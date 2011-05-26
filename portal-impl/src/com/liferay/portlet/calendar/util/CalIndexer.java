@@ -26,18 +26,12 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
-import com.liferay.portlet.asset.service.AssetCategoryLocalServiceUtil;
-import com.liferay.portlet.asset.service.AssetTagLocalServiceUtil;
 import com.liferay.portlet.calendar.model.CalEvent;
 import com.liferay.portlet.calendar.service.CalEventLocalServiceUtil;
-import com.liferay.portlet.expando.model.ExpandoBridge;
-import com.liferay.portlet.expando.util.ExpandoBridgeIndexerUtil;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -70,51 +64,12 @@ public class CalIndexer extends BaseIndexer {
 	protected Document doGetDocument(Object obj) throws Exception {
 		CalEvent event = (CalEvent)obj;
 
-		long companyId = event.getCompanyId();
-		long groupId = getParentGroupId(event.getGroupId());
-		long scopeGroupId = event.getGroupId();
-		long userId = event.getUserId();
-		long eventId = event.getEventId();
-		String userName = PortalUtil.getUserName(userId, event.getUserName());
-		String title = event.getTitle();
-		String description = HtmlUtil.extractText(event.getDescription());
-		String type = event.getType();
-		Date modifiedDate = event.getModifiedDate();
+		Document document = getBaseModelDocument(PORTLET_ID, event);
 
-		long[] assetCategoryIds = AssetCategoryLocalServiceUtil.getCategoryIds(
-			CalEvent.class.getName(), eventId);
-		String[] assetCategoryNames =
-			AssetCategoryLocalServiceUtil.getCategoryNames(
-				CalEvent.class.getName(), eventId);
-		String[] assetTagNames = AssetTagLocalServiceUtil.getTagNames(
-			CalEvent.class.getName(), eventId);
-
-		ExpandoBridge expandoBridge = event.getExpandoBridge();
-
-		Document document = new DocumentImpl();
-
-		document.addUID(PORTLET_ID, eventId);
-
-		document.addModifiedDate(modifiedDate);
-
-		document.addKeyword(Field.COMPANY_ID, companyId);
-		document.addKeyword(Field.PORTLET_ID, PORTLET_ID);
-		document.addKeyword(Field.GROUP_ID, groupId);
-		document.addKeyword(Field.SCOPE_GROUP_ID, scopeGroupId);
-		document.addKeyword(Field.USER_ID, userId);
-		document.addKeyword(Field.USER_NAME, userName, true);
-
-		document.addText(Field.TITLE, title);
-		document.addText(Field.DESCRIPTION, description);
-		document.addKeyword(Field.TYPE, type);
-		document.addKeyword(Field.ASSET_CATEGORY_IDS, assetCategoryIds);
-		document.addKeyword(Field.ASSET_CATEGORY_NAMES, assetCategoryNames);
-		document.addKeyword(Field.ASSET_TAG_NAMES, assetTagNames);
-
-		document.addKeyword(Field.ENTRY_CLASS_NAME, CalEvent.class.getName());
-		document.addKeyword(Field.ENTRY_CLASS_PK, eventId);
-
-		ExpandoBridgeIndexerUtil.addAttributes(document, expandoBridge);
+		document.addText(
+			Field.DESCRIPTION, HtmlUtil.extractText(event.getDescription()));
+		document.addText(Field.TITLE, event.getTitle());
+		document.addKeyword(Field.TYPE, event.getType());
 
 		return document;
 	}

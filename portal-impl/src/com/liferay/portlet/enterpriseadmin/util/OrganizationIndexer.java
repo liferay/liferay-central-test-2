@@ -14,10 +14,6 @@
 
 package com.liferay.portlet.enterpriseadmin.util;
 
-import com.liferay.portal.NoSuchCountryException;
-import com.liferay.portal.NoSuchRegionException;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.search.BaseIndexer;
 import com.liferay.portal.kernel.search.BooleanClauseOccur;
 import com.liferay.portal.kernel.search.BooleanQuery;
@@ -30,19 +26,9 @@ import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.Summary;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.Address;
-import com.liferay.portal.model.Country;
 import com.liferay.portal.model.Organization;
-import com.liferay.portal.model.Region;
-import com.liferay.portal.model.User;
-import com.liferay.portal.service.CountryServiceUtil;
 import com.liferay.portal.service.OrganizationLocalServiceUtil;
-import com.liferay.portal.service.RegionServiceUtil;
 import com.liferay.portal.util.PortletKeys;
-import com.liferay.portlet.asset.service.AssetCategoryLocalServiceUtil;
-import com.liferay.portlet.asset.service.AssetTagLocalServiceUtil;
-import com.liferay.portlet.expando.model.ExpandoBridge;
-import com.liferay.portlet.expando.util.ExpandoBridgeIndexerUtil;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -149,95 +135,24 @@ public class OrganizationIndexer extends BaseIndexer {
 	protected Document doGetDocument(Object obj) throws Exception {
 		Organization organization = (Organization)obj;
 
-		long companyId = organization.getCompanyId();
-		long organizationId = organization.getOrganizationId();
-		long parentOrganizationId = organization.getParentOrganizationId();
-		long leftOrganizationId = organization.getLeftOrganizationId();
-		long rightOrganizationId = organization.getRightOrganizationId();
-		String name = organization.getName();
-		String type = organization.getType();
-		long regionId = organization.getRegionId();
-		long countryId = organization.getCountryId();
+		Document document = getBaseModelDocument(PORTLET_ID, organization);
 
-		List<Address> addresses = organization.getAddresses();
-
-		List<String> streets = new ArrayList<String>();
-		List<String> cities = new ArrayList<String>();
-		List<String> zips = new ArrayList<String>();
-		List<String> regions = new ArrayList<String>();
-		List<String> countries = new ArrayList<String>();
-
-		if (regionId > 0) {
-			try {
-				Region region = RegionServiceUtil.getRegion(regionId);
-
-				regions.add(region.getName().toLowerCase());
-			}
-			catch (NoSuchRegionException nsre) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(nsre.getMessage());
-				}
-			}
-		}
-
-		if (countryId > 0) {
-			try {
-				Country country = CountryServiceUtil.getCountry(countryId);
-
-				countries.add(country.getName().toLowerCase());
-			}
-			catch (NoSuchCountryException nsce) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(nsce.getMessage());
-				}
-			}
-		}
-
-		for (Address address : addresses) {
-			streets.add(address.getStreet1().toLowerCase());
-			streets.add(address.getStreet2().toLowerCase());
-			streets.add(address.getStreet3().toLowerCase());
-			cities.add(address.getCity().toLowerCase());
-			zips.add(address.getZip().toLowerCase());
-			regions.add(address.getRegion().getName().toLowerCase());
-			countries.add(address.getCountry().getName().toLowerCase());
-		}
-
-		long[] assetCategoryIds = AssetCategoryLocalServiceUtil.getCategoryIds(
-			User.class.getName(), organizationId);
-		String[] assetTagNames = AssetTagLocalServiceUtil.getTagNames(
-			User.class.getName(), organizationId);
-
-		ExpandoBridge expandoBridge = organization.getExpandoBridge();
-
-		Document document = new DocumentImpl();
-
-		document.addUID(PORTLET_ID, organizationId);
-
-		document.addKeyword(Field.COMPANY_ID, companyId);
-		document.addKeyword(Field.PORTLET_ID, PORTLET_ID);
-		document.addKeyword(Field.ORGANIZATION_ID, organizationId);
-
-		document.addKeyword(Field.ASSET_CATEGORY_IDS, assetCategoryIds);
-		document.addKeyword(Field.ASSET_TAG_NAMES, assetTagNames);
-
+		document.addKeyword(Field.COMPANY_ID, organization.getCompanyId());
+		document.addText(Field.NAME, organization.getName());
 		document.addKeyword(
-			Field.ENTRY_CLASS_NAME, Organization.class.getName());
-		document.addKeyword(Field.ENTRY_CLASS_PK, organizationId);
+			Field.ORGANIZATION_ID, organization.getOrganizationId());
+		document.addKeyword(Field.TYPE, organization.getType());
 
-		document.addKeyword("parentOrganizationId", parentOrganizationId);
-		document.addNumber("leftOrganizationId", leftOrganizationId);
-		document.addNumber("rightOrganizationId", rightOrganizationId);
-		document.addText(Field.NAME, name);
-		document.addKeyword(Field.TYPE, type);
-		document.addText("street", streets.toArray(new String[streets.size()]));
-		document.addText("city", cities.toArray(new String[cities.size()]));
-		document.addText("zip", zips.toArray(new String[zips.size()]));
-		document.addText("region", regions.toArray(new String[regions.size()]));
-		document.addText(
-			"country", countries.toArray(new String[countries.size()]));
+		document.addNumber(
+			"leftOrganizationId", organization.getLeftOrganizationId());
+		document.addKeyword(
+			"parentOrganizationId", organization.getParentOrganizationId());
+		document.addNumber(
+			"rightOrganizationId", organization.getRightOrganizationId());
 
-		ExpandoBridgeIndexerUtil.addAttributes(document, expandoBridge);
+		populateAddresses(
+			document, organization.getAddresses(), organization.getRegionId(),
+			organization.getCountryId());
 
 		return document;
 	}
@@ -382,7 +297,5 @@ public class OrganizationIndexer extends BaseIndexer {
 
 		SearchEngineUtil.updateDocuments(companyId, documents);
 	}
-
-	private static Log _log = LogFactoryUtil.getLog(OrganizationIndexer.class);
 
 }

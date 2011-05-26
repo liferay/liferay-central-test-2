@@ -31,10 +31,6 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.util.PortletKeys;
-import com.liferay.portlet.asset.service.AssetCategoryLocalServiceUtil;
-import com.liferay.portlet.asset.service.AssetTagLocalServiceUtil;
-import com.liferay.portlet.expando.model.ExpandoBridge;
-import com.liferay.portlet.expando.util.ExpandoBridgeIndexerUtil;
 import com.liferay.portlet.imagegallery.model.IGFolder;
 import com.liferay.portlet.imagegallery.model.IGFolderConstants;
 import com.liferay.portlet.imagegallery.model.IGImage;
@@ -44,7 +40,6 @@ import com.liferay.portlet.imagegallery.service.IGImageLocalServiceUtil;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -109,49 +104,11 @@ public class IGIndexer extends BaseIndexer {
 	protected Document doGetDocument(Object obj) throws Exception {
 		IGImage image = (IGImage)obj;
 
-		long companyId = image.getCompanyId();
-		long groupId = getParentGroupId(image.getGroupId());
-		long scopeGroupId = image.getGroupId();
-		long userId = image.getUserId();
-		long folderId = image.getFolderId();
-		long imageId = image.getImageId();
-		String name = image.getName();
-		String description = image.getDescription();
-		Date modifiedDate = image.getModifiedDate();
+		Document document = getBaseModelDocument(PORTLET_ID, image);
 
-		long[] assetCategoryIds = AssetCategoryLocalServiceUtil.getCategoryIds(
-			IGImage.class.getName(), imageId);
-		String[] assetCategoryNames =
-			AssetCategoryLocalServiceUtil.getCategoryNames(
-				IGImage.class.getName(), imageId);
-		String[] assetTagNames = AssetTagLocalServiceUtil.getTagNames(
-			IGImage.class.getName(), imageId);
-
-		ExpandoBridge expandoBridge = image.getExpandoBridge();
-
-		Document document = new DocumentImpl();
-
-		document.addUID(PORTLET_ID, imageId);
-
-		document.addModifiedDate(modifiedDate);
-
-		document.addKeyword(Field.COMPANY_ID, companyId);
-		document.addKeyword(Field.PORTLET_ID, PORTLET_ID);
-		document.addKeyword(Field.GROUP_ID, groupId);
-		document.addKeyword(Field.SCOPE_GROUP_ID, scopeGroupId);
-		document.addKeyword(Field.USER_ID, userId);
-
-		document.addText(Field.TITLE, name);
-		document.addText(Field.DESCRIPTION, description);
-		document.addKeyword(Field.ASSET_CATEGORY_IDS, assetCategoryIds);
-		document.addKeyword(Field.ASSET_CATEGORY_NAMES, assetCategoryNames);
-		document.addKeyword(Field.ASSET_TAG_NAMES, assetTagNames);
-
-		document.addKeyword(Field.FOLDER_ID, folderId);
-		document.addKeyword(Field.ENTRY_CLASS_NAME, IGImage.class.getName());
-		document.addKeyword(Field.ENTRY_CLASS_PK, imageId);
-
-		ExpandoBridgeIndexerUtil.addAttributes(document, expandoBridge);
+		document.addText(Field.DESCRIPTION, image.getDescription());
+		document.addKeyword(Field.FOLDER_ID, image.getFolderId());
+		document.addText(Field.TITLE, image.getName());
 
 		return document;
 	}

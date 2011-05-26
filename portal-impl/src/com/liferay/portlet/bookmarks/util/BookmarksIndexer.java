@@ -29,20 +29,15 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.util.PortletKeys;
-import com.liferay.portlet.asset.service.AssetCategoryLocalServiceUtil;
-import com.liferay.portlet.asset.service.AssetTagLocalServiceUtil;
 import com.liferay.portlet.bookmarks.model.BookmarksEntry;
 import com.liferay.portlet.bookmarks.model.BookmarksFolder;
 import com.liferay.portlet.bookmarks.model.BookmarksFolderConstants;
 import com.liferay.portlet.bookmarks.service.BookmarksEntryLocalServiceUtil;
 import com.liferay.portlet.bookmarks.service.BookmarksFolderLocalServiceUtil;
 import com.liferay.portlet.bookmarks.service.BookmarksFolderServiceUtil;
-import com.liferay.portlet.expando.model.ExpandoBridge;
-import com.liferay.portlet.expando.util.ExpandoBridgeIndexerUtil;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -108,52 +103,12 @@ public class BookmarksIndexer extends BaseIndexer {
 	protected Document doGetDocument(Object obj) throws Exception {
 		BookmarksEntry entry = (BookmarksEntry)obj;
 
-		long companyId = entry.getCompanyId();
-		long groupId = getParentGroupId(entry.getGroupId());
-		long scopeGroupId = entry.getGroupId();
-		long userId = entry.getUserId();
-		long folderId = entry.getFolderId();
-		long entryId = entry.getEntryId();
-		String name = entry.getName();
-		String url = entry.getUrl();
-		String description = entry.getDescription();
-		Date modifiedDate = entry.getModifiedDate();
+		Document document = getBaseModelDocument(PORTLET_ID, entry);
 
-		long[] assetCategoryIds = AssetCategoryLocalServiceUtil.getCategoryIds(
-			BookmarksEntry.class.getName(), entryId);
-		String[] assetCategoryNames =
-			AssetCategoryLocalServiceUtil.getCategoryNames(
-				BookmarksEntry.class.getName(), entryId);
-		String[] assetTagNames = AssetTagLocalServiceUtil.getTagNames(
-			BookmarksEntry.class.getName(), entryId);
-
-		ExpandoBridge expandoBridge = entry.getExpandoBridge();
-
-		Document document = new DocumentImpl();
-
-		document.addUID(PORTLET_ID, entryId);
-
-		document.addModifiedDate(modifiedDate);
-
-		document.addKeyword(Field.COMPANY_ID, companyId);
-		document.addKeyword(Field.PORTLET_ID, PORTLET_ID);
-		document.addKeyword(Field.GROUP_ID, groupId);
-		document.addKeyword(Field.SCOPE_GROUP_ID, scopeGroupId);
-		document.addKeyword(Field.USER_ID, userId);
-
-		document.addText(Field.TITLE, name);
-		document.addKeyword(Field.ASSET_CATEGORY_IDS, assetCategoryIds);
-		document.addKeyword(Field.ASSET_CATEGORY_NAMES, assetCategoryNames);
-		document.addKeyword(Field.ASSET_TAG_NAMES, assetTagNames);
-
-		document.addKeyword(Field.FOLDER_ID, folderId);
-		document.addKeyword(
-			Field.ENTRY_CLASS_NAME, BookmarksEntry.class.getName());
-		document.addKeyword(Field.ENTRY_CLASS_PK, entryId);
-		document.addText(Field.URL, url);
-		document.addText(Field.DESCRIPTION, description);
-
-		ExpandoBridgeIndexerUtil.addAttributes(document, expandoBridge);
+		document.addText(Field.DESCRIPTION, entry.getDescription());
+		document.addKeyword(Field.FOLDER_ID, entry.getFolderId());
+		document.addText(Field.TITLE, entry.getName());
+		document.addText(Field.URL, entry.getUrl());
 
 		return document;
 	}

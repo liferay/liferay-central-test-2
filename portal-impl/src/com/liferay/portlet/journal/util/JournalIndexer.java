@@ -38,12 +38,7 @@ import com.liferay.portal.kernel.xml.Node;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.service.GroupLocalServiceUtil;
-import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
-import com.liferay.portlet.asset.service.AssetCategoryLocalServiceUtil;
-import com.liferay.portlet.asset.service.AssetTagLocalServiceUtil;
-import com.liferay.portlet.expando.model.ExpandoBridge;
-import com.liferay.portlet.expando.util.ExpandoBridgeIndexerUtil;
 import com.liferay.portlet.journal.NoSuchStructureException;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.model.JournalArticleConstants;
@@ -53,12 +48,10 @@ import com.liferay.portlet.journal.service.JournalStructureLocalServiceUtil;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 
 import javax.portlet.PortletURL;
 
@@ -158,84 +151,18 @@ public class JournalIndexer extends BaseIndexer {
 	protected Document doGetDocument(Object obj) throws Exception {
 		JournalArticle article = (JournalArticle)obj;
 
-		long companyId = article.getCompanyId();
+		Document document = getBaseModelDocument(PORTLET_ID, article);
+
 		long groupId = getParentGroupId(article.getGroupId());
-		long scopeGroupId = article.getGroupId();
-		long userId = article.getUserId();
-		String userName = PortalUtil.getUserName(userId, article.getUserName());
-		Date modifiedDate = article.getModifiedDate();
-		long resourcePrimKey = article.getResourcePrimKey();
-		long classNameId = article.getClassNameId();
-		long classPK = article.getClassPK();
-		String articleId = article.getArticleId();
-		double version = article.getVersion();
-		Map<Locale, String> titleMap = article.getTitleMap();
-		Map<Locale, String> descriptionMap = article.getDescriptionMap();
-		String type = article.getType();
 
-		String structureId = article.getStructureId();
-
-		JournalStructure structure = null;
-
-		if (Validator.isNotNull(structureId)) {
-			try {
-				structure = JournalStructureLocalServiceUtil.getStructure(
-					groupId, structureId);
-			}
-			catch (NoSuchStructureException nsse1) {
-				Group group = GroupLocalServiceUtil.getCompanyGroup(companyId);
-
-				try {
-					structure = JournalStructureLocalServiceUtil.getStructure(
-						group.getGroupId(), structureId);
-				}
-				catch (NoSuchStructureException nsse2) {
-				}
-			}
-		}
-
-		String templateId = article.getTemplateId();
-		String layoutUuid = article.getLayoutUuid();
-		Date displayDate = article.getDisplayDate();
-		long status = article.getStatus();
-
-		long[] assetCategoryIds = AssetCategoryLocalServiceUtil.getCategoryIds(
-			JournalArticle.class.getName(), resourcePrimKey);
-		String[] assetCategoryNames =
-			AssetCategoryLocalServiceUtil.getCategoryNames(
-				JournalArticle.class.getName(), resourcePrimKey);
-		String[] assetTagNames = AssetTagLocalServiceUtil.getTagNames(
-			JournalArticle.class.getName(), resourcePrimKey);
-
-		ExpandoBridge expandoBridge = article.getExpandoBridge();
-
-		Document document = new DocumentImpl();
-
-		document.addUID(PORTLET_ID, groupId, articleId);
-
-		document.addModifiedDate(modifiedDate);
-
-		document.addKeyword(Field.COMPANY_ID, companyId);
-		document.addKeyword(Field.PORTLET_ID, PORTLET_ID);
-		document.addKeyword(Field.GROUP_ID, groupId);
-		document.addKeyword(Field.SCOPE_GROUP_ID, scopeGroupId);
-		document.addKeyword(Field.USER_ID, userId);
-		document.addKeyword(Field.USER_NAME, userName, true);
+		document.addUID(PORTLET_ID, groupId, article.getArticleId());
 
 		Locale defaultLocale = LocaleUtil.getDefault();
 
-		document.addLocalizedText(Field.TITLE, titleMap);
-
-		processStructure(structure, document, article.getContent());
-
 		String defaultLangaugeId = LocaleUtil.toLanguageId(defaultLocale);
 
-		String[] languageIds = LocalizationUtil.getAvailableLocales(
-			article.getContent());
-
-		if (languageIds.length == 0) {
-			languageIds = new String[] {defaultLangaugeId};
-		}
+		String[] languageIds = getLanguageIds(
+			defaultLangaugeId, article.getContent());
 
 		for (String languageId : languageIds) {
 			String content = extractContent(
@@ -250,27 +177,38 @@ public class JournalIndexer extends BaseIndexer {
 				content);
 		}
 
-		document.addLocalizedText(Field.DESCRIPTION, descriptionMap);
-		document.addKeyword(Field.ASSET_CATEGORY_IDS, assetCategoryIds);
-		document.addKeyword(Field.ASSET_CATEGORY_NAMES, assetCategoryNames);
-		document.addKeyword(Field.ASSET_TAG_NAMES, assetTagNames);
+		document.addLocalizedText(
+			Field.DESCRIPTION, article.getDescriptionMap());
+		document.addLocalizedText(Field.TITLE, article.getTitleMap());
+		document.addKeyword(Field.TYPE, article.getType());
+		document.addKeyword(Field.VERSION, article.getVersion());
 
-		document.addKeyword(
-			Field.ENTRY_CLASS_NAME, JournalArticle.class.getName());
-		document.addKeyword(Field.ENTRY_CLASS_PK, articleId);
-		document.addKeyword(Field.ROOT_ENTRY_CLASS_PK, resourcePrimKey);
-		document.addKeyword(Field.CLASS_NAME_ID, classNameId);
-		document.addKeyword(Field.CLASS_PK, classPK);
-		document.addKeyword(Field.VERSION, version);
-		document.addKeyword(Field.TYPE, type);
-		document.addKeyword(Field.STATUS, status);
+		document.addDate("displayDate", article.getDisplayDate());
+		document.addKeyword("layoutUuid", article.getLayoutUuid());
+		document.addKeyword("structureId", article.getStructureId());
+		document.addKeyword("templateId", article.getTemplateId());
 
-		document.addKeyword("structureId", structureId);
-		document.addKeyword("templateId", templateId);
-		document.addKeyword("layoutUuid", layoutUuid);
-		document.addDate("displayDate", displayDate);
+		JournalStructure structure = null;
 
-		ExpandoBridgeIndexerUtil.addAttributes(document, expandoBridge);
+		if (Validator.isNotNull(article.getStructureId())) {
+			try {
+				structure = JournalStructureLocalServiceUtil.getStructure(
+					groupId, article.getStructureId());
+			}
+			catch (NoSuchStructureException nsse1) {
+				Group group = GroupLocalServiceUtil.getCompanyGroup(
+					article.getCompanyId());
+
+				try {
+					structure = JournalStructureLocalServiceUtil.getStructure(
+						group.getGroupId(), article.getStructureId());
+				}
+				catch (NoSuchStructureException nsse2) {
+				}
+			}
+		}
+
+		processStructure(structure, document, article.getContent());
 
 		return document;
 	}
@@ -283,7 +221,7 @@ public class JournalIndexer extends BaseIndexer {
 			return Field.ENTRY_CLASS_PK;
 		}
 		else if (orderByCol.equals("modified-date")) {
-			return Field.MODIFIED;
+			return Field.MODIFIED_DATE;
 		}
 		else if (orderByCol.equals("title")) {
 			return Field.TITLE;
@@ -365,6 +303,18 @@ public class JournalIndexer extends BaseIndexer {
 		content = HtmlUtil.extractText(content);
 
 		return content;
+	}
+
+	protected String[] getLanguageIds(
+		String defaultLangaugeId, String content) {
+
+		String[] languageIds = LocalizationUtil.getAvailableLocales(content);
+
+		if (languageIds.length == 0) {
+			languageIds = new String[] {defaultLangaugeId};
+		}
+
+		return languageIds;
 	}
 
 	protected String getPortletId(SearchContext searchContext) {

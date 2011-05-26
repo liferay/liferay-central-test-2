@@ -33,10 +33,6 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.util.PortletKeys;
-import com.liferay.portlet.asset.service.AssetCategoryLocalServiceUtil;
-import com.liferay.portlet.asset.service.AssetTagLocalServiceUtil;
-import com.liferay.portlet.expando.model.ExpandoBridge;
-import com.liferay.portlet.expando.util.ExpandoBridgeIndexerUtil;
 import com.liferay.portlet.wiki.model.WikiNode;
 import com.liferay.portlet.wiki.model.WikiPage;
 import com.liferay.portlet.wiki.service.WikiNodeLocalServiceUtil;
@@ -45,7 +41,6 @@ import com.liferay.portlet.wiki.service.WikiPageLocalServiceUtil;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -149,51 +144,14 @@ public class WikiIndexer extends BaseIndexer {
 	protected Document doGetDocument(Object obj) throws Exception {
 		WikiPage page = (WikiPage)obj;
 
-		long companyId = page.getCompanyId();
-		long groupId = getParentGroupId(page.getGroupId());
-		long scopeGroupId = page.getGroupId();
-		long userId = page.getUserId();
-		long resourcePrimKey = page.getResourcePrimKey();
-		long nodeId = page.getNodeId();
-		String title = page.getTitle();
-		String content = HtmlUtil.extractText(page.getContent());
-		Date modifiedDate = page.getModifiedDate();
-		int status = page.getStatus();
+		Document document = getBaseModelDocument(PORTLET_ID, page);
 
-		long[] assetCategoryIds = AssetCategoryLocalServiceUtil.getCategoryIds(
-			WikiPage.class.getName(), resourcePrimKey);
-		String[] assetCategoryNames =
-			AssetCategoryLocalServiceUtil.getCategoryNames(
-				WikiPage.class.getName(), resourcePrimKey);
-		String[] assetTagNames = AssetTagLocalServiceUtil.getTagNames(
-			WikiPage.class.getName(), resourcePrimKey);
+		document.addUID(PORTLET_ID, page.getNodeId(), page.getTitle());
 
-		ExpandoBridge expandoBridge = page.getExpandoBridge();
-
-		Document document = new DocumentImpl();
-
-		document.addUID(PORTLET_ID, nodeId, title);
-
-		document.addModifiedDate(modifiedDate);
-
-		document.addKeyword(Field.COMPANY_ID, companyId);
-		document.addKeyword(Field.PORTLET_ID, PORTLET_ID);
-		document.addKeyword(Field.GROUP_ID, groupId);
-		document.addKeyword(Field.SCOPE_GROUP_ID, scopeGroupId);
-		document.addKeyword(Field.USER_ID, userId);
-
-		document.addText(Field.TITLE, title);
-		document.addText(Field.CONTENT, content);
-		document.addKeyword(Field.ASSET_CATEGORY_IDS, assetCategoryIds);
-		document.addKeyword(Field.ASSET_CATEGORY_NAMES, assetCategoryNames);
-		document.addKeyword(Field.ASSET_TAG_NAMES, assetTagNames);
-
-		document.addKeyword(Field.NODE_ID, nodeId);
-		document.addKeyword(Field.STATUS, status);
-		document.addKeyword(Field.ENTRY_CLASS_NAME, WikiPage.class.getName());
-		document.addKeyword(Field.ENTRY_CLASS_PK, resourcePrimKey);
-
-		ExpandoBridgeIndexerUtil.addAttributes(document, expandoBridge);
+		document.addText(
+			Field.CONTENT, HtmlUtil.extractText(page.getContent()));
+		document.addKeyword(Field.NODE_ID, page.getNodeId());
+		document.addText(Field.TITLE, page.getTitle());
 
 		return document;
 	}

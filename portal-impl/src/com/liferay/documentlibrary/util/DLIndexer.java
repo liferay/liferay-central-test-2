@@ -208,7 +208,7 @@ public class DLIndexer extends BaseIndexer {
 
 		document.addUID(portletId, repositoryId, fileName);
 
-		document.addModifiedDate(modifiedDate);
+		document.addDate(Field.MODIFIED_DATE, modifiedDate);
 
 		document.addKeyword(Field.COMPANY_ID, companyId);
 		document.addKeyword(Field.PORTLET_ID, portletId);

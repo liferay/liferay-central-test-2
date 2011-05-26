@@ -14,8 +14,12 @@
 
 package com.liferay.portal.kernel.search;
 
+import com.liferay.portal.NoSuchCountryException;
 import com.liferay.portal.NoSuchModelException;
+import com.liferay.portal.NoSuchRegionException;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.search.facet.AssetEntriesFacet;
@@ -30,11 +34,25 @@ import com.liferay.portal.kernel.util.SetUtil;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.Address;
+import com.liferay.portal.model.AttachedModel;
+import com.liferay.portal.model.AuditedModel;
+import com.liferay.portal.model.BaseModel;
+import com.liferay.portal.model.Country;
 import com.liferay.portal.model.Group;
+import com.liferay.portal.model.GroupedModel;
+import com.liferay.portal.model.Region;
+import com.liferay.portal.model.ResourcedModel;
+import com.liferay.portal.model.WorkflowedModel;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.security.permission.PermissionThreadLocal;
+import com.liferay.portal.service.CountryServiceUtil;
 import com.liferay.portal.service.GroupLocalServiceUtil;
+import com.liferay.portal.service.RegionServiceUtil;
+import com.liferay.portal.util.PortalUtil;
+import com.liferay.portlet.asset.service.AssetCategoryLocalServiceUtil;
+import com.liferay.portlet.asset.service.AssetTagLocalServiceUtil;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.model.ExpandoColumnConstants;
 import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
@@ -626,6 +644,97 @@ public abstract class BaseIndexer implements Indexer {
 		return hits;
 	}
 
+	protected Document getBaseModelDocument(
+			String portletId, BaseModel<?> baseModel)
+		throws SystemException {
+
+		Document document = new DocumentImpl();
+
+		String className = baseModel.getModelClassName();
+
+		long classPK = 0;
+		long resourcePrimKey = 0;
+
+		if (baseModel instanceof ResourcedModel) {
+			ResourcedModel resourcedModel = (ResourcedModel)baseModel;
+
+			classPK = resourcedModel.getResourcePrimKey();
+			resourcePrimKey = resourcedModel.getResourcePrimKey();
+		}
+		else {
+			classPK = (Long)baseModel.getPrimaryKeyObj();
+		}
+
+		document.addUID(portletId, classPK);
+
+		long[] assetCategoryIds = AssetCategoryLocalServiceUtil.getCategoryIds(
+			className, classPK);
+
+		document.addKeyword(Field.ASSET_CATEGORY_IDS, assetCategoryIds);
+
+		String[] assetCategoryNames =
+			AssetCategoryLocalServiceUtil.getCategoryNames(
+				className, classPK);
+
+		document.addKeyword(Field.ASSET_CATEGORY_NAMES, assetCategoryNames);
+
+		String[] assetTagNames = AssetTagLocalServiceUtil.getTagNames(
+			className, classPK);
+
+		document.addKeyword(Field.ASSET_TAG_NAMES, assetTagNames);
+
+		document.addKeyword(Field.ENTRY_CLASS_NAME, className);
+		document.addKeyword(Field.ENTRY_CLASS_PK, classPK);
+		document.addKeyword(Field.PORTLET_ID, portletId);
+
+		if (resourcePrimKey > 0) {
+			document.addKeyword(Field.ROOT_ENTRY_CLASS_PK, resourcePrimKey);
+		}
+
+		if (baseModel instanceof AttachedModel) {
+			AttachedModel attachedModel = (AttachedModel)baseModel;
+
+			document.addKeyword(
+				Field.CLASS_NAME_ID, attachedModel.getClassNameId());
+			document.addKeyword(Field.CLASS_PK, attachedModel.getClassPK());
+		}
+
+		if (baseModel instanceof AuditedModel) {
+			AuditedModel auditedModel = (AuditedModel)baseModel;
+
+			document.addKeyword(Field.COMPANY_ID, auditedModel.getCompanyId());
+			document.addDate(Field.CREATE_DATE, auditedModel.getCreateDate());
+			document.addDate(
+				Field.MODIFIED_DATE, auditedModel.getModifiedDate());
+			document.addKeyword(Field.USER_ID, auditedModel.getUserId());
+
+			String userName = PortalUtil.getUserName(
+				auditedModel.getUserId(), auditedModel.getUserName());
+
+			document.addKeyword(Field.USER_NAME, userName, true);
+		}
+
+		if (baseModel instanceof GroupedModel) {
+			GroupedModel groupedModel = (GroupedModel)baseModel;
+
+			document.addKeyword(
+				Field.GROUP_ID, getParentGroupId(groupedModel.getGroupId()));
+			document.addKeyword(
+				Field.SCOPE_GROUP_ID, groupedModel.getGroupId());
+		}
+
+		if (baseModel instanceof WorkflowedModel) {
+			WorkflowedModel workflowedModel = (WorkflowedModel)baseModel;
+
+			document.addKeyword(Field.STATUS, workflowedModel.getStatus());
+		}
+
+		ExpandoBridgeIndexerUtil.addAttributes(
+			document, baseModel.getExpandoBridge());
+
+		return document;
+	}
+
 	protected String getClassName(SearchContext searchContext) {
 		String[] classNames = getClassNames();
 
@@ -655,6 +764,64 @@ public abstract class BaseIndexer implements Indexer {
 	}
 
 	protected abstract String getPortletId(SearchContext searchContext);
+
+	protected void populateAddresses(
+			Document document, List<Address> addresses, long regionId,
+			long countryId)
+		throws PortalException, SystemException {
+
+		List<String> cities = new ArrayList<String>();
+
+		List<String> countries = new ArrayList<String>();
+
+		if (countryId > 0) {
+			try {
+				Country country = CountryServiceUtil.getCountry(countryId);
+
+				countries.add(country.getName().toLowerCase());
+			}
+			catch (NoSuchCountryException nsce) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(nsce.getMessage());
+				}
+			}
+		}
+
+		List<String> regions = new ArrayList<String>();
+
+		if (regionId > 0) {
+			try {
+				Region region = RegionServiceUtil.getRegion(regionId);
+
+				regions.add(region.getName().toLowerCase());
+			}
+			catch (NoSuchRegionException nsre) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(nsre.getMessage());
+				}
+			}
+		}
+
+		List<String> streets = new ArrayList<String>();
+		List<String> zips = new ArrayList<String>();
+
+		for (Address address : addresses) {
+			cities.add(address.getCity().toLowerCase());
+			countries.add(address.getCountry().getName().toLowerCase());
+			regions.add(address.getRegion().getName().toLowerCase());
+			streets.add(address.getStreet1().toLowerCase());
+			streets.add(address.getStreet2().toLowerCase());
+			streets.add(address.getStreet3().toLowerCase());
+			zips.add(address.getZip().toLowerCase());
+		}
+
+		document.addText("city", cities.toArray(new String[cities.size()]));
+		document.addText(
+			"country", countries.toArray(new String[countries.size()]));
+		document.addText("region", regions.toArray(new String[regions.size()]));
+		document.addText("street", streets.toArray(new String[streets.size()]));
+		document.addText("zip", zips.toArray(new String[zips.size()]));
+	}
 
 	protected void postProcessFullQuery(
 			BooleanQuery fullQuery, SearchContext searchContext)

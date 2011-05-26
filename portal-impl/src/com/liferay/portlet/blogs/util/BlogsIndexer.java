@@ -28,18 +28,12 @@ import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
-import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
-import com.liferay.portlet.asset.service.AssetCategoryLocalServiceUtil;
-import com.liferay.portlet.asset.service.AssetTagLocalServiceUtil;
 import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.blogs.service.BlogsEntryLocalServiceUtil;
-import com.liferay.portlet.expando.model.ExpandoBridge;
-import com.liferay.portlet.expando.util.ExpandoBridgeIndexerUtil;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -88,51 +82,12 @@ public class BlogsIndexer extends BaseIndexer {
 	protected Document doGetDocument(Object obj) throws Exception {
 		BlogsEntry entry = (BlogsEntry)obj;
 
-		long companyId = entry.getCompanyId();
-		long groupId = getParentGroupId(entry.getGroupId());
-		long scopeGroupId = entry.getGroupId();
-		long userId = entry.getUserId();
-		String userName = PortalUtil.getUserName(userId, entry.getUserName());
-		long entryId = entry.getEntryId();
-		String title = entry.getTitle();
-		String content = HtmlUtil.extractText(entry.getContent());
-		Date displayDate = entry.getDisplayDate();
-		int status = entry.getStatus();
+		Document document = getBaseModelDocument(PORTLET_ID, entry);
 
-		long[] assetCategoryIds = AssetCategoryLocalServiceUtil.getCategoryIds(
-			BlogsEntry.class.getName(), entryId);
-		String[] assetCategoryNames =
-			AssetCategoryLocalServiceUtil.getCategoryNames(
-				BlogsEntry.class.getName(), entryId);
-		String[] assetTagNames = AssetTagLocalServiceUtil.getTagNames(
-			BlogsEntry.class.getName(), entryId);
-
-		ExpandoBridge expandoBridge = entry.getExpandoBridge();
-
-		Document document = new DocumentImpl();
-
-		document.addUID(PORTLET_ID, entryId);
-
-		document.addModifiedDate(displayDate);
-
-		document.addKeyword(Field.COMPANY_ID, companyId);
-		document.addKeyword(Field.PORTLET_ID, PORTLET_ID);
-		document.addKeyword(Field.GROUP_ID, groupId);
-		document.addKeyword(Field.SCOPE_GROUP_ID, scopeGroupId);
-		document.addKeyword(Field.USER_ID, userId);
-		document.addKeyword(Field.USER_NAME, userName, true);
-
-		document.addText(Field.TITLE, title);
-		document.addText(Field.CONTENT, content);
-		document.addKeyword(Field.STATUS, status);
-		document.addKeyword(Field.ASSET_CATEGORY_IDS, assetCategoryIds);
-		document.addKeyword(Field.ASSET_CATEGORY_NAMES, assetCategoryNames);
-		document.addKeyword(Field.ASSET_TAG_NAMES, assetTagNames);
-
-		document.addKeyword(Field.ENTRY_CLASS_NAME, BlogsEntry.class.getName());
-		document.addKeyword(Field.ENTRY_CLASS_PK, entryId);
-
-		ExpandoBridgeIndexerUtil.addAttributes(document, expandoBridge);
+		document.addText(
+			Field.CONTENT, HtmlUtil.extractText(entry.getContent()));
+		document.addDate(Field.MODIFIED_DATE, entry.getDisplayDate());
+		document.addText(Field.TITLE, entry.getTitle());
 
 		return document;
 	}

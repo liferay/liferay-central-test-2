@@ -38,11 +38,7 @@ import com.liferay.portal.model.Group;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.service.GroupLocalServiceUtil;
-import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
-import com.liferay.portlet.asset.service.AssetTagLocalServiceUtil;
-import com.liferay.portlet.expando.model.ExpandoBridge;
-import com.liferay.portlet.expando.util.ExpandoBridgeIndexerUtil;
 import com.liferay.portlet.messageboards.model.MBCategory;
 import com.liferay.portlet.messageboards.model.MBCategoryConstants;
 import com.liferay.portlet.messageboards.model.MBMessage;
@@ -54,7 +50,6 @@ import com.liferay.portlet.messageboards.service.permission.MBMessagePermission;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -195,55 +190,19 @@ public class MBIndexer extends BaseIndexer {
 	protected Document doGetDocument(Object obj) throws Exception {
 		MBMessage message = (MBMessage)obj;
 
-		long companyId = message.getCompanyId();
-		long groupId = getParentGroupId(message.getGroupId());
-		long scopeGroupId = message.getGroupId();
-		long userId = message.getUserId();
-		String userName = PortalUtil.getUserName(userId, message.getUserName());
-		long categoryId = message.getCategoryId();
-		long threadId = message.getThreadId();
-		long messageId = message.getMessageId();
-		String title = message.getSubject();
-		String content = processContent(messageId, message.getBody());
-		boolean anonymous = message.isAnonymous();
-		Date modifiedDate = message.getModifiedDate();
-		long status = message.getStatus();
+		Document document = getBaseModelDocument(PORTLET_ID, message);
 
-		String[] assetTagNames = AssetTagLocalServiceUtil.getTagNames(
-			MBMessage.class.getName(), messageId);
-
-		ExpandoBridge expandoBridge = message.getExpandoBridge();
-
-		Document document = new DocumentImpl();
-
-		document.addUID(PORTLET_ID, messageId);
-
-		document.addModifiedDate(modifiedDate);
-
-		document.addKeyword(Field.COMPANY_ID, companyId);
-		document.addKeyword(Field.PORTLET_ID, PORTLET_ID);
-		document.addKeyword(Field.GROUP_ID, groupId);
-		document.addKeyword(Field.SCOPE_GROUP_ID, scopeGroupId);
-		document.addKeyword(Field.USER_ID, userId);
-
-		if (!anonymous) {
-			document.addKeyword(Field.USER_NAME, userName, true);
-		}
-
-		document.addText(Field.TITLE, title);
-		document.addText(Field.CONTENT, content);
-		document.addKeyword(Field.ASSET_TAG_NAMES, assetTagNames);
-
-		document.addKeyword(Field.CATEGORY_ID, categoryId);
-		document.addKeyword(Field.ENTRY_CLASS_NAME, MBMessage.class.getName());
-		document.addKeyword(Field.ENTRY_CLASS_PK, messageId);
+		document.addKeyword(Field.CATEGORY_ID, message.getCategoryId());
+		document.addText(Field.CONTENT, processContent(message));
 		document.addKeyword(
 			Field.ROOT_ENTRY_CLASS_PK, message.getRootMessageId());
+		document.addText(Field.TITLE, message.getSubject());
 
-		document.addKeyword("threadId", threadId);
-		document.addKeyword(Field.STATUS, status);
+		if (message.isAnonymous()) {
+			document.remove(Field.USER_NAME);
+		}
 
-		ExpandoBridgeIndexerUtil.addAttributes(document, expandoBridge);
+		document.addKeyword("threadId", message.getThreadId());
 
 		return document;
 	}
@@ -313,13 +272,16 @@ public class MBIndexer extends BaseIndexer {
 		return PORTLET_ID;
 	}
 
-	protected String processContent(long messageId, String content) {
+	protected String processContent(MBMessage message) {
+		String content = message.getBody();
+
 		try {
 			content = BBCodeUtil.getHTML(content);
 		}
 		catch (Exception e) {
 			_log.error(
-				"Could not parse message " + messageId + ": " + e.getMessage());
+				"Could not parse message " + message.getMessageId() + ": " +
+					e.getMessage());
 		}
 
 		content = HtmlUtil.extractText(content);

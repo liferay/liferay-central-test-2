@@ -27,7 +27,6 @@ import com.liferay.portal.kernel.search.Summary;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
-import com.liferay.portal.model.Address;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.FullNameGenerator;
@@ -35,10 +34,6 @@ import com.liferay.portal.security.auth.FullNameGeneratorFactory;
 import com.liferay.portal.service.OrganizationLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.util.PortletKeys;
-import com.liferay.portlet.asset.service.AssetCategoryLocalServiceUtil;
-import com.liferay.portlet.asset.service.AssetTagLocalServiceUtil;
-import com.liferay.portlet.expando.model.ExpandoBridge;
-import com.liferay.portlet.expando.util.ExpandoBridgeIndexerUtil;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -176,87 +171,31 @@ public class UserIndexer extends BaseIndexer {
 	protected Document doGetDocument(Object obj) throws Exception {
 		User user = (User)obj;
 
-		long companyId = user.getCompanyId();
-		long userId = user.getUserId();
-		String screenName = user.getScreenName();
-		String emailAddress = user.getEmailAddress();
-		String firstName = user.getFirstName();
-		String middleName = user.getMiddleName();
-		String lastName = user.getLastName();
-		String fullName = user.getFullName();
-		String jobTitle = user.getJobTitle();
-		int status = user.getStatus();
-		long[] groupIds = user.getGroupIds();
-		long[] organizationIds = user.getOrganizationIds();
-		long[] roleIds = user.getRoleIds();
-		long[] teamIds = user.getTeamIds();
-		long[] userGroupIds = user.getUserGroupIds();
+		Document document = getBaseModelDocument(PORTLET_ID, user);
 
-		List<Address> addresses = user.getAddresses();
+		document.addKeyword(Field.COMPANY_ID, user.getCompanyId());
+		document.addKeyword(Field.STATUS, user.getStatus());
+		document.addKeyword(Field.USER_ID, user.getUserId());
+		document.addKeyword(Field.USER_NAME, user.getFullName());
 
-		List<String> streets = new ArrayList<String>();
-		List<String> cities = new ArrayList<String>();
-		List<String> zips = new ArrayList<String>();
-		List<String> regions = new ArrayList<String>();
-		List<String> countries = new ArrayList<String>();
-
-		for (Address address : addresses) {
-			streets.add(address.getStreet1().toLowerCase());
-			streets.add(address.getStreet2().toLowerCase());
-			streets.add(address.getStreet3().toLowerCase());
-			cities.add(address.getCity().toLowerCase());
-			zips.add(address.getZip().toLowerCase());
-			regions.add(address.getRegion().getName().toLowerCase());
-			countries.add(address.getCountry().getName().toLowerCase());
-		}
-
-		long[] assetCategoryIds = AssetCategoryLocalServiceUtil.getCategoryIds(
-			User.class.getName(), userId);
-		String[] assetTagNames = AssetTagLocalServiceUtil.getTagNames(
-			User.class.getName(), userId);
-
-		ExpandoBridge expandoBridge = user.getExpandoBridge();
-
-		Document document = new DocumentImpl();
-
-		document.addUID(PORTLET_ID, userId);
-
-		document.addModifiedDate();
-
-		document.addKeyword(Field.COMPANY_ID, companyId);
-		document.addKeyword(Field.PORTLET_ID, PORTLET_ID);
-		document.addKeyword(Field.USER_ID, userId);
-
-		document.addKeyword(Field.ASSET_CATEGORY_IDS, assetCategoryIds);
-		document.addKeyword(Field.ASSET_TAG_NAMES, assetTagNames);
-
-		document.addKeyword(Field.ENTRY_CLASS_NAME, User.class.getName());
-		document.addKeyword(Field.ENTRY_CLASS_PK, userId);
-
-		document.addText("screenName", screenName);
-		document.addText("emailAddress", emailAddress);
-		document.addText("firstName", firstName);
-		document.addText("middleName", middleName);
-		document.addText("lastName", lastName);
-		document.addText("fullName", fullName);
-		document.addText("jobTitle", jobTitle);
-		document.addKeyword(Field.STATUS, status);
-		document.addKeyword("groupIds", groupIds);
-		document.addKeyword("organizationIds", organizationIds);
 		document.addKeyword(
 			"ancestorOrganizationIds",
-			getAncestorOrganizationIds(userId, organizationIds));
-		document.addKeyword("roleIds", roleIds);
-		document.addKeyword("teamIds", teamIds);
-		document.addKeyword("userGroupIds", userGroupIds);
-		document.addText("street", streets.toArray(new String[streets.size()]));
-		document.addText("city", cities.toArray(new String[cities.size()]));
-		document.addText("zip", zips.toArray(new String[zips.size()]));
-		document.addText("region", regions.toArray(new String[regions.size()]));
-		document.addText(
-			"country", countries.toArray(new String[countries.size()]));
+			getAncestorOrganizationIds(
+				user.getUserId(), user.getOrganizationIds()));
+		document.addText("emailAddress", user.getEmailAddress());
+		document.addText("firstName", user.getFirstName());
+		document.addText("fullName", user.getFullName());
+		document.addKeyword("groupIds", user.getGroupIds());
+		document.addText("jobTitle", user.getJobTitle());
+		document.addText("lastName", user.getLastName());
+		document.addText("middleName", user.getMiddleName());
+		document.addKeyword("organizationIds", user.getOrganizationIds());
+		document.addKeyword("roleIds", user.getRoleIds());
+		document.addText("screenName", user.getScreenName());
+		document.addKeyword("teamIds", user.getTeamIds());
+		document.addKeyword("userGroupIds", user.getUserGroupIds());
 
-		ExpandoBridgeIndexerUtil.addAttributes(document, expandoBridge);
+		populateAddresses(document, user.getAddresses(), 0, 0);
 
 		return document;
 	}

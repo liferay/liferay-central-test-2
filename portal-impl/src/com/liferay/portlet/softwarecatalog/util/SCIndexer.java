@@ -33,15 +33,12 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
-import com.liferay.portlet.expando.model.ExpandoBridge;
-import com.liferay.portlet.expando.util.ExpandoBridgeIndexerUtil;
 import com.liferay.portlet.softwarecatalog.model.SCProductEntry;
 import com.liferay.portlet.softwarecatalog.model.SCProductVersion;
 import com.liferay.portlet.softwarecatalog.service.SCProductEntryLocalServiceUtil;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -82,15 +79,43 @@ public class SCIndexer extends BaseIndexer {
 	protected Document doGetDocument(Object obj) throws Exception {
 		SCProductEntry productEntry = (SCProductEntry)obj;
 
-		long companyId = productEntry.getCompanyId();
-		long groupId = getParentGroupId(productEntry.getGroupId());
-		long scopeGroupId = productEntry.getGroupId();
-		long userId = productEntry.getUserId();
+		Document document = getBaseModelDocument(PORTLET_ID, productEntry);
+
+		StringBundler sb = new StringBundler(15);
+
+		String longDescription = HtmlUtil.extractText(
+			productEntry.getLongDescription());
+
+		sb.append(longDescription);
+
+		sb.append(StringPool.SPACE);
+		sb.append(productEntry.getPageURL());
+		sb.append(StringPool.SPACE);
+		sb.append(productEntry.getRepoArtifactId());
+		sb.append(StringPool.SPACE);
+		sb.append(productEntry.getRepoGroupId());
+		sb.append(StringPool.SPACE);
+
+		String shortDescription = HtmlUtil.extractText(
+			productEntry.getShortDescription());
+
+		sb.append(shortDescription);
+
+		sb.append(StringPool.SPACE);
+		sb.append(productEntry.getType());
+		sb.append(StringPool.SPACE);
+		sb.append(productEntry.getUserId());
+		sb.append(StringPool.SPACE);
+
 		String userName = PortalUtil.getUserName(
-			userId, productEntry.getUserName());
-		long productEntryId = productEntry.getProductEntryId();
-		String name = productEntry.getName();
-		Date modifiedDate = productEntry.getModifiedDate();
+			productEntry.getUserId(), productEntry.getUserName());
+
+		sb.append(userName);
+
+		document.addText(Field.CONTENT, sb.toString());
+
+		document.addText(Field.TITLE, productEntry.getName());
+		document.addKeyword(Field.TYPE, productEntry.getType());
 
 		String version = StringPool.BLANK;
 
@@ -100,66 +125,13 @@ public class SCIndexer extends BaseIndexer {
 			version = latestProductVersion.getVersion();
 		}
 
-		String type = productEntry.getType();
-		String shortDescription = HtmlUtil.extractText(
-			productEntry.getShortDescription());
-		String longDescription = HtmlUtil.extractText(
-			productEntry.getLongDescription());
-		String pageURL = productEntry.getPageURL();
-		String repoGroupId = productEntry.getRepoGroupId();
-		String repoArtifactId = productEntry.getRepoArtifactId();
+		document.addKeyword(Field.VERSION, version);
 
-		ExpandoBridge expandoBridge = productEntry.getExpandoBridge();
-
-		StringBundler sb = new StringBundler(15);
-
-		sb.append(userId);
-		sb.append(StringPool.SPACE);
-		sb.append(userName);
-		sb.append(StringPool.SPACE);
-		sb.append(type);
-		sb.append(StringPool.SPACE);
-		sb.append(shortDescription);
-		sb.append(StringPool.SPACE);
-		sb.append(longDescription);
-		sb.append(StringPool.SPACE);
-		sb.append(pageURL);
-		sb.append(StringPool.SPACE);
-		sb.append(repoGroupId);
-		sb.append(StringPool.SPACE);
-		sb.append(repoArtifactId);
-
-		String content = sb.toString();
-
-		Document document = new DocumentImpl();
-
-		document.addUID(PORTLET_ID, productEntryId);
-
-		document.addModifiedDate(modifiedDate);
-
-		document.addKeyword(Field.COMPANY_ID, companyId);
-		document.addKeyword(Field.PORTLET_ID, PORTLET_ID);
-		document.addKeyword(Field.GROUP_ID, groupId);
-		document.addKeyword(Field.SCOPE_GROUP_ID, scopeGroupId);
-		document.addKeyword(Field.USER_ID, userId);
-		document.addKeyword(Field.USER_NAME, userName, true);
-
-		document.addText(Field.TITLE, name);
-		document.addText(Field.CONTENT, content);
-
-		document.addKeyword(
-			Field.ENTRY_CLASS_NAME, SCProductEntry.class.getName());
-		document.addKeyword(Field.ENTRY_CLASS_PK, productEntryId);
-
-		document.addKeyword("version", version);
-		document.addKeyword("type", type);
-		document.addText("shortDescription", shortDescription);
 		document.addText("longDescription", longDescription);
-		document.addText("pageURL", pageURL);
-		document.addKeyword("repoGroupId", repoGroupId);
-		document.addKeyword("repoArtifactId", repoArtifactId);
-
-		ExpandoBridgeIndexerUtil.addAttributes(document, expandoBridge);
+		document.addText("pageURL", productEntry.getPageURL());
+		document.addKeyword("repoArtifactId", productEntry.getRepoArtifactId());
+		document.addKeyword("repoGroupId", productEntry.getRepoGroupId());
+		document.addText("shortDescription", shortDescription);
 
 		return document;
 	}

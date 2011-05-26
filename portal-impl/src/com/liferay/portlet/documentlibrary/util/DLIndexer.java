@@ -182,6 +182,7 @@ public class DLIndexer extends BaseIndexer {
 		fileModel.setAssetTagNames(assetTagNames);
 
 		fileModel.setCompanyId(fileEntry.getCompanyId());
+		fileModel.setCreateDate(fileEntry.getCreateDate());
 		fileModel.setFileEntryId(fileEntry.getFileEntryId());
 		fileModel.setFileName(fileEntry.getName());
 		fileModel.setGroupId(fileEntry.getGroupId());
@@ -190,6 +191,8 @@ public class DLIndexer extends BaseIndexer {
 		fileModel.setProperties(fileEntry.getLuceneProperties());
 		fileModel.setRepositoryId(fileEntry.getDataRepositoryId());
 		fileModel.setUserId(fileEntry.getUserId());
+		fileModel.setUserName(fileEntry.getUserName());
+		fileModel.setUserUuid(fileEntry.getUserUuid());
 
 		Indexer indexer = IndexerRegistryUtil.getIndexer(FileModel.class);
 

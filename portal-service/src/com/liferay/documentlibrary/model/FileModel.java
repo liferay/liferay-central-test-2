@@ -14,6 +14,9 @@
 
 package com.liferay.documentlibrary.model;
 
+import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.util.PortalUtil;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -36,6 +39,10 @@ public class FileModel implements Serializable {
 
 	public long getCompanyId() {
 		return _companyId;
+	}
+
+	public Date getCreateDate() {
+		return _createDate;
 	}
 
 	public long getFileEntryId() {
@@ -69,6 +76,14 @@ public class FileModel implements Serializable {
 	public long getUserId() {
 		return _userId;
 	}
+	
+	public String getUserName() {
+		return _userName;
+	}
+
+	public String getUserUuid() throws SystemException {
+		return PortalUtil.getUserValue(getUserId(), "uuid", _userUuid);
+	}
 
 	public void setAssetCategoryIds(long[] assetCategoryIds) {
 		_assetCategoryIds = assetCategoryIds;
@@ -84,6 +99,10 @@ public class FileModel implements Serializable {
 
 	public void setCompanyId(long companyId) {
 		_companyId = companyId;
+	}
+
+	public void setCreateDate(Date createDate) {
+		_createDate = createDate;
 	}
 
 	public void setFileEntryId(long fileEntryId) {
@@ -117,11 +136,20 @@ public class FileModel implements Serializable {
 	public void setUserId(long userId) {
 		_userId = userId;
 	}
+	
+	public void setUserName(String userName) {
+		_userName = userName;
+	}
+
+	public void setUserUuid(String userUuid) {
+		_userUuid = userUuid;
+	}
 
 	private long[] _assetCategoryIds;
 	private String[] _assetCategoryNames;
 	private String[] _assetTagNames;
 	private long _companyId;
+	private Date _createDate;
 	private long _fileEntryId;
 	private String _fileName;
 	private long _groupId;
@@ -130,5 +158,7 @@ public class FileModel implements Serializable {
 	private String _properties;
 	private long _repositoryId;
 	private long _userId;
+	private String _userName;
+	private String _userUuid;
 
 }
