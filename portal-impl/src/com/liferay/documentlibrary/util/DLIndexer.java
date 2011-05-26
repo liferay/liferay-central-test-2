@@ -80,79 +80,33 @@ public class DLIndexer extends BaseIndexer {
 	protected Document doGetDocument(Object obj) throws Exception {
 		FileModel fileModel = (FileModel)obj;
 
-		long companyId = fileModel.getCompanyId();
-		String portletId = fileModel.getPortletId();
-		long groupId = getParentGroupId(fileModel.getGroupId());
-		long scopeGroupId = fileModel.getGroupId();
-		long userId = fileModel.getUserId();
 		long folderId = DLFolderConstants.getFolderId(
-			scopeGroupId, fileModel.getRepositoryId());
-		long repositoryId = fileModel.getRepositoryId();
-		String fileName = fileModel.getFileName();
-		long fileEntryId = fileModel.getFileEntryId();
-		String properties = fileModel.getProperties();
-		Date modifiedDate = fileModel.getModifiedDate();
-		long[] assetCategoryIds = fileModel.getAssetCategoryIds();
-		String[] assetCategoryNames = fileModel.getAssetCategoryNames();
-		String[] assetTagNames = fileModel.getAssetTagNames();
+			fileModel.getGroupId(), fileModel.getRepositoryId());
 
 		DLFileEntry fileEntry = null;
 
 		try {
-			if (fileEntryId > 0) {
+			if (fileModel.getFileEntryId() > 0) {
 				fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(
-					fileEntryId);
+					fileModel.getFileEntryId());
 			}
 			else {
 				fileEntry = DLFileEntryLocalServiceUtil.getFileEntryByName(
-					scopeGroupId, folderId, fileName);
+					fileModel.getGroupId(), folderId, fileModel.getFileName());
+
+				fileModel.setFileEntryId(fileEntry.getFileEntryId());
 			}
 		}
 		catch (NoSuchFileEntryException nsfe) {
 			if (_log.isDebugEnabled()) {
-				_log.debug(
-					"Not indexing document " + companyId + " " + portletId +
-						" " + scopeGroupId + " " + repositoryId + " " +
-							fileName + " " + fileEntryId);
+				_log.debug("Not indexing document " + fileModel);
 			}
 
 			return null;
 		}
 
-		if (userId == 0) {
-			userId = fileEntry.getUserId();
-		}
-
-		String userName = PortalUtil.getUserName(
-			userId, fileEntry.getUserName());
-
-		String extension = fileEntry.getExtension();
-		String title = fileEntry.getTitle();
-		String description = fileEntry.getDescription();
-
-		if (properties == null) {
-			properties = fileEntry.getLuceneProperties();
-		}
-
-		if (modifiedDate == null) {
-			modifiedDate = fileEntry.getModifiedDate();
-		}
-
-		if (assetCategoryIds == null) {
-			assetCategoryIds = AssetCategoryLocalServiceUtil.getCategoryIds(
-				DLFileEntry.class.getName(), fileEntry.getFileEntryId());
-		}
-
-		if (assetTagNames == null) {
-			assetTagNames = AssetTagLocalServiceUtil.getTagNames(
-				DLFileEntry.class.getName(), fileEntry.getFileEntryId());
-		}
-
 		if (_log.isDebugEnabled()) {
-			_log.debug(
-				"Indexing document " + companyId + " " + portletId + " " +
-					scopeGroupId + " " + repositoryId + " " + fileName + " " +
-						fileEntry.getFileEntryId());
+			_log.debug("Indexing document " + fileModel);
 		}
 
 		boolean indexContent = true;
@@ -166,7 +120,9 @@ public class DLIndexer extends BaseIndexer {
 				indexContent = false;
 			}
 			else if (PropsValues.DL_FILE_INDEXING_MAX_SIZE != -1) {
-				long size = hook.getFileSize(companyId, repositoryId, fileName);
+				long size = hook.getFileSize(
+					fileModel.getCompanyId(), fileModel.getRepositoryId(),
+					fileModel.getFileName());
 
 				if (size > PropsValues.DL_FILE_INDEXING_MAX_SIZE) {
 					indexContent = false;
@@ -174,19 +130,22 @@ public class DLIndexer extends BaseIndexer {
 			}
 
 			if (indexContent) {
-				String extensionWithPeriod = StringPool.PERIOD + extension;
-
 				String[] ignoreExtensions = PrefsPropsUtil.getStringArray(
 					PropsKeys.DL_FILE_INDEXING_IGNORE_EXTENSIONS,
 					StringPool.COMMA);
 
-				if (ArrayUtil.contains(ignoreExtensions, extensionWithPeriod)) {
+				if (ArrayUtil.contains(
+						ignoreExtensions,
+						StringPool.PERIOD + fileEntry.getExtension())) {
+
 					indexContent = false;
 				}
 			}
 
 			if (indexContent) {
-				is = hook.getFileAsStream(companyId, repositoryId, fileName);
+				is = hook.getFileAsStream(
+					fileModel.getCompanyId(), fileModel.getRepositoryId(),
+					fileModel.getFileName());
 			}
 		}
 		catch (Exception e) {
@@ -195,10 +154,7 @@ public class DLIndexer extends BaseIndexer {
 		if (indexContent && (is == null)) {
 			if (_log.isDebugEnabled()) {
 				_log.debug(
-					"Document " + companyId + " " + portletId + " " +
-						scopeGroupId + " " + repositoryId + " " + fileName +
-							" " + fileEntry.getFileEntryId() + " does not " +
-								"have any content");
+					"Document " + fileModel + " does not have any content");
 			}
 
 			return null;
@@ -206,18 +162,38 @@ public class DLIndexer extends BaseIndexer {
 
 		Document document = new DocumentImpl();
 
-		document.addUID(portletId, repositoryId, fileName);
+		document.addUID(
+			fileModel.getPortletId(), fileModel.getRepositoryId(),
+			fileModel.getFileName());
 
-		document.addDate(Field.MODIFIED_DATE, modifiedDate);
+		long[] assetCategoryIds = fileModel.getAssetCategoryIds();
 
-		document.addKeyword(Field.COMPANY_ID, companyId);
-		document.addKeyword(Field.PORTLET_ID, portletId);
-		document.addKeyword(Field.GROUP_ID, groupId);
-		document.addKeyword(Field.SCOPE_GROUP_ID, scopeGroupId);
-		document.addKeyword(Field.USER_ID, userId);
-		document.addKeyword(Field.USER_NAME, userName, true);
+		if (assetCategoryIds == null) {
+			assetCategoryIds = AssetCategoryLocalServiceUtil.getCategoryIds(
+				DLFileEntry.class.getName(), fileEntry.getFileEntryId());
+		}
 
-		document.addText(Field.TITLE, title);
+		document.addKeyword(Field.ASSET_CATEGORY_IDS, assetCategoryIds);
+
+		String[] assetCategoryNames = fileModel.getAssetCategoryNames();
+
+		if (assetCategoryNames == null) {
+			assetCategoryNames = AssetCategoryLocalServiceUtil.getCategoryNames(
+				DLFileEntry.class.getName(), fileEntry.getFileEntryId());
+		}
+
+		document.addKeyword(Field.ASSET_CATEGORY_NAMES, assetCategoryNames);
+
+		String[] assetTagNames = fileModel.getAssetTagNames();
+
+		if (assetTagNames == null) {
+			assetTagNames = AssetTagLocalServiceUtil.getTagNames(
+				DLFileEntry.class.getName(), fileEntry.getFileEntryId());
+		}
+
+		document.addKeyword(Field.ASSET_TAG_NAMES, assetTagNames);
+
+		document.addKeyword(Field.COMPANY_ID, fileModel.getCompanyId());
 
 		if (indexContent) {
 			try {
@@ -225,44 +201,68 @@ public class DLIndexer extends BaseIndexer {
 			}
 			catch (IOException ioe) {
 				throw new SearchException(
-					"Cannot extract text from file" + companyId + " " +
-						portletId +	" " + scopeGroupId + " " + repositoryId +
-						" " + fileName);
+					"Cannot extract text from file" + fileModel);
 			}
 		}
 
-		document.addText(Field.DESCRIPTION, description);
-		document.addText(Field.PROPERTIES, properties);
-		document.addKeyword(Field.ASSET_CATEGORY_IDS, assetCategoryIds);
-		document.addKeyword(Field.ASSET_CATEGORY_NAMES, assetCategoryNames);
-		document.addKeyword(Field.ASSET_TAG_NAMES, assetTagNames);
-
-		document.addKeyword(Field.FOLDER_ID, folderId);
+		document.addText(Field.DESCRIPTION, fileEntry.getDescription());
 		document.addKeyword(
 			Field.ENTRY_CLASS_NAME, DLFileEntry.class.getName());
 		document.addKeyword(Field.ENTRY_CLASS_PK, fileEntry.getFileEntryId());
+		document.addKeyword(Field.FOLDER_ID, folderId);
+		document.addKeyword(Field.GROUP_ID, getParentGroupId(fileModel.getGroupId()));
 
-		document.addKeyword("repositoryId", repositoryId);
-		document.addKeyword("path", fileName);
-		document.addKeyword("extension", extension);
+		Date modifiedDate = fileModel.getModifiedDate();
+
+		if (modifiedDate == null) {
+			modifiedDate = fileEntry.getModifiedDate();
+		}
+
+		document.addDate(Field.MODIFIED_DATE, modifiedDate);
+
+		document.addKeyword(Field.PORTLET_ID, fileModel.getPortletId());
+
+		String properties = fileModel.getProperties();
+
+		if (properties == null) {
+			properties = fileEntry.getLuceneProperties();
+		}
+
+		document.addText(Field.PROPERTIES, properties);
+
+		document.addKeyword(Field.SCOPE_GROUP_ID, fileModel.getGroupId());
 
 		DLFileVersion fileVersion = fileEntry.getFileVersion();
 
-		int status = fileVersion.getStatus();
+		document.addKeyword(Field.STATUS, fileVersion.getStatus());
 
-		document.addKeyword(Field.STATUS, status);
+		document.addText(Field.TITLE, fileEntry.getTitle());
+
+		long userId = fileModel.getUserId();
+
+		if (userId == 0) {
+			userId = fileEntry.getUserId();
+		}
+
+		document.addKeyword(Field.USER_ID, userId);
+
+		String userName = PortalUtil.getUserName(
+			userId, fileEntry.getUserName());
+
+		document.addKeyword(Field.USER_NAME, userName, true);
+
+		document.addKeyword("extension", fileEntry.getExtension());
+		document.addKeyword("path", fileModel.getFileName());
+		document.addKeyword("repositoryId", fileModel.getRepositoryId());
 
 		ExpandoBridge expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(
-			companyId, DLFileEntry.class.getName(),
+			fileModel.getCompanyId(), DLFileEntry.class.getName(),
 			fileVersion.getFileVersionId());
 
 		ExpandoBridgeIndexerUtil.addAttributes(document, expandoBridge);
 
 		if (_log.isDebugEnabled()) {
-			_log.debug(
-				"Document " + companyId + " " + portletId + " " +
-					scopeGroupId + " " + repositoryId + " " + fileName + " " +
-						fileEntry.getFileEntryId() + " indexed successfully");
+			_log.debug("Document " + fileModel + " indexed successfully");
 		}
 
 		return document;

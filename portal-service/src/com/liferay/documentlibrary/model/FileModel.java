@@ -15,6 +15,7 @@
 package com.liferay.documentlibrary.model;
 
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.util.PortalUtil;
 
 import java.io.Serializable;
@@ -76,7 +77,7 @@ public class FileModel implements Serializable {
 	public long getUserId() {
 		return _userId;
 	}
-	
+
 	public String getUserName() {
 		return _userName;
 	}
@@ -128,7 +129,7 @@ public class FileModel implements Serializable {
 	public void setProperties(String properties) {
 		_properties = properties;
 	}
-	
+
 	public void setRepositoryId(long repositoryId) {
 		_repositoryId = repositoryId;
 	}
@@ -136,13 +137,51 @@ public class FileModel implements Serializable {
 	public void setUserId(long userId) {
 		_userId = userId;
 	}
-	
+
 	public void setUserName(String userName) {
 		_userName = userName;
 	}
 
 	public void setUserUuid(String userUuid) {
 		_userUuid = userUuid;
+	}
+
+	public String toString() {
+		StringBundler sb = new StringBundler(31);
+
+		sb.append("{assetCategoryIds=");
+		sb.append(_assetCategoryIds);
+		sb.append(", assetCategoryNames=");
+		sb.append(_assetCategoryNames);
+		sb.append(", assetTagNames=");
+		sb.append(_assetTagNames);
+		sb.append(", companyId=");
+		sb.append(_companyId);
+		sb.append(", createDate=");
+		sb.append(_createDate);
+		sb.append(", fileEntryId=");
+		sb.append(_fileEntryId);
+		sb.append(", fileName=");
+		sb.append(_fileName);
+		sb.append(", groupId=");
+		sb.append(_groupId);
+		sb.append(", modifiedDate=");
+		sb.append(_modifiedDate);
+		sb.append(", portletId=");
+		sb.append(_portletId);
+		sb.append(", properties=");
+		sb.append(_properties);
+		sb.append(", repositoryId=");
+		sb.append(_repositoryId);
+		sb.append(", userId=");
+		sb.append(_userId);
+		sb.append(", userName=");
+		sb.append(_userName);
+		sb.append(", userUuid=");
+		sb.append(_userUuid);
+		sb.append("}");
+
+		return sb.toString();
 	}
 
 	private long[] _assetCategoryIds;
