@@ -55,6 +55,8 @@ import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsValues;
+import com.liferay.portlet.asset.model.AssetEntry;
+import com.liferay.portlet.asset.model.AssetLinkConstants;
 import com.liferay.portlet.calendar.EventDurationException;
 import com.liferay.portlet.calendar.EventEndDateException;
 import com.liferay.portlet.calendar.EventStartDateException;
@@ -234,7 +236,8 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 
 		updateAsset(
 			userId, event, serviceContext.getAssetCategoryIds(),
-			serviceContext.getAssetTagNames());
+			serviceContext.getAssetTagNames(),
+			serviceContext.getAssetLinkEntryIds());
 
 		// Social
 
@@ -720,15 +723,19 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 
 	public void updateAsset(
 			long userId, CalEvent event, long[] assetCategoryIds,
-			String[] assetTagNames)
+			String[] assetTagNames, long[] assetLinkEntryIds)
 		throws PortalException, SystemException {
 
-		assetEntryLocalService.updateEntry(
+		AssetEntry assetEntry = assetEntryLocalService.updateEntry(
 			userId, event.getGroupId(), CalEvent.class.getName(),
 			event.getEventId(), event.getUuid(), assetCategoryIds,
 			assetTagNames, true, null, null, null, null, ContentTypes.TEXT_HTML,
 			event.getTitle(), event.getDescription(), null, null, null, 0, 0,
 			null, false);
+
+		assetLinkLocalService.updateLinks(
+			userId, assetEntry.getEntryId(), assetLinkEntryIds,
+			AssetLinkConstants.TYPE_RELATED);
 	}
 
 	public CalEvent updateEvent(
@@ -817,7 +824,8 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 
 		updateAsset(
 			userId, event, serviceContext.getAssetCategoryIds(),
-			serviceContext.getAssetTagNames());
+			serviceContext.getAssetTagNames(),
+			serviceContext.getAssetLinkEntryIds());
 
 		// Social
 

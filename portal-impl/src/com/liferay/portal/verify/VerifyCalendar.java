@@ -37,7 +37,7 @@ public class VerifyCalendar extends VerifyProcess {
 		for (CalEvent event : events) {
 			try {
 				CalEventLocalServiceUtil.updateAsset(
-					event.getUserId(), event, null, null);
+					event.getUserId(), event, null, null, null);
 			}
 			catch (Exception e) {
 				if (_log.isWarnEnabled()) {
