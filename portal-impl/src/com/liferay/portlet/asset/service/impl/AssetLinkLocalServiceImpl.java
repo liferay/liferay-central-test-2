@@ -144,11 +144,11 @@ public class AssetLinkLocalServiceImpl extends AssetLinkLocalServiceBaseImpl {
 		return assetLinkPersistence.findByE2_T(entryId, typeId);
 	}
 
-	public void updateLinks(long userId, long entryId, long[] linkEntryIds)
+	public void updateLinks(
+			long userId, long entryId, long[] linkEntryIds, int typeId)
 		throws SystemException, PortalException {
 
-		List<AssetLink> links = getLinks(
-			entryId, AssetLinkConstants.TYPE_RELATED);
+		List<AssetLink> links = getLinks(entryId, typeId);
 
 		for (AssetLink link : links) {
 			if (((link.getEntryId1() == entryId) &&
@@ -160,15 +160,15 @@ public class AssetLinkLocalServiceImpl extends AssetLinkLocalServiceBaseImpl {
 			}
 		}
 
-		for (long assetLinkEntryId : linkEntryIds) {
-			if (assetLinkEntryId != entryId) {
-				AssetLink link = assetLinkPersistence.fetchByE_E_T(
-					entryId, assetLinkEntryId, AssetLinkConstants.TYPE_RELATED);
+		if (linkEntryIds != null) {
+			for (long assetLinkEntryId : linkEntryIds) {
+				if (assetLinkEntryId != entryId) {
+					AssetLink link = assetLinkPersistence.fetchByE_E_T(
+						entryId, assetLinkEntryId,typeId);
 
-				if (link == null) {
-					addLink(
-						userId, entryId, assetLinkEntryId,
-						AssetLinkConstants.TYPE_RELATED, 0);
+					if (link == null) {
+						addLink(userId, entryId, assetLinkEntryId, typeId, 0);
+					}
 				}
 			}
 		}
