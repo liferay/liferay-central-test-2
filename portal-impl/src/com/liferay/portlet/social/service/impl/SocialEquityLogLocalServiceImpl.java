@@ -859,7 +859,12 @@ public class SocialEquityLogLocalServiceImpl
 
 		public void flush() {
 			try {
-				_jdbcTemplate.batchUpdate(_sql, this);
+				if (getBatchSize() > 0) {
+					_jdbcTemplate.batchUpdate(_sql, this);
+				}
+				else {
+					return;
+				}
 			}
 			catch (DataAccessException dae) {
 				throw dae;
