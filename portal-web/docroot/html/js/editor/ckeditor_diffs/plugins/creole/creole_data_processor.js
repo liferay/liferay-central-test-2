@@ -358,10 +358,6 @@
 		_handleLink: function(element, listTagsIn, listTagsOut) {
 			var hrefAttribute = element.getAttribute('href');
 
-			if (!REGEX_URL_PREFIX.test(hrefAttribute)) {
-				hrefAttribute = decodeURIComponent(hrefAttribute);
-			}
-
 			if (CKEDITOR.env.ie && (CKEDITOR.env.version <= 8)) {
 				var location = window.location;
 
@@ -374,6 +370,10 @@
 				if (hostPrefix == 0) {
 					hrefAttribute = hrefAttribute.substr(protocolHostPathname.length);
 				}
+			}
+
+			if (!REGEX_URL_PREFIX.test(hrefAttribute)) {
+				hrefAttribute = decodeURIComponent(hrefAttribute);
 			}
 
 			listTagsIn.push('[[', hrefAttribute, STR_PIPE);
