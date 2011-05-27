@@ -532,13 +532,10 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 
 			// Asset
 
-			long[] assetCategoryIds = serviceContext.getAssetCategoryIds();
-			String[] assetTagNames = serviceContext.getAssetTagNames();
-			long[] assetLinkEntryIds = serviceContext.getAssetLinkEntryIds();
-
 			updateAsset(
-				userId, image, assetCategoryIds, assetTagNames,
-				assetLinkEntryIds, contentType);
+				userId, image, serviceContext.getAssetCategoryIds(),
+				serviceContext.getAssetTagNames(),
+				serviceContext.getAssetLinkEntryIds(), contentType);
 
 			// Social
 

@@ -429,14 +429,16 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 
 	public void updateAsset(
 			long userId, FileEntry fileEntry, FileVersion fileVersion,
-			long[] assetCategoryIds, String[] assetTagNames)
+			long[] assetCategoryIds, String[] assetTagNames,
+			long[] assetLinkEntryIds)
 		throws PortalException, SystemException {
 
 		LocalRepository localRepository = getLocalRepository(
 			0, fileEntry.getFileEntryId(), 0);
 
 		localRepository.updateAsset(
-			userId, fileEntry, fileVersion, assetCategoryIds, assetTagNames);
+			userId, fileEntry, fileVersion, assetCategoryIds, assetTagNames,
+			assetLinkEntryIds);
 	}
 
 	public FileEntry updateFileEntry(

@@ -311,8 +311,6 @@ public class DLAppHelperLocalServiceImpl
 								fileEntry.getDescription(), null, null, null, 0,
 								0, null, false);
 
-						// Asset Links
-
 						assetLinkLocalService.updateLinks(
 							userId, assetEntry.getEntryId(),
 							assetLinkEntryIds, AssetLinkConstants.TYPE_RELATED);

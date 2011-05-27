@@ -1995,13 +1995,10 @@ public class JournalArticleLocalServiceImpl
 
 		// Asset
 
-		long[] assetCategoryIds = serviceContext.getAssetCategoryIds();
-		String[] assetTagNames = serviceContext.getAssetTagNames();
-		long[] assetLinkEntryIds = serviceContext.getAssetLinkEntryIds();
-
 		updateAsset(
-			userId, article, assetCategoryIds, assetTagNames,
-			assetLinkEntryIds);
+			userId, article, serviceContext.getAssetCategoryIds(),
+			serviceContext.getAssetTagNames(),
+			serviceContext.getAssetLinkEntryIds());
 
 		// Expando
 
@@ -2316,8 +2313,6 @@ public class JournalArticleLocalServiceImpl
 								ContentTypes.TEXT_HTML, article.getTitle(),
 								article.getDescription(), null, null,
 								article.getLayoutUuid(), 0, 0, null, false);
-
-						// Asset Links
 
 						assetLinkLocalService.updateLinks(
 							userId, assetEntry.getEntryId(),

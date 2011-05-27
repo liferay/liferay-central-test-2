@@ -110,7 +110,8 @@ public interface LocalRepository {
 
 	public void updateAsset(
 			long userId, FileEntry fileEntry, FileVersion fileVersion,
-			long[] assetCategoryIds, String[] assetTagNames)
+			long[] assetCategoryIds, String[] assetTagNames,
+			long[] assetLinkEntryIds)
 		throws PortalException, SystemException;
 
 	public FileEntry updateFileEntry(

@@ -365,8 +365,8 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			WikiPage.class.getName(), page.getResourcePrimKey());
 
 		serviceContext.setAssetCategoryIds(assetCategoryIds);
-		serviceContext.setAssetTagNames(assetTagNames);
 		serviceContext.setAssetLinkEntryIds(null);
+		serviceContext.setAssetTagNames(assetTagNames);
 
 		updatePage(
 			userId, nodeId, title, version, content, summary, minorEdit,
@@ -1006,13 +1006,11 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		serviceContext.setAddGroupPermissions(true);
 		serviceContext.setAddGuestPermissions(true);
 
-		AssetEntry assetEntry =
-			assetEntryLocalService.getEntry(
-				WikiPage.class.getName(), page.getResourcePrimKey());
+		AssetEntry assetEntry = assetEntryLocalService.getEntry(
+			WikiPage.class.getName(), page.getResourcePrimKey());
 
-		List<AssetLink> assetLinks =
-			assetLinkLocalService.getDirectLinks(
-				assetEntry.getEntryId(), AssetLinkConstants.TYPE_RELATED);
+		List<AssetLink> assetLinks = assetLinkLocalService.getDirectLinks(
+			assetEntry.getEntryId(), AssetLinkConstants.TYPE_RELATED);
 
 		long[] assetLinkEntryIds = StringUtil.split(
 			ListUtil.toString(assetLinks, "entryId2"), 0L);

@@ -589,16 +589,6 @@ public class DLFileEntryLocalServiceImpl
 
 	public AssetEntry updateAsset(
 			long userId, DLFileEntry dlFileEntry, DLFileVersion dlFileVersion,
-			long[] assetCategoryIds, String[] assetTagNames)
-		throws PortalException, SystemException {
-
-		return updateAsset(
-			userId, dlFileEntry, dlFileVersion, assetCategoryIds, assetTagNames,
-			null);
-	}
-
-	public AssetEntry updateAsset(
-			long userId, DLFileEntry dlFileEntry, DLFileVersion dlFileVersion,
 			long[] assetCategoryIds, String[] assetTagNames,
 			long[] assetLinkEntryIds)
 		throws PortalException, SystemException {

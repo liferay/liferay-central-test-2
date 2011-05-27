@@ -262,7 +262,8 @@ public class LiferayLocalRepository
 
 	public void updateAsset(
 			long userId, FileEntry fileEntry, FileVersion fileVersion,
-			long[] assetCategoryIds, String[] assetTagNames)
+			long[] assetCategoryIds, String[] assetTagNames,
+			long[] assetLinkEntryIds)
 		throws PortalException, SystemException {
 
 		DLFileEntry dlFileEntry = (DLFileEntry)fileEntry.getModel();
@@ -270,7 +271,7 @@ public class LiferayLocalRepository
 
 		dlFileEntryLocalService.updateAsset(
 			userId, dlFileEntry, dlFileVersion, assetCategoryIds,
-			assetTagNames);
+			assetTagNames, assetLinkEntryIds);
 	}
 
 	public FileEntry updateFileEntry(

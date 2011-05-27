@@ -187,7 +187,8 @@ public class BaseLocalRepositoryImpl implements LocalRepository {
 
 	public void updateAsset(
 		long userId, FileEntry fileEntry, FileVersion fileVersion,
-		long[] assetCategoryIds, String[] assetTagNames) {
+		long[] assetCategoryIds, String[] assetTagNames,
+		long[] assetLinkEntryIds) {
 
 		throw new UnsupportedOperationException();
 	}
