@@ -72,6 +72,9 @@
 		if (reminderQueryQuestion.val() != '<%= EnterpriseAdminUtil.CUSTOM_QUESTION %>') {
 			customQuestionContainer.hide();
 		}
+		else {
+			customQuestionContainer.show();
+		}
 
 		reminderQueryQuestion.on(
 			'change',
