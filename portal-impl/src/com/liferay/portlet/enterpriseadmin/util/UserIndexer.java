@@ -146,6 +146,10 @@ public class UserIndexer extends BaseIndexer {
 					"organizationIds", String.valueOf(value));
 			}
 		}
+		else if (key.equals("usersOrgsCount")) {
+			contextQuery.addRequiredTerm(
+				"organizationCount", String.valueOf(value));
+		}
 		else if (key.equals("usersRoles")) {
 			contextQuery.addRequiredTerm("roleIds", String.valueOf(value));
 		}
@@ -173,6 +177,8 @@ public class UserIndexer extends BaseIndexer {
 
 		Document document = getBaseModelDocument(PORTLET_ID, user);
 
+		long[] organizationIds = user.getOrganizationIds();
+
 		document.addKeyword(Field.COMPANY_ID, user.getCompanyId());
 		document.addKeyword(Field.STATUS, user.getStatus());
 		document.addKeyword(Field.USER_ID, user.getUserId());
@@ -189,7 +195,9 @@ public class UserIndexer extends BaseIndexer {
 		document.addText("jobTitle", user.getJobTitle());
 		document.addText("lastName", user.getLastName());
 		document.addText("middleName", user.getMiddleName());
-		document.addKeyword("organizationIds", user.getOrganizationIds());
+		document.addKeyword("organizationIds", organizationIds);
+		document.addKeyword(
+			"organizationCount", String.valueOf(organizationIds.length));
 		document.addKeyword("roleIds", user.getRoleIds());
 		document.addText("screenName", user.getScreenName());
 		document.addKeyword("teamIds", user.getTeamIds());

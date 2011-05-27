@@ -1407,10 +1407,6 @@ public interface PropsKeys {
 
 	public static final String ORGANIZATIONS_FORM_UPDATE_MISCELLANEOUS = "organizations.form.update.miscellaneous";
 
-	public static final String ORGANIZATIONS_LIST_VIEWS = "organizations.list.views";
-
-	public static final String ORGANIZATIONS_LIST_VIEWS_DEFAULT = "organizations.list.views.default";
-
 	public static final String ORGANIZATIONS_MEMBERSHIP_STRICT = "organizations.membership.strict";
 
 	public static final String ORGANIZATIONS_ROOTABLE = "organizations.rootable";
@@ -1856,6 +1852,10 @@ public interface PropsKeys {
 	public static final String USERS_IMAGE_MAX_WIDTH = "users.image.max.width";
 
 	public static final String USERS_LAST_NAME_REQUIRED = "users.last.name.required";
+
+	public static final String USERS_LIST_VIEWS = "users.list.views";
+
+	public static final String USERS_LIST_VIEWS_DEFAULT = "users.list.views.default";
 
 	public static final String USERS_REMINDER_QUERIES_CUSTOM_QUESTION_ENABLED = "users.reminder.queries.custom.question.enabled";
 

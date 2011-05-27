@@ -66,7 +66,7 @@
 			<portlet:param name="struts_action" value="/enterprise_admin/view" />
 			<portlet:param name="redirect" value="<%= searchContainer.getIteratorURL().toString() %>" />
 			<portlet:param name="organizationId" value="<%= String.valueOf(organization.getOrganizationId()) %>" />
-			<portlet:param name="organizationsListView" value="<%= OrganizationConstants.LIST_VIEW_TREE %>" />
+			<portlet:param name="usersListView" value="<%= UserConstants.LIST_VIEW_TREE %>" />
 		</portlet:renderURL>
 
 		<%
@@ -89,45 +89,7 @@
 		<aui:button onClick='<%= renderResponse.getNamespace() + "deleteOrganizations();" %>' value="delete" />
 	</c:if>
 
-	<c:if test="<%= PropsValues.ORGANIZATIONS_LIST_VIEWS.length > 1 %>">
-		<c:if test="<%= ArrayUtil.contains(PropsValues.ORGANIZATIONS_LIST_VIEWS, OrganizationConstants.LIST_VIEW_FLAT) %>">
-			<td class="organizations-list-view-icon">
-				<portlet:renderURL var="viewOrganizationURL">
-					<portlet:param name="struts_action" value="/enterprise_admin/view" />
-					<portlet:param name="tabs1" value="organizations" />
-					<portlet:param name="organizationsListView" value="<%= OrganizationConstants.LIST_VIEW_FLAT %>" />
-					<portlet:param name="saveOrganizationsListView" value="<%= Boolean.TRUE.toString() %>" />
-				</portlet:renderURL>
-
-				<liferay-ui:icon
-					cssClass="organizations-list-view-icon"
-					image="../message_boards/thread_view_flat"
-					message="flat-view"
-					method="get"
-					url="<%= viewOrganizationURL %>"
-				/>
-			</td>
-		</c:if>
-
-		<c:if test="<%= ArrayUtil.contains(PropsValues.ORGANIZATIONS_LIST_VIEWS, OrganizationConstants.LIST_VIEW_TREE) %>">
-			<td class="organizations-list-view-icon">
-				<portlet:renderURL var="viewOrganizationURL">
-					<portlet:param name="struts_action" value="/enterprise_admin/view" />
-					<portlet:param name="tabs1" value="organizations" />
-					<portlet:param name="organizationsListView" value="<%= OrganizationConstants.LIST_VIEW_TREE %>" />
-					<portlet:param name="saveOrganizationsListView" value="<%= Boolean.TRUE.toString() %>" />
-				</portlet:renderURL>
-
-				<liferay-ui:icon
-					cssClass="organizations-list-view-icon"
-					image="../message_boards/thread_view_tree"
-					message="tree-view"
-					method="get"
-					url="<%= viewOrganizationURL %>"
-				/>
-			</td>
-		</c:if>
-	</c:if>
+	<%@ include file="/html/portlet/enterprise_admin/user/list_views.jspf" %>
 
 	<br />
 

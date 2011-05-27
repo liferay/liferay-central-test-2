@@ -122,7 +122,7 @@
 		margin: 0 0 0.5em 0.5em;
 	}
 
-	.organizations-list-view-icon {
+	.users-list-view-icon {
 		float:right;
 	}
 

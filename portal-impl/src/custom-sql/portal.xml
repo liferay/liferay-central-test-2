@@ -1449,6 +1449,17 @@
 				(Contact_.twitterSn != '')
 		]]>
 	</sql>
+	<sql id="com.liferay.portal.service.persistence.UserFinder.joinByNoOrganizations">
+		<![CDATA[
+			WHERE
+				(User_.userId NOT IN(
+					SELECT
+						userId
+					FROM
+						Users_Orgs
+				))
+		]]>
+	</sql>
 	<sql id="com.liferay.portal.service.persistence.UserFinder.joinByPermission">
 		<![CDATA[
 			INNER JOIN

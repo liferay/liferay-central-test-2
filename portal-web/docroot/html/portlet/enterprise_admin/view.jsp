@@ -56,9 +56,6 @@ request.setAttribute("view.jsp-portletURLString", portletURLString);
 				<c:when test='<%= tabs1.equals("users") %>'>
 					<liferay-util:include page="/html/portlet/enterprise_admin/view_users.jsp" />
 				</c:when>
-				<c:when test='<%= tabs1.equals("organizations") %>'>
-					<liferay-util:include page="/html/portlet/enterprise_admin/view_organizations.jsp" />
-				</c:when>
 				<c:when test='<%= tabs1.equals("user-groups") %>'>
 					<liferay-util:include page="/html/portlet/enterprise_admin/view_user_groups.jsp" />
 				</c:when>

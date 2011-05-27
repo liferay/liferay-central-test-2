@@ -658,6 +658,14 @@
 		<put name="portlet_content" value="/portlet/enterprise_admin/view.jsp" />
 	</definition>
 
+	<definition name="portlet.enterprise_admin.view_organizations" extends="portlet.enterprise_admin">
+		<put name="portlet_content" value="/portlet/enterprise_admin/view_organizations.jsp" />
+	</definition>
+
+	<definition name="portlet.enterprise_admin.view_users" extends="portlet.enterprise_admin">
+		<put name="portlet_content" value="/portlet/enterprise_admin/view_users.jsp" />
+	</definition>
+
 	<!-- Enterprise Admin Sites -->
 
 	<definition name="portlet.enterprise_admin_sites" extends="portlet" />
