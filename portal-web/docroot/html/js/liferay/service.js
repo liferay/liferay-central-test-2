@@ -530,9 +530,11 @@ Liferay.Service.registerClass(
 		deleteTags: true,
 		getGroupsTags: true,
 		getGroupTags: true,
+		getGroupTagsCount: true,
 		getJSONGroupTags: true,
 		getTag: true,
 		getTags: true,
+		getTagsCount: true,
 		mergeTags: true,
 		search: true,
 		updateTag: true

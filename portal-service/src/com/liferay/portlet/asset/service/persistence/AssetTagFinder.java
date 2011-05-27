@@ -26,6 +26,10 @@ public interface AssetTagFinder {
 		java.lang.String[] tagProperties)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	public int filterCountByG_N_P(long groupId, java.lang.String name,
+		java.lang.String[] tagProperties)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	public com.liferay.portlet.asset.model.AssetTag filterFindByG_N(
 		long groupId, java.lang.String name)
 		throws com.liferay.portal.kernel.exception.SystemException,

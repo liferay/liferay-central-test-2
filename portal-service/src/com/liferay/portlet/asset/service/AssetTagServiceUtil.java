@@ -76,6 +76,11 @@ public class AssetTagServiceUtil {
 		return getService().getGroupTags(groupId, start, end, obc);
 	}
 
+	public static int getGroupTagsCount(long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getGroupTagsCount(groupId);
+	}
+
 	public static com.liferay.portal.kernel.json.JSONObject getJSONGroupTags(
 		long groupId, java.lang.String name, int start, int end)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -107,6 +112,19 @@ public class AssetTagServiceUtil {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService().getTags(className, classPK);
+	}
+
+	public static java.util.List<com.liferay.portlet.asset.model.AssetTag> getTags(
+		long groupId, java.lang.String name, java.lang.String[] tagProperties,
+		int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getTags(groupId, name, tagProperties, start, end);
+	}
+
+	public static int getTagsCount(long groupId, java.lang.String name,
+		java.lang.String[] tagProperties)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getTagsCount(groupId, name, tagProperties);
 	}
 
 	public static void mergeTags(long fromTagId, long toTagId)
