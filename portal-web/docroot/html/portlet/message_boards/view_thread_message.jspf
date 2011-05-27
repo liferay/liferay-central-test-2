@@ -483,15 +483,6 @@
 					/>
 				</c:if>
 
-				<br />
-
-				<div class="entry-links">
-					<liferay-ui:asset-links
-						className="<%= MBMessage.class.getName() %>"
-						classPK="<%= message.getMessageId() %>"
-					/>
-				</div>
-
 				<ul class="edit-controls lfr-component">
 					<li>
 

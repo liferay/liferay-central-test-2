@@ -304,13 +304,6 @@ AssetUtil.addLayoutTags(request, AssetTagLocalServiceUtil.getTags(WikiPage.class
 		</div>
 	</c:if>
 
-	<div class="entry-links">
-		<liferay-ui:asset-links
-			className="<%= WikiPage.class.getName() %>"
-			classPK="<%= wikiPage.getResourcePrimKey() %>"
-		/>
-	</div>
-
 	<c:if test="<%= enableComments %>">
 		<liferay-ui:panel-container extended="<%= false %>" id="wikiCommentsPanelContainer" persistState="<%= true %>">
 			<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="wikiCommentsPanel" persistState="<%= true %>" title="comments">

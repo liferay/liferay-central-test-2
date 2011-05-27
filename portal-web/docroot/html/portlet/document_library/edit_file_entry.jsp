@@ -302,13 +302,6 @@ else if (documentType != null) {
 
 				<aui:input classPK="<%= assetClassPK %>" model="<%= DLFileEntry.class %>" name="tags" type="assetTags" />
 			</c:if>
-
-			<aui:fieldset>
-				<liferay-ui:input-asset-links
-					className="<%= DLFileEntry.class.getName() %>"
-					classPK="<%= assetClassPK %>"
-				/>
-			</aui:fieldset>
 		</c:if>
 
 		<%

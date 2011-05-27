@@ -143,13 +143,6 @@ if (portletDisplay.isWebDAVEnabled()) {
 			</aui:column>
 		</aui:layout>
 
-		<div class="entry-links">
-			<liferay-ui:asset-links
-				className="<%= IGImage.class.getName() %>"
-				classPK="<%= image.getImageId() %>"
-			/>
-		</div>
-
 		<div class="lfr-asset-ratings">
 			<liferay-ui:ratings
 				className="<%= IGImage.class.getName() %>"

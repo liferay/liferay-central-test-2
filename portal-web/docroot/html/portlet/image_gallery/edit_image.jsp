@@ -170,13 +170,6 @@ long imageMaxSize = PrefsPropsUtil.getLong(PropsKeys.IG_IMAGE_MAX_SIZE) / 1024;
 
 		<aui:input name="tags" type="assetTags" />
 
-		<aui:fieldset>
-			<liferay-ui:input-asset-links
-				className="<%= IGImage.class.getName() %>"
-				classPK="<%= imageId %>"
-			/>
-		</aui:fieldset>
-
 		<c:if test="<%= image == null %>">
 			<aui:field-wrapper label="permissions">
 				<liferay-ui:input-permissions
