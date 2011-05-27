@@ -22,6 +22,14 @@ String backURL = ParamUtil.getString(request, "backURL", viewUsersRedirect);
 
 PortletURL portletURL = (PortletURL)request.getAttribute("view.jsp-portletURL");
 
+if (portletURL == null) {
+	portletURL = renderResponse.createRenderURL();
+
+	portletURL.setParameter("struts_action", "/enterprise_admin/view_users");
+
+	pageContext.setAttribute("portletURL", portletURL);
+}
+
 if (Validator.isNotNull(viewUsersRedirect)) {
 	portletURL.setParameter("viewUsersRedirect", viewUsersRedirect);
 }
@@ -53,12 +61,12 @@ else {
 
 <c:choose>
 	<c:when test="<%= usersListView.equals(UserConstants.LIST_VIEW_FLAT_ORGANIZATIONS) %>">
-		<%@ include file="/html/portlet/enterprise_admin/view_users_flat_organizations.jspf" %>
+		<%@ include file="/html/portlet/enterprise_admin/view_users_flat_organizations.jsp" %>
 	</c:when>
 	<c:when test="<%= usersListView.equals(UserConstants.LIST_VIEW_FLAT_USERS) %>">
-		<%@ include file="/html/portlet/enterprise_admin/view_users_flat_users.jspf" %>
+		<%@ include file="/html/portlet/enterprise_admin/view_users_flat_users.jsp" %>
 	</c:when>
 	<c:otherwise>
-		<%@ include file="/html/portlet/enterprise_admin/view_users_tree.jspf" %>
+		<%@ include file="/html/portlet/enterprise_admin/view_users_tree.jsp" %>
 	</c:otherwise>
 </c:choose>

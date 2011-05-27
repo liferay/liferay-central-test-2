@@ -44,10 +44,10 @@ PortletURL portletURL = (PortletURL)request.getAttribute("view.jsp-portletURL");
 	<liferay-ui:search-container-results>
 		<c:choose>
 			<c:when test="<%= PropsValues.ORGANIZATIONS_SEARCH_WITH_INDEX %>">
-				<%@ include file="/html/portlet/enterprise_admin/organization_search_results_index.jspf" %>
+				<%@ include file="/html/portlet/enterprise_admin/organization_search_results_index.jsp" %>
 			</c:when>
 			<c:otherwise>
-				<%@ include file="/html/portlet/enterprise_admin/organization_search_results_database.jspf" %>
+				<%@ include file="/html/portlet/enterprise_admin/organization_search_results_database.jsp" %>
 			</c:otherwise>
 		</c:choose>
 	</liferay-ui:search-container-results>

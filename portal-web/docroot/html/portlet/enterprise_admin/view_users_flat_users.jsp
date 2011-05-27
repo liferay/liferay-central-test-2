@@ -34,15 +34,15 @@
 		searchTerms.setStatus(searchTerms.getStatus());
 	}
 
-	long organizationId = searchTerms.getOrganizationId();
+	long currentOrganizationId = searchTerms.getOrganizationId();
 	long roleId = searchTerms.getRoleId();
 	long userGroupId = searchTerms.getUserGroupId();
 
-	Organization organization = null;
+	Organization currentOrganization = null;
 
-	if ((organizationId > 0)) {
+	if ((currentOrganizationId > 0)) {
 		try {
-			organization = OrganizationLocalServiceUtil.getOrganization(organizationId);
+			currentOrganization = OrganizationLocalServiceUtil.getOrganization(currentOrganizationId);
 		}
 		catch (NoSuchOrganizationException nsoe) {
 		}
@@ -69,16 +69,16 @@
 	}
 	%>
 
-	<c:if test="<%= organization != null %>">
-		<aui:input name="<%= UserDisplayTerms.ORGANIZATION_ID %>" type="hidden" value="<%= organization.getOrganizationId() %>" />
+	<c:if test="<%= currentOrganization != null %>">
+		<aui:input name="<%= UserDisplayTerms.ORGANIZATION_ID %>" type="hidden" value="<%= currentOrganization.getOrganizationId() %>" />
 
 		<liferay-ui:header
 			backURL="<%= backURL %>"
-			title="<%= organization.getName() %>"
+			title="<%= currentOrganization.getName() %>"
 		/>
 
 		<%
-		EnterpriseAdminUtil.addPortletBreadcrumbEntries(organization, request, renderResponse);
+		EnterpriseAdminUtil.addPortletBreadcrumbEntries(currentOrganization, request, renderResponse);
 
 		PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "view-users"), currentURL);
 		%>
@@ -115,15 +115,17 @@
 
 	</c:if>
 
-	<liferay-ui:search-form
-		page="/html/portlet/enterprise_admin/user_search.jsp"
-	/>
+	<c:if test="<%= (usersListView.equals(UserConstants.LIST_VIEW_FLAT_USERS)) && (currentOrganization == null) %>">
+		<liferay-ui:search-form
+			page="/html/portlet/enterprise_admin/user_search.jsp"
+		/>
+	</c:if>
 
 	<%
 	LinkedHashMap userParams = new LinkedHashMap();
 
-	if (organizationId > 0) {
-		userParams.put("usersOrgs", new Long(organizationId));
+	if (currentOrganizationId > 0) {
+		userParams.put("usersOrgs", new Long(currentOrganizationId));
 	}
 	else if (usersListView.equals(UserConstants.LIST_VIEW_TREE)) {
 		userParams.put("usersOrgsCount", 0);
@@ -182,7 +184,11 @@
 		/>
 	</liferay-ui:search-container-row>
 
-	<div class="separator"><!-- --></div>
+	<c:if test="<%= !usersListView.equals(UserConstants.LIST_VIEW_TREE) %>">
+		<div class="separator"><!-- --></div>
+
+		<%@ include file="/html/portlet/enterprise_admin/user/list_views.jspf" %>
+	</c:if>
 
 	<%
 	boolean hasButtons = false;

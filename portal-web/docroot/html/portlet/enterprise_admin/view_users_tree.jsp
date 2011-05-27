@@ -77,6 +77,12 @@ int organizationsCount = OrganizationLocalServiceUtil.searchCount(company.getCom
 		/>
 	</c:if>
 
+	<c:if test="<%= organization == null %>">
+		<div class="separator"><!-- --></div>
+
+		<%@ include file="/html/portlet/enterprise_admin/user/list_views.jspf" %>
+	</c:if>
+
 	<liferay-util:buffer var="organizationInfo">
 		<c:if test="<%= organization != null %>">
 
@@ -94,8 +100,9 @@ int organizationsCount = OrganizationLocalServiceUtil.searchCount(company.getCom
 
 				<div class="lfr-asset-icon lfr-asset-users">
 					<portlet:renderURL var="viewUsersURL">
-						<portlet:param name="struts_action" value="/enterprise_admin/view" />
+						<portlet:param name="struts_action" value="/enterprise_admin/view_users" />
 						<portlet:param name="tabs1" value="users" />
+						<portlet:param name="usersListView" value="<%= UserConstants.LIST_VIEW_FLAT_USERS %>" />
 						<portlet:param name="viewUsersRedirect" value="<%= currentURL %>" />
 						<portlet:param name="organizationId" value="<%= String.valueOf(organizationId) %>" />
 					</portlet:renderURL>
@@ -205,10 +212,6 @@ int organizationsCount = OrganizationLocalServiceUtil.searchCount(company.getCom
 		<liferay-ui:search-container
 			searchContainer="<%= organizationSearch %>"
 		>
-			<liferay-ui:search-form
-				page="/html/portlet/enterprise_admin/organization_search.jsp"
-			/>
-
 			<%
 			OrganizationSearchTerms searchTerms = (OrganizationSearchTerms)searchContainer.getSearchTerms();
 
@@ -224,21 +227,16 @@ int organizationsCount = OrganizationLocalServiceUtil.searchCount(company.getCom
 					<liferay-ui:search-container-results>
 						<c:choose>
 							<c:when test="<%= PropsValues.ORGANIZATIONS_SEARCH_WITH_INDEX %>">
-								<%@ include file="/html/portlet/enterprise_admin/organization_search_results_index.jspf" %>
+								<%@ include file="/html/portlet/enterprise_admin/organization_search_results_index.jsp" %>
 							</c:when>
 							<c:otherwise>
-								<%@ include file="/html/portlet/enterprise_admin/organization_search_results_database.jspf" %>
+								<%@ include file="/html/portlet/enterprise_admin/organization_search_results_database.jsp" %>
 							</c:otherwise>
 						</c:choose>
 					</liferay-ui:search-container-results>
 
-
 					<c:if test="<%= !results.isEmpty() %>">
-						<div class="separator"><!-- --></div>
-
 						<aui:button onClick='<%= renderResponse.getNamespace() + "deleteOrganizations();" %>' value="delete" />
-
-						<%@ include file="/html/portlet/enterprise_admin/user/list_views.jspf" %>
 					</c:if>
 				</c:when>
 				<c:otherwise>
@@ -254,10 +252,10 @@ int organizationsCount = OrganizationLocalServiceUtil.searchCount(company.getCom
 
 						<c:choose>
 							<c:when test="<%= PropsValues.ORGANIZATIONS_SEARCH_WITH_INDEX %>">
-								<%@ include file="/html/portlet/enterprise_admin/organization_search_results_index.jspf" %>
+								<%@ include file="/html/portlet/enterprise_admin/organization_search_results_index.jsp" %>
 							</c:when>
 							<c:otherwise>
-								<%@ include file="/html/portlet/enterprise_admin/organization_search_results_database.jspf" %>
+								<%@ include file="/html/portlet/enterprise_admin/organization_search_results_database.jsp" %>
 							</c:otherwise>
 						</c:choose>
 
@@ -290,22 +288,19 @@ int organizationsCount = OrganizationLocalServiceUtil.searchCount(company.getCom
 	</liferay-util:buffer>
 
 	<aui:column columnWidth="<%= (organization != null) ? 75 : 100 %>" cssClass="lfr-asset-column lfr-asset-column-details" first="<%= true %>">
-		<c:choose>
-			<c:when test="<%= (organization != null) %>">
-				<liferay-ui:panel-container extended="<%= false %>" persistState="<%= true %>">
-					<%= organizationInfo %>
+		<liferay-ui:panel-container extended="<%= false %>" persistState="<%= true %>">
+			<%= organizationInfo %>
 
-					<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" persistState="<%= true %>" title="suborganizations">
-						<%= organizationsTree %>
-					</liferay-ui:panel>
-				</liferay-ui:panel-container>
-			</c:when>
-			<c:otherwise>
-				<%= organizationInfo %>
-
+			<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" persistState="<%= true %>" title='<%= (organization != null) ? "suborganizations" : "organizations" %>'>
 				<%= organizationsTree %>
-		</c:otherwise>
-		</c:choose>
+			</liferay-ui:panel>
+
+			<c:if test="<%= organization == null %>">
+				<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" persistState="<%= true %>" title="users">
+					<%@ include file="/html/portlet/enterprise_admin/view_users_flat_users.jsp" %>
+				</liferay-ui:panel>
+			</c:if>
+		</liferay-ui:panel-container>
 	</aui:column>
 
 	<c:if test="<%= organization != null %>">
