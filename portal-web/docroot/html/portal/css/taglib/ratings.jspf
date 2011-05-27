@@ -35,6 +35,14 @@
 	display: inline;
 }
 
+.ie6 .taglib-ratings .liferay-rating-score .aui-rating-content {
+	display: inline;
+}
+
+.ie6 .taglib-ratings-wrapper .taglib-ratings.stars {
+	display: inline-block;
+}
+
 .taglib-ratings.score {
 	white-space: nowrap;
 }
