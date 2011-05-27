@@ -407,8 +407,12 @@ public class PortletImporter {
 			titleMap = new HashMap<Locale, String>();
 		}
 
-		if (Validator.isNull(titleMap.get(LocaleUtil.getDefault()))) {
-			titleMap.put(LocaleUtil.getDefault(), assetCategory.getName());
+		Locale locale = LocaleUtil.getDefault();
+
+		String title = titleMap.get(locale);
+
+		if (Validator.isNull(title)) {
+			titleMap.put(locale, assetCategory.getName());
 		}
 
 		return titleMap;
@@ -423,8 +427,12 @@ public class PortletImporter {
 			titleMap = new HashMap<Locale, String>();
 		}
 
-		if (Validator.isNull(titleMap.get(LocaleUtil.getDefault()))) {
-			titleMap.put(LocaleUtil.getDefault(), assetVocabulary.getName());
+		Locale locale = LocaleUtil.getDefault();
+
+		String title = titleMap.get(locale);
+
+		if (Validator.isNull(title)) {
+			titleMap.put(locale, assetVocabulary.getName());
 		}
 
 		return titleMap;
