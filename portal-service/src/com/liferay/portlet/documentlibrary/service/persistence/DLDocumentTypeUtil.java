@@ -398,6 +398,238 @@ public class DLDocumentTypeUtil {
 	}
 
 	/**
+	* Finds all the d l document types where groupId = &#63; and name = &#63; and description = &#63;.
+	*
+	* @param groupId the group ID to search with
+	* @param name the name to search with
+	* @param description the description to search with
+	* @return the matching d l document types
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLDocumentType> findByG_N_D(
+		long groupId, java.lang.String name, java.lang.String description)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().findByG_N_D(groupId, name, description);
+	}
+
+	/**
+	* Finds a range of all the d l document types where groupId = &#63; and name = &#63; and description = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param groupId the group ID to search with
+	* @param name the name to search with
+	* @param description the description to search with
+	* @param start the lower bound of the range of d l document types to return
+	* @param end the upper bound of the range of d l document types to return (not inclusive)
+	* @return the range of matching d l document types
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLDocumentType> findByG_N_D(
+		long groupId, java.lang.String name, java.lang.String description,
+		int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .findByG_N_D(groupId, name, description, start, end);
+	}
+
+	/**
+	* Finds an ordered range of all the d l document types where groupId = &#63; and name = &#63; and description = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param groupId the group ID to search with
+	* @param name the name to search with
+	* @param description the description to search with
+	* @param start the lower bound of the range of d l document types to return
+	* @param end the upper bound of the range of d l document types to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of matching d l document types
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLDocumentType> findByG_N_D(
+		long groupId, java.lang.String name, java.lang.String description,
+		int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .findByG_N_D(groupId, name, description, start, end,
+			orderByComparator);
+	}
+
+	/**
+	* Finds the first d l document type in the ordered set where groupId = &#63; and name = &#63; and description = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param groupId the group ID to search with
+	* @param name the name to search with
+	* @param description the description to search with
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching d l document type
+	* @throws com.liferay.portlet.documentlibrary.NoSuchDocumentTypeException if a matching d l document type could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.portlet.documentlibrary.model.DLDocumentType findByG_N_D_First(
+		long groupId, java.lang.String name, java.lang.String description,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.documentlibrary.NoSuchDocumentTypeException {
+		return getPersistence()
+				   .findByG_N_D_First(groupId, name, description,
+			orderByComparator);
+	}
+
+	/**
+	* Finds the last d l document type in the ordered set where groupId = &#63; and name = &#63; and description = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param groupId the group ID to search with
+	* @param name the name to search with
+	* @param description the description to search with
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching d l document type
+	* @throws com.liferay.portlet.documentlibrary.NoSuchDocumentTypeException if a matching d l document type could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.portlet.documentlibrary.model.DLDocumentType findByG_N_D_Last(
+		long groupId, java.lang.String name, java.lang.String description,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.documentlibrary.NoSuchDocumentTypeException {
+		return getPersistence()
+				   .findByG_N_D_Last(groupId, name, description,
+			orderByComparator);
+	}
+
+	/**
+	* Finds the d l document types before and after the current d l document type in the ordered set where groupId = &#63; and name = &#63; and description = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param documentTypeId the primary key of the current d l document type
+	* @param groupId the group ID to search with
+	* @param name the name to search with
+	* @param description the description to search with
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the previous, current, and next d l document type
+	* @throws com.liferay.portlet.documentlibrary.NoSuchDocumentTypeException if a d l document type with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.portlet.documentlibrary.model.DLDocumentType[] findByG_N_D_PrevAndNext(
+		long documentTypeId, long groupId, java.lang.String name,
+		java.lang.String description,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.documentlibrary.NoSuchDocumentTypeException {
+		return getPersistence()
+				   .findByG_N_D_PrevAndNext(documentTypeId, groupId, name,
+			description, orderByComparator);
+	}
+
+	/**
+	* Filters by the user's permissions and finds all the d l document types where groupId = &#63; and name = &#63; and description = &#63;.
+	*
+	* @param groupId the group ID to search with
+	* @param name the name to search with
+	* @param description the description to search with
+	* @return the matching d l document types that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLDocumentType> filterFindByG_N_D(
+		long groupId, java.lang.String name, java.lang.String description)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().filterFindByG_N_D(groupId, name, description);
+	}
+
+	/**
+	* Filters by the user's permissions and finds a range of all the d l document types where groupId = &#63; and name = &#63; and description = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param groupId the group ID to search with
+	* @param name the name to search with
+	* @param description the description to search with
+	* @param start the lower bound of the range of d l document types to return
+	* @param end the upper bound of the range of d l document types to return (not inclusive)
+	* @return the range of matching d l document types that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLDocumentType> filterFindByG_N_D(
+		long groupId, java.lang.String name, java.lang.String description,
+		int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .filterFindByG_N_D(groupId, name, description, start, end);
+	}
+
+	/**
+	* Filters by the user's permissions and finds an ordered range of all the d l document types where groupId = &#63; and name = &#63; and description = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param groupId the group ID to search with
+	* @param name the name to search with
+	* @param description the description to search with
+	* @param start the lower bound of the range of d l document types to return
+	* @param end the upper bound of the range of d l document types to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of matching d l document types that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLDocumentType> filterFindByG_N_D(
+		long groupId, java.lang.String name, java.lang.String description,
+		int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .filterFindByG_N_D(groupId, name, description, start, end,
+			orderByComparator);
+	}
+
+	/**
+	* Filters the d l document types before and after the current d l document type in the ordered set where groupId = &#63; and name = &#63; and description = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param documentTypeId the primary key of the current d l document type
+	* @param groupId the group ID to search with
+	* @param name the name to search with
+	* @param description the description to search with
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the previous, current, and next d l document type
+	* @throws com.liferay.portlet.documentlibrary.NoSuchDocumentTypeException if a d l document type with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.portlet.documentlibrary.model.DLDocumentType[] filterFindByG_N_D_PrevAndNext(
+		long documentTypeId, long groupId, java.lang.String name,
+		java.lang.String description,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.documentlibrary.NoSuchDocumentTypeException {
+		return getPersistence()
+				   .filterFindByG_N_D_PrevAndNext(documentTypeId, groupId,
+			name, description, orderByComparator);
+	}
+
+	/**
 	* Finds all the d l document types.
 	*
 	* @return the d l document types
@@ -458,6 +690,20 @@ public class DLDocumentTypeUtil {
 	}
 
 	/**
+	* Removes all the d l document types where groupId = &#63; and name = &#63; and description = &#63; from the database.
+	*
+	* @param groupId the group ID to search with
+	* @param name the name to search with
+	* @param description the description to search with
+	* @throws SystemException if a system exception occurred
+	*/
+	public static void removeByG_N_D(long groupId, java.lang.String name,
+		java.lang.String description)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getPersistence().removeByG_N_D(groupId, name, description);
+	}
+
+	/**
 	* Removes all the d l document types from the database.
 	*
 	* @throws SystemException if a system exception occurred
@@ -489,6 +735,36 @@ public class DLDocumentTypeUtil {
 	public static int filterCountByGroupId(long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().filterCountByGroupId(groupId);
+	}
+
+	/**
+	* Counts all the d l document types where groupId = &#63; and name = &#63; and description = &#63;.
+	*
+	* @param groupId the group ID to search with
+	* @param name the name to search with
+	* @param description the description to search with
+	* @return the number of matching d l document types
+	* @throws SystemException if a system exception occurred
+	*/
+	public static int countByG_N_D(long groupId, java.lang.String name,
+		java.lang.String description)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().countByG_N_D(groupId, name, description);
+	}
+
+	/**
+	* Filters by the user's permissions and counts all the d l document types where groupId = &#63; and name = &#63; and description = &#63;.
+	*
+	* @param groupId the group ID to search with
+	* @param name the name to search with
+	* @param description the description to search with
+	* @return the number of matching d l document types that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public static int filterCountByG_N_D(long groupId, java.lang.String name,
+		java.lang.String description)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().filterCountByG_N_D(groupId, name, description);
 	}
 
 	/**

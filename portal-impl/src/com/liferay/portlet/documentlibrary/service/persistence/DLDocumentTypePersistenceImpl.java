@@ -95,6 +95,23 @@ public class DLDocumentTypePersistenceImpl extends BasePersistenceImpl<DLDocumen
 			DLDocumentTypeModelImpl.FINDER_CACHE_ENABLED,
 			FINDER_CLASS_NAME_LIST, "countByGroupId",
 			new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_G_N_D = new FinderPath(DLDocumentTypeModelImpl.ENTITY_CACHE_ENABLED,
+			DLDocumentTypeModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findByG_N_D",
+			new String[] {
+				Long.class.getName(), String.class.getName(),
+				String.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_G_N_D = new FinderPath(DLDocumentTypeModelImpl.ENTITY_CACHE_ENABLED,
+			DLDocumentTypeModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "countByG_N_D",
+			new String[] {
+				Long.class.getName(), String.class.getName(),
+				String.class.getName()
+			});
 	public static final FinderPath FINDER_PATH_FIND_ALL = new FinderPath(DLDocumentTypeModelImpl.ENTITY_CACHE_ENABLED,
 			DLDocumentTypeModelImpl.FINDER_CACHE_ENABLED,
 			FINDER_CLASS_NAME_LIST, "findAll", new String[0]);
@@ -1043,6 +1060,801 @@ public class DLDocumentTypePersistenceImpl extends BasePersistenceImpl<DLDocumen
 	}
 
 	/**
+	 * Finds all the d l document types where groupId = &#63; and name = &#63; and description = &#63;.
+	 *
+	 * @param groupId the group ID to search with
+	 * @param name the name to search with
+	 * @param description the description to search with
+	 * @return the matching d l document types
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<DLDocumentType> findByG_N_D(long groupId, String name,
+		String description) throws SystemException {
+		return findByG_N_D(groupId, name, description, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
+	}
+
+	/**
+	 * Finds a range of all the d l document types where groupId = &#63; and name = &#63; and description = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group ID to search with
+	 * @param name the name to search with
+	 * @param description the description to search with
+	 * @param start the lower bound of the range of d l document types to return
+	 * @param end the upper bound of the range of d l document types to return (not inclusive)
+	 * @return the range of matching d l document types
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<DLDocumentType> findByG_N_D(long groupId, String name,
+		String description, int start, int end) throws SystemException {
+		return findByG_N_D(groupId, name, description, start, end, null);
+	}
+
+	/**
+	 * Finds an ordered range of all the d l document types where groupId = &#63; and name = &#63; and description = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group ID to search with
+	 * @param name the name to search with
+	 * @param description the description to search with
+	 * @param start the lower bound of the range of d l document types to return
+	 * @param end the upper bound of the range of d l document types to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching d l document types
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<DLDocumentType> findByG_N_D(long groupId, String name,
+		String description, int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
+		Object[] finderArgs = new Object[] {
+				groupId, name, description,
+				
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
+			};
+
+		List<DLDocumentType> list = (List<DLDocumentType>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_G_N_D,
+				finderArgs, this);
+
+		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(5 +
+						(orderByComparator.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(4);
+			}
+
+			query.append(_SQL_SELECT_DLDOCUMENTTYPE_WHERE);
+
+			query.append(_FINDER_COLUMN_G_N_D_GROUPID_2);
+
+			if (name == null) {
+				query.append(_FINDER_COLUMN_G_N_D_NAME_1);
+			}
+			else {
+				if (name.equals(StringPool.BLANK)) {
+					query.append(_FINDER_COLUMN_G_N_D_NAME_3);
+				}
+				else {
+					query.append(_FINDER_COLUMN_G_N_D_NAME_2);
+				}
+			}
+
+			if (description == null) {
+				query.append(_FINDER_COLUMN_G_N_D_DESCRIPTION_1);
+			}
+			else {
+				if (description.equals(StringPool.BLANK)) {
+					query.append(_FINDER_COLUMN_G_N_D_DESCRIPTION_3);
+				}
+				else {
+					query.append(_FINDER_COLUMN_G_N_D_DESCRIPTION_2);
+				}
+			}
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(groupId);
+
+				if (name != null) {
+					qPos.add(name);
+				}
+
+				if (description != null) {
+					qPos.add(description);
+				}
+
+				list = (List<DLDocumentType>)QueryUtil.list(q, getDialect(),
+						start, end);
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_G_N_D,
+						finderArgs);
+				}
+				else {
+					cacheResult(list);
+
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_G_N_D,
+						finderArgs, list);
+				}
+
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	/**
+	 * Finds the first d l document type in the ordered set where groupId = &#63; and name = &#63; and description = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group ID to search with
+	 * @param name the name to search with
+	 * @param description the description to search with
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching d l document type
+	 * @throws com.liferay.portlet.documentlibrary.NoSuchDocumentTypeException if a matching d l document type could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public DLDocumentType findByG_N_D_First(long groupId, String name,
+		String description, OrderByComparator orderByComparator)
+		throws NoSuchDocumentTypeException, SystemException {
+		List<DLDocumentType> list = findByG_N_D(groupId, name, description, 0,
+				1, orderByComparator);
+
+		if (list.isEmpty()) {
+			StringBundler msg = new StringBundler(8);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("groupId=");
+			msg.append(groupId);
+
+			msg.append(", name=");
+			msg.append(name);
+
+			msg.append(", description=");
+			msg.append(description);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchDocumentTypeException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	/**
+	 * Finds the last d l document type in the ordered set where groupId = &#63; and name = &#63; and description = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group ID to search with
+	 * @param name the name to search with
+	 * @param description the description to search with
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching d l document type
+	 * @throws com.liferay.portlet.documentlibrary.NoSuchDocumentTypeException if a matching d l document type could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public DLDocumentType findByG_N_D_Last(long groupId, String name,
+		String description, OrderByComparator orderByComparator)
+		throws NoSuchDocumentTypeException, SystemException {
+		int count = countByG_N_D(groupId, name, description);
+
+		List<DLDocumentType> list = findByG_N_D(groupId, name, description,
+				count - 1, count, orderByComparator);
+
+		if (list.isEmpty()) {
+			StringBundler msg = new StringBundler(8);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("groupId=");
+			msg.append(groupId);
+
+			msg.append(", name=");
+			msg.append(name);
+
+			msg.append(", description=");
+			msg.append(description);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchDocumentTypeException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	/**
+	 * Finds the d l document types before and after the current d l document type in the ordered set where groupId = &#63; and name = &#63; and description = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param documentTypeId the primary key of the current d l document type
+	 * @param groupId the group ID to search with
+	 * @param name the name to search with
+	 * @param description the description to search with
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next d l document type
+	 * @throws com.liferay.portlet.documentlibrary.NoSuchDocumentTypeException if a d l document type with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public DLDocumentType[] findByG_N_D_PrevAndNext(long documentTypeId,
+		long groupId, String name, String description,
+		OrderByComparator orderByComparator)
+		throws NoSuchDocumentTypeException, SystemException {
+		DLDocumentType dlDocumentType = findByPrimaryKey(documentTypeId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			DLDocumentType[] array = new DLDocumentTypeImpl[3];
+
+			array[0] = getByG_N_D_PrevAndNext(session, dlDocumentType, groupId,
+					name, description, orderByComparator, true);
+
+			array[1] = dlDocumentType;
+
+			array[2] = getByG_N_D_PrevAndNext(session, dlDocumentType, groupId,
+					name, description, orderByComparator, false);
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	protected DLDocumentType getByG_N_D_PrevAndNext(Session session,
+		DLDocumentType dlDocumentType, long groupId, String name,
+		String description, OrderByComparator orderByComparator,
+		boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_DLDOCUMENTTYPE_WHERE);
+
+		query.append(_FINDER_COLUMN_G_N_D_GROUPID_2);
+
+		if (name == null) {
+			query.append(_FINDER_COLUMN_G_N_D_NAME_1);
+		}
+		else {
+			if (name.equals(StringPool.BLANK)) {
+				query.append(_FINDER_COLUMN_G_N_D_NAME_3);
+			}
+			else {
+				query.append(_FINDER_COLUMN_G_N_D_NAME_2);
+			}
+		}
+
+		if (description == null) {
+			query.append(_FINDER_COLUMN_G_N_D_DESCRIPTION_1);
+		}
+		else {
+			if (description.equals(StringPool.BLANK)) {
+				query.append(_FINDER_COLUMN_G_N_D_DESCRIPTION_3);
+			}
+			else {
+				query.append(_FINDER_COLUMN_G_N_D_DESCRIPTION_2);
+			}
+		}
+
+		if (orderByComparator != null) {
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			if (orderByFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(groupId);
+
+		if (name != null) {
+			qPos.add(name);
+		}
+
+		if (description != null) {
+			qPos.add(description);
+		}
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByValues(dlDocumentType);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<DLDocumentType> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
+		}
+	}
+
+	/**
+	 * Filters by the user's permissions and finds all the d l document types where groupId = &#63; and name = &#63; and description = &#63;.
+	 *
+	 * @param groupId the group ID to search with
+	 * @param name the name to search with
+	 * @param description the description to search with
+	 * @return the matching d l document types that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<DLDocumentType> filterFindByG_N_D(long groupId, String name,
+		String description) throws SystemException {
+		return filterFindByG_N_D(groupId, name, description, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
+	}
+
+	/**
+	 * Filters by the user's permissions and finds a range of all the d l document types where groupId = &#63; and name = &#63; and description = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group ID to search with
+	 * @param name the name to search with
+	 * @param description the description to search with
+	 * @param start the lower bound of the range of d l document types to return
+	 * @param end the upper bound of the range of d l document types to return (not inclusive)
+	 * @return the range of matching d l document types that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<DLDocumentType> filterFindByG_N_D(long groupId, String name,
+		String description, int start, int end) throws SystemException {
+		return filterFindByG_N_D(groupId, name, description, start, end, null);
+	}
+
+	/**
+	 * Filters by the user's permissions and finds an ordered range of all the d l document types where groupId = &#63; and name = &#63; and description = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group ID to search with
+	 * @param name the name to search with
+	 * @param description the description to search with
+	 * @param start the lower bound of the range of d l document types to return
+	 * @param end the upper bound of the range of d l document types to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching d l document types that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<DLDocumentType> filterFindByG_N_D(long groupId, String name,
+		String description, int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
+		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
+			return findByG_N_D(groupId, name, description, start, end,
+				orderByComparator);
+		}
+
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(5 +
+					(orderByComparator.getOrderByFields().length * 3));
+		}
+		else {
+			query = new StringBundler(4);
+		}
+
+		if (getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_DLDOCUMENTTYPE_WHERE);
+		}
+		else {
+			query.append(_FILTER_SQL_SELECT_DLDOCUMENTTYPE_NO_INLINE_DISTINCT_WHERE_1);
+		}
+
+		query.append(_FINDER_COLUMN_G_N_D_GROUPID_2);
+
+		if (name == null) {
+			query.append(_FINDER_COLUMN_G_N_D_NAME_1);
+		}
+		else {
+			if (name.equals(StringPool.BLANK)) {
+				query.append(_FINDER_COLUMN_G_N_D_NAME_3);
+			}
+			else {
+				query.append(_FINDER_COLUMN_G_N_D_NAME_2);
+			}
+		}
+
+		if (description == null) {
+			query.append(_FINDER_COLUMN_G_N_D_DESCRIPTION_1);
+		}
+		else {
+			if (description.equals(StringPool.BLANK)) {
+				query.append(_FINDER_COLUMN_G_N_D_DESCRIPTION_3);
+			}
+			else {
+				query.append(_FINDER_COLUMN_G_N_D_DESCRIPTION_2);
+			}
+		}
+
+		if (!getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_DLDOCUMENTTYPE_NO_INLINE_DISTINCT_WHERE_2);
+		}
+
+		if (orderByComparator != null) {
+			if (getDB().isSupportsInlineDistinct()) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+			else {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_TABLE,
+					orderByComparator);
+			}
+		}
+
+		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+				DLDocumentType.class.getName(), _FILTER_COLUMN_PK, groupId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			if (getDB().isSupportsInlineDistinct()) {
+				q.addEntity(_FILTER_ENTITY_ALIAS, DLDocumentTypeImpl.class);
+			}
+			else {
+				q.addEntity(_FILTER_ENTITY_TABLE, DLDocumentTypeImpl.class);
+			}
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+
+			if (name != null) {
+				qPos.add(name);
+			}
+
+			if (description != null) {
+				qPos.add(description);
+			}
+
+			return (List<DLDocumentType>)QueryUtil.list(q, getDialect(), start,
+				end);
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	/**
+	 * Filters the d l document types before and after the current d l document type in the ordered set where groupId = &#63; and name = &#63; and description = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param documentTypeId the primary key of the current d l document type
+	 * @param groupId the group ID to search with
+	 * @param name the name to search with
+	 * @param description the description to search with
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next d l document type
+	 * @throws com.liferay.portlet.documentlibrary.NoSuchDocumentTypeException if a d l document type with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public DLDocumentType[] filterFindByG_N_D_PrevAndNext(long documentTypeId,
+		long groupId, String name, String description,
+		OrderByComparator orderByComparator)
+		throws NoSuchDocumentTypeException, SystemException {
+		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
+			return findByG_N_D_PrevAndNext(documentTypeId, groupId, name,
+				description, orderByComparator);
+		}
+
+		DLDocumentType dlDocumentType = findByPrimaryKey(documentTypeId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			DLDocumentType[] array = new DLDocumentTypeImpl[3];
+
+			array[0] = filterGetByG_N_D_PrevAndNext(session, dlDocumentType,
+					groupId, name, description, orderByComparator, true);
+
+			array[1] = dlDocumentType;
+
+			array[2] = filterGetByG_N_D_PrevAndNext(session, dlDocumentType,
+					groupId, name, description, orderByComparator, false);
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	protected DLDocumentType filterGetByG_N_D_PrevAndNext(Session session,
+		DLDocumentType dlDocumentType, long groupId, String name,
+		String description, OrderByComparator orderByComparator,
+		boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		if (getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_DLDOCUMENTTYPE_WHERE);
+		}
+		else {
+			query.append(_FILTER_SQL_SELECT_DLDOCUMENTTYPE_NO_INLINE_DISTINCT_WHERE_1);
+		}
+
+		query.append(_FINDER_COLUMN_G_N_D_GROUPID_2);
+
+		if (name == null) {
+			query.append(_FINDER_COLUMN_G_N_D_NAME_1);
+		}
+		else {
+			if (name.equals(StringPool.BLANK)) {
+				query.append(_FINDER_COLUMN_G_N_D_NAME_3);
+			}
+			else {
+				query.append(_FINDER_COLUMN_G_N_D_NAME_2);
+			}
+		}
+
+		if (description == null) {
+			query.append(_FINDER_COLUMN_G_N_D_DESCRIPTION_1);
+		}
+		else {
+			if (description.equals(StringPool.BLANK)) {
+				query.append(_FINDER_COLUMN_G_N_D_DESCRIPTION_3);
+			}
+			else {
+				query.append(_FINDER_COLUMN_G_N_D_DESCRIPTION_2);
+			}
+		}
+
+		if (!getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_DLDOCUMENTTYPE_NO_INLINE_DISTINCT_WHERE_2);
+		}
+
+		if (orderByComparator != null) {
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			if (orderByFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				if (getDB().isSupportsInlineDistinct()) {
+					query.append(_ORDER_BY_ENTITY_ALIAS);
+				}
+				else {
+					query.append(_ORDER_BY_ENTITY_TABLE);
+				}
+
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				if (getDB().isSupportsInlineDistinct()) {
+					query.append(_ORDER_BY_ENTITY_ALIAS);
+				}
+				else {
+					query.append(_ORDER_BY_ENTITY_TABLE);
+				}
+
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+		}
+
+		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+				DLDocumentType.class.getName(), _FILTER_COLUMN_PK, groupId);
+
+		SQLQuery q = session.createSQLQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
+
+		if (getDB().isSupportsInlineDistinct()) {
+			q.addEntity(_FILTER_ENTITY_ALIAS, DLDocumentTypeImpl.class);
+		}
+		else {
+			q.addEntity(_FILTER_ENTITY_TABLE, DLDocumentTypeImpl.class);
+		}
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(groupId);
+
+		if (name != null) {
+			qPos.add(name);
+		}
+
+		if (description != null) {
+			qPos.add(description);
+		}
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByValues(dlDocumentType);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<DLDocumentType> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
+		}
+	}
+
+	/**
 	 * Finds all the d l document types.
 	 *
 	 * @return the d l document types
@@ -1164,6 +1976,22 @@ public class DLDocumentTypePersistenceImpl extends BasePersistenceImpl<DLDocumen
 	}
 
 	/**
+	 * Removes all the d l document types where groupId = &#63; and name = &#63; and description = &#63; from the database.
+	 *
+	 * @param groupId the group ID to search with
+	 * @param name the name to search with
+	 * @param description the description to search with
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void removeByG_N_D(long groupId, String name, String description)
+		throws SystemException {
+		for (DLDocumentType dlDocumentType : findByG_N_D(groupId, name,
+				description)) {
+			dlDocumentTypePersistence.remove(dlDocumentType);
+		}
+	}
+
+	/**
 	 * Removes all the d l document types from the database.
 	 *
 	 * @throws SystemException if a system exception occurred
@@ -1261,6 +2089,176 @@ public class DLDocumentTypePersistenceImpl extends BasePersistenceImpl<DLDocumen
 			QueryPos qPos = QueryPos.getInstance(q);
 
 			qPos.add(groupId);
+
+			Long count = (Long)q.uniqueResult();
+
+			return count.intValue();
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	/**
+	 * Counts all the d l document types where groupId = &#63; and name = &#63; and description = &#63;.
+	 *
+	 * @param groupId the group ID to search with
+	 * @param name the name to search with
+	 * @param description the description to search with
+	 * @return the number of matching d l document types
+	 * @throws SystemException if a system exception occurred
+	 */
+	public int countByG_N_D(long groupId, String name, String description)
+		throws SystemException {
+		Object[] finderArgs = new Object[] { groupId, name, description };
+
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_N_D,
+				finderArgs, this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(4);
+
+			query.append(_SQL_COUNT_DLDOCUMENTTYPE_WHERE);
+
+			query.append(_FINDER_COLUMN_G_N_D_GROUPID_2);
+
+			if (name == null) {
+				query.append(_FINDER_COLUMN_G_N_D_NAME_1);
+			}
+			else {
+				if (name.equals(StringPool.BLANK)) {
+					query.append(_FINDER_COLUMN_G_N_D_NAME_3);
+				}
+				else {
+					query.append(_FINDER_COLUMN_G_N_D_NAME_2);
+				}
+			}
+
+			if (description == null) {
+				query.append(_FINDER_COLUMN_G_N_D_DESCRIPTION_1);
+			}
+			else {
+				if (description.equals(StringPool.BLANK)) {
+					query.append(_FINDER_COLUMN_G_N_D_DESCRIPTION_3);
+				}
+				else {
+					query.append(_FINDER_COLUMN_G_N_D_DESCRIPTION_2);
+				}
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(groupId);
+
+				if (name != null) {
+					qPos.add(name);
+				}
+
+				if (description != null) {
+					qPos.add(description);
+				}
+
+				count = (Long)q.uniqueResult();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_G_N_D,
+					finderArgs, count);
+
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	/**
+	 * Filters by the user's permissions and counts all the d l document types where groupId = &#63; and name = &#63; and description = &#63;.
+	 *
+	 * @param groupId the group ID to search with
+	 * @param name the name to search with
+	 * @param description the description to search with
+	 * @return the number of matching d l document types that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
+	public int filterCountByG_N_D(long groupId, String name, String description)
+		throws SystemException {
+		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
+			return countByG_N_D(groupId, name, description);
+		}
+
+		StringBundler query = new StringBundler(4);
+
+		query.append(_FILTER_SQL_COUNT_DLDOCUMENTTYPE_WHERE);
+
+		query.append(_FINDER_COLUMN_G_N_D_GROUPID_2);
+
+		if (name == null) {
+			query.append(_FINDER_COLUMN_G_N_D_NAME_1);
+		}
+		else {
+			if (name.equals(StringPool.BLANK)) {
+				query.append(_FINDER_COLUMN_G_N_D_NAME_3);
+			}
+			else {
+				query.append(_FINDER_COLUMN_G_N_D_NAME_2);
+			}
+		}
+
+		if (description == null) {
+			query.append(_FINDER_COLUMN_G_N_D_DESCRIPTION_1);
+		}
+		else {
+			if (description.equals(StringPool.BLANK)) {
+				query.append(_FINDER_COLUMN_G_N_D_DESCRIPTION_3);
+			}
+			else {
+				query.append(_FINDER_COLUMN_G_N_D_DESCRIPTION_2);
+			}
+		}
+
+		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+				DLDocumentType.class.getName(), _FILTER_COLUMN_PK, groupId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addScalar(COUNT_COLUMN_NAME,
+				com.liferay.portal.kernel.dao.orm.Type.LONG);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+
+			if (name != null) {
+				qPos.add(name);
+			}
+
+			if (description != null) {
+				qPos.add(description);
+			}
 
 			Long count = (Long)q.uniqueResult();
 
@@ -2040,6 +3038,13 @@ public class DLDocumentTypePersistenceImpl extends BasePersistenceImpl<DLDocumen
 	private static final String _SQL_GETDDMSTRUCTURESSIZE = "SELECT COUNT(*) AS COUNT_VALUE FROM DLDocumentType_DDMStructure WHERE documentTypeId = ?";
 	private static final String _SQL_CONTAINSDDMSTRUCTURE = "SELECT COUNT(*) AS COUNT_VALUE FROM DLDocumentType_DDMStructure WHERE documentTypeId = ? AND structureId = ?";
 	private static final String _FINDER_COLUMN_GROUPID_GROUPID_2 = "dlDocumentType.groupId = ?";
+	private static final String _FINDER_COLUMN_G_N_D_GROUPID_2 = "dlDocumentType.groupId = ? AND ";
+	private static final String _FINDER_COLUMN_G_N_D_NAME_1 = "dlDocumentType.name IS NULL AND ";
+	private static final String _FINDER_COLUMN_G_N_D_NAME_2 = "dlDocumentType.name = ? AND ";
+	private static final String _FINDER_COLUMN_G_N_D_NAME_3 = "(dlDocumentType.name IS NULL OR dlDocumentType.name = ?) AND ";
+	private static final String _FINDER_COLUMN_G_N_D_DESCRIPTION_1 = "dlDocumentType.description IS NULL";
+	private static final String _FINDER_COLUMN_G_N_D_DESCRIPTION_2 = "dlDocumentType.description = ?";
+	private static final String _FINDER_COLUMN_G_N_D_DESCRIPTION_3 = "(dlDocumentType.description IS NULL OR dlDocumentType.description = ?)";
 	private static final String _FILTER_SQL_SELECT_DLDOCUMENTTYPE_WHERE = "SELECT DISTINCT {dlDocumentType.*} FROM DLDocumentType dlDocumentType WHERE ";
 	private static final String _FILTER_SQL_SELECT_DLDOCUMENTTYPE_NO_INLINE_DISTINCT_WHERE_1 =
 		"SELECT {DLDocumentType.*} FROM (SELECT DISTINCT dlDocumentType.documentTypeId FROM DLDocumentType dlDocumentType WHERE ";
