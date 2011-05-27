@@ -88,7 +88,8 @@ public class LangBuilder {
 				_createProperties(content, "zh_CN"); // Chinese (China)
 				_createProperties(content, "zh_TW"); // Chinese (Taiwan)
 				_createProperties(content, "cs"); // Czech
-				_createProperties(content, "nl"); // Dutch
+				_createProperties(content, "nl"); // Dutch (Nederlands)
+				_createProperties(content, "nl_BE"); // Dutch (Belgium)
 				_createProperties(content, "et"); // Estonian
 				_createProperties(content, "fi"); // Finnish
 				_createProperties(content, "fr"); // French

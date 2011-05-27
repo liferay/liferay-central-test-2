@@ -488,6 +488,10 @@
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>I18n Servlet</servlet-name>
+		<url-pattern>/nl_BE/*</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>I18n Servlet</servlet-name>
 		<url-pattern>/nl_NL/*</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
@@ -814,6 +818,7 @@
 			<url-pattern>/nb/c/portal/protected</url-pattern>
 			<url-pattern>/nb_NO/c/portal/protected</url-pattern>
 			<url-pattern>/nl/c/portal/protected</url-pattern>
+			<url-pattern>/nl_BE/c/portal/protected</url-pattern>
 			<url-pattern>/nl_NL/c/portal/protected</url-pattern>
 			<url-pattern>/pl/c/portal/protected</url-pattern>
 			<url-pattern>/pl_PL/c/portal/protected</url-pattern>
