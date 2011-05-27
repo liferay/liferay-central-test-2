@@ -77,6 +77,13 @@ public class AssetTagFinderImpl
 		return doCountByG_N_P(groupId, name, tagProperties, false);
 	}
 
+	public int filterCountByG_N_P(
+			long groupId, String name, String[] tagProperties)
+		throws SystemException {
+
+		return doCountByG_N_P(groupId, name, tagProperties, true);
+	}
+
 	public AssetTag filterFindByG_N(long groupId, String name)
 		throws NoSuchTagException, SystemException {
 

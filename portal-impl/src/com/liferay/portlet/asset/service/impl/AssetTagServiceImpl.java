@@ -103,6 +103,12 @@ public class AssetTagServiceImpl extends AssetTagServiceBaseImpl {
 			groupId, start, end, obc);
 	}
 
+	public int getGroupTagsCount(long groupId)
+		throws  SystemException {
+
+		return assetTagPersistence.filterCountByGroupId(groupId);
+	}
+
 	public JSONObject getJSONGroupTags(
 			long groupId, String name, int start, int end)
 		throws PortalException, SystemException {
@@ -115,13 +121,19 @@ public class AssetTagServiceImpl extends AssetTagServiceBaseImpl {
 
 		List<AssetTag> tags = new ArrayList<AssetTag>();
 
+		int total = 0;
+
 		if (Validator.isNotNull(name)) {
 			name = (CustomSQLUtil.keywords(name))[0];
 
 			tags = getTags(groupId, name, new String[0], start, end);
+
+			total = getTagsCount(groupId, name, new String[0]);
 		}
 		else {
 			tags = getGroupTags(groupId, start, end, null);
+
+			total = getGroupTagsCount(groupId);
 		}
 
 		String tagsJSON = JSONFactoryUtil.looseSerialize(tags);
@@ -129,8 +141,6 @@ public class AssetTagServiceImpl extends AssetTagServiceBaseImpl {
 		JSONArray tagsJSONArray = JSONFactoryUtil.createJSONArray(tagsJSON);
 
 		jsonObject.put("tags", tagsJSONArray);
-
-		int total = assetTagLocalService.getGroupTagsCount(groupId);
 
 		jsonObject.put("total", total);
 
@@ -174,6 +184,14 @@ public class AssetTagServiceImpl extends AssetTagServiceBaseImpl {
 
 		return assetTagFinder.filterFindByG_N_P(
 			groupId, name, tagProperties, start, end, null);
+	}
+
+	public int getTagsCount(
+			long groupId, String name, String[] tagProperties)
+		throws SystemException {
+
+		return assetTagFinder.filterCountByG_N_P(
+			groupId, name, tagProperties);
 	}
 
 	public void mergeTags(long fromTagId, long toTagId)
