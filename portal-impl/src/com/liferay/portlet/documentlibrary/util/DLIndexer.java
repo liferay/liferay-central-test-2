@@ -129,10 +129,11 @@ public class DLIndexer extends BaseIndexer {
 			BooleanQuery searchQuery, SearchContext searchContext)
 		throws Exception {
 
+		addSearchTerm(searchQuery, searchContext, Field.USER_NAME, true);
+
+		addSearchTerm(searchQuery, searchContext, "documentTypeId", false);
 		addSearchTerm(searchQuery, searchContext, "extension", true);
 		addSearchTerm(searchQuery, searchContext, "path", true);
-		addSearchTerm(searchQuery, searchContext, "documentTypeId", false);
-		addSearchTerm(searchQuery, searchContext, Field.USER_NAME, true);
 
 		LinkedHashMap<String, Object> params =
 			(LinkedHashMap<String, Object>)searchContext.getAttribute("params");

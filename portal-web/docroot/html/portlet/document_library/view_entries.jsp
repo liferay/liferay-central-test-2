@@ -116,8 +116,6 @@ if (documentTypeId > 0) {
 	for (int i = 0; i < hits.getDocs().length; i++) {
 		Document doc = hits.doc(i);
 
-		// Folder and document
-
 		long fileEntryId = GetterUtil.getLong(doc.get(Field.ENTRY_CLASS_PK));
 
 		FileEntry fileEntry = null;
