@@ -97,7 +97,7 @@ private void _buildLayoutBreadcrumb(Layout selLayout, String selLayoutParam, boo
 	if (selLayout.getParentLayoutId() != LayoutConstants.DEFAULT_PARENT_LAYOUT_ID) {
 		layoutParent = LayoutLocalServiceUtil.getLayout(selLayout.getGroupId(), selLayout.isPrivateLayout(), selLayout.getParentLayoutId());
 
-		_buildLayoutBreadcrumb(layoutParent, selLayoutParam, portletURL, themeDisplay, false, sb);
+		_buildLayoutBreadcrumb(layoutParent, selLayoutParam, false, portletURL, themeDisplay, sb);
 
 		sb.append(breadcrumbSB.toString());
 	}
