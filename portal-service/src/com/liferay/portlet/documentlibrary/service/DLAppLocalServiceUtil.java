@@ -346,12 +346,13 @@ public class DLAppLocalServiceUtil {
 	public static void updateAsset(long userId,
 		com.liferay.portal.kernel.repository.model.FileEntry fileEntry,
 		com.liferay.portal.kernel.repository.model.FileVersion fileVersion,
-		long[] assetCategoryIds, java.lang.String[] assetTagNames)
+		long[] assetCategoryIds, java.lang.String[] assetTagNames,
+		long[] assetLinkEntryIds)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		getService()
 			.updateAsset(userId, fileEntry, fileVersion, assetCategoryIds,
-			assetTagNames);
+			assetTagNames, assetLinkEntryIds);
 	}
 
 	public static com.liferay.portal.kernel.repository.model.FileEntry updateFileEntry(

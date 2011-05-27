@@ -327,11 +327,12 @@ public class DLAppLocalServiceWrapper implements DLAppLocalService {
 	public void updateAsset(long userId,
 		com.liferay.portal.kernel.repository.model.FileEntry fileEntry,
 		com.liferay.portal.kernel.repository.model.FileVersion fileVersion,
-		long[] assetCategoryIds, java.lang.String[] assetTagNames)
+		long[] assetCategoryIds, java.lang.String[] assetTagNames,
+		long[] assetLinkEntryIds)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		_dlAppLocalService.updateAsset(userId, fileEntry, fileVersion,
-			assetCategoryIds, assetTagNames);
+			assetCategoryIds, assetTagNames, assetLinkEntryIds);
 	}
 
 	public com.liferay.portal.kernel.repository.model.FileEntry updateFileEntry(
