@@ -38,6 +38,8 @@ catch (CaptchaMaxChallengesException cmce) {
 	<div class="taglib-captcha">
 		<img alt="captcha" class="captcha" src="<%= url %>" />
 
-		<aui:input label="text-verification" name="captchaText" size="10" type="text" value="" />
+		<aui:input label="text-verification" name="captchaText" size="10" type="text" value="">
+			<aui:validator name="required" />
+		</aui:input>
 	</div>
 </c:if>
