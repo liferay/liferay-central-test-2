@@ -43,7 +43,7 @@ public class VerifyAsset extends VerifyProcess {
 
 			ps = con.prepareStatement(
 				"select distinct groupId from AssetCategory where " +
-					"(leftCategoryId is null) or (rightCategoryid is null)");
+					"(leftCategoryId is null) or (rightCategoryId is null)");
 
 			rs = ps.executeQuery();
 
