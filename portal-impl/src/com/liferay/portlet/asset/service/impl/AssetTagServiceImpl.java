@@ -118,11 +118,10 @@ public class AssetTagServiceImpl extends AssetTagServiceBaseImpl {
 		if (Validator.isNotNull(name)) {
 			name = (CustomSQLUtil.keywords(name))[0];
 
-			tags = assetTagLocalService.search(
-				groupId, name, new String[0], start, end);
+			tags = getTags(groupId, name, new String[0], start, end);
 		}
 		else {
-			tags = assetTagLocalService.getGroupTags(groupId, start, end);
+			tags = getGroupTags(groupId, start, end, null);
 		}
 
 		String tagsJSON = JSONFactoryUtil.looseSerialize(tags);
@@ -168,6 +167,15 @@ public class AssetTagServiceImpl extends AssetTagServiceBaseImpl {
 		return filterTags(assetTagLocalService.getTags(className, classPK));
 	}
 
+	public List<AssetTag> getTags(
+			long groupId, String name, String[] tagProperties, int start,
+			int end)
+		throws SystemException {
+
+		return assetTagFinder.filterFindByG_N_P(
+			groupId, name, tagProperties, start, end, null);
+	}
+
 	public void mergeTags(long fromTagId, long toTagId)
 		throws PortalException, SystemException {
 
@@ -185,8 +193,8 @@ public class AssetTagServiceImpl extends AssetTagServiceBaseImpl {
 			int end)
 		throws SystemException {
 
-		List<AssetTag> tags = assetTagFinder.filterFindByG_N_P(
-			groupId, name, tagProperties, start, end, null);
+		List<AssetTag> tags = getTags(
+			groupId, name, tagProperties, start, end);
 
 		return Autocomplete.listToJson(tags, "name", "name");
 	}
