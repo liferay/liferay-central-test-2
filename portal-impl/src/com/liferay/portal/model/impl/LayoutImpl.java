@@ -461,12 +461,14 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 	}
 
 	public boolean isContentDisplayPage() {
+		UnicodeProperties typeSettingsProperties = getTypeSettingsProperties();
+
 		String defaultAssetPublisherPortletId =
-			getTypeSettingsProperties().getProperty(
+			typeSettingsProperties.getProperty(
 				LayoutTypePortletConstants.DEFAULT_ASSET_PUBLISHER_PORTLET_ID);
 
 		if (Validator.isNotNull(defaultAssetPublisherPortletId)) {
-		    return true;
+			return true;
 		}
 		else {
 			return false;

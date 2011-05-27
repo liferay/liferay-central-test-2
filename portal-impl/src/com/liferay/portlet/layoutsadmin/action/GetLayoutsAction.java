@@ -52,6 +52,7 @@ public class GetLayoutsAction extends JSONAction {
 		for (Layout layout : layouts) {
 			JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
+			jsonObject.put("contentDisplayPage", layout.isContentDisplayPage());
 			jsonObject.put("hasChildren", layout.hasChildren());
 			jsonObject.put("layoutId", layout.getLayoutId());
 			jsonObject.put("name", layout.getName());
@@ -60,7 +61,6 @@ public class GetLayoutsAction extends JSONAction {
 			jsonObject.put("priority", layout.getPriority());
 			jsonObject.put("privateLayout", layout.isPrivateLayout());
 			jsonObject.put("type", layout.getType());
-			jsonObject.put("contentDisplayPage", layout.isContentDisplayPage());
 
 			LayoutRevision layoutRevision = LayoutStagingUtil.getLayoutRevision(
 				layout);
