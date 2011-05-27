@@ -63,18 +63,18 @@ public class ViewPageLayoutTest extends BaseTestCase {
 		selenium.clickAt("dockbar", RuntimeVariables.replace(""));
 		selenium.clickAt("navigation", RuntimeVariables.replace(""));
 		assertTrue(selenium.isElementPresent(
-				"//div[@id='column-1' and @class='yui3-aui-w50 portlet-column portlet-column-first yui3-aui-dd-drop']"));
+				"//div[@id='column-1' and @class='aui-w50 portlet-column portlet-column-first aui-dd-drop']"));
 		assertTrue(selenium.isElementPresent(
-				"//div[@id='column-2' and @class='yui3-aui-w50 portlet-column portlet-column-last yui3-aui-dd-drop']"));
+				"//div[@id='column-2' and @class='aui-w50 portlet-column portlet-column-last aui-dd-drop']"));
 		assertEquals(RuntimeVariables.replace("Breadcrumb"),
 			selenium.getText(
-				"//div[@id='column-1' and @class='yui3-aui-w50 portlet-column portlet-column-first yui3-aui-dd-drop']//h1"));
+				"//div[@id='column-1' and @class='aui-w50 portlet-column portlet-column-first aui-dd-drop']//h1"));
 		assertEquals(RuntimeVariables.replace("Navigation"),
 			selenium.getText(
-				"//div[@id='column-2' and @class='yui3-aui-w50 portlet-column portlet-column-last yui3-aui-dd-drop']//h1"));
+				"//div[@id='column-2' and @class='aui-w50 portlet-column portlet-column-last aui-dd-drop']//h1"));
 		assertFalse(selenium.isElementPresent(
-				"//div[@id='column-1' and @class='yui3-aui-w30 portlet-column portlet-column-first yui3-aui-dd-drop']"));
+				"//div[@id='column-1' and @class='aui-w30 portlet-column portlet-column-first aui-dd-drop']"));
 		assertFalse(selenium.isElementPresent(
-				"//div[@id='column-2' and @class='yui3-aui-w70 portlet-column portlet-column-last yui3-aui-dd-drop']"));
+				"//div[@id='column-2' and @class='aui-w70 portlet-column portlet-column-last aui-dd-drop']"));
 	}
 }

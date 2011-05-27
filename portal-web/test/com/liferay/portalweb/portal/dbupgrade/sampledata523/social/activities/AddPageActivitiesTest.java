@@ -30,7 +30,7 @@ public class AddPageActivitiesTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//div[@id='add-page']/a/span")) {
+				if (selenium.isVisible("//div[@id='add-page']/a/span")) {
 					break;
 				}
 			}
@@ -41,11 +41,31 @@ public class AddPageActivitiesTest extends BaseTestCase {
 		}
 
 		selenium.saveScreenShotAndSource();
+		assertEquals(RuntimeVariables.replace("Add Page"),
+			selenium.getText("//div[@id='add-page']/a/span"));
 		selenium.clickAt("//div[@id='add-page']/a/span",
-			RuntimeVariables.replace(""));
+			RuntimeVariables.replace("Add Page"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("new_page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.saveScreenShotAndSource();
 		selenium.type("new_page", RuntimeVariables.replace("Activities Page"));
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("link=Save", RuntimeVariables.replace(""));
+		selenium.clickAt("link=Save", RuntimeVariables.replace("Save"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -64,7 +84,8 @@ public class AddPageActivitiesTest extends BaseTestCase {
 		}
 
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("link=Activities Page", RuntimeVariables.replace(""));
+		selenium.clickAt("link=Activities Page",
+			RuntimeVariables.replace("Activities Page"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 	}

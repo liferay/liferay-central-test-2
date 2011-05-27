@@ -29,6 +29,11 @@ public class ActivitiesTests extends BaseTests {
 
 		testSuite.addTestSuite(AddPageActivitiesTest.class);
 		testSuite.addTestSuite(AddPortletActivitiesTest.class);
+		testSuite.addTestSuite(AddBlogsEntryCPTest.class);
+		testSuite.addTestSuite(AddMBCategoryCPTest.class);
+		testSuite.addTestSuite(PostMBCategoryThreadMessageCPTest.class);
+		testSuite.addTestSuite(ViewActivityBlogsEntryTest.class);
+		testSuite.addTestSuite(ViewActivityMBCategoryThreadMessageTest.class);
 
 		return testSuite;
 	}

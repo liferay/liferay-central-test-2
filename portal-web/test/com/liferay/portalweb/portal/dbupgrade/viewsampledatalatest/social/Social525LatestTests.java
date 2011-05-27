@@ -15,10 +15,9 @@
 package com.liferay.portalweb.portal.dbupgrade.viewsampledatalatest.social;
 
 import com.liferay.portalweb.portal.BaseTests;
-import com.liferay.portalweb.portal.dbupgrade.viewsampledatalatest.social.groupspagescope.GroupsPageScopeTests;
+import com.liferay.portalweb.portal.dbupgrade.viewsampledatalatest.social.activities.ActivitiesTests;
 import com.liferay.portalweb.portal.dbupgrade.viewsampledatalatest.social.relation.RelationTests;
 import com.liferay.portalweb.portal.dbupgrade.viewsampledatalatest.social.request.RequestTests;
-import com.liferay.portalweb.portal.dbupgrade.viewsampledatalatest.social.tagsmessageboards.TagsMessageBoardsTests;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
@@ -31,10 +30,9 @@ public class Social525LatestTests extends BaseTests {
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTest(GroupsPageScopeTests.suite());
+		testSuite.addTest(ActivitiesTests.suite());
 		testSuite.addTest(RelationTests.suite());
 		testSuite.addTest(RequestTests.suite());
-		testSuite.addTest(TagsMessageBoardsTests.suite());
 
 		return testSuite;
 	}
