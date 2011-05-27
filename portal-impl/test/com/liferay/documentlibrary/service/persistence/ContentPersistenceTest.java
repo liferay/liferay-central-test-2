@@ -123,7 +123,7 @@ public class ContentPersistenceTest extends BasePersistenceTestCase {
 			content1.getCompanyId(), content1.getPortletId(),
 			content1.getRepositoryId(), content1.getPath());
 
-		assertTrue(existingContents2.size() == 1);
+		assertTrue(existingContents2.size() == 2);
 
 		Content existingContent2 = existingContents2.get(0);
 
