@@ -405,7 +405,9 @@ public class PortletImporter {
 
 		if (titleMap == null) {
 			titleMap = new HashMap<Locale, String>();
+		}
 
+		if (Validator.isNull(titleMap.get(LocaleUtil.getDefault()))) {
 			titleMap.put(LocaleUtil.getDefault(), assetCategory.getName());
 		}
 
@@ -419,7 +421,9 @@ public class PortletImporter {
 
 		if (titleMap == null) {
 			titleMap = new HashMap<Locale, String>();
+		}
 
+		if (Validator.isNull(titleMap.get(LocaleUtil.getDefault()))) {
 			titleMap.put(LocaleUtil.getDefault(), assetVocabulary.getName());
 		}
 
