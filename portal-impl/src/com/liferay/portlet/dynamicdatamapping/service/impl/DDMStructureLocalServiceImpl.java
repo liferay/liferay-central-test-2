@@ -213,6 +213,13 @@ public class DDMStructureLocalServiceImpl
 		return ddmStructurePersistence.findByG_S(groupId, structureKey);
 	}
 
+	public List<DDMStructure> getStructure(
+			long groupId, String name, String description)
+		throws PortalException, SystemException {
+
+		return ddmStructurePersistence.findByG_N_D(groupId, name, description);
+	}
+
 	public List<DDMStructure> getStructureEntries() throws SystemException {
 		return ddmStructurePersistence.findAll();
 	}

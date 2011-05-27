@@ -96,6 +96,11 @@
 			<finder-column name="groupId" />
 			<finder-column name="structureKey" />
 		</finder>
+		<finder name="G_N_D" return-type="Collection">
+			<finder-column name="groupId" />
+			<finder-column name="name" />
+			<finder-column name="description" />
+		</finder>
 
 		<!-- References -->
 

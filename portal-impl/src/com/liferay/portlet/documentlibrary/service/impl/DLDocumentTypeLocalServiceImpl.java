@@ -102,6 +102,14 @@ public class DLDocumentTypeLocalServiceImpl
 		return dlDocumentTypePersistence.findByGroupId(groupId, start, end);
 	}
 
+	public List<DLDocumentType> getDocumentTypes(
+			long groupId, String name, String description)
+		throws SystemException {
+
+		return dlDocumentTypePersistence.findByG_N_D(
+			groupId, name, description);
+	}
+
 	public List<DLDocumentType> search(
 			long companyId, long groupId, String keywords, int start, int end,
 			OrderByComparator orderByComparator)
