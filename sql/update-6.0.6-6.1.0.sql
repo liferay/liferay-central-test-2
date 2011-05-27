@@ -197,6 +197,7 @@ COMMIT_TRANSACTION;
 update JournalArticle set classNameId = 0;
 update JournalArticle set classPK = 0;
 
+drop index IX_FAD05595 on Layout;
 alter table Layout add createDate DATE null;
 alter table Layout add modifiedDate DATE null;
 alter table Layout add keywords STRING null;
