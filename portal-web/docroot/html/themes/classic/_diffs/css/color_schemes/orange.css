@@ -6,13 +6,13 @@ body.orange, .orange .portlet {
 	background-color: #BFB8A7;
 }
 
-.orange .yui3-aui-state-hover {
+.orange .aui-state-hover {
 	background-color: #DAC8BA;
 	background-image: url(../../images/color_schemes/orange/application/state_hover_bg.png);
 	border-color: #837062;
 }
 
-.orange .yui3-aui-icon {
+.orange .aui-icon {
 	background-image: url(../../images/color_schemes/orange/aui/icon_sprite.png);
 }
 
@@ -44,20 +44,20 @@ body.orange, .orange .portlet {
 	background-color: #DED8D4;
 }
 
-.orange .yui3-aui-resizable-proxy {
+.orange .aui-resizable-proxy {
 	border-color: #968A83;
 }
 
-.orange .yui3-aui-sortable-proxy {
+.orange .aui-sortable-proxy {
 	background-color: #827972;
 }
 
-.orange .yui3-aui-menugroup-content h4 {
+.orange .aui-menugroup-content h4 {
 	background-color: #DFDCD3;
 	color: #7D745B;
 }
 
-.orange .yui3-aui-menu-content li a, .orange .lfr-menu-list ul li a {
+.orange .aui-menu-content li a, .orange .lfr-menu-list ul li a {
 	color: #34322C;
 }
 
@@ -70,21 +70,21 @@ body.orange, .orange .portlet {
 	color: #FFF;
 }
 
-.orange .yui3-aui-menu-content li a.yui3-aui-focus, .orange .lfr-menu-list ul a.yui3-aui-focus, .orange .lfr-menu-expanded li a:focus  {
+.orange .aui-menu-content li a.aui-focus, .orange .lfr-menu-list ul a.aui-focus, .orange .lfr-menu-expanded li a:focus  {
 	background-color: #7D745B;
 	color: #FFF;
 	text-shadow: -1px -1px #34322C;
 }
 
-.orange .yui3-aui-tab {
+.orange .aui-tab {
 	background: none;
 }
 
-.orange .yui3-aui-tab-active {
+.orange .aui-tab-active {
 	background-color: #333;
 }
 
-.orange .yui3-aui-tab-active, .orange .yui3-aui-tab-active a {
+.orange .aui-tab-active, .orange .aui-tab-active a {
 	color: #FFF;
 }
 
@@ -142,30 +142,30 @@ body.orange, .orange .portlet {
 	color: #FFF;
 }
 
-.orange .yui3-aui-portal-layout-drag-indicator {
+.orange .aui-portal-layout-drag-indicator {
 	background-color: #B6A63C;
 }
 
-.orange .yui3-aui-autocomplete-results-content {
+.orange .aui-autocomplete-results-content {
 	border-color: #F5D599;
 }
 
-.orange .yui3-aui-autocomplete-selected {
+.orange .aui-autocomplete-selected {
 	background-color: #F7F0E0;
 	border-color: #EAD8A4;
 }
 
-.orange .yui3-aui-textboxlistentry {
+.orange .aui-textboxlistentry {
 	background-color: #F4EACB;
 	border-color: #EAD8A4;
 }
 
-.orange .yui3-aui-textboxlistentry-focused {
+.orange .aui-textboxlistentry-focused {
 	background-color: #B6A63C;
 	border-color: #4F4534;
 }
 
-.orange .yui3-aui-textboxlistentry-close-hover {
+.orange .aui-textboxlistentry-close-hover {
 	background-color: #EAD8A4;
 }
 
@@ -239,7 +239,7 @@ body.orange, .orange .portlet {
 	background-color: #968A83;
 }
 
-.orange .lfr-tag-selector-popup .yui3-aui-textfield-content {
+.orange .lfr-tag-selector-popup .aui-textfield-content {
 	background-color: #DED8D4;
 	border-color: #BDB4AF;
 }
@@ -264,7 +264,7 @@ body.orange, .orange .portlet {
 
 /* ---------- IE6 chokes on attribute selectors in a chain, so we separate them into their own rule ---------- */
 
-.ie6 .orange input.submit, .ie6 .orange input.button, .ie6 .orange button, .ie6 .orange .yui3-aui-button-disabled input.submit, .ie6 .orange .yui3-aui-button-disabled input.button, .ie6 .orange .yui3-aui-button-disabled button {
+.ie6 .orange input.submit, .ie6 .orange input.button, .ie6 .orange button, .ie6 .orange .aui-button-disabled input.submit, .ie6 .orange .aui-button-disabled input.button, .ie6 .orange .aui-button-disabled button {
 	color: #4F4534;
 }
 

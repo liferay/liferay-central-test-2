@@ -12,7 +12,7 @@
 .ie6 div.portlet-column, .ie7 div.portlet-column {
 }
 
-.ie6 div.yui3-aui-column-last, .ie7 div.yui3-aui-column-last {
+.ie6 div.aui-column-last, .ie7 div.aui-column-last {
 }
 
 .portlet-column-content {

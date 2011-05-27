@@ -4,37 +4,37 @@ fieldset {
 .ie fieldset {
 }
 
-.yui3-aui-fieldset {
+.aui-fieldset {
 }
 
-.yui3-aui-dialog-iframe-popup .yui3-aui-fieldset {
+.aui-dialog-iframe-popup .aui-fieldset {
 }
 
-.yui3-aui-fieldset .yui3-aui-field-content, .yui3-aui-field-row, .yui3-aui-button-holder, .yui3-aui-field-wrapper-content {
+.aui-fieldset .aui-field-content, .aui-field-row, .aui-button-holder, .aui-field-wrapper-content {
 }
 
-.yui3-aui-field-inline .yui3-aui-field-content, .yui3-aui-field-row .yui3-aui-field-content {
+.aui-field-inline .aui-field-content, .aui-field-row .aui-field-content {
 }
 
-.yui3-aui-search-bar .yui3-aui-field-content {
+.aui-search-bar .aui-field-content {
 }
 
-.yui3-aui-search-bar .yui3-aui-field-content, .yui3-aui-search-bar .yui3-aui-button-content {
+.aui-search-bar .aui-field-content, .aui-search-bar .aui-button-content {
 }
 
-.yui3-aui-field-choice .yui3-aui-field-label {
+.aui-field-choice .aui-field-label {
 }
 
-.yui3-aui-field-date .yui3-aui-field-content {
+.aui-field-date .aui-field-content {
 }
 
 legend {
 }
 
-.yui3-aui-fieldset-legend {
+.aui-fieldset-legend {
 }
 
-.yui3-aui-legend {
+.aui-legend {
 }
 
 input {
@@ -58,7 +58,7 @@ input[type="submit"]:hover, input[type="button"]:hover, input[type="reset"]:hove
 input[type="submit"], input[type="button"], input[type="reset"], button, .lfr-actions, .lfr-actions ul {
 }
 
-.yui3-aui-button-disabled input[type], .yui3-aui-button-disabled button, .yui3-aui-button-disabled input[type]:hover, .yui3-aui-button-disabled input[type]:focus, .yui3-aui-button-disabled button:hover, .yui3-aui-button-disabled button:focus, .yui3-aui-buttonitem-disabled, .yui3-aui-buttonitem-disabled:hover  {
+.aui-button-disabled input[type], .aui-button-disabled button, .aui-button-disabled input[type]:hover, .aui-button-disabled input[type]:focus, .aui-button-disabled button:hover, .aui-button-disabled button:focus, .aui-buttonitem-disabled, .aui-buttonitem-disabled:hover  {
 }
 
 input[type="submit"]:hover, input[type="button"]:hover, input[type="reset"]:hover, button:hover, .lfr-actions:hover, .lfr-actions:hover ul {
@@ -72,14 +72,14 @@ input[type="submit"]:focus, input[type="button"]:focus, input[type="reset"]:focu
 .ie6 input.text, input.password, .ie6 input.submit, .ie6 input.file, .ie6 input.button, .ie6 button {
 }
 
-.ie6 input.submit, .ie6 input.button, .ie6 button, .ie6 .yui3-aui-button-disabled input.submit, .ie6 .yui3-aui-button-disabled input.button, .ie6 .yui3-aui-button-disabled button {
+.ie6 input.submit, .ie6 input.button, .ie6 button, .ie6 .aui-button-disabled input.submit, .ie6 .aui-button-disabled input.button, .ie6 .aui-button-disabled button {
 }
 
 input.focus, textarea.focus, .ie6 input.focus, .ie6 textarea.focus {
 }
 
-.ie6 .yui3-aui-button-disabled input.submit, .ie6 .yui3-aui-button-disabled input.button, .ie6 .yui3-aui-button-disabled button {
+.ie6 .aui-button-disabled input.submit, .ie6 .aui-button-disabled input.button, .ie6 .aui-button-disabled button {
 }
 
-.ie .yui3-aui-button-disabled input, .yui3-aui-buttonitem-disabled, .yui3-aui-buttonitem-disabled:hover {
+.ie .aui-button-disabled input, .aui-buttonitem-disabled, .aui-buttonitem-disabled:hover {
 }

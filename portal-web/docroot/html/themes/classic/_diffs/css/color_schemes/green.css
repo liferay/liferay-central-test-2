@@ -6,13 +6,13 @@ body.green, .green .portlet {
 	background-color: #AFBFA7;
 }
 
-.green .yui3-aui-state-hover {
+.green .aui-state-hover {
 	background-color: #CFDABA;
 	background-image: url(../../images/color_schemes/green/application/state_hover_bg.png);
 	border-color: #778362;
 }
 
-.green .yui3-aui-icon {
+.green .aui-icon {
 	background-image: url(../../images/color_schemes/green/aui/icon_sprite.png);
 }
 
@@ -44,20 +44,20 @@ body.green, .green .portlet {
 	background-color: #DBDED4;
 }
 
-.green .yui3-aui-resizable-proxy {
+.green .aui-resizable-proxy {
 	border-color: #909683;
 }
 
-.green .yui3-aui-sortable-proxy {
+.green .aui-sortable-proxy {
 	background-color: #7C8272;
 }
 
-.green .yui3-aui-menugroup-content h4 {
+.green .aui-menugroup-content h4 {
 	background-color: #D7DFD3;
 	color: #677D5B;
 }
 
-.green .yui3-aui-menu-content li a, .green .lfr-menu-list ul li a {
+.green .aui-menu-content li a, .green .lfr-menu-list ul li a {
 	color: #2F342C;
 }
 
@@ -70,21 +70,21 @@ body.green, .green .portlet {
 	color: #FFF;
 }
 
-.green .yui3-aui-menu-content li a.yui3-aui-focus, .green .lfr-menu-list ul a.yui3-aui-focus, .green .lfr-menu-expanded li a:focus  {
+.green .aui-menu-content li a.aui-focus, .green .lfr-menu-list ul a.aui-focus, .green .lfr-menu-expanded li a:focus  {
 	background-color: #677D5B;
 	color: #FFF;
 	text-shadow: -1px -1px #2F342C;
 }
 
-.green .yui3-aui-tab {
+.green .aui-tab {
 	background: none;
 }
 
-.green .yui3-aui-tab-active {
+.green .aui-tab-active {
 	background-color: #333;
 }
 
-.green .yui3-aui-tab-active, .green .yui3-aui-tab-active a {
+.green .aui-tab-active, .green .aui-tab-active a {
 	color: #FFF;
 }
 
@@ -142,30 +142,30 @@ body.green, .green .portlet {
 	color: #FFF;
 }
 
-.green .yui3-aui-portal-layout-drag-indicator {
+.green .aui-portal-layout-drag-indicator {
 	background-color: #57B63C;
 }
 
-.green .yui3-aui-autocomplete-results-content {
+.green .aui-autocomplete-results-content {
 	border-color: #C1F599;
 }
 
-.green .yui3-aui-autocomplete-selected {
+.green .aui-autocomplete-selected {
 	background-color: #E9F7E0;
 	border-color: #BBEAA4;
 }
 
-.green .yui3-aui-textboxlistentry {
+.green .aui-textboxlistentry {
 	background-color: #D9F4CB;
 	border-color: #BBEAA4;
 }
 
-.green .yui3-aui-textboxlistentry-focused {
+.green .aui-textboxlistentry-focused {
 	background-color: #57B63C;
 	border-color: #404F34;
 }
 
-.green .yui3-aui-textboxlistentry-close-hover {
+.green .aui-textboxlistentry-close-hover {
 	background-color: #BBEAA4;
 }
 
@@ -239,7 +239,7 @@ body.green, .green .portlet {
 	background-color: #909683;
 }
 
-.green .lfr-tag-selector-popup .yui3-aui-textfield-content {
+.green .lfr-tag-selector-popup .aui-textfield-content {
 	background-color: #DBDED4;
 	border-color: #B9BDAF;
 }
@@ -264,7 +264,7 @@ body.green, .green .portlet {
 
 /* ---------- IE6 chokes on attribute selectors in a chain, so we separate them into their own rule ---------- */
 
-.ie6 .green input.submit, .ie6 .green input.button, .ie6 .green button, .ie6 .green .yui3-aui-button-disabled input.submit, .ie6 .green .yui3-aui-button-disabled input.button, .ie6 .green .yui3-aui-button-disabled button {
+.ie6 .green input.submit, .ie6 .green input.button, .ie6 .green button, .ie6 .green .aui-button-disabled input.submit, .ie6 .green .aui-button-disabled input.button, .ie6 .green .aui-button-disabled button {
 	color: #404F34;
 }
 

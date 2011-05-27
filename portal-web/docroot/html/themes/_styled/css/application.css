@@ -1,17 +1,17 @@
 /* ---------- Main ---------- */
 
-.yui3-aui-state-default {
+.aui-state-default {
 	background: #D4D4D4 url(../images/portlet/header_bg.png) repeat-x 0 0;
 	border: 1px solid;
 	border-color: #C8C9CA #9E9E9E #9E9E9E #C8C9CA;
 }
 
-.yui3-aui-state-hover {
+.aui-state-hover {
 	background: #B9CED9 url(../images/application/state_hover_bg.png) repeat-x 0 0;
 	border-color: #627782;
 }
 
-.yui3-aui-state-active {
+.aui-state-active {
 	background: #EBEBEB url(../images/application/state_active_bg.png) repeat-x 0 0;
 	border-color: #555;
 }
@@ -63,47 +63,47 @@
 	background: #FFC;
 }
 
-.portlet-boundary.yui3-aui-dd-dragging {
+.portlet-boundary.aui-dd-dragging {
 	opacity: .6;
 }
 
-.ie .portlet-boundary.yui3-aui-dd-dragging {
+.ie .portlet-boundary.aui-dd-dragging {
 	-ms-filter: alpha(opacity=60);
 	filter: alpha(opacity=60);
 }
 
-.portlet-boundary.yui3-aui-dd-dragging .portlet {
+.portlet-boundary.aui-dd-dragging .portlet {
 	border: 2px dashed #ccc;
 }
 
-.yui3-aui-portal-layout-proxy {
+.aui-portal-layout-proxy {
 	opacity: 1 !important;
 }
 
-.yui3-aui-portal-layout-proxy .portlet-topper {
+.aui-portal-layout-proxy .portlet-topper {
 	background-image: none;
 }
 
-.yui3-aui-proxy {
+.aui-proxy {
 	cursor: move;
 	opacity: 0.65;
 	position: absolute;
 }
 
-.ie .yui3-aui-proxy {
+.ie .aui-proxy {
 	filter: alpha(opacity=65);
 }
 
-.yui3-aui-proxy.generic-portlet {
+.aui-proxy.generic-portlet {
 	height: 200px;
 	width: 300px;
 }
 
-.yui3-aui-proxy.generic-portlet .portlet-title {
+.aui-proxy.generic-portlet .portlet-title {
 	padding: 10px;
 }
 
-.yui3-aui-proxy.not-intersecting .forbidden-action {
+.aui-proxy.not-intersecting .forbidden-action {
 	background: url(../images/application/forbidden_action.png) no-repeat;
 	display: block;
 	height: 32px;
@@ -113,18 +113,18 @@
 	width: 32px;
 }
 
-.ie .yui3-aui-proxy.not-intersecting .forbidden-action {
+.ie .aui-proxy.not-intersecting .forbidden-action {
 	right: 2px;
 	top: 2px;
 }
 
-.yui3-aui-resizable-proxy {
+.aui-resizable-proxy {
 	border: 1px dashed #828F95;
 	position: absolute;
 	visibility: hidden;
 }
 
-.yui3-aui-sortable-proxy {
+.aui-sortable-proxy {
 	background: #727C81;
 	margin-top: 1px;
 }
@@ -133,25 +133,25 @@
 	visibility: hidden;
 }
 
-.yui3-aui-portal-layout-drag-target-indicator {
+.aui-portal-layout-drag-target-indicator {
 	margin: 2px 0;
 }
 
 /* ---------- Portal tool tips ---------- */
 
-.yui3-aui-tooltip {
+.aui-tooltip {
 	max-width: 200px;
 }
 
 /* ---------- Tags ---------- */
 
-.yui3-aui-tagselector-content {
+.aui-tagselector-content {
 	border-width: 0;
 	margin-bottom: 15px;
 	padding: 0;
 }
 
-.yui3-aui-tagselector-content .yui3-aui-textboxlistentry-holder {
+.aui-tagselector-content .aui-textboxlistentry-holder {
 	background: #fff;
 	border: 1px solid;
 	border-color: #BFBFBF #DEDEDE #DEDEDE #BFBFBF;
@@ -161,30 +161,30 @@
 	overflow: visible;
 }
 
-.yui3-aui-tagselector .lfr-tag-selector-input {
+.aui-tagselector .lfr-tag-selector-input {
 	background: none;
 	padding: 0;
 	width: auto;
 }
 
-.yui3-aui-tagselector-focused .yui3-aui-textboxlistentry-holder {
+.aui-tagselector-focused .aui-textboxlistentry-holder {
 	background: #FFC none;
 	border: 1px solid #FC0;
 }
 
-.yui3-aui-tagselector .yui3-aui-field .yui3-aui-field-content {
+.aui-tagselector .aui-field .aui-field-content {
 	margin: 0;
 }
 
-.yui3-aui-tagselector .yui3-aui-toolbar {
+.aui-tagselector .aui-toolbar {
 	margin-top: 5px;
 }
 
-.yui3-aui-tagselector .yui3-aui-textboxlist-input-container {
+.aui-tagselector .aui-textboxlist-input-container {
 	margin: 0;
 }
 
-.yui3-aui-categoriesselector-content .yui3-aui-textboxlistentry-holder {
+.aui-categoriesselector-content .aui-textboxlistentry-holder {
 	background-color: transparent;
 	border-width: 0;
 	padding: 0;
@@ -244,70 +244,70 @@
 
 /* ---------- Underlay ---------- */
 
-.yui3-aui-underlay {
+.aui-underlay {
 	clear: both;
 	top: 100%;
 }
 
-.yui3-aui-underlay-hidden {
+.aui-underlay-hidden {
 	display: none;
 }
 
-.yui3-aui-underlay-content {
+.aui-underlay-content {
 	background: #F4F3F3 url(../images/common/message_panel_shadow.png) repeat-x 0 0;
 	border: 0 solid #AEAFB1;
 	border-width: 0 1px 1px;
 }
 
-.yui3-aui-underlay .yui3-widget-hd {
+.aui-underlay .yui3-widget-hd {
 	height: 38px;
 }
 
-.yui3-aui-underlay-close {
+.aui-underlay-close {
 	position: absolute;
 	right: 5px;
 	top: 5px;
 }
 
-.yui3-aui-underlay .lfr-portlet-item {
+.aui-underlay .lfr-portlet-item {
 	border-width: 0;
 }
 
 /* ---------- Tabs ---------- */
 
-.yui3-aui-tabview-list {
+.aui-tabview-list {
 	border: 1px solid #C8C9CA;
 	padding: 4px;
 }
 
-.ie7 .yui3-aui-tabview-list {
+.ie7 .aui-tabview-list {
 	overflow: hidden;
 }
 
-.yui3-aui-tab {
+.aui-tab {
 	background: transparent;
 	border-width: 0;
 	font-weight: bold;
 }
 
-.yui3-aui-tab-content {
+.aui-tab-content {
 	padding: 3px 10px;
 }
 
-.yui3-aui-tab-active {
+.aui-tab-active {
 	background: #333;
 	padding: 0;
 	position: relative;
 	z-index: 10;
 }
 
-.yui3-aui-tab-active, .yui3-aui-tab-active a {
+.aui-tab-active, .aui-tab-active a {
 	color: #FFF;
 	text-decoration: none;
 	text-shadow: -1px -1px #000;
 }
 
-.yui3-aui-tabview-list .toggle {
+.aui-tabview-list .toggle {
 	float: right;
 }
 
@@ -321,16 +321,16 @@
 	background: #FFF;
 }
 
-.yui3-aui-dialog-bd {
+.aui-dialog-bd {
 	min-height: 30px;
 }
 
-.yui3-aui-dialog-content {
+.aui-dialog-content {
 	border: 1px solid #C8C9CA;
 	padding: 5px;
 }
 
-.yui3-aui-panel-hd {
+.aui-panel-hd {
 	background: #C0C2C5 url(../images/application/panel_header_bg.png) repeat-x 0 0;
 	border: 1px solid;
 	border-color: #C8C9CA #AEB2B8 #AEB2B8 #C8C9CA;
@@ -352,36 +352,36 @@
 	z-index: 450;
 }
 
-.yui3-aui-menu .notice-message {
+.aui-menu .notice-message {
 	background-image: none;
 	margin: 3px;
 	padding: 6px;
 }
 
-.yui3-aui-menu {
+.aui-menu {
 	position: absolute;
 	width: auto;
 }
 
-.yui3-aui-menu-content {
+.aui-menu-content {
 	background: #FFF;
 	list-style: none;
 	min-width: 150px;
 }
 
-.yui3-aui-menu-content li {
+.aui-menu-content li {
 	margin: 0;
 	padding: 0;
 }
 
-.yui3-aui-menu-content, .lfr-menu-list ul {
+.aui-menu-content, .lfr-menu-list ul {
 	background: #CCC9C9 url(../images/application/menu_bg.png) repeat-x 0 0;
 	border: 1px solid;
 	border-color: #AEAFB1 #777879 #777879 #AEAFB1;
 	padding: 2px 0;
 }
 
-.yui3-aui-menugroup-content .yui3-aui-menu-label {
+.aui-menugroup-content .aui-menu-label {
 	background: #D2D6DE;
 	color: #5B677D;
 	display: block;
@@ -390,12 +390,12 @@
 	text-shadow: 1px 1px #FFF;
 }
 
-.yui3-aui-menugroup-content ul, .lfr-menu-list ul ul {
+.aui-menugroup-content ul, .lfr-menu-list ul ul {
 	display: block;
 	min-width: 0;
 }
 
-.yui3-aui-menu-content li, .lfr-menu-list ul li {
+.aui-menu-content li, .lfr-menu-list ul li {
 	border-bottom: 1px solid #BCBBBB;
 	border-top: 1px solid #EEE;
 	display: block;
@@ -403,43 +403,43 @@
 	padding: 0;
 }
 
-.ie7 .yui3-aui-menu-content li {
+.ie7 .aui-menu-content li {
 	z-index: 10;
 }
 
-.yui3-aui-menu-content li.first, .lfr-menu-list ul li.first {
+.aui-menu-content li.first, .lfr-menu-list ul li.first {
 	border-top-width: 0;
 }
 
-.yui3-aui-menu-content li.last, .lfr-menu-list ul li.last {
+.aui-menu-content li.last, .lfr-menu-list ul li.last {
 	border-bottom-width: 0;
 }
 
-.yui3-aui-menu-content li a, .lfr-menu-list ul li .taglib-icon, .yui3-aui-menu-content li .disabled {
+.aui-menu-content li a, .lfr-menu-list ul li .taglib-icon, .aui-menu-content li .disabled {
 	color: #2C2F34;
 	display: block;
 	padding: 4px 5px;
 	text-decoration: none;
 }
 
-.yui3-aui-menu-content li .disabled {
+.aui-menu-content li .disabled {
 	color: #999;
 }
 
-.yui3-aui-menu-content li a.yui3-aui-focus, .lfr-menu-list ul .taglib-icon.yui3-aui-focus, .lfr-menu-expanded li a:focus {
+.aui-menu-content li a.aui-focus, .lfr-menu-list ul .taglib-icon.aui-focus, .lfr-menu-expanded li a:focus {
 	background-color: #5B677D;
 	color: #FFF;
 	text-shadow: -1px -1px #2C2F34;
 }
 
-.yui3-aui-menu-content a, .lfr-menu-list li .taglib-icon, .yui3-aui-menu-content .disabled, .lfr-actions .lfr-trigger, .lfr-actions .lfr-trigger strong {
+.aui-menu-content a, .lfr-menu-list li .taglib-icon, .aui-menu-content .disabled, .lfr-actions .lfr-trigger, .lfr-actions .lfr-trigger strong {
 	font-weight: bold;
 	text-shadow: 1px 1px #FFF;
 }
 
 /* ---------- Toolbar ---------- */
 
-.yui3-aui-toolbar li {
+.aui-toolbar li {
 	display: inline-block;
 	margin: 0;
 	margin-left: 10px;
@@ -447,11 +447,11 @@
 	vertical-align: middle;
 }
 
-.ie6 .yui3-aui-toolbar li, .ie7 .yui3-aui-toolbar li {
+.ie6 .aui-toolbar li, .ie7 .aui-toolbar li {
 	display: inline;
 }
 
-.yui3-aui-toolbar-separator {
+.aui-toolbar-separator {
 	background: url(../images/dockbar/separator.png) no-repeat 100% 50%;
 	border-width: 0;
 	cursor: default;
@@ -465,17 +465,17 @@
 
 /* ---------- Loading Mask ---------- */
 
-.yui3-aui-loadingmask-content {
+.aui-loadingmask-content {
 	background: #CCC;
 }
 
-.yui3-aui-loadingmask-message {
+.aui-loadingmask-message {
 	background: #D4D4D4 url(../images/portlet/header_bg.png) repeat-x 0 0;
 }
 
 /* ---------- Tree View ---------- */
 
-.yui3-aui-tree-node-selected .yui3-aui-tree-label {
+.aui-tree-node-selected .aui-tree-label {
 	background-color: transparent;
 	font-weight: bold;
 }

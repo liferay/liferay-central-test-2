@@ -1,12 +1,12 @@
 /* ---------- Main ---------- */
 
-.yui3-aui-state-default {
+.aui-state-default {
 }
 
-.yui3-aui-state-hover {
+.aui-state-hover {
 }
 
-.yui3-aui-state-active {
+.aui-state-active {
 }
 
 .results-header {
@@ -41,80 +41,80 @@
 .active-area {
 }
 
-.portlet-boundary.yui3-aui-dd-dragging {
+.portlet-boundary.aui-dd-dragging {
 }
 
-.ie .portlet-boundary.yui3-aui-dd-dragging {
+.ie .portlet-boundary.aui-dd-dragging {
 }
 
-.portlet-boundary.yui3-aui-dd-dragging .portlet {
+.portlet-boundary.aui-dd-dragging .portlet {
 }
 
-.yui3-aui-portal-layout-proxy {
+.aui-portal-layout-proxy {
 }
 
-.yui3-aui-portal-layout-proxy .portlet-topper {
+.aui-portal-layout-proxy .portlet-topper {
 }
 
-.yui3-aui-proxy {
+.aui-proxy {
 }
 
-.ie .yui3-aui-proxy {
+.ie .aui-proxy {
 }
 
-.yui3-aui-proxy.generic-portlet {
+.aui-proxy.generic-portlet {
 }
 
-.yui3-aui-proxy.generic-portlet .portlet-title {
+.aui-proxy.generic-portlet .portlet-title {
 }
 
-.yui3-aui-proxy.not-intersecting .forbidden-action {
+.aui-proxy.not-intersecting .forbidden-action {
 }
 
-.ie .yui3-aui-proxy.not-intersecting .forbidden-action {
+.ie .aui-proxy.not-intersecting .forbidden-action {
 }
 
-.yui3-aui-resizable-proxy {
+.aui-resizable-proxy {
 }
 
-.yui3-aui-sortable-proxy {
+.aui-sortable-proxy {
 }
 
 .lfr-freeform-layout-drag-indicator {
 }
 
-.yui3-aui-portal-layout-drag-target-indicator {
+.aui-portal-layout-drag-target-indicator {
 }
 
 /* ---------- Portal tool tips ---------- */
 
-.yui3-aui-tooltip {
+.aui-tooltip {
 }
 
 /* ---------- Tags ---------- */
 
-.yui3-aui-tagselector-content {
+.aui-tagselector-content {
 }
 
-.yui3-aui-tagselector-content .yui3-aui-textboxlistentry-holder {
+.aui-tagselector-content .aui-textboxlistentry-holder {
 }
 
-.yui3-aui-tagselector .lfr-tag-selector-input {
+.aui-tagselector .lfr-tag-selector-input {
 }
 
-.yui3-aui-tagselector-focused .yui3-aui-textboxlistentry-holder {
+.aui-tagselector-focused .aui-textboxlistentry-holder {
 }
 
-.yui3-aui-tagselector .yui3-aui-field .yui3-aui-field-content {
+.aui-tagselector .aui-field .aui-field-content {
 }
 
-.yui3-aui-tagselector .yui3-aui-toolbar {
+.aui-tagselector .aui-toolbar {
 }
 
-.yui3-aui-tagselector .yui3-aui-textboxlist-input-container {
+.aui-tagselector .aui-textboxlist-input-container {
 }
 
-.yui3-aui-categoriesselector-content .yui3-aui-textboxlistentry-holder {
+.aui-categoriesselector-content .aui-textboxlistentry-holder {
 }
 
 /* ---------- Tag cloud and tag list ---------- */
@@ -154,45 +154,45 @@
 
 /* ---------- Underlay ---------- */
 
-.yui3-aui-underlay {
+.aui-underlay {
 }
 
-.yui3-aui-underlay-hidden {
+.aui-underlay-hidden {
 }
 
-.yui3-aui-underlay-content {
+.aui-underlay-content {
 }
 
-.yui3-aui-underlay .yui3-widget-hd {
+.aui-underlay .yui3-widget-hd {
 }
 
-.yui3-aui-underlay-close {
+.aui-underlay-close {
 }
 
-.yui3-aui-underlay .lfr-portlet-item {
+.aui-underlay .lfr-portlet-item {
 }
 
 /* ---------- Tabs ---------- */
 
-.yui3-aui-tabview-list {
+.aui-tabview-list {
 }
 
-.ie7 .yui3-aui-tabview-list {
+.ie7 .aui-tabview-list {
 }
 
-.yui3-aui-tab {
+.aui-tab {
 }
 
-.yui3-aui-tab-content {
+.aui-tab-content {
 }
 
-.yui3-aui-tab-active {
+.aui-tab-active {
 }
 
-.yui3-aui-tab-active, .yui3-aui-tab-active a {
+.aui-tab-active, .aui-tab-active a {
 }
 
-.yui3-aui-tabview-list .toggle {
+.aui-tabview-list .toggle {
 }
 
 /* ---------- Misc. ---------- */
@@ -203,13 +203,13 @@
 .lfr-panel-container {
 }
 
-.yui3-aui-dialog-bd {
+.aui-dialog-bd {
 }
 
-.yui3-aui-dialog-content {
+.aui-dialog-content {
 }
 
-.yui3-aui-panel-hd {
+.aui-panel-hd {
 }
 
 /* ---------- Menus ---------- */
@@ -223,73 +223,73 @@
 .lfr-menu-list {
 }
 
-.yui3-aui-menu .notice-message {
+.aui-menu .notice-message {
 }
 
-.yui3-aui-menu {
+.aui-menu {
 }
 
-.yui3-aui-menu-content {
+.aui-menu-content {
 }
 
-.yui3-aui-menu-content li {
+.aui-menu-content li {
 }
 
-.yui3-aui-menu-content, .lfr-menu-list ul {
+.aui-menu-content, .lfr-menu-list ul {
 }
 
-.yui3-aui-menugroup-content .yui3-aui-menu-label {
+.aui-menugroup-content .aui-menu-label {
 }
 
-.yui3-aui-menugroup-content ul, .lfr-menu-list ul ul {
+.aui-menugroup-content ul, .lfr-menu-list ul ul {
 }
 
-.yui3-aui-menu-content li, .lfr-menu-list ul li {
+.aui-menu-content li, .lfr-menu-list ul li {
 }
 
-.ie7 .yui3-aui-menu-content li {
+.ie7 .aui-menu-content li {
 }
 
-.yui3-aui-menu-content li.first, .lfr-menu-list ul li.first {
+.aui-menu-content li.first, .lfr-menu-list ul li.first {
 }
 
-.yui3-aui-menu-content li.last, .lfr-menu-list ul li.last {
+.aui-menu-content li.last, .lfr-menu-list ul li.last {
 }
 
-.yui3-aui-menu-content li a, .lfr-menu-list ul li .taglib-icon, .yui3-aui-menu-content li .disabled {
+.aui-menu-content li a, .lfr-menu-list ul li .taglib-icon, .aui-menu-content li .disabled {
 }
 
-.yui3-aui-menu-content li .disabled {
+.aui-menu-content li .disabled {
 }
 
-.yui3-aui-menu-content li a.yui3-aui-focus, .lfr-menu-list ul .taglib-icon.yui3-aui-focus, .lfr-menu-expanded li a:focus {
+.aui-menu-content li a.aui-focus, .lfr-menu-list ul .taglib-icon.aui-focus, .lfr-menu-expanded li a:focus {
 }
 
-.yui3-aui-menu-content a, .lfr-menu-list li .taglib-icon, .yui3-aui-menu-content .disabled, .lfr-actions .lfr-trigger, .lfr-actions .lfr-trigger strong {
+.aui-menu-content a, .lfr-menu-list li .taglib-icon, .aui-menu-content .disabled, .lfr-actions .lfr-trigger, .lfr-actions .lfr-trigger strong {
 }
 
 /* ---------- Toolbar ---------- */
 
-.yui3-aui-toolbar li {
+.aui-toolbar li {
 }
 
-.ie6 .yui3-aui-toolbar li, .ie7 .yui3-aui-toolbar li {
+.ie6 .aui-toolbar li, .ie7 .aui-toolbar li {
 }
 
-.yui3-aui-toolbar-separator {
+.aui-toolbar-separator {
 }
 
 /* ---------- Loading Mask ---------- */
 
-.yui3-aui-loadingmask-content {
+.aui-loadingmask-content {
 }
 
-.yui3-aui-loadingmask-message {
+.aui-loadingmask-message {
 }
 
 /* ---------- Tree View ---------- */
 
-.yui3-aui-tree-node-selected .yui3-aui-tree-label {
+.aui-tree-node-selected .aui-tree-label {
 }
 
 /* ---------- Page Personalization ---------- */

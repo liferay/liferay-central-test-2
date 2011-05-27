@@ -143,11 +143,11 @@ html > .lfr-dockbar-pinned {
 
 /* ---------- Menus ---------- */
 
-.yui3-aui-dockbarmenu-hidden {
+.aui-dockbarmenu-hidden {
 	visibility: hidden;
 }
 
-.dockbar .yui3-aui-toolbar {
+.dockbar .aui-toolbar {
 	float: left;
 }
 
@@ -155,12 +155,12 @@ html > .lfr-dockbar-pinned {
 	float: right;
 }
 
-.yui3-aui-underlay .portal-add-content {
+.aui-underlay .portal-add-content {
 	background-color: transparent;
 	font-size: 11px;
 }
 
-.yui3-aui-underlay .portal-add-content .portlet-dd-placeholder {
+.aui-underlay .portal-add-content .portlet-dd-placeholder {
 	display: none;
 }
 

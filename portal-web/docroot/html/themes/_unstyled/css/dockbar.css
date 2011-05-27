@@ -86,19 +86,19 @@ html > .lfr-dockbar-pinned {
 
 /* ---------- Menus ---------- */
 
-.yui3-aui-dockbarmenu-hidden {
+.aui-dockbarmenu-hidden {
 }
 
-.dockbar .yui3-aui-toolbar {
+.dockbar .aui-toolbar {
 }
 
 .dockbar .user-toolbar {
 }
 
-.yui3-aui-underlay .portal-add-content {
+.aui-underlay .portal-add-content {
 }
 
-.yui3-aui-underlay .portal-add-content .portlet-dd-placeholder {
+.aui-underlay .portal-add-content .portlet-dd-placeholder {
 }
 
 .add-application .yui3-widget-bd, .dockbar-messages .yui3-widget-bd {

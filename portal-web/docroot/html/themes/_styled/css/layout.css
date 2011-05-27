@@ -24,7 +24,7 @@
 	width: 100%;
 }
 
-.ie6 div.yui3-aui-column-last, .ie7 div.yui3-aui-column-last {
+.ie6 div.aui-column-last, .ie7 div.aui-column-last {
 	margin-right: -1px;
 }
 
