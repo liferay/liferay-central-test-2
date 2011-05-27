@@ -37,7 +37,7 @@ import java.util.List;
  */
 public class UpgradeAdminPortlets extends UpgradeProcess {
 
-	protected void addResource(long resourceId, long codeId, long primKey)
+	protected void addResource(long resourceId, long codeId, String primKey)
 		throws Exception {
 
 		Connection con = null;
@@ -52,7 +52,7 @@ public class UpgradeAdminPortlets extends UpgradeProcess {
 
 			ps.setLong(1, resourceId);
 			ps.setLong(2, codeId);
-			ps.setLong(3, primKey);
+			ps.setString(3, primKey);
 
 			ps.executeUpdate();
 		}
@@ -72,12 +72,12 @@ public class UpgradeAdminPortlets extends UpgradeProcess {
 
 		runSQL(
 			"insert into ResourceCode (codeId, companyId, name, scope) values" +
-				" (" + codeId + ", " + companyId + ", " + name + ", " +
+				" (" + codeId + ", " + companyId + ", '" + name + "', " +
 					ResourceConstants.SCOPE_COMPANY + ")");
 
 		long resourceId = increment();
 
-		addResource(resourceId, codeId, companyId);
+		addResource(resourceId, codeId, String.valueOf(companyId));
 
 		resourceIds[0] = resourceId;
 
@@ -87,14 +87,14 @@ public class UpgradeAdminPortlets extends UpgradeProcess {
 
 		runSQL(
 			"insert into ResourceCode (codeId, companyId, name, scope) values" +
-				" (" + codeId + ", " + companyId + ", " + name + ", " +
+				" (" + codeId + ", " + companyId + ", '" + name + "', " +
 					ResourceConstants.SCOPE_INDIVIDUAL + ")");
 
 		resourceId = increment();
 
 		long controlPanelGroupId = getControlPanelGroupId();
 
-		addResource(resourceId, codeId, controlPanelGroupId);
+		addResource(resourceId, codeId, String.valueOf(controlPanelGroupId));
 
 		resourceIds[1] = resourceId;
 
@@ -103,7 +103,7 @@ public class UpgradeAdminPortlets extends UpgradeProcess {
 
 	protected void addResourcePermission(
 			long resourcePermissionId, long companyId, String name, long scope,
-			long primKey, long roleId, long actionIds)
+			String primKey, long roleId, long actionIds)
 		throws Exception {
 
 		Connection con = null;
@@ -121,7 +121,7 @@ public class UpgradeAdminPortlets extends UpgradeProcess {
 			ps.setLong(2, companyId);
 			ps.setString(3, name);
 			ps.setLong(4, scope);
-			ps.setLong(5, primKey);
+			ps.setString(5, primKey);
 			ps.setLong(6, roleId);
 			ps.setLong(7, actionIds);
 
@@ -302,7 +302,7 @@ public class UpgradeAdminPortlets extends UpgradeProcess {
 
 					long companyId = rs.getLong("companyId");
 					long scope = rs.getLong("scope");
-					long primKey = rs.getLong("primKey");
+					String primKey = rs.getString("primKey");
 					long roleId = rs.getLong("roleId");
 
 					actionIds = rs.getLong("actionIds");

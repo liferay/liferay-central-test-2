@@ -15,6 +15,7 @@
 package com.liferay.portal.dao.db;
 
 import com.liferay.counter.service.CounterLocalServiceUtil;
+import com.liferay.portal.dao.orm.common.SQLTransformer;
 import com.liferay.portal.kernel.dao.db.DB;
 import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
 import com.liferay.portal.kernel.dao.db.Index;
@@ -213,7 +214,7 @@ public abstract class BaseDB implements DB {
 			for (int i = 0; i < sqls.length; i++) {
 				String sql = buildSQL(sqls[i]);
 
-				sql = sql.trim();
+				sql = SQLTransformer.transform(sql.trim());
 
 				if (sql.endsWith(";")) {
 					sql = sql.substring(0, sql.length() - 1);

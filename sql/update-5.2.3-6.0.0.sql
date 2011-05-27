@@ -137,7 +137,7 @@ COMMIT_TRANSACTION;
 
 update DLFileShortcut set status = 0;
 update DLFileShortcut set statusByUserId = userId;
-update DLFileShortcut set statusByUserName = userId;
+update DLFileShortcut set statusByUserName = CAST_TEXT(userId);
 update DLFileShortcut set statusDate = createDate;
 
 alter table DLFileVersion add description STRING null;
@@ -150,7 +150,7 @@ COMMIT_TRANSACTION;
 
 update DLFileVersion set status = 0;
 update DLFileVersion set statusByUserId = userId;
-update DLFileVersion set statusByUserName = userId;
+update DLFileVersion set statusByUserName = CAST_TEXT(userId);
 update DLFileVersion set statusDate = createDate;
 
 alter table JournalArticle add status INTEGER;
@@ -214,7 +214,7 @@ COMMIT_TRANSACTION;
 update MBMessage set allowPingbacks = TRUE;
 update MBMessage set status = 0;
 update MBMessage set statusByUserId = userId;
-update MBMessage set statusByUserName = userId;
+update MBMessage set statusByUserName = CAST_TEXT(userId);
 update MBMessage set statusDate = createDate;
 
 alter table MBThread add status INTEGER;
@@ -250,7 +250,7 @@ COMMIT_TRANSACTION;
 
 update WikiPage set status = 0;
 update WikiPage set statusByUserId = userId;
-update WikiPage set statusByUserName = userId;
+update WikiPage set statusByUserName = CAST_TEXT(userId);
 update WikiPage set statusDate = createDate;
 
 create table WorkflowDefinitionLink (
