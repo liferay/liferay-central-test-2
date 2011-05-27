@@ -1601,6 +1601,8 @@ public interface PropsKeys {
 
 	public static final String SCRIPTING_JRUBY_COMPILE_THRESHOLD = "scripting.jruby.compile.threshold";
 
+	public static final String SEARCH_CONTAINER_PAGE_DEFAULT_DELTA = "search.container.page.default.delta";
+
 	public static final String SEARCH_CONTAINER_PAGE_DELTA_VALUES = "search.container.page.delta.values";
 
 	public static final String SEARCH_CONTAINER_PAGE_ITERATOR_MAX_PAGES = "search.container.page.iterator.max.pages";

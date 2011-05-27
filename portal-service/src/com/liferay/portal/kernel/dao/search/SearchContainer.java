@@ -14,8 +14,11 @@
 
 package com.liferay.portal.kernel.dao.search;
 
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.PropsKeys;
+import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 
@@ -40,7 +43,8 @@ public class SearchContainer<R> {
 	 */
 	public static final int DEFAULT_CUR_VALUE = DEFAULT_CUR;
 
-	public static final int DEFAULT_DELTA = 20;
+	public static final int DEFAULT_DELTA = GetterUtil.getInteger(
+		PropsUtil.get(PropsKeys.SEARCH_CONTAINER_PAGE_DEFAULT_DELTA));
 
 	public static final boolean DEFAULT_DELTA_CONFIGURABLE = true;
 
