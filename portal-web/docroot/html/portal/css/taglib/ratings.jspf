@@ -31,6 +31,10 @@
 	float: left;
 }
 
+.ie6 .taglib-ratings .liferay-rating-vote .aui-rating-content {
+	display: inline;
+}
+
 .taglib-ratings.score {
 	white-space: nowrap;
 }
