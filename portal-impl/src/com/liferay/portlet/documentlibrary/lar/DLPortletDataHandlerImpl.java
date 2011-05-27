@@ -311,7 +311,7 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 
 				DLAppLocalServiceUtil.updateAsset(
 					userId, existingFileEntry, latestFileVersion,
-					assetCategoryIds, assetTagNames);
+					assetCategoryIds, assetTagNames, null);
 
 				if (existingFileEntry instanceof LiferayFileEntry) {
 					LiferayFileEntry liferayFileEntry =
