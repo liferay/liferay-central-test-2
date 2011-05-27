@@ -332,7 +332,7 @@
 				var content = portlet.one('.portlet-content-container');
 
 				if (content) {
-					var restore = content.hasClass('yui3-aui-helper-hidden');
+					var restore = content.hasClass('aui-helper-hidden');
 
 					content.toggle();
 					portlet.toggleClass('portlet-minimized');

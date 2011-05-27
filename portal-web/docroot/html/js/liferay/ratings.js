@@ -48,7 +48,7 @@ AUI().add(
 								[ratingScore, instance.get('size')]
 							);
 
-							ratingScoreLabel = '<span class="yui3-aui-helper-hidden-accessible">' + ratingScoreLabelMessage + '</span>';
+							ratingScoreLabel = '<span class="aui-helper-hidden-accessible">' + ratingScoreLabelMessage + '</span>';
 						}
 
 						var voteLabel = '';

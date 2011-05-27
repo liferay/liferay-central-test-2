@@ -11,7 +11,7 @@ AUI().add(
 
 		var ARIA_ATTR_ROLE = 'role';
 
-		var CSS_STATE_ACTIVE = 'yui3-aui-state-active';
+		var CSS_STATE_ACTIVE = 'aui-state-active';
 
 		var CSS_EXTENDED = 'lfr-extended';
 
@@ -320,8 +320,8 @@ AUI().add(
 						A.Plugin.NodeFocusManager,
 						{
 							circular: true,
-							descendants: 'li:not(.yui3-aui-helper-hidden) a,input',
-							focusClass: 'yui3-aui-focus',
+							descendants: 'li:not(.aui-helper-hidden) a,input',
+							focusClass: 'aui-focus',
 							keys: {
 								next: 'down:40',
 								previous: 'down:38'

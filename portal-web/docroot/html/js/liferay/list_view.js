@@ -23,7 +23,7 @@ AUI().add(
 
 		var STR_TOP = 'top';
 
-		var TPL_DATA_CONTAINER = '<div class="' + CSS_DATA_CONTAINER + ' yui3-aui-helper-hidden"></div>';
+		var TPL_DATA_CONTAINER = '<div class="' + CSS_DATA_CONTAINER + ' aui-helper-hidden"></div>';
 
 		var ListView = A.Component.create(
 			{

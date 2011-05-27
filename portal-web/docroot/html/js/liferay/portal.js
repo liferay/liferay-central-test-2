@@ -17,9 +17,9 @@
 		var tabSection = event.tabSection;
 
 		if (tabItem) {
-			tabItem.radioClass('yui3-aui-selected');
-			tabItem.radioClass('yui3-aui-state-active');
-			tabItem.radioClass('yui3-aui-tab-active');
+			tabItem.radioClass('aui-selected');
+			tabItem.radioClass('aui-state-active');
+			tabItem.radioClass('aui-tab-active');
 			tabItem.radioClass('current');
 		}
 

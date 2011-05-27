@@ -73,7 +73,7 @@ AUI().add(
 					var boundingBox = options.boundingBox;
 
 					if (boundingBox && !('contentBox' in options)) {
-						options.contentBox = boundingBox + '> .yui3-aui-menu-content';
+						options.contentBox = boundingBox + '> .aui-menu-content';
 					}
 
 					menu = new A.OverlayContext(options);
@@ -85,7 +85,7 @@ AUI().add(
 						{
 							circular: false,
 							descendants: 'a',
-							focusClass: 'yui3-aui-focus',
+							focusClass: 'aui-focus',
 							keys: {
 								next: 'down:40',
 								previous: 'down:38'
@@ -95,14 +95,14 @@ AUI().add(
 
 					var focusManager = contentBox.focusManager;
 
-					contentBox.all('li').addClass('yui3-aui-menu-item');
+					contentBox.all('li').addClass('aui-menu-item');
 
 					contentBox.delegate(
 						'mouseenter',
 						function (event) {
 							focusManager.focus(event.currentTarget.one('a'));
 						},
-						'.yui3-aui-menu-item'
+						'.aui-menu-item'
 					);
 
 					contentBox.delegate(
@@ -110,7 +110,7 @@ AUI().add(
 						function (event) {
 							focusManager.blur(event.currentTarget.one('a'));
 						},
-						'.yui3-aui-menu-item'
+						'.aui-menu-item'
 					);
 
 					var MenuManager = Dockbar.MenuManager;
@@ -455,7 +455,7 @@ AUI().add(
 					var commonItems = addContentNode.one('.common-items');
 
 					if (commonItems) {
-						commonItems.removeClass('yui3-aui-menu-item');
+						commonItems.removeClass('aui-menu-item');
 					}
 
 					addContentNode.delegate(
@@ -678,14 +678,14 @@ AUI().add(
 					);
 				}
 
-				dockBar._menuButtons = dockBar.all('ul.yui3-aui-toolbar > li > a, .user-links a, .sign-out a');
+				dockBar._menuButtons = dockBar.all('ul.aui-toolbar > li > a, .user-links a, .sign-out a');
 
 				dockBar.delegate(
 					'keydown',
 					function(event) {
 						instance._updateMenu(event, event.currentTarget);
 					},
-					'.yui3-aui-toolbar a'
+					'.aui-toolbar a'
 				);
 			},
 
@@ -811,7 +811,7 @@ AUI().add(
 
 						closeTool.render(instance.get('boundingBox'));
 
-						closeTool.get('contentBox').addClass('yui3-aui-underlay-close');
+						closeTool.get('contentBox').addClass('aui-underlay-close');
 
 						instance.set('headerContent', closeTool.get('boundingBox'));
 

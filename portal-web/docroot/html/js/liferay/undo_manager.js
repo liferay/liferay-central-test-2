@@ -7,7 +7,7 @@ AUI().add(
 
 		var CSS_ACTION_UNDO = 'lfr-action-undo';
 
-		var CSS_HELPER_CLEARFIX = 'yui3-aui-helper-clearfix';
+		var CSS_HELPER_CLEARFIX = 'aui-helper-clearfix';
 
 		var CSS_ITEMS_LEFT = 'lfr-items-left';
 

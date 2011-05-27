@@ -43,7 +43,7 @@ AUI().add(
 					PanelFloating.superclass.constructor.apply(instance, arguments);
 
 					if (!instance._inContainer) {
-						instance._container = A.Node.create('<div class="lfr-floating-container yui3-aui-helper-hidden"></div>');
+						instance._container = A.Node.create('<div class="lfr-floating-container aui-helper-hidden"></div>');
 
 						instance._panel.item(0).placeBefore(instance._container);
 						instance._container.append(instance._panel);
@@ -54,7 +54,7 @@ AUI().add(
 					instance._positionHelper = A.Node.create('<div class="lfr-position-helper"></div>');
 					instance._positionHelper.append(instance._container);
 
-					instance._positionHelper._hideClass = 'yui3-aui-helper-hidden-accessible';
+					instance._positionHelper._hideClass = 'aui-helper-hidden-accessible';
 
 					A.getBody().prepend(instance._positionHelper);
 

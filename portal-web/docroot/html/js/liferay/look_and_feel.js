@@ -439,8 +439,8 @@ AUI().add(
 
 				var customCSS = instance._getNodeById('lfr-custom-css');
 				var customCSSClassName = instance._getNodeById('lfr-custom-css-class-name');
-				var customCSSContainer = customCSS.ancestor('.yui3-aui-field');
-				var customCSSClassNameContainer = customCSSClassName.ancestor('.yui3-aui-field');
+				var customCSSContainer = customCSS.ancestor('.aui-field');
+				var customCSSClassNameContainer = customCSSClassName.ancestor('.aui-field');
 				var customPortletNoteHTML = '<p class="portlet-msg-info form-hint"></p>';
 				var customPortletNote = A.one('#lfr-portlet-info');
 				var refreshText = '';
@@ -544,7 +544,7 @@ AUI().add(
 					addIdLink = A.Node.create('<a href="javascript:;" id="lfr-add-id">' + Liferay.Language.get('add-a-css-rule-for-just-this-portlet') + '</a>');
 					addClassLink = A.Node.create('<a href="javascript:;" id="lfr-add-class">' + Liferay.Language.get('add-a-css-rule-for-all-portlets-like-this-one') + '</a>');
 
-					var updateOnTypeHolder = A.Node.create('<span class="yui3-aui-field"><span class="yui3-aui-field-content"></span></span>');
+					var updateOnTypeHolder = A.Node.create('<span class="aui-field"><span class="aui-field-content"></span></span>');
 					var updateOnTypeLabel = A.Node.create('<label>' + Liferay.Language.get('update-my-styles-as-i-type') + ' </label>');
 
 					updateOnType = A.Node.create('<input id="lfr-update-on-type" type="checkbox" />');
@@ -745,8 +745,8 @@ AUI().add(
 
 				instance._tabs = new A.TabView(
 					{
-						listNode: newPanel.one('.yui3-aui-tabview-list'),
-						contentNode: newPanel.one('.yui3-aui-tabview-content')
+						listNode: newPanel.one('.aui-tabview-list'),
+						contentNode: newPanel.one('.aui-tabview-content')
 					}
 				).render(newPanel.one('form'));
 
@@ -911,11 +911,11 @@ AUI().add(
 
 						var fieldset = checkBox.ancestor('fieldset');
 
-						var otherHolders = fieldset.all('.yui3-aui-field-row');
+						var otherHolders = fieldset.all('.aui-field-row');
 						var firstIndex = 0;
 
 						if (!otherHolders.size()) {
-							otherHolders = fieldset.all('.yui3-aui-field');
+							otherHolders = fieldset.all('.aui-field');
 							firstIndex = 1;
 						}
 
@@ -925,7 +925,7 @@ AUI().add(
 							function(holderItem, holderIndex, holderCollection) {
 								if (holderIndex > firstIndex) {
 									var fields = holderItem.all('input, select');
-									var colorPickerImages = holderItem.all('.yui3-aui-buttonitem');
+									var colorPickerImages = holderItem.all('.aui-buttonitem');
 
 									var action = 'show';
 									var disabled = false;

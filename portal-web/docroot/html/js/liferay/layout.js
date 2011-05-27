@@ -36,10 +36,10 @@ AUI().add(
 
 			OVER_NESTED_PORTLET: false,
 
-			PROXY_NODE: A.Node.create('<div class="lfr-portlet-proxy yui3-aui-portal-layout-proxy"></div>'),
+			PROXY_NODE: A.Node.create('<div class="lfr-portlet-proxy aui-portal-layout-proxy"></div>'),
 
 			PROXY_NODE_ITEM: A.Node.create(
-				'<div class="lfr-portlet-proxy yui3-aui-portal-layout-proxy">' +
+				'<div class="lfr-portlet-proxy aui-portal-layout-proxy">' +
 					'<div class="portlet-topper">' +
 						'<span class="portlet-title"></span>' +
 					'</div>' +
@@ -674,7 +674,7 @@ AUI().add(
 					_setupNodeResize: function(node) {
 						var instance = this;
 
-						var resizable = node.hasClass('yui3-aui-resize');
+						var resizable = node.hasClass('aui-resize');
 
 						if (!resizable) {
 							var resize = new A.Resize(

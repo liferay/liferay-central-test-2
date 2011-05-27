@@ -95,7 +95,7 @@
 							};
 
 							var isVisible = function(item, index, collection) {
-								return !item.hasClass('yui3-aui-helper-hidden');
+								return !item.hasClass('aui-helper-hidden');
 							};
 
 							new A.LiveSearch(

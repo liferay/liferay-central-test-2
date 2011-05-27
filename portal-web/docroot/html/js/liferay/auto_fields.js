@@ -11,12 +11,12 @@ AUI().add(
 
 		var TPL_AUTOROW_CONTROLS = '<span class="row-controls ' + CSS_AUTOROW_CONTROLS + '"><a href="javascript:;" class="add-row">{0}</a><a href="javascript:;" class="delete-row modify-link">{1}</a></span>';
 
-		var TPL_ADD_BUTTON = '<button type="button" class="add-row yui3-aui-buttonitem-content yui3-aui-buttonitem yui3-aui-state-default yui3-aui-buttonitem-icon-only yui3-aui-toolbar-first yui3-aui-toolbar-item" title=""><span class="yui3-aui-buttonitem-icon yui3-aui-icon yui3-aui-icon-plus"></span></button>';
+		var TPL_ADD_BUTTON = '<button type="button" class="add-row aui-buttonitem-content aui-buttonitem aui-state-default aui-buttonitem-icon-only aui-toolbar-first aui-toolbar-item" title=""><span class="aui-buttonitem-icon aui-icon aui-icon-plus"></span></button>';
 
-		var TPL_DELETE_BUTTON = '<button type="button" class="delete-row yui3-aui-buttonitem-content yui3-aui-buttonitem yui3-aui-state-default yui3-aui-buttonitem-icon-only yui3-aui-toolbar-last yui3-aui-toolbar-item" title=""><span class="yui3-aui-buttonitem-icon yui3-aui-icon yui3-aui-icon-minus"></span></button>';
+		var TPL_DELETE_BUTTON = '<button type="button" class="delete-row aui-buttonitem-content aui-buttonitem aui-state-default aui-buttonitem-icon-only aui-toolbar-last aui-toolbar-item" title=""><span class="aui-buttonitem-icon aui-icon aui-icon-minus"></span></button>';
 
 		var TPL_AUTOROW_CONTROLS =
-			'<span class="lfr-autorow-controls yui3-aui-toolbar yui3-aui-toolbar-horizontal"><span class="yui3-aui-toolbar-content">' +
+			'<span class="lfr-autorow-controls aui-toolbar aui-toolbar-horizontal"><span class="aui-toolbar-content">' +
 				TPL_ADD_BUTTON +
 				TPL_DELETE_BUTTON +
 			'</span></span>';
@@ -96,7 +96,7 @@ AUI().add(
 									instance.deleteRow(currentRow);
 								}
 							},
-							'.lfr-autorow-controls .yui3-aui-buttonitem'
+							'.lfr-autorow-controls .aui-buttonitem'
 						);
 
 						baseRows.each(

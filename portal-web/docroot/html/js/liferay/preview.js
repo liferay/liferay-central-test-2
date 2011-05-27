@@ -19,13 +19,13 @@ AUI().add(
 
 		var TPL_LOADING_COUNT = '<span class="lfr-preview-file-loading-count"></span>';
 
-		var TPL_LOADING_INDICATOR = '<div class="lfr-preview-file-loading-indicator yui3-aui-helper-hidden">{0}&nbsp;</div>';
+		var TPL_LOADING_INDICATOR = '<div class="lfr-preview-file-loading-indicator aui-helper-hidden">{0}&nbsp;</div>';
 
-		var TPL_MAX_ARROW_LEFT = '<a href="javascript:;" class="yui3-aui-image-viewer-arrow yui3-aui-image-viewer-arrow-left lfr-preview-file-arrow lfr-preview-file-arrow-left"></a>';
+		var TPL_MAX_ARROW_LEFT = '<a href="javascript:;" class="aui-image-viewer-arrow aui-image-viewer-arrow-left lfr-preview-file-arrow lfr-preview-file-arrow-left"></a>';
 
-		var TPL_MAX_ARROW_RIGHT = '<a href="javascript:;" class="yui3-aui-image-viewer-arrow yui3-aui-image-viewer-arrow-right lfr-preview-file-arrow lfr-preview-file-arrow-right"></a>';
+		var TPL_MAX_ARROW_RIGHT = '<a href="javascript:;" class="aui-image-viewer-arrow aui-image-viewer-arrow-right lfr-preview-file-arrow lfr-preview-file-arrow-right"></a>';
 
-		var TPL_MAX_CLOSE = '<a href="javascript:;" class="yui3-aui-image-viewer-close lfr-preview-file-close"></a>';
+		var TPL_MAX_CLOSE = '<a href="javascript:;" class="aui-image-viewer-close lfr-preview-file-close"></a>';
 
 		var TPL_MAX_CONTROLS = '<span class="lfr-preview-file-image-overlay-controls"></span>';
 
@@ -134,7 +134,7 @@ AUI().add(
 						if (imageListContentEl.scrollTop >= (imageListContentEl.scrollHeight - 700)) {
 							var loadingIndicator = instance._getLoadingIndicator();
 
-							if (loadingIndicator.hasClass('yui3-aui-helper-hidden')) {
+							if (loadingIndicator.hasClass('aui-helper-hidden')) {
 								loadingIndicator.show();
 
 								setTimeout(
