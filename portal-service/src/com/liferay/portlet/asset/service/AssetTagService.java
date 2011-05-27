@@ -99,15 +99,15 @@ public interface AssetTagService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.asset.model.AssetTag> getTags(
-		java.lang.String className, long classPK)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.List<com.liferay.portlet.asset.model.AssetTag> getTags(
 		long groupId, java.lang.String name, java.lang.String[] tagProperties,
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<com.liferay.portlet.asset.model.AssetTag> getTags(
+		java.lang.String className, long classPK)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getTagsCount(long groupId, java.lang.String name,

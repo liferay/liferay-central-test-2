@@ -108,17 +108,17 @@ public class AssetTagServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.asset.model.AssetTag> getTags(
-		java.lang.String className, long classPK)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return getService().getTags(className, classPK);
-	}
-
-	public static java.util.List<com.liferay.portlet.asset.model.AssetTag> getTags(
 		long groupId, java.lang.String name, java.lang.String[] tagProperties,
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getTags(groupId, name, tagProperties, start, end);
+	}
+
+	public static java.util.List<com.liferay.portlet.asset.model.AssetTag> getTags(
+		java.lang.String className, long classPK)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().getTags(className, classPK);
 	}
 
 	public static int getTagsCount(long groupId, java.lang.String name,

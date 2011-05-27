@@ -100,17 +100,17 @@ public class AssetTagServiceWrapper implements AssetTagService {
 	}
 
 	public java.util.List<com.liferay.portlet.asset.model.AssetTag> getTags(
-		java.lang.String className, long classPK)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return _assetTagService.getTags(className, classPK);
-	}
-
-	public java.util.List<com.liferay.portlet.asset.model.AssetTag> getTags(
 		long groupId, java.lang.String name, java.lang.String[] tagProperties,
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _assetTagService.getTags(groupId, name, tagProperties, start, end);
+	}
+
+	public java.util.List<com.liferay.portlet.asset.model.AssetTag> getTags(
+		java.lang.String className, long classPK)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _assetTagService.getTags(className, classPK);
 	}
 
 	public int getTagsCount(long groupId, java.lang.String name,
