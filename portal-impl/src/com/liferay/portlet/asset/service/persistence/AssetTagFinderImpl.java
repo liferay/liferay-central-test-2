@@ -280,6 +280,8 @@ public class AssetTagFinderImpl
 
 			String sql = CustomSQLUtil.get(COUNT_BY_G_N_P);
 
+			sql = StringUtil.replace(sql, "[$JOIN$]", getJoin(tagProperties));
+
 			if (inlineSQLHelper) {
 				sql = InlineSQLHelperUtil.replacePermissionCheck(
 					sql, AssetTag.class.getName(), "AssetTag.tagId", groupId);
