@@ -127,7 +127,7 @@ private String _buildTagsNavigation(long groupId, String selectedTagName, Portle
 		}
 		else {
 			portletURL.setParameter("tag", tag.getName());
- 
+
  			sb.append("<a href=\"");
 		}
 
