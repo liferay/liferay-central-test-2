@@ -96,8 +96,6 @@
 
 	</aui:field-wrapper>
 
-	<aui:input name="preferences--enableAssetLinks--" type="checkbox" value="<%= enableAssetLinks %>" />
-
 	<aui:input name="preferences--enablePrint--" type="checkbox" value="<%= enablePrint %>" />
 
 	<aui:input name="preferences--enableFlags--" type="checkbox" value="<%= enableFlags %>" />

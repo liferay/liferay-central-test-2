@@ -226,7 +226,6 @@ if (defaultAssetPublisherPortletId.equals(portletResource)) {
 	defaultAssetPublisher = true;
 }
 
-boolean enableAssetLinks = GetterUtil.getBoolean(preferences.getValue("enableAssetLinks", null));
 boolean enableRatings = GetterUtil.getBoolean(preferences.getValue("enableRatings", null));
 boolean enableComments = GetterUtil.getBoolean(preferences.getValue("enableComments", null));
 boolean enableCommentRatings = GetterUtil.getBoolean(preferences.getValue("enableCommentRatings", null));
