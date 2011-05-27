@@ -128,6 +128,8 @@ public class ActionKeys {
 
 	public static final String CONFIGURATION = "CONFIGURATION";
 
+	public static final String CUSTOMIZE = "CUSTOMIZE";
+
 	public static final String DEFINE_PERMISSIONS = "DEFINE_PERMISSIONS";
 
 	public static final String DELEGATE = "DELEGATE";
@@ -183,8 +185,6 @@ public class ActionKeys {
 	public static final String PERMISSIONS = "PERMISSIONS";
 
 	public static final String PERMISSIONS_USER = "PERMISSIONS_USER";
-
-	public static final String PERSONALIZE = "PERSONALIZE";
 
 	public static final String PREFERENCES = "PREFERENCES";
 

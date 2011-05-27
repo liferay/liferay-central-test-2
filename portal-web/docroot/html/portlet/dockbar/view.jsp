@@ -40,7 +40,7 @@ for (String portletId : PropsValues.DOCKBAR_ADD_PORTLETS) {
 			<a href="javascript:;"><img alt='<liferay-ui:message key="pin-the-dockbar" />' src="<%= HtmlUtil.escape(themeDisplay.getPathThemeImages()) %>/spacer.png" /></a>
 		</li>
 
-		<c:if test="<%= (group != null) && !group.isControlPanel() && (!group.hasStagingGroup() || group.isStagingGroup()) && (LayoutPermissionUtil.contains(permissionChecker, layout, ActionKeys.UPDATE) || (layoutTypePortlet.isPersonalizable() && layoutTypePortlet.isPersonalizedView() && LayoutPermissionUtil.contains(permissionChecker, layout, ActionKeys.PERSONALIZE))) %>">
+		<c:if test="<%= (group != null) && !group.isControlPanel() && (!group.hasStagingGroup() || group.isStagingGroup()) && (LayoutPermissionUtil.contains(permissionChecker, layout, ActionKeys.UPDATE) || (layoutTypePortlet.isPersonalizable() && layoutTypePortlet.isPersonalizedView() && LayoutPermissionUtil.contains(permissionChecker, layout, ActionKeys.CUSTOMIZE))) %>">
 			<li class="add-content has-submenu" id="<portlet:namespace />addContent">
 				<a class="menu-button" href="javascript:;">
 					<span>
@@ -136,7 +136,7 @@ for (String portletId : PropsValues.DOCKBAR_ADD_PORTLETS) {
 
 							<c:if test="<%= themeDisplay.isShowPagePersonalizationIcon() %>">
 								<li class="manage-page-personalization">
-									<aui:a cssClass='<%= themeDisplay.isFreeformLayout() ? "disabled" : StringPool.BLANK %>' href='<%= themeDisplay.isFreeformLayout() ? null : "javascript:;" %>' id="managePersonalization" label='<%= (group.isLayoutSetPrototype() || group.isLayoutPrototype()) ? "page-modifications" : "page-personalizations" %>' title='<%= themeDisplay.isFreeformLayout() ? "it-is-not-possible-to-specify-personalization-settings-for-freeform-layouts" : null %>' />
+									<aui:a cssClass='<%= themeDisplay.isFreeformLayout() ? "disabled" : StringPool.BLANK %>' href='<%= themeDisplay.isFreeformLayout() ? null : "javascript:;" %>' id="managePersonalization" label='<%= (group.isLayoutSetPrototype() || group.isLayoutPrototype()) ? "page-modifications" : "page-customizations" %>' title='<%= themeDisplay.isFreeformLayout() ? "it-is-not-possible-to-specify-customization-settings-for-freeform-layouts" : null %>' />
 								</li>
 							</c:if>
 
@@ -164,8 +164,8 @@ for (String portletId : PropsValues.DOCKBAR_ADD_PORTLETS) {
 
 			<c:if test="<%= themeDisplay.isShowPagePersonalizationIcon() %>">
 				<div class="aui-helper-hidden layout-personalizable-controls" id="<portlet:namespace />layout-personalizable-controls">
-					<span title='<liferay-ui:message key="personalizable-help" />'>
-						<aui:input helpMessage='<%= (group.isLayoutSetPrototype() || group.isLayoutPrototype()) ? "modifiable-help" : "personalizable-help" %>' inputCssClass="layout-personalizable-checkbox" id="TypeSettingsProperties--[COLUMN_ID]-personalizable--" label='<%= (group.isLayoutSetPrototype() || group.isLayoutPrototype()) ? "modifiable" : "personalizable" %>' name="TypeSettingsProperties--[COLUMN_ID]-personalizable--" type="checkbox" useNamespace="<%= false %>" />
+					<span title='<liferay-ui:message key="customizable-help" />'>
+						<aui:input helpMessage='<%= (group.isLayoutSetPrototype() || group.isLayoutPrototype()) ? "modifiable-help" : "customizable-help" %>' inputCssClass="layout-personalizable-checkbox" id="TypeSettingsProperties--[COLUMN_ID]-personalizable--" label='<%= (group.isLayoutSetPrototype() || group.isLayoutPrototype()) ? "modifiable" : "customizable" %>' name="TypeSettingsProperties--[COLUMN_ID]-personalizable--" type="checkbox" useNamespace="<%= false %>" />
 					</span>
 				</div>
 			</c:if>
@@ -353,21 +353,21 @@ for (String portletId : PropsValues.DOCKBAR_ADD_PORTLETS) {
 	</c:if>
 </div>
 
-<c:if test="<%= !(group.isLayoutPrototype() || group.isLayoutSetPrototype()) && layoutTypePortlet.isPersonalizable() && LayoutPermissionUtil.contains(permissionChecker, layout, ActionKeys.PERSONALIZE) %>">
+<c:if test="<%= !(group.isLayoutPrototype() || group.isLayoutSetPrototype()) && layoutTypePortlet.isPersonalizable() && LayoutPermissionUtil.contains(permissionChecker, layout, ActionKeys.CUSTOMIZE) %>">
 	<div class="page-personalization-bar">
 		<img alt="" class="personalized-icon" src="<%= themeDisplay.getPathThemeImages() %>/common/guest_icon.png" />
 
 		<c:choose>
 			<c:when test="<%= layoutTypePortlet.isPersonalizedView() %>">
-				<liferay-ui:message key="you-can-personalize-this-page" />
+				<liferay-ui:message key="you-can-customize-this-page" />
 
-				<liferay-ui:icon-help message="personalizable-user-help" />
+				<liferay-ui:icon-help message="customizable-user-help" />
 			</c:when>
 			<c:otherwise>
-				<liferay-ui:message key="this-is-the-default-page-without-your-personalizations" />
+				<liferay-ui:message key="this-is-the-default-page-without-your-customizations" />
 
 				<c:if test="<%= LayoutPermissionUtil.contains(permissionChecker, layout, ActionKeys.UPDATE) %>">
-					<liferay-ui:icon-help message="personalizable-admin-help" />
+					<liferay-ui:icon-help message="customizable-admin-helpp" />
 				</c:if>
 			</c:otherwise>
 		</c:choose>
@@ -379,7 +379,7 @@ for (String portletId : PropsValues.DOCKBAR_ADD_PORTLETS) {
 			String taglibMessage = "view-default-page";
 
 			if (!layoutTypePortlet.isPersonalizedView()) {
-				taglibMessage = "view-my-personalized-page";
+				taglibMessage = "view-my-customized-pagee";
 			}
 			else if (layoutTypePortlet.isDefaultUpdated()) {
 				taglibImage = "activate";
@@ -396,10 +396,10 @@ for (String portletId : PropsValues.DOCKBAR_ADD_PORTLETS) {
 			</liferay-portlet:actionURL>
 
 			<%
-			String taglibURL = "javascript:if(confirm('" + UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-reset-your-personalizations-to-default") + "')){submitForm(document.hrefFm, '" + HttpUtil.encodeURL(resetPersonalizationViewURL) + "');}";
+			String taglibURL = "javascript:if(confirm('" + UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-reset-your-customizations-to-default") + "')){submitForm(document.hrefFm, '" + HttpUtil.encodeURL(resetPersonalizationViewURL) + "');}";
 			%>
 
-			<liferay-ui:icon image="../portlet/refresh" label="<%= true %>" message="reset-my-personalizations" url="<%= taglibURL %>" />
+			<liferay-ui:icon image="../portlet/refresh" label="<%= true %>" message="reset-my-customizations" url="<%= taglibURL %>" />
 		</span>
 	</div>
 

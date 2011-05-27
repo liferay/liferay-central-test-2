@@ -1347,7 +1347,7 @@ public class ServicePreAction extends Action {
 
 			if (signedIn && personalizable && personalizedView &&
 				LayoutPermissionUtil.contains(
-					permissionChecker, layout, ActionKeys.PERSONALIZE)) {
+					permissionChecker, layout, ActionKeys.CUSTOMIZE)) {
 
 				PortalPreferences portalPreferences =
 					PortletPreferencesFactoryUtil.getPortalPreferences(
@@ -1692,7 +1692,7 @@ public class ServicePreAction extends Action {
 
 				boolean hasPersonalizePermission =
 					LayoutPermissionUtil.contains(
-						permissionChecker, layout, ActionKeys.PERSONALIZE);
+						permissionChecker, layout, ActionKeys.CUSTOMIZE);
 
 				if (hasPersonalizePermission && personalizedView) {
 					themeDisplay.setShowAddContentIconPermission(true);

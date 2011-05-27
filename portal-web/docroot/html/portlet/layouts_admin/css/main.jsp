@@ -289,7 +289,7 @@
 		}
 	}
 
-	.personalization-settings {
+	.customization-settings {
 		.portlet-column {
 			border: 1px solid #CCC;
 			margin: 2px;

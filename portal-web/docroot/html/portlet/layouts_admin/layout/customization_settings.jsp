@@ -56,25 +56,25 @@ if (selLayout != null) {
 }
 %>
 
-<liferay-ui:error-marker key="errorSection" value="personalization-settings" />
+<liferay-ui:error-marker key="errorSection" value="customization-settings" />
 
 <aui:model-context bean="<%= selLayout %>" model="<%= Layout.class %>" />
 
-<h3><liferay-ui:message key="personalization-settings" /></h3>
+<h3><liferay-ui:message key="customization-settings" /></h3>
 
 <c:choose>
 	<c:when test="<%= curFreeformLayout %>">
 		<div class="portlet-msg-alert">
-			<liferay-ui:message key="it-is-not-possible-to-specify-personalization-settings-for-freeform-layouts" />
+			<liferay-ui:message key="it-is-not-possible-to-specify-customization-settings-for-freeform-layouts" />
 		</div>
 	</c:when>
 	<c:otherwise>
 		<div class="portlet-msg-info">
-			<liferay-ui:message key="personalizable-help" />
+			<liferay-ui:message key="customizable-help" />
 		</div>
 	</c:otherwise>
 </c:choose>
 
-<div class="personalization-settings">
+<div class="customization-settings">
 	<%= content %>
 </div>

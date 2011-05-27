@@ -91,7 +91,7 @@
 
 			Data: {
 				isPersonalizationView: function() {
-					return <%= (layoutTypePortlet.isPersonalizable() && LayoutPermissionUtil.contains(permissionChecker, layout, ActionKeys.PERSONALIZE)) %>;
+					return <%= (layoutTypePortlet.isPersonalizable() && LayoutPermissionUtil.contains(permissionChecker, layout, ActionKeys.CUSTOMIZE)) %>;
 				}
 			},
 

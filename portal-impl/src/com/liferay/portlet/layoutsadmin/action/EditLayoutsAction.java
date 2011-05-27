@@ -372,7 +372,7 @@ public class EditLayoutsAction extends PortletAction {
 
 		if (cmd.equals("reset_personalized_view")) {
 			if (!LayoutPermissionUtil.contains(
-					permissionChecker, layout, ActionKeys.PERSONALIZE)) {
+					permissionChecker, layout, ActionKeys.CUSTOMIZE)) {
 
 				throw new PrincipalException();
 			}
