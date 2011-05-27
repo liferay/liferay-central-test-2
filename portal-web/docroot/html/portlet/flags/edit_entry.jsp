@@ -25,13 +25,13 @@ long reportedUserId = ParamUtil.getLong(request, "reportedUserId");
 %>
 
 <style type="text/css">
-	.portlet-flags .yui3-aui-form fieldset {
+	.portlet-flags .aui-form fieldset {
 		border: none;
 		padding: 0;
 		width: 100%;
 	}
 
-	.portlet-flags .yui3-aui-form .yui3-aui-fieldset label {
+	.portlet-flags .aui-form .aui-fieldset label {
 		font-weight: bold;
 	}
 </style>
@@ -59,7 +59,7 @@ long reportedUserId = ParamUtil.getLong(request, "reportedUserId");
 				<aui:option label="other" />
 			</aui:select>
 
-			<span class="yui3-aui-helper-hidden" id="<portlet:namespace />otherReasonContainer">
+			<span class="aui-helper-hidden" id="<portlet:namespace />otherReasonContainer">
 				<aui:input name="otherReason" />
 			</span>
 
@@ -74,13 +74,13 @@ long reportedUserId = ParamUtil.getLong(request, "reportedUserId");
 	</aui:form>
 </div>
 
-<div class="yui3-aui-helper-hidden" id="<portlet:namespace />confirmation">
+<div class="aui-helper-hidden" id="<portlet:namespace />confirmation">
 	<p><strong><liferay-ui:message key="thank-you-for-your-report" /></strong></p>
 
 	<p><%= LanguageUtil.format(pageContext, "although-we-cannot-disclose-our-final-decision,-we-do-review-every-report-and-appreciate-your-effort-to-make-sure-x-is-a-safe-environment-for-everyone", company.getName()) %></p>
 </div>
 
-<div class="yui3-aui-helper-hidden" id="<portlet:namespace />error">
+<div class="aui-helper-hidden" id="<portlet:namespace />error">
 	<p><strong><liferay-ui:message key="an-error-occurred-while-sending-the-report.-please-try-again-in-a-few-minutes" /></strong></p>
 </div>
 

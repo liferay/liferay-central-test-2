@@ -243,7 +243,7 @@
 	}
 
 	.calendar-event-details {
-		.yui3-aui-field-wrapper-content {
+		.aui-field-wrapper-content {
 			margin: 0;
 		}
 

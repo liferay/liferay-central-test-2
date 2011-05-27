@@ -45,7 +45,7 @@ boolean deletePortrait = ParamUtil.getBoolean(request, "deletePortrait");
 
 <h3><liferay-ui:message key="details" /></h3>
 
-<aui:fieldset column="<%= true %>" cssClass="yui3-aui-w50">
+<aui:fieldset column="<%= true %>" cssClass="aui-w50">
 	<aui:select bean="<%= selContact %>" label="title[person]" model="<%= Contact.class %>" name="prefixId" listType="<%= ListTypeConstants.CONTACT_PREFIX %>" listTypeFieldName="prefixId" showEmptyOption="<%= true %>" />
 
 	<liferay-ui:error exception="<%= DuplicateUserScreenNameException.class %>" message="the-screen-name-you-requested-is-already-taken" />
@@ -110,7 +110,7 @@ boolean deletePortrait = ParamUtil.getBoolean(request, "deletePortrait");
 	<aui:select bean="<%= selContact %>" label="suffix" model="<%= Contact.class %>" name="suffixId" listType="<%= ListTypeConstants.CONTACT_SUFFIX %>" listTypeFieldName="suffixId" showEmptyOption="<%= true %>" />
 </aui:fieldset>
 
-<aui:fieldset column="<%= true %>" cssClass="yui3-aui-w50">
+<aui:fieldset column="<%= true %>" cssClass="aui-w50">
 	<div>
 		<c:if test="<%= selUser != null %>">
 			<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>" var="editUserPortraitURL">

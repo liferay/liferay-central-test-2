@@ -49,7 +49,7 @@ long imageMaxSize = PrefsPropsUtil.getLong(PropsKeys.IG_IMAGE_MAX_SIZE) / 1024;
 		<div class="lfr-upload-container" id="<portlet:namespace />fileUpload"></div>
 	</div>
 
-	<div class="lfr-fallback yui3-aui-helper-hidden" id="<portlet:namespace />fallback">
+	<div class="lfr-fallback aui-helper-hidden" id="<portlet:namespace />fallback">
 
 	<aui:script use="liferay-upload">
 		new Liferay.Upload(

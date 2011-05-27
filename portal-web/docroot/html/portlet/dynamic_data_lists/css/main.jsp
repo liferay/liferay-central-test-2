@@ -18,20 +18,20 @@
 
 .portlet-dynamic-data-lists {
 	.ddl-form {
-		.yui3-aui-field-radio {
-			.yui3-aui-field {
+		.aui-field-radio {
+			.aui-field {
 				display: block;
 				margin-left: 10px;
 			}
 		}
 
-		.yui3-aui-field-text {
+		.aui-field-text {
 			display: block;
 
-			.yui3-aui-field-element {
+			.aui-field-element {
 				display: block;
 
-				.yui3-aui-field-input {
+				.aui-field-input {
 					width: 100%;
 				}
 			}
@@ -41,7 +41,7 @@
 	.lfr-spreadsheet-add-rows-buttons {
 		padding: 5px;
 
-		.yui3-aui-field-label {
+		.aui-field-label {
 			text-transform: lowercase;
 		}
 	}
@@ -73,26 +73,26 @@
 		}
 
 		td.yui3-datatable-asc, td.yui3-datatable-desc {
-			&.yui3-aui-datatable-cell-selected {
+			&.aui-datatable-cell-selected {
 				background-color: #6688EE;
 			}
 		}
 	}
 }
 
-.yui3-aui-basecelleditor {
+.aui-basecelleditor {
 	z-index: 999 !important;
 
-	.yui3-aui-buttonitem-content {
+	.aui-buttonitem-content {
 		padding: 3px 3px 2px 1px;
 	}
 
-	[class~="yui3-aui-form-validator-message"] {
+	[class~="aui-form-validator-message"] {
 		clip: auto;
 		width: auto;
 	}
 }
 
-.webkit .yui3-aui-basecelleditor .yui3-aui-buttonitem-label-only {
+.webkit .aui-basecelleditor .aui-buttonitem-label-only {
 	padding-bottom: 2px;
 }

@@ -50,11 +50,11 @@ type = ParamUtil.getString(request, "type", type);
 	<liferay-ui:error exception="<%= NoSuchArticleException.class %>" message="the-web-content-could-not-be-found" />
 
 	<div class="portlet-msg-info">
-		<span class="displaying-help-message-holder <%= article == null ? StringPool.BLANK : "yui3-aui-helper-hidden" %>">
+		<span class="displaying-help-message-holder <%= article == null ? StringPool.BLANK : "aui-helper-hidden" %>">
 			<liferay-ui:message key="please-select-a-web-content-from-the-list-below" />
 		</span>
 
-		<span class="displaying-article-id-holder <%= article == null ? "yui3-aui-helper-hidden" : StringPool.BLANK %>">
+		<span class="displaying-article-id-holder <%= article == null ? "aui-helper-hidden" : StringPool.BLANK %>">
 			<liferay-ui:message key="displaying-content" />: <span class="displaying-article-id"><%= article != null ? HtmlUtil.escape(article.getTitle(locale)) : StringPool.BLANK %></span>
 		</span>
 	</div>
@@ -214,7 +214,7 @@ type = ParamUtil.getString(request, "type", type);
 	<aui:input name="preferences--articleId--" type="hidden" value="<%= articleId %>" />
 	<aui:input name="preferences--templateId--" type="hidden" value="<%= templateId %>" />
 
-	<aui:fieldset cssClass="yui3-aui-helper-hidden">
+	<aui:fieldset cssClass="aui-helper-hidden">
 		<aui:field-wrapper label="portlet-id">
 			<%= portletResource %>
 		</aui:field-wrapper>

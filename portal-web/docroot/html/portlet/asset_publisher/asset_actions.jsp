@@ -52,7 +52,7 @@ if (themeDisplay.getScopeGroup().isLayout()) {
 		<liferay-ui:icon
 			image="edit"
 			label="<%= showIconLabel %>"
-			message='<%= showIconLabel ? LanguageUtil.format(pageContext, "edit-x-x", new Object[] {"yui3-aui-helper-hidden-accessible", HtmlUtil.escape(assetRenderer.getTitle(locale))}) : LanguageUtil.format(pageContext, "edit-x", HtmlUtil.escape(assetRenderer.getTitle(locale))) %>'
+			message='<%= showIconLabel ? LanguageUtil.format(pageContext, "edit-x-x", new Object[] {"aui-helper-hidden-accessible", HtmlUtil.escape(assetRenderer.getTitle(locale))}) : LanguageUtil.format(pageContext, "edit-x", HtmlUtil.escape(assetRenderer.getTitle(locale))) %>'
 			url="<%= taglibEditURL %>"
 		/>
 	</div>

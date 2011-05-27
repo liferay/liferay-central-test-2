@@ -123,7 +123,7 @@ portletURL.setParameter("struts_action", "/message_boards/view");
 					<aui:input name="breadcrumbsCategoryId" type="hidden" value="<%= categoryId %>" />
 					<aui:input name="searchCategoryId" type="hidden" value="<%= categoryId %>" />
 
-					<span class="yui3-aui-search-bar">
+					<span class="aui-search-bar">
 						<aui:input id="keywords1" inlineField="<%= true %>" label="" name="keywords" size="30" title="search-messages" type="text" />
 
 						<aui:button type="submit" value="search" />

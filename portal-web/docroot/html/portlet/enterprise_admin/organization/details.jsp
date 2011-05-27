@@ -60,7 +60,7 @@ if (organization != null) {
 
 <h3><liferay-ui:message key="details" /></h3>
 
-<aui:fieldset column="<%= true %>" cssClass="yui3-aui-w50">
+<aui:fieldset column="<%= true %>" cssClass="aui-w50">
 	<liferay-ui:error exception="<%= DuplicateOrganizationException.class %>" message="the-organization-name-is-already-taken" />
 	<liferay-ui:error exception="<%= OrganizationNameException.class %>" message="please-enter-a-valid-name" />
 
@@ -104,7 +104,7 @@ if (organization != null) {
 
 	<liferay-ui:error exception="<%= NoSuchCountryException.class %>" message="please-select-a-country" />
 
-	<div class='<%= GetterUtil.getBoolean(PropsUtil.get(PropsKeys.ORGANIZATIONS_COUNTRY_ENABLED, new Filter(String.valueOf(type)))) ? StringPool.BLANK : "yui3-aui-helper-hidden" %>' id="<portlet:namespace />countryDiv">
+	<div class='<%= GetterUtil.getBoolean(PropsUtil.get(PropsKeys.ORGANIZATIONS_COUNTRY_ENABLED, new Filter(String.valueOf(type)))) ? StringPool.BLANK : "aui-helper-hidden" %>' id="<portlet:namespace />countryDiv">
 		<aui:select label="country" name="countryId" />
 
 		<aui:select label="region" name="regionId" />
@@ -117,7 +117,7 @@ if (organization != null) {
 	</c:if>
 </aui:fieldset>
 
-<aui:fieldset column="<%= true %>" cssClass="yui3-aui-w50">
+<aui:fieldset column="<%= true %>" cssClass="aui-w50">
 	<div>
 		<c:if test="<%= organization != null %>">
 

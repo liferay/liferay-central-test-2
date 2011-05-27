@@ -134,7 +134,7 @@ long[] pooledActorsIds = WorkflowTaskManagerUtil.getPooledActorsIds(company.getC
 	</c:if>
 </liferay-ui:icon-menu>
 
-<div class="yui3-aui-helper-hidden" id="<%= randomId %>updateAsignee">
+<div class="aui-helper-hidden" id="<%= randomId %>updateAsignee">
 	<c:if test="<%= _hasOtherAssignees(pooledActorsIds, workflowTask, user) %>">
 		<aui:select label="assign-to" name="assigneeUserId">
 
@@ -155,15 +155,15 @@ long[] pooledActorsIds = WorkflowTaskManagerUtil.getPooledActorsIds(company.getC
 	</c:if>
 </div>
 
-<div class="yui3-aui-helper-hidden" id="<%= randomId %>updateAsigneeToMe">
+<div class="aui-helper-hidden" id="<%= randomId %>updateAsigneeToMe">
 	<aui:input name="asigneeUserId" type="hidden" value="<%= user.getUserId() %>" />
 </div>
 
-<div class="yui3-aui-helper-hidden" id="<%= randomId %>updateDueDate">
+<div class="aui-helper-hidden" id="<%= randomId %>updateDueDate">
 	<aui:input bean="<%= workflowTask %>" model="<%= WorkflowTask.class %>" name="dueDate" />
 </div>
 
-<div class="yui3-aui-helper-hidden" id="<%= randomId %>updateComments">
+<div class="aui-helper-hidden" id="<%= randomId %>updateComments">
 	<aui:input cols="55" name="comment" type="textarea" rows="10" />
 </div>
 

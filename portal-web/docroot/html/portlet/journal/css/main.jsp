@@ -201,7 +201,7 @@
 			display: none;
 		}
 
-		.yui3-aui-tree-sub-placeholder {
+		.aui-tree-sub-placeholder {
 			margin-top: 10px;
 		}
 
@@ -241,7 +241,7 @@
 		}
 	}
 
-	.component-group .yui3-aui-tree-placeholder {
+	.component-group .aui-tree-placeholder {
 		display: none;
 	}
 
@@ -254,7 +254,7 @@
 		margin-bottom: 10px;
 	}
 
-	.journal-article-variable-name .yui3-aui-field-label {
+	.journal-article-variable-name .aui-field-label {
 		font-weight: normal;
 		margin-right: 5px;
 	}
@@ -368,11 +368,11 @@
 	}
 
 	.lfr-template-editor {
-		.yui3-aui-field-element, .yui3-aui-field-content, .yui3-aui-field-input-text {
+		.aui-field-element, .aui-field-content, .aui-field-input-text {
 			display: block;
 		}
 
-		.yui3-aui-field-input-text {
+		.aui-field-input-text {
 			height: 400px;
 		}
 	}
@@ -430,7 +430,7 @@
 					}
 				}
 
-				&.yui3-aui-dd-draggable .journal-article-move-handler {
+				&.aui-dd-draggable .journal-article-move-handler {
 					background: transparent url(<%= themeImagesPath %>/application/handle_sort_vertical.png) no-repeat scroll right 50%;
 					cursor: move;
 					display: block;
@@ -481,7 +481,7 @@
 			padding-top: 0;
 		}
 
-		.yui3-aui-placeholder, .yui3-aui-tree-placeholder, .yui3-aui-tree-sub-placeholder {
+		.aui-placeholder, .aui-tree-placeholder, .aui-tree-sub-placeholder {
 			-ms-filter: alpha(opacity=75);
 			background: #fff;
 			border: 1px #cdcdcd dashed;
@@ -649,7 +649,7 @@
 	visibility: hidden;
 	width: 100px;
 
-	&.yui3-aui-draggable-dragging {
+	&.aui-draggable-dragging {
 		font-size: 15px;
 	}
 
@@ -671,18 +671,18 @@
 }
 
 .journal-article-edit-field-wrapper {
-	&.yui3-aui-overlaycontextpanel {
+	&.aui-overlaycontextpanel {
 		margin: 0 13px 0 0;
 		padding: 0;
 		position: relative;
 	}
 
-	&.yui3-aui-overlaycontextpanel-container, .yui3-aui-overlaycontextpanel-container {
+	&.aui-overlaycontextpanel-container, .aui-overlaycontextpanel-container {
 		background-color: #EBFFEE;
 		border-color: #C3E7CC;
 	}
 
-	&.yui3-aui-overlaycontextpanel-arrow-tl .yui3-aui-overlaycontextpanel-pointer-inner {
+	&.aui-overlaycontextpanel-arrow-tl .aui-overlaycontextpanel-pointer-inner {
 		border-bottom: 10px solid #EBFFEE;
 	}
 
@@ -697,7 +697,7 @@
 	width: 180px;
 	z-index: 420;
 
-	.yui3-aui-field {
+	.aui-field {
 		padding: 0;
 
 		.textarea {

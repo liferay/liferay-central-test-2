@@ -585,7 +585,7 @@ portletURL.setParameter("tabs1", tabs1);
 		var toggleDisabled = function(disabled) {
 			deleteButton.attr('disabled', disabled);
 
-			deleteButtonWrapper.toggleClass('yui3-aui-button-disabled', disabled);
+			deleteButtonWrapper.toggleClass('aui-button-disabled', disabled);
 		};
 
 		var resultsGrid = A.one('.results-grid');

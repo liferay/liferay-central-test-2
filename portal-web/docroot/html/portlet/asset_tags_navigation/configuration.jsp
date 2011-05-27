@@ -37,7 +37,7 @@ List<AssetRendererFactory> assetRendererFactories = AssetRendererFactoryRegistry
 			<li class="tree-item">
 				<aui:input name="preferences--showAssetCount--" type="checkbox" value="<%= showAssetCount %>" />
 
-				<ul class="lfr-tree lfr-component yui3-aui-helper-hidden" id="<portlet:namespace />assetCountOptions">
+				<ul class="lfr-tree lfr-component aui-helper-hidden" id="<portlet:namespace />assetCountOptions">
 					<li class="tree-item">
 						<aui:select helpMessage="asset-type-asset-count-help" label="asset-type" name="preferences--classNameId--">
 							<aui:option label="any" value="<%= classNameId == 0 %>" />

@@ -24,7 +24,7 @@ boolean enabled = SocialEquityGroupSettingLocalServiceUtil.isEnabled(themeDispla
 	<aui:input label="enable-social-equity" name="enabled" onClick="<%= taglibEnable %>" type="checkbox" value="<%= enabled %>" />
 </h4>
 
-<div class="<%= enabled ? StringPool.BLANK : "yui3-aui-helper-hidden" %>" id="<%= renderResponse.getNamespace() %>settings">
+<div class="<%= enabled ? StringPool.BLANK : "aui-helper-hidden" %>" id="<%= renderResponse.getNamespace() %>settings">
 
 	<%
 	Map<String, List<SocialEquityActionMapping>> equityActionMappingsMap = (Map<String, List<SocialEquityActionMapping>>)request.getAttribute(WebKeys.SOCIAL_EQUITY_ACTION_MAPPINGS_MAP);
@@ -43,7 +43,7 @@ boolean enabled = SocialEquityGroupSettingLocalServiceUtil.isEnabled(themeDispla
 			<aui:input label="<%= ResourceActionsUtil.getModelResource(locale, className) %>" name='<%= className + ".enabled" %>' onClick='<%= taglibEnable %>' type="checkbox" value="<%= enabled %>" />
 		</h4>
 
-		<div class="<%= enabled ? StringPool.BLANK : "yui3-aui-helper-hidden" %>" id="<%= renderResponse.getNamespace() + StringUtil.replace(className, ".", "_") %>">
+		<div class="<%= enabled ? StringPool.BLANK : "aui-helper-hidden" %>" id="<%= renderResponse.getNamespace() + StringUtil.replace(className, ".", "_") %>">
 			<br />
 
 			<liferay-ui:search-container

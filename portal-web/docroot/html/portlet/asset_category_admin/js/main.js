@@ -17,9 +17,9 @@ AUI().add(
 
 		var CSS_ACTIVE_AREA = 'active-area';
 
-		var CSS_COLUMN_WIDTH_CATEGORY = 'yui3-aui-w40';
+		var CSS_COLUMN_WIDTH_CATEGORY = 'aui-w40';
 
-		var CSS_COLUMN_WIDTH_CATEGORY_FULL = 'yui3-aui-w75';
+		var CSS_COLUMN_WIDTH_CATEGORY_FULL = 'aui-w75';
 
 		var EXCEPTION_NO_SUCH_VOCABULARY = 'NoSuchVocabularyException';
 
@@ -35,9 +35,9 @@ AUI().add(
 
 		var MESSAGE_TYPE_SUCCESS = 'success';
 
-		var TPL_MESSAGES_CATEGORY = '<div class="yui3-aui-helper-hidden lfr-message-response" id="vocabulary-category-messages" />';
+		var TPL_MESSAGES_CATEGORY = '<div class="aui-helper-hidden lfr-message-response" id="vocabulary-category-messages" />';
 
-		var TPL_MESSAGES_VOCABULARY = '<div class="yui3-aui-helper-hidden lfr-message-response" id="vocabulary-messages" />';
+		var TPL_MESSAGES_VOCABULARY = '<div class="aui-helper-hidden lfr-message-response" id="vocabulary-messages" />';
 
 		var TPL_VOCABULARY_LIST = '<li class="vocabulary-category results-row {cssClassSelected}" data-vocabulary="{name}" data-vocabularyId="{vocabularyId}" tabIndex="0">' +
 			'<div class="vocabulary-content-wrapper">' +
@@ -773,7 +773,7 @@ AUI().add(
 
 						categoryFormAdd.on('submit', instance._onCategoryFormSubmit, instance, categoryFormAdd);
 
-						var closeButton = categoryFormAdd.one('.yui3-aui-button-input-cancel');
+						var closeButton = categoryFormAdd.one('.aui-button-input-cancel');
 
 						closeButton.on('click', instance._onCategoryAddButtonClose, instance);
 
@@ -793,7 +793,7 @@ AUI().add(
 
 						categoryFormEdit.on('submit', instance._onCategoryFormSubmit, instance, categoryFormEdit);
 
-						var closeButton = categoryFormEdit.one('.yui3-aui-button-input-cancel');
+						var closeButton = categoryFormEdit.one('.aui-button-input-cancel');
 
 						closeButton.on(
 							'click',
@@ -830,7 +830,7 @@ AUI().add(
 
 						vocabularyFormAdd.on('submit', instance._onVocabularyFormSubmit, instance, vocabularyFormAdd);
 
-						var closeButton = vocabularyFormAdd.one('.yui3-aui-button-input-cancel');
+						var closeButton = vocabularyFormAdd.one('.aui-button-input-cancel');
 
 						closeButton.on(
 							'click',
@@ -857,7 +857,7 @@ AUI().add(
 
 						vocabularyFormEdit.on('submit', instance._onVocabularyFormSubmit, instance, vocabularyFormEdit);
 
-						var closeButton = vocabularyFormEdit.one('.yui3-aui-button-input-cancel');
+						var closeButton = vocabularyFormEdit.one('.aui-button-input-cancel');
 
 						closeButton.on(
 							'click',
@@ -1046,10 +1046,10 @@ AUI().add(
 						var node = A.one(exp);
 
 						if (node) {
-							var parentNode = node.ancestor('.yui3-aui-column');
+							var parentNode = node.ancestor('.aui-column');
 
 							if (parentNode) {
-								parentNode.previous('.yui3-aui-column').replaceClass(CSS_COLUMN_WIDTH_CATEGORY, CSS_COLUMN_WIDTH_CATEGORY_FULL);
+								parentNode.previous('.aui-column').replaceClass(CSS_COLUMN_WIDTH_CATEGORY, CSS_COLUMN_WIDTH_CATEGORY_FULL);
 								parentNode.hide();
 							}
 						}
@@ -1507,7 +1507,7 @@ AUI().add(
 												results,
 												function(item, index, collection) {
 													var nodeWidget = A.Widget.getByNode(item.node);
-													var nodeVisible = nodeWidget.get('boundingBox').hasClass('yui3-aui-helper-hidden');
+													var nodeVisible = nodeWidget.get('boundingBox').hasClass('aui-helper-hidden');
 
 													if (!nodeVisible) {
 														nodeWidget.eachParent(
@@ -1521,7 +1521,7 @@ AUI().add(
 										}
 									},
 									data: function(node) {
-										return node.one('.yui3-aui-tree-label').html();
+										return node.one('.aui-tree-label').html();
 									},
 									nodes: instance._categoryItemSelector
 								}
@@ -1743,10 +1743,10 @@ AUI().add(
 						var element = A.one(exp);
 
 						if (element) {
-							var parentNode = element.ancestor('.yui3-aui-column');
+							var parentNode = element.ancestor('.aui-column');
 
 							if (parentNode) {
-								parentNode.previous('.yui3-aui-column').replaceClass(CSS_COLUMN_WIDTH_CATEGORY_FULL, CSS_COLUMN_WIDTH_CATEGORY);
+								parentNode.previous('.aui-column').replaceClass(CSS_COLUMN_WIDTH_CATEGORY_FULL, CSS_COLUMN_WIDTH_CATEGORY);
 
 								parentNode.show();
 
@@ -1878,7 +1878,7 @@ AUI().add(
 						ioCategoryUpdate.start();
 					},
 
-					_categoryItemSelector: '.vocabulary-categories .yui3-aui-tree-node',
+					_categoryItemSelector: '.vocabulary-categories .aui-tree-node',
 					_categoryContainerSelector: '.vocabulary-categories',
 					_selectedVocabulary: null,
 					_selectedVocabularyId: null,

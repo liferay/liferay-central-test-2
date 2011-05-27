@@ -85,7 +85,7 @@ if (!categories.isEmpty() || !portlets.isEmpty()) {
 			<span><%= Validator.isNotNull(externalPortletCategory) ? externalPortletCategory : LanguageUtil.get(pageContext, portletCategory.getName()) %></span>
 		</h2>
 
-		<div class="lfr-content-category <%= layout.isTypePortlet() ? "yui3-aui-helper-hidden" : "" %>">
+		<div class="lfr-content-category <%= layout.isTypePortlet() ? "aui-helper-hidden" : "" %>">
 
 			<%
 			itr = categories.iterator();

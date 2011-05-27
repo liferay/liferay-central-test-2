@@ -51,7 +51,7 @@ UnicodeProperties liveGroupTypeSettings = (UnicodeProperties)request.getAttribut
 		<aui:option selected="<%= liveGroup.isStaged() && liveGroup.isStagedRemotely() %>" value="<%= StagingConstants.TYPE_REMOTE_STAGING %>"><liferay-ui:message key="remote-live" /></aui:option>
 	</aui:select>
 
-	<div class='<%= (liveGroup.isStaged() && liveGroup.isStagedRemotely() ? StringPool.BLANK : "yui3-aui-helper-hidden") %>' id="<portlet:namespace />remoteStagingOptions">
+	<div class='<%= (liveGroup.isStaged() && liveGroup.isStagedRemotely() ? StringPool.BLANK : "aui-helper-hidden") %>' id="<portlet:namespace />remoteStagingOptions">
 		<br />
 
 		<liferay-ui:error exception="<%= RemoteExportException.class %>">
@@ -103,7 +103,7 @@ UnicodeProperties liveGroupTypeSettings = (UnicodeProperties)request.getAttribut
 		</aui:fieldset>
 	</div>
 
-	<div class='<%= (liveGroup.isStaged() ? StringPool.BLANK : "yui3-aui-helper-hidden") %>' id="<portlet:namespace />stagedPortlets">
+	<div class='<%= (liveGroup.isStaged() ? StringPool.BLANK : "aui-helper-hidden") %>' id="<portlet:namespace />stagedPortlets">
 		<br />
 
 		<aui:fieldset label="versioning-and-branching">

@@ -120,7 +120,7 @@ portletsList = ListUtil.sort(portletsList, new PortletTitleComparator(applicatio
 										yesterday.add(Calendar.DATE, -1);
 										%>
 
-										<ul class="yui3-aui-helper-hidden" id="<portlet:namespace />startEndDate">
+										<ul class="aui-helper-hidden" id="<portlet:namespace />startEndDate">
 											<li>
 												<table class="lfr-table">
 												<tr>

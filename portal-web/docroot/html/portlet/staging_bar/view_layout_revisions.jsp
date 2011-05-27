@@ -24,7 +24,7 @@ long layoutRevisionId = StagingUtil.getRecentLayoutRevisionId(request, layoutSet
 List<LayoutRevision> layoutRevisions = LayoutRevisionLocalServiceUtil.getLayoutRevisions(layoutSetBranchId, LayoutRevisionConstants.DEFAULT_PARENT_LAYOUT_REVISION_ID, plid, QueryUtil.ALL_POS, QueryUtil.ALL_POS, new LayoutRevisionIdComparator(true));
 %>
 
-<div class="yui3-aui-helper-hidden" id="<portlet:namespace />addVariation">
+<div class="aui-helper-hidden" id="<portlet:namespace />addVariation">
 	<portlet:actionURL var="addVariationURL">
 		<portlet:param name="struts_action" value="/staging_bar/edit_layouts" />
 		<portlet:param name="<%= Constants.CMD %>" value="add_root_revision" />

@@ -78,7 +78,7 @@
 
 	<aui:field-wrapper helpMessage='<%= !openOfficeServerEnabled ? "enabling-openoffice-integration-provides-document-conversion-functionality" : StringPool.BLANK %>' label="enable-conversion-to">
 
-		<div class="yui3-aui-field-row">
+		<div class="aui-field-row">
 
 			<%
 			for (String conversion : conversions) {

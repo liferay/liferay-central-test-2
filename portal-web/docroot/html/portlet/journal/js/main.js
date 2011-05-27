@@ -32,21 +32,21 @@ AUI().add(
 						'<div class="journal-article-move-handler"></div>' +
 						'<label for="" class="journal-article-field-label"><span>{fieldLabel}</span></label>' +
 						'<div class="journal-article-component-container"></div>' +
-						'<span class="yui3-aui-field yui3-aui-field-choice journal-article-localized-checkbox">' +
-							'<span class="yui3-aui-field-content">' +
-								'<span class="yui3-aui-field-element yui3-aui-field-label-right">' +
+						'<span class="aui-field aui-field-choice journal-article-localized-checkbox">' +
+							'<span class="aui-field-content">' +
+								'<span class="aui-field-element aui-field-label-right">' +
 									'<input type="hidden" value="false" name="{portletNamespace}{instanceId}localized-checkbox">' +
-									'<input type="checkbox" onclick="Liferay.Util.updateCheckboxValue(this); " name="{portletNamespace}{instanceId}localized-checkboxCheckbox" id="{portletNamespace}{instanceId}localized-checkboxCheckbox" class="yui3-aui-field-input yui3-aui-field-input-choice"> </span>' +
-									'<label for="{portletNamespace}{instanceId}localized-checkboxCheckbox" class="yui3-aui-field-label">{localizedLabelLanguage}</label>' +
+									'<input type="checkbox" onclick="Liferay.Util.updateCheckboxValue(this); " name="{portletNamespace}{instanceId}localized-checkboxCheckbox" id="{portletNamespace}{instanceId}localized-checkboxCheckbox" class="aui-field-input aui-field-input-choice"> </span>' +
+									'<label for="{portletNamespace}{instanceId}localized-checkboxCheckbox" class="aui-field-label">{localizedLabelLanguage}</label>' +
 								'</span>'+
 							'</span>' +
 						'<div class="journal-article-required-message portlet-msg-error">{requiredFieldLanguage}</div>' +
 						'<div class="journal-article-buttons {articleButtonsRowCSSClass}">' +
-							'<span class="yui3-aui-field yui3-aui-field-inline yui3-aui-field-text journal-article-variable-name">' +
-								'<span class="yui3-aui-field-content">' +
-									'<label for="{portletNamespace}{instanceId}variableName" class="yui3-aui-field-label">{variableNameLanguage}</label>' +
-									'<span class="yui3-aui-field-element ">' +
-										'<input type="text" size="25" value="{variableName}" name="{portletNamespace}variableName" id="{portletNamespace}{instanceId}variableName" class="yui3-aui-field-input yui3-aui-field-input-text">' +
+							'<span class="aui-field aui-field-inline aui-field-text journal-article-variable-name">' +
+								'<span class="aui-field-content">' +
+									'<label for="{portletNamespace}{instanceId}variableName" class="aui-field-label">{variableNameLanguage}</label>' +
+									'<span class="aui-field-element ">' +
+										'<input type="text" size="25" value="{variableName}" name="{portletNamespace}variableName" id="{portletNamespace}{instanceId}variableName" class="aui-field-input aui-field-input-text">' +
 									'</span>' +
 								'</span>' +
 							'</span>' +
@@ -67,9 +67,9 @@ AUI().add(
 
 		var TPL_OPTION = '<option></option>';
 
-		var TPL_PLACEHOLDER = '<div class="yui3-aui-tree-placeholder yui3-aui-tree-sub-placeholder"></div>';
+		var TPL_PLACEHOLDER = '<div class="aui-tree-placeholder aui-tree-sub-placeholder"></div>';
 
-		var TPL_STRUCTURE_FIELD_INPUT = '<input class="yui3-aui-field-input lfr-input-text" type="text" value="" size="40"/>';
+		var TPL_STRUCTURE_FIELD_INPUT = '<input class="aui-field-input lfr-input-text" type="text" value="" size="40"/>';
 
 		var TPL_TOOLTIP_IMAGE = '<img align="top" class="journal-article-instructions-container" src="' + themeDisplay.getPathThemeImages() + '/portlet/help.png" />';
 
@@ -211,7 +211,7 @@ AUI().add(
 					instance.clonedSource.guid();
 
 					instance.clonedSource.show().setStyle('visibility', 'visible');
-					instance.clonedSource.removeClass('yui3-aui-helper-hidden');
+					instance.clonedSource.removeClass('aui-helper-hidden');
 					instance.clonedSource.addClass('dragging');
 
 					instance.createNestedList(
@@ -338,7 +338,7 @@ AUI().add(
 						points: ['lc', 'rc']
 					},
 					bodyContent: editContainerWrapper,
-					trigger: '.edit-button .yui3-aui-button-input'
+					trigger: '.edit-button .aui-button-input'
 				}
 			).render();
 
@@ -566,14 +566,14 @@ AUI().add(
 
 				instance.closeEditFieldOptions();
 
-				saveStructureButton.ancestor('.yui3-aui-button').hide();
+				saveStructureButton.ancestor('.aui-button').hide();
 				journalComponentList.hide();
 
 				var structureButtonText = Liferay.Language.get('edit');
 
 				editStructureLink.show();
 
-				editStructureButton.ancestor('.yui3-aui-button').hide();
+				editStructureButton.ancestor('.aui-button').hide();
 
 				A.all('input.journal-list-label').attr('disabled', 'disabled');
 
@@ -653,7 +653,7 @@ AUI().add(
 
 				instance.editContainerNormalMode();
 
-				saveStructureButton.ancestor('.yui3-aui-button').show();
+				saveStructureButton.ancestor('.aui-button').show();
 
 				journalComponentList.show();
 
@@ -661,7 +661,7 @@ AUI().add(
 
 				editStructureLink.hide();
 
-				editStructureButton.ancestor('.yui3-aui-button').show();
+				editStructureButton.ancestor('.aui-button').show();
 
 				structureTree.all('.journal-list-label').attr('disabled', '');
 
@@ -798,7 +798,7 @@ AUI().add(
 			getEditButton: function(source) {
 				var instance = this;
 
-				return source.one('.edit-button .yui3-aui-button-input');
+				return source.one('.edit-button .aui-button-input');
 			},
 
 			getEditButtons: function() {
@@ -806,7 +806,7 @@ AUI().add(
 
 				var structureTreeId = instance._getNamespacedId('#structureTree');
 
-				return A.all(structureTreeId + ' div.journal-article-buttons .edit-button .yui3-aui-button-input');
+				return A.all(structureTreeId + ' div.journal-article-buttons .edit-button .aui-button-input');
 			},
 
 			getFieldInstance: function(source) {
@@ -855,7 +855,7 @@ AUI().add(
 
 				var structureTreeId = instance._getNamespacedId('#structureTree');
 
-				return A.all(structureTreeId + ' div.journal-article-buttons .repeatable-button .yui3-aui-button-input');
+				return A.all(structureTreeId + ' div.journal-article-buttons .repeatable-button .aui-button-input');
 			},
 
 			getRepeatedSiblings: function(fieldInstance) {
@@ -1098,7 +1098,7 @@ AUI().add(
 
 				var componentContainer = source.one('div.journal-article-component-container');
 
-				return componentContainer.one('.yui3-aui-field-input');
+				return componentContainer.one('.aui-field-input');
 			},
 
 			getPrincipalForm: function(formName) {
@@ -1390,7 +1390,7 @@ AUI().add(
 
 				var editContainerWrapper = instance.getById('#journalArticleEditFieldWrapper');
 
-				var isVisible = !editContainerWrapper.ancestor('.yui3-aui-overlaycontextpanel-hidden');
+				var isVisible = !editContainerWrapper.ancestor('.aui-overlaycontextpanel-hidden');
 
 				if (isVisible) {
 					setTimeout(
@@ -2004,7 +2004,7 @@ AUI().add(
 
 						instance._updateLocaleState(source, checkbox);
 					},
-					'.journal-article-localized-checkbox .yui3-aui-field-input-choice'
+					'.journal-article-localized-checkbox .aui-field-input-choice'
 				);
 
 				container.delegate(
@@ -2088,7 +2088,7 @@ AUI().add(
 						var showLabel = link.one('.show-label').show();
 						var hideLabel = link.one('.hide-label').show();
 
-						var visible = imagePreviewDiv.hasClass('yui3-aui-helper-hidden');
+						var visible = imagePreviewDiv.hasClass('aui-helper-hidden');
 
 						if (visible) {
 							showLabel.hide();
@@ -2105,13 +2105,13 @@ AUI().add(
 				);
 
 				var _attachButtonInputSelector = function(id, title, handlerName) {
-					var buttonId = '.journal-' + id + '-button .yui3-aui-button-input';
+					var buttonId = '.journal-' + id + '-button .aui-button-input';
 
 					container.delegate(
 						'click',
 						function(event) {
 							var button = event.currentTarget;
-							var input = button.ancestor('.journal-article-component-container').one('.yui3-aui-field-input');
+							var input = button.ancestor('.journal-article-component-container').one('.aui-field-input');
 							var selectUrl = button.attr('data-' + id + 'Url');
 
 							window[instance.portletNamespace + handlerName] = function(url) {
@@ -2158,9 +2158,9 @@ AUI().add(
 					var editContainerCheckboxes = editContainerWrapper.all('input[type=checkbox]');
 					var editContainerInputs = editContainerWrapper.all('input[type=text],select');
 					var editContainerTextareas = editContainerWrapper.all('textarea');
-					var editFieldCancelButton = editContainerWrapper.one('.cancel-button .yui3-aui-button-input');
-					var editFieldCloseButton = editContainerWrapper.one('.close-button .yui3-aui-button-input');
-					var editFieldSaveButton = editContainerWrapper.one('.save-button .yui3-aui-button-input');
+					var editFieldCancelButton = editContainerWrapper.one('.cancel-button .aui-button-input');
+					var editFieldCloseButton = editContainerWrapper.one('.close-button .aui-button-input');
+					var editFieldSaveButton = editContainerWrapper.one('.save-button .aui-button-input');
 					var wrapper = instance.getById('journalArticleWrapper');
 
 					editContainerCheckboxes.detach('click');
@@ -2209,7 +2209,7 @@ AUI().add(
 				var saveButton = instance.getById('saveButton');
 				var translateButton = instance.getById('translateButton');
 
-				var containerInputs = fieldsContainer.all('.journal-article-component-container .yui3-aui-field-input');
+				var containerInputs = fieldsContainer.all('.journal-article-component-container .aui-field-input');
 
 				closeButtons.detach('click');
 				containerInputs.detach('change');
@@ -3048,7 +3048,7 @@ AUI().add(
 						var type = instance.get('fieldType');
 						var componentContainer = source.one('div.journal-article-component-container');
 
-						var principalElement = componentContainer.one('.yui3-aui-field-input');
+						var principalElement = componentContainer.one('.aui-field-input');
 
 						if (type == 'boolean') {
 							content = principalElement.attr('checked');
@@ -3127,7 +3127,7 @@ AUI().add(
 							var articleButtonsRowCSSClass = '';
 
 							if (!optionsEditable) {
-								articleButtonsRowCSSClass = 'yui3-aui-helper-hidden';
+								articleButtonsRowCSSClass = 'aui-helper-hidden';
 							}
 
 							var repeatableButtonTemplate = instance.getById('repeatableButtonTemplate');
@@ -3362,7 +3362,7 @@ AUI().add(
 						var instance = this;
 
 						var fieldLabel = instance.getFieldLabelElement();
-						var input = fieldLabel.get('parentNode').one('.journal-article-component-container .yui3-aui-field-input');
+						var input = fieldLabel.get('parentNode').one('.journal-article-component-container .aui-field-input');
 
 						if (input) {
 							input.attr('id', value);

@@ -116,7 +116,7 @@
 
 											<br />
 
-											<ul class="yui3-aui-helper-hidden" id="<portlet:namespace />startEndDate">
+											<ul class="aui-helper-hidden" id="<portlet:namespace />startEndDate">
 												<li>
 													<aui:field-wrapper label="start-date">
 														<liferay-ui:input-date

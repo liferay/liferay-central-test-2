@@ -86,7 +86,7 @@ Group scopeGroup = themeDisplay.getScopeGroup();
 			typesRightList = ListUtil.sort(typesRightList, new KeyValuePairComparator(false, true));
 			%>
 
-			<div class="<%= anyAssetType ? "yui3-aui-helper-hidden" : "" %>" id="<portlet:namespace />classNamesBoxes">
+			<div class="<%= anyAssetType ? "aui-helper-hidden" : "" %>" id="<portlet:namespace />classNamesBoxes">
 				<liferay-ui:input-move-boxes
 					leftTitle="current"
 					rightTitle="available"
@@ -144,7 +144,7 @@ Group scopeGroup = themeDisplay.getScopeGroup();
 			scopesRightList = ListUtil.sort(scopesRightList, new KeyValuePairComparator(false, true));
 			%>
 
-			<div class="<%= defaultScope ? "yui3-aui-helper-hidden" : "" %>" id="<portlet:namespace />scopesBoxes">
+			<div class="<%= defaultScope ? "aui-helper-hidden" : "" %>" id="<portlet:namespace />scopesBoxes">
 				<liferay-ui:input-move-boxes
 					leftTitle="current"
 					rightTitle="available"
@@ -443,7 +443,7 @@ Group scopeGroup = themeDisplay.getScopeGroup();
 					</liferay-ui:panel>
 					<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="assetPublisherOrderingAndGroupingPanel" persistState="<%= true %>" title="ordering-and-grouping">
 						<aui:fieldset>
-							<span class="yui3-aui-field-row">
+							<span class="aui-field-row">
 								<aui:select inlineField="<%= true %>" inlineLabel="left" label="order-by" name="preferences--orderByColumn1--">
 									<aui:option label="title" selected='<%= orderByColumn1.equals("title") %>' />
 									<aui:option label="create-date" selected='<%= orderByColumn1.equals("createDate") %>' value="createDate" />
@@ -461,7 +461,7 @@ Group scopeGroup = themeDisplay.getScopeGroup();
 								</aui:select>
 							</span>
 
-							<span class="yui3-aui-field-row">
+							<span class="aui-field-row">
 								<aui:select inlineField="<%= true %>" inlineLabel="left" label="and-then-by" name="preferences--orderByColumn2--">
 									<aui:option label="title" selected='<%= orderByColumn2.equals("title") %>' />
 									<aui:option label="create-date" selected='<%= orderByColumn2.equals("createDate") %>' value="createDate" />
@@ -478,7 +478,7 @@ Group scopeGroup = themeDisplay.getScopeGroup();
 								</aui:select>
 							</span>
 
-							<span class="yui3-aui-field-row">
+							<span class="aui-field-row">
 								<aui:select inlineField="<%= true %>" inlineLabel="left" label="group-by" name="preferences--assetVocabularyId--">
 									<aui:option value="" />
 									<aui:option label="asset-types" selected="<%= assetVocabularyId == -1 %>" value="-1" />

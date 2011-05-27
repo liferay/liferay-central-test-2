@@ -42,11 +42,11 @@ catch (NoSuchRecordSetException nsrse) {
 	<liferay-ui:error exception="<%= NoSuchRecordSetException.class %>" message="the-list-could-not-be-found" />
 
 	<div class="portlet-msg-info">
-		<span class="displaying-help-message-holder <%= selRecordSet == null ? StringPool.BLANK : "yui3-aui-helper-hidden" %>">
+		<span class="displaying-help-message-holder <%= selRecordSet == null ? StringPool.BLANK : "aui-helper-hidden" %>">
 			<liferay-ui:message key="please-select-a-list-entry-from-the-list-below" />
 		</span>
 
-		<span class="displaying-record-set-id-holder <%= selRecordSet == null ? "yui3-aui-helper-hidden" : StringPool.BLANK %>">
+		<span class="displaying-record-set-id-holder <%= selRecordSet == null ? "aui-helper-hidden" : StringPool.BLANK %>">
 			<liferay-ui:message key="displaying-list" />: <span class="displaying-record-set-id"><%= selRecordSet != null ? HtmlUtil.escape(selRecordSet.getName(locale)) : StringPool.BLANK %></span>
 		</span>
 	</div>
@@ -171,7 +171,7 @@ catch (NoSuchRecordSetException nsrse) {
 	<aui:input name="preferences--editable--" type="hidden" value="<%= editable %>" />
 	<aui:input name="preferences--spreadsheet--" type="hidden" value="<%= spreadsheet %>" />
 
-	<aui:fieldset cssClass="yui3-aui-helper-hidden">
+	<aui:fieldset cssClass="aui-helper-hidden">
 		<aui:field-wrapper label="portlet-id">
 			<%= portletResource %>
 		</aui:field-wrapper>

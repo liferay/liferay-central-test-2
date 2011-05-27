@@ -16,7 +16,7 @@
 
 <%@ include file="/html/portlet/staging_bar/init.jsp" %>
 
-<div class="yui3-aui-helper-hidden" data-namespace="<portlet:namespace />" id="<portlet:namespace />addBranch">
+<div class="aui-helper-hidden" data-namespace="<portlet:namespace />" id="<portlet:namespace />addBranch">
 	<aui:model-context model="<%= LayoutSetBranch.class %>" />
 
 	<portlet:actionURL var="editLayoutSetBranchURL">

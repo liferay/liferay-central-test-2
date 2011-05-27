@@ -393,7 +393,7 @@ AUI().add(
 
 						LiferayFormBuilder.superclass._onClickSettingsButton.apply(instance, arguments);
 
-						if (target.hasClass('yui3-aui-form-builder-button-save')) {
+						if (target.hasClass('aui-form-builder-button-save')) {
 							instance.validator.validate();
 						}
 					}
@@ -405,49 +405,49 @@ AUI().add(
 			DEFAULT: [
 				{
 					fieldLabel: Liferay.Language.get('button'),
-					iconClass: 'yui3-aui-form-builder-field-icon yui3-aui-form-builder-field-icon-button',
+					iconClass: 'aui-form-builder-field-icon aui-form-builder-field-icon-button',
 					label: Liferay.Language.get('button'),
 					type: 'button'
 				},
 				{
 					fieldLabel: Liferay.Language.get('checkbox'),
-					iconClass: 'yui3-aui-form-builder-field-icon yui3-aui-form-builder-field-icon-checkbox',
+					iconClass: 'aui-form-builder-field-icon aui-form-builder-field-icon-checkbox',
 					label: Liferay.Language.get('checkbox'),
 					type: 'checkbox'
 				},
 				{
 					fieldLabel: Liferay.Language.get('fieldset'),
-					iconClass: 'yui3-aui-form-builder-field-icon yui3-aui-form-builder-field-icon-fieldset',
+					iconClass: 'aui-form-builder-field-icon aui-form-builder-field-icon-fieldset',
 					label: Liferay.Language.get('fieldset'),
 					type: 'fieldset'
 				},
 				{
 					fieldLabel: Liferay.Language.get('file-upload'),
-					iconClass: 'yui3-aui-form-builder-field-icon yui3-aui-form-builder-field-icon-fileupload',
+					iconClass: 'aui-form-builder-field-icon aui-form-builder-field-icon-fileupload',
 					label: Liferay.Language.get('file-upload'),
 					type: 'fileupload'
 				},
 				{
 					fieldLabel: Liferay.Language.get('text-box'),
-					iconClass: 'yui3-aui-form-builder-field-icon yui3-aui-form-builder-field-icon-text',
+					iconClass: 'aui-form-builder-field-icon aui-form-builder-field-icon-text',
 					label: Liferay.Language.get('text-box'),
 					type: 'text'
 				},
 				{
 					fieldLabel: Liferay.Language.get('text-area'),
-					iconClass: 'yui3-aui-form-builder-field-icon yui3-aui-form-builder-field-icon-textarea',
+					iconClass: 'aui-form-builder-field-icon aui-form-builder-field-icon-textarea',
 					label: Liferay.Language.get('text-area'),
 					type: 'textarea'
 				},
 				{
 					fieldLabel: Liferay.Language.get('radio-buttons'),
-					iconClass: 'yui3-aui-form-builder-field-icon yui3-aui-form-builder-field-icon-radio',
+					iconClass: 'aui-form-builder-field-icon aui-form-builder-field-icon-radio',
 					label: Liferay.Language.get('radio-buttons'),
 					type: 'radio'
 				},
 				{
 					fieldLabel: Liferay.Language.get('select-option'),
-					iconClass: 'yui3-aui-form-builder-field-icon yui3-aui-form-builder-field-icon-select',
+					iconClass: 'aui-form-builder-field-icon aui-form-builder-field-icon-select',
 					label: Liferay.Language.get('select-option'),
 					type: 'select'
 				}
@@ -456,13 +456,13 @@ AUI().add(
 			DDM_STRUCTURE: [
 				{
 					fieldLabel: Liferay.Language.get('boolean'),
-					iconClass: 'yui3-aui-form-builder-field-icon yui3-aui-form-builder-field-icon-checkbox',
+					iconClass: 'aui-form-builder-field-icon aui-form-builder-field-icon-checkbox',
 					label: Liferay.Language.get('boolean'),
 					type: 'checkbox'
 				},
 				{
 					fieldLabel: Liferay.Language.get('date'),
-					iconClass: 'yui3-aui-form-builder-field-icon yui3-aui-icon yui3-aui-icon-calendar',
+					iconClass: 'aui-form-builder-field-icon aui-icon aui-icon-calendar',
 					label: Liferay.Language.get('date'),
 					type: 'ddm-date'
 				},
@@ -483,13 +483,13 @@ AUI().add(
 				},
 				{
 					fieldLabel: Liferay.Language.get('radio'),
-					iconClass: 'yui3-aui-form-builder-field-icon yui3-aui-form-builder-field-icon-radio',
+					iconClass: 'aui-form-builder-field-icon aui-form-builder-field-icon-radio',
 					label: Liferay.Language.get('radio'),
 					type: 'radio'
 				},
 				{
 					fieldLabel: Liferay.Language.get('select'),
-					iconClass: 'yui3-aui-form-builder-field-icon yui3-aui-form-builder-field-icon-select',
+					iconClass: 'aui-form-builder-field-icon aui-form-builder-field-icon-select',
 					label: Liferay.Language.get('select'),
 					type: 'select'
 				},
@@ -508,19 +508,19 @@ AUI().add(
 			DDM_TEMPLATE: [
 				{
 					fieldLabel: Liferay.Language.get('button'),
-					iconClass: 'yui3-aui-form-builder-field-icon yui3-aui-form-builder-field-icon-button',
+					iconClass: 'aui-form-builder-field-icon aui-form-builder-field-icon-button',
 					label: Liferay.Language.get('button'),
 					type: 'button'
 				},
 				{
 					fieldLabel: Liferay.Language.get('separator'),
-					iconClass: 'yui3-aui-form-builder-field-icon ddm-field-icon-separator',
+					iconClass: 'aui-form-builder-field-icon ddm-field-icon-separator',
 					label: Liferay.Language.get('separator'),
 					type: 'ddm-separator'
 				},
 				{
 					fieldLabel: Liferay.Language.get('fieldset'),
-					iconClass: 'yui3-aui-form-builder-field-icon yui3-aui-form-builder-field-icon-fieldset',
+					iconClass: 'aui-form-builder-field-icon aui-form-builder-field-icon-fieldset',
 					label: Liferay.Language.get('fieldset'),
 					type: 'fieldset'
 				}

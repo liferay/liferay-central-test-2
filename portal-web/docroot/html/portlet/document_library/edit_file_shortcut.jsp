@@ -202,7 +202,7 @@ portletURL.setParameter("fileShortcutId", String.valueOf(fileShortcutId));
 
 			if (button) {
 				button.set('disabled', false);
-				button.ancestor('.yui3-aui-button').removeClass('yui3-aui-button-disabled');
+				button.ancestor('.aui-button').removeClass('aui-button-disabled');
 			}
 		},
 		['aui-base']

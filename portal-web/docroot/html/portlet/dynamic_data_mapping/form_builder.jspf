@@ -18,52 +18,52 @@
 
 <div class="separator"><!-- --></div>
 
-<div class="yui3-widget yui3-aui-component yui3-aui-form-builder" id="<portlet:namespace />formBuilder">
-	<div class="yui3-aui-form-builder-content">
-		<div class="yui3-widget-bd yui3-aui-helper-clearfix">
-			<ul class="yui3-aui-form-builder-drop-container">
+<div class="yui3-widget aui-component aui-form-builder" id="<portlet:namespace />formBuilder">
+	<div class="aui-form-builder-content">
+		<div class="yui3-widget-bd aui-helper-clearfix">
+			<ul class="aui-form-builder-drop-container">
 				<c:choose>
 					<c:when test="<%= Validator.isNotNull(script) %>">
 						<li class="form-fields-loading">
-							<div class="yui3-aui-loadingmask-message">
-								<div class="yui3-aui-loadingmask-message-content"><liferay-ui:message key="loading" />...</div>
+							<div class="aui-loadingmask-message">
+								<div class="aui-loadingmask-message-content"><liferay-ui:message key="loading" />...</div>
 							</div>
 						</li>
 					</c:when>
 					<c:otherwise>
-						<li class="yui3-aui-form-builder-default-message"><liferay-ui:message key="drop-fields-here" /></li>
+						<li class="aui-form-builder-default-message"><liferay-ui:message key="drop-fields-here" /></li>
 					</c:otherwise>
 				</c:choose>
 			</ul>
 
-			<div class="yui3-aui-form-builder-tabs-container">
-				<ul class="yui3-aui-tabview-list yui3-widget-hd">
-					<li class="yui3-aui-component yui3-aui-form-builder-tab-add yui3-aui-state-active yui3-aui-state-default yui3-aui-tab yui3-aui-tab-active yui3-widget">
-						<span class="yui3-aui-tab-content"><a class="yui3-aui-tab-label" href="javascript:;"><liferay-ui:message key="add-field" /></a></span>
+			<div class="aui-form-builder-tabs-container">
+				<ul class="aui-tabview-list yui3-widget-hd">
+					<li class="aui-component aui-form-builder-tab-add aui-state-active aui-state-default aui-tab aui-tab-active yui3-widget">
+						<span class="aui-tab-content"><a class="aui-tab-label" href="javascript:;"><liferay-ui:message key="add-field" /></a></span>
 					</li>
-					<li class="yui3-aui-component yui3-aui-form-builder-tab-settings yui3-aui-tab yui3-aui-state-default yui3-widget">
-						<span class="yui3-aui-tab-content"><a class="yui3-aui-tab-label" href="javascript:;"><liferay-ui:message key="field-settings" /></a></span>
+					<li class="aui-component aui-form-builder-tab-settings aui-tab aui-state-default yui3-widget">
+						<span class="aui-tab-content"><a class="aui-tab-label" href="javascript:;"><liferay-ui:message key="field-settings" /></a></span>
 					</li>
 				</ul>
 
-				<div class="yui3-aui-tabview-content yui3-widget-bd">
-					<div class="yui3-aui-tabview-content-item">
-						<ul class="yui3-aui-form-builder-drag-container"></ul>
+				<div class="aui-tabview-content yui3-widget-bd">
+					<div class="aui-tabview-content-item">
+						<ul class="aui-form-builder-drag-container"></ul>
 					</div>
 
-					<div class="yui3-aui-helper-hidden yui3-aui-tabview-content-item">
-						<form class="yui3-aui-form-builder-settings"></form>
+					<div class="aui-helper-hidden aui-tabview-content-item">
+						<form class="aui-form-builder-settings"></form>
 
-						<div class="yui3-aui-button-row yui3-aui-form-builder-settings-buttons">
-							<span class="yui3-aui-button yui3-aui-button-submit yui3-aui-priority-primary yui3-aui-state-positive">
-								<span class="yui3-aui-button-content">
-									<input type="button" value="<liferay-ui:message key="save" />" class="yui3-aui-button-input yui3-aui-form-builder-button-save">
+						<div class="aui-button-row aui-form-builder-settings-buttons">
+							<span class="aui-button aui-button-submit aui-priority-primary aui-state-positive">
+								<span class="aui-button-content">
+									<input type="button" value="<liferay-ui:message key="save" />" class="aui-button-input aui-form-builder-button-save">
 								</span>
 							</span>
 
-							<span class="yui3-aui-button yui3-aui-button-submit yui3-aui-priority-secondary yui3-aui-state-positive">
-								<span class="yui3-aui-button-content">
-									<input class="yui3-aui-button-input yui3-aui-form-builder-button-close" type="button" value="<liferay-ui:message key="close" />">
+							<span class="aui-button aui-button-submit aui-priority-secondary aui-state-positive">
+								<span class="aui-button-content">
+									<input class="aui-button-input aui-form-builder-button-close" type="button" value="<liferay-ui:message key="close" />">
 								</span>
 							</span>
 						</div>
@@ -90,7 +90,7 @@
 
 			portletNamespace: '<portlet:namespace />',
 			portletResourceNamespace: '<%= HtmlUtil.escapeJS(portletResourceNamespace) %>',
-			srcNode: '#<portlet:namespace />formBuilder .yui3-aui-form-builder-content'
+			srcNode: '#<portlet:namespace />formBuilder .aui-form-builder-content'
 		}
 	).render();
 </aui:script>

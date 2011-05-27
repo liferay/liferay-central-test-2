@@ -49,7 +49,7 @@
 		margin-top: 1em;
 	}
 
-	.yui3-aui-tabview-list {
+	.aui-tabview-list {
 		margin: 18px 0;
 	}
 

@@ -35,7 +35,7 @@
 		.assign-permissions {
 			float: left;
 
-			.yui3-aui-button-holder {
+			.aui-button-holder {
 				position: relative;
 
 				.finished {

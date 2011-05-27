@@ -143,10 +143,10 @@ Element contentEl = (Element)request.getAttribute(WebKeys.JOURNAL_ARTICLE_CONTEN
 
 					<c:if test="<%= Validator.isNotNull(elContent) %>">
 						<span class="journal-image-show-hide">
-							[ <aui:a cssClass="journal-image-link" href="javascript:void(0);"><span class="show-label"><liferay-ui:message key="show" /></span><span class="hide-label yui3-aui-helper-hidden"><liferay-ui:message key="hide" /></span></aui:a> ]
+							[ <aui:a cssClass="journal-image-link" href="javascript:void(0);"><span class="show-label"><liferay-ui:message key="show" /></span><span class="hide-label aui-helper-hidden"><liferay-ui:message key="hide" /></span></aui:a> ]
 						</span>
 
-						<div class="journal-image-preview yui3-aui-helper-hidden">
+						<div class="journal-image-preview aui-helper-hidden">
 							<aui:input name="journalImageContent" type="hidden" value="<%= elContent %>" />
 
 							<aui:input name="journalImageDelete" type="hidden" value="" />
@@ -378,7 +378,7 @@ Element contentEl = (Element)request.getAttribute(WebKeys.JOURNAL_ARTICLE_CONTEN
 
 				<aui:button cssClass="edit-button" value="edit-options" />
 
-				<aui:button cssClass="repeatable-button yui3-aui-helper-hidden" value="repeat" />
+				<aui:button cssClass="repeatable-button aui-helper-hidden" value="repeat" />
 			</div>
 
 			<c:if test="<%= elRepeatable %>">

@@ -17,18 +17,18 @@
 <%@ include file="/html/portlet/css_init.jsp" %>
 
 .portlet-enterprise-admin {
-	.yui3-aui-form {
+	.aui-form {
 		fieldset {
 			border-width: 0;
 			padding: 0;
 		}
 
-		.yui3-aui-fieldset {
+		.aui-fieldset {
 			textarea {
 				width: 90%;
 			}
 
-			table.org-labor-table td .yui3-aui-field {
+			table.org-labor-table td .aui-field {
 				margin-bottom: 0;
 				padding: 3px 1px;
 			}
@@ -41,7 +41,7 @@
 				}
 			}
 
-			.yui3-aui-field {
+			.aui-field {
 				margin-bottom: 10px;
 
 				&.mailing-ctrl {
@@ -220,7 +220,7 @@
 			margin-top: 1.8em;
 		}
 
-		.yui3-aui-field {
+		.aui-field {
 			float: left;
 		}
 	}
@@ -229,7 +229,7 @@
 		margin-bottom: 30px;
 	}
 
-	#addresses .yui3-aui-field {
+	#addresses .aui-field {
 		float: none;
 		width: auto;
 	}
@@ -292,7 +292,7 @@
 }
 
 .lfr-floating-container {
-	.yui3-aui-field {
+	.aui-field {
 		input, img {
 			vertical-align: top;
 		}

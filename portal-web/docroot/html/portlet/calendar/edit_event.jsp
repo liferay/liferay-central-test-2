@@ -229,7 +229,7 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 
 		<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="calendarRemindersPanel" persistState="<%= true %>" title="reminders">
 			<aui:fieldset>
-				<span class="yui3-aui-field-row">
+				<span class="aui-field-row">
 					<aui:select inlineField="<%= true %>" inlineLabel="left" label="remind-me" name="firstReminder">
 
 						<%

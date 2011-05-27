@@ -57,7 +57,7 @@ request.setAttribute("view.jsp-folderId", String.valueOf(folderId));
 request.setAttribute("view.jsp-repositoryId", String.valueOf(repositoryId));
 %>
 
-<div class="portlet-msg-error yui3-aui-helper-hidden" id="<portlet:namespace />errorContainer">
+<div class="portlet-msg-error aui-helper-hidden" id="<portlet:namespace />errorContainer">
 	<liferay-ui:message key="your-request-failed-to-complete" />
 </div>
 

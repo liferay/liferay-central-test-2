@@ -127,7 +127,7 @@
 						/>
 					</div>
 
-					<div class="answer <%= !message.isRoot() && MBMessageFlagLocalServiceUtil.hasAnswerFlag(message.getMessageId()) ? "" : "yui3-aui-helper-hidden" %>" id="<portlet:namespace />deleteAnswerFlag_<%= message.getMessageId() %>">
+					<div class="answer <%= !message.isRoot() && MBMessageFlagLocalServiceUtil.hasAnswerFlag(message.getMessageId()) ? "" : "aui-helper-hidden" %>" id="<portlet:namespace />deleteAnswerFlag_<%= message.getMessageId() %>">
 						<liferay-ui:icon
 							image="checked"
 							label="<%= true %>"
@@ -186,7 +186,7 @@
 
 					<c:if test="<%= showAnswerFlag || hasReplyPermission %>">
 						<ul class="edit-controls lfr-component">
-							<li class="<%= showAnswerFlag ? "" : "yui3-aui-helper-hidden" %>" id="<portlet:namespace />addAnswerFlag_<%= message.getMessageId() %>">
+							<li class="<%= showAnswerFlag ? "" : "aui-helper-hidden" %>" id="<portlet:namespace />addAnswerFlag_<%= message.getMessageId() %>">
 
 								<%
 								String taglibMarkAsAnswerURL = "javascript:" + renderResponse.getNamespace() + "addAnswerFlag('" + message.getMessageId() + "');";

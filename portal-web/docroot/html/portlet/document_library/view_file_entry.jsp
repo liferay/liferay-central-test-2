@@ -324,7 +324,7 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 						</c:choose>
 					</span>
 
-					<div class="lfr-asset-field url-file-container yui3-aui-helper-hidden">
+					<div class="lfr-asset-field url-file-container aui-helper-hidden">
 						<label><liferay-ui:message key="url" /></label>
 
 						<liferay-ui:input-resource
@@ -333,7 +333,7 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 					</div>
 
 					<c:if test="<%= portletDisplay.isWebDAVEnabled() && fileEntry.isSupportsSocial() %>">
-						<div class="lfr-asset-field webdav-url-file-container yui3-aui-helper-hidden">
+						<div class="lfr-asset-field webdav-url-file-container aui-helper-hidden">
 
 							<%
 							String webDavHelpMessage = null;
@@ -563,7 +563,7 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 		function(event) {
 			var URLFileContainer = A.one('.url-file-container');
 
-			URLFileContainer.toggleClass('yui3-aui-helper-hidden');
+			URLFileContainer.toggleClass('aui-helper-hidden');
 		}
 	);
 
@@ -572,7 +572,7 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 		function(event) {
 			var WebdavFileContainer = A.one('.webdav-url-file-container');
 
-			WebdavFileContainer.toggleClass('yui3-aui-helper-hidden');
+			WebdavFileContainer.toggleClass('aui-helper-hidden');
 		}
 	);
 

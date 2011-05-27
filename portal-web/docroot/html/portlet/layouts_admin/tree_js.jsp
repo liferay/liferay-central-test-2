@@ -30,7 +30,7 @@ PortletURL portletURL = (PortletURL)request.getAttribute("edit_pages.jsp-portlet
 %>
 
 <div class="lfr-tree-loading" id="<portlet:namespace />treeLoading">
-	<span class="yui3-aui-icon yui3-aui-icon-loading lfr-tree-loading-icon"></span>
+	<span class="aui-icon aui-icon-loading lfr-tree-loading-icon"></span>
 </div>
 
 <div class="lfr-tree" id="<portlet:namespace /><%= HtmlUtil.escape(treeId) %>Output"></div>

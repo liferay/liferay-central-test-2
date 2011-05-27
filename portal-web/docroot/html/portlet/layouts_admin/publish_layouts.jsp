@@ -214,7 +214,7 @@ response.setHeader("Ajax-ID", request.getHeader("Ajax-ID"));
 		padding: 1em;
 	}
 
-	#<portlet:namespace />exportPagesFm .selected-pages-option .yui3-aui-field-content {
+	#<portlet:namespace />exportPagesFm .selected-pages-option .aui-field-content {
 		display: inline;
 	}
 
@@ -314,7 +314,7 @@ response.setHeader("Ajax-ID", request.getHeader("Ajax-ID"));
 					</span>
 				</div>
 
-				<div class="yui3-aui-helper-hidden" id="<portlet:namespace />publishedEvents">
+				<div class="aui-helper-hidden" id="<portlet:namespace />publishedEvents">
 					<liferay-ui:header
 						title="scheduled-events"
 					/>

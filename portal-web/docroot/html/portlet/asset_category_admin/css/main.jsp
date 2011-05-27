@@ -33,7 +33,7 @@
 		position: relative;
 	}
 
-	.vocabulary-content-wrapper, .header-title, .yui3-aui-tree-node-content .yui3-aui-tree-label  {
+	.vocabulary-content-wrapper, .header-title, .aui-tree-node-content .aui-tree-label  {
 		word-wrap: break-word;
 	}
 
@@ -185,7 +185,7 @@
 	}
 
 	.vocabulary-treeview-container {
-		.yui3-aui-tree-label {
+		.aui-tree-label {
 			cursor: pointer;
 
 			&:hover {
@@ -193,7 +193,7 @@
 			}
 		}
 
-		.yui3-aui-tree-node-selected .yui3-aui-tree-label {
+		.aui-tree-node-selected .aui-tree-label {
 			background-color: #6F7D83;
 			color: #FFF;
 			cursor: move;
@@ -205,12 +205,12 @@
 	}
 
 	.vocabulary-search, .vocabulary-select-search {
-		.yui3-aui-field-content {
+		.aui-field-content {
 			display: inline-block;
 		}
 	}
 
-	.vocabulary-search .yui3-aui-field-input {
+	.vocabulary-search .aui-field-input {
 		background-image: url(<%= themeImagesPath %>/common/search.png);
 		background-repeat: no-repeat;
 		background-position: 5px 50%;
@@ -234,7 +234,7 @@
 }
 
 .portlet-asset-categories-admin-dialog {
-	.yui3-aui-fieldset {
+	.aui-fieldset {
 		margin-bottom: 0;
 	}
 
@@ -243,7 +243,7 @@
 		border-width: 0;
 	}
 
-	.asset-category-layer .yui3-aui-overlay {
+	.asset-category-layer .aui-overlay {
 		overflow: visible;
 		width: 230px;
 	}
@@ -252,7 +252,7 @@
 		.asset-category-layer {
 			padding: 0 10px;
 
-			.yui3-aui-field-content {
+			.aui-field-content {
 				margin-bottom: 10px;
 			}
 
@@ -261,7 +261,7 @@
 				font-weight: bold;
 			}
 
-			.yui3-aui-field {
+			.aui-field {
 				input, select {
 					width: 200px;
 				}
@@ -273,7 +273,7 @@
 		}
 	}
 
-	.yui3-widget-bd .yui3-aui-field.vocabulary-checkbox {
+	.yui3-widget-bd .aui-field.vocabulary-checkbox {
 		input {
 			width: 100%;
 		}

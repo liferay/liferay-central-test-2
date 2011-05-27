@@ -66,7 +66,7 @@
 				<div class="vocabulary-categories"></div>
 			</aui:column>
 
-			<aui:column columnWidth="35" cssClass="yui3-aui-helper-hidden vocabulary-edit-category">
+			<aui:column columnWidth="35" cssClass="aui-helper-hidden vocabulary-edit-category">
 				<div class="results-header">
 					<liferay-ui:message key="category-details" />
 

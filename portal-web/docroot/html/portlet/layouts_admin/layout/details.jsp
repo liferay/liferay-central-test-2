@@ -134,7 +134,7 @@ StringBuilder friendlyURLBase = new StringBuilder();
 		String curLayoutType = PropsValues.LAYOUT_TYPES[i];
 	%>
 
-		<div class="layout-type-form layout-type-form-<%= curLayoutType %> <%= selLayout.getType().equals(PropsValues.LAYOUT_TYPES[i]) ? "" : "yui3-aui-helper-hidden" %>">
+		<div class="layout-type-form layout-type-form-<%= curLayoutType %> <%= selLayout.getType().equals(PropsValues.LAYOUT_TYPES[i]) ? "" : "aui-helper-hidden" %>">
 
 			<%
 			request.setAttribute(WebKeys.SEL_LAYOUT, selLayout);

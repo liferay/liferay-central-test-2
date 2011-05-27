@@ -235,7 +235,7 @@
 }
 
 .portlet-configuration {
-	.yui3-aui-form {
+	.aui-form {
 		.queryRules fieldset {
 			padding: 0;
 
@@ -253,7 +253,7 @@
 				background-color: #DFFCCB;
 			}
 
-			.yui3-aui-field {
+			.aui-field {
 				line-height: 2;
 
 				&.tags-selector, &.categories-selector {

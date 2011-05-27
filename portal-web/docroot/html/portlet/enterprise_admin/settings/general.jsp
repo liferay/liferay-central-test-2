@@ -38,7 +38,7 @@ String defaultLogoutPagePath = PrefsPropsUtil.getString(company.getCompanyId(), 
 
 <aui:model-context bean="<%= account %>" model="<%= Account.class %>" />
 
-<aui:fieldset column="<%= true %>" cssClass="yui3-aui-w50">
+<aui:fieldset column="<%= true %>" cssClass="aui-w50">
 	<liferay-ui:error exception="<%= AccountNameException.class %>" message="please-enter-a-valid-name" />
 
 	<aui:input name="name" />
@@ -48,7 +48,7 @@ String defaultLogoutPagePath = PrefsPropsUtil.getString(company.getCompanyId(), 
 	<aui:input bean="<%= company %>" disabled="<%= !PropsValues.MAIL_MX_UPDATE %>" label="mail-domain" name="mx" model="<%= Company.class %>" />
 </aui:fieldset>
 
-<aui:fieldset column="<%= true %>" cssClass="yui3-aui-w50">
+<aui:fieldset column="<%= true %>" cssClass="aui-w50">
 	<liferay-ui:error exception="<%= CompanyVirtualHostException.class %>" message="please-enter-a-valid-virtual-host" />
 
 	<aui:input bean="<%= virtualHost %>" fieldParam="virtualHostname" label="virtual-host" model="<%= VirtualHost.class %>" name="hostname" />
@@ -60,11 +60,11 @@ String defaultLogoutPagePath = PrefsPropsUtil.getString(company.getCompanyId(), 
 
 <h3><liferay-ui:message key="navigation" /></h3>
 
-<aui:fieldset column="<%= true %>" cssClass="yui3-aui-w50">
+<aui:fieldset column="<%= true %>" cssClass="aui-w50">
 	<aui:input bean="<%= company %>" helpMessage="home-url-help" label="home-url" name="homeURL" model="<%= Company.class %>" />
 </aui:fieldset>
 
-<aui:fieldset column="<%= true %>" cssClass="yui3-aui-w50">
+<aui:fieldset column="<%= true %>" cssClass="aui-w50">
 	<aui:input helpMessage="default-landing-page-help" label="default-landing-page" name='<%= "settings--" + PropsKeys.DEFAULT_LANDING_PAGE_PATH + "--" %>' type="text" value="<%= defaultLandingPagePath %>" />
 
 	<aui:input helpMessage="default-logout-page-help" label="default-logout-page" name='<%= "settings--" + PropsKeys.DEFAULT_LOGOUT_PAGE_PATH + "--" %>' type="text" value="<%= defaultLogoutPagePath %>" />
@@ -72,7 +72,7 @@ String defaultLogoutPagePath = PrefsPropsUtil.getString(company.getCompanyId(), 
 
 <h3><liferay-ui:message key="additional-information" /></h3>
 
-<aui:fieldset column="<%= true %>" cssClass="yui3-aui-w50">
+<aui:fieldset column="<%= true %>" cssClass="aui-w50">
 	<aui:input name="legalName" />
 
 	<aui:input name="legalId" />
@@ -80,7 +80,7 @@ String defaultLogoutPagePath = PrefsPropsUtil.getString(company.getCompanyId(), 
 	<aui:input name="legalType" />
 </aui:fieldset>
 
-<aui:fieldset column="<%= true %>" cssClass="yui3-aui-w50">
+<aui:fieldset column="<%= true %>" cssClass="aui-w50">
 	<aui:input name="sicCode" />
 
 	<aui:input name="tickerSymbol" />
