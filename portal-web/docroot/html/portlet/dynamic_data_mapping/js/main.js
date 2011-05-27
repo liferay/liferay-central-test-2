@@ -507,10 +507,10 @@ AUI().add(
 
 			DDM_TEMPLATE: [
 				{
-					fieldLabel: Liferay.Language.get('button'),
-					iconClass: 'aui-form-builder-field-icon aui-form-builder-field-icon-button',
-					label: Liferay.Language.get('button'),
-					type: 'button'
+					fieldLabel: Liferay.Language.get('paragraph'),
+					iconClass: 'aui-form-builder-field-icon aui-form-builder-field-icon-paragraph',
+					label: Liferay.Language.get('paragraph'),
+					type: 'ddm-paragraph'
 				},
 				{
 					fieldLabel: Liferay.Language.get('separator'),

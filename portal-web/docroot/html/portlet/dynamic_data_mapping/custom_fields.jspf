@@ -119,11 +119,83 @@
 		}
 	);
 
+	var DDMParagraphField = A.Component.create(
+		{
+			ATTRS: {
+				dataType: {
+					value: undefined
+				},
+				disabled: {
+					readOnly: true,
+					value: false
+				},
+				fieldNamespace: {
+					value: 'ddm'
+				},
+				templateNode: {
+					valueFn: function() {
+						return A.Node.create('<p></p>');
+					}
+				}
+			},
+
+			UI_ATTRS: ['label'],
+
+			EXTENDS: A.FormBuilderField,
+
+			NAME: 'ddm-paragraph',
+
+			prototype: {
+				renderSettings: function() {
+					var instance = this;
+
+					var settingsNodesMap = instance.settingsNodesMap;
+
+					var formBuilder = instance.get('formBuilder');
+					var formNode = formBuilder.get('settingsFormNode');
+
+					formNode.setContent('');
+
+					instance._renderSettingsFields(
+	                    [
+	                        {
+	                            labelText: 'Label',
+	                            name: 'label',
+	                            type: 'textarea',
+	                            value: instance.get('label')
+	                        }
+	                    ],
+	                   formNode
+	                );
+
+	                var labelNode = settingsNodesMap.labelSettingNode;
+
+	                labelNode.on(
+	                    {
+	                        input: A.bind(instance._onLabelInput, instance)
+	                    }
+	                );
+				},
+
+				_uiSetLabel: function(val) {
+					var instance = this;
+
+					console.log(instance.get('templateNode'), val);
+
+					instance.get('templateNode').setContent(val);
+				}
+			}
+		}
+	);
+
 	var DDMSeparatorField = A.Component.create(
 		{
 			ATTRS: {
 				dataType: {
 					value: undefined
+				},
+				fieldNamespace: {
+					value: 'ddm'
 				},
 				templateNode: {
 					valueFn: function() {
@@ -155,5 +227,6 @@
 	FormBuilderTypes['ddm-decimal'] = DDMDecimalField;
 	FormBuilderTypes['ddm-integer'] = DDMIntegerField;
 	FormBuilderTypes['ddm-number'] = DDMNumberField;
+	FormBuilderTypes['ddm-paragraph'] = DDMParagraphField;
 	FormBuilderTypes['ddm-separator'] = DDMSeparatorField;
 </aui:script>
