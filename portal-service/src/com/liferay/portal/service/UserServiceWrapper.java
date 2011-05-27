@@ -28,10 +28,10 @@ public class UserServiceWrapper implements UserService {
 		_userService = userService;
 	}
 
-	public void addGroupUsers(long groupId, long remoteUserId, long[] userIds)
+	public void addGroupUsers(long groupId, long[] userIds)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		_userService.addGroupUsers(groupId, remoteUserId, userIds);
+		_userService.addGroupUsers(groupId, userIds);
 	}
 
 	public void addOrganizationUsers(long organizationId, long[] userIds)
@@ -415,7 +415,6 @@ public class UserServiceWrapper implements UserService {
 		java.util.List<com.liferay.portal.model.Phone> phones,
 		java.util.List<com.liferay.portal.model.Website> websites,
 		java.util.List<com.liferay.portlet.announcements.model.AnnouncementsDelivery> announcementsDelivers,
-		long remoteUserId,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -428,7 +427,7 @@ public class UserServiceWrapper implements UserService {
 			mySpaceSn, skypeSn, twitterSn, ymSn, jobTitle, groupIds,
 			organizationIds, roleIds, userGroupRoles, userGroupIds, addresses,
 			emailAddresses, phones, websites, announcementsDelivers,
-			remoteUserId, serviceContext);
+			serviceContext);
 	}
 
 	public com.liferay.portal.model.User updateUser(long userId,
@@ -450,7 +449,7 @@ public class UserServiceWrapper implements UserService {
 		java.lang.String jobTitle, long[] groupIds, long[] organizationIds,
 		long[] roleIds,
 		java.util.List<com.liferay.portal.model.UserGroupRole> userGroupRoles,
-		long[] userGroupIds, long remoteUserId,
+		long[] userGroupIds,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -462,7 +461,7 @@ public class UserServiceWrapper implements UserService {
 			birthdayYear, smsSn, aimSn, facebookSn, icqSn, jabberSn, msnSn,
 			mySpaceSn, skypeSn, twitterSn, ymSn, jobTitle, groupIds,
 			organizationIds, roleIds, userGroupRoles, userGroupIds,
-			remoteUserId, serviceContext);
+			serviceContext);
 	}
 
 	public UserService getWrappedUserService() {

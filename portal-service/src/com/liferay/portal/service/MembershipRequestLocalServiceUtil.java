@@ -270,12 +270,6 @@ public class MembershipRequestLocalServiceUtil {
 		getService().deleteMembershipRequestsByUserId(userId);
 	}
 
-	public static java.util.List<com.liferay.portal.model.MembershipRequest> getMembershipRequests(
-		long userId, long groupId, int statusId)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().getMembershipRequests(userId, groupId, statusId);
-	}
-
 	public static boolean hasMembershipRequest(long userId, long groupId,
 		int statusId)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -294,13 +288,12 @@ public class MembershipRequestLocalServiceUtil {
 	}
 
 	public static void updateStatus(long replierUserId,
-		long membershipRequestId, java.lang.String replyComments, int statusId,
-		boolean addUserToGroup)
+		long membershipRequestId, java.lang.String replyComments, int statusId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		getService()
 			.updateStatus(replierUserId, membershipRequestId, replyComments,
-			statusId, addUserToGroup);
+			statusId);
 	}
 
 	public static MembershipRequestLocalService getService() {

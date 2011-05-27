@@ -63,7 +63,7 @@ public class MembershipRequestServiceImpl
 			ActionKeys.ASSIGN_MEMBERS);
 
 		membershipRequestLocalService.updateStatus(
-			getUserId(), membershipRequestId, reviewComments, statusId, true);
+			getUserId(), membershipRequestId, reviewComments, statusId);
 	}
 
 }

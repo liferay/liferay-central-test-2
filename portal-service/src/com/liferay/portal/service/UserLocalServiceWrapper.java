@@ -292,10 +292,10 @@ public class UserLocalServiceWrapper implements UserLocalService {
 	be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public void addGroupUsers(long groupId, long remoteUserId, long[] userIds)
+	public void addGroupUsers(long groupId, long[] userIds)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		_userLocalService.addGroupUsers(groupId, remoteUserId, userIds);
+		_userLocalService.addGroupUsers(groupId, userIds);
 	}
 
 	/**
@@ -2294,10 +2294,10 @@ public class UserLocalServiceWrapper implements UserLocalService {
 	* @throws PortalException if a portal exception occurred
 	* @throws SystemException if a system exception occurred
 	*/
-	public void updateGroups(long userId, long remoteUserId, long[] newGroupIds)
+	public void updateGroups(long userId, long[] newGroupIds)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		_userLocalService.updateGroups(userId, remoteUserId, newGroupIds);
+		_userLocalService.updateGroups(userId, newGroupIds);
 	}
 
 	/**
@@ -2671,7 +2671,7 @@ public class UserLocalServiceWrapper implements UserLocalService {
 		java.lang.String jobTitle, long[] groupIds, long[] organizationIds,
 		long[] roleIds,
 		java.util.List<com.liferay.portal.model.UserGroupRole> userGroupRoles,
-		long[] userGroupIds, long remoteUserId,
+		long[] userGroupIds,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -2683,7 +2683,7 @@ public class UserLocalServiceWrapper implements UserLocalService {
 			birthdayYear, smsSn, aimSn, facebookSn, icqSn, jabberSn, msnSn,
 			mySpaceSn, skypeSn, twitterSn, ymSn, jobTitle, groupIds,
 			organizationIds, roleIds, userGroupRoles, userGroupIds,
-			remoteUserId, serviceContext);
+			serviceContext);
 	}
 
 	public UserLocalService getWrappedUserLocalService() {

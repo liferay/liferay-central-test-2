@@ -159,14 +159,13 @@ public class EditGroupAssignmentsAction extends PortletAction {
 			WebKeys.THEME_DISPLAY);
 
 		long groupId = ParamUtil.getLong(actionRequest, "groupId");
-		long remoteUserId = Long.valueOf(actionRequest.getRemoteUser());
 
 		long[] addUserIds = StringUtil.split(
 			ParamUtil.getString(actionRequest, "addUserIds"), 0L);
 		long[] removeUserIds = StringUtil.split(
 			ParamUtil.getString(actionRequest, "removeUserIds"), 0L);
 
-		UserServiceUtil.addGroupUsers(groupId, remoteUserId, addUserIds);
+		UserServiceUtil.addGroupUsers(groupId, addUserIds);
 		UserServiceUtil.unsetGroupUsers(groupId, removeUserIds);
 
 		LiveUsers.joinGroup(themeDisplay.getCompanyId(), groupId, addUserIds);

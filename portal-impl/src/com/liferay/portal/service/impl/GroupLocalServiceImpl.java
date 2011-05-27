@@ -222,7 +222,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 			// User
 
 			userLocalService.addGroupUsers(
-				group.getGroupId(), 0, new long[] {userId});
+				group.getGroupId(), new long[] {userId});
 
 			// Asset
 
