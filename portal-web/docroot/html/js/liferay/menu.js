@@ -290,7 +290,7 @@ AUI().add(
 				if (cssClass.indexOf('lfr-menu-expanded') == -1) {
 					var params = REGEX_MAX_DISPLAY_ITEMS.exec(cssClass);
 
-					var maxDisplayItems = 3;//params && parseInt(params[1], 10);
+					var maxDisplayItems = params && parseInt(params[1], 10);
 
 					if (maxDisplayItems && listItems.size() > maxDisplayItems) {
 						instance._getLiveSearch(trigger, trigger.getData('menu'));
