@@ -374,15 +374,7 @@ public class JournalUtil {
 			groupId, privateLayout);
 
 		for (Layout layout : layouts) {
-			UnicodeProperties typeSettingsProperties =
-				layout.getTypeSettingsProperties();
-
-			String defaultAssetPublisherPortletId =
-				typeSettingsProperties.getProperty(
-					LayoutTypePortletConstants.
-						DEFAULT_ASSET_PUBLISHER_PORTLET_ID);
-
-			if (Validator.isNotNull(defaultAssetPublisherPortletId)) {
+			if (layout.isContentDisplayPage()) {
 				defaultAssetPublisherLayouts.add(layout);
 			}
 		}

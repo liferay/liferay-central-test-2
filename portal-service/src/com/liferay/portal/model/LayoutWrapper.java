@@ -1210,6 +1210,10 @@ public class LayoutWrapper implements Layout {
 		return _layout.isChildSelected(selectable, layout);
 	}
 
+	public boolean isContentDisplayPage() {
+		return _layout.isContentDisplayPage();
+	}
+
 	public boolean isFirstChild() {
 		return _layout.isFirstChild();
 	}

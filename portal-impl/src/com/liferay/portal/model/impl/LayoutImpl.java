@@ -460,6 +460,19 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 		return false;
 	}
 
+	public boolean isContentDisplayPage() {
+		String defaultAssetPublisherPortletId =
+			getTypeSettingsProperties().getProperty(
+				LayoutTypePortletConstants.DEFAULT_ASSET_PUBLISHER_PORTLET_ID);
+
+		if (Validator.isNotNull(defaultAssetPublisherPortletId)) {
+		    return true;
+		}
+		else {
+			return false;
+		}
+	}
+
 	public boolean isFirstChild() {
 		if (getPriority() == 0) {
 			return true;

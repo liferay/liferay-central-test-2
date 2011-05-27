@@ -60,6 +60,7 @@ public class GetLayoutsAction extends JSONAction {
 			jsonObject.put("priority", layout.getPriority());
 			jsonObject.put("privateLayout", layout.isPrivateLayout());
 			jsonObject.put("type", layout.getType());
+			jsonObject.put("contentDisplayPage", layout.isContentDisplayPage());
 
 			LayoutRevision layoutRevision = LayoutStagingUtil.getLayoutRevision(
 				layout);

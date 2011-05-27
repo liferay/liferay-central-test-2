@@ -134,6 +134,8 @@ public interface Layout extends LayoutModel {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
+	public boolean isContentDisplayPage();
+
 	public boolean isFirstChild();
 
 	public boolean isFirstParent();
