@@ -25,8 +25,8 @@ String toolbarItem = ParamUtil.getString(request, "toolbarItem", "view");
 		<portlet:param name="struts_action" value="/enterprise_admin/view" />
 	</portlet:renderURL>
 
-	<span class="lfr-toolbar-button view-button <%= toolbarItem.equals("view-all") ? "current" : StringPool.BLANK %>">
-		<a href="<%= viewUsersURL %>"><liferay-ui:message key="view-all" /></a>
+	<span class="lfr-toolbar-button view-button <%= toolbarItem.equals("view") ? "current" : StringPool.BLANK %>">
+		<a href="<%= viewUsersURL %>"><liferay-ui:message key="view" /></a>
 	</span>
 
 	<c:if test="<%= PortalPermissionUtil.contains(permissionChecker, ActionKeys.ADD_USER) %>">
@@ -35,7 +35,16 @@ String toolbarItem = ParamUtil.getString(request, "toolbarItem", "view");
 			<portlet:param name="redirect" value="<%= currentURL %>" />
 		</portlet:renderURL>
 
-		<span class="lfr-toolbar-button add-button <%= toolbarItem.equals("add") ? "current" : StringPool.BLANK %>"><a href="<%= addUserURL %>"><liferay-ui:message key="add-user" /></a></span>
+		<span class="lfr-toolbar-button add-button <%= toolbarItem.equals("add-user") ? "current" : StringPool.BLANK %>"><a href="<%= addUserURL %>"><liferay-ui:message key="add-user" /></a></span>
+	</c:if>
+
+	<c:if test="<%= PortalPermissionUtil.contains(permissionChecker, ActionKeys.ADD_ORGANIZATION) %>">
+		<portlet:renderURL var="addOrganizationURL">
+			<portlet:param name="struts_action" value="/enterprise_admin/edit_organization" />
+			<portlet:param name="redirect" value="<%= currentURL %>" />
+		</portlet:renderURL>
+
+		<span class="lfr-toolbar-button add-button <%= toolbarItem.equals("add-organization") ? "current" : StringPool.BLANK %>"><a href="<%= addOrganizationURL %>"><liferay-ui:message key="add-organization" /></a></span>
 	</c:if>
 
 	<c:if test="<%= PortalPermissionUtil.contains(permissionChecker, ActionKeys.EXPORT_USER) %>">
