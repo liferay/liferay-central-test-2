@@ -55,7 +55,7 @@ DLDocumentType documentType = (DLDocumentType)row.getObject();
 			<portlet:param name="struts_action" value="/document_library/edit_document_type" />
 			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
-			<portlet:param name="structureId" value="<%= String.valueOf(documentType.getDocumentTypeId()) %>" />
+			<portlet:param name="documentTypeId" value="<%= String.valueOf(documentType.getDocumentTypeId()) %>" />
 		</portlet:actionURL>
 
 		<liferay-ui:icon-delete url="<%= deleteURL %>" />
