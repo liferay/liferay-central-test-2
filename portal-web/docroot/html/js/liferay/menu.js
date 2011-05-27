@@ -48,6 +48,11 @@ AUI().add(
 			up: STR_B
 		};
 
+		var MAP_ALIGN_VERTICAL_TRIGGER = {
+			down: STR_B,
+			up: STR_T
+		};
+
 		var REGEX_DIRECTION = /\bdirection-(down|left|right|up)\b/;
 
 		var REGEX_MAX_DISPLAY_ITEMS = /max-display-items-(\d+)/;
@@ -136,7 +141,7 @@ AUI().add(
 						var overlayVertical = MAP_ALIGN_VERTICAL_OVERLAY[direction] || STR_T;
 
 						var triggerHorizontal = MAP_ALIGN_HORIZONTAL_TRIGGER[direction] || STR_L;
-						var triggerVertical = STR_T;
+						var triggerVertical = MAP_ALIGN_VERTICAL_TRIGGER[direction] || STR_T;
 
 						alignPoints = [overlayVertical + overlayHorizontal, triggerVertical + triggerHorizontal];
 					}
