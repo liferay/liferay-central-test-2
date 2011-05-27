@@ -100,6 +100,6 @@
 	padding-left: 3px;
 }
 
-.lfr-categories-selector-list .yui3-aui-tree-node-paginator {
+.lfr-categories-selector-list .aui-tree-node-paginator {
 	margin-left: 29px;
 }

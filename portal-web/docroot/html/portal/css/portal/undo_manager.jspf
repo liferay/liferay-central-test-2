@@ -14,7 +14,7 @@
  */
 --%>
 
-.yui3-aui-undomanager .lfr-undo-queue {
+.aui-undomanager .lfr-undo-queue {
 	margin: 10px auto;
 }
 
@@ -26,6 +26,6 @@
 	float: right;
 }
 
-.yui3-aui-undomanager .lfr-queue-empty, .lfr-queue-single .lfr-action-clear {
+.aui-undomanager .lfr-queue-empty, .lfr-queue-single .lfr-action-clear {
 	display: none;
 }

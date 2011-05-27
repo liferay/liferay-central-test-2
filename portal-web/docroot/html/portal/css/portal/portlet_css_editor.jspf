@@ -14,7 +14,7 @@
  */
 --%>
 
-#portlet-set-properties .yui3-aui-form {
+#portlet-set-properties .aui-form {
 	clear: both;
 }
 
@@ -30,12 +30,12 @@
 	font-size: 1.1em;
 }
 
-#portlet-set-properties .yui3-aui-form .text-input {
+#portlet-set-properties .aui-form .text-input {
 	margin-right: 5px;
 	width: 80px;
 }
 
-#portlet-set-properties .yui3-aui-form fieldset.col {
+#portlet-set-properties .aui-form fieldset.col {
 	width: 29%;
 }
 
@@ -47,11 +47,11 @@
 	width: 20%;
 }
 
-#portlet-set-properties .use-for-all-column .yui3-aui-field-row .yui3-aui-field-label {
+#portlet-set-properties .use-for-all-column .aui-field-row .aui-field-label {
 	width: 50px;
 }
 
-#portlet-set-properties .yui3-aui-form #custom-css {
+#portlet-set-properties .aui-form #custom-css {
 	height: 300px;
 	width: 400px;
 }
@@ -68,15 +68,15 @@
 	margin-top: 10px;
 }
 
-#portlet-set-properties .yui3-aui-form {
+#portlet-set-properties .aui-form {
 	clear: both;
 }
 
-#portlet-set-properties .yui3-aui-legend {
+#portlet-set-properties .aui-legend {
 	width: 100%;
 }
 
-#portlet-set-properties .yui3-aui-colorpicker-trigger {
+#portlet-set-properties .aui-colorpicker-trigger {
 	margin-top: 0;
 	vertical-align: top;
 }

@@ -110,7 +110,7 @@
 	display: none;
 }
 
-.taglib-form-navigator .form-navigator .yui3-aui-button-holder {
+.taglib-form-navigator .form-navigator .aui-button-holder {
 	margin-top: 20px;
 }
 

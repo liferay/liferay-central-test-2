@@ -14,41 +14,41 @@
  */
 --%>
 
-.yui3-aui-field-wrapper {
+.aui-field-wrapper {
 	clear: both;
 	overflow: hidden;
 }
 
-.yui3-aui-form-button.yui3-aui-input-disabled input, .yui3-aui-form-button.yui3-aui-input-disabled button {
+.aui-form-button.aui-input-disabled input, .aui-form-button.aui-input-disabled button {
 	background: #F5F5F5 url(../images/forms/button.png) repeat-x 0 0;
 	color: #ccc;
 }
 
-.yui3-aui-form-button.yui3-aui-input-disabled input:hover, .yui3-aui-form-button.yui3-aui-input-disabled button:hover {
+.aui-form-button.aui-input-disabled input:hover, .aui-form-button.aui-input-disabled button:hover {
 	background: #F5F5F5 url(../images/forms/button.png) repeat-x 0 0;
 	border-color: #DEDEDE #BFBFBF #BFBFBF #DEDEDE;
 	color: #ccc;
 	cursor: auto;
 }
 
-.yui3-aui-form-validator-error-container .yui3-aui-field-element {
+.aui-form-validator-error-container .aui-field-element {
 	display: inline-block;
 }
 
-.yui3-aui-form-validator-error-container {
+.aui-form-validator-error-container {
 	color: #900;
 }
 
-.yui3-aui-form-validator-stack-error {
+.aui-form-validator-stack-error {
 	font-size: 0.9em;
 }
 
-.yui3-aui-form-validator-error-container .yui3-aui-field-element {
+.aui-form-validator-error-container .aui-field-element {
 	background: url(<%= themeImagesPath %>/messages/error.png) no-repeat scroll 100% 50%;
 	padding-right: 20px;
 }
 
-[class~="yui3-aui-form-validator-message"] {
+[class~="aui-form-validator-message"] {
 	background-color: #333;
 	clip: rect(0 0 0 0);
 	color: #fff;
@@ -61,15 +61,15 @@
 	z-index: 5;
 }
 
-.yui3-aui-field-focused .yui3-aui-form-validator-message, .yui3-aui-form-validator-error-container:hover .yui3-aui-form-validator-message {
+.aui-field-focused .aui-form-validator-message, .aui-form-validator-error-container:hover .aui-form-validator-message {
 	clip: rect(auto auto auto auto);
 }
 
-.yui3-aui-field-element {
+.aui-field-element {
 	position: relative;
 }
 
-.ie6 .yui3-aui-form-validator-message {
+.ie6 .aui-form-validator-message {
 	color: #777;
 }
 
@@ -77,7 +77,7 @@
 	width: <%= ModelHintsConstants.TEXT_DISPLAY_WIDTH%>px;
 }
 
-.lfr-input-text, .yui3-aui-form .yui3-aui-fieldset .yui3-aui-field.lfr-input-text-container input {
+.lfr-input-text, .aui-form .aui-fieldset .aui-field.lfr-input-text-container input {
 	width: <%= ModelHintsConstants.TEXT_DISPLAY_WIDTH %>px;
 }
 
@@ -85,16 +85,16 @@
 	width: auto;
 }
 
-.lfr-textarea, .yui3-aui-form .yui3-aui-fieldset .yui3-aui-field.lfr-textarea-container textarea {
+.lfr-textarea, .aui-form .aui-fieldset .aui-field.lfr-textarea-container textarea {
 	height: <%= ModelHintsConstants.TEXTAREA_DISPLAY_HEIGHT %>px;
 	width: <%= ModelHintsConstants.TEXTAREA_DISPLAY_WIDTH %>px;
 }
 
-fieldset, .yui3-aui-form fieldset {
+fieldset, .aui-form fieldset {
 	margin-bottom: 2em;
 }
 
-fieldset:last-child, .yui3-aui-form fieldset:last-child {
+fieldset:last-child, .aui-form fieldset:last-child {
 	margin-bottom: 0;
 }
 

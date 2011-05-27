@@ -26,7 +26,7 @@
 	width: 380px;
 }
 
-.yui3-aui-liferaypreview .lfr-preview-file-content {
+.aui-liferaypreview .lfr-preview-file-content {
 	padding-right: 155px;
 }
 
@@ -85,7 +85,7 @@
 	filter: alpha(opacity=100);
 }
 
-.lfr-preview-file-toolbar .yui3-aui-toolbar-item {
+.lfr-preview-file-toolbar .aui-toolbar-item {
 	background: none;
 	border-width: 0;
 	height: auto;
@@ -93,21 +93,21 @@
 	width: auto;
 }
 
-.lfr-preview-file-toolbar .yui3-aui-buttonitem .yui3-aui-icon {
+.lfr-preview-file-toolbar .aui-buttonitem .aui-icon {
 	height: 30px;
 	margin: 0;
 	width: 30px;
 }
 
-.lfr-preview-file-toolbar .yui3-aui-icon-arrow-1-l {
+.lfr-preview-file-toolbar .aui-icon-arrow-1-l {
 	background: url(<%= themeImagesPath %>/document_library/preview_left.png) no-repeat 0 50%;
 }
 
-.lfr-preview-file-toolbar .yui3-aui-icon-arrow-1-r {
+.lfr-preview-file-toolbar .aui-icon-arrow-1-r {
 	background: url(<%= themeImagesPath %>/document_library/preview_right.png) no-repeat 0 50%;
 }
 
-.lfr-preview-file-toolbar .yui3-aui-icon-zoomin {
+.lfr-preview-file-toolbar .aui-icon-zoomin {
 	background: url(<%= themeImagesPath %>/document_library/preview_zoom.png) no-repeat 0 50%;
 }
 

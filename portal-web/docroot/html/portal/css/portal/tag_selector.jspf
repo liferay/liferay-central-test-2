@@ -65,13 +65,13 @@
 	display: none;
 }
 
-.lfr-tag-selector-popup .yui3-aui-textfield-content {
+.lfr-tag-selector-popup .aui-textfield-content {
 	background-color: #D3DADD;
 	border-bottom: 1px solid #AEB8BC;
 	padding: 5px;
 }
 
-.lfr-tag-selector-popup .yui3-aui-field-input-text {
+.lfr-tag-selector-popup .aui-field-input-text {
 	width: 99%;
 }
 

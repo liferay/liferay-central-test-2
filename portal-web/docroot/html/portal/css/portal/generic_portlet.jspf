@@ -79,7 +79,7 @@
 	font-weight: bold;
 }
 
-.lfr-table-grid .yui3-aui-field-hint {
+.lfr-table-grid .aui-field-hint {
 	float: none;
 }
 

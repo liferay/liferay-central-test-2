@@ -40,7 +40,7 @@
 	padding: 5px;
 }
 
-.taglib-move-boxes .choice-selector .yui3-aui-field-content {
+.taglib-move-boxes .choice-selector .aui-field-content {
 	margin-bottom: 0;
 }
 

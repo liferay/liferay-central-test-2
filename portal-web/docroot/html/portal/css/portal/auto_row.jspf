@@ -35,12 +35,12 @@
 	padding-top: 0;
 }
 
-.lfr-form-row .yui3-aui-field {
+.lfr-form-row .aui-field {
 	clear: none;
 	float: left;
 }
 
-.lfr-form-row-inline .yui3-aui-field {
+.lfr-form-row-inline .aui-field {
 	margin-right: 5px;
 }
 
@@ -61,7 +61,7 @@
 	padding: 0;
 }
 
-.lfr-autorow-controls.yui3-aui-toolbar {
+.lfr-autorow-controls.aui-toolbar {
 	padding: 1px;
 }
 
