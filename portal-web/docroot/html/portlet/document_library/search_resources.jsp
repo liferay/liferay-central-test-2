@@ -28,8 +28,12 @@ long searchFolderIds = ParamUtil.getLong(request, "searchFolderIds");
 
 long[] folderIdsArray = null;
 
+Folder folder = null;
+
 if (searchFolderId > 0) {
 	folderIdsArray = new long[] {searchFolderId};
+
+	folder = DLAppServiceUtil.getFolder(searchFolderId);
 }
 else {
 	long defaultFolderId = DLFolderConstants.getFolderId(scopeGroupId, DLFolderConstants.getDataRepositoryId(scopeGroupId, searchFolderIds));
@@ -53,8 +57,14 @@ if (Validator.isNull(displayStyle)) {
 <div id="<portlet:namespace />entries">
 	<div class="search-info">
 		<span class="keywords">
-			<%= LanguageUtil.format(pageContext, "searched-for-x", keywords) %>
+			<%= (folder != null) ? LanguageUtil.format(pageContext, "searched-for-x-in-x", new Object[] {keywords, folder.getName()}) : LanguageUtil.format(pageContext, "searched-for-x-in-every-folder", keywords) %>
 		</span>
+
+		<c:if test="<%= folderId != DLFolderConstants.DEFAULT_PARENT_FOLDER_ID %>">
+			<span class="change-search-folder">
+					<aui:button onClick='<%= "javascript:" + liferayPortletResponse.getNamespace() + "changeSearchFolder()" %>' value='<%= folder != null ? LanguageUtil.get(pageContext, "search-in-every-folder") : LanguageUtil.get(pageContext, "search-in-current-folder") %>' />
+			</span>
+		</c:if>
 
 		<liferay-ui:icon cssClass="close-search" id="closeSearch" image="../aui/closethick" url="javascript:;" />
 	</div>
@@ -211,8 +221,6 @@ if (Validator.isNull(displayStyle)) {
 
 							row.setObject(fileEntry);
 
-							Folder folder = fileEntry.getFolder();
-
 							PortletURL rowURL = liferayPortletResponse.createRenderURL();
 
 							rowURL.setParameter("struts_action", "/document_library/view_file_entry");
@@ -272,6 +280,56 @@ if (Validator.isNull(displayStyle)) {
 	<%
 	PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "search") + ": " + keywords, currentURL);
 	%>
+
+	<aui:script use="aui-base">
+		<portlet:resourceURL var="changeSearchFolder">
+			<portlet:param name="struts_action" value="/document_library/search" />
+			<portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" />
+			<portlet:param name="searchFolderId" value="<%= (folder != null) ? String.valueOf(DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) : String.valueOf(folderId) %>" />
+			<portlet:param name="keywords" value="<%= keywords %>" />
+		</portlet:resourceURL>
+
+		Liferay.provide(
+			window,
+			'<portlet:namespace />changeSearchFolder',
+			function() {
+
+				var documentContainer = A.one('#<portlet:namespace />documentContainer');
+
+				documentContainer.plug(A.LoadingMask);
+
+				documentContainer.loadingmask.toggle();
+
+				A.io.request(
+					'<%= changeSearchFolder.toString() %>',
+					{
+						after: {
+							success: function(event, id, obj) {
+								documentContainer.unplug(A.LoadingMask);
+
+								var responseData = this.get('responseData');
+
+								var content = A.Node.create(responseData);
+
+								A.one('#<portlet:namespace />displayStyleToolbar').empty();
+
+								var displayStyleButtonsContainer = A.one('#<portlet:namespace />displayStyleButtonsContainer');
+								var displayStyleButtons = content.one('#<portlet:namespace />displayStyleButtons');
+
+								displayStyleButtonsContainer.plug(A.Plugin.ParseContent);
+								displayStyleButtonsContainer.setContent(displayStyleButtons);
+
+								var entries = content.one('#<portlet:namespace />entries');
+
+								documentContainer.setContent(entries);
+							}
+						}
+					}
+				);
+			},
+			['aui-base,aui-io']
+		);
+	</aui:script>
 
 	<aui:script use="aui-io">
 		<portlet:resourceURL var="closeSearch">

@@ -54,6 +54,12 @@
 			top: 7px;
 		}
 
+		.change-search-folder {
+			position: absolute;
+			right: 60px;
+			top: 7px;
+		}
+
 		.close-search {
 			position: absolute;
 			right: 20px;
