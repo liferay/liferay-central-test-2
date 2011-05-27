@@ -787,9 +787,7 @@
 			<validator name="required" />
 		</field>
 		<field name="middleName" type="String" />
-		<field name="lastName" type="String">
-			<validator name="required" />
-		</field>
+		<field name="lastName" type="String" />
 		<field name="jobTitle" type="String">
 			<hint name="max-length">100</hint>
 		</field>

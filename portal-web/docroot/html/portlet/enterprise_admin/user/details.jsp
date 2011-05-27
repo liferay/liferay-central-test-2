@@ -105,7 +105,11 @@ boolean deletePortrait = ParamUtil.getBoolean(request, "deletePortrait");
 
 	<liferay-ui:error exception="<%= ContactLastNameException.class %>" message="please-enter-a-valid-last-name" />
 
-	<aui:input name="lastName" />
+	<aui:input name="lastName">
+		<c:if test="<%= PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.USERS_LAST_NAME_REQUIRED, PropsValues.USERS_LAST_NAME_REQUIRED) %>">
+			<aui:validator name="required" />
+		</c:if>
+	</aui:input>
 
 	<aui:select bean="<%= selContact %>" label="suffix" model="<%= Contact.class %>" name="suffixId" listType="<%= ListTypeConstants.CONTACT_SUFFIX %>" listTypeFieldName="suffixId" showEmptyOption="<%= true %>" />
 </aui:fieldset>

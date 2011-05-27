@@ -5255,12 +5255,17 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	protected void validateFullName(
 			long companyId, String firstName, String middleName,
 			String lastName)
-		throws PortalException {
+		throws PortalException, SystemException {
 
 		if (Validator.isNull(firstName)) {
 			throw new ContactFirstNameException();
 		}
-		else if (Validator.isNull(lastName)) {
+		else if (Validator.isNull(lastName) &&
+				 PrefsPropsUtil.getBoolean(
+					 companyId,
+					 PropsKeys.USERS_LAST_NAME_REQUIRED,
+					 PropsValues.USERS_LAST_NAME_REQUIRED)) {
+
 			throw new ContactLastNameException();
 		}
 

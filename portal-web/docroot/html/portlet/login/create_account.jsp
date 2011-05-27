@@ -21,9 +21,6 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 String openId = ParamUtil.getString(request, "openId");
 
-User user2 = null;
-Contact contact2 = null;
-
 PasswordPolicy passwordPolicy = PasswordPolicyLocalServiceUtil.getDefaultPasswordPolicy(company.getCompanyId());
 
 Calendar birthday = CalendarFactoryUtil.getCalendar();
@@ -32,7 +29,7 @@ birthday.set(Calendar.MONTH, Calendar.JANUARY);
 birthday.set(Calendar.DATE, 1);
 birthday.set(Calendar.YEAR, 1970);
 
-boolean male = BeanParamUtil.getBoolean(contact2, request, "male", true);
+boolean male = ParamUtil.getBoolean(request, "male", true);
 %>
 
 <portlet:actionURL var="createAccoutURL">
@@ -106,21 +103,25 @@ boolean male = BeanParamUtil.getBoolean(contact2, request, "male", true);
 		</div>
 	</c:if>
 
-	<aui:model-context bean="<%= contact2 %>" model="<%= Contact.class %>" />
+	<aui:model-context model="<%= Contact.class %>" />
 
 	<aui:fieldset>
 		<aui:column>
-			<aui:input name="firstName" />
+			<aui:input model="<%= User.class %>" name="firstName" />
 
-			<aui:input name="middleName" />
+			<aui:input model="<%= User.class %>" name="middleName" />
 
-			<aui:input name="lastName" />
+			<aui:input model="<%= User.class %>" name="lastName">
+				<c:if test="<%= PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.USERS_LAST_NAME_REQUIRED, PropsValues.USERS_LAST_NAME_REQUIRED) %>">
+					<aui:validator name="required" />
+				</c:if>
+			</aui:input>
 
 			<c:if test="<%= !PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.USERS_SCREEN_NAME_ALWAYS_AUTOGENERATE) %>">
-				<aui:input bean="<%= user2 %>" model="<%= User.class %>" name="screenName" />
+				<aui:input model="<%= User.class %>" name="screenName" />
 			</c:if>
 
-			<aui:input bean="<%= user2 %>" model="<%= User.class %>" name="emailAddress" />
+			<aui:input model="<%= User.class %>" name="emailAddress" />
 		</aui:column>
 
 		<aui:column>

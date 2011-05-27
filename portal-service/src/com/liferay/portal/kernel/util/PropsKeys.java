@@ -1855,6 +1855,8 @@ public interface PropsKeys {
 
 	public static final String USERS_IMAGE_MAX_WIDTH = "users.image.max.width";
 
+	public static final String USERS_LAST_NAME_REQUIRED = "users.last.name.required";
+
 	public static final String USERS_REMINDER_QUERIES_CUSTOM_QUESTION_ENABLED = "users.reminder.queries.custom.question.enabled";
 
 	public static final String USERS_REMINDER_QUERIES_ENABLED = "users.reminder.queries.enabled";

@@ -30,13 +30,13 @@ public class DefaultFullNameGenerator implements FullNameGenerator {
 		StringBuilder sb = new StringBuilder();
 
 		sb.append(firstName);
-		sb.append(StringPool.SPACE);
 
-		if (Validator.isNull(middleName)) {
-			sb.append(lastName);
-		}
-		else {
+		if (Validator.isNotNull(middleName)) {
+			sb.append(StringPool.SPACE);
 			sb.append(middleName);
+		}
+
+		if (Validator.isNotNull(lastName)) {
 			sb.append(StringPool.SPACE);
 			sb.append(lastName);
 		}

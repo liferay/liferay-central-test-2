@@ -39,7 +39,11 @@
 		<aui:column>
 			<aui:input model="<%= User.class %>" name="firstName" />
 
-			<aui:input model="<%= User.class %>" name="lastName" />
+			<c:if test="<%= PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.USERS_LAST_NAME_REQUIRED, PropsValues.USERS_LAST_NAME_REQUIRED) %>">
+				<aui:input model="<%= User.class %>" name="lastName">
+					<aui:validator name="required" />
+				</aui:input>
+			</c:if>
 
 			<aui:input model="<%= User.class %>" name="emailAddress" />
 		</aui:column>
