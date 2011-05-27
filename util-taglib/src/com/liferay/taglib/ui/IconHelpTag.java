@@ -48,7 +48,7 @@ public class IconHelpTag extends IconTag {
 		jspWriter.write("');\" src=\"");
 		jspWriter.write(themeDisplay.getPathThemeImages());
 		jspWriter.write("/portlet/help.png\" />");
-		jspWriter.write("<span class=\"yui3-aui-helper-hidden-accessible\">");
+		jspWriter.write("<span class=\"aui-helper-hidden-accessible\">");
 		jspWriter.write(LanguageUtil.get(pageContext, getMessage()));
 		jspWriter.write("</span></span>");
 

@@ -25,15 +25,15 @@ import java.util.Map;
  */
 public class AUIUtil {
 
-	public static final String BUTTON_INPUT_PREFIX = "yui3-aui-button-input";
+	public static final String BUTTON_INPUT_PREFIX = "aui-button-input";
 
-	public static final String BUTTON_PREFIX = "yui3-aui-button";
+	public static final String BUTTON_PREFIX = "aui-button";
 
-	public static final String FIELD_PREFIX = "yui3-aui-field";
+	public static final String FIELD_PREFIX = "aui-field";
 
-	public static final String INPUT_PREFIX = "yui3-aui-field-input";
+	public static final String INPUT_PREFIX = "aui-field-input";
 
-	public static final String LABEL_PREFIX = "yui3-aui-field-label";
+	public static final String LABEL_PREFIX = "aui-field-label";
 
 	public static String buildCss(
 		String prefix, String baseTypeCss, boolean inlineField,
