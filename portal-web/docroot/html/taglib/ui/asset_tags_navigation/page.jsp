@@ -121,40 +121,31 @@ private String _buildTagsNavigation(long groupId, String selectedTagName, Portle
 		sb.append("\"><span>");
 
 		if (tagName.equals(selectedTagName)) {
-			sb.append("<strong>");
-			sb.append(tagName);
-			sb.append("</strong>");
+			portletURL.setParameter("tag", "");
 
-			if (showAssetCount) {
-				sb.append("<span class=\"tag-asset-count\">");
-				sb.append(StringPool.SPACE);
-				sb.append(StringPool.OPEN_PARENTHESIS);
-				sb.append(count);
-				sb.append(StringPool.CLOSE_PARENTHESIS);
-				sb.append("</span>");
-			}
+			sb.append("<a class=\"tag-selected\" href=\"");
 		}
 		else {
 			portletURL.setParameter("tag", tag.getName());
-
-			sb.append("<a href=\"");
-			sb.append(portletURL.toString());
-			sb.append("\">");
-			sb.append(tagName);
-
-			if (showAssetCount) {
-				sb.append("<span class=\"tag-asset-count\">");
-				sb.append(StringPool.SPACE);
-				sb.append(StringPool.OPEN_PARENTHESIS);
-				sb.append(count);
-				sb.append(StringPool.CLOSE_PARENTHESIS);
-				sb.append("</span>");
-			}
-
-			sb.append("</a></span>");
+ 
+ 			sb.append("<a href=\"");
 		}
 
-		sb.append("</span></li>");
+		sb.append(portletURL.toString());
+		sb.append("\"><strong>");
+		sb.append(tagName);
+		sb.append("</strong>");
+
+		if (showAssetCount) {
+			sb.append("<span class=\"tag-asset-count\">");
+			sb.append(StringPool.SPACE);
+			sb.append(StringPool.OPEN_PARENTHESIS);
+			sb.append(count);
+			sb.append(StringPool.CLOSE_PARENTHESIS);
+			sb.append("</span>");
+		}
+
+		sb.append("</a></span></li>");
 	}
 
 	sb.append("</ul><br style=\"clear: both;\" />");

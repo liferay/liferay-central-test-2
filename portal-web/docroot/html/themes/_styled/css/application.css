@@ -203,6 +203,11 @@
 	line-height: 2.5em;
 }
 
+.tag-cloud .tag-selected, .tag-list .tag-selected {
+	color: #000;
+	text-decoration: none;
+}
+
 .tag-cloud li, .tag-list li {
 	display: inline;
 	float: left;
