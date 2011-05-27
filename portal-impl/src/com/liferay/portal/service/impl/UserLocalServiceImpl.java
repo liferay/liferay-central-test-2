@@ -5262,8 +5262,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		}
 		else if (Validator.isNull(lastName) &&
 				 PrefsPropsUtil.getBoolean(
-					 companyId,
-					 PropsKeys.USERS_LAST_NAME_REQUIRED,
+					 companyId, PropsKeys.USERS_LAST_NAME_REQUIRED,
 					 PropsValues.USERS_LAST_NAME_REQUIRED)) {
 
 			throw new ContactLastNameException();
