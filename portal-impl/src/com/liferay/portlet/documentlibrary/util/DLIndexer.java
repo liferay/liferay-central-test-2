@@ -131,6 +131,7 @@ public class DLIndexer extends BaseIndexer {
 
 		addSearchTerm(searchQuery, searchContext, "extension", true);
 		addSearchTerm(searchQuery, searchContext, "path", true);
+		addSearchTerm(searchQuery, searchContext, "documentTypeId", false);
 		addSearchTerm(searchQuery, searchContext, Field.USER_NAME, true);
 
 		LinkedHashMap<String, Object> params =

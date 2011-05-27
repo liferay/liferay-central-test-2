@@ -102,8 +102,41 @@ List results = null;
 int total = 0;
 
 if (documentTypeId > 0) {
-	results= DLAppServiceUtil.getFileEntries(repositoryId, defaultFolderId, documentTypeId, searchContainer.getStart(), searchContainer.getEnd());
-	total = DLAppServiceUtil.getFileEntriesCount(repositoryId, defaultFolderId, documentTypeId);
+	Indexer indexer = IndexerRegistryUtil.getIndexer(DLFileEntryConstants.getClassName());
+
+	SearchContext searchContext = SearchContextFactory.getInstance(request);
+
+	searchContext.setEnd(searchContainer.getEnd());
+	searchContext.setStart(searchContainer.getStart());
+
+	Hits hits = indexer.search(searchContext);
+
+	results = new ArrayList();
+
+	for (int i = 0; i < hits.getDocs().length; i++) {
+		Document doc = hits.doc(i);
+
+		// Folder and document
+
+		long fileEntryId = GetterUtil.getLong(doc.get(Field.ENTRY_CLASS_PK));
+
+		FileEntry fileEntry = null;
+
+		try {
+			fileEntry = DLAppLocalServiceUtil.getFileEntry(fileEntryId);
+		}
+		catch (Exception e) {
+			if (_log.isWarnEnabled()) {
+				_log.warn("Document library search index is stale and contains file entry {" + fileEntryId + "}");
+			}
+
+			continue;
+		}
+
+		results.add(fileEntry);
+	}
+
+	total = results.size();
 }
 else {
 	if (navigation.equals("documents-home")) {
@@ -351,3 +384,7 @@ for (int i = 0; i < results.size(); i++) {
 		<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
 	</div>
 </c:if>
+
+<%!
+private static Log _log = LogFactoryUtil.getLog("portal-web.docroot.html.portlet.document_library.view_entries_jsp");
+%>
