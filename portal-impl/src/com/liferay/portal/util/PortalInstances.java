@@ -404,7 +404,7 @@ public class PortalInstances {
 						String.valueOf(currentCompanyId),
 						WebKeys.PORTLET_CATEGORY);
 
-				if (portletCategory != null) {
+				if (currentPortletCategory != null) {
 					portletCategory.merge(currentPortletCategory);
 				}
 			}
