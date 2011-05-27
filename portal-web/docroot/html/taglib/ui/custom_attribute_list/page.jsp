@@ -51,8 +51,8 @@ List<String> attributeNames = Collections.list(expandoBridge.getAttributeNames()
 	%>
 
 	<c:if test="<%= attributeNames.isEmpty() %>">
-		<span class="yui3-aui-field">
-			<span class="yui3-aui-field-content">
+		<span class="aui-field">
+			<span class="aui-field-content">
 				<label><%= LanguageUtil.format(pageContext, "no-custom-fields-are-defined-for-x", modelResourceName) %></label>
 			</span>
 		</span>

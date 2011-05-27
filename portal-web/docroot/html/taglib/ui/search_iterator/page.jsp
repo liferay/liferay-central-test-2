@@ -63,7 +63,7 @@ List<String> primaryKeys = new ArrayList<String>();
 	</div>
 </c:if>
 
-<div class="lfr-search-container <%= resultRows.isEmpty() ? "yui3-aui-helper-hidden" : StringPool.BLANK %>">
+<div class="lfr-search-container <%= resultRows.isEmpty() ? "aui-helper-hidden" : StringPool.BLANK %>">
 	<c:if test="<%= PropsValues.SEARCH_CONTAINER_SHOW_PAGINATION_TOP && (resultRows.size() > 10) && paginate %>">
 		<div class="taglib-search-iterator-page-iterator-top">
 			<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" type="<%= type %>" />

@@ -16,5 +16,5 @@
 
 <%@ include file="init.jsp" %>
 
-<div class="yui3-aui-layout <%= cssClass %>" <%= InlineUtil.buildDynamicAttributes(dynamicAttributes) %>>
-	<div class="yui3-aui-layout-content <%= cssClasses %>">
+<div class="aui-layout <%= cssClass %>" <%= InlineUtil.buildDynamicAttributes(dynamicAttributes) %>>
+	<div class="aui-layout-content <%= cssClasses %>">

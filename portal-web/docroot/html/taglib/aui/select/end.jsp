@@ -29,7 +29,7 @@ String suffix = GetterUtil.getString((String)request.getAttribute("aui:select:su
 		</span>
 
 		<c:if test="<%= Validator.isNotNull(suffix) %>">
-			<span class="yui3-aui-suffix">
+			<span class="aui-suffix">
 				<liferay-ui:message key="<%= suffix %>" />
 			</span>
 		</c:if>
@@ -43,7 +43,7 @@ String suffix = GetterUtil.getString((String)request.getAttribute("aui:select:su
 				</c:if>
 
 				<c:if test="<%= changesContext %>">
-					<span class="yui3-aui-helper-hidden-accessible"><liferay-ui:message key="changing-the-value-of-this-field-will-reload-the-page" />)</span>
+					<span class="aui-helper-hidden-accessible"><liferay-ui:message key="changing-the-value-of-this-field-will-reload-the-page" />)</span>
 				</c:if>
 			</label>
 		</c:if>

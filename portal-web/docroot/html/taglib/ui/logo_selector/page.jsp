@@ -53,7 +53,7 @@ else {
 			/>
 
 			<liferay-ui:icon
-				cssClass='<%= "modify-link" + (imageId != 0 ? StringPool.BLANK : " yui3-aui-helper-hidden") %>'
+				cssClass='<%= "modify-link" + (imageId != 0 ? StringPool.BLANK : " aui-helper-hidden") %>'
 				id='<%= randomNamespace + "deleteLogoLink" %>'
 				image="delete"
 				label="<%= true %>"

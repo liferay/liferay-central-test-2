@@ -16,5 +16,5 @@
 
 <%@ include file="init.jsp" %>
 
-<div class="yui3-aui-column <%= (columnWidth > 0) ? "yui3-aui-w" + columnWidth : StringPool.BLANK %> <%= cssClass %> <%= first ? "yui3-aui-column-first" : StringPool.BLANK %> <%= last ? "yui3-aui-column-last" : StringPool.BLANK %>" <%= InlineUtil.buildDynamicAttributes(dynamicAttributes) %>>
-	<div class="yui3-aui-column-content <%= first ? "yui3-aui-column-content-first" : StringPool.BLANK %> <%= last ? "yui3-aui-column-content-last" : StringPool.BLANK %> <%= cssClasses %>">
+<div class="aui-column <%= (columnWidth > 0) ? "aui-w" + columnWidth : StringPool.BLANK %> <%= cssClass %> <%= first ? "aui-column-first" : StringPool.BLANK %> <%= last ? "aui-column-last" : StringPool.BLANK %>" <%= InlineUtil.buildDynamicAttributes(dynamicAttributes) %>>
+	<div class="aui-column-content <%= first ? "aui-column-content-first" : StringPool.BLANK %> <%= last ? "aui-column-content-last" : StringPool.BLANK %> <%= cssClasses %>">

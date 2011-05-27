@@ -111,7 +111,7 @@ if (auiImage) {
 
 	details = sb.toString();
 
-	imgClass = imgClass.concat(" yui3-aui-icon-").concat(image.substring(_AUI_PATH.length()));
+	imgClass = imgClass.concat(" aui-icon-").concat(image.substring(_AUI_PATH.length()));
 }
 
 boolean urlIsNotNull = Validator.isNotNull(url);

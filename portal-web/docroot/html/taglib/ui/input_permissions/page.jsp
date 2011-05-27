@@ -80,14 +80,14 @@ String modelName = (String)request.getAttribute("liferay-ui:input-permissions:mo
 				</select>
 			</label>
 
-			<span <%= inputPermissionsShowOptions ? "class=\"yui3-aui-helper-hidden\"" : "" %> id="<%= randomNamespace %>inputPermissionsShowOptionsLink">
+			<span <%= inputPermissionsShowOptions ? "class=\"aui-helper-hidden\"" : "" %> id="<%= randomNamespace %>inputPermissionsShowOptionsLink">
 				<a href="javascript:<%= randomNamespace %>inputPermissionsShowOptions();" style="margin-left: 10px;"><liferay-ui:message key="more-options" /> &raquo;</a> <liferay-ui:icon-help message="input-permissions-more-options-help" />
 			</span>
 
-			<a <%= inputPermissionsShowOptions ? "" : "class=\"yui3-aui-helper-hidden\"" %> href="javascript:<%= randomNamespace %>inputPermissionsHideOptions();" id="<%= randomNamespace %>inputPermissionsHideOptionsLink" style="margin-left: 10px;">&laquo; <liferay-ui:message key="hide-options" /></a>
+			<a <%= inputPermissionsShowOptions ? "" : "class=\"aui-helper-hidden\"" %> href="javascript:<%= randomNamespace %>inputPermissionsHideOptions();" id="<%= randomNamespace %>inputPermissionsHideOptionsLink" style="margin-left: 10px;">&laquo; <liferay-ui:message key="hide-options" /></a>
 		</p>
 
-		<table class="lfr-table <%= inputPermissionsShowOptions ? "" : "yui3-aui-helper-hidden" %>" id="<%= randomNamespace %>inputPermissionsTable">
+		<table class="lfr-table <%= inputPermissionsShowOptions ? "" : "aui-helper-hidden" %>" id="<%= randomNamespace %>inputPermissionsTable">
 		<tr>
 			<th>
 				<liferay-ui:message key="roles" />
@@ -98,7 +98,7 @@ String modelName = (String)request.getAttribute("liferay-ui:input-permissions:mo
 				String action = (String)supportedActions.get(i);
 			%>
 
-				<th <%= (action.equals(ActionKeys.VIEW)) ? "class=\"yui3-aui-helper-hidden\"" : "" %> style="text-align: center;">
+				<th <%= (action.equals(ActionKeys.VIEW)) ? "class=\"aui-helper-hidden\"" : "" %> style="text-align: center;">
 					<%= ResourceActionsUtil.getAction(pageContext, action) %>
 				</th>
 
@@ -159,7 +159,7 @@ String modelName = (String)request.getAttribute("liferay-ui:input-permissions:mo
 					String checkboxFieldId = checkboxFieldName + StringPool.UNDERLINE + action;
 				%>
 
-					<td style="text-align: center;" <%= (action.equals(ActionKeys.VIEW)) ? "class=\"yui3-aui-helper-hidden-accessible\"" : "" %>>
+					<td style="text-align: center;" <%= (action.equals(ActionKeys.VIEW)) ? "class=\"aui-helper-hidden-accessible\"" : "" %>>
 						<label class="hidden-label" for="<%= checkboxFieldId %>"><liferay-ui:message arguments="<%= new Object[] {ResourceActionsUtil.getAction(pageContext, action), role.getTitle(themeDisplay.getLocale())} %>" key="give-x-permission-to-users-with-role-x" /></label>
 
 						<input <%= checked ? "checked" : "" %> <%= disabled ? "disabled" : "" %>  id="<%= checkboxFieldId %>" name="<%= checkboxFieldName %>" type="checkbox" value="<%= action %>" />

@@ -22,7 +22,7 @@
 	<div class="<%= basicFormCssClass %>" id="<%= id %>basic">
 		<c:choose>
 			<c:when test="<%= Validator.isNotNull(buttonLabel) %>">
-				<span class="yui3-aui-search-bar">
+				<span class="aui-search-bar">
 					<aui:input id="<%= id + displayTerms.KEYWORDS %>" inlineField="<%= true %>" label="" name="<%= displayTerms.KEYWORDS %>" size="30" value="<%= displayTerms.getKeywords() %>" />
 
 					<aui:button type="submit" value="<%= buttonLabel %>" />

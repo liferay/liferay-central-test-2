@@ -21,4 +21,4 @@ String param = (String)request.getAttribute("liferay-ui:section:param");
 String name = (String)request.getAttribute("liferay-ui:section:name");
 %>
 
-<div class="yui3-aui-helper-hidden" id="<%= namespace %><%= param %><%= StringUtil.toCharCode(name) %>TabsSection">
+<div class="aui-helper-hidden" id="<%= namespace %><%= param %><%= StringUtil.toCharCode(name) %>TabsSection">

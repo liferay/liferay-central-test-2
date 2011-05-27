@@ -85,8 +85,8 @@ String mainLanguageValue = ParamUtil.getString(request, name + StringPool.UNDERL
 		}
 		%>
 
-		<div class="lfr-floating-container lfr-language-selector yui3-aui-helper-hidden" id="<%= randomNamespace %>languageSelector">
-			<div class="lfr-panel yui3-aui-form">
+		<div class="lfr-floating-container lfr-language-selector aui-helper-hidden" id="<%= randomNamespace %>languageSelector">
+			<div class="lfr-panel aui-form">
 				<div class="lfr-panel-titlebar">
 					<h3 class="lfr-panel-title"><span><liferay-ui:message key="other-languages" /></span></h3>
 				</div>

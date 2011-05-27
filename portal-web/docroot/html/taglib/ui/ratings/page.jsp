@@ -70,13 +70,13 @@ if (ratingsEntry != null) {
 					<c:when test='<%= themeDisplay.isSignedIn() %>'>
 						<div class="liferay-rating-vote" id="<%= randomNamespace %>ratingStar">
 							<div id="<%= randomNamespace %>ratingStarContent">
-								<div class="yui3-aui-rating-label-element"><liferay-ui:message key="your-rating" /></div>
+								<div class="aui-rating-label-element"><liferay-ui:message key="your-rating" /></div>
 
 								<%
 								for (int i = 1; i <= numberOfStars; i++) {
 								%>
 
-									<a class="yui3-aui-rating-element <%= (i <= yourScore) ? "yui3-aui-rating-element-on" : StringPool.BLANK %>" href="javascript:;"></a>
+									<a class="aui-rating-element <%= (i <= yourScore) ? "aui-rating-element-on" : StringPool.BLANK %>" href="javascript:;"></a>
 
 									<aui:input checked="<%= i == yourScore %>" label='<%= (yourScore == i) ? LanguageUtil.format(pageContext, "you-have-rated-this-x-stars-out-of-x", new Object[] {i, numberOfStars}) : LanguageUtil.format(pageContext, "rate-this-x-stars-out-of-x", new Object[] {i, numberOfStars}) %>' name="rating" type="radio" value="<%= i %>" />
 
@@ -91,7 +91,7 @@ if (ratingsEntry != null) {
 
 				<div class="liferay-rating-score" id="<%= randomNamespace %>ratingScore">
 					<div id="<%= randomNamespace %>ratingScoreContent">
-						<div class="yui3-aui-rating-label-element">
+						<div class="aui-rating-label-element">
 							<liferay-ui:message key="average" />
 
 							(<%= ratingsStats.getTotalEntries() %> <%= LanguageUtil.get(pageContext, (ratingsStats.getTotalEntries() == 1) ? "vote" : "votes") %>)
@@ -101,7 +101,7 @@ if (ratingsEntry != null) {
 						for (int i = 1; i <= numberOfStars; i++) {
 						%>
 
-							<a class="yui3-aui-rating-element <%= (i <= ratingsStats.getAverageScore()) ? "yui3-aui-rating-element-on" : StringPool.BLANK %>" href="javascript:;"></a>
+							<a class="aui-rating-element <%= (i <= ratingsStats.getAverageScore()) ? "aui-rating-element-on" : StringPool.BLANK %>" href="javascript:;"></a>
 
 						<%
 						}
@@ -113,9 +113,9 @@ if (ratingsEntry != null) {
 			<c:when test='<%= type.equals("thumbs") %>'>
 				<c:choose>
 					<c:when test='<%= themeDisplay.isSignedIn() %>'>
-						<div class="yui3-aui-thumbrating liferay-rating-vote" id="<%= randomNamespace %>ratingThumb">
-							<div class="yui3-aui-helper-clearfix yui3-aui-rating-content yui3-aui-thumbrating-content" id="<%= randomNamespace %>ratingThumbContent">
-								<div class="yui3-aui-rating-label-element">
+						<div class="aui-thumbrating liferay-rating-vote" id="<%= randomNamespace %>ratingThumb">
+							<div class="aui-helper-clearfix aui-rating-content aui-thumbrating-content" id="<%= randomNamespace %>ratingThumbContent">
+								<div class="aui-rating-label-element">
 									<c:choose>
 										<c:when test="<%= (ratingsStats.getAverageScore() * ratingsStats.getTotalEntries() == 0) %>">
 											0
@@ -128,9 +128,9 @@ if (ratingsEntry != null) {
 									(<%= ratingsStats.getTotalEntries() %> <%= LanguageUtil.get(pageContext, (ratingsStats.getTotalEntries() == 1) ? "vote" : "votes") %>)
 								</div>
 
-								<a class="yui3-aui-rating-element yui3-aui-rating-element-<%= (yourScore > 0) ? "on" : "off" %> yui3-aui-rating-thumb-up" href="javascript:;"></a>
+								<a class="aui-rating-element aui-rating-element-<%= (yourScore > 0) ? "on" : "off" %> aui-rating-thumb-up" href="javascript:;"></a>
 
-								<a class="yui3-aui-rating-element yui3-aui-rating-element-<%= (yourScore < 0) ? "on" : "off" %> yui3-aui-rating-thumb-down" href="javascript:;"></a>
+								<a class="aui-rating-element aui-rating-element-<%= (yourScore < 0) ? "on" : "off" %> aui-rating-thumb-down" href="javascript:;"></a>
 
 								<aui:input label='<%= (yourScore == 1) ? "you-have-rated-this-as-good" : "rate-this-as-good" %>' name="ratingThumb" type="radio" value="up" />
 

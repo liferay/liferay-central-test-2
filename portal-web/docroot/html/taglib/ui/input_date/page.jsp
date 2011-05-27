@@ -79,9 +79,9 @@ if (yearValue > 0) {
 }
 %>
 
-<div class="yui3-aui-datepicker yui3-aui-datepicker-display yui3-aui-helper-clearfix <%= Validator.isNotNull(cssClass) ? cssClass : StringPool.BLANK %>" id="<%= randomNamespace %>displayDate">
-	<div class="yui3-aui-datepicker-content" id="<%= randomNamespace %>displayDateContent">
-		<div class="yui3-aui-datepicker-select-wrapper">
+<div class="aui-datepicker aui-datepicker-display aui-helper-clearfix <%= Validator.isNotNull(cssClass) ? cssClass : StringPool.BLANK %>" id="<%= randomNamespace %>displayDate">
+	<div class="aui-datepicker-content" id="<%= randomNamespace %>displayDateContent">
+		<div class="aui-datepicker-select-wrapper">
 			<c:choose>
 				<c:when test="<%= monthAndYearParam.equals(namespace) %>">
 
@@ -116,9 +116,9 @@ if (yearValue > 0) {
 				</c:when>
 			</c:choose>
 		</div>
-		<div class="yui3-aui-datepicker-button-wrapper">
-			<button class="yui3-aui-buttonitem yui3-aui-buttonitem-content yui3-aui-buttonitem-icon-only yui3-aui-component yui3-aui-state-default yui3-widget" id="buttonTest" type="button">
-				<span class="yui3-aui-buttonitem-icon yui3-aui-icon yui3-aui-icon-calendar"></span>
+		<div class="aui-datepicker-button-wrapper">
+			<button class="aui-buttonitem aui-buttonitem-content aui-buttonitem-icon-only aui-component aui-state-default yui3-widget" id="buttonTest" type="button">
+				<span class="aui-buttonitem-icon aui-icon aui-icon-calendar"></span>
 			</button>
 		</div>
 	</div>

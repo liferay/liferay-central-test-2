@@ -16,4 +16,4 @@
 
 <%@ include file="/html/taglib/ui/panel_floating_container/init.jsp" %>
 
-<div class="lfr-panel-container lfr-floating-container yui3-aui-helper-hidden <%= cssClass %>" id="<%= id %>">
+<div class="lfr-panel-container lfr-floating-container aui-helper-hidden <%= cssClass %>" id="<%= id %>">

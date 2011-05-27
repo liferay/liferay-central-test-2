@@ -25,7 +25,7 @@
 	%>
 
 	<aui:field-wrapper label="start-date">
-		<div class="yui3-aui-field-row">
+		<div class="aui-field-row">
 			<liferay-ui:input-date
 				dayParam="schedulerStartDateDay"
 				dayValue="<%= cal.get(Calendar.DATE) %>"
@@ -54,11 +54,11 @@
 	</aui:field-wrapper>
 
 	<aui:field-wrapper label="end-date">
-		<div class="yui3-aui-field-row">
+		<div class="aui-field-row">
 			<aui:input checked="<%= true %>" label="no-end-date" name="endDateType" type="radio" value="0" />
 		</div>
 
-		<div class="yui3-aui-field-row">
+		<div class="aui-field-row">
 			<aui:input first="<%= true %>" inlineField="<%= true %>" label="end-by" name="endDateType" type="radio" value="1" />
 
 			<liferay-ui:input-date

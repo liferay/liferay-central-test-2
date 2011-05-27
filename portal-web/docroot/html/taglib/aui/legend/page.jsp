@@ -16,4 +16,4 @@
 
 <%@ include file="init.jsp" %>
 
-<legend class="yui3-aui-fieldset-legend" <%= InlineUtil.buildDynamicAttributes(dynamicAttributes) %>><span class="yui3-aui-legend <%= cssClass %>"><liferay-ui:message key="<%= label %>" /></span></legend>
+<legend class="aui-fieldset-legend" <%= InlineUtil.buildDynamicAttributes(dynamicAttributes) %>><span class="aui-legend <%= cssClass %>"><liferay-ui:message key="<%= label %>" /></span></legend>

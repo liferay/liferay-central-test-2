@@ -35,13 +35,13 @@ String scoreString = numberFormat.format(score);
 	</c:when>
 	<c:otherwise>
 		<div class="taglib-ratings score" id="<%= randomNamespace %>averageRating">
-			<div class="yui3-aui-helper-clearfix" id="<%= randomNamespace %>averageRatingContent">
+			<div class="aui-helper-clearfix" id="<%= randomNamespace %>averageRatingContent">
 
 				<%
 				for (int i = 1; i <= 5; i++) {
 				%>
 
-					<a class="yui3-aui-rating-element <%= (i <= score) ? "yui3-aui-rating-element-on" : StringPool.BLANK %>" href="javascript:;"></a>
+					<a class="aui-rating-element <%= (i <= score) ? "aui-rating-element-on" : StringPool.BLANK %>" href="javascript:;"></a>
 
 				<%
 				}

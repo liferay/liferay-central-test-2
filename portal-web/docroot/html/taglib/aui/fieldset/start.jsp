@@ -16,9 +16,9 @@
 
 <%@ include file="init.jsp" %>
 
-<fieldset class="yui3-aui-fieldset <%= cssClass %> <%= column ? "yui3-aui-column yui3-aui-form-column" : StringPool.BLANK %>" <%= InlineUtil.buildDynamicAttributes(dynamicAttributes) %>>
+<fieldset class="aui-fieldset <%= cssClass %> <%= column ? "aui-column aui-form-column" : StringPool.BLANK %>" <%= InlineUtil.buildDynamicAttributes(dynamicAttributes) %>>
 	<c:if test="<%= Validator.isNotNull(label) %>">
 		<aui:legend label="<%= label %>" />
 	</c:if>
 
-	<div class="yui3-aui-fieldset-content <%= column ? "yui3-aui-column-content" : StringPool.BLANK %>">
+	<div class="aui-fieldset-content <%= column ? "aui-column-content" : StringPool.BLANK %>">

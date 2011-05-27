@@ -297,7 +297,7 @@ boolean weeklyPosSa = _getWeeklyDayPos(request, Calendar.SATURDAY, event, recurr
 		</div>
 
 		<div id="<portlet:namespace />monthlyTable" style="display: none;">
-			<span class="yui3-aui-field-row">
+			<span class="aui-field-row">
 				<aui:input checked="<%= monthlyType == 0 %>" cssClass="input-container" inlineField="<%= true %>" label="day" name="monthlyType" type="radio" value="0" />
 
 				<aui:input inlineField="<%= true %>" inlineLabel="right" label="of-every" maxlength="2" name="monthlyDay0" size="2" type="text" value="<%= monthlyDay0 %>" />
@@ -305,7 +305,7 @@ boolean weeklyPosSa = _getWeeklyDayPos(request, Calendar.SATURDAY, event, recurr
 				<aui:input inlineField="<%= true %>" inlineLabel="right" label="month-s" maxlength="2" name="monthlyInterval0" size="2" type="text" value="<%= monthlyInterval0 %>" />
 			</span>
 
-			<span class="yui3-aui-field-row">
+			<span class="aui-field-row">
 				<aui:input checked="<%= (monthlyType == 1) %>" cssClass="input-container" inlineField="<%= true %>" label="the" name="monthlyType" type="radio" value="1" />
 
 				<aui:select cssClass="input-container" inlineField="<%= true %>" inlineLabel="left" label="" name="monthlyPos">
@@ -336,7 +336,7 @@ boolean weeklyPosSa = _getWeeklyDayPos(request, Calendar.SATURDAY, event, recurr
 		%>
 
 		<div id="<portlet:namespace />yearlyTable" style="display: none;">
-			<span class="yui3-aui-field-row">
+			<span class="aui-field-row">
 				<aui:input checked="<%= yearlyType == 0 %>" cssClass="input-container" inlineField="<%= true %>" label="every" name="yearlyType" type="radio" value="0" />
 
 				<aui:select cssClass="input-container" inlineField="<%= true %>" inlineLabel="left" label="" name="yearlyMonth0">
@@ -358,7 +358,7 @@ boolean weeklyPosSa = _getWeeklyDayPos(request, Calendar.SATURDAY, event, recurr
 				<aui:input inlineField="<%= true %>" inlineLabel="right" label="year-s" maxlength="2" name="yearlyInterval0" size="2" type="text" value="<%= yearlyInterval0 %>" />
 			</span>
 
-			<span class="yui3-aui-field-row">
+			<span class="aui-field-row">
 				<aui:input checked="<%= yearlyType == 1 %>" cssClass="input-container" inlineField="<%= true %>" label="the" name="yearlyType" type="radio" value="1" />
 
 				<aui:select cssClass="input-container" inlineField="<%= true %>" label="" name="yearlyPos">

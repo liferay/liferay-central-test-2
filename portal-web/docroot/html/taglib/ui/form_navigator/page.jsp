@@ -55,7 +55,7 @@ if (Validator.isNotNull(historyKey)) {
 
 					<!-- Begin fragment <%= namespace + sectionId %> -->
 
-					<div class="form-section <%= (curSection.equals(section) || curSection.equals(sectionId)) ? "selected" : "yui3-aui-helper-hidden-accessible" %>" id="<%= namespace + sectionId %>">
+					<div class="form-section <%= (curSection.equals(section) || curSection.equals(sectionId)) ? "selected" : "aui-helper-hidden-accessible" %>" id="<%= namespace + sectionId %>">
 						<liferay-util:include page="<%= sectionJsp %>" />
 					</div>
 

@@ -93,7 +93,7 @@ if (hidePortletWhenEmpty) {
 				}
 			).render();
 
-			var selected = assetCategoryList.one('.yui3-aui-tree-node strong');
+			var selected = assetCategoryList.one('.aui-tree-node strong');
 
 			if (selected) {
 				var selectedChild = treeView.getNodeByChild(selected);
