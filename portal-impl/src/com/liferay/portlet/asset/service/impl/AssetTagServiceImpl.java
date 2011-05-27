@@ -97,7 +97,7 @@ public class AssetTagServiceImpl extends AssetTagServiceBaseImpl {
 
 	public List<AssetTag> getGroupTags(
 			long groupId, int start, int end, OrderByComparator obc)
-		throws  SystemException {
+		throws SystemException {
 
 		return assetTagPersistence.filterFindByGroupId(
 			groupId, start, end, obc);
@@ -120,19 +120,16 @@ public class AssetTagServiceImpl extends AssetTagServiceBaseImpl {
 		jsonObject.put("page", page);
 
 		List<AssetTag> tags = new ArrayList<AssetTag>();
-
 		int total = 0;
 
 		if (Validator.isNotNull(name)) {
 			name = (CustomSQLUtil.keywords(name))[0];
 
 			tags = getTags(groupId, name, new String[0], start, end);
-
 			total = getTagsCount(groupId, name, new String[0]);
 		}
 		else {
 			tags = getGroupTags(groupId, start, end, null);
-
 			total = getGroupTagsCount(groupId);
 		}
 
@@ -171,12 +168,6 @@ public class AssetTagServiceImpl extends AssetTagServiceBaseImpl {
 			groupId, classNameId, name, start, end, obc);
 	}
 
-	public List<AssetTag> getTags(String className, long classPK)
-		throws PortalException, SystemException {
-
-		return filterTags(assetTagLocalService.getTags(className, classPK));
-	}
-
 	public List<AssetTag> getTags(
 			long groupId, String name, String[] tagProperties, int start,
 			int end)
@@ -184,6 +175,12 @@ public class AssetTagServiceImpl extends AssetTagServiceBaseImpl {
 
 		return assetTagFinder.filterFindByG_N_P(
 			groupId, name, tagProperties, start, end, null);
+	}
+
+	public List<AssetTag> getTags(String className, long classPK)
+		throws PortalException, SystemException {
+
+		return filterTags(assetTagLocalService.getTags(className, classPK));
 	}
 
 	public int getTagsCount(
