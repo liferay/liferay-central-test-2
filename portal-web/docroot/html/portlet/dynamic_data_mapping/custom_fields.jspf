@@ -157,24 +157,24 @@
 					formNode.setContent('');
 
 					instance._renderSettingsFields(
-	                    [
-	                        {
-	                            labelText: 'Label',
-	                            name: 'label',
-	                            type: 'textarea',
-	                            value: instance.get('label')
-	                        }
-	                    ],
-	                   formNode
-	                );
+						[
+							{
+								labelText: 'Label',
+								name: 'label',
+								type: 'textarea',
+								value: instance.get('label')
+							}
+						],
+					   formNode
+					);
 
-	                var labelNode = settingsNodesMap.labelSettingNode;
+					var labelNode = settingsNodesMap.labelSettingNode;
 
-	                labelNode.on(
-	                    {
-	                        input: A.bind(instance._onLabelInput, instance)
-	                    }
-	                );
+					labelNode.on(
+						{
+							input: A.bind(instance._onLabelInput, instance)
+						}
+					);
 				},
 
 				_uiSetLabel: function(val) {
