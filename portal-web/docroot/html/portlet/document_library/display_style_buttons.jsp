@@ -53,10 +53,10 @@ String keywords = ParamUtil.getString(request, "keywords");
 							</c:otherwise>
 						</c:choose>
 
-						<portlet:param name="displayStyle" value="icon" />
-						<portlet:param name="saveDisplayStyle" value="<%= Boolean.TRUE.toString() %>" />
 						<portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" />
 						<portlet:param name="documentTypeId" value="<%= String.valueOf(documentTypeId) %>" />
+						<portlet:param name="displayStyle" value="icon" />
+						<portlet:param name="saveDisplayStyle" value="<%= Boolean.TRUE.toString() %>" />
 					</portlet:resourceURL>
 
 					handler: function(event) {
