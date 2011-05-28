@@ -101,7 +101,7 @@
 
 	corruptIndex = false;
 
-	SearchContainer userSearch = new UserSearch(renderRequest, portletURL);
+	UserSearch userSearch = new UserSearch(renderRequest, portletURL);
 
 	if (PropsValues.USERS_SEARCH_WITH_INDEX) {
 		Sort sort = SortFactoryUtil.getSort(User.class, userSearch.getOrderByCol(), userSearch.getOrderByType());
@@ -124,7 +124,7 @@
 	}
 
 	if (organizationUserCount > 0) {
-		%>
+	%>
 
 		<liferay-portlet:renderURL varImpl="viewUserURL">
 			<portlet:param name="struts_action" value="/enterprise_admin/edit_user" />
@@ -165,7 +165,6 @@
 
 		rowURL.setParameter("organizationId", String.valueOf(curOrganization.getOrganizationId()));
 	}
-
 	%>
 
 </liferay-ui:search-container-column-text>
