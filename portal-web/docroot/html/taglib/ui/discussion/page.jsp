@@ -267,8 +267,8 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 						classPKs.add(curMessage.getMessageId());
 					}
 
-					List<RatingsEntry> ratingsEntries = RatingsEntryLocalServiceUtil.getEntries(themeDisplay.getUserId(), MBMessage.class.getName(), classPKs);
-					List<RatingsStats> ratingsStatsList = RatingsStatsLocalServiceUtil.getStats(MBMessage.class.getName(), classPKs);
+					List<RatingsEntry> ratingsEntries = RatingsEntryLocalServiceUtil.getEntries(themeDisplay.getUserId(), MBDiscussion.class.getName(), classPKs);
+					List<RatingsStats> ratingsStatsList = RatingsStatsLocalServiceUtil.getStats(MBDiscussion.class.getName(), classPKs);
 
 					for (i = 1; i <= messages.size(); i++) {
 						message = messages.get(i - 1);
