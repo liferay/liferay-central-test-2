@@ -17,11 +17,11 @@
 <%@ include file="/html/portlet/enterprise_admin/init.jsp" %>
 
 <%
-OrganizationSearch searchContainer = (OrganizationSearch)request.getAttribute("liferay-ui:search:searchContainer");
+SearchContainer searchContainer = (SearchContainer)request.getAttribute("liferay-ui:search:searchContainer");
 
 String redirect = currentURL;
 
-if (searchContainer != null) {
+if ((searchContainer != null) && (searchContainer instanceof OrganizationSearch)) {
 	redirect = searchContainer.getIteratorURL().toString();
 }
 

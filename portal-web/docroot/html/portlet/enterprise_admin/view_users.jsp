@@ -22,6 +22,14 @@ String backURL = ParamUtil.getString(request, "backURL", viewUsersRedirect);
 
 PortletURL portletURL = (PortletURL)request.getAttribute("view.jsp-portletURL");
 
+if (portletURL == null) {
+	portletURL = renderResponse.createRenderURL();
+
+	portletURL.setParameter("struts_action", "/enterprise_admin/view_users");
+
+	pageContext.setAttribute("portletURL", portletURL);
+}
+
 if (Validator.isNotNull(viewUsersRedirect)) {
 	portletURL.setParameter("viewUsersRedirect", viewUsersRedirect);
 }
