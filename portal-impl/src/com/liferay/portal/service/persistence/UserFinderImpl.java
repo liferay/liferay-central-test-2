@@ -495,7 +495,7 @@ public class UserFinderImpl
 		if (key.equals("contactTwitterSn")) {
 			join = CustomSQLUtil.get(JOIN_BY_CONTACT_TWITTER_SN);
 		}
-		else if (key.equals("usersOrgsCount")) {
+		else if (key.equals("noOrganizations")) {
 			join = CustomSQLUtil.get(JOIN_BY_NO_ORGANIZATIONS);
 		}
 		else if (key.equals("permission")) {
@@ -587,7 +587,7 @@ public class UserFinderImpl
 		if (key.equals("contactTwitterSn")) {
 			join = CustomSQLUtil.get(JOIN_BY_CONTACT_TWITTER_SN);
 		}
-		else if (key.equals("usersOrgsCount")) {
+		else if (key.equals("noOrganizations")) {
 			join = CustomSQLUtil.get(JOIN_BY_NO_ORGANIZATIONS);
 		}
 		else if (key.equals("permission")) {

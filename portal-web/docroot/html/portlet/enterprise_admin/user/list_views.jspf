@@ -15,7 +15,7 @@
 --%>
 
 <c:if test="<%= PropsValues.USERS_LIST_VIEWS.length > 1 %>">
-	<c:if test="<%= ArrayUtil.contains(PropsValues.USERS_LIST_VIEWS, UserConstants.LIST_VIEW_FLAT_USERS) %>">
+	<c:if test="<%= ArrayUtil.contains(PropsValues.USERS_LIST_VIEWS, UserConstants.LIST_VIEW_FLAT_ORGANIZATIONS) %>">
 		<td class="users-list-view-icon">
 			<portlet:renderURL var="viewUsersURL">
 				<portlet:param name="struts_action" value="/enterprise_admin/view" />

@@ -24,10 +24,10 @@ import com.liferay.portal.kernel.util.StringBundler;
  */
 public class UserConstants {
 
-	public static final String LIST_VIEW_FLAT_USERS = "flat-users";
-
 	public static final String LIST_VIEW_FLAT_ORGANIZATIONS =
 		"flat-organizations";
+
+	public static final String LIST_VIEW_FLAT_USERS = "flat-users";
 
 	public static final String LIST_VIEW_TREE = "tree";
 

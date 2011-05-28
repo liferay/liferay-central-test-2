@@ -128,6 +128,7 @@
 		userParams.put("usersOrgs", new Long(currentOrganizationId));
 	}
 	else if (usersListView.equals(UserConstants.LIST_VIEW_TREE)) {
+		userParams.put("noOrganizations");
 		userParams.put("usersOrgsCount", 0);
 	}
 	else {

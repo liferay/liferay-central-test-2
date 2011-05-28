@@ -822,12 +822,12 @@
 			<forward name="portlet.sites_admin.error" path="portlet.enterprise_admin.error" />
 		</action>
 
-		<action path="/enterprise_admin_organizations/get_users_count" type="com.liferay.portlet.enterpriseadmin.action.GetUsersCountAction" />
-
 		<action path="/enterprise_admin_organizations/export_layouts" type="com.liferay.portlet.layoutsadmin.action.ExportLayoutsAction">
 			<forward name="portlet.layouts_admin.error" path="portlet.layouts_admin.error" />
 			<forward name="portlet.layouts_admin.export_layouts" path="portlet.layouts_admin.export_layouts" />
 		</action>
+
+		<action path="/enterprise_admin_organizations/get_users_count" type="com.liferay.portlet.enterpriseadmin.action.GetUsersCountAction" />
 
 		<action path="/enterprise_admin_organizations/import_layouts" type="com.liferay.portlet.layoutsadmin.action.ImportLayoutsAction">
 			<forward name="portlet.layouts_admin.edit_layouts" path="portlet.layouts_admin.edit_layouts" />
@@ -1129,16 +1129,16 @@
 			<forward name="portlet.sites_admin.error" path="portlet.enterprise_admin.error" />
 		</action>
 
+		<action path="/enterprise_admin_users/export_layouts" type="com.liferay.portlet.layoutsadmin.action.ExportLayoutsAction">
+			<forward name="portlet.layouts_admin.error" path="portlet.layouts_admin.error" />
+			<forward name="portlet.layouts_admin.export_layouts" path="portlet.layouts_admin.export_layouts" />
+		</action>
+
 		<action path="/enterprise_admin_users/export_users" type="com.liferay.portlet.enterpriseadmin.action.ExportUsersAction">
 			<forward name="portlet.enterprise_admin.error" path="portlet.enterprise_admin.error" />
 		</action>
 
 		<action path="/enterprise_admin_users/get_users_count" type="com.liferay.portlet.enterpriseadmin.action.GetUsersCountAction" />
-
-		<action path="/enterprise_admin_users/export_layouts" type="com.liferay.portlet.layoutsadmin.action.ExportLayoutsAction">
-			<forward name="portlet.layouts_admin.error" path="portlet.layouts_admin.error" />
-			<forward name="portlet.layouts_admin.export_layouts" path="portlet.layouts_admin.export_layouts" />
-		</action>
 
 		<action path="/enterprise_admin_users/import_layouts" type="com.liferay.portlet.layoutsadmin.action.ImportLayoutsAction">
 			<forward name="portlet.layouts_admin.edit_layouts" path="portlet.layouts_admin.edit_layouts" />
