@@ -96,6 +96,8 @@ if (name.equals(RoleConstants.GUEST) || name.equals(RoleConstants.OWNER) || name
 			<portlet:param name="tabs1" value="users" />
 			<portlet:param name="viewUsersRedirect" value="<%= currentURL %>" />
 			<portlet:param name="roleId" value="<%= String.valueOf(role.getRoleId()) %>" />
+			<portlet:param name="usersListView" value="<%= UserConstants.LIST_VIEW_FLAT_USERS %>" />
+			<portlet:param name="saveUsersListView" value="<%= Boolean.FALSE.toString() %>" />
 		</portlet:renderURL>
 
 		<liferay-ui:icon image="view_users" message="view-users" method="get" url="<%= viewUsersURL %>" />

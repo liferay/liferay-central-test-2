@@ -166,6 +166,8 @@ if (row == null) {
 			<portlet:param name="tabs1" value="users" />
 			<portlet:param name="viewUsersRedirect" value="<%= redirect %>" />
 			<portlet:param name="organizationId" value="<%= String.valueOf(organizationId) %>" />
+			<portlet:param name="usersListView" value="<%= UserConstants.LIST_VIEW_FLAT_USERS %>" />
+			<portlet:param name="saveUsersListView" value="<%= Boolean.FALSE.toString() %>" />
 		</portlet:renderURL>
 
 		<liferay-ui:icon

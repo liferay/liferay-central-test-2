@@ -71,6 +71,20 @@
 
 	<c:if test="<%= userOrganization != null %>">
 		<aui:input name="<%= UserDisplayTerms.ORGANIZATION_ID %>" type="hidden" value="<%= userOrganization.getOrganizationId() %>" />
+
+		<c:if test="<%= usersListView.equals(UserConstants.LIST_VIEW_FLAT_USERS) %>">
+			<liferay-ui:header
+				backURL="<%= backURL %>"
+				title="<%= userOrganization.getName() %>"
+			/>
+
+			<%
+			EnterpriseAdminUtil.addPortletBreadcrumbEntries(userOrganization, request, renderResponse);
+
+			PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "view-users"), currentURL);
+			%>
+
+		</c:if>
 	</c:if>
 
 	<c:if test="<%= role != null %>">
