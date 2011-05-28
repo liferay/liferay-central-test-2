@@ -39,7 +39,7 @@ import java.util.List;
 /**
  * @author Sergio González
  */
-public class AddDefaultDocumentLibraryStructureAction extends SimpleAction {
+public class AddDefaultDocumentLibraryStructuresAction extends SimpleAction {
 
 	public void run(String[] ids) throws ActionException {
 		try {
@@ -50,38 +50,13 @@ public class AddDefaultDocumentLibraryStructureAction extends SimpleAction {
 		}
 	}
 
-	protected void doRun(long companyId) throws Exception {
-		long defaultUserId = UserLocalServiceUtil.getDefaultUserId(companyId);
-
-		Group generalGuestGroup = GroupLocalServiceUtil.getGroup(
-			companyId, GroupConstants.GUEST);
-
-		long groupId = generalGuestGroup.getGroupId();
-
-		ServiceContext serviceContext = new ServiceContext();
-
-		serviceContext.setUserId(defaultUserId);
-		serviceContext.setScopeGroupId(groupId);
-
-		addDocumentStructures(defaultUserId, groupId, serviceContext);
-		addDocumentTypes(defaultUserId, groupId, serviceContext);
-	}
-
-	protected void addDocumentStructures(
+	protected void addDDMStructures(
 			long userId, long groupId, ServiceContext serviceContext)
 		throws Exception {
 
-		long classNameId = PortalUtil.getClassNameId(DDLRecordSet.class);
-
-		String structureKey = StringPool.BLANK;
-
-		boolean autoStructureKey = true;
-
-		String storageType = "xml";
-
 		String xml = ContentUtil.get(
-			"com/liferay/portal/dependencies/" +
-				"liferay-documentlibrary-structures.xml");
+			"com/liferay/portal/events/dependencies/" +
+				"document-library-structures.xml");
 
 		Document document = SAXReaderUtil.read(xml);
 
@@ -90,72 +65,90 @@ public class AddDefaultDocumentLibraryStructureAction extends SimpleAction {
 		List<Element> structureElements = rootElement.elements("structure");
 
 		for (Element structureElement : structureElements) {
-			Element nameElement = structureElement.element("name");
-			Element descriptionElement = structureElement.element(
-				"description");
+			String name = structureElement.elementText("name");
+			String description = structureElement.elementText("description");
 
-			String name = nameElement.getText();
-			String description = descriptionElement. getText();
+			List<DDMStructure> ddmStructures =
+				DDMStructureLocalServiceUtil.getStructure(
+					groupId, name, description);
 
-			List<DDMStructure> structures =
-					DDMStructureLocalServiceUtil.getStructure(
-						groupId, name, description);
-
-			if (structures.size() > 0) {
+			if (!ddmStructures.isEmpty()) {
 				continue;
 			}
 
-			Element structureDefinition = structureElement.element("root");
+			Element structureElementRootElement = structureElement.element(
+				"root");
 
-			String xsd = structureDefinition.asXML();
+			String xsd = structureElementRootElement.asXML();
 
 			DDMStructureLocalServiceUtil.addStructure(
-				userId, groupId, classNameId, structureKey,
-				autoStructureKey, name, description, xsd, storageType,
+				userId, groupId, PortalUtil.getClassNameId(DDLRecordSet.class),
+				StringPool.BLANK, true, name, description, xsd, "xml",
 				serviceContext);
 		}
 	}
 
-	protected void addDocumentType(
-			long userId, long groupId, String documentTypeName,
-			String documentTypeDescription, String structureName,
-			String structureDescription, ServiceContext serviceContext)
+	protected void addDLDocumentType(
+			long userId, long groupId, String dlDocumentTypeName,
+			String dlDocumentTypeDescription, String ddmStructureName,
+			String ddmStructureDescription, ServiceContext serviceContext)
 		throws Exception {
 
-		List<DDMStructure> structures =
+		List<DDMStructure> ddmStructures =
 			DDMStructureLocalServiceUtil.getStructure(
-					groupId, structureName, structureDescription);
+				groupId, ddmStructureName, ddmStructureDescription);
 
-		if (structures.size() == 0) {
+		if (ddmStructures.isEmpty()) {
 			return;
 		}
 
-		long[] ddmStructureId = new long[] {structures.get(0).getStructureId()};
+		DDMStructure ddmStructure = ddmStructures.get(0);
 
-		List<DLDocumentType> documentTypes =
+		long[] ddmStructureId = new long[] {ddmStructure.getStructureId()};
+
+		List<DLDocumentType> dlDocumentTypes =
 			DLDocumentTypeLocalServiceUtil.getDocumentTypes(
-				groupId, documentTypeName, documentTypeDescription);
+				groupId, dlDocumentTypeName, dlDocumentTypeDescription);
 
-		if (documentTypes.size() == 0) {
+		if (dlDocumentTypes.isEmpty()) {
 			DLDocumentTypeLocalServiceUtil.addDocumentType(
-				userId, groupId, documentTypeName, documentTypeDescription,
+				userId, groupId, dlDocumentTypeName, dlDocumentTypeDescription,
 				ddmStructureId,	serviceContext);
 		}
 	}
 
-	protected void addDocumentTypes(
+	protected void addDLDocumentTypes(
 			long userId, long groupId, ServiceContext serviceContext)
 		throws Exception {
 
-		addDocumentType(userId, groupId, "Image", "Image Document Type",
+		addDLDocumentType(
+			userId, groupId, "Image", "Image Document Type",
 			"Default Image's Metadata Set based on Dublin Core Metadata " +
 				"Iniative",
 			"Default Image's Metadata Set based on Dublin Core Metadata " +
 				"Iniative", serviceContext);
 
-		addDocumentType(userId, groupId, "Video", "Video Document Type",
+		addDLDocumentType(
+			userId, groupId, "Video", "Video Document Type",
 			"Default Videos's Metadata Set", "Default Videos's Metadata Set",
 			serviceContext);
+	}
+
+	protected void doRun(long companyId) throws Exception {
+		ServiceContext serviceContext = new ServiceContext();
+
+		Group group = GroupLocalServiceUtil.getGroup(
+			companyId, GroupConstants.GUEST);
+
+		serviceContext.setScopeGroupId(group.getGroupId());
+
+		long defaultUserId = UserLocalServiceUtil.getDefaultUserId(companyId);
+
+		serviceContext.setUserId(defaultUserId);
+
+		addDDMStructures(
+			defaultUserId, group.getGroupId(), serviceContext);
+		addDLDocumentTypes(defaultUserId, group.getGroupId(), serviceContext);
 	}
 
 }

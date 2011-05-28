@@ -23,6 +23,11 @@ import com.liferay.portal.kernel.events.SimpleAction;
 public class AddDefaultDataAction extends SimpleAction {
 
 	public void run(String[] ids) throws ActionException {
+		SimpleAction addDefaultDocumentLibraryStructuresAction =
+			new AddDefaultDocumentLibraryStructuresAction();
+
+		addDefaultDocumentLibraryStructuresAction.run(ids);
+
 		SimpleAction addDefaultLayoutPrototypesAction =
 			new AddDefaultLayoutPrototypesAction();
 
@@ -32,11 +37,6 @@ public class AddDefaultDataAction extends SimpleAction {
 			new AddDefaultLayoutSetPrototypesAction();
 
 		addDefaultLayoutSetPrototypesAction.run(ids);
-
-		SimpleAction addDefaultDocumentLibraryStructureAction =
-			new AddDefaultDocumentLibraryStructureAction();
-
-		addDefaultDocumentLibraryStructureAction.run(ids);
 	}
 
 }

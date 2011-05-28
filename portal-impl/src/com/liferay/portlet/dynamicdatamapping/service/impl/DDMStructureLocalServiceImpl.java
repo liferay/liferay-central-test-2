@@ -215,7 +215,7 @@ public class DDMStructureLocalServiceImpl
 
 	public List<DDMStructure> getStructure(
 			long groupId, String name, String description)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		return ddmStructurePersistence.findByG_N_D(groupId, name, description);
 	}
