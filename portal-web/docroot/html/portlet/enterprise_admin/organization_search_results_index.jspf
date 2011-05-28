@@ -47,7 +47,7 @@ if (!corruptIndex) {
 else {
 %>
 
-	<%@ include file="/html/portlet/enterprise_admin/organization_search_results_database.jsp" %>
+	<%@ include file="/html/portlet/enterprise_admin/organization_search_results_database.jspf" %>
 
 <%
 }
