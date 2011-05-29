@@ -148,10 +148,11 @@ String[] allAssetTagNames = new String[0];
 
 if (selectionStyle.equals("dynamic")) {
 	if (!ArrayUtil.contains(groupIds, scopeGroupId)) {
-		groupIds = ArrayUtil.append(groupIds, scopeGroupId);
+		assetEntryQuery = AssetPublisherUtil.getAssetEntryQuery(preferences, ArrayUtil.append(groupIds, scopeGroupId));
 	}
-
-	assetEntryQuery = AssetPublisherUtil.getAssetEntryQuery(preferences, groupIds);
+	else {
+		assetEntryQuery = AssetPublisherUtil.getAssetEntryQuery(preferences, groupIds);
+	}
 
 	allAssetTagNames = AssetPublisherUtil.getAssetTagNames(preferences, scopeGroupId);
 }
