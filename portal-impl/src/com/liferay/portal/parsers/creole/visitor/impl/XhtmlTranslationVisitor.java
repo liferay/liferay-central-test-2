@@ -96,7 +96,9 @@ public class XhtmlTranslationVisitor implements ASTVisitor {
 		write("<h");
 		write(level);
 		write(">");
+
 		traverse(headingNode.getChildASTNodes());
+
 		write("</h");
 		write(level);
 		write(">");

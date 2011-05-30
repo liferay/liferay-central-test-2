@@ -36,6 +36,7 @@ public class ImageNode extends URLNode {
 
 	public ImageNode(
 		int tokenType, CollectionNode altCollectionNode, String uri) {
+
 		super(tokenType, uri);
 
 		_altCollectionNode = altCollectionNode;

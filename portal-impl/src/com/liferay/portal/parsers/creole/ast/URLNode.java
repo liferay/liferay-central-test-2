@@ -19,9 +19,6 @@ package com.liferay.portal.parsers.creole.ast;
  */
 public abstract class URLNode extends ASTNode {
 
-	public static String[] SUPPORTED_PROTOCOL_LINK =
-		{"http://", "https://", "ftp://"};
-
 	public URLNode() {
 	}
 
@@ -65,7 +62,10 @@ public abstract class URLNode extends ASTNode {
 		_supportedProtocols = supportedProtocols;
 	}
 
+	private static String[] _SUPPORTED_PROTOCOL_LINK =
+		{"http://", "https://", "ftp://"};
+
 	private String _link;
-	private String[] _supportedProtocols = SUPPORTED_PROTOCOL_LINK;
+	private String[] _supportedProtocols = _SUPPORTED_PROTOCOL_LINK;
 
 }

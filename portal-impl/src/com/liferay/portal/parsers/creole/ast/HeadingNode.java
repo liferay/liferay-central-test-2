@@ -25,8 +25,8 @@ public class HeadingNode extends BaseParentableNode {
 		_level = level;
 	}
 
-	public HeadingNode(CollectionNode content, int level) {
-		super(content);
+	public HeadingNode(CollectionNode collectionNode, int level) {
+		super(collectionNode);
 
 		_level = level;
 	}
