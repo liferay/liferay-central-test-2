@@ -14,6 +14,7 @@
 
 package com.liferay.portal.parsers.creole.visitor.impl;
 
+import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.parsers.creole.ast.ASTNode;
@@ -35,6 +36,7 @@ import com.liferay.portal.parsers.creole.ast.UnformattedTextNode;
 import com.liferay.portal.parsers.creole.ast.UnorderedListItemNode;
 import com.liferay.portal.parsers.creole.ast.UnorderedListNode;
 import com.liferay.portal.parsers.creole.ast.WikiPageNode;
+import com.liferay.portal.parsers.creole.ast.extension.TableOfContentsNode;
 import com.liferay.portal.parsers.creole.ast.link.LinkNode;
 import com.liferay.portal.parsers.creole.ast.table.TableDataNode;
 import com.liferay.portal.parsers.creole.ast.table.TableHeaderNode;
@@ -60,7 +62,7 @@ public class XhtmlTranslationVisitor implements ASTVisitor {
 		write("<strong>");
 
 		if (boldTextNode.getContent() != null) {
-			write(boldTextNode.getContent());
+			write(HtmlUtil.escape(boldTextNode.getContent()));
 		}
 		else {
 			traverse(boldTextNode.getChildASTNodes());
@@ -81,7 +83,7 @@ public class XhtmlTranslationVisitor implements ASTVisitor {
 
 	public void visit(FormattedTextNode formattedTextNode) {
 		if (formattedTextNode.getContent() != null) {
-			write(formattedTextNode.getContent());
+			write(HtmlUtil.escape(formattedTextNode.getContent()));
 		}
 		else {
 			traverse(formattedTextNode.getChildASTNodes());
@@ -94,7 +96,7 @@ public class XhtmlTranslationVisitor implements ASTVisitor {
 		write("<h");
 		write(level);
 		write(">");
-		write(headingNode.getContent());
+		traverse(headingNode.getChildASTNodes());
 		write("</h");
 		write(level);
 		write(">");
@@ -106,7 +108,7 @@ public class XhtmlTranslationVisitor implements ASTVisitor {
 
 	public void visit(ImageNode imageNode) {
 		write("<img src=\"");
-		write(imageNode.getUri());
+		write(HtmlUtil.escape(imageNode.getLink()));
 		write("\" ");
 
 		if (imageNode.hasAltCollectionNode()) {
@@ -126,7 +128,7 @@ public class XhtmlTranslationVisitor implements ASTVisitor {
 		write("<em>");
 
 		if (italicTextNode.getContent() != null) {
-			write(italicTextNode.getContent());
+			write(HtmlUtil.escape(italicTextNode.getContent()));
 		}
 		else {
 			traverse(italicTextNode.getChildASTNodes());
@@ -141,7 +143,7 @@ public class XhtmlTranslationVisitor implements ASTVisitor {
 
 	public void visit(LinkNode linkNode) {
 		write("<a href=\"");
-		write(linkNode.getLink());
+		write(HtmlUtil.escape(linkNode.getLink()));
 		write("\">");
 
 		if (linkNode.hasAltCollectionNode()) {
@@ -150,7 +152,7 @@ public class XhtmlTranslationVisitor implements ASTVisitor {
 			traverse(altCollectionNode.getASTNodes());
 		}
 		else {
-			write(linkNode.getLink());
+			write(HtmlUtil.escape(linkNode.getLink()));
 		}
 
 		write("</a>");
@@ -158,13 +160,12 @@ public class XhtmlTranslationVisitor implements ASTVisitor {
 
 	public void visit(NoWikiSectionNode noWikiSectionNode) {
 		write("<pre>");
-		write(noWikiSectionNode.getContent());
+		write(HtmlUtil.escape(noWikiSectionNode.getContent()));
 		write("</pre>");
 	}
 
 	public void visit(OrderedListItemNode orderedListItemNode) {
-		traverseAndWriteForEach(
-			orderedListItemNode.getChildASTNodes(), "<li>", "</li>");
+		traverse(orderedListItemNode.getChildASTNodes(), "<li>", "</li>");
 	}
 
 	public void visit(OrderedListNode orderedListNode) {
@@ -180,7 +181,7 @@ public class XhtmlTranslationVisitor implements ASTVisitor {
 	}
 
 	public void visit(ScapedNode scapedNode) {
-		write(scapedNode.getContent());
+		write(HtmlUtil.escape(scapedNode.getContent()));
 	}
 
 	public void visit(TableDataNode tableDataNode) {
@@ -199,9 +200,12 @@ public class XhtmlTranslationVisitor implements ASTVisitor {
 		write("</table>");
 	}
 
+	public void visit(TableOfContentsNode tableOfContentsNode) {
+	}
+
 	public void visit(UnformattedTextNode unformattedTextNode) {
 		if (unformattedTextNode.hasContent()) {
-			write(unformattedTextNode.getContent());
+			write(HtmlUtil.escape(unformattedTextNode.getContent()));
 		}
 		else {
 			traverse(unformattedTextNode.getChildASTNodes());

@@ -19,21 +19,15 @@ import com.liferay.portal.parsers.creole.visitor.ASTVisitor;
 /**
  * @author Miguel Pastor
  */
-public class HeadingNode extends ASTNode {
+public class HeadingNode extends BaseParentableNode {
 
-	public HeadingNode(int tokenType) {
-		super(tokenType);
-	}
-
-	public HeadingNode(int tokenType, String content, int level) {
-		this(tokenType);
-
-		_content = content;
+	public HeadingNode(int level) {
 		_level = level;
 	}
 
-	public HeadingNode(String content, int level) {
-		_content = content;
+	public HeadingNode(CollectionNode content, int level) {
+		super(content);
+
 		_level = level;
 	}
 
@@ -41,23 +35,14 @@ public class HeadingNode extends ASTNode {
 		astVisitor.visit(this);
 	}
 
-	public String getContent() {
-		return _content;
-	}
-
 	public int getLevel() {
 		return _level;
-	}
-
-	public void setContent(String content) {
-		_content = content;
 	}
 
 	public void setLevel(int level) {
 		_level = level;
 	}
 
-	private String _content;
 	private int _level;
 
 }

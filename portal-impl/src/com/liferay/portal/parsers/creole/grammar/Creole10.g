@@ -41,10 +41,12 @@ scope CountLevel {
  
 package com.liferay.portal.parsers.creole.parser;
 
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.parsers.creole.ast.ASTNode;
 import com.liferay.portal.parsers.creole.ast.BaseListNode;
 import com.liferay.portal.parsers.creole.ast.BoldTextNode;
 import com.liferay.portal.parsers.creole.ast.CollectionNode;
+import com.liferay.portal.parsers.creole.ast.extension.TableOfContentsNode;
 import com.liferay.portal.parsers.creole.ast.ForcedEndOfLineNode;
 import com.liferay.portal.parsers.creole.ast.FormattedTextNode;
 import com.liferay.portal.parsers.creole.ast.HeadingNode;
@@ -94,7 +96,7 @@ import com.liferay.portal.parsers.creole.ast.WikiPageNode;
  package com.liferay.portal.parsers.creole.parser;
 }
 
-@members {
+@members{
 	protected static final String GROUPING_SEPARATOR = "-";
 
 	private WikiPageNode _wikipage = null;
@@ -104,20 +106,25 @@ import com.liferay.portal.parsers.creole.ast.WikiPageNode;
 			throw new IllegalStateException("No succesful parsing process");
 		
 		return _wikipage;
-	}	
-}
-
+	}
+	
+				
 wikipage
 	:	( whitespaces )?  p=paragraphs  { _wikipage = new WikiPageNode($p.sections); } EOF
 	;
 paragraphs returns [CollectionNode sections = new CollectionNode()]
-	:	(p= paragraph {$sections.add($p.node);} )*
+	:	(p= paragraph {
+			if($p.node != null){ // at this moment we ignore paragraps with blanks
+				$sections.add($p.node);
+			}
+			} )*
 	;
 paragraph returns [ASTNode node = null]
 	:	n=nowiki_block { $node = $n.nowikiNode; }
 	|	blanks  paragraph_separator
 	|	( blanks )?
-			(	h = heading { $node = $h.header;}
+			(	tof = table_of_contents {$node = $tof.tableOfContents;}			
+			|	h =  heading { $node = $h.header;}
 			|	{ input.LA(1) == DASH && input.LA(2) == DASH &&
 				input.LA(3) == DASH && input.LA(4) == DASH }?
 				hn = horizontalrule {$node = $hn.horizontal;}
@@ -139,7 +146,11 @@ text_paragraph returns [ ParagraphNode paragraph = new ParagraphNode() ]
 		)+
 	;
 text_line returns [LineNode line = new LineNode()]
-	:	first = text_firstelement  {$line.addChildASTNode($first.item); } ( element = text_element  {$line.addChildASTNode($element.item);} )*  text_lineseparator
+	:	first = text_firstelement  {$line.addChildASTNode($first.item); } ( element = text_element  {
+								if($element.item != null) // recovering from errors
+									$line.addChildASTNode($element.item);
+							} 
+					)*  text_lineseparator
 	;
 text_firstelement returns [ASTNode item = null]
 	:	{ input.LA(1) != STAR || (input.LA(1) == STAR && input.LA(2) == STAR) }?
@@ -192,19 +203,19 @@ text_first_inlineelement  returns [ASTNode element = null]
 	:	
 		l=link {$element = $l.link;}
 	|	i = image {$element = $i.image;}
-	|	e=extension {$element = $e.node;}
+	|	e= extension {$element = $e.node;}
 	;
 text_first_unformattedelement returns [ASTNode item = null]
 	:	tfu = text_first_unformatted {$item = new UnformattedTextNode($tfu.items);}
 	|	tfi = text_first_inlineelement { $item = $tfi.element; }
 	;
 text_first_unformatted returns [CollectionNode items = new CollectionNode()]
-	:	 	t = text_first_unformmatted_text {$items.add(new UnformattedTextNode($t.text));}
+	:	 	t = text_first_unformmatted_text {$items.add(new UnformattedTextNode($t.text.toString()));}
 		|	(forced_linebreak { $items.add(new ForcedEndOfLineNode()); }
 		|	e = escaped {$items.add($e.scaped);} )+
 	;
 
-text_first_unformmatted_text returns [String text = new String()]
+text_first_unformmatted_text returns [StringBundler text = new StringBundler()]
 	:	
 	 (c =  ~(	POUND
 			|	STAR
@@ -218,7 +229,7 @@ text_first_unformmatted_text returns [String text = new String()]
 			|	FORCED_LINEBREAK
 			|	ESCAPE
 			|	NEWLINE
-			|	EOF ) {$text += $c.text; } )  +
+			|	EOF ) {$text.append($c.text); } )  +
 	;
 text_unformattedelement returns [ASTNode contents = null]
 	:	text = text_unformatted { $contents = $text.items; }
@@ -226,12 +237,12 @@ text_unformattedelement returns [ASTNode contents = null]
 	;
 
 text_unformatted returns [CollectionNode items = new CollectionNode()]
-	:		contents = text_unformated_text {$items.add(new UnformattedTextNode($contents.text)); }
+	:		contents = text_unformated_text {$items.add(new UnformattedTextNode($contents.text.toString())); }
 		|	(forced_linebreak { $items.add(new ForcedEndOfLineNode()); }
 		|	e = escaped {$items.add($e.scaped);} )+ 
 	;
-
-text_unformated_text returns [String text = new String()]
+	
+text_unformated_text returns [StringBundler text = new StringBundler()]
 :
 	(c = ~(	ITAL
 			|	STAR
@@ -242,33 +253,82 @@ text_unformated_text returns [String text = new String()]
 			|	FORCED_LINEBREAK
 			|	ESCAPE
 			|	NEWLINE
-			|	EOF ) { $text += $c.text;} ) +
+			|	EOF ) { $text.append($c.text);} ) +
 	;
 	
 //////////////////////////////   H E A D I N G   //////////////////////////////
 
 heading returns [ASTNode header]
 	scope {
+	       CollectionNode items;	
 	       int nestedLevel;
 	       String text;
 	}	
 	@init {
+		$heading::items = new CollectionNode();	
 		$heading::text = new String();
 	}
-	:	heading_markup  {$heading::nestedLevel++;} heading_content { $header = new HeadingNode($heading::text,$heading::nestedLevel); }  ( heading_markup )?  ( blanks )?
+/*	:	heading_markup  {$heading::nestedLevel++;} heading_content { $header = new HeadingNode($heading::text,$heading::nestedLevel); }  ( heading_markup )?  ( blanks )?*/
+	:	heading_markup  {$heading::nestedLevel++;} hc =heading_content { $header = new HeadingNode($heading::items,$heading::nestedLevel); }  ( heading_markup )?  ( blanks )?
 		paragraph_separator
 	;
 heading_content
 	:	heading_markup {$heading::nestedLevel++;}  heading_content  ( heading_markup )?
-	|	heading_text
+	|	ht = heading_text {$heading::items= $ht.items;}
 	;
 
-heading_text
-	:
-		(  (contents = ~( EQUAL | ESCAPE | NEWLINE | EOF ) { $heading::text += $contents.text; } 
-	| 		symbol = escaped { $heading::text += $symbol.scaped.getContent(); } ) 	)+ 
+// DO THIS IMPROVEMENT?? Not sure it does work!!
+heading_text returns [CollectionNode items = null]
+	:	te = heading_cellcontent {$items = $te.items;}
+	;	
+heading_cellcontent returns [CollectionNode items = new CollectionNode()]
+	:	onestar  ( tcp = heading_cellcontentpart  {$items.add($tcp.node); } onestar )*
 	;
-	
+heading_cellcontentpart returns [ASTNode node = null]
+	:	tf = heading_formattedelement {$node=$tf.content;}
+	|	tu = heading_unformattedelement {$node=$tu.content;}
+	;
+heading_formattedelement returns [ASTNode content = null]
+	:	ital_markup   ( tic = heading_italcontent { $content = new ItalicTextNode($tic.items); })?  ( ital_markup )?
+	|	bold_markup ( tbc= heading_boldcontent  {$content = new BoldTextNode($tbc.items);})?  ( bold_markup )?
+	;
+heading_boldcontent returns [CollectionNode items = new CollectionNode()]
+	:	onestar  ( tb = heading_boldcontentpart  { $items.add($tb.node); } onestar )+
+	|	EOF
+	;
+heading_italcontent returns [CollectionNode items = new CollectionNode()]
+	:	onestar  ( ti = heading_italcontentpart  { $items.add($ti.node); } onestar )+
+	|	EOF
+	;
+heading_boldcontentpart returns [ASTNode node = null]
+	:	tf = heading_formattedcontent {$node = $tf.elements; }
+	|	ital_markup  tb = heading_bolditalcontent  { $node = new ItalicTextNode($tb.elements);  } ( ital_markup )?
+	;
+heading_italcontentpart returns [ASTNode node = null]
+	:	bold_markup  tb = heading_bolditalcontent  {$node = new BoldTextNode($tb.elements); } ( bold_markup )?
+	|	tf = heading_formattedcontent { $node = $tf.elements; }
+	;
+heading_bolditalcontent returns [CollectionNode elements = null]
+	:	onestar  ( tfc = heading_formattedcontent  { $elements = $tfc.elements; } onestar )?
+	|	EOF
+	;
+heading_formattedcontent returns [CollectionNode elements = new CollectionNode()]
+	:	( tu = heading_unformattedelement { $elements.add($tu.content); } )+
+	;
+heading_unformattedelement returns [ASTNode content = null]
+	:	tu = heading_unformatted_text  {$content = new UnformattedTextNode($tu.text.toString());}
+	|	ti = heading_inlineelement {$content = $ti.element;}
+	;	
+heading_inlineelement returns [ASTNode element = null]
+	:	l = link {$element = $l.link; }
+	|	i =image {$element = $i.image; }
+	|	nwi = nowiki_inline {$element = $nwi.nowiki; } 	
+	;
+
+heading_unformatted_text returns [StringBundler text = new StringBundler()]
+	:	( c = ~(LINK_OPEN | IMAGE_OPEN | NOWIKI_OPEN |EQUAL | ESCAPE | NEWLINE | EOF  )  {$text.append($c.text);} )+
+	;
+
 /////////////////////////////////   L I S T   /////////////////////////////////
 
 list_ord returns [OrderedListNode orderedList = new OrderedListNode()] 
@@ -320,9 +380,30 @@ list_elemcontentpart returns [ASTNode node = null]
 	|	tf = list_formatted_elem { $node = new FormattedTextNode($tf.contents);}
 	;
 list_formatted_elem returns [CollectionNode contents = new CollectionNode()] 
-	:	bold_markup  onestar  ( boldContents = list_boldcontentpart  { $contents.add(new BoldTextNode($boldContents.contents)); } onestar )*
+	:	bold_markup  onestar  ( boldContents = list_boldcontentpart  { 
+						BoldTextNode add = null;
+						if($boldContents.contents instanceof CollectionNode){
+						     add = new BoldTextNode($boldContents.contents); 		     
+						}else{						
+						    CollectionNode c = new CollectionNode();
+						    c.add($boldContents.contents);
+						    add = new BoldTextNode(c); 		     
+						}
+						$contents.add(add);						
+						} 
+				onestar )*
 		( bold_markup )?
-	|	ital_markup  onestar  ( italContents = list_italcontentpart  { $contents.add(new ItalicTextNode($italContents.contents)); } onestar )*
+	|	ital_markup    onestar  ( italContents = list_italcontentpart      {
+						ItalicTextNode add = null;
+						if($italContents.contents instanceof CollectionNode){
+						    add = new ItalicTextNode($italContents.contents);
+						}else{
+						      CollectionNode c = new CollectionNode();
+						      c.add($italContents.contents);
+						      add = new ItalicTextNode(c);
+						}
+						$contents.add(add); 
+						} onestar )*
 		( ital_markup )?
 	;
 
@@ -415,12 +496,12 @@ table_inlineelement returns [ASTNode element = null]
 	|	nw =nowiki_inline {$element = $nw.nowiki; }
 	;	
 table_unformatted returns [CollectionNode text = new CollectionNode()]
-	:		t = table_unformatted_text { $text.add(new UnformattedTextNode($t.text));}
+	:		t = table_unformatted_text { $text.add(new UnformattedTextNode($t.text.toString()));}
 		|	(forced_linebreak {$text.add(new ForcedEndOfLineNode());} 
 		|	e = escaped {$text.add($e.scaped);} )+
 	;
 
-table_unformatted_text returns [String text = new String()]
+table_unformatted_text returns [StringBundler text = new StringBundler()]
 	:	( c = ~(	PIPE
 			|	ITAL
 			|	STAR
@@ -431,13 +512,13 @@ table_unformatted_text returns [String text = new String()]
 			|	FORCED_LINEBREAK
 			|	ESCAPE
 			|	NEWLINE
-			|	EOF )  {$text += $c.text;} )+
+			|	EOF )  {$text.append($c.text);} )+
 	;
 ///////////////////////////////   N O W I K I   ///////////////////////////////
 
 nowiki_block returns [NoWikiSectionNode nowikiNode]
-	:	nowikiblock_open_markup  contents = nowiki_block_contents {$nowikiNode = new NoWikiSectionNode($contents.text);}
-		nowikiblock_close_markup  paragraph_separator 
+	:	nowikiblock_open_markup  contents = nowiki_block_contents {$nowikiNode = new NoWikiSectionNode($contents.text.toString());}
+		nowikiblock_close_markup  paragraph_separator 		
 	;
 	
 nowikiblock_open_markup
@@ -450,16 +531,16 @@ nowikiblock_close_markup
 
 nowiki_inline returns [NoWikiSectionNode nowiki = null]
 	:	nowiki_open_markup  t = nowiki_inline_contents 
-		nowiki_close_markup {$nowiki = new NoWikiSectionNode($t.text);}
+		nowiki_close_markup {$nowiki = new NoWikiSectionNode($t.text.toString());}
+	;	
+nowiki_block_contents returns [StringBundler contents = new StringBundler()]
+	:	(c=~( NOWIKI_BLOCK_CLOSE | EOF ) {$contents.append($c.text);})*
 	;
 	
-nowiki_block_contents returns [String contents = new String()]
-	:	(c=~( NOWIKI_BLOCK_CLOSE | EOF ) {$contents += $c.text;})*
+nowiki_inline_contents returns [StringBundler text = new StringBundler()]
+	:	(c = ~( NOWIKI_CLOSE| NEWLINE | EOF )  { $text.append($c.text); })*
 	;
 	
-nowiki_inline_contents returns [String text = new String()]
-	:	(c = ~( NOWIKI_CLOSE| NEWLINE | EOF )  { $text +=$c.text; })*
-	;
 
 
 //////////////////////   H O R I Z O N T A L   R U L E   //////////////////////
@@ -474,14 +555,21 @@ horizontalrule returns [ASTNode horizontal = null]
 
 link returns [LinkNode link = null]
 	:	link_open_markup  a =link_address  {$link = $a.link; } (link_description_markup  
-		d = link_description {$link.setAltCollectionNode($d.node); } )?  link_close_markup
+		d = link_description {
+			if($link == null) { // recover from possible errors
+			    $link = new LinkNode();
+			}
+			$link.setAltCollectionNode($d.node); 
+			
+			} )?  link_close_markup
 	;
-link_address returns [LinkNode link =null] 
+
+link_address returns [LinkNode link =null]
 	:	li = link_interwiki_uri  ':'  p = link_interwiki_pagename { 
-						$li.interwiki.setUri($p.text);
+						$li.interwiki.setUri($p.text.toString());
 						$link = $li.interwiki;
 					}
-	|	lu = link_uri {$link = new LinkNode($lu.text); }
+	|	lu = link_uri {$link = new LinkNode($lu.text.toString()); }
 	;
 link_interwiki_uri returns [InterwikiLinkNode interwiki = null]
 	:	'C' '2'
@@ -505,8 +593,8 @@ link_interwiki_uri returns [InterwikiLinkNode interwiki = null]
 	|	'W' 'i' 'k' 'i' 'p' 'e' 'd' 'i' 'a'
 	|	'X' 'W' 'i' 'k' 'i'
 	;
-link_interwiki_pagename returns [String text = new String()]
-	:	( c = ~( PIPE | LINK_CLOSE | NEWLINE | EOF ) { $text += $c.text; } ) +
+link_interwiki_pagename returns [StringBundler text = new StringBundler()]
+	:	( c = ~( PIPE | LINK_CLOSE | NEWLINE | EOF ) { $text.append($c.text); } ) +
 	;
 link_description returns [CollectionNode node = new CollectionNode()]
 	:	( l = link_descriptionpart {$node.add($l.text);}
@@ -541,11 +629,11 @@ link_boldital_description returns [CollectionNode text = new CollectionNode()]
 				                   })+
 	;
 link_descriptiontext returns [CollectionNode text = new CollectionNode()]
-	:		t = link_descriptiontext_simple { $text.add(new UnformattedTextNode($t.text));}
+	:		t = link_descriptiontext_simple { $text.add(new UnformattedTextNode($t.text.toString()));}
 		|	( forced_linebreak {$text.add(new ForcedEndOfLineNode());}
 		|	e = escaped {$text.add($e.scaped);} )+
 	;
-link_descriptiontext_simple returns [String text = new String()]
+link_descriptiontext_simple returns [StringBundler text = new StringBundler()]
 	:	( c = ~(	LINK_CLOSE
 			|	ITAL
 			|	STAR
@@ -556,10 +644,10 @@ link_descriptiontext_simple returns [String text = new String()]
 			|	FORCED_LINEBREAK
 			|	ESCAPE
 			|	NEWLINE
-			|	EOF ) { $text += $c.text; } )+
+			|	EOF ) { $text.append($c.text); } )+
 	;	
-link_uri returns [String text = new String()]
-	:	( c = ~( PIPE | LINK_CLOSE | NEWLINE | EOF ) {$text += $c.text; } )+
+link_uri returns [StringBundler text = new StringBundler()]
+	:	( c = ~( PIPE | LINK_CLOSE | NEWLINE | EOF ) {$text.append($c.text); } )+
 	;
 
 
@@ -567,11 +655,11 @@ link_uri returns [String text = new String()]
 ////////////////////////////////   I M A G E   ////////////////////////////////
 
 image returns [ImageNode image = new ImageNode()]
-	:	image_open_markup uri = image_uri {$image.setUri($uri.link);}  ( alt =image_alternative {$image.setAltCollectionNode($alt.alternative);} )?   
+	:	image_open_markup uri = image_uri {$image.setLink($uri.link.toString());}  ( alt =image_alternative {$image.setAltCollectionNode($alt.alternative);} )?
 		image_close_markup
 	;
-image_uri returns [String link = new String()]
-	:	(c = ~( PIPE | IMAGE_CLOSE | NEWLINE | EOF ) {$link += $c.text; })+
+image_uri returns [StringBundler link = new StringBundler()]
+	:	(c = ~( PIPE | IMAGE_CLOSE | NEWLINE | EOF ) {$link.append($c.text); })+
 	;
 image_alternative returns [CollectionNode alternative = new CollectionNode()]
 	:	image_alternative_markup  ( p = image_alternativepart {$alternative.add($p.item); } )+
@@ -630,11 +718,11 @@ image_boldital_alternative returns [CollectionNode text = new CollectionNode()]
 					})+
 	;	
 image_alternativetext returns [CollectionNode items = new CollectionNode()]
-	:	contents = image_alternative_simple_text {$items.add(new UnformattedTextNode($contents.text)); }
+	:	contents = image_alternative_simple_text {$items.add(new UnformattedTextNode($contents.text.toString())); }
 	|	(forced_linebreak {$items.add(new ForcedEndOfLineNode());})+
 	;
 
-image_alternative_simple_text returns [String text = new String()]
+image_alternative_simple_text returns [StringBundler text = new StringBundler()]
 	:	
 	( c = ~( 	IMAGE_CLOSE
 			|	ITAL
@@ -645,14 +733,14 @@ image_alternative_simple_text returns [String text = new String()]
 			|	EXTENSION
 			|	FORCED_LINEBREAK
 			|	NEWLINE
-			|	EOF ) {$text += $c.text; } ) +
+			|	EOF ) {$text.append($c.text); } ) +
 	;
 	
 /////////////////////////////  E X T E N S I O N  /////////////////////////////
 
 extension returns [ASTNode node = null]
-	:	extension_markup  extension_handler  blanks  extension_statement
-		extension_markup
+	:	extension_markup  extension_handler  blanks  extension_statement 
+		extension_markup	
 	;
 extension_handler
 	:	(~( EXTENSION  |  BLANKS  |  ESCAPE  |  NEWLINE  |  EOF ) | escaped )+
@@ -662,6 +750,10 @@ extension_statement
 	;
 
 
+/////////////////////////////  TABLE OF CONTENTS EXTENSION  /////////////////////////////
+table_of_contents returns [ASTNode tableOfContents = new TableOfContentsNode()]
+	:	/*TABLE_OF_CONTENTS_OPEN_MARKUP*/ TABLE_OF_CONTENTS_TEXT  /*TABLE_OF_CONTENTS_CLOSE_MARKUP*/	
+	;
 onestar
 	:	( { input.LA(2) != STAR }?  ( STAR )?)
 	| 
@@ -762,7 +854,7 @@ forced_linebreak
 ///////////////////////////////////////////////////////////////////////////////
 
 ESCAPE					: '~';
-NOWIKI_BLOCK_CLOSE		: NEWLINE  '}}}';
+NOWIKI_BLOCK_CLOSE		: 	NEWLINE  '}}}';
 NEWLINE					: ( CR )?  LF
 						| CR;
 fragment CR				: '\r';
@@ -788,7 +880,15 @@ DASH					: '-';
 STAR					: '*';
 SLASH					: '/';
 EXTENSION				: '@@';
-
+TABLE_OF_CONTENTS_OPEN_MARKUP
+	:	'<<'
+	;
+TABLE_OF_CONTENTS_CLOSE_MARKUP
+	:	'>>'
+	;
+TABLE_OF_CONTENTS_TEXT
+	:	'<<TableOfContents>>'
+	;	
 INSIGNIFICANT_CHAR		: .;
 
 

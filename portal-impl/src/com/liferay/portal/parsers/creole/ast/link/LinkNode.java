@@ -14,14 +14,14 @@
 
 package com.liferay.portal.parsers.creole.ast.link;
 
-import com.liferay.portal.parsers.creole.ast.ASTNode;
 import com.liferay.portal.parsers.creole.ast.CollectionNode;
+import com.liferay.portal.parsers.creole.ast.URLNode;
 import com.liferay.portal.parsers.creole.visitor.ASTVisitor;
 
 /**
  * @author Miguel Pastor
  */
-public class LinkNode extends ASTNode {
+public class LinkNode extends URLNode {
 
 	public LinkNode() {
 	}
@@ -31,13 +31,11 @@ public class LinkNode extends ASTNode {
 	}
 
 	public LinkNode(int token, String link) {
-		this(token);
-
-		_link = link;
+		super(token, link);
 	}
 
 	public LinkNode(String link) {
-		_link = link;
+		super(link);
 	}
 
 	public void accept(ASTVisitor astVisitor) {
@@ -46,10 +44,6 @@ public class LinkNode extends ASTNode {
 
 	public CollectionNode getAltCollectionNode() {
 		return _altCollectionNode;
-	}
-
-	public String getLink() {
-		return _link;
 	}
 
 	public boolean hasAltCollectionNode() {
@@ -65,11 +59,6 @@ public class LinkNode extends ASTNode {
 		_altCollectionNode = altCollectionNode;
 	}
 
-	public void setLink(String link) {
-		_link = link;
-	}
-
 	private CollectionNode _altCollectionNode;
-	private String _link;
 
 }
