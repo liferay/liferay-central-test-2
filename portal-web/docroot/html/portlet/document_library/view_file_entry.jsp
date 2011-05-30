@@ -239,7 +239,9 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 
 						<c:choose>
 							<c:when test="<%= previewFileCount == 0 %>">
-								<liferay-ui:message key="generating-preview-will-take-a-few-minutes" />
+								<div class="portlet-msg-alert">
+									<liferay-ui:message key="generating-preview-will-take-a-few-minutes" />
+								</div>
 							</c:when>
 							<c:otherwise>
 								<div class="lfr-preview-file" id="<portlet:namespace />previewFile">
