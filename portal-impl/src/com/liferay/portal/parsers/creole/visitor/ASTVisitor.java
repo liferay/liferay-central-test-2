@@ -32,6 +32,7 @@ import com.liferay.portal.parsers.creole.ast.UnformattedTextNode;
 import com.liferay.portal.parsers.creole.ast.UnorderedListItemNode;
 import com.liferay.portal.parsers.creole.ast.UnorderedListNode;
 import com.liferay.portal.parsers.creole.ast.WikiPageNode;
+import com.liferay.portal.parsers.creole.ast.extension.TableOfContentsNode;
 import com.liferay.portal.parsers.creole.ast.link.LinkNode;
 import com.liferay.portal.parsers.creole.ast.table.TableDataNode;
 import com.liferay.portal.parsers.creole.ast.table.TableHeaderNode;
@@ -77,6 +78,8 @@ public interface ASTVisitor {
 	public void visit(TableHeaderNode tableHeaderNode);
 
 	public void visit(TableNode tableNode);
+
+	public void visit(TableOfContentsNode tableOfContentsNode);
 
 	public void visit(UnformattedTextNode unformattedTextNode);
 
