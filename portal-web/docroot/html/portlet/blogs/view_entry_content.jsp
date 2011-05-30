@@ -139,7 +139,7 @@ AssetEntry assetEntry = (AssetEntry)request.getAttribute("view_entry_content.jsp
 						<liferay-ui:custom-attributes-available className="<%= BlogsEntry.class.getName() %>">
 							<liferay-ui:custom-attribute-list
 								className="<%= BlogsEntry.class.getName() %>"
-								classPK="<%= (entry != null) ? entry.getEntryId() : 0 %>"
+								classPK="<%= entry.getEntryId() %>"
 								editable="<%= false %>"
 								label="<%= true %>"
 							/>

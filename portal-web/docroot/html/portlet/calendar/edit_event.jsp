@@ -185,7 +185,7 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 		<liferay-ui:custom-attributes-available className="<%= CalEvent.class.getName() %>">
 			<liferay-ui:custom-attribute-list
 				className="<%= CalEvent.class.getName() %>"
-				classPK="<%= (event != null) ? event.getEventId() : 0 %>"
+				classPK="<%= eventId %>"
 				editable="<%= true %>"
 				label="<%= true %>"
 			/>
@@ -215,7 +215,7 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 			<aui:fieldset>
 				<liferay-ui:input-asset-links
 					className="<%= CalEvent.class.getName() %>"
-					classPK="<%= (event != null) ? event.getEventId() : 0 %>"
+					classPK="<%= eventId %>"
 				/>
 			</aui:fieldset>
 		</liferay-ui:panel>

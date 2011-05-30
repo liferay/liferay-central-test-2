@@ -101,7 +101,7 @@ boolean allowTrackbacks = PropsValues.BLOGS_TRACKBACK_ENABLED && BeanParamUtil.g
 		<liferay-ui:custom-attributes-available className="<%= BlogsEntry.class.getName() %>">
 			<liferay-ui:custom-attribute-list
 				className="<%= BlogsEntry.class.getName() %>"
-				classPK="<%= (entry != null) ? entry.getEntryId() : 0 %>"
+				classPK="<%= entryId %>"
 				editable="<%= true %>"
 				label="<%= true %>"
 			/>
@@ -187,7 +187,7 @@ boolean allowTrackbacks = PropsValues.BLOGS_TRACKBACK_ENABLED && BeanParamUtil.g
 			<aui:fieldset>
 				<liferay-ui:input-asset-links
 					className="<%= BlogsEntry.class.getName() %>"
-					classPK="<%= (entry != null) ? entry.getEntryId() : 0 %>"
+					classPK="<%= entryId %>"
 				/>
 			</aui:fieldset>
 		</liferay-ui:panel>

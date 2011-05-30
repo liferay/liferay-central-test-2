@@ -207,7 +207,7 @@ if (Validator.isNull(redirect)) {
 		<liferay-ui:custom-attributes-available className="<%= MBMessage.class.getName() %>">
 			<liferay-ui:custom-attribute-list
 				className="<%= MBMessage.class.getName() %>"
-				classPK="<%= (message != null) ? message.getMessageId() : 0 %>"
+				classPK="<%= messageId %>"
 				editable="<%= true %>"
 				label="<%= true %>"
 			/>

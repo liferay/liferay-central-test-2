@@ -64,7 +64,7 @@ request.setAttribute("view_entry.jsp-entry", entry);
 		<liferay-ui:custom-attributes-available className="<%= BookmarksEntry.class.getName() %>">
 			<liferay-ui:custom-attribute-list
 				className="<%= BookmarksEntry.class.getName() %>"
-				classPK="<%= (entry != null) ? entry.getEntryId() : 0 %>"
+				classPK="<%= entryId %>"
 				editable="<%= false %>"
 				label="<%= true %>"
 			/>
