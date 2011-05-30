@@ -24,6 +24,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
+import com.liferay.portal.model.GroupConstants;
 import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.impl.LayoutImpl;
 import com.liferay.portal.service.GroupLocalServiceUtil;
@@ -244,14 +245,6 @@ public class VirtualHostFilter extends BasePortalFilter {
 						StringPool.BLANK);
 				}
 
-				if (friendlyURL.equals(StringPool.SLASH)) {
-					String homeURL = PortalUtil.getRelativeHomeURL(request);
-
-					if (Validator.isNotNull(homeURL)) {
-						friendlyURL = homeURL;
-					}
-				}
-
 				long plid = PortalUtil.getPlidFromFriendlyURL(
 					companyId, friendlyURL);
 
@@ -275,7 +268,20 @@ public class VirtualHostFilter extends BasePortalFilter {
 
 					prefix.append(group.getFriendlyURL());
 
-					forwardURL.append(prefix);
+					Group guestGroup = GroupLocalServiceUtil.getGroup(
+						companyId, GroupConstants.GUEST);
+
+					String homeURL = PortalUtil.getRelativeHomeURL(request);
+
+					if (group.equals(guestGroup) &&
+						friendlyURL.equals(StringPool.SLASH) &&
+						Validator.isNotNull(homeURL)) {
+
+						friendlyURL = homeURL;
+					}
+					else {
+						forwardURL.append(prefix);
+					}
 				}
 
 				forwardURL.append(friendlyURL);
