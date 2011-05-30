@@ -18,8 +18,12 @@ import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.kernel.upgrade.util.UpgradeTable;
 import com.liferay.portal.kernel.upgrade.util.UpgradeTableFactoryUtil;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.MimeTypesUtil;
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.upgrade.v6_1_0.util.DLFileVersionTable;
+import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -38,6 +42,7 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 		updateFileRanks();
 		updateFileShortcuts();
 		updateFileVersions();
+		updateLocks();
 	}
 
 	protected long getFileEntryId(long groupId, long folderId, String name)
@@ -253,6 +258,43 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 				DLFileVersionTable.TABLE_SQL_ADD_INDEXES);
 
 			upgradeTable.updateTable();
+		}
+	}
+
+	protected void updateLocks() throws Exception {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			con = DataAccess.getConnection();
+
+			ps = con.prepareStatement(
+				"select lockId, key_ from Lock_ where className = ?");
+
+			ps.setString(1, DLFileEntry.class.getName());
+
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				long lockId = rs.getLong("lockId");
+				String key = rs.getString("key_");
+
+				String[] keyArray = StringUtil.split(key, StringPool.POUND);
+
+				long groupId = GetterUtil.getLong(keyArray[0]);
+				long folderId = GetterUtil.getLong(keyArray[1]);
+				String name = keyArray[2];
+
+				long fileEntryId = getFileEntryId(groupId, folderId, name);
+
+				runSQL(
+					"update Lock_ set key_ = " + fileEntryId +
+						" where lockId = " + lockId);
+			}
+		}
+		finally {
+			DataAccess.cleanUp(con, ps, rs);
 		}
 	}
 
