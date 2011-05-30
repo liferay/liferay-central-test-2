@@ -282,15 +282,21 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 
 				String[] keyArray = StringUtil.split(key, StringPool.POUND);
 
+				if (keyArray.length != 3) {
+					continue;
+				}
+
 				long groupId = GetterUtil.getLong(keyArray[0]);
 				long folderId = GetterUtil.getLong(keyArray[1]);
 				String name = keyArray[2];
 
 				long fileEntryId = getFileEntryId(groupId, folderId, name);
 
-				runSQL(
-					"update Lock_ set key_ = " + fileEntryId +
-						" where lockId = " + lockId);
+				if (fileEntryId > 0) {
+					runSQL(
+						"update Lock_ set key_ = " + fileEntryId +
+							" where lockId = " + lockId);
+				}
 			}
 		}
 		finally {
