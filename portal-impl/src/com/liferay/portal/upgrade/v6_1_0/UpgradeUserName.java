@@ -44,7 +44,7 @@ public class UpgradeUserName extends UpgradeProcess {
 		try {
 			con = DataAccess.getConnection();
 
-			StringBundler sb = new StringBundler(7);
+			StringBundler sb = new StringBundler(8);
 
 			sb.append("select distinct User_.userId, User_.firstName, ");
 			sb.append("User_.middleName, User_.lastName from User_ ");
@@ -52,13 +52,15 @@ public class UpgradeUserName extends UpgradeProcess {
 			sb.append(tableName);
 			sb.append(" on ");
 			sb.append(tableName);
-			sb.append(".userId = User_.userId");
+			sb.append(".userId = User_.userId where " + tableName);
+			sb.append(".userName is null or " + tableName + ".userName = ''");
 
 			ps = con.prepareStatement(sb.toString());
 
 			rs = ps.executeQuery();
 
 			while (rs.next()) {
+				long userId = rs.getLong("userId");
 				String firstName = rs.getString("firstName");
 				String middleName = rs.getString("middleName");
 				String lastName = rs.getString("lastName");
@@ -71,7 +73,7 @@ public class UpgradeUserName extends UpgradeProcess {
 
 				runSQL(
 					"update " + tableName + " set userName = '" + fullName +
-						"'");
+						"' where userId = " + userId);
 			}
 		}
 		finally {
