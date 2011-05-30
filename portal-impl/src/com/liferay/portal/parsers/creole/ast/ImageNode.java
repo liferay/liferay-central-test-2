@@ -19,14 +19,15 @@ import com.liferay.portal.parsers.creole.visitor.ASTVisitor;
 /**
  * @author Miguel Pastor
  */
-public class ImageNode extends ASTNode {
+public class ImageNode extends URLNode {
 
 	public ImageNode() {
 	}
 
 	public ImageNode(CollectionNode altCollectionNode, String uri) {
+		super(uri);
+
 		_altCollectionNode = altCollectionNode;
-		_uri = uri;
 	}
 
 	public ImageNode(int token) {
@@ -35,11 +36,10 @@ public class ImageNode extends ASTNode {
 
 	public ImageNode(
 		int tokenType, CollectionNode altCollectionNode, String uri) {
-
-		this(tokenType);
+		super(tokenType, uri);
 
 		_altCollectionNode = altCollectionNode;
-		_uri = uri;
+
 	}
 
 	public void accept(ASTVisitor astVisitor) {
@@ -48,10 +48,6 @@ public class ImageNode extends ASTNode {
 
 	public CollectionNode getAltNode() {
 		return _altCollectionNode;
-	}
-
-	public String getUri() {
-		return _uri;
 	}
 
 	public boolean hasAltCollectionNode() {
@@ -67,11 +63,6 @@ public class ImageNode extends ASTNode {
 		_altCollectionNode = altCollectionNode;
 	}
 
-	public void setUri(String uri) {
-		_uri = uri;
-	}
-
 	private CollectionNode _altCollectionNode;
-	private String _uri;
 
 }
