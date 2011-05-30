@@ -24,7 +24,6 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
-import com.liferay.portal.model.GroupConstants;
 import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.impl.LayoutImpl;
 import com.liferay.portal.service.GroupLocalServiceUtil;
