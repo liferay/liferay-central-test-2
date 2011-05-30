@@ -56,8 +56,9 @@ public class PollsQuestionImpl
 		ServiceContext serviceContext, Date defaultCreateDate) {
 
 		Date createDate = serviceContext.getCreateDate(defaultCreateDate);
+		Date expirationDate = getExpirationDate();
 
-		if (createDate.after(getExpirationDate())) {
+		if ((expirationDate != null) && createDate.after(expirationDate)) {
 			return true;
 		}
 		else {
