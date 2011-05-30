@@ -268,12 +268,9 @@ public class VirtualHostFilter extends BasePortalFilter {
 
 					prefix.append(group.getFriendlyURL());
 
-					Group guestGroup = GroupLocalServiceUtil.getGroup(
-						companyId, GroupConstants.GUEST);
-
 					String homeURL = PortalUtil.getRelativeHomeURL(request);
 
-					if (group.equals(guestGroup) &&
+					if (group.isGuest() &&
 						friendlyURL.equals(StringPool.SLASH) &&
 						Validator.isNotNull(homeURL)) {
 
