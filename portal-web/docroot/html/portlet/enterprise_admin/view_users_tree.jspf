@@ -77,12 +77,6 @@ int organizationsCount = OrganizationLocalServiceUtil.searchCount(company.getCom
 		/>
 	</c:if>
 
-	<c:if test="<%= organization == null %>">
-		<div class="separator"><!-- --></div>
-
-		<%@ include file="/html/portlet/enterprise_admin/user/list_views.jspf" %>
-	</c:if>
-
 	<liferay-util:buffer var="organizationInfo">
 		<c:if test="<%= organization != null %>">
 

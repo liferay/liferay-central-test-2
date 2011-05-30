@@ -122,10 +122,6 @@
 		margin: 0 0 0.5em 0.5em;
 	}
 
-	.users-list-view-icon {
-		float:right;
-	}
-
 	.section {
 		float: left;
 		margin-left: 10px;

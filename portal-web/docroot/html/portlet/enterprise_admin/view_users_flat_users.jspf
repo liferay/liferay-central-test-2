@@ -187,12 +187,6 @@
 		/>
 	</liferay-ui:search-container-row>
 
-	<c:if test="<%= !usersListView.equals(UserConstants.LIST_VIEW_TREE) %>">
-		<div class="separator"><!-- --></div>
-
-		<%@ include file="/html/portlet/enterprise_admin/user/list_views.jspf" %>
-	</c:if>
-
 	<%
 	boolean hasButtons = false;
 	%>
