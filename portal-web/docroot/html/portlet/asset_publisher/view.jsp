@@ -17,13 +17,19 @@
 <%@ include file="/html/portlet/asset_publisher/init.jsp" %>
 
 <%
-if (mergeUrlTags) {
-	String[] compilerTagNames = (String[])request.getAttribute(WebKeys.TAGS_COMPILER_ENTRIES);
+if (mergeUrlTags || mergeLayoutTags) {
+	String[] compilerTagNames = new String[]{};
 
-	Set<String> layoutTagNames = AssetUtil.getLayoutTagNames(request);
+	if (mergeUrlTags) {
+		compilerTagNames = (String[])request.getAttribute(WebKeys.TAGS_COMPILER_ENTRIES);
+	}
 
-	if (!layoutTagNames.isEmpty()) {
-		compilerTagNames = ArrayUtil.append(compilerTagNames, layoutTagNames.toArray(new String[layoutTagNames.size()]));
+	if (mergeLayoutTags) {
+		Set<String> layoutTagNames = AssetUtil.getLayoutTagNames(request);
+
+		if (!layoutTagNames.isEmpty()) {
+			compilerTagNames = ArrayUtil.append(compilerTagNames, layoutTagNames.toArray(new String[layoutTagNames.size()]));
+		}
 	}
 
 	String titleEntry = null;
