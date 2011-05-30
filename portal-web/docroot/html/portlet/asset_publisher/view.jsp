@@ -18,7 +18,7 @@
 
 <%
 if (mergeUrlTags || mergeLayoutTags) {
-	String[] compilerTagNames = new String[]{};
+	String[] compilerTagNames = new String[0];
 
 	if (mergeUrlTags) {
 		compilerTagNames = (String[])request.getAttribute(WebKeys.TAGS_COMPILER_ENTRIES);
