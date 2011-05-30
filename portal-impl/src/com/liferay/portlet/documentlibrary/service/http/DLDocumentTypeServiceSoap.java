@@ -128,11 +128,12 @@ public class DLDocumentTypeServiceSoap {
 
 	public static void updateDocumentType(long documentTypeId,
 		java.lang.String name, java.lang.String description,
+		long[] ddmStructureIds,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
 			DLDocumentTypeServiceUtil.updateDocumentType(documentTypeId, name,
-				description, serviceContext);
+				description, ddmStructureIds, serviceContext);
 		}
 		catch (Exception e) {
 			_log.error(e, e);

@@ -69,12 +69,13 @@ public class DLDocumentTypeServiceUtil {
 
 	public static void updateDocumentType(long documentTypeId,
 		java.lang.String name, java.lang.String description,
+		long[] ddmStructureIds,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		getService()
 			.updateDocumentType(documentTypeId, name, description,
-			serviceContext);
+			ddmStructureIds, serviceContext);
 	}
 
 	public static DLDocumentTypeService getService() {

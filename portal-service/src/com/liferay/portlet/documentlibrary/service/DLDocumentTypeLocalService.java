@@ -269,7 +269,7 @@ public interface DLDocumentTypeLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public void updateDocumentType(long documentTypeId, java.lang.String name,
-		java.lang.String description,
+		java.lang.String description, long[] ddmStructureIds,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;

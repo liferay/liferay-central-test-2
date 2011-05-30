@@ -197,7 +197,7 @@ public class DLDocumentTypeServiceHttp {
 
 	public static void updateDocumentType(HttpPrincipal httpPrincipal,
 		long documentTypeId, java.lang.String name,
-		java.lang.String description,
+		java.lang.String description, long[] ddmStructureIds,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -206,7 +206,8 @@ public class DLDocumentTypeServiceHttp {
 					"updateDocumentType", _updateDocumentTypeParameterTypes4);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
-					documentTypeId, name, description, serviceContext);
+					documentTypeId, name, description, ddmStructureIds,
+					serviceContext);
 
 			try {
 				TunnelUtil.invoke(httpPrincipal, methodHandler);
@@ -246,6 +247,6 @@ public class DLDocumentTypeServiceHttp {
 		};
 	private static final Class<?>[] _updateDocumentTypeParameterTypes4 = new Class[] {
 			long.class, java.lang.String.class, java.lang.String.class,
-			com.liferay.portal.service.ServiceContext.class
+			long[].class, com.liferay.portal.service.ServiceContext.class
 		};
 }

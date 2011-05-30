@@ -300,12 +300,12 @@ public class DLDocumentTypeLocalServiceWrapper
 	}
 
 	public void updateDocumentType(long documentTypeId, java.lang.String name,
-		java.lang.String description,
+		java.lang.String description, long[] ddmStructureIds,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		_dlDocumentTypeLocalService.updateDocumentType(documentTypeId, name,
-			description, serviceContext);
+			description, ddmStructureIds, serviceContext);
 	}
 
 	public DLDocumentTypeLocalService getWrappedDLDocumentTypeLocalService() {

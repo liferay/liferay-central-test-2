@@ -59,12 +59,12 @@ public class DLDocumentTypeServiceWrapper implements DLDocumentTypeService {
 	}
 
 	public void updateDocumentType(long documentTypeId, java.lang.String name,
-		java.lang.String description,
+		java.lang.String description, long[] ddmStructureIds,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		_dlDocumentTypeService.updateDocumentType(documentTypeId, name,
-			description, serviceContext);
+			description, ddmStructureIds, serviceContext);
 	}
 
 	public DLDocumentTypeService getWrappedDLDocumentTypeService() {
