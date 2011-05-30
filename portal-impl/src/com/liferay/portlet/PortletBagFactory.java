@@ -388,7 +388,9 @@ public class PortletBagFactory {
 				}
 			}
 
-			sb.append(".properties");
+			if (!resourceBundleName.endsWith(".properties")) {
+				sb.append(".properties");
+			}
 
 			String localizedResourceBundleName = sb.toString();
 
