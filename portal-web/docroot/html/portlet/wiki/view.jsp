@@ -297,6 +297,13 @@ if (Validator.isNotNull(ParamUtil.getString(request, "title"))) {
 		</div>
 	</div>
 
+	<div class="entry-links">
+		<liferay-ui:asset-links
+			className="<%= WikiPage.class.getName() %>"
+			classPK="<%= wikiPage.getResourcePrimKey() %>"
+		/>
+	</div>
+
 	<c:if test="<%= enablePageRatings %>">
 		<div class="page-ratings">
 			<liferay-ui:ratings

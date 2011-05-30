@@ -298,11 +298,24 @@ else if (documentType != null) {
 			</c:if>
 
 			<c:if test="<%= folder.isSupportsSocial() %>">
-				<aui:input classPK="<%= assetClassPK %>" model="<%= DLFileEntry.class %>" name="categories" type="assetCategories" />
+			    <liferay-ui:panel defaultState="closed" extended="<%= false %>" id="dlFileEntryCategorizationPanel" persistState="<%= true %>" title="categorization">
+					<aui:fieldset>
+						<aui:input classPK="<%= assetClassPK %>" model="<%= DLFileEntry.class %>" name="categories" type="assetCategories" />
 
-				<aui:input classPK="<%= assetClassPK %>" model="<%= DLFileEntry.class %>" name="tags" type="assetTags" />
+						<aui:input classPK="<%= assetClassPK %>" model="<%= DLFileEntry.class %>" name="tags" type="assetTags" />
+					</aui:fieldset>
+				</liferay-ui:panel>
 			</c:if>
 		</c:if>
+
+		<liferay-ui:panel defaultState="closed" extended="<%= false %>" id="dlFileEntryAssetLinksPanel" persistState="<%= true %>" title="related-assets">
+			<aui:fieldset>
+				<liferay-ui:input-asset-links
+					className="<%= DLFileEntry.class.getName() %>"
+					classPK="<%= assetClassPK %>"
+				/>
+			</aui:fieldset>
+		</liferay-ui:panel>
 
 		<%
 		List<DLDocumentType> documentTypes = DLDocumentTypeServiceUtil.getDocumentTypes(scopeGroupId, QueryUtil.ALL_POS, QueryUtil.ALL_POS);

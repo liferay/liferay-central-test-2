@@ -197,6 +197,13 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 						</span>
 					</c:if>
 
+					<div class="entry-links">
+						<liferay-ui:asset-links
+							className="<%= DLFileEntryConstants.getClassName() %>"
+							classPK="<%= assetClassPK %>"
+						/>
+					</div>
+
 					<span class="document-description">
 						<%= fileEntry.getDescription() %>
 					</span>

@@ -111,10 +111,6 @@ long folderId = BeanParamUtil.getLong(entry, request, "folderId");
 			/>
 		</liferay-ui:custom-attributes-available>
 
-		<aui:input name="categories" type="assetCategories" />
-
-		<aui:input name="tags" type="assetTags" />
-
 		<c:if test="<%= entry == null %>">
 			<aui:field-wrapper label="permissions">
 				<liferay-ui:input-permissions
@@ -122,6 +118,21 @@ long folderId = BeanParamUtil.getLong(entry, request, "folderId");
 				/>
 			</aui:field-wrapper>
 		</c:if>
+
+		<liferay-ui:panel defaultState="closed" extended="<%= false %>" id="bookmarksEntryCategorizationPanel" persistState="<%= true %>" title="categorization">
+			<aui:input name="categories" type="assetCategories" />
+
+			<aui:input name="tags" type="assetTags" />
+		</liferay-ui:panel>
+
+		<liferay-ui:panel defaultState="closed" extended="<%= false %>" id="bookmarksEntryAssetLinksPanel" persistState="<%= true %>" title="related-assets">
+			<aui:fieldset>
+				<liferay-ui:input-asset-links
+					className="<%= BookmarksEntry.class.getName() %>"
+					classPK="<%= (entry != null) ? entry.getEntryId() : 0 %>"
+				/>
+			</aui:fieldset>
+		</liferay-ui:panel>
 	</aui:fieldset>
 
 	<aui:button-row>

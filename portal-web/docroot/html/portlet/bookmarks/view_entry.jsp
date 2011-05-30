@@ -84,6 +84,13 @@ request.setAttribute("view_entry.jsp-entry", entry);
 			</div>
 		</div>
 
+		<div class="entry-links">
+			<liferay-ui:asset-links
+				className="<%= BookmarksEntry.class.getName() %>"
+				classPK="<%= entryId %>"
+			/>
+		</div>
+
 		<div class="lfr-asset-ratings">
 			<liferay-ui:ratings
 				className="<%= BookmarksEntry.class.getName() %>"

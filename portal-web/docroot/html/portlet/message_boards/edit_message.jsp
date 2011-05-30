@@ -326,10 +326,6 @@ if (Validator.isNull(redirect)) {
 			<aui:input helpMessage="to-allow-pingbacks,-please-also-ensure-the-entry's-guest-view-permission-is-enabled" inlineLabel="left" label="allow-pingbacks" name="allowPingbacks" value="<%= allowPingbacks %>" />
 		</c:if>
 
-		<c:if test="<%= (curParentMessage == null) || childrenMessagesTaggable %>">
-			<aui:input name="tags" type="assetTags" />
-		</c:if>
-
 		<c:if test="<%= message == null %>">
 			<aui:field-wrapper label="permissions">
 				<liferay-ui:input-permissions
@@ -337,6 +333,21 @@ if (Validator.isNull(redirect)) {
 				/>
 			</aui:field-wrapper>
 		</c:if>
+
+		<c:if test="<%= (curParentMessage == null) || childrenMessagesTaggable %>">
+			<liferay-ui:panel defaultState="closed" extended="<%= false %>" id="mbMessageCategorizationPanel" persistState="<%= true %>" title="categorization">
+				<aui:input name="tags" type="assetTags" />
+			</liferay-ui:panel>
+		</c:if>
+
+		<liferay-ui:panel defaultState="closed" extended="<%= false %>" id="mbMessageAssetLinksPanel" persistState="<%= true %>" title="related-assets">
+			<aui:fieldset>
+				<liferay-ui:input-asset-links
+					className="<%= MBMessage.class.getName() %>"
+					classPK="<%= (message != null) ? message.getMessageId() : 0 %>"
+				/>
+			</aui:fieldset>
+		</liferay-ui:panel>
 	</aui:fieldset>
 
 	<c:if test="<%= (message == null) && PropsValues.CAPTCHA_CHECK_PORTLET_MESSAGE_BOARDS_EDIT_MESSAGE %>">

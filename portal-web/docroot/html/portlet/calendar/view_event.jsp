@@ -207,6 +207,13 @@ request.setAttribute("view_event.jsp-event", event);
 			/>
 		</span>
 
+		<div class="entry-links">
+			<liferay-ui:asset-links
+				className="<%= CalEvent.class.getName() %>"
+				classPK="<%= event.getEventId() %>"
+			/>
+		</div>
+
 		<c:if test="<%= enableRatings %>">
 			<div class="entry-ratings">
 				<liferay-ui:ratings

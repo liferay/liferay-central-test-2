@@ -166,10 +166,6 @@ long imageMaxSize = PrefsPropsUtil.getLong(PropsKeys.IG_IMAGE_MAX_SIZE) / 1024;
 			/>
 		</liferay-ui:custom-attributes-available>
 
-		<aui:input name="categories" type="assetCategories" />
-
-		<aui:input name="tags" type="assetTags" />
-
 		<c:if test="<%= image == null %>">
 			<aui:field-wrapper label="permissions">
 				<liferay-ui:input-permissions
@@ -177,6 +173,23 @@ long imageMaxSize = PrefsPropsUtil.getLong(PropsKeys.IG_IMAGE_MAX_SIZE) / 1024;
 				/>
 			</aui:field-wrapper>
 		</c:if>
+
+		<liferay-ui:panel defaultState="closed" extended="<%= false %>" id="imageEntryCategorizationPanel" persistState="<%= true %>" title="categorization">
+			<aui:fieldset>
+				<aui:input name="categories" type="assetCategories" />
+
+				<aui:input name="tags" type="assetTags" />
+			</aui:fieldset>
+		</liferay-ui:panel>
+
+		<liferay-ui:panel defaultState="closed" extended="<%= false %>" id="imageEntryAssetLinksPanel" persistState="<%= true %>" title="related-assets">
+			<aui:fieldset>
+				<liferay-ui:input-asset-links
+					className="<%= IGImage.class.getName() %>"
+					classPK="<%= imageId %>"
+				/>
+			</aui:fieldset>
+		</liferay-ui:panel>
 	</aui:fieldset>
 
 	<aui:button-row>

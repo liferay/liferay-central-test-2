@@ -183,6 +183,15 @@ boolean allowTrackbacks = PropsValues.BLOGS_TRACKBACK_ENABLED && BeanParamUtil.g
 			</aui:fieldset>
 		</liferay-ui:panel>
 
+		<liferay-ui:panel defaultState="closed" extended="<%= false %>" id="blogsEntryAssetLinksPanel" persistState="<%= true %>" title="related-assets">
+			<aui:fieldset>
+				<liferay-ui:input-asset-links
+					className="<%= BlogsEntry.class.getName() %>"
+					classPK="<%= (entry != null) ? entry.getEntryId() : 0 %>"
+				/>
+			</aui:fieldset>
+		</liferay-ui:panel>
+
 		<%
 		boolean pending = false;
 

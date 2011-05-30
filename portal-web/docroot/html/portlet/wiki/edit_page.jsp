@@ -331,10 +331,6 @@ if (Validator.isNull(redirect)) {
 				}
 				%>
 
-				<aui:input classPK="<%= classPK %>" name="categories" type="assetCategories" />
-
-				<aui:input classPK="<%= classPK %>" name="tags" type="assetTags" />
-
 				<c:if test="<%= newPage || wikiPage.isApproved() %>">
 					<aui:model-context bean="<%= new WikiPageImpl() %>" model="<%= WikiPage.class %>" />
 				</c:if>
@@ -352,6 +348,23 @@ if (Validator.isNull(redirect)) {
 						/>
 					</aui:field-wrapper>
 				</c:if>
+
+				<liferay-ui:panel defaultState="closed" extended="<%= false %>" id="wikiPageCategorizationPanel" persistState="<%= true %>" title="categorization">
+					<aui:fieldset>
+						<aui:input classPK="<%= classPK %>" name="categories" type="assetCategories" />
+
+						<aui:input classPK="<%= classPK %>" name="tags" type="assetTags" />
+					</aui:fieldset>
+				</liferay-ui:panel>
+
+				<liferay-ui:panel defaultState="closed" extended="<%= false %>" id="wikiPageAssetLinksPanel" persistState="<%= true %>" title="related-assets">
+					<aui:fieldset>
+						<liferay-ui:input-asset-links
+							className="<%= WikiPage.class.getName() %>"
+							classPK="<%= classPK %>"
+						/>
+					</aui:fieldset>
+				</liferay-ui:panel>
 
 				<%
 				boolean approved = false;
