@@ -1435,6 +1435,21 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 			GetterUtil.getBoolean(
 				portletElement.elementText("add-default-resource"),
 				portletModel.isAddDefaultResource()));
+
+		Element autoPropagatedParametersElement = portletElement.element(
+			"auto-propagated-parameters");
+
+		if (autoPropagatedParametersElement != null) {
+			Set<String> autoPropagatedParameters =
+				portletModel.getAutoPropagatedParameters();
+
+			for (String autoPropagatedParameter :
+				StringUtil.split(autoPropagatedParametersElement.getText())) {
+
+				autoPropagatedParameters.add(autoPropagatedParameter);
+			}
+		}
+
 		portletModel.setSystem(
 			GetterUtil.getBoolean(
 				portletElement.elementText("system"), portletModel.isSystem()));

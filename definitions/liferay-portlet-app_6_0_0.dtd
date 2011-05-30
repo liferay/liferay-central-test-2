@@ -35,7 +35,8 @@ private-session-attributes?, action-timeout?, render-timeout?, render-weight?,
 ajaxable?, header-portal-css*, header-portlet-css*, header-portal-javascript*,
 header-portlet-javascript*, footer-portal-css*, footer-portlet-css*,
 footer-portal-javascript*, footer-portlet-javascript*, css-class-wrapper?,
-facebook-integration?, add-default-resource?, system?, active?, include?)>
+facebook-integration?, add-default-resource?, auto-propagated-parameters?, 
+system?, active?, include?)>
 
 <!--
 The portlet-name element contains the unique name of the portlet. This name must
@@ -690,6 +691,12 @@ The properties "portlet.add.default.resource.check.enabled" and
 security checks to be configured around this behavior.
 -->
 <!ELEMENT add-default-resource (#PCDATA)>
+
+<!--
+Set the parameters names that will be automatically propagated through 
+the porlet.
+-->
+<!ELEMENT auto-propagated-parameters (#PCDATA)>
 
 <!--
 Set the system value to true if the portlet is a system portlet that a user

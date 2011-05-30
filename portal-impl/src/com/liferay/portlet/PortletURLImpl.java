@@ -106,6 +106,22 @@ public class PortletURLImpl
 		Portlet portlet = getPortlet();
 
 		if (portlet != null) {
+			Set<String> autoPropagatedParameters =
+				portlet.getAutoPropagatedParameters();
+
+			for (String autoPropagatedParameter : autoPropagatedParameters) {
+				if (PortalUtil.isReservedParameter(autoPropagatedParameter)) {
+					continue;
+				}
+
+				String value = ParamUtil.getString(
+					request, autoPropagatedParameter);
+
+				if (Validator.isNotNull(value)) {
+					setParameter(autoPropagatedParameter, value);
+				}
+			}
+
 			PortletApp portletApp = portlet.getPortletApp();
 
 			_escapeXml = MapUtil.getBoolean(

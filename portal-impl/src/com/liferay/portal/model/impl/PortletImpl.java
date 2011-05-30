@@ -108,6 +108,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		_footerPortletCss = new ArrayList<String>();
 		_footerPortalJavaScript = new ArrayList<String>();
 		_footerPortletJavaScript = new ArrayList<String>();
+		_autoPropagatedParameters = new HashSet<String>();
 		_unlinkedRoles = new HashSet<String>();
 		_roleMappers = new LinkedHashMap<String, String>();
 		_initParams = new HashMap<String, String>();
@@ -156,7 +157,8 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		List<String> headerPortletJavaScript, List<String> footerPortalCss,
 		List<String> footerPortletCss, List<String> footerPortalJavaScript,
 		List<String> footerPortletJavaScript, String cssClassWrapper,
-		String facebookIntegration, boolean addDefaultResource, String roles,
+		String facebookIntegration, boolean addDefaultResource,
+		Set<String> autoPropagatedParameters, String roles,
 		Set<String> unlinkedRoles, Map<String, String> roleMappers,
 		boolean system, boolean active, boolean include,
 		Map<String, String> initParams, Integer expCache,
@@ -241,6 +243,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		_facebookIntegration = facebookIntegration;
 		_scopeable = scopeable;
 		_addDefaultResource = addDefaultResource;
+		_autoPropagatedParameters = autoPropagatedParameters;
 		setRoles(roles);
 		_unlinkedRoles = unlinkedRoles;
 		_roleMappers = roleMappers;
@@ -1167,6 +1170,17 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		PortletBag portletBag = PortletBagPool.get(getRootPortletId());
 
 		return portletBag.getAssetRendererFactoryInstances();
+	}
+
+	/**
+	 * Gets the names of the parameters that will be automatically propagated
+	 * through the portlet.
+	 *
+	 * @return the names of of the parameters that will be automatically
+	 *         propagated through the portlet
+	 */
+	public Set<String> getAutoPropagatedParameters() {
+		return _autoPropagatedParameters;
 	}
 
 	/**
@@ -2203,6 +2217,19 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
+	 * Sets the names of the parameters that will be automatically propagated
+	 * through the portlet.
+	 *
+	 * @param autoPropagatedParameters the names of of the parameters that will
+	 *        be automatically propagated through the portlet
+	 */
+	public void setAutoPropagatedParameters(
+		Set<String> autoPropagatedParameters) {
+
+		_autoPropagatedParameters = autoPropagatedParameters;
+	}
+
+	/**
 	 * Sets a string of ordered comma delimited portlet IDs.
 	 *
 	 * @param roles a string of ordered comma delimited portlet IDs
@@ -3122,9 +3149,9 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 			getFooterPortalCss(), getFooterPortletCss(),
 			getFooterPortalJavaScript(), getFooterPortletJavaScript(),
 			getCssClassWrapper(), getFacebookIntegration(),
-			isAddDefaultResource(), getRoles(), getUnlinkedRoles(),
-			getRoleMappers(), isSystem(), isActive(), isInclude(),
-			getInitParams(), getExpCache(), getPortletModes(),
+			isAddDefaultResource(), getAutoPropagatedParameters(), getRoles(),
+			getUnlinkedRoles(), getRoleMappers(), isSystem(), isActive(),
+			isInclude(), getInitParams(), getExpCache(), getPortletModes(),
 			getWindowStates(), getSupportedLocales(), getResourceBundle(),
 			getPortletInfo(), getPortletFilters(), getProcessingEvents(),
 			getPublishingEvents(), getPublicRenderParameters(),
@@ -3552,6 +3579,11 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 * page.
 	 */
 	private boolean _addDefaultResource;
+
+	/**
+	 * The automatically propagated parameters names.
+	 */
+	private Set<String> _autoPropagatedParameters;
 
 	/**
 	 * An array of required roles of the portlet.
