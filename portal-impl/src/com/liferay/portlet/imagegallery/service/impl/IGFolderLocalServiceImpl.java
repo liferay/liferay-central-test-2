@@ -61,6 +61,7 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 		folder.setGroupId(groupId);
 		folder.setCompanyId(user.getCompanyId());
 		folder.setUserId(user.getUserId());
+		folder.setUserName(user.getFullName());
 		folder.setCreateDate(serviceContext.getCreateDate(now));
 		folder.setModifiedDate(serviceContext.getModifiedDate(now));
 		folder.setParentFolderId(parentFolderId);

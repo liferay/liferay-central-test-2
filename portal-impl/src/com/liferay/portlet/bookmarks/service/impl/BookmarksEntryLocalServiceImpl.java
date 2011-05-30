@@ -70,6 +70,7 @@ public class BookmarksEntryLocalServiceImpl
 		entry.setGroupId(groupId);
 		entry.setCompanyId(user.getCompanyId());
 		entry.setUserId(user.getUserId());
+		entry.setUserName(user.getFullName());
 		entry.setCreateDate(serviceContext.getCreateDate(now));
 		entry.setModifiedDate(serviceContext.getModifiedDate(now));
 		entry.setFolderId(folderId);

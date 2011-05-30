@@ -123,6 +123,7 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 			image.setGroupId(groupId);
 			image.setCompanyId(user.getCompanyId());
 			image.setUserId(user.getUserId());
+			image.setUserName(user.getFullName());
 			image.setCreateDate(serviceContext.getCreateDate(now));
 			image.setModifiedDate(serviceContext.getModifiedDate(now));
 			image.setFolderId(folderId);
