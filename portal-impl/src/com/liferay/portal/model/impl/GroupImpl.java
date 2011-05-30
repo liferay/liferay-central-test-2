@@ -332,7 +332,20 @@ public class GroupImpl extends GroupModelImpl implements Group {
 	}
 
 	public boolean isControlPanel() {
-		if (getName().equals(GroupConstants.CONTROL_PANEL)) {
+		String name = getName();
+
+		if (name.equals(GroupConstants.CONTROL_PANEL)) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	public boolean isGuest() {
+		String name = getName();
+
+		if (name.equals(GroupConstants.GUEST)) {
 			return true;
 		}
 		else {

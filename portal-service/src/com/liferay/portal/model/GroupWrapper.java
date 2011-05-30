@@ -504,6 +504,10 @@ public class GroupWrapper implements Group {
 		return _group.isControlPanel();
 	}
 
+	public boolean isGuest() {
+		return _group.isGuest();
+	}
+
 	public boolean isLayout() {
 		return _group.isLayout();
 	}

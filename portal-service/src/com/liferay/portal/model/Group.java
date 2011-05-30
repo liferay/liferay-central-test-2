@@ -77,6 +77,8 @@ public interface Group extends GroupModel {
 
 	public boolean isControlPanel();
 
+	public boolean isGuest();
+
 	public boolean isLayout();
 
 	public boolean isLayoutPrototype();
