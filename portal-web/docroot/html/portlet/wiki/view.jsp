@@ -106,7 +106,9 @@ viewAttachmentsURL.setParameter("struts_action", "/wiki/view_page_attachments");
 
 AssetEntryServiceUtil.incrementViewCounter(WikiPage.class.getName(), wikiPage.getResourcePrimKey());
 
-AssetUtil.addLayoutTags(request, AssetTagLocalServiceUtil.getTags(WikiPage.class.getName(), wikiPage.getResourcePrimKey()));
+if (Validator.isNotNull(ParamUtil.getString(request, "title"))) {
+	AssetUtil.addLayoutTags(request, AssetTagLocalServiceUtil.getTags(WikiPage.class.getName(), wikiPage.getResourcePrimKey()));
+}
 %>
 
 <c:choose>
