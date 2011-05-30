@@ -128,7 +128,7 @@ public class DLDocumentTypeLocalServiceImpl
 
 	public void updateDocumentType(
 			long documentTypeId, String name, String description,
-			ServiceContext serviceContext)
+			long[] ddmStructureIds, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		DLDocumentType documentType =
@@ -139,6 +139,9 @@ public class DLDocumentTypeLocalServiceImpl
 		documentType.setDescription(description);
 
 		dlDocumentTypePersistence.update(documentType, false);
+
+		dlDocumentTypePersistence.setDDMStructures(
+			documentTypeId, ddmStructureIds);
 	}
 
 	protected void addDocumentTypeResources(

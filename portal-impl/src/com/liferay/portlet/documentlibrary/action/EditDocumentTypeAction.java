@@ -166,7 +166,8 @@ public class EditDocumentTypeAction extends PortletAction {
 			// Update document type
 
 			DLDocumentTypeServiceUtil.updateDocumentType(
-				documentTypeId, name, description, serviceContext);
+				documentTypeId, name, description, ddmStructureIds,
+				serviceContext);
 		}
 	}
 

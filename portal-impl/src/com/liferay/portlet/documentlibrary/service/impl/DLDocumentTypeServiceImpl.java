@@ -71,14 +71,14 @@ public class DLDocumentTypeServiceImpl extends DLDocumentTypeServiceBaseImpl {
 
 	public void updateDocumentType(
 			long documentTypeId, String name, String description,
-			ServiceContext serviceContext)
+			long[] ddmStructureIds, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		DLDocumentTypePermission.check(
 			getPermissionChecker(), documentTypeId, ActionKeys.UPDATE);
 
 		dlDocumentTypeLocalService.updateDocumentType(
-			documentTypeId, name, description, serviceContext);
+			documentTypeId, name, description, ddmStructureIds, serviceContext);
 	}
 
 }

@@ -85,25 +85,21 @@ if (documentType != null) {
 					value="<%= structure.getName() %>"
 				/>
 
-				<c:if test="<%= documentType == null %>">
-					<liferay-ui:search-container-column-text>
-						<a class="modify-link" data-rowId="<%= structure.getStructureId() %>" href="javascript:;"><%= removeStructureIcon %></a>
-					</liferay-ui:search-container-column-text>
-				</c:if>
+				<liferay-ui:search-container-column-text>
+					<a class="modify-link" data-rowId="<%= structure.getStructureId() %>" href="javascript:;"><%= removeStructureIcon %></a>
+				</liferay-ui:search-container-column-text>
 			</liferay-ui:search-container-row>
 
 			<liferay-ui:search-iterator paginate="<%= false %>" />
 		</liferay-ui:search-container>
 
-		<c:if test="<%= documentType == null %>">
-			<liferay-ui:icon
-				cssClass="modify-link select-metadata-set"
-				image="add"
-				label="<%= true %>"
-				message="select"
-				url='<%= "javascript:" + renderResponse.getNamespace() + "openDDMStructureSelector();" %>'
-			/>
-		</c:if>
+		<liferay-ui:icon
+			cssClass="modify-link select-metadata-set"
+			image="add"
+			label="<%= true %>"
+			message="select"
+			url='<%= "javascript:" + renderResponse.getNamespace() + "openDDMStructureSelector();" %>'
+		/>
 
 		<aui:button-row>
 			<aui:button type="submit" />
