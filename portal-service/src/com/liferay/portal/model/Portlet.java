@@ -675,6 +675,15 @@ public interface Portlet extends PortletModel {
 	public java.util.List<com.liferay.portlet.asset.model.AssetRendererFactory> getAssetRendererFactoryInstances();
 
 	/**
+	* Gets the names of the parameters that will be automatically propagated
+	* through the portlet.
+	*
+	* @return the names of of the parameters that will be automatically
+	propagated through the portlet
+	*/
+	public java.util.Set<java.lang.String> getAutoPropagatedParameters();
+
+	/**
 	* Gets the names of the classes that represent custom attribute displays
 	* associated to the portlet.
 	*
@@ -1489,6 +1498,16 @@ public interface Portlet extends PortletModel {
 	resources for the portlet are added to a page
 	*/
 	public void setAddDefaultResource(boolean addDefaultResource);
+
+	/**
+	* Sets the names of the parameters that will be automatically propagated
+	* through the portlet.
+	*
+	* @param autoPropagatedParameters the names of of the parameters that will
+	be automatically propagated through the portlet
+	*/
+	public void setAutoPropagatedParameters(
+		java.util.Set<java.lang.String> autoPropagatedParameters);
 
 	/**
 	* Sets a string of ordered comma delimited portlet IDs.

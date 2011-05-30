@@ -1033,6 +1033,17 @@ public class PortletWrapper implements Portlet {
 	}
 
 	/**
+	* Gets the names of the parameters that will be automatically propagated
+	* through the portlet.
+	*
+	* @return the names of of the parameters that will be automatically
+	propagated through the portlet
+	*/
+	public java.util.Set<java.lang.String> getAutoPropagatedParameters() {
+		return _portlet.getAutoPropagatedParameters();
+	}
+
+	/**
 	* Gets the names of the classes that represent custom attribute displays
 	* associated to the portlet.
 	*
@@ -2036,6 +2047,18 @@ public class PortletWrapper implements Portlet {
 	*/
 	public void setAddDefaultResource(boolean addDefaultResource) {
 		_portlet.setAddDefaultResource(addDefaultResource);
+	}
+
+	/**
+	* Sets the names of the parameters that will be automatically propagated
+	* through the portlet.
+	*
+	* @param autoPropagatedParameters the names of of the parameters that will
+	be automatically propagated through the portlet
+	*/
+	public void setAutoPropagatedParameters(
+		java.util.Set<java.lang.String> autoPropagatedParameters) {
+		_portlet.setAutoPropagatedParameters(autoPropagatedParameters);
 	}
 
 	/**
