@@ -31,15 +31,11 @@
 	float: left;
 }
 
-.ie6 .taglib-ratings .liferay-rating-vote .aui-rating-content {
+.ie6 .taglib-ratings .liferay-rating-vote .aui-rating-content, .ie6 .taglib-ratings .liferay-rating-score .aui-rating-content {
 	display: inline;
 }
 
-.ie6 .taglib-ratings .liferay-rating-score .aui-rating-content {
-	display: inline;
-}
-
-.ie6 .taglib-ratings-wrapper .taglib-ratings.stars {
+.ie6 .taglib-ratings.stars {
 	display: inline-block;
 }
 
