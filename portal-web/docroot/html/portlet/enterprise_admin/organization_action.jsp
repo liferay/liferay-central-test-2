@@ -128,6 +128,7 @@ if (row == null) {
 
 		<liferay-ui:icon
 			image="assign_user_roles"
+			message="assign_organization_roles"
 			url="<%= assignUserRolesURL %>"
 		/>
 	</c:if>
@@ -141,7 +142,7 @@ if (row == null) {
 
 		<liferay-ui:icon
 			image="assign"
-			message="assign-members"
+			message="assign-users"
 			url="<%= assignMembersURL %>"
 		/>
 	</c:if>

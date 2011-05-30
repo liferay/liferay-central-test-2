@@ -59,7 +59,7 @@
 
 	if (suborganizationsCount > 0) {
 		buffer.append("<br /><u>");
-		buffer.append(LanguageUtil.get(pageContext, "suborganizations"));
+		buffer.append((suborganizationsCount == 1) ? LanguageUtil.format(pageContext, "x-suborganization", String.valueOf(suborganizationsCount)) : LanguageUtil.format(pageContext, "x-suborganizations", String.valueOf(suborganizationsCount)));
 		buffer.append("</u>: ");
 
 		for (int k = 0; k < suborganizations.size(); k++) {
@@ -133,7 +133,7 @@
 
 		<%
 		buffer.append("<br /><u>");
-		buffer.append(LanguageUtil.get(pageContext, "users"));
+		buffer.append((organizationUserCount == 1) ? LanguageUtil.format(pageContext, "x-user", String.valueOf(organizationUserCount)) : LanguageUtil.format(pageContext, "x-users", String.valueOf(organizationUserCount)));
 		buffer.append("</u>: ");
 
 		for (int k = 0; k < organizationUsers.size(); k++) {

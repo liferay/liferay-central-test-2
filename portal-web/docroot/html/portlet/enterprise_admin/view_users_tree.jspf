@@ -50,6 +50,11 @@ if (leftAndRightOrganizationIds != null) {
 }
 
 int organizationsCount = OrganizationLocalServiceUtil.searchCount(company.getCompanyId(), (organization != null) ? organization.getOrganizationId() : OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID, null, null, null, null, organizationParams);
+int usersCount = 0;
+
+if (organization != null) {
+	usersCount = UserLocalServiceUtil.getOrganizationUsersCount(organizationId);
+}
 %>
 
 <aui:layout>
@@ -82,20 +87,11 @@ int organizationsCount = OrganizationLocalServiceUtil.searchCount(company.getCom
 
 			<%
 			int teamsCount = TeamLocalServiceUtil.searchCount(organizationGroupId, null, null, null);
-			int usersCount = UserLocalServiceUtil.getOrganizationUsersCount(organizationId);
 			%>
 
 			<aui:input name="organizationId" type="hidden" value="<%= organizationId %>" />
 
 			<div class="lfr-asset-metadata">
-				<div class="lfr-asset-icon lfr-asset-organizations">
-					<%= organizationsCount %> <liferay-ui:message key='<%= (organizationsCount == 1) ? "suborganization" : "suborganizations" %>' />
-				</div>
-
-				<div class="lfr-asset-icon lfr-asset-users">
-					<%= usersCount %> <liferay-ui:message key='<%= (usersCount == 1) ? "user" : "users" %>' />
-				</div>
-
 				<div class="lfr-asset-icon lfr-asset-teams">
 					<portlet:renderURL var="manageTeamsURL">
 						<portlet:param name="struts_action" value="/enterprise_admin/view_teams" />
@@ -103,14 +99,9 @@ int organizationsCount = OrganizationLocalServiceUtil.searchCount(company.getCom
 						<portlet:param name="groupId" value="<%= String.valueOf(organizationGroupId) %>" />
 					</portlet:renderURL>
 
-					<c:choose>
-						<c:when test="<%= teamsCount > 0 %>">
-							<aui:a href="<%= manageTeamsURL %>"> <%= teamsCount %> <liferay-ui:message key='<%= (usersCount == 1) ? "team" : "teams" %>' /></aui:a>
-						</c:when>
-						<c:otherwise>
-							<%= teamsCount %> <liferay-ui:message key='<%= (usersCount == 1) ? "team" : "teams" %>' />
-						</c:otherwise>
-					</c:choose>
+					<c:if test="<%= teamsCount > 0 %>">
+						<aui:a href="<%= manageTeamsURL %>"> <%= teamsCount %> <liferay-ui:message key='<%= (teamsCount == 1) ? "team" : "teams" %>' /></aui:a>
+					</c:if>
 				</div>
 			</div>
 
@@ -270,13 +261,17 @@ int organizationsCount = OrganizationLocalServiceUtil.searchCount(company.getCom
 		<liferay-ui:panel-container extended="<%= false %>" persistState="<%= true %>">
 			<%= organizationInfo %>
 
-			<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" persistState="<%= true %>" title='<%= (organization != null) ? "suborganizations" : "organizations" %>'>
-				<%= organizationsTree %>
-			</liferay-ui:panel>
+			<c:if test="<%= organizationsCount > 0 %>">
+				<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" persistState="<%= true %>" title='<%= (organization == null) ? "organizations" : (organizationsCount == 1) ?  LanguageUtil.format(pageContext, "x-suborganization", String.valueOf(organizationsCount)) : LanguageUtil.format(pageContext, "x-suborganizations", String.valueOf(organizationsCount)) %>'>
+					<%= organizationsTree %>
+				</liferay-ui:panel>
+			</c:if>
 
-			<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" persistState="<%= true %>" title="users">
-				<%@ include file="/html/portlet/enterprise_admin/view_users_flat_users.jspf" %>
-			</liferay-ui:panel>
+			<c:if test="<%= (organization == null) || (usersCount > 0) %>">
+				<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" persistState="<%= true %>" title='<%= (organization == null) ? "users" : (usersCount == 1) ? LanguageUtil.format(pageContext, "x-user", String.valueOf(usersCount)) : LanguageUtil.format(pageContext, "x-users", String.valueOf(usersCount)) %>'>
+					<%@ include file="/html/portlet/enterprise_admin/view_users_flat_users.jspf" %>
+				</liferay-ui:panel>
+			</c:if>
 		</liferay-ui:panel-container>
 	</aui:column>
 
