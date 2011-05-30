@@ -55,10 +55,15 @@ public class PollsQuestionImpl
 	public boolean isExpired(
 		ServiceContext serviceContext, Date defaultCreateDate) {
 
-		Date createDate = serviceContext.getCreateDate(defaultCreateDate);
 		Date expirationDate = getExpirationDate();
 
-		if ((expirationDate != null) && createDate.after(expirationDate)) {
+		if (expirationDate == null) {
+			return false;
+		}
+
+		Date createDate = serviceContext.getCreateDate(defaultCreateDate);
+
+		if (createDate.after(expirationDate)) {
 			return true;
 		}
 		else {
