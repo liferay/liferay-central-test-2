@@ -48,22 +48,20 @@ String toolbarItem = ParamUtil.getString(request, "toolbarItem", "view");
 			<c:if test="<%= PortalPermissionUtil.contains(permissionChecker, ActionKeys.ADD_ORGANIZATION) %>">
 
 				<%
-				String[] childrenTypes = PropsUtil.getArray(PropsKeys.ORGANIZATIONS_TYPES);
-
-				for (String childrenType : childrenTypes) {
+				for (String organiztionType : PropsValues.ORGANIZATIONS_TYPES) {
 				%>
 
-						<portlet:renderURL var="addOrganizationURL">
-							<portlet:param name="struts_action" value="/enterprise_admin/edit_organization" />
-							<portlet:param name="redirect" value="<%= currentURL %>" />
-							<portlet:param name="type" value="<%= childrenType %>" />
-						</portlet:renderURL>
+					<portlet:renderURL var="addOrganizationURL">
+						<portlet:param name="struts_action" value="/enterprise_admin/edit_organization" />
+						<portlet:param name="redirect" value="<%= currentURL %>" />
+						<portlet:param name="type" value="<%= organiztionType %>" />
+					</portlet:renderURL>
 
-						<liferay-ui:icon
-							image="add_location"
-							message='<%= LanguageUtil.get(pageContext, childrenType) %>'
-							url="<%= addOrganizationURL %>"
-						/>
+					<liferay-ui:icon
+						image="add_location"
+						message='<%= LanguageUtil.get(pageContext, organiztionType) %>'
+						url="<%= addOrganizationURL %>"
+					/>
 
 				<%
 				}
