@@ -148,7 +148,6 @@ create index IX_32A18526 on DDMStorageLink (uuid_);
 
 create index IX_31817A62 on DDMStructure (classNameId);
 create index IX_C8419FBE on DDMStructure (groupId);
-create index IX_CCCB0F4F on DDMStructure (groupId, name, description);
 create unique index IX_490E7A1E on DDMStructure (groupId, structureKey);
 create index IX_E61809C8 on DDMStructure (uuid_);
 create unique index IX_85C7EBE2 on DDMStructure (uuid_, groupId);
@@ -171,7 +170,6 @@ create index IX_18D42171 on DLDocumentMetadataSet (fileVersionId);
 create index IX_79AEF83E on DLDocumentMetadataSet (uuid_);
 
 create index IX_C0A3BBE7 on DLDocumentType (groupId);
-create index IX_B186C886 on DLDocumentType (groupId, name, description);
 
 create index IX_E5E327B2 on DLDocumentType_DDMStructure (documentTypeId);
 create index IX_F8746210 on DLDocumentType_DDMStructure (structureId);
