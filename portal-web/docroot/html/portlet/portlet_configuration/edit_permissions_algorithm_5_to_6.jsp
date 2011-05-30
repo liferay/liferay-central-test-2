@@ -166,13 +166,19 @@ definePermissionsURL.setParameter(Constants.CMD, Constants.VIEW);
 
 		if (!ResourceActionsUtil.isPortalModelResource(modelResource)) {
 			Role organizationAdministrator = RoleLocalServiceUtil.getRole(company.getCompanyId(), RoleConstants.ORGANIZATION_ADMINISTRATOR);
-			Role organizationOwner = RoleLocalServiceUtil.getRole(company.getCompanyId(), RoleConstants.ORGANIZATION_OWNER);
-			Role siteAdministrator = RoleLocalServiceUtil.getRole(company.getCompanyId(), RoleConstants.SITE_ADMINISTRATOR);
-			Role siteOwner = RoleLocalServiceUtil.getRole(company.getCompanyId(), RoleConstants.SITE_OWNER);
 
 			roles.remove(organizationAdministrator);
+
+			Role organizationOwner = RoleLocalServiceUtil.getRole(company.getCompanyId(), RoleConstants.ORGANIZATION_OWNER);
+
 			roles.remove(organizationOwner);
+
+			Role siteAdministrator = RoleLocalServiceUtil.getRole(company.getCompanyId(), RoleConstants.SITE_ADMINISTRATOR);
+
 			roles.remove(siteAdministrator);
+
+			Role siteOwner = RoleLocalServiceUtil.getRole(company.getCompanyId(), RoleConstants.SITE_OWNER);
+
 			roles.remove(siteOwner);
 		}
 
