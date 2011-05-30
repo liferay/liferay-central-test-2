@@ -17,6 +17,7 @@ package com.liferay.portlet.bookmarks.model;
 import com.liferay.portal.kernel.bean.AutoEscape;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.BaseModel;
+import com.liferay.portal.model.GroupedModel;
 import com.liferay.portal.service.ServiceContext;
 
 import com.liferay.portlet.expando.model.ExpandoBridge;
@@ -38,7 +39,8 @@ import java.util.Date;
  * @see com.liferay.portlet.bookmarks.model.impl.BookmarksFolderModelImpl
  * @generated
  */
-public interface BookmarksFolderModel extends BaseModel<BookmarksFolder> {
+public interface BookmarksFolderModel extends BaseModel<BookmarksFolder>,
+	GroupedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
@@ -144,6 +146,21 @@ public interface BookmarksFolderModel extends BaseModel<BookmarksFolder> {
 	 * @param userUuid the user uuid of this bookmarks folder
 	 */
 	public void setUserUuid(String userUuid);
+
+	/**
+	 * Gets the user name of this bookmarks folder.
+	 *
+	 * @return the user name of this bookmarks folder
+	 */
+	@AutoEscape
+	public String getUserName();
+
+	/**
+	 * Sets the user name of this bookmarks folder.
+	 *
+	 * @param userName the user name of this bookmarks folder
+	 */
+	public void setUserName(String userName);
 
 	/**
 	 * Gets the create date of this bookmarks folder.

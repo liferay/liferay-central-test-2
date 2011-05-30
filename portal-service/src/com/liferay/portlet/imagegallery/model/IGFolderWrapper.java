@@ -165,6 +165,24 @@ public class IGFolderWrapper implements IGFolder {
 	}
 
 	/**
+	* Gets the user name of this i g folder.
+	*
+	* @return the user name of this i g folder
+	*/
+	public java.lang.String getUserName() {
+		return _igFolder.getUserName();
+	}
+
+	/**
+	* Sets the user name of this i g folder.
+	*
+	* @param userName the user name of this i g folder
+	*/
+	public void setUserName(java.lang.String userName) {
+		_igFolder.setUserName(userName);
+	}
+
+	/**
 	* Gets the create date of this i g folder.
 	*
 	* @return the create date of this i g folder

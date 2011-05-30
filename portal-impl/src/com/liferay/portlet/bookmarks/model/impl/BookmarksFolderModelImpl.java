@@ -68,13 +68,14 @@ public class BookmarksFolderModelImpl extends BaseModelImpl<BookmarksFolder>
 			{ "groupId", Types.BIGINT },
 			{ "companyId", Types.BIGINT },
 			{ "userId", Types.BIGINT },
+			{ "userName", Types.VARCHAR },
 			{ "createDate", Types.TIMESTAMP },
 			{ "modifiedDate", Types.TIMESTAMP },
 			{ "parentFolderId", Types.BIGINT },
 			{ "name", Types.VARCHAR },
 			{ "description", Types.VARCHAR }
 		};
-	public static final String TABLE_SQL_CREATE = "create table BookmarksFolder (uuid_ VARCHAR(75) null,folderId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,createDate DATE null,modifiedDate DATE null,parentFolderId LONG,name VARCHAR(75) null,description STRING null)";
+	public static final String TABLE_SQL_CREATE = "create table BookmarksFolder (uuid_ VARCHAR(75) null,folderId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,parentFolderId LONG,name VARCHAR(75) null,description STRING null)";
 	public static final String TABLE_SQL_DROP = "drop table BookmarksFolder";
 	public static final String ORDER_BY_JPQL = " ORDER BY bookmarksFolder.parentFolderId ASC, bookmarksFolder.name ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY BookmarksFolder.parentFolderId ASC, BookmarksFolder.name ASC";
@@ -102,6 +103,7 @@ public class BookmarksFolderModelImpl extends BaseModelImpl<BookmarksFolder>
 		model.setGroupId(soapModel.getGroupId());
 		model.setCompanyId(soapModel.getCompanyId());
 		model.setUserId(soapModel.getUserId());
+		model.setUserName(soapModel.getUserName());
 		model.setCreateDate(soapModel.getCreateDate());
 		model.setModifiedDate(soapModel.getModifiedDate());
 		model.setParentFolderId(soapModel.getParentFolderId());
@@ -235,6 +237,20 @@ public class BookmarksFolderModelImpl extends BaseModelImpl<BookmarksFolder>
 	}
 
 	@JSON
+	public String getUserName() {
+		if (_userName == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _userName;
+		}
+	}
+
+	public void setUserName(String userName) {
+		_userName = userName;
+	}
+
+	@JSON
 	public Date getCreateDate() {
 		return _createDate;
 	}
@@ -321,6 +337,7 @@ public class BookmarksFolderModelImpl extends BaseModelImpl<BookmarksFolder>
 		bookmarksFolderImpl.setGroupId(getGroupId());
 		bookmarksFolderImpl.setCompanyId(getCompanyId());
 		bookmarksFolderImpl.setUserId(getUserId());
+		bookmarksFolderImpl.setUserName(getUserName());
 		bookmarksFolderImpl.setCreateDate(getCreateDate());
 		bookmarksFolderImpl.setModifiedDate(getModifiedDate());
 		bookmarksFolderImpl.setParentFolderId(getParentFolderId());
@@ -398,7 +415,7 @@ public class BookmarksFolderModelImpl extends BaseModelImpl<BookmarksFolder>
 	}
 
 	public String toString() {
-		StringBundler sb = new StringBundler(21);
+		StringBundler sb = new StringBundler(23);
 
 		sb.append("{uuid=");
 		sb.append(getUuid());
@@ -410,6 +427,8 @@ public class BookmarksFolderModelImpl extends BaseModelImpl<BookmarksFolder>
 		sb.append(getCompanyId());
 		sb.append(", userId=");
 		sb.append(getUserId());
+		sb.append(", userName=");
+		sb.append(getUserName());
 		sb.append(", createDate=");
 		sb.append(getCreateDate());
 		sb.append(", modifiedDate=");
@@ -426,7 +445,7 @@ public class BookmarksFolderModelImpl extends BaseModelImpl<BookmarksFolder>
 	}
 
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(34);
+		StringBundler sb = new StringBundler(37);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.portlet.bookmarks.model.BookmarksFolder");
@@ -451,6 +470,10 @@ public class BookmarksFolderModelImpl extends BaseModelImpl<BookmarksFolder>
 		sb.append(
 			"<column><column-name>userId</column-name><column-value><![CDATA[");
 		sb.append(getUserId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>userName</column-name><column-value><![CDATA[");
+		sb.append(getUserName());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>createDate</column-name><column-value><![CDATA[");
@@ -487,6 +510,7 @@ public class BookmarksFolderModelImpl extends BaseModelImpl<BookmarksFolder>
 	private long _companyId;
 	private long _userId;
 	private String _userUuid;
+	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
 	private long _parentFolderId;

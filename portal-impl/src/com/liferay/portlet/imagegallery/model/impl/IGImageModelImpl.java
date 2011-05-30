@@ -68,6 +68,7 @@ public class IGImageModelImpl extends BaseModelImpl<IGImage>
 			{ "groupId", Types.BIGINT },
 			{ "companyId", Types.BIGINT },
 			{ "userId", Types.BIGINT },
+			{ "userName", Types.VARCHAR },
 			{ "createDate", Types.TIMESTAMP },
 			{ "modifiedDate", Types.TIMESTAMP },
 			{ "folderId", Types.BIGINT },
@@ -78,7 +79,7 @@ public class IGImageModelImpl extends BaseModelImpl<IGImage>
 			{ "custom1ImageId", Types.BIGINT },
 			{ "custom2ImageId", Types.BIGINT }
 		};
-	public static final String TABLE_SQL_CREATE = "create table IGImage (uuid_ VARCHAR(75) null,imageId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,createDate DATE null,modifiedDate DATE null,folderId LONG,name VARCHAR(75) null,description STRING null,smallImageId LONG,largeImageId LONG,custom1ImageId LONG,custom2ImageId LONG)";
+	public static final String TABLE_SQL_CREATE = "create table IGImage (uuid_ VARCHAR(75) null,imageId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,folderId LONG,name VARCHAR(75) null,description STRING null,smallImageId LONG,largeImageId LONG,custom1ImageId LONG,custom2ImageId LONG)";
 	public static final String TABLE_SQL_DROP = "drop table IGImage";
 	public static final String ORDER_BY_JPQL = " ORDER BY igImage.imageId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY IGImage.imageId ASC";
@@ -106,6 +107,7 @@ public class IGImageModelImpl extends BaseModelImpl<IGImage>
 		model.setGroupId(soapModel.getGroupId());
 		model.setCompanyId(soapModel.getCompanyId());
 		model.setUserId(soapModel.getUserId());
+		model.setUserName(soapModel.getUserName());
 		model.setCreateDate(soapModel.getCreateDate());
 		model.setModifiedDate(soapModel.getModifiedDate());
 		model.setFolderId(soapModel.getFolderId());
@@ -239,6 +241,20 @@ public class IGImageModelImpl extends BaseModelImpl<IGImage>
 
 	public void setUserUuid(String userUuid) {
 		_userUuid = userUuid;
+	}
+
+	@JSON
+	public String getUserName() {
+		if (_userName == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _userName;
+		}
+	}
+
+	public void setUserName(String userName) {
+		_userName = userName;
 	}
 
 	@JSON
@@ -403,6 +419,7 @@ public class IGImageModelImpl extends BaseModelImpl<IGImage>
 		igImageImpl.setGroupId(getGroupId());
 		igImageImpl.setCompanyId(getCompanyId());
 		igImageImpl.setUserId(getUserId());
+		igImageImpl.setUserName(getUserName());
 		igImageImpl.setCreateDate(getCreateDate());
 		igImageImpl.setModifiedDate(getModifiedDate());
 		igImageImpl.setFolderId(getFolderId());
@@ -493,7 +510,7 @@ public class IGImageModelImpl extends BaseModelImpl<IGImage>
 	}
 
 	public String toString() {
-		StringBundler sb = new StringBundler(29);
+		StringBundler sb = new StringBundler(31);
 
 		sb.append("{uuid=");
 		sb.append(getUuid());
@@ -505,6 +522,8 @@ public class IGImageModelImpl extends BaseModelImpl<IGImage>
 		sb.append(getCompanyId());
 		sb.append(", userId=");
 		sb.append(getUserId());
+		sb.append(", userName=");
+		sb.append(getUserName());
 		sb.append(", createDate=");
 		sb.append(getCreateDate());
 		sb.append(", modifiedDate=");
@@ -529,7 +548,7 @@ public class IGImageModelImpl extends BaseModelImpl<IGImage>
 	}
 
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(46);
+		StringBundler sb = new StringBundler(49);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.portlet.imagegallery.model.IGImage");
@@ -554,6 +573,10 @@ public class IGImageModelImpl extends BaseModelImpl<IGImage>
 		sb.append(
 			"<column><column-name>userId</column-name><column-value><![CDATA[");
 		sb.append(getUserId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>userName</column-name><column-value><![CDATA[");
+		sb.append(getUserName());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>createDate</column-name><column-value><![CDATA[");
@@ -606,6 +629,7 @@ public class IGImageModelImpl extends BaseModelImpl<IGImage>
 	private long _companyId;
 	private long _userId;
 	private String _userUuid;
+	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
 	private long _folderId;

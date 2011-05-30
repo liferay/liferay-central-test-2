@@ -539,6 +539,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 		igImageImpl.setGroupId(igImage.getGroupId());
 		igImageImpl.setCompanyId(igImage.getCompanyId());
 		igImageImpl.setUserId(igImage.getUserId());
+		igImageImpl.setUserName(igImage.getUserName());
 		igImageImpl.setCreateDate(igImage.getCreateDate());
 		igImageImpl.setModifiedDate(igImage.getModifiedDate());
 		igImageImpl.setFolderId(igImage.getFolderId());

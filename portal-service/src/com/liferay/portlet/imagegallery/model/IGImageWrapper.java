@@ -165,6 +165,24 @@ public class IGImageWrapper implements IGImage {
 	}
 
 	/**
+	* Gets the user name of this i g image.
+	*
+	* @return the user name of this i g image
+	*/
+	public java.lang.String getUserName() {
+		return _igImage.getUserName();
+	}
+
+	/**
+	* Sets the user name of this i g image.
+	*
+	* @param userName the user name of this i g image
+	*/
+	public void setUserName(java.lang.String userName) {
+		_igImage.setUserName(userName);
+	}
+
+	/**
 	* Gets the create date of this i g image.
 	*
 	* @return the create date of this i g image

@@ -68,6 +68,7 @@ public class BookmarksEntryModelImpl extends BaseModelImpl<BookmarksEntry>
 			{ "groupId", Types.BIGINT },
 			{ "companyId", Types.BIGINT },
 			{ "userId", Types.BIGINT },
+			{ "userName", Types.VARCHAR },
 			{ "createDate", Types.TIMESTAMP },
 			{ "modifiedDate", Types.TIMESTAMP },
 			{ "folderId", Types.BIGINT },
@@ -77,7 +78,7 @@ public class BookmarksEntryModelImpl extends BaseModelImpl<BookmarksEntry>
 			{ "visits", Types.INTEGER },
 			{ "priority", Types.INTEGER }
 		};
-	public static final String TABLE_SQL_CREATE = "create table BookmarksEntry (uuid_ VARCHAR(75) null,entryId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,createDate DATE null,modifiedDate DATE null,folderId LONG,name VARCHAR(255) null,url STRING null,description STRING null,visits INTEGER,priority INTEGER)";
+	public static final String TABLE_SQL_CREATE = "create table BookmarksEntry (uuid_ VARCHAR(75) null,entryId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,folderId LONG,name VARCHAR(255) null,url STRING null,description STRING null,visits INTEGER,priority INTEGER)";
 	public static final String TABLE_SQL_DROP = "drop table BookmarksEntry";
 	public static final String ORDER_BY_JPQL = " ORDER BY bookmarksEntry.folderId ASC, bookmarksEntry.name ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY BookmarksEntry.folderId ASC, BookmarksEntry.name ASC";
@@ -105,6 +106,7 @@ public class BookmarksEntryModelImpl extends BaseModelImpl<BookmarksEntry>
 		model.setGroupId(soapModel.getGroupId());
 		model.setCompanyId(soapModel.getCompanyId());
 		model.setUserId(soapModel.getUserId());
+		model.setUserName(soapModel.getUserName());
 		model.setCreateDate(soapModel.getCreateDate());
 		model.setModifiedDate(soapModel.getModifiedDate());
 		model.setFolderId(soapModel.getFolderId());
@@ -240,6 +242,20 @@ public class BookmarksEntryModelImpl extends BaseModelImpl<BookmarksEntry>
 	}
 
 	@JSON
+	public String getUserName() {
+		if (_userName == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _userName;
+		}
+	}
+
+	public void setUserName(String userName) {
+		_userName = userName;
+	}
+
+	@JSON
 	public Date getCreateDate() {
 		return _createDate;
 	}
@@ -358,6 +374,7 @@ public class BookmarksEntryModelImpl extends BaseModelImpl<BookmarksEntry>
 		bookmarksEntryImpl.setGroupId(getGroupId());
 		bookmarksEntryImpl.setCompanyId(getCompanyId());
 		bookmarksEntryImpl.setUserId(getUserId());
+		bookmarksEntryImpl.setUserName(getUserName());
 		bookmarksEntryImpl.setCreateDate(getCreateDate());
 		bookmarksEntryImpl.setModifiedDate(getModifiedDate());
 		bookmarksEntryImpl.setFolderId(getFolderId());
@@ -438,7 +455,7 @@ public class BookmarksEntryModelImpl extends BaseModelImpl<BookmarksEntry>
 	}
 
 	public String toString() {
-		StringBundler sb = new StringBundler(27);
+		StringBundler sb = new StringBundler(29);
 
 		sb.append("{uuid=");
 		sb.append(getUuid());
@@ -450,6 +467,8 @@ public class BookmarksEntryModelImpl extends BaseModelImpl<BookmarksEntry>
 		sb.append(getCompanyId());
 		sb.append(", userId=");
 		sb.append(getUserId());
+		sb.append(", userName=");
+		sb.append(getUserName());
 		sb.append(", createDate=");
 		sb.append(getCreateDate());
 		sb.append(", modifiedDate=");
@@ -472,7 +491,7 @@ public class BookmarksEntryModelImpl extends BaseModelImpl<BookmarksEntry>
 	}
 
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(43);
+		StringBundler sb = new StringBundler(46);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.portlet.bookmarks.model.BookmarksEntry");
@@ -497,6 +516,10 @@ public class BookmarksEntryModelImpl extends BaseModelImpl<BookmarksEntry>
 		sb.append(
 			"<column><column-name>userId</column-name><column-value><![CDATA[");
 		sb.append(getUserId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>userName</column-name><column-value><![CDATA[");
+		sb.append(getUserName());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>createDate</column-name><column-value><![CDATA[");
@@ -545,6 +568,7 @@ public class BookmarksEntryModelImpl extends BaseModelImpl<BookmarksEntry>
 	private long _companyId;
 	private long _userId;
 	private String _userUuid;
+	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
 	private long _folderId;

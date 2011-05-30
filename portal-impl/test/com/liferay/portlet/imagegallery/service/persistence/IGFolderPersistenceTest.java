@@ -73,6 +73,7 @@ public class IGFolderPersistenceTest extends BasePersistenceTestCase {
 		newIGFolder.setGroupId(nextLong());
 		newIGFolder.setCompanyId(nextLong());
 		newIGFolder.setUserId(nextLong());
+		newIGFolder.setUserName(randomString());
 		newIGFolder.setCreateDate(nextDate());
 		newIGFolder.setModifiedDate(nextDate());
 		newIGFolder.setParentFolderId(nextLong());
@@ -88,6 +89,7 @@ public class IGFolderPersistenceTest extends BasePersistenceTestCase {
 		assertEquals(existingIGFolder.getGroupId(), newIGFolder.getGroupId());
 		assertEquals(existingIGFolder.getCompanyId(), newIGFolder.getCompanyId());
 		assertEquals(existingIGFolder.getUserId(), newIGFolder.getUserId());
+		assertEquals(existingIGFolder.getUserName(), newIGFolder.getUserName());
 		assertEquals(Time.getShortTimestamp(existingIGFolder.getCreateDate()),
 			Time.getShortTimestamp(newIGFolder.getCreateDate()));
 		assertEquals(Time.getShortTimestamp(existingIGFolder.getModifiedDate()),
@@ -235,6 +237,7 @@ public class IGFolderPersistenceTest extends BasePersistenceTestCase {
 		igFolder.setGroupId(nextLong());
 		igFolder.setCompanyId(nextLong());
 		igFolder.setUserId(nextLong());
+		igFolder.setUserName(randomString());
 		igFolder.setCreateDate(nextDate());
 		igFolder.setModifiedDate(nextDate());
 		igFolder.setParentFolderId(nextLong());

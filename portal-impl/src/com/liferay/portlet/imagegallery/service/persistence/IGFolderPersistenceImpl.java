@@ -465,6 +465,7 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 		igFolderImpl.setGroupId(igFolder.getGroupId());
 		igFolderImpl.setCompanyId(igFolder.getCompanyId());
 		igFolderImpl.setUserId(igFolder.getUserId());
+		igFolderImpl.setUserName(igFolder.getUserName());
 		igFolderImpl.setCreateDate(igFolder.getCreateDate());
 		igFolderImpl.setModifiedDate(igFolder.getModifiedDate());
 		igFolderImpl.setParentFolderId(igFolder.getParentFolderId());

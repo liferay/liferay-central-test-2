@@ -165,6 +165,24 @@ public class BookmarksEntryWrapper implements BookmarksEntry {
 	}
 
 	/**
+	* Gets the user name of this bookmarks entry.
+	*
+	* @return the user name of this bookmarks entry
+	*/
+	public java.lang.String getUserName() {
+		return _bookmarksEntry.getUserName();
+	}
+
+	/**
+	* Sets the user name of this bookmarks entry.
+	*
+	* @param userName the user name of this bookmarks entry
+	*/
+	public void setUserName(java.lang.String userName) {
+		_bookmarksEntry.setUserName(userName);
+	}
+
+	/**
 	* Gets the create date of this bookmarks entry.
 	*
 	* @return the create date of this bookmarks entry

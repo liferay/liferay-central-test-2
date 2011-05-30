@@ -73,6 +73,7 @@ public class BookmarksFolderPersistenceTest extends BasePersistenceTestCase {
 		newBookmarksFolder.setGroupId(nextLong());
 		newBookmarksFolder.setCompanyId(nextLong());
 		newBookmarksFolder.setUserId(nextLong());
+		newBookmarksFolder.setUserName(randomString());
 		newBookmarksFolder.setCreateDate(nextDate());
 		newBookmarksFolder.setModifiedDate(nextDate());
 		newBookmarksFolder.setParentFolderId(nextLong());
@@ -93,6 +94,8 @@ public class BookmarksFolderPersistenceTest extends BasePersistenceTestCase {
 			newBookmarksFolder.getCompanyId());
 		assertEquals(existingBookmarksFolder.getUserId(),
 			newBookmarksFolder.getUserId());
+		assertEquals(existingBookmarksFolder.getUserName(),
+			newBookmarksFolder.getUserName());
 		assertEquals(Time.getShortTimestamp(
 				existingBookmarksFolder.getCreateDate()),
 			Time.getShortTimestamp(newBookmarksFolder.getCreateDate()));
@@ -237,6 +240,7 @@ public class BookmarksFolderPersistenceTest extends BasePersistenceTestCase {
 		bookmarksFolder.setGroupId(nextLong());
 		bookmarksFolder.setCompanyId(nextLong());
 		bookmarksFolder.setUserId(nextLong());
+		bookmarksFolder.setUserName(randomString());
 		bookmarksFolder.setCreateDate(nextDate());
 		bookmarksFolder.setModifiedDate(nextDate());
 		bookmarksFolder.setParentFolderId(nextLong());

@@ -410,6 +410,7 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl<Bookmark
 		bookmarksFolderImpl.setGroupId(bookmarksFolder.getGroupId());
 		bookmarksFolderImpl.setCompanyId(bookmarksFolder.getCompanyId());
 		bookmarksFolderImpl.setUserId(bookmarksFolder.getUserId());
+		bookmarksFolderImpl.setUserName(bookmarksFolder.getUserName());
 		bookmarksFolderImpl.setCreateDate(bookmarksFolder.getCreateDate());
 		bookmarksFolderImpl.setModifiedDate(bookmarksFolder.getModifiedDate());
 		bookmarksFolderImpl.setParentFolderId(bookmarksFolder.getParentFolderId());

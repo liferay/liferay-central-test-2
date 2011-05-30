@@ -73,6 +73,7 @@ public class IGImagePersistenceTest extends BasePersistenceTestCase {
 		newIGImage.setGroupId(nextLong());
 		newIGImage.setCompanyId(nextLong());
 		newIGImage.setUserId(nextLong());
+		newIGImage.setUserName(randomString());
 		newIGImage.setCreateDate(nextDate());
 		newIGImage.setModifiedDate(nextDate());
 		newIGImage.setFolderId(nextLong());
@@ -92,6 +93,7 @@ public class IGImagePersistenceTest extends BasePersistenceTestCase {
 		assertEquals(existingIGImage.getGroupId(), newIGImage.getGroupId());
 		assertEquals(existingIGImage.getCompanyId(), newIGImage.getCompanyId());
 		assertEquals(existingIGImage.getUserId(), newIGImage.getUserId());
+		assertEquals(existingIGImage.getUserName(), newIGImage.getUserName());
 		assertEquals(Time.getShortTimestamp(existingIGImage.getCreateDate()),
 			Time.getShortTimestamp(newIGImage.getCreateDate()));
 		assertEquals(Time.getShortTimestamp(existingIGImage.getModifiedDate()),
@@ -251,6 +253,7 @@ public class IGImagePersistenceTest extends BasePersistenceTestCase {
 		igImage.setGroupId(nextLong());
 		igImage.setCompanyId(nextLong());
 		igImage.setUserId(nextLong());
+		igImage.setUserName(randomString());
 		igImage.setCreateDate(nextDate());
 		igImage.setModifiedDate(nextDate());
 		igImage.setFolderId(nextLong());

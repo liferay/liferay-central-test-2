@@ -165,6 +165,24 @@ public class BookmarksFolderWrapper implements BookmarksFolder {
 	}
 
 	/**
+	* Gets the user name of this bookmarks folder.
+	*
+	* @return the user name of this bookmarks folder
+	*/
+	public java.lang.String getUserName() {
+		return _bookmarksFolder.getUserName();
+	}
+
+	/**
+	* Sets the user name of this bookmarks folder.
+	*
+	* @param userName the user name of this bookmarks folder
+	*/
+	public void setUserName(java.lang.String userName) {
+		_bookmarksFolder.setUserName(userName);
+	}
+
+	/**
 	* Gets the create date of this bookmarks folder.
 	*
 	* @return the create date of this bookmarks folder

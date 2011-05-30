@@ -1515,6 +1515,7 @@
 			<basic name="groupId" />
 			<basic name="companyId" />
 			<basic name="userId" />
+			<basic name="userName" />
 			<basic name="createDate">
 				<temporal>TIMESTAMP</temporal>
 			</basic>
@@ -1541,6 +1542,7 @@
 			<basic name="groupId" />
 			<basic name="companyId" />
 			<basic name="userId" />
+			<basic name="userName" />
 			<basic name="createDate">
 				<temporal>TIMESTAMP</temporal>
 			</basic>
@@ -2007,6 +2009,7 @@
 			<basic name="groupId" />
 			<basic name="companyId" />
 			<basic name="userId" />
+			<basic name="userName" />
 			<basic name="createDate">
 				<temporal>TIMESTAMP</temporal>
 			</basic>
@@ -2030,6 +2033,7 @@
 			<basic name="groupId" />
 			<basic name="companyId" />
 			<basic name="userId" />
+			<basic name="userName" />
 			<basic name="createDate">
 				<temporal>TIMESTAMP</temporal>
 			</basic>

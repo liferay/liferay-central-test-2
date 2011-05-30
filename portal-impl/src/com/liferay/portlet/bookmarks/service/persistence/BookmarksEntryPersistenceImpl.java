@@ -412,6 +412,7 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl<Bookmarks
 		bookmarksEntryImpl.setGroupId(bookmarksEntry.getGroupId());
 		bookmarksEntryImpl.setCompanyId(bookmarksEntry.getCompanyId());
 		bookmarksEntryImpl.setUserId(bookmarksEntry.getUserId());
+		bookmarksEntryImpl.setUserName(bookmarksEntry.getUserName());
 		bookmarksEntryImpl.setCreateDate(bookmarksEntry.getCreateDate());
 		bookmarksEntryImpl.setModifiedDate(bookmarksEntry.getModifiedDate());
 		bookmarksEntryImpl.setFolderId(bookmarksEntry.getFolderId());

@@ -17,6 +17,7 @@ package com.liferay.portlet.imagegallery.model;
 import com.liferay.portal.kernel.bean.AutoEscape;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.BaseModel;
+import com.liferay.portal.model.GroupedModel;
 import com.liferay.portal.service.ServiceContext;
 
 import com.liferay.portlet.expando.model.ExpandoBridge;
@@ -38,7 +39,7 @@ import java.util.Date;
  * @see com.liferay.portlet.imagegallery.model.impl.IGFolderModelImpl
  * @generated
  */
-public interface IGFolderModel extends BaseModel<IGFolder> {
+public interface IGFolderModel extends BaseModel<IGFolder>, GroupedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
@@ -144,6 +145,21 @@ public interface IGFolderModel extends BaseModel<IGFolder> {
 	 * @param userUuid the user uuid of this i g folder
 	 */
 	public void setUserUuid(String userUuid);
+
+	/**
+	 * Gets the user name of this i g folder.
+	 *
+	 * @return the user name of this i g folder
+	 */
+	@AutoEscape
+	public String getUserName();
+
+	/**
+	 * Sets the user name of this i g folder.
+	 *
+	 * @param userName the user name of this i g folder
+	 */
+	public void setUserName(String userName);
 
 	/**
 	 * Gets the create date of this i g folder.
