@@ -80,6 +80,20 @@ svn://svn.liferay.com/repos/public/alloy/trunk/sandbox/taglibs.
 			<arg path="src/com/liferay/portal/parsers/creole/parser" />
 			<arg path="src/com/liferay/portal/parsers/creole/grammar/Creole10.g" />
 		</java>
+
+		<replace file="src/com/liferay/portal/parsers/creole/parser/Creole10Parser.java">		  
+			<replacetoken>public class Creole10Parser</replacetoken>
+			<replacevalue><![CDATA[@SuppressWarnings("all") 
+public class Creole10Parser]]></replacevalue>			
+        </replace>
+        
+        <replace file="src/com/liferay/portal/parsers/creole/parser/Creole10Lexer.java">		  
+			<replacetoken>public class Creole10Lexer</replacetoken>									   
+			<replacevalue><![CDATA[@SuppressWarnings("all")
+public class Creole10Lexer]]></replacevalue>			
+        </replace>        
+        
+        <fixcrlf srcdir="src/com/liferay/portal/parsers/creole/parser" includes="*.java" javafiles="yes" tab="add" />
     </target>
 
 	<target name="build-css">
