@@ -428,6 +428,14 @@
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>I18n Servlet</servlet-name>
+		<url-pattern>/hr/*</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>I18n Servlet</servlet-name>
+		<url-pattern>/hr_HR/*</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>I18n Servlet</servlet-name>
 		<url-pattern>/hu/*</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
@@ -803,6 +811,8 @@
 			<url-pattern>/gl_ES/c/portal/protected</url-pattern>
 			<url-pattern>/hi/c/portal/protected</url-pattern>
 			<url-pattern>/hi_IN/c/portal/protected</url-pattern>
+			<url-pattern>/hr/c/portal/protected</url-pattern>
+			<url-pattern>/hr_HR/c/portal/protected</url-pattern>
 			<url-pattern>/hu/c/portal/protected</url-pattern>
 			<url-pattern>/hu_HU/c/portal/protected</url-pattern>
 			<url-pattern>/in/c/portal/protected</url-pattern>
