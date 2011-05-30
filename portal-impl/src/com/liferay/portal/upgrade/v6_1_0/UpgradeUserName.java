@@ -69,15 +69,9 @@ public class UpgradeUserName extends UpgradeProcess {
 				String fullName = fullNameGenerator.getFullName(
 					firstName, middleName, lastName);
 
-				sb = new StringBundler(5);
-
-				sb.append("update ");
-				sb.append(tableName);
-				sb.append(" set userName = '");
-				sb.append(fullName);
-				sb.append("'");
-
-				runSQL(sb.toString());
+				runSQL(
+					"update " + tableName + " set userName = '" + fullName +
+						"'");
 			}
 		}
 		finally {
