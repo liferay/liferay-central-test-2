@@ -398,9 +398,17 @@
 		.lfr-asset-summary {
 			margin-left: 5px;
 
-			.download-document, .last-updated, .webdav-url {
+			.download-document, .conversions, .last-updated, .webdav-url {
 				display: block;
 				margin: 0.7em 0;
+			}
+
+			.download-document {
+				margin-top: 1.2em;
+			}
+
+			.conversions {
+				margin-bottom: 1.2em;
 			}
 
 			.version {

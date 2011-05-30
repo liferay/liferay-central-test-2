@@ -319,6 +319,26 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 						</c:if>
 					</span>
 
+					<span class="conversions">
+
+						<%
+						for (int i = 0; i < conversions.length; i++) {
+							String conversion = conversions[i];
+						%>
+
+							<liferay-ui:icon
+								image='<%= "../file_system/small/" + conversion %>'
+								label="<%= true %>"
+								message="<%= conversion.toUpperCase() %>"
+								url='<%= themeDisplay.getPortalURL() + themeDisplay.getPathContext() + "/documents/" + themeDisplay.getScopeGroupId() + StringPool.SLASH + fileEntry.getFolderId() + StringPool.SLASH + HttpUtil.encodeURL(HtmlUtil.unescape(fileEntry.getTitle())) + "?version=" + fileVersion.getVersion() + "&targetExtension=" + conversion %>'
+							/>
+
+						<%
+						}
+						%>
+
+					</span>
+
 					<span class="webdav-url">
 						<c:choose>
 							<c:when test="<%= portletDisplay.isWebDAVEnabled() && fileEntry.isSupportsSocial() %>">
