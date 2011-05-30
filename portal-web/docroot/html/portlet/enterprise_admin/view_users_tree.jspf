@@ -50,11 +50,6 @@ if (leftAndRightOrganizationIds != null) {
 }
 
 int organizationsCount = OrganizationLocalServiceUtil.searchCount(company.getCompanyId(), (organization != null) ? organization.getOrganizationId() : OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID, null, null, null, null, organizationParams);
-int usersCount = 0;
-
-if (organization != null) {
-	usersCount = UserLocalServiceUtil.getOrganizationUsersCount(organizationId);
-}
 %>
 
 <aui:layout>
@@ -266,6 +261,14 @@ if (organization != null) {
 					<%= organizationsTree %>
 				</liferay-ui:panel>
 			</c:if>
+
+			<%
+			int usersCount = 0;
+
+			if (organization != null) {
+				usersCount = UserLocalServiceUtil.getOrganizationUsersCount(organizationId);
+			}
+			%>
 
 			<c:if test="<%= (organization == null) || (usersCount > 0) %>">
 				<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" persistState="<%= true %>" title='<%= (organization == null) ? "users" : (usersCount == 1) ? LanguageUtil.format(pageContext, "x-user", String.valueOf(usersCount)) : LanguageUtil.format(pageContext, "x-users", String.valueOf(usersCount)) %>'>
