@@ -3441,7 +3441,6 @@
 		<attributes>
 			<transient name="passwordModified" />
 			<transient name="passwordUnencrypted" />
-			<transient name="userName" />
 		</attributes>
 	</entity>
 	<entity class="com.liferay.portal.model.impl.UserGroupImpl" name="UserGroup">
