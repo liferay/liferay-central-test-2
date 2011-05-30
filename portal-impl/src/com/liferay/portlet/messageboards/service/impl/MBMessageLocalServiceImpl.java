@@ -84,7 +84,6 @@ import com.liferay.portlet.messageboards.util.comparator.MessageCreateDateCompar
 import com.liferay.portlet.messageboards.util.comparator.MessageThreadComparator;
 import com.liferay.portlet.messageboards.util.comparator.ThreadLastPostDateComparator;
 import com.liferay.portlet.social.model.SocialActivity;
-import com.liferay.util.SerializationUtil;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -98,6 +97,8 @@ import javax.portlet.PortletPreferences;
 
 import net.htmlparser.jericho.Source;
 import net.htmlparser.jericho.StartTag;
+
+import org.apache.commons.lang.SerializationUtils;
 
 /**
  * @author Brian Wing Shun Chan
@@ -1894,7 +1895,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		subscriptionSenderPrototype.setUserId(message.getUserId());
 
 		SubscriptionSender subscriptionSender =
-			(SubscriptionSender)SerializationUtil.clone(
+			(SubscriptionSender)SerializationUtils.clone(
 				subscriptionSenderPrototype);
 
 		for (long categoryId : categoryIds) {
@@ -1914,7 +1915,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		if (!MailingListThreadLocal.isSourceMailingList()) {
 			for (long categoryId : categoryIds) {
 				MBSubscriptionSender sourceMailingListSubscriptionSender =
-					(MBSubscriptionSender)SerializationUtil.clone(
+					(MBSubscriptionSender)SerializationUtils.clone(
 						subscriptionSenderPrototype);
 
 				sourceMailingListSubscriptionSender.initialize();
