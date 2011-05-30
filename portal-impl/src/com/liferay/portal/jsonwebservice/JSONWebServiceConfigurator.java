@@ -30,6 +30,7 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 
 import java.net.MalformedURLException;
+import java.net.URI;
 import java.net.URL;
 
 import java.util.HashMap;
@@ -80,7 +81,9 @@ public class JSONWebServiceConfigurator extends FindClass {
 			classPathURLs = new URL[1];
 
 			try {
-				classPathURLs[0] = classPathFile.toURL();
+				URI classPathURI = classPathFile.toURI();
+
+				classPathURLs[0] = classPathURI.toURL();
 			}
 			catch (MalformedURLException murle) {
 				_log.error(murle, murle);
@@ -98,7 +101,9 @@ public class JSONWebServiceConfigurator extends FindClass {
 				classPathURLs = new URL[1];
 
 				try {
-					classPathURLs[0] = portalImplJarFile.toURL();
+					URI portalImplJarURI = portalImplJarFile.toURI();
+
+					classPathURLs[0] = portalImplJarURI.toURL();
 				}
 				catch (MalformedURLException murle) {
 					_log.error(murle, murle);
