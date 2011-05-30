@@ -8,11 +8,14 @@ alter table BlogsEntry add smallImageId VARCHAR(75) null;
 alter table BlogsEntry add smallImageURL STRING null;
 
 alter table BookmarksEntry add description VARCHAR(75) null;
+alter table BookmarksEntry add userName VARCHAR(75) null;
 
 COMMIT_TRANSACTION;
 
 update BookmarksEntry set description = comments;
 alter table BookmarksEntry drop column comments;
+
+alter table BookmarksFolder add userName VARCHAR(75) null;
 
 alter table CalEvent add location STRING null;
 
@@ -187,6 +190,10 @@ COMMIT_TRANSACTION;
 update DLFolder set repositoryId = groupId;
 
 alter table Group_ add site BOOLEAN;
+
+alter table IGFolder add userName VARCHAR(75) null;
+
+alter table IGImage add userName VARCHAR(75) null;
 
 alter table JournalArticle add classNameId LONG null;
 alter table JournalArticle add classPK LONG null;
