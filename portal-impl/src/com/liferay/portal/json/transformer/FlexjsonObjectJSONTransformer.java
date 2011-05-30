@@ -39,25 +39,28 @@ public class FlexjsonObjectJSONTransformer
 	public void transform(Object object) {
 		Class<?> type = resolveClass(object);
 
-		_pathExpressions = (List<PathExpression>)BeanUtil.getDeclaredProperty(
-			getContext(), "pathExpressions");
+		List<PathExpression> pathExpressions =
+			(List<PathExpression>)BeanUtil.getDeclaredProperty(
+				getContext(), "pathExpressions");
 
 		String path = _getPath();
 
 		String[] excludes = _jsonIncludesManager.lookupExcludes(type);
 
-		_exclude(path, excludes);
+		_exclude(pathExpressions, path, excludes);
 
 		String[] includes = _jsonIncludesManager.lookupIncludes(type);
 
-		_include(path, includes);
+		_include(pathExpressions, path, includes);
 
 		super.transform(object);
 	}
 
-	private void _exclude(String path, String... names) {
+	private void _exclude(
+		List<PathExpression> pathExpressions, String path, String... names) {
+
 		for (String name : names) {
-			_pathExpressions.add(new PathExpression(path + name, false));
+			pathExpressions.add(new PathExpression(path + name, false));
 		}
 	}
 
@@ -82,18 +85,18 @@ public class FlexjsonObjectJSONTransformer
 		return sb.toString();
 	}
 
-	private void _include(String path, String... names) {
+	private void _include(
+		List<PathExpression> pathExpressions, String path, String... names) {
+
 		for (String name : names) {
 			PathExpression pathExpression = new PathExpression(
 				path + name, true);
 
-			_pathExpressions.add(0, pathExpression);
+			pathExpressions.add(0, pathExpression);
 		}
 	}
 
 	private static JSONIncludesManager _jsonIncludesManager =
 		new JSONIncludesManager();
-
-	private List<PathExpression> _pathExpressions;
 
 }
