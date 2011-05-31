@@ -261,6 +261,8 @@ public class RSSAction extends PortletAction {
 			preferences, themeDisplay.getScopeGroupId(),
 			themeDisplay.getLayout());
 
+		boolean anyAssetType = GetterUtil.getBoolean(
+			preferences.getValue("anyAssetType", Boolean.TRUE.toString()));
 		String assetLinkBehavior = preferences.getValue(
 			"assetLinkBehaviour", "showFullContent");
 		boolean excludeZeroViewCount = GetterUtil.getBoolean(
@@ -279,6 +281,16 @@ public class RSSAction extends PortletAction {
 		AssetEntryQuery assetEntryQuery =
 			AssetPublisherUtil.getAssetEntryQuery(
 				preferences, new long[] {themeDisplay.getScopeGroupId()});
+
+		if (!anyAssetType) {
+			long[] availableClassNameIds =
+				AssetRendererFactoryRegistryUtil.getClassNameIds();
+
+			long[] classNameIds = AssetPublisherUtil.getClassNameIds(
+				preferences, availableClassNameIds);
+
+			assetEntryQuery.setClassNameIds(classNameIds);
+		}
 
 		assetEntryQuery.setEnd(rssDelta);
 		assetEntryQuery.setExcludeZeroViewCount(excludeZeroViewCount);
