@@ -493,6 +493,16 @@
 					<fileset dir="docroot/html/js/editor/fckeditor_diffs" />
 				</copy>
 
+				<replace file="docroot/html/js/editor/fckeditor_diffs/editor/dialog/fck_link/fck_link.js">
+					<replacetoken><![CDATA[var aMatch = aLinkInfo[2].match( /^location\.href='mailto:'\+(String\.fromCharCode\([\d,]+\))\+'(.*)'$/ ) ;]]></replacetoken>
+					<replacevalue><![CDATA[var aMatch = aLinkInfo[2].match( /^(?:void\()?location\.href='mailto:'\+(String\.fromCharCode\([\d,]+\))\+'(.*)'\)?$/ ) ;]]></replacevalue>
+				</replace>
+
+				<replace file="docroot/html/js/editor/fckeditor_diffs/editor/dialog/fck_link/fck_link.js">
+					<replacetoken><![CDATA[return 'javascript:location.href=\'mailto:\'+String.fromCharCode(' + aAddressCode.join( ',' ) + ')+\'?' + aParams.join( '&' ) + '\'' ;]]></replacetoken>
+					<replacevalue><![CDATA[return 'javascript:void(location.href=\'mailto:\'+String.fromCharCode(' + aAddressCode.join( ',' ) + ')+\'?' + aParams.join( '&' ) + '\')' ;]]></replacevalue>
+				</replace>
+
 				<mkdir dir="docroot/html/js/editor/ckeditor/editor/filemanager/browser/liferay" />
 
 				<copy todir="docroot/html/js/editor/ckeditor/editor/filemanager/browser/liferay">
