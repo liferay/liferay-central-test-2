@@ -16,6 +16,7 @@ package com.liferay.portlet.journal.lar;
 
 import com.liferay.portal.NoSuchImageException;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.lar.BasePortletDataHandler;
 import com.liferay.portal.kernel.lar.PortletDataContext;
 import com.liferay.portal.kernel.lar.PortletDataHandlerBoolean;
@@ -934,9 +935,16 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 
 				String oldLinkToLayout = matcher.group(0);
 
+				StringBundler sb = new StringBundler(5);
+
+				sb.append(type);
+				sb.append(StringPool.AT);
+				sb.append(layout.getUuid());
+				sb.append(StringPool.AT);
+				sb.append(layout.getFriendlyURL());
+
 				String newLinkToLayout = StringUtil.replace(
-					oldLinkToLayout, type,
-					type.concat(StringPool.AT.concat(layout.getFriendlyURL())));
+					oldLinkToLayout, type, sb.toString());
 
 				oldLinksToLayout.add(oldLinkToLayout);
 				newLinksToLayout.add(newLinkToLayout);
@@ -1878,30 +1886,59 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 
 			boolean privateLayout = type.startsWith("private");
 
-			String friendlyURL = matcher.group(3);
+			String layoutUuid = matcher.group(3);
+
+			String friendlyURL = matcher.group(4);
 
 			try {
-				Layout layout = LayoutUtil.fetchByG_P_F(
-					portletDataContext.getScopeGroupId(), privateLayout,
-					friendlyURL);
+				Layout layout = LayoutUtil.fetchByUUID_G(
+					layoutUuid, portletDataContext.getScopeGroupId());
 
-				newLayoutId = String.valueOf(layout.getLayoutId());
+				if (layout == null) {
+					layout = LayoutUtil.fetchByG_P_F(
+						portletDataContext.getScopeGroupId(), privateLayout,
+						friendlyURL);
+				}
+
+				if (layout == null) {
+					layout = LayoutUtil.fetchByG_P_L(
+						portletDataContext.getScopeGroupId(), privateLayout,
+						Long.valueOf(oldLayoutId));
+				}
+
+				if (layout == null) {
+					if (_log.isWarnEnabled()) {
+						_log.warn(
+							"Unable to get layout with UUID " + layoutUuid +
+								", friendly URL " +	friendlyURL + ", or " +
+								"layoutId " + oldLayoutId + " in group " +
+									portletDataContext.getScopeGroupId());
+					}
+				}
+				else {
+					newLayoutId = String.valueOf(layout.getLayoutId());
+				}
 			}
-			catch (Exception e) {
+			catch (SystemException e) {
 				if (_log.isWarnEnabled()) {
 					_log.warn(
-						"Unable to get layout with friendly URL " +
-							friendlyURL + " in group " +
-								portletDataContext.getScopeGroupId(),
-						e);
+						"Unable to get layout in group " +
+							portletDataContext.getScopeGroupId(), e);
 				}
 			}
 
 			String oldLinkToLayout = matcher.group(0);
 
+			StringBundler sb = new StringBundler(4);
+
+			sb.append(StringPool.AT);
+			sb.append(layoutUuid);
+			sb.append(StringPool.AT);
+			sb.append(friendlyURL);
+
 			String newLinkToLayout = StringUtil.replace(
 				oldLinkToLayout,
-				new String[] {StringPool.AT.concat(friendlyURL), oldLayoutId},
+				new String[] {sb.toString(), oldLayoutId},
 				new String[] {StringPool.BLANK, newLayoutId});
 
 			oldLinksToLayout.add(oldLinkToLayout);
@@ -2414,6 +2451,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 	private static Pattern _exportLinksToLayoutPattern = Pattern.compile(
 		"\\[([0-9]+)@(public|private\\-[a-z]*)\\]");
 	private static Pattern _importLinksToLayoutPattern = Pattern.compile(
-		"\\[([0-9]+)@(public|private\\-[a-z]*)@([^\\]]*)\\]");
+		"\\[([0-9]+)@(public|private\\-[a-z]*)@(\\p{XDigit}{8}\\-" +
+		"(?:\\p{XDigit}{4}\\-){3}\\p{XDigit}{12})@([^\\]]*)\\]");
 
 }
