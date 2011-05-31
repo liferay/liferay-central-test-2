@@ -59,16 +59,16 @@ public class XhtmlTranslationVisitor implements ASTVisitor {
 	}
 
 	public void visit(BoldTextNode boldTextNode) {
-		write("<strong>");
+		append("<strong>");
 
 		if (boldTextNode.getContent() != null) {
-			write(HtmlUtil.escape(boldTextNode.getContent()));
+			append(HtmlUtil.escape(boldTextNode.getContent()));
 		}
 		else {
 			traverse(boldTextNode.getChildASTNodes());
 		}
 
-		write("</strong>");
+		append("</strong>");
 	}
 
 	public void visit(CollectionNode collectionNode) {
@@ -78,12 +78,12 @@ public class XhtmlTranslationVisitor implements ASTVisitor {
 	}
 
 	public void visit(ForcedEndOfLineNode forcedEndOfLineNode) {
-		write("<br/>");
+		append("<br/>");
 	}
 
 	public void visit(FormattedTextNode formattedTextNode) {
 		if (formattedTextNode.getContent() != null) {
-			write(HtmlUtil.escape(formattedTextNode.getContent()));
+			append(HtmlUtil.escape(formattedTextNode.getContent()));
 		}
 		else {
 			traverse(formattedTextNode.getChildASTNodes());
@@ -93,50 +93,50 @@ public class XhtmlTranslationVisitor implements ASTVisitor {
 	public void visit(HeadingNode headingNode) {
 		int level = headingNode.getLevel();
 
-		write("<h");
-		write(level);
-		write(">");
+		append("<h");
+		append(level);
+		append(">");
 
 		traverse(headingNode.getChildASTNodes());
 
-		write("</h");
-		write(level);
-		write(">");
+		append("</h");
+		append(level);
+		append(">");
 	}
 
 	public void visit(HorizontalNode horizontalNode) {
-		write("<hr/>");
+		append("<hr/>");
 	}
 
 	public void visit(ImageNode imageNode) {
-		write("<img src=\"");
-		write(HtmlUtil.escape(imageNode.getLink()));
-		write("\" ");
+		append("<img src=\"");
+		append(HtmlUtil.escape(imageNode.getLink()));
+		append("\" ");
 
 		if (imageNode.hasAltCollectionNode()) {
-			write("alt=\"");
+			append("alt=\"");
 
 			CollectionNode altCollectionNode = imageNode.getAltNode();
 
 			traverse(altCollectionNode.getASTNodes());
 
-			write("\"");
+			append("\"");
 		}
 
-		write("/>");
+		append("/>");
 	}
 
 	public void visit(ItalicTextNode italicTextNode) {
-		write("<em>");
+		append("<em>");
 
 		if (italicTextNode.getContent() != null) {
-			write(HtmlUtil.escape(italicTextNode.getContent()));
+			append(HtmlUtil.escape(italicTextNode.getContent()));
 		}
 		else {
 			traverse(italicTextNode.getChildASTNodes());
 		}
 
-		write("</em>");
+		append("</em>");
 	}
 
 	public void visit(LineNode lineNode) {
@@ -144,9 +144,9 @@ public class XhtmlTranslationVisitor implements ASTVisitor {
 	}
 
 	public void visit(LinkNode linkNode) {
-		write("<a href=\"");
-		write(HtmlUtil.escape(linkNode.getLink()));
-		write("\">");
+		append("<a href=\"");
+		append(HtmlUtil.escape(linkNode.getLink()));
+		append("\">");
 
 		if (linkNode.hasAltCollectionNode()) {
 			CollectionNode altCollectionNode = linkNode.getAltCollectionNode();
@@ -154,16 +154,16 @@ public class XhtmlTranslationVisitor implements ASTVisitor {
 			traverse(altCollectionNode.getASTNodes());
 		}
 		else {
-			write(HtmlUtil.escape(linkNode.getLink()));
+			append(HtmlUtil.escape(linkNode.getLink()));
 		}
 
-		write("</a>");
+		append("</a>");
 	}
 
 	public void visit(NoWikiSectionNode noWikiSectionNode) {
-		write("<pre>");
-		write(HtmlUtil.escape(noWikiSectionNode.getContent()));
-		write("</pre>");
+		append("<pre>");
+		append(HtmlUtil.escape(noWikiSectionNode.getContent()));
+		append("</pre>");
 	}
 
 	public void visit(OrderedListItemNode orderedListItemNode) {
@@ -171,11 +171,11 @@ public class XhtmlTranslationVisitor implements ASTVisitor {
 	}
 
 	public void visit(OrderedListNode orderedListNode) {
-		write("<ol>");
+		append("<ol>");
 
 		traverse(orderedListNode.getChildASTNodes());
 
-		write("</ol>");
+		append("</ol>");
 	}
 
 	public void visit(ParagraphNode paragraphNode) {
@@ -183,7 +183,7 @@ public class XhtmlTranslationVisitor implements ASTVisitor {
 	}
 
 	public void visit(ScapedNode scapedNode) {
-		write(HtmlUtil.escape(scapedNode.getContent()));
+		append(HtmlUtil.escape(scapedNode.getContent()));
 	}
 
 	public void visit(TableDataNode tableDataNode) {
@@ -195,11 +195,11 @@ public class XhtmlTranslationVisitor implements ASTVisitor {
 	}
 
 	public void visit(TableNode tableNode) {
-		write("<table>");
+		append("<table>");
 
 		traverseAndWriteForEach(tableNode.getChildASTNodes(), "<tr>", "</tr>");
 
-		write("</table>");
+		append("</table>");
 	}
 
 	public void visit(TableOfContentsNode tableOfContentsNode) {
@@ -207,7 +207,7 @@ public class XhtmlTranslationVisitor implements ASTVisitor {
 
 	public void visit(UnformattedTextNode unformattedTextNode) {
 		if (unformattedTextNode.hasContent()) {
-			write(HtmlUtil.escape(unformattedTextNode.getContent()));
+			append(HtmlUtil.escape(unformattedTextNode.getContent()));
 		}
 		else {
 			traverse(unformattedTextNode.getChildASTNodes());
@@ -219,11 +219,11 @@ public class XhtmlTranslationVisitor implements ASTVisitor {
 	}
 
 	public void visit(UnorderedListNode unorderedListNode) {
-		write("<ul>");
+		append("<ul>");
 
 		traverse(unorderedListNode.getChildASTNodes());
 
-		write("</ul>");
+		append("</ul>");
 	}
 
 	public void visit(WikiPageNode wikiPageNode) {
@@ -232,33 +232,33 @@ public class XhtmlTranslationVisitor implements ASTVisitor {
 
 	protected void traverse(List<ASTNode> astNodes) {
 		if (astNodes != null) {
-			for (ASTNode curNode : astNodes) {
-				curNode.accept(this);
+			for (ASTNode astNode : astNodes) {
+				astNode.accept(this);
 			}
 		}
 	}
 
 	protected void traverse(List<ASTNode> astNodes, String open, String close) {
-		write(open);
+		append(open);
 
 		traverse(astNodes);
 
-		write(close);
+		append(close);
 	}
 
 	protected void traverseAndWriteForEach(
 		List<ASTNode> astNodes, String open, String close) {
 
 		for (ASTNode curNode : astNodes) {
-			write(open);
+			append(open);
 
 			curNode.accept(this);
 
-			write(close);
+			append(close);
 		}
 	}
 
-	protected void write(Object object) {
+	protected void append(Object object) {
 		if (object != null) {
 			_sb.append(object);
 		}
