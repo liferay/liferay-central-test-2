@@ -76,7 +76,7 @@
 					manageableSites.add(group);
 				}
 				else {
-					manageableSites = GroupServiceUtil.getManageableSites(categoryPortlets, PropsValues.CONTROL_PANEL_NAVIGATION_MAX_COMMUNITIES);
+					manageableSites = GroupServiceUtil.getManageableSites(categoryPortlets, PropsValues.CONTROL_PANEL_NAVIGATION_MAX_SITES);
 
 					Group userGroup = user.getGroup();
 

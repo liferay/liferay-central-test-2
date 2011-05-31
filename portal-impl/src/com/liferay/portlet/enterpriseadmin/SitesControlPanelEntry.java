@@ -25,13 +25,13 @@ import java.util.LinkedHashMap;
 /**
  * @author Jorge Ferrer
  */
-public class CommunitiesControlPanelEntry extends BaseControlPanelEntry {
+public class SitesControlPanelEntry extends BaseControlPanelEntry {
 
 	public boolean isVisible(
 			PermissionChecker permissionChecker, Portlet portlet)
 		throws Exception {
 
-		if (PropsValues.COMMUNITIES_CONTROL_PANEL_MEMBERS_VISIBLE) {
+		if (PropsValues.SITES_CONTROL_PANEL_MEMBERS_VISIBLE) {
 			LinkedHashMap<String, Object> groupParams =
 				new LinkedHashMap<String, Object>();
 

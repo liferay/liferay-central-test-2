@@ -1334,7 +1334,7 @@ public class LayoutTypePortletImpl
 		}
 		else if (group.isRegularSite()) {
 			selector1 =
-				LayoutTypePortletConstants.STATIC_PORTLET_COMMUNITY_SELECTOR;
+				LayoutTypePortletConstants.STATIC_PORTLET_REGULAR_SITE_SELECTOR;
 		}
 
 		String selector2 = layout.getFriendlyURL();

@@ -382,7 +382,7 @@ public class PortalImpl implements Portal {
 		// Site roles
 
 		String customSystemSiteRoles[] =
-			PropsUtil.getArray(PropsKeys.SYSTEM_COMMUNITY_ROLES);
+			PropsUtil.getArray(PropsKeys.SYSTEM_SITE_ROLES);
 
 		if ((customSystemSiteRoles == null) ||
 			(customSystemSiteRoles.length == 0)) {
@@ -1615,13 +1615,13 @@ public class PortalImpl implements Portal {
 
 			if (Validator.isNull(virtualHostname) &&
 				Validator.isNotNull(
-					PropsValues.VIRTUAL_HOSTS_DEFAULT_COMMUNITY_NAME) &&
+					PropsValues.VIRTUAL_HOSTS_DEFAULT_SITE_NAME) &&
 				!layoutSet.isPrivateLayout()) {
 
 				try {
 					Group defaultGroup = GroupLocalServiceUtil.getGroup(
 						themeDisplay.getCompanyId(),
-						PropsValues.VIRTUAL_HOSTS_DEFAULT_COMMUNITY_NAME);
+						PropsValues.VIRTUAL_HOSTS_DEFAULT_SITE_NAME);
 
 					if (layoutSet.getGroupId() == defaultGroup.getGroupId()) {
 						Company company = themeDisplay.getCompany();
@@ -2133,14 +2133,13 @@ public class PortalImpl implements Portal {
 		String virtualHostname = layoutSet.getVirtualHostname();
 
 		if (Validator.isNull(virtualHostname) &&
-			Validator.isNotNull(
-				PropsValues.VIRTUAL_HOSTS_DEFAULT_COMMUNITY_NAME) &&
+			Validator.isNotNull(PropsValues.VIRTUAL_HOSTS_DEFAULT_SITE_NAME) &&
 			!layoutSet.isPrivateLayout()) {
 
 			try {
 				Group group = GroupLocalServiceUtil.getGroup(
 					themeDisplay.getCompanyId(),
-					PropsValues.VIRTUAL_HOSTS_DEFAULT_COMMUNITY_NAME);
+					PropsValues.VIRTUAL_HOSTS_DEFAULT_SITE_NAME);
 
 				if (layoutSet.getGroupId() == group.getGroupId()) {
 					Company company = themeDisplay.getCompany();
@@ -3239,7 +3238,7 @@ public class PortalImpl implements Portal {
 	public String getSiteLoginURL(ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
-		if (Validator.isNull(PropsValues.AUTH_LOGIN_COMMUNITY_URL)) {
+		if (Validator.isNull(PropsValues.AUTH_LOGIN_SITE_URL)) {
 			return null;
 		}
 
@@ -3251,14 +3250,14 @@ public class PortalImpl implements Portal {
 
 		for (Layout layout : layouts) {
 			if (layout.getFriendlyURL().equals(
-					PropsValues.AUTH_LOGIN_COMMUNITY_URL)) {
+					PropsValues.AUTH_LOGIN_SITE_URL)) {
 
 				if (themeDisplay.getLayout() != null) {
 					String layoutSetFriendlyURL = getLayoutSetFriendlyURL(
 						themeDisplay.getLayout().getLayoutSet(), themeDisplay);
 
 					return layoutSetFriendlyURL +
-						PropsValues.AUTH_LOGIN_COMMUNITY_URL;
+						PropsValues.AUTH_LOGIN_SITE_URL;
 				}
 
 				break;

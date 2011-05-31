@@ -198,14 +198,12 @@ public class PortalInstances {
 
 		CompanyThreadLocal.setCompanyId(companyId);
 
-		if (Validator.isNotNull(
-				PropsValues.VIRTUAL_HOSTS_DEFAULT_COMMUNITY_NAME) &&
+		if (Validator.isNotNull(PropsValues.VIRTUAL_HOSTS_DEFAULT_SITE_NAME) &&
 			(request.getAttribute(WebKeys.VIRTUAL_HOST_LAYOUT_SET) == null)) {
 
 			try {
 				Group group = GroupLocalServiceUtil.getGroup(
-					companyId,
-					PropsValues.VIRTUAL_HOSTS_DEFAULT_COMMUNITY_NAME);
+					companyId, PropsValues.VIRTUAL_HOSTS_DEFAULT_SITE_NAME);
 
 				LayoutSet layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(
 					group.getGroupId(), false);

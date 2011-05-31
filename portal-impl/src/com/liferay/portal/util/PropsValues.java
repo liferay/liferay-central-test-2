@@ -82,13 +82,13 @@ public class PropsValues {
 
 	public static final boolean AUTH_FORWARD_BY_REDIRECT = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.AUTH_FORWARD_BY_REDIRECT));
 
-	public static final String AUTH_LOGIN_COMMUNITY_URL = PropsUtil.get(PropsKeys.AUTH_LOGIN_COMMUNITY_URL);
-
 	public static final boolean AUTH_LOGIN_DISABLED = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.AUTH_LOGIN_DISABLED));
 
 	public static final String AUTH_LOGIN_DISABLED_PATH = PropsUtil.get(PropsKeys.AUTH_LOGIN_DISABLED_PATH);
 
 	public static final String AUTH_LOGIN_PORTLET_NAME = PropsUtil.get(PropsKeys.AUTH_LOGIN_PORTLET_NAME);
+
+	public static final String AUTH_LOGIN_SITE_URL = PropsUtil.get(PropsKeys.AUTH_LOGIN_SITE_URL);
 
 	public static final String AUTH_LOGIN_URL = PropsUtil.get(PropsKeys.AUTH_LOGIN_URL);
 
@@ -252,7 +252,7 @@ public class PropsValues {
 
 	public static final long COMBO_CHECK_TIMESTAMP_INTERVAL = GetterUtil.getLong(PropsUtil.get(PropsKeys.COMBO_CHECK_TIMESTAMP_INTERVAL));
 
-	public static final boolean COMMUNITIES_CONTROL_PANEL_MEMBERS_VISIBLE = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.COMMUNITIES_CONTROL_PANEL_MEMBERS_VISIBLE));
+	public static final boolean SITES_CONTROL_PANEL_MEMBERS_VISIBLE = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.SITES_CONTROL_PANEL_MEMBERS_VISIBLE));
 
 	public static final String COMPANY_DEFAULT_HOME_URL = PropsUtil.get(PropsKeys.COMPANY_DEFAULT_HOME_URL);
 
@@ -296,9 +296,7 @@ public class PropsValues {
 
 	public static final String CONTROL_PANEL_LAYOUT_REGULAR_THEME_ID = PropsUtil.get(PropsKeys.CONTROL_PANEL_LAYOUT_REGULAR_THEME_ID);
 
-	public static final int CONTROL_PANEL_NAVIGATION_MAX_COMMUNITIES = GetterUtil.getInteger(PropsUtil.get(PropsKeys.CONTROL_PANEL_NAVIGATION_MAX_COMMUNITIES));
-
-	public static final int CONTROL_PANEL_NAVIGATION_MAX_ORGANIZATIONS = GetterUtil.getInteger(PropsUtil.get(PropsKeys.CONTROL_PANEL_NAVIGATION_MAX_ORGANIZATIONS));
+	public static final int CONTROL_PANEL_NAVIGATION_MAX_SITES = GetterUtil.getInteger(PropsUtil.get(PropsKeys.CONTROL_PANEL_NAVIGATION_MAX_SITES));
 
 	public static String[] CONVERT_PROCESSES = PropsUtil.getArray(PropsKeys.CONVERT_PROCESSES);
 
@@ -1338,7 +1336,7 @@ public class PropsValues {
 
 	public static final int VELOCITY_ENGINE_RESOURCE_MANAGER_MODIFICATION_CHECK_INTERVAL = GetterUtil.getInteger(PropsUtil.get(PropsKeys.VELOCITY_ENGINE_RESOURCE_MANAGER_MODIFICATION_CHECK_INTERVAL));
 
-	public static final String VIRTUAL_HOSTS_DEFAULT_COMMUNITY_NAME = PropsUtil.get(PropsKeys.VIRTUAL_HOSTS_DEFAULT_COMMUNITY_NAME);
+	public static final String VIRTUAL_HOSTS_DEFAULT_SITE_NAME = PropsUtil.get(PropsKeys.VIRTUAL_HOSTS_DEFAULT_SITE_NAME);
 
 	public static final String[] VIRTUAL_HOSTS_IGNORE_EXTENSIONS = PropsUtil.getArray(PropsKeys.VIRTUAL_HOSTS_IGNORE_EXTENSIONS);
 

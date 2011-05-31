@@ -47,10 +47,11 @@ public class LayoutTypePortletConstants {
 
 	public static final String MODE_PRINT = "mode-print";
 
-	public static final String STATIC_PORTLET_COMMUNITY_SELECTOR = "community";
-
 	public static final String STATIC_PORTLET_ORGANIZATION_SELECTOR =
 		"organization";
+
+	public static final String STATIC_PORTLET_REGULAR_SITE_SELECTOR =
+		"regular-site";
 
 	public static final String STATIC_PORTLET_USER_SELECTOR = "user";
 

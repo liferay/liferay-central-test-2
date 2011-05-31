@@ -111,13 +111,13 @@ public interface PropsKeys {
 
 	public static final String AUTH_FORWARD_LAST_PATHS = "auth.forward.last.paths";
 
-	public static final String AUTH_LOGIN_COMMUNITY_URL = "auth.login.community.url";
-
 	public static final String AUTH_LOGIN_DISABLED = "auth.login.disabled";
 
 	public static final String AUTH_LOGIN_DISABLED_PATH = "auth.login.disabled.path";
 
 	public static final String AUTH_LOGIN_PORTLET_NAME = "auth.login.portlet.name";
+
+	public static final String AUTH_LOGIN_SITE_URL = "auth.login.site.url";
 
 	public static final String AUTH_LOGIN_URL = "auth.login.url";
 
@@ -345,8 +345,6 @@ public interface PropsKeys {
 
 	public static final String COMMUNITIES_EMAIL_MEMBERSHIP_REQUEST_BODY = "communities.email.membership.request.body";
 
-	public static final String COMMUNITIES_EMAIL_MEMBERSHIP_REQUEST_SUBJECT = "communities.email.membership.request.subject";
-
 	public static final String COMPANY_DEFAULT_HOME_URL = "company.default.home.url";
 
 	public static final String COMPANY_DEFAULT_WEB_ID = "company.default.web.id";
@@ -389,7 +387,7 @@ public interface PropsKeys {
 
 	public static final String CONTROL_PANEL_LAYOUT_REGULAR_THEME_ID = "control.panel.layout.regular.theme.id";
 
-	public static final String CONTROL_PANEL_NAVIGATION_MAX_COMMUNITIES = "control.panel.navigation.max.communities";
+	public static final String CONTROL_PANEL_NAVIGATION_MAX_SITES = "control.panel.navigation.max.communities";
 
 	public static final String CONTROL_PANEL_NAVIGATION_MAX_ORGANIZATIONS = "control.panel.navigation.max.organizations";
 
@@ -1709,6 +1707,8 @@ public interface PropsKeys {
 
 	public static final String SITEMINDER_USER_HEADER = "siteminder.user.header";
 
+	public static final String SITES_CONTROL_PANEL_MEMBERS_VISIBLE = "sites.control.panel.members.visible";
+
 	public static final String SOCIAL_BOOKMARK_POST_URL = "social.bookmark.post.url";
 
 	public static final String SOCIAL_BOOKMARK_TYPES = "social.bookmark.types";
@@ -1749,13 +1749,13 @@ public interface PropsKeys {
 
 	public static final String STRUTS_PORTLET_REQUEST_PROCESSOR = "struts.portlet.request.processor";
 
-	public static final String SYSTEM_COMMUNITY_ROLES = "system.community.roles";
-
 	public static final String SYSTEM_GROUPS = "system.groups";
 
 	public static final String SYSTEM_ORGANIZATION_ROLES = "system.organization.roles";
 
 	public static final String SYSTEM_ROLES = "system.roles";
+
+	public static final String SYSTEM_SITE_ROLES = "system.site.roles";
 
 	public static final String TAGS_COMPILER_ENABLED = "tags.compiler.enabled";
 
@@ -1913,7 +1913,7 @@ public interface PropsKeys {
 
 	public static final String VERIFY_PROCESSES = "verify.processes";
 
-	public static final String VIRTUAL_HOSTS_DEFAULT_COMMUNITY_NAME = "virtual.hosts.default.community.name";
+	public static final String VIRTUAL_HOSTS_DEFAULT_SITE_NAME = "virtual.hosts.default.site.name";
 
 	public static final String VIRTUAL_HOSTS_IGNORE_EXTENSIONS = "virtual.hosts.ignore.extensions";
 
