@@ -39,6 +39,7 @@ long repositoryId = GetterUtil.getLong((String)request.getAttribute("view.jsp-re
 	<c:if test="<%= DLFolderPermission.contains(permissionChecker, scopeGroupId, folderId, ActionKeys.ADD_DOCUMENT) %>">
 		<portlet:renderURL var="editFileEntryURL">
 			<portlet:param name="struts_action" value="/document_library/edit_file_entry" />
+			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.ADD %>" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
 			<portlet:param name="backURL" value="<%= currentURL %>" />
 			<portlet:param name="repositoryId" value="<%= String.valueOf(repositoryId) %>" />
