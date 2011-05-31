@@ -343,7 +343,7 @@ else if (documentType != null) {
 				<liferay-ui:custom-attributes-available className="<%= DLFileEntryConstants.getClassName() %>">
 					<liferay-ui:custom-attribute-list
 						className="<%= DLFileEntryConstants.getClassName() %>"
-						classPK="<%= (fileVersion != null) ? fileVersion.getFileVersionId() : 0 %>"
+						classPK="<%= fileVersionId %>"
 						editable="<%= true %>"
 						label="<%= true %>"
 					/>
