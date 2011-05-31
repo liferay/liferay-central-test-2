@@ -192,7 +192,7 @@
 
 /* ---------- Tag cloud and tag list ---------- */
 
-.tag-cloud, .tag-list {
+.tag-items {
 	list-style: none;
 	margin: 0 1em 0 0;
 	padding: 0 1em 0.5em 1em;
@@ -203,18 +203,18 @@
 	line-height: 2.5em;
 }
 
-.tag-cloud .tag-selected, .tag-list .tag-selected {
+.tag-selected {
 	color: #000;
 	text-decoration: none;
 }
 
-.tag-cloud li, .tag-list li {
+.tag-items li {
 	display: inline;
 	float: left;
 	margin: 0 1em 0 0;
 }
 
-.tag-cloud a, .tag-list a {
+.tag-items a {
 	white-space: nowrap;
 }
 

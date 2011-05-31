@@ -72,7 +72,7 @@ private String _buildTagsNavigation(long groupId, String selectedTagName, Portle
 
 	StringBundler sb = new StringBundler();
 
-	sb.append("<ul class=\"");
+	sb.append("<ul class=\"tag-items ");
 
 	if (showAssetCount && displayStyle.equals("cloud")) {
 		sb.append("tag-cloud");

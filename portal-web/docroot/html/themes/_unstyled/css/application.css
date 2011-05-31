@@ -119,19 +119,19 @@
 
 /* ---------- Tag cloud and tag list ---------- */
 
-.tag-cloud, .tag-list {
+.tag-items {
 }
 
 .tag-cloud {
 }
 
-.tag-cloud .tag-selected, .tag-list .tag-selected {
+.tag-selected {
 }
 
-.tag-cloud li, .tag-list li {
+.tag-items li {
 }
 
-.tag-cloud a, .tag-list a {
+.tag-items a {
 }
 
 .tag-cloud .tag-asset-count {
