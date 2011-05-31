@@ -75,6 +75,8 @@ public interface PermissionChecker {
 
 	public boolean isOmniadmin();
 
+	public boolean isSignedIn();
+
 	public void resetValues();
 
 	public void setCheckGuest(boolean checkGuest);
