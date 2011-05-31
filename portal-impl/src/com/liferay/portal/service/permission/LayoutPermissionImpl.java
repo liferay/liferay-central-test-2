@@ -112,7 +112,7 @@ public class LayoutPermissionImpl implements LayoutPermission {
 			}
 		}
 		catch (NoSuchResourceException nsre) {
-			boolean addCommunityPermission = true;
+			boolean addGroupPermission = true;
 			boolean addGuestPermission = true;
 
 			if (layout.isPrivateLayout()) {
@@ -122,7 +122,7 @@ public class LayoutPermissionImpl implements LayoutPermission {
 			ResourceLocalServiceUtil.addResources(
 				layout.getCompanyId(), layout.getGroupId(), 0,
 				Layout.class.getName(), layout.getPlid(), false,
-				addCommunityPermission, addGuestPermission);
+				addGroupPermission, addGuestPermission);
 		}
 
 		return permissionChecker.hasPermission(

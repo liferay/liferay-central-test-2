@@ -88,14 +88,14 @@ public class DDMTemplateLocalServiceImpl
 	}
 
 	public void addTemplateResources(
-			DDMTemplate template, boolean addCommunityPermissions,
+			DDMTemplate template, boolean addGroupPermissions,
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
 		resourceLocalService.addResources(
 			template.getCompanyId(), template.getGroupId(),
 			template.getUserId(), DDMTemplate.class.getName(),
-			template.getTemplateId(), false, addCommunityPermissions,
+			template.getTemplateId(), false, addGroupPermissions,
 			addGuestPermissions);
 	}
 

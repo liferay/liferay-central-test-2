@@ -96,7 +96,7 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 			ServiceContext serviceContext = new ServiceContext();
 
 			serviceContext.setAddGroupPermissions(
-				isAddCommunityPermissions(groupId));
+				isAddGroupPermissions(groupId));
 			serviceContext.setAddGuestPermissions(true);
 
 			int status = HttpServletResponse.SC_CREATED;
@@ -172,7 +172,7 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 			ServiceContext serviceContext = new ServiceContext();
 
 			serviceContext.setAddGroupPermissions(
-				isAddCommunityPermissions(groupId));
+				isAddGroupPermissions(groupId));
 			serviceContext.setAddGuestPermissions(true);
 
 			int status = HttpServletResponse.SC_CREATED;
@@ -363,7 +363,7 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 				ServiceContext serviceContext = new ServiceContext();
 
 				serviceContext.setAddGroupPermissions(
-					isAddCommunityPermissions(groupId));
+					isAddGroupPermissions(groupId));
 				serviceContext.setAddGuestPermissions(true);
 
 				FileEntry fileEntry = DLAppServiceUtil.addFileEntry(
@@ -432,7 +432,7 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 			ServiceContext serviceContext = new ServiceContext();
 
 			serviceContext.setAddGroupPermissions(
-				isAddCommunityPermissions(groupId));
+				isAddGroupPermissions(groupId));
 			serviceContext.setAddGuestPermissions(true);
 
 			DLAppServiceUtil.addFolder(
@@ -634,7 +634,7 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 			ServiceContext serviceContext = new ServiceContext();
 
 			serviceContext.setAddGroupPermissions(
-				isAddCommunityPermissions(groupId));
+				isAddGroupPermissions(groupId));
 			serviceContext.setAddGuestPermissions(true);
 
 			String contentType = GetterUtil.get(
@@ -976,7 +976,7 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 		ServiceContext serviceContext = new ServiceContext();
 
 		serviceContext.setAddGroupPermissions(
-			isAddCommunityPermissions(fileEntry.getRepositoryId()));
+			isAddGroupPermissions(fileEntry.getRepositoryId()));
 		serviceContext.setAddGuestPermissions(true);
 
 		DLAppServiceUtil.updateFileEntry(

@@ -115,7 +115,7 @@ public class PollsQuestionLocalServiceImpl
 	}
 
 	public void addQuestionResources(
-			long questionId, boolean addCommunityPermissions,
+			long questionId, boolean addGroupPermissions,
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
@@ -123,7 +123,7 @@ public class PollsQuestionLocalServiceImpl
 			questionId);
 
 		addQuestionResources(
-			question, addCommunityPermissions, addGuestPermissions);
+			question, addGroupPermissions, addGuestPermissions);
 	}
 
 	public void addQuestionResources(
@@ -138,14 +138,14 @@ public class PollsQuestionLocalServiceImpl
 	}
 
 	public void addQuestionResources(
-			PollsQuestion question, boolean addCommunityPermissions,
+			PollsQuestion question, boolean addGroupPermissions,
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
 		resourceLocalService.addResources(
 			question.getCompanyId(), question.getGroupId(),
 			question.getUserId(), PollsQuestion.class.getName(),
-			question.getQuestionId(), false, addCommunityPermissions,
+			question.getQuestionId(), false, addGroupPermissions,
 			addGuestPermissions);
 	}
 

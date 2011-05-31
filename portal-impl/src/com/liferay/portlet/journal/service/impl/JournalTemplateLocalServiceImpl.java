@@ -159,7 +159,7 @@ public class JournalTemplateLocalServiceImpl
 	}
 
 	public void addTemplateResources(
-			long groupId, String templateId, boolean addCommunityPermissions,
+			long groupId, String templateId, boolean addGroupPermissions,
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
@@ -167,18 +167,18 @@ public class JournalTemplateLocalServiceImpl
 			groupId, templateId);
 
 		addTemplateResources(
-			template, addCommunityPermissions, addGuestPermissions);
+			template, addGroupPermissions, addGuestPermissions);
 	}
 
 	public void addTemplateResources(
-			JournalTemplate template, boolean addCommunityPermissions,
+			JournalTemplate template, boolean addGroupPermissions,
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
 		resourceLocalService.addResources(
 			template.getCompanyId(), template.getGroupId(),
 			template.getUserId(), JournalTemplate.class.getName(),
-			template.getId(), false, addCommunityPermissions,
+			template.getId(), false, addGroupPermissions,
 			addGuestPermissions);
 	}
 

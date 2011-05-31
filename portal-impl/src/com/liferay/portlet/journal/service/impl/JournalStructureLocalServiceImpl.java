@@ -133,14 +133,14 @@ public class JournalStructureLocalServiceImpl
 	}
 
 	public void addStructureResources(
-			JournalStructure structure, boolean addCommunityPermissions,
+			JournalStructure structure, boolean addGroupPermissions,
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
 		resourceLocalService.addResources(
 			structure.getCompanyId(), structure.getGroupId(),
 			structure.getUserId(), JournalStructure.class.getName(),
-			structure.getId(), false, addCommunityPermissions,
+			structure.getId(), false, addGroupPermissions,
 			addGuestPermissions);
 	}
 
@@ -156,7 +156,7 @@ public class JournalStructureLocalServiceImpl
 	}
 
 	public void addStructureResources(
-			long groupId, String structureId, boolean addCommunityPermissions,
+			long groupId, String structureId, boolean addGroupPermissions,
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
@@ -164,7 +164,7 @@ public class JournalStructureLocalServiceImpl
 			groupId, structureId);
 
 		addStructureResources(
-			structure, addCommunityPermissions, addGuestPermissions);
+			structure, addGroupPermissions, addGuestPermissions);
 	}
 
 	public void addStructureResources(

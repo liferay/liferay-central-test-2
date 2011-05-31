@@ -115,7 +115,7 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 	}
 
 	public void addCategoryResources(
-			long categoryId, boolean addCommunityPermissions,
+			long categoryId, boolean addGroupPermissions,
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
@@ -129,7 +129,7 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 			categoryId);
 
 		addCategoryResources(
-			category, addCommunityPermissions, addGuestPermissions);
+			category, addGroupPermissions, addGuestPermissions);
 	}
 
 	public void addCategoryResources(
@@ -150,14 +150,14 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 	}
 
 	public void addCategoryResources(
-			MBCategory category, boolean addCommunityPermissions,
+			MBCategory category, boolean addGroupPermissions,
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
 		resourceLocalService.addResources(
 			category.getCompanyId(), category.getGroupId(),
 			category.getUserId(), MBCategory.class.getName(),
-			category.getCategoryId(), false, addCommunityPermissions,
+			category.getCategoryId(), false, addGroupPermissions,
 			addGuestPermissions);
 	}
 

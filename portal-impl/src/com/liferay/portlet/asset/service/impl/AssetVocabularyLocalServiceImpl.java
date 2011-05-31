@@ -125,14 +125,14 @@ public class AssetVocabularyLocalServiceImpl
 	}
 
 	public void addVocabularyResources(
-			AssetVocabulary vocabulary, boolean addCommunityPermissions,
+			AssetVocabulary vocabulary, boolean addGroupPermissions,
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
 		resourceLocalService.addResources(
 			vocabulary.getCompanyId(), vocabulary.getGroupId(),
 			vocabulary.getUserId(), AssetVocabulary.class.getName(),
-			vocabulary.getVocabularyId(), false, addCommunityPermissions,
+			vocabulary.getVocabularyId(), false, addGroupPermissions,
 			addGuestPermissions);
 	}
 

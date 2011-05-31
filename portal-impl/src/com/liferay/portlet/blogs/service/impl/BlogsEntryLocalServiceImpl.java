@@ -198,14 +198,14 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 	}
 
 	public void addEntryResources(
-			BlogsEntry entry, boolean addCommunityPermissions,
+			BlogsEntry entry, boolean addGroupPermissions,
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
 		resourceLocalService.addResources(
 			entry.getCompanyId(), entry.getGroupId(), entry.getUserId(),
 			BlogsEntry.class.getName(), entry.getEntryId(), false,
-			addCommunityPermissions, addGuestPermissions);
+			addGroupPermissions, addGuestPermissions);
 	}
 
 	public void addEntryResources(
@@ -220,13 +220,13 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 	}
 
 	public void addEntryResources(
-			long entryId, boolean addCommunityPermissions,
+			long entryId, boolean addGroupPermissions,
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
 		BlogsEntry entry = blogsEntryPersistence.findByPrimaryKey(entryId);
 
-		addEntryResources(entry, addCommunityPermissions, addGuestPermissions);
+		addEntryResources(entry, addGroupPermissions, addGuestPermissions);
 	}
 
 	public void addEntryResources(

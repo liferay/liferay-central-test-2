@@ -416,14 +416,13 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 	}
 
 	public void addMessageResources(
-			long messageId, boolean addCommunityPermissions,
+			long messageId, boolean addGroupPermissions,
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
 		MBMessage message = mbMessagePersistence.findByPrimaryKey(messageId);
 
-		addMessageResources(
-			message, addCommunityPermissions, addGuestPermissions);
+		addMessageResources(message, addGroupPermissions, addGuestPermissions);
 	}
 
 	public void addMessageResources(
@@ -437,14 +436,14 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 	}
 
 	public void addMessageResources(
-			MBMessage message, boolean addCommunityPermissions,
+			MBMessage message, boolean addGroupPermissions,
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
 		resourceLocalService.addResources(
 			message.getCompanyId(), message.getGroupId(), message.getUserId(),
 			MBMessage.class.getName(), message.getMessageId(),
-			false, addCommunityPermissions, addGuestPermissions);
+			false, addGroupPermissions, addGuestPermissions);
 	}
 
 	public void addMessageResources(

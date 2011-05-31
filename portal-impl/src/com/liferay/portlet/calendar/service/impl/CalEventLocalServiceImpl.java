@@ -259,14 +259,14 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 	}
 
 	public void addEventResources(
-			CalEvent event, boolean addCommunityPermissions,
+			CalEvent event, boolean addGroupPermissions,
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
 		resourceLocalService.addResources(
 			event.getCompanyId(), event.getGroupId(), event.getUserId(),
 			CalEvent.class.getName(), event.getEventId(), false,
-			addCommunityPermissions, addGuestPermissions);
+			addGroupPermissions, addGuestPermissions);
 	}
 
 	public void addEventResources(
@@ -281,14 +281,14 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 	}
 
 	public void addEventResources(
-			long eventId, boolean addCommunityPermissions,
+			long eventId, boolean addGroupPermissions,
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
 		CalEvent event = calEventPersistence.findByPrimaryKey(eventId);
 
 		addEventResources(
-			event, addCommunityPermissions, addGuestPermissions);
+			event, addGroupPermissions, addGuestPermissions);
 	}
 
 	public void addEventResources(

@@ -339,14 +339,14 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 	}
 
 	protected void addFolderResources(
-			DLFolder dlFolder, boolean addCommunityPermissions,
+			DLFolder dlFolder, boolean addGroupPermissions,
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
 		resourceLocalService.addResources(
 			dlFolder.getCompanyId(), dlFolder.getGroupId(),
 			dlFolder.getUserId(), DLFolder.class.getName(),
-			dlFolder.getFolderId(), false, addCommunityPermissions,
+			dlFolder.getFolderId(), false, addGroupPermissions,
 			addGuestPermissions);
 	}
 
@@ -362,14 +362,14 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 	}
 
 	protected void addFolderResources(
-			long folderId, boolean addCommunityPermissions,
+			long folderId, boolean addGroupPermissions,
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
 		DLFolder dlFolder = dlFolderPersistence.findByPrimaryKey(folderId);
 
 		addFolderResources(
-			dlFolder, addCommunityPermissions, addGuestPermissions);
+			dlFolder, addGroupPermissions, addGuestPermissions);
 	}
 
 	protected void addFolderResources(

@@ -76,7 +76,7 @@ public interface JournalCreationStrategy {
 	 * @return <code>true</code> if default community permissions should be
 	 *         added to the specified journalObj
 	 */
-	public boolean addCommunityPermissions(
+	public boolean addGroupPermissions(
 			PortletDataContext context, Object journalObj)
 		throws Exception;
 

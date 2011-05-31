@@ -45,7 +45,7 @@ public class JournalCreationStrategyImpl implements JournalCreationStrategy {
 		return JournalCreationStrategy.ARTICLE_CONTENT_UNCHANGED;
 	}
 
-	public boolean addCommunityPermissions(
+	public boolean addGroupPermissions(
 			PortletDataContext context, Object journalObj)
 		throws Exception {
 

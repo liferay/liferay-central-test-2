@@ -114,14 +114,14 @@ public class BookmarksEntryLocalServiceImpl
 	}
 
 	public void addEntryResources(
-			BookmarksEntry entry, boolean addCommunityPermissions,
+			BookmarksEntry entry, boolean addGroupPermissions,
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
 		resourceLocalService.addResources(
 			entry.getCompanyId(), entry.getGroupId(), entry.getUserId(),
 			BookmarksEntry.class.getName(), entry.getEntryId(), false,
-			addCommunityPermissions, addGuestPermissions);
+			addGroupPermissions, addGuestPermissions);
 	}
 
 	public void addEntryResources(
@@ -136,14 +136,14 @@ public class BookmarksEntryLocalServiceImpl
 	}
 
 	public void addEntryResources(
-			long entryId, boolean addCommunityPermissions,
+			long entryId, boolean addGroupPermissions,
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
 		BookmarksEntry entry =
 			bookmarksEntryPersistence.findByPrimaryKey(entryId);
 
-		addEntryResources(entry, addCommunityPermissions, addGuestPermissions);
+		addEntryResources(entry, addGroupPermissions, addGuestPermissions);
 	}
 
 	public void addEntryResources(

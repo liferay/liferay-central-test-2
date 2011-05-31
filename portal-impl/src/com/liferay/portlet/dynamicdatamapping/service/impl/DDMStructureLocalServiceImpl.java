@@ -117,14 +117,14 @@ public class DDMStructureLocalServiceImpl
 	}
 
 	public void addStructureResources(
-			DDMStructure structure, boolean addCommunityPermissions,
+			DDMStructure structure, boolean addGroupPermissions,
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
 		resourceLocalService.addResources(
 			structure.getCompanyId(), structure.getGroupId(),
 			structure.getUserId(), DDMStructure.class.getName(),
-			structure.getStructureId(), false, addCommunityPermissions,
+			structure.getStructureId(), false, addGroupPermissions,
 			addGuestPermissions);
 	}
 

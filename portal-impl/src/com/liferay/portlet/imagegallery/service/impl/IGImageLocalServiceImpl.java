@@ -211,14 +211,14 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 	}
 
 	public void addImageResources(
-			IGImage image, boolean addCommunityPermissions,
+			IGImage image, boolean addGroupPermissions,
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
 		resourceLocalService.addResources(
 			image.getCompanyId(), image.getGroupId(), image.getUserId(),
 			IGImage.class.getName(), image.getImageId(), false,
-			addCommunityPermissions, addGuestPermissions);
+			addGroupPermissions, addGuestPermissions);
 	}
 
 	public void addImageResources(
@@ -233,13 +233,13 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 	}
 
 	public void addImageResources(
-			long imageId, boolean addCommunityPermissions,
+			long imageId, boolean addGroupPermissions,
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
 		IGImage image = igImagePersistence.findByPrimaryKey(imageId);
 
-		addImageResources(image, addCommunityPermissions, addGuestPermissions);
+		addImageResources(image, addGroupPermissions, addGuestPermissions);
 	}
 
 	public void addImageResources(

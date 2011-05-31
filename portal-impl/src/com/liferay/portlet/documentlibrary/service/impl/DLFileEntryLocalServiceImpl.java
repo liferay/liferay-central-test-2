@@ -734,14 +734,14 @@ public class DLFileEntryLocalServiceImpl
 	}
 
 	protected void addFileEntryResources(
-			DLFileEntry dlFileEntry, boolean addCommunityPermissions,
+			DLFileEntry dlFileEntry, boolean addGroupPermissions,
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
 		resourceLocalService.addResources(
 			dlFileEntry.getCompanyId(), dlFileEntry.getGroupId(),
 			dlFileEntry.getUserId(), DLFileEntry.class.getName(),
-			dlFileEntry.getFileEntryId(), false, addCommunityPermissions,
+			dlFileEntry.getFileEntryId(), false, addGroupPermissions,
 			addGuestPermissions);
 	}
 
@@ -758,7 +758,7 @@ public class DLFileEntryLocalServiceImpl
 	}
 
 	protected void addFileEntryResources(
-			long fileEntryId, boolean addCommunityPermissions,
+			long fileEntryId, boolean addGroupPermissions,
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
@@ -766,7 +766,7 @@ public class DLFileEntryLocalServiceImpl
 			fileEntryId);
 
 		addFileEntryResources(
-			dlFileEntry, addCommunityPermissions, addGuestPermissions);
+			dlFileEntry, addGroupPermissions, addGuestPermissions);
 	}
 
 	protected void addFileEntryResources(

@@ -84,7 +84,7 @@ public class SCFrameworkVersionLocalServiceImpl
 	}
 
 	public void addFrameworkVersionResources(
-			long frameworkVersionId, boolean addCommunityPermissions,
+			long frameworkVersionId, boolean addGroupPermissions,
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
@@ -92,7 +92,7 @@ public class SCFrameworkVersionLocalServiceImpl
 			scFrameworkVersionPersistence.findByPrimaryKey(frameworkVersionId);
 
 		addFrameworkVersionResources(
-			frameworkVersion, addCommunityPermissions, addGuestPermissions);
+			frameworkVersion, addGroupPermissions, addGuestPermissions);
 	}
 
 	public void addFrameworkVersionResources(
@@ -109,14 +109,14 @@ public class SCFrameworkVersionLocalServiceImpl
 
 	public void addFrameworkVersionResources(
 			SCFrameworkVersion frameworkVersion,
-			boolean addCommunityPermissions, boolean addGuestPermissions)
+			boolean addGroupPermissions, boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
 		resourceLocalService.addResources(
 			frameworkVersion.getCompanyId(), frameworkVersion.getGroupId(),
 			frameworkVersion.getUserId(), SCFrameworkVersion.class.getName(),
 			frameworkVersion.getFrameworkVersionId(), false,
-			addCommunityPermissions, addGuestPermissions);
+			addGroupPermissions, addGuestPermissions);
 	}
 
 	public void addFrameworkVersionResources(

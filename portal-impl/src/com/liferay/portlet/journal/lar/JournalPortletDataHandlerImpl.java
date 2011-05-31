@@ -1498,8 +1498,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		String articleURL = null;
 
-		boolean addCommunityPermissions =
-			creationStrategy.addCommunityPermissions(
+		boolean addGroupPermissions = creationStrategy.addGroupPermissions(
 				portletDataContext, article);
 		boolean addGuestPermissions = creationStrategy.addGuestPermissions(
 			portletDataContext, article);
@@ -1507,7 +1506,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 		ServiceContext serviceContext = portletDataContext.createServiceContext(
 			articleElement, article, _NAMESPACE);
 
-		serviceContext.setAddGroupPermissions(addCommunityPermissions);
+		serviceContext.setAddGroupPermissions(addGroupPermissions);
 		serviceContext.setAddGuestPermissions(addGuestPermissions);
 		serviceContext.setAttribute("imported", Boolean.TRUE.toString());
 
@@ -1752,15 +1751,15 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 			templateIds, feed.getRendererTemplateId(),
 			feed.getRendererTemplateId());
 
-		boolean addCommunityPermissions =
-			creationStrategy.addCommunityPermissions(portletDataContext, feed);
+		boolean addGroupPermissions = creationStrategy.addGroupPermissions(
+			portletDataContext, feed);
 		boolean addGuestPermissions = creationStrategy.addGuestPermissions(
 			portletDataContext, feed);
 
 		ServiceContext serviceContext = portletDataContext.createServiceContext(
 			feedElement, feed, _NAMESPACE);
 
-		serviceContext.setAddGroupPermissions(addCommunityPermissions);
+		serviceContext.setAddGroupPermissions(addGroupPermissions);
 		serviceContext.setAddGuestPermissions(addGuestPermissions);
 
 		JournalFeed importedFeed = null;
@@ -2022,8 +2021,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 			parentStructureId = parentStructure.getStructureId();
 		}
 
-		boolean addCommunityPermissions =
-			creationStrategy.addCommunityPermissions(
+		boolean addGroupPermissions = creationStrategy.addGroupPermissions(
 				portletDataContext, structure);
 		boolean addGuestPermissions = creationStrategy.addGuestPermissions(
 			portletDataContext, structure);
@@ -2031,7 +2029,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 		ServiceContext serviceContext = portletDataContext.createServiceContext(
 			structureElement, structure, _NAMESPACE);
 
-		serviceContext.setAddGroupPermissions(addCommunityPermissions);
+		serviceContext.setAddGroupPermissions(addGroupPermissions);
 		serviceContext.setAddGuestPermissions(addGuestPermissions);
 
 		JournalStructure importedStructure = null;
@@ -2150,8 +2148,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		boolean formatXsl = false;
 
-		boolean addCommunityPermissions =
-			creationStrategy.addCommunityPermissions(
+		boolean addGroupPermissions = creationStrategy.addGroupPermissions(
 				portletDataContext, template);
 		boolean addGuestPermissions = creationStrategy.addGuestPermissions(
 			portletDataContext, template);
@@ -2159,7 +2156,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 		ServiceContext serviceContext = portletDataContext.createServiceContext(
 			templateElement, template, _NAMESPACE);
 
-		serviceContext.setAddGroupPermissions(addCommunityPermissions);
+		serviceContext.setAddGroupPermissions(addGroupPermissions);
 		serviceContext.setAddGuestPermissions(addGuestPermissions);
 
 		File smallFile = null;

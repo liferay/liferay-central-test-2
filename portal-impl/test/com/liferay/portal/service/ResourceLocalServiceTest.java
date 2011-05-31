@@ -94,7 +94,7 @@ public class ResourceLocalServiceTest extends BaseServiceTestCase {
 					String.valueOf(_layout.getPlid()));
 			}
 			catch (NoSuchResourceException nsre) {
-				boolean addCommunityPermission = true;
+				boolean addGroupPermission = true;
 				boolean addGuestPermission = true;
 
 				if (_layout.isPrivateLayout()) {
@@ -104,7 +104,7 @@ public class ResourceLocalServiceTest extends BaseServiceTestCase {
 				ResourceLocalServiceUtil.addResources(
 					_layout.getCompanyId(), _layout.getGroupId(), 0,
 					Layout.class.getName(), _layout.getPlid(), false,
-					addCommunityPermission, addGuestPermission);
+					addGroupPermission, addGuestPermission);
 			}
 		}
 

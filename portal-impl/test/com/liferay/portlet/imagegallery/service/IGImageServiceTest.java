@@ -38,7 +38,7 @@ public class IGImageServiceTest extends BaseServiceTestCase {
 		String name = "Test Folder";
 		String description = "This is a test folder.";
 
-		boolean addCommunityPermissions = true;
+		boolean addGroupPermissions = true;
 		boolean addGuestPermissions = true;
 
 		Layout layout = LayoutLocalServiceUtil.getLayout(
@@ -58,7 +58,7 @@ public class IGImageServiceTest extends BaseServiceTestCase {
 
 		ServiceContext serviceContext = new ServiceContext();
 
-		serviceContext.setAddGroupPermissions(addCommunityPermissions);
+		serviceContext.setAddGroupPermissions(addGroupPermissions);
 		serviceContext.setAddGuestPermissions(addGuestPermissions);
 		serviceContext.setScopeGroupId(layout.getGroupId());
 		serviceContext.setPlid(layout.getPlid());

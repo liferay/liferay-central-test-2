@@ -87,7 +87,7 @@ public class ShoppingCategoryLocalServiceImpl
 	}
 
 	public void addCategoryResources(
-			long categoryId, boolean addCommunityPermissions,
+			long categoryId, boolean addGroupPermissions,
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
@@ -95,7 +95,7 @@ public class ShoppingCategoryLocalServiceImpl
 			shoppingCategoryPersistence.findByPrimaryKey(categoryId);
 
 		addCategoryResources(
-			category, addCommunityPermissions, addGuestPermissions);
+			category, addGroupPermissions, addGuestPermissions);
 	}
 
 	public void addCategoryResources(
@@ -110,14 +110,14 @@ public class ShoppingCategoryLocalServiceImpl
 	}
 
 	public void addCategoryResources(
-			ShoppingCategory category, boolean addCommunityPermissions,
+			ShoppingCategory category, boolean addGroupPermissions,
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
 		resourceLocalService.addResources(
 			category.getCompanyId(), category.getGroupId(),
 			category.getUserId(), ShoppingCategory.class.getName(),
-			category.getCategoryId(), false, addCommunityPermissions,
+			category.getCategoryId(), false, addGroupPermissions,
 			addGuestPermissions);
 	}
 

@@ -95,7 +95,7 @@ public class IGWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 			ServiceContext serviceContext = new ServiceContext();
 
 			serviceContext.setAddGroupPermissions(
-				isAddCommunityPermissions(groupId));
+				isAddGroupPermissions(groupId));
 			serviceContext.setAddGuestPermissions(true);
 			serviceContext.setScopeGroupId(groupId);
 
@@ -161,7 +161,7 @@ public class IGWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 			ServiceContext serviceContext = new ServiceContext();
 
 			serviceContext.setAddGroupPermissions(
-				isAddCommunityPermissions(groupId));
+				isAddGroupPermissions(groupId));
 			serviceContext.setAddGuestPermissions(true);
 
 			int status = HttpServletResponse.SC_CREATED;
@@ -324,7 +324,7 @@ public class IGWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 			ServiceContext serviceContext = new ServiceContext();
 
 			serviceContext.setAddGroupPermissions(
-				isAddCommunityPermissions(groupId));
+				isAddGroupPermissions(groupId));
 			serviceContext.setAddGuestPermissions(true);
 			serviceContext.setPlid(getPlid(webDavRequest.getGroupId()));
 			serviceContext.setScopeGroupId(webDavRequest.getGroupId());
@@ -469,7 +469,7 @@ public class IGWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 			ServiceContext serviceContext = new ServiceContext();
 
 			serviceContext.setAddGroupPermissions(
-				isAddCommunityPermissions(groupId));
+				isAddGroupPermissions(groupId));
 			serviceContext.setAddGuestPermissions(true);
 
 			try {

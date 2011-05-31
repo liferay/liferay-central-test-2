@@ -127,24 +127,24 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 	}
 
 	public void addNodeResources(
-			long nodeId, boolean addCommunityPermissions,
+			long nodeId, boolean addGroupPermissions,
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
 		WikiNode node = wikiNodePersistence.findByPrimaryKey(nodeId);
 
-		addNodeResources(node, addCommunityPermissions, addGuestPermissions);
+		addNodeResources(node, addGroupPermissions, addGuestPermissions);
 	}
 
 	public void addNodeResources(
-			WikiNode node, boolean addCommunityPermissions,
+			WikiNode node, boolean addGroupPermissions,
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
 		resourceLocalService.addResources(
 			node.getCompanyId(), node.getGroupId(),	node.getUserId(),
 			WikiNode.class.getName(), node.getNodeId(), false,
-			addCommunityPermissions, addGuestPermissions);
+			addGroupPermissions, addGuestPermissions);
 	}
 
 	public void addNodeResources(

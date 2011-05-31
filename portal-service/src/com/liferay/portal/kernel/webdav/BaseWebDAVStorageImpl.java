@@ -140,7 +140,7 @@ public abstract class BaseWebDAVStorageImpl implements WebDAVStorage {
 		return LayoutLocalServiceUtil.getDefaultPlid(groupId);
 	}
 
-	protected boolean isAddCommunityPermissions(long groupId) throws Exception {
+	protected boolean isAddGroupPermissions(long groupId) throws Exception {
 		Group group = GroupLocalServiceUtil.getGroup(groupId);
 
 		if (!group.isUser()) {

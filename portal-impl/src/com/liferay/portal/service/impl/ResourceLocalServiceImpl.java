@@ -146,18 +146,18 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 	public void addResources(
 			long companyId, long groupId, long userId, String name,
 			long primKey, boolean portletActions,
-			boolean addCommunityPermissions, boolean addGuestPermissions)
+			boolean addGroupPermissions, boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
 		addResources(
 			companyId, groupId, userId, name, String.valueOf(primKey),
-			portletActions, addCommunityPermissions, addGuestPermissions);
+			portletActions, addGroupPermissions, addGuestPermissions);
 	}
 
 	public void addResources(
 			long companyId, long groupId, long userId, String name,
 			String primKey, boolean portletActions,
-			boolean addCommunityPermissions, boolean addGuestPermissions)
+			boolean addGroupPermissions, boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
 		if (!PermissionThreadLocal.isAddResource()) {
@@ -208,8 +208,8 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 
 			// Community permissions
 
-			if ((groupId > 0) && addCommunityPermissions) {
-				addCommunityPermissions(
+			if ((groupId > 0) && addGroupPermissions) {
+				addGroupPermissions(
 					companyId, groupId, userId, name, resource, portletActions);
 			}
 
@@ -388,7 +388,7 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 		}
 	}
 
-	protected void addCommunityPermissions(
+	protected void addGroupPermissions(
 			long companyId, long groupId, long userId, String name,
 			Resource resource, boolean portletActions)
 		throws PortalException, SystemException {
@@ -407,16 +407,16 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 		String[] actionIds = actions.toArray(new String[actions.size()]);
 
 		if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 6) {
-			addCommunityPermissions_6(groupId, resource, actionIds);
+			addGroupPermissions_6(groupId, resource, actionIds);
 		}
 		else {
-			addCommunityPermissions_1to5(
+			addGroupPermissions_1to5(
 				companyId, groupId, userId, name, resource, portletActions,
 				actionIds);
 		}
 	}
 
-	protected void addCommunityPermissions_1to5(
+	protected void addGroupPermissions_1to5(
 			long companyId, long groupId, long userId, String name,
 			Resource resource, boolean portletActions, String[] actionIds)
 		throws PortalException, SystemException {
@@ -447,7 +447,7 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 		}
 	}
 
-	protected void addCommunityPermissions_6(
+	protected void addGroupPermissions_6(
 			long groupId, Resource resource, String[] actionIds)
 		throws PortalException, SystemException {
 

@@ -338,7 +338,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 					friendlyURL, site, true, null);
 
 				if (name.equals(GroupConstants.USER_PERSONAL_SITE)) {
-					initUserPersonalCommunityPermissions(group);
+					initUserPersonalSitePermissions(group);
 				}
 			}
 
@@ -1325,7 +1325,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		}
 	}
 
-	protected void initUserPersonalCommunityPermissions(Group group)
+	protected void initUserPersonalSitePermissions(Group group)
 		throws PortalException, SystemException {
 
 		// User role

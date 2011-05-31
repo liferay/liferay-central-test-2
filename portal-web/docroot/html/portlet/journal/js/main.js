@@ -358,7 +358,7 @@ AUI().add(
 				var instance = this;
 
 				var groupId = instance.getGroupId();
-				var addCommunityPermissions = true;
+				var addGroupPermissions = true;
 				var addGuestPermissions = true;
 				var parentStructureId = '';
 
@@ -384,7 +384,7 @@ AUI().add(
 						xsd: xsd,
 						serviceContext: A.JSON.stringify(
 							{
-								addCommunityPermissions: addCommunityPermissions,
+								addGroupPermissions: addGroupPermissions,
 								addGuestPermissions: addGuestPermissions,
 								scopeGroupId: groupId
 							}

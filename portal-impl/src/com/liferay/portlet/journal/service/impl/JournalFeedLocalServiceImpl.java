@@ -135,24 +135,24 @@ public class JournalFeedLocalServiceImpl
 	}
 
 	public void addFeedResources(
-			long feedId, boolean addCommunityPermissions,
+			long feedId, boolean addGroupPermissions,
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
 		JournalFeed feed = journalFeedPersistence.findByPrimaryKey(feedId);
 
-		addFeedResources(feed, addCommunityPermissions, addGuestPermissions);
+		addFeedResources(feed, addGroupPermissions, addGuestPermissions);
 	}
 
 	public void addFeedResources(
-			JournalFeed feed, boolean addCommunityPermissions,
+			JournalFeed feed, boolean addGroupPermissions,
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
 		resourceLocalService.addResources(
 			feed.getCompanyId(), feed.getGroupId(), feed.getUserId(),
 			JournalFeed.class.getName(), feed.getId(), false,
-			addCommunityPermissions, addGuestPermissions);
+			addGroupPermissions, addGuestPermissions);
 	}
 
 	public void addFeedResources(

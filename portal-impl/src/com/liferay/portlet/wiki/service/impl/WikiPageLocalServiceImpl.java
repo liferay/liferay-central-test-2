@@ -292,13 +292,13 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 	}
 
 	public void addPageResources(
-			long nodeId, String title, boolean addCommunityPermissions,
+			long nodeId, String title, boolean addGroupPermissions,
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
 		WikiPage page = getPage(nodeId, title);
 
-		addPageResources(page, addCommunityPermissions, addGuestPermissions);
+		addPageResources(page, addGroupPermissions, addGuestPermissions);
 	}
 
 	public void addPageResources(
@@ -312,14 +312,14 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 	}
 
 	public void addPageResources(
-			WikiPage page, boolean addCommunityPermissions,
+			WikiPage page, boolean addGroupPermissions,
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
 		resourceLocalService.addResources(
 			page.getCompanyId(), page.getGroupId(),	page.getUserId(),
 			WikiPage.class.getName(), page.getResourcePrimKey(), false,
-			addCommunityPermissions, addGuestPermissions);
+			addGroupPermissions, addGuestPermissions);
 	}
 
 	public void addPageResources(

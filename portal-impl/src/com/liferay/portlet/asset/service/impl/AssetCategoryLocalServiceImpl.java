@@ -136,14 +136,14 @@ public class AssetCategoryLocalServiceImpl
 	}
 
 	public void addCategoryResources(
-			AssetCategory category, boolean addCommunityPermissions,
+			AssetCategory category, boolean addGroupPermissions,
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
 		resourceLocalService.addResources(
 			category.getCompanyId(), category.getGroupId(),
 			category.getUserId(), AssetCategory.class.getName(),
-			category.getCategoryId(), false, addCommunityPermissions,
+			category.getCategoryId(), false, addGroupPermissions,
 			addGuestPermissions);
 	}
 

@@ -145,14 +145,14 @@ public class DLDocumentTypeLocalServiceImpl
 	}
 
 	protected void addDocumentTypeResources(
-			DLDocumentType documentType, boolean addCommunityPermissions,
+			DLDocumentType documentType, boolean addGroupPermissions,
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
 		resourceLocalService.addResources(
 			documentType.getCompanyId(), documentType.getGroupId(),
 			documentType.getUserId(), DLDocumentType.class.getName(),
-			documentType.getDocumentTypeId(), false, addCommunityPermissions,
+			documentType.getDocumentTypeId(), false, addGroupPermissions,
 			addGuestPermissions);
 	}
 
