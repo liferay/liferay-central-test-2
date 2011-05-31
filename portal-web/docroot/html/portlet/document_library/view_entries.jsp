@@ -189,9 +189,9 @@ for (int i = 0; i < results.size(); i++) {
 	<%@ include file="/html/portlet/document_library/cast_result.jspf" %>
 
 	<c:choose>
-		<c:when test='<%= !displayStyle.equals("list") %>'>
+		<c:when test="<%= fileEntry != null %>">
 			<c:choose>
-				<c:when test="<%= fileEntry != null %>">
+				<c:when test='<%= !displayStyle.equals("list") %>'>
 					<c:choose>
 						<c:when test="<%= DLFileEntryPermission.contains(permissionChecker, fileEntry, ActionKeys.VIEW) %>">
 
@@ -225,52 +225,7 @@ for (int i = 0; i < results.size(); i++) {
 					</c:choose>
 				</c:when>
 
-				<c:when test="<%= (curFolder != null) %>">
-					<liferay-portlet:resourceURL copyCurrentRenderParameters="<%= false %>" varImpl="viewEntriesURL">
-						<portlet:param name="struts_action" value="/document_library/view" />
-						<portlet:param name="folderId" value="<%= String.valueOf(curFolder.getFolderId()) %>" />
-						<portlet:param name="showSiblings" value="<%= Boolean.TRUE.toString() %>" />
-						<portlet:param name="viewAddButton" value="<%= Boolean.TRUE.toString() %>" />
-						<portlet:param name="viewBreadcrumb" value="<%= Boolean.TRUE.toString() %>" />
-						<portlet:param name="viewDisplayStyleButtons" value="<%= Boolean.TRUE.toString() %>" />
-						<portlet:param name="viewEntries" value="<%= Boolean.TRUE.toString() %>" />
-						<portlet:param name="viewFileEntrySearch" value="<%= Boolean.TRUE.toString() %>" />
-						<portlet:param name="viewFolders" value="<%= Boolean.TRUE.toString() %>" />
-						<portlet:param name="start" value="0" />
-						<portlet:param name="end" value="<%= String.valueOf(end - start) %>" />
-					</liferay-portlet:resourceURL>
-
-					<%
-					PortletURL tempRowURL = liferayPortletResponse.createRenderURL();
-
-					tempRowURL.setParameter("struts_action", "/document_library/view");
-					tempRowURL.setParameter("redirect", currentURL);
-					tempRowURL.setParameter("folderId", String.valueOf(curFolder.getFolderId()));
-
-					request.setAttribute("view_entries.jsp-folder", curFolder);
-					request.setAttribute("view_entries.jsp-folderId", String.valueOf(curFolder.getFolderId()));
-					request.setAttribute("view_entries.jsp-repositoryId", String.valueOf(curFolder.getRepositoryId()));
-
-					request.setAttribute("view_entries.jsp-tempRowURL", tempRowURL);
-					request.setAttribute("view_entries.jsp-viewEntriesURL", viewEntriesURL);
-					%>
-
-					<c:choose>
-						<c:when test='<%= displayStyle.equals("icon") %>'>
-							<liferay-util:include page="/html/portlet/document_library/view_folder_icon.jsp" />
-						</c:when>
-
-						<c:otherwise>
-							<liferay-util:include page="/html/portlet/document_library/view_folder_descriptive.jsp" />
-						</c:otherwise>
-					</c:choose>
-				</c:when>
-			</c:choose>
-		</c:when>
-
-		<c:otherwise>
-			<c:choose>
-				<c:when test="<%= fileEntry != null %>">
+				<c:otherwise>
 					<liferay-util:buffer var="fileEntryTitle">
 						<liferay-ui:icon
 							image='<%= "../file_system/small/" + fileEntry.getExtension() %>'
@@ -307,8 +262,54 @@ for (int i = 0; i < results.size(); i++) {
 					resultRows.add(row);
 					%>
 
+				</c:otherwise>
+			</c:choose>
+		</c:when>
+
+		<c:when test="<%= curFolder != null %>">
+			<liferay-portlet:resourceURL copyCurrentRenderParameters="<%= false %>" varImpl="viewEntriesURL">
+				<portlet:param name="struts_action" value="/document_library/view" />
+				<portlet:param name="folderId" value="<%= String.valueOf(curFolder.getFolderId()) %>" />
+				<portlet:param name="showSiblings" value="<%= Boolean.TRUE.toString() %>" />
+				<portlet:param name="viewAddButton" value="<%= Boolean.TRUE.toString() %>" />
+				<portlet:param name="viewBreadcrumb" value="<%= Boolean.TRUE.toString() %>" />
+				<portlet:param name="viewDisplayStyleButtons" value="<%= Boolean.TRUE.toString() %>" />
+				<portlet:param name="viewEntries" value="<%= Boolean.TRUE.toString() %>" />
+				<portlet:param name="viewFileEntrySearch" value="<%= Boolean.TRUE.toString() %>" />
+				<portlet:param name="viewFolders" value="<%= Boolean.TRUE.toString() %>" />
+				<portlet:param name="start" value="0" />
+				<portlet:param name="end" value="<%= String.valueOf(end - start) %>" />
+			</liferay-portlet:resourceURL>
+
+			<c:choose>
+				<c:when test='<%= !displayStyle.equals("list") %>'>
+					<%
+					PortletURL tempRowURL = liferayPortletResponse.createRenderURL();
+
+					tempRowURL.setParameter("struts_action", "/document_library/view");
+					tempRowURL.setParameter("redirect", currentURL);
+					tempRowURL.setParameter("folderId", String.valueOf(curFolder.getFolderId()));
+
+					request.setAttribute("view_entries.jsp-folder", curFolder);
+					request.setAttribute("view_entries.jsp-folderId", String.valueOf(curFolder.getFolderId()));
+					request.setAttribute("view_entries.jsp-repositoryId", String.valueOf(curFolder.getRepositoryId()));
+
+					request.setAttribute("view_entries.jsp-tempRowURL", tempRowURL);
+					request.setAttribute("view_entries.jsp-viewEntriesURL", viewEntriesURL);
+					%>
+
+					<c:choose>
+						<c:when test='<%= displayStyle.equals("icon") %>'>
+							<liferay-util:include page="/html/portlet/document_library/view_folder_icon.jsp" />
+						</c:when>
+
+						<c:otherwise>
+							<liferay-util:include page="/html/portlet/document_library/view_folder_descriptive.jsp" />
+						</c:otherwise>
+					</c:choose>
 				</c:when>
-				<c:when test="<%= curFolder != null %>">
+
+				<c:otherwise>
 					<liferay-util:buffer var="folderTitle">
 						<liferay-ui:icon
 							image="folder"
@@ -328,9 +329,26 @@ for (int i = 0; i < results.size(); i++) {
 					rowURL.setParameter("redirect", currentURL);
 					rowURL.setParameter("folderId", String.valueOf(curFolder.getFolderId()));
 
-					row.addText(folderTitle, rowURL);
+					Map<String,Object> data = new HashMap<String,Object>();
 
-					row.addText(curFolder.getDescription(), rowURL);
+					data.put("folder", true);
+					data.put("resource-url", viewEntriesURL);
+
+					TextSearchEntry folderTitleSearchEntry = new TextSearchEntry();
+
+					folderTitleSearchEntry.setData(data);
+					folderTitleSearchEntry.setHref(rowURL.toString());
+					folderTitleSearchEntry.setName(folderTitle);
+
+					row.addSearchEntry(folderTitleSearchEntry);
+
+					TextSearchEntry folderDescriptionSearchEntry = new TextSearchEntry();
+
+					folderDescriptionSearchEntry.setData(data);
+					folderDescriptionSearchEntry.setHref(rowURL.toString());
+					folderDescriptionSearchEntry.setName(folderTitle);
+
+					row.addSearchEntry(folderDescriptionSearchEntry);
 
 					row.addText(String.valueOf(0) + "k");
 
@@ -345,9 +363,9 @@ for (int i = 0; i < results.size(); i++) {
 					resultRows.add(row);
 					%>
 
-				</c:when>
+				</c:otherwise>
 			</c:choose>
-		</c:otherwise>
+		</c:when>
 	</c:choose>
 
 <%
@@ -355,7 +373,7 @@ for (int i = 0; i < results.size(); i++) {
 %>
 
 <c:if test='<%= displayStyle.equals("list") %>'>
-	<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
+	<liferay-ui:search-iterator paginate="<%= false %>" searchContainer="<%= searchContainer %>" />
 </c:if>
 
 <liferay-portlet:resourceURL varImpl="paginationURL">
