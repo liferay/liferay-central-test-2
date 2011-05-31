@@ -53,9 +53,6 @@ else {
 	}
 }
 
-int targetPage = ParamUtil.getInteger(request, "targetPage");
-int rowsPerPage = ParamUtil.getInteger(request, "rowsPerPage", SearchContainer.DEFAULT_DELTA);
-
 PortletURL portletURL = liferayPortletResponse.createRenderURL();
 
 portletURL.setParameter("struts_action", "/document_library/view");
@@ -97,6 +94,9 @@ searchContainer.setOrderByType(orderByType);
 searchContainer.setOrderByComparator(orderByComparator);
 
 searchContainer.setRowChecker(new RowChecker(liferayPortletResponse));
+
+int start = ParamUtil.getInteger(request, "start", searchContainer.getStart());
+int end = ParamUtil.getInteger(request, "end", searchContainer.getEnd());
 
 List results = null;
 int total = 0;
@@ -149,26 +149,8 @@ else {
 			total = AssetEntryServiceUtil.getEntriesCount(assetEntryQuery);
 		}
 		else {
-			if (true) {
-				results = DLAppServiceUtil.getFoldersAndFileEntriesAndFileShortcuts(repositoryId, folderId, status, searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator());
-			}
-			else {
-				List folders = DLAppServiceUtil.getFolders(repositoryId, folderId, searchContainer.getStart(), searchContainer.getEnd(), DLUtil.getRepositoryModelOrderByComparator(orderByCol, orderByType));
-
-				List fileEntries = DLAppServiceUtil.getFileEntries(repositoryId, folderId, searchContainer.getStart(), searchContainer.getEnd(), DLUtil.getRepositoryModelOrderByComparator(orderByCol, orderByType));
-
-				results = ListUtil.copy(folders);
-
-				results.addAll(fileEntries);
-			}
-
-			if (true) {
-				total = DLAppServiceUtil.getFoldersAndFileEntriesAndFileShortcutsCount(repositoryId, folderId, status);
-			}
-			else {
-				total = DLAppServiceUtil.getFoldersCount(repositoryId, folderId);
-				total += DLAppServiceUtil.getFileEntriesCount(repositoryId, folderId);
-			}
+			results = DLAppServiceUtil.getFoldersAndFileEntriesAndFileShortcuts(repositoryId, folderId, status, start, end, searchContainer.getOrderByComparator());
+			total = DLAppServiceUtil.getFoldersAndFileEntriesAndFileShortcutsCount(repositoryId, folderId, status);
 		}
 	}
 	else if (navigation.equals("my-documents") || navigation.equals("recent-documents")) {
@@ -178,7 +160,7 @@ else {
 			groupFileEntriesUserId = user.getUserId();
 		}
 
-		results= DLAppServiceUtil.getGroupFileEntries(repositoryId, groupFileEntriesUserId, defaultFolderId, searchContainer.getStart(), searchContainer.getEnd());
+		results= DLAppServiceUtil.getGroupFileEntries(repositoryId, groupFileEntriesUserId, defaultFolderId, start, end);
 		total= DLAppServiceUtil.getGroupFileEntriesCount(repositoryId, groupFileEntriesUserId, defaultFolderId);
 	}
 }
@@ -195,9 +177,6 @@ searchContainer.setTotal(total);
 			</div>
 		</c:when>
 		<c:otherwise>
-			<div class="taglib-search-iterator-page-iterator-top">
-				<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
-			</div>
 		</c:otherwise>
 	</c:choose>
 </c:if>
@@ -220,7 +199,7 @@ for (int i = 0; i < results.size(); i++) {
 							PortletURL tempRowURL = liferayPortletResponse.createRenderURL();
 
 							tempRowURL.setParameter("struts_action", "/document_library/view_file_entry");
-							tempRowURL.setParameter("redirect", currentURL);
+							tempRowURL.setParameter("redirect", HttpUtil.addParameter(currentURL, liferayPortletResponse.getNamespace() + "showSiblings", true));
 							tempRowURL.setParameter("fileEntryId", String.valueOf(fileEntry.getFileEntryId()));
 
 							request.setAttribute("view_entries.jsp-fileEntry", fileEntry);
@@ -257,6 +236,8 @@ for (int i = 0; i < results.size(); i++) {
 						<portlet:param name="viewEntries" value="<%= Boolean.TRUE.toString() %>" />
 						<portlet:param name="viewFileEntrySearch" value="<%= Boolean.TRUE.toString() %>" />
 						<portlet:param name="viewFolders" value="<%= Boolean.TRUE.toString() %>" />
+						<portlet:param name="start" value="0" />
+						<portlet:param name="end" value="<%= String.valueOf(end - start) %>" />
 					</liferay-portlet:resourceURL>
 
 					<%
@@ -306,7 +287,7 @@ for (int i = 0; i < results.size(); i++) {
 					PortletURL rowURL = liferayPortletResponse.createRenderURL();
 
 					rowURL.setParameter("struts_action", "/document_library/view_file_entry");
-					rowURL.setParameter("redirect", currentURL);
+					rowURL.setParameter("redirect", HttpUtil.addParameter(currentURL, liferayPortletResponse.getNamespace() + "showSiblings", true));
 					rowURL.setParameter("fileEntryId", String.valueOf(fileEntry.getFileEntryId()));
 
 					row.addText(fileEntryTitle, rowURL);
@@ -377,11 +358,24 @@ for (int i = 0; i < results.size(); i++) {
 	<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 </c:if>
 
-<c:if test='<%= !displayStyle.equals("list") && !results.isEmpty() %>'>
-	<div class="taglib-search-iterator-page-iterator-top">
-		<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
-	</div>
-</c:if>
+<liferay-portlet:resourceURL varImpl="paginationURL">
+	<portlet:param name="struts_action" value="/document_library/view" />
+	<portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" />
+	<portlet:param name="viewEntries" value="<%= Boolean.TRUE.toString() %>" />
+	<portlet:param name="viewFolders" value="<%= Boolean.TRUE.toString() %>" />
+	<portlet:param name="showSiblings" value="<%= Boolean.TRUE.toString() %>" />
+</liferay-portlet:resourceURL>
+
+<aui:script>
+	Liferay.fire(
+		'viewEntriesLoaded',
+		{
+			total: <%= total %>,
+			paginationURL: '<%= paginationURL %>',
+			page: <%= end / (end - start) %>
+		}
+	);
+</aui:script>
 
 <%!
 private static Log _log = LogFactoryUtil.getLog("portal-web.docroot.html.portlet.document_library.view_entries_jsp");

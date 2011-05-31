@@ -55,6 +55,9 @@ request.setAttribute("view.jsp-folder", folder);
 request.setAttribute("view.jsp-folderId", String.valueOf(folderId));
 
 request.setAttribute("view.jsp-repositoryId", String.valueOf(repositoryId));
+
+long start = ParamUtil.getLong(request, "start");
+long end = ParamUtil.getLong(request, "end", SearchContainer.DEFAULT_DELTA);
 %>
 
 <div class="portlet-msg-error aui-helper-hidden" id="<portlet:namespace />errorContainer">
@@ -64,7 +67,14 @@ request.setAttribute("view.jsp-repositoryId", String.valueOf(repositoryId));
 <div id="<portlet:namespace />documentLibraryContainer">
 	<aui:layout cssClass="view">
 		<aui:column columnWidth="<%= 20 %>" cssClass="navigation-pane" first="<%= true %>">
-			<liferay-util:include page="/html/portlet/document_library/view_folders.jsp" />
+			<div class="header-row">
+				<div class="header-row-content" id="<portlet:namespace />parentFolderTitleContainer">
+					<div class="parent-folder-title" id="<portlet:namespace />parentFolderTitle"></div>
+				</div>
+			</div>
+			<div class="body-row">
+				<div id="<portlet:namespace />folderContainer"></div>
+			</div>
 		</aui:column>
 
 		<aui:column columnWidth="<%= showFolderMenu ? 80 : 100 %>" cssClass="context-pane" last="<%= true %>">
@@ -94,11 +104,9 @@ request.setAttribute("view.jsp-repositoryId", String.valueOf(repositoryId));
 					</div>
 				</div>
 
-				<div class="document-container" id="<portlet:namespace />documentContainer">
-					<c:if test='<%= true %>'>
-						<liferay-util:include page="/html/portlet/document_library/view_entries.jsp" />
-					</c:if>
-				</div>
+				<div class="document-container" id="<portlet:namespace />documentContainer"></div>
+
+				<div class="document-entries-paginator"></div>
 			</aui:form>
 		</aui:column>
 	</aui:layout>
@@ -186,7 +194,106 @@ if (folder != null) {
 	<liferay-util:include page="/html/portlet/document_library/display_style_buttons.jsp" />
 </span>
 
-<aui:script use="liferay-list-view">
+<aui:script use="aui-paginator,liferay-list-view">
+	<liferay-portlet:resourceURL varImpl="paginationURL">
+		<portlet:param name="struts_action" value="/document_library/view" />
+		<portlet:param name="viewEntries" value="<%= Boolean.TRUE.toString() %>" />
+		<portlet:param name="viewFolders" value="<%= Boolean.TRUE.toString() %>" />
+		<portlet:param name="showSiblings" value="<%= Boolean.TRUE.toString() %>" />
+	</liferay-portlet:resourceURL>
+
+	paginationURL = '<%= paginationURL %>';
+
+	var Lang = A.Lang;
+
+	var entryPaginator = new A.Paginator(
+		{
+			alwaysVisible: false,
+			circular: false,
+			containers: '.document-entries-paginator',
+			firstPageLinkLabel: '<<',
+			lastPageLinkLabel: '>>',
+			maxPageLinks: <%= PropsValues.SEARCH_CONTAINER_PAGE_ITERATOR_MAX_PAGES * 2 %>,
+			nextPageLinkLabel: '>',
+			page: <%= end / (end - start) %>,
+			prevPageLinkLabel: '<',
+			rowsPerPage: <%= end - start %>,
+			rowsPerPageOptions: [<%= StringUtil.merge(PropsValues.SEARCH_CONTAINER_PAGE_DELTA_VALUES) %>],
+			on: {
+				changeRequest: function(event) {
+					var state = event.state;
+
+					var page = state.page;
+					var rowsPerPage = state.rowsPerPage;
+
+					loadEntriesData(page, rowsPerPage);
+				}
+			}
+		}
+	).render();
+
+	Liferay.on(
+		'viewEntriesLoaded',
+		function(event) {
+			entryPaginator.setState(
+				{
+					total: event.total,
+					page: event.page
+				}
+			);
+
+			paginationURL = event.paginationURL;
+		}
+	);
+
+	function loadEntriesData(page, rowsPerPage) {
+		page = Lang.isValue(page) ? page : entryPaginator.get('page');
+		rowsPerPage = Lang.isValue(rowsPerPage) ? rowsPerPage : entryPaginator.get('rowsPerPage');
+
+		currentPage = (page || 1) - 1;
+
+		var start = currentPage * rowsPerPage;
+		var end = start + rowsPerPage;
+
+		var data = {
+			start : start,
+			end : end
+		};
+
+		var requestUrl = paginationURL;
+
+		var entriesContainer = A.one('#<portlet:namespace />documentContainer');
+
+		entriesContainer.plug(A.LoadingMask);
+
+		entriesContainer.loadingmask.toggle();
+
+		A.io.request(
+			requestUrl,
+			{
+				data: data,
+				on: {
+					success: function(event, id, obj) {
+						entriesContainer.unplug(A.LoadingMask);
+
+						var responseData = this.get('responseData');
+
+						var content = A.Node.create(responseData);
+
+						var folders = content.one('#<portlet:namespace />folderContainer');
+
+						listView.set('data', folders);
+
+						var entries = content.one('#<portlet:namespace />entries')
+
+						entriesContainer.plug(A.Plugin.ParseContent);
+						entriesContainer.setContent(entries);
+					},
+				}
+			}
+		);
+	}
+
 	var listView = new Liferay.ListView(
 		{
 			itemAttributes: ['data-direction-right', 'data-refresh-entries', 'data-refresh-folders', 'data-resource-url'],

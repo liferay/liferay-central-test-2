@@ -58,7 +58,7 @@ else {
 int start = ParamUtil.getInteger(request, "start");
 int end = ParamUtil.getInteger(request, "end", SearchContainer.DEFAULT_DELTA);
 
-List<Folder> folders = DLAppServiceUtil.getFolders(repositoryId, parentFolderId, start, end);
+List<Folder> folders = DLAppServiceUtil.getFolders(repositoryId, parentFolderId, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 
 List<Folder> ancestorFolders = new ArrayList();
 
@@ -120,6 +120,8 @@ if (folder != null) {
 						<portlet:param name="viewEntries" value="<%= Boolean.TRUE.toString() %>" />
 						<portlet:param name="viewFileEntrySearch" value="<%= Boolean.TRUE.toString() %>" />
 						<portlet:param name="viewFolders" value="<%= Boolean.TRUE.toString() %>" />
+						<portlet:param name="start" value="0" />
+						<portlet:param name="end" value="<%= String.valueOf(end - start) %>" />
 					</liferay-portlet:resourceURL>
 
 					<%
@@ -153,6 +155,8 @@ if (folder != null) {
 						<portlet:param name="viewDisplayStyleButtons" value="<%= Boolean.TRUE.toString() %>" />
 						<portlet:param name="viewEntries" value="<%= Boolean.TRUE.toString() %>" />
 						<portlet:param name="viewFileEntrySearch" value="<%= Boolean.TRUE.toString() %>" />
+						<portlet:param name="start" value="0" />
+						<portlet:param name="end" value="<%= String.valueOf(end - start) %>" />
 					</liferay-portlet:resourceURL>
 
 					<li class="folder <%= navigation.equals("recent-documents") ? "selected" : StringPool.BLANK %>">
@@ -176,6 +180,8 @@ if (folder != null) {
 						<portlet:param name="viewDisplayStyleButtons" value="<%= Boolean.TRUE.toString() %>" />
 						<portlet:param name="viewEntries" value="<%= Boolean.TRUE.toString() %>" />
 						<portlet:param name="viewFileEntrySearch" value="<%= Boolean.TRUE.toString() %>" />
+						<portlet:param name="start" value="0" />
+						<portlet:param name="end" value="<%= String.valueOf(end - start) %>" />
 					</liferay-portlet:resourceURL>
 
 					<li class="folder <%= navigation.equals("my-documents") ? "selected" : StringPool.BLANK %>">
@@ -187,7 +193,7 @@ if (folder != null) {
 					</li>
 
 					<%
-					List<DLDocumentType> documentTypes = DLDocumentTypeServiceUtil.getDocumentTypes(scopeGroupId, start, end);
+					List<DLDocumentType> documentTypes = DLDocumentTypeServiceUtil.getDocumentTypes(scopeGroupId, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 
 					for (DLDocumentType documentType : documentTypes) {
 					%>
@@ -206,6 +212,8 @@ if (folder != null) {
 							<portlet:param name="viewDisplayStyleButtons" value="<%= Boolean.TRUE.toString() %>" />
 							<portlet:param name="viewEntries" value="<%= Boolean.TRUE.toString() %>" />
 							<portlet:param name="viewFileEntrySearch" value="<%= Boolean.TRUE.toString() %>" />
+							<portlet:param name="start" value="0" />
+							<portlet:param name="end" value="<%= String.valueOf(end - start) %>" />
 						</liferay-portlet:resourceURL>
 
 						<li class="folder document-type">
@@ -244,6 +252,8 @@ if (folder != null) {
 						<portlet:param name="viewEntries" value="<%= Boolean.TRUE.toString() %>" />
 						<portlet:param name="viewFileEntrySearch" value="<%= Boolean.TRUE.toString() %>" />
 						<portlet:param name="viewFolders" value="<%= Boolean.TRUE.toString() %>" />
+						<portlet:param name="start" value="0" />
+						<portlet:param name="end" value="<%= String.valueOf(end - start) %>" />
 					</liferay-portlet:resourceURL>
 
 					<li class="folder">
@@ -283,6 +293,8 @@ if (folder != null) {
 							<portlet:param name="viewDisplayStyleButtons" value="<%= Boolean.TRUE.toString() %>" />
 							<portlet:param name="viewEntries" value="<%= Boolean.TRUE.toString() %>" />
 							<portlet:param name="viewFileEntrySearch" value="<%= Boolean.TRUE.toString() %>" />
+							<portlet:param name="start" value="0" />
+							<portlet:param name="end" value="<%= String.valueOf(end - start) %>" />
 						</liferay-portlet:resourceURL>
 
 						<li class="folder <%= (curFolder.getFolderId() == folderId) ? "selected" : StringPool.BLANK %>">
