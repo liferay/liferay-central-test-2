@@ -345,6 +345,8 @@ public interface PropsKeys {
 
 	public static final String COMMUNITIES_EMAIL_MEMBERSHIP_REQUEST_BODY = "communities.email.membership.request.body";
 
+	public static final String COMMUNITIES_EMAIL_MEMBERSHIP_REQUEST_SUBJECT = "communities.email.membership.request.subject";
+
 	public static final String COMPANY_DEFAULT_HOME_URL = "company.default.home.url";
 
 	public static final String COMPANY_DEFAULT_WEB_ID = "company.default.web.id";
