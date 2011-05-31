@@ -54,7 +54,7 @@
 			'input-move-boxes': ['aui-base', 'aui-toolbar'],
 			'layout': ['aui-io-request', 'aui-portal-layout', 'aui-resize', 'dd'],
 			'layout-configuration': ['aui-live-search', 'dd', 'liferay-layout'],
-			'list-view': ['aui-base'],
+			'list-view': ['aui-base', 'transition'],
 			'logo-selector': ['aui-base'],
 			'look-and-feel': ['aui-color-picker', 'aui-dialog', 'aui-io-request', 'aui-tabs-base'],
 			'menu': ['aui-live-search','aui-overlay', 'node-focusmanager', 'selector-css3'],
