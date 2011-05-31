@@ -129,7 +129,7 @@
 	if (userOrganizationId > 0) {
 		userParams.put("usersOrgs", new Long(userOrganizationId));
 	}
-	else if (usersListView.equals(UserConstants.LIST_VIEW_TREE)) {
+	else if (usersListView.equals(UserConstants.LIST_VIEW_TREE) && Validator.isNull(searchTerms.getKeywords())) {
 		userParams.put("noOrganizations", Boolean.TRUE);
 		userParams.put("usersOrgsCount", 0);
 	}
