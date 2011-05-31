@@ -1585,6 +1585,15 @@ public class ServicePreAction extends Action {
 
 		// Icons
 
+		themeDisplay.setShowAddContentIcon(false);
+		themeDisplay.setShowControlPanelIcon(signedIn);
+		themeDisplay.setShowHomeIcon(true);
+		themeDisplay.setShowMyAccountIcon(signedIn);
+		themeDisplay.setShowPageSettingsIcon(false);
+		themeDisplay.setShowPortalIcon(true);
+		themeDisplay.setShowSignInIcon(!signedIn);
+		themeDisplay.setShowSignOutIcon(signedIn);
+
 		Group controlPanelGroup = GroupLocalServiceUtil.getGroup(
 			companyId, GroupConstants.CONTROL_PANEL);
 
@@ -1602,19 +1611,12 @@ public class ServicePreAction extends Action {
 		siteContentPortlets.remove(groupPagesPortlet);
 		siteContentPortlets.remove(siteSettingsPortlet);
 
-		boolean isShowSiteContentIcon = PortletPermissionUtil.contains(
+		boolean showSiteContentIcon = PortletPermissionUtil.contains(
 			permissionChecker, controlPanelGroup.getGroupId(), controlPanelPlid,
 			siteContentPortlets, ActionKeys.VIEW);
 
-		themeDisplay.setShowAddContentIcon(false);
-		themeDisplay.setShowControlPanelIcon(signedIn);
-		themeDisplay.setShowHomeIcon(true);
-		themeDisplay.setShowMyAccountIcon(signedIn);
-		themeDisplay.setShowPageSettingsIcon(false);
-		themeDisplay.setShowPortalIcon(true);
-		themeDisplay.setShowSignInIcon(!signedIn);
-		themeDisplay.setShowSignOutIcon(signedIn);
-		themeDisplay.setShowSiteContentIcon(isShowSiteContentIcon);
+		themeDisplay.setShowSiteContentIcon(showSiteContentIcon);
+
 		themeDisplay.setShowStagingIcon(false);
 
 		// Session
