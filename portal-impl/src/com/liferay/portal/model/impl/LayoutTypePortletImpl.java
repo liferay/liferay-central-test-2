@@ -683,7 +683,7 @@ public class LayoutTypePortletImpl
 
 		Layout layout = getLayout();
 
-		if (layout.isTypeControlPanel()) {
+		if (layout.isTypeControlPanel() || layout.isTypePanel()) {
 			return true;
 		}
 

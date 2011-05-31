@@ -25,7 +25,9 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.LayoutTypePortlet;
+import com.liferay.portal.model.Portlet;
 import com.liferay.portal.security.auth.PrincipalException;
+import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
@@ -234,16 +236,18 @@ public class PortletAction extends Action {
 
 			boolean hasPortletId = false;
 
-			try {
-				String portletId = (String)actionRequest.getAttribute(
-					WebKeys.PORTLET_ID);
+			String portletId = (String)actionRequest.getAttribute(
+				WebKeys.PORTLET_ID);
 
+			try {
 				hasPortletId = layoutTypePortlet.hasPortletId(portletId);
 			}
 			catch (Exception e) {
 			}
 
-			if (hasPortletId) {
+			Portlet portlet = PortletLocalServiceUtil.getPortletById(portletId);
+
+			if (hasPortletId || portlet.isAddDefaultResource()) {
 				addSuccessMessage(actionRequest, actionResponse);
 			}
 		}
