@@ -112,49 +112,57 @@
 </aui:fieldset>
 
 <aui:fieldset label="show-metadata">
+
+	<br />
+
+	<aui:input name="preferences--showAssetLinks--" type="checkbox" value="<%= showAssetLinks %>" />
+
 	<aui:input name="preferences--metadataFields--" type="hidden" />
 
-	<%
-	Set availableMetadataFields = SetUtil.fromArray(StringUtil.split(allMetadataFields));
+	<aui:field-wrapper label="metadata-fields">
 
-	// Left list
+		<%
+		Set availableMetadataFields = SetUtil.fromArray(StringUtil.split(allMetadataFields));
 
-	List leftList = new ArrayList();
+		// Left list
 
-	for (int i = 0; i < metadataFields.length; i++) {
-		String folderColumn = metadataFields[i];
+		List leftList = new ArrayList();
 
-		leftList.add(new KeyValuePair(folderColumn, LanguageUtil.get(pageContext, folderColumn)));
-	}
+		for (int i = 0; i < metadataFields.length; i++) {
+			String folderColumn = metadataFields[i];
 
-	// Right list
-
-	List rightList = new ArrayList();
-
-	Arrays.sort(metadataFields);
-
-	Iterator itr = availableMetadataFields.iterator();
-
-	while (itr.hasNext()) {
-		String folderColumn = (String)itr.next();
-
-		if (Arrays.binarySearch(metadataFields, folderColumn) < 0) {
-			rightList.add(new KeyValuePair(folderColumn, LanguageUtil.get(pageContext, folderColumn)));
+			leftList.add(new KeyValuePair(folderColumn, LanguageUtil.get(pageContext, folderColumn)));
 		}
-	}
 
-	rightList = ListUtil.sort(rightList, new KeyValuePairComparator(false, true));
-	%>
+		// Right list
 
-	<liferay-ui:input-move-boxes
-		leftTitle="current"
-		rightTitle="available"
-		leftBoxName="currentMetadataFields"
-		rightBoxName="availableMetadataFields"
-		leftReorder="true"
-		leftList="<%= leftList %>"
-		rightList="<%= rightList %>"
-	/>
+		List rightList = new ArrayList();
+
+		Arrays.sort(metadataFields);
+
+		Iterator itr = availableMetadataFields.iterator();
+
+		while (itr.hasNext()) {
+			String folderColumn = (String)itr.next();
+
+			if (Arrays.binarySearch(metadataFields, folderColumn) < 0) {
+				rightList.add(new KeyValuePair(folderColumn, LanguageUtil.get(pageContext, folderColumn)));
+			}
+		}
+
+		rightList = ListUtil.sort(rightList, new KeyValuePairComparator(false, true));
+		%>
+
+		<liferay-ui:input-move-boxes
+			leftTitle="current"
+			rightTitle="available"
+			leftBoxName="currentMetadataFields"
+			rightBoxName="availableMetadataFields"
+			leftReorder="true"
+			leftList="<%= leftList %>"
+			rightList="<%= rightList %>"
+		/>
+	</aui:field-wrapper>
 </aui:fieldset>
 
 <aui:script use="aui-base">

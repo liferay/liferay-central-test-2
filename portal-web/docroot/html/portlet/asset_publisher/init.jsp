@@ -243,6 +243,7 @@ boolean enableFlags = GetterUtil.getBoolean(preferences.getValue("enableFlags", 
 String defaultMetadataFields = StringPool.BLANK;
 String allMetadataFields = "create-date,modified-date,publish-date,expiration-date,priority,author,view-count,categories,tags,ratings";
 
+boolean showAssetLinks = GetterUtil.getBoolean(preferences.getValue("showAssetLinks", null), true);
 String[] metadataFields = StringUtil.split(preferences.getValue("metadataFields", defaultMetadataFields));
 
 boolean enableRSS = GetterUtil.getBoolean(preferences.getValue("enableRss", null));

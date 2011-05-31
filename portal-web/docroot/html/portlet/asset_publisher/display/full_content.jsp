@@ -155,6 +155,15 @@ request.setAttribute("view.jsp-showIconLabel", true);
 				</div>
 			</c:if>
 
+			<br />
+
+			<c:if test='<%= showAssetLinks %>' >
+				<liferay-ui:asset-links
+					className="<%= assetEntry.getClassName() %>"
+					classPK="<%= assetEntry.getClassPK() %>"
+				/>
+			</c:if>
+
 			<c:if test="<%= Validator.isNotNull(assetRenderer.getDiscussionPath()) && enableComments %>">
 				<br />
 
