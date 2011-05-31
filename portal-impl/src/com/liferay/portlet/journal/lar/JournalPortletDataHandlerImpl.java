@@ -1901,8 +1901,8 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 
 			String newLinkToLayout = StringUtil.replace(
 				oldLinkToLayout,
-				new String[] {oldLayoutId, StringPool.AT.concat(friendlyURL)},
-				new String[] {newLayoutId, StringPool.BLANK});
+				new String[] {StringPool.AT.concat(friendlyURL), oldLayoutId},
+				new String[] {StringPool.BLANK, newLayoutId});
 
 			oldLinksToLayout.add(oldLinkToLayout);
 			newLinksToLayout.add(newLinkToLayout);
