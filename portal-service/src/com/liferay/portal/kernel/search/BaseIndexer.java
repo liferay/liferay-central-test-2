@@ -302,8 +302,8 @@ public abstract class BaseIndexer implements Indexer {
 			int end = searchContext.getEnd();
 
 			if (isFilterSearch() && (permissionChecker != null)) {
-				start = 0;
-				end = end + INDEX_FILTER_SEARCH_LIMIT;
+				searchContext.setStart(0);
+				searchContext.setEnd(end + INDEX_FILTER_SEARCH_LIMIT);
 			}
 
 			Hits hits = SearchEngineUtil.search(searchContext, fullQuery);
