@@ -6,28 +6,15 @@
 			INNER JOIN
 				ResourcePermission ON
 					(
-						[$OWNER_CHECK$]
 						(ResourcePermission.companyId = [$COMPANY_ID$]) AND
 						(ResourcePermission.name = '[$CLASS_NAME$]') AND
-						(ResourcePermission.roleId IN ([$ROLE_IDS$])) AND
-						(MOD(ResourcePermission.actionIds, 2) = 1) AND
+						[$PRIM_KEYS$] AND
 						(
 							(
-								(ResourcePermission.scope = 1) AND
-								(ResourcePermission.primKey = '[$COMPANY_ID$]')
-							) OR
-							(
-								(ResourcePermission.scope = 2) AND
-								(ResourcePermission.primKey IN ('[$GROUP_IDS$]'))
-							) OR
-							(
-								(ResourcePermission.scope = 3) AND
-								(ResourcePermission.primKey = '0')
-							) OR
-							(
-								(ResourcePermission.scope = 4) AND
-								(ResourcePermission.primKey = CAST_TEXT([$CLASS_PK_FIELD$]))
+								[$ROLE_IDS$] AND
+								(MOD(ResourcePermission.actionIds, 2) = 1)
 							)
+							OR [$OWNER_CHECK$]
 						)
 					)
 		]]>

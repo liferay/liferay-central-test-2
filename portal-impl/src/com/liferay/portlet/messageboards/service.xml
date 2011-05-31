@@ -302,7 +302,7 @@
 		<reference package-path="com.liferay.portal" entity="Subscription" />
 		<reference package-path="com.liferay.portal" entity="WorkflowInstanceLink" />
 		<reference package-path="com.liferay.portlet.asset" entity="AssetEntry" />
-        <reference package-path="com.liferay.portlet.asset" entity="AssetLink" />
+		<reference package-path="com.liferay.portlet.asset" entity="AssetLink" />
 		<reference package-path="com.liferay.portlet.asset" entity="AssetTag" />
 		<reference package-path="com.liferay.portlet.blogs" entity="BlogsEntry" />
 		<reference package-path="com.liferay.portlet.ratings" entity="RatingsStats" />
@@ -440,6 +440,9 @@
 		<finder name="GroupId" return-type="Collection">
 			<finder-column name="groupId" />
 		</finder>
+		<finder name="RootMessageId" return-type="MBMessage">
+			<finder-column name="rootMessageId" />
+		</finder>
 		<finder name="G_C" return-type="Collection">
 			<finder-column name="groupId" />
 			<finder-column name="categoryId" arrayable-operator="OR" />
@@ -454,6 +457,10 @@
 		</finder>
 		<finder name="C_P" return-type="Collection">
 			<finder-column name="categoryId" />
+			<finder-column name="priority" />
+		</finder>
+		<finder name="L_P" return-type="Collection">
+			<finder-column name="lastPostDate" />
 			<finder-column name="priority" />
 		</finder>
 		<finder name="G_C_L" return-type="Collection">

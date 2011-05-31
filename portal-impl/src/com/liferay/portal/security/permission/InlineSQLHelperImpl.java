@@ -178,6 +178,18 @@ public class InlineSQLHelperImpl implements InlineSQLHelper {
 		PermissionChecker permissionChecker =
 			PermissionThreadLocal.getPermissionChecker();
 
+		long checkGroupId = 0;
+
+		if (groupIds.length == 1) {
+			checkGroupId = groupIds[0];
+		}
+
+		if (permissionChecker.hasPermission(
+				checkGroupId, className, 0, ActionKeys.VIEW)) {
+
+			return sql;
+		}
+
 		String permissionJoin = StringPool.BLANK;
 
 		if (Validator.isNotNull(bridgeJoin)) {
@@ -190,41 +202,89 @@ public class InlineSQLHelperImpl implements InlineSQLHelper {
 
 		long userId = getUserId();
 
-		if (userId > 0) {
+		if (permissionChecker.isSignedIn()) {
+			ownerSQL.append(" OR ");
+
 			if (Validator.isNotNull(userIdField)) {
 				ownerSQL.append("(");
 				ownerSQL.append(userIdField);
 				ownerSQL.append(" = ");
 				ownerSQL.append(userId);
-				ownerSQL.append(") OR ");
+				ownerSQL.append(")");
 			}
 			else {
 				ownerSQL.append("(ResourcePermission.ownerId = ");
 				ownerSQL.append(userId);
-				ownerSQL.append(") OR ");
+				ownerSQL.append(")");
 			}
 		}
+
+		long[] roleIds = getRoleIds(groupIds);
+
+		StringBundler roleIdsSQL = new StringBundler(3 * roleIds.length + 2);
+
+		if (roleIds.length == 0) {
+			roleIds = _NO_ROLE_IDS;
+		}
+
+		for (int i = 0; i < roleIds.length; i++) {
+			if (i == 0) {
+				roleIdsSQL.append("(");
+			}
+
+			if (i > 0) {
+				roleIdsSQL.append(" OR ");
+			}
+
+			roleIdsSQL.append("ResourcePermission.roleId = ");
+			roleIdsSQL.append(roleIds[i]);
+
+			if (i == (roleIds.length - 1)) {
+				roleIdsSQL.append(")");
+			}
+		}
+
+		StringBundler primKeysSQL = new StringBundler(3);
+
+		primKeysSQL.append("(ResourcePermission.primKey = CAST_TEXT(");
+		primKeysSQL.append(classPKField);
+		primKeysSQL.append(")");
+
+		if (groupIds.length > 1) {
+			for (long groupId : groupIds) {
+				primKeysSQL.append(" OR ResourcePermission.primKey = '");
+				primKeysSQL.append(groupId);
+				primKeysSQL.append("'");
+			}
+		}
+
+		primKeysSQL.append(")");
 
 		permissionJoin = StringUtil.replace(
 			permissionJoin,
 			new String[] {
 				"[$CLASS_NAME$]",
-				"[$CLASS_PK_FIELD$]",
 				"[$COMPANY_ID$]",
-				"[$GROUP_IDS$]",
-				"[$OWNER_CHECK$]",
+				"OR [$OWNER_CHECK$]",
+				"[$PRIM_KEYS$]",
 				"[$ROLE_IDS$]"
 			},
 			new String[] {
 				className,
-				classPKField,
 				String.valueOf(permissionChecker.getCompanyId()),
-				StringUtil.merge(groupIds, "','"),
 				ownerSQL.toString(),
-				StringUtil.merge(getRoleIds(groupIds))
+				primKeysSQL.toString(),
+				roleIdsSQL.toString()
 			});
 
 		int pos = sql.indexOf(_WHERE_CLAUSE);
+
+		if (pos != -1) {
+			return sql.substring(0, pos + 1).concat(permissionJoin).concat(
+				sql.substring(pos + 1));
+		}
+
+		pos = sql.indexOf(_GROUP_BY_CLAUSE);
 
 		if (pos != -1) {
 			return sql.substring(0, pos + 1).concat(permissionJoin).concat(
@@ -289,6 +349,10 @@ public class InlineSQLHelperImpl implements InlineSQLHelper {
 
 		return userId;
 	}
+
+	private static final long[] _NO_ROLE_IDS = new long[] {0};
+
+	private static final String _GROUP_BY_CLAUSE = " GROUP BY ";
 
 	private static final String _ORDER_BY_CLAUSE = " ORDER BY ";
 
