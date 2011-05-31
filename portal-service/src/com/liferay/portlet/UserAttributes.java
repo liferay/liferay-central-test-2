@@ -484,6 +484,7 @@ public class UserAttributes {
 			if (_bizAddress != null) {
 				return _bizAddress.getZip();
 			}
+
 			return StringPool.BLANK;
 		}
 		else if (name.equals(USER_BUSINESS_INFO_POSTAL_COUNTRY)) {
