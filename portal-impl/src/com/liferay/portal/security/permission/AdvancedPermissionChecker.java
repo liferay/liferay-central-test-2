@@ -350,7 +350,8 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 		}
 
 		Boolean value = PermissionCacheUtil.getPermission(
-			user.getUserId(), groupId, name, primKey, actionId);
+			user.getUserId(), signedIn, checkGuest, groupId, name, primKey,
+			actionId);
 
 		if (value == null) {
 			try {
@@ -370,7 +371,8 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 				}
 
 				PermissionCacheUtil.putPermission(
-					user.getUserId(), groupId, name, primKey, actionId, value);
+					user.getUserId(), signedIn, checkGuest, groupId, name,
+					primKey, actionId, value);
 			}
 		}
 

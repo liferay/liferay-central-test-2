@@ -73,12 +73,13 @@ public class PermissionCacheUtil {
 	}
 
 	public static Boolean getPermission(
-		long userId, long groupId, String name, String primKey,
-		String actionId) {
+		long userId, boolean signedIn, boolean checkGuest, long groupId,
+		String name, String primKey, String actionId) {
 
 		Boolean value = null;
 
-		String key = _encodeKey(userId, groupId, name, primKey, actionId);
+		String key = _encodeKey(
+			userId, signedIn, checkGuest, groupId, name, primKey, actionId);
 
 		if (_localCacheAvailable) {
 			Map<String, Object> localCache = _localCache.get();
@@ -112,11 +113,12 @@ public class PermissionCacheUtil {
 	}
 
 	public static Boolean putPermission(
-		long userId, long groupId, String name, String primKey, String actionId,
-		Boolean value) {
+		long userId, boolean signedIn, boolean checkGuest, long groupId,
+		String name, String primKey, String actionId, Boolean value) {
 
 		if (value != null) {
-			String key = _encodeKey(userId, groupId, name, primKey, actionId);
+			String key = _encodeKey(
+				userId, signedIn, checkGuest, groupId, name, primKey, actionId);
 
 			if (_localCacheAvailable) {
 				Map<String, Object> localCache = _localCache.get();
@@ -142,14 +144,16 @@ public class PermissionCacheUtil {
 	}
 
 	private static String _encodeKey(
-		long userId, long groupId, String name, String primKey,
-		String actionId) {
+		long userId, boolean signedIn, boolean checkGuest, long groupId,
+		String name, String primKey, String actionId) {
 
 		CacheKeyGenerator cacheKeyGenerator =
 			CacheKeyGeneratorUtil.getCacheKeyGenerator(
 				PERMISSION_CHECKER_BAG_CACHE_NAME);
 
 		cacheKeyGenerator.append(StringUtil.toHexString(userId));
+		cacheKeyGenerator.append(String.valueOf(checkGuest));
+		cacheKeyGenerator.append(String.valueOf(signedIn));
 		cacheKeyGenerator.append(StringUtil.toHexString(groupId));
 		cacheKeyGenerator.append(name);
 		cacheKeyGenerator.append(primKey);
