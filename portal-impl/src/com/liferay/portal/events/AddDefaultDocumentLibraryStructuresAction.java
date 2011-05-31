@@ -27,9 +27,9 @@ import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portlet.documentlibrary.model.DLDocumentMetadataSet;
 import com.liferay.portlet.documentlibrary.model.DLDocumentType;
 import com.liferay.portlet.documentlibrary.service.DLDocumentTypeLocalServiceUtil;
-import com.liferay.portlet.dynamicdatalists.model.DDLRecordSet;
 import com.liferay.portlet.dynamicdatamapping.model.DDMStructure;
 import com.liferay.portlet.dynamicdatamapping.service.DDMStructureLocalServiceUtil;
 import com.liferay.util.ContentUtil;
@@ -82,7 +82,8 @@ public class AddDefaultDocumentLibraryStructuresAction extends SimpleAction {
 			String xsd = structureElementRootElement.asXML();
 
 			DDMStructureLocalServiceUtil.addStructure(
-				userId, groupId, PortalUtil.getClassNameId(DDLRecordSet.class),
+				userId, groupId,
+				PortalUtil.getClassNameId(DLDocumentMetadataSet.class),
 				StringPool.BLANK, true, name, description, xsd, "xml",
 				serviceContext);
 		}
