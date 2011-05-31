@@ -1200,14 +1200,14 @@ public class ServicePreAction extends Action {
 					request.setAttribute(WebKeys.REQUESTED_LAYOUT, layout);
 				}
 
-				boolean isViewableCommunity = isViewableGroup(
+				boolean isViewableGroup = isViewableGroup(
 					user, layout.getGroupId(), layout.isPrivateLayout(),
 					layout.getLayoutId(), permissionChecker);
 
-				if (!isViewableCommunity && group.isStagingGroup()) {
+				if (!isViewableGroup && group.isStagingGroup()) {
 					layout = null;
 				}
-				else if (!isViewableCommunity) {
+				else if (!isViewableGroup) {
 					sb = new StringBundler(6);
 
 					sb.append("User ");
@@ -1223,7 +1223,7 @@ public class ServicePreAction extends Action {
 
 					throw new PrincipalException(sb.toString());
 				}
-				else if (isViewableCommunity &&
+				else if (isViewableGroup &&
 						!LayoutPermissionUtil.contains(
 							permissionChecker, layout, ActionKeys.VIEW)) {
 

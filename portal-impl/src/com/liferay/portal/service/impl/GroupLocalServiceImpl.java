@@ -211,7 +211,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 				group.getCompanyId(), 0, 0, Group.class.getName(),
 				group.getGroupId(), false, false, false);
 
-			// Community roles
+			// Site roles
 
 			Role role = roleLocalService.getRole(
 				group.getCompanyId(), RoleConstants.SITE_OWNER);

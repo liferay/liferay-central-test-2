@@ -379,7 +379,7 @@ public class PortalImpl implements Portal {
 
 		Arrays.sort(_sortedSystemRoles, new StringComparator());
 
-		// Community roles
+		// Site roles
 
 		String customSystemSiteRoles[] =
 			PropsUtil.getArray(PropsKeys.SYSTEM_COMMUNITY_ROLES);

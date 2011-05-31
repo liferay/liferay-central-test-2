@@ -179,23 +179,23 @@ List<Group> myPlaces = user.getMyPlaces(max);
 						portletURL.setParameter("groupId", String.valueOf(myPlace.getGroupId()));
 						portletURL.setParameter("privateLayout", Boolean.FALSE.toString());
 
-						boolean firstCommunity = false;
+						boolean firstSite = false;
 
 						if (myPlaces.indexOf(myPlace) == 0) {
-							firstCommunity = true;
+							firstSite = true;
 						}
 
-						boolean lastCommunity = false;
+						boolean lastSite = false;
 
 						if (myPlaces.size()	== (myPlaces.indexOf(myPlace) + 1)) {
-							lastCommunity = true;
+							lastSite = true;
 						}
 
-						boolean selectedCommunity = false;
+						boolean selectedSite = false;
 
 						if (layout != null) {
 							if (layout.getGroupId() == myPlace.getGroupId()) {
-								selectedCommunity = true;
+								selectedSite = true;
 							}
 						}
 
@@ -209,15 +209,15 @@ List<Group> myPlaces = user.getMyPlaces(max);
 
 						String cssClass = "public-community";
 
-						if (firstCommunity) {
+						if (firstSite) {
 							cssClass += " first";
 						}
 
-						if (lastCommunity) {
+						if (lastSite) {
 							cssClass += " last";
 						}
 
-						if (selectedCommunity) {
+						if (selectedSite) {
 							cssClass += " current-community";
 						}
 
@@ -271,7 +271,7 @@ List<Group> myPlaces = user.getMyPlaces(max);
 							cssClass += " control-panel";
 						}
 
-						if (selectedCommunity) {
+						if (selectedSite) {
 							cssClass += " current-community";
 						}
 
@@ -313,16 +313,16 @@ List<Group> myPlaces = user.getMyPlaces(max);
 					<c:when test='<%= PropsValues.MY_PLACES_DISPLAY_STYLE.equals("classic") %>'>
 
 						<%
-						boolean selectedCommunity = false;
+						boolean selectedSite = false;
 
 						if (layout != null) {
 							if (layout.getGroupId() == myPlace.getGroupId()) {
-								selectedCommunity = true;
+								selectedSite = true;
 							}
 						}
 						%>
 
-						<li class="<%= selectedCommunity ? "current-community" : "" %>">
+						<li class="<%= selectedSite ? "current-community" : "" %>">
 							<h3>
 								<a href="javascript:;">
 									<c:choose>

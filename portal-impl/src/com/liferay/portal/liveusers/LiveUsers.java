@@ -345,13 +345,13 @@ public class LiveUsers {
 
 		groupParams.put("usersGroups", userId);
 
-		List<Group> communities = GroupLocalServiceUtil.search(
+		List<Group> groups = GroupLocalServiceUtil.search(
 			companyId, null, null, groupParams, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS);
 
-		for (Group community : communities) {
+		for (Group group : groups) {
 			Set<Long> groupUsers = _getGroupUsers(
-				liveUsers, community.getGroupId());
+				liveUsers, group.getGroupId());
 
 			if (signedIn) {
 				groupUsers.add(userId);

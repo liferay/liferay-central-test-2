@@ -1521,7 +1521,7 @@ public interface UserLocalService {
 	*
 	* @param companyId the primary key of the company the role belongs to
 	* @param name the name of the role (must be a regular role, not an
-	organization, community, or provider role)
+	organization, site or provider role)
 	* @param userId the primary key of the user
 	* @param inherited whether to include roles inherited from organizations,
 	sites, etc.

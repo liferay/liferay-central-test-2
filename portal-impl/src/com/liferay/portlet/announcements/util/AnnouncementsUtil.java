@@ -50,7 +50,7 @@ public class AnnouncementsUtil {
 
 		scopes.put(_USER_CLASS_NAME_ID, new long[] {userId});
 
-		// Community announcements
+		// Site announcements
 
 		List<Group> groupsList = new ArrayList<Group>();
 

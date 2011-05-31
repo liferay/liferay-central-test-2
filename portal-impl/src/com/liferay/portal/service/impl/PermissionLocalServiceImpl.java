@@ -430,7 +430,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 
 		logHasUserPermissions(userId, resourceId, actionId, stopWatch, block++);
 
-		// Check the organization and community intersection table. Break out of
+		// Check the organization and group intersection table. Break out of
 		// this method if the user has one of the permissions set at the
 		// intersection because that takes priority.
 

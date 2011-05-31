@@ -133,9 +133,7 @@ public class AddDefaultLayoutSetPrototypesAction extends SimpleAction {
 
 		LayoutSet layoutSet = addLayoutSetPrototype(
 			companyId, defaultUserId,
-			"Site with Calendar, Documents and Images",
-			"Pages that are only available to members of this community " +
-				"or organization.",
+			"Site with Calendar, Documents and Images", StringPool.BLANK,
 			layoutSetPrototypes);
 
 		if (layoutSet == null) {
