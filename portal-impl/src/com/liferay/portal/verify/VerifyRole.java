@@ -32,10 +32,10 @@ public class VerifyRole extends VerifyProcess {
 			RoleLocalServiceUtil.checkSystemRoles(companyId);
 
 			try {
-				Role organizationMemberRole = RoleLocalServiceUtil.getRole(
+				Role organizationUserRole = RoleLocalServiceUtil.getRole(
 					companyId, RoleConstants.ORGANIZATION_USER);
 
-				deleteImplicitAssociations(organizationMemberRole);
+				deleteImplicitAssociations(organizationUserRole);
 			}
 			catch (NoSuchRoleException nsre) {
 			}

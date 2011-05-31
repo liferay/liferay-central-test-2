@@ -789,17 +789,6 @@ public class DataFactory {
 
 		_organizationAdministratorRole = role;
 
-		// Organization Member
-
-		role = newRole();
-
-		role.setName(RoleConstants.ORGANIZATION_USER);
-		role.setType(RoleConstants.TYPE_ORGANIZATION);
-
-		_roles.add(role);
-
-		_organizationMemberRole = role;
-
 		// Organization Owner
 
 		role = newRole();
@@ -810,6 +799,17 @@ public class DataFactory {
 		_roles.add(role);
 
 		_organizationOwnerRole = role;
+
+		// Organization User
+
+		role = newRole();
+
+		role.setName(RoleConstants.ORGANIZATION_USER);
+		role.setType(RoleConstants.TYPE_ORGANIZATION);
+
+		_roles.add(role);
+
+		_organizationUserRole = role;
 
 		// Owner
 
@@ -937,8 +937,8 @@ public class DataFactory {
 	private int _maxGroupsCount;
 	private int _maxUserToGroupCount;
 	private Role _organizationAdministratorRole;
-	private Role _organizationMemberRole;
 	private Role _organizationOwnerRole;
+	private Role _organizationUserRole;
 	private Role _ownerRole;
 	private SimpleCounter _permissionCounter;
 	private Role _powerUserRole;

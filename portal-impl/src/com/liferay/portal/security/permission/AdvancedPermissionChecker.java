@@ -442,10 +442,10 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 		throws Exception {
 
 		if (group.isOrganization()) {
-			Role organizationMemberRole = RoleLocalServiceUtil.getRole(
+			Role organizationUserRole = RoleLocalServiceUtil.getRole(
 				group.getCompanyId(), RoleConstants.ORGANIZATION_USER);
 
-			roles.add(organizationMemberRole);
+			roles.add(organizationUserRole);
 		}
 
 		if (group.isSite()) {
