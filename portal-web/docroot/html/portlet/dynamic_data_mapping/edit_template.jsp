@@ -40,8 +40,6 @@ String availableFields = ParamUtil.getString(request, "availableFields");
 if (Validator.isNull(availableFields)) {
 	availableFields = renderResponse.getNamespace() + "structureAvailableFields";
 }
-
-String callback = ParamUtil.getString(request, "callback");
 %>
 
 <portlet:actionURL var="editTemplateURL">
@@ -56,8 +54,8 @@ String callback = ParamUtil.getString(request, "callback");
 	<aui:input name="structureKey" type="hidden" value="<%= structureKey %>" />
 	<aui:input name="type" type="hidden" value="<%= type %>" />
 	<aui:input name="availableFields" type="hidden" value="<%= availableFields %>" />
-	<aui:input name="callback" type="hidden" value="<%= callback %>" />
-	<aui:input name="saveAndContinue" type="hidden" value="<%= true %>" />
+	<aui:input name="saveCallback" type="hidden" value="<%= saveCallback %>" />
+	<aui:input name="saveAndContinue" type="hidden" value="<%= false %>" />
 
 	<liferay-ui:error exception="<%= TemplateNameException.class %>" message="please-enter-a-valid-name" />
 	<liferay-ui:error exception="<%= TemplateScriptException.class %>" message="please-enter-a-valid-script" />

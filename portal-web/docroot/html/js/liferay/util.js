@@ -1019,21 +1019,35 @@
 
 	Liferay.provide(
 		Util,
-		'openFormBuilderWindow',
+		'openDDMPortlet',
 		function(config) {
 			var instance = this;
 
-			var formBuilderURL = Liferay.PortletURL.createRenderURL();
+			var ddmURL = Liferay.PortletURL.createRenderURL();
 
-			formBuilderURL.setEscapeXML(false);
-			formBuilderURL.setParameter('struts_action', '/dynamic_data_mapping/edit_structure');
-			formBuilderURL.setParameter('portletResourceNamespace', config.namespace);
-			formBuilderURL.setParameter('availableFields', config.availableFields);
-			formBuilderURL.setParameter('callback', config.callback);
-			formBuilderURL.setPortletId(166);
-			formBuilderURL.setWindowState('pop_up');
+			ddmURL.setEscapeXML(false);
+			ddmURL.setParameter('struts_action', '/dynamic_data_mapping/view');
+			ddmURL.setParameter('scopeStorageType', config.storageType);
+			ddmURL.setParameter('scopeStructureName', config.structureName);
+			ddmURL.setParameter('scopeStructureType', config.structureType);
+			ddmURL.setParameter('chooseCallback', config.chooseCallback);
+			ddmURL.setParameter('saveCallback', config.saveCallback);
+			ddmURL.setPortletId(166);
+			ddmURL.setWindowState('pop_up');
 
-			config.uri = formBuilderURL.toString();
+			if (config.struts_action) {
+				ddmURL.setParameter('struts_action', config.struts_action);
+			}
+
+			if (config.showManageTemplates) {
+				ddmURL.setParameter('showManageTemplates', config.showManageTemplates);
+			}
+
+			if (config.showToolbar) {
+				ddmURL.setParameter('showToolbar', config.showToolbar);
+			}
+
+			config.uri = ddmURL.toString();
 
 			var dialogConfig = config.dialog;
 

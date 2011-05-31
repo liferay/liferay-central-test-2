@@ -158,7 +158,8 @@ public class EditTemplateAction extends PortletAction {
 			actionRequest, "structureKey");
 		String availableFields = ParamUtil.getString(
 			actionRequest, "availableFields");
-		String callback = ParamUtil.getString(actionRequest, "callback");
+		String saveCallback = ParamUtil.getString(
+			actionRequest, "saveCallback");
 
 		PortletURLImpl portletURL = new PortletURLImpl(
 			(ActionRequestImpl)actionRequest, portletConfig.getPortletName(),
@@ -175,7 +176,7 @@ public class EditTemplateAction extends PortletAction {
 		portletURL.setParameter("structureKey", structureKey, false);
 		portletURL.setParameter("type", template.getType(), false);
 		portletURL.setParameter("availableFields", availableFields, false);
-		portletURL.setParameter("callback", callback, false);
+		portletURL.setParameter("saveCallback", saveCallback, false);
 		portletURL.setParameter(
 			"templateId", String.valueOf(template.getTemplateId()), false);
 

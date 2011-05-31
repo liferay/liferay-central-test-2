@@ -168,7 +168,8 @@ public class EditStructureAction extends PortletAction {
 
 		String availableFields = ParamUtil.getString(
 			actionRequest, "availableFields");
-		String callback = ParamUtil.getString(actionRequest, "callback");
+		String saveCallback = ParamUtil.getString(
+			actionRequest, "saveCallback");
 
 		PortletURLImpl portletURL = new PortletURLImpl(
 			(ActionRequestImpl)actionRequest, portletConfig.getPortletName(),
@@ -185,7 +186,7 @@ public class EditStructureAction extends PortletAction {
 		portletURL.setParameter(
 			"structureKey", structure.getStructureKey(), false);
 		portletURL.setParameter("availableFields", availableFields, false);
-		portletURL.setParameter("callback", callback, false);
+		portletURL.setParameter("saveCallback", saveCallback, false);
 
 		return portletURL.toString();
 	}

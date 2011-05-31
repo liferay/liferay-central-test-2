@@ -49,22 +49,25 @@
 <%
 PortalPreferences portalPreferences = PortletPreferencesFactoryUtil.getPortalPreferences(request);
 
-boolean showManageTemplates = GetterUtil.getBoolean(portletConfig.getInitParameter("show-manage-templates"), true);
-boolean showTabs = GetterUtil.getBoolean(portletConfig.getInitParameter("show-tabs"), true);
-boolean showToolbar = GetterUtil.getBoolean(portletConfig.getInitParameter("show-toolbar"), true);
-String structureNameInitParam = GetterUtil.getString(portletConfig.getInitParameter("structure-name"));
-String storageTypeInitParam = GetterUtil.getString(portletConfig.getInitParameter("storage-type"));
-String structureTypeInitParam = GetterUtil.getString(portletConfig.getInitParameter("structure-type"));
+boolean showManageTemplates = ParamUtil.getBoolean(request, "showManageTemplates", true);
+boolean showToolbar = ParamUtil.getBoolean(request, "showToolbar", true);
 
-long classNameId = 0;
+String scopeStructureName = ParamUtil.getString(request, "scopeStructureName");
+String scopeStorageType = ParamUtil.getString(request, "scopeStorageType");
+String scopeStructureType = ParamUtil.getString(request, "scopeStructureType");
+
+String chooseCallback = ParamUtil.getString(request, "chooseCallback");
+String saveCallback = ParamUtil.getString(request, "saveCallback");
+
+long classNameId = PortalUtil.getClassNameId(scopeStructureType);
+
 String storageTypeValue = StringPool.BLANK;
 
-if (structureTypeInitParam.equals("DLDocumentMetadataSet")) {
-	classNameId = PortalUtil.getClassNameId(DLDocumentMetadataSet.class.getName());
-}
-
-if (storageTypeInitParam.equals("xml")) {
+if (scopeStorageType.equals("xml")) {
 	storageTypeValue = StorageType.XML.getValue();
+}
+else if (scopeStorageType.equals("expando")) {
+	storageTypeValue = StorageType.EXPANDO.getValue();
 }
 
 Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZone);

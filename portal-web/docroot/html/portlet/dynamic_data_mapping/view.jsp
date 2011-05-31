@@ -25,13 +25,6 @@ portletURL.setParameter("struts_action", "/dynamic_data_mapping/view");
 portletURL.setParameter("tabs1", tabs1);
 %>
 
-<c:if test="<%= showTabs %>">
-	<liferay-ui:tabs
-		names="structures"
-		portletURL="<%= portletURL %>"
-	/>
-</c:if>
-
 <c:if test="<%= showToolbar %>">
 	<liferay-util:include page="/html/portlet/dynamic_data_mapping/toolbar.jsp">
 		<liferay-util:param name="toolbarItem" value="view-all" />
@@ -68,14 +61,14 @@ portletURL.setParameter("tabs1", tabs1);
 			property="name"
 		/>
 
-		<c:if test="<%= classNameId == 0 %>">
+		<c:if test="<%= Validator.isNull(storageTypeValue) %>">
 			<liferay-ui:search-container-column-text
 				name="storage-type"
 				value="<%= LanguageUtil.get(pageContext, structure.getStorageType()) %>"
 			/>
 		</c:if>
 
-		<c:if test="<%= Validator.isNull(storageTypeValue) %>">
+		<c:if test="<%= classNameId == 0 %>">
 			<liferay-ui:search-container-column-text
 				buffer="buffer"
 				name="type"

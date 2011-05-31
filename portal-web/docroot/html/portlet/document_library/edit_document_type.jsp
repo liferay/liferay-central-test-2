@@ -111,14 +111,20 @@ if (documentType != null) {
 
 <aui:script>
 	function <portlet:namespace />openDDMStructureSelector() {
-		Liferay.Util.openWindow(
+		Liferay.Util.openDDMPortlet(
 			{
 				dialog: {
 					stack: false,
 					width:680
 				},
+				struts_action: '/dynamic_data_mapping/select_structure',
+				showManageTemplates: 'false',
+				showToolbar: 'false',
+				structureName: 'metadata-set',
+				structureType: 'com.liferay.portlet.documentlibrary.model.DLDocumentMetadataSet',
+				storageType: 'xml',
 				title: '<liferay-ui:message key="metadata-sets" />',
-				uri: '<liferay-portlet:renderURL portletName="<%= PortletKeys.METADATA_SET_ADMIN %>" windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/dynamic_data_mapping/select_structure" /><portlet:param name="callback" value='<%= renderResponse.getNamespace() + "selectDDMStructure" %>' /></liferay-portlet:renderURL>'
+				saveCallback: '<%= renderResponse.getNamespace() + "selectDDMStructure" %>'
 			}
 		);
 	}

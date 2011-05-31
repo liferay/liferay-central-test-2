@@ -116,14 +116,17 @@ String orderByType = ParamUtil.getString(request, "orderByType");
 	}
 
 	function <portlet:namespace />openDDMStructureView() {
-		Liferay.Util.openWindow(
+		Liferay.Util.openDDMPortlet(
 			{
 				dialog: {
 					stack: false,
 					width:820
 				},
-				title: '<liferay-ui:message key="metadata-sets" />',
-				uri: '<liferay-portlet:renderURL portletName="<%= PortletKeys.METADATA_SET_ADMIN %>" windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/dynamic_data_mapping/view" /></liferay-portlet:renderURL>'
+				showManageTemplates: 'false',
+				structureName: 'metadata-set',
+				structureType: 'com.liferay.portlet.documentlibrary.model.DLDocumentMetadataSet',
+				storageType: 'xml',
+				title: '<liferay-ui:message key="metadata-sets" />'
 			}
 		);
 	}

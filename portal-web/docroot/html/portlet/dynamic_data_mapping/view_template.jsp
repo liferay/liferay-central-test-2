@@ -34,6 +34,7 @@ PortletURL portletURL = renderResponse.createRenderURL();
 portletURL.setParameter("struts_action", "/dynamic_data_mapping/view_template");
 portletURL.setParameter("tabs1", tabs1);
 portletURL.setParameter("structureKey", structureKey);
+portletURL.setParameter("backURL", backURL);
 %>
 
 <c:if test="<%= (structure != null) %>">
@@ -43,13 +44,9 @@ portletURL.setParameter("structureKey", structureKey);
 	/>
 </c:if>
 
-<liferay-ui:tabs
-	names="templates"
-	portletURL="<%= portletURL %>"
-/>
-
 <liferay-util:include page="/html/portlet/dynamic_data_mapping/template_toolbar.jsp">
 	<liferay-util:param name="structureKey" value="<%= structureKey %>" />
+	<liferay-util:param name="backURL" value="<%= backURL %>" />
 </liferay-util:include>
 
 <aui:form action="<%= portletURL.toString() %>" method="post" name="fm">

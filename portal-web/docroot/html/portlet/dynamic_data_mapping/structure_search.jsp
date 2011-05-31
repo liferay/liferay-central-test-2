@@ -76,8 +76,8 @@ if (!portletName.equals(PortletKeys.DYNAMIC_DATA_MAPPING)) {
 
 String buttonLabel = "add-structure";
 
-if (Validator.isNotNull(structureNameInitParam)) {
-	buttonLabel = LanguageUtil.format(pageContext, "add-x", structureNameInitParam);
+if (Validator.isNotNull(scopeStructureName)) {
+	buttonLabel = LanguageUtil.format(pageContext, "add-x", scopeStructureName);
 }
 %>
 

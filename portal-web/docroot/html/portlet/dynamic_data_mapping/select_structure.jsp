@@ -16,14 +16,6 @@
 
 <%@ include file="/html/portlet/dynamic_data_mapping/init.jsp" %>
 
-<%
-String callback = ParamUtil.getString(request, "callback");
-
-if (Validator.isNull(callback)) {
-	callback = renderResponse.getNamespace() + "selectDDMStructure";
-}
-%>
-
 <liferay-portlet:renderURL varImpl="portletURL">
 	<portlet:param name="struts_action" value="/dynamic_data_mapping/select_structure" />
 </liferay-portlet:renderURL>
@@ -31,7 +23,7 @@ if (Validator.isNull(callback)) {
 <aui:form action="<%= portletURL.toString() %>" method="post" name="fm">
 
 	<liferay-ui:header
-		title='<%= Validator.isNotNull(structureNameInitParam) ? structureNameInitParam : "structures" %>'
+		title='<%= Validator.isNotNull(scopeStructureName) ? scopeStructureName : "structures" %>'
 	/>
 
 	<liferay-ui:search-form
@@ -57,7 +49,7 @@ if (Validator.isNull(callback)) {
 			StringBundler sb = new StringBundler(7);
 
 			sb.append("javascript:Liferay.Util.getOpener().");
-			sb.append(callback);
+			sb.append(saveCallback);
 			sb.append("('");
 			sb.append(structure.getStructureId());
 			sb.append("', '");

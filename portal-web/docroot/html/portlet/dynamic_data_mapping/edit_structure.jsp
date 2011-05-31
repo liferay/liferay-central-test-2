@@ -30,7 +30,6 @@ String newStructureKey = ParamUtil.getString(request, "newStructureKey");
 String script = BeanParamUtil.getString(structure, request, "xsd");
 
 String availableFields = ParamUtil.getString(request, "availableFields");
-String callback = ParamUtil.getString(request, "callback");
 %>
 
 <portlet:actionURL var="editStructureURL">
@@ -44,7 +43,7 @@ String callback = ParamUtil.getString(request, "callback");
 	<aui:input name="structureKey" type="hidden" value="<%= structureKey %>" />
 	<aui:input name="script" type="hidden" />
 	<aui:input name="availableFields" type="hidden" value="<%= availableFields %>" />
-	<aui:input name="callback" type="hidden" value="<%= callback %>" />
+	<aui:input name="saveCallback" type="hidden" value="<%= saveCallback %>" />
 	<aui:input name="saveAndContinue" type="hidden" value="<%= false %>" />
 
 	<liferay-ui:error exception="<%= StructureDuplicateElementException.class %>" message="please-enter-unique-structure-field-names-(including-field-names-inherited-from-the-parent-structure)" />
@@ -59,8 +58,8 @@ String callback = ParamUtil.getString(request, "callback");
 	if (structure != null) {
 		title = structure.getName();
 	}
-	else if (Validator.isNotNull(structureNameInitParam)) {
-		title = LanguageUtil.format(pageContext, "new-x", structureNameInitParam);
+	else if (Validator.isNotNull(scopeStructureName)) {
+		title = LanguageUtil.format(pageContext, "new-x", scopeStructureName);
 	}
 	%>
 
@@ -172,7 +171,7 @@ String callback = ParamUtil.getString(request, "callback");
 		['aui-base']
 	);
 
-	<c:if test="<%= Validator.isNotNull(callback) && Validator.isNotNull(structureKey) %>">
-		window.parent.<%= HtmlUtil.escapeJS(callback) %>('<%= HtmlUtil.escapeJS(structureKey) %>');
+	<c:if test="<%= Validator.isNotNull(saveCallback) && Validator.isNotNull(structureKey) %>">
+		window.parent.<%= HtmlUtil.escapeJS(saveCallback) %>('<%= HtmlUtil.escapeJS(structureKey) %>');
 	</c:if>
 </aui:script>

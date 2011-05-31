@@ -2572,50 +2572,6 @@
 		</security-role-ref>
 	</portlet>
 	<portlet>
-		<portlet-name>171</portlet-name>
-		<display-name>Metadata Set Manager</display-name>
-		<portlet-class>com.liferay.portlet.StrutsPortlet</portlet-class>
-		<init-param>
-			<name>show-manage-templates</name>
-			<value>false</value>
-		</init-param>
-		<init-param>
-			<name>show-tabs</name>
-			<value>false</value>
-		</init-param>
-		<init-param>
-			<name>show-toolbar</name>
-			<value>false</value>
-		</init-param>
-		<init-param>
-			<name>structure-name</name>
-			<value>metadata-set</value>
-		</init-param>
-		<init-param>
-			<name>storage-type</name>
-			<value>xml</value>
-		</init-param>
-		<init-param>
-			<name>structure-type</name>
-			<value>DLDocumentMetadataSet</value>
-		</init-param>
-		<init-param>
-			<name>view-action</name>
-			<value>/dynamic_data_mapping/view</value>
-		</init-param>
-		<expiration-cache>0</expiration-cache>
-		<supports>
-			<mime-type>text/html</mime-type>
-		</supports>
-		<resource-bundle>com.liferay.portlet.StrutsResourceBundle</resource-bundle>
-		<security-role-ref>
-			<role-name>power-user</role-name>
-		</security-role-ref>
-		<security-role-ref>
-			<role-name>user</role-name>
-		</security-role-ref>
-	</portlet>
-    <portlet>
         <portlet-name>172</portlet-name>
         <display-name>Asset Browser</display-name>
         <portlet-class>com.liferay.portlet.StrutsPortlet</portlet-class>
