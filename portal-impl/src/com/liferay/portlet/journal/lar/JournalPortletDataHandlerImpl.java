@@ -1877,9 +1877,9 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 		Matcher matcher = _importLinksToLayoutPattern.matcher(content);
 
 		while (matcher.find()) {
-			String oldLayoutId = matcher.group(1);
+			long oldLayoutId = GetterUtil.getLong(matcher.group(1));
 
-			String newLayoutId = oldLayoutId;
+			long newLayoutId = oldLayoutId;
 
 			String type = matcher.group(2);
 
@@ -1902,20 +1902,28 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 				if (layout == null) {
 					layout = LayoutUtil.fetchByG_P_L(
 						portletDataContext.getScopeGroupId(), privateLayout,
-						Long.valueOf(oldLayoutId));
+						oldLayoutId);
 				}
 
 				if (layout == null) {
 					if (_log.isWarnEnabled()) {
-						_log.warn(
-							"Unable to get layout with UUID " + layoutUuid +
-								", friendly URL " +	friendlyURL + ", or " +
-								"layoutId " + oldLayoutId + " in group " +
-									portletDataContext.getScopeGroupId());
+						StringBundler sb = new StringBundler(9);
+
+						sb.append("Unable to get layout with UUID ");
+						sb.append(layoutUuid);
+						sb.append(", friendly URL ");
+						sb.append(friendlyURL);
+						sb.append(", or ");
+						sb.append("layoutId ");
+						sb.append(oldLayoutId);
+						sb.append(" in group ");
+						sb.append(portletDataContext.getScopeGroupId());
+
+						_log.warn(sb.toString());
 					}
 				}
 				else {
-					newLayoutId = String.valueOf(layout.getLayoutId());
+					newLayoutId = layout.getLayoutId();
 				}
 			}
 			catch (SystemException e) {
@@ -1937,8 +1945,8 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 
 			String newLinkToLayout = StringUtil.replace(
 				oldLinkToLayout,
-				new String[] {sb.toString(), oldLayoutId},
-				new String[] {StringPool.BLANK, newLayoutId});
+				new String[] {sb.toString(), String.valueOf(oldLayoutId)},
+				new String[] {StringPool.BLANK, String.valueOf(newLayoutId)});
 
 			oldLinksToLayout.add(oldLinkToLayout);
 			newLinksToLayout.add(newLinkToLayout);
