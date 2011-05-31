@@ -341,8 +341,8 @@ public class PortalImpl implements Portal {
 
 		// Groups
 
-		String customSystemGroups[] =
-			PropsUtil.getArray(PropsKeys.SYSTEM_GROUPS);
+		String[] customSystemGroups = PropsUtil.getArray(
+			PropsKeys.SYSTEM_GROUPS);
 
 		if ((customSystemGroups == null) || (customSystemGroups.length == 0)) {
 			_allSystemGroups = GroupConstants.SYSTEM_GROUPS;
@@ -362,7 +362,7 @@ public class PortalImpl implements Portal {
 
 		// Regular roles
 
-		String customSystemRoles[] = PropsUtil.getArray(PropsKeys.SYSTEM_ROLES);
+		String[] customSystemRoles = PropsUtil.getArray(PropsKeys.SYSTEM_ROLES);
 
 		if ((customSystemRoles == null) || (customSystemRoles.length == 0)) {
 			_allSystemRoles = RoleConstants.SYSTEM_ROLES;
@@ -379,35 +379,10 @@ public class PortalImpl implements Portal {
 
 		Arrays.sort(_sortedSystemRoles, new StringComparator());
 
-		// Site roles
-
-		String customSystemSiteRoles[] =
-			PropsUtil.getArray(PropsKeys.SYSTEM_SITE_ROLES);
-
-		if ((customSystemSiteRoles == null) ||
-			(customSystemSiteRoles.length == 0)) {
-
-			_allSystemSiteRoles = RoleConstants.SYSTEM_SITE_ROLES;
-		}
-		else {
-			_allSystemSiteRoles = ArrayUtil.append(
-				RoleConstants.SYSTEM_SITE_ROLES,
-				customSystemSiteRoles);
-		}
-
-		_sortedSystemSiteRoles =
-			new String[_allSystemSiteRoles.length];
-
-		System.arraycopy(
-			_allSystemSiteRoles, 0, _sortedSystemSiteRoles, 0,
-				_allSystemSiteRoles.length);
-
-		Arrays.sort(_sortedSystemSiteRoles, new StringComparator());
-
 		// Organization roles
 
-		String customSystemOrganizationRoles[] =
-			PropsUtil.getArray(PropsKeys.SYSTEM_ORGANIZATION_ROLES);
+		String[] customSystemOrganizationRoles = PropsUtil.getArray(
+			PropsKeys.SYSTEM_ORGANIZATION_ROLES);
 
 		if ((customSystemOrganizationRoles == null) ||
 			(customSystemOrganizationRoles.length == 0)) {
@@ -426,9 +401,33 @@ public class PortalImpl implements Portal {
 
 		System.arraycopy(
 			_allSystemOrganizationRoles, 0, _sortedSystemOrganizationRoles, 0,
-				_allSystemOrganizationRoles.length);
+			_allSystemOrganizationRoles.length);
 
 		Arrays.sort(_sortedSystemOrganizationRoles, new StringComparator());
+
+		// Site roles
+
+		String[] customSystemSiteRoles = PropsUtil.getArray(
+			PropsKeys.SYSTEM_SITE_ROLES);
+
+		if ((customSystemSiteRoles == null) ||
+			(customSystemSiteRoles.length == 0)) {
+
+			_allSystemSiteRoles = RoleConstants.SYSTEM_SITE_ROLES;
+		}
+		else {
+			_allSystemSiteRoles = ArrayUtil.append(
+				RoleConstants.SYSTEM_SITE_ROLES, customSystemSiteRoles);
+		}
+
+		_sortedSystemSiteRoles =
+			new String[_allSystemSiteRoles.length];
+
+		System.arraycopy(
+			_allSystemSiteRoles, 0, _sortedSystemSiteRoles, 0,
+			_allSystemSiteRoles.length);
+
+		Arrays.sort(_sortedSystemSiteRoles, new StringComparator());
 
 		// Authentication token ignore actions and tokens
 

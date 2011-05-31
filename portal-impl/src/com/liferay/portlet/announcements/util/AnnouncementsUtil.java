@@ -50,18 +50,6 @@ public class AnnouncementsUtil {
 
 		scopes.put(_USER_CLASS_NAME_ID, new long[] {userId});
 
-		// Site announcements
-
-		List<Group> groupsList = new ArrayList<Group>();
-
-		List<Group> groups = GroupLocalServiceUtil.getUserGroups(userId, true);
-
-		if (!groups.isEmpty()) {
-			scopes.put(_GROUP_CLASS_NAME_ID, _getGroupIds(groups));
-
-			groupsList.addAll(groups);
-		}
-
 		// Organization announcements
 
 		List<Organization> organizations =
@@ -89,6 +77,18 @@ public class AnnouncementsUtil {
 			scopes.put(
 				_ORGANIZATION_CLASS_NAME_ID,
 				_getOrganizationIds(organizationsList));
+		}
+
+		// Site announcements
+
+		List<Group> groupsList = new ArrayList<Group>();
+
+		List<Group> groups = GroupLocalServiceUtil.getUserGroups(userId, true);
+
+		if (!groups.isEmpty()) {
+			scopes.put(_GROUP_CLASS_NAME_ID, _getGroupIds(groups));
+
+			groupsList.addAll(groups);
 		}
 
 		// User group announcements
