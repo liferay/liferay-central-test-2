@@ -117,7 +117,7 @@ portletURL.setParameter("tabs1", tabs1);
 			}
 			%>
 
-			<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
+			<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" type="approximate" />
 		</c:when>
 		<c:when test='<%= tabs1.equals("structures") %>'>
 			<aui:input name="groupId" type="hidden" />

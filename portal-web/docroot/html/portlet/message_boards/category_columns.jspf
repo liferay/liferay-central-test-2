@@ -36,7 +36,7 @@
 
 	List subcategories = MBCategoryServiceUtil.getCategories(scopeGroupId, curCategory.getCategoryId(), 0, 5);
 
-	int subcategoriesCount = MBCategoryServiceUtil.getCategoriesCount(scopeGroupId, curCategory.getCategoryId());
+	int subcategoriesCount = MBCategoryLocalServiceUtil.getCategoriesCount(scopeGroupId, curCategory.getCategoryId());
 
 	if (subcategoriesCount > 0) {
 		buffer.append("<br /><span class=\"subcategories\">");

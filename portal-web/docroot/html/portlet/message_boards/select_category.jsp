@@ -51,7 +51,7 @@ if (category != null) {
 
 	SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
 
-	int total = MBCategoryServiceUtil.getCategoriesCount(scopeGroupId, categoryId);
+	int total = MBCategoryLocalServiceUtil.getCategoriesCount(scopeGroupId, categoryId);
 
 	searchContainer.setTotal(total);
 
@@ -121,5 +121,5 @@ if (category != null) {
 		<aui:button onClick="<%= taglibSelectOnClick %>" value="choose-this-category" />
 	</aui:button-row>
 
-	<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
+	<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" type="approximate" />
 </aui:form>

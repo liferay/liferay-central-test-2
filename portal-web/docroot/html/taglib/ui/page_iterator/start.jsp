@@ -57,11 +57,11 @@ String deltaURL = HttpUtil.removeParameter(url, namespace + deltaParam);
 NumberFormat numberFormat = NumberFormat.getNumberInstance(locale);
 %>
 
-<c:if test='<%= type.equals("more") || type.equals("regular") || (type.equals("article") && (total > resultRowsSize)) %>'>
+<c:if test='<%= type.equals("approximate") || type.equals("more") || type.equals("regular") || (type.equals("article") && (total > resultRowsSize)) %>'>
 	<div class="taglib-page-iterator">
 </c:if>
 
-<c:if test='<%= type.equals("more") || type.equals("regular") %>'>
+<c:if test='<%= type.equals("approximate") || type.equals("more") || type.equals("regular") %>'>
 	<%@ include file="/html/taglib/ui/page_iterator/showing_x_results.jspf" %>
 </c:if>
 
@@ -165,7 +165,7 @@ NumberFormat numberFormat = NumberFormat.getNumberInstance(locale);
 						<%
 						String suffix = LanguageUtil.get(pageContext, "of") + StringPool.SPACE + numberFormat.format(pages);
 
-						if (type.equals("more")) {
+						if (type.equals("approximate") || type.equals("more")) {
 							suffix = StringPool.BLANK;
 						}
 						%>
@@ -206,7 +206,7 @@ NumberFormat numberFormat = NumberFormat.getNumberInstance(locale);
 		</c:if>
 
 		<div class="page-links">
-			<c:if test='<%= type.equals("more") || type.equals("regular") %>'>
+			<c:if test='<%= type.equals("approximate") || type.equals("more") || type.equals("regular") %>'>
 				<c:choose>
 					<c:when test="<%= cur != 1 %>">
 						<a class="first" href="<%= _getHREF(formName, curParam, 1, jsCall, url, urlAnchor) %>" target="<%= target %>">
@@ -232,12 +232,12 @@ NumberFormat numberFormat = NumberFormat.getNumberInstance(locale);
 				<c:when test="<%= cur != 1 %>">
 					<a class="previous" href="<%= _getHREF(formName, curParam, cur - 1, jsCall, url, urlAnchor) %>" target="<%= target %>">
 				</c:when>
-				<c:when test='<%= type.equals("more") || type.equals("regular") %>'>
+				<c:when test='<%= type.equals("approximate") || type.equals("more") || type.equals("regular") %>'>
 					<span class="previous">
 				</c:when>
 			</c:choose>
 
-			<c:if test='<%= (type.equals("more") || type.equals("regular") || cur != 1) %>'>
+			<c:if test='<%= (type.equals("approximate") || type.equals("more") || type.equals("regular") || cur != 1) %>'>
 				<liferay-ui:message key="previous" />
 			</c:if>
 
@@ -245,7 +245,7 @@ NumberFormat numberFormat = NumberFormat.getNumberInstance(locale);
 				<c:when test="<%= cur != 1 %>">
 					</a>
 				</c:when>
-				<c:when test='<%= type.equals("more") || type.equals("regular") %>'>
+				<c:when test='<%= type.equals("approximate") || type.equals("more") || type.equals("regular") %>'>
 					</span>
 				</c:when>
 			</c:choose>
@@ -254,14 +254,14 @@ NumberFormat numberFormat = NumberFormat.getNumberInstance(locale);
 				<c:when test="<%= cur != pages %>">
 					<a class="next" href="<%= _getHREF(formName, curParam, cur + 1, jsCall, url, urlAnchor) %>" target="<%= target %>">
 				</c:when>
-				<c:when test='<%= type.equals("more") || type.equals("regular") %>'>
+				<c:when test='<%= type.equals("approximate") || type.equals("more") || type.equals("regular") %>'>
 					<span class="next">
 				</c:when>
 			</c:choose>
 
-			<c:if test='<%= (type.equals("more") || type.equals("regular") || cur != pages) %>'>
+			<c:if test='<%= (type.equals("approximate") || type.equals("more") || type.equals("regular") || cur != pages) %>'>
 				<c:choose>
-					<c:when test='<%= type.equals("more") %>'>
+					<c:when test='<%= type.equals("approximate") || type.equals("more") %>'>
 						<liferay-ui:message key="more" />
 					</c:when>
 					<c:otherwise>
@@ -274,7 +274,7 @@ NumberFormat numberFormat = NumberFormat.getNumberInstance(locale);
 				<c:when test="<%= cur != pages %>">
 					</a>
 				</c:when>
-				<c:when test='<%= type.equals("more") || type.equals("regular") %>'>
+				<c:when test='<%= type.equals("approximate") || type.equals("more") || type.equals("regular") %>'>
 					</span>
 				</c:when>
 			</c:choose>
@@ -304,11 +304,11 @@ NumberFormat numberFormat = NumberFormat.getNumberInstance(locale);
 	</div>
 </c:if>
 
-<c:if test='<%= type.equals("more") || type.equals("regular") || (type.equals("article") && (total > resultRowsSize)) %>'>
+<c:if test='<%= type.equals("approximate") || type.equals("more") || type.equals("regular") || (type.equals("article") && (total > resultRowsSize)) %>'>
 	</div>
 </c:if>
 
-<c:if test='<%= type.equals("more") || type.equals("regular") && !themeDisplay.isFacebook() %>'>
+<c:if test='<%= type.equals("approximate") || type.equals("more") || type.equals("regular") && !themeDisplay.isFacebook() %>'>
 	<aui:script>
 		Liferay.provide(
 			window,

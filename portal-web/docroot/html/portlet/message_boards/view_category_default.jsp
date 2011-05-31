@@ -32,7 +32,7 @@ PortletURL portletURL = (PortletURL)request.getAttribute("view.jsp-portletURL");
 <liferay-ui:panel-container cssClass="message-boards-panels" extended="<%= false %>" id="messageBoardsPanelContainer" persistState="<%= true %>">
 
 	<%
-	int categoriesCount = MBCategoryServiceUtil.getCategoriesCount(scopeGroupId, categoryId);
+	int categoriesCount = MBCategoryLocalServiceUtil.getCategoriesCount(scopeGroupId, categoryId);
 	%>
 
 	<c:if test="<%= categoriesCount > 0 %>">
@@ -64,7 +64,7 @@ PortletURL portletURL = (PortletURL)request.getAttribute("view.jsp-portletURL");
 					<%@ include file="/html/portlet/message_boards/category_columns.jspf" %>
 				</liferay-ui:search-container-row>
 
-				<liferay-ui:search-iterator />
+				<liferay-ui:search-iterator type="approximate" />
 			</liferay-ui:search-container>
 		</liferay-ui:panel>
 	</c:if>
@@ -78,7 +78,7 @@ PortletURL portletURL = (PortletURL)request.getAttribute("view.jsp-portletURL");
 		>
 			<liferay-ui:search-container-results
 				results="<%= MBThreadServiceUtil.getThreads(scopeGroupId, categoryId, WorkflowConstants.STATUS_APPROVED, searchContainer.getStart(), searchContainer.getEnd()) %>"
-				total="<%= MBThreadServiceUtil.getThreadsCount(scopeGroupId, categoryId, WorkflowConstants.STATUS_APPROVED) %>"
+				total="<%= MBThreadLocalServiceUtil.getThreadsCount(scopeGroupId, categoryId, WorkflowConstants.STATUS_APPROVED) %>"
 			/>
 
 			<liferay-ui:search-container-row
@@ -118,7 +118,7 @@ PortletURL portletURL = (PortletURL)request.getAttribute("view.jsp-portletURL");
 				<%@ include file="/html/portlet/message_boards/thread_columns.jspf" %>
 			</liferay-ui:search-container-row>
 
-			<liferay-ui:search-iterator />
+			<liferay-ui:search-iterator type="approximate" />
 		</liferay-ui:search-container>
 	</liferay-ui:panel>
 </liferay-ui:panel-container>

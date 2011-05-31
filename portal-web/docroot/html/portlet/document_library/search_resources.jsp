@@ -265,7 +265,7 @@ if (Validator.isNull(displayStyle)) {
 
 			<c:if test='<%= !displayStyle.equals("list") &&  (results.getLength() > 0) %>'>
 				<div class="taglib-search-iterator-page-iterator-top">
-					<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
+					<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" type="approximate" />
 				</div>
 			</c:if>
 		</aui:form>

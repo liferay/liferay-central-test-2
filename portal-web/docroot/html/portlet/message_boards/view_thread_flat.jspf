@@ -39,7 +39,7 @@ if (threadView.equals(MBThreadConstants.THREAD_VIEW_FLAT)) {
 
 	searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, cur, delta, portletURL, null, null);
 
-	int total = MBMessageServiceUtil.getThreadMessagesCount(scopeGroupId, category.getCategoryId(), message.getThreadId(), WorkflowConstants.STATUS_ANY);
+	int total = MBMessageLocalServiceUtil.getThreadMessagesCount(message.getThreadId(), WorkflowConstants.STATUS_ANY);
 
 	searchContainer.setTotal(total);
 

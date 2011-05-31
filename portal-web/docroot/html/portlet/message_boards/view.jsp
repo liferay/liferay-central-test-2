@@ -249,7 +249,7 @@ request.setAttribute("view.jsp-portletURL", portletURL);
 			>
 				<liferay-ui:search-container-results
 					results="<%= MBCategoryServiceUtil.getSubscribedCategories(scopeGroupId, user.getUserId(), searchContainer.getStart(), searchContainer.getEnd()) %>"
-					total="<%= MBCategoryServiceUtil.getSubscribedCategoriesCount(scopeGroupId, user.getUserId()) %>"
+					total="<%= MBCategoryLocalServiceUtil.getSubscribedCategoriesCount(scopeGroupId, user.getUserId()) %>"
 				/>
 
 				<liferay-ui:search-container-row
@@ -268,7 +268,7 @@ request.setAttribute("view.jsp-portletURL", portletURL);
 					<%@ include file="/html/portlet/message_boards/subscribed_category_columns.jspf" %>
 				</liferay-ui:search-container-row>
 
-				<liferay-ui:search-iterator type="more" />
+				<liferay-ui:search-iterator type="approximate" />
 			</liferay-ui:search-container>
 		</c:if>
 
@@ -298,15 +298,15 @@ request.setAttribute("view.jsp-portletURL", portletURL);
 				<%
 				if (topLink.equals("my-posts")) {
 					results = MBThreadServiceUtil.getGroupThreads(scopeGroupId, groupThreadsUserId, WorkflowConstants.STATUS_ANY, searchContainer.getStart(), searchContainer.getEnd());
-					total = MBThreadServiceUtil.getGroupThreadsCount(scopeGroupId, groupThreadsUserId, WorkflowConstants.STATUS_ANY);
+					total = MBThreadLocalServiceUtil.getGroupThreadsCount(scopeGroupId, groupThreadsUserId, WorkflowConstants.STATUS_ANY);
 				}
 				else if (topLink.equals("my-subscriptions")) {
 					results = MBThreadServiceUtil.getGroupThreads(scopeGroupId, groupThreadsUserId, WorkflowConstants.STATUS_APPROVED, true, searchContainer.getStart(), searchContainer.getEnd());
-					total = MBThreadServiceUtil.getGroupThreadsCount(scopeGroupId, groupThreadsUserId, WorkflowConstants.STATUS_APPROVED, true);
+					total = MBThreadLocalServiceUtil.getGroupThreadsCount(scopeGroupId, groupThreadsUserId, WorkflowConstants.STATUS_APPROVED, true);
 				}
 				else if (topLink.equals("recent-posts")) {
 					results = MBThreadServiceUtil.getGroupThreads(scopeGroupId, groupThreadsUserId, WorkflowConstants.STATUS_APPROVED, false, false, searchContainer.getStart(), searchContainer.getEnd());
-					total = MBThreadServiceUtil.getGroupThreadsCount(scopeGroupId, groupThreadsUserId, WorkflowConstants.STATUS_APPROVED, false, false);
+					total = MBThreadLocalServiceUtil.getGroupThreadsCount(scopeGroupId, groupThreadsUserId, WorkflowConstants.STATUS_APPROVED, false, false);
 				}
 
 				pageContext.setAttribute("results", results);
@@ -352,7 +352,7 @@ request.setAttribute("view.jsp-portletURL", portletURL);
 				<%@ include file="/html/portlet/message_boards/user_thread_columns.jspf" %>
 			</liferay-ui:search-container-row>
 
-			<liferay-ui:search-iterator />
+			<liferay-ui:search-iterator type="approximate" />
 		</liferay-ui:search-container>
 
 		<c:if test='<%= topLink.equals("recent-posts") %>'>
@@ -405,7 +405,7 @@ request.setAttribute("view.jsp-portletURL", portletURL);
 						<liferay-ui:message key="num-of-posts" />:
 					</dt>
 					<dd>
-						<%= numberFormat.format(MBMessageServiceUtil.getGroupMessagesCount(scopeGroupId, WorkflowConstants.STATUS_APPROVED)) %>
+						<%= numberFormat.format(MBMessageLocalServiceUtil.getGroupMessagesCount(scopeGroupId, WorkflowConstants.STATUS_APPROVED)) %>
 					</dd>
 					<dt>
 						<liferay-ui:message key="num-of-participants" />:

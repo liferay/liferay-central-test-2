@@ -16,7 +16,7 @@
 
 <%
 if (Validator.isNull(searchTerms.getKeywords())) {
-	results = BlogsEntryLocalServiceUtil.getGroupEntries(scopeGroupId, WorkflowConstants.STATUS_ANY, searchContainer.getStart(), searchContainer.getEnd());
+	results = BlogsEntryServiceUtil.getGroupEntries(scopeGroupId, WorkflowConstants.STATUS_ANY, searchContainer.getStart(), searchContainer.getEnd());
 	total = BlogsEntryLocalServiceUtil.getGroupEntriesCount(scopeGroupId, WorkflowConstants.STATUS_ANY);
 }
 else {

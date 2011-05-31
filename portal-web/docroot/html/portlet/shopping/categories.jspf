@@ -51,7 +51,7 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 
 		SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, "cur1", SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
 
-		int total = ShoppingCategoryServiceUtil.getCategoriesCount(scopeGroupId, categoryId);
+		int total = ShoppingCategoryLocalServiceUtil.getCategoriesCount(scopeGroupId, categoryId);
 
 		searchContainer.setTotal(total);
 
@@ -91,7 +91,7 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 			ShoppingCategoryServiceUtil.getSubcategoryIds(subcategoryIds, scopeGroupId, curCategory.getCategoryId());
 
 			int categoriesCount = subcategoryIds.size() - 1;
-			int itemsCount = ShoppingItemServiceUtil.getCategoriesItemsCount(scopeGroupId, subcategoryIds);
+			int itemsCount = ShoppingItemLocalServiceUtil.getCategoriesItemsCount(scopeGroupId, subcategoryIds);
 
 			row.addText(String.valueOf(categoriesCount), rowURL);
 			row.addText(String.valueOf(itemsCount), rowURL);
@@ -160,7 +160,7 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 					</aui:button-row>
 				</c:if>
 
-				<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
+				<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" type="approximate" />
 			</liferay-ui:panel>
 		</liferay-ui:panel-container>
 	</aui:form>
@@ -207,7 +207,7 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 		searchContainer.setOrderByCol(orderByCol);
 		searchContainer.setOrderByType(orderByType);
 
-		int total = ShoppingItemServiceUtil.getItemsCount(scopeGroupId, categoryId);
+		int total = ShoppingItemLocalServiceUtil.getItemsCount(scopeGroupId, categoryId);
 
 		searchContainer.setTotal(total);
 
@@ -352,7 +352,7 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 					</aui:button-row>
 				</c:if>
 
-				<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
+				<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" type="approximate" />
 			</liferay-ui:panel>
 		</liferay-ui:panel-container>
 	</aui:form>
