@@ -16,13 +16,17 @@ package com.liferay.portlet;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Address;
+import com.liferay.portal.model.ListType;
 import com.liferay.portal.model.Phone;
 import com.liferay.portal.model.User;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.List;
 
 /**
  * @author Brian Wing Shun Chan
@@ -257,18 +261,40 @@ public class UserAttributes {
 	public UserAttributes(User user) {
 		_user = user;
 
-		/*List addresses = user.getAddresses();
+		try {
+			List<Address> addresses = user.getAddresses();
 
-		for (int i = 0; i < addresses.size(); i++) {
-			Address address = (Address)addresses.get(i);
+			for (Address address : addresses) {
+				ListType listType = address.getType();
 
-			if (address.getDescription().equalsIgnoreCase("home")) {
-				_homeAddress = address;
+				String listTypeName = listType.getName();
+
+				if (listTypeName.equals("business")) {
+					_bizAddress = address;
+				}
+				else if (listTypeName.equals("personal")) {
+					_homeAddress = address;
+				}
 			}
-			else if (address.getDescription().equalsIgnoreCase("business")) {
-				_bizAddress = address;
+
+			List<Phone> phones = user.getPhones();
+
+			for (Phone phone : phones) {
+				ListType listType = phone.getType();
+
+				String listTypeName = listType.getName();
+
+				if (listTypeName.equals("business")) {
+					_bizPhone = phone;
+				}
+				else if (listTypeName.equals("personal")) {
+					_homePhone = phone;
+				}
 			}
-		}*/
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
 	}
 
 	public String getValue(String name)
@@ -630,6 +656,8 @@ public class UserAttributes {
 			return null;
 		}
 	}
+
+	private static Log _log = LogFactoryUtil.getLog(UserAttributes.class);
 
 	private Address _bizAddress;
 	private Phone _bizPhone;

@@ -1002,6 +1002,11 @@ public class UserWrapper implements User {
 		return _user.getPasswordUnencrypted();
 	}
 
+	public java.util.List<com.liferay.portal.model.Phone> getPhones()
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _user.getPhones();
+	}
+
 	public java.lang.String getPortraitURL(
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -1159,6 +1164,11 @@ public class UserWrapper implements User {
 
 	public void updateSocialParticipationEquity(long groupId, double value) {
 		_user.updateSocialParticipationEquity(groupId, value);
+	}
+
+	public java.util.List<com.liferay.portal.model.Website> getWebsites()
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _user.getWebsites();
 	}
 
 	public User getWrappedUser() {

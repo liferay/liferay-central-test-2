@@ -118,6 +118,9 @@ public interface User extends UserModel {
 
 	public java.lang.String getPasswordUnencrypted();
 
+	public java.util.List<com.liferay.portal.model.Phone> getPhones()
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	public java.lang.String getPortraitURL(
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -216,4 +219,7 @@ public interface User extends UserModel {
 	public void updateSocialContributionEquity(long groupId, double value);
 
 	public void updateSocialParticipationEquity(long groupId, double value);
+
+	public java.util.List<com.liferay.portal.model.Website> getWebsites()
+		throws com.liferay.portal.kernel.exception.SystemException;
 }

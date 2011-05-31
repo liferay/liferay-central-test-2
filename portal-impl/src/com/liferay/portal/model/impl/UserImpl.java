@@ -43,11 +43,13 @@ import com.liferay.portal.model.GroupConstants;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.OrganizationConstants;
 import com.liferay.portal.model.PasswordPolicy;
+import com.liferay.portal.model.Phone;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.Team;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.UserConstants;
 import com.liferay.portal.model.UserGroup;
+import com.liferay.portal.model.Website;
 import com.liferay.portal.security.auth.EmailAddressGenerator;
 import com.liferay.portal.security.auth.EmailAddressGeneratorFactory;
 import com.liferay.portal.security.auth.FullNameGenerator;
@@ -58,9 +60,11 @@ import com.liferay.portal.service.ContactLocalServiceUtil;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.OrganizationLocalServiceUtil;
 import com.liferay.portal.service.PasswordPolicyLocalServiceUtil;
+import com.liferay.portal.service.PhoneLocalServiceUtil;
 import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.service.TeamLocalServiceUtil;
 import com.liferay.portal.service.UserGroupLocalServiceUtil;
+import com.liferay.portal.service.WebsiteLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.Portal;
 import com.liferay.portal.util.PropsUtil;
@@ -408,6 +412,11 @@ public class UserImpl extends UserModelImpl implements User {
 		return _passwordUnencrypted;
 	}
 
+	public List<Phone> getPhones() throws SystemException {
+		return PhoneLocalServiceUtil.getPhones(
+			getCompanyId(), Contact.class.getName(), getContactId());
+	}
+
 	public String getPortraitURL(ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
@@ -748,6 +757,11 @@ public class UserImpl extends UserModelImpl implements User {
 		}
 		while (!socialParticipationEquity.compareAndSet(
 					currentValue, newValue));
+	}
+
+	public List<Website> getWebsites() throws SystemException {
+		return WebsiteLocalServiceUtil.getWebsites(
+			getCompanyId(), Contact.class.getName(), getContactId());
 	}
 
 	private static final String _GET_MY_PLACES_CACHE_NAME = "GET_MY_PLACES";
