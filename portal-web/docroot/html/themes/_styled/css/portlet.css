@@ -41,9 +41,7 @@ body.portlet {
 	padding: 1px;
 }
 
-.ie .portlet-topper-toolbar .portlet-minimize-icon a img,
-.ie .portlet-topper-toolbar .portlet-maximize-icon a img,
-.ie .portlet-topper-toolbar .portlet-close-icon a img {
+.ie6 .portlet-topper-toolbar .icon {
 	height: 16px;
 	width: 16px;
 }

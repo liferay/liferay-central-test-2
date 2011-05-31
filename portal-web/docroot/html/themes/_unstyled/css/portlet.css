@@ -24,9 +24,7 @@ body.portlet {
 .portlet-topper-toolbar .nobr {
 }
 
-.ie .portlet-topper-toolbar .portlet-minimize-icon a img,
-.ie .portlet-topper-toolbar .portlet-maximize-icon a img,
-.ie .portlet-topper-toolbar .portlet-close-icon a img {
+.ie6 .portlet-topper-toolbar .icon {
 }
 
 .portlet-content, .portlet-minimized .portlet-content-container {
