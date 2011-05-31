@@ -447,10 +447,6 @@ public class ThemeDisplay implements Serializable {
 		return _urlLayoutTemplates;
 	}
 
-	public String getURLManageContent() {
-			return _urlManageContent;
-		}
-
 	public PortletURL getURLMyAccount() {
 		return _urlMyAccount;
 	}
@@ -473,6 +469,10 @@ public class ThemeDisplay implements Serializable {
 
 	public String getURLSignOut() {
 		return _urlSignOut;
+	}
+
+	public String getURLSiteContent() {
+		return _urlSiteContent;
 	}
 
 	public PortletURL getURLSiteMapSettings() {
@@ -608,6 +608,10 @@ public class ThemeDisplay implements Serializable {
 
 	public boolean isShowSignOutIcon() {
 		return _showSignOutIcon;
+	}
+
+	public boolean isShowSiteContentIcon() {
+		return _showSiteContentIcon;
 	}
 
 	public boolean isShowSiteMapSettingsIcon() {
@@ -1053,6 +1057,10 @@ public class ThemeDisplay implements Serializable {
 		_showSignOutIcon = showSignOutIcon;
 	}
 
+	public void setShowSiteContentIcon(boolean showSiteContentIcon) {
+		_showSiteContentIcon = showSiteContentIcon;
+	}
+
 	public void setShowSiteMapSettingsIcon(boolean showSiteMapSettingsIcon) {
 		_showSiteMapSettingsIcon = showSiteMapSettingsIcon;
 	}
@@ -1141,10 +1149,6 @@ public class ThemeDisplay implements Serializable {
 		_urlLayoutTemplates = urlLayoutTemplates;
 	}
 
-	public void setURLManageContent(String urlManageContent) {
-		_urlManageContent = urlManageContent;
-	}
-
 	public void setURLMyAccount(PortletURL urlMyAccount) {
 		_urlMyAccount = urlMyAccount;
 	}
@@ -1167,6 +1171,10 @@ public class ThemeDisplay implements Serializable {
 
 	public void setURLSignOut(String urlSignOut) {
 		_urlSignOut = urlSignOut;
+	}
+
+	public void setURLSiteContent(String urlSiteContent) {
+		_urlSiteContent = urlSiteContent;
 	}
 
 	public void setURLSiteMapSettings(PortletURL urlSiteMapSettings) {
@@ -1287,6 +1295,7 @@ public class ThemeDisplay implements Serializable {
 	private boolean _showPortalIcon;
 	private boolean _showSignInIcon;
 	private boolean _showSignOutIcon;
+	private boolean _showSiteContentIcon;
 	private boolean _showSiteMapSettingsIcon;
 	private boolean _showSiteSettingsIcon;
 	private boolean _showStagingIcon;
@@ -1310,13 +1319,13 @@ public class ThemeDisplay implements Serializable {
 	private String _urlCurrent = StringPool.BLANK;
 	private String _urlHome = StringPool.BLANK;
 	private String _urlLayoutTemplates = StringPool.BLANK;
-	private String _urlManageContent = StringPool.BLANK;
 	private transient PortletURL _urlMyAccount = null;
 	private transient PortletURL _urlPageSettings = null;
 	private String _urlPortal = StringPool.BLANK;
 	private transient PortletURL _urlPublishToLive = null;
 	private String _urlSignIn = StringPool.BLANK;
 	private String _urlSignOut = StringPool.BLANK;
+	private String _urlSiteContent = StringPool.BLANK;
 	private transient PortletURL _urlSiteMapSettings = null;
 	private transient PortletURL _urlSiteSettings = null;
 	private transient PortletURL _urlUpdateManager = null;

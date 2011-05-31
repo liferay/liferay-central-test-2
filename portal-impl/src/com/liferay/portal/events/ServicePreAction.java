@@ -84,6 +84,7 @@ import com.liferay.portal.service.permission.LayoutPermissionUtil;
 import com.liferay.portal.service.permission.LayoutPrototypePermissionUtil;
 import com.liferay.portal.service.permission.LayoutSetPrototypePermissionUtil;
 import com.liferay.portal.service.permission.OrganizationPermissionUtil;
+import com.liferay.portal.service.permission.PortletPermissionUtil;
 import com.liferay.portal.service.permission.UserPermissionUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.theme.ThemeDisplayFactory;
@@ -1584,6 +1585,27 @@ public class ServicePreAction extends Action {
 
 		// Icons
 
+		Group controlPanelGroup = GroupLocalServiceUtil.getGroup(
+			companyId, GroupConstants.CONTROL_PANEL);
+
+		long controlPanelPlid = LayoutLocalServiceUtil.getDefaultPlid(
+			controlPanelGroup.getGroupId(), true);
+
+		List<Portlet> siteContentPortlets = PortalUtil.getControlPanelPortlets(
+			PortletCategoryKeys.CONTENT, themeDisplay);
+
+		Portlet groupPagesPortlet = PortletLocalServiceUtil.getPortletById(
+			PortletKeys.GROUP_PAGES);
+		Portlet siteSettingsPortlet = PortletLocalServiceUtil.getPortletById(
+			PortletKeys.SITE_SETTINGS);
+
+		siteContentPortlets.remove(groupPagesPortlet);
+		siteContentPortlets.remove(siteSettingsPortlet);
+
+		boolean isShowSiteContentIcon = PortletPermissionUtil.contains(
+			permissionChecker, controlPanelGroup.getGroupId(), controlPanelPlid,
+			siteContentPortlets, ActionKeys.VIEW);
+
 		themeDisplay.setShowAddContentIcon(false);
 		themeDisplay.setShowControlPanelIcon(signedIn);
 		themeDisplay.setShowHomeIcon(true);
@@ -1592,6 +1614,7 @@ public class ServicePreAction extends Action {
 		themeDisplay.setShowPortalIcon(true);
 		themeDisplay.setShowSignInIcon(!signedIn);
 		themeDisplay.setShowSignOutIcon(signedIn);
+		themeDisplay.setShowSiteContentIcon(isShowSiteContentIcon);
 		themeDisplay.setShowStagingIcon(false);
 
 		// Session
@@ -1632,13 +1655,13 @@ public class ServicePreAction extends Action {
 
 		themeDisplay.setURLControlPanel(urlControlPanel);
 
-		String urlManageContent = urlControlPanel;
+		String siteContentURL = urlControlPanel;
 
-		urlManageContent = HttpUtil.addParameter(
-			urlManageContent, "controlPanelCategory",
+		siteContentURL = HttpUtil.addParameter(
+			siteContentURL, "controlPanelCategory",
 			PortletCategoryKeys.CONTENT);
 
-		themeDisplay.setURLManageContent(urlManageContent);
+		themeDisplay.setURLSiteContent(siteContentURL);
 
 		PortletURL createAccountURL = new PortletURLImpl(
 			request, PortletKeys.LOGIN, plid, PortletRequest.ACTION_PHASE);
@@ -1720,12 +1743,6 @@ public class ServicePreAction extends Action {
 					hasManageLayoutsPermission = false;
 				}
 			}
-
-			Group controlPanelGroup = GroupLocalServiceUtil.getGroup(
-				companyId, GroupConstants.CONTROL_PANEL);
-
-			long controlPanelPlid = LayoutLocalServiceUtil.getDefaultPlid(
-				controlPanelGroup.getGroupId(), true);
 
 			if (hasManageLayoutsPermission) {
 				themeDisplay.setShowPageSettingsIcon(true);
@@ -1906,6 +1923,7 @@ public class ServicePreAction extends Action {
 			themeDisplay.setShowPortalIcon(false);
 			themeDisplay.setShowSignInIcon(false);
 			themeDisplay.setShowSignOutIcon(false);
+			themeDisplay.setShowSiteContentIcon(false);
 			themeDisplay.setShowStagingIcon(false);
 		}
 

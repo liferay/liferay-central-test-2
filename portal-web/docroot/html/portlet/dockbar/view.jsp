@@ -111,7 +111,7 @@ for (String portletId : PropsValues.DOCKBAR_ADD_PORTLETS) {
 			</li>
 		</c:if>
 
-		<c:if test="<%= !group.isControlPanel() && themeDisplay.isShowControlPanelIcon() || themeDisplay.isShowPageSettingsIcon() || themeDisplay.isShowSiteSettingsIcon() || themeDisplay.isShowLayoutTemplatesIcon() %>">
+		<c:if test="<%= !group.isControlPanel() && (themeDisplay.isShowPageSettingsIcon() || themeDisplay.isShowSiteContentIcon() || themeDisplay.isShowSiteSettingsIcon() || themeDisplay.isShowLayoutTemplatesIcon()) %>">
 			<li class="manage-content has-submenu" id="<portlet:namespace />manageContent">
 				<a class="menu-button" href="javascript:;">
 					<span>
@@ -146,9 +146,9 @@ for (String portletId : PropsValues.DOCKBAR_ADD_PORTLETS) {
 								</li>
 							</c:if>
 
-							<c:if test="<%= themeDisplay.isShowControlPanelIcon() %>">
+							<c:if test="<%= themeDisplay.isShowSiteContentIcon() %>">
 								<li class="manage-site-content use-dialog">
-									<aui:a href="<%= themeDisplay.getURLManageContent() %>" label="site-content" title="manage-site-content" />
+									<aui:a href="<%= themeDisplay.getURLSiteContent() %>" label="site-content" title="manage-site-content" />
 								</li>
 							</c:if>
 
