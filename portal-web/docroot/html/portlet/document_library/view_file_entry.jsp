@@ -432,6 +432,14 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 					}
 					%>
 
+					<liferay-ui:custom-attributes-available className="<%= DLFileEntryConstants.getClassName() %>">
+						<liferay-ui:custom-attribute-list
+							className="<%= DLFileEntryConstants.getClassName() %>"
+							classPK="<%= (fileVersion != null) ? fileVersion.getFileVersionId() : 0 %>"
+							editable="<%= false %>"
+							label="<%= true %>"
+						/>
+					</liferay-ui:custom-attributes-available>
 				</div>
 
 				<%

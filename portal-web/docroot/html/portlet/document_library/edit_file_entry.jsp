@@ -287,6 +287,59 @@ else if (documentType != null) {
 			<c:if test="<%= folder.isSupportsMetadata() %>">
 				<aui:input name="description" />
 
+				<%
+				List<DLDocumentType> documentTypes = DLDocumentTypeServiceUtil.getDocumentTypes(scopeGroupId, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+				%>
+
+				<c:choose>
+					<c:when test="<%= !cmd.equals(Constants.ADD) %>">
+						<aui:select changesContext="<%= true %>" label="document-type" name="documentTypeId" onChange='<%= renderResponse.getNamespace() + "changeDocumentType();" %>'>
+							<aui:option label="none" value="0" />
+
+							<%
+							for (DLDocumentType curDocumentType : documentTypes) {
+							%>
+
+								<aui:option label="<%= curDocumentType.getName() %>" selected="<%= (documentTypeId == curDocumentType.getPrimaryKey()) %>" value="<%= curDocumentType.getPrimaryKey() %>" />
+
+							<%
+							}
+							%>
+
+						</aui:select>
+					</c:when>
+					<c:otherwise>
+						<aui:input name="documentTypeId" type="hidden" value="<%= documentTypeId %>" />
+					</c:otherwise>
+				</c:choose>
+
+				<%
+				if (documentTypeId > 0) {
+					try {
+						List<DDMStructure> ddmStructures = documentType.getDDMStructures();
+
+						for (DDMStructure ddmStructure : ddmStructures) {
+							Fields fields = null;
+
+							try {
+								DLDocumentMetadataSet documentMetadataSet = DLDocumentMetadataSetLocalServiceUtil.getDocumentMetadataSet(ddmStructure.getStructureId(), fileVersionId);
+
+								fields = StorageEngineUtil.getFields(documentMetadataSet.getClassPK());
+							}
+							catch (Exception e) {
+							}
+				%>
+
+							<%= DDMXSDUtil.getHTML(pageContext, ddmStructure.getXsd(), fields, String.valueOf(ddmStructure.getPrimaryKey())) %>
+
+				<%
+						}
+					}
+					catch (Exception e) {
+					}
+				}
+				%>
+
 				<liferay-ui:custom-attributes-available className="<%= DLFileEntryConstants.getClassName() %>">
 					<liferay-ui:custom-attribute-list
 						className="<%= DLFileEntryConstants.getClassName() %>"
@@ -316,59 +369,6 @@ else if (documentType != null) {
 				/>
 			</aui:fieldset>
 		</liferay-ui:panel>
-
-		<%
-		List<DLDocumentType> documentTypes = DLDocumentTypeServiceUtil.getDocumentTypes(scopeGroupId, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
-		%>
-
-		<c:choose>
-			<c:when test="<%= !cmd.equals(Constants.ADD) %>">
-				<aui:select changesContext="<%= true %>" label="document-type" name="documentTypeId" onChange='<%= renderResponse.getNamespace() + "changeDocumentType();" %>'>
-					<aui:option label="none" value="0" />
-
-					<%
-					for (DLDocumentType curDocumentType : documentTypes) {
-					%>
-
-						<aui:option label="<%= curDocumentType.getName() %>" selected="<%= (documentTypeId == curDocumentType.getPrimaryKey()) %>" value="<%= curDocumentType.getPrimaryKey() %>" />
-
-					<%
-					}
-					%>
-
-				</aui:select>
-			</c:when>
-			<c:otherwise>
-				<aui:input name="documentTypeId" type="hidden" value="<%= documentTypeId %>" />
-			</c:otherwise>
-		</c:choose>
-
-		<%
-		if (documentTypeId > 0) {
-			try {
-				List<DDMStructure> ddmStructures = documentType.getDDMStructures();
-
-				for (DDMStructure ddmStructure : ddmStructures) {
-					Fields fields = null;
-
-					try {
-						DLDocumentMetadataSet documentMetadataSet = DLDocumentMetadataSetLocalServiceUtil.getDocumentMetadataSet(ddmStructure.getStructureId(), fileVersionId);
-
-						fields = StorageEngineUtil.getFields(documentMetadataSet.getClassPK());
-					}
-					catch (Exception e) {
-					}
-		%>
-
-					<%= DDMXSDUtil.getHTML(pageContext, ddmStructure.getXsd(), fields, String.valueOf(ddmStructure.getPrimaryKey())) %>
-
-		<%
-				}
-			}
-			catch (Exception e) {
-			}
-		}
-		%>
 
 		<c:if test="<%= fileEntry == null %>">
 			<aui:field-wrapper label="permissions">
