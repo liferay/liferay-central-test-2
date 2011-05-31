@@ -80,3 +80,10 @@ String toolbarItem = ParamUtil.getString(request, "toolbarItem", "view");
 		<span class="lfr-toolbar-button export-button"><a href="javascript:<portlet:namespace />exportUsers();"><liferay-ui:message key="export-users" /></a></span>
 	</c:if>
 </div>
+
+<aui:script>
+	function <portlet:namespace />exportUsers() {
+		document.<portlet:namespace />fm.method = "post";
+		submitForm(document.<portlet:namespace />fm, "<portlet:actionURL><portlet:param name="struts_action" value="/enterprise_admin/export_users" /></portlet:actionURL>&etag=0&strip=0&compress=0", false);
+	}
+</aui:script>
