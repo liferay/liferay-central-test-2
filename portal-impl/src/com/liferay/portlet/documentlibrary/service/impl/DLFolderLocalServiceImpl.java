@@ -368,8 +368,7 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 
 		DLFolder dlFolder = dlFolderPersistence.findByPrimaryKey(folderId);
 
-		addFolderResources(
-			dlFolder, addGroupPermissions, addGuestPermissions);
+		addFolderResources(dlFolder, addGroupPermissions, addGuestPermissions);
 	}
 
 	protected void addFolderResources(

@@ -1499,7 +1499,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 		String articleURL = null;
 
 		boolean addGroupPermissions = creationStrategy.addGroupPermissions(
-				portletDataContext, article);
+			portletDataContext, article);
 		boolean addGuestPermissions = creationStrategy.addGuestPermissions(
 			portletDataContext, article);
 
@@ -2030,7 +2030,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 		}
 
 		boolean addGroupPermissions = creationStrategy.addGroupPermissions(
-				portletDataContext, structure);
+			portletDataContext, structure);
 		boolean addGuestPermissions = creationStrategy.addGuestPermissions(
 			portletDataContext, structure);
 
@@ -2157,7 +2157,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 		boolean formatXsl = false;
 
 		boolean addGroupPermissions = creationStrategy.addGroupPermissions(
-				portletDataContext, template);
+			portletDataContext, template);
 		boolean addGuestPermissions = creationStrategy.addGuestPermissions(
 			portletDataContext, template);
 
