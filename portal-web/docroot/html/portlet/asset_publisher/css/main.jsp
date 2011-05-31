@@ -102,6 +102,7 @@
 	.asset-small-image {
 		float: right;
 		padding-left: 0.5em;
+		width: 150px;
 	}
 
 	.asset-actions {
