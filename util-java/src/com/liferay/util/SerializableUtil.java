@@ -12,10 +12,11 @@
  * details.
  */
 
-package com.liferay.portal.kernel.util;
+package com.liferay.util;
 
 import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayInputStream;
 import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayOutputStream;
+import com.liferay.portal.kernel.util.StreamUtil;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -26,51 +27,48 @@ import java.io.ObjectOutputStream;
  */
 public class SerializableUtil {
 
-	public static Object deserialize(byte[] bytes)
-		throws ClassNotFoundException, IOException {
+	public static Object clone(Object object) {
+		return deserialize(serialize(object));
+	}
+
+	public static Object deserialize(byte[] bytes) {
 
 		ObjectInputStream ois = null;
 
 		try {
 			ois = new ObjectInputStream(new UnsyncByteArrayInputStream(bytes));
 
-			Object obj = ois.readObject();
-
-			ois.close();
-
-			ois = null;
-
-			return obj;
+			return ois.readObject();
+		}
+		catch (ClassNotFoundException e) {
+			throw new RuntimeException(e);
+		}
+		catch (IOException e) {
+			throw new RuntimeException(e);
 		}
 		finally {
-			if (ois != null) {
-				ois.close();
-			}
+			StreamUtil.cleanUp(ois);
 		}
 	}
 
-	public static byte[] serialize(Object obj) throws IOException {
+	public static byte[] serialize(Object obj) {
 		ObjectOutputStream oos = null;
 
-		try {
-			UnsyncByteArrayOutputStream ubaos =
-				new UnsyncByteArrayOutputStream();
+		UnsyncByteArrayOutputStream ubaos = new UnsyncByteArrayOutputStream();
 
+		try {
 			oos = new ObjectOutputStream(ubaos);
 
 			oos.writeObject(obj);
-
-			oos.close();
-
-			oos = null;
-
-			return ubaos.toByteArray();
+		}
+		catch (IOException e) {
+			throw new RuntimeException(e);
 		}
 		finally {
-			if (oos != null) {
-				oos.close();
-			}
+			StreamUtil.cleanUp(oos);
 		}
+
+		return ubaos.toByteArray();
 	}
 
 }

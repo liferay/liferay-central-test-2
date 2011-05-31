@@ -19,7 +19,7 @@ import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.MultiValueMap;
-import com.liferay.portal.kernel.util.SerializableUtil;
+import com.liferay.util.SerializableUtil;
 
 import java.io.File;
 import java.io.Serializable;
