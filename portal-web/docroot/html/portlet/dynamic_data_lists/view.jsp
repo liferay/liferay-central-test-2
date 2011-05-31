@@ -17,20 +17,58 @@
 <%@ include file="/html/portlet/dynamic_data_lists/init.jsp" %>
 
 <%
-String tabs1 = ParamUtil.getString(request, "tabs1", "lists");
-
 PortletURL portletURL = renderResponse.createRenderURL();
 
-portletURL.setParameter("tabs1", tabs1);
+portletURL.setParameter("struts_action", "/dynamic_data_lists/view");
 %>
 
-<liferay-ui:tabs
-	names="lists"
-	portletURL="<%= portletURL %>"
-/>
+<aui:form action="<%= portletURL.toString() %>" method="post" name="fm">
+	<aui:input name="<%= Constants.CMD %>" type="hidden" />
+	<aui:input name="redirect" type="hidden" value="<%= portletURL.toString() %>" />
 
-<c:choose>
-	<c:when test='<%= tabs1.equals("lists") %>'>
-		<liferay-util:include page="/html/portlet/dynamic_data_lists/view_record_sets.jsp" />
-	</c:when>
-</c:choose>
+	<liferay-util:include page="/html/portlet/dynamic_data_lists/toolbar.jsp">
+		<liferay-util:param name="toolbarItem" value="view-all" />
+	</liferay-util:include>
+
+	<liferay-ui:search-container
+		searchContainer="<%= new RecordSetSearch(renderRequest, portletURL) %>"
+	>
+
+		<%
+		RecordSetDisplayTerms displayTerms = (RecordSetDisplayTerms)searchContainer.getDisplayTerms();
+		RecordSetSearchTerms searchTerms = (RecordSetSearchTerms)searchContainer.getSearchTerms();
+		%>
+
+		<liferay-ui:search-form
+			page="/html/portlet/dynamic_data_lists/record_set_search.jsp"
+		/>
+
+		<liferay-ui:search-container-results>
+			<%@ include file="/html/portlet/dynamic_data_lists/record_set_search_results.jspf" %>
+		</liferay-ui:search-container-results>
+
+		<liferay-ui:search-container-row
+			className="com.liferay.portlet.dynamicdatalists.model.DDLRecordSet"
+			escapedModel="<%= true %>"
+			keyProperty="recordSetId"
+			modelVar="recordSet"
+		>
+			<liferay-portlet:renderURL varImpl="rowURL">
+				<portlet:param name="struts_action" value="/dynamic_data_lists/edit_record_set" />
+				<portlet:param name="redirect" value="<%= searchContainer.getIteratorURL().toString() %>" />
+				<portlet:param name="recordSetId" value="<%= String.valueOf(recordSet.getRecordSetId()) %>" />
+			</liferay-portlet:renderURL>
+
+			<%@ include file="/html/portlet/dynamic_data_lists/search_columns.jspf" %>
+
+			<liferay-ui:search-container-column-jsp
+				align="right"
+				path="/html/portlet/dynamic_data_lists/record_set_action.jsp"
+			/>
+		</liferay-ui:search-container-row>
+
+		<div class="separator"><!-- --></div>
+
+		<liferay-ui:search-iterator />
+	</liferay-ui:search-container>
+</aui:form>

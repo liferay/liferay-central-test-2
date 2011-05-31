@@ -105,12 +105,12 @@ String newRecordSetKey = ParamUtil.getString(request, "newRecordSetKey");
 
 		<aui:input name="description" />
 
-		<aui:field-wrapper label="definition">
+		<aui:field-wrapper label="data-definition">
 			<span id="<portlet:namespace />ddmStructureNameDisplay">
 				 <%= ddmStructureName %>
 			</span>
 
-			<aui:button name="selectDDMStructureButton" onClick='<%= renderResponse.getNamespace() + "openDDMStructureSelector();" %>' value="select" />
+			<aui:button name="selectDDMStructureButton" onClick='<%= renderResponse.getNamespace() + "openDDMPortlet();" %>' value="select" />
 		</aui:field-wrapper>
 
 		<aui:button-row>
@@ -122,15 +122,17 @@ String newRecordSetKey = ParamUtil.getString(request, "newRecordSetKey");
 </aui:form>
 
 <aui:script>
-	function <portlet:namespace />openDDMStructureSelector() {
-		Liferay.Util.openWindow(
+	function <portlet:namespace />openDDMPortlet() {
+		Liferay.Util.openDDMPortlet(
 			{
 				dialog: {
 					stack: false,
-					width:680
+					width:820
 				},
-				title: '<liferay-ui:message key="definition" />',
-				uri: '<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/dynamic_data_lists/select_dynamic_data_mapping_structure" /></portlet:renderURL>'
+				chooseCallback: '<portlet:namespace />selectDDMStructure',
+				structureName: 'data-definition',
+				structureType: 'com.liferay.portlet.dynamicdatalists.model.DDLRecordSet',
+				title: '<liferay-ui:message key="data-definitions" />'
 			}
 		);
 	}
