@@ -26,7 +26,7 @@ public class RoleConstants {
 	public static final String ORGANIZATION_ADMINISTRATOR =
 		"Organization Administrator";
 
-	public static final String ORGANIZATION_MEMBER = "Organization Member";
+	public static final String ORGANIZATION_USER = "Organization Member";
 
 	public static final String ORGANIZATION_OWNER = "Organization Owner";
 
@@ -41,7 +41,7 @@ public class RoleConstants {
 	public static final String SITE_OWNER = "Community Owner";
 
 	public static final String[] SYSTEM_ORGANIZATION_ROLES = {
-		ORGANIZATION_ADMINISTRATOR, ORGANIZATION_MEMBER, ORGANIZATION_OWNER
+		ORGANIZATION_ADMINISTRATOR, ORGANIZATION_USER, ORGANIZATION_OWNER
 	};
 
 	public static final String[] SYSTEM_ROLES = {

@@ -33,7 +33,7 @@ public class VerifyRole extends VerifyProcess {
 
 			try {
 				Role organizationMemberRole = RoleLocalServiceUtil.getRole(
-					companyId, RoleConstants.ORGANIZATION_MEMBER);
+					companyId, RoleConstants.ORGANIZATION_USER);
 
 				deleteImplicitAssociations(organizationMemberRole);
 			}

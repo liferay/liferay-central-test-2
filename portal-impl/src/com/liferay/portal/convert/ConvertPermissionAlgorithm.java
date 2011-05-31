@@ -704,7 +704,7 @@ public class ConvertPermissionAlgorithm extends ConvertProcess {
 				companyId,
 				new Role[] {
 					RoleLocalServiceUtil.getRole(
-						companyId, RoleConstants.ORGANIZATION_MEMBER),
+						companyId, RoleConstants.ORGANIZATION_USER),
 					RoleLocalServiceUtil.getRole(
 						companyId, RoleConstants.POWER_USER),
 					RoleLocalServiceUtil.getRole(

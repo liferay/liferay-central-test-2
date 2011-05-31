@@ -199,7 +199,7 @@ public class EnterpriseAdminImpl implements EnterpriseAdmin {
 
 			String name = groupRole.getName();
 
-			if (name.equals(RoleConstants.ORGANIZATION_MEMBER) ||
+			if (name.equals(RoleConstants.ORGANIZATION_USER) ||
 				name.equals(RoleConstants.SITE_MEMBER)) {
 
 				itr.remove();
@@ -300,7 +300,7 @@ public class EnterpriseAdminImpl implements EnterpriseAdmin {
 			String name = role.getName();
 
 			if (name.equals(RoleConstants.GUEST) ||
-				name.equals(RoleConstants.ORGANIZATION_MEMBER) ||
+				name.equals(RoleConstants.ORGANIZATION_USER) ||
 				name.equals(RoleConstants.OWNER) ||
 				name.equals(RoleConstants.SITE_MEMBER) ||
 				name.equals(RoleConstants.USER)) {
@@ -346,7 +346,7 @@ public class EnterpriseAdminImpl implements EnterpriseAdmin {
 
 			String name = role.getName();
 
-			if (name.equals(RoleConstants.ORGANIZATION_MEMBER) ||
+			if (name.equals(RoleConstants.ORGANIZATION_USER) ||
 				name.equals(RoleConstants.SITE_MEMBER)) {
 
 				itr.remove();

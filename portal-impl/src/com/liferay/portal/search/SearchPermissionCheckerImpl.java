@@ -157,7 +157,7 @@ public class SearchPermissionCheckerImpl implements SearchPermissionChecker {
 
 		if (group.isOrganization()) {
 			Role organizationMemberRole = RoleLocalServiceUtil.getRole(
-				group.getCompanyId(), RoleConstants.ORGANIZATION_MEMBER);
+				group.getCompanyId(), RoleConstants.ORGANIZATION_USER);
 
 			permissionQuery.addTerm(
 				Field.GROUP_ROLE_ID,

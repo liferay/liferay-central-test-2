@@ -24,7 +24,7 @@ PortletURL portletURL = (PortletURL)request.getAttribute("edit_permissions.jsp-p
 String systemRoleName = RoleConstants.OWNER;
 
 if (tabs2.equals("organizations")) {
-	systemRoleName = RoleConstants.ORGANIZATION_MEMBER;
+	systemRoleName = RoleConstants.ORGANIZATION_USER;
 }
 else if (tabs2.equals("sites")) {
 	systemRoleName = RoleConstants.SITE_MEMBER;

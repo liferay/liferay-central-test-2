@@ -443,7 +443,7 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 
 		if (group.isOrganization()) {
 			Role organizationMemberRole = RoleLocalServiceUtil.getRole(
-				group.getCompanyId(), RoleConstants.ORGANIZATION_MEMBER);
+				group.getCompanyId(), RoleConstants.ORGANIZATION_USER);
 
 			roles.add(organizationMemberRole);
 		}

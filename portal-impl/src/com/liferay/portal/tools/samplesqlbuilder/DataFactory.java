@@ -793,7 +793,7 @@ public class DataFactory {
 
 		role = newRole();
 
-		role.setName(RoleConstants.ORGANIZATION_MEMBER);
+		role.setName(RoleConstants.ORGANIZATION_USER);
 		role.setType(RoleConstants.TYPE_ORGANIZATION);
 
 		_roles.add(role);
