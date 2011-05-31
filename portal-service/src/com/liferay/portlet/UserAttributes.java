@@ -43,7 +43,8 @@ public class UserAttributes {
 
 	public static final String USER_BDATE_DAY = "user.bdate.ymd.day";
 
-	public static final String USER_BDATE_FRACTIONSECOND = "user.bdate.fractionsecond";
+	public static final String USER_BDATE_FRACTIONSECOND =
+		"user.bdate.fractionsecond";
 
 	public static final String USER_BDATE_HOUR = "user.bdate.hms.hour";
 
@@ -77,123 +78,181 @@ public class UserAttributes {
 
 	public static final String USER_NAME_NICKNAME = "user.name.nickName";
 
-	public static final String USER_HOME_INFO_POSTAL_NAME = "user.home-info.postal.name";
+	public static final String USER_HOME_INFO_POSTAL_NAME =
+		"user.home-info.postal.name";
 
-	public static final String USER_HOME_INFO_POSTAL_STREET = "user.home-info.postal.street";
+	public static final String USER_HOME_INFO_POSTAL_STREET =
+		"user.home-info.postal.street";
 
-	public static final String USER_HOME_INFO_POSTAL_CITY = "user.home-info.postal.city";
+	public static final String USER_HOME_INFO_POSTAL_CITY =
+		"user.home-info.postal.city";
 
-	public static final String USER_HOME_INFO_POSTAL_STATEPROV = "user.home-info.postal.stateprov";
+	public static final String USER_HOME_INFO_POSTAL_STATEPROV =
+		"user.home-info.postal.stateprov";
 
-	public static final String USER_HOME_INFO_POSTAL_POSTALCODE = "user.home-info.postal.postalcode";
+	public static final String USER_HOME_INFO_POSTAL_POSTALCODE =
+		"user.home-info.postal.postalcode";
 
-	public static final String USER_HOME_INFO_POSTAL_COUNTRY = "user.home-info.postal.country";
+	public static final String USER_HOME_INFO_POSTAL_COUNTRY =
+		"user.home-info.postal.country";
 
-	public static final String USER_HOME_INFO_POSTAL_ORGANIZATION = "user.home-info.postal.organization";
+	public static final String USER_HOME_INFO_POSTAL_ORGANIZATION =
+		"user.home-info.postal.organization";
 
-	public static final String USER_HOME_INFO_TELECOM_TELEPHONE_INTCODE = "user.home-info.telecom.telephone.intcode";
+	public static final String USER_HOME_INFO_TELECOM_TELEPHONE_INTCODE =
+		"user.home-info.telecom.telephone.intcode";
 
-	public static final String USER_HOME_INFO_TELECOM_TELEPHONE_LOCCODE = "user.home-info.telecom.telephone.loccode";
+	public static final String USER_HOME_INFO_TELECOM_TELEPHONE_LOCCODE =
+		"user.home-info.telecom.telephone.loccode";
 
-	public static final String USER_HOME_INFO_TELECOM_TELEPHONE_NUMBER = "user.home-info.telecom.telephone.number";
+	public static final String USER_HOME_INFO_TELECOM_TELEPHONE_NUMBER =
+		"user.home-info.telecom.telephone.number";
 
-	public static final String USER_HOME_INFO_TELECOM_TELEPHONE_EXT = "user.home-info.telecom.telephone.ext";
+	public static final String USER_HOME_INFO_TELECOM_TELEPHONE_EXT =
+		"user.home-info.telecom.telephone.ext";
 
-	public static final String USER_HOME_INFO_TELECOM_TELEPHONE_COMMENT = "user.home-info.telecom.telephone.comment";
+	public static final String USER_HOME_INFO_TELECOM_TELEPHONE_COMMENT =
+		"user.home-info.telecom.telephone.comment";
 
-	public static final String USER_HOME_INFO_TELECOM_FAX_INTCODE = "user.home-info.telecom.fax.intcode";
+	public static final String USER_HOME_INFO_TELECOM_FAX_INTCODE =
+		"user.home-info.telecom.fax.intcode";
 
-	public static final String USER_HOME_INFO_TELECOM_FAX_LOCCODE = "user.home-info.telecom.fax.loccode";
+	public static final String USER_HOME_INFO_TELECOM_FAX_LOCCODE =
+		"user.home-info.telecom.fax.loccode";
 
-	public static final String USER_HOME_INFO_TELECOM_FAX_NUMBER = "user.home-info.telecom.fax.number";
+	public static final String USER_HOME_INFO_TELECOM_FAX_NUMBER =
+		"user.home-info.telecom.fax.number";
 
-	public static final String USER_HOME_INFO_TELECOM_FAX_EXT = "user.home-info.telecom.fax.ext";
+	public static final String USER_HOME_INFO_TELECOM_FAX_EXT =
+		"user.home-info.telecom.fax.ext";
 
-	public static final String USER_HOME_INFO_TELECOM_FAX_COMMENT = "user.home-info.telecom.fax.comment";
+	public static final String USER_HOME_INFO_TELECOM_FAX_COMMENT =
+		"user.home-info.telecom.fax.comment";
 
-	public static final String USER_HOME_INFO_TELECOM_MOBILE_INTCODE = "user.home-info.telecom.mobile.intcode";
+	public static final String USER_HOME_INFO_TELECOM_MOBILE_INTCODE =
+		"user.home-info.telecom.mobile.intcode";
 
-	public static final String USER_HOME_INFO_TELECOM_MOBILE_LOCCODE = "user.home-info.telecom.mobile.loccode";
+	public static final String USER_HOME_INFO_TELECOM_MOBILE_LOCCODE =
+		"user.home-info.telecom.mobile.loccode";
 
-	public static final String USER_HOME_INFO_TELECOM_MOBILE_NUMBER = "user.home-info.telecom.mobile.number";
+	public static final String USER_HOME_INFO_TELECOM_MOBILE_NUMBER =
+		"user.home-info.telecom.mobile.number";
 
-	public static final String USER_HOME_INFO_TELECOM_MOBILE_EXT = "user.home-info.telecom.mobile.ext";
+	public static final String USER_HOME_INFO_TELECOM_MOBILE_EXT =
+		"user.home-info.telecom.mobile.ext";
 
-	public static final String USER_HOME_INFO_TELECOM_MOBILE_COMMENT = "user.home-info.telecom.mobile.comment";
+	public static final String USER_HOME_INFO_TELECOM_MOBILE_COMMENT =
+		"user.home-info.telecom.mobile.comment";
 
-	public static final String USER_HOME_INFO_TELECOM_PAGER_INTCODE = "user.home-info.telecom.pager.intcode";
+	public static final String USER_HOME_INFO_TELECOM_PAGER_INTCODE =
+		"user.home-info.telecom.pager.intcode";
 
-	public static final String USER_HOME_INFO_TELECOM_PAGER_LOCCODE = "user.home-info.telecom.pager.loccode";
+	public static final String USER_HOME_INFO_TELECOM_PAGER_LOCCODE =
+		"user.home-info.telecom.pager.loccode";
 
-	public static final String USER_HOME_INFO_TELECOM_PAGER_NUMBER = "user.home-info.telecom.pager.number";
+	public static final String USER_HOME_INFO_TELECOM_PAGER_NUMBER =
+		"user.home-info.telecom.pager.number";
 
-	public static final String USER_HOME_INFO_TELECOM_PAGER_EXT = "user.home-info.telecom.pager.ext";
+	public static final String USER_HOME_INFO_TELECOM_PAGER_EXT =
+		"user.home-info.telecom.pager.ext";
 
-	public static final String USER_HOME_INFO_TELECOM_PAGER_COMMENT = "user.home-info.telecom.pager.comment";
+	public static final String USER_HOME_INFO_TELECOM_PAGER_COMMENT =
+		"user.home-info.telecom.pager.comment";
 
-	public static final String USER_HOME_INFO_ONLINE_EMAIL = "user.home-info.online.email";
+	public static final String USER_HOME_INFO_ONLINE_EMAIL =
+		"user.home-info.online.email";
 
-	public static final String USER_HOME_INFO_ONLINE_URI = "user.home-info.online.uri";
+	public static final String USER_HOME_INFO_ONLINE_URI =
+		"user.home-info.online.uri";
 
-	public static final String USER_BUSINESS_INFO_POSTAL_NAME = "user.business-info.postal.name";
+	public static final String USER_BUSINESS_INFO_POSTAL_NAME =
+		"user.business-info.postal.name";
 
-	public static final String USER_BUSINESS_INFO_POSTAL_STREET = "user.business-info.postal.street";
+	public static final String USER_BUSINESS_INFO_POSTAL_STREET =
+		"user.business-info.postal.street";
 
-	public static final String USER_BUSINESS_INFO_POSTAL_CITY = "user.business-info.postal.city";
+	public static final String USER_BUSINESS_INFO_POSTAL_CITY =
+		"user.business-info.postal.city";
 
-	public static final String USER_BUSINESS_INFO_POSTAL_STATEPROV = "user.business-info.postal.stateprov";
+	public static final String USER_BUSINESS_INFO_POSTAL_STATEPROV =
+		"user.business-info.postal.stateprov";
 
-	public static final String USER_BUSINESS_INFO_POSTAL_POSTALCODE = "user.business-info.postal.postalcode";
+	public static final String USER_BUSINESS_INFO_POSTAL_POSTALCODE =
+		"user.business-info.postal.postalcode";
 
-	public static final String USER_BUSINESS_INFO_POSTAL_COUNTRY = "user.business-info.postal.country";
+	public static final String USER_BUSINESS_INFO_POSTAL_COUNTRY =
+		"user.business-info.postal.country";
 
-	public static final String USER_BUSINESS_INFO_POSTAL_ORGANIZATION = "user.business-info.postal.organization";
+	public static final String USER_BUSINESS_INFO_POSTAL_ORGANIZATION =
+		"user.business-info.postal.organization";
 
-	public static final String USER_BUSINESS_INFO_TELECOM_TELEPHONE_INTCODE = "user.business-info.telecom.telephone.intcode";
+	public static final String USER_BUSINESS_INFO_TELECOM_TELEPHONE_INTCODE =
+		"user.business-info.telecom.telephone.intcode";
 
-	public static final String USER_BUSINESS_INFO_TELECOM_TELEPHONE_LOCCODE = "user.business-info.telecom.telephone.loccode";
+	public static final String USER_BUSINESS_INFO_TELECOM_TELEPHONE_LOCCODE =
+		"user.business-info.telecom.telephone.loccode";
 
-	public static final String USER_BUSINESS_INFO_TELECOM_TELEPHONE_NUMBER = "user.business-info.telecom.telephone.number";
+	public static final String USER_BUSINESS_INFO_TELECOM_TELEPHONE_NUMBER =
+		"user.business-info.telecom.telephone.number";
 
-	public static final String USER_BUSINESS_INFO_TELECOM_TELEPHONE_EXT = "user.business-info.telecom.telephone.ext";
+	public static final String USER_BUSINESS_INFO_TELECOM_TELEPHONE_EXT =
+		"user.business-info.telecom.telephone.ext";
 
-	public static final String USER_BUSINESS_INFO_TELECOM_TELEPHONE_COMMENT = "user.business-info.telecom.telephone.comment";
+	public static final String USER_BUSINESS_INFO_TELECOM_TELEPHONE_COMMENT =
+		"user.business-info.telecom.telephone.comment";
 
-	public static final String USER_BUSINESS_INFO_TELECOM_FAX_INTCODE = "user.business-info.telecom.fax.intcode";
+	public static final String USER_BUSINESS_INFO_TELECOM_FAX_INTCODE =
+		"user.business-info.telecom.fax.intcode";
 
-	public static final String USER_BUSINESS_INFO_TELECOM_FAX_LOCCODE = "user.business-info.telecom.fax.loccode";
+	public static final String USER_BUSINESS_INFO_TELECOM_FAX_LOCCODE =
+		"user.business-info.telecom.fax.loccode";
 
-	public static final String USER_BUSINESS_INFO_TELECOM_FAX_NUMBER = "user.business-info.telecom.fax.number";
+	public static final String USER_BUSINESS_INFO_TELECOM_FAX_NUMBER =
+		"user.business-info.telecom.fax.number";
 
-	public static final String USER_BUSINESS_INFO_TELECOM_FAX_EXT = "user.business-info.telecom.fax.ext";
+	public static final String USER_BUSINESS_INFO_TELECOM_FAX_EXT =
+		"user.business-info.telecom.fax.ext";
 
-	public static final String USER_BUSINESS_INFO_TELECOM_FAX_COMMENT = "user.business-info.telecom.fax.comment";
+	public static final String USER_BUSINESS_INFO_TELECOM_FAX_COMMENT =
+		"user.business-info.telecom.fax.comment";
 
-	public static final String USER_BUSINESS_INFO_TELECOM_MOBILE_INTCODE = "user.business-info.telecom.mobile.intcode";
+	public static final String USER_BUSINESS_INFO_TELECOM_MOBILE_INTCODE =
+		"user.business-info.telecom.mobile.intcode";
 
-	public static final String USER_BUSINESS_INFO_TELECOM_MOBILE_LOCCODE = "user.business-info.telecom.mobile.loccode";
+	public static final String USER_BUSINESS_INFO_TELECOM_MOBILE_LOCCODE =
+		"user.business-info.telecom.mobile.loccode";
 
-	public static final String USER_BUSINESS_INFO_TELECOM_MOBILE_NUMBER = "user.business-info.telecom.mobile.number";
+	public static final String USER_BUSINESS_INFO_TELECOM_MOBILE_NUMBER =
+		"user.business-info.telecom.mobile.number";
 
-	public static final String USER_BUSINESS_INFO_TELECOM_MOBILE_EXT = "user.business-info.telecom.mobile.ext";
+	public static final String USER_BUSINESS_INFO_TELECOM_MOBILE_EXT =
+		"user.business-info.telecom.mobile.ext";
 
-	public static final String USER_BUSINESS_INFO_TELECOM_MOBILE_COMMENT = "user.business-info.telecom.mobile.comment";
+	public static final String USER_BUSINESS_INFO_TELECOM_MOBILE_COMMENT =
+		"user.business-info.telecom.mobile.comment";
 
-	public static final String USER_BUSINESS_INFO_TELECOM_PAGER_INTCODE = "user.business-info.telecom.pager.intcode";
+	public static final String USER_BUSINESS_INFO_TELECOM_PAGER_INTCODE =
+		"user.business-info.telecom.pager.intcode";
 
-	public static final String USER_BUSINESS_INFO_TELECOM_PAGER_LOCCODE = "user.business-info.telecom.pager.loccode";
+	public static final String USER_BUSINESS_INFO_TELECOM_PAGER_LOCCODE =
+		"user.business-info.telecom.pager.loccode";
 
-	public static final String USER_BUSINESS_INFO_TELECOM_PAGER_NUMBER = "user.business-info.telecom.pager.number";
+	public static final String USER_BUSINESS_INFO_TELECOM_PAGER_NUMBER =
+		"user.business-info.telecom.pager.number";
 
-	public static final String USER_BUSINESS_INFO_TELECOM_PAGER_EXT = "user.business-info.telecom.pager.ext";
+	public static final String USER_BUSINESS_INFO_TELECOM_PAGER_EXT =
+		"user.business-info.telecom.pager.ext";
 
-	public static final String USER_BUSINESS_INFO_TELECOM_PAGER_COMMENT = "user.business-info.telecom.pager.comment";
+	public static final String USER_BUSINESS_INFO_TELECOM_PAGER_COMMENT =
+		"user.business-info.telecom.pager.comment";
 
-	public static final String USER_BUSINESS_INFO_ONLINE_EMAIL = "user.business-info.online.email";
+	public static final String USER_BUSINESS_INFO_ONLINE_EMAIL =
+		"user.business-info.online.email";
 
-	public static final String USER_BUSINESS_INFO_ONLINE_URI = "user.business-info.online.uri";
+	public static final String USER_BUSINESS_INFO_ONLINE_URI =
+		"user.business-info.online.uri";
 
-    public static final String USER_LOGIN_ID = "user.login.id";
+	public static final String USER_LOGIN_ID = "user.login.id";
 
 	public UserAttributes(User user) {
 		_user = user;
@@ -572,11 +631,11 @@ public class UserAttributes {
 		}
 	}
 
-	private User _user;
-	private Address _homeAddress;
 	private Address _bizAddress;
-	private Calendar _calendar = new GregorianCalendar();
-	private Phone _homePhone;
 	private Phone _bizPhone;
+	private Calendar _calendar = new GregorianCalendar();
+	private Address _homeAddress;
+	private Phone _homePhone;
+	private User _user;
 
 }
