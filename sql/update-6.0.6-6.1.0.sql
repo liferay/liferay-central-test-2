@@ -316,7 +316,7 @@ alter table SocialEquityLog add extraData VARCHAR(255) null;
 update Role_ set name = 'Site Administrator' where name = 'Community Administrator';
 update Role_ set name = 'Site Member' where name = 'Community Member';
 update Role_ set name = 'Site Owner' where name = 'Community Owner';
-update Role_ set name = 'Organization Member' where name = 'Organization User';
+update Role_ set name = 'Organization User' where name = 'Organization Member';
 
 alter table User_ add status int;
 
