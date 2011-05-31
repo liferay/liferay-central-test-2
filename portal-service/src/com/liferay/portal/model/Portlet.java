@@ -586,8 +586,8 @@ public interface Portlet extends PortletModel {
 	* Gets the name of the category of the Control Panel where the portlet will
 	* be shown.
 	*
-	* @return the name of of the category of the Control Panel where the
-	portlet will be shown
+	* @return the name of the category of the Control Panel where the portlet
+	will be shown
 	*/
 	public java.lang.String getControlPanelEntryCategory();
 
@@ -673,15 +673,6 @@ public interface Portlet extends PortletModel {
 	* @return the asset type instances of the portlet
 	*/
 	public java.util.List<com.liferay.portlet.asset.model.AssetRendererFactory> getAssetRendererFactoryInstances();
-
-	/**
-	* Gets the names of the parameters that will be automatically propagated
-	* through the portlet.
-	*
-	* @return the names of of the parameters that will be automatically
-	propagated through the portlet
-	*/
-	public java.util.Set<java.lang.String> getAutoPropagatedParameters();
 
 	/**
 	* Gets the names of the classes that represent custom attribute displays
@@ -1221,6 +1212,25 @@ public interface Portlet extends PortletModel {
 	public void setPrivateSessionAttributes(boolean privateSessionAttributes);
 
 	/**
+	* Gets the names of the parameters that will be automatically propagated
+	* through the portlet.
+	*
+	* @return the names of the parameters that will be automatically propagated
+	through the portlet
+	*/
+	public java.util.Set<java.lang.String> getAutopropagatedParameters();
+
+	/**
+	* Sets the names of the parameters that will be automatically propagated
+	* through the portlet.
+	*
+	* @param autopropagatedParameters the names of the parameters that will be
+	automatically propagated through the portlet
+	*/
+	public void setAutopropagatedParameters(
+		java.util.Set<java.lang.String> autopropagatedParameters);
+
+	/**
 	* Gets the action timeout of the portlet.
 	*
 	* @return the action timeout of the portlet
@@ -1498,16 +1508,6 @@ public interface Portlet extends PortletModel {
 	resources for the portlet are added to a page
 	*/
 	public void setAddDefaultResource(boolean addDefaultResource);
-
-	/**
-	* Sets the names of the parameters that will be automatically propagated
-	* through the portlet.
-	*
-	* @param autoPropagatedParameters the names of of the parameters that will
-	be automatically propagated through the portlet
-	*/
-	public void setAutoPropagatedParameters(
-		java.util.Set<java.lang.String> autoPropagatedParameters);
 
 	/**
 	* Sets a string of ordered comma delimited portlet IDs.

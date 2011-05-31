@@ -1333,6 +1333,24 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 			GetterUtil.getBoolean(
 				portletElement.elementText("private-session-attributes"),
 				portletModel.isPrivateSessionAttributes()));
+
+		Element autopropagatedParametersElement = portletElement.element(
+			"autopropagated-parameters");
+
+		if (autopropagatedParametersElement != null) {
+			Set<String> autopropagatedParameters =
+				portletModel.getAutopropagatedParameters();
+
+			String[] autopropagatedParametersArray = StringUtil.split(
+				autopropagatedParametersElement.getText());
+
+			for (String autopropagatedParameter :
+					autopropagatedParametersArray) {
+
+				autopropagatedParameters.add(autopropagatedParameter);
+			}
+		}
+
 		portletModel.setActionTimeout(
 			GetterUtil.getInteger(
 				portletElement.elementText("action-timeout"),
@@ -1435,21 +1453,6 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 			GetterUtil.getBoolean(
 				portletElement.elementText("add-default-resource"),
 				portletModel.isAddDefaultResource()));
-
-		Element autoPropagatedParametersElement = portletElement.element(
-			"auto-propagated-parameters");
-
-		if (autoPropagatedParametersElement != null) {
-			Set<String> autoPropagatedParameters =
-				portletModel.getAutoPropagatedParameters();
-
-			for (String autoPropagatedParameter :
-				StringUtil.split(autoPropagatedParametersElement.getText())) {
-
-				autoPropagatedParameters.add(autoPropagatedParameter);
-			}
-		}
-
 		portletModel.setSystem(
 			GetterUtil.getBoolean(
 				portletElement.elementText("system"), portletModel.isSystem()));

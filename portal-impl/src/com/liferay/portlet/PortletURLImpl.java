@@ -106,19 +106,18 @@ public class PortletURLImpl
 		Portlet portlet = getPortlet();
 
 		if (portlet != null) {
-			Set<String> autoPropagatedParameters =
-				portlet.getAutoPropagatedParameters();
+			Set<String> autopropagatedParameters =
+				portlet.getAutopropagatedParameters();
 
-			for (String autoPropagatedParameter : autoPropagatedParameters) {
-				if (PortalUtil.isReservedParameter(autoPropagatedParameter)) {
+			for (String autopropagatedParameter : autopropagatedParameters) {
+				if (PortalUtil.isReservedParameter(autopropagatedParameter)) {
 					continue;
 				}
 
-				String value = ParamUtil.getString(
-					request, autoPropagatedParameter);
+				String value = request.getParameter(autopropagatedParameter);
 
-				if (Validator.isNotNull(value)) {
-					setParameter(autoPropagatedParameter, value);
+				if (value != null) {
+					setParameter(autopropagatedParameter, value);
 				}
 			}
 

@@ -68,6 +68,7 @@ import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -100,6 +101,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		_assetRendererFactoryClasses = new ArrayList<String>();
 		_customAttributesDisplayClasses = new ArrayList<String>();
 		_workflowHandlerClasses = new ArrayList<String>();
+		_autopropagatedParameters = new LinkedHashSet<String>();
 		_headerPortalCss = new ArrayList<String>();
 		_headerPortletCss = new ArrayList<String>();
 		_headerPortalJavaScript = new ArrayList<String>();
@@ -108,7 +110,6 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		_footerPortletCss = new ArrayList<String>();
 		_footerPortalJavaScript = new ArrayList<String>();
 		_footerPortletJavaScript = new ArrayList<String>();
-		_autoPropagatedParameters = new HashSet<String>();
 		_unlinkedRoles = new HashSet<String>();
 		_roleMappers = new LinkedHashMap<String, String>();
 		_initParams = new HashMap<String, String>();
@@ -151,14 +152,14 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		boolean popUpPrint, boolean layoutCacheable, boolean instanceable,
 		boolean remoteable, boolean scopeable, String userPrincipalStrategy,
 		boolean privateRequestAttributes, boolean privateSessionAttributes,
-		int actionTimeout, int renderTimeout, int renderWeight,
-		boolean ajaxable, List<String> headerPortalCss,
-		List<String> headerPortletCss, List<String> headerPortalJavaScript,
+		Set<String> autopropagatedParameters, int actionTimeout,
+		int renderTimeout, int renderWeight, boolean ajaxable,
+		List<String> headerPortalCss, List<String> headerPortletCss,
+		List<String> headerPortalJavaScript,
 		List<String> headerPortletJavaScript, List<String> footerPortalCss,
 		List<String> footerPortletCss, List<String> footerPortalJavaScript,
 		List<String> footerPortletJavaScript, String cssClassWrapper,
-		String facebookIntegration, boolean addDefaultResource,
-		Set<String> autoPropagatedParameters, String roles,
+		String facebookIntegration, boolean addDefaultResource, String roles,
 		Set<String> unlinkedRoles, Map<String, String> roleMappers,
 		boolean system, boolean active, boolean include,
 		Map<String, String> initParams, Integer expCache,
@@ -227,6 +228,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		_userPrincipalStrategy = userPrincipalStrategy;
 		_privateRequestAttributes = privateRequestAttributes;
 		_privateSessionAttributes = privateSessionAttributes;
+		_autopropagatedParameters = autopropagatedParameters;
 		_actionTimeout = actionTimeout;
 		_renderTimeout = renderTimeout;
 		_renderWeight = renderWeight;
@@ -243,7 +245,6 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		_facebookIntegration = facebookIntegration;
 		_scopeable = scopeable;
 		_addDefaultResource = addDefaultResource;
-		_autoPropagatedParameters = autoPropagatedParameters;
 		setRoles(roles);
 		_unlinkedRoles = unlinkedRoles;
 		_roleMappers = roleMappers;
@@ -1053,8 +1054,8 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 * Gets the name of the category of the Control Panel where the portlet will
 	 * be shown.
 	 *
-	 * @return the name of of the category of the Control Panel where the
-	 *         portlet will be shown
+	 * @return the name of the category of the Control Panel where the portlet
+	 *         will be shown
 	 */
 	public String getControlPanelEntryCategory() {
 		return _controlPanelEntryCategory;
@@ -1170,17 +1171,6 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		PortletBag portletBag = PortletBagPool.get(getRootPortletId());
 
 		return portletBag.getAssetRendererFactoryInstances();
-	}
-
-	/**
-	 * Gets the names of the parameters that will be automatically propagated
-	 * through the portlet.
-	 *
-	 * @return the names of of the parameters that will be automatically
-	 *         propagated through the portlet
-	 */
-	public Set<String> getAutoPropagatedParameters() {
-		return _autoPropagatedParameters;
 	}
 
 	/**
@@ -1876,6 +1866,30 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
+	 * Gets the names of the parameters that will be automatically propagated
+	 * through the portlet.
+	 *
+	 * @return the names of the parameters that will be automatically propagated
+	 *         through the portlet
+	 */
+	public Set<String> getAutopropagatedParameters() {
+		return _autopropagatedParameters;
+	}
+
+	/**
+	 * Sets the names of the parameters that will be automatically propagated
+	 * through the portlet.
+	 *
+	 * @param autopropagatedParameters the names of the parameters that will be
+	 *        automatically propagated through the portlet
+	 */
+	public void setAutopropagatedParameters(
+		Set<String> autopropagatedParameters) {
+
+		_autopropagatedParameters = autopropagatedParameters;
+	}
+
+	/**
 	 * Gets the action timeout of the portlet.
 	 *
 	 * @return the action timeout of the portlet
@@ -2214,19 +2228,6 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 */
 	public void setAddDefaultResource(boolean addDefaultResource) {
 		_addDefaultResource = addDefaultResource;
-	}
-
-	/**
-	 * Sets the names of the parameters that will be automatically propagated
-	 * through the portlet.
-	 *
-	 * @param autoPropagatedParameters the names of of the parameters that will
-	 *        be automatically propagated through the portlet
-	 */
-	public void setAutoPropagatedParameters(
-		Set<String> autoPropagatedParameters) {
-
-		_autoPropagatedParameters = autoPropagatedParameters;
 	}
 
 	/**
@@ -3142,16 +3143,16 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 			isMaximizeHelp(), isPopUpPrint(), isLayoutCacheable(),
 			isInstanceable(), isRemoteable(), isScopeable(),
 			getUserPrincipalStrategy(), isPrivateRequestAttributes(),
-			isPrivateSessionAttributes(), getActionTimeout(),
-			getRenderTimeout(), getRenderWeight(), isAjaxable(),
-			getHeaderPortalCss(), getHeaderPortletCss(),
+			isPrivateSessionAttributes(), getAutopropagatedParameters(),
+			getActionTimeout(), getRenderTimeout(), getRenderWeight(),
+			isAjaxable(), getHeaderPortalCss(), getHeaderPortletCss(),
 			getHeaderPortalJavaScript(), getHeaderPortletJavaScript(),
 			getFooterPortalCss(), getFooterPortletCss(),
 			getFooterPortalJavaScript(), getFooterPortletJavaScript(),
 			getCssClassWrapper(), getFacebookIntegration(),
-			isAddDefaultResource(), getAutoPropagatedParameters(), getRoles(),
-			getUnlinkedRoles(), getRoleMappers(), isSystem(), isActive(),
-			isInclude(), getInitParams(), getExpCache(), getPortletModes(),
+			isAddDefaultResource(), getRoles(), getUnlinkedRoles(),
+			getRoleMappers(), isSystem(), isActive(), isInclude(),
+			getInitParams(), getExpCache(), getPortletModes(),
 			getWindowStates(), getSupportedLocales(), getResourceBundle(),
 			getPortletInfo(), getPortletFilters(), getProcessingEvents(),
 			getPublishingEvents(), getPublicRenderParameters(),
@@ -3495,6 +3496,12 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	private boolean _privateSessionAttributes = true;
 
 	/**
+	 * The names of the parameters that will be automatically propagated through
+	 * the portlet.
+	 */
+	private Set<String> _autopropagatedParameters;
+
+	/**
 	 * The action timeout of the portlet.
 	 */
 	private int _actionTimeout;
@@ -3579,11 +3586,6 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 * page.
 	 */
 	private boolean _addDefaultResource;
-
-	/**
-	 * The automatically propagated parameters names.
-	 */
-	private Set<String> _autoPropagatedParameters;
 
 	/**
 	 * An array of required roles of the portlet.

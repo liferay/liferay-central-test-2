@@ -924,8 +924,8 @@ public class PortletWrapper implements Portlet {
 	* Gets the name of the category of the Control Panel where the portlet will
 	* be shown.
 	*
-	* @return the name of of the category of the Control Panel where the
-	portlet will be shown
+	* @return the name of the category of the Control Panel where the portlet
+	will be shown
 	*/
 	public java.lang.String getControlPanelEntryCategory() {
 		return _portlet.getControlPanelEntryCategory();
@@ -1030,17 +1030,6 @@ public class PortletWrapper implements Portlet {
 	*/
 	public java.util.List<com.liferay.portlet.asset.model.AssetRendererFactory> getAssetRendererFactoryInstances() {
 		return _portlet.getAssetRendererFactoryInstances();
-	}
-
-	/**
-	* Gets the names of the parameters that will be automatically propagated
-	* through the portlet.
-	*
-	* @return the names of of the parameters that will be automatically
-	propagated through the portlet
-	*/
-	public java.util.Set<java.lang.String> getAutoPropagatedParameters() {
-		return _portlet.getAutoPropagatedParameters();
 	}
 
 	/**
@@ -1707,6 +1696,29 @@ public class PortletWrapper implements Portlet {
 	}
 
 	/**
+	* Gets the names of the parameters that will be automatically propagated
+	* through the portlet.
+	*
+	* @return the names of the parameters that will be automatically propagated
+	through the portlet
+	*/
+	public java.util.Set<java.lang.String> getAutopropagatedParameters() {
+		return _portlet.getAutopropagatedParameters();
+	}
+
+	/**
+	* Sets the names of the parameters that will be automatically propagated
+	* through the portlet.
+	*
+	* @param autopropagatedParameters the names of the parameters that will be
+	automatically propagated through the portlet
+	*/
+	public void setAutopropagatedParameters(
+		java.util.Set<java.lang.String> autopropagatedParameters) {
+		_portlet.setAutopropagatedParameters(autopropagatedParameters);
+	}
+
+	/**
 	* Gets the action timeout of the portlet.
 	*
 	* @return the action timeout of the portlet
@@ -2047,18 +2059,6 @@ public class PortletWrapper implements Portlet {
 	*/
 	public void setAddDefaultResource(boolean addDefaultResource) {
 		_portlet.setAddDefaultResource(addDefaultResource);
-	}
-
-	/**
-	* Sets the names of the parameters that will be automatically propagated
-	* through the portlet.
-	*
-	* @param autoPropagatedParameters the names of of the parameters that will
-	be automatically propagated through the portlet
-	*/
-	public void setAutoPropagatedParameters(
-		java.util.Set<java.lang.String> autoPropagatedParameters) {
-		_portlet.setAutoPropagatedParameters(autoPropagatedParameters);
 	}
 
 	/**
