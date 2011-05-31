@@ -273,11 +273,11 @@ public class AssetCategoryLocalServiceWrapper
 
 	public void addCategoryResources(
 		com.liferay.portlet.asset.model.AssetCategory category,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		boolean addGroupPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		_assetCategoryLocalService.addCategoryResources(category,
-			addCommunityPermissions, addGuestPermissions);
+			addGroupPermissions, addGuestPermissions);
 	}
 
 	public void addCategoryResources(

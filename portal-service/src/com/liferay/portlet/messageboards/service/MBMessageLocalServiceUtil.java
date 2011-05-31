@@ -317,11 +317,11 @@ public class MBMessageLocalServiceUtil {
 	}
 
 	public static void addMessageResources(long messageId,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		boolean addGroupPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		getService()
-			.addMessageResources(messageId, addCommunityPermissions,
+			.addMessageResources(messageId, addGroupPermissions,
 			addGuestPermissions);
 	}
 
@@ -337,11 +337,11 @@ public class MBMessageLocalServiceUtil {
 
 	public static void addMessageResources(
 		com.liferay.portlet.messageboards.model.MBMessage message,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		boolean addGroupPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		getService()
-			.addMessageResources(message, addCommunityPermissions,
+			.addMessageResources(message, addGroupPermissions,
 			addGuestPermissions);
 	}
 

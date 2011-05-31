@@ -273,21 +273,21 @@ public class JournalFeedLocalServiceWrapper implements JournalFeedLocalService {
 			feedVersion, serviceContext);
 	}
 
-	public void addFeedResources(long feedId, boolean addCommunityPermissions,
+	public void addFeedResources(long feedId, boolean addGroupPermissions,
 		boolean addGuestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		_journalFeedLocalService.addFeedResources(feedId,
-			addCommunityPermissions, addGuestPermissions);
+			addGroupPermissions, addGuestPermissions);
 	}
 
 	public void addFeedResources(
 		com.liferay.portlet.journal.model.JournalFeed feed,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		boolean addGroupPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		_journalFeedLocalService.addFeedResources(feed,
-			addCommunityPermissions, addGuestPermissions);
+			addGroupPermissions, addGuestPermissions);
 	}
 
 	public void addFeedResources(long feedId,

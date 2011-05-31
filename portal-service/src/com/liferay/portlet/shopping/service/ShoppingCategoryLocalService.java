@@ -232,7 +232,7 @@ public interface ShoppingCategoryLocalService {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public void addCategoryResources(long categoryId,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		boolean addGroupPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -244,7 +244,7 @@ public interface ShoppingCategoryLocalService {
 
 	public void addCategoryResources(
 		com.liferay.portlet.shopping.model.ShoppingCategory category,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		boolean addGroupPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 

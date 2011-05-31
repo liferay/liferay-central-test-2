@@ -265,11 +265,11 @@ public class SCProductEntryLocalServiceUtil {
 	}
 
 	public static void addProductEntryResources(long productEntryId,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		boolean addGroupPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		getService()
-			.addProductEntryResources(productEntryId, addCommunityPermissions,
+			.addProductEntryResources(productEntryId, addGroupPermissions,
 			addGuestPermissions);
 	}
 
@@ -285,11 +285,11 @@ public class SCProductEntryLocalServiceUtil {
 
 	public static void addProductEntryResources(
 		com.liferay.portlet.softwarecatalog.model.SCProductEntry productEntry,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		boolean addGroupPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		getService()
-			.addProductEntryResources(productEntry, addCommunityPermissions,
+			.addProductEntryResources(productEntry, addGroupPermissions,
 			addGuestPermissions);
 	}
 

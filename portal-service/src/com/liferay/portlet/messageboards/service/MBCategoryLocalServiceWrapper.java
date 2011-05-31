@@ -279,11 +279,11 @@ public class MBCategoryLocalServiceWrapper implements MBCategoryLocalService {
 	}
 
 	public void addCategoryResources(long categoryId,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		boolean addGroupPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		_mbCategoryLocalService.addCategoryResources(categoryId,
-			addCommunityPermissions, addGuestPermissions);
+			addGroupPermissions, addGuestPermissions);
 	}
 
 	public void addCategoryResources(long categoryId,
@@ -297,11 +297,11 @@ public class MBCategoryLocalServiceWrapper implements MBCategoryLocalService {
 
 	public void addCategoryResources(
 		com.liferay.portlet.messageboards.model.MBCategory category,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		boolean addGroupPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		_mbCategoryLocalService.addCategoryResources(category,
-			addCommunityPermissions, addGuestPermissions);
+			addGroupPermissions, addGuestPermissions);
 	}
 
 	public void addCategoryResources(

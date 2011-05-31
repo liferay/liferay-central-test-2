@@ -248,7 +248,7 @@ public interface BookmarksFolderLocalService {
 
 	public void addFolderResources(
 		com.liferay.portlet.bookmarks.model.BookmarksFolder folder,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		boolean addGroupPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -260,7 +260,7 @@ public interface BookmarksFolderLocalService {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public void addFolderResources(long folderId,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		boolean addGroupPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 

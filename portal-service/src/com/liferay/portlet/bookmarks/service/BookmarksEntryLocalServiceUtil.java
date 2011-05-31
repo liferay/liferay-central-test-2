@@ -277,11 +277,11 @@ public class BookmarksEntryLocalServiceUtil {
 
 	public static void addEntryResources(
 		com.liferay.portlet.bookmarks.model.BookmarksEntry entry,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		boolean addGroupPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		getService()
-			.addEntryResources(entry, addCommunityPermissions,
+			.addEntryResources(entry, addGroupPermissions,
 			addGuestPermissions);
 	}
 
@@ -296,11 +296,11 @@ public class BookmarksEntryLocalServiceUtil {
 	}
 
 	public static void addEntryResources(long entryId,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		boolean addGroupPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		getService()
-			.addEntryResources(entryId, addCommunityPermissions,
+			.addEntryResources(entryId, addGroupPermissions,
 			addGuestPermissions);
 	}
 

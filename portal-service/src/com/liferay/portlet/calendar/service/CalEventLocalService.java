@@ -252,7 +252,7 @@ public interface CalEventLocalService {
 
 	public void addEventResources(
 		com.liferay.portlet.calendar.model.CalEvent event,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		boolean addGroupPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -264,7 +264,7 @@ public interface CalEventLocalService {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public void addEventResources(long eventId,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		boolean addGroupPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 

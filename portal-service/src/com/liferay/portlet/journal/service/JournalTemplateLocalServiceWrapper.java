@@ -276,20 +276,20 @@ public class JournalTemplateLocalServiceWrapper
 	}
 
 	public void addTemplateResources(long groupId, java.lang.String templateId,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		boolean addGroupPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		_journalTemplateLocalService.addTemplateResources(groupId, templateId,
-			addCommunityPermissions, addGuestPermissions);
+			addGroupPermissions, addGuestPermissions);
 	}
 
 	public void addTemplateResources(
 		com.liferay.portlet.journal.model.JournalTemplate template,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		boolean addGroupPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		_journalTemplateLocalService.addTemplateResources(template,
-			addCommunityPermissions, addGuestPermissions);
+			addGroupPermissions, addGuestPermissions);
 	}
 
 	public void addTemplateResources(long groupId, java.lang.String templateId,

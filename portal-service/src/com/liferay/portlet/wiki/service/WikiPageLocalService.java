@@ -264,7 +264,7 @@ public interface WikiPageLocalService {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public void addPageResources(long nodeId, java.lang.String title,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		boolean addGroupPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -275,7 +275,7 @@ public interface WikiPageLocalService {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public void addPageResources(com.liferay.portlet.wiki.model.WikiPage page,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		boolean addGroupPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 

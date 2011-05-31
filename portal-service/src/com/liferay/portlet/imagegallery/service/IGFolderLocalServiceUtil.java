@@ -276,11 +276,11 @@ public class IGFolderLocalServiceUtil {
 
 	public static void addFolderResources(
 		com.liferay.portlet.imagegallery.model.IGFolder folder,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		boolean addGroupPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		getService()
-			.addFolderResources(folder, addCommunityPermissions,
+			.addFolderResources(folder, addGroupPermissions,
 			addGuestPermissions);
 	}
 
@@ -295,11 +295,11 @@ public class IGFolderLocalServiceUtil {
 	}
 
 	public static void addFolderResources(long folderId,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		boolean addGroupPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		getService()
-			.addFolderResources(folderId, addCommunityPermissions,
+			.addFolderResources(folderId, addGroupPermissions,
 			addGuestPermissions);
 	}
 

@@ -301,11 +301,11 @@ public class IGImageLocalServiceUtil {
 
 	public static void addImageResources(
 		com.liferay.portlet.imagegallery.model.IGImage image,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		boolean addGroupPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		getService()
-			.addImageResources(image, addCommunityPermissions,
+			.addImageResources(image, addGroupPermissions,
 			addGuestPermissions);
 	}
 
@@ -320,11 +320,11 @@ public class IGImageLocalServiceUtil {
 	}
 
 	public static void addImageResources(long imageId,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		boolean addGroupPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		getService()
-			.addImageResources(imageId, addCommunityPermissions,
+			.addImageResources(imageId, addGroupPermissions,
 			addGuestPermissions);
 	}
 

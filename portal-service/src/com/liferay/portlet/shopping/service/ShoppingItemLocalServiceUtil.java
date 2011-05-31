@@ -279,11 +279,11 @@ public class ShoppingItemLocalServiceUtil {
 	}
 
 	public static void addItemResources(long itemId,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		boolean addGroupPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		getService()
-			.addItemResources(itemId, addCommunityPermissions,
+			.addItemResources(itemId, addGroupPermissions,
 			addGuestPermissions);
 	}
 
@@ -298,11 +298,11 @@ public class ShoppingItemLocalServiceUtil {
 
 	public static void addItemResources(
 		com.liferay.portlet.shopping.model.ShoppingItem item,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		boolean addGroupPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		getService()
-			.addItemResources(item, addCommunityPermissions, addGuestPermissions);
+			.addItemResources(item, addGroupPermissions, addGuestPermissions);
 	}
 
 	public static void addItemResources(

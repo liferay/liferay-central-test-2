@@ -247,7 +247,7 @@ public interface IGFolderLocalService {
 
 	public void addFolderResources(
 		com.liferay.portlet.imagegallery.model.IGFolder folder,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		boolean addGroupPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -259,7 +259,7 @@ public interface IGFolderLocalService {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public void addFolderResources(long folderId,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		boolean addGroupPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 

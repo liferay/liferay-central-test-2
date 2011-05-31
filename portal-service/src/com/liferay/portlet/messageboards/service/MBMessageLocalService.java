@@ -274,7 +274,7 @@ public interface MBMessageLocalService {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public void addMessageResources(long messageId,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		boolean addGroupPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -286,7 +286,7 @@ public interface MBMessageLocalService {
 
 	public void addMessageResources(
 		com.liferay.portlet.messageboards.model.MBMessage message,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		boolean addGroupPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 

@@ -280,11 +280,11 @@ public class DDMStructureLocalServiceUtil {
 
 	public static void addStructureResources(
 		com.liferay.portlet.dynamicdatamapping.model.DDMStructure structure,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		boolean addGroupPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		getService()
-			.addStructureResources(structure, addCommunityPermissions,
+			.addStructureResources(structure, addGroupPermissions,
 			addGuestPermissions);
 	}
 

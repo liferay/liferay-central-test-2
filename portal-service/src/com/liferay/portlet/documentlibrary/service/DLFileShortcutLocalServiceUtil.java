@@ -276,11 +276,11 @@ public class DLFileShortcutLocalServiceUtil {
 
 	public static void addFileShortcutResources(
 		com.liferay.portlet.documentlibrary.model.DLFileShortcut fileShortcut,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		boolean addGroupPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		getService()
-			.addFileShortcutResources(fileShortcut, addCommunityPermissions,
+			.addFileShortcutResources(fileShortcut, addGroupPermissions,
 			addGuestPermissions);
 	}
 
@@ -296,11 +296,11 @@ public class DLFileShortcutLocalServiceUtil {
 	}
 
 	public static void addFileShortcutResources(long fileShortcutId,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		boolean addGroupPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		getService()
-			.addFileShortcutResources(fileShortcutId, addCommunityPermissions,
+			.addFileShortcutResources(fileShortcutId, addGroupPermissions,
 			addGuestPermissions);
 	}
 

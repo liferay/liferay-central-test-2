@@ -280,11 +280,11 @@ public class DDLRecordSetLocalServiceUtil {
 
 	public static void addRecordSetResources(
 		com.liferay.portlet.dynamicdatalists.model.DDLRecordSet recordSet,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		boolean addGroupPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		getService()
-			.addRecordSetResources(recordSet, addCommunityPermissions,
+			.addRecordSetResources(recordSet, addGroupPermissions,
 			addGuestPermissions);
 	}
 

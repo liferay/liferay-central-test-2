@@ -282,11 +282,11 @@ public class BlogsEntryLocalServiceUtil {
 
 	public static void addEntryResources(
 		com.liferay.portlet.blogs.model.BlogsEntry entry,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		boolean addGroupPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		getService()
-			.addEntryResources(entry, addCommunityPermissions,
+			.addEntryResources(entry, addGroupPermissions,
 			addGuestPermissions);
 	}
 
@@ -301,11 +301,11 @@ public class BlogsEntryLocalServiceUtil {
 	}
 
 	public static void addEntryResources(long entryId,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		boolean addGroupPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		getService()
-			.addEntryResources(entryId, addCommunityPermissions,
+			.addEntryResources(entryId, addGroupPermissions,
 			addGuestPermissions);
 	}
 

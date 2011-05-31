@@ -257,11 +257,11 @@ public class AssetTagLocalServiceUtil {
 
 	public static void addTagResources(
 		com.liferay.portlet.asset.model.AssetTag tag,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		boolean addGroupPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		getService()
-			.addTagResources(tag, addCommunityPermissions, addGuestPermissions);
+			.addTagResources(tag, addGroupPermissions, addGuestPermissions);
 	}
 
 	public static void addTagResources(

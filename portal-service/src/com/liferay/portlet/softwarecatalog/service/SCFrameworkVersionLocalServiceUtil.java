@@ -260,12 +260,12 @@ public class SCFrameworkVersionLocalServiceUtil {
 	}
 
 	public static void addFrameworkVersionResources(long frameworkVersionId,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		boolean addGroupPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		getService()
 			.addFrameworkVersionResources(frameworkVersionId,
-			addCommunityPermissions, addGuestPermissions);
+			addGroupPermissions, addGuestPermissions);
 	}
 
 	public static void addFrameworkVersionResources(long frameworkVersionId,
@@ -280,12 +280,12 @@ public class SCFrameworkVersionLocalServiceUtil {
 
 	public static void addFrameworkVersionResources(
 		com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion frameworkVersion,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		boolean addGroupPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		getService()
 			.addFrameworkVersionResources(frameworkVersion,
-			addCommunityPermissions, addGuestPermissions);
+			addGroupPermissions, addGuestPermissions);
 	}
 
 	public static void addFrameworkVersionResources(

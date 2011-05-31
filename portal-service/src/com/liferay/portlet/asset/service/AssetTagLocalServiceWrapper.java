@@ -246,10 +246,10 @@ public class AssetTagLocalServiceWrapper implements AssetTagLocalService {
 	}
 
 	public void addTagResources(com.liferay.portlet.asset.model.AssetTag tag,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		boolean addGroupPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		_assetTagLocalService.addTagResources(tag, addCommunityPermissions,
+		_assetTagLocalService.addTagResources(tag, addGroupPermissions,
 			addGuestPermissions);
 	}
 

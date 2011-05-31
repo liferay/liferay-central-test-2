@@ -264,7 +264,7 @@ public interface IGImageLocalService {
 
 	public void addImageResources(
 		com.liferay.portlet.imagegallery.model.IGImage image,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		boolean addGroupPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -276,7 +276,7 @@ public interface IGImageLocalService {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public void addImageResources(long imageId,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		boolean addGroupPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 

@@ -278,11 +278,11 @@ public class DDMTemplateLocalServiceUtil {
 
 	public static void addTemplateResources(
 		com.liferay.portlet.dynamicdatamapping.model.DDMTemplate template,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		boolean addGroupPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		getService()
-			.addTemplateResources(template, addCommunityPermissions,
+			.addTemplateResources(template, addGroupPermissions,
 			addGuestPermissions);
 	}
 

@@ -305,11 +305,11 @@ public class MBMessageLocalServiceWrapper implements MBMessageLocalService {
 	}
 
 	public void addMessageResources(long messageId,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		boolean addGroupPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		_mbMessageLocalService.addMessageResources(messageId,
-			addCommunityPermissions, addGuestPermissions);
+			addGroupPermissions, addGuestPermissions);
 	}
 
 	public void addMessageResources(long messageId,
@@ -323,11 +323,11 @@ public class MBMessageLocalServiceWrapper implements MBMessageLocalService {
 
 	public void addMessageResources(
 		com.liferay.portlet.messageboards.model.MBMessage message,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		boolean addGroupPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		_mbMessageLocalService.addMessageResources(message,
-			addCommunityPermissions, addGuestPermissions);
+			addGroupPermissions, addGuestPermissions);
 	}
 
 	public void addMessageResources(

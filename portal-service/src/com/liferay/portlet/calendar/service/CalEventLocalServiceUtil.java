@@ -286,11 +286,11 @@ public class CalEventLocalServiceUtil {
 
 	public static void addEventResources(
 		com.liferay.portlet.calendar.model.CalEvent event,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		boolean addGroupPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		getService()
-			.addEventResources(event, addCommunityPermissions,
+			.addEventResources(event, addGroupPermissions,
 			addGuestPermissions);
 	}
 
@@ -305,11 +305,11 @@ public class CalEventLocalServiceUtil {
 	}
 
 	public static void addEventResources(long eventId,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		boolean addGroupPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		getService()
-			.addEventResources(eventId, addCommunityPermissions,
+			.addEventResources(eventId, addGroupPermissions,
 			addGuestPermissions);
 	}
 

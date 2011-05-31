@@ -250,7 +250,7 @@ public interface AssetCategoryLocalService {
 
 	public void addCategoryResources(
 		com.liferay.portlet.asset.model.AssetCategory category,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		boolean addGroupPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 

@@ -281,22 +281,22 @@ public class JournalTemplateLocalServiceUtil {
 	}
 
 	public static void addTemplateResources(long groupId,
-		java.lang.String templateId, boolean addCommunityPermissions,
+		java.lang.String templateId, boolean addGroupPermissions,
 		boolean addGuestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		getService()
-			.addTemplateResources(groupId, templateId, addCommunityPermissions,
+			.addTemplateResources(groupId, templateId, addGroupPermissions,
 			addGuestPermissions);
 	}
 
 	public static void addTemplateResources(
 		com.liferay.portlet.journal.model.JournalTemplate template,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		boolean addGroupPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		getService()
-			.addTemplateResources(template, addCommunityPermissions,
+			.addTemplateResources(template, addGroupPermissions,
 			addGuestPermissions);
 	}
 

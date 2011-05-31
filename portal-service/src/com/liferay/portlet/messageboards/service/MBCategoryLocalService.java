@@ -255,7 +255,7 @@ public interface MBCategoryLocalService {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public void addCategoryResources(long categoryId,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		boolean addGroupPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -267,7 +267,7 @@ public interface MBCategoryLocalService {
 
 	public void addCategoryResources(
 		com.liferay.portlet.messageboards.model.MBCategory category,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		boolean addGroupPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 

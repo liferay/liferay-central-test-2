@@ -251,7 +251,7 @@ public interface PollsQuestionLocalService {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public void addQuestionResources(long questionId,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		boolean addGroupPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -263,7 +263,7 @@ public interface PollsQuestionLocalService {
 
 	public void addQuestionResources(
 		com.liferay.portlet.polls.model.PollsQuestion question,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		boolean addGroupPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 

@@ -275,10 +275,10 @@ public class CalEventLocalServiceWrapper implements CalEventLocalService {
 
 	public void addEventResources(
 		com.liferay.portlet.calendar.model.CalEvent event,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		boolean addGroupPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		_calEventLocalService.addEventResources(event, addCommunityPermissions,
+		_calEventLocalService.addEventResources(event, addGroupPermissions,
 			addGuestPermissions);
 	}
 
@@ -293,11 +293,11 @@ public class CalEventLocalServiceWrapper implements CalEventLocalService {
 	}
 
 	public void addEventResources(long eventId,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		boolean addGroupPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		_calEventLocalService.addEventResources(eventId,
-			addCommunityPermissions, addGuestPermissions);
+			addGroupPermissions, addGuestPermissions);
 	}
 
 	public void addEventResources(long eventId,

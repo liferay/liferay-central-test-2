@@ -282,11 +282,11 @@ public class PollsQuestionLocalServiceUtil {
 	}
 
 	public static void addQuestionResources(long questionId,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		boolean addGroupPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		getService()
-			.addQuestionResources(questionId, addCommunityPermissions,
+			.addQuestionResources(questionId, addGroupPermissions,
 			addGuestPermissions);
 	}
 
@@ -302,11 +302,11 @@ public class PollsQuestionLocalServiceUtil {
 
 	public static void addQuestionResources(
 		com.liferay.portlet.polls.model.PollsQuestion question,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		boolean addGroupPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		getService()
-			.addQuestionResources(question, addCommunityPermissions,
+			.addQuestionResources(question, addGroupPermissions,
 			addGuestPermissions);
 	}
 

@@ -282,23 +282,23 @@ public class ResourceLocalServiceUtil {
 
 	public static void addResources(long companyId, long groupId, long userId,
 		java.lang.String name, long primKey, boolean portletActions,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		boolean addGroupPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		getService()
 			.addResources(companyId, groupId, userId, name, primKey,
-			portletActions, addCommunityPermissions, addGuestPermissions);
+			portletActions, addGroupPermissions, addGuestPermissions);
 	}
 
 	public static void addResources(long companyId, long groupId, long userId,
 		java.lang.String name, java.lang.String primKey,
-		boolean portletActions, boolean addCommunityPermissions,
+		boolean portletActions, boolean addGroupPermissions,
 		boolean addGuestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		getService()
 			.addResources(companyId, groupId, userId, name, primKey,
-			portletActions, addCommunityPermissions, addGuestPermissions);
+			portletActions, addGroupPermissions, addGuestPermissions);
 	}
 
 	public static void deleteResource(long companyId, java.lang.String name,

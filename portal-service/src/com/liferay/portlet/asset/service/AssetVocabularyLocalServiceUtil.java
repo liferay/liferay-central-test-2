@@ -295,11 +295,11 @@ public class AssetVocabularyLocalServiceUtil {
 
 	public static void addVocabularyResources(
 		com.liferay.portlet.asset.model.AssetVocabulary vocabulary,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		boolean addGroupPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		getService()
-			.addVocabularyResources(vocabulary, addCommunityPermissions,
+			.addVocabularyResources(vocabulary, addGroupPermissions,
 			addGuestPermissions);
 	}
 

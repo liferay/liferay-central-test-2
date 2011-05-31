@@ -270,12 +270,12 @@ public class ShoppingItemLocalServiceWrapper implements ShoppingItemLocalService
 			serviceContext);
 	}
 
-	public void addItemResources(long itemId, boolean addCommunityPermissions,
+	public void addItemResources(long itemId, boolean addGroupPermissions,
 		boolean addGuestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		_shoppingItemLocalService.addItemResources(itemId,
-			addCommunityPermissions, addGuestPermissions);
+			addGroupPermissions, addGuestPermissions);
 	}
 
 	public void addItemResources(long itemId,
@@ -289,11 +289,11 @@ public class ShoppingItemLocalServiceWrapper implements ShoppingItemLocalService
 
 	public void addItemResources(
 		com.liferay.portlet.shopping.model.ShoppingItem item,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		boolean addGroupPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		_shoppingItemLocalService.addItemResources(item,
-			addCommunityPermissions, addGuestPermissions);
+			addGroupPermissions, addGuestPermissions);
 	}
 
 	public void addItemResources(
