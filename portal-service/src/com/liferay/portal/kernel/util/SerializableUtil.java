@@ -12,19 +12,19 @@
  * details.
  */
 
-package com.liferay.util;
+package com.liferay.portal.kernel.util;
 
 import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayInputStream;
 import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayOutputStream;
-import com.liferay.portal.kernel.util.StreamUtil;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 /**
- * @author Alexander Chow
- * @author Igor Spasic
+ * @author     Alexander Chow
+ * @author     Igor Spasic
+ * @deprecated As of 6.1, moved to {@link com.liferay.util.SerializableUtil}
  */
 public class SerializableUtil {
 
