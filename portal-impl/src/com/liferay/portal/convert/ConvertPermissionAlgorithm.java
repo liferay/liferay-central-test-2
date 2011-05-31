@@ -22,6 +22,7 @@ import com.liferay.portal.kernel.dao.db.DB;
 import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
+import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.io.unsync.UnsyncBufferedReader;
 import com.liferay.portal.kernel.io.unsync.UnsyncBufferedWriter;
 import com.liferay.portal.kernel.log.Log;
@@ -31,6 +32,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.MultiValueMap;
 import com.liferay.portal.kernel.util.MultiValueMapFactoryUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
+import com.liferay.portal.kernel.util.ReleaseInfo;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Tuple;
@@ -38,6 +40,8 @@ import com.liferay.portal.kernel.util.UnmodifiableList;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Group;
+import com.liferay.portal.model.Release;
+import com.liferay.portal.model.ReleaseConstants;
 import com.liferay.portal.model.ResourceAction;
 import com.liferay.portal.model.ResourceCode;
 import com.liferay.portal.model.ResourceConstants;
@@ -54,6 +58,7 @@ import com.liferay.portal.security.permission.ResourceActionsUtil;
 import com.liferay.portal.service.ClassNameLocalServiceUtil;
 import com.liferay.portal.service.CompanyLocalServiceUtil;
 import com.liferay.portal.service.GroupLocalServiceUtil;
+import com.liferay.portal.service.ReleaseLocalServiceUtil;
 import com.liferay.portal.service.ResourceActionLocalServiceUtil;
 import com.liferay.portal.service.ResourceCodeLocalServiceUtil;
 import com.liferay.portal.service.RoleLocalServiceUtil;
@@ -192,6 +197,23 @@ public class ConvertPermissionAlgorithm extends ConvertProcess {
 		db.runSQL("DELETE FROM " + PermissionModelImpl.TABLE_NAME);
 		db.runSQL("DELETE FROM " + ResourceModelImpl.TABLE_NAME);
 		db.runSQL("DELETE FROM Roles_Permissions");
+
+		Release release = null;
+
+		try {
+			release = ReleaseLocalServiceUtil.getRelease(
+				ReleaseConstants.DEFAULT_SERVLET_CONTEXT_NAME,
+				ReleaseInfo.getBuildNumber());
+		}
+		catch (PortalException pe) {
+			release = ReleaseLocalServiceUtil.addRelease(
+				ReleaseConstants.DEFAULT_SERVLET_CONTEXT_NAME,
+				ReleaseInfo.getBuildNumber());
+		}
+
+		ReleaseLocalServiceUtil.updateRelease(
+			release.getReleaseId(), ReleaseInfo.getBuildNumber(),
+			ReleaseInfo.getBuildDate(), false);
 
 		MaintenanceUtil.appendStatus("Converted to bitwise permission");
 	}
@@ -414,6 +436,7 @@ public class ConvertPermissionAlgorithm extends ConvertProcess {
 			writer.append(scope + StringPool.COMMA);
 			writer.append(primKey + StringPool.COMMA);
 			writer.append(roleId + StringPool.COMMA);
+			writer.append(0 + StringPool.COMMA);
 			writer.append(actionIds + StringPool.COMMA + StringPool.NEW_LINE);
 		}
 	}
