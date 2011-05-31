@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Address;
+import com.liferay.portal.model.Phone;
 import com.liferay.portal.model.User;
 
 import java.util.Calendar;
@@ -233,91 +234,91 @@ public class UserAttributes {
 		else if (name.equals(USER_BDATE_DAY)) {
 			String returnValue = null;
 
-            if (_user.getBirthday() != null) {
-                _calendar.setTime(_user.getBirthday());
+			if (_user.getBirthday() != null) {
+				_calendar.setTime(_user.getBirthday());
 
-	            returnValue = String.valueOf(_calendar.get(Calendar.DATE));
-            }
+				returnValue = String.valueOf(_calendar.get(Calendar.DATE));
+				}
 
-            return returnValue;
+			return returnValue;
 		}
 		else if (name.equals(USER_BDATE_FRACTIONSECOND)) {
 			String returnValue = null;
 
-            if (_user.getBirthday() != null) {
-                _calendar.setTime(_user.getBirthday());
+			if (_user.getBirthday() != null) {
+				_calendar.setTime(_user.getBirthday());
 
-	            returnValue = String.valueOf(
+				returnValue = String.valueOf(
 					_calendar.get(Calendar.MILLISECOND));
-            }
+			}
 
-            return returnValue;
+			return returnValue;
 		}
 		else if (name.equals(USER_BDATE_HOUR)) {
 			String returnValue = null;
 
-            if (_user.getBirthday() != null) {
-                _calendar.setTime(_user.getBirthday());
+			if (_user.getBirthday() != null) {
+				_calendar.setTime(_user.getBirthday());
 
-	            returnValue = String.valueOf(_calendar.get(Calendar.HOUR));
-            }
+				returnValue = String.valueOf(_calendar.get(Calendar.HOUR));
+			}
 
-            return returnValue;
+			return returnValue;
 		}
 		else if (name.equals(USER_BDATE_MINUTE)) {
 			String returnValue = null;
 
-            if (_user.getBirthday() != null) {
-                _calendar.setTime(_user.getBirthday());
+			if (_user.getBirthday() != null) {
+				_calendar.setTime(_user.getBirthday());
 
-                returnValue = String.valueOf(_calendar.get(Calendar.MINUTE));
-            }
+				returnValue = String.valueOf(_calendar.get(Calendar.MINUTE));
+			}
 
-            return returnValue;
+			return returnValue;
 		}
 		else if (name.equals(USER_BDATE_MONTH)) {
 			String returnValue = null;
 
-            if (_user.getBirthday() != null) {
-                _calendar.setTime(_user.getBirthday());
+			if (_user.getBirthday() != null) {
+				_calendar.setTime(_user.getBirthday());
 
-                returnValue = String.valueOf(_calendar.get(Calendar.MONTH) + 1);
-            }
+				returnValue = String.valueOf(_calendar.get(Calendar.MONTH) + 1);
+			}
 
-            return returnValue;
+			return returnValue;
 		}
 		else if (name.equals(USER_BDATE_SECOND)) {
 			String returnValue = null;
 
-            if (_user.getBirthday() != null) {
-                _calendar.setTime(_user.getBirthday());
+			if (_user.getBirthday() != null) {
+				_calendar.setTime(_user.getBirthday());
 
-                returnValue = String.valueOf(_calendar.get(Calendar.SECOND));
-            }
+				returnValue = String.valueOf(_calendar.get(Calendar.SECOND));
+			}
 
-            return returnValue;
+			return returnValue;
 		}
 		else if (name.equals(USER_BDATE_TIMEZONE)) {
 			String returnValue = null;
 
-            if (_user.getBirthday() != null) {
-                _calendar.setTime(_user.getBirthday());
+			if (_user.getBirthday() != null) {
+				_calendar.setTime(_user.getBirthday());
 
-                returnValue = String.valueOf(
+				returnValue = String.valueOf(
 					_calendar.get(Calendar.ZONE_OFFSET));
-            }
-            return returnValue;
+			}
+			return returnValue;
 		}
 		else if (name.equals(USER_BDATE_YEAR)) {
 			String returnValue = null;
 
-            if (_user.getBirthday() != null) {
-                _calendar.setTime(_user.getBirthday());
+			if (_user.getBirthday() != null) {
+				_calendar.setTime(_user.getBirthday());
 
-                returnValue = String.valueOf(_calendar.get(Calendar.YEAR));
-            }
+				returnValue = String.valueOf(_calendar.get(Calendar.YEAR));
+			}
 
-            return returnValue;
+			return returnValue;
 		}
 		else if (name.equals(USER_GENDER)) {
 			return _user.isMale() ? "male" : "female";
@@ -359,17 +360,15 @@ public class UserAttributes {
 			if (_homeAddress != null) {
 				return _homeAddress.getStreet1();
 			}
-			else {
-				return StringPool.BLANK;
-			}
+
+			return StringPool.BLANK;
 		}
 		else if (name.equals(USER_HOME_INFO_POSTAL_CITY)) {
 			if (_homeAddress != null) {
 				return _homeAddress.getCity();
 			}
-			else {
-				return StringPool.BLANK;
-			}
+
+			return StringPool.BLANK;
 		}
 		else if (name.equals(USER_HOME_INFO_POSTAL_STATEPROV)) {
 			return StringPool.BLANK;
@@ -378,9 +377,8 @@ public class UserAttributes {
 			if (_homeAddress != null) {
 				return _homeAddress.getZip();
 			}
-			else {
-				return StringPool.BLANK;
-			}
+
+			return StringPool.BLANK;
 		}
 		else if (name.equals(USER_HOME_INFO_POSTAL_COUNTRY)) {
 			return StringPool.BLANK;
@@ -395,9 +393,17 @@ public class UserAttributes {
 			return StringPool.BLANK;
 		}
 		else if (name.equals(USER_HOME_INFO_TELECOM_TELEPHONE_NUMBER)) {
+			if (_homePhone != null) {
+				return _homePhone.getNumber();
+			}
+
 			return StringPool.BLANK;
 		}
 		else if (name.equals(USER_HOME_INFO_TELECOM_TELEPHONE_EXT)) {
+			if (_homePhone != null) {
+				return _homePhone.getExtension();
+			}
+
 			return StringPool.BLANK;
 		}
 		else if (name.equals(USER_HOME_INFO_TELECOM_TELEPHONE_COMMENT)) {
@@ -461,17 +467,15 @@ public class UserAttributes {
 			if (_bizAddress != null) {
 				return _bizAddress.getStreet1();
 			}
-			else {
-				return StringPool.BLANK;
-			}
+
+			return StringPool.BLANK;
 		}
 		else if (name.equals(USER_BUSINESS_INFO_POSTAL_CITY)) {
 			if (_bizAddress != null) {
 				return _bizAddress.getCity();
 			}
-			else {
-				return StringPool.BLANK;
-			}
+
+			return StringPool.BLANK;
 		}
 		else if (name.equals(USER_BUSINESS_INFO_POSTAL_STATEPROV)) {
 			return StringPool.BLANK;
@@ -480,9 +484,7 @@ public class UserAttributes {
 			if (_bizAddress != null) {
 				return _bizAddress.getZip();
 			}
-			else {
-				return StringPool.BLANK;
-			}
+			return StringPool.BLANK;
 		}
 		else if (name.equals(USER_BUSINESS_INFO_POSTAL_COUNTRY)) {
 			return StringPool.BLANK;
@@ -497,9 +499,17 @@ public class UserAttributes {
 			return StringPool.BLANK;
 		}
 		else if (name.equals(USER_BUSINESS_INFO_TELECOM_TELEPHONE_NUMBER)) {
+			if (_bizPhone != null) {
+				return _bizPhone.getNumber();
+			}
+
 			return StringPool.BLANK;
 		}
 		else if (name.equals(USER_BUSINESS_INFO_TELECOM_TELEPHONE_EXT)) {
+			if (_bizPhone != null) {
+				return _bizPhone.getExtension();
+			}
+
 			return StringPool.BLANK;
 		}
 		else if (name.equals(USER_BUSINESS_INFO_TELECOM_TELEPHONE_COMMENT)) {
@@ -565,5 +575,7 @@ public class UserAttributes {
 	private Address _homeAddress;
 	private Address _bizAddress;
 	private Calendar _calendar = new GregorianCalendar();
+	private Phone _homePhone;
+	private Phone _bizPhone;
 
 }
