@@ -18,6 +18,10 @@
 	var FormBuilderTextField = A.FormBuilderTextField;
 	var FormBuilderTypes = A.FormBuilder.types;
 
+	var TPL_SEPARATOR = '<div class="separator"></div>';
+
+	var TPL_TEMPLATE_NODE = '<p></p>';
+
 	var DDMTextField = A.Component.create(
 		{
 			EXTENDS: FormBuilderTextField,
@@ -134,7 +138,7 @@
 				},
 				templateNode: {
 					valueFn: function() {
-						return A.Node.create('<p></p>');
+						return A.Node.create(TPL_TEMPLATE_NODE);
 					}
 				}
 			},
@@ -154,12 +158,12 @@
 					var formBuilder = instance.get('formBuilder');
 					var formNode = formBuilder.get('settingsFormNode');
 
-					formNode.setContent('');
+					formNode.empty();
 
 					instance._renderSettingsFields(
 						[
 							{
-								labelText: 'Label',
+								labelText: Liferay.Language.get('label'),
 								name: 'label',
 								type: 'textarea',
 								value: instance.get('label')
@@ -170,17 +174,11 @@
 
 					var labelNode = settingsNodesMap.labelSettingNode;
 
-					labelNode.on(
-						{
-							input: A.bind(instance._onLabelInput, instance)
-						}
-					);
+					labelNode.on('input', instance._onLabelInput, instance);
 				},
 
 				_uiSetLabel: function(val) {
 					var instance = this;
-
-					console.log(instance.get('templateNode'), val);
 
 					instance.get('templateNode').setContent(val);
 				}
@@ -199,7 +197,7 @@
 				},
 				templateNode: {
 					valueFn: function() {
-						return A.Node.create('<div class="separator"></div>');
+						return A.Node.create(TPL_SEPARATOR);
 					}
 				},
 				showLabel: {
@@ -217,7 +215,7 @@
 					var formBuilder = this.get('formBuilder');
 					var formNode = formBuilder.get('settingsFormNode');
 
-					formNode.setContent('');
+					formNode.empty();
 				}
 			}
 		}
