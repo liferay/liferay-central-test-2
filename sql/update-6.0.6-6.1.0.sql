@@ -191,6 +191,8 @@ update DLFolder set repositoryId = groupId;
 
 alter table Group_ add site BOOLEAN;
 
+update Group_ set name = 'User Personal Site' where name = 'User Personal Community';
+
 alter table IGFolder add userName VARCHAR(75) null;
 
 alter table IGImage add userName VARCHAR(75) null;
