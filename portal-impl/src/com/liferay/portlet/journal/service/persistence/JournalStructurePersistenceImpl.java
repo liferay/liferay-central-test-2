@@ -1478,18 +1478,11 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 			query = new StringBundler(3);
 		}
 
-		if (getDB().isSupportsInlineDistinct()) {
-			query.append(_FILTER_SQL_SELECT_JOURNALSTRUCTURE_WHERE);
-		}
-		else {
-			query.append(_FILTER_SQL_SELECT_JOURNALSTRUCTURE_NO_INLINE_DISTINCT_WHERE_1);
-		}
+		query.append(_FILTER_SQL_SELECT_JOURNALSTRUCTURE_WHERE);
 
 		query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
-		if (!getDB().isSupportsInlineDistinct()) {
-			query.append(_FILTER_SQL_SELECT_JOURNALSTRUCTURE_NO_INLINE_DISTINCT_WHERE_2);
-		}
+		appendGroupByComparator(query, _FILTER_COLUMN_PK);
 
 		if (orderByComparator != null) {
 			if (getDB().isSupportsInlineDistinct()) {
@@ -1604,18 +1597,11 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 			query = new StringBundler(3);
 		}
 
-		if (getDB().isSupportsInlineDistinct()) {
-			query.append(_FILTER_SQL_SELECT_JOURNALSTRUCTURE_WHERE);
-		}
-		else {
-			query.append(_FILTER_SQL_SELECT_JOURNALSTRUCTURE_NO_INLINE_DISTINCT_WHERE_1);
-		}
+		query.append(_FILTER_SQL_SELECT_JOURNALSTRUCTURE_WHERE);
 
 		query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
-		if (!getDB().isSupportsInlineDistinct()) {
-			query.append(_FILTER_SQL_SELECT_JOURNALSTRUCTURE_NO_INLINE_DISTINCT_WHERE_2);
-		}
+		appendGroupByComparator(query, _FILTER_COLUMN_PK);
 
 		if (orderByComparator != null) {
 			String[] orderByFields = orderByComparator.getOrderByFields();
@@ -2702,12 +2688,7 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 			query = new StringBundler(4);
 		}
 
-		if (getDB().isSupportsInlineDistinct()) {
-			query.append(_FILTER_SQL_SELECT_JOURNALSTRUCTURE_WHERE);
-		}
-		else {
-			query.append(_FILTER_SQL_SELECT_JOURNALSTRUCTURE_NO_INLINE_DISTINCT_WHERE_1);
-		}
+		query.append(_FILTER_SQL_SELECT_JOURNALSTRUCTURE_WHERE);
 
 		query.append(_FINDER_COLUMN_G_P_GROUPID_2);
 
@@ -2723,9 +2704,7 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 			}
 		}
 
-		if (!getDB().isSupportsInlineDistinct()) {
-			query.append(_FILTER_SQL_SELECT_JOURNALSTRUCTURE_NO_INLINE_DISTINCT_WHERE_2);
-		}
+		appendGroupByComparator(query, _FILTER_COLUMN_PK);
 
 		if (orderByComparator != null) {
 			if (getDB().isSupportsInlineDistinct()) {
@@ -2848,12 +2827,7 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 			query = new StringBundler(3);
 		}
 
-		if (getDB().isSupportsInlineDistinct()) {
-			query.append(_FILTER_SQL_SELECT_JOURNALSTRUCTURE_WHERE);
-		}
-		else {
-			query.append(_FILTER_SQL_SELECT_JOURNALSTRUCTURE_NO_INLINE_DISTINCT_WHERE_1);
-		}
+		query.append(_FILTER_SQL_SELECT_JOURNALSTRUCTURE_WHERE);
 
 		query.append(_FINDER_COLUMN_G_P_GROUPID_2);
 
@@ -2869,9 +2843,7 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 			}
 		}
 
-		if (!getDB().isSupportsInlineDistinct()) {
-			query.append(_FILTER_SQL_SELECT_JOURNALSTRUCTURE_NO_INLINE_DISTINCT_WHERE_2);
-		}
+		appendGroupByComparator(query, _FILTER_COLUMN_PK);
 
 		if (orderByComparator != null) {
 			String[] orderByFields = orderByComparator.getOrderByFields();
@@ -3813,11 +3785,7 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 	private static final String _FINDER_COLUMN_G_P_PARENTSTRUCTUREID_1 = "journalStructure.parentStructureId IS NULL";
 	private static final String _FINDER_COLUMN_G_P_PARENTSTRUCTUREID_2 = "journalStructure.parentStructureId = ?";
 	private static final String _FINDER_COLUMN_G_P_PARENTSTRUCTUREID_3 = "(journalStructure.parentStructureId IS NULL OR journalStructure.parentStructureId = ?)";
-	private static final String _FILTER_SQL_SELECT_JOURNALSTRUCTURE_WHERE = "SELECT DISTINCT {journalStructure.*} FROM JournalStructure journalStructure WHERE ";
-	private static final String _FILTER_SQL_SELECT_JOURNALSTRUCTURE_NO_INLINE_DISTINCT_WHERE_1 =
-		"SELECT {JournalStructure.*} FROM (SELECT DISTINCT journalStructure.id FROM JournalStructure journalStructure WHERE ";
-	private static final String _FILTER_SQL_SELECT_JOURNALSTRUCTURE_NO_INLINE_DISTINCT_WHERE_2 =
-		") TEMP_TABLE INNER JOIN JournalStructure ON TEMP_TABLE.id = JournalStructure.id";
+	private static final String _FILTER_SQL_SELECT_JOURNALSTRUCTURE_WHERE = "SELECT {journalStructure.*} FROM JournalStructure journalStructure WHERE ";
 	private static final String _FILTER_SQL_COUNT_JOURNALSTRUCTURE_WHERE = "SELECT COUNT(DISTINCT journalStructure.id) AS COUNT_VALUE FROM JournalStructure journalStructure WHERE ";
 	private static final String _FILTER_COLUMN_PK = "journalStructure.id";
 	private static final String _FILTER_ENTITY_ALIAS = "journalStructure";

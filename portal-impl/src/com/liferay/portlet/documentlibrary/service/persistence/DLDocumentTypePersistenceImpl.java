@@ -825,18 +825,11 @@ public class DLDocumentTypePersistenceImpl extends BasePersistenceImpl<DLDocumen
 			query = new StringBundler(2);
 		}
 
-		if (getDB().isSupportsInlineDistinct()) {
-			query.append(_FILTER_SQL_SELECT_DLDOCUMENTTYPE_WHERE);
-		}
-		else {
-			query.append(_FILTER_SQL_SELECT_DLDOCUMENTTYPE_NO_INLINE_DISTINCT_WHERE_1);
-		}
+		query.append(_FILTER_SQL_SELECT_DLDOCUMENTTYPE_WHERE);
 
 		query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
-		if (!getDB().isSupportsInlineDistinct()) {
-			query.append(_FILTER_SQL_SELECT_DLDOCUMENTTYPE_NO_INLINE_DISTINCT_WHERE_2);
-		}
+		appendGroupByComparator(query, _FILTER_COLUMN_PK);
 
 		if (orderByComparator != null) {
 			if (getDB().isSupportsInlineDistinct()) {
@@ -943,18 +936,11 @@ public class DLDocumentTypePersistenceImpl extends BasePersistenceImpl<DLDocumen
 			query = new StringBundler(3);
 		}
 
-		if (getDB().isSupportsInlineDistinct()) {
-			query.append(_FILTER_SQL_SELECT_DLDOCUMENTTYPE_WHERE);
-		}
-		else {
-			query.append(_FILTER_SQL_SELECT_DLDOCUMENTTYPE_NO_INLINE_DISTINCT_WHERE_1);
-		}
+		query.append(_FILTER_SQL_SELECT_DLDOCUMENTTYPE_WHERE);
 
 		query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
-		if (!getDB().isSupportsInlineDistinct()) {
-			query.append(_FILTER_SQL_SELECT_DLDOCUMENTTYPE_NO_INLINE_DISTINCT_WHERE_2);
-		}
+		appendGroupByComparator(query, _FILTER_COLUMN_PK);
 
 		if (orderByComparator != null) {
 			String[] orderByFields = orderByComparator.getOrderByFields();
@@ -1552,12 +1538,7 @@ public class DLDocumentTypePersistenceImpl extends BasePersistenceImpl<DLDocumen
 			query = new StringBundler(4);
 		}
 
-		if (getDB().isSupportsInlineDistinct()) {
-			query.append(_FILTER_SQL_SELECT_DLDOCUMENTTYPE_WHERE);
-		}
-		else {
-			query.append(_FILTER_SQL_SELECT_DLDOCUMENTTYPE_NO_INLINE_DISTINCT_WHERE_1);
-		}
+		query.append(_FILTER_SQL_SELECT_DLDOCUMENTTYPE_WHERE);
 
 		query.append(_FINDER_COLUMN_G_N_D_GROUPID_2);
 
@@ -1585,9 +1566,7 @@ public class DLDocumentTypePersistenceImpl extends BasePersistenceImpl<DLDocumen
 			}
 		}
 
-		if (!getDB().isSupportsInlineDistinct()) {
-			query.append(_FILTER_SQL_SELECT_DLDOCUMENTTYPE_NO_INLINE_DISTINCT_WHERE_2);
-		}
+		appendGroupByComparator(query, _FILTER_COLUMN_PK);
 
 		if (orderByComparator != null) {
 			if (getDB().isSupportsInlineDistinct()) {
@@ -1706,12 +1685,7 @@ public class DLDocumentTypePersistenceImpl extends BasePersistenceImpl<DLDocumen
 			query = new StringBundler(3);
 		}
 
-		if (getDB().isSupportsInlineDistinct()) {
-			query.append(_FILTER_SQL_SELECT_DLDOCUMENTTYPE_WHERE);
-		}
-		else {
-			query.append(_FILTER_SQL_SELECT_DLDOCUMENTTYPE_NO_INLINE_DISTINCT_WHERE_1);
-		}
+		query.append(_FILTER_SQL_SELECT_DLDOCUMENTTYPE_WHERE);
 
 		query.append(_FINDER_COLUMN_G_N_D_GROUPID_2);
 
@@ -1739,9 +1713,7 @@ public class DLDocumentTypePersistenceImpl extends BasePersistenceImpl<DLDocumen
 			}
 		}
 
-		if (!getDB().isSupportsInlineDistinct()) {
-			query.append(_FILTER_SQL_SELECT_DLDOCUMENTTYPE_NO_INLINE_DISTINCT_WHERE_2);
-		}
+		appendGroupByComparator(query, _FILTER_COLUMN_PK);
 
 		if (orderByComparator != null) {
 			String[] orderByFields = orderByComparator.getOrderByFields();
@@ -3045,11 +3017,7 @@ public class DLDocumentTypePersistenceImpl extends BasePersistenceImpl<DLDocumen
 	private static final String _FINDER_COLUMN_G_N_D_DESCRIPTION_1 = "dlDocumentType.description IS NULL";
 	private static final String _FINDER_COLUMN_G_N_D_DESCRIPTION_2 = "dlDocumentType.description = ?";
 	private static final String _FINDER_COLUMN_G_N_D_DESCRIPTION_3 = "(dlDocumentType.description IS NULL OR dlDocumentType.description = ?)";
-	private static final String _FILTER_SQL_SELECT_DLDOCUMENTTYPE_WHERE = "SELECT DISTINCT {dlDocumentType.*} FROM DLDocumentType dlDocumentType WHERE ";
-	private static final String _FILTER_SQL_SELECT_DLDOCUMENTTYPE_NO_INLINE_DISTINCT_WHERE_1 =
-		"SELECT {DLDocumentType.*} FROM (SELECT DISTINCT dlDocumentType.documentTypeId FROM DLDocumentType dlDocumentType WHERE ";
-	private static final String _FILTER_SQL_SELECT_DLDOCUMENTTYPE_NO_INLINE_DISTINCT_WHERE_2 =
-		") TEMP_TABLE INNER JOIN DLDocumentType ON TEMP_TABLE.documentTypeId = DLDocumentType.documentTypeId";
+	private static final String _FILTER_SQL_SELECT_DLDOCUMENTTYPE_WHERE = "SELECT {dlDocumentType.*} FROM DLDocumentType dlDocumentType WHERE ";
 	private static final String _FILTER_SQL_COUNT_DLDOCUMENTTYPE_WHERE = "SELECT COUNT(DISTINCT dlDocumentType.documentTypeId) AS COUNT_VALUE FROM DLDocumentType dlDocumentType WHERE ";
 	private static final String _FILTER_COLUMN_PK = "dlDocumentType.documentTypeId";
 	private static final String _FILTER_ENTITY_ALIAS = "dlDocumentType";

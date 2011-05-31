@@ -211,7 +211,17 @@ public class MBThreadModelImpl extends BaseModelImpl<MBThread>
 	}
 
 	public void setRootMessageId(long rootMessageId) {
+		if (!_setOriginalRootMessageId) {
+			_setOriginalRootMessageId = true;
+
+			_originalRootMessageId = _rootMessageId;
+		}
+
 		_rootMessageId = rootMessageId;
+	}
+
+	public long getOriginalRootMessageId() {
+		return _originalRootMessageId;
 	}
 
 	@JSON
@@ -485,6 +495,11 @@ public class MBThreadModelImpl extends BaseModelImpl<MBThread>
 	}
 
 	public void resetOriginalValues() {
+		MBThreadModelImpl mbThreadModelImpl = this;
+
+		mbThreadModelImpl._originalRootMessageId = mbThreadModelImpl._rootMessageId;
+
+		mbThreadModelImpl._setOriginalRootMessageId = false;
 	}
 
 	public String toString() {
@@ -603,6 +618,8 @@ public class MBThreadModelImpl extends BaseModelImpl<MBThread>
 	private long _companyId;
 	private long _categoryId;
 	private long _rootMessageId;
+	private long _originalRootMessageId;
+	private boolean _setOriginalRootMessageId;
 	private long _rootMessageUserId;
 	private String _rootMessageUserUuid;
 	private int _messageCount;

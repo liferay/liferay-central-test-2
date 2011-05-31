@@ -436,6 +436,8 @@ create index IX_9A2D11B2 on MBThread (groupId, categoryId);
 create index IX_50F1904A on MBThread (groupId, categoryId, lastPostDate);
 create index IX_485F7E98 on MBThread (groupId, categoryId, status);
 create index IX_E1E7142B on MBThread (groupId, status);
+create index IX_AEDD9CB5 on MBThread (lastPostDate, priority);
+create index IX_CC993ECB on MBThread (rootMessageId);
 
 create index IX_8A1CC4B on MembershipRequest (groupId);
 create index IX_C28C72EC on MembershipRequest (groupId, statusId);
@@ -527,6 +529,8 @@ create index IX_717FDD47 on ResourceCode (companyId);
 create unique index IX_A32C097E on ResourceCode (companyId, name, scope);
 create index IX_AACAFF40 on ResourceCode (name);
 
+create index IX_88705859 on ResourcePermission (companyId, name, primKey, ownerId);
+create index IX_C94C7708 on ResourcePermission (companyId, name, primKey, roleId, actionIds);
 create index IX_60B99860 on ResourcePermission (companyId, name, scope);
 create index IX_2200AA69 on ResourcePermission (companyId, name, scope, primKey);
 create unique index IX_8D83D0CE on ResourcePermission (companyId, name, scope, primKey, roleId);

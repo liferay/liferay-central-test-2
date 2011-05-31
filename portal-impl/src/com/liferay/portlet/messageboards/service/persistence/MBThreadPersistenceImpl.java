@@ -91,6 +91,12 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 	public static final FinderPath FINDER_PATH_COUNT_BY_GROUPID = new FinderPath(MBThreadModelImpl.ENTITY_CACHE_ENABLED,
 			MBThreadModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"countByGroupId", new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FETCH_BY_ROOTMESSAGEID = new FinderPath(MBThreadModelImpl.ENTITY_CACHE_ENABLED,
+			MBThreadModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_ENTITY,
+			"fetchByRootMessageId", new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_COUNT_BY_ROOTMESSAGEID = new FinderPath(MBThreadModelImpl.ENTITY_CACHE_ENABLED,
+			MBThreadModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"countByRootMessageId", new String[] { Long.class.getName() });
 	public static final FinderPath FINDER_PATH_FIND_BY_G_C = new FinderPath(MBThreadModelImpl.ENTITY_CACHE_ENABLED,
 			MBThreadModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"findByG_C",
@@ -143,6 +149,19 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 			MBThreadModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"countByC_P",
 			new String[] { Long.class.getName(), Double.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_L_P = new FinderPath(MBThreadModelImpl.ENTITY_CACHE_ENABLED,
+			MBThreadModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findByL_P",
+			new String[] {
+				Date.class.getName(), Double.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_L_P = new FinderPath(MBThreadModelImpl.ENTITY_CACHE_ENABLED,
+			MBThreadModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"countByL_P",
+			new String[] { Date.class.getName(), Double.class.getName() });
 	public static final FinderPath FINDER_PATH_FIND_BY_G_C_L = new FinderPath(MBThreadModelImpl.ENTITY_CACHE_ENABLED,
 			MBThreadModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"findByG_C_L",
@@ -208,6 +227,9 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 		EntityCacheUtil.putResult(MBThreadModelImpl.ENTITY_CACHE_ENABLED,
 			MBThreadImpl.class, mbThread.getPrimaryKey(), mbThread);
 
+		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_ROOTMESSAGEID,
+			new Object[] { Long.valueOf(mbThread.getRootMessageId()) }, mbThread);
+
 		mbThread.resetOriginalValues();
 	}
 
@@ -253,6 +275,9 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 	public void clearCache(MBThread mbThread) {
 		EntityCacheUtil.removeResult(MBThreadModelImpl.ENTITY_CACHE_ENABLED,
 			MBThreadImpl.class, mbThread.getPrimaryKey());
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_ROOTMESSAGEID,
+			new Object[] { Long.valueOf(mbThread.getRootMessageId()) });
 	}
 
 	/**
@@ -353,6 +378,11 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 
+		MBThreadModelImpl mbThreadModelImpl = (MBThreadModelImpl)mbThread;
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_ROOTMESSAGEID,
+			new Object[] { Long.valueOf(mbThreadModelImpl.getRootMessageId()) });
+
 		EntityCacheUtil.removeResult(MBThreadModelImpl.ENTITY_CACHE_ENABLED,
 			MBThreadImpl.class, mbThread.getPrimaryKey());
 
@@ -363,6 +393,10 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 		com.liferay.portlet.messageboards.model.MBThread mbThread, boolean merge)
 		throws SystemException {
 		mbThread = toUnwrappedModel(mbThread);
+
+		boolean isNew = mbThread.isNew();
+
+		MBThreadModelImpl mbThreadModelImpl = (MBThreadModelImpl)mbThread;
 
 		Session session = null;
 
@@ -384,6 +418,21 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 
 		EntityCacheUtil.putResult(MBThreadModelImpl.ENTITY_CACHE_ENABLED,
 			MBThreadImpl.class, mbThread.getPrimaryKey(), mbThread);
+
+		if (!isNew &&
+				(mbThread.getRootMessageId() != mbThreadModelImpl.getOriginalRootMessageId())) {
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_ROOTMESSAGEID,
+				new Object[] {
+					Long.valueOf(mbThreadModelImpl.getOriginalRootMessageId())
+				});
+		}
+
+		if (isNew ||
+				(mbThread.getRootMessageId() != mbThreadModelImpl.getOriginalRootMessageId())) {
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_ROOTMESSAGEID,
+				new Object[] { Long.valueOf(mbThread.getRootMessageId()) },
+				mbThread);
+		}
 
 		return mbThread;
 	}
@@ -836,6 +885,135 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 		}
 		else {
 			return null;
+		}
+	}
+
+	/**
+	 * Finds the message boards thread where rootMessageId = &#63; or throws a {@link com.liferay.portlet.messageboards.NoSuchThreadException} if it could not be found.
+	 *
+	 * @param rootMessageId the root message ID to search with
+	 * @return the matching message boards thread
+	 * @throws com.liferay.portlet.messageboards.NoSuchThreadException if a matching message boards thread could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public MBThread findByRootMessageId(long rootMessageId)
+		throws NoSuchThreadException, SystemException {
+		MBThread mbThread = fetchByRootMessageId(rootMessageId);
+
+		if (mbThread == null) {
+			StringBundler msg = new StringBundler(4);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("rootMessageId=");
+			msg.append(rootMessageId);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			if (_log.isWarnEnabled()) {
+				_log.warn(msg.toString());
+			}
+
+			throw new NoSuchThreadException(msg.toString());
+		}
+
+		return mbThread;
+	}
+
+	/**
+	 * Finds the message boards thread where rootMessageId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param rootMessageId the root message ID to search with
+	 * @return the matching message boards thread, or <code>null</code> if a matching message boards thread could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public MBThread fetchByRootMessageId(long rootMessageId)
+		throws SystemException {
+		return fetchByRootMessageId(rootMessageId, true);
+	}
+
+	/**
+	 * Finds the message boards thread where rootMessageId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param rootMessageId the root message ID to search with
+	 * @return the matching message boards thread, or <code>null</code> if a matching message boards thread could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public MBThread fetchByRootMessageId(long rootMessageId,
+		boolean retrieveFromCache) throws SystemException {
+		Object[] finderArgs = new Object[] { rootMessageId };
+
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_ROOTMESSAGEID,
+					finderArgs, this);
+		}
+
+		if (result == null) {
+			StringBundler query = new StringBundler(3);
+
+			query.append(_SQL_SELECT_MBTHREAD_WHERE);
+
+			query.append(_FINDER_COLUMN_ROOTMESSAGEID_ROOTMESSAGEID_2);
+
+			query.append(MBThreadModelImpl.ORDER_BY_JPQL);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(rootMessageId);
+
+				List<MBThread> list = q.list();
+
+				result = list;
+
+				MBThread mbThread = null;
+
+				if (list.isEmpty()) {
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_ROOTMESSAGEID,
+						finderArgs, list);
+				}
+				else {
+					mbThread = list.get(0);
+
+					cacheResult(mbThread);
+
+					if ((mbThread.getRootMessageId() != rootMessageId)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_ROOTMESSAGEID,
+							finderArgs, mbThread);
+					}
+				}
+
+				return mbThread;
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (result == null) {
+					FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_ROOTMESSAGEID,
+						finderArgs);
+				}
+
+				closeSession(session);
+			}
+		}
+		else {
+			if (result instanceof List<?>) {
+				return null;
+			}
+			else {
+				return (MBThread)result;
+			}
 		}
 	}
 
@@ -2436,6 +2614,382 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 	}
 
 	/**
+	 * Finds all the message boards threads where lastPostDate = &#63; and priority = &#63;.
+	 *
+	 * @param lastPostDate the last post date to search with
+	 * @param priority the priority to search with
+	 * @return the matching message boards threads
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<MBThread> findByL_P(Date lastPostDate, double priority)
+		throws SystemException {
+		return findByL_P(lastPostDate, priority, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
+	}
+
+	/**
+	 * Finds a range of all the message boards threads where lastPostDate = &#63; and priority = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param lastPostDate the last post date to search with
+	 * @param priority the priority to search with
+	 * @param start the lower bound of the range of message boards threads to return
+	 * @param end the upper bound of the range of message boards threads to return (not inclusive)
+	 * @return the range of matching message boards threads
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<MBThread> findByL_P(Date lastPostDate, double priority,
+		int start, int end) throws SystemException {
+		return findByL_P(lastPostDate, priority, start, end, null);
+	}
+
+	/**
+	 * Finds an ordered range of all the message boards threads where lastPostDate = &#63; and priority = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param lastPostDate the last post date to search with
+	 * @param priority the priority to search with
+	 * @param start the lower bound of the range of message boards threads to return
+	 * @param end the upper bound of the range of message boards threads to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching message boards threads
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<MBThread> findByL_P(Date lastPostDate, double priority,
+		int start, int end, OrderByComparator orderByComparator)
+		throws SystemException {
+		Object[] finderArgs = new Object[] {
+				lastPostDate, priority,
+				
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
+			};
+
+		List<MBThread> list = (List<MBThread>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_L_P,
+				finderArgs, this);
+
+		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(4 +
+						(orderByComparator.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(4);
+			}
+
+			query.append(_SQL_SELECT_MBTHREAD_WHERE);
+
+			if (lastPostDate == null) {
+				query.append(_FINDER_COLUMN_L_P_LASTPOSTDATE_1);
+			}
+			else {
+				query.append(_FINDER_COLUMN_L_P_LASTPOSTDATE_2);
+			}
+
+			query.append(_FINDER_COLUMN_L_P_PRIORITY_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+
+			else {
+				query.append(MBThreadModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				if (lastPostDate != null) {
+					qPos.add(CalendarUtil.getTimestamp(lastPostDate));
+				}
+
+				qPos.add(priority);
+
+				list = (List<MBThread>)QueryUtil.list(q, getDialect(), start,
+						end);
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_L_P,
+						finderArgs);
+				}
+				else {
+					cacheResult(list);
+
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_L_P,
+						finderArgs, list);
+				}
+
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	/**
+	 * Finds the first message boards thread in the ordered set where lastPostDate = &#63; and priority = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param lastPostDate the last post date to search with
+	 * @param priority the priority to search with
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching message boards thread
+	 * @throws com.liferay.portlet.messageboards.NoSuchThreadException if a matching message boards thread could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public MBThread findByL_P_First(Date lastPostDate, double priority,
+		OrderByComparator orderByComparator)
+		throws NoSuchThreadException, SystemException {
+		List<MBThread> list = findByL_P(lastPostDate, priority, 0, 1,
+				orderByComparator);
+
+		if (list.isEmpty()) {
+			StringBundler msg = new StringBundler(6);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("lastPostDate=");
+			msg.append(lastPostDate);
+
+			msg.append(", priority=");
+			msg.append(priority);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchThreadException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	/**
+	 * Finds the last message boards thread in the ordered set where lastPostDate = &#63; and priority = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param lastPostDate the last post date to search with
+	 * @param priority the priority to search with
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching message boards thread
+	 * @throws com.liferay.portlet.messageboards.NoSuchThreadException if a matching message boards thread could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public MBThread findByL_P_Last(Date lastPostDate, double priority,
+		OrderByComparator orderByComparator)
+		throws NoSuchThreadException, SystemException {
+		int count = countByL_P(lastPostDate, priority);
+
+		List<MBThread> list = findByL_P(lastPostDate, priority, count - 1,
+				count, orderByComparator);
+
+		if (list.isEmpty()) {
+			StringBundler msg = new StringBundler(6);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("lastPostDate=");
+			msg.append(lastPostDate);
+
+			msg.append(", priority=");
+			msg.append(priority);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchThreadException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	/**
+	 * Finds the message boards threads before and after the current message boards thread in the ordered set where lastPostDate = &#63; and priority = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param threadId the primary key of the current message boards thread
+	 * @param lastPostDate the last post date to search with
+	 * @param priority the priority to search with
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next message boards thread
+	 * @throws com.liferay.portlet.messageboards.NoSuchThreadException if a message boards thread with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public MBThread[] findByL_P_PrevAndNext(long threadId, Date lastPostDate,
+		double priority, OrderByComparator orderByComparator)
+		throws NoSuchThreadException, SystemException {
+		MBThread mbThread = findByPrimaryKey(threadId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			MBThread[] array = new MBThreadImpl[3];
+
+			array[0] = getByL_P_PrevAndNext(session, mbThread, lastPostDate,
+					priority, orderByComparator, true);
+
+			array[1] = mbThread;
+
+			array[2] = getByL_P_PrevAndNext(session, mbThread, lastPostDate,
+					priority, orderByComparator, false);
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	protected MBThread getByL_P_PrevAndNext(Session session, MBThread mbThread,
+		Date lastPostDate, double priority,
+		OrderByComparator orderByComparator, boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_MBTHREAD_WHERE);
+
+		if (lastPostDate == null) {
+			query.append(_FINDER_COLUMN_L_P_LASTPOSTDATE_1);
+		}
+		else {
+			query.append(_FINDER_COLUMN_L_P_LASTPOSTDATE_2);
+		}
+
+		query.append(_FINDER_COLUMN_L_P_PRIORITY_2);
+
+		if (orderByComparator != null) {
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			if (orderByFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+		}
+
+		else {
+			query.append(MBThreadModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		if (lastPostDate != null) {
+			qPos.add(CalendarUtil.getTimestamp(lastPostDate));
+		}
+
+		qPos.add(priority);
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByValues(mbThread);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<MBThread> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
+		}
+	}
+
+	/**
 	 * Finds all the message boards threads where groupId = &#63; and categoryId = &#63; and lastPostDate = &#63;.
 	 *
 	 * @param groupId the group ID to search with
@@ -3880,6 +4434,19 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 	}
 
 	/**
+	 * Removes the message boards thread where rootMessageId = &#63; from the database.
+	 *
+	 * @param rootMessageId the root message ID to search with
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void removeByRootMessageId(long rootMessageId)
+		throws NoSuchThreadException, SystemException {
+		MBThread mbThread = findByRootMessageId(rootMessageId);
+
+		mbThreadPersistence.remove(mbThread);
+	}
+
+	/**
 	 * Removes all the message boards threads where groupId = &#63; and categoryId = &#63; from the database.
 	 *
 	 * @param groupId the group ID to search with
@@ -3930,6 +4497,20 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 	public void removeByC_P(long categoryId, double priority)
 		throws SystemException {
 		for (MBThread mbThread : findByC_P(categoryId, priority)) {
+			mbThreadPersistence.remove(mbThread);
+		}
+	}
+
+	/**
+	 * Removes all the message boards threads where lastPostDate = &#63; and priority = &#63; from the database.
+	 *
+	 * @param lastPostDate the last post date to search with
+	 * @param priority the priority to search with
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void removeByL_P(Date lastPostDate, double priority)
+		throws SystemException {
+		for (MBThread mbThread : findByL_P(lastPostDate, priority)) {
 			mbThreadPersistence.remove(mbThread);
 		}
 	}
@@ -4034,6 +4615,60 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 				}
 
 				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_GROUPID,
+					finderArgs, count);
+
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	/**
+	 * Counts all the message boards threads where rootMessageId = &#63;.
+	 *
+	 * @param rootMessageId the root message ID to search with
+	 * @return the number of matching message boards threads
+	 * @throws SystemException if a system exception occurred
+	 */
+	public int countByRootMessageId(long rootMessageId)
+		throws SystemException {
+		Object[] finderArgs = new Object[] { rootMessageId };
+
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_ROOTMESSAGEID,
+				finderArgs, this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(2);
+
+			query.append(_SQL_COUNT_MBTHREAD_WHERE);
+
+			query.append(_FINDER_COLUMN_ROOTMESSAGEID_ROOTMESSAGEID_2);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(rootMessageId);
+
+				count = (Long)q.uniqueResult();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_ROOTMESSAGEID,
 					finderArgs, count);
 
 				closeSession(session);
@@ -4358,6 +4993,72 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 				}
 
 				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_C_P, finderArgs,
+					count);
+
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	/**
+	 * Counts all the message boards threads where lastPostDate = &#63; and priority = &#63;.
+	 *
+	 * @param lastPostDate the last post date to search with
+	 * @param priority the priority to search with
+	 * @return the number of matching message boards threads
+	 * @throws SystemException if a system exception occurred
+	 */
+	public int countByL_P(Date lastPostDate, double priority)
+		throws SystemException {
+		Object[] finderArgs = new Object[] { lastPostDate, priority };
+
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_L_P,
+				finderArgs, this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(3);
+
+			query.append(_SQL_COUNT_MBTHREAD_WHERE);
+
+			if (lastPostDate == null) {
+				query.append(_FINDER_COLUMN_L_P_LASTPOSTDATE_1);
+			}
+			else {
+				query.append(_FINDER_COLUMN_L_P_LASTPOSTDATE_2);
+			}
+
+			query.append(_FINDER_COLUMN_L_P_PRIORITY_2);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				if (lastPostDate != null) {
+					qPos.add(CalendarUtil.getTimestamp(lastPostDate));
+				}
+
+				qPos.add(priority);
+
+				count = (Long)q.uniqueResult();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_L_P, finderArgs,
 					count);
 
 				closeSession(session);
@@ -4772,6 +5473,7 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 	private static final String _SQL_COUNT_MBTHREAD = "SELECT COUNT(mbThread) FROM MBThread mbThread";
 	private static final String _SQL_COUNT_MBTHREAD_WHERE = "SELECT COUNT(mbThread) FROM MBThread mbThread WHERE ";
 	private static final String _FINDER_COLUMN_GROUPID_GROUPID_2 = "mbThread.groupId = ?";
+	private static final String _FINDER_COLUMN_ROOTMESSAGEID_ROOTMESSAGEID_2 = "mbThread.rootMessageId = ?";
 	private static final String _FINDER_COLUMN_G_C_GROUPID_2 = "mbThread.groupId = ? AND ";
 	private static final String _FINDER_COLUMN_G_C_GROUPID_5 = "(" +
 		_removeConjunction(_FINDER_COLUMN_G_C_GROUPID_2) + ")";
@@ -4784,6 +5486,9 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 	private static final String _FINDER_COLUMN_G_S_STATUS_2 = "mbThread.status = ? AND mbThread.categoryId != -1";
 	private static final String _FINDER_COLUMN_C_P_CATEGORYID_2 = "mbThread.categoryId = ? AND ";
 	private static final String _FINDER_COLUMN_C_P_PRIORITY_2 = "mbThread.priority = ?";
+	private static final String _FINDER_COLUMN_L_P_LASTPOSTDATE_1 = "mbThread.lastPostDate IS NULL AND ";
+	private static final String _FINDER_COLUMN_L_P_LASTPOSTDATE_2 = "mbThread.lastPostDate = ? AND ";
+	private static final String _FINDER_COLUMN_L_P_PRIORITY_2 = "mbThread.priority = ?";
 	private static final String _FINDER_COLUMN_G_C_L_GROUPID_2 = "mbThread.groupId = ? AND ";
 	private static final String _FINDER_COLUMN_G_C_L_CATEGORYID_2 = "mbThread.categoryId = ? AND ";
 	private static final String _FINDER_COLUMN_G_C_L_LASTPOSTDATE_1 = "mbThread.lastPostDate IS NULL";

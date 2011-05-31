@@ -318,6 +318,48 @@ public class MBThreadUtil {
 	}
 
 	/**
+	* Finds the message boards thread where rootMessageId = &#63; or throws a {@link com.liferay.portlet.messageboards.NoSuchThreadException} if it could not be found.
+	*
+	* @param rootMessageId the root message ID to search with
+	* @return the matching message boards thread
+	* @throws com.liferay.portlet.messageboards.NoSuchThreadException if a matching message boards thread could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.portlet.messageboards.model.MBThread findByRootMessageId(
+		long rootMessageId)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.messageboards.NoSuchThreadException {
+		return getPersistence().findByRootMessageId(rootMessageId);
+	}
+
+	/**
+	* Finds the message boards thread where rootMessageId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	*
+	* @param rootMessageId the root message ID to search with
+	* @return the matching message boards thread, or <code>null</code> if a matching message boards thread could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.portlet.messageboards.model.MBThread fetchByRootMessageId(
+		long rootMessageId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().fetchByRootMessageId(rootMessageId);
+	}
+
+	/**
+	* Finds the message boards thread where rootMessageId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	*
+	* @param rootMessageId the root message ID to search with
+	* @return the matching message boards thread, or <code>null</code> if a matching message boards thread could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.portlet.messageboards.model.MBThread fetchByRootMessageId(
+		long rootMessageId, boolean retrieveFromCache)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .fetchByRootMessageId(rootMessageId, retrieveFromCache);
+	}
+
+	/**
 	* Finds all the message boards threads where groupId = &#63; and categoryId = &#63;.
 	*
 	* @param groupId the group ID to search with
@@ -894,6 +936,135 @@ public class MBThreadUtil {
 	}
 
 	/**
+	* Finds all the message boards threads where lastPostDate = &#63; and priority = &#63;.
+	*
+	* @param lastPostDate the last post date to search with
+	* @param priority the priority to search with
+	* @return the matching message boards threads
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<com.liferay.portlet.messageboards.model.MBThread> findByL_P(
+		java.util.Date lastPostDate, double priority)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().findByL_P(lastPostDate, priority);
+	}
+
+	/**
+	* Finds a range of all the message boards threads where lastPostDate = &#63; and priority = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param lastPostDate the last post date to search with
+	* @param priority the priority to search with
+	* @param start the lower bound of the range of message boards threads to return
+	* @param end the upper bound of the range of message boards threads to return (not inclusive)
+	* @return the range of matching message boards threads
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<com.liferay.portlet.messageboards.model.MBThread> findByL_P(
+		java.util.Date lastPostDate, double priority, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().findByL_P(lastPostDate, priority, start, end);
+	}
+
+	/**
+	* Finds an ordered range of all the message boards threads where lastPostDate = &#63; and priority = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param lastPostDate the last post date to search with
+	* @param priority the priority to search with
+	* @param start the lower bound of the range of message boards threads to return
+	* @param end the upper bound of the range of message boards threads to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of matching message boards threads
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<com.liferay.portlet.messageboards.model.MBThread> findByL_P(
+		java.util.Date lastPostDate, double priority, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .findByL_P(lastPostDate, priority, start, end,
+			orderByComparator);
+	}
+
+	/**
+	* Finds the first message boards thread in the ordered set where lastPostDate = &#63; and priority = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param lastPostDate the last post date to search with
+	* @param priority the priority to search with
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching message boards thread
+	* @throws com.liferay.portlet.messageboards.NoSuchThreadException if a matching message boards thread could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.portlet.messageboards.model.MBThread findByL_P_First(
+		java.util.Date lastPostDate, double priority,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.messageboards.NoSuchThreadException {
+		return getPersistence()
+				   .findByL_P_First(lastPostDate, priority, orderByComparator);
+	}
+
+	/**
+	* Finds the last message boards thread in the ordered set where lastPostDate = &#63; and priority = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param lastPostDate the last post date to search with
+	* @param priority the priority to search with
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching message boards thread
+	* @throws com.liferay.portlet.messageboards.NoSuchThreadException if a matching message boards thread could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.portlet.messageboards.model.MBThread findByL_P_Last(
+		java.util.Date lastPostDate, double priority,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.messageboards.NoSuchThreadException {
+		return getPersistence()
+				   .findByL_P_Last(lastPostDate, priority, orderByComparator);
+	}
+
+	/**
+	* Finds the message boards threads before and after the current message boards thread in the ordered set where lastPostDate = &#63; and priority = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param threadId the primary key of the current message boards thread
+	* @param lastPostDate the last post date to search with
+	* @param priority the priority to search with
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the previous, current, and next message boards thread
+	* @throws com.liferay.portlet.messageboards.NoSuchThreadException if a message boards thread with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.portlet.messageboards.model.MBThread[] findByL_P_PrevAndNext(
+		long threadId, java.util.Date lastPostDate, double priority,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.messageboards.NoSuchThreadException {
+		return getPersistence()
+				   .findByL_P_PrevAndNext(threadId, lastPostDate, priority,
+			orderByComparator);
+	}
+
+	/**
 	* Finds all the message boards threads where groupId = &#63; and categoryId = &#63; and lastPostDate = &#63;.
 	*
 	* @param groupId the group ID to search with
@@ -1436,6 +1607,18 @@ public class MBThreadUtil {
 	}
 
 	/**
+	* Removes the message boards thread where rootMessageId = &#63; from the database.
+	*
+	* @param rootMessageId the root message ID to search with
+	* @throws SystemException if a system exception occurred
+	*/
+	public static void removeByRootMessageId(long rootMessageId)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.messageboards.NoSuchThreadException {
+		getPersistence().removeByRootMessageId(rootMessageId);
+	}
+
+	/**
 	* Removes all the message boards threads where groupId = &#63; and categoryId = &#63; from the database.
 	*
 	* @param groupId the group ID to search with
@@ -1481,6 +1664,18 @@ public class MBThreadUtil {
 	public static void removeByC_P(long categoryId, double priority)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().removeByC_P(categoryId, priority);
+	}
+
+	/**
+	* Removes all the message boards threads where lastPostDate = &#63; and priority = &#63; from the database.
+	*
+	* @param lastPostDate the last post date to search with
+	* @param priority the priority to search with
+	* @throws SystemException if a system exception occurred
+	*/
+	public static void removeByL_P(java.util.Date lastPostDate, double priority)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getPersistence().removeByL_P(lastPostDate, priority);
 	}
 
 	/**
@@ -1546,6 +1741,18 @@ public class MBThreadUtil {
 	}
 
 	/**
+	* Counts all the message boards threads where rootMessageId = &#63;.
+	*
+	* @param rootMessageId the root message ID to search with
+	* @return the number of matching message boards threads
+	* @throws SystemException if a system exception occurred
+	*/
+	public static int countByRootMessageId(long rootMessageId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().countByRootMessageId(rootMessageId);
+	}
+
+	/**
 	* Counts all the message boards threads where groupId = &#63; and categoryId = &#63;.
 	*
 	* @param groupId the group ID to search with
@@ -1608,6 +1815,19 @@ public class MBThreadUtil {
 	public static int countByC_P(long categoryId, double priority)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByC_P(categoryId, priority);
+	}
+
+	/**
+	* Counts all the message boards threads where lastPostDate = &#63; and priority = &#63;.
+	*
+	* @param lastPostDate the last post date to search with
+	* @param priority the priority to search with
+	* @return the number of matching message boards threads
+	* @throws SystemException if a system exception occurred
+	*/
+	public static int countByL_P(java.util.Date lastPostDate, double priority)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().countByL_P(lastPostDate, priority);
 	}
 
 	/**
