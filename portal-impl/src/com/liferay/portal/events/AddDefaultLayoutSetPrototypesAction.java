@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.events.ActionException;
 import com.liferay.portal.kernel.events.SimpleAction;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
@@ -86,7 +87,8 @@ public class AddDefaultLayoutSetPrototypesAction extends SimpleAction {
 		throws Exception {
 
 		for (LayoutSetPrototype layoutSetPrototype : layoutSetPrototypes) {
-			String curName = layoutSetPrototype.getName(Locale.US);
+			String curName = 
+				layoutSetPrototype.getName(LocaleUtil.getDefault());
 			String curDescription = layoutSetPrototype.getDescription();
 
 			if (name.equals(curName) && description.equals(curDescription)) {
@@ -96,7 +98,7 @@ public class AddDefaultLayoutSetPrototypesAction extends SimpleAction {
 
 		Map<Locale, String> nameMap = new HashMap<Locale, String>();
 
-		nameMap.put(Locale.US, name);
+		nameMap.put(LocaleUtil.getDefault(), name);
 
 		LayoutSetPrototype layoutSetPrototype =
 			LayoutSetPrototypeLocalServiceUtil.addLayoutSetPrototype(
@@ -167,7 +169,8 @@ public class AddDefaultLayoutSetPrototypesAction extends SimpleAction {
 		preferences.put("class-name-ids", String.valueOf(classNameId));
 
 		preferences.put(
-			"portlet-setup-title-en_US", "Upcoming Events");
+			"portlet-setup-title-" + LocaleUtil.getDefault().toString(),
+			"Upcoming Events");
 		preferences.put(
 			"portlet-setup-use-custom-title", Boolean.TRUE.toString());
 

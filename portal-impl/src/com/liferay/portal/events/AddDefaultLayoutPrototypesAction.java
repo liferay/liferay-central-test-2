@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.events.ActionException;
 import com.liferay.portal.kernel.events.SimpleAction;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.model.Group;
@@ -103,7 +104,7 @@ public class AddDefaultLayoutPrototypesAction extends SimpleAction {
 		throws Exception {
 
 		for (LayoutPrototype layoutPrototype : layoutPrototypes) {
-			String curName = layoutPrototype.getName(Locale.US);
+			String curName = layoutPrototype.getName(LocaleUtil.getDefault());
 			String curDescription = layoutPrototype.getDescription();
 
 			if (name.equals(curName) && description.equals(curDescription)) {
@@ -113,7 +114,7 @@ public class AddDefaultLayoutPrototypesAction extends SimpleAction {
 
 		Map<Locale, String> nameMap = new HashMap<Locale, String>();
 
-		nameMap.put(Locale.US, name);
+		nameMap.put(LocaleUtil.getDefault(), name);
 
 		LayoutPrototype layoutPrototype =
 			LayoutPrototypeLocalServiceUtil.addLayoutPrototype(
