@@ -17,10 +17,12 @@ package com.liferay.portal.kernel.dao.search;
 import com.liferay.portal.kernel.bean.BeanPropertiesUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 
 import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.PageContext;
+import java.util.Map;
 
 /**
  * @author Brian Wing Shun Chan
@@ -33,6 +35,10 @@ public class TextSearchEntry extends SearchEntry {
 		BeanPropertiesUtil.copyProperties(this, textSearchEntry);
 
 		return textSearchEntry;
+	}
+
+	public Map<String, Object> getData() {
+		return _data;
 	}
 
 	public String getHref() {
@@ -74,6 +80,21 @@ public class TextSearchEntry extends SearchEntry {
 				sb.append("\"");
 			}
 
+			if ((_data != null) && (!_data.isEmpty())) {
+				sb.append(StringPool.BLANK);
+
+				for (Map.Entry<String, Object> entry : _data.entrySet()) {
+					String dataKey = entry.getKey();
+					String dataValue = String.valueOf(entry.getValue());
+
+					sb.append("data-");
+					sb.append(dataKey);
+					sb.append("=\"");
+					sb.append(dataValue);
+					sb.append("\" ");
+				}
+			}
+
 			sb.append(">");
 			sb.append(_name);
 			sb.append("</a>");
@@ -82,6 +103,10 @@ public class TextSearchEntry extends SearchEntry {
 
 			jspWriter.print(sb.toString());
 		}
+	}
+
+	public void setData(Map<String,Object> data) {
+		_data = data;
 	}
 
 	public void setHref(String href) {
@@ -100,6 +125,7 @@ public class TextSearchEntry extends SearchEntry {
 		_title = title;
 	}
 
+	private Map<String, Object> _data;
 	private String _href;
 	private String _name;
 	private String _target;
