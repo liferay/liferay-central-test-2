@@ -298,7 +298,7 @@ else if (documentType != null) {
 			</c:if>
 
 			<c:if test="<%= folder.isSupportsSocial() %>">
-			    <liferay-ui:panel defaultState="closed" extended="<%= false %>" id="dlFileEntryCategorizationPanel" persistState="<%= true %>" title="categorization">
+				<liferay-ui:panel defaultState="closed" extended="<%= false %>" id="dlFileEntryCategorizationPanel" persistState="<%= true %>" title="categorization">
 					<aui:fieldset>
 						<aui:input classPK="<%= assetClassPK %>" model="<%= DLFileEntry.class %>" name="categories" type="assetCategories" />
 
