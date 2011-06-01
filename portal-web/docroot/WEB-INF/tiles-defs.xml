@@ -462,6 +462,10 @@
 		<put name="portlet_content" value="/portlet/document_library_display/search.jsp" />
 	</definition>
 
+	<definition name="portlet.document_library_display.select_document_type" extends="portlet.document_library_display">
+		<put name="portlet_content" value="/portlet/document_library_display/select_document_type.jsp" />
+	</definition>
+
 	<definition name="portlet.document_library_display.view" extends="portlet.document_library_display">
 		<put name="portlet_content" value="/portlet/document_library_display/view.jsp" />
 	</definition>

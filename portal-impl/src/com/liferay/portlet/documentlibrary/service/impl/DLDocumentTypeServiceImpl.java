@@ -69,6 +69,10 @@ public class DLDocumentTypeServiceImpl extends DLDocumentTypeServiceBaseImpl {
 			groupId, start, end);
 	}
 
+	public int getDocumentTypesCount(long groupId)throws SystemException {
+		return dlDocumentTypePersistence.filterCountByGroupId(groupId);
+	}
+
 	public void updateDocumentType(
 			long documentTypeId, String name, String description,
 			long[] ddmStructureIds, ServiceContext serviceContext)

@@ -230,14 +230,34 @@ if (row == null && portletName.equals(PortletKeys.DOCUMENT_LIBRARY_DISPLAY)) {
 		<c:if test="<%= portletName.equals(PortletKeys.DOCUMENT_LIBRARY_DISPLAY) %>">
 			<c:if test="<%= showActions && DLFolderPermission.contains(permissionChecker, scopeGroupId, folderId, ActionKeys.ADD_DOCUMENT) %>">
 				<portlet:renderURL var="editFileEntryURL">
-					<portlet:param name="struts_action" value="/document_library_display/edit_file_entry" />
+					<portlet:param name="struts_action" value="/document_library/upload_multiple_file_entries" />
 					<portlet:param name="redirect" value="<%= currentURL %>" />
 					<portlet:param name="backURL" value="<%= currentURL %>" />
 					<portlet:param name="repositoryId" value="<%= String.valueOf(repositoryId) %>" />
 					<portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" />
 				</portlet:renderURL>
 
-				<liferay-ui:icon image="../document_library/add_document" message="add-document" url="<%= editFileEntryURL %>" />
+				<liferay-ui:icon cssClass="aui-helper-hidden upload-multiple-documents" image="../document_library/add_multiple_documents" message="multiple-documents" url="<%= editFileEntryURL %>" />
+			</c:if>
+
+			<%
+			int documentTypesCount = DLDocumentTypeServiceUtil.getDocumentTypesCount(scopeGroupId);
+			%>
+
+			<c:if test="<%= showActions && DLFolderPermission.contains(permissionChecker, scopeGroupId, folderId, ActionKeys.ADD_DOCUMENT) %>">
+				<liferay-portlet:renderURL var="editFileEntryURL" windowState="<%= documentTypesCount > 0 ? LiferayWindowState.POP_UP.toString() : WindowState.NORMAL.toString() %>">
+					<portlet:param name="struts_action" value='<%= documentTypesCount > 0 ? "/document_library_display/select_document_type" : "/document_library_display/edit_file_entry" %>' />
+					<portlet:param name="redirect" value="<%= currentURL %>" />
+					<portlet:param name="backURL" value="<%= currentURL %>" />
+					<portlet:param name="repositoryId" value="<%= String.valueOf(repositoryId) %>" />
+					<portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" />
+				</liferay-portlet:renderURL>
+
+				<%
+				String taglibEditURL = "javascript:Liferay.Util.openWindow({dialog: {width: 420}, id: '" + renderResponse.getNamespace() + "selectDocumentType', title: '" + LanguageUtil.get(pageContext, "select-document-type") + "', uri:'" + editFileEntryURL.toString() + "'});";
+				%>
+
+				<liferay-ui:icon image="../document_library/add_document" message="add-document" url="<%= documentTypesCount > 0 ? taglibEditURL : editFileEntryURL %>" />
 			</c:if>
 
 			<c:if test="<%= showActions && DLFolderPermission.contains(permissionChecker, scopeGroupId, folderId, ActionKeys.ADD_SHORTCUT) && ((folder == null) || folder.isSupportsShortcuts()) %>">
@@ -322,6 +342,16 @@ if (row == null && portletName.equals(PortletKeys.DOCUMENT_LIBRARY_DISPLAY)) {
 		</div>
 	</div>
 </div>
+
+<aui:script use="aui-base,aui-swf">
+	if (A.SWF.isFlashVersionAtLeast(9)) {
+		var uploadMultipleDocumentsIcon = A.one('.aui-helper-hidden.upload-multiple-documents');
+
+		if (uploadMultipleDocumentsIcon) {
+			uploadMultipleDocumentsIcon.removeClass('aui-helper-hidden');
+		}
+	}
+</aui:script>
 
 <aui:script use="aui-dialog">
 	var webdavAction = A.one('.<%= randomNamespace %>-webdav-action');
