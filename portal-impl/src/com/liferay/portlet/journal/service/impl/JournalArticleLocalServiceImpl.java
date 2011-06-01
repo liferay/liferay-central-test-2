@@ -2190,8 +2190,8 @@ public class JournalArticleLocalServiceImpl
 				article.getPrimaryKey(), article.getUuid(), assetCategoryIds,
 				assetTagNames, false, null, null, displayDate, expirationDate,
 				ContentTypes.TEXT_HTML, article.getTitle(),
-				article.getDescription(), null, null, article.getLayoutUuid(),
-				0, 0, null, false);
+				article.getDescription(), article.getDescription(),
+				null, article.getLayoutUuid(), 0, 0, null, false);
 		}
 		else {
 			assetEntry = assetEntryLocalService.updateEntry(
@@ -2199,8 +2199,9 @@ public class JournalArticleLocalServiceImpl
 				article.getResourcePrimKey(), article.getUuid(),
 				assetCategoryIds, assetTagNames, visible, null, null,
 				displayDate, expirationDate, ContentTypes.TEXT_HTML,
-				article.getTitle(), article.getDescription(), null, null,
-				article.getLayoutUuid(), 0, 0, null, false);
+				article.getTitle(), article.getDescription(),
+				article.getDescription(), null, article.getLayoutUuid(), 0, 0,
+				null, false);
 		}
 
 		assetLinkLocalService.updateLinks(
@@ -2311,7 +2312,8 @@ public class JournalArticleLocalServiceImpl
 								assetCategoryIds, assetTagNames, visible, null,
 								null, displayDate, expirationDate,
 								ContentTypes.TEXT_HTML, article.getTitle(),
-								article.getDescription(), null, null,
+								article.getDescription(),
+								article.getDescription(), null,
 								article.getLayoutUuid(), 0, 0, null, false);
 
 						assetLinkLocalService.updateLinks(
