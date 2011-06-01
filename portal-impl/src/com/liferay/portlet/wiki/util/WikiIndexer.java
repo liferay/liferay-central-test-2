@@ -76,7 +76,7 @@ public class WikiIndexer extends BaseIndexer {
 
 		long[] nodeIds = searchContext.getNodeIds();
 
-		if (nodeIds != null && nodeIds.length > 0) {
+		if ((nodeIds != null) && (nodeIds.length > 0)) {
 			BooleanQuery nodeIdsQuery = BooleanQueryFactoryUtil.create();
 
 			for (long nodeId : nodeIds) {
