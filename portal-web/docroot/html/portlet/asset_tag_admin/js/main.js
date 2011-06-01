@@ -991,7 +991,9 @@ AUI().add(
 							var tagsMessageContainer = instance._tagsMessageContainer;
 
 							tagsMessageContainer.html(Liferay.Language.get('there-are-no-tags'));
+
 							instance._tagsList.setContent(tagsMessageContainer);
+
 							tagsMessageContainer.show();
 
 							instance._selectedTagName = null;
