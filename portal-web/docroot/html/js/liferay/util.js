@@ -1026,18 +1026,12 @@
 			var ddmURL = Liferay.PortletURL.createRenderURL();
 
 			ddmURL.setEscapeXML(false);
-			ddmURL.setParameter('struts_action', '/dynamic_data_mapping/view');
+			
+			ddmURL.setParameter('chooseCallback', config.chooseCallback);
+			ddmURL.setParameter('saveCallback', config.saveCallback);
 			ddmURL.setParameter('scopeStorageType', config.storageType);
 			ddmURL.setParameter('scopeStructureName', config.structureName);
 			ddmURL.setParameter('scopeStructureType', config.structureType);
-			ddmURL.setParameter('chooseCallback', config.chooseCallback);
-			ddmURL.setParameter('saveCallback', config.saveCallback);
-			ddmURL.setPortletId(166);
-			ddmURL.setWindowState('pop_up');
-
-			if (config.struts_action) {
-				ddmURL.setParameter('struts_action', config.struts_action);
-			}
 
 			if (config.showManageTemplates) {
 				ddmURL.setParameter('showManageTemplates', config.showManageTemplates);
@@ -1046,6 +1040,15 @@
 			if (config.showToolbar) {
 				ddmURL.setParameter('showToolbar', config.showToolbar);
 			}
+
+			ddmURL.setParameter('struts_action', '/dynamic_data_mapping/view');
+
+			if (config.struts_action) {
+				ddmURL.setParameter('struts_action', config.struts_action);
+			}
+
+			ddmURL.setPortletId(166);
+			ddmURL.setWindowState('pop_up');
 
 			config.uri = ddmURL.toString();
 

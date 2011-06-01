@@ -125,11 +125,11 @@ String newRecordSetKey = ParamUtil.getString(request, "newRecordSetKey");
 	function <portlet:namespace />openDDMPortlet() {
 		Liferay.Util.openDDMPortlet(
 			{
+				chooseCallback: '<portlet:namespace />selectDDMStructure',
 				dialog: {
 					stack: false,
 					width:820
 				},
-				chooseCallback: '<portlet:namespace />selectDDMStructure',
 				structureName: 'data-definition',
 				structureType: 'com.liferay.portlet.dynamicdatalists.model.DDLRecordSet',
 				title: '<liferay-ui:message key="data-definitions" />'

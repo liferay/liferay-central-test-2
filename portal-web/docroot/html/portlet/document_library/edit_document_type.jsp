@@ -117,12 +117,12 @@ if (documentType != null) {
 					stack: false,
 					width:680
 				},
-				struts_action: '/dynamic_data_mapping/select_structure',
 				showManageTemplates: 'false',
 				showToolbar: 'false',
+				storageType: 'xml',
+				struts_action: '/dynamic_data_mapping/select_structure',
 				structureName: 'metadata-set',
 				structureType: 'com.liferay.portlet.documentlibrary.model.DLDocumentMetadataSet',
-				storageType: 'xml',
 				title: '<liferay-ui:message key="metadata-sets" />',
 				saveCallback: '<%= renderResponse.getNamespace() + "selectDDMStructure" %>'
 			}

@@ -17,18 +17,18 @@
 <%@ include file="/html/portlet/dynamic_data_mapping/init.jsp" %>
 
 <%
+String backURL = ParamUtil.getString(request, "backURL");
+
 String toolbarItem = ParamUtil.getString(request, "toolbarItem", "view-all");
 
 String structureKey = ParamUtil.getString(request, "structureKey");
-
-String backURL = ParamUtil.getString(request, "backURL");
 %>
 
 <div class="lfr-portlet-toolbar">
 	<portlet:renderURL var="viewEntriesURL">
 		<portlet:param name="struts_action" value="/dynamic_data_mapping/view_template" />
-		<portlet:param name="structureKey" value="<%= structureKey %>" />
 		<portlet:param name="backURL" value="<%= backURL %>" />
+		<portlet:param name="structureKey" value="<%= structureKey %>" />
 	</portlet:renderURL>
 
 	<span class="lfr-toolbar-button view-button <%= toolbarItem.equals("view-all") ? "current" : StringPool.BLANK %>">

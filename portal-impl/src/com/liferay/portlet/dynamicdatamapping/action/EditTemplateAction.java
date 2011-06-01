@@ -172,13 +172,13 @@ public class EditTemplateAction extends PortletAction {
 			"struts_action", "/dynamic_data_mapping/edit_template");
 		portletURL.setParameter("redirect", redirect, false);
 		portletURL.setParameter(
+			"templateId", String.valueOf(template.getTemplateId()), false);
+		portletURL.setParameter(
 			"groupId", String.valueOf(template.getGroupId()), false);
 		portletURL.setParameter("structureKey", structureKey, false);
 		portletURL.setParameter("type", template.getType(), false);
 		portletURL.setParameter("availableFields", availableFields, false);
 		portletURL.setParameter("saveCallback", saveCallback, false);
-		portletURL.setParameter(
-			"templateId", String.valueOf(template.getTemplateId()), false);
 
 		return portletURL.toString();
 	}

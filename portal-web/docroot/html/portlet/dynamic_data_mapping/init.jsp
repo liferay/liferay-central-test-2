@@ -52,8 +52,8 @@ PortalPreferences portalPreferences = PortletPreferencesFactoryUtil.getPortalPre
 boolean showManageTemplates = ParamUtil.getBoolean(request, "showManageTemplates", true);
 boolean showToolbar = ParamUtil.getBoolean(request, "showToolbar", true);
 
-String scopeStructureName = ParamUtil.getString(request, "scopeStructureName");
 String scopeStorageType = ParamUtil.getString(request, "scopeStorageType");
+String scopeStructureName = ParamUtil.getString(request, "scopeStructureName");
 String scopeStructureType = ParamUtil.getString(request, "scopeStructureType");
 
 String chooseCallback = ParamUtil.getString(request, "chooseCallback");
@@ -63,11 +63,11 @@ long classNameId = PortalUtil.getClassNameId(scopeStructureType);
 
 String storageTypeValue = StringPool.BLANK;
 
-if (scopeStorageType.equals("xml")) {
-	storageTypeValue = StorageType.XML.getValue();
-}
-else if (scopeStorageType.equals("expando")) {
+if (scopeStorageType.equals("expando")) {
 	storageTypeValue = StorageType.EXPANDO.getValue();
+}
+else if (scopeStorageType.equals("xml")) {
+	storageTypeValue = StorageType.XML.getValue();
 }
 
 Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZone);

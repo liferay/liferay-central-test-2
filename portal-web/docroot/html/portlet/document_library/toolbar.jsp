@@ -123,9 +123,9 @@ String orderByType = ParamUtil.getString(request, "orderByType");
 					width:820
 				},
 				showManageTemplates: 'false',
+				storageType: 'xml',
 				structureName: 'metadata-set',
 				structureType: 'com.liferay.portlet.documentlibrary.model.DLDocumentMetadataSet',
-				storageType: 'xml',
 				title: '<liferay-ui:message key="metadata-sets" />'
 			}
 		);

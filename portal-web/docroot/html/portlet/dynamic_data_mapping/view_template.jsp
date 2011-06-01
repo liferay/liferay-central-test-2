@@ -33,8 +33,8 @@ PortletURL portletURL = renderResponse.createRenderURL();
 
 portletURL.setParameter("struts_action", "/dynamic_data_mapping/view_template");
 portletURL.setParameter("tabs1", tabs1);
-portletURL.setParameter("structureKey", structureKey);
 portletURL.setParameter("backURL", backURL);
+portletURL.setParameter("structureKey", structureKey);
 %>
 
 <c:if test="<%= (structure != null) %>">
