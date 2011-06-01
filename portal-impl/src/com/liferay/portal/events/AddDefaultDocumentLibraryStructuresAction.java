@@ -124,10 +124,8 @@ public class AddDefaultDocumentLibraryStructuresAction extends SimpleAction {
 
 		addDLDocumentType(
 			userId, groupId, "Image", "Image Document Type",
-			"Default Image's Metadata Set based on Dublin Core Metadata " +
-				"Iniative",
-			"Default Image's Metadata Set based on Dublin Core Metadata " +
-				"Iniative", serviceContext);
+			"Default Image's Metadata Set", "Default Image's Metadata Set",
+			serviceContext);
 
 		addDLDocumentType(
 			userId, groupId, "Video", "Video Document Type",
