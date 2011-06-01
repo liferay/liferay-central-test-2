@@ -25,7 +25,7 @@ long folderId = ParamUtil.getLong(request, "folderId");
 
 List<DLDocumentType> documentTypes = new ArrayList<DLDocumentType>();
 
-DLDocumentType basicDocumentType = DLDocumentTypeLocalServiceUtil.create(0);
+DLDocumentType basicDocumentType = DLDocumentTypeLocalServiceUtil.createDLDocumentType(0);
 
 basicDocumentType.setName(LanguageUtil.get(pageContext, "basic-document"));
 
