@@ -20,6 +20,7 @@ import com.liferay.portal.parsers.creole.ast.FormattedTextNode;
 import com.liferay.portal.parsers.creole.ast.ItalicTextNode;
 import com.liferay.portal.parsers.creole.ast.NoWikiSectionNode;
 import com.liferay.portal.parsers.creole.ast.UnformattedTextNode;
+import com.liferay.portal.parsers.creole.ast.link.LinkNode;
 import com.liferay.portal.parsers.creole.visitor.impl.BaseASTVisitor;
 
 /**
@@ -45,7 +46,7 @@ public abstract class UnformattedTextVisitor extends BaseASTVisitor {
 			write(formattedTextNode.getContent());
 		}
 		else {
-			traverse(formattedTextNode.getChildASTNodes());
+			super.visit(formattedTextNode);
 		}
 	}
 
@@ -56,6 +57,15 @@ public abstract class UnformattedTextVisitor extends BaseASTVisitor {
 		else {
 			super.visit(italicTextNode);
 		}
+	}
+
+	public void visit(LinkNode linkNode) {
+		String link = linkNode.getLink();
+		if (link != null) {
+			write(link);
+		}
+
+		super.visit(linkNode);
 	}
 
 	public void visit(NoWikiSectionNode noWikiSectionNode) {

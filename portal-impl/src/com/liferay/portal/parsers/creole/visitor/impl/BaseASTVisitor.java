@@ -48,7 +48,10 @@ import java.util.List;
 public abstract class BaseASTVisitor implements ASTVisitor {
 
 	public void visit(BoldTextNode boldTextNode) {
-		traverse(boldTextNode.getChildASTNodes());
+
+		if (boldTextNode.getChildASTNodesCount() > 0) {
+			traverse(boldTextNode.getChildASTNodes());
+		}
 	}
 
 	public void visit(TableDataNode tableDataNode) {
@@ -69,7 +72,9 @@ public abstract class BaseASTVisitor implements ASTVisitor {
 	}
 
 	public void visit(FormattedTextNode formattedTextNode) {
-		traverse(formattedTextNode.getChildASTNodes());
+		if (formattedTextNode.getChildASTNodesCount() > 0) {
+			traverse(formattedTextNode.getChildASTNodes());
+		}
 	}
 
 	public void visit(HeadingNode headingNode) {
@@ -80,11 +85,15 @@ public abstract class BaseASTVisitor implements ASTVisitor {
 	}
 
 	public void visit(ImageNode imageNode) {
-		traverse(imageNode.getAltNode().getASTNodes());
+		if (imageNode.hasAltCollectionNode()) {
+			traverse(imageNode.getAltNode().getASTNodes());
+		}
 	}
 
 	public void visit(ItalicTextNode italicTextNode) {
-		traverse(italicTextNode.getChildASTNodes());
+		if (italicTextNode.getChildASTNodesCount() > 0) {
+			traverse(italicTextNode.getChildASTNodes());
+		}
 	}
 
 	public void visit(LineNode lineNode) {
@@ -92,7 +101,9 @@ public abstract class BaseASTVisitor implements ASTVisitor {
 	}
 
 	public void visit(LinkNode linkNode) {
-		traverse(linkNode.getAltCollectionNode().getASTNodes());
+		if (linkNode.hasAltCollectionNode()) {
+			traverse(linkNode.getAltCollectionNode().getASTNodes());
+		}
 	}
 
 	public void visit(NoWikiSectionNode noWikiSectionNode) {
@@ -121,7 +132,9 @@ public abstract class BaseASTVisitor implements ASTVisitor {
 	}
 
 	public void visit(UnformattedTextNode unformattedTextNode) {
-		traverse(unformattedTextNode.getChildASTNodes());
+		if (unformattedTextNode.getChildASTNodesCount() > 0) {
+			traverse(unformattedTextNode.getChildASTNodes());
+		}
 	}
 
 	public void visit(UnorderedListItemNode unorderedListItemNode) {
