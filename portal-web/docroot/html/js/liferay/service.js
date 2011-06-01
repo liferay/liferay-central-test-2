@@ -684,9 +684,6 @@ Liferay.Service.registerClass(
 Liferay.Service.registerClass(
 	Liferay.Service.DL, "DLFileEntry",
 	{
-		cancelCheckOut: true,
-		checkInFileEntry: true,
-		checkOutFileEntry: true,
 		copyFileEntry: true,
 		deleteFileEntry: true,
 		getFileEntries: true,

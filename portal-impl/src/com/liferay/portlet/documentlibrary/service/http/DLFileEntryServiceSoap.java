@@ -66,63 +66,6 @@ import java.rmi.RemoteException;
  * @generated
  */
 public class DLFileEntryServiceSoap {
-	public static void cancelCheckOut(long fileEntryId)
-		throws RemoteException {
-		try {
-			DLFileEntryServiceUtil.cancelCheckOut(fileEntryId);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static void checkInFileEntry(long fileEntryId, boolean major,
-		java.lang.String changeLog,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws RemoteException {
-		try {
-			DLFileEntryServiceUtil.checkInFileEntry(fileEntryId, major,
-				changeLog, serviceContext);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static com.liferay.portlet.documentlibrary.model.DLFileEntrySoap checkOutFileEntry(
-		long fileEntryId) throws RemoteException {
-		try {
-			com.liferay.portlet.documentlibrary.model.DLFileEntry returnValue = DLFileEntryServiceUtil.checkOutFileEntry(fileEntryId);
-
-			return com.liferay.portlet.documentlibrary.model.DLFileEntrySoap.toSoapModel(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static com.liferay.portlet.documentlibrary.model.DLFileEntrySoap checkOutFileEntry(
-		long fileEntryId, java.lang.String owner, long expirationTime)
-		throws RemoteException {
-		try {
-			com.liferay.portlet.documentlibrary.model.DLFileEntry returnValue = DLFileEntryServiceUtil.checkOutFileEntry(fileEntryId,
-					owner, expirationTime);
-
-			return com.liferay.portlet.documentlibrary.model.DLFileEntrySoap.toSoapModel(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
 	public static void copyFileEntry(long groupId, long repositoryId,
 		long fileEntryId, long destFolderId,
 		com.liferay.portal.service.ServiceContext serviceContext)

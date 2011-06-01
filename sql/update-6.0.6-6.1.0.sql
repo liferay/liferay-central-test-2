@@ -152,12 +152,6 @@ create table DLDocumentType_DDMStructure (
 alter table DLFileEntry add repositoryId LONG;
 alter table DLFileEntry add mimeType VARCHAR(75) null;
 alter table DLFileEntry add documentTypeId LONG;
-alter table DLFileEntry add checkedOut BOOLEAN;
-alter table DLFileEntry add checkoutDate DATE null;
-alter table DLFileEntry add checkoutExpirationDate DATE null;
-alter table DLFileEntry add checkoutOwner VARCHAR(75) null;
-alter table DLFileEntry add checkoutUserId LONG;
-alter table DLFileEntry add checkoutUserName VARCHAR(75) null;
 
 COMMIT_TRANSACTION;
 

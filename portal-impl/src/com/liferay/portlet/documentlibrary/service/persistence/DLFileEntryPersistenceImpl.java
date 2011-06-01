@@ -585,12 +585,6 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 		dlFileEntryImpl.setVersionUserName(dlFileEntry.getVersionUserName());
 		dlFileEntryImpl.setCreateDate(dlFileEntry.getCreateDate());
 		dlFileEntryImpl.setModifiedDate(dlFileEntry.getModifiedDate());
-		dlFileEntryImpl.setCheckedOut(dlFileEntry.isCheckedOut());
-		dlFileEntryImpl.setCheckoutDate(dlFileEntry.getCheckoutDate());
-		dlFileEntryImpl.setCheckoutExpirationDate(dlFileEntry.getCheckoutExpirationDate());
-		dlFileEntryImpl.setCheckoutOwner(dlFileEntry.getCheckoutOwner());
-		dlFileEntryImpl.setCheckoutUserId(dlFileEntry.getCheckoutUserId());
-		dlFileEntryImpl.setCheckoutUserName(dlFileEntry.getCheckoutUserName());
 		dlFileEntryImpl.setRepositoryId(dlFileEntry.getRepositoryId());
 		dlFileEntryImpl.setFolderId(dlFileEntry.getFolderId());
 		dlFileEntryImpl.setName(dlFileEntry.getName());

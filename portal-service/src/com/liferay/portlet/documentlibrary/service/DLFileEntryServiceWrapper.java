@@ -39,36 +39,6 @@ public class DLFileEntryServiceWrapper implements DLFileEntryService {
 			folderId, title, description, changeLog, is, size, serviceContext);
 	}
 
-	public void cancelCheckOut(long fileEntryId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		_dlFileEntryService.cancelCheckOut(fileEntryId);
-	}
-
-	public void checkInFileEntry(long fileEntryId, boolean major,
-		java.lang.String changeLog,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		_dlFileEntryService.checkInFileEntry(fileEntryId, major, changeLog,
-			serviceContext);
-	}
-
-	public com.liferay.portlet.documentlibrary.model.DLFileEntry checkOutFileEntry(
-		long fileEntryId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return _dlFileEntryService.checkOutFileEntry(fileEntryId);
-	}
-
-	public com.liferay.portlet.documentlibrary.model.DLFileEntry checkOutFileEntry(
-		long fileEntryId, java.lang.String owner, long expirationTime)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return _dlFileEntryService.checkOutFileEntry(fileEntryId, owner,
-			expirationTime);
-	}
-
 	public void copyFileEntry(long groupId, long repositoryId,
 		long fileEntryId, long destFolderId,
 		com.liferay.portal.service.ServiceContext serviceContext)

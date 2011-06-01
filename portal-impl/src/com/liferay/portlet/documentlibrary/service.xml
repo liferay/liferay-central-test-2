@@ -127,12 +127,6 @@
 		<column name="versionUserName" type="String" />
 		<column name="createDate" type="Date" />
 		<column name="modifiedDate" type="Date" />
-		<column name="checkedOut" type="boolean" />
-		<column name="checkoutDate" type="Date" />
-		<column name="checkoutExpirationDate" type="Date" />
-		<column name="checkoutOwner" type="String" />
-		<column name="checkoutUserId" type="long" />
-		<column name="checkoutUserName" type="String" />
 
 		<!-- Other fields -->
 
@@ -427,7 +421,6 @@
 		<reference package-path="com.liferay.portlet.expando" entity="ExpandoValue" />
 	</entity>
 	<exceptions>
-		<exception>DuplicateCheckOut</exception>
 		<exception>DuplicateFolderName</exception>
 		<exception>DuplicateRepositoryName</exception>
 		<exception>FileShortcutPermission</exception>
