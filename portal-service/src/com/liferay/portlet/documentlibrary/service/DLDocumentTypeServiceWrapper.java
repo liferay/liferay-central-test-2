@@ -58,6 +58,11 @@ public class DLDocumentTypeServiceWrapper implements DLDocumentTypeService {
 		return _dlDocumentTypeService.getDocumentTypes(groupId, start, end);
 	}
 
+	public int getDocumentTypesCount(long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _dlDocumentTypeService.getDocumentTypesCount(groupId);
+	}
+
 	public void updateDocumentType(long documentTypeId, java.lang.String name,
 		java.lang.String description, long[] ddmStructureIds,
 		com.liferay.portal.service.ServiceContext serviceContext)

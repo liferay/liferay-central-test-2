@@ -195,6 +195,38 @@ public class DLDocumentTypeServiceHttp {
 		}
 	}
 
+	public static int getDocumentTypesCount(HttpPrincipal httpPrincipal,
+		long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		try {
+			MethodKey methodKey = new MethodKey(DLDocumentTypeServiceUtil.class.getName(),
+					"getDocumentTypesCount",
+					_getDocumentTypesCountParameterTypes4);
+
+			MethodHandler methodHandler = new MethodHandler(methodKey, groupId);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
+					throw (com.liferay.portal.kernel.exception.SystemException)e;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(e);
+			}
+
+			return ((Integer)returnObj).intValue();
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
 	public static void updateDocumentType(HttpPrincipal httpPrincipal,
 		long documentTypeId, java.lang.String name,
 		java.lang.String description, long[] ddmStructureIds,
@@ -203,7 +235,7 @@ public class DLDocumentTypeServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(DLDocumentTypeServiceUtil.class.getName(),
-					"updateDocumentType", _updateDocumentTypeParameterTypes4);
+					"updateDocumentType", _updateDocumentTypeParameterTypes5);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					documentTypeId, name, description, ddmStructureIds,
@@ -245,7 +277,10 @@ public class DLDocumentTypeServiceHttp {
 	private static final Class<?>[] _getDocumentTypesParameterTypes3 = new Class[] {
 			long.class, int.class, int.class
 		};
-	private static final Class<?>[] _updateDocumentTypeParameterTypes4 = new Class[] {
+	private static final Class<?>[] _getDocumentTypesCountParameterTypes4 = new Class[] {
+			long.class
+		};
+	private static final Class<?>[] _updateDocumentTypeParameterTypes5 = new Class[] {
 			long.class, java.lang.String.class, java.lang.String.class,
 			long[].class, com.liferay.portal.service.ServiceContext.class
 		};

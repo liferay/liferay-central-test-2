@@ -676,6 +676,7 @@ Liferay.Service.registerClass(
 		deleteDocumentType: true,
 		getDocumentType: true,
 		getDocumentTypes: true,
+		getDocumentTypesCount: true,
 		updateDocumentType: true
 	}
 );

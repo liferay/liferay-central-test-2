@@ -126,6 +126,20 @@ public class DLDocumentTypeServiceSoap {
 		}
 	}
 
+	public static int getDocumentTypesCount(long groupId)
+		throws RemoteException {
+		try {
+			int returnValue = DLDocumentTypeServiceUtil.getDocumentTypesCount(groupId);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static void updateDocumentType(long documentTypeId,
 		java.lang.String name, java.lang.String description,
 		long[] ddmStructureIds,

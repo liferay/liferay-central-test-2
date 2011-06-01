@@ -63,6 +63,10 @@ public interface DLDocumentTypeService {
 		long groupId, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getDocumentTypesCount(long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	public void updateDocumentType(long documentTypeId, java.lang.String name,
 		java.lang.String description, long[] ddmStructureIds,
 		com.liferay.portal.service.ServiceContext serviceContext)

@@ -67,6 +67,11 @@ public class DLDocumentTypeServiceUtil {
 		return getService().getDocumentTypes(groupId, start, end);
 	}
 
+	public static int getDocumentTypesCount(long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getDocumentTypesCount(groupId);
+	}
+
 	public static void updateDocumentType(long documentTypeId,
 		java.lang.String name, java.lang.String description,
 		long[] ddmStructureIds,
