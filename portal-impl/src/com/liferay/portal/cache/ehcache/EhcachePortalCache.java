@@ -133,6 +133,10 @@ public class EhcachePortalCache extends BasePortalCache {
 		_ehcache.removeAll();
 	}
 
+	public void setEhcache(Ehcache ehcache) {
+		_ehcache = ehcache;
+	}
+
 	public void unregisterCacheListener(CacheListener cacheListener) {
 		CacheEventListener cacheEventListener = _cacheEventListeners.get(
 			cacheListener);

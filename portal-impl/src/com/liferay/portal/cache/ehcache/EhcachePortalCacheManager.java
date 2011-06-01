@@ -31,6 +31,7 @@ import java.lang.reflect.Field;
 
 import java.net.URL;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.management.MBeanServer;
@@ -38,6 +39,7 @@ import javax.management.MBeanServer;
 import net.sf.ehcache.Cache;
 import net.sf.ehcache.CacheManager;
 import net.sf.ehcache.Ehcache;
+import net.sf.ehcache.Statistics;
 import net.sf.ehcache.config.CacheConfiguration;
 import net.sf.ehcache.config.Configuration;
 import net.sf.ehcache.management.ManagementService;
@@ -51,24 +53,6 @@ import net.sf.ehcache.util.FailSafeTimer;
  * @author Edward Han
  */
 public class EhcachePortalCacheManager implements PortalCacheManager {
-
-	public PortalCache addCache(Cache cache) {
-		synchronized (_cacheManager) {
-			String cacheName = cache.getName();
-
-			if (_cacheManager.cacheExists(cacheName)) {
-				if (_log.isInfoEnabled()) {
-					_log.info("Overriding existing cache " + cacheName);
-				}
-
-				_cacheManager.removeCache(cacheName);
-			}
-
-			_cacheManager.addCache(cache);
-
-			return getCache(cacheName);
-		}
-	}
 
 	public void afterPropertiesSet() {
 		String configurationPath = PropsUtil.get(_configPropertyKey);
@@ -129,32 +113,17 @@ public class EhcachePortalCacheManager implements PortalCacheManager {
 	}
 
 	public PortalCache getCache(String name, boolean blocking) {
-		Ehcache cache = _cacheManager.getEhcache(name);
+		PortalCache portalCache = _cacheRegistry.get(name);
 
-		if (cache == null) {
+		if (portalCache == null) {
 			synchronized (_cacheManager) {
-				cache = _cacheManager.getEhcache(name);
+				portalCache = _cacheRegistry.get(name);
 
-				if (cache == null) {
-					_cacheManager.addCache(name);
-
-					cache = _cacheManager.getEhcache(name);
-
-					cache.setStatisticsEnabled(
-						PropsValues.EHCACHE_STATISTICS_ENABLED);
-
-					if (_log.isInfoEnabled()) {
-						_log.info(
-							"Cache name " + name + " is using implementation " +
-								cache.getClass().getName());
-					}
+				if (portalCache == null) {
+					portalCache = addCache(name, null);
 				}
 			}
 		}
-
-		PortalCache portalCache = new EhcachePortalCache(cache);
-
-		portalCache.setDebug(_debug);
 
 		if (PropsValues.TRANSACTIONAL_CACHE_ENABLED &&
 			(name.startsWith(EntityCacheImpl.CACHE_NAME) ||
@@ -186,7 +155,7 @@ public class EhcachePortalCacheManager implements PortalCacheManager {
 
 			Cache cache = new Cache(cacheConfiguration);
 
-			PortalCache portalCache = addCache(cache);
+			PortalCache portalCache = addCache(cache.getName(), cache);
 
 			if (portalCache == null) {
 				_log.error(
@@ -196,6 +165,8 @@ public class EhcachePortalCacheManager implements PortalCacheManager {
 	}
 
 	public void removeCache(String name) {
+		_cacheRegistry.remove(name);
+
 		_cacheManager.removeCache(name);
 	}
 
@@ -233,6 +204,54 @@ public class EhcachePortalCacheManager implements PortalCacheManager {
 		_registerCacheStatistics = registerCacheStatistics;
 	}
 
+	protected PortalCache addCache(String cacheName, Cache cache) {
+
+		EhcachePortalCache ehcachePortalCache = null;
+
+		synchronized (_cacheManager) {
+			if (_cacheManager.cacheExists(cacheName) && cache != null) {
+				if (_log.isInfoEnabled()) {
+					_log.info("Overriding existing cache " + cacheName);
+				}
+
+				_cacheManager.removeCache(cacheName);
+			}
+
+			if (cache == null) {
+				if (!_cacheManager.cacheExists(cacheName)) {
+					_cacheManager.addCache(cacheName);
+				}
+			}
+			else {
+				_cacheManager.addCache(cache);
+			}
+
+			Ehcache ehcache = _cacheManager.getEhcache(cacheName);
+
+			if (ehcache == null) {
+				return null;
+			}
+
+			ehcache.setStatisticsEnabled(
+				PropsValues.EHCACHE_STATISTICS_ENABLED);
+
+			ehcachePortalCache = _cacheRegistry.get(cacheName);
+
+			if (ehcachePortalCache == null) {
+				ehcachePortalCache = new EhcachePortalCache(ehcache);
+				ehcachePortalCache.setDebug(_debug);
+
+				_cacheRegistry.put(cacheName, ehcachePortalCache);
+			}
+			else {
+				ehcachePortalCache.setEhcache(ehcache);
+			}
+
+		}
+
+		return ehcachePortalCache;
+	}
+
 	private static final String _DEFAULT_CLUSTERED_EHCACHE_CONFIG_FILE =
 		"/ehcache/liferay-multi-vm-clustered.xml";
 
@@ -241,6 +260,8 @@ public class EhcachePortalCacheManager implements PortalCacheManager {
 
 	private String _configPropertyKey;
 	private CacheManager _cacheManager;
+	private Map<String, EhcachePortalCache> _cacheRegistry =
+		new HashMap<String, EhcachePortalCache>();
 	private boolean _clusterAware;
 	private boolean _debug;
 	private ManagementService _managementService;
