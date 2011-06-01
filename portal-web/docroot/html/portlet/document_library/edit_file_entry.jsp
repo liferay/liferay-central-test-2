@@ -152,28 +152,6 @@ else if (documentType != null) {
 	title="<%= header %>"
 />
 
-<c:if test="<%= fileEntry == null %>">
-	<div class="lfr-dynamic-uploader">
-		<div class="lfr-upload-container" id="<portlet:namespace />fileUpload"></div>
-	</div>
-
-	<div class="lfr-fallback aui-helper-hidden" id="<portlet:namespace />fallback">
-
-	<aui:script use="liferay-upload">
-		new Liferay.Upload(
-			{
-				allowedFileTypes: '<%= StringUtil.merge(PrefsPropsUtil.getStringArray(PropsKeys.DL_FILE_EXTENSIONS, StringPool.COMMA)) %>',
-				container: '#<portlet:namespace />fileUpload',
-				fileDescription: '<%= StringUtil.merge(PrefsPropsUtil.getStringArray(PropsKeys.DL_FILE_EXTENSIONS, StringPool.COMMA)) %>',
-				fallbackContainer: '#<portlet:namespace />fallback',
-				maxFileSize: <%= PrefsPropsUtil.getLong(PropsKeys.DL_FILE_MAX_SIZE) %> / 1024,
-				namespace: '<portlet:namespace />',
-				uploadFile: '<liferay-portlet:actionURL doAsUserId="<%= user.getUserId() %>"><portlet:param name="struts_action" value="/document_library/edit_file_entry" /><portlet:param name="<%= Constants.CMD %>" value="<%= Constants.ADD %>" /><portlet:param name="repositoryId" value="<%= String.valueOf(repositoryId) %>" /><portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" /></liferay-portlet:actionURL><liferay-ui:input-permissions-params modelName="<%= DLFileEntryConstants.getClassName() %>" />'
-			}
-		);
-	</aui:script>
-</c:if>
-
 <portlet:actionURL var="editFileEntryURL">
 	<portlet:param name="struts_action" value="/document_library/edit_file_entry" />
 	<portlet:param name="uploader" value="classic" />
@@ -449,10 +427,6 @@ else if (documentType != null) {
 	message="uploading"
 	redirect="<%= redirect %>"
 />
-
-<c:if test="<%= fileEntry == null %>">
-	</div>
-</c:if>
 
 <aui:script>
 	function <portlet:namespace />changeDocumentType() {

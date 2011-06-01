@@ -22,6 +22,8 @@ Folder folder = (Folder)request.getAttribute("view.jsp-folder");
 long folderId = GetterUtil.getLong((String)request.getAttribute("view.jsp-folderId"));
 
 long repositoryId = GetterUtil.getLong((String)request.getAttribute("view.jsp-repositoryId"));
+
+List<DLDocumentType> documentTypes = DLDocumentTypeServiceUtil.getDocumentTypes(scopeGroupId, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 %>
 
 <liferay-ui:icon-menu align="left" icon="" direction="down" message="add" showExpanded="<%= false %>" showWhenSingleIcon="<%= false %>">
@@ -34,19 +36,6 @@ long repositoryId = GetterUtil.getLong((String)request.getAttribute("view.jsp-re
 		</portlet:renderURL>
 
 		<liferay-ui:icon image="folder" message='<%= (folder != null) ? "subfolder" : "folder" %>' url="<%= addFolderURL %>" />
-	</c:if>
-
-	<c:if test="<%= DLFolderPermission.contains(permissionChecker, scopeGroupId, folderId, ActionKeys.ADD_DOCUMENT) %>">
-		<portlet:renderURL var="editFileEntryURL">
-			<portlet:param name="struts_action" value="/document_library/edit_file_entry" />
-			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.ADD %>" />
-			<portlet:param name="redirect" value="<%= currentURL %>" />
-			<portlet:param name="backURL" value="<%= currentURL %>" />
-			<portlet:param name="repositoryId" value="<%= String.valueOf(repositoryId) %>" />
-			<portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" />
-		</portlet:renderURL>
-
-		<liferay-ui:icon image="../document_library/add_document" message="document" url="<%= editFileEntryURL %>" />
 	</c:if>
 
 	<c:if test="<%= DLFolderPermission.contains(permissionChecker, scopeGroupId, folderId, ActionKeys.ADD_SHORTCUT) %>">
@@ -70,9 +59,32 @@ long repositoryId = GetterUtil.getLong((String)request.getAttribute("view.jsp-re
 		<liferay-ui:icon image="add_drive" message="repository" url="<%= addRepositoryURL %>" />
 	</c:if>
 
-	<%
-	List<DLDocumentType> documentTypes = DLDocumentTypeServiceUtil.getDocumentTypes(scopeGroupId, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+	<c:if test="<%= DLFolderPermission.contains(permissionChecker, scopeGroupId, folderId, ActionKeys.ADD_DOCUMENT) %>">
+		<portlet:renderURL var="editFileEntryURL">
+			<portlet:param name="struts_action" value="/document_library/upload_multiple_file_entries" />
+			<portlet:param name="redirect" value="<%= currentURL %>" />
+			<portlet:param name="backURL" value="<%= currentURL %>" />
+			<portlet:param name="repositoryId" value="<%= String.valueOf(repositoryId) %>" />
+			<portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" />
+		</portlet:renderURL>
 
+		<liferay-ui:icon cssClass="aui-helper-hidden upload-multiple-documents" image="../document_library/add_multiple_documents" message="multiple-documents" url="<%= editFileEntryURL %>" />
+	</c:if>
+
+	<c:if test="<%= DLFolderPermission.contains(permissionChecker, scopeGroupId, folderId, ActionKeys.ADD_DOCUMENT) %>">
+		<portlet:renderURL var="editFileEntryURL">
+			<portlet:param name="struts_action" value="/document_library/edit_file_entry" />
+			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.ADD %>" />
+			<portlet:param name="redirect" value="<%= currentURL %>" />
+			<portlet:param name="backURL" value="<%= currentURL %>" />
+			<portlet:param name="repositoryId" value="<%= String.valueOf(repositoryId) %>" />
+			<portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" />
+		</portlet:renderURL>
+
+		<liferay-ui:icon image='<%= documentTypes.size() > 0 ? "copy" : "../document_library/add_document" %>' message='<%= documentTypes.size() > 0 ? "basic-document" : "document" %>' url="<%= editFileEntryURL %>" />
+	</c:if>
+
+	<%
 	for (DLDocumentType documentType : documentTypes) {
 	%>
 
@@ -92,3 +104,13 @@ long repositoryId = GetterUtil.getLong((String)request.getAttribute("view.jsp-re
 	%>
 
 </liferay-ui:icon-menu>
+
+<aui:script use="aui-base,aui-swf">
+	if (A.SWF.isFlashVersionAtLeast(9)) {
+		var uploadMultipleDocumentsIcon = A.one('.aui-helper-hidden.upload-multiple-documents');
+
+		if (uploadMultipleDocumentsIcon) {
+			uploadMultipleDocumentsIcon.removeClass('aui-helper-hidden');
+		}
+	}
+</aui:script>

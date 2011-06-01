@@ -351,6 +351,7 @@ if (folder != null) {
 								var addButtonContainer = A.one('#<portlet:namespace />addButtonContainer');
 								var addButton = content.one('#<portlet:namespace />addButton')
 
+								addButtonContainer.plug(A.Plugin.ParseContent);
 								addButtonContainer.setContent(addButton);
 
 								A.one('#<portlet:namespace />displayStyleToolbar').empty();
@@ -440,6 +441,7 @@ if (folder != null) {
 							var addButtonContainer = A.one('#<portlet:namespace />addButtonContainer');
 							var addButton = content.one('#<portlet:namespace />addButton');
 
+							addButtonContainer.plug(A.Plugin.ParseContent);
 							addButtonContainer.setContent(addButton);
 
 							A.one('#<portlet:namespace />displayStyleToolbar').empty();

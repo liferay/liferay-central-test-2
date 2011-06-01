@@ -519,6 +519,11 @@
 
 		<action path="/document_library/select_group" forward="portlet.document_library.select_group" />
 
+		<action path="/document_library/upload_multiple_file_entries" type="com.liferay.portlet.documentlibrary.action.EditFileEntryAction">
+			<forward name="portlet.document_library.edit_file_entry" path="portlet.document_library.upload_multiple_file_entries" />
+			<forward name="portlet.document_library.error" path="portlet.document_library.error" />
+		</action>
+
 		<action path="/document_library/view" type="com.liferay.portlet.documentlibrary.action.ViewAction">
 			<forward name="portlet.document_library.error" path="portlet.document_library.error" />
 			<forward name="portlet.document_library.view" path="portlet.document_library.view" />

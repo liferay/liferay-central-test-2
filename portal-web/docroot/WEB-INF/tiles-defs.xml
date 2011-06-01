@@ -430,6 +430,10 @@
 		<put name="portlet_content" value="/portlet/document_library/select_group.jsp" />
 	</definition>
 
+	<definition name="portlet.document_library.upload_multiple_file_entries" extends="portlet.document_library">
+		<put name="portlet_content" value="/portlet/document_library/upload_multiple_file_entries.jsp" />
+	</definition>
+
 	<definition name="portlet.document_library.view" extends="portlet.document_library">
 		<put name="portlet_content" value="/portlet/document_library/view.jsp" />
 	</definition>
