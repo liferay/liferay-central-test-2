@@ -17,27 +17,6 @@
 <%@ include file="/html/portlet/css_init.jsp" %>
 
 .portlet-dynamic-data-lists {
-	.ddl-form {
-		.aui-field-radio {
-			.aui-field {
-				display: block;
-				margin-left: 10px;
-			}
-		}
-
-		.aui-field-text {
-			display: block;
-
-			.aui-field-element {
-				display: block;
-
-				.aui-field-input {
-					width: 100%;
-				}
-			}
-		}
-	}
-
 	.lfr-spreadsheet-add-rows-buttons {
 		padding: 5px;
 

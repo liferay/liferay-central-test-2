@@ -73,6 +73,27 @@
 	color: #777;
 }
 
+.lfr-dynamic-form {
+	.aui-field-radio {
+		.aui-field {
+			display: block;
+			margin-left: 10px;
+		}
+	}
+
+	.aui-field-text {
+		display: block;
+
+		.aui-field-element {
+			display: block;
+
+			.aui-field-input {
+				width: 100%;
+			}
+		}
+	}
+}
+
 .lfr-input-resource {
 	width: <%= ModelHintsConstants.TEXT_DISPLAY_WIDTH%>px;
 }

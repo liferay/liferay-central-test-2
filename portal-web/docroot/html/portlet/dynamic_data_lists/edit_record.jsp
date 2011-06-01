@@ -38,7 +38,7 @@ long detailDDMTemplateId = ParamUtil.getLong(request, "detailDDMTemplateId");
 	<portlet:param name="struts_action" value="/dynamic_data_lists/edit_record" />
 </portlet:actionURL>
 
-<aui:form action="<%= editRecordURL %>" cssClass="ddl-form" method="post" name="fm" onSubmit='<%= "event.preventDefault(); " %>'>
+<aui:form action="<%= editRecordURL %>" cssClass="lfr-dynamic-form" method="post" name="fm" onSubmit='<%= "event.preventDefault(); " %>'>
 	<aui:input name="<%= Constants.CMD %>" type="hidden" />
 	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
 	<aui:input name="backURL" type="hidden" value="<%= backURL %>" />
@@ -56,9 +56,13 @@ long detailDDMTemplateId = ParamUtil.getLong(request, "detailDDMTemplateId");
 		DDMStructure ddmStructure = recordSet.getDDMStructure();
 
 		if (detailDDMTemplateId > 0) {
-			DDMTemplate ddmTemplate = DDMTemplateLocalServiceUtil.getTemplate(detailDDMTemplateId);
+			try {
+				DDMTemplate ddmTemplate = DDMTemplateLocalServiceUtil.getTemplate(detailDDMTemplateId);
 
-			ddmStructure.setXsd(ddmTemplate.getScript());
+				ddmStructure.setXsd(ddmTemplate.getScript());
+			}
+			catch(NoSuchTemplateException nste) {
+			}
 		}
 
 		Fields fields = null;
