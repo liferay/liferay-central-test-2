@@ -23,13 +23,14 @@ String backURL = ParamUtil.getString(request, "backURL");
 long repositoryId = ParamUtil.getLong(request, "repositoryId");
 long folderId = ParamUtil.getLong(request, "folderId");
 
-DLDocumentType basicDocumentType = new DLDocumentTypeImpl();
+List<DLDocumentType> documentTypes = new ArrayList<DLDocumentType>();
+
+DLDocumentType basicDocumentType = DLDocumentTypeLocalServiceUtil.create(0);
 
 basicDocumentType.setName(LanguageUtil.get(pageContext, "basic-document"));
 
-List<DLDocumentType> documentTypes = new ArrayList();
-
 documentTypes.add(basicDocumentType);
+
 documentTypes.addAll(DLDocumentTypeServiceUtil.getDocumentTypes(scopeGroupId, QueryUtil.ALL_POS, QueryUtil.ALL_POS));
 %>
 
@@ -66,13 +67,13 @@ documentTypes.addAll(DLDocumentTypeServiceUtil.getDocumentTypes(scopeGroupId, Qu
 
 			portletURL.setPortletId('<%= portletId %>');
 
-			portletURL.setParameter('struts_action', '/document_library/edit_file_entry')
-			portletURL.setParameter('<%= Constants.CMD %>', '<%= Constants.ADD %>')
-			portletURL.setParameter('redirect', '<%= HtmlUtil.escape(redirect) %>')
-			portletURL.setParameter('backURL', '<%= HtmlUtil.escape(backURL) %>')
-			portletURL.setParameter('repositoryId', '<%= repositoryId %>')
-			portletURL.setParameter('folderId', '<%= folderId %>')
-			portletURL.setParameter('documentTypeId', link.getAttribute('data-rowId'))
+			portletURL.setParameter('struts_action', '/document_library/edit_file_entry');
+			portletURL.setParameter('<%= Constants.CMD %>', '<%= Constants.ADD %>');
+			portletURL.setParameter('redirect', '<%= HtmlUtil.escape(redirect) %>');
+			portletURL.setParameter('backURL', '<%= HtmlUtil.escape(backURL) %>');
+			portletURL.setParameter('documentTypeId', link.getAttribute('data-rowId'));
+			portletURL.setParameter('repositoryId', '<%= repositoryId %>');
+			portletURL.setParameter('folderId', '<%= folderId %>');
 
 			window.parent.location.href = portletURL.toString();
 
