@@ -50,6 +50,8 @@ public class AnnouncementsUtil {
 
 		scopes.put(_USER_CLASS_NAME_ID, new long[] {userId});
 
+		List<Group> groupsList = new ArrayList<Group>();
+
 		// Organization announcements
 
 		List<Organization> organizations =
@@ -80,8 +82,6 @@ public class AnnouncementsUtil {
 		}
 
 		// Site announcements
-
-		List<Group> groupsList = new ArrayList<Group>();
 
 		List<Group> groups = GroupLocalServiceUtil.getUserGroups(userId, true);
 
