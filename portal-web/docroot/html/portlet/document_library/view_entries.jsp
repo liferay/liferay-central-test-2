@@ -306,7 +306,6 @@ for (int i = 0; i < results.size(); i++) {
 						</c:otherwise>
 					</c:choose>
 				</c:when>
-
 				<c:otherwise>
 					<liferay-util:buffer var="folderTitle">
 						<liferay-ui:icon
