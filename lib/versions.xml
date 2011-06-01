@@ -868,7 +868,7 @@
 	</library>
 	<library>
 		<file-name>portal/abdera.jar</file-name>
-		<version>0.4.0</version>
+		<version>1.1.2</version>
 		<project-name>Abdera</project-name>
 		<project-url>http://abdera.apache.org</project-url>
 		<licenses>
@@ -1036,7 +1036,7 @@
 	</library>
 	<library>
 		<file-name>portal/axiom-api.jar</file-name>
-		<version>1.2.8</version>
+		<version>1.2.10</version>
 		<project-name>Axiom</project-name>
 		<project-url>http://ws.apache.org/commons/axiom</project-url>
 		<licenses>
@@ -1047,7 +1047,7 @@
 	</library>
 	<library>
 		<file-name>portal/axiom-impl.jar</file-name>
-		<version>1.2.8</version>
+		<version>1.2.10</version>
 		<project-name>Axiom</project-name>
 		<project-url>http://ws.apache.org/commons/axiom</project-url>
 		<licenses>
