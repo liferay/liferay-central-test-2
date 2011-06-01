@@ -81,7 +81,7 @@ List<DLDocumentType> documentTypes = DLDocumentTypeServiceUtil.getDocumentTypes(
 			<portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" />
 		</portlet:renderURL>
 
-		<liferay-ui:icon image='<%= documentTypes.size() > 0 ? "copy" : "../document_library/add_document" %>' message='<%= documentTypes.size() > 0 ? "basic-document" : "document" %>' url="<%= editFileEntryURL %>" />
+		<liferay-ui:icon image='<%= !documentTypes.isEmpty() ? "copy" : "../document_library/add_document" %>' message='<%= !documentTypes.isEmpty() ? "basic-document" : "document" %>' url="<%= editFileEntryURL %>" />
 	</c:if>
 
 	<%
