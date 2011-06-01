@@ -39,7 +39,6 @@ import javax.management.MBeanServer;
 import net.sf.ehcache.Cache;
 import net.sf.ehcache.CacheManager;
 import net.sf.ehcache.Ehcache;
-import net.sf.ehcache.Statistics;
 import net.sf.ehcache.config.CacheConfiguration;
 import net.sf.ehcache.config.Configuration;
 import net.sf.ehcache.management.ManagementService;
@@ -113,11 +112,11 @@ public class EhcachePortalCacheManager implements PortalCacheManager {
 	}
 
 	public PortalCache getCache(String name, boolean blocking) {
-		PortalCache portalCache = _cacheRegistry.get(name);
+		PortalCache portalCache = _ehcachePortalCaches.get(name);
 
 		if (portalCache == null) {
 			synchronized (_cacheManager) {
-				portalCache = _cacheRegistry.get(name);
+				portalCache = _ehcachePortalCaches.get(name);
 
 				if (portalCache == null) {
 					portalCache = addCache(name, null);
@@ -165,7 +164,7 @@ public class EhcachePortalCacheManager implements PortalCacheManager {
 	}
 
 	public void removeCache(String name) {
-		_cacheRegistry.remove(name);
+		_ehcachePortalCaches.remove(name);
 
 		_cacheManager.removeCache(name);
 	}
@@ -204,29 +203,28 @@ public class EhcachePortalCacheManager implements PortalCacheManager {
 		_registerCacheStatistics = registerCacheStatistics;
 	}
 
-	protected PortalCache addCache(String cacheName, Cache cache) {
-
+	protected PortalCache addCache(String name, Cache cache) {
 		EhcachePortalCache ehcachePortalCache = null;
 
 		synchronized (_cacheManager) {
-			if (_cacheManager.cacheExists(cacheName) && cache != null) {
+			if ((cache != null) && _cacheManager.cacheExists(name)) {
 				if (_log.isInfoEnabled()) {
-					_log.info("Overriding existing cache " + cacheName);
+					_log.info("Overriding existing cache " + name);
 				}
 
-				_cacheManager.removeCache(cacheName);
+				_cacheManager.removeCache(name);
 			}
 
 			if (cache == null) {
-				if (!_cacheManager.cacheExists(cacheName)) {
-					_cacheManager.addCache(cacheName);
+				if (!_cacheManager.cacheExists(name)) {
+					_cacheManager.addCache(name);
 				}
 			}
 			else {
 				_cacheManager.addCache(cache);
 			}
 
-			Ehcache ehcache = _cacheManager.getEhcache(cacheName);
+			Ehcache ehcache = _cacheManager.getEhcache(name);
 
 			if (ehcache == null) {
 				return null;
@@ -235,13 +233,14 @@ public class EhcachePortalCacheManager implements PortalCacheManager {
 			ehcache.setStatisticsEnabled(
 				PropsValues.EHCACHE_STATISTICS_ENABLED);
 
-			ehcachePortalCache = _cacheRegistry.get(cacheName);
+			ehcachePortalCache = _ehcachePortalCaches.get(name);
 
 			if (ehcachePortalCache == null) {
 				ehcachePortalCache = new EhcachePortalCache(ehcache);
+
 				ehcachePortalCache.setDebug(_debug);
 
-				_cacheRegistry.put(cacheName, ehcachePortalCache);
+				_ehcachePortalCaches.put(name, ehcachePortalCache);
 			}
 			else {
 				ehcachePortalCache.setEhcache(ehcache);
@@ -260,10 +259,10 @@ public class EhcachePortalCacheManager implements PortalCacheManager {
 
 	private String _configPropertyKey;
 	private CacheManager _cacheManager;
-	private Map<String, EhcachePortalCache> _cacheRegistry =
-		new HashMap<String, EhcachePortalCache>();
 	private boolean _clusterAware;
 	private boolean _debug;
+	private Map<String, EhcachePortalCache> _ehcachePortalCaches =
+		new HashMap<String, EhcachePortalCache>();
 	private ManagementService _managementService;
 	private MBeanServer _mBeanServer;
 	private boolean _registerCacheManager = true;
