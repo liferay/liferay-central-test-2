@@ -15,7 +15,8 @@
 package com.liferay.portal.cache.cluster.clusterlink.messaging;
 
 import com.liferay.portal.cache.ehcache.EhcachePortalCacheManager;
-import com.liferay.portal.dao.orm.hibernate.EhCacheProvider;
+import com.liferay.portal.dao.orm.hibernate.region.LiferayEhcacheRegionFactory;
+import com.liferay.portal.dao.orm.hibernate.region.SingletonLiferayEhcacheRegionFactory;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.cache.cluster.PortalCacheClusterEvent;
 import com.liferay.portal.kernel.cache.cluster.PortalCacheClusterEventType;
@@ -34,7 +35,10 @@ public class ClusterLinkPortalCacheClusterRemoveListener
 	extends BaseMessageListener {
 
 	public ClusterLinkPortalCacheClusterRemoveListener() {
-		_hibernateCacheManager = EhCacheProvider.getCacheManager();
+		LiferayEhcacheRegionFactory liferayEhcacheRegionFactory =
+			SingletonLiferayEhcacheRegionFactory.getInstance();
+
+		_hibernateCacheManager = liferayEhcacheRegionFactory.getCacheManager();
 
 		EhcachePortalCacheManager ehcachePortalCacheManager =
 			(EhcachePortalCacheManager)PortalBeanLocatorUtil.locate(

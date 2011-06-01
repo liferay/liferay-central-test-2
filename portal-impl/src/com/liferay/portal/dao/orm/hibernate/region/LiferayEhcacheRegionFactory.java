@@ -1,0 +1,196 @@
+/**
+ * Copyright (c) 2000-2011 Liferay, Inc. All rights reserved.
+ *
+ * This library is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU Lesser General Public License as published by the Free
+ * Software Foundation; either version 2.1 of the License, or (at your option)
+ * any later version.
+ *
+ * This library is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
+ * details.
+ */
+
+package com.liferay.portal.dao.orm.hibernate.region;
+
+import com.liferay.portal.cache.ehcache.EhcacheConfigurationUtil;
+import com.liferay.portal.cache.ehcache.ModifiableEhcacheWrapper;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+
+import java.net.URL;
+
+import java.util.Map;
+import java.util.Properties;
+
+import net.sf.ehcache.Cache;
+import net.sf.ehcache.CacheManager;
+import net.sf.ehcache.Ehcache;
+import net.sf.ehcache.config.CacheConfiguration;
+import net.sf.ehcache.config.Configuration;
+import net.sf.ehcache.hibernate.EhCacheRegionFactory;
+import net.sf.ehcache.hibernate.regions.EhcacheCollectionRegion;
+import net.sf.ehcache.hibernate.regions.EhcacheEntityRegion;
+import net.sf.ehcache.hibernate.regions.EhcacheQueryResultsRegion;
+import net.sf.ehcache.hibernate.regions.EhcacheTimestampsRegion;
+
+import org.hibernate.cache.CacheDataDescription;
+import org.hibernate.cache.CacheException;
+import org.hibernate.cache.CollectionRegion;
+import org.hibernate.cache.EntityRegion;
+import org.hibernate.cache.QueryResultsRegion;
+import org.hibernate.cache.TimestampsRegion;
+
+/**
+ * @author Edward Han
+ */
+public class LiferayEhcacheRegionFactory extends EhCacheRegionFactory {
+	public LiferayEhcacheRegionFactory(Properties properties) {
+        super(properties);
+    }
+
+	public CollectionRegion buildCollectionRegion(
+			String regionName, Properties properties,
+			CacheDataDescription cacheDataDescription)
+		throws CacheException {
+
+		configureCache(regionName);
+
+		EhcacheCollectionRegion ehcacheCollectionRegion =
+			(EhcacheCollectionRegion) super.buildCollectionRegion(
+				regionName, properties, cacheDataDescription);
+
+		return new CollectionRegionWrapper(ehcacheCollectionRegion);
+	}
+
+	public EntityRegion buildEntityRegion(
+			String regionName, Properties properties,
+			CacheDataDescription cacheDataDescription)
+		throws CacheException {
+
+		configureCache(regionName);
+
+		EhcacheEntityRegion ehcacheEntityRegion =
+			(EhcacheEntityRegion) super.buildEntityRegion(
+				regionName, properties, cacheDataDescription);
+
+		return new EntityRegionWrapper(ehcacheEntityRegion);
+	}
+
+	public QueryResultsRegion buildQueryResultsRegion(
+			String regionName, Properties properties)
+		throws CacheException {
+
+		configureCache(regionName);
+
+		EhcacheQueryResultsRegion ehcacheQueryResultsRegion =
+			(EhcacheQueryResultsRegion) super.buildQueryResultsRegion(
+				regionName, properties);
+
+		return new QueryResultsRegionWrapper(ehcacheQueryResultsRegion);
+	}
+
+	public TimestampsRegion buildTimestampsRegion(
+			String regionName, Properties properties)
+		throws CacheException {
+
+		configureCache(regionName);
+
+		EhcacheTimestampsRegion ehcacheTimestampsRegion =
+			(EhcacheTimestampsRegion) super.buildTimestampsRegion(
+				regionName, properties);
+
+		TimestampsRegion region = new TimestampsRegionWrapper(
+			ehcacheTimestampsRegion);
+
+		return region;
+	}
+
+	public CacheManager getCacheManager() {
+		return manager;
+	}
+
+	public void reconfigureCaches(URL cacheConfigFile) {
+		synchronized (manager) {
+			Configuration configuration = EhcacheConfigurationUtil.
+				getConfiguration(cacheConfigFile, true);
+
+			Map<String, CacheConfiguration> cacheConfigurations =
+				configuration.getCacheConfigurations();
+
+			for (CacheConfiguration cacheConfiguration :
+					cacheConfigurations.values()) {
+
+				Ehcache cache = new Cache(cacheConfiguration);
+
+				reconfigureCache(cache);
+			}
+		}
+	}
+
+	protected void configureCache(String regionName) {
+		synchronized (manager) {
+			Ehcache cache = manager.getEhcache(regionName);
+
+			if (cache == null) {
+				manager.addCache(regionName);
+
+				cache = manager.getEhcache(regionName);
+			}
+
+			if (!(cache instanceof ModifiableEhcacheWrapper)) {
+				Ehcache modifiableEhcacheWrapper = new ModifiableEhcacheWrapper(
+					cache);
+
+				manager.replaceCacheWithDecoratedCache(
+					cache, modifiableEhcacheWrapper);
+			}
+		}
+	}
+
+	protected void reconfigureCache(Ehcache replacementCache) {
+ 		String cacheName = replacementCache.getName();
+
+		Ehcache cache = manager.getEhcache(cacheName);
+
+		if ((cache != null) && (cache instanceof ModifiableEhcacheWrapper)) {
+			if (_log.isInfoEnabled()) {
+				_log.info("Reconfiguring Hibernate cache: " + cacheName);
+			}
+
+			ModifiableEhcacheWrapper modifiableEhcacheWrapper =
+				(ModifiableEhcacheWrapper) cache;
+
+			manager.replaceCacheWithDecoratedCache(
+				cache, modifiableEhcacheWrapper.getWrappedCache());
+
+			manager.removeCache(cacheName);
+
+			manager.addCache(replacementCache);
+
+			modifiableEhcacheWrapper.setWrappedCache(replacementCache);
+
+			manager.replaceCacheWithDecoratedCache(
+				replacementCache, modifiableEhcacheWrapper);
+		}
+		else {
+			if (_log.isInfoEnabled()) {
+				_log.info("Configuring Hibernate cache: " + cacheName);
+			}
+
+			if (cache != null) {
+				 manager.removeCache(cacheName);
+			}
+
+			cache = new ModifiableEhcacheWrapper(replacementCache);
+
+			manager.addCache(replacementCache);
+
+			manager.replaceCacheWithDecoratedCache(replacementCache, cache);
+		}
+	}
+
+	private static final Log _log = LogFactoryUtil.getLog(
+		LiferayEhcacheRegionFactory.class);
+}
