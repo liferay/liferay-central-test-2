@@ -17,7 +17,6 @@ package com.liferay.portal.kernel.dao.search;
 import com.liferay.portal.kernel.bean.BeanPropertiesUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringBundler;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 
 import java.util.Map;
@@ -65,7 +64,22 @@ public class TextSearchEntry extends SearchEntry {
 		else {
 			StringBundler sb = new StringBundler();
 
-			sb.append("<a href=\"");
+			sb.append("<a");
+
+			if (_data != null) {
+				for (Map.Entry<String, Object> entry : _data.entrySet()) {
+					String key = entry.getKey();
+					String value = String.valueOf(entry.getValue());
+
+					sb.append(" data-");
+					sb.append(key);
+					sb.append("=\"");
+					sb.append(value);
+					sb.append("\"");
+				}
+			}
+
+			sb.append(" href=\"");
 			sb.append(HtmlUtil.escape(_href));
 			sb.append("\"");
 
@@ -79,21 +93,6 @@ public class TextSearchEntry extends SearchEntry {
 				sb.append(" title=\"");
 				sb.append(_title);
 				sb.append("\"");
-			}
-
-			if ((_data != null) && (!_data.isEmpty())) {
-				sb.append(StringPool.BLANK);
-
-				for (Map.Entry<String, Object> entry : _data.entrySet()) {
-					String dataKey = entry.getKey();
-					String dataValue = String.valueOf(entry.getValue());
-
-					sb.append("data-");
-					sb.append(dataKey);
-					sb.append("=\"");
-					sb.append(dataValue);
-					sb.append("\" ");
-				}
 			}
 
 			sb.append(">");
