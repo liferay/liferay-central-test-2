@@ -15,6 +15,7 @@
 package com.liferay.portal.tools;
 
 import com.liferay.portal.kernel.io.unsync.UnsyncBufferedReader;
+import com.liferay.portal.kernel.util.ReleaseInfo;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.tools.servicebuilder.ServiceBuilder;
@@ -25,6 +26,7 @@ import java.io.FileInputStream;
 import java.io.InputStreamReader;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.apache.tools.ant.DirectoryScanner;
@@ -44,72 +46,112 @@ public class UpgradeTableBuilder {
 	}
 
 	public UpgradeTableBuilder(String upgradeTableDir) throws Exception {
-		DirectoryScanner ds = new DirectoryScanner();
+		File[] files = new File("src/com/liferay/portal/upgrade").listFiles();
 
-		ds.setBasedir(".");
-		ds.setIncludes(new String[] {"**\\upgrade\\v**\\util\\*Table.java"});
-
-		ds.scan();
-
-		String[] fileNames = ds.getIncludedFiles();
-
-		for (String fileName : fileNames) {
-			fileName = StringUtil.replace(fileName, "\\", "/");
-
-			int x = fileName.indexOf("upgrade/v");
-			int y = fileName.indexOf("/util", x);
-
-			String version = StringUtil.replace(
-				fileName.substring(x + 9, y), "_", ".");
-
-			String upgradeFileVersion = version;
-
-			int z = upgradeFileVersion.indexOf(".to.");
-
-			if (z != -1) {
-				upgradeFileVersion = upgradeFileVersion.substring(z + 4);
+		for (File file : files) {
+			if (!file.isDirectory()) {
+				continue;
 			}
 
-			x = fileName.indexOf("/", y + 1);
-			y = fileName.indexOf("Table.java", x);
+			String folderName = file.getName();
 
-			String upgradeFileName =
-				upgradeTableDir + "/" + upgradeFileVersion + "/" +
-					fileName.substring(x, y) + "ModelImpl.java";
+			if (!folderName.startsWith("v")) {
+				continue;
+			}
 
-			if (!_fileUtil.exists(upgradeFileName)) {
-				upgradeFileName = _findUpgradeFileName(
-					fileName.substring(x, y));
+			File utilFolder = new File(file, "util");
+
+			if (!utilFolder.exists()) {
+				continue;
+			}
+
+			String version = StringUtil.replace(
+				folderName.substring(1), "_", ".");
+
+			int pos = version.indexOf(".to.");
+
+			if (pos != -1) {
+				version = version.substring(pos + 4);
+			}
+
+			File upgradeDir = new File(upgradeTableDir, version);
+
+			checkUpgradeTable(upgradeDir, utilFolder.listFiles(), version);
+		}
+	}
+
+	protected void checkUpgradeTable(
+			File upgradeDir, File[] files, String version)
+		throws Exception {
+
+		boolean currentRelease = version.equals(ReleaseInfo.getVersion());
+
+		if (!currentRelease && !upgradeDir.exists()) {
+			return;
+		}
+
+		File indexesFile = null;
+
+		if (currentRelease) {
+			indexesFile = new File("../sql/indexes.sql");
+		}
+		else {
+			indexesFile = new File(upgradeDir, "indexes.sql");
+		}
+
+		for (File file : files) {
+			String fileName = file.getName();
+
+			if (!fileName.endsWith("Table.java")) {
+				continue;
+			}
+
+			String modelName = fileName.substring(0, fileName.length() - 10);
+
+			File upgradeFile = null;
+
+			if (currentRelease) {
+				String upgradeFileName = _findUpgradeFileName(modelName);
 
 				if (upgradeFileName == null) {
 					continue;
 				}
+
+				upgradeFile = new File("src", upgradeFileName);
+			}
+			else {
+				String modelImplFileName = modelName + "ModelImpl.java";
+
+				upgradeFile = new File(upgradeDir, modelImplFileName);
 			}
 
-			String content = _fileUtil.read(upgradeFileName);
+			if (!upgradeFile.exists()) {
+				continue;
+			}
+
+			String content = _fileUtil.read(upgradeFile);
 
 			String packagePath =
 				"com.liferay.portal.upgrade.v" +
 					StringUtil.replace(version, ".", "_") + ".util";
-			String className = fileName.substring(x + 1, y) + "Table";
+
+			String className = modelName + "Table";
 
 			String author = _getAuthor(fileName);
 
-			String[] addIndexes = _getAddIndexes(
-				upgradeTableDir + "/" + upgradeFileVersion + "/indexes.sql",
-				fileName.substring(x + 1, y));
+			String[] addIndexes = _getAddIndexes(indexesFile, modelName);
 
 			content = _getContent(
 				packagePath, className, content, author, addIndexes);
 
-			_fileUtil.write(fileName, content);
+			_fileUtil.write(file, content);
 		}
 	}
 
 	private String _findUpgradeFileName(String modelName) {
 		DirectoryScanner ds = new DirectoryScanner();
 
-		ds.setBasedir(".");
+		ds.setBasedir("src");
 		ds.setIncludes(new String[] {"**\\" + modelName + "ModelImpl.java"});
 
 		ds.scan();
@@ -124,16 +166,10 @@ public class UpgradeTableBuilder {
 		}
 	}
 
-	private String[] _getAddIndexes(String indexesFileName, String tableName)
+	private String[] _getAddIndexes(File indexesFile, String tableName)
 		throws Exception {
 
 		List<String> addIndexes = new ArrayList<String>();
-
-		File indexesFile = new File(indexesFileName);
-
-		if (!indexesFile.exists()) {
-			indexesFile = new File("../sql/indexes.sql");
-		}
 
 		UnsyncBufferedReader unsyncBufferedReader = new UnsyncBufferedReader(
 			new InputStreamReader(new FileInputStream(indexesFile)));
