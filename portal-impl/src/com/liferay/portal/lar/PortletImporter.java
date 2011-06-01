@@ -65,10 +65,15 @@ import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.portlet.PortletPreferencesImpl;
 import com.liferay.portlet.asset.NoSuchCategoryException;
+import com.liferay.portlet.asset.NoSuchEntryException;
 import com.liferay.portlet.asset.model.AssetCategory;
 import com.liferay.portlet.asset.model.AssetCategoryConstants;
+import com.liferay.portlet.asset.model.AssetEntry;
+import com.liferay.portlet.asset.model.AssetLinkConstants;
 import com.liferay.portlet.asset.model.AssetVocabulary;
 import com.liferay.portlet.asset.service.AssetCategoryLocalServiceUtil;
+import com.liferay.portlet.asset.service.AssetEntryLocalServiceUtil;
+import com.liferay.portlet.asset.service.AssetLinkLocalServiceUtil;
 import com.liferay.portlet.asset.service.AssetVocabularyLocalServiceUtil;
 import com.liferay.portlet.asset.service.persistence.AssetCategoryUtil;
 import com.liferay.portlet.asset.service.persistence.AssetVocabularyUtil;
@@ -299,6 +304,10 @@ public class PortletImporter {
 				layoutCache, layout.getCompanyId(), groupId, userId, layout,
 				portletElement, portletId, importUserPermissions);
 		}
+
+		// Asset links
+
+		readAssetLinks(portletDataContext);
 
 		zipReader.close();
 	}
@@ -1021,6 +1030,60 @@ public class PortletImporter {
 
 			portletDataContext.addAssetCategories(
 				className, classPK, assetCategoryIds);
+		}
+	}
+
+	protected void readAssetLinks(PortletDataContext portletDataContext)
+		throws Exception {
+
+		String xml = portletDataContext.getZipEntryAsString(
+			portletDataContext.getSourceRootPath() + "/links.xml");
+
+		if (xml == null) {
+			return;
+		}
+
+		Document document = SAXReaderUtil.read(xml);
+
+		Element rootElement = document.getRootElement();
+
+		List<Element> assetElements = rootElement.elements("asset-link");
+
+		for (Element assetElement : assetElements) {
+			String sourceUuid = GetterUtil.getString(
+				assetElement.attributeValue("source-uuid"));
+			String[] assetEntryUuidArray = StringUtil.split(
+				GetterUtil.getString(
+					assetElement.attributeValue("target-uuids")));
+
+			List<Long> entryIds = new ArrayList<Long>();
+
+			for (String assetEntryUuid : assetEntryUuidArray) {
+				try {
+					AssetEntry entry = AssetEntryLocalServiceUtil.getEntry(
+						portletDataContext.getScopeGroupId(), assetEntryUuid);
+
+					entryIds.add(entry.getEntryId());
+				} catch (NoSuchEntryException nsee) {
+				}
+			}
+
+			if (entryIds.size() > 0) {
+				long[] entryIdsArray = ArrayUtil.toArray(
+					entryIds.toArray(new Long[entryIds.size()]));
+
+				try {
+					AssetEntry sourceEntry =
+						AssetEntryLocalServiceUtil.getEntry(
+							portletDataContext.getScopeGroupId(), sourceUuid);
+
+					AssetLinkLocalServiceUtil.updateLinks(
+						sourceEntry.getUserId(), sourceEntry.getEntryId(),
+						entryIdsArray, AssetLinkConstants.TYPE_RELATED);
+				}
+				catch (NoSuchEntryException nsee) {
+				}
+			}
 		}
 	}
 

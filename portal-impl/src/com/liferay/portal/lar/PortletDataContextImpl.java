@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
 import com.liferay.portal.kernel.lar.UserIdStrategy;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.KeyValuePair;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.MapUtil;
@@ -60,7 +61,12 @@ import com.liferay.portal.service.TeamLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.asset.model.AssetCategory;
+import com.liferay.portlet.asset.model.AssetEntry;
+import com.liferay.portlet.asset.model.AssetLink;
+import com.liferay.portlet.asset.model.AssetLinkConstants;
 import com.liferay.portlet.asset.service.AssetCategoryLocalServiceUtil;
+import com.liferay.portlet.asset.service.AssetEntryLocalServiceUtil;
+import com.liferay.portlet.asset.service.AssetLinkLocalServiceUtil;
 import com.liferay.portlet.asset.service.AssetTagLocalServiceUtil;
 import com.liferay.portlet.blogs.model.impl.BlogsEntryImpl;
 import com.liferay.portlet.bookmarks.model.impl.BookmarksEntryImpl;
@@ -213,6 +219,34 @@ public class PortletDataContextImpl implements PortletDataContext {
 		_assetTagNamesMap.put(getPrimaryKeyString(clazz, classPK), tagNames);
 	}
 
+	public void addAssetLinks(Class<?> clazz, long classPK)
+		throws PortalException, SystemException {
+
+		AssetEntry entry = AssetEntryLocalServiceUtil.getEntry(
+			clazz.getName(), classPK);
+
+		List<AssetLink> assetLinks =
+			AssetLinkLocalServiceUtil.getDirectLinks(
+				entry.getEntryId(), AssetLinkConstants.TYPE_RELATED);
+
+		if (assetLinks.isEmpty()) {
+			return;
+		}
+
+		List<String> uuids = new ArrayList<String>(assetLinks.size());
+
+		for (AssetLink assetLink : assetLinks) {
+			AssetEntry linkedEntry = AssetEntryLocalServiceUtil.getEntry(
+				assetLink.getEntryId2());
+
+			uuids.add(linkedEntry.getClassUuid());
+		}
+
+		_assetLinkUuidsMap.put(
+			entry.getClassUuid(),
+			ArrayUtil.toStringArray(uuids.toArray()));
+	}
+
 	public void addAssetTags(
 		String className, long classPK, String[] assetTagNames) {
 
@@ -237,6 +271,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 			Class<?> clazz = classedModel.getModelClass();
 			long classPK = getClassPK(classedModel);
 
+			addAssetLinks(clazz, classPK);
 			addExpando(element, path, classedModel);
 			addLocks(clazz, String.valueOf(classPK));
 			addPermissions(clazz, classPK);
@@ -533,6 +568,10 @@ public class PortletDataContextImpl implements PortletDataContext {
 
 	public Map<String, String[]> getAssetCategoryUuidsMap() {
 		return _assetCategoryUuidsMap;
+	}
+
+	public Map<String, String[]> getAssetLinkUuidsMap() {
+		return _assetLinkUuidsMap;
 	}
 
 	public String[] getAssetTagNames(Class<?> clazz, long classPK) {
@@ -1376,6 +1415,8 @@ public class PortletDataContextImpl implements PortletDataContext {
 	private Map<String, long[]> _assetCategoryIdsMap =
 		new HashMap<String, long[]>();
 	private Map<String, String[]> _assetCategoryUuidsMap =
+		new HashMap<String, String[]>();
+	private Map<String, String[]> _assetLinkUuidsMap =
 		new HashMap<String, String[]>();
 	private Map<String, String[]> _assetTagNamesMap =
 		new HashMap<String, String[]>();

@@ -501,6 +501,10 @@ public class LayoutImporter {
 				false);
 		}
 
+		// Asset Links
+
+		_portletImporter.readAssetLinks(portletDataContext);
+
 		// Delete missing layouts
 
 		if (deleteMissingLayouts) {

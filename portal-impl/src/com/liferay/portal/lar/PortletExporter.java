@@ -264,6 +264,7 @@ public class PortletExporter {
 			exportAssetCategories(portletDataContext);
 		}
 
+		exportAssetLinks(portletDataContext);
 		exportAssetTags(portletDataContext);
 		exportComments(portletDataContext);
 		exportExpandoTables(portletDataContext);
@@ -421,6 +422,29 @@ public class PortletExporter {
 				portletDataContext, assetVocabulariesElement,
 				assetCategoriesElement, assetCategory);
 		}
+	}
+
+	protected void exportAssetLinks(PortletDataContext portletDataContext)
+		throws Exception {
+
+		Document document = SAXReaderUtil.createDocument();
+
+		Element rootElement = document.addElement("links");
+
+		Map<String, String[]> assetLinkUuidsMap =
+			portletDataContext.getAssetLinkUuidsMap();
+
+		for (Map.Entry<String, String[]> entry : assetLinkUuidsMap.entrySet()) {
+			Element assetElement = rootElement.addElement("asset-link");
+
+			assetElement.addAttribute("source-uuid", entry.getKey());
+			assetElement.addAttribute(
+				"target-uuids", StringUtil.merge(entry.getValue()));
+		}
+
+		portletDataContext.addZipEntry(
+			portletDataContext.getRootPath() + "/links.xml",
+			document.formattedString());
 	}
 
 	protected void exportAssetTags(PortletDataContext portletDataContext)

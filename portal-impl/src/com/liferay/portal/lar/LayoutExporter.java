@@ -458,6 +458,7 @@ public class LayoutExporter {
 			exportAssetCategories(portletDataContext);
 		}
 
+		_portletExporter.exportAssetLinks(portletDataContext);
 		_portletExporter.exportAssetTags(portletDataContext);
 		_portletExporter.exportComments(portletDataContext);
 		_portletExporter.exportExpandoTables(portletDataContext);
