@@ -18,6 +18,13 @@
 
 <%
 String typeSelection = request.getParameter("typeSelection");
+String groupIdParameter = request.getParameter("groupId");
+
+long groupId = 0;
+
+if (Validator.isNotNull(groupIdParameter)) {
+	groupId = Long.parseLong(groupIdParameter);
+}
 
 String callback = ParamUtil.getString(request, "callback");
 
@@ -52,7 +59,7 @@ portletURL.setParameter("typeSelection", typeSelection);
 		<%
 		AssetSearchTerms searchTerms = (AssetSearchTerms)searchContainer.getSearchTerms();
 
-		long[] groupIds = new long[] {scopeGroupId};
+		long[] groupIds = new long[] {groupId};
 		%>
 
 		<%@ include file="/html/portlet/asset_publisher/asset_search_results.jspf" %>

@@ -40,6 +40,7 @@ assetBrowserURL.setWindowState(LiferayWindowState.POP_UP);
 assetBrowserURL.setPortletMode(PortletMode.VIEW);
 
 assetBrowserURL.setParameter("struts_action", "/asset_browser/view");
+assetBrowserURL.setParameter("groupId", scopeGroupId.toString());
 %>
 
 <liferay-ui:icon-menu align="left" cssClass="select-existing-selector" icon='<%= themeDisplay.getPathThemeImages() + "/common/search.png" %>' id='<%= randomNamespace + "inputAssetLinks" %>' message="select" showWhenSingleIcon="<%= true %>">
