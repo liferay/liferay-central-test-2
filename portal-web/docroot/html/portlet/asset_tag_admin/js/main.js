@@ -984,8 +984,8 @@ AUI().add(
 							var tagName = instance._getTagName(firstTag);
 							var tagId = instance._getTagId(firstTag);
 
-							instance._selectedTagName = tagName;
 							instance._selectedTagId = tagId;
+							instance._selectedTagName = tagName;
 						}
 						else {
 							var tagsMessageContainer = instance._tagsMessageContainer;
@@ -996,8 +996,8 @@ AUI().add(
 
 							tagsMessageContainer.show();
 
-							instance._selectedTagName = null;
 							instance._selectedTagId = null;
+							instance._selectedTagName = null;
 						}
 
 						instance._getDDHandler().syncTargets();
