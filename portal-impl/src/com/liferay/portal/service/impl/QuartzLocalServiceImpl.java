@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayInputStream;
 import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayOutputStream;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
+import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.messaging.Message;
@@ -29,6 +30,8 @@ import com.liferay.portal.messaging.LayoutsLocalPublisherRequest;
 import com.liferay.portal.messaging.LayoutsRemotePublisherRequest;
 import com.liferay.portal.service.base.QuartzLocalServiceBaseImpl;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
@@ -43,6 +46,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 
 /**
  * @author Brian Wing Shun Chan
@@ -83,6 +87,14 @@ public class QuartzLocalServiceImpl extends QuartzLocalServiceBaseImpl {
 
 				if (stringKey.startsWith("destination")) {
 					key = SchedulerEngine.DESTINATION_NAME;
+				}
+				else if (stringKey.equals("messageBody")) {
+					key = SchedulerEngine.MESSAGE;
+
+					jobDataMap.put(
+						key, convertOldJsonStringToObject(entry.getValue()));
+
+					continue;
 				}
 				else {
 					key = stringKey.toUpperCase();
@@ -125,6 +137,76 @@ public class QuartzLocalServiceImpl extends QuartzLocalServiceBaseImpl {
 		objectOutputStream.close();
 
 		return newJobDataOutputStream.toByteArray();
+	}
+
+	protected Object convertOldJsonStringToObject(Object object) {
+		if (!(object instanceof String)) {
+			return null;
+		}
+
+		String jsonString = (String)object;
+		JSONObject jsonObject = null;
+
+		try {
+			jsonObject = JSONFactoryUtil.createJSONObject(jsonString);
+		}
+		catch(Exception e) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(e, e);
+			}
+		}
+
+		String oldJavaClass = jsonObject.getString("javaClass");
+
+		if (oldJavaClass.equals(
+			com.liferay.portlet.communities.messaging.
+				LayoutsLocalPublisherRequest.class.getName())) {
+
+			jsonObject.put(
+				"javaClass", LayoutsLocalPublisherRequest.class.getName());
+		}
+		else if (oldJavaClass.equals(
+			com.liferay.portlet.communities.messaging.
+				LayoutsRemotePublisherRequest.class.getName())) {
+
+			jsonObject.put(
+				"javaClass", LayoutsRemotePublisherRequest.class.getName());
+		}
+
+		jsonString = jsonObject.toString();
+
+		return JSONFactoryUtil.deserialize(jsonString);
+	}
+
+	protected byte[] convertPropertiesToMap(byte[] jobData) throws Exception {
+		InputStream inputStream = null;
+
+		try {
+			inputStream = new ByteArrayInputStream(jobData);
+
+			new ObjectInputStream(inputStream);
+
+			return jobData;
+		}
+		catch (Exception e) {
+			Properties properties = new Properties();
+
+			properties.load(inputStream);
+
+			ByteArrayOutputStream byteArrayOutputStream =
+				new ByteArrayOutputStream();
+
+			ObjectOutputStream objectOutputStream = new ObjectOutputStream(
+				byteArrayOutputStream);
+
+			objectOutputStream.writeObject(new HashMap(properties));
+			objectOutputStream.flush();
+
+			return byteArrayOutputStream.toByteArray();
+		}
+		finally {
+			inputStream.close();
+		}
 	}
 
 	protected void createQuartzTables() throws SystemException {
@@ -183,6 +265,7 @@ public class QuartzLocalServiceImpl extends QuartzLocalServiceBaseImpl {
 				String jobGroup = rs.getString("JOB_GROUP");
 				byte[] jobData = rs.getBytes("JOB_DATA");
 
+				jobData = convertPropertiesToMap(jobData);
 				jobData = convertMessageToJSON(jobData);
 
 				if (jobData == null) {
