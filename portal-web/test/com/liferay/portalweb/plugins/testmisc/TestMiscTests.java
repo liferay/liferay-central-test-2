@@ -29,6 +29,7 @@ public class TestMiscTests extends BaseTests {
 
 		testSuite.addTestSuite(AddPageTest.class);
 		testSuite.addTestSuite(AddPortletTest.class);
+		testSuite.addTestSuite(ViewPortletTestMiscTest.class);
 		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;

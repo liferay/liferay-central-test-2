@@ -44,6 +44,9 @@ public class SaveSettingsStatusMessageTest extends BaseTestCase {
 		selenium.clickAt("link=Test CLP Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
+		assertEquals(RuntimeVariables.replace(""),
+			selenium.getText(
+				"//div[@class='portlet-body']/table/tbody/tr[2]/td[7]"));
 		selenium.clickAt("//ul[@class='chat-tabs']/li[2]/div[1]/span",
 			RuntimeVariables.replace(""));
 

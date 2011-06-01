@@ -29,6 +29,10 @@ public class TestLocalizedTests extends BaseTests {
 
 		testSuite.addTestSuite(AddPageTest.class);
 		testSuite.addTestSuite(AddPortletTest.class);
+		testSuite.addTestSuite(ViewPortletChineseLocalizedTest.class);
+		testSuite.addTestSuite(ViewPortletFrenchLocalizedTest.class);
+		testSuite.addTestSuite(ViewPortletSpanishLocalizedTest.class);
+		testSuite.addTestSuite(ViewPortletEnglishLocalizedTest.class);
 		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;

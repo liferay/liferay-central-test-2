@@ -109,7 +109,7 @@ public class AddPortletOpenSocialGadgetTest extends BaseTestCase {
 		assertEquals(RuntimeVariables.replace("Hello World!"),
 			selenium.getText("//header/h1/span"));
 		Thread.sleep(5000);
-		selenium.selectFrame("//iframe[@class='yui3-aui-gadget']");
+		selenium.selectFrame("//iframe[@class='aui-gadget']");
 		assertEquals(RuntimeVariables.replace("Hello, world!"),
 			selenium.getText("//body"));
 		selenium.selectFrame("relative=top");
