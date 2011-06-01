@@ -315,8 +315,6 @@ public class LayoutImporter {
 
 		String css = GetterUtil.getString(headerElement.elementText("css"));
 
-		boolean useThemeZip = false;
-
 		if (themeZip != null) {
 			String importThemeId = importTheme(layoutSet, themeZip);
 
@@ -324,8 +322,6 @@ public class LayoutImporter {
 				themeId = importThemeId;
 				colorSchemeId =
 					ColorSchemeImpl.getDefaultRegularColorSchemeId();
-
-				useThemeZip = true;
 			}
 
 			if (_log.isDebugEnabled()) {
@@ -385,7 +381,7 @@ public class LayoutImporter {
 				portletDataContext, user, layoutCache, previousLayouts,
 				newLayouts, newLayoutsMap, newLayoutIds, portletsMergeMode,
 				themeId, colorSchemeId, layoutsImportMode, privateLayout,
-				importPermissions, importUserPermissions, useThemeZip,
+				importPermissions, importUserPermissions, importThemeSettings,
 				rootElement, layoutElement);
 		}
 
@@ -726,7 +722,7 @@ public class LayoutImporter {
 			Set<Long> newLayoutIds, String portletsMergeMode, String themeId,
 			String colorSchemeId, String layoutsImportMode,
 			boolean privateLayout, boolean importPermissions,
-			boolean importUserPermissions, boolean useThemeZip,
+			boolean importUserPermissions, boolean importThemeSettings,
 			Element rootElement, Element layoutElement)
 		throws Exception {
 
@@ -878,7 +874,7 @@ public class LayoutImporter {
 				portletDataContext, user, layoutCache, previousLayouts,
 				newLayouts, newLayoutsMap, newLayoutIds, portletsMergeMode,
 				themeId, colorSchemeId, layoutsImportMode, privateLayout,
-				importPermissions, importUserPermissions, useThemeZip,
+				importPermissions, importUserPermissions, importThemeSettings,
 				rootElement, (Element)parentLayoutNode);
 
 			Layout parentLayout = newLayoutsMap.get(parentLayoutId);
@@ -934,7 +930,7 @@ public class LayoutImporter {
 						newLayouts, newLayoutsMap, newLayoutIds,
 						portletsMergeMode, themeId, colorSchemeId,
 						layoutsImportMode, privateLayout, importPermissions,
-						importUserPermissions, useThemeZip, rootElement,
+						importUserPermissions, importThemeSettings, rootElement,
 						(Element)linkedLayoutNode);
 
 					Layout linkedLayout = newLayoutsMap.get(linkToLayoutId);
@@ -971,13 +967,13 @@ public class LayoutImporter {
 		importedLayout.setHidden(layout.isHidden());
 		importedLayout.setFriendlyURL(friendlyURL);
 
-		if (useThemeZip) {
-			importedLayout.setThemeId(StringPool.BLANK);
-			importedLayout.setColorSchemeId(StringPool.BLANK);
-		}
-		else {
+		if (importThemeSettings) {
 			importedLayout.setThemeId(layout.getThemeId());
 			importedLayout.setColorSchemeId(layout.getColorSchemeId());
+		}
+		else {
+			importedLayout.setThemeId(StringPool.BLANK);
+			importedLayout.setColorSchemeId(StringPool.BLANK);
 		}
 
 		importedLayout.setWapThemeId(layout.getWapThemeId());
