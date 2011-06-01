@@ -17,14 +17,9 @@
 <%@ include file="/html/portlet/asset_browser/init.jsp" %>
 
 <%
+long groupId = GetterUtil.getLong(request, "groupId");
+
 String typeSelection = request.getParameter("typeSelection");
-String groupIdParameter = request.getParameter("groupId");
-
-long groupId = 0;
-
-if (Validator.isNotNull(groupIdParameter)) {
-	groupId = Long.parseLong(groupIdParameter);
-}
 
 String callback = ParamUtil.getString(request, "callback");
 
