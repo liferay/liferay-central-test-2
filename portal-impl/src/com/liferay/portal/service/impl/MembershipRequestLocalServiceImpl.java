@@ -197,7 +197,7 @@ public class MembershipRequestLocalServiceImpl
 		membershipRequestPersistence.update(membershipRequest, false);
 
 		if ((statusId == MembershipRequestConstants.STATUS_APPROVED) &&
-				addUserToGroup) {
+			addUserToGroup) {
 
 			long[] addUserIds = new long[] {membershipRequest.getUserId()};
 

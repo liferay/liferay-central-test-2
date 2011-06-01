@@ -14,10 +14,9 @@
 
 package com.liferay.portal.model;
 
+import com.liferay.portal.ModelListenerException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.ModelListenerException;
-import com.liferay.portal.model.Group;
 import com.liferay.portal.security.auth.PrincipalThreadLocal;
 import com.liferay.portal.security.ldap.LDAPUserTransactionThreadLocal;
 import com.liferay.portal.security.ldap.PortalLDAPExporterUtil;
