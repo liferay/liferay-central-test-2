@@ -34,9 +34,8 @@ import com.liferay.portlet.wiki.engines.antlrwiki.translator.internal.Unformatte
 import com.liferay.portlet.wiki.model.WikiPage;
 import com.liferay.portlet.wiki.service.WikiPageLocalServiceUtil;
 
-import java.util.List;
-
 import javax.portlet.PortletURL;
+import java.util.List;
 
 /**
  * @author Miguel Pastor
@@ -160,45 +159,6 @@ public class XhtmlTranslator extends XhtmlTranslationVisitor {
 		append(HtmlUtil.escape(linkNode.getLink()));
 	}
 
-	protected void appendWikiHref(LinkNode linkNode) {
-		WikiPage page = null;
-
-		try {
-			page = WikiPageLocalServiceUtil.getPage(
-				_wikiPage.getNodeId(), linkNode.getLink());
-		}
-		catch (NoSuchPageException nspe) {
-		}
-		catch (Exception e) {
-			_log.warn(
-				"Unexpected error searching for page: " + linkNode.getLink() +
-				". Assuming that it does not exist.");
-		}
-
-		String href = null;
-
-		String pageTitle = HtmlUtil.escape(linkNode.getLink());
-
-		if (page != null && _viewUrl != null) {
-			_viewUrl.setParameter("title", pageTitle);
-
-			href = _viewUrl.toString();
-		}
-		else if (_editUrl != null) {
-			_editUrl.setParameter("title", pageTitle);
-
-			href = _editUrl.toString();
-		}
-
-		append(href);
-	}
-
-	protected String getUnformattedHeadingText(HeadingNode headingNode) {
-
-		return new UnformattedHeadingTextVisitor().getUnformattedText(
-			headingNode);
-	}
-
 	protected void appendHref(LinkNode linkNode) {
 		if (linkNode.getLink() == null) {
 
@@ -215,22 +175,6 @@ public class XhtmlTranslator extends XhtmlTranslationVisitor {
 		else {
 			appendWikiHref(linkNode);
 		}
-	}
-
-	protected String getHeadingMarkup(String prefix, String text) {
-		StringBundler trimmedText = new StringBundler(5);
-
-		trimmedText.append(_HEADING_ANCHOR_PREFIX);
-		trimmedText.append(prefix);
-		trimmedText.append(StringPool.DASH);
-		trimmedText.append(text.trim());
-
-		if (StringPool.BLANK.equals(trimmedText)) {
-			trimmedText.append(++_uniqueIdHeaderSequence);
-		}
-
-		return StringUtil.replace(
-			trimmedText.toString(), StringPool.SPACE, StringPool.PLUS);
 	}
 
 	protected void appendTableOfContents(
@@ -268,6 +212,61 @@ public class XhtmlTranslator extends XhtmlTranslationVisitor {
 		}
 
 		append("</ol>");
+	}
+
+	protected void appendWikiHref(LinkNode linkNode) {
+		WikiPage page = null;
+
+		try {
+			page = WikiPageLocalServiceUtil.getPage(
+				_wikiPage.getNodeId(), linkNode.getLink());
+		}
+		catch (NoSuchPageException nspe) {
+		}
+		catch (Exception e) {
+			_log.warn(
+				"Unexpected error searching for page: " + linkNode.getLink() +
+				". Assuming that it does not exist.");
+		}
+
+		String href = null;
+
+		String pageTitle = HtmlUtil.escape(linkNode.getLink());
+
+		if (page != null && _viewUrl != null) {
+			_viewUrl.setParameter("title", pageTitle);
+
+			href = _viewUrl.toString();
+		}
+		else if (_editUrl != null) {
+			_editUrl.setParameter("title", pageTitle);
+
+			href = _editUrl.toString();
+		}
+
+		append(href);
+	}
+
+	protected String getHeadingMarkup(String prefix, String text) {
+		StringBundler trimmedText = new StringBundler(5);
+
+		trimmedText.append(_HEADING_ANCHOR_PREFIX);
+		trimmedText.append(prefix);
+		trimmedText.append(StringPool.DASH);
+		trimmedText.append(text.trim());
+
+		if (StringPool.BLANK.equals(trimmedText)) {
+			trimmedText.append(++_uniqueIdHeaderSequence);
+		}
+
+		return StringUtil.replace(
+			trimmedText.toString(), StringPool.SPACE, StringPool.PLUS);
+	}
+
+	protected String getUnformattedHeadingText(HeadingNode headingNode) {
+
+		return new UnformattedHeadingTextVisitor().getUnformattedText(
+			headingNode);
 	}
 
 	private static final String _HEADING_ANCHOR_PREFIX = "section-";
