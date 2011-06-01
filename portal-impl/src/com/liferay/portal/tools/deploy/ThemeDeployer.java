@@ -93,6 +93,10 @@ public class ThemeDeployer extends BaseDeployer {
 		sb.append("</listener-class>");
 		sb.append("</listener>");
 
+		// Ignore filters
+
+		sb.append(getIgnoreFiltersContent(srcFile));
+
 		// Speed filters
 
 		sb.append(getSpeedFiltersContent(srcFile));
