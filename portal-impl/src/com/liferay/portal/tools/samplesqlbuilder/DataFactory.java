@@ -508,12 +508,12 @@ public class DataFactory {
 		return _organizationAdministratorRole;
 	}
 
-	public Role getOrganizationUserRole() {
-		return _organizationUserRole;
-	}
-
 	public Role getOrganizationOwnerRole() {
 		return _organizationOwnerRole;
+	}
+
+	public Role getOrganizationUserRole() {
+		return _organizationUserRole;
 	}
 
 	public Role getPowerUserRole() {
