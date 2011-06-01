@@ -61,7 +61,7 @@ long detailDDMTemplateId = ParamUtil.getLong(request, "detailDDMTemplateId");
 
 				ddmStructure.setXsd(ddmTemplate.getScript());
 			}
-			catch(NoSuchTemplateException nste) {
+			catch (NoSuchTemplateException nste) {
 			}
 		}
 
