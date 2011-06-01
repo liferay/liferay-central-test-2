@@ -25,24 +25,22 @@ import java.util.List;
  */
 public abstract class NodeCollectorVisitor extends BaseASTVisitor {
 
-	public List<ASTNode> collect(WikiPageNode start) {
+	public List<ASTNode> collect(WikiPageNode wikiPageNode) {
+		_astNodes = new ArrayList<ASTNode>();
 
-		_collectedNodes = new ArrayList<ASTNode>();
+		visit(wikiPageNode);
 
-		visit(start);
+		List<ASTNode> astNodes = new ArrayList<ASTNode>(_astNodes);
 
-		List<ASTNode> collectedNodesCopy = new ArrayList<ASTNode>(
-			_collectedNodes);
+		_astNodes = null;
 
-		_collectedNodes = null;
-
-		return collectedNodesCopy;
+		return astNodes;
 	}
 
 	protected void addNode(ASTNode node) {
-		_collectedNodes.add(node);
+		_astNodes.add(node);
 	}
 
-	private List<ASTNode> _collectedNodes = null;
+	private List<ASTNode> _astNodes;
 
 }

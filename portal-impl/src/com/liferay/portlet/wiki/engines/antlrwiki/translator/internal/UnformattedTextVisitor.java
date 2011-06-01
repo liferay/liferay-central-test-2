@@ -29,11 +29,10 @@ import com.liferay.portal.parsers.creole.visitor.impl.BaseASTVisitor;
 public abstract class UnformattedTextVisitor extends BaseASTVisitor {
 
 	public String getText() {
-		return _text.toString();
+		return _sb.toString();
 	}
 
 	public void visit(BoldTextNode boldTextNode) {
-
 		if (boldTextNode.getContent() != null) {
 			write(boldTextNode.getContent());
 		}
@@ -43,7 +42,6 @@ public abstract class UnformattedTextVisitor extends BaseASTVisitor {
 	}
 
 	public void visit(FormattedTextNode formattedTextNode) {
-
 		if (formattedTextNode.getContent() != null) {
 			write(formattedTextNode.getContent());
 		}
@@ -53,7 +51,6 @@ public abstract class UnformattedTextVisitor extends BaseASTVisitor {
 	}
 
 	public void visit(ItalicTextNode italicTextNode) {
-
 		if (italicTextNode.getContent() != null) {
 			write(italicTextNode.getContent());
 		}
@@ -63,7 +60,6 @@ public abstract class UnformattedTextVisitor extends BaseASTVisitor {
 	}
 
 	public void visit(LinkNode linkNode) {
-
 		String link = linkNode.getLink();
 
 		if (link != null) {
@@ -87,9 +83,9 @@ public abstract class UnformattedTextVisitor extends BaseASTVisitor {
 	}
 
 	protected void write(String text) {
-		_text.append(text);
+		_sb.append(text);
 	}
 
-	private StringBundler _text = new StringBundler();
+	private StringBundler _sb = new StringBundler();
 
 }

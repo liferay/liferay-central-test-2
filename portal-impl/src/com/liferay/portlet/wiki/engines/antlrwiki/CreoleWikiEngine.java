@@ -45,11 +45,12 @@ import org.antlr.runtime.RecognitionException;
 public class CreoleWikiEngine implements WikiEngine {
 
 	public String convert(
-			WikiPage page, PortletURL viewPageURL, PortletURL editPageURL,
-			String attachmentURLPrefix)
-		throws PageContentException {
+		WikiPage page, PortletURL viewPageURL, PortletURL editPageURL,
+		String attachmentURLPrefix) {
 
-		return new XhtmlTranslator().translate(
+		XhtmlTranslator xhtmlTranslator = new XhtmlTranslator();
+
+		return xhtmlTranslator.translate(
 			page, viewPageURL, editPageURL, attachmentURLPrefix, parse(
 			page.getContent()));
 	}
@@ -59,12 +60,15 @@ public class CreoleWikiEngine implements WikiEngine {
 
 		Map<String, Boolean> outgoingLinks = new HashMap<String, Boolean>();
 
-		List<ASTNode> linkNodes = new LinkNodeCollectorVisitor().collect(
+		LinkNodeCollectorVisitor linkNodeCollectorVisitor =
+			new LinkNodeCollectorVisitor();
+
+		List<ASTNode> astNodes = linkNodeCollectorVisitor.collect(
 			parse(page.getContent()));
 
 		try {
-			for (ASTNode node : linkNodes) {
-				LinkNode linkNode = (LinkNode) node;
+			for (ASTNode astNode : astNodes) {
+				LinkNode linkNode = (LinkNode)astNode;
 
 				String title = linkNode.getLink();
 
@@ -97,29 +101,29 @@ public class CreoleWikiEngine implements WikiEngine {
 	}
 
 	protected Creole10Parser build(String creoleCode) {
-		ANTLRStringStream stream = new ANTLRStringStream(creoleCode);
+		ANTLRStringStream antlrStringStream = new ANTLRStringStream(creoleCode);
 
-		Creole10Lexer lexer = new Creole10Lexer(stream);
+		Creole10Lexer creole10Lexer = new Creole10Lexer(antlrStringStream);
 
-		CommonTokenStream tokens = new CommonTokenStream(lexer);
+		CommonTokenStream commonTokenStream = new CommonTokenStream(
+			creole10Lexer);
 
-		return new Creole10Parser(tokens);
-
+		return new Creole10Parser(commonTokenStream);
 	}
 
 	protected WikiPageNode parse(String creoleCode) {
-		Creole10Parser parser = build(creoleCode);
+		Creole10Parser creole10Parser = build(creoleCode);
 
 		try {
-			parser.wikipage();
+			creole10Parser.wikipage();
 		}
 		catch (RecognitionException re) {
 			if (_log.isDebugEnabled()) {
-				_log.debug("Error parsing creole code:\n" + creoleCode, re);
+				_log.debug("Unable to parse:\n" + creoleCode, re);
 			}
 		}
 
-		return parser.getWikiPageNode();
+		return creole10Parser.getWikiPageNode();
 	}
 
 	private Log _log = LogFactoryUtil.getLog(CreoleWikiEngine.class);

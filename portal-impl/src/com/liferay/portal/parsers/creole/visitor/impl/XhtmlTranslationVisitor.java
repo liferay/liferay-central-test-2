@@ -230,6 +230,12 @@ public class XhtmlTranslationVisitor implements ASTVisitor {
 		traverse(wikiPageNode.getChildASTNodes());
 	}
 
+	protected void append(Object object) {
+		if (object != null) {
+			_sb.append(object);
+		}
+	}
+
 	protected void traverse(List<ASTNode> astNodes) {
 		if (astNodes != null) {
 			for (ASTNode astNode : astNodes) {
@@ -255,12 +261,6 @@ public class XhtmlTranslationVisitor implements ASTVisitor {
 			curNode.accept(this);
 
 			append(close);
-		}
-	}
-
-	protected void append(Object object) {
-		if (object != null) {
-			_sb.append(object);
 		}
 	}
 

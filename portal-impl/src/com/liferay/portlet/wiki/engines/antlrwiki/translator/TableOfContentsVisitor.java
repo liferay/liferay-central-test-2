@@ -27,61 +27,54 @@ import java.util.List;
 public class TableOfContentsVisitor extends BaseASTVisitor {
 
 	public TreeNode<HeadingNode> compose(WikiPageNode wikiPageNode) {
-		_tableOfContents = new TreeNode<HeadingNode>(
-			(new HeadingNode(Integer.MIN_VALUE)));
+		_headingNode = new TreeNode<HeadingNode>(
+			new HeadingNode(Integer.MIN_VALUE));
 
 		visit(wikiPageNode);
 
-		return _tableOfContents;
+		return _headingNode;
 	}
 
 	public void visit(HeadingNode headingNode) {
-		addNodeToTree(_tableOfContents, headingNode);
+		addHeadingNode(_headingNode, headingNode);
 	}
 
-	protected void addNode(
+	protected boolean addHeadingNode(
 		TreeNode<HeadingNode> treeNode, HeadingNode headingNode) {
 
-		if (headingNode.getLevel() <= treeNode.getValue().getLevel()) {
+		if (!isLastHeadingNode(treeNode, headingNode)) {
+			HeadingNode treeNodeHeadingNode = treeNode.getValue();
 
-			// Add as a sibling
+			if (headingNode.getLevel() <= treeNodeHeadingNode.getLevel()) {
+				TreeNode<HeadingNode> parentTreeNode = treeNode.getParentNode();
 
-			treeNode.getParentNode().addChildNode(headingNode);
-		}
-		else {
-			treeNode.addChildNode(headingNode);
-		}
-	}
-
-	protected boolean addNodeToTree(
-		TreeNode<HeadingNode> treeNode, HeadingNode headingNode) {
-
-		if (!continueRecursion(treeNode, headingNode)) {
-			addNode(treeNode, headingNode);
-
-			// Stop recursion
+				parentTreeNode.addChildNode(headingNode);
+			}
+			else {
+				treeNode.addChildNode(headingNode);
+			}
 
 			return false;
 		}
 
 		List<TreeNode<HeadingNode>> treeNodes = treeNode.getChildNodes();
 
-		int size = treeNode.getChildNodes().size();
-
-		for (int i = size - 1; i >= 0; --i) {
-			return addNodeToTree(treeNodes.get(i), headingNode);
+		for (int i = treeNodes.size() - 1; i >= 0; --i) {
+			return addHeadingNode(treeNodes.get(i), headingNode);
 		}
 
 		return true;
 	}
 
-	protected boolean continueRecursion(
+	protected boolean isLastHeadingNode(
 		TreeNode<HeadingNode> treeNode, HeadingNode headingNode) {
 
-		List<TreeNode<HeadingNode>> children = treeNode.getChildNodes();
+		HeadingNode treeNodeHeadingNode = treeNode.getValue();
 
-		if ((headingNode.getLevel() > treeNode.getValue().getLevel()) &&
-			(children != null) && (children.size() > 0)) {
+		List<TreeNode<HeadingNode>> treeNodes = treeNode.getChildNodes();
+
+		if ((headingNode.getLevel() > treeNodeHeadingNode.getLevel()) &&
+			(treeNodes != null) && (treeNodes.size() > 0)) {
 
 			return true;
 		}
@@ -89,6 +82,6 @@ public class TableOfContentsVisitor extends BaseASTVisitor {
 		return false;
 	}
 
-	private TreeNode<HeadingNode> _tableOfContents = null;
+	private TreeNode<HeadingNode> _headingNode;
 
 }

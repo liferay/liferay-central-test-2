@@ -48,18 +48,9 @@ import java.util.List;
 public abstract class BaseASTVisitor implements ASTVisitor {
 
 	public void visit(BoldTextNode boldTextNode) {
-
 		if (boldTextNode.getChildASTNodesCount() > 0) {
 			traverse(boldTextNode.getChildASTNodes());
 		}
-	}
-
-	public void visit(TableDataNode tableDataNode) {
-		traverse(tableDataNode.getChildASTNodes());
-	}
-
-	public void visit(TableHeaderNode tableHeaderNode) {
-		traverse(tableHeaderNode.getChildASTNodes());
 	}
 
 	public void visit(CollectionNode collectionNode) {
@@ -124,6 +115,14 @@ public abstract class BaseASTVisitor implements ASTVisitor {
 	public void visit(ScapedNode scapedNode) {
 	}
 
+	public void visit(TableDataNode tableDataNode) {
+		traverse(tableDataNode.getChildASTNodes());
+	}
+
+	public void visit(TableHeaderNode tableHeaderNode) {
+		traverse(tableHeaderNode.getChildASTNodes());
+	}
+
 	public void visit(TableNode tableNode) {
 		traverse(tableNode.getChildASTNodes());
 	}
@@ -132,7 +131,6 @@ public abstract class BaseASTVisitor implements ASTVisitor {
 	}
 
 	public void visit(UnformattedTextNode unformattedTextNode) {
-
 		if (unformattedTextNode.getChildASTNodesCount() > 0) {
 			traverse(unformattedTextNode.getChildASTNodes());
 		}
@@ -150,9 +148,9 @@ public abstract class BaseASTVisitor implements ASTVisitor {
 		traverse(wikiPageNode.getChildASTNodes());
 	}
 
-	protected void traverse(List<ASTNode> nodes) {
-		if (nodes != null) {
-			for (ASTNode node : nodes) {
+	protected void traverse(List<ASTNode> astNodes) {
+		if (astNodes != null) {
+			for (ASTNode node : astNodes) {
 				node.accept(this);
 			}
 		}

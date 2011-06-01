@@ -19,8 +19,8 @@ import com.liferay.portal.parsers.creole.visitor.ASTVisitor;
 /**
  * @author Miguel Pastor
  */
-public class HeadingNode extends BaseParentableNode
-	implements Comparable<HeadingNode> {
+public class HeadingNode
+	extends BaseParentableNode implements Comparable<HeadingNode> {
 
 	public HeadingNode(int level) {
 		_level = level;
@@ -37,7 +37,15 @@ public class HeadingNode extends BaseParentableNode
 	}
 
 	public int compareTo(HeadingNode headingNode) {
-		return new Integer(_level).compareTo(headingNode.getLevel());
+		if (_level < headingNode.getLevel()) {
+			return -1;
+		}
+		else if (_level > headingNode.getLevel()) {
+			return 1;
+		}
+		else {
+			return 0;
+		}
 	}
 
 	public int getLevel() {
