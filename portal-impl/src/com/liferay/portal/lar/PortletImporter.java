@@ -307,6 +307,10 @@ public class PortletImporter {
 
 		// Asset links
 
+		if (_log.isDebugEnabled()) {
+			_log.debug("Importing asset links");
+		}
+
 		readAssetLinks(portletDataContext);
 
 		zipReader.close();
@@ -1047,42 +1051,44 @@ public class PortletImporter {
 
 		Element rootElement = document.getRootElement();
 
-		List<Element> assetElements = rootElement.elements("asset-link");
+		List<Element> assetLinkElements = rootElement.elements("asset-link");
 
-		for (Element assetElement : assetElements) {
+		for (Element assetLinkElement : assetLinkElements) {
 			String sourceUuid = GetterUtil.getString(
-				assetElement.attributeValue("source-uuid"));
+				assetLinkElement.attributeValue("source-uuid"));
 			String[] assetEntryUuidArray = StringUtil.split(
 				GetterUtil.getString(
-					assetElement.attributeValue("target-uuids")));
+					assetLinkElement.attributeValue("target-uuids")));
 
-			List<Long> entryIds = new ArrayList<Long>();
+			List<Long> assetEntryIds = new ArrayList<Long>();
 
 			for (String assetEntryUuid : assetEntryUuidArray) {
 				try {
-					AssetEntry entry = AssetEntryLocalServiceUtil.getEntry(
+					AssetEntry assetEntry = AssetEntryLocalServiceUtil.getEntry(
 						portletDataContext.getScopeGroupId(), assetEntryUuid);
 
-					entryIds.add(entry.getEntryId());
-				} catch (NoSuchEntryException nsee) {
-				}
-			}
-
-			if (entryIds.size() > 0) {
-				long[] entryIdsArray = ArrayUtil.toArray(
-					entryIds.toArray(new Long[entryIds.size()]));
-
-				try {
-					AssetEntry sourceEntry =
-						AssetEntryLocalServiceUtil.getEntry(
-							portletDataContext.getScopeGroupId(), sourceUuid);
-
-					AssetLinkLocalServiceUtil.updateLinks(
-						sourceEntry.getUserId(), sourceEntry.getEntryId(),
-						entryIdsArray, AssetLinkConstants.TYPE_RELATED);
+					assetEntryIds.add(assetEntry.getEntryId());
 				}
 				catch (NoSuchEntryException nsee) {
 				}
+			}
+
+			if (assetEntryIds.isEmpty()) {
+				continue;
+			}
+
+			long[] assetEntryIdsArray = ArrayUtil.toArray(
+				assetEntryIds.toArray(new Long[assetEntryIds.size()]));
+
+			try {
+				AssetEntry assetEntry = AssetEntryLocalServiceUtil.getEntry(
+					portletDataContext.getScopeGroupId(), sourceUuid);
+
+				AssetLinkLocalServiceUtil.updateLinks(
+					assetEntry.getUserId(), assetEntry.getEntryId(),
+					assetEntryIdsArray, AssetLinkConstants.TYPE_RELATED);
+			}
+			catch (NoSuchEntryException nsee) {
 			}
 		}
 	}

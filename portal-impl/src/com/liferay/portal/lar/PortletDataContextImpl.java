@@ -206,6 +206,34 @@ public class PortletDataContextImpl implements PortletDataContext {
 			getPrimaryKeyString(className, classPK), assetCategoryIds);
 	}
 
+	public void addAssetLinks(Class<?> clazz, long classPK)
+		throws PortalException, SystemException {
+
+		AssetEntry assetEntry = AssetEntryLocalServiceUtil.getEntry(
+			clazz.getName(), classPK);
+
+		List<AssetLink> assetLinks =
+			AssetLinkLocalServiceUtil.getDirectLinks(
+				assetEntry.getEntryId(), AssetLinkConstants.TYPE_RELATED);
+
+		if (assetLinks.isEmpty()) {
+			return;
+		}
+
+		List<String> assetLinkUuids = new ArrayList<String>(assetLinks.size());
+
+		for (AssetLink assetLink : assetLinks) {
+			AssetEntry assetLinkEntry = AssetEntryLocalServiceUtil.getEntry(
+				assetLink.getEntryId2());
+
+			assetLinkUuids.add(assetLinkEntry.getClassUuid());
+		}
+
+		_assetLinkUuidsMap.put(
+			assetEntry.getClassUuid(),
+			ArrayUtil.toStringArray(assetLinkUuids.toArray()));
+	}
+
 	public void addAssetTags(Class<?> clazz, long classPK)
 		throws SystemException {
 
@@ -217,34 +245,6 @@ public class PortletDataContextImpl implements PortletDataContext {
 		}
 
 		_assetTagNamesMap.put(getPrimaryKeyString(clazz, classPK), tagNames);
-	}
-
-	public void addAssetLinks(Class<?> clazz, long classPK)
-		throws PortalException, SystemException {
-
-		AssetEntry entry = AssetEntryLocalServiceUtil.getEntry(
-			clazz.getName(), classPK);
-
-		List<AssetLink> assetLinks =
-			AssetLinkLocalServiceUtil.getDirectLinks(
-				entry.getEntryId(), AssetLinkConstants.TYPE_RELATED);
-
-		if (assetLinks.isEmpty()) {
-			return;
-		}
-
-		List<String> uuids = new ArrayList<String>(assetLinks.size());
-
-		for (AssetLink assetLink : assetLinks) {
-			AssetEntry linkedEntry = AssetEntryLocalServiceUtil.getEntry(
-				assetLink.getEntryId2());
-
-			uuids.add(linkedEntry.getClassUuid());
-		}
-
-		_assetLinkUuidsMap.put(
-			entry.getClassUuid(),
-			ArrayUtil.toStringArray(uuids.toArray()));
 	}
 
 	public void addAssetTags(

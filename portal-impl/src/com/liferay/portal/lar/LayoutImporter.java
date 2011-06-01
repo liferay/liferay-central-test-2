@@ -501,7 +501,7 @@ public class LayoutImporter {
 				false);
 		}
 
-		// Asset Links
+		// Asset links
 
 		_portletImporter.readAssetLinks(portletDataContext);
 
