@@ -42,6 +42,9 @@ if (Validator.isNull(displayStyle)) {
 	displayStyle = portalPreferences.getValue(PortletKeys.DOCUMENT_LIBRARY, "display-style", "icon");
 }
 
+long start = ParamUtil.getLong(request, "start");
+long end = ParamUtil.getLong(request, "end", SearchContainer.DEFAULT_DELTA);
+
 String orderByCol = ParamUtil.getString(request, "orderByCol");
 String orderByType = ParamUtil.getString(request, "orderByType");
 
@@ -55,9 +58,6 @@ request.setAttribute("view.jsp-folder", folder);
 request.setAttribute("view.jsp-folderId", String.valueOf(folderId));
 
 request.setAttribute("view.jsp-repositoryId", String.valueOf(repositoryId));
-
-long start = ParamUtil.getLong(request, "start");
-long end = ParamUtil.getLong(request, "end", SearchContainer.DEFAULT_DELTA);
 %>
 
 <div class="portlet-msg-error aui-helper-hidden" id="<portlet:namespace />errorContainer">
@@ -72,6 +72,7 @@ long end = ParamUtil.getLong(request, "end", SearchContainer.DEFAULT_DELTA);
 					<div class="parent-folder-title" id="<portlet:namespace />parentFolderTitle"></div>
 				</div>
 			</div>
+
 			<div class="body-row">
 				<div id="<portlet:namespace />folderContainer"></div>
 			</div>

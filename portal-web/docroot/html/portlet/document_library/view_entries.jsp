@@ -176,8 +176,6 @@ searchContainer.setTotal(total);
 				<%= LanguageUtil.get(pageContext, "there-are-no-documents-in-this-folder") %>
 			</div>
 		</c:when>
-		<c:otherwise>
-		</c:otherwise>
 	</c:choose>
 </c:if>
 
@@ -388,9 +386,9 @@ for (int i = 0; i < results.size(); i++) {
 	Liferay.fire(
 		'viewEntriesLoaded',
 		{
-			total: <%= total %>,
+			page: <%= end / (end - start) %>,
 			paginationURL: '<%= paginationURL %>',
-			page: <%= end / (end - start) %>
+			total: <%= total %>
 		}
 	);
 </aui:script>
