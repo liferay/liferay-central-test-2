@@ -15,6 +15,7 @@
 package com.liferay.portal.tools;
 
 import com.liferay.portal.kernel.io.unsync.UnsyncBufferedReader;
+import com.liferay.portal.kernel.util.ReleaseInfo;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.tools.servicebuilder.ServiceBuilder;
@@ -78,6 +79,10 @@ public class UpgradeTableBuilder {
 					fileName.substring(x, y) + "ModelImpl.java";
 
 			if (!_fileUtil.exists(upgradeFileName)) {
+				if (!upgradeFileVersion.equals(ReleaseInfo.getVersion())) {
+					continue;
+				}
+
 				upgradeFileName = _findUpgradeFileName(
 					fileName.substring(x, y));
 
