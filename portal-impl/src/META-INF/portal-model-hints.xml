@@ -1434,7 +1434,7 @@
 			<hint name="upper-case">true</hint>
 			<hint name="auto-escape">false</hint>
 		</field>
-		<field name="name" type="String">
+		<field name="name" type="String" localized="true">
 			<validator name="required" />
 		</field>
 		<field name="description" type="String">

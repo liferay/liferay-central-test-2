@@ -467,7 +467,7 @@ create table DDMStructure (
 	modifiedDate DATE null,
 	classNameId LONG,
 	structureKey VARCHAR(75) null,
-	name VARCHAR(75) null,
+	name STRING null,
 	description STRING null,
 	xsd TEXT null,
 	storageType VARCHAR(75) null

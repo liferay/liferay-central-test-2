@@ -57,8 +57,9 @@ public class DDMStructureServiceHttp {
 	public static com.liferay.portlet.dynamicdatamapping.model.DDMStructure addStructure(
 		HttpPrincipal httpPrincipal, long groupId, long classNameId,
 		java.lang.String structureKey, boolean autoStructureKey,
-		java.lang.String name, java.lang.String description,
-		java.lang.String xsd, java.lang.String storageType,
+		java.util.Map<java.util.Locale, java.lang.String> nameMap,
+		java.lang.String description, java.lang.String xsd,
+		java.lang.String storageType,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -67,7 +68,7 @@ public class DDMStructureServiceHttp {
 					"addStructure", _addStructureParameterTypes0);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
-					classNameId, structureKey, autoStructureKey, name,
+					classNameId, structureKey, autoStructureKey, nameMap,
 					description, xsd, storageType, serviceContext);
 
 			Object returnObj = null;
@@ -201,7 +202,8 @@ public class DDMStructureServiceHttp {
 
 	public static com.liferay.portlet.dynamicdatamapping.model.DDMStructure updateStructure(
 		HttpPrincipal httpPrincipal, long groupId,
-		java.lang.String structureKey, java.lang.String name,
+		java.lang.String structureKey,
+		java.util.Map<java.util.Locale, java.lang.String> nameMap,
 		java.lang.String description, java.lang.String xsd,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -211,7 +213,7 @@ public class DDMStructureServiceHttp {
 					"updateStructure", _updateStructureParameterTypes4);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
-					structureKey, name, description, xsd, serviceContext);
+					structureKey, nameMap, description, xsd, serviceContext);
 
 			Object returnObj = null;
 
@@ -242,8 +244,8 @@ public class DDMStructureServiceHttp {
 	private static Log _log = LogFactoryUtil.getLog(DDMStructureServiceHttp.class);
 	private static final Class<?>[] _addStructureParameterTypes0 = new Class[] {
 			long.class, long.class, java.lang.String.class, boolean.class,
-			java.lang.String.class, java.lang.String.class,
-			java.lang.String.class, java.lang.String.class,
+			java.util.Map.class, java.lang.String.class, java.lang.String.class,
+			java.lang.String.class,
 			com.liferay.portal.service.ServiceContext.class
 		};
 	private static final Class<?>[] _deleteStructureParameterTypes1 = new Class[] {
@@ -256,7 +258,7 @@ public class DDMStructureServiceHttp {
 			long.class, java.lang.String.class
 		};
 	private static final Class<?>[] _updateStructureParameterTypes4 = new Class[] {
-			long.class, java.lang.String.class, java.lang.String.class,
+			long.class, java.lang.String.class, java.util.Map.class,
 			java.lang.String.class, java.lang.String.class,
 			com.liferay.portal.service.ServiceContext.class
 		};

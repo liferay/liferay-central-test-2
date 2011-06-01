@@ -273,12 +273,95 @@ public class DDMStructureWrapper implements DDMStructure {
 	}
 
 	/**
+	* Gets the localized name of this d d m structure. Uses the default language if no localization exists for the requested language.
+	*
+	* @param locale the locale to get the localized name for
+	* @return the localized name of this d d m structure
+	*/
+	public java.lang.String getName(java.util.Locale locale) {
+		return _ddmStructure.getName(locale);
+	}
+
+	/**
+	* Gets the localized name of this d d m structure, optionally using the default language if no localization exists for the requested language.
+	*
+	* @param locale the local to get the localized name for
+	* @param useDefault whether to use the default language if no localization exists for the requested language
+	* @return the localized name of this d d m structure. If <code>useDefault</code> is <code>false</code> and no localization exists for the requested language, an empty string will be returned.
+	*/
+	public java.lang.String getName(java.util.Locale locale, boolean useDefault) {
+		return _ddmStructure.getName(locale, useDefault);
+	}
+
+	/**
+	* Gets the localized name of this d d m structure. Uses the default language if no localization exists for the requested language.
+	*
+	* @param languageId the id of the language to get the localized name for
+	* @return the localized name of this d d m structure
+	*/
+	public java.lang.String getName(java.lang.String languageId) {
+		return _ddmStructure.getName(languageId);
+	}
+
+	/**
+	* Gets the localized name of this d d m structure, optionally using the default language if no localization exists for the requested language.
+	*
+	* @param languageId the id of the language to get the localized name for
+	* @param useDefault whether to use the default language if no localization exists for the requested language
+	* @return the localized name of this d d m structure
+	*/
+	public java.lang.String getName(java.lang.String languageId,
+		boolean useDefault) {
+		return _ddmStructure.getName(languageId, useDefault);
+	}
+
+	/**
+	* Gets a map of the locales and localized name of this d d m structure.
+	*
+	* @return the locales and localized name
+	*/
+	public java.util.Map<java.util.Locale, java.lang.String> getNameMap() {
+		return _ddmStructure.getNameMap();
+	}
+
+	/**
 	* Sets the name of this d d m structure.
 	*
 	* @param name the name of this d d m structure
 	*/
 	public void setName(java.lang.String name) {
 		_ddmStructure.setName(name);
+	}
+
+	/**
+	* Sets the localized name of this d d m structure.
+	*
+	* @param name the localized name of this d d m structure
+	* @param locale the locale to set the localized name for
+	*/
+	public void setName(java.lang.String name, java.util.Locale locale) {
+		_ddmStructure.setName(name, locale);
+	}
+
+	public void setName(java.lang.String name, java.util.Locale locale,
+		java.util.Locale defaultLocale) {
+		_ddmStructure.setName(name, locale, defaultLocale);
+	}
+
+	/**
+	* Sets the localized names of this d d m structure from the map of locales and localized names.
+	*
+	* @param nameMap the locales and localized names of this d d m structure
+	*/
+	public void setNameMap(
+		java.util.Map<java.util.Locale, java.lang.String> nameMap) {
+		_ddmStructure.setNameMap(nameMap);
+	}
+
+	public void setNameMap(
+		java.util.Map<java.util.Locale, java.lang.String> nameMap,
+		java.util.Locale defaultLocale) {
+		_ddmStructure.setNameMap(nameMap, defaultLocale);
 	}
 
 	/**

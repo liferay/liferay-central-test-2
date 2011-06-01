@@ -25,6 +25,8 @@ import com.liferay.portlet.expando.model.ExpandoBridge;
 import java.io.Serializable;
 
 import java.util.Date;
+import java.util.Locale;
+import java.util.Map;
 
 /**
  * The base model interface for the DDMStructure service. Represents a row in the &quot;DDMStructure&quot; database table, with each column mapped to a property of this class.
@@ -229,8 +231,48 @@ public interface DDMStructureModel extends BaseModel<DDMStructure>, GroupedModel
 	 *
 	 * @return the name of this d d m structure
 	 */
-	@AutoEscape
 	public String getName();
+
+	/**
+	 * Gets the localized name of this d d m structure. Uses the default language if no localization exists for the requested language.
+	 *
+	 * @param locale the locale to get the localized name for
+	 * @return the localized name of this d d m structure
+	 */
+	public String getName(Locale locale);
+
+	/**
+	 * Gets the localized name of this d d m structure, optionally using the default language if no localization exists for the requested language.
+	 *
+	 * @param locale the local to get the localized name for
+	 * @param useDefault whether to use the default language if no localization exists for the requested language
+	 * @return the localized name of this d d m structure. If <code>useDefault</code> is <code>false</code> and no localization exists for the requested language, an empty string will be returned.
+	 */
+	public String getName(Locale locale, boolean useDefault);
+
+	/**
+	 * Gets the localized name of this d d m structure. Uses the default language if no localization exists for the requested language.
+	 *
+	 * @param languageId the id of the language to get the localized name for
+	 * @return the localized name of this d d m structure
+	 */
+	public String getName(String languageId);
+
+	/**
+	 * Gets the localized name of this d d m structure, optionally using the default language if no localization exists for the requested language.
+	 *
+	 * @param languageId the id of the language to get the localized name for
+	 * @param useDefault whether to use the default language if no localization exists for the requested language
+	 * @return the localized name of this d d m structure
+	 */
+	public String getName(String languageId, boolean useDefault);
+
+	/**
+	 * Gets a map of the locales and localized name of this d d m structure.
+	 *
+	 * @return the locales and localized name
+	 */
+	public Map<Locale, String> getNameMap();
 
 	/**
 	 * Sets the name of this d d m structure.
@@ -238,6 +280,25 @@ public interface DDMStructureModel extends BaseModel<DDMStructure>, GroupedModel
 	 * @param name the name of this d d m structure
 	 */
 	public void setName(String name);
+
+	/**
+	 * Sets the localized name of this d d m structure.
+	 *
+	 * @param name the localized name of this d d m structure
+	 * @param locale the locale to set the localized name for
+	 */
+	public void setName(String name, Locale locale);
+
+	public void setName(String name, Locale locale, Locale defaultLocale);
+
+	/**
+	 * Sets the localized names of this d d m structure from the map of locales and localized names.
+	 *
+	 * @param nameMap the locales and localized names of this d d m structure
+	 */
+	public void setNameMap(Map<Locale, String> nameMap);
+
+	public void setNameMap(Map<Locale, String> nameMap, Locale defaultLocale);
 
 	/**
 	 * Gets the description of this d d m structure.
