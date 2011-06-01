@@ -33,7 +33,7 @@ DDMStructure structure = (DDMStructure)row.getObject();
 		sb.append("('");
 		sb.append(structure.getStructureId());
 		sb.append("', '");
-		sb.append(HtmlUtil.escapeJS(structure.getName()));
+		sb.append(HtmlUtil.escapeJS(structure.getName(locale)));
 		sb.append("', Liferay.Util.getWindow());");
 
 		String rowHREF = sb.toString();
@@ -80,7 +80,7 @@ DDMStructure structure = (DDMStructure)row.getObject();
 	<c:if test="<%= DDMStructurePermission.contains(permissionChecker, structure, ActionKeys.PERMISSIONS) %>">
 		<liferay-security:permissionsURL
 			modelResource="<%= DDMStructure.class.getName() %>"
-			modelResourceDescription="<%= structure.getName() %>"
+			modelResourceDescription="<%= structure.getName(locale) %>"
 			resourcePrimKey="<%= String.valueOf(structure.getStructureId()) %>"
 			var="permissionsURL"
 		/>

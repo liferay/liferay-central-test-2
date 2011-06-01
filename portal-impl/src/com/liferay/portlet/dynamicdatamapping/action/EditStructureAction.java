@@ -16,6 +16,7 @@ package com.liferay.portlet.dynamicdatamapping.action;
 
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Constants;
+import com.liferay.portal.kernel.util.LocalizationUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.security.auth.PrincipalException;
@@ -34,6 +35,9 @@ import com.liferay.portlet.dynamicdatamapping.StructureStructureKeyException;
 import com.liferay.portlet.dynamicdatamapping.StructureXsdException;
 import com.liferay.portlet.dynamicdatamapping.model.DDMStructure;
 import com.liferay.portlet.dynamicdatamapping.service.DDMStructureServiceUtil;
+
+import java.util.Locale;
+import java.util.Map;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -202,7 +206,8 @@ public class EditStructureAction extends PortletAction {
 			actionRequest, "structureKey");
 		boolean autoStructureKey = ParamUtil.getBoolean(
 			actionRequest, "autoStructureKey");
-		String name = ParamUtil.getString(actionRequest, "name");
+		Map<Locale, String> nameMap = LocalizationUtil.getLocalizationMap(
+			actionRequest, "name");
 		String description = ParamUtil.getString(actionRequest, "description");
 		String xsd = ParamUtil.getString(actionRequest, "script");
 		String storageType = ParamUtil.getString(actionRequest, "storageType");
@@ -214,12 +219,13 @@ public class EditStructureAction extends PortletAction {
 
 		if (cmd.equals(Constants.ADD)) {
 			structure = DDMStructureServiceUtil.addStructure(
-				groupId, classNameId, structureKey, autoStructureKey, name,
+				groupId, classNameId, structureKey, autoStructureKey, nameMap,
 				description, xsd, storageType, serviceContext);
 		}
 		else if (cmd.equals(Constants.UPDATE)) {
 			structure = DDMStructureServiceUtil.updateStructure(
-				groupId, structureKey, name, description, xsd, serviceContext);
+				groupId, structureKey, nameMap, description, xsd,
+				serviceContext);
 		}
 
 		return structure;

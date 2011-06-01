@@ -82,7 +82,7 @@ if (documentType != null) {
 			>
 				<liferay-ui:search-container-column-text
 					name="name"
-					value="<%= structure.getName() %>"
+					value="<%= structure.getName(locale) %>"
 				/>
 
 				<liferay-ui:search-container-column-text>

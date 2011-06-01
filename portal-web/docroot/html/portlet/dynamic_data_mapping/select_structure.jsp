@@ -53,7 +53,7 @@
 			sb.append("('");
 			sb.append(structure.getStructureId());
 			sb.append("', '");
-			sb.append(HtmlUtil.escapeJS(structure.getName()));
+			sb.append(HtmlUtil.escapeJS(structure.getName(locale)));
 			sb.append("', Liferay.Util.getWindow());");
 
 			String rowHREF = sb.toString();
@@ -68,7 +68,7 @@
 			<liferay-ui:search-container-column-text
 				href="<%= rowHREF %>"
 				name="name"
-				value="<%= structure.getName() %>"
+				value="<%= structure.getName(locale) %>"
 			/>
 
 		</liferay-ui:search-container-row>

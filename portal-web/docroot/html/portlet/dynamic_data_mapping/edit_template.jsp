@@ -65,10 +65,10 @@ if (Validator.isNull(availableFields)) {
 
 	if (structure != null) {
 		if (template != null) {
-			title = template.getName() + " (" + structure.getName() + ")";
+			title = template.getName() + " (" + structure.getName(locale) + ")";
 		}
 		else {
-			title = LanguageUtil.format(pageContext, "new-template-for-structure-x", structure.getName(), false);
+			title = LanguageUtil.format(pageContext, "new-template-for-structure-x", structure.getName(locale), false);
 		}
 	}
 	%>

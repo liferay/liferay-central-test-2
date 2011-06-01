@@ -17,6 +17,7 @@ package com.liferay.portlet.dynamicdatamapping.service.impl;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.CharPool;
+import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
@@ -40,6 +41,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -51,7 +54,7 @@ public class DDMStructureLocalServiceImpl
 
 	public DDMStructure addStructure(
 			long userId, long groupId, long classNameId, String structureKey,
-			boolean autoStructureKey, String name,
+			boolean autoStructureKey, Map<Locale, String> nameMap,
 			String description, String xsd, String storageType,
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
@@ -76,7 +79,7 @@ public class DDMStructureLocalServiceImpl
 
 		Date now = new Date();
 
-		validate(groupId, structureKey, autoStructureKey, name, xsd);
+		validate(groupId, structureKey, autoStructureKey, nameMap, xsd);
 
 		long structureId = counterLocalService.increment();
 
@@ -91,7 +94,7 @@ public class DDMStructureLocalServiceImpl
 		structure.setModifiedDate(serviceContext.getModifiedDate(now));
 		structure.setClassNameId(classNameId);
 		structure.setStructureKey(structureKey);
-		structure.setName(name);
+		structure.setNameMap(nameMap);
 		structure.setDescription(description);
 		structure.setXsd(xsd);
 		structure.setStorageType(storageType);
@@ -283,8 +286,8 @@ public class DDMStructureLocalServiceImpl
 	}
 
 	public DDMStructure updateStructure(
-			long groupId, String structureKey, String name, String description,
-			String xsd, ServiceContext serviceContext)
+			long groupId, String structureKey, Map<Locale, String> nameMap,
+			String description, String xsd, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		try {
@@ -297,10 +300,10 @@ public class DDMStructureLocalServiceImpl
 		DDMStructure structure =
 			ddmStructurePersistence.findByG_S(groupId, structureKey);
 
-		validate(groupId, name, xsd);
+		validate(groupId, nameMap, xsd);
 
 		structure.setModifiedDate(serviceContext.getModifiedDate(null));
-		structure.setName(name);
+		structure.setNameMap(nameMap);
 		structure.setDescription(description);
 		structure.setXsd(xsd);
 
@@ -371,7 +374,7 @@ public class DDMStructureLocalServiceImpl
 
 	protected void validate(
 			long groupId, String structureKey, boolean autoStructureKey,
-			String name, String xsd)
+			Map<Locale, String> nameMap, String xsd)
 		throws PortalException, SystemException {
 
 		if (!autoStructureKey) {
@@ -385,15 +388,14 @@ public class DDMStructureLocalServiceImpl
 			}
 		}
 
-		validate(groupId, name, xsd);
+		validate(groupId, nameMap, xsd);
 	}
 
-	protected void validate(long groupId, String name, String xsd)
+	protected void validate(
+			long groupId, Map<Locale, String> nameMap, String xsd)
 		throws PortalException {
 
-		if (Validator.isNull(name)) {
-			throw new StructureNameException();
-		}
+		validateName(nameMap);
 
 		if (Validator.isNull(xsd)) {
 			throw new StructureXsdException();
@@ -425,6 +427,16 @@ public class DDMStructureLocalServiceImpl
 			catch (Exception e) {
 				throw new StructureXsdException();
 			}
+		}
+	}
+
+	protected void validateName(Map<Locale, String> nameMap)
+		throws PortalException {
+
+		String name = nameMap.get(LocaleUtil.getDefault());
+
+		if (Validator.isNull(name)) {
+			throw new StructureNameException();
 		}
 	}
 

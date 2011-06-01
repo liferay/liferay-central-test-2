@@ -56,7 +56,7 @@ String availableFields = ParamUtil.getString(request, "availableFields");
 	String title = "new-structure";
 
 	if (structure != null) {
-		title = structure.getName();
+		title = structure.getName(locale);
 	}
 	else if (Validator.isNotNull(scopeStructureName)) {
 		title = LanguageUtil.format(pageContext, "new-x", scopeStructureName);

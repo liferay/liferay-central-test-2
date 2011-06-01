@@ -39,7 +39,7 @@ portletURL.setParameter("structureKey", structureKey);
 
 <c:if test="<%= (structure != null) %>">
 	<liferay-ui:header
-		title='<%= LanguageUtil.format(pageContext, "templates-for-structure-x", structure.getName(), false) %>'
+		title='<%= LanguageUtil.format(pageContext, "templates-for-structure-x", structure.getName(locale), false) %>'
 		backURL="<%= backURL %>"
 	/>
 </c:if>

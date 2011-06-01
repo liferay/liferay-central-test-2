@@ -17,6 +17,7 @@ package com.liferay.portal.events;
 import com.liferay.portal.kernel.events.ActionException;
 import com.liferay.portal.kernel.events.SimpleAction;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
@@ -34,7 +35,9 @@ import com.liferay.portlet.dynamicdatamapping.model.DDMStructure;
 import com.liferay.portlet.dynamicdatamapping.service.DDMStructureLocalServiceUtil;
 import com.liferay.util.ContentUtil;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * @author Sergio González
@@ -81,10 +84,14 @@ public class AddDefaultDocumentLibraryStructuresAction extends SimpleAction {
 
 			String xsd = structureElementRootElement.asXML();
 
+			HashMap<Locale, String> nameMap = new HashMap<Locale, String>();
+
+			nameMap.put(LocaleUtil.getDefault(), name);
+
 			DDMStructureLocalServiceUtil.addStructure(
 				userId, groupId,
 				PortalUtil.getClassNameId(DLDocumentMetadataSet.class),
-				StringPool.BLANK, true, name, description, xsd, "xml",
+				StringPool.BLANK, true, nameMap, description, xsd, "xml",
 				serviceContext);
 		}
 	}
