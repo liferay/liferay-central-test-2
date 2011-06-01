@@ -87,8 +87,8 @@ public class AddDefaultLayoutSetPrototypesAction extends SimpleAction {
 		throws Exception {
 
 		for (LayoutSetPrototype layoutSetPrototype : layoutSetPrototypes) {
-			String curName = 
-				layoutSetPrototype.getName(LocaleUtil.getDefault());
+			String curName = layoutSetPrototype.getName(
+				LocaleUtil.getDefault());
 			String curDescription = layoutSetPrototype.getDescription();
 
 			if (name.equals(curName) && description.equals(curDescription)) {
@@ -169,7 +169,7 @@ public class AddDefaultLayoutSetPrototypesAction extends SimpleAction {
 		preferences.put("class-name-ids", String.valueOf(classNameId));
 
 		preferences.put(
-			"portlet-setup-title-" + LocaleUtil.getDefault().toString(),
+			"portlet-setup-title-" + LocaleUtil.getDefault(),
 			"Upcoming Events");
 		preferences.put(
 			"portlet-setup-use-custom-title", Boolean.TRUE.toString());
