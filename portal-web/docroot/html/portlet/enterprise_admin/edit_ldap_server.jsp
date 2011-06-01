@@ -457,8 +457,8 @@ for (int i = 0 ; i < groupMappingArray.length ; i++) {
 				userMappingMiddleName = "";
 				userMappingLastName = "sn";
 				userMappingJobTitle = "title";
-				userMappingGroup = "groupMembership";
-				userMappingUuid = "uuid";
+				userMappingGroup = "";
+				userMappingUuid = "";
 				importGroupSearchFilter = "(objectClass=groupOfUniqueNames)";
 				groupMappingGroupName = "cn";
 				groupMappingDescription = "description";
