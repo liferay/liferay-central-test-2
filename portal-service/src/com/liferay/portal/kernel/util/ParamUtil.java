@@ -672,8 +672,7 @@ public class ParamUtil {
 	}
 
 	public static String[] getParameterValues(
-		PortletRequest portletRequest, String param,
-		String[] defaultValue) {
+		PortletRequest portletRequest, String param, String[] defaultValue) {
 
 		HttpServletRequest request = PortalUtil.getHttpServletRequest(
 			portletRequest);

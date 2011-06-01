@@ -550,6 +550,28 @@ public class ParamUtil_IW {
 		return ParamUtil.getLongValues(serviceContext, param, defaultValue);
 	}
 
+	public java.lang.String[] getParameterValues(
+		javax.servlet.http.HttpServletRequest request, java.lang.String param) {
+		return ParamUtil.getParameterValues(request, param);
+	}
+
+	public java.lang.String[] getParameterValues(
+		javax.servlet.http.HttpServletRequest request, java.lang.String param,
+		java.lang.String[] defaultValue) {
+		return ParamUtil.getParameterValues(request, param, defaultValue);
+	}
+
+	public java.lang.String[] getParameterValues(
+		javax.portlet.PortletRequest portletRequest, java.lang.String param) {
+		return ParamUtil.getParameterValues(portletRequest, param);
+	}
+
+	public java.lang.String[] getParameterValues(
+		javax.portlet.PortletRequest portletRequest, java.lang.String param,
+		java.lang.String[] defaultValue) {
+		return ParamUtil.getParameterValues(portletRequest, param, defaultValue);
+	}
+
 	public short getShort(javax.servlet.http.HttpServletRequest request,
 		java.lang.String param) {
 		return ParamUtil.getShort(request, param);
