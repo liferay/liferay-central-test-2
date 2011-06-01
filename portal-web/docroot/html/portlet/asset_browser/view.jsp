@@ -17,7 +17,7 @@
 <%@ include file="/html/portlet/asset_browser/init.jsp" %>
 
 <%
-long groupId = GetterUtil.getLong(request, "groupId");
+long groupId = ParamUtil.getLong(request, "groupId");
 
 String typeSelection = request.getParameter("typeSelection");
 
