@@ -33,6 +33,7 @@ public abstract class UnformattedTextVisitor extends BaseASTVisitor {
 	}
 
 	public void visit(BoldTextNode boldTextNode) {
+
 		if (boldTextNode.getContent() != null) {
 			write(boldTextNode.getContent());
 		}
@@ -42,6 +43,7 @@ public abstract class UnformattedTextVisitor extends BaseASTVisitor {
 	}
 
 	public void visit(FormattedTextNode formattedTextNode) {
+
 		if (formattedTextNode.getContent() != null) {
 			write(formattedTextNode.getContent());
 		}
@@ -51,6 +53,7 @@ public abstract class UnformattedTextVisitor extends BaseASTVisitor {
 	}
 
 	public void visit(ItalicTextNode italicTextNode) {
+
 		if (italicTextNode.getContent() != null) {
 			write(italicTextNode.getContent());
 		}
@@ -60,7 +63,9 @@ public abstract class UnformattedTextVisitor extends BaseASTVisitor {
 	}
 
 	public void visit(LinkNode linkNode) {
+
 		String link = linkNode.getLink();
+
 		if (link != null) {
 			write(link);
 		}

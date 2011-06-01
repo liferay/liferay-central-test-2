@@ -132,6 +132,7 @@ public abstract class BaseASTVisitor implements ASTVisitor {
 	}
 
 	public void visit(UnformattedTextNode unformattedTextNode) {
+
 		if (unformattedTextNode.getChildASTNodesCount() > 0) {
 			traverse(unformattedTextNode.getChildASTNodes());
 		}
