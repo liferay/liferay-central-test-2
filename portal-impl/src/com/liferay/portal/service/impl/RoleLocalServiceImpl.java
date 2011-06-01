@@ -249,10 +249,9 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 			role = getRole(group.getCompanyId(), RoleConstants.USER);
 		}
 		else if (group.isLayoutPrototype() || group.isLayoutSetPrototype() ||
-				 group.isSite()) {
+				 group.isRegularSite() || group.isSite()) {
 
-			role = getRole(
-				group.getCompanyId(), RoleConstants.SITE_MEMBER);
+			role = getRole(group.getCompanyId(), RoleConstants.SITE_MEMBER);
 		}
 		else if (group.isOrganization()) {
 			role = getRole(
@@ -260,6 +259,9 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 		}
 		else if (group.isUser() || group.isUserGroup()) {
 			role = getRole(group.getCompanyId(), RoleConstants.POWER_USER);
+		}
+		else {
+			role = getRole(group.getCompanyId(), RoleConstants.USER);
 		}
 
 		return role;
