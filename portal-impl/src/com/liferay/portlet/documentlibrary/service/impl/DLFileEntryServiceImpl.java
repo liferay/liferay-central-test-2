@@ -20,7 +20,9 @@ import com.liferay.portal.NoSuchLockException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.model.Lock;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.ServiceContext;
@@ -57,6 +59,59 @@ public class DLFileEntryServiceImpl extends DLFileEntryServiceBaseImpl {
 		return dlFileEntryLocalService.addFileEntry(
 			getUserId(), groupId, repositoryId, folderId, title, description,
 			changeLog, is, size, serviceContext);
+	}
+
+	public void cancelCheckOut(long fileEntryId)
+		throws PortalException, SystemException {
+
+		try {
+			DLFileEntryPermission.check(
+				getPermissionChecker(), fileEntryId, ActionKeys.UPDATE);
+		}
+		catch (NoSuchFileEntryException nsfee) {
+		}
+
+		dlFileEntryLocalService.cancelCheckOut(getUserId(), fileEntryId);
+	}
+
+	public void checkInFileEntry(
+			long fileEntryId, boolean major, String changeLog,
+			ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		try {
+			DLFileEntryPermission.check(
+				getPermissionChecker(), fileEntryId, ActionKeys.UPDATE);
+		}
+		catch (NoSuchFileEntryException nsfee) {
+		}
+
+		dlFileEntryLocalService.checkInFileEntry(
+			getUserId(), fileEntryId, major, changeLog, serviceContext);
+	}
+
+	public DLFileEntry checkOutFileEntry(long fileEntryId)
+		throws PortalException, SystemException {
+
+		return checkOutFileEntry(
+			fileEntryId, null, DLFileEntryImpl.LOCK_EXPIRATION_TIME);
+	}
+
+	public DLFileEntry checkOutFileEntry(
+			long fileEntryId, String owner, long expirationTime)
+		throws PortalException, SystemException {
+
+		DLFileEntryPermission.check(
+			getPermissionChecker(), fileEntryId, ActionKeys.UPDATE);
+
+		if ((expirationTime <= 0) ||
+			(expirationTime > DLFileEntryImpl.LOCK_EXPIRATION_TIME)) {
+
+			expirationTime = DLFileEntryImpl.LOCK_EXPIRATION_TIME;
+		}
+
+		return dlFileEntryLocalService.checkOutFileEntry(
+			getUserId(), fileEntryId, owner, expirationTime);
 	}
 
 	public void copyFileEntry(

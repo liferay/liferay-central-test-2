@@ -39,6 +39,13 @@ public class FileVersionVersionComparator
 
 		int value = 0;
 
+		if (dlFileVersion1.getVersion().equals("PWC")) {
+			return -1;
+		}
+		else if (dlFileVersion2.getVersion().equals("PWC")) {
+			return 1;
+		}
+
 		int[] versionParts1 = StringUtil.split(
 			dlFileVersion1.getVersion(), StringPool.PERIOD, 0);
 		int[] versionParts2 = StringUtil.split(

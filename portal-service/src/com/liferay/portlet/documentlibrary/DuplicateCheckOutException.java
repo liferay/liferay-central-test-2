@@ -12,28 +12,29 @@
  * details.
  */
 
-package com.liferay.portlet.documentlibrary.model;
+package com.liferay.portlet.documentlibrary;
 
-import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.PropsUtil;
+import com.liferay.portal.kernel.exception.PortalException;
 
 /**
- * @author Samuel Kong
+ * @author Brian Wing Shun Chan
  */
-public class DLFileEntryConstants {
+public class DuplicateCheckOutException extends PortalException {
 
-	public static final int DEFAULT_READ_COUNT = 0;
+	public DuplicateCheckOutException() {
+		super();
+	}
 
-	public static final String DEFAULT_VERSION = "1.0";
+	public DuplicateCheckOutException(String msg) {
+		super(msg);
+	}
 
-	public static final long LOCK_EXPIRATION_TIME =
-		GetterUtil.getLong(
-			PropsUtil.get("lock.expiration.time" + getClassName()));
+	public DuplicateCheckOutException(String msg, Throwable cause) {
+		super(msg, cause);
+	}
 
-	public static final String PRIVATE_WORKING_COPY_VERSION = "PWC";
-
-	public static String getClassName() {
-		return DLFileEntry.class.getName();
+	public DuplicateCheckOutException(Throwable cause) {
+		super(cause);
 	}
 
 }
