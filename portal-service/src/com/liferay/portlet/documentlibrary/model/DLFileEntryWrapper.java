@@ -275,6 +275,143 @@ public class DLFileEntryWrapper implements DLFileEntry {
 	}
 
 	/**
+	* Gets the checked out of this d l file entry.
+	*
+	* @return the checked out of this d l file entry
+	*/
+	public boolean getCheckedOut() {
+		return _dlFileEntry.getCheckedOut();
+	}
+
+	/**
+	* Determines if this d l file entry is checked out.
+	*
+	* @return <code>true</code> if this d l file entry is checked out; <code>false</code> otherwise
+	*/
+	public boolean isCheckedOut() {
+		return _dlFileEntry.isCheckedOut();
+	}
+
+	/**
+	* Sets whether this d l file entry is checked out.
+	*
+	* @param checkedOut the checked out of this d l file entry
+	*/
+	public void setCheckedOut(boolean checkedOut) {
+		_dlFileEntry.setCheckedOut(checkedOut);
+	}
+
+	/**
+	* Gets the checkout date of this d l file entry.
+	*
+	* @return the checkout date of this d l file entry
+	*/
+	public java.util.Date getCheckoutDate() {
+		return _dlFileEntry.getCheckoutDate();
+	}
+
+	/**
+	* Sets the checkout date of this d l file entry.
+	*
+	* @param checkoutDate the checkout date of this d l file entry
+	*/
+	public void setCheckoutDate(java.util.Date checkoutDate) {
+		_dlFileEntry.setCheckoutDate(checkoutDate);
+	}
+
+	/**
+	* Gets the checkout expiration date of this d l file entry.
+	*
+	* @return the checkout expiration date of this d l file entry
+	*/
+	public java.util.Date getCheckoutExpirationDate() {
+		return _dlFileEntry.getCheckoutExpirationDate();
+	}
+
+	/**
+	* Sets the checkout expiration date of this d l file entry.
+	*
+	* @param checkoutExpirationDate the checkout expiration date of this d l file entry
+	*/
+	public void setCheckoutExpirationDate(java.util.Date checkoutExpirationDate) {
+		_dlFileEntry.setCheckoutExpirationDate(checkoutExpirationDate);
+	}
+
+	/**
+	* Gets the checkout owner of this d l file entry.
+	*
+	* @return the checkout owner of this d l file entry
+	*/
+	public java.lang.String getCheckoutOwner() {
+		return _dlFileEntry.getCheckoutOwner();
+	}
+
+	/**
+	* Sets the checkout owner of this d l file entry.
+	*
+	* @param checkoutOwner the checkout owner of this d l file entry
+	*/
+	public void setCheckoutOwner(java.lang.String checkoutOwner) {
+		_dlFileEntry.setCheckoutOwner(checkoutOwner);
+	}
+
+	/**
+	* Gets the checkout user ID of this d l file entry.
+	*
+	* @return the checkout user ID of this d l file entry
+	*/
+	public long getCheckoutUserId() {
+		return _dlFileEntry.getCheckoutUserId();
+	}
+
+	/**
+	* Sets the checkout user ID of this d l file entry.
+	*
+	* @param checkoutUserId the checkout user ID of this d l file entry
+	*/
+	public void setCheckoutUserId(long checkoutUserId) {
+		_dlFileEntry.setCheckoutUserId(checkoutUserId);
+	}
+
+	/**
+	* Gets the checkout user uuid of this d l file entry.
+	*
+	* @return the checkout user uuid of this d l file entry
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.lang.String getCheckoutUserUuid()
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _dlFileEntry.getCheckoutUserUuid();
+	}
+
+	/**
+	* Sets the checkout user uuid of this d l file entry.
+	*
+	* @param checkoutUserUuid the checkout user uuid of this d l file entry
+	*/
+	public void setCheckoutUserUuid(java.lang.String checkoutUserUuid) {
+		_dlFileEntry.setCheckoutUserUuid(checkoutUserUuid);
+	}
+
+	/**
+	* Gets the checkout user name of this d l file entry.
+	*
+	* @return the checkout user name of this d l file entry
+	*/
+	public java.lang.String getCheckoutUserName() {
+		return _dlFileEntry.getCheckoutUserName();
+	}
+
+	/**
+	* Sets the checkout user name of this d l file entry.
+	*
+	* @param checkoutUserName the checkout user name of this d l file entry
+	*/
+	public void setCheckoutUserName(java.lang.String checkoutUserName) {
+		_dlFileEntry.setCheckoutUserName(checkoutUserName);
+	}
+
+	/**
 	* Gets the repository ID of this d l file entry.
 	*
 	* @return the repository ID of this d l file entry

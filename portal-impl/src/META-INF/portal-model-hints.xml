@@ -954,9 +954,7 @@
 		</field>
 		<field name="type" type="String" />
 		<field name="displayDate" type="Date" />
-		<field name="expirationDate" type="Date">
-			<hint name="default-month-delta">1</hint>
-		</field>
+		<field name="expirationDate" type="Date" />
 		<field name="priority" type="int" />
 		<field name="alert" type="boolean" />
 	</model>
@@ -1258,6 +1256,12 @@
 		<field name="versionUserName" type="String" />
 		<field name="createDate" type="Date" />
 		<field name="modifiedDate" type="Date" />
+		<field name="checkedOut" type="boolean" />
+		<field name="checkoutDate" type="Date" />
+		<field name="checkoutExpirationDate" type="Date" />
+		<field name="checkoutOwner" type="String" />
+		<field name="checkoutUserId" type="long" />
+		<field name="checkoutUserName" type="String" />
 		<field name="repositoryId" type="long" />
 		<field name="folderId" type="long" />
 		<field name="name" type="String">
@@ -1588,12 +1592,8 @@
 		</field>
 		<field name="layoutUuid" type="String" />
 		<field name="displayDate" type="Date" />
-		<field name="expirationDate" type="Date">
-			<hint name="default-year-delta">1</hint>
-		</field>
-		<field name="reviewDate" type="Date">
-			<hint name="default-month-delta">9</hint>
-		</field>
+		<field name="expirationDate" type="Date" />
+		<field name="reviewDate" type="Date" />
 		<field name="indexable" type="boolean">
 			<hint name="default-value">true</hint>
 		</field>
@@ -1816,12 +1816,10 @@
 		<field name="rootMessageId" type="long" />
 		<field name="parentMessageId" type="long" />
 		<field name="subject" type="String">
-			<sanitize content-type="text/plain" modes="ALL" />
 			<validator name="required" />
 		</field>
 		<field name="body" type="String">
 			<hint-collection name="CLOB" />
-			<sanitize content-type="text/html" modes="ALL" />
 			<validator name="required" />
 		</field>
 		<field name="format" type="String" />
@@ -1892,9 +1890,7 @@
 			<hint-collection name="TEXTAREA" />
 			<validator name="required" />
 		</field>
-		<field name="expirationDate" type="Date">
-			<hint name="default-month-delta">1</hint>
-		</field>
+		<field name="expirationDate" type="Date" />
 		<field name="lastVoteDate" type="Date" />
 	</model>
 	<model name="com.liferay.portlet.polls.model.PollsVote">
@@ -1968,9 +1964,7 @@
 			<hint-collection name="TEXTAREA" />
 		</field>
 		<field name="startDate" type="Date" />
-		<field name="endDate" type="Date">
-			<hint name="default-month-delta">1</hint>
-		</field>
+		<field name="endDate" type="Date" />
 		<field name="active" type="boolean" />
 		<field name="limitCategories" type="String">
 			<hint-collection name="TEXTAREA" />

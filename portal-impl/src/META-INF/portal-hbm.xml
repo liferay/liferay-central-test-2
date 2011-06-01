@@ -1348,6 +1348,12 @@
 		<property name="versionUserName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="createDate" type="org.hibernate.type.TimestampType" />
 		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
+		<property name="checkedOut" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="checkoutDate" type="org.hibernate.type.TimestampType" />
+		<property name="checkoutExpirationDate" type="org.hibernate.type.TimestampType" />
+		<property name="checkoutOwner" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="checkoutUserId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="checkoutUserName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="repositoryId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="folderId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="name" type="com.liferay.portal.dao.orm.hibernate.StringType" />

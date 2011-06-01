@@ -1652,6 +1652,16 @@
 			<basic name="modifiedDate">
 				<temporal>TIMESTAMP</temporal>
 			</basic>
+			<basic name="checkedOut" />
+			<basic name="checkoutDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="checkoutExpirationDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="checkoutOwner" />
+			<basic name="checkoutUserId" />
+			<basic name="checkoutUserName" />
 			<basic name="repositoryId" />
 			<basic name="folderId" />
 			<basic name="name" />
@@ -1666,6 +1676,7 @@
 				<column name="SIZE_" />
 			</basic>
 			<basic name="readCount" />
+			<transient name="checkoutUserUuid" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />
 			<transient name="userUuid" />

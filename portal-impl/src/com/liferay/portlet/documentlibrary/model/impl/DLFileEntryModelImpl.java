@@ -73,6 +73,12 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry>
 			{ "versionUserName", Types.VARCHAR },
 			{ "createDate", Types.TIMESTAMP },
 			{ "modifiedDate", Types.TIMESTAMP },
+			{ "checkedOut", Types.BOOLEAN },
+			{ "checkoutDate", Types.TIMESTAMP },
+			{ "checkoutExpirationDate", Types.TIMESTAMP },
+			{ "checkoutOwner", Types.VARCHAR },
+			{ "checkoutUserId", Types.BIGINT },
+			{ "checkoutUserName", Types.VARCHAR },
 			{ "repositoryId", Types.BIGINT },
 			{ "folderId", Types.BIGINT },
 			{ "name", Types.VARCHAR },
@@ -86,7 +92,7 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry>
 			{ "size_", Types.BIGINT },
 			{ "readCount", Types.INTEGER }
 		};
-	public static final String TABLE_SQL_CREATE = "create table DLFileEntry (uuid_ VARCHAR(75) null,fileEntryId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,versionUserId LONG,versionUserName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,repositoryId LONG,folderId LONG,name VARCHAR(255) null,extension VARCHAR(75) null,mimeType VARCHAR(75) null,title VARCHAR(255) null,description STRING null,extraSettings TEXT null,documentTypeId LONG,version VARCHAR(75) null,size_ LONG,readCount INTEGER)";
+	public static final String TABLE_SQL_CREATE = "create table DLFileEntry (uuid_ VARCHAR(75) null,fileEntryId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,versionUserId LONG,versionUserName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,checkedOut BOOLEAN,checkoutDate DATE null,checkoutExpirationDate DATE null,checkoutOwner VARCHAR(75) null,checkoutUserId LONG,checkoutUserName VARCHAR(75) null,repositoryId LONG,folderId LONG,name VARCHAR(255) null,extension VARCHAR(75) null,mimeType VARCHAR(75) null,title VARCHAR(255) null,description STRING null,extraSettings TEXT null,documentTypeId LONG,version VARCHAR(75) null,size_ LONG,readCount INTEGER)";
 	public static final String TABLE_SQL_DROP = "drop table DLFileEntry";
 	public static final String ORDER_BY_JPQL = " ORDER BY dlFileEntry.folderId ASC, dlFileEntry.name ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY DLFileEntry.folderId ASC, DLFileEntry.name ASC";
@@ -119,6 +125,12 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry>
 		model.setVersionUserName(soapModel.getVersionUserName());
 		model.setCreateDate(soapModel.getCreateDate());
 		model.setModifiedDate(soapModel.getModifiedDate());
+		model.setCheckedOut(soapModel.getCheckedOut());
+		model.setCheckoutDate(soapModel.getCheckoutDate());
+		model.setCheckoutExpirationDate(soapModel.getCheckoutExpirationDate());
+		model.setCheckoutOwner(soapModel.getCheckoutOwner());
+		model.setCheckoutUserId(soapModel.getCheckoutUserId());
+		model.setCheckoutUserName(soapModel.getCheckoutUserName());
 		model.setRepositoryId(soapModel.getRepositoryId());
 		model.setFolderId(soapModel.getFolderId());
 		model.setName(soapModel.getName());
@@ -319,6 +331,83 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry>
 
 	public void setModifiedDate(Date modifiedDate) {
 		_modifiedDate = modifiedDate;
+	}
+
+	@JSON
+	public boolean getCheckedOut() {
+		return _checkedOut;
+	}
+
+	public boolean isCheckedOut() {
+		return _checkedOut;
+	}
+
+	public void setCheckedOut(boolean checkedOut) {
+		_checkedOut = checkedOut;
+	}
+
+	@JSON
+	public Date getCheckoutDate() {
+		return _checkoutDate;
+	}
+
+	public void setCheckoutDate(Date checkoutDate) {
+		_checkoutDate = checkoutDate;
+	}
+
+	@JSON
+	public Date getCheckoutExpirationDate() {
+		return _checkoutExpirationDate;
+	}
+
+	public void setCheckoutExpirationDate(Date checkoutExpirationDate) {
+		_checkoutExpirationDate = checkoutExpirationDate;
+	}
+
+	@JSON
+	public String getCheckoutOwner() {
+		if (_checkoutOwner == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _checkoutOwner;
+		}
+	}
+
+	public void setCheckoutOwner(String checkoutOwner) {
+		_checkoutOwner = checkoutOwner;
+	}
+
+	@JSON
+	public long getCheckoutUserId() {
+		return _checkoutUserId;
+	}
+
+	public void setCheckoutUserId(long checkoutUserId) {
+		_checkoutUserId = checkoutUserId;
+	}
+
+	public String getCheckoutUserUuid() throws SystemException {
+		return PortalUtil.getUserValue(getCheckoutUserId(), "uuid",
+			_checkoutUserUuid);
+	}
+
+	public void setCheckoutUserUuid(String checkoutUserUuid) {
+		_checkoutUserUuid = checkoutUserUuid;
+	}
+
+	@JSON
+	public String getCheckoutUserName() {
+		if (_checkoutUserName == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _checkoutUserName;
+		}
+	}
+
+	public void setCheckoutUserName(String checkoutUserName) {
+		_checkoutUserName = checkoutUserName;
 	}
 
 	@JSON
@@ -527,6 +616,12 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry>
 		dlFileEntryImpl.setVersionUserName(getVersionUserName());
 		dlFileEntryImpl.setCreateDate(getCreateDate());
 		dlFileEntryImpl.setModifiedDate(getModifiedDate());
+		dlFileEntryImpl.setCheckedOut(getCheckedOut());
+		dlFileEntryImpl.setCheckoutDate(getCheckoutDate());
+		dlFileEntryImpl.setCheckoutExpirationDate(getCheckoutExpirationDate());
+		dlFileEntryImpl.setCheckoutOwner(getCheckoutOwner());
+		dlFileEntryImpl.setCheckoutUserId(getCheckoutUserId());
+		dlFileEntryImpl.setCheckoutUserName(getCheckoutUserName());
 		dlFileEntryImpl.setRepositoryId(getRepositoryId());
 		dlFileEntryImpl.setFolderId(getFolderId());
 		dlFileEntryImpl.setName(getName());
@@ -618,7 +713,7 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry>
 	}
 
 	public String toString() {
-		StringBundler sb = new StringBundler(45);
+		StringBundler sb = new StringBundler(57);
 
 		sb.append("{uuid=");
 		sb.append(getUuid());
@@ -640,6 +735,18 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry>
 		sb.append(getCreateDate());
 		sb.append(", modifiedDate=");
 		sb.append(getModifiedDate());
+		sb.append(", checkedOut=");
+		sb.append(getCheckedOut());
+		sb.append(", checkoutDate=");
+		sb.append(getCheckoutDate());
+		sb.append(", checkoutExpirationDate=");
+		sb.append(getCheckoutExpirationDate());
+		sb.append(", checkoutOwner=");
+		sb.append(getCheckoutOwner());
+		sb.append(", checkoutUserId=");
+		sb.append(getCheckoutUserId());
+		sb.append(", checkoutUserName=");
+		sb.append(getCheckoutUserName());
 		sb.append(", repositoryId=");
 		sb.append(getRepositoryId());
 		sb.append(", folderId=");
@@ -670,7 +777,7 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry>
 	}
 
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(70);
+		StringBundler sb = new StringBundler(88);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.portlet.documentlibrary.model.DLFileEntry");
@@ -715,6 +822,30 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry>
 		sb.append(
 			"<column><column-name>modifiedDate</column-name><column-value><![CDATA[");
 		sb.append(getModifiedDate());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>checkedOut</column-name><column-value><![CDATA[");
+		sb.append(getCheckedOut());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>checkoutDate</column-name><column-value><![CDATA[");
+		sb.append(getCheckoutDate());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>checkoutExpirationDate</column-name><column-value><![CDATA[");
+		sb.append(getCheckoutExpirationDate());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>checkoutOwner</column-name><column-value><![CDATA[");
+		sb.append(getCheckoutOwner());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>checkoutUserId</column-name><column-value><![CDATA[");
+		sb.append(getCheckoutUserId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>checkoutUserName</column-name><column-value><![CDATA[");
+		sb.append(getCheckoutUserName());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>repositoryId</column-name><column-value><![CDATA[");
@@ -785,6 +916,13 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry>
 	private String _versionUserName;
 	private Date _createDate;
 	private Date _modifiedDate;
+	private boolean _checkedOut;
+	private Date _checkoutDate;
+	private Date _checkoutExpirationDate;
+	private String _checkoutOwner;
+	private long _checkoutUserId;
+	private String _checkoutUserUuid;
+	private String _checkoutUserName;
 	private long _repositoryId;
 	private long _folderId;
 	private long _originalFolderId;

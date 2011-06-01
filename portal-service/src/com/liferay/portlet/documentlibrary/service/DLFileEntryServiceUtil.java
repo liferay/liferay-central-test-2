@@ -49,6 +49,35 @@ public class DLFileEntryServiceUtil {
 			description, changeLog, is, size, serviceContext);
 	}
 
+	public static void cancelCheckOut(long fileEntryId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		getService().cancelCheckOut(fileEntryId);
+	}
+
+	public static void checkInFileEntry(long fileEntryId, boolean major,
+		java.lang.String changeLog,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		getService()
+			.checkInFileEntry(fileEntryId, major, changeLog, serviceContext);
+	}
+
+	public static com.liferay.portlet.documentlibrary.model.DLFileEntry checkOutFileEntry(
+		long fileEntryId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().checkOutFileEntry(fileEntryId);
+	}
+
+	public static com.liferay.portlet.documentlibrary.model.DLFileEntry checkOutFileEntry(
+		long fileEntryId, java.lang.String owner, long expirationTime)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().checkOutFileEntry(fileEntryId, owner, expirationTime);
+	}
+
 	public static void copyFileEntry(long groupId, long repositoryId,
 		long fileEntryId, long destFolderId,
 		com.liferay.portal.service.ServiceContext serviceContext)

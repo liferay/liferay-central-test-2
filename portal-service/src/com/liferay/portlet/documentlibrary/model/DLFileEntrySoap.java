@@ -41,6 +41,12 @@ public class DLFileEntrySoap implements Serializable {
 		soapModel.setVersionUserName(model.getVersionUserName());
 		soapModel.setCreateDate(model.getCreateDate());
 		soapModel.setModifiedDate(model.getModifiedDate());
+		soapModel.setCheckedOut(model.getCheckedOut());
+		soapModel.setCheckoutDate(model.getCheckoutDate());
+		soapModel.setCheckoutExpirationDate(model.getCheckoutExpirationDate());
+		soapModel.setCheckoutOwner(model.getCheckoutOwner());
+		soapModel.setCheckoutUserId(model.getCheckoutUserId());
+		soapModel.setCheckoutUserName(model.getCheckoutUserName());
 		soapModel.setRepositoryId(model.getRepositoryId());
 		soapModel.setFolderId(model.getFolderId());
 		soapModel.setName(model.getName());
@@ -185,6 +191,58 @@ public class DLFileEntrySoap implements Serializable {
 		_modifiedDate = modifiedDate;
 	}
 
+	public boolean getCheckedOut() {
+		return _checkedOut;
+	}
+
+	public boolean isCheckedOut() {
+		return _checkedOut;
+	}
+
+	public void setCheckedOut(boolean checkedOut) {
+		_checkedOut = checkedOut;
+	}
+
+	public Date getCheckoutDate() {
+		return _checkoutDate;
+	}
+
+	public void setCheckoutDate(Date checkoutDate) {
+		_checkoutDate = checkoutDate;
+	}
+
+	public Date getCheckoutExpirationDate() {
+		return _checkoutExpirationDate;
+	}
+
+	public void setCheckoutExpirationDate(Date checkoutExpirationDate) {
+		_checkoutExpirationDate = checkoutExpirationDate;
+	}
+
+	public String getCheckoutOwner() {
+		return _checkoutOwner;
+	}
+
+	public void setCheckoutOwner(String checkoutOwner) {
+		_checkoutOwner = checkoutOwner;
+	}
+
+	public long getCheckoutUserId() {
+		return _checkoutUserId;
+	}
+
+	public void setCheckoutUserId(long checkoutUserId) {
+		_checkoutUserId = checkoutUserId;
+	}
+
+	public String getCheckoutUserName() {
+		return _checkoutUserName;
+	}
+
+	public void setCheckoutUserName(String checkoutUserName) {
+		_checkoutUserName = checkoutUserName;
+	}
+
 	public long getRepositoryId() {
 		return _repositoryId;
 	}
@@ -291,6 +349,12 @@ public class DLFileEntrySoap implements Serializable {
 	private String _versionUserName;
 	private Date _createDate;
 	private Date _modifiedDate;
+	private boolean _checkedOut;
+	private Date _checkoutDate;
+	private Date _checkoutExpirationDate;
+	private String _checkoutOwner;
+	private long _checkoutUserId;
+	private String _checkoutUserName;
 	private long _repositoryId;
 	private long _folderId;
 	private String _name;

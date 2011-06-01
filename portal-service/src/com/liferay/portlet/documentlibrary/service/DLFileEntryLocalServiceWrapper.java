@@ -268,6 +268,37 @@ public class DLFileEntryLocalServiceWrapper implements DLFileEntryLocalService {
 			serviceContext);
 	}
 
+	public void cancelCheckOut(long userId, long fileEntryId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		_dlFileEntryLocalService.cancelCheckOut(userId, fileEntryId);
+	}
+
+	public void checkInFileEntry(long userId, long fileEntryId,
+		boolean majorVersion, java.lang.String changeLog,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		_dlFileEntryLocalService.checkInFileEntry(userId, fileEntryId,
+			majorVersion, changeLog, serviceContext);
+	}
+
+	public com.liferay.portlet.documentlibrary.model.DLFileEntry checkOutFileEntry(
+		long userId, long fileEntryId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _dlFileEntryLocalService.checkOutFileEntry(userId, fileEntryId);
+	}
+
+	public com.liferay.portlet.documentlibrary.model.DLFileEntry checkOutFileEntry(
+		long userId, long fileEntryId, java.lang.String owner,
+		long expirationTime)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _dlFileEntryLocalService.checkOutFileEntry(userId, fileEntryId,
+			owner, expirationTime);
+	}
+
 	public void convertExtraSettings(java.lang.String[] keys)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {

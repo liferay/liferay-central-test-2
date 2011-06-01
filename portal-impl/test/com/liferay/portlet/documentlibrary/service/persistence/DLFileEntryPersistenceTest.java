@@ -78,6 +78,12 @@ public class DLFileEntryPersistenceTest extends BasePersistenceTestCase {
 		newDLFileEntry.setVersionUserName(randomString());
 		newDLFileEntry.setCreateDate(nextDate());
 		newDLFileEntry.setModifiedDate(nextDate());
+		newDLFileEntry.setCheckedOut(randomBoolean());
+		newDLFileEntry.setCheckoutDate(nextDate());
+		newDLFileEntry.setCheckoutExpirationDate(nextDate());
+		newDLFileEntry.setCheckoutOwner(randomString());
+		newDLFileEntry.setCheckoutUserId(nextLong());
+		newDLFileEntry.setCheckoutUserName(randomString());
 		newDLFileEntry.setRepositoryId(nextLong());
 		newDLFileEntry.setFolderId(nextLong());
 		newDLFileEntry.setName(randomString());
@@ -114,6 +120,20 @@ public class DLFileEntryPersistenceTest extends BasePersistenceTestCase {
 		assertEquals(Time.getShortTimestamp(
 				existingDLFileEntry.getModifiedDate()),
 			Time.getShortTimestamp(newDLFileEntry.getModifiedDate()));
+		assertEquals(existingDLFileEntry.getCheckedOut(),
+			newDLFileEntry.getCheckedOut());
+		assertEquals(Time.getShortTimestamp(
+				existingDLFileEntry.getCheckoutDate()),
+			Time.getShortTimestamp(newDLFileEntry.getCheckoutDate()));
+		assertEquals(Time.getShortTimestamp(
+				existingDLFileEntry.getCheckoutExpirationDate()),
+			Time.getShortTimestamp(newDLFileEntry.getCheckoutExpirationDate()));
+		assertEquals(existingDLFileEntry.getCheckoutOwner(),
+			newDLFileEntry.getCheckoutOwner());
+		assertEquals(existingDLFileEntry.getCheckoutUserId(),
+			newDLFileEntry.getCheckoutUserId());
+		assertEquals(existingDLFileEntry.getCheckoutUserName(),
+			newDLFileEntry.getCheckoutUserName());
 		assertEquals(existingDLFileEntry.getRepositoryId(),
 			newDLFileEntry.getRepositoryId());
 		assertEquals(existingDLFileEntry.getFolderId(),
@@ -285,6 +305,12 @@ public class DLFileEntryPersistenceTest extends BasePersistenceTestCase {
 		dlFileEntry.setVersionUserName(randomString());
 		dlFileEntry.setCreateDate(nextDate());
 		dlFileEntry.setModifiedDate(nextDate());
+		dlFileEntry.setCheckedOut(randomBoolean());
+		dlFileEntry.setCheckoutDate(nextDate());
+		dlFileEntry.setCheckoutExpirationDate(nextDate());
+		dlFileEntry.setCheckoutOwner(randomString());
+		dlFileEntry.setCheckoutUserId(nextLong());
+		dlFileEntry.setCheckoutUserName(randomString());
 		dlFileEntry.setRepositoryId(nextLong());
 		dlFileEntry.setFolderId(nextLong());
 		dlFileEntry.setName(randomString());
