@@ -20,11 +20,14 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Address;
+import com.liferay.portal.model.Country;
 import com.liferay.portal.model.ListType;
 import com.liferay.portal.model.Phone;
+import com.liferay.portal.model.Region;
 import com.liferay.portal.model.User;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 
@@ -270,10 +273,10 @@ public class UserAttributes {
 				String listTypeName = listType.getName();
 
 				if (listTypeName.equals("business")) {
-					_bizAddress = address;
+					_businessAddress = address;
 				}
 				else if (listTypeName.equals("personal")) {
-					_homeAddress = address;
+					_personalAddress = address;
 				}
 			}
 
@@ -285,22 +288,22 @@ public class UserAttributes {
 				String listTypeName = listType.getName();
 
 				if (listTypeName.equals("business")) {
-					_bizPhone = phone;
+					_businessPhone = phone;
 				}
 				else if (listTypeName.equals("business-fax")) {
-					_bizFax = phone;
+					_businessFaxPhone = phone;
 				}
 				else if (listTypeName.equals("mobile-phone")) {
 					_mobilePhone = phone;
 				}
 				else if (listTypeName.equals("pager")) {
-					_pager = phone;
+					_pagerPhone = phone;
 				}
 				else if (listTypeName.equals("personal")) {
-					_homePhone = phone;
+					_personalPhone = phone;
 				}
 				else if (listTypeName.equals("personal-fax")) {
-					_homeFax = phone;
+					_personalFaxPhone = phone;
 				}
 			}
 		}
@@ -326,20 +329,26 @@ public class UserAttributes {
 			return _user.getFullName();
 		}
 		else if (name.equals(USER_BDATE)) {
-			return _user.getBirthday().toString();
+			Date birthday = _user.getBirthday();
+
+			return birthday.toString();
 		}
 		else if (name.equals(USER_BDATE_DAY)) {
-			if (_user.getBirthday() != null) {
-				_calendar.setTime(_user.getBirthday());
+			Date birthday = _user.getBirthday();
+
+			if (birthday != null) {
+				_calendar.setTime(birthday);
 
 				return String.valueOf(_calendar.get(Calendar.DATE));
-				}
+			}
 
 			return null;
 		}
 		else if (name.equals(USER_BDATE_FRACTIONSECOND)) {
-			if (_user.getBirthday() != null) {
-				_calendar.setTime(_user.getBirthday());
+			Date birthday = _user.getBirthday();
+
+			if (birthday != null) {
+				_calendar.setTime(birthday);
 
 				return String.valueOf(_calendar.get(Calendar.MILLISECOND));
 			}
@@ -347,8 +356,10 @@ public class UserAttributes {
 			return null;
 		}
 		else if (name.equals(USER_BDATE_HOUR)) {
-			if (_user.getBirthday() != null) {
-				_calendar.setTime(_user.getBirthday());
+			Date birthday = _user.getBirthday();
+
+			if (birthday != null) {
+				_calendar.setTime(birthday);
 
 				return String.valueOf(_calendar.get(Calendar.HOUR));
 			}
@@ -356,8 +367,10 @@ public class UserAttributes {
 			return null;
 		}
 		else if (name.equals(USER_BDATE_MINUTE)) {
-			if (_user.getBirthday() != null) {
-				_calendar.setTime(_user.getBirthday());
+			Date birthday = _user.getBirthday();
+
+			if (birthday != null) {
+				_calendar.setTime(birthday);
 
 				return String.valueOf(_calendar.get(Calendar.MINUTE));
 			}
@@ -365,8 +378,10 @@ public class UserAttributes {
 			return null;
 		}
 		else if (name.equals(USER_BDATE_MONTH)) {
-			if (_user.getBirthday() != null) {
-				_calendar.setTime(_user.getBirthday());
+			Date birthday = _user.getBirthday();
+
+			if (birthday != null) {
+				_calendar.setTime(birthday);
 
 				return String.valueOf(_calendar.get(Calendar.MONTH) + 1);
 			}
@@ -374,8 +389,10 @@ public class UserAttributes {
 			return null;
 		}
 		else if (name.equals(USER_BDATE_SECOND)) {
-			if (_user.getBirthday() != null) {
-				_calendar.setTime(_user.getBirthday());
+			Date birthday = _user.getBirthday();
+
+			if (birthday != null) {
+				_calendar.setTime(birthday);
 
 				return String.valueOf(_calendar.get(Calendar.SECOND));
 			}
@@ -383,16 +400,21 @@ public class UserAttributes {
 			return null;
 		}
 		else if (name.equals(USER_BDATE_TIMEZONE)) {
-			if (_user.getBirthday() != null) {
-				_calendar.setTime(_user.getBirthday());
+			Date birthday = _user.getBirthday();
+
+			if (birthday != null) {
+				_calendar.setTime(birthday);
 
 				return String.valueOf(_calendar.get(Calendar.ZONE_OFFSET));
 			}
+
 			return null;
 		}
 		else if (name.equals(USER_BDATE_YEAR)) {
-			if (_user.getBirthday() != null) {
-				_calendar.setTime(_user.getBirthday());
+			Date birthday = _user.getBirthday();
+
+			if (birthday != null) {
+				_calendar.setTime(birthday);
 
 				return String.valueOf(_calendar.get(Calendar.YEAR));
 			}
@@ -436,36 +458,40 @@ public class UserAttributes {
 			return StringPool.BLANK;
 		}
 		else if (name.equals(USER_HOME_INFO_POSTAL_STREET)) {
-			if (_homeAddress != null) {
-				return _homeAddress.getStreet1();
+			if (_personalAddress != null) {
+				return _personalAddress.getStreet1();
 			}
 
 			return StringPool.BLANK;
 		}
 		else if (name.equals(USER_HOME_INFO_POSTAL_CITY)) {
-			if (_homeAddress != null) {
-				return _homeAddress.getCity();
+			if (_personalAddress != null) {
+				return _personalAddress.getCity();
 			}
 
 			return StringPool.BLANK;
 		}
 		else if (name.equals(USER_HOME_INFO_POSTAL_STATEPROV)) {
-			if (_homeAddress != null) {
-				return String.valueOf(_homeAddress.getRegion().getRegionCode());
+			if (_personalAddress != null) {
+				Region region = _personalAddress.getRegion();
+
+				return String.valueOf(region.getRegionCode());
 			}
 
 			return StringPool.BLANK;
 		}
 		else if (name.equals(USER_HOME_INFO_POSTAL_POSTALCODE)) {
-			if (_homeAddress != null) {
-				return _homeAddress.getZip();
+			if (_personalAddress != null) {
+				return _personalAddress.getZip();
 			}
 
 			return StringPool.BLANK;
 		}
 		else if (name.equals(USER_HOME_INFO_POSTAL_COUNTRY)) {
-			if (_homeAddress != null) {
-				return String.valueOf(_homeAddress.getCountry().getName());
+			if (_personalAddress != null) {
+				Country country = _personalAddress.getCountry();
+
+				return String.valueOf(country.getName());
 			}
 
 			return StringPool.BLANK;
@@ -480,15 +506,15 @@ public class UserAttributes {
 			return StringPool.BLANK;
 		}
 		else if (name.equals(USER_HOME_INFO_TELECOM_TELEPHONE_NUMBER)) {
-			if (_homePhone != null) {
-				return _homePhone.getNumber();
+			if (_personalPhone != null) {
+				return _personalPhone.getNumber();
 			}
 
 			return StringPool.BLANK;
 		}
 		else if (name.equals(USER_HOME_INFO_TELECOM_TELEPHONE_EXT)) {
-			if (_homePhone != null) {
-				return _homePhone.getExtension();
+			if (_personalPhone != null) {
+				return _personalPhone.getExtension();
 			}
 
 			return StringPool.BLANK;
@@ -503,15 +529,15 @@ public class UserAttributes {
 			return StringPool.BLANK;
 		}
 		else if (name.equals(USER_HOME_INFO_TELECOM_FAX_NUMBER)) {
-			if (_homeFax != null) {
-				return _homeFax.getNumber();
+			if (_personalFaxPhone != null) {
+				return _personalFaxPhone.getNumber();
 			}
 
 			return StringPool.BLANK;
 		}
 		else if (name.equals(USER_HOME_INFO_TELECOM_FAX_EXT)) {
-			if (_homeFax != null) {
-				return _homeFax.getExtension();
+			if (_personalFaxPhone != null) {
+				return _personalFaxPhone.getExtension();
 			}
 
 			return StringPool.BLANK;
@@ -549,15 +575,15 @@ public class UserAttributes {
 			return StringPool.BLANK;
 		}
 		else if (name.equals(USER_HOME_INFO_TELECOM_PAGER_NUMBER)) {
-			if (_pager != null) {
-				return _pager.getNumber();
+			if (_pagerPhone != null) {
+				return _pagerPhone.getNumber();
 			}
 
 			return StringPool.BLANK;
 		}
 		else if (name.equals(USER_HOME_INFO_TELECOM_PAGER_EXT)) {
-			if (_pager != null) {
-				return _pager.getExtension();
+			if (_pagerPhone != null) {
+				return _pagerPhone.getExtension();
 			}
 
 			return StringPool.BLANK;
@@ -575,36 +601,40 @@ public class UserAttributes {
 			return StringPool.BLANK;
 		}
 		else if (name.equals(USER_BUSINESS_INFO_POSTAL_STREET)) {
-			if (_bizAddress != null) {
-				return _bizAddress.getStreet1();
+			if (_businessAddress != null) {
+				return _businessAddress.getStreet1();
 			}
 
 			return StringPool.BLANK;
 		}
 		else if (name.equals(USER_BUSINESS_INFO_POSTAL_CITY)) {
-			if (_bizAddress != null) {
-				return _bizAddress.getCity();
+			if (_businessAddress != null) {
+				return _businessAddress.getCity();
 			}
 
 			return StringPool.BLANK;
 		}
 		else if (name.equals(USER_BUSINESS_INFO_POSTAL_STATEPROV)) {
-			if (_bizAddress != null) {
-				return String.valueOf(_bizAddress.getRegion().getRegionCode());
+			if (_businessAddress != null) {
+				Region region = _businessAddress.getRegion();
+
+				return String.valueOf(region.getRegionCode());
 			}
 
 			return StringPool.BLANK;
 		}
 		else if (name.equals(USER_BUSINESS_INFO_POSTAL_POSTALCODE)) {
-			if (_bizAddress != null) {
-				return _bizAddress.getZip();
+			if (_businessAddress != null) {
+				return _businessAddress.getZip();
 			}
 
 			return StringPool.BLANK;
 		}
 		else if (name.equals(USER_BUSINESS_INFO_POSTAL_COUNTRY)) {
-			if (_bizAddress != null) {
-				return String.valueOf(_bizAddress.getCountry().getName());
+			if (_businessAddress != null) {
+				Country country = _businessAddress.getCountry();
+
+				return String.valueOf(country.getName());
 			}
 
 			return StringPool.BLANK;
@@ -619,15 +649,15 @@ public class UserAttributes {
 			return StringPool.BLANK;
 		}
 		else if (name.equals(USER_BUSINESS_INFO_TELECOM_TELEPHONE_NUMBER)) {
-			if (_bizPhone != null) {
-				return _bizPhone.getNumber();
+			if (_businessPhone != null) {
+				return _businessPhone.getNumber();
 			}
 
 			return StringPool.BLANK;
 		}
 		else if (name.equals(USER_BUSINESS_INFO_TELECOM_TELEPHONE_EXT)) {
-			if (_bizPhone != null) {
-				return _bizPhone.getExtension();
+			if (_businessPhone != null) {
+				return _businessPhone.getExtension();
 			}
 
 			return StringPool.BLANK;
@@ -642,15 +672,15 @@ public class UserAttributes {
 			return StringPool.BLANK;
 		}
 		else if (name.equals(USER_BUSINESS_INFO_TELECOM_FAX_NUMBER)) {
-			if (_bizFax != null) {
-				return _bizFax.getNumber();
+			if (_businessFaxPhone != null) {
+				return _businessFaxPhone.getNumber();
 			}
 
 			return StringPool.BLANK;
 		}
 		else if (name.equals(USER_BUSINESS_INFO_TELECOM_FAX_EXT)) {
-			if (_bizFax != null) {
-				return _bizFax.getExtension();
+			if (_businessFaxPhone != null) {
+				return _businessFaxPhone.getExtension();
 			}
 
 			return StringPool.BLANK;
@@ -688,15 +718,15 @@ public class UserAttributes {
 			return StringPool.BLANK;
 		}
 		else if (name.equals(USER_BUSINESS_INFO_TELECOM_PAGER_NUMBER)) {
-			if (_pager != null) {
-				return _pager.getNumber();
+			if (_pagerPhone != null) {
+				return _pagerPhone.getNumber();
 			}
 
 			return StringPool.BLANK;
 		}
 		else if (name.equals(USER_BUSINESS_INFO_TELECOM_PAGER_EXT)) {
-			if (_pager != null) {
-				return _pager.getExtension();
+			if (_pagerPhone != null) {
+				return _pagerPhone.getExtension();
 			}
 
 			return StringPool.BLANK;
@@ -717,15 +747,15 @@ public class UserAttributes {
 
 	private static Log _log = LogFactoryUtil.getLog(UserAttributes.class);
 
-	private Address _bizAddress;
-	private Phone _bizFax;
-	private Phone _bizPhone;
+	private Address _businessAddress;
+	private Phone _businessFaxPhone;
+	private Phone _businessPhone;
 	private Calendar _calendar = new GregorianCalendar();
-	private Address _homeAddress;
-	private Phone _homeFax;
-	private Phone _homePhone;
 	private Phone _mobilePhone;
-	private Phone _pager;
+	private Phone _pagerPhone;
+	private Address _personalAddress;
+	private Phone _personalFaxPhone;
+	private Phone _personalPhone;
 	private User _user;
 
 }
