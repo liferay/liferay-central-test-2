@@ -139,18 +139,20 @@ public class QuartzLocalServiceImpl extends QuartzLocalServiceBaseImpl {
 		return newJobDataOutputStream.toByteArray();
 	}
 
+	@SuppressWarnings("deprecation")
 	protected Object convertOldJsonStringToObject(Object object) {
 		if (!(object instanceof String)) {
 			return null;
 		}
 
 		String jsonString = (String)object;
+
 		JSONObject jsonObject = null;
 
 		try {
 			jsonObject = JSONFactoryUtil.createJSONObject(jsonString);
 		}
-		catch(Exception e) {
+		catch (Exception e) {
 			if (_log.isWarnEnabled()) {
 				_log.warn(e, e);
 			}
@@ -159,15 +161,15 @@ public class QuartzLocalServiceImpl extends QuartzLocalServiceBaseImpl {
 		String oldJavaClass = jsonObject.getString("javaClass");
 
 		if (oldJavaClass.equals(
-			com.liferay.portlet.communities.messaging.
-				LayoutsLocalPublisherRequest.class.getName())) {
+				com.liferay.portlet.communities.messaging.
+					LayoutsLocalPublisherRequest.class.getName())) {
 
 			jsonObject.put(
 				"javaClass", LayoutsLocalPublisherRequest.class.getName());
 		}
 		else if (oldJavaClass.equals(
-			com.liferay.portlet.communities.messaging.
-				LayoutsRemotePublisherRequest.class.getName())) {
+					com.liferay.portlet.communities.messaging.
+						LayoutsRemotePublisherRequest.class.getName())) {
 
 			jsonObject.put(
 				"javaClass", LayoutsRemotePublisherRequest.class.getName());
@@ -199,7 +201,9 @@ public class QuartzLocalServiceImpl extends QuartzLocalServiceBaseImpl {
 			ObjectOutputStream objectOutputStream = new ObjectOutputStream(
 				byteArrayOutputStream);
 
-			objectOutputStream.writeObject(new HashMap(properties));
+			objectOutputStream.writeObject(
+				new HashMap<Object, Object>(properties));
+
 			objectOutputStream.flush();
 
 			return byteArrayOutputStream.toByteArray();
@@ -441,6 +445,7 @@ public class QuartzLocalServiceImpl extends QuartzLocalServiceBaseImpl {
 				return objectStreamClass;
 			}
 		}
+
 	}
 
 }
