@@ -287,8 +287,20 @@ public class UserAttributes {
 				if (listTypeName.equals("business")) {
 					_bizPhone = phone;
 				}
+				else if (listTypeName.equals("business-fax")) {
+					_bizFax = phone;
+				}
+				else if (listTypeName.equals("mobile-phone")) {
+					_mobilePhone = phone;
+				}
+				else if (listTypeName.equals("pager")) {
+					_pager = phone;
+				}
 				else if (listTypeName.equals("personal")) {
 					_homePhone = phone;
+				}
+				else if (listTypeName.equals("personal-fax")) {
+					_homeFax = phone;
 				}
 			}
 		}
@@ -317,93 +329,75 @@ public class UserAttributes {
 			return _user.getBirthday().toString();
 		}
 		else if (name.equals(USER_BDATE_DAY)) {
-			String returnValue = null;
-
 			if (_user.getBirthday() != null) {
 				_calendar.setTime(_user.getBirthday());
 
-				returnValue = String.valueOf(_calendar.get(Calendar.DATE));
+				return String.valueOf(_calendar.get(Calendar.DATE));
 				}
 
-			return returnValue;
+			return null;
 		}
 		else if (name.equals(USER_BDATE_FRACTIONSECOND)) {
-			String returnValue = null;
-
 			if (_user.getBirthday() != null) {
 				_calendar.setTime(_user.getBirthday());
 
-				returnValue = String.valueOf(
-					_calendar.get(Calendar.MILLISECOND));
+				return String.valueOf(_calendar.get(Calendar.MILLISECOND));
 			}
 
-			return returnValue;
+			return null;
 		}
 		else if (name.equals(USER_BDATE_HOUR)) {
-			String returnValue = null;
-
 			if (_user.getBirthday() != null) {
 				_calendar.setTime(_user.getBirthday());
 
-				returnValue = String.valueOf(_calendar.get(Calendar.HOUR));
+				return String.valueOf(_calendar.get(Calendar.HOUR));
 			}
 
-			return returnValue;
+			return null;
 		}
 		else if (name.equals(USER_BDATE_MINUTE)) {
-			String returnValue = null;
-
 			if (_user.getBirthday() != null) {
 				_calendar.setTime(_user.getBirthday());
 
-				returnValue = String.valueOf(_calendar.get(Calendar.MINUTE));
+				return String.valueOf(_calendar.get(Calendar.MINUTE));
 			}
 
-			return returnValue;
+			return null;
 		}
 		else if (name.equals(USER_BDATE_MONTH)) {
-			String returnValue = null;
-
 			if (_user.getBirthday() != null) {
 				_calendar.setTime(_user.getBirthday());
 
-				returnValue = String.valueOf(_calendar.get(Calendar.MONTH) + 1);
+				return String.valueOf(_calendar.get(Calendar.MONTH) + 1);
 			}
 
-			return returnValue;
+			return null;
 		}
 		else if (name.equals(USER_BDATE_SECOND)) {
-			String returnValue = null;
-
 			if (_user.getBirthday() != null) {
 				_calendar.setTime(_user.getBirthday());
 
-				returnValue = String.valueOf(_calendar.get(Calendar.SECOND));
+				return String.valueOf(_calendar.get(Calendar.SECOND));
 			}
 
-			return returnValue;
+			return null;
 		}
 		else if (name.equals(USER_BDATE_TIMEZONE)) {
-			String returnValue = null;
-
 			if (_user.getBirthday() != null) {
 				_calendar.setTime(_user.getBirthday());
 
-				returnValue = String.valueOf(
-					_calendar.get(Calendar.ZONE_OFFSET));
+				return String.valueOf(_calendar.get(Calendar.ZONE_OFFSET));
 			}
-			return returnValue;
+			return null;
 		}
 		else if (name.equals(USER_BDATE_YEAR)) {
-			String returnValue = null;
-
 			if (_user.getBirthday() != null) {
 				_calendar.setTime(_user.getBirthday());
 
-				returnValue = String.valueOf(_calendar.get(Calendar.YEAR));
+				return String.valueOf(_calendar.get(Calendar.YEAR));
 			}
 
-			return returnValue;
+			return null;
 		}
 		else if (name.equals(USER_GENDER)) {
 			return _user.isMale() ? "male" : "female";
@@ -456,6 +450,10 @@ public class UserAttributes {
 			return StringPool.BLANK;
 		}
 		else if (name.equals(USER_HOME_INFO_POSTAL_STATEPROV)) {
+			if (_homeAddress != null) {
+				return String.valueOf(_homeAddress.getRegion().getRegionCode());
+			}
+
 			return StringPool.BLANK;
 		}
 		else if (name.equals(USER_HOME_INFO_POSTAL_POSTALCODE)) {
@@ -466,6 +464,10 @@ public class UserAttributes {
 			return StringPool.BLANK;
 		}
 		else if (name.equals(USER_HOME_INFO_POSTAL_COUNTRY)) {
+			if (_homeAddress != null) {
+				return String.valueOf(_homeAddress.getCountry().getName());
+			}
+
 			return StringPool.BLANK;
 		}
 		else if (name.equals(USER_HOME_INFO_POSTAL_ORGANIZATION)) {
@@ -501,9 +503,17 @@ public class UserAttributes {
 			return StringPool.BLANK;
 		}
 		else if (name.equals(USER_HOME_INFO_TELECOM_FAX_NUMBER)) {
+			if (_homeFax != null) {
+				return _homeFax.getNumber();
+			}
+
 			return StringPool.BLANK;
 		}
 		else if (name.equals(USER_HOME_INFO_TELECOM_FAX_EXT)) {
+			if (_homeFax != null) {
+				return _homeFax.getExtension();
+			}
+
 			return StringPool.BLANK;
 		}
 		else if (name.equals(USER_HOME_INFO_TELECOM_FAX_COMMENT)) {
@@ -516,9 +526,17 @@ public class UserAttributes {
 			return StringPool.BLANK;
 		}
 		else if (name.equals(USER_HOME_INFO_TELECOM_MOBILE_NUMBER)) {
+			if (_mobilePhone != null) {
+				return _mobilePhone.getNumber();
+			}
+
 			return StringPool.BLANK;
 		}
 		else if (name.equals(USER_HOME_INFO_TELECOM_MOBILE_EXT)) {
+			if (_mobilePhone != null) {
+				return _mobilePhone.getExtension();
+			}
+
 			return StringPool.BLANK;
 		}
 		else if (name.equals(USER_HOME_INFO_TELECOM_MOBILE_COMMENT)) {
@@ -531,9 +549,17 @@ public class UserAttributes {
 			return StringPool.BLANK;
 		}
 		else if (name.equals(USER_HOME_INFO_TELECOM_PAGER_NUMBER)) {
+			if (_pager != null) {
+				return _pager.getNumber();
+			}
+
 			return StringPool.BLANK;
 		}
 		else if (name.equals(USER_HOME_INFO_TELECOM_PAGER_EXT)) {
+			if (_pager != null) {
+				return _pager.getExtension();
+			}
+
 			return StringPool.BLANK;
 		}
 		else if (name.equals(USER_HOME_INFO_TELECOM_PAGER_COMMENT)) {
@@ -563,6 +589,10 @@ public class UserAttributes {
 			return StringPool.BLANK;
 		}
 		else if (name.equals(USER_BUSINESS_INFO_POSTAL_STATEPROV)) {
+			if (_bizAddress != null) {
+				return String.valueOf(_bizAddress.getRegion().getRegionCode());
+			}
+
 			return StringPool.BLANK;
 		}
 		else if (name.equals(USER_BUSINESS_INFO_POSTAL_POSTALCODE)) {
@@ -573,6 +603,10 @@ public class UserAttributes {
 			return StringPool.BLANK;
 		}
 		else if (name.equals(USER_BUSINESS_INFO_POSTAL_COUNTRY)) {
+			if (_bizAddress != null) {
+				return String.valueOf(_bizAddress.getCountry().getName());
+			}
+
 			return StringPool.BLANK;
 		}
 		else if (name.equals(USER_BUSINESS_INFO_POSTAL_ORGANIZATION)) {
@@ -608,9 +642,17 @@ public class UserAttributes {
 			return StringPool.BLANK;
 		}
 		else if (name.equals(USER_BUSINESS_INFO_TELECOM_FAX_NUMBER)) {
+			if (_bizFax != null) {
+				return _bizFax.getNumber();
+			}
+
 			return StringPool.BLANK;
 		}
 		else if (name.equals(USER_BUSINESS_INFO_TELECOM_FAX_EXT)) {
+			if (_bizFax != null) {
+				return _bizFax.getExtension();
+			}
+
 			return StringPool.BLANK;
 		}
 		else if (name.equals(USER_BUSINESS_INFO_TELECOM_FAX_COMMENT)) {
@@ -623,9 +665,17 @@ public class UserAttributes {
 			return StringPool.BLANK;
 		}
 		else if (name.equals(USER_BUSINESS_INFO_TELECOM_MOBILE_NUMBER)) {
+			if (_mobilePhone != null) {
+				return _mobilePhone.getNumber();
+			}
+
 			return StringPool.BLANK;
 		}
 		else if (name.equals(USER_BUSINESS_INFO_TELECOM_MOBILE_EXT)) {
+			if (_mobilePhone != null) {
+				return _mobilePhone.getExtension();
+			}
+
 			return StringPool.BLANK;
 		}
 		else if (name.equals(USER_BUSINESS_INFO_TELECOM_MOBILE_COMMENT)) {
@@ -638,9 +688,17 @@ public class UserAttributes {
 			return StringPool.BLANK;
 		}
 		else if (name.equals(USER_BUSINESS_INFO_TELECOM_PAGER_NUMBER)) {
+			if (_pager != null) {
+				return _pager.getNumber();
+			}
+
 			return StringPool.BLANK;
 		}
 		else if (name.equals(USER_BUSINESS_INFO_TELECOM_PAGER_EXT)) {
+			if (_pager != null) {
+				return _pager.getExtension();
+			}
+
 			return StringPool.BLANK;
 		}
 		else if (name.equals(USER_BUSINESS_INFO_TELECOM_PAGER_COMMENT)) {
@@ -660,10 +718,14 @@ public class UserAttributes {
 	private static Log _log = LogFactoryUtil.getLog(UserAttributes.class);
 
 	private Address _bizAddress;
+	private Phone _bizFax;
 	private Phone _bizPhone;
 	private Calendar _calendar = new GregorianCalendar();
 	private Address _homeAddress;
+	private Phone _homeFax;
 	private Phone _homePhone;
+	private Phone _mobilePhone;
+	private Phone _pager;
 	private User _user;
 
 }
