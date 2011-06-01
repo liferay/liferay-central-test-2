@@ -221,7 +221,7 @@ public class InlineSQLHelperImpl implements InlineSQLHelper {
 
 		long[] roleIds = getRoleIds(groupIds);
 
-		StringBundler roleIdsSQL = new StringBundler(3 * roleIds.length + 2);
+		StringBundler roleIdsSQL = new StringBundler();
 
 		if (roleIds.length == 0) {
 			roleIds = _NO_ROLE_IDS;
@@ -231,8 +231,7 @@ public class InlineSQLHelperImpl implements InlineSQLHelper {
 			if (i == 0) {
 				roleIdsSQL.append("(");
 			}
-
-			if (i > 0) {
+			else if (i > 0) {
 				roleIdsSQL.append(" OR ");
 			}
 
@@ -244,7 +243,7 @@ public class InlineSQLHelperImpl implements InlineSQLHelper {
 			}
 		}
 
-		StringBundler primKeysSQL = new StringBundler(3);
+		StringBundler primKeysSQL = new StringBundler();
 
 		primKeysSQL.append("(ResourcePermission.primKey = CAST_TEXT(");
 		primKeysSQL.append(classPKField);
@@ -350,7 +349,7 @@ public class InlineSQLHelperImpl implements InlineSQLHelper {
 		return userId;
 	}
 
-	private static final long[] _NO_ROLE_IDS = new long[] {0};
+	private static final long[] _NO_ROLE_IDS = {0};
 
 	private static final String _GROUP_BY_CLAUSE = " GROUP BY ";
 

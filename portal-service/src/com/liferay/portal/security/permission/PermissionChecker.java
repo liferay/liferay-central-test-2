@@ -23,7 +23,7 @@ import javax.portlet.PortletRequest;
  */
 public interface PermissionChecker {
 
-	public static final long[] DEFAULT_ROLE_IDS = new long[] {};
+	public static final long[] DEFAULT_ROLE_IDS = {};
 
 	public long getCompanyId();
 
