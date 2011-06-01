@@ -28,10 +28,17 @@ boolean approved = false;
 boolean expired = true;
 
 try {
-	if (articleDisplay != null) {
-		JournalArticle article = JournalArticleLocalServiceUtil.getLatestArticle(articleDisplay.getGroupId(), articleDisplay.getArticleId(), WorkflowConstants.STATUS_APPROVED);
+	JournalArticle article = null;
 
-		title = article.getTitle();
+	if (articleDisplay != null) {
+		article = JournalArticleLocalServiceUtil.getLatestArticle(articleDisplay.getGroupId(), articleDisplay.getArticleId(), WorkflowConstants.STATUS_APPROVED);
+	}
+	else if (Validator.isNotNull(articleId)) {
+		article = JournalArticleLocalServiceUtil.getLatestArticle(scopeGroupId, articleId, WorkflowConstants.STATUS_ANY);
+	}
+
+	if (Validator.isNotNull(article)) {
+		title = article.getTitle(locale);
 		approved = article.isApproved();
 		expired = article.isExpired();
 
@@ -224,13 +231,13 @@ try {
 					%>
 
 						<c:choose>
-							<c:when test="<%= JournalArticlePermission.contains(permissionChecker, articleDisplay.getGroupId(), articleDisplay.getArticleId(), ActionKeys.UPDATE) %>">
+							<c:when test="<%= JournalArticlePermission.contains(permissionChecker, article.getGroupId(), article.getArticleId(), ActionKeys.UPDATE) %>">
 								<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editURL" portletName="<%= PortletKeys.JOURNAL %>">
 									<portlet:param name="struts_action" value="/journal/edit_article" />
 									<portlet:param name="redirect" value="<%= currentURL %>" />
-									<portlet:param name="groupId" value="<%= String.valueOf(articleDisplay.getGroupId()) %>" />
-									<portlet:param name="articleId" value="<%= articleDisplay.getArticleId() %>" />
-									<portlet:param name="version" value="<%= String.valueOf(articleDisplay.getVersion()) %>" />
+									<portlet:param name="groupId" value="<%= String.valueOf(article.getGroupId()) %>" />
+									<portlet:param name="articleId" value="<%= article.getArticleId() %>" />
+									<portlet:param name="version" value="<%= String.valueOf(article.getVersion()) %>" />
 								</liferay-portlet:renderURL>
 
 								<div class="portlet-msg-alert">
