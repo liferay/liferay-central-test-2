@@ -141,6 +141,8 @@ public class LayoutImporter {
 			parameterMap, PortletDataHandlerKeys.PORTLET_USER_PREFERENCES);
 		boolean importTheme = MapUtil.getBoolean(
 			parameterMap, PortletDataHandlerKeys.THEME);
+		boolean importThemeSettings = MapUtil.getBoolean(
+			parameterMap, PortletDataHandlerKeys.THEME_REFERENCE);
 		boolean layoutSetPrototypeInherited = MapUtil.getBoolean(
 			parameterMap,
 			PortletDataHandlerKeys.LAYOUT_SET_PROTOTYPE_INHERITED);
@@ -295,6 +297,22 @@ public class LayoutImporter {
 
 		String themeId = layoutSet.getThemeId();
 		String colorSchemeId = layoutSet.getColorSchemeId();
+
+		if (importThemeSettings) {
+			Attribute themeIdAttribute = headerElement.attribute("theme-id");
+
+			if (themeIdAttribute != null) {
+				themeId = themeIdAttribute.getValue();
+			}
+
+			Attribute colorSchemeIdAttribute = headerElement.attribute(
+				"color-scheme-id");
+
+			if (colorSchemeIdAttribute != null) {
+				colorSchemeId = colorSchemeIdAttribute.getValue();
+			}
+		}
+
 		String css = GetterUtil.getString(headerElement.elementText("css"));
 
 		boolean useThemeZip = false;
@@ -313,20 +331,6 @@ public class LayoutImporter {
 			if (_log.isDebugEnabled()) {
 				_log.debug(
 					"Importing theme takes " + stopWatch.getTime() + " ms");
-			}
-		}
-		else {
-			Attribute themeIdAttribute = headerElement.attribute("theme-id");
-
-			if (themeIdAttribute != null) {
-				themeId = themeIdAttribute.getValue();
-			}
-
-			Attribute colorSchemeIdAttribute = headerElement.attribute(
-				"color-scheme-id");
-
-			if (colorSchemeIdAttribute != null) {
-				colorSchemeId = colorSchemeIdAttribute.getValue();
 			}
 		}
 
