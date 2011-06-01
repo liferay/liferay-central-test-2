@@ -501,7 +501,7 @@ if (Validator.isNotNull(content)) {
 										</div>
 
 										<div class="journal-article-buttons">
-											<aui:input cssClass="journal-article-variable-name" inlineField="<%= true %>" id="TextAreaFieldvariableName" label="variable-name" name="variableName" size="25" type="text" value="content" />
+											<aui:input cssClass="journal-article-variable-name" id="TextAreaFieldvariableName" inlineField="<%= true %>" label="variable-name" name="variableName" size="25" type="text" value="content" />
 
 											<aui:button cssClass="edit-button" value="edit-options" />
 
