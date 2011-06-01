@@ -294,22 +294,7 @@ public class LayoutImporter {
 		// Look and feel
 
 		String themeId = layoutSet.getThemeId();
-
-		Attribute themeIdAttribute = headerElement.attribute("theme-id");
-
-		if (themeIdAttribute != null) {
-			themeId = themeIdAttribute.getValue();
-		}
-
 		String colorSchemeId = layoutSet.getColorSchemeId();
-
-		Attribute colorSchemeIdAttribute = headerElement.attribute(
-			"color-scheme-id");
-
-		if (colorSchemeIdAttribute != null) {
-			colorSchemeId = colorSchemeIdAttribute.getValue();
-		}
-
 		String css = GetterUtil.getString(headerElement.elementText("css"));
 
 		boolean useThemeZip = false;
@@ -328,6 +313,20 @@ public class LayoutImporter {
 			if (_log.isDebugEnabled()) {
 				_log.debug(
 					"Importing theme takes " + stopWatch.getTime() + " ms");
+			}
+		}
+		else {
+			Attribute themeIdAttribute = headerElement.attribute("theme-id");
+
+			if (themeIdAttribute != null) {
+				themeId = themeIdAttribute.getValue();
+			}
+
+			Attribute colorSchemeIdAttribute = headerElement.attribute(
+				"color-scheme-id");
+
+			if (colorSchemeIdAttribute != null) {
+				colorSchemeId = colorSchemeIdAttribute.getValue();
 			}
 		}
 
