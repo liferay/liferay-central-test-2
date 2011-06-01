@@ -34,8 +34,9 @@ import com.liferay.portlet.wiki.engines.antlrwiki.translator.internal.Unformatte
 import com.liferay.portlet.wiki.model.WikiPage;
 import com.liferay.portlet.wiki.service.WikiPageLocalServiceUtil;
 
-import javax.portlet.PortletURL;
 import java.util.List;
+
+import javax.portlet.PortletURL;
 
 /**
  * @author Miguel Pastor
