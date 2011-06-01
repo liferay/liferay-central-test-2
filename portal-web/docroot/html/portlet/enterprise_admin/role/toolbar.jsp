@@ -53,7 +53,7 @@ String toolbarItem = ParamUtil.getString(request, "toolbarItem", "view-all");
 			%>
 
 			<liferay-ui:icon
-				image="community_icon"
+				image="site_icon"
 				message="site-role"
 				method="get"
 				url="<%= addRoleURL.toString() %>"
