@@ -143,11 +143,11 @@
 			<finder-column name="urlTitle" />
 			<finder-column name="status" />
 		</finder>
-        <finder name="C_V_ST" return-type="Collection">
-            <finder-column name="companyId" />
-            <finder-column name="version" />
-            <finder-column name="status" />
-        </finder>
+		<finder name="C_V_ST" return-type="Collection">
+			<finder-column name="companyId" />
+			<finder-column name="version" />
+			<finder-column name="status" />
+		</finder>
 
 		<!-- References -->
 
@@ -160,7 +160,7 @@
 		<reference package-path="com.liferay.portal" entity="WorkflowInstanceLink" />
 		<reference package-path="com.liferay.portlet.asset" entity="AssetCategory" />
 		<reference package-path="com.liferay.portlet.asset" entity="AssetEntry" />
-        <reference package-path="com.liferay.portlet.asset" entity="AssetLink" />
+		<reference package-path="com.liferay.portlet.asset" entity="AssetLink" />
 		<reference package-path="com.liferay.portlet.asset" entity="AssetTag" />
 		<reference package-path="com.liferay.portlet.expando" entity="ExpandoValue" />
 		<reference package-path="com.liferay.portlet.messageboards" entity="MBMessage" />
