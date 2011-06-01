@@ -124,7 +124,14 @@ for (int i = 0; i < results.size(); i++) {
 
 		User user3 = UserLocalServiceUtil.getUserById(membershipRequest.getReplierUserId());
 
-		row.addText(HtmlUtil.escape(user3.getFullName()));
+		if (user3.isDefaultUser()) {
+			Company userCompany = CompanyLocalServiceUtil.getCompanyById(user3.getCompanyId());
+
+			row.addText(HtmlUtil.escape(userCompany.getName()));
+		}
+		else {
+			row.addText(HtmlUtil.escape(user3.getFullName()));
+		}
 
 		// Reply comments
 

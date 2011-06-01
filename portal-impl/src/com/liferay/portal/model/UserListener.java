@@ -14,14 +14,21 @@
 
 package com.liferay.portal.model;
 
+import com.liferay.portal.kernel.language.LanguageUtil;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.ModelListenerException;
+import com.liferay.portal.model.Group;
+import com.liferay.portal.security.auth.PrincipalThreadLocal;
 import com.liferay.portal.security.ldap.LDAPUserTransactionThreadLocal;
 import com.liferay.portal.security.ldap.PortalLDAPExporterUtil;
+import com.liferay.portal.service.MembershipRequestLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextThreadLocal;
+import com.liferay.portal.service.UserLocalServiceUtil;
 
 import java.io.Serializable;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -30,6 +37,24 @@ import java.util.Map;
  * @author Raymond Augé
  */
 public class UserListener extends BaseModelListener<User> {
+
+	public void onAfterAddAssociation(
+			Object classPK, String associationClassName,
+			Object associationClassPK)
+		throws ModelListenerException {
+
+		try {
+			if (associationClassName.equals(Group.class.getName())) {
+				long userId = ((Long)classPK).longValue();
+				long groupId = ((Long)associationClassPK).longValue();
+
+				updateMembershipRequestStatus(userId, groupId);
+			}
+		}
+		catch (Exception e) {
+			throw new ModelListenerException(e);
+		}
+	}
 
 	public void onAfterCreate(User user) throws ModelListenerException {
 		try {
@@ -67,6 +92,27 @@ public class UserListener extends BaseModelListener<User> {
 		}
 
 		PortalLDAPExporterUtil.exportToLDAP(user, expandoBridgeAttributes);
+	}
+
+	protected void updateMembershipRequestStatus(long userId, long groupId)
+		throws Exception {
+
+		long principalUserId = GetterUtil.getLong(
+			PrincipalThreadLocal.getName());
+
+		User user = UserLocalServiceUtil.getUser(userId);
+
+		List<MembershipRequest> membershipRequests =
+			MembershipRequestLocalServiceUtil.getMembershipRequests(
+				userId, groupId, MembershipRequestConstants.STATUS_PENDING);
+
+		for (MembershipRequest membershipRequest : membershipRequests) {
+			MembershipRequestLocalServiceUtil.updateStatus(
+				principalUserId, membershipRequest.getMembershipRequestId(),
+				LanguageUtil.get(
+					user.getLocale(), "your-membership-has-been-approved"),
+				MembershipRequestConstants.STATUS_APPROVED, false);
+		}
 	}
 
 }
