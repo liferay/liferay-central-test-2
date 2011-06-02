@@ -267,9 +267,10 @@ public class PluginPackageHotDeployListener extends BaseHotDeployListener {
 					portalCacheManagerBeanId);
 
 			if (_log.isInfoEnabled()) {
-				_log.info("Reconfiguring caches in cache manager "
-					+ portalCacheManagerBeanId + " using config file "
-					+ cacheConfigurationURL);
+				_log.info(
+					"Reconfiguring caches in cache manager " +
+						portalCacheManagerBeanId + " using " +
+							cacheConfigurationURL);
 			}
 
 			portalCacheManager.reconfigureCaches(cacheConfigurationURL);
@@ -278,6 +279,7 @@ public class PluginPackageHotDeployListener extends BaseHotDeployListener {
 
 	protected void reconfigureHibernateCache(
 		ClassLoader classLoader, String hibernateCacheConfigurationPath) {
+
 		if (Validator.isNull(hibernateCacheConfigurationPath)) {
 			return;
 		}
@@ -290,8 +292,9 @@ public class PluginPackageHotDeployListener extends BaseHotDeployListener {
 
 		if (Validator.isNotNull(configurationFile)) {
 			if (_log.isInfoEnabled()) {
-				_log.info("Reconfiguring Hibernate caches using config file "
-					+ configurationFile);
+				_log.info(
+					"Reconfiguring Hibernate caches using " +
+						configurationFile);
 			}
 
 			liferayEhcacheRegionFactory.reconfigureCaches(configurationFile);
