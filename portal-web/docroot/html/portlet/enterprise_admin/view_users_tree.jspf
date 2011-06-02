@@ -265,21 +265,39 @@ int organizationsCount = OrganizationLocalServiceUtil.searchCount(company.getCom
 		<liferay-ui:panel-container extended="<%= false %>" persistState="<%= true %>">
 			<%= organizationInfo %>
 
-			<c:if test="<%= organizationsCount > 0 %>">
+			<%
+			int usersCount = 0;
+
+			boolean showUsers = false;
+			boolean showOrganizations = false;
+
+			if (organization != null) {
+				usersCount = UserLocalServiceUtil.getOrganizationUsersCount(organizationId);
+
+				showUsers = true;
+				showOrganizations = true;
+			}
+			else {
+				if (!PortalPermissionUtil.contains(permissionChecker, ActionKeys.ADD_USER)) {
+					showOrganizations = true;
+				}
+				else if (organizationsCount > 0) {
+					showOrganizations = true;
+					showUsers = true;
+				}
+				else {
+					showUsers = true;
+				}
+			}
+			%>
+
+			<c:if test="<%= showOrganizations %>">
 				<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" persistState="<%= true %>" title='<%= (organization == null) ? "organizations" : (organizationsCount == 1) ?  LanguageUtil.format(pageContext, "x-suborganization", String.valueOf(organizationsCount)) : LanguageUtil.format(pageContext, "x-suborganizations", String.valueOf(organizationsCount)) %>'>
 					<%= organizationsTree %>
 				</liferay-ui:panel>
 			</c:if>
 
-			<%
-			int usersCount = 0;
-
-			if (organization != null) {
-				usersCount = UserLocalServiceUtil.getOrganizationUsersCount(organizationId);
-			}
-			%>
-
-			<c:if test="<%= (organization == null) || (usersCount > 0) %>">
+			<c:if test="<%= showUsers %>">
 				<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" persistState="<%= true %>" title='<%= (organization == null) ? "users" : (usersCount == 1) ? LanguageUtil.format(pageContext, "x-user", String.valueOf(usersCount)) : LanguageUtil.format(pageContext, "x-users", String.valueOf(usersCount)) %>'>
 					<%@ include file="/html/portlet/enterprise_admin/view_users_flat_users.jspf" %>
 				</liferay-ui:panel>
