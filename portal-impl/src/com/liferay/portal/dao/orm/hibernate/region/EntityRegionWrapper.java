@@ -28,31 +28,38 @@ import org.hibernate.cache.access.EntityRegionAccessStrategy;
 public class EntityRegionWrapper
 	extends BaseRegionWrapper implements EntityRegion {
 
-	public EntityRegionWrapper(
-		EhcacheEntityRegion ehcacheEntityRegion) {
-
+	public EntityRegionWrapper(EhcacheEntityRegion ehcacheEntityRegion) {
 		super(ehcacheEntityRegion);
 	}
 
 	public EntityRegionAccessStrategy buildAccessStrategy(AccessType accessType)
 		throws CacheException {
 
-		return getEhcacheEntityRegion().buildAccessStrategy(accessType);
+		EhcacheEntityRegion ehcacheEntityRegion = getEhcacheEntityRegion();
+
+		return ehcacheEntityRegion.buildAccessStrategy(accessType);
 	}
 
 	public CacheDataDescription getCacheDataDescription() {
-		return getEhcacheEntityRegion().getCacheDataDescription();
+		EhcacheEntityRegion ehcacheEntityRegion = getEhcacheEntityRegion();
+
+		return ehcacheEntityRegion.getCacheDataDescription();
 	}
 
 	public void invalidate() {
-		getEhcacheEntityRegion().clear();
+		EhcacheEntityRegion ehcacheEntityRegion = getEhcacheEntityRegion();
+
+		ehcacheEntityRegion.clear();
 	}
 
 	public boolean isTransactionAware() {
-		return getEhcacheEntityRegion().isTransactionAware();
+		EhcacheEntityRegion ehcacheEntityRegion = getEhcacheEntityRegion();
+
+		return ehcacheEntityRegion.isTransactionAware();
 	}
 
 	protected EhcacheEntityRegion getEhcacheEntityRegion() {
-		return (EhcacheEntityRegion) getEhcacheDataRegion();
+		return (EhcacheEntityRegion)getEhcacheDataRegion();
 	}
+
 }

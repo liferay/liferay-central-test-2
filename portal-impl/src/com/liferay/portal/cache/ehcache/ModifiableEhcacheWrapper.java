@@ -46,6 +46,7 @@ import net.sf.ehcache.writer.CacheWriterManager;
  * @author Edward Han
  */
 public class ModifiableEhcacheWrapper implements Ehcache {
+
 	public ModifiableEhcacheWrapper(Ehcache ehcache) {
 		_ehcache = ehcache;
 	}
@@ -65,7 +66,7 @@ public class ModifiableEhcacheWrapper implements Ehcache {
 	}
 
 	public long calculateInMemorySize()
-		throws IllegalStateException, CacheException {
+		throws CacheException, IllegalStateException {
 
 		return _ehcache.calculateInMemorySize();
 	}
@@ -86,24 +87,26 @@ public class ModifiableEhcacheWrapper implements Ehcache {
 		_ehcache.dispose();
 	}
 
-	public boolean equals(Object obj) {
-		return _ehcache.equals(obj);
+	public boolean equals(Object object) {
+		return _ehcache.equals(object);
 	}
 
 	public void evictExpiredElements() {
 		_ehcache.evictExpiredElements();
 	}
 
-	public void flush() throws IllegalStateException, CacheException {
+	public void flush() throws CacheException, IllegalStateException {
 		_ehcache.flush();
 	}
 
-	public Element get(Object key) throws IllegalStateException, CacheException {
+	public Element get(Object key)
+		throws CacheException, IllegalStateException {
+
 		return _ehcache.get(key);
 	}
 
 	public Element get(Serializable key)
-		throws IllegalStateException, CacheException {
+		throws CacheException, IllegalStateException {
 
 		return _ehcache.get(key);
 	}
@@ -112,10 +115,11 @@ public class ModifiableEhcacheWrapper implements Ehcache {
 		return _referenceCounter.get();
 	}
 
-	public Map getAllWithLoader(Collection collection, Object o)
+	@SuppressWarnings("rawtypes")
+	public Map getAllWithLoader(Collection keys, Object argument)
 		throws CacheException {
 
-		return _ehcache.getAllWithLoader(collection, o);
+		return _ehcache.getAllWithLoader(keys, argument);
 	}
 
 	public float getAverageGetTime() {
@@ -154,16 +158,19 @@ public class ModifiableEhcacheWrapper implements Ehcache {
 		return _ehcache.getInternalContext();
 	}
 
-	public List getKeys() throws IllegalStateException, CacheException {
+	@SuppressWarnings("rawtypes")
+	public List getKeys() throws CacheException, IllegalStateException {
 		return _ehcache.getKeys();
 	}
 
+	@SuppressWarnings("rawtypes")
 	public List getKeysNoDuplicateCheck() throws IllegalStateException {
 		return _ehcache.getKeysNoDuplicateCheck();
 	}
 
+	@SuppressWarnings("rawtypes")
 	public List getKeysWithExpiryCheck()
-		throws IllegalStateException, CacheException {
+		throws CacheException, IllegalStateException {
 
 		return _ehcache.getKeysWithExpiryCheck();
 	}
@@ -182,16 +189,16 @@ public class ModifiableEhcacheWrapper implements Ehcache {
 		return _ehcache.getName();
 	}
 
-	public Element getQuiet(Serializable serializable)
-		throws IllegalStateException, CacheException {
+	public Element getQuiet(Object key)
+		throws CacheException, IllegalStateException {
 
-		return _ehcache.getQuiet(serializable);
+		return _ehcache.getQuiet(key);
 	}
 
-	public Element getQuiet(Object o)
-		throws IllegalStateException, CacheException {
+	public Element getQuiet(Serializable key)
+		throws CacheException, IllegalStateException {
 
-		return _ehcache.getQuiet(o);
+		return _ehcache.getQuiet(key);
 	}
 
 	public List<CacheExtension> getRegisteredCacheExtensions() {
@@ -210,13 +217,14 @@ public class ModifiableEhcacheWrapper implements Ehcache {
 		return _ehcache.getSampledCacheStatistics();
 	}
 
-	public int getSize() throws IllegalStateException, CacheException {
+	public int getSize() throws CacheException, IllegalStateException {
 		return _ehcache.getSize();
 	}
 
-	public int getSizeBasedOnAccuracy(int i)
-		throws IllegalArgumentException, IllegalStateException, CacheException {
-		return _ehcache.getSizeBasedOnAccuracy(i);
+	public int getSizeBasedOnAccuracy(int statisticsAccuracy)
+		throws CacheException, IllegalArgumentException, IllegalStateException {
+
+		return _ehcache.getSizeBasedOnAccuracy(statisticsAccuracy);
 	}
 
 	public Statistics getStatistics() throws IllegalStateException {
@@ -231,14 +239,15 @@ public class ModifiableEhcacheWrapper implements Ehcache {
 		return _ehcache.getStatus();
 	}
 
-	public Ehcache getWrappedCache() {
-		return _ehcache;
-	}
-
-	public Element getWithLoader(Object o, CacheLoader cacheLoader, Object o1)
+	public Element getWithLoader(
+			Object key, CacheLoader cacheLoader, Object argument)
 		throws CacheException {
 
-		return _ehcache.getWithLoader(o, cacheLoader, o1);
+		return _ehcache.getWithLoader(key, cacheLoader, argument);
+	}
+
+	public Ehcache getWrappedCache() {
+		return _ehcache;
 	}
 
 	public CacheWriterManager getWriterManager() {
@@ -261,20 +270,20 @@ public class ModifiableEhcacheWrapper implements Ehcache {
 		return _ehcache.isDisabled();
 	}
 
-	public boolean isElementInMemory(Object o) {
-		return _ehcache.isElementInMemory(o);
+	public boolean isElementInMemory(Object key) {
+		return _ehcache.isElementInMemory(key);
 	}
 
-	public boolean isElementInMemory(Serializable serializable) {
-		return _ehcache.isElementInMemory(serializable);
+	public boolean isElementInMemory(Serializable key) {
+		return _ehcache.isElementInMemory(key);
 	}
 
-	public boolean isElementOnDisk(Object o) {
-		return _ehcache.isElementOnDisk(o);
+	public boolean isElementOnDisk(Object key) {
+		return _ehcache.isElementOnDisk(key);
 	}
 
-	public boolean isElementOnDisk(Serializable serializable) {
-		return _ehcache.isElementOnDisk(serializable);
+	public boolean isElementOnDisk(Serializable key) {
+		return _ehcache.isElementOnDisk(key);
 	}
 
 	public boolean isExpired(Element element)
@@ -283,8 +292,8 @@ public class ModifiableEhcacheWrapper implements Ehcache {
 		return _ehcache.isExpired(element);
 	}
 
-	public boolean isKeyInCache(Object o) {
-		return _ehcache.isKeyInCache(o);
+	public boolean isKeyInCache(Object key) {
+		return _ehcache.isKeyInCache(key);
 	}
 
 	public boolean isNodeCoherent() {
@@ -299,43 +308,45 @@ public class ModifiableEhcacheWrapper implements Ehcache {
 		return _ehcache.isStatisticsEnabled();
 	}
 
-	public boolean isValueInCache(Object o) {
-		return _ehcache.isValueInCache(o);
+	public boolean isValueInCache(Object value) {
+		return _ehcache.isValueInCache(value);
 	}
 
-	public void load(Object o) throws CacheException {
-		_ehcache.load(o);
+	public void load(Object key) throws CacheException {
+		_ehcache.load(key);
 	}
 
-	public void loadAll(Collection collection, Object o) throws CacheException {
-		_ehcache.loadAll(collection, o);
+	@SuppressWarnings("rawtypes")
+	public void loadAll(Collection keys, Object argument)
+		throws CacheException {
+
+		_ehcache.loadAll(keys, argument);
 	}
 
 	public void put(Element element)
-		throws IllegalArgumentException, IllegalStateException, CacheException {
+		throws CacheException, IllegalArgumentException, IllegalStateException {
 
 		_ehcache.put(element);
 	}
 
-	public void put(Element element, boolean b)
-		throws IllegalArgumentException, IllegalStateException, CacheException {
+	public void put(Element element, boolean doNotNotifyCacheReplicators)
+		throws CacheException, IllegalArgumentException, IllegalStateException {
 
-		_ehcache.put(element, b);
+		_ehcache.put(element, doNotNotifyCacheReplicators);
 	}
 
 	public Element putIfAbsent(Element element) throws NullPointerException {
-
 		return _ehcache.putIfAbsent(element);
 	}
 
 	public void putQuiet(Element element)
-		throws IllegalArgumentException, IllegalStateException, CacheException {
+		throws CacheException, IllegalArgumentException, IllegalStateException {
 
 		_ehcache.putQuiet(element);
 	}
 
 	public void putWithWriter(Element element)
-		throws IllegalArgumentException, IllegalStateException, CacheException {
+		throws CacheException, IllegalArgumentException, IllegalStateException {
 
 		_ehcache.putWithWriter(element);
 	}
@@ -363,16 +374,14 @@ public class ModifiableEhcacheWrapper implements Ehcache {
 		return _ehcache.remove(key);
 	}
 
-	public boolean remove(Serializable key)
-		throws IllegalStateException {
-
-		return _ehcache.remove(key);
-	}
-
 	public boolean remove(Object key, boolean doNotNotifyCacheReplicators)
 		throws IllegalStateException {
 
 		return _ehcache.remove(key, doNotNotifyCacheReplicators);
+	}
+
+	public boolean remove(Serializable key) throws IllegalStateException {
+		return _ehcache.remove(key);
 	}
 
 	public boolean remove(Serializable key, boolean doNotNotifyCacheReplicators)
@@ -381,12 +390,12 @@ public class ModifiableEhcacheWrapper implements Ehcache {
 		return _ehcache.remove(key, doNotNotifyCacheReplicators);
 	}
 
-	public void removeAll() throws IllegalStateException, CacheException {
+	public void removeAll() throws CacheException, IllegalStateException {
 		_ehcache.removeAll();
 	}
 
 	public void removeAll(boolean doNotNotifyCacheReplicators)
-		throws IllegalStateException, CacheException {
+		throws CacheException, IllegalStateException {
 
 		_ehcache.removeAll(doNotNotifyCacheReplicators);
 	}
@@ -411,10 +420,8 @@ public class ModifiableEhcacheWrapper implements Ehcache {
 		return _ehcache.removeQuiet(key);
 	}
 
-	public boolean removeQuiet(Serializable serializable)
-		throws IllegalStateException {
-
-		return _ehcache.removeQuiet(serializable);
+	public boolean removeQuiet(Serializable key) throws IllegalStateException {
+		return _ehcache.removeQuiet(key);
 	}
 
 	public void removeReference() {
@@ -422,7 +429,7 @@ public class ModifiableEhcacheWrapper implements Ehcache {
 	}
 
 	public boolean removeWithWriter(Object key)
-		throws IllegalStateException, CacheException {
+		throws CacheException, IllegalStateException {
 
 		return _ehcache.removeWithWriter(key);
 	}
@@ -432,7 +439,7 @@ public class ModifiableEhcacheWrapper implements Ehcache {
 	}
 
 	public boolean replace(Element oldElement, Element newElement)
-		throws NullPointerException, IllegalArgumentException {
+		throws IllegalArgumentException, NullPointerException {
 
 		return _ehcache.replace(oldElement, newElement);
 	}
@@ -514,4 +521,5 @@ public class ModifiableEhcacheWrapper implements Ehcache {
 
 	private Ehcache _ehcache;
 	private AtomicInteger _referenceCounter = new AtomicInteger(0);
+
 }

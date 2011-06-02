@@ -31,26 +31,18 @@ import org.hibernate.cfg.Settings;
  * @author Edward Han
  */
 public class SingletonLiferayEhcacheRegionFactory implements RegionFactory {
+
 	public static LiferayEhcacheRegionFactory getInstance() {
-		return _wrappedRegionFactory;
+		return _liferayEhcacheRegionFactory;
 	}
 
 	public SingletonLiferayEhcacheRegionFactory(Properties properties) {
 		synchronized (this) {
-			if (_wrappedRegionFactory == null) {
-				_wrappedRegionFactory = new LiferayEhcacheRegionFactory(
+			if (_liferayEhcacheRegionFactory == null) {
+				_liferayEhcacheRegionFactory = new LiferayEhcacheRegionFactory(
 					properties);
 			}
 		}
-	}
-
-	public EntityRegion buildEntityRegion(
-			String regionName, Properties properties,
-			CacheDataDescription cacheDataDescription)
-		throws CacheException {
-
-		return _wrappedRegionFactory.buildEntityRegion(
-			regionName, properties, cacheDataDescription);
 	}
 
 	public CollectionRegion buildCollectionRegion(
@@ -58,15 +50,24 @@ public class SingletonLiferayEhcacheRegionFactory implements RegionFactory {
 			CacheDataDescription cacheDataDescription)
 		throws CacheException {
 
-		return _wrappedRegionFactory.buildCollectionRegion(
+		return _liferayEhcacheRegionFactory.buildCollectionRegion(
 			regionName,properties, cacheDataDescription);
+	}
+
+	public EntityRegion buildEntityRegion(
+			String regionName, Properties properties,
+			CacheDataDescription cacheDataDescription)
+		throws CacheException {
+
+		return _liferayEhcacheRegionFactory.buildEntityRegion(
+			regionName, properties, cacheDataDescription);
 	}
 
 	public QueryResultsRegion buildQueryResultsRegion(
 			String regionName, Properties properties)
 		throws CacheException {
 
-		return _wrappedRegionFactory.buildQueryResultsRegion(
+		return _liferayEhcacheRegionFactory.buildQueryResultsRegion(
 			regionName, properties);
 	}
 
@@ -74,37 +75,37 @@ public class SingletonLiferayEhcacheRegionFactory implements RegionFactory {
 			String regionName, Properties properties)
 		throws CacheException {
 
-		return _wrappedRegionFactory.buildTimestampsRegion(
+		return _liferayEhcacheRegionFactory.buildTimestampsRegion(
 			regionName, properties);
 	}
 
 	public AccessType getDefaultAccessType() {
-		return _wrappedRegionFactory.getDefaultAccessType();
+		return _liferayEhcacheRegionFactory.getDefaultAccessType();
 	}
 
 	public boolean isMinimalPutsEnabledByDefault() {
-		return _wrappedRegionFactory.isMinimalPutsEnabledByDefault();
+		return _liferayEhcacheRegionFactory.isMinimalPutsEnabledByDefault();
 	}
 
 	public long nextTimestamp() {
-		return _wrappedRegionFactory.nextTimestamp();
+		return _liferayEhcacheRegionFactory.nextTimestamp();
 	}
 
-	public synchronized void start(
-			Settings settings, Properties properties)
+	public synchronized void start(Settings settings, Properties properties)
 		throws CacheException {
 
 		if (_instanceCounter.getAndIncrement() == 0) {
-			_wrappedRegionFactory.start(settings, properties);
+			_liferayEhcacheRegionFactory.start(settings, properties);
 		}
 	}
 
 	public synchronized void stop() {
 		if (_instanceCounter.decrementAndGet() == 0) {
-			_wrappedRegionFactory.stop();
+			_liferayEhcacheRegionFactory.stop();
 		}
 	}
 
 	private static AtomicInteger _instanceCounter = new AtomicInteger(0);
-	private static LiferayEhcacheRegionFactory _wrappedRegionFactory;
+	private static LiferayEhcacheRegionFactory _liferayEhcacheRegionFactory;
+
 }

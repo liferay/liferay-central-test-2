@@ -29,17 +29,16 @@ import org.hibernate.cache.Region;
 /**
  * @author Edward Han
  */
-public abstract class BaseRegionWrapper implements Region, CacheRegistryItem {
+public abstract class BaseRegionWrapper implements CacheRegistryItem, Region {
 
 	public BaseRegionWrapper(EhcacheDataRegion ehcacheDataRegion) {
-
 		_ehcacheDataRegion = ehcacheDataRegion;
 
-		Ehcache cache = _ehcacheDataRegion.getEhcache();
+		Ehcache ehcache = _ehcacheDataRegion.getEhcache();
 
-		if (cache instanceof ModifiableEhcacheWrapper) {
+		if (ehcache instanceof ModifiableEhcacheWrapper) {
 			ModifiableEhcacheWrapper modifiableEhcacheWrapper =
-				(ModifiableEhcacheWrapper) cache;
+				(ModifiableEhcacheWrapper)ehcache;
 
 			modifiableEhcacheWrapper.addReference();
 		}
@@ -47,16 +46,18 @@ public abstract class BaseRegionWrapper implements Region, CacheRegistryItem {
 		CacheRegistryUtil.register(this);
 	}
 
-	public boolean contains(Object o) {
-		return _ehcacheDataRegion.contains(o);
+	public boolean contains(Object object) {
+		return _ehcacheDataRegion.contains(object);
 	}
 
 	public void destroy() throws CacheException {
-		Ehcache cache = getEhcacheDataRegion().getEhcache();
+		EhcacheDataRegion ehcacheDataRegion = getEhcacheDataRegion();
 
-		if (cache instanceof ModifiableEhcacheWrapper) {
+		Ehcache ehcache = ehcacheDataRegion.getEhcache();
+
+		if (ehcache instanceof ModifiableEhcacheWrapper) {
 			ModifiableEhcacheWrapper modifiableEhcacheWrapper =
-				(ModifiableEhcacheWrapper) cache;
+				(ModifiableEhcacheWrapper)ehcache;
 
 			modifiableEhcacheWrapper.removeReference();
 
@@ -69,16 +70,16 @@ public abstract class BaseRegionWrapper implements Region, CacheRegistryItem {
 		}
 	}
 
-	public String getName() {
-		return _ehcacheDataRegion.getName();
-	}
-
 	public long getElementCountInMemory() {
 		return _ehcacheDataRegion.getElementCountInMemory();
 	}
 
 	public long getElementCountOnDisk() {
 		return _ehcacheDataRegion.getElementCountOnDisk();
+	}
+
+	public String getName() {
+		return _ehcacheDataRegion.getName();
 	}
 
 	public String getRegistryName() {
@@ -97,6 +98,7 @@ public abstract class BaseRegionWrapper implements Region, CacheRegistryItem {
 		return _ehcacheDataRegion.nextTimestamp();
 	}
 
+	@SuppressWarnings("rawtypes")
 	public Map toMap() {
 		return _ehcacheDataRegion.toMap();
 	}
@@ -116,4 +118,5 @@ public abstract class BaseRegionWrapper implements Region, CacheRegistryItem {
 	}
 
 	private EhcacheDataRegion _ehcacheDataRegion;
+
 }

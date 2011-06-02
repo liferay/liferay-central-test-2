@@ -46,9 +46,10 @@ import org.hibernate.cache.TimestampsRegion;
  * @author Edward Han
  */
 public class LiferayEhcacheRegionFactory extends EhCacheRegionFactory {
+
 	public LiferayEhcacheRegionFactory(Properties properties) {
-        super(properties);
-    }
+		super(properties);
+	}
 
 	public CollectionRegion buildCollectionRegion(
 			String regionName, Properties properties,
@@ -58,7 +59,7 @@ public class LiferayEhcacheRegionFactory extends EhCacheRegionFactory {
 		configureCache(regionName);
 
 		EhcacheCollectionRegion ehcacheCollectionRegion =
-			(EhcacheCollectionRegion) super.buildCollectionRegion(
+			(EhcacheCollectionRegion)super.buildCollectionRegion(
 				regionName, properties, cacheDataDescription);
 
 		return new CollectionRegionWrapper(ehcacheCollectionRegion);
@@ -72,7 +73,7 @@ public class LiferayEhcacheRegionFactory extends EhCacheRegionFactory {
 		configureCache(regionName);
 
 		EhcacheEntityRegion ehcacheEntityRegion =
-			(EhcacheEntityRegion) super.buildEntityRegion(
+			(EhcacheEntityRegion)super.buildEntityRegion(
 				regionName, properties, cacheDataDescription);
 
 		return new EntityRegionWrapper(ehcacheEntityRegion);
@@ -85,7 +86,7 @@ public class LiferayEhcacheRegionFactory extends EhCacheRegionFactory {
 		configureCache(regionName);
 
 		EhcacheQueryResultsRegion ehcacheQueryResultsRegion =
-			(EhcacheQueryResultsRegion) super.buildQueryResultsRegion(
+			(EhcacheQueryResultsRegion)super.buildQueryResultsRegion(
 				regionName, properties);
 
 		return new QueryResultsRegionWrapper(ehcacheQueryResultsRegion);
@@ -98,13 +99,13 @@ public class LiferayEhcacheRegionFactory extends EhCacheRegionFactory {
 		configureCache(regionName);
 
 		EhcacheTimestampsRegion ehcacheTimestampsRegion =
-			(EhcacheTimestampsRegion) super.buildTimestampsRegion(
+			(EhcacheTimestampsRegion)super.buildTimestampsRegion(
 				regionName, properties);
 
-		TimestampsRegion region = new TimestampsRegionWrapper(
+		TimestampsRegion timestampsRegion = new TimestampsRegionWrapper(
 			ehcacheTimestampsRegion);
 
-		return region;
+		return timestampsRegion;
 	}
 
 	public CacheManager getCacheManager() {
@@ -122,29 +123,29 @@ public class LiferayEhcacheRegionFactory extends EhCacheRegionFactory {
 			for (CacheConfiguration cacheConfiguration :
 					cacheConfigurations.values()) {
 
-				Ehcache cache = new Cache(cacheConfiguration);
+				Ehcache ehcache = new Cache(cacheConfiguration);
 
-				reconfigureCache(cache);
+				reconfigureCache(ehcache);
 			}
 		}
 	}
 
 	protected void configureCache(String regionName) {
 		synchronized (manager) {
-			Ehcache cache = manager.getEhcache(regionName);
+			Ehcache ehcache = manager.getEhcache(regionName);
 
-			if (cache == null) {
+			if (ehcache == null) {
 				manager.addCache(regionName);
 
-				cache = manager.getEhcache(regionName);
+				ehcache = manager.getEhcache(regionName);
 			}
 
-			if (!(cache instanceof ModifiableEhcacheWrapper)) {
+			if (!(ehcache instanceof ModifiableEhcacheWrapper)) {
 				Ehcache modifiableEhcacheWrapper = new ModifiableEhcacheWrapper(
-					cache);
+					ehcache);
 
 				manager.replaceCacheWithDecoratedCache(
-					cache, modifiableEhcacheWrapper);
+					ehcache, modifiableEhcacheWrapper);
 			}
 		}
 	}
@@ -152,18 +153,20 @@ public class LiferayEhcacheRegionFactory extends EhCacheRegionFactory {
 	protected void reconfigureCache(Ehcache replacementCache) {
  		String cacheName = replacementCache.getName();
 
-		Ehcache cache = manager.getEhcache(cacheName);
+		Ehcache ehcache = manager.getEhcache(cacheName);
 
-		if ((cache != null) && (cache instanceof ModifiableEhcacheWrapper)) {
+		if ((ehcache != null) &&
+			(ehcache instanceof ModifiableEhcacheWrapper)) {
+
 			if (_log.isInfoEnabled()) {
-				_log.info("Reconfiguring Hibernate cache: " + cacheName);
+				_log.info("Reconfiguring Hibernate cache " + cacheName);
 			}
 
 			ModifiableEhcacheWrapper modifiableEhcacheWrapper =
-				(ModifiableEhcacheWrapper) cache;
+				(ModifiableEhcacheWrapper)ehcache;
 
 			manager.replaceCacheWithDecoratedCache(
-				cache, modifiableEhcacheWrapper.getWrappedCache());
+				ehcache, modifiableEhcacheWrapper.getWrappedCache());
 
 			manager.removeCache(cacheName);
 
@@ -176,21 +179,22 @@ public class LiferayEhcacheRegionFactory extends EhCacheRegionFactory {
 		}
 		else {
 			if (_log.isInfoEnabled()) {
-				_log.info("Configuring Hibernate cache: " + cacheName);
+				_log.info("Configuring Hibernate cache " + cacheName);
 			}
 
-			if (cache != null) {
+			if (ehcache != null) {
 				 manager.removeCache(cacheName);
 			}
 
-			cache = new ModifiableEhcacheWrapper(replacementCache);
+			ehcache = new ModifiableEhcacheWrapper(replacementCache);
 
 			manager.addCache(replacementCache);
 
-			manager.replaceCacheWithDecoratedCache(replacementCache, cache);
+			manager.replaceCacheWithDecoratedCache(replacementCache, ehcache);
 		}
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
 		LiferayEhcacheRegionFactory.class);
+
 }

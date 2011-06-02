@@ -38,22 +38,35 @@ public class CollectionRegionWrapper
 			AccessType accessType)
 		throws CacheException {
 
-		return getEhcacheCollectionRegion().buildAccessStrategy(accessType);
+		EhcacheCollectionRegion ehcacheCollectionRegion =
+			getEhcacheCollectionRegion();
+
+		return ehcacheCollectionRegion.buildAccessStrategy(accessType);
 	}
 
 	public CacheDataDescription getCacheDataDescription() {
-		return getEhcacheCollectionRegion().getCacheDataDescription();
+		EhcacheCollectionRegion ehcacheCollectionRegion =
+			getEhcacheCollectionRegion();
+
+		return ehcacheCollectionRegion.getCacheDataDescription();
 	}
 
 	public void invalidate() {
-		getEhcacheCollectionRegion().clear();
+		EhcacheCollectionRegion ehcacheCollectionRegion =
+			getEhcacheCollectionRegion();
+
+		ehcacheCollectionRegion.clear();
 	}
 
 	public boolean isTransactionAware() {
-		return getEhcacheCollectionRegion().isTransactionAware();
+		EhcacheCollectionRegion ehcacheCollectionRegion =
+			getEhcacheCollectionRegion();
+
+		return ehcacheCollectionRegion.isTransactionAware();
 	}
 
 	protected EhcacheCollectionRegion getEhcacheCollectionRegion() {
-		return (EhcacheCollectionRegion) getEhcacheDataRegion();
+		return (EhcacheCollectionRegion)getEhcacheDataRegion();
 	}
+
 }

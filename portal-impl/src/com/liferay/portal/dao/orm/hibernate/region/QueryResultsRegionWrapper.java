@@ -32,26 +32,42 @@ public class QueryResultsRegionWrapper
 	}
 
 	public void evict(Object key) throws CacheException {
-		getEhcacheQueryResultsRegion().evict(key);
+		EhcacheQueryResultsRegion ehcacheQueryResultsRegion =
+			getEhcacheQueryResultsRegion();
+
+		ehcacheQueryResultsRegion.evict(key);
 	}
 
 	public void evictAll() throws CacheException {
-		getEhcacheQueryResultsRegion().evictAll();
+		EhcacheQueryResultsRegion ehcacheQueryResultsRegion =
+			getEhcacheQueryResultsRegion();
+
+		ehcacheQueryResultsRegion.evictAll();
 	}
 
 	public Object get(Object key) throws CacheException {
-		return getEhcacheQueryResultsRegion().get(key);
+		EhcacheQueryResultsRegion ehcacheQueryResultsRegion =
+			getEhcacheQueryResultsRegion();
+
+		return ehcacheQueryResultsRegion.get(key);
 	}
 
 	public void invalidate() {
-		getEhcacheQueryResultsRegion().evictAll();
+		EhcacheQueryResultsRegion ehcacheQueryResultsRegion =
+			getEhcacheQueryResultsRegion();
+
+		ehcacheQueryResultsRegion.evictAll();
 	}
 
 	public void put(Object key, Object value) throws CacheException {
-		getEhcacheQueryResultsRegion().put(key, value);
+		EhcacheQueryResultsRegion ehcacheQueryResultsRegion =
+			getEhcacheQueryResultsRegion();
+
+		ehcacheQueryResultsRegion.put(key, value);
 	}
 
 	protected EhcacheQueryResultsRegion getEhcacheQueryResultsRegion() {
-		return (EhcacheQueryResultsRegion) getEhcacheDataRegion();
+		return (EhcacheQueryResultsRegion)getEhcacheDataRegion();
 	}
+
 }
