@@ -1777,6 +1777,8 @@ public interface PropsKeys {
 
 	public static final String THEME_IMAGES_FAST_LOAD = "theme.images.fast.load";
 
+	public static final String THEME_JSP_OVERRIDE_ENABLED = "theme.jsp.override.enabled";
+
 	public static final String THEME_LOADER_NEW_THEME_ID_ON_IMPORT = "theme.loader.new.theme.id.on.import";
 
 	public static final String THEME_LOADER_STORAGE_PATH = "theme.loader.storage.path";

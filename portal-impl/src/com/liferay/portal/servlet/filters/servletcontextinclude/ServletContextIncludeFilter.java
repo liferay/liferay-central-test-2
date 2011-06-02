@@ -27,6 +27,7 @@ import com.liferay.portal.service.ThemeLocalServiceUtil;
 import com.liferay.portal.servlet.filters.BasePortalFilter;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
 
 import javax.servlet.FilterChain;
@@ -45,6 +46,10 @@ public class ServletContextIncludeFilter extends BasePortalFilter {
 		HttpServletRequest request, HttpServletResponse response) {
 
 		try {
+			if (!PropsValues.THEME_JSP_OVERRIDE_ENABLED) {
+				return false;
+			}
+
 			Theme theme = getTheme(request);
 
 			if (theme == null) {

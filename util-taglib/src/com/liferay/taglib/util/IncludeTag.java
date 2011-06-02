@@ -375,6 +375,10 @@ public class IncludeTag extends AttributesTagSupport {
 	protected boolean themeResourceExists(String page)
 		throws Exception {
 
+		if (!_THEME_JSP_OVERRIDE_ENABLED) {
+			return false;
+		}
+
 		ServletContext servletContext = getServletContext();
 		HttpServletRequest request = getServletRequest();
 
@@ -431,6 +435,10 @@ public class IncludeTag extends AttributesTagSupport {
 
 	private static final String _LIFERAY_REQUEST_DISPATCHER =
 		"com.liferay.portal.apache.bridges.struts.LiferayRequestDispatcher";
+
+	private static final boolean _THEME_JSP_OVERRIDE_ENABLED =
+		GetterUtil.getBoolean(
+			PropsUtil.get(PropsKeys.THEME_JSP_OVERRIDE_ENABLED));
 
 	private static final boolean _TRIM_NEW_LINES = false;
 

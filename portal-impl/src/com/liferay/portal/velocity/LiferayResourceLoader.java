@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.util.PropsValues;
 
+import java.io.IOException;
 import java.io.InputStream;
 
 import org.apache.commons.collections.ExtendedProperties;
@@ -99,6 +100,37 @@ public class LiferayResourceLoader extends ResourceLoader {
 
 		return false;
 	}
+
+	public boolean resourceExists(String resourceName) {
+        InputStream is = null;
+
+        try {
+            is = getResourceStream(resourceName);
+        }
+        catch (ResourceNotFoundException e) {
+            if(_log.isDebugEnabled()) {
+                _log.debug(
+					"Could not load resource '" + resourceName +
+					"' from ResourceLoader " + getClass().getName() + ": ", e);
+			}
+        }
+		finally {
+            try {
+                if (is != null) {
+                    is.close();
+				}
+            }
+            catch (IOException e) {
+			}
+        }
+
+		if (is != null) {
+			return true;
+		}
+        else {
+			return false;
+		}
+    }
 
 	private static Log _log = LogFactoryUtil.getLog(
 		LiferayResourceLoader.class);
