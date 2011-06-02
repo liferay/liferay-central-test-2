@@ -14,6 +14,7 @@
 
 package com.liferay.portal.apache.bridges.struts;
 
+import com.liferay.portal.kernel.servlet.PipingServletResponse;
 import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.StringPool;
@@ -190,16 +191,18 @@ public class LiferayRequestDispatcher implements RequestDispatcher {
 	}
 
 	protected HttpServletResponse getPortletServletResponse(
-		ServletResponse servletResponse, PortletRequest portletRequest,
-		PortletResponse portletResponse, boolean include) {
+			ServletResponse servletResponse, PortletRequest portletRequest,
+			PortletResponse portletResponse, boolean include)
+		throws IOException {
 
 		HttpServletResponse response = (HttpServletResponse)servletResponse;
 
 		PortletResponseImpl portletResponseImpl =
 			(PortletResponseImpl)portletResponse;
 
-		return new PortletServletResponse(
-			response, portletResponseImpl, include);
+		return new PipingServletResponse(
+			new PortletServletResponse(response, portletResponseImpl, include),
+			servletResponse.getWriter());
 	}
 
 	protected Set<String> getServletURLPatterns(
