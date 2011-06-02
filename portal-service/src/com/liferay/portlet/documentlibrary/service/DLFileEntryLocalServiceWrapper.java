@@ -520,8 +520,7 @@ public class DLFileEntryLocalServiceWrapper implements DLFileEntryLocalService {
 	}
 
 	public void unlockFileEntry(long fileEntryId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		_dlFileEntryLocalService.unlockFileEntry(fileEntryId);
 	}
 

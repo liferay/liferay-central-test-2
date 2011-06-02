@@ -435,8 +435,7 @@ public interface DLFileEntryLocalService {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public void unlockFileEntry(long fileEntryId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException;
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portlet.asset.model.AssetEntry updateAsset(long userId,
 		com.liferay.portlet.documentlibrary.model.DLFileEntry dlFileEntry,

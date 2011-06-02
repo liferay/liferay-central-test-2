@@ -522,8 +522,7 @@ public class DLFileEntryLocalServiceUtil {
 	}
 
 	public static void unlockFileEntry(long fileEntryId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		getService().unlockFileEntry(fileEntryId);
 	}
 
