@@ -14,7 +14,7 @@
 
 package com.liferay.portalweb.portal;
 
-import com.liferay.portalweb.plugins.knowledgebasedisplay.KnowledgeBaseDisplayTests;
+import com.liferay.portalweb.plugins.knowledgebase.KnowledgeBaseTests;
 import com.liferay.portalweb.portal.login.LoginTests;
 
 import junit.framework.Test;
@@ -23,13 +23,13 @@ import junit.framework.TestSuite;
 /**
  * @author Brian Wing Shun Chan
  */
-public class PluginsKnowledgeBaseDisplayTestSuite extends BaseTests {
+public class PluginsKnowledgeBaseTestSuite extends BaseTests {
 
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
 		testSuite.addTest(LoginTests.suite());
-		testSuite.addTest(KnowledgeBaseDisplayTests.suite());
+		testSuite.addTest(KnowledgeBaseTests.suite());
 
 		testSuite.addTestSuite(StopSeleniumTest.class);
 
