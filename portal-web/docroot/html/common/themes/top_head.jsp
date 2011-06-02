@@ -65,6 +65,24 @@ if (layout != null) {
 		portlets.add(PortletLocalServiceUtil.getPortletById(company.getCompanyId(), ppid));
 	}
 
+	Set<String> runtimePortletIds = (Set<String>)request.getAttribute(WebKeys.RUNTIME_PORTLET_IDS);
+
+	if (runtimePortletIds != null) {
+		if (portlets == null) {
+			portlets = new ArrayList<Portlet>();
+		}
+
+		Iterator<String> runtimePortletIdsItr = runtimePortletIds.iterator();
+
+		while (runtimePortletIdsItr.hasNext()) {
+			String runtimePortletId = runtimePortletIdsItr.next();
+
+			String runtimeRootPortletId = PortletConstants.getRootPortletId(runtimePortletId);
+
+			portlets.add(PortletLocalServiceUtil.getPortletById(runtimeRootPortletId));
+		}
+	}
+
 	if (themeDisplay.isShowStagingIcon()) {
 		portlets.add(PortletLocalServiceUtil.getPortletById(company.getCompanyId(), PortletKeys.STAGING_BAR));
 	}
