@@ -21,9 +21,14 @@
 >
 
 	<%
-	buffer.append("<a href=\"");
-	buffer.append(rowURL);
-	buffer.append("\">");
+	buffer.append("<a ");
+
+	if (rowURL != null) {
+		buffer.append("href=\"");
+		buffer.append(rowURL);
+		buffer.append("\">");
+	}
+
 	buffer.append("<img align=\"left\" border=\"0\" style=\"margin: 0px 5px 0px 0px;\" src=\"");
 	buffer.append(themeDisplay.getPathThemeImages());
 	buffer.append("/common/organization_icon.png\">");
@@ -58,6 +63,14 @@
 	}
 
 	if (suborganizationsCount > 0) {
+	%>
+
+		<liferay-portlet:renderURL varImpl="viewOrganizationURL">
+			<portlet:param name="struts_action" value="/enterprise_admin_organizations/view" />
+			<portlet:param name="usersListView" value="<%= UserConstants.LIST_VIEW_TREE %>" />
+		</liferay-portlet:renderURL>
+
+		<%
 		buffer.append("<br /><u>");
 		buffer.append((suborganizationsCount == 1) ? LanguageUtil.format(pageContext, "x-suborganization", String.valueOf(suborganizationsCount)) : LanguageUtil.format(pageContext, "x-suborganizations", String.valueOf(suborganizationsCount)));
 		buffer.append("</u>: ");
@@ -65,13 +78,18 @@
 		for (int k = 0; k < suborganizations.size(); k++) {
 			Organization suborganization = (Organization)suborganizations.get(k);
 
-			rowURL.setParameter("organizationId", String.valueOf(suborganization.getOrganizationId()));
+			if (OrganizationPermissionUtil.contains(permissionChecker, suborganization.getOrganizationId(), ActionKeys.VIEW)) {
+				viewOrganizationURL.setParameter("organizationId", String.valueOf(suborganization.getOrganizationId()));
 
-			buffer.append("<a href=\"");
-			buffer.append(rowURL);
-			buffer.append("\">");
-			buffer.append(suborganization.getName());
-			buffer.append("</a>");
+				buffer.append("<a href=\"");
+				buffer.append(viewOrganizationURL);
+				buffer.append("\">");
+				buffer.append(suborganization.getName());
+				buffer.append("</a>");
+			}
+			else {
+				buffer.append(suborganization.getName());
+			}
 
 			if ((k + 1) < suborganizations.size()) {
 				buffer.append(", ");
@@ -79,17 +97,29 @@
 		}
 
 		if (suborganizationsCount > suborganizations.size()) {
-			rowURL.setParameter("organizationId", String.valueOf(curOrganization.getOrganizationId()));
+		%>
+
+			<liferay-portlet:renderURL varImpl="viewSuborganizationsURL">
+				<portlet:param name="struts_action" value="/enterprise_admin/view" />
+				<portlet:param name="tabs1" value="users" />
+				<portlet:param name="viewUsersRedirect" value="<%= currentURL %>" />
+				<portlet:param name="parentOrganizationId" value="<%= String.valueOf(curOrganization.getOrganizationId()) %>" />
+				<portlet:param name="usersListView" value="<%= UserConstants.LIST_VIEW_FLAT_ORGANIZATIONS %>" />
+				<portlet:param name="saveUsersListView" value="<%= Boolean.FALSE.toString() %>" />
+			</liferay-portlet:renderURL>
+
+			<%
+			if (rowURL != null) {
+				viewSuborganizationsURL = rowURL;
+			}
 
 			buffer.append(", <a href=\"");
-			buffer.append(rowURL);
+			buffer.append(viewSuborganizationsURL);
 			buffer.append("\">");
 			buffer.append(LanguageUtil.get(pageContext, "more"));
 			buffer.append(" &raquo;");
 			buffer.append("</a>");
 		}
-
-		rowURL.setParameter("organizationId", String.valueOf(curOrganization.getOrganizationId()));
 	}
 
 	LinkedHashMap userParams = new LinkedHashMap();
@@ -139,13 +169,18 @@
 		for (int k = 0; k < organizationUsers.size(); k++) {
 			User organizationUser = (User)organizationUsers.get(k);
 
-			viewUserURL.setParameter("p_u_i_d", String.valueOf(organizationUser.getUserId()));
+			if (UserPermissionUtil.contains(permissionChecker, organizationUser.getUserId(), ActionKeys.UPDATE)) {
+				viewUserURL.setParameter("p_u_i_d", String.valueOf(organizationUser.getUserId()));
 
-			buffer.append("<a href=\"");
-			buffer.append(viewUserURL);
-			buffer.append("\">");
-			buffer.append(organizationUser.getFullName());
-			buffer.append("</a>");
+				buffer.append("<a href=\"");
+				buffer.append(viewUserURL);
+				buffer.append("\">");
+				buffer.append(organizationUser.getFullName());
+				buffer.append("</a>");
+			}
+			else {
+				buffer.append(organizationUser.getFullName());
+			}
 
 			if ((k + 1) < organizationUsers.size()) {
 				buffer.append(", ");
@@ -153,17 +188,29 @@
 		}
 
 		if (organizationUserCount > organizationUsers.size()) {
-			rowURL.setParameter("organizationId", String.valueOf(curOrganization.getOrganizationId()));
+		%>
+
+			<liferay-portlet:renderURL varImpl="viewUsersURL">
+				<portlet:param name="struts_action" value="/enterprise_admin/view" />
+				<portlet:param name="tabs1" value="users" />
+				<portlet:param name="viewUsersRedirect" value="<%= currentURL %>" />
+				<portlet:param name="organizationId" value="<%= String.valueOf(curOrganization.getOrganizationId()) %>" />
+				<portlet:param name="usersListView" value="<%= UserConstants.LIST_VIEW_FLAT_USERS %>" />
+				<portlet:param name="saveUsersListView" value="<%= Boolean.FALSE.toString() %>" />
+			</liferay-portlet:renderURL>
+
+			<%
+			if (rowURL != null) {
+				viewUsersURL = rowURL;
+			}
 
 			buffer.append(", <a href=\"");
-			buffer.append(rowURL);
+			buffer.append(viewUsersURL);
 			buffer.append("\">");
 			buffer.append(LanguageUtil.get(pageContext, "more"));
 			buffer.append(" &raquo;");
 			buffer.append("</a>");
 		}
-
-		rowURL.setParameter("organizationId", String.valueOf(curOrganization.getOrganizationId()));
 	}
 	%>
 

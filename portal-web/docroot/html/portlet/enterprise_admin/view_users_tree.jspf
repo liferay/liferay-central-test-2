@@ -254,6 +254,12 @@ int organizationsCount = OrganizationLocalServiceUtil.searchCount(company.getCom
 					<portlet:param name="usersListView" value="<%= UserConstants.LIST_VIEW_TREE %>" />
 				</liferay-portlet:renderURL>
 
+				<%
+				if (!OrganizationPermissionUtil.contains(permissionChecker, curOrganization.getOrganizationId(), ActionKeys.VIEW)) {
+					rowURL = null;
+				}
+				%>
+
 				<%@ include file="/html/portlet/enterprise_admin/organization/organization_columns.jspf" %>
 			</liferay-ui:search-container-row>
 
