@@ -23,16 +23,30 @@ AssetRenderer assetRenderer = (AssetRenderer)request.getAttribute("view.jsp-asse
 
 PortletURL editPortletURL = assetRenderer.getURLEdit(liferayPortletRequest, liferayPortletResponse);
 
+String editPortletURLString = StringPool.BLANK;
+
 if (editPortletURL != null) {
 	editPortletURL.setWindowState(LiferayWindowState.POP_UP);
 	editPortletURL.setPortletMode(PortletMode.VIEW);
-}
 
-if (Validator.isNotNull(portletResource)) {
-	editPortletURL.setParameter("referringPortletResource", portletResource);
-}
-else {
-	editPortletURL.setParameter("referringPortletResource", portletDisplay.getId());
+	if (Validator.isNotNull(portletResource)) {
+		editPortletURL.setParameter("referringPortletResource", portletResource);
+	}
+	else {
+		editPortletURL.setParameter("referringPortletResource", portletDisplay.getId());
+	}
+
+	PortletURL redirectURL = renderResponse.createRenderURL();
+
+	redirectURL.setWindowState(LiferayWindowState.POP_UP);
+
+	redirectURL.setParameter("struts_action", "/asset_publisher/add_asset_redirect");
+
+	editPortletURL.setParameter("redirect", HtmlUtil.escapeURL(redirectURL.toString()));
+
+	editPortletURLString = editPortletURL.toString();
+
+	editPortletURLString = HttpUtil.addParameter(editPortletURLString, "refererPlid", plid);
 }
 
 Group stageableGroup = themeDisplay.getScopeGroup();
@@ -42,11 +56,11 @@ if (themeDisplay.getScopeGroup().isLayout()) {
 }
 %>
 
-<c:if test="<%= assetRenderer.hasEditPermission(permissionChecker) && (editPortletURL != null) && !stageableGroup.hasStagingGroup() %>">
+<c:if test="<%= assetRenderer.hasEditPermission(permissionChecker) && Validator.isNotNull(editPortletURLString) && !stageableGroup.hasStagingGroup() %>">
 	<div class="lfr-meta-actions asset-actions">
 
 		<%
-		String taglibEditURL = "javascript:Liferay.Util.openWindow({dialog: {width: 960}, id: '" + renderResponse.getNamespace() + "', title: '" + LanguageUtil.format(pageContext, "edit-x", HtmlUtil.escape(assetRenderer.getTitle(locale))) + "', uri:'" + editPortletURL.toString() + "'});";
+		String taglibEditURL = "javascript:Liferay.Util.openWindow({dialog: {width: 960}, id: '" + renderResponse.getNamespace() + "', title: '" + LanguageUtil.format(pageContext, "edit-x", HtmlUtil.escape(assetRenderer.getTitle(locale))) + "', uri:'" + editPortletURLString + "'});";
 		%>
 
 		<liferay-ui:icon
