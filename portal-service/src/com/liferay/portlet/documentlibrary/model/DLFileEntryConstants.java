@@ -30,6 +30,8 @@ public class DLFileEntryConstants {
 		GetterUtil.getLong(
 			PropsUtil.get("lock.expiration.time" + getClassName()));
 
+	public static final String PRIVATE_WORKING_COPY_VERSION = "PWC";
+
 	public static String getClassName() {
 		return DLFileEntry.class.getName();
 	}

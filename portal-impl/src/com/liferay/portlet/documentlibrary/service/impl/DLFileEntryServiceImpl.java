@@ -20,7 +20,9 @@ import com.liferay.portal.NoSuchLockException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.model.Lock;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.ServiceContext;
@@ -59,6 +61,59 @@ public class DLFileEntryServiceImpl extends DLFileEntryServiceBaseImpl {
 			changeLog, is, size, serviceContext);
 	}
 
+	public void cancelCheckOut(long fileEntryId)
+		throws PortalException, SystemException {
+
+		try {
+			DLFileEntryPermission.check(
+				getPermissionChecker(), fileEntryId, ActionKeys.UPDATE);
+		}
+		catch (NoSuchFileEntryException nsfee) {
+		}
+
+		dlFileEntryLocalService.cancelCheckOut(getUserId(), fileEntryId);
+	}
+
+	public void checkInFileEntry(
+			long fileEntryId, boolean major, String changeLog,
+			ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		try {
+			DLFileEntryPermission.check(
+				getPermissionChecker(), fileEntryId, ActionKeys.UPDATE);
+		}
+		catch (NoSuchFileEntryException nsfee) {
+		}
+
+		dlFileEntryLocalService.checkInFileEntry(
+			getUserId(), fileEntryId, major, changeLog, serviceContext);
+	}
+
+	public DLFileEntry checkOutFileEntry(long fileEntryId)
+		throws PortalException, SystemException {
+
+		return checkOutFileEntry(
+			fileEntryId, null, DLFileEntryImpl.LOCK_EXPIRATION_TIME);
+	}
+
+	public DLFileEntry checkOutFileEntry(
+			long fileEntryId, String owner, long expirationTime)
+		throws PortalException, SystemException {
+
+		DLFileEntryPermission.check(
+			getPermissionChecker(), fileEntryId, ActionKeys.UPDATE);
+
+		if ((expirationTime <= 0) ||
+			(expirationTime > DLFileEntryImpl.LOCK_EXPIRATION_TIME)) {
+
+			expirationTime = DLFileEntryImpl.LOCK_EXPIRATION_TIME;
+		}
+
+		return dlFileEntryLocalService.checkOutFileEntry(
+			getUserId(), fileEntryId, owner, expirationTime);
+	}
+
 	public void copyFileEntry(
 			long groupId, long repositoryId, long fileEntryId,
 			long destFolderId, ServiceContext serviceContext)
@@ -82,24 +137,7 @@ public class DLFileEntryServiceImpl extends DLFileEntryServiceBaseImpl {
 		DLFileEntryPermission.check(
 			getPermissionChecker(), fileEntryId, ActionKeys.DELETE);
 
-		boolean hasLock = hasFileEntryLock(fileEntryId);
-
-		if (!hasLock) {
-
-			// Lock
-
-			lockFileEntry(fileEntryId);
-		}
-
-		try {
-			dlFileEntryLocalService.deleteFileEntry(fileEntryId);
-		}
-		finally {
-
-			// Unlock
-
-			unlockFileEntry(fileEntryId);
-		}
+		dlFileEntryLocalService.deleteFileEntry(getUserId(), fileEntryId);
 	}
 
 	public void deleteFileEntry(long groupId, long folderId, String title)
@@ -329,31 +367,9 @@ public class DLFileEntryServiceImpl extends DLFileEntryServiceBaseImpl {
 		DLFileEntryPermission.check(
 			getPermissionChecker(), fileEntryId, ActionKeys.UPDATE);
 
-		boolean hasLock = hasFileEntryLock(fileEntryId);
+		return dlFileEntryLocalService.moveFileEntry(
+			getUserId(), fileEntryId, newFolderId, serviceContext);
 
-		if (!hasLock) {
-
-			// Lock
-
-			lockFileEntry(fileEntryId);
-		}
-
-		DLFileEntry dlFileEntry = null;
-
-		try {
-			dlFileEntry = dlFileEntryLocalService.moveFileEntry(
-				getUserId(), fileEntryId, newFolderId, serviceContext);
-		}
-		finally {
-			if (!hasLock) {
-
-				// Unlock
-
-				unlockFileEntry(fileEntryId);
-			}
-		}
-
-		return dlFileEntry;
 	}
 
 	public Lock refreshFileEntryLock(String lockUuid, long expirationTime)
@@ -369,25 +385,8 @@ public class DLFileEntryServiceImpl extends DLFileEntryServiceBaseImpl {
 		DLFileEntryPermission.check(
 			getPermissionChecker(), fileEntryId, ActionKeys.UPDATE);
 
-		boolean hasLock = hasFileEntryLock(fileEntryId);
-
-		if (!hasLock) {
-
-			// Lock
-
-			lockFileEntry(fileEntryId);
-		}
-
-		try {
-			dlFileEntryLocalService.revertFileEntry(
-				getUserId(), fileEntryId, version, serviceContext);
-		}
-		finally {
-
-			// Unlock
-
-			unlockFileEntry(fileEntryId);
-		}
+		dlFileEntryLocalService.revertFileEntry(
+			getUserId(), fileEntryId, version, serviceContext);
 	}
 
 	public void unlockFileEntry(long fileEntryId)
@@ -444,30 +443,11 @@ public class DLFileEntryServiceImpl extends DLFileEntryServiceBaseImpl {
 		DLFileEntryPermission.check(
 			getPermissionChecker(), fileEntryId, ActionKeys.UPDATE);
 
-		boolean hasLock = hasFileEntryLock(fileEntryId);
-
-		if (!hasLock) {
-
-			// Lock
-
-			lockFileEntry(fileEntryId);
-		}
-
 		DLFileEntry dlFileEntry = null;
 
-		try {
-			dlFileEntry = dlFileEntryLocalService.updateFileEntry(
-				getUserId(), fileEntryId, sourceFileName, title, description,
-				changeLog, majorVersion, is, size, serviceContext);
-		}
-		finally {
-			if (!hasLock) {
-
-				// Unlock
-
-				unlockFileEntry(fileEntryId);
-			}
-		}
+		dlFileEntry = dlFileEntryLocalService.updateFileEntry(
+			getUserId(), fileEntryId, sourceFileName, title, description,
+			changeLog, majorVersion, is, size, serviceContext);
 
 		return dlFileEntry;
 	}
