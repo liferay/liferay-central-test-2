@@ -286,6 +286,14 @@ public class LayoutSetPrototypeLocalServiceWrapper
 			nameMap, description, active, serviceContext);
 	}
 
+	public com.liferay.portal.model.LayoutSetPrototype updateLayoutSetPrototype(
+		long layoutSetPrototypeId, java.lang.String settings)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _layoutSetPrototypeLocalService.updateLayoutSetPrototype(layoutSetPrototypeId,
+			settings);
+	}
+
 	public LayoutSetPrototypeLocalService getWrappedLayoutSetPrototypeLocalService() {
 		return _layoutSetPrototypeLocalService;
 	}

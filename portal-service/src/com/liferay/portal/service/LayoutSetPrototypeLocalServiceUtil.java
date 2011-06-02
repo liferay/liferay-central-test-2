@@ -293,6 +293,14 @@ public class LayoutSetPrototypeLocalServiceUtil {
 			description, active, serviceContext);
 	}
 
+	public static com.liferay.portal.model.LayoutSetPrototype updateLayoutSetPrototype(
+		long layoutSetPrototypeId, java.lang.String settings)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .updateLayoutSetPrototype(layoutSetPrototypeId, settings);
+	}
+
 	public static LayoutSetPrototypeLocalService getService() {
 		if (_service == null) {
 			_service = (LayoutSetPrototypeLocalService)PortalBeanLocatorUtil.locate(LayoutSetPrototypeLocalService.class.getName());

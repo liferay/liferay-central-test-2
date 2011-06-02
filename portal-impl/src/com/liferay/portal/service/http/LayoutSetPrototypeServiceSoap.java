@@ -107,5 +107,21 @@ public class LayoutSetPrototypeServiceSoap {
 		}
 	}
 
+	public static com.liferay.portal.model.LayoutSetPrototypeSoap updateLayoutSetPrototype(
+		long layoutSetPrototypeId, java.lang.String settings)
+		throws RemoteException {
+		try {
+			com.liferay.portal.model.LayoutSetPrototype returnValue = LayoutSetPrototypeServiceUtil.updateLayoutSetPrototype(layoutSetPrototypeId,
+					settings);
+
+			return com.liferay.portal.model.LayoutSetPrototypeSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	private static Log _log = LogFactoryUtil.getLog(LayoutSetPrototypeServiceSoap.class);
 }
