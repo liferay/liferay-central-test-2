@@ -29,15 +29,7 @@ String orderByType = ParamUtil.getString(request, "orderByType");
 
 <aui:input cssClass="select-documents aui-state-default" inline="<%= true %>" label="" name='<%= RowChecker.ALL_ROW_IDS %>' type="checkbox" />
 
-<span class="add-button" id="<portlet:namespace />addButtonContainer">
-	<liferay-util:include page="/html/portlet/document_library/add_button.jsp" />
-</span>
-
-<span class="sort-button" id="<portlet:namespace />sortButtonContainer">
-	<liferay-util:include page="/html/portlet/document_library/sort_button.jsp" />
-</span>
-
-<liferay-ui:icon-menu align="left" direction="down" icon="" message="actions" showExpanded="<%= false %>" showWhenSingleIcon="<%= false %>">
+<liferay-ui:icon-menu align="left" cssClass="actions-button" direction="down" icon="" message="actions" showExpanded="<%= false %>" showWhenSingleIcon="<%= false %>">
 
 	<%
 	String taglibUrl = "javascript:" + renderResponse.getNamespace() + "editFileEntry('" + Constants.LOCK + "')";
@@ -75,6 +67,14 @@ String orderByType = ParamUtil.getString(request, "orderByType");
 		url="<%= taglibUrl %>"
 	/>
 </liferay-ui:icon-menu>
+
+<span class="add-button" id="<portlet:namespace />addButtonContainer">
+	<liferay-util:include page="/html/portlet/document_library/add_button.jsp" />
+</span>
+
+<span class="sort-button" id="<portlet:namespace />sortButtonContainer">
+	<liferay-util:include page="/html/portlet/document_library/sort_button.jsp" />
+</span>
 
 <span class="manage-button">
 	<liferay-ui:icon-menu align="left" direction="down" icon="" message="manage" showExpanded="<%= false %>" showWhenSingleIcon="<%= true %>">

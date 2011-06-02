@@ -106,7 +106,6 @@
 
 	.select-documents {
 		float: left;
-		margin-right: 2em;
 
 		.aui-field-element {
 			border-width: 0;
@@ -435,9 +434,12 @@
 			float: left;
 		}
 
+		.toolbar .actions-button {
+			margin-right: 2em;
+		}
+
 		.toolbar .manage-button {
 			display: inline-block;
-			margin-left: 30px;
 		}
 
 		.display-style {
