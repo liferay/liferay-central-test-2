@@ -15,7 +15,6 @@
 package com.liferay.portal.util;
 
 import com.liferay.portal.NoSuchCompanyException;
-import com.liferay.portal.NoSuchVirtualHostException;
 import com.liferay.portal.events.EventsProcessorUtil;
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.dao.shard.ShardUtil;
