@@ -102,35 +102,36 @@ public class LiferayResourceLoader extends ResourceLoader {
 	}
 
 	public boolean resourceExists(String resourceName) {
-        InputStream is = null;
+		InputStream is = null;
 
-        try {
-            is = getResourceStream(resourceName);
-        }
-        catch (ResourceNotFoundException e) {
-            if(_log.isDebugEnabled()) {
-                _log.debug(
-					"Could not load resource '" + resourceName +
-					"' from ResourceLoader " + getClass().getName() + ": ", e);
+		try {
+			is = getResourceStream(resourceName);
+		}
+		catch (ResourceNotFoundException rnfe) {
+			if (_log.isDebugEnabled()) {
+				_log.debug(
+					"Could not load resource " + resourceName + " from " +
+						getClass(),
+					rnfe);
 			}
-        }
+		}
 		finally {
-            try {
-                if (is != null) {
-                    is.close();
+			try {
+				if (is != null) {
+					is.close();
 				}
-            }
-            catch (IOException e) {
 			}
-        }
+			catch (IOException ioe) {
+			}
+		}
 
 		if (is != null) {
 			return true;
 		}
-        else {
+		else {
 			return false;
 		}
-    }
+	}
 
 	private static Log _log = LogFactoryUtil.getLog(
 		LiferayResourceLoader.class);
