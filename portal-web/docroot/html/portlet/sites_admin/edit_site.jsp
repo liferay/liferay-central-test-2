@@ -115,16 +115,47 @@ else if (layoutSetPrototype != null) {
 				<br />
 
 				<aui:fieldset label="pages">
+
+					<%
+					Set<String> servletContextNames = CustomJspRegistryUtil.getServletContextNames();
+
+					String customJspServletContextName = StringPool.BLANK;
+
+					if (group != null) {
+						UnicodeProperties typeSettingsProperties = group.getTypeSettingsProperties();
+
+						customJspServletContextName = GetterUtil.getString(typeSettingsProperties.get("customJspServletContextName"));
+					}
+					%>
+
+					<aui:select helpMessage="changing-the-application-adapter-may-cause-this-site-to-appear-and-behave-differently" label="application-adapter" name="customJspServletContextName">
+						<aui:option label="none" value="" />
+
+						<%
+						for (String servletContextName : servletContextNames) {
+						%>
+
+							<aui:option label="<%= servletContextName %>" selected="<%= customJspServletContextName.equals(servletContextName) %>" value="<%= servletContextName %>" />
+
+						<%
+						}
+						%>
+
+					</aui:select>
+
 					<c:choose>
 						<c:when test="<%= ((group == null) || (group.getPublicLayoutsPageCount() == 0)) && !layoutSetPrototypes.isEmpty() %>">
-							<aui:select label="public-pages" name="publicLayoutSetPrototypeId">
+							<aui:select helpMessage="site-templates-with-an-incompatible-application-adapter-are-disabled" label="public-pages" name="publicLayoutSetPrototypeId">
 								<aui:option label="none" selected="<%= true %>" value="" />
 
 								<%
 								for (LayoutSetPrototype curLayoutSetPrototype : layoutSetPrototypes) {
+									UnicodeProperties settingsProperties = curLayoutSetPrototype.getSettingsProperties();
+
+									String servletContextName = settingsProperties.getProperty("customJspServletContextName", StringPool.BLANK);
 								%>
 
-									<aui:option value="<%= curLayoutSetPrototype.getLayoutSetPrototypeId() %>"><%= curLayoutSetPrototype.getName(user.getLanguageId()) %></aui:option>
+									<aui:option data-servletContextName="<%= servletContextName %>" value="<%= curLayoutSetPrototype.getLayoutSetPrototypeId() %>"><%= curLayoutSetPrototype.getName(user.getLanguageId()) %></aui:option>
 
 								<%
 								}
@@ -161,14 +192,17 @@ else if (layoutSetPrototype != null) {
 
 					<c:choose>
 						<c:when test="<%= ((group == null) || (group.getPrivateLayoutsPageCount() == 0)) && !layoutSetPrototypes.isEmpty() %>">
-							<aui:select label="private-pages" name="privateLayoutSetPrototypeId">
+							<aui:select helpMessage="site-templates-with-an-incompatible-application-adapter-are-disabled" label="private-pages" name="privateLayoutSetPrototypeId">
 								<aui:option label="none" selected="<%= true %>" value="" />
 
 								<%
 								for (LayoutSetPrototype curLayoutSetPrototype : layoutSetPrototypes) {
+									UnicodeProperties settingsProperties = curLayoutSetPrototype.getSettingsProperties();
+
+									String servletContextName = settingsProperties.getProperty("customJspServletContextName", StringPool.BLANK);
 								%>
 
-									<aui:option value="<%= curLayoutSetPrototype.getLayoutSetPrototypeId() %>"><%= curLayoutSetPrototype.getName(user.getLanguageId()) %></aui:option>
+									<aui:option data-servletContextName="<%= servletContextName %>" value="<%= curLayoutSetPrototype.getLayoutSetPrototypeId() %>"><%= curLayoutSetPrototype.getName(user.getLanguageId()) %></aui:option>
 
 								<%
 								}
@@ -229,38 +263,6 @@ else if (layoutSetPrototype != null) {
 				</aui:fieldset>
 			</c:when>
 		</c:choose>
-
-		<%
-		Set<String> servletContextNames = CustomJspRegistryUtil.getServletContextNames();
-		%>
-
-		<c:if test="<%= !servletContextNames.isEmpty() %>">
-
-			<%
-			String customJspServletContextName = StringPool.BLANK;
-
-			if (group != null) {
-				UnicodeProperties typeSettingsProperties = group.getTypeSettingsProperties();
-
-				customJspServletContextName = GetterUtil.getString(typeSettingsProperties.get("customJspServletContextName"));
-			}
-			%>
-
-			<aui:select label="apply-add-on" name="customJspServletContextName">
-				<aui:option label="none" />
-
-				<%
-				for (String servletContextName : servletContextNames) {
-				%>
-
-					<aui:option label="<%= servletContextName %>" selected="<%= customJspServletContextName.equals(servletContextName) %>" value="<%= servletContextName %>" />
-
-				<%
-				}
-				%>
-
-			</aui:select>
-		</c:if>
 	</aui:fieldset>
 
 	<aui:button-row>
@@ -279,6 +281,33 @@ else if (layoutSetPrototype != null) {
 	<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />name);
 	</c:if>
+</aui:script>
+
+<aui:script use="aui-base">
+	var applicationAdapterSelect = A.one('#<portlet:namespace />customJspServletContextName');
+
+	var publicPagesSelect = A.one('#<portlet:namespace />publicLayoutSetPrototypeId');
+	var privatePagesSelect = A.one('#<portlet:namespace />privateLayoutSetPrototypeId');
+
+	var toggleCompatibleSiteTemplates = function() {
+		var siteTemplate = applicationAdapterSelect.get('value');
+
+		if (publicPagesSelect) {
+			var options = publicPagesSelect.all('option[data-servletContextName]').attr('disabled', false);
+
+			options.filter('option:not([data-servletContextName=' + siteTemplate + '])').attr('disabled', true);
+		}
+
+		if (privatePagesSelect) {
+			var options = privatePagesSelect.all('option[data-servletContextName]').attr('disabled', false);
+
+			options.filter('option:not([data-servletContextName=' + siteTemplate + '])').attr('disabled', true);
+		}
+	};
+
+	applicationAdapterSelect.on('change', toggleCompatibleSiteTemplates);
+
+	toggleCompatibleSiteTemplates();
 </aui:script>
 
 <%

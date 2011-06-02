@@ -20,6 +20,8 @@ import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.LocalizationUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.UnicodeProperties;
+import com.liferay.portal.model.LayoutSetPrototype;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.LayoutSetPrototypeServiceUtil;
 import com.liferay.portal.service.ServiceContext;
@@ -41,6 +43,7 @@ import org.apache.struts.action.ActionMapping;
 
 /**
  * @author Brian Wing Shun Chan
+ * @author Ryan Park
  */
 public class EditLayoutSetPrototypeAction extends PortletAction {
 
@@ -127,21 +130,40 @@ public class EditLayoutSetPrototypeAction extends PortletAction {
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			actionRequest);
 
+		LayoutSetPrototype layoutSetPrototype = null;
+
 		if (layoutSetPrototypeId <= 0) {
 
 			// Add layout prototoype
 
-			LayoutSetPrototypeServiceUtil.addLayoutSetPrototype(
-				nameMap, description, active, serviceContext);
+			layoutSetPrototype =
+				LayoutSetPrototypeServiceUtil.addLayoutSetPrototype(
+					nameMap, description, active, serviceContext);
 		}
 		else {
 
 			// Update layout prototoype
 
-			LayoutSetPrototypeServiceUtil.updateLayoutSetPrototype(
-				layoutSetPrototypeId, nameMap, description, active,
-				serviceContext);
+			layoutSetPrototype =
+				LayoutSetPrototypeServiceUtil.updateLayoutSetPrototype(
+					layoutSetPrototypeId, nameMap, description, active,
+					serviceContext);
 		}
+
+		// Custom JSPs
+
+		String customJspServletContextName = ParamUtil.getString(
+			actionRequest, "customJspServletContextName");
+
+		UnicodeProperties settingsProperties =
+			layoutSetPrototype.getSettingsProperties();
+
+		settingsProperties.setProperty(
+			"customJspServletContextName", customJspServletContextName);
+
+		LayoutSetPrototypeServiceUtil.updateLayoutSetPrototype(
+			layoutSetPrototype.getLayoutSetPrototypeId(),
+			settingsProperties.toString());
 	}
 
 }

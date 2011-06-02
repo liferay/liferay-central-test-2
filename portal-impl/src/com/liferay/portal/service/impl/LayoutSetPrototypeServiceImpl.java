@@ -33,6 +33,7 @@ import java.util.Map;
 
 /**
  * @author Brian Wing Shun Chan
+ * @author Ryan Park
  */
 public class LayoutSetPrototypeServiceImpl
 	extends LayoutSetPrototypeServiceBaseImpl {
@@ -106,6 +107,14 @@ public class LayoutSetPrototypeServiceImpl
 
 		return layoutSetPrototypeLocalService.updateLayoutSetPrototype(
 			layoutSetPrototypeId, nameMap, description, active, serviceContext);
+	}
+
+	public LayoutSetPrototype updateLayoutSetPrototype(
+			long layoutSetPrototypeId, String settings)
+		throws PortalException, SystemException {
+
+		return layoutSetPrototypeLocalService.updateLayoutSetPrototype(
+			layoutSetPrototypeId, settings);
 	}
 
 }

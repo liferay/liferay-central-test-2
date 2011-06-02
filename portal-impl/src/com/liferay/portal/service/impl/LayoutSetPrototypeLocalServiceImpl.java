@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portal.model.LayoutSetPrototype;
@@ -32,6 +33,7 @@ import java.util.Map;
 
 /**
  * @author Brian Wing Shun Chan
+ * @author Ryan Park
  */
 public class LayoutSetPrototypeLocalServiceImpl
 	extends LayoutSetPrototypeLocalServiceBaseImpl {
@@ -175,6 +177,46 @@ public class LayoutSetPrototypeLocalServiceImpl
 			layoutSetPrototype.getCompanyId(), layoutSetPrototypeId);
 
 		group.setName(layoutSetPrototype.getName(LocaleUtil.getDefault()));
+
+		groupPersistence.update(group, false);
+
+		return layoutSetPrototype;
+	}
+
+	public LayoutSetPrototype updateLayoutSetPrototype(
+			long layoutSetPrototypeId, String settings)
+		throws PortalException, SystemException {
+
+		// Layout set prototype
+
+		LayoutSetPrototype layoutSetPrototype =
+			layoutSetPrototypePersistence.findByPrimaryKey(
+				layoutSetPrototypeId);
+
+		layoutSetPrototype.setSettings(settings);
+
+		layoutSetPrototypePersistence.update(layoutSetPrototype, false);
+
+		// Group
+
+		UnicodeProperties settingsProperties =
+			layoutSetPrototype.getSettingsProperties();
+
+		if (!settingsProperties.containsKey("customJspServletContextName")) {
+			return layoutSetPrototype;
+		}
+
+		Group group = groupLocalService.getLayoutSetPrototypeGroup(
+			layoutSetPrototype.getCompanyId(), layoutSetPrototypeId);
+
+		UnicodeProperties typeSettingsProperties =
+			group.getTypeSettingsProperties();
+
+		typeSettingsProperties.setProperty(
+			"customJspServletContextName",
+			settingsProperties.getProperty("customJspServletContextName"));
+
+		group.setTypeSettings(typeSettingsProperties.toString());
 
 		groupPersistence.update(group, false);
 

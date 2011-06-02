@@ -28,6 +28,7 @@ import com.liferay.portal.model.LayoutSetPrototype;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
+import com.liferay.portal.service.GroupServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.LayoutServiceUtil;
 import com.liferay.portal.service.LayoutSetPrototypeLocalServiceUtil;
@@ -55,6 +56,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * @author Raymond Augé
+ * @author Ryan Park
  */
 public class CommunitiesUtil {
 
@@ -62,6 +64,8 @@ public class CommunitiesUtil {
 			Group group, long publicLayoutSetPrototypeId,
 			long privateLayoutSetPrototypeId, ServiceContext serviceContext)
 		throws Exception {
+
+		Group sourceGroup = null;
 
 		if (publicLayoutSetPrototypeId > 0) {
 			LayoutSetPrototype layoutSetPrototype =
@@ -73,6 +77,8 @@ public class CommunitiesUtil {
 			copyLayoutSet(
 				layoutSetPrototype.getLayoutSet(), publicLayoutSet,
 				serviceContext);
+
+			sourceGroup = layoutSetPrototype.getGroup();
 		}
 
 		if (privateLayoutSetPrototypeId > 0) {
@@ -85,6 +91,14 @@ public class CommunitiesUtil {
 			copyLayoutSet(
 				layoutSetPrototype.getLayoutSet(), privateLayoutSet,
 				serviceContext);
+
+			if (sourceGroup == null) {
+				sourceGroup = layoutSetPrototype.getGroup();
+			}
+		}
+
+		if (sourceGroup != null) {
+			copyTypeSettings(sourceGroup, group);
 		}
 	}
 
@@ -108,6 +122,13 @@ public class CommunitiesUtil {
 		finally {
 			file.delete();
 		}
+	}
+
+	public static void copyTypeSettings(Group sourceGroup, Group targetGroup)
+		throws Exception {
+
+		GroupServiceUtil.updateGroup(
+			targetGroup.getGroupId(), sourceGroup.getTypeSettings());
 	}
 
 	public static void deleteLayout(

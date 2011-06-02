@@ -79,6 +79,33 @@ Locale[] locales = LanguageUtil.getAvailableLocales();
 			</aui:field-wrapper>
 		</c:if>
 
+		<%
+		Set<String> servletContextNames = CustomJspRegistryUtil.getServletContextNames();
+
+		String customJspServletContextName = StringPool.BLANK;
+
+		if (layoutSetPrototype != null) {
+			UnicodeProperties settingsProperties = layoutSetPrototype.getSettingsProperties();
+
+			customJspServletContextName = GetterUtil.getString(settingsProperties.get("customJspServletContextName"));
+		}
+		%>
+
+		<aui:select label="application-adapter" name="customJspServletContextName">
+			<aui:option label="none" />
+
+			<%
+			for (String servletContextName : servletContextNames) {
+			%>
+
+				<aui:option label="<%= servletContextName %>" selected="<%= customJspServletContextName.equals(servletContextName) %>" value="<%= servletContextName %>" />
+
+			<%
+			}
+			%>
+
+		</aui:select>
+
 		<aui:button-row>
 			<aui:button type="submit" />
 
