@@ -1236,7 +1236,7 @@ public class PortalUtil {
 	}
 
 	public static boolean isLayoutDescendant(Layout layout, long layoutId)
-			throws PortalException, SystemException {
+		throws PortalException, SystemException {
 
 		return getPortal().isLayoutDescendant(layout, layoutId);
 	}
