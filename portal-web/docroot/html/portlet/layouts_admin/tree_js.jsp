@@ -16,17 +16,24 @@
 
 <%@ include file="/html/portlet/layouts_admin/init.jsp" %>
 
-<%@ include file="/html/portlet/layouts_admin/init_attributes.jspf" %>
-
 <%
-String treeLoadingId = PortalUtil.generateRandomKey(request, "treeLoading");
+long groupId = ((Long)request.getAttribute("edit_pages.jsp-groupId")).longValue();
+long selPlid = ((Long)request.getAttribute("edit_pages.jsp-selPlid")).longValue();
+boolean privateLayout = ((Boolean)request.getAttribute("edit_pages.jsp-privateLayout")).booleanValue();
 
-boolean checkContentDisplayPage = ParamUtil.getBoolean(request, "checkContentDisplayPage", false);
-boolean expandFirstNode = ParamUtil.getBoolean(request, "expandFirstNode", true);
-boolean saveState = ParamUtil.getBoolean(request, "saveState", true);
+String rootNodeName = (String)request.getAttribute("edit_pages.jsp-rootNodeName");
+
 boolean selectableTree = ParamUtil.getBoolean(request, "selectableTree");
 String treeId = ParamUtil.getString(request, "treeId");
+
+PortletURL portletURL = (PortletURL)request.getAttribute("edit_pages.jsp-portletURL");
 %>
+
+<div class="lfr-tree-loading" id="<portlet:namespace />treeLoading">
+	<span class="aui-icon aui-icon-loading lfr-tree-loading-icon"></span>
+</div>
+
+<div class="lfr-tree" id="<portlet:namespace /><%= HtmlUtil.escape(treeId) %>Output"></div>
 
 <aui:script use="aui-io-request,aui-tree-view">
 	var TreeUtil = {
@@ -44,32 +51,19 @@ String treeId = ParamUtil.getString(request, "treeId");
 			var treeInstance = event.target;
 
 			var rootNode = treeInstance.item(0);
-			var loadingEl = A.one('#<portlet:namespace />treeLoading<%= treeLoadingId %>');
+			var loadingEl = A.one('#<portlet:namespace />treeLoading');
 
 			loadingEl.hide();
 
-			if (<%= saveState || expandFirstNode %>) {
-				TreeUtil.restoreNodeState(rootNode);
-			}
+			TreeUtil.restoreNodeState(rootNode);
 		},
 
 		createId: function(layoutId, plid) {
 			return '<%= HtmlUtil.escape(treeId) %>' + TreeUtil.PREFIX_LAYOUT_ID + layoutId + TreeUtil.PREFIX_PLID + plid;
 		},
 
-		createLink: function(data) {
-			var className = 'layout-tree';
-
-			var contentDisplayPage = data.contentDisplayPage;
-			var label = data.label;
-			var plid = data.plid;
-			var uuid = data.uuid;
-
-			if (<%= checkContentDisplayPage %> && !contentDisplayPage) {
-				className += ' layout-page-unacceptable';
-			}
-
-			return '<a class="' + className + '" data-uuid="' + uuid + '" href="<%= portletURL + StringPool.AMPERSAND + portletDisplay.getNamespace() + "selPlid=" %>'+ plid +'">'+ Liferay.Util.escapeHTML(label) +'</a>';
+		createLink: function(label, plid) {
+			return '<a class="layout-tree" href="<%= portletURL + StringPool.AMPERSAND + portletDisplay.getNamespace() + "selPlid=" %>'+ plid +'">'+ Liferay.Util.escapeHTML(label) +'</a>';
 		},
 
 		createTreeNode: function(node, childrenSet) {
@@ -90,14 +84,7 @@ String treeId = ParamUtil.getString(request, "treeId");
 				newNode.checked = node.checked;
 			}
 			else {
-				newNode.label = TreeUtil.createLink(
-					{
-						label: newNode.label,
-						plid: node.plid,
-						uuid: node.uuid,
-						contentDisplayPage: node.contentDisplayPage
-					}
-				);
+				newNode.label = TreeUtil.createLink(newNode.label, node.plid);
 			}
 
 			return newNode;
@@ -262,12 +249,7 @@ String treeId = ParamUtil.getString(request, "treeId");
 		RootNodeType = A.TreeNodeIO;
 		TreeViewType = A.TreeViewDD;
 
-		rootLabel = TreeUtil.createLink(
-			{
-				label: rootLabel,
-				plid: TreeUtil.DEFAULT_PARENT_LAYOUT_ID
-			}
-		);
+		rootLabel = TreeUtil.createLink(rootLabel, TreeUtil.DEFAULT_PARENT_LAYOUT_ID);
 	}
 
 	var rootNode = new RootNodeType(rootConfig);
@@ -299,6 +281,27 @@ String treeId = ParamUtil.getString(request, "treeId");
 				url: getLayoutsURL
 			},
 			on: {
+				'*:checkedChange': TreeUtil.debouncedCheckedChange,
+				'*:expandedChange': function(event) {
+					var node = event.target;
+					var expanded = event.newVal;
+					var layoutId = TreeUtil.extractLayoutId(node);
+
+					if (event.prevVal !== event.newVal) {
+						var cmd = TreeUtil.CMD_COLLAPSE;
+						var recursive = true;
+
+						if (expanded) {
+							cmd = TreeUtil.CMD_EXPAND;
+							recursive = false;
+						}
+
+						TreeUtil.updateSessionTreeClick(cmd, layoutId, '<%= HtmlUtil.escape(treeId) %>', recursive);
+					}
+				},
+				append: function(event) {
+					TreeUtil.restoreNodeState(event.tree.node);
+				},
 				drop: function(event) {
 					var tree = event.tree;
 
@@ -335,45 +338,4 @@ String treeId = ParamUtil.getString(request, "treeId");
 			type: 'pages'
 		}
 	).render();
-
-	if (<%= saveState %>) {
-		treeview.on('*:checkedChange', TreeUtil.debouncedCheckedChange);
-
-		treeview.on(
-			'*:expandedChange',
-			function(event) {
-				var node = event.target;
-				var expanded = event.newVal;
-				var layoutId = TreeUtil.extractLayoutId(node);
-
-				if (event.prevVal !== event.newVal) {
-					var cmd = TreeUtil.CMD_COLLAPSE;
-					var recursive = true;
-
-					if (expanded) {
-						cmd = TreeUtil.CMD_EXPAND;
-						recursive = false;
-					}
-
-					TreeUtil.updateSessionTreeClick(cmd, layoutId, '<%= HtmlUtil.escape(treeId) %>', recursive);
-				}
-			}
-		);
-
-		treeview.on(
-			'append',
-			function(event) {
-				TreeUtil.restoreNodeState(event.tree.node);
-			}
-		);
-	}
-
-
-	A.one('#' + treeElId).setData('treeInstance', treeview);
 </aui:script>
-
-<div class="lfr-tree-loading" id="<portlet:namespace />treeLoading<%= treeLoadingId %>">
-	<span class="aui-icon aui-icon-loading lfr-tree-loading-icon"></span>
-</div>
-
-<div class="lfr-tree" id="<portlet:namespace /><%= HtmlUtil.escape(treeId) %>Output"></div>

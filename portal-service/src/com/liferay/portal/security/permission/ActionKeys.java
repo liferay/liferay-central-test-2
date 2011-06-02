@@ -211,8 +211,6 @@ public class ActionKeys {
 
 	public static final String VIEW = "VIEW";
 
-	public static final String VIEW_TREE = "VIEW_TREE";
-
 	public static final String VIEW_USER = "VIEW_USER";
 
 }
