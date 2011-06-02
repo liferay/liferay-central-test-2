@@ -32,27 +32,42 @@ public class TimestampsRegionWrapper
 	}
 
 	public void evict(Object key) throws CacheException {
-		getEhcacheTimestampsRegion().evict(key);
+		EhcacheTimestampsRegion ehcacheTimestampsRegion =
+			getEhcacheTimestampsRegion();
+
+		ehcacheTimestampsRegion.evict(key);
 	}
 
 	public void evictAll() throws CacheException {
-		getEhcacheTimestampsRegion().evictAll();
+		EhcacheTimestampsRegion ehcacheTimestampsRegion =
+			getEhcacheTimestampsRegion();
+
+		ehcacheTimestampsRegion.evictAll();
 	}
 
 	public Object get(Object key) throws CacheException {
-		return getEhcacheTimestampsRegion().get(key);
+		EhcacheTimestampsRegion ehcacheTimestampsRegion =
+			getEhcacheTimestampsRegion();
+
+		return ehcacheTimestampsRegion.get(key);
 	}
 
 	public void invalidate() {
-		getEhcacheTimestampsRegion().evictAll();
+		EhcacheTimestampsRegion ehcacheTimestampsRegion =
+			getEhcacheTimestampsRegion();
+
+		ehcacheTimestampsRegion.evictAll();
 	}
 
 	public void put(Object key, Object value) throws CacheException {
-		getEhcacheTimestampsRegion().put(key, value);
+		EhcacheTimestampsRegion ehcacheTimestampsRegion =
+			getEhcacheTimestampsRegion();
+
+		ehcacheTimestampsRegion.put(key, value);
 	}
 
 	protected EhcacheTimestampsRegion getEhcacheTimestampsRegion() {
-		return (EhcacheTimestampsRegion) getEhcacheDataRegion();
+		return (EhcacheTimestampsRegion)getEhcacheDataRegion();
 	}
 
 }
