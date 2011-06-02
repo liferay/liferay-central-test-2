@@ -116,7 +116,7 @@ public class DataFactory {
 
 	public AssetEntry addAssetEntry(
 			long groupId, long userId, long classNameId, long classPK,
-			String mimeType, String title)
+			boolean visible, String mimeType, String title)
 		throws Exception {
 
 		AssetEntry assetEntry = new AssetEntryImpl();
@@ -125,6 +125,7 @@ public class DataFactory {
 		assetEntry.setUserId(userId);
 		assetEntry.setClassNameId(classNameId);
 		assetEntry.setClassPK(classPK);
+		assetEntry.setVisible(visible);
 		assetEntry.setMimeType(mimeType);
 		assetEntry.setTitle(title);
 
@@ -504,6 +505,10 @@ public class DataFactory {
 		return _guestRole;
 	}
 
+	public ClassName getMBMessageClassName() {
+		return _mbMessageClassName;
+	}
+
 	public Role getOrganizationAdministratorRole() {
 		return _organizationAdministratorRole;
 	}
@@ -580,8 +585,11 @@ public class DataFactory {
 			if (model.equals(BlogsEntry.class.getName())) {
 				_blogsEntryClassName = className;
 			}
-			if (model.equals(Group.class.getName())) {
+			else if (model.equals(Group.class.getName())) {
 				_groupClassName = className;
+			}
+			else if (model.equals(MBMessage.class.getName())) {
+				_mbMessageClassName = className;
 			}
 			else if (model.equals(Role.class.getName())) {
 				_roleClassName = className;
@@ -936,6 +944,7 @@ public class DataFactory {
 	private Map<Long, String> _individualResourceNames;
 	private int _maxGroupsCount;
 	private int _maxUserToGroupCount;
+	private ClassName _mbMessageClassName;
 	private Role _organizationAdministratorRole;
 	private Role _organizationOwnerRole;
 	private Role _organizationUserRole;

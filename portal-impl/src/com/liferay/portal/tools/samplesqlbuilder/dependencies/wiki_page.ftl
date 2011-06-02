@@ -7,7 +7,7 @@ insert into WikiPageResource values ('${portalUUIDUtil.generate()}', ${wikiPage.
 ${sampleSQLBuilder.insertSecurity("com.liferay.portlet.wiki.model.WikiPage", wikiPage.resourcePrimKey)}
 
 <#if wikiPage.head>
-	<#assign assetEntry = dataFactory.addAssetEntry(wikiNode.groupId, wikiPage.userId, dataFactory.wikiPageClassName.classNameId, wikiPage.resourcePrimKey, "text/html", wikiPage.title)>
+	<#assign assetEntry = dataFactory.addAssetEntry(wikiNode.groupId, wikiPage.userId, dataFactory.wikiPageClassName.classNameId, wikiPage.resourcePrimKey, true, "text/html", wikiPage.title)>
 
 	${sampleSQLBuilder.insertAssetEntry(assetEntry)}
 </#if>
