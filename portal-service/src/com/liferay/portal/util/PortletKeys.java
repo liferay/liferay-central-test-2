@@ -198,6 +198,8 @@ public class PortletKeys {
 
 	public static final String STOCKS = "12";
 
+	public static final String SUMMARY = "173";
+
 	public static final String TAGS_ADMIN = "99";
 
 	public static final String TAGS_CATEGORIES_NAVIGATION = "122";
