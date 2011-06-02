@@ -531,18 +531,8 @@ public class VelocityTaglib {
 		throws Exception {
 
 		RuntimeTag.doTag(
-			portletName, queryString, defaultPreferences, true, null,
-			_servletContext, _request, _response);
-	}
-
-	public void runtime(
-			String portletName, String queryString, String defaultPreferences,
-			boolean includeCss)
-		throws Exception {
-
-		RuntimeTag.doTag(
-			portletName, queryString, defaultPreferences, includeCss, null,
-			_servletContext, _request, _response);
+			portletName, queryString, defaultPreferences, null, _servletContext,
+			_request, _response);
 	}
 
 	public void search() throws Exception {

@@ -24,9 +24,6 @@ import com.liferay.portal.model.Layout;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.portlet.layoutconfiguration.util.RuntimePortletUtil;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletResponse;
 import javax.portlet.RenderRequest;
@@ -41,7 +38,6 @@ import javax.servlet.jsp.tagext.TagSupport;
 
 /**
  * @author Brian Wing Shun Chan
- * @author Sergio González
  */
 public class RuntimeTag extends TagSupport {
 
@@ -62,15 +58,14 @@ public class RuntimeTag extends TagSupport {
 		throws Exception {
 
 		doTag(
-			portletName, queryString, null, true, pageContext, servletContext,
+			portletName, queryString, null, pageContext, servletContext,
 			request, response);
 	}
 
 	public static void doTag(
 			String portletName, String queryString, String defaultPreferences,
-			boolean includeCss, PageContext pageContext,
-			ServletContext servletContext, HttpServletRequest request,
-			HttpServletResponse response)
+			PageContext pageContext, ServletContext servletContext,
+			HttpServletRequest request, HttpServletResponse response)
 		throws Exception {
 
 		if (pageContext != null) {
@@ -113,21 +108,6 @@ public class RuntimeTag extends TagSupport {
 			RuntimePortletUtil.processPortlet(
 				servletContext, request, response, renderRequest,
 				renderResponse, portletId, queryString, true);
-
-			if (includeCss) {
-				Set<String> runtimePortletIds =
-					(Set<String>)request.getAttribute(
-						WebKeys.RUNTIME_PORTLET_IDS);
-
-				if (runtimePortletIds == null) {
-					runtimePortletIds = new HashSet<String>();
-				}
-
-				runtimePortletIds.add(portletId);
-
-				request.setAttribute(
-					WebKeys.RUNTIME_PORTLET_IDS, runtimePortletIds);
-			}
 		}
 		finally {
 			request.removeAttribute(WebKeys.RENDER_PORTLET_RESOURCE);
@@ -152,8 +132,8 @@ public class RuntimeTag extends TagSupport {
 				(HttpServletResponse)pageContext.getResponse();
 
 			doTag(
-				_portletName, _queryString, _defaultPreferences, _includeCss,
-				pageContext, servletContext, request, response);
+				_portletName, _queryString, _defaultPreferences, pageContext,
+				servletContext, request, response);
 
 			return EVAL_PAGE;
 		}
@@ -162,10 +142,6 @@ public class RuntimeTag extends TagSupport {
 
 			throw new JspException(e);
 		}
-	}
-
-	public void setIncludeCss(boolean includeCss) {
-		_includeCss = includeCss;
 	}
 
 	public void setPortletName(String portletName) {
@@ -182,7 +158,6 @@ public class RuntimeTag extends TagSupport {
 
 	private static Log _log = LogFactoryUtil.getLog(RuntimeTag.class);
 
-	private boolean _includeCss = true;
 	private String _portletName;
 	private String _queryString;
 	private String _defaultPreferences;
