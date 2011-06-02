@@ -95,19 +95,19 @@ int organizationsCount = OrganizationLocalServiceUtil.searchCount(company.getCom
 
 			<aui:input name="organizationId" type="hidden" value="<%= organizationId %>" />
 
-			<div class="lfr-asset-metadata">
-				<div class="lfr-asset-icon lfr-asset-teams">
-					<portlet:renderURL var="manageTeamsURL">
-						<portlet:param name="struts_action" value="/enterprise_admin/view_teams" />
-						<portlet:param name="redirect" value="<%= currentURL %>" />
-						<portlet:param name="groupId" value="<%= String.valueOf(organizationGroupId) %>" />
-					</portlet:renderURL>
+			<c:if test="<%= teamsCount > 0 %>">
+				<div class="lfr-asset-metadata">
+					<div class="lfr-asset-icon lfr-asset-teams">
+						<portlet:renderURL var="manageTeamsURL">
+							<portlet:param name="struts_action" value="/enterprise_admin/view_teams" />
+							<portlet:param name="redirect" value="<%= currentURL %>" />
+							<portlet:param name="groupId" value="<%= String.valueOf(organizationGroupId) %>" />
+						</portlet:renderURL>
 
-					<c:if test="<%= teamsCount > 0 %>">
 						<aui:a href="<%= manageTeamsURL %>"> <%= teamsCount %> <liferay-ui:message key='<%= (teamsCount == 1) ? "team" : "teams" %>' /></aui:a>
-					</c:if>
+					</div>
 				</div>
-			</div>
+			</c:if>
 
 			<span class="entry-categories">
 				<liferay-ui:asset-categories-summary
