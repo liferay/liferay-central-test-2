@@ -16,60 +16,113 @@ package com.liferay.portal.util;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.model.Layout;
+import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portlet.PortalPreferences;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author Brian Wing Shun Chan
+ * @author Eduardo Lundgren
  */
 public class SessionTreeJSClicks {
 
-	public static final String CLASS_NAME = SessionTreeJSClicks.class.getName();
+	public static void addLayoutNodes(
+		HttpServletRequest request, String treeId, long layoutId,
+		boolean privateLayout, boolean recursive) {
 
-	public static void closeNode(
+		try {
+			List<String> layoutIds = getLayoutsChildrenIds(
+				request, layoutId, privateLayout, recursive);
+
+			addNodes(request, treeId, layoutIds.toArray(
+				new String[layoutIds.size()]));
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
+	}
+
+	public static void addNode(
 		HttpServletRequest request, String treeId, String nodeId) {
 
-		try {
-			PortalPreferences preferences =
-				PortletPreferencesFactoryUtil.getPortalPreferences(request);
+		String addNodesString = get(request, treeId);
 
-			String openNodesString = preferences.getValue(CLASS_NAME, treeId);
+		addNodesString = StringUtil.add(addNodesString, nodeId);
 
-			openNodesString = StringUtil.remove(openNodesString, nodeId);
-
-			preferences.setValue(CLASS_NAME, treeId, openNodesString);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-		}
+		put(request, treeId, addNodesString);
 	}
 
-	public static void closeNodes(HttpServletRequest request, String treeId) {
-		try {
-			PortalPreferences preferences =
-				PortletPreferencesFactoryUtil.getPortalPreferences(request);
+	public static void addNodes(
+			HttpServletRequest request, String treeId, String[] nodeIds) {
 
-			String openNodesString = StringPool.BLANK;
+		String addNodesString = get(request, treeId);
 
-			preferences.setValue(CLASS_NAME, treeId, openNodesString);
+		for (int i = 0; i < nodeIds.length; i++) {
+			addNodesString = StringUtil.add(addNodesString, nodeIds[i]);
 		}
-		catch (Exception e) {
-			_log.error(e, e);
-		}
+
+		put(request, treeId, addNodesString);
 	}
 
-	public static String getOpenNodes(
+	public static String getAddedNodes(
 		HttpServletRequest request, String treeId) {
 
+		return get(request, treeId);
+	}
+
+	public static void removeLayoutNodes(
+		HttpServletRequest request, String treeId, long layoutId,
+		boolean privateLayout, boolean recursive) {
+
+		try {
+			List<String> layoutIds = getLayoutsChildrenIds(
+				request, layoutId, privateLayout, recursive);
+
+			removeNodes(request, treeId, layoutIds.toArray(
+				new String[layoutIds.size()]));
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
+	}
+
+	public static void removeNode(
+		HttpServletRequest request, String treeId, String nodeId) {
+
+		String addNodesString = get(request, treeId);
+
+		addNodesString = StringUtil.remove(addNodesString, nodeId);
+
+		put(request, treeId, addNodesString);
+	}
+
+	public static void removeNodes(
+			HttpServletRequest request, String treeId, String[] nodeIds) {
+
+		String addNodesString = get(request, treeId);
+
+		for (int i = 0; i < nodeIds.length; i++) {
+			addNodesString = StringUtil.remove(addNodesString, nodeIds[i]);
+		}
+
+		put(request, treeId, addNodesString);
+	}
+
+	protected static String get(HttpServletRequest request, String key) {
 		try {
 			PortalPreferences preferences =
 				PortletPreferencesFactoryUtil.getPortalPreferences(request);
 
-			return preferences.getValue(CLASS_NAME, treeId);
+			return preferences.getValue(CLASS_NAME, key, StringPool.BLANK);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -78,43 +131,59 @@ public class SessionTreeJSClicks {
 		}
 	}
 
-	public static void openNode(
-		HttpServletRequest request, String treeId, String nodeId) {
+	protected static List<String> getLayoutsChildrenIds(
+			HttpServletRequest request, List<String> layoutIds,
+			long parentLayoutId, boolean privateLayout)
+		throws Exception {
+
+		long groupId = ParamUtil.getLong(request, "groupId");
+
+		List<Layout> layouts = LayoutLocalServiceUtil.getLayouts(
+			groupId, privateLayout, parentLayoutId);
+
+		for (Layout layout : layouts) {
+			layoutIds.add(String.valueOf(layout.getLayoutId()));
+
+			getLayoutsChildrenIds(
+				request, layoutIds, layout.getLayoutId(), privateLayout);
+		}
+
+		return layoutIds;
+	}
+
+	protected static List<String> getLayoutsChildrenIds(
+			HttpServletRequest request, long parentLayoutId,
+			boolean privateLayout, boolean recursive)
+		throws Exception {
+
+		List<String> layoutIds = new ArrayList<String>();
+
+		layoutIds.add(String.valueOf(parentLayoutId));
+
+		if (recursive) {
+			return getLayoutsChildrenIds(
+				request, layoutIds, parentLayoutId, privateLayout);
+		}
+		else {
+			return layoutIds;
+		}
+	}
+
+	protected static void put(
+		HttpServletRequest request, String key, String value) {
 
 		try {
 			PortalPreferences preferences =
 				PortletPreferencesFactoryUtil.getPortalPreferences(request);
 
-			String openNodesString = preferences.getValue(CLASS_NAME, treeId);
-
-			openNodesString = StringUtil.add(openNodesString, nodeId);
-
-			preferences.setValue(CLASS_NAME, treeId, openNodesString);
+			preferences.setValue(CLASS_NAME, key, value);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
 		}
 	}
 
-	public static void openNodes(
-		HttpServletRequest request, String treeId, String[] nodeIds) {
-
-		try {
-			PortalPreferences preferences =
-				PortletPreferencesFactoryUtil.getPortalPreferences(request);
-
-			String openNodesString = preferences.getValue(CLASS_NAME, treeId);
-
-			for (int i = 0; i < nodeIds.length; i++) {
-				openNodesString = StringUtil.add(openNodesString, nodeIds[i]);
-			}
-
-			preferences.setValue(CLASS_NAME, treeId, openNodesString);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-		}
-	}
+	public static final String CLASS_NAME = SessionTreeJSClicks.class.getName();
 
 	private static Log _log = LogFactoryUtil.getLog(SessionTreeJSClicks.class);
 

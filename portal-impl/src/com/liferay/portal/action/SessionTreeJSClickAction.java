@@ -16,7 +16,9 @@ package com.liferay.portal.action;
 
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.model.Layout;
+import com.liferay.portal.model.LayoutConstants;
+import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.SessionTreeJSClicks;
 
@@ -30,6 +32,7 @@ import org.apache.struts.action.ActionMapping;
 
 /**
  * @author Brian Wing Shun Chan
+ * @author Eduardo Lundgren
  */
 public class SessionTreeJSClickAction extends Action {
 
@@ -43,24 +46,59 @@ public class SessionTreeJSClickAction extends Action {
 
 			String treeId = ParamUtil.getString(request, "treeId");
 
-			if (cmd.equals("expand")) {
-				String[] nodeIds = StringUtil.split(
-					ParamUtil.getString(request, "nodeIds"));
+			long groupId = ParamUtil.getLong(request, "groupId");
 
-				SessionTreeJSClicks.openNodes(request, treeId, nodeIds);
+			long layoutId = ParamUtil.getLong(request, "layoutId");
+
+			boolean privateLayout = ParamUtil.getBoolean(
+				request, "privateLayout");
+
+			boolean recursive = ParamUtil.getBoolean(request, "recursive");
+
+			if (cmd.equals("collapseLayout")) {
+				String treeNamespace = _EXPAND_NAMESPACE.concat(treeId);
+
+				SessionTreeJSClicks.removeLayoutNodes(
+					request, treeNamespace, layoutId, privateLayout, recursive);
 			}
-			else if (cmd.equals("collapse")) {
-				SessionTreeJSClicks.closeNodes(request, treeId);
+			else if (cmd.equals("expandLayout")) {
+				String treeNamespace = _EXPAND_NAMESPACE.concat(treeId);
+
+				SessionTreeJSClicks.addLayoutNodes(
+					request, treeNamespace, layoutId, privateLayout, recursive);
+			}
+			else if (cmd.equals("checkLayout")) {
+				String treeNamespace = _CHECK_NAMESPACE.concat(treeId);
+
+				SessionTreeJSClicks.addLayoutNodes(
+					request, treeNamespace, layoutId, privateLayout, recursive);
+			}
+			else if (cmd.equals("uncheckLayout")) {
+				String treeNamespace = _CHECK_NAMESPACE.concat(treeId);
+
+				SessionTreeJSClicks.removeLayoutNodes(
+					request, treeNamespace, layoutId, privateLayout, recursive);
+
+				if (layoutId != LayoutConstants.DEFAULT_PARENT_LAYOUT_ID) {
+					Layout layout = LayoutLocalServiceUtil.getLayout(
+						groupId, privateLayout, layoutId);
+
+					for (Layout parentLayout : layout.getAncestors()) {
+						SessionTreeJSClicks.removeNode(
+							request, treeNamespace,
+							String.valueOf(parentLayout.getLayoutId()));
+					}
+				}
 			}
 			else {
 				String nodeId = ParamUtil.getString(request, "nodeId");
-				boolean openNode = ParamUtil.getBoolean(request, "openNode");
+				boolean addNode = ParamUtil.getBoolean(request, "addNode");
 
-				if (openNode) {
-					SessionTreeJSClicks.openNode(request, treeId, nodeId);
+				if (addNode) {
+					SessionTreeJSClicks.addNode(request, treeId, nodeId);
 				}
 				else {
-					SessionTreeJSClicks.closeNode(request, treeId, nodeId);
+					SessionTreeJSClicks.removeNode(request, treeId, nodeId);
 				}
 			}
 
@@ -72,5 +110,9 @@ public class SessionTreeJSClickAction extends Action {
 			return null;
 		}
 	}
+
+	private final String _CHECK_NAMESPACE = "CHECK_NAMESPACE_";
+
+	private final String _EXPAND_NAMESPACE = "EXPAND_NAMESPACE_";
 
 }
