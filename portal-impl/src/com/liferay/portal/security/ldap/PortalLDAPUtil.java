@@ -655,6 +655,55 @@ public class PortalLDAPUtil {
 		return false;
 	}
 
+	public static boolean isUserGroupMember(
+			long ldapServerId, long companyId, String groupDN, String userDN)
+		throws Exception {
+
+		LdapContext ldapContext = getContext(ldapServerId, companyId);
+
+		try {
+			if (ldapContext == null) {
+				return false;
+			}
+
+			Properties userMappings = LDAPSettingsUtil.getUserMappings(
+				ldapServerId, companyId);
+
+			StringBundler filter = new StringBundler(5);
+
+			filter.append(StringPool.OPEN_PARENTHESIS);
+			filter.append(userMappings.getProperty(UserConverterKeys.GROUP));
+			filter.append(StringPool.EQUAL);
+			filter.append(groupDN);
+			filter.append(StringPool.CLOSE_PARENTHESIS);
+
+			SearchControls searchControls = new SearchControls(
+				SearchControls.SUBTREE_SCOPE, 1, 0, null, false, false);
+
+			NamingEnumeration<SearchResult> enu = ldapContext.search(
+				userDN, filter.toString(), searchControls);
+
+			if (enu.hasMoreElements()) {
+				return true;
+			}
+		}
+		catch (NameNotFoundException nnfe) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(
+					"Unable to determine if group DN " + groupDN +
+						" is a member of user DN " + userDN,
+					nnfe);
+			}
+		}
+		finally {
+			if (ldapContext != null) {
+				ldapContext.close();
+			}
+		}
+
+		return false;
+	}
+
 	public static byte[] searchLDAP(
 			long companyId, LdapContext ldapContext, byte[] cookie,
 			int maxResults, String baseDN, String filter,

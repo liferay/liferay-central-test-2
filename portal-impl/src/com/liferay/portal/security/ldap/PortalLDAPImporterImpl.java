@@ -78,6 +78,7 @@ import javax.naming.ldap.LdapContext;
 /**
  * @author Michael C. Han
  * @author Brian Wing Shun Chan
+ * @author Wesley Gong
  */
 public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 
@@ -791,10 +792,21 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 			}
 		}
 
-		UserGroupLocalServiceUtil.setUserUserGroups(
-			user.getUserId(),
-			ArrayUtil.toArray(
-				newUserGroupIds.toArray(new Long[newUserGroupIds.size()])));
+		if (!LDAPSettingsUtil.isExportEnabled(companyId) ||
+			!LDAPSettingsUtil.isExportGroupEnabled(companyId)) {
+
+			UserGroupLocalServiceUtil.setUserUserGroups(
+				user.getUserId(),
+				ArrayUtil.toArray(
+					newUserGroupIds.toArray(new Long[newUserGroupIds.size()])));
+		}
+		else {
+			long[] userIds = new long[] {user.getUserId()};
+
+			for (long newUserGroupId : newUserGroupIds) {
+				UserLocalServiceUtil.addUserGroupUsers(newUserGroupId, userIds);
+			}
+		}
 	}
 
 	protected User importUser(

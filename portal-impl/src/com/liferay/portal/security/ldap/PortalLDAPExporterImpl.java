@@ -27,6 +27,7 @@ import com.liferay.portal.util.PrefsPropsUtil;
 
 import java.io.Serializable;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
@@ -42,6 +43,7 @@ import javax.naming.ldap.LdapContext;
  * @author Michael C. Han
  * @author Brian Wing Shun Chan
  * @author Marcellus Tavares
+ * @author Wesley Gong
  */
 public class PortalLDAPExporterImpl implements PortalLDAPExporter {
 
@@ -174,6 +176,28 @@ public class PortalLDAPExporterImpl implements PortalLDAPExporter {
 			ModificationItem[] modificationItems = modifications.getItems();
 
 			ldapContext.modifyAttributes(name, modificationItems);
+
+			if (!LDAPSettingsUtil.isExportGroupEnabled(companyId)) {
+				return;
+			}
+
+			List<UserGroup> userGroups =
+				UserGroupLocalServiceUtil.getUserUserGroups(user.getUserId());
+
+			for (UserGroup userGroup : userGroups) {
+				exportToLDAP(user.getUserId(), userGroup.getUserGroupId());
+			}
+
+			Modifications groupModifications =
+				_portalToLDAPConverter.getLDAPUserGroupModifications(
+					ldapServerId, userGroups, user, userMappings);
+
+			ModificationItem[] groupModificationItems =
+				groupModifications.getItems();
+
+			if (groupModificationItems.length > 0) {
+				ldapContext.modifyAttributes(name, groupModificationItems);
+			}
 		}
 		catch (NameNotFoundException nnfe) {
 			if (PrefsPropsUtil.getBoolean(

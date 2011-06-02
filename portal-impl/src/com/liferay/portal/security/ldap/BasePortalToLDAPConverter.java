@@ -36,6 +36,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
+import javax.naming.Binding;
 import javax.naming.directory.Attribute;
 import javax.naming.directory.Attributes;
 import javax.naming.directory.BasicAttribute;
@@ -48,6 +49,7 @@ import org.apache.commons.beanutils.PropertyUtils;
  * @author Michael C. Han
  * @author Brian Wing Shun Chan
  * @author Marcellus Tavares
+ * @author Wesley Gong
  */
 public class BasePortalToLDAPConverter implements PortalToLDAPConverter {
 
@@ -63,6 +65,14 @@ public class BasePortalToLDAPConverter implements PortalToLDAPConverter {
 	public String getGroupDNName(
 			long ldapServerId, UserGroup userGroup, Properties groupMappings)
 		throws Exception {
+
+		Binding groupBinding = PortalLDAPUtil.getGroup(
+			ldapServerId, userGroup.getCompanyId(), userGroup.getName());
+
+		if (groupBinding != null) {
+			return PortalLDAPUtil.getNameInNamespace(
+				ldapServerId, userGroup.getCompanyId(), groupBinding);
+		}
 
 		StringBundler sb = new StringBundler(5);
 
@@ -148,8 +158,7 @@ public class BasePortalToLDAPConverter implements PortalToLDAPConverter {
 
 			modifications.addItem(
 				DirContext.ADD_ATTRIBUTE,
-				groupMappings.getProperty(GroupConverterKeys.USER),
-				getUserDNName(ldapServerId, user, userMappings));
+				groupMappings.getProperty(GroupConverterKeys.USER), userDN);
 		}
 
 		return modifications;
@@ -204,6 +213,36 @@ public class BasePortalToLDAPConverter implements PortalToLDAPConverter {
 		return attributes;
 	}
 
+	public Modifications getLDAPUserGroupModifications(
+			long ldapServerId, List<UserGroup> userGroups, User user,
+			Properties userMappings)
+		throws Exception {
+
+		Modifications modifications = Modifications.getInstance();
+
+		Properties groupMappings = LDAPSettingsUtil.getGroupMappings(
+			ldapServerId, user.getCompanyId());
+
+		String userDN = getUserDNName(ldapServerId, user, userMappings);
+
+		for (UserGroup userGroup : userGroups) {
+			String groupDN = getGroupDNName(
+				ldapServerId, userGroup, groupMappings);
+
+			if (PortalLDAPUtil.isUserGroupMember(
+					ldapServerId, user.getCompanyId(), groupDN, userDN)) {
+
+				continue;
+			}
+
+			modifications.addItem(
+				DirContext.ADD_ATTRIBUTE,
+				userMappings.getProperty(UserConverterKeys.GROUP), groupDN);
+		}
+
+		return modifications;
+	}
+
 	public Modifications getLDAPUserModifications(
 			User user, Map<String, Serializable> userExpandoAttributes,
 			Properties userMappings, Properties userExpandoMappings)
@@ -246,6 +285,15 @@ public class BasePortalToLDAPConverter implements PortalToLDAPConverter {
 	public String getUserDNName(
 			long ldapServerId, User user, Properties userMappings)
 		throws Exception {
+
+		Binding userBinding = PortalLDAPUtil.getUser(
+			ldapServerId, user.getCompanyId(), user.getScreenName(),
+			user.getEmailAddress());
+
+		if (userBinding != null) {
+			return PortalLDAPUtil.getNameInNamespace(
+				ldapServerId, user.getCompanyId(), userBinding);
+		}
 
 		StringBundler sb = new StringBundler(5);
 

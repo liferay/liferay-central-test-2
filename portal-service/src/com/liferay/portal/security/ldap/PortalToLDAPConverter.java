@@ -20,6 +20,7 @@ import com.liferay.portal.model.UserGroup;
 
 import java.io.Serializable;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
@@ -29,6 +30,7 @@ import javax.naming.directory.Attributes;
  * @author Michael C. Han
  * @author Brian Wing Shun Chan
  * @author Marcellus Tavares
+ * @author Wesley Gong
  */
 public interface PortalToLDAPConverter {
 
@@ -53,6 +55,11 @@ public interface PortalToLDAPConverter {
 
 	public Attributes getLDAPUserAttributes(
 			long ldapServerId, User user, Properties userMappings)
+		throws Exception;
+
+	public Modifications getLDAPUserGroupModifications(
+			long ldapServerId, List<UserGroup> userGroups, User user,
+			Properties userMappings)
 		throws Exception;
 
 	public Modifications getLDAPUserModifications(
