@@ -16,6 +16,7 @@ package com.liferay.portlet.documentlibrary.util.comparator;
 
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portlet.documentlibrary.model.DLFileEntryConstants;
 import com.liferay.portlet.documentlibrary.model.DLFileVersion;
 
 import java.util.Comparator;
@@ -39,17 +40,24 @@ public class FileVersionVersionComparator
 
 		int value = 0;
 
-		if (dlFileVersion1.getVersion().equals("PWC")) {
+		String version1 = dlFileVersion1.getVersion();
+
+		if (version1.equals(
+				DLFileEntryConstants.PRIVATE_WORKING_COPY_VERSION)) {
+
 			return -1;
 		}
-		else if (dlFileVersion2.getVersion().equals("PWC")) {
+
+		String version2 = dlFileVersion2.getVersion();
+
+		if (version2.equals(
+				DLFileEntryConstants.PRIVATE_WORKING_COPY_VERSION)) {
+
 			return 1;
 		}
 
-		int[] versionParts1 = StringUtil.split(
-			dlFileVersion1.getVersion(), StringPool.PERIOD, 0);
-		int[] versionParts2 = StringUtil.split(
-			dlFileVersion2.getVersion(), StringPool.PERIOD, 0);
+		int[] versionParts1 = StringUtil.split(version1, StringPool.PERIOD, 0);
+		int[] versionParts2 = StringUtil.split(version2, StringPool.PERIOD, 0);
 
 		if ((versionParts1.length != 2) && (versionParts2.length != 2)) {
 			value = 0;

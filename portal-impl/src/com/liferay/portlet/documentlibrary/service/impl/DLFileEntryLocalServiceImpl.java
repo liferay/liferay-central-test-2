@@ -67,6 +67,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
+
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -241,7 +242,6 @@ public class DLFileEntryLocalServiceImpl
 		}
 
 		User user = userPersistence.findByPrimaryKey(userId);
-
 		DLFileEntry dlFileEntry = dlFileEntryPersistence.findByPrimaryKey(
 			fileEntryId);
 
@@ -278,7 +278,7 @@ public class DLFileEntryLocalServiceImpl
 
 		// File
 
-		File file = getAsFile(
+		File file = getFile(
 			dlFileEntry, DLFileEntryConstants.PRIVATE_WORKING_COPY_VERSION);
 
 		InputStream is = null;
@@ -363,20 +363,20 @@ public class DLFileEntryLocalServiceImpl
 		DLFileVersion dlFileVersion = getLatestFileVersion(fileEntryId);
 
 		if (!dlFileVersion.equals(
-			DLFileEntryConstants.PRIVATE_WORKING_COPY_VERSION)) {
+				DLFileEntryConstants.PRIVATE_WORKING_COPY_VERSION)) {
 
 			String version = DLFileEntryConstants.PRIVATE_WORKING_COPY_VERSION;
 
 			dlFileVersion = addFileVersion(
-				user, dlFileEntry, new Date(),
-				dlFileVersion.getExtension(), dlFileVersion.getMimeType(),
-				dlFileVersion.getTitle(), dlFileVersion.getDescription(),
-				dlFileVersion.getChangeLog(), dlFileVersion.getExtraSettings(),
-				dlFileVersion.getDocumentTypeId(),
-				version, dlFileVersion.getSize(),
-				WorkflowConstants.STATUS_DRAFT, new ServiceContext());
+				user, dlFileEntry, new Date(), dlFileVersion.getExtension(),
+				dlFileVersion.getMimeType(), dlFileVersion.getTitle(),
+				dlFileVersion.getDescription(), dlFileVersion.getChangeLog(),
+				dlFileVersion.getExtraSettings(),
+				dlFileVersion.getDocumentTypeId(), version,
+				dlFileVersion.getSize(), WorkflowConstants.STATUS_DRAFT,
+				new ServiceContext());
 
-			File file = getAsFile(dlFileEntry);
+			File file = getFile(dlFileEntry);
 
 			InputStream is;
 
@@ -738,9 +738,7 @@ public class DLFileEntryLocalServiceImpl
 			majorVersion, extraSettings, is, size, serviceContext);
 	}
 
-	public void unlockFileEntry(long fileEntryId)
-		throws PortalException, SystemException {
-
+	public void unlockFileEntry(long fileEntryId) throws SystemException {
 		lockLocalService.unlock(DLFileEntry.class.getName(), fileEntryId);
 	}
 
@@ -800,7 +798,6 @@ public class DLFileEntryLocalServiceImpl
 		// File entry
 
 		User user = userPersistence.findByPrimaryKey(userId);
-
 		DLFileEntry dlFileEntry = dlFileEntryPersistence.findByPrimaryKey(
 			fileEntryId);
 
@@ -1131,23 +1128,24 @@ public class DLFileEntryLocalServiceImpl
 		}
 	}
 
-	protected File getAsFile(DLFileEntry dlFileEntry)
+	protected File getFile(DLFileEntry dlFileEntry)
 		throws PortalException, SystemException {
-	
-		InputStream is = null;
+
 		File file = null;
+
+		InputStream is = null;
 		int fetchFailures = 0;
-	
+
 		while (is == null) {
 			try {
 				is = dlLocalService.getFileAsStream(
 					dlFileEntry.getCompanyId(),
 					dlFileEntry.getDataRepositoryId(),
 					dlFileEntry.getName());
-	
+
 				file = FileUtil.createTempFile(
 					FileUtil.getExtension(dlFileEntry.getTitle()));
-	
+
 				FileUtil.write(file, is);
 			}
 			catch (IOException ioe) {
@@ -1155,12 +1153,12 @@ public class DLFileEntryLocalServiceImpl
 			}
 			catch (NoSuchFileException nsfe) {
 				fetchFailures++;
-	
+
 				if (PropsValues.DL_HOOK_IMPL.equals(
 						JCRHook.class.getName()) &&
 					(fetchFailures <
 						PropsValues.DL_HOOK_JCR_FETCH_MAX_FAILURES)) {
-	
+
 					try {
 						Thread.sleep(PropsValues.DL_HOOK_JCR_FETCH_DELAY);
 					}
@@ -1172,15 +1170,16 @@ public class DLFileEntryLocalServiceImpl
 				}
 			}
 		}
-	
+
 		return file;
 	}
 
-	protected File getAsFile(DLFileEntry dlFileEntry, String version)
+	protected File getFile(DLFileEntry dlFileEntry, String version)
 		throws PortalException, SystemException {
 
-		InputStream is = null;
 		File file = null;
+
+		InputStream is = null;
 		int fetchFailures = 0;
 
 		while (is == null) {
@@ -1265,29 +1264,29 @@ public class DLFileEntryLocalServiceImpl
 			long userId, long fileEntryId, long newFolderId,
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
-	
+
 		User user = userPersistence.findByPrimaryKey(userId);
 		DLFileEntry dlFileEntry = dlFileEntryPersistence.findByPrimaryKey(
 			fileEntryId);
-	
+
 		long oldFileEntryId = dlFileEntry.getFileEntryId();
-	
+
 		if (dlLocalService.hasFile(
 				user.getCompanyId(),
 				DLFolderConstants.getDataRepositoryId(
 					dlFileEntry.getGroupId(), newFolderId),
 				dlFileEntry.getName(), StringPool.BLANK)) {
-	
+
 			throw new DuplicateFileException(dlFileEntry.getName());
 		}
-	
+
 		Date now = new Date();
-	
+
 		long newFileEntryId = counterLocalService.increment();
-	
+
 		DLFileEntry newDLFileEntry = dlFileEntryPersistence.create(
 			newFileEntryId);
-	
+
 		newDLFileEntry.setUuid(dlFileEntry.getUuid());
 		newDLFileEntry.setGroupId(dlFileEntry.getGroupId());
 		newDLFileEntry.setCompanyId(dlFileEntry.getCompanyId());
@@ -1307,24 +1306,24 @@ public class DLFileEntryLocalServiceImpl
 		newDLFileEntry.setVersion(dlFileEntry.getVersion());
 		newDLFileEntry.setSize(dlFileEntry.getSize());
 		newDLFileEntry.setReadCount(dlFileEntry.getReadCount());
-	
+
 		dlFileEntryPersistence.remove(dlFileEntry);
-	
+
 		dlFileEntryPersistence.update(newDLFileEntry, false);
-	
+
 		workflowInstanceLinkLocalService.updateClassPK(
 			dlFileEntry.getCompanyId(), dlFileEntry.getGroupId(),
 			DLFileEntry.class.getName(), oldFileEntryId, newFileEntryId);
-	
+
 		List<DLFileVersion> dlFileVersions =
 			dlFileVersionPersistence.findByFileEntryId(oldFileEntryId);
-	
+
 		for (DLFileVersion dlFileVersion : dlFileVersions) {
 			long newFileVersionId = counterLocalService.increment();
-	
+
 			DLFileVersion newDLFileVersion = dlFileVersionPersistence.create(
 				newFileVersionId);
-	
+
 			newDLFileVersion.setGroupId(dlFileVersion.getGroupId());
 			newDLFileVersion.setCompanyId(dlFileVersion.getCompanyId());
 			newDLFileVersion.setUserId(dlFileVersion.getUserId());
@@ -1342,46 +1341,46 @@ public class DLFileEntryLocalServiceImpl
 			newDLFileVersion.setStatusByUserId(userId);
 			newDLFileVersion.setStatusByUserName(user.getFullName());
 			newDLFileVersion.setStatusDate(serviceContext.getModifiedDate(now));
-	
+
 			ExpandoBridge newDLFileVersionExpandoBridge =
 				newDLFileVersion.getExpandoBridge();
-	
+
 			ExpandoBridge dlFileVersionExpandoBridge =
 				dlFileVersion.getExpandoBridge();
-	
+
 			newDLFileVersionExpandoBridge.setAttributes(
 				dlFileVersionExpandoBridge.getAttributes());
-	
+
 			dlFileVersionPersistence.update(newDLFileVersion, false);
-	
+
 			dlFileVersionPersistence.remove(dlFileVersion);
 		}
-	
+
 		// Resources
-	
+
 		resourceLocalService.updateResources(
 			dlFileEntry.getCompanyId(), DLFileEntry.class.getName(),
 			ResourceConstants.SCOPE_INDIVIDUAL,
 			String.valueOf(dlFileEntry.getFileEntryId()),
 			String.valueOf(newFileEntryId));
-	
+
 		// Expando
-	
+
 		expandoValueLocalService.deleteValues(
 			DLFileEntry.class.getName(), dlFileEntry.getFileEntryId());
-	
+
 		// DLApp
-	
+
 		dlAppHelperLocalService.moveFileEntry(oldFileEntryId, newFileEntryId);
-	
+
 		// File
-	
+
 		dlLocalService.updateFile(
 			user.getCompanyId(), PortletKeys.DOCUMENT_LIBRARY,
 			newDLFileEntry.getGroupId(), dlFileEntry.getDataRepositoryId(),
 			newDLFileEntry.getDataRepositoryId(), dlFileEntry.getName(),
 			newFileEntryId);
-	
+
 		return newDLFileEntry;
 	}
 
@@ -1393,7 +1392,6 @@ public class DLFileEntryLocalServiceImpl
 		throws PortalException, SystemException {
 
 		User user = userPersistence.findByPrimaryKey(userId);
-
 		DLFileEntry dlFileEntry = dlFileEntryPersistence.findByPrimaryKey(
 			fileEntryId);
 
@@ -1401,6 +1399,7 @@ public class DLFileEntryLocalServiceImpl
 
 		if (!dlFileEntry.isLocked()) {
 			dlFileEntry = checkOutFileEntry(userId, fileEntryId);
+
 			autoCheckIn = true;
 		}
 
