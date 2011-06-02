@@ -268,14 +268,14 @@ int organizationsCount = OrganizationLocalServiceUtil.searchCount(company.getCom
 			<%
 			int usersCount = 0;
 
-			boolean showUsers = false;
 			boolean showOrganizations = false;
+			boolean showUsers = false;
 
 			if (organization != null) {
 				usersCount = UserLocalServiceUtil.getOrganizationUsersCount(organizationId);
 
-				showUsers = true;
 				showOrganizations = true;
+				showUsers = true;
 			}
 			else {
 				if (!PortalPermissionUtil.contains(permissionChecker, ActionKeys.ADD_USER)) {
