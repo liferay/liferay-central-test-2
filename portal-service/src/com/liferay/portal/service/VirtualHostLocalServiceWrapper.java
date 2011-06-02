@@ -238,6 +238,12 @@ public class VirtualHostLocalServiceWrapper implements VirtualHostLocalService {
 		_virtualHostLocalService.setBeanIdentifier(beanIdentifier);
 	}
 
+	public com.liferay.portal.model.VirtualHost fetchVirtualHost(
+		java.lang.String hostname)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _virtualHostLocalService.fetchVirtualHost(hostname);
+	}
+
 	public com.liferay.portal.model.VirtualHost getVirtualHost(long companyId,
 		long layoutSetId)
 		throws com.liferay.portal.kernel.exception.PortalException,

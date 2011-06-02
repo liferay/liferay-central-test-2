@@ -234,7 +234,11 @@ public class PortalInstances {
 
 		try {
 			VirtualHost virtualHost =
-				VirtualHostLocalServiceUtil.getVirtualHost(host);
+				VirtualHostLocalServiceUtil.fetchVirtualHost(host);
+
+			if (virtualHost == null) {
+				return 0;
+			}
 
 			if (virtualHost.getLayoutSetId() != 0) {
 				LayoutSet layoutSet = null;
@@ -261,8 +265,6 @@ public class PortalInstances {
 			}
 
 			return virtualHost.getCompanyId();
-		}
-		catch (NoSuchVirtualHostException nsvhe) {
 		}
 		catch (Exception e) {
 			_log.error(e, e);
