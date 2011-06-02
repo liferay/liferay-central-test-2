@@ -223,6 +223,10 @@ public interface VirtualHostLocalService {
 	*/
 	public void setBeanIdentifier(java.lang.String beanIdentifier);
 
+	public com.liferay.portal.model.VirtualHost fetchVirtualHost(long companyId,
+		long layoutSetId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	public com.liferay.portal.model.VirtualHost fetchVirtualHost(
 		java.lang.String hostname)
 		throws com.liferay.portal.kernel.exception.SystemException;

@@ -248,6 +248,12 @@ public class VirtualHostLocalServiceUtil {
 	}
 
 	public static com.liferay.portal.model.VirtualHost fetchVirtualHost(
+		long companyId, long layoutSetId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().fetchVirtualHost(companyId, layoutSetId);
+	}
+
+	public static com.liferay.portal.model.VirtualHost fetchVirtualHost(
 		java.lang.String hostname)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().fetchVirtualHost(hostname);

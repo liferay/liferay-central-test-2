@@ -25,6 +25,12 @@ import com.liferay.portal.service.base.VirtualHostLocalServiceBaseImpl;
 public class VirtualHostLocalServiceImpl
 	extends VirtualHostLocalServiceBaseImpl {
 
+	public VirtualHost fetchVirtualHost(long companyId, long layoutSetId)
+		throws SystemException {
+
+		return virtualHostPersistence.fetchByC_L(companyId, layoutSetId);
+	}
+
 	public VirtualHost fetchVirtualHost(String hostname)
 		throws SystemException {
 

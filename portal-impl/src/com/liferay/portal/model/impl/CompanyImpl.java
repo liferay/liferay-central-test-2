@@ -140,9 +140,14 @@ public class CompanyImpl extends CompanyModelImpl implements Company {
 	public String getVirtualHostname() {
 		try {
 			VirtualHost virtualHost =
-				VirtualHostLocalServiceUtil.getVirtualHost(getCompanyId(), 0);
+				VirtualHostLocalServiceUtil.fetchVirtualHost(getCompanyId(), 0);
 
-			return virtualHost.getHostname();
+			if (virtualHost == null) {
+				return StringPool.BLANK;
+			}
+			else {
+				return virtualHost.getHostname();
+			}
 		}
 		catch (Exception e) {
 			return StringPool.BLANK;

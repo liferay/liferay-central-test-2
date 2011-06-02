@@ -133,10 +133,15 @@ public class LayoutSetImpl extends LayoutSetModelImpl implements LayoutSet {
 	public String getVirtualHostname() {
 		try {
 			VirtualHost virtualHost =
-				VirtualHostLocalServiceUtil.getVirtualHost(
+				VirtualHostLocalServiceUtil.fetchVirtualHost(
 					getCompanyId(), getLayoutSetId());
 
-			return virtualHost.getHostname();
+			if (virtualHost == null) {
+				return StringPool.BLANK;
+			}
+			else {
+				return virtualHost.getHostname();
+			}
 		}
 		catch (Exception e) {
 			return StringPool.BLANK;
