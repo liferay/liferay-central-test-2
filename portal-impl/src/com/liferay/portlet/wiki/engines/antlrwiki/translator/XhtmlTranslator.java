@@ -242,7 +242,6 @@ public class XhtmlTranslator extends XhtmlTranslationVisitor {
 		sb.append(prefix);
 		sb.append(StringPool.DASH);
 		sb.append(text.trim());
-		sb.append(++_uniqueIdHeaderSequence);
 
 		return StringUtil.replace(
 			sb.toString(), StringPool.SPACE, StringPool.PLUS);
@@ -262,7 +261,6 @@ public class XhtmlTranslator extends XhtmlTranslationVisitor {
 	private String _attachmentURLPrefix;
 	private PortletURL _editPageURL;
 	private WikiPageNode _rootWikiPageNode;
-	private int _uniqueIdHeaderSequence;
 	private PortletURL _viewPageURL;
 	private WikiPage _wikiPage;
 
