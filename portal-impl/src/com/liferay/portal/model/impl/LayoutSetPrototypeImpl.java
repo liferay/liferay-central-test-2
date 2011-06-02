@@ -37,6 +37,16 @@ public class LayoutSetPrototypeImpl
 	public LayoutSetPrototypeImpl() {
 	}
 
+	public Group getGroup() throws PortalException, SystemException {
+		return GroupLocalServiceUtil.getLayoutSetPrototypeGroup(
+			getCompanyId(), getLayoutSetPrototypeId());
+	}
+
+	public LayoutSet getLayoutSet() throws PortalException, SystemException {
+		return LayoutSetLocalServiceUtil.getLayoutSet(
+			getGroup().getGroupId(), true);
+	}
+
 	public UnicodeProperties getSettingsProperties() {
 		if (_settingsProperties == null) {
 			_settingsProperties = new UnicodeProperties(true);
@@ -50,16 +60,6 @@ public class LayoutSetPrototypeImpl
 		}
 
 		return _settingsProperties;
-	}
-
-	public Group getGroup() throws PortalException, SystemException {
-		return GroupLocalServiceUtil.getLayoutSetPrototypeGroup(
-			getCompanyId(), getLayoutSetPrototypeId());
-	}
-
-	public LayoutSet getLayoutSet() throws PortalException, SystemException {
-		return LayoutSetLocalServiceUtil.getLayoutSet(
-			getGroup().getGroupId(), true);
 	}
 
 	public void setSettings(String settings) {

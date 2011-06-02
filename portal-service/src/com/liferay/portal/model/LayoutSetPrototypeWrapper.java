@@ -338,10 +338,6 @@ public class LayoutSetPrototypeWrapper implements LayoutSetPrototype {
 		return _layoutSetPrototype.toXmlString();
 	}
 
-	public com.liferay.portal.kernel.util.UnicodeProperties getSettingsProperties() {
-		return _layoutSetPrototype.getSettingsProperties();
-	}
-
 	public com.liferay.portal.model.Group getGroup()
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -352,6 +348,10 @@ public class LayoutSetPrototypeWrapper implements LayoutSetPrototype {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _layoutSetPrototype.getLayoutSet();
+	}
+
+	public com.liferay.portal.kernel.util.UnicodeProperties getSettingsProperties() {
+		return _layoutSetPrototype.getSettingsProperties();
 	}
 
 	public LayoutSetPrototype getWrappedLayoutSetPrototype() {
