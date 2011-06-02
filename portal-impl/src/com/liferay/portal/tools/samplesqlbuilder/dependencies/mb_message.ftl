@@ -4,7 +4,7 @@ insert into MBMessage values ('${portalUUIDUtil.generate()}', ${mbMessage.messag
 
 ${sampleSQLBuilder.insertSecurity("com.liferay.portlet.messageboards.model.MBMessage", mbMessage.messageId)}
 
-<#if mbMessage.classNameId == 0 || mbMessage.parentMessageId != 0>
+<#if (mbMessage.classNameId == 0) || (mbMessage.parentMessageId != 0)>
 	<#assign assetEntry = dataFactory.addAssetEntry(mbMessage.groupId, mbMessage.userId, dataFactory.MBMessageClassName.classNameId, mbMessage.messageId, true, "text/html", mbMessage.subject)>
 <#else>
 	<#assign assetEntry = dataFactory.addAssetEntry(mbMessage.groupId, mbMessage.userId, dataFactory.MBMessageClassName.classNameId, mbMessage.messageId, false, "text/html", mbMessage.subject)>
