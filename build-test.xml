@@ -2773,9 +2773,17 @@ file.
 	</target>
 
 	<target name="start-selenium-nanny">
-		<forget>
-			<exec executable="${selenium.nanny.executable}" />
-		</forget>
+		<copy file="${selenium.nanny.executable}" tofile="selenium_nanny.exe" />
+
+		<sequential>
+			<waitfor>
+				<available file="selenium_nanny.exe" />
+			</waitfor>
+
+			<forget>
+				<exec executable="selenium_nanny.exe" />
+			</forget>
+		</sequential>
 	</target>
 
 	<target name="stop-selenium">
@@ -2786,6 +2794,8 @@ file.
 		<exec executable="taskkill.exe">
 			<arg line="/F /IM selenium_nanny.exe" />
 		</exec>
+
+		<delete file="selenium_nanny.exe" />
 	</target>
 
 	<target name="stop-vm">
