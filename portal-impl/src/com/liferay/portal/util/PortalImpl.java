@@ -4132,6 +4132,23 @@ public class PortalImpl implements Portal {
 		return permissionChecker.isGroupOwner(groupId);
 	}
 
+	public boolean isLayoutDescendant(Layout layout, long layoutId)
+		throws PortalException, SystemException {
+
+		if (layout.getLayoutId() == layoutId) {
+			return true;
+		}
+		else {
+			for (Layout childLayout : layout.getChildren()) {
+				if (isLayoutDescendant(childLayout, layoutId)) {
+					return true;
+				}
+			}
+
+			return false;
+		}
+	}
+
 	public boolean isLayoutFirstPageable(Layout layout) {
 		LayoutSettings layoutSettings = LayoutSettings.getInstance(layout);
 

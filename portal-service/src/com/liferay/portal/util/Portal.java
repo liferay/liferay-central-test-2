@@ -912,6 +912,9 @@ public interface Portal {
 
 	public boolean isGroupOwner(User user, long groupId) throws Exception;
 
+	public boolean isLayoutDescendant(Layout layout, long layoutId)
+		throws PortalException, SystemException;
+
 	public boolean isLayoutFirstPageable(Layout layout);
 
 	public boolean isLayoutFirstPageable(String type);

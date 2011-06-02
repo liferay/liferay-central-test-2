@@ -1235,6 +1235,12 @@ public class PortalUtil {
 		return getPortal().isGroupOwner(user, groupId);
 	}
 
+	public static boolean isLayoutDescendant(Layout layout, long layoutId)
+			throws PortalException, SystemException {
+
+		return getPortal().isLayoutDescendant(layout, layoutId);
+	}
+
 	public static boolean isLayoutFirstPageable(Layout layout) {
 		return getPortal().isLayoutFirstPageable(layout);
 	}

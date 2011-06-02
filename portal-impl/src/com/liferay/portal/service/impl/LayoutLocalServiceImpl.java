@@ -1192,23 +1192,6 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		return parentLayoutId;
 	}
 
-	protected boolean isDescendant(Layout layout, long layoutId)
-		throws PortalException, SystemException {
-
-		if (layout.getLayoutId() == layoutId) {
-			return true;
-		}
-		else {
-			for (Layout childLayout : layout.getChildren()) {
-				if (isDescendant(childLayout, layoutId)) {
-					return true;
-				}
-			}
-
-			return false;
-		}
-	}
-
 	protected void validate(
 			long groupId, boolean privateLayout, long layoutId,
 			long parentLayoutId, String name, String type, boolean hidden,
@@ -1358,7 +1341,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 			// Layout cannot become descendant of itself
 
-			if (isDescendant(layout, parentLayoutId)) {
+			if (PortalUtil.isLayoutDescendant(layout, parentLayoutId)) {
 				throw new LayoutParentLayoutIdException(
 					LayoutParentLayoutIdException.SELF_DESCENDANT);
 			}
