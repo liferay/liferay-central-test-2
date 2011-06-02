@@ -2450,18 +2450,6 @@
 		</licenses>
 	</library>
 	<library>
-		<file-name>portal/oscache.jar</file-name>
-		<version>2.4</version>
-		<project-name>OSCache</project-name>
-		<project-url>http://www.opensymphony.com/oscache</project-url>
-		<licenses>
-			<license>
-				<license-name>Symphony License For OSCache</license-name>
-				<copyright-notice>Copyright (c) 2001-2004 The OpenSymphony Group. All rights reserved.</copyright-notice>
-			</license>
-		</licenses>
-	</library>
-	<library>
 		<file-name>portal/pdfbox.jar</file-name>
 		<version>1.4.0</version>
 		<project-name>PDFBox</project-name>
