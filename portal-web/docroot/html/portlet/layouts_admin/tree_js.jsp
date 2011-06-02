@@ -213,7 +213,7 @@ PortletURL portletURL = (PortletURL)request.getAttribute("edit_pages.jsp-portlet
 
 			var data = {
 				cmd: cmd,
-				groupId: themeDisplay.getScopeGroupId(),
+				groupId: <%= groupId %>,
 				layoutId: id,
 				privateLayout: <%= privateLayout %>,
 				recursive: recursive,
