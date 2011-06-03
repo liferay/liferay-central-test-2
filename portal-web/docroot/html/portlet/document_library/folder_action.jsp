@@ -343,17 +343,15 @@ if (row == null && portletName.equals(PortletKeys.DOCUMENT_LIBRARY_DISPLAY)) {
 	</div>
 </div>
 
-<aui:script use="aui-base,aui-swf">
+<aui:script use="aui-dialog,aui-swf">
 	if (A.SWF.isFlashVersionAtLeast(9)) {
-		var uploadMultipleDocumentsIcon = A.one('.aui-helper-hidden.upload-multiple-documents');
+		var uploadMultipleDocumentsIcon = A.one('.upload-multiple-documents:hidden');
 
 		if (uploadMultipleDocumentsIcon) {
-			uploadMultipleDocumentsIcon.removeClass('aui-helper-hidden');
+			uploadMultipleDocumentsIcon.show();
 		}
 	}
-</aui:script>
 
-<aui:script use="aui-dialog">
 	var webdavAction = A.one('.<%= randomNamespace %>-webdav-action');
 
 	if (webdavAction) {

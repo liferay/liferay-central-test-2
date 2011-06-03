@@ -67,15 +67,15 @@ documentTypes.addAll(DLDocumentTypeServiceUtil.getDocumentTypes(scopeGroupId, Qu
 
 			portletURL.setPortletId('<%= portletId %>');
 
-			portletURL.setParameter('struts_action', '/document_library/edit_file_entry');
-			portletURL.setParameter('<%= Constants.CMD %>', '<%= Constants.ADD %>');
-			portletURL.setParameter('redirect', '<%= HtmlUtil.escape(redirect) %>');
 			portletURL.setParameter('backURL', '<%= HtmlUtil.escape(backURL) %>');
+			portletURL.setParameter('<%= Constants.CMD %>', '<%= Constants.ADD %>');
 			portletURL.setParameter('documentTypeId', link.getAttribute('data-rowId'));
-			portletURL.setParameter('repositoryId', '<%= repositoryId %>');
 			portletURL.setParameter('folderId', '<%= folderId %>');
+			portletURL.setParameter('redirect', '<%= HtmlUtil.escape(redirect) %>');
+			portletURL.setParameter('repositoryId', '<%= repositoryId %>');
+			portletURL.setParameter('struts_action', '/document_library/edit_file_entry');
 
-			window.parent.location.href = portletURL.toString();
+			Liferay.Util.getOpener().location.href = portletURL.toString();
 
 			Liferay.fire(
 				'closeWindow',
