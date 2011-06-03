@@ -23,7 +23,7 @@
 <aui:form action="<%= portletURL.toString() %>" method="post" name="fm">
 
 	<liferay-ui:header
-		title='<%= scopeStructureName %>'
+		title="<%= scopeStructureName %>"
 	/>
 
 	<liferay-ui:search-form
