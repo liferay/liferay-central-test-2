@@ -1258,6 +1258,8 @@ public class PropsValues {
 
 	public static boolean USER_GROUPS_NAME_ALLOW_NUMERIC = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.USER_GROUPS_NAME_ALLOW_NUMERIC));
 
+	public static final boolean USER_NOTIFICATION_EVENT_CONFIRMATION_ENABLED = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.USER_NOTIFICATION_EVENT_CONFIRMATION_ENABLED));
+
 	public static final boolean USERS_DELETE = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.USERS_DELETE));
 
 	public static final String USERS_EMAIL_ADDRESS_AUTO_SUFFIX = PropsUtil.get(PropsKeys.USERS_EMAIL_ADDRESS_AUTO_SUFFIX);
@@ -1299,8 +1301,6 @@ public class PropsValues {
 	public static final String[] USERS_LIST_VIEWS = PropsUtil.getArray(PropsKeys.USERS_LIST_VIEWS);
 
 	public static final String USERS_LIST_VIEWS_DEFAULT = PropsUtil.get(PropsKeys.USERS_LIST_VIEWS_DEFAULT);
-
-	public static final boolean USER_NOTIFICATION_EVENT_CONFIRMATION_ENABLED = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.USER_NOTIFICATION_EVENT_CONFIRMATION_ENABLED));
 
 	public static final boolean USERS_REMINDER_QUERIES_CUSTOM_QUESTION_ENABLED = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.USERS_REMINDER_QUERIES_CUSTOM_QUESTION_ENABLED));
 
