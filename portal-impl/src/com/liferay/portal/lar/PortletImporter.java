@@ -321,62 +321,56 @@ public class PortletImporter {
 			PortletDataContext portletDataContext, long companyId,
 			long ownerId, int ownerType, long plid, String portletId,
 			String xml)
-		throws Exception{
+		throws Exception {
 
 		String rootPotletId = PortletConstants.getRootPortletId(portletId);
 
-		if (rootPotletId.equals(PortletKeys.ASSET_PUBLISHER)) {
-			PortletPreferencesImpl portletPreferences =
-				(PortletPreferencesImpl)PortletPreferencesFactoryUtil.
-					fromXML(companyId, ownerId, ownerType, plid, portletId, xml);
-
-			 Enumeration<String> names = portletPreferences.getNames();
-
-			 while (names.hasMoreElements()) {
-				String name = names.nextElement();
-				String value = portletPreferences.getValue(name, null);
-				String prefix = "queryName";
-
-				if ((value != null) &&
-					value.equalsIgnoreCase("assetCategories") &&
-					name.startsWith(prefix)) {
-
-					String idx = name.substring(prefix.length(), name.length());
-					String queryValuesName = "queryValues" + idx;
-
-					String[] importedCategoryPKs =
-						portletPreferences.getValues(queryValuesName, null);
-
-					Map<Long, Long> assetCategoryPKs =
-						(Map<Long, Long>)portletDataContext.
-							getNewPrimaryKeysMap(AssetCategory.class);
-
-					String[] newCategoryPKs =
-						new String[importedCategoryPKs.length];
-
-					int i = 0;
-
-					for (String importedCategoryPK : importedCategoryPKs) {
-						newCategoryPKs[i++] =
-							StringUtil.valueOf(
-								assetCategoryPKs.get(
-									new Long(importedCategoryPK)));
-					}
-
-					try {
-						portletPreferences.setValues(
-							queryValuesName, newCategoryPKs);
-					}
-					catch (Exception e) {
-						throw new PortalException(e);
-					}
-				}
-			}
-
-			xml = PortletPreferencesFactoryUtil.toXML(portletPreferences);
+		if (!rootPotletId.equals(PortletKeys.ASSET_PUBLISHER)) {
+			return xml;
 		}
 
-		return xml;
+		PortletPreferencesImpl portletPreferences =
+			(PortletPreferencesImpl)PortletPreferencesFactoryUtil.
+				fromXML(companyId, ownerId, ownerType, plid, portletId, xml);
+
+		 Enumeration<String> enu = portletPreferences.getNames();
+
+		 while (enu.hasMoreElements()) {
+			String name = enu.nextElement();
+
+			String value = portletPreferences.getValue(name, StringPool.BLANK);
+
+			String prefix = "queryName";
+
+			if (value.equalsIgnoreCase("assetCategories") &&
+				name.startsWith(prefix)) {
+
+				String index = name.substring(prefix.length(), name.length());
+
+				String queryValuesName = "queryValues" + index;
+
+				String[] importedCategoryPKs = portletPreferences.getValues(
+					queryValuesName, null);
+
+				Map<Long, Long> assetCategoryPKs =
+					(Map<Long, Long>)portletDataContext.getNewPrimaryKeysMap(
+						AssetCategory.class);
+
+				String[] newCategoryPKs = new String[
+					importedCategoryPKs.length];
+
+				int i = 0;
+
+				for (String importedCategoryPK : importedCategoryPKs) {
+					newCategoryPKs[i++] = StringUtil.valueOf(
+						assetCategoryPKs.get(importedCategoryPK));
+				}
+
+				portletPreferences.setValues(queryValuesName, newCategoryPKs);
+			}
+		}
+
+		return PortletPreferencesFactoryUtil.toXML(portletPreferences);
 	}
 
 	protected void deletePortletData(
