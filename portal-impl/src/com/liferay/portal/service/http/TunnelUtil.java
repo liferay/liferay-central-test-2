@@ -16,6 +16,7 @@ package com.liferay.portal.service.http;
 
 import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.util.Base64;
+import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.MethodHandler;
 import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.kernel.util.ObjectValuePair;
@@ -156,15 +157,17 @@ public class TunnelUtil {
 				httpPrincipal.getUrl() + "/tunnel-web/secure/liferay/do");
 		}
 
-		HttpURLConnection urlc = (HttpURLConnection)url.openConnection();
+		HttpURLConnection httpURLConnection =
+			(HttpURLConnection)url.openConnection();
 
-		urlc.setDoInput(true);
-		urlc.setDoOutput(true);
-		urlc.setUseCaches(false);
-		urlc.setRequestProperty(
-			"Content-Type","application/x-java-serialized-object");
+		httpURLConnection.setDoInput(true);
+		httpURLConnection.setDoOutput(true);
+		httpURLConnection.setRequestProperty(
+			HttpHeaders.CONTENT_TYPE,
+			ContentTypes.APPLICATION_X_JAVA_SERIALIZED_OBJECT);
+		httpURLConnection.setUseCaches(false);
 
-		urlc.setRequestMethod("POST");
+		httpURLConnection.setRequestMethod("POST");
 
 		if (Validator.isNotNull(httpPrincipal.getLogin()) &&
 			Validator.isNotNull(httpPrincipal.getPassword())) {
@@ -173,13 +176,13 @@ public class TunnelUtil {
 				httpPrincipal.getLogin() + StringPool.COLON +
 					httpPrincipal.getPassword();
 
-			urlc.setRequestProperty(
+			httpURLConnection.setRequestProperty(
 				HttpHeaders.AUTHORIZATION,
 				HttpServletRequest.BASIC_AUTH + StringPool.SPACE +
 					Base64.encode(userNameAndPassword.getBytes()));
 		}
 
-		return urlc;
+		return httpURLConnection;
 	}
 
 }

@@ -28,6 +28,9 @@ public interface ContentTypes {
 
 	public static final String APPLICATION_TEXT = "application/text";
 
+	public static final String APPLICATION_X_JAVA_SERIALIZED_OBJECT =
+		"application/x-java-serialized-object";
+
 	public static final String APPLICATION_X_WWW_FORM_URLENCODED =
 		"application/x-www-form-urlencoded";
 
