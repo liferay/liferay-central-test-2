@@ -62,4 +62,20 @@
 			url="<%= viewUsersURL %>"
 		/>
 	</c:if>
+
+	<c:if test="<%= ArrayUtil.contains(PropsValues.USERS_LIST_VIEWS, UserConstants.LIST_VIEW_FLAT_USER_GROUPS) %>">
+		<portlet:renderURL var="viewUsergroupsURL">
+			<portlet:param name="struts_action" value="/enterprise_admin/view" />
+			<portlet:param name="tabs1" value="users" />
+			<portlet:param name="usersListView" value="<%= UserConstants.LIST_VIEW_FLAT_USER_GROUPS%>" />
+			<portlet:param name="saveUsersListView" value="<%= Boolean.TRUE.toString() %>" />
+		</portlet:renderURL>
+
+		<liferay-ui:icon
+			image="assign_user_group_roles"
+			message="user-groups"
+			method="get"
+			url="<%= viewUsergroupsURL %>"
+		/>
+	</c:if>
 </c:if>

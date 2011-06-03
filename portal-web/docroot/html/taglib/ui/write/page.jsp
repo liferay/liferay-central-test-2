@@ -90,6 +90,14 @@ String property = (String)request.getAttribute("liferay-ui:write:property");
 
 				<%= HtmlUtil.escape(ListUtil.toString(organizations, "name", StringPool.COMMA_AND_SPACE)) %>
 			</c:when>
+			<c:when test='<%= property.equals("user-groups") %>'>
+
+				<%
+				List<UserGroup> userGroups = user2.getUserGroups();
+				%>
+
+				<%= HtmlUtil.escape(ListUtil.toString(userGroups, "name", StringPool.COMMA_AND_SPACE)) %>
+			</c:when>
 		</c:choose>
 	</c:when>
 </c:choose>

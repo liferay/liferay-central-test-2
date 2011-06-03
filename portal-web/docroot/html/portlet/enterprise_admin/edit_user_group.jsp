@@ -30,8 +30,8 @@ long userGroupId = BeanParamUtil.getLong(userGroup, request, "userGroupId");
 	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
 	<aui:input name="userGroupId" type="hidden" value="<%= userGroupId %>" />
 
-	<liferay-util:include page="/html/portlet/enterprise_admin/user_group/toolbar.jsp">
-		<liferay-util:param name="toolbarItem" value='<%= (userGroup == null) ? "add" : "view-all" %>' />
+	<liferay-util:include page="/html/portlet/enterprise_admin/user/toolbar.jsp">
+		<liferay-util:param name="toolbarItem" value='<%= (userGroup == null) ? "add" : "view" %>' />
 	</liferay-util:include>
 
 	<liferay-ui:header

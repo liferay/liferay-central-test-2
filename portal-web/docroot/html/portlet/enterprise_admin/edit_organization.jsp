@@ -40,7 +40,7 @@ String[][] categorySections = {mainSections, identificationSections, miscellaneo
 %>
 
 <liferay-util:include page="/html/portlet/enterprise_admin/user/toolbar.jsp">
-	<liferay-util:param name="toolbarItem" value='<%= (organization == null) ? "add-organization" : "view" %>' />
+	<liferay-util:param name="toolbarItem" value='<%= (organization == null) ? "add" : "view" %>' />
 </liferay-util:include>
 
 <liferay-ui:header

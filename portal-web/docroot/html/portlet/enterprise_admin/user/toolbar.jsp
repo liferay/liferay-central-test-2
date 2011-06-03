@@ -29,7 +29,7 @@ String toolbarItem = ParamUtil.getString(request, "toolbarItem", "view");
 		<%@ include file="/html/portlet/enterprise_admin/user/list_views.jspf" %>
 	</liferay-ui:icon-menu>
 
-	<c:if test="<%= PortalPermissionUtil.contains(permissionChecker, ActionKeys.ADD_ORGANIZATION) || PortalPermissionUtil.contains(permissionChecker, ActionKeys.ADD_USER) %>">
+	<c:if test="<%= PortalPermissionUtil.contains(permissionChecker, ActionKeys.ADD_ORGANIZATION) || PortalPermissionUtil.contains(permissionChecker, ActionKeys.ADD_USER) || PortalPermissionUtil.contains(permissionChecker, ActionKeys.ADD_USER_GROUP) %>">
 		<liferay-ui:icon-menu align="left" direction="down" extended="<%= false %>" icon='<%= themeDisplay.getPathThemeImages() + "/common/add.png" %>' message="add">
 
 			<c:if test="<%= PortalPermissionUtil.contains(permissionChecker, ActionKeys.ADD_USER) %>">
@@ -67,6 +67,19 @@ String toolbarItem = ParamUtil.getString(request, "toolbarItem", "view");
 				}
 				%>
 
+			</c:if>
+
+			<c:if test="<%= PortalPermissionUtil.contains(permissionChecker, ActionKeys.ADD_USER_GROUP) %>">
+				<portlet:renderURL var="addUsergroupURL">
+					<portlet:param name="struts_action" value="/enterprise_admin/edit_user_group" />
+					<portlet:param name="redirect" value="<%= currentURL %>" />
+				</portlet:renderURL>
+
+				<liferay-ui:icon
+					image="assign_user_group_roles"
+					message="user-group"
+					url="<%= addUsergroupURL %>"
+				/>
 			</c:if>
 		</liferay-ui:icon-menu>
 	</c:if>

@@ -48,3 +48,10 @@
 >
 	<liferay-ui:write bean="<%= user2 %>" property="organizations" />
 </liferay-ui:search-container-column-text>
+
+<liferay-ui:search-container-column-text
+	href="<%= rowURL %>"
+	name="user-groups"
+>
+	<liferay-ui:write bean="<%= user2 %>" property="user-groups" />
+</liferay-ui:search-container-column-text>

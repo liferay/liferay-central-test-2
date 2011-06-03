@@ -117,7 +117,7 @@
 
 	</c:if>
 
-	<c:if test="<%= (usersListView.equals(UserConstants.LIST_VIEW_FLAT_USERS)) && (userOrganization == null) %>">
+	<c:if test="<%= (usersListView.equals(UserConstants.LIST_VIEW_FLAT_USERS)) && (userOrganization == null) && (userGroup == null) %>">
 		<liferay-ui:search-form
 			page="/html/portlet/enterprise_admin/user_search.jsp"
 		/>

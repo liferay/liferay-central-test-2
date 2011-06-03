@@ -1174,8 +1174,6 @@
 		<icon>/html/icons/enterprise_admin_user_groups.png</icon>
 		<struts-path>enterprise_admin_user_groups</struts-path>
 		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
-		<control-panel-entry-category>portal</control-panel-entry-category>
-		<control-panel-entry-weight>4.0</control-panel-entry-weight>
 		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<use-default-template>false</use-default-template>
 		<private-request-attributes>false</private-request-attributes>

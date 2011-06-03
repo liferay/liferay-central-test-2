@@ -29,6 +29,8 @@ public class UserConstants {
 
 	public static final String LIST_VIEW_FLAT_USERS = "flat-users";
 
+	public static final String LIST_VIEW_FLAT_USER_GROUPS = "flat-user-groups";
+
 	public static final String LIST_VIEW_TREE = "tree";
 
 	public static final String USERS_EMAIL_ADDRESS_AUTO_SUFFIX = PropsUtil.get(

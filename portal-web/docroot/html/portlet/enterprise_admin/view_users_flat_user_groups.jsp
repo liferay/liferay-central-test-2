@@ -14,28 +14,8 @@
  */
 --%>
 
-<%@ include file="/html/portlet/enterprise_admin/init.jsp" %>
-
-<%
-PortletURL portletURL = (PortletURL)request.getAttribute("view.jsp-portletURL");
-%>
-
-<liferay-ui:error exception="<%= RequiredUserGroupException.class %>" message="you-cannot-delete-user-groups-that-have-users" />
-
-<liferay-util:include page="/html/portlet/enterprise_admin/user_group/toolbar.jsp">
-	<liferay-util:param name="toolbarItem" value="view-all" />
-</liferay-util:include>
-
-<%
-RowChecker rowChecker = null;
-
-if (PortalPermissionUtil.contains(permissionChecker, ActionKeys.ADD_USER_GROUP)) {
-	rowChecker = new RowChecker(renderResponse);
-}
-%>
-
 <liferay-ui:search-container
-	rowChecker="<%= rowChecker %>"
+	rowChecker="<%= new RowChecker(renderResponse) %>"
 	searchContainer="<%= new UserGroupSearch(renderRequest, portletURL) %>"
 >
 	<aui:input name="deleteUserGroupIds" type="hidden" />
@@ -47,11 +27,17 @@ if (PortalPermissionUtil.contains(permissionChecker, ActionKeys.ADD_USER_GROUP))
 
 	<%
 	UserGroupSearchTerms searchTerms = (UserGroupSearchTerms)searchContainer.getSearchTerms();
+
+	LinkedHashMap userGroupParams = new LinkedHashMap();
+
+	if (filterManageableUserGroups) {
+		userGroupParams.put("userGroupsUsers", new Long(user.getUserId()));
+	}
 	%>
 
 	<liferay-ui:search-container-results
-		results="<%= UserGroupLocalServiceUtil.search(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), null, searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator()) %>"
-		total="<%= UserGroupLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), null) %>"
+		results="<%= UserGroupLocalServiceUtil.search(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), userGroupParams, searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator()) %>"
+		total="<%= UserGroupLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), userGroupParams) %>"
 	/>
 
 	<liferay-ui:search-container-row
@@ -65,6 +51,12 @@ if (PortalPermissionUtil.contains(permissionChecker, ActionKeys.ADD_USER_GROUP))
 			<portlet:param name="redirect" value="<%= searchContainer.getIteratorURL().toString() %>" />
 			<portlet:param name="userGroupId" value="<%= String.valueOf(userGroup.getUserGroupId()) %>" />
 		</portlet:renderURL>
+
+		<%
+		if (!UserGroupPermissionUtil.contains(permissionChecker, userGroup.getUserGroupId(), ActionKeys.UPDATE)) {
+			rowURL = null;
+		}
+		%>
 
 		<liferay-ui:search-container-column-text
 			href="<%= rowURL %>"
