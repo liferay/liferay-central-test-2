@@ -142,7 +142,7 @@ public class JournalArticleAssetRenderer extends BaseAssetRenderer {
 			(ThemeDisplay)liferayPortletRequest.getAttribute(
 				WebKeys.THEME_DISPLAY);
 
-		String urlViewInContext = StringPool.BLANK;
+		String urlViewInContext = null;
 
 		if (Validator.isNotNull(_article.getLayoutUuid())) {
 			Group group = themeDisplay.getScopeGroup();
@@ -155,29 +155,6 @@ public class JournalArticleAssetRenderer extends BaseAssetRenderer {
 				PortalUtil.getGroupFriendlyURL(group, false, themeDisplay) +
 					JournalArticleConstants.CANONICAL_URL_SEPARATOR +
 						_article.getUrlTitle();
-		}
-		else {
-			String languageId = LanguageUtil.getLanguageId(
-				liferayPortletRequest);
-
-			JournalArticleDisplay articleDisplay =
-				JournalContentUtil.getDisplay(
-					_article.getGroupId(), _article.getArticleId(), null, null,
-					languageId, themeDisplay);
-
-			if (articleDisplay == null) {
-				return StringPool.BLANK;
-			}
-
-			PortletURL portletURL = liferayPortletResponse.createRenderURL();
-
-			portletURL.setParameter(
-				"struts_action", "/asset_publisher/view_content");
-			portletURL.setParameter(
-				"type", JournalArticleAssetRendererFactory.TYPE);
-			portletURL.setParameter("urlTitle", _article.getUrlTitle());
-
-			urlViewInContext = portletURL.toString();
 		}
 
 		return urlViewInContext;

@@ -55,6 +55,11 @@ viewFullContentURLString = HttpUtil.setParameter(viewFullContentURLString, "redi
 
 String summary = StringUtil.shorten(assetRenderer.getSummary(locale), abstractLength);
 String viewURL = viewInContext ? assetRenderer.getURLViewInContext(liferayPortletRequest, liferayPortletResponse, viewFullContentURLString) : viewFullContentURL.toString();
+
+if (Validator.isNull(viewURL)) {
+	viewURL = viewFullContentURL.toString();
+}
+
 String viewURLMessage = viewInContext ? assetRenderer.getViewInContextMessage() : "read-more-x-about-x";
 
 viewURL = _checkViewURL(viewURL, currentURL, themeDisplay);
