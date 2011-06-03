@@ -424,6 +424,8 @@ public class JCRHook extends BaseHook {
 
 			Version version = versionHistory.getVersionByLabel(versionLabel);
 
+			versionManager.restore(version.getPredecessors()[0], true);
+
 			versionHistory.removeVersion(version.getName());
 
 			session.save();
