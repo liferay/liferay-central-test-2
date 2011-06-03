@@ -17,10 +17,8 @@ package com.liferay.portal.kernel.spring.context;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.PortalClassLoaderServletContextListener;
-import com.liferay.portal.kernel.util.MethodHandler;
+import com.liferay.portal.kernel.util.PortalClassInvoker;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
-
-import java.lang.reflect.Method;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextListener;
@@ -36,38 +34,17 @@ public class PortletContextLoaderListener
 	}
 
 	public static String getLockKey(String contextPath) {
-		Thread currentThread = Thread.currentThread();
-
-		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
-
 		try {
-			ClassLoader portalClusterLoader =
-				PortalClassLoaderUtil.getClassLoader();
+			Object returnValue = PortalClassInvoker.invoke(
+				false, _CLASS_NAME, "getLockKey",
+				new String[] {String.class.getName()}, contextPath);
 
-			currentThread.setContextClassLoader(portalClusterLoader);
-
-			Method getKeyMethod = portalClusterLoader.loadClass(
-				_CLASS_NAME).getMethod("getLockKey", String.class);
-
-			MethodHandler methodHandler = new MethodHandler(
-				getKeyMethod, contextPath);
-
-			Object returnValue = methodHandler.invoke(false);
-
-			return returnValue.toString();
+			return String.valueOf(returnValue);
 		}
 		catch (Exception e) {
-			if (_log.isWarnEnabled()) {
-				_log.warn(
-					"Unable to get lock key by class :" + _CLASS_NAME +
-						" loaded by portal class loader",
-					e);
-			}
+			_log.error(e, e);
 
 			throw new IllegalStateException("Unable to get lock key", e);
-		}
-		finally {
-			currentThread.setContextClassLoader(contextClassLoader);
 		}
 	}
 

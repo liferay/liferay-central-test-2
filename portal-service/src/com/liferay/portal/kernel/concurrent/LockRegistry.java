@@ -53,6 +53,16 @@ public class LockRegistry {
 		return lock;
 	}
 
+	public static ReentrantLock finallyFreeLock(
+		String groupName, String key, boolean unlock) {
+
+		if (_prematureLockReleases.containsKey(groupName + key)) {
+			return freeLock(groupName, key, unlock);
+		}
+
+		return null;
+	}
+
 	public static void freeAllLock() {
 		freeAllLock(false);
 	}
@@ -76,23 +86,13 @@ public class LockRegistry {
 		return freeLock(groupName, false);
 	}
 
-	public static ReentrantLock finallyFreeLock(
-		String groupName, String key, boolean unlock) {
-
-		if (_prematureLockReleases.containsKey(groupName + key)) {
-			return freeLock(groupName, key, unlock);
-		}
-
-		return null;
-	}
-
 	public static Map<String, ReentrantLock> freeLock(
 		String groupName, boolean unlock) {
 
 		Map<String, ReentrantLock> lockGroup = _lockGroupMap.remove(groupName);
 
 		if (lockGroup == null) {
-			_prematureLockReleases.put(groupName, _DUMMY_VALUE);
+			_prematureLockReleases.put(groupName, _dummyValue);
 
 			return null;
 		}
@@ -120,7 +120,7 @@ public class LockRegistry {
 		String prematureLockReleasesKey = groupName + key;
 
 		if (lockGroup == null) {
-			_prematureLockReleases.put(prematureLockReleasesKey, _DUMMY_VALUE);
+			_prematureLockReleases.put(prematureLockReleasesKey, _dummyValue);
 
 			return null;
 		}
@@ -128,7 +128,7 @@ public class LockRegistry {
 		ReentrantLock lock = lockGroup.remove(key);
 
 		if (lock == null) {
-			_prematureLockReleases.put(prematureLockReleasesKey, _DUMMY_VALUE);
+			_prematureLockReleases.put(prematureLockReleasesKey, _dummyValue);
 
 			return null;
 		}
@@ -153,14 +153,12 @@ public class LockRegistry {
 		return lockGroup.get(key);
 	}
 
-	private static final Object _DUMMY_VALUE = new Object();
-
+	private static Object _dummyValue = new Object();
 	private static ConcurrentHashMap
 		<String, ConcurrentHashMap<String, ReentrantLock>>
 			_lockGroupMap =
 				new ConcurrentHashMap
 					<String, ConcurrentHashMap<String, ReentrantLock>>();
-
 	private static Map<String, Object> _prematureLockReleases =
 		new ConcurrentHashMap<String, Object>();
 
