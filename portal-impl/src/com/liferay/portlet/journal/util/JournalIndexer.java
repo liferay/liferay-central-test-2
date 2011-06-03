@@ -152,7 +152,7 @@ public class JournalIndexer extends BaseIndexer {
 
 		Document document = getBaseModelDocument(PORTLET_ID, article);
 
-		long groupId = getParentGroupId(article.getGroupId());
+		long groupId = article.getGroupId();
 
 		document.addUID(PORTLET_ID, groupId, article.getArticleId());
 

@@ -231,7 +231,7 @@ if (Validator.isNotNull(content)) {
 
 										<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>" var="changeStructureURL">
 											<portlet:param name="struts_action" value="/journal/select_structure" />
-											<portlet:param name="groupId" value="<%= String.valueOf(themeDisplay.getParentGroupId()) %>" />
+											<portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" />
 										</portlet:renderURL>
 
 										<span class="structure-links">
@@ -669,7 +669,7 @@ if (Validator.isNotNull(content)) {
 							width:680
 						},
 						title: '<liferay-ui:message key="template" />',
-						uri: '<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/journal/select_template" /><portlet:param name="groupId" value="<%= String.valueOf(themeDisplay.getParentGroupId()) %>" /></portlet:renderURL>'
+						uri: '<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/journal/select_template" /><portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" /></portlet:renderURL>'
 					}
 				);
 			}
