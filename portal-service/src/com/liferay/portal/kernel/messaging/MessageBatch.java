@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2000-2011 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
@@ -15,6 +15,7 @@
 package com.liferay.portal.kernel.messaging;
 
 import java.io.Serializable;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,21 +35,21 @@ public class MessageBatch  implements Serializable {
 	public MessageBatch(String messageBatchId, int initialSize) {
 		_messageBatchId = messageBatchId;
 		_messages = new ArrayList<Message>(initialSize);
-
 	}
 
 	public void addMessage(Message message) {
 		_messages.add(message);
 	}
 
-	public List<Message> getMessages() {
-		return _messages;
-	}
-
 	public String getMessageBatchId() {
 		return _messageBatchId;
 	}
 
-	private List<Message> _messages;
+	public List<Message> getMessages() {
+		return _messages;
+	}
+
 	private String _messageBatchId;
+	private List<Message> _messages;
+
 }
