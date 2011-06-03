@@ -49,7 +49,7 @@ import com.liferay.portlet.PortletConfigFactoryUtil;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.portlet.portletconfiguration.util.PortletConfigurationUtil;
 import com.liferay.portlet.sites.action.ActionUtil;
-import com.liferay.portlet.sites.util.CommunitiesUtil;
+import com.liferay.portlet.sites.util.SitesUtil;
 
 import java.util.List;
 import java.util.ResourceBundle;
@@ -127,7 +127,7 @@ public class UpdateLayoutAction extends JSONAction {
 			jsonObj.put("url", array[1]);
 		}
 		else if (cmd.equals("delete")) {
-			CommunitiesUtil.deleteLayout(request, response);
+			SitesUtil.deleteLayout(request, response);
 		}
 		else if (cmd.equals("display_order")) {
 			updateDisplayOrder(request);

@@ -80,7 +80,7 @@ import com.liferay.portlet.announcements.model.AnnouncementsDelivery;
 import com.liferay.portlet.announcements.model.AnnouncementsEntryConstants;
 import com.liferay.portlet.announcements.model.impl.AnnouncementsDeliveryImpl;
 import com.liferay.portlet.enterpriseadmin.util.EnterpriseAdminUtil;
-import com.liferay.portlet.sites.util.CommunitiesUtil;
+import com.liferay.portlet.sites.util.SitesUtil;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -414,7 +414,7 @@ public class EditUserAction extends PortletAction {
 		long privateLayoutSetPrototypeId = ParamUtil.getLong(
 			actionRequest, "privateLayoutSetPrototypeId");
 
-		CommunitiesUtil.applyLayoutSetPrototypes(
+		SitesUtil.applyLayoutSetPrototypes(
 			user.getGroup(), publicLayoutSetPrototypeId,
 			privateLayoutSetPrototypeId, serviceContext);
 
@@ -673,7 +673,7 @@ public class EditUserAction extends PortletAction {
 		long privateLayoutSetPrototypeId = ParamUtil.getLong(
 			actionRequest, "privateLayoutSetPrototypeId");
 
-		CommunitiesUtil.applyLayoutSetPrototypes(
+		SitesUtil.applyLayoutSetPrototypes(
 			user.getGroup(), publicLayoutSetPrototypeId,
 			privateLayoutSetPrototypeId, serviceContext);
 

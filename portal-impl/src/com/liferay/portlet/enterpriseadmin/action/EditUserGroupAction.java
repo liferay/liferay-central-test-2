@@ -30,7 +30,7 @@ import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.service.UserGroupServiceUtil;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portlet.sites.util.CommunitiesUtil;
+import com.liferay.portlet.sites.util.SitesUtil;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -162,7 +162,7 @@ public class EditUserGroupAction extends PortletAction {
 		long privateLayoutSetPrototypeId = ParamUtil.getLong(
 			actionRequest, "privateLayoutSetPrototypeId");
 
-		CommunitiesUtil.applyLayoutSetPrototypes(
+		SitesUtil.applyLayoutSetPrototypes(
 			userGroup.getGroup(), publicLayoutSetPrototypeId,
 			privateLayoutSetPrototypeId, serviceContext);
 	}

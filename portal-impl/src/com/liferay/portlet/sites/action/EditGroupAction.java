@@ -45,7 +45,7 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.asset.AssetCategoryException;
 import com.liferay.portlet.asset.AssetTagException;
-import com.liferay.portlet.sites.util.CommunitiesUtil;
+import com.liferay.portlet.sites.util.SitesUtil;
 
 import java.util.List;
 
@@ -311,7 +311,7 @@ public class EditGroupAction extends PortletAction {
 		if ((publicLayoutSetPrototypeId > 0) ||
 			(privateLayoutSetPrototypeId > 0)) {
 
-			CommunitiesUtil.applyLayoutSetPrototypes(
+			SitesUtil.applyLayoutSetPrototypes(
 				group, publicLayoutSetPrototypeId, privateLayoutSetPrototypeId,
 				serviceContext);
 		}

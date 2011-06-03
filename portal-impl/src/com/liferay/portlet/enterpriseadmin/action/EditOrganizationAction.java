@@ -49,7 +49,7 @@ import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.enterpriseadmin.util.EnterpriseAdminUtil;
-import com.liferay.portlet.sites.util.CommunitiesUtil;
+import com.liferay.portlet.sites.util.SitesUtil;
 
 import java.util.List;
 
@@ -249,7 +249,7 @@ public class EditOrganizationAction extends PortletAction {
 		long privateLayoutSetPrototypeId = ParamUtil.getLong(
 			actionRequest, "privateLayoutSetPrototypeId");
 
-		CommunitiesUtil.applyLayoutSetPrototypes(
+		SitesUtil.applyLayoutSetPrototypes(
 			organization.getGroup(), publicLayoutSetPrototypeId,
 			privateLayoutSetPrototypeId, serviceContext);
 

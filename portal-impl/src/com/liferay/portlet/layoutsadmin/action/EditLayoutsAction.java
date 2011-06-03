@@ -79,7 +79,7 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.sites.action.ActionUtil;
-import com.liferay.portlet.sites.util.CommunitiesUtil;
+import com.liferay.portlet.sites.util.SitesUtil;
 import com.liferay.util.servlet.UploadException;
 
 import java.util.Iterator;
@@ -140,7 +140,7 @@ public class EditLayoutsAction extends PortletAction {
 				oldFriendlyURL = (String)returnValue[1];
 			}
 			else if (cmd.equals(Constants.DELETE)) {
-				CommunitiesUtil.deleteLayout(actionRequest, actionResponse);
+				SitesUtil.deleteLayout(actionRequest, actionResponse);
 			}
 			else if (cmd.equals("add_root_revision")) {
 				addRootRevision(actionRequest);

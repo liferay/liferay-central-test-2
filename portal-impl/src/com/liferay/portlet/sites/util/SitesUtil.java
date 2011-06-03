@@ -58,7 +58,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author Raymond Augé
  * @author Ryan Park
  */
-public class CommunitiesUtil {
+public class SitesUtil {
 
 	public static void applyLayoutSetPrototypes(
 			Group group, long publicLayoutSetPrototypeId,

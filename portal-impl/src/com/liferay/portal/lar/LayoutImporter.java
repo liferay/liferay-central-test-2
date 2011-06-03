@@ -84,7 +84,7 @@ import com.liferay.portlet.asset.model.AssetVocabulary;
 import com.liferay.portlet.asset.service.AssetVocabularyLocalServiceUtil;
 import com.liferay.portlet.asset.service.persistence.AssetVocabularyUtil;
 import com.liferay.portlet.journal.model.JournalArticle;
-import com.liferay.portlet.sites.util.CommunitiesUtil;
+import com.liferay.portlet.sites.util.SitesUtil;
 
 import java.io.File;
 import java.io.IOException;
@@ -1066,7 +1066,7 @@ public class LayoutImporter {
 		InputStream inputStream = portletDataContext.getZipEntryAsInputStream(
 			path.concat(".lar"));
 
-		CommunitiesUtil.importLayoutSetPrototype(
+		SitesUtil.importLayoutSetPrototype(
 			layoutSetPrototype, inputStream, serviceContext);
 	}
 

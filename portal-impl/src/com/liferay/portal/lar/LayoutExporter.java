@@ -68,7 +68,7 @@ import com.liferay.portlet.asset.model.AssetCategory;
 import com.liferay.portlet.asset.model.AssetVocabulary;
 import com.liferay.portlet.asset.service.AssetVocabularyLocalServiceUtil;
 import com.liferay.portlet.asset.service.persistence.AssetCategoryUtil;
-import com.liferay.portlet.sites.util.CommunitiesUtil;
+import com.liferay.portlet.sites.util.SitesUtil;
 import com.liferay.util.ContentUtil;
 
 import de.schlichtherle.io.FileInputStream;
@@ -296,7 +296,7 @@ public class LayoutExporter {
 					portletDataContext, layoutSetPrototypeUuid);
 
 				File layoutSetPrototypeFile =
-					CommunitiesUtil.exportLayoutSetPrototype(
+					SitesUtil.exportLayoutSetPrototype(
 						layoutSetPrototype, serviceContext);
 
 				try {
