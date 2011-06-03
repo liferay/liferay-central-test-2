@@ -461,6 +461,7 @@ public class LayoutImporter {
 				portletDataContext, portletElement);
 
 			try {
+
 				// Portlet preferences
 
 				_portletImporter.importPortletPreferences(

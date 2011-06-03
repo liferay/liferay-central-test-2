@@ -261,6 +261,7 @@ public class PortletImporter {
 		setPortletScope(portletDataContext, portletElement);
 
 		try {
+
 			// Portlet preferences
 
 			importPortletPreferences(
@@ -860,14 +861,14 @@ public class PortletImporter {
 						String prefix = "queryName";
 
 						if ((value != null) &&
-							value.equalsIgnoreCase("assetCategories") && 
+							value.equalsIgnoreCase("assetCategories") &&
 							name.startsWith(prefix)) {
 
 							String idx = name.substring(
 								prefix.length(), name.length());
 
 							String queryValuesName = "queryValues" + idx;
-							String[] importedCategoryPKs = 
+							String[] importedCategoryPKs =
 								portletPreferences.getValues(
 									queryValuesName, null);
 
@@ -1306,8 +1307,8 @@ public class PortletImporter {
 		PortletDataContext portletDataContext, long groupId) {
 
 		portletDataContext.setScopeGroupId(groupId);
-		portletDataContext.setScopeType(StringPool.BLANK);
 		portletDataContext.setScopeLayoutUuid(StringPool.BLANK);
+		portletDataContext.setScopeType(StringPool.BLANK);
 	}
 
 	protected void setPortletScope(
@@ -1315,13 +1316,13 @@ public class PortletImporter {
 
 		// Portlet data scope
 
-		String scopeLayoutType = GetterUtil.getString(
-			portletElement.attributeValue("scope-layout-type"));
 		String scopeLayoutUuid = GetterUtil.getString(
 			portletElement.attributeValue("scope-layout-uuid"));
+		String scopeLayoutType = GetterUtil.getString(
+			portletElement.attributeValue("scope-layout-type"));
 
-		portletDataContext.setScopeType(scopeLayoutType);
 		portletDataContext.setScopeLayoutUuid(scopeLayoutUuid);
+		portletDataContext.setScopeType(scopeLayoutType);
 
 		// Layout scope
 
