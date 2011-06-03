@@ -223,7 +223,7 @@
 										<portlet:param name="mbCategoryId" value="<%= String.valueOf(message.getCategoryId()) %>" />
 										<portlet:param name="threadId" value="<%= String.valueOf(message.getThreadId()) %>" />
 										<portlet:param name="parentMessageId" value="<%= String.valueOf(message.getMessageId()) %>" />
-										<portlet:param name="quote" value="true" />
+										<portlet:param name="quote" value="<%= Boolean.TRUE.toString() %>" />
 									</portlet:renderURL>
 
 									<liferay-ui:icon
@@ -545,6 +545,7 @@
 								<portlet:param name="struts_action" value="/message_boards/split_thread" />
 								<portlet:param name="redirect" value="<%= currentURL %>" />
 								<portlet:param name="messageId" value="<%= String.valueOf(message.getMessageId()) %>" />
+								<portlet:param name="splitThread" value="<%= Boolean.TRUE.toString() %>" />
 							</portlet:renderURL>
 
 							<liferay-ui:icon

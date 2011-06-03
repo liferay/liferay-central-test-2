@@ -57,6 +57,7 @@ String body = BeanParamUtil.getString(message, request, "body");
 boolean attachments = BeanParamUtil.getBoolean(message, request, "attachments");
 boolean preview = ParamUtil.getBoolean(request, "preview");
 boolean quote = ParamUtil.getBoolean(request, "quote");
+boolean splitThread = ParamUtil.getBoolean(request, "splitThread");
 
 String[] existingAttachments = new String[0];
 

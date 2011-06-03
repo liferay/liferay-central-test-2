@@ -35,6 +35,7 @@ String parentAuthor = null;
 
 String body = StringPool.BLANK;
 boolean quote = false;
+boolean splitThread = true;
 %>
 
 <portlet:actionURL var="splitThreadURL">
@@ -111,10 +112,6 @@ boolean quote = false;
 				<%@ include file="/html/portlet/message_boards/bbcode_editor.jspf" %>
 
 				<aui:input name="body" type="hidden" />
-
-				<aui:script use="liferay-bbcode-editor">
-					<portlet:namespace />editor.setHTML('<%= LanguageUtil.format(pageContext, "the-new-thread-can-be-found-at-x", "[url=${newThreadURL}]${newThreadURL}[/url]", false) %>');
-				</aui:script>
 			</aui:field-wrapper>
 		</div>
 	</aui:fieldset>

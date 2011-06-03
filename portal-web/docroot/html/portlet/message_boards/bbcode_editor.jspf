@@ -29,6 +29,9 @@ if (quote && Validator.isNull(body) && (curParentMessage != null)) {
 
 	body = sb.toString();
 }
+else if (splitThread && Validator.isNull(body)) {
+	body = LanguageUtil.format(pageContext, "the-new-thread-can-be-found-at-x", "[url=${newThreadURL}]${newThreadURL}[/url]", false);
+}
 %>
 
 <liferay-ui:input-editor configParams="<%= configParams %>" editorImpl="<%= BB_CODE_EDITOR_WYSIWYG_IMPL_KEY %>" toolbarSet="bbcode" />

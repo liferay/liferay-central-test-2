@@ -32,6 +32,7 @@ String parentAuthor = null;
 
 String body = StringPool.BLANK;
 boolean quote = false;
+boolean splitThread = false;
 %>
 
 <portlet:actionURL var="moveThreadURL">

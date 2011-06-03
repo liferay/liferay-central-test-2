@@ -53,6 +53,7 @@ String body = BeanParamUtil.getString(replyMessage, request, "body");
 boolean attachments = BeanParamUtil.getBoolean(replyMessage, request, "attachments");
 boolean preview = ParamUtil.getBoolean(request, "preview");
 boolean quote = ParamUtil.getBoolean(request, "quote");
+boolean splitThread = ParamUtil.getBoolean(request, "splitThread");
 %>
 
 <portlet:actionURL var="editMessageURL">
