@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.MethodHandler;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.util.PropsValues;
 
 import java.io.Serializable;
 
@@ -146,9 +147,13 @@ public class ClusterRequestReceiver extends BaseReceiver {
 				clusterRequest.getOriginatingClusterNode();
 
 			if (originatingClusterNode != null) {
+				long expirationTime =
+					System.currentTimeMillis() +
+						(PropsValues.CLUSTER_EXECUTOR_HEARTBEAT_INTERVAL * 2);
+
 				_clusterExecutorImpl.notify(
 					new AddressImpl(sourceAddress), originatingClusterNode,
-					clusterRequest.getExpirationTime());
+					expirationTime);
 			}
 			else {
 				if (_log.isWarnEnabled()) {

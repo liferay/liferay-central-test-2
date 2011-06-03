@@ -552,14 +552,10 @@ public class ClusterExecutorImpl
 	private class HeartbeatTask implements Runnable {
 
 		public void run() {
-			long expirationTime =
-				System.currentTimeMillis() +
-					(PropsValues.CLUSTER_EXECUTOR_HEARTBEAT_INTERVAL * 2);
-
 			try {
 				ClusterRequest clusterNotifyRequest =
 					ClusterRequest.createClusterNotifyRequest(
-						expirationTime, _localClusterNode);
+						_localClusterNode);
 
 				sendMulticastRequest(clusterNotifyRequest);
 			}
