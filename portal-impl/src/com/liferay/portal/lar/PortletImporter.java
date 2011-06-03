@@ -342,7 +342,8 @@ public class PortletImporter {
 
 			String prefix = "queryName";
 
-			if (value.equalsIgnoreCase("assetCategories") &&
+			if (Validator.isNotNull(value) &&
+				value.equalsIgnoreCase("assetCategories") &&
 				name.startsWith(prefix)) {
 
 				String index = name.substring(prefix.length(), name.length());
@@ -363,7 +364,7 @@ public class PortletImporter {
 
 				for (String importedCategoryPK : importedCategoryPKs) {
 					newCategoryPKs[i++] = StringUtil.valueOf(
-						assetCategoryPKs.get(importedCategoryPK));
+						assetCategoryPKs.get(new Long(importedCategoryPK)));
 				}
 
 				portletPreferences.setValues(queryValuesName, newCategoryPKs);
