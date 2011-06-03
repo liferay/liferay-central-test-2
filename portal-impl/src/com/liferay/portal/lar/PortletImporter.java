@@ -92,6 +92,7 @@ import java.io.File;
 import java.io.Serializable;
 
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -314,6 +315,68 @@ public class PortletImporter {
 		}
 
 		zipReader.close();
+	}
+
+	protected String checkPortletPreferences(
+			PortletDataContext portletDataContext, long companyId,
+			long ownerId, int ownerType, long plid, String portletId,
+			String xml)
+		throws Exception{
+
+		String rootPotletId = PortletConstants.getRootPortletId(portletId);
+
+		if (rootPotletId.equals(PortletKeys.ASSET_PUBLISHER)) {
+			PortletPreferencesImpl portletPreferences =
+				(PortletPreferencesImpl)PortletPreferencesFactoryUtil.
+					fromXML(companyId, ownerId, ownerType, plid, portletId, xml);
+
+			 Enumeration<String> names = portletPreferences.getNames();
+
+			 while (names.hasMoreElements()) {
+				String name = names.nextElement();
+				String value = portletPreferences.getValue(name, null);
+				String prefix = "queryName";
+
+				if ((value != null) &&
+					value.equalsIgnoreCase("assetCategories") &&
+					name.startsWith(prefix)) {
+
+					String idx = name.substring(prefix.length(), name.length());
+					String queryValuesName = "queryValues" + idx;
+
+					String[] importedCategoryPKs =
+						portletPreferences.getValues(queryValuesName, null);
+
+					Map<Long, Long> assetCategoryPKs =
+						(Map<Long, Long>)portletDataContext.
+							getNewPrimaryKeysMap(AssetCategory.class);
+
+					String[] newCategoryPKs =
+						new String[importedCategoryPKs.length];
+
+					int i = 0;
+
+					for (String importedCategoryPK : importedCategoryPKs) {
+						newCategoryPKs[i++] =
+							StringUtil.valueOf(
+								assetCategoryPKs.get(
+									new Long(importedCategoryPK)));
+					}
+
+					try {
+						portletPreferences.setValues(
+							queryValuesName, newCategoryPKs);
+					}
+					catch (Exception e) {
+						throw new PortalException(e);
+					}
+				}
+			}
+
+			xml = PortletPreferencesFactoryUtil.toXML(portletPreferences);
+		}
+
+		return xml;
 	}
 
 	protected void deletePortletData(
@@ -842,6 +905,10 @@ public class PortletImporter {
 				if (defaultUser) {
 					ownerId = defaultUserId;
 				}
+
+				xml = checkPortletPreferences(
+					portletDataContext, companyId, ownerId, ownerType, plid,
+					portletId, xml);
 
 				PortletPreferencesLocalServiceUtil.updatePreferences(
 					ownerId, ownerType, plid, portletId, xml);
