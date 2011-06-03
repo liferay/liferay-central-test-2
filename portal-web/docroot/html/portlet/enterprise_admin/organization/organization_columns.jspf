@@ -21,10 +21,8 @@
 >
 
 	<%
-	buffer.append("<a ");
-
 	if (rowURL != null) {
-		buffer.append("href=\"");
+		buffer.append("<a href=\"");
 		buffer.append(rowURL);
 		buffer.append("\">");
 	}
@@ -35,7 +33,10 @@
 	buffer.append("<strong>");
 	buffer.append(curOrganization.getName());
 	buffer.append("</strong>");
-	buffer.append("</a>");
+
+	if (rowURL != null) {
+		buffer.append("</a>");
+	}
 
 	List<Organization> suborganizations = new ArrayList<Organization>();
 	int suborganizationsCount = 0;
