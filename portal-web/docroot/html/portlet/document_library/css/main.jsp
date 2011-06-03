@@ -430,16 +430,18 @@
 	.header-row-content {
 		padding: 0.2em;
 
-		.toolbar, .add-button {
-			float: left;
-		}
+		.toolbar {
+			&, & .add-button {
+				float: left;
+			}
 
-		.toolbar .actions-button {
-			margin-right: 2em;
-		}
+			.actions-button {
+				margin-right: 2em;
+			}
 
-		.toolbar .manage-button {
-			display: inline-block;
+			.manage-button {
+				display: inline-block;
+			}
 		}
 
 		.display-style {
