@@ -209,8 +209,19 @@ portletsList = ListUtil.sort(portletsList, new PortletTitleComparator(applicatio
 							<%
 							itr1 = portletsList.iterator();
 
+							Set<String> processedHandlers = new HashSet<String>();
+
 							while (itr1.hasNext()) {
 								Portlet curPortlet = (Portlet)itr1.next();
+
+								String portletDataHandlerClass = curPortlet.getPortletDataHandlerClass();
+
+								if (!processedHandlers.contains(portletDataHandlerClass)) {
+									processedHandlers.add(portletDataHandlerClass);
+								}
+								else {
+									continue;
+								}
 
 								PortletDataHandler portletDataHandler = curPortlet.getPortletDataHandlerInstance();
 
