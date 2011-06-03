@@ -21,7 +21,6 @@ import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.InfrastructureUtil;
-import com.liferay.portal.spring.hibernate.PortalHibernateConfiguration;
 import com.liferay.portal.spring.hibernate.PortletHibernateConfiguration;
 import com.liferay.portal.util.PropsValues;
 
@@ -94,42 +93,42 @@ public class PortletSessionFactoryImpl extends SessionFactoryImpl {
 			(ShardDataSourceTargetSource)
 				InfrastructureUtil.getShardDataSourceTargetSource();
 
-		if (shardDataSourceTargetSource != null) {
-			DataSource dataSource = shardDataSourceTargetSource.getDataSource();
-
-			SessionFactory sessionFactory = _sessionFactories.get(dataSource);
-
-			if (sessionFactory == null) {
-				PortletHibernateConfiguration portletHibernateConfiguration =
-					new PortletHibernateConfiguration();
-
-				portletHibernateConfiguration.setDataSource(dataSource);
-
-				try {
-					sessionFactory =
-						portletHibernateConfiguration.buildSessionFactory();
-				}
-				catch (Exception e) {
-					_log.error(e, e);
-
-					return null;
-				}
-
-				_sessionFactories.put(dataSource, sessionFactory);
-			}
-
-			return sessionFactory;
-		}
-		else {
+		if (shardDataSourceTargetSource == null) {
 			return getSessionFactoryImplementor();
 		}
+
+		DataSource dataSource = shardDataSourceTargetSource.getDataSource();
+
+		SessionFactory sessionFactory = _sessionFactories.get(dataSource);
+
+		if (sessionFactory != null) {
+			return sessionFactory;
+		}
+
+		PortletHibernateConfiguration portletHibernateConfiguration =
+			new PortletHibernateConfiguration();
+
+		portletHibernateConfiguration.setDataSource(dataSource);
+
+		try {
+			sessionFactory =
+				portletHibernateConfiguration.buildSessionFactory();
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			return null;
+		}
+
+		_sessionFactories.put(dataSource, sessionFactory);
+
+		return sessionFactory;
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(
 		PortletSessionFactoryImpl.class);
 
 	private DataSource _dataSource;
-
 	private Map<DataSource, SessionFactory> _sessionFactories =
 		new HashMap<DataSource, SessionFactory>();
 
