@@ -40,9 +40,9 @@
 			FROM
 				DLFileEntry, DLFileVersion
 			WHERE
-				(DLFileEntry.extraSettings != '') OR
+				(CAST_TEXT(DLFileEntry.extraSettings) != '') OR
 				(
-					(DLFileVersion.fileEntryId = DLFileEntry.fileEntryId) AND (DLFileVersion.extraSettings != '')
+					(DLFileVersion.fileEntryId = DLFileEntry.fileEntryId) AND (CAST_TEXT(DLFileVersion.extraSettings) != '')
 				)
 		]]>
 	</sql>
@@ -85,9 +85,9 @@
 			FROM
 				DLFileEntry, DLFileVersion
 			WHERE
-				(DLFileEntry.extraSettings != '') OR
+				(CAST_TEXT(DLFileEntry.extraSettings) != '') OR
 				(
-					(DLFileVersion.fileEntryId = DLFileEntry.fileEntryId) AND (DLFileVersion.extraSettings != '')
+					(DLFileVersion.fileEntryId = DLFileEntry.fileEntryId) AND (CAST_TEXT(DLFileVersion.extraSettings) != '')
 				)
 			ORDER BY
 				DLFileEntry.modifiedDate DESC
