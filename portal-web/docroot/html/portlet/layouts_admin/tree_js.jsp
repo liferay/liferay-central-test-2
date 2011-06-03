@@ -76,6 +76,8 @@ PortletURL portletURL = (PortletURL)request.getAttribute("edit_pages.jsp-portlet
 			A.each(
 				json,
 				function(node) {
+					var xmlDoc = A.DataType.XML.parse(node.name);
+
 					var newNode = {
 						after: {
 							check: function(event) {
@@ -94,7 +96,7 @@ PortletURL portletURL = (PortletURL)request.getAttribute("edit_pages.jsp-portlet
 						type: '<%= selectableTree ? "task" : "io" %>'
 					};
 
-					newNode.label = node.name;
+					newNode.label = TreeUtil.getNodeLabel(xmlDoc);
 
 					if (node.layoutRevisionId) {
 						newNode.label = [newNode.label, " [", node.layoutSetBranchName, " ", node.layoutRevisionId, "]"].join('');
@@ -109,6 +111,44 @@ PortletURL portletURL = (PortletURL)request.getAttribute("edit_pages.jsp-portlet
 			);
 
 			return output;
+		},
+
+		getLocalizedLabel: function(locale, xmlDoc) {
+			var schema = TreeUtil.getSchema('label', 'Name[@language-id="' + locale + '"]');
+			var localizedLabel = TreeUtil.mergeSchema(schema, xmlDoc);
+
+			return localizedLabel.label;
+		},
+
+		getNodeLabel: function(xmlDoc) {
+			var label = TreeUtil.getLocalizedLabel('<%= themeDisplay.getLocale() %>', xmlDoc);
+
+			if (!label) {
+				var findDefLocaleSchema = TreeUtil.getSchema('locale', '@default-locale');
+				var rootDefLocale = TreeUtil.mergeSchema(findDefLocaleSchema, xmlDoc);
+
+				if (rootDefLocale.locale) {
+					label = TreeUtil.getLocalizedLabel(rootDefLocale.locale, xmlDoc);
+				}
+			}
+
+			return label;
+		},
+
+		getSchema: function(key, locator) {
+			return {
+				resultListLocator: 'root',
+				resultFields: [
+					{
+						key: key,
+						locator: locator
+					}
+				]
+			};
+		},
+
+		mergeSchema: function(schema, xmlDoc, index) {
+			return A.DataSchema.XML.apply(schema, xmlDoc).results[0] || {};
 		},
 
 		restoreNodeState: function(node) {
