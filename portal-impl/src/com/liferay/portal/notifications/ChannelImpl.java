@@ -69,8 +69,10 @@ public class ChannelImpl extends BaseChannelImpl {
 				_unconfirmedNotificationEvents.remove(notificationEventUuid);
 			}
 
-			UserNotificationEventLocalServiceUtil.deleteUserNotificationEvents(
-				notificationEventUuids);
+			if (PropsValues.USER_NOTIFICATION_EVENT_CONFIRMATION_ENABLED) {
+				UserNotificationEventLocalServiceUtil.
+					deleteUserNotificationEvents(notificationEventUuids);
+			}
 		}
 		catch (Exception e) {
 			throw new ChannelException(
@@ -90,7 +92,9 @@ public class ChannelImpl extends BaseChannelImpl {
 			NotificationEvent notificationEvent =
 				_unconfirmedNotificationEvents.remove(notificationEventUuid);
 
-			if (notificationEvent != null) {
+			if ((notificationEvent != null) &&
+				PropsValues.USER_NOTIFICATION_EVENT_CONFIRMATION_ENABLED) {
+
 				UserNotificationEventLocalServiceUtil.
 					deleteUserNotificationEvent(notificationEvent.getUuid());
 			}
@@ -220,7 +224,9 @@ public class ChannelImpl extends BaseChannelImpl {
 
 			storeNotificationEvent(notificationEvent, currentTime);
 
-			if (notificationEvent.isDeliveryRequired()) {
+			if (notificationEvent.isDeliveryRequired() &&
+				PropsValues.USER_NOTIFICATION_EVENT_CONFIRMATION_ENABLED) {
+
 				UserNotificationEventLocalServiceUtil.addUserNotificationEvent(
 					getUserId(), notificationEvent);
 			}
@@ -250,13 +256,19 @@ public class ChannelImpl extends BaseChannelImpl {
 			for (NotificationEvent notificationEvent : notificationEvents) {
 				storeNotificationEvent(notificationEvent, currentTime);
 
-				if (notificationEvent.isDeliveryRequired()) {
+				if (notificationEvent.isDeliveryRequired() &&
+					PropsValues.USER_NOTIFICATION_EVENT_CONFIRMATION_ENABLED) {
+
 					persistedNotificationEvents.add(notificationEvent);
 				}
 			}
 
-			UserNotificationEventLocalServiceUtil.addUserNotificationEvents(
-				getUserId(), persistedNotificationEvents);
+			if (!persistedNotificationEvents.isEmpty() &&
+				PropsValues.USER_NOTIFICATION_EVENT_CONFIRMATION_ENABLED) {
+
+				UserNotificationEventLocalServiceUtil.addUserNotificationEvents(
+					getUserId(), persistedNotificationEvents);
+			}
 		}
 		catch (Exception e) {
 			throw new ChannelException("Unable to send event", e);
@@ -307,8 +319,12 @@ public class ChannelImpl extends BaseChannelImpl {
 				}
 			}
 
-			UserNotificationEventLocalServiceUtil.deleteUserNotificationEvents(
-				invalidNotificationEventUuids);
+			if (!invalidNotificationEventUuids.isEmpty() &&
+				PropsValues.USER_NOTIFICATION_EVENT_CONFIRMATION_ENABLED) {
+
+				UserNotificationEventLocalServiceUtil.
+					deleteUserNotificationEvents(invalidNotificationEventUuids);
+			}
 		}
 		catch (Exception e) {
 			throw new ChannelException(
@@ -367,7 +383,9 @@ public class ChannelImpl extends BaseChannelImpl {
 			}
 		}
 
-		if (!invalidNotificationEventUuids.isEmpty()) {
+		if (!invalidNotificationEventUuids.isEmpty() &&
+			PropsValues.USER_NOTIFICATION_EVENT_CONFIRMATION_ENABLED) {
+
 			UserNotificationEventLocalServiceUtil.deleteUserNotificationEvents(
 				invalidNotificationEventUuids);
 		}
@@ -376,6 +394,11 @@ public class ChannelImpl extends BaseChannelImpl {
 	}
 
 	protected void doInit() throws Exception {
+
+		if (!PropsValues.USER_NOTIFICATION_EVENT_CONFIRMATION_ENABLED) {
+			return;
+		}
+
 		List<UserNotificationEvent> userNotificationEvents =
 			UserNotificationEventLocalServiceUtil.getUserNotificationEvents(
 				getUserId());
@@ -446,7 +469,9 @@ public class ChannelImpl extends BaseChannelImpl {
 			return;
 		}
 
-		if (notificationEvent.isDeliveryRequired()) {
+		if (notificationEvent.isDeliveryRequired() &&
+			PropsValues.USER_NOTIFICATION_EVENT_CONFIRMATION_ENABLED) {
+
 			_unconfirmedNotificationEvents.put(
 				notificationEvent.getUuid(), notificationEvent);
 		}
