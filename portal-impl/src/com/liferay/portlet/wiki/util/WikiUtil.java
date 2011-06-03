@@ -551,7 +551,8 @@ public class WikiUtil {
 		try {
 			content = engine.convert(page, null, null, null);
 
-			content = HtmlUtil.stripHtml(content);
+			content = StringUtil.shorten(
+				HtmlUtil.stripHtml(content), 200);
 		}
 		catch (Exception e) {
 			content = null;
