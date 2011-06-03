@@ -56,21 +56,24 @@ if (classPK > 0) {
 
 				AssetRenderer assetRenderer = assetRendererFactory.getAssetRenderer(assetLinkEntry.getClassPK());
 
-				String asseLinktEntryTitle = assetRenderer.getTitle(locale);
+				if (assetRenderer.hasViewPermission(permissionChecker)) {
 
-				String urlViewInContext = assetRenderer.getURLViewInContext((LiferayPortletRequest)portletRequest, (LiferayPortletResponse)portletResponse, "viewFullContentURLString");
+					String asseLinktEntryTitle = assetRenderer.getTitle(locale);
+
+					String urlViewInContext = assetRenderer.getURLViewInContext((LiferayPortletRequest)portletRequest, (LiferayPortletResponse)portletResponse, "viewFullContentURLString");
 			%>
 
-				<li class="asset-links-list-item">
-					<liferay-ui:icon
-						label="<%= true %>"
-						message="<%= asseLinktEntryTitle %>"
-						src="<%= assetRenderer.getIconPath(portletRequest) %>"
-						url="<%= urlViewInContext %>"
-					/>
-				</li>
+					<li class="asset-links-list-item">
+						<liferay-ui:icon
+							label="<%= true %>"
+							message="<%= asseLinktEntryTitle %>"
+							src="<%= assetRenderer.getIconPath(portletRequest) %>"
+							url="<%= urlViewInContext %>"
+						/>
+					</li>
 
 			<%
+				}
 			}
 			%>
 
