@@ -161,6 +161,8 @@ public class TunnelUtil {
 		urlc.setDoInput(true);
 		urlc.setDoOutput(true);
 		urlc.setUseCaches(false);
+		urlc.setRequestProperty(
+			"Content-Type","application/x-java-serialized-object");
 
 		urlc.setRequestMethod("POST");
 
