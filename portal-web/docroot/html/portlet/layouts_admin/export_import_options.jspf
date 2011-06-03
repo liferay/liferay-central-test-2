@@ -196,15 +196,15 @@
 							<%
 							itr1 = portletsList.iterator();
 
-							Set<String> processedHandlers = new HashSet<String>();
+							Set<String> portletDataHandlerClasses = new HashSet<String>();
 
 							while (itr1.hasNext()) {
 								Portlet curPortlet = (Portlet)itr1.next();
 
 								String portletDataHandlerClass = curPortlet.getPortletDataHandlerClass();
 
-								if (!processedHandlers.contains(portletDataHandlerClass)) {
-									processedHandlers.add(portletDataHandlerClass);
+								if (!portletDataHandlerClasses.contains(portletDataHandlerClass)) {
+									portletDataHandlerClasses.add(portletDataHandlerClass);
 								}
 								else {
 									continue;
