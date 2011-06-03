@@ -64,7 +64,7 @@ else {
 		<%@ include file="/html/portlet/enterprise_admin/view_users_flat_organizations.jspf" %>
 	</c:when>
 	<c:when test="<%= usersListView.equals(UserConstants.LIST_VIEW_FLAT_USER_GROUPS) %>">
-		<%@ include file="/html/portlet/enterprise_admin/view_users_flat_user_groups.jsp" %>
+		<%@ include file="/html/portlet/enterprise_admin/view_users_flat_user_groups.jspf" %>
 	</c:when>
 	<c:when test="<%= usersListView.equals(UserConstants.LIST_VIEW_FLAT_USERS) %>">
 		<%@ include file="/html/portlet/enterprise_admin/view_users_flat_users.jspf" %>
