@@ -19,12 +19,14 @@ import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.staging.LayoutStagingUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutRevision;
 import com.liferay.portal.model.LayoutSetBranch;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.LayoutSetBranchLocalServiceUtil;
 import com.liferay.portal.struts.JSONAction;
+import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PropsValues;
 
 import java.util.List;
@@ -45,6 +47,9 @@ public class GetLayoutsAction extends JSONAction {
 			HttpServletResponse response)
 		throws Exception {
 
+		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
 		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 
 		List<Layout> layouts = getLayouts(request);
@@ -55,7 +60,7 @@ public class GetLayoutsAction extends JSONAction {
 			jsonObject.put("contentDisplayPage", layout.isContentDisplayPage());
 			jsonObject.put("hasChildren", layout.hasChildren());
 			jsonObject.put("layoutId", layout.getLayoutId());
-			jsonObject.put("name", layout.getName());
+			jsonObject.put("name", layout.getName(themeDisplay.getLocale()));
 			jsonObject.put("parentLayoutId", layout.getParentLayoutId());
 			jsonObject.put("plid", layout.getPlid());
 			jsonObject.put("priority", layout.getPriority());
