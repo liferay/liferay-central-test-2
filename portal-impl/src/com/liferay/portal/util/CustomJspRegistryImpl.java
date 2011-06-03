@@ -14,12 +14,13 @@
 
 package com.liferay.portal.util;
 
-import com.liferay.portal.kernel.concurrent.ConcurrentHashSet;
 import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 
+import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @author Ryan Park
@@ -28,7 +29,7 @@ import java.util.Set;
 public class CustomJspRegistryImpl implements CustomJspRegistry {
 
 	public CustomJspRegistryImpl() {
-		_servletContextNames = new ConcurrentHashSet<String>();
+		_servletContextNames = new ConcurrentHashMap<String, String>();
 	}
 
 	public String getCustomJspFileName(
@@ -51,18 +52,24 @@ public class CustomJspRegistryImpl implements CustomJspRegistry {
 		return sb.toString();
 	}
 
-	public Set<String> getServletContextNames() {
-		return _servletContextNames;
+	public String getDisplayName(String servletContextName) {
+		return _servletContextNames.get(servletContextName);
 	}
 
-	public void registerServletContextName(String servletContextName) {
-		_servletContextNames.add(servletContextName);
+	public Set<String> getServletContextNames() {
+		return _servletContextNames.keySet();
+	}
+
+	public void registerServletContextName(
+		String servletContextName, String displayName) {
+
+		_servletContextNames.put(servletContextName, displayName);
 	}
 
 	public void unregisterServletContextName(String servletContextName) {
 		_servletContextNames.remove(servletContextName);
 	}
 
-	private Set<String> _servletContextNames;
+	private Map<String, String> _servletContextNames;
 
 }

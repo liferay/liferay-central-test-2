@@ -135,7 +135,7 @@ else if (layoutSetPrototype != null) {
 						for (String servletContextName : servletContextNames) {
 						%>
 
-							<aui:option label="<%= servletContextName %>" selected="<%= customJspServletContextName.equals(servletContextName) %>" value="<%= servletContextName %>" />
+							<aui:option selected="<%= customJspServletContextName.equals(servletContextName) %>" value="<%= servletContextName %>"><%= CustomJspRegistryUtil.getDisplayName(servletContextName) %></aui:option>
 
 						<%
 						}
@@ -295,11 +295,11 @@ else if (layoutSetPrototype != null) {
 		var options = A.all([]);
 
 		if (publicPages) {
-			options.concat(publicPages.all('option[data-servletContextName]'));
+			options = options.concat(publicPages.all('option[data-servletContextName]'));
 		}
 
 		if (privatePages) {
-			options.concat(privatePages.all('option[data-servletContextName]'));
+			options = options.concat(privatePages.all('option[data-servletContextName]'));
 		}
 
 		options.attr('disabled', false);

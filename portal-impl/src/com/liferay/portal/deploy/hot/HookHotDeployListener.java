@@ -40,6 +40,7 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.plugin.PluginPackage;
 import com.liferay.portal.kernel.sanitizer.Sanitizer;
 import com.liferay.portal.kernel.sanitizer.SanitizerUtil;
 import com.liferay.portal.kernel.sanitizer.SanitizerWrapper;
@@ -652,7 +653,10 @@ public class HookHotDeployListener
 
 				_customJspBagsMap.put(servletContextName, customJspBag);
 
-				initCustomJspBag(servletContextName, customJspBag);
+				PluginPackage pluginPackage = event.getPluginPackage();
+
+				initCustomJspBag(
+					servletContextName, pluginPackage.getName(), customJspBag);
 			}
 		}
 
@@ -1259,7 +1263,8 @@ public class HookHotDeployListener
 	}
 
 	protected void initCustomJspBag(
-			String servletContextName, CustomJspBag customJspBag)
+			String servletContextName, String displayName,
+			CustomJspBag customJspBag)
 		throws Exception {
 
 		String customJspDir = customJspBag.getCustomJspDir();
@@ -1293,7 +1298,7 @@ public class HookHotDeployListener
 
 		if (!customJspGlobal) {
 			CustomJspRegistryUtil.registerServletContextName(
-				servletContextName);
+				servletContextName, displayName);
 		}
 	}
 

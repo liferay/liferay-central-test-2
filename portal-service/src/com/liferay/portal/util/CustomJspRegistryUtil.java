@@ -29,13 +29,19 @@ public class CustomJspRegistryUtil {
 			servletContextName, fileName);
 	}
 
+	public static String getDisplayName(String servletContextName) {
+		return getCustomJspRegistry().getDisplayName(servletContextName);
+	}
+
 	public static Set<String> getServletContextNames() {
 		return getCustomJspRegistry().getServletContextNames();
 	}
 
-	public static void registerServletContextName(String servletContextName) {
+	public static void registerServletContextName(
+		String servletContextName, String displayName) {
+
 		getCustomJspRegistry().registerServletContextName(
-			servletContextName);
+			servletContextName, displayName);
 	}
 
 	public static void unregisterServletContextName(

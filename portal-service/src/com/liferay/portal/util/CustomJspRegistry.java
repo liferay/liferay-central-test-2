@@ -25,9 +25,12 @@ public interface CustomJspRegistry {
 	public String getCustomJspFileName(
 		String servletContextName, String fileName);
 
+	public String getDisplayName(String servletContextName);
+
 	public Set<String> getServletContextNames();
 
-	public void registerServletContextName(String servletContextName);
+	public void registerServletContextName(
+		String servletContextName, String displayName);
 
 	public void unregisterServletContextName(String servletContextName);
 

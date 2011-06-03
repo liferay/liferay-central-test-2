@@ -98,7 +98,7 @@ Locale[] locales = LanguageUtil.getAvailableLocales();
 			for (String servletContextName : servletContextNames) {
 			%>
 
-				<aui:option label="<%= servletContextName %>" selected="<%= customJspServletContextName.equals(servletContextName) %>" value="<%= servletContextName %>" />
+				<aui:option selected="<%= customJspServletContextName.equals(servletContextName) %>" value="<%= servletContextName %>"><%= CustomJspRegistryUtil.getDisplayName(servletContextName) %></aui:option>
 
 			<%
 			}
