@@ -73,25 +73,17 @@
 	color: #777;
 }
 
-.lfr-dynamic-form {
-	.aui-field-radio {
-		.aui-field {
-			display: block;
-			margin-left: 10px;
-		}
-	}
+.lfr-dynamic-form .aui-field-radio .aui-field {
+	display: block;
+	margin-left: 10px;
+}
 
-	.aui-field-text {
-		display: block;
+.lfr-dynamic-form .aui-field-text, .lfr-dynamic-form .aui-field-text  .aui-field-element {
+	display: block;
+}
 
-		.aui-field-element {
-			display: block;
-
-			.aui-field-input {
-				width: 100%;
-			}
-		}
-	}
+.lfr-dynamic-form .aui-field-text .aui-field-input {
+	width: 100%;
 }
 
 .lfr-input-resource {
