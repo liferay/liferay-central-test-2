@@ -64,34 +64,7 @@
 		</property>
 	</bean>
 	<bean id="shardSessionFactoryTargetSource" class="com.liferay.portal.dao.shard.ShardSessionFactoryTargetSource">
-		<property name="sessionFactories">
-			<map>
-				<entry>
-					<key>
-						<value>default</value>
-					</key>
-					<bean class="com.liferay.portal.spring.hibernate.PortalHibernateConfiguration">
-						<property name="dataSource" ref="shardDataSource0" />
-					</bean>
-				</entry>
-				<entry>
-					<key>
-						<value>one</value>
-					</key>
-					<bean class="com.liferay.portal.spring.hibernate.PortalHibernateConfiguration">
-						<property name="dataSource" ref="shardDataSource1" />
-					</bean>
-				</entry>
-				<entry>
-					<key>
-						<value>two</value>
-					</key>
-					<bean class="com.liferay.portal.spring.hibernate.PortalHibernateConfiguration">
-						<property name="dataSource" ref="shardDataSource2" />
-					</bean>
-				</entry>
-			</map>
-		</property>
+ 		<property name="shardDataSourceTargetSource" ref="shardDataSourceTargetSource" />
 	</bean>
 	<bean id="com.liferay.portal.kernel.dao.jdbc.MappingSqlQueryFactoryUtil" class="com.liferay.portal.kernel.dao.jdbc.MappingSqlQueryFactoryUtil">
 		<property name="mappingSqlQueryFactory">

@@ -31,6 +31,7 @@ import java.io.InputStream;
 import java.util.Map;
 import java.util.Properties;
 
+import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.cfg.Environment;
 
@@ -41,6 +42,10 @@ import org.springframework.orm.hibernate3.LocalSessionFactoryBean;
  * @author Marcellus Tavares
  */
 public class PortalHibernateConfiguration extends LocalSessionFactoryBean {
+
+	public SessionFactory buildSessionFactory() throws Exception {
+		return super.buildSessionFactory();
+	}
 
 	public void setHibernateConfigurationConverter(
 		Converter<String> hibernateConfigurationConverter) {

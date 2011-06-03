@@ -31,6 +31,10 @@ public class ShardDataSourceTargetSource implements TargetSource {
 		return _dataSource.get();
 	}
 
+	public Map<String, DataSource> getDataSources() {
+		return _dataSources;
+	}
+
 	public Object getTarget() throws Exception {
 		return getDataSource();
 	}

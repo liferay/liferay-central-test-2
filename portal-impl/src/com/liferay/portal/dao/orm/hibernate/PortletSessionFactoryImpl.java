@@ -14,43 +14,50 @@
 
 package com.liferay.portal.dao.orm.hibernate;
 
+import com.liferay.portal.dao.shard.ShardDataSourceTargetSource;
 import com.liferay.portal.kernel.dao.jdbc.CurrentConnectionUtil;
 import com.liferay.portal.kernel.dao.orm.ORMException;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.InfrastructureUtil;
+import com.liferay.portal.spring.hibernate.PortalHibernateConfiguration;
+import com.liferay.portal.spring.hibernate.PortletHibernateConfiguration;
 import com.liferay.portal.util.PropsValues;
 
 import java.sql.Connection;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.sql.DataSource;
 
-import org.hibernate.engine.SessionFactoryImplementor;
+import org.hibernate.SessionFactory;
 
 /**
  * @author Shuyang Zhou
+ * @author Alexander Chow
  */
 public class PortletSessionFactoryImpl extends SessionFactoryImpl {
 
 	public Session openSession() throws ORMException {
-		SessionFactoryImplementor sessionFactoryImplementor =
-			getSessionFactoryImplementor();
+		SessionFactory sessionFactory = getSessionFactory();
 
 		org.hibernate.Session session = null;
 
 		if (PropsValues.SPRING_HIBERNATE_SESSION_DELEGATED) {
 			Connection connection = CurrentConnectionUtil.getConnection(
-				_dataSource);
+				getDataSource());
 
 			if (connection == null) {
-				session = sessionFactoryImplementor.getCurrentSession();
+				session = sessionFactory.getCurrentSession();
 			}
 			else {
-				session = sessionFactoryImplementor.openSession(connection);
+				session = sessionFactory.openSession(connection);
 			}
 		}
 		else {
-			session = sessionFactoryImplementor.openSession();
+			session = sessionFactory.openSession();
 		}
 
 		if (_log.isDebugEnabled()) {
@@ -69,9 +76,61 @@ public class PortletSessionFactoryImpl extends SessionFactoryImpl {
 		_dataSource = dataSource;
 	}
 
+	protected DataSource getDataSource() {
+		ShardDataSourceTargetSource shardDataSourceTargetSource =
+			(ShardDataSourceTargetSource)
+				InfrastructureUtil.getShardDataSourceTargetSource();
+
+		if (shardDataSourceTargetSource != null) {
+			return shardDataSourceTargetSource.getDataSource();
+		}
+		else {
+			return _dataSource;
+		}
+	}
+
+	protected SessionFactory getSessionFactory() {
+		ShardDataSourceTargetSource shardDataSourceTargetSource =
+			(ShardDataSourceTargetSource)
+				InfrastructureUtil.getShardDataSourceTargetSource();
+
+		if (shardDataSourceTargetSource != null) {
+			DataSource dataSource = shardDataSourceTargetSource.getDataSource();
+
+			SessionFactory sessionFactory = _sessionFactories.get(dataSource);
+
+			if (sessionFactory == null) {
+				PortletHibernateConfiguration portletHibernateConfiguration =
+					new PortletHibernateConfiguration();
+
+				portletHibernateConfiguration.setDataSource(dataSource);
+
+				try {
+					sessionFactory =
+						portletHibernateConfiguration.buildSessionFactory();
+				}
+				catch (Exception e) {
+					_log.error(e, e);
+
+					return null;
+				}
+
+				_sessionFactories.put(dataSource, sessionFactory);
+			}
+
+			return sessionFactory;
+		}
+		else {
+			return getSessionFactoryImplementor();
+		}
+	}
+
 	private static Log _log = LogFactoryUtil.getLog(
 		PortletSessionFactoryImpl.class);
 
 	private DataSource _dataSource;
+
+	private Map<DataSource, SessionFactory> _sessionFactories =
+		new HashMap<DataSource, SessionFactory>();
 
 }

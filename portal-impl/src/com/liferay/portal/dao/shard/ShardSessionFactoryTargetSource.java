@@ -14,9 +14,13 @@
 
 package com.liferay.portal.dao.shard;
 
+import com.liferay.portal.spring.hibernate.PortalHibernateConfiguration;
 import com.liferay.portal.util.PropsValues;
 
+import java.util.HashMap;
 import java.util.Map;
+
+import javax.sql.DataSource;
 
 import org.hibernate.SessionFactory;
 
@@ -24,8 +28,13 @@ import org.springframework.aop.TargetSource;
 
 /**
  * @author Michael Young
+ * @author Alexander Chow
  */
 public class ShardSessionFactoryTargetSource implements TargetSource {
+
+	public Map<String, SessionFactory> getSessionFactories() {
+		return _sessionFactories;
+	}
 
 	public SessionFactory getSessionFactory() {
 		return _sessionFactory.get();
@@ -50,10 +59,26 @@ public class ShardSessionFactoryTargetSource implements TargetSource {
 		_sessionFactory.set(_sessionFactories.get(shardName));
 	}
 
-	public void setSessionFactories(
-		Map<String, SessionFactory> sessionFactories) {
+	public void setShardDataSourceTargetSource(
+			ShardDataSourceTargetSource shardDataSourceTargetSource)
+		throws Exception {
 
-		_sessionFactories = sessionFactories;
+		Map<String, DataSource> dataSources =
+			shardDataSourceTargetSource.getDataSources();
+
+		for (String shardName : dataSources.keySet()) {
+			DataSource dataSource = dataSources.get(shardName);
+
+			PortalHibernateConfiguration portalHibernateConfiguration =
+				new PortalHibernateConfiguration();
+
+			portalHibernateConfiguration.setDataSource(dataSource);
+
+			SessionFactory sessionFactory =
+				portalHibernateConfiguration.buildSessionFactory();
+
+			_sessionFactories.put(shardName, sessionFactory);
+		}
 	}
 
 	private static ThreadLocal<SessionFactory> _sessionFactory =
@@ -65,6 +90,7 @@ public class ShardSessionFactoryTargetSource implements TargetSource {
 
 	};
 
-	private static Map<String, SessionFactory> _sessionFactories;
+	private static Map<String, SessionFactory> _sessionFactories =
+		new HashMap<String, SessionFactory>();
 
 }
