@@ -67,8 +67,8 @@ documentTypes.addAll(DLDocumentTypeServiceUtil.getDocumentTypes(scopeGroupId, Qu
 
 			portletURL.setPortletId('<%= portletId %>');
 
-			portletURL.setParameter('backURL', '<%= HtmlUtil.escape(backURL) %>');
 			portletURL.setParameter('<%= Constants.CMD %>', '<%= Constants.ADD %>');
+			portletURL.setParameter('backURL', '<%= HtmlUtil.escape(backURL) %>');
 			portletURL.setParameter('documentTypeId', link.getAttribute('data-rowId'));
 			portletURL.setParameter('folderId', '<%= folderId %>');
 			portletURL.setParameter('redirect', '<%= HtmlUtil.escape(redirect) %>');
