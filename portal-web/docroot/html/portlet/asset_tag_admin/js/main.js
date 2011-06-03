@@ -957,6 +957,9 @@ AUI().add(
 					_prepareTags: function(tags, callback) {
 						var instance = this;
 
+						var selectedTagId;
+						var selectedTagName;
+
 						if (tags.length > 0) {
 							var buffer = ['<ul>'];
 
@@ -984,8 +987,8 @@ AUI().add(
 							var tagName = instance._getTagName(firstTag);
 							var tagId = instance._getTagId(firstTag);
 
-							instance._selectedTagId = tagId;
-							instance._selectedTagName = tagName;
+							selectedTagId = tagId;
+							selectedTagName = tagName;
 						}
 						else {
 							var tagsMessageContainer = instance._tagsMessageContainer;
@@ -996,9 +999,12 @@ AUI().add(
 
 							tagsMessageContainer.show();
 
-							instance._selectedTagId = null;
-							instance._selectedTagName = null;
+							selectedTagId = null;
+							selectedTagName = null;
 						}
+
+						instance._selectedTagId = selectedTagId;
+						instance._selectedTagName = selectedTagName;
 
 						instance._getDDHandler().syncTargets();
 
