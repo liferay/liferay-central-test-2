@@ -70,9 +70,9 @@ public class StructureDisplayTerms extends DisplayTerms {
 		String strutsAction = ParamUtil.getString(
 			portletRequest, "struts_action");
 
-		long groupId = ParamUtil.getLong(portletRequest, "groupId");
-
 		StringBundler sb = new StringBundler();
+
+		long groupId = ParamUtil.getLong(portletRequest, "groupId");
 
 		if (groupId > 0) {
 			sb.append(groupId);

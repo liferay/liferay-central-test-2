@@ -152,9 +152,8 @@ public class JournalIndexer extends BaseIndexer {
 
 		Document document = getBaseModelDocument(PORTLET_ID, article);
 
-		long groupId = article.getGroupId();
-
-		document.addUID(PORTLET_ID, groupId, article.getArticleId());
+		document.addUID(
+			PORTLET_ID, article.getGroupId(), article.getArticleId());
 
 		Locale defaultLocale = LocaleUtil.getDefault();
 
@@ -192,7 +191,7 @@ public class JournalIndexer extends BaseIndexer {
 		if (Validator.isNotNull(article.getStructureId())) {
 			try {
 				structure = JournalStructureLocalServiceUtil.getStructure(
-					groupId, article.getStructureId());
+					article.getGroupId(), article.getStructureId());
 			}
 			catch (NoSuchStructureException nsse1) {
 				Group group = GroupLocalServiceUtil.getCompanyGroup(
