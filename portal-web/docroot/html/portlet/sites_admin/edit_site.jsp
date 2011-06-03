@@ -284,28 +284,30 @@ else if (layoutSetPrototype != null) {
 </aui:script>
 
 <aui:script use="aui-base">
-	var applicationAdapterSelect = A.one('#<portlet:namespace />customJspServletContextName');
+	var applicationAdapter = A.one('#<portlet:namespace />customJspServletContextName');
 
-	var publicPagesSelect = A.one('#<portlet:namespace />publicLayoutSetPrototypeId');
-	var privatePagesSelect = A.one('#<portlet:namespace />privateLayoutSetPrototypeId');
+	var publicPages = A.one('#<portlet:namespace />publicLayoutSetPrototypeId');
+	var privatePages = A.one('#<portlet:namespace />privateLayoutSetPrototypeId');
 
-	var toggleCompatibleSiteTemplates = function() {
-		var siteTemplate = applicationAdapterSelect.get('value');
+	var toggleCompatibleSiteTemplates = function(event) {
+		var siteTemplate = applicationAdapter.val();
 
-		if (publicPagesSelect) {
-			var options = publicPagesSelect.all('option[data-servletContextName]').attr('disabled', false);
+		var options = A.all([]);
 
-			options.filter('option:not([data-servletContextName=' + siteTemplate + '])').attr('disabled', true);
+		if (publicPages) {
+			options.concat(publicPages.all('option[data-servletContextName]'));
 		}
 
-		if (privatePagesSelect) {
-			var options = privatePagesSelect.all('option[data-servletContextName]').attr('disabled', false);
-
-			options.filter('option:not([data-servletContextName=' + siteTemplate + '])').attr('disabled', true);
+		if (privatePages) {
+			options.concat(privatePages.all('option[data-servletContextName]'));
 		}
+
+		options.attr('disabled', false);
+
+		options.filter(':not([data-servletContextName=' + siteTemplate + '])').attr('disabled', true);
 	};
 
-	applicationAdapterSelect.on('change', toggleCompatibleSiteTemplates);
+	applicationAdapter.on('change', toggleCompatibleSiteTemplates);
 
 	toggleCompatibleSiteTemplates();
 </aui:script>
