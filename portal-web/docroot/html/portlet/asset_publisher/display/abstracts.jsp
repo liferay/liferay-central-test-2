@@ -54,6 +54,7 @@ String viewFullContentURLString = viewFullContentURL.toString();
 viewFullContentURLString = HttpUtil.setParameter(viewFullContentURLString, "redirect", currentURL);
 
 String summary = StringUtil.shorten(assetRenderer.getSummary(locale), abstractLength);
+
 String viewURL = viewInContext ? assetRenderer.getURLViewInContext(liferayPortletRequest, liferayPortletResponse, viewFullContentURLString) : viewFullContentURL.toString();
 
 if (Validator.isNull(viewURL)) {
