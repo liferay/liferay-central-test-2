@@ -14,8 +14,10 @@
 
 package com.liferay.portal.kernel.deploy.hot;
 
+import com.liferay.portal.kernel.concurrent.LockRegistry;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.spring.context.PortletContextLoaderListener;
 import com.liferay.portal.kernel.util.BasePortalLifecycle;
 import com.liferay.portal.kernel.util.PortalLifecycle;
 import com.liferay.portal.kernel.util.PortalLifecycleUtil;
@@ -180,7 +182,15 @@ public class HotDeployUtil {
 
 			// Fire current event
 
-			_doFireDeployEvent(event);
+			try {
+				_doFireDeployEvent(event);
+			}
+			finally {
+				String lockKey = PortletContextLoaderListener.getLockKey(
+					event.getServletContext());
+
+				LockRegistry.finallyFreeLock(lockKey, lockKey, true);
+			}
 		}
 	}
 

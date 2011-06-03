@@ -14,9 +14,15 @@
 
 package com.liferay.portal.kernel.spring.context;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.PortalClassLoaderServletContextListener;
+import com.liferay.portal.kernel.util.MethodHandler;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 
+import java.lang.reflect.Method;
+
+import javax.servlet.ServletContext;
 import javax.servlet.ServletContextListener;
 
 /**
@@ -24,6 +30,46 @@ import javax.servlet.ServletContextListener;
  */
 public class PortletContextLoaderListener
 	extends PortalClassLoaderServletContextListener {
+
+	public static String getLockKey(ServletContext servletContext) {
+		return getLockKey(servletContext.getContextPath());
+	}
+
+	public static String getLockKey(String contextPath) {
+		Thread currentThread = Thread.currentThread();
+
+		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
+
+		try {
+			ClassLoader portalClusterLoader =
+				PortalClassLoaderUtil.getClassLoader();
+
+			currentThread.setContextClassLoader(portalClusterLoader);
+
+			Method getKeyMethod = portalClusterLoader.loadClass(
+				_CLASS_NAME).getMethod("getLockKey", String.class);
+
+			MethodHandler methodHandler = new MethodHandler(
+				getKeyMethod, contextPath);
+
+			Object returnValue = methodHandler.invoke(false);
+
+			return returnValue.toString();
+		}
+		catch (Exception e) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(
+					"Unable to get lock key by class :" + _CLASS_NAME +
+						" loaded by portal class loader",
+					e);
+			}
+
+			throw new IllegalStateException("Unable to get lock key", e);
+		}
+		finally {
+			currentThread.setContextClassLoader(contextClassLoader);
+		}
+	}
 
 	protected ServletContextListener getInstance() throws Exception {
 		Class<?> clazz = Class.forName(
@@ -34,5 +80,8 @@ public class PortletContextLoaderListener
 
 	private static final String _CLASS_NAME =
 		"com.liferay.portal.spring.context.PortletContextLoaderListener";
+
+	private static Log _log = LogFactoryUtil.getLog(
+		PortletContextLoaderListener.class.getName());
 
 }

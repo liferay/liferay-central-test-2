@@ -69,10 +69,21 @@ public class LockRegistry {
 		}
 
 		_lockGroupMap.clear();
+		_prematureLockReleases.clear();
 	}
 
 	public static Map<String, ReentrantLock> freeLock(String groupName) {
 		return freeLock(groupName, false);
+	}
+
+	public static ReentrantLock finallyFreeLock(
+		String groupName, String key, boolean unlock) {
+
+		if (_prematureLockReleases.containsKey(groupName + key)) {
+			return freeLock(groupName, key, unlock);
+		}
+
+		return null;
 	}
 
 	public static Map<String, ReentrantLock> freeLock(
@@ -81,6 +92,8 @@ public class LockRegistry {
 		Map<String, ReentrantLock> lockGroup = _lockGroupMap.remove(groupName);
 
 		if (lockGroup == null) {
+			_prematureLockReleases.put(groupName, _DUMMY_VALUE);
+
 			return null;
 		}
 
@@ -88,6 +101,8 @@ public class LockRegistry {
 			for (ReentrantLock lock : lockGroup.values()) {
 				lock.unlock();
 			}
+
+			_prematureLockReleases.remove(groupName);
 		}
 
 		return lockGroup;
@@ -102,18 +117,26 @@ public class LockRegistry {
 
 		Map<String, ReentrantLock> lockGroup = _lockGroupMap.get(groupName);
 
+		String prematureLockReleasesKey = groupName + key;
+
 		if (lockGroup == null) {
+			_prematureLockReleases.put(prematureLockReleasesKey, _DUMMY_VALUE);
+
 			return null;
 		}
 
 		ReentrantLock lock = lockGroup.remove(key);
 
 		if (lock == null) {
+			_prematureLockReleases.put(prematureLockReleasesKey, _DUMMY_VALUE);
+
 			return null;
 		}
 
 		if (unlock) {
 			lock.unlock();
+
+			_prematureLockReleases.remove(prematureLockReleasesKey);
 		}
 
 		return lock;
@@ -130,10 +153,15 @@ public class LockRegistry {
 		return lockGroup.get(key);
 	}
 
+	private static final Object _DUMMY_VALUE = new Object();
+
 	private static ConcurrentHashMap
 		<String, ConcurrentHashMap<String, ReentrantLock>>
 			_lockGroupMap =
 				new ConcurrentHashMap
 					<String, ConcurrentHashMap<String, ReentrantLock>>();
+
+	private static Map<String, Object> _prematureLockReleases =
+		new ConcurrentHashMap<String, Object>();
 
 }
