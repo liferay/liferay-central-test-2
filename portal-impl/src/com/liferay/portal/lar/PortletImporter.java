@@ -257,47 +257,41 @@ public class PortletImporter {
 			throw new SystemException(de);
 		}
 
-		// Portlet preferences
+		setPortletScope(portletDataContext, portletElement);
 
-		importPortletPreferences(
-			portletDataContext, layout.getCompanyId(), groupId, layout,
-			portletId, portletElement, importPortletSetup,
-			importPortletArchivedSetups, importPortletUserPreferences, true);
+		try {
+			// Portlet preferences
 
-		// Portlet data
+			importPortletPreferences(
+				portletDataContext, layout.getCompanyId(), groupId, layout,
+				portletId, portletElement, importPortletSetup,
+				importPortletArchivedSetups, importPortletUserPreferences,
+				true);
 
-		if (_log.isDebugEnabled()) {
-			_log.debug("Importing portlet data");
-		}
+			// Portlet data
 
-		if (importPortletData) {
 			Element portletDataElement = portletElement.element("portlet-data");
 
-			if (portletDataElement != null) {
+			if (importPortletData && (portletDataElement != null)) {
+				if (_log.isDebugEnabled()) {
+					_log.debug("Importing portlet data");
+				}
+
 				importPortletData(
 					portletDataContext, portletId, plid, portletDataElement);
 			}
-			else {
-				if (_log.isWarnEnabled()) {
-					_log.warn(
-						"Could not import portlet data because it cannot be " +
-							"found in the input");
-				}
-			}
 		}
-
-		if (_log.isInfoEnabled()) {
-			_log.info(
-				"Importing portlet data takes " + stopWatch.getTime() + " ms");
+		finally {
+			resetPortletScope(portletDataContext, groupId);
 		}
 
 		// Portlet permissions
 
-		if (_log.isDebugEnabled()) {
-			_log.debug("Importing portlet permissions");
-		}
-
 		if (importPermissions) {
+			if (_log.isDebugEnabled()) {
+				_log.debug("Importing portlet permissions");
+			}
+
 			LayoutCache layoutCache = new LayoutCache();
 
 			_permissionImporter.importPortletPermissions(
@@ -312,6 +306,11 @@ public class PortletImporter {
 		}
 
 		readAssetLinks(portletDataContext);
+
+		if (_log.isInfoEnabled()) {
+			_log.info(
+				"Importing portlet takes " + stopWatch.getTime() + " ms");
+		}
 
 		zipReader.close();
 	}
@@ -692,73 +691,6 @@ public class PortletImporter {
 			_log.debug("Importing data for " + portletId);
 		}
 
-		// Layout scope
-
-		long groupId = portletDataContext.getGroupId();
-
-		String scopeType = portletDataContext.getScopeType();
-
-		String scopeLayoutUuid = portletDataContext.getScopeLayoutUuid();
-
-		if (Validator.isNull(scopeType)) {
-			Element portletDataParentElement = portletDataElement.getParent();
-
-			scopeLayoutUuid = GetterUtil.getString(
-				portletDataParentElement.attributeValue("scope-layout-uuid"));
-		}
-
-		try {
-			Group scopeGroup = null;
-
-			if (scopeType.equals("company")) {
-				scopeGroup = GroupLocalServiceUtil.getCompanyGroup(
-					portletDataContext.getCompanyId());
-			}
-			else if (Validator.isNotNull(scopeLayoutUuid)) {
-				Layout scopeLayout =
-					LayoutLocalServiceUtil.getLayoutByUuidAndGroupId(
-						scopeLayoutUuid, groupId);
-
-				if (scopeLayout.hasScopeGroup()) {
-					scopeGroup = scopeLayout.getScopeGroup();
-				}
-				else {
-					String name = String.valueOf(scopeLayout.getPlid());
-
-					scopeGroup = GroupLocalServiceUtil.addGroup(
-						portletDataContext.getUserId(null),
-						Layout.class.getName(), scopeLayout.getPlid(), name,
-						null, 0, null, false, true, null);
-				}
-
-				Group group = scopeLayout.getGroup();
-
-				if (group.isStaged() && !group.isStagedRemotely()) {
-					try {
-						Layout oldLayout =
-							LayoutLocalServiceUtil.getLayoutByUuidAndGroupId(
-								scopeLayoutUuid,
-								portletDataContext.getSourceGroupId());
-
-						Group oldScopeGroup = oldLayout.getScopeGroup();
-
-						oldScopeGroup.setLiveGroupId(scopeGroup.getGroupId());
-
-						GroupLocalServiceUtil.updateGroup(oldScopeGroup, true);
-					}
-					catch (NoSuchLayoutException nsle) {
-						if (_log.isWarnEnabled()) {
-							_log.warn(nsle);
-						}
-					}
-				}
-
-				portletDataContext.setScopeGroupId(scopeGroup.getGroupId());
-			}
-		}
-		catch (PortalException pe) {
-		}
-
 		PortletPreferencesImpl portletPreferencesImpl = null;
 
 		if (portletPreferences != null) {
@@ -784,8 +716,6 @@ public class PortletImporter {
 			throw e;
 		}
 		finally {
-			portletDataContext.setScopeGroupId(groupId);
-
 			SocialActivityThreadLocal.setEnabled(true);
 			WorkflowThreadLocal.setEnabled(true);
 		}
@@ -880,7 +810,7 @@ public class PortletImporter {
 
 				if (ownerType == PortletKeys.PREFS_OWNER_TYPE_GROUP) {
 					plid = PortletKeys.PREFS_PLID_SHARED;
-					ownerId = portletDataContext.getGroupId();
+					ownerId = portletDataContext.getScopeGroupId();
 				}
 
 				boolean defaultUser = GetterUtil.getBoolean(
@@ -1307,6 +1237,85 @@ public class PortletImporter {
 
 			portletDataContext.addRatingsEntries(
 				className, classPK, ratingsEntries);
+		}
+	}
+
+	protected void resetPortletScope(
+		PortletDataContext portletDataContext, long groupId) {
+
+		portletDataContext.setScopeGroupId(groupId);
+		portletDataContext.setScopeType(StringPool.BLANK);
+		portletDataContext.setScopeLayoutUuid(StringPool.BLANK);
+	}
+
+	protected void setPortletScope(
+		PortletDataContext portletDataContext, Element portletElement) {
+
+		// Portlet data scope
+
+		String scopeLayoutType = GetterUtil.getString(
+			portletElement.attributeValue("scope-layout-type"));
+		String scopeLayoutUuid = GetterUtil.getString(
+			portletElement.attributeValue("scope-layout-uuid"));
+
+		portletDataContext.setScopeType(scopeLayoutType);
+		portletDataContext.setScopeLayoutUuid(scopeLayoutUuid);
+
+		// Layout scope
+
+		try {
+			Group scopeGroup = null;
+
+			if (scopeLayoutType.equals("company")) {
+				scopeGroup = GroupLocalServiceUtil.getCompanyGroup(
+					portletDataContext.getCompanyId());
+			}
+			else if (Validator.isNotNull(scopeLayoutUuid)) {
+				Layout scopeLayout =
+					LayoutLocalServiceUtil.getLayoutByUuidAndGroupId(
+						scopeLayoutUuid, portletDataContext.getGroupId());
+
+				if (scopeLayout.hasScopeGroup()) {
+					scopeGroup = scopeLayout.getScopeGroup();
+				}
+				else {
+					String name = String.valueOf(scopeLayout.getPlid());
+
+					scopeGroup = GroupLocalServiceUtil.addGroup(
+						portletDataContext.getUserId(null),
+						Layout.class.getName(), scopeLayout.getPlid(), name,
+						null, 0, null, false, true, null);
+				}
+
+				Group group = scopeLayout.getGroup();
+
+				if (group.isStaged() && !group.isStagedRemotely()) {
+					try {
+						Layout oldLayout =
+							LayoutLocalServiceUtil.getLayoutByUuidAndGroupId(
+								scopeLayoutUuid,
+								portletDataContext.getSourceGroupId());
+
+						Group oldScopeGroup = oldLayout.getScopeGroup();
+
+						oldScopeGroup.setLiveGroupId(scopeGroup.getGroupId());
+
+						GroupLocalServiceUtil.updateGroup(oldScopeGroup, true);
+					}
+					catch (NoSuchLayoutException nsle) {
+						if (_log.isWarnEnabled()) {
+							_log.warn(nsle);
+						}
+					}
+				}
+
+				portletDataContext.setScopeGroupId(scopeGroup.getGroupId());
+			}
+		}
+		catch (PortalException pe) {
+		}
+		catch (Exception e) {
+			_log.error(e, e);
 		}
 	}
 

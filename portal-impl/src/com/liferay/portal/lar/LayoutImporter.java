@@ -457,31 +457,32 @@ public class LayoutImporter {
 			// the portlet permissions. The import of the portlet data
 			// assumes that portlet preferences already exist.
 
-			// Portlet preferences
+			_portletImporter.setPortletScope(
+				portletDataContext, portletElement);
 
-			_portletImporter.importPortletPreferences(
-				portletDataContext, layoutSet.getCompanyId(),
-				layout.getGroupId(), layout, null, portletElement,
-				importPortletSetup, importPortletArchivedSetups,
-				importPortletUserPreferences, false);
+			try {
+				// Portlet preferences
 
-			// Portlet data scope
+				_portletImporter.importPortletPreferences(
+					portletDataContext, layoutSet.getCompanyId(),
+					layout.getGroupId(), layout, null, portletElement,
+					importPortletSetup, importPortletArchivedSetups,
+					importPortletUserPreferences, false);
 
-			String scopeType = GetterUtil.getString(
-				portletElement.attributeValue("scope-type"));
-			String scopeLayoutUuid = GetterUtil.getString(
-				portletElement.attributeValue("scope-layout-uuid"));
+				// Portlet data
 
-			portletDataContext.setScopeType(scopeType);
-			portletDataContext.setScopeLayoutUuid(scopeLayoutUuid);
+				Element portletDataElement = portletElement.element(
+					"portlet-data");
 
-			// Portlet data
-
-			Element portletDataElement = portletElement.element("portlet-data");
-
-			if (importPortletData && (portletDataElement != null)) {
-				_portletImporter.importPortletData(
-					portletDataContext, portletId, plid, portletDataElement);
+				if (importPortletData && (portletDataElement != null)) {
+					_portletImporter.importPortletData(
+						portletDataContext, portletId, plid,
+						portletDataElement);
+				}
+			}
+			finally {
+				_portletImporter.resetPortletScope(
+					portletDataContext, layout.getGroupId());
 			}
 
 			// Portlet permissions

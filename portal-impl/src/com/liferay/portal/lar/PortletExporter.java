@@ -734,7 +734,7 @@ public class PortletExporter {
 				portletElement);
 
 			exportPortletPreferences(
-				portletDataContext, portletDataContext.getGroupId(),
+				portletDataContext, portletDataContext.getScopeGroupId(),
 				PortletKeys.PREFS_OWNER_TYPE_GROUP, false, layout, portletId,
 				portletElement);
 
@@ -755,12 +755,12 @@ public class PortletExporter {
 			try {
 				PortletPreferences groupPortletPreferences =
 					PortletPreferencesLocalServiceUtil.getPortletPreferences(
-						portletDataContext.getGroupId(),
+						portletDataContext.getScopeGroupId(),
 						PortletKeys.PREFS_OWNER_TYPE_GROUP,
 						PortletKeys.PREFS_PLID_SHARED, portletId);
 
 				exportPortletPreference(
-					portletDataContext, portletDataContext.getGroupId(),
+					portletDataContext, portletDataContext.getScopeGroupId(),
 					PortletKeys.PREFS_OWNER_TYPE_GROUP, false,
 					groupPortletPreferences, portletId,
 					PortletKeys.PREFS_PLID_SHARED, portletElement);
