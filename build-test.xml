@@ -2728,6 +2728,8 @@ file.
 				<available file="selenium_nanny.exe" />
 			</waitfor>
 
+			<sleep seconds="10" />
+
 			<forget>
 				<exec executable="selenium_nanny.exe" />
 			</forget>
