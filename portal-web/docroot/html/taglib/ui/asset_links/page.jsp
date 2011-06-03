@@ -57,7 +57,6 @@ if (classPK > 0) {
 				AssetRenderer assetRenderer = assetRendererFactory.getAssetRenderer(assetLinkEntry.getClassPK());
 
 				if (assetRenderer.hasViewPermission(permissionChecker)) {
-
 					String asseLinktEntryTitle = assetRenderer.getTitle(locale);
 
 					String urlViewInContext = assetRenderer.getURLViewInContext((LiferayPortletRequest)portletRequest, (LiferayPortletResponse)portletResponse, "viewFullContentURLString");
