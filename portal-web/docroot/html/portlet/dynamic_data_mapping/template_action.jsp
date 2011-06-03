@@ -34,7 +34,7 @@ DDMStructure structure = template.getStructure();
 			<portlet:param name="structureKey" value="<%= structure.getStructureKey() %>" />
 			<portlet:param name="templateId" value="<%= String.valueOf(template.getTemplateId()) %>" />
 			<portlet:param name="type" value="<%= template.getType() %>" />
-			<portlet:param name="availableFields" value='<%= renderResponse.getNamespace() + "structureAvailableFields" %>' />
+			<portlet:param name="structureAvailableFields" value='<%= renderResponse.getNamespace() + "structureAvailableFields" %>' />
 		</portlet:renderURL>
 
 		<liferay-ui:icon

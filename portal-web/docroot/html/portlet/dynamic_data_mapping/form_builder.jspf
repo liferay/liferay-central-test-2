@@ -77,8 +77,8 @@
 <aui:script use="liferay-portlet-dynamic-data-mapping">
 	window.<portlet:namespace />formBuilder = new Liferay.FormBuilder(
 		{
-			<c:if test="<%= Validator.isNotNull(availableFields) %>">
-				availableFields: A.Object.getValue(window, '<%= HtmlUtil.escapeJS(availableFields) %>'.split('.')),
+			<c:if test="<%= Validator.isNotNull(scopeAvailableFields) %>">
+				availableFields: A.Object.getValue(window, '<%= HtmlUtil.escapeJS(scopeAvailableFields) %>'.split('.')),
 			</c:if>
 
 			boundingBox: '#<portlet:namespace />formBuilder',

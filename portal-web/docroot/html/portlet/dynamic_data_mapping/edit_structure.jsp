@@ -28,8 +28,6 @@ long groupId = BeanParamUtil.getLong(structure, request, "groupId", scopeGroupId
 String structureKey = BeanParamUtil.getString(structure, request, "structureKey");
 String newStructureKey = ParamUtil.getString(request, "newStructureKey");
 String script = BeanParamUtil.getString(structure, request, "xsd");
-
-String availableFields = ParamUtil.getString(request, "availableFields");
 %>
 
 <portlet:actionURL var="editStructureURL">
@@ -42,7 +40,6 @@ String availableFields = ParamUtil.getString(request, "availableFields");
 	<aui:input name="groupId" type="hidden" value="<%= groupId %>" />
 	<aui:input name="structureKey" type="hidden" value="<%= structureKey %>" />
 	<aui:input name="script" type="hidden" />
-	<aui:input name="availableFields" type="hidden" value="<%= availableFields %>" />
 	<aui:input name="saveCallback" type="hidden" value="<%= saveCallback %>" />
 	<aui:input name="saveAndContinue" type="hidden" value="<%= false %>" />
 

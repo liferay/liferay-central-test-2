@@ -35,10 +35,10 @@ String structureKey = BeanParamUtil.getString(structure, request, "structureKey"
 String type = BeanParamUtil.getString(template, request, "type", "detail");
 String script = BeanParamUtil.getString(template, request, "script");
 
-String availableFields = ParamUtil.getString(request, "availableFields");
+String structureAvailableFields = ParamUtil.getString(request, "structureAvailableFields");
 
-if (Validator.isNull(availableFields)) {
-	availableFields = renderResponse.getNamespace() + "structureAvailableFields";
+if (Validator.isNotNull(structureAvailableFields)) {
+	scopeAvailableFields = structureAvailableFields;
 }
 %>
 
@@ -53,7 +53,6 @@ if (Validator.isNull(availableFields)) {
 	<aui:input name="groupId" type="hidden" value="<%= groupId %>" />
 	<aui:input name="structureKey" type="hidden" value="<%= structureKey %>" />
 	<aui:input name="type" type="hidden" value="<%= type %>" />
-	<aui:input name="availableFields" type="hidden" value="<%= availableFields %>" />
 	<aui:input name="saveCallback" type="hidden" value="<%= saveCallback %>" />
 	<aui:input name="saveAndContinue" type="hidden" value="<%= false %>" />
 

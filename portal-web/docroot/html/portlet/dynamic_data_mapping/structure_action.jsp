@@ -52,7 +52,6 @@ DDMStructure structure = (DDMStructure)row.getObject();
 			<portlet:param name="redirect" value="<%= currentURL %>" />
 			<portlet:param name="groupId" value="<%= String.valueOf(structure.getGroupId()) %>" />
 			<portlet:param name="structureKey" value="<%= structure.getStructureKey() %>" />
-			<portlet:param name="availableFields" value="Liferay.FormBuilder.AVAILABLE_FIELDS.DDM_STRUCTURE" />
 		</portlet:renderURL>
 
 		<liferay-ui:icon

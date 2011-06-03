@@ -1023,12 +1023,20 @@
 		function(config) {
 			var instance = this;
 
+			var defaultValues = {
+				availableFields: 'Liferay.FormBuilder.AVAILABLE_FIELDS.DDM_STRUCTURE',
+				structureName: 'structures'
+			};
+
+			config = A.merge(defaultValues,	config);
+
 			var ddmURL = Liferay.PortletURL.createRenderURL();
 
 			ddmURL.setEscapeXML(false);
-			
+
 			ddmURL.setParameter('chooseCallback', config.chooseCallback);
 			ddmURL.setParameter('saveCallback', config.saveCallback);
+			ddmURL.setParameter('scopeAvailableFields', config.availableFields);
 			ddmURL.setParameter('scopeStorageType', config.storageType);
 			ddmURL.setParameter('scopeStructureName', config.structureName);
 			ddmURL.setParameter('scopeStructureType', config.structureType);
