@@ -18,7 +18,7 @@
 	<c:if test="<%= ArrayUtil.contains(PropsValues.USERS_LIST_VIEWS, UserConstants.LIST_VIEW_TREE) %>">
 		<portlet:renderURL var="viewUsersURL">
 			<portlet:param name="struts_action" value="/enterprise_admin/view" />
-			<portlet:param name="tabs1" value="organizations" />
+			<portlet:param name="tabs1" value="users" />
 			<portlet:param name="usersListView" value="<%= UserConstants.LIST_VIEW_TREE %>" />
 			<portlet:param name="saveUsersListView" value="<%= Boolean.TRUE.toString() %>" />
 		</portlet:renderURL>
@@ -34,7 +34,7 @@
 	<c:if test="<%= ArrayUtil.contains(PropsValues.USERS_LIST_VIEWS, UserConstants.LIST_VIEW_FLAT_USERS) %>">
 		<portlet:renderURL var="viewUsersURL">
 			<portlet:param name="struts_action" value="/enterprise_admin/view" />
-			<portlet:param name="tabs1" value="organizations" />
+			<portlet:param name="tabs1" value="users" />
 			<portlet:param name="usersListView" value="<%= UserConstants.LIST_VIEW_FLAT_USERS %>" />
 			<portlet:param name="saveUsersListView" value="<%= Boolean.TRUE.toString() %>" />
 		</portlet:renderURL>
@@ -50,7 +50,7 @@
 	<c:if test="<%= ArrayUtil.contains(PropsValues.USERS_LIST_VIEWS, UserConstants.LIST_VIEW_FLAT_ORGANIZATIONS) %>">
 		<portlet:renderURL var="viewUsersURL">
 			<portlet:param name="struts_action" value="/enterprise_admin/view" />
-			<portlet:param name="tabs1" value="organizations" />
+			<portlet:param name="tabs1" value="users" />
 			<portlet:param name="usersListView" value="<%= UserConstants.LIST_VIEW_FLAT_ORGANIZATIONS%>" />
 			<portlet:param name="saveUsersListView" value="<%= Boolean.TRUE.toString() %>" />
 		</portlet:renderURL>
