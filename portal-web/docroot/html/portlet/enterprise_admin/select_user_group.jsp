@@ -38,15 +38,13 @@ portletURL.setParameter("struts_action", "/enterprise_admin/select_user_group");
 
 		<%
 		UserGroupSearchTerms searchTerms = (UserGroupSearchTerms)searchContainer.getSearchTerms();
-
-		LinkedHashMap userGroupParams = new LinkedHashMap();
 		%>
 
 		<liferay-ui:search-container-results>
 
 			<%
 			if (filterManageableUserGroups) {
-				List<UserGroup> userGroups = UserGroupLocalServiceUtil.getUserGroups(company.getCompanyId());
+				List<UserGroup> userGroups = UserGroupLocalServiceUtil.search(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), null, QueryUtil.ALL_POS, QueryUtil.ALL_POS, searchContainer.getOrderByComparator());
 
 				userGroups = EnterpriseAdminUtil.filterUserGroups(permissionChecker, userGroups);
 
@@ -54,8 +52,8 @@ portletURL.setParameter("struts_action", "/enterprise_admin/select_user_group");
 				results = ListUtil.subList(userGroups, searchContainer.getStart(), searchContainer.getEnd());
 			}
 			else {
-				results = UserGroupLocalServiceUtil.search(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), userGroupParams, searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator());
-				total = UserGroupLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), userGroupParams);
+				results = UserGroupLocalServiceUtil.search(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), null, searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator());
+				total = UserGroupLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), null);
 			}
 
 			pageContext.setAttribute("results", results);
