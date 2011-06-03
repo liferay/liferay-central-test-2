@@ -85,9 +85,9 @@ public class StringUtil {
 	public static String bytesToHexString(byte[] bytes) {
 		StringBuilder sb = new StringBuilder(bytes.length * 2);
 
-		for (int i = 0; i < bytes.length; i++) {
+		for (byte b : bytes) {
 			String hex = Integer.toHexString(
-				0x0100 + (bytes[i] & 0x00FF)).substring(1);
+				0x0100 + (b & 0x00FF)).substring(1);
 
 			if (hex.length() < 2) {
 				sb.append("0");
@@ -179,9 +179,9 @@ public class StringUtil {
 
 		char[] chars = s.toCharArray();
 
-		for (int i = 0; i < chars.length; i++) {
-			if (Validator.isChar(chars[i])) {
-				sb.append(chars[i]);
+		for (char c : chars) {
+			if (Validator.isChar(c)) {
+				sb.append(c);
 			}
 		}
 
@@ -197,9 +197,9 @@ public class StringUtil {
 
 		char[] chars = s.toCharArray();
 
-		for (int i = 0; i < chars.length; i++) {
-			if (Validator.isDigit(chars[i])) {
-				sb.append(chars[i]);
+		for (char c : chars) {
+			if (Validator.isDigit(c)) {
+				sb.append(c);
 			}
 		}
 
@@ -330,14 +330,14 @@ public class StringUtil {
 	public static boolean matches(String s, String pattern) {
 		String[] array = pattern.split("\\*");
 
-		for (int i = 0; i < array.length; i++) {
-			int pos = s.indexOf(array[i]);
+		for (String element : array) {
+			int pos = s.indexOf(element);
 
 			if (pos == -1) {
 				return false;
 			}
 
-			s = s.substring(pos + array[i].length());
+			s = s.substring(pos + element.length());
 		}
 
 		return true;
@@ -1671,8 +1671,8 @@ public class StringUtil {
 
 	private static boolean _isTrimable(char c, char[] exceptions) {
 		if ((exceptions != null) && (exceptions.length > 0)) {
-			for (int i = 0; i < exceptions.length; i++) {
-				if (c == exceptions[i]) {
+			for (char exception : exceptions) {
+				if (c == exception) {
 					return false;
 				}
 			}
