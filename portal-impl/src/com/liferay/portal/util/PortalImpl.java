@@ -5130,7 +5130,7 @@ public class PortalImpl implements Portal {
 
 			String portletId1 = parameterName.substring(1, pos);
 
-			if (portletId1.equals(portletId)) {
+			if (portletId.equals(portletId1)) {
 				value = parameterValues[0];
 			}
 		}
