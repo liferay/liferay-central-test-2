@@ -78,7 +78,8 @@ public class VelocityEngineImpl implements VelocityEngine {
 		LiferayResourceLoader.setListeners(
 			PropsValues.VELOCITY_ENGINE_RESOURCE_LISTENERS);
 
-		ExtendedProperties extendedProperties = new ExtendedProperties();
+		ExtendedProperties extendedProperties =
+			new ScalableExtendedProperties();
 
 		extendedProperties.setProperty(_RESOURCE_LOADER, "string,servlet");
 

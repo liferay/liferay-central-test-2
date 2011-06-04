@@ -15,12 +15,19 @@
 package com.liferay.portal.velocity;
 
 import com.liferay.portal.deploy.sandbox.SandboxHandler;
+import com.liferay.portal.kernel.util.ReflectionUtil;
 
+import java.lang.reflect.Field;
+
+import org.apache.commons.collections.ExtendedProperties;
+import org.apache.velocity.runtime.RuntimeInstance;
+import org.apache.velocity.runtime.RuntimeServices;
 import org.apache.velocity.runtime.resource.Resource;
 import org.apache.velocity.runtime.resource.ResourceManagerImpl;
 
 /**
  * @author Brian Wing Shun Chan
+ * @author Shuyang Zhou
  */
 public class LiferayResourceManager extends ResourceManagerImpl {
 
@@ -47,6 +54,20 @@ public class LiferayResourceManager extends ResourceManagerImpl {
 		else {
 			return super.getResource(resourceName, resourceType, encoding);
 		}
+	}
+
+	public synchronized void initialize(RuntimeServices runtimeServices)
+		throws Exception {
+		ExtendedProperties extendedProperties =
+			runtimeServices.getConfiguration();
+
+		Field field = ReflectionUtil.getDeclaredField(RuntimeInstance.class,
+			"configuration");
+
+		field.set(runtimeServices,
+			new ScalableExtendedProperties(extendedProperties));
+
+		super.initialize(runtimeServices);
 	}
 
 }
