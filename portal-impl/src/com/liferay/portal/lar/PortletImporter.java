@@ -338,12 +338,12 @@ public class PortletImporter {
 		 while (enu.hasMoreElements()) {
 			String name = enu.nextElement();
 
-			String value = portletPreferences.getValue(name, StringPool.BLANK);
+			String value = GetterUtil.getString(
+				portletPreferences.getValue(name, StringPool.BLANK));
 
 			String prefix = "queryName";
 
-			if (Validator.isNotNull(value) &&
-				value.equalsIgnoreCase("assetCategories") &&
+			if (value.equalsIgnoreCase("assetCategories") &&
 				name.startsWith(prefix)) {
 
 				String index = name.substring(prefix.length(), name.length());
