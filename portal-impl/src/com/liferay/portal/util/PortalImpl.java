@@ -5087,18 +5087,27 @@ public class PortalImpl implements Portal {
 	}
 
 	private String _getPortletParam(HttpServletRequest request, String name) {
+		String portletId = ParamUtil.getString(request, "p_p_id");
+
+		if (Validator.isNull(portletId)) {
+			return StringPool.BLANK;
+		}
+
 		String value = null;
 
 		int valueCount = 0;
 
-		Enumeration<String> enu = request.getParameterNames();
+		String keyName = StringPool.UNDERLINE.concat(name);
 
-		while (enu.hasMoreElements()) {
-			String curName = enu.nextElement();
+		Map<String, String[]> parameterMap = request.getParameterMap();
 
-			int pos = curName.indexOf(StringPool.UNDERLINE + name);
+		for (Map.Entry<String, String[]> parameterEntry :
+			parameterMap.entrySet()) {
+			String parameterName = parameterEntry.getKey();
 
-			if (pos != -1) {
+			int index = parameterName.indexOf(keyName);
+
+			if (index != -1) {
 				valueCount++;
 
 				// There should never be more than one value
@@ -5107,17 +5116,17 @@ public class PortalImpl implements Portal {
 					return StringPool.BLANK;
 				}
 
-				String curValue = ParamUtil.getString(request, curName);
+				String[] parameterValues = parameterEntry.getValue();
 
-				if (Validator.isNotNull(curValue)) {
+				if ((parameterValues != null) && (parameterValues.length > 0) &&
+					Validator.isNotNull(parameterValues[0])) {
 
 					// The Struts action must be for the correct portlet
 
-					String portletId1 = curName.substring(1, pos);
-					String portletId2 = ParamUtil.getString(request, "p_p_id");
+					String portletId1 = parameterName.substring(1, index);
 
-					if (portletId1.equals(portletId2)) {
-						value = curValue;
+					if (portletId1.equals(portletId)) {
+						value = parameterValues[0];
 					}
 				}
 			}
