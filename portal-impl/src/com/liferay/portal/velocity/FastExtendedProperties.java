@@ -16,8 +16,10 @@ package com.liferay.portal.velocity;
 
 import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayInputStream;
 import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayOutputStream;
+import com.liferay.portal.kernel.util.StringPool;
 
 import java.io.IOException;
+import java.io.InputStream;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -31,104 +33,114 @@ import org.apache.commons.collections.ExtendedProperties;
 /**
  * @author Shuyang Zhou
  */
-public class ScalableExtendedProperties extends ExtendedProperties {
+public class FastExtendedProperties extends ExtendedProperties {
 
-	public ScalableExtendedProperties() {
+	public FastExtendedProperties() {
 	}
 
-	public ScalableExtendedProperties(ExtendedProperties extendedProperties)
+	public FastExtendedProperties(ExtendedProperties extendedProperties)
 		throws IOException {
-		UnsyncByteArrayOutputStream ubaos = new UnsyncByteArrayOutputStream();
 
-		extendedProperties.save(ubaos, "");
+		UnsyncByteArrayOutputStream unsyncByteArrayOutputStream =
+			new UnsyncByteArrayOutputStream();
 
-		load(new UnsyncByteArrayInputStream(ubaos.unsafeGetByteArray(), 0,
-			ubaos.size()));
+		extendedProperties.save(unsyncByteArrayOutputStream, StringPool.BLANK);
+
+		InputStream inputStream = new UnsyncByteArrayInputStream(
+			unsyncByteArrayOutputStream.unsafeGetByteArray(), 0,
+			unsyncByteArrayOutputStream.size());
+
+		load(inputStream);
 	}
 
 	public void clear() {
-		_scalableMap.clear();
+		_map.clear();
 	}
 
 	public Object clone() {
-		ScalableExtendedProperties scalableExtendedProperties =
-			(ScalableExtendedProperties)super.clone();
+		FastExtendedProperties fastExtendedProperties =
+			(FastExtendedProperties)super.clone();
 
-		scalableExtendedProperties._scalableMap =
-			new ConcurrentHashMap<Object, Object>(_scalableMap);
+		fastExtendedProperties._map = new ConcurrentHashMap<Object, Object>(
+			_map);
 
-		return scalableExtendedProperties;
+		return fastExtendedProperties;
 	}
 
 	public boolean contains(Object value) {
-		return _scalableMap.containsKey(value);
+		return _map.containsKey(value);
 	}
 
 	public boolean containsKey(Object key) {
-		return _scalableMap.containsKey(key);
+		return _map.containsKey(key);
 	}
 
 	public boolean containsValue(Object value) {
-		return _scalableMap.containsValue(value);
+		return _map.containsValue(value);
 	}
 
+	@SuppressWarnings("rawtypes")
 	public Enumeration elements() {
-		return Collections.enumeration(_scalableMap.values());
+		return Collections.enumeration(_map.values());
 	}
 
+	@SuppressWarnings("rawtypes")
 	public Set entrySet() {
-		return _scalableMap.entrySet();
+		return _map.entrySet();
 	}
 
 	public boolean equals(Object o) {
-		return _scalableMap.equals(o);
+		return _map.equals(o);
 	}
 
 	public Object get(Object key) {
-		return _scalableMap.get(key);
+		return _map.get(key);
 	}
 
 	public int hashCode() {
-		return _scalableMap.hashCode();
+		return _map.hashCode();
 	}
 
 	public boolean isEmpty() {
-		return _scalableMap.isEmpty();
+		return _map.isEmpty();
 	}
 
-	public Set keySet() {
-		return _scalableMap.keySet();
-	}
-
+	@SuppressWarnings("rawtypes")
 	public Enumeration keys() {
-		return Collections.enumeration(_scalableMap.keySet());
+		return Collections.enumeration(_map.keySet());
+	}
+
+	@SuppressWarnings("rawtypes")
+	public Set keySet() {
+		return _map.keySet();
 	}
 
 	public Object put(Object key, Object value) {
-		return _scalableMap.put(key, value);
+		return _map.put(key, value);
 	}
 
+	@SuppressWarnings("rawtypes")
 	public void putAll(Map t) {
-		_scalableMap.putAll(t);
+		_map.putAll(t);
 	}
 
 	public Object remove(Object key) {
-		return _scalableMap.remove(key);
+		return _map.remove(key);
 	}
 
 	public int size() {
-		return _scalableMap.size();
+		return _map.size();
 	}
 
 	public String toString() {
-		return _scalableMap.toString();
+		return _map.toString();
 	}
 
+	@SuppressWarnings("rawtypes")
 	public Collection values() {
-		return _scalableMap.values();
+		return _map.values();
 	}
 
-	private Map<Object, Object> _scalableMap =
-		new ConcurrentHashMap<Object, Object>();
+	private Map<Object, Object> _map = new ConcurrentHashMap<Object, Object>();
 
 }

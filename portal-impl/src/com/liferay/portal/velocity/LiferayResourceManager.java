@@ -58,14 +58,15 @@ public class LiferayResourceManager extends ResourceManagerImpl {
 
 	public synchronized void initialize(RuntimeServices runtimeServices)
 		throws Exception {
+
 		ExtendedProperties extendedProperties =
 			runtimeServices.getConfiguration();
 
-		Field field = ReflectionUtil.getDeclaredField(RuntimeInstance.class,
-			"configuration");
+		Field field = ReflectionUtil.getDeclaredField(
+			RuntimeInstance.class, "configuration");
 
-		field.set(runtimeServices,
-			new ScalableExtendedProperties(extendedProperties));
+		field.set(
+			runtimeServices, new FastExtendedProperties(extendedProperties));
 
 		super.initialize(runtimeServices);
 	}
