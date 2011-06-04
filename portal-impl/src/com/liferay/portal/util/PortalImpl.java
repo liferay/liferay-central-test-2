@@ -5101,34 +5101,37 @@ public class PortalImpl implements Portal {
 
 		Map<String, String[]> parameterMap = request.getParameterMap();
 
-		for (Map.Entry<String, String[]> parameterEntry :
-			parameterMap.entrySet()) {
-			String parameterName = parameterEntry.getKey();
+		for (Map.Entry<String, String[]> entry : parameterMap.entrySet()) {
+			String parameterName = entry.getKey();
 
-			int index = parameterName.indexOf(keyName);
+			int pos = parameterName.indexOf(keyName);
 
-			if (index != -1) {
-				valueCount++;
+			if (pos == -1) {
+				continue;
+			}
 
-				// There should never be more than one value
+			valueCount++;
 
-				if (valueCount > 1) {
-					return StringPool.BLANK;
-				}
+			// There should never be more than one value
 
-				String[] parameterValues = parameterEntry.getValue();
+			if (valueCount > 1) {
+				return StringPool.BLANK;
+			}
 
-				if ((parameterValues != null) && (parameterValues.length > 0) &&
-					Validator.isNotNull(parameterValues[0])) {
+			String[] parameterValues = entry.getValue();
 
-					// The Struts action must be for the correct portlet
+			if ((parameterValues == null) || (parameterValues.length == 0) ||
+				Validator.isNull(parameterValues[0])) {
 
-					String portletId1 = parameterName.substring(1, index);
+				continue;
+			}
 
-					if (portletId1.equals(portletId)) {
-						value = parameterValues[0];
-					}
-				}
+			// The Struts action must be for the correct portlet
+
+			String portletId1 = parameterName.substring(1, pos);
+
+			if (portletId1.equals(portletId)) {
+				value = parameterValues[0];
 			}
 		}
 
