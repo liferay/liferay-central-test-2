@@ -79,7 +79,9 @@ public class MethodTargetClassKey {
 			hashCode = 11 * hashCode;
 
 			if (_targetClass != null) {
-				hashCode += _targetClass.getName().hashCode();
+				String targetClassName = _targetClass.getName();
+
+				hashCode += targetClassName.hashCode();
 			}
 
 			_hashCode = hashCode;

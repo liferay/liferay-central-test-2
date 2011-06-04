@@ -57,6 +57,7 @@ public abstract class AnnotationChainableMethodAdvice<T extends Annotation>
 
 	protected MethodTargetClassKey buildMethodTargetClassKey(
 		MethodInvocation methodInvocation) {
+
 		Method method = methodInvocation.getMethod();
 
 		Class<?> targetClass = null;
