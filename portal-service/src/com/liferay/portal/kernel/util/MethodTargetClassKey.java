@@ -79,7 +79,7 @@ public class MethodTargetClassKey {
 			hashCode = 11 * hashCode;
 
 			if (_targetClass != null) {
-				hashCode += _targetClass.hashCode();
+				hashCode += _targetClass.getName().hashCode();
 			}
 
 			_hashCode = hashCode;

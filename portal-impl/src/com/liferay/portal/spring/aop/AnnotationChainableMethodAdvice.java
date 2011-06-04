@@ -14,16 +14,12 @@
 
 package com.liferay.portal.spring.aop;
 
-import com.liferay.portal.kernel.concurrent.ConcurrentHashSet;
-import com.liferay.portal.kernel.util.InitialThreadLocal;
 import com.liferay.portal.kernel.util.MethodTargetClassKey;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 
-import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
@@ -44,17 +40,6 @@ public abstract class AnnotationChainableMethodAdvice<T extends Annotation>
 		_annotationType = _nullAnnotation.annotationType();
 	}
 
-	public void duringFinally(MethodInvocation methodInvocation) {
-		if (!_methodInvocations.remove(methodInvocation)) {
-			return;
-		}
-
-		Map<MethodInvocation, MethodTargetClassKey> methodTargetClassKeyMap =
-			_methodTargetClassKeyThreadLocalCache.get();
-
-		methodTargetClassKeyMap.remove(methodInvocation);
-	}
-
 	public abstract T getNullAnnotation();
 
 	public void setBeanFactory(BeanFactory beanFactory) {
@@ -72,17 +57,6 @@ public abstract class AnnotationChainableMethodAdvice<T extends Annotation>
 
 	protected MethodTargetClassKey buildMethodTargetClassKey(
 		MethodInvocation methodInvocation) {
-
-		Map<MethodInvocation, MethodTargetClassKey> methodTargetClassKeyMap =
-			_methodTargetClassKeyThreadLocalCache.get();
-
-		MethodTargetClassKey methodTargetClassKey = methodTargetClassKeyMap.get(
-			methodInvocation);
-
-		if (methodTargetClassKey != null) {
-			return methodTargetClassKey;
-		}
-
 		Method method = methodInvocation.getMethod();
 
 		Class<?> targetClass = null;
@@ -93,13 +67,7 @@ public abstract class AnnotationChainableMethodAdvice<T extends Annotation>
 			targetClass = thisObject.getClass();
 		}
 
-		methodTargetClassKey = new MethodTargetClassKey(method, targetClass);
-
-		methodTargetClassKeyMap.put(methodInvocation, methodTargetClassKey);
-
-		_methodInvocations.add(methodInvocation);
-
-		return methodTargetClassKey;
+		return new MethodTargetClassKey(method, targetClass);
 	}
 
 	protected T findAnnotation(MethodTargetClassKey methodTargetClassKey) {
@@ -153,17 +121,9 @@ public abstract class AnnotationChainableMethodAdvice<T extends Annotation>
 				new ConcurrentHashMap
 					<BeanFactory, Map<MethodTargetClassKey, Annotation[]>>();
 	private static Annotation[] _emptyAnnotations = new Annotation[0];
-	private static ThreadLocal<Map<MethodInvocation, MethodTargetClassKey>>
-		_methodTargetClassKeyThreadLocalCache =
-			new InitialThreadLocal<Map<MethodInvocation, MethodTargetClassKey>>(
-				AnnotationChainableMethodAdvice.class +
-					"._methodTargetClassKeyThreadLocalCache",
-				new HashMap<MethodInvocation, MethodTargetClassKey>());
 
 	private Class<? extends Annotation> _annotationType;
 	private BeanFactory _beanFactory;
-	private Set<MethodInvocation> _methodInvocations =
-		new ConcurrentHashSet<MethodInvocation>();
 	private T _nullAnnotation;
 
 }
