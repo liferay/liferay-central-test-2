@@ -325,8 +325,14 @@ public class GetterUtil {
 			return defaultValue;
 		}
 
-		return StringUtil.replace(
-			value.trim(), StringPool.RETURN_NEW_LINE, StringPool.NEW_LINE);
+		String trimValue = value.trim();
+
+		if (trimValue.indexOf(CharPool.RETURN) != -1) {
+			trimValue = StringUtil.replace(trimValue,
+				StringPool.RETURN_NEW_LINE, StringPool.NEW_LINE);
+		}
+
+		return trimValue;
 	}
 
 	public static boolean getBoolean(Serializable value) {
