@@ -175,7 +175,7 @@ public class MultiVMKeyPoolPortalCache extends BasePortalCache {
 
 		Object clusterValue = _clusterPortalCache.get(key);
 
-		if (!key.equals(clusterValue)) {
+		if (key.equals(clusterValue)) {
 			return;
 		}
 
