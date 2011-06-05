@@ -86,8 +86,6 @@ public class LiferayResourceLoader extends ResourceLoader {
 	}
 
 	public void init(ExtendedProperties props) {
-		setCachingOn(
-			PropsValues.VELOCITY_ENGINE_RESOURCE_MANAGER_CACHE_ENABLED);
 		setModificationCheckInterval(
 			PropsValues.
 				VELOCITY_ENGINE_RESOURCE_MANAGER_MODIFICATION_CHECK_INTERVAL);
