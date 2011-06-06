@@ -191,17 +191,8 @@ public class AssetTagServiceImpl extends AssetTagServiceBaseImpl {
 			groupId, name, tagProperties);
 	}
 
-	public void mergeMultipleTags(long[] fromTagIds, long toTagId,
-			boolean overrideProperties)
-		throws PortalException, SystemException {
-
-		for (long fromTagId : fromTagIds) {
-			mergeTags(fromTagId, toTagId, overrideProperties);
-		}
-	}
-
-	public void mergeTags(long fromTagId, long toTagId,
-			boolean overrideProperties)
+	public void mergeTags(
+			long fromTagId, long toTagId, boolean overrideProperties)
 		throws PortalException, SystemException {
 
 		AssetTagPermission.check(
@@ -211,6 +202,15 @@ public class AssetTagServiceImpl extends AssetTagServiceBaseImpl {
 			getPermissionChecker(), toTagId, ActionKeys.UPDATE);
 
 		assetTagLocalService.mergeTags(fromTagId, toTagId, overrideProperties);
+	}
+
+	public void mergeTags(
+			long[] fromTagIds, long toTagId, boolean overrideProperties)
+		throws PortalException, SystemException {
+
+		for (long fromTagId : fromTagIds) {
+			mergeTags(fromTagId, toTagId, overrideProperties);
+		}
 	}
 
 	public JSONArray search(
