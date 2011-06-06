@@ -890,6 +890,11 @@
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
+			<name>disabled</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
 			<name>extended</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>

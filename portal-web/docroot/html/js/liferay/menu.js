@@ -99,7 +99,7 @@ AUI().add(
 
 						event.halt();
 					},
-					'.lfr-actions'
+					'.lfr-actions:not(.disabled)'
 				);
 
 				A.getDoc().on(EVENT_CLICK, instance._closeActiveMenu, instance);

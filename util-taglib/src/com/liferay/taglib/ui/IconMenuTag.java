@@ -148,6 +148,10 @@ public class IconMenuTag extends BaseBodyTagSupport implements BodyTag {
 		_direction = direction;
 	}
 
+	public void setDisabled(boolean disabled) {
+		_disabled = disabled;
+	}
+
 	public void setEndPage(String endPage) {
 		_endPage = endPage;
 	}
@@ -258,6 +262,10 @@ public class IconMenuTag extends BaseBodyTagSupport implements BodyTag {
 						jspWriter.print(_cssClass);
 					}
 
+					if (_disabled) {
+						jspWriter.write(" disabled");
+					}
+
 					if (_extended) {
 						jspWriter.write(" lfr-extended");
 					}
@@ -333,6 +341,7 @@ public class IconMenuTag extends BaseBodyTagSupport implements BodyTag {
 	private String _align = "right";
 	private String _cssClass;
 	private String _direction;
+	private boolean _disabled = false;
 	private String _endPage;
 	private boolean _extended = true;
 	private String _icon;
