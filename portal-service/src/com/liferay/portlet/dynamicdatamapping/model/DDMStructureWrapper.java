@@ -387,12 +387,110 @@ public class DDMStructureWrapper implements DDMStructure {
 	}
 
 	/**
+	* Returns the localized description of this d d m structure in the language. Uses the default language if no localization exists for the requested language.
+	*
+	* @param locale the locale of the language
+	* @return the localized description of this d d m structure
+	*/
+	public java.lang.String getDescription(java.util.Locale locale) {
+		return _ddmStructure.getDescription(locale);
+	}
+
+	/**
+	* Returns the localized description of this d d m structure in the language, optionally using the default language if no localization exists for the requested language.
+	*
+	* @param locale the local of the language
+	* @param useDefault whether to use the default language if no localization exists for the requested language
+	* @return the localized description of this d d m structure. If <code>useDefault</code> is <code>false</code> and no localization exists for the requested language, an empty string will be returned.
+	*/
+	public java.lang.String getDescription(java.util.Locale locale,
+		boolean useDefault) {
+		return _ddmStructure.getDescription(locale, useDefault);
+	}
+
+	/**
+	* Returns the localized description of this d d m structure in the language. Uses the default language if no localization exists for the requested language.
+	*
+	* @param languageId the ID of the language
+	* @return the localized description of this d d m structure
+	*/
+	public java.lang.String getDescription(java.lang.String languageId) {
+		return _ddmStructure.getDescription(languageId);
+	}
+
+	/**
+	* Returns the localized description of this d d m structure in the language, optionally using the default language if no localization exists for the requested language.
+	*
+	* @param languageId the ID of the language
+	* @param useDefault whether to use the default language if no localization exists for the requested language
+	* @return the localized description of this d d m structure
+	*/
+	public java.lang.String getDescription(java.lang.String languageId,
+		boolean useDefault) {
+		return _ddmStructure.getDescription(languageId, useDefault);
+	}
+
+	/**
+	* Returns a map of the locales and localized descriptions of this d d m structure.
+	*
+	* @return the locales and localized descriptions of this d d m structure
+	*/
+	public java.util.Map<java.util.Locale, java.lang.String> getDescriptionMap() {
+		return _ddmStructure.getDescriptionMap();
+	}
+
+	/**
 	* Sets the description of this d d m structure.
 	*
 	* @param description the description of this d d m structure
 	*/
 	public void setDescription(java.lang.String description) {
 		_ddmStructure.setDescription(description);
+	}
+
+	/**
+	* Sets the localized description of this d d m structure in the language.
+	*
+	* @param description the localized description of this d d m structure
+	* @param locale the locale of the language
+	*/
+	public void setDescription(java.lang.String description,
+		java.util.Locale locale) {
+		_ddmStructure.setDescription(description, locale);
+	}
+
+	/**
+	* Sets the localized description of this d d m structure in the language, and sets the default locale.
+	*
+	* @param description the localized description of this d d m structure
+	* @param locale the locale of the language
+	* @param defaultLocale the default locale
+	*/
+	public void setDescription(java.lang.String description,
+		java.util.Locale locale, java.util.Locale defaultLocale) {
+		_ddmStructure.setDescription(description, locale, defaultLocale);
+	}
+
+	/**
+	* Sets the localized descriptions of this d d m structure from the map of locales and localized descriptions.
+	*
+	* @param descriptionMap the locales and localized descriptions of this d d m structure
+	*/
+	public void setDescriptionMap(
+		java.util.Map<java.util.Locale, java.lang.String> descriptionMap) {
+		_ddmStructure.setDescriptionMap(descriptionMap);
+	}
+
+	/**
+	* Sets the localized descriptions of this d d m structure from the map of locales and localized descriptions, and sets the default locale.
+	*
+	* @param descriptionMap the locales and localized descriptions of this d d m structure
+	* @param defaultLocale the default locale
+	*/
+	public void setDescriptionMap(
+		java.util.Map<java.util.Locale, java.lang.String> descriptionMap,
+		java.util.Locale defaultLocale) {
+		_ddmStructure.setDescriptionMap(descriptionMap, defaultLocale);
 	}
 
 	/**

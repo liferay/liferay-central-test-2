@@ -1901,6 +1901,7 @@
 			<basic name="description" />
 			<basic name="xsd" />
 			<basic name="storageType" />
+			<transient name="descriptionMap" />
 			<transient name="nameMap" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />

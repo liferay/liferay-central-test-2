@@ -45,8 +45,8 @@ public interface DDMStructureService {
 		long groupId, long classNameId, java.lang.String structureKey,
 		boolean autoStructureKey,
 		java.util.Map<java.util.Locale, java.lang.String> nameMap,
-		java.lang.String description, java.lang.String xsd,
-		java.lang.String storageType,
+		java.util.Map<java.util.Locale, java.lang.String> descriptionMap,
+		java.lang.String xsd, java.lang.String storageType,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
@@ -68,7 +68,8 @@ public interface DDMStructureService {
 	public com.liferay.portlet.dynamicdatamapping.model.DDMStructure updateStructure(
 		long groupId, java.lang.String structureKey,
 		java.util.Map<java.util.Locale, java.lang.String> nameMap,
-		java.lang.String description, java.lang.String xsd,
+		java.util.Map<java.util.Locale, java.lang.String> descriptionMap,
+		java.lang.String xsd,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;

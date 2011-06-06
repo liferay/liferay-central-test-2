@@ -32,13 +32,13 @@ public class DDMStructureServiceWrapper implements DDMStructureService {
 		long groupId, long classNameId, java.lang.String structureKey,
 		boolean autoStructureKey,
 		java.util.Map<java.util.Locale, java.lang.String> nameMap,
-		java.lang.String description, java.lang.String xsd,
-		java.lang.String storageType,
+		java.util.Map<java.util.Locale, java.lang.String> descriptionMap,
+		java.lang.String xsd, java.lang.String storageType,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _ddmStructureService.addStructure(groupId, classNameId,
-			structureKey, autoStructureKey, nameMap, description, xsd,
+			structureKey, autoStructureKey, nameMap, descriptionMap, xsd,
 			storageType, serviceContext);
 	}
 
@@ -64,12 +64,13 @@ public class DDMStructureServiceWrapper implements DDMStructureService {
 	public com.liferay.portlet.dynamicdatamapping.model.DDMStructure updateStructure(
 		long groupId, java.lang.String structureKey,
 		java.util.Map<java.util.Locale, java.lang.String> nameMap,
-		java.lang.String description, java.lang.String xsd,
+		java.util.Map<java.util.Locale, java.lang.String> descriptionMap,
+		java.lang.String xsd,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _ddmStructureService.updateStructure(groupId, structureKey,
-			nameMap, description, xsd, serviceContext);
+			nameMap, descriptionMap, xsd, serviceContext);
 	}
 
 	public DDMStructureService getWrappedDDMStructureService() {
