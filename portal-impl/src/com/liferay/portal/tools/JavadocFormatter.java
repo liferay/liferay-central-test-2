@@ -761,7 +761,7 @@ public class JavadocFormatter {
 	}
 
 	private boolean _isGenerated(String content) {
-		if (content.contains("* @generated")) {
+		if (content.contains("* @generated") || content.contains("$ANTLR")) {
 			return true;
 		}
 		else {
