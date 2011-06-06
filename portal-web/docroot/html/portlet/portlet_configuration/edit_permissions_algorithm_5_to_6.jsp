@@ -207,6 +207,26 @@ definePermissionsURL.setParameter(Constants.CMD, Constants.VIEW);
 			if (!curRole.getName().equals(RoleConstants.GUEST) && !RolePermissionUtil.contains(permissionChecker, groupId, curRole.getRoleId(), ActionKeys.VIEW)) {
 				itr.remove();
 			}
+
+			if (curRole.getName().equals(RoleConstants.GUEST) && (modelResource.equals(Layout.class.getName()))) {
+				Layout resourceLayout = LayoutLocalServiceUtil.getLayout(GetterUtil.getLong(resourcePrimKey));
+
+				if (resourceLayout.isPrivateLayout()) {
+					itr.remove();
+				}
+			}
+
+			if (curRole.getName().equals(RoleConstants.GUEST) && (Validator.isNotNull(portletResource))) {
+				int pos = resourcePrimKey.indexOf(PortletConstants.LAYOUT_SEPARATOR);
+
+				if (pos > 0) {
+					Layout resourceLayout = LayoutLocalServiceUtil.getLayout(GetterUtil.getLong(resourcePrimKey.substring(0, pos)));
+
+					if (resourceLayout.isPrivateLayout()) {
+						itr.remove();
+					}
+				}
+			}
 		}
 		%>
 
