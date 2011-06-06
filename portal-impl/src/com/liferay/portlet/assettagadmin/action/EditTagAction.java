@@ -122,7 +122,7 @@ public class EditTagAction extends PortletAction {
 		long fromTagId = ParamUtil.getLong(actionRequest, "fromTagId");
 		long toTagId = ParamUtil.getLong(actionRequest, "toTagId");
 
-		AssetTagServiceUtil.mergeTags(fromTagId, toTagId);
+		AssetTagServiceUtil.mergeTags(fromTagId, toTagId, false);
 
 		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
