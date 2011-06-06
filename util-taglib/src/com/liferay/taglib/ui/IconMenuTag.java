@@ -341,7 +341,7 @@ public class IconMenuTag extends BaseBodyTagSupport implements BodyTag {
 	private String _align = "right";
 	private String _cssClass;
 	private String _direction;
-	private boolean _disabled = false;
+	private boolean _disabled;
 	private String _endPage;
 	private boolean _extended = true;
 	private String _icon;
