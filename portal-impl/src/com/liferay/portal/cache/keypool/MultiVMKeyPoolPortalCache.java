@@ -18,8 +18,6 @@ import com.liferay.portal.kernel.cache.BasePortalCache;
 import com.liferay.portal.kernel.cache.CacheListener;
 import com.liferay.portal.kernel.cache.CacheListenerScope;
 import com.liferay.portal.kernel.cache.PortalCache;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 
 import java.io.Serializable;
 
@@ -55,42 +53,7 @@ public class MultiVMKeyPoolPortalCache extends BasePortalCache {
 			return null;
 		}
 
-		Object localValue = _localPortalCache.get(key);
-
-		if (localValue == null) {
-			Object clusterValue = _clusterPortalCache.get(key);
-
-			if (key.equals(clusterValue)) {
-				if (_log.isDebugEnabled()) {
-					_log.debug("Flagging local key " + key);
-				}
-
-				_localPortalCache.put(key, _dummyValue);
-			}
-		}
-		else {
-			if (localValue.equals(_dummyValue)) {
-				if (_log.isDebugEnabled()) {
-					_log.debug("Local key " + key + " has dummy value");
-				}
-
-				return null;
-			}
-
-			Object clusterValue = _clusterPortalCache.get(key);
-
-			if (!key.equals(clusterValue)) {
-				if (_log.isDebugEnabled()) {
-					_log.debug("Local key " + key + " is not in cluster");
-				}
-
-				return null;
-			}
-
-			return localValue;
-		}
-
-		return null;
+		return _localPortalCache.get(key);
 	}
 
 	public String getName() {
@@ -98,41 +61,25 @@ public class MultiVMKeyPoolPortalCache extends BasePortalCache {
 	}
 
 	public void put(String key, Object obj) {
-		updateClusterKey(key);
-
-		if (_log.isDebugEnabled()) {
-			_log.debug("Storing local key " + key);
-		}
+		_clusterPortalCache.put(key, key);
 
 		_localPortalCache.put(key, obj);
 	}
 
 	public void put(String key, Object obj, int timeToLive) {
-		updateClusterKey(key, timeToLive);
-
-		if (_log.isDebugEnabled()) {
-			_log.debug("Storing local key " + key);
-		}
+		_clusterPortalCache.put(key, key, timeToLive);
 
 		_localPortalCache.put(key, obj, timeToLive);
 	}
 
 	public void put(String key, Serializable obj) {
-		updateClusterKey(key);
-
-		if (_log.isDebugEnabled()) {
-			_log.debug("Storing local key " + key);
-		}
+		_clusterPortalCache.put(key, key);
 
 		_localPortalCache.put(key, obj);
 	}
 
 	public void put(String key, Serializable obj, int timeToLive) {
-		updateClusterKey(key, timeToLive);
-
-		if (_log.isDebugEnabled()) {
-			_log.debug("Storing local key " + key);
-		}
+		_clusterPortalCache.put(key, key, timeToLive);
 
 		_localPortalCache.put(key, obj, timeToLive);
 	}
@@ -165,51 +112,6 @@ public class MultiVMKeyPoolPortalCache extends BasePortalCache {
 	public void unregisterCacheListeners() {
 		_clusterPortalCache.unregisterCacheListeners();
 	}
-
-	protected void updateClusterKey(String key) {
-		Object localValue = _localPortalCache.get(key);
-
-		if (localValue == _dummyValue) {
-			return;
-		}
-
-		Object clusterValue = _clusterPortalCache.get(key);
-
-		if (key.equals(clusterValue)) {
-			return;
-		}
-
-		if (_log.isDebugEnabled()) {
-			_log.debug("Invalidating cluster key " + key);
-		}
-
-		_clusterPortalCache.put(key, key);
-	}
-
-	protected void updateClusterKey(String key, int timeToLive) {
-		Object localValue = _localPortalCache.get(key);
-
-		if (localValue == _dummyValue) {
-			return;
-		}
-
-		Object clusterValue = _clusterPortalCache.get(key);
-
-		if (!key.equals(clusterValue)) {
-			return;
-		}
-
-		if (_log.isDebugEnabled()) {
-			_log.debug("Invalidating cluster key " + key);
-		}
-
-		_clusterPortalCache.put(key, key, timeToLive);
-	}
-
-	private static final Log _log = LogFactoryUtil.getLog(
-		MultiVMKeyPoolPortalCache.class);
-
-	private static Object _dummyValue = new Object();
 
 	private PortalCache _clusterPortalCache;
 	private PortalCache _localPortalCache;
