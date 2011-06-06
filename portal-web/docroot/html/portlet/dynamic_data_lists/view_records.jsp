@@ -19,8 +19,6 @@
 <%
 DDLRecordSet recordSet = (DDLRecordSet)request.getAttribute(WebKeys.DYNAMIC_DATA_LISTS_RECORD_SET);
 
-DDMStructure ddmStructure = recordSet.getDDMStructure();
-
 long detailDDMTemplateId = ParamUtil.getLong(request, "detailDDMTemplateId");
 
 boolean editable = ParamUtil.getBoolean(request, "editable", true);
