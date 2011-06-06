@@ -41,7 +41,7 @@
 
 	<aui:input cssClass="hidden-field show-context-link" name="preferences--showContextLink--" type="checkbox" value="<%= showContextLink %>" />
 
-	<aui:select cssClass="hidden-field asset-link-behaviour" name="preferences--assetLinkBehavior--">
+	<aui:select cssClass="hidden-field asset-link-behavior" name="preferences--assetLinkBehavior--">
 		<aui:option label="show-full-content" selected='<%= assetLinkBehavior.equals("showFullContent") %>' value="showFullContent" />
 		<aui:option label="view-in-a-specific-portlet" selected='<%= assetLinkBehavior.equals("viewInPortlet") %>' value="viewInPortlet" />
 	</aui:select>
@@ -166,7 +166,7 @@
 	var selectDisplayStyle = A.one('#<portlet:namespace />displayStyle');
 
 	function showHiddenFields () {
-		var assetLinkBehavior = A.one('.asset-link-behaviour');
+		var assetLinkBehavior = A.one('.asset-link-behavior');
 		var hiddenFields = A.all('.hidden-field');
 		var selectDisplayStyle = A.one('#<portlet:namespace />displayStyle');
 
