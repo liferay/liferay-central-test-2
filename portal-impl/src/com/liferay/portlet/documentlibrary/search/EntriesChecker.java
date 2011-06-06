@@ -16,14 +16,18 @@ package com.liferay.portlet.documentlibrary.search;
 
 import com.liferay.portal.NoSuchRepositoryEntryException;
 import com.liferay.portal.kernel.dao.search.RowChecker;
+import com.liferay.portal.kernel.portlet.LiferayPortletRequest;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.repository.model.Folder;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
+import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
 import com.liferay.portlet.documentlibrary.NoSuchFileShortcutException;
 import com.liferay.portlet.documentlibrary.model.DLFileShortcut;
@@ -38,13 +42,18 @@ import com.liferay.portlet.documentlibrary.service.permission.DLFolderPermission
 public class EntriesChecker extends RowChecker {
 
 	public EntriesChecker(
-		LiferayPortletResponse liferayPortletResponse,
-		PermissionChecker permissionChecker, String namespace) {
+		LiferayPortletRequest liferayPortletRequest,
+		LiferayPortletResponse liferayPortletResponse) {
 
 		super(liferayPortletResponse);
 
-		_namespace = namespace;
-		_permissionChecker = permissionChecker;
+		_liferayPortletResponse = liferayPortletResponse;
+
+		ThemeDisplay themeDisplay =
+			(ThemeDisplay)liferayPortletRequest.getAttribute(
+				WebKeys.THEME_DISPLAY);
+
+		_permissionChecker = themeDisplay.getPermissionChecker();
 	}
 
 	public String getAllRowsCheckBox() {
@@ -52,8 +61,8 @@ public class EntriesChecker extends RowChecker {
 	}
 
 	public String getRowCheckBox(boolean checked, String primaryKey) {
+		DLFileShortcut dlFileShortcut = null;
 		FileEntry fileEntry = null;
-		DLFileShortcut fileShortcut = null;
 		Folder folder = null;
 
 		long entryId = GetterUtil.getLong(primaryKey);
@@ -66,7 +75,7 @@ public class EntriesChecker extends RowChecker {
 				e1 instanceof NoSuchRepositoryEntryException) {
 
 				try {
-					fileShortcut = DLAppServiceUtil.getFileShortcut(entryId);
+					dlFileShortcut = DLAppServiceUtil.getFileShortcut(entryId);
 				}
 				catch (Exception e2) {
 					if (e2 instanceof NoSuchFileShortcutException) {
@@ -91,66 +100,58 @@ public class EntriesChecker extends RowChecker {
 
 		if (fileEntry != null) {
 			try {
-				showSelect =
+				if (DLFileEntryPermission.contains(
+						_permissionChecker, fileEntry, ActionKeys.DELETE) ||
 					DLFileEntryPermission.contains(
-						_permissionChecker, fileEntry, ActionKeys.UPDATE) ||
-					DLFileEntryPermission.contains(
-						_permissionChecker, fileEntry, ActionKeys.DELETE);
+						_permissionChecker, fileEntry, ActionKeys.UPDATE)) {
+
+					showSelect = true;
+				}
 			}
 			catch (Exception e) {
 			}
 		}
-		else if (fileShortcut != null) {
+		else if (dlFileShortcut != null) {
 			try {
-				showSelect = DLFileShortcutPermission.contains(
-					_permissionChecker, fileShortcut, ActionKeys.DELETE);
+				if (DLFileShortcutPermission.contains(
+						_permissionChecker, dlFileShortcut,
+						ActionKeys.DELETE)) {
+
+					showSelect = true;
+				}
 			}
 			catch (Exception e) {
 			}
 		}
 		else if (folder != null) {
 			try {
-				showSelect = DLFolderPermission.contains(
-					_permissionChecker, folder, ActionKeys.DELETE);
+				if (DLFolderPermission.contains(
+						_permissionChecker, folder, ActionKeys.DELETE)) {
+
+					showSelect = true;
+				}
 			}
 			catch (Exception e) {
 			}
 		}
 
-		StringBuilder sb = new StringBuilder();
-
-		if (showSelect) {
-			sb.append("<input ");
-
-			if (checked) {
-				sb.append("checked ");
-			}
-
-			sb.append("name=\"");
-			sb.append(getRowIds());
-			sb.append("\" type=\"checkbox\" value=\"");
-			sb.append(primaryKey);
-			sb.append("\" ");
-
-			if (Validator.isNotNull(getAllRowIds())) {
-				sb.append("onClick=\"Liferay.Util.checkAllBox(");
-				sb.append("AUI().one(this).ancestor('");
-				sb.append("table.taglib-search-iterator'), '");
-				sb.append(getRowIds());
-				sb.append("', ");
-				sb.append(getAllRowIds());
-				sb.append("Checkbox); ");
-				sb.append(_namespace);
-				sb.append("toggleActionsButton();\"");
-			}
-
-			sb.append(">");
+		if (!showSelect) {
+			return StringPool.BLANK;
 		}
 
-		return sb.toString();
+		String rowCheckBox = super.getRowCheckBox(checked, primaryKey);
+
+		if (Validator.isNotNull(getAllRowIds())) {
+			rowCheckBox = StringUtil.replaceLast(
+				rowCheckBox, ");\"",
+				"Checkbox); " + _liferayPortletResponse.getNamespace() +
+					"toggleActionsButton();\"");
+		}
+
+		return rowCheckBox;
 	}
 
-	private String _namespace;
+	private LiferayPortletResponse _liferayPortletResponse;
 	private PermissionChecker _permissionChecker;
 
 }

@@ -29,7 +29,7 @@ if (PDFProcessorUtil.hasImages(fileEntry)) {
 %>
 
 <div class="document-display-style icon">
-	<c:if test="<%= DLFileEntryPermission.contains(permissionChecker, fileEntry, ActionKeys.UPDATE) || DLFileEntryPermission.contains(permissionChecker, fileEntry, ActionKeys.DELETE) %>">
+	<c:if test="<%= DLFileEntryPermission.contains(permissionChecker, fileEntry, ActionKeys.DELETE) || DLFileEntryPermission.contains(permissionChecker, fileEntry, ActionKeys.UPDATE) %>">
 		<input class="overlay document-selector" name="<portlet:namespace /><%= RowChecker.ROW_IDS %>" type="checkbox" value="<%= fileEntry.getFileEntryId() %>" />
 	</c:if>
 
