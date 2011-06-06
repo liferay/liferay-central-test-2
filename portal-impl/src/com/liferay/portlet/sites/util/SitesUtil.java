@@ -75,7 +75,7 @@ public class SitesUtil {
 			LayoutSet publicLayoutSet = group.getPublicLayoutSet();
 
 			copyLayoutSet(
-				layoutSetPrototype.getLayoutSet(), publicLayoutSet, true,
+				layoutSetPrototype.getLayoutSet(), publicLayoutSet,
 				serviceContext);
 
 			sourceGroup = layoutSetPrototype.getGroup();
@@ -89,7 +89,7 @@ public class SitesUtil {
 			LayoutSet privateLayoutSet = group.getPrivateLayoutSet();
 
 			copyLayoutSet(
-				layoutSetPrototype.getLayoutSet(), privateLayoutSet, false,
+				layoutSetPrototype.getLayoutSet(), privateLayoutSet,
 				serviceContext);
 
 			if (sourceGroup == null) {
@@ -104,14 +104,13 @@ public class SitesUtil {
 
 	public static void copyLayoutSet(
 			LayoutSet sourceLayoutSet, LayoutSet targetLayoutSet,
-			boolean importPublicLayoutPermissions,
 			ServiceContext serviceContext)
 		throws Exception {
 
 		Map<String, String[]> parameterMap = getLayoutSetPrototypeParameters(
 			serviceContext);
 
-		if (importPublicLayoutPermissions) {
+		if (!targetLayoutSet.isPrivateLayout()) {
 			parameterMap.put(
 				PortletDataHandlerKeys.PUBLIC_LAYOUT_PERMISSIONS,
 				new String[] {Boolean.TRUE.toString()});
