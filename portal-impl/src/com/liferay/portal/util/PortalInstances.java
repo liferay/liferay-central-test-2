@@ -160,24 +160,26 @@ public class PortalInstances {
 			long cookieCompanyId = GetterUtil.getLong(
 				CookieKeys.getCookie(request, CookieKeys.COMPANY_ID));
 
-			try {
-				CompanyLocalServiceUtil.getCompanyById(cookieCompanyId);
+			if (cookieCompanyId > 0) {
+				try {
+					CompanyLocalServiceUtil.getCompanyById(cookieCompanyId);
 
-				companyId = cookieCompanyId;
+					companyId = cookieCompanyId;
 
-				if (_log.isDebugEnabled()) {
-					_log.debug("Company id from cookie " + companyId);
+					if (_log.isDebugEnabled()) {
+						_log.debug("Company id from cookie " + companyId);
+					}
 				}
-			}
-			catch (NoSuchCompanyException nsce) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(
-						"Company id from cookie " + cookieCompanyId +
-							" does not exist");
+				catch (NoSuchCompanyException nsce) {
+					if (_log.isWarnEnabled()) {
+						_log.warn(
+							"Company id from cookie " + cookieCompanyId +
+								" does not exist");
+					}
 				}
-			}
-			catch (Exception e) {
-				_log.error(e, e);
+				catch (Exception e) {
+					_log.error(e, e);
+				}
 			}
 		}
 
