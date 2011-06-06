@@ -24,10 +24,10 @@ import com.liferay.portal.util.BaseTestCase;
 public class MultiVMKeyPoolPortalCacheTest extends BaseTestCase {
 
 	public void testPutAndGet() {
-		PortalCache clusterPortalCache =
-			SingleVMPoolUtil.getCache("ClusterPortalCache");
-		PortalCache localPortalCache =
-			SingleVMPoolUtil.getCache("LocalPortalCache");
+		PortalCache clusterPortalCache = SingleVMPoolUtil.getCache(
+			"ClusterPortalCache");
+		PortalCache localPortalCache = SingleVMPoolUtil.getCache(
+			"LocalPortalCache");
 
 		MultiVMKeyPoolPortalCache multiVMKeyPoolPortalCache =
 			new MultiVMKeyPoolPortalCache(clusterPortalCache, localPortalCache);
