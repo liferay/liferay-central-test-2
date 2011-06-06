@@ -23,6 +23,7 @@ import org.apache.commons.collections.ExtendedProperties;
 import org.apache.velocity.runtime.RuntimeInstance;
 import org.apache.velocity.runtime.RuntimeServices;
 import org.apache.velocity.runtime.resource.Resource;
+import org.apache.velocity.runtime.resource.ResourceManager;
 import org.apache.velocity.runtime.resource.ResourceManagerImpl;
 
 /**
@@ -36,7 +37,9 @@ public class LiferayResourceManager extends ResourceManagerImpl {
 		// Velocity's default implementation makes its cache useless because
 		// getResourceStream is called to test the availability of a template
 
-		if (globalCache.get(source) != null) {
+		if ((globalCache.get(ResourceManager.RESOURCE_TEMPLATE + source) != null) ||
+			(globalCache.get(ResourceManager.RESOURCE_CONTENT + source) != null)) {
+
 			return LiferayResourceLoader.class.getName();
 		}
 		else {
