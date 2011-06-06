@@ -19,7 +19,9 @@
 	<liferay-ui:message key="update-rankings-help" />
 </div>
 
-<liferay-ui:search-container>
+<liferay-ui:search-container
+	iteratorURL="<%= portletURL %>"
+>
 	<liferay-ui:search-container-results
 		results="<%= SocialEquityUserLocalServiceUtil.getRankedEquityUsers(scopeGroupId, searchContainer.getStart(), searchContainer.getEnd(), new SocialEquityUserRankComparator(true)) %>"
 		total="<%= SocialEquityUserLocalServiceUtil.getRankedEquityUsersCount(scopeGroupId) %>"
