@@ -19,6 +19,8 @@
 <%
 DDLRecordSet recordSet = (DDLRecordSet)request.getAttribute(WebKeys.DYNAMIC_DATA_LISTS_RECORD_SET);
 
+DDMStructure structure = recordSet.getDDMStructure();
+
 long detailDDMTemplateId = ParamUtil.getLong(request, "detailDDMTemplateId");
 
 boolean editable = ParamUtil.getBoolean(request, "editable", true);
@@ -94,6 +96,14 @@ for (int i = 0; i < results.size(); i++) {
 			com.liferay.portlet.dynamicdatamapping.storage.Field field = fieldsModel.get(name);
 
 			value = String.valueOf(field.getValue());
+
+			if (structure.getFieldDisplayChildLabelAsValue(name)) {
+				Map<String, String> childMap = structure.getFieldChildMapByAttribute(name, DDMFieldConstants.VALUE, value);
+
+				if (childMap != null) {
+					value = childMap.get(DDMFieldConstants.LABEL);
+				}
+			}
 		}
 		else {
 			value = StringPool.BLANK;

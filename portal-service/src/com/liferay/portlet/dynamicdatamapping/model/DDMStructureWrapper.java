@@ -497,6 +497,13 @@ public class DDMStructureWrapper implements DDMStructure {
 		return _ddmStructure.toXmlString();
 	}
 
+	public java.util.Map<java.lang.String, java.lang.String> getFieldChildMapByAttribute(
+		java.lang.String fieldName, java.lang.String attributeName,
+		java.lang.String attributeValue) {
+		return _ddmStructure.getFieldChildMapByAttribute(fieldName,
+			attributeName, attributeValue);
+	}
+
 	public java.lang.String getFieldDataType(java.lang.String fieldName) {
 		return _ddmStructure.getFieldDataType(fieldName);
 	}
@@ -513,12 +520,21 @@ public class DDMStructureWrapper implements DDMStructure {
 		return _ddmStructure.getFieldsMap();
 	}
 
+	public java.lang.String getFieldProperty(java.lang.String fieldName,
+		java.lang.String property) {
+		return _ddmStructure.getFieldProperty(fieldName, property);
+	}
+
 	public boolean getFieldRequired(java.lang.String fieldName) {
 		return _ddmStructure.getFieldRequired(fieldName);
 	}
 
 	public java.lang.String getFieldType(java.lang.String fieldName) {
 		return _ddmStructure.getFieldType(fieldName);
+	}
+
+	public boolean getFieldDisplayChildLabelAsValue(java.lang.String fieldName) {
+		return _ddmStructure.getFieldDisplayChildLabelAsValue(fieldName);
 	}
 
 	public boolean hasField(java.lang.String fieldName) {

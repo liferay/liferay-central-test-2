@@ -11,6 +11,10 @@ AUI().add(
 
 		var DEFAULTS_FORM_VALIDATOR = AUI.defaults.FormValidator;
 
+		var MAP_ATTR_DISPLAY_CHILD_LABEL_AS_VALUE = {
+			name: 'displayChildLabelAsValue'
+		};
+
 		var MAP_ATTR_FIELD_CSS_CLASS = {
 			name: 'fieldCssClass'
 		};
@@ -248,6 +252,8 @@ AUI().add(
 						);
 
 						var metadata = instance._createDynamicNode('meta-data');
+						
+						var displayChildLabelAsValue = instance._createDynamicNode('entry', MAP_ATTR_DISPLAY_CHILD_LABEL_AS_VALUE);
 
 						var entryRequired = instance._createDynamicNode('entry', MAP_ATTR_REQUIRED);
 
@@ -296,6 +302,12 @@ AUI().add(
 								multiple.openTag,
 								STR_CDATA_OPEN + multipleVal + STR_CDATA_CLOSE,
 								multiple.closeTag
+							);
+							
+							buffer.push(
+								displayChildLabelAsValue.openTag,
+								STR_CDATA_OPEN + true + STR_CDATA_CLOSE,
+								displayChildLabelAsValue.closeTag
 							);
 						}
 
