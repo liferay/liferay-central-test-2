@@ -83,24 +83,22 @@ public class VelocityEngineImpl implements VelocityEngine {
 		extendedProperties.setProperty(_RESOURCE_LOADER, "string,servlet");
 
 		extendedProperties.setProperty(
-			"string." + _RESOURCE_LOADER + ".class",
-			StringResourceLoader.class.getName());
+			"string." + _RESOURCE_LOADER + ".cache", Boolean.TRUE.toString());
 
 		extendedProperties.setProperty(
-			"string." + _RESOURCE_LOADER + ".cache",
-			"true");
+			"string." + _RESOURCE_LOADER + ".class",
+			StringResourceLoader.class.getName());
 
 		extendedProperties.setProperty(
 			"string." + _RESOURCE_LOADER + ".repository.class",
 			StringResourceRepositoryImpl.class.getName());
 
 		extendedProperties.setProperty(
-			"servlet." + _RESOURCE_LOADER + ".class",
-			LiferayResourceLoader.class.getName());
+			"servlet." + _RESOURCE_LOADER + ".cache", Boolean.TRUE.toString());
 
 		extendedProperties.setProperty(
-			"servlet." + _RESOURCE_LOADER + ".cache",
-			"true");
+			"servlet." + _RESOURCE_LOADER + ".class",
+			LiferayResourceLoader.class.getName());
 
 		extendedProperties.setProperty(
 			org.apache.velocity.app.VelocityEngine.RESOURCE_MANAGER_CLASS,
