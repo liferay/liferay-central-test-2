@@ -508,6 +508,10 @@ public class DDMStructureWrapper implements DDMStructure {
 		return _ddmStructure.getFieldDataType(fieldName);
 	}
 
+	public boolean getFieldDisplayChildLabelAsValue(java.lang.String fieldName) {
+		return _ddmStructure.getFieldDisplayChildLabelAsValue(fieldName);
+	}
+
 	public java.lang.String getFieldLabel(java.lang.String fieldName) {
 		return _ddmStructure.getFieldLabel(fieldName);
 	}
@@ -531,10 +535,6 @@ public class DDMStructureWrapper implements DDMStructure {
 
 	public java.lang.String getFieldType(java.lang.String fieldName) {
 		return _ddmStructure.getFieldType(fieldName);
-	}
-
-	public boolean getFieldDisplayChildLabelAsValue(java.lang.String fieldName) {
-		return _ddmStructure.getFieldDisplayChildLabelAsValue(fieldName);
 	}
 
 	public boolean hasField(java.lang.String fieldName) {

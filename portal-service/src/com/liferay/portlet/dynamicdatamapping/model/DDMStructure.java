@@ -35,6 +35,8 @@ public interface DDMStructure extends DDMStructureModel {
 
 	public java.lang.String getFieldDataType(java.lang.String fieldName);
 
+	public boolean getFieldDisplayChildLabelAsValue(java.lang.String fieldName);
+
 	public java.lang.String getFieldLabel(java.lang.String fieldName);
 
 	public java.util.Set<java.lang.String> getFieldNames();
@@ -47,8 +49,6 @@ public interface DDMStructure extends DDMStructureModel {
 	public boolean getFieldRequired(java.lang.String fieldName);
 
 	public java.lang.String getFieldType(java.lang.String fieldName);
-
-	public boolean getFieldDisplayChildLabelAsValue(java.lang.String fieldName);
 
 	public boolean hasField(java.lang.String fieldName);
 
