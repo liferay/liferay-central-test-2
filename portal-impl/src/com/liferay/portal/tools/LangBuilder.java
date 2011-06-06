@@ -374,6 +374,8 @@ public class LangBuilder {
 			translationId.equals("en_ro") ||
 			translationId.equals("en_ru") ||
 			translationId.equals("en_rs") ||
+			translationId.equals("en_rs_SR") ||
+			translationId.equals("en_rs_SR_latin") ||
 			translationId.equals("en_sk") ||
 			translationId.equals("en_sl") ||
 			translationId.equals("en_sv") ||
