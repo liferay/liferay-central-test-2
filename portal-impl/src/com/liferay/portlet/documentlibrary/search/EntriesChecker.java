@@ -16,7 +16,20 @@ package com.liferay.portlet.documentlibrary.search;
 
 import com.liferay.portal.kernel.dao.search.RowChecker;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
+import com.liferay.portal.kernel.repository.model.FileEntry;
+import com.liferay.portal.kernel.repository.model.Folder;
+import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.security.permission.ActionKeys;
+import com.liferay.portal.security.permission.PermissionChecker;
+import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
+import com.liferay.portlet.documentlibrary.NoSuchFileShortcutException;
+import com.liferay.portlet.documentlibrary.model.DLFileShortcut;
+import com.liferay.portlet.documentlibrary.service.DLAppServiceUtil;
+import com.liferay.portlet.documentlibrary.service.permission.DLFileEntryPermission;
+import com.liferay.portlet.documentlibrary.service.permission.DLFileShortcutPermission;
+import com.liferay.portlet.documentlibrary.service.permission.DLFolderPermission;
 
 /**
  * @author Sergio González
@@ -24,9 +37,12 @@ import com.liferay.portal.kernel.util.Validator;
 public class EntriesChecker extends RowChecker {
 
 	public EntriesChecker(
-		LiferayPortletResponse liferayPortletResponse) {
+		LiferayPortletResponse liferayPortletResponse,
+		PermissionChecker permissionChecker) {
 
 		super(liferayPortletResponse);
+
+		_permissionChecker = permissionChecker;
 	}
 
 	public String getAllRowsCheckBox() {
@@ -34,34 +50,96 @@ public class EntriesChecker extends RowChecker {
 	}
 
 	public String getRowCheckBox(boolean checked, String primaryKey) {
+		FileEntry fileEntry = null;
+		DLFileShortcut fileShortcut = null;
+		Folder folder = null;
+
+		long entryId = GetterUtil.getLong(primaryKey);
+
+		try {
+			fileEntry =	DLAppServiceUtil.getFileEntry(entryId);
+		}
+		catch (NoSuchFileEntryException nsfe) {
+			try {
+				fileShortcut = DLAppServiceUtil.getFileShortcut(entryId);
+			}
+			catch (NoSuchFileShortcutException nsfs) {
+				try {
+					folder = DLAppServiceUtil.getFolder(entryId);
+				}
+				catch (Exception e) {
+					return StringPool.BLANK;
+				}
+			}
+			catch (Exception e) {
+				return StringPool.BLANK;
+			}
+		}
+		catch (Exception e) {
+			return StringPool.BLANK;
+		}
+
+		boolean showSelect = false;
+
+		if (fileEntry != null) {
+			try {
+				showSelect =
+					DLFileEntryPermission.contains(
+						_permissionChecker, fileEntry, ActionKeys.UPDATE) ||
+					DLFileEntryPermission.contains(
+						_permissionChecker, fileEntry, ActionKeys.DELETE);
+			}
+			catch (Exception e) {
+			}
+		}
+		else if (fileShortcut != null) {
+			try {
+				showSelect = DLFileShortcutPermission.contains(
+					_permissionChecker, fileShortcut, ActionKeys.DELETE);
+			}
+			catch (Exception e) {
+			}
+		}
+		else if (folder != null) {
+			try {
+				showSelect = DLFolderPermission.contains(
+					_permissionChecker, folder, ActionKeys.DELETE);
+			}
+			catch (Exception e) {
+			}
+		}
 
 		StringBuilder sb = new StringBuilder();
 
-		sb.append("<input ");
+		if (showSelect) {
+			sb.append("<input ");
 
-		if (checked) {
-			sb.append("checked ");
-		}
+			if (checked) {
+				sb.append("checked ");
+			}
 
-		sb.append("name=\"");
-		sb.append(getRowIds());
-		sb.append("\" type=\"checkbox\" value=\"");
-		sb.append(primaryKey);
-		sb.append("\" ");
-
-		if (Validator.isNotNull(getAllRowIds())) {
-			sb.append("onClick=\"Liferay.Util.checkAllBox(");
-			sb.append("AUI().one(this).ancestor('");
-			sb.append("table.taglib-search-iterator'), '");
+			sb.append("name=\"");
 			sb.append(getRowIds());
-			sb.append("', ");
-			sb.append(getAllRowIds());
-			sb.append("Checkbox); ");
-		}
+			sb.append("\" type=\"checkbox\" value=\"");
+			sb.append(primaryKey);
+			sb.append("\" ");
 
-		sb.append(">");
+			if (Validator.isNotNull(getAllRowIds())) {
+				sb.append("onClick=\"Liferay.Util.checkAllBox(");
+				sb.append("AUI().one(this).ancestor('");
+				sb.append("table.taglib-search-iterator'), '");
+				sb.append(getRowIds());
+				sb.append("', ");
+				sb.append(getAllRowIds());
+				sb.append("Checkbox); ");
+			}
+
+			sb.append(">");
+		}
 
 		return sb.toString();
 	}
+
+	private PermissionChecker _permissionChecker;
 
 }

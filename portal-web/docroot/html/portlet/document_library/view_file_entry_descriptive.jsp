@@ -43,5 +43,7 @@ if (PDFProcessorUtil.hasImages(fileEntry)) {
 
 	<liferay-util:include page="/html/portlet/document_library/file_entry_action.jsp" />
 
-	<input class="overlay document-selector" name="<portlet:namespace /><%= RowChecker.ROW_IDS %>" type="checkbox" value="<%= fileEntry.getFileEntryId() %>" />
+	<c:if test="<%= DLFileEntryPermission.contains(permissionChecker, fileEntry, ActionKeys.UPDATE) || DLFileEntryPermission.contains(permissionChecker, fileEntry, ActionKeys.DELETE) %>">
+		<input class="overlay document-selector" name="<portlet:namespace /><%= RowChecker.ROW_IDS %>" type="checkbox" value="<%= fileEntry.getFileEntryId() %>" />
+	</c:if>
 </div>
