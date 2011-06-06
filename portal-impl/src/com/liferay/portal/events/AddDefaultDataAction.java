@@ -19,7 +19,7 @@ import com.liferay.portal.kernel.events.SimpleAction;
 
 /**
  * @author Juan Fernández
-  */
+ */
 public class AddDefaultDataAction extends SimpleAction {
 
 	public void run(String[] ids) throws ActionException {

@@ -21,7 +21,6 @@ import com.liferay.portal.parsers.creole.visitor.ASTVisitor;
 /**
  * @author Miguel Pastor
  */
-
 public class TableNode extends BaseParentableNode {
 
 	public TableNode() {

@@ -19,7 +19,6 @@ import com.liferay.portal.kernel.util.Validator;
 import java.io.Serializable;
 
 /**
- *
  * @author Milen Dyankov
  * @author Michael C. Han
  */

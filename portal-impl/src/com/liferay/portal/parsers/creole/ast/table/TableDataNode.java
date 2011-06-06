@@ -20,7 +20,6 @@ import com.liferay.portal.parsers.creole.visitor.ASTVisitor;
 /**
  * @author Miguel Pastor
  */
-
 public class TableDataNode extends TableCellNode {
 
 	public TableDataNode() {

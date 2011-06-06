@@ -21,7 +21,6 @@ import com.liferay.portal.kernel.messaging.MessageListener;
 import com.liferay.portal.kernel.messaging.proxy.ProxyMessageListener;
 
 /**
- *
  * @author Milen Dyankov
  * @author Michael C. Han
  */

@@ -20,7 +20,6 @@ import com.liferay.portal.parsers.creole.ast.CollectionNode;
 /**
  * @author Miguel Pastor
  */
-
 public abstract class TableCellNode extends BaseParentableNode {
 
 	public TableCellNode() {
