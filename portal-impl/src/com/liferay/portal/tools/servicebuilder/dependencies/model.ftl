@@ -67,14 +67,14 @@ public interface ${entity.name}Model extends
 	 */
 
 	/**
-	 * Gets the primary key of this ${entity.humanName}.
+	 * Returns the primary key of this ${entity.humanName}.
 	 *
 	 * @return the primary key of this ${entity.humanName}
 	 */
 	public ${entity.PKClassName} getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this ${entity.humanName}
+	 * Sets the primary key of this ${entity.humanName}.
 	 *
 	 * @param primaryKey the primary key of this ${entity.humanName}
 	 */
@@ -83,9 +83,9 @@ public interface ${entity.name}Model extends
 	<#list entity.regularColList as column>
 		<#if column.name == "classNameId">
 			/**
-			 * Gets the class name of the model instance this ${entity.humanName} is polymorphically associated with.
+			 * Returns the fully qualified class name of this ${entity.humanName}.
 			 *
-			 * @return the class name of the model instance this ${entity.humanName} is polymorphically associated with
+			 * @return the fully qualified class name of this ${entity.humanName}
 			 */
 			public String getClassName();
 		</#if>
@@ -107,7 +107,7 @@ public interface ${entity.name}Model extends
 		</#if>
 
 		/**
-		 * Gets the ${column.humanName} of this ${entity.humanName}.
+		 * Returns the ${column.humanName} of this ${entity.humanName}.
 		 *
 		 * @return the ${column.humanName} of this ${entity.humanName}
 		 */
@@ -119,43 +119,43 @@ public interface ${entity.name}Model extends
 
 		<#if column.localized>
 			/**
-			 * Gets the localized ${column.humanName} of this ${entity.humanName}. Uses the default language if no localization exists for the requested language.
+			 * Returns the localized ${column.humanName} of this ${entity.humanName} in the language. Uses the default language if no localization exists for the requested language.
 			 *
-			 * @param locale the locale to get the localized ${column.humanName} for
+			 * @param locale the locale of the language
 			 * @return the localized ${column.humanName} of this ${entity.humanName}
 			 */
 			public ${column.type} get${column.methodName}(Locale locale);
 
 			/**
-			 * Gets the localized ${column.humanName} of this ${entity.humanName}, optionally using the default language if no localization exists for the requested language.
+			 * Returns the localized ${column.humanName} of this ${entity.humanName} in the language, optionally using the default language if no localization exists for the requested language.
 			 *
-			 * @param locale the local to get the localized ${column.humanName} for
+			 * @param locale the local of the language
 			 * @param useDefault whether to use the default language if no localization exists for the requested language
 			 * @return the localized ${column.humanName} of this ${entity.humanName}. If <code>useDefault</code> is <code>false</code> and no localization exists for the requested language, an empty string will be returned.
 			 */
 			public ${column.type} get${column.methodName}(Locale locale, boolean useDefault);
 
 			/**
-			 * Gets the localized ${column.humanName} of this ${entity.humanName}. Uses the default language if no localization exists for the requested language.
+			 * Returns the localized ${column.humanName} of this ${entity.humanName} in the language. Uses the default language if no localization exists for the requested language.
 			 *
-			 * @param languageId the id of the language to get the localized ${column.humanName} for
+			 * @param languageId the ID of the language
 			 * @return the localized ${column.humanName} of this ${entity.humanName}
 			 */
 			public ${column.type} get${column.methodName}(String languageId);
 
 			/**
-			 * Gets the localized ${column.humanName} of this ${entity.humanName}, optionally using the default language if no localization exists for the requested language.
+			 * Returns the localized ${column.humanName} of this ${entity.humanName} in the language, optionally using the default language if no localization exists for the requested language.
 			 *
-			 * @param languageId the id of the language to get the localized ${column.humanName} for
+			 * @param languageId the ID of the language
 			 * @param useDefault whether to use the default language if no localization exists for the requested language
 			 * @return the localized ${column.humanName} of this ${entity.humanName}
 			 */
 			public String get${column.methodName}(String languageId, boolean useDefault);
 
 			/**
-			 * Gets a map of the locales and localized ${column.humanName} of this ${entity.humanName}.
+			 * Returns a map of the locales and localized ${column.humanNames} of this ${entity.humanName}.
 			 *
-			 * @return the locales and localized ${column.humanName}
+			 * @return the locales and localized ${column.humanNames} of this ${entity.humanName}
 			 */
 			public Map<Locale, String> get${column.methodName}Map();
 		</#if>
@@ -182,13 +182,20 @@ public interface ${entity.name}Model extends
 
 		<#if column.localized>
 			/**
-			 * Sets the localized ${column.humanName} of this ${entity.humanName}.
+			 * Sets the localized ${column.humanName} of this ${entity.humanName} in the language.
 			 *
 			 * @param ${column.name} the localized ${column.humanName} of this ${entity.humanName}
-			 * @param locale the locale to set the localized ${column.humanName} for
+			 * @param locale the locale of the language
 			 */
 			public void set${column.methodName}(String ${column.name}, Locale locale);
 
+			/**
+			 * Sets the localized ${column.humanName} of this ${entity.humanName} in the language, and sets the default locale.
+			 *
+			 * @param ${column.name} the localized ${column.humanName} of this ${entity.humanName}
+			 * @param locale the locale of the language
+			 * @param defaultLocale the default locale
+			 */
 			public void set${column.methodName}(String ${column.name}, Locale locale, Locale defaultLocale);
 
 			/**
@@ -198,6 +205,12 @@ public interface ${entity.name}Model extends
 			 */
 			public void set${column.methodName}Map(Map<Locale, String> ${column.name}Map);
 
+			/**
+			 * Sets the localized ${column.humanNames} of this ${entity.humanName} from the map of locales and localized ${column.humanNames}, and sets the default locale.
+			 *
+			 * @param ${column.name}Map the locales and localized ${column.humanNames} of this ${entity.humanName}
+			 * @param defaultLocale the default locale
+			 */
 			public void set${column.methodName}Map(Map<Locale, String> ${column.name}Map, Locale defaultLocale);
 		</#if>
 
@@ -207,7 +220,7 @@ public interface ${entity.name}Model extends
 
 		<#if column.userUuid>
 			/**
-			 * Gets the ${column.userUuidHumanName} of this ${entity.humanName}.
+			 * Returns the ${column.userUuidHumanName} of this ${entity.humanName}.
 			 *
 			 * @return the ${column.userUuidHumanName} of this ${entity.humanName}
 			 * @throws SystemException if a system exception occurred
@@ -225,7 +238,7 @@ public interface ${entity.name}Model extends
 
 	<#if entity.isWorkflowEnabled()>
 		/**
-		 * @deprecated {@link #isApproved}
+		 * @deprecated Renamed to {@link #isApproved()}
 		 */
 		public boolean getApproved();
 

@@ -315,18 +315,18 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Get the package to which the portlet belongs to.
+	 * Gets this portlet's plugin package.
 	 *
-	 * @return the plugin package of the portlet
+	 * @return this portlet's plugin package
 	 */
 	public PluginPackage getPluginPackage() {
 		return _pluginPackage;
 	}
 
 	/**
-	 * Sets the plugin package this portlet belongs to.
+	 * Sets this portlet's plugin package.
 	 *
-	 * @param pluginPackage the plugin package
+	 * @param pluginPackage this portlet's plugin package
 	 */
 	public void setPluginPackage(PluginPackage pluginPackage) {
 		_pluginPackage = pluginPackage;
@@ -2941,18 +2941,18 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Get the application this portlet belongs to.
+	 * Gets this portlet's application.
 	 *
-	 * @return the application this portlet belongs to
+	 * @return this portlet's application
 	 */
 	public PortletApp getPortletApp() {
 		return _portletApp;
 	}
 
 	/**
-	 * Sets the application this portlet belongs to.
+	 * Sets this portlet's application.
 	 *
-	 * @param portletApp the application this portlet belongs to
+	 * @param portletApp this portlet's application
 	 */
 	public void setPortletApp(PortletApp portletApp) {
 		_portletApp = portletApp;
@@ -3206,7 +3206,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	private Portlet _rootPortlet = this;
 
 	/**
-	 * Package this plugin belongs to.
+	 * Package to which this plugin belongs.
 	 */
 	private PluginPackage _pluginPackage;
 
@@ -3693,7 +3693,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 			new HashMap<String, PublicRenderParameter>();
 
 	/**
-	 * The application this portlet belongs to.
+	 * The application to which this portlet belongs.
 	 */
 	private PortletApp _portletApp;
 
