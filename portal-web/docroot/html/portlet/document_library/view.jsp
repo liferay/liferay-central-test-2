@@ -160,7 +160,7 @@ if (folder != null) {
 		window,
 		'<portlet:namespace />toggleActionsButton',
 		function() {
-			A = AUI();
+			var A = AUI();
 
 			var actionsButton = A.one('#<portlet:namespace />actionsButtonContainer ul');
 
