@@ -202,13 +202,15 @@ definePermissionsURL.setParameter(Constants.CMD, Constants.VIEW);
 		Iterator<Role> itr = roles.iterator();
 
 		while (itr.hasNext()) {
-			Role curRole = itr.next();
+			Role role = itr.next();
 
-			if (!curRole.getName().equals(RoleConstants.GUEST) && !RolePermissionUtil.contains(permissionChecker, groupId, curRole.getRoleId(), ActionKeys.VIEW)) {
+			String name = role.getName();
+
+			if (!name.equals(RoleConstants.GUEST) && !RolePermissionUtil.contains(permissionChecker, groupId, role.getRoleId(), ActionKeys.VIEW)) {
 				itr.remove();
 			}
 
-			if (curRole.getName().equals(RoleConstants.GUEST) && (modelResource.equals(Layout.class.getName()))) {
+			if (name.equals(RoleConstants.GUEST) && modelResource.equals(Layout.class.getName())) {
 				Layout resourceLayout = LayoutLocalServiceUtil.getLayout(GetterUtil.getLong(resourcePrimKey));
 
 				if (resourceLayout.isPrivateLayout()) {
@@ -216,11 +218,13 @@ definePermissionsURL.setParameter(Constants.CMD, Constants.VIEW);
 				}
 			}
 
-			if (curRole.getName().equals(RoleConstants.GUEST) && (Validator.isNotNull(portletResource))) {
+			if (name.equals(RoleConstants.GUEST) && Validator.isNotNull(portletResource)) {
 				int pos = resourcePrimKey.indexOf(PortletConstants.LAYOUT_SEPARATOR);
 
 				if (pos > 0) {
-					Layout resourceLayout = LayoutLocalServiceUtil.getLayout(GetterUtil.getLong(resourcePrimKey.substring(0, pos)));
+					long resourcePlid = GetterUtil.getLong(resourcePrimKey.substring(0, pos));
+
+					Layout resourceLayout = LayoutLocalServiceUtil.getLayout(resourcePlid);
 
 					if (resourceLayout.isPrivateLayout()) {
 						itr.remove();
