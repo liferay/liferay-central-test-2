@@ -46,21 +46,21 @@ AUI().add(
 
 		var TPL_TAG_MERGE_BODY = '<div class="aui-layout tags-admin-merge-tag">' +
 			'<div class="aui-layout-content">' +
-				'<div class="aui-column aui-w45">' + 
+				'<div class="aui-column aui-w45">' +
 					'<div class="selected-tags-container">' +
-						'<label for="selectedTagsList">' + Liferay.Language.get('tags-to-be-merged') + ':</label>' +
-						'<select id="selectedTagsList" class="selected-tags-list" multiple>' +
+						'<label for="{namespace}selectedTagsList">' + Liferay.Language.get('tags-to-be-merged') + ':</label>' +
+						'<select id="{namespace}selectedTagsList" class="selected-tags-list" multiple>' +
 						'</select>' +
 					'</div>' +
 				'</div>' +
-				'<div class="aui-column aui-w10">' +
-						'<button class="tag-move tag-move-up" id="tagMoveUp"></button>' +
-						'<button class="tag-move tag-move-down" id="tagMoveDown"></button>' +
+				'<div class="aui-column aui-w10" id="{namespace}sortSelect">' +
+						'<button class="tag-move tag-move-up" id="{namespace}tagMoveUp"></button>' +
+						'<button class="tag-move tag-move-down" id="{namespace}tagMoveDown"></button>' +
 				'</div>' +
 				'<div class="aui-column aui-w45">' +
 					'<div class="target-tags-container">' +
-						'<label class="tags-label" for="targetTagsList">' + Liferay.Language.get('target-tag') + ':</label>' +
-						'<select id="targetTagsList" class="target-tags-list">' +
+						'<label class="tags-label" for="{namespace}targetTagsList">' + Liferay.Language.get('target-tag') + ':</label>' +
+						'<select id="{namespace}targetTagsList" class="target-tags-list">' +
 						'</select>' +
 					'</div>' +
 				'</div>' +
@@ -72,14 +72,14 @@ AUI().add(
 				'<div class="aui-layout-content">' +
 					'<div class="aui-column aui-w60">' +
 						'<div class="tag-options">' +
-							'<input id="mergeOnlySelectedTags" type="checkbox">' +
-							'<label class="tags-merge-label" for="mergeOnlySelectedTags">' + Liferay.Language.get('merge-only-selected-tags') + '</label>' + '<br>' +
-							'<input checked id="overrideProperties" type="checkbox">' +
-							'<label class="tags-merge-label" for="overrideProperties">' + Liferay.Language.get('override-tags-properties') + '</label>' +
+							'<input id="{namespace}mergeOnlySelectedTags" type="checkbox">' +
+							'<label class="tags-merge-label" for="{namespace}mergeOnlySelectedTags">' + Liferay.Language.get('merge-only-selected-tags') + '</label>' + '<br>' +
+							'<input checked id="{namespace}overrideProperties" type="checkbox">' +
+							'<label class="tags-merge-label" for="{namespace}overrideProperties">' + Liferay.Language.get('override-tags-properties') + '</label>' +
 						'</div>' +
 					'</div>' +
 					'<div class="aui-column aui-w40">' +
-						'<div id="buttonsContainer"></div>' +
+						'<div id="{namespace}buttonsContainer"></div>' +
 					'</div>' +
 				'</div>' +
 			'</div>';
@@ -287,70 +287,6 @@ AUI().add(
 						return instance._tagPanelEdit;
 					},
 
-					_createTagPanelMerge: function() {
-						var instance = this;
-
-						var tagPanelMerge = new A.Dialog(
-							{
-								align: instance._dialogAlignConfig,
-								bodyContent: TPL_TAG_MERGE_BODY,
-								cssClass: CSS_TAG_DIALOG,
-								footerContent: TPL_TAG_MERGE_FOOTER,
-								resizable: false,
-								title: Liferay.Language.get('merge-tags'),
-								width: 500,
-								zIndex: 1000
-							}
-						).render();
-
-						var okButton = new A.ButtonItem({
-							label: Liferay.Language.get('ok'),
-							on: {
-								click: A.bind(instance._onTagMergeClick, instance)
-							}
-						});
-
-						var cancelButton = new A.ButtonItem({
-							label: Liferay.Language.get('cancel'),
-							on: {
-								click: A.bind(tagPanelMerge.hide, tagPanelMerge)
-							}
-						});
-
-						var buttonsContaner = A.one('#buttonsContainer');
-
-						okButton.render(buttonsContaner);
-
-						cancelButton.render(buttonsContaner);
-
-						tagPanelMerge.hide();
-
-						tagPanelMerge.after(
-							'visibleChange',
-							function(event){
-								if (!event.newVal) {
-									instance._prevSelectedTagData = null;
-								}
-							}
-						);
-
-						A.one('#tagMoveUp').on(EVENT_CLICK, instance._onTagMoveUp, instance);
-						A.one('#tagMoveDown').on(EVENT_CLICK, instance._onTagMoveDown, instance);
-
-						instance._bindCloseEvent(tagPanelMerge);
-
-						var targetTagsList = tagPanelMerge.get('contentBox').one('#targetTagsList');
-
-						targetTagsList.on('change', instance._updateMergeItemsTarget, instance);
-
-						instance._selectedTagsList = tagPanelMerge.get('contentBox').one('#selectedTagsList');
-						instance._targetTagsList = tagPanelMerge.get('contentBox').one('#targetTagsList');
-
-						instance._tagPanelMerge = tagPanelMerge;
-
-						return tagPanelMerge;
-					},
-
 					_createTagPanelPermissions: function() {
 						var instance = this;
 
@@ -457,24 +393,22 @@ AUI().add(
 
 						var tagsNodes = A.all('.tag-item-check:checked');
 
-						if (tagsNodes.size() <= 0) {
-							alert(Liferay.Language.get('there-are-no-any-selected-tags'));
+						if (tagsNodes.size() > 0) {
+							if (confirm(Liferay.Language.get('are-you-sure-you-want-to-delete-the-selected-tags'))) {
+								var checkedItemsIds = tagsNodes.attr('data-tagId');
 
-							return;
-						}
-
-						if (confirm(Liferay.Language.get('are-you-sure-you-want-to-delete-the-selected-tags'))) {
-
-							var checkedItemsIds = tagsNodes.attr('data-tagId');
-
-							if (checkedItemsIds.length > 0) {
-								Liferay.Service.Asset.AssetTag.deleteTags(
-									{
-										tagIds: checkedItemsIds
-									},
-									A.bind(instance._processActionResult, instance)
-								);
+								if (checkedItemsIds.length > 0) {
+									Liferay.Service.Asset.AssetTag.deleteTags(
+										{
+											tagIds: checkedItemsIds
+										},
+										A.bind(instance._processActionResult, instance)
+									);
+								}
 							}
+						}
+						else {
+							alert(Liferay.Language.get('there-are-no-selected-tags'));
 						}
 					},
 
@@ -716,6 +650,97 @@ AUI().add(
 						return tagsPaginator;
 					},
 
+					_getTagPanelMerge: function() {
+						var instance = this;
+
+						var tagPanelMerge = instance._tagPanelMerge;
+
+						if (!tagPanelMerge) {
+							var namespace = instance._prefixedPortletId;
+
+							var tplValues = {
+								namespace: namespace
+							};
+
+							var panelBodyContent = Lang.sub(TPL_TAG_MERGE_BODY, tplValues);
+							var panelFooterContent = Lang.sub(TPL_TAG_MERGE_FOOTER, tplValues);
+
+							var tagPanelMerge = new A.Dialog(
+								{
+									align: instance._dialogAlignConfig,
+									bodyContent: panelBodyContent,
+									cssClass: CSS_TAG_DIALOG,
+									footerContent: panelFooterContent,
+									resizable: false,
+									title: Liferay.Language.get('merge-tags'),
+									width: 500,
+									zIndex: 1000
+								}
+							).render();
+
+							var okButton = new A.ButtonItem(
+								{
+									label: Liferay.Language.get('ok'),
+									on: {
+										click: A.bind(instance._onTagMergeClick, instance)
+									}
+								}
+							);
+
+							var cancelButton = new A.ButtonItem(
+								{
+									label: Liferay.Language.get('cancel'),
+									on: {
+										click: function(event) {
+											tagPanelMerge.hide();
+										}
+									}
+								}
+							);
+
+							var buttonsContainer = A.one('#' + namespace + 'buttonsContainer');
+
+							okButton.render(buttonsContainer);
+							cancelButton.render(buttonsContainer);
+
+							tagPanelMerge.hide();
+
+							tagPanelMerge.after(
+								'visibleChange',
+								function(event){
+									if (!event.newVal) {
+										instance._previousTagData = null;
+									}
+								}
+							);
+
+							A.one('#' + namespace + 'sortSelect').delegate(
+								'click',
+								function(event) {
+									var down = event.currentTarget.hasClass('tag-move-down');
+
+									Liferay.Util.reorder(instance._selectedTagsList, down);
+								},
+								'button'
+							);
+
+							instance._bindCloseEvent(tagPanelMerge);
+
+							var contentBox = tagPanelMerge.get('contentBox');
+
+							var targetTagsList = contentBox.one('#' + namespace + 'targetTagsList');
+
+							targetTagsList.on('change', instance._updateMergeItemsTarget, instance);
+
+							instance._selectedTagsList = contentBox.one('#' + namespace + 'selectedTagsList');
+							instance._targetTagsList = contentBox.one('#' + namespace + 'targetTagsList');
+
+							instance._tagPanelMerge = tagPanelMerge;
+						}
+
+						return tagPanelMerge;
+					},
+
 					_getTags: function(callback) {
 						var instance = this;
 
@@ -896,7 +921,7 @@ AUI().add(
 
 						var mergeText = Liferay.Language.get('are-you-sure-you-want-to-merge-x-into-x');
 
-						mergeText = A.substitute(mergeText, [fromTagName, toTagName]);
+						mergeText = Lang.sub(mergeText, [fromTagName, toTagName]);
 
 						if (confirm(mergeText)) {
 							instance._mergeTag(
@@ -916,61 +941,55 @@ AUI().add(
 
 						var selectedTagsNodes = A.all('.tag-item-check:checked');
 
-						if (selectedTagsNodes.size() < 2) {
-							var errorMessage = A.substitute(Liferay.Language.get('please-choose-at-least-x-tags'), [2]);
+						if (selectedTagsNodes.size() > 1) {
+							var checkedItemsIds = selectedTagsNodes.attr('data-tagId');
+							var checkedItemsName = selectedTagsNodes.attr('data-tagName');
+
+							var tagPanelMerge = instance._getTagPanelMerge();
+
+							var selectedTagsList = instance._selectedTagsList;
+							var targetTagsList = instance._targetTagsList;
+
+							selectedTagsList.empty();
+							targetTagsList.empty();
+
+							selectedTagsNodes.each(
+								function(item, index, collection) {
+									var name = checkedItemsName[index];
+									var value = checkedItemsIds[index];
+
+									var listItem = Lang.sub(
+										TPL_TAG_MERGE_ITEM,
+										{
+											name: name,
+											title: name,
+											value: value
+										}
+									);
+
+									selectedTagsList.append(listItem);
+									targetTagsList.append(listItem);
+								}
+							);
+
+							targetTagsList.attr('selectedIndex', 0);
+
+							instance._updateMergeItemsTarget();
+
+							if (selectedTagsNodes.size() > MAX_DISPLAY_ITEMS) {
+								selectedTagsList.attr('size', MAX_DISPLAY_ITEMS);
+							}
+							else {
+								selectedTagsList.removeAttribute('size');
+							}
+
+							tagPanelMerge.show();
+						}
+						else {
+							var errorMessage = Lang.sub(Liferay.Language.get('please-choose-at-least-x-tags'), [2]);
 
 							alert(errorMessage);
-
-							return;
 						}
-
-						var checkedItemsIds = selectedTagsNodes.attr('data-tagId');
-						var checkedItemsName = selectedTagsNodes.attr('data-tagName');
-
-						var tagPanelMerge = instance._tagPanelMerge;
-
-						if (!tagPanelMerge) {
-							tagPanelMerge = instance._createTagPanelMerge();
-						}
-
-						var selectedTagsList = instance._selectedTagsList;
-						var targetTagsList = instance._targetTagsList;
-
-						selectedTagsList.empty();
-						targetTagsList.empty();
-
-						A.each(
-							selectedTagsNodes,
-							function(item, index, collection) {
-								var name = checkedItemsName[index];
-								var value = checkedItemsIds[index];
-
-								var listItem = Lang.substitute(
-									TPL_TAG_MERGE_ITEM,
-									{
-										name: name,
-										title: name,
-										value: value
-									}
-								);
-
-								selectedTagsList.appendChild(A.Node.create(listItem));
-
-								targetTagsList.appendChild(A.Node.create(listItem));
-							}
-						);
-
-						targetTagsList.set('selectedIndex', 0);
-
-						instance._updateMergeItemsTarget();
-
-						if (selectedTagsNodes.size() > MAX_DISPLAY_ITEMS) {
-							selectedTagsList.attr('size', MAX_DISPLAY_ITEMS);
-						} else {
-							selectedTagsList.removeAttribute('size');
-						}
-
-						tagPanelMerge.show();
 					},
 
 					_mergeMultipleTags: function(fromIds, toId, overrideProperties, callback) {
@@ -1068,11 +1087,12 @@ AUI().add(
 					_onTagMergeClick: function(event) {
 						var instance = this;
 
+						var namespace = instance._prefixedPortletId;
 						var selectedList = instance._selectedTagsList;
 
-						var mergeOnlySelected = A.one('#mergeOnlySelectedTags').get('checked');
+						var mergeOnlySelected = A.one('#' + namespace + 'mergeOnlySelectedTags').get('checked');
 
-						var tags = selectedList.all( mergeOnlySelected ? ':selected' : 'option');
+						var tags = selectedList.all(mergeOnlySelected ? ':selected' : 'option');
 
 						if (tags.size() > 0) {
 							var targetTag = instance._targetTagsList.one(':selected');
@@ -1081,14 +1101,13 @@ AUI().add(
 
 							var mergeText = Liferay.Language.get('are-you-sure-you-want-to-merge-the-chosen-tags-into-x');
 
-							mergeText = A.substitute(mergeText, [targetTagName]);
+							mergeText = Lang.sub(mergeText, [targetTagName]);
 
 							if (confirm(mergeText)) {
-								var tagsIds = tags.attr('value');
+								var tagsIds = tags.val();
+								var targetTagId = targetTag.val();
 
-								var targetTagId = targetTag.attr('value');
-
-								var overrideProperties = A.one('#overrideProperties').get('checked');
+								var overrideProperties = A.one('#' + namespace + 'overrideProperties').attr('checked');
 
 								instance._mergeMultipleTags(
 									tagsIds,
@@ -1099,60 +1118,7 @@ AUI().add(
 							}
 						}
 						else {
-							alert(Liferay.Language.get('there-are-no-any-selected-tags'));
-						}
-					},
-
-					_onTagMoveDown: function(event) {
-						var instance = this;
-
-						var selectedTagsList = instance._selectedTagsList;
-						var totalItemsSize = selectedTagsList.get('options').size();
-
-						var selectedItems = selectedTagsList.all(':selected');
-						var selectedItemsSize = selectedItems.size();
-
-						for (var i = selectedItemsSize - 1; i >= 0; i--) {
-							var item = selectedItems.item(i);
-
-							var itemIndex = item.get('index');
-
-							if (itemIndex == totalItemsSize - 1) {
-								var firstChild = selectedTagsList.get('firstChild');
-
-								selectedTagsList.insertBefore(item, firstChild);
-							}
-							else {
-								var nextSibling = item.get('nextSibling');
-
-								var parent = nextSibling ? nextSibling.get('nextSibling') : selectedTagsList.get('firstChild');
-
-								selectedTagsList.insertBefore(item, parent);
-							}
-						}
-					},
-
-					_onTagMoveUp: function(event) {
-						var instance = this;
-
-						var selectedTagsList = instance._selectedTagsList;
-
-						var selectedItems = selectedTagsList.all(':selected');
-						var selectedItemsSize = selectedItems.size();
-
-						for (var i = 0; i < selectedItemsSize; i++) {
-							var item = selectedItems.item(i);
-
-							var itemIndex = item.get('index');
-
-							if (itemIndex == 0) {
-								selectedTagsList.appendChild(item);
-							}
-							else {
-								var previousSibling = item.get('previousSibling');
-
-								selectedTagsList.insertBefore(item, previousSibling);
-							}
+							alert(Liferay.Language.get('there-are-no-selected-tags'));
 						}
 					},
 
@@ -1472,42 +1438,43 @@ AUI().add(
 						var targetTagsList = instance._targetTagsList;
 
 						var selectetTargeTagIndex = targetTagsList.get('selectedIndex');
-						
+
 						var targetTag = targetTagsList.get('options').item(selectetTargeTagIndex);
-						var targetTagId = targetTag.attr('value');
 
-						var prevSelectedTagData = instance._prevSelectedTagData;
+						var targetTagId = targetTag.val();
 
-						if (prevSelectedTagData) {
-							var prevSelectedTag = prevSelectedTagData.tagNode;
-							var prevSelectedTagNextSibling = prevSelectedTagData.nextSibling;
-							var prevSelectedTagPrevSibling = prevSelectedTagData.previousSibling;
+						var previousTagData = instance._previousTagData;
 
-							if (prevSelectedTagNextSibling) {
-								selectedTagsList.insertBefore(prevSelectedTag, prevSelectedTagNextSibling);
+						if (previousTagData) {
+							var previousTag = previousTagData.tagNode;
+							var previousTagNextSibling = previousTagData.nextSibling;
+							var previousTagPrevSibling = previousTagData.previousSibling;
+
+							if (previousTagNextSibling) {
+								previousTagNextSibling.placeBefore(previousTag);
 							}
-							else if (prevSelectedTagPrevSibling){
-								selectedTagsList.insertBefore(prevSelectedTag, prevSelectedTagPrevSibling.get('nextSibling'));
+							else if (previousTagPrevSibling){
+								previousTagPrevSibling.placeAfter(previousTag)
 							}
 							else {
-								selectedTagsList.appendChild(prevSelectedTag);
+								selectedTagsList.append(previousTag);
 							}
 
-							prevSelectedTagData = null;
+							previousTagData = null;
 						}
-						
+
 						var selectedTag = selectedTagsList.one('[value=' + targetTagId + ']');
 
 						if (selectedTag) {
-							prevSelectedTagData = {
+							previousTagData = {
 								tagNode: selectedTag,
-								nextSibling: selectedTag.get('nextSibling'),
-								previousSibling: selectedTag.get('previousSibling')
+								nextSibling: selectedTag.next(),
+								previousSibling: selectedTag.previous()
 							};
 
 							selectedTag.remove();
 
-							instance._prevSelectedTagData = prevSelectedTagData;
+							instance._previousTagData = previousTagData;
 						}
 					},
 

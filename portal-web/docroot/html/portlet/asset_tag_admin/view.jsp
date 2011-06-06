@@ -51,14 +51,14 @@
 
 					<liferay-ui:icon-menu
 						align="auto"
-						message='Actions'
+						message="actions"
 						showWhenSingleIcon="true"
 					>
 
 						<liferay-ui:icon
 							id="deleteSelectedTags"
 							image="delete"
-							message="Delete"
+							message="delete"
 							url="javascript:;"
 						/>
 

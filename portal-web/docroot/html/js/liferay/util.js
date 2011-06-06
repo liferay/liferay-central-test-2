@@ -1142,74 +1142,44 @@
 				box.set('selectedIndex', 0);
 			}
 			else {
-				var options = box.get('options');
+				var selectedItems = box.all(':selected');
 
-				var selectedOption = options.item(selectedIndex);
-				var lastIndex = box.get('length') - 1;
+				var lastIndex = box.get('options').size() - 1;
 
-				var currentOption;
-				var newOption;
-				var newIndex;
+				var length = selectedItems.size();
 
-				var text = selectedOption.get('text');
-				var value = selectedOption.val();
+				if (down) {
+					while (length--) {
+						var item = selectedItems.item(length);
 
-				if (value && (selectedIndex > 0) && (down == 0)) {
-					var previousOption = options.item(selectedIndex - 1);
+						var itemIndex = item.get('index');
 
-					selectedOption.set('text', previousOption.get('text'));
-					selectedOption.val(previousOption.val());
+						var referenceNode = box.get('firstChild');
 
-					newOption = previousOption;
-					newIndex = selectedIndex - 1;
-				}
-				else if ((selectedIndex < lastIndex) && (options.item(selectedIndex + 1).val()) && (down == 1)) {
-					var nextOption = options.item(selectedIndex + 1);
+						if (itemIndex != lastIndex) {
+							var nextSibling = item.next();
 
-					selectedOption.set('text', nextOption.get('text'));
-					selectedOption.val(nextOption.val());
+							if (nextSibling) {
+								referenceNode = nextSibling.next();
+							}
+						}
 
-					newOption = nextOption;
-					newIndex = selectedIndex + 1;
-				}
-				else if (selectedIndex == 0) {
-					var nextIndex;
-					var nextOption;
-
-					for (var i = 0; i < lastIndex; i++) {
-						nextIndex = i + 1;
-						currentOption = options.item(i);
-						nextOption = options.item(nextIndex);
-
-						currentOption.set('text', nextOption.get('text'));
-						currentOption.val(nextOption.val());
+						box.insertBefore(item, referenceNode);
 					}
-
-					newOption = options.item(lastIndex);
-					newIndex = lastIndex;
 				}
-				else if (selectedIndex == lastIndex) {
-					var previousIndex;
-					var previousOption;
+				else {
+					for (var i = 0; i < length; i++) {
+						var item = selectedItems.item(i);
 
-					for (var i = lastIndex; i > 0; i--) {
-						previousIndex = i - 1;
-						currentOption = options.item(i);
-						previousOption = options.item(previousIndex);
+						var itemIndex = item.get('index');
 
-						currentOption.set('text', previousOption.get('text'));
-						currentOption.val(previousOption.val());
+						if (itemIndex == 0) {
+							box.append(item);
+						}
+						else {
+							box.insertBefore(item, item.previous());
+						}
 					}
-
-					newOption = options.item(0);
-					newIndex = 0;
-				}
-
-				if (newOption) {
-					newOption.set('text', text);
-					newOption.val(value);
-
-					box.set('selectedIndex', newIndex);
 				}
 			}
 		},
