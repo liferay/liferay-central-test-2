@@ -261,7 +261,7 @@ public interface JournalArticleLocalService {
 
 	public void addArticleResources(
 		com.liferay.portlet.journal.model.JournalArticle article,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		boolean addGroupPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -273,7 +273,7 @@ public interface JournalArticleLocalService {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public void addArticleResources(long groupId, java.lang.String articleId,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		boolean addGroupPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 

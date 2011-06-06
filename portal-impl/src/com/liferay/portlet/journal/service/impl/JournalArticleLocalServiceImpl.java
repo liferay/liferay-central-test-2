@@ -336,14 +336,14 @@ public class JournalArticleLocalServiceImpl
 	}
 
 	public void addArticleResources(
-			JournalArticle article, boolean addCommunityPermissions,
+			JournalArticle article, boolean addGroupPermissions,
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
 		resourceLocalService.addResources(
 			article.getCompanyId(), article.getGroupId(),
 			article.getUserId(), JournalArticle.class.getName(),
-			article.getResourcePrimKey(), false, addCommunityPermissions,
+			article.getResourcePrimKey(), false, addGroupPermissions,
 			addGuestPermissions);
 	}
 
@@ -360,14 +360,14 @@ public class JournalArticleLocalServiceImpl
 	}
 
 	public void addArticleResources(
-			long groupId, String articleId, boolean addCommunityPermissions,
+			long groupId, String articleId, boolean addGroupPermissions,
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
 		JournalArticle article = getLatestArticle(groupId, articleId);
 
 		addArticleResources(
-			article, addCommunityPermissions, addGuestPermissions);
+			article, addGroupPermissions, addGuestPermissions);
 	}
 
 	public void addArticleResources(

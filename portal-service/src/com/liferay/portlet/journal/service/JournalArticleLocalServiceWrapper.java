@@ -291,11 +291,11 @@ public class JournalArticleLocalServiceWrapper
 
 	public void addArticleResources(
 		com.liferay.portlet.journal.model.JournalArticle article,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		boolean addGroupPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		_journalArticleLocalService.addArticleResources(article,
-			addCommunityPermissions, addGuestPermissions);
+			addGroupPermissions, addGuestPermissions);
 	}
 
 	public void addArticleResources(
@@ -309,11 +309,11 @@ public class JournalArticleLocalServiceWrapper
 	}
 
 	public void addArticleResources(long groupId, java.lang.String articleId,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		boolean addGroupPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		_journalArticleLocalService.addArticleResources(groupId, articleId,
-			addCommunityPermissions, addGuestPermissions);
+			addGroupPermissions, addGuestPermissions);
 	}
 
 	public void addArticleResources(long groupId, java.lang.String articleId,
