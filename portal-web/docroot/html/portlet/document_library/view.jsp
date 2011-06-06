@@ -155,6 +155,24 @@ if (folder != null) {
 		},
 		['liferay-util-list-fields']
 	);
+
+	Liferay.provide(
+		window,
+		'<portlet:namespace />toggleActionsButton',
+		function() {
+	        A = AUI();
+
+			var actionsButton = A.one('#<portlet:namespace />actionsButtonContainer ul');
+
+			if (Liferay.Util.listCheckedExceptItem(document.<portlet:namespace />fm2, '<portlet:namespace /><%= RowChecker.ALL_ROW_IDS %>Checkbox').length > 0) {
+				actionsButton.removeClass('disabled');
+			}
+			else {
+				actionsButton.addClass('disabled');
+			}
+		},
+		['liferay-util-list-fields']
+	);
 </aui:script>
 
 <aui:script use="aui-dialog,aui-dialog-iframe">
@@ -170,6 +188,8 @@ if (folder != null) {
 		'change',
 		function(event) {
 			markSelected(event.currentTarget);
+
+			<portlet:namespace />toggleActionsButton();
 
 			Liferay.Util.checkAllBox(documentContainer, '<portlet:namespace /><%= RowChecker.ROW_IDS %>', '#<portlet:namespace /><%= RowChecker.ALL_ROW_IDS %>Checkbox');
 		},

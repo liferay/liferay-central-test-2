@@ -38,10 +38,11 @@ public class EntriesChecker extends RowChecker {
 
 	public EntriesChecker(
 		LiferayPortletResponse liferayPortletResponse,
-		PermissionChecker permissionChecker) {
+		PermissionChecker permissionChecker, String namespace) {
 
 		super(liferayPortletResponse);
 
+		_namespace = namespace;
 		_permissionChecker = permissionChecker;
 	}
 
@@ -132,6 +133,8 @@ public class EntriesChecker extends RowChecker {
 				sb.append("', ");
 				sb.append(getAllRowIds());
 				sb.append("Checkbox); ");
+				sb.append(_namespace);
+				sb.append("toggleActionsButton();\"");
 			}
 
 			sb.append(">");
@@ -140,6 +143,7 @@ public class EntriesChecker extends RowChecker {
 		return sb.toString();
 	}
 
+	private String _namespace;
 	private PermissionChecker _permissionChecker;
 
 }

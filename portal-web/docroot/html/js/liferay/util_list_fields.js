@@ -4,26 +4,14 @@ AUI().add(
 		var Util = Liferay.Util;
 
 		Util.listChecked = function(form) {
-			var s = [];
-
-			form = AUI().one(form);
-
-			if (form) {
-				form.all('input[type=checkbox]').each(
-					function(item, index, collection) {
-						var val = item.val();
-
-						if (val && item.get('checked')) {
-							s.push(val);
-						}
-					}
-				);
-			}
-
-			return s.join(',');
+			return Util.listChecked(form).join(',');
 		};
 
 		Util.listCheckedExcept = function(form, except) {
+			return Util.listCheckedExceptItem(form, except).join(',');
+		};
+
+		Util.listCheckedExceptItem = function(form, except) {
 			var s = [];
 
 			form = AUI().one(form);
@@ -40,7 +28,27 @@ AUI().add(
 				);
 			}
 
-			return s.join(',');
+			return s;
+		};
+
+		Util.listCheckedItem = function(form) {
+			var s = [];
+
+			form = AUI().one(form);
+
+			if (form) {
+				form.all('input[type=checkbox]').each(
+					function(item, index, collection) {
+						var val = item.val();
+
+						if (val && item.get('checked')) {
+							s.push(val);
+						}
+					}
+				);
+			}
+
+			return s;
 		};
 
 		Util.listSelect = function(box, delimeter) {

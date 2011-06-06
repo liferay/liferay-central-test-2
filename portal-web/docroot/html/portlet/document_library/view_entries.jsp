@@ -73,7 +73,7 @@ headerNames.add(StringPool.BLANK);
 
 searchContainer.setHeaderNames(headerNames);
 
-searchContainer.setRowChecker(new EntriesChecker(liferayPortletResponse, permissionChecker));
+searchContainer.setRowChecker(new EntriesChecker(liferayPortletResponse, permissionChecker, liferayPortletResponse.getNamespace()));
 
 Map<String, String> orderableHeaders = new HashMap<String, String>();
 

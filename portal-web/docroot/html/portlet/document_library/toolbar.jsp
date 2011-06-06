@@ -29,44 +29,46 @@ String orderByType = ParamUtil.getString(request, "orderByType");
 
 <aui:input cssClass="select-documents aui-state-default" inline="<%= true %>" label="" name='<%= RowChecker.ALL_ROW_IDS %>' type="checkbox" />
 
-<liferay-ui:icon-menu align="left" cssClass="actions-button" direction="down" icon="" message="actions" showExpanded="<%= false %>" showWhenSingleIcon="<%= false %>">
+<span id="<portlet:namespace />actionsButtonContainer">
+	<liferay-ui:icon-menu align="left" cssClass="actions-button" direction="down" disabled="<%= true %>" icon="" message="actions" showExpanded="<%= false %>" showWhenSingleIcon="<%= false %>">
 
-	<%
-	String taglibUrl = "javascript:" + renderResponse.getNamespace() + "editFileEntry('" + Constants.LOCK + "')";
-	%>
+		<%
+		String taglibUrl = "javascript:" + renderResponse.getNamespace() + "editFileEntry('" + Constants.LOCK + "')";
+		%>
 
-	<liferay-ui:icon
-		image="lock"
-		url="<%= taglibUrl %>"
-	/>
+		<liferay-ui:icon
+			image="lock"
+			url="<%= taglibUrl %>"
+		/>
 
-	<%
-	taglibUrl = "javascript:" + renderResponse.getNamespace() + "editFileEntry('" + Constants.UNLOCK + "')";
-	%>
+		<%
+		taglibUrl = "javascript:" + renderResponse.getNamespace() + "editFileEntry('" + Constants.UNLOCK + "')";
+		%>
 
-	<liferay-ui:icon
-		image="unlock"
-		url="<%= taglibUrl %>"
-	/>
+		<liferay-ui:icon
+			image="unlock"
+			url="<%= taglibUrl %>"
+		/>
 
-	<%
-	taglibUrl = "javascript:" + renderResponse.getNamespace() + "editFileEntry('" + Constants.MOVE + "')";
-	%>
+		<%
+		taglibUrl = "javascript:" + renderResponse.getNamespace() + "editFileEntry('" + Constants.MOVE + "')";
+		%>
 
-	<liferay-ui:icon
-		image="submit"
-		message="move"
-		url="<%= taglibUrl %>"
-	/>
+		<liferay-ui:icon
+			image="submit"
+			message="move"
+			url="<%= taglibUrl %>"
+		/>
 
-	<%
-	taglibUrl = "javascript:" + renderResponse.getNamespace() + "editFileEntry('" + Constants.DELETE + "')";
-	%>
+		<%
+		taglibUrl = "javascript:" + renderResponse.getNamespace() + "editFileEntry('" + Constants.DELETE + "')";
+		%>
 
-	<liferay-ui:icon-delete
-		url="<%= taglibUrl %>"
-	/>
-</liferay-ui:icon-menu>
+		<liferay-ui:icon-delete
+			url="<%= taglibUrl %>"
+		/>
+	</liferay-ui:icon-menu>
+</span>
 
 <span class="add-button" id="<portlet:namespace />addButtonContainer">
 	<liferay-util:include page="/html/portlet/document_library/add_button.jsp" />
@@ -142,6 +144,8 @@ String orderByType = ParamUtil.getString(request, "orderByType");
 			var documentDisplayStyle = A.all('.document-display-style')
 
 			Liferay.Util.checkAll(documentContainer, '<portlet:namespace /><%= RowChecker.ROW_IDS %>', event.currentTarget);
+
+			<portlet:namespace />toggleActionsButton();
 
 			documentDisplayStyle.toggleClass('selected', allRowIds.attr('checked'));
 		}
