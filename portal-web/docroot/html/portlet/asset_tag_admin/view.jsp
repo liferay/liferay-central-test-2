@@ -49,7 +49,27 @@
 				<div class="results-header">
 					<aui:input cssClass="tag-admin-check" label="tags" name="checkAllTags" type="checkbox" title='<%= LanguageUtil.get(pageContext, "check-all-tags") %>' />
 
-					<aui:button cssClass="tag-admin-delete" name="deleteCheckedTags" value="delete" />
+					<liferay-ui:icon-menu
+						align="auto"
+						message='Actions'
+						showWhenSingleIcon="true"
+					>
+
+						<liferay-ui:icon
+							id="deleteSelectedTags"
+							image="delete"
+							message="Delete"
+							url="javascript:;"
+						/>
+
+						<liferay-ui:icon
+							id="mergeSelectedTags"
+							image="../common/all_pages"
+							message="merge"
+							url="javascript:;"
+						/>
+
+					</liferay-ui:icon-menu>
 				</div>
 
 				<div class="tags-admin-list lfr-component"></div>

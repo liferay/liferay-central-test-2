@@ -169,13 +169,6 @@
 			}
 		}
 
-		.tag-admin-delete {
-			display: block;
-			position: absolute;
-			right: 10px;
-			top: 0px;
-		}
-
 		&:after {
 			clear: both;
 			content: "";
@@ -252,6 +245,53 @@
 			.button-holder {
 				margin-top: 10px;
 			}
+		}
+	}
+
+	.tags-admin-merge-tag {
+		.arrows-container {
+			top: 50%;
+			margin-top: -20px;
+		}
+
+		label {
+			color: #5C85AD;
+			display: inline-block;
+			margin-bottom: 0.5em;
+		}
+
+		.selected-tags-container, .target-tags-container {
+			padding: 0.5em;
+		}
+
+		.selected-tags-list, .target-tags-list {
+			width: 100%;
+		}
+
+		.tag-move {
+			display: block;
+			height: 18px;
+			position: relative;
+			top: 30px;
+			width: 18px;
+		}
+
+		.tag-move-down {
+			background-image: url(<%= themeImagesPath %>/arrows/02_down.png);
+			margin-top: 0.2em;
+		}
+
+		.tag-move-up {
+			background-image: url(<%= themeImagesPath %>/arrows/02_up.png);
+		}
+
+		.tag-options {
+			text-align: left;
+		}
+
+		.tags-merge-label {
+			margin-left: 0.5em;
+			vertical-align: middle;
 		}
 	}
 }
