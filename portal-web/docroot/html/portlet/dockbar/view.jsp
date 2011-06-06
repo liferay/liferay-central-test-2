@@ -157,6 +157,12 @@ for (String portletId : PropsValues.DOCKBAR_ADD_PORTLETS) {
 									<aui:a href="<%= themeDisplay.getURLSiteSettings().toString() %>" label="site-settings" title="manage-site-settings" />
 								</li>
 							</c:if>
+
+							<c:if test="<%= themeDisplay.isShowManageSiteMembershipsIcon() && !group.isLayoutPrototype() %>">
+								<li class="settings use-dialog">
+									<aui:a href="<%= themeDisplay.getURLManageSiteMemberships().toString() %>" label="site-memberships" title="manage-site-memberships" />
+								</li>
+							</c:if>
 						</ul>
 					</div>
 				</div>

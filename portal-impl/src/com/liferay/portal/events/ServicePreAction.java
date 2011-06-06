@@ -1772,6 +1772,26 @@ public class ServicePreAction extends Action {
 				pageSettingsURL.setParameter("selPlid", String.valueOf(plid));
 
 				themeDisplay.setURLPageSettings(pageSettingsURL);
+
+				themeDisplay.setShowManageSiteMembershipsIcon(true);
+
+				PortletURL manageMembershipsURL = new PortletURLImpl(
+					request, PortletKeys.SITE_MEMBERSHIPS_ADMIN,
+					controlPanelPlid, PortletRequest.RENDER_PHASE);
+
+				manageMembershipsURL.setWindowState(LiferayWindowState.POP_UP);
+				manageMembershipsURL.setPortletMode(PortletMode.VIEW);
+
+				manageMembershipsURL.setParameter(
+					"struts_action", "/sites_admin/edit_site_assignments");
+
+				manageMembershipsURL.setParameter("redirect", currentURL);
+				manageMembershipsURL.setParameter(
+					"groupId", String.valueOf(scopeGroupId));
+				manageMembershipsURL.setParameter(
+					"selPlid", String.valueOf(plid));
+
+				themeDisplay.setURLManageSiteMemberships(manageMembershipsURL);
 			}
 
 			if (!group.isControlPanel() && !group.isUser() &&

@@ -447,6 +447,10 @@ public class ThemeDisplay implements Serializable {
 		return _urlLayoutTemplates;
 	}
 
+	public PortletURL getURLManageSiteMemberships() {
+		return _urlManageSiteMemberships;
+	}
+
 	public PortletURL getURLMyAccount() {
 		return _urlMyAccount;
 	}
@@ -584,6 +588,10 @@ public class ThemeDisplay implements Serializable {
 
 	public boolean isShowLayoutTemplatesIcon() {
 		return _showLayoutTemplatesIcon;
+	}
+
+	public boolean isShowManageSiteMembershipsIcon() {
+		return _showManageSiteMembershipsIcon;
 	}
 
 	public boolean isShowMyAccountIcon() {
@@ -1031,6 +1039,12 @@ public class ThemeDisplay implements Serializable {
 		_showLayoutTemplatesIcon = showLayoutTemplatesIcon;
 	}
 
+	public void setShowManageSiteMembershipsIcon(
+		boolean showManageSiteMembershipsIcon) {
+
+		_showManageSiteMembershipsIcon = showManageSiteMembershipsIcon;
+	}
+
 	public void setShowMyAccountIcon(boolean showMyAccountIcon) {
 		_showMyAccountIcon = showMyAccountIcon;
 	}
@@ -1147,6 +1161,12 @@ public class ThemeDisplay implements Serializable {
 
 	public void setURLLayoutTemplates(String urlLayoutTemplates) {
 		_urlLayoutTemplates = urlLayoutTemplates;
+	}
+
+	public void setURLManageSiteMemberships(
+		PortletURL urlManageSiteMemberships) {
+
+		_urlManageSiteMemberships = urlManageSiteMemberships;
 	}
 
 	public void setURLMyAccount(PortletURL urlMyAccount) {
@@ -1289,6 +1309,7 @@ public class ThemeDisplay implements Serializable {
 	private boolean _showControlPanelIcon;
 	private boolean _showHomeIcon;
 	private boolean _showLayoutTemplatesIcon;
+	private boolean _showManageSiteMembershipsIcon;
 	private boolean _showMyAccountIcon;
 	private boolean _showPagePersonalizationIcon;
 	private boolean _showPageSettingsIcon;
@@ -1319,6 +1340,7 @@ public class ThemeDisplay implements Serializable {
 	private String _urlCurrent = StringPool.BLANK;
 	private String _urlHome = StringPool.BLANK;
 	private String _urlLayoutTemplates = StringPool.BLANK;
+	private transient PortletURL _urlManageSiteMemberships = null;
 	private transient PortletURL _urlMyAccount = null;
 	private transient PortletURL _urlPageSettings = null;
 	private String _urlPortal = StringPool.BLANK;
