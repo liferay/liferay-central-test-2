@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.documentlibrary.search;
 
+import com.liferay.portal.NoSuchRepositoryEntryException;
 import com.liferay.portal.kernel.dao.search.RowChecker;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portal.kernel.repository.model.FileEntry;
@@ -60,24 +61,30 @@ public class EntriesChecker extends RowChecker {
 		try {
 			fileEntry =	DLAppServiceUtil.getFileEntry(entryId);
 		}
-		catch (NoSuchFileEntryException nsfe) {
-			try {
-				fileShortcut = DLAppServiceUtil.getFileShortcut(entryId);
-			}
-			catch (NoSuchFileShortcutException nsfs) {
+		catch (Exception e1) {
+			if (e1 instanceof NoSuchFileEntryException ||
+				e1 instanceof NoSuchRepositoryEntryException) {
+
 				try {
-					folder = DLAppServiceUtil.getFolder(entryId);
+					fileShortcut = DLAppServiceUtil.getFileShortcut(entryId);
 				}
-				catch (Exception e) {
-					return StringPool.BLANK;
+				catch (Exception e2) {
+					if (e2 instanceof NoSuchFileShortcutException) {
+						try {
+							folder = DLAppServiceUtil.getFolder(entryId);
+						}
+						catch (Exception e3) {
+							return StringPool.BLANK;
+						}
+					}
+					else {
+						return StringPool.BLANK;
+					}
 				}
 			}
-			catch (Exception e) {
+			else {
 				return StringPool.BLANK;
 			}
-		}
-		catch (Exception e) {
-			return StringPool.BLANK;
 		}
 
 		boolean showSelect = false;
