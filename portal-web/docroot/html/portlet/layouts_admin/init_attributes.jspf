@@ -219,7 +219,7 @@ request.setAttribute(WebKeys.LAYOUT_LISTER_LIST, layoutList);
 </liferay-portlet:resourceURL>
 
 <%
-if (!portletName.equals(PortletKeys.GROUP_PAGES) && !portletName.equals(PortletKeys.MY_PAGES)) {
+if (!portletName.equals(PortletKeys.GROUP_PAGES) && !portletName.equals(PortletKeys.MY_PAGES) && (renderResponse != null)) {
 	if (organization != null) {
 		EnterpriseAdminUtil.addPortletBreadcrumbEntries(organization, request, renderResponse);
 	}
