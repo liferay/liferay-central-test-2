@@ -351,7 +351,8 @@ public interface AssetTagLocalService {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
-	public void mergeTags(long fromTagId, long toTagId)
+	public void mergeTags(long fromTagId, long toTagId,
+		boolean overrideProperties)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 

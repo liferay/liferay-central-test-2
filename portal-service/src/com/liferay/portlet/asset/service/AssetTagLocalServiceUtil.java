@@ -417,10 +417,11 @@ public class AssetTagLocalServiceUtil {
 		return getService().incrementAssetCount(tagId, classNameId);
 	}
 
-	public static void mergeTags(long fromTagId, long toTagId)
+	public static void mergeTags(long fromTagId, long toTagId,
+		boolean overrideProperties)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		getService().mergeTags(fromTagId, toTagId);
+		getService().mergeTags(fromTagId, toTagId, overrideProperties);
 	}
 
 	public static java.util.List<com.liferay.portlet.asset.model.AssetTag> search(

@@ -405,10 +405,11 @@ public class AssetTagLocalServiceWrapper implements AssetTagLocalService {
 		return _assetTagLocalService.incrementAssetCount(tagId, classNameId);
 	}
 
-	public void mergeTags(long fromTagId, long toTagId)
+	public void mergeTags(long fromTagId, long toTagId,
+		boolean overrideProperties)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		_assetTagLocalService.mergeTags(fromTagId, toTagId);
+		_assetTagLocalService.mergeTags(fromTagId, toTagId, overrideProperties);
 	}
 
 	public java.util.List<com.liferay.portlet.asset.model.AssetTag> search(

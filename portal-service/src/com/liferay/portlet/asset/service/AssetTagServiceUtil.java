@@ -127,10 +127,18 @@ public class AssetTagServiceUtil {
 		return getService().getTagsCount(groupId, name, tagProperties);
 	}
 
-	public static void mergeTags(long fromTagId, long toTagId)
+	public static void mergeMultipleTags(long[] fromTagIds, long toTagId,
+		boolean overrideProperties)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		getService().mergeTags(fromTagId, toTagId);
+		getService().mergeMultipleTags(fromTagIds, toTagId, overrideProperties);
+	}
+
+	public static void mergeTags(long fromTagId, long toTagId,
+		boolean overrideProperties)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		getService().mergeTags(fromTagId, toTagId, overrideProperties);
 	}
 
 	public static com.liferay.portal.kernel.json.JSONArray search(

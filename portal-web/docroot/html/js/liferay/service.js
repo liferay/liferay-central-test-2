@@ -535,6 +535,7 @@ Liferay.Service.registerClass(
 		getTag: true,
 		getTags: true,
 		getTagsCount: true,
+		mergeMultipleTags: true,
 		mergeTags: true,
 		search: true,
 		updateTag: true

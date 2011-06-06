@@ -119,10 +119,19 @@ public class AssetTagServiceWrapper implements AssetTagService {
 		return _assetTagService.getTagsCount(groupId, name, tagProperties);
 	}
 
-	public void mergeTags(long fromTagId, long toTagId)
+	public void mergeMultipleTags(long[] fromTagIds, long toTagId,
+		boolean overrideProperties)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		_assetTagService.mergeTags(fromTagId, toTagId);
+		_assetTagService.mergeMultipleTags(fromTagIds, toTagId,
+			overrideProperties);
+	}
+
+	public void mergeTags(long fromTagId, long toTagId,
+		boolean overrideProperties)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		_assetTagService.mergeTags(fromTagId, toTagId, overrideProperties);
 	}
 
 	public com.liferay.portal.kernel.json.JSONArray search(long groupId,
