@@ -119,9 +119,11 @@ public class LocaleUtil {
 					locale = new Locale(languageId);
 				}
 				else {
-					String languageCode = languageId.substring(0, pos);
-					String countryCode = languageId.substring(
-						pos + 1, languageId.length());
+					String[] languageIdParts = StringUtil.split(
+						languageId, StringPool.UNDERLINE);
+
+					String languageCode = languageIdParts[0];
+					String countryCode = languageIdParts[1];
 
 					if ((Arrays.binarySearch(
 							_isoLanguages, languageCode) < 0) ||
@@ -130,7 +132,18 @@ public class LocaleUtil {
 						return _getDefault();
 					}
 
-					locale = new Locale(languageCode, countryCode);
+					String variant = null;
+
+					if (languageIdParts.length > 2) {
+						variant = languageIdParts[2];
+					}
+
+					if (Validator.isNotNull(variant)) {
+						locale = new Locale(languageCode, countryCode, variant);
+					}
+					else {
+						locale = new Locale(languageCode, countryCode);
+					}
 				}
 
 				_locales.put(languageId, locale);
@@ -215,6 +228,11 @@ public class LocaleUtil {
 		if (Validator.isNotNull(locale.getCountry())) {
 			languageId = languageId.concat(StringPool.UNDERLINE);
 			languageId = languageId.concat(locale.getCountry());
+		}
+
+		if (Validator.isNotNull(locale.getVariant())) {
+			languageId = languageId.concat(StringPool.UNDERLINE);
+			languageId = languageId.concat(locale.getVariant());
 		}
 
 		return languageId;

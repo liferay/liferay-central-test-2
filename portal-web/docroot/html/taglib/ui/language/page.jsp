@@ -138,7 +138,7 @@ for (int i = 0; i < locales.length; i++) {
 						image='<%= "../language/" + LocaleUtil.toLanguageId(locales[i]) %>'
 						lang="<%= LocaleUtil.toW3cLanguageId(locales[i]) %>"
 						message="<%= locales[i].getDisplayName(locales[i]) %>"
-						url='<%= formAction + "&" + name + "=" + locales[i].getLanguage() + "_" + locales[i].getCountry() %>'
+						url='<%= formAction + "&" + name + "=" + LocaleUtil.toLanguageId(locales[i]) %>'
 					/>
 				</c:otherwise>
 			</c:choose>
