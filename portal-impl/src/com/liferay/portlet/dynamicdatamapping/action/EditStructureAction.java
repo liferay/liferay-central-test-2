@@ -208,7 +208,8 @@ public class EditStructureAction extends PortletAction {
 			actionRequest, "autoStructureKey");
 		Map<Locale, String> nameMap = LocalizationUtil.getLocalizationMap(
 			actionRequest, "name");
-		String description = ParamUtil.getString(actionRequest, "description");
+		Map<Locale, String> descriptionMap =
+			LocalizationUtil.getLocalizationMap(actionRequest, "description");
 		String xsd = ParamUtil.getString(actionRequest, "script");
 		String storageType = ParamUtil.getString(actionRequest, "storageType");
 
@@ -220,11 +221,11 @@ public class EditStructureAction extends PortletAction {
 		if (cmd.equals(Constants.ADD)) {
 			structure = DDMStructureServiceUtil.addStructure(
 				groupId, classNameId, structureKey, autoStructureKey, nameMap,
-				description, xsd, storageType, serviceContext);
+				descriptionMap, xsd, storageType, serviceContext);
 		}
 		else if (cmd.equals(Constants.UPDATE)) {
 			structure = DDMStructureServiceUtil.updateStructure(
-				groupId, structureKey, nameMap, description, xsd,
+				groupId, structureKey, nameMap, descriptionMap, xsd,
 				serviceContext);
 		}
 

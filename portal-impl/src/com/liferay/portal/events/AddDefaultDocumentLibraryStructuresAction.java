@@ -88,10 +88,14 @@ public class AddDefaultDocumentLibraryStructuresAction extends SimpleAction {
 
 			nameMap.put(LocaleUtil.getDefault(), name);
 
+			HashMap<Locale, String> descriptionMap = new HashMap<Locale, String>();
+
+			descriptionMap.put(LocaleUtil.getDefault(), description);
+
 			DDMStructureLocalServiceUtil.addStructure(
 				userId, groupId,
 				PortalUtil.getClassNameId(DLDocumentMetadataSet.class),
-				StringPool.BLANK, true, nameMap, description, xsd, "xml",
+				StringPool.BLANK, true, nameMap, descriptionMap, xsd, "xml",
 				serviceContext);
 		}
 	}
