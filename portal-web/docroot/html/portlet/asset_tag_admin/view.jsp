@@ -54,10 +54,8 @@
 						message="actions"
 						showWhenSingleIcon="true"
 					>
-
 						<liferay-ui:icon
 							id="deleteSelectedTags"
-							image="delete"
 							message="delete"
 							url="javascript:;"
 						/>
@@ -68,7 +66,6 @@
 							message="merge"
 							url="javascript:;"
 						/>
-
 					</liferay-ui:icon-menu>
 				</div>
 
