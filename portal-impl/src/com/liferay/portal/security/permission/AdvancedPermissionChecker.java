@@ -215,13 +215,34 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 
 				roles.addAll(userGroupGroupRoles);
 
-				if ((group != null) &&
-					((group.isOrganization() &&
-						userOrgGroups.contains(group)) ||
-					 (group.isSite() && userGroups.contains(group)))) {
+				if (group != null) {
+					if (group.isOrganization() &&
+						userOrgGroups.contains(group)) {
 
-					addRequiredMemberRole(group, roles);
-					addTeamRoles(userId, group, roles);
+						Role organizationUserRole =
+							RoleLocalServiceUtil.getRole(
+								group.getCompanyId(),
+								RoleConstants.ORGANIZATION_USER);
+
+						roles.add(organizationUserRole);
+					}
+
+					if (group.isSite() &&
+						(userGroups.contains(group) ||
+							userOrgGroups.contains(group))) {
+
+						Role siteMemberRole = RoleLocalServiceUtil.getRole(
+							group.getCompanyId(), RoleConstants.SITE_MEMBER);
+
+						roles.add(siteMemberRole);
+					}
+
+					if ((group.isOrganization() &&
+							userOrgGroups.contains(group)) ||
+						 (group.isSite() && userGroups.contains(group))) {
+
+						addTeamRoles(userId, group, roles);
+					}
 				}
 			}
 			else {
@@ -435,24 +456,6 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 			_log.error(e, e);
 
 			return false;
-		}
-	}
-
-	protected void addRequiredMemberRole(Group group, List<Role> roles)
-		throws Exception {
-
-		if (group.isOrganization()) {
-			Role organizationUserRole = RoleLocalServiceUtil.getRole(
-				group.getCompanyId(), RoleConstants.ORGANIZATION_USER);
-
-			roles.add(organizationUserRole);
-		}
-
-		if (group.isSite()) {
-			Role siteMemberRole = RoleLocalServiceUtil.getRole(
-				group.getCompanyId(), RoleConstants.SITE_MEMBER);
-
-			roles.add(siteMemberRole);
 		}
 	}
 
