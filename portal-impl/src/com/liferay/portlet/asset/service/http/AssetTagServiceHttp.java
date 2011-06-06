@@ -524,16 +524,16 @@ public class AssetTagServiceHttp {
 		}
 	}
 
-	public static void mergeMultipleTags(HttpPrincipal httpPrincipal,
-		long[] fromTagIds, long toTagId, boolean overrideProperties)
+	public static void mergeTags(HttpPrincipal httpPrincipal, long fromTagId,
+		long toTagId, boolean overrideProperties)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(AssetTagServiceUtil.class.getName(),
-					"mergeMultipleTags", _mergeMultipleTagsParameterTypes14);
+					"mergeTags", _mergeTagsParameterTypes14);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
-					fromTagIds, toTagId, overrideProperties);
+					fromTagId, toTagId, overrideProperties);
 
 			try {
 				TunnelUtil.invoke(httpPrincipal, methodHandler);
@@ -557,8 +557,8 @@ public class AssetTagServiceHttp {
 		}
 	}
 
-	public static void mergeTags(HttpPrincipal httpPrincipal, long fromTagId,
-		long toTagId, boolean overrideProperties)
+	public static void mergeTags(HttpPrincipal httpPrincipal,
+		long[] fromTagIds, long toTagId, boolean overrideProperties)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
@@ -566,7 +566,7 @@ public class AssetTagServiceHttp {
 					"mergeTags", _mergeTagsParameterTypes15);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
-					fromTagId, toTagId, overrideProperties);
+					fromTagIds, toTagId, overrideProperties);
 
 			try {
 				TunnelUtil.invoke(httpPrincipal, methodHandler);
@@ -709,11 +709,11 @@ public class AssetTagServiceHttp {
 	private static final Class<?>[] _getTagsCountParameterTypes13 = new Class[] {
 			long.class, java.lang.String.class, java.lang.String[].class
 		};
-	private static final Class<?>[] _mergeMultipleTagsParameterTypes14 = new Class[] {
-			long[].class, long.class, boolean.class
+	private static final Class<?>[] _mergeTagsParameterTypes14 = new Class[] {
+			long.class, long.class, boolean.class
 		};
 	private static final Class<?>[] _mergeTagsParameterTypes15 = new Class[] {
-			long.class, long.class, boolean.class
+			long[].class, long.class, boolean.class
 		};
 	private static final Class<?>[] _searchParameterTypes16 = new Class[] {
 			long.class, java.lang.String.class, java.lang.String[].class,

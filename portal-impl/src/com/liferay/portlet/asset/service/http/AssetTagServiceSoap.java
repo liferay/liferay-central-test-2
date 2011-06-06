@@ -274,11 +274,10 @@ public class AssetTagServiceSoap {
 		}
 	}
 
-	public static void mergeMultipleTags(long[] fromTagIds, long toTagId,
+	public static void mergeTags(long fromTagId, long toTagId,
 		boolean overrideProperties) throws RemoteException {
 		try {
-			AssetTagServiceUtil.mergeMultipleTags(fromTagIds, toTagId,
-				overrideProperties);
+			AssetTagServiceUtil.mergeTags(fromTagId, toTagId, overrideProperties);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -287,10 +286,11 @@ public class AssetTagServiceSoap {
 		}
 	}
 
-	public static void mergeTags(long fromTagId, long toTagId,
+	public static void mergeTags(long[] fromTagIds, long toTagId,
 		boolean overrideProperties) throws RemoteException {
 		try {
-			AssetTagServiceUtil.mergeTags(fromTagId, toTagId, overrideProperties);
+			AssetTagServiceUtil.mergeTags(fromTagIds, toTagId,
+				overrideProperties);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
