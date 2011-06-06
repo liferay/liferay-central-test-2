@@ -41,8 +41,40 @@ public class DDMStructureImpl
 	public DDMStructureImpl() {
 	}
 
-	public Map<String, String> getFieldChildMapByAttribute(
-			String fieldName, String attributeName, String attributeValue) {
+	public String getFieldDataType(String fieldName) {
+		return getFieldProperty(fieldName, "dataType");
+	}
+
+	public boolean getFieldDisplayChildLabelAsValue(String fieldName) {
+		return GetterUtil.getBoolean(
+			getFieldProperty(fieldName, "displayChildLabelAsValue"));
+	}
+
+	public String getFieldLabel(String fieldName) {
+		return GetterUtil.getString(
+			getFieldProperty(fieldName, "label"), fieldName);
+	}
+
+	public Set<String> getFieldNames() {
+		Map<String, Map<String, String>> fieldsMap = _getFieldsMap();
+
+		return fieldsMap.keySet();
+	}
+
+	public String getFieldProperty(String fieldName, String property) {
+		Map<String, Map<String, String>> fieldsMap = _getFieldsMap();
+
+		Map<String, String> field = fieldsMap.get(fieldName);
+
+		return field.get(property);
+	}
+
+	public boolean getFieldRequired(String fieldName) {
+		return GetterUtil.getBoolean(getFieldProperty(fieldName, "required"));
+	}
+
+	public Map<String, String> getFields(
+		String fieldName, String attributeName, String attributeValue) {
 
 		try {
 			StringBundler sb = new StringBundler(7);
@@ -70,40 +102,8 @@ public class DDMStructureImpl
 		return null;
 	}
 
-	public String getFieldDataType(String fieldName) {
-		return getFieldProperty(fieldName, "dataType");
-	}
-
-	public boolean getFieldDisplayChildLabelAsValue(String fieldName) {
-		return GetterUtil.getBoolean(
-			getFieldProperty(fieldName, "displayChildLabelAsValue"));
-	}
-
-	public String getFieldLabel(String fieldName) {
-		return GetterUtil.getString(
-			getFieldProperty(fieldName, "label"), fieldName);
-	}
-
-	public Set<String> getFieldNames() {
-		Map<String, Map<String, String>> fieldsMap = _getFieldsMap();
-
-		return fieldsMap.keySet();
-	}
-
 	public Map<String, Map<String, String>> getFieldsMap() {
 		return _getFieldsMap();
-	}
-
-	public String getFieldProperty(String fieldName, String property) {
-		Map<String, Map<String, String>> fieldsMap = _getFieldsMap();
-
-		Map<String, String> field = fieldsMap.get(fieldName);
-
-		return field.get(property);
-	}
-
-	public boolean getFieldRequired(String fieldName) {
-		return GetterUtil.getBoolean(getFieldProperty(fieldName, "required"));
 	}
 
 	public String getFieldType(String fieldName) {
@@ -158,7 +158,7 @@ public class DDMStructureImpl
 
 		return field;
 	}
-
+	
 	private Map<String, Map<String, String>> _getFieldsMap() {
 		if (_fieldsMap == null) {
 			synchronized (this) {
@@ -190,7 +190,6 @@ public class DDMStructureImpl
 	private static Log _log = LogFactoryUtil.getLog(DDMStructureImpl.class);
 
 	private Document _document;
-
 	private Map<String, Map<String, String>> _fieldsMap;
 
 }

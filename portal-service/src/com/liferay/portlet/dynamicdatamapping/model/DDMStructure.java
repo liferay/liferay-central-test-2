@@ -29,10 +29,6 @@ public interface DDMStructure extends DDMStructureModel {
 	 *
 	 * Never modify this interface directly. Add methods to {@link com.liferay.portlet.dynamicdatamapping.model.impl.DDMStructureImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-	public java.util.Map<java.lang.String, java.lang.String> getFieldChildMapByAttribute(
-		java.lang.String fieldName, java.lang.String attributeName,
-		java.lang.String attributeValue);
-
 	public java.lang.String getFieldDataType(java.lang.String fieldName);
 
 	public boolean getFieldDisplayChildLabelAsValue(java.lang.String fieldName);
@@ -41,12 +37,16 @@ public interface DDMStructure extends DDMStructureModel {
 
 	public java.util.Set<java.lang.String> getFieldNames();
 
-	public java.util.Map<java.lang.String, java.util.Map<java.lang.String, java.lang.String>> getFieldsMap();
-
 	public java.lang.String getFieldProperty(java.lang.String fieldName,
 		java.lang.String property);
 
 	public boolean getFieldRequired(java.lang.String fieldName);
+
+	public java.util.Map<java.lang.String, java.lang.String> getFields(
+		java.lang.String fieldName, java.lang.String attributeName,
+		java.lang.String attributeValue);
+
+	public java.util.Map<java.lang.String, java.util.Map<java.lang.String, java.lang.String>> getFieldsMap();
 
 	public java.lang.String getFieldType(java.lang.String fieldName);
 

@@ -19,7 +19,7 @@
 <%
 DDLRecordSet recordSet = (DDLRecordSet)request.getAttribute(WebKeys.DYNAMIC_DATA_LISTS_RECORD_SET);
 
-DDMStructure structure = recordSet.getDDMStructure();
+DDMStructure ddmStructure = recordSet.getDDMStructure();
 
 long detailDDMTemplateId = ParamUtil.getLong(request, "detailDDMTemplateId");
 
@@ -97,11 +97,11 @@ for (int i = 0; i < results.size(); i++) {
 
 			value = String.valueOf(field.getValue());
 
-			if (structure.getFieldDisplayChildLabelAsValue(name)) {
-				Map<String, String> childMap = structure.getFieldChildMapByAttribute(name, DDMFieldConstants.VALUE, value);
+			if (ddmStructure.getFieldDisplayChildLabelAsValue(name)) {
+				Map<String, String> childFields = ddmStructure.getFields(name, DDMFieldConstants.VALUE, value);
 
-				if (childMap != null) {
-					value = childMap.get(DDMFieldConstants.LABEL);
+				if (childFields != null) {
+					value = childFields.get(DDMFieldConstants.LABEL);
 				}
 			}
 		}
