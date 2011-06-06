@@ -140,20 +140,16 @@ String[][] categorySections = {mainSections};
 						},
 						{
 							handler: function(event) {
-								if (!permissionPopUp) {
-									permissionPopUp = Liferay.Util._openWindow(
-										{
-											dialog: {
-												width: 700
-											},
-											title: '<liferay-ui:message key="permissions" />',
-											uri: '<%= permissionURL %>'
-										}
-									);
-								}
-								else {
-									permissionPopUp.iframe.node.get('contentWindow.location').reload(true);
-								}
+								Liferay.Util.openWindow(
+									{
+										dialog: {
+											width: 700
+										},
+										id: '<portlet:namespace /><%= selPlid %>_permissions',
+										title: '<liferay-ui:message key="permissions" />',
+										uri: '<%= permissionURL %>'
+									}
+								);
 							},
 							icon: 'key',
 							label: '<liferay-ui:message key="permissions" />'
