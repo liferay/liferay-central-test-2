@@ -1775,23 +1775,24 @@ public class ServicePreAction extends Action {
 
 				themeDisplay.setShowManageSiteMembershipsIcon(true);
 
-				PortletURL manageMembershipsURL = new PortletURLImpl(
+				PortletURL manageSiteMembershipsURL = new PortletURLImpl(
 					request, PortletKeys.SITE_MEMBERSHIPS_ADMIN,
 					controlPanelPlid, PortletRequest.RENDER_PHASE);
 
-				manageMembershipsURL.setWindowState(LiferayWindowState.POP_UP);
-				manageMembershipsURL.setPortletMode(PortletMode.VIEW);
+				manageSiteMembershipsURL.setWindowState(
+					LiferayWindowState.POP_UP);
+				manageSiteMembershipsURL.setPortletMode(PortletMode.VIEW);
 
-				manageMembershipsURL.setParameter(
+				manageSiteMembershipsURL.setParameter(
 					"struts_action", "/sites_admin/edit_site_assignments");
-
-				manageMembershipsURL.setParameter("redirect", currentURL);
-				manageMembershipsURL.setParameter(
+				manageSiteMembershipsURL.setParameter("redirect", currentURL);
+				manageSiteMembershipsURL.setParameter(
 					"groupId", String.valueOf(scopeGroupId));
-				manageMembershipsURL.setParameter(
+				manageSiteMembershipsURL.setParameter(
 					"selPlid", String.valueOf(plid));
 
-				themeDisplay.setURLManageSiteMemberships(manageMembershipsURL);
+				themeDisplay.setURLManageSiteMemberships(
+					manageSiteMembershipsURL);
 			}
 
 			if (!group.isControlPanel() && !group.isUser() &&
