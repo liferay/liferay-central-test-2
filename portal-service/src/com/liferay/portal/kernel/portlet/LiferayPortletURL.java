@@ -35,14 +35,14 @@ public interface LiferayPortletURL
 	 * Adds a parameter that is included in the friendly URL path and does not
 	 * need to appear in the query string.
 	 *
-	 * @param name the name of the parameter that is included in the path
+	 * @param name the name of the parameter
 	 */
 	public void addParameterIncludedInPath(String name);
 
 	/**
-	 * Gets the lifecycle of the portlet this URL points to.
+	 * Gets the portlet lifecycle of this URL's target portlet.
 	 *
-	 * @return the portlet lifecycle
+	 * @return the portlet lifecycle of this URL's target portlet
 	 * @see    #setLifecycle(String)
 	 */
 	public String getLifecycle();
@@ -50,15 +50,15 @@ public interface LiferayPortletURL
 	/**
 	 * Gets the first value of the URL parameter.
 	 *
-	 * @param  name the name of the URL parameter to get the value of
+	 * @param  name the name of the URL parameter
 	 * @return the first value of the URL parameter
 	 */
 	public String getParameter(String name);
 
 	/**
-	 * Gets the ID of the portlet this URL points to.
+	 * Gets the ID of this URL's target portlet.
 	 *
-	 * @return the ID of the portlet this URL points to
+	 * @return the ID of this URL's target portlet
 	 */
 	public String getPortletId();
 
@@ -76,9 +76,9 @@ public interface LiferayPortletURL
 	public Map<String, String> getReservedParameterMap();
 
 	/**
-	 * Gets the ID of the resource this URL points to.
+	 * Gets the ID of this URL's target resource.
 	 *
-	 * @return the ID of the resource this URL points to
+	 * @return the ID of this URL's target resource
 	 */
 	public String getResourceID();
 
@@ -138,7 +138,7 @@ public interface LiferayPortletURL
 	public boolean isSecure();
 
 	/**
-	 * Sets the lifecycle of the portlet this URL points to.
+	 * Sets the portlet lifecycle of this URL's target portlet.
 	 *
 	 * <p>
 	 * Valid lifecycles are:
@@ -156,7 +156,7 @@ public interface LiferayPortletURL
 	 * </li>
 	 * </ul>
 	 *
-	 * @param lifecycle the lifecycle of the portlet this URL points to
+	 * @param lifecycle the portlet lifecycle
 	 */
 	public void setLifecycle(String lifecycle);
 
@@ -176,6 +176,7 @@ public interface LiferayPortletURL
 	 * Sets the URL parameter the values.
 	 *
 	 * @param name the name of the URL parameter
+	 * @param values the values of the URL parameter
 	 * @param append whether the new values should be appended to any existing
 	 *        values for the parameter. If <code>append</code> is
 	 *        <code>false</code> any existing values will be overwritten with
@@ -183,6 +184,13 @@ public interface LiferayPortletURL
 	 */
 	public void setParameter(String name, String[] values, boolean append);
 
+	/**
+	 * Returns the parameters that are included in the friendly URL path and do
+	 * not need to appear in the query string.
+	 *
+	 * @return the names of the parameters that are included in the friendly URL
+	 *         path and do not need to appear in the query string
+	 */
 	public Set<String> getParametersIncludedInPath();
 
 	/**
@@ -227,6 +235,18 @@ public interface LiferayPortletURL
 	 */
 	public void setDoAsUserId(long doAsUserId);
 
+	/**
+	 * Sets the language ID of the user to impersonate. This will only have an
+	 * effect when a user is being impersonated via {@link
+	 * #setDoAsUserId(long)}.
+	 *
+	 * <p>
+	 * The language set here will override the impersonated user's default
+	 * language.
+	 * </p>
+	 *
+	 * @param doAsUserLanguageId the language ID of the user to impersonate
+	 */
 	public void setDoAsUserLanguageId(String doAsUserLanguageId);
 
 	/**

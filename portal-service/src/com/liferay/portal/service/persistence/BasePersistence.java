@@ -67,9 +67,9 @@ public interface BasePersistence<T extends BaseModel<T>> {
 	public void clearCache(T model);
 
 	/**
-	 * Counts the number of rows that match the dynamic query.
+	 * Returns the number of rows that match the dynamic query.
 	 *
-	 * @param  dynamicQuery the dynamic query to search with
+	 * @param  dynamicQuery the dynamic query
 	 * @return the number of rows that match the dynamic query
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -77,10 +77,10 @@ public interface BasePersistence<T extends BaseModel<T>> {
 		throws SystemException;
 
 	/**
-	 * Finds the model instance with the primary key or returns
+	 * Returns the model instance with the primary key or returns
 	 * <code>null</code> if it could not be found.
 	 *
-	 * @param  primaryKey the primary key of the model instance to find
+	 * @param  primaryKey the primary key of the model instance
 	 * @return the model instance, or <code>null</code> if an instance of this
 	 *         model with the primary key could not be found
 	 * @throws SystemException if the primary key is <code>null</code>, or if a
@@ -89,10 +89,10 @@ public interface BasePersistence<T extends BaseModel<T>> {
 	public T fetchByPrimaryKey(Serializable primaryKey) throws SystemException;
 
 	/**
-	 * Finds the model instance with the primary key or throws a {@link
+	 * Returns the model instance with the primary key or throws a {@link
 	 * NoSuchModelException} if it could not be found.
 	 *
-	 * @param  primaryKey the primary key of the model instance to find
+	 * @param  primaryKey the primary key of the model instance
 	 * @return the model instance
 	 * @throws NoSuchModelException if an instance of this model with the
 	 *         primary key could not be found
@@ -105,7 +105,7 @@ public interface BasePersistence<T extends BaseModel<T>> {
 	/**
 	 * Performs a dynamic query on the database and returns the matching rows.
 	 *
-	 * @param  dynamicQuery the dynamic query to search with
+	 * @param  dynamicQuery the dynamic query
 	 * @return the matching rows
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -127,10 +127,9 @@ public interface BasePersistence<T extends BaseModel<T>> {
 	 * result set.
 	 * </p>
 	 *
-	 * @param  dynamicQuery the dynamic query to search with
-	 * @param  start the lower bound of the range of model instances to return
-	 * @param  end the upper bound of the range of model instances to return
-	 *         (not inclusive)
+	 * @param  dynamicQuery the dynamic query
+	 * @param  start the lower bound of the range of matching rows
+	 * @param  end the upper bound of the range of matching rows (not inclusive)
 	 * @return the range of matching rows
 	 * @throws SystemException if a system exception occurred
 	 * @see    com.liferay.portal.kernel.dao.orm.QueryUtil#list(
@@ -156,10 +155,9 @@ public interface BasePersistence<T extends BaseModel<T>> {
 	 * result set.
 	 * </p>
 	 *
-	 * @param  dynamicQuery the dynamic query to search with
-	 * @param  start the lower bound of the range of model instances to return
-	 * @param  end the upper bound of the range of model instances to return
-	 *         (not inclusive)
+	 * @param  dynamicQuery the dynamic query
+	 * @param  start the lower bound of the range of matching rows
+	 * @param  end the upper bound of the range of matching rows (not inclusive)
 	 * @param  orderByComparator the comparator to order the results by
 	 * @return the ordered range of matching rows
 	 * @throws SystemException if a system exception occurred
@@ -171,7 +169,7 @@ public interface BasePersistence<T extends BaseModel<T>> {
 		throws SystemException;
 
 	/**
-	 * Gets the data source for this model.
+	 * Returns the data source for this model.
 	 *
 	 * @return the data source for this model
 	 * @see    #setDataSource(DataSource)
@@ -179,7 +177,7 @@ public interface BasePersistence<T extends BaseModel<T>> {
 	public DataSource getDataSource();
 
 	/**
-	 * Gets the listeners registered for this model.
+	 * Returns the listeners registered for this model.
 	 *
 	 * @return the listeners registered for this model
 	 * @see    #registerListener(ModelListener)
