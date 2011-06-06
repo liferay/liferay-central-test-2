@@ -115,8 +115,7 @@ AUI().add(
 
 								var newTreeNode = {
 									after: {
-										check: A.bind(instance._onCheckboxCheck, instance),
-										uncheck: A.bind(instance._onCheckboxUncheck, instance)
+										checkedChange: A.bind(instance._onCheckboxCheckedChange, instance)
 									},
 									checked: checked,
 									id: treeId,
@@ -244,6 +243,17 @@ AUI().add(
 						entry[matchKey] = treeNode.get('label');
 
 						instance.entries.add(entry);
+					},
+
+					_onCheckboxCheckedChange: function(event) {
+						var intance = this;
+
+						if (event.newVal) {
+							intance._onCheckboxCheck(event);
+						}
+						else {
+							intance._onCheckboxUncheck(event);
+						}
 					},
 
 					_onCheckboxUncheck: function(event) {
