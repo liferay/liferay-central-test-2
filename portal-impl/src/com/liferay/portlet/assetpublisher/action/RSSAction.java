@@ -264,7 +264,7 @@ public class RSSAction extends PortletAction {
 		boolean anyAssetType = GetterUtil.getBoolean(
 			preferences.getValue("anyAssetType", Boolean.TRUE.toString()));
 		String assetLinkBehavior = preferences.getValue(
-			"assetLinkBehaviour", "showFullContent");
+			"assetLinkBehavior", "showFullContent");
 		boolean excludeZeroViewCount = GetterUtil.getBoolean(
 			preferences.getValue("excludeZeroViewCount", "0"));
 
