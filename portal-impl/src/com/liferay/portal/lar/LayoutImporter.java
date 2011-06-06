@@ -137,10 +137,10 @@ public class LayoutImporter {
 			parameterMap, PortletDataHandlerKeys.CATEGORIES);
 		boolean importPermissions = MapUtil.getBoolean(
 			parameterMap, PortletDataHandlerKeys.PERMISSIONS);
+		boolean importPublicLayoutPermissions = MapUtil.getBoolean(
+			parameterMap, PortletDataHandlerKeys.PUBLIC_LAYOUT_PERMISSIONS);
 		boolean importUserPermissions = MapUtil.getBoolean(
-			parameterMap, PortletDataHandlerKeys.PERMISSIONS);
-		boolean addPublicLayoutPermission = MapUtil.getBoolean(
-			parameterMap, PortletDataHandlerKeys.ADD_PUBLIC_LAYOUT_PERMISSIONS);
+			parameterMap, PortletDataHandlerKeys.USER_PERMISSIONS);
 		boolean importPortletData = MapUtil.getBoolean(
 			parameterMap, PortletDataHandlerKeys.PORTLET_DATA);
 		boolean importPortletSetup = MapUtil.getBoolean(
@@ -391,8 +391,8 @@ public class LayoutImporter {
 				portletDataContext, user, layoutCache, previousLayouts,
 				newLayouts, newLayoutsMap, newLayoutIds, portletsMergeMode,
 				themeId, colorSchemeId, layoutsImportMode, privateLayout,
-				importPermissions, importUserPermissions,
-				addPublicLayoutPermission, importThemeSettings,
+				importPermissions, importPublicLayoutPermissions,
+				importUserPermissions, importThemeSettings,
 				rootElement, layoutElement);
 		}
 
@@ -739,9 +739,9 @@ public class LayoutImporter {
 			Set<Long> newLayoutIds, String portletsMergeMode, String themeId,
 			String colorSchemeId, String layoutsImportMode,
 			boolean privateLayout, boolean importPermissions,
-			boolean importUserPermissions, boolean addPublicLayoutPermission,
-			boolean importThemeSettings, Element rootElement,
-			Element layoutElement)
+			boolean importPublicLayoutPermissions,
+			boolean importUserPermissions, boolean importThemeSettings,
+			Element rootElement, Element layoutElement)
 		throws Exception {
 
 		long groupId = portletDataContext.getGroupId();
@@ -892,8 +892,8 @@ public class LayoutImporter {
 				portletDataContext, user, layoutCache, previousLayouts,
 				newLayouts, newLayoutsMap, newLayoutIds, portletsMergeMode,
 				themeId, colorSchemeId, layoutsImportMode, privateLayout,
-				importPermissions, importUserPermissions,
-				addPublicLayoutPermission, importThemeSettings,
+				importPermissions, importPublicLayoutPermissions,
+				importUserPermissions, importThemeSettings,
 				rootElement, (Element)parentLayoutNode);
 
 			Layout parentLayout = newLayoutsMap.get(parentLayoutId);
@@ -949,7 +949,7 @@ public class LayoutImporter {
 						newLayouts, newLayoutsMap, newLayoutIds,
 						portletsMergeMode, themeId, colorSchemeId,
 						layoutsImportMode, privateLayout, importPermissions,
-						importUserPermissions, addPublicLayoutPermission,
+						importPublicLayoutPermissions, importUserPermissions,
 						importThemeSettings, rootElement,
 						(Element)linkedLayoutNode);
 
@@ -1041,7 +1041,7 @@ public class LayoutImporter {
 				importUserPermissions);
 		}
 
-		if (addPublicLayoutPermission) {
+		if (importPublicLayoutPermissions) {
 			String resourceName = Layout.class.getName();
 			String resourcePrimKey = String.valueOf(importedLayout.getPlid());
 
@@ -1054,14 +1054,14 @@ public class LayoutImporter {
 					ResourceConstants.SCOPE_INDIVIDUAL, resourcePrimKey, false);
 
 				PermissionLocalServiceUtil.setRolePermissions(
-					guestRole.getRoleId(), new String[]{ActionKeys.VIEW},
+					guestRole.getRoleId(), new String[] {ActionKeys.VIEW},
 					resource.getResourceId());
 			}
 			else if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 6) {
 				ResourcePermissionLocalServiceUtil.setResourcePermissions(
 					importedLayout.getCompanyId(), resourceName,
 					ResourceConstants.SCOPE_INDIVIDUAL, resourcePrimKey,
-					guestRole.getRoleId(), new String[]{ActionKeys.VIEW});
+					guestRole.getRoleId(), new String[] {ActionKeys.VIEW});
 			}
 			else {
 				Resource resource = layoutCache.getResource(
@@ -1069,7 +1069,7 @@ public class LayoutImporter {
 					ResourceConstants.SCOPE_INDIVIDUAL, resourcePrimKey, false);
 
 				PermissionLocalServiceUtil.setGroupPermissions(
-					groupId, new String[]{ActionKeys.VIEW},
+					groupId, new String[] {ActionKeys.VIEW},
 					resource.getResourceId());
 			}
 		}

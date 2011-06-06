@@ -104,16 +104,17 @@ public class SitesUtil {
 
 	public static void copyLayoutSet(
 			LayoutSet sourceLayoutSet, LayoutSet targetLayoutSet,
-			boolean addPublicLayoutPermission, ServiceContext serviceContext)
+			boolean importPublicLayoutPermissions,
+			ServiceContext serviceContext)
 		throws Exception {
 
 		Map<String, String[]> parameterMap = getLayoutSetPrototypeParameters(
 			serviceContext);
 
-		if (addPublicLayoutPermission) {
+		if (importPublicLayoutPermissions) {
 			parameterMap.put(
-				PortletDataHandlerKeys.ADD_PUBLIC_LAYOUT_PERMISSIONS,
-				new String[]{Boolean.TRUE.toString()});
+				PortletDataHandlerKeys.PUBLIC_LAYOUT_PERMISSIONS,
+				new String[] {Boolean.TRUE.toString()});
 		}
 
 		File file = LayoutLocalServiceUtil.exportLayoutsAsFile(
