@@ -7,6 +7,11 @@ import ${beanLocatorUtil};
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdate;
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.InfrastructureUtil;
 
 import javax.sql.DataSource;
@@ -111,7 +116,22 @@ import javax.sql.DataSource;
 		public ${entity.name} add${entity.name}(${entity.name} ${entity.varName}) throws ${stringUtil.merge(serviceBaseExceptions)} {
 			${entity.varName}.setNew(true);
 
-			return ${entity.varName}Persistence.update(${entity.varName}, false);
+			${entity.varName} = ${entity.varName}Persistence.update(${entity.varName}, false);
+
+			Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+			if (indexer != null) {
+				try {
+					indexer.reindex(${entity.varName});
+				}
+				catch (SearchException se) {
+					if (_log.isWarnEnabled()) {
+						_log.warn(se, se);
+					}
+				}
+			}
+
+			return ${entity.varName};
 		}
 
 		/**
@@ -141,7 +161,20 @@ import javax.sql.DataSource;
 		</#list>
 		 */
 		public void delete${entity.name}(${entity.PKClassName} ${entity.PKVarName}) throws ${stringUtil.merge(serviceBaseExceptions)} {
-			${entity.varName}Persistence.remove(${entity.PKVarName});
+			${entity.name} ${entity.varName} = ${entity.varName}Persistence.remove(${entity.PKVarName});
+
+			Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+			if (indexer != null) {
+				try {
+					indexer.delete(${entity.varName});
+				}
+				catch (SearchException se) {
+					if (_log.isWarnEnabled()) {
+						_log.warn(se, se);
+					}
+				}
+			}
 		}
 
 		<#assign serviceBaseExceptions = serviceBuilder.getServiceBaseExceptions(methods, "delete" + entity.name, [packagePath + ".model." + entity.name], ["SystemException"])>
@@ -160,6 +193,19 @@ import javax.sql.DataSource;
 		 */
 		public void delete${entity.name}(${entity.name} ${entity.varName}) throws ${stringUtil.merge(serviceBaseExceptions)} {
 			${entity.varName}Persistence.remove(${entity.varName});
+
+			Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+			if (indexer != null) {
+				try {
+					indexer.delete(${entity.varName});
+				}
+				catch (SearchException se) {
+					if (_log.isWarnEnabled()) {
+						_log.warn(se, se);
+					}
+				}
+			}
 		}
 
 		/**
@@ -307,9 +353,7 @@ import javax.sql.DataSource;
 		</#list>
 		 */
 		public ${entity.name} update${entity.name}(${entity.name} ${entity.varName}) throws ${stringUtil.merge(serviceBaseExceptions)} {
-			${entity.varName}.setNew(false);
-
-			return ${entity.varName}Persistence.update(${entity.varName}, true);
+			return update${entity.name}(${entity.varName}, true);
 		}
 
 		/**
@@ -329,7 +373,22 @@ import javax.sql.DataSource;
 		public ${entity.name} update${entity.name}(${entity.name} ${entity.varName}, boolean merge) throws ${stringUtil.merge(serviceBaseExceptions)} {
 			${entity.varName}.setNew(false);
 
-			return ${entity.varName}Persistence.update(${entity.varName}, merge);
+			${entity.varName} = ${entity.varName}Persistence.update(${entity.varName}, merge);
+
+			Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+			if (indexer != null) {
+				try {
+					indexer.reindex(${entity.varName});
+				}
+				catch (SearchException se) {
+					if (_log.isWarnEnabled()) {
+						_log.warn(se, se);
+					}
+				}
+			}
+
+			return ${entity.varName};
 		}
 	</#if>
 
@@ -433,6 +492,14 @@ import javax.sql.DataSource;
 		_beanIdentifier = beanIdentifier;
 	}
 
+	protected Class<?> getModelClass() {
+		return ${entity.name}.class;
+	}
+
+	protected String getModelClassName() {
+		return ${entity.name}.class.getName();
+	}
+
 	/**
 	 * Performs an SQL query.
 	 *
@@ -476,6 +543,10 @@ import javax.sql.DataSource;
 			protected ${tempEntity.name}Finder ${tempEntity.varName}Finder;
 		</#if>
 	</#list>
+
+	<#if (sessionTypeName == "Local") && entity.hasColumns()>
+		private static Log _log = LogFactoryUtil.getLog(${entity.name}${sessionTypeName}ServiceBaseImpl.class);
+	</#if>
 
 	private String _beanIdentifier;
 
