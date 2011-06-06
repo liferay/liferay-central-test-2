@@ -381,7 +381,8 @@ public class AssetTagLocalServiceImpl extends AssetTagLocalServiceBaseImpl {
 		return tag;
 	}
 
-	public void mergeTags(long fromTagId, long toTagId)
+	public void mergeTags(long fromTagId, long toTagId,
+			boolean overrideProperties)
 		throws PortalException, SystemException {
 
 		List<AssetEntry> entries = assetTagPersistence.getAssetEntries(
@@ -397,7 +398,12 @@ public class AssetTagLocalServiceImpl extends AssetTagLocalServiceBaseImpl {
 				assetTagPropertyPersistence.fetchByT_K(
 					toTagId, fromTagProperty.getKey());
 
-			if (toTagProperty == null) {
+			if (overrideProperties && toTagProperty != null) {
+				toTagProperty.setValue(fromTagProperty.getValue());
+
+				assetTagPropertyPersistence.update(toTagProperty, false);
+			}
+			else if (toTagProperty == null) {
 				fromTagProperty.setTagId(toTagId);
 
 				assetTagPropertyPersistence.update(fromTagProperty, false);
