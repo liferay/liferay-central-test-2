@@ -61,15 +61,23 @@ import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.LayoutTypePortletConstants;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletConstants;
+import com.liferay.portal.model.Resource;
+import com.liferay.portal.model.ResourceConstants;
+import com.liferay.portal.model.Role;
+import com.liferay.portal.model.RoleConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.ColorSchemeImpl;
+import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.ImageLocalServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.LayoutSetLocalServiceUtil;
 import com.liferay.portal.service.LayoutSetPrototypeLocalServiceUtil;
 import com.liferay.portal.service.LayoutTemplateLocalServiceUtil;
+import com.liferay.portal.service.PermissionLocalServiceUtil;
 import com.liferay.portal.service.PortletLocalServiceUtil;
+import com.liferay.portal.service.ResourcePermissionLocalServiceUtil;
+import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextThreadLocal;
 import com.liferay.portal.service.persistence.LayoutUtil;
@@ -131,6 +139,8 @@ public class LayoutImporter {
 			parameterMap, PortletDataHandlerKeys.PERMISSIONS);
 		boolean importUserPermissions = MapUtil.getBoolean(
 			parameterMap, PortletDataHandlerKeys.PERMISSIONS);
+		boolean addPublicLayoutPermission = MapUtil.getBoolean(
+			parameterMap, PortletDataHandlerKeys.ADD_PUBLIC_LAYOUT_PERMISSIONS);
 		boolean importPortletData = MapUtil.getBoolean(
 			parameterMap, PortletDataHandlerKeys.PORTLET_DATA);
 		boolean importPortletSetup = MapUtil.getBoolean(
@@ -381,7 +391,8 @@ public class LayoutImporter {
 				portletDataContext, user, layoutCache, previousLayouts,
 				newLayouts, newLayoutsMap, newLayoutIds, portletsMergeMode,
 				themeId, colorSchemeId, layoutsImportMode, privateLayout,
-				importPermissions, importUserPermissions, importThemeSettings,
+				importPermissions, importUserPermissions,
+				addPublicLayoutPermission, importThemeSettings,
 				rootElement, layoutElement);
 		}
 
@@ -728,8 +739,9 @@ public class LayoutImporter {
 			Set<Long> newLayoutIds, String portletsMergeMode, String themeId,
 			String colorSchemeId, String layoutsImportMode,
 			boolean privateLayout, boolean importPermissions,
-			boolean importUserPermissions, boolean importThemeSettings,
-			Element rootElement, Element layoutElement)
+			boolean importUserPermissions, boolean addPublicLayoutPermission,
+			boolean importThemeSettings, Element rootElement,
+			Element layoutElement)
 		throws Exception {
 
 		long groupId = portletDataContext.getGroupId();
@@ -880,7 +892,8 @@ public class LayoutImporter {
 				portletDataContext, user, layoutCache, previousLayouts,
 				newLayouts, newLayoutsMap, newLayoutIds, portletsMergeMode,
 				themeId, colorSchemeId, layoutsImportMode, privateLayout,
-				importPermissions, importUserPermissions, importThemeSettings,
+				importPermissions, importUserPermissions,
+				addPublicLayoutPermission, importThemeSettings,
 				rootElement, (Element)parentLayoutNode);
 
 			Layout parentLayout = newLayoutsMap.get(parentLayoutId);
@@ -936,7 +949,8 @@ public class LayoutImporter {
 						newLayouts, newLayoutsMap, newLayoutIds,
 						portletsMergeMode, themeId, colorSchemeId,
 						layoutsImportMode, privateLayout, importPermissions,
-						importUserPermissions, importThemeSettings, rootElement,
+						importUserPermissions, addPublicLayoutPermission,
+						importThemeSettings, rootElement,
 						(Element)linkedLayoutNode);
 
 					Layout linkedLayout = newLayoutsMap.get(linkToLayoutId);
@@ -1025,6 +1039,39 @@ public class LayoutImporter {
 				layoutCache, portletDataContext.getCompanyId(), groupId,
 				user.getUserId(), importedLayout, layoutElement, rootElement,
 				importUserPermissions);
+		}
+
+		if (addPublicLayoutPermission) {
+			String resourceName = Layout.class.getName();
+			String resourcePrimKey = String.valueOf(importedLayout.getPlid());
+
+			Role guestRole = RoleLocalServiceUtil.getRole(
+				importedLayout.getCompanyId(), RoleConstants.GUEST);
+
+			if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 5) {
+				Resource resource = layoutCache.getResource(
+					importedLayout.getCompanyId(), groupId, resourceName,
+					ResourceConstants.SCOPE_INDIVIDUAL, resourcePrimKey, false);
+
+				PermissionLocalServiceUtil.setRolePermissions(
+					guestRole.getRoleId(), new String[]{ActionKeys.VIEW},
+					resource.getResourceId());
+			}
+			else if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 6) {
+				ResourcePermissionLocalServiceUtil.setResourcePermissions(
+					importedLayout.getCompanyId(), resourceName,
+					ResourceConstants.SCOPE_INDIVIDUAL, resourcePrimKey,
+					guestRole.getRoleId(), new String[]{ActionKeys.VIEW});
+			}
+			else {
+				Resource resource = layoutCache.getResource(
+					importedLayout.getCompanyId(), groupId, resourceName,
+					ResourceConstants.SCOPE_INDIVIDUAL, resourcePrimKey, false);
+
+				PermissionLocalServiceUtil.setGroupPermissions(
+					groupId, new String[]{ActionKeys.VIEW},
+					resource.getResourceId());
+			}
 		}
 
 		_portletImporter.importPortletData(

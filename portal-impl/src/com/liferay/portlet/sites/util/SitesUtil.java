@@ -75,7 +75,7 @@ public class SitesUtil {
 			LayoutSet publicLayoutSet = group.getPublicLayoutSet();
 
 			copyLayoutSet(
-				layoutSetPrototype.getLayoutSet(), publicLayoutSet,
+				layoutSetPrototype.getLayoutSet(), publicLayoutSet, true,
 				serviceContext);
 
 			sourceGroup = layoutSetPrototype.getGroup();
@@ -89,7 +89,7 @@ public class SitesUtil {
 			LayoutSet privateLayoutSet = group.getPrivateLayoutSet();
 
 			copyLayoutSet(
-				layoutSetPrototype.getLayoutSet(), privateLayoutSet,
+				layoutSetPrototype.getLayoutSet(), privateLayoutSet, false,
 				serviceContext);
 
 			if (sourceGroup == null) {
@@ -104,11 +104,17 @@ public class SitesUtil {
 
 	public static void copyLayoutSet(
 			LayoutSet sourceLayoutSet, LayoutSet targetLayoutSet,
-			ServiceContext serviceContext)
+			boolean addPublicLayoutPermission, ServiceContext serviceContext)
 		throws Exception {
 
 		Map<String, String[]> parameterMap = getLayoutSetPrototypeParameters(
 			serviceContext);
+
+		if (addPublicLayoutPermission) {
+			parameterMap.put(
+				PortletDataHandlerKeys.ADD_PUBLIC_LAYOUT_PERMISSIONS,
+				new String[]{Boolean.TRUE.toString()});
+		}
 
 		File file = LayoutLocalServiceUtil.exportLayoutsAsFile(
 			sourceLayoutSet.getGroupId(), sourceLayoutSet.isPrivateLayout(),

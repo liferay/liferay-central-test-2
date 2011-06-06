@@ -19,6 +19,9 @@ package com.liferay.portal.kernel.lar;
  */
 public class PortletDataHandlerKeys {
 
+	public static final String ADD_PUBLIC_LAYOUT_PERMISSIONS =
+		"ADD_PUBLIC_LAYOUT_PERMISSIONS";
+
 	public static final String CATEGORIES = "CATEGORIES";
 
 	public static final String DATA_STRATEGY = "DATA_STRATEGY";
