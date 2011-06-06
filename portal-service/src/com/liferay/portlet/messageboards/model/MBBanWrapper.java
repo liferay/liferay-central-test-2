@@ -37,7 +37,7 @@ public class MBBanWrapper implements MBBan {
 	}
 
 	/**
-	* Gets the primary key of this message boards ban.
+	* Returns the primary key of this message boards ban.
 	*
 	* @return the primary key of this message boards ban
 	*/
@@ -46,7 +46,7 @@ public class MBBanWrapper implements MBBan {
 	}
 
 	/**
-	* Sets the primary key of this message boards ban
+	* Sets the primary key of this message boards ban.
 	*
 	* @param primaryKey the primary key of this message boards ban
 	*/
@@ -55,7 +55,7 @@ public class MBBanWrapper implements MBBan {
 	}
 
 	/**
-	* Gets the ban ID of this message boards ban.
+	* Returns the ban ID of this message boards ban.
 	*
 	* @return the ban ID of this message boards ban
 	*/
@@ -73,7 +73,7 @@ public class MBBanWrapper implements MBBan {
 	}
 
 	/**
-	* Gets the group ID of this message boards ban.
+	* Returns the group ID of this message boards ban.
 	*
 	* @return the group ID of this message boards ban
 	*/
@@ -91,7 +91,7 @@ public class MBBanWrapper implements MBBan {
 	}
 
 	/**
-	* Gets the company ID of this message boards ban.
+	* Returns the company ID of this message boards ban.
 	*
 	* @return the company ID of this message boards ban
 	*/
@@ -109,7 +109,7 @@ public class MBBanWrapper implements MBBan {
 	}
 
 	/**
-	* Gets the user ID of this message boards ban.
+	* Returns the user ID of this message boards ban.
 	*
 	* @return the user ID of this message boards ban
 	*/
@@ -127,7 +127,7 @@ public class MBBanWrapper implements MBBan {
 	}
 
 	/**
-	* Gets the user uuid of this message boards ban.
+	* Returns the user uuid of this message boards ban.
 	*
 	* @return the user uuid of this message boards ban
 	* @throws SystemException if a system exception occurred
@@ -147,7 +147,7 @@ public class MBBanWrapper implements MBBan {
 	}
 
 	/**
-	* Gets the user name of this message boards ban.
+	* Returns the user name of this message boards ban.
 	*
 	* @return the user name of this message boards ban
 	*/
@@ -165,7 +165,7 @@ public class MBBanWrapper implements MBBan {
 	}
 
 	/**
-	* Gets the create date of this message boards ban.
+	* Returns the create date of this message boards ban.
 	*
 	* @return the create date of this message boards ban
 	*/
@@ -183,7 +183,7 @@ public class MBBanWrapper implements MBBan {
 	}
 
 	/**
-	* Gets the modified date of this message boards ban.
+	* Returns the modified date of this message boards ban.
 	*
 	* @return the modified date of this message boards ban
 	*/
@@ -201,7 +201,7 @@ public class MBBanWrapper implements MBBan {
 	}
 
 	/**
-	* Gets the ban user ID of this message boards ban.
+	* Returns the ban user ID of this message boards ban.
 	*
 	* @return the ban user ID of this message boards ban
 	*/
@@ -219,7 +219,7 @@ public class MBBanWrapper implements MBBan {
 	}
 
 	/**
-	* Gets the ban user uuid of this message boards ban.
+	* Returns the ban user uuid of this message boards ban.
 	*
 	* @return the ban user uuid of this message boards ban
 	* @throws SystemException if a system exception occurred

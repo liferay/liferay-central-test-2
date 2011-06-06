@@ -195,7 +195,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	/**
 	 * Caches the group in the entity cache if it is enabled.
 	 *
-	 * @param group the group to cache
+	 * @param group the group
 	 */
 	public void cacheResult(Group group) {
 		EntityCacheUtil.putResult(GroupModelImpl.ENTITY_CACHE_ENABLED,
@@ -245,7 +245,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	/**
 	 * Caches the groups in the entity cache if it is enabled.
 	 *
-	 * @param groups the groups to cache
+	 * @param groups the groups
 	 */
 	public void cacheResult(List<Group> groups) {
 		for (Group group : groups) {
@@ -340,7 +340,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	/**
 	 * Removes the group with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param primaryKey the primary key of the group to remove
+	 * @param primaryKey the primary key of the group
 	 * @return the group that was removed
 	 * @throws com.liferay.portal.NoSuchModelException if a group with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -353,7 +353,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	/**
 	 * Removes the group with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param groupId the primary key of the group to remove
+	 * @param groupId the primary key of the group
 	 * @return the group that was removed
 	 * @throws com.liferay.portal.NoSuchGroupException if a group with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -393,7 +393,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	/**
 	 * Removes the group from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param group the group to remove
+	 * @param group the group
 	 * @return the group that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -723,9 +723,9 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	}
 
 	/**
-	 * Finds the group with the primary key or throws a {@link com.liferay.portal.NoSuchModelException} if it could not be found.
+	 * Returns the group with the primary key or throws a {@link com.liferay.portal.NoSuchModelException} if it could not be found.
 	 *
-	 * @param primaryKey the primary key of the group to find
+	 * @param primaryKey the primary key of the group
 	 * @return the group
 	 * @throws com.liferay.portal.NoSuchModelException if a group with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -736,9 +736,9 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	}
 
 	/**
-	 * Finds the group with the primary key or throws a {@link com.liferay.portal.NoSuchGroupException} if it could not be found.
+	 * Returns the group with the primary key or throws a {@link com.liferay.portal.NoSuchGroupException} if it could not be found.
 	 *
-	 * @param groupId the primary key of the group to find
+	 * @param groupId the primary key of the group
 	 * @return the group
 	 * @throws com.liferay.portal.NoSuchGroupException if a group with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -760,9 +760,9 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	}
 
 	/**
-	 * Finds the group with the primary key or returns <code>null</code> if it could not be found.
+	 * Returns the group with the primary key or returns <code>null</code> if it could not be found.
 	 *
-	 * @param primaryKey the primary key of the group to find
+	 * @param primaryKey the primary key of the group
 	 * @return the group, or <code>null</code> if a group with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -772,9 +772,9 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	}
 
 	/**
-	 * Finds the group with the primary key or returns <code>null</code> if it could not be found.
+	 * Returns the group with the primary key or returns <code>null</code> if it could not be found.
 	 *
-	 * @param groupId the primary key of the group to find
+	 * @param groupId the primary key of the group
 	 * @return the group, or <code>null</code> if a group with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -807,9 +807,9 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	}
 
 	/**
-	 * Finds all the groups where companyId = &#63;.
+	 * Returns all the groups where companyId = &#63;.
 	 *
-	 * @param companyId the company ID to search with
+	 * @param companyId the company ID
 	 * @return the matching groups
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -820,15 +820,15 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	}
 
 	/**
-	 * Finds a range of all the groups where companyId = &#63;.
+	 * Returns a range of all the groups where companyId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param companyId the company ID to search with
-	 * @param start the lower bound of the range of groups to return
-	 * @param end the upper bound of the range of groups to return (not inclusive)
+	 * @param companyId the company ID
+	 * @param start the lower bound of the range of groups
+	 * @param end the upper bound of the range of groups (not inclusive)
 	 * @return the range of matching groups
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -838,15 +838,15 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	}
 
 	/**
-	 * Finds an ordered range of all the groups where companyId = &#63;.
+	 * Returns an ordered range of all the groups where companyId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param companyId the company ID to search with
-	 * @param start the lower bound of the range of groups to return
-	 * @param end the upper bound of the range of groups to return (not inclusive)
+	 * @param companyId the company ID
+	 * @param start the lower bound of the range of groups
+	 * @param end the upper bound of the range of groups (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching groups
 	 * @throws SystemException if a system exception occurred
@@ -925,13 +925,13 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	}
 
 	/**
-	 * Finds the first group in the ordered set where companyId = &#63;.
+	 * Returns the first group in the ordered set where companyId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param companyId the company ID to search with
+	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching group
 	 * @throws com.liferay.portal.NoSuchGroupException if a matching group could not be found
@@ -960,13 +960,13 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	}
 
 	/**
-	 * Finds the last group in the ordered set where companyId = &#63;.
+	 * Returns the last group in the ordered set where companyId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param companyId the company ID to search with
+	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching group
 	 * @throws com.liferay.portal.NoSuchGroupException if a matching group could not be found
@@ -998,14 +998,14 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	}
 
 	/**
-	 * Finds the groups before and after the current group in the ordered set where companyId = &#63;.
+	 * Returns the groups before and after the current group in the ordered set where companyId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
 	 * @param groupId the primary key of the current group
-	 * @param companyId the company ID to search with
+	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next group
 	 * @throws com.liferay.portal.NoSuchGroupException if a group with the primary key could not be found
@@ -1145,9 +1145,9 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	}
 
 	/**
-	 * Finds the group where liveGroupId = &#63; or throws a {@link com.liferay.portal.NoSuchGroupException} if it could not be found.
+	 * Returns the group where liveGroupId = &#63; or throws a {@link com.liferay.portal.NoSuchGroupException} if it could not be found.
 	 *
-	 * @param liveGroupId the live group ID to search with
+	 * @param liveGroupId the live group ID
 	 * @return the matching group
 	 * @throws com.liferay.portal.NoSuchGroupException if a matching group could not be found
 	 * @throws SystemException if a system exception occurred
@@ -1177,9 +1177,9 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	}
 
 	/**
-	 * Finds the group where liveGroupId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 * Returns the group where liveGroupId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	 *
-	 * @param liveGroupId the live group ID to search with
+	 * @param liveGroupId the live group ID
 	 * @return the matching group, or <code>null</code> if a matching group could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1188,9 +1188,9 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	}
 
 	/**
-	 * Finds the group where liveGroupId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 * Returns the group where liveGroupId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	 *
-	 * @param liveGroupId the live group ID to search with
+	 * @param liveGroupId the live group ID
 	 * @return the matching group, or <code>null</code> if a matching group could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1273,10 +1273,10 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	}
 
 	/**
-	 * Finds the group where companyId = &#63; and name = &#63; or throws a {@link com.liferay.portal.NoSuchGroupException} if it could not be found.
+	 * Returns the group where companyId = &#63; and name = &#63; or throws a {@link com.liferay.portal.NoSuchGroupException} if it could not be found.
 	 *
-	 * @param companyId the company ID to search with
-	 * @param name the name to search with
+	 * @param companyId the company ID
+	 * @param name the name
 	 * @return the matching group
 	 * @throws com.liferay.portal.NoSuchGroupException if a matching group could not be found
 	 * @throws SystemException if a system exception occurred
@@ -1309,10 +1309,10 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	}
 
 	/**
-	 * Finds the group where companyId = &#63; and name = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 * Returns the group where companyId = &#63; and name = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	 *
-	 * @param companyId the company ID to search with
-	 * @param name the name to search with
+	 * @param companyId the company ID
+	 * @param name the name
 	 * @return the matching group, or <code>null</code> if a matching group could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1322,10 +1322,10 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	}
 
 	/**
-	 * Finds the group where companyId = &#63; and name = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 * Returns the group where companyId = &#63; and name = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	 *
-	 * @param companyId the company ID to search with
-	 * @param name the name to search with
+	 * @param companyId the company ID
+	 * @param name the name
 	 * @return the matching group, or <code>null</code> if a matching group could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1426,10 +1426,10 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	}
 
 	/**
-	 * Finds the group where companyId = &#63; and friendlyURL = &#63; or throws a {@link com.liferay.portal.NoSuchGroupException} if it could not be found.
+	 * Returns the group where companyId = &#63; and friendlyURL = &#63; or throws a {@link com.liferay.portal.NoSuchGroupException} if it could not be found.
 	 *
-	 * @param companyId the company ID to search with
-	 * @param friendlyURL the friendly u r l to search with
+	 * @param companyId the company ID
+	 * @param friendlyURL the friendly u r l
 	 * @return the matching group
 	 * @throws com.liferay.portal.NoSuchGroupException if a matching group could not be found
 	 * @throws SystemException if a system exception occurred
@@ -1462,10 +1462,10 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	}
 
 	/**
-	 * Finds the group where companyId = &#63; and friendlyURL = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 * Returns the group where companyId = &#63; and friendlyURL = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	 *
-	 * @param companyId the company ID to search with
-	 * @param friendlyURL the friendly u r l to search with
+	 * @param companyId the company ID
+	 * @param friendlyURL the friendly u r l
 	 * @return the matching group, or <code>null</code> if a matching group could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1475,10 +1475,10 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	}
 
 	/**
-	 * Finds the group where companyId = &#63; and friendlyURL = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 * Returns the group where companyId = &#63; and friendlyURL = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	 *
-	 * @param companyId the company ID to search with
-	 * @param friendlyURL the friendly u r l to search with
+	 * @param companyId the company ID
+	 * @param friendlyURL the friendly u r l
 	 * @return the matching group, or <code>null</code> if a matching group could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1579,10 +1579,10 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	}
 
 	/**
-	 * Finds all the groups where type = &#63; and active = &#63;.
+	 * Returns all the groups where type = &#63; and active = &#63;.
 	 *
-	 * @param type the type to search with
-	 * @param active the active to search with
+	 * @param type the type
+	 * @param active the active
 	 * @return the matching groups
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1593,16 +1593,16 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	}
 
 	/**
-	 * Finds a range of all the groups where type = &#63; and active = &#63;.
+	 * Returns a range of all the groups where type = &#63; and active = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param type the type to search with
-	 * @param active the active to search with
-	 * @param start the lower bound of the range of groups to return
-	 * @param end the upper bound of the range of groups to return (not inclusive)
+	 * @param type the type
+	 * @param active the active
+	 * @param start the lower bound of the range of groups
+	 * @param end the upper bound of the range of groups (not inclusive)
 	 * @return the range of matching groups
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1612,16 +1612,16 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	}
 
 	/**
-	 * Finds an ordered range of all the groups where type = &#63; and active = &#63;.
+	 * Returns an ordered range of all the groups where type = &#63; and active = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param type the type to search with
-	 * @param active the active to search with
-	 * @param start the lower bound of the range of groups to return
-	 * @param end the upper bound of the range of groups to return (not inclusive)
+	 * @param type the type
+	 * @param active the active
+	 * @param start the lower bound of the range of groups
+	 * @param end the upper bound of the range of groups (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching groups
 	 * @throws SystemException if a system exception occurred
@@ -1704,14 +1704,14 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	}
 
 	/**
-	 * Finds the first group in the ordered set where type = &#63; and active = &#63;.
+	 * Returns the first group in the ordered set where type = &#63; and active = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param type the type to search with
-	 * @param active the active to search with
+	 * @param type the type
+	 * @param active the active
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching group
 	 * @throws com.liferay.portal.NoSuchGroupException if a matching group could not be found
@@ -1743,14 +1743,14 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	}
 
 	/**
-	 * Finds the last group in the ordered set where type = &#63; and active = &#63;.
+	 * Returns the last group in the ordered set where type = &#63; and active = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param type the type to search with
-	 * @param active the active to search with
+	 * @param type the type
+	 * @param active the active
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching group
 	 * @throws com.liferay.portal.NoSuchGroupException if a matching group could not be found
@@ -1785,15 +1785,15 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	}
 
 	/**
-	 * Finds the groups before and after the current group in the ordered set where type = &#63; and active = &#63;.
+	 * Returns the groups before and after the current group in the ordered set where type = &#63; and active = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
 	 * @param groupId the primary key of the current group
-	 * @param type the type to search with
-	 * @param active the active to search with
+	 * @param type the type
+	 * @param active the active
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next group
 	 * @throws com.liferay.portal.NoSuchGroupException if a group with the primary key could not be found
@@ -1938,11 +1938,11 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	}
 
 	/**
-	 * Finds the group where companyId = &#63; and classNameId = &#63; and classPK = &#63; or throws a {@link com.liferay.portal.NoSuchGroupException} if it could not be found.
+	 * Returns the group where companyId = &#63; and classNameId = &#63; and classPK = &#63; or throws a {@link com.liferay.portal.NoSuchGroupException} if it could not be found.
 	 *
-	 * @param companyId the company ID to search with
-	 * @param classNameId the class name ID to search with
-	 * @param classPK the class p k to search with
+	 * @param companyId the company ID
+	 * @param classNameId the class name ID
+	 * @param classPK the class p k
 	 * @return the matching group
 	 * @throws com.liferay.portal.NoSuchGroupException if a matching group could not be found
 	 * @throws SystemException if a system exception occurred
@@ -1978,11 +1978,11 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	}
 
 	/**
-	 * Finds the group where companyId = &#63; and classNameId = &#63; and classPK = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 * Returns the group where companyId = &#63; and classNameId = &#63; and classPK = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	 *
-	 * @param companyId the company ID to search with
-	 * @param classNameId the class name ID to search with
-	 * @param classPK the class p k to search with
+	 * @param companyId the company ID
+	 * @param classNameId the class name ID
+	 * @param classPK the class p k
 	 * @return the matching group, or <code>null</code> if a matching group could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1992,11 +1992,11 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	}
 
 	/**
-	 * Finds the group where companyId = &#63; and classNameId = &#63; and classPK = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 * Returns the group where companyId = &#63; and classNameId = &#63; and classPK = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	 *
-	 * @param companyId the company ID to search with
-	 * @param classNameId the class name ID to search with
-	 * @param classPK the class p k to search with
+	 * @param companyId the company ID
+	 * @param classNameId the class name ID
+	 * @param classPK the class p k
 	 * @return the matching group, or <code>null</code> if a matching group could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2089,11 +2089,11 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	}
 
 	/**
-	 * Finds the group where companyId = &#63; and liveGroupId = &#63; and name = &#63; or throws a {@link com.liferay.portal.NoSuchGroupException} if it could not be found.
+	 * Returns the group where companyId = &#63; and liveGroupId = &#63; and name = &#63; or throws a {@link com.liferay.portal.NoSuchGroupException} if it could not be found.
 	 *
-	 * @param companyId the company ID to search with
-	 * @param liveGroupId the live group ID to search with
-	 * @param name the name to search with
+	 * @param companyId the company ID
+	 * @param liveGroupId the live group ID
+	 * @param name the name
 	 * @return the matching group
 	 * @throws com.liferay.portal.NoSuchGroupException if a matching group could not be found
 	 * @throws SystemException if a system exception occurred
@@ -2129,11 +2129,11 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	}
 
 	/**
-	 * Finds the group where companyId = &#63; and liveGroupId = &#63; and name = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 * Returns the group where companyId = &#63; and liveGroupId = &#63; and name = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	 *
-	 * @param companyId the company ID to search with
-	 * @param liveGroupId the live group ID to search with
-	 * @param name the name to search with
+	 * @param companyId the company ID
+	 * @param liveGroupId the live group ID
+	 * @param name the name
 	 * @return the matching group, or <code>null</code> if a matching group could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2143,11 +2143,11 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	}
 
 	/**
-	 * Finds the group where companyId = &#63; and liveGroupId = &#63; and name = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 * Returns the group where companyId = &#63; and liveGroupId = &#63; and name = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	 *
-	 * @param companyId the company ID to search with
-	 * @param liveGroupId the live group ID to search with
-	 * @param name the name to search with
+	 * @param companyId the company ID
+	 * @param liveGroupId the live group ID
+	 * @param name the name
 	 * @return the matching group, or <code>null</code> if a matching group could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2253,12 +2253,12 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	}
 
 	/**
-	 * Finds the group where companyId = &#63; and classNameId = &#63; and liveGroupId = &#63; and name = &#63; or throws a {@link com.liferay.portal.NoSuchGroupException} if it could not be found.
+	 * Returns the group where companyId = &#63; and classNameId = &#63; and liveGroupId = &#63; and name = &#63; or throws a {@link com.liferay.portal.NoSuchGroupException} if it could not be found.
 	 *
-	 * @param companyId the company ID to search with
-	 * @param classNameId the class name ID to search with
-	 * @param liveGroupId the live group ID to search with
-	 * @param name the name to search with
+	 * @param companyId the company ID
+	 * @param classNameId the class name ID
+	 * @param liveGroupId the live group ID
+	 * @param name the name
 	 * @return the matching group
 	 * @throws com.liferay.portal.NoSuchGroupException if a matching group could not be found
 	 * @throws SystemException if a system exception occurred
@@ -2298,12 +2298,12 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	}
 
 	/**
-	 * Finds the group where companyId = &#63; and classNameId = &#63; and liveGroupId = &#63; and name = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 * Returns the group where companyId = &#63; and classNameId = &#63; and liveGroupId = &#63; and name = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	 *
-	 * @param companyId the company ID to search with
-	 * @param classNameId the class name ID to search with
-	 * @param liveGroupId the live group ID to search with
-	 * @param name the name to search with
+	 * @param companyId the company ID
+	 * @param classNameId the class name ID
+	 * @param liveGroupId the live group ID
+	 * @param name the name
 	 * @return the matching group, or <code>null</code> if a matching group could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2313,12 +2313,12 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	}
 
 	/**
-	 * Finds the group where companyId = &#63; and classNameId = &#63; and liveGroupId = &#63; and name = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 * Returns the group where companyId = &#63; and classNameId = &#63; and liveGroupId = &#63; and name = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	 *
-	 * @param companyId the company ID to search with
-	 * @param classNameId the class name ID to search with
-	 * @param liveGroupId the live group ID to search with
-	 * @param name the name to search with
+	 * @param companyId the company ID
+	 * @param classNameId the class name ID
+	 * @param liveGroupId the live group ID
+	 * @param name the name
 	 * @return the matching group, or <code>null</code> if a matching group could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2432,7 +2432,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	}
 
 	/**
-	 * Finds all the groups.
+	 * Returns all the groups.
 	 *
 	 * @return the groups
 	 * @throws SystemException if a system exception occurred
@@ -2442,14 +2442,14 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	}
 
 	/**
-	 * Finds a range of all the groups.
+	 * Returns a range of all the groups.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param start the lower bound of the range of groups to return
-	 * @param end the upper bound of the range of groups to return (not inclusive)
+	 * @param start the lower bound of the range of groups
+	 * @param end the upper bound of the range of groups (not inclusive)
 	 * @return the range of groups
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2458,14 +2458,14 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	}
 
 	/**
-	 * Finds an ordered range of all the groups.
+	 * Returns an ordered range of all the groups.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param start the lower bound of the range of groups to return
-	 * @param end the upper bound of the range of groups to return (not inclusive)
+	 * @param start the lower bound of the range of groups
+	 * @param end the upper bound of the range of groups (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of groups
 	 * @throws SystemException if a system exception occurred
@@ -2542,7 +2542,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	/**
 	 * Removes all the groups where companyId = &#63; from the database.
 	 *
-	 * @param companyId the company ID to search with
+	 * @param companyId the company ID
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByCompanyId(long companyId) throws SystemException {
@@ -2554,7 +2554,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	/**
 	 * Removes the group where liveGroupId = &#63; from the database.
 	 *
-	 * @param liveGroupId the live group ID to search with
+	 * @param liveGroupId the live group ID
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByLiveGroupId(long liveGroupId)
@@ -2567,8 +2567,8 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	/**
 	 * Removes the group where companyId = &#63; and name = &#63; from the database.
 	 *
-	 * @param companyId the company ID to search with
-	 * @param name the name to search with
+	 * @param companyId the company ID
+	 * @param name the name
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByC_N(long companyId, String name)
@@ -2581,8 +2581,8 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	/**
 	 * Removes the group where companyId = &#63; and friendlyURL = &#63; from the database.
 	 *
-	 * @param companyId the company ID to search with
-	 * @param friendlyURL the friendly u r l to search with
+	 * @param companyId the company ID
+	 * @param friendlyURL the friendly u r l
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByC_F(long companyId, String friendlyURL)
@@ -2595,8 +2595,8 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	/**
 	 * Removes all the groups where type = &#63; and active = &#63; from the database.
 	 *
-	 * @param type the type to search with
-	 * @param active the active to search with
+	 * @param type the type
+	 * @param active the active
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByT_A(int type, boolean active) throws SystemException {
@@ -2608,9 +2608,9 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	/**
 	 * Removes the group where companyId = &#63; and classNameId = &#63; and classPK = &#63; from the database.
 	 *
-	 * @param companyId the company ID to search with
-	 * @param classNameId the class name ID to search with
-	 * @param classPK the class p k to search with
+	 * @param companyId the company ID
+	 * @param classNameId the class name ID
+	 * @param classPK the class p k
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByC_C_C(long companyId, long classNameId, long classPK)
@@ -2623,9 +2623,9 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	/**
 	 * Removes the group where companyId = &#63; and liveGroupId = &#63; and name = &#63; from the database.
 	 *
-	 * @param companyId the company ID to search with
-	 * @param liveGroupId the live group ID to search with
-	 * @param name the name to search with
+	 * @param companyId the company ID
+	 * @param liveGroupId the live group ID
+	 * @param name the name
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByC_L_N(long companyId, long liveGroupId, String name)
@@ -2638,10 +2638,10 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	/**
 	 * Removes the group where companyId = &#63; and classNameId = &#63; and liveGroupId = &#63; and name = &#63; from the database.
 	 *
-	 * @param companyId the company ID to search with
-	 * @param classNameId the class name ID to search with
-	 * @param liveGroupId the live group ID to search with
-	 * @param name the name to search with
+	 * @param companyId the company ID
+	 * @param classNameId the class name ID
+	 * @param liveGroupId the live group ID
+	 * @param name the name
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByC_C_L_N(long companyId, long classNameId,
@@ -2664,9 +2664,9 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	}
 
 	/**
-	 * Counts all the groups where companyId = &#63;.
+	 * Returns the number of groups where companyId = &#63;.
 	 *
-	 * @param companyId the company ID to search with
+	 * @param companyId the company ID
 	 * @return the number of matching groups
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2717,9 +2717,9 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	}
 
 	/**
-	 * Counts all the groups where liveGroupId = &#63;.
+	 * Returns the number of groups where liveGroupId = &#63;.
 	 *
-	 * @param liveGroupId the live group ID to search with
+	 * @param liveGroupId the live group ID
 	 * @return the number of matching groups
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2770,10 +2770,10 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	}
 
 	/**
-	 * Counts all the groups where companyId = &#63; and name = &#63;.
+	 * Returns the number of groups where companyId = &#63; and name = &#63;.
 	 *
-	 * @param companyId the company ID to search with
-	 * @param name the name to search with
+	 * @param companyId the company ID
+	 * @param name the name
 	 * @return the number of matching groups
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2841,10 +2841,10 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	}
 
 	/**
-	 * Counts all the groups where companyId = &#63; and friendlyURL = &#63;.
+	 * Returns the number of groups where companyId = &#63; and friendlyURL = &#63;.
 	 *
-	 * @param companyId the company ID to search with
-	 * @param friendlyURL the friendly u r l to search with
+	 * @param companyId the company ID
+	 * @param friendlyURL the friendly u r l
 	 * @return the number of matching groups
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2912,10 +2912,10 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	}
 
 	/**
-	 * Counts all the groups where type = &#63; and active = &#63;.
+	 * Returns the number of groups where type = &#63; and active = &#63;.
 	 *
-	 * @param type the type to search with
-	 * @param active the active to search with
+	 * @param type the type
+	 * @param active the active
 	 * @return the number of matching groups
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2970,11 +2970,11 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	}
 
 	/**
-	 * Counts all the groups where companyId = &#63; and classNameId = &#63; and classPK = &#63;.
+	 * Returns the number of groups where companyId = &#63; and classNameId = &#63; and classPK = &#63;.
 	 *
-	 * @param companyId the company ID to search with
-	 * @param classNameId the class name ID to search with
-	 * @param classPK the class p k to search with
+	 * @param companyId the company ID
+	 * @param classNameId the class name ID
+	 * @param classPK the class p k
 	 * @return the number of matching groups
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -3034,11 +3034,11 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	}
 
 	/**
-	 * Counts all the groups where companyId = &#63; and liveGroupId = &#63; and name = &#63;.
+	 * Returns the number of groups where companyId = &#63; and liveGroupId = &#63; and name = &#63;.
 	 *
-	 * @param companyId the company ID to search with
-	 * @param liveGroupId the live group ID to search with
-	 * @param name the name to search with
+	 * @param companyId the company ID
+	 * @param liveGroupId the live group ID
+	 * @param name the name
 	 * @return the number of matching groups
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -3110,12 +3110,12 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	}
 
 	/**
-	 * Counts all the groups where companyId = &#63; and classNameId = &#63; and liveGroupId = &#63; and name = &#63;.
+	 * Returns the number of groups where companyId = &#63; and classNameId = &#63; and liveGroupId = &#63; and name = &#63;.
 	 *
-	 * @param companyId the company ID to search with
-	 * @param classNameId the class name ID to search with
-	 * @param liveGroupId the live group ID to search with
-	 * @param name the name to search with
+	 * @param companyId the company ID
+	 * @param classNameId the class name ID
+	 * @param liveGroupId the live group ID
+	 * @param name the name
 	 * @return the number of matching groups
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -3193,7 +3193,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	}
 
 	/**
-	 * Counts all the groups.
+	 * Returns the number of groups.
 	 *
 	 * @return the number of groups
 	 * @throws SystemException if a system exception occurred
@@ -3233,9 +3233,9 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	}
 
 	/**
-	 * Gets all the organizations associated with the group.
+	 * Returns all the organizations associated with the group.
 	 *
-	 * @param pk the primary key of the group to get the associated organizations for
+	 * @param pk the primary key of the group
 	 * @return the organizations associated with the group
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -3245,15 +3245,15 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	}
 
 	/**
-	 * Gets a range of all the organizations associated with the group.
+	 * Returns a range of all the organizations associated with the group.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param pk the primary key of the group to get the associated organizations for
-	 * @param start the lower bound of the range of groups to return
-	 * @param end the upper bound of the range of groups to return (not inclusive)
+	 * @param pk the primary key of the group
+	 * @param start the lower bound of the range of groups
+	 * @param end the upper bound of the range of groups (not inclusive)
 	 * @return the range of organizations associated with the group
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -3271,15 +3271,15 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			});
 
 	/**
-	 * Gets an ordered range of all the organizations associated with the group.
+	 * Returns an ordered range of all the organizations associated with the group.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param pk the primary key of the group to get the associated organizations for
-	 * @param start the lower bound of the range of groups to return
-	 * @param end the upper bound of the range of groups to return (not inclusive)
+	 * @param pk the primary key of the group
+	 * @param start the lower bound of the range of groups
+	 * @param end the upper bound of the range of groups (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of organizations associated with the group
 	 * @throws SystemException if a system exception occurred
@@ -3351,9 +3351,9 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			"getOrganizationsSize", new String[] { Long.class.getName() });
 
 	/**
-	 * Gets the number of organizations associated with the group.
+	 * Returns the number of organizations associated with the group.
 	 *
-	 * @param pk the primary key of the group to get the number of associated organizations for
+	 * @param pk the primary key of the group
 	 * @return the number of organizations associated with the group
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -3649,7 +3649,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	/**
 	 * Sets the organizations associated with the group, removing and adding associations as necessary. Also notifies the appropriate model listeners and clears the mapping table finder cache.
 	 *
-	 * @param pk the primary key of the group to set the associations for
+	 * @param pk the primary key of the group
 	 * @param organizationPKs the primary keys of the organizations to be associated with the group
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -3681,7 +3681,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	/**
 	 * Sets the organizations associated with the group, removing and adding associations as necessary. Also notifies the appropriate model listeners and clears the mapping table finder cache.
 	 *
-	 * @param pk the primary key of the group to set the associations for
+	 * @param pk the primary key of the group
 	 * @param organizations the organizations to be associated with the group
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -3708,9 +3708,9 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	}
 
 	/**
-	 * Gets all the permissions associated with the group.
+	 * Returns all the permissions associated with the group.
 	 *
-	 * @param pk the primary key of the group to get the associated permissions for
+	 * @param pk the primary key of the group
 	 * @return the permissions associated with the group
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -3720,15 +3720,15 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	}
 
 	/**
-	 * Gets a range of all the permissions associated with the group.
+	 * Returns a range of all the permissions associated with the group.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param pk the primary key of the group to get the associated permissions for
-	 * @param start the lower bound of the range of groups to return
-	 * @param end the upper bound of the range of groups to return (not inclusive)
+	 * @param pk the primary key of the group
+	 * @param start the lower bound of the range of groups
+	 * @param end the upper bound of the range of groups (not inclusive)
 	 * @return the range of permissions associated with the group
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -3747,15 +3747,15 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			});
 
 	/**
-	 * Gets an ordered range of all the permissions associated with the group.
+	 * Returns an ordered range of all the permissions associated with the group.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param pk the primary key of the group to get the associated permissions for
-	 * @param start the lower bound of the range of groups to return
-	 * @param end the upper bound of the range of groups to return (not inclusive)
+	 * @param pk the primary key of the group
+	 * @param start the lower bound of the range of groups
+	 * @param end the upper bound of the range of groups (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of permissions associated with the group
 	 * @throws SystemException if a system exception occurred
@@ -3827,9 +3827,9 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			"getPermissionsSize", new String[] { Long.class.getName() });
 
 	/**
-	 * Gets the number of permissions associated with the group.
+	 * Returns the number of permissions associated with the group.
 	 *
-	 * @param pk the primary key of the group to get the number of associated permissions for
+	 * @param pk the primary key of the group
 	 * @return the number of permissions associated with the group
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -4125,7 +4125,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	/**
 	 * Sets the permissions associated with the group, removing and adding associations as necessary. Also notifies the appropriate model listeners and clears the mapping table finder cache.
 	 *
-	 * @param pk the primary key of the group to set the associations for
+	 * @param pk the primary key of the group
 	 * @param permissionPKs the primary keys of the permissions to be associated with the group
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -4157,7 +4157,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	/**
 	 * Sets the permissions associated with the group, removing and adding associations as necessary. Also notifies the appropriate model listeners and clears the mapping table finder cache.
 	 *
-	 * @param pk the primary key of the group to set the associations for
+	 * @param pk the primary key of the group
 	 * @param permissions the permissions to be associated with the group
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -4184,9 +4184,9 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	}
 
 	/**
-	 * Gets all the roles associated with the group.
+	 * Returns all the roles associated with the group.
 	 *
-	 * @param pk the primary key of the group to get the associated roles for
+	 * @param pk the primary key of the group
 	 * @return the roles associated with the group
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -4196,15 +4196,15 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	}
 
 	/**
-	 * Gets a range of all the roles associated with the group.
+	 * Returns a range of all the roles associated with the group.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param pk the primary key of the group to get the associated roles for
-	 * @param start the lower bound of the range of groups to return
-	 * @param end the upper bound of the range of groups to return (not inclusive)
+	 * @param pk the primary key of the group
+	 * @param start the lower bound of the range of groups
+	 * @param end the upper bound of the range of groups (not inclusive)
 	 * @return the range of roles associated with the group
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -4222,15 +4222,15 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			});
 
 	/**
-	 * Gets an ordered range of all the roles associated with the group.
+	 * Returns an ordered range of all the roles associated with the group.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param pk the primary key of the group to get the associated roles for
-	 * @param start the lower bound of the range of groups to return
-	 * @param end the upper bound of the range of groups to return (not inclusive)
+	 * @param pk the primary key of the group
+	 * @param start the lower bound of the range of groups
+	 * @param end the upper bound of the range of groups (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of roles associated with the group
 	 * @throws SystemException if a system exception occurred
@@ -4301,9 +4301,9 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			new String[] { Long.class.getName() });
 
 	/**
-	 * Gets the number of roles associated with the group.
+	 * Returns the number of roles associated with the group.
 	 *
-	 * @param pk the primary key of the group to get the number of associated roles for
+	 * @param pk the primary key of the group
 	 * @return the number of roles associated with the group
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -4588,7 +4588,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	/**
 	 * Sets the roles associated with the group, removing and adding associations as necessary. Also notifies the appropriate model listeners and clears the mapping table finder cache.
 	 *
-	 * @param pk the primary key of the group to set the associations for
+	 * @param pk the primary key of the group
 	 * @param rolePKs the primary keys of the roles to be associated with the group
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -4619,7 +4619,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	/**
 	 * Sets the roles associated with the group, removing and adding associations as necessary. Also notifies the appropriate model listeners and clears the mapping table finder cache.
 	 *
-	 * @param pk the primary key of the group to set the associations for
+	 * @param pk the primary key of the group
 	 * @param roles the roles to be associated with the group
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -4645,9 +4645,9 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	}
 
 	/**
-	 * Gets all the user groups associated with the group.
+	 * Returns all the user groups associated with the group.
 	 *
-	 * @param pk the primary key of the group to get the associated user groups for
+	 * @param pk the primary key of the group
 	 * @return the user groups associated with the group
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -4657,15 +4657,15 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	}
 
 	/**
-	 * Gets a range of all the user groups associated with the group.
+	 * Returns a range of all the user groups associated with the group.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param pk the primary key of the group to get the associated user groups for
-	 * @param start the lower bound of the range of groups to return
-	 * @param end the upper bound of the range of groups to return (not inclusive)
+	 * @param pk the primary key of the group
+	 * @param start the lower bound of the range of groups
+	 * @param end the upper bound of the range of groups (not inclusive)
 	 * @return the range of user groups associated with the group
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -4684,15 +4684,15 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			});
 
 	/**
-	 * Gets an ordered range of all the user groups associated with the group.
+	 * Returns an ordered range of all the user groups associated with the group.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param pk the primary key of the group to get the associated user groups for
-	 * @param start the lower bound of the range of groups to return
-	 * @param end the upper bound of the range of groups to return (not inclusive)
+	 * @param pk the primary key of the group
+	 * @param start the lower bound of the range of groups
+	 * @param end the upper bound of the range of groups (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of user groups associated with the group
 	 * @throws SystemException if a system exception occurred
@@ -4764,9 +4764,9 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			"getUserGroupsSize", new String[] { Long.class.getName() });
 
 	/**
-	 * Gets the number of user groups associated with the group.
+	 * Returns the number of user groups associated with the group.
 	 *
-	 * @param pk the primary key of the group to get the number of associated user groups for
+	 * @param pk the primary key of the group
 	 * @return the number of user groups associated with the group
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -5060,7 +5060,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	/**
 	 * Sets the user groups associated with the group, removing and adding associations as necessary. Also notifies the appropriate model listeners and clears the mapping table finder cache.
 	 *
-	 * @param pk the primary key of the group to set the associations for
+	 * @param pk the primary key of the group
 	 * @param userGroupPKs the primary keys of the user groups to be associated with the group
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -5092,7 +5092,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	/**
 	 * Sets the user groups associated with the group, removing and adding associations as necessary. Also notifies the appropriate model listeners and clears the mapping table finder cache.
 	 *
-	 * @param pk the primary key of the group to set the associations for
+	 * @param pk the primary key of the group
 	 * @param userGroups the user groups to be associated with the group
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -5119,9 +5119,9 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	}
 
 	/**
-	 * Gets all the users associated with the group.
+	 * Returns all the users associated with the group.
 	 *
-	 * @param pk the primary key of the group to get the associated users for
+	 * @param pk the primary key of the group
 	 * @return the users associated with the group
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -5131,15 +5131,15 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	}
 
 	/**
-	 * Gets a range of all the users associated with the group.
+	 * Returns a range of all the users associated with the group.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param pk the primary key of the group to get the associated users for
-	 * @param start the lower bound of the range of groups to return
-	 * @param end the upper bound of the range of groups to return (not inclusive)
+	 * @param pk the primary key of the group
+	 * @param start the lower bound of the range of groups
+	 * @param end the upper bound of the range of groups (not inclusive)
 	 * @return the range of users associated with the group
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -5157,15 +5157,15 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			});
 
 	/**
-	 * Gets an ordered range of all the users associated with the group.
+	 * Returns an ordered range of all the users associated with the group.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param pk the primary key of the group to get the associated users for
-	 * @param start the lower bound of the range of groups to return
-	 * @param end the upper bound of the range of groups to return (not inclusive)
+	 * @param pk the primary key of the group
+	 * @param start the lower bound of the range of groups
+	 * @param end the upper bound of the range of groups (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of users associated with the group
 	 * @throws SystemException if a system exception occurred
@@ -5236,9 +5236,9 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			new String[] { Long.class.getName() });
 
 	/**
-	 * Gets the number of users associated with the group.
+	 * Returns the number of users associated with the group.
 	 *
-	 * @param pk the primary key of the group to get the number of associated users for
+	 * @param pk the primary key of the group
 	 * @return the number of users associated with the group
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -5523,7 +5523,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	/**
 	 * Sets the users associated with the group, removing and adding associations as necessary. Also notifies the appropriate model listeners and clears the mapping table finder cache.
 	 *
-	 * @param pk the primary key of the group to set the associations for
+	 * @param pk the primary key of the group
 	 * @param userPKs the primary keys of the users to be associated with the group
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -5554,7 +5554,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	/**
 	 * Sets the users associated with the group, removing and adding associations as necessary. Also notifies the appropriate model listeners and clears the mapping table finder cache.
 	 *
-	 * @param pk the primary key of the group to set the associations for
+	 * @param pk the primary key of the group
 	 * @param users the users to be associated with the group
 	 * @throws SystemException if a system exception occurred
 	 */

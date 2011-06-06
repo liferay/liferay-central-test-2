@@ -44,21 +44,21 @@ public interface ImageModel extends BaseModel<Image> {
 	 */
 
 	/**
-	 * Gets the primary key of this image.
+	 * Returns the primary key of this image.
 	 *
 	 * @return the primary key of this image
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this image
+	 * Sets the primary key of this image.
 	 *
 	 * @param primaryKey the primary key of this image
 	 */
 	public void setPrimaryKey(long primaryKey);
 
 	/**
-	 * Gets the image ID of this image.
+	 * Returns the image ID of this image.
 	 *
 	 * @return the image ID of this image
 	 */
@@ -72,7 +72,7 @@ public interface ImageModel extends BaseModel<Image> {
 	public void setImageId(long imageId);
 
 	/**
-	 * Gets the modified date of this image.
+	 * Returns the modified date of this image.
 	 *
 	 * @return the modified date of this image
 	 */
@@ -86,7 +86,7 @@ public interface ImageModel extends BaseModel<Image> {
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
-	 * Gets the text of this image.
+	 * Returns the text of this image.
 	 *
 	 * @return the text of this image
 	 */
@@ -101,7 +101,7 @@ public interface ImageModel extends BaseModel<Image> {
 	public void setText(String text);
 
 	/**
-	 * Gets the type of this image.
+	 * Returns the type of this image.
 	 *
 	 * @return the type of this image
 	 */
@@ -116,7 +116,7 @@ public interface ImageModel extends BaseModel<Image> {
 	public void setType(String type);
 
 	/**
-	 * Gets the height of this image.
+	 * Returns the height of this image.
 	 *
 	 * @return the height of this image
 	 */
@@ -130,7 +130,7 @@ public interface ImageModel extends BaseModel<Image> {
 	public void setHeight(int height);
 
 	/**
-	 * Gets the width of this image.
+	 * Returns the width of this image.
 	 *
 	 * @return the width of this image
 	 */
@@ -144,7 +144,7 @@ public interface ImageModel extends BaseModel<Image> {
 	public void setWidth(int width);
 
 	/**
-	 * Gets the size of this image.
+	 * Returns the size of this image.
 	 *
 	 * @return the size of this image
 	 */

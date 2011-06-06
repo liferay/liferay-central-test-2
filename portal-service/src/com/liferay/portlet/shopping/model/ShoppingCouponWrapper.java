@@ -37,7 +37,7 @@ public class ShoppingCouponWrapper implements ShoppingCoupon {
 	}
 
 	/**
-	* Gets the primary key of this shopping coupon.
+	* Returns the primary key of this shopping coupon.
 	*
 	* @return the primary key of this shopping coupon
 	*/
@@ -46,7 +46,7 @@ public class ShoppingCouponWrapper implements ShoppingCoupon {
 	}
 
 	/**
-	* Sets the primary key of this shopping coupon
+	* Sets the primary key of this shopping coupon.
 	*
 	* @param primaryKey the primary key of this shopping coupon
 	*/
@@ -55,7 +55,7 @@ public class ShoppingCouponWrapper implements ShoppingCoupon {
 	}
 
 	/**
-	* Gets the coupon ID of this shopping coupon.
+	* Returns the coupon ID of this shopping coupon.
 	*
 	* @return the coupon ID of this shopping coupon
 	*/
@@ -73,7 +73,7 @@ public class ShoppingCouponWrapper implements ShoppingCoupon {
 	}
 
 	/**
-	* Gets the group ID of this shopping coupon.
+	* Returns the group ID of this shopping coupon.
 	*
 	* @return the group ID of this shopping coupon
 	*/
@@ -91,7 +91,7 @@ public class ShoppingCouponWrapper implements ShoppingCoupon {
 	}
 
 	/**
-	* Gets the company ID of this shopping coupon.
+	* Returns the company ID of this shopping coupon.
 	*
 	* @return the company ID of this shopping coupon
 	*/
@@ -109,7 +109,7 @@ public class ShoppingCouponWrapper implements ShoppingCoupon {
 	}
 
 	/**
-	* Gets the user ID of this shopping coupon.
+	* Returns the user ID of this shopping coupon.
 	*
 	* @return the user ID of this shopping coupon
 	*/
@@ -127,7 +127,7 @@ public class ShoppingCouponWrapper implements ShoppingCoupon {
 	}
 
 	/**
-	* Gets the user uuid of this shopping coupon.
+	* Returns the user uuid of this shopping coupon.
 	*
 	* @return the user uuid of this shopping coupon
 	* @throws SystemException if a system exception occurred
@@ -147,7 +147,7 @@ public class ShoppingCouponWrapper implements ShoppingCoupon {
 	}
 
 	/**
-	* Gets the user name of this shopping coupon.
+	* Returns the user name of this shopping coupon.
 	*
 	* @return the user name of this shopping coupon
 	*/
@@ -165,7 +165,7 @@ public class ShoppingCouponWrapper implements ShoppingCoupon {
 	}
 
 	/**
-	* Gets the create date of this shopping coupon.
+	* Returns the create date of this shopping coupon.
 	*
 	* @return the create date of this shopping coupon
 	*/
@@ -183,7 +183,7 @@ public class ShoppingCouponWrapper implements ShoppingCoupon {
 	}
 
 	/**
-	* Gets the modified date of this shopping coupon.
+	* Returns the modified date of this shopping coupon.
 	*
 	* @return the modified date of this shopping coupon
 	*/
@@ -201,7 +201,7 @@ public class ShoppingCouponWrapper implements ShoppingCoupon {
 	}
 
 	/**
-	* Gets the code of this shopping coupon.
+	* Returns the code of this shopping coupon.
 	*
 	* @return the code of this shopping coupon
 	*/
@@ -219,7 +219,7 @@ public class ShoppingCouponWrapper implements ShoppingCoupon {
 	}
 
 	/**
-	* Gets the name of this shopping coupon.
+	* Returns the name of this shopping coupon.
 	*
 	* @return the name of this shopping coupon
 	*/
@@ -237,7 +237,7 @@ public class ShoppingCouponWrapper implements ShoppingCoupon {
 	}
 
 	/**
-	* Gets the description of this shopping coupon.
+	* Returns the description of this shopping coupon.
 	*
 	* @return the description of this shopping coupon
 	*/
@@ -255,7 +255,7 @@ public class ShoppingCouponWrapper implements ShoppingCoupon {
 	}
 
 	/**
-	* Gets the start date of this shopping coupon.
+	* Returns the start date of this shopping coupon.
 	*
 	* @return the start date of this shopping coupon
 	*/
@@ -273,7 +273,7 @@ public class ShoppingCouponWrapper implements ShoppingCoupon {
 	}
 
 	/**
-	* Gets the end date of this shopping coupon.
+	* Returns the end date of this shopping coupon.
 	*
 	* @return the end date of this shopping coupon
 	*/
@@ -291,7 +291,7 @@ public class ShoppingCouponWrapper implements ShoppingCoupon {
 	}
 
 	/**
-	* Gets the active of this shopping coupon.
+	* Returns the active of this shopping coupon.
 	*
 	* @return the active of this shopping coupon
 	*/
@@ -318,7 +318,7 @@ public class ShoppingCouponWrapper implements ShoppingCoupon {
 	}
 
 	/**
-	* Gets the limit categories of this shopping coupon.
+	* Returns the limit categories of this shopping coupon.
 	*
 	* @return the limit categories of this shopping coupon
 	*/
@@ -336,7 +336,7 @@ public class ShoppingCouponWrapper implements ShoppingCoupon {
 	}
 
 	/**
-	* Gets the limit skus of this shopping coupon.
+	* Returns the limit skus of this shopping coupon.
 	*
 	* @return the limit skus of this shopping coupon
 	*/
@@ -354,7 +354,7 @@ public class ShoppingCouponWrapper implements ShoppingCoupon {
 	}
 
 	/**
-	* Gets the min order of this shopping coupon.
+	* Returns the min order of this shopping coupon.
 	*
 	* @return the min order of this shopping coupon
 	*/
@@ -372,7 +372,7 @@ public class ShoppingCouponWrapper implements ShoppingCoupon {
 	}
 
 	/**
-	* Gets the discount of this shopping coupon.
+	* Returns the discount of this shopping coupon.
 	*
 	* @return the discount of this shopping coupon
 	*/
@@ -390,7 +390,7 @@ public class ShoppingCouponWrapper implements ShoppingCoupon {
 	}
 
 	/**
-	* Gets the discount type of this shopping coupon.
+	* Returns the discount type of this shopping coupon.
 	*
 	* @return the discount type of this shopping coupon
 	*/

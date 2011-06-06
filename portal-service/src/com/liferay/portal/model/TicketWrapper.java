@@ -37,7 +37,7 @@ public class TicketWrapper implements Ticket {
 	}
 
 	/**
-	* Gets the primary key of this ticket.
+	* Returns the primary key of this ticket.
 	*
 	* @return the primary key of this ticket
 	*/
@@ -46,7 +46,7 @@ public class TicketWrapper implements Ticket {
 	}
 
 	/**
-	* Sets the primary key of this ticket
+	* Sets the primary key of this ticket.
 	*
 	* @param primaryKey the primary key of this ticket
 	*/
@@ -55,7 +55,7 @@ public class TicketWrapper implements Ticket {
 	}
 
 	/**
-	* Gets the ticket ID of this ticket.
+	* Returns the ticket ID of this ticket.
 	*
 	* @return the ticket ID of this ticket
 	*/
@@ -73,7 +73,7 @@ public class TicketWrapper implements Ticket {
 	}
 
 	/**
-	* Gets the company ID of this ticket.
+	* Returns the company ID of this ticket.
 	*
 	* @return the company ID of this ticket
 	*/
@@ -91,7 +91,7 @@ public class TicketWrapper implements Ticket {
 	}
 
 	/**
-	* Gets the create date of this ticket.
+	* Returns the create date of this ticket.
 	*
 	* @return the create date of this ticket
 	*/
@@ -109,16 +109,16 @@ public class TicketWrapper implements Ticket {
 	}
 
 	/**
-	* Gets the class name of the model instance this ticket is polymorphically associated with.
+	* Returns the fully qualified class name of this ticket.
 	*
-	* @return the class name of the model instance this ticket is polymorphically associated with
+	* @return the fully qualified class name of this ticket
 	*/
 	public java.lang.String getClassName() {
 		return _ticket.getClassName();
 	}
 
 	/**
-	* Gets the class name ID of this ticket.
+	* Returns the class name ID of this ticket.
 	*
 	* @return the class name ID of this ticket
 	*/
@@ -136,7 +136,7 @@ public class TicketWrapper implements Ticket {
 	}
 
 	/**
-	* Gets the class p k of this ticket.
+	* Returns the class p k of this ticket.
 	*
 	* @return the class p k of this ticket
 	*/
@@ -154,7 +154,7 @@ public class TicketWrapper implements Ticket {
 	}
 
 	/**
-	* Gets the key of this ticket.
+	* Returns the key of this ticket.
 	*
 	* @return the key of this ticket
 	*/
@@ -172,7 +172,7 @@ public class TicketWrapper implements Ticket {
 	}
 
 	/**
-	* Gets the expiration date of this ticket.
+	* Returns the expiration date of this ticket.
 	*
 	* @return the expiration date of this ticket
 	*/

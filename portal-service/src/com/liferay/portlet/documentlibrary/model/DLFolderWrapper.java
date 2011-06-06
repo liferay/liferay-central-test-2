@@ -37,7 +37,7 @@ public class DLFolderWrapper implements DLFolder {
 	}
 
 	/**
-	* Gets the primary key of this d l folder.
+	* Returns the primary key of this d l folder.
 	*
 	* @return the primary key of this d l folder
 	*/
@@ -46,7 +46,7 @@ public class DLFolderWrapper implements DLFolder {
 	}
 
 	/**
-	* Sets the primary key of this d l folder
+	* Sets the primary key of this d l folder.
 	*
 	* @param primaryKey the primary key of this d l folder
 	*/
@@ -55,7 +55,7 @@ public class DLFolderWrapper implements DLFolder {
 	}
 
 	/**
-	* Gets the uuid of this d l folder.
+	* Returns the uuid of this d l folder.
 	*
 	* @return the uuid of this d l folder
 	*/
@@ -73,7 +73,7 @@ public class DLFolderWrapper implements DLFolder {
 	}
 
 	/**
-	* Gets the folder ID of this d l folder.
+	* Returns the folder ID of this d l folder.
 	*
 	* @return the folder ID of this d l folder
 	*/
@@ -91,7 +91,7 @@ public class DLFolderWrapper implements DLFolder {
 	}
 
 	/**
-	* Gets the group ID of this d l folder.
+	* Returns the group ID of this d l folder.
 	*
 	* @return the group ID of this d l folder
 	*/
@@ -109,7 +109,7 @@ public class DLFolderWrapper implements DLFolder {
 	}
 
 	/**
-	* Gets the company ID of this d l folder.
+	* Returns the company ID of this d l folder.
 	*
 	* @return the company ID of this d l folder
 	*/
@@ -127,7 +127,7 @@ public class DLFolderWrapper implements DLFolder {
 	}
 
 	/**
-	* Gets the user ID of this d l folder.
+	* Returns the user ID of this d l folder.
 	*
 	* @return the user ID of this d l folder
 	*/
@@ -145,7 +145,7 @@ public class DLFolderWrapper implements DLFolder {
 	}
 
 	/**
-	* Gets the user uuid of this d l folder.
+	* Returns the user uuid of this d l folder.
 	*
 	* @return the user uuid of this d l folder
 	* @throws SystemException if a system exception occurred
@@ -165,7 +165,7 @@ public class DLFolderWrapper implements DLFolder {
 	}
 
 	/**
-	* Gets the user name of this d l folder.
+	* Returns the user name of this d l folder.
 	*
 	* @return the user name of this d l folder
 	*/
@@ -183,7 +183,7 @@ public class DLFolderWrapper implements DLFolder {
 	}
 
 	/**
-	* Gets the create date of this d l folder.
+	* Returns the create date of this d l folder.
 	*
 	* @return the create date of this d l folder
 	*/
@@ -201,7 +201,7 @@ public class DLFolderWrapper implements DLFolder {
 	}
 
 	/**
-	* Gets the modified date of this d l folder.
+	* Returns the modified date of this d l folder.
 	*
 	* @return the modified date of this d l folder
 	*/
@@ -219,7 +219,7 @@ public class DLFolderWrapper implements DLFolder {
 	}
 
 	/**
-	* Gets the repository ID of this d l folder.
+	* Returns the repository ID of this d l folder.
 	*
 	* @return the repository ID of this d l folder
 	*/
@@ -237,7 +237,7 @@ public class DLFolderWrapper implements DLFolder {
 	}
 
 	/**
-	* Gets the mount point of this d l folder.
+	* Returns the mount point of this d l folder.
 	*
 	* @return the mount point of this d l folder
 	*/
@@ -264,7 +264,7 @@ public class DLFolderWrapper implements DLFolder {
 	}
 
 	/**
-	* Gets the parent folder ID of this d l folder.
+	* Returns the parent folder ID of this d l folder.
 	*
 	* @return the parent folder ID of this d l folder
 	*/
@@ -282,7 +282,7 @@ public class DLFolderWrapper implements DLFolder {
 	}
 
 	/**
-	* Gets the name of this d l folder.
+	* Returns the name of this d l folder.
 	*
 	* @return the name of this d l folder
 	*/
@@ -300,7 +300,7 @@ public class DLFolderWrapper implements DLFolder {
 	}
 
 	/**
-	* Gets the description of this d l folder.
+	* Returns the description of this d l folder.
 	*
 	* @return the description of this d l folder
 	*/
@@ -318,7 +318,7 @@ public class DLFolderWrapper implements DLFolder {
 	}
 
 	/**
-	* Gets the last post date of this d l folder.
+	* Returns the last post date of this d l folder.
 	*
 	* @return the last post date of this d l folder
 	*/

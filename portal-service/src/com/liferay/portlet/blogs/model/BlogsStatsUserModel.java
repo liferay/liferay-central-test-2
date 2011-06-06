@@ -45,21 +45,21 @@ public interface BlogsStatsUserModel extends BaseModel<BlogsStatsUser> {
 	 */
 
 	/**
-	 * Gets the primary key of this blogs stats user.
+	 * Returns the primary key of this blogs stats user.
 	 *
 	 * @return the primary key of this blogs stats user
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this blogs stats user
+	 * Sets the primary key of this blogs stats user.
 	 *
 	 * @param primaryKey the primary key of this blogs stats user
 	 */
 	public void setPrimaryKey(long primaryKey);
 
 	/**
-	 * Gets the stats user ID of this blogs stats user.
+	 * Returns the stats user ID of this blogs stats user.
 	 *
 	 * @return the stats user ID of this blogs stats user
 	 */
@@ -73,7 +73,7 @@ public interface BlogsStatsUserModel extends BaseModel<BlogsStatsUser> {
 	public void setStatsUserId(long statsUserId);
 
 	/**
-	 * Gets the stats user uuid of this blogs stats user.
+	 * Returns the stats user uuid of this blogs stats user.
 	 *
 	 * @return the stats user uuid of this blogs stats user
 	 * @throws SystemException if a system exception occurred
@@ -88,7 +88,7 @@ public interface BlogsStatsUserModel extends BaseModel<BlogsStatsUser> {
 	public void setStatsUserUuid(String statsUserUuid);
 
 	/**
-	 * Gets the group ID of this blogs stats user.
+	 * Returns the group ID of this blogs stats user.
 	 *
 	 * @return the group ID of this blogs stats user
 	 */
@@ -102,7 +102,7 @@ public interface BlogsStatsUserModel extends BaseModel<BlogsStatsUser> {
 	public void setGroupId(long groupId);
 
 	/**
-	 * Gets the company ID of this blogs stats user.
+	 * Returns the company ID of this blogs stats user.
 	 *
 	 * @return the company ID of this blogs stats user
 	 */
@@ -116,7 +116,7 @@ public interface BlogsStatsUserModel extends BaseModel<BlogsStatsUser> {
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the user ID of this blogs stats user.
+	 * Returns the user ID of this blogs stats user.
 	 *
 	 * @return the user ID of this blogs stats user
 	 */
@@ -130,7 +130,7 @@ public interface BlogsStatsUserModel extends BaseModel<BlogsStatsUser> {
 	public void setUserId(long userId);
 
 	/**
-	 * Gets the user uuid of this blogs stats user.
+	 * Returns the user uuid of this blogs stats user.
 	 *
 	 * @return the user uuid of this blogs stats user
 	 * @throws SystemException if a system exception occurred
@@ -145,7 +145,7 @@ public interface BlogsStatsUserModel extends BaseModel<BlogsStatsUser> {
 	public void setUserUuid(String userUuid);
 
 	/**
-	 * Gets the entry count of this blogs stats user.
+	 * Returns the entry count of this blogs stats user.
 	 *
 	 * @return the entry count of this blogs stats user
 	 */
@@ -159,7 +159,7 @@ public interface BlogsStatsUserModel extends BaseModel<BlogsStatsUser> {
 	public void setEntryCount(int entryCount);
 
 	/**
-	 * Gets the last post date of this blogs stats user.
+	 * Returns the last post date of this blogs stats user.
 	 *
 	 * @return the last post date of this blogs stats user
 	 */
@@ -173,7 +173,7 @@ public interface BlogsStatsUserModel extends BaseModel<BlogsStatsUser> {
 	public void setLastPostDate(Date lastPostDate);
 
 	/**
-	 * Gets the ratings total entries of this blogs stats user.
+	 * Returns the ratings total entries of this blogs stats user.
 	 *
 	 * @return the ratings total entries of this blogs stats user
 	 */
@@ -187,7 +187,7 @@ public interface BlogsStatsUserModel extends BaseModel<BlogsStatsUser> {
 	public void setRatingsTotalEntries(int ratingsTotalEntries);
 
 	/**
-	 * Gets the ratings total score of this blogs stats user.
+	 * Returns the ratings total score of this blogs stats user.
 	 *
 	 * @return the ratings total score of this blogs stats user
 	 */
@@ -201,7 +201,7 @@ public interface BlogsStatsUserModel extends BaseModel<BlogsStatsUser> {
 	public void setRatingsTotalScore(double ratingsTotalScore);
 
 	/**
-	 * Gets the ratings average score of this blogs stats user.
+	 * Returns the ratings average score of this blogs stats user.
 	 *
 	 * @return the ratings average score of this blogs stats user
 	 */

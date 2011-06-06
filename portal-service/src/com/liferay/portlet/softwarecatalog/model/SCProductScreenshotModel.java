@@ -42,21 +42,21 @@ public interface SCProductScreenshotModel extends BaseModel<SCProductScreenshot>
 	 */
 
 	/**
-	 * Gets the primary key of this s c product screenshot.
+	 * Returns the primary key of this s c product screenshot.
 	 *
 	 * @return the primary key of this s c product screenshot
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this s c product screenshot
+	 * Sets the primary key of this s c product screenshot.
 	 *
 	 * @param primaryKey the primary key of this s c product screenshot
 	 */
 	public void setPrimaryKey(long primaryKey);
 
 	/**
-	 * Gets the product screenshot ID of this s c product screenshot.
+	 * Returns the product screenshot ID of this s c product screenshot.
 	 *
 	 * @return the product screenshot ID of this s c product screenshot
 	 */
@@ -70,7 +70,7 @@ public interface SCProductScreenshotModel extends BaseModel<SCProductScreenshot>
 	public void setProductScreenshotId(long productScreenshotId);
 
 	/**
-	 * Gets the company ID of this s c product screenshot.
+	 * Returns the company ID of this s c product screenshot.
 	 *
 	 * @return the company ID of this s c product screenshot
 	 */
@@ -84,7 +84,7 @@ public interface SCProductScreenshotModel extends BaseModel<SCProductScreenshot>
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the group ID of this s c product screenshot.
+	 * Returns the group ID of this s c product screenshot.
 	 *
 	 * @return the group ID of this s c product screenshot
 	 */
@@ -98,7 +98,7 @@ public interface SCProductScreenshotModel extends BaseModel<SCProductScreenshot>
 	public void setGroupId(long groupId);
 
 	/**
-	 * Gets the product entry ID of this s c product screenshot.
+	 * Returns the product entry ID of this s c product screenshot.
 	 *
 	 * @return the product entry ID of this s c product screenshot
 	 */
@@ -112,7 +112,7 @@ public interface SCProductScreenshotModel extends BaseModel<SCProductScreenshot>
 	public void setProductEntryId(long productEntryId);
 
 	/**
-	 * Gets the thumbnail ID of this s c product screenshot.
+	 * Returns the thumbnail ID of this s c product screenshot.
 	 *
 	 * @return the thumbnail ID of this s c product screenshot
 	 */
@@ -126,7 +126,7 @@ public interface SCProductScreenshotModel extends BaseModel<SCProductScreenshot>
 	public void setThumbnailId(long thumbnailId);
 
 	/**
-	 * Gets the full image ID of this s c product screenshot.
+	 * Returns the full image ID of this s c product screenshot.
 	 *
 	 * @return the full image ID of this s c product screenshot
 	 */
@@ -140,7 +140,7 @@ public interface SCProductScreenshotModel extends BaseModel<SCProductScreenshot>
 	public void setFullImageId(long fullImageId);
 
 	/**
-	 * Gets the priority of this s c product screenshot.
+	 * Returns the priority of this s c product screenshot.
 	 *
 	 * @return the priority of this s c product screenshot
 	 */

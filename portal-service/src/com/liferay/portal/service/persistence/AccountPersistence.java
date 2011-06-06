@@ -39,14 +39,14 @@ public interface AccountPersistence extends BasePersistence<Account> {
 	/**
 	* Caches the account in the entity cache if it is enabled.
 	*
-	* @param account the account to cache
+	* @param account the account
 	*/
 	public void cacheResult(com.liferay.portal.model.Account account);
 
 	/**
 	* Caches the accounts in the entity cache if it is enabled.
 	*
-	* @param accounts the accounts to cache
+	* @param accounts the accounts
 	*/
 	public void cacheResult(
 		java.util.List<com.liferay.portal.model.Account> accounts);
@@ -62,7 +62,7 @@ public interface AccountPersistence extends BasePersistence<Account> {
 	/**
 	* Removes the account with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param accountId the primary key of the account to remove
+	* @param accountId the primary key of the account
 	* @return the account that was removed
 	* @throws com.liferay.portal.NoSuchAccountException if a account with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -76,9 +76,9 @@ public interface AccountPersistence extends BasePersistence<Account> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the account with the primary key or throws a {@link com.liferay.portal.NoSuchAccountException} if it could not be found.
+	* Returns the account with the primary key or throws a {@link com.liferay.portal.NoSuchAccountException} if it could not be found.
 	*
-	* @param accountId the primary key of the account to find
+	* @param accountId the primary key of the account
 	* @return the account
 	* @throws com.liferay.portal.NoSuchAccountException if a account with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -88,9 +88,9 @@ public interface AccountPersistence extends BasePersistence<Account> {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the account with the primary key or returns <code>null</code> if it could not be found.
+	* Returns the account with the primary key or returns <code>null</code> if it could not be found.
 	*
-	* @param accountId the primary key of the account to find
+	* @param accountId the primary key of the account
 	* @return the account, or <code>null</code> if a account with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -98,7 +98,7 @@ public interface AccountPersistence extends BasePersistence<Account> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds all the accounts.
+	* Returns all the accounts.
 	*
 	* @return the accounts
 	* @throws SystemException if a system exception occurred
@@ -107,14 +107,14 @@ public interface AccountPersistence extends BasePersistence<Account> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds a range of all the accounts.
+	* Returns a range of all the accounts.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of accounts to return
-	* @param end the upper bound of the range of accounts to return (not inclusive)
+	* @param start the lower bound of the range of accounts
+	* @param end the upper bound of the range of accounts (not inclusive)
 	* @return the range of accounts
 	* @throws SystemException if a system exception occurred
 	*/
@@ -122,14 +122,14 @@ public interface AccountPersistence extends BasePersistence<Account> {
 		int end) throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds an ordered range of all the accounts.
+	* Returns an ordered range of all the accounts.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of accounts to return
-	* @param end the upper bound of the range of accounts to return (not inclusive)
+	* @param start the lower bound of the range of accounts
+	* @param end the upper bound of the range of accounts (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of accounts
 	* @throws SystemException if a system exception occurred
@@ -148,7 +148,7 @@ public interface AccountPersistence extends BasePersistence<Account> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Counts all the accounts.
+	* Returns the number of accounts.
 	*
 	* @return the number of accounts
 	* @throws SystemException if a system exception occurred

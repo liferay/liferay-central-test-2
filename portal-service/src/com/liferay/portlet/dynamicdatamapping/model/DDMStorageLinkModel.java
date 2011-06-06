@@ -45,21 +45,21 @@ public interface DDMStorageLinkModel extends AttachedModel,
 	 */
 
 	/**
-	 * Gets the primary key of this d d m storage link.
+	 * Returns the primary key of this d d m storage link.
 	 *
 	 * @return the primary key of this d d m storage link
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this d d m storage link
+	 * Sets the primary key of this d d m storage link.
 	 *
 	 * @param primaryKey the primary key of this d d m storage link
 	 */
 	public void setPrimaryKey(long primaryKey);
 
 	/**
-	 * Gets the uuid of this d d m storage link.
+	 * Returns the uuid of this d d m storage link.
 	 *
 	 * @return the uuid of this d d m storage link
 	 */
@@ -74,7 +74,7 @@ public interface DDMStorageLinkModel extends AttachedModel,
 	public void setUuid(String uuid);
 
 	/**
-	 * Gets the storage link ID of this d d m storage link.
+	 * Returns the storage link ID of this d d m storage link.
 	 *
 	 * @return the storage link ID of this d d m storage link
 	 */
@@ -88,14 +88,14 @@ public interface DDMStorageLinkModel extends AttachedModel,
 	public void setStorageLinkId(long storageLinkId);
 
 	/**
-	 * Gets the class name of the model instance this d d m storage link is polymorphically associated with.
+	 * Returns the fully qualified class name of this d d m storage link.
 	 *
-	 * @return the class name of the model instance this d d m storage link is polymorphically associated with
+	 * @return the fully qualified class name of this d d m storage link
 	 */
 	public String getClassName();
 
 	/**
-	 * Gets the class name ID of this d d m storage link.
+	 * Returns the class name ID of this d d m storage link.
 	 *
 	 * @return the class name ID of this d d m storage link
 	 */
@@ -109,7 +109,7 @@ public interface DDMStorageLinkModel extends AttachedModel,
 	public void setClassNameId(long classNameId);
 
 	/**
-	 * Gets the class p k of this d d m storage link.
+	 * Returns the class p k of this d d m storage link.
 	 *
 	 * @return the class p k of this d d m storage link
 	 */
@@ -123,7 +123,7 @@ public interface DDMStorageLinkModel extends AttachedModel,
 	public void setClassPK(long classPK);
 
 	/**
-	 * Gets the structure ID of this d d m storage link.
+	 * Returns the structure ID of this d d m storage link.
 	 *
 	 * @return the structure ID of this d d m storage link
 	 */

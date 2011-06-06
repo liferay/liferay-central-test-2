@@ -46,21 +46,21 @@ public interface WebsiteModel extends AttachedModel, AuditedModel,
 	 */
 
 	/**
-	 * Gets the primary key of this website.
+	 * Returns the primary key of this website.
 	 *
 	 * @return the primary key of this website
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this website
+	 * Sets the primary key of this website.
 	 *
 	 * @param primaryKey the primary key of this website
 	 */
 	public void setPrimaryKey(long primaryKey);
 
 	/**
-	 * Gets the website ID of this website.
+	 * Returns the website ID of this website.
 	 *
 	 * @return the website ID of this website
 	 */
@@ -74,7 +74,7 @@ public interface WebsiteModel extends AttachedModel, AuditedModel,
 	public void setWebsiteId(long websiteId);
 
 	/**
-	 * Gets the company ID of this website.
+	 * Returns the company ID of this website.
 	 *
 	 * @return the company ID of this website
 	 */
@@ -88,7 +88,7 @@ public interface WebsiteModel extends AttachedModel, AuditedModel,
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the user ID of this website.
+	 * Returns the user ID of this website.
 	 *
 	 * @return the user ID of this website
 	 */
@@ -102,7 +102,7 @@ public interface WebsiteModel extends AttachedModel, AuditedModel,
 	public void setUserId(long userId);
 
 	/**
-	 * Gets the user uuid of this website.
+	 * Returns the user uuid of this website.
 	 *
 	 * @return the user uuid of this website
 	 * @throws SystemException if a system exception occurred
@@ -117,7 +117,7 @@ public interface WebsiteModel extends AttachedModel, AuditedModel,
 	public void setUserUuid(String userUuid);
 
 	/**
-	 * Gets the user name of this website.
+	 * Returns the user name of this website.
 	 *
 	 * @return the user name of this website
 	 */
@@ -132,7 +132,7 @@ public interface WebsiteModel extends AttachedModel, AuditedModel,
 	public void setUserName(String userName);
 
 	/**
-	 * Gets the create date of this website.
+	 * Returns the create date of this website.
 	 *
 	 * @return the create date of this website
 	 */
@@ -146,7 +146,7 @@ public interface WebsiteModel extends AttachedModel, AuditedModel,
 	public void setCreateDate(Date createDate);
 
 	/**
-	 * Gets the modified date of this website.
+	 * Returns the modified date of this website.
 	 *
 	 * @return the modified date of this website
 	 */
@@ -160,14 +160,14 @@ public interface WebsiteModel extends AttachedModel, AuditedModel,
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
-	 * Gets the class name of the model instance this website is polymorphically associated with.
+	 * Returns the fully qualified class name of this website.
 	 *
-	 * @return the class name of the model instance this website is polymorphically associated with
+	 * @return the fully qualified class name of this website
 	 */
 	public String getClassName();
 
 	/**
-	 * Gets the class name ID of this website.
+	 * Returns the class name ID of this website.
 	 *
 	 * @return the class name ID of this website
 	 */
@@ -181,7 +181,7 @@ public interface WebsiteModel extends AttachedModel, AuditedModel,
 	public void setClassNameId(long classNameId);
 
 	/**
-	 * Gets the class p k of this website.
+	 * Returns the class p k of this website.
 	 *
 	 * @return the class p k of this website
 	 */
@@ -195,7 +195,7 @@ public interface WebsiteModel extends AttachedModel, AuditedModel,
 	public void setClassPK(long classPK);
 
 	/**
-	 * Gets the url of this website.
+	 * Returns the url of this website.
 	 *
 	 * @return the url of this website
 	 */
@@ -210,7 +210,7 @@ public interface WebsiteModel extends AttachedModel, AuditedModel,
 	public void setUrl(String url);
 
 	/**
-	 * Gets the type ID of this website.
+	 * Returns the type ID of this website.
 	 *
 	 * @return the type ID of this website
 	 */
@@ -224,7 +224,7 @@ public interface WebsiteModel extends AttachedModel, AuditedModel,
 	public void setTypeId(int typeId);
 
 	/**
-	 * Gets the primary of this website.
+	 * Returns the primary of this website.
 	 *
 	 * @return the primary of this website
 	 */

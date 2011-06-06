@@ -41,7 +41,7 @@ public class LayoutSetLocalServiceUtil {
 	/**
 	* Adds the layout set to the database. Also notifies the appropriate model listeners.
 	*
-	* @param layoutSet the layout set to add
+	* @param layoutSet the layout set
 	* @return the layout set that was added
 	* @throws SystemException if a system exception occurred
 	*/
@@ -65,7 +65,7 @@ public class LayoutSetLocalServiceUtil {
 	/**
 	* Deletes the layout set with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param layoutSetId the primary key of the layout set to delete
+	* @param layoutSetId the primary key of the layout set
 	* @throws PortalException if a layout set with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -78,7 +78,7 @@ public class LayoutSetLocalServiceUtil {
 	/**
 	* Deletes the layout set from the database. Also notifies the appropriate model listeners.
 	*
-	* @param layoutSet the layout set to delete
+	* @param layoutSet the layout set
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void deleteLayoutSet(
@@ -90,7 +90,7 @@ public class LayoutSetLocalServiceUtil {
 	/**
 	* Performs a dynamic query on the database and returns the matching rows.
 	*
-	* @param dynamicQuery the dynamic query to search with
+	* @param dynamicQuery the dynamic query
 	* @return the matching rows
 	* @throws SystemException if a system exception occurred
 	*/
@@ -108,9 +108,9 @@ public class LayoutSetLocalServiceUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param dynamicQuery the dynamic query to search with
-	* @param start the lower bound of the range of model instances to return
-	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param dynamicQuery the dynamic query
+	* @param start the lower bound of the range of model instances
+	* @param end the upper bound of the range of model instances (not inclusive)
 	* @return the range of matching rows
 	* @throws SystemException if a system exception occurred
 	*/
@@ -128,9 +128,9 @@ public class LayoutSetLocalServiceUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param dynamicQuery the dynamic query to search with
-	* @param start the lower bound of the range of model instances to return
-	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param dynamicQuery the dynamic query
+	* @param start the lower bound of the range of model instances
+	* @param end the upper bound of the range of model instances (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching rows
 	* @throws SystemException if a system exception occurred
@@ -146,9 +146,9 @@ public class LayoutSetLocalServiceUtil {
 	}
 
 	/**
-	* Counts the number of rows that match the dynamic query.
+	* Returns the number of rows that match the dynamic query.
 	*
-	* @param dynamicQuery the dynamic query to search with
+	* @param dynamicQuery the dynamic query
 	* @return the number of rows that match the dynamic query
 	* @throws SystemException if a system exception occurred
 	*/
@@ -159,9 +159,9 @@ public class LayoutSetLocalServiceUtil {
 	}
 
 	/**
-	* Gets the layout set with the primary key.
+	* Returns the layout set with the primary key.
 	*
-	* @param layoutSetId the primary key of the layout set to get
+	* @param layoutSetId the primary key of the layout set
 	* @return the layout set
 	* @throws PortalException if a layout set with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -174,14 +174,14 @@ public class LayoutSetLocalServiceUtil {
 	}
 
 	/**
-	* Gets a range of all the layout sets.
+	* Returns a range of all the layout sets.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of layout sets to return
-	* @param end the upper bound of the range of layout sets to return (not inclusive)
+	* @param start the lower bound of the range of layout sets
+	* @param end the upper bound of the range of layout sets (not inclusive)
 	* @return the range of layout sets
 	* @throws SystemException if a system exception occurred
 	*/
@@ -192,7 +192,7 @@ public class LayoutSetLocalServiceUtil {
 	}
 
 	/**
-	* Gets the number of layout sets.
+	* Returns the number of layout sets.
 	*
 	* @return the number of layout sets
 	* @throws SystemException if a system exception occurred
@@ -205,7 +205,7 @@ public class LayoutSetLocalServiceUtil {
 	/**
 	* Updates the layout set in the database. Also notifies the appropriate model listeners.
 	*
-	* @param layoutSet the layout set to update
+	* @param layoutSet the layout set
 	* @return the layout set that was updated
 	* @throws SystemException if a system exception occurred
 	*/
@@ -218,7 +218,7 @@ public class LayoutSetLocalServiceUtil {
 	/**
 	* Updates the layout set in the database. Also notifies the appropriate model listeners.
 	*
-	* @param layoutSet the layout set to update
+	* @param layoutSet the layout set
 	* @param merge whether to merge the layout set with the current session. See {@link com.liferay.portal.service.persistence.BatchSession#update(com.liferay.portal.kernel.dao.orm.Session, com.liferay.portal.model.BaseModel, boolean)} for an explanation.
 	* @return the layout set that was updated
 	* @throws SystemException if a system exception occurred
@@ -230,7 +230,7 @@ public class LayoutSetLocalServiceUtil {
 	}
 
 	/**
-	* Gets the Spring bean ID for this bean.
+	* Returns the Spring bean ID for this bean.
 	*
 	* @return the Spring bean ID for this bean
 	*/

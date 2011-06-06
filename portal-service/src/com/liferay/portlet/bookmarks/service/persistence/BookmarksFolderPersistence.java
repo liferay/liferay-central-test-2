@@ -41,7 +41,7 @@ public interface BookmarksFolderPersistence extends BasePersistence<BookmarksFol
 	/**
 	* Caches the bookmarks folder in the entity cache if it is enabled.
 	*
-	* @param bookmarksFolder the bookmarks folder to cache
+	* @param bookmarksFolder the bookmarks folder
 	*/
 	public void cacheResult(
 		com.liferay.portlet.bookmarks.model.BookmarksFolder bookmarksFolder);
@@ -49,7 +49,7 @@ public interface BookmarksFolderPersistence extends BasePersistence<BookmarksFol
 	/**
 	* Caches the bookmarks folders in the entity cache if it is enabled.
 	*
-	* @param bookmarksFolders the bookmarks folders to cache
+	* @param bookmarksFolders the bookmarks folders
 	*/
 	public void cacheResult(
 		java.util.List<com.liferay.portlet.bookmarks.model.BookmarksFolder> bookmarksFolders);
@@ -66,7 +66,7 @@ public interface BookmarksFolderPersistence extends BasePersistence<BookmarksFol
 	/**
 	* Removes the bookmarks folder with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param folderId the primary key of the bookmarks folder to remove
+	* @param folderId the primary key of the bookmarks folder
 	* @return the bookmarks folder that was removed
 	* @throws com.liferay.portlet.bookmarks.NoSuchFolderException if a bookmarks folder with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -82,9 +82,9 @@ public interface BookmarksFolderPersistence extends BasePersistence<BookmarksFol
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the bookmarks folder with the primary key or throws a {@link com.liferay.portlet.bookmarks.NoSuchFolderException} if it could not be found.
+	* Returns the bookmarks folder with the primary key or throws a {@link com.liferay.portlet.bookmarks.NoSuchFolderException} if it could not be found.
 	*
-	* @param folderId the primary key of the bookmarks folder to find
+	* @param folderId the primary key of the bookmarks folder
 	* @return the bookmarks folder
 	* @throws com.liferay.portlet.bookmarks.NoSuchFolderException if a bookmarks folder with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -95,9 +95,9 @@ public interface BookmarksFolderPersistence extends BasePersistence<BookmarksFol
 			com.liferay.portlet.bookmarks.NoSuchFolderException;
 
 	/**
-	* Finds the bookmarks folder with the primary key or returns <code>null</code> if it could not be found.
+	* Returns the bookmarks folder with the primary key or returns <code>null</code> if it could not be found.
 	*
-	* @param folderId the primary key of the bookmarks folder to find
+	* @param folderId the primary key of the bookmarks folder
 	* @return the bookmarks folder, or <code>null</code> if a bookmarks folder with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -106,9 +106,9 @@ public interface BookmarksFolderPersistence extends BasePersistence<BookmarksFol
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds all the bookmarks folders where uuid = &#63;.
+	* Returns all the bookmarks folders where uuid = &#63;.
 	*
-	* @param uuid the uuid to search with
+	* @param uuid the uuid
 	* @return the matching bookmarks folders
 	* @throws SystemException if a system exception occurred
 	*/
@@ -117,15 +117,15 @@ public interface BookmarksFolderPersistence extends BasePersistence<BookmarksFol
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds a range of all the bookmarks folders where uuid = &#63;.
+	* Returns a range of all the bookmarks folders where uuid = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param uuid the uuid to search with
-	* @param start the lower bound of the range of bookmarks folders to return
-	* @param end the upper bound of the range of bookmarks folders to return (not inclusive)
+	* @param uuid the uuid
+	* @param start the lower bound of the range of bookmarks folders
+	* @param end the upper bound of the range of bookmarks folders (not inclusive)
 	* @return the range of matching bookmarks folders
 	* @throws SystemException if a system exception occurred
 	*/
@@ -134,15 +134,15 @@ public interface BookmarksFolderPersistence extends BasePersistence<BookmarksFol
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds an ordered range of all the bookmarks folders where uuid = &#63;.
+	* Returns an ordered range of all the bookmarks folders where uuid = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param uuid the uuid to search with
-	* @param start the lower bound of the range of bookmarks folders to return
-	* @param end the upper bound of the range of bookmarks folders to return (not inclusive)
+	* @param uuid the uuid
+	* @param start the lower bound of the range of bookmarks folders
+	* @param end the upper bound of the range of bookmarks folders (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching bookmarks folders
 	* @throws SystemException if a system exception occurred
@@ -153,13 +153,13 @@ public interface BookmarksFolderPersistence extends BasePersistence<BookmarksFol
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the first bookmarks folder in the ordered set where uuid = &#63;.
+	* Returns the first bookmarks folder in the ordered set where uuid = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param uuid the uuid to search with
+	* @param uuid the uuid
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching bookmarks folder
 	* @throws com.liferay.portlet.bookmarks.NoSuchFolderException if a matching bookmarks folder could not be found
@@ -172,13 +172,13 @@ public interface BookmarksFolderPersistence extends BasePersistence<BookmarksFol
 			com.liferay.portlet.bookmarks.NoSuchFolderException;
 
 	/**
-	* Finds the last bookmarks folder in the ordered set where uuid = &#63;.
+	* Returns the last bookmarks folder in the ordered set where uuid = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param uuid the uuid to search with
+	* @param uuid the uuid
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching bookmarks folder
 	* @throws com.liferay.portlet.bookmarks.NoSuchFolderException if a matching bookmarks folder could not be found
@@ -191,14 +191,14 @@ public interface BookmarksFolderPersistence extends BasePersistence<BookmarksFol
 			com.liferay.portlet.bookmarks.NoSuchFolderException;
 
 	/**
-	* Finds the bookmarks folders before and after the current bookmarks folder in the ordered set where uuid = &#63;.
+	* Returns the bookmarks folders before and after the current bookmarks folder in the ordered set where uuid = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
 	* @param folderId the primary key of the current bookmarks folder
-	* @param uuid the uuid to search with
+	* @param uuid the uuid
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next bookmarks folder
 	* @throws com.liferay.portlet.bookmarks.NoSuchFolderException if a bookmarks folder with the primary key could not be found
@@ -211,10 +211,10 @@ public interface BookmarksFolderPersistence extends BasePersistence<BookmarksFol
 			com.liferay.portlet.bookmarks.NoSuchFolderException;
 
 	/**
-	* Finds the bookmarks folder where uuid = &#63; and groupId = &#63; or throws a {@link com.liferay.portlet.bookmarks.NoSuchFolderException} if it could not be found.
+	* Returns the bookmarks folder where uuid = &#63; and groupId = &#63; or throws a {@link com.liferay.portlet.bookmarks.NoSuchFolderException} if it could not be found.
 	*
-	* @param uuid the uuid to search with
-	* @param groupId the group ID to search with
+	* @param uuid the uuid
+	* @param groupId the group ID
 	* @return the matching bookmarks folder
 	* @throws com.liferay.portlet.bookmarks.NoSuchFolderException if a matching bookmarks folder could not be found
 	* @throws SystemException if a system exception occurred
@@ -225,10 +225,10 @@ public interface BookmarksFolderPersistence extends BasePersistence<BookmarksFol
 			com.liferay.portlet.bookmarks.NoSuchFolderException;
 
 	/**
-	* Finds the bookmarks folder where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	* Returns the bookmarks folder where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	*
-	* @param uuid the uuid to search with
-	* @param groupId the group ID to search with
+	* @param uuid the uuid
+	* @param groupId the group ID
 	* @return the matching bookmarks folder, or <code>null</code> if a matching bookmarks folder could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -237,10 +237,10 @@ public interface BookmarksFolderPersistence extends BasePersistence<BookmarksFol
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the bookmarks folder where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	* Returns the bookmarks folder where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
-	* @param uuid the uuid to search with
-	* @param groupId the group ID to search with
+	* @param uuid the uuid
+	* @param groupId the group ID
 	* @return the matching bookmarks folder, or <code>null</code> if a matching bookmarks folder could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -249,9 +249,9 @@ public interface BookmarksFolderPersistence extends BasePersistence<BookmarksFol
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds all the bookmarks folders where groupId = &#63;.
+	* Returns all the bookmarks folders where groupId = &#63;.
 	*
-	* @param groupId the group ID to search with
+	* @param groupId the group ID
 	* @return the matching bookmarks folders
 	* @throws SystemException if a system exception occurred
 	*/
@@ -260,15 +260,15 @@ public interface BookmarksFolderPersistence extends BasePersistence<BookmarksFol
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds a range of all the bookmarks folders where groupId = &#63;.
+	* Returns a range of all the bookmarks folders where groupId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param start the lower bound of the range of bookmarks folders to return
-	* @param end the upper bound of the range of bookmarks folders to return (not inclusive)
+	* @param groupId the group ID
+	* @param start the lower bound of the range of bookmarks folders
+	* @param end the upper bound of the range of bookmarks folders (not inclusive)
 	* @return the range of matching bookmarks folders
 	* @throws SystemException if a system exception occurred
 	*/
@@ -277,15 +277,15 @@ public interface BookmarksFolderPersistence extends BasePersistence<BookmarksFol
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds an ordered range of all the bookmarks folders where groupId = &#63;.
+	* Returns an ordered range of all the bookmarks folders where groupId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param start the lower bound of the range of bookmarks folders to return
-	* @param end the upper bound of the range of bookmarks folders to return (not inclusive)
+	* @param groupId the group ID
+	* @param start the lower bound of the range of bookmarks folders
+	* @param end the upper bound of the range of bookmarks folders (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching bookmarks folders
 	* @throws SystemException if a system exception occurred
@@ -296,13 +296,13 @@ public interface BookmarksFolderPersistence extends BasePersistence<BookmarksFol
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the first bookmarks folder in the ordered set where groupId = &#63;.
+	* Returns the first bookmarks folder in the ordered set where groupId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
+	* @param groupId the group ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching bookmarks folder
 	* @throws com.liferay.portlet.bookmarks.NoSuchFolderException if a matching bookmarks folder could not be found
@@ -315,13 +315,13 @@ public interface BookmarksFolderPersistence extends BasePersistence<BookmarksFol
 			com.liferay.portlet.bookmarks.NoSuchFolderException;
 
 	/**
-	* Finds the last bookmarks folder in the ordered set where groupId = &#63;.
+	* Returns the last bookmarks folder in the ordered set where groupId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
+	* @param groupId the group ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching bookmarks folder
 	* @throws com.liferay.portlet.bookmarks.NoSuchFolderException if a matching bookmarks folder could not be found
@@ -334,14 +334,14 @@ public interface BookmarksFolderPersistence extends BasePersistence<BookmarksFol
 			com.liferay.portlet.bookmarks.NoSuchFolderException;
 
 	/**
-	* Finds the bookmarks folders before and after the current bookmarks folder in the ordered set where groupId = &#63;.
+	* Returns the bookmarks folders before and after the current bookmarks folder in the ordered set where groupId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
 	* @param folderId the primary key of the current bookmarks folder
-	* @param groupId the group ID to search with
+	* @param groupId the group ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next bookmarks folder
 	* @throws com.liferay.portlet.bookmarks.NoSuchFolderException if a bookmarks folder with the primary key could not be found
@@ -354,9 +354,9 @@ public interface BookmarksFolderPersistence extends BasePersistence<BookmarksFol
 			com.liferay.portlet.bookmarks.NoSuchFolderException;
 
 	/**
-	* Filters by the user's permissions and finds all the bookmarks folders where groupId = &#63;.
+	* Returns all the bookmarks folders that the user has permission to view where groupId = &#63;.
 	*
-	* @param groupId the group ID to search with
+	* @param groupId the group ID
 	* @return the matching bookmarks folders that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -365,15 +365,15 @@ public interface BookmarksFolderPersistence extends BasePersistence<BookmarksFol
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Filters by the user's permissions and finds a range of all the bookmarks folders where groupId = &#63;.
+	* Returns a range of all the bookmarks folders that the user has permission to view where groupId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param start the lower bound of the range of bookmarks folders to return
-	* @param end the upper bound of the range of bookmarks folders to return (not inclusive)
+	* @param groupId the group ID
+	* @param start the lower bound of the range of bookmarks folders
+	* @param end the upper bound of the range of bookmarks folders (not inclusive)
 	* @return the range of matching bookmarks folders that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -382,15 +382,15 @@ public interface BookmarksFolderPersistence extends BasePersistence<BookmarksFol
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Filters by the user's permissions and finds an ordered range of all the bookmarks folders where groupId = &#63;.
+	* Returns an ordered range of all the bookmarks folders that the user has permissions to view where groupId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param start the lower bound of the range of bookmarks folders to return
-	* @param end the upper bound of the range of bookmarks folders to return (not inclusive)
+	* @param groupId the group ID
+	* @param start the lower bound of the range of bookmarks folders
+	* @param end the upper bound of the range of bookmarks folders (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching bookmarks folders that the user has permission to view
 	* @throws SystemException if a system exception occurred
@@ -401,14 +401,10 @@ public interface BookmarksFolderPersistence extends BasePersistence<BookmarksFol
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Filters the bookmarks folders before and after the current bookmarks folder in the ordered set where groupId = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
-	* </p>
+	* Returns the bookmarks folders before and after the current bookmarks folder in the ordered set of bookmarks folders that the user has permission to view where groupId = &#63;.
 	*
 	* @param folderId the primary key of the current bookmarks folder
-	* @param groupId the group ID to search with
+	* @param groupId the group ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next bookmarks folder
 	* @throws com.liferay.portlet.bookmarks.NoSuchFolderException if a bookmarks folder with the primary key could not be found
@@ -421,9 +417,9 @@ public interface BookmarksFolderPersistence extends BasePersistence<BookmarksFol
 			com.liferay.portlet.bookmarks.NoSuchFolderException;
 
 	/**
-	* Finds all the bookmarks folders where companyId = &#63;.
+	* Returns all the bookmarks folders where companyId = &#63;.
 	*
-	* @param companyId the company ID to search with
+	* @param companyId the company ID
 	* @return the matching bookmarks folders
 	* @throws SystemException if a system exception occurred
 	*/
@@ -432,15 +428,15 @@ public interface BookmarksFolderPersistence extends BasePersistence<BookmarksFol
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds a range of all the bookmarks folders where companyId = &#63;.
+	* Returns a range of all the bookmarks folders where companyId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company ID to search with
-	* @param start the lower bound of the range of bookmarks folders to return
-	* @param end the upper bound of the range of bookmarks folders to return (not inclusive)
+	* @param companyId the company ID
+	* @param start the lower bound of the range of bookmarks folders
+	* @param end the upper bound of the range of bookmarks folders (not inclusive)
 	* @return the range of matching bookmarks folders
 	* @throws SystemException if a system exception occurred
 	*/
@@ -449,15 +445,15 @@ public interface BookmarksFolderPersistence extends BasePersistence<BookmarksFol
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds an ordered range of all the bookmarks folders where companyId = &#63;.
+	* Returns an ordered range of all the bookmarks folders where companyId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company ID to search with
-	* @param start the lower bound of the range of bookmarks folders to return
-	* @param end the upper bound of the range of bookmarks folders to return (not inclusive)
+	* @param companyId the company ID
+	* @param start the lower bound of the range of bookmarks folders
+	* @param end the upper bound of the range of bookmarks folders (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching bookmarks folders
 	* @throws SystemException if a system exception occurred
@@ -468,13 +464,13 @@ public interface BookmarksFolderPersistence extends BasePersistence<BookmarksFol
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the first bookmarks folder in the ordered set where companyId = &#63;.
+	* Returns the first bookmarks folder in the ordered set where companyId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company ID to search with
+	* @param companyId the company ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching bookmarks folder
 	* @throws com.liferay.portlet.bookmarks.NoSuchFolderException if a matching bookmarks folder could not be found
@@ -487,13 +483,13 @@ public interface BookmarksFolderPersistence extends BasePersistence<BookmarksFol
 			com.liferay.portlet.bookmarks.NoSuchFolderException;
 
 	/**
-	* Finds the last bookmarks folder in the ordered set where companyId = &#63;.
+	* Returns the last bookmarks folder in the ordered set where companyId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company ID to search with
+	* @param companyId the company ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching bookmarks folder
 	* @throws com.liferay.portlet.bookmarks.NoSuchFolderException if a matching bookmarks folder could not be found
@@ -506,14 +502,14 @@ public interface BookmarksFolderPersistence extends BasePersistence<BookmarksFol
 			com.liferay.portlet.bookmarks.NoSuchFolderException;
 
 	/**
-	* Finds the bookmarks folders before and after the current bookmarks folder in the ordered set where companyId = &#63;.
+	* Returns the bookmarks folders before and after the current bookmarks folder in the ordered set where companyId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
 	* @param folderId the primary key of the current bookmarks folder
-	* @param companyId the company ID to search with
+	* @param companyId the company ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next bookmarks folder
 	* @throws com.liferay.portlet.bookmarks.NoSuchFolderException if a bookmarks folder with the primary key could not be found
@@ -526,10 +522,10 @@ public interface BookmarksFolderPersistence extends BasePersistence<BookmarksFol
 			com.liferay.portlet.bookmarks.NoSuchFolderException;
 
 	/**
-	* Finds all the bookmarks folders where groupId = &#63; and parentFolderId = &#63;.
+	* Returns all the bookmarks folders where groupId = &#63; and parentFolderId = &#63;.
 	*
-	* @param groupId the group ID to search with
-	* @param parentFolderId the parent folder ID to search with
+	* @param groupId the group ID
+	* @param parentFolderId the parent folder ID
 	* @return the matching bookmarks folders
 	* @throws SystemException if a system exception occurred
 	*/
@@ -538,16 +534,16 @@ public interface BookmarksFolderPersistence extends BasePersistence<BookmarksFol
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds a range of all the bookmarks folders where groupId = &#63; and parentFolderId = &#63;.
+	* Returns a range of all the bookmarks folders where groupId = &#63; and parentFolderId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param parentFolderId the parent folder ID to search with
-	* @param start the lower bound of the range of bookmarks folders to return
-	* @param end the upper bound of the range of bookmarks folders to return (not inclusive)
+	* @param groupId the group ID
+	* @param parentFolderId the parent folder ID
+	* @param start the lower bound of the range of bookmarks folders
+	* @param end the upper bound of the range of bookmarks folders (not inclusive)
 	* @return the range of matching bookmarks folders
 	* @throws SystemException if a system exception occurred
 	*/
@@ -556,16 +552,16 @@ public interface BookmarksFolderPersistence extends BasePersistence<BookmarksFol
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds an ordered range of all the bookmarks folders where groupId = &#63; and parentFolderId = &#63;.
+	* Returns an ordered range of all the bookmarks folders where groupId = &#63; and parentFolderId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param parentFolderId the parent folder ID to search with
-	* @param start the lower bound of the range of bookmarks folders to return
-	* @param end the upper bound of the range of bookmarks folders to return (not inclusive)
+	* @param groupId the group ID
+	* @param parentFolderId the parent folder ID
+	* @param start the lower bound of the range of bookmarks folders
+	* @param end the upper bound of the range of bookmarks folders (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching bookmarks folders
 	* @throws SystemException if a system exception occurred
@@ -576,14 +572,14 @@ public interface BookmarksFolderPersistence extends BasePersistence<BookmarksFol
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the first bookmarks folder in the ordered set where groupId = &#63; and parentFolderId = &#63;.
+	* Returns the first bookmarks folder in the ordered set where groupId = &#63; and parentFolderId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param parentFolderId the parent folder ID to search with
+	* @param groupId the group ID
+	* @param parentFolderId the parent folder ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching bookmarks folder
 	* @throws com.liferay.portlet.bookmarks.NoSuchFolderException if a matching bookmarks folder could not be found
@@ -596,14 +592,14 @@ public interface BookmarksFolderPersistence extends BasePersistence<BookmarksFol
 			com.liferay.portlet.bookmarks.NoSuchFolderException;
 
 	/**
-	* Finds the last bookmarks folder in the ordered set where groupId = &#63; and parentFolderId = &#63;.
+	* Returns the last bookmarks folder in the ordered set where groupId = &#63; and parentFolderId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param parentFolderId the parent folder ID to search with
+	* @param groupId the group ID
+	* @param parentFolderId the parent folder ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching bookmarks folder
 	* @throws com.liferay.portlet.bookmarks.NoSuchFolderException if a matching bookmarks folder could not be found
@@ -616,15 +612,15 @@ public interface BookmarksFolderPersistence extends BasePersistence<BookmarksFol
 			com.liferay.portlet.bookmarks.NoSuchFolderException;
 
 	/**
-	* Finds the bookmarks folders before and after the current bookmarks folder in the ordered set where groupId = &#63; and parentFolderId = &#63;.
+	* Returns the bookmarks folders before and after the current bookmarks folder in the ordered set where groupId = &#63; and parentFolderId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
 	* @param folderId the primary key of the current bookmarks folder
-	* @param groupId the group ID to search with
-	* @param parentFolderId the parent folder ID to search with
+	* @param groupId the group ID
+	* @param parentFolderId the parent folder ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next bookmarks folder
 	* @throws com.liferay.portlet.bookmarks.NoSuchFolderException if a bookmarks folder with the primary key could not be found
@@ -637,10 +633,10 @@ public interface BookmarksFolderPersistence extends BasePersistence<BookmarksFol
 			com.liferay.portlet.bookmarks.NoSuchFolderException;
 
 	/**
-	* Filters by the user's permissions and finds all the bookmarks folders where groupId = &#63; and parentFolderId = &#63;.
+	* Returns all the bookmarks folders that the user has permission to view where groupId = &#63; and parentFolderId = &#63;.
 	*
-	* @param groupId the group ID to search with
-	* @param parentFolderId the parent folder ID to search with
+	* @param groupId the group ID
+	* @param parentFolderId the parent folder ID
 	* @return the matching bookmarks folders that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -649,16 +645,16 @@ public interface BookmarksFolderPersistence extends BasePersistence<BookmarksFol
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Filters by the user's permissions and finds a range of all the bookmarks folders where groupId = &#63; and parentFolderId = &#63;.
+	* Returns a range of all the bookmarks folders that the user has permission to view where groupId = &#63; and parentFolderId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param parentFolderId the parent folder ID to search with
-	* @param start the lower bound of the range of bookmarks folders to return
-	* @param end the upper bound of the range of bookmarks folders to return (not inclusive)
+	* @param groupId the group ID
+	* @param parentFolderId the parent folder ID
+	* @param start the lower bound of the range of bookmarks folders
+	* @param end the upper bound of the range of bookmarks folders (not inclusive)
 	* @return the range of matching bookmarks folders that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -667,16 +663,16 @@ public interface BookmarksFolderPersistence extends BasePersistence<BookmarksFol
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Filters by the user's permissions and finds an ordered range of all the bookmarks folders where groupId = &#63; and parentFolderId = &#63;.
+	* Returns an ordered range of all the bookmarks folders that the user has permissions to view where groupId = &#63; and parentFolderId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param parentFolderId the parent folder ID to search with
-	* @param start the lower bound of the range of bookmarks folders to return
-	* @param end the upper bound of the range of bookmarks folders to return (not inclusive)
+	* @param groupId the group ID
+	* @param parentFolderId the parent folder ID
+	* @param start the lower bound of the range of bookmarks folders
+	* @param end the upper bound of the range of bookmarks folders (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching bookmarks folders that the user has permission to view
 	* @throws SystemException if a system exception occurred
@@ -687,15 +683,11 @@ public interface BookmarksFolderPersistence extends BasePersistence<BookmarksFol
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Filters the bookmarks folders before and after the current bookmarks folder in the ordered set where groupId = &#63; and parentFolderId = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
-	* </p>
+	* Returns the bookmarks folders before and after the current bookmarks folder in the ordered set of bookmarks folders that the user has permission to view where groupId = &#63; and parentFolderId = &#63;.
 	*
 	* @param folderId the primary key of the current bookmarks folder
-	* @param groupId the group ID to search with
-	* @param parentFolderId the parent folder ID to search with
+	* @param groupId the group ID
+	* @param parentFolderId the parent folder ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next bookmarks folder
 	* @throws com.liferay.portlet.bookmarks.NoSuchFolderException if a bookmarks folder with the primary key could not be found
@@ -708,7 +700,7 @@ public interface BookmarksFolderPersistence extends BasePersistence<BookmarksFol
 			com.liferay.portlet.bookmarks.NoSuchFolderException;
 
 	/**
-	* Finds all the bookmarks folders.
+	* Returns all the bookmarks folders.
 	*
 	* @return the bookmarks folders
 	* @throws SystemException if a system exception occurred
@@ -717,14 +709,14 @@ public interface BookmarksFolderPersistence extends BasePersistence<BookmarksFol
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds a range of all the bookmarks folders.
+	* Returns a range of all the bookmarks folders.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of bookmarks folders to return
-	* @param end the upper bound of the range of bookmarks folders to return (not inclusive)
+	* @param start the lower bound of the range of bookmarks folders
+	* @param end the upper bound of the range of bookmarks folders (not inclusive)
 	* @return the range of bookmarks folders
 	* @throws SystemException if a system exception occurred
 	*/
@@ -733,14 +725,14 @@ public interface BookmarksFolderPersistence extends BasePersistence<BookmarksFol
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds an ordered range of all the bookmarks folders.
+	* Returns an ordered range of all the bookmarks folders.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of bookmarks folders to return
-	* @param end the upper bound of the range of bookmarks folders to return (not inclusive)
+	* @param start the lower bound of the range of bookmarks folders
+	* @param end the upper bound of the range of bookmarks folders (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of bookmarks folders
 	* @throws SystemException if a system exception occurred
@@ -753,7 +745,7 @@ public interface BookmarksFolderPersistence extends BasePersistence<BookmarksFol
 	/**
 	* Removes all the bookmarks folders where uuid = &#63; from the database.
 	*
-	* @param uuid the uuid to search with
+	* @param uuid the uuid
 	* @throws SystemException if a system exception occurred
 	*/
 	public void removeByUuid(java.lang.String uuid)
@@ -762,8 +754,8 @@ public interface BookmarksFolderPersistence extends BasePersistence<BookmarksFol
 	/**
 	* Removes the bookmarks folder where uuid = &#63; and groupId = &#63; from the database.
 	*
-	* @param uuid the uuid to search with
-	* @param groupId the group ID to search with
+	* @param uuid the uuid
+	* @param groupId the group ID
 	* @throws SystemException if a system exception occurred
 	*/
 	public void removeByUUID_G(java.lang.String uuid, long groupId)
@@ -773,7 +765,7 @@ public interface BookmarksFolderPersistence extends BasePersistence<BookmarksFol
 	/**
 	* Removes all the bookmarks folders where groupId = &#63; from the database.
 	*
-	* @param groupId the group ID to search with
+	* @param groupId the group ID
 	* @throws SystemException if a system exception occurred
 	*/
 	public void removeByGroupId(long groupId)
@@ -782,7 +774,7 @@ public interface BookmarksFolderPersistence extends BasePersistence<BookmarksFol
 	/**
 	* Removes all the bookmarks folders where companyId = &#63; from the database.
 	*
-	* @param companyId the company ID to search with
+	* @param companyId the company ID
 	* @throws SystemException if a system exception occurred
 	*/
 	public void removeByCompanyId(long companyId)
@@ -791,8 +783,8 @@ public interface BookmarksFolderPersistence extends BasePersistence<BookmarksFol
 	/**
 	* Removes all the bookmarks folders where groupId = &#63; and parentFolderId = &#63; from the database.
 	*
-	* @param groupId the group ID to search with
-	* @param parentFolderId the parent folder ID to search with
+	* @param groupId the group ID
+	* @param parentFolderId the parent folder ID
 	* @throws SystemException if a system exception occurred
 	*/
 	public void removeByG_P(long groupId, long parentFolderId)
@@ -807,9 +799,9 @@ public interface BookmarksFolderPersistence extends BasePersistence<BookmarksFol
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Counts all the bookmarks folders where uuid = &#63;.
+	* Returns the number of bookmarks folders where uuid = &#63;.
 	*
-	* @param uuid the uuid to search with
+	* @param uuid the uuid
 	* @return the number of matching bookmarks folders
 	* @throws SystemException if a system exception occurred
 	*/
@@ -817,10 +809,10 @@ public interface BookmarksFolderPersistence extends BasePersistence<BookmarksFol
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Counts all the bookmarks folders where uuid = &#63; and groupId = &#63;.
+	* Returns the number of bookmarks folders where uuid = &#63; and groupId = &#63;.
 	*
-	* @param uuid the uuid to search with
-	* @param groupId the group ID to search with
+	* @param uuid the uuid
+	* @param groupId the group ID
 	* @return the number of matching bookmarks folders
 	* @throws SystemException if a system exception occurred
 	*/
@@ -828,9 +820,9 @@ public interface BookmarksFolderPersistence extends BasePersistence<BookmarksFol
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Counts all the bookmarks folders where groupId = &#63;.
+	* Returns the number of bookmarks folders where groupId = &#63;.
 	*
-	* @param groupId the group ID to search with
+	* @param groupId the group ID
 	* @return the number of matching bookmarks folders
 	* @throws SystemException if a system exception occurred
 	*/
@@ -838,9 +830,9 @@ public interface BookmarksFolderPersistence extends BasePersistence<BookmarksFol
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Filters by the user's permissions and counts all the bookmarks folders where groupId = &#63;.
+	* Returns the number of bookmarks folders that the user has permission to view where groupId = &#63;.
 	*
-	* @param groupId the group ID to search with
+	* @param groupId the group ID
 	* @return the number of matching bookmarks folders that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -848,9 +840,9 @@ public interface BookmarksFolderPersistence extends BasePersistence<BookmarksFol
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Counts all the bookmarks folders where companyId = &#63;.
+	* Returns the number of bookmarks folders where companyId = &#63;.
 	*
-	* @param companyId the company ID to search with
+	* @param companyId the company ID
 	* @return the number of matching bookmarks folders
 	* @throws SystemException if a system exception occurred
 	*/
@@ -858,10 +850,10 @@ public interface BookmarksFolderPersistence extends BasePersistence<BookmarksFol
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Counts all the bookmarks folders where groupId = &#63; and parentFolderId = &#63;.
+	* Returns the number of bookmarks folders where groupId = &#63; and parentFolderId = &#63;.
 	*
-	* @param groupId the group ID to search with
-	* @param parentFolderId the parent folder ID to search with
+	* @param groupId the group ID
+	* @param parentFolderId the parent folder ID
 	* @return the number of matching bookmarks folders
 	* @throws SystemException if a system exception occurred
 	*/
@@ -869,10 +861,10 @@ public interface BookmarksFolderPersistence extends BasePersistence<BookmarksFol
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Filters by the user's permissions and counts all the bookmarks folders where groupId = &#63; and parentFolderId = &#63;.
+	* Returns the number of bookmarks folders that the user has permission to view where groupId = &#63; and parentFolderId = &#63;.
 	*
-	* @param groupId the group ID to search with
-	* @param parentFolderId the parent folder ID to search with
+	* @param groupId the group ID
+	* @param parentFolderId the parent folder ID
 	* @return the number of matching bookmarks folders that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -880,7 +872,7 @@ public interface BookmarksFolderPersistence extends BasePersistence<BookmarksFol
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Counts all the bookmarks folders.
+	* Returns the number of bookmarks folders.
 	*
 	* @return the number of bookmarks folders
 	* @throws SystemException if a system exception occurred

@@ -45,7 +45,7 @@ public interface PermissionLocalService {
 	/**
 	* Adds the permission to the database. Also notifies the appropriate model listeners.
 	*
-	* @param permission the permission to add
+	* @param permission the permission
 	* @return the permission that was added
 	* @throws SystemException if a system exception occurred
 	*/
@@ -65,7 +65,7 @@ public interface PermissionLocalService {
 	/**
 	* Deletes the permission with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param permissionId the primary key of the permission to delete
+	* @param permissionId the primary key of the permission
 	* @throws PortalException if a permission with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -76,7 +76,7 @@ public interface PermissionLocalService {
 	/**
 	* Deletes the permission from the database. Also notifies the appropriate model listeners.
 	*
-	* @param permission the permission to delete
+	* @param permission the permission
 	* @throws SystemException if a system exception occurred
 	*/
 	public void deletePermission(com.liferay.portal.model.Permission permission)
@@ -85,7 +85,7 @@ public interface PermissionLocalService {
 	/**
 	* Performs a dynamic query on the database and returns the matching rows.
 	*
-	* @param dynamicQuery the dynamic query to search with
+	* @param dynamicQuery the dynamic query
 	* @return the matching rows
 	* @throws SystemException if a system exception occurred
 	*/
@@ -101,9 +101,9 @@ public interface PermissionLocalService {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param dynamicQuery the dynamic query to search with
-	* @param start the lower bound of the range of model instances to return
-	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param dynamicQuery the dynamic query
+	* @param start the lower bound of the range of model instances
+	* @param end the upper bound of the range of model instances (not inclusive)
 	* @return the range of matching rows
 	* @throws SystemException if a system exception occurred
 	*/
@@ -119,9 +119,9 @@ public interface PermissionLocalService {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param dynamicQuery the dynamic query to search with
-	* @param start the lower bound of the range of model instances to return
-	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param dynamicQuery the dynamic query
+	* @param start the lower bound of the range of model instances
+	* @param end the upper bound of the range of model instances (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching rows
 	* @throws SystemException if a system exception occurred
@@ -134,9 +134,9 @@ public interface PermissionLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Counts the number of rows that match the dynamic query.
+	* Returns the number of rows that match the dynamic query.
 	*
-	* @param dynamicQuery the dynamic query to search with
+	* @param dynamicQuery the dynamic query
 	* @return the number of rows that match the dynamic query
 	* @throws SystemException if a system exception occurred
 	*/
@@ -145,9 +145,9 @@ public interface PermissionLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Gets the permission with the primary key.
+	* Returns the permission with the primary key.
 	*
-	* @param permissionId the primary key of the permission to get
+	* @param permissionId the primary key of the permission
 	* @return the permission
 	* @throws PortalException if a permission with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -158,14 +158,14 @@ public interface PermissionLocalService {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Gets a range of all the permissions.
+	* Returns a range of all the permissions.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of permissions to return
-	* @param end the upper bound of the range of permissions to return (not inclusive)
+	* @param start the lower bound of the range of permissions
+	* @param end the upper bound of the range of permissions (not inclusive)
 	* @return the range of permissions
 	* @throws SystemException if a system exception occurred
 	*/
@@ -175,7 +175,7 @@ public interface PermissionLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Gets the number of permissions.
+	* Returns the number of permissions.
 	*
 	* @return the number of permissions
 	* @throws SystemException if a system exception occurred
@@ -187,7 +187,7 @@ public interface PermissionLocalService {
 	/**
 	* Updates the permission in the database. Also notifies the appropriate model listeners.
 	*
-	* @param permission the permission to update
+	* @param permission the permission
 	* @return the permission that was updated
 	* @throws SystemException if a system exception occurred
 	*/
@@ -198,7 +198,7 @@ public interface PermissionLocalService {
 	/**
 	* Updates the permission in the database. Also notifies the appropriate model listeners.
 	*
-	* @param permission the permission to update
+	* @param permission the permission
 	* @param merge whether to merge the permission with the current session. See {@link com.liferay.portal.service.persistence.BatchSession#update(com.liferay.portal.kernel.dao.orm.Session, com.liferay.portal.model.BaseModel, boolean)} for an explanation.
 	* @return the permission that was updated
 	* @throws SystemException if a system exception occurred
@@ -208,7 +208,7 @@ public interface PermissionLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Gets the Spring bean ID for this bean.
+	* Returns the Spring bean ID for this bean.
 	*
 	* @return the Spring bean ID for this bean
 	*/

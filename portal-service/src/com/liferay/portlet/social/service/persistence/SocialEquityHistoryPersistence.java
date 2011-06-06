@@ -41,7 +41,7 @@ public interface SocialEquityHistoryPersistence extends BasePersistence<SocialEq
 	/**
 	* Caches the social equity history in the entity cache if it is enabled.
 	*
-	* @param socialEquityHistory the social equity history to cache
+	* @param socialEquityHistory the social equity history
 	*/
 	public void cacheResult(
 		com.liferay.portlet.social.model.SocialEquityHistory socialEquityHistory);
@@ -49,7 +49,7 @@ public interface SocialEquityHistoryPersistence extends BasePersistence<SocialEq
 	/**
 	* Caches the social equity histories in the entity cache if it is enabled.
 	*
-	* @param socialEquityHistories the social equity histories to cache
+	* @param socialEquityHistories the social equity histories
 	*/
 	public void cacheResult(
 		java.util.List<com.liferay.portlet.social.model.SocialEquityHistory> socialEquityHistories);
@@ -66,7 +66,7 @@ public interface SocialEquityHistoryPersistence extends BasePersistence<SocialEq
 	/**
 	* Removes the social equity history with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param equityHistoryId the primary key of the social equity history to remove
+	* @param equityHistoryId the primary key of the social equity history
 	* @return the social equity history that was removed
 	* @throws com.liferay.portlet.social.NoSuchEquityHistoryException if a social equity history with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -82,9 +82,9 @@ public interface SocialEquityHistoryPersistence extends BasePersistence<SocialEq
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the social equity history with the primary key or throws a {@link com.liferay.portlet.social.NoSuchEquityHistoryException} if it could not be found.
+	* Returns the social equity history with the primary key or throws a {@link com.liferay.portlet.social.NoSuchEquityHistoryException} if it could not be found.
 	*
-	* @param equityHistoryId the primary key of the social equity history to find
+	* @param equityHistoryId the primary key of the social equity history
 	* @return the social equity history
 	* @throws com.liferay.portlet.social.NoSuchEquityHistoryException if a social equity history with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -95,9 +95,9 @@ public interface SocialEquityHistoryPersistence extends BasePersistence<SocialEq
 			com.liferay.portlet.social.NoSuchEquityHistoryException;
 
 	/**
-	* Finds the social equity history with the primary key or returns <code>null</code> if it could not be found.
+	* Returns the social equity history with the primary key or returns <code>null</code> if it could not be found.
 	*
-	* @param equityHistoryId the primary key of the social equity history to find
+	* @param equityHistoryId the primary key of the social equity history
 	* @return the social equity history, or <code>null</code> if a social equity history with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -106,7 +106,7 @@ public interface SocialEquityHistoryPersistence extends BasePersistence<SocialEq
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds all the social equity histories.
+	* Returns all the social equity histories.
 	*
 	* @return the social equity histories
 	* @throws SystemException if a system exception occurred
@@ -115,14 +115,14 @@ public interface SocialEquityHistoryPersistence extends BasePersistence<SocialEq
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds a range of all the social equity histories.
+	* Returns a range of all the social equity histories.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of social equity histories to return
-	* @param end the upper bound of the range of social equity histories to return (not inclusive)
+	* @param start the lower bound of the range of social equity histories
+	* @param end the upper bound of the range of social equity histories (not inclusive)
 	* @return the range of social equity histories
 	* @throws SystemException if a system exception occurred
 	*/
@@ -131,14 +131,14 @@ public interface SocialEquityHistoryPersistence extends BasePersistence<SocialEq
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds an ordered range of all the social equity histories.
+	* Returns an ordered range of all the social equity histories.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of social equity histories to return
-	* @param end the upper bound of the range of social equity histories to return (not inclusive)
+	* @param start the lower bound of the range of social equity histories
+	* @param end the upper bound of the range of social equity histories (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of social equity histories
 	* @throws SystemException if a system exception occurred
@@ -157,7 +157,7 @@ public interface SocialEquityHistoryPersistence extends BasePersistence<SocialEq
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Counts all the social equity histories.
+	* Returns the number of social equity histories.
 	*
 	* @return the number of social equity histories
 	* @throws SystemException if a system exception occurred

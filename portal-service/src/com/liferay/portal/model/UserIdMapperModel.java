@@ -43,21 +43,21 @@ public interface UserIdMapperModel extends BaseModel<UserIdMapper> {
 	 */
 
 	/**
-	 * Gets the primary key of this user ID mapper.
+	 * Returns the primary key of this user ID mapper.
 	 *
 	 * @return the primary key of this user ID mapper
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this user ID mapper
+	 * Sets the primary key of this user ID mapper.
 	 *
 	 * @param primaryKey the primary key of this user ID mapper
 	 */
 	public void setPrimaryKey(long primaryKey);
 
 	/**
-	 * Gets the user ID mapper ID of this user ID mapper.
+	 * Returns the user ID mapper ID of this user ID mapper.
 	 *
 	 * @return the user ID mapper ID of this user ID mapper
 	 */
@@ -71,7 +71,7 @@ public interface UserIdMapperModel extends BaseModel<UserIdMapper> {
 	public void setUserIdMapperId(long userIdMapperId);
 
 	/**
-	 * Gets the user ID of this user ID mapper.
+	 * Returns the user ID of this user ID mapper.
 	 *
 	 * @return the user ID of this user ID mapper
 	 */
@@ -85,7 +85,7 @@ public interface UserIdMapperModel extends BaseModel<UserIdMapper> {
 	public void setUserId(long userId);
 
 	/**
-	 * Gets the user uuid of this user ID mapper.
+	 * Returns the user uuid of this user ID mapper.
 	 *
 	 * @return the user uuid of this user ID mapper
 	 * @throws SystemException if a system exception occurred
@@ -100,7 +100,7 @@ public interface UserIdMapperModel extends BaseModel<UserIdMapper> {
 	public void setUserUuid(String userUuid);
 
 	/**
-	 * Gets the type of this user ID mapper.
+	 * Returns the type of this user ID mapper.
 	 *
 	 * @return the type of this user ID mapper
 	 */
@@ -115,7 +115,7 @@ public interface UserIdMapperModel extends BaseModel<UserIdMapper> {
 	public void setType(String type);
 
 	/**
-	 * Gets the description of this user ID mapper.
+	 * Returns the description of this user ID mapper.
 	 *
 	 * @return the description of this user ID mapper
 	 */
@@ -130,7 +130,7 @@ public interface UserIdMapperModel extends BaseModel<UserIdMapper> {
 	public void setDescription(String description);
 
 	/**
-	 * Gets the external user ID of this user ID mapper.
+	 * Returns the external user ID of this user ID mapper.
 	 *
 	 * @return the external user ID of this user ID mapper
 	 */

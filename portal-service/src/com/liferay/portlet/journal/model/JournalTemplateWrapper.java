@@ -37,7 +37,7 @@ public class JournalTemplateWrapper implements JournalTemplate {
 	}
 
 	/**
-	* Gets the primary key of this journal template.
+	* Returns the primary key of this journal template.
 	*
 	* @return the primary key of this journal template
 	*/
@@ -46,7 +46,7 @@ public class JournalTemplateWrapper implements JournalTemplate {
 	}
 
 	/**
-	* Sets the primary key of this journal template
+	* Sets the primary key of this journal template.
 	*
 	* @param primaryKey the primary key of this journal template
 	*/
@@ -55,7 +55,7 @@ public class JournalTemplateWrapper implements JournalTemplate {
 	}
 
 	/**
-	* Gets the uuid of this journal template.
+	* Returns the uuid of this journal template.
 	*
 	* @return the uuid of this journal template
 	*/
@@ -73,7 +73,7 @@ public class JournalTemplateWrapper implements JournalTemplate {
 	}
 
 	/**
-	* Gets the ID of this journal template.
+	* Returns the ID of this journal template.
 	*
 	* @return the ID of this journal template
 	*/
@@ -91,7 +91,7 @@ public class JournalTemplateWrapper implements JournalTemplate {
 	}
 
 	/**
-	* Gets the group ID of this journal template.
+	* Returns the group ID of this journal template.
 	*
 	* @return the group ID of this journal template
 	*/
@@ -109,7 +109,7 @@ public class JournalTemplateWrapper implements JournalTemplate {
 	}
 
 	/**
-	* Gets the company ID of this journal template.
+	* Returns the company ID of this journal template.
 	*
 	* @return the company ID of this journal template
 	*/
@@ -127,7 +127,7 @@ public class JournalTemplateWrapper implements JournalTemplate {
 	}
 
 	/**
-	* Gets the user ID of this journal template.
+	* Returns the user ID of this journal template.
 	*
 	* @return the user ID of this journal template
 	*/
@@ -145,7 +145,7 @@ public class JournalTemplateWrapper implements JournalTemplate {
 	}
 
 	/**
-	* Gets the user uuid of this journal template.
+	* Returns the user uuid of this journal template.
 	*
 	* @return the user uuid of this journal template
 	* @throws SystemException if a system exception occurred
@@ -165,7 +165,7 @@ public class JournalTemplateWrapper implements JournalTemplate {
 	}
 
 	/**
-	* Gets the user name of this journal template.
+	* Returns the user name of this journal template.
 	*
 	* @return the user name of this journal template
 	*/
@@ -183,7 +183,7 @@ public class JournalTemplateWrapper implements JournalTemplate {
 	}
 
 	/**
-	* Gets the create date of this journal template.
+	* Returns the create date of this journal template.
 	*
 	* @return the create date of this journal template
 	*/
@@ -201,7 +201,7 @@ public class JournalTemplateWrapper implements JournalTemplate {
 	}
 
 	/**
-	* Gets the modified date of this journal template.
+	* Returns the modified date of this journal template.
 	*
 	* @return the modified date of this journal template
 	*/
@@ -219,7 +219,7 @@ public class JournalTemplateWrapper implements JournalTemplate {
 	}
 
 	/**
-	* Gets the template ID of this journal template.
+	* Returns the template ID of this journal template.
 	*
 	* @return the template ID of this journal template
 	*/
@@ -237,7 +237,7 @@ public class JournalTemplateWrapper implements JournalTemplate {
 	}
 
 	/**
-	* Gets the structure ID of this journal template.
+	* Returns the structure ID of this journal template.
 	*
 	* @return the structure ID of this journal template
 	*/
@@ -255,7 +255,7 @@ public class JournalTemplateWrapper implements JournalTemplate {
 	}
 
 	/**
-	* Gets the name of this journal template.
+	* Returns the name of this journal template.
 	*
 	* @return the name of this journal template
 	*/
@@ -273,7 +273,7 @@ public class JournalTemplateWrapper implements JournalTemplate {
 	}
 
 	/**
-	* Gets the description of this journal template.
+	* Returns the description of this journal template.
 	*
 	* @return the description of this journal template
 	*/
@@ -291,7 +291,7 @@ public class JournalTemplateWrapper implements JournalTemplate {
 	}
 
 	/**
-	* Gets the xsl of this journal template.
+	* Returns the xsl of this journal template.
 	*
 	* @return the xsl of this journal template
 	*/
@@ -309,7 +309,7 @@ public class JournalTemplateWrapper implements JournalTemplate {
 	}
 
 	/**
-	* Gets the lang type of this journal template.
+	* Returns the lang type of this journal template.
 	*
 	* @return the lang type of this journal template
 	*/
@@ -327,7 +327,7 @@ public class JournalTemplateWrapper implements JournalTemplate {
 	}
 
 	/**
-	* Gets the cacheable of this journal template.
+	* Returns the cacheable of this journal template.
 	*
 	* @return the cacheable of this journal template
 	*/
@@ -354,7 +354,7 @@ public class JournalTemplateWrapper implements JournalTemplate {
 	}
 
 	/**
-	* Gets the small image of this journal template.
+	* Returns the small image of this journal template.
 	*
 	* @return the small image of this journal template
 	*/
@@ -381,7 +381,7 @@ public class JournalTemplateWrapper implements JournalTemplate {
 	}
 
 	/**
-	* Gets the small image ID of this journal template.
+	* Returns the small image ID of this journal template.
 	*
 	* @return the small image ID of this journal template
 	*/
@@ -399,7 +399,7 @@ public class JournalTemplateWrapper implements JournalTemplate {
 	}
 
 	/**
-	* Gets the small image u r l of this journal template.
+	* Returns the small image u r l of this journal template.
 	*
 	* @return the small image u r l of this journal template
 	*/

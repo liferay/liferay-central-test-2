@@ -37,7 +37,7 @@ public class PollsQuestionWrapper implements PollsQuestion {
 	}
 
 	/**
-	* Gets the primary key of this polls question.
+	* Returns the primary key of this polls question.
 	*
 	* @return the primary key of this polls question
 	*/
@@ -46,7 +46,7 @@ public class PollsQuestionWrapper implements PollsQuestion {
 	}
 
 	/**
-	* Sets the primary key of this polls question
+	* Sets the primary key of this polls question.
 	*
 	* @param primaryKey the primary key of this polls question
 	*/
@@ -55,7 +55,7 @@ public class PollsQuestionWrapper implements PollsQuestion {
 	}
 
 	/**
-	* Gets the uuid of this polls question.
+	* Returns the uuid of this polls question.
 	*
 	* @return the uuid of this polls question
 	*/
@@ -73,7 +73,7 @@ public class PollsQuestionWrapper implements PollsQuestion {
 	}
 
 	/**
-	* Gets the question ID of this polls question.
+	* Returns the question ID of this polls question.
 	*
 	* @return the question ID of this polls question
 	*/
@@ -91,7 +91,7 @@ public class PollsQuestionWrapper implements PollsQuestion {
 	}
 
 	/**
-	* Gets the group ID of this polls question.
+	* Returns the group ID of this polls question.
 	*
 	* @return the group ID of this polls question
 	*/
@@ -109,7 +109,7 @@ public class PollsQuestionWrapper implements PollsQuestion {
 	}
 
 	/**
-	* Gets the company ID of this polls question.
+	* Returns the company ID of this polls question.
 	*
 	* @return the company ID of this polls question
 	*/
@@ -127,7 +127,7 @@ public class PollsQuestionWrapper implements PollsQuestion {
 	}
 
 	/**
-	* Gets the user ID of this polls question.
+	* Returns the user ID of this polls question.
 	*
 	* @return the user ID of this polls question
 	*/
@@ -145,7 +145,7 @@ public class PollsQuestionWrapper implements PollsQuestion {
 	}
 
 	/**
-	* Gets the user uuid of this polls question.
+	* Returns the user uuid of this polls question.
 	*
 	* @return the user uuid of this polls question
 	* @throws SystemException if a system exception occurred
@@ -165,7 +165,7 @@ public class PollsQuestionWrapper implements PollsQuestion {
 	}
 
 	/**
-	* Gets the user name of this polls question.
+	* Returns the user name of this polls question.
 	*
 	* @return the user name of this polls question
 	*/
@@ -183,7 +183,7 @@ public class PollsQuestionWrapper implements PollsQuestion {
 	}
 
 	/**
-	* Gets the create date of this polls question.
+	* Returns the create date of this polls question.
 	*
 	* @return the create date of this polls question
 	*/
@@ -201,7 +201,7 @@ public class PollsQuestionWrapper implements PollsQuestion {
 	}
 
 	/**
-	* Gets the modified date of this polls question.
+	* Returns the modified date of this polls question.
 	*
 	* @return the modified date of this polls question
 	*/
@@ -219,7 +219,7 @@ public class PollsQuestionWrapper implements PollsQuestion {
 	}
 
 	/**
-	* Gets the title of this polls question.
+	* Returns the title of this polls question.
 	*
 	* @return the title of this polls question
 	*/
@@ -228,9 +228,9 @@ public class PollsQuestionWrapper implements PollsQuestion {
 	}
 
 	/**
-	* Gets the localized title of this polls question. Uses the default language if no localization exists for the requested language.
+	* Returns the localized title of this polls question in the language. Uses the default language if no localization exists for the requested language.
 	*
-	* @param locale the locale to get the localized title for
+	* @param locale the locale of the language
 	* @return the localized title of this polls question
 	*/
 	public java.lang.String getTitle(java.util.Locale locale) {
@@ -238,9 +238,9 @@ public class PollsQuestionWrapper implements PollsQuestion {
 	}
 
 	/**
-	* Gets the localized title of this polls question, optionally using the default language if no localization exists for the requested language.
+	* Returns the localized title of this polls question in the language, optionally using the default language if no localization exists for the requested language.
 	*
-	* @param locale the local to get the localized title for
+	* @param locale the local of the language
 	* @param useDefault whether to use the default language if no localization exists for the requested language
 	* @return the localized title of this polls question. If <code>useDefault</code> is <code>false</code> and no localization exists for the requested language, an empty string will be returned.
 	*/
@@ -249,9 +249,9 @@ public class PollsQuestionWrapper implements PollsQuestion {
 	}
 
 	/**
-	* Gets the localized title of this polls question. Uses the default language if no localization exists for the requested language.
+	* Returns the localized title of this polls question in the language. Uses the default language if no localization exists for the requested language.
 	*
-	* @param languageId the id of the language to get the localized title for
+	* @param languageId the ID of the language
 	* @return the localized title of this polls question
 	*/
 	public java.lang.String getTitle(java.lang.String languageId) {
@@ -259,9 +259,9 @@ public class PollsQuestionWrapper implements PollsQuestion {
 	}
 
 	/**
-	* Gets the localized title of this polls question, optionally using the default language if no localization exists for the requested language.
+	* Returns the localized title of this polls question in the language, optionally using the default language if no localization exists for the requested language.
 	*
-	* @param languageId the id of the language to get the localized title for
+	* @param languageId the ID of the language
 	* @param useDefault whether to use the default language if no localization exists for the requested language
 	* @return the localized title of this polls question
 	*/
@@ -271,9 +271,9 @@ public class PollsQuestionWrapper implements PollsQuestion {
 	}
 
 	/**
-	* Gets a map of the locales and localized title of this polls question.
+	* Returns a map of the locales and localized titles of this polls question.
 	*
-	* @return the locales and localized title
+	* @return the locales and localized titles of this polls question
 	*/
 	public java.util.Map<java.util.Locale, java.lang.String> getTitleMap() {
 		return _pollsQuestion.getTitleMap();
@@ -289,15 +289,22 @@ public class PollsQuestionWrapper implements PollsQuestion {
 	}
 
 	/**
-	* Sets the localized title of this polls question.
+	* Sets the localized title of this polls question in the language.
 	*
 	* @param title the localized title of this polls question
-	* @param locale the locale to set the localized title for
+	* @param locale the locale of the language
 	*/
 	public void setTitle(java.lang.String title, java.util.Locale locale) {
 		_pollsQuestion.setTitle(title, locale);
 	}
 
+	/**
+	* Sets the localized title of this polls question in the language, and sets the default locale.
+	*
+	* @param title the localized title of this polls question
+	* @param locale the locale of the language
+	* @param defaultLocale the default locale
+	*/
 	public void setTitle(java.lang.String title, java.util.Locale locale,
 		java.util.Locale defaultLocale) {
 		_pollsQuestion.setTitle(title, locale, defaultLocale);
@@ -313,6 +320,12 @@ public class PollsQuestionWrapper implements PollsQuestion {
 		_pollsQuestion.setTitleMap(titleMap);
 	}
 
+	/**
+	* Sets the localized titles of this polls question from the map of locales and localized titles, and sets the default locale.
+	*
+	* @param titleMap the locales and localized titles of this polls question
+	* @param defaultLocale the default locale
+	*/
 	public void setTitleMap(
 		java.util.Map<java.util.Locale, java.lang.String> titleMap,
 		java.util.Locale defaultLocale) {
@@ -320,7 +333,7 @@ public class PollsQuestionWrapper implements PollsQuestion {
 	}
 
 	/**
-	* Gets the description of this polls question.
+	* Returns the description of this polls question.
 	*
 	* @return the description of this polls question
 	*/
@@ -329,9 +342,9 @@ public class PollsQuestionWrapper implements PollsQuestion {
 	}
 
 	/**
-	* Gets the localized description of this polls question. Uses the default language if no localization exists for the requested language.
+	* Returns the localized description of this polls question in the language. Uses the default language if no localization exists for the requested language.
 	*
-	* @param locale the locale to get the localized description for
+	* @param locale the locale of the language
 	* @return the localized description of this polls question
 	*/
 	public java.lang.String getDescription(java.util.Locale locale) {
@@ -339,9 +352,9 @@ public class PollsQuestionWrapper implements PollsQuestion {
 	}
 
 	/**
-	* Gets the localized description of this polls question, optionally using the default language if no localization exists for the requested language.
+	* Returns the localized description of this polls question in the language, optionally using the default language if no localization exists for the requested language.
 	*
-	* @param locale the local to get the localized description for
+	* @param locale the local of the language
 	* @param useDefault whether to use the default language if no localization exists for the requested language
 	* @return the localized description of this polls question. If <code>useDefault</code> is <code>false</code> and no localization exists for the requested language, an empty string will be returned.
 	*/
@@ -351,9 +364,9 @@ public class PollsQuestionWrapper implements PollsQuestion {
 	}
 
 	/**
-	* Gets the localized description of this polls question. Uses the default language if no localization exists for the requested language.
+	* Returns the localized description of this polls question in the language. Uses the default language if no localization exists for the requested language.
 	*
-	* @param languageId the id of the language to get the localized description for
+	* @param languageId the ID of the language
 	* @return the localized description of this polls question
 	*/
 	public java.lang.String getDescription(java.lang.String languageId) {
@@ -361,9 +374,9 @@ public class PollsQuestionWrapper implements PollsQuestion {
 	}
 
 	/**
-	* Gets the localized description of this polls question, optionally using the default language if no localization exists for the requested language.
+	* Returns the localized description of this polls question in the language, optionally using the default language if no localization exists for the requested language.
 	*
-	* @param languageId the id of the language to get the localized description for
+	* @param languageId the ID of the language
 	* @param useDefault whether to use the default language if no localization exists for the requested language
 	* @return the localized description of this polls question
 	*/
@@ -373,9 +386,9 @@ public class PollsQuestionWrapper implements PollsQuestion {
 	}
 
 	/**
-	* Gets a map of the locales and localized description of this polls question.
+	* Returns a map of the locales and localized descriptions of this polls question.
 	*
-	* @return the locales and localized description
+	* @return the locales and localized descriptions of this polls question
 	*/
 	public java.util.Map<java.util.Locale, java.lang.String> getDescriptionMap() {
 		return _pollsQuestion.getDescriptionMap();
@@ -391,16 +404,23 @@ public class PollsQuestionWrapper implements PollsQuestion {
 	}
 
 	/**
-	* Sets the localized description of this polls question.
+	* Sets the localized description of this polls question in the language.
 	*
 	* @param description the localized description of this polls question
-	* @param locale the locale to set the localized description for
+	* @param locale the locale of the language
 	*/
 	public void setDescription(java.lang.String description,
 		java.util.Locale locale) {
 		_pollsQuestion.setDescription(description, locale);
 	}
 
+	/**
+	* Sets the localized description of this polls question in the language, and sets the default locale.
+	*
+	* @param description the localized description of this polls question
+	* @param locale the locale of the language
+	* @param defaultLocale the default locale
+	*/
 	public void setDescription(java.lang.String description,
 		java.util.Locale locale, java.util.Locale defaultLocale) {
 		_pollsQuestion.setDescription(description, locale, defaultLocale);
@@ -416,6 +436,12 @@ public class PollsQuestionWrapper implements PollsQuestion {
 		_pollsQuestion.setDescriptionMap(descriptionMap);
 	}
 
+	/**
+	* Sets the localized descriptions of this polls question from the map of locales and localized descriptions, and sets the default locale.
+	*
+	* @param descriptionMap the locales and localized descriptions of this polls question
+	* @param defaultLocale the default locale
+	*/
 	public void setDescriptionMap(
 		java.util.Map<java.util.Locale, java.lang.String> descriptionMap,
 		java.util.Locale defaultLocale) {
@@ -423,7 +449,7 @@ public class PollsQuestionWrapper implements PollsQuestion {
 	}
 
 	/**
-	* Gets the expiration date of this polls question.
+	* Returns the expiration date of this polls question.
 	*
 	* @return the expiration date of this polls question
 	*/
@@ -441,7 +467,7 @@ public class PollsQuestionWrapper implements PollsQuestion {
 	}
 
 	/**
-	* Gets the last vote date of this polls question.
+	* Returns the last vote date of this polls question.
 	*
 	* @return the last vote date of this polls question
 	*/

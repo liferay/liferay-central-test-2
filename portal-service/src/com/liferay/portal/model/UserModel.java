@@ -45,21 +45,21 @@ public interface UserModel extends BaseModel<User> {
 	 */
 
 	/**
-	 * Gets the primary key of this user.
+	 * Returns the primary key of this user.
 	 *
 	 * @return the primary key of this user
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this user
+	 * Sets the primary key of this user.
 	 *
 	 * @param primaryKey the primary key of this user
 	 */
 	public void setPrimaryKey(long primaryKey);
 
 	/**
-	 * Gets the uuid of this user.
+	 * Returns the uuid of this user.
 	 *
 	 * @return the uuid of this user
 	 */
@@ -74,7 +74,7 @@ public interface UserModel extends BaseModel<User> {
 	public void setUuid(String uuid);
 
 	/**
-	 * Gets the user ID of this user.
+	 * Returns the user ID of this user.
 	 *
 	 * @return the user ID of this user
 	 */
@@ -88,7 +88,7 @@ public interface UserModel extends BaseModel<User> {
 	public void setUserId(long userId);
 
 	/**
-	 * Gets the user uuid of this user.
+	 * Returns the user uuid of this user.
 	 *
 	 * @return the user uuid of this user
 	 * @throws SystemException if a system exception occurred
@@ -103,7 +103,7 @@ public interface UserModel extends BaseModel<User> {
 	public void setUserUuid(String userUuid);
 
 	/**
-	 * Gets the company ID of this user.
+	 * Returns the company ID of this user.
 	 *
 	 * @return the company ID of this user
 	 */
@@ -117,7 +117,7 @@ public interface UserModel extends BaseModel<User> {
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the create date of this user.
+	 * Returns the create date of this user.
 	 *
 	 * @return the create date of this user
 	 */
@@ -131,7 +131,7 @@ public interface UserModel extends BaseModel<User> {
 	public void setCreateDate(Date createDate);
 
 	/**
-	 * Gets the modified date of this user.
+	 * Returns the modified date of this user.
 	 *
 	 * @return the modified date of this user
 	 */
@@ -145,7 +145,7 @@ public interface UserModel extends BaseModel<User> {
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
-	 * Gets the default user of this user.
+	 * Returns the default user of this user.
 	 *
 	 * @return the default user of this user
 	 */
@@ -166,7 +166,7 @@ public interface UserModel extends BaseModel<User> {
 	public void setDefaultUser(boolean defaultUser);
 
 	/**
-	 * Gets the contact ID of this user.
+	 * Returns the contact ID of this user.
 	 *
 	 * @return the contact ID of this user
 	 */
@@ -180,7 +180,7 @@ public interface UserModel extends BaseModel<User> {
 	public void setContactId(long contactId);
 
 	/**
-	 * Gets the password of this user.
+	 * Returns the password of this user.
 	 *
 	 * @return the password of this user
 	 */
@@ -195,7 +195,7 @@ public interface UserModel extends BaseModel<User> {
 	public void setPassword(String password);
 
 	/**
-	 * Gets the password encrypted of this user.
+	 * Returns the password encrypted of this user.
 	 *
 	 * @return the password encrypted of this user
 	 */
@@ -216,7 +216,7 @@ public interface UserModel extends BaseModel<User> {
 	public void setPasswordEncrypted(boolean passwordEncrypted);
 
 	/**
-	 * Gets the password reset of this user.
+	 * Returns the password reset of this user.
 	 *
 	 * @return the password reset of this user
 	 */
@@ -237,7 +237,7 @@ public interface UserModel extends BaseModel<User> {
 	public void setPasswordReset(boolean passwordReset);
 
 	/**
-	 * Gets the password modified date of this user.
+	 * Returns the password modified date of this user.
 	 *
 	 * @return the password modified date of this user
 	 */
@@ -251,7 +251,7 @@ public interface UserModel extends BaseModel<User> {
 	public void setPasswordModifiedDate(Date passwordModifiedDate);
 
 	/**
-	 * Gets the digest of this user.
+	 * Returns the digest of this user.
 	 *
 	 * @return the digest of this user
 	 */
@@ -266,7 +266,7 @@ public interface UserModel extends BaseModel<User> {
 	public void setDigest(String digest);
 
 	/**
-	 * Gets the reminder query question of this user.
+	 * Returns the reminder query question of this user.
 	 *
 	 * @return the reminder query question of this user
 	 */
@@ -281,7 +281,7 @@ public interface UserModel extends BaseModel<User> {
 	public void setReminderQueryQuestion(String reminderQueryQuestion);
 
 	/**
-	 * Gets the reminder query answer of this user.
+	 * Returns the reminder query answer of this user.
 	 *
 	 * @return the reminder query answer of this user
 	 */
@@ -296,7 +296,7 @@ public interface UserModel extends BaseModel<User> {
 	public void setReminderQueryAnswer(String reminderQueryAnswer);
 
 	/**
-	 * Gets the grace login count of this user.
+	 * Returns the grace login count of this user.
 	 *
 	 * @return the grace login count of this user
 	 */
@@ -310,7 +310,7 @@ public interface UserModel extends BaseModel<User> {
 	public void setGraceLoginCount(int graceLoginCount);
 
 	/**
-	 * Gets the screen name of this user.
+	 * Returns the screen name of this user.
 	 *
 	 * @return the screen name of this user
 	 */
@@ -325,7 +325,7 @@ public interface UserModel extends BaseModel<User> {
 	public void setScreenName(String screenName);
 
 	/**
-	 * Gets the email address of this user.
+	 * Returns the email address of this user.
 	 *
 	 * @return the email address of this user
 	 */
@@ -340,7 +340,7 @@ public interface UserModel extends BaseModel<User> {
 	public void setEmailAddress(String emailAddress);
 
 	/**
-	 * Gets the facebook ID of this user.
+	 * Returns the facebook ID of this user.
 	 *
 	 * @return the facebook ID of this user
 	 */
@@ -354,7 +354,7 @@ public interface UserModel extends BaseModel<User> {
 	public void setFacebookId(long facebookId);
 
 	/**
-	 * Gets the open ID of this user.
+	 * Returns the open ID of this user.
 	 *
 	 * @return the open ID of this user
 	 */
@@ -369,7 +369,7 @@ public interface UserModel extends BaseModel<User> {
 	public void setOpenId(String openId);
 
 	/**
-	 * Gets the portrait ID of this user.
+	 * Returns the portrait ID of this user.
 	 *
 	 * @return the portrait ID of this user
 	 */
@@ -383,7 +383,7 @@ public interface UserModel extends BaseModel<User> {
 	public void setPortraitId(long portraitId);
 
 	/**
-	 * Gets the language ID of this user.
+	 * Returns the language ID of this user.
 	 *
 	 * @return the language ID of this user
 	 */
@@ -398,7 +398,7 @@ public interface UserModel extends BaseModel<User> {
 	public void setLanguageId(String languageId);
 
 	/**
-	 * Gets the time zone ID of this user.
+	 * Returns the time zone ID of this user.
 	 *
 	 * @return the time zone ID of this user
 	 */
@@ -413,7 +413,7 @@ public interface UserModel extends BaseModel<User> {
 	public void setTimeZoneId(String timeZoneId);
 
 	/**
-	 * Gets the greeting of this user.
+	 * Returns the greeting of this user.
 	 *
 	 * @return the greeting of this user
 	 */
@@ -428,7 +428,7 @@ public interface UserModel extends BaseModel<User> {
 	public void setGreeting(String greeting);
 
 	/**
-	 * Gets the comments of this user.
+	 * Returns the comments of this user.
 	 *
 	 * @return the comments of this user
 	 */
@@ -443,7 +443,7 @@ public interface UserModel extends BaseModel<User> {
 	public void setComments(String comments);
 
 	/**
-	 * Gets the first name of this user.
+	 * Returns the first name of this user.
 	 *
 	 * @return the first name of this user
 	 */
@@ -458,7 +458,7 @@ public interface UserModel extends BaseModel<User> {
 	public void setFirstName(String firstName);
 
 	/**
-	 * Gets the middle name of this user.
+	 * Returns the middle name of this user.
 	 *
 	 * @return the middle name of this user
 	 */
@@ -473,7 +473,7 @@ public interface UserModel extends BaseModel<User> {
 	public void setMiddleName(String middleName);
 
 	/**
-	 * Gets the last name of this user.
+	 * Returns the last name of this user.
 	 *
 	 * @return the last name of this user
 	 */
@@ -488,7 +488,7 @@ public interface UserModel extends BaseModel<User> {
 	public void setLastName(String lastName);
 
 	/**
-	 * Gets the job title of this user.
+	 * Returns the job title of this user.
 	 *
 	 * @return the job title of this user
 	 */
@@ -503,7 +503,7 @@ public interface UserModel extends BaseModel<User> {
 	public void setJobTitle(String jobTitle);
 
 	/**
-	 * Gets the login date of this user.
+	 * Returns the login date of this user.
 	 *
 	 * @return the login date of this user
 	 */
@@ -517,7 +517,7 @@ public interface UserModel extends BaseModel<User> {
 	public void setLoginDate(Date loginDate);
 
 	/**
-	 * Gets the login i p of this user.
+	 * Returns the login i p of this user.
 	 *
 	 * @return the login i p of this user
 	 */
@@ -532,7 +532,7 @@ public interface UserModel extends BaseModel<User> {
 	public void setLoginIP(String loginIP);
 
 	/**
-	 * Gets the last login date of this user.
+	 * Returns the last login date of this user.
 	 *
 	 * @return the last login date of this user
 	 */
@@ -546,7 +546,7 @@ public interface UserModel extends BaseModel<User> {
 	public void setLastLoginDate(Date lastLoginDate);
 
 	/**
-	 * Gets the last login i p of this user.
+	 * Returns the last login i p of this user.
 	 *
 	 * @return the last login i p of this user
 	 */
@@ -561,7 +561,7 @@ public interface UserModel extends BaseModel<User> {
 	public void setLastLoginIP(String lastLoginIP);
 
 	/**
-	 * Gets the last failed login date of this user.
+	 * Returns the last failed login date of this user.
 	 *
 	 * @return the last failed login date of this user
 	 */
@@ -575,7 +575,7 @@ public interface UserModel extends BaseModel<User> {
 	public void setLastFailedLoginDate(Date lastFailedLoginDate);
 
 	/**
-	 * Gets the failed login attempts of this user.
+	 * Returns the failed login attempts of this user.
 	 *
 	 * @return the failed login attempts of this user
 	 */
@@ -589,7 +589,7 @@ public interface UserModel extends BaseModel<User> {
 	public void setFailedLoginAttempts(int failedLoginAttempts);
 
 	/**
-	 * Gets the lockout of this user.
+	 * Returns the lockout of this user.
 	 *
 	 * @return the lockout of this user
 	 */
@@ -610,7 +610,7 @@ public interface UserModel extends BaseModel<User> {
 	public void setLockout(boolean lockout);
 
 	/**
-	 * Gets the lockout date of this user.
+	 * Returns the lockout date of this user.
 	 *
 	 * @return the lockout date of this user
 	 */
@@ -624,7 +624,7 @@ public interface UserModel extends BaseModel<User> {
 	public void setLockoutDate(Date lockoutDate);
 
 	/**
-	 * Gets the agreed to terms of use of this user.
+	 * Returns the agreed to terms of use of this user.
 	 *
 	 * @return the agreed to terms of use of this user
 	 */
@@ -645,7 +645,7 @@ public interface UserModel extends BaseModel<User> {
 	public void setAgreedToTermsOfUse(boolean agreedToTermsOfUse);
 
 	/**
-	 * Gets the status of this user.
+	 * Returns the status of this user.
 	 *
 	 * @return the status of this user
 	 */

@@ -41,7 +41,7 @@ public class DLDocumentMetadataSetLocalServiceUtil {
 	/**
 	* Adds the d l document metadata set to the database. Also notifies the appropriate model listeners.
 	*
-	* @param dlDocumentMetadataSet the d l document metadata set to add
+	* @param dlDocumentMetadataSet the d l document metadata set
 	* @return the d l document metadata set that was added
 	* @throws SystemException if a system exception occurred
 	*/
@@ -65,7 +65,7 @@ public class DLDocumentMetadataSetLocalServiceUtil {
 	/**
 	* Deletes the d l document metadata set with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param documentMetadataSetId the primary key of the d l document metadata set to delete
+	* @param documentMetadataSetId the primary key of the d l document metadata set
 	* @throws PortalException if a d l document metadata set with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -78,7 +78,7 @@ public class DLDocumentMetadataSetLocalServiceUtil {
 	/**
 	* Deletes the d l document metadata set from the database. Also notifies the appropriate model listeners.
 	*
-	* @param dlDocumentMetadataSet the d l document metadata set to delete
+	* @param dlDocumentMetadataSet the d l document metadata set
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void deleteDLDocumentMetadataSet(
@@ -90,7 +90,7 @@ public class DLDocumentMetadataSetLocalServiceUtil {
 	/**
 	* Performs a dynamic query on the database and returns the matching rows.
 	*
-	* @param dynamicQuery the dynamic query to search with
+	* @param dynamicQuery the dynamic query
 	* @return the matching rows
 	* @throws SystemException if a system exception occurred
 	*/
@@ -108,9 +108,9 @@ public class DLDocumentMetadataSetLocalServiceUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param dynamicQuery the dynamic query to search with
-	* @param start the lower bound of the range of model instances to return
-	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param dynamicQuery the dynamic query
+	* @param start the lower bound of the range of model instances
+	* @param end the upper bound of the range of model instances (not inclusive)
 	* @return the range of matching rows
 	* @throws SystemException if a system exception occurred
 	*/
@@ -128,9 +128,9 @@ public class DLDocumentMetadataSetLocalServiceUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param dynamicQuery the dynamic query to search with
-	* @param start the lower bound of the range of model instances to return
-	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param dynamicQuery the dynamic query
+	* @param start the lower bound of the range of model instances
+	* @param end the upper bound of the range of model instances (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching rows
 	* @throws SystemException if a system exception occurred
@@ -146,9 +146,9 @@ public class DLDocumentMetadataSetLocalServiceUtil {
 	}
 
 	/**
-	* Counts the number of rows that match the dynamic query.
+	* Returns the number of rows that match the dynamic query.
 	*
-	* @param dynamicQuery the dynamic query to search with
+	* @param dynamicQuery the dynamic query
 	* @return the number of rows that match the dynamic query
 	* @throws SystemException if a system exception occurred
 	*/
@@ -159,9 +159,9 @@ public class DLDocumentMetadataSetLocalServiceUtil {
 	}
 
 	/**
-	* Gets the d l document metadata set with the primary key.
+	* Returns the d l document metadata set with the primary key.
 	*
-	* @param documentMetadataSetId the primary key of the d l document metadata set to get
+	* @param documentMetadataSetId the primary key of the d l document metadata set
 	* @return the d l document metadata set
 	* @throws PortalException if a d l document metadata set with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -174,14 +174,14 @@ public class DLDocumentMetadataSetLocalServiceUtil {
 	}
 
 	/**
-	* Gets a range of all the d l document metadata sets.
+	* Returns a range of all the d l document metadata sets.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of d l document metadata sets to return
-	* @param end the upper bound of the range of d l document metadata sets to return (not inclusive)
+	* @param start the lower bound of the range of d l document metadata sets
+	* @param end the upper bound of the range of d l document metadata sets (not inclusive)
 	* @return the range of d l document metadata sets
 	* @throws SystemException if a system exception occurred
 	*/
@@ -192,7 +192,7 @@ public class DLDocumentMetadataSetLocalServiceUtil {
 	}
 
 	/**
-	* Gets the number of d l document metadata sets.
+	* Returns the number of d l document metadata sets.
 	*
 	* @return the number of d l document metadata sets
 	* @throws SystemException if a system exception occurred
@@ -205,7 +205,7 @@ public class DLDocumentMetadataSetLocalServiceUtil {
 	/**
 	* Updates the d l document metadata set in the database. Also notifies the appropriate model listeners.
 	*
-	* @param dlDocumentMetadataSet the d l document metadata set to update
+	* @param dlDocumentMetadataSet the d l document metadata set
 	* @return the d l document metadata set that was updated
 	* @throws SystemException if a system exception occurred
 	*/
@@ -218,7 +218,7 @@ public class DLDocumentMetadataSetLocalServiceUtil {
 	/**
 	* Updates the d l document metadata set in the database. Also notifies the appropriate model listeners.
 	*
-	* @param dlDocumentMetadataSet the d l document metadata set to update
+	* @param dlDocumentMetadataSet the d l document metadata set
 	* @param merge whether to merge the d l document metadata set with the current session. See {@link com.liferay.portal.service.persistence.BatchSession#update(com.liferay.portal.kernel.dao.orm.Session, com.liferay.portal.model.BaseModel, boolean)} for an explanation.
 	* @return the d l document metadata set that was updated
 	* @throws SystemException if a system exception occurred
@@ -232,7 +232,7 @@ public class DLDocumentMetadataSetLocalServiceUtil {
 	}
 
 	/**
-	* Gets the Spring bean ID for this bean.
+	* Returns the Spring bean ID for this bean.
 	*
 	* @return the Spring bean ID for this bean
 	*/

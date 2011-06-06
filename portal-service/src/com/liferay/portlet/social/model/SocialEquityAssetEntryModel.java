@@ -43,21 +43,21 @@ public interface SocialEquityAssetEntryModel extends BaseModel<SocialEquityAsset
 	 */
 
 	/**
-	 * Gets the primary key of this social equity asset entry.
+	 * Returns the primary key of this social equity asset entry.
 	 *
 	 * @return the primary key of this social equity asset entry
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this social equity asset entry
+	 * Sets the primary key of this social equity asset entry.
 	 *
 	 * @param primaryKey the primary key of this social equity asset entry
 	 */
 	public void setPrimaryKey(long primaryKey);
 
 	/**
-	 * Gets the equity asset entry ID of this social equity asset entry.
+	 * Returns the equity asset entry ID of this social equity asset entry.
 	 *
 	 * @return the equity asset entry ID of this social equity asset entry
 	 */
@@ -71,7 +71,7 @@ public interface SocialEquityAssetEntryModel extends BaseModel<SocialEquityAsset
 	public void setEquityAssetEntryId(long equityAssetEntryId);
 
 	/**
-	 * Gets the group ID of this social equity asset entry.
+	 * Returns the group ID of this social equity asset entry.
 	 *
 	 * @return the group ID of this social equity asset entry
 	 */
@@ -85,7 +85,7 @@ public interface SocialEquityAssetEntryModel extends BaseModel<SocialEquityAsset
 	public void setGroupId(long groupId);
 
 	/**
-	 * Gets the company ID of this social equity asset entry.
+	 * Returns the company ID of this social equity asset entry.
 	 *
 	 * @return the company ID of this social equity asset entry
 	 */
@@ -99,7 +99,7 @@ public interface SocialEquityAssetEntryModel extends BaseModel<SocialEquityAsset
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the user ID of this social equity asset entry.
+	 * Returns the user ID of this social equity asset entry.
 	 *
 	 * @return the user ID of this social equity asset entry
 	 */
@@ -113,7 +113,7 @@ public interface SocialEquityAssetEntryModel extends BaseModel<SocialEquityAsset
 	public void setUserId(long userId);
 
 	/**
-	 * Gets the user uuid of this social equity asset entry.
+	 * Returns the user uuid of this social equity asset entry.
 	 *
 	 * @return the user uuid of this social equity asset entry
 	 * @throws SystemException if a system exception occurred
@@ -128,7 +128,7 @@ public interface SocialEquityAssetEntryModel extends BaseModel<SocialEquityAsset
 	public void setUserUuid(String userUuid);
 
 	/**
-	 * Gets the asset entry ID of this social equity asset entry.
+	 * Returns the asset entry ID of this social equity asset entry.
 	 *
 	 * @return the asset entry ID of this social equity asset entry
 	 */
@@ -142,7 +142,7 @@ public interface SocialEquityAssetEntryModel extends BaseModel<SocialEquityAsset
 	public void setAssetEntryId(long assetEntryId);
 
 	/**
-	 * Gets the information k of this social equity asset entry.
+	 * Returns the information k of this social equity asset entry.
 	 *
 	 * @return the information k of this social equity asset entry
 	 */
@@ -156,7 +156,7 @@ public interface SocialEquityAssetEntryModel extends BaseModel<SocialEquityAsset
 	public void setInformationK(double informationK);
 
 	/**
-	 * Gets the information b of this social equity asset entry.
+	 * Returns the information b of this social equity asset entry.
 	 *
 	 * @return the information b of this social equity asset entry
 	 */

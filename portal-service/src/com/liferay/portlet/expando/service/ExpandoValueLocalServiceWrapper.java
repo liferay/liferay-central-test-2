@@ -32,7 +32,7 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 	/**
 	* Adds the expando value to the database. Also notifies the appropriate model listeners.
 	*
-	* @param expandoValue the expando value to add
+	* @param expandoValue the expando value
 	* @return the expando value that was added
 	* @throws SystemException if a system exception occurred
 	*/
@@ -56,7 +56,7 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 	/**
 	* Deletes the expando value with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param valueId the primary key of the expando value to delete
+	* @param valueId the primary key of the expando value
 	* @throws PortalException if a expando value with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -69,7 +69,7 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 	/**
 	* Deletes the expando value from the database. Also notifies the appropriate model listeners.
 	*
-	* @param expandoValue the expando value to delete
+	* @param expandoValue the expando value
 	* @throws SystemException if a system exception occurred
 	*/
 	public void deleteExpandoValue(
@@ -81,7 +81,7 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 	/**
 	* Performs a dynamic query on the database and returns the matching rows.
 	*
-	* @param dynamicQuery the dynamic query to search with
+	* @param dynamicQuery the dynamic query
 	* @return the matching rows
 	* @throws SystemException if a system exception occurred
 	*/
@@ -99,9 +99,9 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param dynamicQuery the dynamic query to search with
-	* @param start the lower bound of the range of model instances to return
-	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param dynamicQuery the dynamic query
+	* @param start the lower bound of the range of model instances
+	* @param end the upper bound of the range of model instances (not inclusive)
 	* @return the range of matching rows
 	* @throws SystemException if a system exception occurred
 	*/
@@ -119,9 +119,9 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param dynamicQuery the dynamic query to search with
-	* @param start the lower bound of the range of model instances to return
-	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param dynamicQuery the dynamic query
+	* @param start the lower bound of the range of model instances
+	* @param end the upper bound of the range of model instances (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching rows
 	* @throws SystemException if a system exception occurred
@@ -137,9 +137,9 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 	}
 
 	/**
-	* Counts the number of rows that match the dynamic query.
+	* Returns the number of rows that match the dynamic query.
 	*
-	* @param dynamicQuery the dynamic query to search with
+	* @param dynamicQuery the dynamic query
 	* @return the number of rows that match the dynamic query
 	* @throws SystemException if a system exception occurred
 	*/
@@ -150,9 +150,9 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 	}
 
 	/**
-	* Gets the expando value with the primary key.
+	* Returns the expando value with the primary key.
 	*
-	* @param valueId the primary key of the expando value to get
+	* @param valueId the primary key of the expando value
 	* @return the expando value
 	* @throws PortalException if a expando value with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -165,14 +165,14 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 	}
 
 	/**
-	* Gets a range of all the expando values.
+	* Returns a range of all the expando values.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of expando values to return
-	* @param end the upper bound of the range of expando values to return (not inclusive)
+	* @param start the lower bound of the range of expando values
+	* @param end the upper bound of the range of expando values (not inclusive)
 	* @return the range of expando values
 	* @throws SystemException if a system exception occurred
 	*/
@@ -183,7 +183,7 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 	}
 
 	/**
-	* Gets the number of expando values.
+	* Returns the number of expando values.
 	*
 	* @return the number of expando values
 	* @throws SystemException if a system exception occurred
@@ -196,7 +196,7 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 	/**
 	* Updates the expando value in the database. Also notifies the appropriate model listeners.
 	*
-	* @param expandoValue the expando value to update
+	* @param expandoValue the expando value
 	* @return the expando value that was updated
 	* @throws SystemException if a system exception occurred
 	*/
@@ -209,7 +209,7 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 	/**
 	* Updates the expando value in the database. Also notifies the appropriate model listeners.
 	*
-	* @param expandoValue the expando value to update
+	* @param expandoValue the expando value
 	* @param merge whether to merge the expando value with the current session. See {@link com.liferay.portal.service.persistence.BatchSession#update(com.liferay.portal.kernel.dao.orm.Session, com.liferay.portal.model.BaseModel, boolean)} for an explanation.
 	* @return the expando value that was updated
 	* @throws SystemException if a system exception occurred
@@ -222,7 +222,7 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 	}
 
 	/**
-	* Gets the Spring bean ID for this bean.
+	* Returns the Spring bean ID for this bean.
 	*
 	* @return the Spring bean ID for this bean
 	*/

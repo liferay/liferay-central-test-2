@@ -69,7 +69,7 @@ public abstract class RatingsStatsLocalServiceBaseImpl
 	/**
 	 * Adds the ratings stats to the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param ratingsStats the ratings stats to add
+	 * @param ratingsStats the ratings stats
 	 * @return the ratings stats that was added
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -93,7 +93,7 @@ public abstract class RatingsStatsLocalServiceBaseImpl
 	/**
 	 * Deletes the ratings stats with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param statsId the primary key of the ratings stats to delete
+	 * @param statsId the primary key of the ratings stats
 	 * @throws PortalException if a ratings stats with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -105,7 +105,7 @@ public abstract class RatingsStatsLocalServiceBaseImpl
 	/**
 	 * Deletes the ratings stats from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param ratingsStats the ratings stats to delete
+	 * @param ratingsStats the ratings stats
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void deleteRatingsStats(RatingsStats ratingsStats)
@@ -116,7 +116,7 @@ public abstract class RatingsStatsLocalServiceBaseImpl
 	/**
 	 * Performs a dynamic query on the database and returns the matching rows.
 	 *
-	 * @param dynamicQuery the dynamic query to search with
+	 * @param dynamicQuery the dynamic query
 	 * @return the matching rows
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -133,9 +133,9 @@ public abstract class RatingsStatsLocalServiceBaseImpl
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param dynamicQuery the dynamic query to search with
-	 * @param start the lower bound of the range of model instances to return
-	 * @param end the upper bound of the range of model instances to return (not inclusive)
+	 * @param dynamicQuery the dynamic query
+	 * @param start the lower bound of the range of model instances
+	 * @param end the upper bound of the range of model instances (not inclusive)
 	 * @return the range of matching rows
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -153,9 +153,9 @@ public abstract class RatingsStatsLocalServiceBaseImpl
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param dynamicQuery the dynamic query to search with
-	 * @param start the lower bound of the range of model instances to return
-	 * @param end the upper bound of the range of model instances to return (not inclusive)
+	 * @param dynamicQuery the dynamic query
+	 * @param start the lower bound of the range of model instances
+	 * @param end the upper bound of the range of model instances (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching rows
 	 * @throws SystemException if a system exception occurred
@@ -168,9 +168,9 @@ public abstract class RatingsStatsLocalServiceBaseImpl
 	}
 
 	/**
-	 * Counts the number of rows that match the dynamic query.
+	 * Returns the number of rows that match the dynamic query.
 	 *
-	 * @param dynamicQuery the dynamic query to search with
+	 * @param dynamicQuery the dynamic query
 	 * @return the number of rows that match the dynamic query
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -180,9 +180,9 @@ public abstract class RatingsStatsLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the ratings stats with the primary key.
+	 * Returns the ratings stats with the primary key.
 	 *
-	 * @param statsId the primary key of the ratings stats to get
+	 * @param statsId the primary key of the ratings stats
 	 * @return the ratings stats
 	 * @throws PortalException if a ratings stats with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -193,14 +193,14 @@ public abstract class RatingsStatsLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets a range of all the ratings statses.
+	 * Returns a range of all the ratings statses.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param start the lower bound of the range of ratings statses to return
-	 * @param end the upper bound of the range of ratings statses to return (not inclusive)
+	 * @param start the lower bound of the range of ratings statses
+	 * @param end the upper bound of the range of ratings statses (not inclusive)
 	 * @return the range of ratings statses
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -210,7 +210,7 @@ public abstract class RatingsStatsLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the number of ratings statses.
+	 * Returns the number of ratings statses.
 	 *
 	 * @return the number of ratings statses
 	 * @throws SystemException if a system exception occurred
@@ -222,7 +222,7 @@ public abstract class RatingsStatsLocalServiceBaseImpl
 	/**
 	 * Updates the ratings stats in the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param ratingsStats the ratings stats to update
+	 * @param ratingsStats the ratings stats
 	 * @return the ratings stats that was updated
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -236,7 +236,7 @@ public abstract class RatingsStatsLocalServiceBaseImpl
 	/**
 	 * Updates the ratings stats in the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param ratingsStats the ratings stats to update
+	 * @param ratingsStats the ratings stats
 	 * @param merge whether to merge the ratings stats with the current session. See {@link com.liferay.portal.service.persistence.BatchSession#update(com.liferay.portal.kernel.dao.orm.Session, com.liferay.portal.model.BaseModel, boolean)} for an explanation.
 	 * @return the ratings stats that was updated
 	 * @throws SystemException if a system exception occurred
@@ -249,7 +249,7 @@ public abstract class RatingsStatsLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the ratings entry local service.
+	 * Returns the ratings entry local service.
 	 *
 	 * @return the ratings entry local service
 	 */
@@ -268,7 +268,7 @@ public abstract class RatingsStatsLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the ratings entry remote service.
+	 * Returns the ratings entry remote service.
 	 *
 	 * @return the ratings entry remote service
 	 */
@@ -286,7 +286,7 @@ public abstract class RatingsStatsLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the ratings entry persistence.
+	 * Returns the ratings entry persistence.
 	 *
 	 * @return the ratings entry persistence
 	 */
@@ -305,7 +305,7 @@ public abstract class RatingsStatsLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the ratings entry finder.
+	 * Returns the ratings entry finder.
 	 *
 	 * @return the ratings entry finder
 	 */
@@ -323,7 +323,7 @@ public abstract class RatingsStatsLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the ratings stats local service.
+	 * Returns the ratings stats local service.
 	 *
 	 * @return the ratings stats local service
 	 */
@@ -342,7 +342,7 @@ public abstract class RatingsStatsLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the ratings stats persistence.
+	 * Returns the ratings stats persistence.
 	 *
 	 * @return the ratings stats persistence
 	 */
@@ -361,7 +361,7 @@ public abstract class RatingsStatsLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the ratings stats finder.
+	 * Returns the ratings stats finder.
 	 *
 	 * @return the ratings stats finder
 	 */
@@ -379,7 +379,7 @@ public abstract class RatingsStatsLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the counter local service.
+	 * Returns the counter local service.
 	 *
 	 * @return the counter local service
 	 */
@@ -397,7 +397,7 @@ public abstract class RatingsStatsLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the resource local service.
+	 * Returns the resource local service.
 	 *
 	 * @return the resource local service
 	 */
@@ -416,7 +416,7 @@ public abstract class RatingsStatsLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the resource remote service.
+	 * Returns the resource remote service.
 	 *
 	 * @return the resource remote service
 	 */
@@ -434,7 +434,7 @@ public abstract class RatingsStatsLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the resource persistence.
+	 * Returns the resource persistence.
 	 *
 	 * @return the resource persistence
 	 */
@@ -452,7 +452,7 @@ public abstract class RatingsStatsLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the resource finder.
+	 * Returns the resource finder.
 	 *
 	 * @return the resource finder
 	 */
@@ -470,7 +470,7 @@ public abstract class RatingsStatsLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the user local service.
+	 * Returns the user local service.
 	 *
 	 * @return the user local service
 	 */
@@ -488,7 +488,7 @@ public abstract class RatingsStatsLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the user remote service.
+	 * Returns the user remote service.
 	 *
 	 * @return the user remote service
 	 */
@@ -506,7 +506,7 @@ public abstract class RatingsStatsLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the user persistence.
+	 * Returns the user persistence.
 	 *
 	 * @return the user persistence
 	 */
@@ -524,7 +524,7 @@ public abstract class RatingsStatsLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the user finder.
+	 * Returns the user finder.
 	 *
 	 * @return the user finder
 	 */
@@ -542,7 +542,7 @@ public abstract class RatingsStatsLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the Spring bean ID for this bean.
+	 * Returns the Spring bean ID for this bean.
 	 *
 	 * @return the Spring bean ID for this bean
 	 */
@@ -562,7 +562,7 @@ public abstract class RatingsStatsLocalServiceBaseImpl
 	/**
 	 * Performs an SQL query.
 	 *
-	 * @param sql the sql query to perform
+	 * @param sql the sql query
 	 */
 	protected void runSQL(String sql) throws SystemException {
 		try {

@@ -39,14 +39,14 @@ public interface ListTypePersistence extends BasePersistence<ListType> {
 	/**
 	* Caches the list type in the entity cache if it is enabled.
 	*
-	* @param listType the list type to cache
+	* @param listType the list type
 	*/
 	public void cacheResult(com.liferay.portal.model.ListType listType);
 
 	/**
 	* Caches the list types in the entity cache if it is enabled.
 	*
-	* @param listTypes the list types to cache
+	* @param listTypes the list types
 	*/
 	public void cacheResult(
 		java.util.List<com.liferay.portal.model.ListType> listTypes);
@@ -62,7 +62,7 @@ public interface ListTypePersistence extends BasePersistence<ListType> {
 	/**
 	* Removes the list type with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param listTypeId the primary key of the list type to remove
+	* @param listTypeId the primary key of the list type
 	* @return the list type that was removed
 	* @throws com.liferay.portal.NoSuchListTypeException if a list type with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -76,9 +76,9 @@ public interface ListTypePersistence extends BasePersistence<ListType> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the list type with the primary key or throws a {@link com.liferay.portal.NoSuchListTypeException} if it could not be found.
+	* Returns the list type with the primary key or throws a {@link com.liferay.portal.NoSuchListTypeException} if it could not be found.
 	*
-	* @param listTypeId the primary key of the list type to find
+	* @param listTypeId the primary key of the list type
 	* @return the list type
 	* @throws com.liferay.portal.NoSuchListTypeException if a list type with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -88,9 +88,9 @@ public interface ListTypePersistence extends BasePersistence<ListType> {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the list type with the primary key or returns <code>null</code> if it could not be found.
+	* Returns the list type with the primary key or returns <code>null</code> if it could not be found.
 	*
-	* @param listTypeId the primary key of the list type to find
+	* @param listTypeId the primary key of the list type
 	* @return the list type, or <code>null</code> if a list type with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -98,9 +98,9 @@ public interface ListTypePersistence extends BasePersistence<ListType> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds all the list types where type = &#63;.
+	* Returns all the list types where type = &#63;.
 	*
-	* @param type the type to search with
+	* @param type the type
 	* @return the matching list types
 	* @throws SystemException if a system exception occurred
 	*/
@@ -109,15 +109,15 @@ public interface ListTypePersistence extends BasePersistence<ListType> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds a range of all the list types where type = &#63;.
+	* Returns a range of all the list types where type = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param type the type to search with
-	* @param start the lower bound of the range of list types to return
-	* @param end the upper bound of the range of list types to return (not inclusive)
+	* @param type the type
+	* @param start the lower bound of the range of list types
+	* @param end the upper bound of the range of list types (not inclusive)
 	* @return the range of matching list types
 	* @throws SystemException if a system exception occurred
 	*/
@@ -126,15 +126,15 @@ public interface ListTypePersistence extends BasePersistence<ListType> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds an ordered range of all the list types where type = &#63;.
+	* Returns an ordered range of all the list types where type = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param type the type to search with
-	* @param start the lower bound of the range of list types to return
-	* @param end the upper bound of the range of list types to return (not inclusive)
+	* @param type the type
+	* @param start the lower bound of the range of list types
+	* @param end the upper bound of the range of list types (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching list types
 	* @throws SystemException if a system exception occurred
@@ -145,13 +145,13 @@ public interface ListTypePersistence extends BasePersistence<ListType> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the first list type in the ordered set where type = &#63;.
+	* Returns the first list type in the ordered set where type = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param type the type to search with
+	* @param type the type
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching list type
 	* @throws com.liferay.portal.NoSuchListTypeException if a matching list type could not be found
@@ -164,13 +164,13 @@ public interface ListTypePersistence extends BasePersistence<ListType> {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the last list type in the ordered set where type = &#63;.
+	* Returns the last list type in the ordered set where type = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param type the type to search with
+	* @param type the type
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching list type
 	* @throws com.liferay.portal.NoSuchListTypeException if a matching list type could not be found
@@ -183,14 +183,14 @@ public interface ListTypePersistence extends BasePersistence<ListType> {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the list types before and after the current list type in the ordered set where type = &#63;.
+	* Returns the list types before and after the current list type in the ordered set where type = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
 	* @param listTypeId the primary key of the current list type
-	* @param type the type to search with
+	* @param type the type
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next list type
 	* @throws com.liferay.portal.NoSuchListTypeException if a list type with the primary key could not be found
@@ -203,7 +203,7 @@ public interface ListTypePersistence extends BasePersistence<ListType> {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds all the list types.
+	* Returns all the list types.
 	*
 	* @return the list types
 	* @throws SystemException if a system exception occurred
@@ -212,14 +212,14 @@ public interface ListTypePersistence extends BasePersistence<ListType> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds a range of all the list types.
+	* Returns a range of all the list types.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of list types to return
-	* @param end the upper bound of the range of list types to return (not inclusive)
+	* @param start the lower bound of the range of list types
+	* @param end the upper bound of the range of list types (not inclusive)
 	* @return the range of list types
 	* @throws SystemException if a system exception occurred
 	*/
@@ -228,14 +228,14 @@ public interface ListTypePersistence extends BasePersistence<ListType> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds an ordered range of all the list types.
+	* Returns an ordered range of all the list types.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of list types to return
-	* @param end the upper bound of the range of list types to return (not inclusive)
+	* @param start the lower bound of the range of list types
+	* @param end the upper bound of the range of list types (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of list types
 	* @throws SystemException if a system exception occurred
@@ -248,7 +248,7 @@ public interface ListTypePersistence extends BasePersistence<ListType> {
 	/**
 	* Removes all the list types where type = &#63; from the database.
 	*
-	* @param type the type to search with
+	* @param type the type
 	* @throws SystemException if a system exception occurred
 	*/
 	public void removeByType(java.lang.String type)
@@ -263,9 +263,9 @@ public interface ListTypePersistence extends BasePersistence<ListType> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Counts all the list types where type = &#63;.
+	* Returns the number of list types where type = &#63;.
 	*
-	* @param type the type to search with
+	* @param type the type
 	* @return the number of matching list types
 	* @throws SystemException if a system exception occurred
 	*/
@@ -273,7 +273,7 @@ public interface ListTypePersistence extends BasePersistence<ListType> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Counts all the list types.
+	* Returns the number of list types.
 	*
 	* @return the number of list types
 	* @throws SystemException if a system exception occurred

@@ -37,7 +37,7 @@ public class PasswordPolicyRelWrapper implements PasswordPolicyRel {
 	}
 
 	/**
-	* Gets the primary key of this password policy rel.
+	* Returns the primary key of this password policy rel.
 	*
 	* @return the primary key of this password policy rel
 	*/
@@ -46,7 +46,7 @@ public class PasswordPolicyRelWrapper implements PasswordPolicyRel {
 	}
 
 	/**
-	* Sets the primary key of this password policy rel
+	* Sets the primary key of this password policy rel.
 	*
 	* @param primaryKey the primary key of this password policy rel
 	*/
@@ -55,7 +55,7 @@ public class PasswordPolicyRelWrapper implements PasswordPolicyRel {
 	}
 
 	/**
-	* Gets the password policy rel ID of this password policy rel.
+	* Returns the password policy rel ID of this password policy rel.
 	*
 	* @return the password policy rel ID of this password policy rel
 	*/
@@ -73,7 +73,7 @@ public class PasswordPolicyRelWrapper implements PasswordPolicyRel {
 	}
 
 	/**
-	* Gets the password policy ID of this password policy rel.
+	* Returns the password policy ID of this password policy rel.
 	*
 	* @return the password policy ID of this password policy rel
 	*/
@@ -91,16 +91,16 @@ public class PasswordPolicyRelWrapper implements PasswordPolicyRel {
 	}
 
 	/**
-	* Gets the class name of the model instance this password policy rel is polymorphically associated with.
+	* Returns the fully qualified class name of this password policy rel.
 	*
-	* @return the class name of the model instance this password policy rel is polymorphically associated with
+	* @return the fully qualified class name of this password policy rel
 	*/
 	public java.lang.String getClassName() {
 		return _passwordPolicyRel.getClassName();
 	}
 
 	/**
-	* Gets the class name ID of this password policy rel.
+	* Returns the class name ID of this password policy rel.
 	*
 	* @return the class name ID of this password policy rel
 	*/
@@ -118,7 +118,7 @@ public class PasswordPolicyRelWrapper implements PasswordPolicyRel {
 	}
 
 	/**
-	* Gets the class p k of this password policy rel.
+	* Returns the class p k of this password policy rel.
 	*
 	* @return the class p k of this password policy rel
 	*/

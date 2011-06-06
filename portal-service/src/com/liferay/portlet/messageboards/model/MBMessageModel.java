@@ -50,21 +50,21 @@ public interface MBMessageModel extends AttachedModel, BaseModel<MBMessage>,
 	 */
 
 	/**
-	 * Gets the primary key of this message-boards message.
+	 * Returns the primary key of this message-boards message.
 	 *
 	 * @return the primary key of this message-boards message
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this message-boards message
+	 * Sets the primary key of this message-boards message.
 	 *
 	 * @param primaryKey the primary key of this message-boards message
 	 */
 	public void setPrimaryKey(long primaryKey);
 
 	/**
-	 * Gets the uuid of this message-boards message.
+	 * Returns the uuid of this message-boards message.
 	 *
 	 * @return the uuid of this message-boards message
 	 */
@@ -79,7 +79,7 @@ public interface MBMessageModel extends AttachedModel, BaseModel<MBMessage>,
 	public void setUuid(String uuid);
 
 	/**
-	 * Gets the message ID of this message-boards message.
+	 * Returns the message ID of this message-boards message.
 	 *
 	 * @return the message ID of this message-boards message
 	 */
@@ -93,7 +93,7 @@ public interface MBMessageModel extends AttachedModel, BaseModel<MBMessage>,
 	public void setMessageId(long messageId);
 
 	/**
-	 * Gets the group ID of this message-boards message.
+	 * Returns the group ID of this message-boards message.
 	 *
 	 * @return the group ID of this message-boards message
 	 */
@@ -107,7 +107,7 @@ public interface MBMessageModel extends AttachedModel, BaseModel<MBMessage>,
 	public void setGroupId(long groupId);
 
 	/**
-	 * Gets the company ID of this message-boards message.
+	 * Returns the company ID of this message-boards message.
 	 *
 	 * @return the company ID of this message-boards message
 	 */
@@ -121,7 +121,7 @@ public interface MBMessageModel extends AttachedModel, BaseModel<MBMessage>,
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the user ID of this message-boards message.
+	 * Returns the user ID of this message-boards message.
 	 *
 	 * @return the user ID of this message-boards message
 	 */
@@ -135,7 +135,7 @@ public interface MBMessageModel extends AttachedModel, BaseModel<MBMessage>,
 	public void setUserId(long userId);
 
 	/**
-	 * Gets the user uuid of this message-boards message.
+	 * Returns the user uuid of this message-boards message.
 	 *
 	 * @return the user uuid of this message-boards message
 	 * @throws SystemException if a system exception occurred
@@ -150,7 +150,7 @@ public interface MBMessageModel extends AttachedModel, BaseModel<MBMessage>,
 	public void setUserUuid(String userUuid);
 
 	/**
-	 * Gets the user name of this message-boards message.
+	 * Returns the user name of this message-boards message.
 	 *
 	 * @return the user name of this message-boards message
 	 */
@@ -165,7 +165,7 @@ public interface MBMessageModel extends AttachedModel, BaseModel<MBMessage>,
 	public void setUserName(String userName);
 
 	/**
-	 * Gets the create date of this message-boards message.
+	 * Returns the create date of this message-boards message.
 	 *
 	 * @return the create date of this message-boards message
 	 */
@@ -179,7 +179,7 @@ public interface MBMessageModel extends AttachedModel, BaseModel<MBMessage>,
 	public void setCreateDate(Date createDate);
 
 	/**
-	 * Gets the modified date of this message-boards message.
+	 * Returns the modified date of this message-boards message.
 	 *
 	 * @return the modified date of this message-boards message
 	 */
@@ -193,14 +193,14 @@ public interface MBMessageModel extends AttachedModel, BaseModel<MBMessage>,
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
-	 * Gets the class name of the model instance this message-boards message is polymorphically associated with.
+	 * Returns the fully qualified class name of this message-boards message.
 	 *
-	 * @return the class name of the model instance this message-boards message is polymorphically associated with
+	 * @return the fully qualified class name of this message-boards message
 	 */
 	public String getClassName();
 
 	/**
-	 * Gets the class name ID of this message-boards message.
+	 * Returns the class name ID of this message-boards message.
 	 *
 	 * @return the class name ID of this message-boards message
 	 */
@@ -214,7 +214,7 @@ public interface MBMessageModel extends AttachedModel, BaseModel<MBMessage>,
 	public void setClassNameId(long classNameId);
 
 	/**
-	 * Gets the class p k of this message-boards message.
+	 * Returns the class p k of this message-boards message.
 	 *
 	 * @return the class p k of this message-boards message
 	 */
@@ -228,7 +228,7 @@ public interface MBMessageModel extends AttachedModel, BaseModel<MBMessage>,
 	public void setClassPK(long classPK);
 
 	/**
-	 * Gets the category ID of this message-boards message.
+	 * Returns the category ID of this message-boards message.
 	 *
 	 * @return the category ID of this message-boards message
 	 */
@@ -242,7 +242,7 @@ public interface MBMessageModel extends AttachedModel, BaseModel<MBMessage>,
 	public void setCategoryId(long categoryId);
 
 	/**
-	 * Gets the thread ID of this message-boards message.
+	 * Returns the thread ID of this message-boards message.
 	 *
 	 * @return the thread ID of this message-boards message
 	 */
@@ -256,7 +256,7 @@ public interface MBMessageModel extends AttachedModel, BaseModel<MBMessage>,
 	public void setThreadId(long threadId);
 
 	/**
-	 * Gets the root message ID of this message-boards message.
+	 * Returns the root message ID of this message-boards message.
 	 *
 	 * @return the root message ID of this message-boards message
 	 */
@@ -270,7 +270,7 @@ public interface MBMessageModel extends AttachedModel, BaseModel<MBMessage>,
 	public void setRootMessageId(long rootMessageId);
 
 	/**
-	 * Gets the parent message ID of this message-boards message.
+	 * Returns the parent message ID of this message-boards message.
 	 *
 	 * @return the parent message ID of this message-boards message
 	 */
@@ -284,7 +284,7 @@ public interface MBMessageModel extends AttachedModel, BaseModel<MBMessage>,
 	public void setParentMessageId(long parentMessageId);
 
 	/**
-	 * Gets the subject of this message-boards message.
+	 * Returns the subject of this message-boards message.
 	 *
 	 * @return the subject of this message-boards message
 	 */
@@ -299,7 +299,7 @@ public interface MBMessageModel extends AttachedModel, BaseModel<MBMessage>,
 	public void setSubject(String subject);
 
 	/**
-	 * Gets the body of this message-boards message.
+	 * Returns the body of this message-boards message.
 	 *
 	 * @return the body of this message-boards message
 	 */
@@ -314,7 +314,7 @@ public interface MBMessageModel extends AttachedModel, BaseModel<MBMessage>,
 	public void setBody(String body);
 
 	/**
-	 * Gets the format of this message-boards message.
+	 * Returns the format of this message-boards message.
 	 *
 	 * @return the format of this message-boards message
 	 */
@@ -329,7 +329,7 @@ public interface MBMessageModel extends AttachedModel, BaseModel<MBMessage>,
 	public void setFormat(String format);
 
 	/**
-	 * Gets the attachments of this message-boards message.
+	 * Returns the attachments of this message-boards message.
 	 *
 	 * @return the attachments of this message-boards message
 	 */
@@ -350,7 +350,7 @@ public interface MBMessageModel extends AttachedModel, BaseModel<MBMessage>,
 	public void setAttachments(boolean attachments);
 
 	/**
-	 * Gets the anonymous of this message-boards message.
+	 * Returns the anonymous of this message-boards message.
 	 *
 	 * @return the anonymous of this message-boards message
 	 */
@@ -371,7 +371,7 @@ public interface MBMessageModel extends AttachedModel, BaseModel<MBMessage>,
 	public void setAnonymous(boolean anonymous);
 
 	/**
-	 * Gets the priority of this message-boards message.
+	 * Returns the priority of this message-boards message.
 	 *
 	 * @return the priority of this message-boards message
 	 */
@@ -385,7 +385,7 @@ public interface MBMessageModel extends AttachedModel, BaseModel<MBMessage>,
 	public void setPriority(double priority);
 
 	/**
-	 * Gets the allow pingbacks of this message-boards message.
+	 * Returns the allow pingbacks of this message-boards message.
 	 *
 	 * @return the allow pingbacks of this message-boards message
 	 */
@@ -406,7 +406,7 @@ public interface MBMessageModel extends AttachedModel, BaseModel<MBMessage>,
 	public void setAllowPingbacks(boolean allowPingbacks);
 
 	/**
-	 * Gets the status of this message-boards message.
+	 * Returns the status of this message-boards message.
 	 *
 	 * @return the status of this message-boards message
 	 */
@@ -420,7 +420,7 @@ public interface MBMessageModel extends AttachedModel, BaseModel<MBMessage>,
 	public void setStatus(int status);
 
 	/**
-	 * Gets the status by user ID of this message-boards message.
+	 * Returns the status by user ID of this message-boards message.
 	 *
 	 * @return the status by user ID of this message-boards message
 	 */
@@ -434,7 +434,7 @@ public interface MBMessageModel extends AttachedModel, BaseModel<MBMessage>,
 	public void setStatusByUserId(long statusByUserId);
 
 	/**
-	 * Gets the status by user uuid of this message-boards message.
+	 * Returns the status by user uuid of this message-boards message.
 	 *
 	 * @return the status by user uuid of this message-boards message
 	 * @throws SystemException if a system exception occurred
@@ -449,7 +449,7 @@ public interface MBMessageModel extends AttachedModel, BaseModel<MBMessage>,
 	public void setStatusByUserUuid(String statusByUserUuid);
 
 	/**
-	 * Gets the status by user name of this message-boards message.
+	 * Returns the status by user name of this message-boards message.
 	 *
 	 * @return the status by user name of this message-boards message
 	 */
@@ -464,7 +464,7 @@ public interface MBMessageModel extends AttachedModel, BaseModel<MBMessage>,
 	public void setStatusByUserName(String statusByUserName);
 
 	/**
-	 * Gets the status date of this message-boards message.
+	 * Returns the status date of this message-boards message.
 	 *
 	 * @return the status date of this message-boards message
 	 */
@@ -478,7 +478,7 @@ public interface MBMessageModel extends AttachedModel, BaseModel<MBMessage>,
 	public void setStatusDate(Date statusDate);
 
 	/**
-	 * @deprecated {@link #isApproved}
+	 * @deprecated Renamed to {@link #isApproved()}
 	 */
 	public boolean getApproved();
 

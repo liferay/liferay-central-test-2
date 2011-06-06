@@ -45,7 +45,7 @@ public interface DLFileRankLocalService {
 	/**
 	* Adds the d l file rank to the database. Also notifies the appropriate model listeners.
 	*
-	* @param dlFileRank the d l file rank to add
+	* @param dlFileRank the d l file rank
 	* @return the d l file rank that was added
 	* @throws SystemException if a system exception occurred
 	*/
@@ -65,7 +65,7 @@ public interface DLFileRankLocalService {
 	/**
 	* Deletes the d l file rank with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param fileRankId the primary key of the d l file rank to delete
+	* @param fileRankId the primary key of the d l file rank
 	* @throws PortalException if a d l file rank with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -76,7 +76,7 @@ public interface DLFileRankLocalService {
 	/**
 	* Deletes the d l file rank from the database. Also notifies the appropriate model listeners.
 	*
-	* @param dlFileRank the d l file rank to delete
+	* @param dlFileRank the d l file rank
 	* @throws SystemException if a system exception occurred
 	*/
 	public void deleteDLFileRank(
@@ -86,7 +86,7 @@ public interface DLFileRankLocalService {
 	/**
 	* Performs a dynamic query on the database and returns the matching rows.
 	*
-	* @param dynamicQuery the dynamic query to search with
+	* @param dynamicQuery the dynamic query
 	* @return the matching rows
 	* @throws SystemException if a system exception occurred
 	*/
@@ -102,9 +102,9 @@ public interface DLFileRankLocalService {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param dynamicQuery the dynamic query to search with
-	* @param start the lower bound of the range of model instances to return
-	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param dynamicQuery the dynamic query
+	* @param start the lower bound of the range of model instances
+	* @param end the upper bound of the range of model instances (not inclusive)
 	* @return the range of matching rows
 	* @throws SystemException if a system exception occurred
 	*/
@@ -120,9 +120,9 @@ public interface DLFileRankLocalService {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param dynamicQuery the dynamic query to search with
-	* @param start the lower bound of the range of model instances to return
-	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param dynamicQuery the dynamic query
+	* @param start the lower bound of the range of model instances
+	* @param end the upper bound of the range of model instances (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching rows
 	* @throws SystemException if a system exception occurred
@@ -135,9 +135,9 @@ public interface DLFileRankLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Counts the number of rows that match the dynamic query.
+	* Returns the number of rows that match the dynamic query.
 	*
-	* @param dynamicQuery the dynamic query to search with
+	* @param dynamicQuery the dynamic query
 	* @return the number of rows that match the dynamic query
 	* @throws SystemException if a system exception occurred
 	*/
@@ -146,9 +146,9 @@ public interface DLFileRankLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Gets the d l file rank with the primary key.
+	* Returns the d l file rank with the primary key.
 	*
-	* @param fileRankId the primary key of the d l file rank to get
+	* @param fileRankId the primary key of the d l file rank
 	* @return the d l file rank
 	* @throws PortalException if a d l file rank with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -160,14 +160,14 @@ public interface DLFileRankLocalService {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Gets a range of all the d l file ranks.
+	* Returns a range of all the d l file ranks.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of d l file ranks to return
-	* @param end the upper bound of the range of d l file ranks to return (not inclusive)
+	* @param start the lower bound of the range of d l file ranks
+	* @param end the upper bound of the range of d l file ranks (not inclusive)
 	* @return the range of d l file ranks
 	* @throws SystemException if a system exception occurred
 	*/
@@ -177,7 +177,7 @@ public interface DLFileRankLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Gets the number of d l file ranks.
+	* Returns the number of d l file ranks.
 	*
 	* @return the number of d l file ranks
 	* @throws SystemException if a system exception occurred
@@ -189,7 +189,7 @@ public interface DLFileRankLocalService {
 	/**
 	* Updates the d l file rank in the database. Also notifies the appropriate model listeners.
 	*
-	* @param dlFileRank the d l file rank to update
+	* @param dlFileRank the d l file rank
 	* @return the d l file rank that was updated
 	* @throws SystemException if a system exception occurred
 	*/
@@ -200,7 +200,7 @@ public interface DLFileRankLocalService {
 	/**
 	* Updates the d l file rank in the database. Also notifies the appropriate model listeners.
 	*
-	* @param dlFileRank the d l file rank to update
+	* @param dlFileRank the d l file rank
 	* @param merge whether to merge the d l file rank with the current session. See {@link com.liferay.portal.service.persistence.BatchSession#update(com.liferay.portal.kernel.dao.orm.Session, com.liferay.portal.model.BaseModel, boolean)} for an explanation.
 	* @return the d l file rank that was updated
 	* @throws SystemException if a system exception occurred
@@ -211,7 +211,7 @@ public interface DLFileRankLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Gets the Spring bean ID for this bean.
+	* Returns the Spring bean ID for this bean.
 	*
 	* @return the Spring bean ID for this bean
 	*/

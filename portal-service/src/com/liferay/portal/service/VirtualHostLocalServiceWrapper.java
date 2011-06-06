@@ -32,7 +32,7 @@ public class VirtualHostLocalServiceWrapper implements VirtualHostLocalService {
 	/**
 	* Adds the virtual host to the database. Also notifies the appropriate model listeners.
 	*
-	* @param virtualHost the virtual host to add
+	* @param virtualHost the virtual host
 	* @return the virtual host that was added
 	* @throws SystemException if a system exception occurred
 	*/
@@ -56,7 +56,7 @@ public class VirtualHostLocalServiceWrapper implements VirtualHostLocalService {
 	/**
 	* Deletes the virtual host with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param virtualHostId the primary key of the virtual host to delete
+	* @param virtualHostId the primary key of the virtual host
 	* @throws PortalException if a virtual host with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -69,7 +69,7 @@ public class VirtualHostLocalServiceWrapper implements VirtualHostLocalService {
 	/**
 	* Deletes the virtual host from the database. Also notifies the appropriate model listeners.
 	*
-	* @param virtualHost the virtual host to delete
+	* @param virtualHost the virtual host
 	* @throws SystemException if a system exception occurred
 	*/
 	public void deleteVirtualHost(
@@ -81,7 +81,7 @@ public class VirtualHostLocalServiceWrapper implements VirtualHostLocalService {
 	/**
 	* Performs a dynamic query on the database and returns the matching rows.
 	*
-	* @param dynamicQuery the dynamic query to search with
+	* @param dynamicQuery the dynamic query
 	* @return the matching rows
 	* @throws SystemException if a system exception occurred
 	*/
@@ -99,9 +99,9 @@ public class VirtualHostLocalServiceWrapper implements VirtualHostLocalService {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param dynamicQuery the dynamic query to search with
-	* @param start the lower bound of the range of model instances to return
-	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param dynamicQuery the dynamic query
+	* @param start the lower bound of the range of model instances
+	* @param end the upper bound of the range of model instances (not inclusive)
 	* @return the range of matching rows
 	* @throws SystemException if a system exception occurred
 	*/
@@ -119,9 +119,9 @@ public class VirtualHostLocalServiceWrapper implements VirtualHostLocalService {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param dynamicQuery the dynamic query to search with
-	* @param start the lower bound of the range of model instances to return
-	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param dynamicQuery the dynamic query
+	* @param start the lower bound of the range of model instances
+	* @param end the upper bound of the range of model instances (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching rows
 	* @throws SystemException if a system exception occurred
@@ -137,9 +137,9 @@ public class VirtualHostLocalServiceWrapper implements VirtualHostLocalService {
 	}
 
 	/**
-	* Counts the number of rows that match the dynamic query.
+	* Returns the number of rows that match the dynamic query.
 	*
-	* @param dynamicQuery the dynamic query to search with
+	* @param dynamicQuery the dynamic query
 	* @return the number of rows that match the dynamic query
 	* @throws SystemException if a system exception occurred
 	*/
@@ -150,9 +150,9 @@ public class VirtualHostLocalServiceWrapper implements VirtualHostLocalService {
 	}
 
 	/**
-	* Gets the virtual host with the primary key.
+	* Returns the virtual host with the primary key.
 	*
-	* @param virtualHostId the primary key of the virtual host to get
+	* @param virtualHostId the primary key of the virtual host
 	* @return the virtual host
 	* @throws PortalException if a virtual host with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -165,14 +165,14 @@ public class VirtualHostLocalServiceWrapper implements VirtualHostLocalService {
 	}
 
 	/**
-	* Gets a range of all the virtual hosts.
+	* Returns a range of all the virtual hosts.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of virtual hosts to return
-	* @param end the upper bound of the range of virtual hosts to return (not inclusive)
+	* @param start the lower bound of the range of virtual hosts
+	* @param end the upper bound of the range of virtual hosts (not inclusive)
 	* @return the range of virtual hosts
 	* @throws SystemException if a system exception occurred
 	*/
@@ -183,7 +183,7 @@ public class VirtualHostLocalServiceWrapper implements VirtualHostLocalService {
 	}
 
 	/**
-	* Gets the number of virtual hosts.
+	* Returns the number of virtual hosts.
 	*
 	* @return the number of virtual hosts
 	* @throws SystemException if a system exception occurred
@@ -196,7 +196,7 @@ public class VirtualHostLocalServiceWrapper implements VirtualHostLocalService {
 	/**
 	* Updates the virtual host in the database. Also notifies the appropriate model listeners.
 	*
-	* @param virtualHost the virtual host to update
+	* @param virtualHost the virtual host
 	* @return the virtual host that was updated
 	* @throws SystemException if a system exception occurred
 	*/
@@ -209,7 +209,7 @@ public class VirtualHostLocalServiceWrapper implements VirtualHostLocalService {
 	/**
 	* Updates the virtual host in the database. Also notifies the appropriate model listeners.
 	*
-	* @param virtualHost the virtual host to update
+	* @param virtualHost the virtual host
 	* @param merge whether to merge the virtual host with the current session. See {@link com.liferay.portal.service.persistence.BatchSession#update(com.liferay.portal.kernel.dao.orm.Session, com.liferay.portal.model.BaseModel, boolean)} for an explanation.
 	* @return the virtual host that was updated
 	* @throws SystemException if a system exception occurred
@@ -221,7 +221,7 @@ public class VirtualHostLocalServiceWrapper implements VirtualHostLocalService {
 	}
 
 	/**
-	* Gets the Spring bean ID for this bean.
+	* Returns the Spring bean ID for this bean.
 	*
 	* @return the Spring bean ID for this bean
 	*/

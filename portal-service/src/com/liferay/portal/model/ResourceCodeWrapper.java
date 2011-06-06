@@ -37,7 +37,7 @@ public class ResourceCodeWrapper implements ResourceCode {
 	}
 
 	/**
-	* Gets the primary key of this resource code.
+	* Returns the primary key of this resource code.
 	*
 	* @return the primary key of this resource code
 	*/
@@ -46,7 +46,7 @@ public class ResourceCodeWrapper implements ResourceCode {
 	}
 
 	/**
-	* Sets the primary key of this resource code
+	* Sets the primary key of this resource code.
 	*
 	* @param primaryKey the primary key of this resource code
 	*/
@@ -55,7 +55,7 @@ public class ResourceCodeWrapper implements ResourceCode {
 	}
 
 	/**
-	* Gets the code ID of this resource code.
+	* Returns the code ID of this resource code.
 	*
 	* @return the code ID of this resource code
 	*/
@@ -73,7 +73,7 @@ public class ResourceCodeWrapper implements ResourceCode {
 	}
 
 	/**
-	* Gets the company ID of this resource code.
+	* Returns the company ID of this resource code.
 	*
 	* @return the company ID of this resource code
 	*/
@@ -91,7 +91,7 @@ public class ResourceCodeWrapper implements ResourceCode {
 	}
 
 	/**
-	* Gets the name of this resource code.
+	* Returns the name of this resource code.
 	*
 	* @return the name of this resource code
 	*/
@@ -109,7 +109,7 @@ public class ResourceCodeWrapper implements ResourceCode {
 	}
 
 	/**
-	* Gets the scope of this resource code.
+	* Returns the scope of this resource code.
 	*
 	* @return the scope of this resource code
 	*/

@@ -132,7 +132,7 @@ public class DLDocumentMetadataSetPersistenceImpl extends BasePersistenceImpl<DL
 	/**
 	 * Caches the d l document metadata set in the entity cache if it is enabled.
 	 *
-	 * @param dlDocumentMetadataSet the d l document metadata set to cache
+	 * @param dlDocumentMetadataSet the d l document metadata set
 	 */
 	public void cacheResult(DLDocumentMetadataSet dlDocumentMetadataSet) {
 		EntityCacheUtil.putResult(DLDocumentMetadataSetModelImpl.ENTITY_CACHE_ENABLED,
@@ -151,7 +151,7 @@ public class DLDocumentMetadataSetPersistenceImpl extends BasePersistenceImpl<DL
 	/**
 	 * Caches the d l document metadata sets in the entity cache if it is enabled.
 	 *
-	 * @param dlDocumentMetadataSets the d l document metadata sets to cache
+	 * @param dlDocumentMetadataSets the d l document metadata sets
 	 */
 	public void cacheResult(List<DLDocumentMetadataSet> dlDocumentMetadataSets) {
 		for (DLDocumentMetadataSet dlDocumentMetadataSet : dlDocumentMetadataSets) {
@@ -222,7 +222,7 @@ public class DLDocumentMetadataSetPersistenceImpl extends BasePersistenceImpl<DL
 	/**
 	 * Removes the d l document metadata set with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param primaryKey the primary key of the d l document metadata set to remove
+	 * @param primaryKey the primary key of the d l document metadata set
 	 * @return the d l document metadata set that was removed
 	 * @throws com.liferay.portal.NoSuchModelException if a d l document metadata set with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -235,7 +235,7 @@ public class DLDocumentMetadataSetPersistenceImpl extends BasePersistenceImpl<DL
 	/**
 	 * Removes the d l document metadata set with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param documentMetadataSetId the primary key of the d l document metadata set to remove
+	 * @param documentMetadataSetId the primary key of the d l document metadata set
 	 * @return the d l document metadata set that was removed
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchDocumentMetadataSetException if a d l document metadata set with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -276,7 +276,7 @@ public class DLDocumentMetadataSetPersistenceImpl extends BasePersistenceImpl<DL
 	/**
 	 * Removes the d l document metadata set from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param dlDocumentMetadataSet the d l document metadata set to remove
+	 * @param dlDocumentMetadataSet the d l document metadata set
 	 * @return the d l document metadata set that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -405,9 +405,9 @@ public class DLDocumentMetadataSetPersistenceImpl extends BasePersistenceImpl<DL
 	}
 
 	/**
-	 * Finds the d l document metadata set with the primary key or throws a {@link com.liferay.portal.NoSuchModelException} if it could not be found.
+	 * Returns the d l document metadata set with the primary key or throws a {@link com.liferay.portal.NoSuchModelException} if it could not be found.
 	 *
-	 * @param primaryKey the primary key of the d l document metadata set to find
+	 * @param primaryKey the primary key of the d l document metadata set
 	 * @return the d l document metadata set
 	 * @throws com.liferay.portal.NoSuchModelException if a d l document metadata set with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -418,9 +418,9 @@ public class DLDocumentMetadataSetPersistenceImpl extends BasePersistenceImpl<DL
 	}
 
 	/**
-	 * Finds the d l document metadata set with the primary key or throws a {@link com.liferay.portlet.documentlibrary.NoSuchDocumentMetadataSetException} if it could not be found.
+	 * Returns the d l document metadata set with the primary key or throws a {@link com.liferay.portlet.documentlibrary.NoSuchDocumentMetadataSetException} if it could not be found.
 	 *
-	 * @param documentMetadataSetId the primary key of the d l document metadata set to find
+	 * @param documentMetadataSetId the primary key of the d l document metadata set
 	 * @return the d l document metadata set
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchDocumentMetadataSetException if a d l document metadata set with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -443,9 +443,9 @@ public class DLDocumentMetadataSetPersistenceImpl extends BasePersistenceImpl<DL
 	}
 
 	/**
-	 * Finds the d l document metadata set with the primary key or returns <code>null</code> if it could not be found.
+	 * Returns the d l document metadata set with the primary key or returns <code>null</code> if it could not be found.
 	 *
-	 * @param primaryKey the primary key of the d l document metadata set to find
+	 * @param primaryKey the primary key of the d l document metadata set
 	 * @return the d l document metadata set, or <code>null</code> if a d l document metadata set with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -455,9 +455,9 @@ public class DLDocumentMetadataSetPersistenceImpl extends BasePersistenceImpl<DL
 	}
 
 	/**
-	 * Finds the d l document metadata set with the primary key or returns <code>null</code> if it could not be found.
+	 * Returns the d l document metadata set with the primary key or returns <code>null</code> if it could not be found.
 	 *
-	 * @param documentMetadataSetId the primary key of the d l document metadata set to find
+	 * @param documentMetadataSetId the primary key of the d l document metadata set
 	 * @return the d l document metadata set, or <code>null</code> if a d l document metadata set with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -491,9 +491,9 @@ public class DLDocumentMetadataSetPersistenceImpl extends BasePersistenceImpl<DL
 	}
 
 	/**
-	 * Finds all the d l document metadata sets where uuid = &#63;.
+	 * Returns all the d l document metadata sets where uuid = &#63;.
 	 *
-	 * @param uuid the uuid to search with
+	 * @param uuid the uuid
 	 * @return the matching d l document metadata sets
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -503,15 +503,15 @@ public class DLDocumentMetadataSetPersistenceImpl extends BasePersistenceImpl<DL
 	}
 
 	/**
-	 * Finds a range of all the d l document metadata sets where uuid = &#63;.
+	 * Returns a range of all the d l document metadata sets where uuid = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param uuid the uuid to search with
-	 * @param start the lower bound of the range of d l document metadata sets to return
-	 * @param end the upper bound of the range of d l document metadata sets to return (not inclusive)
+	 * @param uuid the uuid
+	 * @param start the lower bound of the range of d l document metadata sets
+	 * @param end the upper bound of the range of d l document metadata sets (not inclusive)
 	 * @return the range of matching d l document metadata sets
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -521,15 +521,15 @@ public class DLDocumentMetadataSetPersistenceImpl extends BasePersistenceImpl<DL
 	}
 
 	/**
-	 * Finds an ordered range of all the d l document metadata sets where uuid = &#63;.
+	 * Returns an ordered range of all the d l document metadata sets where uuid = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param uuid the uuid to search with
-	 * @param start the lower bound of the range of d l document metadata sets to return
-	 * @param end the upper bound of the range of d l document metadata sets to return (not inclusive)
+	 * @param uuid the uuid
+	 * @param start the lower bound of the range of d l document metadata sets
+	 * @param end the upper bound of the range of d l document metadata sets (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching d l document metadata sets
 	 * @throws SystemException if a system exception occurred
@@ -617,13 +617,13 @@ public class DLDocumentMetadataSetPersistenceImpl extends BasePersistenceImpl<DL
 	}
 
 	/**
-	 * Finds the first d l document metadata set in the ordered set where uuid = &#63;.
+	 * Returns the first d l document metadata set in the ordered set where uuid = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param uuid the uuid to search with
+	 * @param uuid the uuid
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching d l document metadata set
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchDocumentMetadataSetException if a matching d l document metadata set could not be found
@@ -653,13 +653,13 @@ public class DLDocumentMetadataSetPersistenceImpl extends BasePersistenceImpl<DL
 	}
 
 	/**
-	 * Finds the last d l document metadata set in the ordered set where uuid = &#63;.
+	 * Returns the last d l document metadata set in the ordered set where uuid = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param uuid the uuid to search with
+	 * @param uuid the uuid
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching d l document metadata set
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchDocumentMetadataSetException if a matching d l document metadata set could not be found
@@ -691,14 +691,14 @@ public class DLDocumentMetadataSetPersistenceImpl extends BasePersistenceImpl<DL
 	}
 
 	/**
-	 * Finds the d l document metadata sets before and after the current d l document metadata set in the ordered set where uuid = &#63;.
+	 * Returns the d l document metadata sets before and after the current d l document metadata set in the ordered set where uuid = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
 	 * @param documentMetadataSetId the primary key of the current d l document metadata set
-	 * @param uuid the uuid to search with
+	 * @param uuid the uuid
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next d l document metadata set
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchDocumentMetadataSetException if a d l document metadata set with the primary key could not be found
@@ -848,9 +848,9 @@ public class DLDocumentMetadataSetPersistenceImpl extends BasePersistenceImpl<DL
 	}
 
 	/**
-	 * Finds all the d l document metadata sets where documentTypeId = &#63;.
+	 * Returns all the d l document metadata sets where documentTypeId = &#63;.
 	 *
-	 * @param documentTypeId the document type ID to search with
+	 * @param documentTypeId the document type ID
 	 * @return the matching d l document metadata sets
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -861,15 +861,15 @@ public class DLDocumentMetadataSetPersistenceImpl extends BasePersistenceImpl<DL
 	}
 
 	/**
-	 * Finds a range of all the d l document metadata sets where documentTypeId = &#63;.
+	 * Returns a range of all the d l document metadata sets where documentTypeId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param documentTypeId the document type ID to search with
-	 * @param start the lower bound of the range of d l document metadata sets to return
-	 * @param end the upper bound of the range of d l document metadata sets to return (not inclusive)
+	 * @param documentTypeId the document type ID
+	 * @param start the lower bound of the range of d l document metadata sets
+	 * @param end the upper bound of the range of d l document metadata sets (not inclusive)
 	 * @return the range of matching d l document metadata sets
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -879,15 +879,15 @@ public class DLDocumentMetadataSetPersistenceImpl extends BasePersistenceImpl<DL
 	}
 
 	/**
-	 * Finds an ordered range of all the d l document metadata sets where documentTypeId = &#63;.
+	 * Returns an ordered range of all the d l document metadata sets where documentTypeId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param documentTypeId the document type ID to search with
-	 * @param start the lower bound of the range of d l document metadata sets to return
-	 * @param end the upper bound of the range of d l document metadata sets to return (not inclusive)
+	 * @param documentTypeId the document type ID
+	 * @param start the lower bound of the range of d l document metadata sets
+	 * @param end the upper bound of the range of d l document metadata sets (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching d l document metadata sets
 	 * @throws SystemException if a system exception occurred
@@ -964,13 +964,13 @@ public class DLDocumentMetadataSetPersistenceImpl extends BasePersistenceImpl<DL
 	}
 
 	/**
-	 * Finds the first d l document metadata set in the ordered set where documentTypeId = &#63;.
+	 * Returns the first d l document metadata set in the ordered set where documentTypeId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param documentTypeId the document type ID to search with
+	 * @param documentTypeId the document type ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching d l document metadata set
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchDocumentMetadataSetException if a matching d l document metadata set could not be found
@@ -1000,13 +1000,13 @@ public class DLDocumentMetadataSetPersistenceImpl extends BasePersistenceImpl<DL
 	}
 
 	/**
-	 * Finds the last d l document metadata set in the ordered set where documentTypeId = &#63;.
+	 * Returns the last d l document metadata set in the ordered set where documentTypeId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param documentTypeId the document type ID to search with
+	 * @param documentTypeId the document type ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching d l document metadata set
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchDocumentMetadataSetException if a matching d l document metadata set could not be found
@@ -1038,14 +1038,14 @@ public class DLDocumentMetadataSetPersistenceImpl extends BasePersistenceImpl<DL
 	}
 
 	/**
-	 * Finds the d l document metadata sets before and after the current d l document metadata set in the ordered set where documentTypeId = &#63;.
+	 * Returns the d l document metadata sets before and after the current d l document metadata set in the ordered set where documentTypeId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
 	 * @param documentMetadataSetId the primary key of the current d l document metadata set
-	 * @param documentTypeId the document type ID to search with
+	 * @param documentTypeId the document type ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next d l document metadata set
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchDocumentMetadataSetException if a d l document metadata set with the primary key could not be found
@@ -1186,9 +1186,9 @@ public class DLDocumentMetadataSetPersistenceImpl extends BasePersistenceImpl<DL
 	}
 
 	/**
-	 * Finds all the d l document metadata sets where fileVersionId = &#63;.
+	 * Returns all the d l document metadata sets where fileVersionId = &#63;.
 	 *
-	 * @param fileVersionId the file version ID to search with
+	 * @param fileVersionId the file version ID
 	 * @return the matching d l document metadata sets
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1199,15 +1199,15 @@ public class DLDocumentMetadataSetPersistenceImpl extends BasePersistenceImpl<DL
 	}
 
 	/**
-	 * Finds a range of all the d l document metadata sets where fileVersionId = &#63;.
+	 * Returns a range of all the d l document metadata sets where fileVersionId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param fileVersionId the file version ID to search with
-	 * @param start the lower bound of the range of d l document metadata sets to return
-	 * @param end the upper bound of the range of d l document metadata sets to return (not inclusive)
+	 * @param fileVersionId the file version ID
+	 * @param start the lower bound of the range of d l document metadata sets
+	 * @param end the upper bound of the range of d l document metadata sets (not inclusive)
 	 * @return the range of matching d l document metadata sets
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1217,15 +1217,15 @@ public class DLDocumentMetadataSetPersistenceImpl extends BasePersistenceImpl<DL
 	}
 
 	/**
-	 * Finds an ordered range of all the d l document metadata sets where fileVersionId = &#63;.
+	 * Returns an ordered range of all the d l document metadata sets where fileVersionId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param fileVersionId the file version ID to search with
-	 * @param start the lower bound of the range of d l document metadata sets to return
-	 * @param end the upper bound of the range of d l document metadata sets to return (not inclusive)
+	 * @param fileVersionId the file version ID
+	 * @param start the lower bound of the range of d l document metadata sets
+	 * @param end the upper bound of the range of d l document metadata sets (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching d l document metadata sets
 	 * @throws SystemException if a system exception occurred
@@ -1302,13 +1302,13 @@ public class DLDocumentMetadataSetPersistenceImpl extends BasePersistenceImpl<DL
 	}
 
 	/**
-	 * Finds the first d l document metadata set in the ordered set where fileVersionId = &#63;.
+	 * Returns the first d l document metadata set in the ordered set where fileVersionId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param fileVersionId the file version ID to search with
+	 * @param fileVersionId the file version ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching d l document metadata set
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchDocumentMetadataSetException if a matching d l document metadata set could not be found
@@ -1338,13 +1338,13 @@ public class DLDocumentMetadataSetPersistenceImpl extends BasePersistenceImpl<DL
 	}
 
 	/**
-	 * Finds the last d l document metadata set in the ordered set where fileVersionId = &#63;.
+	 * Returns the last d l document metadata set in the ordered set where fileVersionId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param fileVersionId the file version ID to search with
+	 * @param fileVersionId the file version ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching d l document metadata set
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchDocumentMetadataSetException if a matching d l document metadata set could not be found
@@ -1376,14 +1376,14 @@ public class DLDocumentMetadataSetPersistenceImpl extends BasePersistenceImpl<DL
 	}
 
 	/**
-	 * Finds the d l document metadata sets before and after the current d l document metadata set in the ordered set where fileVersionId = &#63;.
+	 * Returns the d l document metadata sets before and after the current d l document metadata set in the ordered set where fileVersionId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
 	 * @param documentMetadataSetId the primary key of the current d l document metadata set
-	 * @param fileVersionId the file version ID to search with
+	 * @param fileVersionId the file version ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next d l document metadata set
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchDocumentMetadataSetException if a d l document metadata set with the primary key could not be found
@@ -1524,10 +1524,10 @@ public class DLDocumentMetadataSetPersistenceImpl extends BasePersistenceImpl<DL
 	}
 
 	/**
-	 * Finds the d l document metadata set where DDMStructureId = &#63; and fileVersionId = &#63; or throws a {@link com.liferay.portlet.documentlibrary.NoSuchDocumentMetadataSetException} if it could not be found.
+	 * Returns the d l document metadata set where DDMStructureId = &#63; and fileVersionId = &#63; or throws a {@link com.liferay.portlet.documentlibrary.NoSuchDocumentMetadataSetException} if it could not be found.
 	 *
-	 * @param DDMStructureId the d d m structure ID to search with
-	 * @param fileVersionId the file version ID to search with
+	 * @param DDMStructureId the d d m structure ID
+	 * @param fileVersionId the file version ID
 	 * @return the matching d l document metadata set
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchDocumentMetadataSetException if a matching d l document metadata set could not be found
 	 * @throws SystemException if a system exception occurred
@@ -1562,10 +1562,10 @@ public class DLDocumentMetadataSetPersistenceImpl extends BasePersistenceImpl<DL
 	}
 
 	/**
-	 * Finds the d l document metadata set where DDMStructureId = &#63; and fileVersionId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 * Returns the d l document metadata set where DDMStructureId = &#63; and fileVersionId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	 *
-	 * @param DDMStructureId the d d m structure ID to search with
-	 * @param fileVersionId the file version ID to search with
+	 * @param DDMStructureId the d d m structure ID
+	 * @param fileVersionId the file version ID
 	 * @return the matching d l document metadata set, or <code>null</code> if a matching d l document metadata set could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1575,10 +1575,10 @@ public class DLDocumentMetadataSetPersistenceImpl extends BasePersistenceImpl<DL
 	}
 
 	/**
-	 * Finds the d l document metadata set where DDMStructureId = &#63; and fileVersionId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 * Returns the d l document metadata set where DDMStructureId = &#63; and fileVersionId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	 *
-	 * @param DDMStructureId the d d m structure ID to search with
-	 * @param fileVersionId the file version ID to search with
+	 * @param DDMStructureId the d d m structure ID
+	 * @param fileVersionId the file version ID
 	 * @return the matching d l document metadata set, or <code>null</code> if a matching d l document metadata set could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1665,7 +1665,7 @@ public class DLDocumentMetadataSetPersistenceImpl extends BasePersistenceImpl<DL
 	}
 
 	/**
-	 * Finds all the d l document metadata sets.
+	 * Returns all the d l document metadata sets.
 	 *
 	 * @return the d l document metadata sets
 	 * @throws SystemException if a system exception occurred
@@ -1675,14 +1675,14 @@ public class DLDocumentMetadataSetPersistenceImpl extends BasePersistenceImpl<DL
 	}
 
 	/**
-	 * Finds a range of all the d l document metadata sets.
+	 * Returns a range of all the d l document metadata sets.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param start the lower bound of the range of d l document metadata sets to return
-	 * @param end the upper bound of the range of d l document metadata sets to return (not inclusive)
+	 * @param start the lower bound of the range of d l document metadata sets
+	 * @param end the upper bound of the range of d l document metadata sets (not inclusive)
 	 * @return the range of d l document metadata sets
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1692,14 +1692,14 @@ public class DLDocumentMetadataSetPersistenceImpl extends BasePersistenceImpl<DL
 	}
 
 	/**
-	 * Finds an ordered range of all the d l document metadata sets.
+	 * Returns an ordered range of all the d l document metadata sets.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param start the lower bound of the range of d l document metadata sets to return
-	 * @param end the upper bound of the range of d l document metadata sets to return (not inclusive)
+	 * @param start the lower bound of the range of d l document metadata sets
+	 * @param end the upper bound of the range of d l document metadata sets (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of d l document metadata sets
 	 * @throws SystemException if a system exception occurred
@@ -1776,7 +1776,7 @@ public class DLDocumentMetadataSetPersistenceImpl extends BasePersistenceImpl<DL
 	/**
 	 * Removes all the d l document metadata sets where uuid = &#63; from the database.
 	 *
-	 * @param uuid the uuid to search with
+	 * @param uuid the uuid
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByUuid(String uuid) throws SystemException {
@@ -1788,7 +1788,7 @@ public class DLDocumentMetadataSetPersistenceImpl extends BasePersistenceImpl<DL
 	/**
 	 * Removes all the d l document metadata sets where documentTypeId = &#63; from the database.
 	 *
-	 * @param documentTypeId the document type ID to search with
+	 * @param documentTypeId the document type ID
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByDocumentTypeId(long documentTypeId)
@@ -1802,7 +1802,7 @@ public class DLDocumentMetadataSetPersistenceImpl extends BasePersistenceImpl<DL
 	/**
 	 * Removes all the d l document metadata sets where fileVersionId = &#63; from the database.
 	 *
-	 * @param fileVersionId the file version ID to search with
+	 * @param fileVersionId the file version ID
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByFileVersionId(long fileVersionId)
@@ -1816,8 +1816,8 @@ public class DLDocumentMetadataSetPersistenceImpl extends BasePersistenceImpl<DL
 	/**
 	 * Removes the d l document metadata set where DDMStructureId = &#63; and fileVersionId = &#63; from the database.
 	 *
-	 * @param DDMStructureId the d d m structure ID to search with
-	 * @param fileVersionId the file version ID to search with
+	 * @param DDMStructureId the d d m structure ID
+	 * @param fileVersionId the file version ID
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByD_F(long DDMStructureId, long fileVersionId)
@@ -1840,9 +1840,9 @@ public class DLDocumentMetadataSetPersistenceImpl extends BasePersistenceImpl<DL
 	}
 
 	/**
-	 * Counts all the d l document metadata sets where uuid = &#63;.
+	 * Returns the number of d l document metadata sets where uuid = &#63;.
 	 *
-	 * @param uuid the uuid to search with
+	 * @param uuid the uuid
 	 * @return the number of matching d l document metadata sets
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1905,9 +1905,9 @@ public class DLDocumentMetadataSetPersistenceImpl extends BasePersistenceImpl<DL
 	}
 
 	/**
-	 * Counts all the d l document metadata sets where documentTypeId = &#63;.
+	 * Returns the number of d l document metadata sets where documentTypeId = &#63;.
 	 *
-	 * @param documentTypeId the document type ID to search with
+	 * @param documentTypeId the document type ID
 	 * @return the number of matching d l document metadata sets
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1959,9 +1959,9 @@ public class DLDocumentMetadataSetPersistenceImpl extends BasePersistenceImpl<DL
 	}
 
 	/**
-	 * Counts all the d l document metadata sets where fileVersionId = &#63;.
+	 * Returns the number of d l document metadata sets where fileVersionId = &#63;.
 	 *
-	 * @param fileVersionId the file version ID to search with
+	 * @param fileVersionId the file version ID
 	 * @return the number of matching d l document metadata sets
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2013,10 +2013,10 @@ public class DLDocumentMetadataSetPersistenceImpl extends BasePersistenceImpl<DL
 	}
 
 	/**
-	 * Counts all the d l document metadata sets where DDMStructureId = &#63; and fileVersionId = &#63;.
+	 * Returns the number of d l document metadata sets where DDMStructureId = &#63; and fileVersionId = &#63;.
 	 *
-	 * @param DDMStructureId the d d m structure ID to search with
-	 * @param fileVersionId the file version ID to search with
+	 * @param DDMStructureId the d d m structure ID
+	 * @param fileVersionId the file version ID
 	 * @return the number of matching d l document metadata sets
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2072,7 +2072,7 @@ public class DLDocumentMetadataSetPersistenceImpl extends BasePersistenceImpl<DL
 	}
 
 	/**
-	 * Counts all the d l document metadata sets.
+	 * Returns the number of d l document metadata sets.
 	 *
 	 * @return the number of d l document metadata sets
 	 * @throws SystemException if a system exception occurred

@@ -49,21 +49,21 @@ public interface DLFileShortcutModel extends BaseModel<DLFileShortcut>,
 	 */
 
 	/**
-	 * Gets the primary key of this d l file shortcut.
+	 * Returns the primary key of this d l file shortcut.
 	 *
 	 * @return the primary key of this d l file shortcut
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this d l file shortcut
+	 * Sets the primary key of this d l file shortcut.
 	 *
 	 * @param primaryKey the primary key of this d l file shortcut
 	 */
 	public void setPrimaryKey(long primaryKey);
 
 	/**
-	 * Gets the uuid of this d l file shortcut.
+	 * Returns the uuid of this d l file shortcut.
 	 *
 	 * @return the uuid of this d l file shortcut
 	 */
@@ -78,7 +78,7 @@ public interface DLFileShortcutModel extends BaseModel<DLFileShortcut>,
 	public void setUuid(String uuid);
 
 	/**
-	 * Gets the file shortcut ID of this d l file shortcut.
+	 * Returns the file shortcut ID of this d l file shortcut.
 	 *
 	 * @return the file shortcut ID of this d l file shortcut
 	 */
@@ -92,7 +92,7 @@ public interface DLFileShortcutModel extends BaseModel<DLFileShortcut>,
 	public void setFileShortcutId(long fileShortcutId);
 
 	/**
-	 * Gets the group ID of this d l file shortcut.
+	 * Returns the group ID of this d l file shortcut.
 	 *
 	 * @return the group ID of this d l file shortcut
 	 */
@@ -106,7 +106,7 @@ public interface DLFileShortcutModel extends BaseModel<DLFileShortcut>,
 	public void setGroupId(long groupId);
 
 	/**
-	 * Gets the company ID of this d l file shortcut.
+	 * Returns the company ID of this d l file shortcut.
 	 *
 	 * @return the company ID of this d l file shortcut
 	 */
@@ -120,7 +120,7 @@ public interface DLFileShortcutModel extends BaseModel<DLFileShortcut>,
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the user ID of this d l file shortcut.
+	 * Returns the user ID of this d l file shortcut.
 	 *
 	 * @return the user ID of this d l file shortcut
 	 */
@@ -134,7 +134,7 @@ public interface DLFileShortcutModel extends BaseModel<DLFileShortcut>,
 	public void setUserId(long userId);
 
 	/**
-	 * Gets the user uuid of this d l file shortcut.
+	 * Returns the user uuid of this d l file shortcut.
 	 *
 	 * @return the user uuid of this d l file shortcut
 	 * @throws SystemException if a system exception occurred
@@ -149,7 +149,7 @@ public interface DLFileShortcutModel extends BaseModel<DLFileShortcut>,
 	public void setUserUuid(String userUuid);
 
 	/**
-	 * Gets the user name of this d l file shortcut.
+	 * Returns the user name of this d l file shortcut.
 	 *
 	 * @return the user name of this d l file shortcut
 	 */
@@ -164,7 +164,7 @@ public interface DLFileShortcutModel extends BaseModel<DLFileShortcut>,
 	public void setUserName(String userName);
 
 	/**
-	 * Gets the create date of this d l file shortcut.
+	 * Returns the create date of this d l file shortcut.
 	 *
 	 * @return the create date of this d l file shortcut
 	 */
@@ -178,7 +178,7 @@ public interface DLFileShortcutModel extends BaseModel<DLFileShortcut>,
 	public void setCreateDate(Date createDate);
 
 	/**
-	 * Gets the modified date of this d l file shortcut.
+	 * Returns the modified date of this d l file shortcut.
 	 *
 	 * @return the modified date of this d l file shortcut
 	 */
@@ -192,7 +192,7 @@ public interface DLFileShortcutModel extends BaseModel<DLFileShortcut>,
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
-	 * Gets the repository ID of this d l file shortcut.
+	 * Returns the repository ID of this d l file shortcut.
 	 *
 	 * @return the repository ID of this d l file shortcut
 	 */
@@ -206,7 +206,7 @@ public interface DLFileShortcutModel extends BaseModel<DLFileShortcut>,
 	public void setRepositoryId(long repositoryId);
 
 	/**
-	 * Gets the folder ID of this d l file shortcut.
+	 * Returns the folder ID of this d l file shortcut.
 	 *
 	 * @return the folder ID of this d l file shortcut
 	 */
@@ -220,7 +220,7 @@ public interface DLFileShortcutModel extends BaseModel<DLFileShortcut>,
 	public void setFolderId(long folderId);
 
 	/**
-	 * Gets the to file entry ID of this d l file shortcut.
+	 * Returns the to file entry ID of this d l file shortcut.
 	 *
 	 * @return the to file entry ID of this d l file shortcut
 	 */
@@ -234,7 +234,7 @@ public interface DLFileShortcutModel extends BaseModel<DLFileShortcut>,
 	public void setToFileEntryId(long toFileEntryId);
 
 	/**
-	 * Gets the status of this d l file shortcut.
+	 * Returns the status of this d l file shortcut.
 	 *
 	 * @return the status of this d l file shortcut
 	 */
@@ -248,7 +248,7 @@ public interface DLFileShortcutModel extends BaseModel<DLFileShortcut>,
 	public void setStatus(int status);
 
 	/**
-	 * Gets the status by user ID of this d l file shortcut.
+	 * Returns the status by user ID of this d l file shortcut.
 	 *
 	 * @return the status by user ID of this d l file shortcut
 	 */
@@ -262,7 +262,7 @@ public interface DLFileShortcutModel extends BaseModel<DLFileShortcut>,
 	public void setStatusByUserId(long statusByUserId);
 
 	/**
-	 * Gets the status by user uuid of this d l file shortcut.
+	 * Returns the status by user uuid of this d l file shortcut.
 	 *
 	 * @return the status by user uuid of this d l file shortcut
 	 * @throws SystemException if a system exception occurred
@@ -277,7 +277,7 @@ public interface DLFileShortcutModel extends BaseModel<DLFileShortcut>,
 	public void setStatusByUserUuid(String statusByUserUuid);
 
 	/**
-	 * Gets the status by user name of this d l file shortcut.
+	 * Returns the status by user name of this d l file shortcut.
 	 *
 	 * @return the status by user name of this d l file shortcut
 	 */
@@ -292,7 +292,7 @@ public interface DLFileShortcutModel extends BaseModel<DLFileShortcut>,
 	public void setStatusByUserName(String statusByUserName);
 
 	/**
-	 * Gets the status date of this d l file shortcut.
+	 * Returns the status date of this d l file shortcut.
 	 *
 	 * @return the status date of this d l file shortcut
 	 */
@@ -306,7 +306,7 @@ public interface DLFileShortcutModel extends BaseModel<DLFileShortcut>,
 	public void setStatusDate(Date statusDate);
 
 	/**
-	 * @deprecated {@link #isApproved}
+	 * @deprecated Renamed to {@link #isApproved()}
 	 */
 	public boolean getApproved();
 

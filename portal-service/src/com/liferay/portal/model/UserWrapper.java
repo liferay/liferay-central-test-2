@@ -37,7 +37,7 @@ public class UserWrapper implements User {
 	}
 
 	/**
-	* Gets the primary key of this user.
+	* Returns the primary key of this user.
 	*
 	* @return the primary key of this user
 	*/
@@ -46,7 +46,7 @@ public class UserWrapper implements User {
 	}
 
 	/**
-	* Sets the primary key of this user
+	* Sets the primary key of this user.
 	*
 	* @param primaryKey the primary key of this user
 	*/
@@ -55,7 +55,7 @@ public class UserWrapper implements User {
 	}
 
 	/**
-	* Gets the uuid of this user.
+	* Returns the uuid of this user.
 	*
 	* @return the uuid of this user
 	*/
@@ -73,7 +73,7 @@ public class UserWrapper implements User {
 	}
 
 	/**
-	* Gets the user ID of this user.
+	* Returns the user ID of this user.
 	*
 	* @return the user ID of this user
 	*/
@@ -91,7 +91,7 @@ public class UserWrapper implements User {
 	}
 
 	/**
-	* Gets the user uuid of this user.
+	* Returns the user uuid of this user.
 	*
 	* @return the user uuid of this user
 	* @throws SystemException if a system exception occurred
@@ -111,7 +111,7 @@ public class UserWrapper implements User {
 	}
 
 	/**
-	* Gets the company ID of this user.
+	* Returns the company ID of this user.
 	*
 	* @return the company ID of this user
 	*/
@@ -129,7 +129,7 @@ public class UserWrapper implements User {
 	}
 
 	/**
-	* Gets the create date of this user.
+	* Returns the create date of this user.
 	*
 	* @return the create date of this user
 	*/
@@ -147,7 +147,7 @@ public class UserWrapper implements User {
 	}
 
 	/**
-	* Gets the modified date of this user.
+	* Returns the modified date of this user.
 	*
 	* @return the modified date of this user
 	*/
@@ -165,7 +165,7 @@ public class UserWrapper implements User {
 	}
 
 	/**
-	* Gets the default user of this user.
+	* Returns the default user of this user.
 	*
 	* @return the default user of this user
 	*/
@@ -192,7 +192,7 @@ public class UserWrapper implements User {
 	}
 
 	/**
-	* Gets the contact ID of this user.
+	* Returns the contact ID of this user.
 	*
 	* @return the contact ID of this user
 	*/
@@ -210,7 +210,7 @@ public class UserWrapper implements User {
 	}
 
 	/**
-	* Gets the password of this user.
+	* Returns the password of this user.
 	*
 	* @return the password of this user
 	*/
@@ -228,7 +228,7 @@ public class UserWrapper implements User {
 	}
 
 	/**
-	* Gets the password encrypted of this user.
+	* Returns the password encrypted of this user.
 	*
 	* @return the password encrypted of this user
 	*/
@@ -255,7 +255,7 @@ public class UserWrapper implements User {
 	}
 
 	/**
-	* Gets the password reset of this user.
+	* Returns the password reset of this user.
 	*
 	* @return the password reset of this user
 	*/
@@ -282,7 +282,7 @@ public class UserWrapper implements User {
 	}
 
 	/**
-	* Gets the password modified date of this user.
+	* Returns the password modified date of this user.
 	*
 	* @return the password modified date of this user
 	*/
@@ -300,7 +300,7 @@ public class UserWrapper implements User {
 	}
 
 	/**
-	* Gets the digest of this user.
+	* Returns the digest of this user.
 	*
 	* @return the digest of this user
 	*/
@@ -318,7 +318,7 @@ public class UserWrapper implements User {
 	}
 
 	/**
-	* Gets the reminder query question of this user.
+	* Returns the reminder query question of this user.
 	*
 	* @return the reminder query question of this user
 	*/
@@ -336,7 +336,7 @@ public class UserWrapper implements User {
 	}
 
 	/**
-	* Gets the reminder query answer of this user.
+	* Returns the reminder query answer of this user.
 	*
 	* @return the reminder query answer of this user
 	*/
@@ -354,7 +354,7 @@ public class UserWrapper implements User {
 	}
 
 	/**
-	* Gets the grace login count of this user.
+	* Returns the grace login count of this user.
 	*
 	* @return the grace login count of this user
 	*/
@@ -372,7 +372,7 @@ public class UserWrapper implements User {
 	}
 
 	/**
-	* Gets the screen name of this user.
+	* Returns the screen name of this user.
 	*
 	* @return the screen name of this user
 	*/
@@ -390,7 +390,7 @@ public class UserWrapper implements User {
 	}
 
 	/**
-	* Gets the email address of this user.
+	* Returns the email address of this user.
 	*
 	* @return the email address of this user
 	*/
@@ -408,7 +408,7 @@ public class UserWrapper implements User {
 	}
 
 	/**
-	* Gets the facebook ID of this user.
+	* Returns the facebook ID of this user.
 	*
 	* @return the facebook ID of this user
 	*/
@@ -426,7 +426,7 @@ public class UserWrapper implements User {
 	}
 
 	/**
-	* Gets the open ID of this user.
+	* Returns the open ID of this user.
 	*
 	* @return the open ID of this user
 	*/
@@ -444,7 +444,7 @@ public class UserWrapper implements User {
 	}
 
 	/**
-	* Gets the portrait ID of this user.
+	* Returns the portrait ID of this user.
 	*
 	* @return the portrait ID of this user
 	*/
@@ -462,7 +462,7 @@ public class UserWrapper implements User {
 	}
 
 	/**
-	* Gets the language ID of this user.
+	* Returns the language ID of this user.
 	*
 	* @return the language ID of this user
 	*/
@@ -480,7 +480,7 @@ public class UserWrapper implements User {
 	}
 
 	/**
-	* Gets the time zone ID of this user.
+	* Returns the time zone ID of this user.
 	*
 	* @return the time zone ID of this user
 	*/
@@ -498,7 +498,7 @@ public class UserWrapper implements User {
 	}
 
 	/**
-	* Gets the greeting of this user.
+	* Returns the greeting of this user.
 	*
 	* @return the greeting of this user
 	*/
@@ -516,7 +516,7 @@ public class UserWrapper implements User {
 	}
 
 	/**
-	* Gets the comments of this user.
+	* Returns the comments of this user.
 	*
 	* @return the comments of this user
 	*/
@@ -534,7 +534,7 @@ public class UserWrapper implements User {
 	}
 
 	/**
-	* Gets the first name of this user.
+	* Returns the first name of this user.
 	*
 	* @return the first name of this user
 	*/
@@ -552,7 +552,7 @@ public class UserWrapper implements User {
 	}
 
 	/**
-	* Gets the middle name of this user.
+	* Returns the middle name of this user.
 	*
 	* @return the middle name of this user
 	*/
@@ -570,7 +570,7 @@ public class UserWrapper implements User {
 	}
 
 	/**
-	* Gets the last name of this user.
+	* Returns the last name of this user.
 	*
 	* @return the last name of this user
 	*/
@@ -588,7 +588,7 @@ public class UserWrapper implements User {
 	}
 
 	/**
-	* Gets the job title of this user.
+	* Returns the job title of this user.
 	*
 	* @return the job title of this user
 	*/
@@ -606,7 +606,7 @@ public class UserWrapper implements User {
 	}
 
 	/**
-	* Gets the login date of this user.
+	* Returns the login date of this user.
 	*
 	* @return the login date of this user
 	*/
@@ -624,7 +624,7 @@ public class UserWrapper implements User {
 	}
 
 	/**
-	* Gets the login i p of this user.
+	* Returns the login i p of this user.
 	*
 	* @return the login i p of this user
 	*/
@@ -642,7 +642,7 @@ public class UserWrapper implements User {
 	}
 
 	/**
-	* Gets the last login date of this user.
+	* Returns the last login date of this user.
 	*
 	* @return the last login date of this user
 	*/
@@ -660,7 +660,7 @@ public class UserWrapper implements User {
 	}
 
 	/**
-	* Gets the last login i p of this user.
+	* Returns the last login i p of this user.
 	*
 	* @return the last login i p of this user
 	*/
@@ -678,7 +678,7 @@ public class UserWrapper implements User {
 	}
 
 	/**
-	* Gets the last failed login date of this user.
+	* Returns the last failed login date of this user.
 	*
 	* @return the last failed login date of this user
 	*/
@@ -696,7 +696,7 @@ public class UserWrapper implements User {
 	}
 
 	/**
-	* Gets the failed login attempts of this user.
+	* Returns the failed login attempts of this user.
 	*
 	* @return the failed login attempts of this user
 	*/
@@ -714,7 +714,7 @@ public class UserWrapper implements User {
 	}
 
 	/**
-	* Gets the lockout of this user.
+	* Returns the lockout of this user.
 	*
 	* @return the lockout of this user
 	*/
@@ -741,7 +741,7 @@ public class UserWrapper implements User {
 	}
 
 	/**
-	* Gets the lockout date of this user.
+	* Returns the lockout date of this user.
 	*
 	* @return the lockout date of this user
 	*/
@@ -759,7 +759,7 @@ public class UserWrapper implements User {
 	}
 
 	/**
-	* Gets the agreed to terms of use of this user.
+	* Returns the agreed to terms of use of this user.
 	*
 	* @return the agreed to terms of use of this user
 	*/
@@ -786,7 +786,7 @@ public class UserWrapper implements User {
 	}
 
 	/**
-	* Gets the status of this user.
+	* Returns the status of this user.
 	*
 	* @return the status of this user
 	*/

@@ -37,7 +37,7 @@ public class SocialActivityWrapper implements SocialActivity {
 	}
 
 	/**
-	* Gets the primary key of this social activity.
+	* Returns the primary key of this social activity.
 	*
 	* @return the primary key of this social activity
 	*/
@@ -46,7 +46,7 @@ public class SocialActivityWrapper implements SocialActivity {
 	}
 
 	/**
-	* Sets the primary key of this social activity
+	* Sets the primary key of this social activity.
 	*
 	* @param primaryKey the primary key of this social activity
 	*/
@@ -55,7 +55,7 @@ public class SocialActivityWrapper implements SocialActivity {
 	}
 
 	/**
-	* Gets the activity ID of this social activity.
+	* Returns the activity ID of this social activity.
 	*
 	* @return the activity ID of this social activity
 	*/
@@ -73,7 +73,7 @@ public class SocialActivityWrapper implements SocialActivity {
 	}
 
 	/**
-	* Gets the group ID of this social activity.
+	* Returns the group ID of this social activity.
 	*
 	* @return the group ID of this social activity
 	*/
@@ -91,7 +91,7 @@ public class SocialActivityWrapper implements SocialActivity {
 	}
 
 	/**
-	* Gets the company ID of this social activity.
+	* Returns the company ID of this social activity.
 	*
 	* @return the company ID of this social activity
 	*/
@@ -109,7 +109,7 @@ public class SocialActivityWrapper implements SocialActivity {
 	}
 
 	/**
-	* Gets the user ID of this social activity.
+	* Returns the user ID of this social activity.
 	*
 	* @return the user ID of this social activity
 	*/
@@ -127,7 +127,7 @@ public class SocialActivityWrapper implements SocialActivity {
 	}
 
 	/**
-	* Gets the user uuid of this social activity.
+	* Returns the user uuid of this social activity.
 	*
 	* @return the user uuid of this social activity
 	* @throws SystemException if a system exception occurred
@@ -147,7 +147,7 @@ public class SocialActivityWrapper implements SocialActivity {
 	}
 
 	/**
-	* Gets the create date of this social activity.
+	* Returns the create date of this social activity.
 	*
 	* @return the create date of this social activity
 	*/
@@ -165,7 +165,7 @@ public class SocialActivityWrapper implements SocialActivity {
 	}
 
 	/**
-	* Gets the mirror activity ID of this social activity.
+	* Returns the mirror activity ID of this social activity.
 	*
 	* @return the mirror activity ID of this social activity
 	*/
@@ -183,16 +183,16 @@ public class SocialActivityWrapper implements SocialActivity {
 	}
 
 	/**
-	* Gets the class name of the model instance this social activity is polymorphically associated with.
+	* Returns the fully qualified class name of this social activity.
 	*
-	* @return the class name of the model instance this social activity is polymorphically associated with
+	* @return the fully qualified class name of this social activity
 	*/
 	public java.lang.String getClassName() {
 		return _socialActivity.getClassName();
 	}
 
 	/**
-	* Gets the class name ID of this social activity.
+	* Returns the class name ID of this social activity.
 	*
 	* @return the class name ID of this social activity
 	*/
@@ -210,7 +210,7 @@ public class SocialActivityWrapper implements SocialActivity {
 	}
 
 	/**
-	* Gets the class p k of this social activity.
+	* Returns the class p k of this social activity.
 	*
 	* @return the class p k of this social activity
 	*/
@@ -228,7 +228,7 @@ public class SocialActivityWrapper implements SocialActivity {
 	}
 
 	/**
-	* Gets the type of this social activity.
+	* Returns the type of this social activity.
 	*
 	* @return the type of this social activity
 	*/
@@ -246,7 +246,7 @@ public class SocialActivityWrapper implements SocialActivity {
 	}
 
 	/**
-	* Gets the extra data of this social activity.
+	* Returns the extra data of this social activity.
 	*
 	* @return the extra data of this social activity
 	*/
@@ -264,7 +264,7 @@ public class SocialActivityWrapper implements SocialActivity {
 	}
 
 	/**
-	* Gets the receiver user ID of this social activity.
+	* Returns the receiver user ID of this social activity.
 	*
 	* @return the receiver user ID of this social activity
 	*/
@@ -282,7 +282,7 @@ public class SocialActivityWrapper implements SocialActivity {
 	}
 
 	/**
-	* Gets the receiver user uuid of this social activity.
+	* Returns the receiver user uuid of this social activity.
 	*
 	* @return the receiver user uuid of this social activity
 	* @throws SystemException if a system exception occurred

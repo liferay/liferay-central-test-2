@@ -37,7 +37,7 @@ public class OrgLaborWrapper implements OrgLabor {
 	}
 
 	/**
-	* Gets the primary key of this org labor.
+	* Returns the primary key of this org labor.
 	*
 	* @return the primary key of this org labor
 	*/
@@ -46,7 +46,7 @@ public class OrgLaborWrapper implements OrgLabor {
 	}
 
 	/**
-	* Sets the primary key of this org labor
+	* Sets the primary key of this org labor.
 	*
 	* @param primaryKey the primary key of this org labor
 	*/
@@ -55,7 +55,7 @@ public class OrgLaborWrapper implements OrgLabor {
 	}
 
 	/**
-	* Gets the org labor ID of this org labor.
+	* Returns the org labor ID of this org labor.
 	*
 	* @return the org labor ID of this org labor
 	*/
@@ -73,7 +73,7 @@ public class OrgLaborWrapper implements OrgLabor {
 	}
 
 	/**
-	* Gets the organization ID of this org labor.
+	* Returns the organization ID of this org labor.
 	*
 	* @return the organization ID of this org labor
 	*/
@@ -91,7 +91,7 @@ public class OrgLaborWrapper implements OrgLabor {
 	}
 
 	/**
-	* Gets the type ID of this org labor.
+	* Returns the type ID of this org labor.
 	*
 	* @return the type ID of this org labor
 	*/
@@ -109,7 +109,7 @@ public class OrgLaborWrapper implements OrgLabor {
 	}
 
 	/**
-	* Gets the sun open of this org labor.
+	* Returns the sun open of this org labor.
 	*
 	* @return the sun open of this org labor
 	*/
@@ -127,7 +127,7 @@ public class OrgLaborWrapper implements OrgLabor {
 	}
 
 	/**
-	* Gets the sun close of this org labor.
+	* Returns the sun close of this org labor.
 	*
 	* @return the sun close of this org labor
 	*/
@@ -145,7 +145,7 @@ public class OrgLaborWrapper implements OrgLabor {
 	}
 
 	/**
-	* Gets the mon open of this org labor.
+	* Returns the mon open of this org labor.
 	*
 	* @return the mon open of this org labor
 	*/
@@ -163,7 +163,7 @@ public class OrgLaborWrapper implements OrgLabor {
 	}
 
 	/**
-	* Gets the mon close of this org labor.
+	* Returns the mon close of this org labor.
 	*
 	* @return the mon close of this org labor
 	*/
@@ -181,7 +181,7 @@ public class OrgLaborWrapper implements OrgLabor {
 	}
 
 	/**
-	* Gets the tue open of this org labor.
+	* Returns the tue open of this org labor.
 	*
 	* @return the tue open of this org labor
 	*/
@@ -199,7 +199,7 @@ public class OrgLaborWrapper implements OrgLabor {
 	}
 
 	/**
-	* Gets the tue close of this org labor.
+	* Returns the tue close of this org labor.
 	*
 	* @return the tue close of this org labor
 	*/
@@ -217,7 +217,7 @@ public class OrgLaborWrapper implements OrgLabor {
 	}
 
 	/**
-	* Gets the wed open of this org labor.
+	* Returns the wed open of this org labor.
 	*
 	* @return the wed open of this org labor
 	*/
@@ -235,7 +235,7 @@ public class OrgLaborWrapper implements OrgLabor {
 	}
 
 	/**
-	* Gets the wed close of this org labor.
+	* Returns the wed close of this org labor.
 	*
 	* @return the wed close of this org labor
 	*/
@@ -253,7 +253,7 @@ public class OrgLaborWrapper implements OrgLabor {
 	}
 
 	/**
-	* Gets the thu open of this org labor.
+	* Returns the thu open of this org labor.
 	*
 	* @return the thu open of this org labor
 	*/
@@ -271,7 +271,7 @@ public class OrgLaborWrapper implements OrgLabor {
 	}
 
 	/**
-	* Gets the thu close of this org labor.
+	* Returns the thu close of this org labor.
 	*
 	* @return the thu close of this org labor
 	*/
@@ -289,7 +289,7 @@ public class OrgLaborWrapper implements OrgLabor {
 	}
 
 	/**
-	* Gets the fri open of this org labor.
+	* Returns the fri open of this org labor.
 	*
 	* @return the fri open of this org labor
 	*/
@@ -307,7 +307,7 @@ public class OrgLaborWrapper implements OrgLabor {
 	}
 
 	/**
-	* Gets the fri close of this org labor.
+	* Returns the fri close of this org labor.
 	*
 	* @return the fri close of this org labor
 	*/
@@ -325,7 +325,7 @@ public class OrgLaborWrapper implements OrgLabor {
 	}
 
 	/**
-	* Gets the sat open of this org labor.
+	* Returns the sat open of this org labor.
 	*
 	* @return the sat open of this org labor
 	*/
@@ -343,7 +343,7 @@ public class OrgLaborWrapper implements OrgLabor {
 	}
 
 	/**
-	* Gets the sat close of this org labor.
+	* Returns the sat close of this org labor.
 	*
 	* @return the sat close of this org labor
 	*/

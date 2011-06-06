@@ -37,7 +37,7 @@ public class DLFileEntryWrapper implements DLFileEntry {
 	}
 
 	/**
-	* Gets the primary key of this d l file entry.
+	* Returns the primary key of this d l file entry.
 	*
 	* @return the primary key of this d l file entry
 	*/
@@ -46,7 +46,7 @@ public class DLFileEntryWrapper implements DLFileEntry {
 	}
 
 	/**
-	* Sets the primary key of this d l file entry
+	* Sets the primary key of this d l file entry.
 	*
 	* @param primaryKey the primary key of this d l file entry
 	*/
@@ -55,7 +55,7 @@ public class DLFileEntryWrapper implements DLFileEntry {
 	}
 
 	/**
-	* Gets the uuid of this d l file entry.
+	* Returns the uuid of this d l file entry.
 	*
 	* @return the uuid of this d l file entry
 	*/
@@ -73,7 +73,7 @@ public class DLFileEntryWrapper implements DLFileEntry {
 	}
 
 	/**
-	* Gets the file entry ID of this d l file entry.
+	* Returns the file entry ID of this d l file entry.
 	*
 	* @return the file entry ID of this d l file entry
 	*/
@@ -91,7 +91,7 @@ public class DLFileEntryWrapper implements DLFileEntry {
 	}
 
 	/**
-	* Gets the group ID of this d l file entry.
+	* Returns the group ID of this d l file entry.
 	*
 	* @return the group ID of this d l file entry
 	*/
@@ -109,7 +109,7 @@ public class DLFileEntryWrapper implements DLFileEntry {
 	}
 
 	/**
-	* Gets the company ID of this d l file entry.
+	* Returns the company ID of this d l file entry.
 	*
 	* @return the company ID of this d l file entry
 	*/
@@ -127,7 +127,7 @@ public class DLFileEntryWrapper implements DLFileEntry {
 	}
 
 	/**
-	* Gets the user ID of this d l file entry.
+	* Returns the user ID of this d l file entry.
 	*
 	* @return the user ID of this d l file entry
 	*/
@@ -145,7 +145,7 @@ public class DLFileEntryWrapper implements DLFileEntry {
 	}
 
 	/**
-	* Gets the user uuid of this d l file entry.
+	* Returns the user uuid of this d l file entry.
 	*
 	* @return the user uuid of this d l file entry
 	* @throws SystemException if a system exception occurred
@@ -165,7 +165,7 @@ public class DLFileEntryWrapper implements DLFileEntry {
 	}
 
 	/**
-	* Gets the user name of this d l file entry.
+	* Returns the user name of this d l file entry.
 	*
 	* @return the user name of this d l file entry
 	*/
@@ -183,7 +183,7 @@ public class DLFileEntryWrapper implements DLFileEntry {
 	}
 
 	/**
-	* Gets the version user ID of this d l file entry.
+	* Returns the version user ID of this d l file entry.
 	*
 	* @return the version user ID of this d l file entry
 	*/
@@ -201,7 +201,7 @@ public class DLFileEntryWrapper implements DLFileEntry {
 	}
 
 	/**
-	* Gets the version user uuid of this d l file entry.
+	* Returns the version user uuid of this d l file entry.
 	*
 	* @return the version user uuid of this d l file entry
 	* @throws SystemException if a system exception occurred
@@ -221,7 +221,7 @@ public class DLFileEntryWrapper implements DLFileEntry {
 	}
 
 	/**
-	* Gets the version user name of this d l file entry.
+	* Returns the version user name of this d l file entry.
 	*
 	* @return the version user name of this d l file entry
 	*/
@@ -239,7 +239,7 @@ public class DLFileEntryWrapper implements DLFileEntry {
 	}
 
 	/**
-	* Gets the create date of this d l file entry.
+	* Returns the create date of this d l file entry.
 	*
 	* @return the create date of this d l file entry
 	*/
@@ -257,7 +257,7 @@ public class DLFileEntryWrapper implements DLFileEntry {
 	}
 
 	/**
-	* Gets the modified date of this d l file entry.
+	* Returns the modified date of this d l file entry.
 	*
 	* @return the modified date of this d l file entry
 	*/
@@ -275,7 +275,7 @@ public class DLFileEntryWrapper implements DLFileEntry {
 	}
 
 	/**
-	* Gets the repository ID of this d l file entry.
+	* Returns the repository ID of this d l file entry.
 	*
 	* @return the repository ID of this d l file entry
 	*/
@@ -293,7 +293,7 @@ public class DLFileEntryWrapper implements DLFileEntry {
 	}
 
 	/**
-	* Gets the folder ID of this d l file entry.
+	* Returns the folder ID of this d l file entry.
 	*
 	* @return the folder ID of this d l file entry
 	*/
@@ -311,7 +311,7 @@ public class DLFileEntryWrapper implements DLFileEntry {
 	}
 
 	/**
-	* Gets the name of this d l file entry.
+	* Returns the name of this d l file entry.
 	*
 	* @return the name of this d l file entry
 	*/
@@ -329,7 +329,7 @@ public class DLFileEntryWrapper implements DLFileEntry {
 	}
 
 	/**
-	* Gets the extension of this d l file entry.
+	* Returns the extension of this d l file entry.
 	*
 	* @return the extension of this d l file entry
 	*/
@@ -347,7 +347,7 @@ public class DLFileEntryWrapper implements DLFileEntry {
 	}
 
 	/**
-	* Gets the mime type of this d l file entry.
+	* Returns the mime type of this d l file entry.
 	*
 	* @return the mime type of this d l file entry
 	*/
@@ -365,7 +365,7 @@ public class DLFileEntryWrapper implements DLFileEntry {
 	}
 
 	/**
-	* Gets the title of this d l file entry.
+	* Returns the title of this d l file entry.
 	*
 	* @return the title of this d l file entry
 	*/
@@ -383,7 +383,7 @@ public class DLFileEntryWrapper implements DLFileEntry {
 	}
 
 	/**
-	* Gets the description of this d l file entry.
+	* Returns the description of this d l file entry.
 	*
 	* @return the description of this d l file entry
 	*/
@@ -401,7 +401,7 @@ public class DLFileEntryWrapper implements DLFileEntry {
 	}
 
 	/**
-	* Gets the extra settings of this d l file entry.
+	* Returns the extra settings of this d l file entry.
 	*
 	* @return the extra settings of this d l file entry
 	*/
@@ -419,7 +419,7 @@ public class DLFileEntryWrapper implements DLFileEntry {
 	}
 
 	/**
-	* Gets the document type ID of this d l file entry.
+	* Returns the document type ID of this d l file entry.
 	*
 	* @return the document type ID of this d l file entry
 	*/
@@ -437,7 +437,7 @@ public class DLFileEntryWrapper implements DLFileEntry {
 	}
 
 	/**
-	* Gets the version of this d l file entry.
+	* Returns the version of this d l file entry.
 	*
 	* @return the version of this d l file entry
 	*/
@@ -455,7 +455,7 @@ public class DLFileEntryWrapper implements DLFileEntry {
 	}
 
 	/**
-	* Gets the size of this d l file entry.
+	* Returns the size of this d l file entry.
 	*
 	* @return the size of this d l file entry
 	*/
@@ -473,7 +473,7 @@ public class DLFileEntryWrapper implements DLFileEntry {
 	}
 
 	/**
-	* Gets the read count of this d l file entry.
+	* Returns the read count of this d l file entry.
 	*
 	* @return the read count of this d l file entry
 	*/

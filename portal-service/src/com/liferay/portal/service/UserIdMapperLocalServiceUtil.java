@@ -41,7 +41,7 @@ public class UserIdMapperLocalServiceUtil {
 	/**
 	* Adds the user ID mapper to the database. Also notifies the appropriate model listeners.
 	*
-	* @param userIdMapper the user ID mapper to add
+	* @param userIdMapper the user ID mapper
 	* @return the user ID mapper that was added
 	* @throws SystemException if a system exception occurred
 	*/
@@ -65,7 +65,7 @@ public class UserIdMapperLocalServiceUtil {
 	/**
 	* Deletes the user ID mapper with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param userIdMapperId the primary key of the user ID mapper to delete
+	* @param userIdMapperId the primary key of the user ID mapper
 	* @throws PortalException if a user ID mapper with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -78,7 +78,7 @@ public class UserIdMapperLocalServiceUtil {
 	/**
 	* Deletes the user ID mapper from the database. Also notifies the appropriate model listeners.
 	*
-	* @param userIdMapper the user ID mapper to delete
+	* @param userIdMapper the user ID mapper
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void deleteUserIdMapper(
@@ -90,7 +90,7 @@ public class UserIdMapperLocalServiceUtil {
 	/**
 	* Performs a dynamic query on the database and returns the matching rows.
 	*
-	* @param dynamicQuery the dynamic query to search with
+	* @param dynamicQuery the dynamic query
 	* @return the matching rows
 	* @throws SystemException if a system exception occurred
 	*/
@@ -108,9 +108,9 @@ public class UserIdMapperLocalServiceUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param dynamicQuery the dynamic query to search with
-	* @param start the lower bound of the range of model instances to return
-	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param dynamicQuery the dynamic query
+	* @param start the lower bound of the range of model instances
+	* @param end the upper bound of the range of model instances (not inclusive)
 	* @return the range of matching rows
 	* @throws SystemException if a system exception occurred
 	*/
@@ -128,9 +128,9 @@ public class UserIdMapperLocalServiceUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param dynamicQuery the dynamic query to search with
-	* @param start the lower bound of the range of model instances to return
-	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param dynamicQuery the dynamic query
+	* @param start the lower bound of the range of model instances
+	* @param end the upper bound of the range of model instances (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching rows
 	* @throws SystemException if a system exception occurred
@@ -146,9 +146,9 @@ public class UserIdMapperLocalServiceUtil {
 	}
 
 	/**
-	* Counts the number of rows that match the dynamic query.
+	* Returns the number of rows that match the dynamic query.
 	*
-	* @param dynamicQuery the dynamic query to search with
+	* @param dynamicQuery the dynamic query
 	* @return the number of rows that match the dynamic query
 	* @throws SystemException if a system exception occurred
 	*/
@@ -159,9 +159,9 @@ public class UserIdMapperLocalServiceUtil {
 	}
 
 	/**
-	* Gets the user ID mapper with the primary key.
+	* Returns the user ID mapper with the primary key.
 	*
-	* @param userIdMapperId the primary key of the user ID mapper to get
+	* @param userIdMapperId the primary key of the user ID mapper
 	* @return the user ID mapper
 	* @throws PortalException if a user ID mapper with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -174,14 +174,14 @@ public class UserIdMapperLocalServiceUtil {
 	}
 
 	/**
-	* Gets a range of all the user ID mappers.
+	* Returns a range of all the user ID mappers.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of user ID mappers to return
-	* @param end the upper bound of the range of user ID mappers to return (not inclusive)
+	* @param start the lower bound of the range of user ID mappers
+	* @param end the upper bound of the range of user ID mappers (not inclusive)
 	* @return the range of user ID mappers
 	* @throws SystemException if a system exception occurred
 	*/
@@ -192,7 +192,7 @@ public class UserIdMapperLocalServiceUtil {
 	}
 
 	/**
-	* Gets the number of user ID mappers.
+	* Returns the number of user ID mappers.
 	*
 	* @return the number of user ID mappers
 	* @throws SystemException if a system exception occurred
@@ -205,7 +205,7 @@ public class UserIdMapperLocalServiceUtil {
 	/**
 	* Updates the user ID mapper in the database. Also notifies the appropriate model listeners.
 	*
-	* @param userIdMapper the user ID mapper to update
+	* @param userIdMapper the user ID mapper
 	* @return the user ID mapper that was updated
 	* @throws SystemException if a system exception occurred
 	*/
@@ -218,7 +218,7 @@ public class UserIdMapperLocalServiceUtil {
 	/**
 	* Updates the user ID mapper in the database. Also notifies the appropriate model listeners.
 	*
-	* @param userIdMapper the user ID mapper to update
+	* @param userIdMapper the user ID mapper
 	* @param merge whether to merge the user ID mapper with the current session. See {@link com.liferay.portal.service.persistence.BatchSession#update(com.liferay.portal.kernel.dao.orm.Session, com.liferay.portal.model.BaseModel, boolean)} for an explanation.
 	* @return the user ID mapper that was updated
 	* @throws SystemException if a system exception occurred
@@ -230,7 +230,7 @@ public class UserIdMapperLocalServiceUtil {
 	}
 
 	/**
-	* Gets the Spring bean ID for this bean.
+	* Returns the Spring bean ID for this bean.
 	*
 	* @return the Spring bean ID for this bean
 	*/

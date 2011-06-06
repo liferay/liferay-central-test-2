@@ -109,7 +109,7 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 	/**
 	 * Caches the message boards discussion in the entity cache if it is enabled.
 	 *
-	 * @param mbDiscussion the message boards discussion to cache
+	 * @param mbDiscussion the message boards discussion
 	 */
 	public void cacheResult(MBDiscussion mbDiscussion) {
 		EntityCacheUtil.putResult(MBDiscussionModelImpl.ENTITY_CACHE_ENABLED,
@@ -131,7 +131,7 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 	/**
 	 * Caches the message boards discussions in the entity cache if it is enabled.
 	 *
-	 * @param mbDiscussions the message boards discussions to cache
+	 * @param mbDiscussions the message boards discussions
 	 */
 	public void cacheResult(List<MBDiscussion> mbDiscussions) {
 		for (MBDiscussion mbDiscussion : mbDiscussions) {
@@ -200,7 +200,7 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 	/**
 	 * Removes the message boards discussion with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param primaryKey the primary key of the message boards discussion to remove
+	 * @param primaryKey the primary key of the message boards discussion
 	 * @return the message boards discussion that was removed
 	 * @throws com.liferay.portal.NoSuchModelException if a message boards discussion with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -213,7 +213,7 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 	/**
 	 * Removes the message boards discussion with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param discussionId the primary key of the message boards discussion to remove
+	 * @param discussionId the primary key of the message boards discussion
 	 * @return the message boards discussion that was removed
 	 * @throws com.liferay.portlet.messageboards.NoSuchDiscussionException if a message boards discussion with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -253,7 +253,7 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 	/**
 	 * Removes the message boards discussion from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param mbDiscussion the message boards discussion to remove
+	 * @param mbDiscussion the message boards discussion
 	 * @return the message boards discussion that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -386,9 +386,9 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 	}
 
 	/**
-	 * Finds the message boards discussion with the primary key or throws a {@link com.liferay.portal.NoSuchModelException} if it could not be found.
+	 * Returns the message boards discussion with the primary key or throws a {@link com.liferay.portal.NoSuchModelException} if it could not be found.
 	 *
-	 * @param primaryKey the primary key of the message boards discussion to find
+	 * @param primaryKey the primary key of the message boards discussion
 	 * @return the message boards discussion
 	 * @throws com.liferay.portal.NoSuchModelException if a message boards discussion with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -399,9 +399,9 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 	}
 
 	/**
-	 * Finds the message boards discussion with the primary key or throws a {@link com.liferay.portlet.messageboards.NoSuchDiscussionException} if it could not be found.
+	 * Returns the message boards discussion with the primary key or throws a {@link com.liferay.portlet.messageboards.NoSuchDiscussionException} if it could not be found.
 	 *
-	 * @param discussionId the primary key of the message boards discussion to find
+	 * @param discussionId the primary key of the message boards discussion
 	 * @return the message boards discussion
 	 * @throws com.liferay.portlet.messageboards.NoSuchDiscussionException if a message boards discussion with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -423,9 +423,9 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 	}
 
 	/**
-	 * Finds the message boards discussion with the primary key or returns <code>null</code> if it could not be found.
+	 * Returns the message boards discussion with the primary key or returns <code>null</code> if it could not be found.
 	 *
-	 * @param primaryKey the primary key of the message boards discussion to find
+	 * @param primaryKey the primary key of the message boards discussion
 	 * @return the message boards discussion, or <code>null</code> if a message boards discussion with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -435,9 +435,9 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 	}
 
 	/**
-	 * Finds the message boards discussion with the primary key or returns <code>null</code> if it could not be found.
+	 * Returns the message boards discussion with the primary key or returns <code>null</code> if it could not be found.
 	 *
-	 * @param discussionId the primary key of the message boards discussion to find
+	 * @param discussionId the primary key of the message boards discussion
 	 * @return the message boards discussion, or <code>null</code> if a message boards discussion with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -471,9 +471,9 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 	}
 
 	/**
-	 * Finds all the message boards discussions where classNameId = &#63;.
+	 * Returns all the message boards discussions where classNameId = &#63;.
 	 *
-	 * @param classNameId the class name ID to search with
+	 * @param classNameId the class name ID
 	 * @return the matching message boards discussions
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -484,15 +484,15 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 	}
 
 	/**
-	 * Finds a range of all the message boards discussions where classNameId = &#63;.
+	 * Returns a range of all the message boards discussions where classNameId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param classNameId the class name ID to search with
-	 * @param start the lower bound of the range of message boards discussions to return
-	 * @param end the upper bound of the range of message boards discussions to return (not inclusive)
+	 * @param classNameId the class name ID
+	 * @param start the lower bound of the range of message boards discussions
+	 * @param end the upper bound of the range of message boards discussions (not inclusive)
 	 * @return the range of matching message boards discussions
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -502,15 +502,15 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 	}
 
 	/**
-	 * Finds an ordered range of all the message boards discussions where classNameId = &#63;.
+	 * Returns an ordered range of all the message boards discussions where classNameId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param classNameId the class name ID to search with
-	 * @param start the lower bound of the range of message boards discussions to return
-	 * @param end the upper bound of the range of message boards discussions to return (not inclusive)
+	 * @param classNameId the class name ID
+	 * @param start the lower bound of the range of message boards discussions
+	 * @param end the upper bound of the range of message boards discussions (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching message boards discussions
 	 * @throws SystemException if a system exception occurred
@@ -586,13 +586,13 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 	}
 
 	/**
-	 * Finds the first message boards discussion in the ordered set where classNameId = &#63;.
+	 * Returns the first message boards discussion in the ordered set where classNameId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param classNameId the class name ID to search with
+	 * @param classNameId the class name ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching message boards discussion
 	 * @throws com.liferay.portlet.messageboards.NoSuchDiscussionException if a matching message boards discussion could not be found
@@ -622,13 +622,13 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 	}
 
 	/**
-	 * Finds the last message boards discussion in the ordered set where classNameId = &#63;.
+	 * Returns the last message boards discussion in the ordered set where classNameId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param classNameId the class name ID to search with
+	 * @param classNameId the class name ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching message boards discussion
 	 * @throws com.liferay.portlet.messageboards.NoSuchDiscussionException if a matching message boards discussion could not be found
@@ -660,14 +660,14 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 	}
 
 	/**
-	 * Finds the message boards discussions before and after the current message boards discussion in the ordered set where classNameId = &#63;.
+	 * Returns the message boards discussions before and after the current message boards discussion in the ordered set where classNameId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
 	 * @param discussionId the primary key of the current message boards discussion
-	 * @param classNameId the class name ID to search with
+	 * @param classNameId the class name ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next message boards discussion
 	 * @throws com.liferay.portlet.messageboards.NoSuchDiscussionException if a message boards discussion with the primary key could not be found
@@ -804,9 +804,9 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 	}
 
 	/**
-	 * Finds the message boards discussion where threadId = &#63; or throws a {@link com.liferay.portlet.messageboards.NoSuchDiscussionException} if it could not be found.
+	 * Returns the message boards discussion where threadId = &#63; or throws a {@link com.liferay.portlet.messageboards.NoSuchDiscussionException} if it could not be found.
 	 *
-	 * @param threadId the thread ID to search with
+	 * @param threadId the thread ID
 	 * @return the matching message boards discussion
 	 * @throws com.liferay.portlet.messageboards.NoSuchDiscussionException if a matching message boards discussion could not be found
 	 * @throws SystemException if a system exception occurred
@@ -836,9 +836,9 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 	}
 
 	/**
-	 * Finds the message boards discussion where threadId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 * Returns the message boards discussion where threadId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	 *
-	 * @param threadId the thread ID to search with
+	 * @param threadId the thread ID
 	 * @return the matching message boards discussion, or <code>null</code> if a matching message boards discussion could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -848,9 +848,9 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 	}
 
 	/**
-	 * Finds the message boards discussion where threadId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 * Returns the message boards discussion where threadId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	 *
-	 * @param threadId the thread ID to search with
+	 * @param threadId the thread ID
 	 * @return the matching message boards discussion, or <code>null</code> if a matching message boards discussion could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -931,10 +931,10 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 	}
 
 	/**
-	 * Finds the message boards discussion where classNameId = &#63; and classPK = &#63; or throws a {@link com.liferay.portlet.messageboards.NoSuchDiscussionException} if it could not be found.
+	 * Returns the message boards discussion where classNameId = &#63; and classPK = &#63; or throws a {@link com.liferay.portlet.messageboards.NoSuchDiscussionException} if it could not be found.
 	 *
-	 * @param classNameId the class name ID to search with
-	 * @param classPK the class p k to search with
+	 * @param classNameId the class name ID
+	 * @param classPK the class p k
 	 * @return the matching message boards discussion
 	 * @throws com.liferay.portlet.messageboards.NoSuchDiscussionException if a matching message boards discussion could not be found
 	 * @throws SystemException if a system exception occurred
@@ -967,10 +967,10 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 	}
 
 	/**
-	 * Finds the message boards discussion where classNameId = &#63; and classPK = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 * Returns the message boards discussion where classNameId = &#63; and classPK = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	 *
-	 * @param classNameId the class name ID to search with
-	 * @param classPK the class p k to search with
+	 * @param classNameId the class name ID
+	 * @param classPK the class p k
 	 * @return the matching message boards discussion, or <code>null</code> if a matching message boards discussion could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -980,10 +980,10 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 	}
 
 	/**
-	 * Finds the message boards discussion where classNameId = &#63; and classPK = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 * Returns the message boards discussion where classNameId = &#63; and classPK = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	 *
-	 * @param classNameId the class name ID to search with
-	 * @param classPK the class p k to search with
+	 * @param classNameId the class name ID
+	 * @param classPK the class p k
 	 * @return the matching message boards discussion, or <code>null</code> if a matching message boards discussion could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1069,7 +1069,7 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 	}
 
 	/**
-	 * Finds all the message boards discussions.
+	 * Returns all the message boards discussions.
 	 *
 	 * @return the message boards discussions
 	 * @throws SystemException if a system exception occurred
@@ -1079,14 +1079,14 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 	}
 
 	/**
-	 * Finds a range of all the message boards discussions.
+	 * Returns a range of all the message boards discussions.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param start the lower bound of the range of message boards discussions to return
-	 * @param end the upper bound of the range of message boards discussions to return (not inclusive)
+	 * @param start the lower bound of the range of message boards discussions
+	 * @param end the upper bound of the range of message boards discussions (not inclusive)
 	 * @return the range of message boards discussions
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1096,14 +1096,14 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 	}
 
 	/**
-	 * Finds an ordered range of all the message boards discussions.
+	 * Returns an ordered range of all the message boards discussions.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param start the lower bound of the range of message boards discussions to return
-	 * @param end the upper bound of the range of message boards discussions to return (not inclusive)
+	 * @param start the lower bound of the range of message boards discussions
+	 * @param end the upper bound of the range of message boards discussions (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of message boards discussions
 	 * @throws SystemException if a system exception occurred
@@ -1180,7 +1180,7 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 	/**
 	 * Removes all the message boards discussions where classNameId = &#63; from the database.
 	 *
-	 * @param classNameId the class name ID to search with
+	 * @param classNameId the class name ID
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByClassNameId(long classNameId) throws SystemException {
@@ -1192,7 +1192,7 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 	/**
 	 * Removes the message boards discussion where threadId = &#63; from the database.
 	 *
-	 * @param threadId the thread ID to search with
+	 * @param threadId the thread ID
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByThreadId(long threadId)
@@ -1205,8 +1205,8 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 	/**
 	 * Removes the message boards discussion where classNameId = &#63; and classPK = &#63; from the database.
 	 *
-	 * @param classNameId the class name ID to search with
-	 * @param classPK the class p k to search with
+	 * @param classNameId the class name ID
+	 * @param classPK the class p k
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByC_C(long classNameId, long classPK)
@@ -1228,9 +1228,9 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 	}
 
 	/**
-	 * Counts all the message boards discussions where classNameId = &#63;.
+	 * Returns the number of message boards discussions where classNameId = &#63;.
 	 *
-	 * @param classNameId the class name ID to search with
+	 * @param classNameId the class name ID
 	 * @return the number of matching message boards discussions
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1281,9 +1281,9 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 	}
 
 	/**
-	 * Counts all the message boards discussions where threadId = &#63;.
+	 * Returns the number of message boards discussions where threadId = &#63;.
 	 *
-	 * @param threadId the thread ID to search with
+	 * @param threadId the thread ID
 	 * @return the number of matching message boards discussions
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1334,10 +1334,10 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 	}
 
 	/**
-	 * Counts all the message boards discussions where classNameId = &#63; and classPK = &#63;.
+	 * Returns the number of message boards discussions where classNameId = &#63; and classPK = &#63;.
 	 *
-	 * @param classNameId the class name ID to search with
-	 * @param classPK the class p k to search with
+	 * @param classNameId the class name ID
+	 * @param classPK the class p k
 	 * @return the number of matching message boards discussions
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1393,7 +1393,7 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 	}
 
 	/**
-	 * Counts all the message boards discussions.
+	 * Returns the number of message boards discussions.
 	 *
 	 * @return the number of message boards discussions
 	 * @throws SystemException if a system exception occurred

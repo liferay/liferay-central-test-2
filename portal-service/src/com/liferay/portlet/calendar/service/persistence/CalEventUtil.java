@@ -120,7 +120,7 @@ public class CalEventUtil {
 	/**
 	* Caches the cal event in the entity cache if it is enabled.
 	*
-	* @param calEvent the cal event to cache
+	* @param calEvent the cal event
 	*/
 	public static void cacheResult(
 		com.liferay.portlet.calendar.model.CalEvent calEvent) {
@@ -130,7 +130,7 @@ public class CalEventUtil {
 	/**
 	* Caches the cal events in the entity cache if it is enabled.
 	*
-	* @param calEvents the cal events to cache
+	* @param calEvents the cal events
 	*/
 	public static void cacheResult(
 		java.util.List<com.liferay.portlet.calendar.model.CalEvent> calEvents) {
@@ -151,7 +151,7 @@ public class CalEventUtil {
 	/**
 	* Removes the cal event with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param eventId the primary key of the cal event to remove
+	* @param eventId the primary key of the cal event
 	* @return the cal event that was removed
 	* @throws com.liferay.portlet.calendar.NoSuchEventException if a cal event with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -170,9 +170,9 @@ public class CalEventUtil {
 	}
 
 	/**
-	* Finds the cal event with the primary key or throws a {@link com.liferay.portlet.calendar.NoSuchEventException} if it could not be found.
+	* Returns the cal event with the primary key or throws a {@link com.liferay.portlet.calendar.NoSuchEventException} if it could not be found.
 	*
-	* @param eventId the primary key of the cal event to find
+	* @param eventId the primary key of the cal event
 	* @return the cal event
 	* @throws com.liferay.portlet.calendar.NoSuchEventException if a cal event with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -185,9 +185,9 @@ public class CalEventUtil {
 	}
 
 	/**
-	* Finds the cal event with the primary key or returns <code>null</code> if it could not be found.
+	* Returns the cal event with the primary key or returns <code>null</code> if it could not be found.
 	*
-	* @param eventId the primary key of the cal event to find
+	* @param eventId the primary key of the cal event
 	* @return the cal event, or <code>null</code> if a cal event with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -198,9 +198,9 @@ public class CalEventUtil {
 	}
 
 	/**
-	* Finds all the cal events where uuid = &#63;.
+	* Returns all the cal events where uuid = &#63;.
 	*
-	* @param uuid the uuid to search with
+	* @param uuid the uuid
 	* @return the matching cal events
 	* @throws SystemException if a system exception occurred
 	*/
@@ -211,15 +211,15 @@ public class CalEventUtil {
 	}
 
 	/**
-	* Finds a range of all the cal events where uuid = &#63;.
+	* Returns a range of all the cal events where uuid = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param uuid the uuid to search with
-	* @param start the lower bound of the range of cal events to return
-	* @param end the upper bound of the range of cal events to return (not inclusive)
+	* @param uuid the uuid
+	* @param start the lower bound of the range of cal events
+	* @param end the upper bound of the range of cal events (not inclusive)
 	* @return the range of matching cal events
 	* @throws SystemException if a system exception occurred
 	*/
@@ -230,15 +230,15 @@ public class CalEventUtil {
 	}
 
 	/**
-	* Finds an ordered range of all the cal events where uuid = &#63;.
+	* Returns an ordered range of all the cal events where uuid = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param uuid the uuid to search with
-	* @param start the lower bound of the range of cal events to return
-	* @param end the upper bound of the range of cal events to return (not inclusive)
+	* @param uuid the uuid
+	* @param start the lower bound of the range of cal events
+	* @param end the upper bound of the range of cal events (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching cal events
 	* @throws SystemException if a system exception occurred
@@ -251,13 +251,13 @@ public class CalEventUtil {
 	}
 
 	/**
-	* Finds the first cal event in the ordered set where uuid = &#63;.
+	* Returns the first cal event in the ordered set where uuid = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param uuid the uuid to search with
+	* @param uuid the uuid
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching cal event
 	* @throws com.liferay.portlet.calendar.NoSuchEventException if a matching cal event could not be found
@@ -272,13 +272,13 @@ public class CalEventUtil {
 	}
 
 	/**
-	* Finds the last cal event in the ordered set where uuid = &#63;.
+	* Returns the last cal event in the ordered set where uuid = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param uuid the uuid to search with
+	* @param uuid the uuid
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching cal event
 	* @throws com.liferay.portlet.calendar.NoSuchEventException if a matching cal event could not be found
@@ -293,14 +293,14 @@ public class CalEventUtil {
 	}
 
 	/**
-	* Finds the cal events before and after the current cal event in the ordered set where uuid = &#63;.
+	* Returns the cal events before and after the current cal event in the ordered set where uuid = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
 	* @param eventId the primary key of the current cal event
-	* @param uuid the uuid to search with
+	* @param uuid the uuid
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next cal event
 	* @throws com.liferay.portlet.calendar.NoSuchEventException if a cal event with the primary key could not be found
@@ -316,10 +316,10 @@ public class CalEventUtil {
 	}
 
 	/**
-	* Finds the cal event where uuid = &#63; and groupId = &#63; or throws a {@link com.liferay.portlet.calendar.NoSuchEventException} if it could not be found.
+	* Returns the cal event where uuid = &#63; and groupId = &#63; or throws a {@link com.liferay.portlet.calendar.NoSuchEventException} if it could not be found.
 	*
-	* @param uuid the uuid to search with
-	* @param groupId the group ID to search with
+	* @param uuid the uuid
+	* @param groupId the group ID
 	* @return the matching cal event
 	* @throws com.liferay.portlet.calendar.NoSuchEventException if a matching cal event could not be found
 	* @throws SystemException if a system exception occurred
@@ -332,10 +332,10 @@ public class CalEventUtil {
 	}
 
 	/**
-	* Finds the cal event where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	* Returns the cal event where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	*
-	* @param uuid the uuid to search with
-	* @param groupId the group ID to search with
+	* @param uuid the uuid
+	* @param groupId the group ID
 	* @return the matching cal event, or <code>null</code> if a matching cal event could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -346,10 +346,10 @@ public class CalEventUtil {
 	}
 
 	/**
-	* Finds the cal event where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	* Returns the cal event where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
-	* @param uuid the uuid to search with
-	* @param groupId the group ID to search with
+	* @param uuid the uuid
+	* @param groupId the group ID
 	* @return the matching cal event, or <code>null</code> if a matching cal event could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -360,9 +360,9 @@ public class CalEventUtil {
 	}
 
 	/**
-	* Finds all the cal events where companyId = &#63;.
+	* Returns all the cal events where companyId = &#63;.
 	*
-	* @param companyId the company ID to search with
+	* @param companyId the company ID
 	* @return the matching cal events
 	* @throws SystemException if a system exception occurred
 	*/
@@ -373,15 +373,15 @@ public class CalEventUtil {
 	}
 
 	/**
-	* Finds a range of all the cal events where companyId = &#63;.
+	* Returns a range of all the cal events where companyId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company ID to search with
-	* @param start the lower bound of the range of cal events to return
-	* @param end the upper bound of the range of cal events to return (not inclusive)
+	* @param companyId the company ID
+	* @param start the lower bound of the range of cal events
+	* @param end the upper bound of the range of cal events (not inclusive)
 	* @return the range of matching cal events
 	* @throws SystemException if a system exception occurred
 	*/
@@ -392,15 +392,15 @@ public class CalEventUtil {
 	}
 
 	/**
-	* Finds an ordered range of all the cal events where companyId = &#63;.
+	* Returns an ordered range of all the cal events where companyId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company ID to search with
-	* @param start the lower bound of the range of cal events to return
-	* @param end the upper bound of the range of cal events to return (not inclusive)
+	* @param companyId the company ID
+	* @param start the lower bound of the range of cal events
+	* @param end the upper bound of the range of cal events (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching cal events
 	* @throws SystemException if a system exception occurred
@@ -414,13 +414,13 @@ public class CalEventUtil {
 	}
 
 	/**
-	* Finds the first cal event in the ordered set where companyId = &#63;.
+	* Returns the first cal event in the ordered set where companyId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company ID to search with
+	* @param companyId the company ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching cal event
 	* @throws com.liferay.portlet.calendar.NoSuchEventException if a matching cal event could not be found
@@ -436,13 +436,13 @@ public class CalEventUtil {
 	}
 
 	/**
-	* Finds the last cal event in the ordered set where companyId = &#63;.
+	* Returns the last cal event in the ordered set where companyId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company ID to search with
+	* @param companyId the company ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching cal event
 	* @throws com.liferay.portlet.calendar.NoSuchEventException if a matching cal event could not be found
@@ -458,14 +458,14 @@ public class CalEventUtil {
 	}
 
 	/**
-	* Finds the cal events before and after the current cal event in the ordered set where companyId = &#63;.
+	* Returns the cal events before and after the current cal event in the ordered set where companyId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
 	* @param eventId the primary key of the current cal event
-	* @param companyId the company ID to search with
+	* @param companyId the company ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next cal event
 	* @throws com.liferay.portlet.calendar.NoSuchEventException if a cal event with the primary key could not be found
@@ -482,9 +482,9 @@ public class CalEventUtil {
 	}
 
 	/**
-	* Finds all the cal events where groupId = &#63;.
+	* Returns all the cal events where groupId = &#63;.
 	*
-	* @param groupId the group ID to search with
+	* @param groupId the group ID
 	* @return the matching cal events
 	* @throws SystemException if a system exception occurred
 	*/
@@ -495,15 +495,15 @@ public class CalEventUtil {
 	}
 
 	/**
-	* Finds a range of all the cal events where groupId = &#63;.
+	* Returns a range of all the cal events where groupId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param start the lower bound of the range of cal events to return
-	* @param end the upper bound of the range of cal events to return (not inclusive)
+	* @param groupId the group ID
+	* @param start the lower bound of the range of cal events
+	* @param end the upper bound of the range of cal events (not inclusive)
 	* @return the range of matching cal events
 	* @throws SystemException if a system exception occurred
 	*/
@@ -514,15 +514,15 @@ public class CalEventUtil {
 	}
 
 	/**
-	* Finds an ordered range of all the cal events where groupId = &#63;.
+	* Returns an ordered range of all the cal events where groupId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param start the lower bound of the range of cal events to return
-	* @param end the upper bound of the range of cal events to return (not inclusive)
+	* @param groupId the group ID
+	* @param start the lower bound of the range of cal events
+	* @param end the upper bound of the range of cal events (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching cal events
 	* @throws SystemException if a system exception occurred
@@ -536,13 +536,13 @@ public class CalEventUtil {
 	}
 
 	/**
-	* Finds the first cal event in the ordered set where groupId = &#63;.
+	* Returns the first cal event in the ordered set where groupId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
+	* @param groupId the group ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching cal event
 	* @throws com.liferay.portlet.calendar.NoSuchEventException if a matching cal event could not be found
@@ -557,13 +557,13 @@ public class CalEventUtil {
 	}
 
 	/**
-	* Finds the last cal event in the ordered set where groupId = &#63;.
+	* Returns the last cal event in the ordered set where groupId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
+	* @param groupId the group ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching cal event
 	* @throws com.liferay.portlet.calendar.NoSuchEventException if a matching cal event could not be found
@@ -578,14 +578,14 @@ public class CalEventUtil {
 	}
 
 	/**
-	* Finds the cal events before and after the current cal event in the ordered set where groupId = &#63;.
+	* Returns the cal events before and after the current cal event in the ordered set where groupId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
 	* @param eventId the primary key of the current cal event
-	* @param groupId the group ID to search with
+	* @param groupId the group ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next cal event
 	* @throws com.liferay.portlet.calendar.NoSuchEventException if a cal event with the primary key could not be found
@@ -602,9 +602,9 @@ public class CalEventUtil {
 	}
 
 	/**
-	* Filters by the user's permissions and finds all the cal events where groupId = &#63;.
+	* Returns all the cal events that the user has permission to view where groupId = &#63;.
 	*
-	* @param groupId the group ID to search with
+	* @param groupId the group ID
 	* @return the matching cal events that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -615,15 +615,15 @@ public class CalEventUtil {
 	}
 
 	/**
-	* Filters by the user's permissions and finds a range of all the cal events where groupId = &#63;.
+	* Returns a range of all the cal events that the user has permission to view where groupId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param start the lower bound of the range of cal events to return
-	* @param end the upper bound of the range of cal events to return (not inclusive)
+	* @param groupId the group ID
+	* @param start the lower bound of the range of cal events
+	* @param end the upper bound of the range of cal events (not inclusive)
 	* @return the range of matching cal events that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -634,15 +634,15 @@ public class CalEventUtil {
 	}
 
 	/**
-	* Filters by the user's permissions and finds an ordered range of all the cal events where groupId = &#63;.
+	* Returns an ordered range of all the cal events that the user has permissions to view where groupId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param start the lower bound of the range of cal events to return
-	* @param end the upper bound of the range of cal events to return (not inclusive)
+	* @param groupId the group ID
+	* @param start the lower bound of the range of cal events
+	* @param end the upper bound of the range of cal events (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching cal events that the user has permission to view
 	* @throws SystemException if a system exception occurred
@@ -656,14 +656,10 @@ public class CalEventUtil {
 	}
 
 	/**
-	* Filters the cal events before and after the current cal event in the ordered set where groupId = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
-	* </p>
+	* Returns the cal events before and after the current cal event in the ordered set of cal events that the user has permission to view where groupId = &#63;.
 	*
 	* @param eventId the primary key of the current cal event
-	* @param groupId the group ID to search with
+	* @param groupId the group ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next cal event
 	* @throws com.liferay.portlet.calendar.NoSuchEventException if a cal event with the primary key could not be found
@@ -680,9 +676,9 @@ public class CalEventUtil {
 	}
 
 	/**
-	* Finds all the cal events where remindBy &ne; &#63;.
+	* Returns all the cal events where remindBy &ne; &#63;.
 	*
-	* @param remindBy the remind by to search with
+	* @param remindBy the remind by
 	* @return the matching cal events
 	* @throws SystemException if a system exception occurred
 	*/
@@ -693,15 +689,15 @@ public class CalEventUtil {
 	}
 
 	/**
-	* Finds a range of all the cal events where remindBy &ne; &#63;.
+	* Returns a range of all the cal events where remindBy &ne; &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param remindBy the remind by to search with
-	* @param start the lower bound of the range of cal events to return
-	* @param end the upper bound of the range of cal events to return (not inclusive)
+	* @param remindBy the remind by
+	* @param start the lower bound of the range of cal events
+	* @param end the upper bound of the range of cal events (not inclusive)
 	* @return the range of matching cal events
 	* @throws SystemException if a system exception occurred
 	*/
@@ -712,15 +708,15 @@ public class CalEventUtil {
 	}
 
 	/**
-	* Finds an ordered range of all the cal events where remindBy &ne; &#63;.
+	* Returns an ordered range of all the cal events where remindBy &ne; &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param remindBy the remind by to search with
-	* @param start the lower bound of the range of cal events to return
-	* @param end the upper bound of the range of cal events to return (not inclusive)
+	* @param remindBy the remind by
+	* @param start the lower bound of the range of cal events
+	* @param end the upper bound of the range of cal events (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching cal events
 	* @throws SystemException if a system exception occurred
@@ -734,13 +730,13 @@ public class CalEventUtil {
 	}
 
 	/**
-	* Finds the first cal event in the ordered set where remindBy &ne; &#63;.
+	* Returns the first cal event in the ordered set where remindBy &ne; &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param remindBy the remind by to search with
+	* @param remindBy the remind by
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching cal event
 	* @throws com.liferay.portlet.calendar.NoSuchEventException if a matching cal event could not be found
@@ -756,13 +752,13 @@ public class CalEventUtil {
 	}
 
 	/**
-	* Finds the last cal event in the ordered set where remindBy &ne; &#63;.
+	* Returns the last cal event in the ordered set where remindBy &ne; &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param remindBy the remind by to search with
+	* @param remindBy the remind by
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching cal event
 	* @throws com.liferay.portlet.calendar.NoSuchEventException if a matching cal event could not be found
@@ -778,14 +774,14 @@ public class CalEventUtil {
 	}
 
 	/**
-	* Finds the cal events before and after the current cal event in the ordered set where remindBy &ne; &#63;.
+	* Returns the cal events before and after the current cal event in the ordered set where remindBy &ne; &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
 	* @param eventId the primary key of the current cal event
-	* @param remindBy the remind by to search with
+	* @param remindBy the remind by
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next cal event
 	* @throws com.liferay.portlet.calendar.NoSuchEventException if a cal event with the primary key could not be found
@@ -802,10 +798,10 @@ public class CalEventUtil {
 	}
 
 	/**
-	* Finds all the cal events where groupId = &#63; and type = &#63;.
+	* Returns all the cal events where groupId = &#63; and type = &#63;.
 	*
-	* @param groupId the group ID to search with
-	* @param type the type to search with
+	* @param groupId the group ID
+	* @param type the type
 	* @return the matching cal events
 	* @throws SystemException if a system exception occurred
 	*/
@@ -816,16 +812,16 @@ public class CalEventUtil {
 	}
 
 	/**
-	* Finds a range of all the cal events where groupId = &#63; and type = &#63;.
+	* Returns a range of all the cal events where groupId = &#63; and type = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param type the type to search with
-	* @param start the lower bound of the range of cal events to return
-	* @param end the upper bound of the range of cal events to return (not inclusive)
+	* @param groupId the group ID
+	* @param type the type
+	* @param start the lower bound of the range of cal events
+	* @param end the upper bound of the range of cal events (not inclusive)
 	* @return the range of matching cal events
 	* @throws SystemException if a system exception occurred
 	*/
@@ -836,16 +832,16 @@ public class CalEventUtil {
 	}
 
 	/**
-	* Finds an ordered range of all the cal events where groupId = &#63; and type = &#63;.
+	* Returns an ordered range of all the cal events where groupId = &#63; and type = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param type the type to search with
-	* @param start the lower bound of the range of cal events to return
-	* @param end the upper bound of the range of cal events to return (not inclusive)
+	* @param groupId the group ID
+	* @param type the type
+	* @param start the lower bound of the range of cal events
+	* @param end the upper bound of the range of cal events (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching cal events
 	* @throws SystemException if a system exception occurred
@@ -859,14 +855,14 @@ public class CalEventUtil {
 	}
 
 	/**
-	* Finds the first cal event in the ordered set where groupId = &#63; and type = &#63;.
+	* Returns the first cal event in the ordered set where groupId = &#63; and type = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param type the type to search with
+	* @param groupId the group ID
+	* @param type the type
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching cal event
 	* @throws com.liferay.portlet.calendar.NoSuchEventException if a matching cal event could not be found
@@ -881,14 +877,14 @@ public class CalEventUtil {
 	}
 
 	/**
-	* Finds the last cal event in the ordered set where groupId = &#63; and type = &#63;.
+	* Returns the last cal event in the ordered set where groupId = &#63; and type = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param type the type to search with
+	* @param groupId the group ID
+	* @param type the type
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching cal event
 	* @throws com.liferay.portlet.calendar.NoSuchEventException if a matching cal event could not be found
@@ -903,15 +899,15 @@ public class CalEventUtil {
 	}
 
 	/**
-	* Finds the cal events before and after the current cal event in the ordered set where groupId = &#63; and type = &#63;.
+	* Returns the cal events before and after the current cal event in the ordered set where groupId = &#63; and type = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
 	* @param eventId the primary key of the current cal event
-	* @param groupId the group ID to search with
-	* @param type the type to search with
+	* @param groupId the group ID
+	* @param type the type
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next cal event
 	* @throws com.liferay.portlet.calendar.NoSuchEventException if a cal event with the primary key could not be found
@@ -928,14 +924,14 @@ public class CalEventUtil {
 	}
 
 	/**
-	* Finds all the cal events where groupId = &#63; and type = any &#63;.
+	* Returns all the cal events where groupId = &#63; and type = any &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param types the types to search with
+	* @param groupId the group ID
+	* @param types the types
 	* @return the matching cal events
 	* @throws SystemException if a system exception occurred
 	*/
@@ -946,16 +942,16 @@ public class CalEventUtil {
 	}
 
 	/**
-	* Finds a range of all the cal events where groupId = &#63; and type = any &#63;.
+	* Returns a range of all the cal events where groupId = &#63; and type = any &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param types the types to search with
-	* @param start the lower bound of the range of cal events to return
-	* @param end the upper bound of the range of cal events to return (not inclusive)
+	* @param groupId the group ID
+	* @param types the types
+	* @param start the lower bound of the range of cal events
+	* @param end the upper bound of the range of cal events (not inclusive)
 	* @return the range of matching cal events
 	* @throws SystemException if a system exception occurred
 	*/
@@ -966,16 +962,16 @@ public class CalEventUtil {
 	}
 
 	/**
-	* Finds an ordered range of all the cal events where groupId = &#63; and type = any &#63;.
+	* Returns an ordered range of all the cal events where groupId = &#63; and type = any &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param types the types to search with
-	* @param start the lower bound of the range of cal events to return
-	* @param end the upper bound of the range of cal events to return (not inclusive)
+	* @param groupId the group ID
+	* @param types the types
+	* @param start the lower bound of the range of cal events
+	* @param end the upper bound of the range of cal events (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching cal events
 	* @throws SystemException if a system exception occurred
@@ -989,10 +985,10 @@ public class CalEventUtil {
 	}
 
 	/**
-	* Filters by the user's permissions and finds all the cal events where groupId = &#63; and type = &#63;.
+	* Returns all the cal events that the user has permission to view where groupId = &#63; and type = &#63;.
 	*
-	* @param groupId the group ID to search with
-	* @param type the type to search with
+	* @param groupId the group ID
+	* @param type the type
 	* @return the matching cal events that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1003,16 +999,16 @@ public class CalEventUtil {
 	}
 
 	/**
-	* Filters by the user's permissions and finds a range of all the cal events where groupId = &#63; and type = &#63;.
+	* Returns a range of all the cal events that the user has permission to view where groupId = &#63; and type = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param type the type to search with
-	* @param start the lower bound of the range of cal events to return
-	* @param end the upper bound of the range of cal events to return (not inclusive)
+	* @param groupId the group ID
+	* @param type the type
+	* @param start the lower bound of the range of cal events
+	* @param end the upper bound of the range of cal events (not inclusive)
 	* @return the range of matching cal events that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1023,16 +1019,16 @@ public class CalEventUtil {
 	}
 
 	/**
-	* Filters by the user's permissions and finds an ordered range of all the cal events where groupId = &#63; and type = &#63;.
+	* Returns an ordered range of all the cal events that the user has permissions to view where groupId = &#63; and type = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param type the type to search with
-	* @param start the lower bound of the range of cal events to return
-	* @param end the upper bound of the range of cal events to return (not inclusive)
+	* @param groupId the group ID
+	* @param type the type
+	* @param start the lower bound of the range of cal events
+	* @param end the upper bound of the range of cal events (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching cal events that the user has permission to view
 	* @throws SystemException if a system exception occurred
@@ -1046,15 +1042,11 @@ public class CalEventUtil {
 	}
 
 	/**
-	* Filters the cal events before and after the current cal event in the ordered set where groupId = &#63; and type = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
-	* </p>
+	* Returns the cal events before and after the current cal event in the ordered set of cal events that the user has permission to view where groupId = &#63; and type = &#63;.
 	*
 	* @param eventId the primary key of the current cal event
-	* @param groupId the group ID to search with
-	* @param type the type to search with
+	* @param groupId the group ID
+	* @param type the type
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next cal event
 	* @throws com.liferay.portlet.calendar.NoSuchEventException if a cal event with the primary key could not be found
@@ -1071,14 +1063,10 @@ public class CalEventUtil {
 	}
 
 	/**
-	* Filters by the user's permissions and finds all the cal events where groupId = &#63; and type = any &#63;.
+	* Returns all the cal events that the user has permission to view where groupId = &#63; and type = any &#63;.
 	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
-	* </p>
-	*
-	* @param groupId the group ID to search with
-	* @param types the types to search with
+	* @param groupId the group ID
+	* @param types the types
 	* @return the matching cal events that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1089,16 +1077,16 @@ public class CalEventUtil {
 	}
 
 	/**
-	* Filters by the user's permissions and finds a range of all the cal events where groupId = &#63; and type = any &#63;.
+	* Returns a range of all the cal events that the user has permission to view where groupId = &#63; and type = any &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param types the types to search with
-	* @param start the lower bound of the range of cal events to return
-	* @param end the upper bound of the range of cal events to return (not inclusive)
+	* @param groupId the group ID
+	* @param types the types
+	* @param start the lower bound of the range of cal events
+	* @param end the upper bound of the range of cal events (not inclusive)
 	* @return the range of matching cal events that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1109,16 +1097,16 @@ public class CalEventUtil {
 	}
 
 	/**
-	* Filters by the user's permissions and finds an ordered range of all the cal events where groupId = &#63; and type = any &#63;.
+	* Returns an ordered range of all the cal events that the user has permission to view where groupId = &#63; and type = any &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param types the types to search with
-	* @param start the lower bound of the range of cal events to return
-	* @param end the upper bound of the range of cal events to return (not inclusive)
+	* @param groupId the group ID
+	* @param types the types
+	* @param start the lower bound of the range of cal events
+	* @param end the upper bound of the range of cal events (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching cal events that the user has permission to view
 	* @throws SystemException if a system exception occurred
@@ -1133,10 +1121,10 @@ public class CalEventUtil {
 	}
 
 	/**
-	* Finds all the cal events where groupId = &#63; and repeating = &#63;.
+	* Returns all the cal events where groupId = &#63; and repeating = &#63;.
 	*
-	* @param groupId the group ID to search with
-	* @param repeating the repeating to search with
+	* @param groupId the group ID
+	* @param repeating the repeating
 	* @return the matching cal events
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1147,16 +1135,16 @@ public class CalEventUtil {
 	}
 
 	/**
-	* Finds a range of all the cal events where groupId = &#63; and repeating = &#63;.
+	* Returns a range of all the cal events where groupId = &#63; and repeating = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param repeating the repeating to search with
-	* @param start the lower bound of the range of cal events to return
-	* @param end the upper bound of the range of cal events to return (not inclusive)
+	* @param groupId the group ID
+	* @param repeating the repeating
+	* @param start the lower bound of the range of cal events
+	* @param end the upper bound of the range of cal events (not inclusive)
 	* @return the range of matching cal events
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1167,16 +1155,16 @@ public class CalEventUtil {
 	}
 
 	/**
-	* Finds an ordered range of all the cal events where groupId = &#63; and repeating = &#63;.
+	* Returns an ordered range of all the cal events where groupId = &#63; and repeating = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param repeating the repeating to search with
-	* @param start the lower bound of the range of cal events to return
-	* @param end the upper bound of the range of cal events to return (not inclusive)
+	* @param groupId the group ID
+	* @param repeating the repeating
+	* @param start the lower bound of the range of cal events
+	* @param end the upper bound of the range of cal events (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching cal events
 	* @throws SystemException if a system exception occurred
@@ -1190,14 +1178,14 @@ public class CalEventUtil {
 	}
 
 	/**
-	* Finds the first cal event in the ordered set where groupId = &#63; and repeating = &#63;.
+	* Returns the first cal event in the ordered set where groupId = &#63; and repeating = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param repeating the repeating to search with
+	* @param groupId the group ID
+	* @param repeating the repeating
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching cal event
 	* @throws com.liferay.portlet.calendar.NoSuchEventException if a matching cal event could not be found
@@ -1213,14 +1201,14 @@ public class CalEventUtil {
 	}
 
 	/**
-	* Finds the last cal event in the ordered set where groupId = &#63; and repeating = &#63;.
+	* Returns the last cal event in the ordered set where groupId = &#63; and repeating = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param repeating the repeating to search with
+	* @param groupId the group ID
+	* @param repeating the repeating
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching cal event
 	* @throws com.liferay.portlet.calendar.NoSuchEventException if a matching cal event could not be found
@@ -1236,15 +1224,15 @@ public class CalEventUtil {
 	}
 
 	/**
-	* Finds the cal events before and after the current cal event in the ordered set where groupId = &#63; and repeating = &#63;.
+	* Returns the cal events before and after the current cal event in the ordered set where groupId = &#63; and repeating = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
 	* @param eventId the primary key of the current cal event
-	* @param groupId the group ID to search with
-	* @param repeating the repeating to search with
+	* @param groupId the group ID
+	* @param repeating the repeating
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next cal event
 	* @throws com.liferay.portlet.calendar.NoSuchEventException if a cal event with the primary key could not be found
@@ -1261,10 +1249,10 @@ public class CalEventUtil {
 	}
 
 	/**
-	* Filters by the user's permissions and finds all the cal events where groupId = &#63; and repeating = &#63;.
+	* Returns all the cal events that the user has permission to view where groupId = &#63; and repeating = &#63;.
 	*
-	* @param groupId the group ID to search with
-	* @param repeating the repeating to search with
+	* @param groupId the group ID
+	* @param repeating the repeating
 	* @return the matching cal events that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1275,16 +1263,16 @@ public class CalEventUtil {
 	}
 
 	/**
-	* Filters by the user's permissions and finds a range of all the cal events where groupId = &#63; and repeating = &#63;.
+	* Returns a range of all the cal events that the user has permission to view where groupId = &#63; and repeating = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param repeating the repeating to search with
-	* @param start the lower bound of the range of cal events to return
-	* @param end the upper bound of the range of cal events to return (not inclusive)
+	* @param groupId the group ID
+	* @param repeating the repeating
+	* @param start the lower bound of the range of cal events
+	* @param end the upper bound of the range of cal events (not inclusive)
 	* @return the range of matching cal events that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1295,16 +1283,16 @@ public class CalEventUtil {
 	}
 
 	/**
-	* Filters by the user's permissions and finds an ordered range of all the cal events where groupId = &#63; and repeating = &#63;.
+	* Returns an ordered range of all the cal events that the user has permissions to view where groupId = &#63; and repeating = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param repeating the repeating to search with
-	* @param start the lower bound of the range of cal events to return
-	* @param end the upper bound of the range of cal events to return (not inclusive)
+	* @param groupId the group ID
+	* @param repeating the repeating
+	* @param start the lower bound of the range of cal events
+	* @param end the upper bound of the range of cal events (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching cal events that the user has permission to view
 	* @throws SystemException if a system exception occurred
@@ -1319,15 +1307,11 @@ public class CalEventUtil {
 	}
 
 	/**
-	* Filters the cal events before and after the current cal event in the ordered set where groupId = &#63; and repeating = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
-	* </p>
+	* Returns the cal events before and after the current cal event in the ordered set of cal events that the user has permission to view where groupId = &#63; and repeating = &#63;.
 	*
 	* @param eventId the primary key of the current cal event
-	* @param groupId the group ID to search with
-	* @param repeating the repeating to search with
+	* @param groupId the group ID
+	* @param repeating the repeating
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next cal event
 	* @throws com.liferay.portlet.calendar.NoSuchEventException if a cal event with the primary key could not be found
@@ -1344,11 +1328,11 @@ public class CalEventUtil {
 	}
 
 	/**
-	* Finds all the cal events where groupId = &#63; and type = &#63; and repeating = &#63;.
+	* Returns all the cal events where groupId = &#63; and type = &#63; and repeating = &#63;.
 	*
-	* @param groupId the group ID to search with
-	* @param type the type to search with
-	* @param repeating the repeating to search with
+	* @param groupId the group ID
+	* @param type the type
+	* @param repeating the repeating
 	* @return the matching cal events
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1359,17 +1343,17 @@ public class CalEventUtil {
 	}
 
 	/**
-	* Finds a range of all the cal events where groupId = &#63; and type = &#63; and repeating = &#63;.
+	* Returns a range of all the cal events where groupId = &#63; and type = &#63; and repeating = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param type the type to search with
-	* @param repeating the repeating to search with
-	* @param start the lower bound of the range of cal events to return
-	* @param end the upper bound of the range of cal events to return (not inclusive)
+	* @param groupId the group ID
+	* @param type the type
+	* @param repeating the repeating
+	* @param start the lower bound of the range of cal events
+	* @param end the upper bound of the range of cal events (not inclusive)
 	* @return the range of matching cal events
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1380,17 +1364,17 @@ public class CalEventUtil {
 	}
 
 	/**
-	* Finds an ordered range of all the cal events where groupId = &#63; and type = &#63; and repeating = &#63;.
+	* Returns an ordered range of all the cal events where groupId = &#63; and type = &#63; and repeating = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param type the type to search with
-	* @param repeating the repeating to search with
-	* @param start the lower bound of the range of cal events to return
-	* @param end the upper bound of the range of cal events to return (not inclusive)
+	* @param groupId the group ID
+	* @param type the type
+	* @param repeating the repeating
+	* @param start the lower bound of the range of cal events
+	* @param end the upper bound of the range of cal events (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching cal events
 	* @throws SystemException if a system exception occurred
@@ -1406,15 +1390,15 @@ public class CalEventUtil {
 	}
 
 	/**
-	* Finds the first cal event in the ordered set where groupId = &#63; and type = &#63; and repeating = &#63;.
+	* Returns the first cal event in the ordered set where groupId = &#63; and type = &#63; and repeating = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param type the type to search with
-	* @param repeating the repeating to search with
+	* @param groupId the group ID
+	* @param type the type
+	* @param repeating the repeating
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching cal event
 	* @throws com.liferay.portlet.calendar.NoSuchEventException if a matching cal event could not be found
@@ -1431,15 +1415,15 @@ public class CalEventUtil {
 	}
 
 	/**
-	* Finds the last cal event in the ordered set where groupId = &#63; and type = &#63; and repeating = &#63;.
+	* Returns the last cal event in the ordered set where groupId = &#63; and type = &#63; and repeating = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param type the type to search with
-	* @param repeating the repeating to search with
+	* @param groupId the group ID
+	* @param type the type
+	* @param repeating the repeating
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching cal event
 	* @throws com.liferay.portlet.calendar.NoSuchEventException if a matching cal event could not be found
@@ -1455,16 +1439,16 @@ public class CalEventUtil {
 	}
 
 	/**
-	* Finds the cal events before and after the current cal event in the ordered set where groupId = &#63; and type = &#63; and repeating = &#63;.
+	* Returns the cal events before and after the current cal event in the ordered set where groupId = &#63; and type = &#63; and repeating = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
 	* @param eventId the primary key of the current cal event
-	* @param groupId the group ID to search with
-	* @param type the type to search with
-	* @param repeating the repeating to search with
+	* @param groupId the group ID
+	* @param type the type
+	* @param repeating the repeating
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next cal event
 	* @throws com.liferay.portlet.calendar.NoSuchEventException if a cal event with the primary key could not be found
@@ -1481,15 +1465,15 @@ public class CalEventUtil {
 	}
 
 	/**
-	* Finds all the cal events where groupId = &#63; and type = any &#63; and repeating = &#63;.
+	* Returns all the cal events where groupId = &#63; and type = any &#63; and repeating = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param types the types to search with
-	* @param repeating the repeating to search with
+	* @param groupId the group ID
+	* @param types the types
+	* @param repeating the repeating
 	* @return the matching cal events
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1500,17 +1484,17 @@ public class CalEventUtil {
 	}
 
 	/**
-	* Finds a range of all the cal events where groupId = &#63; and type = any &#63; and repeating = &#63;.
+	* Returns a range of all the cal events where groupId = &#63; and type = any &#63; and repeating = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param types the types to search with
-	* @param repeating the repeating to search with
-	* @param start the lower bound of the range of cal events to return
-	* @param end the upper bound of the range of cal events to return (not inclusive)
+	* @param groupId the group ID
+	* @param types the types
+	* @param repeating the repeating
+	* @param start the lower bound of the range of cal events
+	* @param end the upper bound of the range of cal events (not inclusive)
 	* @return the range of matching cal events
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1522,17 +1506,17 @@ public class CalEventUtil {
 	}
 
 	/**
-	* Finds an ordered range of all the cal events where groupId = &#63; and type = any &#63; and repeating = &#63;.
+	* Returns an ordered range of all the cal events where groupId = &#63; and type = any &#63; and repeating = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param types the types to search with
-	* @param repeating the repeating to search with
-	* @param start the lower bound of the range of cal events to return
-	* @param end the upper bound of the range of cal events to return (not inclusive)
+	* @param groupId the group ID
+	* @param types the types
+	* @param repeating the repeating
+	* @param start the lower bound of the range of cal events
+	* @param end the upper bound of the range of cal events (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching cal events
 	* @throws SystemException if a system exception occurred
@@ -1548,11 +1532,11 @@ public class CalEventUtil {
 	}
 
 	/**
-	* Filters by the user's permissions and finds all the cal events where groupId = &#63; and type = &#63; and repeating = &#63;.
+	* Returns all the cal events that the user has permission to view where groupId = &#63; and type = &#63; and repeating = &#63;.
 	*
-	* @param groupId the group ID to search with
-	* @param type the type to search with
-	* @param repeating the repeating to search with
+	* @param groupId the group ID
+	* @param type the type
+	* @param repeating the repeating
 	* @return the matching cal events that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1563,17 +1547,17 @@ public class CalEventUtil {
 	}
 
 	/**
-	* Filters by the user's permissions and finds a range of all the cal events where groupId = &#63; and type = &#63; and repeating = &#63;.
+	* Returns a range of all the cal events that the user has permission to view where groupId = &#63; and type = &#63; and repeating = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param type the type to search with
-	* @param repeating the repeating to search with
-	* @param start the lower bound of the range of cal events to return
-	* @param end the upper bound of the range of cal events to return (not inclusive)
+	* @param groupId the group ID
+	* @param type the type
+	* @param repeating the repeating
+	* @param start the lower bound of the range of cal events
+	* @param end the upper bound of the range of cal events (not inclusive)
 	* @return the range of matching cal events that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1585,17 +1569,17 @@ public class CalEventUtil {
 	}
 
 	/**
-	* Filters by the user's permissions and finds an ordered range of all the cal events where groupId = &#63; and type = &#63; and repeating = &#63;.
+	* Returns an ordered range of all the cal events that the user has permissions to view where groupId = &#63; and type = &#63; and repeating = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param type the type to search with
-	* @param repeating the repeating to search with
-	* @param start the lower bound of the range of cal events to return
-	* @param end the upper bound of the range of cal events to return (not inclusive)
+	* @param groupId the group ID
+	* @param type the type
+	* @param repeating the repeating
+	* @param start the lower bound of the range of cal events
+	* @param end the upper bound of the range of cal events (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching cal events that the user has permission to view
 	* @throws SystemException if a system exception occurred
@@ -1611,16 +1595,12 @@ public class CalEventUtil {
 	}
 
 	/**
-	* Filters the cal events before and after the current cal event in the ordered set where groupId = &#63; and type = &#63; and repeating = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
-	* </p>
+	* Returns the cal events before and after the current cal event in the ordered set of cal events that the user has permission to view where groupId = &#63; and type = &#63; and repeating = &#63;.
 	*
 	* @param eventId the primary key of the current cal event
-	* @param groupId the group ID to search with
-	* @param type the type to search with
-	* @param repeating the repeating to search with
+	* @param groupId the group ID
+	* @param type the type
+	* @param repeating the repeating
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next cal event
 	* @throws com.liferay.portlet.calendar.NoSuchEventException if a cal event with the primary key could not be found
@@ -1637,15 +1617,11 @@ public class CalEventUtil {
 	}
 
 	/**
-	* Filters by the user's permissions and finds all the cal events where groupId = &#63; and type = any &#63; and repeating = &#63;.
+	* Returns all the cal events that the user has permission to view where groupId = &#63; and type = any &#63; and repeating = &#63;.
 	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
-	* </p>
-	*
-	* @param groupId the group ID to search with
-	* @param types the types to search with
-	* @param repeating the repeating to search with
+	* @param groupId the group ID
+	* @param types the types
+	* @param repeating the repeating
 	* @return the matching cal events that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1656,17 +1632,17 @@ public class CalEventUtil {
 	}
 
 	/**
-	* Filters by the user's permissions and finds a range of all the cal events where groupId = &#63; and type = any &#63; and repeating = &#63;.
+	* Returns a range of all the cal events that the user has permission to view where groupId = &#63; and type = any &#63; and repeating = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param types the types to search with
-	* @param repeating the repeating to search with
-	* @param start the lower bound of the range of cal events to return
-	* @param end the upper bound of the range of cal events to return (not inclusive)
+	* @param groupId the group ID
+	* @param types the types
+	* @param repeating the repeating
+	* @param start the lower bound of the range of cal events
+	* @param end the upper bound of the range of cal events (not inclusive)
 	* @return the range of matching cal events that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1678,17 +1654,17 @@ public class CalEventUtil {
 	}
 
 	/**
-	* Filters by the user's permissions and finds an ordered range of all the cal events where groupId = &#63; and type = any &#63; and repeating = &#63;.
+	* Returns an ordered range of all the cal events that the user has permission to view where groupId = &#63; and type = any &#63; and repeating = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param types the types to search with
-	* @param repeating the repeating to search with
-	* @param start the lower bound of the range of cal events to return
-	* @param end the upper bound of the range of cal events to return (not inclusive)
+	* @param groupId the group ID
+	* @param types the types
+	* @param repeating the repeating
+	* @param start the lower bound of the range of cal events
+	* @param end the upper bound of the range of cal events (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching cal events that the user has permission to view
 	* @throws SystemException if a system exception occurred
@@ -1704,7 +1680,7 @@ public class CalEventUtil {
 	}
 
 	/**
-	* Finds all the cal events.
+	* Returns all the cal events.
 	*
 	* @return the cal events
 	* @throws SystemException if a system exception occurred
@@ -1715,14 +1691,14 @@ public class CalEventUtil {
 	}
 
 	/**
-	* Finds a range of all the cal events.
+	* Returns a range of all the cal events.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of cal events to return
-	* @param end the upper bound of the range of cal events to return (not inclusive)
+	* @param start the lower bound of the range of cal events
+	* @param end the upper bound of the range of cal events (not inclusive)
 	* @return the range of cal events
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1733,14 +1709,14 @@ public class CalEventUtil {
 	}
 
 	/**
-	* Finds an ordered range of all the cal events.
+	* Returns an ordered range of all the cal events.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of cal events to return
-	* @param end the upper bound of the range of cal events to return (not inclusive)
+	* @param start the lower bound of the range of cal events
+	* @param end the upper bound of the range of cal events (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of cal events
 	* @throws SystemException if a system exception occurred
@@ -1755,7 +1731,7 @@ public class CalEventUtil {
 	/**
 	* Removes all the cal events where uuid = &#63; from the database.
 	*
-	* @param uuid the uuid to search with
+	* @param uuid the uuid
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByUuid(java.lang.String uuid)
@@ -1766,8 +1742,8 @@ public class CalEventUtil {
 	/**
 	* Removes the cal event where uuid = &#63; and groupId = &#63; from the database.
 	*
-	* @param uuid the uuid to search with
-	* @param groupId the group ID to search with
+	* @param uuid the uuid
+	* @param groupId the group ID
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByUUID_G(java.lang.String uuid, long groupId)
@@ -1779,7 +1755,7 @@ public class CalEventUtil {
 	/**
 	* Removes all the cal events where companyId = &#63; from the database.
 	*
-	* @param companyId the company ID to search with
+	* @param companyId the company ID
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByCompanyId(long companyId)
@@ -1790,7 +1766,7 @@ public class CalEventUtil {
 	/**
 	* Removes all the cal events where groupId = &#63; from the database.
 	*
-	* @param groupId the group ID to search with
+	* @param groupId the group ID
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByGroupId(long groupId)
@@ -1801,7 +1777,7 @@ public class CalEventUtil {
 	/**
 	* Removes all the cal events where remindBy &ne; &#63; from the database.
 	*
-	* @param remindBy the remind by to search with
+	* @param remindBy the remind by
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByNotRemindBy(int remindBy)
@@ -1812,8 +1788,8 @@ public class CalEventUtil {
 	/**
 	* Removes all the cal events where groupId = &#63; and type = &#63; from the database.
 	*
-	* @param groupId the group ID to search with
-	* @param type the type to search with
+	* @param groupId the group ID
+	* @param type the type
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByG_T(long groupId, java.lang.String type)
@@ -1824,8 +1800,8 @@ public class CalEventUtil {
 	/**
 	* Removes all the cal events where groupId = &#63; and repeating = &#63; from the database.
 	*
-	* @param groupId the group ID to search with
-	* @param repeating the repeating to search with
+	* @param groupId the group ID
+	* @param repeating the repeating
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByG_R(long groupId, boolean repeating)
@@ -1836,9 +1812,9 @@ public class CalEventUtil {
 	/**
 	* Removes all the cal events where groupId = &#63; and type = &#63; and repeating = &#63; from the database.
 	*
-	* @param groupId the group ID to search with
-	* @param type the type to search with
-	* @param repeating the repeating to search with
+	* @param groupId the group ID
+	* @param type the type
+	* @param repeating the repeating
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByG_T_R(long groupId, java.lang.String type,
@@ -1858,9 +1834,9 @@ public class CalEventUtil {
 	}
 
 	/**
-	* Counts all the cal events where uuid = &#63;.
+	* Returns the number of cal events where uuid = &#63;.
 	*
-	* @param uuid the uuid to search with
+	* @param uuid the uuid
 	* @return the number of matching cal events
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1870,10 +1846,10 @@ public class CalEventUtil {
 	}
 
 	/**
-	* Counts all the cal events where uuid = &#63; and groupId = &#63;.
+	* Returns the number of cal events where uuid = &#63; and groupId = &#63;.
 	*
-	* @param uuid the uuid to search with
-	* @param groupId the group ID to search with
+	* @param uuid the uuid
+	* @param groupId the group ID
 	* @return the number of matching cal events
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1883,9 +1859,9 @@ public class CalEventUtil {
 	}
 
 	/**
-	* Counts all the cal events where companyId = &#63;.
+	* Returns the number of cal events where companyId = &#63;.
 	*
-	* @param companyId the company ID to search with
+	* @param companyId the company ID
 	* @return the number of matching cal events
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1895,9 +1871,9 @@ public class CalEventUtil {
 	}
 
 	/**
-	* Counts all the cal events where groupId = &#63;.
+	* Returns the number of cal events where groupId = &#63;.
 	*
-	* @param groupId the group ID to search with
+	* @param groupId the group ID
 	* @return the number of matching cal events
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1907,9 +1883,9 @@ public class CalEventUtil {
 	}
 
 	/**
-	* Filters by the user's permissions and counts all the cal events where groupId = &#63;.
+	* Returns the number of cal events that the user has permission to view where groupId = &#63;.
 	*
-	* @param groupId the group ID to search with
+	* @param groupId the group ID
 	* @return the number of matching cal events that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1919,9 +1895,9 @@ public class CalEventUtil {
 	}
 
 	/**
-	* Counts all the cal events where remindBy &ne; &#63;.
+	* Returns the number of cal events where remindBy &ne; &#63;.
 	*
-	* @param remindBy the remind by to search with
+	* @param remindBy the remind by
 	* @return the number of matching cal events
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1931,10 +1907,10 @@ public class CalEventUtil {
 	}
 
 	/**
-	* Counts all the cal events where groupId = &#63; and type = &#63;.
+	* Returns the number of cal events where groupId = &#63; and type = &#63;.
 	*
-	* @param groupId the group ID to search with
-	* @param type the type to search with
+	* @param groupId the group ID
+	* @param type the type
 	* @return the number of matching cal events
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1944,10 +1920,10 @@ public class CalEventUtil {
 	}
 
 	/**
-	* Counts all the cal events where groupId = &#63; and type = any &#63;.
+	* Returns the number of cal events where groupId = &#63; and type = any &#63;.
 	*
-	* @param groupId the group ID to search with
-	* @param types the types to search with
+	* @param groupId the group ID
+	* @param types the types
 	* @return the number of matching cal events
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1957,10 +1933,10 @@ public class CalEventUtil {
 	}
 
 	/**
-	* Filters by the user's permissions and counts all the cal events where groupId = &#63; and type = &#63;.
+	* Returns the number of cal events that the user has permission to view where groupId = &#63; and type = &#63;.
 	*
-	* @param groupId the group ID to search with
-	* @param type the type to search with
+	* @param groupId the group ID
+	* @param type the type
 	* @return the number of matching cal events that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1970,10 +1946,10 @@ public class CalEventUtil {
 	}
 
 	/**
-	* Filters by the user's permissions and counts all the cal events where groupId = &#63; and type = any &#63;.
+	* Returns the number of cal events that the user has permission to view where groupId = &#63; and type = any &#63;.
 	*
-	* @param groupId the group ID to search with
-	* @param types the types to search with
+	* @param groupId the group ID
+	* @param types the types
 	* @return the number of matching cal events that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1983,10 +1959,10 @@ public class CalEventUtil {
 	}
 
 	/**
-	* Counts all the cal events where groupId = &#63; and repeating = &#63;.
+	* Returns the number of cal events where groupId = &#63; and repeating = &#63;.
 	*
-	* @param groupId the group ID to search with
-	* @param repeating the repeating to search with
+	* @param groupId the group ID
+	* @param repeating the repeating
 	* @return the number of matching cal events
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1996,10 +1972,10 @@ public class CalEventUtil {
 	}
 
 	/**
-	* Filters by the user's permissions and counts all the cal events where groupId = &#63; and repeating = &#63;.
+	* Returns the number of cal events that the user has permission to view where groupId = &#63; and repeating = &#63;.
 	*
-	* @param groupId the group ID to search with
-	* @param repeating the repeating to search with
+	* @param groupId the group ID
+	* @param repeating the repeating
 	* @return the number of matching cal events that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -2009,11 +1985,11 @@ public class CalEventUtil {
 	}
 
 	/**
-	* Counts all the cal events where groupId = &#63; and type = &#63; and repeating = &#63;.
+	* Returns the number of cal events where groupId = &#63; and type = &#63; and repeating = &#63;.
 	*
-	* @param groupId the group ID to search with
-	* @param type the type to search with
-	* @param repeating the repeating to search with
+	* @param groupId the group ID
+	* @param type the type
+	* @param repeating the repeating
 	* @return the number of matching cal events
 	* @throws SystemException if a system exception occurred
 	*/
@@ -2024,11 +2000,11 @@ public class CalEventUtil {
 	}
 
 	/**
-	* Counts all the cal events where groupId = &#63; and type = any &#63; and repeating = &#63;.
+	* Returns the number of cal events where groupId = &#63; and type = any &#63; and repeating = &#63;.
 	*
-	* @param groupId the group ID to search with
-	* @param types the types to search with
-	* @param repeating the repeating to search with
+	* @param groupId the group ID
+	* @param types the types
+	* @param repeating the repeating
 	* @return the number of matching cal events
 	* @throws SystemException if a system exception occurred
 	*/
@@ -2039,11 +2015,11 @@ public class CalEventUtil {
 	}
 
 	/**
-	* Filters by the user's permissions and counts all the cal events where groupId = &#63; and type = &#63; and repeating = &#63;.
+	* Returns the number of cal events that the user has permission to view where groupId = &#63; and type = &#63; and repeating = &#63;.
 	*
-	* @param groupId the group ID to search with
-	* @param type the type to search with
-	* @param repeating the repeating to search with
+	* @param groupId the group ID
+	* @param type the type
+	* @param repeating the repeating
 	* @return the number of matching cal events that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -2054,11 +2030,11 @@ public class CalEventUtil {
 	}
 
 	/**
-	* Filters by the user's permissions and counts all the cal events where groupId = &#63; and type = any &#63; and repeating = &#63;.
+	* Returns the number of cal events that the user has permission to view where groupId = &#63; and type = any &#63; and repeating = &#63;.
 	*
-	* @param groupId the group ID to search with
-	* @param types the types to search with
-	* @param repeating the repeating to search with
+	* @param groupId the group ID
+	* @param types the types
+	* @param repeating the repeating
 	* @return the number of matching cal events that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -2069,7 +2045,7 @@ public class CalEventUtil {
 	}
 
 	/**
-	* Counts all the cal events.
+	* Returns the number of cal events.
 	*
 	* @return the number of cal events
 	* @throws SystemException if a system exception occurred

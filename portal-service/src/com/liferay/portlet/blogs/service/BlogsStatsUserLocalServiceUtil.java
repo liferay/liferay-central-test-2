@@ -41,7 +41,7 @@ public class BlogsStatsUserLocalServiceUtil {
 	/**
 	* Adds the blogs stats user to the database. Also notifies the appropriate model listeners.
 	*
-	* @param blogsStatsUser the blogs stats user to add
+	* @param blogsStatsUser the blogs stats user
 	* @return the blogs stats user that was added
 	* @throws SystemException if a system exception occurred
 	*/
@@ -65,7 +65,7 @@ public class BlogsStatsUserLocalServiceUtil {
 	/**
 	* Deletes the blogs stats user with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param statsUserId the primary key of the blogs stats user to delete
+	* @param statsUserId the primary key of the blogs stats user
 	* @throws PortalException if a blogs stats user with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -78,7 +78,7 @@ public class BlogsStatsUserLocalServiceUtil {
 	/**
 	* Deletes the blogs stats user from the database. Also notifies the appropriate model listeners.
 	*
-	* @param blogsStatsUser the blogs stats user to delete
+	* @param blogsStatsUser the blogs stats user
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void deleteBlogsStatsUser(
@@ -90,7 +90,7 @@ public class BlogsStatsUserLocalServiceUtil {
 	/**
 	* Performs a dynamic query on the database and returns the matching rows.
 	*
-	* @param dynamicQuery the dynamic query to search with
+	* @param dynamicQuery the dynamic query
 	* @return the matching rows
 	* @throws SystemException if a system exception occurred
 	*/
@@ -108,9 +108,9 @@ public class BlogsStatsUserLocalServiceUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param dynamicQuery the dynamic query to search with
-	* @param start the lower bound of the range of model instances to return
-	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param dynamicQuery the dynamic query
+	* @param start the lower bound of the range of model instances
+	* @param end the upper bound of the range of model instances (not inclusive)
 	* @return the range of matching rows
 	* @throws SystemException if a system exception occurred
 	*/
@@ -128,9 +128,9 @@ public class BlogsStatsUserLocalServiceUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param dynamicQuery the dynamic query to search with
-	* @param start the lower bound of the range of model instances to return
-	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param dynamicQuery the dynamic query
+	* @param start the lower bound of the range of model instances
+	* @param end the upper bound of the range of model instances (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching rows
 	* @throws SystemException if a system exception occurred
@@ -146,9 +146,9 @@ public class BlogsStatsUserLocalServiceUtil {
 	}
 
 	/**
-	* Counts the number of rows that match the dynamic query.
+	* Returns the number of rows that match the dynamic query.
 	*
-	* @param dynamicQuery the dynamic query to search with
+	* @param dynamicQuery the dynamic query
 	* @return the number of rows that match the dynamic query
 	* @throws SystemException if a system exception occurred
 	*/
@@ -159,9 +159,9 @@ public class BlogsStatsUserLocalServiceUtil {
 	}
 
 	/**
-	* Gets the blogs stats user with the primary key.
+	* Returns the blogs stats user with the primary key.
 	*
-	* @param statsUserId the primary key of the blogs stats user to get
+	* @param statsUserId the primary key of the blogs stats user
 	* @return the blogs stats user
 	* @throws PortalException if a blogs stats user with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -174,14 +174,14 @@ public class BlogsStatsUserLocalServiceUtil {
 	}
 
 	/**
-	* Gets a range of all the blogs stats users.
+	* Returns a range of all the blogs stats users.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of blogs stats users to return
-	* @param end the upper bound of the range of blogs stats users to return (not inclusive)
+	* @param start the lower bound of the range of blogs stats users
+	* @param end the upper bound of the range of blogs stats users (not inclusive)
 	* @return the range of blogs stats users
 	* @throws SystemException if a system exception occurred
 	*/
@@ -192,7 +192,7 @@ public class BlogsStatsUserLocalServiceUtil {
 	}
 
 	/**
-	* Gets the number of blogs stats users.
+	* Returns the number of blogs stats users.
 	*
 	* @return the number of blogs stats users
 	* @throws SystemException if a system exception occurred
@@ -205,7 +205,7 @@ public class BlogsStatsUserLocalServiceUtil {
 	/**
 	* Updates the blogs stats user in the database. Also notifies the appropriate model listeners.
 	*
-	* @param blogsStatsUser the blogs stats user to update
+	* @param blogsStatsUser the blogs stats user
 	* @return the blogs stats user that was updated
 	* @throws SystemException if a system exception occurred
 	*/
@@ -218,7 +218,7 @@ public class BlogsStatsUserLocalServiceUtil {
 	/**
 	* Updates the blogs stats user in the database. Also notifies the appropriate model listeners.
 	*
-	* @param blogsStatsUser the blogs stats user to update
+	* @param blogsStatsUser the blogs stats user
 	* @param merge whether to merge the blogs stats user with the current session. See {@link com.liferay.portal.service.persistence.BatchSession#update(com.liferay.portal.kernel.dao.orm.Session, com.liferay.portal.model.BaseModel, boolean)} for an explanation.
 	* @return the blogs stats user that was updated
 	* @throws SystemException if a system exception occurred
@@ -231,7 +231,7 @@ public class BlogsStatsUserLocalServiceUtil {
 	}
 
 	/**
-	* Gets the Spring bean ID for this bean.
+	* Returns the Spring bean ID for this bean.
 	*
 	* @return the Spring bean ID for this bean
 	*/

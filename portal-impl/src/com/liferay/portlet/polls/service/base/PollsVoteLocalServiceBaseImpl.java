@@ -71,7 +71,7 @@ public abstract class PollsVoteLocalServiceBaseImpl
 	/**
 	 * Adds the polls vote to the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param pollsVote the polls vote to add
+	 * @param pollsVote the polls vote
 	 * @return the polls vote that was added
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -95,7 +95,7 @@ public abstract class PollsVoteLocalServiceBaseImpl
 	/**
 	 * Deletes the polls vote with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param voteId the primary key of the polls vote to delete
+	 * @param voteId the primary key of the polls vote
 	 * @throws PortalException if a polls vote with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -107,7 +107,7 @@ public abstract class PollsVoteLocalServiceBaseImpl
 	/**
 	 * Deletes the polls vote from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param pollsVote the polls vote to delete
+	 * @param pollsVote the polls vote
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void deletePollsVote(PollsVote pollsVote) throws SystemException {
@@ -117,7 +117,7 @@ public abstract class PollsVoteLocalServiceBaseImpl
 	/**
 	 * Performs a dynamic query on the database and returns the matching rows.
 	 *
-	 * @param dynamicQuery the dynamic query to search with
+	 * @param dynamicQuery the dynamic query
 	 * @return the matching rows
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -134,9 +134,9 @@ public abstract class PollsVoteLocalServiceBaseImpl
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param dynamicQuery the dynamic query to search with
-	 * @param start the lower bound of the range of model instances to return
-	 * @param end the upper bound of the range of model instances to return (not inclusive)
+	 * @param dynamicQuery the dynamic query
+	 * @param start the lower bound of the range of model instances
+	 * @param end the upper bound of the range of model instances (not inclusive)
 	 * @return the range of matching rows
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -154,9 +154,9 @@ public abstract class PollsVoteLocalServiceBaseImpl
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param dynamicQuery the dynamic query to search with
-	 * @param start the lower bound of the range of model instances to return
-	 * @param end the upper bound of the range of model instances to return (not inclusive)
+	 * @param dynamicQuery the dynamic query
+	 * @param start the lower bound of the range of model instances
+	 * @param end the upper bound of the range of model instances (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching rows
 	 * @throws SystemException if a system exception occurred
@@ -169,9 +169,9 @@ public abstract class PollsVoteLocalServiceBaseImpl
 	}
 
 	/**
-	 * Counts the number of rows that match the dynamic query.
+	 * Returns the number of rows that match the dynamic query.
 	 *
-	 * @param dynamicQuery the dynamic query to search with
+	 * @param dynamicQuery the dynamic query
 	 * @return the number of rows that match the dynamic query
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -181,9 +181,9 @@ public abstract class PollsVoteLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the polls vote with the primary key.
+	 * Returns the polls vote with the primary key.
 	 *
-	 * @param voteId the primary key of the polls vote to get
+	 * @param voteId the primary key of the polls vote
 	 * @return the polls vote
 	 * @throws PortalException if a polls vote with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -194,14 +194,14 @@ public abstract class PollsVoteLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets a range of all the polls votes.
+	 * Returns a range of all the polls votes.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param start the lower bound of the range of polls votes to return
-	 * @param end the upper bound of the range of polls votes to return (not inclusive)
+	 * @param start the lower bound of the range of polls votes
+	 * @param end the upper bound of the range of polls votes (not inclusive)
 	 * @return the range of polls votes
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -211,7 +211,7 @@ public abstract class PollsVoteLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the number of polls votes.
+	 * Returns the number of polls votes.
 	 *
 	 * @return the number of polls votes
 	 * @throws SystemException if a system exception occurred
@@ -223,7 +223,7 @@ public abstract class PollsVoteLocalServiceBaseImpl
 	/**
 	 * Updates the polls vote in the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param pollsVote the polls vote to update
+	 * @param pollsVote the polls vote
 	 * @return the polls vote that was updated
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -237,7 +237,7 @@ public abstract class PollsVoteLocalServiceBaseImpl
 	/**
 	 * Updates the polls vote in the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param pollsVote the polls vote to update
+	 * @param pollsVote the polls vote
 	 * @param merge whether to merge the polls vote with the current session. See {@link com.liferay.portal.service.persistence.BatchSession#update(com.liferay.portal.kernel.dao.orm.Session, com.liferay.portal.model.BaseModel, boolean)} for an explanation.
 	 * @return the polls vote that was updated
 	 * @throws SystemException if a system exception occurred
@@ -250,7 +250,7 @@ public abstract class PollsVoteLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the polls choice local service.
+	 * Returns the polls choice local service.
 	 *
 	 * @return the polls choice local service
 	 */
@@ -269,7 +269,7 @@ public abstract class PollsVoteLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the polls choice persistence.
+	 * Returns the polls choice persistence.
 	 *
 	 * @return the polls choice persistence
 	 */
@@ -288,7 +288,7 @@ public abstract class PollsVoteLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the polls choice finder.
+	 * Returns the polls choice finder.
 	 *
 	 * @return the polls choice finder
 	 */
@@ -306,7 +306,7 @@ public abstract class PollsVoteLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the polls question local service.
+	 * Returns the polls question local service.
 	 *
 	 * @return the polls question local service
 	 */
@@ -325,7 +325,7 @@ public abstract class PollsVoteLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the polls question remote service.
+	 * Returns the polls question remote service.
 	 *
 	 * @return the polls question remote service
 	 */
@@ -344,7 +344,7 @@ public abstract class PollsVoteLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the polls question persistence.
+	 * Returns the polls question persistence.
 	 *
 	 * @return the polls question persistence
 	 */
@@ -363,7 +363,7 @@ public abstract class PollsVoteLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the polls vote local service.
+	 * Returns the polls vote local service.
 	 *
 	 * @return the polls vote local service
 	 */
@@ -382,7 +382,7 @@ public abstract class PollsVoteLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the polls vote remote service.
+	 * Returns the polls vote remote service.
 	 *
 	 * @return the polls vote remote service
 	 */
@@ -400,7 +400,7 @@ public abstract class PollsVoteLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the polls vote persistence.
+	 * Returns the polls vote persistence.
 	 *
 	 * @return the polls vote persistence
 	 */
@@ -419,7 +419,7 @@ public abstract class PollsVoteLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the counter local service.
+	 * Returns the counter local service.
 	 *
 	 * @return the counter local service
 	 */
@@ -437,7 +437,7 @@ public abstract class PollsVoteLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the resource local service.
+	 * Returns the resource local service.
 	 *
 	 * @return the resource local service
 	 */
@@ -456,7 +456,7 @@ public abstract class PollsVoteLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the resource remote service.
+	 * Returns the resource remote service.
 	 *
 	 * @return the resource remote service
 	 */
@@ -474,7 +474,7 @@ public abstract class PollsVoteLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the resource persistence.
+	 * Returns the resource persistence.
 	 *
 	 * @return the resource persistence
 	 */
@@ -492,7 +492,7 @@ public abstract class PollsVoteLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the resource finder.
+	 * Returns the resource finder.
 	 *
 	 * @return the resource finder
 	 */
@@ -510,7 +510,7 @@ public abstract class PollsVoteLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the user local service.
+	 * Returns the user local service.
 	 *
 	 * @return the user local service
 	 */
@@ -528,7 +528,7 @@ public abstract class PollsVoteLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the user remote service.
+	 * Returns the user remote service.
 	 *
 	 * @return the user remote service
 	 */
@@ -546,7 +546,7 @@ public abstract class PollsVoteLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the user persistence.
+	 * Returns the user persistence.
 	 *
 	 * @return the user persistence
 	 */
@@ -564,7 +564,7 @@ public abstract class PollsVoteLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the user finder.
+	 * Returns the user finder.
 	 *
 	 * @return the user finder
 	 */
@@ -582,7 +582,7 @@ public abstract class PollsVoteLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the Spring bean ID for this bean.
+	 * Returns the Spring bean ID for this bean.
 	 *
 	 * @return the Spring bean ID for this bean
 	 */
@@ -602,7 +602,7 @@ public abstract class PollsVoteLocalServiceBaseImpl
 	/**
 	 * Performs an SQL query.
 	 *
-	 * @param sql the sql query to perform
+	 * @param sql the sql query
 	 */
 	protected void runSQL(String sql) throws SystemException {
 		try {

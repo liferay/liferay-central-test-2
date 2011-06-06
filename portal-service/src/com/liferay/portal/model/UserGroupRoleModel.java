@@ -43,21 +43,21 @@ public interface UserGroupRoleModel extends BaseModel<UserGroupRole> {
 	 */
 
 	/**
-	 * Gets the primary key of this user group role.
+	 * Returns the primary key of this user group role.
 	 *
 	 * @return the primary key of this user group role
 	 */
 	public UserGroupRolePK getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this user group role
+	 * Sets the primary key of this user group role.
 	 *
 	 * @param primaryKey the primary key of this user group role
 	 */
 	public void setPrimaryKey(UserGroupRolePK primaryKey);
 
 	/**
-	 * Gets the user ID of this user group role.
+	 * Returns the user ID of this user group role.
 	 *
 	 * @return the user ID of this user group role
 	 */
@@ -71,7 +71,7 @@ public interface UserGroupRoleModel extends BaseModel<UserGroupRole> {
 	public void setUserId(long userId);
 
 	/**
-	 * Gets the user uuid of this user group role.
+	 * Returns the user uuid of this user group role.
 	 *
 	 * @return the user uuid of this user group role
 	 * @throws SystemException if a system exception occurred
@@ -86,7 +86,7 @@ public interface UserGroupRoleModel extends BaseModel<UserGroupRole> {
 	public void setUserUuid(String userUuid);
 
 	/**
-	 * Gets the group ID of this user group role.
+	 * Returns the group ID of this user group role.
 	 *
 	 * @return the group ID of this user group role
 	 */
@@ -100,7 +100,7 @@ public interface UserGroupRoleModel extends BaseModel<UserGroupRole> {
 	public void setGroupId(long groupId);
 
 	/**
-	 * Gets the role ID of this user group role.
+	 * Returns the role ID of this user group role.
 	 *
 	 * @return the role ID of this user group role
 	 */

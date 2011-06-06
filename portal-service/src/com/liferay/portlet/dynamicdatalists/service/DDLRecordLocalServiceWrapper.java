@@ -32,7 +32,7 @@ public class DDLRecordLocalServiceWrapper implements DDLRecordLocalService {
 	/**
 	* Adds the d d l record to the database. Also notifies the appropriate model listeners.
 	*
-	* @param ddlRecord the d d l record to add
+	* @param ddlRecord the d d l record
 	* @return the d d l record that was added
 	* @throws SystemException if a system exception occurred
 	*/
@@ -56,7 +56,7 @@ public class DDLRecordLocalServiceWrapper implements DDLRecordLocalService {
 	/**
 	* Deletes the d d l record with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param recordId the primary key of the d d l record to delete
+	* @param recordId the primary key of the d d l record
 	* @throws PortalException if a d d l record with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -69,7 +69,7 @@ public class DDLRecordLocalServiceWrapper implements DDLRecordLocalService {
 	/**
 	* Deletes the d d l record from the database. Also notifies the appropriate model listeners.
 	*
-	* @param ddlRecord the d d l record to delete
+	* @param ddlRecord the d d l record
 	* @throws SystemException if a system exception occurred
 	*/
 	public void deleteDDLRecord(
@@ -81,7 +81,7 @@ public class DDLRecordLocalServiceWrapper implements DDLRecordLocalService {
 	/**
 	* Performs a dynamic query on the database and returns the matching rows.
 	*
-	* @param dynamicQuery the dynamic query to search with
+	* @param dynamicQuery the dynamic query
 	* @return the matching rows
 	* @throws SystemException if a system exception occurred
 	*/
@@ -99,9 +99,9 @@ public class DDLRecordLocalServiceWrapper implements DDLRecordLocalService {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param dynamicQuery the dynamic query to search with
-	* @param start the lower bound of the range of model instances to return
-	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param dynamicQuery the dynamic query
+	* @param start the lower bound of the range of model instances
+	* @param end the upper bound of the range of model instances (not inclusive)
 	* @return the range of matching rows
 	* @throws SystemException if a system exception occurred
 	*/
@@ -119,9 +119,9 @@ public class DDLRecordLocalServiceWrapper implements DDLRecordLocalService {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param dynamicQuery the dynamic query to search with
-	* @param start the lower bound of the range of model instances to return
-	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param dynamicQuery the dynamic query
+	* @param start the lower bound of the range of model instances
+	* @param end the upper bound of the range of model instances (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching rows
 	* @throws SystemException if a system exception occurred
@@ -137,9 +137,9 @@ public class DDLRecordLocalServiceWrapper implements DDLRecordLocalService {
 	}
 
 	/**
-	* Counts the number of rows that match the dynamic query.
+	* Returns the number of rows that match the dynamic query.
 	*
-	* @param dynamicQuery the dynamic query to search with
+	* @param dynamicQuery the dynamic query
 	* @return the number of rows that match the dynamic query
 	* @throws SystemException if a system exception occurred
 	*/
@@ -150,9 +150,9 @@ public class DDLRecordLocalServiceWrapper implements DDLRecordLocalService {
 	}
 
 	/**
-	* Gets the d d l record with the primary key.
+	* Returns the d d l record with the primary key.
 	*
-	* @param recordId the primary key of the d d l record to get
+	* @param recordId the primary key of the d d l record
 	* @return the d d l record
 	* @throws PortalException if a d d l record with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -165,12 +165,12 @@ public class DDLRecordLocalServiceWrapper implements DDLRecordLocalService {
 	}
 
 	/**
-	* Gets the d d l record with the UUID and group id.
+	* Returns the d d l record with the UUID in the group.
 	*
-	* @param uuid the UUID of d d l record to get
-	* @param groupId the group id of the d d l record to get
+	* @param uuid the UUID of d d l record
+	* @param groupId the group id of the d d l record
 	* @return the d d l record
-	* @throws PortalException if a d d l record with the UUID and group id could not be found
+	* @throws PortalException if a d d l record with the UUID in the group could not be found
 	* @throws SystemException if a system exception occurred
 	*/
 	public com.liferay.portlet.dynamicdatalists.model.DDLRecord getDDLRecordByUuidAndGroupId(
@@ -181,14 +181,14 @@ public class DDLRecordLocalServiceWrapper implements DDLRecordLocalService {
 	}
 
 	/**
-	* Gets a range of all the d d l records.
+	* Returns a range of all the d d l records.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of d d l records to return
-	* @param end the upper bound of the range of d d l records to return (not inclusive)
+	* @param start the lower bound of the range of d d l records
+	* @param end the upper bound of the range of d d l records (not inclusive)
 	* @return the range of d d l records
 	* @throws SystemException if a system exception occurred
 	*/
@@ -199,7 +199,7 @@ public class DDLRecordLocalServiceWrapper implements DDLRecordLocalService {
 	}
 
 	/**
-	* Gets the number of d d l records.
+	* Returns the number of d d l records.
 	*
 	* @return the number of d d l records
 	* @throws SystemException if a system exception occurred
@@ -212,7 +212,7 @@ public class DDLRecordLocalServiceWrapper implements DDLRecordLocalService {
 	/**
 	* Updates the d d l record in the database. Also notifies the appropriate model listeners.
 	*
-	* @param ddlRecord the d d l record to update
+	* @param ddlRecord the d d l record
 	* @return the d d l record that was updated
 	* @throws SystemException if a system exception occurred
 	*/
@@ -225,7 +225,7 @@ public class DDLRecordLocalServiceWrapper implements DDLRecordLocalService {
 	/**
 	* Updates the d d l record in the database. Also notifies the appropriate model listeners.
 	*
-	* @param ddlRecord the d d l record to update
+	* @param ddlRecord the d d l record
 	* @param merge whether to merge the d d l record with the current session. See {@link com.liferay.portal.service.persistence.BatchSession#update(com.liferay.portal.kernel.dao.orm.Session, com.liferay.portal.model.BaseModel, boolean)} for an explanation.
 	* @return the d d l record that was updated
 	* @throws SystemException if a system exception occurred
@@ -238,7 +238,7 @@ public class DDLRecordLocalServiceWrapper implements DDLRecordLocalService {
 	}
 
 	/**
-	* Gets the Spring bean ID for this bean.
+	* Returns the Spring bean ID for this bean.
 	*
 	* @return the Spring bean ID for this bean
 	*/

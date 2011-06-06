@@ -37,7 +37,7 @@ public class PhoneWrapper implements Phone {
 	}
 
 	/**
-	* Gets the primary key of this phone.
+	* Returns the primary key of this phone.
 	*
 	* @return the primary key of this phone
 	*/
@@ -46,7 +46,7 @@ public class PhoneWrapper implements Phone {
 	}
 
 	/**
-	* Sets the primary key of this phone
+	* Sets the primary key of this phone.
 	*
 	* @param primaryKey the primary key of this phone
 	*/
@@ -55,7 +55,7 @@ public class PhoneWrapper implements Phone {
 	}
 
 	/**
-	* Gets the phone ID of this phone.
+	* Returns the phone ID of this phone.
 	*
 	* @return the phone ID of this phone
 	*/
@@ -73,7 +73,7 @@ public class PhoneWrapper implements Phone {
 	}
 
 	/**
-	* Gets the company ID of this phone.
+	* Returns the company ID of this phone.
 	*
 	* @return the company ID of this phone
 	*/
@@ -91,7 +91,7 @@ public class PhoneWrapper implements Phone {
 	}
 
 	/**
-	* Gets the user ID of this phone.
+	* Returns the user ID of this phone.
 	*
 	* @return the user ID of this phone
 	*/
@@ -109,7 +109,7 @@ public class PhoneWrapper implements Phone {
 	}
 
 	/**
-	* Gets the user uuid of this phone.
+	* Returns the user uuid of this phone.
 	*
 	* @return the user uuid of this phone
 	* @throws SystemException if a system exception occurred
@@ -129,7 +129,7 @@ public class PhoneWrapper implements Phone {
 	}
 
 	/**
-	* Gets the user name of this phone.
+	* Returns the user name of this phone.
 	*
 	* @return the user name of this phone
 	*/
@@ -147,7 +147,7 @@ public class PhoneWrapper implements Phone {
 	}
 
 	/**
-	* Gets the create date of this phone.
+	* Returns the create date of this phone.
 	*
 	* @return the create date of this phone
 	*/
@@ -165,7 +165,7 @@ public class PhoneWrapper implements Phone {
 	}
 
 	/**
-	* Gets the modified date of this phone.
+	* Returns the modified date of this phone.
 	*
 	* @return the modified date of this phone
 	*/
@@ -183,16 +183,16 @@ public class PhoneWrapper implements Phone {
 	}
 
 	/**
-	* Gets the class name of the model instance this phone is polymorphically associated with.
+	* Returns the fully qualified class name of this phone.
 	*
-	* @return the class name of the model instance this phone is polymorphically associated with
+	* @return the fully qualified class name of this phone
 	*/
 	public java.lang.String getClassName() {
 		return _phone.getClassName();
 	}
 
 	/**
-	* Gets the class name ID of this phone.
+	* Returns the class name ID of this phone.
 	*
 	* @return the class name ID of this phone
 	*/
@@ -210,7 +210,7 @@ public class PhoneWrapper implements Phone {
 	}
 
 	/**
-	* Gets the class p k of this phone.
+	* Returns the class p k of this phone.
 	*
 	* @return the class p k of this phone
 	*/
@@ -228,7 +228,7 @@ public class PhoneWrapper implements Phone {
 	}
 
 	/**
-	* Gets the number of this phone.
+	* Returns the number of this phone.
 	*
 	* @return the number of this phone
 	*/
@@ -246,7 +246,7 @@ public class PhoneWrapper implements Phone {
 	}
 
 	/**
-	* Gets the extension of this phone.
+	* Returns the extension of this phone.
 	*
 	* @return the extension of this phone
 	*/
@@ -264,7 +264,7 @@ public class PhoneWrapper implements Phone {
 	}
 
 	/**
-	* Gets the type ID of this phone.
+	* Returns the type ID of this phone.
 	*
 	* @return the type ID of this phone
 	*/
@@ -282,7 +282,7 @@ public class PhoneWrapper implements Phone {
 	}
 
 	/**
-	* Gets the primary of this phone.
+	* Returns the primary of this phone.
 	*
 	* @return the primary of this phone
 	*/

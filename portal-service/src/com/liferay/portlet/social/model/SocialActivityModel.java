@@ -46,21 +46,21 @@ public interface SocialActivityModel extends AttachedModel,
 	 */
 
 	/**
-	 * Gets the primary key of this social activity.
+	 * Returns the primary key of this social activity.
 	 *
 	 * @return the primary key of this social activity
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this social activity
+	 * Sets the primary key of this social activity.
 	 *
 	 * @param primaryKey the primary key of this social activity
 	 */
 	public void setPrimaryKey(long primaryKey);
 
 	/**
-	 * Gets the activity ID of this social activity.
+	 * Returns the activity ID of this social activity.
 	 *
 	 * @return the activity ID of this social activity
 	 */
@@ -74,7 +74,7 @@ public interface SocialActivityModel extends AttachedModel,
 	public void setActivityId(long activityId);
 
 	/**
-	 * Gets the group ID of this social activity.
+	 * Returns the group ID of this social activity.
 	 *
 	 * @return the group ID of this social activity
 	 */
@@ -88,7 +88,7 @@ public interface SocialActivityModel extends AttachedModel,
 	public void setGroupId(long groupId);
 
 	/**
-	 * Gets the company ID of this social activity.
+	 * Returns the company ID of this social activity.
 	 *
 	 * @return the company ID of this social activity
 	 */
@@ -102,7 +102,7 @@ public interface SocialActivityModel extends AttachedModel,
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the user ID of this social activity.
+	 * Returns the user ID of this social activity.
 	 *
 	 * @return the user ID of this social activity
 	 */
@@ -116,7 +116,7 @@ public interface SocialActivityModel extends AttachedModel,
 	public void setUserId(long userId);
 
 	/**
-	 * Gets the user uuid of this social activity.
+	 * Returns the user uuid of this social activity.
 	 *
 	 * @return the user uuid of this social activity
 	 * @throws SystemException if a system exception occurred
@@ -131,7 +131,7 @@ public interface SocialActivityModel extends AttachedModel,
 	public void setUserUuid(String userUuid);
 
 	/**
-	 * Gets the create date of this social activity.
+	 * Returns the create date of this social activity.
 	 *
 	 * @return the create date of this social activity
 	 */
@@ -145,7 +145,7 @@ public interface SocialActivityModel extends AttachedModel,
 	public void setCreateDate(long createDate);
 
 	/**
-	 * Gets the mirror activity ID of this social activity.
+	 * Returns the mirror activity ID of this social activity.
 	 *
 	 * @return the mirror activity ID of this social activity
 	 */
@@ -159,14 +159,14 @@ public interface SocialActivityModel extends AttachedModel,
 	public void setMirrorActivityId(long mirrorActivityId);
 
 	/**
-	 * Gets the class name of the model instance this social activity is polymorphically associated with.
+	 * Returns the fully qualified class name of this social activity.
 	 *
-	 * @return the class name of the model instance this social activity is polymorphically associated with
+	 * @return the fully qualified class name of this social activity
 	 */
 	public String getClassName();
 
 	/**
-	 * Gets the class name ID of this social activity.
+	 * Returns the class name ID of this social activity.
 	 *
 	 * @return the class name ID of this social activity
 	 */
@@ -180,7 +180,7 @@ public interface SocialActivityModel extends AttachedModel,
 	public void setClassNameId(long classNameId);
 
 	/**
-	 * Gets the class p k of this social activity.
+	 * Returns the class p k of this social activity.
 	 *
 	 * @return the class p k of this social activity
 	 */
@@ -194,7 +194,7 @@ public interface SocialActivityModel extends AttachedModel,
 	public void setClassPK(long classPK);
 
 	/**
-	 * Gets the type of this social activity.
+	 * Returns the type of this social activity.
 	 *
 	 * @return the type of this social activity
 	 */
@@ -208,7 +208,7 @@ public interface SocialActivityModel extends AttachedModel,
 	public void setType(int type);
 
 	/**
-	 * Gets the extra data of this social activity.
+	 * Returns the extra data of this social activity.
 	 *
 	 * @return the extra data of this social activity
 	 */
@@ -223,7 +223,7 @@ public interface SocialActivityModel extends AttachedModel,
 	public void setExtraData(String extraData);
 
 	/**
-	 * Gets the receiver user ID of this social activity.
+	 * Returns the receiver user ID of this social activity.
 	 *
 	 * @return the receiver user ID of this social activity
 	 */
@@ -237,7 +237,7 @@ public interface SocialActivityModel extends AttachedModel,
 	public void setReceiverUserId(long receiverUserId);
 
 	/**
-	 * Gets the receiver user uuid of this social activity.
+	 * Returns the receiver user uuid of this social activity.
 	 *
 	 * @return the receiver user uuid of this social activity
 	 * @throws SystemException if a system exception occurred

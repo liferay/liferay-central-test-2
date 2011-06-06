@@ -31,7 +31,7 @@ public class WebsiteLocalServiceWrapper implements WebsiteLocalService {
 	/**
 	* Adds the website to the database. Also notifies the appropriate model listeners.
 	*
-	* @param website the website to add
+	* @param website the website
 	* @return the website that was added
 	* @throws SystemException if a system exception occurred
 	*/
@@ -54,7 +54,7 @@ public class WebsiteLocalServiceWrapper implements WebsiteLocalService {
 	/**
 	* Deletes the website with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param websiteId the primary key of the website to delete
+	* @param websiteId the primary key of the website
 	* @throws PortalException if a website with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -67,7 +67,7 @@ public class WebsiteLocalServiceWrapper implements WebsiteLocalService {
 	/**
 	* Deletes the website from the database. Also notifies the appropriate model listeners.
 	*
-	* @param website the website to delete
+	* @param website the website
 	* @throws SystemException if a system exception occurred
 	*/
 	public void deleteWebsite(com.liferay.portal.model.Website website)
@@ -78,7 +78,7 @@ public class WebsiteLocalServiceWrapper implements WebsiteLocalService {
 	/**
 	* Performs a dynamic query on the database and returns the matching rows.
 	*
-	* @param dynamicQuery the dynamic query to search with
+	* @param dynamicQuery the dynamic query
 	* @return the matching rows
 	* @throws SystemException if a system exception occurred
 	*/
@@ -96,9 +96,9 @@ public class WebsiteLocalServiceWrapper implements WebsiteLocalService {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param dynamicQuery the dynamic query to search with
-	* @param start the lower bound of the range of model instances to return
-	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param dynamicQuery the dynamic query
+	* @param start the lower bound of the range of model instances
+	* @param end the upper bound of the range of model instances (not inclusive)
 	* @return the range of matching rows
 	* @throws SystemException if a system exception occurred
 	*/
@@ -116,9 +116,9 @@ public class WebsiteLocalServiceWrapper implements WebsiteLocalService {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param dynamicQuery the dynamic query to search with
-	* @param start the lower bound of the range of model instances to return
-	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param dynamicQuery the dynamic query
+	* @param start the lower bound of the range of model instances
+	* @param end the upper bound of the range of model instances (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching rows
 	* @throws SystemException if a system exception occurred
@@ -134,9 +134,9 @@ public class WebsiteLocalServiceWrapper implements WebsiteLocalService {
 	}
 
 	/**
-	* Counts the number of rows that match the dynamic query.
+	* Returns the number of rows that match the dynamic query.
 	*
-	* @param dynamicQuery the dynamic query to search with
+	* @param dynamicQuery the dynamic query
 	* @return the number of rows that match the dynamic query
 	* @throws SystemException if a system exception occurred
 	*/
@@ -147,9 +147,9 @@ public class WebsiteLocalServiceWrapper implements WebsiteLocalService {
 	}
 
 	/**
-	* Gets the website with the primary key.
+	* Returns the website with the primary key.
 	*
-	* @param websiteId the primary key of the website to get
+	* @param websiteId the primary key of the website
 	* @return the website
 	* @throws PortalException if a website with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -161,14 +161,14 @@ public class WebsiteLocalServiceWrapper implements WebsiteLocalService {
 	}
 
 	/**
-	* Gets a range of all the websites.
+	* Returns a range of all the websites.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of websites to return
-	* @param end the upper bound of the range of websites to return (not inclusive)
+	* @param start the lower bound of the range of websites
+	* @param end the upper bound of the range of websites (not inclusive)
 	* @return the range of websites
 	* @throws SystemException if a system exception occurred
 	*/
@@ -179,7 +179,7 @@ public class WebsiteLocalServiceWrapper implements WebsiteLocalService {
 	}
 
 	/**
-	* Gets the number of websites.
+	* Returns the number of websites.
 	*
 	* @return the number of websites
 	* @throws SystemException if a system exception occurred
@@ -192,7 +192,7 @@ public class WebsiteLocalServiceWrapper implements WebsiteLocalService {
 	/**
 	* Updates the website in the database. Also notifies the appropriate model listeners.
 	*
-	* @param website the website to update
+	* @param website the website
 	* @return the website that was updated
 	* @throws SystemException if a system exception occurred
 	*/
@@ -205,7 +205,7 @@ public class WebsiteLocalServiceWrapper implements WebsiteLocalService {
 	/**
 	* Updates the website in the database. Also notifies the appropriate model listeners.
 	*
-	* @param website the website to update
+	* @param website the website
 	* @param merge whether to merge the website with the current session. See {@link com.liferay.portal.service.persistence.BatchSession#update(com.liferay.portal.kernel.dao.orm.Session, com.liferay.portal.model.BaseModel, boolean)} for an explanation.
 	* @return the website that was updated
 	* @throws SystemException if a system exception occurred
@@ -217,7 +217,7 @@ public class WebsiteLocalServiceWrapper implements WebsiteLocalService {
 	}
 
 	/**
-	* Gets the Spring bean ID for this bean.
+	* Returns the Spring bean ID for this bean.
 	*
 	* @return the Spring bean ID for this bean
 	*/

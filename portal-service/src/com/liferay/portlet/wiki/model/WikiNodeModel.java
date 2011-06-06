@@ -47,21 +47,21 @@ public interface WikiNodeModel extends BaseModel<WikiNode>, GroupedModel {
 	 */
 
 	/**
-	 * Gets the primary key of this wiki node.
+	 * Returns the primary key of this wiki node.
 	 *
 	 * @return the primary key of this wiki node
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this wiki node
+	 * Sets the primary key of this wiki node.
 	 *
 	 * @param primaryKey the primary key of this wiki node
 	 */
 	public void setPrimaryKey(long primaryKey);
 
 	/**
-	 * Gets the uuid of this wiki node.
+	 * Returns the uuid of this wiki node.
 	 *
 	 * @return the uuid of this wiki node
 	 */
@@ -76,7 +76,7 @@ public interface WikiNodeModel extends BaseModel<WikiNode>, GroupedModel {
 	public void setUuid(String uuid);
 
 	/**
-	 * Gets the node ID of this wiki node.
+	 * Returns the node ID of this wiki node.
 	 *
 	 * @return the node ID of this wiki node
 	 */
@@ -90,7 +90,7 @@ public interface WikiNodeModel extends BaseModel<WikiNode>, GroupedModel {
 	public void setNodeId(long nodeId);
 
 	/**
-	 * Gets the group ID of this wiki node.
+	 * Returns the group ID of this wiki node.
 	 *
 	 * @return the group ID of this wiki node
 	 */
@@ -104,7 +104,7 @@ public interface WikiNodeModel extends BaseModel<WikiNode>, GroupedModel {
 	public void setGroupId(long groupId);
 
 	/**
-	 * Gets the company ID of this wiki node.
+	 * Returns the company ID of this wiki node.
 	 *
 	 * @return the company ID of this wiki node
 	 */
@@ -118,7 +118,7 @@ public interface WikiNodeModel extends BaseModel<WikiNode>, GroupedModel {
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the user ID of this wiki node.
+	 * Returns the user ID of this wiki node.
 	 *
 	 * @return the user ID of this wiki node
 	 */
@@ -132,7 +132,7 @@ public interface WikiNodeModel extends BaseModel<WikiNode>, GroupedModel {
 	public void setUserId(long userId);
 
 	/**
-	 * Gets the user uuid of this wiki node.
+	 * Returns the user uuid of this wiki node.
 	 *
 	 * @return the user uuid of this wiki node
 	 * @throws SystemException if a system exception occurred
@@ -147,7 +147,7 @@ public interface WikiNodeModel extends BaseModel<WikiNode>, GroupedModel {
 	public void setUserUuid(String userUuid);
 
 	/**
-	 * Gets the user name of this wiki node.
+	 * Returns the user name of this wiki node.
 	 *
 	 * @return the user name of this wiki node
 	 */
@@ -162,7 +162,7 @@ public interface WikiNodeModel extends BaseModel<WikiNode>, GroupedModel {
 	public void setUserName(String userName);
 
 	/**
-	 * Gets the create date of this wiki node.
+	 * Returns the create date of this wiki node.
 	 *
 	 * @return the create date of this wiki node
 	 */
@@ -176,7 +176,7 @@ public interface WikiNodeModel extends BaseModel<WikiNode>, GroupedModel {
 	public void setCreateDate(Date createDate);
 
 	/**
-	 * Gets the modified date of this wiki node.
+	 * Returns the modified date of this wiki node.
 	 *
 	 * @return the modified date of this wiki node
 	 */
@@ -190,7 +190,7 @@ public interface WikiNodeModel extends BaseModel<WikiNode>, GroupedModel {
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
-	 * Gets the name of this wiki node.
+	 * Returns the name of this wiki node.
 	 *
 	 * @return the name of this wiki node
 	 */
@@ -205,7 +205,7 @@ public interface WikiNodeModel extends BaseModel<WikiNode>, GroupedModel {
 	public void setName(String name);
 
 	/**
-	 * Gets the description of this wiki node.
+	 * Returns the description of this wiki node.
 	 *
 	 * @return the description of this wiki node
 	 */
@@ -220,7 +220,7 @@ public interface WikiNodeModel extends BaseModel<WikiNode>, GroupedModel {
 	public void setDescription(String description);
 
 	/**
-	 * Gets the last post date of this wiki node.
+	 * Returns the last post date of this wiki node.
 	 *
 	 * @return the last post date of this wiki node
 	 */

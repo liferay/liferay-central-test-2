@@ -121,7 +121,7 @@ public class SCProductVersionUtil {
 	/**
 	* Caches the s c product version in the entity cache if it is enabled.
 	*
-	* @param scProductVersion the s c product version to cache
+	* @param scProductVersion the s c product version
 	*/
 	public static void cacheResult(
 		com.liferay.portlet.softwarecatalog.model.SCProductVersion scProductVersion) {
@@ -131,7 +131,7 @@ public class SCProductVersionUtil {
 	/**
 	* Caches the s c product versions in the entity cache if it is enabled.
 	*
-	* @param scProductVersions the s c product versions to cache
+	* @param scProductVersions the s c product versions
 	*/
 	public static void cacheResult(
 		java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductVersion> scProductVersions) {
@@ -152,7 +152,7 @@ public class SCProductVersionUtil {
 	/**
 	* Removes the s c product version with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param productVersionId the primary key of the s c product version to remove
+	* @param productVersionId the primary key of the s c product version
 	* @return the s c product version that was removed
 	* @throws com.liferay.portlet.softwarecatalog.NoSuchProductVersionException if a s c product version with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -172,9 +172,9 @@ public class SCProductVersionUtil {
 	}
 
 	/**
-	* Finds the s c product version with the primary key or throws a {@link com.liferay.portlet.softwarecatalog.NoSuchProductVersionException} if it could not be found.
+	* Returns the s c product version with the primary key or throws a {@link com.liferay.portlet.softwarecatalog.NoSuchProductVersionException} if it could not be found.
 	*
-	* @param productVersionId the primary key of the s c product version to find
+	* @param productVersionId the primary key of the s c product version
 	* @return the s c product version
 	* @throws com.liferay.portlet.softwarecatalog.NoSuchProductVersionException if a s c product version with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -187,9 +187,9 @@ public class SCProductVersionUtil {
 	}
 
 	/**
-	* Finds the s c product version with the primary key or returns <code>null</code> if it could not be found.
+	* Returns the s c product version with the primary key or returns <code>null</code> if it could not be found.
 	*
-	* @param productVersionId the primary key of the s c product version to find
+	* @param productVersionId the primary key of the s c product version
 	* @return the s c product version, or <code>null</code> if a s c product version with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -200,9 +200,9 @@ public class SCProductVersionUtil {
 	}
 
 	/**
-	* Finds all the s c product versions where productEntryId = &#63;.
+	* Returns all the s c product versions where productEntryId = &#63;.
 	*
-	* @param productEntryId the product entry ID to search with
+	* @param productEntryId the product entry ID
 	* @return the matching s c product versions
 	* @throws SystemException if a system exception occurred
 	*/
@@ -213,15 +213,15 @@ public class SCProductVersionUtil {
 	}
 
 	/**
-	* Finds a range of all the s c product versions where productEntryId = &#63;.
+	* Returns a range of all the s c product versions where productEntryId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param productEntryId the product entry ID to search with
-	* @param start the lower bound of the range of s c product versions to return
-	* @param end the upper bound of the range of s c product versions to return (not inclusive)
+	* @param productEntryId the product entry ID
+	* @param start the lower bound of the range of s c product versions
+	* @param end the upper bound of the range of s c product versions (not inclusive)
 	* @return the range of matching s c product versions
 	* @throws SystemException if a system exception occurred
 	*/
@@ -232,15 +232,15 @@ public class SCProductVersionUtil {
 	}
 
 	/**
-	* Finds an ordered range of all the s c product versions where productEntryId = &#63;.
+	* Returns an ordered range of all the s c product versions where productEntryId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param productEntryId the product entry ID to search with
-	* @param start the lower bound of the range of s c product versions to return
-	* @param end the upper bound of the range of s c product versions to return (not inclusive)
+	* @param productEntryId the product entry ID
+	* @param start the lower bound of the range of s c product versions
+	* @param end the upper bound of the range of s c product versions (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching s c product versions
 	* @throws SystemException if a system exception occurred
@@ -255,13 +255,13 @@ public class SCProductVersionUtil {
 	}
 
 	/**
-	* Finds the first s c product version in the ordered set where productEntryId = &#63;.
+	* Returns the first s c product version in the ordered set where productEntryId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param productEntryId the product entry ID to search with
+	* @param productEntryId the product entry ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching s c product version
 	* @throws com.liferay.portlet.softwarecatalog.NoSuchProductVersionException if a matching s c product version could not be found
@@ -277,13 +277,13 @@ public class SCProductVersionUtil {
 	}
 
 	/**
-	* Finds the last s c product version in the ordered set where productEntryId = &#63;.
+	* Returns the last s c product version in the ordered set where productEntryId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param productEntryId the product entry ID to search with
+	* @param productEntryId the product entry ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching s c product version
 	* @throws com.liferay.portlet.softwarecatalog.NoSuchProductVersionException if a matching s c product version could not be found
@@ -299,14 +299,14 @@ public class SCProductVersionUtil {
 	}
 
 	/**
-	* Finds the s c product versions before and after the current s c product version in the ordered set where productEntryId = &#63;.
+	* Returns the s c product versions before and after the current s c product version in the ordered set where productEntryId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
 	* @param productVersionId the primary key of the current s c product version
-	* @param productEntryId the product entry ID to search with
+	* @param productEntryId the product entry ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next s c product version
 	* @throws com.liferay.portlet.softwarecatalog.NoSuchProductVersionException if a s c product version with the primary key could not be found
@@ -323,9 +323,9 @@ public class SCProductVersionUtil {
 	}
 
 	/**
-	* Finds the s c product version where directDownloadURL = &#63; or throws a {@link com.liferay.portlet.softwarecatalog.NoSuchProductVersionException} if it could not be found.
+	* Returns the s c product version where directDownloadURL = &#63; or throws a {@link com.liferay.portlet.softwarecatalog.NoSuchProductVersionException} if it could not be found.
 	*
-	* @param directDownloadURL the direct download u r l to search with
+	* @param directDownloadURL the direct download u r l
 	* @return the matching s c product version
 	* @throws com.liferay.portlet.softwarecatalog.NoSuchProductVersionException if a matching s c product version could not be found
 	* @throws SystemException if a system exception occurred
@@ -338,9 +338,9 @@ public class SCProductVersionUtil {
 	}
 
 	/**
-	* Finds the s c product version where directDownloadURL = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	* Returns the s c product version where directDownloadURL = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	*
-	* @param directDownloadURL the direct download u r l to search with
+	* @param directDownloadURL the direct download u r l
 	* @return the matching s c product version, or <code>null</code> if a matching s c product version could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -351,9 +351,9 @@ public class SCProductVersionUtil {
 	}
 
 	/**
-	* Finds the s c product version where directDownloadURL = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	* Returns the s c product version where directDownloadURL = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
-	* @param directDownloadURL the direct download u r l to search with
+	* @param directDownloadURL the direct download u r l
 	* @return the matching s c product version, or <code>null</code> if a matching s c product version could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -366,7 +366,7 @@ public class SCProductVersionUtil {
 	}
 
 	/**
-	* Finds all the s c product versions.
+	* Returns all the s c product versions.
 	*
 	* @return the s c product versions
 	* @throws SystemException if a system exception occurred
@@ -377,14 +377,14 @@ public class SCProductVersionUtil {
 	}
 
 	/**
-	* Finds a range of all the s c product versions.
+	* Returns a range of all the s c product versions.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of s c product versions to return
-	* @param end the upper bound of the range of s c product versions to return (not inclusive)
+	* @param start the lower bound of the range of s c product versions
+	* @param end the upper bound of the range of s c product versions (not inclusive)
 	* @return the range of s c product versions
 	* @throws SystemException if a system exception occurred
 	*/
@@ -395,14 +395,14 @@ public class SCProductVersionUtil {
 	}
 
 	/**
-	* Finds an ordered range of all the s c product versions.
+	* Returns an ordered range of all the s c product versions.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of s c product versions to return
-	* @param end the upper bound of the range of s c product versions to return (not inclusive)
+	* @param start the lower bound of the range of s c product versions
+	* @param end the upper bound of the range of s c product versions (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of s c product versions
 	* @throws SystemException if a system exception occurred
@@ -417,7 +417,7 @@ public class SCProductVersionUtil {
 	/**
 	* Removes all the s c product versions where productEntryId = &#63; from the database.
 	*
-	* @param productEntryId the product entry ID to search with
+	* @param productEntryId the product entry ID
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByProductEntryId(long productEntryId)
@@ -428,7 +428,7 @@ public class SCProductVersionUtil {
 	/**
 	* Removes the s c product version where directDownloadURL = &#63; from the database.
 	*
-	* @param directDownloadURL the direct download u r l to search with
+	* @param directDownloadURL the direct download u r l
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByDirectDownloadURL(
@@ -449,9 +449,9 @@ public class SCProductVersionUtil {
 	}
 
 	/**
-	* Counts all the s c product versions where productEntryId = &#63;.
+	* Returns the number of s c product versions where productEntryId = &#63;.
 	*
-	* @param productEntryId the product entry ID to search with
+	* @param productEntryId the product entry ID
 	* @return the number of matching s c product versions
 	* @throws SystemException if a system exception occurred
 	*/
@@ -461,9 +461,9 @@ public class SCProductVersionUtil {
 	}
 
 	/**
-	* Counts all the s c product versions where directDownloadURL = &#63;.
+	* Returns the number of s c product versions where directDownloadURL = &#63;.
 	*
-	* @param directDownloadURL the direct download u r l to search with
+	* @param directDownloadURL the direct download u r l
 	* @return the number of matching s c product versions
 	* @throws SystemException if a system exception occurred
 	*/
@@ -474,7 +474,7 @@ public class SCProductVersionUtil {
 	}
 
 	/**
-	* Counts all the s c product versions.
+	* Returns the number of s c product versions.
 	*
 	* @return the number of s c product versions
 	* @throws SystemException if a system exception occurred
@@ -485,9 +485,9 @@ public class SCProductVersionUtil {
 	}
 
 	/**
-	* Gets all the s c framework versions associated with the s c product version.
+	* Returns all the s c framework versions associated with the s c product version.
 	*
-	* @param pk the primary key of the s c product version to get the associated s c framework versions for
+	* @param pk the primary key of the s c product version
 	* @return the s c framework versions associated with the s c product version
 	* @throws SystemException if a system exception occurred
 	*/
@@ -497,15 +497,15 @@ public class SCProductVersionUtil {
 	}
 
 	/**
-	* Gets a range of all the s c framework versions associated with the s c product version.
+	* Returns a range of all the s c framework versions associated with the s c product version.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param pk the primary key of the s c product version to get the associated s c framework versions for
-	* @param start the lower bound of the range of s c product versions to return
-	* @param end the upper bound of the range of s c product versions to return (not inclusive)
+	* @param pk the primary key of the s c product version
+	* @param start the lower bound of the range of s c product versions
+	* @param end the upper bound of the range of s c product versions (not inclusive)
 	* @return the range of s c framework versions associated with the s c product version
 	* @throws SystemException if a system exception occurred
 	*/
@@ -516,15 +516,15 @@ public class SCProductVersionUtil {
 	}
 
 	/**
-	* Gets an ordered range of all the s c framework versions associated with the s c product version.
+	* Returns an ordered range of all the s c framework versions associated with the s c product version.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param pk the primary key of the s c product version to get the associated s c framework versions for
-	* @param start the lower bound of the range of s c product versions to return
-	* @param end the upper bound of the range of s c product versions to return (not inclusive)
+	* @param pk the primary key of the s c product version
+	* @param start the lower bound of the range of s c product versions
+	* @param end the upper bound of the range of s c product versions (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of s c framework versions associated with the s c product version
 	* @throws SystemException if a system exception occurred
@@ -538,9 +538,9 @@ public class SCProductVersionUtil {
 	}
 
 	/**
-	* Gets the number of s c framework versions associated with the s c product version.
+	* Returns the number of s c framework versions associated with the s c product version.
 	*
-	* @param pk the primary key of the s c product version to get the number of associated s c framework versions for
+	* @param pk the primary key of the s c product version
 	* @return the number of s c framework versions associated with the s c product version
 	* @throws SystemException if a system exception occurred
 	*/
@@ -693,7 +693,7 @@ public class SCProductVersionUtil {
 	/**
 	* Sets the s c framework versions associated with the s c product version, removing and adding associations as necessary. Also notifies the appropriate model listeners and clears the mapping table finder cache.
 	*
-	* @param pk the primary key of the s c product version to set the associations for
+	* @param pk the primary key of the s c product version
 	* @param scFrameworkVersionPKs the primary keys of the s c framework versions to be associated with the s c product version
 	* @throws SystemException if a system exception occurred
 	*/
@@ -706,7 +706,7 @@ public class SCProductVersionUtil {
 	/**
 	* Sets the s c framework versions associated with the s c product version, removing and adding associations as necessary. Also notifies the appropriate model listeners and clears the mapping table finder cache.
 	*
-	* @param pk the primary key of the s c product version to set the associations for
+	* @param pk the primary key of the s c product version
 	* @param scFrameworkVersions the s c framework versions to be associated with the s c product version
 	* @throws SystemException if a system exception occurred
 	*/

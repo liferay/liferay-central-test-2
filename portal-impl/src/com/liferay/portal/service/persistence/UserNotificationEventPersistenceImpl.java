@@ -106,7 +106,7 @@ public class UserNotificationEventPersistenceImpl extends BasePersistenceImpl<Us
 	/**
 	 * Caches the user notification event in the entity cache if it is enabled.
 	 *
-	 * @param userNotificationEvent the user notification event to cache
+	 * @param userNotificationEvent the user notification event
 	 */
 	public void cacheResult(UserNotificationEvent userNotificationEvent) {
 		EntityCacheUtil.putResult(UserNotificationEventModelImpl.ENTITY_CACHE_ENABLED,
@@ -119,7 +119,7 @@ public class UserNotificationEventPersistenceImpl extends BasePersistenceImpl<Us
 	/**
 	 * Caches the user notification events in the entity cache if it is enabled.
 	 *
-	 * @param userNotificationEvents the user notification events to cache
+	 * @param userNotificationEvents the user notification events
 	 */
 	public void cacheResult(List<UserNotificationEvent> userNotificationEvents) {
 		for (UserNotificationEvent userNotificationEvent : userNotificationEvents) {
@@ -184,7 +184,7 @@ public class UserNotificationEventPersistenceImpl extends BasePersistenceImpl<Us
 	/**
 	 * Removes the user notification event with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param primaryKey the primary key of the user notification event to remove
+	 * @param primaryKey the primary key of the user notification event
 	 * @return the user notification event that was removed
 	 * @throws com.liferay.portal.NoSuchModelException if a user notification event with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -197,7 +197,7 @@ public class UserNotificationEventPersistenceImpl extends BasePersistenceImpl<Us
 	/**
 	 * Removes the user notification event with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param userNotificationEventId the primary key of the user notification event to remove
+	 * @param userNotificationEventId the primary key of the user notification event
 	 * @return the user notification event that was removed
 	 * @throws com.liferay.portal.NoSuchUserNotificationEventException if a user notification event with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -238,7 +238,7 @@ public class UserNotificationEventPersistenceImpl extends BasePersistenceImpl<Us
 	/**
 	 * Removes the user notification event from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param userNotificationEvent the user notification event to remove
+	 * @param userNotificationEvent the user notification event
 	 * @return the user notification event that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -334,9 +334,9 @@ public class UserNotificationEventPersistenceImpl extends BasePersistenceImpl<Us
 	}
 
 	/**
-	 * Finds the user notification event with the primary key or throws a {@link com.liferay.portal.NoSuchModelException} if it could not be found.
+	 * Returns the user notification event with the primary key or throws a {@link com.liferay.portal.NoSuchModelException} if it could not be found.
 	 *
-	 * @param primaryKey the primary key of the user notification event to find
+	 * @param primaryKey the primary key of the user notification event
 	 * @return the user notification event
 	 * @throws com.liferay.portal.NoSuchModelException if a user notification event with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -347,9 +347,9 @@ public class UserNotificationEventPersistenceImpl extends BasePersistenceImpl<Us
 	}
 
 	/**
-	 * Finds the user notification event with the primary key or throws a {@link com.liferay.portal.NoSuchUserNotificationEventException} if it could not be found.
+	 * Returns the user notification event with the primary key or throws a {@link com.liferay.portal.NoSuchUserNotificationEventException} if it could not be found.
 	 *
-	 * @param userNotificationEventId the primary key of the user notification event to find
+	 * @param userNotificationEventId the primary key of the user notification event
 	 * @return the user notification event
 	 * @throws com.liferay.portal.NoSuchUserNotificationEventException if a user notification event with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -372,9 +372,9 @@ public class UserNotificationEventPersistenceImpl extends BasePersistenceImpl<Us
 	}
 
 	/**
-	 * Finds the user notification event with the primary key or returns <code>null</code> if it could not be found.
+	 * Returns the user notification event with the primary key or returns <code>null</code> if it could not be found.
 	 *
-	 * @param primaryKey the primary key of the user notification event to find
+	 * @param primaryKey the primary key of the user notification event
 	 * @return the user notification event, or <code>null</code> if a user notification event with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -384,9 +384,9 @@ public class UserNotificationEventPersistenceImpl extends BasePersistenceImpl<Us
 	}
 
 	/**
-	 * Finds the user notification event with the primary key or returns <code>null</code> if it could not be found.
+	 * Returns the user notification event with the primary key or returns <code>null</code> if it could not be found.
 	 *
-	 * @param userNotificationEventId the primary key of the user notification event to find
+	 * @param userNotificationEventId the primary key of the user notification event
 	 * @return the user notification event, or <code>null</code> if a user notification event with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -420,9 +420,9 @@ public class UserNotificationEventPersistenceImpl extends BasePersistenceImpl<Us
 	}
 
 	/**
-	 * Finds all the user notification events where uuid = &#63;.
+	 * Returns all the user notification events where uuid = &#63;.
 	 *
-	 * @param uuid the uuid to search with
+	 * @param uuid the uuid
 	 * @return the matching user notification events
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -432,15 +432,15 @@ public class UserNotificationEventPersistenceImpl extends BasePersistenceImpl<Us
 	}
 
 	/**
-	 * Finds a range of all the user notification events where uuid = &#63;.
+	 * Returns a range of all the user notification events where uuid = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param uuid the uuid to search with
-	 * @param start the lower bound of the range of user notification events to return
-	 * @param end the upper bound of the range of user notification events to return (not inclusive)
+	 * @param uuid the uuid
+	 * @param start the lower bound of the range of user notification events
+	 * @param end the upper bound of the range of user notification events (not inclusive)
 	 * @return the range of matching user notification events
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -450,15 +450,15 @@ public class UserNotificationEventPersistenceImpl extends BasePersistenceImpl<Us
 	}
 
 	/**
-	 * Finds an ordered range of all the user notification events where uuid = &#63;.
+	 * Returns an ordered range of all the user notification events where uuid = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param uuid the uuid to search with
-	 * @param start the lower bound of the range of user notification events to return
-	 * @param end the upper bound of the range of user notification events to return (not inclusive)
+	 * @param uuid the uuid
+	 * @param start the lower bound of the range of user notification events
+	 * @param end the upper bound of the range of user notification events (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching user notification events
 	 * @throws SystemException if a system exception occurred
@@ -550,13 +550,13 @@ public class UserNotificationEventPersistenceImpl extends BasePersistenceImpl<Us
 	}
 
 	/**
-	 * Finds the first user notification event in the ordered set where uuid = &#63;.
+	 * Returns the first user notification event in the ordered set where uuid = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param uuid the uuid to search with
+	 * @param uuid the uuid
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching user notification event
 	 * @throws com.liferay.portal.NoSuchUserNotificationEventException if a matching user notification event could not be found
@@ -586,13 +586,13 @@ public class UserNotificationEventPersistenceImpl extends BasePersistenceImpl<Us
 	}
 
 	/**
-	 * Finds the last user notification event in the ordered set where uuid = &#63;.
+	 * Returns the last user notification event in the ordered set where uuid = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param uuid the uuid to search with
+	 * @param uuid the uuid
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching user notification event
 	 * @throws com.liferay.portal.NoSuchUserNotificationEventException if a matching user notification event could not be found
@@ -624,14 +624,14 @@ public class UserNotificationEventPersistenceImpl extends BasePersistenceImpl<Us
 	}
 
 	/**
-	 * Finds the user notification events before and after the current user notification event in the ordered set where uuid = &#63;.
+	 * Returns the user notification events before and after the current user notification event in the ordered set where uuid = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
 	 * @param userNotificationEventId the primary key of the current user notification event
-	 * @param uuid the uuid to search with
+	 * @param uuid the uuid
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next user notification event
 	 * @throws com.liferay.portal.NoSuchUserNotificationEventException if a user notification event with the primary key could not be found
@@ -785,9 +785,9 @@ public class UserNotificationEventPersistenceImpl extends BasePersistenceImpl<Us
 	}
 
 	/**
-	 * Finds all the user notification events where userId = &#63;.
+	 * Returns all the user notification events where userId = &#63;.
 	 *
-	 * @param userId the user ID to search with
+	 * @param userId the user ID
 	 * @return the matching user notification events
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -797,15 +797,15 @@ public class UserNotificationEventPersistenceImpl extends BasePersistenceImpl<Us
 	}
 
 	/**
-	 * Finds a range of all the user notification events where userId = &#63;.
+	 * Returns a range of all the user notification events where userId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param userId the user ID to search with
-	 * @param start the lower bound of the range of user notification events to return
-	 * @param end the upper bound of the range of user notification events to return (not inclusive)
+	 * @param userId the user ID
+	 * @param start the lower bound of the range of user notification events
+	 * @param end the upper bound of the range of user notification events (not inclusive)
 	 * @return the range of matching user notification events
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -815,15 +815,15 @@ public class UserNotificationEventPersistenceImpl extends BasePersistenceImpl<Us
 	}
 
 	/**
-	 * Finds an ordered range of all the user notification events where userId = &#63;.
+	 * Returns an ordered range of all the user notification events where userId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param userId the user ID to search with
-	 * @param start the lower bound of the range of user notification events to return
-	 * @param end the upper bound of the range of user notification events to return (not inclusive)
+	 * @param userId the user ID
+	 * @param start the lower bound of the range of user notification events
+	 * @param end the upper bound of the range of user notification events (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching user notification events
 	 * @throws SystemException if a system exception occurred
@@ -903,13 +903,13 @@ public class UserNotificationEventPersistenceImpl extends BasePersistenceImpl<Us
 	}
 
 	/**
-	 * Finds the first user notification event in the ordered set where userId = &#63;.
+	 * Returns the first user notification event in the ordered set where userId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param userId the user ID to search with
+	 * @param userId the user ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching user notification event
 	 * @throws com.liferay.portal.NoSuchUserNotificationEventException if a matching user notification event could not be found
@@ -939,13 +939,13 @@ public class UserNotificationEventPersistenceImpl extends BasePersistenceImpl<Us
 	}
 
 	/**
-	 * Finds the last user notification event in the ordered set where userId = &#63;.
+	 * Returns the last user notification event in the ordered set where userId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param userId the user ID to search with
+	 * @param userId the user ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching user notification event
 	 * @throws com.liferay.portal.NoSuchUserNotificationEventException if a matching user notification event could not be found
@@ -977,14 +977,14 @@ public class UserNotificationEventPersistenceImpl extends BasePersistenceImpl<Us
 	}
 
 	/**
-	 * Finds the user notification events before and after the current user notification event in the ordered set where userId = &#63;.
+	 * Returns the user notification events before and after the current user notification event in the ordered set where userId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
 	 * @param userNotificationEventId the primary key of the current user notification event
-	 * @param userId the user ID to search with
+	 * @param userId the user ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next user notification event
 	 * @throws com.liferay.portal.NoSuchUserNotificationEventException if a user notification event with the primary key could not be found
@@ -1126,7 +1126,7 @@ public class UserNotificationEventPersistenceImpl extends BasePersistenceImpl<Us
 	}
 
 	/**
-	 * Finds all the user notification events.
+	 * Returns all the user notification events.
 	 *
 	 * @return the user notification events
 	 * @throws SystemException if a system exception occurred
@@ -1136,14 +1136,14 @@ public class UserNotificationEventPersistenceImpl extends BasePersistenceImpl<Us
 	}
 
 	/**
-	 * Finds a range of all the user notification events.
+	 * Returns a range of all the user notification events.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param start the lower bound of the range of user notification events to return
-	 * @param end the upper bound of the range of user notification events to return (not inclusive)
+	 * @param start the lower bound of the range of user notification events
+	 * @param end the upper bound of the range of user notification events (not inclusive)
 	 * @return the range of user notification events
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1153,14 +1153,14 @@ public class UserNotificationEventPersistenceImpl extends BasePersistenceImpl<Us
 	}
 
 	/**
-	 * Finds an ordered range of all the user notification events.
+	 * Returns an ordered range of all the user notification events.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param start the lower bound of the range of user notification events to return
-	 * @param end the upper bound of the range of user notification events to return (not inclusive)
+	 * @param start the lower bound of the range of user notification events
+	 * @param end the upper bound of the range of user notification events (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of user notification events
 	 * @throws SystemException if a system exception occurred
@@ -1237,7 +1237,7 @@ public class UserNotificationEventPersistenceImpl extends BasePersistenceImpl<Us
 	/**
 	 * Removes all the user notification events where uuid = &#63; from the database.
 	 *
-	 * @param uuid the uuid to search with
+	 * @param uuid the uuid
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByUuid(String uuid) throws SystemException {
@@ -1249,7 +1249,7 @@ public class UserNotificationEventPersistenceImpl extends BasePersistenceImpl<Us
 	/**
 	 * Removes all the user notification events where userId = &#63; from the database.
 	 *
-	 * @param userId the user ID to search with
+	 * @param userId the user ID
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByUserId(long userId) throws SystemException {
@@ -1270,9 +1270,9 @@ public class UserNotificationEventPersistenceImpl extends BasePersistenceImpl<Us
 	}
 
 	/**
-	 * Counts all the user notification events where uuid = &#63;.
+	 * Returns the number of user notification events where uuid = &#63;.
 	 *
-	 * @param uuid the uuid to search with
+	 * @param uuid the uuid
 	 * @return the number of matching user notification events
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1335,9 +1335,9 @@ public class UserNotificationEventPersistenceImpl extends BasePersistenceImpl<Us
 	}
 
 	/**
-	 * Counts all the user notification events where userId = &#63;.
+	 * Returns the number of user notification events where userId = &#63;.
 	 *
-	 * @param userId the user ID to search with
+	 * @param userId the user ID
 	 * @return the number of matching user notification events
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1388,7 +1388,7 @@ public class UserNotificationEventPersistenceImpl extends BasePersistenceImpl<Us
 	}
 
 	/**
-	 * Counts all the user notification events.
+	 * Returns the number of user notification events.
 	 *
 	 * @return the number of user notification events
 	 * @throws SystemException if a system exception occurred

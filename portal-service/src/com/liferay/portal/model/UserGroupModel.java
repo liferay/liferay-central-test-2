@@ -42,21 +42,21 @@ public interface UserGroupModel extends BaseModel<UserGroup> {
 	 */
 
 	/**
-	 * Gets the primary key of this user group.
+	 * Returns the primary key of this user group.
 	 *
 	 * @return the primary key of this user group
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this user group
+	 * Sets the primary key of this user group.
 	 *
 	 * @param primaryKey the primary key of this user group
 	 */
 	public void setPrimaryKey(long primaryKey);
 
 	/**
-	 * Gets the user group ID of this user group.
+	 * Returns the user group ID of this user group.
 	 *
 	 * @return the user group ID of this user group
 	 */
@@ -70,7 +70,7 @@ public interface UserGroupModel extends BaseModel<UserGroup> {
 	public void setUserGroupId(long userGroupId);
 
 	/**
-	 * Gets the company ID of this user group.
+	 * Returns the company ID of this user group.
 	 *
 	 * @return the company ID of this user group
 	 */
@@ -84,7 +84,7 @@ public interface UserGroupModel extends BaseModel<UserGroup> {
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the parent user group ID of this user group.
+	 * Returns the parent user group ID of this user group.
 	 *
 	 * @return the parent user group ID of this user group
 	 */
@@ -98,7 +98,7 @@ public interface UserGroupModel extends BaseModel<UserGroup> {
 	public void setParentUserGroupId(long parentUserGroupId);
 
 	/**
-	 * Gets the name of this user group.
+	 * Returns the name of this user group.
 	 *
 	 * @return the name of this user group
 	 */
@@ -113,7 +113,7 @@ public interface UserGroupModel extends BaseModel<UserGroup> {
 	public void setName(String name);
 
 	/**
-	 * Gets the description of this user group.
+	 * Returns the description of this user group.
 	 *
 	 * @return the description of this user group
 	 */

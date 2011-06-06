@@ -114,7 +114,7 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 	/**
 	 * Caches the user tracker in the entity cache if it is enabled.
 	 *
-	 * @param userTracker the user tracker to cache
+	 * @param userTracker the user tracker
 	 */
 	public void cacheResult(UserTracker userTracker) {
 		EntityCacheUtil.putResult(UserTrackerModelImpl.ENTITY_CACHE_ENABLED,
@@ -126,7 +126,7 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 	/**
 	 * Caches the user trackers in the entity cache if it is enabled.
 	 *
-	 * @param userTrackers the user trackers to cache
+	 * @param userTrackers the user trackers
 	 */
 	public void cacheResult(List<UserTracker> userTrackers) {
 		for (UserTracker userTracker : userTrackers) {
@@ -185,7 +185,7 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 	/**
 	 * Removes the user tracker with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param primaryKey the primary key of the user tracker to remove
+	 * @param primaryKey the primary key of the user tracker
 	 * @return the user tracker that was removed
 	 * @throws com.liferay.portal.NoSuchModelException if a user tracker with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -198,7 +198,7 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 	/**
 	 * Removes the user tracker with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param userTrackerId the primary key of the user tracker to remove
+	 * @param userTrackerId the primary key of the user tracker
 	 * @return the user tracker that was removed
 	 * @throws com.liferay.portal.NoSuchUserTrackerException if a user tracker with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -238,7 +238,7 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 	/**
 	 * Removes the user tracker from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param userTracker the user tracker to remove
+	 * @param userTracker the user tracker
 	 * @return the user tracker that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -325,9 +325,9 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 	}
 
 	/**
-	 * Finds the user tracker with the primary key or throws a {@link com.liferay.portal.NoSuchModelException} if it could not be found.
+	 * Returns the user tracker with the primary key or throws a {@link com.liferay.portal.NoSuchModelException} if it could not be found.
 	 *
-	 * @param primaryKey the primary key of the user tracker to find
+	 * @param primaryKey the primary key of the user tracker
 	 * @return the user tracker
 	 * @throws com.liferay.portal.NoSuchModelException if a user tracker with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -338,9 +338,9 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 	}
 
 	/**
-	 * Finds the user tracker with the primary key or throws a {@link com.liferay.portal.NoSuchUserTrackerException} if it could not be found.
+	 * Returns the user tracker with the primary key or throws a {@link com.liferay.portal.NoSuchUserTrackerException} if it could not be found.
 	 *
-	 * @param userTrackerId the primary key of the user tracker to find
+	 * @param userTrackerId the primary key of the user tracker
 	 * @return the user tracker
 	 * @throws com.liferay.portal.NoSuchUserTrackerException if a user tracker with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -362,9 +362,9 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 	}
 
 	/**
-	 * Finds the user tracker with the primary key or returns <code>null</code> if it could not be found.
+	 * Returns the user tracker with the primary key or returns <code>null</code> if it could not be found.
 	 *
-	 * @param primaryKey the primary key of the user tracker to find
+	 * @param primaryKey the primary key of the user tracker
 	 * @return the user tracker, or <code>null</code> if a user tracker with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -374,9 +374,9 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 	}
 
 	/**
-	 * Finds the user tracker with the primary key or returns <code>null</code> if it could not be found.
+	 * Returns the user tracker with the primary key or returns <code>null</code> if it could not be found.
 	 *
-	 * @param userTrackerId the primary key of the user tracker to find
+	 * @param userTrackerId the primary key of the user tracker
 	 * @return the user tracker, or <code>null</code> if a user tracker with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -410,9 +410,9 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 	}
 
 	/**
-	 * Finds all the user trackers where companyId = &#63;.
+	 * Returns all the user trackers where companyId = &#63;.
 	 *
-	 * @param companyId the company ID to search with
+	 * @param companyId the company ID
 	 * @return the matching user trackers
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -423,15 +423,15 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 	}
 
 	/**
-	 * Finds a range of all the user trackers where companyId = &#63;.
+	 * Returns a range of all the user trackers where companyId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param companyId the company ID to search with
-	 * @param start the lower bound of the range of user trackers to return
-	 * @param end the upper bound of the range of user trackers to return (not inclusive)
+	 * @param companyId the company ID
+	 * @param start the lower bound of the range of user trackers
+	 * @param end the upper bound of the range of user trackers (not inclusive)
 	 * @return the range of matching user trackers
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -441,15 +441,15 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 	}
 
 	/**
-	 * Finds an ordered range of all the user trackers where companyId = &#63;.
+	 * Returns an ordered range of all the user trackers where companyId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param companyId the company ID to search with
-	 * @param start the lower bound of the range of user trackers to return
-	 * @param end the upper bound of the range of user trackers to return (not inclusive)
+	 * @param companyId the company ID
+	 * @param start the lower bound of the range of user trackers
+	 * @param end the upper bound of the range of user trackers (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching user trackers
 	 * @throws SystemException if a system exception occurred
@@ -525,13 +525,13 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 	}
 
 	/**
-	 * Finds the first user tracker in the ordered set where companyId = &#63;.
+	 * Returns the first user tracker in the ordered set where companyId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param companyId the company ID to search with
+	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching user tracker
 	 * @throws com.liferay.portal.NoSuchUserTrackerException if a matching user tracker could not be found
@@ -561,13 +561,13 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 	}
 
 	/**
-	 * Finds the last user tracker in the ordered set where companyId = &#63;.
+	 * Returns the last user tracker in the ordered set where companyId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param companyId the company ID to search with
+	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching user tracker
 	 * @throws com.liferay.portal.NoSuchUserTrackerException if a matching user tracker could not be found
@@ -599,14 +599,14 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 	}
 
 	/**
-	 * Finds the user trackers before and after the current user tracker in the ordered set where companyId = &#63;.
+	 * Returns the user trackers before and after the current user tracker in the ordered set where companyId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
 	 * @param userTrackerId the primary key of the current user tracker
-	 * @param companyId the company ID to search with
+	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next user tracker
 	 * @throws com.liferay.portal.NoSuchUserTrackerException if a user tracker with the primary key could not be found
@@ -743,9 +743,9 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 	}
 
 	/**
-	 * Finds all the user trackers where userId = &#63;.
+	 * Returns all the user trackers where userId = &#63;.
 	 *
-	 * @param userId the user ID to search with
+	 * @param userId the user ID
 	 * @return the matching user trackers
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -755,15 +755,15 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 	}
 
 	/**
-	 * Finds a range of all the user trackers where userId = &#63;.
+	 * Returns a range of all the user trackers where userId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param userId the user ID to search with
-	 * @param start the lower bound of the range of user trackers to return
-	 * @param end the upper bound of the range of user trackers to return (not inclusive)
+	 * @param userId the user ID
+	 * @param start the lower bound of the range of user trackers
+	 * @param end the upper bound of the range of user trackers (not inclusive)
 	 * @return the range of matching user trackers
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -773,15 +773,15 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 	}
 
 	/**
-	 * Finds an ordered range of all the user trackers where userId = &#63;.
+	 * Returns an ordered range of all the user trackers where userId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param userId the user ID to search with
-	 * @param start the lower bound of the range of user trackers to return
-	 * @param end the upper bound of the range of user trackers to return (not inclusive)
+	 * @param userId the user ID
+	 * @param start the lower bound of the range of user trackers
+	 * @param end the upper bound of the range of user trackers (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching user trackers
 	 * @throws SystemException if a system exception occurred
@@ -857,13 +857,13 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 	}
 
 	/**
-	 * Finds the first user tracker in the ordered set where userId = &#63;.
+	 * Returns the first user tracker in the ordered set where userId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param userId the user ID to search with
+	 * @param userId the user ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching user tracker
 	 * @throws com.liferay.portal.NoSuchUserTrackerException if a matching user tracker could not be found
@@ -892,13 +892,13 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 	}
 
 	/**
-	 * Finds the last user tracker in the ordered set where userId = &#63;.
+	 * Returns the last user tracker in the ordered set where userId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param userId the user ID to search with
+	 * @param userId the user ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching user tracker
 	 * @throws com.liferay.portal.NoSuchUserTrackerException if a matching user tracker could not be found
@@ -930,14 +930,14 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 	}
 
 	/**
-	 * Finds the user trackers before and after the current user tracker in the ordered set where userId = &#63;.
+	 * Returns the user trackers before and after the current user tracker in the ordered set where userId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
 	 * @param userTrackerId the primary key of the current user tracker
-	 * @param userId the user ID to search with
+	 * @param userId the user ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next user tracker
 	 * @throws com.liferay.portal.NoSuchUserTrackerException if a user tracker with the primary key could not be found
@@ -1074,9 +1074,9 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 	}
 
 	/**
-	 * Finds all the user trackers where sessionId = &#63;.
+	 * Returns all the user trackers where sessionId = &#63;.
 	 *
-	 * @param sessionId the session ID to search with
+	 * @param sessionId the session ID
 	 * @return the matching user trackers
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1087,15 +1087,15 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 	}
 
 	/**
-	 * Finds a range of all the user trackers where sessionId = &#63;.
+	 * Returns a range of all the user trackers where sessionId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param sessionId the session ID to search with
-	 * @param start the lower bound of the range of user trackers to return
-	 * @param end the upper bound of the range of user trackers to return (not inclusive)
+	 * @param sessionId the session ID
+	 * @param start the lower bound of the range of user trackers
+	 * @param end the upper bound of the range of user trackers (not inclusive)
 	 * @return the range of matching user trackers
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1105,15 +1105,15 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 	}
 
 	/**
-	 * Finds an ordered range of all the user trackers where sessionId = &#63;.
+	 * Returns an ordered range of all the user trackers where sessionId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param sessionId the session ID to search with
-	 * @param start the lower bound of the range of user trackers to return
-	 * @param end the upper bound of the range of user trackers to return (not inclusive)
+	 * @param sessionId the session ID
+	 * @param start the lower bound of the range of user trackers
+	 * @param end the upper bound of the range of user trackers (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching user trackers
 	 * @throws SystemException if a system exception occurred
@@ -1201,13 +1201,13 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 	}
 
 	/**
-	 * Finds the first user tracker in the ordered set where sessionId = &#63;.
+	 * Returns the first user tracker in the ordered set where sessionId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param sessionId the session ID to search with
+	 * @param sessionId the session ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching user tracker
 	 * @throws com.liferay.portal.NoSuchUserTrackerException if a matching user tracker could not be found
@@ -1237,13 +1237,13 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 	}
 
 	/**
-	 * Finds the last user tracker in the ordered set where sessionId = &#63;.
+	 * Returns the last user tracker in the ordered set where sessionId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param sessionId the session ID to search with
+	 * @param sessionId the session ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching user tracker
 	 * @throws com.liferay.portal.NoSuchUserTrackerException if a matching user tracker could not be found
@@ -1275,14 +1275,14 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 	}
 
 	/**
-	 * Finds the user trackers before and after the current user tracker in the ordered set where sessionId = &#63;.
+	 * Returns the user trackers before and after the current user tracker in the ordered set where sessionId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
 	 * @param userTrackerId the primary key of the current user tracker
-	 * @param sessionId the session ID to search with
+	 * @param sessionId the session ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next user tracker
 	 * @throws com.liferay.portal.NoSuchUserTrackerException if a user tracker with the primary key could not be found
@@ -1431,7 +1431,7 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 	}
 
 	/**
-	 * Finds all the user trackers.
+	 * Returns all the user trackers.
 	 *
 	 * @return the user trackers
 	 * @throws SystemException if a system exception occurred
@@ -1441,14 +1441,14 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 	}
 
 	/**
-	 * Finds a range of all the user trackers.
+	 * Returns a range of all the user trackers.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param start the lower bound of the range of user trackers to return
-	 * @param end the upper bound of the range of user trackers to return (not inclusive)
+	 * @param start the lower bound of the range of user trackers
+	 * @param end the upper bound of the range of user trackers (not inclusive)
 	 * @return the range of user trackers
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1458,14 +1458,14 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 	}
 
 	/**
-	 * Finds an ordered range of all the user trackers.
+	 * Returns an ordered range of all the user trackers.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param start the lower bound of the range of user trackers to return
-	 * @param end the upper bound of the range of user trackers to return (not inclusive)
+	 * @param start the lower bound of the range of user trackers
+	 * @param end the upper bound of the range of user trackers (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of user trackers
 	 * @throws SystemException if a system exception occurred
@@ -1542,7 +1542,7 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 	/**
 	 * Removes all the user trackers where companyId = &#63; from the database.
 	 *
-	 * @param companyId the company ID to search with
+	 * @param companyId the company ID
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByCompanyId(long companyId) throws SystemException {
@@ -1554,7 +1554,7 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 	/**
 	 * Removes all the user trackers where userId = &#63; from the database.
 	 *
-	 * @param userId the user ID to search with
+	 * @param userId the user ID
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByUserId(long userId) throws SystemException {
@@ -1566,7 +1566,7 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 	/**
 	 * Removes all the user trackers where sessionId = &#63; from the database.
 	 *
-	 * @param sessionId the session ID to search with
+	 * @param sessionId the session ID
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeBySessionId(String sessionId) throws SystemException {
@@ -1587,9 +1587,9 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 	}
 
 	/**
-	 * Counts all the user trackers where companyId = &#63;.
+	 * Returns the number of user trackers where companyId = &#63;.
 	 *
-	 * @param companyId the company ID to search with
+	 * @param companyId the company ID
 	 * @return the number of matching user trackers
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1640,9 +1640,9 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 	}
 
 	/**
-	 * Counts all the user trackers where userId = &#63;.
+	 * Returns the number of user trackers where userId = &#63;.
 	 *
-	 * @param userId the user ID to search with
+	 * @param userId the user ID
 	 * @return the number of matching user trackers
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1693,9 +1693,9 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 	}
 
 	/**
-	 * Counts all the user trackers where sessionId = &#63;.
+	 * Returns the number of user trackers where sessionId = &#63;.
 	 *
-	 * @param sessionId the session ID to search with
+	 * @param sessionId the session ID
 	 * @return the number of matching user trackers
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1758,7 +1758,7 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 	}
 
 	/**
-	 * Counts all the user trackers.
+	 * Returns the number of user trackers.
 	 *
 	 * @return the number of user trackers
 	 * @throws SystemException if a system exception occurred

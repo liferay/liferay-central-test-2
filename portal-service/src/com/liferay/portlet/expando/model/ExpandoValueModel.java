@@ -42,21 +42,21 @@ public interface ExpandoValueModel extends AttachedModel, BaseModel<ExpandoValue
 	 */
 
 	/**
-	 * Gets the primary key of this expando value.
+	 * Returns the primary key of this expando value.
 	 *
 	 * @return the primary key of this expando value
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this expando value
+	 * Sets the primary key of this expando value.
 	 *
 	 * @param primaryKey the primary key of this expando value
 	 */
 	public void setPrimaryKey(long primaryKey);
 
 	/**
-	 * Gets the value ID of this expando value.
+	 * Returns the value ID of this expando value.
 	 *
 	 * @return the value ID of this expando value
 	 */
@@ -70,7 +70,7 @@ public interface ExpandoValueModel extends AttachedModel, BaseModel<ExpandoValue
 	public void setValueId(long valueId);
 
 	/**
-	 * Gets the company ID of this expando value.
+	 * Returns the company ID of this expando value.
 	 *
 	 * @return the company ID of this expando value
 	 */
@@ -84,7 +84,7 @@ public interface ExpandoValueModel extends AttachedModel, BaseModel<ExpandoValue
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the table ID of this expando value.
+	 * Returns the table ID of this expando value.
 	 *
 	 * @return the table ID of this expando value
 	 */
@@ -98,7 +98,7 @@ public interface ExpandoValueModel extends AttachedModel, BaseModel<ExpandoValue
 	public void setTableId(long tableId);
 
 	/**
-	 * Gets the column ID of this expando value.
+	 * Returns the column ID of this expando value.
 	 *
 	 * @return the column ID of this expando value
 	 */
@@ -112,7 +112,7 @@ public interface ExpandoValueModel extends AttachedModel, BaseModel<ExpandoValue
 	public void setColumnId(long columnId);
 
 	/**
-	 * Gets the row ID of this expando value.
+	 * Returns the row ID of this expando value.
 	 *
 	 * @return the row ID of this expando value
 	 */
@@ -126,14 +126,14 @@ public interface ExpandoValueModel extends AttachedModel, BaseModel<ExpandoValue
 	public void setRowId(long rowId);
 
 	/**
-	 * Gets the class name of the model instance this expando value is polymorphically associated with.
+	 * Returns the fully qualified class name of this expando value.
 	 *
-	 * @return the class name of the model instance this expando value is polymorphically associated with
+	 * @return the fully qualified class name of this expando value
 	 */
 	public String getClassName();
 
 	/**
-	 * Gets the class name ID of this expando value.
+	 * Returns the class name ID of this expando value.
 	 *
 	 * @return the class name ID of this expando value
 	 */
@@ -147,7 +147,7 @@ public interface ExpandoValueModel extends AttachedModel, BaseModel<ExpandoValue
 	public void setClassNameId(long classNameId);
 
 	/**
-	 * Gets the class p k of this expando value.
+	 * Returns the class p k of this expando value.
 	 *
 	 * @return the class p k of this expando value
 	 */
@@ -161,7 +161,7 @@ public interface ExpandoValueModel extends AttachedModel, BaseModel<ExpandoValue
 	public void setClassPK(long classPK);
 
 	/**
-	 * Gets the data of this expando value.
+	 * Returns the data of this expando value.
 	 *
 	 * @return the data of this expando value
 	 */

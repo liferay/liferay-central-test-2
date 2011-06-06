@@ -37,7 +37,7 @@ public class RatingsStatsWrapper implements RatingsStats {
 	}
 
 	/**
-	* Gets the primary key of this ratings stats.
+	* Returns the primary key of this ratings stats.
 	*
 	* @return the primary key of this ratings stats
 	*/
@@ -46,7 +46,7 @@ public class RatingsStatsWrapper implements RatingsStats {
 	}
 
 	/**
-	* Sets the primary key of this ratings stats
+	* Sets the primary key of this ratings stats.
 	*
 	* @param primaryKey the primary key of this ratings stats
 	*/
@@ -55,7 +55,7 @@ public class RatingsStatsWrapper implements RatingsStats {
 	}
 
 	/**
-	* Gets the stats ID of this ratings stats.
+	* Returns the stats ID of this ratings stats.
 	*
 	* @return the stats ID of this ratings stats
 	*/
@@ -73,16 +73,16 @@ public class RatingsStatsWrapper implements RatingsStats {
 	}
 
 	/**
-	* Gets the class name of the model instance this ratings stats is polymorphically associated with.
+	* Returns the fully qualified class name of this ratings stats.
 	*
-	* @return the class name of the model instance this ratings stats is polymorphically associated with
+	* @return the fully qualified class name of this ratings stats
 	*/
 	public java.lang.String getClassName() {
 		return _ratingsStats.getClassName();
 	}
 
 	/**
-	* Gets the class name ID of this ratings stats.
+	* Returns the class name ID of this ratings stats.
 	*
 	* @return the class name ID of this ratings stats
 	*/
@@ -100,7 +100,7 @@ public class RatingsStatsWrapper implements RatingsStats {
 	}
 
 	/**
-	* Gets the class p k of this ratings stats.
+	* Returns the class p k of this ratings stats.
 	*
 	* @return the class p k of this ratings stats
 	*/
@@ -118,7 +118,7 @@ public class RatingsStatsWrapper implements RatingsStats {
 	}
 
 	/**
-	* Gets the total entries of this ratings stats.
+	* Returns the total entries of this ratings stats.
 	*
 	* @return the total entries of this ratings stats
 	*/
@@ -136,7 +136,7 @@ public class RatingsStatsWrapper implements RatingsStats {
 	}
 
 	/**
-	* Gets the total score of this ratings stats.
+	* Returns the total score of this ratings stats.
 	*
 	* @return the total score of this ratings stats
 	*/
@@ -154,7 +154,7 @@ public class RatingsStatsWrapper implements RatingsStats {
 	}
 
 	/**
-	* Gets the average score of this ratings stats.
+	* Returns the average score of this ratings stats.
 	*
 	* @return the average score of this ratings stats
 	*/

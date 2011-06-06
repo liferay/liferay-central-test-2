@@ -33,7 +33,7 @@ public class WorkflowDefinitionLinkLocalServiceWrapper
 	/**
 	* Adds the workflow definition link to the database. Also notifies the appropriate model listeners.
 	*
-	* @param workflowDefinitionLink the workflow definition link to add
+	* @param workflowDefinitionLink the workflow definition link
 	* @return the workflow definition link that was added
 	* @throws SystemException if a system exception occurred
 	*/
@@ -57,7 +57,7 @@ public class WorkflowDefinitionLinkLocalServiceWrapper
 	/**
 	* Deletes the workflow definition link with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param workflowDefinitionLinkId the primary key of the workflow definition link to delete
+	* @param workflowDefinitionLinkId the primary key of the workflow definition link
 	* @throws PortalException if a workflow definition link with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -70,7 +70,7 @@ public class WorkflowDefinitionLinkLocalServiceWrapper
 	/**
 	* Deletes the workflow definition link from the database. Also notifies the appropriate model listeners.
 	*
-	* @param workflowDefinitionLink the workflow definition link to delete
+	* @param workflowDefinitionLink the workflow definition link
 	* @throws SystemException if a system exception occurred
 	*/
 	public void deleteWorkflowDefinitionLink(
@@ -82,7 +82,7 @@ public class WorkflowDefinitionLinkLocalServiceWrapper
 	/**
 	* Performs a dynamic query on the database and returns the matching rows.
 	*
-	* @param dynamicQuery the dynamic query to search with
+	* @param dynamicQuery the dynamic query
 	* @return the matching rows
 	* @throws SystemException if a system exception occurred
 	*/
@@ -100,9 +100,9 @@ public class WorkflowDefinitionLinkLocalServiceWrapper
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param dynamicQuery the dynamic query to search with
-	* @param start the lower bound of the range of model instances to return
-	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param dynamicQuery the dynamic query
+	* @param start the lower bound of the range of model instances
+	* @param end the upper bound of the range of model instances (not inclusive)
 	* @return the range of matching rows
 	* @throws SystemException if a system exception occurred
 	*/
@@ -121,9 +121,9 @@ public class WorkflowDefinitionLinkLocalServiceWrapper
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param dynamicQuery the dynamic query to search with
-	* @param start the lower bound of the range of model instances to return
-	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param dynamicQuery the dynamic query
+	* @param start the lower bound of the range of model instances
+	* @param end the upper bound of the range of model instances (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching rows
 	* @throws SystemException if a system exception occurred
@@ -139,9 +139,9 @@ public class WorkflowDefinitionLinkLocalServiceWrapper
 	}
 
 	/**
-	* Counts the number of rows that match the dynamic query.
+	* Returns the number of rows that match the dynamic query.
 	*
-	* @param dynamicQuery the dynamic query to search with
+	* @param dynamicQuery the dynamic query
 	* @return the number of rows that match the dynamic query
 	* @throws SystemException if a system exception occurred
 	*/
@@ -152,9 +152,9 @@ public class WorkflowDefinitionLinkLocalServiceWrapper
 	}
 
 	/**
-	* Gets the workflow definition link with the primary key.
+	* Returns the workflow definition link with the primary key.
 	*
-	* @param workflowDefinitionLinkId the primary key of the workflow definition link to get
+	* @param workflowDefinitionLinkId the primary key of the workflow definition link
 	* @return the workflow definition link
 	* @throws PortalException if a workflow definition link with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -167,14 +167,14 @@ public class WorkflowDefinitionLinkLocalServiceWrapper
 	}
 
 	/**
-	* Gets a range of all the workflow definition links.
+	* Returns a range of all the workflow definition links.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of workflow definition links to return
-	* @param end the upper bound of the range of workflow definition links to return (not inclusive)
+	* @param start the lower bound of the range of workflow definition links
+	* @param end the upper bound of the range of workflow definition links (not inclusive)
 	* @return the range of workflow definition links
 	* @throws SystemException if a system exception occurred
 	*/
@@ -186,7 +186,7 @@ public class WorkflowDefinitionLinkLocalServiceWrapper
 	}
 
 	/**
-	* Gets the number of workflow definition links.
+	* Returns the number of workflow definition links.
 	*
 	* @return the number of workflow definition links
 	* @throws SystemException if a system exception occurred
@@ -199,7 +199,7 @@ public class WorkflowDefinitionLinkLocalServiceWrapper
 	/**
 	* Updates the workflow definition link in the database. Also notifies the appropriate model listeners.
 	*
-	* @param workflowDefinitionLink the workflow definition link to update
+	* @param workflowDefinitionLink the workflow definition link
 	* @return the workflow definition link that was updated
 	* @throws SystemException if a system exception occurred
 	*/
@@ -212,7 +212,7 @@ public class WorkflowDefinitionLinkLocalServiceWrapper
 	/**
 	* Updates the workflow definition link in the database. Also notifies the appropriate model listeners.
 	*
-	* @param workflowDefinitionLink the workflow definition link to update
+	* @param workflowDefinitionLink the workflow definition link
 	* @param merge whether to merge the workflow definition link with the current session. See {@link com.liferay.portal.service.persistence.BatchSession#update(com.liferay.portal.kernel.dao.orm.Session, com.liferay.portal.model.BaseModel, boolean)} for an explanation.
 	* @return the workflow definition link that was updated
 	* @throws SystemException if a system exception occurred
@@ -226,7 +226,7 @@ public class WorkflowDefinitionLinkLocalServiceWrapper
 	}
 
 	/**
-	* Gets the Spring bean ID for this bean.
+	* Returns the Spring bean ID for this bean.
 	*
 	* @return the Spring bean ID for this bean
 	*/

@@ -38,7 +38,7 @@ public class WorkflowInstanceLinkWrapper implements WorkflowInstanceLink {
 	}
 
 	/**
-	* Gets the primary key of this workflow instance link.
+	* Returns the primary key of this workflow instance link.
 	*
 	* @return the primary key of this workflow instance link
 	*/
@@ -47,7 +47,7 @@ public class WorkflowInstanceLinkWrapper implements WorkflowInstanceLink {
 	}
 
 	/**
-	* Sets the primary key of this workflow instance link
+	* Sets the primary key of this workflow instance link.
 	*
 	* @param primaryKey the primary key of this workflow instance link
 	*/
@@ -56,7 +56,7 @@ public class WorkflowInstanceLinkWrapper implements WorkflowInstanceLink {
 	}
 
 	/**
-	* Gets the workflow instance link ID of this workflow instance link.
+	* Returns the workflow instance link ID of this workflow instance link.
 	*
 	* @return the workflow instance link ID of this workflow instance link
 	*/
@@ -74,7 +74,7 @@ public class WorkflowInstanceLinkWrapper implements WorkflowInstanceLink {
 	}
 
 	/**
-	* Gets the group ID of this workflow instance link.
+	* Returns the group ID of this workflow instance link.
 	*
 	* @return the group ID of this workflow instance link
 	*/
@@ -92,7 +92,7 @@ public class WorkflowInstanceLinkWrapper implements WorkflowInstanceLink {
 	}
 
 	/**
-	* Gets the company ID of this workflow instance link.
+	* Returns the company ID of this workflow instance link.
 	*
 	* @return the company ID of this workflow instance link
 	*/
@@ -110,7 +110,7 @@ public class WorkflowInstanceLinkWrapper implements WorkflowInstanceLink {
 	}
 
 	/**
-	* Gets the user ID of this workflow instance link.
+	* Returns the user ID of this workflow instance link.
 	*
 	* @return the user ID of this workflow instance link
 	*/
@@ -128,7 +128,7 @@ public class WorkflowInstanceLinkWrapper implements WorkflowInstanceLink {
 	}
 
 	/**
-	* Gets the user uuid of this workflow instance link.
+	* Returns the user uuid of this workflow instance link.
 	*
 	* @return the user uuid of this workflow instance link
 	* @throws SystemException if a system exception occurred
@@ -148,7 +148,7 @@ public class WorkflowInstanceLinkWrapper implements WorkflowInstanceLink {
 	}
 
 	/**
-	* Gets the user name of this workflow instance link.
+	* Returns the user name of this workflow instance link.
 	*
 	* @return the user name of this workflow instance link
 	*/
@@ -166,7 +166,7 @@ public class WorkflowInstanceLinkWrapper implements WorkflowInstanceLink {
 	}
 
 	/**
-	* Gets the create date of this workflow instance link.
+	* Returns the create date of this workflow instance link.
 	*
 	* @return the create date of this workflow instance link
 	*/
@@ -184,7 +184,7 @@ public class WorkflowInstanceLinkWrapper implements WorkflowInstanceLink {
 	}
 
 	/**
-	* Gets the modified date of this workflow instance link.
+	* Returns the modified date of this workflow instance link.
 	*
 	* @return the modified date of this workflow instance link
 	*/
@@ -202,16 +202,16 @@ public class WorkflowInstanceLinkWrapper implements WorkflowInstanceLink {
 	}
 
 	/**
-	* Gets the class name of the model instance this workflow instance link is polymorphically associated with.
+	* Returns the fully qualified class name of this workflow instance link.
 	*
-	* @return the class name of the model instance this workflow instance link is polymorphically associated with
+	* @return the fully qualified class name of this workflow instance link
 	*/
 	public java.lang.String getClassName() {
 		return _workflowInstanceLink.getClassName();
 	}
 
 	/**
-	* Gets the class name ID of this workflow instance link.
+	* Returns the class name ID of this workflow instance link.
 	*
 	* @return the class name ID of this workflow instance link
 	*/
@@ -229,7 +229,7 @@ public class WorkflowInstanceLinkWrapper implements WorkflowInstanceLink {
 	}
 
 	/**
-	* Gets the class p k of this workflow instance link.
+	* Returns the class p k of this workflow instance link.
 	*
 	* @return the class p k of this workflow instance link
 	*/
@@ -247,7 +247,7 @@ public class WorkflowInstanceLinkWrapper implements WorkflowInstanceLink {
 	}
 
 	/**
-	* Gets the workflow instance ID of this workflow instance link.
+	* Returns the workflow instance ID of this workflow instance link.
 	*
 	* @return the workflow instance ID of this workflow instance link
 	*/

@@ -32,7 +32,7 @@ public class MBCategoryLocalServiceWrapper implements MBCategoryLocalService {
 	/**
 	* Adds the message boards category to the database. Also notifies the appropriate model listeners.
 	*
-	* @param mbCategory the message boards category to add
+	* @param mbCategory the message boards category
 	* @return the message boards category that was added
 	* @throws SystemException if a system exception occurred
 	*/
@@ -56,7 +56,7 @@ public class MBCategoryLocalServiceWrapper implements MBCategoryLocalService {
 	/**
 	* Deletes the message boards category with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param categoryId the primary key of the message boards category to delete
+	* @param categoryId the primary key of the message boards category
 	* @throws PortalException if a message boards category with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -69,7 +69,7 @@ public class MBCategoryLocalServiceWrapper implements MBCategoryLocalService {
 	/**
 	* Deletes the message boards category from the database. Also notifies the appropriate model listeners.
 	*
-	* @param mbCategory the message boards category to delete
+	* @param mbCategory the message boards category
 	* @throws SystemException if a system exception occurred
 	*/
 	public void deleteMBCategory(
@@ -81,7 +81,7 @@ public class MBCategoryLocalServiceWrapper implements MBCategoryLocalService {
 	/**
 	* Performs a dynamic query on the database and returns the matching rows.
 	*
-	* @param dynamicQuery the dynamic query to search with
+	* @param dynamicQuery the dynamic query
 	* @return the matching rows
 	* @throws SystemException if a system exception occurred
 	*/
@@ -99,9 +99,9 @@ public class MBCategoryLocalServiceWrapper implements MBCategoryLocalService {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param dynamicQuery the dynamic query to search with
-	* @param start the lower bound of the range of model instances to return
-	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param dynamicQuery the dynamic query
+	* @param start the lower bound of the range of model instances
+	* @param end the upper bound of the range of model instances (not inclusive)
 	* @return the range of matching rows
 	* @throws SystemException if a system exception occurred
 	*/
@@ -119,9 +119,9 @@ public class MBCategoryLocalServiceWrapper implements MBCategoryLocalService {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param dynamicQuery the dynamic query to search with
-	* @param start the lower bound of the range of model instances to return
-	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param dynamicQuery the dynamic query
+	* @param start the lower bound of the range of model instances
+	* @param end the upper bound of the range of model instances (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching rows
 	* @throws SystemException if a system exception occurred
@@ -137,9 +137,9 @@ public class MBCategoryLocalServiceWrapper implements MBCategoryLocalService {
 	}
 
 	/**
-	* Counts the number of rows that match the dynamic query.
+	* Returns the number of rows that match the dynamic query.
 	*
-	* @param dynamicQuery the dynamic query to search with
+	* @param dynamicQuery the dynamic query
 	* @return the number of rows that match the dynamic query
 	* @throws SystemException if a system exception occurred
 	*/
@@ -150,9 +150,9 @@ public class MBCategoryLocalServiceWrapper implements MBCategoryLocalService {
 	}
 
 	/**
-	* Gets the message boards category with the primary key.
+	* Returns the message boards category with the primary key.
 	*
-	* @param categoryId the primary key of the message boards category to get
+	* @param categoryId the primary key of the message boards category
 	* @return the message boards category
 	* @throws PortalException if a message boards category with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -165,12 +165,12 @@ public class MBCategoryLocalServiceWrapper implements MBCategoryLocalService {
 	}
 
 	/**
-	* Gets the message boards category with the UUID and group id.
+	* Returns the message boards category with the UUID in the group.
 	*
-	* @param uuid the UUID of message boards category to get
-	* @param groupId the group id of the message boards category to get
+	* @param uuid the UUID of message boards category
+	* @param groupId the group id of the message boards category
 	* @return the message boards category
-	* @throws PortalException if a message boards category with the UUID and group id could not be found
+	* @throws PortalException if a message boards category with the UUID in the group could not be found
 	* @throws SystemException if a system exception occurred
 	*/
 	public com.liferay.portlet.messageboards.model.MBCategory getMBCategoryByUuidAndGroupId(
@@ -182,14 +182,14 @@ public class MBCategoryLocalServiceWrapper implements MBCategoryLocalService {
 	}
 
 	/**
-	* Gets a range of all the message boards categories.
+	* Returns a range of all the message boards categories.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of message boards categories to return
-	* @param end the upper bound of the range of message boards categories to return (not inclusive)
+	* @param start the lower bound of the range of message boards categories
+	* @param end the upper bound of the range of message boards categories (not inclusive)
 	* @return the range of message boards categories
 	* @throws SystemException if a system exception occurred
 	*/
@@ -200,7 +200,7 @@ public class MBCategoryLocalServiceWrapper implements MBCategoryLocalService {
 	}
 
 	/**
-	* Gets the number of message boards categories.
+	* Returns the number of message boards categories.
 	*
 	* @return the number of message boards categories
 	* @throws SystemException if a system exception occurred
@@ -213,7 +213,7 @@ public class MBCategoryLocalServiceWrapper implements MBCategoryLocalService {
 	/**
 	* Updates the message boards category in the database. Also notifies the appropriate model listeners.
 	*
-	* @param mbCategory the message boards category to update
+	* @param mbCategory the message boards category
 	* @return the message boards category that was updated
 	* @throws SystemException if a system exception occurred
 	*/
@@ -226,7 +226,7 @@ public class MBCategoryLocalServiceWrapper implements MBCategoryLocalService {
 	/**
 	* Updates the message boards category in the database. Also notifies the appropriate model listeners.
 	*
-	* @param mbCategory the message boards category to update
+	* @param mbCategory the message boards category
 	* @param merge whether to merge the message boards category with the current session. See {@link com.liferay.portal.service.persistence.BatchSession#update(com.liferay.portal.kernel.dao.orm.Session, com.liferay.portal.model.BaseModel, boolean)} for an explanation.
 	* @return the message boards category that was updated
 	* @throws SystemException if a system exception occurred
@@ -239,7 +239,7 @@ public class MBCategoryLocalServiceWrapper implements MBCategoryLocalService {
 	}
 
 	/**
-	* Gets the Spring bean ID for this bean.
+	* Returns the Spring bean ID for this bean.
 	*
 	* @return the Spring bean ID for this bean
 	*/

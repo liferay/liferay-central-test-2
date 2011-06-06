@@ -47,21 +47,21 @@ public interface ShoppingItemModel extends BaseModel<ShoppingItem>, GroupedModel
 	 */
 
 	/**
-	 * Gets the primary key of this shopping item.
+	 * Returns the primary key of this shopping item.
 	 *
 	 * @return the primary key of this shopping item
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this shopping item
+	 * Sets the primary key of this shopping item.
 	 *
 	 * @param primaryKey the primary key of this shopping item
 	 */
 	public void setPrimaryKey(long primaryKey);
 
 	/**
-	 * Gets the item ID of this shopping item.
+	 * Returns the item ID of this shopping item.
 	 *
 	 * @return the item ID of this shopping item
 	 */
@@ -75,7 +75,7 @@ public interface ShoppingItemModel extends BaseModel<ShoppingItem>, GroupedModel
 	public void setItemId(long itemId);
 
 	/**
-	 * Gets the group ID of this shopping item.
+	 * Returns the group ID of this shopping item.
 	 *
 	 * @return the group ID of this shopping item
 	 */
@@ -89,7 +89,7 @@ public interface ShoppingItemModel extends BaseModel<ShoppingItem>, GroupedModel
 	public void setGroupId(long groupId);
 
 	/**
-	 * Gets the company ID of this shopping item.
+	 * Returns the company ID of this shopping item.
 	 *
 	 * @return the company ID of this shopping item
 	 */
@@ -103,7 +103,7 @@ public interface ShoppingItemModel extends BaseModel<ShoppingItem>, GroupedModel
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the user ID of this shopping item.
+	 * Returns the user ID of this shopping item.
 	 *
 	 * @return the user ID of this shopping item
 	 */
@@ -117,7 +117,7 @@ public interface ShoppingItemModel extends BaseModel<ShoppingItem>, GroupedModel
 	public void setUserId(long userId);
 
 	/**
-	 * Gets the user uuid of this shopping item.
+	 * Returns the user uuid of this shopping item.
 	 *
 	 * @return the user uuid of this shopping item
 	 * @throws SystemException if a system exception occurred
@@ -132,7 +132,7 @@ public interface ShoppingItemModel extends BaseModel<ShoppingItem>, GroupedModel
 	public void setUserUuid(String userUuid);
 
 	/**
-	 * Gets the user name of this shopping item.
+	 * Returns the user name of this shopping item.
 	 *
 	 * @return the user name of this shopping item
 	 */
@@ -147,7 +147,7 @@ public interface ShoppingItemModel extends BaseModel<ShoppingItem>, GroupedModel
 	public void setUserName(String userName);
 
 	/**
-	 * Gets the create date of this shopping item.
+	 * Returns the create date of this shopping item.
 	 *
 	 * @return the create date of this shopping item
 	 */
@@ -161,7 +161,7 @@ public interface ShoppingItemModel extends BaseModel<ShoppingItem>, GroupedModel
 	public void setCreateDate(Date createDate);
 
 	/**
-	 * Gets the modified date of this shopping item.
+	 * Returns the modified date of this shopping item.
 	 *
 	 * @return the modified date of this shopping item
 	 */
@@ -175,7 +175,7 @@ public interface ShoppingItemModel extends BaseModel<ShoppingItem>, GroupedModel
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
-	 * Gets the category ID of this shopping item.
+	 * Returns the category ID of this shopping item.
 	 *
 	 * @return the category ID of this shopping item
 	 */
@@ -189,7 +189,7 @@ public interface ShoppingItemModel extends BaseModel<ShoppingItem>, GroupedModel
 	public void setCategoryId(long categoryId);
 
 	/**
-	 * Gets the sku of this shopping item.
+	 * Returns the sku of this shopping item.
 	 *
 	 * @return the sku of this shopping item
 	 */
@@ -204,7 +204,7 @@ public interface ShoppingItemModel extends BaseModel<ShoppingItem>, GroupedModel
 	public void setSku(String sku);
 
 	/**
-	 * Gets the name of this shopping item.
+	 * Returns the name of this shopping item.
 	 *
 	 * @return the name of this shopping item
 	 */
@@ -219,7 +219,7 @@ public interface ShoppingItemModel extends BaseModel<ShoppingItem>, GroupedModel
 	public void setName(String name);
 
 	/**
-	 * Gets the description of this shopping item.
+	 * Returns the description of this shopping item.
 	 *
 	 * @return the description of this shopping item
 	 */
@@ -234,7 +234,7 @@ public interface ShoppingItemModel extends BaseModel<ShoppingItem>, GroupedModel
 	public void setDescription(String description);
 
 	/**
-	 * Gets the properties of this shopping item.
+	 * Returns the properties of this shopping item.
 	 *
 	 * @return the properties of this shopping item
 	 */
@@ -249,7 +249,7 @@ public interface ShoppingItemModel extends BaseModel<ShoppingItem>, GroupedModel
 	public void setProperties(String properties);
 
 	/**
-	 * Gets the fields of this shopping item.
+	 * Returns the fields of this shopping item.
 	 *
 	 * @return the fields of this shopping item
 	 */
@@ -270,7 +270,7 @@ public interface ShoppingItemModel extends BaseModel<ShoppingItem>, GroupedModel
 	public void setFields(boolean fields);
 
 	/**
-	 * Gets the fields quantities of this shopping item.
+	 * Returns the fields quantities of this shopping item.
 	 *
 	 * @return the fields quantities of this shopping item
 	 */
@@ -285,7 +285,7 @@ public interface ShoppingItemModel extends BaseModel<ShoppingItem>, GroupedModel
 	public void setFieldsQuantities(String fieldsQuantities);
 
 	/**
-	 * Gets the min quantity of this shopping item.
+	 * Returns the min quantity of this shopping item.
 	 *
 	 * @return the min quantity of this shopping item
 	 */
@@ -299,7 +299,7 @@ public interface ShoppingItemModel extends BaseModel<ShoppingItem>, GroupedModel
 	public void setMinQuantity(int minQuantity);
 
 	/**
-	 * Gets the max quantity of this shopping item.
+	 * Returns the max quantity of this shopping item.
 	 *
 	 * @return the max quantity of this shopping item
 	 */
@@ -313,7 +313,7 @@ public interface ShoppingItemModel extends BaseModel<ShoppingItem>, GroupedModel
 	public void setMaxQuantity(int maxQuantity);
 
 	/**
-	 * Gets the price of this shopping item.
+	 * Returns the price of this shopping item.
 	 *
 	 * @return the price of this shopping item
 	 */
@@ -327,7 +327,7 @@ public interface ShoppingItemModel extends BaseModel<ShoppingItem>, GroupedModel
 	public void setPrice(double price);
 
 	/**
-	 * Gets the discount of this shopping item.
+	 * Returns the discount of this shopping item.
 	 *
 	 * @return the discount of this shopping item
 	 */
@@ -341,7 +341,7 @@ public interface ShoppingItemModel extends BaseModel<ShoppingItem>, GroupedModel
 	public void setDiscount(double discount);
 
 	/**
-	 * Gets the taxable of this shopping item.
+	 * Returns the taxable of this shopping item.
 	 *
 	 * @return the taxable of this shopping item
 	 */
@@ -362,7 +362,7 @@ public interface ShoppingItemModel extends BaseModel<ShoppingItem>, GroupedModel
 	public void setTaxable(boolean taxable);
 
 	/**
-	 * Gets the shipping of this shopping item.
+	 * Returns the shipping of this shopping item.
 	 *
 	 * @return the shipping of this shopping item
 	 */
@@ -376,7 +376,7 @@ public interface ShoppingItemModel extends BaseModel<ShoppingItem>, GroupedModel
 	public void setShipping(double shipping);
 
 	/**
-	 * Gets the use shipping formula of this shopping item.
+	 * Returns the use shipping formula of this shopping item.
 	 *
 	 * @return the use shipping formula of this shopping item
 	 */
@@ -397,7 +397,7 @@ public interface ShoppingItemModel extends BaseModel<ShoppingItem>, GroupedModel
 	public void setUseShippingFormula(boolean useShippingFormula);
 
 	/**
-	 * Gets the requires shipping of this shopping item.
+	 * Returns the requires shipping of this shopping item.
 	 *
 	 * @return the requires shipping of this shopping item
 	 */
@@ -418,7 +418,7 @@ public interface ShoppingItemModel extends BaseModel<ShoppingItem>, GroupedModel
 	public void setRequiresShipping(boolean requiresShipping);
 
 	/**
-	 * Gets the stock quantity of this shopping item.
+	 * Returns the stock quantity of this shopping item.
 	 *
 	 * @return the stock quantity of this shopping item
 	 */
@@ -432,7 +432,7 @@ public interface ShoppingItemModel extends BaseModel<ShoppingItem>, GroupedModel
 	public void setStockQuantity(int stockQuantity);
 
 	/**
-	 * Gets the featured of this shopping item.
+	 * Returns the featured of this shopping item.
 	 *
 	 * @return the featured of this shopping item
 	 */
@@ -453,7 +453,7 @@ public interface ShoppingItemModel extends BaseModel<ShoppingItem>, GroupedModel
 	public void setFeatured(boolean featured);
 
 	/**
-	 * Gets the sale of this shopping item.
+	 * Returns the sale of this shopping item.
 	 *
 	 * @return the sale of this shopping item
 	 */
@@ -474,7 +474,7 @@ public interface ShoppingItemModel extends BaseModel<ShoppingItem>, GroupedModel
 	public void setSale(boolean sale);
 
 	/**
-	 * Gets the small image of this shopping item.
+	 * Returns the small image of this shopping item.
 	 *
 	 * @return the small image of this shopping item
 	 */
@@ -495,7 +495,7 @@ public interface ShoppingItemModel extends BaseModel<ShoppingItem>, GroupedModel
 	public void setSmallImage(boolean smallImage);
 
 	/**
-	 * Gets the small image ID of this shopping item.
+	 * Returns the small image ID of this shopping item.
 	 *
 	 * @return the small image ID of this shopping item
 	 */
@@ -509,7 +509,7 @@ public interface ShoppingItemModel extends BaseModel<ShoppingItem>, GroupedModel
 	public void setSmallImageId(long smallImageId);
 
 	/**
-	 * Gets the small image u r l of this shopping item.
+	 * Returns the small image u r l of this shopping item.
 	 *
 	 * @return the small image u r l of this shopping item
 	 */
@@ -524,7 +524,7 @@ public interface ShoppingItemModel extends BaseModel<ShoppingItem>, GroupedModel
 	public void setSmallImageURL(String smallImageURL);
 
 	/**
-	 * Gets the medium image of this shopping item.
+	 * Returns the medium image of this shopping item.
 	 *
 	 * @return the medium image of this shopping item
 	 */
@@ -545,7 +545,7 @@ public interface ShoppingItemModel extends BaseModel<ShoppingItem>, GroupedModel
 	public void setMediumImage(boolean mediumImage);
 
 	/**
-	 * Gets the medium image ID of this shopping item.
+	 * Returns the medium image ID of this shopping item.
 	 *
 	 * @return the medium image ID of this shopping item
 	 */
@@ -559,7 +559,7 @@ public interface ShoppingItemModel extends BaseModel<ShoppingItem>, GroupedModel
 	public void setMediumImageId(long mediumImageId);
 
 	/**
-	 * Gets the medium image u r l of this shopping item.
+	 * Returns the medium image u r l of this shopping item.
 	 *
 	 * @return the medium image u r l of this shopping item
 	 */
@@ -574,7 +574,7 @@ public interface ShoppingItemModel extends BaseModel<ShoppingItem>, GroupedModel
 	public void setMediumImageURL(String mediumImageURL);
 
 	/**
-	 * Gets the large image of this shopping item.
+	 * Returns the large image of this shopping item.
 	 *
 	 * @return the large image of this shopping item
 	 */
@@ -595,7 +595,7 @@ public interface ShoppingItemModel extends BaseModel<ShoppingItem>, GroupedModel
 	public void setLargeImage(boolean largeImage);
 
 	/**
-	 * Gets the large image ID of this shopping item.
+	 * Returns the large image ID of this shopping item.
 	 *
 	 * @return the large image ID of this shopping item
 	 */
@@ -609,7 +609,7 @@ public interface ShoppingItemModel extends BaseModel<ShoppingItem>, GroupedModel
 	public void setLargeImageId(long largeImageId);
 
 	/**
-	 * Gets the large image u r l of this shopping item.
+	 * Returns the large image u r l of this shopping item.
 	 *
 	 * @return the large image u r l of this shopping item
 	 */

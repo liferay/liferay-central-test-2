@@ -37,7 +37,7 @@ public class ClusterGroupWrapper implements ClusterGroup {
 	}
 
 	/**
-	* Gets the primary key of this cluster group.
+	* Returns the primary key of this cluster group.
 	*
 	* @return the primary key of this cluster group
 	*/
@@ -46,7 +46,7 @@ public class ClusterGroupWrapper implements ClusterGroup {
 	}
 
 	/**
-	* Sets the primary key of this cluster group
+	* Sets the primary key of this cluster group.
 	*
 	* @param primaryKey the primary key of this cluster group
 	*/
@@ -55,7 +55,7 @@ public class ClusterGroupWrapper implements ClusterGroup {
 	}
 
 	/**
-	* Gets the cluster group ID of this cluster group.
+	* Returns the cluster group ID of this cluster group.
 	*
 	* @return the cluster group ID of this cluster group
 	*/
@@ -73,7 +73,7 @@ public class ClusterGroupWrapper implements ClusterGroup {
 	}
 
 	/**
-	* Gets the name of this cluster group.
+	* Returns the name of this cluster group.
 	*
 	* @return the name of this cluster group
 	*/
@@ -91,7 +91,7 @@ public class ClusterGroupWrapper implements ClusterGroup {
 	}
 
 	/**
-	* Gets the cluster node IDs of this cluster group.
+	* Returns the cluster node IDs of this cluster group.
 	*
 	* @return the cluster node IDs of this cluster group
 	*/
@@ -109,7 +109,7 @@ public class ClusterGroupWrapper implements ClusterGroup {
 	}
 
 	/**
-	* Gets the whole cluster of this cluster group.
+	* Returns the whole cluster of this cluster group.
 	*
 	* @return the whole cluster of this cluster group
 	*/

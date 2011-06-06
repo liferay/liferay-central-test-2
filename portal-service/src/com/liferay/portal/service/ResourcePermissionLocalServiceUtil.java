@@ -41,7 +41,7 @@ public class ResourcePermissionLocalServiceUtil {
 	/**
 	* Adds the resource permission to the database. Also notifies the appropriate model listeners.
 	*
-	* @param resourcePermission the resource permission to add
+	* @param resourcePermission the resource permission
 	* @return the resource permission that was added
 	* @throws SystemException if a system exception occurred
 	*/
@@ -65,7 +65,7 @@ public class ResourcePermissionLocalServiceUtil {
 	/**
 	* Deletes the resource permission with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param resourcePermissionId the primary key of the resource permission to delete
+	* @param resourcePermissionId the primary key of the resource permission
 	* @throws PortalException if a resource permission with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -78,7 +78,7 @@ public class ResourcePermissionLocalServiceUtil {
 	/**
 	* Deletes the resource permission from the database. Also notifies the appropriate model listeners.
 	*
-	* @param resourcePermission the resource permission to delete
+	* @param resourcePermission the resource permission
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void deleteResourcePermission(
@@ -90,7 +90,7 @@ public class ResourcePermissionLocalServiceUtil {
 	/**
 	* Performs a dynamic query on the database and returns the matching rows.
 	*
-	* @param dynamicQuery the dynamic query to search with
+	* @param dynamicQuery the dynamic query
 	* @return the matching rows
 	* @throws SystemException if a system exception occurred
 	*/
@@ -108,9 +108,9 @@ public class ResourcePermissionLocalServiceUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param dynamicQuery the dynamic query to search with
-	* @param start the lower bound of the range of model instances to return
-	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param dynamicQuery the dynamic query
+	* @param start the lower bound of the range of model instances
+	* @param end the upper bound of the range of model instances (not inclusive)
 	* @return the range of matching rows
 	* @throws SystemException if a system exception occurred
 	*/
@@ -128,9 +128,9 @@ public class ResourcePermissionLocalServiceUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param dynamicQuery the dynamic query to search with
-	* @param start the lower bound of the range of model instances to return
-	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param dynamicQuery the dynamic query
+	* @param start the lower bound of the range of model instances
+	* @param end the upper bound of the range of model instances (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching rows
 	* @throws SystemException if a system exception occurred
@@ -146,9 +146,9 @@ public class ResourcePermissionLocalServiceUtil {
 	}
 
 	/**
-	* Counts the number of rows that match the dynamic query.
+	* Returns the number of rows that match the dynamic query.
 	*
-	* @param dynamicQuery the dynamic query to search with
+	* @param dynamicQuery the dynamic query
 	* @return the number of rows that match the dynamic query
 	* @throws SystemException if a system exception occurred
 	*/
@@ -159,9 +159,9 @@ public class ResourcePermissionLocalServiceUtil {
 	}
 
 	/**
-	* Gets the resource permission with the primary key.
+	* Returns the resource permission with the primary key.
 	*
-	* @param resourcePermissionId the primary key of the resource permission to get
+	* @param resourcePermissionId the primary key of the resource permission
 	* @return the resource permission
 	* @throws PortalException if a resource permission with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -174,14 +174,14 @@ public class ResourcePermissionLocalServiceUtil {
 	}
 
 	/**
-	* Gets a range of all the resource permissions.
+	* Returns a range of all the resource permissions.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of resource permissions to return
-	* @param end the upper bound of the range of resource permissions to return (not inclusive)
+	* @param start the lower bound of the range of resource permissions
+	* @param end the upper bound of the range of resource permissions (not inclusive)
 	* @return the range of resource permissions
 	* @throws SystemException if a system exception occurred
 	*/
@@ -192,7 +192,7 @@ public class ResourcePermissionLocalServiceUtil {
 	}
 
 	/**
-	* Gets the number of resource permissions.
+	* Returns the number of resource permissions.
 	*
 	* @return the number of resource permissions
 	* @throws SystemException if a system exception occurred
@@ -205,7 +205,7 @@ public class ResourcePermissionLocalServiceUtil {
 	/**
 	* Updates the resource permission in the database. Also notifies the appropriate model listeners.
 	*
-	* @param resourcePermission the resource permission to update
+	* @param resourcePermission the resource permission
 	* @return the resource permission that was updated
 	* @throws SystemException if a system exception occurred
 	*/
@@ -218,7 +218,7 @@ public class ResourcePermissionLocalServiceUtil {
 	/**
 	* Updates the resource permission in the database. Also notifies the appropriate model listeners.
 	*
-	* @param resourcePermission the resource permission to update
+	* @param resourcePermission the resource permission
 	* @param merge whether to merge the resource permission with the current session. See {@link com.liferay.portal.service.persistence.BatchSession#update(com.liferay.portal.kernel.dao.orm.Session, com.liferay.portal.model.BaseModel, boolean)} for an explanation.
 	* @return the resource permission that was updated
 	* @throws SystemException if a system exception occurred
@@ -231,7 +231,7 @@ public class ResourcePermissionLocalServiceUtil {
 	}
 
 	/**
-	* Gets the Spring bean ID for this bean.
+	* Returns the Spring bean ID for this bean.
 	*
 	* @return the Spring bean ID for this bean
 	*/

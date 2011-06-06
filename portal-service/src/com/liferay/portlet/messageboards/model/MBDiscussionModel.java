@@ -43,21 +43,21 @@ public interface MBDiscussionModel extends AttachedModel, BaseModel<MBDiscussion
 	 */
 
 	/**
-	 * Gets the primary key of this message boards discussion.
+	 * Returns the primary key of this message boards discussion.
 	 *
 	 * @return the primary key of this message boards discussion
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this message boards discussion
+	 * Sets the primary key of this message boards discussion.
 	 *
 	 * @param primaryKey the primary key of this message boards discussion
 	 */
 	public void setPrimaryKey(long primaryKey);
 
 	/**
-	 * Gets the discussion ID of this message boards discussion.
+	 * Returns the discussion ID of this message boards discussion.
 	 *
 	 * @return the discussion ID of this message boards discussion
 	 */
@@ -71,14 +71,14 @@ public interface MBDiscussionModel extends AttachedModel, BaseModel<MBDiscussion
 	public void setDiscussionId(long discussionId);
 
 	/**
-	 * Gets the class name of the model instance this message boards discussion is polymorphically associated with.
+	 * Returns the fully qualified class name of this message boards discussion.
 	 *
-	 * @return the class name of the model instance this message boards discussion is polymorphically associated with
+	 * @return the fully qualified class name of this message boards discussion
 	 */
 	public String getClassName();
 
 	/**
-	 * Gets the class name ID of this message boards discussion.
+	 * Returns the class name ID of this message boards discussion.
 	 *
 	 * @return the class name ID of this message boards discussion
 	 */
@@ -92,7 +92,7 @@ public interface MBDiscussionModel extends AttachedModel, BaseModel<MBDiscussion
 	public void setClassNameId(long classNameId);
 
 	/**
-	 * Gets the class p k of this message boards discussion.
+	 * Returns the class p k of this message boards discussion.
 	 *
 	 * @return the class p k of this message boards discussion
 	 */
@@ -106,7 +106,7 @@ public interface MBDiscussionModel extends AttachedModel, BaseModel<MBDiscussion
 	public void setClassPK(long classPK);
 
 	/**
-	 * Gets the thread ID of this message boards discussion.
+	 * Returns the thread ID of this message boards discussion.
 	 *
 	 * @return the thread ID of this message boards discussion
 	 */

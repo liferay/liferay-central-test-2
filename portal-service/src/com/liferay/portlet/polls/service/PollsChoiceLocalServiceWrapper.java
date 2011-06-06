@@ -32,7 +32,7 @@ public class PollsChoiceLocalServiceWrapper implements PollsChoiceLocalService {
 	/**
 	* Adds the polls choice to the database. Also notifies the appropriate model listeners.
 	*
-	* @param pollsChoice the polls choice to add
+	* @param pollsChoice the polls choice
 	* @return the polls choice that was added
 	* @throws SystemException if a system exception occurred
 	*/
@@ -56,7 +56,7 @@ public class PollsChoiceLocalServiceWrapper implements PollsChoiceLocalService {
 	/**
 	* Deletes the polls choice with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param choiceId the primary key of the polls choice to delete
+	* @param choiceId the primary key of the polls choice
 	* @throws PortalException if a polls choice with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -69,7 +69,7 @@ public class PollsChoiceLocalServiceWrapper implements PollsChoiceLocalService {
 	/**
 	* Deletes the polls choice from the database. Also notifies the appropriate model listeners.
 	*
-	* @param pollsChoice the polls choice to delete
+	* @param pollsChoice the polls choice
 	* @throws SystemException if a system exception occurred
 	*/
 	public void deletePollsChoice(
@@ -81,7 +81,7 @@ public class PollsChoiceLocalServiceWrapper implements PollsChoiceLocalService {
 	/**
 	* Performs a dynamic query on the database and returns the matching rows.
 	*
-	* @param dynamicQuery the dynamic query to search with
+	* @param dynamicQuery the dynamic query
 	* @return the matching rows
 	* @throws SystemException if a system exception occurred
 	*/
@@ -99,9 +99,9 @@ public class PollsChoiceLocalServiceWrapper implements PollsChoiceLocalService {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param dynamicQuery the dynamic query to search with
-	* @param start the lower bound of the range of model instances to return
-	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param dynamicQuery the dynamic query
+	* @param start the lower bound of the range of model instances
+	* @param end the upper bound of the range of model instances (not inclusive)
 	* @return the range of matching rows
 	* @throws SystemException if a system exception occurred
 	*/
@@ -119,9 +119,9 @@ public class PollsChoiceLocalServiceWrapper implements PollsChoiceLocalService {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param dynamicQuery the dynamic query to search with
-	* @param start the lower bound of the range of model instances to return
-	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param dynamicQuery the dynamic query
+	* @param start the lower bound of the range of model instances
+	* @param end the upper bound of the range of model instances (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching rows
 	* @throws SystemException if a system exception occurred
@@ -137,9 +137,9 @@ public class PollsChoiceLocalServiceWrapper implements PollsChoiceLocalService {
 	}
 
 	/**
-	* Counts the number of rows that match the dynamic query.
+	* Returns the number of rows that match the dynamic query.
 	*
-	* @param dynamicQuery the dynamic query to search with
+	* @param dynamicQuery the dynamic query
 	* @return the number of rows that match the dynamic query
 	* @throws SystemException if a system exception occurred
 	*/
@@ -150,9 +150,9 @@ public class PollsChoiceLocalServiceWrapper implements PollsChoiceLocalService {
 	}
 
 	/**
-	* Gets the polls choice with the primary key.
+	* Returns the polls choice with the primary key.
 	*
-	* @param choiceId the primary key of the polls choice to get
+	* @param choiceId the primary key of the polls choice
 	* @return the polls choice
 	* @throws PortalException if a polls choice with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -165,14 +165,14 @@ public class PollsChoiceLocalServiceWrapper implements PollsChoiceLocalService {
 	}
 
 	/**
-	* Gets a range of all the polls choices.
+	* Returns a range of all the polls choices.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of polls choices to return
-	* @param end the upper bound of the range of polls choices to return (not inclusive)
+	* @param start the lower bound of the range of polls choices
+	* @param end the upper bound of the range of polls choices (not inclusive)
 	* @return the range of polls choices
 	* @throws SystemException if a system exception occurred
 	*/
@@ -183,7 +183,7 @@ public class PollsChoiceLocalServiceWrapper implements PollsChoiceLocalService {
 	}
 
 	/**
-	* Gets the number of polls choices.
+	* Returns the number of polls choices.
 	*
 	* @return the number of polls choices
 	* @throws SystemException if a system exception occurred
@@ -196,7 +196,7 @@ public class PollsChoiceLocalServiceWrapper implements PollsChoiceLocalService {
 	/**
 	* Updates the polls choice in the database. Also notifies the appropriate model listeners.
 	*
-	* @param pollsChoice the polls choice to update
+	* @param pollsChoice the polls choice
 	* @return the polls choice that was updated
 	* @throws SystemException if a system exception occurred
 	*/
@@ -209,7 +209,7 @@ public class PollsChoiceLocalServiceWrapper implements PollsChoiceLocalService {
 	/**
 	* Updates the polls choice in the database. Also notifies the appropriate model listeners.
 	*
-	* @param pollsChoice the polls choice to update
+	* @param pollsChoice the polls choice
 	* @param merge whether to merge the polls choice with the current session. See {@link com.liferay.portal.service.persistence.BatchSession#update(com.liferay.portal.kernel.dao.orm.Session, com.liferay.portal.model.BaseModel, boolean)} for an explanation.
 	* @return the polls choice that was updated
 	* @throws SystemException if a system exception occurred
@@ -221,7 +221,7 @@ public class PollsChoiceLocalServiceWrapper implements PollsChoiceLocalService {
 	}
 
 	/**
-	* Gets the Spring bean ID for this bean.
+	* Returns the Spring bean ID for this bean.
 	*
 	* @return the Spring bean ID for this bean
 	*/

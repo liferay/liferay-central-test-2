@@ -121,7 +121,7 @@ public class SCProductEntryUtil {
 	/**
 	* Caches the s c product entry in the entity cache if it is enabled.
 	*
-	* @param scProductEntry the s c product entry to cache
+	* @param scProductEntry the s c product entry
 	*/
 	public static void cacheResult(
 		com.liferay.portlet.softwarecatalog.model.SCProductEntry scProductEntry) {
@@ -131,7 +131,7 @@ public class SCProductEntryUtil {
 	/**
 	* Caches the s c product entries in the entity cache if it is enabled.
 	*
-	* @param scProductEntries the s c product entries to cache
+	* @param scProductEntries the s c product entries
 	*/
 	public static void cacheResult(
 		java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductEntry> scProductEntries) {
@@ -152,7 +152,7 @@ public class SCProductEntryUtil {
 	/**
 	* Removes the s c product entry with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param productEntryId the primary key of the s c product entry to remove
+	* @param productEntryId the primary key of the s c product entry
 	* @return the s c product entry that was removed
 	* @throws com.liferay.portlet.softwarecatalog.NoSuchProductEntryException if a s c product entry with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -172,9 +172,9 @@ public class SCProductEntryUtil {
 	}
 
 	/**
-	* Finds the s c product entry with the primary key or throws a {@link com.liferay.portlet.softwarecatalog.NoSuchProductEntryException} if it could not be found.
+	* Returns the s c product entry with the primary key or throws a {@link com.liferay.portlet.softwarecatalog.NoSuchProductEntryException} if it could not be found.
 	*
-	* @param productEntryId the primary key of the s c product entry to find
+	* @param productEntryId the primary key of the s c product entry
 	* @return the s c product entry
 	* @throws com.liferay.portlet.softwarecatalog.NoSuchProductEntryException if a s c product entry with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -187,9 +187,9 @@ public class SCProductEntryUtil {
 	}
 
 	/**
-	* Finds the s c product entry with the primary key or returns <code>null</code> if it could not be found.
+	* Returns the s c product entry with the primary key or returns <code>null</code> if it could not be found.
 	*
-	* @param productEntryId the primary key of the s c product entry to find
+	* @param productEntryId the primary key of the s c product entry
 	* @return the s c product entry, or <code>null</code> if a s c product entry with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -200,9 +200,9 @@ public class SCProductEntryUtil {
 	}
 
 	/**
-	* Finds all the s c product entries where groupId = &#63;.
+	* Returns all the s c product entries where groupId = &#63;.
 	*
-	* @param groupId the group ID to search with
+	* @param groupId the group ID
 	* @return the matching s c product entries
 	* @throws SystemException if a system exception occurred
 	*/
@@ -213,15 +213,15 @@ public class SCProductEntryUtil {
 	}
 
 	/**
-	* Finds a range of all the s c product entries where groupId = &#63;.
+	* Returns a range of all the s c product entries where groupId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param start the lower bound of the range of s c product entries to return
-	* @param end the upper bound of the range of s c product entries to return (not inclusive)
+	* @param groupId the group ID
+	* @param start the lower bound of the range of s c product entries
+	* @param end the upper bound of the range of s c product entries (not inclusive)
 	* @return the range of matching s c product entries
 	* @throws SystemException if a system exception occurred
 	*/
@@ -232,15 +232,15 @@ public class SCProductEntryUtil {
 	}
 
 	/**
-	* Finds an ordered range of all the s c product entries where groupId = &#63;.
+	* Returns an ordered range of all the s c product entries where groupId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param start the lower bound of the range of s c product entries to return
-	* @param end the upper bound of the range of s c product entries to return (not inclusive)
+	* @param groupId the group ID
+	* @param start the lower bound of the range of s c product entries
+	* @param end the upper bound of the range of s c product entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching s c product entries
 	* @throws SystemException if a system exception occurred
@@ -254,13 +254,13 @@ public class SCProductEntryUtil {
 	}
 
 	/**
-	* Finds the first s c product entry in the ordered set where groupId = &#63;.
+	* Returns the first s c product entry in the ordered set where groupId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
+	* @param groupId the group ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching s c product entry
 	* @throws com.liferay.portlet.softwarecatalog.NoSuchProductEntryException if a matching s c product entry could not be found
@@ -275,13 +275,13 @@ public class SCProductEntryUtil {
 	}
 
 	/**
-	* Finds the last s c product entry in the ordered set where groupId = &#63;.
+	* Returns the last s c product entry in the ordered set where groupId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
+	* @param groupId the group ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching s c product entry
 	* @throws com.liferay.portlet.softwarecatalog.NoSuchProductEntryException if a matching s c product entry could not be found
@@ -296,14 +296,14 @@ public class SCProductEntryUtil {
 	}
 
 	/**
-	* Finds the s c product entries before and after the current s c product entry in the ordered set where groupId = &#63;.
+	* Returns the s c product entries before and after the current s c product entry in the ordered set where groupId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
 	* @param productEntryId the primary key of the current s c product entry
-	* @param groupId the group ID to search with
+	* @param groupId the group ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next s c product entry
 	* @throws com.liferay.portlet.softwarecatalog.NoSuchProductEntryException if a s c product entry with the primary key could not be found
@@ -320,9 +320,9 @@ public class SCProductEntryUtil {
 	}
 
 	/**
-	* Filters by the user's permissions and finds all the s c product entries where groupId = &#63;.
+	* Returns all the s c product entries that the user has permission to view where groupId = &#63;.
 	*
-	* @param groupId the group ID to search with
+	* @param groupId the group ID
 	* @return the matching s c product entries that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -333,15 +333,15 @@ public class SCProductEntryUtil {
 	}
 
 	/**
-	* Filters by the user's permissions and finds a range of all the s c product entries where groupId = &#63;.
+	* Returns a range of all the s c product entries that the user has permission to view where groupId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param start the lower bound of the range of s c product entries to return
-	* @param end the upper bound of the range of s c product entries to return (not inclusive)
+	* @param groupId the group ID
+	* @param start the lower bound of the range of s c product entries
+	* @param end the upper bound of the range of s c product entries (not inclusive)
 	* @return the range of matching s c product entries that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -352,15 +352,15 @@ public class SCProductEntryUtil {
 	}
 
 	/**
-	* Filters by the user's permissions and finds an ordered range of all the s c product entries where groupId = &#63;.
+	* Returns an ordered range of all the s c product entries that the user has permissions to view where groupId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param start the lower bound of the range of s c product entries to return
-	* @param end the upper bound of the range of s c product entries to return (not inclusive)
+	* @param groupId the group ID
+	* @param start the lower bound of the range of s c product entries
+	* @param end the upper bound of the range of s c product entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching s c product entries that the user has permission to view
 	* @throws SystemException if a system exception occurred
@@ -374,14 +374,10 @@ public class SCProductEntryUtil {
 	}
 
 	/**
-	* Filters the s c product entries before and after the current s c product entry in the ordered set where groupId = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
-	* </p>
+	* Returns the s c product entries before and after the current s c product entry in the ordered set of s c product entries that the user has permission to view where groupId = &#63;.
 	*
 	* @param productEntryId the primary key of the current s c product entry
-	* @param groupId the group ID to search with
+	* @param groupId the group ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next s c product entry
 	* @throws com.liferay.portlet.softwarecatalog.NoSuchProductEntryException if a s c product entry with the primary key could not be found
@@ -398,9 +394,9 @@ public class SCProductEntryUtil {
 	}
 
 	/**
-	* Finds all the s c product entries where companyId = &#63;.
+	* Returns all the s c product entries where companyId = &#63;.
 	*
-	* @param companyId the company ID to search with
+	* @param companyId the company ID
 	* @return the matching s c product entries
 	* @throws SystemException if a system exception occurred
 	*/
@@ -411,15 +407,15 @@ public class SCProductEntryUtil {
 	}
 
 	/**
-	* Finds a range of all the s c product entries where companyId = &#63;.
+	* Returns a range of all the s c product entries where companyId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company ID to search with
-	* @param start the lower bound of the range of s c product entries to return
-	* @param end the upper bound of the range of s c product entries to return (not inclusive)
+	* @param companyId the company ID
+	* @param start the lower bound of the range of s c product entries
+	* @param end the upper bound of the range of s c product entries (not inclusive)
 	* @return the range of matching s c product entries
 	* @throws SystemException if a system exception occurred
 	*/
@@ -430,15 +426,15 @@ public class SCProductEntryUtil {
 	}
 
 	/**
-	* Finds an ordered range of all the s c product entries where companyId = &#63;.
+	* Returns an ordered range of all the s c product entries where companyId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company ID to search with
-	* @param start the lower bound of the range of s c product entries to return
-	* @param end the upper bound of the range of s c product entries to return (not inclusive)
+	* @param companyId the company ID
+	* @param start the lower bound of the range of s c product entries
+	* @param end the upper bound of the range of s c product entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching s c product entries
 	* @throws SystemException if a system exception occurred
@@ -452,13 +448,13 @@ public class SCProductEntryUtil {
 	}
 
 	/**
-	* Finds the first s c product entry in the ordered set where companyId = &#63;.
+	* Returns the first s c product entry in the ordered set where companyId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company ID to search with
+	* @param companyId the company ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching s c product entry
 	* @throws com.liferay.portlet.softwarecatalog.NoSuchProductEntryException if a matching s c product entry could not be found
@@ -474,13 +470,13 @@ public class SCProductEntryUtil {
 	}
 
 	/**
-	* Finds the last s c product entry in the ordered set where companyId = &#63;.
+	* Returns the last s c product entry in the ordered set where companyId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company ID to search with
+	* @param companyId the company ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching s c product entry
 	* @throws com.liferay.portlet.softwarecatalog.NoSuchProductEntryException if a matching s c product entry could not be found
@@ -496,14 +492,14 @@ public class SCProductEntryUtil {
 	}
 
 	/**
-	* Finds the s c product entries before and after the current s c product entry in the ordered set where companyId = &#63;.
+	* Returns the s c product entries before and after the current s c product entry in the ordered set where companyId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
 	* @param productEntryId the primary key of the current s c product entry
-	* @param companyId the company ID to search with
+	* @param companyId the company ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next s c product entry
 	* @throws com.liferay.portlet.softwarecatalog.NoSuchProductEntryException if a s c product entry with the primary key could not be found
@@ -520,10 +516,10 @@ public class SCProductEntryUtil {
 	}
 
 	/**
-	* Finds all the s c product entries where groupId = &#63; and userId = &#63;.
+	* Returns all the s c product entries where groupId = &#63; and userId = &#63;.
 	*
-	* @param groupId the group ID to search with
-	* @param userId the user ID to search with
+	* @param groupId the group ID
+	* @param userId the user ID
 	* @return the matching s c product entries
 	* @throws SystemException if a system exception occurred
 	*/
@@ -534,16 +530,16 @@ public class SCProductEntryUtil {
 	}
 
 	/**
-	* Finds a range of all the s c product entries where groupId = &#63; and userId = &#63;.
+	* Returns a range of all the s c product entries where groupId = &#63; and userId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param userId the user ID to search with
-	* @param start the lower bound of the range of s c product entries to return
-	* @param end the upper bound of the range of s c product entries to return (not inclusive)
+	* @param groupId the group ID
+	* @param userId the user ID
+	* @param start the lower bound of the range of s c product entries
+	* @param end the upper bound of the range of s c product entries (not inclusive)
 	* @return the range of matching s c product entries
 	* @throws SystemException if a system exception occurred
 	*/
@@ -554,16 +550,16 @@ public class SCProductEntryUtil {
 	}
 
 	/**
-	* Finds an ordered range of all the s c product entries where groupId = &#63; and userId = &#63;.
+	* Returns an ordered range of all the s c product entries where groupId = &#63; and userId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param userId the user ID to search with
-	* @param start the lower bound of the range of s c product entries to return
-	* @param end the upper bound of the range of s c product entries to return (not inclusive)
+	* @param groupId the group ID
+	* @param userId the user ID
+	* @param start the lower bound of the range of s c product entries
+	* @param end the upper bound of the range of s c product entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching s c product entries
 	* @throws SystemException if a system exception occurred
@@ -577,14 +573,14 @@ public class SCProductEntryUtil {
 	}
 
 	/**
-	* Finds the first s c product entry in the ordered set where groupId = &#63; and userId = &#63;.
+	* Returns the first s c product entry in the ordered set where groupId = &#63; and userId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param userId the user ID to search with
+	* @param groupId the group ID
+	* @param userId the user ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching s c product entry
 	* @throws com.liferay.portlet.softwarecatalog.NoSuchProductEntryException if a matching s c product entry could not be found
@@ -600,14 +596,14 @@ public class SCProductEntryUtil {
 	}
 
 	/**
-	* Finds the last s c product entry in the ordered set where groupId = &#63; and userId = &#63;.
+	* Returns the last s c product entry in the ordered set where groupId = &#63; and userId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param userId the user ID to search with
+	* @param groupId the group ID
+	* @param userId the user ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching s c product entry
 	* @throws com.liferay.portlet.softwarecatalog.NoSuchProductEntryException if a matching s c product entry could not be found
@@ -623,15 +619,15 @@ public class SCProductEntryUtil {
 	}
 
 	/**
-	* Finds the s c product entries before and after the current s c product entry in the ordered set where groupId = &#63; and userId = &#63;.
+	* Returns the s c product entries before and after the current s c product entry in the ordered set where groupId = &#63; and userId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
 	* @param productEntryId the primary key of the current s c product entry
-	* @param groupId the group ID to search with
-	* @param userId the user ID to search with
+	* @param groupId the group ID
+	* @param userId the user ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next s c product entry
 	* @throws com.liferay.portlet.softwarecatalog.NoSuchProductEntryException if a s c product entry with the primary key could not be found
@@ -648,10 +644,10 @@ public class SCProductEntryUtil {
 	}
 
 	/**
-	* Filters by the user's permissions and finds all the s c product entries where groupId = &#63; and userId = &#63;.
+	* Returns all the s c product entries that the user has permission to view where groupId = &#63; and userId = &#63;.
 	*
-	* @param groupId the group ID to search with
-	* @param userId the user ID to search with
+	* @param groupId the group ID
+	* @param userId the user ID
 	* @return the matching s c product entries that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -662,16 +658,16 @@ public class SCProductEntryUtil {
 	}
 
 	/**
-	* Filters by the user's permissions and finds a range of all the s c product entries where groupId = &#63; and userId = &#63;.
+	* Returns a range of all the s c product entries that the user has permission to view where groupId = &#63; and userId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param userId the user ID to search with
-	* @param start the lower bound of the range of s c product entries to return
-	* @param end the upper bound of the range of s c product entries to return (not inclusive)
+	* @param groupId the group ID
+	* @param userId the user ID
+	* @param start the lower bound of the range of s c product entries
+	* @param end the upper bound of the range of s c product entries (not inclusive)
 	* @return the range of matching s c product entries that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -682,16 +678,16 @@ public class SCProductEntryUtil {
 	}
 
 	/**
-	* Filters by the user's permissions and finds an ordered range of all the s c product entries where groupId = &#63; and userId = &#63;.
+	* Returns an ordered range of all the s c product entries that the user has permissions to view where groupId = &#63; and userId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param userId the user ID to search with
-	* @param start the lower bound of the range of s c product entries to return
-	* @param end the upper bound of the range of s c product entries to return (not inclusive)
+	* @param groupId the group ID
+	* @param userId the user ID
+	* @param start the lower bound of the range of s c product entries
+	* @param end the upper bound of the range of s c product entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching s c product entries that the user has permission to view
 	* @throws SystemException if a system exception occurred
@@ -706,15 +702,11 @@ public class SCProductEntryUtil {
 	}
 
 	/**
-	* Filters the s c product entries before and after the current s c product entry in the ordered set where groupId = &#63; and userId = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
-	* </p>
+	* Returns the s c product entries before and after the current s c product entry in the ordered set of s c product entries that the user has permission to view where groupId = &#63; and userId = &#63;.
 	*
 	* @param productEntryId the primary key of the current s c product entry
-	* @param groupId the group ID to search with
-	* @param userId the user ID to search with
+	* @param groupId the group ID
+	* @param userId the user ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next s c product entry
 	* @throws com.liferay.portlet.softwarecatalog.NoSuchProductEntryException if a s c product entry with the primary key could not be found
@@ -731,10 +723,10 @@ public class SCProductEntryUtil {
 	}
 
 	/**
-	* Finds the s c product entry where repoGroupId = &#63; and repoArtifactId = &#63; or throws a {@link com.liferay.portlet.softwarecatalog.NoSuchProductEntryException} if it could not be found.
+	* Returns the s c product entry where repoGroupId = &#63; and repoArtifactId = &#63; or throws a {@link com.liferay.portlet.softwarecatalog.NoSuchProductEntryException} if it could not be found.
 	*
-	* @param repoGroupId the repo group ID to search with
-	* @param repoArtifactId the repo artifact ID to search with
+	* @param repoGroupId the repo group ID
+	* @param repoArtifactId the repo artifact ID
 	* @return the matching s c product entry
 	* @throws com.liferay.portlet.softwarecatalog.NoSuchProductEntryException if a matching s c product entry could not be found
 	* @throws SystemException if a system exception occurred
@@ -747,10 +739,10 @@ public class SCProductEntryUtil {
 	}
 
 	/**
-	* Finds the s c product entry where repoGroupId = &#63; and repoArtifactId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	* Returns the s c product entry where repoGroupId = &#63; and repoArtifactId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	*
-	* @param repoGroupId the repo group ID to search with
-	* @param repoArtifactId the repo artifact ID to search with
+	* @param repoGroupId the repo group ID
+	* @param repoArtifactId the repo artifact ID
 	* @return the matching s c product entry, or <code>null</code> if a matching s c product entry could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -761,10 +753,10 @@ public class SCProductEntryUtil {
 	}
 
 	/**
-	* Finds the s c product entry where repoGroupId = &#63; and repoArtifactId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	* Returns the s c product entry where repoGroupId = &#63; and repoArtifactId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
-	* @param repoGroupId the repo group ID to search with
-	* @param repoArtifactId the repo artifact ID to search with
+	* @param repoGroupId the repo group ID
+	* @param repoArtifactId the repo artifact ID
 	* @return the matching s c product entry, or <code>null</code> if a matching s c product entry could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -777,7 +769,7 @@ public class SCProductEntryUtil {
 	}
 
 	/**
-	* Finds all the s c product entries.
+	* Returns all the s c product entries.
 	*
 	* @return the s c product entries
 	* @throws SystemException if a system exception occurred
@@ -788,14 +780,14 @@ public class SCProductEntryUtil {
 	}
 
 	/**
-	* Finds a range of all the s c product entries.
+	* Returns a range of all the s c product entries.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of s c product entries to return
-	* @param end the upper bound of the range of s c product entries to return (not inclusive)
+	* @param start the lower bound of the range of s c product entries
+	* @param end the upper bound of the range of s c product entries (not inclusive)
 	* @return the range of s c product entries
 	* @throws SystemException if a system exception occurred
 	*/
@@ -806,14 +798,14 @@ public class SCProductEntryUtil {
 	}
 
 	/**
-	* Finds an ordered range of all the s c product entries.
+	* Returns an ordered range of all the s c product entries.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of s c product entries to return
-	* @param end the upper bound of the range of s c product entries to return (not inclusive)
+	* @param start the lower bound of the range of s c product entries
+	* @param end the upper bound of the range of s c product entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of s c product entries
 	* @throws SystemException if a system exception occurred
@@ -828,7 +820,7 @@ public class SCProductEntryUtil {
 	/**
 	* Removes all the s c product entries where groupId = &#63; from the database.
 	*
-	* @param groupId the group ID to search with
+	* @param groupId the group ID
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByGroupId(long groupId)
@@ -839,7 +831,7 @@ public class SCProductEntryUtil {
 	/**
 	* Removes all the s c product entries where companyId = &#63; from the database.
 	*
-	* @param companyId the company ID to search with
+	* @param companyId the company ID
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByCompanyId(long companyId)
@@ -850,8 +842,8 @@ public class SCProductEntryUtil {
 	/**
 	* Removes all the s c product entries where groupId = &#63; and userId = &#63; from the database.
 	*
-	* @param groupId the group ID to search with
-	* @param userId the user ID to search with
+	* @param groupId the group ID
+	* @param userId the user ID
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByG_U(long groupId, long userId)
@@ -862,8 +854,8 @@ public class SCProductEntryUtil {
 	/**
 	* Removes the s c product entry where repoGroupId = &#63; and repoArtifactId = &#63; from the database.
 	*
-	* @param repoGroupId the repo group ID to search with
-	* @param repoArtifactId the repo artifact ID to search with
+	* @param repoGroupId the repo group ID
+	* @param repoArtifactId the repo artifact ID
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByRG_RA(java.lang.String repoGroupId,
@@ -884,9 +876,9 @@ public class SCProductEntryUtil {
 	}
 
 	/**
-	* Counts all the s c product entries where groupId = &#63;.
+	* Returns the number of s c product entries where groupId = &#63;.
 	*
-	* @param groupId the group ID to search with
+	* @param groupId the group ID
 	* @return the number of matching s c product entries
 	* @throws SystemException if a system exception occurred
 	*/
@@ -896,9 +888,9 @@ public class SCProductEntryUtil {
 	}
 
 	/**
-	* Filters by the user's permissions and counts all the s c product entries where groupId = &#63;.
+	* Returns the number of s c product entries that the user has permission to view where groupId = &#63;.
 	*
-	* @param groupId the group ID to search with
+	* @param groupId the group ID
 	* @return the number of matching s c product entries that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -908,9 +900,9 @@ public class SCProductEntryUtil {
 	}
 
 	/**
-	* Counts all the s c product entries where companyId = &#63;.
+	* Returns the number of s c product entries where companyId = &#63;.
 	*
-	* @param companyId the company ID to search with
+	* @param companyId the company ID
 	* @return the number of matching s c product entries
 	* @throws SystemException if a system exception occurred
 	*/
@@ -920,10 +912,10 @@ public class SCProductEntryUtil {
 	}
 
 	/**
-	* Counts all the s c product entries where groupId = &#63; and userId = &#63;.
+	* Returns the number of s c product entries where groupId = &#63; and userId = &#63;.
 	*
-	* @param groupId the group ID to search with
-	* @param userId the user ID to search with
+	* @param groupId the group ID
+	* @param userId the user ID
 	* @return the number of matching s c product entries
 	* @throws SystemException if a system exception occurred
 	*/
@@ -933,10 +925,10 @@ public class SCProductEntryUtil {
 	}
 
 	/**
-	* Filters by the user's permissions and counts all the s c product entries where groupId = &#63; and userId = &#63;.
+	* Returns the number of s c product entries that the user has permission to view where groupId = &#63; and userId = &#63;.
 	*
-	* @param groupId the group ID to search with
-	* @param userId the user ID to search with
+	* @param groupId the group ID
+	* @param userId the user ID
 	* @return the number of matching s c product entries that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -946,10 +938,10 @@ public class SCProductEntryUtil {
 	}
 
 	/**
-	* Counts all the s c product entries where repoGroupId = &#63; and repoArtifactId = &#63;.
+	* Returns the number of s c product entries where repoGroupId = &#63; and repoArtifactId = &#63;.
 	*
-	* @param repoGroupId the repo group ID to search with
-	* @param repoArtifactId the repo artifact ID to search with
+	* @param repoGroupId the repo group ID
+	* @param repoArtifactId the repo artifact ID
 	* @return the number of matching s c product entries
 	* @throws SystemException if a system exception occurred
 	*/
@@ -960,7 +952,7 @@ public class SCProductEntryUtil {
 	}
 
 	/**
-	* Counts all the s c product entries.
+	* Returns the number of s c product entries.
 	*
 	* @return the number of s c product entries
 	* @throws SystemException if a system exception occurred
@@ -971,9 +963,9 @@ public class SCProductEntryUtil {
 	}
 
 	/**
-	* Gets all the s c licenses associated with the s c product entry.
+	* Returns all the s c licenses associated with the s c product entry.
 	*
-	* @param pk the primary key of the s c product entry to get the associated s c licenses for
+	* @param pk the primary key of the s c product entry
 	* @return the s c licenses associated with the s c product entry
 	* @throws SystemException if a system exception occurred
 	*/
@@ -983,15 +975,15 @@ public class SCProductEntryUtil {
 	}
 
 	/**
-	* Gets a range of all the s c licenses associated with the s c product entry.
+	* Returns a range of all the s c licenses associated with the s c product entry.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param pk the primary key of the s c product entry to get the associated s c licenses for
-	* @param start the lower bound of the range of s c product entries to return
-	* @param end the upper bound of the range of s c product entries to return (not inclusive)
+	* @param pk the primary key of the s c product entry
+	* @param start the lower bound of the range of s c product entries
+	* @param end the upper bound of the range of s c product entries (not inclusive)
 	* @return the range of s c licenses associated with the s c product entry
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1002,15 +994,15 @@ public class SCProductEntryUtil {
 	}
 
 	/**
-	* Gets an ordered range of all the s c licenses associated with the s c product entry.
+	* Returns an ordered range of all the s c licenses associated with the s c product entry.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param pk the primary key of the s c product entry to get the associated s c licenses for
-	* @param start the lower bound of the range of s c product entries to return
-	* @param end the upper bound of the range of s c product entries to return (not inclusive)
+	* @param pk the primary key of the s c product entry
+	* @param start the lower bound of the range of s c product entries
+	* @param end the upper bound of the range of s c product entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of s c licenses associated with the s c product entry
 	* @throws SystemException if a system exception occurred
@@ -1023,9 +1015,9 @@ public class SCProductEntryUtil {
 	}
 
 	/**
-	* Gets the number of s c licenses associated with the s c product entry.
+	* Returns the number of s c licenses associated with the s c product entry.
 	*
-	* @param pk the primary key of the s c product entry to get the number of associated s c licenses for
+	* @param pk the primary key of the s c product entry
 	* @return the number of s c licenses associated with the s c product entry
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1173,7 +1165,7 @@ public class SCProductEntryUtil {
 	/**
 	* Sets the s c licenses associated with the s c product entry, removing and adding associations as necessary. Also notifies the appropriate model listeners and clears the mapping table finder cache.
 	*
-	* @param pk the primary key of the s c product entry to set the associations for
+	* @param pk the primary key of the s c product entry
 	* @param scLicensePKs the primary keys of the s c licenses to be associated with the s c product entry
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1185,7 +1177,7 @@ public class SCProductEntryUtil {
 	/**
 	* Sets the s c licenses associated with the s c product entry, removing and adding associations as necessary. Also notifies the appropriate model listeners and clears the mapping table finder cache.
 	*
-	* @param pk the primary key of the s c product entry to set the associations for
+	* @param pk the primary key of the s c product entry
 	* @param scLicenses the s c licenses to be associated with the s c product entry
 	* @throws SystemException if a system exception occurred
 	*/

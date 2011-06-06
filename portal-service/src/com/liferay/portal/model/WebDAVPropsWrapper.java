@@ -37,7 +37,7 @@ public class WebDAVPropsWrapper implements WebDAVProps {
 	}
 
 	/**
-	* Gets the primary key of this web d a v props.
+	* Returns the primary key of this web d a v props.
 	*
 	* @return the primary key of this web d a v props
 	*/
@@ -46,7 +46,7 @@ public class WebDAVPropsWrapper implements WebDAVProps {
 	}
 
 	/**
-	* Sets the primary key of this web d a v props
+	* Sets the primary key of this web d a v props.
 	*
 	* @param primaryKey the primary key of this web d a v props
 	*/
@@ -55,7 +55,7 @@ public class WebDAVPropsWrapper implements WebDAVProps {
 	}
 
 	/**
-	* Gets the web dav props ID of this web d a v props.
+	* Returns the web dav props ID of this web d a v props.
 	*
 	* @return the web dav props ID of this web d a v props
 	*/
@@ -73,7 +73,7 @@ public class WebDAVPropsWrapper implements WebDAVProps {
 	}
 
 	/**
-	* Gets the company ID of this web d a v props.
+	* Returns the company ID of this web d a v props.
 	*
 	* @return the company ID of this web d a v props
 	*/
@@ -91,7 +91,7 @@ public class WebDAVPropsWrapper implements WebDAVProps {
 	}
 
 	/**
-	* Gets the create date of this web d a v props.
+	* Returns the create date of this web d a v props.
 	*
 	* @return the create date of this web d a v props
 	*/
@@ -109,7 +109,7 @@ public class WebDAVPropsWrapper implements WebDAVProps {
 	}
 
 	/**
-	* Gets the modified date of this web d a v props.
+	* Returns the modified date of this web d a v props.
 	*
 	* @return the modified date of this web d a v props
 	*/
@@ -127,16 +127,16 @@ public class WebDAVPropsWrapper implements WebDAVProps {
 	}
 
 	/**
-	* Gets the class name of the model instance this web d a v props is polymorphically associated with.
+	* Returns the fully qualified class name of this web d a v props.
 	*
-	* @return the class name of the model instance this web d a v props is polymorphically associated with
+	* @return the fully qualified class name of this web d a v props
 	*/
 	public java.lang.String getClassName() {
 		return _webDAVProps.getClassName();
 	}
 
 	/**
-	* Gets the class name ID of this web d a v props.
+	* Returns the class name ID of this web d a v props.
 	*
 	* @return the class name ID of this web d a v props
 	*/
@@ -154,7 +154,7 @@ public class WebDAVPropsWrapper implements WebDAVProps {
 	}
 
 	/**
-	* Gets the class p k of this web d a v props.
+	* Returns the class p k of this web d a v props.
 	*
 	* @return the class p k of this web d a v props
 	*/
@@ -172,7 +172,7 @@ public class WebDAVPropsWrapper implements WebDAVProps {
 	}
 
 	/**
-	* Gets the props of this web d a v props.
+	* Returns the props of this web d a v props.
 	*
 	* @return the props of this web d a v props
 	*/

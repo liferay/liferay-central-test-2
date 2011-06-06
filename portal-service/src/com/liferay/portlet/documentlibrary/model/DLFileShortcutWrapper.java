@@ -37,7 +37,7 @@ public class DLFileShortcutWrapper implements DLFileShortcut {
 	}
 
 	/**
-	* Gets the primary key of this d l file shortcut.
+	* Returns the primary key of this d l file shortcut.
 	*
 	* @return the primary key of this d l file shortcut
 	*/
@@ -46,7 +46,7 @@ public class DLFileShortcutWrapper implements DLFileShortcut {
 	}
 
 	/**
-	* Sets the primary key of this d l file shortcut
+	* Sets the primary key of this d l file shortcut.
 	*
 	* @param primaryKey the primary key of this d l file shortcut
 	*/
@@ -55,7 +55,7 @@ public class DLFileShortcutWrapper implements DLFileShortcut {
 	}
 
 	/**
-	* Gets the uuid of this d l file shortcut.
+	* Returns the uuid of this d l file shortcut.
 	*
 	* @return the uuid of this d l file shortcut
 	*/
@@ -73,7 +73,7 @@ public class DLFileShortcutWrapper implements DLFileShortcut {
 	}
 
 	/**
-	* Gets the file shortcut ID of this d l file shortcut.
+	* Returns the file shortcut ID of this d l file shortcut.
 	*
 	* @return the file shortcut ID of this d l file shortcut
 	*/
@@ -91,7 +91,7 @@ public class DLFileShortcutWrapper implements DLFileShortcut {
 	}
 
 	/**
-	* Gets the group ID of this d l file shortcut.
+	* Returns the group ID of this d l file shortcut.
 	*
 	* @return the group ID of this d l file shortcut
 	*/
@@ -109,7 +109,7 @@ public class DLFileShortcutWrapper implements DLFileShortcut {
 	}
 
 	/**
-	* Gets the company ID of this d l file shortcut.
+	* Returns the company ID of this d l file shortcut.
 	*
 	* @return the company ID of this d l file shortcut
 	*/
@@ -127,7 +127,7 @@ public class DLFileShortcutWrapper implements DLFileShortcut {
 	}
 
 	/**
-	* Gets the user ID of this d l file shortcut.
+	* Returns the user ID of this d l file shortcut.
 	*
 	* @return the user ID of this d l file shortcut
 	*/
@@ -145,7 +145,7 @@ public class DLFileShortcutWrapper implements DLFileShortcut {
 	}
 
 	/**
-	* Gets the user uuid of this d l file shortcut.
+	* Returns the user uuid of this d l file shortcut.
 	*
 	* @return the user uuid of this d l file shortcut
 	* @throws SystemException if a system exception occurred
@@ -165,7 +165,7 @@ public class DLFileShortcutWrapper implements DLFileShortcut {
 	}
 
 	/**
-	* Gets the user name of this d l file shortcut.
+	* Returns the user name of this d l file shortcut.
 	*
 	* @return the user name of this d l file shortcut
 	*/
@@ -183,7 +183,7 @@ public class DLFileShortcutWrapper implements DLFileShortcut {
 	}
 
 	/**
-	* Gets the create date of this d l file shortcut.
+	* Returns the create date of this d l file shortcut.
 	*
 	* @return the create date of this d l file shortcut
 	*/
@@ -201,7 +201,7 @@ public class DLFileShortcutWrapper implements DLFileShortcut {
 	}
 
 	/**
-	* Gets the modified date of this d l file shortcut.
+	* Returns the modified date of this d l file shortcut.
 	*
 	* @return the modified date of this d l file shortcut
 	*/
@@ -219,7 +219,7 @@ public class DLFileShortcutWrapper implements DLFileShortcut {
 	}
 
 	/**
-	* Gets the repository ID of this d l file shortcut.
+	* Returns the repository ID of this d l file shortcut.
 	*
 	* @return the repository ID of this d l file shortcut
 	*/
@@ -237,7 +237,7 @@ public class DLFileShortcutWrapper implements DLFileShortcut {
 	}
 
 	/**
-	* Gets the folder ID of this d l file shortcut.
+	* Returns the folder ID of this d l file shortcut.
 	*
 	* @return the folder ID of this d l file shortcut
 	*/
@@ -255,7 +255,7 @@ public class DLFileShortcutWrapper implements DLFileShortcut {
 	}
 
 	/**
-	* Gets the to file entry ID of this d l file shortcut.
+	* Returns the to file entry ID of this d l file shortcut.
 	*
 	* @return the to file entry ID of this d l file shortcut
 	*/
@@ -273,7 +273,7 @@ public class DLFileShortcutWrapper implements DLFileShortcut {
 	}
 
 	/**
-	* Gets the status of this d l file shortcut.
+	* Returns the status of this d l file shortcut.
 	*
 	* @return the status of this d l file shortcut
 	*/
@@ -291,7 +291,7 @@ public class DLFileShortcutWrapper implements DLFileShortcut {
 	}
 
 	/**
-	* Gets the status by user ID of this d l file shortcut.
+	* Returns the status by user ID of this d l file shortcut.
 	*
 	* @return the status by user ID of this d l file shortcut
 	*/
@@ -309,7 +309,7 @@ public class DLFileShortcutWrapper implements DLFileShortcut {
 	}
 
 	/**
-	* Gets the status by user uuid of this d l file shortcut.
+	* Returns the status by user uuid of this d l file shortcut.
 	*
 	* @return the status by user uuid of this d l file shortcut
 	* @throws SystemException if a system exception occurred
@@ -329,7 +329,7 @@ public class DLFileShortcutWrapper implements DLFileShortcut {
 	}
 
 	/**
-	* Gets the status by user name of this d l file shortcut.
+	* Returns the status by user name of this d l file shortcut.
 	*
 	* @return the status by user name of this d l file shortcut
 	*/
@@ -347,7 +347,7 @@ public class DLFileShortcutWrapper implements DLFileShortcut {
 	}
 
 	/**
-	* Gets the status date of this d l file shortcut.
+	* Returns the status date of this d l file shortcut.
 	*
 	* @return the status date of this d l file shortcut
 	*/
@@ -365,7 +365,7 @@ public class DLFileShortcutWrapper implements DLFileShortcut {
 	}
 
 	/**
-	* @deprecated {@link #isApproved}
+	* @deprecated Renamed to {@link #isApproved()}
 	*/
 	public boolean getApproved() {
 		return _dlFileShortcut.getApproved();

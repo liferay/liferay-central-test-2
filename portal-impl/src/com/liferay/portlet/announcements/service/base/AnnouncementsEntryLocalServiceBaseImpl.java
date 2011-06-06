@@ -93,7 +93,7 @@ public abstract class AnnouncementsEntryLocalServiceBaseImpl
 	/**
 	 * Adds the announcements entry to the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param announcementsEntry the announcements entry to add
+	 * @param announcementsEntry the announcements entry
 	 * @return the announcements entry that was added
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -117,7 +117,7 @@ public abstract class AnnouncementsEntryLocalServiceBaseImpl
 	/**
 	 * Deletes the announcements entry with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param entryId the primary key of the announcements entry to delete
+	 * @param entryId the primary key of the announcements entry
 	 * @throws PortalException if a announcements entry with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -129,7 +129,7 @@ public abstract class AnnouncementsEntryLocalServiceBaseImpl
 	/**
 	 * Deletes the announcements entry from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param announcementsEntry the announcements entry to delete
+	 * @param announcementsEntry the announcements entry
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void deleteAnnouncementsEntry(AnnouncementsEntry announcementsEntry)
@@ -140,7 +140,7 @@ public abstract class AnnouncementsEntryLocalServiceBaseImpl
 	/**
 	 * Performs a dynamic query on the database and returns the matching rows.
 	 *
-	 * @param dynamicQuery the dynamic query to search with
+	 * @param dynamicQuery the dynamic query
 	 * @return the matching rows
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -157,9 +157,9 @@ public abstract class AnnouncementsEntryLocalServiceBaseImpl
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param dynamicQuery the dynamic query to search with
-	 * @param start the lower bound of the range of model instances to return
-	 * @param end the upper bound of the range of model instances to return (not inclusive)
+	 * @param dynamicQuery the dynamic query
+	 * @param start the lower bound of the range of model instances
+	 * @param end the upper bound of the range of model instances (not inclusive)
 	 * @return the range of matching rows
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -177,9 +177,9 @@ public abstract class AnnouncementsEntryLocalServiceBaseImpl
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param dynamicQuery the dynamic query to search with
-	 * @param start the lower bound of the range of model instances to return
-	 * @param end the upper bound of the range of model instances to return (not inclusive)
+	 * @param dynamicQuery the dynamic query
+	 * @param start the lower bound of the range of model instances
+	 * @param end the upper bound of the range of model instances (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching rows
 	 * @throws SystemException if a system exception occurred
@@ -192,9 +192,9 @@ public abstract class AnnouncementsEntryLocalServiceBaseImpl
 	}
 
 	/**
-	 * Counts the number of rows that match the dynamic query.
+	 * Returns the number of rows that match the dynamic query.
 	 *
-	 * @param dynamicQuery the dynamic query to search with
+	 * @param dynamicQuery the dynamic query
 	 * @return the number of rows that match the dynamic query
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -204,9 +204,9 @@ public abstract class AnnouncementsEntryLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the announcements entry with the primary key.
+	 * Returns the announcements entry with the primary key.
 	 *
-	 * @param entryId the primary key of the announcements entry to get
+	 * @param entryId the primary key of the announcements entry
 	 * @return the announcements entry
 	 * @throws PortalException if a announcements entry with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -217,14 +217,14 @@ public abstract class AnnouncementsEntryLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets a range of all the announcements entries.
+	 * Returns a range of all the announcements entries.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param start the lower bound of the range of announcements entries to return
-	 * @param end the upper bound of the range of announcements entries to return (not inclusive)
+	 * @param start the lower bound of the range of announcements entries
+	 * @param end the upper bound of the range of announcements entries (not inclusive)
 	 * @return the range of announcements entries
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -234,7 +234,7 @@ public abstract class AnnouncementsEntryLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the number of announcements entries.
+	 * Returns the number of announcements entries.
 	 *
 	 * @return the number of announcements entries
 	 * @throws SystemException if a system exception occurred
@@ -246,7 +246,7 @@ public abstract class AnnouncementsEntryLocalServiceBaseImpl
 	/**
 	 * Updates the announcements entry in the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param announcementsEntry the announcements entry to update
+	 * @param announcementsEntry the announcements entry
 	 * @return the announcements entry that was updated
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -260,7 +260,7 @@ public abstract class AnnouncementsEntryLocalServiceBaseImpl
 	/**
 	 * Updates the announcements entry in the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param announcementsEntry the announcements entry to update
+	 * @param announcementsEntry the announcements entry
 	 * @param merge whether to merge the announcements entry with the current session. See {@link com.liferay.portal.service.persistence.BatchSession#update(com.liferay.portal.kernel.dao.orm.Session, com.liferay.portal.model.BaseModel, boolean)} for an explanation.
 	 * @return the announcements entry that was updated
 	 * @throws SystemException if a system exception occurred
@@ -274,7 +274,7 @@ public abstract class AnnouncementsEntryLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the announcements delivery local service.
+	 * Returns the announcements delivery local service.
 	 *
 	 * @return the announcements delivery local service
 	 */
@@ -293,7 +293,7 @@ public abstract class AnnouncementsEntryLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the announcements delivery remote service.
+	 * Returns the announcements delivery remote service.
 	 *
 	 * @return the announcements delivery remote service
 	 */
@@ -312,7 +312,7 @@ public abstract class AnnouncementsEntryLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the announcements delivery persistence.
+	 * Returns the announcements delivery persistence.
 	 *
 	 * @return the announcements delivery persistence
 	 */
@@ -331,7 +331,7 @@ public abstract class AnnouncementsEntryLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the announcements entry local service.
+	 * Returns the announcements entry local service.
 	 *
 	 * @return the announcements entry local service
 	 */
@@ -350,7 +350,7 @@ public abstract class AnnouncementsEntryLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the announcements entry remote service.
+	 * Returns the announcements entry remote service.
 	 *
 	 * @return the announcements entry remote service
 	 */
@@ -369,7 +369,7 @@ public abstract class AnnouncementsEntryLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the announcements entry persistence.
+	 * Returns the announcements entry persistence.
 	 *
 	 * @return the announcements entry persistence
 	 */
@@ -388,7 +388,7 @@ public abstract class AnnouncementsEntryLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the announcements entry finder.
+	 * Returns the announcements entry finder.
 	 *
 	 * @return the announcements entry finder
 	 */
@@ -407,7 +407,7 @@ public abstract class AnnouncementsEntryLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the announcements flag local service.
+	 * Returns the announcements flag local service.
 	 *
 	 * @return the announcements flag local service
 	 */
@@ -426,7 +426,7 @@ public abstract class AnnouncementsEntryLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the announcements flag remote service.
+	 * Returns the announcements flag remote service.
 	 *
 	 * @return the announcements flag remote service
 	 */
@@ -445,7 +445,7 @@ public abstract class AnnouncementsEntryLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the announcements flag persistence.
+	 * Returns the announcements flag persistence.
 	 *
 	 * @return the announcements flag persistence
 	 */
@@ -464,7 +464,7 @@ public abstract class AnnouncementsEntryLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the counter local service.
+	 * Returns the counter local service.
 	 *
 	 * @return the counter local service
 	 */
@@ -482,7 +482,7 @@ public abstract class AnnouncementsEntryLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the mail remote service.
+	 * Returns the mail remote service.
 	 *
 	 * @return the mail remote service
 	 */
@@ -500,7 +500,7 @@ public abstract class AnnouncementsEntryLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the company local service.
+	 * Returns the company local service.
 	 *
 	 * @return the company local service
 	 */
@@ -518,7 +518,7 @@ public abstract class AnnouncementsEntryLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the company remote service.
+	 * Returns the company remote service.
 	 *
 	 * @return the company remote service
 	 */
@@ -536,7 +536,7 @@ public abstract class AnnouncementsEntryLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the company persistence.
+	 * Returns the company persistence.
 	 *
 	 * @return the company persistence
 	 */
@@ -554,7 +554,7 @@ public abstract class AnnouncementsEntryLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the group local service.
+	 * Returns the group local service.
 	 *
 	 * @return the group local service
 	 */
@@ -572,7 +572,7 @@ public abstract class AnnouncementsEntryLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the group remote service.
+	 * Returns the group remote service.
 	 *
 	 * @return the group remote service
 	 */
@@ -590,7 +590,7 @@ public abstract class AnnouncementsEntryLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the group persistence.
+	 * Returns the group persistence.
 	 *
 	 * @return the group persistence
 	 */
@@ -608,7 +608,7 @@ public abstract class AnnouncementsEntryLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the group finder.
+	 * Returns the group finder.
 	 *
 	 * @return the group finder
 	 */
@@ -626,7 +626,7 @@ public abstract class AnnouncementsEntryLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the organization local service.
+	 * Returns the organization local service.
 	 *
 	 * @return the organization local service
 	 */
@@ -645,7 +645,7 @@ public abstract class AnnouncementsEntryLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the organization remote service.
+	 * Returns the organization remote service.
 	 *
 	 * @return the organization remote service
 	 */
@@ -663,7 +663,7 @@ public abstract class AnnouncementsEntryLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the organization persistence.
+	 * Returns the organization persistence.
 	 *
 	 * @return the organization persistence
 	 */
@@ -682,7 +682,7 @@ public abstract class AnnouncementsEntryLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the organization finder.
+	 * Returns the organization finder.
 	 *
 	 * @return the organization finder
 	 */
@@ -700,7 +700,7 @@ public abstract class AnnouncementsEntryLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the resource local service.
+	 * Returns the resource local service.
 	 *
 	 * @return the resource local service
 	 */
@@ -719,7 +719,7 @@ public abstract class AnnouncementsEntryLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the resource remote service.
+	 * Returns the resource remote service.
 	 *
 	 * @return the resource remote service
 	 */
@@ -737,7 +737,7 @@ public abstract class AnnouncementsEntryLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the resource persistence.
+	 * Returns the resource persistence.
 	 *
 	 * @return the resource persistence
 	 */
@@ -755,7 +755,7 @@ public abstract class AnnouncementsEntryLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the resource finder.
+	 * Returns the resource finder.
 	 *
 	 * @return the resource finder
 	 */
@@ -773,7 +773,7 @@ public abstract class AnnouncementsEntryLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the role local service.
+	 * Returns the role local service.
 	 *
 	 * @return the role local service
 	 */
@@ -791,7 +791,7 @@ public abstract class AnnouncementsEntryLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the role remote service.
+	 * Returns the role remote service.
 	 *
 	 * @return the role remote service
 	 */
@@ -809,7 +809,7 @@ public abstract class AnnouncementsEntryLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the role persistence.
+	 * Returns the role persistence.
 	 *
 	 * @return the role persistence
 	 */
@@ -827,7 +827,7 @@ public abstract class AnnouncementsEntryLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the role finder.
+	 * Returns the role finder.
 	 *
 	 * @return the role finder
 	 */
@@ -845,7 +845,7 @@ public abstract class AnnouncementsEntryLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the user local service.
+	 * Returns the user local service.
 	 *
 	 * @return the user local service
 	 */
@@ -863,7 +863,7 @@ public abstract class AnnouncementsEntryLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the user remote service.
+	 * Returns the user remote service.
 	 *
 	 * @return the user remote service
 	 */
@@ -881,7 +881,7 @@ public abstract class AnnouncementsEntryLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the user persistence.
+	 * Returns the user persistence.
 	 *
 	 * @return the user persistence
 	 */
@@ -899,7 +899,7 @@ public abstract class AnnouncementsEntryLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the user finder.
+	 * Returns the user finder.
 	 *
 	 * @return the user finder
 	 */
@@ -917,7 +917,7 @@ public abstract class AnnouncementsEntryLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the user group local service.
+	 * Returns the user group local service.
 	 *
 	 * @return the user group local service
 	 */
@@ -936,7 +936,7 @@ public abstract class AnnouncementsEntryLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the user group remote service.
+	 * Returns the user group remote service.
 	 *
 	 * @return the user group remote service
 	 */
@@ -954,7 +954,7 @@ public abstract class AnnouncementsEntryLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the user group persistence.
+	 * Returns the user group persistence.
 	 *
 	 * @return the user group persistence
 	 */
@@ -973,7 +973,7 @@ public abstract class AnnouncementsEntryLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the user group finder.
+	 * Returns the user group finder.
 	 *
 	 * @return the user group finder
 	 */
@@ -991,7 +991,7 @@ public abstract class AnnouncementsEntryLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the Spring bean ID for this bean.
+	 * Returns the Spring bean ID for this bean.
 	 *
 	 * @return the Spring bean ID for this bean
 	 */
@@ -1011,7 +1011,7 @@ public abstract class AnnouncementsEntryLocalServiceBaseImpl
 	/**
 	 * Performs an SQL query.
 	 *
-	 * @param sql the sql query to perform
+	 * @param sql the sql query
 	 */
 	protected void runSQL(String sql) throws SystemException {
 		try {

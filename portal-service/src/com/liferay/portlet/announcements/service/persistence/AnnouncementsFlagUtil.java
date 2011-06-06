@@ -123,7 +123,7 @@ public class AnnouncementsFlagUtil {
 	/**
 	* Caches the announcements flag in the entity cache if it is enabled.
 	*
-	* @param announcementsFlag the announcements flag to cache
+	* @param announcementsFlag the announcements flag
 	*/
 	public static void cacheResult(
 		com.liferay.portlet.announcements.model.AnnouncementsFlag announcementsFlag) {
@@ -133,7 +133,7 @@ public class AnnouncementsFlagUtil {
 	/**
 	* Caches the announcements flags in the entity cache if it is enabled.
 	*
-	* @param announcementsFlags the announcements flags to cache
+	* @param announcementsFlags the announcements flags
 	*/
 	public static void cacheResult(
 		java.util.List<com.liferay.portlet.announcements.model.AnnouncementsFlag> announcementsFlags) {
@@ -154,7 +154,7 @@ public class AnnouncementsFlagUtil {
 	/**
 	* Removes the announcements flag with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param flagId the primary key of the announcements flag to remove
+	* @param flagId the primary key of the announcements flag
 	* @return the announcements flag that was removed
 	* @throws com.liferay.portlet.announcements.NoSuchFlagException if a announcements flag with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -174,9 +174,9 @@ public class AnnouncementsFlagUtil {
 	}
 
 	/**
-	* Finds the announcements flag with the primary key or throws a {@link com.liferay.portlet.announcements.NoSuchFlagException} if it could not be found.
+	* Returns the announcements flag with the primary key or throws a {@link com.liferay.portlet.announcements.NoSuchFlagException} if it could not be found.
 	*
-	* @param flagId the primary key of the announcements flag to find
+	* @param flagId the primary key of the announcements flag
 	* @return the announcements flag
 	* @throws com.liferay.portlet.announcements.NoSuchFlagException if a announcements flag with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -189,9 +189,9 @@ public class AnnouncementsFlagUtil {
 	}
 
 	/**
-	* Finds the announcements flag with the primary key or returns <code>null</code> if it could not be found.
+	* Returns the announcements flag with the primary key or returns <code>null</code> if it could not be found.
 	*
-	* @param flagId the primary key of the announcements flag to find
+	* @param flagId the primary key of the announcements flag
 	* @return the announcements flag, or <code>null</code> if a announcements flag with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -201,9 +201,9 @@ public class AnnouncementsFlagUtil {
 	}
 
 	/**
-	* Finds all the announcements flags where entryId = &#63;.
+	* Returns all the announcements flags where entryId = &#63;.
 	*
-	* @param entryId the entry ID to search with
+	* @param entryId the entry ID
 	* @return the matching announcements flags
 	* @throws SystemException if a system exception occurred
 	*/
@@ -214,15 +214,15 @@ public class AnnouncementsFlagUtil {
 	}
 
 	/**
-	* Finds a range of all the announcements flags where entryId = &#63;.
+	* Returns a range of all the announcements flags where entryId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param entryId the entry ID to search with
-	* @param start the lower bound of the range of announcements flags to return
-	* @param end the upper bound of the range of announcements flags to return (not inclusive)
+	* @param entryId the entry ID
+	* @param start the lower bound of the range of announcements flags
+	* @param end the upper bound of the range of announcements flags (not inclusive)
 	* @return the range of matching announcements flags
 	* @throws SystemException if a system exception occurred
 	*/
@@ -233,15 +233,15 @@ public class AnnouncementsFlagUtil {
 	}
 
 	/**
-	* Finds an ordered range of all the announcements flags where entryId = &#63;.
+	* Returns an ordered range of all the announcements flags where entryId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param entryId the entry ID to search with
-	* @param start the lower bound of the range of announcements flags to return
-	* @param end the upper bound of the range of announcements flags to return (not inclusive)
+	* @param entryId the entry ID
+	* @param start the lower bound of the range of announcements flags
+	* @param end the upper bound of the range of announcements flags (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching announcements flags
 	* @throws SystemException if a system exception occurred
@@ -255,13 +255,13 @@ public class AnnouncementsFlagUtil {
 	}
 
 	/**
-	* Finds the first announcements flag in the ordered set where entryId = &#63;.
+	* Returns the first announcements flag in the ordered set where entryId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param entryId the entry ID to search with
+	* @param entryId the entry ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching announcements flag
 	* @throws com.liferay.portlet.announcements.NoSuchFlagException if a matching announcements flag could not be found
@@ -276,13 +276,13 @@ public class AnnouncementsFlagUtil {
 	}
 
 	/**
-	* Finds the last announcements flag in the ordered set where entryId = &#63;.
+	* Returns the last announcements flag in the ordered set where entryId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param entryId the entry ID to search with
+	* @param entryId the entry ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching announcements flag
 	* @throws com.liferay.portlet.announcements.NoSuchFlagException if a matching announcements flag could not be found
@@ -297,14 +297,14 @@ public class AnnouncementsFlagUtil {
 	}
 
 	/**
-	* Finds the announcements flags before and after the current announcements flag in the ordered set where entryId = &#63;.
+	* Returns the announcements flags before and after the current announcements flag in the ordered set where entryId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
 	* @param flagId the primary key of the current announcements flag
-	* @param entryId the entry ID to search with
+	* @param entryId the entry ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next announcements flag
 	* @throws com.liferay.portlet.announcements.NoSuchFlagException if a announcements flag with the primary key could not be found
@@ -320,11 +320,11 @@ public class AnnouncementsFlagUtil {
 	}
 
 	/**
-	* Finds the announcements flag where userId = &#63; and entryId = &#63; and value = &#63; or throws a {@link com.liferay.portlet.announcements.NoSuchFlagException} if it could not be found.
+	* Returns the announcements flag where userId = &#63; and entryId = &#63; and value = &#63; or throws a {@link com.liferay.portlet.announcements.NoSuchFlagException} if it could not be found.
 	*
-	* @param userId the user ID to search with
-	* @param entryId the entry ID to search with
-	* @param value the value to search with
+	* @param userId the user ID
+	* @param entryId the entry ID
+	* @param value the value
 	* @return the matching announcements flag
 	* @throws com.liferay.portlet.announcements.NoSuchFlagException if a matching announcements flag could not be found
 	* @throws SystemException if a system exception occurred
@@ -337,11 +337,11 @@ public class AnnouncementsFlagUtil {
 	}
 
 	/**
-	* Finds the announcements flag where userId = &#63; and entryId = &#63; and value = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	* Returns the announcements flag where userId = &#63; and entryId = &#63; and value = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	*
-	* @param userId the user ID to search with
-	* @param entryId the entry ID to search with
-	* @param value the value to search with
+	* @param userId the user ID
+	* @param entryId the entry ID
+	* @param value the value
 	* @return the matching announcements flag, or <code>null</code> if a matching announcements flag could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -352,11 +352,11 @@ public class AnnouncementsFlagUtil {
 	}
 
 	/**
-	* Finds the announcements flag where userId = &#63; and entryId = &#63; and value = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	* Returns the announcements flag where userId = &#63; and entryId = &#63; and value = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
-	* @param userId the user ID to search with
-	* @param entryId the entry ID to search with
-	* @param value the value to search with
+	* @param userId the user ID
+	* @param entryId the entry ID
+	* @param value the value
 	* @return the matching announcements flag, or <code>null</code> if a matching announcements flag could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -368,7 +368,7 @@ public class AnnouncementsFlagUtil {
 	}
 
 	/**
-	* Finds all the announcements flags.
+	* Returns all the announcements flags.
 	*
 	* @return the announcements flags
 	* @throws SystemException if a system exception occurred
@@ -379,14 +379,14 @@ public class AnnouncementsFlagUtil {
 	}
 
 	/**
-	* Finds a range of all the announcements flags.
+	* Returns a range of all the announcements flags.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of announcements flags to return
-	* @param end the upper bound of the range of announcements flags to return (not inclusive)
+	* @param start the lower bound of the range of announcements flags
+	* @param end the upper bound of the range of announcements flags (not inclusive)
 	* @return the range of announcements flags
 	* @throws SystemException if a system exception occurred
 	*/
@@ -397,14 +397,14 @@ public class AnnouncementsFlagUtil {
 	}
 
 	/**
-	* Finds an ordered range of all the announcements flags.
+	* Returns an ordered range of all the announcements flags.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of announcements flags to return
-	* @param end the upper bound of the range of announcements flags to return (not inclusive)
+	* @param start the lower bound of the range of announcements flags
+	* @param end the upper bound of the range of announcements flags (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of announcements flags
 	* @throws SystemException if a system exception occurred
@@ -419,7 +419,7 @@ public class AnnouncementsFlagUtil {
 	/**
 	* Removes all the announcements flags where entryId = &#63; from the database.
 	*
-	* @param entryId the entry ID to search with
+	* @param entryId the entry ID
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByEntryId(long entryId)
@@ -430,9 +430,9 @@ public class AnnouncementsFlagUtil {
 	/**
 	* Removes the announcements flag where userId = &#63; and entryId = &#63; and value = &#63; from the database.
 	*
-	* @param userId the user ID to search with
-	* @param entryId the entry ID to search with
-	* @param value the value to search with
+	* @param userId the user ID
+	* @param entryId the entry ID
+	* @param value the value
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByU_E_V(long userId, long entryId, int value)
@@ -452,9 +452,9 @@ public class AnnouncementsFlagUtil {
 	}
 
 	/**
-	* Counts all the announcements flags where entryId = &#63;.
+	* Returns the number of announcements flags where entryId = &#63;.
 	*
-	* @param entryId the entry ID to search with
+	* @param entryId the entry ID
 	* @return the number of matching announcements flags
 	* @throws SystemException if a system exception occurred
 	*/
@@ -464,11 +464,11 @@ public class AnnouncementsFlagUtil {
 	}
 
 	/**
-	* Counts all the announcements flags where userId = &#63; and entryId = &#63; and value = &#63;.
+	* Returns the number of announcements flags where userId = &#63; and entryId = &#63; and value = &#63;.
 	*
-	* @param userId the user ID to search with
-	* @param entryId the entry ID to search with
-	* @param value the value to search with
+	* @param userId the user ID
+	* @param entryId the entry ID
+	* @param value the value
 	* @return the number of matching announcements flags
 	* @throws SystemException if a system exception occurred
 	*/
@@ -478,7 +478,7 @@ public class AnnouncementsFlagUtil {
 	}
 
 	/**
-	* Counts all the announcements flags.
+	* Returns the number of announcements flags.
 	*
 	* @return the number of announcements flags
 	* @throws SystemException if a system exception occurred

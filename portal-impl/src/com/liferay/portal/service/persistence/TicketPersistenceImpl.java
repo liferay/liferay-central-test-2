@@ -85,7 +85,7 @@ public class TicketPersistenceImpl extends BasePersistenceImpl<Ticket>
 	/**
 	 * Caches the ticket in the entity cache if it is enabled.
 	 *
-	 * @param ticket the ticket to cache
+	 * @param ticket the ticket
 	 */
 	public void cacheResult(Ticket ticket) {
 		EntityCacheUtil.putResult(TicketModelImpl.ENTITY_CACHE_ENABLED,
@@ -100,7 +100,7 @@ public class TicketPersistenceImpl extends BasePersistenceImpl<Ticket>
 	/**
 	 * Caches the tickets in the entity cache if it is enabled.
 	 *
-	 * @param tickets the tickets to cache
+	 * @param tickets the tickets
 	 */
 	public void cacheResult(List<Ticket> tickets) {
 		for (Ticket ticket : tickets) {
@@ -162,7 +162,7 @@ public class TicketPersistenceImpl extends BasePersistenceImpl<Ticket>
 	/**
 	 * Removes the ticket with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param primaryKey the primary key of the ticket to remove
+	 * @param primaryKey the primary key of the ticket
 	 * @return the ticket that was removed
 	 * @throws com.liferay.portal.NoSuchModelException if a ticket with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -175,7 +175,7 @@ public class TicketPersistenceImpl extends BasePersistenceImpl<Ticket>
 	/**
 	 * Removes the ticket with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param ticketId the primary key of the ticket to remove
+	 * @param ticketId the primary key of the ticket
 	 * @return the ticket that was removed
 	 * @throws com.liferay.portal.NoSuchTicketException if a ticket with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -215,7 +215,7 @@ public class TicketPersistenceImpl extends BasePersistenceImpl<Ticket>
 	/**
 	 * Removes the ticket from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param ticket the ticket to remove
+	 * @param ticket the ticket
 	 * @return the ticket that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -321,9 +321,9 @@ public class TicketPersistenceImpl extends BasePersistenceImpl<Ticket>
 	}
 
 	/**
-	 * Finds the ticket with the primary key or throws a {@link com.liferay.portal.NoSuchModelException} if it could not be found.
+	 * Returns the ticket with the primary key or throws a {@link com.liferay.portal.NoSuchModelException} if it could not be found.
 	 *
-	 * @param primaryKey the primary key of the ticket to find
+	 * @param primaryKey the primary key of the ticket
 	 * @return the ticket
 	 * @throws com.liferay.portal.NoSuchModelException if a ticket with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -334,9 +334,9 @@ public class TicketPersistenceImpl extends BasePersistenceImpl<Ticket>
 	}
 
 	/**
-	 * Finds the ticket with the primary key or throws a {@link com.liferay.portal.NoSuchTicketException} if it could not be found.
+	 * Returns the ticket with the primary key or throws a {@link com.liferay.portal.NoSuchTicketException} if it could not be found.
 	 *
-	 * @param ticketId the primary key of the ticket to find
+	 * @param ticketId the primary key of the ticket
 	 * @return the ticket
 	 * @throws com.liferay.portal.NoSuchTicketException if a ticket with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -358,9 +358,9 @@ public class TicketPersistenceImpl extends BasePersistenceImpl<Ticket>
 	}
 
 	/**
-	 * Finds the ticket with the primary key or returns <code>null</code> if it could not be found.
+	 * Returns the ticket with the primary key or returns <code>null</code> if it could not be found.
 	 *
-	 * @param primaryKey the primary key of the ticket to find
+	 * @param primaryKey the primary key of the ticket
 	 * @return the ticket, or <code>null</code> if a ticket with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -370,9 +370,9 @@ public class TicketPersistenceImpl extends BasePersistenceImpl<Ticket>
 	}
 
 	/**
-	 * Finds the ticket with the primary key or returns <code>null</code> if it could not be found.
+	 * Returns the ticket with the primary key or returns <code>null</code> if it could not be found.
 	 *
-	 * @param ticketId the primary key of the ticket to find
+	 * @param ticketId the primary key of the ticket
 	 * @return the ticket, or <code>null</code> if a ticket with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -405,9 +405,9 @@ public class TicketPersistenceImpl extends BasePersistenceImpl<Ticket>
 	}
 
 	/**
-	 * Finds the ticket where key = &#63; or throws a {@link com.liferay.portal.NoSuchTicketException} if it could not be found.
+	 * Returns the ticket where key = &#63; or throws a {@link com.liferay.portal.NoSuchTicketException} if it could not be found.
 	 *
-	 * @param key the key to search with
+	 * @param key the key
 	 * @return the matching ticket
 	 * @throws com.liferay.portal.NoSuchTicketException if a matching ticket could not be found
 	 * @throws SystemException if a system exception occurred
@@ -437,9 +437,9 @@ public class TicketPersistenceImpl extends BasePersistenceImpl<Ticket>
 	}
 
 	/**
-	 * Finds the ticket where key = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 * Returns the ticket where key = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	 *
-	 * @param key the key to search with
+	 * @param key the key
 	 * @return the matching ticket, or <code>null</code> if a matching ticket could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -448,9 +448,9 @@ public class TicketPersistenceImpl extends BasePersistenceImpl<Ticket>
 	}
 
 	/**
-	 * Finds the ticket where key = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 * Returns the ticket where key = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	 *
-	 * @param key the key to search with
+	 * @param key the key
 	 * @return the matching ticket, or <code>null</code> if a matching ticket could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -546,7 +546,7 @@ public class TicketPersistenceImpl extends BasePersistenceImpl<Ticket>
 	}
 
 	/**
-	 * Finds all the tickets.
+	 * Returns all the tickets.
 	 *
 	 * @return the tickets
 	 * @throws SystemException if a system exception occurred
@@ -556,14 +556,14 @@ public class TicketPersistenceImpl extends BasePersistenceImpl<Ticket>
 	}
 
 	/**
-	 * Finds a range of all the tickets.
+	 * Returns a range of all the tickets.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param start the lower bound of the range of tickets to return
-	 * @param end the upper bound of the range of tickets to return (not inclusive)
+	 * @param start the lower bound of the range of tickets
+	 * @param end the upper bound of the range of tickets (not inclusive)
 	 * @return the range of tickets
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -572,14 +572,14 @@ public class TicketPersistenceImpl extends BasePersistenceImpl<Ticket>
 	}
 
 	/**
-	 * Finds an ordered range of all the tickets.
+	 * Returns an ordered range of all the tickets.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param start the lower bound of the range of tickets to return
-	 * @param end the upper bound of the range of tickets to return (not inclusive)
+	 * @param start the lower bound of the range of tickets
+	 * @param end the upper bound of the range of tickets (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of tickets
 	 * @throws SystemException if a system exception occurred
@@ -656,7 +656,7 @@ public class TicketPersistenceImpl extends BasePersistenceImpl<Ticket>
 	/**
 	 * Removes the ticket where key = &#63; from the database.
 	 *
-	 * @param key the key to search with
+	 * @param key the key
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByKey(String key)
@@ -678,9 +678,9 @@ public class TicketPersistenceImpl extends BasePersistenceImpl<Ticket>
 	}
 
 	/**
-	 * Counts all the tickets where key = &#63;.
+	 * Returns the number of tickets where key = &#63;.
 	 *
-	 * @param key the key to search with
+	 * @param key the key
 	 * @return the number of matching tickets
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -743,7 +743,7 @@ public class TicketPersistenceImpl extends BasePersistenceImpl<Ticket>
 	}
 
 	/**
-	 * Counts all the tickets.
+	 * Returns the number of tickets.
 	 *
 	 * @return the number of tickets
 	 * @throws SystemException if a system exception occurred

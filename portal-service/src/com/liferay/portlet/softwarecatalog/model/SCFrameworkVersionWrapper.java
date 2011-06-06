@@ -37,7 +37,7 @@ public class SCFrameworkVersionWrapper implements SCFrameworkVersion {
 	}
 
 	/**
-	* Gets the primary key of this s c framework version.
+	* Returns the primary key of this s c framework version.
 	*
 	* @return the primary key of this s c framework version
 	*/
@@ -46,7 +46,7 @@ public class SCFrameworkVersionWrapper implements SCFrameworkVersion {
 	}
 
 	/**
-	* Sets the primary key of this s c framework version
+	* Sets the primary key of this s c framework version.
 	*
 	* @param primaryKey the primary key of this s c framework version
 	*/
@@ -55,7 +55,7 @@ public class SCFrameworkVersionWrapper implements SCFrameworkVersion {
 	}
 
 	/**
-	* Gets the framework version ID of this s c framework version.
+	* Returns the framework version ID of this s c framework version.
 	*
 	* @return the framework version ID of this s c framework version
 	*/
@@ -73,7 +73,7 @@ public class SCFrameworkVersionWrapper implements SCFrameworkVersion {
 	}
 
 	/**
-	* Gets the group ID of this s c framework version.
+	* Returns the group ID of this s c framework version.
 	*
 	* @return the group ID of this s c framework version
 	*/
@@ -91,7 +91,7 @@ public class SCFrameworkVersionWrapper implements SCFrameworkVersion {
 	}
 
 	/**
-	* Gets the company ID of this s c framework version.
+	* Returns the company ID of this s c framework version.
 	*
 	* @return the company ID of this s c framework version
 	*/
@@ -109,7 +109,7 @@ public class SCFrameworkVersionWrapper implements SCFrameworkVersion {
 	}
 
 	/**
-	* Gets the user ID of this s c framework version.
+	* Returns the user ID of this s c framework version.
 	*
 	* @return the user ID of this s c framework version
 	*/
@@ -127,7 +127,7 @@ public class SCFrameworkVersionWrapper implements SCFrameworkVersion {
 	}
 
 	/**
-	* Gets the user uuid of this s c framework version.
+	* Returns the user uuid of this s c framework version.
 	*
 	* @return the user uuid of this s c framework version
 	* @throws SystemException if a system exception occurred
@@ -147,7 +147,7 @@ public class SCFrameworkVersionWrapper implements SCFrameworkVersion {
 	}
 
 	/**
-	* Gets the user name of this s c framework version.
+	* Returns the user name of this s c framework version.
 	*
 	* @return the user name of this s c framework version
 	*/
@@ -165,7 +165,7 @@ public class SCFrameworkVersionWrapper implements SCFrameworkVersion {
 	}
 
 	/**
-	* Gets the create date of this s c framework version.
+	* Returns the create date of this s c framework version.
 	*
 	* @return the create date of this s c framework version
 	*/
@@ -183,7 +183,7 @@ public class SCFrameworkVersionWrapper implements SCFrameworkVersion {
 	}
 
 	/**
-	* Gets the modified date of this s c framework version.
+	* Returns the modified date of this s c framework version.
 	*
 	* @return the modified date of this s c framework version
 	*/
@@ -201,7 +201,7 @@ public class SCFrameworkVersionWrapper implements SCFrameworkVersion {
 	}
 
 	/**
-	* Gets the name of this s c framework version.
+	* Returns the name of this s c framework version.
 	*
 	* @return the name of this s c framework version
 	*/
@@ -219,7 +219,7 @@ public class SCFrameworkVersionWrapper implements SCFrameworkVersion {
 	}
 
 	/**
-	* Gets the url of this s c framework version.
+	* Returns the url of this s c framework version.
 	*
 	* @return the url of this s c framework version
 	*/
@@ -237,7 +237,7 @@ public class SCFrameworkVersionWrapper implements SCFrameworkVersion {
 	}
 
 	/**
-	* Gets the active of this s c framework version.
+	* Returns the active of this s c framework version.
 	*
 	* @return the active of this s c framework version
 	*/
@@ -264,7 +264,7 @@ public class SCFrameworkVersionWrapper implements SCFrameworkVersion {
 	}
 
 	/**
-	* Gets the priority of this s c framework version.
+	* Returns the priority of this s c framework version.
 	*
 	* @return the priority of this s c framework version
 	*/

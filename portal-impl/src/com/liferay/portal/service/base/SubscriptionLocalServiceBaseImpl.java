@@ -230,7 +230,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	/**
 	 * Adds the subscription to the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param subscription the subscription to add
+	 * @param subscription the subscription
 	 * @return the subscription that was added
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -254,7 +254,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	/**
 	 * Deletes the subscription with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param subscriptionId the primary key of the subscription to delete
+	 * @param subscriptionId the primary key of the subscription
 	 * @throws PortalException if a subscription with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -266,7 +266,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	/**
 	 * Deletes the subscription from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param subscription the subscription to delete
+	 * @param subscription the subscription
 	 * @throws PortalException
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -278,7 +278,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	/**
 	 * Performs a dynamic query on the database and returns the matching rows.
 	 *
-	 * @param dynamicQuery the dynamic query to search with
+	 * @param dynamicQuery the dynamic query
 	 * @return the matching rows
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -295,9 +295,9 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param dynamicQuery the dynamic query to search with
-	 * @param start the lower bound of the range of model instances to return
-	 * @param end the upper bound of the range of model instances to return (not inclusive)
+	 * @param dynamicQuery the dynamic query
+	 * @param start the lower bound of the range of model instances
+	 * @param end the upper bound of the range of model instances (not inclusive)
 	 * @return the range of matching rows
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -315,9 +315,9 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param dynamicQuery the dynamic query to search with
-	 * @param start the lower bound of the range of model instances to return
-	 * @param end the upper bound of the range of model instances to return (not inclusive)
+	 * @param dynamicQuery the dynamic query
+	 * @param start the lower bound of the range of model instances
+	 * @param end the upper bound of the range of model instances (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching rows
 	 * @throws SystemException if a system exception occurred
@@ -330,9 +330,9 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Counts the number of rows that match the dynamic query.
+	 * Returns the number of rows that match the dynamic query.
 	 *
-	 * @param dynamicQuery the dynamic query to search with
+	 * @param dynamicQuery the dynamic query
 	 * @return the number of rows that match the dynamic query
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -342,9 +342,9 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the subscription with the primary key.
+	 * Returns the subscription with the primary key.
 	 *
-	 * @param subscriptionId the primary key of the subscription to get
+	 * @param subscriptionId the primary key of the subscription
 	 * @return the subscription
 	 * @throws PortalException if a subscription with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -355,14 +355,14 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets a range of all the subscriptions.
+	 * Returns a range of all the subscriptions.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param start the lower bound of the range of subscriptions to return
-	 * @param end the upper bound of the range of subscriptions to return (not inclusive)
+	 * @param start the lower bound of the range of subscriptions
+	 * @param end the upper bound of the range of subscriptions (not inclusive)
 	 * @return the range of subscriptions
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -372,7 +372,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the number of subscriptions.
+	 * Returns the number of subscriptions.
 	 *
 	 * @return the number of subscriptions
 	 * @throws SystemException if a system exception occurred
@@ -384,7 +384,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	/**
 	 * Updates the subscription in the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param subscription the subscription to update
+	 * @param subscription the subscription
 	 * @return the subscription that was updated
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -398,7 +398,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	/**
 	 * Updates the subscription in the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param subscription the subscription to update
+	 * @param subscription the subscription
 	 * @param merge whether to merge the subscription with the current session. See {@link com.liferay.portal.service.persistence.BatchSession#update(com.liferay.portal.kernel.dao.orm.Session, com.liferay.portal.model.BaseModel, boolean)} for an explanation.
 	 * @return the subscription that was updated
 	 * @throws SystemException if a system exception occurred
@@ -411,7 +411,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the account local service.
+	 * Returns the account local service.
 	 *
 	 * @return the account local service
 	 */
@@ -429,7 +429,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the account remote service.
+	 * Returns the account remote service.
 	 *
 	 * @return the account remote service
 	 */
@@ -447,7 +447,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the account persistence.
+	 * Returns the account persistence.
 	 *
 	 * @return the account persistence
 	 */
@@ -465,7 +465,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the address local service.
+	 * Returns the address local service.
 	 *
 	 * @return the address local service
 	 */
@@ -483,7 +483,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the address remote service.
+	 * Returns the address remote service.
 	 *
 	 * @return the address remote service
 	 */
@@ -501,7 +501,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the address persistence.
+	 * Returns the address persistence.
 	 *
 	 * @return the address persistence
 	 */
@@ -519,7 +519,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the browser tracker local service.
+	 * Returns the browser tracker local service.
 	 *
 	 * @return the browser tracker local service
 	 */
@@ -538,7 +538,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the browser tracker persistence.
+	 * Returns the browser tracker persistence.
 	 *
 	 * @return the browser tracker persistence
 	 */
@@ -557,7 +557,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the class name local service.
+	 * Returns the class name local service.
 	 *
 	 * @return the class name local service
 	 */
@@ -576,7 +576,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the class name remote service.
+	 * Returns the class name remote service.
 	 *
 	 * @return the class name remote service
 	 */
@@ -594,7 +594,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the class name persistence.
+	 * Returns the class name persistence.
 	 *
 	 * @return the class name persistence
 	 */
@@ -613,7 +613,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the cluster group local service.
+	 * Returns the cluster group local service.
 	 *
 	 * @return the cluster group local service
 	 */
@@ -632,7 +632,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the cluster group persistence.
+	 * Returns the cluster group persistence.
 	 *
 	 * @return the cluster group persistence
 	 */
@@ -651,7 +651,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the c m i s repository local service.
+	 * Returns the c m i s repository local service.
 	 *
 	 * @return the c m i s repository local service
 	 */
@@ -670,7 +670,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the company local service.
+	 * Returns the company local service.
 	 *
 	 * @return the company local service
 	 */
@@ -688,7 +688,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the company remote service.
+	 * Returns the company remote service.
 	 *
 	 * @return the company remote service
 	 */
@@ -706,7 +706,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the company persistence.
+	 * Returns the company persistence.
 	 *
 	 * @return the company persistence
 	 */
@@ -724,7 +724,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the contact local service.
+	 * Returns the contact local service.
 	 *
 	 * @return the contact local service
 	 */
@@ -742,7 +742,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the contact remote service.
+	 * Returns the contact remote service.
 	 *
 	 * @return the contact remote service
 	 */
@@ -760,7 +760,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the contact persistence.
+	 * Returns the contact persistence.
 	 *
 	 * @return the contact persistence
 	 */
@@ -778,7 +778,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the country remote service.
+	 * Returns the country remote service.
 	 *
 	 * @return the country remote service
 	 */
@@ -796,7 +796,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the country persistence.
+	 * Returns the country persistence.
 	 *
 	 * @return the country persistence
 	 */
@@ -814,7 +814,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the email address local service.
+	 * Returns the email address local service.
 	 *
 	 * @return the email address local service
 	 */
@@ -833,7 +833,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the email address remote service.
+	 * Returns the email address remote service.
 	 *
 	 * @return the email address remote service
 	 */
@@ -851,7 +851,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the email address persistence.
+	 * Returns the email address persistence.
 	 *
 	 * @return the email address persistence
 	 */
@@ -870,7 +870,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the group local service.
+	 * Returns the group local service.
 	 *
 	 * @return the group local service
 	 */
@@ -888,7 +888,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the group remote service.
+	 * Returns the group remote service.
 	 *
 	 * @return the group remote service
 	 */
@@ -906,7 +906,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the group persistence.
+	 * Returns the group persistence.
 	 *
 	 * @return the group persistence
 	 */
@@ -924,7 +924,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the group finder.
+	 * Returns the group finder.
 	 *
 	 * @return the group finder
 	 */
@@ -942,7 +942,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the image local service.
+	 * Returns the image local service.
 	 *
 	 * @return the image local service
 	 */
@@ -960,7 +960,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the image remote service.
+	 * Returns the image remote service.
 	 *
 	 * @return the image remote service
 	 */
@@ -978,7 +978,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the image persistence.
+	 * Returns the image persistence.
 	 *
 	 * @return the image persistence
 	 */
@@ -996,7 +996,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the layout local service.
+	 * Returns the layout local service.
 	 *
 	 * @return the layout local service
 	 */
@@ -1014,7 +1014,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the layout remote service.
+	 * Returns the layout remote service.
 	 *
 	 * @return the layout remote service
 	 */
@@ -1032,7 +1032,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the layout persistence.
+	 * Returns the layout persistence.
 	 *
 	 * @return the layout persistence
 	 */
@@ -1050,7 +1050,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the layout finder.
+	 * Returns the layout finder.
 	 *
 	 * @return the layout finder
 	 */
@@ -1068,7 +1068,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the layout prototype local service.
+	 * Returns the layout prototype local service.
 	 *
 	 * @return the layout prototype local service
 	 */
@@ -1087,7 +1087,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the layout prototype remote service.
+	 * Returns the layout prototype remote service.
 	 *
 	 * @return the layout prototype remote service
 	 */
@@ -1106,7 +1106,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the layout prototype persistence.
+	 * Returns the layout prototype persistence.
 	 *
 	 * @return the layout prototype persistence
 	 */
@@ -1125,7 +1125,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the layout revision local service.
+	 * Returns the layout revision local service.
 	 *
 	 * @return the layout revision local service
 	 */
@@ -1144,7 +1144,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the layout revision remote service.
+	 * Returns the layout revision remote service.
 	 *
 	 * @return the layout revision remote service
 	 */
@@ -1163,7 +1163,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the layout revision persistence.
+	 * Returns the layout revision persistence.
 	 *
 	 * @return the layout revision persistence
 	 */
@@ -1182,7 +1182,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the layout set local service.
+	 * Returns the layout set local service.
 	 *
 	 * @return the layout set local service
 	 */
@@ -1201,7 +1201,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the layout set remote service.
+	 * Returns the layout set remote service.
 	 *
 	 * @return the layout set remote service
 	 */
@@ -1219,7 +1219,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the layout set persistence.
+	 * Returns the layout set persistence.
 	 *
 	 * @return the layout set persistence
 	 */
@@ -1238,7 +1238,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the layout set branch local service.
+	 * Returns the layout set branch local service.
 	 *
 	 * @return the layout set branch local service
 	 */
@@ -1257,7 +1257,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the layout set branch remote service.
+	 * Returns the layout set branch remote service.
 	 *
 	 * @return the layout set branch remote service
 	 */
@@ -1276,7 +1276,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the layout set branch persistence.
+	 * Returns the layout set branch persistence.
 	 *
 	 * @return the layout set branch persistence
 	 */
@@ -1295,7 +1295,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the layout set prototype local service.
+	 * Returns the layout set prototype local service.
 	 *
 	 * @return the layout set prototype local service
 	 */
@@ -1314,7 +1314,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the layout set prototype remote service.
+	 * Returns the layout set prototype remote service.
 	 *
 	 * @return the layout set prototype remote service
 	 */
@@ -1333,7 +1333,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the layout set prototype persistence.
+	 * Returns the layout set prototype persistence.
 	 *
 	 * @return the layout set prototype persistence
 	 */
@@ -1352,7 +1352,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the layout template local service.
+	 * Returns the layout template local service.
 	 *
 	 * @return the layout template local service
 	 */
@@ -1371,7 +1371,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the list type remote service.
+	 * Returns the list type remote service.
 	 *
 	 * @return the list type remote service
 	 */
@@ -1389,7 +1389,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the list type persistence.
+	 * Returns the list type persistence.
 	 *
 	 * @return the list type persistence
 	 */
@@ -1407,7 +1407,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the lock local service.
+	 * Returns the lock local service.
 	 *
 	 * @return the lock local service
 	 */
@@ -1425,7 +1425,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the lock persistence.
+	 * Returns the lock persistence.
 	 *
 	 * @return the lock persistence
 	 */
@@ -1443,7 +1443,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the membership request local service.
+	 * Returns the membership request local service.
 	 *
 	 * @return the membership request local service
 	 */
@@ -1462,7 +1462,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the membership request remote service.
+	 * Returns the membership request remote service.
 	 *
 	 * @return the membership request remote service
 	 */
@@ -1481,7 +1481,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the membership request persistence.
+	 * Returns the membership request persistence.
 	 *
 	 * @return the membership request persistence
 	 */
@@ -1500,7 +1500,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the organization local service.
+	 * Returns the organization local service.
 	 *
 	 * @return the organization local service
 	 */
@@ -1519,7 +1519,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the organization remote service.
+	 * Returns the organization remote service.
 	 *
 	 * @return the organization remote service
 	 */
@@ -1537,7 +1537,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the organization persistence.
+	 * Returns the organization persistence.
 	 *
 	 * @return the organization persistence
 	 */
@@ -1556,7 +1556,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the organization finder.
+	 * Returns the organization finder.
 	 *
 	 * @return the organization finder
 	 */
@@ -1574,7 +1574,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the org group permission persistence.
+	 * Returns the org group permission persistence.
 	 *
 	 * @return the org group permission persistence
 	 */
@@ -1593,7 +1593,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the org group permission finder.
+	 * Returns the org group permission finder.
 	 *
 	 * @return the org group permission finder
 	 */
@@ -1612,7 +1612,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the org group role persistence.
+	 * Returns the org group role persistence.
 	 *
 	 * @return the org group role persistence
 	 */
@@ -1631,7 +1631,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the org labor local service.
+	 * Returns the org labor local service.
 	 *
 	 * @return the org labor local service
 	 */
@@ -1650,7 +1650,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the org labor remote service.
+	 * Returns the org labor remote service.
 	 *
 	 * @return the org labor remote service
 	 */
@@ -1668,7 +1668,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the org labor persistence.
+	 * Returns the org labor persistence.
 	 *
 	 * @return the org labor persistence
 	 */
@@ -1686,7 +1686,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the password policy local service.
+	 * Returns the password policy local service.
 	 *
 	 * @return the password policy local service
 	 */
@@ -1705,7 +1705,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the password policy remote service.
+	 * Returns the password policy remote service.
 	 *
 	 * @return the password policy remote service
 	 */
@@ -1724,7 +1724,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the password policy persistence.
+	 * Returns the password policy persistence.
 	 *
 	 * @return the password policy persistence
 	 */
@@ -1743,7 +1743,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the password policy finder.
+	 * Returns the password policy finder.
 	 *
 	 * @return the password policy finder
 	 */
@@ -1762,7 +1762,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the password policy rel local service.
+	 * Returns the password policy rel local service.
 	 *
 	 * @return the password policy rel local service
 	 */
@@ -1781,7 +1781,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the password policy rel persistence.
+	 * Returns the password policy rel persistence.
 	 *
 	 * @return the password policy rel persistence
 	 */
@@ -1800,7 +1800,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the password tracker local service.
+	 * Returns the password tracker local service.
 	 *
 	 * @return the password tracker local service
 	 */
@@ -1819,7 +1819,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the password tracker persistence.
+	 * Returns the password tracker persistence.
 	 *
 	 * @return the password tracker persistence
 	 */
@@ -1838,7 +1838,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the permission local service.
+	 * Returns the permission local service.
 	 *
 	 * @return the permission local service
 	 */
@@ -1857,7 +1857,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the permission remote service.
+	 * Returns the permission remote service.
 	 *
 	 * @return the permission remote service
 	 */
@@ -1875,7 +1875,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the permission persistence.
+	 * Returns the permission persistence.
 	 *
 	 * @return the permission persistence
 	 */
@@ -1894,7 +1894,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the permission finder.
+	 * Returns the permission finder.
 	 *
 	 * @return the permission finder
 	 */
@@ -1912,7 +1912,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the phone local service.
+	 * Returns the phone local service.
 	 *
 	 * @return the phone local service
 	 */
@@ -1930,7 +1930,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the phone remote service.
+	 * Returns the phone remote service.
 	 *
 	 * @return the phone remote service
 	 */
@@ -1948,7 +1948,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the phone persistence.
+	 * Returns the phone persistence.
 	 *
 	 * @return the phone persistence
 	 */
@@ -1966,7 +1966,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the plugin setting local service.
+	 * Returns the plugin setting local service.
 	 *
 	 * @return the plugin setting local service
 	 */
@@ -1985,7 +1985,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the plugin setting remote service.
+	 * Returns the plugin setting remote service.
 	 *
 	 * @return the plugin setting remote service
 	 */
@@ -2004,7 +2004,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the plugin setting persistence.
+	 * Returns the plugin setting persistence.
 	 *
 	 * @return the plugin setting persistence
 	 */
@@ -2023,7 +2023,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the portal local service.
+	 * Returns the portal local service.
 	 *
 	 * @return the portal local service
 	 */
@@ -2041,7 +2041,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the portal remote service.
+	 * Returns the portal remote service.
 	 *
 	 * @return the portal remote service
 	 */
@@ -2059,7 +2059,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the portlet local service.
+	 * Returns the portlet local service.
 	 *
 	 * @return the portlet local service
 	 */
@@ -2077,7 +2077,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the portlet remote service.
+	 * Returns the portlet remote service.
 	 *
 	 * @return the portlet remote service
 	 */
@@ -2095,7 +2095,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the portlet persistence.
+	 * Returns the portlet persistence.
 	 *
 	 * @return the portlet persistence
 	 */
@@ -2113,7 +2113,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the portlet item local service.
+	 * Returns the portlet item local service.
 	 *
 	 * @return the portlet item local service
 	 */
@@ -2132,7 +2132,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the portlet item persistence.
+	 * Returns the portlet item persistence.
 	 *
 	 * @return the portlet item persistence
 	 */
@@ -2151,7 +2151,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the portlet preferences local service.
+	 * Returns the portlet preferences local service.
 	 *
 	 * @return the portlet preferences local service
 	 */
@@ -2170,7 +2170,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the portlet preferences remote service.
+	 * Returns the portlet preferences remote service.
 	 *
 	 * @return the portlet preferences remote service
 	 */
@@ -2189,7 +2189,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the portlet preferences persistence.
+	 * Returns the portlet preferences persistence.
 	 *
 	 * @return the portlet preferences persistence
 	 */
@@ -2208,7 +2208,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the portlet preferences finder.
+	 * Returns the portlet preferences finder.
 	 *
 	 * @return the portlet preferences finder
 	 */
@@ -2227,7 +2227,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the quartz local service.
+	 * Returns the quartz local service.
 	 *
 	 * @return the quartz local service
 	 */
@@ -2245,7 +2245,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the region remote service.
+	 * Returns the region remote service.
 	 *
 	 * @return the region remote service
 	 */
@@ -2263,7 +2263,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the region persistence.
+	 * Returns the region persistence.
 	 *
 	 * @return the region persistence
 	 */
@@ -2281,7 +2281,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the release local service.
+	 * Returns the release local service.
 	 *
 	 * @return the release local service
 	 */
@@ -2299,7 +2299,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the release persistence.
+	 * Returns the release persistence.
 	 *
 	 * @return the release persistence
 	 */
@@ -2317,7 +2317,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the repository remote service.
+	 * Returns the repository remote service.
 	 *
 	 * @return the repository remote service
 	 */
@@ -2335,7 +2335,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the repository persistence.
+	 * Returns the repository persistence.
 	 *
 	 * @return the repository persistence
 	 */
@@ -2354,7 +2354,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the repository entry persistence.
+	 * Returns the repository entry persistence.
 	 *
 	 * @return the repository entry persistence
 	 */
@@ -2373,7 +2373,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the resource local service.
+	 * Returns the resource local service.
 	 *
 	 * @return the resource local service
 	 */
@@ -2392,7 +2392,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the resource remote service.
+	 * Returns the resource remote service.
 	 *
 	 * @return the resource remote service
 	 */
@@ -2410,7 +2410,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the resource persistence.
+	 * Returns the resource persistence.
 	 *
 	 * @return the resource persistence
 	 */
@@ -2428,7 +2428,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the resource finder.
+	 * Returns the resource finder.
 	 *
 	 * @return the resource finder
 	 */
@@ -2446,7 +2446,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the resource action local service.
+	 * Returns the resource action local service.
 	 *
 	 * @return the resource action local service
 	 */
@@ -2465,7 +2465,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the resource action persistence.
+	 * Returns the resource action persistence.
 	 *
 	 * @return the resource action persistence
 	 */
@@ -2484,7 +2484,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the resource code local service.
+	 * Returns the resource code local service.
 	 *
 	 * @return the resource code local service
 	 */
@@ -2503,7 +2503,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the resource code persistence.
+	 * Returns the resource code persistence.
 	 *
 	 * @return the resource code persistence
 	 */
@@ -2522,7 +2522,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the resource permission local service.
+	 * Returns the resource permission local service.
 	 *
 	 * @return the resource permission local service
 	 */
@@ -2541,7 +2541,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the resource permission remote service.
+	 * Returns the resource permission remote service.
 	 *
 	 * @return the resource permission remote service
 	 */
@@ -2560,7 +2560,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the resource permission persistence.
+	 * Returns the resource permission persistence.
 	 *
 	 * @return the resource permission persistence
 	 */
@@ -2579,7 +2579,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the resource permission finder.
+	 * Returns the resource permission finder.
 	 *
 	 * @return the resource permission finder
 	 */
@@ -2598,7 +2598,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the role local service.
+	 * Returns the role local service.
 	 *
 	 * @return the role local service
 	 */
@@ -2616,7 +2616,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the role remote service.
+	 * Returns the role remote service.
 	 *
 	 * @return the role remote service
 	 */
@@ -2634,7 +2634,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the role persistence.
+	 * Returns the role persistence.
 	 *
 	 * @return the role persistence
 	 */
@@ -2652,7 +2652,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the role finder.
+	 * Returns the role finder.
 	 *
 	 * @return the role finder
 	 */
@@ -2670,7 +2670,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the service component local service.
+	 * Returns the service component local service.
 	 *
 	 * @return the service component local service
 	 */
@@ -2689,7 +2689,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the service component persistence.
+	 * Returns the service component persistence.
 	 *
 	 * @return the service component persistence
 	 */
@@ -2708,7 +2708,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the shard local service.
+	 * Returns the shard local service.
 	 *
 	 * @return the shard local service
 	 */
@@ -2726,7 +2726,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the shard persistence.
+	 * Returns the shard persistence.
 	 *
 	 * @return the shard persistence
 	 */
@@ -2744,7 +2744,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the subscription local service.
+	 * Returns the subscription local service.
 	 *
 	 * @return the subscription local service
 	 */
@@ -2763,7 +2763,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the subscription persistence.
+	 * Returns the subscription persistence.
 	 *
 	 * @return the subscription persistence
 	 */
@@ -2782,7 +2782,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the team local service.
+	 * Returns the team local service.
 	 *
 	 * @return the team local service
 	 */
@@ -2800,7 +2800,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the team remote service.
+	 * Returns the team remote service.
 	 *
 	 * @return the team remote service
 	 */
@@ -2818,7 +2818,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the team persistence.
+	 * Returns the team persistence.
 	 *
 	 * @return the team persistence
 	 */
@@ -2836,7 +2836,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the team finder.
+	 * Returns the team finder.
 	 *
 	 * @return the team finder
 	 */
@@ -2854,7 +2854,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the theme local service.
+	 * Returns the theme local service.
 	 *
 	 * @return the theme local service
 	 */
@@ -2872,7 +2872,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the theme remote service.
+	 * Returns the theme remote service.
 	 *
 	 * @return the theme remote service
 	 */
@@ -2890,7 +2890,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the ticket local service.
+	 * Returns the ticket local service.
 	 *
 	 * @return the ticket local service
 	 */
@@ -2908,7 +2908,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the ticket persistence.
+	 * Returns the ticket persistence.
 	 *
 	 * @return the ticket persistence
 	 */
@@ -2926,7 +2926,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the user local service.
+	 * Returns the user local service.
 	 *
 	 * @return the user local service
 	 */
@@ -2944,7 +2944,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the user remote service.
+	 * Returns the user remote service.
 	 *
 	 * @return the user remote service
 	 */
@@ -2962,7 +2962,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the user persistence.
+	 * Returns the user persistence.
 	 *
 	 * @return the user persistence
 	 */
@@ -2980,7 +2980,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the user finder.
+	 * Returns the user finder.
 	 *
 	 * @return the user finder
 	 */
@@ -2998,7 +2998,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the user group local service.
+	 * Returns the user group local service.
 	 *
 	 * @return the user group local service
 	 */
@@ -3017,7 +3017,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the user group remote service.
+	 * Returns the user group remote service.
 	 *
 	 * @return the user group remote service
 	 */
@@ -3035,7 +3035,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the user group persistence.
+	 * Returns the user group persistence.
 	 *
 	 * @return the user group persistence
 	 */
@@ -3054,7 +3054,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the user group finder.
+	 * Returns the user group finder.
 	 *
 	 * @return the user group finder
 	 */
@@ -3072,7 +3072,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the user group group role local service.
+	 * Returns the user group group role local service.
 	 *
 	 * @return the user group group role local service
 	 */
@@ -3091,7 +3091,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the user group group role remote service.
+	 * Returns the user group group role remote service.
 	 *
 	 * @return the user group group role remote service
 	 */
@@ -3110,7 +3110,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the user group group role persistence.
+	 * Returns the user group group role persistence.
 	 *
 	 * @return the user group group role persistence
 	 */
@@ -3129,7 +3129,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the user group role local service.
+	 * Returns the user group role local service.
 	 *
 	 * @return the user group role local service
 	 */
@@ -3148,7 +3148,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the user group role remote service.
+	 * Returns the user group role remote service.
 	 *
 	 * @return the user group role remote service
 	 */
@@ -3167,7 +3167,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the user group role persistence.
+	 * Returns the user group role persistence.
 	 *
 	 * @return the user group role persistence
 	 */
@@ -3186,7 +3186,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the user group role finder.
+	 * Returns the user group role finder.
 	 *
 	 * @return the user group role finder
 	 */
@@ -3204,7 +3204,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the user ID mapper local service.
+	 * Returns the user ID mapper local service.
 	 *
 	 * @return the user ID mapper local service
 	 */
@@ -3223,7 +3223,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the user ID mapper persistence.
+	 * Returns the user ID mapper persistence.
 	 *
 	 * @return the user ID mapper persistence
 	 */
@@ -3242,7 +3242,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the user notification event local service.
+	 * Returns the user notification event local service.
 	 *
 	 * @return the user notification event local service
 	 */
@@ -3261,7 +3261,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the user notification event persistence.
+	 * Returns the user notification event persistence.
 	 *
 	 * @return the user notification event persistence
 	 */
@@ -3280,7 +3280,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the user tracker local service.
+	 * Returns the user tracker local service.
 	 *
 	 * @return the user tracker local service
 	 */
@@ -3299,7 +3299,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the user tracker persistence.
+	 * Returns the user tracker persistence.
 	 *
 	 * @return the user tracker persistence
 	 */
@@ -3318,7 +3318,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the user tracker path local service.
+	 * Returns the user tracker path local service.
 	 *
 	 * @return the user tracker path local service
 	 */
@@ -3337,7 +3337,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the user tracker path persistence.
+	 * Returns the user tracker path persistence.
 	 *
 	 * @return the user tracker path persistence
 	 */
@@ -3356,7 +3356,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the virtual host local service.
+	 * Returns the virtual host local service.
 	 *
 	 * @return the virtual host local service
 	 */
@@ -3375,7 +3375,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the virtual host persistence.
+	 * Returns the virtual host persistence.
 	 *
 	 * @return the virtual host persistence
 	 */
@@ -3394,7 +3394,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the web d a v props local service.
+	 * Returns the web d a v props local service.
 	 *
 	 * @return the web d a v props local service
 	 */
@@ -3413,7 +3413,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the web d a v props persistence.
+	 * Returns the web d a v props persistence.
 	 *
 	 * @return the web d a v props persistence
 	 */
@@ -3432,7 +3432,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the website local service.
+	 * Returns the website local service.
 	 *
 	 * @return the website local service
 	 */
@@ -3450,7 +3450,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the website remote service.
+	 * Returns the website remote service.
 	 *
 	 * @return the website remote service
 	 */
@@ -3468,7 +3468,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the website persistence.
+	 * Returns the website persistence.
 	 *
 	 * @return the website persistence
 	 */
@@ -3486,7 +3486,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the workflow definition link local service.
+	 * Returns the workflow definition link local service.
 	 *
 	 * @return the workflow definition link local service
 	 */
@@ -3505,7 +3505,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the workflow definition link persistence.
+	 * Returns the workflow definition link persistence.
 	 *
 	 * @return the workflow definition link persistence
 	 */
@@ -3524,7 +3524,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the workflow instance link local service.
+	 * Returns the workflow instance link local service.
 	 *
 	 * @return the workflow instance link local service
 	 */
@@ -3543,7 +3543,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the workflow instance link persistence.
+	 * Returns the workflow instance link persistence.
 	 *
 	 * @return the workflow instance link persistence
 	 */
@@ -3562,7 +3562,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the counter local service.
+	 * Returns the counter local service.
 	 *
 	 * @return the counter local service
 	 */
@@ -3580,7 +3580,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the asset entry local service.
+	 * Returns the asset entry local service.
 	 *
 	 * @return the asset entry local service
 	 */
@@ -3599,7 +3599,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the asset entry remote service.
+	 * Returns the asset entry remote service.
 	 *
 	 * @return the asset entry remote service
 	 */
@@ -3617,7 +3617,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the asset entry persistence.
+	 * Returns the asset entry persistence.
 	 *
 	 * @return the asset entry persistence
 	 */
@@ -3636,7 +3636,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the asset entry finder.
+	 * Returns the asset entry finder.
 	 *
 	 * @return the asset entry finder
 	 */
@@ -3654,7 +3654,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the social equity log local service.
+	 * Returns the social equity log local service.
 	 *
 	 * @return the social equity log local service
 	 */
@@ -3673,7 +3673,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the social equity log persistence.
+	 * Returns the social equity log persistence.
 	 *
 	 * @return the social equity log persistence
 	 */
@@ -3692,7 +3692,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the Spring bean ID for this bean.
+	 * Returns the Spring bean ID for this bean.
 	 *
 	 * @return the Spring bean ID for this bean
 	 */
@@ -3712,7 +3712,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	/**
 	 * Performs an SQL query.
 	 *
-	 * @param sql the sql query to perform
+	 * @param sql the sql query
 	 */
 	protected void runSQL(String sql) throws SystemException {
 		try {

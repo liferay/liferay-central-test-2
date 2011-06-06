@@ -46,21 +46,21 @@ public interface AddressModel extends AttachedModel, AuditedModel,
 	 */
 
 	/**
-	 * Gets the primary key of this address.
+	 * Returns the primary key of this address.
 	 *
 	 * @return the primary key of this address
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this address
+	 * Sets the primary key of this address.
 	 *
 	 * @param primaryKey the primary key of this address
 	 */
 	public void setPrimaryKey(long primaryKey);
 
 	/**
-	 * Gets the address ID of this address.
+	 * Returns the address ID of this address.
 	 *
 	 * @return the address ID of this address
 	 */
@@ -74,7 +74,7 @@ public interface AddressModel extends AttachedModel, AuditedModel,
 	public void setAddressId(long addressId);
 
 	/**
-	 * Gets the company ID of this address.
+	 * Returns the company ID of this address.
 	 *
 	 * @return the company ID of this address
 	 */
@@ -88,7 +88,7 @@ public interface AddressModel extends AttachedModel, AuditedModel,
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the user ID of this address.
+	 * Returns the user ID of this address.
 	 *
 	 * @return the user ID of this address
 	 */
@@ -102,7 +102,7 @@ public interface AddressModel extends AttachedModel, AuditedModel,
 	public void setUserId(long userId);
 
 	/**
-	 * Gets the user uuid of this address.
+	 * Returns the user uuid of this address.
 	 *
 	 * @return the user uuid of this address
 	 * @throws SystemException if a system exception occurred
@@ -117,7 +117,7 @@ public interface AddressModel extends AttachedModel, AuditedModel,
 	public void setUserUuid(String userUuid);
 
 	/**
-	 * Gets the user name of this address.
+	 * Returns the user name of this address.
 	 *
 	 * @return the user name of this address
 	 */
@@ -132,7 +132,7 @@ public interface AddressModel extends AttachedModel, AuditedModel,
 	public void setUserName(String userName);
 
 	/**
-	 * Gets the create date of this address.
+	 * Returns the create date of this address.
 	 *
 	 * @return the create date of this address
 	 */
@@ -146,7 +146,7 @@ public interface AddressModel extends AttachedModel, AuditedModel,
 	public void setCreateDate(Date createDate);
 
 	/**
-	 * Gets the modified date of this address.
+	 * Returns the modified date of this address.
 	 *
 	 * @return the modified date of this address
 	 */
@@ -160,14 +160,14 @@ public interface AddressModel extends AttachedModel, AuditedModel,
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
-	 * Gets the class name of the model instance this address is polymorphically associated with.
+	 * Returns the fully qualified class name of this address.
 	 *
-	 * @return the class name of the model instance this address is polymorphically associated with
+	 * @return the fully qualified class name of this address
 	 */
 	public String getClassName();
 
 	/**
-	 * Gets the class name ID of this address.
+	 * Returns the class name ID of this address.
 	 *
 	 * @return the class name ID of this address
 	 */
@@ -181,7 +181,7 @@ public interface AddressModel extends AttachedModel, AuditedModel,
 	public void setClassNameId(long classNameId);
 
 	/**
-	 * Gets the class p k of this address.
+	 * Returns the class p k of this address.
 	 *
 	 * @return the class p k of this address
 	 */
@@ -195,7 +195,7 @@ public interface AddressModel extends AttachedModel, AuditedModel,
 	public void setClassPK(long classPK);
 
 	/**
-	 * Gets the street1 of this address.
+	 * Returns the street1 of this address.
 	 *
 	 * @return the street1 of this address
 	 */
@@ -210,7 +210,7 @@ public interface AddressModel extends AttachedModel, AuditedModel,
 	public void setStreet1(String street1);
 
 	/**
-	 * Gets the street2 of this address.
+	 * Returns the street2 of this address.
 	 *
 	 * @return the street2 of this address
 	 */
@@ -225,7 +225,7 @@ public interface AddressModel extends AttachedModel, AuditedModel,
 	public void setStreet2(String street2);
 
 	/**
-	 * Gets the street3 of this address.
+	 * Returns the street3 of this address.
 	 *
 	 * @return the street3 of this address
 	 */
@@ -240,7 +240,7 @@ public interface AddressModel extends AttachedModel, AuditedModel,
 	public void setStreet3(String street3);
 
 	/**
-	 * Gets the city of this address.
+	 * Returns the city of this address.
 	 *
 	 * @return the city of this address
 	 */
@@ -255,7 +255,7 @@ public interface AddressModel extends AttachedModel, AuditedModel,
 	public void setCity(String city);
 
 	/**
-	 * Gets the zip of this address.
+	 * Returns the zip of this address.
 	 *
 	 * @return the zip of this address
 	 */
@@ -270,7 +270,7 @@ public interface AddressModel extends AttachedModel, AuditedModel,
 	public void setZip(String zip);
 
 	/**
-	 * Gets the region ID of this address.
+	 * Returns the region ID of this address.
 	 *
 	 * @return the region ID of this address
 	 */
@@ -284,7 +284,7 @@ public interface AddressModel extends AttachedModel, AuditedModel,
 	public void setRegionId(long regionId);
 
 	/**
-	 * Gets the country ID of this address.
+	 * Returns the country ID of this address.
 	 *
 	 * @return the country ID of this address
 	 */
@@ -298,7 +298,7 @@ public interface AddressModel extends AttachedModel, AuditedModel,
 	public void setCountryId(long countryId);
 
 	/**
-	 * Gets the type ID of this address.
+	 * Returns the type ID of this address.
 	 *
 	 * @return the type ID of this address
 	 */
@@ -312,7 +312,7 @@ public interface AddressModel extends AttachedModel, AuditedModel,
 	public void setTypeId(int typeId);
 
 	/**
-	 * Gets the mailing of this address.
+	 * Returns the mailing of this address.
 	 *
 	 * @return the mailing of this address
 	 */
@@ -333,7 +333,7 @@ public interface AddressModel extends AttachedModel, AuditedModel,
 	public void setMailing(boolean mailing);
 
 	/**
-	 * Gets the primary of this address.
+	 * Returns the primary of this address.
 	 *
 	 * @return the primary of this address
 	 */

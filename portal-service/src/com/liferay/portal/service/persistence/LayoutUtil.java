@@ -118,7 +118,7 @@ public class LayoutUtil {
 	/**
 	* Caches the layout in the entity cache if it is enabled.
 	*
-	* @param layout the layout to cache
+	* @param layout the layout
 	*/
 	public static void cacheResult(com.liferay.portal.model.Layout layout) {
 		getPersistence().cacheResult(layout);
@@ -127,7 +127,7 @@ public class LayoutUtil {
 	/**
 	* Caches the layouts in the entity cache if it is enabled.
 	*
-	* @param layouts the layouts to cache
+	* @param layouts the layouts
 	*/
 	public static void cacheResult(
 		java.util.List<com.liferay.portal.model.Layout> layouts) {
@@ -147,7 +147,7 @@ public class LayoutUtil {
 	/**
 	* Removes the layout with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param plid the primary key of the layout to remove
+	* @param plid the primary key of the layout
 	* @return the layout that was removed
 	* @throws com.liferay.portal.NoSuchLayoutException if a layout with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -165,9 +165,9 @@ public class LayoutUtil {
 	}
 
 	/**
-	* Finds the layout with the primary key or throws a {@link com.liferay.portal.NoSuchLayoutException} if it could not be found.
+	* Returns the layout with the primary key or throws a {@link com.liferay.portal.NoSuchLayoutException} if it could not be found.
 	*
-	* @param plid the primary key of the layout to find
+	* @param plid the primary key of the layout
 	* @return the layout
 	* @throws com.liferay.portal.NoSuchLayoutException if a layout with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -179,9 +179,9 @@ public class LayoutUtil {
 	}
 
 	/**
-	* Finds the layout with the primary key or returns <code>null</code> if it could not be found.
+	* Returns the layout with the primary key or returns <code>null</code> if it could not be found.
 	*
-	* @param plid the primary key of the layout to find
+	* @param plid the primary key of the layout
 	* @return the layout, or <code>null</code> if a layout with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -191,9 +191,9 @@ public class LayoutUtil {
 	}
 
 	/**
-	* Finds all the layouts where uuid = &#63;.
+	* Returns all the layouts where uuid = &#63;.
 	*
-	* @param uuid the uuid to search with
+	* @param uuid the uuid
 	* @return the matching layouts
 	* @throws SystemException if a system exception occurred
 	*/
@@ -204,15 +204,15 @@ public class LayoutUtil {
 	}
 
 	/**
-	* Finds a range of all the layouts where uuid = &#63;.
+	* Returns a range of all the layouts where uuid = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param uuid the uuid to search with
-	* @param start the lower bound of the range of layouts to return
-	* @param end the upper bound of the range of layouts to return (not inclusive)
+	* @param uuid the uuid
+	* @param start the lower bound of the range of layouts
+	* @param end the upper bound of the range of layouts (not inclusive)
 	* @return the range of matching layouts
 	* @throws SystemException if a system exception occurred
 	*/
@@ -223,15 +223,15 @@ public class LayoutUtil {
 	}
 
 	/**
-	* Finds an ordered range of all the layouts where uuid = &#63;.
+	* Returns an ordered range of all the layouts where uuid = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param uuid the uuid to search with
-	* @param start the lower bound of the range of layouts to return
-	* @param end the upper bound of the range of layouts to return (not inclusive)
+	* @param uuid the uuid
+	* @param start the lower bound of the range of layouts
+	* @param end the upper bound of the range of layouts (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching layouts
 	* @throws SystemException if a system exception occurred
@@ -244,13 +244,13 @@ public class LayoutUtil {
 	}
 
 	/**
-	* Finds the first layout in the ordered set where uuid = &#63;.
+	* Returns the first layout in the ordered set where uuid = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param uuid the uuid to search with
+	* @param uuid the uuid
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching layout
 	* @throws com.liferay.portal.NoSuchLayoutException if a matching layout could not be found
@@ -265,13 +265,13 @@ public class LayoutUtil {
 	}
 
 	/**
-	* Finds the last layout in the ordered set where uuid = &#63;.
+	* Returns the last layout in the ordered set where uuid = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param uuid the uuid to search with
+	* @param uuid the uuid
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching layout
 	* @throws com.liferay.portal.NoSuchLayoutException if a matching layout could not be found
@@ -286,14 +286,14 @@ public class LayoutUtil {
 	}
 
 	/**
-	* Finds the layouts before and after the current layout in the ordered set where uuid = &#63;.
+	* Returns the layouts before and after the current layout in the ordered set where uuid = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
 	* @param plid the primary key of the current layout
-	* @param uuid the uuid to search with
+	* @param uuid the uuid
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next layout
 	* @throws com.liferay.portal.NoSuchLayoutException if a layout with the primary key could not be found
@@ -309,10 +309,10 @@ public class LayoutUtil {
 	}
 
 	/**
-	* Finds the layout where uuid = &#63; and groupId = &#63; or throws a {@link com.liferay.portal.NoSuchLayoutException} if it could not be found.
+	* Returns the layout where uuid = &#63; and groupId = &#63; or throws a {@link com.liferay.portal.NoSuchLayoutException} if it could not be found.
 	*
-	* @param uuid the uuid to search with
-	* @param groupId the group ID to search with
+	* @param uuid the uuid
+	* @param groupId the group ID
 	* @return the matching layout
 	* @throws com.liferay.portal.NoSuchLayoutException if a matching layout could not be found
 	* @throws SystemException if a system exception occurred
@@ -325,10 +325,10 @@ public class LayoutUtil {
 	}
 
 	/**
-	* Finds the layout where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	* Returns the layout where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	*
-	* @param uuid the uuid to search with
-	* @param groupId the group ID to search with
+	* @param uuid the uuid
+	* @param groupId the group ID
 	* @return the matching layout, or <code>null</code> if a matching layout could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -339,10 +339,10 @@ public class LayoutUtil {
 	}
 
 	/**
-	* Finds the layout where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	* Returns the layout where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
-	* @param uuid the uuid to search with
-	* @param groupId the group ID to search with
+	* @param uuid the uuid
+	* @param groupId the group ID
 	* @return the matching layout, or <code>null</code> if a matching layout could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -353,9 +353,9 @@ public class LayoutUtil {
 	}
 
 	/**
-	* Finds all the layouts where groupId = &#63;.
+	* Returns all the layouts where groupId = &#63;.
 	*
-	* @param groupId the group ID to search with
+	* @param groupId the group ID
 	* @return the matching layouts
 	* @throws SystemException if a system exception occurred
 	*/
@@ -366,15 +366,15 @@ public class LayoutUtil {
 	}
 
 	/**
-	* Finds a range of all the layouts where groupId = &#63;.
+	* Returns a range of all the layouts where groupId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param start the lower bound of the range of layouts to return
-	* @param end the upper bound of the range of layouts to return (not inclusive)
+	* @param groupId the group ID
+	* @param start the lower bound of the range of layouts
+	* @param end the upper bound of the range of layouts (not inclusive)
 	* @return the range of matching layouts
 	* @throws SystemException if a system exception occurred
 	*/
@@ -385,15 +385,15 @@ public class LayoutUtil {
 	}
 
 	/**
-	* Finds an ordered range of all the layouts where groupId = &#63;.
+	* Returns an ordered range of all the layouts where groupId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param start the lower bound of the range of layouts to return
-	* @param end the upper bound of the range of layouts to return (not inclusive)
+	* @param groupId the group ID
+	* @param start the lower bound of the range of layouts
+	* @param end the upper bound of the range of layouts (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching layouts
 	* @throws SystemException if a system exception occurred
@@ -407,13 +407,13 @@ public class LayoutUtil {
 	}
 
 	/**
-	* Finds the first layout in the ordered set where groupId = &#63;.
+	* Returns the first layout in the ordered set where groupId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
+	* @param groupId the group ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching layout
 	* @throws com.liferay.portal.NoSuchLayoutException if a matching layout could not be found
@@ -428,13 +428,13 @@ public class LayoutUtil {
 	}
 
 	/**
-	* Finds the last layout in the ordered set where groupId = &#63;.
+	* Returns the last layout in the ordered set where groupId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
+	* @param groupId the group ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching layout
 	* @throws com.liferay.portal.NoSuchLayoutException if a matching layout could not be found
@@ -449,14 +449,14 @@ public class LayoutUtil {
 	}
 
 	/**
-	* Finds the layouts before and after the current layout in the ordered set where groupId = &#63;.
+	* Returns the layouts before and after the current layout in the ordered set where groupId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
 	* @param plid the primary key of the current layout
-	* @param groupId the group ID to search with
+	* @param groupId the group ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next layout
 	* @throws com.liferay.portal.NoSuchLayoutException if a layout with the primary key could not be found
@@ -472,9 +472,9 @@ public class LayoutUtil {
 	}
 
 	/**
-	* Filters by the user's permissions and finds all the layouts where groupId = &#63;.
+	* Returns all the layouts that the user has permission to view where groupId = &#63;.
 	*
-	* @param groupId the group ID to search with
+	* @param groupId the group ID
 	* @return the matching layouts that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -485,15 +485,15 @@ public class LayoutUtil {
 	}
 
 	/**
-	* Filters by the user's permissions and finds a range of all the layouts where groupId = &#63;.
+	* Returns a range of all the layouts that the user has permission to view where groupId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param start the lower bound of the range of layouts to return
-	* @param end the upper bound of the range of layouts to return (not inclusive)
+	* @param groupId the group ID
+	* @param start the lower bound of the range of layouts
+	* @param end the upper bound of the range of layouts (not inclusive)
 	* @return the range of matching layouts that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -504,15 +504,15 @@ public class LayoutUtil {
 	}
 
 	/**
-	* Filters by the user's permissions and finds an ordered range of all the layouts where groupId = &#63;.
+	* Returns an ordered range of all the layouts that the user has permissions to view where groupId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param start the lower bound of the range of layouts to return
-	* @param end the upper bound of the range of layouts to return (not inclusive)
+	* @param groupId the group ID
+	* @param start the lower bound of the range of layouts
+	* @param end the upper bound of the range of layouts (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching layouts that the user has permission to view
 	* @throws SystemException if a system exception occurred
@@ -526,14 +526,10 @@ public class LayoutUtil {
 	}
 
 	/**
-	* Filters the layouts before and after the current layout in the ordered set where groupId = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
-	* </p>
+	* Returns the layouts before and after the current layout in the ordered set of layouts that the user has permission to view where groupId = &#63;.
 	*
 	* @param plid the primary key of the current layout
-	* @param groupId the group ID to search with
+	* @param groupId the group ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next layout
 	* @throws com.liferay.portal.NoSuchLayoutException if a layout with the primary key could not be found
@@ -550,9 +546,9 @@ public class LayoutUtil {
 	}
 
 	/**
-	* Finds all the layouts where companyId = &#63;.
+	* Returns all the layouts where companyId = &#63;.
 	*
-	* @param companyId the company ID to search with
+	* @param companyId the company ID
 	* @return the matching layouts
 	* @throws SystemException if a system exception occurred
 	*/
@@ -563,15 +559,15 @@ public class LayoutUtil {
 	}
 
 	/**
-	* Finds a range of all the layouts where companyId = &#63;.
+	* Returns a range of all the layouts where companyId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company ID to search with
-	* @param start the lower bound of the range of layouts to return
-	* @param end the upper bound of the range of layouts to return (not inclusive)
+	* @param companyId the company ID
+	* @param start the lower bound of the range of layouts
+	* @param end the upper bound of the range of layouts (not inclusive)
 	* @return the range of matching layouts
 	* @throws SystemException if a system exception occurred
 	*/
@@ -582,15 +578,15 @@ public class LayoutUtil {
 	}
 
 	/**
-	* Finds an ordered range of all the layouts where companyId = &#63;.
+	* Returns an ordered range of all the layouts where companyId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company ID to search with
-	* @param start the lower bound of the range of layouts to return
-	* @param end the upper bound of the range of layouts to return (not inclusive)
+	* @param companyId the company ID
+	* @param start the lower bound of the range of layouts
+	* @param end the upper bound of the range of layouts (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching layouts
 	* @throws SystemException if a system exception occurred
@@ -604,13 +600,13 @@ public class LayoutUtil {
 	}
 
 	/**
-	* Finds the first layout in the ordered set where companyId = &#63;.
+	* Returns the first layout in the ordered set where companyId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company ID to search with
+	* @param companyId the company ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching layout
 	* @throws com.liferay.portal.NoSuchLayoutException if a matching layout could not be found
@@ -626,13 +622,13 @@ public class LayoutUtil {
 	}
 
 	/**
-	* Finds the last layout in the ordered set where companyId = &#63;.
+	* Returns the last layout in the ordered set where companyId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company ID to search with
+	* @param companyId the company ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching layout
 	* @throws com.liferay.portal.NoSuchLayoutException if a matching layout could not be found
@@ -648,14 +644,14 @@ public class LayoutUtil {
 	}
 
 	/**
-	* Finds the layouts before and after the current layout in the ordered set where companyId = &#63;.
+	* Returns the layouts before and after the current layout in the ordered set where companyId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
 	* @param plid the primary key of the current layout
-	* @param companyId the company ID to search with
+	* @param companyId the company ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next layout
 	* @throws com.liferay.portal.NoSuchLayoutException if a layout with the primary key could not be found
@@ -672,9 +668,9 @@ public class LayoutUtil {
 	}
 
 	/**
-	* Finds the layout where iconImageId = &#63; or throws a {@link com.liferay.portal.NoSuchLayoutException} if it could not be found.
+	* Returns the layout where iconImageId = &#63; or throws a {@link com.liferay.portal.NoSuchLayoutException} if it could not be found.
 	*
-	* @param iconImageId the icon image ID to search with
+	* @param iconImageId the icon image ID
 	* @return the matching layout
 	* @throws com.liferay.portal.NoSuchLayoutException if a matching layout could not be found
 	* @throws SystemException if a system exception occurred
@@ -687,9 +683,9 @@ public class LayoutUtil {
 	}
 
 	/**
-	* Finds the layout where iconImageId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	* Returns the layout where iconImageId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	*
-	* @param iconImageId the icon image ID to search with
+	* @param iconImageId the icon image ID
 	* @return the matching layout, or <code>null</code> if a matching layout could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -700,9 +696,9 @@ public class LayoutUtil {
 	}
 
 	/**
-	* Finds the layout where iconImageId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	* Returns the layout where iconImageId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
-	* @param iconImageId the icon image ID to search with
+	* @param iconImageId the icon image ID
 	* @return the matching layout, or <code>null</code> if a matching layout could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -714,10 +710,10 @@ public class LayoutUtil {
 	}
 
 	/**
-	* Finds all the layouts where groupId = &#63; and privateLayout = &#63;.
+	* Returns all the layouts where groupId = &#63; and privateLayout = &#63;.
 	*
-	* @param groupId the group ID to search with
-	* @param privateLayout the private layout to search with
+	* @param groupId the group ID
+	* @param privateLayout the private layout
 	* @return the matching layouts
 	* @throws SystemException if a system exception occurred
 	*/
@@ -728,16 +724,16 @@ public class LayoutUtil {
 	}
 
 	/**
-	* Finds a range of all the layouts where groupId = &#63; and privateLayout = &#63;.
+	* Returns a range of all the layouts where groupId = &#63; and privateLayout = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param privateLayout the private layout to search with
-	* @param start the lower bound of the range of layouts to return
-	* @param end the upper bound of the range of layouts to return (not inclusive)
+	* @param groupId the group ID
+	* @param privateLayout the private layout
+	* @param start the lower bound of the range of layouts
+	* @param end the upper bound of the range of layouts (not inclusive)
 	* @return the range of matching layouts
 	* @throws SystemException if a system exception occurred
 	*/
@@ -748,16 +744,16 @@ public class LayoutUtil {
 	}
 
 	/**
-	* Finds an ordered range of all the layouts where groupId = &#63; and privateLayout = &#63;.
+	* Returns an ordered range of all the layouts where groupId = &#63; and privateLayout = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param privateLayout the private layout to search with
-	* @param start the lower bound of the range of layouts to return
-	* @param end the upper bound of the range of layouts to return (not inclusive)
+	* @param groupId the group ID
+	* @param privateLayout the private layout
+	* @param start the lower bound of the range of layouts
+	* @param end the upper bound of the range of layouts (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching layouts
 	* @throws SystemException if a system exception occurred
@@ -772,14 +768,14 @@ public class LayoutUtil {
 	}
 
 	/**
-	* Finds the first layout in the ordered set where groupId = &#63; and privateLayout = &#63;.
+	* Returns the first layout in the ordered set where groupId = &#63; and privateLayout = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param privateLayout the private layout to search with
+	* @param groupId the group ID
+	* @param privateLayout the private layout
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching layout
 	* @throws com.liferay.portal.NoSuchLayoutException if a matching layout could not be found
@@ -795,14 +791,14 @@ public class LayoutUtil {
 	}
 
 	/**
-	* Finds the last layout in the ordered set where groupId = &#63; and privateLayout = &#63;.
+	* Returns the last layout in the ordered set where groupId = &#63; and privateLayout = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param privateLayout the private layout to search with
+	* @param groupId the group ID
+	* @param privateLayout the private layout
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching layout
 	* @throws com.liferay.portal.NoSuchLayoutException if a matching layout could not be found
@@ -818,15 +814,15 @@ public class LayoutUtil {
 	}
 
 	/**
-	* Finds the layouts before and after the current layout in the ordered set where groupId = &#63; and privateLayout = &#63;.
+	* Returns the layouts before and after the current layout in the ordered set where groupId = &#63; and privateLayout = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
 	* @param plid the primary key of the current layout
-	* @param groupId the group ID to search with
-	* @param privateLayout the private layout to search with
+	* @param groupId the group ID
+	* @param privateLayout the private layout
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next layout
 	* @throws com.liferay.portal.NoSuchLayoutException if a layout with the primary key could not be found
@@ -843,10 +839,10 @@ public class LayoutUtil {
 	}
 
 	/**
-	* Filters by the user's permissions and finds all the layouts where groupId = &#63; and privateLayout = &#63;.
+	* Returns all the layouts that the user has permission to view where groupId = &#63; and privateLayout = &#63;.
 	*
-	* @param groupId the group ID to search with
-	* @param privateLayout the private layout to search with
+	* @param groupId the group ID
+	* @param privateLayout the private layout
 	* @return the matching layouts that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -857,16 +853,16 @@ public class LayoutUtil {
 	}
 
 	/**
-	* Filters by the user's permissions and finds a range of all the layouts where groupId = &#63; and privateLayout = &#63;.
+	* Returns a range of all the layouts that the user has permission to view where groupId = &#63; and privateLayout = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param privateLayout the private layout to search with
-	* @param start the lower bound of the range of layouts to return
-	* @param end the upper bound of the range of layouts to return (not inclusive)
+	* @param groupId the group ID
+	* @param privateLayout the private layout
+	* @param start the lower bound of the range of layouts
+	* @param end the upper bound of the range of layouts (not inclusive)
 	* @return the range of matching layouts that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -878,16 +874,16 @@ public class LayoutUtil {
 	}
 
 	/**
-	* Filters by the user's permissions and finds an ordered range of all the layouts where groupId = &#63; and privateLayout = &#63;.
+	* Returns an ordered range of all the layouts that the user has permissions to view where groupId = &#63; and privateLayout = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param privateLayout the private layout to search with
-	* @param start the lower bound of the range of layouts to return
-	* @param end the upper bound of the range of layouts to return (not inclusive)
+	* @param groupId the group ID
+	* @param privateLayout the private layout
+	* @param start the lower bound of the range of layouts
+	* @param end the upper bound of the range of layouts (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching layouts that the user has permission to view
 	* @throws SystemException if a system exception occurred
@@ -902,15 +898,11 @@ public class LayoutUtil {
 	}
 
 	/**
-	* Filters the layouts before and after the current layout in the ordered set where groupId = &#63; and privateLayout = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
-	* </p>
+	* Returns the layouts before and after the current layout in the ordered set of layouts that the user has permission to view where groupId = &#63; and privateLayout = &#63;.
 	*
 	* @param plid the primary key of the current layout
-	* @param groupId the group ID to search with
-	* @param privateLayout the private layout to search with
+	* @param groupId the group ID
+	* @param privateLayout the private layout
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next layout
 	* @throws com.liferay.portal.NoSuchLayoutException if a layout with the primary key could not be found
@@ -927,11 +919,11 @@ public class LayoutUtil {
 	}
 
 	/**
-	* Finds the layout where groupId = &#63; and privateLayout = &#63; and layoutId = &#63; or throws a {@link com.liferay.portal.NoSuchLayoutException} if it could not be found.
+	* Returns the layout where groupId = &#63; and privateLayout = &#63; and layoutId = &#63; or throws a {@link com.liferay.portal.NoSuchLayoutException} if it could not be found.
 	*
-	* @param groupId the group ID to search with
-	* @param privateLayout the private layout to search with
-	* @param layoutId the layout ID to search with
+	* @param groupId the group ID
+	* @param privateLayout the private layout
+	* @param layoutId the layout ID
 	* @return the matching layout
 	* @throws com.liferay.portal.NoSuchLayoutException if a matching layout could not be found
 	* @throws SystemException if a system exception occurred
@@ -944,11 +936,11 @@ public class LayoutUtil {
 	}
 
 	/**
-	* Finds the layout where groupId = &#63; and privateLayout = &#63; and layoutId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	* Returns the layout where groupId = &#63; and privateLayout = &#63; and layoutId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	*
-	* @param groupId the group ID to search with
-	* @param privateLayout the private layout to search with
-	* @param layoutId the layout ID to search with
+	* @param groupId the group ID
+	* @param privateLayout the private layout
+	* @param layoutId the layout ID
 	* @return the matching layout, or <code>null</code> if a matching layout could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -959,11 +951,11 @@ public class LayoutUtil {
 	}
 
 	/**
-	* Finds the layout where groupId = &#63; and privateLayout = &#63; and layoutId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	* Returns the layout where groupId = &#63; and privateLayout = &#63; and layoutId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
-	* @param groupId the group ID to search with
-	* @param privateLayout the private layout to search with
-	* @param layoutId the layout ID to search with
+	* @param groupId the group ID
+	* @param privateLayout the private layout
+	* @param layoutId the layout ID
 	* @return the matching layout, or <code>null</code> if a matching layout could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -976,11 +968,11 @@ public class LayoutUtil {
 	}
 
 	/**
-	* Finds all the layouts where groupId = &#63; and privateLayout = &#63; and parentLayoutId = &#63;.
+	* Returns all the layouts where groupId = &#63; and privateLayout = &#63; and parentLayoutId = &#63;.
 	*
-	* @param groupId the group ID to search with
-	* @param privateLayout the private layout to search with
-	* @param parentLayoutId the parent layout ID to search with
+	* @param groupId the group ID
+	* @param privateLayout the private layout
+	* @param parentLayoutId the parent layout ID
 	* @return the matching layouts
 	* @throws SystemException if a system exception occurred
 	*/
@@ -992,17 +984,17 @@ public class LayoutUtil {
 	}
 
 	/**
-	* Finds a range of all the layouts where groupId = &#63; and privateLayout = &#63; and parentLayoutId = &#63;.
+	* Returns a range of all the layouts where groupId = &#63; and privateLayout = &#63; and parentLayoutId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param privateLayout the private layout to search with
-	* @param parentLayoutId the parent layout ID to search with
-	* @param start the lower bound of the range of layouts to return
-	* @param end the upper bound of the range of layouts to return (not inclusive)
+	* @param groupId the group ID
+	* @param privateLayout the private layout
+	* @param parentLayoutId the parent layout ID
+	* @param start the lower bound of the range of layouts
+	* @param end the upper bound of the range of layouts (not inclusive)
 	* @return the range of matching layouts
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1015,17 +1007,17 @@ public class LayoutUtil {
 	}
 
 	/**
-	* Finds an ordered range of all the layouts where groupId = &#63; and privateLayout = &#63; and parentLayoutId = &#63;.
+	* Returns an ordered range of all the layouts where groupId = &#63; and privateLayout = &#63; and parentLayoutId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param privateLayout the private layout to search with
-	* @param parentLayoutId the parent layout ID to search with
-	* @param start the lower bound of the range of layouts to return
-	* @param end the upper bound of the range of layouts to return (not inclusive)
+	* @param groupId the group ID
+	* @param privateLayout the private layout
+	* @param parentLayoutId the parent layout ID
+	* @param start the lower bound of the range of layouts
+	* @param end the upper bound of the range of layouts (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching layouts
 	* @throws SystemException if a system exception occurred
@@ -1041,15 +1033,15 @@ public class LayoutUtil {
 	}
 
 	/**
-	* Finds the first layout in the ordered set where groupId = &#63; and privateLayout = &#63; and parentLayoutId = &#63;.
+	* Returns the first layout in the ordered set where groupId = &#63; and privateLayout = &#63; and parentLayoutId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param privateLayout the private layout to search with
-	* @param parentLayoutId the parent layout ID to search with
+	* @param groupId the group ID
+	* @param privateLayout the private layout
+	* @param parentLayoutId the parent layout ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching layout
 	* @throws com.liferay.portal.NoSuchLayoutException if a matching layout could not be found
@@ -1066,15 +1058,15 @@ public class LayoutUtil {
 	}
 
 	/**
-	* Finds the last layout in the ordered set where groupId = &#63; and privateLayout = &#63; and parentLayoutId = &#63;.
+	* Returns the last layout in the ordered set where groupId = &#63; and privateLayout = &#63; and parentLayoutId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param privateLayout the private layout to search with
-	* @param parentLayoutId the parent layout ID to search with
+	* @param groupId the group ID
+	* @param privateLayout the private layout
+	* @param parentLayoutId the parent layout ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching layout
 	* @throws com.liferay.portal.NoSuchLayoutException if a matching layout could not be found
@@ -1091,16 +1083,16 @@ public class LayoutUtil {
 	}
 
 	/**
-	* Finds the layouts before and after the current layout in the ordered set where groupId = &#63; and privateLayout = &#63; and parentLayoutId = &#63;.
+	* Returns the layouts before and after the current layout in the ordered set where groupId = &#63; and privateLayout = &#63; and parentLayoutId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
 	* @param plid the primary key of the current layout
-	* @param groupId the group ID to search with
-	* @param privateLayout the private layout to search with
-	* @param parentLayoutId the parent layout ID to search with
+	* @param groupId the group ID
+	* @param privateLayout the private layout
+	* @param parentLayoutId the parent layout ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next layout
 	* @throws com.liferay.portal.NoSuchLayoutException if a layout with the primary key could not be found
@@ -1117,11 +1109,11 @@ public class LayoutUtil {
 	}
 
 	/**
-	* Filters by the user's permissions and finds all the layouts where groupId = &#63; and privateLayout = &#63; and parentLayoutId = &#63;.
+	* Returns all the layouts that the user has permission to view where groupId = &#63; and privateLayout = &#63; and parentLayoutId = &#63;.
 	*
-	* @param groupId the group ID to search with
-	* @param privateLayout the private layout to search with
-	* @param parentLayoutId the parent layout ID to search with
+	* @param groupId the group ID
+	* @param privateLayout the private layout
+	* @param parentLayoutId the parent layout ID
 	* @return the matching layouts that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1133,17 +1125,17 @@ public class LayoutUtil {
 	}
 
 	/**
-	* Filters by the user's permissions and finds a range of all the layouts where groupId = &#63; and privateLayout = &#63; and parentLayoutId = &#63;.
+	* Returns a range of all the layouts that the user has permission to view where groupId = &#63; and privateLayout = &#63; and parentLayoutId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param privateLayout the private layout to search with
-	* @param parentLayoutId the parent layout ID to search with
-	* @param start the lower bound of the range of layouts to return
-	* @param end the upper bound of the range of layouts to return (not inclusive)
+	* @param groupId the group ID
+	* @param privateLayout the private layout
+	* @param parentLayoutId the parent layout ID
+	* @param start the lower bound of the range of layouts
+	* @param end the upper bound of the range of layouts (not inclusive)
 	* @return the range of matching layouts that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1156,17 +1148,17 @@ public class LayoutUtil {
 	}
 
 	/**
-	* Filters by the user's permissions and finds an ordered range of all the layouts where groupId = &#63; and privateLayout = &#63; and parentLayoutId = &#63;.
+	* Returns an ordered range of all the layouts that the user has permissions to view where groupId = &#63; and privateLayout = &#63; and parentLayoutId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param privateLayout the private layout to search with
-	* @param parentLayoutId the parent layout ID to search with
-	* @param start the lower bound of the range of layouts to return
-	* @param end the upper bound of the range of layouts to return (not inclusive)
+	* @param groupId the group ID
+	* @param privateLayout the private layout
+	* @param parentLayoutId the parent layout ID
+	* @param start the lower bound of the range of layouts
+	* @param end the upper bound of the range of layouts (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching layouts that the user has permission to view
 	* @throws SystemException if a system exception occurred
@@ -1182,16 +1174,12 @@ public class LayoutUtil {
 	}
 
 	/**
-	* Filters the layouts before and after the current layout in the ordered set where groupId = &#63; and privateLayout = &#63; and parentLayoutId = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
-	* </p>
+	* Returns the layouts before and after the current layout in the ordered set of layouts that the user has permission to view where groupId = &#63; and privateLayout = &#63; and parentLayoutId = &#63;.
 	*
 	* @param plid the primary key of the current layout
-	* @param groupId the group ID to search with
-	* @param privateLayout the private layout to search with
-	* @param parentLayoutId the parent layout ID to search with
+	* @param groupId the group ID
+	* @param privateLayout the private layout
+	* @param parentLayoutId the parent layout ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next layout
 	* @throws com.liferay.portal.NoSuchLayoutException if a layout with the primary key could not be found
@@ -1208,11 +1196,11 @@ public class LayoutUtil {
 	}
 
 	/**
-	* Finds the layout where groupId = &#63; and privateLayout = &#63; and friendlyURL = &#63; or throws a {@link com.liferay.portal.NoSuchLayoutException} if it could not be found.
+	* Returns the layout where groupId = &#63; and privateLayout = &#63; and friendlyURL = &#63; or throws a {@link com.liferay.portal.NoSuchLayoutException} if it could not be found.
 	*
-	* @param groupId the group ID to search with
-	* @param privateLayout the private layout to search with
-	* @param friendlyURL the friendly u r l to search with
+	* @param groupId the group ID
+	* @param privateLayout the private layout
+	* @param friendlyURL the friendly u r l
 	* @return the matching layout
 	* @throws com.liferay.portal.NoSuchLayoutException if a matching layout could not be found
 	* @throws SystemException if a system exception occurred
@@ -1225,11 +1213,11 @@ public class LayoutUtil {
 	}
 
 	/**
-	* Finds the layout where groupId = &#63; and privateLayout = &#63; and friendlyURL = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	* Returns the layout where groupId = &#63; and privateLayout = &#63; and friendlyURL = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	*
-	* @param groupId the group ID to search with
-	* @param privateLayout the private layout to search with
-	* @param friendlyURL the friendly u r l to search with
+	* @param groupId the group ID
+	* @param privateLayout the private layout
+	* @param friendlyURL the friendly u r l
 	* @return the matching layout, or <code>null</code> if a matching layout could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1240,11 +1228,11 @@ public class LayoutUtil {
 	}
 
 	/**
-	* Finds the layout where groupId = &#63; and privateLayout = &#63; and friendlyURL = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	* Returns the layout where groupId = &#63; and privateLayout = &#63; and friendlyURL = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
-	* @param groupId the group ID to search with
-	* @param privateLayout the private layout to search with
-	* @param friendlyURL the friendly u r l to search with
+	* @param groupId the group ID
+	* @param privateLayout the private layout
+	* @param friendlyURL the friendly u r l
 	* @return the matching layout, or <code>null</code> if a matching layout could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1258,11 +1246,11 @@ public class LayoutUtil {
 	}
 
 	/**
-	* Finds all the layouts where groupId = &#63; and privateLayout = &#63; and type = &#63;.
+	* Returns all the layouts where groupId = &#63; and privateLayout = &#63; and type = &#63;.
 	*
-	* @param groupId the group ID to search with
-	* @param privateLayout the private layout to search with
-	* @param type the type to search with
+	* @param groupId the group ID
+	* @param privateLayout the private layout
+	* @param type the type
 	* @return the matching layouts
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1273,17 +1261,17 @@ public class LayoutUtil {
 	}
 
 	/**
-	* Finds a range of all the layouts where groupId = &#63; and privateLayout = &#63; and type = &#63;.
+	* Returns a range of all the layouts where groupId = &#63; and privateLayout = &#63; and type = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param privateLayout the private layout to search with
-	* @param type the type to search with
-	* @param start the lower bound of the range of layouts to return
-	* @param end the upper bound of the range of layouts to return (not inclusive)
+	* @param groupId the group ID
+	* @param privateLayout the private layout
+	* @param type the type
+	* @param start the lower bound of the range of layouts
+	* @param end the upper bound of the range of layouts (not inclusive)
 	* @return the range of matching layouts
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1295,17 +1283,17 @@ public class LayoutUtil {
 	}
 
 	/**
-	* Finds an ordered range of all the layouts where groupId = &#63; and privateLayout = &#63; and type = &#63;.
+	* Returns an ordered range of all the layouts where groupId = &#63; and privateLayout = &#63; and type = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param privateLayout the private layout to search with
-	* @param type the type to search with
-	* @param start the lower bound of the range of layouts to return
-	* @param end the upper bound of the range of layouts to return (not inclusive)
+	* @param groupId the group ID
+	* @param privateLayout the private layout
+	* @param type the type
+	* @param start the lower bound of the range of layouts
+	* @param end the upper bound of the range of layouts (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching layouts
 	* @throws SystemException if a system exception occurred
@@ -1321,15 +1309,15 @@ public class LayoutUtil {
 	}
 
 	/**
-	* Finds the first layout in the ordered set where groupId = &#63; and privateLayout = &#63; and type = &#63;.
+	* Returns the first layout in the ordered set where groupId = &#63; and privateLayout = &#63; and type = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param privateLayout the private layout to search with
-	* @param type the type to search with
+	* @param groupId the group ID
+	* @param privateLayout the private layout
+	* @param type the type
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching layout
 	* @throws com.liferay.portal.NoSuchLayoutException if a matching layout could not be found
@@ -1346,15 +1334,15 @@ public class LayoutUtil {
 	}
 
 	/**
-	* Finds the last layout in the ordered set where groupId = &#63; and privateLayout = &#63; and type = &#63;.
+	* Returns the last layout in the ordered set where groupId = &#63; and privateLayout = &#63; and type = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param privateLayout the private layout to search with
-	* @param type the type to search with
+	* @param groupId the group ID
+	* @param privateLayout the private layout
+	* @param type the type
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching layout
 	* @throws com.liferay.portal.NoSuchLayoutException if a matching layout could not be found
@@ -1371,16 +1359,16 @@ public class LayoutUtil {
 	}
 
 	/**
-	* Finds the layouts before and after the current layout in the ordered set where groupId = &#63; and privateLayout = &#63; and type = &#63;.
+	* Returns the layouts before and after the current layout in the ordered set where groupId = &#63; and privateLayout = &#63; and type = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
 	* @param plid the primary key of the current layout
-	* @param groupId the group ID to search with
-	* @param privateLayout the private layout to search with
-	* @param type the type to search with
+	* @param groupId the group ID
+	* @param privateLayout the private layout
+	* @param type the type
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next layout
 	* @throws com.liferay.portal.NoSuchLayoutException if a layout with the primary key could not be found
@@ -1397,11 +1385,11 @@ public class LayoutUtil {
 	}
 
 	/**
-	* Filters by the user's permissions and finds all the layouts where groupId = &#63; and privateLayout = &#63; and type = &#63;.
+	* Returns all the layouts that the user has permission to view where groupId = &#63; and privateLayout = &#63; and type = &#63;.
 	*
-	* @param groupId the group ID to search with
-	* @param privateLayout the private layout to search with
-	* @param type the type to search with
+	* @param groupId the group ID
+	* @param privateLayout the private layout
+	* @param type the type
 	* @return the matching layouts that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1412,17 +1400,17 @@ public class LayoutUtil {
 	}
 
 	/**
-	* Filters by the user's permissions and finds a range of all the layouts where groupId = &#63; and privateLayout = &#63; and type = &#63;.
+	* Returns a range of all the layouts that the user has permission to view where groupId = &#63; and privateLayout = &#63; and type = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param privateLayout the private layout to search with
-	* @param type the type to search with
-	* @param start the lower bound of the range of layouts to return
-	* @param end the upper bound of the range of layouts to return (not inclusive)
+	* @param groupId the group ID
+	* @param privateLayout the private layout
+	* @param type the type
+	* @param start the lower bound of the range of layouts
+	* @param end the upper bound of the range of layouts (not inclusive)
 	* @return the range of matching layouts that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1434,17 +1422,17 @@ public class LayoutUtil {
 	}
 
 	/**
-	* Filters by the user's permissions and finds an ordered range of all the layouts where groupId = &#63; and privateLayout = &#63; and type = &#63;.
+	* Returns an ordered range of all the layouts that the user has permissions to view where groupId = &#63; and privateLayout = &#63; and type = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param privateLayout the private layout to search with
-	* @param type the type to search with
-	* @param start the lower bound of the range of layouts to return
-	* @param end the upper bound of the range of layouts to return (not inclusive)
+	* @param groupId the group ID
+	* @param privateLayout the private layout
+	* @param type the type
+	* @param start the lower bound of the range of layouts
+	* @param end the upper bound of the range of layouts (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching layouts that the user has permission to view
 	* @throws SystemException if a system exception occurred
@@ -1460,16 +1448,12 @@ public class LayoutUtil {
 	}
 
 	/**
-	* Filters the layouts before and after the current layout in the ordered set where groupId = &#63; and privateLayout = &#63; and type = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
-	* </p>
+	* Returns the layouts before and after the current layout in the ordered set of layouts that the user has permission to view where groupId = &#63; and privateLayout = &#63; and type = &#63;.
 	*
 	* @param plid the primary key of the current layout
-	* @param groupId the group ID to search with
-	* @param privateLayout the private layout to search with
-	* @param type the type to search with
+	* @param groupId the group ID
+	* @param privateLayout the private layout
+	* @param type the type
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next layout
 	* @throws com.liferay.portal.NoSuchLayoutException if a layout with the primary key could not be found
@@ -1486,7 +1470,7 @@ public class LayoutUtil {
 	}
 
 	/**
-	* Finds all the layouts.
+	* Returns all the layouts.
 	*
 	* @return the layouts
 	* @throws SystemException if a system exception occurred
@@ -1497,14 +1481,14 @@ public class LayoutUtil {
 	}
 
 	/**
-	* Finds a range of all the layouts.
+	* Returns a range of all the layouts.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of layouts to return
-	* @param end the upper bound of the range of layouts to return (not inclusive)
+	* @param start the lower bound of the range of layouts
+	* @param end the upper bound of the range of layouts (not inclusive)
 	* @return the range of layouts
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1515,14 +1499,14 @@ public class LayoutUtil {
 	}
 
 	/**
-	* Finds an ordered range of all the layouts.
+	* Returns an ordered range of all the layouts.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of layouts to return
-	* @param end the upper bound of the range of layouts to return (not inclusive)
+	* @param start the lower bound of the range of layouts
+	* @param end the upper bound of the range of layouts (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of layouts
 	* @throws SystemException if a system exception occurred
@@ -1537,7 +1521,7 @@ public class LayoutUtil {
 	/**
 	* Removes all the layouts where uuid = &#63; from the database.
 	*
-	* @param uuid the uuid to search with
+	* @param uuid the uuid
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByUuid(java.lang.String uuid)
@@ -1548,8 +1532,8 @@ public class LayoutUtil {
 	/**
 	* Removes the layout where uuid = &#63; and groupId = &#63; from the database.
 	*
-	* @param uuid the uuid to search with
-	* @param groupId the group ID to search with
+	* @param uuid the uuid
+	* @param groupId the group ID
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByUUID_G(java.lang.String uuid, long groupId)
@@ -1561,7 +1545,7 @@ public class LayoutUtil {
 	/**
 	* Removes all the layouts where groupId = &#63; from the database.
 	*
-	* @param groupId the group ID to search with
+	* @param groupId the group ID
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByGroupId(long groupId)
@@ -1572,7 +1556,7 @@ public class LayoutUtil {
 	/**
 	* Removes all the layouts where companyId = &#63; from the database.
 	*
-	* @param companyId the company ID to search with
+	* @param companyId the company ID
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByCompanyId(long companyId)
@@ -1583,7 +1567,7 @@ public class LayoutUtil {
 	/**
 	* Removes the layout where iconImageId = &#63; from the database.
 	*
-	* @param iconImageId the icon image ID to search with
+	* @param iconImageId the icon image ID
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByIconImageId(long iconImageId)
@@ -1595,8 +1579,8 @@ public class LayoutUtil {
 	/**
 	* Removes all the layouts where groupId = &#63; and privateLayout = &#63; from the database.
 	*
-	* @param groupId the group ID to search with
-	* @param privateLayout the private layout to search with
+	* @param groupId the group ID
+	* @param privateLayout the private layout
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByG_P(long groupId, boolean privateLayout)
@@ -1607,9 +1591,9 @@ public class LayoutUtil {
 	/**
 	* Removes the layout where groupId = &#63; and privateLayout = &#63; and layoutId = &#63; from the database.
 	*
-	* @param groupId the group ID to search with
-	* @param privateLayout the private layout to search with
-	* @param layoutId the layout ID to search with
+	* @param groupId the group ID
+	* @param privateLayout the private layout
+	* @param layoutId the layout ID
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByG_P_L(long groupId, boolean privateLayout,
@@ -1622,9 +1606,9 @@ public class LayoutUtil {
 	/**
 	* Removes all the layouts where groupId = &#63; and privateLayout = &#63; and parentLayoutId = &#63; from the database.
 	*
-	* @param groupId the group ID to search with
-	* @param privateLayout the private layout to search with
-	* @param parentLayoutId the parent layout ID to search with
+	* @param groupId the group ID
+	* @param privateLayout the private layout
+	* @param parentLayoutId the parent layout ID
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByG_P_P(long groupId, boolean privateLayout,
@@ -1636,9 +1620,9 @@ public class LayoutUtil {
 	/**
 	* Removes the layout where groupId = &#63; and privateLayout = &#63; and friendlyURL = &#63; from the database.
 	*
-	* @param groupId the group ID to search with
-	* @param privateLayout the private layout to search with
-	* @param friendlyURL the friendly u r l to search with
+	* @param groupId the group ID
+	* @param privateLayout the private layout
+	* @param friendlyURL the friendly u r l
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByG_P_F(long groupId, boolean privateLayout,
@@ -1651,9 +1635,9 @@ public class LayoutUtil {
 	/**
 	* Removes all the layouts where groupId = &#63; and privateLayout = &#63; and type = &#63; from the database.
 	*
-	* @param groupId the group ID to search with
-	* @param privateLayout the private layout to search with
-	* @param type the type to search with
+	* @param groupId the group ID
+	* @param privateLayout the private layout
+	* @param type the type
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByG_P_T(long groupId, boolean privateLayout,
@@ -1673,9 +1657,9 @@ public class LayoutUtil {
 	}
 
 	/**
-	* Counts all the layouts where uuid = &#63;.
+	* Returns the number of layouts where uuid = &#63;.
 	*
-	* @param uuid the uuid to search with
+	* @param uuid the uuid
 	* @return the number of matching layouts
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1685,10 +1669,10 @@ public class LayoutUtil {
 	}
 
 	/**
-	* Counts all the layouts where uuid = &#63; and groupId = &#63;.
+	* Returns the number of layouts where uuid = &#63; and groupId = &#63;.
 	*
-	* @param uuid the uuid to search with
-	* @param groupId the group ID to search with
+	* @param uuid the uuid
+	* @param groupId the group ID
 	* @return the number of matching layouts
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1698,9 +1682,9 @@ public class LayoutUtil {
 	}
 
 	/**
-	* Counts all the layouts where groupId = &#63;.
+	* Returns the number of layouts where groupId = &#63;.
 	*
-	* @param groupId the group ID to search with
+	* @param groupId the group ID
 	* @return the number of matching layouts
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1710,9 +1694,9 @@ public class LayoutUtil {
 	}
 
 	/**
-	* Filters by the user's permissions and counts all the layouts where groupId = &#63;.
+	* Returns the number of layouts that the user has permission to view where groupId = &#63;.
 	*
-	* @param groupId the group ID to search with
+	* @param groupId the group ID
 	* @return the number of matching layouts that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1722,9 +1706,9 @@ public class LayoutUtil {
 	}
 
 	/**
-	* Counts all the layouts where companyId = &#63;.
+	* Returns the number of layouts where companyId = &#63;.
 	*
-	* @param companyId the company ID to search with
+	* @param companyId the company ID
 	* @return the number of matching layouts
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1734,9 +1718,9 @@ public class LayoutUtil {
 	}
 
 	/**
-	* Counts all the layouts where iconImageId = &#63;.
+	* Returns the number of layouts where iconImageId = &#63;.
 	*
-	* @param iconImageId the icon image ID to search with
+	* @param iconImageId the icon image ID
 	* @return the number of matching layouts
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1746,10 +1730,10 @@ public class LayoutUtil {
 	}
 
 	/**
-	* Counts all the layouts where groupId = &#63; and privateLayout = &#63;.
+	* Returns the number of layouts where groupId = &#63; and privateLayout = &#63;.
 	*
-	* @param groupId the group ID to search with
-	* @param privateLayout the private layout to search with
+	* @param groupId the group ID
+	* @param privateLayout the private layout
 	* @return the number of matching layouts
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1759,10 +1743,10 @@ public class LayoutUtil {
 	}
 
 	/**
-	* Filters by the user's permissions and counts all the layouts where groupId = &#63; and privateLayout = &#63;.
+	* Returns the number of layouts that the user has permission to view where groupId = &#63; and privateLayout = &#63;.
 	*
-	* @param groupId the group ID to search with
-	* @param privateLayout the private layout to search with
+	* @param groupId the group ID
+	* @param privateLayout the private layout
 	* @return the number of matching layouts that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1772,11 +1756,11 @@ public class LayoutUtil {
 	}
 
 	/**
-	* Counts all the layouts where groupId = &#63; and privateLayout = &#63; and layoutId = &#63;.
+	* Returns the number of layouts where groupId = &#63; and privateLayout = &#63; and layoutId = &#63;.
 	*
-	* @param groupId the group ID to search with
-	* @param privateLayout the private layout to search with
-	* @param layoutId the layout ID to search with
+	* @param groupId the group ID
+	* @param privateLayout the private layout
+	* @param layoutId the layout ID
 	* @return the number of matching layouts
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1787,11 +1771,11 @@ public class LayoutUtil {
 	}
 
 	/**
-	* Counts all the layouts where groupId = &#63; and privateLayout = &#63; and parentLayoutId = &#63;.
+	* Returns the number of layouts where groupId = &#63; and privateLayout = &#63; and parentLayoutId = &#63;.
 	*
-	* @param groupId the group ID to search with
-	* @param privateLayout the private layout to search with
-	* @param parentLayoutId the parent layout ID to search with
+	* @param groupId the group ID
+	* @param privateLayout the private layout
+	* @param parentLayoutId the parent layout ID
 	* @return the number of matching layouts
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1803,11 +1787,11 @@ public class LayoutUtil {
 	}
 
 	/**
-	* Filters by the user's permissions and counts all the layouts where groupId = &#63; and privateLayout = &#63; and parentLayoutId = &#63;.
+	* Returns the number of layouts that the user has permission to view where groupId = &#63; and privateLayout = &#63; and parentLayoutId = &#63;.
 	*
-	* @param groupId the group ID to search with
-	* @param privateLayout the private layout to search with
-	* @param parentLayoutId the parent layout ID to search with
+	* @param groupId the group ID
+	* @param privateLayout the private layout
+	* @param parentLayoutId the parent layout ID
 	* @return the number of matching layouts that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1819,11 +1803,11 @@ public class LayoutUtil {
 	}
 
 	/**
-	* Counts all the layouts where groupId = &#63; and privateLayout = &#63; and friendlyURL = &#63;.
+	* Returns the number of layouts where groupId = &#63; and privateLayout = &#63; and friendlyURL = &#63;.
 	*
-	* @param groupId the group ID to search with
-	* @param privateLayout the private layout to search with
-	* @param friendlyURL the friendly u r l to search with
+	* @param groupId the group ID
+	* @param privateLayout the private layout
+	* @param friendlyURL the friendly u r l
 	* @return the number of matching layouts
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1834,11 +1818,11 @@ public class LayoutUtil {
 	}
 
 	/**
-	* Counts all the layouts where groupId = &#63; and privateLayout = &#63; and type = &#63;.
+	* Returns the number of layouts where groupId = &#63; and privateLayout = &#63; and type = &#63;.
 	*
-	* @param groupId the group ID to search with
-	* @param privateLayout the private layout to search with
-	* @param type the type to search with
+	* @param groupId the group ID
+	* @param privateLayout the private layout
+	* @param type the type
 	* @return the number of matching layouts
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1849,11 +1833,11 @@ public class LayoutUtil {
 	}
 
 	/**
-	* Filters by the user's permissions and counts all the layouts where groupId = &#63; and privateLayout = &#63; and type = &#63;.
+	* Returns the number of layouts that the user has permission to view where groupId = &#63; and privateLayout = &#63; and type = &#63;.
 	*
-	* @param groupId the group ID to search with
-	* @param privateLayout the private layout to search with
-	* @param type the type to search with
+	* @param groupId the group ID
+	* @param privateLayout the private layout
+	* @param type the type
 	* @return the number of matching layouts that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1864,7 +1848,7 @@ public class LayoutUtil {
 	}
 
 	/**
-	* Counts all the layouts.
+	* Returns the number of layouts.
 	*
 	* @return the number of layouts
 	* @throws SystemException if a system exception occurred

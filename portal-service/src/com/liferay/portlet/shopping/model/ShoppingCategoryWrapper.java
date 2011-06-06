@@ -37,7 +37,7 @@ public class ShoppingCategoryWrapper implements ShoppingCategory {
 	}
 
 	/**
-	* Gets the primary key of this shopping category.
+	* Returns the primary key of this shopping category.
 	*
 	* @return the primary key of this shopping category
 	*/
@@ -46,7 +46,7 @@ public class ShoppingCategoryWrapper implements ShoppingCategory {
 	}
 
 	/**
-	* Sets the primary key of this shopping category
+	* Sets the primary key of this shopping category.
 	*
 	* @param primaryKey the primary key of this shopping category
 	*/
@@ -55,7 +55,7 @@ public class ShoppingCategoryWrapper implements ShoppingCategory {
 	}
 
 	/**
-	* Gets the category ID of this shopping category.
+	* Returns the category ID of this shopping category.
 	*
 	* @return the category ID of this shopping category
 	*/
@@ -73,7 +73,7 @@ public class ShoppingCategoryWrapper implements ShoppingCategory {
 	}
 
 	/**
-	* Gets the group ID of this shopping category.
+	* Returns the group ID of this shopping category.
 	*
 	* @return the group ID of this shopping category
 	*/
@@ -91,7 +91,7 @@ public class ShoppingCategoryWrapper implements ShoppingCategory {
 	}
 
 	/**
-	* Gets the company ID of this shopping category.
+	* Returns the company ID of this shopping category.
 	*
 	* @return the company ID of this shopping category
 	*/
@@ -109,7 +109,7 @@ public class ShoppingCategoryWrapper implements ShoppingCategory {
 	}
 
 	/**
-	* Gets the user ID of this shopping category.
+	* Returns the user ID of this shopping category.
 	*
 	* @return the user ID of this shopping category
 	*/
@@ -127,7 +127,7 @@ public class ShoppingCategoryWrapper implements ShoppingCategory {
 	}
 
 	/**
-	* Gets the user uuid of this shopping category.
+	* Returns the user uuid of this shopping category.
 	*
 	* @return the user uuid of this shopping category
 	* @throws SystemException if a system exception occurred
@@ -147,7 +147,7 @@ public class ShoppingCategoryWrapper implements ShoppingCategory {
 	}
 
 	/**
-	* Gets the user name of this shopping category.
+	* Returns the user name of this shopping category.
 	*
 	* @return the user name of this shopping category
 	*/
@@ -165,7 +165,7 @@ public class ShoppingCategoryWrapper implements ShoppingCategory {
 	}
 
 	/**
-	* Gets the create date of this shopping category.
+	* Returns the create date of this shopping category.
 	*
 	* @return the create date of this shopping category
 	*/
@@ -183,7 +183,7 @@ public class ShoppingCategoryWrapper implements ShoppingCategory {
 	}
 
 	/**
-	* Gets the modified date of this shopping category.
+	* Returns the modified date of this shopping category.
 	*
 	* @return the modified date of this shopping category
 	*/
@@ -201,7 +201,7 @@ public class ShoppingCategoryWrapper implements ShoppingCategory {
 	}
 
 	/**
-	* Gets the parent category ID of this shopping category.
+	* Returns the parent category ID of this shopping category.
 	*
 	* @return the parent category ID of this shopping category
 	*/
@@ -219,7 +219,7 @@ public class ShoppingCategoryWrapper implements ShoppingCategory {
 	}
 
 	/**
-	* Gets the name of this shopping category.
+	* Returns the name of this shopping category.
 	*
 	* @return the name of this shopping category
 	*/
@@ -237,7 +237,7 @@ public class ShoppingCategoryWrapper implements ShoppingCategory {
 	}
 
 	/**
-	* Gets the description of this shopping category.
+	* Returns the description of this shopping category.
 	*
 	* @return the description of this shopping category
 	*/

@@ -63,7 +63,7 @@ public abstract class CounterLocalServiceBaseImpl implements CounterLocalService
 	/**
 	 * Adds the counter to the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param counter the counter to add
+	 * @param counter the counter
 	 * @return the counter that was added
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -86,7 +86,7 @@ public abstract class CounterLocalServiceBaseImpl implements CounterLocalService
 	/**
 	 * Deletes the counter with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param name the primary key of the counter to delete
+	 * @param name the primary key of the counter
 	 * @throws PortalException if a counter with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -98,7 +98,7 @@ public abstract class CounterLocalServiceBaseImpl implements CounterLocalService
 	/**
 	 * Deletes the counter from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param counter the counter to delete
+	 * @param counter the counter
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void deleteCounter(Counter counter) throws SystemException {
@@ -108,7 +108,7 @@ public abstract class CounterLocalServiceBaseImpl implements CounterLocalService
 	/**
 	 * Performs a dynamic query on the database and returns the matching rows.
 	 *
-	 * @param dynamicQuery the dynamic query to search with
+	 * @param dynamicQuery the dynamic query
 	 * @return the matching rows
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -125,9 +125,9 @@ public abstract class CounterLocalServiceBaseImpl implements CounterLocalService
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param dynamicQuery the dynamic query to search with
-	 * @param start the lower bound of the range of model instances to return
-	 * @param end the upper bound of the range of model instances to return (not inclusive)
+	 * @param dynamicQuery the dynamic query
+	 * @param start the lower bound of the range of model instances
+	 * @param end the upper bound of the range of model instances (not inclusive)
 	 * @return the range of matching rows
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -144,9 +144,9 @@ public abstract class CounterLocalServiceBaseImpl implements CounterLocalService
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param dynamicQuery the dynamic query to search with
-	 * @param start the lower bound of the range of model instances to return
-	 * @param end the upper bound of the range of model instances to return (not inclusive)
+	 * @param dynamicQuery the dynamic query
+	 * @param start the lower bound of the range of model instances
+	 * @param end the upper bound of the range of model instances (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching rows
 	 * @throws SystemException if a system exception occurred
@@ -159,9 +159,9 @@ public abstract class CounterLocalServiceBaseImpl implements CounterLocalService
 	}
 
 	/**
-	 * Counts the number of rows that match the dynamic query.
+	 * Returns the number of rows that match the dynamic query.
 	 *
-	 * @param dynamicQuery the dynamic query to search with
+	 * @param dynamicQuery the dynamic query
 	 * @return the number of rows that match the dynamic query
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -171,9 +171,9 @@ public abstract class CounterLocalServiceBaseImpl implements CounterLocalService
 	}
 
 	/**
-	 * Gets the counter with the primary key.
+	 * Returns the counter with the primary key.
 	 *
-	 * @param name the primary key of the counter to get
+	 * @param name the primary key of the counter
 	 * @return the counter
 	 * @throws PortalException if a counter with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -184,14 +184,14 @@ public abstract class CounterLocalServiceBaseImpl implements CounterLocalService
 	}
 
 	/**
-	 * Gets a range of all the counters.
+	 * Returns a range of all the counters.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param start the lower bound of the range of counters to return
-	 * @param end the upper bound of the range of counters to return (not inclusive)
+	 * @param start the lower bound of the range of counters
+	 * @param end the upper bound of the range of counters (not inclusive)
 	 * @return the range of counters
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -201,7 +201,7 @@ public abstract class CounterLocalServiceBaseImpl implements CounterLocalService
 	}
 
 	/**
-	 * Gets the number of counters.
+	 * Returns the number of counters.
 	 *
 	 * @return the number of counters
 	 * @throws SystemException if a system exception occurred
@@ -213,7 +213,7 @@ public abstract class CounterLocalServiceBaseImpl implements CounterLocalService
 	/**
 	 * Updates the counter in the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param counter the counter to update
+	 * @param counter the counter
 	 * @return the counter that was updated
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -226,7 +226,7 @@ public abstract class CounterLocalServiceBaseImpl implements CounterLocalService
 	/**
 	 * Updates the counter in the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param counter the counter to update
+	 * @param counter the counter
 	 * @param merge whether to merge the counter with the current session. See {@link com.liferay.portal.service.persistence.BatchSession#update(com.liferay.portal.kernel.dao.orm.Session, com.liferay.portal.model.BaseModel, boolean)} for an explanation.
 	 * @return the counter that was updated
 	 * @throws SystemException if a system exception occurred
@@ -239,7 +239,7 @@ public abstract class CounterLocalServiceBaseImpl implements CounterLocalService
 	}
 
 	/**
-	 * Gets the counter local service.
+	 * Returns the counter local service.
 	 *
 	 * @return the counter local service
 	 */
@@ -257,7 +257,7 @@ public abstract class CounterLocalServiceBaseImpl implements CounterLocalService
 	}
 
 	/**
-	 * Gets the counter persistence.
+	 * Returns the counter persistence.
 	 *
 	 * @return the counter persistence
 	 */
@@ -275,7 +275,7 @@ public abstract class CounterLocalServiceBaseImpl implements CounterLocalService
 	}
 
 	/**
-	 * Gets the counter finder.
+	 * Returns the counter finder.
 	 *
 	 * @return the counter finder
 	 */
@@ -293,7 +293,7 @@ public abstract class CounterLocalServiceBaseImpl implements CounterLocalService
 	}
 
 	/**
-	 * Gets the resource local service.
+	 * Returns the resource local service.
 	 *
 	 * @return the resource local service
 	 */
@@ -312,7 +312,7 @@ public abstract class CounterLocalServiceBaseImpl implements CounterLocalService
 	}
 
 	/**
-	 * Gets the resource remote service.
+	 * Returns the resource remote service.
 	 *
 	 * @return the resource remote service
 	 */
@@ -330,7 +330,7 @@ public abstract class CounterLocalServiceBaseImpl implements CounterLocalService
 	}
 
 	/**
-	 * Gets the resource persistence.
+	 * Returns the resource persistence.
 	 *
 	 * @return the resource persistence
 	 */
@@ -348,7 +348,7 @@ public abstract class CounterLocalServiceBaseImpl implements CounterLocalService
 	}
 
 	/**
-	 * Gets the resource finder.
+	 * Returns the resource finder.
 	 *
 	 * @return the resource finder
 	 */
@@ -366,7 +366,7 @@ public abstract class CounterLocalServiceBaseImpl implements CounterLocalService
 	}
 
 	/**
-	 * Gets the user local service.
+	 * Returns the user local service.
 	 *
 	 * @return the user local service
 	 */
@@ -384,7 +384,7 @@ public abstract class CounterLocalServiceBaseImpl implements CounterLocalService
 	}
 
 	/**
-	 * Gets the user remote service.
+	 * Returns the user remote service.
 	 *
 	 * @return the user remote service
 	 */
@@ -402,7 +402,7 @@ public abstract class CounterLocalServiceBaseImpl implements CounterLocalService
 	}
 
 	/**
-	 * Gets the user persistence.
+	 * Returns the user persistence.
 	 *
 	 * @return the user persistence
 	 */
@@ -420,7 +420,7 @@ public abstract class CounterLocalServiceBaseImpl implements CounterLocalService
 	}
 
 	/**
-	 * Gets the user finder.
+	 * Returns the user finder.
 	 *
 	 * @return the user finder
 	 */
@@ -438,7 +438,7 @@ public abstract class CounterLocalServiceBaseImpl implements CounterLocalService
 	}
 
 	/**
-	 * Gets the Spring bean ID for this bean.
+	 * Returns the Spring bean ID for this bean.
 	 *
 	 * @return the Spring bean ID for this bean
 	 */
@@ -458,7 +458,7 @@ public abstract class CounterLocalServiceBaseImpl implements CounterLocalService
 	/**
 	 * Performs an SQL query.
 	 *
-	 * @param sql the sql query to perform
+	 * @param sql the sql query
 	 */
 	protected void runSQL(String sql) throws SystemException {
 		try {

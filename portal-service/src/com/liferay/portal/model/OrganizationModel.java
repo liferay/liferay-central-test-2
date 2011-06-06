@@ -42,21 +42,21 @@ public interface OrganizationModel extends BaseModel<Organization> {
 	 */
 
 	/**
-	 * Gets the primary key of this organization.
+	 * Returns the primary key of this organization.
 	 *
 	 * @return the primary key of this organization
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this organization
+	 * Sets the primary key of this organization.
 	 *
 	 * @param primaryKey the primary key of this organization
 	 */
 	public void setPrimaryKey(long primaryKey);
 
 	/**
-	 * Gets the organization ID of this organization.
+	 * Returns the organization ID of this organization.
 	 *
 	 * @return the organization ID of this organization
 	 */
@@ -70,7 +70,7 @@ public interface OrganizationModel extends BaseModel<Organization> {
 	public void setOrganizationId(long organizationId);
 
 	/**
-	 * Gets the company ID of this organization.
+	 * Returns the company ID of this organization.
 	 *
 	 * @return the company ID of this organization
 	 */
@@ -84,7 +84,7 @@ public interface OrganizationModel extends BaseModel<Organization> {
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the parent organization ID of this organization.
+	 * Returns the parent organization ID of this organization.
 	 *
 	 * @return the parent organization ID of this organization
 	 */
@@ -98,7 +98,7 @@ public interface OrganizationModel extends BaseModel<Organization> {
 	public void setParentOrganizationId(long parentOrganizationId);
 
 	/**
-	 * Gets the left organization ID of this organization.
+	 * Returns the left organization ID of this organization.
 	 *
 	 * @return the left organization ID of this organization
 	 */
@@ -112,7 +112,7 @@ public interface OrganizationModel extends BaseModel<Organization> {
 	public void setLeftOrganizationId(long leftOrganizationId);
 
 	/**
-	 * Gets the right organization ID of this organization.
+	 * Returns the right organization ID of this organization.
 	 *
 	 * @return the right organization ID of this organization
 	 */
@@ -126,7 +126,7 @@ public interface OrganizationModel extends BaseModel<Organization> {
 	public void setRightOrganizationId(long rightOrganizationId);
 
 	/**
-	 * Gets the name of this organization.
+	 * Returns the name of this organization.
 	 *
 	 * @return the name of this organization
 	 */
@@ -141,7 +141,7 @@ public interface OrganizationModel extends BaseModel<Organization> {
 	public void setName(String name);
 
 	/**
-	 * Gets the type of this organization.
+	 * Returns the type of this organization.
 	 *
 	 * @return the type of this organization
 	 */
@@ -155,7 +155,7 @@ public interface OrganizationModel extends BaseModel<Organization> {
 	public void setType(String type);
 
 	/**
-	 * Gets the recursable of this organization.
+	 * Returns the recursable of this organization.
 	 *
 	 * @return the recursable of this organization
 	 */
@@ -176,7 +176,7 @@ public interface OrganizationModel extends BaseModel<Organization> {
 	public void setRecursable(boolean recursable);
 
 	/**
-	 * Gets the region ID of this organization.
+	 * Returns the region ID of this organization.
 	 *
 	 * @return the region ID of this organization
 	 */
@@ -190,7 +190,7 @@ public interface OrganizationModel extends BaseModel<Organization> {
 	public void setRegionId(long regionId);
 
 	/**
-	 * Gets the country ID of this organization.
+	 * Returns the country ID of this organization.
 	 *
 	 * @return the country ID of this organization
 	 */
@@ -204,7 +204,7 @@ public interface OrganizationModel extends BaseModel<Organization> {
 	public void setCountryId(long countryId);
 
 	/**
-	 * Gets the status ID of this organization.
+	 * Returns the status ID of this organization.
 	 *
 	 * @return the status ID of this organization
 	 */
@@ -218,7 +218,7 @@ public interface OrganizationModel extends BaseModel<Organization> {
 	public void setStatusId(int statusId);
 
 	/**
-	 * Gets the comments of this organization.
+	 * Returns the comments of this organization.
 	 *
 	 * @return the comments of this organization
 	 */

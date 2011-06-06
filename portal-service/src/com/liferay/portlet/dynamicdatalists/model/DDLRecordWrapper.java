@@ -37,7 +37,7 @@ public class DDLRecordWrapper implements DDLRecord {
 	}
 
 	/**
-	* Gets the primary key of this d d l record.
+	* Returns the primary key of this d d l record.
 	*
 	* @return the primary key of this d d l record
 	*/
@@ -46,7 +46,7 @@ public class DDLRecordWrapper implements DDLRecord {
 	}
 
 	/**
-	* Sets the primary key of this d d l record
+	* Sets the primary key of this d d l record.
 	*
 	* @param primaryKey the primary key of this d d l record
 	*/
@@ -55,7 +55,7 @@ public class DDLRecordWrapper implements DDLRecord {
 	}
 
 	/**
-	* Gets the uuid of this d d l record.
+	* Returns the uuid of this d d l record.
 	*
 	* @return the uuid of this d d l record
 	*/
@@ -73,7 +73,7 @@ public class DDLRecordWrapper implements DDLRecord {
 	}
 
 	/**
-	* Gets the record ID of this d d l record.
+	* Returns the record ID of this d d l record.
 	*
 	* @return the record ID of this d d l record
 	*/
@@ -91,7 +91,7 @@ public class DDLRecordWrapper implements DDLRecord {
 	}
 
 	/**
-	* Gets the group ID of this d d l record.
+	* Returns the group ID of this d d l record.
 	*
 	* @return the group ID of this d d l record
 	*/
@@ -109,7 +109,7 @@ public class DDLRecordWrapper implements DDLRecord {
 	}
 
 	/**
-	* Gets the company ID of this d d l record.
+	* Returns the company ID of this d d l record.
 	*
 	* @return the company ID of this d d l record
 	*/
@@ -127,7 +127,7 @@ public class DDLRecordWrapper implements DDLRecord {
 	}
 
 	/**
-	* Gets the user ID of this d d l record.
+	* Returns the user ID of this d d l record.
 	*
 	* @return the user ID of this d d l record
 	*/
@@ -145,7 +145,7 @@ public class DDLRecordWrapper implements DDLRecord {
 	}
 
 	/**
-	* Gets the user uuid of this d d l record.
+	* Returns the user uuid of this d d l record.
 	*
 	* @return the user uuid of this d d l record
 	* @throws SystemException if a system exception occurred
@@ -165,7 +165,7 @@ public class DDLRecordWrapper implements DDLRecord {
 	}
 
 	/**
-	* Gets the user name of this d d l record.
+	* Returns the user name of this d d l record.
 	*
 	* @return the user name of this d d l record
 	*/
@@ -183,7 +183,7 @@ public class DDLRecordWrapper implements DDLRecord {
 	}
 
 	/**
-	* Gets the create date of this d d l record.
+	* Returns the create date of this d d l record.
 	*
 	* @return the create date of this d d l record
 	*/
@@ -201,7 +201,7 @@ public class DDLRecordWrapper implements DDLRecord {
 	}
 
 	/**
-	* Gets the modified date of this d d l record.
+	* Returns the modified date of this d d l record.
 	*
 	* @return the modified date of this d d l record
 	*/
@@ -219,16 +219,16 @@ public class DDLRecordWrapper implements DDLRecord {
 	}
 
 	/**
-	* Gets the class name of the model instance this d d l record is polymorphically associated with.
+	* Returns the fully qualified class name of this d d l record.
 	*
-	* @return the class name of the model instance this d d l record is polymorphically associated with
+	* @return the fully qualified class name of this d d l record
 	*/
 	public java.lang.String getClassName() {
 		return _ddlRecord.getClassName();
 	}
 
 	/**
-	* Gets the class name ID of this d d l record.
+	* Returns the class name ID of this d d l record.
 	*
 	* @return the class name ID of this d d l record
 	*/
@@ -246,7 +246,7 @@ public class DDLRecordWrapper implements DDLRecord {
 	}
 
 	/**
-	* Gets the class p k of this d d l record.
+	* Returns the class p k of this d d l record.
 	*
 	* @return the class p k of this d d l record
 	*/
@@ -264,7 +264,7 @@ public class DDLRecordWrapper implements DDLRecord {
 	}
 
 	/**
-	* Gets the record set ID of this d d l record.
+	* Returns the record set ID of this d d l record.
 	*
 	* @return the record set ID of this d d l record
 	*/
@@ -282,7 +282,7 @@ public class DDLRecordWrapper implements DDLRecord {
 	}
 
 	/**
-	* Gets the display index of this d d l record.
+	* Returns the display index of this d d l record.
 	*
 	* @return the display index of this d d l record
 	*/
@@ -300,7 +300,7 @@ public class DDLRecordWrapper implements DDLRecord {
 	}
 
 	/**
-	* Gets the status of this d d l record.
+	* Returns the status of this d d l record.
 	*
 	* @return the status of this d d l record
 	*/
@@ -318,7 +318,7 @@ public class DDLRecordWrapper implements DDLRecord {
 	}
 
 	/**
-	* Gets the status by user ID of this d d l record.
+	* Returns the status by user ID of this d d l record.
 	*
 	* @return the status by user ID of this d d l record
 	*/
@@ -336,7 +336,7 @@ public class DDLRecordWrapper implements DDLRecord {
 	}
 
 	/**
-	* Gets the status by user uuid of this d d l record.
+	* Returns the status by user uuid of this d d l record.
 	*
 	* @return the status by user uuid of this d d l record
 	* @throws SystemException if a system exception occurred
@@ -356,7 +356,7 @@ public class DDLRecordWrapper implements DDLRecord {
 	}
 
 	/**
-	* Gets the status by user name of this d d l record.
+	* Returns the status by user name of this d d l record.
 	*
 	* @return the status by user name of this d d l record
 	*/
@@ -374,7 +374,7 @@ public class DDLRecordWrapper implements DDLRecord {
 	}
 
 	/**
-	* Gets the status date of this d d l record.
+	* Returns the status date of this d d l record.
 	*
 	* @return the status date of this d d l record
 	*/
@@ -392,7 +392,7 @@ public class DDLRecordWrapper implements DDLRecord {
 	}
 
 	/**
-	* @deprecated {@link #isApproved}
+	* @deprecated Renamed to {@link #isApproved()}
 	*/
 	public boolean getApproved() {
 		return _ddlRecord.getApproved();

@@ -37,7 +37,7 @@ public class PortletPreferencesWrapper implements PortletPreferences {
 	}
 
 	/**
-	* Gets the primary key of this portlet preferences.
+	* Returns the primary key of this portlet preferences.
 	*
 	* @return the primary key of this portlet preferences
 	*/
@@ -46,7 +46,7 @@ public class PortletPreferencesWrapper implements PortletPreferences {
 	}
 
 	/**
-	* Sets the primary key of this portlet preferences
+	* Sets the primary key of this portlet preferences.
 	*
 	* @param primaryKey the primary key of this portlet preferences
 	*/
@@ -55,7 +55,7 @@ public class PortletPreferencesWrapper implements PortletPreferences {
 	}
 
 	/**
-	* Gets the portlet preferences ID of this portlet preferences.
+	* Returns the portlet preferences ID of this portlet preferences.
 	*
 	* @return the portlet preferences ID of this portlet preferences
 	*/
@@ -73,7 +73,7 @@ public class PortletPreferencesWrapper implements PortletPreferences {
 	}
 
 	/**
-	* Gets the owner ID of this portlet preferences.
+	* Returns the owner ID of this portlet preferences.
 	*
 	* @return the owner ID of this portlet preferences
 	*/
@@ -91,7 +91,7 @@ public class PortletPreferencesWrapper implements PortletPreferences {
 	}
 
 	/**
-	* Gets the owner type of this portlet preferences.
+	* Returns the owner type of this portlet preferences.
 	*
 	* @return the owner type of this portlet preferences
 	*/
@@ -109,7 +109,7 @@ public class PortletPreferencesWrapper implements PortletPreferences {
 	}
 
 	/**
-	* Gets the plid of this portlet preferences.
+	* Returns the plid of this portlet preferences.
 	*
 	* @return the plid of this portlet preferences
 	*/
@@ -127,7 +127,7 @@ public class PortletPreferencesWrapper implements PortletPreferences {
 	}
 
 	/**
-	* Gets the portlet ID of this portlet preferences.
+	* Returns the portlet ID of this portlet preferences.
 	*
 	* @return the portlet ID of this portlet preferences
 	*/
@@ -145,7 +145,7 @@ public class PortletPreferencesWrapper implements PortletPreferences {
 	}
 
 	/**
-	* Gets the preferences of this portlet preferences.
+	* Returns the preferences of this portlet preferences.
 	*
 	* @return the preferences of this portlet preferences
 	*/

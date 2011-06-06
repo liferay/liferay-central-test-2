@@ -44,21 +44,21 @@ public interface RepositoryModel extends BaseModel<Repository> {
 	 */
 
 	/**
-	 * Gets the primary key of this repository.
+	 * Returns the primary key of this repository.
 	 *
 	 * @return the primary key of this repository
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this repository
+	 * Sets the primary key of this repository.
 	 *
 	 * @param primaryKey the primary key of this repository
 	 */
 	public void setPrimaryKey(long primaryKey);
 
 	/**
-	 * Gets the repository ID of this repository.
+	 * Returns the repository ID of this repository.
 	 *
 	 * @return the repository ID of this repository
 	 */
@@ -72,7 +72,7 @@ public interface RepositoryModel extends BaseModel<Repository> {
 	public void setRepositoryId(long repositoryId);
 
 	/**
-	 * Gets the group ID of this repository.
+	 * Returns the group ID of this repository.
 	 *
 	 * @return the group ID of this repository
 	 */
@@ -86,7 +86,7 @@ public interface RepositoryModel extends BaseModel<Repository> {
 	public void setGroupId(long groupId);
 
 	/**
-	 * Gets the company ID of this repository.
+	 * Returns the company ID of this repository.
 	 *
 	 * @return the company ID of this repository
 	 */
@@ -100,7 +100,7 @@ public interface RepositoryModel extends BaseModel<Repository> {
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the create date of this repository.
+	 * Returns the create date of this repository.
 	 *
 	 * @return the create date of this repository
 	 */
@@ -114,7 +114,7 @@ public interface RepositoryModel extends BaseModel<Repository> {
 	public void setCreateDate(Date createDate);
 
 	/**
-	 * Gets the modified date of this repository.
+	 * Returns the modified date of this repository.
 	 *
 	 * @return the modified date of this repository
 	 */
@@ -128,14 +128,14 @@ public interface RepositoryModel extends BaseModel<Repository> {
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
-	 * Gets the class name of the model instance this repository is polymorphically associated with.
+	 * Returns the fully qualified class name of this repository.
 	 *
-	 * @return the class name of the model instance this repository is polymorphically associated with
+	 * @return the fully qualified class name of this repository
 	 */
 	public String getClassName();
 
 	/**
-	 * Gets the class name ID of this repository.
+	 * Returns the class name ID of this repository.
 	 *
 	 * @return the class name ID of this repository
 	 */
@@ -149,7 +149,7 @@ public interface RepositoryModel extends BaseModel<Repository> {
 	public void setClassNameId(long classNameId);
 
 	/**
-	 * Gets the name of this repository.
+	 * Returns the name of this repository.
 	 *
 	 * @return the name of this repository
 	 */
@@ -164,7 +164,7 @@ public interface RepositoryModel extends BaseModel<Repository> {
 	public void setName(String name);
 
 	/**
-	 * Gets the description of this repository.
+	 * Returns the description of this repository.
 	 *
 	 * @return the description of this repository
 	 */
@@ -179,7 +179,7 @@ public interface RepositoryModel extends BaseModel<Repository> {
 	public void setDescription(String description);
 
 	/**
-	 * Gets the portlet ID of this repository.
+	 * Returns the portlet ID of this repository.
 	 *
 	 * @return the portlet ID of this repository
 	 */
@@ -194,7 +194,7 @@ public interface RepositoryModel extends BaseModel<Repository> {
 	public void setPortletId(String portletId);
 
 	/**
-	 * Gets the type settings of this repository.
+	 * Returns the type settings of this repository.
 	 *
 	 * @return the type settings of this repository
 	 */
@@ -209,7 +209,7 @@ public interface RepositoryModel extends BaseModel<Repository> {
 	public void setTypeSettings(String typeSettings);
 
 	/**
-	 * Gets the dl folder ID of this repository.
+	 * Returns the dl folder ID of this repository.
 	 *
 	 * @return the dl folder ID of this repository
 	 */

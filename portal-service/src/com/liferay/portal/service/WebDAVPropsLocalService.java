@@ -45,7 +45,7 @@ public interface WebDAVPropsLocalService {
 	/**
 	* Adds the web d a v props to the database. Also notifies the appropriate model listeners.
 	*
-	* @param webDAVProps the web d a v props to add
+	* @param webDAVProps the web d a v props
 	* @return the web d a v props that was added
 	* @throws SystemException if a system exception occurred
 	*/
@@ -65,7 +65,7 @@ public interface WebDAVPropsLocalService {
 	/**
 	* Deletes the web d a v props with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param webDavPropsId the primary key of the web d a v props to delete
+	* @param webDavPropsId the primary key of the web d a v props
 	* @throws PortalException if a web d a v props with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -76,7 +76,7 @@ public interface WebDAVPropsLocalService {
 	/**
 	* Deletes the web d a v props from the database. Also notifies the appropriate model listeners.
 	*
-	* @param webDAVProps the web d a v props to delete
+	* @param webDAVProps the web d a v props
 	* @throws SystemException if a system exception occurred
 	*/
 	public void deleteWebDAVProps(
@@ -86,7 +86,7 @@ public interface WebDAVPropsLocalService {
 	/**
 	* Performs a dynamic query on the database and returns the matching rows.
 	*
-	* @param dynamicQuery the dynamic query to search with
+	* @param dynamicQuery the dynamic query
 	* @return the matching rows
 	* @throws SystemException if a system exception occurred
 	*/
@@ -102,9 +102,9 @@ public interface WebDAVPropsLocalService {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param dynamicQuery the dynamic query to search with
-	* @param start the lower bound of the range of model instances to return
-	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param dynamicQuery the dynamic query
+	* @param start the lower bound of the range of model instances
+	* @param end the upper bound of the range of model instances (not inclusive)
 	* @return the range of matching rows
 	* @throws SystemException if a system exception occurred
 	*/
@@ -120,9 +120,9 @@ public interface WebDAVPropsLocalService {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param dynamicQuery the dynamic query to search with
-	* @param start the lower bound of the range of model instances to return
-	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param dynamicQuery the dynamic query
+	* @param start the lower bound of the range of model instances
+	* @param end the upper bound of the range of model instances (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching rows
 	* @throws SystemException if a system exception occurred
@@ -135,9 +135,9 @@ public interface WebDAVPropsLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Counts the number of rows that match the dynamic query.
+	* Returns the number of rows that match the dynamic query.
 	*
-	* @param dynamicQuery the dynamic query to search with
+	* @param dynamicQuery the dynamic query
 	* @return the number of rows that match the dynamic query
 	* @throws SystemException if a system exception occurred
 	*/
@@ -146,9 +146,9 @@ public interface WebDAVPropsLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Gets the web d a v props with the primary key.
+	* Returns the web d a v props with the primary key.
 	*
-	* @param webDavPropsId the primary key of the web d a v props to get
+	* @param webDavPropsId the primary key of the web d a v props
 	* @return the web d a v props
 	* @throws PortalException if a web d a v props with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -160,14 +160,14 @@ public interface WebDAVPropsLocalService {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Gets a range of all the web d a v propses.
+	* Returns a range of all the web d a v propses.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of web d a v propses to return
-	* @param end the upper bound of the range of web d a v propses to return (not inclusive)
+	* @param start the lower bound of the range of web d a v propses
+	* @param end the upper bound of the range of web d a v propses (not inclusive)
 	* @return the range of web d a v propses
 	* @throws SystemException if a system exception occurred
 	*/
@@ -177,7 +177,7 @@ public interface WebDAVPropsLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Gets the number of web d a v propses.
+	* Returns the number of web d a v propses.
 	*
 	* @return the number of web d a v propses
 	* @throws SystemException if a system exception occurred
@@ -189,7 +189,7 @@ public interface WebDAVPropsLocalService {
 	/**
 	* Updates the web d a v props in the database. Also notifies the appropriate model listeners.
 	*
-	* @param webDAVProps the web d a v props to update
+	* @param webDAVProps the web d a v props
 	* @return the web d a v props that was updated
 	* @throws SystemException if a system exception occurred
 	*/
@@ -200,7 +200,7 @@ public interface WebDAVPropsLocalService {
 	/**
 	* Updates the web d a v props in the database. Also notifies the appropriate model listeners.
 	*
-	* @param webDAVProps the web d a v props to update
+	* @param webDAVProps the web d a v props
 	* @param merge whether to merge the web d a v props with the current session. See {@link com.liferay.portal.service.persistence.BatchSession#update(com.liferay.portal.kernel.dao.orm.Session, com.liferay.portal.model.BaseModel, boolean)} for an explanation.
 	* @return the web d a v props that was updated
 	* @throws SystemException if a system exception occurred
@@ -210,7 +210,7 @@ public interface WebDAVPropsLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Gets the Spring bean ID for this bean.
+	* Returns the Spring bean ID for this bean.
 	*
 	* @return the Spring bean ID for this bean
 	*/

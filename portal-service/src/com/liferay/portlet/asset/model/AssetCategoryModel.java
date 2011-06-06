@@ -50,21 +50,21 @@ public interface AssetCategoryModel extends BaseModel<AssetCategory>,
 	 */
 
 	/**
-	 * Gets the primary key of this asset category.
+	 * Returns the primary key of this asset category.
 	 *
 	 * @return the primary key of this asset category
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this asset category
+	 * Sets the primary key of this asset category.
 	 *
 	 * @param primaryKey the primary key of this asset category
 	 */
 	public void setPrimaryKey(long primaryKey);
 
 	/**
-	 * Gets the uuid of this asset category.
+	 * Returns the uuid of this asset category.
 	 *
 	 * @return the uuid of this asset category
 	 */
@@ -79,7 +79,7 @@ public interface AssetCategoryModel extends BaseModel<AssetCategory>,
 	public void setUuid(String uuid);
 
 	/**
-	 * Gets the category ID of this asset category.
+	 * Returns the category ID of this asset category.
 	 *
 	 * @return the category ID of this asset category
 	 */
@@ -93,7 +93,7 @@ public interface AssetCategoryModel extends BaseModel<AssetCategory>,
 	public void setCategoryId(long categoryId);
 
 	/**
-	 * Gets the group ID of this asset category.
+	 * Returns the group ID of this asset category.
 	 *
 	 * @return the group ID of this asset category
 	 */
@@ -107,7 +107,7 @@ public interface AssetCategoryModel extends BaseModel<AssetCategory>,
 	public void setGroupId(long groupId);
 
 	/**
-	 * Gets the company ID of this asset category.
+	 * Returns the company ID of this asset category.
 	 *
 	 * @return the company ID of this asset category
 	 */
@@ -121,7 +121,7 @@ public interface AssetCategoryModel extends BaseModel<AssetCategory>,
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the user ID of this asset category.
+	 * Returns the user ID of this asset category.
 	 *
 	 * @return the user ID of this asset category
 	 */
@@ -135,7 +135,7 @@ public interface AssetCategoryModel extends BaseModel<AssetCategory>,
 	public void setUserId(long userId);
 
 	/**
-	 * Gets the user uuid of this asset category.
+	 * Returns the user uuid of this asset category.
 	 *
 	 * @return the user uuid of this asset category
 	 * @throws SystemException if a system exception occurred
@@ -150,7 +150,7 @@ public interface AssetCategoryModel extends BaseModel<AssetCategory>,
 	public void setUserUuid(String userUuid);
 
 	/**
-	 * Gets the user name of this asset category.
+	 * Returns the user name of this asset category.
 	 *
 	 * @return the user name of this asset category
 	 */
@@ -165,7 +165,7 @@ public interface AssetCategoryModel extends BaseModel<AssetCategory>,
 	public void setUserName(String userName);
 
 	/**
-	 * Gets the create date of this asset category.
+	 * Returns the create date of this asset category.
 	 *
 	 * @return the create date of this asset category
 	 */
@@ -179,7 +179,7 @@ public interface AssetCategoryModel extends BaseModel<AssetCategory>,
 	public void setCreateDate(Date createDate);
 
 	/**
-	 * Gets the modified date of this asset category.
+	 * Returns the modified date of this asset category.
 	 *
 	 * @return the modified date of this asset category
 	 */
@@ -193,7 +193,7 @@ public interface AssetCategoryModel extends BaseModel<AssetCategory>,
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
-	 * Gets the parent category ID of this asset category.
+	 * Returns the parent category ID of this asset category.
 	 *
 	 * @return the parent category ID of this asset category
 	 */
@@ -207,7 +207,7 @@ public interface AssetCategoryModel extends BaseModel<AssetCategory>,
 	public void setParentCategoryId(long parentCategoryId);
 
 	/**
-	 * Gets the left category ID of this asset category.
+	 * Returns the left category ID of this asset category.
 	 *
 	 * @return the left category ID of this asset category
 	 */
@@ -221,7 +221,7 @@ public interface AssetCategoryModel extends BaseModel<AssetCategory>,
 	public void setLeftCategoryId(long leftCategoryId);
 
 	/**
-	 * Gets the right category ID of this asset category.
+	 * Returns the right category ID of this asset category.
 	 *
 	 * @return the right category ID of this asset category
 	 */
@@ -235,7 +235,7 @@ public interface AssetCategoryModel extends BaseModel<AssetCategory>,
 	public void setRightCategoryId(long rightCategoryId);
 
 	/**
-	 * Gets the name of this asset category.
+	 * Returns the name of this asset category.
 	 *
 	 * @return the name of this asset category
 	 */
@@ -250,50 +250,50 @@ public interface AssetCategoryModel extends BaseModel<AssetCategory>,
 	public void setName(String name);
 
 	/**
-	 * Gets the title of this asset category.
+	 * Returns the title of this asset category.
 	 *
 	 * @return the title of this asset category
 	 */
 	public String getTitle();
 
 	/**
-	 * Gets the localized title of this asset category. Uses the default language if no localization exists for the requested language.
+	 * Returns the localized title of this asset category in the language. Uses the default language if no localization exists for the requested language.
 	 *
-	 * @param locale the locale to get the localized title for
+	 * @param locale the locale of the language
 	 * @return the localized title of this asset category
 	 */
 	public String getTitle(Locale locale);
 
 	/**
-	 * Gets the localized title of this asset category, optionally using the default language if no localization exists for the requested language.
+	 * Returns the localized title of this asset category in the language, optionally using the default language if no localization exists for the requested language.
 	 *
-	 * @param locale the local to get the localized title for
+	 * @param locale the local of the language
 	 * @param useDefault whether to use the default language if no localization exists for the requested language
 	 * @return the localized title of this asset category. If <code>useDefault</code> is <code>false</code> and no localization exists for the requested language, an empty string will be returned.
 	 */
 	public String getTitle(Locale locale, boolean useDefault);
 
 	/**
-	 * Gets the localized title of this asset category. Uses the default language if no localization exists for the requested language.
+	 * Returns the localized title of this asset category in the language. Uses the default language if no localization exists for the requested language.
 	 *
-	 * @param languageId the id of the language to get the localized title for
+	 * @param languageId the ID of the language
 	 * @return the localized title of this asset category
 	 */
 	public String getTitle(String languageId);
 
 	/**
-	 * Gets the localized title of this asset category, optionally using the default language if no localization exists for the requested language.
+	 * Returns the localized title of this asset category in the language, optionally using the default language if no localization exists for the requested language.
 	 *
-	 * @param languageId the id of the language to get the localized title for
+	 * @param languageId the ID of the language
 	 * @param useDefault whether to use the default language if no localization exists for the requested language
 	 * @return the localized title of this asset category
 	 */
 	public String getTitle(String languageId, boolean useDefault);
 
 	/**
-	 * Gets a map of the locales and localized title of this asset category.
+	 * Returns a map of the locales and localized titles of this asset category.
 	 *
-	 * @return the locales and localized title
+	 * @return the locales and localized titles of this asset category
 	 */
 	public Map<Locale, String> getTitleMap();
 
@@ -305,13 +305,20 @@ public interface AssetCategoryModel extends BaseModel<AssetCategory>,
 	public void setTitle(String title);
 
 	/**
-	 * Sets the localized title of this asset category.
+	 * Sets the localized title of this asset category in the language.
 	 *
 	 * @param title the localized title of this asset category
-	 * @param locale the locale to set the localized title for
+	 * @param locale the locale of the language
 	 */
 	public void setTitle(String title, Locale locale);
 
+	/**
+	 * Sets the localized title of this asset category in the language, and sets the default locale.
+	 *
+	 * @param title the localized title of this asset category
+	 * @param locale the locale of the language
+	 * @param defaultLocale the default locale
+	 */
 	public void setTitle(String title, Locale locale, Locale defaultLocale);
 
 	/**
@@ -321,53 +328,59 @@ public interface AssetCategoryModel extends BaseModel<AssetCategory>,
 	 */
 	public void setTitleMap(Map<Locale, String> titleMap);
 
+	/**
+	 * Sets the localized titles of this asset category from the map of locales and localized titles, and sets the default locale.
+	 *
+	 * @param titleMap the locales and localized titles of this asset category
+	 * @param defaultLocale the default locale
+	 */
 	public void setTitleMap(Map<Locale, String> titleMap, Locale defaultLocale);
 
 	/**
-	 * Gets the description of this asset category.
+	 * Returns the description of this asset category.
 	 *
 	 * @return the description of this asset category
 	 */
 	public String getDescription();
 
 	/**
-	 * Gets the localized description of this asset category. Uses the default language if no localization exists for the requested language.
+	 * Returns the localized description of this asset category in the language. Uses the default language if no localization exists for the requested language.
 	 *
-	 * @param locale the locale to get the localized description for
+	 * @param locale the locale of the language
 	 * @return the localized description of this asset category
 	 */
 	public String getDescription(Locale locale);
 
 	/**
-	 * Gets the localized description of this asset category, optionally using the default language if no localization exists for the requested language.
+	 * Returns the localized description of this asset category in the language, optionally using the default language if no localization exists for the requested language.
 	 *
-	 * @param locale the local to get the localized description for
+	 * @param locale the local of the language
 	 * @param useDefault whether to use the default language if no localization exists for the requested language
 	 * @return the localized description of this asset category. If <code>useDefault</code> is <code>false</code> and no localization exists for the requested language, an empty string will be returned.
 	 */
 	public String getDescription(Locale locale, boolean useDefault);
 
 	/**
-	 * Gets the localized description of this asset category. Uses the default language if no localization exists for the requested language.
+	 * Returns the localized description of this asset category in the language. Uses the default language if no localization exists for the requested language.
 	 *
-	 * @param languageId the id of the language to get the localized description for
+	 * @param languageId the ID of the language
 	 * @return the localized description of this asset category
 	 */
 	public String getDescription(String languageId);
 
 	/**
-	 * Gets the localized description of this asset category, optionally using the default language if no localization exists for the requested language.
+	 * Returns the localized description of this asset category in the language, optionally using the default language if no localization exists for the requested language.
 	 *
-	 * @param languageId the id of the language to get the localized description for
+	 * @param languageId the ID of the language
 	 * @param useDefault whether to use the default language if no localization exists for the requested language
 	 * @return the localized description of this asset category
 	 */
 	public String getDescription(String languageId, boolean useDefault);
 
 	/**
-	 * Gets a map of the locales and localized description of this asset category.
+	 * Returns a map of the locales and localized descriptions of this asset category.
 	 *
-	 * @return the locales and localized description
+	 * @return the locales and localized descriptions of this asset category
 	 */
 	public Map<Locale, String> getDescriptionMap();
 
@@ -379,13 +392,20 @@ public interface AssetCategoryModel extends BaseModel<AssetCategory>,
 	public void setDescription(String description);
 
 	/**
-	 * Sets the localized description of this asset category.
+	 * Sets the localized description of this asset category in the language.
 	 *
 	 * @param description the localized description of this asset category
-	 * @param locale the locale to set the localized description for
+	 * @param locale the locale of the language
 	 */
 	public void setDescription(String description, Locale locale);
 
+	/**
+	 * Sets the localized description of this asset category in the language, and sets the default locale.
+	 *
+	 * @param description the localized description of this asset category
+	 * @param locale the locale of the language
+	 * @param defaultLocale the default locale
+	 */
 	public void setDescription(String description, Locale locale,
 		Locale defaultLocale);
 
@@ -396,11 +416,17 @@ public interface AssetCategoryModel extends BaseModel<AssetCategory>,
 	 */
 	public void setDescriptionMap(Map<Locale, String> descriptionMap);
 
+	/**
+	 * Sets the localized descriptions of this asset category from the map of locales and localized descriptions, and sets the default locale.
+	 *
+	 * @param descriptionMap the locales and localized descriptions of this asset category
+	 * @param defaultLocale the default locale
+	 */
 	public void setDescriptionMap(Map<Locale, String> descriptionMap,
 		Locale defaultLocale);
 
 	/**
-	 * Gets the vocabulary ID of this asset category.
+	 * Returns the vocabulary ID of this asset category.
 	 *
 	 * @return the vocabulary ID of this asset category
 	 */

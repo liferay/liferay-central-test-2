@@ -41,7 +41,7 @@ public class SocialEquityHistoryLocalServiceUtil {
 	/**
 	* Adds the social equity history to the database. Also notifies the appropriate model listeners.
 	*
-	* @param socialEquityHistory the social equity history to add
+	* @param socialEquityHistory the social equity history
 	* @return the social equity history that was added
 	* @throws SystemException if a system exception occurred
 	*/
@@ -65,7 +65,7 @@ public class SocialEquityHistoryLocalServiceUtil {
 	/**
 	* Deletes the social equity history with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param equityHistoryId the primary key of the social equity history to delete
+	* @param equityHistoryId the primary key of the social equity history
 	* @throws PortalException if a social equity history with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -78,7 +78,7 @@ public class SocialEquityHistoryLocalServiceUtil {
 	/**
 	* Deletes the social equity history from the database. Also notifies the appropriate model listeners.
 	*
-	* @param socialEquityHistory the social equity history to delete
+	* @param socialEquityHistory the social equity history
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void deleteSocialEquityHistory(
@@ -90,7 +90,7 @@ public class SocialEquityHistoryLocalServiceUtil {
 	/**
 	* Performs a dynamic query on the database and returns the matching rows.
 	*
-	* @param dynamicQuery the dynamic query to search with
+	* @param dynamicQuery the dynamic query
 	* @return the matching rows
 	* @throws SystemException if a system exception occurred
 	*/
@@ -108,9 +108,9 @@ public class SocialEquityHistoryLocalServiceUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param dynamicQuery the dynamic query to search with
-	* @param start the lower bound of the range of model instances to return
-	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param dynamicQuery the dynamic query
+	* @param start the lower bound of the range of model instances
+	* @param end the upper bound of the range of model instances (not inclusive)
 	* @return the range of matching rows
 	* @throws SystemException if a system exception occurred
 	*/
@@ -128,9 +128,9 @@ public class SocialEquityHistoryLocalServiceUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param dynamicQuery the dynamic query to search with
-	* @param start the lower bound of the range of model instances to return
-	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param dynamicQuery the dynamic query
+	* @param start the lower bound of the range of model instances
+	* @param end the upper bound of the range of model instances (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching rows
 	* @throws SystemException if a system exception occurred
@@ -146,9 +146,9 @@ public class SocialEquityHistoryLocalServiceUtil {
 	}
 
 	/**
-	* Counts the number of rows that match the dynamic query.
+	* Returns the number of rows that match the dynamic query.
 	*
-	* @param dynamicQuery the dynamic query to search with
+	* @param dynamicQuery the dynamic query
 	* @return the number of rows that match the dynamic query
 	* @throws SystemException if a system exception occurred
 	*/
@@ -159,9 +159,9 @@ public class SocialEquityHistoryLocalServiceUtil {
 	}
 
 	/**
-	* Gets the social equity history with the primary key.
+	* Returns the social equity history with the primary key.
 	*
-	* @param equityHistoryId the primary key of the social equity history to get
+	* @param equityHistoryId the primary key of the social equity history
 	* @return the social equity history
 	* @throws PortalException if a social equity history with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -174,14 +174,14 @@ public class SocialEquityHistoryLocalServiceUtil {
 	}
 
 	/**
-	* Gets a range of all the social equity histories.
+	* Returns a range of all the social equity histories.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of social equity histories to return
-	* @param end the upper bound of the range of social equity histories to return (not inclusive)
+	* @param start the lower bound of the range of social equity histories
+	* @param end the upper bound of the range of social equity histories (not inclusive)
 	* @return the range of social equity histories
 	* @throws SystemException if a system exception occurred
 	*/
@@ -192,7 +192,7 @@ public class SocialEquityHistoryLocalServiceUtil {
 	}
 
 	/**
-	* Gets the number of social equity histories.
+	* Returns the number of social equity histories.
 	*
 	* @return the number of social equity histories
 	* @throws SystemException if a system exception occurred
@@ -205,7 +205,7 @@ public class SocialEquityHistoryLocalServiceUtil {
 	/**
 	* Updates the social equity history in the database. Also notifies the appropriate model listeners.
 	*
-	* @param socialEquityHistory the social equity history to update
+	* @param socialEquityHistory the social equity history
 	* @return the social equity history that was updated
 	* @throws SystemException if a system exception occurred
 	*/
@@ -218,7 +218,7 @@ public class SocialEquityHistoryLocalServiceUtil {
 	/**
 	* Updates the social equity history in the database. Also notifies the appropriate model listeners.
 	*
-	* @param socialEquityHistory the social equity history to update
+	* @param socialEquityHistory the social equity history
 	* @param merge whether to merge the social equity history with the current session. See {@link com.liferay.portal.service.persistence.BatchSession#update(com.liferay.portal.kernel.dao.orm.Session, com.liferay.portal.model.BaseModel, boolean)} for an explanation.
 	* @return the social equity history that was updated
 	* @throws SystemException if a system exception occurred
@@ -231,7 +231,7 @@ public class SocialEquityHistoryLocalServiceUtil {
 	}
 
 	/**
-	* Gets the Spring bean ID for this bean.
+	* Returns the Spring bean ID for this bean.
 	*
 	* @return the Spring bean ID for this bean
 	*/

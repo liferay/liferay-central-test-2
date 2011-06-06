@@ -41,7 +41,7 @@ public interface DDMStructurePersistence extends BasePersistence<DDMStructure> {
 	/**
 	* Caches the d d m structure in the entity cache if it is enabled.
 	*
-	* @param ddmStructure the d d m structure to cache
+	* @param ddmStructure the d d m structure
 	*/
 	public void cacheResult(
 		com.liferay.portlet.dynamicdatamapping.model.DDMStructure ddmStructure);
@@ -49,7 +49,7 @@ public interface DDMStructurePersistence extends BasePersistence<DDMStructure> {
 	/**
 	* Caches the d d m structures in the entity cache if it is enabled.
 	*
-	* @param ddmStructures the d d m structures to cache
+	* @param ddmStructures the d d m structures
 	*/
 	public void cacheResult(
 		java.util.List<com.liferay.portlet.dynamicdatamapping.model.DDMStructure> ddmStructures);
@@ -66,7 +66,7 @@ public interface DDMStructurePersistence extends BasePersistence<DDMStructure> {
 	/**
 	* Removes the d d m structure with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param structureId the primary key of the d d m structure to remove
+	* @param structureId the primary key of the d d m structure
 	* @return the d d m structure that was removed
 	* @throws com.liferay.portlet.dynamicdatamapping.NoSuchStructureException if a d d m structure with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -82,9 +82,9 @@ public interface DDMStructurePersistence extends BasePersistence<DDMStructure> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the d d m structure with the primary key or throws a {@link com.liferay.portlet.dynamicdatamapping.NoSuchStructureException} if it could not be found.
+	* Returns the d d m structure with the primary key or throws a {@link com.liferay.portlet.dynamicdatamapping.NoSuchStructureException} if it could not be found.
 	*
-	* @param structureId the primary key of the d d m structure to find
+	* @param structureId the primary key of the d d m structure
 	* @return the d d m structure
 	* @throws com.liferay.portlet.dynamicdatamapping.NoSuchStructureException if a d d m structure with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -95,9 +95,9 @@ public interface DDMStructurePersistence extends BasePersistence<DDMStructure> {
 			com.liferay.portlet.dynamicdatamapping.NoSuchStructureException;
 
 	/**
-	* Finds the d d m structure with the primary key or returns <code>null</code> if it could not be found.
+	* Returns the d d m structure with the primary key or returns <code>null</code> if it could not be found.
 	*
-	* @param structureId the primary key of the d d m structure to find
+	* @param structureId the primary key of the d d m structure
 	* @return the d d m structure, or <code>null</code> if a d d m structure with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -106,9 +106,9 @@ public interface DDMStructurePersistence extends BasePersistence<DDMStructure> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds all the d d m structures where uuid = &#63;.
+	* Returns all the d d m structures where uuid = &#63;.
 	*
-	* @param uuid the uuid to search with
+	* @param uuid the uuid
 	* @return the matching d d m structures
 	* @throws SystemException if a system exception occurred
 	*/
@@ -117,15 +117,15 @@ public interface DDMStructurePersistence extends BasePersistence<DDMStructure> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds a range of all the d d m structures where uuid = &#63;.
+	* Returns a range of all the d d m structures where uuid = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param uuid the uuid to search with
-	* @param start the lower bound of the range of d d m structures to return
-	* @param end the upper bound of the range of d d m structures to return (not inclusive)
+	* @param uuid the uuid
+	* @param start the lower bound of the range of d d m structures
+	* @param end the upper bound of the range of d d m structures (not inclusive)
 	* @return the range of matching d d m structures
 	* @throws SystemException if a system exception occurred
 	*/
@@ -134,15 +134,15 @@ public interface DDMStructurePersistence extends BasePersistence<DDMStructure> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds an ordered range of all the d d m structures where uuid = &#63;.
+	* Returns an ordered range of all the d d m structures where uuid = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param uuid the uuid to search with
-	* @param start the lower bound of the range of d d m structures to return
-	* @param end the upper bound of the range of d d m structures to return (not inclusive)
+	* @param uuid the uuid
+	* @param start the lower bound of the range of d d m structures
+	* @param end the upper bound of the range of d d m structures (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching d d m structures
 	* @throws SystemException if a system exception occurred
@@ -153,13 +153,13 @@ public interface DDMStructurePersistence extends BasePersistence<DDMStructure> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the first d d m structure in the ordered set where uuid = &#63;.
+	* Returns the first d d m structure in the ordered set where uuid = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param uuid the uuid to search with
+	* @param uuid the uuid
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching d d m structure
 	* @throws com.liferay.portlet.dynamicdatamapping.NoSuchStructureException if a matching d d m structure could not be found
@@ -172,13 +172,13 @@ public interface DDMStructurePersistence extends BasePersistence<DDMStructure> {
 			com.liferay.portlet.dynamicdatamapping.NoSuchStructureException;
 
 	/**
-	* Finds the last d d m structure in the ordered set where uuid = &#63;.
+	* Returns the last d d m structure in the ordered set where uuid = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param uuid the uuid to search with
+	* @param uuid the uuid
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching d d m structure
 	* @throws com.liferay.portlet.dynamicdatamapping.NoSuchStructureException if a matching d d m structure could not be found
@@ -191,14 +191,14 @@ public interface DDMStructurePersistence extends BasePersistence<DDMStructure> {
 			com.liferay.portlet.dynamicdatamapping.NoSuchStructureException;
 
 	/**
-	* Finds the d d m structures before and after the current d d m structure in the ordered set where uuid = &#63;.
+	* Returns the d d m structures before and after the current d d m structure in the ordered set where uuid = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
 	* @param structureId the primary key of the current d d m structure
-	* @param uuid the uuid to search with
+	* @param uuid the uuid
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next d d m structure
 	* @throws com.liferay.portlet.dynamicdatamapping.NoSuchStructureException if a d d m structure with the primary key could not be found
@@ -211,10 +211,10 @@ public interface DDMStructurePersistence extends BasePersistence<DDMStructure> {
 			com.liferay.portlet.dynamicdatamapping.NoSuchStructureException;
 
 	/**
-	* Finds the d d m structure where uuid = &#63; and groupId = &#63; or throws a {@link com.liferay.portlet.dynamicdatamapping.NoSuchStructureException} if it could not be found.
+	* Returns the d d m structure where uuid = &#63; and groupId = &#63; or throws a {@link com.liferay.portlet.dynamicdatamapping.NoSuchStructureException} if it could not be found.
 	*
-	* @param uuid the uuid to search with
-	* @param groupId the group ID to search with
+	* @param uuid the uuid
+	* @param groupId the group ID
 	* @return the matching d d m structure
 	* @throws com.liferay.portlet.dynamicdatamapping.NoSuchStructureException if a matching d d m structure could not be found
 	* @throws SystemException if a system exception occurred
@@ -225,10 +225,10 @@ public interface DDMStructurePersistence extends BasePersistence<DDMStructure> {
 			com.liferay.portlet.dynamicdatamapping.NoSuchStructureException;
 
 	/**
-	* Finds the d d m structure where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	* Returns the d d m structure where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	*
-	* @param uuid the uuid to search with
-	* @param groupId the group ID to search with
+	* @param uuid the uuid
+	* @param groupId the group ID
 	* @return the matching d d m structure, or <code>null</code> if a matching d d m structure could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -237,10 +237,10 @@ public interface DDMStructurePersistence extends BasePersistence<DDMStructure> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the d d m structure where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	* Returns the d d m structure where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
-	* @param uuid the uuid to search with
-	* @param groupId the group ID to search with
+	* @param uuid the uuid
+	* @param groupId the group ID
 	* @return the matching d d m structure, or <code>null</code> if a matching d d m structure could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -249,9 +249,9 @@ public interface DDMStructurePersistence extends BasePersistence<DDMStructure> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds all the d d m structures where groupId = &#63;.
+	* Returns all the d d m structures where groupId = &#63;.
 	*
-	* @param groupId the group ID to search with
+	* @param groupId the group ID
 	* @return the matching d d m structures
 	* @throws SystemException if a system exception occurred
 	*/
@@ -260,15 +260,15 @@ public interface DDMStructurePersistence extends BasePersistence<DDMStructure> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds a range of all the d d m structures where groupId = &#63;.
+	* Returns a range of all the d d m structures where groupId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param start the lower bound of the range of d d m structures to return
-	* @param end the upper bound of the range of d d m structures to return (not inclusive)
+	* @param groupId the group ID
+	* @param start the lower bound of the range of d d m structures
+	* @param end the upper bound of the range of d d m structures (not inclusive)
 	* @return the range of matching d d m structures
 	* @throws SystemException if a system exception occurred
 	*/
@@ -277,15 +277,15 @@ public interface DDMStructurePersistence extends BasePersistence<DDMStructure> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds an ordered range of all the d d m structures where groupId = &#63;.
+	* Returns an ordered range of all the d d m structures where groupId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param start the lower bound of the range of d d m structures to return
-	* @param end the upper bound of the range of d d m structures to return (not inclusive)
+	* @param groupId the group ID
+	* @param start the lower bound of the range of d d m structures
+	* @param end the upper bound of the range of d d m structures (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching d d m structures
 	* @throws SystemException if a system exception occurred
@@ -296,13 +296,13 @@ public interface DDMStructurePersistence extends BasePersistence<DDMStructure> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the first d d m structure in the ordered set where groupId = &#63;.
+	* Returns the first d d m structure in the ordered set where groupId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
+	* @param groupId the group ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching d d m structure
 	* @throws com.liferay.portlet.dynamicdatamapping.NoSuchStructureException if a matching d d m structure could not be found
@@ -315,13 +315,13 @@ public interface DDMStructurePersistence extends BasePersistence<DDMStructure> {
 			com.liferay.portlet.dynamicdatamapping.NoSuchStructureException;
 
 	/**
-	* Finds the last d d m structure in the ordered set where groupId = &#63;.
+	* Returns the last d d m structure in the ordered set where groupId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
+	* @param groupId the group ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching d d m structure
 	* @throws com.liferay.portlet.dynamicdatamapping.NoSuchStructureException if a matching d d m structure could not be found
@@ -334,14 +334,14 @@ public interface DDMStructurePersistence extends BasePersistence<DDMStructure> {
 			com.liferay.portlet.dynamicdatamapping.NoSuchStructureException;
 
 	/**
-	* Finds the d d m structures before and after the current d d m structure in the ordered set where groupId = &#63;.
+	* Returns the d d m structures before and after the current d d m structure in the ordered set where groupId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
 	* @param structureId the primary key of the current d d m structure
-	* @param groupId the group ID to search with
+	* @param groupId the group ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next d d m structure
 	* @throws com.liferay.portlet.dynamicdatamapping.NoSuchStructureException if a d d m structure with the primary key could not be found
@@ -354,9 +354,9 @@ public interface DDMStructurePersistence extends BasePersistence<DDMStructure> {
 			com.liferay.portlet.dynamicdatamapping.NoSuchStructureException;
 
 	/**
-	* Filters by the user's permissions and finds all the d d m structures where groupId = &#63;.
+	* Returns all the d d m structures that the user has permission to view where groupId = &#63;.
 	*
-	* @param groupId the group ID to search with
+	* @param groupId the group ID
 	* @return the matching d d m structures that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -365,15 +365,15 @@ public interface DDMStructurePersistence extends BasePersistence<DDMStructure> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Filters by the user's permissions and finds a range of all the d d m structures where groupId = &#63;.
+	* Returns a range of all the d d m structures that the user has permission to view where groupId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param start the lower bound of the range of d d m structures to return
-	* @param end the upper bound of the range of d d m structures to return (not inclusive)
+	* @param groupId the group ID
+	* @param start the lower bound of the range of d d m structures
+	* @param end the upper bound of the range of d d m structures (not inclusive)
 	* @return the range of matching d d m structures that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -382,15 +382,15 @@ public interface DDMStructurePersistence extends BasePersistence<DDMStructure> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Filters by the user's permissions and finds an ordered range of all the d d m structures where groupId = &#63;.
+	* Returns an ordered range of all the d d m structures that the user has permissions to view where groupId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param start the lower bound of the range of d d m structures to return
-	* @param end the upper bound of the range of d d m structures to return (not inclusive)
+	* @param groupId the group ID
+	* @param start the lower bound of the range of d d m structures
+	* @param end the upper bound of the range of d d m structures (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching d d m structures that the user has permission to view
 	* @throws SystemException if a system exception occurred
@@ -401,14 +401,10 @@ public interface DDMStructurePersistence extends BasePersistence<DDMStructure> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Filters the d d m structures before and after the current d d m structure in the ordered set where groupId = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
-	* </p>
+	* Returns the d d m structures before and after the current d d m structure in the ordered set of d d m structures that the user has permission to view where groupId = &#63;.
 	*
 	* @param structureId the primary key of the current d d m structure
-	* @param groupId the group ID to search with
+	* @param groupId the group ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next d d m structure
 	* @throws com.liferay.portlet.dynamicdatamapping.NoSuchStructureException if a d d m structure with the primary key could not be found
@@ -421,9 +417,9 @@ public interface DDMStructurePersistence extends BasePersistence<DDMStructure> {
 			com.liferay.portlet.dynamicdatamapping.NoSuchStructureException;
 
 	/**
-	* Finds all the d d m structures where classNameId = &#63;.
+	* Returns all the d d m structures where classNameId = &#63;.
 	*
-	* @param classNameId the class name ID to search with
+	* @param classNameId the class name ID
 	* @return the matching d d m structures
 	* @throws SystemException if a system exception occurred
 	*/
@@ -432,15 +428,15 @@ public interface DDMStructurePersistence extends BasePersistence<DDMStructure> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds a range of all the d d m structures where classNameId = &#63;.
+	* Returns a range of all the d d m structures where classNameId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param classNameId the class name ID to search with
-	* @param start the lower bound of the range of d d m structures to return
-	* @param end the upper bound of the range of d d m structures to return (not inclusive)
+	* @param classNameId the class name ID
+	* @param start the lower bound of the range of d d m structures
+	* @param end the upper bound of the range of d d m structures (not inclusive)
 	* @return the range of matching d d m structures
 	* @throws SystemException if a system exception occurred
 	*/
@@ -449,15 +445,15 @@ public interface DDMStructurePersistence extends BasePersistence<DDMStructure> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds an ordered range of all the d d m structures where classNameId = &#63;.
+	* Returns an ordered range of all the d d m structures where classNameId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param classNameId the class name ID to search with
-	* @param start the lower bound of the range of d d m structures to return
-	* @param end the upper bound of the range of d d m structures to return (not inclusive)
+	* @param classNameId the class name ID
+	* @param start the lower bound of the range of d d m structures
+	* @param end the upper bound of the range of d d m structures (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching d d m structures
 	* @throws SystemException if a system exception occurred
@@ -468,13 +464,13 @@ public interface DDMStructurePersistence extends BasePersistence<DDMStructure> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the first d d m structure in the ordered set where classNameId = &#63;.
+	* Returns the first d d m structure in the ordered set where classNameId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param classNameId the class name ID to search with
+	* @param classNameId the class name ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching d d m structure
 	* @throws com.liferay.portlet.dynamicdatamapping.NoSuchStructureException if a matching d d m structure could not be found
@@ -487,13 +483,13 @@ public interface DDMStructurePersistence extends BasePersistence<DDMStructure> {
 			com.liferay.portlet.dynamicdatamapping.NoSuchStructureException;
 
 	/**
-	* Finds the last d d m structure in the ordered set where classNameId = &#63;.
+	* Returns the last d d m structure in the ordered set where classNameId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param classNameId the class name ID to search with
+	* @param classNameId the class name ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching d d m structure
 	* @throws com.liferay.portlet.dynamicdatamapping.NoSuchStructureException if a matching d d m structure could not be found
@@ -506,14 +502,14 @@ public interface DDMStructurePersistence extends BasePersistence<DDMStructure> {
 			com.liferay.portlet.dynamicdatamapping.NoSuchStructureException;
 
 	/**
-	* Finds the d d m structures before and after the current d d m structure in the ordered set where classNameId = &#63;.
+	* Returns the d d m structures before and after the current d d m structure in the ordered set where classNameId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
 	* @param structureId the primary key of the current d d m structure
-	* @param classNameId the class name ID to search with
+	* @param classNameId the class name ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next d d m structure
 	* @throws com.liferay.portlet.dynamicdatamapping.NoSuchStructureException if a d d m structure with the primary key could not be found
@@ -526,10 +522,10 @@ public interface DDMStructurePersistence extends BasePersistence<DDMStructure> {
 			com.liferay.portlet.dynamicdatamapping.NoSuchStructureException;
 
 	/**
-	* Finds the d d m structure where groupId = &#63; and structureKey = &#63; or throws a {@link com.liferay.portlet.dynamicdatamapping.NoSuchStructureException} if it could not be found.
+	* Returns the d d m structure where groupId = &#63; and structureKey = &#63; or throws a {@link com.liferay.portlet.dynamicdatamapping.NoSuchStructureException} if it could not be found.
 	*
-	* @param groupId the group ID to search with
-	* @param structureKey the structure key to search with
+	* @param groupId the group ID
+	* @param structureKey the structure key
 	* @return the matching d d m structure
 	* @throws com.liferay.portlet.dynamicdatamapping.NoSuchStructureException if a matching d d m structure could not be found
 	* @throws SystemException if a system exception occurred
@@ -540,10 +536,10 @@ public interface DDMStructurePersistence extends BasePersistence<DDMStructure> {
 			com.liferay.portlet.dynamicdatamapping.NoSuchStructureException;
 
 	/**
-	* Finds the d d m structure where groupId = &#63; and structureKey = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	* Returns the d d m structure where groupId = &#63; and structureKey = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	*
-	* @param groupId the group ID to search with
-	* @param structureKey the structure key to search with
+	* @param groupId the group ID
+	* @param structureKey the structure key
 	* @return the matching d d m structure, or <code>null</code> if a matching d d m structure could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -552,10 +548,10 @@ public interface DDMStructurePersistence extends BasePersistence<DDMStructure> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the d d m structure where groupId = &#63; and structureKey = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	* Returns the d d m structure where groupId = &#63; and structureKey = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
-	* @param groupId the group ID to search with
-	* @param structureKey the structure key to search with
+	* @param groupId the group ID
+	* @param structureKey the structure key
 	* @return the matching d d m structure, or <code>null</code> if a matching d d m structure could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -564,11 +560,11 @@ public interface DDMStructurePersistence extends BasePersistence<DDMStructure> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds all the d d m structures where groupId = &#63; and name = &#63; and description = &#63;.
+	* Returns all the d d m structures where groupId = &#63; and name = &#63; and description = &#63;.
 	*
-	* @param groupId the group ID to search with
-	* @param name the name to search with
-	* @param description the description to search with
+	* @param groupId the group ID
+	* @param name the name
+	* @param description the description
 	* @return the matching d d m structures
 	* @throws SystemException if a system exception occurred
 	*/
@@ -577,17 +573,17 @@ public interface DDMStructurePersistence extends BasePersistence<DDMStructure> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds a range of all the d d m structures where groupId = &#63; and name = &#63; and description = &#63;.
+	* Returns a range of all the d d m structures where groupId = &#63; and name = &#63; and description = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param name the name to search with
-	* @param description the description to search with
-	* @param start the lower bound of the range of d d m structures to return
-	* @param end the upper bound of the range of d d m structures to return (not inclusive)
+	* @param groupId the group ID
+	* @param name the name
+	* @param description the description
+	* @param start the lower bound of the range of d d m structures
+	* @param end the upper bound of the range of d d m structures (not inclusive)
 	* @return the range of matching d d m structures
 	* @throws SystemException if a system exception occurred
 	*/
@@ -597,17 +593,17 @@ public interface DDMStructurePersistence extends BasePersistence<DDMStructure> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds an ordered range of all the d d m structures where groupId = &#63; and name = &#63; and description = &#63;.
+	* Returns an ordered range of all the d d m structures where groupId = &#63; and name = &#63; and description = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param name the name to search with
-	* @param description the description to search with
-	* @param start the lower bound of the range of d d m structures to return
-	* @param end the upper bound of the range of d d m structures to return (not inclusive)
+	* @param groupId the group ID
+	* @param name the name
+	* @param description the description
+	* @param start the lower bound of the range of d d m structures
+	* @param end the upper bound of the range of d d m structures (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching d d m structures
 	* @throws SystemException if a system exception occurred
@@ -619,15 +615,15 @@ public interface DDMStructurePersistence extends BasePersistence<DDMStructure> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the first d d m structure in the ordered set where groupId = &#63; and name = &#63; and description = &#63;.
+	* Returns the first d d m structure in the ordered set where groupId = &#63; and name = &#63; and description = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param name the name to search with
-	* @param description the description to search with
+	* @param groupId the group ID
+	* @param name the name
+	* @param description the description
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching d d m structure
 	* @throws com.liferay.portlet.dynamicdatamapping.NoSuchStructureException if a matching d d m structure could not be found
@@ -640,15 +636,15 @@ public interface DDMStructurePersistence extends BasePersistence<DDMStructure> {
 			com.liferay.portlet.dynamicdatamapping.NoSuchStructureException;
 
 	/**
-	* Finds the last d d m structure in the ordered set where groupId = &#63; and name = &#63; and description = &#63;.
+	* Returns the last d d m structure in the ordered set where groupId = &#63; and name = &#63; and description = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param name the name to search with
-	* @param description the description to search with
+	* @param groupId the group ID
+	* @param name the name
+	* @param description the description
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching d d m structure
 	* @throws com.liferay.portlet.dynamicdatamapping.NoSuchStructureException if a matching d d m structure could not be found
@@ -661,16 +657,16 @@ public interface DDMStructurePersistence extends BasePersistence<DDMStructure> {
 			com.liferay.portlet.dynamicdatamapping.NoSuchStructureException;
 
 	/**
-	* Finds the d d m structures before and after the current d d m structure in the ordered set where groupId = &#63; and name = &#63; and description = &#63;.
+	* Returns the d d m structures before and after the current d d m structure in the ordered set where groupId = &#63; and name = &#63; and description = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
 	* @param structureId the primary key of the current d d m structure
-	* @param groupId the group ID to search with
-	* @param name the name to search with
-	* @param description the description to search with
+	* @param groupId the group ID
+	* @param name the name
+	* @param description the description
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next d d m structure
 	* @throws com.liferay.portlet.dynamicdatamapping.NoSuchStructureException if a d d m structure with the primary key could not be found
@@ -684,11 +680,11 @@ public interface DDMStructurePersistence extends BasePersistence<DDMStructure> {
 			com.liferay.portlet.dynamicdatamapping.NoSuchStructureException;
 
 	/**
-	* Filters by the user's permissions and finds all the d d m structures where groupId = &#63; and name = &#63; and description = &#63;.
+	* Returns all the d d m structures that the user has permission to view where groupId = &#63; and name = &#63; and description = &#63;.
 	*
-	* @param groupId the group ID to search with
-	* @param name the name to search with
-	* @param description the description to search with
+	* @param groupId the group ID
+	* @param name the name
+	* @param description the description
 	* @return the matching d d m structures that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -697,17 +693,17 @@ public interface DDMStructurePersistence extends BasePersistence<DDMStructure> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Filters by the user's permissions and finds a range of all the d d m structures where groupId = &#63; and name = &#63; and description = &#63;.
+	* Returns a range of all the d d m structures that the user has permission to view where groupId = &#63; and name = &#63; and description = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param name the name to search with
-	* @param description the description to search with
-	* @param start the lower bound of the range of d d m structures to return
-	* @param end the upper bound of the range of d d m structures to return (not inclusive)
+	* @param groupId the group ID
+	* @param name the name
+	* @param description the description
+	* @param start the lower bound of the range of d d m structures
+	* @param end the upper bound of the range of d d m structures (not inclusive)
 	* @return the range of matching d d m structures that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -717,17 +713,17 @@ public interface DDMStructurePersistence extends BasePersistence<DDMStructure> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Filters by the user's permissions and finds an ordered range of all the d d m structures where groupId = &#63; and name = &#63; and description = &#63;.
+	* Returns an ordered range of all the d d m structures that the user has permissions to view where groupId = &#63; and name = &#63; and description = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param name the name to search with
-	* @param description the description to search with
-	* @param start the lower bound of the range of d d m structures to return
-	* @param end the upper bound of the range of d d m structures to return (not inclusive)
+	* @param groupId the group ID
+	* @param name the name
+	* @param description the description
+	* @param start the lower bound of the range of d d m structures
+	* @param end the upper bound of the range of d d m structures (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching d d m structures that the user has permission to view
 	* @throws SystemException if a system exception occurred
@@ -739,16 +735,12 @@ public interface DDMStructurePersistence extends BasePersistence<DDMStructure> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Filters the d d m structures before and after the current d d m structure in the ordered set where groupId = &#63; and name = &#63; and description = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
-	* </p>
+	* Returns the d d m structures before and after the current d d m structure in the ordered set of d d m structures that the user has permission to view where groupId = &#63; and name = &#63; and description = &#63;.
 	*
 	* @param structureId the primary key of the current d d m structure
-	* @param groupId the group ID to search with
-	* @param name the name to search with
-	* @param description the description to search with
+	* @param groupId the group ID
+	* @param name the name
+	* @param description the description
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next d d m structure
 	* @throws com.liferay.portlet.dynamicdatamapping.NoSuchStructureException if a d d m structure with the primary key could not be found
@@ -762,7 +754,7 @@ public interface DDMStructurePersistence extends BasePersistence<DDMStructure> {
 			com.liferay.portlet.dynamicdatamapping.NoSuchStructureException;
 
 	/**
-	* Finds all the d d m structures.
+	* Returns all the d d m structures.
 	*
 	* @return the d d m structures
 	* @throws SystemException if a system exception occurred
@@ -771,14 +763,14 @@ public interface DDMStructurePersistence extends BasePersistence<DDMStructure> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds a range of all the d d m structures.
+	* Returns a range of all the d d m structures.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of d d m structures to return
-	* @param end the upper bound of the range of d d m structures to return (not inclusive)
+	* @param start the lower bound of the range of d d m structures
+	* @param end the upper bound of the range of d d m structures (not inclusive)
 	* @return the range of d d m structures
 	* @throws SystemException if a system exception occurred
 	*/
@@ -787,14 +779,14 @@ public interface DDMStructurePersistence extends BasePersistence<DDMStructure> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds an ordered range of all the d d m structures.
+	* Returns an ordered range of all the d d m structures.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of d d m structures to return
-	* @param end the upper bound of the range of d d m structures to return (not inclusive)
+	* @param start the lower bound of the range of d d m structures
+	* @param end the upper bound of the range of d d m structures (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of d d m structures
 	* @throws SystemException if a system exception occurred
@@ -807,7 +799,7 @@ public interface DDMStructurePersistence extends BasePersistence<DDMStructure> {
 	/**
 	* Removes all the d d m structures where uuid = &#63; from the database.
 	*
-	* @param uuid the uuid to search with
+	* @param uuid the uuid
 	* @throws SystemException if a system exception occurred
 	*/
 	public void removeByUuid(java.lang.String uuid)
@@ -816,8 +808,8 @@ public interface DDMStructurePersistence extends BasePersistence<DDMStructure> {
 	/**
 	* Removes the d d m structure where uuid = &#63; and groupId = &#63; from the database.
 	*
-	* @param uuid the uuid to search with
-	* @param groupId the group ID to search with
+	* @param uuid the uuid
+	* @param groupId the group ID
 	* @throws SystemException if a system exception occurred
 	*/
 	public void removeByUUID_G(java.lang.String uuid, long groupId)
@@ -827,7 +819,7 @@ public interface DDMStructurePersistence extends BasePersistence<DDMStructure> {
 	/**
 	* Removes all the d d m structures where groupId = &#63; from the database.
 	*
-	* @param groupId the group ID to search with
+	* @param groupId the group ID
 	* @throws SystemException if a system exception occurred
 	*/
 	public void removeByGroupId(long groupId)
@@ -836,7 +828,7 @@ public interface DDMStructurePersistence extends BasePersistence<DDMStructure> {
 	/**
 	* Removes all the d d m structures where classNameId = &#63; from the database.
 	*
-	* @param classNameId the class name ID to search with
+	* @param classNameId the class name ID
 	* @throws SystemException if a system exception occurred
 	*/
 	public void removeByClassNameId(long classNameId)
@@ -845,8 +837,8 @@ public interface DDMStructurePersistence extends BasePersistence<DDMStructure> {
 	/**
 	* Removes the d d m structure where groupId = &#63; and structureKey = &#63; from the database.
 	*
-	* @param groupId the group ID to search with
-	* @param structureKey the structure key to search with
+	* @param groupId the group ID
+	* @param structureKey the structure key
 	* @throws SystemException if a system exception occurred
 	*/
 	public void removeByG_S(long groupId, java.lang.String structureKey)
@@ -856,9 +848,9 @@ public interface DDMStructurePersistence extends BasePersistence<DDMStructure> {
 	/**
 	* Removes all the d d m structures where groupId = &#63; and name = &#63; and description = &#63; from the database.
 	*
-	* @param groupId the group ID to search with
-	* @param name the name to search with
-	* @param description the description to search with
+	* @param groupId the group ID
+	* @param name the name
+	* @param description the description
 	* @throws SystemException if a system exception occurred
 	*/
 	public void removeByG_N_D(long groupId, java.lang.String name,
@@ -874,9 +866,9 @@ public interface DDMStructurePersistence extends BasePersistence<DDMStructure> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Counts all the d d m structures where uuid = &#63;.
+	* Returns the number of d d m structures where uuid = &#63;.
 	*
-	* @param uuid the uuid to search with
+	* @param uuid the uuid
 	* @return the number of matching d d m structures
 	* @throws SystemException if a system exception occurred
 	*/
@@ -884,10 +876,10 @@ public interface DDMStructurePersistence extends BasePersistence<DDMStructure> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Counts all the d d m structures where uuid = &#63; and groupId = &#63;.
+	* Returns the number of d d m structures where uuid = &#63; and groupId = &#63;.
 	*
-	* @param uuid the uuid to search with
-	* @param groupId the group ID to search with
+	* @param uuid the uuid
+	* @param groupId the group ID
 	* @return the number of matching d d m structures
 	* @throws SystemException if a system exception occurred
 	*/
@@ -895,9 +887,9 @@ public interface DDMStructurePersistence extends BasePersistence<DDMStructure> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Counts all the d d m structures where groupId = &#63;.
+	* Returns the number of d d m structures where groupId = &#63;.
 	*
-	* @param groupId the group ID to search with
+	* @param groupId the group ID
 	* @return the number of matching d d m structures
 	* @throws SystemException if a system exception occurred
 	*/
@@ -905,9 +897,9 @@ public interface DDMStructurePersistence extends BasePersistence<DDMStructure> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Filters by the user's permissions and counts all the d d m structures where groupId = &#63;.
+	* Returns the number of d d m structures that the user has permission to view where groupId = &#63;.
 	*
-	* @param groupId the group ID to search with
+	* @param groupId the group ID
 	* @return the number of matching d d m structures that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -915,9 +907,9 @@ public interface DDMStructurePersistence extends BasePersistence<DDMStructure> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Counts all the d d m structures where classNameId = &#63;.
+	* Returns the number of d d m structures where classNameId = &#63;.
 	*
-	* @param classNameId the class name ID to search with
+	* @param classNameId the class name ID
 	* @return the number of matching d d m structures
 	* @throws SystemException if a system exception occurred
 	*/
@@ -925,10 +917,10 @@ public interface DDMStructurePersistence extends BasePersistence<DDMStructure> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Counts all the d d m structures where groupId = &#63; and structureKey = &#63;.
+	* Returns the number of d d m structures where groupId = &#63; and structureKey = &#63;.
 	*
-	* @param groupId the group ID to search with
-	* @param structureKey the structure key to search with
+	* @param groupId the group ID
+	* @param structureKey the structure key
 	* @return the number of matching d d m structures
 	* @throws SystemException if a system exception occurred
 	*/
@@ -936,11 +928,11 @@ public interface DDMStructurePersistence extends BasePersistence<DDMStructure> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Counts all the d d m structures where groupId = &#63; and name = &#63; and description = &#63;.
+	* Returns the number of d d m structures where groupId = &#63; and name = &#63; and description = &#63;.
 	*
-	* @param groupId the group ID to search with
-	* @param name the name to search with
-	* @param description the description to search with
+	* @param groupId the group ID
+	* @param name the name
+	* @param description the description
 	* @return the number of matching d d m structures
 	* @throws SystemException if a system exception occurred
 	*/
@@ -949,11 +941,11 @@ public interface DDMStructurePersistence extends BasePersistence<DDMStructure> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Filters by the user's permissions and counts all the d d m structures where groupId = &#63; and name = &#63; and description = &#63;.
+	* Returns the number of d d m structures that the user has permission to view where groupId = &#63; and name = &#63; and description = &#63;.
 	*
-	* @param groupId the group ID to search with
-	* @param name the name to search with
-	* @param description the description to search with
+	* @param groupId the group ID
+	* @param name the name
+	* @param description the description
 	* @return the number of matching d d m structures that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -962,7 +954,7 @@ public interface DDMStructurePersistence extends BasePersistence<DDMStructure> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Counts all the d d m structures.
+	* Returns the number of d d m structures.
 	*
 	* @return the number of d d m structures
 	* @throws SystemException if a system exception occurred

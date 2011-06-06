@@ -37,7 +37,7 @@ public class ShardWrapper implements Shard {
 	}
 
 	/**
-	* Gets the primary key of this shard.
+	* Returns the primary key of this shard.
 	*
 	* @return the primary key of this shard
 	*/
@@ -46,7 +46,7 @@ public class ShardWrapper implements Shard {
 	}
 
 	/**
-	* Sets the primary key of this shard
+	* Sets the primary key of this shard.
 	*
 	* @param primaryKey the primary key of this shard
 	*/
@@ -55,7 +55,7 @@ public class ShardWrapper implements Shard {
 	}
 
 	/**
-	* Gets the shard ID of this shard.
+	* Returns the shard ID of this shard.
 	*
 	* @return the shard ID of this shard
 	*/
@@ -73,16 +73,16 @@ public class ShardWrapper implements Shard {
 	}
 
 	/**
-	* Gets the class name of the model instance this shard is polymorphically associated with.
+	* Returns the fully qualified class name of this shard.
 	*
-	* @return the class name of the model instance this shard is polymorphically associated with
+	* @return the fully qualified class name of this shard
 	*/
 	public java.lang.String getClassName() {
 		return _shard.getClassName();
 	}
 
 	/**
-	* Gets the class name ID of this shard.
+	* Returns the class name ID of this shard.
 	*
 	* @return the class name ID of this shard
 	*/
@@ -100,7 +100,7 @@ public class ShardWrapper implements Shard {
 	}
 
 	/**
-	* Gets the class p k of this shard.
+	* Returns the class p k of this shard.
 	*
 	* @return the class p k of this shard
 	*/
@@ -118,7 +118,7 @@ public class ShardWrapper implements Shard {
 	}
 
 	/**
-	* Gets the name of this shard.
+	* Returns the name of this shard.
 	*
 	* @return the name of this shard
 	*/

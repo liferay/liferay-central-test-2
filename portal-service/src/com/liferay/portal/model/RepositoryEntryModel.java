@@ -42,21 +42,21 @@ public interface RepositoryEntryModel extends BaseModel<RepositoryEntry> {
 	 */
 
 	/**
-	 * Gets the primary key of this repository entry.
+	 * Returns the primary key of this repository entry.
 	 *
 	 * @return the primary key of this repository entry
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this repository entry
+	 * Sets the primary key of this repository entry.
 	 *
 	 * @param primaryKey the primary key of this repository entry
 	 */
 	public void setPrimaryKey(long primaryKey);
 
 	/**
-	 * Gets the uuid of this repository entry.
+	 * Returns the uuid of this repository entry.
 	 *
 	 * @return the uuid of this repository entry
 	 */
@@ -71,7 +71,7 @@ public interface RepositoryEntryModel extends BaseModel<RepositoryEntry> {
 	public void setUuid(String uuid);
 
 	/**
-	 * Gets the repository entry ID of this repository entry.
+	 * Returns the repository entry ID of this repository entry.
 	 *
 	 * @return the repository entry ID of this repository entry
 	 */
@@ -85,7 +85,7 @@ public interface RepositoryEntryModel extends BaseModel<RepositoryEntry> {
 	public void setRepositoryEntryId(long repositoryEntryId);
 
 	/**
-	 * Gets the group ID of this repository entry.
+	 * Returns the group ID of this repository entry.
 	 *
 	 * @return the group ID of this repository entry
 	 */
@@ -99,7 +99,7 @@ public interface RepositoryEntryModel extends BaseModel<RepositoryEntry> {
 	public void setGroupId(long groupId);
 
 	/**
-	 * Gets the repository ID of this repository entry.
+	 * Returns the repository ID of this repository entry.
 	 *
 	 * @return the repository ID of this repository entry
 	 */
@@ -113,7 +113,7 @@ public interface RepositoryEntryModel extends BaseModel<RepositoryEntry> {
 	public void setRepositoryId(long repositoryId);
 
 	/**
-	 * Gets the mapped ID of this repository entry.
+	 * Returns the mapped ID of this repository entry.
 	 *
 	 * @return the mapped ID of this repository entry
 	 */

@@ -33,7 +33,7 @@ public class AssetTagPropertyLocalServiceWrapper
 	/**
 	* Adds the asset tag property to the database. Also notifies the appropriate model listeners.
 	*
-	* @param assetTagProperty the asset tag property to add
+	* @param assetTagProperty the asset tag property
 	* @return the asset tag property that was added
 	* @throws SystemException if a system exception occurred
 	*/
@@ -57,7 +57,7 @@ public class AssetTagPropertyLocalServiceWrapper
 	/**
 	* Deletes the asset tag property with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param tagPropertyId the primary key of the asset tag property to delete
+	* @param tagPropertyId the primary key of the asset tag property
 	* @throws PortalException if a asset tag property with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -70,7 +70,7 @@ public class AssetTagPropertyLocalServiceWrapper
 	/**
 	* Deletes the asset tag property from the database. Also notifies the appropriate model listeners.
 	*
-	* @param assetTagProperty the asset tag property to delete
+	* @param assetTagProperty the asset tag property
 	* @throws SystemException if a system exception occurred
 	*/
 	public void deleteAssetTagProperty(
@@ -82,7 +82,7 @@ public class AssetTagPropertyLocalServiceWrapper
 	/**
 	* Performs a dynamic query on the database and returns the matching rows.
 	*
-	* @param dynamicQuery the dynamic query to search with
+	* @param dynamicQuery the dynamic query
 	* @return the matching rows
 	* @throws SystemException if a system exception occurred
 	*/
@@ -100,9 +100,9 @@ public class AssetTagPropertyLocalServiceWrapper
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param dynamicQuery the dynamic query to search with
-	* @param start the lower bound of the range of model instances to return
-	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param dynamicQuery the dynamic query
+	* @param start the lower bound of the range of model instances
+	* @param end the upper bound of the range of model instances (not inclusive)
 	* @return the range of matching rows
 	* @throws SystemException if a system exception occurred
 	*/
@@ -121,9 +121,9 @@ public class AssetTagPropertyLocalServiceWrapper
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param dynamicQuery the dynamic query to search with
-	* @param start the lower bound of the range of model instances to return
-	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param dynamicQuery the dynamic query
+	* @param start the lower bound of the range of model instances
+	* @param end the upper bound of the range of model instances (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching rows
 	* @throws SystemException if a system exception occurred
@@ -139,9 +139,9 @@ public class AssetTagPropertyLocalServiceWrapper
 	}
 
 	/**
-	* Counts the number of rows that match the dynamic query.
+	* Returns the number of rows that match the dynamic query.
 	*
-	* @param dynamicQuery the dynamic query to search with
+	* @param dynamicQuery the dynamic query
 	* @return the number of rows that match the dynamic query
 	* @throws SystemException if a system exception occurred
 	*/
@@ -152,9 +152,9 @@ public class AssetTagPropertyLocalServiceWrapper
 	}
 
 	/**
-	* Gets the asset tag property with the primary key.
+	* Returns the asset tag property with the primary key.
 	*
-	* @param tagPropertyId the primary key of the asset tag property to get
+	* @param tagPropertyId the primary key of the asset tag property
 	* @return the asset tag property
 	* @throws PortalException if a asset tag property with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -167,14 +167,14 @@ public class AssetTagPropertyLocalServiceWrapper
 	}
 
 	/**
-	* Gets a range of all the asset tag properties.
+	* Returns a range of all the asset tag properties.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of asset tag properties to return
-	* @param end the upper bound of the range of asset tag properties to return (not inclusive)
+	* @param start the lower bound of the range of asset tag properties
+	* @param end the upper bound of the range of asset tag properties (not inclusive)
 	* @return the range of asset tag properties
 	* @throws SystemException if a system exception occurred
 	*/
@@ -185,7 +185,7 @@ public class AssetTagPropertyLocalServiceWrapper
 	}
 
 	/**
-	* Gets the number of asset tag properties.
+	* Returns the number of asset tag properties.
 	*
 	* @return the number of asset tag properties
 	* @throws SystemException if a system exception occurred
@@ -198,7 +198,7 @@ public class AssetTagPropertyLocalServiceWrapper
 	/**
 	* Updates the asset tag property in the database. Also notifies the appropriate model listeners.
 	*
-	* @param assetTagProperty the asset tag property to update
+	* @param assetTagProperty the asset tag property
 	* @return the asset tag property that was updated
 	* @throws SystemException if a system exception occurred
 	*/
@@ -211,7 +211,7 @@ public class AssetTagPropertyLocalServiceWrapper
 	/**
 	* Updates the asset tag property in the database. Also notifies the appropriate model listeners.
 	*
-	* @param assetTagProperty the asset tag property to update
+	* @param assetTagProperty the asset tag property
 	* @param merge whether to merge the asset tag property with the current session. See {@link com.liferay.portal.service.persistence.BatchSession#update(com.liferay.portal.kernel.dao.orm.Session, com.liferay.portal.model.BaseModel, boolean)} for an explanation.
 	* @return the asset tag property that was updated
 	* @throws SystemException if a system exception occurred
@@ -225,7 +225,7 @@ public class AssetTagPropertyLocalServiceWrapper
 	}
 
 	/**
-	* Gets the Spring bean ID for this bean.
+	* Returns the Spring bean ID for this bean.
 	*
 	* @return the Spring bean ID for this bean
 	*/

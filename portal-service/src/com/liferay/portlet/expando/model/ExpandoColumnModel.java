@@ -41,21 +41,21 @@ public interface ExpandoColumnModel extends BaseModel<ExpandoColumn> {
 	 */
 
 	/**
-	 * Gets the primary key of this expando column.
+	 * Returns the primary key of this expando column.
 	 *
 	 * @return the primary key of this expando column
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this expando column
+	 * Sets the primary key of this expando column.
 	 *
 	 * @param primaryKey the primary key of this expando column
 	 */
 	public void setPrimaryKey(long primaryKey);
 
 	/**
-	 * Gets the column ID of this expando column.
+	 * Returns the column ID of this expando column.
 	 *
 	 * @return the column ID of this expando column
 	 */
@@ -69,7 +69,7 @@ public interface ExpandoColumnModel extends BaseModel<ExpandoColumn> {
 	public void setColumnId(long columnId);
 
 	/**
-	 * Gets the company ID of this expando column.
+	 * Returns the company ID of this expando column.
 	 *
 	 * @return the company ID of this expando column
 	 */
@@ -83,7 +83,7 @@ public interface ExpandoColumnModel extends BaseModel<ExpandoColumn> {
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the table ID of this expando column.
+	 * Returns the table ID of this expando column.
 	 *
 	 * @return the table ID of this expando column
 	 */
@@ -97,7 +97,7 @@ public interface ExpandoColumnModel extends BaseModel<ExpandoColumn> {
 	public void setTableId(long tableId);
 
 	/**
-	 * Gets the name of this expando column.
+	 * Returns the name of this expando column.
 	 *
 	 * @return the name of this expando column
 	 */
@@ -112,7 +112,7 @@ public interface ExpandoColumnModel extends BaseModel<ExpandoColumn> {
 	public void setName(String name);
 
 	/**
-	 * Gets the type of this expando column.
+	 * Returns the type of this expando column.
 	 *
 	 * @return the type of this expando column
 	 */
@@ -126,7 +126,7 @@ public interface ExpandoColumnModel extends BaseModel<ExpandoColumn> {
 	public void setType(int type);
 
 	/**
-	 * Gets the default data of this expando column.
+	 * Returns the default data of this expando column.
 	 *
 	 * @return the default data of this expando column
 	 */
@@ -141,7 +141,7 @@ public interface ExpandoColumnModel extends BaseModel<ExpandoColumn> {
 	public void setDefaultData(String defaultData);
 
 	/**
-	 * Gets the type settings of this expando column.
+	 * Returns the type settings of this expando column.
 	 *
 	 * @return the type settings of this expando column
 	 */

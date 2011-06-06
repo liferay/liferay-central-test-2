@@ -107,7 +107,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 	/**
 	 * Caches the permission in the entity cache if it is enabled.
 	 *
-	 * @param permission the permission to cache
+	 * @param permission the permission
 	 */
 	public void cacheResult(Permission permission) {
 		EntityCacheUtil.putResult(PermissionModelImpl.ENTITY_CACHE_ENABLED,
@@ -125,7 +125,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 	/**
 	 * Caches the permissions in the entity cache if it is enabled.
 	 *
-	 * @param permissions the permissions to cache
+	 * @param permissions the permissions
 	 */
 	public void cacheResult(List<Permission> permissions) {
 		for (Permission permission : permissions) {
@@ -190,7 +190,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 	/**
 	 * Removes the permission with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param primaryKey the primary key of the permission to remove
+	 * @param primaryKey the primary key of the permission
 	 * @return the permission that was removed
 	 * @throws com.liferay.portal.NoSuchModelException if a permission with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -203,7 +203,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 	/**
 	 * Removes the permission with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param permissionId the primary key of the permission to remove
+	 * @param permissionId the primary key of the permission
 	 * @return the permission that was removed
 	 * @throws com.liferay.portal.NoSuchPermissionException if a permission with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -243,7 +243,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 	/**
 	 * Removes the permission from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param permission the permission to remove
+	 * @param permission the permission
 	 * @return the permission that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -389,9 +389,9 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 	}
 
 	/**
-	 * Finds the permission with the primary key or throws a {@link com.liferay.portal.NoSuchModelException} if it could not be found.
+	 * Returns the permission with the primary key or throws a {@link com.liferay.portal.NoSuchModelException} if it could not be found.
 	 *
-	 * @param primaryKey the primary key of the permission to find
+	 * @param primaryKey the primary key of the permission
 	 * @return the permission
 	 * @throws com.liferay.portal.NoSuchModelException if a permission with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -402,9 +402,9 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 	}
 
 	/**
-	 * Finds the permission with the primary key or throws a {@link com.liferay.portal.NoSuchPermissionException} if it could not be found.
+	 * Returns the permission with the primary key or throws a {@link com.liferay.portal.NoSuchPermissionException} if it could not be found.
 	 *
-	 * @param permissionId the primary key of the permission to find
+	 * @param permissionId the primary key of the permission
 	 * @return the permission
 	 * @throws com.liferay.portal.NoSuchPermissionException if a permission with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -426,9 +426,9 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 	}
 
 	/**
-	 * Finds the permission with the primary key or returns <code>null</code> if it could not be found.
+	 * Returns the permission with the primary key or returns <code>null</code> if it could not be found.
 	 *
-	 * @param primaryKey the primary key of the permission to find
+	 * @param primaryKey the primary key of the permission
 	 * @return the permission, or <code>null</code> if a permission with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -438,9 +438,9 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 	}
 
 	/**
-	 * Finds the permission with the primary key or returns <code>null</code> if it could not be found.
+	 * Returns the permission with the primary key or returns <code>null</code> if it could not be found.
 	 *
-	 * @param permissionId the primary key of the permission to find
+	 * @param permissionId the primary key of the permission
 	 * @return the permission, or <code>null</code> if a permission with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -474,9 +474,9 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 	}
 
 	/**
-	 * Finds all the permissions where resourceId = &#63;.
+	 * Returns all the permissions where resourceId = &#63;.
 	 *
-	 * @param resourceId the resource ID to search with
+	 * @param resourceId the resource ID
 	 * @return the matching permissions
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -487,15 +487,15 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 	}
 
 	/**
-	 * Finds a range of all the permissions where resourceId = &#63;.
+	 * Returns a range of all the permissions where resourceId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param resourceId the resource ID to search with
-	 * @param start the lower bound of the range of permissions to return
-	 * @param end the upper bound of the range of permissions to return (not inclusive)
+	 * @param resourceId the resource ID
+	 * @param start the lower bound of the range of permissions
+	 * @param end the upper bound of the range of permissions (not inclusive)
 	 * @return the range of matching permissions
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -505,15 +505,15 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 	}
 
 	/**
-	 * Finds an ordered range of all the permissions where resourceId = &#63;.
+	 * Returns an ordered range of all the permissions where resourceId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param resourceId the resource ID to search with
-	 * @param start the lower bound of the range of permissions to return
-	 * @param end the upper bound of the range of permissions to return (not inclusive)
+	 * @param resourceId the resource ID
+	 * @param start the lower bound of the range of permissions
+	 * @param end the upper bound of the range of permissions (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching permissions
 	 * @throws SystemException if a system exception occurred
@@ -589,13 +589,13 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 	}
 
 	/**
-	 * Finds the first permission in the ordered set where resourceId = &#63;.
+	 * Returns the first permission in the ordered set where resourceId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param resourceId the resource ID to search with
+	 * @param resourceId the resource ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching permission
 	 * @throws com.liferay.portal.NoSuchPermissionException if a matching permission could not be found
@@ -625,13 +625,13 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 	}
 
 	/**
-	 * Finds the last permission in the ordered set where resourceId = &#63;.
+	 * Returns the last permission in the ordered set where resourceId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param resourceId the resource ID to search with
+	 * @param resourceId the resource ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching permission
 	 * @throws com.liferay.portal.NoSuchPermissionException if a matching permission could not be found
@@ -663,14 +663,14 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 	}
 
 	/**
-	 * Finds the permissions before and after the current permission in the ordered set where resourceId = &#63;.
+	 * Returns the permissions before and after the current permission in the ordered set where resourceId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
 	 * @param permissionId the primary key of the current permission
-	 * @param resourceId the resource ID to search with
+	 * @param resourceId the resource ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next permission
 	 * @throws com.liferay.portal.NoSuchPermissionException if a permission with the primary key could not be found
@@ -807,10 +807,10 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 	}
 
 	/**
-	 * Finds the permission where actionId = &#63; and resourceId = &#63; or throws a {@link com.liferay.portal.NoSuchPermissionException} if it could not be found.
+	 * Returns the permission where actionId = &#63; and resourceId = &#63; or throws a {@link com.liferay.portal.NoSuchPermissionException} if it could not be found.
 	 *
-	 * @param actionId the action ID to search with
-	 * @param resourceId the resource ID to search with
+	 * @param actionId the action ID
+	 * @param resourceId the resource ID
 	 * @return the matching permission
 	 * @throws com.liferay.portal.NoSuchPermissionException if a matching permission could not be found
 	 * @throws SystemException if a system exception occurred
@@ -843,10 +843,10 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 	}
 
 	/**
-	 * Finds the permission where actionId = &#63; and resourceId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 * Returns the permission where actionId = &#63; and resourceId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	 *
-	 * @param actionId the action ID to search with
-	 * @param resourceId the resource ID to search with
+	 * @param actionId the action ID
+	 * @param resourceId the resource ID
 	 * @return the matching permission, or <code>null</code> if a matching permission could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -856,10 +856,10 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 	}
 
 	/**
-	 * Finds the permission where actionId = &#63; and resourceId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 * Returns the permission where actionId = &#63; and resourceId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	 *
-	 * @param actionId the action ID to search with
-	 * @param resourceId the resource ID to search with
+	 * @param actionId the action ID
+	 * @param resourceId the resource ID
 	 * @return the matching permission, or <code>null</code> if a matching permission could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -958,7 +958,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 	}
 
 	/**
-	 * Finds all the permissions.
+	 * Returns all the permissions.
 	 *
 	 * @return the permissions
 	 * @throws SystemException if a system exception occurred
@@ -968,14 +968,14 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 	}
 
 	/**
-	 * Finds a range of all the permissions.
+	 * Returns a range of all the permissions.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param start the lower bound of the range of permissions to return
-	 * @param end the upper bound of the range of permissions to return (not inclusive)
+	 * @param start the lower bound of the range of permissions
+	 * @param end the upper bound of the range of permissions (not inclusive)
 	 * @return the range of permissions
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -985,14 +985,14 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 	}
 
 	/**
-	 * Finds an ordered range of all the permissions.
+	 * Returns an ordered range of all the permissions.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param start the lower bound of the range of permissions to return
-	 * @param end the upper bound of the range of permissions to return (not inclusive)
+	 * @param start the lower bound of the range of permissions
+	 * @param end the upper bound of the range of permissions (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of permissions
 	 * @throws SystemException if a system exception occurred
@@ -1069,7 +1069,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 	/**
 	 * Removes all the permissions where resourceId = &#63; from the database.
 	 *
-	 * @param resourceId the resource ID to search with
+	 * @param resourceId the resource ID
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByResourceId(long resourceId) throws SystemException {
@@ -1081,8 +1081,8 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 	/**
 	 * Removes the permission where actionId = &#63; and resourceId = &#63; from the database.
 	 *
-	 * @param actionId the action ID to search with
-	 * @param resourceId the resource ID to search with
+	 * @param actionId the action ID
+	 * @param resourceId the resource ID
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByA_R(String actionId, long resourceId)
@@ -1104,9 +1104,9 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 	}
 
 	/**
-	 * Counts all the permissions where resourceId = &#63;.
+	 * Returns the number of permissions where resourceId = &#63;.
 	 *
-	 * @param resourceId the resource ID to search with
+	 * @param resourceId the resource ID
 	 * @return the number of matching permissions
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1157,10 +1157,10 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 	}
 
 	/**
-	 * Counts all the permissions where actionId = &#63; and resourceId = &#63;.
+	 * Returns the number of permissions where actionId = &#63; and resourceId = &#63;.
 	 *
-	 * @param actionId the action ID to search with
-	 * @param resourceId the resource ID to search with
+	 * @param actionId the action ID
+	 * @param resourceId the resource ID
 	 * @return the number of matching permissions
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1228,7 +1228,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 	}
 
 	/**
-	 * Counts all the permissions.
+	 * Returns the number of permissions.
 	 *
 	 * @return the number of permissions
 	 * @throws SystemException if a system exception occurred
@@ -1268,9 +1268,9 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 	}
 
 	/**
-	 * Gets all the groups associated with the permission.
+	 * Returns all the groups associated with the permission.
 	 *
-	 * @param pk the primary key of the permission to get the associated groups for
+	 * @param pk the primary key of the permission
 	 * @return the groups associated with the permission
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1280,15 +1280,15 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 	}
 
 	/**
-	 * Gets a range of all the groups associated with the permission.
+	 * Returns a range of all the groups associated with the permission.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param pk the primary key of the permission to get the associated groups for
-	 * @param start the lower bound of the range of permissions to return
-	 * @param end the upper bound of the range of permissions to return (not inclusive)
+	 * @param pk the primary key of the permission
+	 * @param start the lower bound of the range of permissions
+	 * @param end the upper bound of the range of permissions (not inclusive)
 	 * @return the range of groups associated with the permission
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1307,15 +1307,15 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 			});
 
 	/**
-	 * Gets an ordered range of all the groups associated with the permission.
+	 * Returns an ordered range of all the groups associated with the permission.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param pk the primary key of the permission to get the associated groups for
-	 * @param start the lower bound of the range of permissions to return
-	 * @param end the upper bound of the range of permissions to return (not inclusive)
+	 * @param pk the primary key of the permission
+	 * @param start the lower bound of the range of permissions
+	 * @param end the upper bound of the range of permissions (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of groups associated with the permission
 	 * @throws SystemException if a system exception occurred
@@ -1386,9 +1386,9 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 			"getGroupsSize", new String[] { Long.class.getName() });
 
 	/**
-	 * Gets the number of groups associated with the permission.
+	 * Returns the number of groups associated with the permission.
 	 *
-	 * @param pk the primary key of the permission to get the number of associated groups for
+	 * @param pk the primary key of the permission
 	 * @return the number of groups associated with the permission
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1676,7 +1676,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 	/**
 	 * Sets the groups associated with the permission, removing and adding associations as necessary. Also notifies the appropriate model listeners and clears the mapping table finder cache.
 	 *
-	 * @param pk the primary key of the permission to set the associations for
+	 * @param pk the primary key of the permission
 	 * @param groupPKs the primary keys of the groups to be associated with the permission
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1707,7 +1707,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 	/**
 	 * Sets the groups associated with the permission, removing and adding associations as necessary. Also notifies the appropriate model listeners and clears the mapping table finder cache.
 	 *
-	 * @param pk the primary key of the permission to set the associations for
+	 * @param pk the primary key of the permission
 	 * @param groups the groups to be associated with the permission
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1733,9 +1733,9 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 	}
 
 	/**
-	 * Gets all the roles associated with the permission.
+	 * Returns all the roles associated with the permission.
 	 *
-	 * @param pk the primary key of the permission to get the associated roles for
+	 * @param pk the primary key of the permission
 	 * @return the roles associated with the permission
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1745,15 +1745,15 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 	}
 
 	/**
-	 * Gets a range of all the roles associated with the permission.
+	 * Returns a range of all the roles associated with the permission.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param pk the primary key of the permission to get the associated roles for
-	 * @param start the lower bound of the range of permissions to return
-	 * @param end the upper bound of the range of permissions to return (not inclusive)
+	 * @param pk the primary key of the permission
+	 * @param start the lower bound of the range of permissions
+	 * @param end the upper bound of the range of permissions (not inclusive)
 	 * @return the range of roles associated with the permission
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1772,15 +1772,15 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 			});
 
 	/**
-	 * Gets an ordered range of all the roles associated with the permission.
+	 * Returns an ordered range of all the roles associated with the permission.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param pk the primary key of the permission to get the associated roles for
-	 * @param start the lower bound of the range of permissions to return
-	 * @param end the upper bound of the range of permissions to return (not inclusive)
+	 * @param pk the primary key of the permission
+	 * @param start the lower bound of the range of permissions
+	 * @param end the upper bound of the range of permissions (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of roles associated with the permission
 	 * @throws SystemException if a system exception occurred
@@ -1851,9 +1851,9 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 			"getRolesSize", new String[] { Long.class.getName() });
 
 	/**
-	 * Gets the number of roles associated with the permission.
+	 * Returns the number of roles associated with the permission.
 	 *
-	 * @param pk the primary key of the permission to get the number of associated roles for
+	 * @param pk the primary key of the permission
 	 * @return the number of roles associated with the permission
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2139,7 +2139,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 	/**
 	 * Sets the roles associated with the permission, removing and adding associations as necessary. Also notifies the appropriate model listeners and clears the mapping table finder cache.
 	 *
-	 * @param pk the primary key of the permission to set the associations for
+	 * @param pk the primary key of the permission
 	 * @param rolePKs the primary keys of the roles to be associated with the permission
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2170,7 +2170,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 	/**
 	 * Sets the roles associated with the permission, removing and adding associations as necessary. Also notifies the appropriate model listeners and clears the mapping table finder cache.
 	 *
-	 * @param pk the primary key of the permission to set the associations for
+	 * @param pk the primary key of the permission
 	 * @param roles the roles to be associated with the permission
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2196,9 +2196,9 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 	}
 
 	/**
-	 * Gets all the users associated with the permission.
+	 * Returns all the users associated with the permission.
 	 *
-	 * @param pk the primary key of the permission to get the associated users for
+	 * @param pk the primary key of the permission
 	 * @return the users associated with the permission
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2208,15 +2208,15 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 	}
 
 	/**
-	 * Gets a range of all the users associated with the permission.
+	 * Returns a range of all the users associated with the permission.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param pk the primary key of the permission to get the associated users for
-	 * @param start the lower bound of the range of permissions to return
-	 * @param end the upper bound of the range of permissions to return (not inclusive)
+	 * @param pk the primary key of the permission
+	 * @param start the lower bound of the range of permissions
+	 * @param end the upper bound of the range of permissions (not inclusive)
 	 * @return the range of users associated with the permission
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2235,15 +2235,15 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 			});
 
 	/**
-	 * Gets an ordered range of all the users associated with the permission.
+	 * Returns an ordered range of all the users associated with the permission.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param pk the primary key of the permission to get the associated users for
-	 * @param start the lower bound of the range of permissions to return
-	 * @param end the upper bound of the range of permissions to return (not inclusive)
+	 * @param pk the primary key of the permission
+	 * @param start the lower bound of the range of permissions
+	 * @param end the upper bound of the range of permissions (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of users associated with the permission
 	 * @throws SystemException if a system exception occurred
@@ -2314,9 +2314,9 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 			"getUsersSize", new String[] { Long.class.getName() });
 
 	/**
-	 * Gets the number of users associated with the permission.
+	 * Returns the number of users associated with the permission.
 	 *
-	 * @param pk the primary key of the permission to get the number of associated users for
+	 * @param pk the primary key of the permission
 	 * @return the number of users associated with the permission
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2602,7 +2602,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 	/**
 	 * Sets the users associated with the permission, removing and adding associations as necessary. Also notifies the appropriate model listeners and clears the mapping table finder cache.
 	 *
-	 * @param pk the primary key of the permission to set the associations for
+	 * @param pk the primary key of the permission
 	 * @param userPKs the primary keys of the users to be associated with the permission
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2633,7 +2633,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 	/**
 	 * Sets the users associated with the permission, removing and adding associations as necessary. Also notifies the appropriate model listeners and clears the mapping table finder cache.
 	 *
-	 * @param pk the primary key of the permission to set the associations for
+	 * @param pk the primary key of the permission
 	 * @param users the users to be associated with the permission
 	 * @throws SystemException if a system exception occurred
 	 */

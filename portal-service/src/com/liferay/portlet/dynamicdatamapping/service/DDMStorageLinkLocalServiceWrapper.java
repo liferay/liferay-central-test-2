@@ -33,7 +33,7 @@ public class DDMStorageLinkLocalServiceWrapper
 	/**
 	* Adds the d d m storage link to the database. Also notifies the appropriate model listeners.
 	*
-	* @param ddmStorageLink the d d m storage link to add
+	* @param ddmStorageLink the d d m storage link
 	* @return the d d m storage link that was added
 	* @throws SystemException if a system exception occurred
 	*/
@@ -57,7 +57,7 @@ public class DDMStorageLinkLocalServiceWrapper
 	/**
 	* Deletes the d d m storage link with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param storageLinkId the primary key of the d d m storage link to delete
+	* @param storageLinkId the primary key of the d d m storage link
 	* @throws PortalException if a d d m storage link with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -70,7 +70,7 @@ public class DDMStorageLinkLocalServiceWrapper
 	/**
 	* Deletes the d d m storage link from the database. Also notifies the appropriate model listeners.
 	*
-	* @param ddmStorageLink the d d m storage link to delete
+	* @param ddmStorageLink the d d m storage link
 	* @throws SystemException if a system exception occurred
 	*/
 	public void deleteDDMStorageLink(
@@ -82,7 +82,7 @@ public class DDMStorageLinkLocalServiceWrapper
 	/**
 	* Performs a dynamic query on the database and returns the matching rows.
 	*
-	* @param dynamicQuery the dynamic query to search with
+	* @param dynamicQuery the dynamic query
 	* @return the matching rows
 	* @throws SystemException if a system exception occurred
 	*/
@@ -100,9 +100,9 @@ public class DDMStorageLinkLocalServiceWrapper
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param dynamicQuery the dynamic query to search with
-	* @param start the lower bound of the range of model instances to return
-	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param dynamicQuery the dynamic query
+	* @param start the lower bound of the range of model instances
+	* @param end the upper bound of the range of model instances (not inclusive)
 	* @return the range of matching rows
 	* @throws SystemException if a system exception occurred
 	*/
@@ -120,9 +120,9 @@ public class DDMStorageLinkLocalServiceWrapper
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param dynamicQuery the dynamic query to search with
-	* @param start the lower bound of the range of model instances to return
-	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param dynamicQuery the dynamic query
+	* @param start the lower bound of the range of model instances
+	* @param end the upper bound of the range of model instances (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching rows
 	* @throws SystemException if a system exception occurred
@@ -138,9 +138,9 @@ public class DDMStorageLinkLocalServiceWrapper
 	}
 
 	/**
-	* Counts the number of rows that match the dynamic query.
+	* Returns the number of rows that match the dynamic query.
 	*
-	* @param dynamicQuery the dynamic query to search with
+	* @param dynamicQuery the dynamic query
 	* @return the number of rows that match the dynamic query
 	* @throws SystemException if a system exception occurred
 	*/
@@ -151,9 +151,9 @@ public class DDMStorageLinkLocalServiceWrapper
 	}
 
 	/**
-	* Gets the d d m storage link with the primary key.
+	* Returns the d d m storage link with the primary key.
 	*
-	* @param storageLinkId the primary key of the d d m storage link to get
+	* @param storageLinkId the primary key of the d d m storage link
 	* @return the d d m storage link
 	* @throws PortalException if a d d m storage link with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -166,14 +166,14 @@ public class DDMStorageLinkLocalServiceWrapper
 	}
 
 	/**
-	* Gets a range of all the d d m storage links.
+	* Returns a range of all the d d m storage links.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of d d m storage links to return
-	* @param end the upper bound of the range of d d m storage links to return (not inclusive)
+	* @param start the lower bound of the range of d d m storage links
+	* @param end the upper bound of the range of d d m storage links (not inclusive)
 	* @return the range of d d m storage links
 	* @throws SystemException if a system exception occurred
 	*/
@@ -184,7 +184,7 @@ public class DDMStorageLinkLocalServiceWrapper
 	}
 
 	/**
-	* Gets the number of d d m storage links.
+	* Returns the number of d d m storage links.
 	*
 	* @return the number of d d m storage links
 	* @throws SystemException if a system exception occurred
@@ -197,7 +197,7 @@ public class DDMStorageLinkLocalServiceWrapper
 	/**
 	* Updates the d d m storage link in the database. Also notifies the appropriate model listeners.
 	*
-	* @param ddmStorageLink the d d m storage link to update
+	* @param ddmStorageLink the d d m storage link
 	* @return the d d m storage link that was updated
 	* @throws SystemException if a system exception occurred
 	*/
@@ -210,7 +210,7 @@ public class DDMStorageLinkLocalServiceWrapper
 	/**
 	* Updates the d d m storage link in the database. Also notifies the appropriate model listeners.
 	*
-	* @param ddmStorageLink the d d m storage link to update
+	* @param ddmStorageLink the d d m storage link
 	* @param merge whether to merge the d d m storage link with the current session. See {@link com.liferay.portal.service.persistence.BatchSession#update(com.liferay.portal.kernel.dao.orm.Session, com.liferay.portal.model.BaseModel, boolean)} for an explanation.
 	* @return the d d m storage link that was updated
 	* @throws SystemException if a system exception occurred
@@ -224,7 +224,7 @@ public class DDMStorageLinkLocalServiceWrapper
 	}
 
 	/**
-	* Gets the Spring bean ID for this bean.
+	* Returns the Spring bean ID for this bean.
 	*
 	* @return the Spring bean ID for this bean
 	*/

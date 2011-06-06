@@ -50,21 +50,21 @@ public interface WikiPageModel extends BaseModel<WikiPage>, GroupedModel,
 	 */
 
 	/**
-	 * Gets the primary key of this wiki page.
+	 * Returns the primary key of this wiki page.
 	 *
 	 * @return the primary key of this wiki page
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this wiki page
+	 * Sets the primary key of this wiki page.
 	 *
 	 * @param primaryKey the primary key of this wiki page
 	 */
 	public void setPrimaryKey(long primaryKey);
 
 	/**
-	 * Gets the uuid of this wiki page.
+	 * Returns the uuid of this wiki page.
 	 *
 	 * @return the uuid of this wiki page
 	 */
@@ -79,7 +79,7 @@ public interface WikiPageModel extends BaseModel<WikiPage>, GroupedModel,
 	public void setUuid(String uuid);
 
 	/**
-	 * Gets the page ID of this wiki page.
+	 * Returns the page ID of this wiki page.
 	 *
 	 * @return the page ID of this wiki page
 	 */
@@ -93,7 +93,7 @@ public interface WikiPageModel extends BaseModel<WikiPage>, GroupedModel,
 	public void setPageId(long pageId);
 
 	/**
-	 * Gets the resource prim key of this wiki page.
+	 * Returns the resource prim key of this wiki page.
 	 *
 	 * @return the resource prim key of this wiki page
 	 */
@@ -109,7 +109,7 @@ public interface WikiPageModel extends BaseModel<WikiPage>, GroupedModel,
 	public boolean isResourceMain();
 
 	/**
-	 * Gets the group ID of this wiki page.
+	 * Returns the group ID of this wiki page.
 	 *
 	 * @return the group ID of this wiki page
 	 */
@@ -123,7 +123,7 @@ public interface WikiPageModel extends BaseModel<WikiPage>, GroupedModel,
 	public void setGroupId(long groupId);
 
 	/**
-	 * Gets the company ID of this wiki page.
+	 * Returns the company ID of this wiki page.
 	 *
 	 * @return the company ID of this wiki page
 	 */
@@ -137,7 +137,7 @@ public interface WikiPageModel extends BaseModel<WikiPage>, GroupedModel,
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the user ID of this wiki page.
+	 * Returns the user ID of this wiki page.
 	 *
 	 * @return the user ID of this wiki page
 	 */
@@ -151,7 +151,7 @@ public interface WikiPageModel extends BaseModel<WikiPage>, GroupedModel,
 	public void setUserId(long userId);
 
 	/**
-	 * Gets the user uuid of this wiki page.
+	 * Returns the user uuid of this wiki page.
 	 *
 	 * @return the user uuid of this wiki page
 	 * @throws SystemException if a system exception occurred
@@ -166,7 +166,7 @@ public interface WikiPageModel extends BaseModel<WikiPage>, GroupedModel,
 	public void setUserUuid(String userUuid);
 
 	/**
-	 * Gets the user name of this wiki page.
+	 * Returns the user name of this wiki page.
 	 *
 	 * @return the user name of this wiki page
 	 */
@@ -181,7 +181,7 @@ public interface WikiPageModel extends BaseModel<WikiPage>, GroupedModel,
 	public void setUserName(String userName);
 
 	/**
-	 * Gets the create date of this wiki page.
+	 * Returns the create date of this wiki page.
 	 *
 	 * @return the create date of this wiki page
 	 */
@@ -195,7 +195,7 @@ public interface WikiPageModel extends BaseModel<WikiPage>, GroupedModel,
 	public void setCreateDate(Date createDate);
 
 	/**
-	 * Gets the modified date of this wiki page.
+	 * Returns the modified date of this wiki page.
 	 *
 	 * @return the modified date of this wiki page
 	 */
@@ -209,7 +209,7 @@ public interface WikiPageModel extends BaseModel<WikiPage>, GroupedModel,
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
-	 * Gets the node ID of this wiki page.
+	 * Returns the node ID of this wiki page.
 	 *
 	 * @return the node ID of this wiki page
 	 */
@@ -223,7 +223,7 @@ public interface WikiPageModel extends BaseModel<WikiPage>, GroupedModel,
 	public void setNodeId(long nodeId);
 
 	/**
-	 * Gets the title of this wiki page.
+	 * Returns the title of this wiki page.
 	 *
 	 * @return the title of this wiki page
 	 */
@@ -238,7 +238,7 @@ public interface WikiPageModel extends BaseModel<WikiPage>, GroupedModel,
 	public void setTitle(String title);
 
 	/**
-	 * Gets the version of this wiki page.
+	 * Returns the version of this wiki page.
 	 *
 	 * @return the version of this wiki page
 	 */
@@ -252,7 +252,7 @@ public interface WikiPageModel extends BaseModel<WikiPage>, GroupedModel,
 	public void setVersion(double version);
 
 	/**
-	 * Gets the minor edit of this wiki page.
+	 * Returns the minor edit of this wiki page.
 	 *
 	 * @return the minor edit of this wiki page
 	 */
@@ -273,7 +273,7 @@ public interface WikiPageModel extends BaseModel<WikiPage>, GroupedModel,
 	public void setMinorEdit(boolean minorEdit);
 
 	/**
-	 * Gets the content of this wiki page.
+	 * Returns the content of this wiki page.
 	 *
 	 * @return the content of this wiki page
 	 */
@@ -288,7 +288,7 @@ public interface WikiPageModel extends BaseModel<WikiPage>, GroupedModel,
 	public void setContent(String content);
 
 	/**
-	 * Gets the summary of this wiki page.
+	 * Returns the summary of this wiki page.
 	 *
 	 * @return the summary of this wiki page
 	 */
@@ -303,7 +303,7 @@ public interface WikiPageModel extends BaseModel<WikiPage>, GroupedModel,
 	public void setSummary(String summary);
 
 	/**
-	 * Gets the format of this wiki page.
+	 * Returns the format of this wiki page.
 	 *
 	 * @return the format of this wiki page
 	 */
@@ -318,7 +318,7 @@ public interface WikiPageModel extends BaseModel<WikiPage>, GroupedModel,
 	public void setFormat(String format);
 
 	/**
-	 * Gets the head of this wiki page.
+	 * Returns the head of this wiki page.
 	 *
 	 * @return the head of this wiki page
 	 */
@@ -339,7 +339,7 @@ public interface WikiPageModel extends BaseModel<WikiPage>, GroupedModel,
 	public void setHead(boolean head);
 
 	/**
-	 * Gets the parent title of this wiki page.
+	 * Returns the parent title of this wiki page.
 	 *
 	 * @return the parent title of this wiki page
 	 */
@@ -354,7 +354,7 @@ public interface WikiPageModel extends BaseModel<WikiPage>, GroupedModel,
 	public void setParentTitle(String parentTitle);
 
 	/**
-	 * Gets the redirect title of this wiki page.
+	 * Returns the redirect title of this wiki page.
 	 *
 	 * @return the redirect title of this wiki page
 	 */
@@ -369,7 +369,7 @@ public interface WikiPageModel extends BaseModel<WikiPage>, GroupedModel,
 	public void setRedirectTitle(String redirectTitle);
 
 	/**
-	 * Gets the status of this wiki page.
+	 * Returns the status of this wiki page.
 	 *
 	 * @return the status of this wiki page
 	 */
@@ -383,7 +383,7 @@ public interface WikiPageModel extends BaseModel<WikiPage>, GroupedModel,
 	public void setStatus(int status);
 
 	/**
-	 * Gets the status by user ID of this wiki page.
+	 * Returns the status by user ID of this wiki page.
 	 *
 	 * @return the status by user ID of this wiki page
 	 */
@@ -397,7 +397,7 @@ public interface WikiPageModel extends BaseModel<WikiPage>, GroupedModel,
 	public void setStatusByUserId(long statusByUserId);
 
 	/**
-	 * Gets the status by user uuid of this wiki page.
+	 * Returns the status by user uuid of this wiki page.
 	 *
 	 * @return the status by user uuid of this wiki page
 	 * @throws SystemException if a system exception occurred
@@ -412,7 +412,7 @@ public interface WikiPageModel extends BaseModel<WikiPage>, GroupedModel,
 	public void setStatusByUserUuid(String statusByUserUuid);
 
 	/**
-	 * Gets the status by user name of this wiki page.
+	 * Returns the status by user name of this wiki page.
 	 *
 	 * @return the status by user name of this wiki page
 	 */
@@ -427,7 +427,7 @@ public interface WikiPageModel extends BaseModel<WikiPage>, GroupedModel,
 	public void setStatusByUserName(String statusByUserName);
 
 	/**
-	 * Gets the status date of this wiki page.
+	 * Returns the status date of this wiki page.
 	 *
 	 * @return the status date of this wiki page
 	 */
@@ -441,7 +441,7 @@ public interface WikiPageModel extends BaseModel<WikiPage>, GroupedModel,
 	public void setStatusDate(Date statusDate);
 
 	/**
-	 * @deprecated {@link #isApproved}
+	 * @deprecated Renamed to {@link #isApproved()}
 	 */
 	public boolean getApproved();
 

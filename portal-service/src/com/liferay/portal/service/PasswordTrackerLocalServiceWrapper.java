@@ -33,7 +33,7 @@ public class PasswordTrackerLocalServiceWrapper
 	/**
 	* Adds the password tracker to the database. Also notifies the appropriate model listeners.
 	*
-	* @param passwordTracker the password tracker to add
+	* @param passwordTracker the password tracker
 	* @return the password tracker that was added
 	* @throws SystemException if a system exception occurred
 	*/
@@ -57,7 +57,7 @@ public class PasswordTrackerLocalServiceWrapper
 	/**
 	* Deletes the password tracker with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param passwordTrackerId the primary key of the password tracker to delete
+	* @param passwordTrackerId the primary key of the password tracker
 	* @throws PortalException if a password tracker with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -70,7 +70,7 @@ public class PasswordTrackerLocalServiceWrapper
 	/**
 	* Deletes the password tracker from the database. Also notifies the appropriate model listeners.
 	*
-	* @param passwordTracker the password tracker to delete
+	* @param passwordTracker the password tracker
 	* @throws SystemException if a system exception occurred
 	*/
 	public void deletePasswordTracker(
@@ -82,7 +82,7 @@ public class PasswordTrackerLocalServiceWrapper
 	/**
 	* Performs a dynamic query on the database and returns the matching rows.
 	*
-	* @param dynamicQuery the dynamic query to search with
+	* @param dynamicQuery the dynamic query
 	* @return the matching rows
 	* @throws SystemException if a system exception occurred
 	*/
@@ -100,9 +100,9 @@ public class PasswordTrackerLocalServiceWrapper
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param dynamicQuery the dynamic query to search with
-	* @param start the lower bound of the range of model instances to return
-	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param dynamicQuery the dynamic query
+	* @param start the lower bound of the range of model instances
+	* @param end the upper bound of the range of model instances (not inclusive)
 	* @return the range of matching rows
 	* @throws SystemException if a system exception occurred
 	*/
@@ -121,9 +121,9 @@ public class PasswordTrackerLocalServiceWrapper
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param dynamicQuery the dynamic query to search with
-	* @param start the lower bound of the range of model instances to return
-	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param dynamicQuery the dynamic query
+	* @param start the lower bound of the range of model instances
+	* @param end the upper bound of the range of model instances (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching rows
 	* @throws SystemException if a system exception occurred
@@ -139,9 +139,9 @@ public class PasswordTrackerLocalServiceWrapper
 	}
 
 	/**
-	* Counts the number of rows that match the dynamic query.
+	* Returns the number of rows that match the dynamic query.
 	*
-	* @param dynamicQuery the dynamic query to search with
+	* @param dynamicQuery the dynamic query
 	* @return the number of rows that match the dynamic query
 	* @throws SystemException if a system exception occurred
 	*/
@@ -152,9 +152,9 @@ public class PasswordTrackerLocalServiceWrapper
 	}
 
 	/**
-	* Gets the password tracker with the primary key.
+	* Returns the password tracker with the primary key.
 	*
-	* @param passwordTrackerId the primary key of the password tracker to get
+	* @param passwordTrackerId the primary key of the password tracker
 	* @return the password tracker
 	* @throws PortalException if a password tracker with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -167,14 +167,14 @@ public class PasswordTrackerLocalServiceWrapper
 	}
 
 	/**
-	* Gets a range of all the password trackers.
+	* Returns a range of all the password trackers.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of password trackers to return
-	* @param end the upper bound of the range of password trackers to return (not inclusive)
+	* @param start the lower bound of the range of password trackers
+	* @param end the upper bound of the range of password trackers (not inclusive)
 	* @return the range of password trackers
 	* @throws SystemException if a system exception occurred
 	*/
@@ -185,7 +185,7 @@ public class PasswordTrackerLocalServiceWrapper
 	}
 
 	/**
-	* Gets the number of password trackers.
+	* Returns the number of password trackers.
 	*
 	* @return the number of password trackers
 	* @throws SystemException if a system exception occurred
@@ -198,7 +198,7 @@ public class PasswordTrackerLocalServiceWrapper
 	/**
 	* Updates the password tracker in the database. Also notifies the appropriate model listeners.
 	*
-	* @param passwordTracker the password tracker to update
+	* @param passwordTracker the password tracker
 	* @return the password tracker that was updated
 	* @throws SystemException if a system exception occurred
 	*/
@@ -211,7 +211,7 @@ public class PasswordTrackerLocalServiceWrapper
 	/**
 	* Updates the password tracker in the database. Also notifies the appropriate model listeners.
 	*
-	* @param passwordTracker the password tracker to update
+	* @param passwordTracker the password tracker
 	* @param merge whether to merge the password tracker with the current session. See {@link com.liferay.portal.service.persistence.BatchSession#update(com.liferay.portal.kernel.dao.orm.Session, com.liferay.portal.model.BaseModel, boolean)} for an explanation.
 	* @return the password tracker that was updated
 	* @throws SystemException if a system exception occurred
@@ -224,7 +224,7 @@ public class PasswordTrackerLocalServiceWrapper
 	}
 
 	/**
-	* Gets the Spring bean ID for this bean.
+	* Returns the Spring bean ID for this bean.
 	*
 	* @return the Spring bean ID for this bean
 	*/

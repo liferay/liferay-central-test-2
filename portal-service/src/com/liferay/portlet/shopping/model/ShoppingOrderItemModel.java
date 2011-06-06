@@ -45,21 +45,21 @@ public interface ShoppingOrderItemModel extends BaseModel<ShoppingOrderItem> {
 	 */
 
 	/**
-	 * Gets the primary key of this shopping order item.
+	 * Returns the primary key of this shopping order item.
 	 *
 	 * @return the primary key of this shopping order item
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this shopping order item
+	 * Sets the primary key of this shopping order item.
 	 *
 	 * @param primaryKey the primary key of this shopping order item
 	 */
 	public void setPrimaryKey(long primaryKey);
 
 	/**
-	 * Gets the order item ID of this shopping order item.
+	 * Returns the order item ID of this shopping order item.
 	 *
 	 * @return the order item ID of this shopping order item
 	 */
@@ -73,7 +73,7 @@ public interface ShoppingOrderItemModel extends BaseModel<ShoppingOrderItem> {
 	public void setOrderItemId(long orderItemId);
 
 	/**
-	 * Gets the order ID of this shopping order item.
+	 * Returns the order ID of this shopping order item.
 	 *
 	 * @return the order ID of this shopping order item
 	 */
@@ -87,7 +87,7 @@ public interface ShoppingOrderItemModel extends BaseModel<ShoppingOrderItem> {
 	public void setOrderId(long orderId);
 
 	/**
-	 * Gets the item ID of this shopping order item.
+	 * Returns the item ID of this shopping order item.
 	 *
 	 * @return the item ID of this shopping order item
 	 */
@@ -102,7 +102,7 @@ public interface ShoppingOrderItemModel extends BaseModel<ShoppingOrderItem> {
 	public void setItemId(String itemId);
 
 	/**
-	 * Gets the sku of this shopping order item.
+	 * Returns the sku of this shopping order item.
 	 *
 	 * @return the sku of this shopping order item
 	 */
@@ -117,7 +117,7 @@ public interface ShoppingOrderItemModel extends BaseModel<ShoppingOrderItem> {
 	public void setSku(String sku);
 
 	/**
-	 * Gets the name of this shopping order item.
+	 * Returns the name of this shopping order item.
 	 *
 	 * @return the name of this shopping order item
 	 */
@@ -132,7 +132,7 @@ public interface ShoppingOrderItemModel extends BaseModel<ShoppingOrderItem> {
 	public void setName(String name);
 
 	/**
-	 * Gets the description of this shopping order item.
+	 * Returns the description of this shopping order item.
 	 *
 	 * @return the description of this shopping order item
 	 */
@@ -147,7 +147,7 @@ public interface ShoppingOrderItemModel extends BaseModel<ShoppingOrderItem> {
 	public void setDescription(String description);
 
 	/**
-	 * Gets the properties of this shopping order item.
+	 * Returns the properties of this shopping order item.
 	 *
 	 * @return the properties of this shopping order item
 	 */
@@ -162,7 +162,7 @@ public interface ShoppingOrderItemModel extends BaseModel<ShoppingOrderItem> {
 	public void setProperties(String properties);
 
 	/**
-	 * Gets the price of this shopping order item.
+	 * Returns the price of this shopping order item.
 	 *
 	 * @return the price of this shopping order item
 	 */
@@ -176,7 +176,7 @@ public interface ShoppingOrderItemModel extends BaseModel<ShoppingOrderItem> {
 	public void setPrice(double price);
 
 	/**
-	 * Gets the quantity of this shopping order item.
+	 * Returns the quantity of this shopping order item.
 	 *
 	 * @return the quantity of this shopping order item
 	 */
@@ -190,7 +190,7 @@ public interface ShoppingOrderItemModel extends BaseModel<ShoppingOrderItem> {
 	public void setQuantity(int quantity);
 
 	/**
-	 * Gets the shipped date of this shopping order item.
+	 * Returns the shipped date of this shopping order item.
 	 *
 	 * @return the shipped date of this shopping order item
 	 */

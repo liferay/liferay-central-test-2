@@ -37,7 +37,7 @@ public class ExpandoRowWrapper implements ExpandoRow {
 	}
 
 	/**
-	* Gets the primary key of this expando row.
+	* Returns the primary key of this expando row.
 	*
 	* @return the primary key of this expando row
 	*/
@@ -46,7 +46,7 @@ public class ExpandoRowWrapper implements ExpandoRow {
 	}
 
 	/**
-	* Sets the primary key of this expando row
+	* Sets the primary key of this expando row.
 	*
 	* @param primaryKey the primary key of this expando row
 	*/
@@ -55,7 +55,7 @@ public class ExpandoRowWrapper implements ExpandoRow {
 	}
 
 	/**
-	* Gets the row ID of this expando row.
+	* Returns the row ID of this expando row.
 	*
 	* @return the row ID of this expando row
 	*/
@@ -73,7 +73,7 @@ public class ExpandoRowWrapper implements ExpandoRow {
 	}
 
 	/**
-	* Gets the company ID of this expando row.
+	* Returns the company ID of this expando row.
 	*
 	* @return the company ID of this expando row
 	*/
@@ -91,7 +91,7 @@ public class ExpandoRowWrapper implements ExpandoRow {
 	}
 
 	/**
-	* Gets the table ID of this expando row.
+	* Returns the table ID of this expando row.
 	*
 	* @return the table ID of this expando row
 	*/
@@ -109,7 +109,7 @@ public class ExpandoRowWrapper implements ExpandoRow {
 	}
 
 	/**
-	* Gets the class p k of this expando row.
+	* Returns the class p k of this expando row.
 	*
 	* @return the class p k of this expando row
 	*/

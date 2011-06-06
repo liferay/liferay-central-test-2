@@ -46,21 +46,21 @@ public interface WorkflowInstanceLinkModel extends AttachedModel,
 	 */
 
 	/**
-	 * Gets the primary key of this workflow instance link.
+	 * Returns the primary key of this workflow instance link.
 	 *
 	 * @return the primary key of this workflow instance link
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this workflow instance link
+	 * Sets the primary key of this workflow instance link.
 	 *
 	 * @param primaryKey the primary key of this workflow instance link
 	 */
 	public void setPrimaryKey(long primaryKey);
 
 	/**
-	 * Gets the workflow instance link ID of this workflow instance link.
+	 * Returns the workflow instance link ID of this workflow instance link.
 	 *
 	 * @return the workflow instance link ID of this workflow instance link
 	 */
@@ -74,7 +74,7 @@ public interface WorkflowInstanceLinkModel extends AttachedModel,
 	public void setWorkflowInstanceLinkId(long workflowInstanceLinkId);
 
 	/**
-	 * Gets the group ID of this workflow instance link.
+	 * Returns the group ID of this workflow instance link.
 	 *
 	 * @return the group ID of this workflow instance link
 	 */
@@ -88,7 +88,7 @@ public interface WorkflowInstanceLinkModel extends AttachedModel,
 	public void setGroupId(long groupId);
 
 	/**
-	 * Gets the company ID of this workflow instance link.
+	 * Returns the company ID of this workflow instance link.
 	 *
 	 * @return the company ID of this workflow instance link
 	 */
@@ -102,7 +102,7 @@ public interface WorkflowInstanceLinkModel extends AttachedModel,
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the user ID of this workflow instance link.
+	 * Returns the user ID of this workflow instance link.
 	 *
 	 * @return the user ID of this workflow instance link
 	 */
@@ -116,7 +116,7 @@ public interface WorkflowInstanceLinkModel extends AttachedModel,
 	public void setUserId(long userId);
 
 	/**
-	 * Gets the user uuid of this workflow instance link.
+	 * Returns the user uuid of this workflow instance link.
 	 *
 	 * @return the user uuid of this workflow instance link
 	 * @throws SystemException if a system exception occurred
@@ -131,7 +131,7 @@ public interface WorkflowInstanceLinkModel extends AttachedModel,
 	public void setUserUuid(String userUuid);
 
 	/**
-	 * Gets the user name of this workflow instance link.
+	 * Returns the user name of this workflow instance link.
 	 *
 	 * @return the user name of this workflow instance link
 	 */
@@ -146,7 +146,7 @@ public interface WorkflowInstanceLinkModel extends AttachedModel,
 	public void setUserName(String userName);
 
 	/**
-	 * Gets the create date of this workflow instance link.
+	 * Returns the create date of this workflow instance link.
 	 *
 	 * @return the create date of this workflow instance link
 	 */
@@ -160,7 +160,7 @@ public interface WorkflowInstanceLinkModel extends AttachedModel,
 	public void setCreateDate(Date createDate);
 
 	/**
-	 * Gets the modified date of this workflow instance link.
+	 * Returns the modified date of this workflow instance link.
 	 *
 	 * @return the modified date of this workflow instance link
 	 */
@@ -174,14 +174,14 @@ public interface WorkflowInstanceLinkModel extends AttachedModel,
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
-	 * Gets the class name of the model instance this workflow instance link is polymorphically associated with.
+	 * Returns the fully qualified class name of this workflow instance link.
 	 *
-	 * @return the class name of the model instance this workflow instance link is polymorphically associated with
+	 * @return the fully qualified class name of this workflow instance link
 	 */
 	public String getClassName();
 
 	/**
-	 * Gets the class name ID of this workflow instance link.
+	 * Returns the class name ID of this workflow instance link.
 	 *
 	 * @return the class name ID of this workflow instance link
 	 */
@@ -195,7 +195,7 @@ public interface WorkflowInstanceLinkModel extends AttachedModel,
 	public void setClassNameId(long classNameId);
 
 	/**
-	 * Gets the class p k of this workflow instance link.
+	 * Returns the class p k of this workflow instance link.
 	 *
 	 * @return the class p k of this workflow instance link
 	 */
@@ -209,7 +209,7 @@ public interface WorkflowInstanceLinkModel extends AttachedModel,
 	public void setClassPK(long classPK);
 
 	/**
-	 * Gets the workflow instance ID of this workflow instance link.
+	 * Returns the workflow instance ID of this workflow instance link.
 	 *
 	 * @return the workflow instance ID of this workflow instance link
 	 */

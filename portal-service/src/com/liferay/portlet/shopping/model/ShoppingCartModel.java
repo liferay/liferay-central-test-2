@@ -47,21 +47,21 @@ public interface ShoppingCartModel extends BaseModel<ShoppingCart>, GroupedModel
 	 */
 
 	/**
-	 * Gets the primary key of this shopping cart.
+	 * Returns the primary key of this shopping cart.
 	 *
 	 * @return the primary key of this shopping cart
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this shopping cart
+	 * Sets the primary key of this shopping cart.
 	 *
 	 * @param primaryKey the primary key of this shopping cart
 	 */
 	public void setPrimaryKey(long primaryKey);
 
 	/**
-	 * Gets the cart ID of this shopping cart.
+	 * Returns the cart ID of this shopping cart.
 	 *
 	 * @return the cart ID of this shopping cart
 	 */
@@ -75,7 +75,7 @@ public interface ShoppingCartModel extends BaseModel<ShoppingCart>, GroupedModel
 	public void setCartId(long cartId);
 
 	/**
-	 * Gets the group ID of this shopping cart.
+	 * Returns the group ID of this shopping cart.
 	 *
 	 * @return the group ID of this shopping cart
 	 */
@@ -89,7 +89,7 @@ public interface ShoppingCartModel extends BaseModel<ShoppingCart>, GroupedModel
 	public void setGroupId(long groupId);
 
 	/**
-	 * Gets the company ID of this shopping cart.
+	 * Returns the company ID of this shopping cart.
 	 *
 	 * @return the company ID of this shopping cart
 	 */
@@ -103,7 +103,7 @@ public interface ShoppingCartModel extends BaseModel<ShoppingCart>, GroupedModel
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the user ID of this shopping cart.
+	 * Returns the user ID of this shopping cart.
 	 *
 	 * @return the user ID of this shopping cart
 	 */
@@ -117,7 +117,7 @@ public interface ShoppingCartModel extends BaseModel<ShoppingCart>, GroupedModel
 	public void setUserId(long userId);
 
 	/**
-	 * Gets the user uuid of this shopping cart.
+	 * Returns the user uuid of this shopping cart.
 	 *
 	 * @return the user uuid of this shopping cart
 	 * @throws SystemException if a system exception occurred
@@ -132,7 +132,7 @@ public interface ShoppingCartModel extends BaseModel<ShoppingCart>, GroupedModel
 	public void setUserUuid(String userUuid);
 
 	/**
-	 * Gets the user name of this shopping cart.
+	 * Returns the user name of this shopping cart.
 	 *
 	 * @return the user name of this shopping cart
 	 */
@@ -147,7 +147,7 @@ public interface ShoppingCartModel extends BaseModel<ShoppingCart>, GroupedModel
 	public void setUserName(String userName);
 
 	/**
-	 * Gets the create date of this shopping cart.
+	 * Returns the create date of this shopping cart.
 	 *
 	 * @return the create date of this shopping cart
 	 */
@@ -161,7 +161,7 @@ public interface ShoppingCartModel extends BaseModel<ShoppingCart>, GroupedModel
 	public void setCreateDate(Date createDate);
 
 	/**
-	 * Gets the modified date of this shopping cart.
+	 * Returns the modified date of this shopping cart.
 	 *
 	 * @return the modified date of this shopping cart
 	 */
@@ -175,7 +175,7 @@ public interface ShoppingCartModel extends BaseModel<ShoppingCart>, GroupedModel
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
-	 * Gets the item IDs of this shopping cart.
+	 * Returns the item IDs of this shopping cart.
 	 *
 	 * @return the item IDs of this shopping cart
 	 */
@@ -190,7 +190,7 @@ public interface ShoppingCartModel extends BaseModel<ShoppingCart>, GroupedModel
 	public void setItemIds(String itemIds);
 
 	/**
-	 * Gets the coupon codes of this shopping cart.
+	 * Returns the coupon codes of this shopping cart.
 	 *
 	 * @return the coupon codes of this shopping cart
 	 */
@@ -205,7 +205,7 @@ public interface ShoppingCartModel extends BaseModel<ShoppingCart>, GroupedModel
 	public void setCouponCodes(String couponCodes);
 
 	/**
-	 * Gets the alt shipping of this shopping cart.
+	 * Returns the alt shipping of this shopping cart.
 	 *
 	 * @return the alt shipping of this shopping cart
 	 */
@@ -219,7 +219,7 @@ public interface ShoppingCartModel extends BaseModel<ShoppingCart>, GroupedModel
 	public void setAltShipping(int altShipping);
 
 	/**
-	 * Gets the insure of this shopping cart.
+	 * Returns the insure of this shopping cart.
 	 *
 	 * @return the insure of this shopping cart
 	 */

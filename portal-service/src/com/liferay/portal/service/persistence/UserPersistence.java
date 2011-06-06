@@ -39,14 +39,14 @@ public interface UserPersistence extends BasePersistence<User> {
 	/**
 	* Caches the user in the entity cache if it is enabled.
 	*
-	* @param user the user to cache
+	* @param user the user
 	*/
 	public void cacheResult(com.liferay.portal.model.User user);
 
 	/**
 	* Caches the users in the entity cache if it is enabled.
 	*
-	* @param users the users to cache
+	* @param users the users
 	*/
 	public void cacheResult(java.util.List<com.liferay.portal.model.User> users);
 
@@ -61,7 +61,7 @@ public interface UserPersistence extends BasePersistence<User> {
 	/**
 	* Removes the user with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param userId the primary key of the user to remove
+	* @param userId the primary key of the user
 	* @return the user that was removed
 	* @throws com.liferay.portal.NoSuchUserException if a user with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -75,9 +75,9 @@ public interface UserPersistence extends BasePersistence<User> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the user with the primary key or throws a {@link com.liferay.portal.NoSuchUserException} if it could not be found.
+	* Returns the user with the primary key or throws a {@link com.liferay.portal.NoSuchUserException} if it could not be found.
 	*
-	* @param userId the primary key of the user to find
+	* @param userId the primary key of the user
 	* @return the user
 	* @throws com.liferay.portal.NoSuchUserException if a user with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -87,9 +87,9 @@ public interface UserPersistence extends BasePersistence<User> {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the user with the primary key or returns <code>null</code> if it could not be found.
+	* Returns the user with the primary key or returns <code>null</code> if it could not be found.
 	*
-	* @param userId the primary key of the user to find
+	* @param userId the primary key of the user
 	* @return the user, or <code>null</code> if a user with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -97,9 +97,9 @@ public interface UserPersistence extends BasePersistence<User> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds all the users where uuid = &#63;.
+	* Returns all the users where uuid = &#63;.
 	*
-	* @param uuid the uuid to search with
+	* @param uuid the uuid
 	* @return the matching users
 	* @throws SystemException if a system exception occurred
 	*/
@@ -108,15 +108,15 @@ public interface UserPersistence extends BasePersistence<User> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds a range of all the users where uuid = &#63;.
+	* Returns a range of all the users where uuid = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param uuid the uuid to search with
-	* @param start the lower bound of the range of users to return
-	* @param end the upper bound of the range of users to return (not inclusive)
+	* @param uuid the uuid
+	* @param start the lower bound of the range of users
+	* @param end the upper bound of the range of users (not inclusive)
 	* @return the range of matching users
 	* @throws SystemException if a system exception occurred
 	*/
@@ -125,15 +125,15 @@ public interface UserPersistence extends BasePersistence<User> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds an ordered range of all the users where uuid = &#63;.
+	* Returns an ordered range of all the users where uuid = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param uuid the uuid to search with
-	* @param start the lower bound of the range of users to return
-	* @param end the upper bound of the range of users to return (not inclusive)
+	* @param uuid the uuid
+	* @param start the lower bound of the range of users
+	* @param end the upper bound of the range of users (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching users
 	* @throws SystemException if a system exception occurred
@@ -144,13 +144,13 @@ public interface UserPersistence extends BasePersistence<User> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the first user in the ordered set where uuid = &#63;.
+	* Returns the first user in the ordered set where uuid = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param uuid the uuid to search with
+	* @param uuid the uuid
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching user
 	* @throws com.liferay.portal.NoSuchUserException if a matching user could not be found
@@ -163,13 +163,13 @@ public interface UserPersistence extends BasePersistence<User> {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the last user in the ordered set where uuid = &#63;.
+	* Returns the last user in the ordered set where uuid = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param uuid the uuid to search with
+	* @param uuid the uuid
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching user
 	* @throws com.liferay.portal.NoSuchUserException if a matching user could not be found
@@ -182,14 +182,14 @@ public interface UserPersistence extends BasePersistence<User> {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the users before and after the current user in the ordered set where uuid = &#63;.
+	* Returns the users before and after the current user in the ordered set where uuid = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
 	* @param userId the primary key of the current user
-	* @param uuid the uuid to search with
+	* @param uuid the uuid
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next user
 	* @throws com.liferay.portal.NoSuchUserException if a user with the primary key could not be found
@@ -202,9 +202,9 @@ public interface UserPersistence extends BasePersistence<User> {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds all the users where companyId = &#63;.
+	* Returns all the users where companyId = &#63;.
 	*
-	* @param companyId the company ID to search with
+	* @param companyId the company ID
 	* @return the matching users
 	* @throws SystemException if a system exception occurred
 	*/
@@ -213,15 +213,15 @@ public interface UserPersistence extends BasePersistence<User> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds a range of all the users where companyId = &#63;.
+	* Returns a range of all the users where companyId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company ID to search with
-	* @param start the lower bound of the range of users to return
-	* @param end the upper bound of the range of users to return (not inclusive)
+	* @param companyId the company ID
+	* @param start the lower bound of the range of users
+	* @param end the upper bound of the range of users (not inclusive)
 	* @return the range of matching users
 	* @throws SystemException if a system exception occurred
 	*/
@@ -230,15 +230,15 @@ public interface UserPersistence extends BasePersistence<User> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds an ordered range of all the users where companyId = &#63;.
+	* Returns an ordered range of all the users where companyId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company ID to search with
-	* @param start the lower bound of the range of users to return
-	* @param end the upper bound of the range of users to return (not inclusive)
+	* @param companyId the company ID
+	* @param start the lower bound of the range of users
+	* @param end the upper bound of the range of users (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching users
 	* @throws SystemException if a system exception occurred
@@ -249,13 +249,13 @@ public interface UserPersistence extends BasePersistence<User> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the first user in the ordered set where companyId = &#63;.
+	* Returns the first user in the ordered set where companyId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company ID to search with
+	* @param companyId the company ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching user
 	* @throws com.liferay.portal.NoSuchUserException if a matching user could not be found
@@ -267,13 +267,13 @@ public interface UserPersistence extends BasePersistence<User> {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the last user in the ordered set where companyId = &#63;.
+	* Returns the last user in the ordered set where companyId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company ID to search with
+	* @param companyId the company ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching user
 	* @throws com.liferay.portal.NoSuchUserException if a matching user could not be found
@@ -285,14 +285,14 @@ public interface UserPersistence extends BasePersistence<User> {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the users before and after the current user in the ordered set where companyId = &#63;.
+	* Returns the users before and after the current user in the ordered set where companyId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
 	* @param userId the primary key of the current user
-	* @param companyId the company ID to search with
+	* @param companyId the company ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next user
 	* @throws com.liferay.portal.NoSuchUserException if a user with the primary key could not be found
@@ -305,9 +305,9 @@ public interface UserPersistence extends BasePersistence<User> {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the user where contactId = &#63; or throws a {@link com.liferay.portal.NoSuchUserException} if it could not be found.
+	* Returns the user where contactId = &#63; or throws a {@link com.liferay.portal.NoSuchUserException} if it could not be found.
 	*
-	* @param contactId the contact ID to search with
+	* @param contactId the contact ID
 	* @return the matching user
 	* @throws com.liferay.portal.NoSuchUserException if a matching user could not be found
 	* @throws SystemException if a system exception occurred
@@ -317,9 +317,9 @@ public interface UserPersistence extends BasePersistence<User> {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the user where contactId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	* Returns the user where contactId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	*
-	* @param contactId the contact ID to search with
+	* @param contactId the contact ID
 	* @return the matching user, or <code>null</code> if a matching user could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -327,9 +327,9 @@ public interface UserPersistence extends BasePersistence<User> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the user where contactId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	* Returns the user where contactId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
-	* @param contactId the contact ID to search with
+	* @param contactId the contact ID
 	* @return the matching user, or <code>null</code> if a matching user could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -338,9 +338,9 @@ public interface UserPersistence extends BasePersistence<User> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds all the users where emailAddress = &#63;.
+	* Returns all the users where emailAddress = &#63;.
 	*
-	* @param emailAddress the email address to search with
+	* @param emailAddress the email address
 	* @return the matching users
 	* @throws SystemException if a system exception occurred
 	*/
@@ -349,15 +349,15 @@ public interface UserPersistence extends BasePersistence<User> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds a range of all the users where emailAddress = &#63;.
+	* Returns a range of all the users where emailAddress = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param emailAddress the email address to search with
-	* @param start the lower bound of the range of users to return
-	* @param end the upper bound of the range of users to return (not inclusive)
+	* @param emailAddress the email address
+	* @param start the lower bound of the range of users
+	* @param end the upper bound of the range of users (not inclusive)
 	* @return the range of matching users
 	* @throws SystemException if a system exception occurred
 	*/
@@ -366,15 +366,15 @@ public interface UserPersistence extends BasePersistence<User> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds an ordered range of all the users where emailAddress = &#63;.
+	* Returns an ordered range of all the users where emailAddress = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param emailAddress the email address to search with
-	* @param start the lower bound of the range of users to return
-	* @param end the upper bound of the range of users to return (not inclusive)
+	* @param emailAddress the email address
+	* @param start the lower bound of the range of users
+	* @param end the upper bound of the range of users (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching users
 	* @throws SystemException if a system exception occurred
@@ -385,13 +385,13 @@ public interface UserPersistence extends BasePersistence<User> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the first user in the ordered set where emailAddress = &#63;.
+	* Returns the first user in the ordered set where emailAddress = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param emailAddress the email address to search with
+	* @param emailAddress the email address
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching user
 	* @throws com.liferay.portal.NoSuchUserException if a matching user could not be found
@@ -404,13 +404,13 @@ public interface UserPersistence extends BasePersistence<User> {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the last user in the ordered set where emailAddress = &#63;.
+	* Returns the last user in the ordered set where emailAddress = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param emailAddress the email address to search with
+	* @param emailAddress the email address
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching user
 	* @throws com.liferay.portal.NoSuchUserException if a matching user could not be found
@@ -423,14 +423,14 @@ public interface UserPersistence extends BasePersistence<User> {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the users before and after the current user in the ordered set where emailAddress = &#63;.
+	* Returns the users before and after the current user in the ordered set where emailAddress = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
 	* @param userId the primary key of the current user
-	* @param emailAddress the email address to search with
+	* @param emailAddress the email address
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next user
 	* @throws com.liferay.portal.NoSuchUserException if a user with the primary key could not be found
@@ -443,9 +443,9 @@ public interface UserPersistence extends BasePersistence<User> {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the user where portraitId = &#63; or throws a {@link com.liferay.portal.NoSuchUserException} if it could not be found.
+	* Returns the user where portraitId = &#63; or throws a {@link com.liferay.portal.NoSuchUserException} if it could not be found.
 	*
-	* @param portraitId the portrait ID to search with
+	* @param portraitId the portrait ID
 	* @return the matching user
 	* @throws com.liferay.portal.NoSuchUserException if a matching user could not be found
 	* @throws SystemException if a system exception occurred
@@ -455,9 +455,9 @@ public interface UserPersistence extends BasePersistence<User> {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the user where portraitId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	* Returns the user where portraitId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	*
-	* @param portraitId the portrait ID to search with
+	* @param portraitId the portrait ID
 	* @return the matching user, or <code>null</code> if a matching user could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -465,9 +465,9 @@ public interface UserPersistence extends BasePersistence<User> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the user where portraitId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	* Returns the user where portraitId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
-	* @param portraitId the portrait ID to search with
+	* @param portraitId the portrait ID
 	* @return the matching user, or <code>null</code> if a matching user could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -476,10 +476,10 @@ public interface UserPersistence extends BasePersistence<User> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the user where companyId = &#63; and userId = &#63; or throws a {@link com.liferay.portal.NoSuchUserException} if it could not be found.
+	* Returns the user where companyId = &#63; and userId = &#63; or throws a {@link com.liferay.portal.NoSuchUserException} if it could not be found.
 	*
-	* @param companyId the company ID to search with
-	* @param userId the user ID to search with
+	* @param companyId the company ID
+	* @param userId the user ID
 	* @return the matching user
 	* @throws com.liferay.portal.NoSuchUserException if a matching user could not be found
 	* @throws SystemException if a system exception occurred
@@ -489,10 +489,10 @@ public interface UserPersistence extends BasePersistence<User> {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the user where companyId = &#63; and userId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	* Returns the user where companyId = &#63; and userId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	*
-	* @param companyId the company ID to search with
-	* @param userId the user ID to search with
+	* @param companyId the company ID
+	* @param userId the user ID
 	* @return the matching user, or <code>null</code> if a matching user could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -500,10 +500,10 @@ public interface UserPersistence extends BasePersistence<User> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the user where companyId = &#63; and userId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	* Returns the user where companyId = &#63; and userId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
-	* @param companyId the company ID to search with
-	* @param userId the user ID to search with
+	* @param companyId the company ID
+	* @param userId the user ID
 	* @return the matching user, or <code>null</code> if a matching user could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -512,10 +512,10 @@ public interface UserPersistence extends BasePersistence<User> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the user where companyId = &#63; and defaultUser = &#63; or throws a {@link com.liferay.portal.NoSuchUserException} if it could not be found.
+	* Returns the user where companyId = &#63; and defaultUser = &#63; or throws a {@link com.liferay.portal.NoSuchUserException} if it could not be found.
 	*
-	* @param companyId the company ID to search with
-	* @param defaultUser the default user to search with
+	* @param companyId the company ID
+	* @param defaultUser the default user
 	* @return the matching user
 	* @throws com.liferay.portal.NoSuchUserException if a matching user could not be found
 	* @throws SystemException if a system exception occurred
@@ -526,10 +526,10 @@ public interface UserPersistence extends BasePersistence<User> {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the user where companyId = &#63; and defaultUser = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	* Returns the user where companyId = &#63; and defaultUser = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	*
-	* @param companyId the company ID to search with
-	* @param defaultUser the default user to search with
+	* @param companyId the company ID
+	* @param defaultUser the default user
 	* @return the matching user, or <code>null</code> if a matching user could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -538,10 +538,10 @@ public interface UserPersistence extends BasePersistence<User> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the user where companyId = &#63; and defaultUser = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	* Returns the user where companyId = &#63; and defaultUser = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
-	* @param companyId the company ID to search with
-	* @param defaultUser the default user to search with
+	* @param companyId the company ID
+	* @param defaultUser the default user
 	* @return the matching user, or <code>null</code> if a matching user could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -550,10 +550,10 @@ public interface UserPersistence extends BasePersistence<User> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the user where companyId = &#63; and screenName = &#63; or throws a {@link com.liferay.portal.NoSuchUserException} if it could not be found.
+	* Returns the user where companyId = &#63; and screenName = &#63; or throws a {@link com.liferay.portal.NoSuchUserException} if it could not be found.
 	*
-	* @param companyId the company ID to search with
-	* @param screenName the screen name to search with
+	* @param companyId the company ID
+	* @param screenName the screen name
 	* @return the matching user
 	* @throws com.liferay.portal.NoSuchUserException if a matching user could not be found
 	* @throws SystemException if a system exception occurred
@@ -564,10 +564,10 @@ public interface UserPersistence extends BasePersistence<User> {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the user where companyId = &#63; and screenName = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	* Returns the user where companyId = &#63; and screenName = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	*
-	* @param companyId the company ID to search with
-	* @param screenName the screen name to search with
+	* @param companyId the company ID
+	* @param screenName the screen name
 	* @return the matching user, or <code>null</code> if a matching user could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -576,10 +576,10 @@ public interface UserPersistence extends BasePersistence<User> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the user where companyId = &#63; and screenName = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	* Returns the user where companyId = &#63; and screenName = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
-	* @param companyId the company ID to search with
-	* @param screenName the screen name to search with
+	* @param companyId the company ID
+	* @param screenName the screen name
 	* @return the matching user, or <code>null</code> if a matching user could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -588,10 +588,10 @@ public interface UserPersistence extends BasePersistence<User> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the user where companyId = &#63; and emailAddress = &#63; or throws a {@link com.liferay.portal.NoSuchUserException} if it could not be found.
+	* Returns the user where companyId = &#63; and emailAddress = &#63; or throws a {@link com.liferay.portal.NoSuchUserException} if it could not be found.
 	*
-	* @param companyId the company ID to search with
-	* @param emailAddress the email address to search with
+	* @param companyId the company ID
+	* @param emailAddress the email address
 	* @return the matching user
 	* @throws com.liferay.portal.NoSuchUserException if a matching user could not be found
 	* @throws SystemException if a system exception occurred
@@ -602,10 +602,10 @@ public interface UserPersistence extends BasePersistence<User> {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the user where companyId = &#63; and emailAddress = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	* Returns the user where companyId = &#63; and emailAddress = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	*
-	* @param companyId the company ID to search with
-	* @param emailAddress the email address to search with
+	* @param companyId the company ID
+	* @param emailAddress the email address
 	* @return the matching user, or <code>null</code> if a matching user could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -614,10 +614,10 @@ public interface UserPersistence extends BasePersistence<User> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the user where companyId = &#63; and emailAddress = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	* Returns the user where companyId = &#63; and emailAddress = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
-	* @param companyId the company ID to search with
-	* @param emailAddress the email address to search with
+	* @param companyId the company ID
+	* @param emailAddress the email address
 	* @return the matching user, or <code>null</code> if a matching user could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -626,10 +626,10 @@ public interface UserPersistence extends BasePersistence<User> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the user where companyId = &#63; and facebookId = &#63; or throws a {@link com.liferay.portal.NoSuchUserException} if it could not be found.
+	* Returns the user where companyId = &#63; and facebookId = &#63; or throws a {@link com.liferay.portal.NoSuchUserException} if it could not be found.
 	*
-	* @param companyId the company ID to search with
-	* @param facebookId the facebook ID to search with
+	* @param companyId the company ID
+	* @param facebookId the facebook ID
 	* @return the matching user
 	* @throws com.liferay.portal.NoSuchUserException if a matching user could not be found
 	* @throws SystemException if a system exception occurred
@@ -640,10 +640,10 @@ public interface UserPersistence extends BasePersistence<User> {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the user where companyId = &#63; and facebookId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	* Returns the user where companyId = &#63; and facebookId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	*
-	* @param companyId the company ID to search with
-	* @param facebookId the facebook ID to search with
+	* @param companyId the company ID
+	* @param facebookId the facebook ID
 	* @return the matching user, or <code>null</code> if a matching user could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -652,10 +652,10 @@ public interface UserPersistence extends BasePersistence<User> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the user where companyId = &#63; and facebookId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	* Returns the user where companyId = &#63; and facebookId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
-	* @param companyId the company ID to search with
-	* @param facebookId the facebook ID to search with
+	* @param companyId the company ID
+	* @param facebookId the facebook ID
 	* @return the matching user, or <code>null</code> if a matching user could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -664,10 +664,10 @@ public interface UserPersistence extends BasePersistence<User> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the user where companyId = &#63; and openId = &#63; or throws a {@link com.liferay.portal.NoSuchUserException} if it could not be found.
+	* Returns the user where companyId = &#63; and openId = &#63; or throws a {@link com.liferay.portal.NoSuchUserException} if it could not be found.
 	*
-	* @param companyId the company ID to search with
-	* @param openId the open ID to search with
+	* @param companyId the company ID
+	* @param openId the open ID
 	* @return the matching user
 	* @throws com.liferay.portal.NoSuchUserException if a matching user could not be found
 	* @throws SystemException if a system exception occurred
@@ -678,10 +678,10 @@ public interface UserPersistence extends BasePersistence<User> {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the user where companyId = &#63; and openId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	* Returns the user where companyId = &#63; and openId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	*
-	* @param companyId the company ID to search with
-	* @param openId the open ID to search with
+	* @param companyId the company ID
+	* @param openId the open ID
 	* @return the matching user, or <code>null</code> if a matching user could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -690,10 +690,10 @@ public interface UserPersistence extends BasePersistence<User> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the user where companyId = &#63; and openId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	* Returns the user where companyId = &#63; and openId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
-	* @param companyId the company ID to search with
-	* @param openId the open ID to search with
+	* @param companyId the company ID
+	* @param openId the open ID
 	* @return the matching user, or <code>null</code> if a matching user could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -702,10 +702,10 @@ public interface UserPersistence extends BasePersistence<User> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds all the users where companyId = &#63; and status = &#63;.
+	* Returns all the users where companyId = &#63; and status = &#63;.
 	*
-	* @param companyId the company ID to search with
-	* @param status the status to search with
+	* @param companyId the company ID
+	* @param status the status
 	* @return the matching users
 	* @throws SystemException if a system exception occurred
 	*/
@@ -714,16 +714,16 @@ public interface UserPersistence extends BasePersistence<User> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds a range of all the users where companyId = &#63; and status = &#63;.
+	* Returns a range of all the users where companyId = &#63; and status = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company ID to search with
-	* @param status the status to search with
-	* @param start the lower bound of the range of users to return
-	* @param end the upper bound of the range of users to return (not inclusive)
+	* @param companyId the company ID
+	* @param status the status
+	* @param start the lower bound of the range of users
+	* @param end the upper bound of the range of users (not inclusive)
 	* @return the range of matching users
 	* @throws SystemException if a system exception occurred
 	*/
@@ -732,16 +732,16 @@ public interface UserPersistence extends BasePersistence<User> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds an ordered range of all the users where companyId = &#63; and status = &#63;.
+	* Returns an ordered range of all the users where companyId = &#63; and status = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company ID to search with
-	* @param status the status to search with
-	* @param start the lower bound of the range of users to return
-	* @param end the upper bound of the range of users to return (not inclusive)
+	* @param companyId the company ID
+	* @param status the status
+	* @param start the lower bound of the range of users
+	* @param end the upper bound of the range of users (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching users
 	* @throws SystemException if a system exception occurred
@@ -752,14 +752,14 @@ public interface UserPersistence extends BasePersistence<User> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the first user in the ordered set where companyId = &#63; and status = &#63;.
+	* Returns the first user in the ordered set where companyId = &#63; and status = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company ID to search with
-	* @param status the status to search with
+	* @param companyId the company ID
+	* @param status the status
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching user
 	* @throws com.liferay.portal.NoSuchUserException if a matching user could not be found
@@ -772,14 +772,14 @@ public interface UserPersistence extends BasePersistence<User> {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the last user in the ordered set where companyId = &#63; and status = &#63;.
+	* Returns the last user in the ordered set where companyId = &#63; and status = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company ID to search with
-	* @param status the status to search with
+	* @param companyId the company ID
+	* @param status the status
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching user
 	* @throws com.liferay.portal.NoSuchUserException if a matching user could not be found
@@ -792,15 +792,15 @@ public interface UserPersistence extends BasePersistence<User> {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the users before and after the current user in the ordered set where companyId = &#63; and status = &#63;.
+	* Returns the users before and after the current user in the ordered set where companyId = &#63; and status = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
 	* @param userId the primary key of the current user
-	* @param companyId the company ID to search with
-	* @param status the status to search with
+	* @param companyId the company ID
+	* @param status the status
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next user
 	* @throws com.liferay.portal.NoSuchUserException if a user with the primary key could not be found
@@ -813,7 +813,7 @@ public interface UserPersistence extends BasePersistence<User> {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds all the users.
+	* Returns all the users.
 	*
 	* @return the users
 	* @throws SystemException if a system exception occurred
@@ -822,14 +822,14 @@ public interface UserPersistence extends BasePersistence<User> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds a range of all the users.
+	* Returns a range of all the users.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of users to return
-	* @param end the upper bound of the range of users to return (not inclusive)
+	* @param start the lower bound of the range of users
+	* @param end the upper bound of the range of users (not inclusive)
 	* @return the range of users
 	* @throws SystemException if a system exception occurred
 	*/
@@ -837,14 +837,14 @@ public interface UserPersistence extends BasePersistence<User> {
 		int end) throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds an ordered range of all the users.
+	* Returns an ordered range of all the users.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of users to return
-	* @param end the upper bound of the range of users to return (not inclusive)
+	* @param start the lower bound of the range of users
+	* @param end the upper bound of the range of users (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of users
 	* @throws SystemException if a system exception occurred
@@ -857,7 +857,7 @@ public interface UserPersistence extends BasePersistence<User> {
 	/**
 	* Removes all the users where uuid = &#63; from the database.
 	*
-	* @param uuid the uuid to search with
+	* @param uuid the uuid
 	* @throws SystemException if a system exception occurred
 	*/
 	public void removeByUuid(java.lang.String uuid)
@@ -866,7 +866,7 @@ public interface UserPersistence extends BasePersistence<User> {
 	/**
 	* Removes all the users where companyId = &#63; from the database.
 	*
-	* @param companyId the company ID to search with
+	* @param companyId the company ID
 	* @throws SystemException if a system exception occurred
 	*/
 	public void removeByCompanyId(long companyId)
@@ -875,7 +875,7 @@ public interface UserPersistence extends BasePersistence<User> {
 	/**
 	* Removes the user where contactId = &#63; from the database.
 	*
-	* @param contactId the contact ID to search with
+	* @param contactId the contact ID
 	* @throws SystemException if a system exception occurred
 	*/
 	public void removeByContactId(long contactId)
@@ -885,7 +885,7 @@ public interface UserPersistence extends BasePersistence<User> {
 	/**
 	* Removes all the users where emailAddress = &#63; from the database.
 	*
-	* @param emailAddress the email address to search with
+	* @param emailAddress the email address
 	* @throws SystemException if a system exception occurred
 	*/
 	public void removeByEmailAddress(java.lang.String emailAddress)
@@ -894,7 +894,7 @@ public interface UserPersistence extends BasePersistence<User> {
 	/**
 	* Removes the user where portraitId = &#63; from the database.
 	*
-	* @param portraitId the portrait ID to search with
+	* @param portraitId the portrait ID
 	* @throws SystemException if a system exception occurred
 	*/
 	public void removeByPortraitId(long portraitId)
@@ -904,8 +904,8 @@ public interface UserPersistence extends BasePersistence<User> {
 	/**
 	* Removes the user where companyId = &#63; and userId = &#63; from the database.
 	*
-	* @param companyId the company ID to search with
-	* @param userId the user ID to search with
+	* @param companyId the company ID
+	* @param userId the user ID
 	* @throws SystemException if a system exception occurred
 	*/
 	public void removeByC_U(long companyId, long userId)
@@ -915,8 +915,8 @@ public interface UserPersistence extends BasePersistence<User> {
 	/**
 	* Removes the user where companyId = &#63; and defaultUser = &#63; from the database.
 	*
-	* @param companyId the company ID to search with
-	* @param defaultUser the default user to search with
+	* @param companyId the company ID
+	* @param defaultUser the default user
 	* @throws SystemException if a system exception occurred
 	*/
 	public void removeByC_DU(long companyId, boolean defaultUser)
@@ -926,8 +926,8 @@ public interface UserPersistence extends BasePersistence<User> {
 	/**
 	* Removes the user where companyId = &#63; and screenName = &#63; from the database.
 	*
-	* @param companyId the company ID to search with
-	* @param screenName the screen name to search with
+	* @param companyId the company ID
+	* @param screenName the screen name
 	* @throws SystemException if a system exception occurred
 	*/
 	public void removeByC_SN(long companyId, java.lang.String screenName)
@@ -937,8 +937,8 @@ public interface UserPersistence extends BasePersistence<User> {
 	/**
 	* Removes the user where companyId = &#63; and emailAddress = &#63; from the database.
 	*
-	* @param companyId the company ID to search with
-	* @param emailAddress the email address to search with
+	* @param companyId the company ID
+	* @param emailAddress the email address
 	* @throws SystemException if a system exception occurred
 	*/
 	public void removeByC_EA(long companyId, java.lang.String emailAddress)
@@ -948,8 +948,8 @@ public interface UserPersistence extends BasePersistence<User> {
 	/**
 	* Removes the user where companyId = &#63; and facebookId = &#63; from the database.
 	*
-	* @param companyId the company ID to search with
-	* @param facebookId the facebook ID to search with
+	* @param companyId the company ID
+	* @param facebookId the facebook ID
 	* @throws SystemException if a system exception occurred
 	*/
 	public void removeByC_FID(long companyId, long facebookId)
@@ -959,8 +959,8 @@ public interface UserPersistence extends BasePersistence<User> {
 	/**
 	* Removes the user where companyId = &#63; and openId = &#63; from the database.
 	*
-	* @param companyId the company ID to search with
-	* @param openId the open ID to search with
+	* @param companyId the company ID
+	* @param openId the open ID
 	* @throws SystemException if a system exception occurred
 	*/
 	public void removeByC_O(long companyId, java.lang.String openId)
@@ -970,8 +970,8 @@ public interface UserPersistence extends BasePersistence<User> {
 	/**
 	* Removes all the users where companyId = &#63; and status = &#63; from the database.
 	*
-	* @param companyId the company ID to search with
-	* @param status the status to search with
+	* @param companyId the company ID
+	* @param status the status
 	* @throws SystemException if a system exception occurred
 	*/
 	public void removeByC_S(long companyId, int status)
@@ -986,9 +986,9 @@ public interface UserPersistence extends BasePersistence<User> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Counts all the users where uuid = &#63;.
+	* Returns the number of users where uuid = &#63;.
 	*
-	* @param uuid the uuid to search with
+	* @param uuid the uuid
 	* @return the number of matching users
 	* @throws SystemException if a system exception occurred
 	*/
@@ -996,9 +996,9 @@ public interface UserPersistence extends BasePersistence<User> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Counts all the users where companyId = &#63;.
+	* Returns the number of users where companyId = &#63;.
 	*
-	* @param companyId the company ID to search with
+	* @param companyId the company ID
 	* @return the number of matching users
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1006,9 +1006,9 @@ public interface UserPersistence extends BasePersistence<User> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Counts all the users where contactId = &#63;.
+	* Returns the number of users where contactId = &#63;.
 	*
-	* @param contactId the contact ID to search with
+	* @param contactId the contact ID
 	* @return the number of matching users
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1016,9 +1016,9 @@ public interface UserPersistence extends BasePersistence<User> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Counts all the users where emailAddress = &#63;.
+	* Returns the number of users where emailAddress = &#63;.
 	*
-	* @param emailAddress the email address to search with
+	* @param emailAddress the email address
 	* @return the number of matching users
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1026,9 +1026,9 @@ public interface UserPersistence extends BasePersistence<User> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Counts all the users where portraitId = &#63;.
+	* Returns the number of users where portraitId = &#63;.
 	*
-	* @param portraitId the portrait ID to search with
+	* @param portraitId the portrait ID
 	* @return the number of matching users
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1036,10 +1036,10 @@ public interface UserPersistence extends BasePersistence<User> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Counts all the users where companyId = &#63; and userId = &#63;.
+	* Returns the number of users where companyId = &#63; and userId = &#63;.
 	*
-	* @param companyId the company ID to search with
-	* @param userId the user ID to search with
+	* @param companyId the company ID
+	* @param userId the user ID
 	* @return the number of matching users
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1047,10 +1047,10 @@ public interface UserPersistence extends BasePersistence<User> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Counts all the users where companyId = &#63; and defaultUser = &#63;.
+	* Returns the number of users where companyId = &#63; and defaultUser = &#63;.
 	*
-	* @param companyId the company ID to search with
-	* @param defaultUser the default user to search with
+	* @param companyId the company ID
+	* @param defaultUser the default user
 	* @return the number of matching users
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1058,10 +1058,10 @@ public interface UserPersistence extends BasePersistence<User> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Counts all the users where companyId = &#63; and screenName = &#63;.
+	* Returns the number of users where companyId = &#63; and screenName = &#63;.
 	*
-	* @param companyId the company ID to search with
-	* @param screenName the screen name to search with
+	* @param companyId the company ID
+	* @param screenName the screen name
 	* @return the number of matching users
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1069,10 +1069,10 @@ public interface UserPersistence extends BasePersistence<User> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Counts all the users where companyId = &#63; and emailAddress = &#63;.
+	* Returns the number of users where companyId = &#63; and emailAddress = &#63;.
 	*
-	* @param companyId the company ID to search with
-	* @param emailAddress the email address to search with
+	* @param companyId the company ID
+	* @param emailAddress the email address
 	* @return the number of matching users
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1080,10 +1080,10 @@ public interface UserPersistence extends BasePersistence<User> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Counts all the users where companyId = &#63; and facebookId = &#63;.
+	* Returns the number of users where companyId = &#63; and facebookId = &#63;.
 	*
-	* @param companyId the company ID to search with
-	* @param facebookId the facebook ID to search with
+	* @param companyId the company ID
+	* @param facebookId the facebook ID
 	* @return the number of matching users
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1091,10 +1091,10 @@ public interface UserPersistence extends BasePersistence<User> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Counts all the users where companyId = &#63; and openId = &#63;.
+	* Returns the number of users where companyId = &#63; and openId = &#63;.
 	*
-	* @param companyId the company ID to search with
-	* @param openId the open ID to search with
+	* @param companyId the company ID
+	* @param openId the open ID
 	* @return the number of matching users
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1102,10 +1102,10 @@ public interface UserPersistence extends BasePersistence<User> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Counts all the users where companyId = &#63; and status = &#63;.
+	* Returns the number of users where companyId = &#63; and status = &#63;.
 	*
-	* @param companyId the company ID to search with
-	* @param status the status to search with
+	* @param companyId the company ID
+	* @param status the status
 	* @return the number of matching users
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1113,7 +1113,7 @@ public interface UserPersistence extends BasePersistence<User> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Counts all the users.
+	* Returns the number of users.
 	*
 	* @return the number of users
 	* @throws SystemException if a system exception occurred
@@ -1122,9 +1122,9 @@ public interface UserPersistence extends BasePersistence<User> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Gets all the groups associated with the user.
+	* Returns all the groups associated with the user.
 	*
-	* @param pk the primary key of the user to get the associated groups for
+	* @param pk the primary key of the user
 	* @return the groups associated with the user
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1132,15 +1132,15 @@ public interface UserPersistence extends BasePersistence<User> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Gets a range of all the groups associated with the user.
+	* Returns a range of all the groups associated with the user.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param pk the primary key of the user to get the associated groups for
-	* @param start the lower bound of the range of users to return
-	* @param end the upper bound of the range of users to return (not inclusive)
+	* @param pk the primary key of the user
+	* @param start the lower bound of the range of users
+	* @param end the upper bound of the range of users (not inclusive)
 	* @return the range of groups associated with the user
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1149,15 +1149,15 @@ public interface UserPersistence extends BasePersistence<User> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Gets an ordered range of all the groups associated with the user.
+	* Returns an ordered range of all the groups associated with the user.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param pk the primary key of the user to get the associated groups for
-	* @param start the lower bound of the range of users to return
-	* @param end the upper bound of the range of users to return (not inclusive)
+	* @param pk the primary key of the user
+	* @param start the lower bound of the range of users
+	* @param end the upper bound of the range of users (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of groups associated with the user
 	* @throws SystemException if a system exception occurred
@@ -1168,9 +1168,9 @@ public interface UserPersistence extends BasePersistence<User> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Gets the number of groups associated with the user.
+	* Returns the number of groups associated with the user.
 	*
-	* @param pk the primary key of the user to get the number of associated groups for
+	* @param pk the primary key of the user
 	* @return the number of groups associated with the user
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1292,7 +1292,7 @@ public interface UserPersistence extends BasePersistence<User> {
 	/**
 	* Sets the groups associated with the user, removing and adding associations as necessary. Also notifies the appropriate model listeners and clears the mapping table finder cache.
 	*
-	* @param pk the primary key of the user to set the associations for
+	* @param pk the primary key of the user
 	* @param groupPKs the primary keys of the groups to be associated with the user
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1302,7 +1302,7 @@ public interface UserPersistence extends BasePersistence<User> {
 	/**
 	* Sets the groups associated with the user, removing and adding associations as necessary. Also notifies the appropriate model listeners and clears the mapping table finder cache.
 	*
-	* @param pk the primary key of the user to set the associations for
+	* @param pk the primary key of the user
 	* @param groups the groups to be associated with the user
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1311,9 +1311,9 @@ public interface UserPersistence extends BasePersistence<User> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Gets all the organizations associated with the user.
+	* Returns all the organizations associated with the user.
 	*
-	* @param pk the primary key of the user to get the associated organizations for
+	* @param pk the primary key of the user
 	* @return the organizations associated with the user
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1321,15 +1321,15 @@ public interface UserPersistence extends BasePersistence<User> {
 		long pk) throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Gets a range of all the organizations associated with the user.
+	* Returns a range of all the organizations associated with the user.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param pk the primary key of the user to get the associated organizations for
-	* @param start the lower bound of the range of users to return
-	* @param end the upper bound of the range of users to return (not inclusive)
+	* @param pk the primary key of the user
+	* @param start the lower bound of the range of users
+	* @param end the upper bound of the range of users (not inclusive)
 	* @return the range of organizations associated with the user
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1338,15 +1338,15 @@ public interface UserPersistence extends BasePersistence<User> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Gets an ordered range of all the organizations associated with the user.
+	* Returns an ordered range of all the organizations associated with the user.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param pk the primary key of the user to get the associated organizations for
-	* @param start the lower bound of the range of users to return
-	* @param end the upper bound of the range of users to return (not inclusive)
+	* @param pk the primary key of the user
+	* @param start the lower bound of the range of users
+	* @param end the upper bound of the range of users (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of organizations associated with the user
 	* @throws SystemException if a system exception occurred
@@ -1357,9 +1357,9 @@ public interface UserPersistence extends BasePersistence<User> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Gets the number of organizations associated with the user.
+	* Returns the number of organizations associated with the user.
 	*
-	* @param pk the primary key of the user to get the number of associated organizations for
+	* @param pk the primary key of the user
 	* @return the number of organizations associated with the user
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1483,7 +1483,7 @@ public interface UserPersistence extends BasePersistence<User> {
 	/**
 	* Sets the organizations associated with the user, removing and adding associations as necessary. Also notifies the appropriate model listeners and clears the mapping table finder cache.
 	*
-	* @param pk the primary key of the user to set the associations for
+	* @param pk the primary key of the user
 	* @param organizationPKs the primary keys of the organizations to be associated with the user
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1493,7 +1493,7 @@ public interface UserPersistence extends BasePersistence<User> {
 	/**
 	* Sets the organizations associated with the user, removing and adding associations as necessary. Also notifies the appropriate model listeners and clears the mapping table finder cache.
 	*
-	* @param pk the primary key of the user to set the associations for
+	* @param pk the primary key of the user
 	* @param organizations the organizations to be associated with the user
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1502,9 +1502,9 @@ public interface UserPersistence extends BasePersistence<User> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Gets all the permissions associated with the user.
+	* Returns all the permissions associated with the user.
 	*
-	* @param pk the primary key of the user to get the associated permissions for
+	* @param pk the primary key of the user
 	* @return the permissions associated with the user
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1512,15 +1512,15 @@ public interface UserPersistence extends BasePersistence<User> {
 		long pk) throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Gets a range of all the permissions associated with the user.
+	* Returns a range of all the permissions associated with the user.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param pk the primary key of the user to get the associated permissions for
-	* @param start the lower bound of the range of users to return
-	* @param end the upper bound of the range of users to return (not inclusive)
+	* @param pk the primary key of the user
+	* @param start the lower bound of the range of users
+	* @param end the upper bound of the range of users (not inclusive)
 	* @return the range of permissions associated with the user
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1529,15 +1529,15 @@ public interface UserPersistence extends BasePersistence<User> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Gets an ordered range of all the permissions associated with the user.
+	* Returns an ordered range of all the permissions associated with the user.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param pk the primary key of the user to get the associated permissions for
-	* @param start the lower bound of the range of users to return
-	* @param end the upper bound of the range of users to return (not inclusive)
+	* @param pk the primary key of the user
+	* @param start the lower bound of the range of users
+	* @param end the upper bound of the range of users (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of permissions associated with the user
 	* @throws SystemException if a system exception occurred
@@ -1548,9 +1548,9 @@ public interface UserPersistence extends BasePersistence<User> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Gets the number of permissions associated with the user.
+	* Returns the number of permissions associated with the user.
 	*
-	* @param pk the primary key of the user to get the number of associated permissions for
+	* @param pk the primary key of the user
 	* @return the number of permissions associated with the user
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1674,7 +1674,7 @@ public interface UserPersistence extends BasePersistence<User> {
 	/**
 	* Sets the permissions associated with the user, removing and adding associations as necessary. Also notifies the appropriate model listeners and clears the mapping table finder cache.
 	*
-	* @param pk the primary key of the user to set the associations for
+	* @param pk the primary key of the user
 	* @param permissionPKs the primary keys of the permissions to be associated with the user
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1684,7 +1684,7 @@ public interface UserPersistence extends BasePersistence<User> {
 	/**
 	* Sets the permissions associated with the user, removing and adding associations as necessary. Also notifies the appropriate model listeners and clears the mapping table finder cache.
 	*
-	* @param pk the primary key of the user to set the associations for
+	* @param pk the primary key of the user
 	* @param permissions the permissions to be associated with the user
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1693,9 +1693,9 @@ public interface UserPersistence extends BasePersistence<User> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Gets all the roles associated with the user.
+	* Returns all the roles associated with the user.
 	*
-	* @param pk the primary key of the user to get the associated roles for
+	* @param pk the primary key of the user
 	* @return the roles associated with the user
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1703,15 +1703,15 @@ public interface UserPersistence extends BasePersistence<User> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Gets a range of all the roles associated with the user.
+	* Returns a range of all the roles associated with the user.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param pk the primary key of the user to get the associated roles for
-	* @param start the lower bound of the range of users to return
-	* @param end the upper bound of the range of users to return (not inclusive)
+	* @param pk the primary key of the user
+	* @param start the lower bound of the range of users
+	* @param end the upper bound of the range of users (not inclusive)
 	* @return the range of roles associated with the user
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1720,15 +1720,15 @@ public interface UserPersistence extends BasePersistence<User> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Gets an ordered range of all the roles associated with the user.
+	* Returns an ordered range of all the roles associated with the user.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param pk the primary key of the user to get the associated roles for
-	* @param start the lower bound of the range of users to return
-	* @param end the upper bound of the range of users to return (not inclusive)
+	* @param pk the primary key of the user
+	* @param start the lower bound of the range of users
+	* @param end the upper bound of the range of users (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of roles associated with the user
 	* @throws SystemException if a system exception occurred
@@ -1739,9 +1739,9 @@ public interface UserPersistence extends BasePersistence<User> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Gets the number of roles associated with the user.
+	* Returns the number of roles associated with the user.
 	*
-	* @param pk the primary key of the user to get the number of associated roles for
+	* @param pk the primary key of the user
 	* @return the number of roles associated with the user
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1863,7 +1863,7 @@ public interface UserPersistence extends BasePersistence<User> {
 	/**
 	* Sets the roles associated with the user, removing and adding associations as necessary. Also notifies the appropriate model listeners and clears the mapping table finder cache.
 	*
-	* @param pk the primary key of the user to set the associations for
+	* @param pk the primary key of the user
 	* @param rolePKs the primary keys of the roles to be associated with the user
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1873,7 +1873,7 @@ public interface UserPersistence extends BasePersistence<User> {
 	/**
 	* Sets the roles associated with the user, removing and adding associations as necessary. Also notifies the appropriate model listeners and clears the mapping table finder cache.
 	*
-	* @param pk the primary key of the user to set the associations for
+	* @param pk the primary key of the user
 	* @param roles the roles to be associated with the user
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1882,9 +1882,9 @@ public interface UserPersistence extends BasePersistence<User> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Gets all the teams associated with the user.
+	* Returns all the teams associated with the user.
 	*
-	* @param pk the primary key of the user to get the associated teams for
+	* @param pk the primary key of the user
 	* @return the teams associated with the user
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1892,15 +1892,15 @@ public interface UserPersistence extends BasePersistence<User> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Gets a range of all the teams associated with the user.
+	* Returns a range of all the teams associated with the user.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param pk the primary key of the user to get the associated teams for
-	* @param start the lower bound of the range of users to return
-	* @param end the upper bound of the range of users to return (not inclusive)
+	* @param pk the primary key of the user
+	* @param start the lower bound of the range of users
+	* @param end the upper bound of the range of users (not inclusive)
 	* @return the range of teams associated with the user
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1909,15 +1909,15 @@ public interface UserPersistence extends BasePersistence<User> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Gets an ordered range of all the teams associated with the user.
+	* Returns an ordered range of all the teams associated with the user.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param pk the primary key of the user to get the associated teams for
-	* @param start the lower bound of the range of users to return
-	* @param end the upper bound of the range of users to return (not inclusive)
+	* @param pk the primary key of the user
+	* @param start the lower bound of the range of users
+	* @param end the upper bound of the range of users (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of teams associated with the user
 	* @throws SystemException if a system exception occurred
@@ -1928,9 +1928,9 @@ public interface UserPersistence extends BasePersistence<User> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Gets the number of teams associated with the user.
+	* Returns the number of teams associated with the user.
 	*
-	* @param pk the primary key of the user to get the number of associated teams for
+	* @param pk the primary key of the user
 	* @return the number of teams associated with the user
 	* @throws SystemException if a system exception occurred
 	*/
@@ -2052,7 +2052,7 @@ public interface UserPersistence extends BasePersistence<User> {
 	/**
 	* Sets the teams associated with the user, removing and adding associations as necessary. Also notifies the appropriate model listeners and clears the mapping table finder cache.
 	*
-	* @param pk the primary key of the user to set the associations for
+	* @param pk the primary key of the user
 	* @param teamPKs the primary keys of the teams to be associated with the user
 	* @throws SystemException if a system exception occurred
 	*/
@@ -2062,7 +2062,7 @@ public interface UserPersistence extends BasePersistence<User> {
 	/**
 	* Sets the teams associated with the user, removing and adding associations as necessary. Also notifies the appropriate model listeners and clears the mapping table finder cache.
 	*
-	* @param pk the primary key of the user to set the associations for
+	* @param pk the primary key of the user
 	* @param teams the teams to be associated with the user
 	* @throws SystemException if a system exception occurred
 	*/
@@ -2071,9 +2071,9 @@ public interface UserPersistence extends BasePersistence<User> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Gets all the user groups associated with the user.
+	* Returns all the user groups associated with the user.
 	*
-	* @param pk the primary key of the user to get the associated user groups for
+	* @param pk the primary key of the user
 	* @return the user groups associated with the user
 	* @throws SystemException if a system exception occurred
 	*/
@@ -2081,15 +2081,15 @@ public interface UserPersistence extends BasePersistence<User> {
 		long pk) throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Gets a range of all the user groups associated with the user.
+	* Returns a range of all the user groups associated with the user.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param pk the primary key of the user to get the associated user groups for
-	* @param start the lower bound of the range of users to return
-	* @param end the upper bound of the range of users to return (not inclusive)
+	* @param pk the primary key of the user
+	* @param start the lower bound of the range of users
+	* @param end the upper bound of the range of users (not inclusive)
 	* @return the range of user groups associated with the user
 	* @throws SystemException if a system exception occurred
 	*/
@@ -2098,15 +2098,15 @@ public interface UserPersistence extends BasePersistence<User> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Gets an ordered range of all the user groups associated with the user.
+	* Returns an ordered range of all the user groups associated with the user.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param pk the primary key of the user to get the associated user groups for
-	* @param start the lower bound of the range of users to return
-	* @param end the upper bound of the range of users to return (not inclusive)
+	* @param pk the primary key of the user
+	* @param start the lower bound of the range of users
+	* @param end the upper bound of the range of users (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of user groups associated with the user
 	* @throws SystemException if a system exception occurred
@@ -2117,9 +2117,9 @@ public interface UserPersistence extends BasePersistence<User> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Gets the number of user groups associated with the user.
+	* Returns the number of user groups associated with the user.
 	*
-	* @param pk the primary key of the user to get the number of associated user groups for
+	* @param pk the primary key of the user
 	* @return the number of user groups associated with the user
 	* @throws SystemException if a system exception occurred
 	*/
@@ -2243,7 +2243,7 @@ public interface UserPersistence extends BasePersistence<User> {
 	/**
 	* Sets the user groups associated with the user, removing and adding associations as necessary. Also notifies the appropriate model listeners and clears the mapping table finder cache.
 	*
-	* @param pk the primary key of the user to set the associations for
+	* @param pk the primary key of the user
 	* @param userGroupPKs the primary keys of the user groups to be associated with the user
 	* @throws SystemException if a system exception occurred
 	*/
@@ -2253,7 +2253,7 @@ public interface UserPersistence extends BasePersistence<User> {
 	/**
 	* Sets the user groups associated with the user, removing and adding associations as necessary. Also notifies the appropriate model listeners and clears the mapping table finder cache.
 	*
-	* @param pk the primary key of the user to set the associations for
+	* @param pk the primary key of the user
 	* @param userGroups the user groups to be associated with the user
 	* @throws SystemException if a system exception occurred
 	*/

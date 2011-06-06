@@ -43,21 +43,21 @@ public interface JournalArticleResourceModel extends BaseModel<JournalArticleRes
 	 */
 
 	/**
-	 * Gets the primary key of this journal article resource.
+	 * Returns the primary key of this journal article resource.
 	 *
 	 * @return the primary key of this journal article resource
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this journal article resource
+	 * Sets the primary key of this journal article resource.
 	 *
 	 * @param primaryKey the primary key of this journal article resource
 	 */
 	public void setPrimaryKey(long primaryKey);
 
 	/**
-	 * Gets the uuid of this journal article resource.
+	 * Returns the uuid of this journal article resource.
 	 *
 	 * @return the uuid of this journal article resource
 	 */
@@ -72,7 +72,7 @@ public interface JournalArticleResourceModel extends BaseModel<JournalArticleRes
 	public void setUuid(String uuid);
 
 	/**
-	 * Gets the resource prim key of this journal article resource.
+	 * Returns the resource prim key of this journal article resource.
 	 *
 	 * @return the resource prim key of this journal article resource
 	 */
@@ -86,7 +86,7 @@ public interface JournalArticleResourceModel extends BaseModel<JournalArticleRes
 	public void setResourcePrimKey(long resourcePrimKey);
 
 	/**
-	 * Gets the group ID of this journal article resource.
+	 * Returns the group ID of this journal article resource.
 	 *
 	 * @return the group ID of this journal article resource
 	 */
@@ -100,7 +100,7 @@ public interface JournalArticleResourceModel extends BaseModel<JournalArticleRes
 	public void setGroupId(long groupId);
 
 	/**
-	 * Gets the article ID of this journal article resource.
+	 * Returns the article ID of this journal article resource.
 	 *
 	 * @return the article ID of this journal article resource
 	 */

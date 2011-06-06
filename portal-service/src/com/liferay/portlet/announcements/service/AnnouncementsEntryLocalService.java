@@ -45,7 +45,7 @@ public interface AnnouncementsEntryLocalService {
 	/**
 	* Adds the announcements entry to the database. Also notifies the appropriate model listeners.
 	*
-	* @param announcementsEntry the announcements entry to add
+	* @param announcementsEntry the announcements entry
 	* @return the announcements entry that was added
 	* @throws SystemException if a system exception occurred
 	*/
@@ -65,7 +65,7 @@ public interface AnnouncementsEntryLocalService {
 	/**
 	* Deletes the announcements entry with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param entryId the primary key of the announcements entry to delete
+	* @param entryId the primary key of the announcements entry
 	* @throws PortalException if a announcements entry with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -76,7 +76,7 @@ public interface AnnouncementsEntryLocalService {
 	/**
 	* Deletes the announcements entry from the database. Also notifies the appropriate model listeners.
 	*
-	* @param announcementsEntry the announcements entry to delete
+	* @param announcementsEntry the announcements entry
 	* @throws SystemException if a system exception occurred
 	*/
 	public void deleteAnnouncementsEntry(
@@ -86,7 +86,7 @@ public interface AnnouncementsEntryLocalService {
 	/**
 	* Performs a dynamic query on the database and returns the matching rows.
 	*
-	* @param dynamicQuery the dynamic query to search with
+	* @param dynamicQuery the dynamic query
 	* @return the matching rows
 	* @throws SystemException if a system exception occurred
 	*/
@@ -102,9 +102,9 @@ public interface AnnouncementsEntryLocalService {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param dynamicQuery the dynamic query to search with
-	* @param start the lower bound of the range of model instances to return
-	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param dynamicQuery the dynamic query
+	* @param start the lower bound of the range of model instances
+	* @param end the upper bound of the range of model instances (not inclusive)
 	* @return the range of matching rows
 	* @throws SystemException if a system exception occurred
 	*/
@@ -120,9 +120,9 @@ public interface AnnouncementsEntryLocalService {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param dynamicQuery the dynamic query to search with
-	* @param start the lower bound of the range of model instances to return
-	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param dynamicQuery the dynamic query
+	* @param start the lower bound of the range of model instances
+	* @param end the upper bound of the range of model instances (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching rows
 	* @throws SystemException if a system exception occurred
@@ -135,9 +135,9 @@ public interface AnnouncementsEntryLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Counts the number of rows that match the dynamic query.
+	* Returns the number of rows that match the dynamic query.
 	*
-	* @param dynamicQuery the dynamic query to search with
+	* @param dynamicQuery the dynamic query
 	* @return the number of rows that match the dynamic query
 	* @throws SystemException if a system exception occurred
 	*/
@@ -146,9 +146,9 @@ public interface AnnouncementsEntryLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Gets the announcements entry with the primary key.
+	* Returns the announcements entry with the primary key.
 	*
-	* @param entryId the primary key of the announcements entry to get
+	* @param entryId the primary key of the announcements entry
 	* @return the announcements entry
 	* @throws PortalException if a announcements entry with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -160,14 +160,14 @@ public interface AnnouncementsEntryLocalService {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Gets a range of all the announcements entries.
+	* Returns a range of all the announcements entries.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of announcements entries to return
-	* @param end the upper bound of the range of announcements entries to return (not inclusive)
+	* @param start the lower bound of the range of announcements entries
+	* @param end the upper bound of the range of announcements entries (not inclusive)
 	* @return the range of announcements entries
 	* @throws SystemException if a system exception occurred
 	*/
@@ -177,7 +177,7 @@ public interface AnnouncementsEntryLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Gets the number of announcements entries.
+	* Returns the number of announcements entries.
 	*
 	* @return the number of announcements entries
 	* @throws SystemException if a system exception occurred
@@ -189,7 +189,7 @@ public interface AnnouncementsEntryLocalService {
 	/**
 	* Updates the announcements entry in the database. Also notifies the appropriate model listeners.
 	*
-	* @param announcementsEntry the announcements entry to update
+	* @param announcementsEntry the announcements entry
 	* @return the announcements entry that was updated
 	* @throws SystemException if a system exception occurred
 	*/
@@ -200,7 +200,7 @@ public interface AnnouncementsEntryLocalService {
 	/**
 	* Updates the announcements entry in the database. Also notifies the appropriate model listeners.
 	*
-	* @param announcementsEntry the announcements entry to update
+	* @param announcementsEntry the announcements entry
 	* @param merge whether to merge the announcements entry with the current session. See {@link com.liferay.portal.service.persistence.BatchSession#update(com.liferay.portal.kernel.dao.orm.Session, com.liferay.portal.model.BaseModel, boolean)} for an explanation.
 	* @return the announcements entry that was updated
 	* @throws SystemException if a system exception occurred
@@ -211,7 +211,7 @@ public interface AnnouncementsEntryLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Gets the Spring bean ID for this bean.
+	* Returns the Spring bean ID for this bean.
 	*
 	* @return the Spring bean ID for this bean
 	*/

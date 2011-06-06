@@ -37,7 +37,7 @@ public class WikiNodeWrapper implements WikiNode {
 	}
 
 	/**
-	* Gets the primary key of this wiki node.
+	* Returns the primary key of this wiki node.
 	*
 	* @return the primary key of this wiki node
 	*/
@@ -46,7 +46,7 @@ public class WikiNodeWrapper implements WikiNode {
 	}
 
 	/**
-	* Sets the primary key of this wiki node
+	* Sets the primary key of this wiki node.
 	*
 	* @param primaryKey the primary key of this wiki node
 	*/
@@ -55,7 +55,7 @@ public class WikiNodeWrapper implements WikiNode {
 	}
 
 	/**
-	* Gets the uuid of this wiki node.
+	* Returns the uuid of this wiki node.
 	*
 	* @return the uuid of this wiki node
 	*/
@@ -73,7 +73,7 @@ public class WikiNodeWrapper implements WikiNode {
 	}
 
 	/**
-	* Gets the node ID of this wiki node.
+	* Returns the node ID of this wiki node.
 	*
 	* @return the node ID of this wiki node
 	*/
@@ -91,7 +91,7 @@ public class WikiNodeWrapper implements WikiNode {
 	}
 
 	/**
-	* Gets the group ID of this wiki node.
+	* Returns the group ID of this wiki node.
 	*
 	* @return the group ID of this wiki node
 	*/
@@ -109,7 +109,7 @@ public class WikiNodeWrapper implements WikiNode {
 	}
 
 	/**
-	* Gets the company ID of this wiki node.
+	* Returns the company ID of this wiki node.
 	*
 	* @return the company ID of this wiki node
 	*/
@@ -127,7 +127,7 @@ public class WikiNodeWrapper implements WikiNode {
 	}
 
 	/**
-	* Gets the user ID of this wiki node.
+	* Returns the user ID of this wiki node.
 	*
 	* @return the user ID of this wiki node
 	*/
@@ -145,7 +145,7 @@ public class WikiNodeWrapper implements WikiNode {
 	}
 
 	/**
-	* Gets the user uuid of this wiki node.
+	* Returns the user uuid of this wiki node.
 	*
 	* @return the user uuid of this wiki node
 	* @throws SystemException if a system exception occurred
@@ -165,7 +165,7 @@ public class WikiNodeWrapper implements WikiNode {
 	}
 
 	/**
-	* Gets the user name of this wiki node.
+	* Returns the user name of this wiki node.
 	*
 	* @return the user name of this wiki node
 	*/
@@ -183,7 +183,7 @@ public class WikiNodeWrapper implements WikiNode {
 	}
 
 	/**
-	* Gets the create date of this wiki node.
+	* Returns the create date of this wiki node.
 	*
 	* @return the create date of this wiki node
 	*/
@@ -201,7 +201,7 @@ public class WikiNodeWrapper implements WikiNode {
 	}
 
 	/**
-	* Gets the modified date of this wiki node.
+	* Returns the modified date of this wiki node.
 	*
 	* @return the modified date of this wiki node
 	*/
@@ -219,7 +219,7 @@ public class WikiNodeWrapper implements WikiNode {
 	}
 
 	/**
-	* Gets the name of this wiki node.
+	* Returns the name of this wiki node.
 	*
 	* @return the name of this wiki node
 	*/
@@ -237,7 +237,7 @@ public class WikiNodeWrapper implements WikiNode {
 	}
 
 	/**
-	* Gets the description of this wiki node.
+	* Returns the description of this wiki node.
 	*
 	* @return the description of this wiki node
 	*/
@@ -255,7 +255,7 @@ public class WikiNodeWrapper implements WikiNode {
 	}
 
 	/**
-	* Gets the last post date of this wiki node.
+	* Returns the last post date of this wiki node.
 	*
 	* @return the last post date of this wiki node
 	*/

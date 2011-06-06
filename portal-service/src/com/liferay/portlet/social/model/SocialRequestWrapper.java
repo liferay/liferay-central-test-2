@@ -37,7 +37,7 @@ public class SocialRequestWrapper implements SocialRequest {
 	}
 
 	/**
-	* Gets the primary key of this social request.
+	* Returns the primary key of this social request.
 	*
 	* @return the primary key of this social request
 	*/
@@ -46,7 +46,7 @@ public class SocialRequestWrapper implements SocialRequest {
 	}
 
 	/**
-	* Sets the primary key of this social request
+	* Sets the primary key of this social request.
 	*
 	* @param primaryKey the primary key of this social request
 	*/
@@ -55,7 +55,7 @@ public class SocialRequestWrapper implements SocialRequest {
 	}
 
 	/**
-	* Gets the uuid of this social request.
+	* Returns the uuid of this social request.
 	*
 	* @return the uuid of this social request
 	*/
@@ -73,7 +73,7 @@ public class SocialRequestWrapper implements SocialRequest {
 	}
 
 	/**
-	* Gets the request ID of this social request.
+	* Returns the request ID of this social request.
 	*
 	* @return the request ID of this social request
 	*/
@@ -91,7 +91,7 @@ public class SocialRequestWrapper implements SocialRequest {
 	}
 
 	/**
-	* Gets the group ID of this social request.
+	* Returns the group ID of this social request.
 	*
 	* @return the group ID of this social request
 	*/
@@ -109,7 +109,7 @@ public class SocialRequestWrapper implements SocialRequest {
 	}
 
 	/**
-	* Gets the company ID of this social request.
+	* Returns the company ID of this social request.
 	*
 	* @return the company ID of this social request
 	*/
@@ -127,7 +127,7 @@ public class SocialRequestWrapper implements SocialRequest {
 	}
 
 	/**
-	* Gets the user ID of this social request.
+	* Returns the user ID of this social request.
 	*
 	* @return the user ID of this social request
 	*/
@@ -145,7 +145,7 @@ public class SocialRequestWrapper implements SocialRequest {
 	}
 
 	/**
-	* Gets the user uuid of this social request.
+	* Returns the user uuid of this social request.
 	*
 	* @return the user uuid of this social request
 	* @throws SystemException if a system exception occurred
@@ -165,7 +165,7 @@ public class SocialRequestWrapper implements SocialRequest {
 	}
 
 	/**
-	* Gets the create date of this social request.
+	* Returns the create date of this social request.
 	*
 	* @return the create date of this social request
 	*/
@@ -183,7 +183,7 @@ public class SocialRequestWrapper implements SocialRequest {
 	}
 
 	/**
-	* Gets the modified date of this social request.
+	* Returns the modified date of this social request.
 	*
 	* @return the modified date of this social request
 	*/
@@ -201,16 +201,16 @@ public class SocialRequestWrapper implements SocialRequest {
 	}
 
 	/**
-	* Gets the class name of the model instance this social request is polymorphically associated with.
+	* Returns the fully qualified class name of this social request.
 	*
-	* @return the class name of the model instance this social request is polymorphically associated with
+	* @return the fully qualified class name of this social request
 	*/
 	public java.lang.String getClassName() {
 		return _socialRequest.getClassName();
 	}
 
 	/**
-	* Gets the class name ID of this social request.
+	* Returns the class name ID of this social request.
 	*
 	* @return the class name ID of this social request
 	*/
@@ -228,7 +228,7 @@ public class SocialRequestWrapper implements SocialRequest {
 	}
 
 	/**
-	* Gets the class p k of this social request.
+	* Returns the class p k of this social request.
 	*
 	* @return the class p k of this social request
 	*/
@@ -246,7 +246,7 @@ public class SocialRequestWrapper implements SocialRequest {
 	}
 
 	/**
-	* Gets the type of this social request.
+	* Returns the type of this social request.
 	*
 	* @return the type of this social request
 	*/
@@ -264,7 +264,7 @@ public class SocialRequestWrapper implements SocialRequest {
 	}
 
 	/**
-	* Gets the extra data of this social request.
+	* Returns the extra data of this social request.
 	*
 	* @return the extra data of this social request
 	*/
@@ -282,7 +282,7 @@ public class SocialRequestWrapper implements SocialRequest {
 	}
 
 	/**
-	* Gets the receiver user ID of this social request.
+	* Returns the receiver user ID of this social request.
 	*
 	* @return the receiver user ID of this social request
 	*/
@@ -300,7 +300,7 @@ public class SocialRequestWrapper implements SocialRequest {
 	}
 
 	/**
-	* Gets the receiver user uuid of this social request.
+	* Returns the receiver user uuid of this social request.
 	*
 	* @return the receiver user uuid of this social request
 	* @throws SystemException if a system exception occurred
@@ -320,7 +320,7 @@ public class SocialRequestWrapper implements SocialRequest {
 	}
 
 	/**
-	* Gets the status of this social request.
+	* Returns the status of this social request.
 	*
 	* @return the status of this social request
 	*/

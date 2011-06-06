@@ -39,7 +39,7 @@ public class PortalLocalServiceUtil {
 	 */
 
 	/**
-	* Gets the Spring bean ID for this bean.
+	* Returns the Spring bean ID for this bean.
 	*
 	* @return the Spring bean ID for this bean
 	*/

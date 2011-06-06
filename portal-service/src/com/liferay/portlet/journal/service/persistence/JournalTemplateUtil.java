@@ -121,7 +121,7 @@ public class JournalTemplateUtil {
 	/**
 	* Caches the journal template in the entity cache if it is enabled.
 	*
-	* @param journalTemplate the journal template to cache
+	* @param journalTemplate the journal template
 	*/
 	public static void cacheResult(
 		com.liferay.portlet.journal.model.JournalTemplate journalTemplate) {
@@ -131,7 +131,7 @@ public class JournalTemplateUtil {
 	/**
 	* Caches the journal templates in the entity cache if it is enabled.
 	*
-	* @param journalTemplates the journal templates to cache
+	* @param journalTemplates the journal templates
 	*/
 	public static void cacheResult(
 		java.util.List<com.liferay.portlet.journal.model.JournalTemplate> journalTemplates) {
@@ -152,7 +152,7 @@ public class JournalTemplateUtil {
 	/**
 	* Removes the journal template with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param id the primary key of the journal template to remove
+	* @param id the primary key of the journal template
 	* @return the journal template that was removed
 	* @throws com.liferay.portlet.journal.NoSuchTemplateException if a journal template with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -172,9 +172,9 @@ public class JournalTemplateUtil {
 	}
 
 	/**
-	* Finds the journal template with the primary key or throws a {@link com.liferay.portlet.journal.NoSuchTemplateException} if it could not be found.
+	* Returns the journal template with the primary key or throws a {@link com.liferay.portlet.journal.NoSuchTemplateException} if it could not be found.
 	*
-	* @param id the primary key of the journal template to find
+	* @param id the primary key of the journal template
 	* @return the journal template
 	* @throws com.liferay.portlet.journal.NoSuchTemplateException if a journal template with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -187,9 +187,9 @@ public class JournalTemplateUtil {
 	}
 
 	/**
-	* Finds the journal template with the primary key or returns <code>null</code> if it could not be found.
+	* Returns the journal template with the primary key or returns <code>null</code> if it could not be found.
 	*
-	* @param id the primary key of the journal template to find
+	* @param id the primary key of the journal template
 	* @return the journal template, or <code>null</code> if a journal template with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -199,9 +199,9 @@ public class JournalTemplateUtil {
 	}
 
 	/**
-	* Finds all the journal templates where uuid = &#63;.
+	* Returns all the journal templates where uuid = &#63;.
 	*
-	* @param uuid the uuid to search with
+	* @param uuid the uuid
 	* @return the matching journal templates
 	* @throws SystemException if a system exception occurred
 	*/
@@ -212,15 +212,15 @@ public class JournalTemplateUtil {
 	}
 
 	/**
-	* Finds a range of all the journal templates where uuid = &#63;.
+	* Returns a range of all the journal templates where uuid = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param uuid the uuid to search with
-	* @param start the lower bound of the range of journal templates to return
-	* @param end the upper bound of the range of journal templates to return (not inclusive)
+	* @param uuid the uuid
+	* @param start the lower bound of the range of journal templates
+	* @param end the upper bound of the range of journal templates (not inclusive)
 	* @return the range of matching journal templates
 	* @throws SystemException if a system exception occurred
 	*/
@@ -231,15 +231,15 @@ public class JournalTemplateUtil {
 	}
 
 	/**
-	* Finds an ordered range of all the journal templates where uuid = &#63;.
+	* Returns an ordered range of all the journal templates where uuid = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param uuid the uuid to search with
-	* @param start the lower bound of the range of journal templates to return
-	* @param end the upper bound of the range of journal templates to return (not inclusive)
+	* @param uuid the uuid
+	* @param start the lower bound of the range of journal templates
+	* @param end the upper bound of the range of journal templates (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching journal templates
 	* @throws SystemException if a system exception occurred
@@ -252,13 +252,13 @@ public class JournalTemplateUtil {
 	}
 
 	/**
-	* Finds the first journal template in the ordered set where uuid = &#63;.
+	* Returns the first journal template in the ordered set where uuid = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param uuid the uuid to search with
+	* @param uuid the uuid
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching journal template
 	* @throws com.liferay.portlet.journal.NoSuchTemplateException if a matching journal template could not be found
@@ -273,13 +273,13 @@ public class JournalTemplateUtil {
 	}
 
 	/**
-	* Finds the last journal template in the ordered set where uuid = &#63;.
+	* Returns the last journal template in the ordered set where uuid = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param uuid the uuid to search with
+	* @param uuid the uuid
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching journal template
 	* @throws com.liferay.portlet.journal.NoSuchTemplateException if a matching journal template could not be found
@@ -294,14 +294,14 @@ public class JournalTemplateUtil {
 	}
 
 	/**
-	* Finds the journal templates before and after the current journal template in the ordered set where uuid = &#63;.
+	* Returns the journal templates before and after the current journal template in the ordered set where uuid = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
 	* @param id the primary key of the current journal template
-	* @param uuid the uuid to search with
+	* @param uuid the uuid
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next journal template
 	* @throws com.liferay.portlet.journal.NoSuchTemplateException if a journal template with the primary key could not be found
@@ -317,10 +317,10 @@ public class JournalTemplateUtil {
 	}
 
 	/**
-	* Finds the journal template where uuid = &#63; and groupId = &#63; or throws a {@link com.liferay.portlet.journal.NoSuchTemplateException} if it could not be found.
+	* Returns the journal template where uuid = &#63; and groupId = &#63; or throws a {@link com.liferay.portlet.journal.NoSuchTemplateException} if it could not be found.
 	*
-	* @param uuid the uuid to search with
-	* @param groupId the group ID to search with
+	* @param uuid the uuid
+	* @param groupId the group ID
 	* @return the matching journal template
 	* @throws com.liferay.portlet.journal.NoSuchTemplateException if a matching journal template could not be found
 	* @throws SystemException if a system exception occurred
@@ -333,10 +333,10 @@ public class JournalTemplateUtil {
 	}
 
 	/**
-	* Finds the journal template where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	* Returns the journal template where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	*
-	* @param uuid the uuid to search with
-	* @param groupId the group ID to search with
+	* @param uuid the uuid
+	* @param groupId the group ID
 	* @return the matching journal template, or <code>null</code> if a matching journal template could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -347,10 +347,10 @@ public class JournalTemplateUtil {
 	}
 
 	/**
-	* Finds the journal template where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	* Returns the journal template where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
-	* @param uuid the uuid to search with
-	* @param groupId the group ID to search with
+	* @param uuid the uuid
+	* @param groupId the group ID
 	* @return the matching journal template, or <code>null</code> if a matching journal template could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -361,9 +361,9 @@ public class JournalTemplateUtil {
 	}
 
 	/**
-	* Finds all the journal templates where groupId = &#63;.
+	* Returns all the journal templates where groupId = &#63;.
 	*
-	* @param groupId the group ID to search with
+	* @param groupId the group ID
 	* @return the matching journal templates
 	* @throws SystemException if a system exception occurred
 	*/
@@ -374,15 +374,15 @@ public class JournalTemplateUtil {
 	}
 
 	/**
-	* Finds a range of all the journal templates where groupId = &#63;.
+	* Returns a range of all the journal templates where groupId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param start the lower bound of the range of journal templates to return
-	* @param end the upper bound of the range of journal templates to return (not inclusive)
+	* @param groupId the group ID
+	* @param start the lower bound of the range of journal templates
+	* @param end the upper bound of the range of journal templates (not inclusive)
 	* @return the range of matching journal templates
 	* @throws SystemException if a system exception occurred
 	*/
@@ -393,15 +393,15 @@ public class JournalTemplateUtil {
 	}
 
 	/**
-	* Finds an ordered range of all the journal templates where groupId = &#63;.
+	* Returns an ordered range of all the journal templates where groupId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param start the lower bound of the range of journal templates to return
-	* @param end the upper bound of the range of journal templates to return (not inclusive)
+	* @param groupId the group ID
+	* @param start the lower bound of the range of journal templates
+	* @param end the upper bound of the range of journal templates (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching journal templates
 	* @throws SystemException if a system exception occurred
@@ -415,13 +415,13 @@ public class JournalTemplateUtil {
 	}
 
 	/**
-	* Finds the first journal template in the ordered set where groupId = &#63;.
+	* Returns the first journal template in the ordered set where groupId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
+	* @param groupId the group ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching journal template
 	* @throws com.liferay.portlet.journal.NoSuchTemplateException if a matching journal template could not be found
@@ -436,13 +436,13 @@ public class JournalTemplateUtil {
 	}
 
 	/**
-	* Finds the last journal template in the ordered set where groupId = &#63;.
+	* Returns the last journal template in the ordered set where groupId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
+	* @param groupId the group ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching journal template
 	* @throws com.liferay.portlet.journal.NoSuchTemplateException if a matching journal template could not be found
@@ -457,14 +457,14 @@ public class JournalTemplateUtil {
 	}
 
 	/**
-	* Finds the journal templates before and after the current journal template in the ordered set where groupId = &#63;.
+	* Returns the journal templates before and after the current journal template in the ordered set where groupId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
 	* @param id the primary key of the current journal template
-	* @param groupId the group ID to search with
+	* @param groupId the group ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next journal template
 	* @throws com.liferay.portlet.journal.NoSuchTemplateException if a journal template with the primary key could not be found
@@ -480,9 +480,9 @@ public class JournalTemplateUtil {
 	}
 
 	/**
-	* Filters by the user's permissions and finds all the journal templates where groupId = &#63;.
+	* Returns all the journal templates that the user has permission to view where groupId = &#63;.
 	*
-	* @param groupId the group ID to search with
+	* @param groupId the group ID
 	* @return the matching journal templates that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -493,15 +493,15 @@ public class JournalTemplateUtil {
 	}
 
 	/**
-	* Filters by the user's permissions and finds a range of all the journal templates where groupId = &#63;.
+	* Returns a range of all the journal templates that the user has permission to view where groupId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param start the lower bound of the range of journal templates to return
-	* @param end the upper bound of the range of journal templates to return (not inclusive)
+	* @param groupId the group ID
+	* @param start the lower bound of the range of journal templates
+	* @param end the upper bound of the range of journal templates (not inclusive)
 	* @return the range of matching journal templates that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -512,15 +512,15 @@ public class JournalTemplateUtil {
 	}
 
 	/**
-	* Filters by the user's permissions and finds an ordered range of all the journal templates where groupId = &#63;.
+	* Returns an ordered range of all the journal templates that the user has permissions to view where groupId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param start the lower bound of the range of journal templates to return
-	* @param end the upper bound of the range of journal templates to return (not inclusive)
+	* @param groupId the group ID
+	* @param start the lower bound of the range of journal templates
+	* @param end the upper bound of the range of journal templates (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching journal templates that the user has permission to view
 	* @throws SystemException if a system exception occurred
@@ -534,14 +534,10 @@ public class JournalTemplateUtil {
 	}
 
 	/**
-	* Filters the journal templates before and after the current journal template in the ordered set where groupId = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
-	* </p>
+	* Returns the journal templates before and after the current journal template in the ordered set of journal templates that the user has permission to view where groupId = &#63;.
 	*
 	* @param id the primary key of the current journal template
-	* @param groupId the group ID to search with
+	* @param groupId the group ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next journal template
 	* @throws com.liferay.portlet.journal.NoSuchTemplateException if a journal template with the primary key could not be found
@@ -558,9 +554,9 @@ public class JournalTemplateUtil {
 	}
 
 	/**
-	* Finds all the journal templates where templateId = &#63;.
+	* Returns all the journal templates where templateId = &#63;.
 	*
-	* @param templateId the template ID to search with
+	* @param templateId the template ID
 	* @return the matching journal templates
 	* @throws SystemException if a system exception occurred
 	*/
@@ -571,15 +567,15 @@ public class JournalTemplateUtil {
 	}
 
 	/**
-	* Finds a range of all the journal templates where templateId = &#63;.
+	* Returns a range of all the journal templates where templateId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param templateId the template ID to search with
-	* @param start the lower bound of the range of journal templates to return
-	* @param end the upper bound of the range of journal templates to return (not inclusive)
+	* @param templateId the template ID
+	* @param start the lower bound of the range of journal templates
+	* @param end the upper bound of the range of journal templates (not inclusive)
 	* @return the range of matching journal templates
 	* @throws SystemException if a system exception occurred
 	*/
@@ -590,15 +586,15 @@ public class JournalTemplateUtil {
 	}
 
 	/**
-	* Finds an ordered range of all the journal templates where templateId = &#63;.
+	* Returns an ordered range of all the journal templates where templateId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param templateId the template ID to search with
-	* @param start the lower bound of the range of journal templates to return
-	* @param end the upper bound of the range of journal templates to return (not inclusive)
+	* @param templateId the template ID
+	* @param start the lower bound of the range of journal templates
+	* @param end the upper bound of the range of journal templates (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching journal templates
 	* @throws SystemException if a system exception occurred
@@ -612,13 +608,13 @@ public class JournalTemplateUtil {
 	}
 
 	/**
-	* Finds the first journal template in the ordered set where templateId = &#63;.
+	* Returns the first journal template in the ordered set where templateId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param templateId the template ID to search with
+	* @param templateId the template ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching journal template
 	* @throws com.liferay.portlet.journal.NoSuchTemplateException if a matching journal template could not be found
@@ -634,13 +630,13 @@ public class JournalTemplateUtil {
 	}
 
 	/**
-	* Finds the last journal template in the ordered set where templateId = &#63;.
+	* Returns the last journal template in the ordered set where templateId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param templateId the template ID to search with
+	* @param templateId the template ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching journal template
 	* @throws com.liferay.portlet.journal.NoSuchTemplateException if a matching journal template could not be found
@@ -656,14 +652,14 @@ public class JournalTemplateUtil {
 	}
 
 	/**
-	* Finds the journal templates before and after the current journal template in the ordered set where templateId = &#63;.
+	* Returns the journal templates before and after the current journal template in the ordered set where templateId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
 	* @param id the primary key of the current journal template
-	* @param templateId the template ID to search with
+	* @param templateId the template ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next journal template
 	* @throws com.liferay.portlet.journal.NoSuchTemplateException if a journal template with the primary key could not be found
@@ -680,9 +676,9 @@ public class JournalTemplateUtil {
 	}
 
 	/**
-	* Finds the journal template where smallImageId = &#63; or throws a {@link com.liferay.portlet.journal.NoSuchTemplateException} if it could not be found.
+	* Returns the journal template where smallImageId = &#63; or throws a {@link com.liferay.portlet.journal.NoSuchTemplateException} if it could not be found.
 	*
-	* @param smallImageId the small image ID to search with
+	* @param smallImageId the small image ID
 	* @return the matching journal template
 	* @throws com.liferay.portlet.journal.NoSuchTemplateException if a matching journal template could not be found
 	* @throws SystemException if a system exception occurred
@@ -695,9 +691,9 @@ public class JournalTemplateUtil {
 	}
 
 	/**
-	* Finds the journal template where smallImageId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	* Returns the journal template where smallImageId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	*
-	* @param smallImageId the small image ID to search with
+	* @param smallImageId the small image ID
 	* @return the matching journal template, or <code>null</code> if a matching journal template could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -708,9 +704,9 @@ public class JournalTemplateUtil {
 	}
 
 	/**
-	* Finds the journal template where smallImageId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	* Returns the journal template where smallImageId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
-	* @param smallImageId the small image ID to search with
+	* @param smallImageId the small image ID
 	* @return the matching journal template, or <code>null</code> if a matching journal template could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -722,10 +718,10 @@ public class JournalTemplateUtil {
 	}
 
 	/**
-	* Finds the journal template where groupId = &#63; and templateId = &#63; or throws a {@link com.liferay.portlet.journal.NoSuchTemplateException} if it could not be found.
+	* Returns the journal template where groupId = &#63; and templateId = &#63; or throws a {@link com.liferay.portlet.journal.NoSuchTemplateException} if it could not be found.
 	*
-	* @param groupId the group ID to search with
-	* @param templateId the template ID to search with
+	* @param groupId the group ID
+	* @param templateId the template ID
 	* @return the matching journal template
 	* @throws com.liferay.portlet.journal.NoSuchTemplateException if a matching journal template could not be found
 	* @throws SystemException if a system exception occurred
@@ -738,10 +734,10 @@ public class JournalTemplateUtil {
 	}
 
 	/**
-	* Finds the journal template where groupId = &#63; and templateId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	* Returns the journal template where groupId = &#63; and templateId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	*
-	* @param groupId the group ID to search with
-	* @param templateId the template ID to search with
+	* @param groupId the group ID
+	* @param templateId the template ID
 	* @return the matching journal template, or <code>null</code> if a matching journal template could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -752,10 +748,10 @@ public class JournalTemplateUtil {
 	}
 
 	/**
-	* Finds the journal template where groupId = &#63; and templateId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	* Returns the journal template where groupId = &#63; and templateId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
-	* @param groupId the group ID to search with
-	* @param templateId the template ID to search with
+	* @param groupId the group ID
+	* @param templateId the template ID
 	* @return the matching journal template, or <code>null</code> if a matching journal template could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -767,10 +763,10 @@ public class JournalTemplateUtil {
 	}
 
 	/**
-	* Finds all the journal templates where groupId = &#63; and structureId = &#63;.
+	* Returns all the journal templates where groupId = &#63; and structureId = &#63;.
 	*
-	* @param groupId the group ID to search with
-	* @param structureId the structure ID to search with
+	* @param groupId the group ID
+	* @param structureId the structure ID
 	* @return the matching journal templates
 	* @throws SystemException if a system exception occurred
 	*/
@@ -781,16 +777,16 @@ public class JournalTemplateUtil {
 	}
 
 	/**
-	* Finds a range of all the journal templates where groupId = &#63; and structureId = &#63;.
+	* Returns a range of all the journal templates where groupId = &#63; and structureId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param structureId the structure ID to search with
-	* @param start the lower bound of the range of journal templates to return
-	* @param end the upper bound of the range of journal templates to return (not inclusive)
+	* @param groupId the group ID
+	* @param structureId the structure ID
+	* @param start the lower bound of the range of journal templates
+	* @param end the upper bound of the range of journal templates (not inclusive)
 	* @return the range of matching journal templates
 	* @throws SystemException if a system exception occurred
 	*/
@@ -801,16 +797,16 @@ public class JournalTemplateUtil {
 	}
 
 	/**
-	* Finds an ordered range of all the journal templates where groupId = &#63; and structureId = &#63;.
+	* Returns an ordered range of all the journal templates where groupId = &#63; and structureId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param structureId the structure ID to search with
-	* @param start the lower bound of the range of journal templates to return
-	* @param end the upper bound of the range of journal templates to return (not inclusive)
+	* @param groupId the group ID
+	* @param structureId the structure ID
+	* @param start the lower bound of the range of journal templates
+	* @param end the upper bound of the range of journal templates (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching journal templates
 	* @throws SystemException if a system exception occurred
@@ -825,14 +821,14 @@ public class JournalTemplateUtil {
 	}
 
 	/**
-	* Finds the first journal template in the ordered set where groupId = &#63; and structureId = &#63;.
+	* Returns the first journal template in the ordered set where groupId = &#63; and structureId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param structureId the structure ID to search with
+	* @param groupId the group ID
+	* @param structureId the structure ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching journal template
 	* @throws com.liferay.portlet.journal.NoSuchTemplateException if a matching journal template could not be found
@@ -848,14 +844,14 @@ public class JournalTemplateUtil {
 	}
 
 	/**
-	* Finds the last journal template in the ordered set where groupId = &#63; and structureId = &#63;.
+	* Returns the last journal template in the ordered set where groupId = &#63; and structureId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param structureId the structure ID to search with
+	* @param groupId the group ID
+	* @param structureId the structure ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching journal template
 	* @throws com.liferay.portlet.journal.NoSuchTemplateException if a matching journal template could not be found
@@ -871,15 +867,15 @@ public class JournalTemplateUtil {
 	}
 
 	/**
-	* Finds the journal templates before and after the current journal template in the ordered set where groupId = &#63; and structureId = &#63;.
+	* Returns the journal templates before and after the current journal template in the ordered set where groupId = &#63; and structureId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
 	* @param id the primary key of the current journal template
-	* @param groupId the group ID to search with
-	* @param structureId the structure ID to search with
+	* @param groupId the group ID
+	* @param structureId the structure ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next journal template
 	* @throws com.liferay.portlet.journal.NoSuchTemplateException if a journal template with the primary key could not be found
@@ -896,10 +892,10 @@ public class JournalTemplateUtil {
 	}
 
 	/**
-	* Filters by the user's permissions and finds all the journal templates where groupId = &#63; and structureId = &#63;.
+	* Returns all the journal templates that the user has permission to view where groupId = &#63; and structureId = &#63;.
 	*
-	* @param groupId the group ID to search with
-	* @param structureId the structure ID to search with
+	* @param groupId the group ID
+	* @param structureId the structure ID
 	* @return the matching journal templates that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -910,16 +906,16 @@ public class JournalTemplateUtil {
 	}
 
 	/**
-	* Filters by the user's permissions and finds a range of all the journal templates where groupId = &#63; and structureId = &#63;.
+	* Returns a range of all the journal templates that the user has permission to view where groupId = &#63; and structureId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param structureId the structure ID to search with
-	* @param start the lower bound of the range of journal templates to return
-	* @param end the upper bound of the range of journal templates to return (not inclusive)
+	* @param groupId the group ID
+	* @param structureId the structure ID
+	* @param start the lower bound of the range of journal templates
+	* @param end the upper bound of the range of journal templates (not inclusive)
 	* @return the range of matching journal templates that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -930,16 +926,16 @@ public class JournalTemplateUtil {
 	}
 
 	/**
-	* Filters by the user's permissions and finds an ordered range of all the journal templates where groupId = &#63; and structureId = &#63;.
+	* Returns an ordered range of all the journal templates that the user has permissions to view where groupId = &#63; and structureId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param structureId the structure ID to search with
-	* @param start the lower bound of the range of journal templates to return
-	* @param end the upper bound of the range of journal templates to return (not inclusive)
+	* @param groupId the group ID
+	* @param structureId the structure ID
+	* @param start the lower bound of the range of journal templates
+	* @param end the upper bound of the range of journal templates (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching journal templates that the user has permission to view
 	* @throws SystemException if a system exception occurred
@@ -954,15 +950,11 @@ public class JournalTemplateUtil {
 	}
 
 	/**
-	* Filters the journal templates before and after the current journal template in the ordered set where groupId = &#63; and structureId = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
-	* </p>
+	* Returns the journal templates before and after the current journal template in the ordered set of journal templates that the user has permission to view where groupId = &#63; and structureId = &#63;.
 	*
 	* @param id the primary key of the current journal template
-	* @param groupId the group ID to search with
-	* @param structureId the structure ID to search with
+	* @param groupId the group ID
+	* @param structureId the structure ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next journal template
 	* @throws com.liferay.portlet.journal.NoSuchTemplateException if a journal template with the primary key could not be found
@@ -979,7 +971,7 @@ public class JournalTemplateUtil {
 	}
 
 	/**
-	* Finds all the journal templates.
+	* Returns all the journal templates.
 	*
 	* @return the journal templates
 	* @throws SystemException if a system exception occurred
@@ -990,14 +982,14 @@ public class JournalTemplateUtil {
 	}
 
 	/**
-	* Finds a range of all the journal templates.
+	* Returns a range of all the journal templates.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of journal templates to return
-	* @param end the upper bound of the range of journal templates to return (not inclusive)
+	* @param start the lower bound of the range of journal templates
+	* @param end the upper bound of the range of journal templates (not inclusive)
 	* @return the range of journal templates
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1008,14 +1000,14 @@ public class JournalTemplateUtil {
 	}
 
 	/**
-	* Finds an ordered range of all the journal templates.
+	* Returns an ordered range of all the journal templates.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of journal templates to return
-	* @param end the upper bound of the range of journal templates to return (not inclusive)
+	* @param start the lower bound of the range of journal templates
+	* @param end the upper bound of the range of journal templates (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of journal templates
 	* @throws SystemException if a system exception occurred
@@ -1030,7 +1022,7 @@ public class JournalTemplateUtil {
 	/**
 	* Removes all the journal templates where uuid = &#63; from the database.
 	*
-	* @param uuid the uuid to search with
+	* @param uuid the uuid
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByUuid(java.lang.String uuid)
@@ -1041,8 +1033,8 @@ public class JournalTemplateUtil {
 	/**
 	* Removes the journal template where uuid = &#63; and groupId = &#63; from the database.
 	*
-	* @param uuid the uuid to search with
-	* @param groupId the group ID to search with
+	* @param uuid the uuid
+	* @param groupId the group ID
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByUUID_G(java.lang.String uuid, long groupId)
@@ -1054,7 +1046,7 @@ public class JournalTemplateUtil {
 	/**
 	* Removes all the journal templates where groupId = &#63; from the database.
 	*
-	* @param groupId the group ID to search with
+	* @param groupId the group ID
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByGroupId(long groupId)
@@ -1065,7 +1057,7 @@ public class JournalTemplateUtil {
 	/**
 	* Removes all the journal templates where templateId = &#63; from the database.
 	*
-	* @param templateId the template ID to search with
+	* @param templateId the template ID
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByTemplateId(java.lang.String templateId)
@@ -1076,7 +1068,7 @@ public class JournalTemplateUtil {
 	/**
 	* Removes the journal template where smallImageId = &#63; from the database.
 	*
-	* @param smallImageId the small image ID to search with
+	* @param smallImageId the small image ID
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeBySmallImageId(long smallImageId)
@@ -1088,8 +1080,8 @@ public class JournalTemplateUtil {
 	/**
 	* Removes the journal template where groupId = &#63; and templateId = &#63; from the database.
 	*
-	* @param groupId the group ID to search with
-	* @param templateId the template ID to search with
+	* @param groupId the group ID
+	* @param templateId the template ID
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByG_T(long groupId, java.lang.String templateId)
@@ -1101,8 +1093,8 @@ public class JournalTemplateUtil {
 	/**
 	* Removes all the journal templates where groupId = &#63; and structureId = &#63; from the database.
 	*
-	* @param groupId the group ID to search with
-	* @param structureId the structure ID to search with
+	* @param groupId the group ID
+	* @param structureId the structure ID
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByG_S(long groupId, java.lang.String structureId)
@@ -1121,9 +1113,9 @@ public class JournalTemplateUtil {
 	}
 
 	/**
-	* Counts all the journal templates where uuid = &#63;.
+	* Returns the number of journal templates where uuid = &#63;.
 	*
-	* @param uuid the uuid to search with
+	* @param uuid the uuid
 	* @return the number of matching journal templates
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1133,10 +1125,10 @@ public class JournalTemplateUtil {
 	}
 
 	/**
-	* Counts all the journal templates where uuid = &#63; and groupId = &#63;.
+	* Returns the number of journal templates where uuid = &#63; and groupId = &#63;.
 	*
-	* @param uuid the uuid to search with
-	* @param groupId the group ID to search with
+	* @param uuid the uuid
+	* @param groupId the group ID
 	* @return the number of matching journal templates
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1146,9 +1138,9 @@ public class JournalTemplateUtil {
 	}
 
 	/**
-	* Counts all the journal templates where groupId = &#63;.
+	* Returns the number of journal templates where groupId = &#63;.
 	*
-	* @param groupId the group ID to search with
+	* @param groupId the group ID
 	* @return the number of matching journal templates
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1158,9 +1150,9 @@ public class JournalTemplateUtil {
 	}
 
 	/**
-	* Filters by the user's permissions and counts all the journal templates where groupId = &#63;.
+	* Returns the number of journal templates that the user has permission to view where groupId = &#63;.
 	*
-	* @param groupId the group ID to search with
+	* @param groupId the group ID
 	* @return the number of matching journal templates that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1170,9 +1162,9 @@ public class JournalTemplateUtil {
 	}
 
 	/**
-	* Counts all the journal templates where templateId = &#63;.
+	* Returns the number of journal templates where templateId = &#63;.
 	*
-	* @param templateId the template ID to search with
+	* @param templateId the template ID
 	* @return the number of matching journal templates
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1182,9 +1174,9 @@ public class JournalTemplateUtil {
 	}
 
 	/**
-	* Counts all the journal templates where smallImageId = &#63;.
+	* Returns the number of journal templates where smallImageId = &#63;.
 	*
-	* @param smallImageId the small image ID to search with
+	* @param smallImageId the small image ID
 	* @return the number of matching journal templates
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1194,10 +1186,10 @@ public class JournalTemplateUtil {
 	}
 
 	/**
-	* Counts all the journal templates where groupId = &#63; and templateId = &#63;.
+	* Returns the number of journal templates where groupId = &#63; and templateId = &#63;.
 	*
-	* @param groupId the group ID to search with
-	* @param templateId the template ID to search with
+	* @param groupId the group ID
+	* @param templateId the template ID
 	* @return the number of matching journal templates
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1207,10 +1199,10 @@ public class JournalTemplateUtil {
 	}
 
 	/**
-	* Counts all the journal templates where groupId = &#63; and structureId = &#63;.
+	* Returns the number of journal templates where groupId = &#63; and structureId = &#63;.
 	*
-	* @param groupId the group ID to search with
-	* @param structureId the structure ID to search with
+	* @param groupId the group ID
+	* @param structureId the structure ID
 	* @return the number of matching journal templates
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1220,10 +1212,10 @@ public class JournalTemplateUtil {
 	}
 
 	/**
-	* Filters by the user's permissions and counts all the journal templates where groupId = &#63; and structureId = &#63;.
+	* Returns the number of journal templates that the user has permission to view where groupId = &#63; and structureId = &#63;.
 	*
-	* @param groupId the group ID to search with
-	* @param structureId the structure ID to search with
+	* @param groupId the group ID
+	* @param structureId the structure ID
 	* @return the number of matching journal templates that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1234,7 +1226,7 @@ public class JournalTemplateUtil {
 	}
 
 	/**
-	* Counts all the journal templates.
+	* Returns the number of journal templates.
 	*
 	* @return the number of journal templates
 	* @throws SystemException if a system exception occurred

@@ -37,7 +37,7 @@ public class LayoutSetWrapper implements LayoutSet {
 	}
 
 	/**
-	* Gets the primary key of this layout set.
+	* Returns the primary key of this layout set.
 	*
 	* @return the primary key of this layout set
 	*/
@@ -46,7 +46,7 @@ public class LayoutSetWrapper implements LayoutSet {
 	}
 
 	/**
-	* Sets the primary key of this layout set
+	* Sets the primary key of this layout set.
 	*
 	* @param primaryKey the primary key of this layout set
 	*/
@@ -55,7 +55,7 @@ public class LayoutSetWrapper implements LayoutSet {
 	}
 
 	/**
-	* Gets the layout set ID of this layout set.
+	* Returns the layout set ID of this layout set.
 	*
 	* @return the layout set ID of this layout set
 	*/
@@ -73,7 +73,7 @@ public class LayoutSetWrapper implements LayoutSet {
 	}
 
 	/**
-	* Gets the group ID of this layout set.
+	* Returns the group ID of this layout set.
 	*
 	* @return the group ID of this layout set
 	*/
@@ -91,7 +91,7 @@ public class LayoutSetWrapper implements LayoutSet {
 	}
 
 	/**
-	* Gets the company ID of this layout set.
+	* Returns the company ID of this layout set.
 	*
 	* @return the company ID of this layout set
 	*/
@@ -109,7 +109,7 @@ public class LayoutSetWrapper implements LayoutSet {
 	}
 
 	/**
-	* Gets the private layout of this layout set.
+	* Returns the private layout of this layout set.
 	*
 	* @return the private layout of this layout set
 	*/
@@ -136,7 +136,7 @@ public class LayoutSetWrapper implements LayoutSet {
 	}
 
 	/**
-	* Gets the logo of this layout set.
+	* Returns the logo of this layout set.
 	*
 	* @return the logo of this layout set
 	*/
@@ -163,7 +163,7 @@ public class LayoutSetWrapper implements LayoutSet {
 	}
 
 	/**
-	* Gets the logo ID of this layout set.
+	* Returns the logo ID of this layout set.
 	*
 	* @return the logo ID of this layout set
 	*/
@@ -181,7 +181,7 @@ public class LayoutSetWrapper implements LayoutSet {
 	}
 
 	/**
-	* Gets the theme ID of this layout set.
+	* Returns the theme ID of this layout set.
 	*
 	* @return the theme ID of this layout set
 	*/
@@ -199,7 +199,7 @@ public class LayoutSetWrapper implements LayoutSet {
 	}
 
 	/**
-	* Gets the color scheme ID of this layout set.
+	* Returns the color scheme ID of this layout set.
 	*
 	* @return the color scheme ID of this layout set
 	*/
@@ -217,7 +217,7 @@ public class LayoutSetWrapper implements LayoutSet {
 	}
 
 	/**
-	* Gets the wap theme ID of this layout set.
+	* Returns the wap theme ID of this layout set.
 	*
 	* @return the wap theme ID of this layout set
 	*/
@@ -235,7 +235,7 @@ public class LayoutSetWrapper implements LayoutSet {
 	}
 
 	/**
-	* Gets the wap color scheme ID of this layout set.
+	* Returns the wap color scheme ID of this layout set.
 	*
 	* @return the wap color scheme ID of this layout set
 	*/
@@ -253,7 +253,7 @@ public class LayoutSetWrapper implements LayoutSet {
 	}
 
 	/**
-	* Gets the css of this layout set.
+	* Returns the css of this layout set.
 	*
 	* @return the css of this layout set
 	*/
@@ -271,7 +271,7 @@ public class LayoutSetWrapper implements LayoutSet {
 	}
 
 	/**
-	* Gets the page count of this layout set.
+	* Returns the page count of this layout set.
 	*
 	* @return the page count of this layout set
 	*/
@@ -289,7 +289,7 @@ public class LayoutSetWrapper implements LayoutSet {
 	}
 
 	/**
-	* Gets the settings of this layout set.
+	* Returns the settings of this layout set.
 	*
 	* @return the settings of this layout set
 	*/
@@ -307,7 +307,7 @@ public class LayoutSetWrapper implements LayoutSet {
 	}
 
 	/**
-	* Gets the layout set prototype ID of this layout set.
+	* Returns the layout set prototype ID of this layout set.
 	*
 	* @return the layout set prototype ID of this layout set
 	*/

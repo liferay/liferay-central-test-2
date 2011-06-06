@@ -45,7 +45,7 @@ public interface EmailAddressLocalService {
 	/**
 	* Adds the email address to the database. Also notifies the appropriate model listeners.
 	*
-	* @param emailAddress the email address to add
+	* @param emailAddress the email address
 	* @return the email address that was added
 	* @throws SystemException if a system exception occurred
 	*/
@@ -65,7 +65,7 @@ public interface EmailAddressLocalService {
 	/**
 	* Deletes the email address with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param emailAddressId the primary key of the email address to delete
+	* @param emailAddressId the primary key of the email address
 	* @throws PortalException if a email address with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -76,7 +76,7 @@ public interface EmailAddressLocalService {
 	/**
 	* Deletes the email address from the database. Also notifies the appropriate model listeners.
 	*
-	* @param emailAddress the email address to delete
+	* @param emailAddress the email address
 	* @throws SystemException if a system exception occurred
 	*/
 	public void deleteEmailAddress(
@@ -86,7 +86,7 @@ public interface EmailAddressLocalService {
 	/**
 	* Performs a dynamic query on the database and returns the matching rows.
 	*
-	* @param dynamicQuery the dynamic query to search with
+	* @param dynamicQuery the dynamic query
 	* @return the matching rows
 	* @throws SystemException if a system exception occurred
 	*/
@@ -102,9 +102,9 @@ public interface EmailAddressLocalService {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param dynamicQuery the dynamic query to search with
-	* @param start the lower bound of the range of model instances to return
-	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param dynamicQuery the dynamic query
+	* @param start the lower bound of the range of model instances
+	* @param end the upper bound of the range of model instances (not inclusive)
 	* @return the range of matching rows
 	* @throws SystemException if a system exception occurred
 	*/
@@ -120,9 +120,9 @@ public interface EmailAddressLocalService {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param dynamicQuery the dynamic query to search with
-	* @param start the lower bound of the range of model instances to return
-	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param dynamicQuery the dynamic query
+	* @param start the lower bound of the range of model instances
+	* @param end the upper bound of the range of model instances (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching rows
 	* @throws SystemException if a system exception occurred
@@ -135,9 +135,9 @@ public interface EmailAddressLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Counts the number of rows that match the dynamic query.
+	* Returns the number of rows that match the dynamic query.
 	*
-	* @param dynamicQuery the dynamic query to search with
+	* @param dynamicQuery the dynamic query
 	* @return the number of rows that match the dynamic query
 	* @throws SystemException if a system exception occurred
 	*/
@@ -146,9 +146,9 @@ public interface EmailAddressLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Gets the email address with the primary key.
+	* Returns the email address with the primary key.
 	*
-	* @param emailAddressId the primary key of the email address to get
+	* @param emailAddressId the primary key of the email address
 	* @return the email address
 	* @throws PortalException if a email address with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -160,14 +160,14 @@ public interface EmailAddressLocalService {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Gets a range of all the email addresses.
+	* Returns a range of all the email addresses.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of email addresses to return
-	* @param end the upper bound of the range of email addresses to return (not inclusive)
+	* @param start the lower bound of the range of email addresses
+	* @param end the upper bound of the range of email addresses (not inclusive)
 	* @return the range of email addresses
 	* @throws SystemException if a system exception occurred
 	*/
@@ -177,7 +177,7 @@ public interface EmailAddressLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Gets the number of email addresses.
+	* Returns the number of email addresses.
 	*
 	* @return the number of email addresses
 	* @throws SystemException if a system exception occurred
@@ -189,7 +189,7 @@ public interface EmailAddressLocalService {
 	/**
 	* Updates the email address in the database. Also notifies the appropriate model listeners.
 	*
-	* @param emailAddress the email address to update
+	* @param emailAddress the email address
 	* @return the email address that was updated
 	* @throws SystemException if a system exception occurred
 	*/
@@ -200,7 +200,7 @@ public interface EmailAddressLocalService {
 	/**
 	* Updates the email address in the database. Also notifies the appropriate model listeners.
 	*
-	* @param emailAddress the email address to update
+	* @param emailAddress the email address
 	* @param merge whether to merge the email address with the current session. See {@link com.liferay.portal.service.persistence.BatchSession#update(com.liferay.portal.kernel.dao.orm.Session, com.liferay.portal.model.BaseModel, boolean)} for an explanation.
 	* @return the email address that was updated
 	* @throws SystemException if a system exception occurred
@@ -210,7 +210,7 @@ public interface EmailAddressLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Gets the Spring bean ID for this bean.
+	* Returns the Spring bean ID for this bean.
 	*
 	* @return the Spring bean ID for this bean
 	*/

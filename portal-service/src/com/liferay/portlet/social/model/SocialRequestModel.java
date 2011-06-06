@@ -46,21 +46,21 @@ public interface SocialRequestModel extends AttachedModel,
 	 */
 
 	/**
-	 * Gets the primary key of this social request.
+	 * Returns the primary key of this social request.
 	 *
 	 * @return the primary key of this social request
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this social request
+	 * Sets the primary key of this social request.
 	 *
 	 * @param primaryKey the primary key of this social request
 	 */
 	public void setPrimaryKey(long primaryKey);
 
 	/**
-	 * Gets the uuid of this social request.
+	 * Returns the uuid of this social request.
 	 *
 	 * @return the uuid of this social request
 	 */
@@ -75,7 +75,7 @@ public interface SocialRequestModel extends AttachedModel,
 	public void setUuid(String uuid);
 
 	/**
-	 * Gets the request ID of this social request.
+	 * Returns the request ID of this social request.
 	 *
 	 * @return the request ID of this social request
 	 */
@@ -89,7 +89,7 @@ public interface SocialRequestModel extends AttachedModel,
 	public void setRequestId(long requestId);
 
 	/**
-	 * Gets the group ID of this social request.
+	 * Returns the group ID of this social request.
 	 *
 	 * @return the group ID of this social request
 	 */
@@ -103,7 +103,7 @@ public interface SocialRequestModel extends AttachedModel,
 	public void setGroupId(long groupId);
 
 	/**
-	 * Gets the company ID of this social request.
+	 * Returns the company ID of this social request.
 	 *
 	 * @return the company ID of this social request
 	 */
@@ -117,7 +117,7 @@ public interface SocialRequestModel extends AttachedModel,
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the user ID of this social request.
+	 * Returns the user ID of this social request.
 	 *
 	 * @return the user ID of this social request
 	 */
@@ -131,7 +131,7 @@ public interface SocialRequestModel extends AttachedModel,
 	public void setUserId(long userId);
 
 	/**
-	 * Gets the user uuid of this social request.
+	 * Returns the user uuid of this social request.
 	 *
 	 * @return the user uuid of this social request
 	 * @throws SystemException if a system exception occurred
@@ -146,7 +146,7 @@ public interface SocialRequestModel extends AttachedModel,
 	public void setUserUuid(String userUuid);
 
 	/**
-	 * Gets the create date of this social request.
+	 * Returns the create date of this social request.
 	 *
 	 * @return the create date of this social request
 	 */
@@ -160,7 +160,7 @@ public interface SocialRequestModel extends AttachedModel,
 	public void setCreateDate(long createDate);
 
 	/**
-	 * Gets the modified date of this social request.
+	 * Returns the modified date of this social request.
 	 *
 	 * @return the modified date of this social request
 	 */
@@ -174,14 +174,14 @@ public interface SocialRequestModel extends AttachedModel,
 	public void setModifiedDate(long modifiedDate);
 
 	/**
-	 * Gets the class name of the model instance this social request is polymorphically associated with.
+	 * Returns the fully qualified class name of this social request.
 	 *
-	 * @return the class name of the model instance this social request is polymorphically associated with
+	 * @return the fully qualified class name of this social request
 	 */
 	public String getClassName();
 
 	/**
-	 * Gets the class name ID of this social request.
+	 * Returns the class name ID of this social request.
 	 *
 	 * @return the class name ID of this social request
 	 */
@@ -195,7 +195,7 @@ public interface SocialRequestModel extends AttachedModel,
 	public void setClassNameId(long classNameId);
 
 	/**
-	 * Gets the class p k of this social request.
+	 * Returns the class p k of this social request.
 	 *
 	 * @return the class p k of this social request
 	 */
@@ -209,7 +209,7 @@ public interface SocialRequestModel extends AttachedModel,
 	public void setClassPK(long classPK);
 
 	/**
-	 * Gets the type of this social request.
+	 * Returns the type of this social request.
 	 *
 	 * @return the type of this social request
 	 */
@@ -223,7 +223,7 @@ public interface SocialRequestModel extends AttachedModel,
 	public void setType(int type);
 
 	/**
-	 * Gets the extra data of this social request.
+	 * Returns the extra data of this social request.
 	 *
 	 * @return the extra data of this social request
 	 */
@@ -238,7 +238,7 @@ public interface SocialRequestModel extends AttachedModel,
 	public void setExtraData(String extraData);
 
 	/**
-	 * Gets the receiver user ID of this social request.
+	 * Returns the receiver user ID of this social request.
 	 *
 	 * @return the receiver user ID of this social request
 	 */
@@ -252,7 +252,7 @@ public interface SocialRequestModel extends AttachedModel,
 	public void setReceiverUserId(long receiverUserId);
 
 	/**
-	 * Gets the receiver user uuid of this social request.
+	 * Returns the receiver user uuid of this social request.
 	 *
 	 * @return the receiver user uuid of this social request
 	 * @throws SystemException if a system exception occurred
@@ -267,7 +267,7 @@ public interface SocialRequestModel extends AttachedModel,
 	public void setReceiverUserUuid(String receiverUserUuid);
 
 	/**
-	 * Gets the status of this social request.
+	 * Returns the status of this social request.
 	 *
 	 * @return the status of this social request
 	 */

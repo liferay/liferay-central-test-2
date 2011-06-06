@@ -104,7 +104,7 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl<An
 	/**
 	 * Caches the announcements delivery in the entity cache if it is enabled.
 	 *
-	 * @param announcementsDelivery the announcements delivery to cache
+	 * @param announcementsDelivery the announcements delivery
 	 */
 	public void cacheResult(AnnouncementsDelivery announcementsDelivery) {
 		EntityCacheUtil.putResult(AnnouncementsDeliveryModelImpl.ENTITY_CACHE_ENABLED,
@@ -124,7 +124,7 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl<An
 	/**
 	 * Caches the announcements deliveries in the entity cache if it is enabled.
 	 *
-	 * @param announcementsDeliveries the announcements deliveries to cache
+	 * @param announcementsDeliveries the announcements deliveries
 	 */
 	public void cacheResult(List<AnnouncementsDelivery> announcementsDeliveries) {
 		for (AnnouncementsDelivery announcementsDelivery : announcementsDeliveries) {
@@ -192,7 +192,7 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl<An
 	/**
 	 * Removes the announcements delivery with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param primaryKey the primary key of the announcements delivery to remove
+	 * @param primaryKey the primary key of the announcements delivery
 	 * @return the announcements delivery that was removed
 	 * @throws com.liferay.portal.NoSuchModelException if a announcements delivery with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -205,7 +205,7 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl<An
 	/**
 	 * Removes the announcements delivery with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param deliveryId the primary key of the announcements delivery to remove
+	 * @param deliveryId the primary key of the announcements delivery
 	 * @return the announcements delivery that was removed
 	 * @throws com.liferay.portlet.announcements.NoSuchDeliveryException if a announcements delivery with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -245,7 +245,7 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl<An
 	/**
 	 * Removes the announcements delivery from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param announcementsDelivery the announcements delivery to remove
+	 * @param announcementsDelivery the announcements delivery
 	 * @return the announcements delivery that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -372,9 +372,9 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl<An
 	}
 
 	/**
-	 * Finds the announcements delivery with the primary key or throws a {@link com.liferay.portal.NoSuchModelException} if it could not be found.
+	 * Returns the announcements delivery with the primary key or throws a {@link com.liferay.portal.NoSuchModelException} if it could not be found.
 	 *
-	 * @param primaryKey the primary key of the announcements delivery to find
+	 * @param primaryKey the primary key of the announcements delivery
 	 * @return the announcements delivery
 	 * @throws com.liferay.portal.NoSuchModelException if a announcements delivery with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -385,9 +385,9 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl<An
 	}
 
 	/**
-	 * Finds the announcements delivery with the primary key or throws a {@link com.liferay.portlet.announcements.NoSuchDeliveryException} if it could not be found.
+	 * Returns the announcements delivery with the primary key or throws a {@link com.liferay.portlet.announcements.NoSuchDeliveryException} if it could not be found.
 	 *
-	 * @param deliveryId the primary key of the announcements delivery to find
+	 * @param deliveryId the primary key of the announcements delivery
 	 * @return the announcements delivery
 	 * @throws com.liferay.portlet.announcements.NoSuchDeliveryException if a announcements delivery with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -409,9 +409,9 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl<An
 	}
 
 	/**
-	 * Finds the announcements delivery with the primary key or returns <code>null</code> if it could not be found.
+	 * Returns the announcements delivery with the primary key or returns <code>null</code> if it could not be found.
 	 *
-	 * @param primaryKey the primary key of the announcements delivery to find
+	 * @param primaryKey the primary key of the announcements delivery
 	 * @return the announcements delivery, or <code>null</code> if a announcements delivery with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -421,9 +421,9 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl<An
 	}
 
 	/**
-	 * Finds the announcements delivery with the primary key or returns <code>null</code> if it could not be found.
+	 * Returns the announcements delivery with the primary key or returns <code>null</code> if it could not be found.
 	 *
-	 * @param deliveryId the primary key of the announcements delivery to find
+	 * @param deliveryId the primary key of the announcements delivery
 	 * @return the announcements delivery, or <code>null</code> if a announcements delivery with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -457,9 +457,9 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl<An
 	}
 
 	/**
-	 * Finds all the announcements deliveries where userId = &#63;.
+	 * Returns all the announcements deliveries where userId = &#63;.
 	 *
-	 * @param userId the user ID to search with
+	 * @param userId the user ID
 	 * @return the matching announcements deliveries
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -469,15 +469,15 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl<An
 	}
 
 	/**
-	 * Finds a range of all the announcements deliveries where userId = &#63;.
+	 * Returns a range of all the announcements deliveries where userId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param userId the user ID to search with
-	 * @param start the lower bound of the range of announcements deliveries to return
-	 * @param end the upper bound of the range of announcements deliveries to return (not inclusive)
+	 * @param userId the user ID
+	 * @param start the lower bound of the range of announcements deliveries
+	 * @param end the upper bound of the range of announcements deliveries (not inclusive)
 	 * @return the range of matching announcements deliveries
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -487,15 +487,15 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl<An
 	}
 
 	/**
-	 * Finds an ordered range of all the announcements deliveries where userId = &#63;.
+	 * Returns an ordered range of all the announcements deliveries where userId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param userId the user ID to search with
-	 * @param start the lower bound of the range of announcements deliveries to return
-	 * @param end the upper bound of the range of announcements deliveries to return (not inclusive)
+	 * @param userId the user ID
+	 * @param start the lower bound of the range of announcements deliveries
+	 * @param end the upper bound of the range of announcements deliveries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching announcements deliveries
 	 * @throws SystemException if a system exception occurred
@@ -571,13 +571,13 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl<An
 	}
 
 	/**
-	 * Finds the first announcements delivery in the ordered set where userId = &#63;.
+	 * Returns the first announcements delivery in the ordered set where userId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param userId the user ID to search with
+	 * @param userId the user ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching announcements delivery
 	 * @throws com.liferay.portlet.announcements.NoSuchDeliveryException if a matching announcements delivery could not be found
@@ -607,13 +607,13 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl<An
 	}
 
 	/**
-	 * Finds the last announcements delivery in the ordered set where userId = &#63;.
+	 * Returns the last announcements delivery in the ordered set where userId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param userId the user ID to search with
+	 * @param userId the user ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching announcements delivery
 	 * @throws com.liferay.portlet.announcements.NoSuchDeliveryException if a matching announcements delivery could not be found
@@ -645,14 +645,14 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl<An
 	}
 
 	/**
-	 * Finds the announcements deliveries before and after the current announcements delivery in the ordered set where userId = &#63;.
+	 * Returns the announcements deliveries before and after the current announcements delivery in the ordered set where userId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
 	 * @param deliveryId the primary key of the current announcements delivery
-	 * @param userId the user ID to search with
+	 * @param userId the user ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next announcements delivery
 	 * @throws com.liferay.portlet.announcements.NoSuchDeliveryException if a announcements delivery with the primary key could not be found
@@ -789,10 +789,10 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl<An
 	}
 
 	/**
-	 * Finds the announcements delivery where userId = &#63; and type = &#63; or throws a {@link com.liferay.portlet.announcements.NoSuchDeliveryException} if it could not be found.
+	 * Returns the announcements delivery where userId = &#63; and type = &#63; or throws a {@link com.liferay.portlet.announcements.NoSuchDeliveryException} if it could not be found.
 	 *
-	 * @param userId the user ID to search with
-	 * @param type the type to search with
+	 * @param userId the user ID
+	 * @param type the type
 	 * @return the matching announcements delivery
 	 * @throws com.liferay.portlet.announcements.NoSuchDeliveryException if a matching announcements delivery could not be found
 	 * @throws SystemException if a system exception occurred
@@ -825,10 +825,10 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl<An
 	}
 
 	/**
-	 * Finds the announcements delivery where userId = &#63; and type = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 * Returns the announcements delivery where userId = &#63; and type = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	 *
-	 * @param userId the user ID to search with
-	 * @param type the type to search with
+	 * @param userId the user ID
+	 * @param type the type
 	 * @return the matching announcements delivery, or <code>null</code> if a matching announcements delivery could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -838,10 +838,10 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl<An
 	}
 
 	/**
-	 * Finds the announcements delivery where userId = &#63; and type = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 * Returns the announcements delivery where userId = &#63; and type = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	 *
-	 * @param userId the user ID to search with
-	 * @param type the type to search with
+	 * @param userId the user ID
+	 * @param type the type
 	 * @return the matching announcements delivery, or <code>null</code> if a matching announcements delivery could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -940,7 +940,7 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl<An
 	}
 
 	/**
-	 * Finds all the announcements deliveries.
+	 * Returns all the announcements deliveries.
 	 *
 	 * @return the announcements deliveries
 	 * @throws SystemException if a system exception occurred
@@ -950,14 +950,14 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl<An
 	}
 
 	/**
-	 * Finds a range of all the announcements deliveries.
+	 * Returns a range of all the announcements deliveries.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param start the lower bound of the range of announcements deliveries to return
-	 * @param end the upper bound of the range of announcements deliveries to return (not inclusive)
+	 * @param start the lower bound of the range of announcements deliveries
+	 * @param end the upper bound of the range of announcements deliveries (not inclusive)
 	 * @return the range of announcements deliveries
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -967,14 +967,14 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl<An
 	}
 
 	/**
-	 * Finds an ordered range of all the announcements deliveries.
+	 * Returns an ordered range of all the announcements deliveries.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param start the lower bound of the range of announcements deliveries to return
-	 * @param end the upper bound of the range of announcements deliveries to return (not inclusive)
+	 * @param start the lower bound of the range of announcements deliveries
+	 * @param end the upper bound of the range of announcements deliveries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of announcements deliveries
 	 * @throws SystemException if a system exception occurred
@@ -1051,7 +1051,7 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl<An
 	/**
 	 * Removes all the announcements deliveries where userId = &#63; from the database.
 	 *
-	 * @param userId the user ID to search with
+	 * @param userId the user ID
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByUserId(long userId) throws SystemException {
@@ -1063,8 +1063,8 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl<An
 	/**
 	 * Removes the announcements delivery where userId = &#63; and type = &#63; from the database.
 	 *
-	 * @param userId the user ID to search with
-	 * @param type the type to search with
+	 * @param userId the user ID
+	 * @param type the type
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByU_T(long userId, String type)
@@ -1086,9 +1086,9 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl<An
 	}
 
 	/**
-	 * Counts all the announcements deliveries where userId = &#63;.
+	 * Returns the number of announcements deliveries where userId = &#63;.
 	 *
-	 * @param userId the user ID to search with
+	 * @param userId the user ID
 	 * @return the number of matching announcements deliveries
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1139,10 +1139,10 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl<An
 	}
 
 	/**
-	 * Counts all the announcements deliveries where userId = &#63; and type = &#63;.
+	 * Returns the number of announcements deliveries where userId = &#63; and type = &#63;.
 	 *
-	 * @param userId the user ID to search with
-	 * @param type the type to search with
+	 * @param userId the user ID
+	 * @param type the type
 	 * @return the number of matching announcements deliveries
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1209,7 +1209,7 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl<An
 	}
 
 	/**
-	 * Counts all the announcements deliveries.
+	 * Returns the number of announcements deliveries.
 	 *
 	 * @return the number of announcements deliveries
 	 * @throws SystemException if a system exception occurred

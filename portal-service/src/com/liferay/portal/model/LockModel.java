@@ -45,21 +45,21 @@ public interface LockModel extends BaseModel<Lock> {
 	 */
 
 	/**
-	 * Gets the primary key of this lock.
+	 * Returns the primary key of this lock.
 	 *
 	 * @return the primary key of this lock
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this lock
+	 * Sets the primary key of this lock.
 	 *
 	 * @param primaryKey the primary key of this lock
 	 */
 	public void setPrimaryKey(long primaryKey);
 
 	/**
-	 * Gets the uuid of this lock.
+	 * Returns the uuid of this lock.
 	 *
 	 * @return the uuid of this lock
 	 */
@@ -74,7 +74,7 @@ public interface LockModel extends BaseModel<Lock> {
 	public void setUuid(String uuid);
 
 	/**
-	 * Gets the lock ID of this lock.
+	 * Returns the lock ID of this lock.
 	 *
 	 * @return the lock ID of this lock
 	 */
@@ -88,7 +88,7 @@ public interface LockModel extends BaseModel<Lock> {
 	public void setLockId(long lockId);
 
 	/**
-	 * Gets the company ID of this lock.
+	 * Returns the company ID of this lock.
 	 *
 	 * @return the company ID of this lock
 	 */
@@ -102,7 +102,7 @@ public interface LockModel extends BaseModel<Lock> {
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the user ID of this lock.
+	 * Returns the user ID of this lock.
 	 *
 	 * @return the user ID of this lock
 	 */
@@ -116,7 +116,7 @@ public interface LockModel extends BaseModel<Lock> {
 	public void setUserId(long userId);
 
 	/**
-	 * Gets the user uuid of this lock.
+	 * Returns the user uuid of this lock.
 	 *
 	 * @return the user uuid of this lock
 	 * @throws SystemException if a system exception occurred
@@ -131,7 +131,7 @@ public interface LockModel extends BaseModel<Lock> {
 	public void setUserUuid(String userUuid);
 
 	/**
-	 * Gets the user name of this lock.
+	 * Returns the user name of this lock.
 	 *
 	 * @return the user name of this lock
 	 */
@@ -146,7 +146,7 @@ public interface LockModel extends BaseModel<Lock> {
 	public void setUserName(String userName);
 
 	/**
-	 * Gets the create date of this lock.
+	 * Returns the create date of this lock.
 	 *
 	 * @return the create date of this lock
 	 */
@@ -160,7 +160,7 @@ public interface LockModel extends BaseModel<Lock> {
 	public void setCreateDate(Date createDate);
 
 	/**
-	 * Gets the class name of this lock.
+	 * Returns the class name of this lock.
 	 *
 	 * @return the class name of this lock
 	 */
@@ -175,7 +175,7 @@ public interface LockModel extends BaseModel<Lock> {
 	public void setClassName(String className);
 
 	/**
-	 * Gets the key of this lock.
+	 * Returns the key of this lock.
 	 *
 	 * @return the key of this lock
 	 */
@@ -190,7 +190,7 @@ public interface LockModel extends BaseModel<Lock> {
 	public void setKey(String key);
 
 	/**
-	 * Gets the owner of this lock.
+	 * Returns the owner of this lock.
 	 *
 	 * @return the owner of this lock
 	 */
@@ -205,7 +205,7 @@ public interface LockModel extends BaseModel<Lock> {
 	public void setOwner(String owner);
 
 	/**
-	 * Gets the inheritable of this lock.
+	 * Returns the inheritable of this lock.
 	 *
 	 * @return the inheritable of this lock
 	 */
@@ -226,7 +226,7 @@ public interface LockModel extends BaseModel<Lock> {
 	public void setInheritable(boolean inheritable);
 
 	/**
-	 * Gets the expiration date of this lock.
+	 * Returns the expiration date of this lock.
 	 *
 	 * @return the expiration date of this lock
 	 */

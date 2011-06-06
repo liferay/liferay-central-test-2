@@ -46,21 +46,21 @@ public interface PollsChoiceModel extends BaseModel<PollsChoice> {
 	 */
 
 	/**
-	 * Gets the primary key of this polls choice.
+	 * Returns the primary key of this polls choice.
 	 *
 	 * @return the primary key of this polls choice
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this polls choice
+	 * Sets the primary key of this polls choice.
 	 *
 	 * @param primaryKey the primary key of this polls choice
 	 */
 	public void setPrimaryKey(long primaryKey);
 
 	/**
-	 * Gets the uuid of this polls choice.
+	 * Returns the uuid of this polls choice.
 	 *
 	 * @return the uuid of this polls choice
 	 */
@@ -75,7 +75,7 @@ public interface PollsChoiceModel extends BaseModel<PollsChoice> {
 	public void setUuid(String uuid);
 
 	/**
-	 * Gets the choice ID of this polls choice.
+	 * Returns the choice ID of this polls choice.
 	 *
 	 * @return the choice ID of this polls choice
 	 */
@@ -89,7 +89,7 @@ public interface PollsChoiceModel extends BaseModel<PollsChoice> {
 	public void setChoiceId(long choiceId);
 
 	/**
-	 * Gets the question ID of this polls choice.
+	 * Returns the question ID of this polls choice.
 	 *
 	 * @return the question ID of this polls choice
 	 */
@@ -103,7 +103,7 @@ public interface PollsChoiceModel extends BaseModel<PollsChoice> {
 	public void setQuestionId(long questionId);
 
 	/**
-	 * Gets the name of this polls choice.
+	 * Returns the name of this polls choice.
 	 *
 	 * @return the name of this polls choice
 	 */
@@ -118,50 +118,50 @@ public interface PollsChoiceModel extends BaseModel<PollsChoice> {
 	public void setName(String name);
 
 	/**
-	 * Gets the description of this polls choice.
+	 * Returns the description of this polls choice.
 	 *
 	 * @return the description of this polls choice
 	 */
 	public String getDescription();
 
 	/**
-	 * Gets the localized description of this polls choice. Uses the default language if no localization exists for the requested language.
+	 * Returns the localized description of this polls choice in the language. Uses the default language if no localization exists for the requested language.
 	 *
-	 * @param locale the locale to get the localized description for
+	 * @param locale the locale of the language
 	 * @return the localized description of this polls choice
 	 */
 	public String getDescription(Locale locale);
 
 	/**
-	 * Gets the localized description of this polls choice, optionally using the default language if no localization exists for the requested language.
+	 * Returns the localized description of this polls choice in the language, optionally using the default language if no localization exists for the requested language.
 	 *
-	 * @param locale the local to get the localized description for
+	 * @param locale the local of the language
 	 * @param useDefault whether to use the default language if no localization exists for the requested language
 	 * @return the localized description of this polls choice. If <code>useDefault</code> is <code>false</code> and no localization exists for the requested language, an empty string will be returned.
 	 */
 	public String getDescription(Locale locale, boolean useDefault);
 
 	/**
-	 * Gets the localized description of this polls choice. Uses the default language if no localization exists for the requested language.
+	 * Returns the localized description of this polls choice in the language. Uses the default language if no localization exists for the requested language.
 	 *
-	 * @param languageId the id of the language to get the localized description for
+	 * @param languageId the ID of the language
 	 * @return the localized description of this polls choice
 	 */
 	public String getDescription(String languageId);
 
 	/**
-	 * Gets the localized description of this polls choice, optionally using the default language if no localization exists for the requested language.
+	 * Returns the localized description of this polls choice in the language, optionally using the default language if no localization exists for the requested language.
 	 *
-	 * @param languageId the id of the language to get the localized description for
+	 * @param languageId the ID of the language
 	 * @param useDefault whether to use the default language if no localization exists for the requested language
 	 * @return the localized description of this polls choice
 	 */
 	public String getDescription(String languageId, boolean useDefault);
 
 	/**
-	 * Gets a map of the locales and localized description of this polls choice.
+	 * Returns a map of the locales and localized descriptions of this polls choice.
 	 *
-	 * @return the locales and localized description
+	 * @return the locales and localized descriptions of this polls choice
 	 */
 	public Map<Locale, String> getDescriptionMap();
 
@@ -173,13 +173,20 @@ public interface PollsChoiceModel extends BaseModel<PollsChoice> {
 	public void setDescription(String description);
 
 	/**
-	 * Sets the localized description of this polls choice.
+	 * Sets the localized description of this polls choice in the language.
 	 *
 	 * @param description the localized description of this polls choice
-	 * @param locale the locale to set the localized description for
+	 * @param locale the locale of the language
 	 */
 	public void setDescription(String description, Locale locale);
 
+	/**
+	 * Sets the localized description of this polls choice in the language, and sets the default locale.
+	 *
+	 * @param description the localized description of this polls choice
+	 * @param locale the locale of the language
+	 * @param defaultLocale the default locale
+	 */
 	public void setDescription(String description, Locale locale,
 		Locale defaultLocale);
 
@@ -190,6 +197,12 @@ public interface PollsChoiceModel extends BaseModel<PollsChoice> {
 	 */
 	public void setDescriptionMap(Map<Locale, String> descriptionMap);
 
+	/**
+	 * Sets the localized descriptions of this polls choice from the map of locales and localized descriptions, and sets the default locale.
+	 *
+	 * @param descriptionMap the locales and localized descriptions of this polls choice
+	 * @param defaultLocale the default locale
+	 */
 	public void setDescriptionMap(Map<Locale, String> descriptionMap,
 		Locale defaultLocale);
 

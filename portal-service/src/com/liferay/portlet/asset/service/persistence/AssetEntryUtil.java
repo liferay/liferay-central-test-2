@@ -121,7 +121,7 @@ public class AssetEntryUtil {
 	/**
 	* Caches the asset entry in the entity cache if it is enabled.
 	*
-	* @param assetEntry the asset entry to cache
+	* @param assetEntry the asset entry
 	*/
 	public static void cacheResult(
 		com.liferay.portlet.asset.model.AssetEntry assetEntry) {
@@ -131,7 +131,7 @@ public class AssetEntryUtil {
 	/**
 	* Caches the asset entries in the entity cache if it is enabled.
 	*
-	* @param assetEntries the asset entries to cache
+	* @param assetEntries the asset entries
 	*/
 	public static void cacheResult(
 		java.util.List<com.liferay.portlet.asset.model.AssetEntry> assetEntries) {
@@ -152,7 +152,7 @@ public class AssetEntryUtil {
 	/**
 	* Removes the asset entry with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param entryId the primary key of the asset entry to remove
+	* @param entryId the primary key of the asset entry
 	* @return the asset entry that was removed
 	* @throws com.liferay.portlet.asset.NoSuchEntryException if a asset entry with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -171,9 +171,9 @@ public class AssetEntryUtil {
 	}
 
 	/**
-	* Finds the asset entry with the primary key or throws a {@link com.liferay.portlet.asset.NoSuchEntryException} if it could not be found.
+	* Returns the asset entry with the primary key or throws a {@link com.liferay.portlet.asset.NoSuchEntryException} if it could not be found.
 	*
-	* @param entryId the primary key of the asset entry to find
+	* @param entryId the primary key of the asset entry
 	* @return the asset entry
 	* @throws com.liferay.portlet.asset.NoSuchEntryException if a asset entry with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -186,9 +186,9 @@ public class AssetEntryUtil {
 	}
 
 	/**
-	* Finds the asset entry with the primary key or returns <code>null</code> if it could not be found.
+	* Returns the asset entry with the primary key or returns <code>null</code> if it could not be found.
 	*
-	* @param entryId the primary key of the asset entry to find
+	* @param entryId the primary key of the asset entry
 	* @return the asset entry, or <code>null</code> if a asset entry with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -199,9 +199,9 @@ public class AssetEntryUtil {
 	}
 
 	/**
-	* Finds all the asset entries where companyId = &#63;.
+	* Returns all the asset entries where companyId = &#63;.
 	*
-	* @param companyId the company ID to search with
+	* @param companyId the company ID
 	* @return the matching asset entries
 	* @throws SystemException if a system exception occurred
 	*/
@@ -212,15 +212,15 @@ public class AssetEntryUtil {
 	}
 
 	/**
-	* Finds a range of all the asset entries where companyId = &#63;.
+	* Returns a range of all the asset entries where companyId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company ID to search with
-	* @param start the lower bound of the range of asset entries to return
-	* @param end the upper bound of the range of asset entries to return (not inclusive)
+	* @param companyId the company ID
+	* @param start the lower bound of the range of asset entries
+	* @param end the upper bound of the range of asset entries (not inclusive)
 	* @return the range of matching asset entries
 	* @throws SystemException if a system exception occurred
 	*/
@@ -231,15 +231,15 @@ public class AssetEntryUtil {
 	}
 
 	/**
-	* Finds an ordered range of all the asset entries where companyId = &#63;.
+	* Returns an ordered range of all the asset entries where companyId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company ID to search with
-	* @param start the lower bound of the range of asset entries to return
-	* @param end the upper bound of the range of asset entries to return (not inclusive)
+	* @param companyId the company ID
+	* @param start the lower bound of the range of asset entries
+	* @param end the upper bound of the range of asset entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching asset entries
 	* @throws SystemException if a system exception occurred
@@ -253,13 +253,13 @@ public class AssetEntryUtil {
 	}
 
 	/**
-	* Finds the first asset entry in the ordered set where companyId = &#63;.
+	* Returns the first asset entry in the ordered set where companyId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company ID to search with
+	* @param companyId the company ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching asset entry
 	* @throws com.liferay.portlet.asset.NoSuchEntryException if a matching asset entry could not be found
@@ -275,13 +275,13 @@ public class AssetEntryUtil {
 	}
 
 	/**
-	* Finds the last asset entry in the ordered set where companyId = &#63;.
+	* Returns the last asset entry in the ordered set where companyId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company ID to search with
+	* @param companyId the company ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching asset entry
 	* @throws com.liferay.portlet.asset.NoSuchEntryException if a matching asset entry could not be found
@@ -297,14 +297,14 @@ public class AssetEntryUtil {
 	}
 
 	/**
-	* Finds the asset entries before and after the current asset entry in the ordered set where companyId = &#63;.
+	* Returns the asset entries before and after the current asset entry in the ordered set where companyId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
 	* @param entryId the primary key of the current asset entry
-	* @param companyId the company ID to search with
+	* @param companyId the company ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next asset entry
 	* @throws com.liferay.portlet.asset.NoSuchEntryException if a asset entry with the primary key could not be found
@@ -321,10 +321,10 @@ public class AssetEntryUtil {
 	}
 
 	/**
-	* Finds the asset entry where groupId = &#63; and classUuid = &#63; or throws a {@link com.liferay.portlet.asset.NoSuchEntryException} if it could not be found.
+	* Returns the asset entry where groupId = &#63; and classUuid = &#63; or throws a {@link com.liferay.portlet.asset.NoSuchEntryException} if it could not be found.
 	*
-	* @param groupId the group ID to search with
-	* @param classUuid the class uuid to search with
+	* @param groupId the group ID
+	* @param classUuid the class uuid
 	* @return the matching asset entry
 	* @throws com.liferay.portlet.asset.NoSuchEntryException if a matching asset entry could not be found
 	* @throws SystemException if a system exception occurred
@@ -337,10 +337,10 @@ public class AssetEntryUtil {
 	}
 
 	/**
-	* Finds the asset entry where groupId = &#63; and classUuid = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	* Returns the asset entry where groupId = &#63; and classUuid = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	*
-	* @param groupId the group ID to search with
-	* @param classUuid the class uuid to search with
+	* @param groupId the group ID
+	* @param classUuid the class uuid
 	* @return the matching asset entry, or <code>null</code> if a matching asset entry could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -351,10 +351,10 @@ public class AssetEntryUtil {
 	}
 
 	/**
-	* Finds the asset entry where groupId = &#63; and classUuid = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	* Returns the asset entry where groupId = &#63; and classUuid = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
-	* @param groupId the group ID to search with
-	* @param classUuid the class uuid to search with
+	* @param groupId the group ID
+	* @param classUuid the class uuid
 	* @return the matching asset entry, or <code>null</code> if a matching asset entry could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -366,10 +366,10 @@ public class AssetEntryUtil {
 	}
 
 	/**
-	* Finds the asset entry where classNameId = &#63; and classPK = &#63; or throws a {@link com.liferay.portlet.asset.NoSuchEntryException} if it could not be found.
+	* Returns the asset entry where classNameId = &#63; and classPK = &#63; or throws a {@link com.liferay.portlet.asset.NoSuchEntryException} if it could not be found.
 	*
-	* @param classNameId the class name ID to search with
-	* @param classPK the class p k to search with
+	* @param classNameId the class name ID
+	* @param classPK the class p k
 	* @return the matching asset entry
 	* @throws com.liferay.portlet.asset.NoSuchEntryException if a matching asset entry could not be found
 	* @throws SystemException if a system exception occurred
@@ -382,10 +382,10 @@ public class AssetEntryUtil {
 	}
 
 	/**
-	* Finds the asset entry where classNameId = &#63; and classPK = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	* Returns the asset entry where classNameId = &#63; and classPK = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	*
-	* @param classNameId the class name ID to search with
-	* @param classPK the class p k to search with
+	* @param classNameId the class name ID
+	* @param classPK the class p k
 	* @return the matching asset entry, or <code>null</code> if a matching asset entry could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -396,10 +396,10 @@ public class AssetEntryUtil {
 	}
 
 	/**
-	* Finds the asset entry where classNameId = &#63; and classPK = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	* Returns the asset entry where classNameId = &#63; and classPK = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
-	* @param classNameId the class name ID to search with
-	* @param classPK the class p k to search with
+	* @param classNameId the class name ID
+	* @param classPK the class p k
 	* @return the matching asset entry, or <code>null</code> if a matching asset entry could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -411,7 +411,7 @@ public class AssetEntryUtil {
 	}
 
 	/**
-	* Finds all the asset entries.
+	* Returns all the asset entries.
 	*
 	* @return the asset entries
 	* @throws SystemException if a system exception occurred
@@ -422,14 +422,14 @@ public class AssetEntryUtil {
 	}
 
 	/**
-	* Finds a range of all the asset entries.
+	* Returns a range of all the asset entries.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of asset entries to return
-	* @param end the upper bound of the range of asset entries to return (not inclusive)
+	* @param start the lower bound of the range of asset entries
+	* @param end the upper bound of the range of asset entries (not inclusive)
 	* @return the range of asset entries
 	* @throws SystemException if a system exception occurred
 	*/
@@ -440,14 +440,14 @@ public class AssetEntryUtil {
 	}
 
 	/**
-	* Finds an ordered range of all the asset entries.
+	* Returns an ordered range of all the asset entries.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of asset entries to return
-	* @param end the upper bound of the range of asset entries to return (not inclusive)
+	* @param start the lower bound of the range of asset entries
+	* @param end the upper bound of the range of asset entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of asset entries
 	* @throws SystemException if a system exception occurred
@@ -462,7 +462,7 @@ public class AssetEntryUtil {
 	/**
 	* Removes all the asset entries where companyId = &#63; from the database.
 	*
-	* @param companyId the company ID to search with
+	* @param companyId the company ID
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByCompanyId(long companyId)
@@ -473,8 +473,8 @@ public class AssetEntryUtil {
 	/**
 	* Removes the asset entry where groupId = &#63; and classUuid = &#63; from the database.
 	*
-	* @param groupId the group ID to search with
-	* @param classUuid the class uuid to search with
+	* @param groupId the group ID
+	* @param classUuid the class uuid
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByG_CU(long groupId, java.lang.String classUuid)
@@ -486,8 +486,8 @@ public class AssetEntryUtil {
 	/**
 	* Removes the asset entry where classNameId = &#63; and classPK = &#63; from the database.
 	*
-	* @param classNameId the class name ID to search with
-	* @param classPK the class p k to search with
+	* @param classNameId the class name ID
+	* @param classPK the class p k
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByC_C(long classNameId, long classPK)
@@ -507,9 +507,9 @@ public class AssetEntryUtil {
 	}
 
 	/**
-	* Counts all the asset entries where companyId = &#63;.
+	* Returns the number of asset entries where companyId = &#63;.
 	*
-	* @param companyId the company ID to search with
+	* @param companyId the company ID
 	* @return the number of matching asset entries
 	* @throws SystemException if a system exception occurred
 	*/
@@ -519,10 +519,10 @@ public class AssetEntryUtil {
 	}
 
 	/**
-	* Counts all the asset entries where groupId = &#63; and classUuid = &#63;.
+	* Returns the number of asset entries where groupId = &#63; and classUuid = &#63;.
 	*
-	* @param groupId the group ID to search with
-	* @param classUuid the class uuid to search with
+	* @param groupId the group ID
+	* @param classUuid the class uuid
 	* @return the number of matching asset entries
 	* @throws SystemException if a system exception occurred
 	*/
@@ -532,10 +532,10 @@ public class AssetEntryUtil {
 	}
 
 	/**
-	* Counts all the asset entries where classNameId = &#63; and classPK = &#63;.
+	* Returns the number of asset entries where classNameId = &#63; and classPK = &#63;.
 	*
-	* @param classNameId the class name ID to search with
-	* @param classPK the class p k to search with
+	* @param classNameId the class name ID
+	* @param classPK the class p k
 	* @return the number of matching asset entries
 	* @throws SystemException if a system exception occurred
 	*/
@@ -545,7 +545,7 @@ public class AssetEntryUtil {
 	}
 
 	/**
-	* Counts all the asset entries.
+	* Returns the number of asset entries.
 	*
 	* @return the number of asset entries
 	* @throws SystemException if a system exception occurred
@@ -556,9 +556,9 @@ public class AssetEntryUtil {
 	}
 
 	/**
-	* Gets all the asset categories associated with the asset entry.
+	* Returns all the asset categories associated with the asset entry.
 	*
-	* @param pk the primary key of the asset entry to get the associated asset categories for
+	* @param pk the primary key of the asset entry
 	* @return the asset categories associated with the asset entry
 	* @throws SystemException if a system exception occurred
 	*/
@@ -568,15 +568,15 @@ public class AssetEntryUtil {
 	}
 
 	/**
-	* Gets a range of all the asset categories associated with the asset entry.
+	* Returns a range of all the asset categories associated with the asset entry.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param pk the primary key of the asset entry to get the associated asset categories for
-	* @param start the lower bound of the range of asset entries to return
-	* @param end the upper bound of the range of asset entries to return (not inclusive)
+	* @param pk the primary key of the asset entry
+	* @param start the lower bound of the range of asset entries
+	* @param end the upper bound of the range of asset entries (not inclusive)
 	* @return the range of asset categories associated with the asset entry
 	* @throws SystemException if a system exception occurred
 	*/
@@ -587,15 +587,15 @@ public class AssetEntryUtil {
 	}
 
 	/**
-	* Gets an ordered range of all the asset categories associated with the asset entry.
+	* Returns an ordered range of all the asset categories associated with the asset entry.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param pk the primary key of the asset entry to get the associated asset categories for
-	* @param start the lower bound of the range of asset entries to return
-	* @param end the upper bound of the range of asset entries to return (not inclusive)
+	* @param pk the primary key of the asset entry
+	* @param start the lower bound of the range of asset entries
+	* @param end the upper bound of the range of asset entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of asset categories associated with the asset entry
 	* @throws SystemException if a system exception occurred
@@ -609,9 +609,9 @@ public class AssetEntryUtil {
 	}
 
 	/**
-	* Gets the number of asset categories associated with the asset entry.
+	* Returns the number of asset categories associated with the asset entry.
 	*
-	* @param pk the primary key of the asset entry to get the number of associated asset categories for
+	* @param pk the primary key of the asset entry
 	* @return the number of asset categories associated with the asset entry
 	* @throws SystemException if a system exception occurred
 	*/
@@ -759,7 +759,7 @@ public class AssetEntryUtil {
 	/**
 	* Sets the asset categories associated with the asset entry, removing and adding associations as necessary. Also notifies the appropriate model listeners and clears the mapping table finder cache.
 	*
-	* @param pk the primary key of the asset entry to set the associations for
+	* @param pk the primary key of the asset entry
 	* @param assetCategoryPKs the primary keys of the asset categories to be associated with the asset entry
 	* @throws SystemException if a system exception occurred
 	*/
@@ -771,7 +771,7 @@ public class AssetEntryUtil {
 	/**
 	* Sets the asset categories associated with the asset entry, removing and adding associations as necessary. Also notifies the appropriate model listeners and clears the mapping table finder cache.
 	*
-	* @param pk the primary key of the asset entry to set the associations for
+	* @param pk the primary key of the asset entry
 	* @param assetCategories the asset categories to be associated with the asset entry
 	* @throws SystemException if a system exception occurred
 	*/
@@ -782,9 +782,9 @@ public class AssetEntryUtil {
 	}
 
 	/**
-	* Gets all the asset tags associated with the asset entry.
+	* Returns all the asset tags associated with the asset entry.
 	*
-	* @param pk the primary key of the asset entry to get the associated asset tags for
+	* @param pk the primary key of the asset entry
 	* @return the asset tags associated with the asset entry
 	* @throws SystemException if a system exception occurred
 	*/
@@ -794,15 +794,15 @@ public class AssetEntryUtil {
 	}
 
 	/**
-	* Gets a range of all the asset tags associated with the asset entry.
+	* Returns a range of all the asset tags associated with the asset entry.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param pk the primary key of the asset entry to get the associated asset tags for
-	* @param start the lower bound of the range of asset entries to return
-	* @param end the upper bound of the range of asset entries to return (not inclusive)
+	* @param pk the primary key of the asset entry
+	* @param start the lower bound of the range of asset entries
+	* @param end the upper bound of the range of asset entries (not inclusive)
 	* @return the range of asset tags associated with the asset entry
 	* @throws SystemException if a system exception occurred
 	*/
@@ -813,15 +813,15 @@ public class AssetEntryUtil {
 	}
 
 	/**
-	* Gets an ordered range of all the asset tags associated with the asset entry.
+	* Returns an ordered range of all the asset tags associated with the asset entry.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param pk the primary key of the asset entry to get the associated asset tags for
-	* @param start the lower bound of the range of asset entries to return
-	* @param end the upper bound of the range of asset entries to return (not inclusive)
+	* @param pk the primary key of the asset entry
+	* @param start the lower bound of the range of asset entries
+	* @param end the upper bound of the range of asset entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of asset tags associated with the asset entry
 	* @throws SystemException if a system exception occurred
@@ -834,9 +834,9 @@ public class AssetEntryUtil {
 	}
 
 	/**
-	* Gets the number of asset tags associated with the asset entry.
+	* Returns the number of asset tags associated with the asset entry.
 	*
-	* @param pk the primary key of the asset entry to get the number of associated asset tags for
+	* @param pk the primary key of the asset entry
 	* @return the number of asset tags associated with the asset entry
 	* @throws SystemException if a system exception occurred
 	*/
@@ -984,7 +984,7 @@ public class AssetEntryUtil {
 	/**
 	* Sets the asset tags associated with the asset entry, removing and adding associations as necessary. Also notifies the appropriate model listeners and clears the mapping table finder cache.
 	*
-	* @param pk the primary key of the asset entry to set the associations for
+	* @param pk the primary key of the asset entry
 	* @param assetTagPKs the primary keys of the asset tags to be associated with the asset entry
 	* @throws SystemException if a system exception occurred
 	*/
@@ -996,7 +996,7 @@ public class AssetEntryUtil {
 	/**
 	* Sets the asset tags associated with the asset entry, removing and adding associations as necessary. Also notifies the appropriate model listeners and clears the mapping table finder cache.
 	*
-	* @param pk the primary key of the asset entry to set the associations for
+	* @param pk the primary key of the asset entry
 	* @param assetTags the asset tags to be associated with the asset entry
 	* @throws SystemException if a system exception occurred
 	*/

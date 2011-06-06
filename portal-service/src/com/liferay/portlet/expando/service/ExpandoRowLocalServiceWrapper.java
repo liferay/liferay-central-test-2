@@ -32,7 +32,7 @@ public class ExpandoRowLocalServiceWrapper implements ExpandoRowLocalService {
 	/**
 	* Adds the expando row to the database. Also notifies the appropriate model listeners.
 	*
-	* @param expandoRow the expando row to add
+	* @param expandoRow the expando row
 	* @return the expando row that was added
 	* @throws SystemException if a system exception occurred
 	*/
@@ -56,7 +56,7 @@ public class ExpandoRowLocalServiceWrapper implements ExpandoRowLocalService {
 	/**
 	* Deletes the expando row with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param rowId the primary key of the expando row to delete
+	* @param rowId the primary key of the expando row
 	* @throws PortalException if a expando row with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -69,7 +69,7 @@ public class ExpandoRowLocalServiceWrapper implements ExpandoRowLocalService {
 	/**
 	* Deletes the expando row from the database. Also notifies the appropriate model listeners.
 	*
-	* @param expandoRow the expando row to delete
+	* @param expandoRow the expando row
 	* @throws SystemException if a system exception occurred
 	*/
 	public void deleteExpandoRow(
@@ -81,7 +81,7 @@ public class ExpandoRowLocalServiceWrapper implements ExpandoRowLocalService {
 	/**
 	* Performs a dynamic query on the database and returns the matching rows.
 	*
-	* @param dynamicQuery the dynamic query to search with
+	* @param dynamicQuery the dynamic query
 	* @return the matching rows
 	* @throws SystemException if a system exception occurred
 	*/
@@ -99,9 +99,9 @@ public class ExpandoRowLocalServiceWrapper implements ExpandoRowLocalService {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param dynamicQuery the dynamic query to search with
-	* @param start the lower bound of the range of model instances to return
-	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param dynamicQuery the dynamic query
+	* @param start the lower bound of the range of model instances
+	* @param end the upper bound of the range of model instances (not inclusive)
 	* @return the range of matching rows
 	* @throws SystemException if a system exception occurred
 	*/
@@ -119,9 +119,9 @@ public class ExpandoRowLocalServiceWrapper implements ExpandoRowLocalService {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param dynamicQuery the dynamic query to search with
-	* @param start the lower bound of the range of model instances to return
-	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param dynamicQuery the dynamic query
+	* @param start the lower bound of the range of model instances
+	* @param end the upper bound of the range of model instances (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching rows
 	* @throws SystemException if a system exception occurred
@@ -137,9 +137,9 @@ public class ExpandoRowLocalServiceWrapper implements ExpandoRowLocalService {
 	}
 
 	/**
-	* Counts the number of rows that match the dynamic query.
+	* Returns the number of rows that match the dynamic query.
 	*
-	* @param dynamicQuery the dynamic query to search with
+	* @param dynamicQuery the dynamic query
 	* @return the number of rows that match the dynamic query
 	* @throws SystemException if a system exception occurred
 	*/
@@ -150,9 +150,9 @@ public class ExpandoRowLocalServiceWrapper implements ExpandoRowLocalService {
 	}
 
 	/**
-	* Gets the expando row with the primary key.
+	* Returns the expando row with the primary key.
 	*
-	* @param rowId the primary key of the expando row to get
+	* @param rowId the primary key of the expando row
 	* @return the expando row
 	* @throws PortalException if a expando row with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -165,14 +165,14 @@ public class ExpandoRowLocalServiceWrapper implements ExpandoRowLocalService {
 	}
 
 	/**
-	* Gets a range of all the expando rows.
+	* Returns a range of all the expando rows.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of expando rows to return
-	* @param end the upper bound of the range of expando rows to return (not inclusive)
+	* @param start the lower bound of the range of expando rows
+	* @param end the upper bound of the range of expando rows (not inclusive)
 	* @return the range of expando rows
 	* @throws SystemException if a system exception occurred
 	*/
@@ -183,7 +183,7 @@ public class ExpandoRowLocalServiceWrapper implements ExpandoRowLocalService {
 	}
 
 	/**
-	* Gets the number of expando rows.
+	* Returns the number of expando rows.
 	*
 	* @return the number of expando rows
 	* @throws SystemException if a system exception occurred
@@ -196,7 +196,7 @@ public class ExpandoRowLocalServiceWrapper implements ExpandoRowLocalService {
 	/**
 	* Updates the expando row in the database. Also notifies the appropriate model listeners.
 	*
-	* @param expandoRow the expando row to update
+	* @param expandoRow the expando row
 	* @return the expando row that was updated
 	* @throws SystemException if a system exception occurred
 	*/
@@ -209,7 +209,7 @@ public class ExpandoRowLocalServiceWrapper implements ExpandoRowLocalService {
 	/**
 	* Updates the expando row in the database. Also notifies the appropriate model listeners.
 	*
-	* @param expandoRow the expando row to update
+	* @param expandoRow the expando row
 	* @param merge whether to merge the expando row with the current session. See {@link com.liferay.portal.service.persistence.BatchSession#update(com.liferay.portal.kernel.dao.orm.Session, com.liferay.portal.model.BaseModel, boolean)} for an explanation.
 	* @return the expando row that was updated
 	* @throws SystemException if a system exception occurred
@@ -221,7 +221,7 @@ public class ExpandoRowLocalServiceWrapper implements ExpandoRowLocalService {
 	}
 
 	/**
-	* Gets the Spring bean ID for this bean.
+	* Returns the Spring bean ID for this bean.
 	*
 	* @return the Spring bean ID for this bean
 	*/

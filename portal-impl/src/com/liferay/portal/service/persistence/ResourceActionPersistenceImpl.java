@@ -100,7 +100,7 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 	/**
 	 * Caches the resource action in the entity cache if it is enabled.
 	 *
-	 * @param resourceAction the resource action to cache
+	 * @param resourceAction the resource action
 	 */
 	public void cacheResult(ResourceAction resourceAction) {
 		EntityCacheUtil.putResult(ResourceActionModelImpl.ENTITY_CACHE_ENABLED,
@@ -117,7 +117,7 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 	/**
 	 * Caches the resource actions in the entity cache if it is enabled.
 	 *
-	 * @param resourceActions the resource actions to cache
+	 * @param resourceActions the resource actions
 	 */
 	public void cacheResult(List<ResourceAction> resourceActions) {
 		for (ResourceAction resourceAction : resourceActions) {
@@ -180,7 +180,7 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 	/**
 	 * Removes the resource action with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param primaryKey the primary key of the resource action to remove
+	 * @param primaryKey the primary key of the resource action
 	 * @return the resource action that was removed
 	 * @throws com.liferay.portal.NoSuchModelException if a resource action with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -193,7 +193,7 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 	/**
 	 * Removes the resource action with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param resourceActionId the primary key of the resource action to remove
+	 * @param resourceActionId the primary key of the resource action
 	 * @return the resource action that was removed
 	 * @throws com.liferay.portal.NoSuchResourceActionException if a resource action with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -234,7 +234,7 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 	/**
 	 * Removes the resource action from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param resourceAction the resource action to remove
+	 * @param resourceAction the resource action
 	 * @return the resource action that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -357,9 +357,9 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 	}
 
 	/**
-	 * Finds the resource action with the primary key or throws a {@link com.liferay.portal.NoSuchModelException} if it could not be found.
+	 * Returns the resource action with the primary key or throws a {@link com.liferay.portal.NoSuchModelException} if it could not be found.
 	 *
-	 * @param primaryKey the primary key of the resource action to find
+	 * @param primaryKey the primary key of the resource action
 	 * @return the resource action
 	 * @throws com.liferay.portal.NoSuchModelException if a resource action with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -370,9 +370,9 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 	}
 
 	/**
-	 * Finds the resource action with the primary key or throws a {@link com.liferay.portal.NoSuchResourceActionException} if it could not be found.
+	 * Returns the resource action with the primary key or throws a {@link com.liferay.portal.NoSuchResourceActionException} if it could not be found.
 	 *
-	 * @param resourceActionId the primary key of the resource action to find
+	 * @param resourceActionId the primary key of the resource action
 	 * @return the resource action
 	 * @throws com.liferay.portal.NoSuchResourceActionException if a resource action with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -394,9 +394,9 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 	}
 
 	/**
-	 * Finds the resource action with the primary key or returns <code>null</code> if it could not be found.
+	 * Returns the resource action with the primary key or returns <code>null</code> if it could not be found.
 	 *
-	 * @param primaryKey the primary key of the resource action to find
+	 * @param primaryKey the primary key of the resource action
 	 * @return the resource action, or <code>null</code> if a resource action with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -406,9 +406,9 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 	}
 
 	/**
-	 * Finds the resource action with the primary key or returns <code>null</code> if it could not be found.
+	 * Returns the resource action with the primary key or returns <code>null</code> if it could not be found.
 	 *
-	 * @param resourceActionId the primary key of the resource action to find
+	 * @param resourceActionId the primary key of the resource action
 	 * @return the resource action, or <code>null</code> if a resource action with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -442,9 +442,9 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 	}
 
 	/**
-	 * Finds all the resource actions where name = &#63;.
+	 * Returns all the resource actions where name = &#63;.
 	 *
-	 * @param name the name to search with
+	 * @param name the name
 	 * @return the matching resource actions
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -454,15 +454,15 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 	}
 
 	/**
-	 * Finds a range of all the resource actions where name = &#63;.
+	 * Returns a range of all the resource actions where name = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param name the name to search with
-	 * @param start the lower bound of the range of resource actions to return
-	 * @param end the upper bound of the range of resource actions to return (not inclusive)
+	 * @param name the name
+	 * @param start the lower bound of the range of resource actions
+	 * @param end the upper bound of the range of resource actions (not inclusive)
 	 * @return the range of matching resource actions
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -472,15 +472,15 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 	}
 
 	/**
-	 * Finds an ordered range of all the resource actions where name = &#63;.
+	 * Returns an ordered range of all the resource actions where name = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param name the name to search with
-	 * @param start the lower bound of the range of resource actions to return
-	 * @param end the upper bound of the range of resource actions to return (not inclusive)
+	 * @param name the name
+	 * @param start the lower bound of the range of resource actions
+	 * @param end the upper bound of the range of resource actions (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching resource actions
 	 * @throws SystemException if a system exception occurred
@@ -572,13 +572,13 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 	}
 
 	/**
-	 * Finds the first resource action in the ordered set where name = &#63;.
+	 * Returns the first resource action in the ordered set where name = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param name the name to search with
+	 * @param name the name
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching resource action
 	 * @throws com.liferay.portal.NoSuchResourceActionException if a matching resource action could not be found
@@ -607,13 +607,13 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 	}
 
 	/**
-	 * Finds the last resource action in the ordered set where name = &#63;.
+	 * Returns the last resource action in the ordered set where name = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param name the name to search with
+	 * @param name the name
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching resource action
 	 * @throws com.liferay.portal.NoSuchResourceActionException if a matching resource action could not be found
@@ -645,14 +645,14 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 	}
 
 	/**
-	 * Finds the resource actions before and after the current resource action in the ordered set where name = &#63;.
+	 * Returns the resource actions before and after the current resource action in the ordered set where name = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
 	 * @param resourceActionId the primary key of the current resource action
-	 * @param name the name to search with
+	 * @param name the name
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next resource action
 	 * @throws com.liferay.portal.NoSuchResourceActionException if a resource action with the primary key could not be found
@@ -805,10 +805,10 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 	}
 
 	/**
-	 * Finds the resource action where name = &#63; and actionId = &#63; or throws a {@link com.liferay.portal.NoSuchResourceActionException} if it could not be found.
+	 * Returns the resource action where name = &#63; and actionId = &#63; or throws a {@link com.liferay.portal.NoSuchResourceActionException} if it could not be found.
 	 *
-	 * @param name the name to search with
-	 * @param actionId the action ID to search with
+	 * @param name the name
+	 * @param actionId the action ID
 	 * @return the matching resource action
 	 * @throws com.liferay.portal.NoSuchResourceActionException if a matching resource action could not be found
 	 * @throws SystemException if a system exception occurred
@@ -841,10 +841,10 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 	}
 
 	/**
-	 * Finds the resource action where name = &#63; and actionId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 * Returns the resource action where name = &#63; and actionId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	 *
-	 * @param name the name to search with
-	 * @param actionId the action ID to search with
+	 * @param name the name
+	 * @param actionId the action ID
 	 * @return the matching resource action, or <code>null</code> if a matching resource action could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -854,10 +854,10 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 	}
 
 	/**
-	 * Finds the resource action where name = &#63; and actionId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 * Returns the resource action where name = &#63; and actionId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	 *
-	 * @param name the name to search with
-	 * @param actionId the action ID to search with
+	 * @param name the name
+	 * @param actionId the action ID
 	 * @return the matching resource action, or <code>null</code> if a matching resource action could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -971,7 +971,7 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 	}
 
 	/**
-	 * Finds all the resource actions.
+	 * Returns all the resource actions.
 	 *
 	 * @return the resource actions
 	 * @throws SystemException if a system exception occurred
@@ -981,14 +981,14 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 	}
 
 	/**
-	 * Finds a range of all the resource actions.
+	 * Returns a range of all the resource actions.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param start the lower bound of the range of resource actions to return
-	 * @param end the upper bound of the range of resource actions to return (not inclusive)
+	 * @param start the lower bound of the range of resource actions
+	 * @param end the upper bound of the range of resource actions (not inclusive)
 	 * @return the range of resource actions
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -998,14 +998,14 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 	}
 
 	/**
-	 * Finds an ordered range of all the resource actions.
+	 * Returns an ordered range of all the resource actions.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param start the lower bound of the range of resource actions to return
-	 * @param end the upper bound of the range of resource actions to return (not inclusive)
+	 * @param start the lower bound of the range of resource actions
+	 * @param end the upper bound of the range of resource actions (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of resource actions
 	 * @throws SystemException if a system exception occurred
@@ -1082,7 +1082,7 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 	/**
 	 * Removes all the resource actions where name = &#63; from the database.
 	 *
-	 * @param name the name to search with
+	 * @param name the name
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByName(String name) throws SystemException {
@@ -1094,8 +1094,8 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 	/**
 	 * Removes the resource action where name = &#63; and actionId = &#63; from the database.
 	 *
-	 * @param name the name to search with
-	 * @param actionId the action ID to search with
+	 * @param name the name
+	 * @param actionId the action ID
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByN_A(String name, String actionId)
@@ -1117,9 +1117,9 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 	}
 
 	/**
-	 * Counts all the resource actions where name = &#63;.
+	 * Returns the number of resource actions where name = &#63;.
 	 *
-	 * @param name the name to search with
+	 * @param name the name
 	 * @return the number of matching resource actions
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1182,10 +1182,10 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 	}
 
 	/**
-	 * Counts all the resource actions where name = &#63; and actionId = &#63;.
+	 * Returns the number of resource actions where name = &#63; and actionId = &#63;.
 	 *
-	 * @param name the name to search with
-	 * @param actionId the action ID to search with
+	 * @param name the name
+	 * @param actionId the action ID
 	 * @return the number of matching resource actions
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1265,7 +1265,7 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 	}
 
 	/**
-	 * Counts all the resource actions.
+	 * Returns the number of resource actions.
 	 *
 	 * @return the number of resource actions
 	 * @throws SystemException if a system exception occurred

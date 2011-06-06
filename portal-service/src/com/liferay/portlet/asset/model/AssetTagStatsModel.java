@@ -42,21 +42,21 @@ public interface AssetTagStatsModel extends BaseModel<AssetTagStats> {
 	 */
 
 	/**
-	 * Gets the primary key of this asset tag stats.
+	 * Returns the primary key of this asset tag stats.
 	 *
 	 * @return the primary key of this asset tag stats
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this asset tag stats
+	 * Sets the primary key of this asset tag stats.
 	 *
 	 * @param primaryKey the primary key of this asset tag stats
 	 */
 	public void setPrimaryKey(long primaryKey);
 
 	/**
-	 * Gets the tag stats ID of this asset tag stats.
+	 * Returns the tag stats ID of this asset tag stats.
 	 *
 	 * @return the tag stats ID of this asset tag stats
 	 */
@@ -70,7 +70,7 @@ public interface AssetTagStatsModel extends BaseModel<AssetTagStats> {
 	public void setTagStatsId(long tagStatsId);
 
 	/**
-	 * Gets the tag ID of this asset tag stats.
+	 * Returns the tag ID of this asset tag stats.
 	 *
 	 * @return the tag ID of this asset tag stats
 	 */
@@ -84,14 +84,14 @@ public interface AssetTagStatsModel extends BaseModel<AssetTagStats> {
 	public void setTagId(long tagId);
 
 	/**
-	 * Gets the class name of the model instance this asset tag stats is polymorphically associated with.
+	 * Returns the fully qualified class name of this asset tag stats.
 	 *
-	 * @return the class name of the model instance this asset tag stats is polymorphically associated with
+	 * @return the fully qualified class name of this asset tag stats
 	 */
 	public String getClassName();
 
 	/**
-	 * Gets the class name ID of this asset tag stats.
+	 * Returns the class name ID of this asset tag stats.
 	 *
 	 * @return the class name ID of this asset tag stats
 	 */
@@ -105,7 +105,7 @@ public interface AssetTagStatsModel extends BaseModel<AssetTagStats> {
 	public void setClassNameId(long classNameId);
 
 	/**
-	 * Gets the asset count of this asset tag stats.
+	 * Returns the asset count of this asset tag stats.
 	 *
 	 * @return the asset count of this asset tag stats
 	 */

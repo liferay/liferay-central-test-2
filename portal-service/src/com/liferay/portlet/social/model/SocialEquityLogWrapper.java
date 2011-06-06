@@ -37,7 +37,7 @@ public class SocialEquityLogWrapper implements SocialEquityLog {
 	}
 
 	/**
-	* Gets the primary key of this social equity log.
+	* Returns the primary key of this social equity log.
 	*
 	* @return the primary key of this social equity log
 	*/
@@ -46,7 +46,7 @@ public class SocialEquityLogWrapper implements SocialEquityLog {
 	}
 
 	/**
-	* Sets the primary key of this social equity log
+	* Sets the primary key of this social equity log.
 	*
 	* @param primaryKey the primary key of this social equity log
 	*/
@@ -55,7 +55,7 @@ public class SocialEquityLogWrapper implements SocialEquityLog {
 	}
 
 	/**
-	* Gets the equity log ID of this social equity log.
+	* Returns the equity log ID of this social equity log.
 	*
 	* @return the equity log ID of this social equity log
 	*/
@@ -73,7 +73,7 @@ public class SocialEquityLogWrapper implements SocialEquityLog {
 	}
 
 	/**
-	* Gets the group ID of this social equity log.
+	* Returns the group ID of this social equity log.
 	*
 	* @return the group ID of this social equity log
 	*/
@@ -91,7 +91,7 @@ public class SocialEquityLogWrapper implements SocialEquityLog {
 	}
 
 	/**
-	* Gets the company ID of this social equity log.
+	* Returns the company ID of this social equity log.
 	*
 	* @return the company ID of this social equity log
 	*/
@@ -109,7 +109,7 @@ public class SocialEquityLogWrapper implements SocialEquityLog {
 	}
 
 	/**
-	* Gets the user ID of this social equity log.
+	* Returns the user ID of this social equity log.
 	*
 	* @return the user ID of this social equity log
 	*/
@@ -127,7 +127,7 @@ public class SocialEquityLogWrapper implements SocialEquityLog {
 	}
 
 	/**
-	* Gets the user uuid of this social equity log.
+	* Returns the user uuid of this social equity log.
 	*
 	* @return the user uuid of this social equity log
 	* @throws SystemException if a system exception occurred
@@ -147,7 +147,7 @@ public class SocialEquityLogWrapper implements SocialEquityLog {
 	}
 
 	/**
-	* Gets the asset entry ID of this social equity log.
+	* Returns the asset entry ID of this social equity log.
 	*
 	* @return the asset entry ID of this social equity log
 	*/
@@ -165,7 +165,7 @@ public class SocialEquityLogWrapper implements SocialEquityLog {
 	}
 
 	/**
-	* Gets the action ID of this social equity log.
+	* Returns the action ID of this social equity log.
 	*
 	* @return the action ID of this social equity log
 	*/
@@ -183,7 +183,7 @@ public class SocialEquityLogWrapper implements SocialEquityLog {
 	}
 
 	/**
-	* Gets the action date of this social equity log.
+	* Returns the action date of this social equity log.
 	*
 	* @return the action date of this social equity log
 	*/
@@ -201,7 +201,7 @@ public class SocialEquityLogWrapper implements SocialEquityLog {
 	}
 
 	/**
-	* Gets the active of this social equity log.
+	* Returns the active of this social equity log.
 	*
 	* @return the active of this social equity log
 	*/
@@ -228,7 +228,7 @@ public class SocialEquityLogWrapper implements SocialEquityLog {
 	}
 
 	/**
-	* Gets the expiration of this social equity log.
+	* Returns the expiration of this social equity log.
 	*
 	* @return the expiration of this social equity log
 	*/
@@ -246,7 +246,7 @@ public class SocialEquityLogWrapper implements SocialEquityLog {
 	}
 
 	/**
-	* Gets the type of this social equity log.
+	* Returns the type of this social equity log.
 	*
 	* @return the type of this social equity log
 	*/
@@ -264,7 +264,7 @@ public class SocialEquityLogWrapper implements SocialEquityLog {
 	}
 
 	/**
-	* Gets the value of this social equity log.
+	* Returns the value of this social equity log.
 	*
 	* @return the value of this social equity log
 	*/
@@ -282,7 +282,7 @@ public class SocialEquityLogWrapper implements SocialEquityLog {
 	}
 
 	/**
-	* Gets the extra data of this social equity log.
+	* Returns the extra data of this social equity log.
 	*
 	* @return the extra data of this social equity log
 	*/

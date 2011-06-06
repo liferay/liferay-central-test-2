@@ -43,21 +43,21 @@ public interface UserNotificationEventModel extends BaseModel<UserNotificationEv
 	 */
 
 	/**
-	 * Gets the primary key of this user notification event.
+	 * Returns the primary key of this user notification event.
 	 *
 	 * @return the primary key of this user notification event
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this user notification event
+	 * Sets the primary key of this user notification event.
 	 *
 	 * @param primaryKey the primary key of this user notification event
 	 */
 	public void setPrimaryKey(long primaryKey);
 
 	/**
-	 * Gets the uuid of this user notification event.
+	 * Returns the uuid of this user notification event.
 	 *
 	 * @return the uuid of this user notification event
 	 */
@@ -72,7 +72,7 @@ public interface UserNotificationEventModel extends BaseModel<UserNotificationEv
 	public void setUuid(String uuid);
 
 	/**
-	 * Gets the user notification event ID of this user notification event.
+	 * Returns the user notification event ID of this user notification event.
 	 *
 	 * @return the user notification event ID of this user notification event
 	 */
@@ -86,7 +86,7 @@ public interface UserNotificationEventModel extends BaseModel<UserNotificationEv
 	public void setUserNotificationEventId(long userNotificationEventId);
 
 	/**
-	 * Gets the company ID of this user notification event.
+	 * Returns the company ID of this user notification event.
 	 *
 	 * @return the company ID of this user notification event
 	 */
@@ -100,7 +100,7 @@ public interface UserNotificationEventModel extends BaseModel<UserNotificationEv
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the user ID of this user notification event.
+	 * Returns the user ID of this user notification event.
 	 *
 	 * @return the user ID of this user notification event
 	 */
@@ -114,7 +114,7 @@ public interface UserNotificationEventModel extends BaseModel<UserNotificationEv
 	public void setUserId(long userId);
 
 	/**
-	 * Gets the user uuid of this user notification event.
+	 * Returns the user uuid of this user notification event.
 	 *
 	 * @return the user uuid of this user notification event
 	 * @throws SystemException if a system exception occurred
@@ -129,7 +129,7 @@ public interface UserNotificationEventModel extends BaseModel<UserNotificationEv
 	public void setUserUuid(String userUuid);
 
 	/**
-	 * Gets the type of this user notification event.
+	 * Returns the type of this user notification event.
 	 *
 	 * @return the type of this user notification event
 	 */
@@ -144,7 +144,7 @@ public interface UserNotificationEventModel extends BaseModel<UserNotificationEv
 	public void setType(String type);
 
 	/**
-	 * Gets the timestamp of this user notification event.
+	 * Returns the timestamp of this user notification event.
 	 *
 	 * @return the timestamp of this user notification event
 	 */
@@ -158,7 +158,7 @@ public interface UserNotificationEventModel extends BaseModel<UserNotificationEv
 	public void setTimestamp(long timestamp);
 
 	/**
-	 * Gets the deliver by of this user notification event.
+	 * Returns the deliver by of this user notification event.
 	 *
 	 * @return the deliver by of this user notification event
 	 */
@@ -172,7 +172,7 @@ public interface UserNotificationEventModel extends BaseModel<UserNotificationEv
 	public void setDeliverBy(long deliverBy);
 
 	/**
-	 * Gets the payload of this user notification event.
+	 * Returns the payload of this user notification event.
 	 *
 	 * @return the payload of this user notification event
 	 */

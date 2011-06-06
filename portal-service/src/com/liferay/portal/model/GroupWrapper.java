@@ -37,7 +37,7 @@ public class GroupWrapper implements Group {
 	}
 
 	/**
-	* Gets the primary key of this group.
+	* Returns the primary key of this group.
 	*
 	* @return the primary key of this group
 	*/
@@ -46,7 +46,7 @@ public class GroupWrapper implements Group {
 	}
 
 	/**
-	* Sets the primary key of this group
+	* Sets the primary key of this group.
 	*
 	* @param primaryKey the primary key of this group
 	*/
@@ -55,7 +55,7 @@ public class GroupWrapper implements Group {
 	}
 
 	/**
-	* Gets the group ID of this group.
+	* Returns the group ID of this group.
 	*
 	* @return the group ID of this group
 	*/
@@ -73,7 +73,7 @@ public class GroupWrapper implements Group {
 	}
 
 	/**
-	* Gets the company ID of this group.
+	* Returns the company ID of this group.
 	*
 	* @return the company ID of this group
 	*/
@@ -91,7 +91,7 @@ public class GroupWrapper implements Group {
 	}
 
 	/**
-	* Gets the creator user ID of this group.
+	* Returns the creator user ID of this group.
 	*
 	* @return the creator user ID of this group
 	*/
@@ -109,7 +109,7 @@ public class GroupWrapper implements Group {
 	}
 
 	/**
-	* Gets the creator user uuid of this group.
+	* Returns the creator user uuid of this group.
 	*
 	* @return the creator user uuid of this group
 	* @throws SystemException if a system exception occurred
@@ -129,16 +129,16 @@ public class GroupWrapper implements Group {
 	}
 
 	/**
-	* Gets the class name of the model instance this group is polymorphically associated with.
+	* Returns the fully qualified class name of this group.
 	*
-	* @return the class name of the model instance this group is polymorphically associated with
+	* @return the fully qualified class name of this group
 	*/
 	public java.lang.String getClassName() {
 		return _group.getClassName();
 	}
 
 	/**
-	* Gets the class name ID of this group.
+	* Returns the class name ID of this group.
 	*
 	* @return the class name ID of this group
 	*/
@@ -156,7 +156,7 @@ public class GroupWrapper implements Group {
 	}
 
 	/**
-	* Gets the class p k of this group.
+	* Returns the class p k of this group.
 	*
 	* @return the class p k of this group
 	*/
@@ -174,7 +174,7 @@ public class GroupWrapper implements Group {
 	}
 
 	/**
-	* Gets the parent group ID of this group.
+	* Returns the parent group ID of this group.
 	*
 	* @return the parent group ID of this group
 	*/
@@ -192,7 +192,7 @@ public class GroupWrapper implements Group {
 	}
 
 	/**
-	* Gets the live group ID of this group.
+	* Returns the live group ID of this group.
 	*
 	* @return the live group ID of this group
 	*/
@@ -210,7 +210,7 @@ public class GroupWrapper implements Group {
 	}
 
 	/**
-	* Gets the name of this group.
+	* Returns the name of this group.
 	*
 	* @return the name of this group
 	*/
@@ -228,7 +228,7 @@ public class GroupWrapper implements Group {
 	}
 
 	/**
-	* Gets the description of this group.
+	* Returns the description of this group.
 	*
 	* @return the description of this group
 	*/
@@ -246,7 +246,7 @@ public class GroupWrapper implements Group {
 	}
 
 	/**
-	* Gets the type of this group.
+	* Returns the type of this group.
 	*
 	* @return the type of this group
 	*/
@@ -264,7 +264,7 @@ public class GroupWrapper implements Group {
 	}
 
 	/**
-	* Gets the type settings of this group.
+	* Returns the type settings of this group.
 	*
 	* @return the type settings of this group
 	*/
@@ -282,7 +282,7 @@ public class GroupWrapper implements Group {
 	}
 
 	/**
-	* Gets the friendly u r l of this group.
+	* Returns the friendly u r l of this group.
 	*
 	* @return the friendly u r l of this group
 	*/
@@ -300,7 +300,7 @@ public class GroupWrapper implements Group {
 	}
 
 	/**
-	* Gets the site of this group.
+	* Returns the site of this group.
 	*
 	* @return the site of this group
 	*/
@@ -327,7 +327,7 @@ public class GroupWrapper implements Group {
 	}
 
 	/**
-	* Gets the active of this group.
+	* Returns the active of this group.
 	*
 	* @return the active of this group
 	*/

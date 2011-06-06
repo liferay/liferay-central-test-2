@@ -43,21 +43,21 @@ public interface SocialRelationModel extends BaseModel<SocialRelation> {
 	 */
 
 	/**
-	 * Gets the primary key of this social relation.
+	 * Returns the primary key of this social relation.
 	 *
 	 * @return the primary key of this social relation
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this social relation
+	 * Sets the primary key of this social relation.
 	 *
 	 * @param primaryKey the primary key of this social relation
 	 */
 	public void setPrimaryKey(long primaryKey);
 
 	/**
-	 * Gets the uuid of this social relation.
+	 * Returns the uuid of this social relation.
 	 *
 	 * @return the uuid of this social relation
 	 */
@@ -72,7 +72,7 @@ public interface SocialRelationModel extends BaseModel<SocialRelation> {
 	public void setUuid(String uuid);
 
 	/**
-	 * Gets the relation ID of this social relation.
+	 * Returns the relation ID of this social relation.
 	 *
 	 * @return the relation ID of this social relation
 	 */
@@ -86,7 +86,7 @@ public interface SocialRelationModel extends BaseModel<SocialRelation> {
 	public void setRelationId(long relationId);
 
 	/**
-	 * Gets the company ID of this social relation.
+	 * Returns the company ID of this social relation.
 	 *
 	 * @return the company ID of this social relation
 	 */
@@ -100,7 +100,7 @@ public interface SocialRelationModel extends BaseModel<SocialRelation> {
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the create date of this social relation.
+	 * Returns the create date of this social relation.
 	 *
 	 * @return the create date of this social relation
 	 */
@@ -114,7 +114,7 @@ public interface SocialRelationModel extends BaseModel<SocialRelation> {
 	public void setCreateDate(long createDate);
 
 	/**
-	 * Gets the user id1 of this social relation.
+	 * Returns the user id1 of this social relation.
 	 *
 	 * @return the user id1 of this social relation
 	 */
@@ -128,7 +128,7 @@ public interface SocialRelationModel extends BaseModel<SocialRelation> {
 	public void setUserId1(long userId1);
 
 	/**
-	 * Gets the user id2 of this social relation.
+	 * Returns the user id2 of this social relation.
 	 *
 	 * @return the user id2 of this social relation
 	 */
@@ -142,7 +142,7 @@ public interface SocialRelationModel extends BaseModel<SocialRelation> {
 	public void setUserId2(long userId2);
 
 	/**
-	 * Gets the type of this social relation.
+	 * Returns the type of this social relation.
 	 *
 	 * @return the type of this social relation
 	 */

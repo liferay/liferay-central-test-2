@@ -37,7 +37,7 @@ public class SocialEquityHistoryWrapper implements SocialEquityHistory {
 	}
 
 	/**
-	* Gets the primary key of this social equity history.
+	* Returns the primary key of this social equity history.
 	*
 	* @return the primary key of this social equity history
 	*/
@@ -46,7 +46,7 @@ public class SocialEquityHistoryWrapper implements SocialEquityHistory {
 	}
 
 	/**
-	* Sets the primary key of this social equity history
+	* Sets the primary key of this social equity history.
 	*
 	* @param primaryKey the primary key of this social equity history
 	*/
@@ -55,7 +55,7 @@ public class SocialEquityHistoryWrapper implements SocialEquityHistory {
 	}
 
 	/**
-	* Gets the equity history ID of this social equity history.
+	* Returns the equity history ID of this social equity history.
 	*
 	* @return the equity history ID of this social equity history
 	*/
@@ -73,7 +73,7 @@ public class SocialEquityHistoryWrapper implements SocialEquityHistory {
 	}
 
 	/**
-	* Gets the group ID of this social equity history.
+	* Returns the group ID of this social equity history.
 	*
 	* @return the group ID of this social equity history
 	*/
@@ -91,7 +91,7 @@ public class SocialEquityHistoryWrapper implements SocialEquityHistory {
 	}
 
 	/**
-	* Gets the company ID of this social equity history.
+	* Returns the company ID of this social equity history.
 	*
 	* @return the company ID of this social equity history
 	*/
@@ -109,7 +109,7 @@ public class SocialEquityHistoryWrapper implements SocialEquityHistory {
 	}
 
 	/**
-	* Gets the user ID of this social equity history.
+	* Returns the user ID of this social equity history.
 	*
 	* @return the user ID of this social equity history
 	*/
@@ -127,7 +127,7 @@ public class SocialEquityHistoryWrapper implements SocialEquityHistory {
 	}
 
 	/**
-	* Gets the user uuid of this social equity history.
+	* Returns the user uuid of this social equity history.
 	*
 	* @return the user uuid of this social equity history
 	* @throws SystemException if a system exception occurred
@@ -147,7 +147,7 @@ public class SocialEquityHistoryWrapper implements SocialEquityHistory {
 	}
 
 	/**
-	* Gets the create date of this social equity history.
+	* Returns the create date of this social equity history.
 	*
 	* @return the create date of this social equity history
 	*/
@@ -165,7 +165,7 @@ public class SocialEquityHistoryWrapper implements SocialEquityHistory {
 	}
 
 	/**
-	* Gets the personal equity of this social equity history.
+	* Returns the personal equity of this social equity history.
 	*
 	* @return the personal equity of this social equity history
 	*/

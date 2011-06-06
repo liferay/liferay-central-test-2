@@ -93,7 +93,7 @@ public class ShardPersistenceImpl extends BasePersistenceImpl<Shard>
 	/**
 	 * Caches the shard in the entity cache if it is enabled.
 	 *
-	 * @param shard the shard to cache
+	 * @param shard the shard
 	 */
 	public void cacheResult(Shard shard) {
 		EntityCacheUtil.putResult(ShardModelImpl.ENTITY_CACHE_ENABLED,
@@ -114,7 +114,7 @@ public class ShardPersistenceImpl extends BasePersistenceImpl<Shard>
 	/**
 	 * Caches the shards in the entity cache if it is enabled.
 	 *
-	 * @param shards the shards to cache
+	 * @param shards the shards
 	 */
 	public void cacheResult(List<Shard> shards) {
 		for (Shard shard : shards) {
@@ -181,7 +181,7 @@ public class ShardPersistenceImpl extends BasePersistenceImpl<Shard>
 	/**
 	 * Removes the shard with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param primaryKey the primary key of the shard to remove
+	 * @param primaryKey the primary key of the shard
 	 * @return the shard that was removed
 	 * @throws com.liferay.portal.NoSuchModelException if a shard with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -194,7 +194,7 @@ public class ShardPersistenceImpl extends BasePersistenceImpl<Shard>
 	/**
 	 * Removes the shard with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param shardId the primary key of the shard to remove
+	 * @param shardId the primary key of the shard
 	 * @return the shard that was removed
 	 * @throws com.liferay.portal.NoSuchShardException if a shard with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -234,7 +234,7 @@ public class ShardPersistenceImpl extends BasePersistenceImpl<Shard>
 	/**
 	 * Removes the shard from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param shard the shard to remove
+	 * @param shard the shard
 	 * @return the shard that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -363,9 +363,9 @@ public class ShardPersistenceImpl extends BasePersistenceImpl<Shard>
 	}
 
 	/**
-	 * Finds the shard with the primary key or throws a {@link com.liferay.portal.NoSuchModelException} if it could not be found.
+	 * Returns the shard with the primary key or throws a {@link com.liferay.portal.NoSuchModelException} if it could not be found.
 	 *
-	 * @param primaryKey the primary key of the shard to find
+	 * @param primaryKey the primary key of the shard
 	 * @return the shard
 	 * @throws com.liferay.portal.NoSuchModelException if a shard with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -376,9 +376,9 @@ public class ShardPersistenceImpl extends BasePersistenceImpl<Shard>
 	}
 
 	/**
-	 * Finds the shard with the primary key or throws a {@link com.liferay.portal.NoSuchShardException} if it could not be found.
+	 * Returns the shard with the primary key or throws a {@link com.liferay.portal.NoSuchShardException} if it could not be found.
 	 *
-	 * @param shardId the primary key of the shard to find
+	 * @param shardId the primary key of the shard
 	 * @return the shard
 	 * @throws com.liferay.portal.NoSuchShardException if a shard with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -400,9 +400,9 @@ public class ShardPersistenceImpl extends BasePersistenceImpl<Shard>
 	}
 
 	/**
-	 * Finds the shard with the primary key or returns <code>null</code> if it could not be found.
+	 * Returns the shard with the primary key or returns <code>null</code> if it could not be found.
 	 *
-	 * @param primaryKey the primary key of the shard to find
+	 * @param primaryKey the primary key of the shard
 	 * @return the shard, or <code>null</code> if a shard with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -412,9 +412,9 @@ public class ShardPersistenceImpl extends BasePersistenceImpl<Shard>
 	}
 
 	/**
-	 * Finds the shard with the primary key or returns <code>null</code> if it could not be found.
+	 * Returns the shard with the primary key or returns <code>null</code> if it could not be found.
 	 *
-	 * @param shardId the primary key of the shard to find
+	 * @param shardId the primary key of the shard
 	 * @return the shard, or <code>null</code> if a shard with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -447,9 +447,9 @@ public class ShardPersistenceImpl extends BasePersistenceImpl<Shard>
 	}
 
 	/**
-	 * Finds the shard where name = &#63; or throws a {@link com.liferay.portal.NoSuchShardException} if it could not be found.
+	 * Returns the shard where name = &#63; or throws a {@link com.liferay.portal.NoSuchShardException} if it could not be found.
 	 *
-	 * @param name the name to search with
+	 * @param name the name
 	 * @return the matching shard
 	 * @throws com.liferay.portal.NoSuchShardException if a matching shard could not be found
 	 * @throws SystemException if a system exception occurred
@@ -479,9 +479,9 @@ public class ShardPersistenceImpl extends BasePersistenceImpl<Shard>
 	}
 
 	/**
-	 * Finds the shard where name = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 * Returns the shard where name = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	 *
-	 * @param name the name to search with
+	 * @param name the name
 	 * @return the matching shard, or <code>null</code> if a matching shard could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -490,9 +490,9 @@ public class ShardPersistenceImpl extends BasePersistenceImpl<Shard>
 	}
 
 	/**
-	 * Finds the shard where name = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 * Returns the shard where name = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	 *
-	 * @param name the name to search with
+	 * @param name the name
 	 * @return the matching shard, or <code>null</code> if a matching shard could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -586,10 +586,10 @@ public class ShardPersistenceImpl extends BasePersistenceImpl<Shard>
 	}
 
 	/**
-	 * Finds the shard where classNameId = &#63; and classPK = &#63; or throws a {@link com.liferay.portal.NoSuchShardException} if it could not be found.
+	 * Returns the shard where classNameId = &#63; and classPK = &#63; or throws a {@link com.liferay.portal.NoSuchShardException} if it could not be found.
 	 *
-	 * @param classNameId the class name ID to search with
-	 * @param classPK the class p k to search with
+	 * @param classNameId the class name ID
+	 * @param classPK the class p k
 	 * @return the matching shard
 	 * @throws com.liferay.portal.NoSuchShardException if a matching shard could not be found
 	 * @throws SystemException if a system exception occurred
@@ -622,10 +622,10 @@ public class ShardPersistenceImpl extends BasePersistenceImpl<Shard>
 	}
 
 	/**
-	 * Finds the shard where classNameId = &#63; and classPK = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 * Returns the shard where classNameId = &#63; and classPK = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	 *
-	 * @param classNameId the class name ID to search with
-	 * @param classPK the class p k to search with
+	 * @param classNameId the class name ID
+	 * @param classPK the class p k
 	 * @return the matching shard, or <code>null</code> if a matching shard could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -635,10 +635,10 @@ public class ShardPersistenceImpl extends BasePersistenceImpl<Shard>
 	}
 
 	/**
-	 * Finds the shard where classNameId = &#63; and classPK = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 * Returns the shard where classNameId = &#63; and classPK = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	 *
-	 * @param classNameId the class name ID to search with
-	 * @param classPK the class p k to search with
+	 * @param classNameId the class name ID
+	 * @param classPK the class p k
 	 * @return the matching shard, or <code>null</code> if a matching shard could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -724,7 +724,7 @@ public class ShardPersistenceImpl extends BasePersistenceImpl<Shard>
 	}
 
 	/**
-	 * Finds all the shards.
+	 * Returns all the shards.
 	 *
 	 * @return the shards
 	 * @throws SystemException if a system exception occurred
@@ -734,14 +734,14 @@ public class ShardPersistenceImpl extends BasePersistenceImpl<Shard>
 	}
 
 	/**
-	 * Finds a range of all the shards.
+	 * Returns a range of all the shards.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param start the lower bound of the range of shards to return
-	 * @param end the upper bound of the range of shards to return (not inclusive)
+	 * @param start the lower bound of the range of shards
+	 * @param end the upper bound of the range of shards (not inclusive)
 	 * @return the range of shards
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -750,14 +750,14 @@ public class ShardPersistenceImpl extends BasePersistenceImpl<Shard>
 	}
 
 	/**
-	 * Finds an ordered range of all the shards.
+	 * Returns an ordered range of all the shards.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param start the lower bound of the range of shards to return
-	 * @param end the upper bound of the range of shards to return (not inclusive)
+	 * @param start the lower bound of the range of shards
+	 * @param end the upper bound of the range of shards (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of shards
 	 * @throws SystemException if a system exception occurred
@@ -834,7 +834,7 @@ public class ShardPersistenceImpl extends BasePersistenceImpl<Shard>
 	/**
 	 * Removes the shard where name = &#63; from the database.
 	 *
-	 * @param name the name to search with
+	 * @param name the name
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByName(String name)
@@ -847,8 +847,8 @@ public class ShardPersistenceImpl extends BasePersistenceImpl<Shard>
 	/**
 	 * Removes the shard where classNameId = &#63; and classPK = &#63; from the database.
 	 *
-	 * @param classNameId the class name ID to search with
-	 * @param classPK the class p k to search with
+	 * @param classNameId the class name ID
+	 * @param classPK the class p k
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByC_C(long classNameId, long classPK)
@@ -870,9 +870,9 @@ public class ShardPersistenceImpl extends BasePersistenceImpl<Shard>
 	}
 
 	/**
-	 * Counts all the shards where name = &#63;.
+	 * Returns the number of shards where name = &#63;.
 	 *
-	 * @param name the name to search with
+	 * @param name the name
 	 * @return the number of matching shards
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -935,10 +935,10 @@ public class ShardPersistenceImpl extends BasePersistenceImpl<Shard>
 	}
 
 	/**
-	 * Counts all the shards where classNameId = &#63; and classPK = &#63;.
+	 * Returns the number of shards where classNameId = &#63; and classPK = &#63;.
 	 *
-	 * @param classNameId the class name ID to search with
-	 * @param classPK the class p k to search with
+	 * @param classNameId the class name ID
+	 * @param classPK the class p k
 	 * @return the number of matching shards
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -994,7 +994,7 @@ public class ShardPersistenceImpl extends BasePersistenceImpl<Shard>
 	}
 
 	/**
-	 * Counts all the shards.
+	 * Returns the number of shards.
 	 *
 	 * @return the number of shards
 	 * @throws SystemException if a system exception occurred

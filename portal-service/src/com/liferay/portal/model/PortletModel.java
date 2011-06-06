@@ -42,21 +42,21 @@ public interface PortletModel extends BaseModel<Portlet> {
 	 */
 
 	/**
-	 * Gets the primary key of this portlet.
+	 * Returns the primary key of this portlet.
 	 *
 	 * @return the primary key of this portlet
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this portlet
+	 * Sets the primary key of this portlet.
 	 *
 	 * @param primaryKey the primary key of this portlet
 	 */
 	public void setPrimaryKey(long primaryKey);
 
 	/**
-	 * Gets the ID of this portlet.
+	 * Returns the ID of this portlet.
 	 *
 	 * @return the ID of this portlet
 	 */
@@ -70,7 +70,7 @@ public interface PortletModel extends BaseModel<Portlet> {
 	public void setId(long id);
 
 	/**
-	 * Gets the company ID of this portlet.
+	 * Returns the company ID of this portlet.
 	 *
 	 * @return the company ID of this portlet
 	 */
@@ -84,7 +84,7 @@ public interface PortletModel extends BaseModel<Portlet> {
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the portlet ID of this portlet.
+	 * Returns the portlet ID of this portlet.
 	 *
 	 * @return the portlet ID of this portlet
 	 */
@@ -99,7 +99,7 @@ public interface PortletModel extends BaseModel<Portlet> {
 	public void setPortletId(String portletId);
 
 	/**
-	 * Gets the roles of this portlet.
+	 * Returns the roles of this portlet.
 	 *
 	 * @return the roles of this portlet
 	 */
@@ -114,7 +114,7 @@ public interface PortletModel extends BaseModel<Portlet> {
 	public void setRoles(String roles);
 
 	/**
-	 * Gets the active of this portlet.
+	 * Returns the active of this portlet.
 	 *
 	 * @return the active of this portlet
 	 */

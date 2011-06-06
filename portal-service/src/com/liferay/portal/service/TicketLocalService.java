@@ -45,7 +45,7 @@ public interface TicketLocalService {
 	/**
 	* Adds the ticket to the database. Also notifies the appropriate model listeners.
 	*
-	* @param ticket the ticket to add
+	* @param ticket the ticket
 	* @return the ticket that was added
 	* @throws SystemException if a system exception occurred
 	*/
@@ -64,7 +64,7 @@ public interface TicketLocalService {
 	/**
 	* Deletes the ticket with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param ticketId the primary key of the ticket to delete
+	* @param ticketId the primary key of the ticket
 	* @throws PortalException if a ticket with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -75,7 +75,7 @@ public interface TicketLocalService {
 	/**
 	* Deletes the ticket from the database. Also notifies the appropriate model listeners.
 	*
-	* @param ticket the ticket to delete
+	* @param ticket the ticket
 	* @throws SystemException if a system exception occurred
 	*/
 	public void deleteTicket(com.liferay.portal.model.Ticket ticket)
@@ -84,7 +84,7 @@ public interface TicketLocalService {
 	/**
 	* Performs a dynamic query on the database and returns the matching rows.
 	*
-	* @param dynamicQuery the dynamic query to search with
+	* @param dynamicQuery the dynamic query
 	* @return the matching rows
 	* @throws SystemException if a system exception occurred
 	*/
@@ -100,9 +100,9 @@ public interface TicketLocalService {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param dynamicQuery the dynamic query to search with
-	* @param start the lower bound of the range of model instances to return
-	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param dynamicQuery the dynamic query
+	* @param start the lower bound of the range of model instances
+	* @param end the upper bound of the range of model instances (not inclusive)
 	* @return the range of matching rows
 	* @throws SystemException if a system exception occurred
 	*/
@@ -118,9 +118,9 @@ public interface TicketLocalService {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param dynamicQuery the dynamic query to search with
-	* @param start the lower bound of the range of model instances to return
-	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param dynamicQuery the dynamic query
+	* @param start the lower bound of the range of model instances
+	* @param end the upper bound of the range of model instances (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching rows
 	* @throws SystemException if a system exception occurred
@@ -133,9 +133,9 @@ public interface TicketLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Counts the number of rows that match the dynamic query.
+	* Returns the number of rows that match the dynamic query.
 	*
-	* @param dynamicQuery the dynamic query to search with
+	* @param dynamicQuery the dynamic query
 	* @return the number of rows that match the dynamic query
 	* @throws SystemException if a system exception occurred
 	*/
@@ -144,9 +144,9 @@ public interface TicketLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Gets the ticket with the primary key.
+	* Returns the ticket with the primary key.
 	*
-	* @param ticketId the primary key of the ticket to get
+	* @param ticketId the primary key of the ticket
 	* @return the ticket
 	* @throws PortalException if a ticket with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -157,14 +157,14 @@ public interface TicketLocalService {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Gets a range of all the tickets.
+	* Returns a range of all the tickets.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of tickets to return
-	* @param end the upper bound of the range of tickets to return (not inclusive)
+	* @param start the lower bound of the range of tickets
+	* @param end the upper bound of the range of tickets (not inclusive)
 	* @return the range of tickets
 	* @throws SystemException if a system exception occurred
 	*/
@@ -174,7 +174,7 @@ public interface TicketLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Gets the number of tickets.
+	* Returns the number of tickets.
 	*
 	* @return the number of tickets
 	* @throws SystemException if a system exception occurred
@@ -186,7 +186,7 @@ public interface TicketLocalService {
 	/**
 	* Updates the ticket in the database. Also notifies the appropriate model listeners.
 	*
-	* @param ticket the ticket to update
+	* @param ticket the ticket
 	* @return the ticket that was updated
 	* @throws SystemException if a system exception occurred
 	*/
@@ -197,7 +197,7 @@ public interface TicketLocalService {
 	/**
 	* Updates the ticket in the database. Also notifies the appropriate model listeners.
 	*
-	* @param ticket the ticket to update
+	* @param ticket the ticket
 	* @param merge whether to merge the ticket with the current session. See {@link com.liferay.portal.service.persistence.BatchSession#update(com.liferay.portal.kernel.dao.orm.Session, com.liferay.portal.model.BaseModel, boolean)} for an explanation.
 	* @return the ticket that was updated
 	* @throws SystemException if a system exception occurred
@@ -207,7 +207,7 @@ public interface TicketLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Gets the Spring bean ID for this bean.
+	* Returns the Spring bean ID for this bean.
 	*
 	* @return the Spring bean ID for this bean
 	*/

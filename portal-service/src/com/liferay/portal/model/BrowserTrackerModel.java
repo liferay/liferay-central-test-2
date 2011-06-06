@@ -42,21 +42,21 @@ public interface BrowserTrackerModel extends BaseModel<BrowserTracker> {
 	 */
 
 	/**
-	 * Gets the primary key of this browser tracker.
+	 * Returns the primary key of this browser tracker.
 	 *
 	 * @return the primary key of this browser tracker
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this browser tracker
+	 * Sets the primary key of this browser tracker.
 	 *
 	 * @param primaryKey the primary key of this browser tracker
 	 */
 	public void setPrimaryKey(long primaryKey);
 
 	/**
-	 * Gets the browser tracker ID of this browser tracker.
+	 * Returns the browser tracker ID of this browser tracker.
 	 *
 	 * @return the browser tracker ID of this browser tracker
 	 */
@@ -70,7 +70,7 @@ public interface BrowserTrackerModel extends BaseModel<BrowserTracker> {
 	public void setBrowserTrackerId(long browserTrackerId);
 
 	/**
-	 * Gets the user ID of this browser tracker.
+	 * Returns the user ID of this browser tracker.
 	 *
 	 * @return the user ID of this browser tracker
 	 */
@@ -84,7 +84,7 @@ public interface BrowserTrackerModel extends BaseModel<BrowserTracker> {
 	public void setUserId(long userId);
 
 	/**
-	 * Gets the user uuid of this browser tracker.
+	 * Returns the user uuid of this browser tracker.
 	 *
 	 * @return the user uuid of this browser tracker
 	 * @throws SystemException if a system exception occurred
@@ -99,7 +99,7 @@ public interface BrowserTrackerModel extends BaseModel<BrowserTracker> {
 	public void setUserUuid(String userUuid);
 
 	/**
-	 * Gets the browser key of this browser tracker.
+	 * Returns the browser key of this browser tracker.
 	 *
 	 * @return the browser key of this browser tracker
 	 */

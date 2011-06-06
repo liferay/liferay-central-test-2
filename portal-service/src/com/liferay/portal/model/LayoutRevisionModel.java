@@ -48,21 +48,21 @@ public interface LayoutRevisionModel extends BaseModel<LayoutRevision>,
 	 */
 
 	/**
-	 * Gets the primary key of this layout revision.
+	 * Returns the primary key of this layout revision.
 	 *
 	 * @return the primary key of this layout revision
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this layout revision
+	 * Sets the primary key of this layout revision.
 	 *
 	 * @param primaryKey the primary key of this layout revision
 	 */
 	public void setPrimaryKey(long primaryKey);
 
 	/**
-	 * Gets the layout revision ID of this layout revision.
+	 * Returns the layout revision ID of this layout revision.
 	 *
 	 * @return the layout revision ID of this layout revision
 	 */
@@ -76,7 +76,7 @@ public interface LayoutRevisionModel extends BaseModel<LayoutRevision>,
 	public void setLayoutRevisionId(long layoutRevisionId);
 
 	/**
-	 * Gets the group ID of this layout revision.
+	 * Returns the group ID of this layout revision.
 	 *
 	 * @return the group ID of this layout revision
 	 */
@@ -90,7 +90,7 @@ public interface LayoutRevisionModel extends BaseModel<LayoutRevision>,
 	public void setGroupId(long groupId);
 
 	/**
-	 * Gets the company ID of this layout revision.
+	 * Returns the company ID of this layout revision.
 	 *
 	 * @return the company ID of this layout revision
 	 */
@@ -104,7 +104,7 @@ public interface LayoutRevisionModel extends BaseModel<LayoutRevision>,
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the user ID of this layout revision.
+	 * Returns the user ID of this layout revision.
 	 *
 	 * @return the user ID of this layout revision
 	 */
@@ -118,7 +118,7 @@ public interface LayoutRevisionModel extends BaseModel<LayoutRevision>,
 	public void setUserId(long userId);
 
 	/**
-	 * Gets the user uuid of this layout revision.
+	 * Returns the user uuid of this layout revision.
 	 *
 	 * @return the user uuid of this layout revision
 	 * @throws SystemException if a system exception occurred
@@ -133,7 +133,7 @@ public interface LayoutRevisionModel extends BaseModel<LayoutRevision>,
 	public void setUserUuid(String userUuid);
 
 	/**
-	 * Gets the user name of this layout revision.
+	 * Returns the user name of this layout revision.
 	 *
 	 * @return the user name of this layout revision
 	 */
@@ -148,7 +148,7 @@ public interface LayoutRevisionModel extends BaseModel<LayoutRevision>,
 	public void setUserName(String userName);
 
 	/**
-	 * Gets the create date of this layout revision.
+	 * Returns the create date of this layout revision.
 	 *
 	 * @return the create date of this layout revision
 	 */
@@ -162,7 +162,7 @@ public interface LayoutRevisionModel extends BaseModel<LayoutRevision>,
 	public void setCreateDate(Date createDate);
 
 	/**
-	 * Gets the modified date of this layout revision.
+	 * Returns the modified date of this layout revision.
 	 *
 	 * @return the modified date of this layout revision
 	 */
@@ -176,7 +176,7 @@ public interface LayoutRevisionModel extends BaseModel<LayoutRevision>,
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
-	 * Gets the layout set branch ID of this layout revision.
+	 * Returns the layout set branch ID of this layout revision.
 	 *
 	 * @return the layout set branch ID of this layout revision
 	 */
@@ -190,7 +190,7 @@ public interface LayoutRevisionModel extends BaseModel<LayoutRevision>,
 	public void setLayoutSetBranchId(long layoutSetBranchId);
 
 	/**
-	 * Gets the parent layout revision ID of this layout revision.
+	 * Returns the parent layout revision ID of this layout revision.
 	 *
 	 * @return the parent layout revision ID of this layout revision
 	 */
@@ -204,7 +204,7 @@ public interface LayoutRevisionModel extends BaseModel<LayoutRevision>,
 	public void setParentLayoutRevisionId(long parentLayoutRevisionId);
 
 	/**
-	 * Gets the head of this layout revision.
+	 * Returns the head of this layout revision.
 	 *
 	 * @return the head of this layout revision
 	 */
@@ -225,7 +225,7 @@ public interface LayoutRevisionModel extends BaseModel<LayoutRevision>,
 	public void setHead(boolean head);
 
 	/**
-	 * Gets the major of this layout revision.
+	 * Returns the major of this layout revision.
 	 *
 	 * @return the major of this layout revision
 	 */
@@ -246,7 +246,7 @@ public interface LayoutRevisionModel extends BaseModel<LayoutRevision>,
 	public void setMajor(boolean major);
 
 	/**
-	 * Gets the variation name of this layout revision.
+	 * Returns the variation name of this layout revision.
 	 *
 	 * @return the variation name of this layout revision
 	 */
@@ -261,7 +261,7 @@ public interface LayoutRevisionModel extends BaseModel<LayoutRevision>,
 	public void setVariationName(String variationName);
 
 	/**
-	 * Gets the plid of this layout revision.
+	 * Returns the plid of this layout revision.
 	 *
 	 * @return the plid of this layout revision
 	 */
@@ -275,7 +275,7 @@ public interface LayoutRevisionModel extends BaseModel<LayoutRevision>,
 	public void setPlid(long plid);
 
 	/**
-	 * Gets the private layout of this layout revision.
+	 * Returns the private layout of this layout revision.
 	 *
 	 * @return the private layout of this layout revision
 	 */
@@ -296,50 +296,50 @@ public interface LayoutRevisionModel extends BaseModel<LayoutRevision>,
 	public void setPrivateLayout(boolean privateLayout);
 
 	/**
-	 * Gets the name of this layout revision.
+	 * Returns the name of this layout revision.
 	 *
 	 * @return the name of this layout revision
 	 */
 	public String getName();
 
 	/**
-	 * Gets the localized name of this layout revision. Uses the default language if no localization exists for the requested language.
+	 * Returns the localized name of this layout revision in the language. Uses the default language if no localization exists for the requested language.
 	 *
-	 * @param locale the locale to get the localized name for
+	 * @param locale the locale of the language
 	 * @return the localized name of this layout revision
 	 */
 	public String getName(Locale locale);
 
 	/**
-	 * Gets the localized name of this layout revision, optionally using the default language if no localization exists for the requested language.
+	 * Returns the localized name of this layout revision in the language, optionally using the default language if no localization exists for the requested language.
 	 *
-	 * @param locale the local to get the localized name for
+	 * @param locale the local of the language
 	 * @param useDefault whether to use the default language if no localization exists for the requested language
 	 * @return the localized name of this layout revision. If <code>useDefault</code> is <code>false</code> and no localization exists for the requested language, an empty string will be returned.
 	 */
 	public String getName(Locale locale, boolean useDefault);
 
 	/**
-	 * Gets the localized name of this layout revision. Uses the default language if no localization exists for the requested language.
+	 * Returns the localized name of this layout revision in the language. Uses the default language if no localization exists for the requested language.
 	 *
-	 * @param languageId the id of the language to get the localized name for
+	 * @param languageId the ID of the language
 	 * @return the localized name of this layout revision
 	 */
 	public String getName(String languageId);
 
 	/**
-	 * Gets the localized name of this layout revision, optionally using the default language if no localization exists for the requested language.
+	 * Returns the localized name of this layout revision in the language, optionally using the default language if no localization exists for the requested language.
 	 *
-	 * @param languageId the id of the language to get the localized name for
+	 * @param languageId the ID of the language
 	 * @param useDefault whether to use the default language if no localization exists for the requested language
 	 * @return the localized name of this layout revision
 	 */
 	public String getName(String languageId, boolean useDefault);
 
 	/**
-	 * Gets a map of the locales and localized name of this layout revision.
+	 * Returns a map of the locales and localized names of this layout revision.
 	 *
-	 * @return the locales and localized name
+	 * @return the locales and localized names of this layout revision
 	 */
 	public Map<Locale, String> getNameMap();
 
@@ -351,13 +351,20 @@ public interface LayoutRevisionModel extends BaseModel<LayoutRevision>,
 	public void setName(String name);
 
 	/**
-	 * Sets the localized name of this layout revision.
+	 * Sets the localized name of this layout revision in the language.
 	 *
 	 * @param name the localized name of this layout revision
-	 * @param locale the locale to set the localized name for
+	 * @param locale the locale of the language
 	 */
 	public void setName(String name, Locale locale);
 
+	/**
+	 * Sets the localized name of this layout revision in the language, and sets the default locale.
+	 *
+	 * @param name the localized name of this layout revision
+	 * @param locale the locale of the language
+	 * @param defaultLocale the default locale
+	 */
 	public void setName(String name, Locale locale, Locale defaultLocale);
 
 	/**
@@ -367,53 +374,59 @@ public interface LayoutRevisionModel extends BaseModel<LayoutRevision>,
 	 */
 	public void setNameMap(Map<Locale, String> nameMap);
 
+	/**
+	 * Sets the localized names of this layout revision from the map of locales and localized names, and sets the default locale.
+	 *
+	 * @param nameMap the locales and localized names of this layout revision
+	 * @param defaultLocale the default locale
+	 */
 	public void setNameMap(Map<Locale, String> nameMap, Locale defaultLocale);
 
 	/**
-	 * Gets the title of this layout revision.
+	 * Returns the title of this layout revision.
 	 *
 	 * @return the title of this layout revision
 	 */
 	public String getTitle();
 
 	/**
-	 * Gets the localized title of this layout revision. Uses the default language if no localization exists for the requested language.
+	 * Returns the localized title of this layout revision in the language. Uses the default language if no localization exists for the requested language.
 	 *
-	 * @param locale the locale to get the localized title for
+	 * @param locale the locale of the language
 	 * @return the localized title of this layout revision
 	 */
 	public String getTitle(Locale locale);
 
 	/**
-	 * Gets the localized title of this layout revision, optionally using the default language if no localization exists for the requested language.
+	 * Returns the localized title of this layout revision in the language, optionally using the default language if no localization exists for the requested language.
 	 *
-	 * @param locale the local to get the localized title for
+	 * @param locale the local of the language
 	 * @param useDefault whether to use the default language if no localization exists for the requested language
 	 * @return the localized title of this layout revision. If <code>useDefault</code> is <code>false</code> and no localization exists for the requested language, an empty string will be returned.
 	 */
 	public String getTitle(Locale locale, boolean useDefault);
 
 	/**
-	 * Gets the localized title of this layout revision. Uses the default language if no localization exists for the requested language.
+	 * Returns the localized title of this layout revision in the language. Uses the default language if no localization exists for the requested language.
 	 *
-	 * @param languageId the id of the language to get the localized title for
+	 * @param languageId the ID of the language
 	 * @return the localized title of this layout revision
 	 */
 	public String getTitle(String languageId);
 
 	/**
-	 * Gets the localized title of this layout revision, optionally using the default language if no localization exists for the requested language.
+	 * Returns the localized title of this layout revision in the language, optionally using the default language if no localization exists for the requested language.
 	 *
-	 * @param languageId the id of the language to get the localized title for
+	 * @param languageId the ID of the language
 	 * @param useDefault whether to use the default language if no localization exists for the requested language
 	 * @return the localized title of this layout revision
 	 */
 	public String getTitle(String languageId, boolean useDefault);
 
 	/**
-	 * Gets a map of the locales and localized title of this layout revision.
+	 * Returns a map of the locales and localized titles of this layout revision.
 	 *
-	 * @return the locales and localized title
+	 * @return the locales and localized titles of this layout revision
 	 */
 	public Map<Locale, String> getTitleMap();
 
@@ -425,13 +438,20 @@ public interface LayoutRevisionModel extends BaseModel<LayoutRevision>,
 	public void setTitle(String title);
 
 	/**
-	 * Sets the localized title of this layout revision.
+	 * Sets the localized title of this layout revision in the language.
 	 *
 	 * @param title the localized title of this layout revision
-	 * @param locale the locale to set the localized title for
+	 * @param locale the locale of the language
 	 */
 	public void setTitle(String title, Locale locale);
 
+	/**
+	 * Sets the localized title of this layout revision in the language, and sets the default locale.
+	 *
+	 * @param title the localized title of this layout revision
+	 * @param locale the locale of the language
+	 * @param defaultLocale the default locale
+	 */
 	public void setTitle(String title, Locale locale, Locale defaultLocale);
 
 	/**
@@ -441,53 +461,59 @@ public interface LayoutRevisionModel extends BaseModel<LayoutRevision>,
 	 */
 	public void setTitleMap(Map<Locale, String> titleMap);
 
+	/**
+	 * Sets the localized titles of this layout revision from the map of locales and localized titles, and sets the default locale.
+	 *
+	 * @param titleMap the locales and localized titles of this layout revision
+	 * @param defaultLocale the default locale
+	 */
 	public void setTitleMap(Map<Locale, String> titleMap, Locale defaultLocale);
 
 	/**
-	 * Gets the description of this layout revision.
+	 * Returns the description of this layout revision.
 	 *
 	 * @return the description of this layout revision
 	 */
 	public String getDescription();
 
 	/**
-	 * Gets the localized description of this layout revision. Uses the default language if no localization exists for the requested language.
+	 * Returns the localized description of this layout revision in the language. Uses the default language if no localization exists for the requested language.
 	 *
-	 * @param locale the locale to get the localized description for
+	 * @param locale the locale of the language
 	 * @return the localized description of this layout revision
 	 */
 	public String getDescription(Locale locale);
 
 	/**
-	 * Gets the localized description of this layout revision, optionally using the default language if no localization exists for the requested language.
+	 * Returns the localized description of this layout revision in the language, optionally using the default language if no localization exists for the requested language.
 	 *
-	 * @param locale the local to get the localized description for
+	 * @param locale the local of the language
 	 * @param useDefault whether to use the default language if no localization exists for the requested language
 	 * @return the localized description of this layout revision. If <code>useDefault</code> is <code>false</code> and no localization exists for the requested language, an empty string will be returned.
 	 */
 	public String getDescription(Locale locale, boolean useDefault);
 
 	/**
-	 * Gets the localized description of this layout revision. Uses the default language if no localization exists for the requested language.
+	 * Returns the localized description of this layout revision in the language. Uses the default language if no localization exists for the requested language.
 	 *
-	 * @param languageId the id of the language to get the localized description for
+	 * @param languageId the ID of the language
 	 * @return the localized description of this layout revision
 	 */
 	public String getDescription(String languageId);
 
 	/**
-	 * Gets the localized description of this layout revision, optionally using the default language if no localization exists for the requested language.
+	 * Returns the localized description of this layout revision in the language, optionally using the default language if no localization exists for the requested language.
 	 *
-	 * @param languageId the id of the language to get the localized description for
+	 * @param languageId the ID of the language
 	 * @param useDefault whether to use the default language if no localization exists for the requested language
 	 * @return the localized description of this layout revision
 	 */
 	public String getDescription(String languageId, boolean useDefault);
 
 	/**
-	 * Gets a map of the locales and localized description of this layout revision.
+	 * Returns a map of the locales and localized descriptions of this layout revision.
 	 *
-	 * @return the locales and localized description
+	 * @return the locales and localized descriptions of this layout revision
 	 */
 	public Map<Locale, String> getDescriptionMap();
 
@@ -499,13 +525,20 @@ public interface LayoutRevisionModel extends BaseModel<LayoutRevision>,
 	public void setDescription(String description);
 
 	/**
-	 * Sets the localized description of this layout revision.
+	 * Sets the localized description of this layout revision in the language.
 	 *
 	 * @param description the localized description of this layout revision
-	 * @param locale the locale to set the localized description for
+	 * @param locale the locale of the language
 	 */
 	public void setDescription(String description, Locale locale);
 
+	/**
+	 * Sets the localized description of this layout revision in the language, and sets the default locale.
+	 *
+	 * @param description the localized description of this layout revision
+	 * @param locale the locale of the language
+	 * @param defaultLocale the default locale
+	 */
 	public void setDescription(String description, Locale locale,
 		Locale defaultLocale);
 
@@ -516,54 +549,60 @@ public interface LayoutRevisionModel extends BaseModel<LayoutRevision>,
 	 */
 	public void setDescriptionMap(Map<Locale, String> descriptionMap);
 
+	/**
+	 * Sets the localized descriptions of this layout revision from the map of locales and localized descriptions, and sets the default locale.
+	 *
+	 * @param descriptionMap the locales and localized descriptions of this layout revision
+	 * @param defaultLocale the default locale
+	 */
 	public void setDescriptionMap(Map<Locale, String> descriptionMap,
 		Locale defaultLocale);
 
 	/**
-	 * Gets the keywords of this layout revision.
+	 * Returns the keywords of this layout revision.
 	 *
 	 * @return the keywords of this layout revision
 	 */
 	public String getKeywords();
 
 	/**
-	 * Gets the localized keywords of this layout revision. Uses the default language if no localization exists for the requested language.
+	 * Returns the localized keywords of this layout revision in the language. Uses the default language if no localization exists for the requested language.
 	 *
-	 * @param locale the locale to get the localized keywords for
+	 * @param locale the locale of the language
 	 * @return the localized keywords of this layout revision
 	 */
 	public String getKeywords(Locale locale);
 
 	/**
-	 * Gets the localized keywords of this layout revision, optionally using the default language if no localization exists for the requested language.
+	 * Returns the localized keywords of this layout revision in the language, optionally using the default language if no localization exists for the requested language.
 	 *
-	 * @param locale the local to get the localized keywords for
+	 * @param locale the local of the language
 	 * @param useDefault whether to use the default language if no localization exists for the requested language
 	 * @return the localized keywords of this layout revision. If <code>useDefault</code> is <code>false</code> and no localization exists for the requested language, an empty string will be returned.
 	 */
 	public String getKeywords(Locale locale, boolean useDefault);
 
 	/**
-	 * Gets the localized keywords of this layout revision. Uses the default language if no localization exists for the requested language.
+	 * Returns the localized keywords of this layout revision in the language. Uses the default language if no localization exists for the requested language.
 	 *
-	 * @param languageId the id of the language to get the localized keywords for
+	 * @param languageId the ID of the language
 	 * @return the localized keywords of this layout revision
 	 */
 	public String getKeywords(String languageId);
 
 	/**
-	 * Gets the localized keywords of this layout revision, optionally using the default language if no localization exists for the requested language.
+	 * Returns the localized keywords of this layout revision in the language, optionally using the default language if no localization exists for the requested language.
 	 *
-	 * @param languageId the id of the language to get the localized keywords for
+	 * @param languageId the ID of the language
 	 * @param useDefault whether to use the default language if no localization exists for the requested language
 	 * @return the localized keywords of this layout revision
 	 */
 	public String getKeywords(String languageId, boolean useDefault);
 
 	/**
-	 * Gets a map of the locales and localized keywords of this layout revision.
+	 * Returns a map of the locales and localized keywordses of this layout revision.
 	 *
-	 * @return the locales and localized keywords
+	 * @return the locales and localized keywordses of this layout revision
 	 */
 	public Map<Locale, String> getKeywordsMap();
 
@@ -575,13 +614,20 @@ public interface LayoutRevisionModel extends BaseModel<LayoutRevision>,
 	public void setKeywords(String keywords);
 
 	/**
-	 * Sets the localized keywords of this layout revision.
+	 * Sets the localized keywords of this layout revision in the language.
 	 *
 	 * @param keywords the localized keywords of this layout revision
-	 * @param locale the locale to set the localized keywords for
+	 * @param locale the locale of the language
 	 */
 	public void setKeywords(String keywords, Locale locale);
 
+	/**
+	 * Sets the localized keywords of this layout revision in the language, and sets the default locale.
+	 *
+	 * @param keywords the localized keywords of this layout revision
+	 * @param locale the locale of the language
+	 * @param defaultLocale the default locale
+	 */
 	public void setKeywords(String keywords, Locale locale, Locale defaultLocale);
 
 	/**
@@ -591,54 +637,60 @@ public interface LayoutRevisionModel extends BaseModel<LayoutRevision>,
 	 */
 	public void setKeywordsMap(Map<Locale, String> keywordsMap);
 
+	/**
+	 * Sets the localized keywordses of this layout revision from the map of locales and localized keywordses, and sets the default locale.
+	 *
+	 * @param keywordsMap the locales and localized keywordses of this layout revision
+	 * @param defaultLocale the default locale
+	 */
 	public void setKeywordsMap(Map<Locale, String> keywordsMap,
 		Locale defaultLocale);
 
 	/**
-	 * Gets the robots of this layout revision.
+	 * Returns the robots of this layout revision.
 	 *
 	 * @return the robots of this layout revision
 	 */
 	public String getRobots();
 
 	/**
-	 * Gets the localized robots of this layout revision. Uses the default language if no localization exists for the requested language.
+	 * Returns the localized robots of this layout revision in the language. Uses the default language if no localization exists for the requested language.
 	 *
-	 * @param locale the locale to get the localized robots for
+	 * @param locale the locale of the language
 	 * @return the localized robots of this layout revision
 	 */
 	public String getRobots(Locale locale);
 
 	/**
-	 * Gets the localized robots of this layout revision, optionally using the default language if no localization exists for the requested language.
+	 * Returns the localized robots of this layout revision in the language, optionally using the default language if no localization exists for the requested language.
 	 *
-	 * @param locale the local to get the localized robots for
+	 * @param locale the local of the language
 	 * @param useDefault whether to use the default language if no localization exists for the requested language
 	 * @return the localized robots of this layout revision. If <code>useDefault</code> is <code>false</code> and no localization exists for the requested language, an empty string will be returned.
 	 */
 	public String getRobots(Locale locale, boolean useDefault);
 
 	/**
-	 * Gets the localized robots of this layout revision. Uses the default language if no localization exists for the requested language.
+	 * Returns the localized robots of this layout revision in the language. Uses the default language if no localization exists for the requested language.
 	 *
-	 * @param languageId the id of the language to get the localized robots for
+	 * @param languageId the ID of the language
 	 * @return the localized robots of this layout revision
 	 */
 	public String getRobots(String languageId);
 
 	/**
-	 * Gets the localized robots of this layout revision, optionally using the default language if no localization exists for the requested language.
+	 * Returns the localized robots of this layout revision in the language, optionally using the default language if no localization exists for the requested language.
 	 *
-	 * @param languageId the id of the language to get the localized robots for
+	 * @param languageId the ID of the language
 	 * @param useDefault whether to use the default language if no localization exists for the requested language
 	 * @return the localized robots of this layout revision
 	 */
 	public String getRobots(String languageId, boolean useDefault);
 
 	/**
-	 * Gets a map of the locales and localized robots of this layout revision.
+	 * Returns a map of the locales and localized robotses of this layout revision.
 	 *
-	 * @return the locales and localized robots
+	 * @return the locales and localized robotses of this layout revision
 	 */
 	public Map<Locale, String> getRobotsMap();
 
@@ -650,13 +702,20 @@ public interface LayoutRevisionModel extends BaseModel<LayoutRevision>,
 	public void setRobots(String robots);
 
 	/**
-	 * Sets the localized robots of this layout revision.
+	 * Sets the localized robots of this layout revision in the language.
 	 *
 	 * @param robots the localized robots of this layout revision
-	 * @param locale the locale to set the localized robots for
+	 * @param locale the locale of the language
 	 */
 	public void setRobots(String robots, Locale locale);
 
+	/**
+	 * Sets the localized robots of this layout revision in the language, and sets the default locale.
+	 *
+	 * @param robots the localized robots of this layout revision
+	 * @param locale the locale of the language
+	 * @param defaultLocale the default locale
+	 */
 	public void setRobots(String robots, Locale locale, Locale defaultLocale);
 
 	/**
@@ -666,10 +725,16 @@ public interface LayoutRevisionModel extends BaseModel<LayoutRevision>,
 	 */
 	public void setRobotsMap(Map<Locale, String> robotsMap);
 
+	/**
+	 * Sets the localized robotses of this layout revision from the map of locales and localized robotses, and sets the default locale.
+	 *
+	 * @param robotsMap the locales and localized robotses of this layout revision
+	 * @param defaultLocale the default locale
+	 */
 	public void setRobotsMap(Map<Locale, String> robotsMap, Locale defaultLocale);
 
 	/**
-	 * Gets the type settings of this layout revision.
+	 * Returns the type settings of this layout revision.
 	 *
 	 * @return the type settings of this layout revision
 	 */
@@ -684,7 +749,7 @@ public interface LayoutRevisionModel extends BaseModel<LayoutRevision>,
 	public void setTypeSettings(String typeSettings);
 
 	/**
-	 * Gets the icon image of this layout revision.
+	 * Returns the icon image of this layout revision.
 	 *
 	 * @return the icon image of this layout revision
 	 */
@@ -705,7 +770,7 @@ public interface LayoutRevisionModel extends BaseModel<LayoutRevision>,
 	public void setIconImage(boolean iconImage);
 
 	/**
-	 * Gets the icon image ID of this layout revision.
+	 * Returns the icon image ID of this layout revision.
 	 *
 	 * @return the icon image ID of this layout revision
 	 */
@@ -719,7 +784,7 @@ public interface LayoutRevisionModel extends BaseModel<LayoutRevision>,
 	public void setIconImageId(long iconImageId);
 
 	/**
-	 * Gets the theme ID of this layout revision.
+	 * Returns the theme ID of this layout revision.
 	 *
 	 * @return the theme ID of this layout revision
 	 */
@@ -734,7 +799,7 @@ public interface LayoutRevisionModel extends BaseModel<LayoutRevision>,
 	public void setThemeId(String themeId);
 
 	/**
-	 * Gets the color scheme ID of this layout revision.
+	 * Returns the color scheme ID of this layout revision.
 	 *
 	 * @return the color scheme ID of this layout revision
 	 */
@@ -749,7 +814,7 @@ public interface LayoutRevisionModel extends BaseModel<LayoutRevision>,
 	public void setColorSchemeId(String colorSchemeId);
 
 	/**
-	 * Gets the wap theme ID of this layout revision.
+	 * Returns the wap theme ID of this layout revision.
 	 *
 	 * @return the wap theme ID of this layout revision
 	 */
@@ -764,7 +829,7 @@ public interface LayoutRevisionModel extends BaseModel<LayoutRevision>,
 	public void setWapThemeId(String wapThemeId);
 
 	/**
-	 * Gets the wap color scheme ID of this layout revision.
+	 * Returns the wap color scheme ID of this layout revision.
 	 *
 	 * @return the wap color scheme ID of this layout revision
 	 */
@@ -779,7 +844,7 @@ public interface LayoutRevisionModel extends BaseModel<LayoutRevision>,
 	public void setWapColorSchemeId(String wapColorSchemeId);
 
 	/**
-	 * Gets the css of this layout revision.
+	 * Returns the css of this layout revision.
 	 *
 	 * @return the css of this layout revision
 	 */
@@ -794,7 +859,7 @@ public interface LayoutRevisionModel extends BaseModel<LayoutRevision>,
 	public void setCss(String css);
 
 	/**
-	 * Gets the status of this layout revision.
+	 * Returns the status of this layout revision.
 	 *
 	 * @return the status of this layout revision
 	 */
@@ -808,7 +873,7 @@ public interface LayoutRevisionModel extends BaseModel<LayoutRevision>,
 	public void setStatus(int status);
 
 	/**
-	 * Gets the status by user ID of this layout revision.
+	 * Returns the status by user ID of this layout revision.
 	 *
 	 * @return the status by user ID of this layout revision
 	 */
@@ -822,7 +887,7 @@ public interface LayoutRevisionModel extends BaseModel<LayoutRevision>,
 	public void setStatusByUserId(long statusByUserId);
 
 	/**
-	 * Gets the status by user uuid of this layout revision.
+	 * Returns the status by user uuid of this layout revision.
 	 *
 	 * @return the status by user uuid of this layout revision
 	 * @throws SystemException if a system exception occurred
@@ -837,7 +902,7 @@ public interface LayoutRevisionModel extends BaseModel<LayoutRevision>,
 	public void setStatusByUserUuid(String statusByUserUuid);
 
 	/**
-	 * Gets the status by user name of this layout revision.
+	 * Returns the status by user name of this layout revision.
 	 *
 	 * @return the status by user name of this layout revision
 	 */
@@ -852,7 +917,7 @@ public interface LayoutRevisionModel extends BaseModel<LayoutRevision>,
 	public void setStatusByUserName(String statusByUserName);
 
 	/**
-	 * Gets the status date of this layout revision.
+	 * Returns the status date of this layout revision.
 	 *
 	 * @return the status date of this layout revision
 	 */
@@ -866,7 +931,7 @@ public interface LayoutRevisionModel extends BaseModel<LayoutRevision>,
 	public void setStatusDate(Date statusDate);
 
 	/**
-	 * @deprecated {@link #isApproved}
+	 * @deprecated Renamed to {@link #isApproved()}
 	 */
 	public boolean getApproved();
 

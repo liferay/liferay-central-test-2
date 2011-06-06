@@ -125,7 +125,7 @@ public class SocialEquityAssetEntryUtil {
 	/**
 	* Caches the social equity asset entry in the entity cache if it is enabled.
 	*
-	* @param socialEquityAssetEntry the social equity asset entry to cache
+	* @param socialEquityAssetEntry the social equity asset entry
 	*/
 	public static void cacheResult(
 		com.liferay.portlet.social.model.SocialEquityAssetEntry socialEquityAssetEntry) {
@@ -135,7 +135,7 @@ public class SocialEquityAssetEntryUtil {
 	/**
 	* Caches the social equity asset entries in the entity cache if it is enabled.
 	*
-	* @param socialEquityAssetEntries the social equity asset entries to cache
+	* @param socialEquityAssetEntries the social equity asset entries
 	*/
 	public static void cacheResult(
 		java.util.List<com.liferay.portlet.social.model.SocialEquityAssetEntry> socialEquityAssetEntries) {
@@ -156,7 +156,7 @@ public class SocialEquityAssetEntryUtil {
 	/**
 	* Removes the social equity asset entry with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param equityAssetEntryId the primary key of the social equity asset entry to remove
+	* @param equityAssetEntryId the primary key of the social equity asset entry
 	* @return the social equity asset entry that was removed
 	* @throws com.liferay.portlet.social.NoSuchEquityAssetEntryException if a social equity asset entry with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -176,9 +176,9 @@ public class SocialEquityAssetEntryUtil {
 	}
 
 	/**
-	* Finds the social equity asset entry with the primary key or throws a {@link com.liferay.portlet.social.NoSuchEquityAssetEntryException} if it could not be found.
+	* Returns the social equity asset entry with the primary key or throws a {@link com.liferay.portlet.social.NoSuchEquityAssetEntryException} if it could not be found.
 	*
-	* @param equityAssetEntryId the primary key of the social equity asset entry to find
+	* @param equityAssetEntryId the primary key of the social equity asset entry
 	* @return the social equity asset entry
 	* @throws com.liferay.portlet.social.NoSuchEquityAssetEntryException if a social equity asset entry with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -191,9 +191,9 @@ public class SocialEquityAssetEntryUtil {
 	}
 
 	/**
-	* Finds the social equity asset entry with the primary key or returns <code>null</code> if it could not be found.
+	* Returns the social equity asset entry with the primary key or returns <code>null</code> if it could not be found.
 	*
-	* @param equityAssetEntryId the primary key of the social equity asset entry to find
+	* @param equityAssetEntryId the primary key of the social equity asset entry
 	* @return the social equity asset entry, or <code>null</code> if a social equity asset entry with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -204,9 +204,9 @@ public class SocialEquityAssetEntryUtil {
 	}
 
 	/**
-	* Finds the social equity asset entry where assetEntryId = &#63; or throws a {@link com.liferay.portlet.social.NoSuchEquityAssetEntryException} if it could not be found.
+	* Returns the social equity asset entry where assetEntryId = &#63; or throws a {@link com.liferay.portlet.social.NoSuchEquityAssetEntryException} if it could not be found.
 	*
-	* @param assetEntryId the asset entry ID to search with
+	* @param assetEntryId the asset entry ID
 	* @return the matching social equity asset entry
 	* @throws com.liferay.portlet.social.NoSuchEquityAssetEntryException if a matching social equity asset entry could not be found
 	* @throws SystemException if a system exception occurred
@@ -219,9 +219,9 @@ public class SocialEquityAssetEntryUtil {
 	}
 
 	/**
-	* Finds the social equity asset entry where assetEntryId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	* Returns the social equity asset entry where assetEntryId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	*
-	* @param assetEntryId the asset entry ID to search with
+	* @param assetEntryId the asset entry ID
 	* @return the matching social equity asset entry, or <code>null</code> if a matching social equity asset entry could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -232,9 +232,9 @@ public class SocialEquityAssetEntryUtil {
 	}
 
 	/**
-	* Finds the social equity asset entry where assetEntryId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	* Returns the social equity asset entry where assetEntryId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
-	* @param assetEntryId the asset entry ID to search with
+	* @param assetEntryId the asset entry ID
 	* @return the matching social equity asset entry, or <code>null</code> if a matching social equity asset entry could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -246,7 +246,7 @@ public class SocialEquityAssetEntryUtil {
 	}
 
 	/**
-	* Finds all the social equity asset entries.
+	* Returns all the social equity asset entries.
 	*
 	* @return the social equity asset entries
 	* @throws SystemException if a system exception occurred
@@ -257,14 +257,14 @@ public class SocialEquityAssetEntryUtil {
 	}
 
 	/**
-	* Finds a range of all the social equity asset entries.
+	* Returns a range of all the social equity asset entries.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of social equity asset entries to return
-	* @param end the upper bound of the range of social equity asset entries to return (not inclusive)
+	* @param start the lower bound of the range of social equity asset entries
+	* @param end the upper bound of the range of social equity asset entries (not inclusive)
 	* @return the range of social equity asset entries
 	* @throws SystemException if a system exception occurred
 	*/
@@ -275,14 +275,14 @@ public class SocialEquityAssetEntryUtil {
 	}
 
 	/**
-	* Finds an ordered range of all the social equity asset entries.
+	* Returns an ordered range of all the social equity asset entries.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of social equity asset entries to return
-	* @param end the upper bound of the range of social equity asset entries to return (not inclusive)
+	* @param start the lower bound of the range of social equity asset entries
+	* @param end the upper bound of the range of social equity asset entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of social equity asset entries
 	* @throws SystemException if a system exception occurred
@@ -297,7 +297,7 @@ public class SocialEquityAssetEntryUtil {
 	/**
 	* Removes the social equity asset entry where assetEntryId = &#63; from the database.
 	*
-	* @param assetEntryId the asset entry ID to search with
+	* @param assetEntryId the asset entry ID
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByAssetEntryId(long assetEntryId)
@@ -317,9 +317,9 @@ public class SocialEquityAssetEntryUtil {
 	}
 
 	/**
-	* Counts all the social equity asset entries where assetEntryId = &#63;.
+	* Returns the number of social equity asset entries where assetEntryId = &#63;.
 	*
-	* @param assetEntryId the asset entry ID to search with
+	* @param assetEntryId the asset entry ID
 	* @return the number of matching social equity asset entries
 	* @throws SystemException if a system exception occurred
 	*/
@@ -329,7 +329,7 @@ public class SocialEquityAssetEntryUtil {
 	}
 
 	/**
-	* Counts all the social equity asset entries.
+	* Returns the number of social equity asset entries.
 	*
 	* @return the number of social equity asset entries
 	* @throws SystemException if a system exception occurred

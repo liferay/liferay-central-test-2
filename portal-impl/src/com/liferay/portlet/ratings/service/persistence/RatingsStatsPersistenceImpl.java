@@ -90,7 +90,7 @@ public class RatingsStatsPersistenceImpl extends BasePersistenceImpl<RatingsStat
 	/**
 	 * Caches the ratings stats in the entity cache if it is enabled.
 	 *
-	 * @param ratingsStats the ratings stats to cache
+	 * @param ratingsStats the ratings stats
 	 */
 	public void cacheResult(RatingsStats ratingsStats) {
 		EntityCacheUtil.putResult(RatingsStatsModelImpl.ENTITY_CACHE_ENABLED,
@@ -108,7 +108,7 @@ public class RatingsStatsPersistenceImpl extends BasePersistenceImpl<RatingsStat
 	/**
 	 * Caches the ratings statses in the entity cache if it is enabled.
 	 *
-	 * @param ratingsStatses the ratings statses to cache
+	 * @param ratingsStatses the ratings statses
 	 */
 	public void cacheResult(List<RatingsStats> ratingsStatses) {
 		for (RatingsStats ratingsStats : ratingsStatses) {
@@ -174,7 +174,7 @@ public class RatingsStatsPersistenceImpl extends BasePersistenceImpl<RatingsStat
 	/**
 	 * Removes the ratings stats with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param primaryKey the primary key of the ratings stats to remove
+	 * @param primaryKey the primary key of the ratings stats
 	 * @return the ratings stats that was removed
 	 * @throws com.liferay.portal.NoSuchModelException if a ratings stats with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -187,7 +187,7 @@ public class RatingsStatsPersistenceImpl extends BasePersistenceImpl<RatingsStat
 	/**
 	 * Removes the ratings stats with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param statsId the primary key of the ratings stats to remove
+	 * @param statsId the primary key of the ratings stats
 	 * @return the ratings stats that was removed
 	 * @throws com.liferay.portlet.ratings.NoSuchStatsException if a ratings stats with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -227,7 +227,7 @@ public class RatingsStatsPersistenceImpl extends BasePersistenceImpl<RatingsStat
 	/**
 	 * Removes the ratings stats from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param ratingsStats the ratings stats to remove
+	 * @param ratingsStats the ratings stats
 	 * @return the ratings stats that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -344,9 +344,9 @@ public class RatingsStatsPersistenceImpl extends BasePersistenceImpl<RatingsStat
 	}
 
 	/**
-	 * Finds the ratings stats with the primary key or throws a {@link com.liferay.portal.NoSuchModelException} if it could not be found.
+	 * Returns the ratings stats with the primary key or throws a {@link com.liferay.portal.NoSuchModelException} if it could not be found.
 	 *
-	 * @param primaryKey the primary key of the ratings stats to find
+	 * @param primaryKey the primary key of the ratings stats
 	 * @return the ratings stats
 	 * @throws com.liferay.portal.NoSuchModelException if a ratings stats with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -357,9 +357,9 @@ public class RatingsStatsPersistenceImpl extends BasePersistenceImpl<RatingsStat
 	}
 
 	/**
-	 * Finds the ratings stats with the primary key or throws a {@link com.liferay.portlet.ratings.NoSuchStatsException} if it could not be found.
+	 * Returns the ratings stats with the primary key or throws a {@link com.liferay.portlet.ratings.NoSuchStatsException} if it could not be found.
 	 *
-	 * @param statsId the primary key of the ratings stats to find
+	 * @param statsId the primary key of the ratings stats
 	 * @return the ratings stats
 	 * @throws com.liferay.portlet.ratings.NoSuchStatsException if a ratings stats with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -381,9 +381,9 @@ public class RatingsStatsPersistenceImpl extends BasePersistenceImpl<RatingsStat
 	}
 
 	/**
-	 * Finds the ratings stats with the primary key or returns <code>null</code> if it could not be found.
+	 * Returns the ratings stats with the primary key or returns <code>null</code> if it could not be found.
 	 *
-	 * @param primaryKey the primary key of the ratings stats to find
+	 * @param primaryKey the primary key of the ratings stats
 	 * @return the ratings stats, or <code>null</code> if a ratings stats with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -393,9 +393,9 @@ public class RatingsStatsPersistenceImpl extends BasePersistenceImpl<RatingsStat
 	}
 
 	/**
-	 * Finds the ratings stats with the primary key or returns <code>null</code> if it could not be found.
+	 * Returns the ratings stats with the primary key or returns <code>null</code> if it could not be found.
 	 *
-	 * @param statsId the primary key of the ratings stats to find
+	 * @param statsId the primary key of the ratings stats
 	 * @return the ratings stats, or <code>null</code> if a ratings stats with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -429,10 +429,10 @@ public class RatingsStatsPersistenceImpl extends BasePersistenceImpl<RatingsStat
 	}
 
 	/**
-	 * Finds the ratings stats where classNameId = &#63; and classPK = &#63; or throws a {@link com.liferay.portlet.ratings.NoSuchStatsException} if it could not be found.
+	 * Returns the ratings stats where classNameId = &#63; and classPK = &#63; or throws a {@link com.liferay.portlet.ratings.NoSuchStatsException} if it could not be found.
 	 *
-	 * @param classNameId the class name ID to search with
-	 * @param classPK the class p k to search with
+	 * @param classNameId the class name ID
+	 * @param classPK the class p k
 	 * @return the matching ratings stats
 	 * @throws com.liferay.portlet.ratings.NoSuchStatsException if a matching ratings stats could not be found
 	 * @throws SystemException if a system exception occurred
@@ -465,10 +465,10 @@ public class RatingsStatsPersistenceImpl extends BasePersistenceImpl<RatingsStat
 	}
 
 	/**
-	 * Finds the ratings stats where classNameId = &#63; and classPK = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 * Returns the ratings stats where classNameId = &#63; and classPK = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	 *
-	 * @param classNameId the class name ID to search with
-	 * @param classPK the class p k to search with
+	 * @param classNameId the class name ID
+	 * @param classPK the class p k
 	 * @return the matching ratings stats, or <code>null</code> if a matching ratings stats could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -478,10 +478,10 @@ public class RatingsStatsPersistenceImpl extends BasePersistenceImpl<RatingsStat
 	}
 
 	/**
-	 * Finds the ratings stats where classNameId = &#63; and classPK = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 * Returns the ratings stats where classNameId = &#63; and classPK = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	 *
-	 * @param classNameId the class name ID to search with
-	 * @param classPK the class p k to search with
+	 * @param classNameId the class name ID
+	 * @param classPK the class p k
 	 * @return the matching ratings stats, or <code>null</code> if a matching ratings stats could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -567,7 +567,7 @@ public class RatingsStatsPersistenceImpl extends BasePersistenceImpl<RatingsStat
 	}
 
 	/**
-	 * Finds all the ratings statses.
+	 * Returns all the ratings statses.
 	 *
 	 * @return the ratings statses
 	 * @throws SystemException if a system exception occurred
@@ -577,14 +577,14 @@ public class RatingsStatsPersistenceImpl extends BasePersistenceImpl<RatingsStat
 	}
 
 	/**
-	 * Finds a range of all the ratings statses.
+	 * Returns a range of all the ratings statses.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param start the lower bound of the range of ratings statses to return
-	 * @param end the upper bound of the range of ratings statses to return (not inclusive)
+	 * @param start the lower bound of the range of ratings statses
+	 * @param end the upper bound of the range of ratings statses (not inclusive)
 	 * @return the range of ratings statses
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -594,14 +594,14 @@ public class RatingsStatsPersistenceImpl extends BasePersistenceImpl<RatingsStat
 	}
 
 	/**
-	 * Finds an ordered range of all the ratings statses.
+	 * Returns an ordered range of all the ratings statses.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param start the lower bound of the range of ratings statses to return
-	 * @param end the upper bound of the range of ratings statses to return (not inclusive)
+	 * @param start the lower bound of the range of ratings statses
+	 * @param end the upper bound of the range of ratings statses (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of ratings statses
 	 * @throws SystemException if a system exception occurred
@@ -678,8 +678,8 @@ public class RatingsStatsPersistenceImpl extends BasePersistenceImpl<RatingsStat
 	/**
 	 * Removes the ratings stats where classNameId = &#63; and classPK = &#63; from the database.
 	 *
-	 * @param classNameId the class name ID to search with
-	 * @param classPK the class p k to search with
+	 * @param classNameId the class name ID
+	 * @param classPK the class p k
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByC_C(long classNameId, long classPK)
@@ -701,10 +701,10 @@ public class RatingsStatsPersistenceImpl extends BasePersistenceImpl<RatingsStat
 	}
 
 	/**
-	 * Counts all the ratings statses where classNameId = &#63; and classPK = &#63;.
+	 * Returns the number of ratings statses where classNameId = &#63; and classPK = &#63;.
 	 *
-	 * @param classNameId the class name ID to search with
-	 * @param classPK the class p k to search with
+	 * @param classNameId the class name ID
+	 * @param classPK the class p k
 	 * @return the number of matching ratings statses
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -760,7 +760,7 @@ public class RatingsStatsPersistenceImpl extends BasePersistenceImpl<RatingsStat
 	}
 
 	/**
-	 * Counts all the ratings statses.
+	 * Returns the number of ratings statses.
 	 *
 	 * @return the number of ratings statses
 	 * @throws SystemException if a system exception occurred

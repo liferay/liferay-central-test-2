@@ -45,7 +45,7 @@ public interface PhoneLocalService {
 	/**
 	* Adds the phone to the database. Also notifies the appropriate model listeners.
 	*
-	* @param phone the phone to add
+	* @param phone the phone
 	* @return the phone that was added
 	* @throws SystemException if a system exception occurred
 	*/
@@ -64,7 +64,7 @@ public interface PhoneLocalService {
 	/**
 	* Deletes the phone with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param phoneId the primary key of the phone to delete
+	* @param phoneId the primary key of the phone
 	* @throws PortalException if a phone with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -75,7 +75,7 @@ public interface PhoneLocalService {
 	/**
 	* Deletes the phone from the database. Also notifies the appropriate model listeners.
 	*
-	* @param phone the phone to delete
+	* @param phone the phone
 	* @throws SystemException if a system exception occurred
 	*/
 	public void deletePhone(com.liferay.portal.model.Phone phone)
@@ -84,7 +84,7 @@ public interface PhoneLocalService {
 	/**
 	* Performs a dynamic query on the database and returns the matching rows.
 	*
-	* @param dynamicQuery the dynamic query to search with
+	* @param dynamicQuery the dynamic query
 	* @return the matching rows
 	* @throws SystemException if a system exception occurred
 	*/
@@ -100,9 +100,9 @@ public interface PhoneLocalService {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param dynamicQuery the dynamic query to search with
-	* @param start the lower bound of the range of model instances to return
-	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param dynamicQuery the dynamic query
+	* @param start the lower bound of the range of model instances
+	* @param end the upper bound of the range of model instances (not inclusive)
 	* @return the range of matching rows
 	* @throws SystemException if a system exception occurred
 	*/
@@ -118,9 +118,9 @@ public interface PhoneLocalService {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param dynamicQuery the dynamic query to search with
-	* @param start the lower bound of the range of model instances to return
-	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param dynamicQuery the dynamic query
+	* @param start the lower bound of the range of model instances
+	* @param end the upper bound of the range of model instances (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching rows
 	* @throws SystemException if a system exception occurred
@@ -133,9 +133,9 @@ public interface PhoneLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Counts the number of rows that match the dynamic query.
+	* Returns the number of rows that match the dynamic query.
 	*
-	* @param dynamicQuery the dynamic query to search with
+	* @param dynamicQuery the dynamic query
 	* @return the number of rows that match the dynamic query
 	* @throws SystemException if a system exception occurred
 	*/
@@ -144,9 +144,9 @@ public interface PhoneLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Gets the phone with the primary key.
+	* Returns the phone with the primary key.
 	*
-	* @param phoneId the primary key of the phone to get
+	* @param phoneId the primary key of the phone
 	* @return the phone
 	* @throws PortalException if a phone with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -157,14 +157,14 @@ public interface PhoneLocalService {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Gets a range of all the phones.
+	* Returns a range of all the phones.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of phones to return
-	* @param end the upper bound of the range of phones to return (not inclusive)
+	* @param start the lower bound of the range of phones
+	* @param end the upper bound of the range of phones (not inclusive)
 	* @return the range of phones
 	* @throws SystemException if a system exception occurred
 	*/
@@ -173,7 +173,7 @@ public interface PhoneLocalService {
 		int end) throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Gets the number of phones.
+	* Returns the number of phones.
 	*
 	* @return the number of phones
 	* @throws SystemException if a system exception occurred
@@ -185,7 +185,7 @@ public interface PhoneLocalService {
 	/**
 	* Updates the phone in the database. Also notifies the appropriate model listeners.
 	*
-	* @param phone the phone to update
+	* @param phone the phone
 	* @return the phone that was updated
 	* @throws SystemException if a system exception occurred
 	*/
@@ -196,7 +196,7 @@ public interface PhoneLocalService {
 	/**
 	* Updates the phone in the database. Also notifies the appropriate model listeners.
 	*
-	* @param phone the phone to update
+	* @param phone the phone
 	* @param merge whether to merge the phone with the current session. See {@link com.liferay.portal.service.persistence.BatchSession#update(com.liferay.portal.kernel.dao.orm.Session, com.liferay.portal.model.BaseModel, boolean)} for an explanation.
 	* @return the phone that was updated
 	* @throws SystemException if a system exception occurred
@@ -206,7 +206,7 @@ public interface PhoneLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Gets the Spring bean ID for this bean.
+	* Returns the Spring bean ID for this bean.
 	*
 	* @return the Spring bean ID for this bean
 	*/

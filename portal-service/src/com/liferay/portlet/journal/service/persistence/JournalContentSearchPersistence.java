@@ -41,7 +41,7 @@ public interface JournalContentSearchPersistence extends BasePersistence<Journal
 	/**
 	* Caches the journal content search in the entity cache if it is enabled.
 	*
-	* @param journalContentSearch the journal content search to cache
+	* @param journalContentSearch the journal content search
 	*/
 	public void cacheResult(
 		com.liferay.portlet.journal.model.JournalContentSearch journalContentSearch);
@@ -49,7 +49,7 @@ public interface JournalContentSearchPersistence extends BasePersistence<Journal
 	/**
 	* Caches the journal content searchs in the entity cache if it is enabled.
 	*
-	* @param journalContentSearchs the journal content searchs to cache
+	* @param journalContentSearchs the journal content searchs
 	*/
 	public void cacheResult(
 		java.util.List<com.liferay.portlet.journal.model.JournalContentSearch> journalContentSearchs);
@@ -66,7 +66,7 @@ public interface JournalContentSearchPersistence extends BasePersistence<Journal
 	/**
 	* Removes the journal content search with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param contentSearchId the primary key of the journal content search to remove
+	* @param contentSearchId the primary key of the journal content search
 	* @return the journal content search that was removed
 	* @throws com.liferay.portlet.journal.NoSuchContentSearchException if a journal content search with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -82,9 +82,9 @@ public interface JournalContentSearchPersistence extends BasePersistence<Journal
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the journal content search with the primary key or throws a {@link com.liferay.portlet.journal.NoSuchContentSearchException} if it could not be found.
+	* Returns the journal content search with the primary key or throws a {@link com.liferay.portlet.journal.NoSuchContentSearchException} if it could not be found.
 	*
-	* @param contentSearchId the primary key of the journal content search to find
+	* @param contentSearchId the primary key of the journal content search
 	* @return the journal content search
 	* @throws com.liferay.portlet.journal.NoSuchContentSearchException if a journal content search with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -95,9 +95,9 @@ public interface JournalContentSearchPersistence extends BasePersistence<Journal
 			com.liferay.portlet.journal.NoSuchContentSearchException;
 
 	/**
-	* Finds the journal content search with the primary key or returns <code>null</code> if it could not be found.
+	* Returns the journal content search with the primary key or returns <code>null</code> if it could not be found.
 	*
-	* @param contentSearchId the primary key of the journal content search to find
+	* @param contentSearchId the primary key of the journal content search
 	* @return the journal content search, or <code>null</code> if a journal content search with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -106,9 +106,9 @@ public interface JournalContentSearchPersistence extends BasePersistence<Journal
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds all the journal content searchs where articleId = &#63;.
+	* Returns all the journal content searchs where articleId = &#63;.
 	*
-	* @param articleId the article ID to search with
+	* @param articleId the article ID
 	* @return the matching journal content searchs
 	* @throws SystemException if a system exception occurred
 	*/
@@ -117,15 +117,15 @@ public interface JournalContentSearchPersistence extends BasePersistence<Journal
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds a range of all the journal content searchs where articleId = &#63;.
+	* Returns a range of all the journal content searchs where articleId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param articleId the article ID to search with
-	* @param start the lower bound of the range of journal content searchs to return
-	* @param end the upper bound of the range of journal content searchs to return (not inclusive)
+	* @param articleId the article ID
+	* @param start the lower bound of the range of journal content searchs
+	* @param end the upper bound of the range of journal content searchs (not inclusive)
 	* @return the range of matching journal content searchs
 	* @throws SystemException if a system exception occurred
 	*/
@@ -134,15 +134,15 @@ public interface JournalContentSearchPersistence extends BasePersistence<Journal
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds an ordered range of all the journal content searchs where articleId = &#63;.
+	* Returns an ordered range of all the journal content searchs where articleId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param articleId the article ID to search with
-	* @param start the lower bound of the range of journal content searchs to return
-	* @param end the upper bound of the range of journal content searchs to return (not inclusive)
+	* @param articleId the article ID
+	* @param start the lower bound of the range of journal content searchs
+	* @param end the upper bound of the range of journal content searchs (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching journal content searchs
 	* @throws SystemException if a system exception occurred
@@ -153,13 +153,13 @@ public interface JournalContentSearchPersistence extends BasePersistence<Journal
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the first journal content search in the ordered set where articleId = &#63;.
+	* Returns the first journal content search in the ordered set where articleId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param articleId the article ID to search with
+	* @param articleId the article ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching journal content search
 	* @throws com.liferay.portlet.journal.NoSuchContentSearchException if a matching journal content search could not be found
@@ -172,13 +172,13 @@ public interface JournalContentSearchPersistence extends BasePersistence<Journal
 			com.liferay.portlet.journal.NoSuchContentSearchException;
 
 	/**
-	* Finds the last journal content search in the ordered set where articleId = &#63;.
+	* Returns the last journal content search in the ordered set where articleId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param articleId the article ID to search with
+	* @param articleId the article ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching journal content search
 	* @throws com.liferay.portlet.journal.NoSuchContentSearchException if a matching journal content search could not be found
@@ -191,14 +191,14 @@ public interface JournalContentSearchPersistence extends BasePersistence<Journal
 			com.liferay.portlet.journal.NoSuchContentSearchException;
 
 	/**
-	* Finds the journal content searchs before and after the current journal content search in the ordered set where articleId = &#63;.
+	* Returns the journal content searchs before and after the current journal content search in the ordered set where articleId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
 	* @param contentSearchId the primary key of the current journal content search
-	* @param articleId the article ID to search with
+	* @param articleId the article ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next journal content search
 	* @throws com.liferay.portlet.journal.NoSuchContentSearchException if a journal content search with the primary key could not be found
@@ -211,10 +211,10 @@ public interface JournalContentSearchPersistence extends BasePersistence<Journal
 			com.liferay.portlet.journal.NoSuchContentSearchException;
 
 	/**
-	* Finds all the journal content searchs where groupId = &#63; and privateLayout = &#63;.
+	* Returns all the journal content searchs where groupId = &#63; and privateLayout = &#63;.
 	*
-	* @param groupId the group ID to search with
-	* @param privateLayout the private layout to search with
+	* @param groupId the group ID
+	* @param privateLayout the private layout
 	* @return the matching journal content searchs
 	* @throws SystemException if a system exception occurred
 	*/
@@ -223,16 +223,16 @@ public interface JournalContentSearchPersistence extends BasePersistence<Journal
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds a range of all the journal content searchs where groupId = &#63; and privateLayout = &#63;.
+	* Returns a range of all the journal content searchs where groupId = &#63; and privateLayout = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param privateLayout the private layout to search with
-	* @param start the lower bound of the range of journal content searchs to return
-	* @param end the upper bound of the range of journal content searchs to return (not inclusive)
+	* @param groupId the group ID
+	* @param privateLayout the private layout
+	* @param start the lower bound of the range of journal content searchs
+	* @param end the upper bound of the range of journal content searchs (not inclusive)
 	* @return the range of matching journal content searchs
 	* @throws SystemException if a system exception occurred
 	*/
@@ -241,16 +241,16 @@ public interface JournalContentSearchPersistence extends BasePersistence<Journal
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds an ordered range of all the journal content searchs where groupId = &#63; and privateLayout = &#63;.
+	* Returns an ordered range of all the journal content searchs where groupId = &#63; and privateLayout = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param privateLayout the private layout to search with
-	* @param start the lower bound of the range of journal content searchs to return
-	* @param end the upper bound of the range of journal content searchs to return (not inclusive)
+	* @param groupId the group ID
+	* @param privateLayout the private layout
+	* @param start the lower bound of the range of journal content searchs
+	* @param end the upper bound of the range of journal content searchs (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching journal content searchs
 	* @throws SystemException if a system exception occurred
@@ -261,14 +261,14 @@ public interface JournalContentSearchPersistence extends BasePersistence<Journal
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the first journal content search in the ordered set where groupId = &#63; and privateLayout = &#63;.
+	* Returns the first journal content search in the ordered set where groupId = &#63; and privateLayout = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param privateLayout the private layout to search with
+	* @param groupId the group ID
+	* @param privateLayout the private layout
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching journal content search
 	* @throws com.liferay.portlet.journal.NoSuchContentSearchException if a matching journal content search could not be found
@@ -281,14 +281,14 @@ public interface JournalContentSearchPersistence extends BasePersistence<Journal
 			com.liferay.portlet.journal.NoSuchContentSearchException;
 
 	/**
-	* Finds the last journal content search in the ordered set where groupId = &#63; and privateLayout = &#63;.
+	* Returns the last journal content search in the ordered set where groupId = &#63; and privateLayout = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param privateLayout the private layout to search with
+	* @param groupId the group ID
+	* @param privateLayout the private layout
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching journal content search
 	* @throws com.liferay.portlet.journal.NoSuchContentSearchException if a matching journal content search could not be found
@@ -301,15 +301,15 @@ public interface JournalContentSearchPersistence extends BasePersistence<Journal
 			com.liferay.portlet.journal.NoSuchContentSearchException;
 
 	/**
-	* Finds the journal content searchs before and after the current journal content search in the ordered set where groupId = &#63; and privateLayout = &#63;.
+	* Returns the journal content searchs before and after the current journal content search in the ordered set where groupId = &#63; and privateLayout = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
 	* @param contentSearchId the primary key of the current journal content search
-	* @param groupId the group ID to search with
-	* @param privateLayout the private layout to search with
+	* @param groupId the group ID
+	* @param privateLayout the private layout
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next journal content search
 	* @throws com.liferay.portlet.journal.NoSuchContentSearchException if a journal content search with the primary key could not be found
@@ -322,10 +322,10 @@ public interface JournalContentSearchPersistence extends BasePersistence<Journal
 			com.liferay.portlet.journal.NoSuchContentSearchException;
 
 	/**
-	* Finds all the journal content searchs where groupId = &#63; and articleId = &#63;.
+	* Returns all the journal content searchs where groupId = &#63; and articleId = &#63;.
 	*
-	* @param groupId the group ID to search with
-	* @param articleId the article ID to search with
+	* @param groupId the group ID
+	* @param articleId the article ID
 	* @return the matching journal content searchs
 	* @throws SystemException if a system exception occurred
 	*/
@@ -334,16 +334,16 @@ public interface JournalContentSearchPersistence extends BasePersistence<Journal
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds a range of all the journal content searchs where groupId = &#63; and articleId = &#63;.
+	* Returns a range of all the journal content searchs where groupId = &#63; and articleId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param articleId the article ID to search with
-	* @param start the lower bound of the range of journal content searchs to return
-	* @param end the upper bound of the range of journal content searchs to return (not inclusive)
+	* @param groupId the group ID
+	* @param articleId the article ID
+	* @param start the lower bound of the range of journal content searchs
+	* @param end the upper bound of the range of journal content searchs (not inclusive)
 	* @return the range of matching journal content searchs
 	* @throws SystemException if a system exception occurred
 	*/
@@ -352,16 +352,16 @@ public interface JournalContentSearchPersistence extends BasePersistence<Journal
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds an ordered range of all the journal content searchs where groupId = &#63; and articleId = &#63;.
+	* Returns an ordered range of all the journal content searchs where groupId = &#63; and articleId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param articleId the article ID to search with
-	* @param start the lower bound of the range of journal content searchs to return
-	* @param end the upper bound of the range of journal content searchs to return (not inclusive)
+	* @param groupId the group ID
+	* @param articleId the article ID
+	* @param start the lower bound of the range of journal content searchs
+	* @param end the upper bound of the range of journal content searchs (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching journal content searchs
 	* @throws SystemException if a system exception occurred
@@ -372,14 +372,14 @@ public interface JournalContentSearchPersistence extends BasePersistence<Journal
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the first journal content search in the ordered set where groupId = &#63; and articleId = &#63;.
+	* Returns the first journal content search in the ordered set where groupId = &#63; and articleId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param articleId the article ID to search with
+	* @param groupId the group ID
+	* @param articleId the article ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching journal content search
 	* @throws com.liferay.portlet.journal.NoSuchContentSearchException if a matching journal content search could not be found
@@ -392,14 +392,14 @@ public interface JournalContentSearchPersistence extends BasePersistence<Journal
 			com.liferay.portlet.journal.NoSuchContentSearchException;
 
 	/**
-	* Finds the last journal content search in the ordered set where groupId = &#63; and articleId = &#63;.
+	* Returns the last journal content search in the ordered set where groupId = &#63; and articleId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param articleId the article ID to search with
+	* @param groupId the group ID
+	* @param articleId the article ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching journal content search
 	* @throws com.liferay.portlet.journal.NoSuchContentSearchException if a matching journal content search could not be found
@@ -412,15 +412,15 @@ public interface JournalContentSearchPersistence extends BasePersistence<Journal
 			com.liferay.portlet.journal.NoSuchContentSearchException;
 
 	/**
-	* Finds the journal content searchs before and after the current journal content search in the ordered set where groupId = &#63; and articleId = &#63;.
+	* Returns the journal content searchs before and after the current journal content search in the ordered set where groupId = &#63; and articleId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
 	* @param contentSearchId the primary key of the current journal content search
-	* @param groupId the group ID to search with
-	* @param articleId the article ID to search with
+	* @param groupId the group ID
+	* @param articleId the article ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next journal content search
 	* @throws com.liferay.portlet.journal.NoSuchContentSearchException if a journal content search with the primary key could not be found
@@ -433,11 +433,11 @@ public interface JournalContentSearchPersistence extends BasePersistence<Journal
 			com.liferay.portlet.journal.NoSuchContentSearchException;
 
 	/**
-	* Finds all the journal content searchs where groupId = &#63; and privateLayout = &#63; and layoutId = &#63;.
+	* Returns all the journal content searchs where groupId = &#63; and privateLayout = &#63; and layoutId = &#63;.
 	*
-	* @param groupId the group ID to search with
-	* @param privateLayout the private layout to search with
-	* @param layoutId the layout ID to search with
+	* @param groupId the group ID
+	* @param privateLayout the private layout
+	* @param layoutId the layout ID
 	* @return the matching journal content searchs
 	* @throws SystemException if a system exception occurred
 	*/
@@ -446,17 +446,17 @@ public interface JournalContentSearchPersistence extends BasePersistence<Journal
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds a range of all the journal content searchs where groupId = &#63; and privateLayout = &#63; and layoutId = &#63;.
+	* Returns a range of all the journal content searchs where groupId = &#63; and privateLayout = &#63; and layoutId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param privateLayout the private layout to search with
-	* @param layoutId the layout ID to search with
-	* @param start the lower bound of the range of journal content searchs to return
-	* @param end the upper bound of the range of journal content searchs to return (not inclusive)
+	* @param groupId the group ID
+	* @param privateLayout the private layout
+	* @param layoutId the layout ID
+	* @param start the lower bound of the range of journal content searchs
+	* @param end the upper bound of the range of journal content searchs (not inclusive)
 	* @return the range of matching journal content searchs
 	* @throws SystemException if a system exception occurred
 	*/
@@ -465,17 +465,17 @@ public interface JournalContentSearchPersistence extends BasePersistence<Journal
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds an ordered range of all the journal content searchs where groupId = &#63; and privateLayout = &#63; and layoutId = &#63;.
+	* Returns an ordered range of all the journal content searchs where groupId = &#63; and privateLayout = &#63; and layoutId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param privateLayout the private layout to search with
-	* @param layoutId the layout ID to search with
-	* @param start the lower bound of the range of journal content searchs to return
-	* @param end the upper bound of the range of journal content searchs to return (not inclusive)
+	* @param groupId the group ID
+	* @param privateLayout the private layout
+	* @param layoutId the layout ID
+	* @param start the lower bound of the range of journal content searchs
+	* @param end the upper bound of the range of journal content searchs (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching journal content searchs
 	* @throws SystemException if a system exception occurred
@@ -486,15 +486,15 @@ public interface JournalContentSearchPersistence extends BasePersistence<Journal
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the first journal content search in the ordered set where groupId = &#63; and privateLayout = &#63; and layoutId = &#63;.
+	* Returns the first journal content search in the ordered set where groupId = &#63; and privateLayout = &#63; and layoutId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param privateLayout the private layout to search with
-	* @param layoutId the layout ID to search with
+	* @param groupId the group ID
+	* @param privateLayout the private layout
+	* @param layoutId the layout ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching journal content search
 	* @throws com.liferay.portlet.journal.NoSuchContentSearchException if a matching journal content search could not be found
@@ -507,15 +507,15 @@ public interface JournalContentSearchPersistence extends BasePersistence<Journal
 			com.liferay.portlet.journal.NoSuchContentSearchException;
 
 	/**
-	* Finds the last journal content search in the ordered set where groupId = &#63; and privateLayout = &#63; and layoutId = &#63;.
+	* Returns the last journal content search in the ordered set where groupId = &#63; and privateLayout = &#63; and layoutId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param privateLayout the private layout to search with
-	* @param layoutId the layout ID to search with
+	* @param groupId the group ID
+	* @param privateLayout the private layout
+	* @param layoutId the layout ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching journal content search
 	* @throws com.liferay.portlet.journal.NoSuchContentSearchException if a matching journal content search could not be found
@@ -528,16 +528,16 @@ public interface JournalContentSearchPersistence extends BasePersistence<Journal
 			com.liferay.portlet.journal.NoSuchContentSearchException;
 
 	/**
-	* Finds the journal content searchs before and after the current journal content search in the ordered set where groupId = &#63; and privateLayout = &#63; and layoutId = &#63;.
+	* Returns the journal content searchs before and after the current journal content search in the ordered set where groupId = &#63; and privateLayout = &#63; and layoutId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
 	* @param contentSearchId the primary key of the current journal content search
-	* @param groupId the group ID to search with
-	* @param privateLayout the private layout to search with
-	* @param layoutId the layout ID to search with
+	* @param groupId the group ID
+	* @param privateLayout the private layout
+	* @param layoutId the layout ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next journal content search
 	* @throws com.liferay.portlet.journal.NoSuchContentSearchException if a journal content search with the primary key could not be found
@@ -551,11 +551,11 @@ public interface JournalContentSearchPersistence extends BasePersistence<Journal
 			com.liferay.portlet.journal.NoSuchContentSearchException;
 
 	/**
-	* Finds all the journal content searchs where groupId = &#63; and privateLayout = &#63; and articleId = &#63;.
+	* Returns all the journal content searchs where groupId = &#63; and privateLayout = &#63; and articleId = &#63;.
 	*
-	* @param groupId the group ID to search with
-	* @param privateLayout the private layout to search with
-	* @param articleId the article ID to search with
+	* @param groupId the group ID
+	* @param privateLayout the private layout
+	* @param articleId the article ID
 	* @return the matching journal content searchs
 	* @throws SystemException if a system exception occurred
 	*/
@@ -564,17 +564,17 @@ public interface JournalContentSearchPersistence extends BasePersistence<Journal
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds a range of all the journal content searchs where groupId = &#63; and privateLayout = &#63; and articleId = &#63;.
+	* Returns a range of all the journal content searchs where groupId = &#63; and privateLayout = &#63; and articleId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param privateLayout the private layout to search with
-	* @param articleId the article ID to search with
-	* @param start the lower bound of the range of journal content searchs to return
-	* @param end the upper bound of the range of journal content searchs to return (not inclusive)
+	* @param groupId the group ID
+	* @param privateLayout the private layout
+	* @param articleId the article ID
+	* @param start the lower bound of the range of journal content searchs
+	* @param end the upper bound of the range of journal content searchs (not inclusive)
 	* @return the range of matching journal content searchs
 	* @throws SystemException if a system exception occurred
 	*/
@@ -584,17 +584,17 @@ public interface JournalContentSearchPersistence extends BasePersistence<Journal
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds an ordered range of all the journal content searchs where groupId = &#63; and privateLayout = &#63; and articleId = &#63;.
+	* Returns an ordered range of all the journal content searchs where groupId = &#63; and privateLayout = &#63; and articleId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param privateLayout the private layout to search with
-	* @param articleId the article ID to search with
-	* @param start the lower bound of the range of journal content searchs to return
-	* @param end the upper bound of the range of journal content searchs to return (not inclusive)
+	* @param groupId the group ID
+	* @param privateLayout the private layout
+	* @param articleId the article ID
+	* @param start the lower bound of the range of journal content searchs
+	* @param end the upper bound of the range of journal content searchs (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching journal content searchs
 	* @throws SystemException if a system exception occurred
@@ -606,15 +606,15 @@ public interface JournalContentSearchPersistence extends BasePersistence<Journal
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the first journal content search in the ordered set where groupId = &#63; and privateLayout = &#63; and articleId = &#63;.
+	* Returns the first journal content search in the ordered set where groupId = &#63; and privateLayout = &#63; and articleId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param privateLayout the private layout to search with
-	* @param articleId the article ID to search with
+	* @param groupId the group ID
+	* @param privateLayout the private layout
+	* @param articleId the article ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching journal content search
 	* @throws com.liferay.portlet.journal.NoSuchContentSearchException if a matching journal content search could not be found
@@ -627,15 +627,15 @@ public interface JournalContentSearchPersistence extends BasePersistence<Journal
 			com.liferay.portlet.journal.NoSuchContentSearchException;
 
 	/**
-	* Finds the last journal content search in the ordered set where groupId = &#63; and privateLayout = &#63; and articleId = &#63;.
+	* Returns the last journal content search in the ordered set where groupId = &#63; and privateLayout = &#63; and articleId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param privateLayout the private layout to search with
-	* @param articleId the article ID to search with
+	* @param groupId the group ID
+	* @param privateLayout the private layout
+	* @param articleId the article ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching journal content search
 	* @throws com.liferay.portlet.journal.NoSuchContentSearchException if a matching journal content search could not be found
@@ -648,16 +648,16 @@ public interface JournalContentSearchPersistence extends BasePersistence<Journal
 			com.liferay.portlet.journal.NoSuchContentSearchException;
 
 	/**
-	* Finds the journal content searchs before and after the current journal content search in the ordered set where groupId = &#63; and privateLayout = &#63; and articleId = &#63;.
+	* Returns the journal content searchs before and after the current journal content search in the ordered set where groupId = &#63; and privateLayout = &#63; and articleId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
 	* @param contentSearchId the primary key of the current journal content search
-	* @param groupId the group ID to search with
-	* @param privateLayout the private layout to search with
-	* @param articleId the article ID to search with
+	* @param groupId the group ID
+	* @param privateLayout the private layout
+	* @param articleId the article ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next journal content search
 	* @throws com.liferay.portlet.journal.NoSuchContentSearchException if a journal content search with the primary key could not be found
@@ -671,12 +671,12 @@ public interface JournalContentSearchPersistence extends BasePersistence<Journal
 			com.liferay.portlet.journal.NoSuchContentSearchException;
 
 	/**
-	* Finds all the journal content searchs where groupId = &#63; and privateLayout = &#63; and layoutId = &#63; and portletId = &#63;.
+	* Returns all the journal content searchs where groupId = &#63; and privateLayout = &#63; and layoutId = &#63; and portletId = &#63;.
 	*
-	* @param groupId the group ID to search with
-	* @param privateLayout the private layout to search with
-	* @param layoutId the layout ID to search with
-	* @param portletId the portlet ID to search with
+	* @param groupId the group ID
+	* @param privateLayout the private layout
+	* @param layoutId the layout ID
+	* @param portletId the portlet ID
 	* @return the matching journal content searchs
 	* @throws SystemException if a system exception occurred
 	*/
@@ -686,18 +686,18 @@ public interface JournalContentSearchPersistence extends BasePersistence<Journal
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds a range of all the journal content searchs where groupId = &#63; and privateLayout = &#63; and layoutId = &#63; and portletId = &#63;.
+	* Returns a range of all the journal content searchs where groupId = &#63; and privateLayout = &#63; and layoutId = &#63; and portletId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param privateLayout the private layout to search with
-	* @param layoutId the layout ID to search with
-	* @param portletId the portlet ID to search with
-	* @param start the lower bound of the range of journal content searchs to return
-	* @param end the upper bound of the range of journal content searchs to return (not inclusive)
+	* @param groupId the group ID
+	* @param privateLayout the private layout
+	* @param layoutId the layout ID
+	* @param portletId the portlet ID
+	* @param start the lower bound of the range of journal content searchs
+	* @param end the upper bound of the range of journal content searchs (not inclusive)
 	* @return the range of matching journal content searchs
 	* @throws SystemException if a system exception occurred
 	*/
@@ -707,18 +707,18 @@ public interface JournalContentSearchPersistence extends BasePersistence<Journal
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds an ordered range of all the journal content searchs where groupId = &#63; and privateLayout = &#63; and layoutId = &#63; and portletId = &#63;.
+	* Returns an ordered range of all the journal content searchs where groupId = &#63; and privateLayout = &#63; and layoutId = &#63; and portletId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param privateLayout the private layout to search with
-	* @param layoutId the layout ID to search with
-	* @param portletId the portlet ID to search with
-	* @param start the lower bound of the range of journal content searchs to return
-	* @param end the upper bound of the range of journal content searchs to return (not inclusive)
+	* @param groupId the group ID
+	* @param privateLayout the private layout
+	* @param layoutId the layout ID
+	* @param portletId the portlet ID
+	* @param start the lower bound of the range of journal content searchs
+	* @param end the upper bound of the range of journal content searchs (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching journal content searchs
 	* @throws SystemException if a system exception occurred
@@ -730,16 +730,16 @@ public interface JournalContentSearchPersistence extends BasePersistence<Journal
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the first journal content search in the ordered set where groupId = &#63; and privateLayout = &#63; and layoutId = &#63; and portletId = &#63;.
+	* Returns the first journal content search in the ordered set where groupId = &#63; and privateLayout = &#63; and layoutId = &#63; and portletId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param privateLayout the private layout to search with
-	* @param layoutId the layout ID to search with
-	* @param portletId the portlet ID to search with
+	* @param groupId the group ID
+	* @param privateLayout the private layout
+	* @param layoutId the layout ID
+	* @param portletId the portlet ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching journal content search
 	* @throws com.liferay.portlet.journal.NoSuchContentSearchException if a matching journal content search could not be found
@@ -753,16 +753,16 @@ public interface JournalContentSearchPersistence extends BasePersistence<Journal
 			com.liferay.portlet.journal.NoSuchContentSearchException;
 
 	/**
-	* Finds the last journal content search in the ordered set where groupId = &#63; and privateLayout = &#63; and layoutId = &#63; and portletId = &#63;.
+	* Returns the last journal content search in the ordered set where groupId = &#63; and privateLayout = &#63; and layoutId = &#63; and portletId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param privateLayout the private layout to search with
-	* @param layoutId the layout ID to search with
-	* @param portletId the portlet ID to search with
+	* @param groupId the group ID
+	* @param privateLayout the private layout
+	* @param layoutId the layout ID
+	* @param portletId the portlet ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching journal content search
 	* @throws com.liferay.portlet.journal.NoSuchContentSearchException if a matching journal content search could not be found
@@ -776,17 +776,17 @@ public interface JournalContentSearchPersistence extends BasePersistence<Journal
 			com.liferay.portlet.journal.NoSuchContentSearchException;
 
 	/**
-	* Finds the journal content searchs before and after the current journal content search in the ordered set where groupId = &#63; and privateLayout = &#63; and layoutId = &#63; and portletId = &#63;.
+	* Returns the journal content searchs before and after the current journal content search in the ordered set where groupId = &#63; and privateLayout = &#63; and layoutId = &#63; and portletId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
 	* @param contentSearchId the primary key of the current journal content search
-	* @param groupId the group ID to search with
-	* @param privateLayout the private layout to search with
-	* @param layoutId the layout ID to search with
-	* @param portletId the portlet ID to search with
+	* @param groupId the group ID
+	* @param privateLayout the private layout
+	* @param layoutId the layout ID
+	* @param portletId the portlet ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next journal content search
 	* @throws com.liferay.portlet.journal.NoSuchContentSearchException if a journal content search with the primary key could not be found
@@ -800,13 +800,13 @@ public interface JournalContentSearchPersistence extends BasePersistence<Journal
 			com.liferay.portlet.journal.NoSuchContentSearchException;
 
 	/**
-	* Finds the journal content search where groupId = &#63; and privateLayout = &#63; and layoutId = &#63; and portletId = &#63; and articleId = &#63; or throws a {@link com.liferay.portlet.journal.NoSuchContentSearchException} if it could not be found.
+	* Returns the journal content search where groupId = &#63; and privateLayout = &#63; and layoutId = &#63; and portletId = &#63; and articleId = &#63; or throws a {@link com.liferay.portlet.journal.NoSuchContentSearchException} if it could not be found.
 	*
-	* @param groupId the group ID to search with
-	* @param privateLayout the private layout to search with
-	* @param layoutId the layout ID to search with
-	* @param portletId the portlet ID to search with
-	* @param articleId the article ID to search with
+	* @param groupId the group ID
+	* @param privateLayout the private layout
+	* @param layoutId the layout ID
+	* @param portletId the portlet ID
+	* @param articleId the article ID
 	* @return the matching journal content search
 	* @throws com.liferay.portlet.journal.NoSuchContentSearchException if a matching journal content search could not be found
 	* @throws SystemException if a system exception occurred
@@ -818,13 +818,13 @@ public interface JournalContentSearchPersistence extends BasePersistence<Journal
 			com.liferay.portlet.journal.NoSuchContentSearchException;
 
 	/**
-	* Finds the journal content search where groupId = &#63; and privateLayout = &#63; and layoutId = &#63; and portletId = &#63; and articleId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	* Returns the journal content search where groupId = &#63; and privateLayout = &#63; and layoutId = &#63; and portletId = &#63; and articleId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	*
-	* @param groupId the group ID to search with
-	* @param privateLayout the private layout to search with
-	* @param layoutId the layout ID to search with
-	* @param portletId the portlet ID to search with
-	* @param articleId the article ID to search with
+	* @param groupId the group ID
+	* @param privateLayout the private layout
+	* @param layoutId the layout ID
+	* @param portletId the portlet ID
+	* @param articleId the article ID
 	* @return the matching journal content search, or <code>null</code> if a matching journal content search could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -834,13 +834,13 @@ public interface JournalContentSearchPersistence extends BasePersistence<Journal
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the journal content search where groupId = &#63; and privateLayout = &#63; and layoutId = &#63; and portletId = &#63; and articleId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	* Returns the journal content search where groupId = &#63; and privateLayout = &#63; and layoutId = &#63; and portletId = &#63; and articleId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
-	* @param groupId the group ID to search with
-	* @param privateLayout the private layout to search with
-	* @param layoutId the layout ID to search with
-	* @param portletId the portlet ID to search with
-	* @param articleId the article ID to search with
+	* @param groupId the group ID
+	* @param privateLayout the private layout
+	* @param layoutId the layout ID
+	* @param portletId the portlet ID
+	* @param articleId the article ID
 	* @return the matching journal content search, or <code>null</code> if a matching journal content search could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -851,7 +851,7 @@ public interface JournalContentSearchPersistence extends BasePersistence<Journal
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds all the journal content searchs.
+	* Returns all the journal content searchs.
 	*
 	* @return the journal content searchs
 	* @throws SystemException if a system exception occurred
@@ -860,14 +860,14 @@ public interface JournalContentSearchPersistence extends BasePersistence<Journal
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds a range of all the journal content searchs.
+	* Returns a range of all the journal content searchs.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of journal content searchs to return
-	* @param end the upper bound of the range of journal content searchs to return (not inclusive)
+	* @param start the lower bound of the range of journal content searchs
+	* @param end the upper bound of the range of journal content searchs (not inclusive)
 	* @return the range of journal content searchs
 	* @throws SystemException if a system exception occurred
 	*/
@@ -876,14 +876,14 @@ public interface JournalContentSearchPersistence extends BasePersistence<Journal
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds an ordered range of all the journal content searchs.
+	* Returns an ordered range of all the journal content searchs.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of journal content searchs to return
-	* @param end the upper bound of the range of journal content searchs to return (not inclusive)
+	* @param start the lower bound of the range of journal content searchs
+	* @param end the upper bound of the range of journal content searchs (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of journal content searchs
 	* @throws SystemException if a system exception occurred
@@ -896,7 +896,7 @@ public interface JournalContentSearchPersistence extends BasePersistence<Journal
 	/**
 	* Removes all the journal content searchs where articleId = &#63; from the database.
 	*
-	* @param articleId the article ID to search with
+	* @param articleId the article ID
 	* @throws SystemException if a system exception occurred
 	*/
 	public void removeByArticleId(java.lang.String articleId)
@@ -905,8 +905,8 @@ public interface JournalContentSearchPersistence extends BasePersistence<Journal
 	/**
 	* Removes all the journal content searchs where groupId = &#63; and privateLayout = &#63; from the database.
 	*
-	* @param groupId the group ID to search with
-	* @param privateLayout the private layout to search with
+	* @param groupId the group ID
+	* @param privateLayout the private layout
 	* @throws SystemException if a system exception occurred
 	*/
 	public void removeByG_P(long groupId, boolean privateLayout)
@@ -915,8 +915,8 @@ public interface JournalContentSearchPersistence extends BasePersistence<Journal
 	/**
 	* Removes all the journal content searchs where groupId = &#63; and articleId = &#63; from the database.
 	*
-	* @param groupId the group ID to search with
-	* @param articleId the article ID to search with
+	* @param groupId the group ID
+	* @param articleId the article ID
 	* @throws SystemException if a system exception occurred
 	*/
 	public void removeByG_A(long groupId, java.lang.String articleId)
@@ -925,9 +925,9 @@ public interface JournalContentSearchPersistence extends BasePersistence<Journal
 	/**
 	* Removes all the journal content searchs where groupId = &#63; and privateLayout = &#63; and layoutId = &#63; from the database.
 	*
-	* @param groupId the group ID to search with
-	* @param privateLayout the private layout to search with
-	* @param layoutId the layout ID to search with
+	* @param groupId the group ID
+	* @param privateLayout the private layout
+	* @param layoutId the layout ID
 	* @throws SystemException if a system exception occurred
 	*/
 	public void removeByG_P_L(long groupId, boolean privateLayout, long layoutId)
@@ -936,9 +936,9 @@ public interface JournalContentSearchPersistence extends BasePersistence<Journal
 	/**
 	* Removes all the journal content searchs where groupId = &#63; and privateLayout = &#63; and articleId = &#63; from the database.
 	*
-	* @param groupId the group ID to search with
-	* @param privateLayout the private layout to search with
-	* @param articleId the article ID to search with
+	* @param groupId the group ID
+	* @param privateLayout the private layout
+	* @param articleId the article ID
 	* @throws SystemException if a system exception occurred
 	*/
 	public void removeByG_P_A(long groupId, boolean privateLayout,
@@ -948,10 +948,10 @@ public interface JournalContentSearchPersistence extends BasePersistence<Journal
 	/**
 	* Removes all the journal content searchs where groupId = &#63; and privateLayout = &#63; and layoutId = &#63; and portletId = &#63; from the database.
 	*
-	* @param groupId the group ID to search with
-	* @param privateLayout the private layout to search with
-	* @param layoutId the layout ID to search with
-	* @param portletId the portlet ID to search with
+	* @param groupId the group ID
+	* @param privateLayout the private layout
+	* @param layoutId the layout ID
+	* @param portletId the portlet ID
 	* @throws SystemException if a system exception occurred
 	*/
 	public void removeByG_P_L_P(long groupId, boolean privateLayout,
@@ -961,11 +961,11 @@ public interface JournalContentSearchPersistence extends BasePersistence<Journal
 	/**
 	* Removes the journal content search where groupId = &#63; and privateLayout = &#63; and layoutId = &#63; and portletId = &#63; and articleId = &#63; from the database.
 	*
-	* @param groupId the group ID to search with
-	* @param privateLayout the private layout to search with
-	* @param layoutId the layout ID to search with
-	* @param portletId the portlet ID to search with
-	* @param articleId the article ID to search with
+	* @param groupId the group ID
+	* @param privateLayout the private layout
+	* @param layoutId the layout ID
+	* @param portletId the portlet ID
+	* @param articleId the article ID
 	* @throws SystemException if a system exception occurred
 	*/
 	public void removeByG_P_L_P_A(long groupId, boolean privateLayout,
@@ -982,9 +982,9 @@ public interface JournalContentSearchPersistence extends BasePersistence<Journal
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Counts all the journal content searchs where articleId = &#63;.
+	* Returns the number of journal content searchs where articleId = &#63;.
 	*
-	* @param articleId the article ID to search with
+	* @param articleId the article ID
 	* @return the number of matching journal content searchs
 	* @throws SystemException if a system exception occurred
 	*/
@@ -992,10 +992,10 @@ public interface JournalContentSearchPersistence extends BasePersistence<Journal
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Counts all the journal content searchs where groupId = &#63; and privateLayout = &#63;.
+	* Returns the number of journal content searchs where groupId = &#63; and privateLayout = &#63;.
 	*
-	* @param groupId the group ID to search with
-	* @param privateLayout the private layout to search with
+	* @param groupId the group ID
+	* @param privateLayout the private layout
 	* @return the number of matching journal content searchs
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1003,10 +1003,10 @@ public interface JournalContentSearchPersistence extends BasePersistence<Journal
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Counts all the journal content searchs where groupId = &#63; and articleId = &#63;.
+	* Returns the number of journal content searchs where groupId = &#63; and articleId = &#63;.
 	*
-	* @param groupId the group ID to search with
-	* @param articleId the article ID to search with
+	* @param groupId the group ID
+	* @param articleId the article ID
 	* @return the number of matching journal content searchs
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1014,11 +1014,11 @@ public interface JournalContentSearchPersistence extends BasePersistence<Journal
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Counts all the journal content searchs where groupId = &#63; and privateLayout = &#63; and layoutId = &#63;.
+	* Returns the number of journal content searchs where groupId = &#63; and privateLayout = &#63; and layoutId = &#63;.
 	*
-	* @param groupId the group ID to search with
-	* @param privateLayout the private layout to search with
-	* @param layoutId the layout ID to search with
+	* @param groupId the group ID
+	* @param privateLayout the private layout
+	* @param layoutId the layout ID
 	* @return the number of matching journal content searchs
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1026,11 +1026,11 @@ public interface JournalContentSearchPersistence extends BasePersistence<Journal
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Counts all the journal content searchs where groupId = &#63; and privateLayout = &#63; and articleId = &#63;.
+	* Returns the number of journal content searchs where groupId = &#63; and privateLayout = &#63; and articleId = &#63;.
 	*
-	* @param groupId the group ID to search with
-	* @param privateLayout the private layout to search with
-	* @param articleId the article ID to search with
+	* @param groupId the group ID
+	* @param privateLayout the private layout
+	* @param articleId the article ID
 	* @return the number of matching journal content searchs
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1039,12 +1039,12 @@ public interface JournalContentSearchPersistence extends BasePersistence<Journal
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Counts all the journal content searchs where groupId = &#63; and privateLayout = &#63; and layoutId = &#63; and portletId = &#63;.
+	* Returns the number of journal content searchs where groupId = &#63; and privateLayout = &#63; and layoutId = &#63; and portletId = &#63;.
 	*
-	* @param groupId the group ID to search with
-	* @param privateLayout the private layout to search with
-	* @param layoutId the layout ID to search with
-	* @param portletId the portlet ID to search with
+	* @param groupId the group ID
+	* @param privateLayout the private layout
+	* @param layoutId the layout ID
+	* @param portletId the portlet ID
 	* @return the number of matching journal content searchs
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1053,13 +1053,13 @@ public interface JournalContentSearchPersistence extends BasePersistence<Journal
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Counts all the journal content searchs where groupId = &#63; and privateLayout = &#63; and layoutId = &#63; and portletId = &#63; and articleId = &#63;.
+	* Returns the number of journal content searchs where groupId = &#63; and privateLayout = &#63; and layoutId = &#63; and portletId = &#63; and articleId = &#63;.
 	*
-	* @param groupId the group ID to search with
-	* @param privateLayout the private layout to search with
-	* @param layoutId the layout ID to search with
-	* @param portletId the portlet ID to search with
-	* @param articleId the article ID to search with
+	* @param groupId the group ID
+	* @param privateLayout the private layout
+	* @param layoutId the layout ID
+	* @param portletId the portlet ID
+	* @param articleId the article ID
 	* @return the number of matching journal content searchs
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1068,7 +1068,7 @@ public interface JournalContentSearchPersistence extends BasePersistence<Journal
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Counts all the journal content searchs.
+	* Returns the number of journal content searchs.
 	*
 	* @return the number of journal content searchs
 	* @throws SystemException if a system exception occurred

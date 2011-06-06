@@ -42,21 +42,21 @@ public interface PermissionModel extends BaseModel<Permission> {
 	 */
 
 	/**
-	 * Gets the primary key of this permission.
+	 * Returns the primary key of this permission.
 	 *
 	 * @return the primary key of this permission
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this permission
+	 * Sets the primary key of this permission.
 	 *
 	 * @param primaryKey the primary key of this permission
 	 */
 	public void setPrimaryKey(long primaryKey);
 
 	/**
-	 * Gets the permission ID of this permission.
+	 * Returns the permission ID of this permission.
 	 *
 	 * @return the permission ID of this permission
 	 */
@@ -70,7 +70,7 @@ public interface PermissionModel extends BaseModel<Permission> {
 	public void setPermissionId(long permissionId);
 
 	/**
-	 * Gets the company ID of this permission.
+	 * Returns the company ID of this permission.
 	 *
 	 * @return the company ID of this permission
 	 */
@@ -84,7 +84,7 @@ public interface PermissionModel extends BaseModel<Permission> {
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the action ID of this permission.
+	 * Returns the action ID of this permission.
 	 *
 	 * @return the action ID of this permission
 	 */
@@ -99,7 +99,7 @@ public interface PermissionModel extends BaseModel<Permission> {
 	public void setActionId(String actionId);
 
 	/**
-	 * Gets the resource ID of this permission.
+	 * Returns the resource ID of this permission.
 	 *
 	 * @return the resource ID of this permission
 	 */

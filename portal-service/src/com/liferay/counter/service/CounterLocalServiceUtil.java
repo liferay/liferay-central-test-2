@@ -41,7 +41,7 @@ public class CounterLocalServiceUtil {
 	/**
 	* Adds the counter to the database. Also notifies the appropriate model listeners.
 	*
-	* @param counter the counter to add
+	* @param counter the counter
 	* @return the counter that was added
 	* @throws SystemException if a system exception occurred
 	*/
@@ -65,7 +65,7 @@ public class CounterLocalServiceUtil {
 	/**
 	* Deletes the counter with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param name the primary key of the counter to delete
+	* @param name the primary key of the counter
 	* @throws PortalException if a counter with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -78,7 +78,7 @@ public class CounterLocalServiceUtil {
 	/**
 	* Deletes the counter from the database. Also notifies the appropriate model listeners.
 	*
-	* @param counter the counter to delete
+	* @param counter the counter
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void deleteCounter(com.liferay.counter.model.Counter counter)
@@ -89,7 +89,7 @@ public class CounterLocalServiceUtil {
 	/**
 	* Performs a dynamic query on the database and returns the matching rows.
 	*
-	* @param dynamicQuery the dynamic query to search with
+	* @param dynamicQuery the dynamic query
 	* @return the matching rows
 	* @throws SystemException if a system exception occurred
 	*/
@@ -107,9 +107,9 @@ public class CounterLocalServiceUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param dynamicQuery the dynamic query to search with
-	* @param start the lower bound of the range of model instances to return
-	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param dynamicQuery the dynamic query
+	* @param start the lower bound of the range of model instances
+	* @param end the upper bound of the range of model instances (not inclusive)
 	* @return the range of matching rows
 	* @throws SystemException if a system exception occurred
 	*/
@@ -127,9 +127,9 @@ public class CounterLocalServiceUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param dynamicQuery the dynamic query to search with
-	* @param start the lower bound of the range of model instances to return
-	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param dynamicQuery the dynamic query
+	* @param start the lower bound of the range of model instances
+	* @param end the upper bound of the range of model instances (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching rows
 	* @throws SystemException if a system exception occurred
@@ -145,9 +145,9 @@ public class CounterLocalServiceUtil {
 	}
 
 	/**
-	* Counts the number of rows that match the dynamic query.
+	* Returns the number of rows that match the dynamic query.
 	*
-	* @param dynamicQuery the dynamic query to search with
+	* @param dynamicQuery the dynamic query
 	* @return the number of rows that match the dynamic query
 	* @throws SystemException if a system exception occurred
 	*/
@@ -158,9 +158,9 @@ public class CounterLocalServiceUtil {
 	}
 
 	/**
-	* Gets the counter with the primary key.
+	* Returns the counter with the primary key.
 	*
-	* @param name the primary key of the counter to get
+	* @param name the primary key of the counter
 	* @return the counter
 	* @throws PortalException if a counter with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -173,14 +173,14 @@ public class CounterLocalServiceUtil {
 	}
 
 	/**
-	* Gets a range of all the counters.
+	* Returns a range of all the counters.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of counters to return
-	* @param end the upper bound of the range of counters to return (not inclusive)
+	* @param start the lower bound of the range of counters
+	* @param end the upper bound of the range of counters (not inclusive)
 	* @return the range of counters
 	* @throws SystemException if a system exception occurred
 	*/
@@ -191,7 +191,7 @@ public class CounterLocalServiceUtil {
 	}
 
 	/**
-	* Gets the number of counters.
+	* Returns the number of counters.
 	*
 	* @return the number of counters
 	* @throws SystemException if a system exception occurred
@@ -204,7 +204,7 @@ public class CounterLocalServiceUtil {
 	/**
 	* Updates the counter in the database. Also notifies the appropriate model listeners.
 	*
-	* @param counter the counter to update
+	* @param counter the counter
 	* @return the counter that was updated
 	* @throws SystemException if a system exception occurred
 	*/
@@ -217,7 +217,7 @@ public class CounterLocalServiceUtil {
 	/**
 	* Updates the counter in the database. Also notifies the appropriate model listeners.
 	*
-	* @param counter the counter to update
+	* @param counter the counter
 	* @param merge whether to merge the counter with the current session. See {@link com.liferay.portal.service.persistence.BatchSession#update(com.liferay.portal.kernel.dao.orm.Session, com.liferay.portal.model.BaseModel, boolean)} for an explanation.
 	* @return the counter that was updated
 	* @throws SystemException if a system exception occurred
@@ -229,7 +229,7 @@ public class CounterLocalServiceUtil {
 	}
 
 	/**
-	* Gets the Spring bean ID for this bean.
+	* Returns the Spring bean ID for this bean.
 	*
 	* @return the Spring bean ID for this bean
 	*/

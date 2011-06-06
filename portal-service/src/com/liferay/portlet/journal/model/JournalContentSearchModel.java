@@ -43,21 +43,21 @@ public interface JournalContentSearchModel extends BaseModel<JournalContentSearc
 	 */
 
 	/**
-	 * Gets the primary key of this journal content search.
+	 * Returns the primary key of this journal content search.
 	 *
 	 * @return the primary key of this journal content search
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this journal content search
+	 * Sets the primary key of this journal content search.
 	 *
 	 * @param primaryKey the primary key of this journal content search
 	 */
 	public void setPrimaryKey(long primaryKey);
 
 	/**
-	 * Gets the content search ID of this journal content search.
+	 * Returns the content search ID of this journal content search.
 	 *
 	 * @return the content search ID of this journal content search
 	 */
@@ -71,7 +71,7 @@ public interface JournalContentSearchModel extends BaseModel<JournalContentSearc
 	public void setContentSearchId(long contentSearchId);
 
 	/**
-	 * Gets the group ID of this journal content search.
+	 * Returns the group ID of this journal content search.
 	 *
 	 * @return the group ID of this journal content search
 	 */
@@ -85,7 +85,7 @@ public interface JournalContentSearchModel extends BaseModel<JournalContentSearc
 	public void setGroupId(long groupId);
 
 	/**
-	 * Gets the company ID of this journal content search.
+	 * Returns the company ID of this journal content search.
 	 *
 	 * @return the company ID of this journal content search
 	 */
@@ -99,7 +99,7 @@ public interface JournalContentSearchModel extends BaseModel<JournalContentSearc
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the private layout of this journal content search.
+	 * Returns the private layout of this journal content search.
 	 *
 	 * @return the private layout of this journal content search
 	 */
@@ -120,7 +120,7 @@ public interface JournalContentSearchModel extends BaseModel<JournalContentSearc
 	public void setPrivateLayout(boolean privateLayout);
 
 	/**
-	 * Gets the layout ID of this journal content search.
+	 * Returns the layout ID of this journal content search.
 	 *
 	 * @return the layout ID of this journal content search
 	 */
@@ -134,7 +134,7 @@ public interface JournalContentSearchModel extends BaseModel<JournalContentSearc
 	public void setLayoutId(long layoutId);
 
 	/**
-	 * Gets the portlet ID of this journal content search.
+	 * Returns the portlet ID of this journal content search.
 	 *
 	 * @return the portlet ID of this journal content search
 	 */
@@ -149,7 +149,7 @@ public interface JournalContentSearchModel extends BaseModel<JournalContentSearc
 	public void setPortletId(String portletId);
 
 	/**
-	 * Gets the article ID of this journal content search.
+	 * Returns the article ID of this journal content search.
 	 *
 	 * @return the article ID of this journal content search
 	 */

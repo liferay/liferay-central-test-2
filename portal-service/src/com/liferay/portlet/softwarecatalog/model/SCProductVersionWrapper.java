@@ -37,7 +37,7 @@ public class SCProductVersionWrapper implements SCProductVersion {
 	}
 
 	/**
-	* Gets the primary key of this s c product version.
+	* Returns the primary key of this s c product version.
 	*
 	* @return the primary key of this s c product version
 	*/
@@ -46,7 +46,7 @@ public class SCProductVersionWrapper implements SCProductVersion {
 	}
 
 	/**
-	* Sets the primary key of this s c product version
+	* Sets the primary key of this s c product version.
 	*
 	* @param primaryKey the primary key of this s c product version
 	*/
@@ -55,7 +55,7 @@ public class SCProductVersionWrapper implements SCProductVersion {
 	}
 
 	/**
-	* Gets the product version ID of this s c product version.
+	* Returns the product version ID of this s c product version.
 	*
 	* @return the product version ID of this s c product version
 	*/
@@ -73,7 +73,7 @@ public class SCProductVersionWrapper implements SCProductVersion {
 	}
 
 	/**
-	* Gets the company ID of this s c product version.
+	* Returns the company ID of this s c product version.
 	*
 	* @return the company ID of this s c product version
 	*/
@@ -91,7 +91,7 @@ public class SCProductVersionWrapper implements SCProductVersion {
 	}
 
 	/**
-	* Gets the user ID of this s c product version.
+	* Returns the user ID of this s c product version.
 	*
 	* @return the user ID of this s c product version
 	*/
@@ -109,7 +109,7 @@ public class SCProductVersionWrapper implements SCProductVersion {
 	}
 
 	/**
-	* Gets the user uuid of this s c product version.
+	* Returns the user uuid of this s c product version.
 	*
 	* @return the user uuid of this s c product version
 	* @throws SystemException if a system exception occurred
@@ -129,7 +129,7 @@ public class SCProductVersionWrapper implements SCProductVersion {
 	}
 
 	/**
-	* Gets the user name of this s c product version.
+	* Returns the user name of this s c product version.
 	*
 	* @return the user name of this s c product version
 	*/
@@ -147,7 +147,7 @@ public class SCProductVersionWrapper implements SCProductVersion {
 	}
 
 	/**
-	* Gets the create date of this s c product version.
+	* Returns the create date of this s c product version.
 	*
 	* @return the create date of this s c product version
 	*/
@@ -165,7 +165,7 @@ public class SCProductVersionWrapper implements SCProductVersion {
 	}
 
 	/**
-	* Gets the modified date of this s c product version.
+	* Returns the modified date of this s c product version.
 	*
 	* @return the modified date of this s c product version
 	*/
@@ -183,7 +183,7 @@ public class SCProductVersionWrapper implements SCProductVersion {
 	}
 
 	/**
-	* Gets the product entry ID of this s c product version.
+	* Returns the product entry ID of this s c product version.
 	*
 	* @return the product entry ID of this s c product version
 	*/
@@ -201,7 +201,7 @@ public class SCProductVersionWrapper implements SCProductVersion {
 	}
 
 	/**
-	* Gets the version of this s c product version.
+	* Returns the version of this s c product version.
 	*
 	* @return the version of this s c product version
 	*/
@@ -219,7 +219,7 @@ public class SCProductVersionWrapper implements SCProductVersion {
 	}
 
 	/**
-	* Gets the change log of this s c product version.
+	* Returns the change log of this s c product version.
 	*
 	* @return the change log of this s c product version
 	*/
@@ -237,7 +237,7 @@ public class SCProductVersionWrapper implements SCProductVersion {
 	}
 
 	/**
-	* Gets the download page u r l of this s c product version.
+	* Returns the download page u r l of this s c product version.
 	*
 	* @return the download page u r l of this s c product version
 	*/
@@ -255,7 +255,7 @@ public class SCProductVersionWrapper implements SCProductVersion {
 	}
 
 	/**
-	* Gets the direct download u r l of this s c product version.
+	* Returns the direct download u r l of this s c product version.
 	*
 	* @return the direct download u r l of this s c product version
 	*/
@@ -273,7 +273,7 @@ public class SCProductVersionWrapper implements SCProductVersion {
 	}
 
 	/**
-	* Gets the repo store artifact of this s c product version.
+	* Returns the repo store artifact of this s c product version.
 	*
 	* @return the repo store artifact of this s c product version
 	*/

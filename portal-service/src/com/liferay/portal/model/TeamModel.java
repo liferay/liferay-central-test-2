@@ -45,21 +45,21 @@ public interface TeamModel extends BaseModel<Team>, GroupedModel {
 	 */
 
 	/**
-	 * Gets the primary key of this team.
+	 * Returns the primary key of this team.
 	 *
 	 * @return the primary key of this team
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this team
+	 * Sets the primary key of this team.
 	 *
 	 * @param primaryKey the primary key of this team
 	 */
 	public void setPrimaryKey(long primaryKey);
 
 	/**
-	 * Gets the team ID of this team.
+	 * Returns the team ID of this team.
 	 *
 	 * @return the team ID of this team
 	 */
@@ -73,7 +73,7 @@ public interface TeamModel extends BaseModel<Team>, GroupedModel {
 	public void setTeamId(long teamId);
 
 	/**
-	 * Gets the company ID of this team.
+	 * Returns the company ID of this team.
 	 *
 	 * @return the company ID of this team
 	 */
@@ -87,7 +87,7 @@ public interface TeamModel extends BaseModel<Team>, GroupedModel {
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the user ID of this team.
+	 * Returns the user ID of this team.
 	 *
 	 * @return the user ID of this team
 	 */
@@ -101,7 +101,7 @@ public interface TeamModel extends BaseModel<Team>, GroupedModel {
 	public void setUserId(long userId);
 
 	/**
-	 * Gets the user uuid of this team.
+	 * Returns the user uuid of this team.
 	 *
 	 * @return the user uuid of this team
 	 * @throws SystemException if a system exception occurred
@@ -116,7 +116,7 @@ public interface TeamModel extends BaseModel<Team>, GroupedModel {
 	public void setUserUuid(String userUuid);
 
 	/**
-	 * Gets the user name of this team.
+	 * Returns the user name of this team.
 	 *
 	 * @return the user name of this team
 	 */
@@ -131,7 +131,7 @@ public interface TeamModel extends BaseModel<Team>, GroupedModel {
 	public void setUserName(String userName);
 
 	/**
-	 * Gets the create date of this team.
+	 * Returns the create date of this team.
 	 *
 	 * @return the create date of this team
 	 */
@@ -145,7 +145,7 @@ public interface TeamModel extends BaseModel<Team>, GroupedModel {
 	public void setCreateDate(Date createDate);
 
 	/**
-	 * Gets the modified date of this team.
+	 * Returns the modified date of this team.
 	 *
 	 * @return the modified date of this team
 	 */
@@ -159,7 +159,7 @@ public interface TeamModel extends BaseModel<Team>, GroupedModel {
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
-	 * Gets the group ID of this team.
+	 * Returns the group ID of this team.
 	 *
 	 * @return the group ID of this team
 	 */
@@ -173,7 +173,7 @@ public interface TeamModel extends BaseModel<Team>, GroupedModel {
 	public void setGroupId(long groupId);
 
 	/**
-	 * Gets the name of this team.
+	 * Returns the name of this team.
 	 *
 	 * @return the name of this team
 	 */
@@ -188,7 +188,7 @@ public interface TeamModel extends BaseModel<Team>, GroupedModel {
 	public void setName(String name);
 
 	/**
-	 * Gets the description of this team.
+	 * Returns the description of this team.
 	 *
 	 * @return the description of this team
 	 */

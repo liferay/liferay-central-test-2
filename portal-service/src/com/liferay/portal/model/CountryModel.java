@@ -42,21 +42,21 @@ public interface CountryModel extends BaseModel<Country> {
 	 */
 
 	/**
-	 * Gets the primary key of this country.
+	 * Returns the primary key of this country.
 	 *
 	 * @return the primary key of this country
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this country
+	 * Sets the primary key of this country.
 	 *
 	 * @param primaryKey the primary key of this country
 	 */
 	public void setPrimaryKey(long primaryKey);
 
 	/**
-	 * Gets the country ID of this country.
+	 * Returns the country ID of this country.
 	 *
 	 * @return the country ID of this country
 	 */
@@ -70,7 +70,7 @@ public interface CountryModel extends BaseModel<Country> {
 	public void setCountryId(long countryId);
 
 	/**
-	 * Gets the name of this country.
+	 * Returns the name of this country.
 	 *
 	 * @return the name of this country
 	 */
@@ -85,7 +85,7 @@ public interface CountryModel extends BaseModel<Country> {
 	public void setName(String name);
 
 	/**
-	 * Gets the a2 of this country.
+	 * Returns the a2 of this country.
 	 *
 	 * @return the a2 of this country
 	 */
@@ -100,7 +100,7 @@ public interface CountryModel extends BaseModel<Country> {
 	public void setA2(String a2);
 
 	/**
-	 * Gets the a3 of this country.
+	 * Returns the a3 of this country.
 	 *
 	 * @return the a3 of this country
 	 */
@@ -115,7 +115,7 @@ public interface CountryModel extends BaseModel<Country> {
 	public void setA3(String a3);
 
 	/**
-	 * Gets the number of this country.
+	 * Returns the number of this country.
 	 *
 	 * @return the number of this country
 	 */
@@ -130,7 +130,7 @@ public interface CountryModel extends BaseModel<Country> {
 	public void setNumber(String number);
 
 	/**
-	 * Gets the idd of this country.
+	 * Returns the idd of this country.
 	 *
 	 * @return the idd of this country
 	 */
@@ -145,7 +145,7 @@ public interface CountryModel extends BaseModel<Country> {
 	public void setIdd(String idd);
 
 	/**
-	 * Gets the active of this country.
+	 * Returns the active of this country.
 	 *
 	 * @return the active of this country
 	 */

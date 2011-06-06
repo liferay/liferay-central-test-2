@@ -121,7 +121,7 @@ public class BookmarksEntryUtil {
 	/**
 	* Caches the bookmarks entry in the entity cache if it is enabled.
 	*
-	* @param bookmarksEntry the bookmarks entry to cache
+	* @param bookmarksEntry the bookmarks entry
 	*/
 	public static void cacheResult(
 		com.liferay.portlet.bookmarks.model.BookmarksEntry bookmarksEntry) {
@@ -131,7 +131,7 @@ public class BookmarksEntryUtil {
 	/**
 	* Caches the bookmarks entries in the entity cache if it is enabled.
 	*
-	* @param bookmarksEntries the bookmarks entries to cache
+	* @param bookmarksEntries the bookmarks entries
 	*/
 	public static void cacheResult(
 		java.util.List<com.liferay.portlet.bookmarks.model.BookmarksEntry> bookmarksEntries) {
@@ -152,7 +152,7 @@ public class BookmarksEntryUtil {
 	/**
 	* Removes the bookmarks entry with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param entryId the primary key of the bookmarks entry to remove
+	* @param entryId the primary key of the bookmarks entry
 	* @return the bookmarks entry that was removed
 	* @throws com.liferay.portlet.bookmarks.NoSuchEntryException if a bookmarks entry with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -172,9 +172,9 @@ public class BookmarksEntryUtil {
 	}
 
 	/**
-	* Finds the bookmarks entry with the primary key or throws a {@link com.liferay.portlet.bookmarks.NoSuchEntryException} if it could not be found.
+	* Returns the bookmarks entry with the primary key or throws a {@link com.liferay.portlet.bookmarks.NoSuchEntryException} if it could not be found.
 	*
-	* @param entryId the primary key of the bookmarks entry to find
+	* @param entryId the primary key of the bookmarks entry
 	* @return the bookmarks entry
 	* @throws com.liferay.portlet.bookmarks.NoSuchEntryException if a bookmarks entry with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -187,9 +187,9 @@ public class BookmarksEntryUtil {
 	}
 
 	/**
-	* Finds the bookmarks entry with the primary key or returns <code>null</code> if it could not be found.
+	* Returns the bookmarks entry with the primary key or returns <code>null</code> if it could not be found.
 	*
-	* @param entryId the primary key of the bookmarks entry to find
+	* @param entryId the primary key of the bookmarks entry
 	* @return the bookmarks entry, or <code>null</code> if a bookmarks entry with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -200,9 +200,9 @@ public class BookmarksEntryUtil {
 	}
 
 	/**
-	* Finds all the bookmarks entries where uuid = &#63;.
+	* Returns all the bookmarks entries where uuid = &#63;.
 	*
-	* @param uuid the uuid to search with
+	* @param uuid the uuid
 	* @return the matching bookmarks entries
 	* @throws SystemException if a system exception occurred
 	*/
@@ -213,15 +213,15 @@ public class BookmarksEntryUtil {
 	}
 
 	/**
-	* Finds a range of all the bookmarks entries where uuid = &#63;.
+	* Returns a range of all the bookmarks entries where uuid = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param uuid the uuid to search with
-	* @param start the lower bound of the range of bookmarks entries to return
-	* @param end the upper bound of the range of bookmarks entries to return (not inclusive)
+	* @param uuid the uuid
+	* @param start the lower bound of the range of bookmarks entries
+	* @param end the upper bound of the range of bookmarks entries (not inclusive)
 	* @return the range of matching bookmarks entries
 	* @throws SystemException if a system exception occurred
 	*/
@@ -232,15 +232,15 @@ public class BookmarksEntryUtil {
 	}
 
 	/**
-	* Finds an ordered range of all the bookmarks entries where uuid = &#63;.
+	* Returns an ordered range of all the bookmarks entries where uuid = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param uuid the uuid to search with
-	* @param start the lower bound of the range of bookmarks entries to return
-	* @param end the upper bound of the range of bookmarks entries to return (not inclusive)
+	* @param uuid the uuid
+	* @param start the lower bound of the range of bookmarks entries
+	* @param end the upper bound of the range of bookmarks entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching bookmarks entries
 	* @throws SystemException if a system exception occurred
@@ -253,13 +253,13 @@ public class BookmarksEntryUtil {
 	}
 
 	/**
-	* Finds the first bookmarks entry in the ordered set where uuid = &#63;.
+	* Returns the first bookmarks entry in the ordered set where uuid = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param uuid the uuid to search with
+	* @param uuid the uuid
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching bookmarks entry
 	* @throws com.liferay.portlet.bookmarks.NoSuchEntryException if a matching bookmarks entry could not be found
@@ -274,13 +274,13 @@ public class BookmarksEntryUtil {
 	}
 
 	/**
-	* Finds the last bookmarks entry in the ordered set where uuid = &#63;.
+	* Returns the last bookmarks entry in the ordered set where uuid = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param uuid the uuid to search with
+	* @param uuid the uuid
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching bookmarks entry
 	* @throws com.liferay.portlet.bookmarks.NoSuchEntryException if a matching bookmarks entry could not be found
@@ -295,14 +295,14 @@ public class BookmarksEntryUtil {
 	}
 
 	/**
-	* Finds the bookmarks entries before and after the current bookmarks entry in the ordered set where uuid = &#63;.
+	* Returns the bookmarks entries before and after the current bookmarks entry in the ordered set where uuid = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
 	* @param entryId the primary key of the current bookmarks entry
-	* @param uuid the uuid to search with
+	* @param uuid the uuid
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next bookmarks entry
 	* @throws com.liferay.portlet.bookmarks.NoSuchEntryException if a bookmarks entry with the primary key could not be found
@@ -318,10 +318,10 @@ public class BookmarksEntryUtil {
 	}
 
 	/**
-	* Finds the bookmarks entry where uuid = &#63; and groupId = &#63; or throws a {@link com.liferay.portlet.bookmarks.NoSuchEntryException} if it could not be found.
+	* Returns the bookmarks entry where uuid = &#63; and groupId = &#63; or throws a {@link com.liferay.portlet.bookmarks.NoSuchEntryException} if it could not be found.
 	*
-	* @param uuid the uuid to search with
-	* @param groupId the group ID to search with
+	* @param uuid the uuid
+	* @param groupId the group ID
 	* @return the matching bookmarks entry
 	* @throws com.liferay.portlet.bookmarks.NoSuchEntryException if a matching bookmarks entry could not be found
 	* @throws SystemException if a system exception occurred
@@ -334,10 +334,10 @@ public class BookmarksEntryUtil {
 	}
 
 	/**
-	* Finds the bookmarks entry where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	* Returns the bookmarks entry where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	*
-	* @param uuid the uuid to search with
-	* @param groupId the group ID to search with
+	* @param uuid the uuid
+	* @param groupId the group ID
 	* @return the matching bookmarks entry, or <code>null</code> if a matching bookmarks entry could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -348,10 +348,10 @@ public class BookmarksEntryUtil {
 	}
 
 	/**
-	* Finds the bookmarks entry where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	* Returns the bookmarks entry where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
-	* @param uuid the uuid to search with
-	* @param groupId the group ID to search with
+	* @param uuid the uuid
+	* @param groupId the group ID
 	* @return the matching bookmarks entry, or <code>null</code> if a matching bookmarks entry could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -362,9 +362,9 @@ public class BookmarksEntryUtil {
 	}
 
 	/**
-	* Finds all the bookmarks entries where groupId = &#63;.
+	* Returns all the bookmarks entries where groupId = &#63;.
 	*
-	* @param groupId the group ID to search with
+	* @param groupId the group ID
 	* @return the matching bookmarks entries
 	* @throws SystemException if a system exception occurred
 	*/
@@ -375,15 +375,15 @@ public class BookmarksEntryUtil {
 	}
 
 	/**
-	* Finds a range of all the bookmarks entries where groupId = &#63;.
+	* Returns a range of all the bookmarks entries where groupId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param start the lower bound of the range of bookmarks entries to return
-	* @param end the upper bound of the range of bookmarks entries to return (not inclusive)
+	* @param groupId the group ID
+	* @param start the lower bound of the range of bookmarks entries
+	* @param end the upper bound of the range of bookmarks entries (not inclusive)
 	* @return the range of matching bookmarks entries
 	* @throws SystemException if a system exception occurred
 	*/
@@ -394,15 +394,15 @@ public class BookmarksEntryUtil {
 	}
 
 	/**
-	* Finds an ordered range of all the bookmarks entries where groupId = &#63;.
+	* Returns an ordered range of all the bookmarks entries where groupId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param start the lower bound of the range of bookmarks entries to return
-	* @param end the upper bound of the range of bookmarks entries to return (not inclusive)
+	* @param groupId the group ID
+	* @param start the lower bound of the range of bookmarks entries
+	* @param end the upper bound of the range of bookmarks entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching bookmarks entries
 	* @throws SystemException if a system exception occurred
@@ -416,13 +416,13 @@ public class BookmarksEntryUtil {
 	}
 
 	/**
-	* Finds the first bookmarks entry in the ordered set where groupId = &#63;.
+	* Returns the first bookmarks entry in the ordered set where groupId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
+	* @param groupId the group ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching bookmarks entry
 	* @throws com.liferay.portlet.bookmarks.NoSuchEntryException if a matching bookmarks entry could not be found
@@ -437,13 +437,13 @@ public class BookmarksEntryUtil {
 	}
 
 	/**
-	* Finds the last bookmarks entry in the ordered set where groupId = &#63;.
+	* Returns the last bookmarks entry in the ordered set where groupId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
+	* @param groupId the group ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching bookmarks entry
 	* @throws com.liferay.portlet.bookmarks.NoSuchEntryException if a matching bookmarks entry could not be found
@@ -458,14 +458,14 @@ public class BookmarksEntryUtil {
 	}
 
 	/**
-	* Finds the bookmarks entries before and after the current bookmarks entry in the ordered set where groupId = &#63;.
+	* Returns the bookmarks entries before and after the current bookmarks entry in the ordered set where groupId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
 	* @param entryId the primary key of the current bookmarks entry
-	* @param groupId the group ID to search with
+	* @param groupId the group ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next bookmarks entry
 	* @throws com.liferay.portlet.bookmarks.NoSuchEntryException if a bookmarks entry with the primary key could not be found
@@ -482,9 +482,9 @@ public class BookmarksEntryUtil {
 	}
 
 	/**
-	* Filters by the user's permissions and finds all the bookmarks entries where groupId = &#63;.
+	* Returns all the bookmarks entries that the user has permission to view where groupId = &#63;.
 	*
-	* @param groupId the group ID to search with
+	* @param groupId the group ID
 	* @return the matching bookmarks entries that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -495,15 +495,15 @@ public class BookmarksEntryUtil {
 	}
 
 	/**
-	* Filters by the user's permissions and finds a range of all the bookmarks entries where groupId = &#63;.
+	* Returns a range of all the bookmarks entries that the user has permission to view where groupId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param start the lower bound of the range of bookmarks entries to return
-	* @param end the upper bound of the range of bookmarks entries to return (not inclusive)
+	* @param groupId the group ID
+	* @param start the lower bound of the range of bookmarks entries
+	* @param end the upper bound of the range of bookmarks entries (not inclusive)
 	* @return the range of matching bookmarks entries that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -514,15 +514,15 @@ public class BookmarksEntryUtil {
 	}
 
 	/**
-	* Filters by the user's permissions and finds an ordered range of all the bookmarks entries where groupId = &#63;.
+	* Returns an ordered range of all the bookmarks entries that the user has permissions to view where groupId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param start the lower bound of the range of bookmarks entries to return
-	* @param end the upper bound of the range of bookmarks entries to return (not inclusive)
+	* @param groupId the group ID
+	* @param start the lower bound of the range of bookmarks entries
+	* @param end the upper bound of the range of bookmarks entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching bookmarks entries that the user has permission to view
 	* @throws SystemException if a system exception occurred
@@ -536,14 +536,10 @@ public class BookmarksEntryUtil {
 	}
 
 	/**
-	* Filters the bookmarks entries before and after the current bookmarks entry in the ordered set where groupId = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
-	* </p>
+	* Returns the bookmarks entries before and after the current bookmarks entry in the ordered set of bookmarks entries that the user has permission to view where groupId = &#63;.
 	*
 	* @param entryId the primary key of the current bookmarks entry
-	* @param groupId the group ID to search with
+	* @param groupId the group ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next bookmarks entry
 	* @throws com.liferay.portlet.bookmarks.NoSuchEntryException if a bookmarks entry with the primary key could not be found
@@ -560,10 +556,10 @@ public class BookmarksEntryUtil {
 	}
 
 	/**
-	* Finds all the bookmarks entries where groupId = &#63; and userId = &#63;.
+	* Returns all the bookmarks entries where groupId = &#63; and userId = &#63;.
 	*
-	* @param groupId the group ID to search with
-	* @param userId the user ID to search with
+	* @param groupId the group ID
+	* @param userId the user ID
 	* @return the matching bookmarks entries
 	* @throws SystemException if a system exception occurred
 	*/
@@ -574,16 +570,16 @@ public class BookmarksEntryUtil {
 	}
 
 	/**
-	* Finds a range of all the bookmarks entries where groupId = &#63; and userId = &#63;.
+	* Returns a range of all the bookmarks entries where groupId = &#63; and userId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param userId the user ID to search with
-	* @param start the lower bound of the range of bookmarks entries to return
-	* @param end the upper bound of the range of bookmarks entries to return (not inclusive)
+	* @param groupId the group ID
+	* @param userId the user ID
+	* @param start the lower bound of the range of bookmarks entries
+	* @param end the upper bound of the range of bookmarks entries (not inclusive)
 	* @return the range of matching bookmarks entries
 	* @throws SystemException if a system exception occurred
 	*/
@@ -594,16 +590,16 @@ public class BookmarksEntryUtil {
 	}
 
 	/**
-	* Finds an ordered range of all the bookmarks entries where groupId = &#63; and userId = &#63;.
+	* Returns an ordered range of all the bookmarks entries where groupId = &#63; and userId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param userId the user ID to search with
-	* @param start the lower bound of the range of bookmarks entries to return
-	* @param end the upper bound of the range of bookmarks entries to return (not inclusive)
+	* @param groupId the group ID
+	* @param userId the user ID
+	* @param start the lower bound of the range of bookmarks entries
+	* @param end the upper bound of the range of bookmarks entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching bookmarks entries
 	* @throws SystemException if a system exception occurred
@@ -617,14 +613,14 @@ public class BookmarksEntryUtil {
 	}
 
 	/**
-	* Finds the first bookmarks entry in the ordered set where groupId = &#63; and userId = &#63;.
+	* Returns the first bookmarks entry in the ordered set where groupId = &#63; and userId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param userId the user ID to search with
+	* @param groupId the group ID
+	* @param userId the user ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching bookmarks entry
 	* @throws com.liferay.portlet.bookmarks.NoSuchEntryException if a matching bookmarks entry could not be found
@@ -640,14 +636,14 @@ public class BookmarksEntryUtil {
 	}
 
 	/**
-	* Finds the last bookmarks entry in the ordered set where groupId = &#63; and userId = &#63;.
+	* Returns the last bookmarks entry in the ordered set where groupId = &#63; and userId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param userId the user ID to search with
+	* @param groupId the group ID
+	* @param userId the user ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching bookmarks entry
 	* @throws com.liferay.portlet.bookmarks.NoSuchEntryException if a matching bookmarks entry could not be found
@@ -663,15 +659,15 @@ public class BookmarksEntryUtil {
 	}
 
 	/**
-	* Finds the bookmarks entries before and after the current bookmarks entry in the ordered set where groupId = &#63; and userId = &#63;.
+	* Returns the bookmarks entries before and after the current bookmarks entry in the ordered set where groupId = &#63; and userId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
 	* @param entryId the primary key of the current bookmarks entry
-	* @param groupId the group ID to search with
-	* @param userId the user ID to search with
+	* @param groupId the group ID
+	* @param userId the user ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next bookmarks entry
 	* @throws com.liferay.portlet.bookmarks.NoSuchEntryException if a bookmarks entry with the primary key could not be found
@@ -688,10 +684,10 @@ public class BookmarksEntryUtil {
 	}
 
 	/**
-	* Filters by the user's permissions and finds all the bookmarks entries where groupId = &#63; and userId = &#63;.
+	* Returns all the bookmarks entries that the user has permission to view where groupId = &#63; and userId = &#63;.
 	*
-	* @param groupId the group ID to search with
-	* @param userId the user ID to search with
+	* @param groupId the group ID
+	* @param userId the user ID
 	* @return the matching bookmarks entries that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -702,16 +698,16 @@ public class BookmarksEntryUtil {
 	}
 
 	/**
-	* Filters by the user's permissions and finds a range of all the bookmarks entries where groupId = &#63; and userId = &#63;.
+	* Returns a range of all the bookmarks entries that the user has permission to view where groupId = &#63; and userId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param userId the user ID to search with
-	* @param start the lower bound of the range of bookmarks entries to return
-	* @param end the upper bound of the range of bookmarks entries to return (not inclusive)
+	* @param groupId the group ID
+	* @param userId the user ID
+	* @param start the lower bound of the range of bookmarks entries
+	* @param end the upper bound of the range of bookmarks entries (not inclusive)
 	* @return the range of matching bookmarks entries that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -722,16 +718,16 @@ public class BookmarksEntryUtil {
 	}
 
 	/**
-	* Filters by the user's permissions and finds an ordered range of all the bookmarks entries where groupId = &#63; and userId = &#63;.
+	* Returns an ordered range of all the bookmarks entries that the user has permissions to view where groupId = &#63; and userId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param userId the user ID to search with
-	* @param start the lower bound of the range of bookmarks entries to return
-	* @param end the upper bound of the range of bookmarks entries to return (not inclusive)
+	* @param groupId the group ID
+	* @param userId the user ID
+	* @param start the lower bound of the range of bookmarks entries
+	* @param end the upper bound of the range of bookmarks entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching bookmarks entries that the user has permission to view
 	* @throws SystemException if a system exception occurred
@@ -746,15 +742,11 @@ public class BookmarksEntryUtil {
 	}
 
 	/**
-	* Filters the bookmarks entries before and after the current bookmarks entry in the ordered set where groupId = &#63; and userId = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
-	* </p>
+	* Returns the bookmarks entries before and after the current bookmarks entry in the ordered set of bookmarks entries that the user has permission to view where groupId = &#63; and userId = &#63;.
 	*
 	* @param entryId the primary key of the current bookmarks entry
-	* @param groupId the group ID to search with
-	* @param userId the user ID to search with
+	* @param groupId the group ID
+	* @param userId the user ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next bookmarks entry
 	* @throws com.liferay.portlet.bookmarks.NoSuchEntryException if a bookmarks entry with the primary key could not be found
@@ -771,10 +763,10 @@ public class BookmarksEntryUtil {
 	}
 
 	/**
-	* Finds all the bookmarks entries where groupId = &#63; and folderId = &#63;.
+	* Returns all the bookmarks entries where groupId = &#63; and folderId = &#63;.
 	*
-	* @param groupId the group ID to search with
-	* @param folderId the folder ID to search with
+	* @param groupId the group ID
+	* @param folderId the folder ID
 	* @return the matching bookmarks entries
 	* @throws SystemException if a system exception occurred
 	*/
@@ -785,16 +777,16 @@ public class BookmarksEntryUtil {
 	}
 
 	/**
-	* Finds a range of all the bookmarks entries where groupId = &#63; and folderId = &#63;.
+	* Returns a range of all the bookmarks entries where groupId = &#63; and folderId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param folderId the folder ID to search with
-	* @param start the lower bound of the range of bookmarks entries to return
-	* @param end the upper bound of the range of bookmarks entries to return (not inclusive)
+	* @param groupId the group ID
+	* @param folderId the folder ID
+	* @param start the lower bound of the range of bookmarks entries
+	* @param end the upper bound of the range of bookmarks entries (not inclusive)
 	* @return the range of matching bookmarks entries
 	* @throws SystemException if a system exception occurred
 	*/
@@ -805,16 +797,16 @@ public class BookmarksEntryUtil {
 	}
 
 	/**
-	* Finds an ordered range of all the bookmarks entries where groupId = &#63; and folderId = &#63;.
+	* Returns an ordered range of all the bookmarks entries where groupId = &#63; and folderId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param folderId the folder ID to search with
-	* @param start the lower bound of the range of bookmarks entries to return
-	* @param end the upper bound of the range of bookmarks entries to return (not inclusive)
+	* @param groupId the group ID
+	* @param folderId the folder ID
+	* @param start the lower bound of the range of bookmarks entries
+	* @param end the upper bound of the range of bookmarks entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching bookmarks entries
 	* @throws SystemException if a system exception occurred
@@ -828,14 +820,14 @@ public class BookmarksEntryUtil {
 	}
 
 	/**
-	* Finds the first bookmarks entry in the ordered set where groupId = &#63; and folderId = &#63;.
+	* Returns the first bookmarks entry in the ordered set where groupId = &#63; and folderId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param folderId the folder ID to search with
+	* @param groupId the group ID
+	* @param folderId the folder ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching bookmarks entry
 	* @throws com.liferay.portlet.bookmarks.NoSuchEntryException if a matching bookmarks entry could not be found
@@ -851,14 +843,14 @@ public class BookmarksEntryUtil {
 	}
 
 	/**
-	* Finds the last bookmarks entry in the ordered set where groupId = &#63; and folderId = &#63;.
+	* Returns the last bookmarks entry in the ordered set where groupId = &#63; and folderId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param folderId the folder ID to search with
+	* @param groupId the group ID
+	* @param folderId the folder ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching bookmarks entry
 	* @throws com.liferay.portlet.bookmarks.NoSuchEntryException if a matching bookmarks entry could not be found
@@ -874,15 +866,15 @@ public class BookmarksEntryUtil {
 	}
 
 	/**
-	* Finds the bookmarks entries before and after the current bookmarks entry in the ordered set where groupId = &#63; and folderId = &#63;.
+	* Returns the bookmarks entries before and after the current bookmarks entry in the ordered set where groupId = &#63; and folderId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
 	* @param entryId the primary key of the current bookmarks entry
-	* @param groupId the group ID to search with
-	* @param folderId the folder ID to search with
+	* @param groupId the group ID
+	* @param folderId the folder ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next bookmarks entry
 	* @throws com.liferay.portlet.bookmarks.NoSuchEntryException if a bookmarks entry with the primary key could not be found
@@ -899,14 +891,14 @@ public class BookmarksEntryUtil {
 	}
 
 	/**
-	* Finds all the bookmarks entries where groupId = &#63; and folderId = any &#63;.
+	* Returns all the bookmarks entries where groupId = &#63; and folderId = any &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param folderIds the folder IDs to search with
+	* @param groupId the group ID
+	* @param folderIds the folder IDs
 	* @return the matching bookmarks entries
 	* @throws SystemException if a system exception occurred
 	*/
@@ -917,16 +909,16 @@ public class BookmarksEntryUtil {
 	}
 
 	/**
-	* Finds a range of all the bookmarks entries where groupId = &#63; and folderId = any &#63;.
+	* Returns a range of all the bookmarks entries where groupId = &#63; and folderId = any &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param folderIds the folder IDs to search with
-	* @param start the lower bound of the range of bookmarks entries to return
-	* @param end the upper bound of the range of bookmarks entries to return (not inclusive)
+	* @param groupId the group ID
+	* @param folderIds the folder IDs
+	* @param start the lower bound of the range of bookmarks entries
+	* @param end the upper bound of the range of bookmarks entries (not inclusive)
 	* @return the range of matching bookmarks entries
 	* @throws SystemException if a system exception occurred
 	*/
@@ -937,16 +929,16 @@ public class BookmarksEntryUtil {
 	}
 
 	/**
-	* Finds an ordered range of all the bookmarks entries where groupId = &#63; and folderId = any &#63;.
+	* Returns an ordered range of all the bookmarks entries where groupId = &#63; and folderId = any &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param folderIds the folder IDs to search with
-	* @param start the lower bound of the range of bookmarks entries to return
-	* @param end the upper bound of the range of bookmarks entries to return (not inclusive)
+	* @param groupId the group ID
+	* @param folderIds the folder IDs
+	* @param start the lower bound of the range of bookmarks entries
+	* @param end the upper bound of the range of bookmarks entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching bookmarks entries
 	* @throws SystemException if a system exception occurred
@@ -960,10 +952,10 @@ public class BookmarksEntryUtil {
 	}
 
 	/**
-	* Filters by the user's permissions and finds all the bookmarks entries where groupId = &#63; and folderId = &#63;.
+	* Returns all the bookmarks entries that the user has permission to view where groupId = &#63; and folderId = &#63;.
 	*
-	* @param groupId the group ID to search with
-	* @param folderId the folder ID to search with
+	* @param groupId the group ID
+	* @param folderId the folder ID
 	* @return the matching bookmarks entries that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -974,16 +966,16 @@ public class BookmarksEntryUtil {
 	}
 
 	/**
-	* Filters by the user's permissions and finds a range of all the bookmarks entries where groupId = &#63; and folderId = &#63;.
+	* Returns a range of all the bookmarks entries that the user has permission to view where groupId = &#63; and folderId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param folderId the folder ID to search with
-	* @param start the lower bound of the range of bookmarks entries to return
-	* @param end the upper bound of the range of bookmarks entries to return (not inclusive)
+	* @param groupId the group ID
+	* @param folderId the folder ID
+	* @param start the lower bound of the range of bookmarks entries
+	* @param end the upper bound of the range of bookmarks entries (not inclusive)
 	* @return the range of matching bookmarks entries that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -994,16 +986,16 @@ public class BookmarksEntryUtil {
 	}
 
 	/**
-	* Filters by the user's permissions and finds an ordered range of all the bookmarks entries where groupId = &#63; and folderId = &#63;.
+	* Returns an ordered range of all the bookmarks entries that the user has permissions to view where groupId = &#63; and folderId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param folderId the folder ID to search with
-	* @param start the lower bound of the range of bookmarks entries to return
-	* @param end the upper bound of the range of bookmarks entries to return (not inclusive)
+	* @param groupId the group ID
+	* @param folderId the folder ID
+	* @param start the lower bound of the range of bookmarks entries
+	* @param end the upper bound of the range of bookmarks entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching bookmarks entries that the user has permission to view
 	* @throws SystemException if a system exception occurred
@@ -1018,15 +1010,11 @@ public class BookmarksEntryUtil {
 	}
 
 	/**
-	* Filters the bookmarks entries before and after the current bookmarks entry in the ordered set where groupId = &#63; and folderId = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
-	* </p>
+	* Returns the bookmarks entries before and after the current bookmarks entry in the ordered set of bookmarks entries that the user has permission to view where groupId = &#63; and folderId = &#63;.
 	*
 	* @param entryId the primary key of the current bookmarks entry
-	* @param groupId the group ID to search with
-	* @param folderId the folder ID to search with
+	* @param groupId the group ID
+	* @param folderId the folder ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next bookmarks entry
 	* @throws com.liferay.portlet.bookmarks.NoSuchEntryException if a bookmarks entry with the primary key could not be found
@@ -1043,14 +1031,10 @@ public class BookmarksEntryUtil {
 	}
 
 	/**
-	* Filters by the user's permissions and finds all the bookmarks entries where groupId = &#63; and folderId = any &#63;.
+	* Returns all the bookmarks entries that the user has permission to view where groupId = &#63; and folderId = any &#63;.
 	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
-	* </p>
-	*
-	* @param groupId the group ID to search with
-	* @param folderIds the folder IDs to search with
+	* @param groupId the group ID
+	* @param folderIds the folder IDs
 	* @return the matching bookmarks entries that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1061,16 +1045,16 @@ public class BookmarksEntryUtil {
 	}
 
 	/**
-	* Filters by the user's permissions and finds a range of all the bookmarks entries where groupId = &#63; and folderId = any &#63;.
+	* Returns a range of all the bookmarks entries that the user has permission to view where groupId = &#63; and folderId = any &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param folderIds the folder IDs to search with
-	* @param start the lower bound of the range of bookmarks entries to return
-	* @param end the upper bound of the range of bookmarks entries to return (not inclusive)
+	* @param groupId the group ID
+	* @param folderIds the folder IDs
+	* @param start the lower bound of the range of bookmarks entries
+	* @param end the upper bound of the range of bookmarks entries (not inclusive)
 	* @return the range of matching bookmarks entries that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1081,16 +1065,16 @@ public class BookmarksEntryUtil {
 	}
 
 	/**
-	* Filters by the user's permissions and finds an ordered range of all the bookmarks entries where groupId = &#63; and folderId = any &#63;.
+	* Returns an ordered range of all the bookmarks entries that the user has permission to view where groupId = &#63; and folderId = any &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param folderIds the folder IDs to search with
-	* @param start the lower bound of the range of bookmarks entries to return
-	* @param end the upper bound of the range of bookmarks entries to return (not inclusive)
+	* @param groupId the group ID
+	* @param folderIds the folder IDs
+	* @param start the lower bound of the range of bookmarks entries
+	* @param end the upper bound of the range of bookmarks entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching bookmarks entries that the user has permission to view
 	* @throws SystemException if a system exception occurred
@@ -1105,7 +1089,7 @@ public class BookmarksEntryUtil {
 	}
 
 	/**
-	* Finds all the bookmarks entries.
+	* Returns all the bookmarks entries.
 	*
 	* @return the bookmarks entries
 	* @throws SystemException if a system exception occurred
@@ -1116,14 +1100,14 @@ public class BookmarksEntryUtil {
 	}
 
 	/**
-	* Finds a range of all the bookmarks entries.
+	* Returns a range of all the bookmarks entries.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of bookmarks entries to return
-	* @param end the upper bound of the range of bookmarks entries to return (not inclusive)
+	* @param start the lower bound of the range of bookmarks entries
+	* @param end the upper bound of the range of bookmarks entries (not inclusive)
 	* @return the range of bookmarks entries
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1134,14 +1118,14 @@ public class BookmarksEntryUtil {
 	}
 
 	/**
-	* Finds an ordered range of all the bookmarks entries.
+	* Returns an ordered range of all the bookmarks entries.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of bookmarks entries to return
-	* @param end the upper bound of the range of bookmarks entries to return (not inclusive)
+	* @param start the lower bound of the range of bookmarks entries
+	* @param end the upper bound of the range of bookmarks entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of bookmarks entries
 	* @throws SystemException if a system exception occurred
@@ -1156,7 +1140,7 @@ public class BookmarksEntryUtil {
 	/**
 	* Removes all the bookmarks entries where uuid = &#63; from the database.
 	*
-	* @param uuid the uuid to search with
+	* @param uuid the uuid
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByUuid(java.lang.String uuid)
@@ -1167,8 +1151,8 @@ public class BookmarksEntryUtil {
 	/**
 	* Removes the bookmarks entry where uuid = &#63; and groupId = &#63; from the database.
 	*
-	* @param uuid the uuid to search with
-	* @param groupId the group ID to search with
+	* @param uuid the uuid
+	* @param groupId the group ID
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByUUID_G(java.lang.String uuid, long groupId)
@@ -1180,7 +1164,7 @@ public class BookmarksEntryUtil {
 	/**
 	* Removes all the bookmarks entries where groupId = &#63; from the database.
 	*
-	* @param groupId the group ID to search with
+	* @param groupId the group ID
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByGroupId(long groupId)
@@ -1191,8 +1175,8 @@ public class BookmarksEntryUtil {
 	/**
 	* Removes all the bookmarks entries where groupId = &#63; and userId = &#63; from the database.
 	*
-	* @param groupId the group ID to search with
-	* @param userId the user ID to search with
+	* @param groupId the group ID
+	* @param userId the user ID
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByG_U(long groupId, long userId)
@@ -1203,8 +1187,8 @@ public class BookmarksEntryUtil {
 	/**
 	* Removes all the bookmarks entries where groupId = &#63; and folderId = &#63; from the database.
 	*
-	* @param groupId the group ID to search with
-	* @param folderId the folder ID to search with
+	* @param groupId the group ID
+	* @param folderId the folder ID
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByG_F(long groupId, long folderId)
@@ -1223,9 +1207,9 @@ public class BookmarksEntryUtil {
 	}
 
 	/**
-	* Counts all the bookmarks entries where uuid = &#63;.
+	* Returns the number of bookmarks entries where uuid = &#63;.
 	*
-	* @param uuid the uuid to search with
+	* @param uuid the uuid
 	* @return the number of matching bookmarks entries
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1235,10 +1219,10 @@ public class BookmarksEntryUtil {
 	}
 
 	/**
-	* Counts all the bookmarks entries where uuid = &#63; and groupId = &#63;.
+	* Returns the number of bookmarks entries where uuid = &#63; and groupId = &#63;.
 	*
-	* @param uuid the uuid to search with
-	* @param groupId the group ID to search with
+	* @param uuid the uuid
+	* @param groupId the group ID
 	* @return the number of matching bookmarks entries
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1248,9 +1232,9 @@ public class BookmarksEntryUtil {
 	}
 
 	/**
-	* Counts all the bookmarks entries where groupId = &#63;.
+	* Returns the number of bookmarks entries where groupId = &#63;.
 	*
-	* @param groupId the group ID to search with
+	* @param groupId the group ID
 	* @return the number of matching bookmarks entries
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1260,9 +1244,9 @@ public class BookmarksEntryUtil {
 	}
 
 	/**
-	* Filters by the user's permissions and counts all the bookmarks entries where groupId = &#63;.
+	* Returns the number of bookmarks entries that the user has permission to view where groupId = &#63;.
 	*
-	* @param groupId the group ID to search with
+	* @param groupId the group ID
 	* @return the number of matching bookmarks entries that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1272,10 +1256,10 @@ public class BookmarksEntryUtil {
 	}
 
 	/**
-	* Counts all the bookmarks entries where groupId = &#63; and userId = &#63;.
+	* Returns the number of bookmarks entries where groupId = &#63; and userId = &#63;.
 	*
-	* @param groupId the group ID to search with
-	* @param userId the user ID to search with
+	* @param groupId the group ID
+	* @param userId the user ID
 	* @return the number of matching bookmarks entries
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1285,10 +1269,10 @@ public class BookmarksEntryUtil {
 	}
 
 	/**
-	* Filters by the user's permissions and counts all the bookmarks entries where groupId = &#63; and userId = &#63;.
+	* Returns the number of bookmarks entries that the user has permission to view where groupId = &#63; and userId = &#63;.
 	*
-	* @param groupId the group ID to search with
-	* @param userId the user ID to search with
+	* @param groupId the group ID
+	* @param userId the user ID
 	* @return the number of matching bookmarks entries that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1298,10 +1282,10 @@ public class BookmarksEntryUtil {
 	}
 
 	/**
-	* Counts all the bookmarks entries where groupId = &#63; and folderId = &#63;.
+	* Returns the number of bookmarks entries where groupId = &#63; and folderId = &#63;.
 	*
-	* @param groupId the group ID to search with
-	* @param folderId the folder ID to search with
+	* @param groupId the group ID
+	* @param folderId the folder ID
 	* @return the number of matching bookmarks entries
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1311,10 +1295,10 @@ public class BookmarksEntryUtil {
 	}
 
 	/**
-	* Counts all the bookmarks entries where groupId = &#63; and folderId = any &#63;.
+	* Returns the number of bookmarks entries where groupId = &#63; and folderId = any &#63;.
 	*
-	* @param groupId the group ID to search with
-	* @param folderIds the folder IDs to search with
+	* @param groupId the group ID
+	* @param folderIds the folder IDs
 	* @return the number of matching bookmarks entries
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1324,10 +1308,10 @@ public class BookmarksEntryUtil {
 	}
 
 	/**
-	* Filters by the user's permissions and counts all the bookmarks entries where groupId = &#63; and folderId = &#63;.
+	* Returns the number of bookmarks entries that the user has permission to view where groupId = &#63; and folderId = &#63;.
 	*
-	* @param groupId the group ID to search with
-	* @param folderId the folder ID to search with
+	* @param groupId the group ID
+	* @param folderId the folder ID
 	* @return the number of matching bookmarks entries that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1337,10 +1321,10 @@ public class BookmarksEntryUtil {
 	}
 
 	/**
-	* Filters by the user's permissions and counts all the bookmarks entries where groupId = &#63; and folderId = any &#63;.
+	* Returns the number of bookmarks entries that the user has permission to view where groupId = &#63; and folderId = any &#63;.
 	*
-	* @param groupId the group ID to search with
-	* @param folderIds the folder IDs to search with
+	* @param groupId the group ID
+	* @param folderIds the folder IDs
 	* @return the number of matching bookmarks entries that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1350,7 +1334,7 @@ public class BookmarksEntryUtil {
 	}
 
 	/**
-	* Counts all the bookmarks entries.
+	* Returns the number of bookmarks entries.
 	*
 	* @return the number of bookmarks entries
 	* @throws SystemException if a system exception occurred

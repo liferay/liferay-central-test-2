@@ -37,7 +37,7 @@ public class ExpandoValueWrapper implements ExpandoValue {
 	}
 
 	/**
-	* Gets the primary key of this expando value.
+	* Returns the primary key of this expando value.
 	*
 	* @return the primary key of this expando value
 	*/
@@ -46,7 +46,7 @@ public class ExpandoValueWrapper implements ExpandoValue {
 	}
 
 	/**
-	* Sets the primary key of this expando value
+	* Sets the primary key of this expando value.
 	*
 	* @param primaryKey the primary key of this expando value
 	*/
@@ -55,7 +55,7 @@ public class ExpandoValueWrapper implements ExpandoValue {
 	}
 
 	/**
-	* Gets the value ID of this expando value.
+	* Returns the value ID of this expando value.
 	*
 	* @return the value ID of this expando value
 	*/
@@ -73,7 +73,7 @@ public class ExpandoValueWrapper implements ExpandoValue {
 	}
 
 	/**
-	* Gets the company ID of this expando value.
+	* Returns the company ID of this expando value.
 	*
 	* @return the company ID of this expando value
 	*/
@@ -91,7 +91,7 @@ public class ExpandoValueWrapper implements ExpandoValue {
 	}
 
 	/**
-	* Gets the table ID of this expando value.
+	* Returns the table ID of this expando value.
 	*
 	* @return the table ID of this expando value
 	*/
@@ -109,7 +109,7 @@ public class ExpandoValueWrapper implements ExpandoValue {
 	}
 
 	/**
-	* Gets the column ID of this expando value.
+	* Returns the column ID of this expando value.
 	*
 	* @return the column ID of this expando value
 	*/
@@ -127,7 +127,7 @@ public class ExpandoValueWrapper implements ExpandoValue {
 	}
 
 	/**
-	* Gets the row ID of this expando value.
+	* Returns the row ID of this expando value.
 	*
 	* @return the row ID of this expando value
 	*/
@@ -145,16 +145,16 @@ public class ExpandoValueWrapper implements ExpandoValue {
 	}
 
 	/**
-	* Gets the class name of the model instance this expando value is polymorphically associated with.
+	* Returns the fully qualified class name of this expando value.
 	*
-	* @return the class name of the model instance this expando value is polymorphically associated with
+	* @return the fully qualified class name of this expando value
 	*/
 	public java.lang.String getClassName() {
 		return _expandoValue.getClassName();
 	}
 
 	/**
-	* Gets the class name ID of this expando value.
+	* Returns the class name ID of this expando value.
 	*
 	* @return the class name ID of this expando value
 	*/
@@ -172,7 +172,7 @@ public class ExpandoValueWrapper implements ExpandoValue {
 	}
 
 	/**
-	* Gets the class p k of this expando value.
+	* Returns the class p k of this expando value.
 	*
 	* @return the class p k of this expando value
 	*/
@@ -190,7 +190,7 @@ public class ExpandoValueWrapper implements ExpandoValue {
 	}
 
 	/**
-	* Gets the data of this expando value.
+	* Returns the data of this expando value.
 	*
 	* @return the data of this expando value
 	*/

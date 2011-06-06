@@ -86,7 +86,7 @@ public abstract class MBMailingListLocalServiceBaseImpl
 	/**
 	 * Adds the message boards mailing list to the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param mbMailingList the message boards mailing list to add
+	 * @param mbMailingList the message boards mailing list
 	 * @return the message boards mailing list that was added
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -110,7 +110,7 @@ public abstract class MBMailingListLocalServiceBaseImpl
 	/**
 	 * Deletes the message boards mailing list with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param mailingListId the primary key of the message boards mailing list to delete
+	 * @param mailingListId the primary key of the message boards mailing list
 	 * @throws PortalException if a message boards mailing list with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -122,7 +122,7 @@ public abstract class MBMailingListLocalServiceBaseImpl
 	/**
 	 * Deletes the message boards mailing list from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param mbMailingList the message boards mailing list to delete
+	 * @param mbMailingList the message boards mailing list
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void deleteMBMailingList(MBMailingList mbMailingList)
@@ -133,7 +133,7 @@ public abstract class MBMailingListLocalServiceBaseImpl
 	/**
 	 * Performs a dynamic query on the database and returns the matching rows.
 	 *
-	 * @param dynamicQuery the dynamic query to search with
+	 * @param dynamicQuery the dynamic query
 	 * @return the matching rows
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -150,9 +150,9 @@ public abstract class MBMailingListLocalServiceBaseImpl
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param dynamicQuery the dynamic query to search with
-	 * @param start the lower bound of the range of model instances to return
-	 * @param end the upper bound of the range of model instances to return (not inclusive)
+	 * @param dynamicQuery the dynamic query
+	 * @param start the lower bound of the range of model instances
+	 * @param end the upper bound of the range of model instances (not inclusive)
 	 * @return the range of matching rows
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -170,9 +170,9 @@ public abstract class MBMailingListLocalServiceBaseImpl
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param dynamicQuery the dynamic query to search with
-	 * @param start the lower bound of the range of model instances to return
-	 * @param end the upper bound of the range of model instances to return (not inclusive)
+	 * @param dynamicQuery the dynamic query
+	 * @param start the lower bound of the range of model instances
+	 * @param end the upper bound of the range of model instances (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching rows
 	 * @throws SystemException if a system exception occurred
@@ -185,9 +185,9 @@ public abstract class MBMailingListLocalServiceBaseImpl
 	}
 
 	/**
-	 * Counts the number of rows that match the dynamic query.
+	 * Returns the number of rows that match the dynamic query.
 	 *
-	 * @param dynamicQuery the dynamic query to search with
+	 * @param dynamicQuery the dynamic query
 	 * @return the number of rows that match the dynamic query
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -197,9 +197,9 @@ public abstract class MBMailingListLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the message boards mailing list with the primary key.
+	 * Returns the message boards mailing list with the primary key.
 	 *
-	 * @param mailingListId the primary key of the message boards mailing list to get
+	 * @param mailingListId the primary key of the message boards mailing list
 	 * @return the message boards mailing list
 	 * @throws PortalException if a message boards mailing list with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -210,12 +210,12 @@ public abstract class MBMailingListLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the message boards mailing list with the UUID and group id.
+	 * Returns the message boards mailing list with the UUID in the group.
 	 *
-	 * @param uuid the UUID of message boards mailing list to get
-	 * @param groupId the group id of the message boards mailing list to get
+	 * @param uuid the UUID of message boards mailing list
+	 * @param groupId the group id of the message boards mailing list
 	 * @return the message boards mailing list
-	 * @throws PortalException if a message boards mailing list with the UUID and group id could not be found
+	 * @throws PortalException if a message boards mailing list with the UUID in the group could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	public MBMailingList getMBMailingListByUuidAndGroupId(String uuid,
@@ -224,14 +224,14 @@ public abstract class MBMailingListLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets a range of all the message boards mailing lists.
+	 * Returns a range of all the message boards mailing lists.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param start the lower bound of the range of message boards mailing lists to return
-	 * @param end the upper bound of the range of message boards mailing lists to return (not inclusive)
+	 * @param start the lower bound of the range of message boards mailing lists
+	 * @param end the upper bound of the range of message boards mailing lists (not inclusive)
 	 * @return the range of message boards mailing lists
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -241,7 +241,7 @@ public abstract class MBMailingListLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the number of message boards mailing lists.
+	 * Returns the number of message boards mailing lists.
 	 *
 	 * @return the number of message boards mailing lists
 	 * @throws SystemException if a system exception occurred
@@ -253,7 +253,7 @@ public abstract class MBMailingListLocalServiceBaseImpl
 	/**
 	 * Updates the message boards mailing list in the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param mbMailingList the message boards mailing list to update
+	 * @param mbMailingList the message boards mailing list
 	 * @return the message boards mailing list that was updated
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -267,7 +267,7 @@ public abstract class MBMailingListLocalServiceBaseImpl
 	/**
 	 * Updates the message boards mailing list in the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param mbMailingList the message boards mailing list to update
+	 * @param mbMailingList the message boards mailing list
 	 * @param merge whether to merge the message boards mailing list with the current session. See {@link com.liferay.portal.service.persistence.BatchSession#update(com.liferay.portal.kernel.dao.orm.Session, com.liferay.portal.model.BaseModel, boolean)} for an explanation.
 	 * @return the message boards mailing list that was updated
 	 * @throws SystemException if a system exception occurred
@@ -280,7 +280,7 @@ public abstract class MBMailingListLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the message boards ban local service.
+	 * Returns the message boards ban local service.
 	 *
 	 * @return the message boards ban local service
 	 */
@@ -298,7 +298,7 @@ public abstract class MBMailingListLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the message boards ban remote service.
+	 * Returns the message boards ban remote service.
 	 *
 	 * @return the message boards ban remote service
 	 */
@@ -316,7 +316,7 @@ public abstract class MBMailingListLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the message boards ban persistence.
+	 * Returns the message boards ban persistence.
 	 *
 	 * @return the message boards ban persistence
 	 */
@@ -334,7 +334,7 @@ public abstract class MBMailingListLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the message boards category local service.
+	 * Returns the message boards category local service.
 	 *
 	 * @return the message boards category local service
 	 */
@@ -353,7 +353,7 @@ public abstract class MBMailingListLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the message boards category remote service.
+	 * Returns the message boards category remote service.
 	 *
 	 * @return the message boards category remote service
 	 */
@@ -371,7 +371,7 @@ public abstract class MBMailingListLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the message boards category persistence.
+	 * Returns the message boards category persistence.
 	 *
 	 * @return the message boards category persistence
 	 */
@@ -390,7 +390,7 @@ public abstract class MBMailingListLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the message boards category finder.
+	 * Returns the message boards category finder.
 	 *
 	 * @return the message boards category finder
 	 */
@@ -408,7 +408,7 @@ public abstract class MBMailingListLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the message boards discussion local service.
+	 * Returns the message boards discussion local service.
 	 *
 	 * @return the message boards discussion local service
 	 */
@@ -427,7 +427,7 @@ public abstract class MBMailingListLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the message boards discussion persistence.
+	 * Returns the message boards discussion persistence.
 	 *
 	 * @return the message boards discussion persistence
 	 */
@@ -446,7 +446,7 @@ public abstract class MBMailingListLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the message boards mailing list local service.
+	 * Returns the message boards mailing list local service.
 	 *
 	 * @return the message boards mailing list local service
 	 */
@@ -465,7 +465,7 @@ public abstract class MBMailingListLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the message boards mailing list persistence.
+	 * Returns the message boards mailing list persistence.
 	 *
 	 * @return the message boards mailing list persistence
 	 */
@@ -484,7 +484,7 @@ public abstract class MBMailingListLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the message-boards message local service.
+	 * Returns the message-boards message local service.
 	 *
 	 * @return the message-boards message local service
 	 */
@@ -503,7 +503,7 @@ public abstract class MBMailingListLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the message-boards message remote service.
+	 * Returns the message-boards message remote service.
 	 *
 	 * @return the message-boards message remote service
 	 */
@@ -521,7 +521,7 @@ public abstract class MBMailingListLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the message-boards message persistence.
+	 * Returns the message-boards message persistence.
 	 *
 	 * @return the message-boards message persistence
 	 */
@@ -540,7 +540,7 @@ public abstract class MBMailingListLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the message-boards message finder.
+	 * Returns the message-boards message finder.
 	 *
 	 * @return the message-boards message finder
 	 */
@@ -558,7 +558,7 @@ public abstract class MBMailingListLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the message boards message flag local service.
+	 * Returns the message boards message flag local service.
 	 *
 	 * @return the message boards message flag local service
 	 */
@@ -577,7 +577,7 @@ public abstract class MBMailingListLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the message boards message flag remote service.
+	 * Returns the message boards message flag remote service.
 	 *
 	 * @return the message boards message flag remote service
 	 */
@@ -596,7 +596,7 @@ public abstract class MBMailingListLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the message boards message flag persistence.
+	 * Returns the message boards message flag persistence.
 	 *
 	 * @return the message boards message flag persistence
 	 */
@@ -615,7 +615,7 @@ public abstract class MBMailingListLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the message boards stats user local service.
+	 * Returns the message boards stats user local service.
 	 *
 	 * @return the message boards stats user local service
 	 */
@@ -634,7 +634,7 @@ public abstract class MBMailingListLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the message boards stats user persistence.
+	 * Returns the message boards stats user persistence.
 	 *
 	 * @return the message boards stats user persistence
 	 */
@@ -653,7 +653,7 @@ public abstract class MBMailingListLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the message boards thread local service.
+	 * Returns the message boards thread local service.
 	 *
 	 * @return the message boards thread local service
 	 */
@@ -672,7 +672,7 @@ public abstract class MBMailingListLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the message boards thread remote service.
+	 * Returns the message boards thread remote service.
 	 *
 	 * @return the message boards thread remote service
 	 */
@@ -690,7 +690,7 @@ public abstract class MBMailingListLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the message boards thread persistence.
+	 * Returns the message boards thread persistence.
 	 *
 	 * @return the message boards thread persistence
 	 */
@@ -708,7 +708,7 @@ public abstract class MBMailingListLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the message boards thread finder.
+	 * Returns the message boards thread finder.
 	 *
 	 * @return the message boards thread finder
 	 */
@@ -726,7 +726,7 @@ public abstract class MBMailingListLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the counter local service.
+	 * Returns the counter local service.
 	 *
 	 * @return the counter local service
 	 */
@@ -744,7 +744,7 @@ public abstract class MBMailingListLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the resource local service.
+	 * Returns the resource local service.
 	 *
 	 * @return the resource local service
 	 */
@@ -763,7 +763,7 @@ public abstract class MBMailingListLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the resource remote service.
+	 * Returns the resource remote service.
 	 *
 	 * @return the resource remote service
 	 */
@@ -781,7 +781,7 @@ public abstract class MBMailingListLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the resource persistence.
+	 * Returns the resource persistence.
 	 *
 	 * @return the resource persistence
 	 */
@@ -799,7 +799,7 @@ public abstract class MBMailingListLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the resource finder.
+	 * Returns the resource finder.
 	 *
 	 * @return the resource finder
 	 */
@@ -817,7 +817,7 @@ public abstract class MBMailingListLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the user local service.
+	 * Returns the user local service.
 	 *
 	 * @return the user local service
 	 */
@@ -835,7 +835,7 @@ public abstract class MBMailingListLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the user remote service.
+	 * Returns the user remote service.
 	 *
 	 * @return the user remote service
 	 */
@@ -853,7 +853,7 @@ public abstract class MBMailingListLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the user persistence.
+	 * Returns the user persistence.
 	 *
 	 * @return the user persistence
 	 */
@@ -871,7 +871,7 @@ public abstract class MBMailingListLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the user finder.
+	 * Returns the user finder.
 	 *
 	 * @return the user finder
 	 */
@@ -889,7 +889,7 @@ public abstract class MBMailingListLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the Spring bean ID for this bean.
+	 * Returns the Spring bean ID for this bean.
 	 *
 	 * @return the Spring bean ID for this bean
 	 */
@@ -909,7 +909,7 @@ public abstract class MBMailingListLocalServiceBaseImpl
 	/**
 	 * Performs an SQL query.
 	 *
-	 * @param sql the sql query to perform
+	 * @param sql the sql query
 	 */
 	protected void runSQL(String sql) throws SystemException {
 		try {

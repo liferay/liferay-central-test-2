@@ -75,7 +75,7 @@ public abstract class DDLRecordLocalServiceBaseImpl
 	/**
 	 * Adds the d d l record to the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param ddlRecord the d d l record to add
+	 * @param ddlRecord the d d l record
 	 * @return the d d l record that was added
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -99,7 +99,7 @@ public abstract class DDLRecordLocalServiceBaseImpl
 	/**
 	 * Deletes the d d l record with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param recordId the primary key of the d d l record to delete
+	 * @param recordId the primary key of the d d l record
 	 * @throws PortalException if a d d l record with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -111,7 +111,7 @@ public abstract class DDLRecordLocalServiceBaseImpl
 	/**
 	 * Deletes the d d l record from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param ddlRecord the d d l record to delete
+	 * @param ddlRecord the d d l record
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void deleteDDLRecord(DDLRecord ddlRecord) throws SystemException {
@@ -121,7 +121,7 @@ public abstract class DDLRecordLocalServiceBaseImpl
 	/**
 	 * Performs a dynamic query on the database and returns the matching rows.
 	 *
-	 * @param dynamicQuery the dynamic query to search with
+	 * @param dynamicQuery the dynamic query
 	 * @return the matching rows
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -138,9 +138,9 @@ public abstract class DDLRecordLocalServiceBaseImpl
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param dynamicQuery the dynamic query to search with
-	 * @param start the lower bound of the range of model instances to return
-	 * @param end the upper bound of the range of model instances to return (not inclusive)
+	 * @param dynamicQuery the dynamic query
+	 * @param start the lower bound of the range of model instances
+	 * @param end the upper bound of the range of model instances (not inclusive)
 	 * @return the range of matching rows
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -158,9 +158,9 @@ public abstract class DDLRecordLocalServiceBaseImpl
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param dynamicQuery the dynamic query to search with
-	 * @param start the lower bound of the range of model instances to return
-	 * @param end the upper bound of the range of model instances to return (not inclusive)
+	 * @param dynamicQuery the dynamic query
+	 * @param start the lower bound of the range of model instances
+	 * @param end the upper bound of the range of model instances (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching rows
 	 * @throws SystemException if a system exception occurred
@@ -173,9 +173,9 @@ public abstract class DDLRecordLocalServiceBaseImpl
 	}
 
 	/**
-	 * Counts the number of rows that match the dynamic query.
+	 * Returns the number of rows that match the dynamic query.
 	 *
-	 * @param dynamicQuery the dynamic query to search with
+	 * @param dynamicQuery the dynamic query
 	 * @return the number of rows that match the dynamic query
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -185,9 +185,9 @@ public abstract class DDLRecordLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the d d l record with the primary key.
+	 * Returns the d d l record with the primary key.
 	 *
-	 * @param recordId the primary key of the d d l record to get
+	 * @param recordId the primary key of the d d l record
 	 * @return the d d l record
 	 * @throws PortalException if a d d l record with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -198,12 +198,12 @@ public abstract class DDLRecordLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the d d l record with the UUID and group id.
+	 * Returns the d d l record with the UUID in the group.
 	 *
-	 * @param uuid the UUID of d d l record to get
-	 * @param groupId the group id of the d d l record to get
+	 * @param uuid the UUID of d d l record
+	 * @param groupId the group id of the d d l record
 	 * @return the d d l record
-	 * @throws PortalException if a d d l record with the UUID and group id could not be found
+	 * @throws PortalException if a d d l record with the UUID in the group could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	public DDLRecord getDDLRecordByUuidAndGroupId(String uuid, long groupId)
@@ -212,14 +212,14 @@ public abstract class DDLRecordLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets a range of all the d d l records.
+	 * Returns a range of all the d d l records.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param start the lower bound of the range of d d l records to return
-	 * @param end the upper bound of the range of d d l records to return (not inclusive)
+	 * @param start the lower bound of the range of d d l records
+	 * @param end the upper bound of the range of d d l records (not inclusive)
 	 * @return the range of d d l records
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -229,7 +229,7 @@ public abstract class DDLRecordLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the number of d d l records.
+	 * Returns the number of d d l records.
 	 *
 	 * @return the number of d d l records
 	 * @throws SystemException if a system exception occurred
@@ -241,7 +241,7 @@ public abstract class DDLRecordLocalServiceBaseImpl
 	/**
 	 * Updates the d d l record in the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param ddlRecord the d d l record to update
+	 * @param ddlRecord the d d l record
 	 * @return the d d l record that was updated
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -255,7 +255,7 @@ public abstract class DDLRecordLocalServiceBaseImpl
 	/**
 	 * Updates the d d l record in the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param ddlRecord the d d l record to update
+	 * @param ddlRecord the d d l record
 	 * @param merge whether to merge the d d l record with the current session. See {@link com.liferay.portal.service.persistence.BatchSession#update(com.liferay.portal.kernel.dao.orm.Session, com.liferay.portal.model.BaseModel, boolean)} for an explanation.
 	 * @return the d d l record that was updated
 	 * @throws SystemException if a system exception occurred
@@ -268,7 +268,7 @@ public abstract class DDLRecordLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the d d l record local service.
+	 * Returns the d d l record local service.
 	 *
 	 * @return the d d l record local service
 	 */
@@ -287,7 +287,7 @@ public abstract class DDLRecordLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the d d l record remote service.
+	 * Returns the d d l record remote service.
 	 *
 	 * @return the d d l record remote service
 	 */
@@ -305,7 +305,7 @@ public abstract class DDLRecordLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the d d l record persistence.
+	 * Returns the d d l record persistence.
 	 *
 	 * @return the d d l record persistence
 	 */
@@ -324,7 +324,7 @@ public abstract class DDLRecordLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the d d l record set local service.
+	 * Returns the d d l record set local service.
 	 *
 	 * @return the d d l record set local service
 	 */
@@ -343,7 +343,7 @@ public abstract class DDLRecordLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the d d l record set remote service.
+	 * Returns the d d l record set remote service.
 	 *
 	 * @return the d d l record set remote service
 	 */
@@ -361,7 +361,7 @@ public abstract class DDLRecordLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the d d l record set persistence.
+	 * Returns the d d l record set persistence.
 	 *
 	 * @return the d d l record set persistence
 	 */
@@ -380,7 +380,7 @@ public abstract class DDLRecordLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the d d l record set finder.
+	 * Returns the d d l record set finder.
 	 *
 	 * @return the d d l record set finder
 	 */
@@ -398,7 +398,7 @@ public abstract class DDLRecordLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the counter local service.
+	 * Returns the counter local service.
 	 *
 	 * @return the counter local service
 	 */
@@ -416,7 +416,7 @@ public abstract class DDLRecordLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the resource local service.
+	 * Returns the resource local service.
 	 *
 	 * @return the resource local service
 	 */
@@ -435,7 +435,7 @@ public abstract class DDLRecordLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the resource remote service.
+	 * Returns the resource remote service.
 	 *
 	 * @return the resource remote service
 	 */
@@ -453,7 +453,7 @@ public abstract class DDLRecordLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the resource persistence.
+	 * Returns the resource persistence.
 	 *
 	 * @return the resource persistence
 	 */
@@ -471,7 +471,7 @@ public abstract class DDLRecordLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the resource finder.
+	 * Returns the resource finder.
 	 *
 	 * @return the resource finder
 	 */
@@ -489,7 +489,7 @@ public abstract class DDLRecordLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the user local service.
+	 * Returns the user local service.
 	 *
 	 * @return the user local service
 	 */
@@ -507,7 +507,7 @@ public abstract class DDLRecordLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the user remote service.
+	 * Returns the user remote service.
 	 *
 	 * @return the user remote service
 	 */
@@ -525,7 +525,7 @@ public abstract class DDLRecordLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the user persistence.
+	 * Returns the user persistence.
 	 *
 	 * @return the user persistence
 	 */
@@ -543,7 +543,7 @@ public abstract class DDLRecordLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the user finder.
+	 * Returns the user finder.
 	 *
 	 * @return the user finder
 	 */
@@ -561,7 +561,7 @@ public abstract class DDLRecordLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the workflow instance link local service.
+	 * Returns the workflow instance link local service.
 	 *
 	 * @return the workflow instance link local service
 	 */
@@ -580,7 +580,7 @@ public abstract class DDLRecordLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the workflow instance link persistence.
+	 * Returns the workflow instance link persistence.
 	 *
 	 * @return the workflow instance link persistence
 	 */
@@ -599,7 +599,7 @@ public abstract class DDLRecordLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the asset entry local service.
+	 * Returns the asset entry local service.
 	 *
 	 * @return the asset entry local service
 	 */
@@ -618,7 +618,7 @@ public abstract class DDLRecordLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the asset entry remote service.
+	 * Returns the asset entry remote service.
 	 *
 	 * @return the asset entry remote service
 	 */
@@ -636,7 +636,7 @@ public abstract class DDLRecordLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the asset entry persistence.
+	 * Returns the asset entry persistence.
 	 *
 	 * @return the asset entry persistence
 	 */
@@ -655,7 +655,7 @@ public abstract class DDLRecordLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the asset entry finder.
+	 * Returns the asset entry finder.
 	 *
 	 * @return the asset entry finder
 	 */
@@ -673,7 +673,7 @@ public abstract class DDLRecordLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the Spring bean ID for this bean.
+	 * Returns the Spring bean ID for this bean.
 	 *
 	 * @return the Spring bean ID for this bean
 	 */
@@ -693,7 +693,7 @@ public abstract class DDLRecordLocalServiceBaseImpl
 	/**
 	 * Performs an SQL query.
 	 *
-	 * @param sql the sql query to perform
+	 * @param sql the sql query
 	 */
 	protected void runSQL(String sql) throws SystemException {
 		try {

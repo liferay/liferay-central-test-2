@@ -118,7 +118,7 @@ public class DDMStorageLinkPersistenceImpl extends BasePersistenceImpl<DDMStorag
 	/**
 	 * Caches the d d m storage link in the entity cache if it is enabled.
 	 *
-	 * @param ddmStorageLink the d d m storage link to cache
+	 * @param ddmStorageLink the d d m storage link
 	 */
 	public void cacheResult(DDMStorageLink ddmStorageLink) {
 		EntityCacheUtil.putResult(DDMStorageLinkModelImpl.ENTITY_CACHE_ENABLED,
@@ -135,7 +135,7 @@ public class DDMStorageLinkPersistenceImpl extends BasePersistenceImpl<DDMStorag
 	/**
 	 * Caches the d d m storage links in the entity cache if it is enabled.
 	 *
-	 * @param ddmStorageLinks the d d m storage links to cache
+	 * @param ddmStorageLinks the d d m storage links
 	 */
 	public void cacheResult(List<DDMStorageLink> ddmStorageLinks) {
 		for (DDMStorageLink ddmStorageLink : ddmStorageLinks) {
@@ -202,7 +202,7 @@ public class DDMStorageLinkPersistenceImpl extends BasePersistenceImpl<DDMStorag
 	/**
 	 * Removes the d d m storage link with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param primaryKey the primary key of the d d m storage link to remove
+	 * @param primaryKey the primary key of the d d m storage link
 	 * @return the d d m storage link that was removed
 	 * @throws com.liferay.portal.NoSuchModelException if a d d m storage link with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -215,7 +215,7 @@ public class DDMStorageLinkPersistenceImpl extends BasePersistenceImpl<DDMStorag
 	/**
 	 * Removes the d d m storage link with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param storageLinkId the primary key of the d d m storage link to remove
+	 * @param storageLinkId the primary key of the d d m storage link
 	 * @return the d d m storage link that was removed
 	 * @throws com.liferay.portlet.dynamicdatamapping.NoSuchStorageLinkException if a d d m storage link with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -255,7 +255,7 @@ public class DDMStorageLinkPersistenceImpl extends BasePersistenceImpl<DDMStorag
 	/**
 	 * Removes the d d m storage link from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param ddmStorageLink the d d m storage link to remove
+	 * @param ddmStorageLink the d d m storage link
 	 * @return the d d m storage link that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -370,9 +370,9 @@ public class DDMStorageLinkPersistenceImpl extends BasePersistenceImpl<DDMStorag
 	}
 
 	/**
-	 * Finds the d d m storage link with the primary key or throws a {@link com.liferay.portal.NoSuchModelException} if it could not be found.
+	 * Returns the d d m storage link with the primary key or throws a {@link com.liferay.portal.NoSuchModelException} if it could not be found.
 	 *
-	 * @param primaryKey the primary key of the d d m storage link to find
+	 * @param primaryKey the primary key of the d d m storage link
 	 * @return the d d m storage link
 	 * @throws com.liferay.portal.NoSuchModelException if a d d m storage link with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -383,9 +383,9 @@ public class DDMStorageLinkPersistenceImpl extends BasePersistenceImpl<DDMStorag
 	}
 
 	/**
-	 * Finds the d d m storage link with the primary key or throws a {@link com.liferay.portlet.dynamicdatamapping.NoSuchStorageLinkException} if it could not be found.
+	 * Returns the d d m storage link with the primary key or throws a {@link com.liferay.portlet.dynamicdatamapping.NoSuchStorageLinkException} if it could not be found.
 	 *
-	 * @param storageLinkId the primary key of the d d m storage link to find
+	 * @param storageLinkId the primary key of the d d m storage link
 	 * @return the d d m storage link
 	 * @throws com.liferay.portlet.dynamicdatamapping.NoSuchStorageLinkException if a d d m storage link with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -407,9 +407,9 @@ public class DDMStorageLinkPersistenceImpl extends BasePersistenceImpl<DDMStorag
 	}
 
 	/**
-	 * Finds the d d m storage link with the primary key or returns <code>null</code> if it could not be found.
+	 * Returns the d d m storage link with the primary key or returns <code>null</code> if it could not be found.
 	 *
-	 * @param primaryKey the primary key of the d d m storage link to find
+	 * @param primaryKey the primary key of the d d m storage link
 	 * @return the d d m storage link, or <code>null</code> if a d d m storage link with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -419,9 +419,9 @@ public class DDMStorageLinkPersistenceImpl extends BasePersistenceImpl<DDMStorag
 	}
 
 	/**
-	 * Finds the d d m storage link with the primary key or returns <code>null</code> if it could not be found.
+	 * Returns the d d m storage link with the primary key or returns <code>null</code> if it could not be found.
 	 *
-	 * @param storageLinkId the primary key of the d d m storage link to find
+	 * @param storageLinkId the primary key of the d d m storage link
 	 * @return the d d m storage link, or <code>null</code> if a d d m storage link with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -455,9 +455,9 @@ public class DDMStorageLinkPersistenceImpl extends BasePersistenceImpl<DDMStorag
 	}
 
 	/**
-	 * Finds all the d d m storage links where uuid = &#63;.
+	 * Returns all the d d m storage links where uuid = &#63;.
 	 *
-	 * @param uuid the uuid to search with
+	 * @param uuid the uuid
 	 * @return the matching d d m storage links
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -467,15 +467,15 @@ public class DDMStorageLinkPersistenceImpl extends BasePersistenceImpl<DDMStorag
 	}
 
 	/**
-	 * Finds a range of all the d d m storage links where uuid = &#63;.
+	 * Returns a range of all the d d m storage links where uuid = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param uuid the uuid to search with
-	 * @param start the lower bound of the range of d d m storage links to return
-	 * @param end the upper bound of the range of d d m storage links to return (not inclusive)
+	 * @param uuid the uuid
+	 * @param start the lower bound of the range of d d m storage links
+	 * @param end the upper bound of the range of d d m storage links (not inclusive)
 	 * @return the range of matching d d m storage links
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -485,15 +485,15 @@ public class DDMStorageLinkPersistenceImpl extends BasePersistenceImpl<DDMStorag
 	}
 
 	/**
-	 * Finds an ordered range of all the d d m storage links where uuid = &#63;.
+	 * Returns an ordered range of all the d d m storage links where uuid = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param uuid the uuid to search with
-	 * @param start the lower bound of the range of d d m storage links to return
-	 * @param end the upper bound of the range of d d m storage links to return (not inclusive)
+	 * @param uuid the uuid
+	 * @param start the lower bound of the range of d d m storage links
+	 * @param end the upper bound of the range of d d m storage links (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching d d m storage links
 	 * @throws SystemException if a system exception occurred
@@ -581,13 +581,13 @@ public class DDMStorageLinkPersistenceImpl extends BasePersistenceImpl<DDMStorag
 	}
 
 	/**
-	 * Finds the first d d m storage link in the ordered set where uuid = &#63;.
+	 * Returns the first d d m storage link in the ordered set where uuid = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param uuid the uuid to search with
+	 * @param uuid the uuid
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching d d m storage link
 	 * @throws com.liferay.portlet.dynamicdatamapping.NoSuchStorageLinkException if a matching d d m storage link could not be found
@@ -616,13 +616,13 @@ public class DDMStorageLinkPersistenceImpl extends BasePersistenceImpl<DDMStorag
 	}
 
 	/**
-	 * Finds the last d d m storage link in the ordered set where uuid = &#63;.
+	 * Returns the last d d m storage link in the ordered set where uuid = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param uuid the uuid to search with
+	 * @param uuid the uuid
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching d d m storage link
 	 * @throws com.liferay.portlet.dynamicdatamapping.NoSuchStorageLinkException if a matching d d m storage link could not be found
@@ -654,14 +654,14 @@ public class DDMStorageLinkPersistenceImpl extends BasePersistenceImpl<DDMStorag
 	}
 
 	/**
-	 * Finds the d d m storage links before and after the current d d m storage link in the ordered set where uuid = &#63;.
+	 * Returns the d d m storage links before and after the current d d m storage link in the ordered set where uuid = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
 	 * @param storageLinkId the primary key of the current d d m storage link
-	 * @param uuid the uuid to search with
+	 * @param uuid the uuid
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next d d m storage link
 	 * @throws com.liferay.portlet.dynamicdatamapping.NoSuchStorageLinkException if a d d m storage link with the primary key could not be found
@@ -810,9 +810,9 @@ public class DDMStorageLinkPersistenceImpl extends BasePersistenceImpl<DDMStorag
 	}
 
 	/**
-	 * Finds the d d m storage link where classPK = &#63; or throws a {@link com.liferay.portlet.dynamicdatamapping.NoSuchStorageLinkException} if it could not be found.
+	 * Returns the d d m storage link where classPK = &#63; or throws a {@link com.liferay.portlet.dynamicdatamapping.NoSuchStorageLinkException} if it could not be found.
 	 *
-	 * @param classPK the class p k to search with
+	 * @param classPK the class p k
 	 * @return the matching d d m storage link
 	 * @throws com.liferay.portlet.dynamicdatamapping.NoSuchStorageLinkException if a matching d d m storage link could not be found
 	 * @throws SystemException if a system exception occurred
@@ -842,9 +842,9 @@ public class DDMStorageLinkPersistenceImpl extends BasePersistenceImpl<DDMStorag
 	}
 
 	/**
-	 * Finds the d d m storage link where classPK = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 * Returns the d d m storage link where classPK = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	 *
-	 * @param classPK the class p k to search with
+	 * @param classPK the class p k
 	 * @return the matching d d m storage link, or <code>null</code> if a matching d d m storage link could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -854,9 +854,9 @@ public class DDMStorageLinkPersistenceImpl extends BasePersistenceImpl<DDMStorag
 	}
 
 	/**
-	 * Finds the d d m storage link where classPK = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 * Returns the d d m storage link where classPK = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	 *
-	 * @param classPK the class p k to search with
+	 * @param classPK the class p k
 	 * @return the matching d d m storage link, or <code>null</code> if a matching d d m storage link could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -937,9 +937,9 @@ public class DDMStorageLinkPersistenceImpl extends BasePersistenceImpl<DDMStorag
 	}
 
 	/**
-	 * Finds all the d d m storage links where structureId = &#63;.
+	 * Returns all the d d m storage links where structureId = &#63;.
 	 *
-	 * @param structureId the structure ID to search with
+	 * @param structureId the structure ID
 	 * @return the matching d d m storage links
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -950,15 +950,15 @@ public class DDMStorageLinkPersistenceImpl extends BasePersistenceImpl<DDMStorag
 	}
 
 	/**
-	 * Finds a range of all the d d m storage links where structureId = &#63;.
+	 * Returns a range of all the d d m storage links where structureId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param structureId the structure ID to search with
-	 * @param start the lower bound of the range of d d m storage links to return
-	 * @param end the upper bound of the range of d d m storage links to return (not inclusive)
+	 * @param structureId the structure ID
+	 * @param start the lower bound of the range of d d m storage links
+	 * @param end the upper bound of the range of d d m storage links (not inclusive)
 	 * @return the range of matching d d m storage links
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -968,15 +968,15 @@ public class DDMStorageLinkPersistenceImpl extends BasePersistenceImpl<DDMStorag
 	}
 
 	/**
-	 * Finds an ordered range of all the d d m storage links where structureId = &#63;.
+	 * Returns an ordered range of all the d d m storage links where structureId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param structureId the structure ID to search with
-	 * @param start the lower bound of the range of d d m storage links to return
-	 * @param end the upper bound of the range of d d m storage links to return (not inclusive)
+	 * @param structureId the structure ID
+	 * @param start the lower bound of the range of d d m storage links
+	 * @param end the upper bound of the range of d d m storage links (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching d d m storage links
 	 * @throws SystemException if a system exception occurred
@@ -1052,13 +1052,13 @@ public class DDMStorageLinkPersistenceImpl extends BasePersistenceImpl<DDMStorag
 	}
 
 	/**
-	 * Finds the first d d m storage link in the ordered set where structureId = &#63;.
+	 * Returns the first d d m storage link in the ordered set where structureId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param structureId the structure ID to search with
+	 * @param structureId the structure ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching d d m storage link
 	 * @throws com.liferay.portlet.dynamicdatamapping.NoSuchStorageLinkException if a matching d d m storage link could not be found
@@ -1088,13 +1088,13 @@ public class DDMStorageLinkPersistenceImpl extends BasePersistenceImpl<DDMStorag
 	}
 
 	/**
-	 * Finds the last d d m storage link in the ordered set where structureId = &#63;.
+	 * Returns the last d d m storage link in the ordered set where structureId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param structureId the structure ID to search with
+	 * @param structureId the structure ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching d d m storage link
 	 * @throws com.liferay.portlet.dynamicdatamapping.NoSuchStorageLinkException if a matching d d m storage link could not be found
@@ -1126,14 +1126,14 @@ public class DDMStorageLinkPersistenceImpl extends BasePersistenceImpl<DDMStorag
 	}
 
 	/**
-	 * Finds the d d m storage links before and after the current d d m storage link in the ordered set where structureId = &#63;.
+	 * Returns the d d m storage links before and after the current d d m storage link in the ordered set where structureId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
 	 * @param storageLinkId the primary key of the current d d m storage link
-	 * @param structureId the structure ID to search with
+	 * @param structureId the structure ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next d d m storage link
 	 * @throws com.liferay.portlet.dynamicdatamapping.NoSuchStorageLinkException if a d d m storage link with the primary key could not be found
@@ -1270,7 +1270,7 @@ public class DDMStorageLinkPersistenceImpl extends BasePersistenceImpl<DDMStorag
 	}
 
 	/**
-	 * Finds all the d d m storage links.
+	 * Returns all the d d m storage links.
 	 *
 	 * @return the d d m storage links
 	 * @throws SystemException if a system exception occurred
@@ -1280,14 +1280,14 @@ public class DDMStorageLinkPersistenceImpl extends BasePersistenceImpl<DDMStorag
 	}
 
 	/**
-	 * Finds a range of all the d d m storage links.
+	 * Returns a range of all the d d m storage links.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param start the lower bound of the range of d d m storage links to return
-	 * @param end the upper bound of the range of d d m storage links to return (not inclusive)
+	 * @param start the lower bound of the range of d d m storage links
+	 * @param end the upper bound of the range of d d m storage links (not inclusive)
 	 * @return the range of d d m storage links
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1297,14 +1297,14 @@ public class DDMStorageLinkPersistenceImpl extends BasePersistenceImpl<DDMStorag
 	}
 
 	/**
-	 * Finds an ordered range of all the d d m storage links.
+	 * Returns an ordered range of all the d d m storage links.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param start the lower bound of the range of d d m storage links to return
-	 * @param end the upper bound of the range of d d m storage links to return (not inclusive)
+	 * @param start the lower bound of the range of d d m storage links
+	 * @param end the upper bound of the range of d d m storage links (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of d d m storage links
 	 * @throws SystemException if a system exception occurred
@@ -1381,7 +1381,7 @@ public class DDMStorageLinkPersistenceImpl extends BasePersistenceImpl<DDMStorag
 	/**
 	 * Removes all the d d m storage links where uuid = &#63; from the database.
 	 *
-	 * @param uuid the uuid to search with
+	 * @param uuid the uuid
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByUuid(String uuid) throws SystemException {
@@ -1393,7 +1393,7 @@ public class DDMStorageLinkPersistenceImpl extends BasePersistenceImpl<DDMStorag
 	/**
 	 * Removes the d d m storage link where classPK = &#63; from the database.
 	 *
-	 * @param classPK the class p k to search with
+	 * @param classPK the class p k
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByClassPK(long classPK)
@@ -1406,7 +1406,7 @@ public class DDMStorageLinkPersistenceImpl extends BasePersistenceImpl<DDMStorag
 	/**
 	 * Removes all the d d m storage links where structureId = &#63; from the database.
 	 *
-	 * @param structureId the structure ID to search with
+	 * @param structureId the structure ID
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByStructureId(long structureId) throws SystemException {
@@ -1427,9 +1427,9 @@ public class DDMStorageLinkPersistenceImpl extends BasePersistenceImpl<DDMStorag
 	}
 
 	/**
-	 * Counts all the d d m storage links where uuid = &#63;.
+	 * Returns the number of d d m storage links where uuid = &#63;.
 	 *
-	 * @param uuid the uuid to search with
+	 * @param uuid the uuid
 	 * @return the number of matching d d m storage links
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1492,9 +1492,9 @@ public class DDMStorageLinkPersistenceImpl extends BasePersistenceImpl<DDMStorag
 	}
 
 	/**
-	 * Counts all the d d m storage links where classPK = &#63;.
+	 * Returns the number of d d m storage links where classPK = &#63;.
 	 *
-	 * @param classPK the class p k to search with
+	 * @param classPK the class p k
 	 * @return the number of matching d d m storage links
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1545,9 +1545,9 @@ public class DDMStorageLinkPersistenceImpl extends BasePersistenceImpl<DDMStorag
 	}
 
 	/**
-	 * Counts all the d d m storage links where structureId = &#63;.
+	 * Returns the number of d d m storage links where structureId = &#63;.
 	 *
-	 * @param structureId the structure ID to search with
+	 * @param structureId the structure ID
 	 * @return the number of matching d d m storage links
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1598,7 +1598,7 @@ public class DDMStorageLinkPersistenceImpl extends BasePersistenceImpl<DDMStorag
 	}
 
 	/**
-	 * Counts all the d d m storage links.
+	 * Returns the number of d d m storage links.
 	 *
 	 * @return the number of d d m storage links
 	 * @throws SystemException if a system exception occurred

@@ -42,21 +42,21 @@ public interface ServiceComponentModel extends BaseModel<ServiceComponent> {
 	 */
 
 	/**
-	 * Gets the primary key of this service component.
+	 * Returns the primary key of this service component.
 	 *
 	 * @return the primary key of this service component
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this service component
+	 * Sets the primary key of this service component.
 	 *
 	 * @param primaryKey the primary key of this service component
 	 */
 	public void setPrimaryKey(long primaryKey);
 
 	/**
-	 * Gets the service component ID of this service component.
+	 * Returns the service component ID of this service component.
 	 *
 	 * @return the service component ID of this service component
 	 */
@@ -70,7 +70,7 @@ public interface ServiceComponentModel extends BaseModel<ServiceComponent> {
 	public void setServiceComponentId(long serviceComponentId);
 
 	/**
-	 * Gets the build namespace of this service component.
+	 * Returns the build namespace of this service component.
 	 *
 	 * @return the build namespace of this service component
 	 */
@@ -85,7 +85,7 @@ public interface ServiceComponentModel extends BaseModel<ServiceComponent> {
 	public void setBuildNamespace(String buildNamespace);
 
 	/**
-	 * Gets the build number of this service component.
+	 * Returns the build number of this service component.
 	 *
 	 * @return the build number of this service component
 	 */
@@ -99,7 +99,7 @@ public interface ServiceComponentModel extends BaseModel<ServiceComponent> {
 	public void setBuildNumber(long buildNumber);
 
 	/**
-	 * Gets the build date of this service component.
+	 * Returns the build date of this service component.
 	 *
 	 * @return the build date of this service component
 	 */
@@ -113,7 +113,7 @@ public interface ServiceComponentModel extends BaseModel<ServiceComponent> {
 	public void setBuildDate(long buildDate);
 
 	/**
-	 * Gets the data of this service component.
+	 * Returns the data of this service component.
 	 *
 	 * @return the data of this service component
 	 */

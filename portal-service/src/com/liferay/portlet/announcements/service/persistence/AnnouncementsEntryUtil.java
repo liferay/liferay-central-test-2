@@ -123,7 +123,7 @@ public class AnnouncementsEntryUtil {
 	/**
 	* Caches the announcements entry in the entity cache if it is enabled.
 	*
-	* @param announcementsEntry the announcements entry to cache
+	* @param announcementsEntry the announcements entry
 	*/
 	public static void cacheResult(
 		com.liferay.portlet.announcements.model.AnnouncementsEntry announcementsEntry) {
@@ -133,7 +133,7 @@ public class AnnouncementsEntryUtil {
 	/**
 	* Caches the announcements entries in the entity cache if it is enabled.
 	*
-	* @param announcementsEntries the announcements entries to cache
+	* @param announcementsEntries the announcements entries
 	*/
 	public static void cacheResult(
 		java.util.List<com.liferay.portlet.announcements.model.AnnouncementsEntry> announcementsEntries) {
@@ -154,7 +154,7 @@ public class AnnouncementsEntryUtil {
 	/**
 	* Removes the announcements entry with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param entryId the primary key of the announcements entry to remove
+	* @param entryId the primary key of the announcements entry
 	* @return the announcements entry that was removed
 	* @throws com.liferay.portlet.announcements.NoSuchEntryException if a announcements entry with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -174,9 +174,9 @@ public class AnnouncementsEntryUtil {
 	}
 
 	/**
-	* Finds the announcements entry with the primary key or throws a {@link com.liferay.portlet.announcements.NoSuchEntryException} if it could not be found.
+	* Returns the announcements entry with the primary key or throws a {@link com.liferay.portlet.announcements.NoSuchEntryException} if it could not be found.
 	*
-	* @param entryId the primary key of the announcements entry to find
+	* @param entryId the primary key of the announcements entry
 	* @return the announcements entry
 	* @throws com.liferay.portlet.announcements.NoSuchEntryException if a announcements entry with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -189,9 +189,9 @@ public class AnnouncementsEntryUtil {
 	}
 
 	/**
-	* Finds the announcements entry with the primary key or returns <code>null</code> if it could not be found.
+	* Returns the announcements entry with the primary key or returns <code>null</code> if it could not be found.
 	*
-	* @param entryId the primary key of the announcements entry to find
+	* @param entryId the primary key of the announcements entry
 	* @return the announcements entry, or <code>null</code> if a announcements entry with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -202,9 +202,9 @@ public class AnnouncementsEntryUtil {
 	}
 
 	/**
-	* Finds all the announcements entries where uuid = &#63;.
+	* Returns all the announcements entries where uuid = &#63;.
 	*
-	* @param uuid the uuid to search with
+	* @param uuid the uuid
 	* @return the matching announcements entries
 	* @throws SystemException if a system exception occurred
 	*/
@@ -215,15 +215,15 @@ public class AnnouncementsEntryUtil {
 	}
 
 	/**
-	* Finds a range of all the announcements entries where uuid = &#63;.
+	* Returns a range of all the announcements entries where uuid = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param uuid the uuid to search with
-	* @param start the lower bound of the range of announcements entries to return
-	* @param end the upper bound of the range of announcements entries to return (not inclusive)
+	* @param uuid the uuid
+	* @param start the lower bound of the range of announcements entries
+	* @param end the upper bound of the range of announcements entries (not inclusive)
 	* @return the range of matching announcements entries
 	* @throws SystemException if a system exception occurred
 	*/
@@ -234,15 +234,15 @@ public class AnnouncementsEntryUtil {
 	}
 
 	/**
-	* Finds an ordered range of all the announcements entries where uuid = &#63;.
+	* Returns an ordered range of all the announcements entries where uuid = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param uuid the uuid to search with
-	* @param start the lower bound of the range of announcements entries to return
-	* @param end the upper bound of the range of announcements entries to return (not inclusive)
+	* @param uuid the uuid
+	* @param start the lower bound of the range of announcements entries
+	* @param end the upper bound of the range of announcements entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching announcements entries
 	* @throws SystemException if a system exception occurred
@@ -255,13 +255,13 @@ public class AnnouncementsEntryUtil {
 	}
 
 	/**
-	* Finds the first announcements entry in the ordered set where uuid = &#63;.
+	* Returns the first announcements entry in the ordered set where uuid = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param uuid the uuid to search with
+	* @param uuid the uuid
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching announcements entry
 	* @throws com.liferay.portlet.announcements.NoSuchEntryException if a matching announcements entry could not be found
@@ -276,13 +276,13 @@ public class AnnouncementsEntryUtil {
 	}
 
 	/**
-	* Finds the last announcements entry in the ordered set where uuid = &#63;.
+	* Returns the last announcements entry in the ordered set where uuid = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param uuid the uuid to search with
+	* @param uuid the uuid
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching announcements entry
 	* @throws com.liferay.portlet.announcements.NoSuchEntryException if a matching announcements entry could not be found
@@ -297,14 +297,14 @@ public class AnnouncementsEntryUtil {
 	}
 
 	/**
-	* Finds the announcements entries before and after the current announcements entry in the ordered set where uuid = &#63;.
+	* Returns the announcements entries before and after the current announcements entry in the ordered set where uuid = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
 	* @param entryId the primary key of the current announcements entry
-	* @param uuid the uuid to search with
+	* @param uuid the uuid
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next announcements entry
 	* @throws com.liferay.portlet.announcements.NoSuchEntryException if a announcements entry with the primary key could not be found
@@ -320,9 +320,9 @@ public class AnnouncementsEntryUtil {
 	}
 
 	/**
-	* Filters by the user's permissions and finds all the announcements entries where uuid = &#63;.
+	* Returns all the announcements entries that the user has permission to view where uuid = &#63;.
 	*
-	* @param uuid the uuid to search with
+	* @param uuid the uuid
 	* @return the matching announcements entries that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -333,15 +333,15 @@ public class AnnouncementsEntryUtil {
 	}
 
 	/**
-	* Filters by the user's permissions and finds a range of all the announcements entries where uuid = &#63;.
+	* Returns a range of all the announcements entries that the user has permission to view where uuid = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param uuid the uuid to search with
-	* @param start the lower bound of the range of announcements entries to return
-	* @param end the upper bound of the range of announcements entries to return (not inclusive)
+	* @param uuid the uuid
+	* @param start the lower bound of the range of announcements entries
+	* @param end the upper bound of the range of announcements entries (not inclusive)
 	* @return the range of matching announcements entries that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -352,15 +352,15 @@ public class AnnouncementsEntryUtil {
 	}
 
 	/**
-	* Filters by the user's permissions and finds an ordered range of all the announcements entries where uuid = &#63;.
+	* Returns an ordered range of all the announcements entries that the user has permissions to view where uuid = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param uuid the uuid to search with
-	* @param start the lower bound of the range of announcements entries to return
-	* @param end the upper bound of the range of announcements entries to return (not inclusive)
+	* @param uuid the uuid
+	* @param start the lower bound of the range of announcements entries
+	* @param end the upper bound of the range of announcements entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching announcements entries that the user has permission to view
 	* @throws SystemException if a system exception occurred
@@ -374,14 +374,10 @@ public class AnnouncementsEntryUtil {
 	}
 
 	/**
-	* Filters the announcements entries before and after the current announcements entry in the ordered set where uuid = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
-	* </p>
+	* Returns the announcements entries before and after the current announcements entry in the ordered set of announcements entries that the user has permission to view where uuid = &#63;.
 	*
 	* @param entryId the primary key of the current announcements entry
-	* @param uuid the uuid to search with
+	* @param uuid the uuid
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next announcements entry
 	* @throws com.liferay.portlet.announcements.NoSuchEntryException if a announcements entry with the primary key could not be found
@@ -398,9 +394,9 @@ public class AnnouncementsEntryUtil {
 	}
 
 	/**
-	* Finds all the announcements entries where userId = &#63;.
+	* Returns all the announcements entries where userId = &#63;.
 	*
-	* @param userId the user ID to search with
+	* @param userId the user ID
 	* @return the matching announcements entries
 	* @throws SystemException if a system exception occurred
 	*/
@@ -410,15 +406,15 @@ public class AnnouncementsEntryUtil {
 	}
 
 	/**
-	* Finds a range of all the announcements entries where userId = &#63;.
+	* Returns a range of all the announcements entries where userId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param userId the user ID to search with
-	* @param start the lower bound of the range of announcements entries to return
-	* @param end the upper bound of the range of announcements entries to return (not inclusive)
+	* @param userId the user ID
+	* @param start the lower bound of the range of announcements entries
+	* @param end the upper bound of the range of announcements entries (not inclusive)
 	* @return the range of matching announcements entries
 	* @throws SystemException if a system exception occurred
 	*/
@@ -429,15 +425,15 @@ public class AnnouncementsEntryUtil {
 	}
 
 	/**
-	* Finds an ordered range of all the announcements entries where userId = &#63;.
+	* Returns an ordered range of all the announcements entries where userId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param userId the user ID to search with
-	* @param start the lower bound of the range of announcements entries to return
-	* @param end the upper bound of the range of announcements entries to return (not inclusive)
+	* @param userId the user ID
+	* @param start the lower bound of the range of announcements entries
+	* @param end the upper bound of the range of announcements entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching announcements entries
 	* @throws SystemException if a system exception occurred
@@ -451,13 +447,13 @@ public class AnnouncementsEntryUtil {
 	}
 
 	/**
-	* Finds the first announcements entry in the ordered set where userId = &#63;.
+	* Returns the first announcements entry in the ordered set where userId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param userId the user ID to search with
+	* @param userId the user ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching announcements entry
 	* @throws com.liferay.portlet.announcements.NoSuchEntryException if a matching announcements entry could not be found
@@ -472,13 +468,13 @@ public class AnnouncementsEntryUtil {
 	}
 
 	/**
-	* Finds the last announcements entry in the ordered set where userId = &#63;.
+	* Returns the last announcements entry in the ordered set where userId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param userId the user ID to search with
+	* @param userId the user ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching announcements entry
 	* @throws com.liferay.portlet.announcements.NoSuchEntryException if a matching announcements entry could not be found
@@ -493,14 +489,14 @@ public class AnnouncementsEntryUtil {
 	}
 
 	/**
-	* Finds the announcements entries before and after the current announcements entry in the ordered set where userId = &#63;.
+	* Returns the announcements entries before and after the current announcements entry in the ordered set where userId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
 	* @param entryId the primary key of the current announcements entry
-	* @param userId the user ID to search with
+	* @param userId the user ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next announcements entry
 	* @throws com.liferay.portlet.announcements.NoSuchEntryException if a announcements entry with the primary key could not be found
@@ -516,9 +512,9 @@ public class AnnouncementsEntryUtil {
 	}
 
 	/**
-	* Filters by the user's permissions and finds all the announcements entries where userId = &#63;.
+	* Returns all the announcements entries that the user has permission to view where userId = &#63;.
 	*
-	* @param userId the user ID to search with
+	* @param userId the user ID
 	* @return the matching announcements entries that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -528,15 +524,15 @@ public class AnnouncementsEntryUtil {
 	}
 
 	/**
-	* Filters by the user's permissions and finds a range of all the announcements entries where userId = &#63;.
+	* Returns a range of all the announcements entries that the user has permission to view where userId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param userId the user ID to search with
-	* @param start the lower bound of the range of announcements entries to return
-	* @param end the upper bound of the range of announcements entries to return (not inclusive)
+	* @param userId the user ID
+	* @param start the lower bound of the range of announcements entries
+	* @param end the upper bound of the range of announcements entries (not inclusive)
 	* @return the range of matching announcements entries that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -547,15 +543,15 @@ public class AnnouncementsEntryUtil {
 	}
 
 	/**
-	* Filters by the user's permissions and finds an ordered range of all the announcements entries where userId = &#63;.
+	* Returns an ordered range of all the announcements entries that the user has permissions to view where userId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param userId the user ID to search with
-	* @param start the lower bound of the range of announcements entries to return
-	* @param end the upper bound of the range of announcements entries to return (not inclusive)
+	* @param userId the user ID
+	* @param start the lower bound of the range of announcements entries
+	* @param end the upper bound of the range of announcements entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching announcements entries that the user has permission to view
 	* @throws SystemException if a system exception occurred
@@ -569,14 +565,10 @@ public class AnnouncementsEntryUtil {
 	}
 
 	/**
-	* Filters the announcements entries before and after the current announcements entry in the ordered set where userId = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
-	* </p>
+	* Returns the announcements entries before and after the current announcements entry in the ordered set of announcements entries that the user has permission to view where userId = &#63;.
 	*
 	* @param entryId the primary key of the current announcements entry
-	* @param userId the user ID to search with
+	* @param userId the user ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next announcements entry
 	* @throws com.liferay.portlet.announcements.NoSuchEntryException if a announcements entry with the primary key could not be found
@@ -593,10 +585,10 @@ public class AnnouncementsEntryUtil {
 	}
 
 	/**
-	* Finds all the announcements entries where classNameId = &#63; and classPK = &#63;.
+	* Returns all the announcements entries where classNameId = &#63; and classPK = &#63;.
 	*
-	* @param classNameId the class name ID to search with
-	* @param classPK the class p k to search with
+	* @param classNameId the class name ID
+	* @param classPK the class p k
 	* @return the matching announcements entries
 	* @throws SystemException if a system exception occurred
 	*/
@@ -607,16 +599,16 @@ public class AnnouncementsEntryUtil {
 	}
 
 	/**
-	* Finds a range of all the announcements entries where classNameId = &#63; and classPK = &#63;.
+	* Returns a range of all the announcements entries where classNameId = &#63; and classPK = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param classNameId the class name ID to search with
-	* @param classPK the class p k to search with
-	* @param start the lower bound of the range of announcements entries to return
-	* @param end the upper bound of the range of announcements entries to return (not inclusive)
+	* @param classNameId the class name ID
+	* @param classPK the class p k
+	* @param start the lower bound of the range of announcements entries
+	* @param end the upper bound of the range of announcements entries (not inclusive)
 	* @return the range of matching announcements entries
 	* @throws SystemException if a system exception occurred
 	*/
@@ -627,16 +619,16 @@ public class AnnouncementsEntryUtil {
 	}
 
 	/**
-	* Finds an ordered range of all the announcements entries where classNameId = &#63; and classPK = &#63;.
+	* Returns an ordered range of all the announcements entries where classNameId = &#63; and classPK = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param classNameId the class name ID to search with
-	* @param classPK the class p k to search with
-	* @param start the lower bound of the range of announcements entries to return
-	* @param end the upper bound of the range of announcements entries to return (not inclusive)
+	* @param classNameId the class name ID
+	* @param classPK the class p k
+	* @param start the lower bound of the range of announcements entries
+	* @param end the upper bound of the range of announcements entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching announcements entries
 	* @throws SystemException if a system exception occurred
@@ -651,14 +643,14 @@ public class AnnouncementsEntryUtil {
 	}
 
 	/**
-	* Finds the first announcements entry in the ordered set where classNameId = &#63; and classPK = &#63;.
+	* Returns the first announcements entry in the ordered set where classNameId = &#63; and classPK = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param classNameId the class name ID to search with
-	* @param classPK the class p k to search with
+	* @param classNameId the class name ID
+	* @param classPK the class p k
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching announcements entry
 	* @throws com.liferay.portlet.announcements.NoSuchEntryException if a matching announcements entry could not be found
@@ -674,14 +666,14 @@ public class AnnouncementsEntryUtil {
 	}
 
 	/**
-	* Finds the last announcements entry in the ordered set where classNameId = &#63; and classPK = &#63;.
+	* Returns the last announcements entry in the ordered set where classNameId = &#63; and classPK = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param classNameId the class name ID to search with
-	* @param classPK the class p k to search with
+	* @param classNameId the class name ID
+	* @param classPK the class p k
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching announcements entry
 	* @throws com.liferay.portlet.announcements.NoSuchEntryException if a matching announcements entry could not be found
@@ -697,15 +689,15 @@ public class AnnouncementsEntryUtil {
 	}
 
 	/**
-	* Finds the announcements entries before and after the current announcements entry in the ordered set where classNameId = &#63; and classPK = &#63;.
+	* Returns the announcements entries before and after the current announcements entry in the ordered set where classNameId = &#63; and classPK = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
 	* @param entryId the primary key of the current announcements entry
-	* @param classNameId the class name ID to search with
-	* @param classPK the class p k to search with
+	* @param classNameId the class name ID
+	* @param classPK the class p k
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next announcements entry
 	* @throws com.liferay.portlet.announcements.NoSuchEntryException if a announcements entry with the primary key could not be found
@@ -722,10 +714,10 @@ public class AnnouncementsEntryUtil {
 	}
 
 	/**
-	* Filters by the user's permissions and finds all the announcements entries where classNameId = &#63; and classPK = &#63;.
+	* Returns all the announcements entries that the user has permission to view where classNameId = &#63; and classPK = &#63;.
 	*
-	* @param classNameId the class name ID to search with
-	* @param classPK the class p k to search with
+	* @param classNameId the class name ID
+	* @param classPK the class p k
 	* @return the matching announcements entries that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -736,16 +728,16 @@ public class AnnouncementsEntryUtil {
 	}
 
 	/**
-	* Filters by the user's permissions and finds a range of all the announcements entries where classNameId = &#63; and classPK = &#63;.
+	* Returns a range of all the announcements entries that the user has permission to view where classNameId = &#63; and classPK = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param classNameId the class name ID to search with
-	* @param classPK the class p k to search with
-	* @param start the lower bound of the range of announcements entries to return
-	* @param end the upper bound of the range of announcements entries to return (not inclusive)
+	* @param classNameId the class name ID
+	* @param classPK the class p k
+	* @param start the lower bound of the range of announcements entries
+	* @param end the upper bound of the range of announcements entries (not inclusive)
 	* @return the range of matching announcements entries that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -756,16 +748,16 @@ public class AnnouncementsEntryUtil {
 	}
 
 	/**
-	* Filters by the user's permissions and finds an ordered range of all the announcements entries where classNameId = &#63; and classPK = &#63;.
+	* Returns an ordered range of all the announcements entries that the user has permissions to view where classNameId = &#63; and classPK = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param classNameId the class name ID to search with
-	* @param classPK the class p k to search with
-	* @param start the lower bound of the range of announcements entries to return
-	* @param end the upper bound of the range of announcements entries to return (not inclusive)
+	* @param classNameId the class name ID
+	* @param classPK the class p k
+	* @param start the lower bound of the range of announcements entries
+	* @param end the upper bound of the range of announcements entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching announcements entries that the user has permission to view
 	* @throws SystemException if a system exception occurred
@@ -780,15 +772,11 @@ public class AnnouncementsEntryUtil {
 	}
 
 	/**
-	* Filters the announcements entries before and after the current announcements entry in the ordered set where classNameId = &#63; and classPK = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
-	* </p>
+	* Returns the announcements entries before and after the current announcements entry in the ordered set of announcements entries that the user has permission to view where classNameId = &#63; and classPK = &#63;.
 	*
 	* @param entryId the primary key of the current announcements entry
-	* @param classNameId the class name ID to search with
-	* @param classPK the class p k to search with
+	* @param classNameId the class name ID
+	* @param classPK the class p k
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next announcements entry
 	* @throws com.liferay.portlet.announcements.NoSuchEntryException if a announcements entry with the primary key could not be found
@@ -805,11 +793,11 @@ public class AnnouncementsEntryUtil {
 	}
 
 	/**
-	* Finds all the announcements entries where classNameId = &#63; and classPK = &#63; and alert = &#63;.
+	* Returns all the announcements entries where classNameId = &#63; and classPK = &#63; and alert = &#63;.
 	*
-	* @param classNameId the class name ID to search with
-	* @param classPK the class p k to search with
-	* @param alert the alert to search with
+	* @param classNameId the class name ID
+	* @param classPK the class p k
+	* @param alert the alert
 	* @return the matching announcements entries
 	* @throws SystemException if a system exception occurred
 	*/
@@ -820,17 +808,17 @@ public class AnnouncementsEntryUtil {
 	}
 
 	/**
-	* Finds a range of all the announcements entries where classNameId = &#63; and classPK = &#63; and alert = &#63;.
+	* Returns a range of all the announcements entries where classNameId = &#63; and classPK = &#63; and alert = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param classNameId the class name ID to search with
-	* @param classPK the class p k to search with
-	* @param alert the alert to search with
-	* @param start the lower bound of the range of announcements entries to return
-	* @param end the upper bound of the range of announcements entries to return (not inclusive)
+	* @param classNameId the class name ID
+	* @param classPK the class p k
+	* @param alert the alert
+	* @param start the lower bound of the range of announcements entries
+	* @param end the upper bound of the range of announcements entries (not inclusive)
 	* @return the range of matching announcements entries
 	* @throws SystemException if a system exception occurred
 	*/
@@ -842,17 +830,17 @@ public class AnnouncementsEntryUtil {
 	}
 
 	/**
-	* Finds an ordered range of all the announcements entries where classNameId = &#63; and classPK = &#63; and alert = &#63;.
+	* Returns an ordered range of all the announcements entries where classNameId = &#63; and classPK = &#63; and alert = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param classNameId the class name ID to search with
-	* @param classPK the class p k to search with
-	* @param alert the alert to search with
-	* @param start the lower bound of the range of announcements entries to return
-	* @param end the upper bound of the range of announcements entries to return (not inclusive)
+	* @param classNameId the class name ID
+	* @param classPK the class p k
+	* @param alert the alert
+	* @param start the lower bound of the range of announcements entries
+	* @param end the upper bound of the range of announcements entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching announcements entries
 	* @throws SystemException if a system exception occurred
@@ -867,15 +855,15 @@ public class AnnouncementsEntryUtil {
 	}
 
 	/**
-	* Finds the first announcements entry in the ordered set where classNameId = &#63; and classPK = &#63; and alert = &#63;.
+	* Returns the first announcements entry in the ordered set where classNameId = &#63; and classPK = &#63; and alert = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param classNameId the class name ID to search with
-	* @param classPK the class p k to search with
-	* @param alert the alert to search with
+	* @param classNameId the class name ID
+	* @param classPK the class p k
+	* @param alert the alert
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching announcements entry
 	* @throws com.liferay.portlet.announcements.NoSuchEntryException if a matching announcements entry could not be found
@@ -892,15 +880,15 @@ public class AnnouncementsEntryUtil {
 	}
 
 	/**
-	* Finds the last announcements entry in the ordered set where classNameId = &#63; and classPK = &#63; and alert = &#63;.
+	* Returns the last announcements entry in the ordered set where classNameId = &#63; and classPK = &#63; and alert = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param classNameId the class name ID to search with
-	* @param classPK the class p k to search with
-	* @param alert the alert to search with
+	* @param classNameId the class name ID
+	* @param classPK the class p k
+	* @param alert the alert
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching announcements entry
 	* @throws com.liferay.portlet.announcements.NoSuchEntryException if a matching announcements entry could not be found
@@ -917,16 +905,16 @@ public class AnnouncementsEntryUtil {
 	}
 
 	/**
-	* Finds the announcements entries before and after the current announcements entry in the ordered set where classNameId = &#63; and classPK = &#63; and alert = &#63;.
+	* Returns the announcements entries before and after the current announcements entry in the ordered set where classNameId = &#63; and classPK = &#63; and alert = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
 	* @param entryId the primary key of the current announcements entry
-	* @param classNameId the class name ID to search with
-	* @param classPK the class p k to search with
-	* @param alert the alert to search with
+	* @param classNameId the class name ID
+	* @param classPK the class p k
+	* @param alert the alert
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next announcements entry
 	* @throws com.liferay.portlet.announcements.NoSuchEntryException if a announcements entry with the primary key could not be found
@@ -943,11 +931,11 @@ public class AnnouncementsEntryUtil {
 	}
 
 	/**
-	* Filters by the user's permissions and finds all the announcements entries where classNameId = &#63; and classPK = &#63; and alert = &#63;.
+	* Returns all the announcements entries that the user has permission to view where classNameId = &#63; and classPK = &#63; and alert = &#63;.
 	*
-	* @param classNameId the class name ID to search with
-	* @param classPK the class p k to search with
-	* @param alert the alert to search with
+	* @param classNameId the class name ID
+	* @param classPK the class p k
+	* @param alert the alert
 	* @return the matching announcements entries that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -958,17 +946,17 @@ public class AnnouncementsEntryUtil {
 	}
 
 	/**
-	* Filters by the user's permissions and finds a range of all the announcements entries where classNameId = &#63; and classPK = &#63; and alert = &#63;.
+	* Returns a range of all the announcements entries that the user has permission to view where classNameId = &#63; and classPK = &#63; and alert = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param classNameId the class name ID to search with
-	* @param classPK the class p k to search with
-	* @param alert the alert to search with
-	* @param start the lower bound of the range of announcements entries to return
-	* @param end the upper bound of the range of announcements entries to return (not inclusive)
+	* @param classNameId the class name ID
+	* @param classPK the class p k
+	* @param alert the alert
+	* @param start the lower bound of the range of announcements entries
+	* @param end the upper bound of the range of announcements entries (not inclusive)
 	* @return the range of matching announcements entries that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -980,17 +968,17 @@ public class AnnouncementsEntryUtil {
 	}
 
 	/**
-	* Filters by the user's permissions and finds an ordered range of all the announcements entries where classNameId = &#63; and classPK = &#63; and alert = &#63;.
+	* Returns an ordered range of all the announcements entries that the user has permissions to view where classNameId = &#63; and classPK = &#63; and alert = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param classNameId the class name ID to search with
-	* @param classPK the class p k to search with
-	* @param alert the alert to search with
-	* @param start the lower bound of the range of announcements entries to return
-	* @param end the upper bound of the range of announcements entries to return (not inclusive)
+	* @param classNameId the class name ID
+	* @param classPK the class p k
+	* @param alert the alert
+	* @param start the lower bound of the range of announcements entries
+	* @param end the upper bound of the range of announcements entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching announcements entries that the user has permission to view
 	* @throws SystemException if a system exception occurred
@@ -1005,16 +993,12 @@ public class AnnouncementsEntryUtil {
 	}
 
 	/**
-	* Filters the announcements entries before and after the current announcements entry in the ordered set where classNameId = &#63; and classPK = &#63; and alert = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
-	* </p>
+	* Returns the announcements entries before and after the current announcements entry in the ordered set of announcements entries that the user has permission to view where classNameId = &#63; and classPK = &#63; and alert = &#63;.
 	*
 	* @param entryId the primary key of the current announcements entry
-	* @param classNameId the class name ID to search with
-	* @param classPK the class p k to search with
-	* @param alert the alert to search with
+	* @param classNameId the class name ID
+	* @param classPK the class p k
+	* @param alert the alert
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next announcements entry
 	* @throws com.liferay.portlet.announcements.NoSuchEntryException if a announcements entry with the primary key could not be found
@@ -1031,7 +1015,7 @@ public class AnnouncementsEntryUtil {
 	}
 
 	/**
-	* Finds all the announcements entries.
+	* Returns all the announcements entries.
 	*
 	* @return the announcements entries
 	* @throws SystemException if a system exception occurred
@@ -1042,14 +1026,14 @@ public class AnnouncementsEntryUtil {
 	}
 
 	/**
-	* Finds a range of all the announcements entries.
+	* Returns a range of all the announcements entries.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of announcements entries to return
-	* @param end the upper bound of the range of announcements entries to return (not inclusive)
+	* @param start the lower bound of the range of announcements entries
+	* @param end the upper bound of the range of announcements entries (not inclusive)
 	* @return the range of announcements entries
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1060,14 +1044,14 @@ public class AnnouncementsEntryUtil {
 	}
 
 	/**
-	* Finds an ordered range of all the announcements entries.
+	* Returns an ordered range of all the announcements entries.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of announcements entries to return
-	* @param end the upper bound of the range of announcements entries to return (not inclusive)
+	* @param start the lower bound of the range of announcements entries
+	* @param end the upper bound of the range of announcements entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of announcements entries
 	* @throws SystemException if a system exception occurred
@@ -1082,7 +1066,7 @@ public class AnnouncementsEntryUtil {
 	/**
 	* Removes all the announcements entries where uuid = &#63; from the database.
 	*
-	* @param uuid the uuid to search with
+	* @param uuid the uuid
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByUuid(java.lang.String uuid)
@@ -1093,7 +1077,7 @@ public class AnnouncementsEntryUtil {
 	/**
 	* Removes all the announcements entries where userId = &#63; from the database.
 	*
-	* @param userId the user ID to search with
+	* @param userId the user ID
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByUserId(long userId)
@@ -1104,8 +1088,8 @@ public class AnnouncementsEntryUtil {
 	/**
 	* Removes all the announcements entries where classNameId = &#63; and classPK = &#63; from the database.
 	*
-	* @param classNameId the class name ID to search with
-	* @param classPK the class p k to search with
+	* @param classNameId the class name ID
+	* @param classPK the class p k
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByC_C(long classNameId, long classPK)
@@ -1116,9 +1100,9 @@ public class AnnouncementsEntryUtil {
 	/**
 	* Removes all the announcements entries where classNameId = &#63; and classPK = &#63; and alert = &#63; from the database.
 	*
-	* @param classNameId the class name ID to search with
-	* @param classPK the class p k to search with
-	* @param alert the alert to search with
+	* @param classNameId the class name ID
+	* @param classPK the class p k
+	* @param alert the alert
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByC_C_A(long classNameId, long classPK,
@@ -1138,9 +1122,9 @@ public class AnnouncementsEntryUtil {
 	}
 
 	/**
-	* Counts all the announcements entries where uuid = &#63;.
+	* Returns the number of announcements entries where uuid = &#63;.
 	*
-	* @param uuid the uuid to search with
+	* @param uuid the uuid
 	* @return the number of matching announcements entries
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1150,9 +1134,9 @@ public class AnnouncementsEntryUtil {
 	}
 
 	/**
-	* Filters by the user's permissions and counts all the announcements entries where uuid = &#63;.
+	* Returns the number of announcements entries that the user has permission to view where uuid = &#63;.
 	*
-	* @param uuid the uuid to search with
+	* @param uuid the uuid
 	* @return the number of matching announcements entries that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1162,9 +1146,9 @@ public class AnnouncementsEntryUtil {
 	}
 
 	/**
-	* Counts all the announcements entries where userId = &#63;.
+	* Returns the number of announcements entries where userId = &#63;.
 	*
-	* @param userId the user ID to search with
+	* @param userId the user ID
 	* @return the number of matching announcements entries
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1174,9 +1158,9 @@ public class AnnouncementsEntryUtil {
 	}
 
 	/**
-	* Filters by the user's permissions and counts all the announcements entries where userId = &#63;.
+	* Returns the number of announcements entries that the user has permission to view where userId = &#63;.
 	*
-	* @param userId the user ID to search with
+	* @param userId the user ID
 	* @return the number of matching announcements entries that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1186,10 +1170,10 @@ public class AnnouncementsEntryUtil {
 	}
 
 	/**
-	* Counts all the announcements entries where classNameId = &#63; and classPK = &#63;.
+	* Returns the number of announcements entries where classNameId = &#63; and classPK = &#63;.
 	*
-	* @param classNameId the class name ID to search with
-	* @param classPK the class p k to search with
+	* @param classNameId the class name ID
+	* @param classPK the class p k
 	* @return the number of matching announcements entries
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1199,10 +1183,10 @@ public class AnnouncementsEntryUtil {
 	}
 
 	/**
-	* Filters by the user's permissions and counts all the announcements entries where classNameId = &#63; and classPK = &#63;.
+	* Returns the number of announcements entries that the user has permission to view where classNameId = &#63; and classPK = &#63;.
 	*
-	* @param classNameId the class name ID to search with
-	* @param classPK the class p k to search with
+	* @param classNameId the class name ID
+	* @param classPK the class p k
 	* @return the number of matching announcements entries that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1212,11 +1196,11 @@ public class AnnouncementsEntryUtil {
 	}
 
 	/**
-	* Counts all the announcements entries where classNameId = &#63; and classPK = &#63; and alert = &#63;.
+	* Returns the number of announcements entries where classNameId = &#63; and classPK = &#63; and alert = &#63;.
 	*
-	* @param classNameId the class name ID to search with
-	* @param classPK the class p k to search with
-	* @param alert the alert to search with
+	* @param classNameId the class name ID
+	* @param classPK the class p k
+	* @param alert the alert
 	* @return the number of matching announcements entries
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1226,11 +1210,11 @@ public class AnnouncementsEntryUtil {
 	}
 
 	/**
-	* Filters by the user's permissions and counts all the announcements entries where classNameId = &#63; and classPK = &#63; and alert = &#63;.
+	* Returns the number of announcements entries that the user has permission to view where classNameId = &#63; and classPK = &#63; and alert = &#63;.
 	*
-	* @param classNameId the class name ID to search with
-	* @param classPK the class p k to search with
-	* @param alert the alert to search with
+	* @param classNameId the class name ID
+	* @param classPK the class p k
+	* @param alert the alert
 	* @return the number of matching announcements entries that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1241,7 +1225,7 @@ public class AnnouncementsEntryUtil {
 	}
 
 	/**
-	* Counts all the announcements entries.
+	* Returns the number of announcements entries.
 	*
 	* @return the number of announcements entries
 	* @throws SystemException if a system exception occurred

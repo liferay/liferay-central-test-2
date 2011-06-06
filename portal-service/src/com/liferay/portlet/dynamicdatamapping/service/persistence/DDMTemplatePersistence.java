@@ -41,7 +41,7 @@ public interface DDMTemplatePersistence extends BasePersistence<DDMTemplate> {
 	/**
 	* Caches the d d m template in the entity cache if it is enabled.
 	*
-	* @param ddmTemplate the d d m template to cache
+	* @param ddmTemplate the d d m template
 	*/
 	public void cacheResult(
 		com.liferay.portlet.dynamicdatamapping.model.DDMTemplate ddmTemplate);
@@ -49,7 +49,7 @@ public interface DDMTemplatePersistence extends BasePersistence<DDMTemplate> {
 	/**
 	* Caches the d d m templates in the entity cache if it is enabled.
 	*
-	* @param ddmTemplates the d d m templates to cache
+	* @param ddmTemplates the d d m templates
 	*/
 	public void cacheResult(
 		java.util.List<com.liferay.portlet.dynamicdatamapping.model.DDMTemplate> ddmTemplates);
@@ -66,7 +66,7 @@ public interface DDMTemplatePersistence extends BasePersistence<DDMTemplate> {
 	/**
 	* Removes the d d m template with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param templateId the primary key of the d d m template to remove
+	* @param templateId the primary key of the d d m template
 	* @return the d d m template that was removed
 	* @throws com.liferay.portlet.dynamicdatamapping.NoSuchTemplateException if a d d m template with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -82,9 +82,9 @@ public interface DDMTemplatePersistence extends BasePersistence<DDMTemplate> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the d d m template with the primary key or throws a {@link com.liferay.portlet.dynamicdatamapping.NoSuchTemplateException} if it could not be found.
+	* Returns the d d m template with the primary key or throws a {@link com.liferay.portlet.dynamicdatamapping.NoSuchTemplateException} if it could not be found.
 	*
-	* @param templateId the primary key of the d d m template to find
+	* @param templateId the primary key of the d d m template
 	* @return the d d m template
 	* @throws com.liferay.portlet.dynamicdatamapping.NoSuchTemplateException if a d d m template with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -95,9 +95,9 @@ public interface DDMTemplatePersistence extends BasePersistence<DDMTemplate> {
 			com.liferay.portlet.dynamicdatamapping.NoSuchTemplateException;
 
 	/**
-	* Finds the d d m template with the primary key or returns <code>null</code> if it could not be found.
+	* Returns the d d m template with the primary key or returns <code>null</code> if it could not be found.
 	*
-	* @param templateId the primary key of the d d m template to find
+	* @param templateId the primary key of the d d m template
 	* @return the d d m template, or <code>null</code> if a d d m template with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -106,9 +106,9 @@ public interface DDMTemplatePersistence extends BasePersistence<DDMTemplate> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds all the d d m templates where uuid = &#63;.
+	* Returns all the d d m templates where uuid = &#63;.
 	*
-	* @param uuid the uuid to search with
+	* @param uuid the uuid
 	* @return the matching d d m templates
 	* @throws SystemException if a system exception occurred
 	*/
@@ -117,15 +117,15 @@ public interface DDMTemplatePersistence extends BasePersistence<DDMTemplate> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds a range of all the d d m templates where uuid = &#63;.
+	* Returns a range of all the d d m templates where uuid = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param uuid the uuid to search with
-	* @param start the lower bound of the range of d d m templates to return
-	* @param end the upper bound of the range of d d m templates to return (not inclusive)
+	* @param uuid the uuid
+	* @param start the lower bound of the range of d d m templates
+	* @param end the upper bound of the range of d d m templates (not inclusive)
 	* @return the range of matching d d m templates
 	* @throws SystemException if a system exception occurred
 	*/
@@ -134,15 +134,15 @@ public interface DDMTemplatePersistence extends BasePersistence<DDMTemplate> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds an ordered range of all the d d m templates where uuid = &#63;.
+	* Returns an ordered range of all the d d m templates where uuid = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param uuid the uuid to search with
-	* @param start the lower bound of the range of d d m templates to return
-	* @param end the upper bound of the range of d d m templates to return (not inclusive)
+	* @param uuid the uuid
+	* @param start the lower bound of the range of d d m templates
+	* @param end the upper bound of the range of d d m templates (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching d d m templates
 	* @throws SystemException if a system exception occurred
@@ -153,13 +153,13 @@ public interface DDMTemplatePersistence extends BasePersistence<DDMTemplate> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the first d d m template in the ordered set where uuid = &#63;.
+	* Returns the first d d m template in the ordered set where uuid = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param uuid the uuid to search with
+	* @param uuid the uuid
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching d d m template
 	* @throws com.liferay.portlet.dynamicdatamapping.NoSuchTemplateException if a matching d d m template could not be found
@@ -172,13 +172,13 @@ public interface DDMTemplatePersistence extends BasePersistence<DDMTemplate> {
 			com.liferay.portlet.dynamicdatamapping.NoSuchTemplateException;
 
 	/**
-	* Finds the last d d m template in the ordered set where uuid = &#63;.
+	* Returns the last d d m template in the ordered set where uuid = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param uuid the uuid to search with
+	* @param uuid the uuid
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching d d m template
 	* @throws com.liferay.portlet.dynamicdatamapping.NoSuchTemplateException if a matching d d m template could not be found
@@ -191,14 +191,14 @@ public interface DDMTemplatePersistence extends BasePersistence<DDMTemplate> {
 			com.liferay.portlet.dynamicdatamapping.NoSuchTemplateException;
 
 	/**
-	* Finds the d d m templates before and after the current d d m template in the ordered set where uuid = &#63;.
+	* Returns the d d m templates before and after the current d d m template in the ordered set where uuid = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
 	* @param templateId the primary key of the current d d m template
-	* @param uuid the uuid to search with
+	* @param uuid the uuid
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next d d m template
 	* @throws com.liferay.portlet.dynamicdatamapping.NoSuchTemplateException if a d d m template with the primary key could not be found
@@ -211,10 +211,10 @@ public interface DDMTemplatePersistence extends BasePersistence<DDMTemplate> {
 			com.liferay.portlet.dynamicdatamapping.NoSuchTemplateException;
 
 	/**
-	* Finds the d d m template where uuid = &#63; and groupId = &#63; or throws a {@link com.liferay.portlet.dynamicdatamapping.NoSuchTemplateException} if it could not be found.
+	* Returns the d d m template where uuid = &#63; and groupId = &#63; or throws a {@link com.liferay.portlet.dynamicdatamapping.NoSuchTemplateException} if it could not be found.
 	*
-	* @param uuid the uuid to search with
-	* @param groupId the group ID to search with
+	* @param uuid the uuid
+	* @param groupId the group ID
 	* @return the matching d d m template
 	* @throws com.liferay.portlet.dynamicdatamapping.NoSuchTemplateException if a matching d d m template could not be found
 	* @throws SystemException if a system exception occurred
@@ -225,10 +225,10 @@ public interface DDMTemplatePersistence extends BasePersistence<DDMTemplate> {
 			com.liferay.portlet.dynamicdatamapping.NoSuchTemplateException;
 
 	/**
-	* Finds the d d m template where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	* Returns the d d m template where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	*
-	* @param uuid the uuid to search with
-	* @param groupId the group ID to search with
+	* @param uuid the uuid
+	* @param groupId the group ID
 	* @return the matching d d m template, or <code>null</code> if a matching d d m template could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -237,10 +237,10 @@ public interface DDMTemplatePersistence extends BasePersistence<DDMTemplate> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the d d m template where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	* Returns the d d m template where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
-	* @param uuid the uuid to search with
-	* @param groupId the group ID to search with
+	* @param uuid the uuid
+	* @param groupId the group ID
 	* @return the matching d d m template, or <code>null</code> if a matching d d m template could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -249,9 +249,9 @@ public interface DDMTemplatePersistence extends BasePersistence<DDMTemplate> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds all the d d m templates where groupId = &#63;.
+	* Returns all the d d m templates where groupId = &#63;.
 	*
-	* @param groupId the group ID to search with
+	* @param groupId the group ID
 	* @return the matching d d m templates
 	* @throws SystemException if a system exception occurred
 	*/
@@ -260,15 +260,15 @@ public interface DDMTemplatePersistence extends BasePersistence<DDMTemplate> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds a range of all the d d m templates where groupId = &#63;.
+	* Returns a range of all the d d m templates where groupId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param start the lower bound of the range of d d m templates to return
-	* @param end the upper bound of the range of d d m templates to return (not inclusive)
+	* @param groupId the group ID
+	* @param start the lower bound of the range of d d m templates
+	* @param end the upper bound of the range of d d m templates (not inclusive)
 	* @return the range of matching d d m templates
 	* @throws SystemException if a system exception occurred
 	*/
@@ -277,15 +277,15 @@ public interface DDMTemplatePersistence extends BasePersistence<DDMTemplate> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds an ordered range of all the d d m templates where groupId = &#63;.
+	* Returns an ordered range of all the d d m templates where groupId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param start the lower bound of the range of d d m templates to return
-	* @param end the upper bound of the range of d d m templates to return (not inclusive)
+	* @param groupId the group ID
+	* @param start the lower bound of the range of d d m templates
+	* @param end the upper bound of the range of d d m templates (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching d d m templates
 	* @throws SystemException if a system exception occurred
@@ -296,13 +296,13 @@ public interface DDMTemplatePersistence extends BasePersistence<DDMTemplate> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the first d d m template in the ordered set where groupId = &#63;.
+	* Returns the first d d m template in the ordered set where groupId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
+	* @param groupId the group ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching d d m template
 	* @throws com.liferay.portlet.dynamicdatamapping.NoSuchTemplateException if a matching d d m template could not be found
@@ -315,13 +315,13 @@ public interface DDMTemplatePersistence extends BasePersistence<DDMTemplate> {
 			com.liferay.portlet.dynamicdatamapping.NoSuchTemplateException;
 
 	/**
-	* Finds the last d d m template in the ordered set where groupId = &#63;.
+	* Returns the last d d m template in the ordered set where groupId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
+	* @param groupId the group ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching d d m template
 	* @throws com.liferay.portlet.dynamicdatamapping.NoSuchTemplateException if a matching d d m template could not be found
@@ -334,14 +334,14 @@ public interface DDMTemplatePersistence extends BasePersistence<DDMTemplate> {
 			com.liferay.portlet.dynamicdatamapping.NoSuchTemplateException;
 
 	/**
-	* Finds the d d m templates before and after the current d d m template in the ordered set where groupId = &#63;.
+	* Returns the d d m templates before and after the current d d m template in the ordered set where groupId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
 	* @param templateId the primary key of the current d d m template
-	* @param groupId the group ID to search with
+	* @param groupId the group ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next d d m template
 	* @throws com.liferay.portlet.dynamicdatamapping.NoSuchTemplateException if a d d m template with the primary key could not be found
@@ -354,9 +354,9 @@ public interface DDMTemplatePersistence extends BasePersistence<DDMTemplate> {
 			com.liferay.portlet.dynamicdatamapping.NoSuchTemplateException;
 
 	/**
-	* Filters by the user's permissions and finds all the d d m templates where groupId = &#63;.
+	* Returns all the d d m templates that the user has permission to view where groupId = &#63;.
 	*
-	* @param groupId the group ID to search with
+	* @param groupId the group ID
 	* @return the matching d d m templates that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -365,15 +365,15 @@ public interface DDMTemplatePersistence extends BasePersistence<DDMTemplate> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Filters by the user's permissions and finds a range of all the d d m templates where groupId = &#63;.
+	* Returns a range of all the d d m templates that the user has permission to view where groupId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param start the lower bound of the range of d d m templates to return
-	* @param end the upper bound of the range of d d m templates to return (not inclusive)
+	* @param groupId the group ID
+	* @param start the lower bound of the range of d d m templates
+	* @param end the upper bound of the range of d d m templates (not inclusive)
 	* @return the range of matching d d m templates that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -382,15 +382,15 @@ public interface DDMTemplatePersistence extends BasePersistence<DDMTemplate> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Filters by the user's permissions and finds an ordered range of all the d d m templates where groupId = &#63;.
+	* Returns an ordered range of all the d d m templates that the user has permissions to view where groupId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param start the lower bound of the range of d d m templates to return
-	* @param end the upper bound of the range of d d m templates to return (not inclusive)
+	* @param groupId the group ID
+	* @param start the lower bound of the range of d d m templates
+	* @param end the upper bound of the range of d d m templates (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching d d m templates that the user has permission to view
 	* @throws SystemException if a system exception occurred
@@ -401,14 +401,10 @@ public interface DDMTemplatePersistence extends BasePersistence<DDMTemplate> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Filters the d d m templates before and after the current d d m template in the ordered set where groupId = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
-	* </p>
+	* Returns the d d m templates before and after the current d d m template in the ordered set of d d m templates that the user has permission to view where groupId = &#63;.
 	*
 	* @param templateId the primary key of the current d d m template
-	* @param groupId the group ID to search with
+	* @param groupId the group ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next d d m template
 	* @throws com.liferay.portlet.dynamicdatamapping.NoSuchTemplateException if a d d m template with the primary key could not be found
@@ -421,9 +417,9 @@ public interface DDMTemplatePersistence extends BasePersistence<DDMTemplate> {
 			com.liferay.portlet.dynamicdatamapping.NoSuchTemplateException;
 
 	/**
-	* Finds all the d d m templates where structureId = &#63;.
+	* Returns all the d d m templates where structureId = &#63;.
 	*
-	* @param structureId the structure ID to search with
+	* @param structureId the structure ID
 	* @return the matching d d m templates
 	* @throws SystemException if a system exception occurred
 	*/
@@ -432,15 +428,15 @@ public interface DDMTemplatePersistence extends BasePersistence<DDMTemplate> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds a range of all the d d m templates where structureId = &#63;.
+	* Returns a range of all the d d m templates where structureId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param structureId the structure ID to search with
-	* @param start the lower bound of the range of d d m templates to return
-	* @param end the upper bound of the range of d d m templates to return (not inclusive)
+	* @param structureId the structure ID
+	* @param start the lower bound of the range of d d m templates
+	* @param end the upper bound of the range of d d m templates (not inclusive)
 	* @return the range of matching d d m templates
 	* @throws SystemException if a system exception occurred
 	*/
@@ -449,15 +445,15 @@ public interface DDMTemplatePersistence extends BasePersistence<DDMTemplate> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds an ordered range of all the d d m templates where structureId = &#63;.
+	* Returns an ordered range of all the d d m templates where structureId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param structureId the structure ID to search with
-	* @param start the lower bound of the range of d d m templates to return
-	* @param end the upper bound of the range of d d m templates to return (not inclusive)
+	* @param structureId the structure ID
+	* @param start the lower bound of the range of d d m templates
+	* @param end the upper bound of the range of d d m templates (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching d d m templates
 	* @throws SystemException if a system exception occurred
@@ -468,13 +464,13 @@ public interface DDMTemplatePersistence extends BasePersistence<DDMTemplate> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the first d d m template in the ordered set where structureId = &#63;.
+	* Returns the first d d m template in the ordered set where structureId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param structureId the structure ID to search with
+	* @param structureId the structure ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching d d m template
 	* @throws com.liferay.portlet.dynamicdatamapping.NoSuchTemplateException if a matching d d m template could not be found
@@ -487,13 +483,13 @@ public interface DDMTemplatePersistence extends BasePersistence<DDMTemplate> {
 			com.liferay.portlet.dynamicdatamapping.NoSuchTemplateException;
 
 	/**
-	* Finds the last d d m template in the ordered set where structureId = &#63;.
+	* Returns the last d d m template in the ordered set where structureId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param structureId the structure ID to search with
+	* @param structureId the structure ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching d d m template
 	* @throws com.liferay.portlet.dynamicdatamapping.NoSuchTemplateException if a matching d d m template could not be found
@@ -506,14 +502,14 @@ public interface DDMTemplatePersistence extends BasePersistence<DDMTemplate> {
 			com.liferay.portlet.dynamicdatamapping.NoSuchTemplateException;
 
 	/**
-	* Finds the d d m templates before and after the current d d m template in the ordered set where structureId = &#63;.
+	* Returns the d d m templates before and after the current d d m template in the ordered set where structureId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
 	* @param templateId the primary key of the current d d m template
-	* @param structureId the structure ID to search with
+	* @param structureId the structure ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next d d m template
 	* @throws com.liferay.portlet.dynamicdatamapping.NoSuchTemplateException if a d d m template with the primary key could not be found
@@ -526,9 +522,9 @@ public interface DDMTemplatePersistence extends BasePersistence<DDMTemplate> {
 			com.liferay.portlet.dynamicdatamapping.NoSuchTemplateException;
 
 	/**
-	* Finds all the d d m templates where type = &#63;.
+	* Returns all the d d m templates where type = &#63;.
 	*
-	* @param type the type to search with
+	* @param type the type
 	* @return the matching d d m templates
 	* @throws SystemException if a system exception occurred
 	*/
@@ -537,15 +533,15 @@ public interface DDMTemplatePersistence extends BasePersistence<DDMTemplate> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds a range of all the d d m templates where type = &#63;.
+	* Returns a range of all the d d m templates where type = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param type the type to search with
-	* @param start the lower bound of the range of d d m templates to return
-	* @param end the upper bound of the range of d d m templates to return (not inclusive)
+	* @param type the type
+	* @param start the lower bound of the range of d d m templates
+	* @param end the upper bound of the range of d d m templates (not inclusive)
 	* @return the range of matching d d m templates
 	* @throws SystemException if a system exception occurred
 	*/
@@ -554,15 +550,15 @@ public interface DDMTemplatePersistence extends BasePersistence<DDMTemplate> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds an ordered range of all the d d m templates where type = &#63;.
+	* Returns an ordered range of all the d d m templates where type = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param type the type to search with
-	* @param start the lower bound of the range of d d m templates to return
-	* @param end the upper bound of the range of d d m templates to return (not inclusive)
+	* @param type the type
+	* @param start the lower bound of the range of d d m templates
+	* @param end the upper bound of the range of d d m templates (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching d d m templates
 	* @throws SystemException if a system exception occurred
@@ -573,13 +569,13 @@ public interface DDMTemplatePersistence extends BasePersistence<DDMTemplate> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the first d d m template in the ordered set where type = &#63;.
+	* Returns the first d d m template in the ordered set where type = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param type the type to search with
+	* @param type the type
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching d d m template
 	* @throws com.liferay.portlet.dynamicdatamapping.NoSuchTemplateException if a matching d d m template could not be found
@@ -592,13 +588,13 @@ public interface DDMTemplatePersistence extends BasePersistence<DDMTemplate> {
 			com.liferay.portlet.dynamicdatamapping.NoSuchTemplateException;
 
 	/**
-	* Finds the last d d m template in the ordered set where type = &#63;.
+	* Returns the last d d m template in the ordered set where type = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param type the type to search with
+	* @param type the type
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching d d m template
 	* @throws com.liferay.portlet.dynamicdatamapping.NoSuchTemplateException if a matching d d m template could not be found
@@ -611,14 +607,14 @@ public interface DDMTemplatePersistence extends BasePersistence<DDMTemplate> {
 			com.liferay.portlet.dynamicdatamapping.NoSuchTemplateException;
 
 	/**
-	* Finds the d d m templates before and after the current d d m template in the ordered set where type = &#63;.
+	* Returns the d d m templates before and after the current d d m template in the ordered set where type = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
 	* @param templateId the primary key of the current d d m template
-	* @param type the type to search with
+	* @param type the type
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next d d m template
 	* @throws com.liferay.portlet.dynamicdatamapping.NoSuchTemplateException if a d d m template with the primary key could not be found
@@ -631,9 +627,9 @@ public interface DDMTemplatePersistence extends BasePersistence<DDMTemplate> {
 			com.liferay.portlet.dynamicdatamapping.NoSuchTemplateException;
 
 	/**
-	* Finds all the d d m templates where language = &#63;.
+	* Returns all the d d m templates where language = &#63;.
 	*
-	* @param language the language to search with
+	* @param language the language
 	* @return the matching d d m templates
 	* @throws SystemException if a system exception occurred
 	*/
@@ -642,15 +638,15 @@ public interface DDMTemplatePersistence extends BasePersistence<DDMTemplate> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds a range of all the d d m templates where language = &#63;.
+	* Returns a range of all the d d m templates where language = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param language the language to search with
-	* @param start the lower bound of the range of d d m templates to return
-	* @param end the upper bound of the range of d d m templates to return (not inclusive)
+	* @param language the language
+	* @param start the lower bound of the range of d d m templates
+	* @param end the upper bound of the range of d d m templates (not inclusive)
 	* @return the range of matching d d m templates
 	* @throws SystemException if a system exception occurred
 	*/
@@ -659,15 +655,15 @@ public interface DDMTemplatePersistence extends BasePersistence<DDMTemplate> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds an ordered range of all the d d m templates where language = &#63;.
+	* Returns an ordered range of all the d d m templates where language = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param language the language to search with
-	* @param start the lower bound of the range of d d m templates to return
-	* @param end the upper bound of the range of d d m templates to return (not inclusive)
+	* @param language the language
+	* @param start the lower bound of the range of d d m templates
+	* @param end the upper bound of the range of d d m templates (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching d d m templates
 	* @throws SystemException if a system exception occurred
@@ -678,13 +674,13 @@ public interface DDMTemplatePersistence extends BasePersistence<DDMTemplate> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the first d d m template in the ordered set where language = &#63;.
+	* Returns the first d d m template in the ordered set where language = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param language the language to search with
+	* @param language the language
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching d d m template
 	* @throws com.liferay.portlet.dynamicdatamapping.NoSuchTemplateException if a matching d d m template could not be found
@@ -697,13 +693,13 @@ public interface DDMTemplatePersistence extends BasePersistence<DDMTemplate> {
 			com.liferay.portlet.dynamicdatamapping.NoSuchTemplateException;
 
 	/**
-	* Finds the last d d m template in the ordered set where language = &#63;.
+	* Returns the last d d m template in the ordered set where language = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param language the language to search with
+	* @param language the language
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching d d m template
 	* @throws com.liferay.portlet.dynamicdatamapping.NoSuchTemplateException if a matching d d m template could not be found
@@ -716,14 +712,14 @@ public interface DDMTemplatePersistence extends BasePersistence<DDMTemplate> {
 			com.liferay.portlet.dynamicdatamapping.NoSuchTemplateException;
 
 	/**
-	* Finds the d d m templates before and after the current d d m template in the ordered set where language = &#63;.
+	* Returns the d d m templates before and after the current d d m template in the ordered set where language = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
 	* @param templateId the primary key of the current d d m template
-	* @param language the language to search with
+	* @param language the language
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next d d m template
 	* @throws com.liferay.portlet.dynamicdatamapping.NoSuchTemplateException if a d d m template with the primary key could not be found
@@ -736,10 +732,10 @@ public interface DDMTemplatePersistence extends BasePersistence<DDMTemplate> {
 			com.liferay.portlet.dynamicdatamapping.NoSuchTemplateException;
 
 	/**
-	* Finds all the d d m templates where structureId = &#63; and type = &#63;.
+	* Returns all the d d m templates where structureId = &#63; and type = &#63;.
 	*
-	* @param structureId the structure ID to search with
-	* @param type the type to search with
+	* @param structureId the structure ID
+	* @param type the type
 	* @return the matching d d m templates
 	* @throws SystemException if a system exception occurred
 	*/
@@ -748,16 +744,16 @@ public interface DDMTemplatePersistence extends BasePersistence<DDMTemplate> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds a range of all the d d m templates where structureId = &#63; and type = &#63;.
+	* Returns a range of all the d d m templates where structureId = &#63; and type = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param structureId the structure ID to search with
-	* @param type the type to search with
-	* @param start the lower bound of the range of d d m templates to return
-	* @param end the upper bound of the range of d d m templates to return (not inclusive)
+	* @param structureId the structure ID
+	* @param type the type
+	* @param start the lower bound of the range of d d m templates
+	* @param end the upper bound of the range of d d m templates (not inclusive)
 	* @return the range of matching d d m templates
 	* @throws SystemException if a system exception occurred
 	*/
@@ -766,16 +762,16 @@ public interface DDMTemplatePersistence extends BasePersistence<DDMTemplate> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds an ordered range of all the d d m templates where structureId = &#63; and type = &#63;.
+	* Returns an ordered range of all the d d m templates where structureId = &#63; and type = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param structureId the structure ID to search with
-	* @param type the type to search with
-	* @param start the lower bound of the range of d d m templates to return
-	* @param end the upper bound of the range of d d m templates to return (not inclusive)
+	* @param structureId the structure ID
+	* @param type the type
+	* @param start the lower bound of the range of d d m templates
+	* @param end the upper bound of the range of d d m templates (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching d d m templates
 	* @throws SystemException if a system exception occurred
@@ -786,14 +782,14 @@ public interface DDMTemplatePersistence extends BasePersistence<DDMTemplate> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the first d d m template in the ordered set where structureId = &#63; and type = &#63;.
+	* Returns the first d d m template in the ordered set where structureId = &#63; and type = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param structureId the structure ID to search with
-	* @param type the type to search with
+	* @param structureId the structure ID
+	* @param type the type
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching d d m template
 	* @throws com.liferay.portlet.dynamicdatamapping.NoSuchTemplateException if a matching d d m template could not be found
@@ -806,14 +802,14 @@ public interface DDMTemplatePersistence extends BasePersistence<DDMTemplate> {
 			com.liferay.portlet.dynamicdatamapping.NoSuchTemplateException;
 
 	/**
-	* Finds the last d d m template in the ordered set where structureId = &#63; and type = &#63;.
+	* Returns the last d d m template in the ordered set where structureId = &#63; and type = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param structureId the structure ID to search with
-	* @param type the type to search with
+	* @param structureId the structure ID
+	* @param type the type
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching d d m template
 	* @throws com.liferay.portlet.dynamicdatamapping.NoSuchTemplateException if a matching d d m template could not be found
@@ -826,15 +822,15 @@ public interface DDMTemplatePersistence extends BasePersistence<DDMTemplate> {
 			com.liferay.portlet.dynamicdatamapping.NoSuchTemplateException;
 
 	/**
-	* Finds the d d m templates before and after the current d d m template in the ordered set where structureId = &#63; and type = &#63;.
+	* Returns the d d m templates before and after the current d d m template in the ordered set where structureId = &#63; and type = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
 	* @param templateId the primary key of the current d d m template
-	* @param structureId the structure ID to search with
-	* @param type the type to search with
+	* @param structureId the structure ID
+	* @param type the type
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next d d m template
 	* @throws com.liferay.portlet.dynamicdatamapping.NoSuchTemplateException if a d d m template with the primary key could not be found
@@ -847,7 +843,7 @@ public interface DDMTemplatePersistence extends BasePersistence<DDMTemplate> {
 			com.liferay.portlet.dynamicdatamapping.NoSuchTemplateException;
 
 	/**
-	* Finds all the d d m templates.
+	* Returns all the d d m templates.
 	*
 	* @return the d d m templates
 	* @throws SystemException if a system exception occurred
@@ -856,14 +852,14 @@ public interface DDMTemplatePersistence extends BasePersistence<DDMTemplate> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds a range of all the d d m templates.
+	* Returns a range of all the d d m templates.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of d d m templates to return
-	* @param end the upper bound of the range of d d m templates to return (not inclusive)
+	* @param start the lower bound of the range of d d m templates
+	* @param end the upper bound of the range of d d m templates (not inclusive)
 	* @return the range of d d m templates
 	* @throws SystemException if a system exception occurred
 	*/
@@ -872,14 +868,14 @@ public interface DDMTemplatePersistence extends BasePersistence<DDMTemplate> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds an ordered range of all the d d m templates.
+	* Returns an ordered range of all the d d m templates.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of d d m templates to return
-	* @param end the upper bound of the range of d d m templates to return (not inclusive)
+	* @param start the lower bound of the range of d d m templates
+	* @param end the upper bound of the range of d d m templates (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of d d m templates
 	* @throws SystemException if a system exception occurred
@@ -892,7 +888,7 @@ public interface DDMTemplatePersistence extends BasePersistence<DDMTemplate> {
 	/**
 	* Removes all the d d m templates where uuid = &#63; from the database.
 	*
-	* @param uuid the uuid to search with
+	* @param uuid the uuid
 	* @throws SystemException if a system exception occurred
 	*/
 	public void removeByUuid(java.lang.String uuid)
@@ -901,8 +897,8 @@ public interface DDMTemplatePersistence extends BasePersistence<DDMTemplate> {
 	/**
 	* Removes the d d m template where uuid = &#63; and groupId = &#63; from the database.
 	*
-	* @param uuid the uuid to search with
-	* @param groupId the group ID to search with
+	* @param uuid the uuid
+	* @param groupId the group ID
 	* @throws SystemException if a system exception occurred
 	*/
 	public void removeByUUID_G(java.lang.String uuid, long groupId)
@@ -912,7 +908,7 @@ public interface DDMTemplatePersistence extends BasePersistence<DDMTemplate> {
 	/**
 	* Removes all the d d m templates where groupId = &#63; from the database.
 	*
-	* @param groupId the group ID to search with
+	* @param groupId the group ID
 	* @throws SystemException if a system exception occurred
 	*/
 	public void removeByGroupId(long groupId)
@@ -921,7 +917,7 @@ public interface DDMTemplatePersistence extends BasePersistence<DDMTemplate> {
 	/**
 	* Removes all the d d m templates where structureId = &#63; from the database.
 	*
-	* @param structureId the structure ID to search with
+	* @param structureId the structure ID
 	* @throws SystemException if a system exception occurred
 	*/
 	public void removeByStructureId(long structureId)
@@ -930,7 +926,7 @@ public interface DDMTemplatePersistence extends BasePersistence<DDMTemplate> {
 	/**
 	* Removes all the d d m templates where type = &#63; from the database.
 	*
-	* @param type the type to search with
+	* @param type the type
 	* @throws SystemException if a system exception occurred
 	*/
 	public void removeByType(java.lang.String type)
@@ -939,7 +935,7 @@ public interface DDMTemplatePersistence extends BasePersistence<DDMTemplate> {
 	/**
 	* Removes all the d d m templates where language = &#63; from the database.
 	*
-	* @param language the language to search with
+	* @param language the language
 	* @throws SystemException if a system exception occurred
 	*/
 	public void removeByLanguage(java.lang.String language)
@@ -948,8 +944,8 @@ public interface DDMTemplatePersistence extends BasePersistence<DDMTemplate> {
 	/**
 	* Removes all the d d m templates where structureId = &#63; and type = &#63; from the database.
 	*
-	* @param structureId the structure ID to search with
-	* @param type the type to search with
+	* @param structureId the structure ID
+	* @param type the type
 	* @throws SystemException if a system exception occurred
 	*/
 	public void removeByS_T(long structureId, java.lang.String type)
@@ -964,9 +960,9 @@ public interface DDMTemplatePersistence extends BasePersistence<DDMTemplate> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Counts all the d d m templates where uuid = &#63;.
+	* Returns the number of d d m templates where uuid = &#63;.
 	*
-	* @param uuid the uuid to search with
+	* @param uuid the uuid
 	* @return the number of matching d d m templates
 	* @throws SystemException if a system exception occurred
 	*/
@@ -974,10 +970,10 @@ public interface DDMTemplatePersistence extends BasePersistence<DDMTemplate> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Counts all the d d m templates where uuid = &#63; and groupId = &#63;.
+	* Returns the number of d d m templates where uuid = &#63; and groupId = &#63;.
 	*
-	* @param uuid the uuid to search with
-	* @param groupId the group ID to search with
+	* @param uuid the uuid
+	* @param groupId the group ID
 	* @return the number of matching d d m templates
 	* @throws SystemException if a system exception occurred
 	*/
@@ -985,9 +981,9 @@ public interface DDMTemplatePersistence extends BasePersistence<DDMTemplate> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Counts all the d d m templates where groupId = &#63;.
+	* Returns the number of d d m templates where groupId = &#63;.
 	*
-	* @param groupId the group ID to search with
+	* @param groupId the group ID
 	* @return the number of matching d d m templates
 	* @throws SystemException if a system exception occurred
 	*/
@@ -995,9 +991,9 @@ public interface DDMTemplatePersistence extends BasePersistence<DDMTemplate> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Filters by the user's permissions and counts all the d d m templates where groupId = &#63;.
+	* Returns the number of d d m templates that the user has permission to view where groupId = &#63;.
 	*
-	* @param groupId the group ID to search with
+	* @param groupId the group ID
 	* @return the number of matching d d m templates that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1005,9 +1001,9 @@ public interface DDMTemplatePersistence extends BasePersistence<DDMTemplate> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Counts all the d d m templates where structureId = &#63;.
+	* Returns the number of d d m templates where structureId = &#63;.
 	*
-	* @param structureId the structure ID to search with
+	* @param structureId the structure ID
 	* @return the number of matching d d m templates
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1015,9 +1011,9 @@ public interface DDMTemplatePersistence extends BasePersistence<DDMTemplate> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Counts all the d d m templates where type = &#63;.
+	* Returns the number of d d m templates where type = &#63;.
 	*
-	* @param type the type to search with
+	* @param type the type
 	* @return the number of matching d d m templates
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1025,9 +1021,9 @@ public interface DDMTemplatePersistence extends BasePersistence<DDMTemplate> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Counts all the d d m templates where language = &#63;.
+	* Returns the number of d d m templates where language = &#63;.
 	*
-	* @param language the language to search with
+	* @param language the language
 	* @return the number of matching d d m templates
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1035,10 +1031,10 @@ public interface DDMTemplatePersistence extends BasePersistence<DDMTemplate> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Counts all the d d m templates where structureId = &#63; and type = &#63;.
+	* Returns the number of d d m templates where structureId = &#63; and type = &#63;.
 	*
-	* @param structureId the structure ID to search with
-	* @param type the type to search with
+	* @param structureId the structure ID
+	* @param type the type
 	* @return the number of matching d d m templates
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1046,7 +1042,7 @@ public interface DDMTemplatePersistence extends BasePersistence<DDMTemplate> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Counts all the d d m templates.
+	* Returns the number of d d m templates.
 	*
 	* @return the number of d d m templates
 	* @throws SystemException if a system exception occurred

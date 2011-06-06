@@ -38,7 +38,7 @@ public class WorkflowDefinitionLinkWrapper implements WorkflowDefinitionLink {
 	}
 
 	/**
-	* Gets the primary key of this workflow definition link.
+	* Returns the primary key of this workflow definition link.
 	*
 	* @return the primary key of this workflow definition link
 	*/
@@ -47,7 +47,7 @@ public class WorkflowDefinitionLinkWrapper implements WorkflowDefinitionLink {
 	}
 
 	/**
-	* Sets the primary key of this workflow definition link
+	* Sets the primary key of this workflow definition link.
 	*
 	* @param primaryKey the primary key of this workflow definition link
 	*/
@@ -56,7 +56,7 @@ public class WorkflowDefinitionLinkWrapper implements WorkflowDefinitionLink {
 	}
 
 	/**
-	* Gets the workflow definition link ID of this workflow definition link.
+	* Returns the workflow definition link ID of this workflow definition link.
 	*
 	* @return the workflow definition link ID of this workflow definition link
 	*/
@@ -74,7 +74,7 @@ public class WorkflowDefinitionLinkWrapper implements WorkflowDefinitionLink {
 	}
 
 	/**
-	* Gets the group ID of this workflow definition link.
+	* Returns the group ID of this workflow definition link.
 	*
 	* @return the group ID of this workflow definition link
 	*/
@@ -92,7 +92,7 @@ public class WorkflowDefinitionLinkWrapper implements WorkflowDefinitionLink {
 	}
 
 	/**
-	* Gets the company ID of this workflow definition link.
+	* Returns the company ID of this workflow definition link.
 	*
 	* @return the company ID of this workflow definition link
 	*/
@@ -110,7 +110,7 @@ public class WorkflowDefinitionLinkWrapper implements WorkflowDefinitionLink {
 	}
 
 	/**
-	* Gets the user ID of this workflow definition link.
+	* Returns the user ID of this workflow definition link.
 	*
 	* @return the user ID of this workflow definition link
 	*/
@@ -128,7 +128,7 @@ public class WorkflowDefinitionLinkWrapper implements WorkflowDefinitionLink {
 	}
 
 	/**
-	* Gets the user uuid of this workflow definition link.
+	* Returns the user uuid of this workflow definition link.
 	*
 	* @return the user uuid of this workflow definition link
 	* @throws SystemException if a system exception occurred
@@ -148,7 +148,7 @@ public class WorkflowDefinitionLinkWrapper implements WorkflowDefinitionLink {
 	}
 
 	/**
-	* Gets the user name of this workflow definition link.
+	* Returns the user name of this workflow definition link.
 	*
 	* @return the user name of this workflow definition link
 	*/
@@ -166,7 +166,7 @@ public class WorkflowDefinitionLinkWrapper implements WorkflowDefinitionLink {
 	}
 
 	/**
-	* Gets the create date of this workflow definition link.
+	* Returns the create date of this workflow definition link.
 	*
 	* @return the create date of this workflow definition link
 	*/
@@ -184,7 +184,7 @@ public class WorkflowDefinitionLinkWrapper implements WorkflowDefinitionLink {
 	}
 
 	/**
-	* Gets the modified date of this workflow definition link.
+	* Returns the modified date of this workflow definition link.
 	*
 	* @return the modified date of this workflow definition link
 	*/
@@ -202,16 +202,16 @@ public class WorkflowDefinitionLinkWrapper implements WorkflowDefinitionLink {
 	}
 
 	/**
-	* Gets the class name of the model instance this workflow definition link is polymorphically associated with.
+	* Returns the fully qualified class name of this workflow definition link.
 	*
-	* @return the class name of the model instance this workflow definition link is polymorphically associated with
+	* @return the fully qualified class name of this workflow definition link
 	*/
 	public java.lang.String getClassName() {
 		return _workflowDefinitionLink.getClassName();
 	}
 
 	/**
-	* Gets the class name ID of this workflow definition link.
+	* Returns the class name ID of this workflow definition link.
 	*
 	* @return the class name ID of this workflow definition link
 	*/
@@ -229,7 +229,7 @@ public class WorkflowDefinitionLinkWrapper implements WorkflowDefinitionLink {
 	}
 
 	/**
-	* Gets the workflow definition name of this workflow definition link.
+	* Returns the workflow definition name of this workflow definition link.
 	*
 	* @return the workflow definition name of this workflow definition link
 	*/
@@ -248,7 +248,7 @@ public class WorkflowDefinitionLinkWrapper implements WorkflowDefinitionLink {
 	}
 
 	/**
-	* Gets the workflow definition version of this workflow definition link.
+	* Returns the workflow definition version of this workflow definition link.
 	*
 	* @return the workflow definition version of this workflow definition link
 	*/

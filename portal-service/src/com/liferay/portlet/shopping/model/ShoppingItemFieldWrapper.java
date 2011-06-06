@@ -37,7 +37,7 @@ public class ShoppingItemFieldWrapper implements ShoppingItemField {
 	}
 
 	/**
-	* Gets the primary key of this shopping item field.
+	* Returns the primary key of this shopping item field.
 	*
 	* @return the primary key of this shopping item field
 	*/
@@ -46,7 +46,7 @@ public class ShoppingItemFieldWrapper implements ShoppingItemField {
 	}
 
 	/**
-	* Sets the primary key of this shopping item field
+	* Sets the primary key of this shopping item field.
 	*
 	* @param primaryKey the primary key of this shopping item field
 	*/
@@ -55,7 +55,7 @@ public class ShoppingItemFieldWrapper implements ShoppingItemField {
 	}
 
 	/**
-	* Gets the item field ID of this shopping item field.
+	* Returns the item field ID of this shopping item field.
 	*
 	* @return the item field ID of this shopping item field
 	*/
@@ -73,7 +73,7 @@ public class ShoppingItemFieldWrapper implements ShoppingItemField {
 	}
 
 	/**
-	* Gets the item ID of this shopping item field.
+	* Returns the item ID of this shopping item field.
 	*
 	* @return the item ID of this shopping item field
 	*/
@@ -91,7 +91,7 @@ public class ShoppingItemFieldWrapper implements ShoppingItemField {
 	}
 
 	/**
-	* Gets the name of this shopping item field.
+	* Returns the name of this shopping item field.
 	*
 	* @return the name of this shopping item field
 	*/
@@ -109,7 +109,7 @@ public class ShoppingItemFieldWrapper implements ShoppingItemField {
 	}
 
 	/**
-	* Gets the values of this shopping item field.
+	* Returns the values of this shopping item field.
 	*
 	* @return the values of this shopping item field
 	*/
@@ -127,7 +127,7 @@ public class ShoppingItemFieldWrapper implements ShoppingItemField {
 	}
 
 	/**
-	* Gets the description of this shopping item field.
+	* Returns the description of this shopping item field.
 	*
 	* @return the description of this shopping item field
 	*/

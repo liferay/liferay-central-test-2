@@ -38,7 +38,7 @@ public class DLDocumentMetadataSetWrapper implements DLDocumentMetadataSet {
 	}
 
 	/**
-	* Gets the primary key of this d l document metadata set.
+	* Returns the primary key of this d l document metadata set.
 	*
 	* @return the primary key of this d l document metadata set
 	*/
@@ -47,7 +47,7 @@ public class DLDocumentMetadataSetWrapper implements DLDocumentMetadataSet {
 	}
 
 	/**
-	* Sets the primary key of this d l document metadata set
+	* Sets the primary key of this d l document metadata set.
 	*
 	* @param primaryKey the primary key of this d l document metadata set
 	*/
@@ -56,7 +56,7 @@ public class DLDocumentMetadataSetWrapper implements DLDocumentMetadataSet {
 	}
 
 	/**
-	* Gets the uuid of this d l document metadata set.
+	* Returns the uuid of this d l document metadata set.
 	*
 	* @return the uuid of this d l document metadata set
 	*/
@@ -74,7 +74,7 @@ public class DLDocumentMetadataSetWrapper implements DLDocumentMetadataSet {
 	}
 
 	/**
-	* Gets the document metadata set ID of this d l document metadata set.
+	* Returns the document metadata set ID of this d l document metadata set.
 	*
 	* @return the document metadata set ID of this d l document metadata set
 	*/
@@ -92,16 +92,16 @@ public class DLDocumentMetadataSetWrapper implements DLDocumentMetadataSet {
 	}
 
 	/**
-	* Gets the class name of the model instance this d l document metadata set is polymorphically associated with.
+	* Returns the fully qualified class name of this d l document metadata set.
 	*
-	* @return the class name of the model instance this d l document metadata set is polymorphically associated with
+	* @return the fully qualified class name of this d l document metadata set
 	*/
 	public java.lang.String getClassName() {
 		return _dlDocumentMetadataSet.getClassName();
 	}
 
 	/**
-	* Gets the class name ID of this d l document metadata set.
+	* Returns the class name ID of this d l document metadata set.
 	*
 	* @return the class name ID of this d l document metadata set
 	*/
@@ -119,7 +119,7 @@ public class DLDocumentMetadataSetWrapper implements DLDocumentMetadataSet {
 	}
 
 	/**
-	* Gets the class p k of this d l document metadata set.
+	* Returns the class p k of this d l document metadata set.
 	*
 	* @return the class p k of this d l document metadata set
 	*/
@@ -137,7 +137,7 @@ public class DLDocumentMetadataSetWrapper implements DLDocumentMetadataSet {
 	}
 
 	/**
-	* Gets the d d m structure ID of this d l document metadata set.
+	* Returns the d d m structure ID of this d l document metadata set.
 	*
 	* @return the d d m structure ID of this d l document metadata set
 	*/
@@ -155,7 +155,7 @@ public class DLDocumentMetadataSetWrapper implements DLDocumentMetadataSet {
 	}
 
 	/**
-	* Gets the document type ID of this d l document metadata set.
+	* Returns the document type ID of this d l document metadata set.
 	*
 	* @return the document type ID of this d l document metadata set
 	*/
@@ -173,7 +173,7 @@ public class DLDocumentMetadataSetWrapper implements DLDocumentMetadataSet {
 	}
 
 	/**
-	* Gets the file version ID of this d l document metadata set.
+	* Returns the file version ID of this d l document metadata set.
 	*
 	* @return the file version ID of this d l document metadata set
 	*/

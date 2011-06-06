@@ -43,21 +43,21 @@ public interface SocialEquityUserModel extends BaseModel<SocialEquityUser> {
 	 */
 
 	/**
-	 * Gets the primary key of this social equity user.
+	 * Returns the primary key of this social equity user.
 	 *
 	 * @return the primary key of this social equity user
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this social equity user
+	 * Sets the primary key of this social equity user.
 	 *
 	 * @param primaryKey the primary key of this social equity user
 	 */
 	public void setPrimaryKey(long primaryKey);
 
 	/**
-	 * Gets the equity user ID of this social equity user.
+	 * Returns the equity user ID of this social equity user.
 	 *
 	 * @return the equity user ID of this social equity user
 	 */
@@ -71,7 +71,7 @@ public interface SocialEquityUserModel extends BaseModel<SocialEquityUser> {
 	public void setEquityUserId(long equityUserId);
 
 	/**
-	 * Gets the equity user uuid of this social equity user.
+	 * Returns the equity user uuid of this social equity user.
 	 *
 	 * @return the equity user uuid of this social equity user
 	 * @throws SystemException if a system exception occurred
@@ -86,7 +86,7 @@ public interface SocialEquityUserModel extends BaseModel<SocialEquityUser> {
 	public void setEquityUserUuid(String equityUserUuid);
 
 	/**
-	 * Gets the group ID of this social equity user.
+	 * Returns the group ID of this social equity user.
 	 *
 	 * @return the group ID of this social equity user
 	 */
@@ -100,7 +100,7 @@ public interface SocialEquityUserModel extends BaseModel<SocialEquityUser> {
 	public void setGroupId(long groupId);
 
 	/**
-	 * Gets the company ID of this social equity user.
+	 * Returns the company ID of this social equity user.
 	 *
 	 * @return the company ID of this social equity user
 	 */
@@ -114,7 +114,7 @@ public interface SocialEquityUserModel extends BaseModel<SocialEquityUser> {
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the user ID of this social equity user.
+	 * Returns the user ID of this social equity user.
 	 *
 	 * @return the user ID of this social equity user
 	 */
@@ -128,7 +128,7 @@ public interface SocialEquityUserModel extends BaseModel<SocialEquityUser> {
 	public void setUserId(long userId);
 
 	/**
-	 * Gets the user uuid of this social equity user.
+	 * Returns the user uuid of this social equity user.
 	 *
 	 * @return the user uuid of this social equity user
 	 * @throws SystemException if a system exception occurred
@@ -143,7 +143,7 @@ public interface SocialEquityUserModel extends BaseModel<SocialEquityUser> {
 	public void setUserUuid(String userUuid);
 
 	/**
-	 * Gets the contribution k of this social equity user.
+	 * Returns the contribution k of this social equity user.
 	 *
 	 * @return the contribution k of this social equity user
 	 */
@@ -157,7 +157,7 @@ public interface SocialEquityUserModel extends BaseModel<SocialEquityUser> {
 	public void setContributionK(double contributionK);
 
 	/**
-	 * Gets the contribution b of this social equity user.
+	 * Returns the contribution b of this social equity user.
 	 *
 	 * @return the contribution b of this social equity user
 	 */
@@ -171,7 +171,7 @@ public interface SocialEquityUserModel extends BaseModel<SocialEquityUser> {
 	public void setContributionB(double contributionB);
 
 	/**
-	 * Gets the participation k of this social equity user.
+	 * Returns the participation k of this social equity user.
 	 *
 	 * @return the participation k of this social equity user
 	 */
@@ -185,7 +185,7 @@ public interface SocialEquityUserModel extends BaseModel<SocialEquityUser> {
 	public void setParticipationK(double participationK);
 
 	/**
-	 * Gets the participation b of this social equity user.
+	 * Returns the participation b of this social equity user.
 	 *
 	 * @return the participation b of this social equity user
 	 */
@@ -199,7 +199,7 @@ public interface SocialEquityUserModel extends BaseModel<SocialEquityUser> {
 	public void setParticipationB(double participationB);
 
 	/**
-	 * Gets the rank of this social equity user.
+	 * Returns the rank of this social equity user.
 	 *
 	 * @return the rank of this social equity user
 	 */

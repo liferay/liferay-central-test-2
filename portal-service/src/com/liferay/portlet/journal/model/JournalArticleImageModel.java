@@ -43,21 +43,21 @@ public interface JournalArticleImageModel extends BaseModel<JournalArticleImage>
 	 */
 
 	/**
-	 * Gets the primary key of this journal article image.
+	 * Returns the primary key of this journal article image.
 	 *
 	 * @return the primary key of this journal article image
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this journal article image
+	 * Sets the primary key of this journal article image.
 	 *
 	 * @param primaryKey the primary key of this journal article image
 	 */
 	public void setPrimaryKey(long primaryKey);
 
 	/**
-	 * Gets the article image ID of this journal article image.
+	 * Returns the article image ID of this journal article image.
 	 *
 	 * @return the article image ID of this journal article image
 	 */
@@ -71,7 +71,7 @@ public interface JournalArticleImageModel extends BaseModel<JournalArticleImage>
 	public void setArticleImageId(long articleImageId);
 
 	/**
-	 * Gets the group ID of this journal article image.
+	 * Returns the group ID of this journal article image.
 	 *
 	 * @return the group ID of this journal article image
 	 */
@@ -85,7 +85,7 @@ public interface JournalArticleImageModel extends BaseModel<JournalArticleImage>
 	public void setGroupId(long groupId);
 
 	/**
-	 * Gets the article ID of this journal article image.
+	 * Returns the article ID of this journal article image.
 	 *
 	 * @return the article ID of this journal article image
 	 */
@@ -100,7 +100,7 @@ public interface JournalArticleImageModel extends BaseModel<JournalArticleImage>
 	public void setArticleId(String articleId);
 
 	/**
-	 * Gets the version of this journal article image.
+	 * Returns the version of this journal article image.
 	 *
 	 * @return the version of this journal article image
 	 */
@@ -114,7 +114,7 @@ public interface JournalArticleImageModel extends BaseModel<JournalArticleImage>
 	public void setVersion(double version);
 
 	/**
-	 * Gets the el instance ID of this journal article image.
+	 * Returns the el instance ID of this journal article image.
 	 *
 	 * @return the el instance ID of this journal article image
 	 */
@@ -129,7 +129,7 @@ public interface JournalArticleImageModel extends BaseModel<JournalArticleImage>
 	public void setElInstanceId(String elInstanceId);
 
 	/**
-	 * Gets the el name of this journal article image.
+	 * Returns the el name of this journal article image.
 	 *
 	 * @return the el name of this journal article image
 	 */
@@ -144,7 +144,7 @@ public interface JournalArticleImageModel extends BaseModel<JournalArticleImage>
 	public void setElName(String elName);
 
 	/**
-	 * Gets the language ID of this journal article image.
+	 * Returns the language ID of this journal article image.
 	 *
 	 * @return the language ID of this journal article image
 	 */
@@ -159,7 +159,7 @@ public interface JournalArticleImageModel extends BaseModel<JournalArticleImage>
 	public void setLanguageId(String languageId);
 
 	/**
-	 * Gets the temp image of this journal article image.
+	 * Returns the temp image of this journal article image.
 	 *
 	 * @return the temp image of this journal article image
 	 */

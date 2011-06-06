@@ -46,21 +46,21 @@ public interface PasswordPolicyModel extends AuditedModel,
 	 */
 
 	/**
-	 * Gets the primary key of this password policy.
+	 * Returns the primary key of this password policy.
 	 *
 	 * @return the primary key of this password policy
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this password policy
+	 * Sets the primary key of this password policy.
 	 *
 	 * @param primaryKey the primary key of this password policy
 	 */
 	public void setPrimaryKey(long primaryKey);
 
 	/**
-	 * Gets the password policy ID of this password policy.
+	 * Returns the password policy ID of this password policy.
 	 *
 	 * @return the password policy ID of this password policy
 	 */
@@ -74,7 +74,7 @@ public interface PasswordPolicyModel extends AuditedModel,
 	public void setPasswordPolicyId(long passwordPolicyId);
 
 	/**
-	 * Gets the company ID of this password policy.
+	 * Returns the company ID of this password policy.
 	 *
 	 * @return the company ID of this password policy
 	 */
@@ -88,7 +88,7 @@ public interface PasswordPolicyModel extends AuditedModel,
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the user ID of this password policy.
+	 * Returns the user ID of this password policy.
 	 *
 	 * @return the user ID of this password policy
 	 */
@@ -102,7 +102,7 @@ public interface PasswordPolicyModel extends AuditedModel,
 	public void setUserId(long userId);
 
 	/**
-	 * Gets the user uuid of this password policy.
+	 * Returns the user uuid of this password policy.
 	 *
 	 * @return the user uuid of this password policy
 	 * @throws SystemException if a system exception occurred
@@ -117,7 +117,7 @@ public interface PasswordPolicyModel extends AuditedModel,
 	public void setUserUuid(String userUuid);
 
 	/**
-	 * Gets the user name of this password policy.
+	 * Returns the user name of this password policy.
 	 *
 	 * @return the user name of this password policy
 	 */
@@ -132,7 +132,7 @@ public interface PasswordPolicyModel extends AuditedModel,
 	public void setUserName(String userName);
 
 	/**
-	 * Gets the create date of this password policy.
+	 * Returns the create date of this password policy.
 	 *
 	 * @return the create date of this password policy
 	 */
@@ -146,7 +146,7 @@ public interface PasswordPolicyModel extends AuditedModel,
 	public void setCreateDate(Date createDate);
 
 	/**
-	 * Gets the modified date of this password policy.
+	 * Returns the modified date of this password policy.
 	 *
 	 * @return the modified date of this password policy
 	 */
@@ -160,7 +160,7 @@ public interface PasswordPolicyModel extends AuditedModel,
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
-	 * Gets the default policy of this password policy.
+	 * Returns the default policy of this password policy.
 	 *
 	 * @return the default policy of this password policy
 	 */
@@ -181,7 +181,7 @@ public interface PasswordPolicyModel extends AuditedModel,
 	public void setDefaultPolicy(boolean defaultPolicy);
 
 	/**
-	 * Gets the name of this password policy.
+	 * Returns the name of this password policy.
 	 *
 	 * @return the name of this password policy
 	 */
@@ -196,7 +196,7 @@ public interface PasswordPolicyModel extends AuditedModel,
 	public void setName(String name);
 
 	/**
-	 * Gets the description of this password policy.
+	 * Returns the description of this password policy.
 	 *
 	 * @return the description of this password policy
 	 */
@@ -211,7 +211,7 @@ public interface PasswordPolicyModel extends AuditedModel,
 	public void setDescription(String description);
 
 	/**
-	 * Gets the changeable of this password policy.
+	 * Returns the changeable of this password policy.
 	 *
 	 * @return the changeable of this password policy
 	 */
@@ -232,7 +232,7 @@ public interface PasswordPolicyModel extends AuditedModel,
 	public void setChangeable(boolean changeable);
 
 	/**
-	 * Gets the change required of this password policy.
+	 * Returns the change required of this password policy.
 	 *
 	 * @return the change required of this password policy
 	 */
@@ -253,7 +253,7 @@ public interface PasswordPolicyModel extends AuditedModel,
 	public void setChangeRequired(boolean changeRequired);
 
 	/**
-	 * Gets the min age of this password policy.
+	 * Returns the min age of this password policy.
 	 *
 	 * @return the min age of this password policy
 	 */
@@ -267,7 +267,7 @@ public interface PasswordPolicyModel extends AuditedModel,
 	public void setMinAge(long minAge);
 
 	/**
-	 * Gets the check syntax of this password policy.
+	 * Returns the check syntax of this password policy.
 	 *
 	 * @return the check syntax of this password policy
 	 */
@@ -288,7 +288,7 @@ public interface PasswordPolicyModel extends AuditedModel,
 	public void setCheckSyntax(boolean checkSyntax);
 
 	/**
-	 * Gets the allow dictionary words of this password policy.
+	 * Returns the allow dictionary words of this password policy.
 	 *
 	 * @return the allow dictionary words of this password policy
 	 */
@@ -309,7 +309,7 @@ public interface PasswordPolicyModel extends AuditedModel,
 	public void setAllowDictionaryWords(boolean allowDictionaryWords);
 
 	/**
-	 * Gets the min alphanumeric of this password policy.
+	 * Returns the min alphanumeric of this password policy.
 	 *
 	 * @return the min alphanumeric of this password policy
 	 */
@@ -323,7 +323,7 @@ public interface PasswordPolicyModel extends AuditedModel,
 	public void setMinAlphanumeric(int minAlphanumeric);
 
 	/**
-	 * Gets the min length of this password policy.
+	 * Returns the min length of this password policy.
 	 *
 	 * @return the min length of this password policy
 	 */
@@ -337,7 +337,7 @@ public interface PasswordPolicyModel extends AuditedModel,
 	public void setMinLength(int minLength);
 
 	/**
-	 * Gets the min lower case of this password policy.
+	 * Returns the min lower case of this password policy.
 	 *
 	 * @return the min lower case of this password policy
 	 */
@@ -351,7 +351,7 @@ public interface PasswordPolicyModel extends AuditedModel,
 	public void setMinLowerCase(int minLowerCase);
 
 	/**
-	 * Gets the min numbers of this password policy.
+	 * Returns the min numbers of this password policy.
 	 *
 	 * @return the min numbers of this password policy
 	 */
@@ -365,7 +365,7 @@ public interface PasswordPolicyModel extends AuditedModel,
 	public void setMinNumbers(int minNumbers);
 
 	/**
-	 * Gets the min symbols of this password policy.
+	 * Returns the min symbols of this password policy.
 	 *
 	 * @return the min symbols of this password policy
 	 */
@@ -379,7 +379,7 @@ public interface PasswordPolicyModel extends AuditedModel,
 	public void setMinSymbols(int minSymbols);
 
 	/**
-	 * Gets the min upper case of this password policy.
+	 * Returns the min upper case of this password policy.
 	 *
 	 * @return the min upper case of this password policy
 	 */
@@ -393,7 +393,7 @@ public interface PasswordPolicyModel extends AuditedModel,
 	public void setMinUpperCase(int minUpperCase);
 
 	/**
-	 * Gets the history of this password policy.
+	 * Returns the history of this password policy.
 	 *
 	 * @return the history of this password policy
 	 */
@@ -414,7 +414,7 @@ public interface PasswordPolicyModel extends AuditedModel,
 	public void setHistory(boolean history);
 
 	/**
-	 * Gets the history count of this password policy.
+	 * Returns the history count of this password policy.
 	 *
 	 * @return the history count of this password policy
 	 */
@@ -428,7 +428,7 @@ public interface PasswordPolicyModel extends AuditedModel,
 	public void setHistoryCount(int historyCount);
 
 	/**
-	 * Gets the expireable of this password policy.
+	 * Returns the expireable of this password policy.
 	 *
 	 * @return the expireable of this password policy
 	 */
@@ -449,7 +449,7 @@ public interface PasswordPolicyModel extends AuditedModel,
 	public void setExpireable(boolean expireable);
 
 	/**
-	 * Gets the max age of this password policy.
+	 * Returns the max age of this password policy.
 	 *
 	 * @return the max age of this password policy
 	 */
@@ -463,7 +463,7 @@ public interface PasswordPolicyModel extends AuditedModel,
 	public void setMaxAge(long maxAge);
 
 	/**
-	 * Gets the warning time of this password policy.
+	 * Returns the warning time of this password policy.
 	 *
 	 * @return the warning time of this password policy
 	 */
@@ -477,7 +477,7 @@ public interface PasswordPolicyModel extends AuditedModel,
 	public void setWarningTime(long warningTime);
 
 	/**
-	 * Gets the grace limit of this password policy.
+	 * Returns the grace limit of this password policy.
 	 *
 	 * @return the grace limit of this password policy
 	 */
@@ -491,7 +491,7 @@ public interface PasswordPolicyModel extends AuditedModel,
 	public void setGraceLimit(int graceLimit);
 
 	/**
-	 * Gets the lockout of this password policy.
+	 * Returns the lockout of this password policy.
 	 *
 	 * @return the lockout of this password policy
 	 */
@@ -512,7 +512,7 @@ public interface PasswordPolicyModel extends AuditedModel,
 	public void setLockout(boolean lockout);
 
 	/**
-	 * Gets the max failure of this password policy.
+	 * Returns the max failure of this password policy.
 	 *
 	 * @return the max failure of this password policy
 	 */
@@ -526,7 +526,7 @@ public interface PasswordPolicyModel extends AuditedModel,
 	public void setMaxFailure(int maxFailure);
 
 	/**
-	 * Gets the lockout duration of this password policy.
+	 * Returns the lockout duration of this password policy.
 	 *
 	 * @return the lockout duration of this password policy
 	 */
@@ -540,7 +540,7 @@ public interface PasswordPolicyModel extends AuditedModel,
 	public void setLockoutDuration(long lockoutDuration);
 
 	/**
-	 * Gets the require unlock of this password policy.
+	 * Returns the require unlock of this password policy.
 	 *
 	 * @return the require unlock of this password policy
 	 */
@@ -561,7 +561,7 @@ public interface PasswordPolicyModel extends AuditedModel,
 	public void setRequireUnlock(boolean requireUnlock);
 
 	/**
-	 * Gets the reset failure count of this password policy.
+	 * Returns the reset failure count of this password policy.
 	 *
 	 * @return the reset failure count of this password policy
 	 */
@@ -575,7 +575,7 @@ public interface PasswordPolicyModel extends AuditedModel,
 	public void setResetFailureCount(long resetFailureCount);
 
 	/**
-	 * Gets the reset ticket max age of this password policy.
+	 * Returns the reset ticket max age of this password policy.
 	 *
 	 * @return the reset ticket max age of this password policy
 	 */

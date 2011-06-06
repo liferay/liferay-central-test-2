@@ -37,7 +37,7 @@ public class AssetLinkWrapper implements AssetLink {
 	}
 
 	/**
-	* Gets the primary key of this asset link.
+	* Returns the primary key of this asset link.
 	*
 	* @return the primary key of this asset link
 	*/
@@ -46,7 +46,7 @@ public class AssetLinkWrapper implements AssetLink {
 	}
 
 	/**
-	* Sets the primary key of this asset link
+	* Sets the primary key of this asset link.
 	*
 	* @param primaryKey the primary key of this asset link
 	*/
@@ -55,7 +55,7 @@ public class AssetLinkWrapper implements AssetLink {
 	}
 
 	/**
-	* Gets the link ID of this asset link.
+	* Returns the link ID of this asset link.
 	*
 	* @return the link ID of this asset link
 	*/
@@ -73,7 +73,7 @@ public class AssetLinkWrapper implements AssetLink {
 	}
 
 	/**
-	* Gets the company ID of this asset link.
+	* Returns the company ID of this asset link.
 	*
 	* @return the company ID of this asset link
 	*/
@@ -91,7 +91,7 @@ public class AssetLinkWrapper implements AssetLink {
 	}
 
 	/**
-	* Gets the user ID of this asset link.
+	* Returns the user ID of this asset link.
 	*
 	* @return the user ID of this asset link
 	*/
@@ -109,7 +109,7 @@ public class AssetLinkWrapper implements AssetLink {
 	}
 
 	/**
-	* Gets the user uuid of this asset link.
+	* Returns the user uuid of this asset link.
 	*
 	* @return the user uuid of this asset link
 	* @throws SystemException if a system exception occurred
@@ -129,7 +129,7 @@ public class AssetLinkWrapper implements AssetLink {
 	}
 
 	/**
-	* Gets the user name of this asset link.
+	* Returns the user name of this asset link.
 	*
 	* @return the user name of this asset link
 	*/
@@ -147,7 +147,7 @@ public class AssetLinkWrapper implements AssetLink {
 	}
 
 	/**
-	* Gets the create date of this asset link.
+	* Returns the create date of this asset link.
 	*
 	* @return the create date of this asset link
 	*/
@@ -165,7 +165,7 @@ public class AssetLinkWrapper implements AssetLink {
 	}
 
 	/**
-	* Gets the entry id1 of this asset link.
+	* Returns the entry id1 of this asset link.
 	*
 	* @return the entry id1 of this asset link
 	*/
@@ -183,7 +183,7 @@ public class AssetLinkWrapper implements AssetLink {
 	}
 
 	/**
-	* Gets the entry id2 of this asset link.
+	* Returns the entry id2 of this asset link.
 	*
 	* @return the entry id2 of this asset link
 	*/
@@ -201,7 +201,7 @@ public class AssetLinkWrapper implements AssetLink {
 	}
 
 	/**
-	* Gets the type of this asset link.
+	* Returns the type of this asset link.
 	*
 	* @return the type of this asset link
 	*/
@@ -219,7 +219,7 @@ public class AssetLinkWrapper implements AssetLink {
 	}
 
 	/**
-	* Gets the weight of this asset link.
+	* Returns the weight of this asset link.
 	*
 	* @return the weight of this asset link
 	*/

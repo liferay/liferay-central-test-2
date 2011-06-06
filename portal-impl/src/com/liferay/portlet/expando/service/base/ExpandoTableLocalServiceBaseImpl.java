@@ -72,7 +72,7 @@ public abstract class ExpandoTableLocalServiceBaseImpl
 	/**
 	 * Adds the expando table to the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param expandoTable the expando table to add
+	 * @param expandoTable the expando table
 	 * @return the expando table that was added
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -96,7 +96,7 @@ public abstract class ExpandoTableLocalServiceBaseImpl
 	/**
 	 * Deletes the expando table with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param tableId the primary key of the expando table to delete
+	 * @param tableId the primary key of the expando table
 	 * @throws PortalException if a expando table with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -108,7 +108,7 @@ public abstract class ExpandoTableLocalServiceBaseImpl
 	/**
 	 * Deletes the expando table from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param expandoTable the expando table to delete
+	 * @param expandoTable the expando table
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void deleteExpandoTable(ExpandoTable expandoTable)
@@ -119,7 +119,7 @@ public abstract class ExpandoTableLocalServiceBaseImpl
 	/**
 	 * Performs a dynamic query on the database and returns the matching rows.
 	 *
-	 * @param dynamicQuery the dynamic query to search with
+	 * @param dynamicQuery the dynamic query
 	 * @return the matching rows
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -136,9 +136,9 @@ public abstract class ExpandoTableLocalServiceBaseImpl
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param dynamicQuery the dynamic query to search with
-	 * @param start the lower bound of the range of model instances to return
-	 * @param end the upper bound of the range of model instances to return (not inclusive)
+	 * @param dynamicQuery the dynamic query
+	 * @param start the lower bound of the range of model instances
+	 * @param end the upper bound of the range of model instances (not inclusive)
 	 * @return the range of matching rows
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -156,9 +156,9 @@ public abstract class ExpandoTableLocalServiceBaseImpl
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param dynamicQuery the dynamic query to search with
-	 * @param start the lower bound of the range of model instances to return
-	 * @param end the upper bound of the range of model instances to return (not inclusive)
+	 * @param dynamicQuery the dynamic query
+	 * @param start the lower bound of the range of model instances
+	 * @param end the upper bound of the range of model instances (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching rows
 	 * @throws SystemException if a system exception occurred
@@ -171,9 +171,9 @@ public abstract class ExpandoTableLocalServiceBaseImpl
 	}
 
 	/**
-	 * Counts the number of rows that match the dynamic query.
+	 * Returns the number of rows that match the dynamic query.
 	 *
-	 * @param dynamicQuery the dynamic query to search with
+	 * @param dynamicQuery the dynamic query
 	 * @return the number of rows that match the dynamic query
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -183,9 +183,9 @@ public abstract class ExpandoTableLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the expando table with the primary key.
+	 * Returns the expando table with the primary key.
 	 *
-	 * @param tableId the primary key of the expando table to get
+	 * @param tableId the primary key of the expando table
 	 * @return the expando table
 	 * @throws PortalException if a expando table with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -196,14 +196,14 @@ public abstract class ExpandoTableLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets a range of all the expando tables.
+	 * Returns a range of all the expando tables.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param start the lower bound of the range of expando tables to return
-	 * @param end the upper bound of the range of expando tables to return (not inclusive)
+	 * @param start the lower bound of the range of expando tables
+	 * @param end the upper bound of the range of expando tables (not inclusive)
 	 * @return the range of expando tables
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -213,7 +213,7 @@ public abstract class ExpandoTableLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the number of expando tables.
+	 * Returns the number of expando tables.
 	 *
 	 * @return the number of expando tables
 	 * @throws SystemException if a system exception occurred
@@ -225,7 +225,7 @@ public abstract class ExpandoTableLocalServiceBaseImpl
 	/**
 	 * Updates the expando table in the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param expandoTable the expando table to update
+	 * @param expandoTable the expando table
 	 * @return the expando table that was updated
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -239,7 +239,7 @@ public abstract class ExpandoTableLocalServiceBaseImpl
 	/**
 	 * Updates the expando table in the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param expandoTable the expando table to update
+	 * @param expandoTable the expando table
 	 * @param merge whether to merge the expando table with the current session. See {@link com.liferay.portal.service.persistence.BatchSession#update(com.liferay.portal.kernel.dao.orm.Session, com.liferay.portal.model.BaseModel, boolean)} for an explanation.
 	 * @return the expando table that was updated
 	 * @throws SystemException if a system exception occurred
@@ -252,7 +252,7 @@ public abstract class ExpandoTableLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the expando column local service.
+	 * Returns the expando column local service.
 	 *
 	 * @return the expando column local service
 	 */
@@ -271,7 +271,7 @@ public abstract class ExpandoTableLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the expando column remote service.
+	 * Returns the expando column remote service.
 	 *
 	 * @return the expando column remote service
 	 */
@@ -290,7 +290,7 @@ public abstract class ExpandoTableLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the expando column persistence.
+	 * Returns the expando column persistence.
 	 *
 	 * @return the expando column persistence
 	 */
@@ -309,7 +309,7 @@ public abstract class ExpandoTableLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the expando row local service.
+	 * Returns the expando row local service.
 	 *
 	 * @return the expando row local service
 	 */
@@ -328,7 +328,7 @@ public abstract class ExpandoTableLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the expando row persistence.
+	 * Returns the expando row persistence.
 	 *
 	 * @return the expando row persistence
 	 */
@@ -347,7 +347,7 @@ public abstract class ExpandoTableLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the expando table local service.
+	 * Returns the expando table local service.
 	 *
 	 * @return the expando table local service
 	 */
@@ -366,7 +366,7 @@ public abstract class ExpandoTableLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the expando table persistence.
+	 * Returns the expando table persistence.
 	 *
 	 * @return the expando table persistence
 	 */
@@ -385,7 +385,7 @@ public abstract class ExpandoTableLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the expando value local service.
+	 * Returns the expando value local service.
 	 *
 	 * @return the expando value local service
 	 */
@@ -404,7 +404,7 @@ public abstract class ExpandoTableLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the expando value remote service.
+	 * Returns the expando value remote service.
 	 *
 	 * @return the expando value remote service
 	 */
@@ -422,7 +422,7 @@ public abstract class ExpandoTableLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the expando value persistence.
+	 * Returns the expando value persistence.
 	 *
 	 * @return the expando value persistence
 	 */
@@ -441,7 +441,7 @@ public abstract class ExpandoTableLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the counter local service.
+	 * Returns the counter local service.
 	 *
 	 * @return the counter local service
 	 */
@@ -459,7 +459,7 @@ public abstract class ExpandoTableLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the resource local service.
+	 * Returns the resource local service.
 	 *
 	 * @return the resource local service
 	 */
@@ -478,7 +478,7 @@ public abstract class ExpandoTableLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the resource remote service.
+	 * Returns the resource remote service.
 	 *
 	 * @return the resource remote service
 	 */
@@ -496,7 +496,7 @@ public abstract class ExpandoTableLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the resource persistence.
+	 * Returns the resource persistence.
 	 *
 	 * @return the resource persistence
 	 */
@@ -514,7 +514,7 @@ public abstract class ExpandoTableLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the resource finder.
+	 * Returns the resource finder.
 	 *
 	 * @return the resource finder
 	 */
@@ -532,7 +532,7 @@ public abstract class ExpandoTableLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the user local service.
+	 * Returns the user local service.
 	 *
 	 * @return the user local service
 	 */
@@ -550,7 +550,7 @@ public abstract class ExpandoTableLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the user remote service.
+	 * Returns the user remote service.
 	 *
 	 * @return the user remote service
 	 */
@@ -568,7 +568,7 @@ public abstract class ExpandoTableLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the user persistence.
+	 * Returns the user persistence.
 	 *
 	 * @return the user persistence
 	 */
@@ -586,7 +586,7 @@ public abstract class ExpandoTableLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the user finder.
+	 * Returns the user finder.
 	 *
 	 * @return the user finder
 	 */
@@ -604,7 +604,7 @@ public abstract class ExpandoTableLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the Spring bean ID for this bean.
+	 * Returns the Spring bean ID for this bean.
 	 *
 	 * @return the Spring bean ID for this bean
 	 */
@@ -624,7 +624,7 @@ public abstract class ExpandoTableLocalServiceBaseImpl
 	/**
 	 * Performs an SQL query.
 	 *
-	 * @param sql the sql query to perform
+	 * @param sql the sql query
 	 */
 	protected void runSQL(String sql) throws SystemException {
 		try {

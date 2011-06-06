@@ -121,7 +121,7 @@ public class MBMailingListUtil {
 	/**
 	* Caches the message boards mailing list in the entity cache if it is enabled.
 	*
-	* @param mbMailingList the message boards mailing list to cache
+	* @param mbMailingList the message boards mailing list
 	*/
 	public static void cacheResult(
 		com.liferay.portlet.messageboards.model.MBMailingList mbMailingList) {
@@ -131,7 +131,7 @@ public class MBMailingListUtil {
 	/**
 	* Caches the message boards mailing lists in the entity cache if it is enabled.
 	*
-	* @param mbMailingLists the message boards mailing lists to cache
+	* @param mbMailingLists the message boards mailing lists
 	*/
 	public static void cacheResult(
 		java.util.List<com.liferay.portlet.messageboards.model.MBMailingList> mbMailingLists) {
@@ -152,7 +152,7 @@ public class MBMailingListUtil {
 	/**
 	* Removes the message boards mailing list with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param mailingListId the primary key of the message boards mailing list to remove
+	* @param mailingListId the primary key of the message boards mailing list
 	* @return the message boards mailing list that was removed
 	* @throws com.liferay.portlet.messageboards.NoSuchMailingListException if a message boards mailing list with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -172,9 +172,9 @@ public class MBMailingListUtil {
 	}
 
 	/**
-	* Finds the message boards mailing list with the primary key or throws a {@link com.liferay.portlet.messageboards.NoSuchMailingListException} if it could not be found.
+	* Returns the message boards mailing list with the primary key or throws a {@link com.liferay.portlet.messageboards.NoSuchMailingListException} if it could not be found.
 	*
-	* @param mailingListId the primary key of the message boards mailing list to find
+	* @param mailingListId the primary key of the message boards mailing list
 	* @return the message boards mailing list
 	* @throws com.liferay.portlet.messageboards.NoSuchMailingListException if a message boards mailing list with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -187,9 +187,9 @@ public class MBMailingListUtil {
 	}
 
 	/**
-	* Finds the message boards mailing list with the primary key or returns <code>null</code> if it could not be found.
+	* Returns the message boards mailing list with the primary key or returns <code>null</code> if it could not be found.
 	*
-	* @param mailingListId the primary key of the message boards mailing list to find
+	* @param mailingListId the primary key of the message boards mailing list
 	* @return the message boards mailing list, or <code>null</code> if a message boards mailing list with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -200,9 +200,9 @@ public class MBMailingListUtil {
 	}
 
 	/**
-	* Finds all the message boards mailing lists where uuid = &#63;.
+	* Returns all the message boards mailing lists where uuid = &#63;.
 	*
-	* @param uuid the uuid to search with
+	* @param uuid the uuid
 	* @return the matching message boards mailing lists
 	* @throws SystemException if a system exception occurred
 	*/
@@ -213,15 +213,15 @@ public class MBMailingListUtil {
 	}
 
 	/**
-	* Finds a range of all the message boards mailing lists where uuid = &#63;.
+	* Returns a range of all the message boards mailing lists where uuid = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param uuid the uuid to search with
-	* @param start the lower bound of the range of message boards mailing lists to return
-	* @param end the upper bound of the range of message boards mailing lists to return (not inclusive)
+	* @param uuid the uuid
+	* @param start the lower bound of the range of message boards mailing lists
+	* @param end the upper bound of the range of message boards mailing lists (not inclusive)
 	* @return the range of matching message boards mailing lists
 	* @throws SystemException if a system exception occurred
 	*/
@@ -232,15 +232,15 @@ public class MBMailingListUtil {
 	}
 
 	/**
-	* Finds an ordered range of all the message boards mailing lists where uuid = &#63;.
+	* Returns an ordered range of all the message boards mailing lists where uuid = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param uuid the uuid to search with
-	* @param start the lower bound of the range of message boards mailing lists to return
-	* @param end the upper bound of the range of message boards mailing lists to return (not inclusive)
+	* @param uuid the uuid
+	* @param start the lower bound of the range of message boards mailing lists
+	* @param end the upper bound of the range of message boards mailing lists (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching message boards mailing lists
 	* @throws SystemException if a system exception occurred
@@ -253,13 +253,13 @@ public class MBMailingListUtil {
 	}
 
 	/**
-	* Finds the first message boards mailing list in the ordered set where uuid = &#63;.
+	* Returns the first message boards mailing list in the ordered set where uuid = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param uuid the uuid to search with
+	* @param uuid the uuid
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching message boards mailing list
 	* @throws com.liferay.portlet.messageboards.NoSuchMailingListException if a matching message boards mailing list could not be found
@@ -274,13 +274,13 @@ public class MBMailingListUtil {
 	}
 
 	/**
-	* Finds the last message boards mailing list in the ordered set where uuid = &#63;.
+	* Returns the last message boards mailing list in the ordered set where uuid = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param uuid the uuid to search with
+	* @param uuid the uuid
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching message boards mailing list
 	* @throws com.liferay.portlet.messageboards.NoSuchMailingListException if a matching message boards mailing list could not be found
@@ -295,14 +295,14 @@ public class MBMailingListUtil {
 	}
 
 	/**
-	* Finds the message boards mailing lists before and after the current message boards mailing list in the ordered set where uuid = &#63;.
+	* Returns the message boards mailing lists before and after the current message boards mailing list in the ordered set where uuid = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
 	* @param mailingListId the primary key of the current message boards mailing list
-	* @param uuid the uuid to search with
+	* @param uuid the uuid
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next message boards mailing list
 	* @throws com.liferay.portlet.messageboards.NoSuchMailingListException if a message boards mailing list with the primary key could not be found
@@ -319,10 +319,10 @@ public class MBMailingListUtil {
 	}
 
 	/**
-	* Finds the message boards mailing list where uuid = &#63; and groupId = &#63; or throws a {@link com.liferay.portlet.messageboards.NoSuchMailingListException} if it could not be found.
+	* Returns the message boards mailing list where uuid = &#63; and groupId = &#63; or throws a {@link com.liferay.portlet.messageboards.NoSuchMailingListException} if it could not be found.
 	*
-	* @param uuid the uuid to search with
-	* @param groupId the group ID to search with
+	* @param uuid the uuid
+	* @param groupId the group ID
 	* @return the matching message boards mailing list
 	* @throws com.liferay.portlet.messageboards.NoSuchMailingListException if a matching message boards mailing list could not be found
 	* @throws SystemException if a system exception occurred
@@ -335,10 +335,10 @@ public class MBMailingListUtil {
 	}
 
 	/**
-	* Finds the message boards mailing list where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	* Returns the message boards mailing list where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	*
-	* @param uuid the uuid to search with
-	* @param groupId the group ID to search with
+	* @param uuid the uuid
+	* @param groupId the group ID
 	* @return the matching message boards mailing list, or <code>null</code> if a matching message boards mailing list could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -349,10 +349,10 @@ public class MBMailingListUtil {
 	}
 
 	/**
-	* Finds the message boards mailing list where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	* Returns the message boards mailing list where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
-	* @param uuid the uuid to search with
-	* @param groupId the group ID to search with
+	* @param uuid the uuid
+	* @param groupId the group ID
 	* @return the matching message boards mailing list, or <code>null</code> if a matching message boards mailing list could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -363,9 +363,9 @@ public class MBMailingListUtil {
 	}
 
 	/**
-	* Finds all the message boards mailing lists where active = &#63;.
+	* Returns all the message boards mailing lists where active = &#63;.
 	*
-	* @param active the active to search with
+	* @param active the active
 	* @return the matching message boards mailing lists
 	* @throws SystemException if a system exception occurred
 	*/
@@ -376,15 +376,15 @@ public class MBMailingListUtil {
 	}
 
 	/**
-	* Finds a range of all the message boards mailing lists where active = &#63;.
+	* Returns a range of all the message boards mailing lists where active = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param active the active to search with
-	* @param start the lower bound of the range of message boards mailing lists to return
-	* @param end the upper bound of the range of message boards mailing lists to return (not inclusive)
+	* @param active the active
+	* @param start the lower bound of the range of message boards mailing lists
+	* @param end the upper bound of the range of message boards mailing lists (not inclusive)
 	* @return the range of matching message boards mailing lists
 	* @throws SystemException if a system exception occurred
 	*/
@@ -395,15 +395,15 @@ public class MBMailingListUtil {
 	}
 
 	/**
-	* Finds an ordered range of all the message boards mailing lists where active = &#63;.
+	* Returns an ordered range of all the message boards mailing lists where active = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param active the active to search with
-	* @param start the lower bound of the range of message boards mailing lists to return
-	* @param end the upper bound of the range of message boards mailing lists to return (not inclusive)
+	* @param active the active
+	* @param start the lower bound of the range of message boards mailing lists
+	* @param end the upper bound of the range of message boards mailing lists (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching message boards mailing lists
 	* @throws SystemException if a system exception occurred
@@ -417,13 +417,13 @@ public class MBMailingListUtil {
 	}
 
 	/**
-	* Finds the first message boards mailing list in the ordered set where active = &#63;.
+	* Returns the first message boards mailing list in the ordered set where active = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param active the active to search with
+	* @param active the active
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching message boards mailing list
 	* @throws com.liferay.portlet.messageboards.NoSuchMailingListException if a matching message boards mailing list could not be found
@@ -438,13 +438,13 @@ public class MBMailingListUtil {
 	}
 
 	/**
-	* Finds the last message boards mailing list in the ordered set where active = &#63;.
+	* Returns the last message boards mailing list in the ordered set where active = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param active the active to search with
+	* @param active the active
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching message boards mailing list
 	* @throws com.liferay.portlet.messageboards.NoSuchMailingListException if a matching message boards mailing list could not be found
@@ -459,14 +459,14 @@ public class MBMailingListUtil {
 	}
 
 	/**
-	* Finds the message boards mailing lists before and after the current message boards mailing list in the ordered set where active = &#63;.
+	* Returns the message boards mailing lists before and after the current message boards mailing list in the ordered set where active = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
 	* @param mailingListId the primary key of the current message boards mailing list
-	* @param active the active to search with
+	* @param active the active
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next message boards mailing list
 	* @throws com.liferay.portlet.messageboards.NoSuchMailingListException if a message boards mailing list with the primary key could not be found
@@ -483,10 +483,10 @@ public class MBMailingListUtil {
 	}
 
 	/**
-	* Finds the message boards mailing list where groupId = &#63; and categoryId = &#63; or throws a {@link com.liferay.portlet.messageboards.NoSuchMailingListException} if it could not be found.
+	* Returns the message boards mailing list where groupId = &#63; and categoryId = &#63; or throws a {@link com.liferay.portlet.messageboards.NoSuchMailingListException} if it could not be found.
 	*
-	* @param groupId the group ID to search with
-	* @param categoryId the category ID to search with
+	* @param groupId the group ID
+	* @param categoryId the category ID
 	* @return the matching message boards mailing list
 	* @throws com.liferay.portlet.messageboards.NoSuchMailingListException if a matching message boards mailing list could not be found
 	* @throws SystemException if a system exception occurred
@@ -499,10 +499,10 @@ public class MBMailingListUtil {
 	}
 
 	/**
-	* Finds the message boards mailing list where groupId = &#63; and categoryId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	* Returns the message boards mailing list where groupId = &#63; and categoryId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	*
-	* @param groupId the group ID to search with
-	* @param categoryId the category ID to search with
+	* @param groupId the group ID
+	* @param categoryId the category ID
 	* @return the matching message boards mailing list, or <code>null</code> if a matching message boards mailing list could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -513,10 +513,10 @@ public class MBMailingListUtil {
 	}
 
 	/**
-	* Finds the message boards mailing list where groupId = &#63; and categoryId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	* Returns the message boards mailing list where groupId = &#63; and categoryId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
-	* @param groupId the group ID to search with
-	* @param categoryId the category ID to search with
+	* @param groupId the group ID
+	* @param categoryId the category ID
 	* @return the matching message boards mailing list, or <code>null</code> if a matching message boards mailing list could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -528,7 +528,7 @@ public class MBMailingListUtil {
 	}
 
 	/**
-	* Finds all the message boards mailing lists.
+	* Returns all the message boards mailing lists.
 	*
 	* @return the message boards mailing lists
 	* @throws SystemException if a system exception occurred
@@ -539,14 +539,14 @@ public class MBMailingListUtil {
 	}
 
 	/**
-	* Finds a range of all the message boards mailing lists.
+	* Returns a range of all the message boards mailing lists.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of message boards mailing lists to return
-	* @param end the upper bound of the range of message boards mailing lists to return (not inclusive)
+	* @param start the lower bound of the range of message boards mailing lists
+	* @param end the upper bound of the range of message boards mailing lists (not inclusive)
 	* @return the range of message boards mailing lists
 	* @throws SystemException if a system exception occurred
 	*/
@@ -557,14 +557,14 @@ public class MBMailingListUtil {
 	}
 
 	/**
-	* Finds an ordered range of all the message boards mailing lists.
+	* Returns an ordered range of all the message boards mailing lists.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of message boards mailing lists to return
-	* @param end the upper bound of the range of message boards mailing lists to return (not inclusive)
+	* @param start the lower bound of the range of message boards mailing lists
+	* @param end the upper bound of the range of message boards mailing lists (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of message boards mailing lists
 	* @throws SystemException if a system exception occurred
@@ -579,7 +579,7 @@ public class MBMailingListUtil {
 	/**
 	* Removes all the message boards mailing lists where uuid = &#63; from the database.
 	*
-	* @param uuid the uuid to search with
+	* @param uuid the uuid
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByUuid(java.lang.String uuid)
@@ -590,8 +590,8 @@ public class MBMailingListUtil {
 	/**
 	* Removes the message boards mailing list where uuid = &#63; and groupId = &#63; from the database.
 	*
-	* @param uuid the uuid to search with
-	* @param groupId the group ID to search with
+	* @param uuid the uuid
+	* @param groupId the group ID
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByUUID_G(java.lang.String uuid, long groupId)
@@ -603,7 +603,7 @@ public class MBMailingListUtil {
 	/**
 	* Removes all the message boards mailing lists where active = &#63; from the database.
 	*
-	* @param active the active to search with
+	* @param active the active
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByActive(boolean active)
@@ -614,8 +614,8 @@ public class MBMailingListUtil {
 	/**
 	* Removes the message boards mailing list where groupId = &#63; and categoryId = &#63; from the database.
 	*
-	* @param groupId the group ID to search with
-	* @param categoryId the category ID to search with
+	* @param groupId the group ID
+	* @param categoryId the category ID
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByG_C(long groupId, long categoryId)
@@ -635,9 +635,9 @@ public class MBMailingListUtil {
 	}
 
 	/**
-	* Counts all the message boards mailing lists where uuid = &#63;.
+	* Returns the number of message boards mailing lists where uuid = &#63;.
 	*
-	* @param uuid the uuid to search with
+	* @param uuid the uuid
 	* @return the number of matching message boards mailing lists
 	* @throws SystemException if a system exception occurred
 	*/
@@ -647,10 +647,10 @@ public class MBMailingListUtil {
 	}
 
 	/**
-	* Counts all the message boards mailing lists where uuid = &#63; and groupId = &#63;.
+	* Returns the number of message boards mailing lists where uuid = &#63; and groupId = &#63;.
 	*
-	* @param uuid the uuid to search with
-	* @param groupId the group ID to search with
+	* @param uuid the uuid
+	* @param groupId the group ID
 	* @return the number of matching message boards mailing lists
 	* @throws SystemException if a system exception occurred
 	*/
@@ -660,9 +660,9 @@ public class MBMailingListUtil {
 	}
 
 	/**
-	* Counts all the message boards mailing lists where active = &#63;.
+	* Returns the number of message boards mailing lists where active = &#63;.
 	*
-	* @param active the active to search with
+	* @param active the active
 	* @return the number of matching message boards mailing lists
 	* @throws SystemException if a system exception occurred
 	*/
@@ -672,10 +672,10 @@ public class MBMailingListUtil {
 	}
 
 	/**
-	* Counts all the message boards mailing lists where groupId = &#63; and categoryId = &#63;.
+	* Returns the number of message boards mailing lists where groupId = &#63; and categoryId = &#63;.
 	*
-	* @param groupId the group ID to search with
-	* @param categoryId the category ID to search with
+	* @param groupId the group ID
+	* @param categoryId the category ID
 	* @return the number of matching message boards mailing lists
 	* @throws SystemException if a system exception occurred
 	*/
@@ -685,7 +685,7 @@ public class MBMailingListUtil {
 	}
 
 	/**
-	* Counts all the message boards mailing lists.
+	* Returns the number of message boards mailing lists.
 	*
 	* @return the number of message boards mailing lists
 	* @throws SystemException if a system exception occurred

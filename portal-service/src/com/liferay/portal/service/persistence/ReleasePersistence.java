@@ -39,14 +39,14 @@ public interface ReleasePersistence extends BasePersistence<Release> {
 	/**
 	* Caches the release in the entity cache if it is enabled.
 	*
-	* @param release the release to cache
+	* @param release the release
 	*/
 	public void cacheResult(com.liferay.portal.model.Release release);
 
 	/**
 	* Caches the releases in the entity cache if it is enabled.
 	*
-	* @param releases the releases to cache
+	* @param releases the releases
 	*/
 	public void cacheResult(
 		java.util.List<com.liferay.portal.model.Release> releases);
@@ -62,7 +62,7 @@ public interface ReleasePersistence extends BasePersistence<Release> {
 	/**
 	* Removes the release with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param releaseId the primary key of the release to remove
+	* @param releaseId the primary key of the release
 	* @return the release that was removed
 	* @throws com.liferay.portal.NoSuchReleaseException if a release with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -76,9 +76,9 @@ public interface ReleasePersistence extends BasePersistence<Release> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the release with the primary key or throws a {@link com.liferay.portal.NoSuchReleaseException} if it could not be found.
+	* Returns the release with the primary key or throws a {@link com.liferay.portal.NoSuchReleaseException} if it could not be found.
 	*
-	* @param releaseId the primary key of the release to find
+	* @param releaseId the primary key of the release
 	* @return the release
 	* @throws com.liferay.portal.NoSuchReleaseException if a release with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -88,9 +88,9 @@ public interface ReleasePersistence extends BasePersistence<Release> {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the release with the primary key or returns <code>null</code> if it could not be found.
+	* Returns the release with the primary key or returns <code>null</code> if it could not be found.
 	*
-	* @param releaseId the primary key of the release to find
+	* @param releaseId the primary key of the release
 	* @return the release, or <code>null</code> if a release with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -98,9 +98,9 @@ public interface ReleasePersistence extends BasePersistence<Release> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the release where servletContextName = &#63; or throws a {@link com.liferay.portal.NoSuchReleaseException} if it could not be found.
+	* Returns the release where servletContextName = &#63; or throws a {@link com.liferay.portal.NoSuchReleaseException} if it could not be found.
 	*
-	* @param servletContextName the servlet context name to search with
+	* @param servletContextName the servlet context name
 	* @return the matching release
 	* @throws com.liferay.portal.NoSuchReleaseException if a matching release could not be found
 	* @throws SystemException if a system exception occurred
@@ -111,9 +111,9 @@ public interface ReleasePersistence extends BasePersistence<Release> {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the release where servletContextName = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	* Returns the release where servletContextName = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	*
-	* @param servletContextName the servlet context name to search with
+	* @param servletContextName the servlet context name
 	* @return the matching release, or <code>null</code> if a matching release could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -122,9 +122,9 @@ public interface ReleasePersistence extends BasePersistence<Release> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the release where servletContextName = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	* Returns the release where servletContextName = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
-	* @param servletContextName the servlet context name to search with
+	* @param servletContextName the servlet context name
 	* @return the matching release, or <code>null</code> if a matching release could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -133,7 +133,7 @@ public interface ReleasePersistence extends BasePersistence<Release> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds all the releases.
+	* Returns all the releases.
 	*
 	* @return the releases
 	* @throws SystemException if a system exception occurred
@@ -142,14 +142,14 @@ public interface ReleasePersistence extends BasePersistence<Release> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds a range of all the releases.
+	* Returns a range of all the releases.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of releases to return
-	* @param end the upper bound of the range of releases to return (not inclusive)
+	* @param start the lower bound of the range of releases
+	* @param end the upper bound of the range of releases (not inclusive)
 	* @return the range of releases
 	* @throws SystemException if a system exception occurred
 	*/
@@ -157,14 +157,14 @@ public interface ReleasePersistence extends BasePersistence<Release> {
 		int end) throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds an ordered range of all the releases.
+	* Returns an ordered range of all the releases.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of releases to return
-	* @param end the upper bound of the range of releases to return (not inclusive)
+	* @param start the lower bound of the range of releases
+	* @param end the upper bound of the range of releases (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of releases
 	* @throws SystemException if a system exception occurred
@@ -177,7 +177,7 @@ public interface ReleasePersistence extends BasePersistence<Release> {
 	/**
 	* Removes the release where servletContextName = &#63; from the database.
 	*
-	* @param servletContextName the servlet context name to search with
+	* @param servletContextName the servlet context name
 	* @throws SystemException if a system exception occurred
 	*/
 	public void removeByServletContextName(java.lang.String servletContextName)
@@ -193,9 +193,9 @@ public interface ReleasePersistence extends BasePersistence<Release> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Counts all the releases where servletContextName = &#63;.
+	* Returns the number of releases where servletContextName = &#63;.
 	*
-	* @param servletContextName the servlet context name to search with
+	* @param servletContextName the servlet context name
 	* @return the number of matching releases
 	* @throws SystemException if a system exception occurred
 	*/
@@ -203,7 +203,7 @@ public interface ReleasePersistence extends BasePersistence<Release> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Counts all the releases.
+	* Returns the number of releases.
 	*
 	* @return the number of releases
 	* @throws SystemException if a system exception occurred

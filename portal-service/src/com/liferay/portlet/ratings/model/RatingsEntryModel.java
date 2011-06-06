@@ -49,21 +49,21 @@ public interface RatingsEntryModel extends AttachedModel, AuditedModel,
 	 */
 
 	/**
-	 * Gets the primary key of this ratings entry.
+	 * Returns the primary key of this ratings entry.
 	 *
 	 * @return the primary key of this ratings entry
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this ratings entry
+	 * Sets the primary key of this ratings entry.
 	 *
 	 * @param primaryKey the primary key of this ratings entry
 	 */
 	public void setPrimaryKey(long primaryKey);
 
 	/**
-	 * Gets the entry ID of this ratings entry.
+	 * Returns the entry ID of this ratings entry.
 	 *
 	 * @return the entry ID of this ratings entry
 	 */
@@ -77,7 +77,7 @@ public interface RatingsEntryModel extends AttachedModel, AuditedModel,
 	public void setEntryId(long entryId);
 
 	/**
-	 * Gets the company ID of this ratings entry.
+	 * Returns the company ID of this ratings entry.
 	 *
 	 * @return the company ID of this ratings entry
 	 */
@@ -91,7 +91,7 @@ public interface RatingsEntryModel extends AttachedModel, AuditedModel,
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the user ID of this ratings entry.
+	 * Returns the user ID of this ratings entry.
 	 *
 	 * @return the user ID of this ratings entry
 	 */
@@ -105,7 +105,7 @@ public interface RatingsEntryModel extends AttachedModel, AuditedModel,
 	public void setUserId(long userId);
 
 	/**
-	 * Gets the user uuid of this ratings entry.
+	 * Returns the user uuid of this ratings entry.
 	 *
 	 * @return the user uuid of this ratings entry
 	 * @throws SystemException if a system exception occurred
@@ -120,7 +120,7 @@ public interface RatingsEntryModel extends AttachedModel, AuditedModel,
 	public void setUserUuid(String userUuid);
 
 	/**
-	 * Gets the user name of this ratings entry.
+	 * Returns the user name of this ratings entry.
 	 *
 	 * @return the user name of this ratings entry
 	 */
@@ -135,7 +135,7 @@ public interface RatingsEntryModel extends AttachedModel, AuditedModel,
 	public void setUserName(String userName);
 
 	/**
-	 * Gets the create date of this ratings entry.
+	 * Returns the create date of this ratings entry.
 	 *
 	 * @return the create date of this ratings entry
 	 */
@@ -149,7 +149,7 @@ public interface RatingsEntryModel extends AttachedModel, AuditedModel,
 	public void setCreateDate(Date createDate);
 
 	/**
-	 * Gets the modified date of this ratings entry.
+	 * Returns the modified date of this ratings entry.
 	 *
 	 * @return the modified date of this ratings entry
 	 */
@@ -163,14 +163,14 @@ public interface RatingsEntryModel extends AttachedModel, AuditedModel,
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
-	 * Gets the class name of the model instance this ratings entry is polymorphically associated with.
+	 * Returns the fully qualified class name of this ratings entry.
 	 *
-	 * @return the class name of the model instance this ratings entry is polymorphically associated with
+	 * @return the fully qualified class name of this ratings entry
 	 */
 	public String getClassName();
 
 	/**
-	 * Gets the class name ID of this ratings entry.
+	 * Returns the class name ID of this ratings entry.
 	 *
 	 * @return the class name ID of this ratings entry
 	 */
@@ -184,7 +184,7 @@ public interface RatingsEntryModel extends AttachedModel, AuditedModel,
 	public void setClassNameId(long classNameId);
 
 	/**
-	 * Gets the class p k of this ratings entry.
+	 * Returns the class p k of this ratings entry.
 	 *
 	 * @return the class p k of this ratings entry
 	 */
@@ -198,7 +198,7 @@ public interface RatingsEntryModel extends AttachedModel, AuditedModel,
 	public void setClassPK(long classPK);
 
 	/**
-	 * Gets the score of this ratings entry.
+	 * Returns the score of this ratings entry.
 	 *
 	 * @return the score of this ratings entry
 	 */

@@ -53,21 +53,21 @@ public interface JournalArticleModel extends AttachedModel,
 	 */
 
 	/**
-	 * Gets the primary key of this journal article.
+	 * Returns the primary key of this journal article.
 	 *
 	 * @return the primary key of this journal article
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this journal article
+	 * Sets the primary key of this journal article.
 	 *
 	 * @param primaryKey the primary key of this journal article
 	 */
 	public void setPrimaryKey(long primaryKey);
 
 	/**
-	 * Gets the uuid of this journal article.
+	 * Returns the uuid of this journal article.
 	 *
 	 * @return the uuid of this journal article
 	 */
@@ -82,7 +82,7 @@ public interface JournalArticleModel extends AttachedModel,
 	public void setUuid(String uuid);
 
 	/**
-	 * Gets the ID of this journal article.
+	 * Returns the ID of this journal article.
 	 *
 	 * @return the ID of this journal article
 	 */
@@ -96,7 +96,7 @@ public interface JournalArticleModel extends AttachedModel,
 	public void setId(long id);
 
 	/**
-	 * Gets the resource prim key of this journal article.
+	 * Returns the resource prim key of this journal article.
 	 *
 	 * @return the resource prim key of this journal article
 	 */
@@ -112,7 +112,7 @@ public interface JournalArticleModel extends AttachedModel,
 	public boolean isResourceMain();
 
 	/**
-	 * Gets the group ID of this journal article.
+	 * Returns the group ID of this journal article.
 	 *
 	 * @return the group ID of this journal article
 	 */
@@ -126,7 +126,7 @@ public interface JournalArticleModel extends AttachedModel,
 	public void setGroupId(long groupId);
 
 	/**
-	 * Gets the company ID of this journal article.
+	 * Returns the company ID of this journal article.
 	 *
 	 * @return the company ID of this journal article
 	 */
@@ -140,7 +140,7 @@ public interface JournalArticleModel extends AttachedModel,
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the user ID of this journal article.
+	 * Returns the user ID of this journal article.
 	 *
 	 * @return the user ID of this journal article
 	 */
@@ -154,7 +154,7 @@ public interface JournalArticleModel extends AttachedModel,
 	public void setUserId(long userId);
 
 	/**
-	 * Gets the user uuid of this journal article.
+	 * Returns the user uuid of this journal article.
 	 *
 	 * @return the user uuid of this journal article
 	 * @throws SystemException if a system exception occurred
@@ -169,7 +169,7 @@ public interface JournalArticleModel extends AttachedModel,
 	public void setUserUuid(String userUuid);
 
 	/**
-	 * Gets the user name of this journal article.
+	 * Returns the user name of this journal article.
 	 *
 	 * @return the user name of this journal article
 	 */
@@ -184,7 +184,7 @@ public interface JournalArticleModel extends AttachedModel,
 	public void setUserName(String userName);
 
 	/**
-	 * Gets the create date of this journal article.
+	 * Returns the create date of this journal article.
 	 *
 	 * @return the create date of this journal article
 	 */
@@ -198,7 +198,7 @@ public interface JournalArticleModel extends AttachedModel,
 	public void setCreateDate(Date createDate);
 
 	/**
-	 * Gets the modified date of this journal article.
+	 * Returns the modified date of this journal article.
 	 *
 	 * @return the modified date of this journal article
 	 */
@@ -212,14 +212,14 @@ public interface JournalArticleModel extends AttachedModel,
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
-	 * Gets the class name of the model instance this journal article is polymorphically associated with.
+	 * Returns the fully qualified class name of this journal article.
 	 *
-	 * @return the class name of the model instance this journal article is polymorphically associated with
+	 * @return the fully qualified class name of this journal article
 	 */
 	public String getClassName();
 
 	/**
-	 * Gets the class name ID of this journal article.
+	 * Returns the class name ID of this journal article.
 	 *
 	 * @return the class name ID of this journal article
 	 */
@@ -233,7 +233,7 @@ public interface JournalArticleModel extends AttachedModel,
 	public void setClassNameId(long classNameId);
 
 	/**
-	 * Gets the class p k of this journal article.
+	 * Returns the class p k of this journal article.
 	 *
 	 * @return the class p k of this journal article
 	 */
@@ -247,7 +247,7 @@ public interface JournalArticleModel extends AttachedModel,
 	public void setClassPK(long classPK);
 
 	/**
-	 * Gets the article ID of this journal article.
+	 * Returns the article ID of this journal article.
 	 *
 	 * @return the article ID of this journal article
 	 */
@@ -261,7 +261,7 @@ public interface JournalArticleModel extends AttachedModel,
 	public void setArticleId(String articleId);
 
 	/**
-	 * Gets the version of this journal article.
+	 * Returns the version of this journal article.
 	 *
 	 * @return the version of this journal article
 	 */
@@ -275,50 +275,50 @@ public interface JournalArticleModel extends AttachedModel,
 	public void setVersion(double version);
 
 	/**
-	 * Gets the title of this journal article.
+	 * Returns the title of this journal article.
 	 *
 	 * @return the title of this journal article
 	 */
 	public String getTitle();
 
 	/**
-	 * Gets the localized title of this journal article. Uses the default language if no localization exists for the requested language.
+	 * Returns the localized title of this journal article in the language. Uses the default language if no localization exists for the requested language.
 	 *
-	 * @param locale the locale to get the localized title for
+	 * @param locale the locale of the language
 	 * @return the localized title of this journal article
 	 */
 	public String getTitle(Locale locale);
 
 	/**
-	 * Gets the localized title of this journal article, optionally using the default language if no localization exists for the requested language.
+	 * Returns the localized title of this journal article in the language, optionally using the default language if no localization exists for the requested language.
 	 *
-	 * @param locale the local to get the localized title for
+	 * @param locale the local of the language
 	 * @param useDefault whether to use the default language if no localization exists for the requested language
 	 * @return the localized title of this journal article. If <code>useDefault</code> is <code>false</code> and no localization exists for the requested language, an empty string will be returned.
 	 */
 	public String getTitle(Locale locale, boolean useDefault);
 
 	/**
-	 * Gets the localized title of this journal article. Uses the default language if no localization exists for the requested language.
+	 * Returns the localized title of this journal article in the language. Uses the default language if no localization exists for the requested language.
 	 *
-	 * @param languageId the id of the language to get the localized title for
+	 * @param languageId the ID of the language
 	 * @return the localized title of this journal article
 	 */
 	public String getTitle(String languageId);
 
 	/**
-	 * Gets the localized title of this journal article, optionally using the default language if no localization exists for the requested language.
+	 * Returns the localized title of this journal article in the language, optionally using the default language if no localization exists for the requested language.
 	 *
-	 * @param languageId the id of the language to get the localized title for
+	 * @param languageId the ID of the language
 	 * @param useDefault whether to use the default language if no localization exists for the requested language
 	 * @return the localized title of this journal article
 	 */
 	public String getTitle(String languageId, boolean useDefault);
 
 	/**
-	 * Gets a map of the locales and localized title of this journal article.
+	 * Returns a map of the locales and localized titles of this journal article.
 	 *
-	 * @return the locales and localized title
+	 * @return the locales and localized titles of this journal article
 	 */
 	public Map<Locale, String> getTitleMap();
 
@@ -330,13 +330,20 @@ public interface JournalArticleModel extends AttachedModel,
 	public void setTitle(String title);
 
 	/**
-	 * Sets the localized title of this journal article.
+	 * Sets the localized title of this journal article in the language.
 	 *
 	 * @param title the localized title of this journal article
-	 * @param locale the locale to set the localized title for
+	 * @param locale the locale of the language
 	 */
 	public void setTitle(String title, Locale locale);
 
+	/**
+	 * Sets the localized title of this journal article in the language, and sets the default locale.
+	 *
+	 * @param title the localized title of this journal article
+	 * @param locale the locale of the language
+	 * @param defaultLocale the default locale
+	 */
 	public void setTitle(String title, Locale locale, Locale defaultLocale);
 
 	/**
@@ -346,10 +353,16 @@ public interface JournalArticleModel extends AttachedModel,
 	 */
 	public void setTitleMap(Map<Locale, String> titleMap);
 
+	/**
+	 * Sets the localized titles of this journal article from the map of locales and localized titles, and sets the default locale.
+	 *
+	 * @param titleMap the locales and localized titles of this journal article
+	 * @param defaultLocale the default locale
+	 */
 	public void setTitleMap(Map<Locale, String> titleMap, Locale defaultLocale);
 
 	/**
-	 * Gets the url title of this journal article.
+	 * Returns the url title of this journal article.
 	 *
 	 * @return the url title of this journal article
 	 */
@@ -364,50 +377,50 @@ public interface JournalArticleModel extends AttachedModel,
 	public void setUrlTitle(String urlTitle);
 
 	/**
-	 * Gets the description of this journal article.
+	 * Returns the description of this journal article.
 	 *
 	 * @return the description of this journal article
 	 */
 	public String getDescription();
 
 	/**
-	 * Gets the localized description of this journal article. Uses the default language if no localization exists for the requested language.
+	 * Returns the localized description of this journal article in the language. Uses the default language if no localization exists for the requested language.
 	 *
-	 * @param locale the locale to get the localized description for
+	 * @param locale the locale of the language
 	 * @return the localized description of this journal article
 	 */
 	public String getDescription(Locale locale);
 
 	/**
-	 * Gets the localized description of this journal article, optionally using the default language if no localization exists for the requested language.
+	 * Returns the localized description of this journal article in the language, optionally using the default language if no localization exists for the requested language.
 	 *
-	 * @param locale the local to get the localized description for
+	 * @param locale the local of the language
 	 * @param useDefault whether to use the default language if no localization exists for the requested language
 	 * @return the localized description of this journal article. If <code>useDefault</code> is <code>false</code> and no localization exists for the requested language, an empty string will be returned.
 	 */
 	public String getDescription(Locale locale, boolean useDefault);
 
 	/**
-	 * Gets the localized description of this journal article. Uses the default language if no localization exists for the requested language.
+	 * Returns the localized description of this journal article in the language. Uses the default language if no localization exists for the requested language.
 	 *
-	 * @param languageId the id of the language to get the localized description for
+	 * @param languageId the ID of the language
 	 * @return the localized description of this journal article
 	 */
 	public String getDescription(String languageId);
 
 	/**
-	 * Gets the localized description of this journal article, optionally using the default language if no localization exists for the requested language.
+	 * Returns the localized description of this journal article in the language, optionally using the default language if no localization exists for the requested language.
 	 *
-	 * @param languageId the id of the language to get the localized description for
+	 * @param languageId the ID of the language
 	 * @param useDefault whether to use the default language if no localization exists for the requested language
 	 * @return the localized description of this journal article
 	 */
 	public String getDescription(String languageId, boolean useDefault);
 
 	/**
-	 * Gets a map of the locales and localized description of this journal article.
+	 * Returns a map of the locales and localized descriptions of this journal article.
 	 *
-	 * @return the locales and localized description
+	 * @return the locales and localized descriptions of this journal article
 	 */
 	public Map<Locale, String> getDescriptionMap();
 
@@ -419,13 +432,20 @@ public interface JournalArticleModel extends AttachedModel,
 	public void setDescription(String description);
 
 	/**
-	 * Sets the localized description of this journal article.
+	 * Sets the localized description of this journal article in the language.
 	 *
 	 * @param description the localized description of this journal article
-	 * @param locale the locale to set the localized description for
+	 * @param locale the locale of the language
 	 */
 	public void setDescription(String description, Locale locale);
 
+	/**
+	 * Sets the localized description of this journal article in the language, and sets the default locale.
+	 *
+	 * @param description the localized description of this journal article
+	 * @param locale the locale of the language
+	 * @param defaultLocale the default locale
+	 */
 	public void setDescription(String description, Locale locale,
 		Locale defaultLocale);
 
@@ -436,11 +456,17 @@ public interface JournalArticleModel extends AttachedModel,
 	 */
 	public void setDescriptionMap(Map<Locale, String> descriptionMap);
 
+	/**
+	 * Sets the localized descriptions of this journal article from the map of locales and localized descriptions, and sets the default locale.
+	 *
+	 * @param descriptionMap the locales and localized descriptions of this journal article
+	 * @param defaultLocale the default locale
+	 */
 	public void setDescriptionMap(Map<Locale, String> descriptionMap,
 		Locale defaultLocale);
 
 	/**
-	 * Gets the content of this journal article.
+	 * Returns the content of this journal article.
 	 *
 	 * @return the content of this journal article
 	 */
@@ -455,7 +481,7 @@ public interface JournalArticleModel extends AttachedModel,
 	public void setContent(String content);
 
 	/**
-	 * Gets the type of this journal article.
+	 * Returns the type of this journal article.
 	 *
 	 * @return the type of this journal article
 	 */
@@ -470,7 +496,7 @@ public interface JournalArticleModel extends AttachedModel,
 	public void setType(String type);
 
 	/**
-	 * Gets the structure ID of this journal article.
+	 * Returns the structure ID of this journal article.
 	 *
 	 * @return the structure ID of this journal article
 	 */
@@ -484,7 +510,7 @@ public interface JournalArticleModel extends AttachedModel,
 	public void setStructureId(String structureId);
 
 	/**
-	 * Gets the template ID of this journal article.
+	 * Returns the template ID of this journal article.
 	 *
 	 * @return the template ID of this journal article
 	 */
@@ -498,7 +524,7 @@ public interface JournalArticleModel extends AttachedModel,
 	public void setTemplateId(String templateId);
 
 	/**
-	 * Gets the layout uuid of this journal article.
+	 * Returns the layout uuid of this journal article.
 	 *
 	 * @return the layout uuid of this journal article
 	 */
@@ -513,7 +539,7 @@ public interface JournalArticleModel extends AttachedModel,
 	public void setLayoutUuid(String layoutUuid);
 
 	/**
-	 * Gets the display date of this journal article.
+	 * Returns the display date of this journal article.
 	 *
 	 * @return the display date of this journal article
 	 */
@@ -527,7 +553,7 @@ public interface JournalArticleModel extends AttachedModel,
 	public void setDisplayDate(Date displayDate);
 
 	/**
-	 * Gets the expiration date of this journal article.
+	 * Returns the expiration date of this journal article.
 	 *
 	 * @return the expiration date of this journal article
 	 */
@@ -541,7 +567,7 @@ public interface JournalArticleModel extends AttachedModel,
 	public void setExpirationDate(Date expirationDate);
 
 	/**
-	 * Gets the review date of this journal article.
+	 * Returns the review date of this journal article.
 	 *
 	 * @return the review date of this journal article
 	 */
@@ -555,7 +581,7 @@ public interface JournalArticleModel extends AttachedModel,
 	public void setReviewDate(Date reviewDate);
 
 	/**
-	 * Gets the indexable of this journal article.
+	 * Returns the indexable of this journal article.
 	 *
 	 * @return the indexable of this journal article
 	 */
@@ -576,7 +602,7 @@ public interface JournalArticleModel extends AttachedModel,
 	public void setIndexable(boolean indexable);
 
 	/**
-	 * Gets the small image of this journal article.
+	 * Returns the small image of this journal article.
 	 *
 	 * @return the small image of this journal article
 	 */
@@ -597,7 +623,7 @@ public interface JournalArticleModel extends AttachedModel,
 	public void setSmallImage(boolean smallImage);
 
 	/**
-	 * Gets the small image ID of this journal article.
+	 * Returns the small image ID of this journal article.
 	 *
 	 * @return the small image ID of this journal article
 	 */
@@ -611,7 +637,7 @@ public interface JournalArticleModel extends AttachedModel,
 	public void setSmallImageId(long smallImageId);
 
 	/**
-	 * Gets the small image u r l of this journal article.
+	 * Returns the small image u r l of this journal article.
 	 *
 	 * @return the small image u r l of this journal article
 	 */
@@ -626,7 +652,7 @@ public interface JournalArticleModel extends AttachedModel,
 	public void setSmallImageURL(String smallImageURL);
 
 	/**
-	 * Gets the status of this journal article.
+	 * Returns the status of this journal article.
 	 *
 	 * @return the status of this journal article
 	 */
@@ -640,7 +666,7 @@ public interface JournalArticleModel extends AttachedModel,
 	public void setStatus(int status);
 
 	/**
-	 * Gets the status by user ID of this journal article.
+	 * Returns the status by user ID of this journal article.
 	 *
 	 * @return the status by user ID of this journal article
 	 */
@@ -654,7 +680,7 @@ public interface JournalArticleModel extends AttachedModel,
 	public void setStatusByUserId(long statusByUserId);
 
 	/**
-	 * Gets the status by user uuid of this journal article.
+	 * Returns the status by user uuid of this journal article.
 	 *
 	 * @return the status by user uuid of this journal article
 	 * @throws SystemException if a system exception occurred
@@ -669,7 +695,7 @@ public interface JournalArticleModel extends AttachedModel,
 	public void setStatusByUserUuid(String statusByUserUuid);
 
 	/**
-	 * Gets the status by user name of this journal article.
+	 * Returns the status by user name of this journal article.
 	 *
 	 * @return the status by user name of this journal article
 	 */
@@ -684,7 +710,7 @@ public interface JournalArticleModel extends AttachedModel,
 	public void setStatusByUserName(String statusByUserName);
 
 	/**
-	 * Gets the status date of this journal article.
+	 * Returns the status date of this journal article.
 	 *
 	 * @return the status date of this journal article
 	 */
@@ -698,7 +724,7 @@ public interface JournalArticleModel extends AttachedModel,
 	public void setStatusDate(Date statusDate);
 
 	/**
-	 * @deprecated {@link #isApproved}
+	 * @deprecated Renamed to {@link #isApproved()}
 	 */
 	public boolean getApproved();
 

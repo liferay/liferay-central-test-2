@@ -72,7 +72,7 @@ public abstract class AnnouncementsFlagLocalServiceBaseImpl
 	/**
 	 * Adds the announcements flag to the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param announcementsFlag the announcements flag to add
+	 * @param announcementsFlag the announcements flag
 	 * @return the announcements flag that was added
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -96,7 +96,7 @@ public abstract class AnnouncementsFlagLocalServiceBaseImpl
 	/**
 	 * Deletes the announcements flag with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param flagId the primary key of the announcements flag to delete
+	 * @param flagId the primary key of the announcements flag
 	 * @throws PortalException if a announcements flag with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -108,7 +108,7 @@ public abstract class AnnouncementsFlagLocalServiceBaseImpl
 	/**
 	 * Deletes the announcements flag from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param announcementsFlag the announcements flag to delete
+	 * @param announcementsFlag the announcements flag
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void deleteAnnouncementsFlag(AnnouncementsFlag announcementsFlag)
@@ -119,7 +119,7 @@ public abstract class AnnouncementsFlagLocalServiceBaseImpl
 	/**
 	 * Performs a dynamic query on the database and returns the matching rows.
 	 *
-	 * @param dynamicQuery the dynamic query to search with
+	 * @param dynamicQuery the dynamic query
 	 * @return the matching rows
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -136,9 +136,9 @@ public abstract class AnnouncementsFlagLocalServiceBaseImpl
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param dynamicQuery the dynamic query to search with
-	 * @param start the lower bound of the range of model instances to return
-	 * @param end the upper bound of the range of model instances to return (not inclusive)
+	 * @param dynamicQuery the dynamic query
+	 * @param start the lower bound of the range of model instances
+	 * @param end the upper bound of the range of model instances (not inclusive)
 	 * @return the range of matching rows
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -156,9 +156,9 @@ public abstract class AnnouncementsFlagLocalServiceBaseImpl
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param dynamicQuery the dynamic query to search with
-	 * @param start the lower bound of the range of model instances to return
-	 * @param end the upper bound of the range of model instances to return (not inclusive)
+	 * @param dynamicQuery the dynamic query
+	 * @param start the lower bound of the range of model instances
+	 * @param end the upper bound of the range of model instances (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching rows
 	 * @throws SystemException if a system exception occurred
@@ -171,9 +171,9 @@ public abstract class AnnouncementsFlagLocalServiceBaseImpl
 	}
 
 	/**
-	 * Counts the number of rows that match the dynamic query.
+	 * Returns the number of rows that match the dynamic query.
 	 *
-	 * @param dynamicQuery the dynamic query to search with
+	 * @param dynamicQuery the dynamic query
 	 * @return the number of rows that match the dynamic query
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -183,9 +183,9 @@ public abstract class AnnouncementsFlagLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the announcements flag with the primary key.
+	 * Returns the announcements flag with the primary key.
 	 *
-	 * @param flagId the primary key of the announcements flag to get
+	 * @param flagId the primary key of the announcements flag
 	 * @return the announcements flag
 	 * @throws PortalException if a announcements flag with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -196,14 +196,14 @@ public abstract class AnnouncementsFlagLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets a range of all the announcements flags.
+	 * Returns a range of all the announcements flags.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param start the lower bound of the range of announcements flags to return
-	 * @param end the upper bound of the range of announcements flags to return (not inclusive)
+	 * @param start the lower bound of the range of announcements flags
+	 * @param end the upper bound of the range of announcements flags (not inclusive)
 	 * @return the range of announcements flags
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -213,7 +213,7 @@ public abstract class AnnouncementsFlagLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the number of announcements flags.
+	 * Returns the number of announcements flags.
 	 *
 	 * @return the number of announcements flags
 	 * @throws SystemException if a system exception occurred
@@ -225,7 +225,7 @@ public abstract class AnnouncementsFlagLocalServiceBaseImpl
 	/**
 	 * Updates the announcements flag in the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param announcementsFlag the announcements flag to update
+	 * @param announcementsFlag the announcements flag
 	 * @return the announcements flag that was updated
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -239,7 +239,7 @@ public abstract class AnnouncementsFlagLocalServiceBaseImpl
 	/**
 	 * Updates the announcements flag in the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param announcementsFlag the announcements flag to update
+	 * @param announcementsFlag the announcements flag
 	 * @param merge whether to merge the announcements flag with the current session. See {@link com.liferay.portal.service.persistence.BatchSession#update(com.liferay.portal.kernel.dao.orm.Session, com.liferay.portal.model.BaseModel, boolean)} for an explanation.
 	 * @return the announcements flag that was updated
 	 * @throws SystemException if a system exception occurred
@@ -253,7 +253,7 @@ public abstract class AnnouncementsFlagLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the announcements delivery local service.
+	 * Returns the announcements delivery local service.
 	 *
 	 * @return the announcements delivery local service
 	 */
@@ -272,7 +272,7 @@ public abstract class AnnouncementsFlagLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the announcements delivery remote service.
+	 * Returns the announcements delivery remote service.
 	 *
 	 * @return the announcements delivery remote service
 	 */
@@ -291,7 +291,7 @@ public abstract class AnnouncementsFlagLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the announcements delivery persistence.
+	 * Returns the announcements delivery persistence.
 	 *
 	 * @return the announcements delivery persistence
 	 */
@@ -310,7 +310,7 @@ public abstract class AnnouncementsFlagLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the announcements entry local service.
+	 * Returns the announcements entry local service.
 	 *
 	 * @return the announcements entry local service
 	 */
@@ -329,7 +329,7 @@ public abstract class AnnouncementsFlagLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the announcements entry remote service.
+	 * Returns the announcements entry remote service.
 	 *
 	 * @return the announcements entry remote service
 	 */
@@ -348,7 +348,7 @@ public abstract class AnnouncementsFlagLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the announcements entry persistence.
+	 * Returns the announcements entry persistence.
 	 *
 	 * @return the announcements entry persistence
 	 */
@@ -367,7 +367,7 @@ public abstract class AnnouncementsFlagLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the announcements entry finder.
+	 * Returns the announcements entry finder.
 	 *
 	 * @return the announcements entry finder
 	 */
@@ -386,7 +386,7 @@ public abstract class AnnouncementsFlagLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the announcements flag local service.
+	 * Returns the announcements flag local service.
 	 *
 	 * @return the announcements flag local service
 	 */
@@ -405,7 +405,7 @@ public abstract class AnnouncementsFlagLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the announcements flag remote service.
+	 * Returns the announcements flag remote service.
 	 *
 	 * @return the announcements flag remote service
 	 */
@@ -424,7 +424,7 @@ public abstract class AnnouncementsFlagLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the announcements flag persistence.
+	 * Returns the announcements flag persistence.
 	 *
 	 * @return the announcements flag persistence
 	 */
@@ -443,7 +443,7 @@ public abstract class AnnouncementsFlagLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the counter local service.
+	 * Returns the counter local service.
 	 *
 	 * @return the counter local service
 	 */
@@ -461,7 +461,7 @@ public abstract class AnnouncementsFlagLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the resource local service.
+	 * Returns the resource local service.
 	 *
 	 * @return the resource local service
 	 */
@@ -480,7 +480,7 @@ public abstract class AnnouncementsFlagLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the resource remote service.
+	 * Returns the resource remote service.
 	 *
 	 * @return the resource remote service
 	 */
@@ -498,7 +498,7 @@ public abstract class AnnouncementsFlagLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the resource persistence.
+	 * Returns the resource persistence.
 	 *
 	 * @return the resource persistence
 	 */
@@ -516,7 +516,7 @@ public abstract class AnnouncementsFlagLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the resource finder.
+	 * Returns the resource finder.
 	 *
 	 * @return the resource finder
 	 */
@@ -534,7 +534,7 @@ public abstract class AnnouncementsFlagLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the user local service.
+	 * Returns the user local service.
 	 *
 	 * @return the user local service
 	 */
@@ -552,7 +552,7 @@ public abstract class AnnouncementsFlagLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the user remote service.
+	 * Returns the user remote service.
 	 *
 	 * @return the user remote service
 	 */
@@ -570,7 +570,7 @@ public abstract class AnnouncementsFlagLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the user persistence.
+	 * Returns the user persistence.
 	 *
 	 * @return the user persistence
 	 */
@@ -588,7 +588,7 @@ public abstract class AnnouncementsFlagLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the user finder.
+	 * Returns the user finder.
 	 *
 	 * @return the user finder
 	 */
@@ -606,7 +606,7 @@ public abstract class AnnouncementsFlagLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the Spring bean ID for this bean.
+	 * Returns the Spring bean ID for this bean.
 	 *
 	 * @return the Spring bean ID for this bean
 	 */
@@ -626,7 +626,7 @@ public abstract class AnnouncementsFlagLocalServiceBaseImpl
 	/**
 	 * Performs an SQL query.
 	 *
-	 * @param sql the sql query to perform
+	 * @param sql the sql query
 	 */
 	protected void runSQL(String sql) throws SystemException {
 		try {

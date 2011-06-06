@@ -33,7 +33,7 @@ public class LayoutSetPrototypeLocalServiceWrapper
 	/**
 	* Adds the layout set prototype to the database. Also notifies the appropriate model listeners.
 	*
-	* @param layoutSetPrototype the layout set prototype to add
+	* @param layoutSetPrototype the layout set prototype
 	* @return the layout set prototype that was added
 	* @throws SystemException if a system exception occurred
 	*/
@@ -57,7 +57,7 @@ public class LayoutSetPrototypeLocalServiceWrapper
 	/**
 	* Deletes the layout set prototype with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param layoutSetPrototypeId the primary key of the layout set prototype to delete
+	* @param layoutSetPrototypeId the primary key of the layout set prototype
 	* @throws PortalException if a layout set prototype with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -70,7 +70,7 @@ public class LayoutSetPrototypeLocalServiceWrapper
 	/**
 	* Deletes the layout set prototype from the database. Also notifies the appropriate model listeners.
 	*
-	* @param layoutSetPrototype the layout set prototype to delete
+	* @param layoutSetPrototype the layout set prototype
 	* @throws PortalException
 	* @throws SystemException if a system exception occurred
 	*/
@@ -84,7 +84,7 @@ public class LayoutSetPrototypeLocalServiceWrapper
 	/**
 	* Performs a dynamic query on the database and returns the matching rows.
 	*
-	* @param dynamicQuery the dynamic query to search with
+	* @param dynamicQuery the dynamic query
 	* @return the matching rows
 	* @throws SystemException if a system exception occurred
 	*/
@@ -102,9 +102,9 @@ public class LayoutSetPrototypeLocalServiceWrapper
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param dynamicQuery the dynamic query to search with
-	* @param start the lower bound of the range of model instances to return
-	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param dynamicQuery the dynamic query
+	* @param start the lower bound of the range of model instances
+	* @param end the upper bound of the range of model instances (not inclusive)
 	* @return the range of matching rows
 	* @throws SystemException if a system exception occurred
 	*/
@@ -123,9 +123,9 @@ public class LayoutSetPrototypeLocalServiceWrapper
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param dynamicQuery the dynamic query to search with
-	* @param start the lower bound of the range of model instances to return
-	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param dynamicQuery the dynamic query
+	* @param start the lower bound of the range of model instances
+	* @param end the upper bound of the range of model instances (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching rows
 	* @throws SystemException if a system exception occurred
@@ -141,9 +141,9 @@ public class LayoutSetPrototypeLocalServiceWrapper
 	}
 
 	/**
-	* Counts the number of rows that match the dynamic query.
+	* Returns the number of rows that match the dynamic query.
 	*
-	* @param dynamicQuery the dynamic query to search with
+	* @param dynamicQuery the dynamic query
 	* @return the number of rows that match the dynamic query
 	* @throws SystemException if a system exception occurred
 	*/
@@ -154,9 +154,9 @@ public class LayoutSetPrototypeLocalServiceWrapper
 	}
 
 	/**
-	* Gets the layout set prototype with the primary key.
+	* Returns the layout set prototype with the primary key.
 	*
-	* @param layoutSetPrototypeId the primary key of the layout set prototype to get
+	* @param layoutSetPrototypeId the primary key of the layout set prototype
 	* @return the layout set prototype
 	* @throws PortalException if a layout set prototype with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -169,14 +169,14 @@ public class LayoutSetPrototypeLocalServiceWrapper
 	}
 
 	/**
-	* Gets a range of all the layout set prototypes.
+	* Returns a range of all the layout set prototypes.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of layout set prototypes to return
-	* @param end the upper bound of the range of layout set prototypes to return (not inclusive)
+	* @param start the lower bound of the range of layout set prototypes
+	* @param end the upper bound of the range of layout set prototypes (not inclusive)
 	* @return the range of layout set prototypes
 	* @throws SystemException if a system exception occurred
 	*/
@@ -187,7 +187,7 @@ public class LayoutSetPrototypeLocalServiceWrapper
 	}
 
 	/**
-	* Gets the number of layout set prototypes.
+	* Returns the number of layout set prototypes.
 	*
 	* @return the number of layout set prototypes
 	* @throws SystemException if a system exception occurred
@@ -200,7 +200,7 @@ public class LayoutSetPrototypeLocalServiceWrapper
 	/**
 	* Updates the layout set prototype in the database. Also notifies the appropriate model listeners.
 	*
-	* @param layoutSetPrototype the layout set prototype to update
+	* @param layoutSetPrototype the layout set prototype
 	* @return the layout set prototype that was updated
 	* @throws SystemException if a system exception occurred
 	*/
@@ -213,7 +213,7 @@ public class LayoutSetPrototypeLocalServiceWrapper
 	/**
 	* Updates the layout set prototype in the database. Also notifies the appropriate model listeners.
 	*
-	* @param layoutSetPrototype the layout set prototype to update
+	* @param layoutSetPrototype the layout set prototype
 	* @param merge whether to merge the layout set prototype with the current session. See {@link com.liferay.portal.service.persistence.BatchSession#update(com.liferay.portal.kernel.dao.orm.Session, com.liferay.portal.model.BaseModel, boolean)} for an explanation.
 	* @return the layout set prototype that was updated
 	* @throws SystemException if a system exception occurred
@@ -227,7 +227,7 @@ public class LayoutSetPrototypeLocalServiceWrapper
 	}
 
 	/**
-	* Gets the Spring bean ID for this bean.
+	* Returns the Spring bean ID for this bean.
 	*
 	* @return the Spring bean ID for this bean
 	*/

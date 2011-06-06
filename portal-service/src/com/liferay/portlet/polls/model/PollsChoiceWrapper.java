@@ -37,7 +37,7 @@ public class PollsChoiceWrapper implements PollsChoice {
 	}
 
 	/**
-	* Gets the primary key of this polls choice.
+	* Returns the primary key of this polls choice.
 	*
 	* @return the primary key of this polls choice
 	*/
@@ -46,7 +46,7 @@ public class PollsChoiceWrapper implements PollsChoice {
 	}
 
 	/**
-	* Sets the primary key of this polls choice
+	* Sets the primary key of this polls choice.
 	*
 	* @param primaryKey the primary key of this polls choice
 	*/
@@ -55,7 +55,7 @@ public class PollsChoiceWrapper implements PollsChoice {
 	}
 
 	/**
-	* Gets the uuid of this polls choice.
+	* Returns the uuid of this polls choice.
 	*
 	* @return the uuid of this polls choice
 	*/
@@ -73,7 +73,7 @@ public class PollsChoiceWrapper implements PollsChoice {
 	}
 
 	/**
-	* Gets the choice ID of this polls choice.
+	* Returns the choice ID of this polls choice.
 	*
 	* @return the choice ID of this polls choice
 	*/
@@ -91,7 +91,7 @@ public class PollsChoiceWrapper implements PollsChoice {
 	}
 
 	/**
-	* Gets the question ID of this polls choice.
+	* Returns the question ID of this polls choice.
 	*
 	* @return the question ID of this polls choice
 	*/
@@ -109,7 +109,7 @@ public class PollsChoiceWrapper implements PollsChoice {
 	}
 
 	/**
-	* Gets the name of this polls choice.
+	* Returns the name of this polls choice.
 	*
 	* @return the name of this polls choice
 	*/
@@ -127,7 +127,7 @@ public class PollsChoiceWrapper implements PollsChoice {
 	}
 
 	/**
-	* Gets the description of this polls choice.
+	* Returns the description of this polls choice.
 	*
 	* @return the description of this polls choice
 	*/
@@ -136,9 +136,9 @@ public class PollsChoiceWrapper implements PollsChoice {
 	}
 
 	/**
-	* Gets the localized description of this polls choice. Uses the default language if no localization exists for the requested language.
+	* Returns the localized description of this polls choice in the language. Uses the default language if no localization exists for the requested language.
 	*
-	* @param locale the locale to get the localized description for
+	* @param locale the locale of the language
 	* @return the localized description of this polls choice
 	*/
 	public java.lang.String getDescription(java.util.Locale locale) {
@@ -146,9 +146,9 @@ public class PollsChoiceWrapper implements PollsChoice {
 	}
 
 	/**
-	* Gets the localized description of this polls choice, optionally using the default language if no localization exists for the requested language.
+	* Returns the localized description of this polls choice in the language, optionally using the default language if no localization exists for the requested language.
 	*
-	* @param locale the local to get the localized description for
+	* @param locale the local of the language
 	* @param useDefault whether to use the default language if no localization exists for the requested language
 	* @return the localized description of this polls choice. If <code>useDefault</code> is <code>false</code> and no localization exists for the requested language, an empty string will be returned.
 	*/
@@ -158,9 +158,9 @@ public class PollsChoiceWrapper implements PollsChoice {
 	}
 
 	/**
-	* Gets the localized description of this polls choice. Uses the default language if no localization exists for the requested language.
+	* Returns the localized description of this polls choice in the language. Uses the default language if no localization exists for the requested language.
 	*
-	* @param languageId the id of the language to get the localized description for
+	* @param languageId the ID of the language
 	* @return the localized description of this polls choice
 	*/
 	public java.lang.String getDescription(java.lang.String languageId) {
@@ -168,9 +168,9 @@ public class PollsChoiceWrapper implements PollsChoice {
 	}
 
 	/**
-	* Gets the localized description of this polls choice, optionally using the default language if no localization exists for the requested language.
+	* Returns the localized description of this polls choice in the language, optionally using the default language if no localization exists for the requested language.
 	*
-	* @param languageId the id of the language to get the localized description for
+	* @param languageId the ID of the language
 	* @param useDefault whether to use the default language if no localization exists for the requested language
 	* @return the localized description of this polls choice
 	*/
@@ -180,9 +180,9 @@ public class PollsChoiceWrapper implements PollsChoice {
 	}
 
 	/**
-	* Gets a map of the locales and localized description of this polls choice.
+	* Returns a map of the locales and localized descriptions of this polls choice.
 	*
-	* @return the locales and localized description
+	* @return the locales and localized descriptions of this polls choice
 	*/
 	public java.util.Map<java.util.Locale, java.lang.String> getDescriptionMap() {
 		return _pollsChoice.getDescriptionMap();
@@ -198,16 +198,23 @@ public class PollsChoiceWrapper implements PollsChoice {
 	}
 
 	/**
-	* Sets the localized description of this polls choice.
+	* Sets the localized description of this polls choice in the language.
 	*
 	* @param description the localized description of this polls choice
-	* @param locale the locale to set the localized description for
+	* @param locale the locale of the language
 	*/
 	public void setDescription(java.lang.String description,
 		java.util.Locale locale) {
 		_pollsChoice.setDescription(description, locale);
 	}
 
+	/**
+	* Sets the localized description of this polls choice in the language, and sets the default locale.
+	*
+	* @param description the localized description of this polls choice
+	* @param locale the locale of the language
+	* @param defaultLocale the default locale
+	*/
 	public void setDescription(java.lang.String description,
 		java.util.Locale locale, java.util.Locale defaultLocale) {
 		_pollsChoice.setDescription(description, locale, defaultLocale);
@@ -223,6 +230,12 @@ public class PollsChoiceWrapper implements PollsChoice {
 		_pollsChoice.setDescriptionMap(descriptionMap);
 	}
 
+	/**
+	* Sets the localized descriptions of this polls choice from the map of locales and localized descriptions, and sets the default locale.
+	*
+	* @param descriptionMap the locales and localized descriptions of this polls choice
+	* @param defaultLocale the default locale
+	*/
 	public void setDescriptionMap(
 		java.util.Map<java.util.Locale, java.lang.String> descriptionMap,
 		java.util.Locale defaultLocale) {

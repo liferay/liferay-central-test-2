@@ -46,21 +46,21 @@ public interface SubscriptionModel extends AttachedModel, AuditedModel,
 	 */
 
 	/**
-	 * Gets the primary key of this subscription.
+	 * Returns the primary key of this subscription.
 	 *
 	 * @return the primary key of this subscription
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this subscription
+	 * Sets the primary key of this subscription.
 	 *
 	 * @param primaryKey the primary key of this subscription
 	 */
 	public void setPrimaryKey(long primaryKey);
 
 	/**
-	 * Gets the subscription ID of this subscription.
+	 * Returns the subscription ID of this subscription.
 	 *
 	 * @return the subscription ID of this subscription
 	 */
@@ -74,7 +74,7 @@ public interface SubscriptionModel extends AttachedModel, AuditedModel,
 	public void setSubscriptionId(long subscriptionId);
 
 	/**
-	 * Gets the company ID of this subscription.
+	 * Returns the company ID of this subscription.
 	 *
 	 * @return the company ID of this subscription
 	 */
@@ -88,7 +88,7 @@ public interface SubscriptionModel extends AttachedModel, AuditedModel,
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the user ID of this subscription.
+	 * Returns the user ID of this subscription.
 	 *
 	 * @return the user ID of this subscription
 	 */
@@ -102,7 +102,7 @@ public interface SubscriptionModel extends AttachedModel, AuditedModel,
 	public void setUserId(long userId);
 
 	/**
-	 * Gets the user uuid of this subscription.
+	 * Returns the user uuid of this subscription.
 	 *
 	 * @return the user uuid of this subscription
 	 * @throws SystemException if a system exception occurred
@@ -117,7 +117,7 @@ public interface SubscriptionModel extends AttachedModel, AuditedModel,
 	public void setUserUuid(String userUuid);
 
 	/**
-	 * Gets the user name of this subscription.
+	 * Returns the user name of this subscription.
 	 *
 	 * @return the user name of this subscription
 	 */
@@ -132,7 +132,7 @@ public interface SubscriptionModel extends AttachedModel, AuditedModel,
 	public void setUserName(String userName);
 
 	/**
-	 * Gets the create date of this subscription.
+	 * Returns the create date of this subscription.
 	 *
 	 * @return the create date of this subscription
 	 */
@@ -146,7 +146,7 @@ public interface SubscriptionModel extends AttachedModel, AuditedModel,
 	public void setCreateDate(Date createDate);
 
 	/**
-	 * Gets the modified date of this subscription.
+	 * Returns the modified date of this subscription.
 	 *
 	 * @return the modified date of this subscription
 	 */
@@ -160,14 +160,14 @@ public interface SubscriptionModel extends AttachedModel, AuditedModel,
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
-	 * Gets the class name of the model instance this subscription is polymorphically associated with.
+	 * Returns the fully qualified class name of this subscription.
 	 *
-	 * @return the class name of the model instance this subscription is polymorphically associated with
+	 * @return the fully qualified class name of this subscription
 	 */
 	public String getClassName();
 
 	/**
-	 * Gets the class name ID of this subscription.
+	 * Returns the class name ID of this subscription.
 	 *
 	 * @return the class name ID of this subscription
 	 */
@@ -181,7 +181,7 @@ public interface SubscriptionModel extends AttachedModel, AuditedModel,
 	public void setClassNameId(long classNameId);
 
 	/**
-	 * Gets the class p k of this subscription.
+	 * Returns the class p k of this subscription.
 	 *
 	 * @return the class p k of this subscription
 	 */
@@ -195,7 +195,7 @@ public interface SubscriptionModel extends AttachedModel, AuditedModel,
 	public void setClassPK(long classPK);
 
 	/**
-	 * Gets the frequency of this subscription.
+	 * Returns the frequency of this subscription.
 	 *
 	 * @return the frequency of this subscription
 	 */

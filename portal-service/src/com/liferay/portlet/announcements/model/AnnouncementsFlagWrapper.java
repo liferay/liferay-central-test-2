@@ -37,7 +37,7 @@ public class AnnouncementsFlagWrapper implements AnnouncementsFlag {
 	}
 
 	/**
-	* Gets the primary key of this announcements flag.
+	* Returns the primary key of this announcements flag.
 	*
 	* @return the primary key of this announcements flag
 	*/
@@ -46,7 +46,7 @@ public class AnnouncementsFlagWrapper implements AnnouncementsFlag {
 	}
 
 	/**
-	* Sets the primary key of this announcements flag
+	* Sets the primary key of this announcements flag.
 	*
 	* @param primaryKey the primary key of this announcements flag
 	*/
@@ -55,7 +55,7 @@ public class AnnouncementsFlagWrapper implements AnnouncementsFlag {
 	}
 
 	/**
-	* Gets the flag ID of this announcements flag.
+	* Returns the flag ID of this announcements flag.
 	*
 	* @return the flag ID of this announcements flag
 	*/
@@ -73,7 +73,7 @@ public class AnnouncementsFlagWrapper implements AnnouncementsFlag {
 	}
 
 	/**
-	* Gets the user ID of this announcements flag.
+	* Returns the user ID of this announcements flag.
 	*
 	* @return the user ID of this announcements flag
 	*/
@@ -91,7 +91,7 @@ public class AnnouncementsFlagWrapper implements AnnouncementsFlag {
 	}
 
 	/**
-	* Gets the user uuid of this announcements flag.
+	* Returns the user uuid of this announcements flag.
 	*
 	* @return the user uuid of this announcements flag
 	* @throws SystemException if a system exception occurred
@@ -111,7 +111,7 @@ public class AnnouncementsFlagWrapper implements AnnouncementsFlag {
 	}
 
 	/**
-	* Gets the create date of this announcements flag.
+	* Returns the create date of this announcements flag.
 	*
 	* @return the create date of this announcements flag
 	*/
@@ -129,7 +129,7 @@ public class AnnouncementsFlagWrapper implements AnnouncementsFlag {
 	}
 
 	/**
-	* Gets the entry ID of this announcements flag.
+	* Returns the entry ID of this announcements flag.
 	*
 	* @return the entry ID of this announcements flag
 	*/
@@ -147,7 +147,7 @@ public class AnnouncementsFlagWrapper implements AnnouncementsFlag {
 	}
 
 	/**
-	* Gets the value of this announcements flag.
+	* Returns the value of this announcements flag.
 	*
 	* @return the value of this announcements flag
 	*/

@@ -126,7 +126,7 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 	/**
 	 * Caches the journal article resource in the entity cache if it is enabled.
 	 *
-	 * @param journalArticleResource the journal article resource to cache
+	 * @param journalArticleResource the journal article resource
 	 */
 	public void cacheResult(JournalArticleResource journalArticleResource) {
 		EntityCacheUtil.putResult(JournalArticleResourceModelImpl.ENTITY_CACHE_ENABLED,
@@ -152,7 +152,7 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 	/**
 	 * Caches the journal article resources in the entity cache if it is enabled.
 	 *
-	 * @param journalArticleResources the journal article resources to cache
+	 * @param journalArticleResources the journal article resources
 	 */
 	public void cacheResult(
 		List<JournalArticleResource> journalArticleResources) {
@@ -231,7 +231,7 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 	/**
 	 * Removes the journal article resource with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param primaryKey the primary key of the journal article resource to remove
+	 * @param primaryKey the primary key of the journal article resource
 	 * @return the journal article resource that was removed
 	 * @throws com.liferay.portal.NoSuchModelException if a journal article resource with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -244,7 +244,7 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 	/**
 	 * Removes the journal article resource with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param resourcePrimKey the primary key of the journal article resource to remove
+	 * @param resourcePrimKey the primary key of the journal article resource
 	 * @return the journal article resource that was removed
 	 * @throws com.liferay.portlet.journal.NoSuchArticleResourceException if a journal article resource with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -285,7 +285,7 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 	/**
 	 * Removes the journal article resource from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param journalArticleResource the journal article resource to remove
+	 * @param journalArticleResource the journal article resource
 	 * @return the journal article resource that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -446,9 +446,9 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 	}
 
 	/**
-	 * Finds the journal article resource with the primary key or throws a {@link com.liferay.portal.NoSuchModelException} if it could not be found.
+	 * Returns the journal article resource with the primary key or throws a {@link com.liferay.portal.NoSuchModelException} if it could not be found.
 	 *
-	 * @param primaryKey the primary key of the journal article resource to find
+	 * @param primaryKey the primary key of the journal article resource
 	 * @return the journal article resource
 	 * @throws com.liferay.portal.NoSuchModelException if a journal article resource with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -459,9 +459,9 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 	}
 
 	/**
-	 * Finds the journal article resource with the primary key or throws a {@link com.liferay.portlet.journal.NoSuchArticleResourceException} if it could not be found.
+	 * Returns the journal article resource with the primary key or throws a {@link com.liferay.portlet.journal.NoSuchArticleResourceException} if it could not be found.
 	 *
-	 * @param resourcePrimKey the primary key of the journal article resource to find
+	 * @param resourcePrimKey the primary key of the journal article resource
 	 * @return the journal article resource
 	 * @throws com.liferay.portlet.journal.NoSuchArticleResourceException if a journal article resource with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -483,9 +483,9 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 	}
 
 	/**
-	 * Finds the journal article resource with the primary key or returns <code>null</code> if it could not be found.
+	 * Returns the journal article resource with the primary key or returns <code>null</code> if it could not be found.
 	 *
-	 * @param primaryKey the primary key of the journal article resource to find
+	 * @param primaryKey the primary key of the journal article resource
 	 * @return the journal article resource, or <code>null</code> if a journal article resource with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -495,9 +495,9 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 	}
 
 	/**
-	 * Finds the journal article resource with the primary key or returns <code>null</code> if it could not be found.
+	 * Returns the journal article resource with the primary key or returns <code>null</code> if it could not be found.
 	 *
-	 * @param resourcePrimKey the primary key of the journal article resource to find
+	 * @param resourcePrimKey the primary key of the journal article resource
 	 * @return the journal article resource, or <code>null</code> if a journal article resource with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -531,9 +531,9 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 	}
 
 	/**
-	 * Finds all the journal article resources where uuid = &#63;.
+	 * Returns all the journal article resources where uuid = &#63;.
 	 *
-	 * @param uuid the uuid to search with
+	 * @param uuid the uuid
 	 * @return the matching journal article resources
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -543,15 +543,15 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 	}
 
 	/**
-	 * Finds a range of all the journal article resources where uuid = &#63;.
+	 * Returns a range of all the journal article resources where uuid = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param uuid the uuid to search with
-	 * @param start the lower bound of the range of journal article resources to return
-	 * @param end the upper bound of the range of journal article resources to return (not inclusive)
+	 * @param uuid the uuid
+	 * @param start the lower bound of the range of journal article resources
+	 * @param end the upper bound of the range of journal article resources (not inclusive)
 	 * @return the range of matching journal article resources
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -561,15 +561,15 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 	}
 
 	/**
-	 * Finds an ordered range of all the journal article resources where uuid = &#63;.
+	 * Returns an ordered range of all the journal article resources where uuid = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param uuid the uuid to search with
-	 * @param start the lower bound of the range of journal article resources to return
-	 * @param end the upper bound of the range of journal article resources to return (not inclusive)
+	 * @param uuid the uuid
+	 * @param start the lower bound of the range of journal article resources
+	 * @param end the upper bound of the range of journal article resources (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching journal article resources
 	 * @throws SystemException if a system exception occurred
@@ -657,13 +657,13 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 	}
 
 	/**
-	 * Finds the first journal article resource in the ordered set where uuid = &#63;.
+	 * Returns the first journal article resource in the ordered set where uuid = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param uuid the uuid to search with
+	 * @param uuid the uuid
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching journal article resource
 	 * @throws com.liferay.portlet.journal.NoSuchArticleResourceException if a matching journal article resource could not be found
@@ -693,13 +693,13 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 	}
 
 	/**
-	 * Finds the last journal article resource in the ordered set where uuid = &#63;.
+	 * Returns the last journal article resource in the ordered set where uuid = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param uuid the uuid to search with
+	 * @param uuid the uuid
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching journal article resource
 	 * @throws com.liferay.portlet.journal.NoSuchArticleResourceException if a matching journal article resource could not be found
@@ -731,14 +731,14 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 	}
 
 	/**
-	 * Finds the journal article resources before and after the current journal article resource in the ordered set where uuid = &#63;.
+	 * Returns the journal article resources before and after the current journal article resource in the ordered set where uuid = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
 	 * @param resourcePrimKey the primary key of the current journal article resource
-	 * @param uuid the uuid to search with
+	 * @param uuid the uuid
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next journal article resource
 	 * @throws com.liferay.portlet.journal.NoSuchArticleResourceException if a journal article resource with the primary key could not be found
@@ -887,10 +887,10 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 	}
 
 	/**
-	 * Finds the journal article resource where uuid = &#63; and groupId = &#63; or throws a {@link com.liferay.portlet.journal.NoSuchArticleResourceException} if it could not be found.
+	 * Returns the journal article resource where uuid = &#63; and groupId = &#63; or throws a {@link com.liferay.portlet.journal.NoSuchArticleResourceException} if it could not be found.
 	 *
-	 * @param uuid the uuid to search with
-	 * @param groupId the group ID to search with
+	 * @param uuid the uuid
+	 * @param groupId the group ID
 	 * @return the matching journal article resource
 	 * @throws com.liferay.portlet.journal.NoSuchArticleResourceException if a matching journal article resource could not be found
 	 * @throws SystemException if a system exception occurred
@@ -924,10 +924,10 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 	}
 
 	/**
-	 * Finds the journal article resource where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 * Returns the journal article resource where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	 *
-	 * @param uuid the uuid to search with
-	 * @param groupId the group ID to search with
+	 * @param uuid the uuid
+	 * @param groupId the group ID
 	 * @return the matching journal article resource, or <code>null</code> if a matching journal article resource could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -937,10 +937,10 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 	}
 
 	/**
-	 * Finds the journal article resource where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 * Returns the journal article resource where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	 *
-	 * @param uuid the uuid to search with
-	 * @param groupId the group ID to search with
+	 * @param uuid the uuid
+	 * @param groupId the group ID
 	 * @return the matching journal article resource, or <code>null</code> if a matching journal article resource could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1039,9 +1039,9 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 	}
 
 	/**
-	 * Finds all the journal article resources where groupId = &#63;.
+	 * Returns all the journal article resources where groupId = &#63;.
 	 *
-	 * @param groupId the group ID to search with
+	 * @param groupId the group ID
 	 * @return the matching journal article resources
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1051,15 +1051,15 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 	}
 
 	/**
-	 * Finds a range of all the journal article resources where groupId = &#63;.
+	 * Returns a range of all the journal article resources where groupId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group ID to search with
-	 * @param start the lower bound of the range of journal article resources to return
-	 * @param end the upper bound of the range of journal article resources to return (not inclusive)
+	 * @param groupId the group ID
+	 * @param start the lower bound of the range of journal article resources
+	 * @param end the upper bound of the range of journal article resources (not inclusive)
 	 * @return the range of matching journal article resources
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1069,15 +1069,15 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 	}
 
 	/**
-	 * Finds an ordered range of all the journal article resources where groupId = &#63;.
+	 * Returns an ordered range of all the journal article resources where groupId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group ID to search with
-	 * @param start the lower bound of the range of journal article resources to return
-	 * @param end the upper bound of the range of journal article resources to return (not inclusive)
+	 * @param groupId the group ID
+	 * @param start the lower bound of the range of journal article resources
+	 * @param end the upper bound of the range of journal article resources (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching journal article resources
 	 * @throws SystemException if a system exception occurred
@@ -1153,13 +1153,13 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 	}
 
 	/**
-	 * Finds the first journal article resource in the ordered set where groupId = &#63;.
+	 * Returns the first journal article resource in the ordered set where groupId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group ID to search with
+	 * @param groupId the group ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching journal article resource
 	 * @throws com.liferay.portlet.journal.NoSuchArticleResourceException if a matching journal article resource could not be found
@@ -1189,13 +1189,13 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 	}
 
 	/**
-	 * Finds the last journal article resource in the ordered set where groupId = &#63;.
+	 * Returns the last journal article resource in the ordered set where groupId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group ID to search with
+	 * @param groupId the group ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching journal article resource
 	 * @throws com.liferay.portlet.journal.NoSuchArticleResourceException if a matching journal article resource could not be found
@@ -1227,14 +1227,14 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 	}
 
 	/**
-	 * Finds the journal article resources before and after the current journal article resource in the ordered set where groupId = &#63;.
+	 * Returns the journal article resources before and after the current journal article resource in the ordered set where groupId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
 	 * @param resourcePrimKey the primary key of the current journal article resource
-	 * @param groupId the group ID to search with
+	 * @param groupId the group ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next journal article resource
 	 * @throws com.liferay.portlet.journal.NoSuchArticleResourceException if a journal article resource with the primary key could not be found
@@ -1371,10 +1371,10 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 	}
 
 	/**
-	 * Finds the journal article resource where groupId = &#63; and articleId = &#63; or throws a {@link com.liferay.portlet.journal.NoSuchArticleResourceException} if it could not be found.
+	 * Returns the journal article resource where groupId = &#63; and articleId = &#63; or throws a {@link com.liferay.portlet.journal.NoSuchArticleResourceException} if it could not be found.
 	 *
-	 * @param groupId the group ID to search with
-	 * @param articleId the article ID to search with
+	 * @param groupId the group ID
+	 * @param articleId the article ID
 	 * @return the matching journal article resource
 	 * @throws com.liferay.portlet.journal.NoSuchArticleResourceException if a matching journal article resource could not be found
 	 * @throws SystemException if a system exception occurred
@@ -1408,10 +1408,10 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 	}
 
 	/**
-	 * Finds the journal article resource where groupId = &#63; and articleId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 * Returns the journal article resource where groupId = &#63; and articleId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	 *
-	 * @param groupId the group ID to search with
-	 * @param articleId the article ID to search with
+	 * @param groupId the group ID
+	 * @param articleId the article ID
 	 * @return the matching journal article resource, or <code>null</code> if a matching journal article resource could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1421,10 +1421,10 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 	}
 
 	/**
-	 * Finds the journal article resource where groupId = &#63; and articleId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 * Returns the journal article resource where groupId = &#63; and articleId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	 *
-	 * @param groupId the group ID to search with
-	 * @param articleId the article ID to search with
+	 * @param groupId the group ID
+	 * @param articleId the article ID
 	 * @return the matching journal article resource, or <code>null</code> if a matching journal article resource could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1524,7 +1524,7 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 	}
 
 	/**
-	 * Finds all the journal article resources.
+	 * Returns all the journal article resources.
 	 *
 	 * @return the journal article resources
 	 * @throws SystemException if a system exception occurred
@@ -1534,14 +1534,14 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 	}
 
 	/**
-	 * Finds a range of all the journal article resources.
+	 * Returns a range of all the journal article resources.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param start the lower bound of the range of journal article resources to return
-	 * @param end the upper bound of the range of journal article resources to return (not inclusive)
+	 * @param start the lower bound of the range of journal article resources
+	 * @param end the upper bound of the range of journal article resources (not inclusive)
 	 * @return the range of journal article resources
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1551,14 +1551,14 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 	}
 
 	/**
-	 * Finds an ordered range of all the journal article resources.
+	 * Returns an ordered range of all the journal article resources.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param start the lower bound of the range of journal article resources to return
-	 * @param end the upper bound of the range of journal article resources to return (not inclusive)
+	 * @param start the lower bound of the range of journal article resources
+	 * @param end the upper bound of the range of journal article resources (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of journal article resources
 	 * @throws SystemException if a system exception occurred
@@ -1635,7 +1635,7 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 	/**
 	 * Removes all the journal article resources where uuid = &#63; from the database.
 	 *
-	 * @param uuid the uuid to search with
+	 * @param uuid the uuid
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByUuid(String uuid) throws SystemException {
@@ -1647,8 +1647,8 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 	/**
 	 * Removes the journal article resource where uuid = &#63; and groupId = &#63; from the database.
 	 *
-	 * @param uuid the uuid to search with
-	 * @param groupId the group ID to search with
+	 * @param uuid the uuid
+	 * @param groupId the group ID
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByUUID_G(String uuid, long groupId)
@@ -1662,7 +1662,7 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 	/**
 	 * Removes all the journal article resources where groupId = &#63; from the database.
 	 *
-	 * @param groupId the group ID to search with
+	 * @param groupId the group ID
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByGroupId(long groupId) throws SystemException {
@@ -1675,8 +1675,8 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 	/**
 	 * Removes the journal article resource where groupId = &#63; and articleId = &#63; from the database.
 	 *
-	 * @param groupId the group ID to search with
-	 * @param articleId the article ID to search with
+	 * @param groupId the group ID
+	 * @param articleId the article ID
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByG_A(long groupId, String articleId)
@@ -1699,9 +1699,9 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 	}
 
 	/**
-	 * Counts all the journal article resources where uuid = &#63;.
+	 * Returns the number of journal article resources where uuid = &#63;.
 	 *
-	 * @param uuid the uuid to search with
+	 * @param uuid the uuid
 	 * @return the number of matching journal article resources
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1764,10 +1764,10 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 	}
 
 	/**
-	 * Counts all the journal article resources where uuid = &#63; and groupId = &#63;.
+	 * Returns the number of journal article resources where uuid = &#63; and groupId = &#63;.
 	 *
-	 * @param uuid the uuid to search with
-	 * @param groupId the group ID to search with
+	 * @param uuid the uuid
+	 * @param groupId the group ID
 	 * @return the number of matching journal article resources
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1835,9 +1835,9 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 	}
 
 	/**
-	 * Counts all the journal article resources where groupId = &#63;.
+	 * Returns the number of journal article resources where groupId = &#63;.
 	 *
-	 * @param groupId the group ID to search with
+	 * @param groupId the group ID
 	 * @return the number of matching journal article resources
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1888,10 +1888,10 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 	}
 
 	/**
-	 * Counts all the journal article resources where groupId = &#63; and articleId = &#63;.
+	 * Returns the number of journal article resources where groupId = &#63; and articleId = &#63;.
 	 *
-	 * @param groupId the group ID to search with
-	 * @param articleId the article ID to search with
+	 * @param groupId the group ID
+	 * @param articleId the article ID
 	 * @return the number of matching journal article resources
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1959,7 +1959,7 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 	}
 
 	/**
-	 * Counts all the journal article resources.
+	 * Returns the number of journal article resources.
 	 *
 	 * @return the number of journal article resources
 	 * @throws SystemException if a system exception occurred

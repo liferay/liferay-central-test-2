@@ -121,7 +121,7 @@ public class AssetCategoryUtil {
 	/**
 	* Caches the asset category in the entity cache if it is enabled.
 	*
-	* @param assetCategory the asset category to cache
+	* @param assetCategory the asset category
 	*/
 	public static void cacheResult(
 		com.liferay.portlet.asset.model.AssetCategory assetCategory) {
@@ -131,7 +131,7 @@ public class AssetCategoryUtil {
 	/**
 	* Caches the asset categories in the entity cache if it is enabled.
 	*
-	* @param assetCategories the asset categories to cache
+	* @param assetCategories the asset categories
 	*/
 	public static void cacheResult(
 		java.util.List<com.liferay.portlet.asset.model.AssetCategory> assetCategories) {
@@ -152,7 +152,7 @@ public class AssetCategoryUtil {
 	/**
 	* Removes the asset category with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param categoryId the primary key of the asset category to remove
+	* @param categoryId the primary key of the asset category
 	* @return the asset category that was removed
 	* @throws com.liferay.portlet.asset.NoSuchCategoryException if a asset category with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -172,9 +172,9 @@ public class AssetCategoryUtil {
 	}
 
 	/**
-	* Finds the asset category with the primary key or throws a {@link com.liferay.portlet.asset.NoSuchCategoryException} if it could not be found.
+	* Returns the asset category with the primary key or throws a {@link com.liferay.portlet.asset.NoSuchCategoryException} if it could not be found.
 	*
-	* @param categoryId the primary key of the asset category to find
+	* @param categoryId the primary key of the asset category
 	* @return the asset category
 	* @throws com.liferay.portlet.asset.NoSuchCategoryException if a asset category with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -187,9 +187,9 @@ public class AssetCategoryUtil {
 	}
 
 	/**
-	* Finds the asset category with the primary key or returns <code>null</code> if it could not be found.
+	* Returns the asset category with the primary key or returns <code>null</code> if it could not be found.
 	*
-	* @param categoryId the primary key of the asset category to find
+	* @param categoryId the primary key of the asset category
 	* @return the asset category, or <code>null</code> if a asset category with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -200,9 +200,9 @@ public class AssetCategoryUtil {
 	}
 
 	/**
-	* Finds all the asset categories where uuid = &#63;.
+	* Returns all the asset categories where uuid = &#63;.
 	*
-	* @param uuid the uuid to search with
+	* @param uuid the uuid
 	* @return the matching asset categories
 	* @throws SystemException if a system exception occurred
 	*/
@@ -213,15 +213,15 @@ public class AssetCategoryUtil {
 	}
 
 	/**
-	* Finds a range of all the asset categories where uuid = &#63;.
+	* Returns a range of all the asset categories where uuid = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param uuid the uuid to search with
-	* @param start the lower bound of the range of asset categories to return
-	* @param end the upper bound of the range of asset categories to return (not inclusive)
+	* @param uuid the uuid
+	* @param start the lower bound of the range of asset categories
+	* @param end the upper bound of the range of asset categories (not inclusive)
 	* @return the range of matching asset categories
 	* @throws SystemException if a system exception occurred
 	*/
@@ -232,15 +232,15 @@ public class AssetCategoryUtil {
 	}
 
 	/**
-	* Finds an ordered range of all the asset categories where uuid = &#63;.
+	* Returns an ordered range of all the asset categories where uuid = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param uuid the uuid to search with
-	* @param start the lower bound of the range of asset categories to return
-	* @param end the upper bound of the range of asset categories to return (not inclusive)
+	* @param uuid the uuid
+	* @param start the lower bound of the range of asset categories
+	* @param end the upper bound of the range of asset categories (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching asset categories
 	* @throws SystemException if a system exception occurred
@@ -253,13 +253,13 @@ public class AssetCategoryUtil {
 	}
 
 	/**
-	* Finds the first asset category in the ordered set where uuid = &#63;.
+	* Returns the first asset category in the ordered set where uuid = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param uuid the uuid to search with
+	* @param uuid the uuid
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching asset category
 	* @throws com.liferay.portlet.asset.NoSuchCategoryException if a matching asset category could not be found
@@ -274,13 +274,13 @@ public class AssetCategoryUtil {
 	}
 
 	/**
-	* Finds the last asset category in the ordered set where uuid = &#63;.
+	* Returns the last asset category in the ordered set where uuid = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param uuid the uuid to search with
+	* @param uuid the uuid
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching asset category
 	* @throws com.liferay.portlet.asset.NoSuchCategoryException if a matching asset category could not be found
@@ -295,14 +295,14 @@ public class AssetCategoryUtil {
 	}
 
 	/**
-	* Finds the asset categories before and after the current asset category in the ordered set where uuid = &#63;.
+	* Returns the asset categories before and after the current asset category in the ordered set where uuid = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
 	* @param categoryId the primary key of the current asset category
-	* @param uuid the uuid to search with
+	* @param uuid the uuid
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next asset category
 	* @throws com.liferay.portlet.asset.NoSuchCategoryException if a asset category with the primary key could not be found
@@ -318,10 +318,10 @@ public class AssetCategoryUtil {
 	}
 
 	/**
-	* Finds the asset category where uuid = &#63; and groupId = &#63; or throws a {@link com.liferay.portlet.asset.NoSuchCategoryException} if it could not be found.
+	* Returns the asset category where uuid = &#63; and groupId = &#63; or throws a {@link com.liferay.portlet.asset.NoSuchCategoryException} if it could not be found.
 	*
-	* @param uuid the uuid to search with
-	* @param groupId the group ID to search with
+	* @param uuid the uuid
+	* @param groupId the group ID
 	* @return the matching asset category
 	* @throws com.liferay.portlet.asset.NoSuchCategoryException if a matching asset category could not be found
 	* @throws SystemException if a system exception occurred
@@ -334,10 +334,10 @@ public class AssetCategoryUtil {
 	}
 
 	/**
-	* Finds the asset category where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	* Returns the asset category where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	*
-	* @param uuid the uuid to search with
-	* @param groupId the group ID to search with
+	* @param uuid the uuid
+	* @param groupId the group ID
 	* @return the matching asset category, or <code>null</code> if a matching asset category could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -348,10 +348,10 @@ public class AssetCategoryUtil {
 	}
 
 	/**
-	* Finds the asset category where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	* Returns the asset category where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
-	* @param uuid the uuid to search with
-	* @param groupId the group ID to search with
+	* @param uuid the uuid
+	* @param groupId the group ID
 	* @return the matching asset category, or <code>null</code> if a matching asset category could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -362,9 +362,9 @@ public class AssetCategoryUtil {
 	}
 
 	/**
-	* Finds all the asset categories where groupId = &#63;.
+	* Returns all the asset categories where groupId = &#63;.
 	*
-	* @param groupId the group ID to search with
+	* @param groupId the group ID
 	* @return the matching asset categories
 	* @throws SystemException if a system exception occurred
 	*/
@@ -375,15 +375,15 @@ public class AssetCategoryUtil {
 	}
 
 	/**
-	* Finds a range of all the asset categories where groupId = &#63;.
+	* Returns a range of all the asset categories where groupId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param start the lower bound of the range of asset categories to return
-	* @param end the upper bound of the range of asset categories to return (not inclusive)
+	* @param groupId the group ID
+	* @param start the lower bound of the range of asset categories
+	* @param end the upper bound of the range of asset categories (not inclusive)
 	* @return the range of matching asset categories
 	* @throws SystemException if a system exception occurred
 	*/
@@ -394,15 +394,15 @@ public class AssetCategoryUtil {
 	}
 
 	/**
-	* Finds an ordered range of all the asset categories where groupId = &#63;.
+	* Returns an ordered range of all the asset categories where groupId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param start the lower bound of the range of asset categories to return
-	* @param end the upper bound of the range of asset categories to return (not inclusive)
+	* @param groupId the group ID
+	* @param start the lower bound of the range of asset categories
+	* @param end the upper bound of the range of asset categories (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching asset categories
 	* @throws SystemException if a system exception occurred
@@ -416,13 +416,13 @@ public class AssetCategoryUtil {
 	}
 
 	/**
-	* Finds the first asset category in the ordered set where groupId = &#63;.
+	* Returns the first asset category in the ordered set where groupId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
+	* @param groupId the group ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching asset category
 	* @throws com.liferay.portlet.asset.NoSuchCategoryException if a matching asset category could not be found
@@ -437,13 +437,13 @@ public class AssetCategoryUtil {
 	}
 
 	/**
-	* Finds the last asset category in the ordered set where groupId = &#63;.
+	* Returns the last asset category in the ordered set where groupId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
+	* @param groupId the group ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching asset category
 	* @throws com.liferay.portlet.asset.NoSuchCategoryException if a matching asset category could not be found
@@ -458,14 +458,14 @@ public class AssetCategoryUtil {
 	}
 
 	/**
-	* Finds the asset categories before and after the current asset category in the ordered set where groupId = &#63;.
+	* Returns the asset categories before and after the current asset category in the ordered set where groupId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
 	* @param categoryId the primary key of the current asset category
-	* @param groupId the group ID to search with
+	* @param groupId the group ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next asset category
 	* @throws com.liferay.portlet.asset.NoSuchCategoryException if a asset category with the primary key could not be found
@@ -482,9 +482,9 @@ public class AssetCategoryUtil {
 	}
 
 	/**
-	* Filters by the user's permissions and finds all the asset categories where groupId = &#63;.
+	* Returns all the asset categories that the user has permission to view where groupId = &#63;.
 	*
-	* @param groupId the group ID to search with
+	* @param groupId the group ID
 	* @return the matching asset categories that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -495,15 +495,15 @@ public class AssetCategoryUtil {
 	}
 
 	/**
-	* Filters by the user's permissions and finds a range of all the asset categories where groupId = &#63;.
+	* Returns a range of all the asset categories that the user has permission to view where groupId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param start the lower bound of the range of asset categories to return
-	* @param end the upper bound of the range of asset categories to return (not inclusive)
+	* @param groupId the group ID
+	* @param start the lower bound of the range of asset categories
+	* @param end the upper bound of the range of asset categories (not inclusive)
 	* @return the range of matching asset categories that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -514,15 +514,15 @@ public class AssetCategoryUtil {
 	}
 
 	/**
-	* Filters by the user's permissions and finds an ordered range of all the asset categories where groupId = &#63;.
+	* Returns an ordered range of all the asset categories that the user has permissions to view where groupId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param start the lower bound of the range of asset categories to return
-	* @param end the upper bound of the range of asset categories to return (not inclusive)
+	* @param groupId the group ID
+	* @param start the lower bound of the range of asset categories
+	* @param end the upper bound of the range of asset categories (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching asset categories that the user has permission to view
 	* @throws SystemException if a system exception occurred
@@ -536,14 +536,10 @@ public class AssetCategoryUtil {
 	}
 
 	/**
-	* Filters the asset categories before and after the current asset category in the ordered set where groupId = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
-	* </p>
+	* Returns the asset categories before and after the current asset category in the ordered set of asset categories that the user has permission to view where groupId = &#63;.
 	*
 	* @param categoryId the primary key of the current asset category
-	* @param groupId the group ID to search with
+	* @param groupId the group ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next asset category
 	* @throws com.liferay.portlet.asset.NoSuchCategoryException if a asset category with the primary key could not be found
@@ -560,9 +556,9 @@ public class AssetCategoryUtil {
 	}
 
 	/**
-	* Finds all the asset categories where parentCategoryId = &#63;.
+	* Returns all the asset categories where parentCategoryId = &#63;.
 	*
-	* @param parentCategoryId the parent category ID to search with
+	* @param parentCategoryId the parent category ID
 	* @return the matching asset categories
 	* @throws SystemException if a system exception occurred
 	*/
@@ -573,15 +569,15 @@ public class AssetCategoryUtil {
 	}
 
 	/**
-	* Finds a range of all the asset categories where parentCategoryId = &#63;.
+	* Returns a range of all the asset categories where parentCategoryId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param parentCategoryId the parent category ID to search with
-	* @param start the lower bound of the range of asset categories to return
-	* @param end the upper bound of the range of asset categories to return (not inclusive)
+	* @param parentCategoryId the parent category ID
+	* @param start the lower bound of the range of asset categories
+	* @param end the upper bound of the range of asset categories (not inclusive)
 	* @return the range of matching asset categories
 	* @throws SystemException if a system exception occurred
 	*/
@@ -593,15 +589,15 @@ public class AssetCategoryUtil {
 	}
 
 	/**
-	* Finds an ordered range of all the asset categories where parentCategoryId = &#63;.
+	* Returns an ordered range of all the asset categories where parentCategoryId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param parentCategoryId the parent category ID to search with
-	* @param start the lower bound of the range of asset categories to return
-	* @param end the upper bound of the range of asset categories to return (not inclusive)
+	* @param parentCategoryId the parent category ID
+	* @param start the lower bound of the range of asset categories
+	* @param end the upper bound of the range of asset categories (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching asset categories
 	* @throws SystemException if a system exception occurred
@@ -616,13 +612,13 @@ public class AssetCategoryUtil {
 	}
 
 	/**
-	* Finds the first asset category in the ordered set where parentCategoryId = &#63;.
+	* Returns the first asset category in the ordered set where parentCategoryId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param parentCategoryId the parent category ID to search with
+	* @param parentCategoryId the parent category ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching asset category
 	* @throws com.liferay.portlet.asset.NoSuchCategoryException if a matching asset category could not be found
@@ -639,13 +635,13 @@ public class AssetCategoryUtil {
 	}
 
 	/**
-	* Finds the last asset category in the ordered set where parentCategoryId = &#63;.
+	* Returns the last asset category in the ordered set where parentCategoryId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param parentCategoryId the parent category ID to search with
+	* @param parentCategoryId the parent category ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching asset category
 	* @throws com.liferay.portlet.asset.NoSuchCategoryException if a matching asset category could not be found
@@ -662,14 +658,14 @@ public class AssetCategoryUtil {
 	}
 
 	/**
-	* Finds the asset categories before and after the current asset category in the ordered set where parentCategoryId = &#63;.
+	* Returns the asset categories before and after the current asset category in the ordered set where parentCategoryId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
 	* @param categoryId the primary key of the current asset category
-	* @param parentCategoryId the parent category ID to search with
+	* @param parentCategoryId the parent category ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next asset category
 	* @throws com.liferay.portlet.asset.NoSuchCategoryException if a asset category with the primary key could not be found
@@ -686,9 +682,9 @@ public class AssetCategoryUtil {
 	}
 
 	/**
-	* Finds all the asset categories where vocabularyId = &#63;.
+	* Returns all the asset categories where vocabularyId = &#63;.
 	*
-	* @param vocabularyId the vocabulary ID to search with
+	* @param vocabularyId the vocabulary ID
 	* @return the matching asset categories
 	* @throws SystemException if a system exception occurred
 	*/
@@ -699,15 +695,15 @@ public class AssetCategoryUtil {
 	}
 
 	/**
-	* Finds a range of all the asset categories where vocabularyId = &#63;.
+	* Returns a range of all the asset categories where vocabularyId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param vocabularyId the vocabulary ID to search with
-	* @param start the lower bound of the range of asset categories to return
-	* @param end the upper bound of the range of asset categories to return (not inclusive)
+	* @param vocabularyId the vocabulary ID
+	* @param start the lower bound of the range of asset categories
+	* @param end the upper bound of the range of asset categories (not inclusive)
 	* @return the range of matching asset categories
 	* @throws SystemException if a system exception occurred
 	*/
@@ -718,15 +714,15 @@ public class AssetCategoryUtil {
 	}
 
 	/**
-	* Finds an ordered range of all the asset categories where vocabularyId = &#63;.
+	* Returns an ordered range of all the asset categories where vocabularyId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param vocabularyId the vocabulary ID to search with
-	* @param start the lower bound of the range of asset categories to return
-	* @param end the upper bound of the range of asset categories to return (not inclusive)
+	* @param vocabularyId the vocabulary ID
+	* @param start the lower bound of the range of asset categories
+	* @param end the upper bound of the range of asset categories (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching asset categories
 	* @throws SystemException if a system exception occurred
@@ -741,13 +737,13 @@ public class AssetCategoryUtil {
 	}
 
 	/**
-	* Finds the first asset category in the ordered set where vocabularyId = &#63;.
+	* Returns the first asset category in the ordered set where vocabularyId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param vocabularyId the vocabulary ID to search with
+	* @param vocabularyId the vocabulary ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching asset category
 	* @throws com.liferay.portlet.asset.NoSuchCategoryException if a matching asset category could not be found
@@ -763,13 +759,13 @@ public class AssetCategoryUtil {
 	}
 
 	/**
-	* Finds the last asset category in the ordered set where vocabularyId = &#63;.
+	* Returns the last asset category in the ordered set where vocabularyId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param vocabularyId the vocabulary ID to search with
+	* @param vocabularyId the vocabulary ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching asset category
 	* @throws com.liferay.portlet.asset.NoSuchCategoryException if a matching asset category could not be found
@@ -785,14 +781,14 @@ public class AssetCategoryUtil {
 	}
 
 	/**
-	* Finds the asset categories before and after the current asset category in the ordered set where vocabularyId = &#63;.
+	* Returns the asset categories before and after the current asset category in the ordered set where vocabularyId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
 	* @param categoryId the primary key of the current asset category
-	* @param vocabularyId the vocabulary ID to search with
+	* @param vocabularyId the vocabulary ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next asset category
 	* @throws com.liferay.portlet.asset.NoSuchCategoryException if a asset category with the primary key could not be found
@@ -809,10 +805,10 @@ public class AssetCategoryUtil {
 	}
 
 	/**
-	* Finds all the asset categories where parentCategoryId = &#63; and name = &#63;.
+	* Returns all the asset categories where parentCategoryId = &#63; and name = &#63;.
 	*
-	* @param parentCategoryId the parent category ID to search with
-	* @param name the name to search with
+	* @param parentCategoryId the parent category ID
+	* @param name the name
 	* @return the matching asset categories
 	* @throws SystemException if a system exception occurred
 	*/
@@ -823,16 +819,16 @@ public class AssetCategoryUtil {
 	}
 
 	/**
-	* Finds a range of all the asset categories where parentCategoryId = &#63; and name = &#63;.
+	* Returns a range of all the asset categories where parentCategoryId = &#63; and name = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param parentCategoryId the parent category ID to search with
-	* @param name the name to search with
-	* @param start the lower bound of the range of asset categories to return
-	* @param end the upper bound of the range of asset categories to return (not inclusive)
+	* @param parentCategoryId the parent category ID
+	* @param name the name
+	* @param start the lower bound of the range of asset categories
+	* @param end the upper bound of the range of asset categories (not inclusive)
 	* @return the range of matching asset categories
 	* @throws SystemException if a system exception occurred
 	*/
@@ -843,16 +839,16 @@ public class AssetCategoryUtil {
 	}
 
 	/**
-	* Finds an ordered range of all the asset categories where parentCategoryId = &#63; and name = &#63;.
+	* Returns an ordered range of all the asset categories where parentCategoryId = &#63; and name = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param parentCategoryId the parent category ID to search with
-	* @param name the name to search with
-	* @param start the lower bound of the range of asset categories to return
-	* @param end the upper bound of the range of asset categories to return (not inclusive)
+	* @param parentCategoryId the parent category ID
+	* @param name the name
+	* @param start the lower bound of the range of asset categories
+	* @param end the upper bound of the range of asset categories (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching asset categories
 	* @throws SystemException if a system exception occurred
@@ -867,14 +863,14 @@ public class AssetCategoryUtil {
 	}
 
 	/**
-	* Finds the first asset category in the ordered set where parentCategoryId = &#63; and name = &#63;.
+	* Returns the first asset category in the ordered set where parentCategoryId = &#63; and name = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param parentCategoryId the parent category ID to search with
-	* @param name the name to search with
+	* @param parentCategoryId the parent category ID
+	* @param name the name
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching asset category
 	* @throws com.liferay.portlet.asset.NoSuchCategoryException if a matching asset category could not be found
@@ -890,14 +886,14 @@ public class AssetCategoryUtil {
 	}
 
 	/**
-	* Finds the last asset category in the ordered set where parentCategoryId = &#63; and name = &#63;.
+	* Returns the last asset category in the ordered set where parentCategoryId = &#63; and name = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param parentCategoryId the parent category ID to search with
-	* @param name the name to search with
+	* @param parentCategoryId the parent category ID
+	* @param name the name
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching asset category
 	* @throws com.liferay.portlet.asset.NoSuchCategoryException if a matching asset category could not be found
@@ -913,15 +909,15 @@ public class AssetCategoryUtil {
 	}
 
 	/**
-	* Finds the asset categories before and after the current asset category in the ordered set where parentCategoryId = &#63; and name = &#63;.
+	* Returns the asset categories before and after the current asset category in the ordered set where parentCategoryId = &#63; and name = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
 	* @param categoryId the primary key of the current asset category
-	* @param parentCategoryId the parent category ID to search with
-	* @param name the name to search with
+	* @param parentCategoryId the parent category ID
+	* @param name the name
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next asset category
 	* @throws com.liferay.portlet.asset.NoSuchCategoryException if a asset category with the primary key could not be found
@@ -938,10 +934,10 @@ public class AssetCategoryUtil {
 	}
 
 	/**
-	* Finds all the asset categories where parentCategoryId = &#63; and vocabularyId = &#63;.
+	* Returns all the asset categories where parentCategoryId = &#63; and vocabularyId = &#63;.
 	*
-	* @param parentCategoryId the parent category ID to search with
-	* @param vocabularyId the vocabulary ID to search with
+	* @param parentCategoryId the parent category ID
+	* @param vocabularyId the vocabulary ID
 	* @return the matching asset categories
 	* @throws SystemException if a system exception occurred
 	*/
@@ -952,16 +948,16 @@ public class AssetCategoryUtil {
 	}
 
 	/**
-	* Finds a range of all the asset categories where parentCategoryId = &#63; and vocabularyId = &#63;.
+	* Returns a range of all the asset categories where parentCategoryId = &#63; and vocabularyId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param parentCategoryId the parent category ID to search with
-	* @param vocabularyId the vocabulary ID to search with
-	* @param start the lower bound of the range of asset categories to return
-	* @param end the upper bound of the range of asset categories to return (not inclusive)
+	* @param parentCategoryId the parent category ID
+	* @param vocabularyId the vocabulary ID
+	* @param start the lower bound of the range of asset categories
+	* @param end the upper bound of the range of asset categories (not inclusive)
 	* @return the range of matching asset categories
 	* @throws SystemException if a system exception occurred
 	*/
@@ -973,16 +969,16 @@ public class AssetCategoryUtil {
 	}
 
 	/**
-	* Finds an ordered range of all the asset categories where parentCategoryId = &#63; and vocabularyId = &#63;.
+	* Returns an ordered range of all the asset categories where parentCategoryId = &#63; and vocabularyId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param parentCategoryId the parent category ID to search with
-	* @param vocabularyId the vocabulary ID to search with
-	* @param start the lower bound of the range of asset categories to return
-	* @param end the upper bound of the range of asset categories to return (not inclusive)
+	* @param parentCategoryId the parent category ID
+	* @param vocabularyId the vocabulary ID
+	* @param start the lower bound of the range of asset categories
+	* @param end the upper bound of the range of asset categories (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching asset categories
 	* @throws SystemException if a system exception occurred
@@ -997,14 +993,14 @@ public class AssetCategoryUtil {
 	}
 
 	/**
-	* Finds the first asset category in the ordered set where parentCategoryId = &#63; and vocabularyId = &#63;.
+	* Returns the first asset category in the ordered set where parentCategoryId = &#63; and vocabularyId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param parentCategoryId the parent category ID to search with
-	* @param vocabularyId the vocabulary ID to search with
+	* @param parentCategoryId the parent category ID
+	* @param vocabularyId the vocabulary ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching asset category
 	* @throws com.liferay.portlet.asset.NoSuchCategoryException if a matching asset category could not be found
@@ -1021,14 +1017,14 @@ public class AssetCategoryUtil {
 	}
 
 	/**
-	* Finds the last asset category in the ordered set where parentCategoryId = &#63; and vocabularyId = &#63;.
+	* Returns the last asset category in the ordered set where parentCategoryId = &#63; and vocabularyId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param parentCategoryId the parent category ID to search with
-	* @param vocabularyId the vocabulary ID to search with
+	* @param parentCategoryId the parent category ID
+	* @param vocabularyId the vocabulary ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching asset category
 	* @throws com.liferay.portlet.asset.NoSuchCategoryException if a matching asset category could not be found
@@ -1045,15 +1041,15 @@ public class AssetCategoryUtil {
 	}
 
 	/**
-	* Finds the asset categories before and after the current asset category in the ordered set where parentCategoryId = &#63; and vocabularyId = &#63;.
+	* Returns the asset categories before and after the current asset category in the ordered set where parentCategoryId = &#63; and vocabularyId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
 	* @param categoryId the primary key of the current asset category
-	* @param parentCategoryId the parent category ID to search with
-	* @param vocabularyId the vocabulary ID to search with
+	* @param parentCategoryId the parent category ID
+	* @param vocabularyId the vocabulary ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next asset category
 	* @throws com.liferay.portlet.asset.NoSuchCategoryException if a asset category with the primary key could not be found
@@ -1070,10 +1066,10 @@ public class AssetCategoryUtil {
 	}
 
 	/**
-	* Finds all the asset categories where name = &#63; and vocabularyId = &#63;.
+	* Returns all the asset categories where name = &#63; and vocabularyId = &#63;.
 	*
-	* @param name the name to search with
-	* @param vocabularyId the vocabulary ID to search with
+	* @param name the name
+	* @param vocabularyId the vocabulary ID
 	* @return the matching asset categories
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1084,16 +1080,16 @@ public class AssetCategoryUtil {
 	}
 
 	/**
-	* Finds a range of all the asset categories where name = &#63; and vocabularyId = &#63;.
+	* Returns a range of all the asset categories where name = &#63; and vocabularyId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param name the name to search with
-	* @param vocabularyId the vocabulary ID to search with
-	* @param start the lower bound of the range of asset categories to return
-	* @param end the upper bound of the range of asset categories to return (not inclusive)
+	* @param name the name
+	* @param vocabularyId the vocabulary ID
+	* @param start the lower bound of the range of asset categories
+	* @param end the upper bound of the range of asset categories (not inclusive)
 	* @return the range of matching asset categories
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1104,16 +1100,16 @@ public class AssetCategoryUtil {
 	}
 
 	/**
-	* Finds an ordered range of all the asset categories where name = &#63; and vocabularyId = &#63;.
+	* Returns an ordered range of all the asset categories where name = &#63; and vocabularyId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param name the name to search with
-	* @param vocabularyId the vocabulary ID to search with
-	* @param start the lower bound of the range of asset categories to return
-	* @param end the upper bound of the range of asset categories to return (not inclusive)
+	* @param name the name
+	* @param vocabularyId the vocabulary ID
+	* @param start the lower bound of the range of asset categories
+	* @param end the upper bound of the range of asset categories (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching asset categories
 	* @throws SystemException if a system exception occurred
@@ -1127,14 +1123,14 @@ public class AssetCategoryUtil {
 	}
 
 	/**
-	* Finds the first asset category in the ordered set where name = &#63; and vocabularyId = &#63;.
+	* Returns the first asset category in the ordered set where name = &#63; and vocabularyId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param name the name to search with
-	* @param vocabularyId the vocabulary ID to search with
+	* @param name the name
+	* @param vocabularyId the vocabulary ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching asset category
 	* @throws com.liferay.portlet.asset.NoSuchCategoryException if a matching asset category could not be found
@@ -1150,14 +1146,14 @@ public class AssetCategoryUtil {
 	}
 
 	/**
-	* Finds the last asset category in the ordered set where name = &#63; and vocabularyId = &#63;.
+	* Returns the last asset category in the ordered set where name = &#63; and vocabularyId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param name the name to search with
-	* @param vocabularyId the vocabulary ID to search with
+	* @param name the name
+	* @param vocabularyId the vocabulary ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching asset category
 	* @throws com.liferay.portlet.asset.NoSuchCategoryException if a matching asset category could not be found
@@ -1173,15 +1169,15 @@ public class AssetCategoryUtil {
 	}
 
 	/**
-	* Finds the asset categories before and after the current asset category in the ordered set where name = &#63; and vocabularyId = &#63;.
+	* Returns the asset categories before and after the current asset category in the ordered set where name = &#63; and vocabularyId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
 	* @param categoryId the primary key of the current asset category
-	* @param name the name to search with
-	* @param vocabularyId the vocabulary ID to search with
+	* @param name the name
+	* @param vocabularyId the vocabulary ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next asset category
 	* @throws com.liferay.portlet.asset.NoSuchCategoryException if a asset category with the primary key could not be found
@@ -1198,11 +1194,11 @@ public class AssetCategoryUtil {
 	}
 
 	/**
-	* Finds the asset category where parentCategoryId = &#63; and name = &#63; and vocabularyId = &#63; or throws a {@link com.liferay.portlet.asset.NoSuchCategoryException} if it could not be found.
+	* Returns the asset category where parentCategoryId = &#63; and name = &#63; and vocabularyId = &#63; or throws a {@link com.liferay.portlet.asset.NoSuchCategoryException} if it could not be found.
 	*
-	* @param parentCategoryId the parent category ID to search with
-	* @param name the name to search with
-	* @param vocabularyId the vocabulary ID to search with
+	* @param parentCategoryId the parent category ID
+	* @param name the name
+	* @param vocabularyId the vocabulary ID
 	* @return the matching asset category
 	* @throws com.liferay.portlet.asset.NoSuchCategoryException if a matching asset category could not be found
 	* @throws SystemException if a system exception occurred
@@ -1215,11 +1211,11 @@ public class AssetCategoryUtil {
 	}
 
 	/**
-	* Finds the asset category where parentCategoryId = &#63; and name = &#63; and vocabularyId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	* Returns the asset category where parentCategoryId = &#63; and name = &#63; and vocabularyId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	*
-	* @param parentCategoryId the parent category ID to search with
-	* @param name the name to search with
-	* @param vocabularyId the vocabulary ID to search with
+	* @param parentCategoryId the parent category ID
+	* @param name the name
+	* @param vocabularyId the vocabulary ID
 	* @return the matching asset category, or <code>null</code> if a matching asset category could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1231,11 +1227,11 @@ public class AssetCategoryUtil {
 	}
 
 	/**
-	* Finds the asset category where parentCategoryId = &#63; and name = &#63; and vocabularyId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	* Returns the asset category where parentCategoryId = &#63; and name = &#63; and vocabularyId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
-	* @param parentCategoryId the parent category ID to search with
-	* @param name the name to search with
-	* @param vocabularyId the vocabulary ID to search with
+	* @param parentCategoryId the parent category ID
+	* @param name the name
+	* @param vocabularyId the vocabulary ID
 	* @return the matching asset category, or <code>null</code> if a matching asset category could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1249,7 +1245,7 @@ public class AssetCategoryUtil {
 	}
 
 	/**
-	* Finds all the asset categories.
+	* Returns all the asset categories.
 	*
 	* @return the asset categories
 	* @throws SystemException if a system exception occurred
@@ -1260,14 +1256,14 @@ public class AssetCategoryUtil {
 	}
 
 	/**
-	* Finds a range of all the asset categories.
+	* Returns a range of all the asset categories.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of asset categories to return
-	* @param end the upper bound of the range of asset categories to return (not inclusive)
+	* @param start the lower bound of the range of asset categories
+	* @param end the upper bound of the range of asset categories (not inclusive)
 	* @return the range of asset categories
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1278,14 +1274,14 @@ public class AssetCategoryUtil {
 	}
 
 	/**
-	* Finds an ordered range of all the asset categories.
+	* Returns an ordered range of all the asset categories.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of asset categories to return
-	* @param end the upper bound of the range of asset categories to return (not inclusive)
+	* @param start the lower bound of the range of asset categories
+	* @param end the upper bound of the range of asset categories (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of asset categories
 	* @throws SystemException if a system exception occurred
@@ -1300,7 +1296,7 @@ public class AssetCategoryUtil {
 	/**
 	* Removes all the asset categories where uuid = &#63; from the database.
 	*
-	* @param uuid the uuid to search with
+	* @param uuid the uuid
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByUuid(java.lang.String uuid)
@@ -1311,8 +1307,8 @@ public class AssetCategoryUtil {
 	/**
 	* Removes the asset category where uuid = &#63; and groupId = &#63; from the database.
 	*
-	* @param uuid the uuid to search with
-	* @param groupId the group ID to search with
+	* @param uuid the uuid
+	* @param groupId the group ID
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByUUID_G(java.lang.String uuid, long groupId)
@@ -1324,7 +1320,7 @@ public class AssetCategoryUtil {
 	/**
 	* Removes all the asset categories where groupId = &#63; from the database.
 	*
-	* @param groupId the group ID to search with
+	* @param groupId the group ID
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByGroupId(long groupId)
@@ -1335,7 +1331,7 @@ public class AssetCategoryUtil {
 	/**
 	* Removes all the asset categories where parentCategoryId = &#63; from the database.
 	*
-	* @param parentCategoryId the parent category ID to search with
+	* @param parentCategoryId the parent category ID
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByParentCategoryId(long parentCategoryId)
@@ -1346,7 +1342,7 @@ public class AssetCategoryUtil {
 	/**
 	* Removes all the asset categories where vocabularyId = &#63; from the database.
 	*
-	* @param vocabularyId the vocabulary ID to search with
+	* @param vocabularyId the vocabulary ID
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByVocabularyId(long vocabularyId)
@@ -1357,8 +1353,8 @@ public class AssetCategoryUtil {
 	/**
 	* Removes all the asset categories where parentCategoryId = &#63; and name = &#63; from the database.
 	*
-	* @param parentCategoryId the parent category ID to search with
-	* @param name the name to search with
+	* @param parentCategoryId the parent category ID
+	* @param name the name
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByP_N(long parentCategoryId, java.lang.String name)
@@ -1369,8 +1365,8 @@ public class AssetCategoryUtil {
 	/**
 	* Removes all the asset categories where parentCategoryId = &#63; and vocabularyId = &#63; from the database.
 	*
-	* @param parentCategoryId the parent category ID to search with
-	* @param vocabularyId the vocabulary ID to search with
+	* @param parentCategoryId the parent category ID
+	* @param vocabularyId the vocabulary ID
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByP_V(long parentCategoryId, long vocabularyId)
@@ -1381,8 +1377,8 @@ public class AssetCategoryUtil {
 	/**
 	* Removes all the asset categories where name = &#63; and vocabularyId = &#63; from the database.
 	*
-	* @param name the name to search with
-	* @param vocabularyId the vocabulary ID to search with
+	* @param name the name
+	* @param vocabularyId the vocabulary ID
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByN_V(java.lang.String name, long vocabularyId)
@@ -1393,9 +1389,9 @@ public class AssetCategoryUtil {
 	/**
 	* Removes the asset category where parentCategoryId = &#63; and name = &#63; and vocabularyId = &#63; from the database.
 	*
-	* @param parentCategoryId the parent category ID to search with
-	* @param name the name to search with
-	* @param vocabularyId the vocabulary ID to search with
+	* @param parentCategoryId the parent category ID
+	* @param name the name
+	* @param vocabularyId the vocabulary ID
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByP_N_V(long parentCategoryId,
@@ -1416,9 +1412,9 @@ public class AssetCategoryUtil {
 	}
 
 	/**
-	* Counts all the asset categories where uuid = &#63;.
+	* Returns the number of asset categories where uuid = &#63;.
 	*
-	* @param uuid the uuid to search with
+	* @param uuid the uuid
 	* @return the number of matching asset categories
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1428,10 +1424,10 @@ public class AssetCategoryUtil {
 	}
 
 	/**
-	* Counts all the asset categories where uuid = &#63; and groupId = &#63;.
+	* Returns the number of asset categories where uuid = &#63; and groupId = &#63;.
 	*
-	* @param uuid the uuid to search with
-	* @param groupId the group ID to search with
+	* @param uuid the uuid
+	* @param groupId the group ID
 	* @return the number of matching asset categories
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1441,9 +1437,9 @@ public class AssetCategoryUtil {
 	}
 
 	/**
-	* Counts all the asset categories where groupId = &#63;.
+	* Returns the number of asset categories where groupId = &#63;.
 	*
-	* @param groupId the group ID to search with
+	* @param groupId the group ID
 	* @return the number of matching asset categories
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1453,9 +1449,9 @@ public class AssetCategoryUtil {
 	}
 
 	/**
-	* Filters by the user's permissions and counts all the asset categories where groupId = &#63;.
+	* Returns the number of asset categories that the user has permission to view where groupId = &#63;.
 	*
-	* @param groupId the group ID to search with
+	* @param groupId the group ID
 	* @return the number of matching asset categories that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1465,9 +1461,9 @@ public class AssetCategoryUtil {
 	}
 
 	/**
-	* Counts all the asset categories where parentCategoryId = &#63;.
+	* Returns the number of asset categories where parentCategoryId = &#63;.
 	*
-	* @param parentCategoryId the parent category ID to search with
+	* @param parentCategoryId the parent category ID
 	* @return the number of matching asset categories
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1477,9 +1473,9 @@ public class AssetCategoryUtil {
 	}
 
 	/**
-	* Counts all the asset categories where vocabularyId = &#63;.
+	* Returns the number of asset categories where vocabularyId = &#63;.
 	*
-	* @param vocabularyId the vocabulary ID to search with
+	* @param vocabularyId the vocabulary ID
 	* @return the number of matching asset categories
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1489,10 +1485,10 @@ public class AssetCategoryUtil {
 	}
 
 	/**
-	* Counts all the asset categories where parentCategoryId = &#63; and name = &#63;.
+	* Returns the number of asset categories where parentCategoryId = &#63; and name = &#63;.
 	*
-	* @param parentCategoryId the parent category ID to search with
-	* @param name the name to search with
+	* @param parentCategoryId the parent category ID
+	* @param name the name
 	* @return the number of matching asset categories
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1502,10 +1498,10 @@ public class AssetCategoryUtil {
 	}
 
 	/**
-	* Counts all the asset categories where parentCategoryId = &#63; and vocabularyId = &#63;.
+	* Returns the number of asset categories where parentCategoryId = &#63; and vocabularyId = &#63;.
 	*
-	* @param parentCategoryId the parent category ID to search with
-	* @param vocabularyId the vocabulary ID to search with
+	* @param parentCategoryId the parent category ID
+	* @param vocabularyId the vocabulary ID
 	* @return the number of matching asset categories
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1515,10 +1511,10 @@ public class AssetCategoryUtil {
 	}
 
 	/**
-	* Counts all the asset categories where name = &#63; and vocabularyId = &#63;.
+	* Returns the number of asset categories where name = &#63; and vocabularyId = &#63;.
 	*
-	* @param name the name to search with
-	* @param vocabularyId the vocabulary ID to search with
+	* @param name the name
+	* @param vocabularyId the vocabulary ID
 	* @return the number of matching asset categories
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1528,11 +1524,11 @@ public class AssetCategoryUtil {
 	}
 
 	/**
-	* Counts all the asset categories where parentCategoryId = &#63; and name = &#63; and vocabularyId = &#63;.
+	* Returns the number of asset categories where parentCategoryId = &#63; and name = &#63; and vocabularyId = &#63;.
 	*
-	* @param parentCategoryId the parent category ID to search with
-	* @param name the name to search with
-	* @param vocabularyId the vocabulary ID to search with
+	* @param parentCategoryId the parent category ID
+	* @param name the name
+	* @param vocabularyId the vocabulary ID
 	* @return the number of matching asset categories
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1544,7 +1540,7 @@ public class AssetCategoryUtil {
 	}
 
 	/**
-	* Counts all the asset categories.
+	* Returns the number of asset categories.
 	*
 	* @return the number of asset categories
 	* @throws SystemException if a system exception occurred
@@ -1555,9 +1551,9 @@ public class AssetCategoryUtil {
 	}
 
 	/**
-	* Gets all the asset entries associated with the asset category.
+	* Returns all the asset entries associated with the asset category.
 	*
-	* @param pk the primary key of the asset category to get the associated asset entries for
+	* @param pk the primary key of the asset category
 	* @return the asset entries associated with the asset category
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1567,15 +1563,15 @@ public class AssetCategoryUtil {
 	}
 
 	/**
-	* Gets a range of all the asset entries associated with the asset category.
+	* Returns a range of all the asset entries associated with the asset category.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param pk the primary key of the asset category to get the associated asset entries for
-	* @param start the lower bound of the range of asset categories to return
-	* @param end the upper bound of the range of asset categories to return (not inclusive)
+	* @param pk the primary key of the asset category
+	* @param start the lower bound of the range of asset categories
+	* @param end the upper bound of the range of asset categories (not inclusive)
 	* @return the range of asset entries associated with the asset category
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1586,15 +1582,15 @@ public class AssetCategoryUtil {
 	}
 
 	/**
-	* Gets an ordered range of all the asset entries associated with the asset category.
+	* Returns an ordered range of all the asset entries associated with the asset category.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param pk the primary key of the asset category to get the associated asset entries for
-	* @param start the lower bound of the range of asset categories to return
-	* @param end the upper bound of the range of asset categories to return (not inclusive)
+	* @param pk the primary key of the asset category
+	* @param start the lower bound of the range of asset categories
+	* @param end the upper bound of the range of asset categories (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of asset entries associated with the asset category
 	* @throws SystemException if a system exception occurred
@@ -1608,9 +1604,9 @@ public class AssetCategoryUtil {
 	}
 
 	/**
-	* Gets the number of asset entries associated with the asset category.
+	* Returns the number of asset entries associated with the asset category.
 	*
-	* @param pk the primary key of the asset category to get the number of associated asset entries for
+	* @param pk the primary key of the asset category
 	* @return the number of asset entries associated with the asset category
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1758,7 +1754,7 @@ public class AssetCategoryUtil {
 	/**
 	* Sets the asset entries associated with the asset category, removing and adding associations as necessary. Also notifies the appropriate model listeners and clears the mapping table finder cache.
 	*
-	* @param pk the primary key of the asset category to set the associations for
+	* @param pk the primary key of the asset category
 	* @param assetEntryPKs the primary keys of the asset entries to be associated with the asset category
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1770,7 +1766,7 @@ public class AssetCategoryUtil {
 	/**
 	* Sets the asset entries associated with the asset category, removing and adding associations as necessary. Also notifies the appropriate model listeners and clears the mapping table finder cache.
 	*
-	* @param pk the primary key of the asset category to set the associations for
+	* @param pk the primary key of the asset category
 	* @param assetEntries the asset entries to be associated with the asset category
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1787,7 +1783,7 @@ public class AssetCategoryUtil {
 	* Only call this method if the tree has become stale through operations other than normal CRUD. Under normal circumstances the tree is automatically rebuilt whenver necessary.
 	* </p>
 	*
-	* @param groupId the id of the scope to rebuild the tree for
+	* @param groupId the ID of the scope
 	* @param force whether to force the rebuild even if the tree is not stale
 	*/
 	public static void rebuildTree(long groupId, boolean force)

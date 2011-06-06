@@ -45,7 +45,7 @@ public interface DDMStructureLinkLocalService {
 	/**
 	* Adds the d d m structure link to the database. Also notifies the appropriate model listeners.
 	*
-	* @param ddmStructureLink the d d m structure link to add
+	* @param ddmStructureLink the d d m structure link
 	* @return the d d m structure link that was added
 	* @throws SystemException if a system exception occurred
 	*/
@@ -65,7 +65,7 @@ public interface DDMStructureLinkLocalService {
 	/**
 	* Deletes the d d m structure link with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param structureLinkId the primary key of the d d m structure link to delete
+	* @param structureLinkId the primary key of the d d m structure link
 	* @throws PortalException if a d d m structure link with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -76,7 +76,7 @@ public interface DDMStructureLinkLocalService {
 	/**
 	* Deletes the d d m structure link from the database. Also notifies the appropriate model listeners.
 	*
-	* @param ddmStructureLink the d d m structure link to delete
+	* @param ddmStructureLink the d d m structure link
 	* @throws SystemException if a system exception occurred
 	*/
 	public void deleteDDMStructureLink(
@@ -86,7 +86,7 @@ public interface DDMStructureLinkLocalService {
 	/**
 	* Performs a dynamic query on the database and returns the matching rows.
 	*
-	* @param dynamicQuery the dynamic query to search with
+	* @param dynamicQuery the dynamic query
 	* @return the matching rows
 	* @throws SystemException if a system exception occurred
 	*/
@@ -102,9 +102,9 @@ public interface DDMStructureLinkLocalService {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param dynamicQuery the dynamic query to search with
-	* @param start the lower bound of the range of model instances to return
-	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param dynamicQuery the dynamic query
+	* @param start the lower bound of the range of model instances
+	* @param end the upper bound of the range of model instances (not inclusive)
 	* @return the range of matching rows
 	* @throws SystemException if a system exception occurred
 	*/
@@ -120,9 +120,9 @@ public interface DDMStructureLinkLocalService {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param dynamicQuery the dynamic query to search with
-	* @param start the lower bound of the range of model instances to return
-	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param dynamicQuery the dynamic query
+	* @param start the lower bound of the range of model instances
+	* @param end the upper bound of the range of model instances (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching rows
 	* @throws SystemException if a system exception occurred
@@ -135,9 +135,9 @@ public interface DDMStructureLinkLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Counts the number of rows that match the dynamic query.
+	* Returns the number of rows that match the dynamic query.
 	*
-	* @param dynamicQuery the dynamic query to search with
+	* @param dynamicQuery the dynamic query
 	* @return the number of rows that match the dynamic query
 	* @throws SystemException if a system exception occurred
 	*/
@@ -146,9 +146,9 @@ public interface DDMStructureLinkLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Gets the d d m structure link with the primary key.
+	* Returns the d d m structure link with the primary key.
 	*
-	* @param structureLinkId the primary key of the d d m structure link to get
+	* @param structureLinkId the primary key of the d d m structure link
 	* @return the d d m structure link
 	* @throws PortalException if a d d m structure link with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -160,14 +160,14 @@ public interface DDMStructureLinkLocalService {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Gets a range of all the d d m structure links.
+	* Returns a range of all the d d m structure links.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of d d m structure links to return
-	* @param end the upper bound of the range of d d m structure links to return (not inclusive)
+	* @param start the lower bound of the range of d d m structure links
+	* @param end the upper bound of the range of d d m structure links (not inclusive)
 	* @return the range of d d m structure links
 	* @throws SystemException if a system exception occurred
 	*/
@@ -177,7 +177,7 @@ public interface DDMStructureLinkLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Gets the number of d d m structure links.
+	* Returns the number of d d m structure links.
 	*
 	* @return the number of d d m structure links
 	* @throws SystemException if a system exception occurred
@@ -189,7 +189,7 @@ public interface DDMStructureLinkLocalService {
 	/**
 	* Updates the d d m structure link in the database. Also notifies the appropriate model listeners.
 	*
-	* @param ddmStructureLink the d d m structure link to update
+	* @param ddmStructureLink the d d m structure link
 	* @return the d d m structure link that was updated
 	* @throws SystemException if a system exception occurred
 	*/
@@ -200,7 +200,7 @@ public interface DDMStructureLinkLocalService {
 	/**
 	* Updates the d d m structure link in the database. Also notifies the appropriate model listeners.
 	*
-	* @param ddmStructureLink the d d m structure link to update
+	* @param ddmStructureLink the d d m structure link
 	* @param merge whether to merge the d d m structure link with the current session. See {@link com.liferay.portal.service.persistence.BatchSession#update(com.liferay.portal.kernel.dao.orm.Session, com.liferay.portal.model.BaseModel, boolean)} for an explanation.
 	* @return the d d m structure link that was updated
 	* @throws SystemException if a system exception occurred
@@ -211,7 +211,7 @@ public interface DDMStructureLinkLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Gets the Spring bean ID for this bean.
+	* Returns the Spring bean ID for this bean.
 	*
 	* @return the Spring bean ID for this bean
 	*/

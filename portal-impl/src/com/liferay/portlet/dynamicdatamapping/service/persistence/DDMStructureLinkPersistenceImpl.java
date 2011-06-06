@@ -118,7 +118,7 @@ public class DDMStructureLinkPersistenceImpl extends BasePersistenceImpl<DDMStru
 	/**
 	 * Caches the d d m structure link in the entity cache if it is enabled.
 	 *
-	 * @param ddmStructureLink the d d m structure link to cache
+	 * @param ddmStructureLink the d d m structure link
 	 */
 	public void cacheResult(DDMStructureLink ddmStructureLink) {
 		EntityCacheUtil.putResult(DDMStructureLinkModelImpl.ENTITY_CACHE_ENABLED,
@@ -135,7 +135,7 @@ public class DDMStructureLinkPersistenceImpl extends BasePersistenceImpl<DDMStru
 	/**
 	 * Caches the d d m structure links in the entity cache if it is enabled.
 	 *
-	 * @param ddmStructureLinks the d d m structure links to cache
+	 * @param ddmStructureLinks the d d m structure links
 	 */
 	public void cacheResult(List<DDMStructureLink> ddmStructureLinks) {
 		for (DDMStructureLink ddmStructureLink : ddmStructureLinks) {
@@ -198,7 +198,7 @@ public class DDMStructureLinkPersistenceImpl extends BasePersistenceImpl<DDMStru
 	/**
 	 * Removes the d d m structure link with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param primaryKey the primary key of the d d m structure link to remove
+	 * @param primaryKey the primary key of the d d m structure link
 	 * @return the d d m structure link that was removed
 	 * @throws com.liferay.portal.NoSuchModelException if a d d m structure link with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -211,7 +211,7 @@ public class DDMStructureLinkPersistenceImpl extends BasePersistenceImpl<DDMStru
 	/**
 	 * Removes the d d m structure link with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param structureLinkId the primary key of the d d m structure link to remove
+	 * @param structureLinkId the primary key of the d d m structure link
 	 * @return the d d m structure link that was removed
 	 * @throws com.liferay.portlet.dynamicdatamapping.NoSuchStructureLinkException if a d d m structure link with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -252,7 +252,7 @@ public class DDMStructureLinkPersistenceImpl extends BasePersistenceImpl<DDMStru
 	/**
 	 * Removes the d d m structure link from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param ddmStructureLink the d d m structure link to remove
+	 * @param ddmStructureLink the d d m structure link
 	 * @return the d d m structure link that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -361,9 +361,9 @@ public class DDMStructureLinkPersistenceImpl extends BasePersistenceImpl<DDMStru
 	}
 
 	/**
-	 * Finds the d d m structure link with the primary key or throws a {@link com.liferay.portal.NoSuchModelException} if it could not be found.
+	 * Returns the d d m structure link with the primary key or throws a {@link com.liferay.portal.NoSuchModelException} if it could not be found.
 	 *
-	 * @param primaryKey the primary key of the d d m structure link to find
+	 * @param primaryKey the primary key of the d d m structure link
 	 * @return the d d m structure link
 	 * @throws com.liferay.portal.NoSuchModelException if a d d m structure link with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -374,9 +374,9 @@ public class DDMStructureLinkPersistenceImpl extends BasePersistenceImpl<DDMStru
 	}
 
 	/**
-	 * Finds the d d m structure link with the primary key or throws a {@link com.liferay.portlet.dynamicdatamapping.NoSuchStructureLinkException} if it could not be found.
+	 * Returns the d d m structure link with the primary key or throws a {@link com.liferay.portlet.dynamicdatamapping.NoSuchStructureLinkException} if it could not be found.
 	 *
-	 * @param structureLinkId the primary key of the d d m structure link to find
+	 * @param structureLinkId the primary key of the d d m structure link
 	 * @return the d d m structure link
 	 * @throws com.liferay.portlet.dynamicdatamapping.NoSuchStructureLinkException if a d d m structure link with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -398,9 +398,9 @@ public class DDMStructureLinkPersistenceImpl extends BasePersistenceImpl<DDMStru
 	}
 
 	/**
-	 * Finds the d d m structure link with the primary key or returns <code>null</code> if it could not be found.
+	 * Returns the d d m structure link with the primary key or returns <code>null</code> if it could not be found.
 	 *
-	 * @param primaryKey the primary key of the d d m structure link to find
+	 * @param primaryKey the primary key of the d d m structure link
 	 * @return the d d m structure link, or <code>null</code> if a d d m structure link with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -410,9 +410,9 @@ public class DDMStructureLinkPersistenceImpl extends BasePersistenceImpl<DDMStru
 	}
 
 	/**
-	 * Finds the d d m structure link with the primary key or returns <code>null</code> if it could not be found.
+	 * Returns the d d m structure link with the primary key or returns <code>null</code> if it could not be found.
 	 *
-	 * @param structureLinkId the primary key of the d d m structure link to find
+	 * @param structureLinkId the primary key of the d d m structure link
 	 * @return the d d m structure link, or <code>null</code> if a d d m structure link with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -446,9 +446,9 @@ public class DDMStructureLinkPersistenceImpl extends BasePersistenceImpl<DDMStru
 	}
 
 	/**
-	 * Finds all the d d m structure links where classNameId = &#63;.
+	 * Returns all the d d m structure links where classNameId = &#63;.
 	 *
-	 * @param classNameId the class name ID to search with
+	 * @param classNameId the class name ID
 	 * @return the matching d d m structure links
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -459,15 +459,15 @@ public class DDMStructureLinkPersistenceImpl extends BasePersistenceImpl<DDMStru
 	}
 
 	/**
-	 * Finds a range of all the d d m structure links where classNameId = &#63;.
+	 * Returns a range of all the d d m structure links where classNameId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param classNameId the class name ID to search with
-	 * @param start the lower bound of the range of d d m structure links to return
-	 * @param end the upper bound of the range of d d m structure links to return (not inclusive)
+	 * @param classNameId the class name ID
+	 * @param start the lower bound of the range of d d m structure links
+	 * @param end the upper bound of the range of d d m structure links (not inclusive)
 	 * @return the range of matching d d m structure links
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -477,15 +477,15 @@ public class DDMStructureLinkPersistenceImpl extends BasePersistenceImpl<DDMStru
 	}
 
 	/**
-	 * Finds an ordered range of all the d d m structure links where classNameId = &#63;.
+	 * Returns an ordered range of all the d d m structure links where classNameId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param classNameId the class name ID to search with
-	 * @param start the lower bound of the range of d d m structure links to return
-	 * @param end the upper bound of the range of d d m structure links to return (not inclusive)
+	 * @param classNameId the class name ID
+	 * @param start the lower bound of the range of d d m structure links
+	 * @param end the upper bound of the range of d d m structure links (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching d d m structure links
 	 * @throws SystemException if a system exception occurred
@@ -562,13 +562,13 @@ public class DDMStructureLinkPersistenceImpl extends BasePersistenceImpl<DDMStru
 	}
 
 	/**
-	 * Finds the first d d m structure link in the ordered set where classNameId = &#63;.
+	 * Returns the first d d m structure link in the ordered set where classNameId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param classNameId the class name ID to search with
+	 * @param classNameId the class name ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching d d m structure link
 	 * @throws com.liferay.portlet.dynamicdatamapping.NoSuchStructureLinkException if a matching d d m structure link could not be found
@@ -598,13 +598,13 @@ public class DDMStructureLinkPersistenceImpl extends BasePersistenceImpl<DDMStru
 	}
 
 	/**
-	 * Finds the last d d m structure link in the ordered set where classNameId = &#63;.
+	 * Returns the last d d m structure link in the ordered set where classNameId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param classNameId the class name ID to search with
+	 * @param classNameId the class name ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching d d m structure link
 	 * @throws com.liferay.portlet.dynamicdatamapping.NoSuchStructureLinkException if a matching d d m structure link could not be found
@@ -636,14 +636,14 @@ public class DDMStructureLinkPersistenceImpl extends BasePersistenceImpl<DDMStru
 	}
 
 	/**
-	 * Finds the d d m structure links before and after the current d d m structure link in the ordered set where classNameId = &#63;.
+	 * Returns the d d m structure links before and after the current d d m structure link in the ordered set where classNameId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
 	 * @param structureLinkId the primary key of the current d d m structure link
-	 * @param classNameId the class name ID to search with
+	 * @param classNameId the class name ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next d d m structure link
 	 * @throws com.liferay.portlet.dynamicdatamapping.NoSuchStructureLinkException if a d d m structure link with the primary key could not be found
@@ -781,9 +781,9 @@ public class DDMStructureLinkPersistenceImpl extends BasePersistenceImpl<DDMStru
 	}
 
 	/**
-	 * Filters by the user's permissions and finds all the d d m structure links where classNameId = &#63;.
+	 * Returns all the d d m structure links that the user has permission to view where classNameId = &#63;.
 	 *
-	 * @param classNameId the class name ID to search with
+	 * @param classNameId the class name ID
 	 * @return the matching d d m structure links that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -794,15 +794,15 @@ public class DDMStructureLinkPersistenceImpl extends BasePersistenceImpl<DDMStru
 	}
 
 	/**
-	 * Filters by the user's permissions and finds a range of all the d d m structure links where classNameId = &#63;.
+	 * Returns a range of all the d d m structure links that the user has permission to view where classNameId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param classNameId the class name ID to search with
-	 * @param start the lower bound of the range of d d m structure links to return
-	 * @param end the upper bound of the range of d d m structure links to return (not inclusive)
+	 * @param classNameId the class name ID
+	 * @param start the lower bound of the range of d d m structure links
+	 * @param end the upper bound of the range of d d m structure links (not inclusive)
 	 * @return the range of matching d d m structure links that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -812,15 +812,15 @@ public class DDMStructureLinkPersistenceImpl extends BasePersistenceImpl<DDMStru
 	}
 
 	/**
-	 * Filters by the user's permissions and finds an ordered range of all the d d m structure links where classNameId = &#63;.
+	 * Returns an ordered range of all the d d m structure links that the user has permissions to view where classNameId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param classNameId the class name ID to search with
-	 * @param start the lower bound of the range of d d m structure links to return
-	 * @param end the upper bound of the range of d d m structure links to return (not inclusive)
+	 * @param classNameId the class name ID
+	 * @param start the lower bound of the range of d d m structure links
+	 * @param end the upper bound of the range of d d m structure links (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching d d m structure links that the user has permission to view
 	 * @throws SystemException if a system exception occurred
@@ -892,14 +892,10 @@ public class DDMStructureLinkPersistenceImpl extends BasePersistenceImpl<DDMStru
 	}
 
 	/**
-	 * Filters the d d m structure links before and after the current d d m structure link in the ordered set where classNameId = &#63;.
-	 *
-	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
-	 * </p>
+	 * Returns the d d m structure links before and after the current d d m structure link in the ordered set of d d m structure links that the user has permission to view where classNameId = &#63;.
 	 *
 	 * @param structureLinkId the primary key of the current d d m structure link
-	 * @param classNameId the class name ID to search with
+	 * @param classNameId the class name ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next d d m structure link
 	 * @throws com.liferay.portlet.dynamicdatamapping.NoSuchStructureLinkException if a d d m structure link with the primary key could not be found
@@ -1064,9 +1060,9 @@ public class DDMStructureLinkPersistenceImpl extends BasePersistenceImpl<DDMStru
 	}
 
 	/**
-	 * Finds the d d m structure link where classPK = &#63; or throws a {@link com.liferay.portlet.dynamicdatamapping.NoSuchStructureLinkException} if it could not be found.
+	 * Returns the d d m structure link where classPK = &#63; or throws a {@link com.liferay.portlet.dynamicdatamapping.NoSuchStructureLinkException} if it could not be found.
 	 *
-	 * @param classPK the class p k to search with
+	 * @param classPK the class p k
 	 * @return the matching d d m structure link
 	 * @throws com.liferay.portlet.dynamicdatamapping.NoSuchStructureLinkException if a matching d d m structure link could not be found
 	 * @throws SystemException if a system exception occurred
@@ -1096,9 +1092,9 @@ public class DDMStructureLinkPersistenceImpl extends BasePersistenceImpl<DDMStru
 	}
 
 	/**
-	 * Finds the d d m structure link where classPK = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 * Returns the d d m structure link where classPK = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	 *
-	 * @param classPK the class p k to search with
+	 * @param classPK the class p k
 	 * @return the matching d d m structure link, or <code>null</code> if a matching d d m structure link could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1108,9 +1104,9 @@ public class DDMStructureLinkPersistenceImpl extends BasePersistenceImpl<DDMStru
 	}
 
 	/**
-	 * Finds the d d m structure link where classPK = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 * Returns the d d m structure link where classPK = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	 *
-	 * @param classPK the class p k to search with
+	 * @param classPK the class p k
 	 * @return the matching d d m structure link, or <code>null</code> if a matching d d m structure link could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1191,9 +1187,9 @@ public class DDMStructureLinkPersistenceImpl extends BasePersistenceImpl<DDMStru
 	}
 
 	/**
-	 * Finds all the d d m structure links where structureId = &#63;.
+	 * Returns all the d d m structure links where structureId = &#63;.
 	 *
-	 * @param structureId the structure ID to search with
+	 * @param structureId the structure ID
 	 * @return the matching d d m structure links
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1204,15 +1200,15 @@ public class DDMStructureLinkPersistenceImpl extends BasePersistenceImpl<DDMStru
 	}
 
 	/**
-	 * Finds a range of all the d d m structure links where structureId = &#63;.
+	 * Returns a range of all the d d m structure links where structureId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param structureId the structure ID to search with
-	 * @param start the lower bound of the range of d d m structure links to return
-	 * @param end the upper bound of the range of d d m structure links to return (not inclusive)
+	 * @param structureId the structure ID
+	 * @param start the lower bound of the range of d d m structure links
+	 * @param end the upper bound of the range of d d m structure links (not inclusive)
 	 * @return the range of matching d d m structure links
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1222,15 +1218,15 @@ public class DDMStructureLinkPersistenceImpl extends BasePersistenceImpl<DDMStru
 	}
 
 	/**
-	 * Finds an ordered range of all the d d m structure links where structureId = &#63;.
+	 * Returns an ordered range of all the d d m structure links where structureId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param structureId the structure ID to search with
-	 * @param start the lower bound of the range of d d m structure links to return
-	 * @param end the upper bound of the range of d d m structure links to return (not inclusive)
+	 * @param structureId the structure ID
+	 * @param start the lower bound of the range of d d m structure links
+	 * @param end the upper bound of the range of d d m structure links (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching d d m structure links
 	 * @throws SystemException if a system exception occurred
@@ -1307,13 +1303,13 @@ public class DDMStructureLinkPersistenceImpl extends BasePersistenceImpl<DDMStru
 	}
 
 	/**
-	 * Finds the first d d m structure link in the ordered set where structureId = &#63;.
+	 * Returns the first d d m structure link in the ordered set where structureId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param structureId the structure ID to search with
+	 * @param structureId the structure ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching d d m structure link
 	 * @throws com.liferay.portlet.dynamicdatamapping.NoSuchStructureLinkException if a matching d d m structure link could not be found
@@ -1343,13 +1339,13 @@ public class DDMStructureLinkPersistenceImpl extends BasePersistenceImpl<DDMStru
 	}
 
 	/**
-	 * Finds the last d d m structure link in the ordered set where structureId = &#63;.
+	 * Returns the last d d m structure link in the ordered set where structureId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param structureId the structure ID to search with
+	 * @param structureId the structure ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching d d m structure link
 	 * @throws com.liferay.portlet.dynamicdatamapping.NoSuchStructureLinkException if a matching d d m structure link could not be found
@@ -1381,14 +1377,14 @@ public class DDMStructureLinkPersistenceImpl extends BasePersistenceImpl<DDMStru
 	}
 
 	/**
-	 * Finds the d d m structure links before and after the current d d m structure link in the ordered set where structureId = &#63;.
+	 * Returns the d d m structure links before and after the current d d m structure link in the ordered set where structureId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
 	 * @param structureLinkId the primary key of the current d d m structure link
-	 * @param structureId the structure ID to search with
+	 * @param structureId the structure ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next d d m structure link
 	 * @throws com.liferay.portlet.dynamicdatamapping.NoSuchStructureLinkException if a d d m structure link with the primary key could not be found
@@ -1526,9 +1522,9 @@ public class DDMStructureLinkPersistenceImpl extends BasePersistenceImpl<DDMStru
 	}
 
 	/**
-	 * Filters by the user's permissions and finds all the d d m structure links where structureId = &#63;.
+	 * Returns all the d d m structure links that the user has permission to view where structureId = &#63;.
 	 *
-	 * @param structureId the structure ID to search with
+	 * @param structureId the structure ID
 	 * @return the matching d d m structure links that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1539,15 +1535,15 @@ public class DDMStructureLinkPersistenceImpl extends BasePersistenceImpl<DDMStru
 	}
 
 	/**
-	 * Filters by the user's permissions and finds a range of all the d d m structure links where structureId = &#63;.
+	 * Returns a range of all the d d m structure links that the user has permission to view where structureId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param structureId the structure ID to search with
-	 * @param start the lower bound of the range of d d m structure links to return
-	 * @param end the upper bound of the range of d d m structure links to return (not inclusive)
+	 * @param structureId the structure ID
+	 * @param start the lower bound of the range of d d m structure links
+	 * @param end the upper bound of the range of d d m structure links (not inclusive)
 	 * @return the range of matching d d m structure links that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1557,15 +1553,15 @@ public class DDMStructureLinkPersistenceImpl extends BasePersistenceImpl<DDMStru
 	}
 
 	/**
-	 * Filters by the user's permissions and finds an ordered range of all the d d m structure links where structureId = &#63;.
+	 * Returns an ordered range of all the d d m structure links that the user has permissions to view where structureId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param structureId the structure ID to search with
-	 * @param start the lower bound of the range of d d m structure links to return
-	 * @param end the upper bound of the range of d d m structure links to return (not inclusive)
+	 * @param structureId the structure ID
+	 * @param start the lower bound of the range of d d m structure links
+	 * @param end the upper bound of the range of d d m structure links (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching d d m structure links that the user has permission to view
 	 * @throws SystemException if a system exception occurred
@@ -1637,14 +1633,10 @@ public class DDMStructureLinkPersistenceImpl extends BasePersistenceImpl<DDMStru
 	}
 
 	/**
-	 * Filters the d d m structure links before and after the current d d m structure link in the ordered set where structureId = &#63;.
-	 *
-	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
-	 * </p>
+	 * Returns the d d m structure links before and after the current d d m structure link in the ordered set of d d m structure links that the user has permission to view where structureId = &#63;.
 	 *
 	 * @param structureLinkId the primary key of the current d d m structure link
-	 * @param structureId the structure ID to search with
+	 * @param structureId the structure ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next d d m structure link
 	 * @throws com.liferay.portlet.dynamicdatamapping.NoSuchStructureLinkException if a d d m structure link with the primary key could not be found
@@ -1809,7 +1801,7 @@ public class DDMStructureLinkPersistenceImpl extends BasePersistenceImpl<DDMStru
 	}
 
 	/**
-	 * Finds all the d d m structure links.
+	 * Returns all the d d m structure links.
 	 *
 	 * @return the d d m structure links
 	 * @throws SystemException if a system exception occurred
@@ -1819,14 +1811,14 @@ public class DDMStructureLinkPersistenceImpl extends BasePersistenceImpl<DDMStru
 	}
 
 	/**
-	 * Finds a range of all the d d m structure links.
+	 * Returns a range of all the d d m structure links.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param start the lower bound of the range of d d m structure links to return
-	 * @param end the upper bound of the range of d d m structure links to return (not inclusive)
+	 * @param start the lower bound of the range of d d m structure links
+	 * @param end the upper bound of the range of d d m structure links (not inclusive)
 	 * @return the range of d d m structure links
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1836,14 +1828,14 @@ public class DDMStructureLinkPersistenceImpl extends BasePersistenceImpl<DDMStru
 	}
 
 	/**
-	 * Finds an ordered range of all the d d m structure links.
+	 * Returns an ordered range of all the d d m structure links.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param start the lower bound of the range of d d m structure links to return
-	 * @param end the upper bound of the range of d d m structure links to return (not inclusive)
+	 * @param start the lower bound of the range of d d m structure links
+	 * @param end the upper bound of the range of d d m structure links (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of d d m structure links
 	 * @throws SystemException if a system exception occurred
@@ -1920,7 +1912,7 @@ public class DDMStructureLinkPersistenceImpl extends BasePersistenceImpl<DDMStru
 	/**
 	 * Removes all the d d m structure links where classNameId = &#63; from the database.
 	 *
-	 * @param classNameId the class name ID to search with
+	 * @param classNameId the class name ID
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByClassNameId(long classNameId) throws SystemException {
@@ -1932,7 +1924,7 @@ public class DDMStructureLinkPersistenceImpl extends BasePersistenceImpl<DDMStru
 	/**
 	 * Removes the d d m structure link where classPK = &#63; from the database.
 	 *
-	 * @param classPK the class p k to search with
+	 * @param classPK the class p k
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByClassPK(long classPK)
@@ -1945,7 +1937,7 @@ public class DDMStructureLinkPersistenceImpl extends BasePersistenceImpl<DDMStru
 	/**
 	 * Removes all the d d m structure links where structureId = &#63; from the database.
 	 *
-	 * @param structureId the structure ID to search with
+	 * @param structureId the structure ID
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByStructureId(long structureId) throws SystemException {
@@ -1966,9 +1958,9 @@ public class DDMStructureLinkPersistenceImpl extends BasePersistenceImpl<DDMStru
 	}
 
 	/**
-	 * Counts all the d d m structure links where classNameId = &#63;.
+	 * Returns the number of d d m structure links where classNameId = &#63;.
 	 *
-	 * @param classNameId the class name ID to search with
+	 * @param classNameId the class name ID
 	 * @return the number of matching d d m structure links
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2019,9 +2011,9 @@ public class DDMStructureLinkPersistenceImpl extends BasePersistenceImpl<DDMStru
 	}
 
 	/**
-	 * Filters by the user's permissions and counts all the d d m structure links where classNameId = &#63;.
+	 * Returns the number of d d m structure links that the user has permission to view where classNameId = &#63;.
 	 *
-	 * @param classNameId the class name ID to search with
+	 * @param classNameId the class name ID
 	 * @return the number of matching d d m structure links that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2067,9 +2059,9 @@ public class DDMStructureLinkPersistenceImpl extends BasePersistenceImpl<DDMStru
 	}
 
 	/**
-	 * Counts all the d d m structure links where classPK = &#63;.
+	 * Returns the number of d d m structure links where classPK = &#63;.
 	 *
-	 * @param classPK the class p k to search with
+	 * @param classPK the class p k
 	 * @return the number of matching d d m structure links
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2120,9 +2112,9 @@ public class DDMStructureLinkPersistenceImpl extends BasePersistenceImpl<DDMStru
 	}
 
 	/**
-	 * Counts all the d d m structure links where structureId = &#63;.
+	 * Returns the number of d d m structure links where structureId = &#63;.
 	 *
-	 * @param structureId the structure ID to search with
+	 * @param structureId the structure ID
 	 * @return the number of matching d d m structure links
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2173,9 +2165,9 @@ public class DDMStructureLinkPersistenceImpl extends BasePersistenceImpl<DDMStru
 	}
 
 	/**
-	 * Filters by the user's permissions and counts all the d d m structure links where structureId = &#63;.
+	 * Returns the number of d d m structure links that the user has permission to view where structureId = &#63;.
 	 *
-	 * @param structureId the structure ID to search with
+	 * @param structureId the structure ID
 	 * @return the number of matching d d m structure links that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2221,7 +2213,7 @@ public class DDMStructureLinkPersistenceImpl extends BasePersistenceImpl<DDMStru
 	}
 
 	/**
-	 * Counts all the d d m structure links.
+	 * Returns the number of d d m structure links.
 	 *
 	 * @return the number of d d m structure links
 	 * @throws SystemException if a system exception occurred

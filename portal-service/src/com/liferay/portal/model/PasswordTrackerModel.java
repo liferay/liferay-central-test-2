@@ -45,21 +45,21 @@ public interface PasswordTrackerModel extends BaseModel<PasswordTracker> {
 	 */
 
 	/**
-	 * Gets the primary key of this password tracker.
+	 * Returns the primary key of this password tracker.
 	 *
 	 * @return the primary key of this password tracker
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this password tracker
+	 * Sets the primary key of this password tracker.
 	 *
 	 * @param primaryKey the primary key of this password tracker
 	 */
 	public void setPrimaryKey(long primaryKey);
 
 	/**
-	 * Gets the password tracker ID of this password tracker.
+	 * Returns the password tracker ID of this password tracker.
 	 *
 	 * @return the password tracker ID of this password tracker
 	 */
@@ -73,7 +73,7 @@ public interface PasswordTrackerModel extends BaseModel<PasswordTracker> {
 	public void setPasswordTrackerId(long passwordTrackerId);
 
 	/**
-	 * Gets the user ID of this password tracker.
+	 * Returns the user ID of this password tracker.
 	 *
 	 * @return the user ID of this password tracker
 	 */
@@ -87,7 +87,7 @@ public interface PasswordTrackerModel extends BaseModel<PasswordTracker> {
 	public void setUserId(long userId);
 
 	/**
-	 * Gets the user uuid of this password tracker.
+	 * Returns the user uuid of this password tracker.
 	 *
 	 * @return the user uuid of this password tracker
 	 * @throws SystemException if a system exception occurred
@@ -102,7 +102,7 @@ public interface PasswordTrackerModel extends BaseModel<PasswordTracker> {
 	public void setUserUuid(String userUuid);
 
 	/**
-	 * Gets the create date of this password tracker.
+	 * Returns the create date of this password tracker.
 	 *
 	 * @return the create date of this password tracker
 	 */
@@ -116,7 +116,7 @@ public interface PasswordTrackerModel extends BaseModel<PasswordTracker> {
 	public void setCreateDate(Date createDate);
 
 	/**
-	 * Gets the password of this password tracker.
+	 * Returns the password of this password tracker.
 	 *
 	 * @return the password of this password tracker
 	 */

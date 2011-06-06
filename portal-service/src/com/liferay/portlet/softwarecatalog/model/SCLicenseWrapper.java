@@ -37,7 +37,7 @@ public class SCLicenseWrapper implements SCLicense {
 	}
 
 	/**
-	* Gets the primary key of this s c license.
+	* Returns the primary key of this s c license.
 	*
 	* @return the primary key of this s c license
 	*/
@@ -46,7 +46,7 @@ public class SCLicenseWrapper implements SCLicense {
 	}
 
 	/**
-	* Sets the primary key of this s c license
+	* Sets the primary key of this s c license.
 	*
 	* @param primaryKey the primary key of this s c license
 	*/
@@ -55,7 +55,7 @@ public class SCLicenseWrapper implements SCLicense {
 	}
 
 	/**
-	* Gets the license ID of this s c license.
+	* Returns the license ID of this s c license.
 	*
 	* @return the license ID of this s c license
 	*/
@@ -73,7 +73,7 @@ public class SCLicenseWrapper implements SCLicense {
 	}
 
 	/**
-	* Gets the name of this s c license.
+	* Returns the name of this s c license.
 	*
 	* @return the name of this s c license
 	*/
@@ -91,7 +91,7 @@ public class SCLicenseWrapper implements SCLicense {
 	}
 
 	/**
-	* Gets the url of this s c license.
+	* Returns the url of this s c license.
 	*
 	* @return the url of this s c license
 	*/
@@ -109,7 +109,7 @@ public class SCLicenseWrapper implements SCLicense {
 	}
 
 	/**
-	* Gets the open source of this s c license.
+	* Returns the open source of this s c license.
 	*
 	* @return the open source of this s c license
 	*/
@@ -136,7 +136,7 @@ public class SCLicenseWrapper implements SCLicense {
 	}
 
 	/**
-	* Gets the active of this s c license.
+	* Returns the active of this s c license.
 	*
 	* @return the active of this s c license
 	*/
@@ -163,7 +163,7 @@ public class SCLicenseWrapper implements SCLicense {
 	}
 
 	/**
-	* Gets the recommended of this s c license.
+	* Returns the recommended of this s c license.
 	*
 	* @return the recommended of this s c license
 	*/

@@ -85,7 +85,7 @@ public class ClassNamePersistenceImpl extends BasePersistenceImpl<ClassName>
 	/**
 	 * Caches the class name in the entity cache if it is enabled.
 	 *
-	 * @param className the class name to cache
+	 * @param className the class name
 	 */
 	public void cacheResult(ClassName className) {
 		EntityCacheUtil.putResult(ClassNameModelImpl.ENTITY_CACHE_ENABLED,
@@ -100,7 +100,7 @@ public class ClassNamePersistenceImpl extends BasePersistenceImpl<ClassName>
 	/**
 	 * Caches the class names in the entity cache if it is enabled.
 	 *
-	 * @param classNames the class names to cache
+	 * @param classNames the class names
 	 */
 	public void cacheResult(List<ClassName> classNames) {
 		for (ClassName className : classNames) {
@@ -162,7 +162,7 @@ public class ClassNamePersistenceImpl extends BasePersistenceImpl<ClassName>
 	/**
 	 * Removes the class name with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param primaryKey the primary key of the class name to remove
+	 * @param primaryKey the primary key of the class name
 	 * @return the class name that was removed
 	 * @throws com.liferay.portal.NoSuchModelException if a class name with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -175,7 +175,7 @@ public class ClassNamePersistenceImpl extends BasePersistenceImpl<ClassName>
 	/**
 	 * Removes the class name with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param classNameId the primary key of the class name to remove
+	 * @param classNameId the primary key of the class name
 	 * @return the class name that was removed
 	 * @throws com.liferay.portal.NoSuchClassNameException if a class name with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -215,7 +215,7 @@ public class ClassNamePersistenceImpl extends BasePersistenceImpl<ClassName>
 	/**
 	 * Removes the class name from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param className the class name to remove
+	 * @param className the class name
 	 * @return the class name that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -317,9 +317,9 @@ public class ClassNamePersistenceImpl extends BasePersistenceImpl<ClassName>
 	}
 
 	/**
-	 * Finds the class name with the primary key or throws a {@link com.liferay.portal.NoSuchModelException} if it could not be found.
+	 * Returns the class name with the primary key or throws a {@link com.liferay.portal.NoSuchModelException} if it could not be found.
 	 *
-	 * @param primaryKey the primary key of the class name to find
+	 * @param primaryKey the primary key of the class name
 	 * @return the class name
 	 * @throws com.liferay.portal.NoSuchModelException if a class name with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -330,9 +330,9 @@ public class ClassNamePersistenceImpl extends BasePersistenceImpl<ClassName>
 	}
 
 	/**
-	 * Finds the class name with the primary key or throws a {@link com.liferay.portal.NoSuchClassNameException} if it could not be found.
+	 * Returns the class name with the primary key or throws a {@link com.liferay.portal.NoSuchClassNameException} if it could not be found.
 	 *
-	 * @param classNameId the primary key of the class name to find
+	 * @param classNameId the primary key of the class name
 	 * @return the class name
 	 * @throws com.liferay.portal.NoSuchClassNameException if a class name with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -354,9 +354,9 @@ public class ClassNamePersistenceImpl extends BasePersistenceImpl<ClassName>
 	}
 
 	/**
-	 * Finds the class name with the primary key or returns <code>null</code> if it could not be found.
+	 * Returns the class name with the primary key or returns <code>null</code> if it could not be found.
 	 *
-	 * @param primaryKey the primary key of the class name to find
+	 * @param primaryKey the primary key of the class name
 	 * @return the class name, or <code>null</code> if a class name with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -366,9 +366,9 @@ public class ClassNamePersistenceImpl extends BasePersistenceImpl<ClassName>
 	}
 
 	/**
-	 * Finds the class name with the primary key or returns <code>null</code> if it could not be found.
+	 * Returns the class name with the primary key or returns <code>null</code> if it could not be found.
 	 *
-	 * @param classNameId the primary key of the class name to find
+	 * @param classNameId the primary key of the class name
 	 * @return the class name, or <code>null</code> if a class name with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -402,9 +402,9 @@ public class ClassNamePersistenceImpl extends BasePersistenceImpl<ClassName>
 	}
 
 	/**
-	 * Finds the class name where value = &#63; or throws a {@link com.liferay.portal.NoSuchClassNameException} if it could not be found.
+	 * Returns the class name where value = &#63; or throws a {@link com.liferay.portal.NoSuchClassNameException} if it could not be found.
 	 *
-	 * @param value the value to search with
+	 * @param value the value
 	 * @return the matching class name
 	 * @throws com.liferay.portal.NoSuchClassNameException if a matching class name could not be found
 	 * @throws SystemException if a system exception occurred
@@ -434,9 +434,9 @@ public class ClassNamePersistenceImpl extends BasePersistenceImpl<ClassName>
 	}
 
 	/**
-	 * Finds the class name where value = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 * Returns the class name where value = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	 *
-	 * @param value the value to search with
+	 * @param value the value
 	 * @return the matching class name, or <code>null</code> if a matching class name could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -445,9 +445,9 @@ public class ClassNamePersistenceImpl extends BasePersistenceImpl<ClassName>
 	}
 
 	/**
-	 * Finds the class name where value = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 * Returns the class name where value = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	 *
-	 * @param value the value to search with
+	 * @param value the value
 	 * @return the matching class name, or <code>null</code> if a matching class name could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -541,7 +541,7 @@ public class ClassNamePersistenceImpl extends BasePersistenceImpl<ClassName>
 	}
 
 	/**
-	 * Finds all the class names.
+	 * Returns all the class names.
 	 *
 	 * @return the class names
 	 * @throws SystemException if a system exception occurred
@@ -551,14 +551,14 @@ public class ClassNamePersistenceImpl extends BasePersistenceImpl<ClassName>
 	}
 
 	/**
-	 * Finds a range of all the class names.
+	 * Returns a range of all the class names.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param start the lower bound of the range of class names to return
-	 * @param end the upper bound of the range of class names to return (not inclusive)
+	 * @param start the lower bound of the range of class names
+	 * @param end the upper bound of the range of class names (not inclusive)
 	 * @return the range of class names
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -568,14 +568,14 @@ public class ClassNamePersistenceImpl extends BasePersistenceImpl<ClassName>
 	}
 
 	/**
-	 * Finds an ordered range of all the class names.
+	 * Returns an ordered range of all the class names.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param start the lower bound of the range of class names to return
-	 * @param end the upper bound of the range of class names to return (not inclusive)
+	 * @param start the lower bound of the range of class names
+	 * @param end the upper bound of the range of class names (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of class names
 	 * @throws SystemException if a system exception occurred
@@ -652,7 +652,7 @@ public class ClassNamePersistenceImpl extends BasePersistenceImpl<ClassName>
 	/**
 	 * Removes the class name where value = &#63; from the database.
 	 *
-	 * @param value the value to search with
+	 * @param value the value
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByValue(String value)
@@ -674,9 +674,9 @@ public class ClassNamePersistenceImpl extends BasePersistenceImpl<ClassName>
 	}
 
 	/**
-	 * Counts all the class names where value = &#63;.
+	 * Returns the number of class names where value = &#63;.
 	 *
-	 * @param value the value to search with
+	 * @param value the value
 	 * @return the number of matching class names
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -739,7 +739,7 @@ public class ClassNamePersistenceImpl extends BasePersistenceImpl<ClassName>
 	}
 
 	/**
-	 * Counts all the class names.
+	 * Returns the number of class names.
 	 *
 	 * @return the number of class names
 	 * @throws SystemException if a system exception occurred

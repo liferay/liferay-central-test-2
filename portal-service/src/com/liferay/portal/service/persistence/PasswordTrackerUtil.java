@@ -120,7 +120,7 @@ public class PasswordTrackerUtil {
 	/**
 	* Caches the password tracker in the entity cache if it is enabled.
 	*
-	* @param passwordTracker the password tracker to cache
+	* @param passwordTracker the password tracker
 	*/
 	public static void cacheResult(
 		com.liferay.portal.model.PasswordTracker passwordTracker) {
@@ -130,7 +130,7 @@ public class PasswordTrackerUtil {
 	/**
 	* Caches the password trackers in the entity cache if it is enabled.
 	*
-	* @param passwordTrackers the password trackers to cache
+	* @param passwordTrackers the password trackers
 	*/
 	public static void cacheResult(
 		java.util.List<com.liferay.portal.model.PasswordTracker> passwordTrackers) {
@@ -151,7 +151,7 @@ public class PasswordTrackerUtil {
 	/**
 	* Removes the password tracker with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param passwordTrackerId the primary key of the password tracker to remove
+	* @param passwordTrackerId the primary key of the password tracker
 	* @return the password tracker that was removed
 	* @throws com.liferay.portal.NoSuchPasswordTrackerException if a password tracker with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -170,9 +170,9 @@ public class PasswordTrackerUtil {
 	}
 
 	/**
-	* Finds the password tracker with the primary key or throws a {@link com.liferay.portal.NoSuchPasswordTrackerException} if it could not be found.
+	* Returns the password tracker with the primary key or throws a {@link com.liferay.portal.NoSuchPasswordTrackerException} if it could not be found.
 	*
-	* @param passwordTrackerId the primary key of the password tracker to find
+	* @param passwordTrackerId the primary key of the password tracker
 	* @return the password tracker
 	* @throws com.liferay.portal.NoSuchPasswordTrackerException if a password tracker with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -185,9 +185,9 @@ public class PasswordTrackerUtil {
 	}
 
 	/**
-	* Finds the password tracker with the primary key or returns <code>null</code> if it could not be found.
+	* Returns the password tracker with the primary key or returns <code>null</code> if it could not be found.
 	*
-	* @param passwordTrackerId the primary key of the password tracker to find
+	* @param passwordTrackerId the primary key of the password tracker
 	* @return the password tracker, or <code>null</code> if a password tracker with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -198,9 +198,9 @@ public class PasswordTrackerUtil {
 	}
 
 	/**
-	* Finds all the password trackers where userId = &#63;.
+	* Returns all the password trackers where userId = &#63;.
 	*
-	* @param userId the user ID to search with
+	* @param userId the user ID
 	* @return the matching password trackers
 	* @throws SystemException if a system exception occurred
 	*/
@@ -210,15 +210,15 @@ public class PasswordTrackerUtil {
 	}
 
 	/**
-	* Finds a range of all the password trackers where userId = &#63;.
+	* Returns a range of all the password trackers where userId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param userId the user ID to search with
-	* @param start the lower bound of the range of password trackers to return
-	* @param end the upper bound of the range of password trackers to return (not inclusive)
+	* @param userId the user ID
+	* @param start the lower bound of the range of password trackers
+	* @param end the upper bound of the range of password trackers (not inclusive)
 	* @return the range of matching password trackers
 	* @throws SystemException if a system exception occurred
 	*/
@@ -229,15 +229,15 @@ public class PasswordTrackerUtil {
 	}
 
 	/**
-	* Finds an ordered range of all the password trackers where userId = &#63;.
+	* Returns an ordered range of all the password trackers where userId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param userId the user ID to search with
-	* @param start the lower bound of the range of password trackers to return
-	* @param end the upper bound of the range of password trackers to return (not inclusive)
+	* @param userId the user ID
+	* @param start the lower bound of the range of password trackers
+	* @param end the upper bound of the range of password trackers (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching password trackers
 	* @throws SystemException if a system exception occurred
@@ -251,13 +251,13 @@ public class PasswordTrackerUtil {
 	}
 
 	/**
-	* Finds the first password tracker in the ordered set where userId = &#63;.
+	* Returns the first password tracker in the ordered set where userId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param userId the user ID to search with
+	* @param userId the user ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching password tracker
 	* @throws com.liferay.portal.NoSuchPasswordTrackerException if a matching password tracker could not be found
@@ -272,13 +272,13 @@ public class PasswordTrackerUtil {
 	}
 
 	/**
-	* Finds the last password tracker in the ordered set where userId = &#63;.
+	* Returns the last password tracker in the ordered set where userId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param userId the user ID to search with
+	* @param userId the user ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching password tracker
 	* @throws com.liferay.portal.NoSuchPasswordTrackerException if a matching password tracker could not be found
@@ -293,14 +293,14 @@ public class PasswordTrackerUtil {
 	}
 
 	/**
-	* Finds the password trackers before and after the current password tracker in the ordered set where userId = &#63;.
+	* Returns the password trackers before and after the current password tracker in the ordered set where userId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
 	* @param passwordTrackerId the primary key of the current password tracker
-	* @param userId the user ID to search with
+	* @param userId the user ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next password tracker
 	* @throws com.liferay.portal.NoSuchPasswordTrackerException if a password tracker with the primary key could not be found
@@ -317,7 +317,7 @@ public class PasswordTrackerUtil {
 	}
 
 	/**
-	* Finds all the password trackers.
+	* Returns all the password trackers.
 	*
 	* @return the password trackers
 	* @throws SystemException if a system exception occurred
@@ -328,14 +328,14 @@ public class PasswordTrackerUtil {
 	}
 
 	/**
-	* Finds a range of all the password trackers.
+	* Returns a range of all the password trackers.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of password trackers to return
-	* @param end the upper bound of the range of password trackers to return (not inclusive)
+	* @param start the lower bound of the range of password trackers
+	* @param end the upper bound of the range of password trackers (not inclusive)
 	* @return the range of password trackers
 	* @throws SystemException if a system exception occurred
 	*/
@@ -346,14 +346,14 @@ public class PasswordTrackerUtil {
 	}
 
 	/**
-	* Finds an ordered range of all the password trackers.
+	* Returns an ordered range of all the password trackers.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of password trackers to return
-	* @param end the upper bound of the range of password trackers to return (not inclusive)
+	* @param start the lower bound of the range of password trackers
+	* @param end the upper bound of the range of password trackers (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of password trackers
 	* @throws SystemException if a system exception occurred
@@ -368,7 +368,7 @@ public class PasswordTrackerUtil {
 	/**
 	* Removes all the password trackers where userId = &#63; from the database.
 	*
-	* @param userId the user ID to search with
+	* @param userId the user ID
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByUserId(long userId)
@@ -387,9 +387,9 @@ public class PasswordTrackerUtil {
 	}
 
 	/**
-	* Counts all the password trackers where userId = &#63;.
+	* Returns the number of password trackers where userId = &#63;.
 	*
-	* @param userId the user ID to search with
+	* @param userId the user ID
 	* @return the number of matching password trackers
 	* @throws SystemException if a system exception occurred
 	*/
@@ -399,7 +399,7 @@ public class PasswordTrackerUtil {
 	}
 
 	/**
-	* Counts all the password trackers.
+	* Returns the number of password trackers.
 	*
 	* @return the number of password trackers
 	* @throws SystemException if a system exception occurred

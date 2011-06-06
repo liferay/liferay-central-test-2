@@ -45,21 +45,21 @@ public interface AccountModel extends AuditedModel, BaseModel<Account> {
 	 */
 
 	/**
-	 * Gets the primary key of this account.
+	 * Returns the primary key of this account.
 	 *
 	 * @return the primary key of this account
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this account
+	 * Sets the primary key of this account.
 	 *
 	 * @param primaryKey the primary key of this account
 	 */
 	public void setPrimaryKey(long primaryKey);
 
 	/**
-	 * Gets the account ID of this account.
+	 * Returns the account ID of this account.
 	 *
 	 * @return the account ID of this account
 	 */
@@ -73,7 +73,7 @@ public interface AccountModel extends AuditedModel, BaseModel<Account> {
 	public void setAccountId(long accountId);
 
 	/**
-	 * Gets the company ID of this account.
+	 * Returns the company ID of this account.
 	 *
 	 * @return the company ID of this account
 	 */
@@ -87,7 +87,7 @@ public interface AccountModel extends AuditedModel, BaseModel<Account> {
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the user ID of this account.
+	 * Returns the user ID of this account.
 	 *
 	 * @return the user ID of this account
 	 */
@@ -101,7 +101,7 @@ public interface AccountModel extends AuditedModel, BaseModel<Account> {
 	public void setUserId(long userId);
 
 	/**
-	 * Gets the user uuid of this account.
+	 * Returns the user uuid of this account.
 	 *
 	 * @return the user uuid of this account
 	 * @throws SystemException if a system exception occurred
@@ -116,7 +116,7 @@ public interface AccountModel extends AuditedModel, BaseModel<Account> {
 	public void setUserUuid(String userUuid);
 
 	/**
-	 * Gets the user name of this account.
+	 * Returns the user name of this account.
 	 *
 	 * @return the user name of this account
 	 */
@@ -131,7 +131,7 @@ public interface AccountModel extends AuditedModel, BaseModel<Account> {
 	public void setUserName(String userName);
 
 	/**
-	 * Gets the create date of this account.
+	 * Returns the create date of this account.
 	 *
 	 * @return the create date of this account
 	 */
@@ -145,7 +145,7 @@ public interface AccountModel extends AuditedModel, BaseModel<Account> {
 	public void setCreateDate(Date createDate);
 
 	/**
-	 * Gets the modified date of this account.
+	 * Returns the modified date of this account.
 	 *
 	 * @return the modified date of this account
 	 */
@@ -159,7 +159,7 @@ public interface AccountModel extends AuditedModel, BaseModel<Account> {
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
-	 * Gets the parent account ID of this account.
+	 * Returns the parent account ID of this account.
 	 *
 	 * @return the parent account ID of this account
 	 */
@@ -173,7 +173,7 @@ public interface AccountModel extends AuditedModel, BaseModel<Account> {
 	public void setParentAccountId(long parentAccountId);
 
 	/**
-	 * Gets the name of this account.
+	 * Returns the name of this account.
 	 *
 	 * @return the name of this account
 	 */
@@ -188,7 +188,7 @@ public interface AccountModel extends AuditedModel, BaseModel<Account> {
 	public void setName(String name);
 
 	/**
-	 * Gets the legal name of this account.
+	 * Returns the legal name of this account.
 	 *
 	 * @return the legal name of this account
 	 */
@@ -203,7 +203,7 @@ public interface AccountModel extends AuditedModel, BaseModel<Account> {
 	public void setLegalName(String legalName);
 
 	/**
-	 * Gets the legal ID of this account.
+	 * Returns the legal ID of this account.
 	 *
 	 * @return the legal ID of this account
 	 */
@@ -218,7 +218,7 @@ public interface AccountModel extends AuditedModel, BaseModel<Account> {
 	public void setLegalId(String legalId);
 
 	/**
-	 * Gets the legal type of this account.
+	 * Returns the legal type of this account.
 	 *
 	 * @return the legal type of this account
 	 */
@@ -233,7 +233,7 @@ public interface AccountModel extends AuditedModel, BaseModel<Account> {
 	public void setLegalType(String legalType);
 
 	/**
-	 * Gets the sic code of this account.
+	 * Returns the sic code of this account.
 	 *
 	 * @return the sic code of this account
 	 */
@@ -248,7 +248,7 @@ public interface AccountModel extends AuditedModel, BaseModel<Account> {
 	public void setSicCode(String sicCode);
 
 	/**
-	 * Gets the ticker symbol of this account.
+	 * Returns the ticker symbol of this account.
 	 *
 	 * @return the ticker symbol of this account
 	 */
@@ -263,7 +263,7 @@ public interface AccountModel extends AuditedModel, BaseModel<Account> {
 	public void setTickerSymbol(String tickerSymbol);
 
 	/**
-	 * Gets the industry of this account.
+	 * Returns the industry of this account.
 	 *
 	 * @return the industry of this account
 	 */
@@ -278,7 +278,7 @@ public interface AccountModel extends AuditedModel, BaseModel<Account> {
 	public void setIndustry(String industry);
 
 	/**
-	 * Gets the type of this account.
+	 * Returns the type of this account.
 	 *
 	 * @return the type of this account
 	 */
@@ -293,7 +293,7 @@ public interface AccountModel extends AuditedModel, BaseModel<Account> {
 	public void setType(String type);
 
 	/**
-	 * Gets the size of this account.
+	 * Returns the size of this account.
 	 *
 	 * @return the size of this account
 	 */

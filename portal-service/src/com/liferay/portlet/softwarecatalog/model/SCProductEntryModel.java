@@ -48,21 +48,21 @@ public interface SCProductEntryModel extends BaseModel<SCProductEntry>,
 	 */
 
 	/**
-	 * Gets the primary key of this s c product entry.
+	 * Returns the primary key of this s c product entry.
 	 *
 	 * @return the primary key of this s c product entry
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this s c product entry
+	 * Sets the primary key of this s c product entry.
 	 *
 	 * @param primaryKey the primary key of this s c product entry
 	 */
 	public void setPrimaryKey(long primaryKey);
 
 	/**
-	 * Gets the product entry ID of this s c product entry.
+	 * Returns the product entry ID of this s c product entry.
 	 *
 	 * @return the product entry ID of this s c product entry
 	 */
@@ -76,7 +76,7 @@ public interface SCProductEntryModel extends BaseModel<SCProductEntry>,
 	public void setProductEntryId(long productEntryId);
 
 	/**
-	 * Gets the group ID of this s c product entry.
+	 * Returns the group ID of this s c product entry.
 	 *
 	 * @return the group ID of this s c product entry
 	 */
@@ -90,7 +90,7 @@ public interface SCProductEntryModel extends BaseModel<SCProductEntry>,
 	public void setGroupId(long groupId);
 
 	/**
-	 * Gets the company ID of this s c product entry.
+	 * Returns the company ID of this s c product entry.
 	 *
 	 * @return the company ID of this s c product entry
 	 */
@@ -104,7 +104,7 @@ public interface SCProductEntryModel extends BaseModel<SCProductEntry>,
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the user ID of this s c product entry.
+	 * Returns the user ID of this s c product entry.
 	 *
 	 * @return the user ID of this s c product entry
 	 */
@@ -118,7 +118,7 @@ public interface SCProductEntryModel extends BaseModel<SCProductEntry>,
 	public void setUserId(long userId);
 
 	/**
-	 * Gets the user uuid of this s c product entry.
+	 * Returns the user uuid of this s c product entry.
 	 *
 	 * @return the user uuid of this s c product entry
 	 * @throws SystemException if a system exception occurred
@@ -133,7 +133,7 @@ public interface SCProductEntryModel extends BaseModel<SCProductEntry>,
 	public void setUserUuid(String userUuid);
 
 	/**
-	 * Gets the user name of this s c product entry.
+	 * Returns the user name of this s c product entry.
 	 *
 	 * @return the user name of this s c product entry
 	 */
@@ -148,7 +148,7 @@ public interface SCProductEntryModel extends BaseModel<SCProductEntry>,
 	public void setUserName(String userName);
 
 	/**
-	 * Gets the create date of this s c product entry.
+	 * Returns the create date of this s c product entry.
 	 *
 	 * @return the create date of this s c product entry
 	 */
@@ -162,7 +162,7 @@ public interface SCProductEntryModel extends BaseModel<SCProductEntry>,
 	public void setCreateDate(Date createDate);
 
 	/**
-	 * Gets the modified date of this s c product entry.
+	 * Returns the modified date of this s c product entry.
 	 *
 	 * @return the modified date of this s c product entry
 	 */
@@ -176,7 +176,7 @@ public interface SCProductEntryModel extends BaseModel<SCProductEntry>,
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
-	 * Gets the name of this s c product entry.
+	 * Returns the name of this s c product entry.
 	 *
 	 * @return the name of this s c product entry
 	 */
@@ -191,7 +191,7 @@ public interface SCProductEntryModel extends BaseModel<SCProductEntry>,
 	public void setName(String name);
 
 	/**
-	 * Gets the type of this s c product entry.
+	 * Returns the type of this s c product entry.
 	 *
 	 * @return the type of this s c product entry
 	 */
@@ -206,7 +206,7 @@ public interface SCProductEntryModel extends BaseModel<SCProductEntry>,
 	public void setType(String type);
 
 	/**
-	 * Gets the tags of this s c product entry.
+	 * Returns the tags of this s c product entry.
 	 *
 	 * @return the tags of this s c product entry
 	 */
@@ -221,7 +221,7 @@ public interface SCProductEntryModel extends BaseModel<SCProductEntry>,
 	public void setTags(String tags);
 
 	/**
-	 * Gets the short description of this s c product entry.
+	 * Returns the short description of this s c product entry.
 	 *
 	 * @return the short description of this s c product entry
 	 */
@@ -236,7 +236,7 @@ public interface SCProductEntryModel extends BaseModel<SCProductEntry>,
 	public void setShortDescription(String shortDescription);
 
 	/**
-	 * Gets the long description of this s c product entry.
+	 * Returns the long description of this s c product entry.
 	 *
 	 * @return the long description of this s c product entry
 	 */
@@ -251,7 +251,7 @@ public interface SCProductEntryModel extends BaseModel<SCProductEntry>,
 	public void setLongDescription(String longDescription);
 
 	/**
-	 * Gets the page u r l of this s c product entry.
+	 * Returns the page u r l of this s c product entry.
 	 *
 	 * @return the page u r l of this s c product entry
 	 */
@@ -266,7 +266,7 @@ public interface SCProductEntryModel extends BaseModel<SCProductEntry>,
 	public void setPageURL(String pageURL);
 
 	/**
-	 * Gets the author of this s c product entry.
+	 * Returns the author of this s c product entry.
 	 *
 	 * @return the author of this s c product entry
 	 */
@@ -281,7 +281,7 @@ public interface SCProductEntryModel extends BaseModel<SCProductEntry>,
 	public void setAuthor(String author);
 
 	/**
-	 * Gets the repo group ID of this s c product entry.
+	 * Returns the repo group ID of this s c product entry.
 	 *
 	 * @return the repo group ID of this s c product entry
 	 */
@@ -296,7 +296,7 @@ public interface SCProductEntryModel extends BaseModel<SCProductEntry>,
 	public void setRepoGroupId(String repoGroupId);
 
 	/**
-	 * Gets the repo artifact ID of this s c product entry.
+	 * Returns the repo artifact ID of this s c product entry.
 	 *
 	 * @return the repo artifact ID of this s c product entry
 	 */

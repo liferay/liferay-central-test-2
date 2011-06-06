@@ -47,21 +47,21 @@ public interface JournalFeedModel extends BaseModel<JournalFeed>, GroupedModel {
 	 */
 
 	/**
-	 * Gets the primary key of this journal feed.
+	 * Returns the primary key of this journal feed.
 	 *
 	 * @return the primary key of this journal feed
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this journal feed
+	 * Sets the primary key of this journal feed.
 	 *
 	 * @param primaryKey the primary key of this journal feed
 	 */
 	public void setPrimaryKey(long primaryKey);
 
 	/**
-	 * Gets the uuid of this journal feed.
+	 * Returns the uuid of this journal feed.
 	 *
 	 * @return the uuid of this journal feed
 	 */
@@ -76,7 +76,7 @@ public interface JournalFeedModel extends BaseModel<JournalFeed>, GroupedModel {
 	public void setUuid(String uuid);
 
 	/**
-	 * Gets the ID of this journal feed.
+	 * Returns the ID of this journal feed.
 	 *
 	 * @return the ID of this journal feed
 	 */
@@ -90,7 +90,7 @@ public interface JournalFeedModel extends BaseModel<JournalFeed>, GroupedModel {
 	public void setId(long id);
 
 	/**
-	 * Gets the group ID of this journal feed.
+	 * Returns the group ID of this journal feed.
 	 *
 	 * @return the group ID of this journal feed
 	 */
@@ -104,7 +104,7 @@ public interface JournalFeedModel extends BaseModel<JournalFeed>, GroupedModel {
 	public void setGroupId(long groupId);
 
 	/**
-	 * Gets the company ID of this journal feed.
+	 * Returns the company ID of this journal feed.
 	 *
 	 * @return the company ID of this journal feed
 	 */
@@ -118,7 +118,7 @@ public interface JournalFeedModel extends BaseModel<JournalFeed>, GroupedModel {
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the user ID of this journal feed.
+	 * Returns the user ID of this journal feed.
 	 *
 	 * @return the user ID of this journal feed
 	 */
@@ -132,7 +132,7 @@ public interface JournalFeedModel extends BaseModel<JournalFeed>, GroupedModel {
 	public void setUserId(long userId);
 
 	/**
-	 * Gets the user uuid of this journal feed.
+	 * Returns the user uuid of this journal feed.
 	 *
 	 * @return the user uuid of this journal feed
 	 * @throws SystemException if a system exception occurred
@@ -147,7 +147,7 @@ public interface JournalFeedModel extends BaseModel<JournalFeed>, GroupedModel {
 	public void setUserUuid(String userUuid);
 
 	/**
-	 * Gets the user name of this journal feed.
+	 * Returns the user name of this journal feed.
 	 *
 	 * @return the user name of this journal feed
 	 */
@@ -162,7 +162,7 @@ public interface JournalFeedModel extends BaseModel<JournalFeed>, GroupedModel {
 	public void setUserName(String userName);
 
 	/**
-	 * Gets the create date of this journal feed.
+	 * Returns the create date of this journal feed.
 	 *
 	 * @return the create date of this journal feed
 	 */
@@ -176,7 +176,7 @@ public interface JournalFeedModel extends BaseModel<JournalFeed>, GroupedModel {
 	public void setCreateDate(Date createDate);
 
 	/**
-	 * Gets the modified date of this journal feed.
+	 * Returns the modified date of this journal feed.
 	 *
 	 * @return the modified date of this journal feed
 	 */
@@ -190,7 +190,7 @@ public interface JournalFeedModel extends BaseModel<JournalFeed>, GroupedModel {
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
-	 * Gets the feed ID of this journal feed.
+	 * Returns the feed ID of this journal feed.
 	 *
 	 * @return the feed ID of this journal feed
 	 */
@@ -204,7 +204,7 @@ public interface JournalFeedModel extends BaseModel<JournalFeed>, GroupedModel {
 	public void setFeedId(String feedId);
 
 	/**
-	 * Gets the name of this journal feed.
+	 * Returns the name of this journal feed.
 	 *
 	 * @return the name of this journal feed
 	 */
@@ -219,7 +219,7 @@ public interface JournalFeedModel extends BaseModel<JournalFeed>, GroupedModel {
 	public void setName(String name);
 
 	/**
-	 * Gets the description of this journal feed.
+	 * Returns the description of this journal feed.
 	 *
 	 * @return the description of this journal feed
 	 */
@@ -234,7 +234,7 @@ public interface JournalFeedModel extends BaseModel<JournalFeed>, GroupedModel {
 	public void setDescription(String description);
 
 	/**
-	 * Gets the type of this journal feed.
+	 * Returns the type of this journal feed.
 	 *
 	 * @return the type of this journal feed
 	 */
@@ -249,7 +249,7 @@ public interface JournalFeedModel extends BaseModel<JournalFeed>, GroupedModel {
 	public void setType(String type);
 
 	/**
-	 * Gets the structure ID of this journal feed.
+	 * Returns the structure ID of this journal feed.
 	 *
 	 * @return the structure ID of this journal feed
 	 */
@@ -263,7 +263,7 @@ public interface JournalFeedModel extends BaseModel<JournalFeed>, GroupedModel {
 	public void setStructureId(String structureId);
 
 	/**
-	 * Gets the template ID of this journal feed.
+	 * Returns the template ID of this journal feed.
 	 *
 	 * @return the template ID of this journal feed
 	 */
@@ -277,7 +277,7 @@ public interface JournalFeedModel extends BaseModel<JournalFeed>, GroupedModel {
 	public void setTemplateId(String templateId);
 
 	/**
-	 * Gets the renderer template ID of this journal feed.
+	 * Returns the renderer template ID of this journal feed.
 	 *
 	 * @return the renderer template ID of this journal feed
 	 */
@@ -292,7 +292,7 @@ public interface JournalFeedModel extends BaseModel<JournalFeed>, GroupedModel {
 	public void setRendererTemplateId(String rendererTemplateId);
 
 	/**
-	 * Gets the delta of this journal feed.
+	 * Returns the delta of this journal feed.
 	 *
 	 * @return the delta of this journal feed
 	 */
@@ -306,7 +306,7 @@ public interface JournalFeedModel extends BaseModel<JournalFeed>, GroupedModel {
 	public void setDelta(int delta);
 
 	/**
-	 * Gets the order by col of this journal feed.
+	 * Returns the order by col of this journal feed.
 	 *
 	 * @return the order by col of this journal feed
 	 */
@@ -321,7 +321,7 @@ public interface JournalFeedModel extends BaseModel<JournalFeed>, GroupedModel {
 	public void setOrderByCol(String orderByCol);
 
 	/**
-	 * Gets the order by type of this journal feed.
+	 * Returns the order by type of this journal feed.
 	 *
 	 * @return the order by type of this journal feed
 	 */
@@ -336,7 +336,7 @@ public interface JournalFeedModel extends BaseModel<JournalFeed>, GroupedModel {
 	public void setOrderByType(String orderByType);
 
 	/**
-	 * Gets the target layout friendly url of this journal feed.
+	 * Returns the target layout friendly url of this journal feed.
 	 *
 	 * @return the target layout friendly url of this journal feed
 	 */
@@ -351,7 +351,7 @@ public interface JournalFeedModel extends BaseModel<JournalFeed>, GroupedModel {
 	public void setTargetLayoutFriendlyUrl(String targetLayoutFriendlyUrl);
 
 	/**
-	 * Gets the target portlet ID of this journal feed.
+	 * Returns the target portlet ID of this journal feed.
 	 *
 	 * @return the target portlet ID of this journal feed
 	 */
@@ -366,7 +366,7 @@ public interface JournalFeedModel extends BaseModel<JournalFeed>, GroupedModel {
 	public void setTargetPortletId(String targetPortletId);
 
 	/**
-	 * Gets the content field of this journal feed.
+	 * Returns the content field of this journal feed.
 	 *
 	 * @return the content field of this journal feed
 	 */
@@ -381,7 +381,7 @@ public interface JournalFeedModel extends BaseModel<JournalFeed>, GroupedModel {
 	public void setContentField(String contentField);
 
 	/**
-	 * Gets the feed type of this journal feed.
+	 * Returns the feed type of this journal feed.
 	 *
 	 * @return the feed type of this journal feed
 	 */
@@ -396,7 +396,7 @@ public interface JournalFeedModel extends BaseModel<JournalFeed>, GroupedModel {
 	public void setFeedType(String feedType);
 
 	/**
-	 * Gets the feed version of this journal feed.
+	 * Returns the feed version of this journal feed.
 	 *
 	 * @return the feed version of this journal feed
 	 */

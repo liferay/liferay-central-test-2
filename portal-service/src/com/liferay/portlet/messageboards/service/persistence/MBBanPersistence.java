@@ -41,14 +41,14 @@ public interface MBBanPersistence extends BasePersistence<MBBan> {
 	/**
 	* Caches the message boards ban in the entity cache if it is enabled.
 	*
-	* @param mbBan the message boards ban to cache
+	* @param mbBan the message boards ban
 	*/
 	public void cacheResult(com.liferay.portlet.messageboards.model.MBBan mbBan);
 
 	/**
 	* Caches the message boards bans in the entity cache if it is enabled.
 	*
-	* @param mbBans the message boards bans to cache
+	* @param mbBans the message boards bans
 	*/
 	public void cacheResult(
 		java.util.List<com.liferay.portlet.messageboards.model.MBBan> mbBans);
@@ -64,7 +64,7 @@ public interface MBBanPersistence extends BasePersistence<MBBan> {
 	/**
 	* Removes the message boards ban with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param banId the primary key of the message boards ban to remove
+	* @param banId the primary key of the message boards ban
 	* @return the message boards ban that was removed
 	* @throws com.liferay.portlet.messageboards.NoSuchBanException if a message boards ban with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -78,9 +78,9 @@ public interface MBBanPersistence extends BasePersistence<MBBan> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the message boards ban with the primary key or throws a {@link com.liferay.portlet.messageboards.NoSuchBanException} if it could not be found.
+	* Returns the message boards ban with the primary key or throws a {@link com.liferay.portlet.messageboards.NoSuchBanException} if it could not be found.
 	*
-	* @param banId the primary key of the message boards ban to find
+	* @param banId the primary key of the message boards ban
 	* @return the message boards ban
 	* @throws com.liferay.portlet.messageboards.NoSuchBanException if a message boards ban with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -91,9 +91,9 @@ public interface MBBanPersistence extends BasePersistence<MBBan> {
 			com.liferay.portlet.messageboards.NoSuchBanException;
 
 	/**
-	* Finds the message boards ban with the primary key or returns <code>null</code> if it could not be found.
+	* Returns the message boards ban with the primary key or returns <code>null</code> if it could not be found.
 	*
-	* @param banId the primary key of the message boards ban to find
+	* @param banId the primary key of the message boards ban
 	* @return the message boards ban, or <code>null</code> if a message boards ban with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -101,9 +101,9 @@ public interface MBBanPersistence extends BasePersistence<MBBan> {
 		long banId) throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds all the message boards bans where groupId = &#63;.
+	* Returns all the message boards bans where groupId = &#63;.
 	*
-	* @param groupId the group ID to search with
+	* @param groupId the group ID
 	* @return the matching message boards bans
 	* @throws SystemException if a system exception occurred
 	*/
@@ -112,15 +112,15 @@ public interface MBBanPersistence extends BasePersistence<MBBan> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds a range of all the message boards bans where groupId = &#63;.
+	* Returns a range of all the message boards bans where groupId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param start the lower bound of the range of message boards bans to return
-	* @param end the upper bound of the range of message boards bans to return (not inclusive)
+	* @param groupId the group ID
+	* @param start the lower bound of the range of message boards bans
+	* @param end the upper bound of the range of message boards bans (not inclusive)
 	* @return the range of matching message boards bans
 	* @throws SystemException if a system exception occurred
 	*/
@@ -129,15 +129,15 @@ public interface MBBanPersistence extends BasePersistence<MBBan> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds an ordered range of all the message boards bans where groupId = &#63;.
+	* Returns an ordered range of all the message boards bans where groupId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param start the lower bound of the range of message boards bans to return
-	* @param end the upper bound of the range of message boards bans to return (not inclusive)
+	* @param groupId the group ID
+	* @param start the lower bound of the range of message boards bans
+	* @param end the upper bound of the range of message boards bans (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching message boards bans
 	* @throws SystemException if a system exception occurred
@@ -148,13 +148,13 @@ public interface MBBanPersistence extends BasePersistence<MBBan> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the first message boards ban in the ordered set where groupId = &#63;.
+	* Returns the first message boards ban in the ordered set where groupId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
+	* @param groupId the group ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching message boards ban
 	* @throws com.liferay.portlet.messageboards.NoSuchBanException if a matching message boards ban could not be found
@@ -167,13 +167,13 @@ public interface MBBanPersistence extends BasePersistence<MBBan> {
 			com.liferay.portlet.messageboards.NoSuchBanException;
 
 	/**
-	* Finds the last message boards ban in the ordered set where groupId = &#63;.
+	* Returns the last message boards ban in the ordered set where groupId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
+	* @param groupId the group ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching message boards ban
 	* @throws com.liferay.portlet.messageboards.NoSuchBanException if a matching message boards ban could not be found
@@ -186,14 +186,14 @@ public interface MBBanPersistence extends BasePersistence<MBBan> {
 			com.liferay.portlet.messageboards.NoSuchBanException;
 
 	/**
-	* Finds the message boards bans before and after the current message boards ban in the ordered set where groupId = &#63;.
+	* Returns the message boards bans before and after the current message boards ban in the ordered set where groupId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
 	* @param banId the primary key of the current message boards ban
-	* @param groupId the group ID to search with
+	* @param groupId the group ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next message boards ban
 	* @throws com.liferay.portlet.messageboards.NoSuchBanException if a message boards ban with the primary key could not be found
@@ -206,9 +206,9 @@ public interface MBBanPersistence extends BasePersistence<MBBan> {
 			com.liferay.portlet.messageboards.NoSuchBanException;
 
 	/**
-	* Finds all the message boards bans where userId = &#63;.
+	* Returns all the message boards bans where userId = &#63;.
 	*
-	* @param userId the user ID to search with
+	* @param userId the user ID
 	* @return the matching message boards bans
 	* @throws SystemException if a system exception occurred
 	*/
@@ -216,15 +216,15 @@ public interface MBBanPersistence extends BasePersistence<MBBan> {
 		long userId) throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds a range of all the message boards bans where userId = &#63;.
+	* Returns a range of all the message boards bans where userId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param userId the user ID to search with
-	* @param start the lower bound of the range of message boards bans to return
-	* @param end the upper bound of the range of message boards bans to return (not inclusive)
+	* @param userId the user ID
+	* @param start the lower bound of the range of message boards bans
+	* @param end the upper bound of the range of message boards bans (not inclusive)
 	* @return the range of matching message boards bans
 	* @throws SystemException if a system exception occurred
 	*/
@@ -233,15 +233,15 @@ public interface MBBanPersistence extends BasePersistence<MBBan> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds an ordered range of all the message boards bans where userId = &#63;.
+	* Returns an ordered range of all the message boards bans where userId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param userId the user ID to search with
-	* @param start the lower bound of the range of message boards bans to return
-	* @param end the upper bound of the range of message boards bans to return (not inclusive)
+	* @param userId the user ID
+	* @param start the lower bound of the range of message boards bans
+	* @param end the upper bound of the range of message boards bans (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching message boards bans
 	* @throws SystemException if a system exception occurred
@@ -252,13 +252,13 @@ public interface MBBanPersistence extends BasePersistence<MBBan> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the first message boards ban in the ordered set where userId = &#63;.
+	* Returns the first message boards ban in the ordered set where userId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param userId the user ID to search with
+	* @param userId the user ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching message boards ban
 	* @throws com.liferay.portlet.messageboards.NoSuchBanException if a matching message boards ban could not be found
@@ -271,13 +271,13 @@ public interface MBBanPersistence extends BasePersistence<MBBan> {
 			com.liferay.portlet.messageboards.NoSuchBanException;
 
 	/**
-	* Finds the last message boards ban in the ordered set where userId = &#63;.
+	* Returns the last message boards ban in the ordered set where userId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param userId the user ID to search with
+	* @param userId the user ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching message boards ban
 	* @throws com.liferay.portlet.messageboards.NoSuchBanException if a matching message boards ban could not be found
@@ -290,14 +290,14 @@ public interface MBBanPersistence extends BasePersistence<MBBan> {
 			com.liferay.portlet.messageboards.NoSuchBanException;
 
 	/**
-	* Finds the message boards bans before and after the current message boards ban in the ordered set where userId = &#63;.
+	* Returns the message boards bans before and after the current message boards ban in the ordered set where userId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
 	* @param banId the primary key of the current message boards ban
-	* @param userId the user ID to search with
+	* @param userId the user ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next message boards ban
 	* @throws com.liferay.portlet.messageboards.NoSuchBanException if a message boards ban with the primary key could not be found
@@ -310,9 +310,9 @@ public interface MBBanPersistence extends BasePersistence<MBBan> {
 			com.liferay.portlet.messageboards.NoSuchBanException;
 
 	/**
-	* Finds all the message boards bans where banUserId = &#63;.
+	* Returns all the message boards bans where banUserId = &#63;.
 	*
-	* @param banUserId the ban user ID to search with
+	* @param banUserId the ban user ID
 	* @return the matching message boards bans
 	* @throws SystemException if a system exception occurred
 	*/
@@ -321,15 +321,15 @@ public interface MBBanPersistence extends BasePersistence<MBBan> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds a range of all the message boards bans where banUserId = &#63;.
+	* Returns a range of all the message boards bans where banUserId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param banUserId the ban user ID to search with
-	* @param start the lower bound of the range of message boards bans to return
-	* @param end the upper bound of the range of message boards bans to return (not inclusive)
+	* @param banUserId the ban user ID
+	* @param start the lower bound of the range of message boards bans
+	* @param end the upper bound of the range of message boards bans (not inclusive)
 	* @return the range of matching message boards bans
 	* @throws SystemException if a system exception occurred
 	*/
@@ -338,15 +338,15 @@ public interface MBBanPersistence extends BasePersistence<MBBan> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds an ordered range of all the message boards bans where banUserId = &#63;.
+	* Returns an ordered range of all the message boards bans where banUserId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param banUserId the ban user ID to search with
-	* @param start the lower bound of the range of message boards bans to return
-	* @param end the upper bound of the range of message boards bans to return (not inclusive)
+	* @param banUserId the ban user ID
+	* @param start the lower bound of the range of message boards bans
+	* @param end the upper bound of the range of message boards bans (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching message boards bans
 	* @throws SystemException if a system exception occurred
@@ -357,13 +357,13 @@ public interface MBBanPersistence extends BasePersistence<MBBan> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the first message boards ban in the ordered set where banUserId = &#63;.
+	* Returns the first message boards ban in the ordered set where banUserId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param banUserId the ban user ID to search with
+	* @param banUserId the ban user ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching message boards ban
 	* @throws com.liferay.portlet.messageboards.NoSuchBanException if a matching message boards ban could not be found
@@ -376,13 +376,13 @@ public interface MBBanPersistence extends BasePersistence<MBBan> {
 			com.liferay.portlet.messageboards.NoSuchBanException;
 
 	/**
-	* Finds the last message boards ban in the ordered set where banUserId = &#63;.
+	* Returns the last message boards ban in the ordered set where banUserId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param banUserId the ban user ID to search with
+	* @param banUserId the ban user ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching message boards ban
 	* @throws com.liferay.portlet.messageboards.NoSuchBanException if a matching message boards ban could not be found
@@ -395,14 +395,14 @@ public interface MBBanPersistence extends BasePersistence<MBBan> {
 			com.liferay.portlet.messageboards.NoSuchBanException;
 
 	/**
-	* Finds the message boards bans before and after the current message boards ban in the ordered set where banUserId = &#63;.
+	* Returns the message boards bans before and after the current message boards ban in the ordered set where banUserId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
 	* @param banId the primary key of the current message boards ban
-	* @param banUserId the ban user ID to search with
+	* @param banUserId the ban user ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next message boards ban
 	* @throws com.liferay.portlet.messageboards.NoSuchBanException if a message boards ban with the primary key could not be found
@@ -415,10 +415,10 @@ public interface MBBanPersistence extends BasePersistence<MBBan> {
 			com.liferay.portlet.messageboards.NoSuchBanException;
 
 	/**
-	* Finds the message boards ban where groupId = &#63; and banUserId = &#63; or throws a {@link com.liferay.portlet.messageboards.NoSuchBanException} if it could not be found.
+	* Returns the message boards ban where groupId = &#63; and banUserId = &#63; or throws a {@link com.liferay.portlet.messageboards.NoSuchBanException} if it could not be found.
 	*
-	* @param groupId the group ID to search with
-	* @param banUserId the ban user ID to search with
+	* @param groupId the group ID
+	* @param banUserId the ban user ID
 	* @return the matching message boards ban
 	* @throws com.liferay.portlet.messageboards.NoSuchBanException if a matching message boards ban could not be found
 	* @throws SystemException if a system exception occurred
@@ -429,10 +429,10 @@ public interface MBBanPersistence extends BasePersistence<MBBan> {
 			com.liferay.portlet.messageboards.NoSuchBanException;
 
 	/**
-	* Finds the message boards ban where groupId = &#63; and banUserId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	* Returns the message boards ban where groupId = &#63; and banUserId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	*
-	* @param groupId the group ID to search with
-	* @param banUserId the ban user ID to search with
+	* @param groupId the group ID
+	* @param banUserId the ban user ID
 	* @return the matching message boards ban, or <code>null</code> if a matching message boards ban could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -441,10 +441,10 @@ public interface MBBanPersistence extends BasePersistence<MBBan> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the message boards ban where groupId = &#63; and banUserId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	* Returns the message boards ban where groupId = &#63; and banUserId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
-	* @param groupId the group ID to search with
-	* @param banUserId the ban user ID to search with
+	* @param groupId the group ID
+	* @param banUserId the ban user ID
 	* @return the matching message boards ban, or <code>null</code> if a matching message boards ban could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -453,7 +453,7 @@ public interface MBBanPersistence extends BasePersistence<MBBan> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds all the message boards bans.
+	* Returns all the message boards bans.
 	*
 	* @return the message boards bans
 	* @throws SystemException if a system exception occurred
@@ -462,14 +462,14 @@ public interface MBBanPersistence extends BasePersistence<MBBan> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds a range of all the message boards bans.
+	* Returns a range of all the message boards bans.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of message boards bans to return
-	* @param end the upper bound of the range of message boards bans to return (not inclusive)
+	* @param start the lower bound of the range of message boards bans
+	* @param end the upper bound of the range of message boards bans (not inclusive)
 	* @return the range of message boards bans
 	* @throws SystemException if a system exception occurred
 	*/
@@ -478,14 +478,14 @@ public interface MBBanPersistence extends BasePersistence<MBBan> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds an ordered range of all the message boards bans.
+	* Returns an ordered range of all the message boards bans.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of message boards bans to return
-	* @param end the upper bound of the range of message boards bans to return (not inclusive)
+	* @param start the lower bound of the range of message boards bans
+	* @param end the upper bound of the range of message boards bans (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of message boards bans
 	* @throws SystemException if a system exception occurred
@@ -498,7 +498,7 @@ public interface MBBanPersistence extends BasePersistence<MBBan> {
 	/**
 	* Removes all the message boards bans where groupId = &#63; from the database.
 	*
-	* @param groupId the group ID to search with
+	* @param groupId the group ID
 	* @throws SystemException if a system exception occurred
 	*/
 	public void removeByGroupId(long groupId)
@@ -507,7 +507,7 @@ public interface MBBanPersistence extends BasePersistence<MBBan> {
 	/**
 	* Removes all the message boards bans where userId = &#63; from the database.
 	*
-	* @param userId the user ID to search with
+	* @param userId the user ID
 	* @throws SystemException if a system exception occurred
 	*/
 	public void removeByUserId(long userId)
@@ -516,7 +516,7 @@ public interface MBBanPersistence extends BasePersistence<MBBan> {
 	/**
 	* Removes all the message boards bans where banUserId = &#63; from the database.
 	*
-	* @param banUserId the ban user ID to search with
+	* @param banUserId the ban user ID
 	* @throws SystemException if a system exception occurred
 	*/
 	public void removeByBanUserId(long banUserId)
@@ -525,8 +525,8 @@ public interface MBBanPersistence extends BasePersistence<MBBan> {
 	/**
 	* Removes the message boards ban where groupId = &#63; and banUserId = &#63; from the database.
 	*
-	* @param groupId the group ID to search with
-	* @param banUserId the ban user ID to search with
+	* @param groupId the group ID
+	* @param banUserId the ban user ID
 	* @throws SystemException if a system exception occurred
 	*/
 	public void removeByG_B(long groupId, long banUserId)
@@ -542,9 +542,9 @@ public interface MBBanPersistence extends BasePersistence<MBBan> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Counts all the message boards bans where groupId = &#63;.
+	* Returns the number of message boards bans where groupId = &#63;.
 	*
-	* @param groupId the group ID to search with
+	* @param groupId the group ID
 	* @return the number of matching message boards bans
 	* @throws SystemException if a system exception occurred
 	*/
@@ -552,9 +552,9 @@ public interface MBBanPersistence extends BasePersistence<MBBan> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Counts all the message boards bans where userId = &#63;.
+	* Returns the number of message boards bans where userId = &#63;.
 	*
-	* @param userId the user ID to search with
+	* @param userId the user ID
 	* @return the number of matching message boards bans
 	* @throws SystemException if a system exception occurred
 	*/
@@ -562,9 +562,9 @@ public interface MBBanPersistence extends BasePersistence<MBBan> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Counts all the message boards bans where banUserId = &#63;.
+	* Returns the number of message boards bans where banUserId = &#63;.
 	*
-	* @param banUserId the ban user ID to search with
+	* @param banUserId the ban user ID
 	* @return the number of matching message boards bans
 	* @throws SystemException if a system exception occurred
 	*/
@@ -572,10 +572,10 @@ public interface MBBanPersistence extends BasePersistence<MBBan> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Counts all the message boards bans where groupId = &#63; and banUserId = &#63;.
+	* Returns the number of message boards bans where groupId = &#63; and banUserId = &#63;.
 	*
-	* @param groupId the group ID to search with
-	* @param banUserId the ban user ID to search with
+	* @param groupId the group ID
+	* @param banUserId the ban user ID
 	* @return the number of matching message boards bans
 	* @throws SystemException if a system exception occurred
 	*/
@@ -583,7 +583,7 @@ public interface MBBanPersistence extends BasePersistence<MBBan> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Counts all the message boards bans.
+	* Returns the number of message boards bans.
 	*
 	* @return the number of message boards bans
 	* @throws SystemException if a system exception occurred

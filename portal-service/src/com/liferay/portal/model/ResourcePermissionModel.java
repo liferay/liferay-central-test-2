@@ -42,21 +42,21 @@ public interface ResourcePermissionModel extends BaseModel<ResourcePermission> {
 	 */
 
 	/**
-	 * Gets the primary key of this resource permission.
+	 * Returns the primary key of this resource permission.
 	 *
 	 * @return the primary key of this resource permission
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this resource permission
+	 * Sets the primary key of this resource permission.
 	 *
 	 * @param primaryKey the primary key of this resource permission
 	 */
 	public void setPrimaryKey(long primaryKey);
 
 	/**
-	 * Gets the resource permission ID of this resource permission.
+	 * Returns the resource permission ID of this resource permission.
 	 *
 	 * @return the resource permission ID of this resource permission
 	 */
@@ -70,7 +70,7 @@ public interface ResourcePermissionModel extends BaseModel<ResourcePermission> {
 	public void setResourcePermissionId(long resourcePermissionId);
 
 	/**
-	 * Gets the company ID of this resource permission.
+	 * Returns the company ID of this resource permission.
 	 *
 	 * @return the company ID of this resource permission
 	 */
@@ -84,7 +84,7 @@ public interface ResourcePermissionModel extends BaseModel<ResourcePermission> {
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the name of this resource permission.
+	 * Returns the name of this resource permission.
 	 *
 	 * @return the name of this resource permission
 	 */
@@ -99,7 +99,7 @@ public interface ResourcePermissionModel extends BaseModel<ResourcePermission> {
 	public void setName(String name);
 
 	/**
-	 * Gets the scope of this resource permission.
+	 * Returns the scope of this resource permission.
 	 *
 	 * @return the scope of this resource permission
 	 */
@@ -113,7 +113,7 @@ public interface ResourcePermissionModel extends BaseModel<ResourcePermission> {
 	public void setScope(int scope);
 
 	/**
-	 * Gets the prim key of this resource permission.
+	 * Returns the prim key of this resource permission.
 	 *
 	 * @return the prim key of this resource permission
 	 */
@@ -128,7 +128,7 @@ public interface ResourcePermissionModel extends BaseModel<ResourcePermission> {
 	public void setPrimKey(String primKey);
 
 	/**
-	 * Gets the role ID of this resource permission.
+	 * Returns the role ID of this resource permission.
 	 *
 	 * @return the role ID of this resource permission
 	 */
@@ -142,7 +142,7 @@ public interface ResourcePermissionModel extends BaseModel<ResourcePermission> {
 	public void setRoleId(long roleId);
 
 	/**
-	 * Gets the owner ID of this resource permission.
+	 * Returns the owner ID of this resource permission.
 	 *
 	 * @return the owner ID of this resource permission
 	 */
@@ -156,7 +156,7 @@ public interface ResourcePermissionModel extends BaseModel<ResourcePermission> {
 	public void setOwnerId(long ownerId);
 
 	/**
-	 * Gets the action IDs of this resource permission.
+	 * Returns the action IDs of this resource permission.
 	 *
 	 * @return the action IDs of this resource permission
 	 */

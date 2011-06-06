@@ -121,7 +121,7 @@ public class DDMContentUtil {
 	/**
 	* Caches the d d m content in the entity cache if it is enabled.
 	*
-	* @param ddmContent the d d m content to cache
+	* @param ddmContent the d d m content
 	*/
 	public static void cacheResult(
 		com.liferay.portlet.dynamicdatamapping.model.DDMContent ddmContent) {
@@ -131,7 +131,7 @@ public class DDMContentUtil {
 	/**
 	* Caches the d d m contents in the entity cache if it is enabled.
 	*
-	* @param ddmContents the d d m contents to cache
+	* @param ddmContents the d d m contents
 	*/
 	public static void cacheResult(
 		java.util.List<com.liferay.portlet.dynamicdatamapping.model.DDMContent> ddmContents) {
@@ -152,7 +152,7 @@ public class DDMContentUtil {
 	/**
 	* Removes the d d m content with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param contentId the primary key of the d d m content to remove
+	* @param contentId the primary key of the d d m content
 	* @return the d d m content that was removed
 	* @throws com.liferay.portlet.dynamicdatamapping.NoSuchContentException if a d d m content with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -172,9 +172,9 @@ public class DDMContentUtil {
 	}
 
 	/**
-	* Finds the d d m content with the primary key or throws a {@link com.liferay.portlet.dynamicdatamapping.NoSuchContentException} if it could not be found.
+	* Returns the d d m content with the primary key or throws a {@link com.liferay.portlet.dynamicdatamapping.NoSuchContentException} if it could not be found.
 	*
-	* @param contentId the primary key of the d d m content to find
+	* @param contentId the primary key of the d d m content
 	* @return the d d m content
 	* @throws com.liferay.portlet.dynamicdatamapping.NoSuchContentException if a d d m content with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -187,9 +187,9 @@ public class DDMContentUtil {
 	}
 
 	/**
-	* Finds the d d m content with the primary key or returns <code>null</code> if it could not be found.
+	* Returns the d d m content with the primary key or returns <code>null</code> if it could not be found.
 	*
-	* @param contentId the primary key of the d d m content to find
+	* @param contentId the primary key of the d d m content
 	* @return the d d m content, or <code>null</code> if a d d m content with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -200,9 +200,9 @@ public class DDMContentUtil {
 	}
 
 	/**
-	* Finds all the d d m contents where uuid = &#63;.
+	* Returns all the d d m contents where uuid = &#63;.
 	*
-	* @param uuid the uuid to search with
+	* @param uuid the uuid
 	* @return the matching d d m contents
 	* @throws SystemException if a system exception occurred
 	*/
@@ -213,15 +213,15 @@ public class DDMContentUtil {
 	}
 
 	/**
-	* Finds a range of all the d d m contents where uuid = &#63;.
+	* Returns a range of all the d d m contents where uuid = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param uuid the uuid to search with
-	* @param start the lower bound of the range of d d m contents to return
-	* @param end the upper bound of the range of d d m contents to return (not inclusive)
+	* @param uuid the uuid
+	* @param start the lower bound of the range of d d m contents
+	* @param end the upper bound of the range of d d m contents (not inclusive)
 	* @return the range of matching d d m contents
 	* @throws SystemException if a system exception occurred
 	*/
@@ -232,15 +232,15 @@ public class DDMContentUtil {
 	}
 
 	/**
-	* Finds an ordered range of all the d d m contents where uuid = &#63;.
+	* Returns an ordered range of all the d d m contents where uuid = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param uuid the uuid to search with
-	* @param start the lower bound of the range of d d m contents to return
-	* @param end the upper bound of the range of d d m contents to return (not inclusive)
+	* @param uuid the uuid
+	* @param start the lower bound of the range of d d m contents
+	* @param end the upper bound of the range of d d m contents (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching d d m contents
 	* @throws SystemException if a system exception occurred
@@ -253,13 +253,13 @@ public class DDMContentUtil {
 	}
 
 	/**
-	* Finds the first d d m content in the ordered set where uuid = &#63;.
+	* Returns the first d d m content in the ordered set where uuid = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param uuid the uuid to search with
+	* @param uuid the uuid
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching d d m content
 	* @throws com.liferay.portlet.dynamicdatamapping.NoSuchContentException if a matching d d m content could not be found
@@ -274,13 +274,13 @@ public class DDMContentUtil {
 	}
 
 	/**
-	* Finds the last d d m content in the ordered set where uuid = &#63;.
+	* Returns the last d d m content in the ordered set where uuid = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param uuid the uuid to search with
+	* @param uuid the uuid
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching d d m content
 	* @throws com.liferay.portlet.dynamicdatamapping.NoSuchContentException if a matching d d m content could not be found
@@ -295,14 +295,14 @@ public class DDMContentUtil {
 	}
 
 	/**
-	* Finds the d d m contents before and after the current d d m content in the ordered set where uuid = &#63;.
+	* Returns the d d m contents before and after the current d d m content in the ordered set where uuid = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
 	* @param contentId the primary key of the current d d m content
-	* @param uuid the uuid to search with
+	* @param uuid the uuid
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next d d m content
 	* @throws com.liferay.portlet.dynamicdatamapping.NoSuchContentException if a d d m content with the primary key could not be found
@@ -318,10 +318,10 @@ public class DDMContentUtil {
 	}
 
 	/**
-	* Finds the d d m content where uuid = &#63; and groupId = &#63; or throws a {@link com.liferay.portlet.dynamicdatamapping.NoSuchContentException} if it could not be found.
+	* Returns the d d m content where uuid = &#63; and groupId = &#63; or throws a {@link com.liferay.portlet.dynamicdatamapping.NoSuchContentException} if it could not be found.
 	*
-	* @param uuid the uuid to search with
-	* @param groupId the group ID to search with
+	* @param uuid the uuid
+	* @param groupId the group ID
 	* @return the matching d d m content
 	* @throws com.liferay.portlet.dynamicdatamapping.NoSuchContentException if a matching d d m content could not be found
 	* @throws SystemException if a system exception occurred
@@ -334,10 +334,10 @@ public class DDMContentUtil {
 	}
 
 	/**
-	* Finds the d d m content where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	* Returns the d d m content where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	*
-	* @param uuid the uuid to search with
-	* @param groupId the group ID to search with
+	* @param uuid the uuid
+	* @param groupId the group ID
 	* @return the matching d d m content, or <code>null</code> if a matching d d m content could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -348,10 +348,10 @@ public class DDMContentUtil {
 	}
 
 	/**
-	* Finds the d d m content where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	* Returns the d d m content where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
-	* @param uuid the uuid to search with
-	* @param groupId the group ID to search with
+	* @param uuid the uuid
+	* @param groupId the group ID
 	* @return the matching d d m content, or <code>null</code> if a matching d d m content could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -362,9 +362,9 @@ public class DDMContentUtil {
 	}
 
 	/**
-	* Finds all the d d m contents where groupId = &#63;.
+	* Returns all the d d m contents where groupId = &#63;.
 	*
-	* @param groupId the group ID to search with
+	* @param groupId the group ID
 	* @return the matching d d m contents
 	* @throws SystemException if a system exception occurred
 	*/
@@ -375,15 +375,15 @@ public class DDMContentUtil {
 	}
 
 	/**
-	* Finds a range of all the d d m contents where groupId = &#63;.
+	* Returns a range of all the d d m contents where groupId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param start the lower bound of the range of d d m contents to return
-	* @param end the upper bound of the range of d d m contents to return (not inclusive)
+	* @param groupId the group ID
+	* @param start the lower bound of the range of d d m contents
+	* @param end the upper bound of the range of d d m contents (not inclusive)
 	* @return the range of matching d d m contents
 	* @throws SystemException if a system exception occurred
 	*/
@@ -394,15 +394,15 @@ public class DDMContentUtil {
 	}
 
 	/**
-	* Finds an ordered range of all the d d m contents where groupId = &#63;.
+	* Returns an ordered range of all the d d m contents where groupId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param start the lower bound of the range of d d m contents to return
-	* @param end the upper bound of the range of d d m contents to return (not inclusive)
+	* @param groupId the group ID
+	* @param start the lower bound of the range of d d m contents
+	* @param end the upper bound of the range of d d m contents (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching d d m contents
 	* @throws SystemException if a system exception occurred
@@ -416,13 +416,13 @@ public class DDMContentUtil {
 	}
 
 	/**
-	* Finds the first d d m content in the ordered set where groupId = &#63;.
+	* Returns the first d d m content in the ordered set where groupId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
+	* @param groupId the group ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching d d m content
 	* @throws com.liferay.portlet.dynamicdatamapping.NoSuchContentException if a matching d d m content could not be found
@@ -437,13 +437,13 @@ public class DDMContentUtil {
 	}
 
 	/**
-	* Finds the last d d m content in the ordered set where groupId = &#63;.
+	* Returns the last d d m content in the ordered set where groupId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
+	* @param groupId the group ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching d d m content
 	* @throws com.liferay.portlet.dynamicdatamapping.NoSuchContentException if a matching d d m content could not be found
@@ -458,14 +458,14 @@ public class DDMContentUtil {
 	}
 
 	/**
-	* Finds the d d m contents before and after the current d d m content in the ordered set where groupId = &#63;.
+	* Returns the d d m contents before and after the current d d m content in the ordered set where groupId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
 	* @param contentId the primary key of the current d d m content
-	* @param groupId the group ID to search with
+	* @param groupId the group ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next d d m content
 	* @throws com.liferay.portlet.dynamicdatamapping.NoSuchContentException if a d d m content with the primary key could not be found
@@ -482,9 +482,9 @@ public class DDMContentUtil {
 	}
 
 	/**
-	* Finds all the d d m contents where companyId = &#63;.
+	* Returns all the d d m contents where companyId = &#63;.
 	*
-	* @param companyId the company ID to search with
+	* @param companyId the company ID
 	* @return the matching d d m contents
 	* @throws SystemException if a system exception occurred
 	*/
@@ -495,15 +495,15 @@ public class DDMContentUtil {
 	}
 
 	/**
-	* Finds a range of all the d d m contents where companyId = &#63;.
+	* Returns a range of all the d d m contents where companyId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company ID to search with
-	* @param start the lower bound of the range of d d m contents to return
-	* @param end the upper bound of the range of d d m contents to return (not inclusive)
+	* @param companyId the company ID
+	* @param start the lower bound of the range of d d m contents
+	* @param end the upper bound of the range of d d m contents (not inclusive)
 	* @return the range of matching d d m contents
 	* @throws SystemException if a system exception occurred
 	*/
@@ -514,15 +514,15 @@ public class DDMContentUtil {
 	}
 
 	/**
-	* Finds an ordered range of all the d d m contents where companyId = &#63;.
+	* Returns an ordered range of all the d d m contents where companyId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company ID to search with
-	* @param start the lower bound of the range of d d m contents to return
-	* @param end the upper bound of the range of d d m contents to return (not inclusive)
+	* @param companyId the company ID
+	* @param start the lower bound of the range of d d m contents
+	* @param end the upper bound of the range of d d m contents (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching d d m contents
 	* @throws SystemException if a system exception occurred
@@ -536,13 +536,13 @@ public class DDMContentUtil {
 	}
 
 	/**
-	* Finds the first d d m content in the ordered set where companyId = &#63;.
+	* Returns the first d d m content in the ordered set where companyId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company ID to search with
+	* @param companyId the company ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching d d m content
 	* @throws com.liferay.portlet.dynamicdatamapping.NoSuchContentException if a matching d d m content could not be found
@@ -558,13 +558,13 @@ public class DDMContentUtil {
 	}
 
 	/**
-	* Finds the last d d m content in the ordered set where companyId = &#63;.
+	* Returns the last d d m content in the ordered set where companyId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company ID to search with
+	* @param companyId the company ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching d d m content
 	* @throws com.liferay.portlet.dynamicdatamapping.NoSuchContentException if a matching d d m content could not be found
@@ -580,14 +580,14 @@ public class DDMContentUtil {
 	}
 
 	/**
-	* Finds the d d m contents before and after the current d d m content in the ordered set where companyId = &#63;.
+	* Returns the d d m contents before and after the current d d m content in the ordered set where companyId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
 	* @param contentId the primary key of the current d d m content
-	* @param companyId the company ID to search with
+	* @param companyId the company ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next d d m content
 	* @throws com.liferay.portlet.dynamicdatamapping.NoSuchContentException if a d d m content with the primary key could not be found
@@ -604,7 +604,7 @@ public class DDMContentUtil {
 	}
 
 	/**
-	* Finds all the d d m contents.
+	* Returns all the d d m contents.
 	*
 	* @return the d d m contents
 	* @throws SystemException if a system exception occurred
@@ -615,14 +615,14 @@ public class DDMContentUtil {
 	}
 
 	/**
-	* Finds a range of all the d d m contents.
+	* Returns a range of all the d d m contents.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of d d m contents to return
-	* @param end the upper bound of the range of d d m contents to return (not inclusive)
+	* @param start the lower bound of the range of d d m contents
+	* @param end the upper bound of the range of d d m contents (not inclusive)
 	* @return the range of d d m contents
 	* @throws SystemException if a system exception occurred
 	*/
@@ -633,14 +633,14 @@ public class DDMContentUtil {
 	}
 
 	/**
-	* Finds an ordered range of all the d d m contents.
+	* Returns an ordered range of all the d d m contents.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of d d m contents to return
-	* @param end the upper bound of the range of d d m contents to return (not inclusive)
+	* @param start the lower bound of the range of d d m contents
+	* @param end the upper bound of the range of d d m contents (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of d d m contents
 	* @throws SystemException if a system exception occurred
@@ -655,7 +655,7 @@ public class DDMContentUtil {
 	/**
 	* Removes all the d d m contents where uuid = &#63; from the database.
 	*
-	* @param uuid the uuid to search with
+	* @param uuid the uuid
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByUuid(java.lang.String uuid)
@@ -666,8 +666,8 @@ public class DDMContentUtil {
 	/**
 	* Removes the d d m content where uuid = &#63; and groupId = &#63; from the database.
 	*
-	* @param uuid the uuid to search with
-	* @param groupId the group ID to search with
+	* @param uuid the uuid
+	* @param groupId the group ID
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByUUID_G(java.lang.String uuid, long groupId)
@@ -679,7 +679,7 @@ public class DDMContentUtil {
 	/**
 	* Removes all the d d m contents where groupId = &#63; from the database.
 	*
-	* @param groupId the group ID to search with
+	* @param groupId the group ID
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByGroupId(long groupId)
@@ -690,7 +690,7 @@ public class DDMContentUtil {
 	/**
 	* Removes all the d d m contents where companyId = &#63; from the database.
 	*
-	* @param companyId the company ID to search with
+	* @param companyId the company ID
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByCompanyId(long companyId)
@@ -709,9 +709,9 @@ public class DDMContentUtil {
 	}
 
 	/**
-	* Counts all the d d m contents where uuid = &#63;.
+	* Returns the number of d d m contents where uuid = &#63;.
 	*
-	* @param uuid the uuid to search with
+	* @param uuid the uuid
 	* @return the number of matching d d m contents
 	* @throws SystemException if a system exception occurred
 	*/
@@ -721,10 +721,10 @@ public class DDMContentUtil {
 	}
 
 	/**
-	* Counts all the d d m contents where uuid = &#63; and groupId = &#63;.
+	* Returns the number of d d m contents where uuid = &#63; and groupId = &#63;.
 	*
-	* @param uuid the uuid to search with
-	* @param groupId the group ID to search with
+	* @param uuid the uuid
+	* @param groupId the group ID
 	* @return the number of matching d d m contents
 	* @throws SystemException if a system exception occurred
 	*/
@@ -734,9 +734,9 @@ public class DDMContentUtil {
 	}
 
 	/**
-	* Counts all the d d m contents where groupId = &#63;.
+	* Returns the number of d d m contents where groupId = &#63;.
 	*
-	* @param groupId the group ID to search with
+	* @param groupId the group ID
 	* @return the number of matching d d m contents
 	* @throws SystemException if a system exception occurred
 	*/
@@ -746,9 +746,9 @@ public class DDMContentUtil {
 	}
 
 	/**
-	* Counts all the d d m contents where companyId = &#63;.
+	* Returns the number of d d m contents where companyId = &#63;.
 	*
-	* @param companyId the company ID to search with
+	* @param companyId the company ID
 	* @return the number of matching d d m contents
 	* @throws SystemException if a system exception occurred
 	*/
@@ -758,7 +758,7 @@ public class DDMContentUtil {
 	}
 
 	/**
-	* Counts all the d d m contents.
+	* Returns the number of d d m contents.
 	*
 	* @return the number of d d m contents
 	* @throws SystemException if a system exception occurred

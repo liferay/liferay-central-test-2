@@ -37,7 +37,7 @@ public class CounterWrapper implements Counter {
 	}
 
 	/**
-	* Gets the primary key of this counter.
+	* Returns the primary key of this counter.
 	*
 	* @return the primary key of this counter
 	*/
@@ -46,7 +46,7 @@ public class CounterWrapper implements Counter {
 	}
 
 	/**
-	* Sets the primary key of this counter
+	* Sets the primary key of this counter.
 	*
 	* @param primaryKey the primary key of this counter
 	*/
@@ -55,7 +55,7 @@ public class CounterWrapper implements Counter {
 	}
 
 	/**
-	* Gets the name of this counter.
+	* Returns the name of this counter.
 	*
 	* @return the name of this counter
 	*/
@@ -73,7 +73,7 @@ public class CounterWrapper implements Counter {
 	}
 
 	/**
-	* Gets the current ID of this counter.
+	* Returns the current ID of this counter.
 	*
 	* @return the current ID of this counter
 	*/

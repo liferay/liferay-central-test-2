@@ -37,7 +37,7 @@ public class ContactWrapper implements Contact {
 	}
 
 	/**
-	* Gets the primary key of this contact.
+	* Returns the primary key of this contact.
 	*
 	* @return the primary key of this contact
 	*/
@@ -46,7 +46,7 @@ public class ContactWrapper implements Contact {
 	}
 
 	/**
-	* Sets the primary key of this contact
+	* Sets the primary key of this contact.
 	*
 	* @param primaryKey the primary key of this contact
 	*/
@@ -55,7 +55,7 @@ public class ContactWrapper implements Contact {
 	}
 
 	/**
-	* Gets the contact ID of this contact.
+	* Returns the contact ID of this contact.
 	*
 	* @return the contact ID of this contact
 	*/
@@ -73,7 +73,7 @@ public class ContactWrapper implements Contact {
 	}
 
 	/**
-	* Gets the company ID of this contact.
+	* Returns the company ID of this contact.
 	*
 	* @return the company ID of this contact
 	*/
@@ -91,7 +91,7 @@ public class ContactWrapper implements Contact {
 	}
 
 	/**
-	* Gets the user ID of this contact.
+	* Returns the user ID of this contact.
 	*
 	* @return the user ID of this contact
 	*/
@@ -109,7 +109,7 @@ public class ContactWrapper implements Contact {
 	}
 
 	/**
-	* Gets the user uuid of this contact.
+	* Returns the user uuid of this contact.
 	*
 	* @return the user uuid of this contact
 	* @throws SystemException if a system exception occurred
@@ -129,7 +129,7 @@ public class ContactWrapper implements Contact {
 	}
 
 	/**
-	* Gets the user name of this contact.
+	* Returns the user name of this contact.
 	*
 	* @return the user name of this contact
 	*/
@@ -147,7 +147,7 @@ public class ContactWrapper implements Contact {
 	}
 
 	/**
-	* Gets the create date of this contact.
+	* Returns the create date of this contact.
 	*
 	* @return the create date of this contact
 	*/
@@ -165,7 +165,7 @@ public class ContactWrapper implements Contact {
 	}
 
 	/**
-	* Gets the modified date of this contact.
+	* Returns the modified date of this contact.
 	*
 	* @return the modified date of this contact
 	*/
@@ -183,7 +183,7 @@ public class ContactWrapper implements Contact {
 	}
 
 	/**
-	* Gets the account ID of this contact.
+	* Returns the account ID of this contact.
 	*
 	* @return the account ID of this contact
 	*/
@@ -201,7 +201,7 @@ public class ContactWrapper implements Contact {
 	}
 
 	/**
-	* Gets the parent contact ID of this contact.
+	* Returns the parent contact ID of this contact.
 	*
 	* @return the parent contact ID of this contact
 	*/
@@ -219,7 +219,7 @@ public class ContactWrapper implements Contact {
 	}
 
 	/**
-	* Gets the first name of this contact.
+	* Returns the first name of this contact.
 	*
 	* @return the first name of this contact
 	*/
@@ -237,7 +237,7 @@ public class ContactWrapper implements Contact {
 	}
 
 	/**
-	* Gets the middle name of this contact.
+	* Returns the middle name of this contact.
 	*
 	* @return the middle name of this contact
 	*/
@@ -255,7 +255,7 @@ public class ContactWrapper implements Contact {
 	}
 
 	/**
-	* Gets the last name of this contact.
+	* Returns the last name of this contact.
 	*
 	* @return the last name of this contact
 	*/
@@ -273,7 +273,7 @@ public class ContactWrapper implements Contact {
 	}
 
 	/**
-	* Gets the prefix ID of this contact.
+	* Returns the prefix ID of this contact.
 	*
 	* @return the prefix ID of this contact
 	*/
@@ -291,7 +291,7 @@ public class ContactWrapper implements Contact {
 	}
 
 	/**
-	* Gets the suffix ID of this contact.
+	* Returns the suffix ID of this contact.
 	*
 	* @return the suffix ID of this contact
 	*/
@@ -309,7 +309,7 @@ public class ContactWrapper implements Contact {
 	}
 
 	/**
-	* Gets the male of this contact.
+	* Returns the male of this contact.
 	*
 	* @return the male of this contact
 	*/
@@ -336,7 +336,7 @@ public class ContactWrapper implements Contact {
 	}
 
 	/**
-	* Gets the birthday of this contact.
+	* Returns the birthday of this contact.
 	*
 	* @return the birthday of this contact
 	*/
@@ -354,7 +354,7 @@ public class ContactWrapper implements Contact {
 	}
 
 	/**
-	* Gets the sms sn of this contact.
+	* Returns the sms sn of this contact.
 	*
 	* @return the sms sn of this contact
 	*/
@@ -372,7 +372,7 @@ public class ContactWrapper implements Contact {
 	}
 
 	/**
-	* Gets the aim sn of this contact.
+	* Returns the aim sn of this contact.
 	*
 	* @return the aim sn of this contact
 	*/
@@ -390,7 +390,7 @@ public class ContactWrapper implements Contact {
 	}
 
 	/**
-	* Gets the facebook sn of this contact.
+	* Returns the facebook sn of this contact.
 	*
 	* @return the facebook sn of this contact
 	*/
@@ -408,7 +408,7 @@ public class ContactWrapper implements Contact {
 	}
 
 	/**
-	* Gets the icq sn of this contact.
+	* Returns the icq sn of this contact.
 	*
 	* @return the icq sn of this contact
 	*/
@@ -426,7 +426,7 @@ public class ContactWrapper implements Contact {
 	}
 
 	/**
-	* Gets the jabber sn of this contact.
+	* Returns the jabber sn of this contact.
 	*
 	* @return the jabber sn of this contact
 	*/
@@ -444,7 +444,7 @@ public class ContactWrapper implements Contact {
 	}
 
 	/**
-	* Gets the msn sn of this contact.
+	* Returns the msn sn of this contact.
 	*
 	* @return the msn sn of this contact
 	*/
@@ -462,7 +462,7 @@ public class ContactWrapper implements Contact {
 	}
 
 	/**
-	* Gets the my space sn of this contact.
+	* Returns the my space sn of this contact.
 	*
 	* @return the my space sn of this contact
 	*/
@@ -480,7 +480,7 @@ public class ContactWrapper implements Contact {
 	}
 
 	/**
-	* Gets the skype sn of this contact.
+	* Returns the skype sn of this contact.
 	*
 	* @return the skype sn of this contact
 	*/
@@ -498,7 +498,7 @@ public class ContactWrapper implements Contact {
 	}
 
 	/**
-	* Gets the twitter sn of this contact.
+	* Returns the twitter sn of this contact.
 	*
 	* @return the twitter sn of this contact
 	*/
@@ -516,7 +516,7 @@ public class ContactWrapper implements Contact {
 	}
 
 	/**
-	* Gets the ym sn of this contact.
+	* Returns the ym sn of this contact.
 	*
 	* @return the ym sn of this contact
 	*/
@@ -534,7 +534,7 @@ public class ContactWrapper implements Contact {
 	}
 
 	/**
-	* Gets the employee status ID of this contact.
+	* Returns the employee status ID of this contact.
 	*
 	* @return the employee status ID of this contact
 	*/
@@ -552,7 +552,7 @@ public class ContactWrapper implements Contact {
 	}
 
 	/**
-	* Gets the employee number of this contact.
+	* Returns the employee number of this contact.
 	*
 	* @return the employee number of this contact
 	*/
@@ -570,7 +570,7 @@ public class ContactWrapper implements Contact {
 	}
 
 	/**
-	* Gets the job title of this contact.
+	* Returns the job title of this contact.
 	*
 	* @return the job title of this contact
 	*/
@@ -588,7 +588,7 @@ public class ContactWrapper implements Contact {
 	}
 
 	/**
-	* Gets the job class of this contact.
+	* Returns the job class of this contact.
 	*
 	* @return the job class of this contact
 	*/
@@ -606,7 +606,7 @@ public class ContactWrapper implements Contact {
 	}
 
 	/**
-	* Gets the hours of operation of this contact.
+	* Returns the hours of operation of this contact.
 	*
 	* @return the hours of operation of this contact
 	*/

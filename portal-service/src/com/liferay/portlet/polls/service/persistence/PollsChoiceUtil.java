@@ -121,7 +121,7 @@ public class PollsChoiceUtil {
 	/**
 	* Caches the polls choice in the entity cache if it is enabled.
 	*
-	* @param pollsChoice the polls choice to cache
+	* @param pollsChoice the polls choice
 	*/
 	public static void cacheResult(
 		com.liferay.portlet.polls.model.PollsChoice pollsChoice) {
@@ -131,7 +131,7 @@ public class PollsChoiceUtil {
 	/**
 	* Caches the polls choices in the entity cache if it is enabled.
 	*
-	* @param pollsChoices the polls choices to cache
+	* @param pollsChoices the polls choices
 	*/
 	public static void cacheResult(
 		java.util.List<com.liferay.portlet.polls.model.PollsChoice> pollsChoices) {
@@ -152,7 +152,7 @@ public class PollsChoiceUtil {
 	/**
 	* Removes the polls choice with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param choiceId the primary key of the polls choice to remove
+	* @param choiceId the primary key of the polls choice
 	* @return the polls choice that was removed
 	* @throws com.liferay.portlet.polls.NoSuchChoiceException if a polls choice with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -171,9 +171,9 @@ public class PollsChoiceUtil {
 	}
 
 	/**
-	* Finds the polls choice with the primary key or throws a {@link com.liferay.portlet.polls.NoSuchChoiceException} if it could not be found.
+	* Returns the polls choice with the primary key or throws a {@link com.liferay.portlet.polls.NoSuchChoiceException} if it could not be found.
 	*
-	* @param choiceId the primary key of the polls choice to find
+	* @param choiceId the primary key of the polls choice
 	* @return the polls choice
 	* @throws com.liferay.portlet.polls.NoSuchChoiceException if a polls choice with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -186,9 +186,9 @@ public class PollsChoiceUtil {
 	}
 
 	/**
-	* Finds the polls choice with the primary key or returns <code>null</code> if it could not be found.
+	* Returns the polls choice with the primary key or returns <code>null</code> if it could not be found.
 	*
-	* @param choiceId the primary key of the polls choice to find
+	* @param choiceId the primary key of the polls choice
 	* @return the polls choice, or <code>null</code> if a polls choice with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -199,9 +199,9 @@ public class PollsChoiceUtil {
 	}
 
 	/**
-	* Finds all the polls choices where uuid = &#63;.
+	* Returns all the polls choices where uuid = &#63;.
 	*
-	* @param uuid the uuid to search with
+	* @param uuid the uuid
 	* @return the matching polls choices
 	* @throws SystemException if a system exception occurred
 	*/
@@ -212,15 +212,15 @@ public class PollsChoiceUtil {
 	}
 
 	/**
-	* Finds a range of all the polls choices where uuid = &#63;.
+	* Returns a range of all the polls choices where uuid = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param uuid the uuid to search with
-	* @param start the lower bound of the range of polls choices to return
-	* @param end the upper bound of the range of polls choices to return (not inclusive)
+	* @param uuid the uuid
+	* @param start the lower bound of the range of polls choices
+	* @param end the upper bound of the range of polls choices (not inclusive)
 	* @return the range of matching polls choices
 	* @throws SystemException if a system exception occurred
 	*/
@@ -231,15 +231,15 @@ public class PollsChoiceUtil {
 	}
 
 	/**
-	* Finds an ordered range of all the polls choices where uuid = &#63;.
+	* Returns an ordered range of all the polls choices where uuid = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param uuid the uuid to search with
-	* @param start the lower bound of the range of polls choices to return
-	* @param end the upper bound of the range of polls choices to return (not inclusive)
+	* @param uuid the uuid
+	* @param start the lower bound of the range of polls choices
+	* @param end the upper bound of the range of polls choices (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching polls choices
 	* @throws SystemException if a system exception occurred
@@ -252,13 +252,13 @@ public class PollsChoiceUtil {
 	}
 
 	/**
-	* Finds the first polls choice in the ordered set where uuid = &#63;.
+	* Returns the first polls choice in the ordered set where uuid = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param uuid the uuid to search with
+	* @param uuid the uuid
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching polls choice
 	* @throws com.liferay.portlet.polls.NoSuchChoiceException if a matching polls choice could not be found
@@ -273,13 +273,13 @@ public class PollsChoiceUtil {
 	}
 
 	/**
-	* Finds the last polls choice in the ordered set where uuid = &#63;.
+	* Returns the last polls choice in the ordered set where uuid = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param uuid the uuid to search with
+	* @param uuid the uuid
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching polls choice
 	* @throws com.liferay.portlet.polls.NoSuchChoiceException if a matching polls choice could not be found
@@ -294,14 +294,14 @@ public class PollsChoiceUtil {
 	}
 
 	/**
-	* Finds the polls choices before and after the current polls choice in the ordered set where uuid = &#63;.
+	* Returns the polls choices before and after the current polls choice in the ordered set where uuid = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
 	* @param choiceId the primary key of the current polls choice
-	* @param uuid the uuid to search with
+	* @param uuid the uuid
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next polls choice
 	* @throws com.liferay.portlet.polls.NoSuchChoiceException if a polls choice with the primary key could not be found
@@ -317,9 +317,9 @@ public class PollsChoiceUtil {
 	}
 
 	/**
-	* Finds all the polls choices where questionId = &#63;.
+	* Returns all the polls choices where questionId = &#63;.
 	*
-	* @param questionId the question ID to search with
+	* @param questionId the question ID
 	* @return the matching polls choices
 	* @throws SystemException if a system exception occurred
 	*/
@@ -330,15 +330,15 @@ public class PollsChoiceUtil {
 	}
 
 	/**
-	* Finds a range of all the polls choices where questionId = &#63;.
+	* Returns a range of all the polls choices where questionId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param questionId the question ID to search with
-	* @param start the lower bound of the range of polls choices to return
-	* @param end the upper bound of the range of polls choices to return (not inclusive)
+	* @param questionId the question ID
+	* @param start the lower bound of the range of polls choices
+	* @param end the upper bound of the range of polls choices (not inclusive)
 	* @return the range of matching polls choices
 	* @throws SystemException if a system exception occurred
 	*/
@@ -349,15 +349,15 @@ public class PollsChoiceUtil {
 	}
 
 	/**
-	* Finds an ordered range of all the polls choices where questionId = &#63;.
+	* Returns an ordered range of all the polls choices where questionId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param questionId the question ID to search with
-	* @param start the lower bound of the range of polls choices to return
-	* @param end the upper bound of the range of polls choices to return (not inclusive)
+	* @param questionId the question ID
+	* @param start the lower bound of the range of polls choices
+	* @param end the upper bound of the range of polls choices (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching polls choices
 	* @throws SystemException if a system exception occurred
@@ -371,13 +371,13 @@ public class PollsChoiceUtil {
 	}
 
 	/**
-	* Finds the first polls choice in the ordered set where questionId = &#63;.
+	* Returns the first polls choice in the ordered set where questionId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param questionId the question ID to search with
+	* @param questionId the question ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching polls choice
 	* @throws com.liferay.portlet.polls.NoSuchChoiceException if a matching polls choice could not be found
@@ -393,13 +393,13 @@ public class PollsChoiceUtil {
 	}
 
 	/**
-	* Finds the last polls choice in the ordered set where questionId = &#63;.
+	* Returns the last polls choice in the ordered set where questionId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param questionId the question ID to search with
+	* @param questionId the question ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching polls choice
 	* @throws com.liferay.portlet.polls.NoSuchChoiceException if a matching polls choice could not be found
@@ -415,14 +415,14 @@ public class PollsChoiceUtil {
 	}
 
 	/**
-	* Finds the polls choices before and after the current polls choice in the ordered set where questionId = &#63;.
+	* Returns the polls choices before and after the current polls choice in the ordered set where questionId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
 	* @param choiceId the primary key of the current polls choice
-	* @param questionId the question ID to search with
+	* @param questionId the question ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next polls choice
 	* @throws com.liferay.portlet.polls.NoSuchChoiceException if a polls choice with the primary key could not be found
@@ -439,10 +439,10 @@ public class PollsChoiceUtil {
 	}
 
 	/**
-	* Finds the polls choice where questionId = &#63; and name = &#63; or throws a {@link com.liferay.portlet.polls.NoSuchChoiceException} if it could not be found.
+	* Returns the polls choice where questionId = &#63; and name = &#63; or throws a {@link com.liferay.portlet.polls.NoSuchChoiceException} if it could not be found.
 	*
-	* @param questionId the question ID to search with
-	* @param name the name to search with
+	* @param questionId the question ID
+	* @param name the name
 	* @return the matching polls choice
 	* @throws com.liferay.portlet.polls.NoSuchChoiceException if a matching polls choice could not be found
 	* @throws SystemException if a system exception occurred
@@ -455,10 +455,10 @@ public class PollsChoiceUtil {
 	}
 
 	/**
-	* Finds the polls choice where questionId = &#63; and name = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	* Returns the polls choice where questionId = &#63; and name = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	*
-	* @param questionId the question ID to search with
-	* @param name the name to search with
+	* @param questionId the question ID
+	* @param name the name
 	* @return the matching polls choice, or <code>null</code> if a matching polls choice could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -469,10 +469,10 @@ public class PollsChoiceUtil {
 	}
 
 	/**
-	* Finds the polls choice where questionId = &#63; and name = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	* Returns the polls choice where questionId = &#63; and name = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
-	* @param questionId the question ID to search with
-	* @param name the name to search with
+	* @param questionId the question ID
+	* @param name the name
 	* @return the matching polls choice, or <code>null</code> if a matching polls choice could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -483,7 +483,7 @@ public class PollsChoiceUtil {
 	}
 
 	/**
-	* Finds all the polls choices.
+	* Returns all the polls choices.
 	*
 	* @return the polls choices
 	* @throws SystemException if a system exception occurred
@@ -494,14 +494,14 @@ public class PollsChoiceUtil {
 	}
 
 	/**
-	* Finds a range of all the polls choices.
+	* Returns a range of all the polls choices.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of polls choices to return
-	* @param end the upper bound of the range of polls choices to return (not inclusive)
+	* @param start the lower bound of the range of polls choices
+	* @param end the upper bound of the range of polls choices (not inclusive)
 	* @return the range of polls choices
 	* @throws SystemException if a system exception occurred
 	*/
@@ -512,14 +512,14 @@ public class PollsChoiceUtil {
 	}
 
 	/**
-	* Finds an ordered range of all the polls choices.
+	* Returns an ordered range of all the polls choices.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of polls choices to return
-	* @param end the upper bound of the range of polls choices to return (not inclusive)
+	* @param start the lower bound of the range of polls choices
+	* @param end the upper bound of the range of polls choices (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of polls choices
 	* @throws SystemException if a system exception occurred
@@ -534,7 +534,7 @@ public class PollsChoiceUtil {
 	/**
 	* Removes all the polls choices where uuid = &#63; from the database.
 	*
-	* @param uuid the uuid to search with
+	* @param uuid the uuid
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByUuid(java.lang.String uuid)
@@ -545,7 +545,7 @@ public class PollsChoiceUtil {
 	/**
 	* Removes all the polls choices where questionId = &#63; from the database.
 	*
-	* @param questionId the question ID to search with
+	* @param questionId the question ID
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByQuestionId(long questionId)
@@ -556,8 +556,8 @@ public class PollsChoiceUtil {
 	/**
 	* Removes the polls choice where questionId = &#63; and name = &#63; from the database.
 	*
-	* @param questionId the question ID to search with
-	* @param name the name to search with
+	* @param questionId the question ID
+	* @param name the name
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByQ_N(long questionId, java.lang.String name)
@@ -577,9 +577,9 @@ public class PollsChoiceUtil {
 	}
 
 	/**
-	* Counts all the polls choices where uuid = &#63;.
+	* Returns the number of polls choices where uuid = &#63;.
 	*
-	* @param uuid the uuid to search with
+	* @param uuid the uuid
 	* @return the number of matching polls choices
 	* @throws SystemException if a system exception occurred
 	*/
@@ -589,9 +589,9 @@ public class PollsChoiceUtil {
 	}
 
 	/**
-	* Counts all the polls choices where questionId = &#63;.
+	* Returns the number of polls choices where questionId = &#63;.
 	*
-	* @param questionId the question ID to search with
+	* @param questionId the question ID
 	* @return the number of matching polls choices
 	* @throws SystemException if a system exception occurred
 	*/
@@ -601,10 +601,10 @@ public class PollsChoiceUtil {
 	}
 
 	/**
-	* Counts all the polls choices where questionId = &#63; and name = &#63;.
+	* Returns the number of polls choices where questionId = &#63; and name = &#63;.
 	*
-	* @param questionId the question ID to search with
-	* @param name the name to search with
+	* @param questionId the question ID
+	* @param name the name
 	* @return the number of matching polls choices
 	* @throws SystemException if a system exception occurred
 	*/
@@ -614,7 +614,7 @@ public class PollsChoiceUtil {
 	}
 
 	/**
-	* Counts all the polls choices.
+	* Returns the number of polls choices.
 	*
 	* @return the number of polls choices
 	* @throws SystemException if a system exception occurred

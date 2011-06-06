@@ -82,7 +82,7 @@ public abstract class BookmarksEntryLocalServiceBaseImpl
 	/**
 	 * Adds the bookmarks entry to the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param bookmarksEntry the bookmarks entry to add
+	 * @param bookmarksEntry the bookmarks entry
 	 * @return the bookmarks entry that was added
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -106,7 +106,7 @@ public abstract class BookmarksEntryLocalServiceBaseImpl
 	/**
 	 * Deletes the bookmarks entry with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param entryId the primary key of the bookmarks entry to delete
+	 * @param entryId the primary key of the bookmarks entry
 	 * @throws PortalException if a bookmarks entry with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -118,7 +118,7 @@ public abstract class BookmarksEntryLocalServiceBaseImpl
 	/**
 	 * Deletes the bookmarks entry from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param bookmarksEntry the bookmarks entry to delete
+	 * @param bookmarksEntry the bookmarks entry
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void deleteBookmarksEntry(BookmarksEntry bookmarksEntry)
@@ -129,7 +129,7 @@ public abstract class BookmarksEntryLocalServiceBaseImpl
 	/**
 	 * Performs a dynamic query on the database and returns the matching rows.
 	 *
-	 * @param dynamicQuery the dynamic query to search with
+	 * @param dynamicQuery the dynamic query
 	 * @return the matching rows
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -146,9 +146,9 @@ public abstract class BookmarksEntryLocalServiceBaseImpl
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param dynamicQuery the dynamic query to search with
-	 * @param start the lower bound of the range of model instances to return
-	 * @param end the upper bound of the range of model instances to return (not inclusive)
+	 * @param dynamicQuery the dynamic query
+	 * @param start the lower bound of the range of model instances
+	 * @param end the upper bound of the range of model instances (not inclusive)
 	 * @return the range of matching rows
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -166,9 +166,9 @@ public abstract class BookmarksEntryLocalServiceBaseImpl
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param dynamicQuery the dynamic query to search with
-	 * @param start the lower bound of the range of model instances to return
-	 * @param end the upper bound of the range of model instances to return (not inclusive)
+	 * @param dynamicQuery the dynamic query
+	 * @param start the lower bound of the range of model instances
+	 * @param end the upper bound of the range of model instances (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching rows
 	 * @throws SystemException if a system exception occurred
@@ -181,9 +181,9 @@ public abstract class BookmarksEntryLocalServiceBaseImpl
 	}
 
 	/**
-	 * Counts the number of rows that match the dynamic query.
+	 * Returns the number of rows that match the dynamic query.
 	 *
-	 * @param dynamicQuery the dynamic query to search with
+	 * @param dynamicQuery the dynamic query
 	 * @return the number of rows that match the dynamic query
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -193,9 +193,9 @@ public abstract class BookmarksEntryLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the bookmarks entry with the primary key.
+	 * Returns the bookmarks entry with the primary key.
 	 *
-	 * @param entryId the primary key of the bookmarks entry to get
+	 * @param entryId the primary key of the bookmarks entry
 	 * @return the bookmarks entry
 	 * @throws PortalException if a bookmarks entry with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -206,12 +206,12 @@ public abstract class BookmarksEntryLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the bookmarks entry with the UUID and group id.
+	 * Returns the bookmarks entry with the UUID in the group.
 	 *
-	 * @param uuid the UUID of bookmarks entry to get
-	 * @param groupId the group id of the bookmarks entry to get
+	 * @param uuid the UUID of bookmarks entry
+	 * @param groupId the group id of the bookmarks entry
 	 * @return the bookmarks entry
-	 * @throws PortalException if a bookmarks entry with the UUID and group id could not be found
+	 * @throws PortalException if a bookmarks entry with the UUID in the group could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	public BookmarksEntry getBookmarksEntryByUuidAndGroupId(String uuid,
@@ -220,14 +220,14 @@ public abstract class BookmarksEntryLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets a range of all the bookmarks entries.
+	 * Returns a range of all the bookmarks entries.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param start the lower bound of the range of bookmarks entries to return
-	 * @param end the upper bound of the range of bookmarks entries to return (not inclusive)
+	 * @param start the lower bound of the range of bookmarks entries
+	 * @param end the upper bound of the range of bookmarks entries (not inclusive)
 	 * @return the range of bookmarks entries
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -237,7 +237,7 @@ public abstract class BookmarksEntryLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the number of bookmarks entries.
+	 * Returns the number of bookmarks entries.
 	 *
 	 * @return the number of bookmarks entries
 	 * @throws SystemException if a system exception occurred
@@ -249,7 +249,7 @@ public abstract class BookmarksEntryLocalServiceBaseImpl
 	/**
 	 * Updates the bookmarks entry in the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param bookmarksEntry the bookmarks entry to update
+	 * @param bookmarksEntry the bookmarks entry
 	 * @return the bookmarks entry that was updated
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -263,7 +263,7 @@ public abstract class BookmarksEntryLocalServiceBaseImpl
 	/**
 	 * Updates the bookmarks entry in the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param bookmarksEntry the bookmarks entry to update
+	 * @param bookmarksEntry the bookmarks entry
 	 * @param merge whether to merge the bookmarks entry with the current session. See {@link com.liferay.portal.service.persistence.BatchSession#update(com.liferay.portal.kernel.dao.orm.Session, com.liferay.portal.model.BaseModel, boolean)} for an explanation.
 	 * @return the bookmarks entry that was updated
 	 * @throws SystemException if a system exception occurred
@@ -276,7 +276,7 @@ public abstract class BookmarksEntryLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the bookmarks entry local service.
+	 * Returns the bookmarks entry local service.
 	 *
 	 * @return the bookmarks entry local service
 	 */
@@ -295,7 +295,7 @@ public abstract class BookmarksEntryLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the bookmarks entry remote service.
+	 * Returns the bookmarks entry remote service.
 	 *
 	 * @return the bookmarks entry remote service
 	 */
@@ -314,7 +314,7 @@ public abstract class BookmarksEntryLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the bookmarks entry persistence.
+	 * Returns the bookmarks entry persistence.
 	 *
 	 * @return the bookmarks entry persistence
 	 */
@@ -333,7 +333,7 @@ public abstract class BookmarksEntryLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the bookmarks entry finder.
+	 * Returns the bookmarks entry finder.
 	 *
 	 * @return the bookmarks entry finder
 	 */
@@ -352,7 +352,7 @@ public abstract class BookmarksEntryLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the bookmarks folder local service.
+	 * Returns the bookmarks folder local service.
 	 *
 	 * @return the bookmarks folder local service
 	 */
@@ -371,7 +371,7 @@ public abstract class BookmarksEntryLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the bookmarks folder remote service.
+	 * Returns the bookmarks folder remote service.
 	 *
 	 * @return the bookmarks folder remote service
 	 */
@@ -390,7 +390,7 @@ public abstract class BookmarksEntryLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the bookmarks folder persistence.
+	 * Returns the bookmarks folder persistence.
 	 *
 	 * @return the bookmarks folder persistence
 	 */
@@ -409,7 +409,7 @@ public abstract class BookmarksEntryLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the counter local service.
+	 * Returns the counter local service.
 	 *
 	 * @return the counter local service
 	 */
@@ -427,7 +427,7 @@ public abstract class BookmarksEntryLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the resource local service.
+	 * Returns the resource local service.
 	 *
 	 * @return the resource local service
 	 */
@@ -446,7 +446,7 @@ public abstract class BookmarksEntryLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the resource remote service.
+	 * Returns the resource remote service.
 	 *
 	 * @return the resource remote service
 	 */
@@ -464,7 +464,7 @@ public abstract class BookmarksEntryLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the resource persistence.
+	 * Returns the resource persistence.
 	 *
 	 * @return the resource persistence
 	 */
@@ -482,7 +482,7 @@ public abstract class BookmarksEntryLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the resource finder.
+	 * Returns the resource finder.
 	 *
 	 * @return the resource finder
 	 */
@@ -500,7 +500,7 @@ public abstract class BookmarksEntryLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the user local service.
+	 * Returns the user local service.
 	 *
 	 * @return the user local service
 	 */
@@ -518,7 +518,7 @@ public abstract class BookmarksEntryLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the user remote service.
+	 * Returns the user remote service.
 	 *
 	 * @return the user remote service
 	 */
@@ -536,7 +536,7 @@ public abstract class BookmarksEntryLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the user persistence.
+	 * Returns the user persistence.
 	 *
 	 * @return the user persistence
 	 */
@@ -554,7 +554,7 @@ public abstract class BookmarksEntryLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the user finder.
+	 * Returns the user finder.
 	 *
 	 * @return the user finder
 	 */
@@ -572,7 +572,7 @@ public abstract class BookmarksEntryLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the asset entry local service.
+	 * Returns the asset entry local service.
 	 *
 	 * @return the asset entry local service
 	 */
@@ -591,7 +591,7 @@ public abstract class BookmarksEntryLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the asset entry remote service.
+	 * Returns the asset entry remote service.
 	 *
 	 * @return the asset entry remote service
 	 */
@@ -609,7 +609,7 @@ public abstract class BookmarksEntryLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the asset entry persistence.
+	 * Returns the asset entry persistence.
 	 *
 	 * @return the asset entry persistence
 	 */
@@ -628,7 +628,7 @@ public abstract class BookmarksEntryLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the asset entry finder.
+	 * Returns the asset entry finder.
 	 *
 	 * @return the asset entry finder
 	 */
@@ -646,7 +646,7 @@ public abstract class BookmarksEntryLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the asset link local service.
+	 * Returns the asset link local service.
 	 *
 	 * @return the asset link local service
 	 */
@@ -665,7 +665,7 @@ public abstract class BookmarksEntryLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the asset link persistence.
+	 * Returns the asset link persistence.
 	 *
 	 * @return the asset link persistence
 	 */
@@ -684,7 +684,7 @@ public abstract class BookmarksEntryLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the asset tag local service.
+	 * Returns the asset tag local service.
 	 *
 	 * @return the asset tag local service
 	 */
@@ -703,7 +703,7 @@ public abstract class BookmarksEntryLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the asset tag remote service.
+	 * Returns the asset tag remote service.
 	 *
 	 * @return the asset tag remote service
 	 */
@@ -721,7 +721,7 @@ public abstract class BookmarksEntryLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the asset tag persistence.
+	 * Returns the asset tag persistence.
 	 *
 	 * @return the asset tag persistence
 	 */
@@ -739,7 +739,7 @@ public abstract class BookmarksEntryLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the asset tag finder.
+	 * Returns the asset tag finder.
 	 *
 	 * @return the asset tag finder
 	 */
@@ -757,7 +757,7 @@ public abstract class BookmarksEntryLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the expando value local service.
+	 * Returns the expando value local service.
 	 *
 	 * @return the expando value local service
 	 */
@@ -776,7 +776,7 @@ public abstract class BookmarksEntryLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the expando value remote service.
+	 * Returns the expando value remote service.
 	 *
 	 * @return the expando value remote service
 	 */
@@ -794,7 +794,7 @@ public abstract class BookmarksEntryLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the expando value persistence.
+	 * Returns the expando value persistence.
 	 *
 	 * @return the expando value persistence
 	 */
@@ -813,7 +813,7 @@ public abstract class BookmarksEntryLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the Spring bean ID for this bean.
+	 * Returns the Spring bean ID for this bean.
 	 *
 	 * @return the Spring bean ID for this bean
 	 */
@@ -833,7 +833,7 @@ public abstract class BookmarksEntryLocalServiceBaseImpl
 	/**
 	 * Performs an SQL query.
 	 *
-	 * @param sql the sql query to perform
+	 * @param sql the sql query
 	 */
 	protected void runSQL(String sql) throws SystemException {
 		try {

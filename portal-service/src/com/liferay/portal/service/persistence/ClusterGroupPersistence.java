@@ -39,14 +39,14 @@ public interface ClusterGroupPersistence extends BasePersistence<ClusterGroup> {
 	/**
 	* Caches the cluster group in the entity cache if it is enabled.
 	*
-	* @param clusterGroup the cluster group to cache
+	* @param clusterGroup the cluster group
 	*/
 	public void cacheResult(com.liferay.portal.model.ClusterGroup clusterGroup);
 
 	/**
 	* Caches the cluster groups in the entity cache if it is enabled.
 	*
-	* @param clusterGroups the cluster groups to cache
+	* @param clusterGroups the cluster groups
 	*/
 	public void cacheResult(
 		java.util.List<com.liferay.portal.model.ClusterGroup> clusterGroups);
@@ -62,7 +62,7 @@ public interface ClusterGroupPersistence extends BasePersistence<ClusterGroup> {
 	/**
 	* Removes the cluster group with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param clusterGroupId the primary key of the cluster group to remove
+	* @param clusterGroupId the primary key of the cluster group
 	* @return the cluster group that was removed
 	* @throws com.liferay.portal.NoSuchClusterGroupException if a cluster group with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -76,9 +76,9 @@ public interface ClusterGroupPersistence extends BasePersistence<ClusterGroup> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the cluster group with the primary key or throws a {@link com.liferay.portal.NoSuchClusterGroupException} if it could not be found.
+	* Returns the cluster group with the primary key or throws a {@link com.liferay.portal.NoSuchClusterGroupException} if it could not be found.
 	*
-	* @param clusterGroupId the primary key of the cluster group to find
+	* @param clusterGroupId the primary key of the cluster group
 	* @return the cluster group
 	* @throws com.liferay.portal.NoSuchClusterGroupException if a cluster group with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -89,9 +89,9 @@ public interface ClusterGroupPersistence extends BasePersistence<ClusterGroup> {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the cluster group with the primary key or returns <code>null</code> if it could not be found.
+	* Returns the cluster group with the primary key or returns <code>null</code> if it could not be found.
 	*
-	* @param clusterGroupId the primary key of the cluster group to find
+	* @param clusterGroupId the primary key of the cluster group
 	* @return the cluster group, or <code>null</code> if a cluster group with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -100,7 +100,7 @@ public interface ClusterGroupPersistence extends BasePersistence<ClusterGroup> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds all the cluster groups.
+	* Returns all the cluster groups.
 	*
 	* @return the cluster groups
 	* @throws SystemException if a system exception occurred
@@ -109,14 +109,14 @@ public interface ClusterGroupPersistence extends BasePersistence<ClusterGroup> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds a range of all the cluster groups.
+	* Returns a range of all the cluster groups.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of cluster groups to return
-	* @param end the upper bound of the range of cluster groups to return (not inclusive)
+	* @param start the lower bound of the range of cluster groups
+	* @param end the upper bound of the range of cluster groups (not inclusive)
 	* @return the range of cluster groups
 	* @throws SystemException if a system exception occurred
 	*/
@@ -125,14 +125,14 @@ public interface ClusterGroupPersistence extends BasePersistence<ClusterGroup> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds an ordered range of all the cluster groups.
+	* Returns an ordered range of all the cluster groups.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of cluster groups to return
-	* @param end the upper bound of the range of cluster groups to return (not inclusive)
+	* @param start the lower bound of the range of cluster groups
+	* @param end the upper bound of the range of cluster groups (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of cluster groups
 	* @throws SystemException if a system exception occurred
@@ -151,7 +151,7 @@ public interface ClusterGroupPersistence extends BasePersistence<ClusterGroup> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Counts all the cluster groups.
+	* Returns the number of cluster groups.
 	*
 	* @return the number of cluster groups
 	* @throws SystemException if a system exception occurred

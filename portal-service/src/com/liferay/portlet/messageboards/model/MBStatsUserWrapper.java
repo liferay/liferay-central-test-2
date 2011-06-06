@@ -37,7 +37,7 @@ public class MBStatsUserWrapper implements MBStatsUser {
 	}
 
 	/**
-	* Gets the primary key of this message boards stats user.
+	* Returns the primary key of this message boards stats user.
 	*
 	* @return the primary key of this message boards stats user
 	*/
@@ -46,7 +46,7 @@ public class MBStatsUserWrapper implements MBStatsUser {
 	}
 
 	/**
-	* Sets the primary key of this message boards stats user
+	* Sets the primary key of this message boards stats user.
 	*
 	* @param primaryKey the primary key of this message boards stats user
 	*/
@@ -55,7 +55,7 @@ public class MBStatsUserWrapper implements MBStatsUser {
 	}
 
 	/**
-	* Gets the stats user ID of this message boards stats user.
+	* Returns the stats user ID of this message boards stats user.
 	*
 	* @return the stats user ID of this message boards stats user
 	*/
@@ -73,7 +73,7 @@ public class MBStatsUserWrapper implements MBStatsUser {
 	}
 
 	/**
-	* Gets the stats user uuid of this message boards stats user.
+	* Returns the stats user uuid of this message boards stats user.
 	*
 	* @return the stats user uuid of this message boards stats user
 	* @throws SystemException if a system exception occurred
@@ -93,7 +93,7 @@ public class MBStatsUserWrapper implements MBStatsUser {
 	}
 
 	/**
-	* Gets the group ID of this message boards stats user.
+	* Returns the group ID of this message boards stats user.
 	*
 	* @return the group ID of this message boards stats user
 	*/
@@ -111,7 +111,7 @@ public class MBStatsUserWrapper implements MBStatsUser {
 	}
 
 	/**
-	* Gets the user ID of this message boards stats user.
+	* Returns the user ID of this message boards stats user.
 	*
 	* @return the user ID of this message boards stats user
 	*/
@@ -129,7 +129,7 @@ public class MBStatsUserWrapper implements MBStatsUser {
 	}
 
 	/**
-	* Gets the user uuid of this message boards stats user.
+	* Returns the user uuid of this message boards stats user.
 	*
 	* @return the user uuid of this message boards stats user
 	* @throws SystemException if a system exception occurred
@@ -149,7 +149,7 @@ public class MBStatsUserWrapper implements MBStatsUser {
 	}
 
 	/**
-	* Gets the message count of this message boards stats user.
+	* Returns the message count of this message boards stats user.
 	*
 	* @return the message count of this message boards stats user
 	*/
@@ -167,7 +167,7 @@ public class MBStatsUserWrapper implements MBStatsUser {
 	}
 
 	/**
-	* Gets the last post date of this message boards stats user.
+	* Returns the last post date of this message boards stats user.
 	*
 	* @return the last post date of this message boards stats user
 	*/

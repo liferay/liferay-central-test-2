@@ -38,7 +38,7 @@ public class SocialEquityAssetEntryWrapper implements SocialEquityAssetEntry {
 	}
 
 	/**
-	* Gets the primary key of this social equity asset entry.
+	* Returns the primary key of this social equity asset entry.
 	*
 	* @return the primary key of this social equity asset entry
 	*/
@@ -47,7 +47,7 @@ public class SocialEquityAssetEntryWrapper implements SocialEquityAssetEntry {
 	}
 
 	/**
-	* Sets the primary key of this social equity asset entry
+	* Sets the primary key of this social equity asset entry.
 	*
 	* @param primaryKey the primary key of this social equity asset entry
 	*/
@@ -56,7 +56,7 @@ public class SocialEquityAssetEntryWrapper implements SocialEquityAssetEntry {
 	}
 
 	/**
-	* Gets the equity asset entry ID of this social equity asset entry.
+	* Returns the equity asset entry ID of this social equity asset entry.
 	*
 	* @return the equity asset entry ID of this social equity asset entry
 	*/
@@ -74,7 +74,7 @@ public class SocialEquityAssetEntryWrapper implements SocialEquityAssetEntry {
 	}
 
 	/**
-	* Gets the group ID of this social equity asset entry.
+	* Returns the group ID of this social equity asset entry.
 	*
 	* @return the group ID of this social equity asset entry
 	*/
@@ -92,7 +92,7 @@ public class SocialEquityAssetEntryWrapper implements SocialEquityAssetEntry {
 	}
 
 	/**
-	* Gets the company ID of this social equity asset entry.
+	* Returns the company ID of this social equity asset entry.
 	*
 	* @return the company ID of this social equity asset entry
 	*/
@@ -110,7 +110,7 @@ public class SocialEquityAssetEntryWrapper implements SocialEquityAssetEntry {
 	}
 
 	/**
-	* Gets the user ID of this social equity asset entry.
+	* Returns the user ID of this social equity asset entry.
 	*
 	* @return the user ID of this social equity asset entry
 	*/
@@ -128,7 +128,7 @@ public class SocialEquityAssetEntryWrapper implements SocialEquityAssetEntry {
 	}
 
 	/**
-	* Gets the user uuid of this social equity asset entry.
+	* Returns the user uuid of this social equity asset entry.
 	*
 	* @return the user uuid of this social equity asset entry
 	* @throws SystemException if a system exception occurred
@@ -148,7 +148,7 @@ public class SocialEquityAssetEntryWrapper implements SocialEquityAssetEntry {
 	}
 
 	/**
-	* Gets the asset entry ID of this social equity asset entry.
+	* Returns the asset entry ID of this social equity asset entry.
 	*
 	* @return the asset entry ID of this social equity asset entry
 	*/
@@ -166,7 +166,7 @@ public class SocialEquityAssetEntryWrapper implements SocialEquityAssetEntry {
 	}
 
 	/**
-	* Gets the information k of this social equity asset entry.
+	* Returns the information k of this social equity asset entry.
 	*
 	* @return the information k of this social equity asset entry
 	*/
@@ -184,7 +184,7 @@ public class SocialEquityAssetEntryWrapper implements SocialEquityAssetEntry {
 	}
 
 	/**
-	* Gets the information b of this social equity asset entry.
+	* Returns the information b of this social equity asset entry.
 	*
 	* @return the information b of this social equity asset entry
 	*/

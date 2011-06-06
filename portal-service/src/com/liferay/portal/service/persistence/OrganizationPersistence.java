@@ -39,14 +39,14 @@ public interface OrganizationPersistence extends BasePersistence<Organization> {
 	/**
 	* Caches the organization in the entity cache if it is enabled.
 	*
-	* @param organization the organization to cache
+	* @param organization the organization
 	*/
 	public void cacheResult(com.liferay.portal.model.Organization organization);
 
 	/**
 	* Caches the organizations in the entity cache if it is enabled.
 	*
-	* @param organizations the organizations to cache
+	* @param organizations the organizations
 	*/
 	public void cacheResult(
 		java.util.List<com.liferay.portal.model.Organization> organizations);
@@ -62,7 +62,7 @@ public interface OrganizationPersistence extends BasePersistence<Organization> {
 	/**
 	* Removes the organization with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param organizationId the primary key of the organization to remove
+	* @param organizationId the primary key of the organization
 	* @return the organization that was removed
 	* @throws com.liferay.portal.NoSuchOrganizationException if a organization with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -76,9 +76,9 @@ public interface OrganizationPersistence extends BasePersistence<Organization> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the organization with the primary key or throws a {@link com.liferay.portal.NoSuchOrganizationException} if it could not be found.
+	* Returns the organization with the primary key or throws a {@link com.liferay.portal.NoSuchOrganizationException} if it could not be found.
 	*
-	* @param organizationId the primary key of the organization to find
+	* @param organizationId the primary key of the organization
 	* @return the organization
 	* @throws com.liferay.portal.NoSuchOrganizationException if a organization with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -89,9 +89,9 @@ public interface OrganizationPersistence extends BasePersistence<Organization> {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the organization with the primary key or returns <code>null</code> if it could not be found.
+	* Returns the organization with the primary key or returns <code>null</code> if it could not be found.
 	*
-	* @param organizationId the primary key of the organization to find
+	* @param organizationId the primary key of the organization
 	* @return the organization, or <code>null</code> if a organization with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -100,9 +100,9 @@ public interface OrganizationPersistence extends BasePersistence<Organization> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds all the organizations where companyId = &#63;.
+	* Returns all the organizations where companyId = &#63;.
 	*
-	* @param companyId the company ID to search with
+	* @param companyId the company ID
 	* @return the matching organizations
 	* @throws SystemException if a system exception occurred
 	*/
@@ -111,15 +111,15 @@ public interface OrganizationPersistence extends BasePersistence<Organization> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds a range of all the organizations where companyId = &#63;.
+	* Returns a range of all the organizations where companyId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company ID to search with
-	* @param start the lower bound of the range of organizations to return
-	* @param end the upper bound of the range of organizations to return (not inclusive)
+	* @param companyId the company ID
+	* @param start the lower bound of the range of organizations
+	* @param end the upper bound of the range of organizations (not inclusive)
 	* @return the range of matching organizations
 	* @throws SystemException if a system exception occurred
 	*/
@@ -128,15 +128,15 @@ public interface OrganizationPersistence extends BasePersistence<Organization> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds an ordered range of all the organizations where companyId = &#63;.
+	* Returns an ordered range of all the organizations where companyId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company ID to search with
-	* @param start the lower bound of the range of organizations to return
-	* @param end the upper bound of the range of organizations to return (not inclusive)
+	* @param companyId the company ID
+	* @param start the lower bound of the range of organizations
+	* @param end the upper bound of the range of organizations (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching organizations
 	* @throws SystemException if a system exception occurred
@@ -147,13 +147,13 @@ public interface OrganizationPersistence extends BasePersistence<Organization> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the first organization in the ordered set where companyId = &#63;.
+	* Returns the first organization in the ordered set where companyId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company ID to search with
+	* @param companyId the company ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching organization
 	* @throws com.liferay.portal.NoSuchOrganizationException if a matching organization could not be found
@@ -166,13 +166,13 @@ public interface OrganizationPersistence extends BasePersistence<Organization> {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the last organization in the ordered set where companyId = &#63;.
+	* Returns the last organization in the ordered set where companyId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company ID to search with
+	* @param companyId the company ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching organization
 	* @throws com.liferay.portal.NoSuchOrganizationException if a matching organization could not be found
@@ -185,14 +185,14 @@ public interface OrganizationPersistence extends BasePersistence<Organization> {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the organizations before and after the current organization in the ordered set where companyId = &#63;.
+	* Returns the organizations before and after the current organization in the ordered set where companyId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
 	* @param organizationId the primary key of the current organization
-	* @param companyId the company ID to search with
+	* @param companyId the company ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next organization
 	* @throws com.liferay.portal.NoSuchOrganizationException if a organization with the primary key could not be found
@@ -205,9 +205,9 @@ public interface OrganizationPersistence extends BasePersistence<Organization> {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Filters by the user's permissions and finds all the organizations where companyId = &#63;.
+	* Returns all the organizations that the user has permission to view where companyId = &#63;.
 	*
-	* @param companyId the company ID to search with
+	* @param companyId the company ID
 	* @return the matching organizations that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -216,15 +216,15 @@ public interface OrganizationPersistence extends BasePersistence<Organization> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Filters by the user's permissions and finds a range of all the organizations where companyId = &#63;.
+	* Returns a range of all the organizations that the user has permission to view where companyId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company ID to search with
-	* @param start the lower bound of the range of organizations to return
-	* @param end the upper bound of the range of organizations to return (not inclusive)
+	* @param companyId the company ID
+	* @param start the lower bound of the range of organizations
+	* @param end the upper bound of the range of organizations (not inclusive)
 	* @return the range of matching organizations that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -233,15 +233,15 @@ public interface OrganizationPersistence extends BasePersistence<Organization> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Filters by the user's permissions and finds an ordered range of all the organizations where companyId = &#63;.
+	* Returns an ordered range of all the organizations that the user has permissions to view where companyId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company ID to search with
-	* @param start the lower bound of the range of organizations to return
-	* @param end the upper bound of the range of organizations to return (not inclusive)
+	* @param companyId the company ID
+	* @param start the lower bound of the range of organizations
+	* @param end the upper bound of the range of organizations (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching organizations that the user has permission to view
 	* @throws SystemException if a system exception occurred
@@ -252,14 +252,10 @@ public interface OrganizationPersistence extends BasePersistence<Organization> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Filters the organizations before and after the current organization in the ordered set where companyId = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
-	* </p>
+	* Returns the organizations before and after the current organization in the ordered set of organizations that the user has permission to view where companyId = &#63;.
 	*
 	* @param organizationId the primary key of the current organization
-	* @param companyId the company ID to search with
+	* @param companyId the company ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next organization
 	* @throws com.liferay.portal.NoSuchOrganizationException if a organization with the primary key could not be found
@@ -272,9 +268,9 @@ public interface OrganizationPersistence extends BasePersistence<Organization> {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds all the organizations where companyId = &#63;.
+	* Returns all the organizations where companyId = &#63;.
 	*
-	* @param companyId the company ID to search with
+	* @param companyId the company ID
 	* @return the matching organizations
 	* @throws SystemException if a system exception occurred
 	*/
@@ -283,15 +279,15 @@ public interface OrganizationPersistence extends BasePersistence<Organization> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds a range of all the organizations where companyId = &#63;.
+	* Returns a range of all the organizations where companyId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company ID to search with
-	* @param start the lower bound of the range of organizations to return
-	* @param end the upper bound of the range of organizations to return (not inclusive)
+	* @param companyId the company ID
+	* @param start the lower bound of the range of organizations
+	* @param end the upper bound of the range of organizations (not inclusive)
 	* @return the range of matching organizations
 	* @throws SystemException if a system exception occurred
 	*/
@@ -300,15 +296,15 @@ public interface OrganizationPersistence extends BasePersistence<Organization> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds an ordered range of all the organizations where companyId = &#63;.
+	* Returns an ordered range of all the organizations where companyId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company ID to search with
-	* @param start the lower bound of the range of organizations to return
-	* @param end the upper bound of the range of organizations to return (not inclusive)
+	* @param companyId the company ID
+	* @param start the lower bound of the range of organizations
+	* @param end the upper bound of the range of organizations (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching organizations
 	* @throws SystemException if a system exception occurred
@@ -319,13 +315,13 @@ public interface OrganizationPersistence extends BasePersistence<Organization> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the first organization in the ordered set where companyId = &#63;.
+	* Returns the first organization in the ordered set where companyId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company ID to search with
+	* @param companyId the company ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching organization
 	* @throws com.liferay.portal.NoSuchOrganizationException if a matching organization could not be found
@@ -338,13 +334,13 @@ public interface OrganizationPersistence extends BasePersistence<Organization> {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the last organization in the ordered set where companyId = &#63;.
+	* Returns the last organization in the ordered set where companyId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company ID to search with
+	* @param companyId the company ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching organization
 	* @throws com.liferay.portal.NoSuchOrganizationException if a matching organization could not be found
@@ -357,14 +353,14 @@ public interface OrganizationPersistence extends BasePersistence<Organization> {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the organizations before and after the current organization in the ordered set where companyId = &#63;.
+	* Returns the organizations before and after the current organization in the ordered set where companyId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
 	* @param organizationId the primary key of the current organization
-	* @param companyId the company ID to search with
+	* @param companyId the company ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next organization
 	* @throws com.liferay.portal.NoSuchOrganizationException if a organization with the primary key could not be found
@@ -377,9 +373,9 @@ public interface OrganizationPersistence extends BasePersistence<Organization> {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Filters by the user's permissions and finds all the organizations where companyId = &#63;.
+	* Returns all the organizations that the user has permission to view where companyId = &#63;.
 	*
-	* @param companyId the company ID to search with
+	* @param companyId the company ID
 	* @return the matching organizations that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -388,15 +384,15 @@ public interface OrganizationPersistence extends BasePersistence<Organization> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Filters by the user's permissions and finds a range of all the organizations where companyId = &#63;.
+	* Returns a range of all the organizations that the user has permission to view where companyId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company ID to search with
-	* @param start the lower bound of the range of organizations to return
-	* @param end the upper bound of the range of organizations to return (not inclusive)
+	* @param companyId the company ID
+	* @param start the lower bound of the range of organizations
+	* @param end the upper bound of the range of organizations (not inclusive)
 	* @return the range of matching organizations that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -405,15 +401,15 @@ public interface OrganizationPersistence extends BasePersistence<Organization> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Filters by the user's permissions and finds an ordered range of all the organizations where companyId = &#63;.
+	* Returns an ordered range of all the organizations that the user has permissions to view where companyId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company ID to search with
-	* @param start the lower bound of the range of organizations to return
-	* @param end the upper bound of the range of organizations to return (not inclusive)
+	* @param companyId the company ID
+	* @param start the lower bound of the range of organizations
+	* @param end the upper bound of the range of organizations (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching organizations that the user has permission to view
 	* @throws SystemException if a system exception occurred
@@ -424,14 +420,10 @@ public interface OrganizationPersistence extends BasePersistence<Organization> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Filters the organizations before and after the current organization in the ordered set where companyId = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
-	* </p>
+	* Returns the organizations before and after the current organization in the ordered set of organizations that the user has permission to view where companyId = &#63;.
 	*
 	* @param organizationId the primary key of the current organization
-	* @param companyId the company ID to search with
+	* @param companyId the company ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next organization
 	* @throws com.liferay.portal.NoSuchOrganizationException if a organization with the primary key could not be found
@@ -444,10 +436,10 @@ public interface OrganizationPersistence extends BasePersistence<Organization> {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds all the organizations where companyId = &#63; and parentOrganizationId = &#63;.
+	* Returns all the organizations where companyId = &#63; and parentOrganizationId = &#63;.
 	*
-	* @param companyId the company ID to search with
-	* @param parentOrganizationId the parent organization ID to search with
+	* @param companyId the company ID
+	* @param parentOrganizationId the parent organization ID
 	* @return the matching organizations
 	* @throws SystemException if a system exception occurred
 	*/
@@ -456,16 +448,16 @@ public interface OrganizationPersistence extends BasePersistence<Organization> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds a range of all the organizations where companyId = &#63; and parentOrganizationId = &#63;.
+	* Returns a range of all the organizations where companyId = &#63; and parentOrganizationId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company ID to search with
-	* @param parentOrganizationId the parent organization ID to search with
-	* @param start the lower bound of the range of organizations to return
-	* @param end the upper bound of the range of organizations to return (not inclusive)
+	* @param companyId the company ID
+	* @param parentOrganizationId the parent organization ID
+	* @param start the lower bound of the range of organizations
+	* @param end the upper bound of the range of organizations (not inclusive)
 	* @return the range of matching organizations
 	* @throws SystemException if a system exception occurred
 	*/
@@ -474,16 +466,16 @@ public interface OrganizationPersistence extends BasePersistence<Organization> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds an ordered range of all the organizations where companyId = &#63; and parentOrganizationId = &#63;.
+	* Returns an ordered range of all the organizations where companyId = &#63; and parentOrganizationId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company ID to search with
-	* @param parentOrganizationId the parent organization ID to search with
-	* @param start the lower bound of the range of organizations to return
-	* @param end the upper bound of the range of organizations to return (not inclusive)
+	* @param companyId the company ID
+	* @param parentOrganizationId the parent organization ID
+	* @param start the lower bound of the range of organizations
+	* @param end the upper bound of the range of organizations (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching organizations
 	* @throws SystemException if a system exception occurred
@@ -494,14 +486,14 @@ public interface OrganizationPersistence extends BasePersistence<Organization> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the first organization in the ordered set where companyId = &#63; and parentOrganizationId = &#63;.
+	* Returns the first organization in the ordered set where companyId = &#63; and parentOrganizationId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company ID to search with
-	* @param parentOrganizationId the parent organization ID to search with
+	* @param companyId the company ID
+	* @param parentOrganizationId the parent organization ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching organization
 	* @throws com.liferay.portal.NoSuchOrganizationException if a matching organization could not be found
@@ -514,14 +506,14 @@ public interface OrganizationPersistence extends BasePersistence<Organization> {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the last organization in the ordered set where companyId = &#63; and parentOrganizationId = &#63;.
+	* Returns the last organization in the ordered set where companyId = &#63; and parentOrganizationId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company ID to search with
-	* @param parentOrganizationId the parent organization ID to search with
+	* @param companyId the company ID
+	* @param parentOrganizationId the parent organization ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching organization
 	* @throws com.liferay.portal.NoSuchOrganizationException if a matching organization could not be found
@@ -534,15 +526,15 @@ public interface OrganizationPersistence extends BasePersistence<Organization> {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the organizations before and after the current organization in the ordered set where companyId = &#63; and parentOrganizationId = &#63;.
+	* Returns the organizations before and after the current organization in the ordered set where companyId = &#63; and parentOrganizationId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
 	* @param organizationId the primary key of the current organization
-	* @param companyId the company ID to search with
-	* @param parentOrganizationId the parent organization ID to search with
+	* @param companyId the company ID
+	* @param parentOrganizationId the parent organization ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next organization
 	* @throws com.liferay.portal.NoSuchOrganizationException if a organization with the primary key could not be found
@@ -555,10 +547,10 @@ public interface OrganizationPersistence extends BasePersistence<Organization> {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Filters by the user's permissions and finds all the organizations where companyId = &#63; and parentOrganizationId = &#63;.
+	* Returns all the organizations that the user has permission to view where companyId = &#63; and parentOrganizationId = &#63;.
 	*
-	* @param companyId the company ID to search with
-	* @param parentOrganizationId the parent organization ID to search with
+	* @param companyId the company ID
+	* @param parentOrganizationId the parent organization ID
 	* @return the matching organizations that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -567,16 +559,16 @@ public interface OrganizationPersistence extends BasePersistence<Organization> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Filters by the user's permissions and finds a range of all the organizations where companyId = &#63; and parentOrganizationId = &#63;.
+	* Returns a range of all the organizations that the user has permission to view where companyId = &#63; and parentOrganizationId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company ID to search with
-	* @param parentOrganizationId the parent organization ID to search with
-	* @param start the lower bound of the range of organizations to return
-	* @param end the upper bound of the range of organizations to return (not inclusive)
+	* @param companyId the company ID
+	* @param parentOrganizationId the parent organization ID
+	* @param start the lower bound of the range of organizations
+	* @param end the upper bound of the range of organizations (not inclusive)
 	* @return the range of matching organizations that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -585,16 +577,16 @@ public interface OrganizationPersistence extends BasePersistence<Organization> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Filters by the user's permissions and finds an ordered range of all the organizations where companyId = &#63; and parentOrganizationId = &#63;.
+	* Returns an ordered range of all the organizations that the user has permissions to view where companyId = &#63; and parentOrganizationId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company ID to search with
-	* @param parentOrganizationId the parent organization ID to search with
-	* @param start the lower bound of the range of organizations to return
-	* @param end the upper bound of the range of organizations to return (not inclusive)
+	* @param companyId the company ID
+	* @param parentOrganizationId the parent organization ID
+	* @param start the lower bound of the range of organizations
+	* @param end the upper bound of the range of organizations (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching organizations that the user has permission to view
 	* @throws SystemException if a system exception occurred
@@ -605,15 +597,11 @@ public interface OrganizationPersistence extends BasePersistence<Organization> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Filters the organizations before and after the current organization in the ordered set where companyId = &#63; and parentOrganizationId = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
-	* </p>
+	* Returns the organizations before and after the current organization in the ordered set of organizations that the user has permission to view where companyId = &#63; and parentOrganizationId = &#63;.
 	*
 	* @param organizationId the primary key of the current organization
-	* @param companyId the company ID to search with
-	* @param parentOrganizationId the parent organization ID to search with
+	* @param companyId the company ID
+	* @param parentOrganizationId the parent organization ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next organization
 	* @throws com.liferay.portal.NoSuchOrganizationException if a organization with the primary key could not be found
@@ -626,10 +614,10 @@ public interface OrganizationPersistence extends BasePersistence<Organization> {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the organization where companyId = &#63; and name = &#63; or throws a {@link com.liferay.portal.NoSuchOrganizationException} if it could not be found.
+	* Returns the organization where companyId = &#63; and name = &#63; or throws a {@link com.liferay.portal.NoSuchOrganizationException} if it could not be found.
 	*
-	* @param companyId the company ID to search with
-	* @param name the name to search with
+	* @param companyId the company ID
+	* @param name the name
 	* @return the matching organization
 	* @throws com.liferay.portal.NoSuchOrganizationException if a matching organization could not be found
 	* @throws SystemException if a system exception occurred
@@ -640,10 +628,10 @@ public interface OrganizationPersistence extends BasePersistence<Organization> {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the organization where companyId = &#63; and name = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	* Returns the organization where companyId = &#63; and name = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	*
-	* @param companyId the company ID to search with
-	* @param name the name to search with
+	* @param companyId the company ID
+	* @param name the name
 	* @return the matching organization, or <code>null</code> if a matching organization could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -652,10 +640,10 @@ public interface OrganizationPersistence extends BasePersistence<Organization> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the organization where companyId = &#63; and name = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	* Returns the organization where companyId = &#63; and name = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
-	* @param companyId the company ID to search with
-	* @param name the name to search with
+	* @param companyId the company ID
+	* @param name the name
 	* @return the matching organization, or <code>null</code> if a matching organization could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -664,7 +652,7 @@ public interface OrganizationPersistence extends BasePersistence<Organization> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds all the organizations.
+	* Returns all the organizations.
 	*
 	* @return the organizations
 	* @throws SystemException if a system exception occurred
@@ -673,14 +661,14 @@ public interface OrganizationPersistence extends BasePersistence<Organization> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds a range of all the organizations.
+	* Returns a range of all the organizations.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of organizations to return
-	* @param end the upper bound of the range of organizations to return (not inclusive)
+	* @param start the lower bound of the range of organizations
+	* @param end the upper bound of the range of organizations (not inclusive)
 	* @return the range of organizations
 	* @throws SystemException if a system exception occurred
 	*/
@@ -689,14 +677,14 @@ public interface OrganizationPersistence extends BasePersistence<Organization> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds an ordered range of all the organizations.
+	* Returns an ordered range of all the organizations.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of organizations to return
-	* @param end the upper bound of the range of organizations to return (not inclusive)
+	* @param start the lower bound of the range of organizations
+	* @param end the upper bound of the range of organizations (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of organizations
 	* @throws SystemException if a system exception occurred
@@ -709,7 +697,7 @@ public interface OrganizationPersistence extends BasePersistence<Organization> {
 	/**
 	* Removes all the organizations where companyId = &#63; from the database.
 	*
-	* @param companyId the company ID to search with
+	* @param companyId the company ID
 	* @throws SystemException if a system exception occurred
 	*/
 	public void removeByCompanyId(long companyId)
@@ -718,7 +706,7 @@ public interface OrganizationPersistence extends BasePersistence<Organization> {
 	/**
 	* Removes all the organizations where companyId = &#63; from the database.
 	*
-	* @param companyId the company ID to search with
+	* @param companyId the company ID
 	* @throws SystemException if a system exception occurred
 	*/
 	public void removeByLocations(long companyId)
@@ -727,8 +715,8 @@ public interface OrganizationPersistence extends BasePersistence<Organization> {
 	/**
 	* Removes all the organizations where companyId = &#63; and parentOrganizationId = &#63; from the database.
 	*
-	* @param companyId the company ID to search with
-	* @param parentOrganizationId the parent organization ID to search with
+	* @param companyId the company ID
+	* @param parentOrganizationId the parent organization ID
 	* @throws SystemException if a system exception occurred
 	*/
 	public void removeByC_P(long companyId, long parentOrganizationId)
@@ -737,8 +725,8 @@ public interface OrganizationPersistence extends BasePersistence<Organization> {
 	/**
 	* Removes the organization where companyId = &#63; and name = &#63; from the database.
 	*
-	* @param companyId the company ID to search with
-	* @param name the name to search with
+	* @param companyId the company ID
+	* @param name the name
 	* @throws SystemException if a system exception occurred
 	*/
 	public void removeByC_N(long companyId, java.lang.String name)
@@ -754,9 +742,9 @@ public interface OrganizationPersistence extends BasePersistence<Organization> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Counts all the organizations where companyId = &#63;.
+	* Returns the number of organizations where companyId = &#63;.
 	*
-	* @param companyId the company ID to search with
+	* @param companyId the company ID
 	* @return the number of matching organizations
 	* @throws SystemException if a system exception occurred
 	*/
@@ -764,9 +752,9 @@ public interface OrganizationPersistence extends BasePersistence<Organization> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Filters by the user's permissions and counts all the organizations where companyId = &#63;.
+	* Returns the number of organizations that the user has permission to view where companyId = &#63;.
 	*
-	* @param companyId the company ID to search with
+	* @param companyId the company ID
 	* @return the number of matching organizations that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -774,9 +762,9 @@ public interface OrganizationPersistence extends BasePersistence<Organization> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Counts all the organizations where companyId = &#63;.
+	* Returns the number of organizations where companyId = &#63;.
 	*
-	* @param companyId the company ID to search with
+	* @param companyId the company ID
 	* @return the number of matching organizations
 	* @throws SystemException if a system exception occurred
 	*/
@@ -784,9 +772,9 @@ public interface OrganizationPersistence extends BasePersistence<Organization> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Filters by the user's permissions and counts all the organizations where companyId = &#63;.
+	* Returns the number of organizations that the user has permission to view where companyId = &#63;.
 	*
-	* @param companyId the company ID to search with
+	* @param companyId the company ID
 	* @return the number of matching organizations that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -794,10 +782,10 @@ public interface OrganizationPersistence extends BasePersistence<Organization> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Counts all the organizations where companyId = &#63; and parentOrganizationId = &#63;.
+	* Returns the number of organizations where companyId = &#63; and parentOrganizationId = &#63;.
 	*
-	* @param companyId the company ID to search with
-	* @param parentOrganizationId the parent organization ID to search with
+	* @param companyId the company ID
+	* @param parentOrganizationId the parent organization ID
 	* @return the number of matching organizations
 	* @throws SystemException if a system exception occurred
 	*/
@@ -805,10 +793,10 @@ public interface OrganizationPersistence extends BasePersistence<Organization> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Filters by the user's permissions and counts all the organizations where companyId = &#63; and parentOrganizationId = &#63;.
+	* Returns the number of organizations that the user has permission to view where companyId = &#63; and parentOrganizationId = &#63;.
 	*
-	* @param companyId the company ID to search with
-	* @param parentOrganizationId the parent organization ID to search with
+	* @param companyId the company ID
+	* @param parentOrganizationId the parent organization ID
 	* @return the number of matching organizations that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -816,10 +804,10 @@ public interface OrganizationPersistence extends BasePersistence<Organization> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Counts all the organizations where companyId = &#63; and name = &#63;.
+	* Returns the number of organizations where companyId = &#63; and name = &#63;.
 	*
-	* @param companyId the company ID to search with
-	* @param name the name to search with
+	* @param companyId the company ID
+	* @param name the name
 	* @return the number of matching organizations
 	* @throws SystemException if a system exception occurred
 	*/
@@ -827,7 +815,7 @@ public interface OrganizationPersistence extends BasePersistence<Organization> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Counts all the organizations.
+	* Returns the number of organizations.
 	*
 	* @return the number of organizations
 	* @throws SystemException if a system exception occurred
@@ -836,9 +824,9 @@ public interface OrganizationPersistence extends BasePersistence<Organization> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Gets all the groups associated with the organization.
+	* Returns all the groups associated with the organization.
 	*
-	* @param pk the primary key of the organization to get the associated groups for
+	* @param pk the primary key of the organization
 	* @return the groups associated with the organization
 	* @throws SystemException if a system exception occurred
 	*/
@@ -846,15 +834,15 @@ public interface OrganizationPersistence extends BasePersistence<Organization> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Gets a range of all the groups associated with the organization.
+	* Returns a range of all the groups associated with the organization.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param pk the primary key of the organization to get the associated groups for
-	* @param start the lower bound of the range of organizations to return
-	* @param end the upper bound of the range of organizations to return (not inclusive)
+	* @param pk the primary key of the organization
+	* @param start the lower bound of the range of organizations
+	* @param end the upper bound of the range of organizations (not inclusive)
 	* @return the range of groups associated with the organization
 	* @throws SystemException if a system exception occurred
 	*/
@@ -863,15 +851,15 @@ public interface OrganizationPersistence extends BasePersistence<Organization> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Gets an ordered range of all the groups associated with the organization.
+	* Returns an ordered range of all the groups associated with the organization.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param pk the primary key of the organization to get the associated groups for
-	* @param start the lower bound of the range of organizations to return
-	* @param end the upper bound of the range of organizations to return (not inclusive)
+	* @param pk the primary key of the organization
+	* @param start the lower bound of the range of organizations
+	* @param end the upper bound of the range of organizations (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of groups associated with the organization
 	* @throws SystemException if a system exception occurred
@@ -882,9 +870,9 @@ public interface OrganizationPersistence extends BasePersistence<Organization> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Gets the number of groups associated with the organization.
+	* Returns the number of groups associated with the organization.
 	*
-	* @param pk the primary key of the organization to get the number of associated groups for
+	* @param pk the primary key of the organization
 	* @return the number of groups associated with the organization
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1006,7 +994,7 @@ public interface OrganizationPersistence extends BasePersistence<Organization> {
 	/**
 	* Sets the groups associated with the organization, removing and adding associations as necessary. Also notifies the appropriate model listeners and clears the mapping table finder cache.
 	*
-	* @param pk the primary key of the organization to set the associations for
+	* @param pk the primary key of the organization
 	* @param groupPKs the primary keys of the groups to be associated with the organization
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1016,7 +1004,7 @@ public interface OrganizationPersistence extends BasePersistence<Organization> {
 	/**
 	* Sets the groups associated with the organization, removing and adding associations as necessary. Also notifies the appropriate model listeners and clears the mapping table finder cache.
 	*
-	* @param pk the primary key of the organization to set the associations for
+	* @param pk the primary key of the organization
 	* @param groups the groups to be associated with the organization
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1025,9 +1013,9 @@ public interface OrganizationPersistence extends BasePersistence<Organization> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Gets all the users associated with the organization.
+	* Returns all the users associated with the organization.
 	*
-	* @param pk the primary key of the organization to get the associated users for
+	* @param pk the primary key of the organization
 	* @return the users associated with the organization
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1035,15 +1023,15 @@ public interface OrganizationPersistence extends BasePersistence<Organization> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Gets a range of all the users associated with the organization.
+	* Returns a range of all the users associated with the organization.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param pk the primary key of the organization to get the associated users for
-	* @param start the lower bound of the range of organizations to return
-	* @param end the upper bound of the range of organizations to return (not inclusive)
+	* @param pk the primary key of the organization
+	* @param start the lower bound of the range of organizations
+	* @param end the upper bound of the range of organizations (not inclusive)
 	* @return the range of users associated with the organization
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1052,15 +1040,15 @@ public interface OrganizationPersistence extends BasePersistence<Organization> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Gets an ordered range of all the users associated with the organization.
+	* Returns an ordered range of all the users associated with the organization.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param pk the primary key of the organization to get the associated users for
-	* @param start the lower bound of the range of organizations to return
-	* @param end the upper bound of the range of organizations to return (not inclusive)
+	* @param pk the primary key of the organization
+	* @param start the lower bound of the range of organizations
+	* @param end the upper bound of the range of organizations (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of users associated with the organization
 	* @throws SystemException if a system exception occurred
@@ -1071,9 +1059,9 @@ public interface OrganizationPersistence extends BasePersistence<Organization> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Gets the number of users associated with the organization.
+	* Returns the number of users associated with the organization.
 	*
-	* @param pk the primary key of the organization to get the number of associated users for
+	* @param pk the primary key of the organization
 	* @return the number of users associated with the organization
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1195,7 +1183,7 @@ public interface OrganizationPersistence extends BasePersistence<Organization> {
 	/**
 	* Sets the users associated with the organization, removing and adding associations as necessary. Also notifies the appropriate model listeners and clears the mapping table finder cache.
 	*
-	* @param pk the primary key of the organization to set the associations for
+	* @param pk the primary key of the organization
 	* @param userPKs the primary keys of the users to be associated with the organization
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1205,7 +1193,7 @@ public interface OrganizationPersistence extends BasePersistence<Organization> {
 	/**
 	* Sets the users associated with the organization, removing and adding associations as necessary. Also notifies the appropriate model listeners and clears the mapping table finder cache.
 	*
-	* @param pk the primary key of the organization to set the associations for
+	* @param pk the primary key of the organization
 	* @param users the users to be associated with the organization
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1220,7 +1208,7 @@ public interface OrganizationPersistence extends BasePersistence<Organization> {
 	* Only call this method if the tree has become stale through operations other than normal CRUD. Under normal circumstances the tree is automatically rebuilt whenver necessary.
 	* </p>
 	*
-	* @param companyId the id of the scope to rebuild the tree for
+	* @param companyId the ID of the scope
 	* @param force whether to force the rebuild even if the tree is not stale
 	*/
 	public void rebuildTree(long companyId, boolean force)

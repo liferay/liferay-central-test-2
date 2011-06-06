@@ -121,7 +121,7 @@ public class ShoppingCategoryUtil {
 	/**
 	* Caches the shopping category in the entity cache if it is enabled.
 	*
-	* @param shoppingCategory the shopping category to cache
+	* @param shoppingCategory the shopping category
 	*/
 	public static void cacheResult(
 		com.liferay.portlet.shopping.model.ShoppingCategory shoppingCategory) {
@@ -131,7 +131,7 @@ public class ShoppingCategoryUtil {
 	/**
 	* Caches the shopping categories in the entity cache if it is enabled.
 	*
-	* @param shoppingCategories the shopping categories to cache
+	* @param shoppingCategories the shopping categories
 	*/
 	public static void cacheResult(
 		java.util.List<com.liferay.portlet.shopping.model.ShoppingCategory> shoppingCategories) {
@@ -152,7 +152,7 @@ public class ShoppingCategoryUtil {
 	/**
 	* Removes the shopping category with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param categoryId the primary key of the shopping category to remove
+	* @param categoryId the primary key of the shopping category
 	* @return the shopping category that was removed
 	* @throws com.liferay.portlet.shopping.NoSuchCategoryException if a shopping category with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -172,9 +172,9 @@ public class ShoppingCategoryUtil {
 	}
 
 	/**
-	* Finds the shopping category with the primary key or throws a {@link com.liferay.portlet.shopping.NoSuchCategoryException} if it could not be found.
+	* Returns the shopping category with the primary key or throws a {@link com.liferay.portlet.shopping.NoSuchCategoryException} if it could not be found.
 	*
-	* @param categoryId the primary key of the shopping category to find
+	* @param categoryId the primary key of the shopping category
 	* @return the shopping category
 	* @throws com.liferay.portlet.shopping.NoSuchCategoryException if a shopping category with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -187,9 +187,9 @@ public class ShoppingCategoryUtil {
 	}
 
 	/**
-	* Finds the shopping category with the primary key or returns <code>null</code> if it could not be found.
+	* Returns the shopping category with the primary key or returns <code>null</code> if it could not be found.
 	*
-	* @param categoryId the primary key of the shopping category to find
+	* @param categoryId the primary key of the shopping category
 	* @return the shopping category, or <code>null</code> if a shopping category with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -200,9 +200,9 @@ public class ShoppingCategoryUtil {
 	}
 
 	/**
-	* Finds all the shopping categories where groupId = &#63;.
+	* Returns all the shopping categories where groupId = &#63;.
 	*
-	* @param groupId the group ID to search with
+	* @param groupId the group ID
 	* @return the matching shopping categories
 	* @throws SystemException if a system exception occurred
 	*/
@@ -213,15 +213,15 @@ public class ShoppingCategoryUtil {
 	}
 
 	/**
-	* Finds a range of all the shopping categories where groupId = &#63;.
+	* Returns a range of all the shopping categories where groupId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param start the lower bound of the range of shopping categories to return
-	* @param end the upper bound of the range of shopping categories to return (not inclusive)
+	* @param groupId the group ID
+	* @param start the lower bound of the range of shopping categories
+	* @param end the upper bound of the range of shopping categories (not inclusive)
 	* @return the range of matching shopping categories
 	* @throws SystemException if a system exception occurred
 	*/
@@ -232,15 +232,15 @@ public class ShoppingCategoryUtil {
 	}
 
 	/**
-	* Finds an ordered range of all the shopping categories where groupId = &#63;.
+	* Returns an ordered range of all the shopping categories where groupId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param start the lower bound of the range of shopping categories to return
-	* @param end the upper bound of the range of shopping categories to return (not inclusive)
+	* @param groupId the group ID
+	* @param start the lower bound of the range of shopping categories
+	* @param end the upper bound of the range of shopping categories (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching shopping categories
 	* @throws SystemException if a system exception occurred
@@ -254,13 +254,13 @@ public class ShoppingCategoryUtil {
 	}
 
 	/**
-	* Finds the first shopping category in the ordered set where groupId = &#63;.
+	* Returns the first shopping category in the ordered set where groupId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
+	* @param groupId the group ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching shopping category
 	* @throws com.liferay.portlet.shopping.NoSuchCategoryException if a matching shopping category could not be found
@@ -275,13 +275,13 @@ public class ShoppingCategoryUtil {
 	}
 
 	/**
-	* Finds the last shopping category in the ordered set where groupId = &#63;.
+	* Returns the last shopping category in the ordered set where groupId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
+	* @param groupId the group ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching shopping category
 	* @throws com.liferay.portlet.shopping.NoSuchCategoryException if a matching shopping category could not be found
@@ -296,14 +296,14 @@ public class ShoppingCategoryUtil {
 	}
 
 	/**
-	* Finds the shopping categories before and after the current shopping category in the ordered set where groupId = &#63;.
+	* Returns the shopping categories before and after the current shopping category in the ordered set where groupId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
 	* @param categoryId the primary key of the current shopping category
-	* @param groupId the group ID to search with
+	* @param groupId the group ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next shopping category
 	* @throws com.liferay.portlet.shopping.NoSuchCategoryException if a shopping category with the primary key could not be found
@@ -320,9 +320,9 @@ public class ShoppingCategoryUtil {
 	}
 
 	/**
-	* Filters by the user's permissions and finds all the shopping categories where groupId = &#63;.
+	* Returns all the shopping categories that the user has permission to view where groupId = &#63;.
 	*
-	* @param groupId the group ID to search with
+	* @param groupId the group ID
 	* @return the matching shopping categories that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -333,15 +333,15 @@ public class ShoppingCategoryUtil {
 	}
 
 	/**
-	* Filters by the user's permissions and finds a range of all the shopping categories where groupId = &#63;.
+	* Returns a range of all the shopping categories that the user has permission to view where groupId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param start the lower bound of the range of shopping categories to return
-	* @param end the upper bound of the range of shopping categories to return (not inclusive)
+	* @param groupId the group ID
+	* @param start the lower bound of the range of shopping categories
+	* @param end the upper bound of the range of shopping categories (not inclusive)
 	* @return the range of matching shopping categories that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -352,15 +352,15 @@ public class ShoppingCategoryUtil {
 	}
 
 	/**
-	* Filters by the user's permissions and finds an ordered range of all the shopping categories where groupId = &#63;.
+	* Returns an ordered range of all the shopping categories that the user has permissions to view where groupId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param start the lower bound of the range of shopping categories to return
-	* @param end the upper bound of the range of shopping categories to return (not inclusive)
+	* @param groupId the group ID
+	* @param start the lower bound of the range of shopping categories
+	* @param end the upper bound of the range of shopping categories (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching shopping categories that the user has permission to view
 	* @throws SystemException if a system exception occurred
@@ -374,14 +374,10 @@ public class ShoppingCategoryUtil {
 	}
 
 	/**
-	* Filters the shopping categories before and after the current shopping category in the ordered set where groupId = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
-	* </p>
+	* Returns the shopping categories before and after the current shopping category in the ordered set of shopping categories that the user has permission to view where groupId = &#63;.
 	*
 	* @param categoryId the primary key of the current shopping category
-	* @param groupId the group ID to search with
+	* @param groupId the group ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next shopping category
 	* @throws com.liferay.portlet.shopping.NoSuchCategoryException if a shopping category with the primary key could not be found
@@ -398,10 +394,10 @@ public class ShoppingCategoryUtil {
 	}
 
 	/**
-	* Finds all the shopping categories where groupId = &#63; and parentCategoryId = &#63;.
+	* Returns all the shopping categories where groupId = &#63; and parentCategoryId = &#63;.
 	*
-	* @param groupId the group ID to search with
-	* @param parentCategoryId the parent category ID to search with
+	* @param groupId the group ID
+	* @param parentCategoryId the parent category ID
 	* @return the matching shopping categories
 	* @throws SystemException if a system exception occurred
 	*/
@@ -412,16 +408,16 @@ public class ShoppingCategoryUtil {
 	}
 
 	/**
-	* Finds a range of all the shopping categories where groupId = &#63; and parentCategoryId = &#63;.
+	* Returns a range of all the shopping categories where groupId = &#63; and parentCategoryId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param parentCategoryId the parent category ID to search with
-	* @param start the lower bound of the range of shopping categories to return
-	* @param end the upper bound of the range of shopping categories to return (not inclusive)
+	* @param groupId the group ID
+	* @param parentCategoryId the parent category ID
+	* @param start the lower bound of the range of shopping categories
+	* @param end the upper bound of the range of shopping categories (not inclusive)
 	* @return the range of matching shopping categories
 	* @throws SystemException if a system exception occurred
 	*/
@@ -432,16 +428,16 @@ public class ShoppingCategoryUtil {
 	}
 
 	/**
-	* Finds an ordered range of all the shopping categories where groupId = &#63; and parentCategoryId = &#63;.
+	* Returns an ordered range of all the shopping categories where groupId = &#63; and parentCategoryId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param parentCategoryId the parent category ID to search with
-	* @param start the lower bound of the range of shopping categories to return
-	* @param end the upper bound of the range of shopping categories to return (not inclusive)
+	* @param groupId the group ID
+	* @param parentCategoryId the parent category ID
+	* @param start the lower bound of the range of shopping categories
+	* @param end the upper bound of the range of shopping categories (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching shopping categories
 	* @throws SystemException if a system exception occurred
@@ -456,14 +452,14 @@ public class ShoppingCategoryUtil {
 	}
 
 	/**
-	* Finds the first shopping category in the ordered set where groupId = &#63; and parentCategoryId = &#63;.
+	* Returns the first shopping category in the ordered set where groupId = &#63; and parentCategoryId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param parentCategoryId the parent category ID to search with
+	* @param groupId the group ID
+	* @param parentCategoryId the parent category ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching shopping category
 	* @throws com.liferay.portlet.shopping.NoSuchCategoryException if a matching shopping category could not be found
@@ -479,14 +475,14 @@ public class ShoppingCategoryUtil {
 	}
 
 	/**
-	* Finds the last shopping category in the ordered set where groupId = &#63; and parentCategoryId = &#63;.
+	* Returns the last shopping category in the ordered set where groupId = &#63; and parentCategoryId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param parentCategoryId the parent category ID to search with
+	* @param groupId the group ID
+	* @param parentCategoryId the parent category ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching shopping category
 	* @throws com.liferay.portlet.shopping.NoSuchCategoryException if a matching shopping category could not be found
@@ -502,15 +498,15 @@ public class ShoppingCategoryUtil {
 	}
 
 	/**
-	* Finds the shopping categories before and after the current shopping category in the ordered set where groupId = &#63; and parentCategoryId = &#63;.
+	* Returns the shopping categories before and after the current shopping category in the ordered set where groupId = &#63; and parentCategoryId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
 	* @param categoryId the primary key of the current shopping category
-	* @param groupId the group ID to search with
-	* @param parentCategoryId the parent category ID to search with
+	* @param groupId the group ID
+	* @param parentCategoryId the parent category ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next shopping category
 	* @throws com.liferay.portlet.shopping.NoSuchCategoryException if a shopping category with the primary key could not be found
@@ -527,10 +523,10 @@ public class ShoppingCategoryUtil {
 	}
 
 	/**
-	* Filters by the user's permissions and finds all the shopping categories where groupId = &#63; and parentCategoryId = &#63;.
+	* Returns all the shopping categories that the user has permission to view where groupId = &#63; and parentCategoryId = &#63;.
 	*
-	* @param groupId the group ID to search with
-	* @param parentCategoryId the parent category ID to search with
+	* @param groupId the group ID
+	* @param parentCategoryId the parent category ID
 	* @return the matching shopping categories that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -541,16 +537,16 @@ public class ShoppingCategoryUtil {
 	}
 
 	/**
-	* Filters by the user's permissions and finds a range of all the shopping categories where groupId = &#63; and parentCategoryId = &#63;.
+	* Returns a range of all the shopping categories that the user has permission to view where groupId = &#63; and parentCategoryId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param parentCategoryId the parent category ID to search with
-	* @param start the lower bound of the range of shopping categories to return
-	* @param end the upper bound of the range of shopping categories to return (not inclusive)
+	* @param groupId the group ID
+	* @param parentCategoryId the parent category ID
+	* @param start the lower bound of the range of shopping categories
+	* @param end the upper bound of the range of shopping categories (not inclusive)
 	* @return the range of matching shopping categories that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -562,16 +558,16 @@ public class ShoppingCategoryUtil {
 	}
 
 	/**
-	* Filters by the user's permissions and finds an ordered range of all the shopping categories where groupId = &#63; and parentCategoryId = &#63;.
+	* Returns an ordered range of all the shopping categories that the user has permissions to view where groupId = &#63; and parentCategoryId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param parentCategoryId the parent category ID to search with
-	* @param start the lower bound of the range of shopping categories to return
-	* @param end the upper bound of the range of shopping categories to return (not inclusive)
+	* @param groupId the group ID
+	* @param parentCategoryId the parent category ID
+	* @param start the lower bound of the range of shopping categories
+	* @param end the upper bound of the range of shopping categories (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching shopping categories that the user has permission to view
 	* @throws SystemException if a system exception occurred
@@ -586,15 +582,11 @@ public class ShoppingCategoryUtil {
 	}
 
 	/**
-	* Filters the shopping categories before and after the current shopping category in the ordered set where groupId = &#63; and parentCategoryId = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
-	* </p>
+	* Returns the shopping categories before and after the current shopping category in the ordered set of shopping categories that the user has permission to view where groupId = &#63; and parentCategoryId = &#63;.
 	*
 	* @param categoryId the primary key of the current shopping category
-	* @param groupId the group ID to search with
-	* @param parentCategoryId the parent category ID to search with
+	* @param groupId the group ID
+	* @param parentCategoryId the parent category ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next shopping category
 	* @throws com.liferay.portlet.shopping.NoSuchCategoryException if a shopping category with the primary key could not be found
@@ -611,7 +603,7 @@ public class ShoppingCategoryUtil {
 	}
 
 	/**
-	* Finds all the shopping categories.
+	* Returns all the shopping categories.
 	*
 	* @return the shopping categories
 	* @throws SystemException if a system exception occurred
@@ -622,14 +614,14 @@ public class ShoppingCategoryUtil {
 	}
 
 	/**
-	* Finds a range of all the shopping categories.
+	* Returns a range of all the shopping categories.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of shopping categories to return
-	* @param end the upper bound of the range of shopping categories to return (not inclusive)
+	* @param start the lower bound of the range of shopping categories
+	* @param end the upper bound of the range of shopping categories (not inclusive)
 	* @return the range of shopping categories
 	* @throws SystemException if a system exception occurred
 	*/
@@ -640,14 +632,14 @@ public class ShoppingCategoryUtil {
 	}
 
 	/**
-	* Finds an ordered range of all the shopping categories.
+	* Returns an ordered range of all the shopping categories.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of shopping categories to return
-	* @param end the upper bound of the range of shopping categories to return (not inclusive)
+	* @param start the lower bound of the range of shopping categories
+	* @param end the upper bound of the range of shopping categories (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of shopping categories
 	* @throws SystemException if a system exception occurred
@@ -662,7 +654,7 @@ public class ShoppingCategoryUtil {
 	/**
 	* Removes all the shopping categories where groupId = &#63; from the database.
 	*
-	* @param groupId the group ID to search with
+	* @param groupId the group ID
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByGroupId(long groupId)
@@ -673,8 +665,8 @@ public class ShoppingCategoryUtil {
 	/**
 	* Removes all the shopping categories where groupId = &#63; and parentCategoryId = &#63; from the database.
 	*
-	* @param groupId the group ID to search with
-	* @param parentCategoryId the parent category ID to search with
+	* @param groupId the group ID
+	* @param parentCategoryId the parent category ID
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByG_P(long groupId, long parentCategoryId)
@@ -693,9 +685,9 @@ public class ShoppingCategoryUtil {
 	}
 
 	/**
-	* Counts all the shopping categories where groupId = &#63;.
+	* Returns the number of shopping categories where groupId = &#63;.
 	*
-	* @param groupId the group ID to search with
+	* @param groupId the group ID
 	* @return the number of matching shopping categories
 	* @throws SystemException if a system exception occurred
 	*/
@@ -705,9 +697,9 @@ public class ShoppingCategoryUtil {
 	}
 
 	/**
-	* Filters by the user's permissions and counts all the shopping categories where groupId = &#63;.
+	* Returns the number of shopping categories that the user has permission to view where groupId = &#63;.
 	*
-	* @param groupId the group ID to search with
+	* @param groupId the group ID
 	* @return the number of matching shopping categories that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -717,10 +709,10 @@ public class ShoppingCategoryUtil {
 	}
 
 	/**
-	* Counts all the shopping categories where groupId = &#63; and parentCategoryId = &#63;.
+	* Returns the number of shopping categories where groupId = &#63; and parentCategoryId = &#63;.
 	*
-	* @param groupId the group ID to search with
-	* @param parentCategoryId the parent category ID to search with
+	* @param groupId the group ID
+	* @param parentCategoryId the parent category ID
 	* @return the number of matching shopping categories
 	* @throws SystemException if a system exception occurred
 	*/
@@ -730,10 +722,10 @@ public class ShoppingCategoryUtil {
 	}
 
 	/**
-	* Filters by the user's permissions and counts all the shopping categories where groupId = &#63; and parentCategoryId = &#63;.
+	* Returns the number of shopping categories that the user has permission to view where groupId = &#63; and parentCategoryId = &#63;.
 	*
-	* @param groupId the group ID to search with
-	* @param parentCategoryId the parent category ID to search with
+	* @param groupId the group ID
+	* @param parentCategoryId the parent category ID
 	* @return the number of matching shopping categories that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -743,7 +735,7 @@ public class ShoppingCategoryUtil {
 	}
 
 	/**
-	* Counts all the shopping categories.
+	* Returns the number of shopping categories.
 	*
 	* @return the number of shopping categories
 	* @throws SystemException if a system exception occurred

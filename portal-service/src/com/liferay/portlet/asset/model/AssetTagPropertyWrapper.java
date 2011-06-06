@@ -37,7 +37,7 @@ public class AssetTagPropertyWrapper implements AssetTagProperty {
 	}
 
 	/**
-	* Gets the primary key of this asset tag property.
+	* Returns the primary key of this asset tag property.
 	*
 	* @return the primary key of this asset tag property
 	*/
@@ -46,7 +46,7 @@ public class AssetTagPropertyWrapper implements AssetTagProperty {
 	}
 
 	/**
-	* Sets the primary key of this asset tag property
+	* Sets the primary key of this asset tag property.
 	*
 	* @param primaryKey the primary key of this asset tag property
 	*/
@@ -55,7 +55,7 @@ public class AssetTagPropertyWrapper implements AssetTagProperty {
 	}
 
 	/**
-	* Gets the tag property ID of this asset tag property.
+	* Returns the tag property ID of this asset tag property.
 	*
 	* @return the tag property ID of this asset tag property
 	*/
@@ -73,7 +73,7 @@ public class AssetTagPropertyWrapper implements AssetTagProperty {
 	}
 
 	/**
-	* Gets the company ID of this asset tag property.
+	* Returns the company ID of this asset tag property.
 	*
 	* @return the company ID of this asset tag property
 	*/
@@ -91,7 +91,7 @@ public class AssetTagPropertyWrapper implements AssetTagProperty {
 	}
 
 	/**
-	* Gets the user ID of this asset tag property.
+	* Returns the user ID of this asset tag property.
 	*
 	* @return the user ID of this asset tag property
 	*/
@@ -109,7 +109,7 @@ public class AssetTagPropertyWrapper implements AssetTagProperty {
 	}
 
 	/**
-	* Gets the user uuid of this asset tag property.
+	* Returns the user uuid of this asset tag property.
 	*
 	* @return the user uuid of this asset tag property
 	* @throws SystemException if a system exception occurred
@@ -129,7 +129,7 @@ public class AssetTagPropertyWrapper implements AssetTagProperty {
 	}
 
 	/**
-	* Gets the user name of this asset tag property.
+	* Returns the user name of this asset tag property.
 	*
 	* @return the user name of this asset tag property
 	*/
@@ -147,7 +147,7 @@ public class AssetTagPropertyWrapper implements AssetTagProperty {
 	}
 
 	/**
-	* Gets the create date of this asset tag property.
+	* Returns the create date of this asset tag property.
 	*
 	* @return the create date of this asset tag property
 	*/
@@ -165,7 +165,7 @@ public class AssetTagPropertyWrapper implements AssetTagProperty {
 	}
 
 	/**
-	* Gets the modified date of this asset tag property.
+	* Returns the modified date of this asset tag property.
 	*
 	* @return the modified date of this asset tag property
 	*/
@@ -183,7 +183,7 @@ public class AssetTagPropertyWrapper implements AssetTagProperty {
 	}
 
 	/**
-	* Gets the tag ID of this asset tag property.
+	* Returns the tag ID of this asset tag property.
 	*
 	* @return the tag ID of this asset tag property
 	*/
@@ -201,7 +201,7 @@ public class AssetTagPropertyWrapper implements AssetTagProperty {
 	}
 
 	/**
-	* Gets the key of this asset tag property.
+	* Returns the key of this asset tag property.
 	*
 	* @return the key of this asset tag property
 	*/
@@ -219,7 +219,7 @@ public class AssetTagPropertyWrapper implements AssetTagProperty {
 	}
 
 	/**
-	* Gets the value of this asset tag property.
+	* Returns the value of this asset tag property.
 	*
 	* @return the value of this asset tag property
 	*/

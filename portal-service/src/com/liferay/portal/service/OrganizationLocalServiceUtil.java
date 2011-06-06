@@ -41,7 +41,7 @@ public class OrganizationLocalServiceUtil {
 	/**
 	* Adds the organization to the database. Also notifies the appropriate model listeners.
 	*
-	* @param organization the organization to add
+	* @param organization the organization
 	* @return the organization that was added
 	* @throws SystemException if a system exception occurred
 	*/
@@ -65,7 +65,7 @@ public class OrganizationLocalServiceUtil {
 	/**
 	* Deletes the organization with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param organizationId the primary key of the organization to delete
+	* @param organizationId the primary key of the organization
 	* @throws PortalException if a organization with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -78,7 +78,7 @@ public class OrganizationLocalServiceUtil {
 	/**
 	* Deletes the organization from the database. Also notifies the appropriate model listeners.
 	*
-	* @param organization the organization to delete
+	* @param organization the organization
 	* @throws PortalException
 	* @throws SystemException if a system exception occurred
 	*/
@@ -92,7 +92,7 @@ public class OrganizationLocalServiceUtil {
 	/**
 	* Performs a dynamic query on the database and returns the matching rows.
 	*
-	* @param dynamicQuery the dynamic query to search with
+	* @param dynamicQuery the dynamic query
 	* @return the matching rows
 	* @throws SystemException if a system exception occurred
 	*/
@@ -110,9 +110,9 @@ public class OrganizationLocalServiceUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param dynamicQuery the dynamic query to search with
-	* @param start the lower bound of the range of model instances to return
-	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param dynamicQuery the dynamic query
+	* @param start the lower bound of the range of model instances
+	* @param end the upper bound of the range of model instances (not inclusive)
 	* @return the range of matching rows
 	* @throws SystemException if a system exception occurred
 	*/
@@ -130,9 +130,9 @@ public class OrganizationLocalServiceUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param dynamicQuery the dynamic query to search with
-	* @param start the lower bound of the range of model instances to return
-	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param dynamicQuery the dynamic query
+	* @param start the lower bound of the range of model instances
+	* @param end the upper bound of the range of model instances (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching rows
 	* @throws SystemException if a system exception occurred
@@ -148,9 +148,9 @@ public class OrganizationLocalServiceUtil {
 	}
 
 	/**
-	* Counts the number of rows that match the dynamic query.
+	* Returns the number of rows that match the dynamic query.
 	*
-	* @param dynamicQuery the dynamic query to search with
+	* @param dynamicQuery the dynamic query
 	* @return the number of rows that match the dynamic query
 	* @throws SystemException if a system exception occurred
 	*/
@@ -161,9 +161,9 @@ public class OrganizationLocalServiceUtil {
 	}
 
 	/**
-	* Gets the organization with the primary key.
+	* Returns the organization with the primary key.
 	*
-	* @param organizationId the primary key of the organization to get
+	* @param organizationId the primary key of the organization
 	* @return the organization
 	* @throws PortalException if a organization with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -176,14 +176,14 @@ public class OrganizationLocalServiceUtil {
 	}
 
 	/**
-	* Gets a range of all the organizations.
+	* Returns a range of all the organizations.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of organizations to return
-	* @param end the upper bound of the range of organizations to return (not inclusive)
+	* @param start the lower bound of the range of organizations
+	* @param end the upper bound of the range of organizations (not inclusive)
 	* @return the range of organizations
 	* @throws SystemException if a system exception occurred
 	*/
@@ -194,7 +194,7 @@ public class OrganizationLocalServiceUtil {
 	}
 
 	/**
-	* Gets the number of organizations.
+	* Returns the number of organizations.
 	*
 	* @return the number of organizations
 	* @throws SystemException if a system exception occurred
@@ -207,7 +207,7 @@ public class OrganizationLocalServiceUtil {
 	/**
 	* Updates the organization in the database. Also notifies the appropriate model listeners.
 	*
-	* @param organization the organization to update
+	* @param organization the organization
 	* @return the organization that was updated
 	* @throws SystemException if a system exception occurred
 	*/
@@ -220,7 +220,7 @@ public class OrganizationLocalServiceUtil {
 	/**
 	* Updates the organization in the database. Also notifies the appropriate model listeners.
 	*
-	* @param organization the organization to update
+	* @param organization the organization
 	* @param merge whether to merge the organization with the current session. See {@link com.liferay.portal.service.persistence.BatchSession#update(com.liferay.portal.kernel.dao.orm.Session, com.liferay.portal.model.BaseModel, boolean)} for an explanation.
 	* @return the organization that was updated
 	* @throws SystemException if a system exception occurred
@@ -232,7 +232,7 @@ public class OrganizationLocalServiceUtil {
 	}
 
 	/**
-	* Gets the Spring bean ID for this bean.
+	* Returns the Spring bean ID for this bean.
 	*
 	* @return the Spring bean ID for this bean
 	*/

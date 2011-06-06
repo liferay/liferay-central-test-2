@@ -42,21 +42,21 @@ public interface LayoutSetModel extends BaseModel<LayoutSet> {
 	 */
 
 	/**
-	 * Gets the primary key of this layout set.
+	 * Returns the primary key of this layout set.
 	 *
 	 * @return the primary key of this layout set
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this layout set
+	 * Sets the primary key of this layout set.
 	 *
 	 * @param primaryKey the primary key of this layout set
 	 */
 	public void setPrimaryKey(long primaryKey);
 
 	/**
-	 * Gets the layout set ID of this layout set.
+	 * Returns the layout set ID of this layout set.
 	 *
 	 * @return the layout set ID of this layout set
 	 */
@@ -70,7 +70,7 @@ public interface LayoutSetModel extends BaseModel<LayoutSet> {
 	public void setLayoutSetId(long layoutSetId);
 
 	/**
-	 * Gets the group ID of this layout set.
+	 * Returns the group ID of this layout set.
 	 *
 	 * @return the group ID of this layout set
 	 */
@@ -84,7 +84,7 @@ public interface LayoutSetModel extends BaseModel<LayoutSet> {
 	public void setGroupId(long groupId);
 
 	/**
-	 * Gets the company ID of this layout set.
+	 * Returns the company ID of this layout set.
 	 *
 	 * @return the company ID of this layout set
 	 */
@@ -98,7 +98,7 @@ public interface LayoutSetModel extends BaseModel<LayoutSet> {
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the private layout of this layout set.
+	 * Returns the private layout of this layout set.
 	 *
 	 * @return the private layout of this layout set
 	 */
@@ -119,7 +119,7 @@ public interface LayoutSetModel extends BaseModel<LayoutSet> {
 	public void setPrivateLayout(boolean privateLayout);
 
 	/**
-	 * Gets the logo of this layout set.
+	 * Returns the logo of this layout set.
 	 *
 	 * @return the logo of this layout set
 	 */
@@ -140,7 +140,7 @@ public interface LayoutSetModel extends BaseModel<LayoutSet> {
 	public void setLogo(boolean logo);
 
 	/**
-	 * Gets the logo ID of this layout set.
+	 * Returns the logo ID of this layout set.
 	 *
 	 * @return the logo ID of this layout set
 	 */
@@ -154,7 +154,7 @@ public interface LayoutSetModel extends BaseModel<LayoutSet> {
 	public void setLogoId(long logoId);
 
 	/**
-	 * Gets the theme ID of this layout set.
+	 * Returns the theme ID of this layout set.
 	 *
 	 * @return the theme ID of this layout set
 	 */
@@ -169,7 +169,7 @@ public interface LayoutSetModel extends BaseModel<LayoutSet> {
 	public void setThemeId(String themeId);
 
 	/**
-	 * Gets the color scheme ID of this layout set.
+	 * Returns the color scheme ID of this layout set.
 	 *
 	 * @return the color scheme ID of this layout set
 	 */
@@ -184,7 +184,7 @@ public interface LayoutSetModel extends BaseModel<LayoutSet> {
 	public void setColorSchemeId(String colorSchemeId);
 
 	/**
-	 * Gets the wap theme ID of this layout set.
+	 * Returns the wap theme ID of this layout set.
 	 *
 	 * @return the wap theme ID of this layout set
 	 */
@@ -199,7 +199,7 @@ public interface LayoutSetModel extends BaseModel<LayoutSet> {
 	public void setWapThemeId(String wapThemeId);
 
 	/**
-	 * Gets the wap color scheme ID of this layout set.
+	 * Returns the wap color scheme ID of this layout set.
 	 *
 	 * @return the wap color scheme ID of this layout set
 	 */
@@ -214,7 +214,7 @@ public interface LayoutSetModel extends BaseModel<LayoutSet> {
 	public void setWapColorSchemeId(String wapColorSchemeId);
 
 	/**
-	 * Gets the css of this layout set.
+	 * Returns the css of this layout set.
 	 *
 	 * @return the css of this layout set
 	 */
@@ -229,7 +229,7 @@ public interface LayoutSetModel extends BaseModel<LayoutSet> {
 	public void setCss(String css);
 
 	/**
-	 * Gets the page count of this layout set.
+	 * Returns the page count of this layout set.
 	 *
 	 * @return the page count of this layout set
 	 */
@@ -243,7 +243,7 @@ public interface LayoutSetModel extends BaseModel<LayoutSet> {
 	public void setPageCount(int pageCount);
 
 	/**
-	 * Gets the settings of this layout set.
+	 * Returns the settings of this layout set.
 	 *
 	 * @return the settings of this layout set
 	 */
@@ -258,7 +258,7 @@ public interface LayoutSetModel extends BaseModel<LayoutSet> {
 	public void setSettings(String settings);
 
 	/**
-	 * Gets the layout set prototype ID of this layout set.
+	 * Returns the layout set prototype ID of this layout set.
 	 *
 	 * @return the layout set prototype ID of this layout set
 	 */

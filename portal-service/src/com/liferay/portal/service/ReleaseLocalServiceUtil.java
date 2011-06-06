@@ -41,7 +41,7 @@ public class ReleaseLocalServiceUtil {
 	/**
 	* Adds the release to the database. Also notifies the appropriate model listeners.
 	*
-	* @param release the release to add
+	* @param release the release
 	* @return the release that was added
 	* @throws SystemException if a system exception occurred
 	*/
@@ -64,7 +64,7 @@ public class ReleaseLocalServiceUtil {
 	/**
 	* Deletes the release with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param releaseId the primary key of the release to delete
+	* @param releaseId the primary key of the release
 	* @throws PortalException if a release with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -77,7 +77,7 @@ public class ReleaseLocalServiceUtil {
 	/**
 	* Deletes the release from the database. Also notifies the appropriate model listeners.
 	*
-	* @param release the release to delete
+	* @param release the release
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void deleteRelease(com.liferay.portal.model.Release release)
@@ -88,7 +88,7 @@ public class ReleaseLocalServiceUtil {
 	/**
 	* Performs a dynamic query on the database and returns the matching rows.
 	*
-	* @param dynamicQuery the dynamic query to search with
+	* @param dynamicQuery the dynamic query
 	* @return the matching rows
 	* @throws SystemException if a system exception occurred
 	*/
@@ -106,9 +106,9 @@ public class ReleaseLocalServiceUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param dynamicQuery the dynamic query to search with
-	* @param start the lower bound of the range of model instances to return
-	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param dynamicQuery the dynamic query
+	* @param start the lower bound of the range of model instances
+	* @param end the upper bound of the range of model instances (not inclusive)
 	* @return the range of matching rows
 	* @throws SystemException if a system exception occurred
 	*/
@@ -126,9 +126,9 @@ public class ReleaseLocalServiceUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param dynamicQuery the dynamic query to search with
-	* @param start the lower bound of the range of model instances to return
-	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param dynamicQuery the dynamic query
+	* @param start the lower bound of the range of model instances
+	* @param end the upper bound of the range of model instances (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching rows
 	* @throws SystemException if a system exception occurred
@@ -144,9 +144,9 @@ public class ReleaseLocalServiceUtil {
 	}
 
 	/**
-	* Counts the number of rows that match the dynamic query.
+	* Returns the number of rows that match the dynamic query.
 	*
-	* @param dynamicQuery the dynamic query to search with
+	* @param dynamicQuery the dynamic query
 	* @return the number of rows that match the dynamic query
 	* @throws SystemException if a system exception occurred
 	*/
@@ -157,9 +157,9 @@ public class ReleaseLocalServiceUtil {
 	}
 
 	/**
-	* Gets the release with the primary key.
+	* Returns the release with the primary key.
 	*
-	* @param releaseId the primary key of the release to get
+	* @param releaseId the primary key of the release
 	* @return the release
 	* @throws PortalException if a release with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -171,14 +171,14 @@ public class ReleaseLocalServiceUtil {
 	}
 
 	/**
-	* Gets a range of all the releases.
+	* Returns a range of all the releases.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of releases to return
-	* @param end the upper bound of the range of releases to return (not inclusive)
+	* @param start the lower bound of the range of releases
+	* @param end the upper bound of the range of releases (not inclusive)
 	* @return the range of releases
 	* @throws SystemException if a system exception occurred
 	*/
@@ -189,7 +189,7 @@ public class ReleaseLocalServiceUtil {
 	}
 
 	/**
-	* Gets the number of releases.
+	* Returns the number of releases.
 	*
 	* @return the number of releases
 	* @throws SystemException if a system exception occurred
@@ -202,7 +202,7 @@ public class ReleaseLocalServiceUtil {
 	/**
 	* Updates the release in the database. Also notifies the appropriate model listeners.
 	*
-	* @param release the release to update
+	* @param release the release
 	* @return the release that was updated
 	* @throws SystemException if a system exception occurred
 	*/
@@ -215,7 +215,7 @@ public class ReleaseLocalServiceUtil {
 	/**
 	* Updates the release in the database. Also notifies the appropriate model listeners.
 	*
-	* @param release the release to update
+	* @param release the release
 	* @param merge whether to merge the release with the current session. See {@link com.liferay.portal.service.persistence.BatchSession#update(com.liferay.portal.kernel.dao.orm.Session, com.liferay.portal.model.BaseModel, boolean)} for an explanation.
 	* @return the release that was updated
 	* @throws SystemException if a system exception occurred
@@ -227,7 +227,7 @@ public class ReleaseLocalServiceUtil {
 	}
 
 	/**
-	* Gets the Spring bean ID for this bean.
+	* Returns the Spring bean ID for this bean.
 	*
 	* @return the Spring bean ID for this bean
 	*/

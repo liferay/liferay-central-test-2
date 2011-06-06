@@ -47,21 +47,21 @@ public interface IGFolderModel extends BaseModel<IGFolder>, GroupedModel {
 	 */
 
 	/**
-	 * Gets the primary key of this i g folder.
+	 * Returns the primary key of this i g folder.
 	 *
 	 * @return the primary key of this i g folder
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this i g folder
+	 * Sets the primary key of this i g folder.
 	 *
 	 * @param primaryKey the primary key of this i g folder
 	 */
 	public void setPrimaryKey(long primaryKey);
 
 	/**
-	 * Gets the uuid of this i g folder.
+	 * Returns the uuid of this i g folder.
 	 *
 	 * @return the uuid of this i g folder
 	 */
@@ -76,7 +76,7 @@ public interface IGFolderModel extends BaseModel<IGFolder>, GroupedModel {
 	public void setUuid(String uuid);
 
 	/**
-	 * Gets the folder ID of this i g folder.
+	 * Returns the folder ID of this i g folder.
 	 *
 	 * @return the folder ID of this i g folder
 	 */
@@ -90,7 +90,7 @@ public interface IGFolderModel extends BaseModel<IGFolder>, GroupedModel {
 	public void setFolderId(long folderId);
 
 	/**
-	 * Gets the group ID of this i g folder.
+	 * Returns the group ID of this i g folder.
 	 *
 	 * @return the group ID of this i g folder
 	 */
@@ -104,7 +104,7 @@ public interface IGFolderModel extends BaseModel<IGFolder>, GroupedModel {
 	public void setGroupId(long groupId);
 
 	/**
-	 * Gets the company ID of this i g folder.
+	 * Returns the company ID of this i g folder.
 	 *
 	 * @return the company ID of this i g folder
 	 */
@@ -118,7 +118,7 @@ public interface IGFolderModel extends BaseModel<IGFolder>, GroupedModel {
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the user ID of this i g folder.
+	 * Returns the user ID of this i g folder.
 	 *
 	 * @return the user ID of this i g folder
 	 */
@@ -132,7 +132,7 @@ public interface IGFolderModel extends BaseModel<IGFolder>, GroupedModel {
 	public void setUserId(long userId);
 
 	/**
-	 * Gets the user uuid of this i g folder.
+	 * Returns the user uuid of this i g folder.
 	 *
 	 * @return the user uuid of this i g folder
 	 * @throws SystemException if a system exception occurred
@@ -147,7 +147,7 @@ public interface IGFolderModel extends BaseModel<IGFolder>, GroupedModel {
 	public void setUserUuid(String userUuid);
 
 	/**
-	 * Gets the user name of this i g folder.
+	 * Returns the user name of this i g folder.
 	 *
 	 * @return the user name of this i g folder
 	 */
@@ -162,7 +162,7 @@ public interface IGFolderModel extends BaseModel<IGFolder>, GroupedModel {
 	public void setUserName(String userName);
 
 	/**
-	 * Gets the create date of this i g folder.
+	 * Returns the create date of this i g folder.
 	 *
 	 * @return the create date of this i g folder
 	 */
@@ -176,7 +176,7 @@ public interface IGFolderModel extends BaseModel<IGFolder>, GroupedModel {
 	public void setCreateDate(Date createDate);
 
 	/**
-	 * Gets the modified date of this i g folder.
+	 * Returns the modified date of this i g folder.
 	 *
 	 * @return the modified date of this i g folder
 	 */
@@ -190,7 +190,7 @@ public interface IGFolderModel extends BaseModel<IGFolder>, GroupedModel {
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
-	 * Gets the parent folder ID of this i g folder.
+	 * Returns the parent folder ID of this i g folder.
 	 *
 	 * @return the parent folder ID of this i g folder
 	 */
@@ -204,7 +204,7 @@ public interface IGFolderModel extends BaseModel<IGFolder>, GroupedModel {
 	public void setParentFolderId(long parentFolderId);
 
 	/**
-	 * Gets the name of this i g folder.
+	 * Returns the name of this i g folder.
 	 *
 	 * @return the name of this i g folder
 	 */
@@ -219,7 +219,7 @@ public interface IGFolderModel extends BaseModel<IGFolder>, GroupedModel {
 	public void setName(String name);
 
 	/**
-	 * Gets the description of this i g folder.
+	 * Returns the description of this i g folder.
 	 *
 	 * @return the description of this i g folder
 	 */

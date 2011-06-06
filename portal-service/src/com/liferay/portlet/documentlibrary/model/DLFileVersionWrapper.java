@@ -37,7 +37,7 @@ public class DLFileVersionWrapper implements DLFileVersion {
 	}
 
 	/**
-	* Gets the primary key of this d l file version.
+	* Returns the primary key of this d l file version.
 	*
 	* @return the primary key of this d l file version
 	*/
@@ -46,7 +46,7 @@ public class DLFileVersionWrapper implements DLFileVersion {
 	}
 
 	/**
-	* Sets the primary key of this d l file version
+	* Sets the primary key of this d l file version.
 	*
 	* @param primaryKey the primary key of this d l file version
 	*/
@@ -55,7 +55,7 @@ public class DLFileVersionWrapper implements DLFileVersion {
 	}
 
 	/**
-	* Gets the file version ID of this d l file version.
+	* Returns the file version ID of this d l file version.
 	*
 	* @return the file version ID of this d l file version
 	*/
@@ -73,7 +73,7 @@ public class DLFileVersionWrapper implements DLFileVersion {
 	}
 
 	/**
-	* Gets the group ID of this d l file version.
+	* Returns the group ID of this d l file version.
 	*
 	* @return the group ID of this d l file version
 	*/
@@ -91,7 +91,7 @@ public class DLFileVersionWrapper implements DLFileVersion {
 	}
 
 	/**
-	* Gets the company ID of this d l file version.
+	* Returns the company ID of this d l file version.
 	*
 	* @return the company ID of this d l file version
 	*/
@@ -109,7 +109,7 @@ public class DLFileVersionWrapper implements DLFileVersion {
 	}
 
 	/**
-	* Gets the user ID of this d l file version.
+	* Returns the user ID of this d l file version.
 	*
 	* @return the user ID of this d l file version
 	*/
@@ -127,7 +127,7 @@ public class DLFileVersionWrapper implements DLFileVersion {
 	}
 
 	/**
-	* Gets the user uuid of this d l file version.
+	* Returns the user uuid of this d l file version.
 	*
 	* @return the user uuid of this d l file version
 	* @throws SystemException if a system exception occurred
@@ -147,7 +147,7 @@ public class DLFileVersionWrapper implements DLFileVersion {
 	}
 
 	/**
-	* Gets the user name of this d l file version.
+	* Returns the user name of this d l file version.
 	*
 	* @return the user name of this d l file version
 	*/
@@ -165,7 +165,7 @@ public class DLFileVersionWrapper implements DLFileVersion {
 	}
 
 	/**
-	* Gets the create date of this d l file version.
+	* Returns the create date of this d l file version.
 	*
 	* @return the create date of this d l file version
 	*/
@@ -183,7 +183,7 @@ public class DLFileVersionWrapper implements DLFileVersion {
 	}
 
 	/**
-	* Gets the repository ID of this d l file version.
+	* Returns the repository ID of this d l file version.
 	*
 	* @return the repository ID of this d l file version
 	*/
@@ -201,7 +201,7 @@ public class DLFileVersionWrapper implements DLFileVersion {
 	}
 
 	/**
-	* Gets the file entry ID of this d l file version.
+	* Returns the file entry ID of this d l file version.
 	*
 	* @return the file entry ID of this d l file version
 	*/
@@ -219,7 +219,7 @@ public class DLFileVersionWrapper implements DLFileVersion {
 	}
 
 	/**
-	* Gets the extension of this d l file version.
+	* Returns the extension of this d l file version.
 	*
 	* @return the extension of this d l file version
 	*/
@@ -237,7 +237,7 @@ public class DLFileVersionWrapper implements DLFileVersion {
 	}
 
 	/**
-	* Gets the mime type of this d l file version.
+	* Returns the mime type of this d l file version.
 	*
 	* @return the mime type of this d l file version
 	*/
@@ -255,7 +255,7 @@ public class DLFileVersionWrapper implements DLFileVersion {
 	}
 
 	/**
-	* Gets the title of this d l file version.
+	* Returns the title of this d l file version.
 	*
 	* @return the title of this d l file version
 	*/
@@ -273,7 +273,7 @@ public class DLFileVersionWrapper implements DLFileVersion {
 	}
 
 	/**
-	* Gets the description of this d l file version.
+	* Returns the description of this d l file version.
 	*
 	* @return the description of this d l file version
 	*/
@@ -291,7 +291,7 @@ public class DLFileVersionWrapper implements DLFileVersion {
 	}
 
 	/**
-	* Gets the change log of this d l file version.
+	* Returns the change log of this d l file version.
 	*
 	* @return the change log of this d l file version
 	*/
@@ -309,7 +309,7 @@ public class DLFileVersionWrapper implements DLFileVersion {
 	}
 
 	/**
-	* Gets the extra settings of this d l file version.
+	* Returns the extra settings of this d l file version.
 	*
 	* @return the extra settings of this d l file version
 	*/
@@ -327,7 +327,7 @@ public class DLFileVersionWrapper implements DLFileVersion {
 	}
 
 	/**
-	* Gets the document type ID of this d l file version.
+	* Returns the document type ID of this d l file version.
 	*
 	* @return the document type ID of this d l file version
 	*/
@@ -345,7 +345,7 @@ public class DLFileVersionWrapper implements DLFileVersion {
 	}
 
 	/**
-	* Gets the version of this d l file version.
+	* Returns the version of this d l file version.
 	*
 	* @return the version of this d l file version
 	*/
@@ -363,7 +363,7 @@ public class DLFileVersionWrapper implements DLFileVersion {
 	}
 
 	/**
-	* Gets the size of this d l file version.
+	* Returns the size of this d l file version.
 	*
 	* @return the size of this d l file version
 	*/
@@ -381,7 +381,7 @@ public class DLFileVersionWrapper implements DLFileVersion {
 	}
 
 	/**
-	* Gets the status of this d l file version.
+	* Returns the status of this d l file version.
 	*
 	* @return the status of this d l file version
 	*/
@@ -399,7 +399,7 @@ public class DLFileVersionWrapper implements DLFileVersion {
 	}
 
 	/**
-	* Gets the status by user ID of this d l file version.
+	* Returns the status by user ID of this d l file version.
 	*
 	* @return the status by user ID of this d l file version
 	*/
@@ -417,7 +417,7 @@ public class DLFileVersionWrapper implements DLFileVersion {
 	}
 
 	/**
-	* Gets the status by user uuid of this d l file version.
+	* Returns the status by user uuid of this d l file version.
 	*
 	* @return the status by user uuid of this d l file version
 	* @throws SystemException if a system exception occurred
@@ -437,7 +437,7 @@ public class DLFileVersionWrapper implements DLFileVersion {
 	}
 
 	/**
-	* Gets the status by user name of this d l file version.
+	* Returns the status by user name of this d l file version.
 	*
 	* @return the status by user name of this d l file version
 	*/
@@ -455,7 +455,7 @@ public class DLFileVersionWrapper implements DLFileVersion {
 	}
 
 	/**
-	* Gets the status date of this d l file version.
+	* Returns the status date of this d l file version.
 	*
 	* @return the status date of this d l file version
 	*/
@@ -473,7 +473,7 @@ public class DLFileVersionWrapper implements DLFileVersion {
 	}
 
 	/**
-	* @deprecated {@link #isApproved}
+	* @deprecated Renamed to {@link #isApproved()}
 	*/
 	public boolean getApproved() {
 		return _dlFileVersion.getApproved();

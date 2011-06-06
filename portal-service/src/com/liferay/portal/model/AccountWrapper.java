@@ -37,7 +37,7 @@ public class AccountWrapper implements Account {
 	}
 
 	/**
-	* Gets the primary key of this account.
+	* Returns the primary key of this account.
 	*
 	* @return the primary key of this account
 	*/
@@ -46,7 +46,7 @@ public class AccountWrapper implements Account {
 	}
 
 	/**
-	* Sets the primary key of this account
+	* Sets the primary key of this account.
 	*
 	* @param primaryKey the primary key of this account
 	*/
@@ -55,7 +55,7 @@ public class AccountWrapper implements Account {
 	}
 
 	/**
-	* Gets the account ID of this account.
+	* Returns the account ID of this account.
 	*
 	* @return the account ID of this account
 	*/
@@ -73,7 +73,7 @@ public class AccountWrapper implements Account {
 	}
 
 	/**
-	* Gets the company ID of this account.
+	* Returns the company ID of this account.
 	*
 	* @return the company ID of this account
 	*/
@@ -91,7 +91,7 @@ public class AccountWrapper implements Account {
 	}
 
 	/**
-	* Gets the user ID of this account.
+	* Returns the user ID of this account.
 	*
 	* @return the user ID of this account
 	*/
@@ -109,7 +109,7 @@ public class AccountWrapper implements Account {
 	}
 
 	/**
-	* Gets the user uuid of this account.
+	* Returns the user uuid of this account.
 	*
 	* @return the user uuid of this account
 	* @throws SystemException if a system exception occurred
@@ -129,7 +129,7 @@ public class AccountWrapper implements Account {
 	}
 
 	/**
-	* Gets the user name of this account.
+	* Returns the user name of this account.
 	*
 	* @return the user name of this account
 	*/
@@ -147,7 +147,7 @@ public class AccountWrapper implements Account {
 	}
 
 	/**
-	* Gets the create date of this account.
+	* Returns the create date of this account.
 	*
 	* @return the create date of this account
 	*/
@@ -165,7 +165,7 @@ public class AccountWrapper implements Account {
 	}
 
 	/**
-	* Gets the modified date of this account.
+	* Returns the modified date of this account.
 	*
 	* @return the modified date of this account
 	*/
@@ -183,7 +183,7 @@ public class AccountWrapper implements Account {
 	}
 
 	/**
-	* Gets the parent account ID of this account.
+	* Returns the parent account ID of this account.
 	*
 	* @return the parent account ID of this account
 	*/
@@ -201,7 +201,7 @@ public class AccountWrapper implements Account {
 	}
 
 	/**
-	* Gets the name of this account.
+	* Returns the name of this account.
 	*
 	* @return the name of this account
 	*/
@@ -219,7 +219,7 @@ public class AccountWrapper implements Account {
 	}
 
 	/**
-	* Gets the legal name of this account.
+	* Returns the legal name of this account.
 	*
 	* @return the legal name of this account
 	*/
@@ -237,7 +237,7 @@ public class AccountWrapper implements Account {
 	}
 
 	/**
-	* Gets the legal ID of this account.
+	* Returns the legal ID of this account.
 	*
 	* @return the legal ID of this account
 	*/
@@ -255,7 +255,7 @@ public class AccountWrapper implements Account {
 	}
 
 	/**
-	* Gets the legal type of this account.
+	* Returns the legal type of this account.
 	*
 	* @return the legal type of this account
 	*/
@@ -273,7 +273,7 @@ public class AccountWrapper implements Account {
 	}
 
 	/**
-	* Gets the sic code of this account.
+	* Returns the sic code of this account.
 	*
 	* @return the sic code of this account
 	*/
@@ -291,7 +291,7 @@ public class AccountWrapper implements Account {
 	}
 
 	/**
-	* Gets the ticker symbol of this account.
+	* Returns the ticker symbol of this account.
 	*
 	* @return the ticker symbol of this account
 	*/
@@ -309,7 +309,7 @@ public class AccountWrapper implements Account {
 	}
 
 	/**
-	* Gets the industry of this account.
+	* Returns the industry of this account.
 	*
 	* @return the industry of this account
 	*/
@@ -327,7 +327,7 @@ public class AccountWrapper implements Account {
 	}
 
 	/**
-	* Gets the type of this account.
+	* Returns the type of this account.
 	*
 	* @return the type of this account
 	*/
@@ -345,7 +345,7 @@ public class AccountWrapper implements Account {
 	}
 
 	/**
-	* Gets the size of this account.
+	* Returns the size of this account.
 	*
 	* @return the size of this account
 	*/

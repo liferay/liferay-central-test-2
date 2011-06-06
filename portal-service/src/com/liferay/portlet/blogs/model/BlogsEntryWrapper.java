@@ -37,7 +37,7 @@ public class BlogsEntryWrapper implements BlogsEntry {
 	}
 
 	/**
-	* Gets the primary key of this blogs entry.
+	* Returns the primary key of this blogs entry.
 	*
 	* @return the primary key of this blogs entry
 	*/
@@ -46,7 +46,7 @@ public class BlogsEntryWrapper implements BlogsEntry {
 	}
 
 	/**
-	* Sets the primary key of this blogs entry
+	* Sets the primary key of this blogs entry.
 	*
 	* @param primaryKey the primary key of this blogs entry
 	*/
@@ -55,7 +55,7 @@ public class BlogsEntryWrapper implements BlogsEntry {
 	}
 
 	/**
-	* Gets the uuid of this blogs entry.
+	* Returns the uuid of this blogs entry.
 	*
 	* @return the uuid of this blogs entry
 	*/
@@ -73,7 +73,7 @@ public class BlogsEntryWrapper implements BlogsEntry {
 	}
 
 	/**
-	* Gets the entry ID of this blogs entry.
+	* Returns the entry ID of this blogs entry.
 	*
 	* @return the entry ID of this blogs entry
 	*/
@@ -91,7 +91,7 @@ public class BlogsEntryWrapper implements BlogsEntry {
 	}
 
 	/**
-	* Gets the group ID of this blogs entry.
+	* Returns the group ID of this blogs entry.
 	*
 	* @return the group ID of this blogs entry
 	*/
@@ -109,7 +109,7 @@ public class BlogsEntryWrapper implements BlogsEntry {
 	}
 
 	/**
-	* Gets the company ID of this blogs entry.
+	* Returns the company ID of this blogs entry.
 	*
 	* @return the company ID of this blogs entry
 	*/
@@ -127,7 +127,7 @@ public class BlogsEntryWrapper implements BlogsEntry {
 	}
 
 	/**
-	* Gets the user ID of this blogs entry.
+	* Returns the user ID of this blogs entry.
 	*
 	* @return the user ID of this blogs entry
 	*/
@@ -145,7 +145,7 @@ public class BlogsEntryWrapper implements BlogsEntry {
 	}
 
 	/**
-	* Gets the user uuid of this blogs entry.
+	* Returns the user uuid of this blogs entry.
 	*
 	* @return the user uuid of this blogs entry
 	* @throws SystemException if a system exception occurred
@@ -165,7 +165,7 @@ public class BlogsEntryWrapper implements BlogsEntry {
 	}
 
 	/**
-	* Gets the user name of this blogs entry.
+	* Returns the user name of this blogs entry.
 	*
 	* @return the user name of this blogs entry
 	*/
@@ -183,7 +183,7 @@ public class BlogsEntryWrapper implements BlogsEntry {
 	}
 
 	/**
-	* Gets the create date of this blogs entry.
+	* Returns the create date of this blogs entry.
 	*
 	* @return the create date of this blogs entry
 	*/
@@ -201,7 +201,7 @@ public class BlogsEntryWrapper implements BlogsEntry {
 	}
 
 	/**
-	* Gets the modified date of this blogs entry.
+	* Returns the modified date of this blogs entry.
 	*
 	* @return the modified date of this blogs entry
 	*/
@@ -219,7 +219,7 @@ public class BlogsEntryWrapper implements BlogsEntry {
 	}
 
 	/**
-	* Gets the title of this blogs entry.
+	* Returns the title of this blogs entry.
 	*
 	* @return the title of this blogs entry
 	*/
@@ -237,7 +237,7 @@ public class BlogsEntryWrapper implements BlogsEntry {
 	}
 
 	/**
-	* Gets the url title of this blogs entry.
+	* Returns the url title of this blogs entry.
 	*
 	* @return the url title of this blogs entry
 	*/
@@ -255,7 +255,7 @@ public class BlogsEntryWrapper implements BlogsEntry {
 	}
 
 	/**
-	* Gets the description of this blogs entry.
+	* Returns the description of this blogs entry.
 	*
 	* @return the description of this blogs entry
 	*/
@@ -273,7 +273,7 @@ public class BlogsEntryWrapper implements BlogsEntry {
 	}
 
 	/**
-	* Gets the content of this blogs entry.
+	* Returns the content of this blogs entry.
 	*
 	* @return the content of this blogs entry
 	*/
@@ -291,7 +291,7 @@ public class BlogsEntryWrapper implements BlogsEntry {
 	}
 
 	/**
-	* Gets the display date of this blogs entry.
+	* Returns the display date of this blogs entry.
 	*
 	* @return the display date of this blogs entry
 	*/
@@ -309,7 +309,7 @@ public class BlogsEntryWrapper implements BlogsEntry {
 	}
 
 	/**
-	* Gets the allow pingbacks of this blogs entry.
+	* Returns the allow pingbacks of this blogs entry.
 	*
 	* @return the allow pingbacks of this blogs entry
 	*/
@@ -336,7 +336,7 @@ public class BlogsEntryWrapper implements BlogsEntry {
 	}
 
 	/**
-	* Gets the allow trackbacks of this blogs entry.
+	* Returns the allow trackbacks of this blogs entry.
 	*
 	* @return the allow trackbacks of this blogs entry
 	*/
@@ -363,7 +363,7 @@ public class BlogsEntryWrapper implements BlogsEntry {
 	}
 
 	/**
-	* Gets the trackbacks of this blogs entry.
+	* Returns the trackbacks of this blogs entry.
 	*
 	* @return the trackbacks of this blogs entry
 	*/
@@ -381,7 +381,7 @@ public class BlogsEntryWrapper implements BlogsEntry {
 	}
 
 	/**
-	* Gets the small image of this blogs entry.
+	* Returns the small image of this blogs entry.
 	*
 	* @return the small image of this blogs entry
 	*/
@@ -408,7 +408,7 @@ public class BlogsEntryWrapper implements BlogsEntry {
 	}
 
 	/**
-	* Gets the small image ID of this blogs entry.
+	* Returns the small image ID of this blogs entry.
 	*
 	* @return the small image ID of this blogs entry
 	*/
@@ -426,7 +426,7 @@ public class BlogsEntryWrapper implements BlogsEntry {
 	}
 
 	/**
-	* Gets the small image u r l of this blogs entry.
+	* Returns the small image u r l of this blogs entry.
 	*
 	* @return the small image u r l of this blogs entry
 	*/
@@ -444,7 +444,7 @@ public class BlogsEntryWrapper implements BlogsEntry {
 	}
 
 	/**
-	* Gets the status of this blogs entry.
+	* Returns the status of this blogs entry.
 	*
 	* @return the status of this blogs entry
 	*/
@@ -462,7 +462,7 @@ public class BlogsEntryWrapper implements BlogsEntry {
 	}
 
 	/**
-	* Gets the status by user ID of this blogs entry.
+	* Returns the status by user ID of this blogs entry.
 	*
 	* @return the status by user ID of this blogs entry
 	*/
@@ -480,7 +480,7 @@ public class BlogsEntryWrapper implements BlogsEntry {
 	}
 
 	/**
-	* Gets the status by user uuid of this blogs entry.
+	* Returns the status by user uuid of this blogs entry.
 	*
 	* @return the status by user uuid of this blogs entry
 	* @throws SystemException if a system exception occurred
@@ -500,7 +500,7 @@ public class BlogsEntryWrapper implements BlogsEntry {
 	}
 
 	/**
-	* Gets the status by user name of this blogs entry.
+	* Returns the status by user name of this blogs entry.
 	*
 	* @return the status by user name of this blogs entry
 	*/
@@ -518,7 +518,7 @@ public class BlogsEntryWrapper implements BlogsEntry {
 	}
 
 	/**
-	* Gets the status date of this blogs entry.
+	* Returns the status date of this blogs entry.
 	*
 	* @return the status date of this blogs entry
 	*/
@@ -536,7 +536,7 @@ public class BlogsEntryWrapper implements BlogsEntry {
 	}
 
 	/**
-	* @deprecated {@link #isApproved}
+	* @deprecated Renamed to {@link #isApproved()}
 	*/
 	public boolean getApproved() {
 		return _blogsEntry.getApproved();

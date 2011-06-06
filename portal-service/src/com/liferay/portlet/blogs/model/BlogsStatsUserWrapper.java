@@ -37,7 +37,7 @@ public class BlogsStatsUserWrapper implements BlogsStatsUser {
 	}
 
 	/**
-	* Gets the primary key of this blogs stats user.
+	* Returns the primary key of this blogs stats user.
 	*
 	* @return the primary key of this blogs stats user
 	*/
@@ -46,7 +46,7 @@ public class BlogsStatsUserWrapper implements BlogsStatsUser {
 	}
 
 	/**
-	* Sets the primary key of this blogs stats user
+	* Sets the primary key of this blogs stats user.
 	*
 	* @param primaryKey the primary key of this blogs stats user
 	*/
@@ -55,7 +55,7 @@ public class BlogsStatsUserWrapper implements BlogsStatsUser {
 	}
 
 	/**
-	* Gets the stats user ID of this blogs stats user.
+	* Returns the stats user ID of this blogs stats user.
 	*
 	* @return the stats user ID of this blogs stats user
 	*/
@@ -73,7 +73,7 @@ public class BlogsStatsUserWrapper implements BlogsStatsUser {
 	}
 
 	/**
-	* Gets the stats user uuid of this blogs stats user.
+	* Returns the stats user uuid of this blogs stats user.
 	*
 	* @return the stats user uuid of this blogs stats user
 	* @throws SystemException if a system exception occurred
@@ -93,7 +93,7 @@ public class BlogsStatsUserWrapper implements BlogsStatsUser {
 	}
 
 	/**
-	* Gets the group ID of this blogs stats user.
+	* Returns the group ID of this blogs stats user.
 	*
 	* @return the group ID of this blogs stats user
 	*/
@@ -111,7 +111,7 @@ public class BlogsStatsUserWrapper implements BlogsStatsUser {
 	}
 
 	/**
-	* Gets the company ID of this blogs stats user.
+	* Returns the company ID of this blogs stats user.
 	*
 	* @return the company ID of this blogs stats user
 	*/
@@ -129,7 +129,7 @@ public class BlogsStatsUserWrapper implements BlogsStatsUser {
 	}
 
 	/**
-	* Gets the user ID of this blogs stats user.
+	* Returns the user ID of this blogs stats user.
 	*
 	* @return the user ID of this blogs stats user
 	*/
@@ -147,7 +147,7 @@ public class BlogsStatsUserWrapper implements BlogsStatsUser {
 	}
 
 	/**
-	* Gets the user uuid of this blogs stats user.
+	* Returns the user uuid of this blogs stats user.
 	*
 	* @return the user uuid of this blogs stats user
 	* @throws SystemException if a system exception occurred
@@ -167,7 +167,7 @@ public class BlogsStatsUserWrapper implements BlogsStatsUser {
 	}
 
 	/**
-	* Gets the entry count of this blogs stats user.
+	* Returns the entry count of this blogs stats user.
 	*
 	* @return the entry count of this blogs stats user
 	*/
@@ -185,7 +185,7 @@ public class BlogsStatsUserWrapper implements BlogsStatsUser {
 	}
 
 	/**
-	* Gets the last post date of this blogs stats user.
+	* Returns the last post date of this blogs stats user.
 	*
 	* @return the last post date of this blogs stats user
 	*/
@@ -203,7 +203,7 @@ public class BlogsStatsUserWrapper implements BlogsStatsUser {
 	}
 
 	/**
-	* Gets the ratings total entries of this blogs stats user.
+	* Returns the ratings total entries of this blogs stats user.
 	*
 	* @return the ratings total entries of this blogs stats user
 	*/
@@ -221,7 +221,7 @@ public class BlogsStatsUserWrapper implements BlogsStatsUser {
 	}
 
 	/**
-	* Gets the ratings total score of this blogs stats user.
+	* Returns the ratings total score of this blogs stats user.
 	*
 	* @return the ratings total score of this blogs stats user
 	*/
@@ -239,7 +239,7 @@ public class BlogsStatsUserWrapper implements BlogsStatsUser {
 	}
 
 	/**
-	* Gets the ratings average score of this blogs stats user.
+	* Returns the ratings average score of this blogs stats user.
 	*
 	* @return the ratings average score of this blogs stats user
 	*/

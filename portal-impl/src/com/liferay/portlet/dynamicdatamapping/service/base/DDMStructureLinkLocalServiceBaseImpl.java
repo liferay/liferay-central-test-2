@@ -77,7 +77,7 @@ public abstract class DDMStructureLinkLocalServiceBaseImpl
 	/**
 	 * Adds the d d m structure link to the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param ddmStructureLink the d d m structure link to add
+	 * @param ddmStructureLink the d d m structure link
 	 * @return the d d m structure link that was added
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -101,7 +101,7 @@ public abstract class DDMStructureLinkLocalServiceBaseImpl
 	/**
 	 * Deletes the d d m structure link with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param structureLinkId the primary key of the d d m structure link to delete
+	 * @param structureLinkId the primary key of the d d m structure link
 	 * @throws PortalException if a d d m structure link with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -113,7 +113,7 @@ public abstract class DDMStructureLinkLocalServiceBaseImpl
 	/**
 	 * Deletes the d d m structure link from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param ddmStructureLink the d d m structure link to delete
+	 * @param ddmStructureLink the d d m structure link
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void deleteDDMStructureLink(DDMStructureLink ddmStructureLink)
@@ -124,7 +124,7 @@ public abstract class DDMStructureLinkLocalServiceBaseImpl
 	/**
 	 * Performs a dynamic query on the database and returns the matching rows.
 	 *
-	 * @param dynamicQuery the dynamic query to search with
+	 * @param dynamicQuery the dynamic query
 	 * @return the matching rows
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -141,9 +141,9 @@ public abstract class DDMStructureLinkLocalServiceBaseImpl
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param dynamicQuery the dynamic query to search with
-	 * @param start the lower bound of the range of model instances to return
-	 * @param end the upper bound of the range of model instances to return (not inclusive)
+	 * @param dynamicQuery the dynamic query
+	 * @param start the lower bound of the range of model instances
+	 * @param end the upper bound of the range of model instances (not inclusive)
 	 * @return the range of matching rows
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -161,9 +161,9 @@ public abstract class DDMStructureLinkLocalServiceBaseImpl
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param dynamicQuery the dynamic query to search with
-	 * @param start the lower bound of the range of model instances to return
-	 * @param end the upper bound of the range of model instances to return (not inclusive)
+	 * @param dynamicQuery the dynamic query
+	 * @param start the lower bound of the range of model instances
+	 * @param end the upper bound of the range of model instances (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching rows
 	 * @throws SystemException if a system exception occurred
@@ -176,9 +176,9 @@ public abstract class DDMStructureLinkLocalServiceBaseImpl
 	}
 
 	/**
-	 * Counts the number of rows that match the dynamic query.
+	 * Returns the number of rows that match the dynamic query.
 	 *
-	 * @param dynamicQuery the dynamic query to search with
+	 * @param dynamicQuery the dynamic query
 	 * @return the number of rows that match the dynamic query
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -188,9 +188,9 @@ public abstract class DDMStructureLinkLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the d d m structure link with the primary key.
+	 * Returns the d d m structure link with the primary key.
 	 *
-	 * @param structureLinkId the primary key of the d d m structure link to get
+	 * @param structureLinkId the primary key of the d d m structure link
 	 * @return the d d m structure link
 	 * @throws PortalException if a d d m structure link with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -201,14 +201,14 @@ public abstract class DDMStructureLinkLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets a range of all the d d m structure links.
+	 * Returns a range of all the d d m structure links.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param start the lower bound of the range of d d m structure links to return
-	 * @param end the upper bound of the range of d d m structure links to return (not inclusive)
+	 * @param start the lower bound of the range of d d m structure links
+	 * @param end the upper bound of the range of d d m structure links (not inclusive)
 	 * @return the range of d d m structure links
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -218,7 +218,7 @@ public abstract class DDMStructureLinkLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the number of d d m structure links.
+	 * Returns the number of d d m structure links.
 	 *
 	 * @return the number of d d m structure links
 	 * @throws SystemException if a system exception occurred
@@ -230,7 +230,7 @@ public abstract class DDMStructureLinkLocalServiceBaseImpl
 	/**
 	 * Updates the d d m structure link in the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param ddmStructureLink the d d m structure link to update
+	 * @param ddmStructureLink the d d m structure link
 	 * @return the d d m structure link that was updated
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -244,7 +244,7 @@ public abstract class DDMStructureLinkLocalServiceBaseImpl
 	/**
 	 * Updates the d d m structure link in the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param ddmStructureLink the d d m structure link to update
+	 * @param ddmStructureLink the d d m structure link
 	 * @param merge whether to merge the d d m structure link with the current session. See {@link com.liferay.portal.service.persistence.BatchSession#update(com.liferay.portal.kernel.dao.orm.Session, com.liferay.portal.model.BaseModel, boolean)} for an explanation.
 	 * @return the d d m structure link that was updated
 	 * @throws SystemException if a system exception occurred
@@ -258,7 +258,7 @@ public abstract class DDMStructureLinkLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the d d m content local service.
+	 * Returns the d d m content local service.
 	 *
 	 * @return the d d m content local service
 	 */
@@ -277,7 +277,7 @@ public abstract class DDMStructureLinkLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the d d m content persistence.
+	 * Returns the d d m content persistence.
 	 *
 	 * @return the d d m content persistence
 	 */
@@ -296,7 +296,7 @@ public abstract class DDMStructureLinkLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the d d m storage link local service.
+	 * Returns the d d m storage link local service.
 	 *
 	 * @return the d d m storage link local service
 	 */
@@ -315,7 +315,7 @@ public abstract class DDMStructureLinkLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the d d m storage link persistence.
+	 * Returns the d d m storage link persistence.
 	 *
 	 * @return the d d m storage link persistence
 	 */
@@ -334,7 +334,7 @@ public abstract class DDMStructureLinkLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the d d m structure local service.
+	 * Returns the d d m structure local service.
 	 *
 	 * @return the d d m structure local service
 	 */
@@ -353,7 +353,7 @@ public abstract class DDMStructureLinkLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the d d m structure remote service.
+	 * Returns the d d m structure remote service.
 	 *
 	 * @return the d d m structure remote service
 	 */
@@ -371,7 +371,7 @@ public abstract class DDMStructureLinkLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the d d m structure persistence.
+	 * Returns the d d m structure persistence.
 	 *
 	 * @return the d d m structure persistence
 	 */
@@ -390,7 +390,7 @@ public abstract class DDMStructureLinkLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the d d m structure finder.
+	 * Returns the d d m structure finder.
 	 *
 	 * @return the d d m structure finder
 	 */
@@ -408,7 +408,7 @@ public abstract class DDMStructureLinkLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the d d m structure link local service.
+	 * Returns the d d m structure link local service.
 	 *
 	 * @return the d d m structure link local service
 	 */
@@ -427,7 +427,7 @@ public abstract class DDMStructureLinkLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the d d m structure link remote service.
+	 * Returns the d d m structure link remote service.
 	 *
 	 * @return the d d m structure link remote service
 	 */
@@ -446,7 +446,7 @@ public abstract class DDMStructureLinkLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the d d m structure link persistence.
+	 * Returns the d d m structure link persistence.
 	 *
 	 * @return the d d m structure link persistence
 	 */
@@ -465,7 +465,7 @@ public abstract class DDMStructureLinkLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the d d m template local service.
+	 * Returns the d d m template local service.
 	 *
 	 * @return the d d m template local service
 	 */
@@ -484,7 +484,7 @@ public abstract class DDMStructureLinkLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the d d m template remote service.
+	 * Returns the d d m template remote service.
 	 *
 	 * @return the d d m template remote service
 	 */
@@ -502,7 +502,7 @@ public abstract class DDMStructureLinkLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the d d m template persistence.
+	 * Returns the d d m template persistence.
 	 *
 	 * @return the d d m template persistence
 	 */
@@ -521,7 +521,7 @@ public abstract class DDMStructureLinkLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the d d m template finder.
+	 * Returns the d d m template finder.
 	 *
 	 * @return the d d m template finder
 	 */
@@ -539,7 +539,7 @@ public abstract class DDMStructureLinkLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the counter local service.
+	 * Returns the counter local service.
 	 *
 	 * @return the counter local service
 	 */
@@ -557,7 +557,7 @@ public abstract class DDMStructureLinkLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the resource local service.
+	 * Returns the resource local service.
 	 *
 	 * @return the resource local service
 	 */
@@ -576,7 +576,7 @@ public abstract class DDMStructureLinkLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the resource remote service.
+	 * Returns the resource remote service.
 	 *
 	 * @return the resource remote service
 	 */
@@ -594,7 +594,7 @@ public abstract class DDMStructureLinkLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the resource persistence.
+	 * Returns the resource persistence.
 	 *
 	 * @return the resource persistence
 	 */
@@ -612,7 +612,7 @@ public abstract class DDMStructureLinkLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the resource finder.
+	 * Returns the resource finder.
 	 *
 	 * @return the resource finder
 	 */
@@ -630,7 +630,7 @@ public abstract class DDMStructureLinkLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the user local service.
+	 * Returns the user local service.
 	 *
 	 * @return the user local service
 	 */
@@ -648,7 +648,7 @@ public abstract class DDMStructureLinkLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the user remote service.
+	 * Returns the user remote service.
 	 *
 	 * @return the user remote service
 	 */
@@ -666,7 +666,7 @@ public abstract class DDMStructureLinkLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the user persistence.
+	 * Returns the user persistence.
 	 *
 	 * @return the user persistence
 	 */
@@ -684,7 +684,7 @@ public abstract class DDMStructureLinkLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the user finder.
+	 * Returns the user finder.
 	 *
 	 * @return the user finder
 	 */
@@ -702,7 +702,7 @@ public abstract class DDMStructureLinkLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the Spring bean ID for this bean.
+	 * Returns the Spring bean ID for this bean.
 	 *
 	 * @return the Spring bean ID for this bean
 	 */
@@ -722,7 +722,7 @@ public abstract class DDMStructureLinkLocalServiceBaseImpl
 	/**
 	 * Performs an SQL query.
 	 *
-	 * @param sql the sql query to perform
+	 * @param sql the sql query
 	 */
 	protected void runSQL(String sql) throws SystemException {
 		try {

@@ -121,7 +121,7 @@ public class ExpandoRowUtil {
 	/**
 	* Caches the expando row in the entity cache if it is enabled.
 	*
-	* @param expandoRow the expando row to cache
+	* @param expandoRow the expando row
 	*/
 	public static void cacheResult(
 		com.liferay.portlet.expando.model.ExpandoRow expandoRow) {
@@ -131,7 +131,7 @@ public class ExpandoRowUtil {
 	/**
 	* Caches the expando rows in the entity cache if it is enabled.
 	*
-	* @param expandoRows the expando rows to cache
+	* @param expandoRows the expando rows
 	*/
 	public static void cacheResult(
 		java.util.List<com.liferay.portlet.expando.model.ExpandoRow> expandoRows) {
@@ -152,7 +152,7 @@ public class ExpandoRowUtil {
 	/**
 	* Removes the expando row with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param rowId the primary key of the expando row to remove
+	* @param rowId the primary key of the expando row
 	* @return the expando row that was removed
 	* @throws com.liferay.portlet.expando.NoSuchRowException if a expando row with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -171,9 +171,9 @@ public class ExpandoRowUtil {
 	}
 
 	/**
-	* Finds the expando row with the primary key or throws a {@link com.liferay.portlet.expando.NoSuchRowException} if it could not be found.
+	* Returns the expando row with the primary key or throws a {@link com.liferay.portlet.expando.NoSuchRowException} if it could not be found.
 	*
-	* @param rowId the primary key of the expando row to find
+	* @param rowId the primary key of the expando row
 	* @return the expando row
 	* @throws com.liferay.portlet.expando.NoSuchRowException if a expando row with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -186,9 +186,9 @@ public class ExpandoRowUtil {
 	}
 
 	/**
-	* Finds the expando row with the primary key or returns <code>null</code> if it could not be found.
+	* Returns the expando row with the primary key or returns <code>null</code> if it could not be found.
 	*
-	* @param rowId the primary key of the expando row to find
+	* @param rowId the primary key of the expando row
 	* @return the expando row, or <code>null</code> if a expando row with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -198,9 +198,9 @@ public class ExpandoRowUtil {
 	}
 
 	/**
-	* Finds all the expando rows where tableId = &#63;.
+	* Returns all the expando rows where tableId = &#63;.
 	*
-	* @param tableId the table ID to search with
+	* @param tableId the table ID
 	* @return the matching expando rows
 	* @throws SystemException if a system exception occurred
 	*/
@@ -211,15 +211,15 @@ public class ExpandoRowUtil {
 	}
 
 	/**
-	* Finds a range of all the expando rows where tableId = &#63;.
+	* Returns a range of all the expando rows where tableId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param tableId the table ID to search with
-	* @param start the lower bound of the range of expando rows to return
-	* @param end the upper bound of the range of expando rows to return (not inclusive)
+	* @param tableId the table ID
+	* @param start the lower bound of the range of expando rows
+	* @param end the upper bound of the range of expando rows (not inclusive)
 	* @return the range of matching expando rows
 	* @throws SystemException if a system exception occurred
 	*/
@@ -230,15 +230,15 @@ public class ExpandoRowUtil {
 	}
 
 	/**
-	* Finds an ordered range of all the expando rows where tableId = &#63;.
+	* Returns an ordered range of all the expando rows where tableId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param tableId the table ID to search with
-	* @param start the lower bound of the range of expando rows to return
-	* @param end the upper bound of the range of expando rows to return (not inclusive)
+	* @param tableId the table ID
+	* @param start the lower bound of the range of expando rows
+	* @param end the upper bound of the range of expando rows (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching expando rows
 	* @throws SystemException if a system exception occurred
@@ -252,13 +252,13 @@ public class ExpandoRowUtil {
 	}
 
 	/**
-	* Finds the first expando row in the ordered set where tableId = &#63;.
+	* Returns the first expando row in the ordered set where tableId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param tableId the table ID to search with
+	* @param tableId the table ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching expando row
 	* @throws com.liferay.portlet.expando.NoSuchRowException if a matching expando row could not be found
@@ -273,13 +273,13 @@ public class ExpandoRowUtil {
 	}
 
 	/**
-	* Finds the last expando row in the ordered set where tableId = &#63;.
+	* Returns the last expando row in the ordered set where tableId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param tableId the table ID to search with
+	* @param tableId the table ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching expando row
 	* @throws com.liferay.portlet.expando.NoSuchRowException if a matching expando row could not be found
@@ -294,14 +294,14 @@ public class ExpandoRowUtil {
 	}
 
 	/**
-	* Finds the expando rows before and after the current expando row in the ordered set where tableId = &#63;.
+	* Returns the expando rows before and after the current expando row in the ordered set where tableId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
 	* @param rowId the primary key of the current expando row
-	* @param tableId the table ID to search with
+	* @param tableId the table ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next expando row
 	* @throws com.liferay.portlet.expando.NoSuchRowException if a expando row with the primary key could not be found
@@ -317,10 +317,10 @@ public class ExpandoRowUtil {
 	}
 
 	/**
-	* Finds the expando row where tableId = &#63; and classPK = &#63; or throws a {@link com.liferay.portlet.expando.NoSuchRowException} if it could not be found.
+	* Returns the expando row where tableId = &#63; and classPK = &#63; or throws a {@link com.liferay.portlet.expando.NoSuchRowException} if it could not be found.
 	*
-	* @param tableId the table ID to search with
-	* @param classPK the class p k to search with
+	* @param tableId the table ID
+	* @param classPK the class p k
 	* @return the matching expando row
 	* @throws com.liferay.portlet.expando.NoSuchRowException if a matching expando row could not be found
 	* @throws SystemException if a system exception occurred
@@ -333,10 +333,10 @@ public class ExpandoRowUtil {
 	}
 
 	/**
-	* Finds the expando row where tableId = &#63; and classPK = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	* Returns the expando row where tableId = &#63; and classPK = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	*
-	* @param tableId the table ID to search with
-	* @param classPK the class p k to search with
+	* @param tableId the table ID
+	* @param classPK the class p k
 	* @return the matching expando row, or <code>null</code> if a matching expando row could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -347,10 +347,10 @@ public class ExpandoRowUtil {
 	}
 
 	/**
-	* Finds the expando row where tableId = &#63; and classPK = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	* Returns the expando row where tableId = &#63; and classPK = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
-	* @param tableId the table ID to search with
-	* @param classPK the class p k to search with
+	* @param tableId the table ID
+	* @param classPK the class p k
 	* @return the matching expando row, or <code>null</code> if a matching expando row could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -361,7 +361,7 @@ public class ExpandoRowUtil {
 	}
 
 	/**
-	* Finds all the expando rows.
+	* Returns all the expando rows.
 	*
 	* @return the expando rows
 	* @throws SystemException if a system exception occurred
@@ -372,14 +372,14 @@ public class ExpandoRowUtil {
 	}
 
 	/**
-	* Finds a range of all the expando rows.
+	* Returns a range of all the expando rows.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of expando rows to return
-	* @param end the upper bound of the range of expando rows to return (not inclusive)
+	* @param start the lower bound of the range of expando rows
+	* @param end the upper bound of the range of expando rows (not inclusive)
 	* @return the range of expando rows
 	* @throws SystemException if a system exception occurred
 	*/
@@ -390,14 +390,14 @@ public class ExpandoRowUtil {
 	}
 
 	/**
-	* Finds an ordered range of all the expando rows.
+	* Returns an ordered range of all the expando rows.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of expando rows to return
-	* @param end the upper bound of the range of expando rows to return (not inclusive)
+	* @param start the lower bound of the range of expando rows
+	* @param end the upper bound of the range of expando rows (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of expando rows
 	* @throws SystemException if a system exception occurred
@@ -412,7 +412,7 @@ public class ExpandoRowUtil {
 	/**
 	* Removes all the expando rows where tableId = &#63; from the database.
 	*
-	* @param tableId the table ID to search with
+	* @param tableId the table ID
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByTableId(long tableId)
@@ -423,8 +423,8 @@ public class ExpandoRowUtil {
 	/**
 	* Removes the expando row where tableId = &#63; and classPK = &#63; from the database.
 	*
-	* @param tableId the table ID to search with
-	* @param classPK the class p k to search with
+	* @param tableId the table ID
+	* @param classPK the class p k
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByT_C(long tableId, long classPK)
@@ -444,9 +444,9 @@ public class ExpandoRowUtil {
 	}
 
 	/**
-	* Counts all the expando rows where tableId = &#63;.
+	* Returns the number of expando rows where tableId = &#63;.
 	*
-	* @param tableId the table ID to search with
+	* @param tableId the table ID
 	* @return the number of matching expando rows
 	* @throws SystemException if a system exception occurred
 	*/
@@ -456,10 +456,10 @@ public class ExpandoRowUtil {
 	}
 
 	/**
-	* Counts all the expando rows where tableId = &#63; and classPK = &#63;.
+	* Returns the number of expando rows where tableId = &#63; and classPK = &#63;.
 	*
-	* @param tableId the table ID to search with
-	* @param classPK the class p k to search with
+	* @param tableId the table ID
+	* @param classPK the class p k
 	* @return the number of matching expando rows
 	* @throws SystemException if a system exception occurred
 	*/
@@ -469,7 +469,7 @@ public class ExpandoRowUtil {
 	}
 
 	/**
-	* Counts all the expando rows.
+	* Returns the number of expando rows.
 	*
 	* @return the number of expando rows
 	* @throws SystemException if a system exception occurred

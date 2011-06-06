@@ -161,7 +161,7 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 	/**
 	 * Caches the i g folder in the entity cache if it is enabled.
 	 *
-	 * @param igFolder the i g folder to cache
+	 * @param igFolder the i g folder
 	 */
 	public void cacheResult(IGFolder igFolder) {
 		EntityCacheUtil.putResult(IGFolderModelImpl.ENTITY_CACHE_ENABLED,
@@ -185,7 +185,7 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 	/**
 	 * Caches the i g folders in the entity cache if it is enabled.
 	 *
-	 * @param igFolders the i g folders to cache
+	 * @param igFolders the i g folders
 	 */
 	public void cacheResult(List<IGFolder> igFolders) {
 		for (IGFolder igFolder : igFolders) {
@@ -260,7 +260,7 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 	/**
 	 * Removes the i g folder with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param primaryKey the primary key of the i g folder to remove
+	 * @param primaryKey the primary key of the i g folder
 	 * @return the i g folder that was removed
 	 * @throws com.liferay.portal.NoSuchModelException if a i g folder with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -273,7 +273,7 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 	/**
 	 * Removes the i g folder with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param folderId the primary key of the i g folder to remove
+	 * @param folderId the primary key of the i g folder
 	 * @return the i g folder that was removed
 	 * @throws com.liferay.portlet.imagegallery.NoSuchFolderException if a i g folder with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -313,7 +313,7 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 	/**
 	 * Removes the i g folder from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param igFolder the i g folder to remove
+	 * @param igFolder the i g folder
 	 * @return the i g folder that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -476,9 +476,9 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 	}
 
 	/**
-	 * Finds the i g folder with the primary key or throws a {@link com.liferay.portal.NoSuchModelException} if it could not be found.
+	 * Returns the i g folder with the primary key or throws a {@link com.liferay.portal.NoSuchModelException} if it could not be found.
 	 *
-	 * @param primaryKey the primary key of the i g folder to find
+	 * @param primaryKey the primary key of the i g folder
 	 * @return the i g folder
 	 * @throws com.liferay.portal.NoSuchModelException if a i g folder with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -489,9 +489,9 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 	}
 
 	/**
-	 * Finds the i g folder with the primary key or throws a {@link com.liferay.portlet.imagegallery.NoSuchFolderException} if it could not be found.
+	 * Returns the i g folder with the primary key or throws a {@link com.liferay.portlet.imagegallery.NoSuchFolderException} if it could not be found.
 	 *
-	 * @param folderId the primary key of the i g folder to find
+	 * @param folderId the primary key of the i g folder
 	 * @return the i g folder
 	 * @throws com.liferay.portlet.imagegallery.NoSuchFolderException if a i g folder with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -513,9 +513,9 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 	}
 
 	/**
-	 * Finds the i g folder with the primary key or returns <code>null</code> if it could not be found.
+	 * Returns the i g folder with the primary key or returns <code>null</code> if it could not be found.
 	 *
-	 * @param primaryKey the primary key of the i g folder to find
+	 * @param primaryKey the primary key of the i g folder
 	 * @return the i g folder, or <code>null</code> if a i g folder with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -525,9 +525,9 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 	}
 
 	/**
-	 * Finds the i g folder with the primary key or returns <code>null</code> if it could not be found.
+	 * Returns the i g folder with the primary key or returns <code>null</code> if it could not be found.
 	 *
-	 * @param folderId the primary key of the i g folder to find
+	 * @param folderId the primary key of the i g folder
 	 * @return the i g folder, or <code>null</code> if a i g folder with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -560,9 +560,9 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 	}
 
 	/**
-	 * Finds all the i g folders where uuid = &#63;.
+	 * Returns all the i g folders where uuid = &#63;.
 	 *
-	 * @param uuid the uuid to search with
+	 * @param uuid the uuid
 	 * @return the matching i g folders
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -571,15 +571,15 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 	}
 
 	/**
-	 * Finds a range of all the i g folders where uuid = &#63;.
+	 * Returns a range of all the i g folders where uuid = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param uuid the uuid to search with
-	 * @param start the lower bound of the range of i g folders to return
-	 * @param end the upper bound of the range of i g folders to return (not inclusive)
+	 * @param uuid the uuid
+	 * @param start the lower bound of the range of i g folders
+	 * @param end the upper bound of the range of i g folders (not inclusive)
 	 * @return the range of matching i g folders
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -589,15 +589,15 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 	}
 
 	/**
-	 * Finds an ordered range of all the i g folders where uuid = &#63;.
+	 * Returns an ordered range of all the i g folders where uuid = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param uuid the uuid to search with
-	 * @param start the lower bound of the range of i g folders to return
-	 * @param end the upper bound of the range of i g folders to return (not inclusive)
+	 * @param uuid the uuid
+	 * @param start the lower bound of the range of i g folders
+	 * @param end the upper bound of the range of i g folders (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching i g folders
 	 * @throws SystemException if a system exception occurred
@@ -689,13 +689,13 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 	}
 
 	/**
-	 * Finds the first i g folder in the ordered set where uuid = &#63;.
+	 * Returns the first i g folder in the ordered set where uuid = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param uuid the uuid to search with
+	 * @param uuid the uuid
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching i g folder
 	 * @throws com.liferay.portlet.imagegallery.NoSuchFolderException if a matching i g folder could not be found
@@ -724,13 +724,13 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 	}
 
 	/**
-	 * Finds the last i g folder in the ordered set where uuid = &#63;.
+	 * Returns the last i g folder in the ordered set where uuid = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param uuid the uuid to search with
+	 * @param uuid the uuid
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching i g folder
 	 * @throws com.liferay.portlet.imagegallery.NoSuchFolderException if a matching i g folder could not be found
@@ -762,14 +762,14 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 	}
 
 	/**
-	 * Finds the i g folders before and after the current i g folder in the ordered set where uuid = &#63;.
+	 * Returns the i g folders before and after the current i g folder in the ordered set where uuid = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
 	 * @param folderId the primary key of the current i g folder
-	 * @param uuid the uuid to search with
+	 * @param uuid the uuid
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next i g folder
 	 * @throws com.liferay.portlet.imagegallery.NoSuchFolderException if a i g folder with the primary key could not be found
@@ -922,10 +922,10 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 	}
 
 	/**
-	 * Finds the i g folder where uuid = &#63; and groupId = &#63; or throws a {@link com.liferay.portlet.imagegallery.NoSuchFolderException} if it could not be found.
+	 * Returns the i g folder where uuid = &#63; and groupId = &#63; or throws a {@link com.liferay.portlet.imagegallery.NoSuchFolderException} if it could not be found.
 	 *
-	 * @param uuid the uuid to search with
-	 * @param groupId the group ID to search with
+	 * @param uuid the uuid
+	 * @param groupId the group ID
 	 * @return the matching i g folder
 	 * @throws com.liferay.portlet.imagegallery.NoSuchFolderException if a matching i g folder could not be found
 	 * @throws SystemException if a system exception occurred
@@ -958,10 +958,10 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 	}
 
 	/**
-	 * Finds the i g folder where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 * Returns the i g folder where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	 *
-	 * @param uuid the uuid to search with
-	 * @param groupId the group ID to search with
+	 * @param uuid the uuid
+	 * @param groupId the group ID
 	 * @return the matching i g folder, or <code>null</code> if a matching i g folder could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -971,10 +971,10 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 	}
 
 	/**
-	 * Finds the i g folder where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 * Returns the i g folder where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	 *
-	 * @param uuid the uuid to search with
-	 * @param groupId the group ID to search with
+	 * @param uuid the uuid
+	 * @param groupId the group ID
 	 * @return the matching i g folder, or <code>null</code> if a matching i g folder could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1075,9 +1075,9 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 	}
 
 	/**
-	 * Finds all the i g folders where groupId = &#63;.
+	 * Returns all the i g folders where groupId = &#63;.
 	 *
-	 * @param groupId the group ID to search with
+	 * @param groupId the group ID
 	 * @return the matching i g folders
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1086,15 +1086,15 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 	}
 
 	/**
-	 * Finds a range of all the i g folders where groupId = &#63;.
+	 * Returns a range of all the i g folders where groupId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group ID to search with
-	 * @param start the lower bound of the range of i g folders to return
-	 * @param end the upper bound of the range of i g folders to return (not inclusive)
+	 * @param groupId the group ID
+	 * @param start the lower bound of the range of i g folders
+	 * @param end the upper bound of the range of i g folders (not inclusive)
 	 * @return the range of matching i g folders
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1104,15 +1104,15 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 	}
 
 	/**
-	 * Finds an ordered range of all the i g folders where groupId = &#63;.
+	 * Returns an ordered range of all the i g folders where groupId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group ID to search with
-	 * @param start the lower bound of the range of i g folders to return
-	 * @param end the upper bound of the range of i g folders to return (not inclusive)
+	 * @param groupId the group ID
+	 * @param start the lower bound of the range of i g folders
+	 * @param end the upper bound of the range of i g folders (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching i g folders
 	 * @throws SystemException if a system exception occurred
@@ -1192,13 +1192,13 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 	}
 
 	/**
-	 * Finds the first i g folder in the ordered set where groupId = &#63;.
+	 * Returns the first i g folder in the ordered set where groupId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group ID to search with
+	 * @param groupId the group ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching i g folder
 	 * @throws com.liferay.portlet.imagegallery.NoSuchFolderException if a matching i g folder could not be found
@@ -1227,13 +1227,13 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 	}
 
 	/**
-	 * Finds the last i g folder in the ordered set where groupId = &#63;.
+	 * Returns the last i g folder in the ordered set where groupId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group ID to search with
+	 * @param groupId the group ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching i g folder
 	 * @throws com.liferay.portlet.imagegallery.NoSuchFolderException if a matching i g folder could not be found
@@ -1265,14 +1265,14 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 	}
 
 	/**
-	 * Finds the i g folders before and after the current i g folder in the ordered set where groupId = &#63;.
+	 * Returns the i g folders before and after the current i g folder in the ordered set where groupId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
 	 * @param folderId the primary key of the current i g folder
-	 * @param groupId the group ID to search with
+	 * @param groupId the group ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next i g folder
 	 * @throws com.liferay.portlet.imagegallery.NoSuchFolderException if a i g folder with the primary key could not be found
@@ -1413,9 +1413,9 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 	}
 
 	/**
-	 * Filters by the user's permissions and finds all the i g folders where groupId = &#63;.
+	 * Returns all the i g folders that the user has permission to view where groupId = &#63;.
 	 *
-	 * @param groupId the group ID to search with
+	 * @param groupId the group ID
 	 * @return the matching i g folders that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1426,15 +1426,15 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 	}
 
 	/**
-	 * Filters by the user's permissions and finds a range of all the i g folders where groupId = &#63;.
+	 * Returns a range of all the i g folders that the user has permission to view where groupId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group ID to search with
-	 * @param start the lower bound of the range of i g folders to return
-	 * @param end the upper bound of the range of i g folders to return (not inclusive)
+	 * @param groupId the group ID
+	 * @param start the lower bound of the range of i g folders
+	 * @param end the upper bound of the range of i g folders (not inclusive)
 	 * @return the range of matching i g folders that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1444,15 +1444,15 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 	}
 
 	/**
-	 * Filters by the user's permissions and finds an ordered range of all the i g folders where groupId = &#63;.
+	 * Returns an ordered range of all the i g folders that the user has permissions to view where groupId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group ID to search with
-	 * @param start the lower bound of the range of i g folders to return
-	 * @param end the upper bound of the range of i g folders to return (not inclusive)
+	 * @param groupId the group ID
+	 * @param start the lower bound of the range of i g folders
+	 * @param end the upper bound of the range of i g folders (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching i g folders that the user has permission to view
 	 * @throws SystemException if a system exception occurred
@@ -1531,14 +1531,10 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 	}
 
 	/**
-	 * Filters the i g folders before and after the current i g folder in the ordered set where groupId = &#63;.
-	 *
-	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
-	 * </p>
+	 * Returns the i g folders before and after the current i g folder in the ordered set of i g folders that the user has permission to view where groupId = &#63;.
 	 *
 	 * @param folderId the primary key of the current i g folder
-	 * @param groupId the group ID to search with
+	 * @param groupId the group ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next i g folder
 	 * @throws com.liferay.portlet.imagegallery.NoSuchFolderException if a i g folder with the primary key could not be found
@@ -1711,9 +1707,9 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 	}
 
 	/**
-	 * Finds all the i g folders where companyId = &#63;.
+	 * Returns all the i g folders where companyId = &#63;.
 	 *
-	 * @param companyId the company ID to search with
+	 * @param companyId the company ID
 	 * @return the matching i g folders
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1724,15 +1720,15 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 	}
 
 	/**
-	 * Finds a range of all the i g folders where companyId = &#63;.
+	 * Returns a range of all the i g folders where companyId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param companyId the company ID to search with
-	 * @param start the lower bound of the range of i g folders to return
-	 * @param end the upper bound of the range of i g folders to return (not inclusive)
+	 * @param companyId the company ID
+	 * @param start the lower bound of the range of i g folders
+	 * @param end the upper bound of the range of i g folders (not inclusive)
 	 * @return the range of matching i g folders
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1742,15 +1738,15 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 	}
 
 	/**
-	 * Finds an ordered range of all the i g folders where companyId = &#63;.
+	 * Returns an ordered range of all the i g folders where companyId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param companyId the company ID to search with
-	 * @param start the lower bound of the range of i g folders to return
-	 * @param end the upper bound of the range of i g folders to return (not inclusive)
+	 * @param companyId the company ID
+	 * @param start the lower bound of the range of i g folders
+	 * @param end the upper bound of the range of i g folders (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching i g folders
 	 * @throws SystemException if a system exception occurred
@@ -1830,13 +1826,13 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 	}
 
 	/**
-	 * Finds the first i g folder in the ordered set where companyId = &#63;.
+	 * Returns the first i g folder in the ordered set where companyId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param companyId the company ID to search with
+	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching i g folder
 	 * @throws com.liferay.portlet.imagegallery.NoSuchFolderException if a matching i g folder could not be found
@@ -1865,13 +1861,13 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 	}
 
 	/**
-	 * Finds the last i g folder in the ordered set where companyId = &#63;.
+	 * Returns the last i g folder in the ordered set where companyId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param companyId the company ID to search with
+	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching i g folder
 	 * @throws com.liferay.portlet.imagegallery.NoSuchFolderException if a matching i g folder could not be found
@@ -1903,14 +1899,14 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 	}
 
 	/**
-	 * Finds the i g folders before and after the current i g folder in the ordered set where companyId = &#63;.
+	 * Returns the i g folders before and after the current i g folder in the ordered set where companyId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
 	 * @param folderId the primary key of the current i g folder
-	 * @param companyId the company ID to search with
+	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next i g folder
 	 * @throws com.liferay.portlet.imagegallery.NoSuchFolderException if a i g folder with the primary key could not be found
@@ -2051,10 +2047,10 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 	}
 
 	/**
-	 * Finds all the i g folders where groupId = &#63; and parentFolderId = &#63;.
+	 * Returns all the i g folders where groupId = &#63; and parentFolderId = &#63;.
 	 *
-	 * @param groupId the group ID to search with
-	 * @param parentFolderId the parent folder ID to search with
+	 * @param groupId the group ID
+	 * @param parentFolderId the parent folder ID
 	 * @return the matching i g folders
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2065,16 +2061,16 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 	}
 
 	/**
-	 * Finds a range of all the i g folders where groupId = &#63; and parentFolderId = &#63;.
+	 * Returns a range of all the i g folders where groupId = &#63; and parentFolderId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group ID to search with
-	 * @param parentFolderId the parent folder ID to search with
-	 * @param start the lower bound of the range of i g folders to return
-	 * @param end the upper bound of the range of i g folders to return (not inclusive)
+	 * @param groupId the group ID
+	 * @param parentFolderId the parent folder ID
+	 * @param start the lower bound of the range of i g folders
+	 * @param end the upper bound of the range of i g folders (not inclusive)
 	 * @return the range of matching i g folders
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2084,16 +2080,16 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 	}
 
 	/**
-	 * Finds an ordered range of all the i g folders where groupId = &#63; and parentFolderId = &#63;.
+	 * Returns an ordered range of all the i g folders where groupId = &#63; and parentFolderId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group ID to search with
-	 * @param parentFolderId the parent folder ID to search with
-	 * @param start the lower bound of the range of i g folders to return
-	 * @param end the upper bound of the range of i g folders to return (not inclusive)
+	 * @param groupId the group ID
+	 * @param parentFolderId the parent folder ID
+	 * @param start the lower bound of the range of i g folders
+	 * @param end the upper bound of the range of i g folders (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching i g folders
 	 * @throws SystemException if a system exception occurred
@@ -2178,14 +2174,14 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 	}
 
 	/**
-	 * Finds the first i g folder in the ordered set where groupId = &#63; and parentFolderId = &#63;.
+	 * Returns the first i g folder in the ordered set where groupId = &#63; and parentFolderId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group ID to search with
-	 * @param parentFolderId the parent folder ID to search with
+	 * @param groupId the group ID
+	 * @param parentFolderId the parent folder ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching i g folder
 	 * @throws com.liferay.portlet.imagegallery.NoSuchFolderException if a matching i g folder could not be found
@@ -2218,14 +2214,14 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 	}
 
 	/**
-	 * Finds the last i g folder in the ordered set where groupId = &#63; and parentFolderId = &#63;.
+	 * Returns the last i g folder in the ordered set where groupId = &#63; and parentFolderId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group ID to search with
-	 * @param parentFolderId the parent folder ID to search with
+	 * @param groupId the group ID
+	 * @param parentFolderId the parent folder ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching i g folder
 	 * @throws com.liferay.portlet.imagegallery.NoSuchFolderException if a matching i g folder could not be found
@@ -2260,15 +2256,15 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 	}
 
 	/**
-	 * Finds the i g folders before and after the current i g folder in the ordered set where groupId = &#63; and parentFolderId = &#63;.
+	 * Returns the i g folders before and after the current i g folder in the ordered set where groupId = &#63; and parentFolderId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
 	 * @param folderId the primary key of the current i g folder
-	 * @param groupId the group ID to search with
-	 * @param parentFolderId the parent folder ID to search with
+	 * @param groupId the group ID
+	 * @param parentFolderId the parent folder ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next i g folder
 	 * @throws com.liferay.portlet.imagegallery.NoSuchFolderException if a i g folder with the primary key could not be found
@@ -2413,10 +2409,10 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 	}
 
 	/**
-	 * Filters by the user's permissions and finds all the i g folders where groupId = &#63; and parentFolderId = &#63;.
+	 * Returns all the i g folders that the user has permission to view where groupId = &#63; and parentFolderId = &#63;.
 	 *
-	 * @param groupId the group ID to search with
-	 * @param parentFolderId the parent folder ID to search with
+	 * @param groupId the group ID
+	 * @param parentFolderId the parent folder ID
 	 * @return the matching i g folders that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2427,16 +2423,16 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 	}
 
 	/**
-	 * Filters by the user's permissions and finds a range of all the i g folders where groupId = &#63; and parentFolderId = &#63;.
+	 * Returns a range of all the i g folders that the user has permission to view where groupId = &#63; and parentFolderId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group ID to search with
-	 * @param parentFolderId the parent folder ID to search with
-	 * @param start the lower bound of the range of i g folders to return
-	 * @param end the upper bound of the range of i g folders to return (not inclusive)
+	 * @param groupId the group ID
+	 * @param parentFolderId the parent folder ID
+	 * @param start the lower bound of the range of i g folders
+	 * @param end the upper bound of the range of i g folders (not inclusive)
 	 * @return the range of matching i g folders that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2446,16 +2442,16 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 	}
 
 	/**
-	 * Filters by the user's permissions and finds an ordered range of all the i g folders where groupId = &#63; and parentFolderId = &#63;.
+	 * Returns an ordered range of all the i g folders that the user has permissions to view where groupId = &#63; and parentFolderId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group ID to search with
-	 * @param parentFolderId the parent folder ID to search with
-	 * @param start the lower bound of the range of i g folders to return
-	 * @param end the upper bound of the range of i g folders to return (not inclusive)
+	 * @param groupId the group ID
+	 * @param parentFolderId the parent folder ID
+	 * @param start the lower bound of the range of i g folders
+	 * @param end the upper bound of the range of i g folders (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching i g folders that the user has permission to view
 	 * @throws SystemException if a system exception occurred
@@ -2540,15 +2536,11 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 	}
 
 	/**
-	 * Filters the i g folders before and after the current i g folder in the ordered set where groupId = &#63; and parentFolderId = &#63;.
-	 *
-	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
-	 * </p>
+	 * Returns the i g folders before and after the current i g folder in the ordered set of i g folders that the user has permission to view where groupId = &#63; and parentFolderId = &#63;.
 	 *
 	 * @param folderId the primary key of the current i g folder
-	 * @param groupId the group ID to search with
-	 * @param parentFolderId the parent folder ID to search with
+	 * @param groupId the group ID
+	 * @param parentFolderId the parent folder ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next i g folder
 	 * @throws com.liferay.portlet.imagegallery.NoSuchFolderException if a i g folder with the primary key could not be found
@@ -2725,11 +2717,11 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 	}
 
 	/**
-	 * Finds the i g folder where groupId = &#63; and parentFolderId = &#63; and name = &#63; or throws a {@link com.liferay.portlet.imagegallery.NoSuchFolderException} if it could not be found.
+	 * Returns the i g folder where groupId = &#63; and parentFolderId = &#63; and name = &#63; or throws a {@link com.liferay.portlet.imagegallery.NoSuchFolderException} if it could not be found.
 	 *
-	 * @param groupId the group ID to search with
-	 * @param parentFolderId the parent folder ID to search with
-	 * @param name the name to search with
+	 * @param groupId the group ID
+	 * @param parentFolderId the parent folder ID
+	 * @param name the name
 	 * @return the matching i g folder
 	 * @throws com.liferay.portlet.imagegallery.NoSuchFolderException if a matching i g folder could not be found
 	 * @throws SystemException if a system exception occurred
@@ -2765,11 +2757,11 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 	}
 
 	/**
-	 * Finds the i g folder where groupId = &#63; and parentFolderId = &#63; and name = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 * Returns the i g folder where groupId = &#63; and parentFolderId = &#63; and name = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	 *
-	 * @param groupId the group ID to search with
-	 * @param parentFolderId the parent folder ID to search with
-	 * @param name the name to search with
+	 * @param groupId the group ID
+	 * @param parentFolderId the parent folder ID
+	 * @param name the name
 	 * @return the matching i g folder, or <code>null</code> if a matching i g folder could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2779,11 +2771,11 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 	}
 
 	/**
-	 * Finds the i g folder where groupId = &#63; and parentFolderId = &#63; and name = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 * Returns the i g folder where groupId = &#63; and parentFolderId = &#63; and name = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	 *
-	 * @param groupId the group ID to search with
-	 * @param parentFolderId the parent folder ID to search with
-	 * @param name the name to search with
+	 * @param groupId the group ID
+	 * @param parentFolderId the parent folder ID
+	 * @param name the name
 	 * @return the matching i g folder, or <code>null</code> if a matching i g folder could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2889,7 +2881,7 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 	}
 
 	/**
-	 * Finds all the i g folders.
+	 * Returns all the i g folders.
 	 *
 	 * @return the i g folders
 	 * @throws SystemException if a system exception occurred
@@ -2899,14 +2891,14 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 	}
 
 	/**
-	 * Finds a range of all the i g folders.
+	 * Returns a range of all the i g folders.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param start the lower bound of the range of i g folders to return
-	 * @param end the upper bound of the range of i g folders to return (not inclusive)
+	 * @param start the lower bound of the range of i g folders
+	 * @param end the upper bound of the range of i g folders (not inclusive)
 	 * @return the range of i g folders
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2915,14 +2907,14 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 	}
 
 	/**
-	 * Finds an ordered range of all the i g folders.
+	 * Returns an ordered range of all the i g folders.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param start the lower bound of the range of i g folders to return
-	 * @param end the upper bound of the range of i g folders to return (not inclusive)
+	 * @param start the lower bound of the range of i g folders
+	 * @param end the upper bound of the range of i g folders (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of i g folders
 	 * @throws SystemException if a system exception occurred
@@ -2999,7 +2991,7 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 	/**
 	 * Removes all the i g folders where uuid = &#63; from the database.
 	 *
-	 * @param uuid the uuid to search with
+	 * @param uuid the uuid
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByUuid(String uuid) throws SystemException {
@@ -3011,8 +3003,8 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 	/**
 	 * Removes the i g folder where uuid = &#63; and groupId = &#63; from the database.
 	 *
-	 * @param uuid the uuid to search with
-	 * @param groupId the group ID to search with
+	 * @param uuid the uuid
+	 * @param groupId the group ID
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByUUID_G(String uuid, long groupId)
@@ -3025,7 +3017,7 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 	/**
 	 * Removes all the i g folders where groupId = &#63; from the database.
 	 *
-	 * @param groupId the group ID to search with
+	 * @param groupId the group ID
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByGroupId(long groupId) throws SystemException {
@@ -3037,7 +3029,7 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 	/**
 	 * Removes all the i g folders where companyId = &#63; from the database.
 	 *
-	 * @param companyId the company ID to search with
+	 * @param companyId the company ID
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByCompanyId(long companyId) throws SystemException {
@@ -3049,8 +3041,8 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 	/**
 	 * Removes all the i g folders where groupId = &#63; and parentFolderId = &#63; from the database.
 	 *
-	 * @param groupId the group ID to search with
-	 * @param parentFolderId the parent folder ID to search with
+	 * @param groupId the group ID
+	 * @param parentFolderId the parent folder ID
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByG_P(long groupId, long parentFolderId)
@@ -3063,9 +3055,9 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 	/**
 	 * Removes the i g folder where groupId = &#63; and parentFolderId = &#63; and name = &#63; from the database.
 	 *
-	 * @param groupId the group ID to search with
-	 * @param parentFolderId the parent folder ID to search with
-	 * @param name the name to search with
+	 * @param groupId the group ID
+	 * @param parentFolderId the parent folder ID
+	 * @param name the name
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByG_P_N(long groupId, long parentFolderId, String name)
@@ -3087,9 +3079,9 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 	}
 
 	/**
-	 * Counts all the i g folders where uuid = &#63;.
+	 * Returns the number of i g folders where uuid = &#63;.
 	 *
-	 * @param uuid the uuid to search with
+	 * @param uuid the uuid
 	 * @return the number of matching i g folders
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -3152,10 +3144,10 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 	}
 
 	/**
-	 * Counts all the i g folders where uuid = &#63; and groupId = &#63;.
+	 * Returns the number of i g folders where uuid = &#63; and groupId = &#63;.
 	 *
-	 * @param uuid the uuid to search with
-	 * @param groupId the group ID to search with
+	 * @param uuid the uuid
+	 * @param groupId the group ID
 	 * @return the number of matching i g folders
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -3223,9 +3215,9 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 	}
 
 	/**
-	 * Counts all the i g folders where groupId = &#63;.
+	 * Returns the number of i g folders where groupId = &#63;.
 	 *
-	 * @param groupId the group ID to search with
+	 * @param groupId the group ID
 	 * @return the number of matching i g folders
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -3276,9 +3268,9 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 	}
 
 	/**
-	 * Filters by the user's permissions and counts all the i g folders where groupId = &#63;.
+	 * Returns the number of i g folders that the user has permission to view where groupId = &#63;.
 	 *
-	 * @param groupId the group ID to search with
+	 * @param groupId the group ID
 	 * @return the number of matching i g folders that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -3323,9 +3315,9 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 	}
 
 	/**
-	 * Counts all the i g folders where companyId = &#63;.
+	 * Returns the number of i g folders where companyId = &#63;.
 	 *
-	 * @param companyId the company ID to search with
+	 * @param companyId the company ID
 	 * @return the number of matching i g folders
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -3376,10 +3368,10 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 	}
 
 	/**
-	 * Counts all the i g folders where groupId = &#63; and parentFolderId = &#63;.
+	 * Returns the number of i g folders where groupId = &#63; and parentFolderId = &#63;.
 	 *
-	 * @param groupId the group ID to search with
-	 * @param parentFolderId the parent folder ID to search with
+	 * @param groupId the group ID
+	 * @param parentFolderId the parent folder ID
 	 * @return the number of matching i g folders
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -3435,10 +3427,10 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 	}
 
 	/**
-	 * Filters by the user's permissions and counts all the i g folders where groupId = &#63; and parentFolderId = &#63;.
+	 * Returns the number of i g folders that the user has permission to view where groupId = &#63; and parentFolderId = &#63;.
 	 *
-	 * @param groupId the group ID to search with
-	 * @param parentFolderId the parent folder ID to search with
+	 * @param groupId the group ID
+	 * @param parentFolderId the parent folder ID
 	 * @return the number of matching i g folders that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -3488,11 +3480,11 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 	}
 
 	/**
-	 * Counts all the i g folders where groupId = &#63; and parentFolderId = &#63; and name = &#63;.
+	 * Returns the number of i g folders where groupId = &#63; and parentFolderId = &#63; and name = &#63;.
 	 *
-	 * @param groupId the group ID to search with
-	 * @param parentFolderId the parent folder ID to search with
-	 * @param name the name to search with
+	 * @param groupId the group ID
+	 * @param parentFolderId the parent folder ID
+	 * @param name the name
 	 * @return the number of matching i g folders
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -3564,7 +3556,7 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 	}
 
 	/**
-	 * Counts all the i g folders.
+	 * Returns the number of i g folders.
 	 *
 	 * @return the number of i g folders
 	 * @throws SystemException if a system exception occurred

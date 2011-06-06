@@ -46,21 +46,21 @@ public interface LayoutSetBranchModel extends BaseModel<LayoutSetBranch>,
 	 */
 
 	/**
-	 * Gets the primary key of this layout set branch.
+	 * Returns the primary key of this layout set branch.
 	 *
 	 * @return the primary key of this layout set branch
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this layout set branch
+	 * Sets the primary key of this layout set branch.
 	 *
 	 * @param primaryKey the primary key of this layout set branch
 	 */
 	public void setPrimaryKey(long primaryKey);
 
 	/**
-	 * Gets the layout set branch ID of this layout set branch.
+	 * Returns the layout set branch ID of this layout set branch.
 	 *
 	 * @return the layout set branch ID of this layout set branch
 	 */
@@ -74,7 +74,7 @@ public interface LayoutSetBranchModel extends BaseModel<LayoutSetBranch>,
 	public void setLayoutSetBranchId(long layoutSetBranchId);
 
 	/**
-	 * Gets the group ID of this layout set branch.
+	 * Returns the group ID of this layout set branch.
 	 *
 	 * @return the group ID of this layout set branch
 	 */
@@ -88,7 +88,7 @@ public interface LayoutSetBranchModel extends BaseModel<LayoutSetBranch>,
 	public void setGroupId(long groupId);
 
 	/**
-	 * Gets the company ID of this layout set branch.
+	 * Returns the company ID of this layout set branch.
 	 *
 	 * @return the company ID of this layout set branch
 	 */
@@ -102,7 +102,7 @@ public interface LayoutSetBranchModel extends BaseModel<LayoutSetBranch>,
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the user ID of this layout set branch.
+	 * Returns the user ID of this layout set branch.
 	 *
 	 * @return the user ID of this layout set branch
 	 */
@@ -116,7 +116,7 @@ public interface LayoutSetBranchModel extends BaseModel<LayoutSetBranch>,
 	public void setUserId(long userId);
 
 	/**
-	 * Gets the user uuid of this layout set branch.
+	 * Returns the user uuid of this layout set branch.
 	 *
 	 * @return the user uuid of this layout set branch
 	 * @throws SystemException if a system exception occurred
@@ -131,7 +131,7 @@ public interface LayoutSetBranchModel extends BaseModel<LayoutSetBranch>,
 	public void setUserUuid(String userUuid);
 
 	/**
-	 * Gets the user name of this layout set branch.
+	 * Returns the user name of this layout set branch.
 	 *
 	 * @return the user name of this layout set branch
 	 */
@@ -146,7 +146,7 @@ public interface LayoutSetBranchModel extends BaseModel<LayoutSetBranch>,
 	public void setUserName(String userName);
 
 	/**
-	 * Gets the create date of this layout set branch.
+	 * Returns the create date of this layout set branch.
 	 *
 	 * @return the create date of this layout set branch
 	 */
@@ -160,7 +160,7 @@ public interface LayoutSetBranchModel extends BaseModel<LayoutSetBranch>,
 	public void setCreateDate(Date createDate);
 
 	/**
-	 * Gets the modified date of this layout set branch.
+	 * Returns the modified date of this layout set branch.
 	 *
 	 * @return the modified date of this layout set branch
 	 */
@@ -174,7 +174,7 @@ public interface LayoutSetBranchModel extends BaseModel<LayoutSetBranch>,
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
-	 * Gets the private layout of this layout set branch.
+	 * Returns the private layout of this layout set branch.
 	 *
 	 * @return the private layout of this layout set branch
 	 */
@@ -195,7 +195,7 @@ public interface LayoutSetBranchModel extends BaseModel<LayoutSetBranch>,
 	public void setPrivateLayout(boolean privateLayout);
 
 	/**
-	 * Gets the name of this layout set branch.
+	 * Returns the name of this layout set branch.
 	 *
 	 * @return the name of this layout set branch
 	 */
@@ -210,7 +210,7 @@ public interface LayoutSetBranchModel extends BaseModel<LayoutSetBranch>,
 	public void setName(String name);
 
 	/**
-	 * Gets the description of this layout set branch.
+	 * Returns the description of this layout set branch.
 	 *
 	 * @return the description of this layout set branch
 	 */

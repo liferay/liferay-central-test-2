@@ -45,21 +45,21 @@ public interface PortletItemModel extends BaseModel<PortletItem>, GroupedModel {
 	 */
 
 	/**
-	 * Gets the primary key of this portlet item.
+	 * Returns the primary key of this portlet item.
 	 *
 	 * @return the primary key of this portlet item
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this portlet item
+	 * Sets the primary key of this portlet item.
 	 *
 	 * @param primaryKey the primary key of this portlet item
 	 */
 	public void setPrimaryKey(long primaryKey);
 
 	/**
-	 * Gets the portlet item ID of this portlet item.
+	 * Returns the portlet item ID of this portlet item.
 	 *
 	 * @return the portlet item ID of this portlet item
 	 */
@@ -73,7 +73,7 @@ public interface PortletItemModel extends BaseModel<PortletItem>, GroupedModel {
 	public void setPortletItemId(long portletItemId);
 
 	/**
-	 * Gets the group ID of this portlet item.
+	 * Returns the group ID of this portlet item.
 	 *
 	 * @return the group ID of this portlet item
 	 */
@@ -87,7 +87,7 @@ public interface PortletItemModel extends BaseModel<PortletItem>, GroupedModel {
 	public void setGroupId(long groupId);
 
 	/**
-	 * Gets the company ID of this portlet item.
+	 * Returns the company ID of this portlet item.
 	 *
 	 * @return the company ID of this portlet item
 	 */
@@ -101,7 +101,7 @@ public interface PortletItemModel extends BaseModel<PortletItem>, GroupedModel {
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the user ID of this portlet item.
+	 * Returns the user ID of this portlet item.
 	 *
 	 * @return the user ID of this portlet item
 	 */
@@ -115,7 +115,7 @@ public interface PortletItemModel extends BaseModel<PortletItem>, GroupedModel {
 	public void setUserId(long userId);
 
 	/**
-	 * Gets the user uuid of this portlet item.
+	 * Returns the user uuid of this portlet item.
 	 *
 	 * @return the user uuid of this portlet item
 	 * @throws SystemException if a system exception occurred
@@ -130,7 +130,7 @@ public interface PortletItemModel extends BaseModel<PortletItem>, GroupedModel {
 	public void setUserUuid(String userUuid);
 
 	/**
-	 * Gets the user name of this portlet item.
+	 * Returns the user name of this portlet item.
 	 *
 	 * @return the user name of this portlet item
 	 */
@@ -145,7 +145,7 @@ public interface PortletItemModel extends BaseModel<PortletItem>, GroupedModel {
 	public void setUserName(String userName);
 
 	/**
-	 * Gets the create date of this portlet item.
+	 * Returns the create date of this portlet item.
 	 *
 	 * @return the create date of this portlet item
 	 */
@@ -159,7 +159,7 @@ public interface PortletItemModel extends BaseModel<PortletItem>, GroupedModel {
 	public void setCreateDate(Date createDate);
 
 	/**
-	 * Gets the modified date of this portlet item.
+	 * Returns the modified date of this portlet item.
 	 *
 	 * @return the modified date of this portlet item
 	 */
@@ -173,7 +173,7 @@ public interface PortletItemModel extends BaseModel<PortletItem>, GroupedModel {
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
-	 * Gets the name of this portlet item.
+	 * Returns the name of this portlet item.
 	 *
 	 * @return the name of this portlet item
 	 */
@@ -188,7 +188,7 @@ public interface PortletItemModel extends BaseModel<PortletItem>, GroupedModel {
 	public void setName(String name);
 
 	/**
-	 * Gets the portlet ID of this portlet item.
+	 * Returns the portlet ID of this portlet item.
 	 *
 	 * @return the portlet ID of this portlet item
 	 */
@@ -203,14 +203,14 @@ public interface PortletItemModel extends BaseModel<PortletItem>, GroupedModel {
 	public void setPortletId(String portletId);
 
 	/**
-	 * Gets the class name of the model instance this portlet item is polymorphically associated with.
+	 * Returns the fully qualified class name of this portlet item.
 	 *
-	 * @return the class name of the model instance this portlet item is polymorphically associated with
+	 * @return the fully qualified class name of this portlet item
 	 */
 	public String getClassName();
 
 	/**
-	 * Gets the class name ID of this portlet item.
+	 * Returns the class name ID of this portlet item.
 	 *
 	 * @return the class name ID of this portlet item
 	 */

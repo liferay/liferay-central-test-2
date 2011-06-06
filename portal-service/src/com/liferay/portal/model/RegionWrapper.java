@@ -37,7 +37,7 @@ public class RegionWrapper implements Region {
 	}
 
 	/**
-	* Gets the primary key of this region.
+	* Returns the primary key of this region.
 	*
 	* @return the primary key of this region
 	*/
@@ -46,7 +46,7 @@ public class RegionWrapper implements Region {
 	}
 
 	/**
-	* Sets the primary key of this region
+	* Sets the primary key of this region.
 	*
 	* @param primaryKey the primary key of this region
 	*/
@@ -55,7 +55,7 @@ public class RegionWrapper implements Region {
 	}
 
 	/**
-	* Gets the region ID of this region.
+	* Returns the region ID of this region.
 	*
 	* @return the region ID of this region
 	*/
@@ -73,7 +73,7 @@ public class RegionWrapper implements Region {
 	}
 
 	/**
-	* Gets the country ID of this region.
+	* Returns the country ID of this region.
 	*
 	* @return the country ID of this region
 	*/
@@ -91,7 +91,7 @@ public class RegionWrapper implements Region {
 	}
 
 	/**
-	* Gets the region code of this region.
+	* Returns the region code of this region.
 	*
 	* @return the region code of this region
 	*/
@@ -109,7 +109,7 @@ public class RegionWrapper implements Region {
 	}
 
 	/**
-	* Gets the name of this region.
+	* Returns the name of this region.
 	*
 	* @return the name of this region
 	*/
@@ -127,7 +127,7 @@ public class RegionWrapper implements Region {
 	}
 
 	/**
-	* Gets the active of this region.
+	* Returns the active of this region.
 	*
 	* @return the active of this region
 	*/

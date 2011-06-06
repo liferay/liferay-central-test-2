@@ -47,21 +47,21 @@ public interface DLFileEntryModel extends BaseModel<DLFileEntry>, GroupedModel {
 	 */
 
 	/**
-	 * Gets the primary key of this d l file entry.
+	 * Returns the primary key of this d l file entry.
 	 *
 	 * @return the primary key of this d l file entry
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this d l file entry
+	 * Sets the primary key of this d l file entry.
 	 *
 	 * @param primaryKey the primary key of this d l file entry
 	 */
 	public void setPrimaryKey(long primaryKey);
 
 	/**
-	 * Gets the uuid of this d l file entry.
+	 * Returns the uuid of this d l file entry.
 	 *
 	 * @return the uuid of this d l file entry
 	 */
@@ -76,7 +76,7 @@ public interface DLFileEntryModel extends BaseModel<DLFileEntry>, GroupedModel {
 	public void setUuid(String uuid);
 
 	/**
-	 * Gets the file entry ID of this d l file entry.
+	 * Returns the file entry ID of this d l file entry.
 	 *
 	 * @return the file entry ID of this d l file entry
 	 */
@@ -90,7 +90,7 @@ public interface DLFileEntryModel extends BaseModel<DLFileEntry>, GroupedModel {
 	public void setFileEntryId(long fileEntryId);
 
 	/**
-	 * Gets the group ID of this d l file entry.
+	 * Returns the group ID of this d l file entry.
 	 *
 	 * @return the group ID of this d l file entry
 	 */
@@ -104,7 +104,7 @@ public interface DLFileEntryModel extends BaseModel<DLFileEntry>, GroupedModel {
 	public void setGroupId(long groupId);
 
 	/**
-	 * Gets the company ID of this d l file entry.
+	 * Returns the company ID of this d l file entry.
 	 *
 	 * @return the company ID of this d l file entry
 	 */
@@ -118,7 +118,7 @@ public interface DLFileEntryModel extends BaseModel<DLFileEntry>, GroupedModel {
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the user ID of this d l file entry.
+	 * Returns the user ID of this d l file entry.
 	 *
 	 * @return the user ID of this d l file entry
 	 */
@@ -132,7 +132,7 @@ public interface DLFileEntryModel extends BaseModel<DLFileEntry>, GroupedModel {
 	public void setUserId(long userId);
 
 	/**
-	 * Gets the user uuid of this d l file entry.
+	 * Returns the user uuid of this d l file entry.
 	 *
 	 * @return the user uuid of this d l file entry
 	 * @throws SystemException if a system exception occurred
@@ -147,7 +147,7 @@ public interface DLFileEntryModel extends BaseModel<DLFileEntry>, GroupedModel {
 	public void setUserUuid(String userUuid);
 
 	/**
-	 * Gets the user name of this d l file entry.
+	 * Returns the user name of this d l file entry.
 	 *
 	 * @return the user name of this d l file entry
 	 */
@@ -162,7 +162,7 @@ public interface DLFileEntryModel extends BaseModel<DLFileEntry>, GroupedModel {
 	public void setUserName(String userName);
 
 	/**
-	 * Gets the version user ID of this d l file entry.
+	 * Returns the version user ID of this d l file entry.
 	 *
 	 * @return the version user ID of this d l file entry
 	 */
@@ -176,7 +176,7 @@ public interface DLFileEntryModel extends BaseModel<DLFileEntry>, GroupedModel {
 	public void setVersionUserId(long versionUserId);
 
 	/**
-	 * Gets the version user uuid of this d l file entry.
+	 * Returns the version user uuid of this d l file entry.
 	 *
 	 * @return the version user uuid of this d l file entry
 	 * @throws SystemException if a system exception occurred
@@ -191,7 +191,7 @@ public interface DLFileEntryModel extends BaseModel<DLFileEntry>, GroupedModel {
 	public void setVersionUserUuid(String versionUserUuid);
 
 	/**
-	 * Gets the version user name of this d l file entry.
+	 * Returns the version user name of this d l file entry.
 	 *
 	 * @return the version user name of this d l file entry
 	 */
@@ -206,7 +206,7 @@ public interface DLFileEntryModel extends BaseModel<DLFileEntry>, GroupedModel {
 	public void setVersionUserName(String versionUserName);
 
 	/**
-	 * Gets the create date of this d l file entry.
+	 * Returns the create date of this d l file entry.
 	 *
 	 * @return the create date of this d l file entry
 	 */
@@ -220,7 +220,7 @@ public interface DLFileEntryModel extends BaseModel<DLFileEntry>, GroupedModel {
 	public void setCreateDate(Date createDate);
 
 	/**
-	 * Gets the modified date of this d l file entry.
+	 * Returns the modified date of this d l file entry.
 	 *
 	 * @return the modified date of this d l file entry
 	 */
@@ -234,7 +234,7 @@ public interface DLFileEntryModel extends BaseModel<DLFileEntry>, GroupedModel {
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
-	 * Gets the repository ID of this d l file entry.
+	 * Returns the repository ID of this d l file entry.
 	 *
 	 * @return the repository ID of this d l file entry
 	 */
@@ -248,7 +248,7 @@ public interface DLFileEntryModel extends BaseModel<DLFileEntry>, GroupedModel {
 	public void setRepositoryId(long repositoryId);
 
 	/**
-	 * Gets the folder ID of this d l file entry.
+	 * Returns the folder ID of this d l file entry.
 	 *
 	 * @return the folder ID of this d l file entry
 	 */
@@ -262,7 +262,7 @@ public interface DLFileEntryModel extends BaseModel<DLFileEntry>, GroupedModel {
 	public void setFolderId(long folderId);
 
 	/**
-	 * Gets the name of this d l file entry.
+	 * Returns the name of this d l file entry.
 	 *
 	 * @return the name of this d l file entry
 	 */
@@ -277,7 +277,7 @@ public interface DLFileEntryModel extends BaseModel<DLFileEntry>, GroupedModel {
 	public void setName(String name);
 
 	/**
-	 * Gets the extension of this d l file entry.
+	 * Returns the extension of this d l file entry.
 	 *
 	 * @return the extension of this d l file entry
 	 */
@@ -292,7 +292,7 @@ public interface DLFileEntryModel extends BaseModel<DLFileEntry>, GroupedModel {
 	public void setExtension(String extension);
 
 	/**
-	 * Gets the mime type of this d l file entry.
+	 * Returns the mime type of this d l file entry.
 	 *
 	 * @return the mime type of this d l file entry
 	 */
@@ -307,7 +307,7 @@ public interface DLFileEntryModel extends BaseModel<DLFileEntry>, GroupedModel {
 	public void setMimeType(String mimeType);
 
 	/**
-	 * Gets the title of this d l file entry.
+	 * Returns the title of this d l file entry.
 	 *
 	 * @return the title of this d l file entry
 	 */
@@ -322,7 +322,7 @@ public interface DLFileEntryModel extends BaseModel<DLFileEntry>, GroupedModel {
 	public void setTitle(String title);
 
 	/**
-	 * Gets the description of this d l file entry.
+	 * Returns the description of this d l file entry.
 	 *
 	 * @return the description of this d l file entry
 	 */
@@ -337,7 +337,7 @@ public interface DLFileEntryModel extends BaseModel<DLFileEntry>, GroupedModel {
 	public void setDescription(String description);
 
 	/**
-	 * Gets the extra settings of this d l file entry.
+	 * Returns the extra settings of this d l file entry.
 	 *
 	 * @return the extra settings of this d l file entry
 	 */
@@ -352,7 +352,7 @@ public interface DLFileEntryModel extends BaseModel<DLFileEntry>, GroupedModel {
 	public void setExtraSettings(String extraSettings);
 
 	/**
-	 * Gets the document type ID of this d l file entry.
+	 * Returns the document type ID of this d l file entry.
 	 *
 	 * @return the document type ID of this d l file entry
 	 */
@@ -366,7 +366,7 @@ public interface DLFileEntryModel extends BaseModel<DLFileEntry>, GroupedModel {
 	public void setDocumentTypeId(long documentTypeId);
 
 	/**
-	 * Gets the version of this d l file entry.
+	 * Returns the version of this d l file entry.
 	 *
 	 * @return the version of this d l file entry
 	 */
@@ -381,7 +381,7 @@ public interface DLFileEntryModel extends BaseModel<DLFileEntry>, GroupedModel {
 	public void setVersion(String version);
 
 	/**
-	 * Gets the size of this d l file entry.
+	 * Returns the size of this d l file entry.
 	 *
 	 * @return the size of this d l file entry
 	 */
@@ -395,7 +395,7 @@ public interface DLFileEntryModel extends BaseModel<DLFileEntry>, GroupedModel {
 	public void setSize(long size);
 
 	/**
-	 * Gets the read count of this d l file entry.
+	 * Returns the read count of this d l file entry.
 	 *
 	 * @return the read count of this d l file entry
 	 */

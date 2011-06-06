@@ -37,7 +37,7 @@ public class AssetEntryWrapper implements AssetEntry {
 	}
 
 	/**
-	* Gets the primary key of this asset entry.
+	* Returns the primary key of this asset entry.
 	*
 	* @return the primary key of this asset entry
 	*/
@@ -46,7 +46,7 @@ public class AssetEntryWrapper implements AssetEntry {
 	}
 
 	/**
-	* Sets the primary key of this asset entry
+	* Sets the primary key of this asset entry.
 	*
 	* @param primaryKey the primary key of this asset entry
 	*/
@@ -55,7 +55,7 @@ public class AssetEntryWrapper implements AssetEntry {
 	}
 
 	/**
-	* Gets the entry ID of this asset entry.
+	* Returns the entry ID of this asset entry.
 	*
 	* @return the entry ID of this asset entry
 	*/
@@ -73,7 +73,7 @@ public class AssetEntryWrapper implements AssetEntry {
 	}
 
 	/**
-	* Gets the group ID of this asset entry.
+	* Returns the group ID of this asset entry.
 	*
 	* @return the group ID of this asset entry
 	*/
@@ -91,7 +91,7 @@ public class AssetEntryWrapper implements AssetEntry {
 	}
 
 	/**
-	* Gets the company ID of this asset entry.
+	* Returns the company ID of this asset entry.
 	*
 	* @return the company ID of this asset entry
 	*/
@@ -109,7 +109,7 @@ public class AssetEntryWrapper implements AssetEntry {
 	}
 
 	/**
-	* Gets the user ID of this asset entry.
+	* Returns the user ID of this asset entry.
 	*
 	* @return the user ID of this asset entry
 	*/
@@ -127,7 +127,7 @@ public class AssetEntryWrapper implements AssetEntry {
 	}
 
 	/**
-	* Gets the user uuid of this asset entry.
+	* Returns the user uuid of this asset entry.
 	*
 	* @return the user uuid of this asset entry
 	* @throws SystemException if a system exception occurred
@@ -147,7 +147,7 @@ public class AssetEntryWrapper implements AssetEntry {
 	}
 
 	/**
-	* Gets the user name of this asset entry.
+	* Returns the user name of this asset entry.
 	*
 	* @return the user name of this asset entry
 	*/
@@ -165,7 +165,7 @@ public class AssetEntryWrapper implements AssetEntry {
 	}
 
 	/**
-	* Gets the create date of this asset entry.
+	* Returns the create date of this asset entry.
 	*
 	* @return the create date of this asset entry
 	*/
@@ -183,7 +183,7 @@ public class AssetEntryWrapper implements AssetEntry {
 	}
 
 	/**
-	* Gets the modified date of this asset entry.
+	* Returns the modified date of this asset entry.
 	*
 	* @return the modified date of this asset entry
 	*/
@@ -201,16 +201,16 @@ public class AssetEntryWrapper implements AssetEntry {
 	}
 
 	/**
-	* Gets the class name of the model instance this asset entry is polymorphically associated with.
+	* Returns the fully qualified class name of this asset entry.
 	*
-	* @return the class name of the model instance this asset entry is polymorphically associated with
+	* @return the fully qualified class name of this asset entry
 	*/
 	public java.lang.String getClassName() {
 		return _assetEntry.getClassName();
 	}
 
 	/**
-	* Gets the class name ID of this asset entry.
+	* Returns the class name ID of this asset entry.
 	*
 	* @return the class name ID of this asset entry
 	*/
@@ -228,7 +228,7 @@ public class AssetEntryWrapper implements AssetEntry {
 	}
 
 	/**
-	* Gets the class p k of this asset entry.
+	* Returns the class p k of this asset entry.
 	*
 	* @return the class p k of this asset entry
 	*/
@@ -246,7 +246,7 @@ public class AssetEntryWrapper implements AssetEntry {
 	}
 
 	/**
-	* Gets the class uuid of this asset entry.
+	* Returns the class uuid of this asset entry.
 	*
 	* @return the class uuid of this asset entry
 	*/
@@ -264,7 +264,7 @@ public class AssetEntryWrapper implements AssetEntry {
 	}
 
 	/**
-	* Gets the visible of this asset entry.
+	* Returns the visible of this asset entry.
 	*
 	* @return the visible of this asset entry
 	*/
@@ -291,7 +291,7 @@ public class AssetEntryWrapper implements AssetEntry {
 	}
 
 	/**
-	* Gets the start date of this asset entry.
+	* Returns the start date of this asset entry.
 	*
 	* @return the start date of this asset entry
 	*/
@@ -309,7 +309,7 @@ public class AssetEntryWrapper implements AssetEntry {
 	}
 
 	/**
-	* Gets the end date of this asset entry.
+	* Returns the end date of this asset entry.
 	*
 	* @return the end date of this asset entry
 	*/
@@ -327,7 +327,7 @@ public class AssetEntryWrapper implements AssetEntry {
 	}
 
 	/**
-	* Gets the publish date of this asset entry.
+	* Returns the publish date of this asset entry.
 	*
 	* @return the publish date of this asset entry
 	*/
@@ -345,7 +345,7 @@ public class AssetEntryWrapper implements AssetEntry {
 	}
 
 	/**
-	* Gets the expiration date of this asset entry.
+	* Returns the expiration date of this asset entry.
 	*
 	* @return the expiration date of this asset entry
 	*/
@@ -363,7 +363,7 @@ public class AssetEntryWrapper implements AssetEntry {
 	}
 
 	/**
-	* Gets the mime type of this asset entry.
+	* Returns the mime type of this asset entry.
 	*
 	* @return the mime type of this asset entry
 	*/
@@ -381,7 +381,7 @@ public class AssetEntryWrapper implements AssetEntry {
 	}
 
 	/**
-	* Gets the title of this asset entry.
+	* Returns the title of this asset entry.
 	*
 	* @return the title of this asset entry
 	*/
@@ -399,7 +399,7 @@ public class AssetEntryWrapper implements AssetEntry {
 	}
 
 	/**
-	* Gets the description of this asset entry.
+	* Returns the description of this asset entry.
 	*
 	* @return the description of this asset entry
 	*/
@@ -417,7 +417,7 @@ public class AssetEntryWrapper implements AssetEntry {
 	}
 
 	/**
-	* Gets the summary of this asset entry.
+	* Returns the summary of this asset entry.
 	*
 	* @return the summary of this asset entry
 	*/
@@ -435,7 +435,7 @@ public class AssetEntryWrapper implements AssetEntry {
 	}
 
 	/**
-	* Gets the url of this asset entry.
+	* Returns the url of this asset entry.
 	*
 	* @return the url of this asset entry
 	*/
@@ -453,7 +453,7 @@ public class AssetEntryWrapper implements AssetEntry {
 	}
 
 	/**
-	* Gets the layout uuid of this asset entry.
+	* Returns the layout uuid of this asset entry.
 	*
 	* @return the layout uuid of this asset entry
 	*/
@@ -471,7 +471,7 @@ public class AssetEntryWrapper implements AssetEntry {
 	}
 
 	/**
-	* Gets the height of this asset entry.
+	* Returns the height of this asset entry.
 	*
 	* @return the height of this asset entry
 	*/
@@ -489,7 +489,7 @@ public class AssetEntryWrapper implements AssetEntry {
 	}
 
 	/**
-	* Gets the width of this asset entry.
+	* Returns the width of this asset entry.
 	*
 	* @return the width of this asset entry
 	*/
@@ -507,7 +507,7 @@ public class AssetEntryWrapper implements AssetEntry {
 	}
 
 	/**
-	* Gets the priority of this asset entry.
+	* Returns the priority of this asset entry.
 	*
 	* @return the priority of this asset entry
 	*/
@@ -525,7 +525,7 @@ public class AssetEntryWrapper implements AssetEntry {
 	}
 
 	/**
-	* Gets the view count of this asset entry.
+	* Returns the view count of this asset entry.
 	*
 	* @return the view count of this asset entry
 	*/

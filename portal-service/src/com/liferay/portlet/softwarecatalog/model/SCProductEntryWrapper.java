@@ -37,7 +37,7 @@ public class SCProductEntryWrapper implements SCProductEntry {
 	}
 
 	/**
-	* Gets the primary key of this s c product entry.
+	* Returns the primary key of this s c product entry.
 	*
 	* @return the primary key of this s c product entry
 	*/
@@ -46,7 +46,7 @@ public class SCProductEntryWrapper implements SCProductEntry {
 	}
 
 	/**
-	* Sets the primary key of this s c product entry
+	* Sets the primary key of this s c product entry.
 	*
 	* @param primaryKey the primary key of this s c product entry
 	*/
@@ -55,7 +55,7 @@ public class SCProductEntryWrapper implements SCProductEntry {
 	}
 
 	/**
-	* Gets the product entry ID of this s c product entry.
+	* Returns the product entry ID of this s c product entry.
 	*
 	* @return the product entry ID of this s c product entry
 	*/
@@ -73,7 +73,7 @@ public class SCProductEntryWrapper implements SCProductEntry {
 	}
 
 	/**
-	* Gets the group ID of this s c product entry.
+	* Returns the group ID of this s c product entry.
 	*
 	* @return the group ID of this s c product entry
 	*/
@@ -91,7 +91,7 @@ public class SCProductEntryWrapper implements SCProductEntry {
 	}
 
 	/**
-	* Gets the company ID of this s c product entry.
+	* Returns the company ID of this s c product entry.
 	*
 	* @return the company ID of this s c product entry
 	*/
@@ -109,7 +109,7 @@ public class SCProductEntryWrapper implements SCProductEntry {
 	}
 
 	/**
-	* Gets the user ID of this s c product entry.
+	* Returns the user ID of this s c product entry.
 	*
 	* @return the user ID of this s c product entry
 	*/
@@ -127,7 +127,7 @@ public class SCProductEntryWrapper implements SCProductEntry {
 	}
 
 	/**
-	* Gets the user uuid of this s c product entry.
+	* Returns the user uuid of this s c product entry.
 	*
 	* @return the user uuid of this s c product entry
 	* @throws SystemException if a system exception occurred
@@ -147,7 +147,7 @@ public class SCProductEntryWrapper implements SCProductEntry {
 	}
 
 	/**
-	* Gets the user name of this s c product entry.
+	* Returns the user name of this s c product entry.
 	*
 	* @return the user name of this s c product entry
 	*/
@@ -165,7 +165,7 @@ public class SCProductEntryWrapper implements SCProductEntry {
 	}
 
 	/**
-	* Gets the create date of this s c product entry.
+	* Returns the create date of this s c product entry.
 	*
 	* @return the create date of this s c product entry
 	*/
@@ -183,7 +183,7 @@ public class SCProductEntryWrapper implements SCProductEntry {
 	}
 
 	/**
-	* Gets the modified date of this s c product entry.
+	* Returns the modified date of this s c product entry.
 	*
 	* @return the modified date of this s c product entry
 	*/
@@ -201,7 +201,7 @@ public class SCProductEntryWrapper implements SCProductEntry {
 	}
 
 	/**
-	* Gets the name of this s c product entry.
+	* Returns the name of this s c product entry.
 	*
 	* @return the name of this s c product entry
 	*/
@@ -219,7 +219,7 @@ public class SCProductEntryWrapper implements SCProductEntry {
 	}
 
 	/**
-	* Gets the type of this s c product entry.
+	* Returns the type of this s c product entry.
 	*
 	* @return the type of this s c product entry
 	*/
@@ -237,7 +237,7 @@ public class SCProductEntryWrapper implements SCProductEntry {
 	}
 
 	/**
-	* Gets the tags of this s c product entry.
+	* Returns the tags of this s c product entry.
 	*
 	* @return the tags of this s c product entry
 	*/
@@ -255,7 +255,7 @@ public class SCProductEntryWrapper implements SCProductEntry {
 	}
 
 	/**
-	* Gets the short description of this s c product entry.
+	* Returns the short description of this s c product entry.
 	*
 	* @return the short description of this s c product entry
 	*/
@@ -273,7 +273,7 @@ public class SCProductEntryWrapper implements SCProductEntry {
 	}
 
 	/**
-	* Gets the long description of this s c product entry.
+	* Returns the long description of this s c product entry.
 	*
 	* @return the long description of this s c product entry
 	*/
@@ -291,7 +291,7 @@ public class SCProductEntryWrapper implements SCProductEntry {
 	}
 
 	/**
-	* Gets the page u r l of this s c product entry.
+	* Returns the page u r l of this s c product entry.
 	*
 	* @return the page u r l of this s c product entry
 	*/
@@ -309,7 +309,7 @@ public class SCProductEntryWrapper implements SCProductEntry {
 	}
 
 	/**
-	* Gets the author of this s c product entry.
+	* Returns the author of this s c product entry.
 	*
 	* @return the author of this s c product entry
 	*/
@@ -327,7 +327,7 @@ public class SCProductEntryWrapper implements SCProductEntry {
 	}
 
 	/**
-	* Gets the repo group ID of this s c product entry.
+	* Returns the repo group ID of this s c product entry.
 	*
 	* @return the repo group ID of this s c product entry
 	*/
@@ -345,7 +345,7 @@ public class SCProductEntryWrapper implements SCProductEntry {
 	}
 
 	/**
-	* Gets the repo artifact ID of this s c product entry.
+	* Returns the repo artifact ID of this s c product entry.
 	*
 	* @return the repo artifact ID of this s c product entry
 	*/

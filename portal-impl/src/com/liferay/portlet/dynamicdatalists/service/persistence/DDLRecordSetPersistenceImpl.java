@@ -128,7 +128,7 @@ public class DDLRecordSetPersistenceImpl extends BasePersistenceImpl<DDLRecordSe
 	/**
 	 * Caches the d d l record set in the entity cache if it is enabled.
 	 *
-	 * @param ddlRecordSet the d d l record set to cache
+	 * @param ddlRecordSet the d d l record set
 	 */
 	public void cacheResult(DDLRecordSet ddlRecordSet) {
 		EntityCacheUtil.putResult(DDLRecordSetModelImpl.ENTITY_CACHE_ENABLED,
@@ -152,7 +152,7 @@ public class DDLRecordSetPersistenceImpl extends BasePersistenceImpl<DDLRecordSe
 	/**
 	 * Caches the d d l record sets in the entity cache if it is enabled.
 	 *
-	 * @param ddlRecordSets the d d l record sets to cache
+	 * @param ddlRecordSets the d d l record sets
 	 */
 	public void cacheResult(List<DDLRecordSet> ddlRecordSets) {
 		for (DDLRecordSet ddlRecordSet : ddlRecordSets) {
@@ -228,7 +228,7 @@ public class DDLRecordSetPersistenceImpl extends BasePersistenceImpl<DDLRecordSe
 	/**
 	 * Removes the d d l record set with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param primaryKey the primary key of the d d l record set to remove
+	 * @param primaryKey the primary key of the d d l record set
 	 * @return the d d l record set that was removed
 	 * @throws com.liferay.portal.NoSuchModelException if a d d l record set with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -241,7 +241,7 @@ public class DDLRecordSetPersistenceImpl extends BasePersistenceImpl<DDLRecordSe
 	/**
 	 * Removes the d d l record set with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param recordSetId the primary key of the d d l record set to remove
+	 * @param recordSetId the primary key of the d d l record set
 	 * @return the d d l record set that was removed
 	 * @throws com.liferay.portlet.dynamicdatalists.NoSuchRecordSetException if a d d l record set with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -281,7 +281,7 @@ public class DDLRecordSetPersistenceImpl extends BasePersistenceImpl<DDLRecordSe
 	/**
 	 * Removes the d d l record set from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param ddlRecordSet the d d l record set to remove
+	 * @param ddlRecordSet the d d l record set
 	 * @return the d d l record set that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -444,9 +444,9 @@ public class DDLRecordSetPersistenceImpl extends BasePersistenceImpl<DDLRecordSe
 	}
 
 	/**
-	 * Finds the d d l record set with the primary key or throws a {@link com.liferay.portal.NoSuchModelException} if it could not be found.
+	 * Returns the d d l record set with the primary key or throws a {@link com.liferay.portal.NoSuchModelException} if it could not be found.
 	 *
-	 * @param primaryKey the primary key of the d d l record set to find
+	 * @param primaryKey the primary key of the d d l record set
 	 * @return the d d l record set
 	 * @throws com.liferay.portal.NoSuchModelException if a d d l record set with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -457,9 +457,9 @@ public class DDLRecordSetPersistenceImpl extends BasePersistenceImpl<DDLRecordSe
 	}
 
 	/**
-	 * Finds the d d l record set with the primary key or throws a {@link com.liferay.portlet.dynamicdatalists.NoSuchRecordSetException} if it could not be found.
+	 * Returns the d d l record set with the primary key or throws a {@link com.liferay.portlet.dynamicdatalists.NoSuchRecordSetException} if it could not be found.
 	 *
-	 * @param recordSetId the primary key of the d d l record set to find
+	 * @param recordSetId the primary key of the d d l record set
 	 * @return the d d l record set
 	 * @throws com.liferay.portlet.dynamicdatalists.NoSuchRecordSetException if a d d l record set with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -481,9 +481,9 @@ public class DDLRecordSetPersistenceImpl extends BasePersistenceImpl<DDLRecordSe
 	}
 
 	/**
-	 * Finds the d d l record set with the primary key or returns <code>null</code> if it could not be found.
+	 * Returns the d d l record set with the primary key or returns <code>null</code> if it could not be found.
 	 *
-	 * @param primaryKey the primary key of the d d l record set to find
+	 * @param primaryKey the primary key of the d d l record set
 	 * @return the d d l record set, or <code>null</code> if a d d l record set with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -493,9 +493,9 @@ public class DDLRecordSetPersistenceImpl extends BasePersistenceImpl<DDLRecordSe
 	}
 
 	/**
-	 * Finds the d d l record set with the primary key or returns <code>null</code> if it could not be found.
+	 * Returns the d d l record set with the primary key or returns <code>null</code> if it could not be found.
 	 *
-	 * @param recordSetId the primary key of the d d l record set to find
+	 * @param recordSetId the primary key of the d d l record set
 	 * @return the d d l record set, or <code>null</code> if a d d l record set with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -529,9 +529,9 @@ public class DDLRecordSetPersistenceImpl extends BasePersistenceImpl<DDLRecordSe
 	}
 
 	/**
-	 * Finds all the d d l record sets where uuid = &#63;.
+	 * Returns all the d d l record sets where uuid = &#63;.
 	 *
-	 * @param uuid the uuid to search with
+	 * @param uuid the uuid
 	 * @return the matching d d l record sets
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -540,15 +540,15 @@ public class DDLRecordSetPersistenceImpl extends BasePersistenceImpl<DDLRecordSe
 	}
 
 	/**
-	 * Finds a range of all the d d l record sets where uuid = &#63;.
+	 * Returns a range of all the d d l record sets where uuid = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param uuid the uuid to search with
-	 * @param start the lower bound of the range of d d l record sets to return
-	 * @param end the upper bound of the range of d d l record sets to return (not inclusive)
+	 * @param uuid the uuid
+	 * @param start the lower bound of the range of d d l record sets
+	 * @param end the upper bound of the range of d d l record sets (not inclusive)
 	 * @return the range of matching d d l record sets
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -558,15 +558,15 @@ public class DDLRecordSetPersistenceImpl extends BasePersistenceImpl<DDLRecordSe
 	}
 
 	/**
-	 * Finds an ordered range of all the d d l record sets where uuid = &#63;.
+	 * Returns an ordered range of all the d d l record sets where uuid = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param uuid the uuid to search with
-	 * @param start the lower bound of the range of d d l record sets to return
-	 * @param end the upper bound of the range of d d l record sets to return (not inclusive)
+	 * @param uuid the uuid
+	 * @param start the lower bound of the range of d d l record sets
+	 * @param end the upper bound of the range of d d l record sets (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching d d l record sets
 	 * @throws SystemException if a system exception occurred
@@ -654,13 +654,13 @@ public class DDLRecordSetPersistenceImpl extends BasePersistenceImpl<DDLRecordSe
 	}
 
 	/**
-	 * Finds the first d d l record set in the ordered set where uuid = &#63;.
+	 * Returns the first d d l record set in the ordered set where uuid = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param uuid the uuid to search with
+	 * @param uuid the uuid
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching d d l record set
 	 * @throws com.liferay.portlet.dynamicdatalists.NoSuchRecordSetException if a matching d d l record set could not be found
@@ -689,13 +689,13 @@ public class DDLRecordSetPersistenceImpl extends BasePersistenceImpl<DDLRecordSe
 	}
 
 	/**
-	 * Finds the last d d l record set in the ordered set where uuid = &#63;.
+	 * Returns the last d d l record set in the ordered set where uuid = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param uuid the uuid to search with
+	 * @param uuid the uuid
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching d d l record set
 	 * @throws com.liferay.portlet.dynamicdatalists.NoSuchRecordSetException if a matching d d l record set could not be found
@@ -727,14 +727,14 @@ public class DDLRecordSetPersistenceImpl extends BasePersistenceImpl<DDLRecordSe
 	}
 
 	/**
-	 * Finds the d d l record sets before and after the current d d l record set in the ordered set where uuid = &#63;.
+	 * Returns the d d l record sets before and after the current d d l record set in the ordered set where uuid = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
 	 * @param recordSetId the primary key of the current d d l record set
-	 * @param uuid the uuid to search with
+	 * @param uuid the uuid
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next d d l record set
 	 * @throws com.liferay.portlet.dynamicdatalists.NoSuchRecordSetException if a d d l record set with the primary key could not be found
@@ -883,10 +883,10 @@ public class DDLRecordSetPersistenceImpl extends BasePersistenceImpl<DDLRecordSe
 	}
 
 	/**
-	 * Finds the d d l record set where uuid = &#63; and groupId = &#63; or throws a {@link com.liferay.portlet.dynamicdatalists.NoSuchRecordSetException} if it could not be found.
+	 * Returns the d d l record set where uuid = &#63; and groupId = &#63; or throws a {@link com.liferay.portlet.dynamicdatalists.NoSuchRecordSetException} if it could not be found.
 	 *
-	 * @param uuid the uuid to search with
-	 * @param groupId the group ID to search with
+	 * @param uuid the uuid
+	 * @param groupId the group ID
 	 * @return the matching d d l record set
 	 * @throws com.liferay.portlet.dynamicdatalists.NoSuchRecordSetException if a matching d d l record set could not be found
 	 * @throws SystemException if a system exception occurred
@@ -919,10 +919,10 @@ public class DDLRecordSetPersistenceImpl extends BasePersistenceImpl<DDLRecordSe
 	}
 
 	/**
-	 * Finds the d d l record set where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 * Returns the d d l record set where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	 *
-	 * @param uuid the uuid to search with
-	 * @param groupId the group ID to search with
+	 * @param uuid the uuid
+	 * @param groupId the group ID
 	 * @return the matching d d l record set, or <code>null</code> if a matching d d l record set could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -932,10 +932,10 @@ public class DDLRecordSetPersistenceImpl extends BasePersistenceImpl<DDLRecordSe
 	}
 
 	/**
-	 * Finds the d d l record set where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 * Returns the d d l record set where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	 *
-	 * @param uuid the uuid to search with
-	 * @param groupId the group ID to search with
+	 * @param uuid the uuid
+	 * @param groupId the group ID
 	 * @return the matching d d l record set, or <code>null</code> if a matching d d l record set could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1034,9 +1034,9 @@ public class DDLRecordSetPersistenceImpl extends BasePersistenceImpl<DDLRecordSe
 	}
 
 	/**
-	 * Finds all the d d l record sets where groupId = &#63;.
+	 * Returns all the d d l record sets where groupId = &#63;.
 	 *
-	 * @param groupId the group ID to search with
+	 * @param groupId the group ID
 	 * @return the matching d d l record sets
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1046,15 +1046,15 @@ public class DDLRecordSetPersistenceImpl extends BasePersistenceImpl<DDLRecordSe
 	}
 
 	/**
-	 * Finds a range of all the d d l record sets where groupId = &#63;.
+	 * Returns a range of all the d d l record sets where groupId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group ID to search with
-	 * @param start the lower bound of the range of d d l record sets to return
-	 * @param end the upper bound of the range of d d l record sets to return (not inclusive)
+	 * @param groupId the group ID
+	 * @param start the lower bound of the range of d d l record sets
+	 * @param end the upper bound of the range of d d l record sets (not inclusive)
 	 * @return the range of matching d d l record sets
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1064,15 +1064,15 @@ public class DDLRecordSetPersistenceImpl extends BasePersistenceImpl<DDLRecordSe
 	}
 
 	/**
-	 * Finds an ordered range of all the d d l record sets where groupId = &#63;.
+	 * Returns an ordered range of all the d d l record sets where groupId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group ID to search with
-	 * @param start the lower bound of the range of d d l record sets to return
-	 * @param end the upper bound of the range of d d l record sets to return (not inclusive)
+	 * @param groupId the group ID
+	 * @param start the lower bound of the range of d d l record sets
+	 * @param end the upper bound of the range of d d l record sets (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching d d l record sets
 	 * @throws SystemException if a system exception occurred
@@ -1148,13 +1148,13 @@ public class DDLRecordSetPersistenceImpl extends BasePersistenceImpl<DDLRecordSe
 	}
 
 	/**
-	 * Finds the first d d l record set in the ordered set where groupId = &#63;.
+	 * Returns the first d d l record set in the ordered set where groupId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group ID to search with
+	 * @param groupId the group ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching d d l record set
 	 * @throws com.liferay.portlet.dynamicdatalists.NoSuchRecordSetException if a matching d d l record set could not be found
@@ -1183,13 +1183,13 @@ public class DDLRecordSetPersistenceImpl extends BasePersistenceImpl<DDLRecordSe
 	}
 
 	/**
-	 * Finds the last d d l record set in the ordered set where groupId = &#63;.
+	 * Returns the last d d l record set in the ordered set where groupId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group ID to search with
+	 * @param groupId the group ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching d d l record set
 	 * @throws com.liferay.portlet.dynamicdatalists.NoSuchRecordSetException if a matching d d l record set could not be found
@@ -1221,14 +1221,14 @@ public class DDLRecordSetPersistenceImpl extends BasePersistenceImpl<DDLRecordSe
 	}
 
 	/**
-	 * Finds the d d l record sets before and after the current d d l record set in the ordered set where groupId = &#63;.
+	 * Returns the d d l record sets before and after the current d d l record set in the ordered set where groupId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
 	 * @param recordSetId the primary key of the current d d l record set
-	 * @param groupId the group ID to search with
+	 * @param groupId the group ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next d d l record set
 	 * @throws com.liferay.portlet.dynamicdatalists.NoSuchRecordSetException if a d d l record set with the primary key could not be found
@@ -1365,9 +1365,9 @@ public class DDLRecordSetPersistenceImpl extends BasePersistenceImpl<DDLRecordSe
 	}
 
 	/**
-	 * Filters by the user's permissions and finds all the d d l record sets where groupId = &#63;.
+	 * Returns all the d d l record sets that the user has permission to view where groupId = &#63;.
 	 *
-	 * @param groupId the group ID to search with
+	 * @param groupId the group ID
 	 * @return the matching d d l record sets that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1378,15 +1378,15 @@ public class DDLRecordSetPersistenceImpl extends BasePersistenceImpl<DDLRecordSe
 	}
 
 	/**
-	 * Filters by the user's permissions and finds a range of all the d d l record sets where groupId = &#63;.
+	 * Returns a range of all the d d l record sets that the user has permission to view where groupId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group ID to search with
-	 * @param start the lower bound of the range of d d l record sets to return
-	 * @param end the upper bound of the range of d d l record sets to return (not inclusive)
+	 * @param groupId the group ID
+	 * @param start the lower bound of the range of d d l record sets
+	 * @param end the upper bound of the range of d d l record sets (not inclusive)
 	 * @return the range of matching d d l record sets that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1396,15 +1396,15 @@ public class DDLRecordSetPersistenceImpl extends BasePersistenceImpl<DDLRecordSe
 	}
 
 	/**
-	 * Filters by the user's permissions and finds an ordered range of all the d d l record sets where groupId = &#63;.
+	 * Returns an ordered range of all the d d l record sets that the user has permissions to view where groupId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group ID to search with
-	 * @param start the lower bound of the range of d d l record sets to return
-	 * @param end the upper bound of the range of d d l record sets to return (not inclusive)
+	 * @param groupId the group ID
+	 * @param start the lower bound of the range of d d l record sets
+	 * @param end the upper bound of the range of d d l record sets (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching d d l record sets that the user has permission to view
 	 * @throws SystemException if a system exception occurred
@@ -1475,14 +1475,10 @@ public class DDLRecordSetPersistenceImpl extends BasePersistenceImpl<DDLRecordSe
 	}
 
 	/**
-	 * Filters the d d l record sets before and after the current d d l record set in the ordered set where groupId = &#63;.
-	 *
-	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
-	 * </p>
+	 * Returns the d d l record sets before and after the current d d l record set in the ordered set of d d l record sets that the user has permission to view where groupId = &#63;.
 	 *
 	 * @param recordSetId the primary key of the current d d l record set
-	 * @param groupId the group ID to search with
+	 * @param groupId the group ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next d d l record set
 	 * @throws com.liferay.portlet.dynamicdatalists.NoSuchRecordSetException if a d d l record set with the primary key could not be found
@@ -1646,10 +1642,10 @@ public class DDLRecordSetPersistenceImpl extends BasePersistenceImpl<DDLRecordSe
 	}
 
 	/**
-	 * Finds the d d l record set where groupId = &#63; and recordSetKey = &#63; or throws a {@link com.liferay.portlet.dynamicdatalists.NoSuchRecordSetException} if it could not be found.
+	 * Returns the d d l record set where groupId = &#63; and recordSetKey = &#63; or throws a {@link com.liferay.portlet.dynamicdatalists.NoSuchRecordSetException} if it could not be found.
 	 *
-	 * @param groupId the group ID to search with
-	 * @param recordSetKey the record set key to search with
+	 * @param groupId the group ID
+	 * @param recordSetKey the record set key
 	 * @return the matching d d l record set
 	 * @throws com.liferay.portlet.dynamicdatalists.NoSuchRecordSetException if a matching d d l record set could not be found
 	 * @throws SystemException if a system exception occurred
@@ -1682,10 +1678,10 @@ public class DDLRecordSetPersistenceImpl extends BasePersistenceImpl<DDLRecordSe
 	}
 
 	/**
-	 * Finds the d d l record set where groupId = &#63; and recordSetKey = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 * Returns the d d l record set where groupId = &#63; and recordSetKey = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	 *
-	 * @param groupId the group ID to search with
-	 * @param recordSetKey the record set key to search with
+	 * @param groupId the group ID
+	 * @param recordSetKey the record set key
 	 * @return the matching d d l record set, or <code>null</code> if a matching d d l record set could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1695,10 +1691,10 @@ public class DDLRecordSetPersistenceImpl extends BasePersistenceImpl<DDLRecordSe
 	}
 
 	/**
-	 * Finds the d d l record set where groupId = &#63; and recordSetKey = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 * Returns the d d l record set where groupId = &#63; and recordSetKey = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	 *
-	 * @param groupId the group ID to search with
-	 * @param recordSetKey the record set key to search with
+	 * @param groupId the group ID
+	 * @param recordSetKey the record set key
 	 * @return the matching d d l record set, or <code>null</code> if a matching d d l record set could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1797,7 +1793,7 @@ public class DDLRecordSetPersistenceImpl extends BasePersistenceImpl<DDLRecordSe
 	}
 
 	/**
-	 * Finds all the d d l record sets.
+	 * Returns all the d d l record sets.
 	 *
 	 * @return the d d l record sets
 	 * @throws SystemException if a system exception occurred
@@ -1807,14 +1803,14 @@ public class DDLRecordSetPersistenceImpl extends BasePersistenceImpl<DDLRecordSe
 	}
 
 	/**
-	 * Finds a range of all the d d l record sets.
+	 * Returns a range of all the d d l record sets.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param start the lower bound of the range of d d l record sets to return
-	 * @param end the upper bound of the range of d d l record sets to return (not inclusive)
+	 * @param start the lower bound of the range of d d l record sets
+	 * @param end the upper bound of the range of d d l record sets (not inclusive)
 	 * @return the range of d d l record sets
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1824,14 +1820,14 @@ public class DDLRecordSetPersistenceImpl extends BasePersistenceImpl<DDLRecordSe
 	}
 
 	/**
-	 * Finds an ordered range of all the d d l record sets.
+	 * Returns an ordered range of all the d d l record sets.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param start the lower bound of the range of d d l record sets to return
-	 * @param end the upper bound of the range of d d l record sets to return (not inclusive)
+	 * @param start the lower bound of the range of d d l record sets
+	 * @param end the upper bound of the range of d d l record sets (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of d d l record sets
 	 * @throws SystemException if a system exception occurred
@@ -1908,7 +1904,7 @@ public class DDLRecordSetPersistenceImpl extends BasePersistenceImpl<DDLRecordSe
 	/**
 	 * Removes all the d d l record sets where uuid = &#63; from the database.
 	 *
-	 * @param uuid the uuid to search with
+	 * @param uuid the uuid
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByUuid(String uuid) throws SystemException {
@@ -1920,8 +1916,8 @@ public class DDLRecordSetPersistenceImpl extends BasePersistenceImpl<DDLRecordSe
 	/**
 	 * Removes the d d l record set where uuid = &#63; and groupId = &#63; from the database.
 	 *
-	 * @param uuid the uuid to search with
-	 * @param groupId the group ID to search with
+	 * @param uuid the uuid
+	 * @param groupId the group ID
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByUUID_G(String uuid, long groupId)
@@ -1934,7 +1930,7 @@ public class DDLRecordSetPersistenceImpl extends BasePersistenceImpl<DDLRecordSe
 	/**
 	 * Removes all the d d l record sets where groupId = &#63; from the database.
 	 *
-	 * @param groupId the group ID to search with
+	 * @param groupId the group ID
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByGroupId(long groupId) throws SystemException {
@@ -1946,8 +1942,8 @@ public class DDLRecordSetPersistenceImpl extends BasePersistenceImpl<DDLRecordSe
 	/**
 	 * Removes the d d l record set where groupId = &#63; and recordSetKey = &#63; from the database.
 	 *
-	 * @param groupId the group ID to search with
-	 * @param recordSetKey the record set key to search with
+	 * @param groupId the group ID
+	 * @param recordSetKey the record set key
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByG_R(long groupId, String recordSetKey)
@@ -1969,9 +1965,9 @@ public class DDLRecordSetPersistenceImpl extends BasePersistenceImpl<DDLRecordSe
 	}
 
 	/**
-	 * Counts all the d d l record sets where uuid = &#63;.
+	 * Returns the number of d d l record sets where uuid = &#63;.
 	 *
-	 * @param uuid the uuid to search with
+	 * @param uuid the uuid
 	 * @return the number of matching d d l record sets
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2034,10 +2030,10 @@ public class DDLRecordSetPersistenceImpl extends BasePersistenceImpl<DDLRecordSe
 	}
 
 	/**
-	 * Counts all the d d l record sets where uuid = &#63; and groupId = &#63;.
+	 * Returns the number of d d l record sets where uuid = &#63; and groupId = &#63;.
 	 *
-	 * @param uuid the uuid to search with
-	 * @param groupId the group ID to search with
+	 * @param uuid the uuid
+	 * @param groupId the group ID
 	 * @return the number of matching d d l record sets
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2105,9 +2101,9 @@ public class DDLRecordSetPersistenceImpl extends BasePersistenceImpl<DDLRecordSe
 	}
 
 	/**
-	 * Counts all the d d l record sets where groupId = &#63;.
+	 * Returns the number of d d l record sets where groupId = &#63;.
 	 *
-	 * @param groupId the group ID to search with
+	 * @param groupId the group ID
 	 * @return the number of matching d d l record sets
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2158,9 +2154,9 @@ public class DDLRecordSetPersistenceImpl extends BasePersistenceImpl<DDLRecordSe
 	}
 
 	/**
-	 * Filters by the user's permissions and counts all the d d l record sets where groupId = &#63;.
+	 * Returns the number of d d l record sets that the user has permission to view where groupId = &#63;.
 	 *
-	 * @param groupId the group ID to search with
+	 * @param groupId the group ID
 	 * @return the number of matching d d l record sets that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2205,10 +2201,10 @@ public class DDLRecordSetPersistenceImpl extends BasePersistenceImpl<DDLRecordSe
 	}
 
 	/**
-	 * Counts all the d d l record sets where groupId = &#63; and recordSetKey = &#63;.
+	 * Returns the number of d d l record sets where groupId = &#63; and recordSetKey = &#63;.
 	 *
-	 * @param groupId the group ID to search with
-	 * @param recordSetKey the record set key to search with
+	 * @param groupId the group ID
+	 * @param recordSetKey the record set key
 	 * @return the number of matching d d l record sets
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2276,7 +2272,7 @@ public class DDLRecordSetPersistenceImpl extends BasePersistenceImpl<DDLRecordSe
 	}
 
 	/**
-	 * Counts all the d d l record sets.
+	 * Returns the number of d d l record sets.
 	 *
 	 * @return the number of d d l record sets
 	 * @throws SystemException if a system exception occurred

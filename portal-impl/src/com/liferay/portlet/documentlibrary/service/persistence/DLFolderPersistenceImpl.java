@@ -181,7 +181,7 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 	/**
 	 * Caches the d l folder in the entity cache if it is enabled.
 	 *
-	 * @param dlFolder the d l folder to cache
+	 * @param dlFolder the d l folder
 	 */
 	public void cacheResult(DLFolder dlFolder) {
 		EntityCacheUtil.putResult(DLFolderModelImpl.ENTITY_CACHE_ENABLED,
@@ -208,7 +208,7 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 	/**
 	 * Caches the d l folders in the entity cache if it is enabled.
 	 *
-	 * @param dlFolders the d l folders to cache
+	 * @param dlFolders the d l folders
 	 */
 	public void cacheResult(List<DLFolder> dlFolders) {
 		for (DLFolder dlFolder : dlFolders) {
@@ -286,7 +286,7 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 	/**
 	 * Removes the d l folder with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param primaryKey the primary key of the d l folder to remove
+	 * @param primaryKey the primary key of the d l folder
 	 * @return the d l folder that was removed
 	 * @throws com.liferay.portal.NoSuchModelException if a d l folder with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -299,7 +299,7 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 	/**
 	 * Removes the d l folder with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param folderId the primary key of the d l folder to remove
+	 * @param folderId the primary key of the d l folder
 	 * @return the d l folder that was removed
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFolderException if a d l folder with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -339,7 +339,7 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 	/**
 	 * Removes the d l folder from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param dlFolder the d l folder to remove
+	 * @param dlFolder the d l folder
 	 * @return the d l folder that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -523,9 +523,9 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 	}
 
 	/**
-	 * Finds the d l folder with the primary key or throws a {@link com.liferay.portal.NoSuchModelException} if it could not be found.
+	 * Returns the d l folder with the primary key or throws a {@link com.liferay.portal.NoSuchModelException} if it could not be found.
 	 *
-	 * @param primaryKey the primary key of the d l folder to find
+	 * @param primaryKey the primary key of the d l folder
 	 * @return the d l folder
 	 * @throws com.liferay.portal.NoSuchModelException if a d l folder with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -536,9 +536,9 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 	}
 
 	/**
-	 * Finds the d l folder with the primary key or throws a {@link com.liferay.portlet.documentlibrary.NoSuchFolderException} if it could not be found.
+	 * Returns the d l folder with the primary key or throws a {@link com.liferay.portlet.documentlibrary.NoSuchFolderException} if it could not be found.
 	 *
-	 * @param folderId the primary key of the d l folder to find
+	 * @param folderId the primary key of the d l folder
 	 * @return the d l folder
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFolderException if a d l folder with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -560,9 +560,9 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 	}
 
 	/**
-	 * Finds the d l folder with the primary key or returns <code>null</code> if it could not be found.
+	 * Returns the d l folder with the primary key or returns <code>null</code> if it could not be found.
 	 *
-	 * @param primaryKey the primary key of the d l folder to find
+	 * @param primaryKey the primary key of the d l folder
 	 * @return the d l folder, or <code>null</code> if a d l folder with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -572,9 +572,9 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 	}
 
 	/**
-	 * Finds the d l folder with the primary key or returns <code>null</code> if it could not be found.
+	 * Returns the d l folder with the primary key or returns <code>null</code> if it could not be found.
 	 *
-	 * @param folderId the primary key of the d l folder to find
+	 * @param folderId the primary key of the d l folder
 	 * @return the d l folder, or <code>null</code> if a d l folder with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -607,9 +607,9 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 	}
 
 	/**
-	 * Finds all the d l folders where uuid = &#63;.
+	 * Returns all the d l folders where uuid = &#63;.
 	 *
-	 * @param uuid the uuid to search with
+	 * @param uuid the uuid
 	 * @return the matching d l folders
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -618,15 +618,15 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 	}
 
 	/**
-	 * Finds a range of all the d l folders where uuid = &#63;.
+	 * Returns a range of all the d l folders where uuid = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param uuid the uuid to search with
-	 * @param start the lower bound of the range of d l folders to return
-	 * @param end the upper bound of the range of d l folders to return (not inclusive)
+	 * @param uuid the uuid
+	 * @param start the lower bound of the range of d l folders
+	 * @param end the upper bound of the range of d l folders (not inclusive)
 	 * @return the range of matching d l folders
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -636,15 +636,15 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 	}
 
 	/**
-	 * Finds an ordered range of all the d l folders where uuid = &#63;.
+	 * Returns an ordered range of all the d l folders where uuid = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param uuid the uuid to search with
-	 * @param start the lower bound of the range of d l folders to return
-	 * @param end the upper bound of the range of d l folders to return (not inclusive)
+	 * @param uuid the uuid
+	 * @param start the lower bound of the range of d l folders
+	 * @param end the upper bound of the range of d l folders (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching d l folders
 	 * @throws SystemException if a system exception occurred
@@ -736,13 +736,13 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 	}
 
 	/**
-	 * Finds the first d l folder in the ordered set where uuid = &#63;.
+	 * Returns the first d l folder in the ordered set where uuid = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param uuid the uuid to search with
+	 * @param uuid the uuid
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching d l folder
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFolderException if a matching d l folder could not be found
@@ -771,13 +771,13 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 	}
 
 	/**
-	 * Finds the last d l folder in the ordered set where uuid = &#63;.
+	 * Returns the last d l folder in the ordered set where uuid = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param uuid the uuid to search with
+	 * @param uuid the uuid
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching d l folder
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFolderException if a matching d l folder could not be found
@@ -809,14 +809,14 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 	}
 
 	/**
-	 * Finds the d l folders before and after the current d l folder in the ordered set where uuid = &#63;.
+	 * Returns the d l folders before and after the current d l folder in the ordered set where uuid = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
 	 * @param folderId the primary key of the current d l folder
-	 * @param uuid the uuid to search with
+	 * @param uuid the uuid
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next d l folder
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFolderException if a d l folder with the primary key could not be found
@@ -969,10 +969,10 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 	}
 
 	/**
-	 * Finds the d l folder where uuid = &#63; and groupId = &#63; or throws a {@link com.liferay.portlet.documentlibrary.NoSuchFolderException} if it could not be found.
+	 * Returns the d l folder where uuid = &#63; and groupId = &#63; or throws a {@link com.liferay.portlet.documentlibrary.NoSuchFolderException} if it could not be found.
 	 *
-	 * @param uuid the uuid to search with
-	 * @param groupId the group ID to search with
+	 * @param uuid the uuid
+	 * @param groupId the group ID
 	 * @return the matching d l folder
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFolderException if a matching d l folder could not be found
 	 * @throws SystemException if a system exception occurred
@@ -1005,10 +1005,10 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 	}
 
 	/**
-	 * Finds the d l folder where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 * Returns the d l folder where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	 *
-	 * @param uuid the uuid to search with
-	 * @param groupId the group ID to search with
+	 * @param uuid the uuid
+	 * @param groupId the group ID
 	 * @return the matching d l folder, or <code>null</code> if a matching d l folder could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1018,10 +1018,10 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 	}
 
 	/**
-	 * Finds the d l folder where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 * Returns the d l folder where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	 *
-	 * @param uuid the uuid to search with
-	 * @param groupId the group ID to search with
+	 * @param uuid the uuid
+	 * @param groupId the group ID
 	 * @return the matching d l folder, or <code>null</code> if a matching d l folder could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1122,9 +1122,9 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 	}
 
 	/**
-	 * Finds all the d l folders where groupId = &#63;.
+	 * Returns all the d l folders where groupId = &#63;.
 	 *
-	 * @param groupId the group ID to search with
+	 * @param groupId the group ID
 	 * @return the matching d l folders
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1133,15 +1133,15 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 	}
 
 	/**
-	 * Finds a range of all the d l folders where groupId = &#63;.
+	 * Returns a range of all the d l folders where groupId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group ID to search with
-	 * @param start the lower bound of the range of d l folders to return
-	 * @param end the upper bound of the range of d l folders to return (not inclusive)
+	 * @param groupId the group ID
+	 * @param start the lower bound of the range of d l folders
+	 * @param end the upper bound of the range of d l folders (not inclusive)
 	 * @return the range of matching d l folders
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1151,15 +1151,15 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 	}
 
 	/**
-	 * Finds an ordered range of all the d l folders where groupId = &#63;.
+	 * Returns an ordered range of all the d l folders where groupId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group ID to search with
-	 * @param start the lower bound of the range of d l folders to return
-	 * @param end the upper bound of the range of d l folders to return (not inclusive)
+	 * @param groupId the group ID
+	 * @param start the lower bound of the range of d l folders
+	 * @param end the upper bound of the range of d l folders (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching d l folders
 	 * @throws SystemException if a system exception occurred
@@ -1239,13 +1239,13 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 	}
 
 	/**
-	 * Finds the first d l folder in the ordered set where groupId = &#63;.
+	 * Returns the first d l folder in the ordered set where groupId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group ID to search with
+	 * @param groupId the group ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching d l folder
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFolderException if a matching d l folder could not be found
@@ -1274,13 +1274,13 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 	}
 
 	/**
-	 * Finds the last d l folder in the ordered set where groupId = &#63;.
+	 * Returns the last d l folder in the ordered set where groupId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group ID to search with
+	 * @param groupId the group ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching d l folder
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFolderException if a matching d l folder could not be found
@@ -1312,14 +1312,14 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 	}
 
 	/**
-	 * Finds the d l folders before and after the current d l folder in the ordered set where groupId = &#63;.
+	 * Returns the d l folders before and after the current d l folder in the ordered set where groupId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
 	 * @param folderId the primary key of the current d l folder
-	 * @param groupId the group ID to search with
+	 * @param groupId the group ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next d l folder
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFolderException if a d l folder with the primary key could not be found
@@ -1460,9 +1460,9 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 	}
 
 	/**
-	 * Filters by the user's permissions and finds all the d l folders where groupId = &#63;.
+	 * Returns all the d l folders that the user has permission to view where groupId = &#63;.
 	 *
-	 * @param groupId the group ID to search with
+	 * @param groupId the group ID
 	 * @return the matching d l folders that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1473,15 +1473,15 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 	}
 
 	/**
-	 * Filters by the user's permissions and finds a range of all the d l folders where groupId = &#63;.
+	 * Returns a range of all the d l folders that the user has permission to view where groupId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group ID to search with
-	 * @param start the lower bound of the range of d l folders to return
-	 * @param end the upper bound of the range of d l folders to return (not inclusive)
+	 * @param groupId the group ID
+	 * @param start the lower bound of the range of d l folders
+	 * @param end the upper bound of the range of d l folders (not inclusive)
 	 * @return the range of matching d l folders that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1491,15 +1491,15 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 	}
 
 	/**
-	 * Filters by the user's permissions and finds an ordered range of all the d l folders where groupId = &#63;.
+	 * Returns an ordered range of all the d l folders that the user has permissions to view where groupId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group ID to search with
-	 * @param start the lower bound of the range of d l folders to return
-	 * @param end the upper bound of the range of d l folders to return (not inclusive)
+	 * @param groupId the group ID
+	 * @param start the lower bound of the range of d l folders
+	 * @param end the upper bound of the range of d l folders (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching d l folders that the user has permission to view
 	 * @throws SystemException if a system exception occurred
@@ -1578,14 +1578,10 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 	}
 
 	/**
-	 * Filters the d l folders before and after the current d l folder in the ordered set where groupId = &#63;.
-	 *
-	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
-	 * </p>
+	 * Returns the d l folders before and after the current d l folder in the ordered set of d l folders that the user has permission to view where groupId = &#63;.
 	 *
 	 * @param folderId the primary key of the current d l folder
-	 * @param groupId the group ID to search with
+	 * @param groupId the group ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next d l folder
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFolderException if a d l folder with the primary key could not be found
@@ -1758,9 +1754,9 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 	}
 
 	/**
-	 * Finds all the d l folders where companyId = &#63;.
+	 * Returns all the d l folders where companyId = &#63;.
 	 *
-	 * @param companyId the company ID to search with
+	 * @param companyId the company ID
 	 * @return the matching d l folders
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1771,15 +1767,15 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 	}
 
 	/**
-	 * Finds a range of all the d l folders where companyId = &#63;.
+	 * Returns a range of all the d l folders where companyId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param companyId the company ID to search with
-	 * @param start the lower bound of the range of d l folders to return
-	 * @param end the upper bound of the range of d l folders to return (not inclusive)
+	 * @param companyId the company ID
+	 * @param start the lower bound of the range of d l folders
+	 * @param end the upper bound of the range of d l folders (not inclusive)
 	 * @return the range of matching d l folders
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1789,15 +1785,15 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 	}
 
 	/**
-	 * Finds an ordered range of all the d l folders where companyId = &#63;.
+	 * Returns an ordered range of all the d l folders where companyId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param companyId the company ID to search with
-	 * @param start the lower bound of the range of d l folders to return
-	 * @param end the upper bound of the range of d l folders to return (not inclusive)
+	 * @param companyId the company ID
+	 * @param start the lower bound of the range of d l folders
+	 * @param end the upper bound of the range of d l folders (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching d l folders
 	 * @throws SystemException if a system exception occurred
@@ -1877,13 +1873,13 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 	}
 
 	/**
-	 * Finds the first d l folder in the ordered set where companyId = &#63;.
+	 * Returns the first d l folder in the ordered set where companyId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param companyId the company ID to search with
+	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching d l folder
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFolderException if a matching d l folder could not be found
@@ -1912,13 +1908,13 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 	}
 
 	/**
-	 * Finds the last d l folder in the ordered set where companyId = &#63;.
+	 * Returns the last d l folder in the ordered set where companyId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param companyId the company ID to search with
+	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching d l folder
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFolderException if a matching d l folder could not be found
@@ -1950,14 +1946,14 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 	}
 
 	/**
-	 * Finds the d l folders before and after the current d l folder in the ordered set where companyId = &#63;.
+	 * Returns the d l folders before and after the current d l folder in the ordered set where companyId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
 	 * @param folderId the primary key of the current d l folder
-	 * @param companyId the company ID to search with
+	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next d l folder
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFolderException if a d l folder with the primary key could not be found
@@ -2098,9 +2094,9 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 	}
 
 	/**
-	 * Finds the d l folder where repositoryId = &#63; or throws a {@link com.liferay.portlet.documentlibrary.NoSuchFolderException} if it could not be found.
+	 * Returns the d l folder where repositoryId = &#63; or throws a {@link com.liferay.portlet.documentlibrary.NoSuchFolderException} if it could not be found.
 	 *
-	 * @param repositoryId the repository ID to search with
+	 * @param repositoryId the repository ID
 	 * @return the matching d l folder
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFolderException if a matching d l folder could not be found
 	 * @throws SystemException if a system exception occurred
@@ -2130,9 +2126,9 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 	}
 
 	/**
-	 * Finds the d l folder where repositoryId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 * Returns the d l folder where repositoryId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	 *
-	 * @param repositoryId the repository ID to search with
+	 * @param repositoryId the repository ID
 	 * @return the matching d l folder, or <code>null</code> if a matching d l folder could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2142,9 +2138,9 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 	}
 
 	/**
-	 * Finds the d l folder where repositoryId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 * Returns the d l folder where repositoryId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	 *
-	 * @param repositoryId the repository ID to search with
+	 * @param repositoryId the repository ID
 	 * @return the matching d l folder, or <code>null</code> if a matching d l folder could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2227,10 +2223,10 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 	}
 
 	/**
-	 * Finds all the d l folders where groupId = &#63; and parentFolderId = &#63;.
+	 * Returns all the d l folders where groupId = &#63; and parentFolderId = &#63;.
 	 *
-	 * @param groupId the group ID to search with
-	 * @param parentFolderId the parent folder ID to search with
+	 * @param groupId the group ID
+	 * @param parentFolderId the parent folder ID
 	 * @return the matching d l folders
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2241,16 +2237,16 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 	}
 
 	/**
-	 * Finds a range of all the d l folders where groupId = &#63; and parentFolderId = &#63;.
+	 * Returns a range of all the d l folders where groupId = &#63; and parentFolderId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group ID to search with
-	 * @param parentFolderId the parent folder ID to search with
-	 * @param start the lower bound of the range of d l folders to return
-	 * @param end the upper bound of the range of d l folders to return (not inclusive)
+	 * @param groupId the group ID
+	 * @param parentFolderId the parent folder ID
+	 * @param start the lower bound of the range of d l folders
+	 * @param end the upper bound of the range of d l folders (not inclusive)
 	 * @return the range of matching d l folders
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2260,16 +2256,16 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 	}
 
 	/**
-	 * Finds an ordered range of all the d l folders where groupId = &#63; and parentFolderId = &#63;.
+	 * Returns an ordered range of all the d l folders where groupId = &#63; and parentFolderId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group ID to search with
-	 * @param parentFolderId the parent folder ID to search with
-	 * @param start the lower bound of the range of d l folders to return
-	 * @param end the upper bound of the range of d l folders to return (not inclusive)
+	 * @param groupId the group ID
+	 * @param parentFolderId the parent folder ID
+	 * @param start the lower bound of the range of d l folders
+	 * @param end the upper bound of the range of d l folders (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching d l folders
 	 * @throws SystemException if a system exception occurred
@@ -2354,14 +2350,14 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 	}
 
 	/**
-	 * Finds the first d l folder in the ordered set where groupId = &#63; and parentFolderId = &#63;.
+	 * Returns the first d l folder in the ordered set where groupId = &#63; and parentFolderId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group ID to search with
-	 * @param parentFolderId the parent folder ID to search with
+	 * @param groupId the group ID
+	 * @param parentFolderId the parent folder ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching d l folder
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFolderException if a matching d l folder could not be found
@@ -2394,14 +2390,14 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 	}
 
 	/**
-	 * Finds the last d l folder in the ordered set where groupId = &#63; and parentFolderId = &#63;.
+	 * Returns the last d l folder in the ordered set where groupId = &#63; and parentFolderId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group ID to search with
-	 * @param parentFolderId the parent folder ID to search with
+	 * @param groupId the group ID
+	 * @param parentFolderId the parent folder ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching d l folder
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFolderException if a matching d l folder could not be found
@@ -2436,15 +2432,15 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 	}
 
 	/**
-	 * Finds the d l folders before and after the current d l folder in the ordered set where groupId = &#63; and parentFolderId = &#63;.
+	 * Returns the d l folders before and after the current d l folder in the ordered set where groupId = &#63; and parentFolderId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
 	 * @param folderId the primary key of the current d l folder
-	 * @param groupId the group ID to search with
-	 * @param parentFolderId the parent folder ID to search with
+	 * @param groupId the group ID
+	 * @param parentFolderId the parent folder ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next d l folder
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFolderException if a d l folder with the primary key could not be found
@@ -2589,10 +2585,10 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 	}
 
 	/**
-	 * Filters by the user's permissions and finds all the d l folders where groupId = &#63; and parentFolderId = &#63;.
+	 * Returns all the d l folders that the user has permission to view where groupId = &#63; and parentFolderId = &#63;.
 	 *
-	 * @param groupId the group ID to search with
-	 * @param parentFolderId the parent folder ID to search with
+	 * @param groupId the group ID
+	 * @param parentFolderId the parent folder ID
 	 * @return the matching d l folders that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2603,16 +2599,16 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 	}
 
 	/**
-	 * Filters by the user's permissions and finds a range of all the d l folders where groupId = &#63; and parentFolderId = &#63;.
+	 * Returns a range of all the d l folders that the user has permission to view where groupId = &#63; and parentFolderId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group ID to search with
-	 * @param parentFolderId the parent folder ID to search with
-	 * @param start the lower bound of the range of d l folders to return
-	 * @param end the upper bound of the range of d l folders to return (not inclusive)
+	 * @param groupId the group ID
+	 * @param parentFolderId the parent folder ID
+	 * @param start the lower bound of the range of d l folders
+	 * @param end the upper bound of the range of d l folders (not inclusive)
 	 * @return the range of matching d l folders that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2622,16 +2618,16 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 	}
 
 	/**
-	 * Filters by the user's permissions and finds an ordered range of all the d l folders where groupId = &#63; and parentFolderId = &#63;.
+	 * Returns an ordered range of all the d l folders that the user has permissions to view where groupId = &#63; and parentFolderId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group ID to search with
-	 * @param parentFolderId the parent folder ID to search with
-	 * @param start the lower bound of the range of d l folders to return
-	 * @param end the upper bound of the range of d l folders to return (not inclusive)
+	 * @param groupId the group ID
+	 * @param parentFolderId the parent folder ID
+	 * @param start the lower bound of the range of d l folders
+	 * @param end the upper bound of the range of d l folders (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching d l folders that the user has permission to view
 	 * @throws SystemException if a system exception occurred
@@ -2716,15 +2712,11 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 	}
 
 	/**
-	 * Filters the d l folders before and after the current d l folder in the ordered set where groupId = &#63; and parentFolderId = &#63;.
-	 *
-	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
-	 * </p>
+	 * Returns the d l folders before and after the current d l folder in the ordered set of d l folders that the user has permission to view where groupId = &#63; and parentFolderId = &#63;.
 	 *
 	 * @param folderId the primary key of the current d l folder
-	 * @param groupId the group ID to search with
-	 * @param parentFolderId the parent folder ID to search with
+	 * @param groupId the group ID
+	 * @param parentFolderId the parent folder ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next d l folder
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFolderException if a d l folder with the primary key could not be found
@@ -2901,10 +2893,10 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 	}
 
 	/**
-	 * Finds all the d l folders where parentFolderId = &#63; and name = &#63;.
+	 * Returns all the d l folders where parentFolderId = &#63; and name = &#63;.
 	 *
-	 * @param parentFolderId the parent folder ID to search with
-	 * @param name the name to search with
+	 * @param parentFolderId the parent folder ID
+	 * @param name the name
 	 * @return the matching d l folders
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2915,16 +2907,16 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 	}
 
 	/**
-	 * Finds a range of all the d l folders where parentFolderId = &#63; and name = &#63;.
+	 * Returns a range of all the d l folders where parentFolderId = &#63; and name = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param parentFolderId the parent folder ID to search with
-	 * @param name the name to search with
-	 * @param start the lower bound of the range of d l folders to return
-	 * @param end the upper bound of the range of d l folders to return (not inclusive)
+	 * @param parentFolderId the parent folder ID
+	 * @param name the name
+	 * @param start the lower bound of the range of d l folders
+	 * @param end the upper bound of the range of d l folders (not inclusive)
 	 * @return the range of matching d l folders
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2934,16 +2926,16 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 	}
 
 	/**
-	 * Finds an ordered range of all the d l folders where parentFolderId = &#63; and name = &#63;.
+	 * Returns an ordered range of all the d l folders where parentFolderId = &#63; and name = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param parentFolderId the parent folder ID to search with
-	 * @param name the name to search with
-	 * @param start the lower bound of the range of d l folders to return
-	 * @param end the upper bound of the range of d l folders to return (not inclusive)
+	 * @param parentFolderId the parent folder ID
+	 * @param name the name
+	 * @param start the lower bound of the range of d l folders
+	 * @param end the upper bound of the range of d l folders (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching d l folders
 	 * @throws SystemException if a system exception occurred
@@ -3040,14 +3032,14 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 	}
 
 	/**
-	 * Finds the first d l folder in the ordered set where parentFolderId = &#63; and name = &#63;.
+	 * Returns the first d l folder in the ordered set where parentFolderId = &#63; and name = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param parentFolderId the parent folder ID to search with
-	 * @param name the name to search with
+	 * @param parentFolderId the parent folder ID
+	 * @param name the name
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching d l folder
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFolderException if a matching d l folder could not be found
@@ -3080,14 +3072,14 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 	}
 
 	/**
-	 * Finds the last d l folder in the ordered set where parentFolderId = &#63; and name = &#63;.
+	 * Returns the last d l folder in the ordered set where parentFolderId = &#63; and name = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param parentFolderId the parent folder ID to search with
-	 * @param name the name to search with
+	 * @param parentFolderId the parent folder ID
+	 * @param name the name
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching d l folder
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFolderException if a matching d l folder could not be found
@@ -3122,15 +3114,15 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 	}
 
 	/**
-	 * Finds the d l folders before and after the current d l folder in the ordered set where parentFolderId = &#63; and name = &#63;.
+	 * Returns the d l folders before and after the current d l folder in the ordered set where parentFolderId = &#63; and name = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
 	 * @param folderId the primary key of the current d l folder
-	 * @param parentFolderId the parent folder ID to search with
-	 * @param name the name to search with
+	 * @param parentFolderId the parent folder ID
+	 * @param name the name
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next d l folder
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFolderException if a d l folder with the primary key could not be found
@@ -3287,11 +3279,11 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 	}
 
 	/**
-	 * Finds the d l folder where groupId = &#63; and parentFolderId = &#63; and name = &#63; or throws a {@link com.liferay.portlet.documentlibrary.NoSuchFolderException} if it could not be found.
+	 * Returns the d l folder where groupId = &#63; and parentFolderId = &#63; and name = &#63; or throws a {@link com.liferay.portlet.documentlibrary.NoSuchFolderException} if it could not be found.
 	 *
-	 * @param groupId the group ID to search with
-	 * @param parentFolderId the parent folder ID to search with
-	 * @param name the name to search with
+	 * @param groupId the group ID
+	 * @param parentFolderId the parent folder ID
+	 * @param name the name
 	 * @return the matching d l folder
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFolderException if a matching d l folder could not be found
 	 * @throws SystemException if a system exception occurred
@@ -3327,11 +3319,11 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 	}
 
 	/**
-	 * Finds the d l folder where groupId = &#63; and parentFolderId = &#63; and name = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 * Returns the d l folder where groupId = &#63; and parentFolderId = &#63; and name = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	 *
-	 * @param groupId the group ID to search with
-	 * @param parentFolderId the parent folder ID to search with
-	 * @param name the name to search with
+	 * @param groupId the group ID
+	 * @param parentFolderId the parent folder ID
+	 * @param name the name
 	 * @return the matching d l folder, or <code>null</code> if a matching d l folder could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -3341,11 +3333,11 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 	}
 
 	/**
-	 * Finds the d l folder where groupId = &#63; and parentFolderId = &#63; and name = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 * Returns the d l folder where groupId = &#63; and parentFolderId = &#63; and name = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	 *
-	 * @param groupId the group ID to search with
-	 * @param parentFolderId the parent folder ID to search with
-	 * @param name the name to search with
+	 * @param groupId the group ID
+	 * @param parentFolderId the parent folder ID
+	 * @param name the name
 	 * @return the matching d l folder, or <code>null</code> if a matching d l folder could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -3451,7 +3443,7 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 	}
 
 	/**
-	 * Finds all the d l folders.
+	 * Returns all the d l folders.
 	 *
 	 * @return the d l folders
 	 * @throws SystemException if a system exception occurred
@@ -3461,14 +3453,14 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 	}
 
 	/**
-	 * Finds a range of all the d l folders.
+	 * Returns a range of all the d l folders.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param start the lower bound of the range of d l folders to return
-	 * @param end the upper bound of the range of d l folders to return (not inclusive)
+	 * @param start the lower bound of the range of d l folders
+	 * @param end the upper bound of the range of d l folders (not inclusive)
 	 * @return the range of d l folders
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -3477,14 +3469,14 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 	}
 
 	/**
-	 * Finds an ordered range of all the d l folders.
+	 * Returns an ordered range of all the d l folders.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param start the lower bound of the range of d l folders to return
-	 * @param end the upper bound of the range of d l folders to return (not inclusive)
+	 * @param start the lower bound of the range of d l folders
+	 * @param end the upper bound of the range of d l folders (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of d l folders
 	 * @throws SystemException if a system exception occurred
@@ -3561,7 +3553,7 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 	/**
 	 * Removes all the d l folders where uuid = &#63; from the database.
 	 *
-	 * @param uuid the uuid to search with
+	 * @param uuid the uuid
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByUuid(String uuid) throws SystemException {
@@ -3573,8 +3565,8 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 	/**
 	 * Removes the d l folder where uuid = &#63; and groupId = &#63; from the database.
 	 *
-	 * @param uuid the uuid to search with
-	 * @param groupId the group ID to search with
+	 * @param uuid the uuid
+	 * @param groupId the group ID
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByUUID_G(String uuid, long groupId)
@@ -3587,7 +3579,7 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 	/**
 	 * Removes all the d l folders where groupId = &#63; from the database.
 	 *
-	 * @param groupId the group ID to search with
+	 * @param groupId the group ID
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByGroupId(long groupId) throws SystemException {
@@ -3599,7 +3591,7 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 	/**
 	 * Removes all the d l folders where companyId = &#63; from the database.
 	 *
-	 * @param companyId the company ID to search with
+	 * @param companyId the company ID
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByCompanyId(long companyId) throws SystemException {
@@ -3611,7 +3603,7 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 	/**
 	 * Removes the d l folder where repositoryId = &#63; from the database.
 	 *
-	 * @param repositoryId the repository ID to search with
+	 * @param repositoryId the repository ID
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByRepositoryId(long repositoryId)
@@ -3624,8 +3616,8 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 	/**
 	 * Removes all the d l folders where groupId = &#63; and parentFolderId = &#63; from the database.
 	 *
-	 * @param groupId the group ID to search with
-	 * @param parentFolderId the parent folder ID to search with
+	 * @param groupId the group ID
+	 * @param parentFolderId the parent folder ID
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByG_P(long groupId, long parentFolderId)
@@ -3638,8 +3630,8 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 	/**
 	 * Removes all the d l folders where parentFolderId = &#63; and name = &#63; from the database.
 	 *
-	 * @param parentFolderId the parent folder ID to search with
-	 * @param name the name to search with
+	 * @param parentFolderId the parent folder ID
+	 * @param name the name
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByP_N(long parentFolderId, String name)
@@ -3652,9 +3644,9 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 	/**
 	 * Removes the d l folder where groupId = &#63; and parentFolderId = &#63; and name = &#63; from the database.
 	 *
-	 * @param groupId the group ID to search with
-	 * @param parentFolderId the parent folder ID to search with
-	 * @param name the name to search with
+	 * @param groupId the group ID
+	 * @param parentFolderId the parent folder ID
+	 * @param name the name
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByG_P_N(long groupId, long parentFolderId, String name)
@@ -3676,9 +3668,9 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 	}
 
 	/**
-	 * Counts all the d l folders where uuid = &#63;.
+	 * Returns the number of d l folders where uuid = &#63;.
 	 *
-	 * @param uuid the uuid to search with
+	 * @param uuid the uuid
 	 * @return the number of matching d l folders
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -3741,10 +3733,10 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 	}
 
 	/**
-	 * Counts all the d l folders where uuid = &#63; and groupId = &#63;.
+	 * Returns the number of d l folders where uuid = &#63; and groupId = &#63;.
 	 *
-	 * @param uuid the uuid to search with
-	 * @param groupId the group ID to search with
+	 * @param uuid the uuid
+	 * @param groupId the group ID
 	 * @return the number of matching d l folders
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -3812,9 +3804,9 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 	}
 
 	/**
-	 * Counts all the d l folders where groupId = &#63;.
+	 * Returns the number of d l folders where groupId = &#63;.
 	 *
-	 * @param groupId the group ID to search with
+	 * @param groupId the group ID
 	 * @return the number of matching d l folders
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -3865,9 +3857,9 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 	}
 
 	/**
-	 * Filters by the user's permissions and counts all the d l folders where groupId = &#63;.
+	 * Returns the number of d l folders that the user has permission to view where groupId = &#63;.
 	 *
-	 * @param groupId the group ID to search with
+	 * @param groupId the group ID
 	 * @return the number of matching d l folders that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -3912,9 +3904,9 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 	}
 
 	/**
-	 * Counts all the d l folders where companyId = &#63;.
+	 * Returns the number of d l folders where companyId = &#63;.
 	 *
-	 * @param companyId the company ID to search with
+	 * @param companyId the company ID
 	 * @return the number of matching d l folders
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -3965,9 +3957,9 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 	}
 
 	/**
-	 * Counts all the d l folders where repositoryId = &#63;.
+	 * Returns the number of d l folders where repositoryId = &#63;.
 	 *
-	 * @param repositoryId the repository ID to search with
+	 * @param repositoryId the repository ID
 	 * @return the number of matching d l folders
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -4018,10 +4010,10 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 	}
 
 	/**
-	 * Counts all the d l folders where groupId = &#63; and parentFolderId = &#63;.
+	 * Returns the number of d l folders where groupId = &#63; and parentFolderId = &#63;.
 	 *
-	 * @param groupId the group ID to search with
-	 * @param parentFolderId the parent folder ID to search with
+	 * @param groupId the group ID
+	 * @param parentFolderId the parent folder ID
 	 * @return the number of matching d l folders
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -4077,10 +4069,10 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 	}
 
 	/**
-	 * Filters by the user's permissions and counts all the d l folders where groupId = &#63; and parentFolderId = &#63;.
+	 * Returns the number of d l folders that the user has permission to view where groupId = &#63; and parentFolderId = &#63;.
 	 *
-	 * @param groupId the group ID to search with
-	 * @param parentFolderId the parent folder ID to search with
+	 * @param groupId the group ID
+	 * @param parentFolderId the parent folder ID
 	 * @return the number of matching d l folders that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -4130,10 +4122,10 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 	}
 
 	/**
-	 * Counts all the d l folders where parentFolderId = &#63; and name = &#63;.
+	 * Returns the number of d l folders where parentFolderId = &#63; and name = &#63;.
 	 *
-	 * @param parentFolderId the parent folder ID to search with
-	 * @param name the name to search with
+	 * @param parentFolderId the parent folder ID
+	 * @param name the name
 	 * @return the number of matching d l folders
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -4201,11 +4193,11 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 	}
 
 	/**
-	 * Counts all the d l folders where groupId = &#63; and parentFolderId = &#63; and name = &#63;.
+	 * Returns the number of d l folders where groupId = &#63; and parentFolderId = &#63; and name = &#63;.
 	 *
-	 * @param groupId the group ID to search with
-	 * @param parentFolderId the parent folder ID to search with
-	 * @param name the name to search with
+	 * @param groupId the group ID
+	 * @param parentFolderId the parent folder ID
+	 * @param name the name
 	 * @return the number of matching d l folders
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -4277,7 +4269,7 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 	}
 
 	/**
-	 * Counts all the d l folders.
+	 * Returns the number of d l folders.
 	 *
 	 * @return the number of d l folders
 	 * @throws SystemException if a system exception occurred

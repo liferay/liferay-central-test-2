@@ -43,21 +43,21 @@ public interface WikiPageResourceModel extends BaseModel<WikiPageResource> {
 	 */
 
 	/**
-	 * Gets the primary key of this wiki page resource.
+	 * Returns the primary key of this wiki page resource.
 	 *
 	 * @return the primary key of this wiki page resource
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this wiki page resource
+	 * Sets the primary key of this wiki page resource.
 	 *
 	 * @param primaryKey the primary key of this wiki page resource
 	 */
 	public void setPrimaryKey(long primaryKey);
 
 	/**
-	 * Gets the uuid of this wiki page resource.
+	 * Returns the uuid of this wiki page resource.
 	 *
 	 * @return the uuid of this wiki page resource
 	 */
@@ -72,7 +72,7 @@ public interface WikiPageResourceModel extends BaseModel<WikiPageResource> {
 	public void setUuid(String uuid);
 
 	/**
-	 * Gets the resource prim key of this wiki page resource.
+	 * Returns the resource prim key of this wiki page resource.
 	 *
 	 * @return the resource prim key of this wiki page resource
 	 */
@@ -86,7 +86,7 @@ public interface WikiPageResourceModel extends BaseModel<WikiPageResource> {
 	public void setResourcePrimKey(long resourcePrimKey);
 
 	/**
-	 * Gets the node ID of this wiki page resource.
+	 * Returns the node ID of this wiki page resource.
 	 *
 	 * @return the node ID of this wiki page resource
 	 */
@@ -100,7 +100,7 @@ public interface WikiPageResourceModel extends BaseModel<WikiPageResource> {
 	public void setNodeId(long nodeId);
 
 	/**
-	 * Gets the title of this wiki page resource.
+	 * Returns the title of this wiki page resource.
 	 *
 	 * @return the title of this wiki page resource
 	 */

@@ -42,21 +42,21 @@ public interface ListTypeModel extends BaseModel<ListType> {
 	 */
 
 	/**
-	 * Gets the primary key of this list type.
+	 * Returns the primary key of this list type.
 	 *
 	 * @return the primary key of this list type
 	 */
 	public int getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this list type
+	 * Sets the primary key of this list type.
 	 *
 	 * @param primaryKey the primary key of this list type
 	 */
 	public void setPrimaryKey(int primaryKey);
 
 	/**
-	 * Gets the list type ID of this list type.
+	 * Returns the list type ID of this list type.
 	 *
 	 * @return the list type ID of this list type
 	 */
@@ -70,7 +70,7 @@ public interface ListTypeModel extends BaseModel<ListType> {
 	public void setListTypeId(int listTypeId);
 
 	/**
-	 * Gets the name of this list type.
+	 * Returns the name of this list type.
 	 *
 	 * @return the name of this list type
 	 */
@@ -85,7 +85,7 @@ public interface ListTypeModel extends BaseModel<ListType> {
 	public void setName(String name);
 
 	/**
-	 * Gets the type of this list type.
+	 * Returns the type of this list type.
 	 *
 	 * @return the type of this list type
 	 */

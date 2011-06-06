@@ -37,7 +37,7 @@ public class CountryWrapper implements Country {
 	}
 
 	/**
-	* Gets the primary key of this country.
+	* Returns the primary key of this country.
 	*
 	* @return the primary key of this country
 	*/
@@ -46,7 +46,7 @@ public class CountryWrapper implements Country {
 	}
 
 	/**
-	* Sets the primary key of this country
+	* Sets the primary key of this country.
 	*
 	* @param primaryKey the primary key of this country
 	*/
@@ -55,7 +55,7 @@ public class CountryWrapper implements Country {
 	}
 
 	/**
-	* Gets the country ID of this country.
+	* Returns the country ID of this country.
 	*
 	* @return the country ID of this country
 	*/
@@ -73,7 +73,7 @@ public class CountryWrapper implements Country {
 	}
 
 	/**
-	* Gets the name of this country.
+	* Returns the name of this country.
 	*
 	* @return the name of this country
 	*/
@@ -91,7 +91,7 @@ public class CountryWrapper implements Country {
 	}
 
 	/**
-	* Gets the a2 of this country.
+	* Returns the a2 of this country.
 	*
 	* @return the a2 of this country
 	*/
@@ -109,7 +109,7 @@ public class CountryWrapper implements Country {
 	}
 
 	/**
-	* Gets the a3 of this country.
+	* Returns the a3 of this country.
 	*
 	* @return the a3 of this country
 	*/
@@ -127,7 +127,7 @@ public class CountryWrapper implements Country {
 	}
 
 	/**
-	* Gets the number of this country.
+	* Returns the number of this country.
 	*
 	* @return the number of this country
 	*/
@@ -145,7 +145,7 @@ public class CountryWrapper implements Country {
 	}
 
 	/**
-	* Gets the idd of this country.
+	* Returns the idd of this country.
 	*
 	* @return the idd of this country
 	*/
@@ -163,7 +163,7 @@ public class CountryWrapper implements Country {
 	}
 
 	/**
-	* Gets the active of this country.
+	* Returns the active of this country.
 	*
 	* @return the active of this country
 	*/

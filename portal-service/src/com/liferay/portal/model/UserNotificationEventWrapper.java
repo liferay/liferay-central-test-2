@@ -38,7 +38,7 @@ public class UserNotificationEventWrapper implements UserNotificationEvent {
 	}
 
 	/**
-	* Gets the primary key of this user notification event.
+	* Returns the primary key of this user notification event.
 	*
 	* @return the primary key of this user notification event
 	*/
@@ -47,7 +47,7 @@ public class UserNotificationEventWrapper implements UserNotificationEvent {
 	}
 
 	/**
-	* Sets the primary key of this user notification event
+	* Sets the primary key of this user notification event.
 	*
 	* @param primaryKey the primary key of this user notification event
 	*/
@@ -56,7 +56,7 @@ public class UserNotificationEventWrapper implements UserNotificationEvent {
 	}
 
 	/**
-	* Gets the uuid of this user notification event.
+	* Returns the uuid of this user notification event.
 	*
 	* @return the uuid of this user notification event
 	*/
@@ -74,7 +74,7 @@ public class UserNotificationEventWrapper implements UserNotificationEvent {
 	}
 
 	/**
-	* Gets the user notification event ID of this user notification event.
+	* Returns the user notification event ID of this user notification event.
 	*
 	* @return the user notification event ID of this user notification event
 	*/
@@ -92,7 +92,7 @@ public class UserNotificationEventWrapper implements UserNotificationEvent {
 	}
 
 	/**
-	* Gets the company ID of this user notification event.
+	* Returns the company ID of this user notification event.
 	*
 	* @return the company ID of this user notification event
 	*/
@@ -110,7 +110,7 @@ public class UserNotificationEventWrapper implements UserNotificationEvent {
 	}
 
 	/**
-	* Gets the user ID of this user notification event.
+	* Returns the user ID of this user notification event.
 	*
 	* @return the user ID of this user notification event
 	*/
@@ -128,7 +128,7 @@ public class UserNotificationEventWrapper implements UserNotificationEvent {
 	}
 
 	/**
-	* Gets the user uuid of this user notification event.
+	* Returns the user uuid of this user notification event.
 	*
 	* @return the user uuid of this user notification event
 	* @throws SystemException if a system exception occurred
@@ -148,7 +148,7 @@ public class UserNotificationEventWrapper implements UserNotificationEvent {
 	}
 
 	/**
-	* Gets the type of this user notification event.
+	* Returns the type of this user notification event.
 	*
 	* @return the type of this user notification event
 	*/
@@ -166,7 +166,7 @@ public class UserNotificationEventWrapper implements UserNotificationEvent {
 	}
 
 	/**
-	* Gets the timestamp of this user notification event.
+	* Returns the timestamp of this user notification event.
 	*
 	* @return the timestamp of this user notification event
 	*/
@@ -184,7 +184,7 @@ public class UserNotificationEventWrapper implements UserNotificationEvent {
 	}
 
 	/**
-	* Gets the deliver by of this user notification event.
+	* Returns the deliver by of this user notification event.
 	*
 	* @return the deliver by of this user notification event
 	*/
@@ -202,7 +202,7 @@ public class UserNotificationEventWrapper implements UserNotificationEvent {
 	}
 
 	/**
-	* Gets the payload of this user notification event.
+	* Returns the payload of this user notification event.
 	*
 	* @return the payload of this user notification event
 	*/

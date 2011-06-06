@@ -37,7 +37,7 @@ public class DDLRecordSetWrapper implements DDLRecordSet {
 	}
 
 	/**
-	* Gets the primary key of this d d l record set.
+	* Returns the primary key of this d d l record set.
 	*
 	* @return the primary key of this d d l record set
 	*/
@@ -46,7 +46,7 @@ public class DDLRecordSetWrapper implements DDLRecordSet {
 	}
 
 	/**
-	* Sets the primary key of this d d l record set
+	* Sets the primary key of this d d l record set.
 	*
 	* @param primaryKey the primary key of this d d l record set
 	*/
@@ -55,7 +55,7 @@ public class DDLRecordSetWrapper implements DDLRecordSet {
 	}
 
 	/**
-	* Gets the uuid of this d d l record set.
+	* Returns the uuid of this d d l record set.
 	*
 	* @return the uuid of this d d l record set
 	*/
@@ -73,7 +73,7 @@ public class DDLRecordSetWrapper implements DDLRecordSet {
 	}
 
 	/**
-	* Gets the record set ID of this d d l record set.
+	* Returns the record set ID of this d d l record set.
 	*
 	* @return the record set ID of this d d l record set
 	*/
@@ -91,7 +91,7 @@ public class DDLRecordSetWrapper implements DDLRecordSet {
 	}
 
 	/**
-	* Gets the group ID of this d d l record set.
+	* Returns the group ID of this d d l record set.
 	*
 	* @return the group ID of this d d l record set
 	*/
@@ -109,7 +109,7 @@ public class DDLRecordSetWrapper implements DDLRecordSet {
 	}
 
 	/**
-	* Gets the company ID of this d d l record set.
+	* Returns the company ID of this d d l record set.
 	*
 	* @return the company ID of this d d l record set
 	*/
@@ -127,7 +127,7 @@ public class DDLRecordSetWrapper implements DDLRecordSet {
 	}
 
 	/**
-	* Gets the user ID of this d d l record set.
+	* Returns the user ID of this d d l record set.
 	*
 	* @return the user ID of this d d l record set
 	*/
@@ -145,7 +145,7 @@ public class DDLRecordSetWrapper implements DDLRecordSet {
 	}
 
 	/**
-	* Gets the user uuid of this d d l record set.
+	* Returns the user uuid of this d d l record set.
 	*
 	* @return the user uuid of this d d l record set
 	* @throws SystemException if a system exception occurred
@@ -165,7 +165,7 @@ public class DDLRecordSetWrapper implements DDLRecordSet {
 	}
 
 	/**
-	* Gets the user name of this d d l record set.
+	* Returns the user name of this d d l record set.
 	*
 	* @return the user name of this d d l record set
 	*/
@@ -183,7 +183,7 @@ public class DDLRecordSetWrapper implements DDLRecordSet {
 	}
 
 	/**
-	* Gets the create date of this d d l record set.
+	* Returns the create date of this d d l record set.
 	*
 	* @return the create date of this d d l record set
 	*/
@@ -201,7 +201,7 @@ public class DDLRecordSetWrapper implements DDLRecordSet {
 	}
 
 	/**
-	* Gets the modified date of this d d l record set.
+	* Returns the modified date of this d d l record set.
 	*
 	* @return the modified date of this d d l record set
 	*/
@@ -219,7 +219,7 @@ public class DDLRecordSetWrapper implements DDLRecordSet {
 	}
 
 	/**
-	* Gets the d d m structure ID of this d d l record set.
+	* Returns the d d m structure ID of this d d l record set.
 	*
 	* @return the d d m structure ID of this d d l record set
 	*/
@@ -237,7 +237,7 @@ public class DDLRecordSetWrapper implements DDLRecordSet {
 	}
 
 	/**
-	* Gets the record set key of this d d l record set.
+	* Returns the record set key of this d d l record set.
 	*
 	* @return the record set key of this d d l record set
 	*/
@@ -255,7 +255,7 @@ public class DDLRecordSetWrapper implements DDLRecordSet {
 	}
 
 	/**
-	* Gets the name of this d d l record set.
+	* Returns the name of this d d l record set.
 	*
 	* @return the name of this d d l record set
 	*/
@@ -264,9 +264,9 @@ public class DDLRecordSetWrapper implements DDLRecordSet {
 	}
 
 	/**
-	* Gets the localized name of this d d l record set. Uses the default language if no localization exists for the requested language.
+	* Returns the localized name of this d d l record set in the language. Uses the default language if no localization exists for the requested language.
 	*
-	* @param locale the locale to get the localized name for
+	* @param locale the locale of the language
 	* @return the localized name of this d d l record set
 	*/
 	public java.lang.String getName(java.util.Locale locale) {
@@ -274,9 +274,9 @@ public class DDLRecordSetWrapper implements DDLRecordSet {
 	}
 
 	/**
-	* Gets the localized name of this d d l record set, optionally using the default language if no localization exists for the requested language.
+	* Returns the localized name of this d d l record set in the language, optionally using the default language if no localization exists for the requested language.
 	*
-	* @param locale the local to get the localized name for
+	* @param locale the local of the language
 	* @param useDefault whether to use the default language if no localization exists for the requested language
 	* @return the localized name of this d d l record set. If <code>useDefault</code> is <code>false</code> and no localization exists for the requested language, an empty string will be returned.
 	*/
@@ -285,9 +285,9 @@ public class DDLRecordSetWrapper implements DDLRecordSet {
 	}
 
 	/**
-	* Gets the localized name of this d d l record set. Uses the default language if no localization exists for the requested language.
+	* Returns the localized name of this d d l record set in the language. Uses the default language if no localization exists for the requested language.
 	*
-	* @param languageId the id of the language to get the localized name for
+	* @param languageId the ID of the language
 	* @return the localized name of this d d l record set
 	*/
 	public java.lang.String getName(java.lang.String languageId) {
@@ -295,9 +295,9 @@ public class DDLRecordSetWrapper implements DDLRecordSet {
 	}
 
 	/**
-	* Gets the localized name of this d d l record set, optionally using the default language if no localization exists for the requested language.
+	* Returns the localized name of this d d l record set in the language, optionally using the default language if no localization exists for the requested language.
 	*
-	* @param languageId the id of the language to get the localized name for
+	* @param languageId the ID of the language
 	* @param useDefault whether to use the default language if no localization exists for the requested language
 	* @return the localized name of this d d l record set
 	*/
@@ -307,9 +307,9 @@ public class DDLRecordSetWrapper implements DDLRecordSet {
 	}
 
 	/**
-	* Gets a map of the locales and localized name of this d d l record set.
+	* Returns a map of the locales and localized names of this d d l record set.
 	*
-	* @return the locales and localized name
+	* @return the locales and localized names of this d d l record set
 	*/
 	public java.util.Map<java.util.Locale, java.lang.String> getNameMap() {
 		return _ddlRecordSet.getNameMap();
@@ -325,15 +325,22 @@ public class DDLRecordSetWrapper implements DDLRecordSet {
 	}
 
 	/**
-	* Sets the localized name of this d d l record set.
+	* Sets the localized name of this d d l record set in the language.
 	*
 	* @param name the localized name of this d d l record set
-	* @param locale the locale to set the localized name for
+	* @param locale the locale of the language
 	*/
 	public void setName(java.lang.String name, java.util.Locale locale) {
 		_ddlRecordSet.setName(name, locale);
 	}
 
+	/**
+	* Sets the localized name of this d d l record set in the language, and sets the default locale.
+	*
+	* @param name the localized name of this d d l record set
+	* @param locale the locale of the language
+	* @param defaultLocale the default locale
+	*/
 	public void setName(java.lang.String name, java.util.Locale locale,
 		java.util.Locale defaultLocale) {
 		_ddlRecordSet.setName(name, locale, defaultLocale);
@@ -349,6 +356,12 @@ public class DDLRecordSetWrapper implements DDLRecordSet {
 		_ddlRecordSet.setNameMap(nameMap);
 	}
 
+	/**
+	* Sets the localized names of this d d l record set from the map of locales and localized names, and sets the default locale.
+	*
+	* @param nameMap the locales and localized names of this d d l record set
+	* @param defaultLocale the default locale
+	*/
 	public void setNameMap(
 		java.util.Map<java.util.Locale, java.lang.String> nameMap,
 		java.util.Locale defaultLocale) {
@@ -356,7 +369,7 @@ public class DDLRecordSetWrapper implements DDLRecordSet {
 	}
 
 	/**
-	* Gets the description of this d d l record set.
+	* Returns the description of this d d l record set.
 	*
 	* @return the description of this d d l record set
 	*/
@@ -374,7 +387,7 @@ public class DDLRecordSetWrapper implements DDLRecordSet {
 	}
 
 	/**
-	* Gets the min display rows of this d d l record set.
+	* Returns the min display rows of this d d l record set.
 	*
 	* @return the min display rows of this d d l record set
 	*/

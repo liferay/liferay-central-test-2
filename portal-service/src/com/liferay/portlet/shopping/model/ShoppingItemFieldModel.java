@@ -43,21 +43,21 @@ public interface ShoppingItemFieldModel extends BaseModel<ShoppingItemField> {
 	 */
 
 	/**
-	 * Gets the primary key of this shopping item field.
+	 * Returns the primary key of this shopping item field.
 	 *
 	 * @return the primary key of this shopping item field
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this shopping item field
+	 * Sets the primary key of this shopping item field.
 	 *
 	 * @param primaryKey the primary key of this shopping item field
 	 */
 	public void setPrimaryKey(long primaryKey);
 
 	/**
-	 * Gets the item field ID of this shopping item field.
+	 * Returns the item field ID of this shopping item field.
 	 *
 	 * @return the item field ID of this shopping item field
 	 */
@@ -71,7 +71,7 @@ public interface ShoppingItemFieldModel extends BaseModel<ShoppingItemField> {
 	public void setItemFieldId(long itemFieldId);
 
 	/**
-	 * Gets the item ID of this shopping item field.
+	 * Returns the item ID of this shopping item field.
 	 *
 	 * @return the item ID of this shopping item field
 	 */
@@ -85,7 +85,7 @@ public interface ShoppingItemFieldModel extends BaseModel<ShoppingItemField> {
 	public void setItemId(long itemId);
 
 	/**
-	 * Gets the name of this shopping item field.
+	 * Returns the name of this shopping item field.
 	 *
 	 * @return the name of this shopping item field
 	 */
@@ -100,7 +100,7 @@ public interface ShoppingItemFieldModel extends BaseModel<ShoppingItemField> {
 	public void setName(String name);
 
 	/**
-	 * Gets the values of this shopping item field.
+	 * Returns the values of this shopping item field.
 	 *
 	 * @return the values of this shopping item field
 	 */
@@ -115,7 +115,7 @@ public interface ShoppingItemFieldModel extends BaseModel<ShoppingItemField> {
 	public void setValues(String values);
 
 	/**
-	 * Gets the description of this shopping item field.
+	 * Returns the description of this shopping item field.
 	 *
 	 * @return the description of this shopping item field
 	 */

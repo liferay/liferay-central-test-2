@@ -42,21 +42,21 @@ public interface PluginSettingModel extends BaseModel<PluginSetting> {
 	 */
 
 	/**
-	 * Gets the primary key of this plugin setting.
+	 * Returns the primary key of this plugin setting.
 	 *
 	 * @return the primary key of this plugin setting
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this plugin setting
+	 * Sets the primary key of this plugin setting.
 	 *
 	 * @param primaryKey the primary key of this plugin setting
 	 */
 	public void setPrimaryKey(long primaryKey);
 
 	/**
-	 * Gets the plugin setting ID of this plugin setting.
+	 * Returns the plugin setting ID of this plugin setting.
 	 *
 	 * @return the plugin setting ID of this plugin setting
 	 */
@@ -70,7 +70,7 @@ public interface PluginSettingModel extends BaseModel<PluginSetting> {
 	public void setPluginSettingId(long pluginSettingId);
 
 	/**
-	 * Gets the company ID of this plugin setting.
+	 * Returns the company ID of this plugin setting.
 	 *
 	 * @return the company ID of this plugin setting
 	 */
@@ -84,7 +84,7 @@ public interface PluginSettingModel extends BaseModel<PluginSetting> {
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the plugin ID of this plugin setting.
+	 * Returns the plugin ID of this plugin setting.
 	 *
 	 * @return the plugin ID of this plugin setting
 	 */
@@ -99,7 +99,7 @@ public interface PluginSettingModel extends BaseModel<PluginSetting> {
 	public void setPluginId(String pluginId);
 
 	/**
-	 * Gets the plugin type of this plugin setting.
+	 * Returns the plugin type of this plugin setting.
 	 *
 	 * @return the plugin type of this plugin setting
 	 */
@@ -114,7 +114,7 @@ public interface PluginSettingModel extends BaseModel<PluginSetting> {
 	public void setPluginType(String pluginType);
 
 	/**
-	 * Gets the roles of this plugin setting.
+	 * Returns the roles of this plugin setting.
 	 *
 	 * @return the roles of this plugin setting
 	 */
@@ -129,7 +129,7 @@ public interface PluginSettingModel extends BaseModel<PluginSetting> {
 	public void setRoles(String roles);
 
 	/**
-	 * Gets the active of this plugin setting.
+	 * Returns the active of this plugin setting.
 	 *
 	 * @return the active of this plugin setting
 	 */

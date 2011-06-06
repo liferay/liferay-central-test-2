@@ -44,21 +44,21 @@ public interface WebDAVPropsModel extends AttachedModel, BaseModel<WebDAVProps> 
 	 */
 
 	/**
-	 * Gets the primary key of this web d a v props.
+	 * Returns the primary key of this web d a v props.
 	 *
 	 * @return the primary key of this web d a v props
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this web d a v props
+	 * Sets the primary key of this web d a v props.
 	 *
 	 * @param primaryKey the primary key of this web d a v props
 	 */
 	public void setPrimaryKey(long primaryKey);
 
 	/**
-	 * Gets the web dav props ID of this web d a v props.
+	 * Returns the web dav props ID of this web d a v props.
 	 *
 	 * @return the web dav props ID of this web d a v props
 	 */
@@ -72,7 +72,7 @@ public interface WebDAVPropsModel extends AttachedModel, BaseModel<WebDAVProps> 
 	public void setWebDavPropsId(long webDavPropsId);
 
 	/**
-	 * Gets the company ID of this web d a v props.
+	 * Returns the company ID of this web d a v props.
 	 *
 	 * @return the company ID of this web d a v props
 	 */
@@ -86,7 +86,7 @@ public interface WebDAVPropsModel extends AttachedModel, BaseModel<WebDAVProps> 
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the create date of this web d a v props.
+	 * Returns the create date of this web d a v props.
 	 *
 	 * @return the create date of this web d a v props
 	 */
@@ -100,7 +100,7 @@ public interface WebDAVPropsModel extends AttachedModel, BaseModel<WebDAVProps> 
 	public void setCreateDate(Date createDate);
 
 	/**
-	 * Gets the modified date of this web d a v props.
+	 * Returns the modified date of this web d a v props.
 	 *
 	 * @return the modified date of this web d a v props
 	 */
@@ -114,14 +114,14 @@ public interface WebDAVPropsModel extends AttachedModel, BaseModel<WebDAVProps> 
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
-	 * Gets the class name of the model instance this web d a v props is polymorphically associated with.
+	 * Returns the fully qualified class name of this web d a v props.
 	 *
-	 * @return the class name of the model instance this web d a v props is polymorphically associated with
+	 * @return the fully qualified class name of this web d a v props
 	 */
 	public String getClassName();
 
 	/**
-	 * Gets the class name ID of this web d a v props.
+	 * Returns the class name ID of this web d a v props.
 	 *
 	 * @return the class name ID of this web d a v props
 	 */
@@ -135,7 +135,7 @@ public interface WebDAVPropsModel extends AttachedModel, BaseModel<WebDAVProps> 
 	public void setClassNameId(long classNameId);
 
 	/**
-	 * Gets the class p k of this web d a v props.
+	 * Returns the class p k of this web d a v props.
 	 *
 	 * @return the class p k of this web d a v props
 	 */
@@ -149,7 +149,7 @@ public interface WebDAVPropsModel extends AttachedModel, BaseModel<WebDAVProps> 
 	public void setClassPK(long classPK);
 
 	/**
-	 * Gets the props of this web d a v props.
+	 * Returns the props of this web d a v props.
 	 *
 	 * @return the props of this web d a v props
 	 */

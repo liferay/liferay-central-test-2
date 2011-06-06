@@ -121,7 +121,7 @@ public class ShoppingItemUtil {
 	/**
 	* Caches the shopping item in the entity cache if it is enabled.
 	*
-	* @param shoppingItem the shopping item to cache
+	* @param shoppingItem the shopping item
 	*/
 	public static void cacheResult(
 		com.liferay.portlet.shopping.model.ShoppingItem shoppingItem) {
@@ -131,7 +131,7 @@ public class ShoppingItemUtil {
 	/**
 	* Caches the shopping items in the entity cache if it is enabled.
 	*
-	* @param shoppingItems the shopping items to cache
+	* @param shoppingItems the shopping items
 	*/
 	public static void cacheResult(
 		java.util.List<com.liferay.portlet.shopping.model.ShoppingItem> shoppingItems) {
@@ -152,7 +152,7 @@ public class ShoppingItemUtil {
 	/**
 	* Removes the shopping item with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param itemId the primary key of the shopping item to remove
+	* @param itemId the primary key of the shopping item
 	* @return the shopping item that was removed
 	* @throws com.liferay.portlet.shopping.NoSuchItemException if a shopping item with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -172,9 +172,9 @@ public class ShoppingItemUtil {
 	}
 
 	/**
-	* Finds the shopping item with the primary key or throws a {@link com.liferay.portlet.shopping.NoSuchItemException} if it could not be found.
+	* Returns the shopping item with the primary key or throws a {@link com.liferay.portlet.shopping.NoSuchItemException} if it could not be found.
 	*
-	* @param itemId the primary key of the shopping item to find
+	* @param itemId the primary key of the shopping item
 	* @return the shopping item
 	* @throws com.liferay.portlet.shopping.NoSuchItemException if a shopping item with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -187,9 +187,9 @@ public class ShoppingItemUtil {
 	}
 
 	/**
-	* Finds the shopping item with the primary key or returns <code>null</code> if it could not be found.
+	* Returns the shopping item with the primary key or returns <code>null</code> if it could not be found.
 	*
-	* @param itemId the primary key of the shopping item to find
+	* @param itemId the primary key of the shopping item
 	* @return the shopping item, or <code>null</code> if a shopping item with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -199,9 +199,9 @@ public class ShoppingItemUtil {
 	}
 
 	/**
-	* Finds the shopping item where smallImageId = &#63; or throws a {@link com.liferay.portlet.shopping.NoSuchItemException} if it could not be found.
+	* Returns the shopping item where smallImageId = &#63; or throws a {@link com.liferay.portlet.shopping.NoSuchItemException} if it could not be found.
 	*
-	* @param smallImageId the small image ID to search with
+	* @param smallImageId the small image ID
 	* @return the matching shopping item
 	* @throws com.liferay.portlet.shopping.NoSuchItemException if a matching shopping item could not be found
 	* @throws SystemException if a system exception occurred
@@ -214,9 +214,9 @@ public class ShoppingItemUtil {
 	}
 
 	/**
-	* Finds the shopping item where smallImageId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	* Returns the shopping item where smallImageId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	*
-	* @param smallImageId the small image ID to search with
+	* @param smallImageId the small image ID
 	* @return the matching shopping item, or <code>null</code> if a matching shopping item could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -227,9 +227,9 @@ public class ShoppingItemUtil {
 	}
 
 	/**
-	* Finds the shopping item where smallImageId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	* Returns the shopping item where smallImageId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
-	* @param smallImageId the small image ID to search with
+	* @param smallImageId the small image ID
 	* @return the matching shopping item, or <code>null</code> if a matching shopping item could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -241,9 +241,9 @@ public class ShoppingItemUtil {
 	}
 
 	/**
-	* Finds the shopping item where mediumImageId = &#63; or throws a {@link com.liferay.portlet.shopping.NoSuchItemException} if it could not be found.
+	* Returns the shopping item where mediumImageId = &#63; or throws a {@link com.liferay.portlet.shopping.NoSuchItemException} if it could not be found.
 	*
-	* @param mediumImageId the medium image ID to search with
+	* @param mediumImageId the medium image ID
 	* @return the matching shopping item
 	* @throws com.liferay.portlet.shopping.NoSuchItemException if a matching shopping item could not be found
 	* @throws SystemException if a system exception occurred
@@ -256,9 +256,9 @@ public class ShoppingItemUtil {
 	}
 
 	/**
-	* Finds the shopping item where mediumImageId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	* Returns the shopping item where mediumImageId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	*
-	* @param mediumImageId the medium image ID to search with
+	* @param mediumImageId the medium image ID
 	* @return the matching shopping item, or <code>null</code> if a matching shopping item could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -269,9 +269,9 @@ public class ShoppingItemUtil {
 	}
 
 	/**
-	* Finds the shopping item where mediumImageId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	* Returns the shopping item where mediumImageId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
-	* @param mediumImageId the medium image ID to search with
+	* @param mediumImageId the medium image ID
 	* @return the matching shopping item, or <code>null</code> if a matching shopping item could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -283,9 +283,9 @@ public class ShoppingItemUtil {
 	}
 
 	/**
-	* Finds the shopping item where largeImageId = &#63; or throws a {@link com.liferay.portlet.shopping.NoSuchItemException} if it could not be found.
+	* Returns the shopping item where largeImageId = &#63; or throws a {@link com.liferay.portlet.shopping.NoSuchItemException} if it could not be found.
 	*
-	* @param largeImageId the large image ID to search with
+	* @param largeImageId the large image ID
 	* @return the matching shopping item
 	* @throws com.liferay.portlet.shopping.NoSuchItemException if a matching shopping item could not be found
 	* @throws SystemException if a system exception occurred
@@ -298,9 +298,9 @@ public class ShoppingItemUtil {
 	}
 
 	/**
-	* Finds the shopping item where largeImageId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	* Returns the shopping item where largeImageId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	*
-	* @param largeImageId the large image ID to search with
+	* @param largeImageId the large image ID
 	* @return the matching shopping item, or <code>null</code> if a matching shopping item could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -311,9 +311,9 @@ public class ShoppingItemUtil {
 	}
 
 	/**
-	* Finds the shopping item where largeImageId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	* Returns the shopping item where largeImageId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
-	* @param largeImageId the large image ID to search with
+	* @param largeImageId the large image ID
 	* @return the matching shopping item, or <code>null</code> if a matching shopping item could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -325,10 +325,10 @@ public class ShoppingItemUtil {
 	}
 
 	/**
-	* Finds all the shopping items where groupId = &#63; and categoryId = &#63;.
+	* Returns all the shopping items where groupId = &#63; and categoryId = &#63;.
 	*
-	* @param groupId the group ID to search with
-	* @param categoryId the category ID to search with
+	* @param groupId the group ID
+	* @param categoryId the category ID
 	* @return the matching shopping items
 	* @throws SystemException if a system exception occurred
 	*/
@@ -339,16 +339,16 @@ public class ShoppingItemUtil {
 	}
 
 	/**
-	* Finds a range of all the shopping items where groupId = &#63; and categoryId = &#63;.
+	* Returns a range of all the shopping items where groupId = &#63; and categoryId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param categoryId the category ID to search with
-	* @param start the lower bound of the range of shopping items to return
-	* @param end the upper bound of the range of shopping items to return (not inclusive)
+	* @param groupId the group ID
+	* @param categoryId the category ID
+	* @param start the lower bound of the range of shopping items
+	* @param end the upper bound of the range of shopping items (not inclusive)
 	* @return the range of matching shopping items
 	* @throws SystemException if a system exception occurred
 	*/
@@ -359,16 +359,16 @@ public class ShoppingItemUtil {
 	}
 
 	/**
-	* Finds an ordered range of all the shopping items where groupId = &#63; and categoryId = &#63;.
+	* Returns an ordered range of all the shopping items where groupId = &#63; and categoryId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param categoryId the category ID to search with
-	* @param start the lower bound of the range of shopping items to return
-	* @param end the upper bound of the range of shopping items to return (not inclusive)
+	* @param groupId the group ID
+	* @param categoryId the category ID
+	* @param start the lower bound of the range of shopping items
+	* @param end the upper bound of the range of shopping items (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching shopping items
 	* @throws SystemException if a system exception occurred
@@ -382,14 +382,14 @@ public class ShoppingItemUtil {
 	}
 
 	/**
-	* Finds the first shopping item in the ordered set where groupId = &#63; and categoryId = &#63;.
+	* Returns the first shopping item in the ordered set where groupId = &#63; and categoryId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param categoryId the category ID to search with
+	* @param groupId the group ID
+	* @param categoryId the category ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching shopping item
 	* @throws com.liferay.portlet.shopping.NoSuchItemException if a matching shopping item could not be found
@@ -405,14 +405,14 @@ public class ShoppingItemUtil {
 	}
 
 	/**
-	* Finds the last shopping item in the ordered set where groupId = &#63; and categoryId = &#63;.
+	* Returns the last shopping item in the ordered set where groupId = &#63; and categoryId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param categoryId the category ID to search with
+	* @param groupId the group ID
+	* @param categoryId the category ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching shopping item
 	* @throws com.liferay.portlet.shopping.NoSuchItemException if a matching shopping item could not be found
@@ -428,15 +428,15 @@ public class ShoppingItemUtil {
 	}
 
 	/**
-	* Finds the shopping items before and after the current shopping item in the ordered set where groupId = &#63; and categoryId = &#63;.
+	* Returns the shopping items before and after the current shopping item in the ordered set where groupId = &#63; and categoryId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
 	* @param itemId the primary key of the current shopping item
-	* @param groupId the group ID to search with
-	* @param categoryId the category ID to search with
+	* @param groupId the group ID
+	* @param categoryId the category ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next shopping item
 	* @throws com.liferay.portlet.shopping.NoSuchItemException if a shopping item with the primary key could not be found
@@ -453,10 +453,10 @@ public class ShoppingItemUtil {
 	}
 
 	/**
-	* Filters by the user's permissions and finds all the shopping items where groupId = &#63; and categoryId = &#63;.
+	* Returns all the shopping items that the user has permission to view where groupId = &#63; and categoryId = &#63;.
 	*
-	* @param groupId the group ID to search with
-	* @param categoryId the category ID to search with
+	* @param groupId the group ID
+	* @param categoryId the category ID
 	* @return the matching shopping items that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -467,16 +467,16 @@ public class ShoppingItemUtil {
 	}
 
 	/**
-	* Filters by the user's permissions and finds a range of all the shopping items where groupId = &#63; and categoryId = &#63;.
+	* Returns a range of all the shopping items that the user has permission to view where groupId = &#63; and categoryId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param categoryId the category ID to search with
-	* @param start the lower bound of the range of shopping items to return
-	* @param end the upper bound of the range of shopping items to return (not inclusive)
+	* @param groupId the group ID
+	* @param categoryId the category ID
+	* @param start the lower bound of the range of shopping items
+	* @param end the upper bound of the range of shopping items (not inclusive)
 	* @return the range of matching shopping items that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -487,16 +487,16 @@ public class ShoppingItemUtil {
 	}
 
 	/**
-	* Filters by the user's permissions and finds an ordered range of all the shopping items where groupId = &#63; and categoryId = &#63;.
+	* Returns an ordered range of all the shopping items that the user has permissions to view where groupId = &#63; and categoryId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param categoryId the category ID to search with
-	* @param start the lower bound of the range of shopping items to return
-	* @param end the upper bound of the range of shopping items to return (not inclusive)
+	* @param groupId the group ID
+	* @param categoryId the category ID
+	* @param start the lower bound of the range of shopping items
+	* @param end the upper bound of the range of shopping items (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching shopping items that the user has permission to view
 	* @throws SystemException if a system exception occurred
@@ -511,15 +511,11 @@ public class ShoppingItemUtil {
 	}
 
 	/**
-	* Filters the shopping items before and after the current shopping item in the ordered set where groupId = &#63; and categoryId = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
-	* </p>
+	* Returns the shopping items before and after the current shopping item in the ordered set of shopping items that the user has permission to view where groupId = &#63; and categoryId = &#63;.
 	*
 	* @param itemId the primary key of the current shopping item
-	* @param groupId the group ID to search with
-	* @param categoryId the category ID to search with
+	* @param groupId the group ID
+	* @param categoryId the category ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next shopping item
 	* @throws com.liferay.portlet.shopping.NoSuchItemException if a shopping item with the primary key could not be found
@@ -536,10 +532,10 @@ public class ShoppingItemUtil {
 	}
 
 	/**
-	* Finds the shopping item where companyId = &#63; and sku = &#63; or throws a {@link com.liferay.portlet.shopping.NoSuchItemException} if it could not be found.
+	* Returns the shopping item where companyId = &#63; and sku = &#63; or throws a {@link com.liferay.portlet.shopping.NoSuchItemException} if it could not be found.
 	*
-	* @param companyId the company ID to search with
-	* @param sku the sku to search with
+	* @param companyId the company ID
+	* @param sku the sku
 	* @return the matching shopping item
 	* @throws com.liferay.portlet.shopping.NoSuchItemException if a matching shopping item could not be found
 	* @throws SystemException if a system exception occurred
@@ -552,10 +548,10 @@ public class ShoppingItemUtil {
 	}
 
 	/**
-	* Finds the shopping item where companyId = &#63; and sku = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	* Returns the shopping item where companyId = &#63; and sku = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	*
-	* @param companyId the company ID to search with
-	* @param sku the sku to search with
+	* @param companyId the company ID
+	* @param sku the sku
 	* @return the matching shopping item, or <code>null</code> if a matching shopping item could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -566,10 +562,10 @@ public class ShoppingItemUtil {
 	}
 
 	/**
-	* Finds the shopping item where companyId = &#63; and sku = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	* Returns the shopping item where companyId = &#63; and sku = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
-	* @param companyId the company ID to search with
-	* @param sku the sku to search with
+	* @param companyId the company ID
+	* @param sku the sku
 	* @return the matching shopping item, or <code>null</code> if a matching shopping item could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -580,7 +576,7 @@ public class ShoppingItemUtil {
 	}
 
 	/**
-	* Finds all the shopping items.
+	* Returns all the shopping items.
 	*
 	* @return the shopping items
 	* @throws SystemException if a system exception occurred
@@ -591,14 +587,14 @@ public class ShoppingItemUtil {
 	}
 
 	/**
-	* Finds a range of all the shopping items.
+	* Returns a range of all the shopping items.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of shopping items to return
-	* @param end the upper bound of the range of shopping items to return (not inclusive)
+	* @param start the lower bound of the range of shopping items
+	* @param end the upper bound of the range of shopping items (not inclusive)
 	* @return the range of shopping items
 	* @throws SystemException if a system exception occurred
 	*/
@@ -609,14 +605,14 @@ public class ShoppingItemUtil {
 	}
 
 	/**
-	* Finds an ordered range of all the shopping items.
+	* Returns an ordered range of all the shopping items.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of shopping items to return
-	* @param end the upper bound of the range of shopping items to return (not inclusive)
+	* @param start the lower bound of the range of shopping items
+	* @param end the upper bound of the range of shopping items (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of shopping items
 	* @throws SystemException if a system exception occurred
@@ -631,7 +627,7 @@ public class ShoppingItemUtil {
 	/**
 	* Removes the shopping item where smallImageId = &#63; from the database.
 	*
-	* @param smallImageId the small image ID to search with
+	* @param smallImageId the small image ID
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeBySmallImageId(long smallImageId)
@@ -643,7 +639,7 @@ public class ShoppingItemUtil {
 	/**
 	* Removes the shopping item where mediumImageId = &#63; from the database.
 	*
-	* @param mediumImageId the medium image ID to search with
+	* @param mediumImageId the medium image ID
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByMediumImageId(long mediumImageId)
@@ -655,7 +651,7 @@ public class ShoppingItemUtil {
 	/**
 	* Removes the shopping item where largeImageId = &#63; from the database.
 	*
-	* @param largeImageId the large image ID to search with
+	* @param largeImageId the large image ID
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByLargeImageId(long largeImageId)
@@ -667,8 +663,8 @@ public class ShoppingItemUtil {
 	/**
 	* Removes all the shopping items where groupId = &#63; and categoryId = &#63; from the database.
 	*
-	* @param groupId the group ID to search with
-	* @param categoryId the category ID to search with
+	* @param groupId the group ID
+	* @param categoryId the category ID
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByG_C(long groupId, long categoryId)
@@ -679,8 +675,8 @@ public class ShoppingItemUtil {
 	/**
 	* Removes the shopping item where companyId = &#63; and sku = &#63; from the database.
 	*
-	* @param companyId the company ID to search with
-	* @param sku the sku to search with
+	* @param companyId the company ID
+	* @param sku the sku
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByC_S(long companyId, java.lang.String sku)
@@ -700,9 +696,9 @@ public class ShoppingItemUtil {
 	}
 
 	/**
-	* Counts all the shopping items where smallImageId = &#63;.
+	* Returns the number of shopping items where smallImageId = &#63;.
 	*
-	* @param smallImageId the small image ID to search with
+	* @param smallImageId the small image ID
 	* @return the number of matching shopping items
 	* @throws SystemException if a system exception occurred
 	*/
@@ -712,9 +708,9 @@ public class ShoppingItemUtil {
 	}
 
 	/**
-	* Counts all the shopping items where mediumImageId = &#63;.
+	* Returns the number of shopping items where mediumImageId = &#63;.
 	*
-	* @param mediumImageId the medium image ID to search with
+	* @param mediumImageId the medium image ID
 	* @return the number of matching shopping items
 	* @throws SystemException if a system exception occurred
 	*/
@@ -724,9 +720,9 @@ public class ShoppingItemUtil {
 	}
 
 	/**
-	* Counts all the shopping items where largeImageId = &#63;.
+	* Returns the number of shopping items where largeImageId = &#63;.
 	*
-	* @param largeImageId the large image ID to search with
+	* @param largeImageId the large image ID
 	* @return the number of matching shopping items
 	* @throws SystemException if a system exception occurred
 	*/
@@ -736,10 +732,10 @@ public class ShoppingItemUtil {
 	}
 
 	/**
-	* Counts all the shopping items where groupId = &#63; and categoryId = &#63;.
+	* Returns the number of shopping items where groupId = &#63; and categoryId = &#63;.
 	*
-	* @param groupId the group ID to search with
-	* @param categoryId the category ID to search with
+	* @param groupId the group ID
+	* @param categoryId the category ID
 	* @return the number of matching shopping items
 	* @throws SystemException if a system exception occurred
 	*/
@@ -749,10 +745,10 @@ public class ShoppingItemUtil {
 	}
 
 	/**
-	* Filters by the user's permissions and counts all the shopping items where groupId = &#63; and categoryId = &#63;.
+	* Returns the number of shopping items that the user has permission to view where groupId = &#63; and categoryId = &#63;.
 	*
-	* @param groupId the group ID to search with
-	* @param categoryId the category ID to search with
+	* @param groupId the group ID
+	* @param categoryId the category ID
 	* @return the number of matching shopping items that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -762,10 +758,10 @@ public class ShoppingItemUtil {
 	}
 
 	/**
-	* Counts all the shopping items where companyId = &#63; and sku = &#63;.
+	* Returns the number of shopping items where companyId = &#63; and sku = &#63;.
 	*
-	* @param companyId the company ID to search with
-	* @param sku the sku to search with
+	* @param companyId the company ID
+	* @param sku the sku
 	* @return the number of matching shopping items
 	* @throws SystemException if a system exception occurred
 	*/
@@ -775,7 +771,7 @@ public class ShoppingItemUtil {
 	}
 
 	/**
-	* Counts all the shopping items.
+	* Returns the number of shopping items.
 	*
 	* @return the number of shopping items
 	* @throws SystemException if a system exception occurred
@@ -786,9 +782,9 @@ public class ShoppingItemUtil {
 	}
 
 	/**
-	* Gets all the shopping item prices associated with the shopping item.
+	* Returns all the shopping item prices associated with the shopping item.
 	*
-	* @param pk the primary key of the shopping item to get the associated shopping item prices for
+	* @param pk the primary key of the shopping item
 	* @return the shopping item prices associated with the shopping item
 	* @throws SystemException if a system exception occurred
 	*/
@@ -798,15 +794,15 @@ public class ShoppingItemUtil {
 	}
 
 	/**
-	* Gets a range of all the shopping item prices associated with the shopping item.
+	* Returns a range of all the shopping item prices associated with the shopping item.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param pk the primary key of the shopping item to get the associated shopping item prices for
-	* @param start the lower bound of the range of shopping items to return
-	* @param end the upper bound of the range of shopping items to return (not inclusive)
+	* @param pk the primary key of the shopping item
+	* @param start the lower bound of the range of shopping items
+	* @param end the upper bound of the range of shopping items (not inclusive)
 	* @return the range of shopping item prices associated with the shopping item
 	* @throws SystemException if a system exception occurred
 	*/
@@ -817,15 +813,15 @@ public class ShoppingItemUtil {
 	}
 
 	/**
-	* Gets an ordered range of all the shopping item prices associated with the shopping item.
+	* Returns an ordered range of all the shopping item prices associated with the shopping item.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param pk the primary key of the shopping item to get the associated shopping item prices for
-	* @param start the lower bound of the range of shopping items to return
-	* @param end the upper bound of the range of shopping items to return (not inclusive)
+	* @param pk the primary key of the shopping item
+	* @param start the lower bound of the range of shopping items
+	* @param end the upper bound of the range of shopping items (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of shopping item prices associated with the shopping item
 	* @throws SystemException if a system exception occurred
@@ -839,9 +835,9 @@ public class ShoppingItemUtil {
 	}
 
 	/**
-	* Gets the number of shopping item prices associated with the shopping item.
+	* Returns the number of shopping item prices associated with the shopping item.
 	*
-	* @param pk the primary key of the shopping item to get the number of associated shopping item prices for
+	* @param pk the primary key of the shopping item
 	* @return the number of shopping item prices associated with the shopping item
 	* @throws SystemException if a system exception occurred
 	*/

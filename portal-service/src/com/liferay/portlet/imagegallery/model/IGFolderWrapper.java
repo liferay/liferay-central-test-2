@@ -37,7 +37,7 @@ public class IGFolderWrapper implements IGFolder {
 	}
 
 	/**
-	* Gets the primary key of this i g folder.
+	* Returns the primary key of this i g folder.
 	*
 	* @return the primary key of this i g folder
 	*/
@@ -46,7 +46,7 @@ public class IGFolderWrapper implements IGFolder {
 	}
 
 	/**
-	* Sets the primary key of this i g folder
+	* Sets the primary key of this i g folder.
 	*
 	* @param primaryKey the primary key of this i g folder
 	*/
@@ -55,7 +55,7 @@ public class IGFolderWrapper implements IGFolder {
 	}
 
 	/**
-	* Gets the uuid of this i g folder.
+	* Returns the uuid of this i g folder.
 	*
 	* @return the uuid of this i g folder
 	*/
@@ -73,7 +73,7 @@ public class IGFolderWrapper implements IGFolder {
 	}
 
 	/**
-	* Gets the folder ID of this i g folder.
+	* Returns the folder ID of this i g folder.
 	*
 	* @return the folder ID of this i g folder
 	*/
@@ -91,7 +91,7 @@ public class IGFolderWrapper implements IGFolder {
 	}
 
 	/**
-	* Gets the group ID of this i g folder.
+	* Returns the group ID of this i g folder.
 	*
 	* @return the group ID of this i g folder
 	*/
@@ -109,7 +109,7 @@ public class IGFolderWrapper implements IGFolder {
 	}
 
 	/**
-	* Gets the company ID of this i g folder.
+	* Returns the company ID of this i g folder.
 	*
 	* @return the company ID of this i g folder
 	*/
@@ -127,7 +127,7 @@ public class IGFolderWrapper implements IGFolder {
 	}
 
 	/**
-	* Gets the user ID of this i g folder.
+	* Returns the user ID of this i g folder.
 	*
 	* @return the user ID of this i g folder
 	*/
@@ -145,7 +145,7 @@ public class IGFolderWrapper implements IGFolder {
 	}
 
 	/**
-	* Gets the user uuid of this i g folder.
+	* Returns the user uuid of this i g folder.
 	*
 	* @return the user uuid of this i g folder
 	* @throws SystemException if a system exception occurred
@@ -165,7 +165,7 @@ public class IGFolderWrapper implements IGFolder {
 	}
 
 	/**
-	* Gets the user name of this i g folder.
+	* Returns the user name of this i g folder.
 	*
 	* @return the user name of this i g folder
 	*/
@@ -183,7 +183,7 @@ public class IGFolderWrapper implements IGFolder {
 	}
 
 	/**
-	* Gets the create date of this i g folder.
+	* Returns the create date of this i g folder.
 	*
 	* @return the create date of this i g folder
 	*/
@@ -201,7 +201,7 @@ public class IGFolderWrapper implements IGFolder {
 	}
 
 	/**
-	* Gets the modified date of this i g folder.
+	* Returns the modified date of this i g folder.
 	*
 	* @return the modified date of this i g folder
 	*/
@@ -219,7 +219,7 @@ public class IGFolderWrapper implements IGFolder {
 	}
 
 	/**
-	* Gets the parent folder ID of this i g folder.
+	* Returns the parent folder ID of this i g folder.
 	*
 	* @return the parent folder ID of this i g folder
 	*/
@@ -237,7 +237,7 @@ public class IGFolderWrapper implements IGFolder {
 	}
 
 	/**
-	* Gets the name of this i g folder.
+	* Returns the name of this i g folder.
 	*
 	* @return the name of this i g folder
 	*/
@@ -255,7 +255,7 @@ public class IGFolderWrapper implements IGFolder {
 	}
 
 	/**
-	* Gets the description of this i g folder.
+	* Returns the description of this i g folder.
 	*
 	* @return the description of this i g folder
 	*/

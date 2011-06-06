@@ -38,7 +38,7 @@ public class JournalArticleResourceWrapper implements JournalArticleResource {
 	}
 
 	/**
-	* Gets the primary key of this journal article resource.
+	* Returns the primary key of this journal article resource.
 	*
 	* @return the primary key of this journal article resource
 	*/
@@ -47,7 +47,7 @@ public class JournalArticleResourceWrapper implements JournalArticleResource {
 	}
 
 	/**
-	* Sets the primary key of this journal article resource
+	* Sets the primary key of this journal article resource.
 	*
 	* @param primaryKey the primary key of this journal article resource
 	*/
@@ -56,7 +56,7 @@ public class JournalArticleResourceWrapper implements JournalArticleResource {
 	}
 
 	/**
-	* Gets the uuid of this journal article resource.
+	* Returns the uuid of this journal article resource.
 	*
 	* @return the uuid of this journal article resource
 	*/
@@ -74,7 +74,7 @@ public class JournalArticleResourceWrapper implements JournalArticleResource {
 	}
 
 	/**
-	* Gets the resource prim key of this journal article resource.
+	* Returns the resource prim key of this journal article resource.
 	*
 	* @return the resource prim key of this journal article resource
 	*/
@@ -92,7 +92,7 @@ public class JournalArticleResourceWrapper implements JournalArticleResource {
 	}
 
 	/**
-	* Gets the group ID of this journal article resource.
+	* Returns the group ID of this journal article resource.
 	*
 	* @return the group ID of this journal article resource
 	*/
@@ -110,7 +110,7 @@ public class JournalArticleResourceWrapper implements JournalArticleResource {
 	}
 
 	/**
-	* Gets the article ID of this journal article resource.
+	* Returns the article ID of this journal article resource.
 	*
 	* @return the article ID of this journal article resource
 	*/

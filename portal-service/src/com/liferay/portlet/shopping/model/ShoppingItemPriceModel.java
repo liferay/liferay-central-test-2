@@ -42,21 +42,21 @@ public interface ShoppingItemPriceModel extends BaseModel<ShoppingItemPrice> {
 	 */
 
 	/**
-	 * Gets the primary key of this shopping item price.
+	 * Returns the primary key of this shopping item price.
 	 *
 	 * @return the primary key of this shopping item price
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this shopping item price
+	 * Sets the primary key of this shopping item price.
 	 *
 	 * @param primaryKey the primary key of this shopping item price
 	 */
 	public void setPrimaryKey(long primaryKey);
 
 	/**
-	 * Gets the item price ID of this shopping item price.
+	 * Returns the item price ID of this shopping item price.
 	 *
 	 * @return the item price ID of this shopping item price
 	 */
@@ -70,7 +70,7 @@ public interface ShoppingItemPriceModel extends BaseModel<ShoppingItemPrice> {
 	public void setItemPriceId(long itemPriceId);
 
 	/**
-	 * Gets the item ID of this shopping item price.
+	 * Returns the item ID of this shopping item price.
 	 *
 	 * @return the item ID of this shopping item price
 	 */
@@ -84,7 +84,7 @@ public interface ShoppingItemPriceModel extends BaseModel<ShoppingItemPrice> {
 	public void setItemId(long itemId);
 
 	/**
-	 * Gets the min quantity of this shopping item price.
+	 * Returns the min quantity of this shopping item price.
 	 *
 	 * @return the min quantity of this shopping item price
 	 */
@@ -98,7 +98,7 @@ public interface ShoppingItemPriceModel extends BaseModel<ShoppingItemPrice> {
 	public void setMinQuantity(int minQuantity);
 
 	/**
-	 * Gets the max quantity of this shopping item price.
+	 * Returns the max quantity of this shopping item price.
 	 *
 	 * @return the max quantity of this shopping item price
 	 */
@@ -112,7 +112,7 @@ public interface ShoppingItemPriceModel extends BaseModel<ShoppingItemPrice> {
 	public void setMaxQuantity(int maxQuantity);
 
 	/**
-	 * Gets the price of this shopping item price.
+	 * Returns the price of this shopping item price.
 	 *
 	 * @return the price of this shopping item price
 	 */
@@ -126,7 +126,7 @@ public interface ShoppingItemPriceModel extends BaseModel<ShoppingItemPrice> {
 	public void setPrice(double price);
 
 	/**
-	 * Gets the discount of this shopping item price.
+	 * Returns the discount of this shopping item price.
 	 *
 	 * @return the discount of this shopping item price
 	 */
@@ -140,7 +140,7 @@ public interface ShoppingItemPriceModel extends BaseModel<ShoppingItemPrice> {
 	public void setDiscount(double discount);
 
 	/**
-	 * Gets the taxable of this shopping item price.
+	 * Returns the taxable of this shopping item price.
 	 *
 	 * @return the taxable of this shopping item price
 	 */
@@ -161,7 +161,7 @@ public interface ShoppingItemPriceModel extends BaseModel<ShoppingItemPrice> {
 	public void setTaxable(boolean taxable);
 
 	/**
-	 * Gets the shipping of this shopping item price.
+	 * Returns the shipping of this shopping item price.
 	 *
 	 * @return the shipping of this shopping item price
 	 */
@@ -175,7 +175,7 @@ public interface ShoppingItemPriceModel extends BaseModel<ShoppingItemPrice> {
 	public void setShipping(double shipping);
 
 	/**
-	 * Gets the use shipping formula of this shopping item price.
+	 * Returns the use shipping formula of this shopping item price.
 	 *
 	 * @return the use shipping formula of this shopping item price
 	 */
@@ -196,7 +196,7 @@ public interface ShoppingItemPriceModel extends BaseModel<ShoppingItemPrice> {
 	public void setUseShippingFormula(boolean useShippingFormula);
 
 	/**
-	 * Gets the status of this shopping item price.
+	 * Returns the status of this shopping item price.
 	 *
 	 * @return the status of this shopping item price
 	 */

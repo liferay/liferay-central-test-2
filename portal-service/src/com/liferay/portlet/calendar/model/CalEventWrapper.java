@@ -37,7 +37,7 @@ public class CalEventWrapper implements CalEvent {
 	}
 
 	/**
-	* Gets the primary key of this cal event.
+	* Returns the primary key of this cal event.
 	*
 	* @return the primary key of this cal event
 	*/
@@ -46,7 +46,7 @@ public class CalEventWrapper implements CalEvent {
 	}
 
 	/**
-	* Sets the primary key of this cal event
+	* Sets the primary key of this cal event.
 	*
 	* @param primaryKey the primary key of this cal event
 	*/
@@ -55,7 +55,7 @@ public class CalEventWrapper implements CalEvent {
 	}
 
 	/**
-	* Gets the uuid of this cal event.
+	* Returns the uuid of this cal event.
 	*
 	* @return the uuid of this cal event
 	*/
@@ -73,7 +73,7 @@ public class CalEventWrapper implements CalEvent {
 	}
 
 	/**
-	* Gets the event ID of this cal event.
+	* Returns the event ID of this cal event.
 	*
 	* @return the event ID of this cal event
 	*/
@@ -91,7 +91,7 @@ public class CalEventWrapper implements CalEvent {
 	}
 
 	/**
-	* Gets the group ID of this cal event.
+	* Returns the group ID of this cal event.
 	*
 	* @return the group ID of this cal event
 	*/
@@ -109,7 +109,7 @@ public class CalEventWrapper implements CalEvent {
 	}
 
 	/**
-	* Gets the company ID of this cal event.
+	* Returns the company ID of this cal event.
 	*
 	* @return the company ID of this cal event
 	*/
@@ -127,7 +127,7 @@ public class CalEventWrapper implements CalEvent {
 	}
 
 	/**
-	* Gets the user ID of this cal event.
+	* Returns the user ID of this cal event.
 	*
 	* @return the user ID of this cal event
 	*/
@@ -145,7 +145,7 @@ public class CalEventWrapper implements CalEvent {
 	}
 
 	/**
-	* Gets the user uuid of this cal event.
+	* Returns the user uuid of this cal event.
 	*
 	* @return the user uuid of this cal event
 	* @throws SystemException if a system exception occurred
@@ -165,7 +165,7 @@ public class CalEventWrapper implements CalEvent {
 	}
 
 	/**
-	* Gets the user name of this cal event.
+	* Returns the user name of this cal event.
 	*
 	* @return the user name of this cal event
 	*/
@@ -183,7 +183,7 @@ public class CalEventWrapper implements CalEvent {
 	}
 
 	/**
-	* Gets the create date of this cal event.
+	* Returns the create date of this cal event.
 	*
 	* @return the create date of this cal event
 	*/
@@ -201,7 +201,7 @@ public class CalEventWrapper implements CalEvent {
 	}
 
 	/**
-	* Gets the modified date of this cal event.
+	* Returns the modified date of this cal event.
 	*
 	* @return the modified date of this cal event
 	*/
@@ -219,7 +219,7 @@ public class CalEventWrapper implements CalEvent {
 	}
 
 	/**
-	* Gets the title of this cal event.
+	* Returns the title of this cal event.
 	*
 	* @return the title of this cal event
 	*/
@@ -237,7 +237,7 @@ public class CalEventWrapper implements CalEvent {
 	}
 
 	/**
-	* Gets the description of this cal event.
+	* Returns the description of this cal event.
 	*
 	* @return the description of this cal event
 	*/
@@ -255,7 +255,7 @@ public class CalEventWrapper implements CalEvent {
 	}
 
 	/**
-	* Gets the location of this cal event.
+	* Returns the location of this cal event.
 	*
 	* @return the location of this cal event
 	*/
@@ -273,7 +273,7 @@ public class CalEventWrapper implements CalEvent {
 	}
 
 	/**
-	* Gets the start date of this cal event.
+	* Returns the start date of this cal event.
 	*
 	* @return the start date of this cal event
 	*/
@@ -291,7 +291,7 @@ public class CalEventWrapper implements CalEvent {
 	}
 
 	/**
-	* Gets the end date of this cal event.
+	* Returns the end date of this cal event.
 	*
 	* @return the end date of this cal event
 	*/
@@ -309,7 +309,7 @@ public class CalEventWrapper implements CalEvent {
 	}
 
 	/**
-	* Gets the duration hour of this cal event.
+	* Returns the duration hour of this cal event.
 	*
 	* @return the duration hour of this cal event
 	*/
@@ -327,7 +327,7 @@ public class CalEventWrapper implements CalEvent {
 	}
 
 	/**
-	* Gets the duration minute of this cal event.
+	* Returns the duration minute of this cal event.
 	*
 	* @return the duration minute of this cal event
 	*/
@@ -345,7 +345,7 @@ public class CalEventWrapper implements CalEvent {
 	}
 
 	/**
-	* Gets the all day of this cal event.
+	* Returns the all day of this cal event.
 	*
 	* @return the all day of this cal event
 	*/
@@ -372,7 +372,7 @@ public class CalEventWrapper implements CalEvent {
 	}
 
 	/**
-	* Gets the time zone sensitive of this cal event.
+	* Returns the time zone sensitive of this cal event.
 	*
 	* @return the time zone sensitive of this cal event
 	*/
@@ -399,7 +399,7 @@ public class CalEventWrapper implements CalEvent {
 	}
 
 	/**
-	* Gets the type of this cal event.
+	* Returns the type of this cal event.
 	*
 	* @return the type of this cal event
 	*/
@@ -417,7 +417,7 @@ public class CalEventWrapper implements CalEvent {
 	}
 
 	/**
-	* Gets the repeating of this cal event.
+	* Returns the repeating of this cal event.
 	*
 	* @return the repeating of this cal event
 	*/
@@ -444,7 +444,7 @@ public class CalEventWrapper implements CalEvent {
 	}
 
 	/**
-	* Gets the recurrence of this cal event.
+	* Returns the recurrence of this cal event.
 	*
 	* @return the recurrence of this cal event
 	*/
@@ -462,7 +462,7 @@ public class CalEventWrapper implements CalEvent {
 	}
 
 	/**
-	* Gets the remind by of this cal event.
+	* Returns the remind by of this cal event.
 	*
 	* @return the remind by of this cal event
 	*/
@@ -480,7 +480,7 @@ public class CalEventWrapper implements CalEvent {
 	}
 
 	/**
-	* Gets the first reminder of this cal event.
+	* Returns the first reminder of this cal event.
 	*
 	* @return the first reminder of this cal event
 	*/
@@ -498,7 +498,7 @@ public class CalEventWrapper implements CalEvent {
 	}
 
 	/**
-	* Gets the second reminder of this cal event.
+	* Returns the second reminder of this cal event.
 	*
 	* @return the second reminder of this cal event
 	*/

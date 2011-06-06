@@ -41,21 +41,21 @@ public interface OrgLaborModel extends BaseModel<OrgLabor> {
 	 */
 
 	/**
-	 * Gets the primary key of this org labor.
+	 * Returns the primary key of this org labor.
 	 *
 	 * @return the primary key of this org labor
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this org labor
+	 * Sets the primary key of this org labor.
 	 *
 	 * @param primaryKey the primary key of this org labor
 	 */
 	public void setPrimaryKey(long primaryKey);
 
 	/**
-	 * Gets the org labor ID of this org labor.
+	 * Returns the org labor ID of this org labor.
 	 *
 	 * @return the org labor ID of this org labor
 	 */
@@ -69,7 +69,7 @@ public interface OrgLaborModel extends BaseModel<OrgLabor> {
 	public void setOrgLaborId(long orgLaborId);
 
 	/**
-	 * Gets the organization ID of this org labor.
+	 * Returns the organization ID of this org labor.
 	 *
 	 * @return the organization ID of this org labor
 	 */
@@ -83,7 +83,7 @@ public interface OrgLaborModel extends BaseModel<OrgLabor> {
 	public void setOrganizationId(long organizationId);
 
 	/**
-	 * Gets the type ID of this org labor.
+	 * Returns the type ID of this org labor.
 	 *
 	 * @return the type ID of this org labor
 	 */
@@ -97,7 +97,7 @@ public interface OrgLaborModel extends BaseModel<OrgLabor> {
 	public void setTypeId(int typeId);
 
 	/**
-	 * Gets the sun open of this org labor.
+	 * Returns the sun open of this org labor.
 	 *
 	 * @return the sun open of this org labor
 	 */
@@ -111,7 +111,7 @@ public interface OrgLaborModel extends BaseModel<OrgLabor> {
 	public void setSunOpen(int sunOpen);
 
 	/**
-	 * Gets the sun close of this org labor.
+	 * Returns the sun close of this org labor.
 	 *
 	 * @return the sun close of this org labor
 	 */
@@ -125,7 +125,7 @@ public interface OrgLaborModel extends BaseModel<OrgLabor> {
 	public void setSunClose(int sunClose);
 
 	/**
-	 * Gets the mon open of this org labor.
+	 * Returns the mon open of this org labor.
 	 *
 	 * @return the mon open of this org labor
 	 */
@@ -139,7 +139,7 @@ public interface OrgLaborModel extends BaseModel<OrgLabor> {
 	public void setMonOpen(int monOpen);
 
 	/**
-	 * Gets the mon close of this org labor.
+	 * Returns the mon close of this org labor.
 	 *
 	 * @return the mon close of this org labor
 	 */
@@ -153,7 +153,7 @@ public interface OrgLaborModel extends BaseModel<OrgLabor> {
 	public void setMonClose(int monClose);
 
 	/**
-	 * Gets the tue open of this org labor.
+	 * Returns the tue open of this org labor.
 	 *
 	 * @return the tue open of this org labor
 	 */
@@ -167,7 +167,7 @@ public interface OrgLaborModel extends BaseModel<OrgLabor> {
 	public void setTueOpen(int tueOpen);
 
 	/**
-	 * Gets the tue close of this org labor.
+	 * Returns the tue close of this org labor.
 	 *
 	 * @return the tue close of this org labor
 	 */
@@ -181,7 +181,7 @@ public interface OrgLaborModel extends BaseModel<OrgLabor> {
 	public void setTueClose(int tueClose);
 
 	/**
-	 * Gets the wed open of this org labor.
+	 * Returns the wed open of this org labor.
 	 *
 	 * @return the wed open of this org labor
 	 */
@@ -195,7 +195,7 @@ public interface OrgLaborModel extends BaseModel<OrgLabor> {
 	public void setWedOpen(int wedOpen);
 
 	/**
-	 * Gets the wed close of this org labor.
+	 * Returns the wed close of this org labor.
 	 *
 	 * @return the wed close of this org labor
 	 */
@@ -209,7 +209,7 @@ public interface OrgLaborModel extends BaseModel<OrgLabor> {
 	public void setWedClose(int wedClose);
 
 	/**
-	 * Gets the thu open of this org labor.
+	 * Returns the thu open of this org labor.
 	 *
 	 * @return the thu open of this org labor
 	 */
@@ -223,7 +223,7 @@ public interface OrgLaborModel extends BaseModel<OrgLabor> {
 	public void setThuOpen(int thuOpen);
 
 	/**
-	 * Gets the thu close of this org labor.
+	 * Returns the thu close of this org labor.
 	 *
 	 * @return the thu close of this org labor
 	 */
@@ -237,7 +237,7 @@ public interface OrgLaborModel extends BaseModel<OrgLabor> {
 	public void setThuClose(int thuClose);
 
 	/**
-	 * Gets the fri open of this org labor.
+	 * Returns the fri open of this org labor.
 	 *
 	 * @return the fri open of this org labor
 	 */
@@ -251,7 +251,7 @@ public interface OrgLaborModel extends BaseModel<OrgLabor> {
 	public void setFriOpen(int friOpen);
 
 	/**
-	 * Gets the fri close of this org labor.
+	 * Returns the fri close of this org labor.
 	 *
 	 * @return the fri close of this org labor
 	 */
@@ -265,7 +265,7 @@ public interface OrgLaborModel extends BaseModel<OrgLabor> {
 	public void setFriClose(int friClose);
 
 	/**
-	 * Gets the sat open of this org labor.
+	 * Returns the sat open of this org labor.
 	 *
 	 * @return the sat open of this org labor
 	 */
@@ -279,7 +279,7 @@ public interface OrgLaborModel extends BaseModel<OrgLabor> {
 	public void setSatOpen(int satOpen);
 
 	/**
-	 * Gets the sat close of this org labor.
+	 * Returns the sat close of this org labor.
 	 *
 	 * @return the sat close of this org labor
 	 */

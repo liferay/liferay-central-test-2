@@ -33,7 +33,7 @@ public class SocialEquityGroupSettingLocalServiceWrapper
 	/**
 	* Adds the social equity group setting to the database. Also notifies the appropriate model listeners.
 	*
-	* @param socialEquityGroupSetting the social equity group setting to add
+	* @param socialEquityGroupSetting the social equity group setting
 	* @return the social equity group setting that was added
 	* @throws SystemException if a system exception occurred
 	*/
@@ -57,7 +57,7 @@ public class SocialEquityGroupSettingLocalServiceWrapper
 	/**
 	* Deletes the social equity group setting with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param equityGroupSettingId the primary key of the social equity group setting to delete
+	* @param equityGroupSettingId the primary key of the social equity group setting
 	* @throws PortalException if a social equity group setting with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -70,7 +70,7 @@ public class SocialEquityGroupSettingLocalServiceWrapper
 	/**
 	* Deletes the social equity group setting from the database. Also notifies the appropriate model listeners.
 	*
-	* @param socialEquityGroupSetting the social equity group setting to delete
+	* @param socialEquityGroupSetting the social equity group setting
 	* @throws SystemException if a system exception occurred
 	*/
 	public void deleteSocialEquityGroupSetting(
@@ -82,7 +82,7 @@ public class SocialEquityGroupSettingLocalServiceWrapper
 	/**
 	* Performs a dynamic query on the database and returns the matching rows.
 	*
-	* @param dynamicQuery the dynamic query to search with
+	* @param dynamicQuery the dynamic query
 	* @return the matching rows
 	* @throws SystemException if a system exception occurred
 	*/
@@ -100,9 +100,9 @@ public class SocialEquityGroupSettingLocalServiceWrapper
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param dynamicQuery the dynamic query to search with
-	* @param start the lower bound of the range of model instances to return
-	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param dynamicQuery the dynamic query
+	* @param start the lower bound of the range of model instances
+	* @param end the upper bound of the range of model instances (not inclusive)
 	* @return the range of matching rows
 	* @throws SystemException if a system exception occurred
 	*/
@@ -121,9 +121,9 @@ public class SocialEquityGroupSettingLocalServiceWrapper
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param dynamicQuery the dynamic query to search with
-	* @param start the lower bound of the range of model instances to return
-	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param dynamicQuery the dynamic query
+	* @param start the lower bound of the range of model instances
+	* @param end the upper bound of the range of model instances (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching rows
 	* @throws SystemException if a system exception occurred
@@ -139,9 +139,9 @@ public class SocialEquityGroupSettingLocalServiceWrapper
 	}
 
 	/**
-	* Counts the number of rows that match the dynamic query.
+	* Returns the number of rows that match the dynamic query.
 	*
-	* @param dynamicQuery the dynamic query to search with
+	* @param dynamicQuery the dynamic query
 	* @return the number of rows that match the dynamic query
 	* @throws SystemException if a system exception occurred
 	*/
@@ -152,9 +152,9 @@ public class SocialEquityGroupSettingLocalServiceWrapper
 	}
 
 	/**
-	* Gets the social equity group setting with the primary key.
+	* Returns the social equity group setting with the primary key.
 	*
-	* @param equityGroupSettingId the primary key of the social equity group setting to get
+	* @param equityGroupSettingId the primary key of the social equity group setting
 	* @return the social equity group setting
 	* @throws PortalException if a social equity group setting with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -167,14 +167,14 @@ public class SocialEquityGroupSettingLocalServiceWrapper
 	}
 
 	/**
-	* Gets a range of all the social equity group settings.
+	* Returns a range of all the social equity group settings.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of social equity group settings to return
-	* @param end the upper bound of the range of social equity group settings to return (not inclusive)
+	* @param start the lower bound of the range of social equity group settings
+	* @param end the upper bound of the range of social equity group settings (not inclusive)
 	* @return the range of social equity group settings
 	* @throws SystemException if a system exception occurred
 	*/
@@ -186,7 +186,7 @@ public class SocialEquityGroupSettingLocalServiceWrapper
 	}
 
 	/**
-	* Gets the number of social equity group settings.
+	* Returns the number of social equity group settings.
 	*
 	* @return the number of social equity group settings
 	* @throws SystemException if a system exception occurred
@@ -199,7 +199,7 @@ public class SocialEquityGroupSettingLocalServiceWrapper
 	/**
 	* Updates the social equity group setting in the database. Also notifies the appropriate model listeners.
 	*
-	* @param socialEquityGroupSetting the social equity group setting to update
+	* @param socialEquityGroupSetting the social equity group setting
 	* @return the social equity group setting that was updated
 	* @throws SystemException if a system exception occurred
 	*/
@@ -212,7 +212,7 @@ public class SocialEquityGroupSettingLocalServiceWrapper
 	/**
 	* Updates the social equity group setting in the database. Also notifies the appropriate model listeners.
 	*
-	* @param socialEquityGroupSetting the social equity group setting to update
+	* @param socialEquityGroupSetting the social equity group setting
 	* @param merge whether to merge the social equity group setting with the current session. See {@link com.liferay.portal.service.persistence.BatchSession#update(com.liferay.portal.kernel.dao.orm.Session, com.liferay.portal.model.BaseModel, boolean)} for an explanation.
 	* @return the social equity group setting that was updated
 	* @throws SystemException if a system exception occurred
@@ -226,7 +226,7 @@ public class SocialEquityGroupSettingLocalServiceWrapper
 	}
 
 	/**
-	* Gets the Spring bean ID for this bean.
+	* Returns the Spring bean ID for this bean.
 	*
 	* @return the Spring bean ID for this bean
 	*/

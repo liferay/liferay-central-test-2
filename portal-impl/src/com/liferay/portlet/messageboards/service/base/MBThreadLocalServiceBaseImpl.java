@@ -102,7 +102,7 @@ public abstract class MBThreadLocalServiceBaseImpl
 	/**
 	 * Adds the message boards thread to the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param mbThread the message boards thread to add
+	 * @param mbThread the message boards thread
 	 * @return the message boards thread that was added
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -125,7 +125,7 @@ public abstract class MBThreadLocalServiceBaseImpl
 	/**
 	 * Deletes the message boards thread with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param threadId the primary key of the message boards thread to delete
+	 * @param threadId the primary key of the message boards thread
 	 * @throws PortalException if a message boards thread with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -137,7 +137,7 @@ public abstract class MBThreadLocalServiceBaseImpl
 	/**
 	 * Deletes the message boards thread from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param mbThread the message boards thread to delete
+	 * @param mbThread the message boards thread
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void deleteMBThread(MBThread mbThread) throws SystemException {
@@ -147,7 +147,7 @@ public abstract class MBThreadLocalServiceBaseImpl
 	/**
 	 * Performs a dynamic query on the database and returns the matching rows.
 	 *
-	 * @param dynamicQuery the dynamic query to search with
+	 * @param dynamicQuery the dynamic query
 	 * @return the matching rows
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -164,9 +164,9 @@ public abstract class MBThreadLocalServiceBaseImpl
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param dynamicQuery the dynamic query to search with
-	 * @param start the lower bound of the range of model instances to return
-	 * @param end the upper bound of the range of model instances to return (not inclusive)
+	 * @param dynamicQuery the dynamic query
+	 * @param start the lower bound of the range of model instances
+	 * @param end the upper bound of the range of model instances (not inclusive)
 	 * @return the range of matching rows
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -183,9 +183,9 @@ public abstract class MBThreadLocalServiceBaseImpl
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param dynamicQuery the dynamic query to search with
-	 * @param start the lower bound of the range of model instances to return
-	 * @param end the upper bound of the range of model instances to return (not inclusive)
+	 * @param dynamicQuery the dynamic query
+	 * @param start the lower bound of the range of model instances
+	 * @param end the upper bound of the range of model instances (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching rows
 	 * @throws SystemException if a system exception occurred
@@ -198,9 +198,9 @@ public abstract class MBThreadLocalServiceBaseImpl
 	}
 
 	/**
-	 * Counts the number of rows that match the dynamic query.
+	 * Returns the number of rows that match the dynamic query.
 	 *
-	 * @param dynamicQuery the dynamic query to search with
+	 * @param dynamicQuery the dynamic query
 	 * @return the number of rows that match the dynamic query
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -210,9 +210,9 @@ public abstract class MBThreadLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the message boards thread with the primary key.
+	 * Returns the message boards thread with the primary key.
 	 *
-	 * @param threadId the primary key of the message boards thread to get
+	 * @param threadId the primary key of the message boards thread
 	 * @return the message boards thread
 	 * @throws PortalException if a message boards thread with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -223,14 +223,14 @@ public abstract class MBThreadLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets a range of all the message boards threads.
+	 * Returns a range of all the message boards threads.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param start the lower bound of the range of message boards threads to return
-	 * @param end the upper bound of the range of message boards threads to return (not inclusive)
+	 * @param start the lower bound of the range of message boards threads
+	 * @param end the upper bound of the range of message boards threads (not inclusive)
 	 * @return the range of message boards threads
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -240,7 +240,7 @@ public abstract class MBThreadLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the number of message boards threads.
+	 * Returns the number of message boards threads.
 	 *
 	 * @return the number of message boards threads
 	 * @throws SystemException if a system exception occurred
@@ -252,7 +252,7 @@ public abstract class MBThreadLocalServiceBaseImpl
 	/**
 	 * Updates the message boards thread in the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param mbThread the message boards thread to update
+	 * @param mbThread the message boards thread
 	 * @return the message boards thread that was updated
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -265,7 +265,7 @@ public abstract class MBThreadLocalServiceBaseImpl
 	/**
 	 * Updates the message boards thread in the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param mbThread the message boards thread to update
+	 * @param mbThread the message boards thread
 	 * @param merge whether to merge the message boards thread with the current session. See {@link com.liferay.portal.service.persistence.BatchSession#update(com.liferay.portal.kernel.dao.orm.Session, com.liferay.portal.model.BaseModel, boolean)} for an explanation.
 	 * @return the message boards thread that was updated
 	 * @throws SystemException if a system exception occurred
@@ -278,7 +278,7 @@ public abstract class MBThreadLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the message boards ban local service.
+	 * Returns the message boards ban local service.
 	 *
 	 * @return the message boards ban local service
 	 */
@@ -296,7 +296,7 @@ public abstract class MBThreadLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the message boards ban remote service.
+	 * Returns the message boards ban remote service.
 	 *
 	 * @return the message boards ban remote service
 	 */
@@ -314,7 +314,7 @@ public abstract class MBThreadLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the message boards ban persistence.
+	 * Returns the message boards ban persistence.
 	 *
 	 * @return the message boards ban persistence
 	 */
@@ -332,7 +332,7 @@ public abstract class MBThreadLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the message boards category local service.
+	 * Returns the message boards category local service.
 	 *
 	 * @return the message boards category local service
 	 */
@@ -351,7 +351,7 @@ public abstract class MBThreadLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the message boards category remote service.
+	 * Returns the message boards category remote service.
 	 *
 	 * @return the message boards category remote service
 	 */
@@ -369,7 +369,7 @@ public abstract class MBThreadLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the message boards category persistence.
+	 * Returns the message boards category persistence.
 	 *
 	 * @return the message boards category persistence
 	 */
@@ -388,7 +388,7 @@ public abstract class MBThreadLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the message boards category finder.
+	 * Returns the message boards category finder.
 	 *
 	 * @return the message boards category finder
 	 */
@@ -406,7 +406,7 @@ public abstract class MBThreadLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the message boards discussion local service.
+	 * Returns the message boards discussion local service.
 	 *
 	 * @return the message boards discussion local service
 	 */
@@ -425,7 +425,7 @@ public abstract class MBThreadLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the message boards discussion persistence.
+	 * Returns the message boards discussion persistence.
 	 *
 	 * @return the message boards discussion persistence
 	 */
@@ -444,7 +444,7 @@ public abstract class MBThreadLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the message boards mailing list local service.
+	 * Returns the message boards mailing list local service.
 	 *
 	 * @return the message boards mailing list local service
 	 */
@@ -463,7 +463,7 @@ public abstract class MBThreadLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the message boards mailing list persistence.
+	 * Returns the message boards mailing list persistence.
 	 *
 	 * @return the message boards mailing list persistence
 	 */
@@ -482,7 +482,7 @@ public abstract class MBThreadLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the message-boards message local service.
+	 * Returns the message-boards message local service.
 	 *
 	 * @return the message-boards message local service
 	 */
@@ -501,7 +501,7 @@ public abstract class MBThreadLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the message-boards message remote service.
+	 * Returns the message-boards message remote service.
 	 *
 	 * @return the message-boards message remote service
 	 */
@@ -519,7 +519,7 @@ public abstract class MBThreadLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the message-boards message persistence.
+	 * Returns the message-boards message persistence.
 	 *
 	 * @return the message-boards message persistence
 	 */
@@ -538,7 +538,7 @@ public abstract class MBThreadLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the message-boards message finder.
+	 * Returns the message-boards message finder.
 	 *
 	 * @return the message-boards message finder
 	 */
@@ -556,7 +556,7 @@ public abstract class MBThreadLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the message boards message flag local service.
+	 * Returns the message boards message flag local service.
 	 *
 	 * @return the message boards message flag local service
 	 */
@@ -575,7 +575,7 @@ public abstract class MBThreadLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the message boards message flag remote service.
+	 * Returns the message boards message flag remote service.
 	 *
 	 * @return the message boards message flag remote service
 	 */
@@ -594,7 +594,7 @@ public abstract class MBThreadLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the message boards message flag persistence.
+	 * Returns the message boards message flag persistence.
 	 *
 	 * @return the message boards message flag persistence
 	 */
@@ -613,7 +613,7 @@ public abstract class MBThreadLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the message boards stats user local service.
+	 * Returns the message boards stats user local service.
 	 *
 	 * @return the message boards stats user local service
 	 */
@@ -632,7 +632,7 @@ public abstract class MBThreadLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the message boards stats user persistence.
+	 * Returns the message boards stats user persistence.
 	 *
 	 * @return the message boards stats user persistence
 	 */
@@ -651,7 +651,7 @@ public abstract class MBThreadLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the message boards thread local service.
+	 * Returns the message boards thread local service.
 	 *
 	 * @return the message boards thread local service
 	 */
@@ -670,7 +670,7 @@ public abstract class MBThreadLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the message boards thread remote service.
+	 * Returns the message boards thread remote service.
 	 *
 	 * @return the message boards thread remote service
 	 */
@@ -688,7 +688,7 @@ public abstract class MBThreadLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the message boards thread persistence.
+	 * Returns the message boards thread persistence.
 	 *
 	 * @return the message boards thread persistence
 	 */
@@ -706,7 +706,7 @@ public abstract class MBThreadLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the message boards thread finder.
+	 * Returns the message boards thread finder.
 	 *
 	 * @return the message boards thread finder
 	 */
@@ -724,7 +724,7 @@ public abstract class MBThreadLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the counter local service.
+	 * Returns the counter local service.
 	 *
 	 * @return the counter local service
 	 */
@@ -742,7 +742,7 @@ public abstract class MBThreadLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the d l local service.
+	 * Returns the d l local service.
 	 *
 	 * @return the d l local service
 	 */
@@ -760,7 +760,7 @@ public abstract class MBThreadLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the lock local service.
+	 * Returns the lock local service.
 	 *
 	 * @return the lock local service
 	 */
@@ -778,7 +778,7 @@ public abstract class MBThreadLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the lock persistence.
+	 * Returns the lock persistence.
 	 *
 	 * @return the lock persistence
 	 */
@@ -796,7 +796,7 @@ public abstract class MBThreadLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the resource local service.
+	 * Returns the resource local service.
 	 *
 	 * @return the resource local service
 	 */
@@ -815,7 +815,7 @@ public abstract class MBThreadLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the resource remote service.
+	 * Returns the resource remote service.
 	 *
 	 * @return the resource remote service
 	 */
@@ -833,7 +833,7 @@ public abstract class MBThreadLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the resource persistence.
+	 * Returns the resource persistence.
 	 *
 	 * @return the resource persistence
 	 */
@@ -851,7 +851,7 @@ public abstract class MBThreadLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the resource finder.
+	 * Returns the resource finder.
 	 *
 	 * @return the resource finder
 	 */
@@ -869,7 +869,7 @@ public abstract class MBThreadLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the user local service.
+	 * Returns the user local service.
 	 *
 	 * @return the user local service
 	 */
@@ -887,7 +887,7 @@ public abstract class MBThreadLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the user remote service.
+	 * Returns the user remote service.
 	 *
 	 * @return the user remote service
 	 */
@@ -905,7 +905,7 @@ public abstract class MBThreadLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the user persistence.
+	 * Returns the user persistence.
 	 *
 	 * @return the user persistence
 	 */
@@ -923,7 +923,7 @@ public abstract class MBThreadLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the user finder.
+	 * Returns the user finder.
 	 *
 	 * @return the user finder
 	 */
@@ -941,7 +941,7 @@ public abstract class MBThreadLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the workflow instance link local service.
+	 * Returns the workflow instance link local service.
 	 *
 	 * @return the workflow instance link local service
 	 */
@@ -960,7 +960,7 @@ public abstract class MBThreadLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the workflow instance link persistence.
+	 * Returns the workflow instance link persistence.
 	 *
 	 * @return the workflow instance link persistence
 	 */
@@ -979,7 +979,7 @@ public abstract class MBThreadLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the asset entry local service.
+	 * Returns the asset entry local service.
 	 *
 	 * @return the asset entry local service
 	 */
@@ -998,7 +998,7 @@ public abstract class MBThreadLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the asset entry remote service.
+	 * Returns the asset entry remote service.
 	 *
 	 * @return the asset entry remote service
 	 */
@@ -1016,7 +1016,7 @@ public abstract class MBThreadLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the asset entry persistence.
+	 * Returns the asset entry persistence.
 	 *
 	 * @return the asset entry persistence
 	 */
@@ -1035,7 +1035,7 @@ public abstract class MBThreadLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the asset entry finder.
+	 * Returns the asset entry finder.
 	 *
 	 * @return the asset entry finder
 	 */
@@ -1053,7 +1053,7 @@ public abstract class MBThreadLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the ratings stats local service.
+	 * Returns the ratings stats local service.
 	 *
 	 * @return the ratings stats local service
 	 */
@@ -1072,7 +1072,7 @@ public abstract class MBThreadLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the ratings stats persistence.
+	 * Returns the ratings stats persistence.
 	 *
 	 * @return the ratings stats persistence
 	 */
@@ -1091,7 +1091,7 @@ public abstract class MBThreadLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the ratings stats finder.
+	 * Returns the ratings stats finder.
 	 *
 	 * @return the ratings stats finder
 	 */
@@ -1109,7 +1109,7 @@ public abstract class MBThreadLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the social activity local service.
+	 * Returns the social activity local service.
 	 *
 	 * @return the social activity local service
 	 */
@@ -1128,7 +1128,7 @@ public abstract class MBThreadLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the social activity persistence.
+	 * Returns the social activity persistence.
 	 *
 	 * @return the social activity persistence
 	 */
@@ -1147,7 +1147,7 @@ public abstract class MBThreadLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the social activity finder.
+	 * Returns the social activity finder.
 	 *
 	 * @return the social activity finder
 	 */
@@ -1166,7 +1166,7 @@ public abstract class MBThreadLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the Spring bean ID for this bean.
+	 * Returns the Spring bean ID for this bean.
 	 *
 	 * @return the Spring bean ID for this bean
 	 */
@@ -1186,7 +1186,7 @@ public abstract class MBThreadLocalServiceBaseImpl
 	/**
 	 * Performs an SQL query.
 	 *
-	 * @param sql the sql query to perform
+	 * @param sql the sql query
 	 */
 	protected void runSQL(String sql) throws SystemException {
 		try {

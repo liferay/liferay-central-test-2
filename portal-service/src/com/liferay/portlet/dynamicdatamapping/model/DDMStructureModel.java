@@ -49,21 +49,21 @@ public interface DDMStructureModel extends BaseModel<DDMStructure>, GroupedModel
 	 */
 
 	/**
-	 * Gets the primary key of this d d m structure.
+	 * Returns the primary key of this d d m structure.
 	 *
 	 * @return the primary key of this d d m structure
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this d d m structure
+	 * Sets the primary key of this d d m structure.
 	 *
 	 * @param primaryKey the primary key of this d d m structure
 	 */
 	public void setPrimaryKey(long primaryKey);
 
 	/**
-	 * Gets the uuid of this d d m structure.
+	 * Returns the uuid of this d d m structure.
 	 *
 	 * @return the uuid of this d d m structure
 	 */
@@ -78,7 +78,7 @@ public interface DDMStructureModel extends BaseModel<DDMStructure>, GroupedModel
 	public void setUuid(String uuid);
 
 	/**
-	 * Gets the structure ID of this d d m structure.
+	 * Returns the structure ID of this d d m structure.
 	 *
 	 * @return the structure ID of this d d m structure
 	 */
@@ -92,7 +92,7 @@ public interface DDMStructureModel extends BaseModel<DDMStructure>, GroupedModel
 	public void setStructureId(long structureId);
 
 	/**
-	 * Gets the group ID of this d d m structure.
+	 * Returns the group ID of this d d m structure.
 	 *
 	 * @return the group ID of this d d m structure
 	 */
@@ -106,7 +106,7 @@ public interface DDMStructureModel extends BaseModel<DDMStructure>, GroupedModel
 	public void setGroupId(long groupId);
 
 	/**
-	 * Gets the company ID of this d d m structure.
+	 * Returns the company ID of this d d m structure.
 	 *
 	 * @return the company ID of this d d m structure
 	 */
@@ -120,7 +120,7 @@ public interface DDMStructureModel extends BaseModel<DDMStructure>, GroupedModel
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the user ID of this d d m structure.
+	 * Returns the user ID of this d d m structure.
 	 *
 	 * @return the user ID of this d d m structure
 	 */
@@ -134,7 +134,7 @@ public interface DDMStructureModel extends BaseModel<DDMStructure>, GroupedModel
 	public void setUserId(long userId);
 
 	/**
-	 * Gets the user uuid of this d d m structure.
+	 * Returns the user uuid of this d d m structure.
 	 *
 	 * @return the user uuid of this d d m structure
 	 * @throws SystemException if a system exception occurred
@@ -149,7 +149,7 @@ public interface DDMStructureModel extends BaseModel<DDMStructure>, GroupedModel
 	public void setUserUuid(String userUuid);
 
 	/**
-	 * Gets the user name of this d d m structure.
+	 * Returns the user name of this d d m structure.
 	 *
 	 * @return the user name of this d d m structure
 	 */
@@ -164,7 +164,7 @@ public interface DDMStructureModel extends BaseModel<DDMStructure>, GroupedModel
 	public void setUserName(String userName);
 
 	/**
-	 * Gets the create date of this d d m structure.
+	 * Returns the create date of this d d m structure.
 	 *
 	 * @return the create date of this d d m structure
 	 */
@@ -178,7 +178,7 @@ public interface DDMStructureModel extends BaseModel<DDMStructure>, GroupedModel
 	public void setCreateDate(Date createDate);
 
 	/**
-	 * Gets the modified date of this d d m structure.
+	 * Returns the modified date of this d d m structure.
 	 *
 	 * @return the modified date of this d d m structure
 	 */
@@ -192,14 +192,14 @@ public interface DDMStructureModel extends BaseModel<DDMStructure>, GroupedModel
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
-	 * Gets the class name of the model instance this d d m structure is polymorphically associated with.
+	 * Returns the fully qualified class name of this d d m structure.
 	 *
-	 * @return the class name of the model instance this d d m structure is polymorphically associated with
+	 * @return the fully qualified class name of this d d m structure
 	 */
 	public String getClassName();
 
 	/**
-	 * Gets the class name ID of this d d m structure.
+	 * Returns the class name ID of this d d m structure.
 	 *
 	 * @return the class name ID of this d d m structure
 	 */
@@ -213,7 +213,7 @@ public interface DDMStructureModel extends BaseModel<DDMStructure>, GroupedModel
 	public void setClassNameId(long classNameId);
 
 	/**
-	 * Gets the structure key of this d d m structure.
+	 * Returns the structure key of this d d m structure.
 	 *
 	 * @return the structure key of this d d m structure
 	 */
@@ -227,50 +227,50 @@ public interface DDMStructureModel extends BaseModel<DDMStructure>, GroupedModel
 	public void setStructureKey(String structureKey);
 
 	/**
-	 * Gets the name of this d d m structure.
+	 * Returns the name of this d d m structure.
 	 *
 	 * @return the name of this d d m structure
 	 */
 	public String getName();
 
 	/**
-	 * Gets the localized name of this d d m structure. Uses the default language if no localization exists for the requested language.
+	 * Returns the localized name of this d d m structure in the language. Uses the default language if no localization exists for the requested language.
 	 *
-	 * @param locale the locale to get the localized name for
+	 * @param locale the locale of the language
 	 * @return the localized name of this d d m structure
 	 */
 	public String getName(Locale locale);
 
 	/**
-	 * Gets the localized name of this d d m structure, optionally using the default language if no localization exists for the requested language.
+	 * Returns the localized name of this d d m structure in the language, optionally using the default language if no localization exists for the requested language.
 	 *
-	 * @param locale the local to get the localized name for
+	 * @param locale the local of the language
 	 * @param useDefault whether to use the default language if no localization exists for the requested language
 	 * @return the localized name of this d d m structure. If <code>useDefault</code> is <code>false</code> and no localization exists for the requested language, an empty string will be returned.
 	 */
 	public String getName(Locale locale, boolean useDefault);
 
 	/**
-	 * Gets the localized name of this d d m structure. Uses the default language if no localization exists for the requested language.
+	 * Returns the localized name of this d d m structure in the language. Uses the default language if no localization exists for the requested language.
 	 *
-	 * @param languageId the id of the language to get the localized name for
+	 * @param languageId the ID of the language
 	 * @return the localized name of this d d m structure
 	 */
 	public String getName(String languageId);
 
 	/**
-	 * Gets the localized name of this d d m structure, optionally using the default language if no localization exists for the requested language.
+	 * Returns the localized name of this d d m structure in the language, optionally using the default language if no localization exists for the requested language.
 	 *
-	 * @param languageId the id of the language to get the localized name for
+	 * @param languageId the ID of the language
 	 * @param useDefault whether to use the default language if no localization exists for the requested language
 	 * @return the localized name of this d d m structure
 	 */
 	public String getName(String languageId, boolean useDefault);
 
 	/**
-	 * Gets a map of the locales and localized name of this d d m structure.
+	 * Returns a map of the locales and localized names of this d d m structure.
 	 *
-	 * @return the locales and localized name
+	 * @return the locales and localized names of this d d m structure
 	 */
 	public Map<Locale, String> getNameMap();
 
@@ -282,13 +282,20 @@ public interface DDMStructureModel extends BaseModel<DDMStructure>, GroupedModel
 	public void setName(String name);
 
 	/**
-	 * Sets the localized name of this d d m structure.
+	 * Sets the localized name of this d d m structure in the language.
 	 *
 	 * @param name the localized name of this d d m structure
-	 * @param locale the locale to set the localized name for
+	 * @param locale the locale of the language
 	 */
 	public void setName(String name, Locale locale);
 
+	/**
+	 * Sets the localized name of this d d m structure in the language, and sets the default locale.
+	 *
+	 * @param name the localized name of this d d m structure
+	 * @param locale the locale of the language
+	 * @param defaultLocale the default locale
+	 */
 	public void setName(String name, Locale locale, Locale defaultLocale);
 
 	/**
@@ -298,10 +305,16 @@ public interface DDMStructureModel extends BaseModel<DDMStructure>, GroupedModel
 	 */
 	public void setNameMap(Map<Locale, String> nameMap);
 
+	/**
+	 * Sets the localized names of this d d m structure from the map of locales and localized names, and sets the default locale.
+	 *
+	 * @param nameMap the locales and localized names of this d d m structure
+	 * @param defaultLocale the default locale
+	 */
 	public void setNameMap(Map<Locale, String> nameMap, Locale defaultLocale);
 
 	/**
-	 * Gets the description of this d d m structure.
+	 * Returns the description of this d d m structure.
 	 *
 	 * @return the description of this d d m structure
 	 */
@@ -316,7 +329,7 @@ public interface DDMStructureModel extends BaseModel<DDMStructure>, GroupedModel
 	public void setDescription(String description);
 
 	/**
-	 * Gets the xsd of this d d m structure.
+	 * Returns the xsd of this d d m structure.
 	 *
 	 * @return the xsd of this d d m structure
 	 */
@@ -331,7 +344,7 @@ public interface DDMStructureModel extends BaseModel<DDMStructure>, GroupedModel
 	public void setXsd(String xsd);
 
 	/**
-	 * Gets the storage type of this d d m structure.
+	 * Returns the storage type of this d d m structure.
 	 *
 	 * @return the storage type of this d d m structure
 	 */

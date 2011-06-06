@@ -41,7 +41,7 @@ public class UserLocalServiceUtil {
 	/**
 	* Adds the user to the database. Also notifies the appropriate model listeners.
 	*
-	* @param user the user to add
+	* @param user the user
 	* @return the user that was added
 	* @throws SystemException if a system exception occurred
 	*/
@@ -64,7 +64,7 @@ public class UserLocalServiceUtil {
 	/**
 	* Deletes the user with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param userId the primary key of the user to delete
+	* @param userId the primary key of the user
 	* @throws PortalException if a user with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -77,7 +77,7 @@ public class UserLocalServiceUtil {
 	/**
 	* Deletes the user from the database. Also notifies the appropriate model listeners.
 	*
-	* @param user the user to delete
+	* @param user the user
 	* @throws PortalException
 	* @throws SystemException if a system exception occurred
 	*/
@@ -90,7 +90,7 @@ public class UserLocalServiceUtil {
 	/**
 	* Performs a dynamic query on the database and returns the matching rows.
 	*
-	* @param dynamicQuery the dynamic query to search with
+	* @param dynamicQuery the dynamic query
 	* @return the matching rows
 	* @throws SystemException if a system exception occurred
 	*/
@@ -108,9 +108,9 @@ public class UserLocalServiceUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param dynamicQuery the dynamic query to search with
-	* @param start the lower bound of the range of model instances to return
-	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param dynamicQuery the dynamic query
+	* @param start the lower bound of the range of model instances
+	* @param end the upper bound of the range of model instances (not inclusive)
 	* @return the range of matching rows
 	* @throws SystemException if a system exception occurred
 	*/
@@ -128,9 +128,9 @@ public class UserLocalServiceUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param dynamicQuery the dynamic query to search with
-	* @param start the lower bound of the range of model instances to return
-	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param dynamicQuery the dynamic query
+	* @param start the lower bound of the range of model instances
+	* @param end the upper bound of the range of model instances (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching rows
 	* @throws SystemException if a system exception occurred
@@ -146,9 +146,9 @@ public class UserLocalServiceUtil {
 	}
 
 	/**
-	* Counts the number of rows that match the dynamic query.
+	* Returns the number of rows that match the dynamic query.
 	*
-	* @param dynamicQuery the dynamic query to search with
+	* @param dynamicQuery the dynamic query
 	* @return the number of rows that match the dynamic query
 	* @throws SystemException if a system exception occurred
 	*/
@@ -159,9 +159,9 @@ public class UserLocalServiceUtil {
 	}
 
 	/**
-	* Gets the user with the primary key.
+	* Returns the user with the primary key.
 	*
-	* @param userId the primary key of the user to get
+	* @param userId the primary key of the user
 	* @return the user
 	* @throws PortalException if a user with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -173,14 +173,14 @@ public class UserLocalServiceUtil {
 	}
 
 	/**
-	* Gets a range of all the users.
+	* Returns a range of all the users.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of users to return
-	* @param end the upper bound of the range of users to return (not inclusive)
+	* @param start the lower bound of the range of users
+	* @param end the upper bound of the range of users (not inclusive)
 	* @return the range of users
 	* @throws SystemException if a system exception occurred
 	*/
@@ -191,7 +191,7 @@ public class UserLocalServiceUtil {
 	}
 
 	/**
-	* Gets the number of users.
+	* Returns the number of users.
 	*
 	* @return the number of users
 	* @throws SystemException if a system exception occurred
@@ -204,7 +204,7 @@ public class UserLocalServiceUtil {
 	/**
 	* Updates the user in the database. Also notifies the appropriate model listeners.
 	*
-	* @param user the user to update
+	* @param user the user
 	* @return the user that was updated
 	* @throws SystemException if a system exception occurred
 	*/
@@ -217,7 +217,7 @@ public class UserLocalServiceUtil {
 	/**
 	* Updates the user in the database. Also notifies the appropriate model listeners.
 	*
-	* @param user the user to update
+	* @param user the user
 	* @param merge whether to merge the user with the current session. See {@link com.liferay.portal.service.persistence.BatchSession#update(com.liferay.portal.kernel.dao.orm.Session, com.liferay.portal.model.BaseModel, boolean)} for an explanation.
 	* @return the user that was updated
 	* @throws SystemException if a system exception occurred
@@ -229,7 +229,7 @@ public class UserLocalServiceUtil {
 	}
 
 	/**
-	* Gets the Spring bean ID for this bean.
+	* Returns the Spring bean ID for this bean.
 	*
 	* @return the Spring bean ID for this bean
 	*/
@@ -325,8 +325,8 @@ public class UserLocalServiceUtil {
 	}
 
 	/**
-	* Adds the users to the password policy, and removes any other password
-	* policies they may already have.
+	* Assigns the password policy to the users, removing any other currently
+	* assigned password policies.
 	*
 	* @param passwordPolicyId the primary key of the password policy
 	* @param userIds the primary keys of the users
@@ -371,8 +371,15 @@ public class UserLocalServiceUtil {
 	/**
 	* Adds a user.
 	*
+	* <p>
+	* This method handles the creation and bookkeeping of the user including
+	* its resources, metadata, and internal data structures. It is not
+	* necessary to make subsequent calls to any methods to setup default
+	* groups, resources, etc.
+	* </p>
+	*
 	* @param creatorUserId the primary key of the creator
-	* @param companyId the primary key of the company the user belongs to
+	* @param companyId the primary key of the user's company
 	* @param autoPassword whether a password should be automatically generated
 	for the user
 	* @param password1 the user's password
@@ -395,17 +402,18 @@ public class UserLocalServiceUtil {
 	* @param birthdayDay the user's birthday day
 	* @param birthdayYear the user's birthday year
 	* @param jobTitle the user's job title
-	* @param groupIds the primary keys of the groups this user belongs to
-	* @param organizationIds the primary keys of the organizations this user
-	belongs to
+	* @param groupIds the primary keys of the user's groups
+	* @param organizationIds the primary keys of the user's organizations
 	* @param roleIds the primary keys of the roles this user possesses
-	* @param userGroupIds the primary keys of the user groups this user
-	belongs to
+	* @param userGroupIds the primary keys of the user's user groups
 	* @param sendEmail whether to send the user an email notification about
 	their new account
-	* @param serviceContext the service context for the user
+	* @param serviceContext the user's service context (optionally
+	<code>null</code>). Specifies the user's universally unique
+	identifier (with the <code>uuid</code> attribute), asset category
+	IDs, asset tag names, and expando bridge attributes.
 	* @return the new user
-	* @throws PortalException if the user's information is invalid
+	* @throws PortalException if the user's information was invalid
 	* @throws SystemException if a system exception occurred
 	*/
 	public static com.liferay.portal.model.User addUser(long creatorUserId,
@@ -448,8 +456,15 @@ public class UserLocalServiceUtil {
 	/**
 	* Adds a user with workflow.
 	*
+	* <p>
+	* This method handles the creation and bookkeeping of the user including
+	* its resources, metadata, and internal data structures. It is not
+	* necessary to make subsequent calls to any methods to setup default
+	* groups, resources, etc.
+	* </p>
+	*
 	* @param creatorUserId the primary key of the creator
-	* @param companyId the primary key of the company the user belongs to
+	* @param companyId the primary key of the user's company
 	* @param autoPassword whether a password should be automatically generated
 	for the user
 	* @param password1 the user's password
@@ -472,17 +487,18 @@ public class UserLocalServiceUtil {
 	* @param birthdayDay the user's birthday day
 	* @param birthdayYear the user's birthday year
 	* @param jobTitle the user's job title
-	* @param groupIds the primary keys of the groups this user belongs to
-	* @param organizationIds the primary keys of the organizations this user
-	belongs to
+	* @param groupIds the primary keys of the user's groups
+	* @param organizationIds the primary keys of the user's organizations
 	* @param roleIds the primary keys of the roles this user possesses
-	* @param userGroupIds the primary keys of the user groups this user
-	belongs to
+	* @param userGroupIds the primary keys of the user's user groups
 	* @param sendEmail whether to send the user an email notification about
 	their new account
-	* @param serviceContext the service context for the user
+	* @param serviceContext the user's service context (optionally
+	<code>null</code>). Specifies the user's universally unique
+	identifier (with the <code>uuid</code> attribute), asset category
+	IDs, asset tag names, and expando bridge attributes.
 	* @return the new user
-	* @throws PortalException if the user's information is invalid
+	* @throws PortalException if the user's information was invalid
 	* @throws SystemException if a system exception occurred
 	*/
 	public static com.liferay.portal.model.User addUserWithWorkflow(
@@ -512,7 +528,7 @@ public class UserLocalServiceUtil {
 	* Attempts to authenticate the user by their email address and password,
 	* while using the AuthPipeline.
 	*
-	* @param companyId the primary key of the company the user belongs to
+	* @param companyId the primary key of the user's company
 	* @param emailAddress the user's email address
 	* @param password the user's password
 	* @param headerMap the header map from the authentication request
@@ -548,7 +564,7 @@ public class UserLocalServiceUtil {
 	* Attempts to authenticate the user by their screen name and password,
 	* while using the AuthPipeline.
 	*
-	* @param companyId the primary key of the company the user belongs to
+	* @param companyId the primary key of the user's company
 	* @param screenName the user's screen name
 	* @param password the user's password
 	* @param headerMap the header map from the authentication request
@@ -584,7 +600,7 @@ public class UserLocalServiceUtil {
 	* Attempts to authenticate the user by their primary key and password,
 	* while using the AuthPipeline.
 	*
-	* @param companyId the primary key of the company the user belongs to
+	* @param companyId the primary key of the user's company
 	* @param userId the user's primary key
 	* @param password the user's password
 	* @param headerMap the header map from the authentication request
@@ -641,7 +657,7 @@ public class UserLocalServiceUtil {
 	* </li>
 	* </ul>
 	*
-	* @param companyId the primary key of the company the user belongs to
+	* @param companyId the primary key of the user's company
 	* @param authType the type of authentication to perform
 	* @param login either the user's email address, screen name, or primary
 	key depending on the value of <code>authType</code>
@@ -670,7 +686,7 @@ public class UserLocalServiceUtil {
 	* authentication, without using the AuthPipeline. Primarily used for
 	* authenticating users of <code>tunnel-web</code>.
 	*
-	* @param companyId the primary key of the company the user belongs to
+	* @param companyId the primary key of the user's company
 	* @param username either the user's email address, screen name, or primary
 	key
 	* @param realm unused
@@ -678,8 +694,8 @@ public class UserLocalServiceUtil {
 	* @param method the request method
 	* @param uri the request URI
 	* @param response the authentication response hash
-	* @return the user's primary key if authentication is succesful; 0
-	otherwise
+	* @return the user's primary key if authentication is succesful;
+	<code>0</code> otherwise
 	* @throws PortalException if a portal exception occurred
 	* @throws SystemException if a system exception occurred
 	*/
@@ -712,7 +728,7 @@ public class UserLocalServiceUtil {
 	* and performs maintenance on the user's lockout and failed login data.
 	*
 	* @param user the user
-	* @throws PortalException if the user is currently locked out
+	* @throws PortalException if the user was determined to still be locked out
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void checkLockout(com.liferay.portal.model.User user)
@@ -737,7 +753,7 @@ public class UserLocalServiceUtil {
 	* Adds a failed login attempt to the user with the email address and
 	* updates the user's last failed login date.
 	*
-	* @param companyId the primary key of the company the user belongs to
+	* @param companyId the primary key of the user's company
 	* @param emailAddress the user's email address
 	* @throws PortalException if a user with the email address could not be
 	found
@@ -751,8 +767,8 @@ public class UserLocalServiceUtil {
 	}
 
 	/**
-	* Adds a failed login attempt to the user with the primary key and updates
-	* the user's last failed login date.
+	* Adds a failed login attempt to the user and updates the user's last
+	* failed login date.
 	*
 	* @param userId the primary key of the user
 	* @throws PortalException if a user with the primary key could not be found
@@ -768,7 +784,7 @@ public class UserLocalServiceUtil {
 	* Adds a failed login attempt to the user with the screen name and updates
 	* the user's last failed login date.
 	*
-	* @param companyId the primary key of the company the user belongs to
+	* @param companyId the primary key of the user's company
 	* @param screenName the user's screen name
 	* @throws PortalException if a user with the screen name could not be found
 	* @throws SystemException if a system exception occurred
@@ -797,7 +813,7 @@ public class UserLocalServiceUtil {
 	}
 
 	/**
-	* Removes all the users from the organization with the primary key.
+	* Removes all the users from the organization.
 	*
 	* @param organizationId the primary key of the organization
 	* @throws SystemException if a system exception occurred
@@ -808,7 +824,7 @@ public class UserLocalServiceUtil {
 	}
 
 	/**
-	* Removes all the users from the user group with the primary key.
+	* Removes all the users from the user group.
 	*
 	* @param userGroupId the primary key of the user group
 	* @throws SystemException if a system exception occurred
@@ -823,10 +839,10 @@ public class UserLocalServiceUtil {
 	* the confirmation email.
 	*
 	* @param user the user
-	* @param serviceContext the service context. The attribute
-	<code>autoPassword</code> determines whether a password should be
-	generated, and the attribute <code>sendEmail</code> determines
-	whether the confirmation email should be sent.
+	* @param serviceContext the user's service context. Specifies whether a
+	password should be generated (with the <code>autoPassword</code>
+	attribute) and whether the confirmation email should be sent
+	(with the <code>sendEmail</code> attribute)
 	* @throws PortalException if a portal exception occurred
 	* @throws SystemException if a system exception occurred
 	*/
@@ -843,7 +859,7 @@ public class UserLocalServiceUtil {
 	* Used for decrypting a user's credentials from the values stored in an
 	* automatic login cookie.
 	*
-	* @param companyId the primary key of the company the user belongs to
+	* @param companyId the primary key of the user's company
 	* @param name the encrypted primary key of the user
 	* @param password the encrypted password of the user
 	* @return the user's primary key and password
@@ -859,10 +875,10 @@ public class UserLocalServiceUtil {
 	}
 
 	/**
-	* Deletes the portrait of the user with the primary key.
+	* Deletes the user's portrait image.
 	*
 	* @throws PortalException if a user with the primary key could not be found
-	or if the user's portrait could not by found by its primary key
+	or if the user's portrait could not be found
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void deletePortrait(long userId)
@@ -872,7 +888,7 @@ public class UserLocalServiceUtil {
 	}
 
 	/**
-	* Removes the user with the primary key from the role with the primary key.
+	* Removes the user from the role.
 	*
 	* @param roleId the primary key of the role
 	* @param userId the primary key of the user
@@ -887,9 +903,8 @@ public class UserLocalServiceUtil {
 	}
 
 	/**
-	* Encrypts the primary key of the user with the primary key. Used when
-	* encrypting the user's credentials for storage in an automatic login
-	* cookie.
+	* Encrypts the primary key of the user. Used when encrypting the user's
+	* credentials for storage in an automatic login cookie.
 	*
 	* @param name the primary key of the user
 	* @return the user's encrypted primary key
@@ -903,8 +918,7 @@ public class UserLocalServiceUtil {
 	}
 
 	/**
-	* Gets a range of all the users belonging to the company with the primary
-	* key.
+	* Returns a range of all the users belonging to the company.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end -
@@ -917,9 +931,8 @@ public class UserLocalServiceUtil {
 	* </p>
 	*
 	* @param companyId the primary key of the company
-	* @param start the lower bound of the range of users to return
-	* @param end the upper bound of the range of users to return (not
-	inclusive)
+	* @param start the lower bound of the range of users
+	* @param end the upper bound of the range of users (not inclusive)
 	* @return the range of users belonging to the company
 	* @throws SystemException if a system exception occurred
 	*/
@@ -930,7 +943,7 @@ public class UserLocalServiceUtil {
 	}
 
 	/**
-	* Counts all the users belonging to the company with the primary key.
+	* Returns the number of users belonging to the company.
 	*
 	* @param companyId the primary key of the company
 	* @return the number of users belonging to the company
@@ -942,7 +955,7 @@ public class UserLocalServiceUtil {
 	}
 
 	/**
-	* Gets the default user for the company with the primary key.
+	* Returns the default user for the company.
 	*
 	* @param companyId the primary key of the company
 	* @return the default user for the company
@@ -957,8 +970,7 @@ public class UserLocalServiceUtil {
 	}
 
 	/**
-	* Gets the primary key of the default user for the company with the primary
-	* key.
+	* Returns the primary key of the default user for the company.
 	*
 	* @param companyId the primary key of the company
 	* @return the primary key of the default user for the company
@@ -973,8 +985,7 @@ public class UserLocalServiceUtil {
 	}
 
 	/**
-	* Gets the primary keys of all the users belonging to the group with the
-	* primary key.
+	* Returns the primary keys of all the users belonging to the group.
 	*
 	* @param groupId the primary key of the group
 	* @return the primary keys of the users belonging to the group
@@ -986,7 +997,7 @@ public class UserLocalServiceUtil {
 	}
 
 	/**
-	* Gets all the users belonging to the group with the primary key.
+	* Returns all the users belonging to the group.
 	*
 	* @param groupId the primary key of the group
 	* @return the users belonging to the group
@@ -999,7 +1010,7 @@ public class UserLocalServiceUtil {
 	}
 
 	/**
-	* Counts all the users belonging to the group with the primary key.
+	* Returns the number of users belonging to the group.
 	*
 	* @param groupId the primary key of the group
 	* @return the number of users belonging to the group
@@ -1011,8 +1022,7 @@ public class UserLocalServiceUtil {
 	}
 
 	/**
-	* Counts all the users with the status belonging to the group with the
-	* primary key.
+	* Returns the number of users with the status belonging to the group.
 	*
 	* @param groupId the primary key of the group
 	* @param status the workflow status
@@ -1028,7 +1038,7 @@ public class UserLocalServiceUtil {
 	}
 
 	/**
-	* Gets all the users who have not had any announcements of the type
+	* Returns all the users who have not had any announcements of the type
 	* delivered, excluding the default user.
 	*
 	* @param type the type of announcement
@@ -1042,7 +1052,7 @@ public class UserLocalServiceUtil {
 	}
 
 	/**
-	* Gets all the users who do nat have any contacts.
+	* Returns all the users who do not have any contacts.
 	*
 	* @return the users who do not have any contacts
 	* @throws SystemException if a system exception occurred
@@ -1053,8 +1063,8 @@ public class UserLocalServiceUtil {
 	}
 
 	/**
-	* Gets all the users who do not belong to any groups, excluding the default
-	* user.
+	* Returns all the users who do not belong to any groups, excluding the
+	* default user.
 	*
 	* @return the users who do not belong to any groups
 	* @throws SystemException if a system exception occurred
@@ -1065,8 +1075,7 @@ public class UserLocalServiceUtil {
 	}
 
 	/**
-	* Gets the primary keys of all the users belonging to the organization with
-	* the primary key.
+	* Returns the primary keys of all the users belonging to the organization.
 	*
 	* @param organizationId the primary key of the organization
 	* @return the primary keys of the users belonging to the organization
@@ -1078,7 +1087,7 @@ public class UserLocalServiceUtil {
 	}
 
 	/**
-	* Gets all the users belonging to the organization with the primary key.
+	* Returns all the users belonging to the organization.
 	*
 	* @param organizationId the primary key of the organization
 	* @return the users belonging to the organization
@@ -1091,7 +1100,7 @@ public class UserLocalServiceUtil {
 	}
 
 	/**
-	* Counts all the users belonging to the organization with the primary key.
+	* Returns the number of users belonging to the organization.
 	*
 	* @param organizationId the primary key of the organization
 	* @return the number of users belonging to the organization
@@ -1103,8 +1112,8 @@ public class UserLocalServiceUtil {
 	}
 
 	/**
-	* Counts all the users with the status belonging to the organization with
-	* the primary key.
+	* Returns the number of users with the status belonging to the
+	* organization.
 	*
 	* @param organizationId the primary key of the organization
 	* @param status the workflow status
@@ -1120,8 +1129,7 @@ public class UserLocalServiceUtil {
 	}
 
 	/**
-	* Gets the primary keys of all the users belonging to the role with the
-	* primary key.
+	* Returns the primary keys of all the users belonging to the role.
 	*
 	* @param roleId the primary key of the role
 	* @return the primary keys of the users belonging to the role
@@ -1133,7 +1141,7 @@ public class UserLocalServiceUtil {
 	}
 
 	/**
-	* Gets all the users belonging to the role with the primary key.
+	* Returns all the users belonging to the role.
 	*
 	* @param roleId the primary key of the role
 	* @return the users belonging to the role
@@ -1145,7 +1153,7 @@ public class UserLocalServiceUtil {
 	}
 
 	/**
-	* Gets a range of all the users belonging to the role with the primary key.
+	* Returns a range of all the users belonging to the role.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end -
@@ -1158,9 +1166,8 @@ public class UserLocalServiceUtil {
 	* </p>
 	*
 	* @param roleId the primary key of the role
-	* @param start the lower bound of the range of users to return
-	* @param end the upper bound of the range of users to return (not
-	inclusive)
+	* @param start the lower bound of the range of users
+	* @param end the upper bound of the range of users (not inclusive)
 	* @return the range of users belonging to the role
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1171,7 +1178,7 @@ public class UserLocalServiceUtil {
 	}
 
 	/**
-	* Counts all the users belonging to the role with the primary key.
+	* Returns the number of users belonging to the role.
 	*
 	* @param roleId the primary key of the role
 	* @return the number of users belonging to the role
@@ -1183,8 +1190,7 @@ public class UserLocalServiceUtil {
 	}
 
 	/**
-	* Counts all the users with the status belonging to the role with the
-	* primary key.
+	* Returns the number of users with the status belonging to the role.
 	*
 	* @param roleId the primary key of the role
 	* @param status the workflow status
@@ -1200,8 +1206,8 @@ public class UserLocalServiceUtil {
 	}
 
 	/**
-	* Gets an ordered range of all the users with a social relation of the type
-	* with the user with the primary key.
+	* Returns an ordered range of all the users with a social relation of the
+	* type with the user.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end -
@@ -1217,9 +1223,8 @@ public class UserLocalServiceUtil {
 	* @param type the type of social relation. The possible types can be found
 	in {@link
 	com.liferay.portlet.social.model.SocialRelationConstants}.
-	* @param start the lower bound of the range of users to return
-	* @param end the upper bound of the range of users to return (not
-	inclusive)
+	* @param start the lower bound of the range of users
+	* @param end the upper bound of the range of users (not inclusive)
 	* @param obc the comparator to order the users by (optionally
 	<code>null</code>)
 	* @return the ordered range of users with a social relation of the type
@@ -1236,8 +1241,8 @@ public class UserLocalServiceUtil {
 	}
 
 	/**
-	* Gets an ordered range of all the users with a social relation with the
-	* user with the primary key.
+	* Returns an ordered range of all the users with a social relation with the
+	* user.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end -
@@ -1250,9 +1255,8 @@ public class UserLocalServiceUtil {
 	* </p>
 	*
 	* @param userId the primary key of the user
-	* @param start the lower bound of the range of users to return
-	* @param end the upper bound of the range of users to return (not
-	inclusive)
+	* @param start the lower bound of the range of users
+	* @param end the upper bound of the range of users (not inclusive)
 	* @param obc the comparator to order the users by (optionally
 	<code>null</code>)
 	* @return the ordered range of users with a social relation with the user
@@ -1268,8 +1272,8 @@ public class UserLocalServiceUtil {
 	}
 
 	/**
-	* Gets an ordered range of all the users with a mutual social relation of
-	* the type with the user with the primary key.
+	* Returns an ordered range of all the users with a mutual social relation
+	* of the type with the user.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end -
@@ -1284,9 +1288,8 @@ public class UserLocalServiceUtil {
 	* @param type the type of social relation. The possible types can be found
 	in {@link
 	com.liferay.portlet.social.model.SocialRelationConstants}.
-	* @param start the lower bound of the range of users to return
-	* @param end the upper bound of the range of users to return (not
-	inclusive)
+	* @param start the lower bound of the range of users
+	* @param end the upper bound of the range of users (not inclusive)
 	* @param obc the comparator to order the users by (optionally
 	<code>null</code>)
 	* @return the ordered range of users with a mutual social relation of the
@@ -1304,8 +1307,8 @@ public class UserLocalServiceUtil {
 	}
 
 	/**
-	* Gets an ordered range of all the users with a mutual social relation with
-	* the user with the primary key.
+	* Returns an ordered range of all the users with a mutual social relation
+	* with the user.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end -
@@ -1317,9 +1320,8 @@ public class UserLocalServiceUtil {
 	* result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of users to return
-	* @param end the upper bound of the range of users to return (not
-	inclusive)
+	* @param start the lower bound of the range of users
+	* @param end the upper bound of the range of users (not inclusive)
 	* @param obc the comparator to order the users by (optionally
 	<code>null</code>)
 	* @return the ordered range of users with a mutual social relation with the
@@ -1336,8 +1338,7 @@ public class UserLocalServiceUtil {
 	}
 
 	/**
-	* Counts all the users with a social relation with the user with the
-	* primary key.
+	* Returns the number of users with a social relation with the user.
 	*
 	* @param userId the primary key of the user
 	* @return the number of users with a social relation with the user
@@ -1351,8 +1352,8 @@ public class UserLocalServiceUtil {
 	}
 
 	/**
-	* Counts all the users with a social relation of the type with the user
-	* with the primary key.
+	* Returns the number of users with a social relation of the type with the
+	* user.
 	*
 	* @param userId the primary key of the user
 	* @param type the type of social relation. The possible types can be found
@@ -1370,8 +1371,7 @@ public class UserLocalServiceUtil {
 	}
 
 	/**
-	* Counts all the users with a mutual social relation with the user with the
-	* primary key.
+	* Returns the number of users with a mutual social relation with the user.
 	*
 	* @return the number of users with a mutual social relation with the user
 	* @throws PortalException if a user with the primary key could not be found
@@ -1384,8 +1384,8 @@ public class UserLocalServiceUtil {
 	}
 
 	/**
-	* Counts all the users with a mutual social relation of the type with the
-	* user with the primary key.
+	* Returns the number of users with a mutual social relation of the type
+	* with the user.
 	*
 	* @param type the type of social relation. The possible types can be found
 	in {@link
@@ -1402,7 +1402,7 @@ public class UserLocalServiceUtil {
 	}
 
 	/**
-	* Gets the user with the contact ID.
+	* Returns the user with the contact ID.
 	*
 	* @param contactId the user's contact ID
 	* @return the user with the contact ID
@@ -1417,9 +1417,9 @@ public class UserLocalServiceUtil {
 	}
 
 	/**
-	* Gets the user with the email address.
+	* Returns the user with the email address.
 	*
-	* @param companyId the primary key of the company the user belongs to
+	* @param companyId the primary key of the user's company
 	* @param emailAddress the user's email address
 	* @return the user with the email address
 	* @throws PortalException if a user with the email address could not be
@@ -1434,9 +1434,9 @@ public class UserLocalServiceUtil {
 	}
 
 	/**
-	* Gets the user with the Facebook ID.
+	* Returns the user with the Facebook ID.
 	*
-	* @param companyId the primary key of the company the user belongs to
+	* @param companyId the primary key of the user's company
 	* @param facebookId the user's Facebook ID
 	* @return the user with the Facebook ID
 	* @throws PortalException if a user with the Facebook ID could not be found
@@ -1450,10 +1450,10 @@ public class UserLocalServiceUtil {
 	}
 
 	/**
-	* Gets the user with the primary key.
+	* Returns the user with the primary key.
 	*
 	* @param userId the primary key of the user
-	* @return thee user with the primary key
+	* @return the user with the primary key
 	* @throws PortalException if a user with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1464,9 +1464,9 @@ public class UserLocalServiceUtil {
 	}
 
 	/**
-	* Gets the user with the primary key from the company with the primary key.
+	* Returns the user with the primary key from the company.
 	*
-	* @param companyId the primary key of the company the user belongs to
+	* @param companyId the primary key of the user's company
 	* @param userId the primary key of the user
 	* @return the user with the primary key
 	* @throws PortalException if a user with the primary key from the company
@@ -1481,9 +1481,9 @@ public class UserLocalServiceUtil {
 	}
 
 	/**
-	* Gets the user with the OpenID.
+	* Returns the user with the OpenID.
 	*
-	* @param companyId the primary key of the company the user belongs to
+	* @param companyId the primary key of the user's company
 	* @param openId the user's OpenID
 	* @return the user with the OpenID
 	* @throws PortalException if a user with the OpenID could not be found
@@ -1497,7 +1497,7 @@ public class UserLocalServiceUtil {
 	}
 
 	/**
-	* Gets the user with the portrait ID.
+	* Returns the user with the portrait ID.
 	*
 	* @param portraitId the user's portrait ID
 	* @return the user with the portrait ID
@@ -1512,9 +1512,9 @@ public class UserLocalServiceUtil {
 	}
 
 	/**
-	* Gets the user with the screen name.
+	* Returns the user with the screen name.
 	*
-	* @param companyId the primary key of the company the user belongs to
+	* @param companyId the primary key of the user's company
 	* @param screenName the user's screen name
 	* @return the user with the screen name
 	* @throws PortalException if a user with the screen name could not be found
@@ -1527,7 +1527,7 @@ public class UserLocalServiceUtil {
 	}
 
 	/**
-	* Gets the user with the universally unique identifier.
+	* Returns the user with the universally unique identifier.
 	*
 	* @param uuid the user's universally unique identifier
 	* @return the user with the universally unique identifier
@@ -1543,7 +1543,7 @@ public class UserLocalServiceUtil {
 	}
 
 	/**
-	* Gets all the users belonging to the user group with the primary key.
+	* Returns all the users belonging to the user group.
 	*
 	* @param userGroupId the primary key of the user group
 	* @return the users belonging to the user group
@@ -1556,7 +1556,7 @@ public class UserLocalServiceUtil {
 	}
 
 	/**
-	* Counts all the users belonging to the user group with the primary key.
+	* Returns the number of users belonging to the user group.
 	*
 	* @param userGroupId the primary key of the user group
 	* @return the number of users belonging to the user group
@@ -1568,8 +1568,7 @@ public class UserLocalServiceUtil {
 	}
 
 	/**
-	* Counts all the users with the status belonging to the user group with the
-	* primary key.
+	* Returns the number of users with the status belonging to the user group.
 	*
 	* @param userGroupId the primary key of the user group
 	* @param status the workflow status
@@ -1585,9 +1584,9 @@ public class UserLocalServiceUtil {
 	}
 
 	/**
-	* Gets the primary key of the user with the email address.
+	* Returns the primary key of the user with the email address.
 	*
-	* @param companyId the primary key of the company the user belongs to
+	* @param companyId the primary key of the user's company
 	* @param emailAddress the user's email address
 	* @return the primary key of the user with the email address
 	* @throws PortalException if a user with the email address could not be
@@ -1602,9 +1601,9 @@ public class UserLocalServiceUtil {
 	}
 
 	/**
-	* Gets the primary key of the user with the screen name.
+	* Returns the primary key of the user with the screen name.
 	*
-	* @param companyId the primary key of the company the user belongs to
+	* @param companyId the primary key of the user's company
 	* @param screenName the user's screen name
 	* @return the primary key of the user with the screen name
 	* @throws PortalException if a user with the screen name could not be found
@@ -1618,8 +1617,7 @@ public class UserLocalServiceUtil {
 	}
 
 	/**
-	* Determines if the user with the primary key is a member of the group with
-	* the primary key.
+	* Determines if the user is a member of the group.
 	*
 	* @param groupId the primary key of the group
 	* @param userId the primary key of the user
@@ -1633,8 +1631,7 @@ public class UserLocalServiceUtil {
 	}
 
 	/**
-	* Determines if the user with the primary key is a member of the
-	* organization with the primary key.
+	* Determines if the user is a member of the organization.
 	*
 	* @param organizationId the primary key of the organization
 	* @return <code>true</code> if the user is a member of the organization;
@@ -1647,12 +1644,11 @@ public class UserLocalServiceUtil {
 	}
 
 	/**
-	* Determines if the user with the primary key is a member of the password
-	* policy with the primary key.
+	* Determines if the password policy has been assigned to the user.
 	*
 	* @param passwordPolicyId the primary key of the password policy
 	* @param userId the primary key of the user
-	* @return <code>true</code> if the user is a member of the password policy;
+	* @return <code>true</code> if the password policy is assigned to the user;
 	<code>false</code> otherwise
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1662,8 +1658,7 @@ public class UserLocalServiceUtil {
 	}
 
 	/**
-	* Determines if the user with the primary key is a member of the role with
-	* the primary key.
+	* Determines if the user is a member of the role.
 	*
 	* @param roleId the primary key of the role
 	* @param userId the primary key of the user
@@ -1677,10 +1672,10 @@ public class UserLocalServiceUtil {
 	}
 
 	/**
-	* Determines if the user with the primary key has the role with the name,
-	* optionally through inheritance.
+	* Determines if the user has the role with the name, optionally through
+	* inheritance.
 	*
-	* @param companyId the primary key of the company the role belongs to
+	* @param companyId the primary key of the role's company
 	* @param name the name of the role (must be a regular role, not an
 	organization, site or provider role)
 	* @param userId the primary key of the user
@@ -1699,8 +1694,7 @@ public class UserLocalServiceUtil {
 	}
 
 	/**
-	* Determines if the user with the primary key is a member of the team with
-	* the primary key.
+	* Determines if the user is a member of the team.
 	*
 	* @param teamId the primary key of the team
 	* @param userId the primary key of the user
@@ -1714,8 +1708,7 @@ public class UserLocalServiceUtil {
 	}
 
 	/**
-	* Determines if the user with the primary key is a member of the user group
-	* with the primary key.
+	* Determines if the user is a member of the user group.
 	*
 	* @param userGroupId the primary key of the user group
 	* @param userId the primary key of the user
@@ -1767,7 +1760,7 @@ public class UserLocalServiceUtil {
 	* name and email address.
 	*
 	* @param creatorUserId the primary key of the creator
-	* @param companyId the primary key of the company the user belongs to
+	* @param companyId the primary key of the user's company
 	* @param autoPassword whether a password should be automatically generated
 	for the user
 	* @param password1 the user's password
@@ -1790,12 +1783,14 @@ public class UserLocalServiceUtil {
 	* @param birthdayDay the user's birthday day
 	* @param birthdayYear the user's birthday year
 	* @param jobTitle the user's job title
+	* @param updateUserInformation whether to update the user's information
 	* @param sendEmail whether to send the user an email notification about
 	their new account
-	* @param serviceContext the service context for the user
-	* @param updateUserInformation whether to update the user information
+	* @param serviceContext the user's service context (optionally
+	<code>null</code>). Specifies the user's expando bridge
+	attributes.
 	* @return the user
-	* @throws PortalException if the user's information is invalid
+	* @throws PortalException if the user's information was invalid
 	* @throws SystemException if a system exception occurred
 	*/
 	public static com.liferay.portal.model.User updateIncompleteUser(
@@ -1838,7 +1833,7 @@ public class UserLocalServiceUtil {
 	* result set.
 	* </p>
 	*
-	* @param companyId the primary key of the company the users belong to
+	* @param companyId the primary key of the user's company
 	* @param keywords the keywords (space separated), which may occur in the
 	user's first name, middle name, last name, screen name, or email
 	address
@@ -1846,9 +1841,8 @@ public class UserLocalServiceUtil {
 	* @param params the finder parameters (optionally <code>null</code>). For
 	more information see {@link
 	com.liferay.portal.service.persistence.UserFinder}.
-	* @param start the lower bound of the range of users to return
-	* @param end the upper bound of the range of users to return (not
-	inclusive)
+	* @param start the lower bound of the range of users
+	* @param end the upper bound of the range of users (not inclusive)
 	* @param obc the comparator to order the users by (optionally
 	<code>null</code>)
 	* @return the users with the status who match the keywords
@@ -1880,7 +1874,7 @@ public class UserLocalServiceUtil {
 	* result set.
 	* </p>
 	*
-	* @param companyId the primary key of the company the users belong to
+	* @param companyId the primary key of the user's company
 	* @param keywords the keywords (space separated), which may occur in the
 	user's first name, middle name, last name, screen name, or email
 	address
@@ -1888,9 +1882,8 @@ public class UserLocalServiceUtil {
 	* @param params the indexer parameters (optionally <code>null</code>). For
 	more information see {@link
 	com.liferay.portlet.enterpriseadmin.util.UserIndexer}.
-	* @param start the lower bound of the range of users to return
-	* @param end the upper bound of the range of users to return (not
-	inclusive)
+	* @param start the lower bound of the range of users
+	* @param end the upper bound of the range of users (not inclusive)
 	* @param sort the field and direction to sort by (optionally
 	<code>null</code>)
 	* @return the users with the status who match the keywords
@@ -1924,7 +1917,7 @@ public class UserLocalServiceUtil {
 	* result set.
 	* </p>
 	*
-	* @param companyId the primary key of the company the users belong to
+	* @param companyId the primary key of the user's company
 	* @param firstName the first name keywords (space separated)
 	* @param middleName the middle name keywords
 	* @param lastName the last name keywords
@@ -1936,9 +1929,8 @@ public class UserLocalServiceUtil {
 	com.liferay.portal.service.persistence.UserFinder}.
 	* @param andSearch whether the users must match all of the keywords in
 	every field or any of them in any field
-	* @param start the lower bound of the range of users to return
-	* @param end the upper bound of the range of users to return (not
-	inclusive)
+	* @param start the lower bound of the range of users
+	* @param end the upper bound of the range of users (not inclusive)
 	* @param obc the comparator to order the users by (optionally
 	<code>null</code>)
 	* @return the users with the status who match the keywords
@@ -1975,7 +1967,7 @@ public class UserLocalServiceUtil {
 	* result set.
 	* </p>
 	*
-	* @param companyId the primary key of the company the users belong to
+	* @param companyId the primary key of the user's company
 	* @param firstName the first name keywords (space separated)
 	* @param middleName the middle name keywords
 	* @param lastName the last name keywords
@@ -1987,9 +1979,8 @@ public class UserLocalServiceUtil {
 	com.liferay.portlet.enterpriseadmin.util.UserIndexer}.
 	* @param andSearch whether the users must match all of the keywords in
 	every field or any of them in any field
-	* @param start the lower bound of the range of users to return
-	* @param end the upper bound of the range of users to return (not
-	inclusive)
+	* @param start the lower bound of the range of users
+	* @param end the upper bound of the range of users (not inclusive)
 	* @param sort the field and direction to sort by (optionally
 	<code>null</code>)
 	* @return the users with the status who match the keywords
@@ -2011,9 +2002,9 @@ public class UserLocalServiceUtil {
 	}
 
 	/**
-	* Counts all the users with the status who match the keywords.
+	* Returns the number of users with the status who match the keywords.
 	*
-	* @param companyId the primary key of the company the users belong to
+	* @param companyId the primary key of the user's company
 	* @param keywords the keywords (space separated), which may occur in the
 	user's first name, middle name, last name, screen name, or email
 	address
@@ -2032,11 +2023,11 @@ public class UserLocalServiceUtil {
 	}
 
 	/**
-	* Counts all the users with the status whose first name, middle name, last
-	* name, screen name, or email address match the keywords specified for
-	* them.
+	* Returns the number of users with the status whose first name, middle
+	* name, last name, screen name, or email address match the keywords
+	* specified for them.
 	*
-	* @param companyId the primary key of the company the users belong to
+	* @param companyId the primary key of the user's company
 	* @param firstName the first name keywords (space separated)
 	* @param middleName the middle name keywords
 	* @param lastName the last name keywords
@@ -2067,7 +2058,7 @@ public class UserLocalServiceUtil {
 	* of this email can be specified in <code>portal.properties</code> with the
 	* <code>admin.email.password</code> keys.
 	*
-	* @param companyId the primary key of the company the user belongs to
+	* @param companyId the primary key of the user's company
 	* @param emailAddress the user's email address
 	* @param remoteAddr the IP address of the individual that made the new
 	password request
@@ -2080,8 +2071,9 @@ public class UserLocalServiceUtil {
 	specified in <code>portal.properties</code> will be used.
 	* @param body the email body. If <code>null</code>, the body specified in
 	<code>portal.properties</code> will be used.
-	* @param serviceContext the service context
-	* @throws PortalException if a user with the email address cannot be found
+	* @param serviceContext the user's service context
+	* @throws PortalException if a user with the email address could not be
+	found
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void sendPassword(long companyId,
@@ -2244,13 +2236,14 @@ public class UserLocalServiceUtil {
 	}
 
 	/**
-	* Updates the user's asset with the new asset categories and tag names.
+	* Updates the user's asset with the new asset categories and tag names,
+	* removing and adding asset categories and tag names as necessary.
 	*
 	* @param userId the primary key of the user
 	* @param user ID the primary key of the user
 	* @param assetCategoryIds the primary key's of the new asset categories
 	* @param assetTagNames the new asset tag names
-	* @throws PortalException if a user with the primary key cannot be found
+	* @throws PortalException if a user with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void updateAsset(long userId,
@@ -2376,7 +2369,7 @@ public class UserLocalServiceUtil {
 	/**
 	* Updates whether the user is locked out from logging in.
 	*
-	* @param companyId the primary key of the company the user belongs to
+	* @param companyId the primary key of the user's company
 	* @param emailAddress the user's email address
 	* @param lockout whether the user is locked out
 	* @return the user
@@ -2411,7 +2404,7 @@ public class UserLocalServiceUtil {
 	/**
 	* Updates whether the user is locked out from logging in.
 	*
-	* @param companyId the primary key of the company the user belongs to
+	* @param companyId the primary key of the user's company
 	* @param screenName the user's screen name
 	* @param lockout whether the user is locked out
 	* @return the user
@@ -2474,7 +2467,7 @@ public class UserLocalServiceUtil {
 	}
 
 	/**
-	* Updates the user's password.
+	* Updates the user's password without tracking or validation of the change.
 	*
 	* @param userId the primary key of the user
 	* @param password1 the user's new password
@@ -2495,7 +2488,8 @@ public class UserLocalServiceUtil {
 	}
 
 	/**
-	* Updates the user's password.
+	* Updates the user's password, optionally with tracking and validation of
+	* the change.
 	*
 	* @param userId the primary key of the user
 	* @param password1 the user's new password
@@ -2503,8 +2497,7 @@ public class UserLocalServiceUtil {
 	* @param passwordReset whether the user should be asked to reset their
 	password the next time they login
 	* @param silentUpdate whether the password should be updated without being
-	exported, tracked, or validated. Primarily used for password
-	imports.
+	tracked, or validated. Primarily used for password imports.
 	* @return the user
 	* @throws PortalException if a user with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -2520,8 +2513,8 @@ public class UserLocalServiceUtil {
 	}
 
 	/**
-	* Updates the user's password without any validation or tracking. This
-	* method should only be used when performing manual maintenance.
+	* Updates the user's password with manually input information. This method
+	* should only be used when performing maintenance.
 	*
 	* @param userId the primary key of the user
 	* @param password the user's new password
@@ -2567,8 +2560,8 @@ public class UserLocalServiceUtil {
 	* @param userId the primary key of the user
 	* @param bytes the new portrait image data
 	* @return the user
-	* @throws PortalException if a user with the primary key could not be
-	found or if the new portrait was invalid
+	* @throws PortalException if a user with the primary key could not be found
+	or if the new portrait was invalid
 	* @throws SystemException if a system exception occurred
 	*/
 	public static com.liferay.portal.model.User updatePortrait(long userId,
@@ -2585,8 +2578,8 @@ public class UserLocalServiceUtil {
 	* @param question the user's new password reset question
 	* @param answer the user's new password reset answer
 	* @return the user
-	* @throws PortalException if a user with the primary key could not be
-	found or if the new question or answer were invalid
+	* @throws PortalException if a user with the primary key could not be found
+	or if the new question or answer were invalid
 	* @throws SystemException if a system exception occurred
 	*/
 	public static com.liferay.portal.model.User updateReminderQuery(
@@ -2602,8 +2595,8 @@ public class UserLocalServiceUtil {
 	* @param userId the primary key of the user
 	* @param screenName the user's new screen name
 	* @return the user
-	* @throws PortalException if a user with the primary key could not be
-	found or if the new screen name was invalid
+	* @throws PortalException if a user with the primary key could not be found
+	or if the new screen name was invalid
 	* @throws SystemException if a system exception occurred
 	*/
 	public static com.liferay.portal.model.User updateScreenName(long userId,
@@ -2671,17 +2664,18 @@ public class UserLocalServiceUtil {
 	* @param twitterSn the user's new Twitter screen name
 	* @param ymSn the user's new Yahoo! Messenger screen name
 	* @param jobTitle the user's new job title
-	* @param groupIds the primary keys of the groups the user belongs to
-	* @param organizationIds the primary keys of the organizations the user
-	belongs to
-	* @param roleIds the primary keys of the roles the user belongs to
-	* @param userGroupRoles the user group roles the user belongs to
-	* @param userGroupIds the primary keys of the user groups the user belongs
-	to
-	* @param serviceContext the service context
+	* @param groupIds the primary keys of the user's groups
+	* @param organizationIds the primary keys of the user's organizations
+	* @param roleIds the primary keys of the user's roles
+	* @param userGroupRoles the user user's group roles
+	* @param userGroupIds the primary keys of the user's user groups
+	* @param serviceContext the user's service context (optionally
+	<code>null</code>). Specifies the user's universally unique
+	identifier (with the <code>uuid</code> attribute), asset category
+	IDs, asset tag names, and expando bridge attributes.
 	* @return the user
-	* @throws PortalException if a user with the primary key could not be
-	found or if the new information was invalid
+	* @throws PortalException if a user with the primary key could not be found
+	or if the new information was invalid
 	* @throws SystemException if a system exception occurred
 	*/
 	public static com.liferay.portal.model.User updateUser(long userId,

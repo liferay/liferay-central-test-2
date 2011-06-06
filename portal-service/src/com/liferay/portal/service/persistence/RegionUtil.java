@@ -118,7 +118,7 @@ public class RegionUtil {
 	/**
 	* Caches the region in the entity cache if it is enabled.
 	*
-	* @param region the region to cache
+	* @param region the region
 	*/
 	public static void cacheResult(com.liferay.portal.model.Region region) {
 		getPersistence().cacheResult(region);
@@ -127,7 +127,7 @@ public class RegionUtil {
 	/**
 	* Caches the regions in the entity cache if it is enabled.
 	*
-	* @param regions the regions to cache
+	* @param regions the regions
 	*/
 	public static void cacheResult(
 		java.util.List<com.liferay.portal.model.Region> regions) {
@@ -147,7 +147,7 @@ public class RegionUtil {
 	/**
 	* Removes the region with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param regionId the primary key of the region to remove
+	* @param regionId the primary key of the region
 	* @return the region that was removed
 	* @throws com.liferay.portal.NoSuchRegionException if a region with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -165,9 +165,9 @@ public class RegionUtil {
 	}
 
 	/**
-	* Finds the region with the primary key or throws a {@link com.liferay.portal.NoSuchRegionException} if it could not be found.
+	* Returns the region with the primary key or throws a {@link com.liferay.portal.NoSuchRegionException} if it could not be found.
 	*
-	* @param regionId the primary key of the region to find
+	* @param regionId the primary key of the region
 	* @return the region
 	* @throws com.liferay.portal.NoSuchRegionException if a region with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -180,9 +180,9 @@ public class RegionUtil {
 	}
 
 	/**
-	* Finds the region with the primary key or returns <code>null</code> if it could not be found.
+	* Returns the region with the primary key or returns <code>null</code> if it could not be found.
 	*
-	* @param regionId the primary key of the region to find
+	* @param regionId the primary key of the region
 	* @return the region, or <code>null</code> if a region with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -193,9 +193,9 @@ public class RegionUtil {
 	}
 
 	/**
-	* Finds all the regions where countryId = &#63;.
+	* Returns all the regions where countryId = &#63;.
 	*
-	* @param countryId the country ID to search with
+	* @param countryId the country ID
 	* @return the matching regions
 	* @throws SystemException if a system exception occurred
 	*/
@@ -206,15 +206,15 @@ public class RegionUtil {
 	}
 
 	/**
-	* Finds a range of all the regions where countryId = &#63;.
+	* Returns a range of all the regions where countryId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param countryId the country ID to search with
-	* @param start the lower bound of the range of regions to return
-	* @param end the upper bound of the range of regions to return (not inclusive)
+	* @param countryId the country ID
+	* @param start the lower bound of the range of regions
+	* @param end the upper bound of the range of regions (not inclusive)
 	* @return the range of matching regions
 	* @throws SystemException if a system exception occurred
 	*/
@@ -225,15 +225,15 @@ public class RegionUtil {
 	}
 
 	/**
-	* Finds an ordered range of all the regions where countryId = &#63;.
+	* Returns an ordered range of all the regions where countryId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param countryId the country ID to search with
-	* @param start the lower bound of the range of regions to return
-	* @param end the upper bound of the range of regions to return (not inclusive)
+	* @param countryId the country ID
+	* @param start the lower bound of the range of regions
+	* @param end the upper bound of the range of regions (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching regions
 	* @throws SystemException if a system exception occurred
@@ -247,13 +247,13 @@ public class RegionUtil {
 	}
 
 	/**
-	* Finds the first region in the ordered set where countryId = &#63;.
+	* Returns the first region in the ordered set where countryId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param countryId the country ID to search with
+	* @param countryId the country ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching region
 	* @throws com.liferay.portal.NoSuchRegionException if a matching region could not be found
@@ -269,13 +269,13 @@ public class RegionUtil {
 	}
 
 	/**
-	* Finds the last region in the ordered set where countryId = &#63;.
+	* Returns the last region in the ordered set where countryId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param countryId the country ID to search with
+	* @param countryId the country ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching region
 	* @throws com.liferay.portal.NoSuchRegionException if a matching region could not be found
@@ -291,14 +291,14 @@ public class RegionUtil {
 	}
 
 	/**
-	* Finds the regions before and after the current region in the ordered set where countryId = &#63;.
+	* Returns the regions before and after the current region in the ordered set where countryId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
 	* @param regionId the primary key of the current region
-	* @param countryId the country ID to search with
+	* @param countryId the country ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next region
 	* @throws com.liferay.portal.NoSuchRegionException if a region with the primary key could not be found
@@ -315,9 +315,9 @@ public class RegionUtil {
 	}
 
 	/**
-	* Finds all the regions where active = &#63;.
+	* Returns all the regions where active = &#63;.
 	*
-	* @param active the active to search with
+	* @param active the active
 	* @return the matching regions
 	* @throws SystemException if a system exception occurred
 	*/
@@ -328,15 +328,15 @@ public class RegionUtil {
 	}
 
 	/**
-	* Finds a range of all the regions where active = &#63;.
+	* Returns a range of all the regions where active = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param active the active to search with
-	* @param start the lower bound of the range of regions to return
-	* @param end the upper bound of the range of regions to return (not inclusive)
+	* @param active the active
+	* @param start the lower bound of the range of regions
+	* @param end the upper bound of the range of regions (not inclusive)
 	* @return the range of matching regions
 	* @throws SystemException if a system exception occurred
 	*/
@@ -347,15 +347,15 @@ public class RegionUtil {
 	}
 
 	/**
-	* Finds an ordered range of all the regions where active = &#63;.
+	* Returns an ordered range of all the regions where active = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param active the active to search with
-	* @param start the lower bound of the range of regions to return
-	* @param end the upper bound of the range of regions to return (not inclusive)
+	* @param active the active
+	* @param start the lower bound of the range of regions
+	* @param end the upper bound of the range of regions (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching regions
 	* @throws SystemException if a system exception occurred
@@ -369,13 +369,13 @@ public class RegionUtil {
 	}
 
 	/**
-	* Finds the first region in the ordered set where active = &#63;.
+	* Returns the first region in the ordered set where active = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param active the active to search with
+	* @param active the active
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching region
 	* @throws com.liferay.portal.NoSuchRegionException if a matching region could not be found
@@ -390,13 +390,13 @@ public class RegionUtil {
 	}
 
 	/**
-	* Finds the last region in the ordered set where active = &#63;.
+	* Returns the last region in the ordered set where active = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param active the active to search with
+	* @param active the active
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching region
 	* @throws com.liferay.portal.NoSuchRegionException if a matching region could not be found
@@ -411,14 +411,14 @@ public class RegionUtil {
 	}
 
 	/**
-	* Finds the regions before and after the current region in the ordered set where active = &#63;.
+	* Returns the regions before and after the current region in the ordered set where active = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
 	* @param regionId the primary key of the current region
-	* @param active the active to search with
+	* @param active the active
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next region
 	* @throws com.liferay.portal.NoSuchRegionException if a region with the primary key could not be found
@@ -434,10 +434,10 @@ public class RegionUtil {
 	}
 
 	/**
-	* Finds all the regions where countryId = &#63; and active = &#63;.
+	* Returns all the regions where countryId = &#63; and active = &#63;.
 	*
-	* @param countryId the country ID to search with
-	* @param active the active to search with
+	* @param countryId the country ID
+	* @param active the active
 	* @return the matching regions
 	* @throws SystemException if a system exception occurred
 	*/
@@ -448,16 +448,16 @@ public class RegionUtil {
 	}
 
 	/**
-	* Finds a range of all the regions where countryId = &#63; and active = &#63;.
+	* Returns a range of all the regions where countryId = &#63; and active = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param countryId the country ID to search with
-	* @param active the active to search with
-	* @param start the lower bound of the range of regions to return
-	* @param end the upper bound of the range of regions to return (not inclusive)
+	* @param countryId the country ID
+	* @param active the active
+	* @param start the lower bound of the range of regions
+	* @param end the upper bound of the range of regions (not inclusive)
 	* @return the range of matching regions
 	* @throws SystemException if a system exception occurred
 	*/
@@ -468,16 +468,16 @@ public class RegionUtil {
 	}
 
 	/**
-	* Finds an ordered range of all the regions where countryId = &#63; and active = &#63;.
+	* Returns an ordered range of all the regions where countryId = &#63; and active = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param countryId the country ID to search with
-	* @param active the active to search with
-	* @param start the lower bound of the range of regions to return
-	* @param end the upper bound of the range of regions to return (not inclusive)
+	* @param countryId the country ID
+	* @param active the active
+	* @param start the lower bound of the range of regions
+	* @param end the upper bound of the range of regions (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching regions
 	* @throws SystemException if a system exception occurred
@@ -491,14 +491,14 @@ public class RegionUtil {
 	}
 
 	/**
-	* Finds the first region in the ordered set where countryId = &#63; and active = &#63;.
+	* Returns the first region in the ordered set where countryId = &#63; and active = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param countryId the country ID to search with
-	* @param active the active to search with
+	* @param countryId the country ID
+	* @param active the active
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching region
 	* @throws com.liferay.portal.NoSuchRegionException if a matching region could not be found
@@ -514,14 +514,14 @@ public class RegionUtil {
 	}
 
 	/**
-	* Finds the last region in the ordered set where countryId = &#63; and active = &#63;.
+	* Returns the last region in the ordered set where countryId = &#63; and active = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param countryId the country ID to search with
-	* @param active the active to search with
+	* @param countryId the country ID
+	* @param active the active
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching region
 	* @throws com.liferay.portal.NoSuchRegionException if a matching region could not be found
@@ -537,15 +537,15 @@ public class RegionUtil {
 	}
 
 	/**
-	* Finds the regions before and after the current region in the ordered set where countryId = &#63; and active = &#63;.
+	* Returns the regions before and after the current region in the ordered set where countryId = &#63; and active = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
 	* @param regionId the primary key of the current region
-	* @param countryId the country ID to search with
-	* @param active the active to search with
+	* @param countryId the country ID
+	* @param active the active
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next region
 	* @throws com.liferay.portal.NoSuchRegionException if a region with the primary key could not be found
@@ -562,7 +562,7 @@ public class RegionUtil {
 	}
 
 	/**
-	* Finds all the regions.
+	* Returns all the regions.
 	*
 	* @return the regions
 	* @throws SystemException if a system exception occurred
@@ -573,14 +573,14 @@ public class RegionUtil {
 	}
 
 	/**
-	* Finds a range of all the regions.
+	* Returns a range of all the regions.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of regions to return
-	* @param end the upper bound of the range of regions to return (not inclusive)
+	* @param start the lower bound of the range of regions
+	* @param end the upper bound of the range of regions (not inclusive)
 	* @return the range of regions
 	* @throws SystemException if a system exception occurred
 	*/
@@ -591,14 +591,14 @@ public class RegionUtil {
 	}
 
 	/**
-	* Finds an ordered range of all the regions.
+	* Returns an ordered range of all the regions.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of regions to return
-	* @param end the upper bound of the range of regions to return (not inclusive)
+	* @param start the lower bound of the range of regions
+	* @param end the upper bound of the range of regions (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of regions
 	* @throws SystemException if a system exception occurred
@@ -613,7 +613,7 @@ public class RegionUtil {
 	/**
 	* Removes all the regions where countryId = &#63; from the database.
 	*
-	* @param countryId the country ID to search with
+	* @param countryId the country ID
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByCountryId(long countryId)
@@ -624,7 +624,7 @@ public class RegionUtil {
 	/**
 	* Removes all the regions where active = &#63; from the database.
 	*
-	* @param active the active to search with
+	* @param active the active
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByActive(boolean active)
@@ -635,8 +635,8 @@ public class RegionUtil {
 	/**
 	* Removes all the regions where countryId = &#63; and active = &#63; from the database.
 	*
-	* @param countryId the country ID to search with
-	* @param active the active to search with
+	* @param countryId the country ID
+	* @param active the active
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByC_A(long countryId, boolean active)
@@ -655,9 +655,9 @@ public class RegionUtil {
 	}
 
 	/**
-	* Counts all the regions where countryId = &#63;.
+	* Returns the number of regions where countryId = &#63;.
 	*
-	* @param countryId the country ID to search with
+	* @param countryId the country ID
 	* @return the number of matching regions
 	* @throws SystemException if a system exception occurred
 	*/
@@ -667,9 +667,9 @@ public class RegionUtil {
 	}
 
 	/**
-	* Counts all the regions where active = &#63;.
+	* Returns the number of regions where active = &#63;.
 	*
-	* @param active the active to search with
+	* @param active the active
 	* @return the number of matching regions
 	* @throws SystemException if a system exception occurred
 	*/
@@ -679,10 +679,10 @@ public class RegionUtil {
 	}
 
 	/**
-	* Counts all the regions where countryId = &#63; and active = &#63;.
+	* Returns the number of regions where countryId = &#63; and active = &#63;.
 	*
-	* @param countryId the country ID to search with
-	* @param active the active to search with
+	* @param countryId the country ID
+	* @param active the active
 	* @return the number of matching regions
 	* @throws SystemException if a system exception occurred
 	*/
@@ -692,7 +692,7 @@ public class RegionUtil {
 	}
 
 	/**
-	* Counts all the regions.
+	* Returns the number of regions.
 	*
 	* @return the number of regions
 	* @throws SystemException if a system exception occurred

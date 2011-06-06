@@ -130,7 +130,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 	/**
 	 * Caches the s c framework version in the entity cache if it is enabled.
 	 *
-	 * @param scFrameworkVersion the s c framework version to cache
+	 * @param scFrameworkVersion the s c framework version
 	 */
 	public void cacheResult(SCFrameworkVersion scFrameworkVersion) {
 		EntityCacheUtil.putResult(SCFrameworkVersionModelImpl.ENTITY_CACHE_ENABLED,
@@ -143,7 +143,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 	/**
 	 * Caches the s c framework versions in the entity cache if it is enabled.
 	 *
-	 * @param scFrameworkVersions the s c framework versions to cache
+	 * @param scFrameworkVersions the s c framework versions
 	 */
 	public void cacheResult(List<SCFrameworkVersion> scFrameworkVersions) {
 		for (SCFrameworkVersion scFrameworkVersion : scFrameworkVersions) {
@@ -203,7 +203,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 	/**
 	 * Removes the s c framework version with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param primaryKey the primary key of the s c framework version to remove
+	 * @param primaryKey the primary key of the s c framework version
 	 * @return the s c framework version that was removed
 	 * @throws com.liferay.portal.NoSuchModelException if a s c framework version with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -216,7 +216,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 	/**
 	 * Removes the s c framework version with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param frameworkVersionId the primary key of the s c framework version to remove
+	 * @param frameworkVersionId the primary key of the s c framework version
 	 * @return the s c framework version that was removed
 	 * @throws com.liferay.portlet.softwarecatalog.NoSuchFrameworkVersionException if a s c framework version with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -257,7 +257,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 	/**
 	 * Removes the s c framework version from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param scFrameworkVersion the s c framework version to remove
+	 * @param scFrameworkVersion the s c framework version
 	 * @return the s c framework version that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -359,9 +359,9 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 	}
 
 	/**
-	 * Finds the s c framework version with the primary key or throws a {@link com.liferay.portal.NoSuchModelException} if it could not be found.
+	 * Returns the s c framework version with the primary key or throws a {@link com.liferay.portal.NoSuchModelException} if it could not be found.
 	 *
-	 * @param primaryKey the primary key of the s c framework version to find
+	 * @param primaryKey the primary key of the s c framework version
 	 * @return the s c framework version
 	 * @throws com.liferay.portal.NoSuchModelException if a s c framework version with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -372,9 +372,9 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 	}
 
 	/**
-	 * Finds the s c framework version with the primary key or throws a {@link com.liferay.portlet.softwarecatalog.NoSuchFrameworkVersionException} if it could not be found.
+	 * Returns the s c framework version with the primary key or throws a {@link com.liferay.portlet.softwarecatalog.NoSuchFrameworkVersionException} if it could not be found.
 	 *
-	 * @param frameworkVersionId the primary key of the s c framework version to find
+	 * @param frameworkVersionId the primary key of the s c framework version
 	 * @return the s c framework version
 	 * @throws com.liferay.portlet.softwarecatalog.NoSuchFrameworkVersionException if a s c framework version with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -397,9 +397,9 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 	}
 
 	/**
-	 * Finds the s c framework version with the primary key or returns <code>null</code> if it could not be found.
+	 * Returns the s c framework version with the primary key or returns <code>null</code> if it could not be found.
 	 *
-	 * @param primaryKey the primary key of the s c framework version to find
+	 * @param primaryKey the primary key of the s c framework version
 	 * @return the s c framework version, or <code>null</code> if a s c framework version with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -409,9 +409,9 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 	}
 
 	/**
-	 * Finds the s c framework version with the primary key or returns <code>null</code> if it could not be found.
+	 * Returns the s c framework version with the primary key or returns <code>null</code> if it could not be found.
 	 *
-	 * @param frameworkVersionId the primary key of the s c framework version to find
+	 * @param frameworkVersionId the primary key of the s c framework version
 	 * @return the s c framework version, or <code>null</code> if a s c framework version with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -445,9 +445,9 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 	}
 
 	/**
-	 * Finds all the s c framework versions where groupId = &#63;.
+	 * Returns all the s c framework versions where groupId = &#63;.
 	 *
-	 * @param groupId the group ID to search with
+	 * @param groupId the group ID
 	 * @return the matching s c framework versions
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -457,15 +457,15 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 	}
 
 	/**
-	 * Finds a range of all the s c framework versions where groupId = &#63;.
+	 * Returns a range of all the s c framework versions where groupId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group ID to search with
-	 * @param start the lower bound of the range of s c framework versions to return
-	 * @param end the upper bound of the range of s c framework versions to return (not inclusive)
+	 * @param groupId the group ID
+	 * @param start the lower bound of the range of s c framework versions
+	 * @param end the upper bound of the range of s c framework versions (not inclusive)
 	 * @return the range of matching s c framework versions
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -475,15 +475,15 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 	}
 
 	/**
-	 * Finds an ordered range of all the s c framework versions where groupId = &#63;.
+	 * Returns an ordered range of all the s c framework versions where groupId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group ID to search with
-	 * @param start the lower bound of the range of s c framework versions to return
-	 * @param end the upper bound of the range of s c framework versions to return (not inclusive)
+	 * @param groupId the group ID
+	 * @param start the lower bound of the range of s c framework versions
+	 * @param end the upper bound of the range of s c framework versions (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching s c framework versions
 	 * @throws SystemException if a system exception occurred
@@ -563,13 +563,13 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 	}
 
 	/**
-	 * Finds the first s c framework version in the ordered set where groupId = &#63;.
+	 * Returns the first s c framework version in the ordered set where groupId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group ID to search with
+	 * @param groupId the group ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching s c framework version
 	 * @throws com.liferay.portlet.softwarecatalog.NoSuchFrameworkVersionException if a matching s c framework version could not be found
@@ -599,13 +599,13 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 	}
 
 	/**
-	 * Finds the last s c framework version in the ordered set where groupId = &#63;.
+	 * Returns the last s c framework version in the ordered set where groupId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group ID to search with
+	 * @param groupId the group ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching s c framework version
 	 * @throws com.liferay.portlet.softwarecatalog.NoSuchFrameworkVersionException if a matching s c framework version could not be found
@@ -637,14 +637,14 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 	}
 
 	/**
-	 * Finds the s c framework versions before and after the current s c framework version in the ordered set where groupId = &#63;.
+	 * Returns the s c framework versions before and after the current s c framework version in the ordered set where groupId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
 	 * @param frameworkVersionId the primary key of the current s c framework version
-	 * @param groupId the group ID to search with
+	 * @param groupId the group ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next s c framework version
 	 * @throws com.liferay.portlet.softwarecatalog.NoSuchFrameworkVersionException if a s c framework version with the primary key could not be found
@@ -786,9 +786,9 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 	}
 
 	/**
-	 * Filters by the user's permissions and finds all the s c framework versions where groupId = &#63;.
+	 * Returns all the s c framework versions that the user has permission to view where groupId = &#63;.
 	 *
-	 * @param groupId the group ID to search with
+	 * @param groupId the group ID
 	 * @return the matching s c framework versions that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -799,15 +799,15 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 	}
 
 	/**
-	 * Filters by the user's permissions and finds a range of all the s c framework versions where groupId = &#63;.
+	 * Returns a range of all the s c framework versions that the user has permission to view where groupId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group ID to search with
-	 * @param start the lower bound of the range of s c framework versions to return
-	 * @param end the upper bound of the range of s c framework versions to return (not inclusive)
+	 * @param groupId the group ID
+	 * @param start the lower bound of the range of s c framework versions
+	 * @param end the upper bound of the range of s c framework versions (not inclusive)
 	 * @return the range of matching s c framework versions that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -817,15 +817,15 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 	}
 
 	/**
-	 * Filters by the user's permissions and finds an ordered range of all the s c framework versions where groupId = &#63;.
+	 * Returns an ordered range of all the s c framework versions that the user has permissions to view where groupId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group ID to search with
-	 * @param start the lower bound of the range of s c framework versions to return
-	 * @param end the upper bound of the range of s c framework versions to return (not inclusive)
+	 * @param groupId the group ID
+	 * @param start the lower bound of the range of s c framework versions
+	 * @param end the upper bound of the range of s c framework versions (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching s c framework versions that the user has permission to view
 	 * @throws SystemException if a system exception occurred
@@ -906,14 +906,10 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 	}
 
 	/**
-	 * Filters the s c framework versions before and after the current s c framework version in the ordered set where groupId = &#63;.
-	 *
-	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
-	 * </p>
+	 * Returns the s c framework versions before and after the current s c framework version in the ordered set of s c framework versions that the user has permission to view where groupId = &#63;.
 	 *
 	 * @param frameworkVersionId the primary key of the current s c framework version
-	 * @param groupId the group ID to search with
+	 * @param groupId the group ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next s c framework version
 	 * @throws com.liferay.portlet.softwarecatalog.NoSuchFrameworkVersionException if a s c framework version with the primary key could not be found
@@ -1087,9 +1083,9 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 	}
 
 	/**
-	 * Finds all the s c framework versions where companyId = &#63;.
+	 * Returns all the s c framework versions where companyId = &#63;.
 	 *
-	 * @param companyId the company ID to search with
+	 * @param companyId the company ID
 	 * @return the matching s c framework versions
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1100,15 +1096,15 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 	}
 
 	/**
-	 * Finds a range of all the s c framework versions where companyId = &#63;.
+	 * Returns a range of all the s c framework versions where companyId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param companyId the company ID to search with
-	 * @param start the lower bound of the range of s c framework versions to return
-	 * @param end the upper bound of the range of s c framework versions to return (not inclusive)
+	 * @param companyId the company ID
+	 * @param start the lower bound of the range of s c framework versions
+	 * @param end the upper bound of the range of s c framework versions (not inclusive)
 	 * @return the range of matching s c framework versions
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1118,15 +1114,15 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 	}
 
 	/**
-	 * Finds an ordered range of all the s c framework versions where companyId = &#63;.
+	 * Returns an ordered range of all the s c framework versions where companyId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param companyId the company ID to search with
-	 * @param start the lower bound of the range of s c framework versions to return
-	 * @param end the upper bound of the range of s c framework versions to return (not inclusive)
+	 * @param companyId the company ID
+	 * @param start the lower bound of the range of s c framework versions
+	 * @param end the upper bound of the range of s c framework versions (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching s c framework versions
 	 * @throws SystemException if a system exception occurred
@@ -1206,13 +1202,13 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 	}
 
 	/**
-	 * Finds the first s c framework version in the ordered set where companyId = &#63;.
+	 * Returns the first s c framework version in the ordered set where companyId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param companyId the company ID to search with
+	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching s c framework version
 	 * @throws com.liferay.portlet.softwarecatalog.NoSuchFrameworkVersionException if a matching s c framework version could not be found
@@ -1242,13 +1238,13 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 	}
 
 	/**
-	 * Finds the last s c framework version in the ordered set where companyId = &#63;.
+	 * Returns the last s c framework version in the ordered set where companyId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param companyId the company ID to search with
+	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching s c framework version
 	 * @throws com.liferay.portlet.softwarecatalog.NoSuchFrameworkVersionException if a matching s c framework version could not be found
@@ -1280,14 +1276,14 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 	}
 
 	/**
-	 * Finds the s c framework versions before and after the current s c framework version in the ordered set where companyId = &#63;.
+	 * Returns the s c framework versions before and after the current s c framework version in the ordered set where companyId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
 	 * @param frameworkVersionId the primary key of the current s c framework version
-	 * @param companyId the company ID to search with
+	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next s c framework version
 	 * @throws com.liferay.portlet.softwarecatalog.NoSuchFrameworkVersionException if a s c framework version with the primary key could not be found
@@ -1429,10 +1425,10 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 	}
 
 	/**
-	 * Finds all the s c framework versions where groupId = &#63; and active = &#63;.
+	 * Returns all the s c framework versions where groupId = &#63; and active = &#63;.
 	 *
-	 * @param groupId the group ID to search with
-	 * @param active the active to search with
+	 * @param groupId the group ID
+	 * @param active the active
 	 * @return the matching s c framework versions
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1443,16 +1439,16 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 	}
 
 	/**
-	 * Finds a range of all the s c framework versions where groupId = &#63; and active = &#63;.
+	 * Returns a range of all the s c framework versions where groupId = &#63; and active = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group ID to search with
-	 * @param active the active to search with
-	 * @param start the lower bound of the range of s c framework versions to return
-	 * @param end the upper bound of the range of s c framework versions to return (not inclusive)
+	 * @param groupId the group ID
+	 * @param active the active
+	 * @param start the lower bound of the range of s c framework versions
+	 * @param end the upper bound of the range of s c framework versions (not inclusive)
 	 * @return the range of matching s c framework versions
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1462,16 +1458,16 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 	}
 
 	/**
-	 * Finds an ordered range of all the s c framework versions where groupId = &#63; and active = &#63;.
+	 * Returns an ordered range of all the s c framework versions where groupId = &#63; and active = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group ID to search with
-	 * @param active the active to search with
-	 * @param start the lower bound of the range of s c framework versions to return
-	 * @param end the upper bound of the range of s c framework versions to return (not inclusive)
+	 * @param groupId the group ID
+	 * @param active the active
+	 * @param start the lower bound of the range of s c framework versions
+	 * @param end the upper bound of the range of s c framework versions (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching s c framework versions
 	 * @throws SystemException if a system exception occurred
@@ -1556,14 +1552,14 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 	}
 
 	/**
-	 * Finds the first s c framework version in the ordered set where groupId = &#63; and active = &#63;.
+	 * Returns the first s c framework version in the ordered set where groupId = &#63; and active = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group ID to search with
-	 * @param active the active to search with
+	 * @param groupId the group ID
+	 * @param active the active
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching s c framework version
 	 * @throws com.liferay.portlet.softwarecatalog.NoSuchFrameworkVersionException if a matching s c framework version could not be found
@@ -1596,14 +1592,14 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 	}
 
 	/**
-	 * Finds the last s c framework version in the ordered set where groupId = &#63; and active = &#63;.
+	 * Returns the last s c framework version in the ordered set where groupId = &#63; and active = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group ID to search with
-	 * @param active the active to search with
+	 * @param groupId the group ID
+	 * @param active the active
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching s c framework version
 	 * @throws com.liferay.portlet.softwarecatalog.NoSuchFrameworkVersionException if a matching s c framework version could not be found
@@ -1638,15 +1634,15 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 	}
 
 	/**
-	 * Finds the s c framework versions before and after the current s c framework version in the ordered set where groupId = &#63; and active = &#63;.
+	 * Returns the s c framework versions before and after the current s c framework version in the ordered set where groupId = &#63; and active = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
 	 * @param frameworkVersionId the primary key of the current s c framework version
-	 * @param groupId the group ID to search with
-	 * @param active the active to search with
+	 * @param groupId the group ID
+	 * @param active the active
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next s c framework version
 	 * @throws com.liferay.portlet.softwarecatalog.NoSuchFrameworkVersionException if a s c framework version with the primary key could not be found
@@ -1791,10 +1787,10 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 	}
 
 	/**
-	 * Filters by the user's permissions and finds all the s c framework versions where groupId = &#63; and active = &#63;.
+	 * Returns all the s c framework versions that the user has permission to view where groupId = &#63; and active = &#63;.
 	 *
-	 * @param groupId the group ID to search with
-	 * @param active the active to search with
+	 * @param groupId the group ID
+	 * @param active the active
 	 * @return the matching s c framework versions that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1805,16 +1801,16 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 	}
 
 	/**
-	 * Filters by the user's permissions and finds a range of all the s c framework versions where groupId = &#63; and active = &#63;.
+	 * Returns a range of all the s c framework versions that the user has permission to view where groupId = &#63; and active = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group ID to search with
-	 * @param active the active to search with
-	 * @param start the lower bound of the range of s c framework versions to return
-	 * @param end the upper bound of the range of s c framework versions to return (not inclusive)
+	 * @param groupId the group ID
+	 * @param active the active
+	 * @param start the lower bound of the range of s c framework versions
+	 * @param end the upper bound of the range of s c framework versions (not inclusive)
 	 * @return the range of matching s c framework versions that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1824,16 +1820,16 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 	}
 
 	/**
-	 * Filters by the user's permissions and finds an ordered range of all the s c framework versions where groupId = &#63; and active = &#63;.
+	 * Returns an ordered range of all the s c framework versions that the user has permissions to view where groupId = &#63; and active = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group ID to search with
-	 * @param active the active to search with
-	 * @param start the lower bound of the range of s c framework versions to return
-	 * @param end the upper bound of the range of s c framework versions to return (not inclusive)
+	 * @param groupId the group ID
+	 * @param active the active
+	 * @param start the lower bound of the range of s c framework versions
+	 * @param end the upper bound of the range of s c framework versions (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching s c framework versions that the user has permission to view
 	 * @throws SystemException if a system exception occurred
@@ -1918,15 +1914,11 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 	}
 
 	/**
-	 * Filters the s c framework versions before and after the current s c framework version in the ordered set where groupId = &#63; and active = &#63;.
-	 *
-	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
-	 * </p>
+	 * Returns the s c framework versions before and after the current s c framework version in the ordered set of s c framework versions that the user has permission to view where groupId = &#63; and active = &#63;.
 	 *
 	 * @param frameworkVersionId the primary key of the current s c framework version
-	 * @param groupId the group ID to search with
-	 * @param active the active to search with
+	 * @param groupId the group ID
+	 * @param active the active
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next s c framework version
 	 * @throws com.liferay.portlet.softwarecatalog.NoSuchFrameworkVersionException if a s c framework version with the primary key could not be found
@@ -2104,7 +2096,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 	}
 
 	/**
-	 * Finds all the s c framework versions.
+	 * Returns all the s c framework versions.
 	 *
 	 * @return the s c framework versions
 	 * @throws SystemException if a system exception occurred
@@ -2114,14 +2106,14 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 	}
 
 	/**
-	 * Finds a range of all the s c framework versions.
+	 * Returns a range of all the s c framework versions.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param start the lower bound of the range of s c framework versions to return
-	 * @param end the upper bound of the range of s c framework versions to return (not inclusive)
+	 * @param start the lower bound of the range of s c framework versions
+	 * @param end the upper bound of the range of s c framework versions (not inclusive)
 	 * @return the range of s c framework versions
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2131,14 +2123,14 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 	}
 
 	/**
-	 * Finds an ordered range of all the s c framework versions.
+	 * Returns an ordered range of all the s c framework versions.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param start the lower bound of the range of s c framework versions to return
-	 * @param end the upper bound of the range of s c framework versions to return (not inclusive)
+	 * @param start the lower bound of the range of s c framework versions
+	 * @param end the upper bound of the range of s c framework versions (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of s c framework versions
 	 * @throws SystemException if a system exception occurred
@@ -2215,7 +2207,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 	/**
 	 * Removes all the s c framework versions where groupId = &#63; from the database.
 	 *
-	 * @param groupId the group ID to search with
+	 * @param groupId the group ID
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByGroupId(long groupId) throws SystemException {
@@ -2227,7 +2219,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 	/**
 	 * Removes all the s c framework versions where companyId = &#63; from the database.
 	 *
-	 * @param companyId the company ID to search with
+	 * @param companyId the company ID
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByCompanyId(long companyId) throws SystemException {
@@ -2239,8 +2231,8 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 	/**
 	 * Removes all the s c framework versions where groupId = &#63; and active = &#63; from the database.
 	 *
-	 * @param groupId the group ID to search with
-	 * @param active the active to search with
+	 * @param groupId the group ID
+	 * @param active the active
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByG_A(long groupId, boolean active)
@@ -2262,9 +2254,9 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 	}
 
 	/**
-	 * Counts all the s c framework versions where groupId = &#63;.
+	 * Returns the number of s c framework versions where groupId = &#63;.
 	 *
-	 * @param groupId the group ID to search with
+	 * @param groupId the group ID
 	 * @return the number of matching s c framework versions
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2315,9 +2307,9 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 	}
 
 	/**
-	 * Filters by the user's permissions and counts all the s c framework versions where groupId = &#63;.
+	 * Returns the number of s c framework versions that the user has permission to view where groupId = &#63;.
 	 *
-	 * @param groupId the group ID to search with
+	 * @param groupId the group ID
 	 * @return the number of matching s c framework versions that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2362,9 +2354,9 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 	}
 
 	/**
-	 * Counts all the s c framework versions where companyId = &#63;.
+	 * Returns the number of s c framework versions where companyId = &#63;.
 	 *
-	 * @param companyId the company ID to search with
+	 * @param companyId the company ID
 	 * @return the number of matching s c framework versions
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2415,10 +2407,10 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 	}
 
 	/**
-	 * Counts all the s c framework versions where groupId = &#63; and active = &#63;.
+	 * Returns the number of s c framework versions where groupId = &#63; and active = &#63;.
 	 *
-	 * @param groupId the group ID to search with
-	 * @param active the active to search with
+	 * @param groupId the group ID
+	 * @param active the active
 	 * @return the number of matching s c framework versions
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2474,10 +2466,10 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 	}
 
 	/**
-	 * Filters by the user's permissions and counts all the s c framework versions where groupId = &#63; and active = &#63;.
+	 * Returns the number of s c framework versions that the user has permission to view where groupId = &#63; and active = &#63;.
 	 *
-	 * @param groupId the group ID to search with
-	 * @param active the active to search with
+	 * @param groupId the group ID
+	 * @param active the active
 	 * @return the number of matching s c framework versions that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2527,7 +2519,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 	}
 
 	/**
-	 * Counts all the s c framework versions.
+	 * Returns the number of s c framework versions.
 	 *
 	 * @return the number of s c framework versions
 	 * @throws SystemException if a system exception occurred
@@ -2567,9 +2559,9 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 	}
 
 	/**
-	 * Gets all the s c product versions associated with the s c framework version.
+	 * Returns all the s c product versions associated with the s c framework version.
 	 *
-	 * @param pk the primary key of the s c framework version to get the associated s c product versions for
+	 * @param pk the primary key of the s c framework version
 	 * @return the s c product versions associated with the s c framework version
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2579,15 +2571,15 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 	}
 
 	/**
-	 * Gets a range of all the s c product versions associated with the s c framework version.
+	 * Returns a range of all the s c product versions associated with the s c framework version.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param pk the primary key of the s c framework version to get the associated s c product versions for
-	 * @param start the lower bound of the range of s c framework versions to return
-	 * @param end the upper bound of the range of s c framework versions to return (not inclusive)
+	 * @param pk the primary key of the s c framework version
+	 * @param start the lower bound of the range of s c framework versions
+	 * @param end the upper bound of the range of s c framework versions (not inclusive)
 	 * @return the range of s c product versions associated with the s c framework version
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2606,15 +2598,15 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 			});
 
 	/**
-	 * Gets an ordered range of all the s c product versions associated with the s c framework version.
+	 * Returns an ordered range of all the s c product versions associated with the s c framework version.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param pk the primary key of the s c framework version to get the associated s c product versions for
-	 * @param start the lower bound of the range of s c framework versions to return
-	 * @param end the upper bound of the range of s c framework versions to return (not inclusive)
+	 * @param pk the primary key of the s c framework version
+	 * @param start the lower bound of the range of s c framework versions
+	 * @param end the upper bound of the range of s c framework versions (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of s c product versions associated with the s c framework version
 	 * @throws SystemException if a system exception occurred
@@ -2686,9 +2678,9 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 			"getSCProductVersionsSize", new String[] { Long.class.getName() });
 
 	/**
-	 * Gets the number of s c product versions associated with the s c framework version.
+	 * Returns the number of s c product versions associated with the s c framework version.
 	 *
-	 * @param pk the primary key of the s c framework version to get the number of associated s c product versions for
+	 * @param pk the primary key of the s c framework version
 	 * @return the number of s c product versions associated with the s c framework version
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2985,7 +2977,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 	/**
 	 * Sets the s c product versions associated with the s c framework version, removing and adding associations as necessary. Also notifies the appropriate model listeners and clears the mapping table finder cache.
 	 *
-	 * @param pk the primary key of the s c framework version to set the associations for
+	 * @param pk the primary key of the s c framework version
 	 * @param scProductVersionPKs the primary keys of the s c product versions to be associated with the s c framework version
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -3020,7 +3012,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 	/**
 	 * Sets the s c product versions associated with the s c framework version, removing and adding associations as necessary. Also notifies the appropriate model listeners and clears the mapping table finder cache.
 	 *
-	 * @param pk the primary key of the s c framework version to set the associations for
+	 * @param pk the primary key of the s c framework version
 	 * @param scProductVersions the s c product versions to be associated with the s c framework version
 	 * @throws SystemException if a system exception occurred
 	 */

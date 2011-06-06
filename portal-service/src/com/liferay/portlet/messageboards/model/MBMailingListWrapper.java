@@ -37,7 +37,7 @@ public class MBMailingListWrapper implements MBMailingList {
 	}
 
 	/**
-	* Gets the primary key of this message boards mailing list.
+	* Returns the primary key of this message boards mailing list.
 	*
 	* @return the primary key of this message boards mailing list
 	*/
@@ -46,7 +46,7 @@ public class MBMailingListWrapper implements MBMailingList {
 	}
 
 	/**
-	* Sets the primary key of this message boards mailing list
+	* Sets the primary key of this message boards mailing list.
 	*
 	* @param primaryKey the primary key of this message boards mailing list
 	*/
@@ -55,7 +55,7 @@ public class MBMailingListWrapper implements MBMailingList {
 	}
 
 	/**
-	* Gets the uuid of this message boards mailing list.
+	* Returns the uuid of this message boards mailing list.
 	*
 	* @return the uuid of this message boards mailing list
 	*/
@@ -73,7 +73,7 @@ public class MBMailingListWrapper implements MBMailingList {
 	}
 
 	/**
-	* Gets the mailing list ID of this message boards mailing list.
+	* Returns the mailing list ID of this message boards mailing list.
 	*
 	* @return the mailing list ID of this message boards mailing list
 	*/
@@ -91,7 +91,7 @@ public class MBMailingListWrapper implements MBMailingList {
 	}
 
 	/**
-	* Gets the group ID of this message boards mailing list.
+	* Returns the group ID of this message boards mailing list.
 	*
 	* @return the group ID of this message boards mailing list
 	*/
@@ -109,7 +109,7 @@ public class MBMailingListWrapper implements MBMailingList {
 	}
 
 	/**
-	* Gets the company ID of this message boards mailing list.
+	* Returns the company ID of this message boards mailing list.
 	*
 	* @return the company ID of this message boards mailing list
 	*/
@@ -127,7 +127,7 @@ public class MBMailingListWrapper implements MBMailingList {
 	}
 
 	/**
-	* Gets the user ID of this message boards mailing list.
+	* Returns the user ID of this message boards mailing list.
 	*
 	* @return the user ID of this message boards mailing list
 	*/
@@ -145,7 +145,7 @@ public class MBMailingListWrapper implements MBMailingList {
 	}
 
 	/**
-	* Gets the user uuid of this message boards mailing list.
+	* Returns the user uuid of this message boards mailing list.
 	*
 	* @return the user uuid of this message boards mailing list
 	* @throws SystemException if a system exception occurred
@@ -165,7 +165,7 @@ public class MBMailingListWrapper implements MBMailingList {
 	}
 
 	/**
-	* Gets the user name of this message boards mailing list.
+	* Returns the user name of this message boards mailing list.
 	*
 	* @return the user name of this message boards mailing list
 	*/
@@ -183,7 +183,7 @@ public class MBMailingListWrapper implements MBMailingList {
 	}
 
 	/**
-	* Gets the create date of this message boards mailing list.
+	* Returns the create date of this message boards mailing list.
 	*
 	* @return the create date of this message boards mailing list
 	*/
@@ -201,7 +201,7 @@ public class MBMailingListWrapper implements MBMailingList {
 	}
 
 	/**
-	* Gets the modified date of this message boards mailing list.
+	* Returns the modified date of this message boards mailing list.
 	*
 	* @return the modified date of this message boards mailing list
 	*/
@@ -219,7 +219,7 @@ public class MBMailingListWrapper implements MBMailingList {
 	}
 
 	/**
-	* Gets the category ID of this message boards mailing list.
+	* Returns the category ID of this message boards mailing list.
 	*
 	* @return the category ID of this message boards mailing list
 	*/
@@ -237,7 +237,7 @@ public class MBMailingListWrapper implements MBMailingList {
 	}
 
 	/**
-	* Gets the email address of this message boards mailing list.
+	* Returns the email address of this message boards mailing list.
 	*
 	* @return the email address of this message boards mailing list
 	*/
@@ -255,7 +255,7 @@ public class MBMailingListWrapper implements MBMailingList {
 	}
 
 	/**
-	* Gets the in protocol of this message boards mailing list.
+	* Returns the in protocol of this message boards mailing list.
 	*
 	* @return the in protocol of this message boards mailing list
 	*/
@@ -273,7 +273,7 @@ public class MBMailingListWrapper implements MBMailingList {
 	}
 
 	/**
-	* Gets the in server name of this message boards mailing list.
+	* Returns the in server name of this message boards mailing list.
 	*
 	* @return the in server name of this message boards mailing list
 	*/
@@ -291,7 +291,7 @@ public class MBMailingListWrapper implements MBMailingList {
 	}
 
 	/**
-	* Gets the in server port of this message boards mailing list.
+	* Returns the in server port of this message boards mailing list.
 	*
 	* @return the in server port of this message boards mailing list
 	*/
@@ -309,7 +309,7 @@ public class MBMailingListWrapper implements MBMailingList {
 	}
 
 	/**
-	* Gets the in use s s l of this message boards mailing list.
+	* Returns the in use s s l of this message boards mailing list.
 	*
 	* @return the in use s s l of this message boards mailing list
 	*/
@@ -336,7 +336,7 @@ public class MBMailingListWrapper implements MBMailingList {
 	}
 
 	/**
-	* Gets the in user name of this message boards mailing list.
+	* Returns the in user name of this message boards mailing list.
 	*
 	* @return the in user name of this message boards mailing list
 	*/
@@ -354,7 +354,7 @@ public class MBMailingListWrapper implements MBMailingList {
 	}
 
 	/**
-	* Gets the in password of this message boards mailing list.
+	* Returns the in password of this message boards mailing list.
 	*
 	* @return the in password of this message boards mailing list
 	*/
@@ -372,7 +372,7 @@ public class MBMailingListWrapper implements MBMailingList {
 	}
 
 	/**
-	* Gets the in read interval of this message boards mailing list.
+	* Returns the in read interval of this message boards mailing list.
 	*
 	* @return the in read interval of this message boards mailing list
 	*/
@@ -390,7 +390,7 @@ public class MBMailingListWrapper implements MBMailingList {
 	}
 
 	/**
-	* Gets the out email address of this message boards mailing list.
+	* Returns the out email address of this message boards mailing list.
 	*
 	* @return the out email address of this message boards mailing list
 	*/
@@ -408,7 +408,7 @@ public class MBMailingListWrapper implements MBMailingList {
 	}
 
 	/**
-	* Gets the out custom of this message boards mailing list.
+	* Returns the out custom of this message boards mailing list.
 	*
 	* @return the out custom of this message boards mailing list
 	*/
@@ -435,7 +435,7 @@ public class MBMailingListWrapper implements MBMailingList {
 	}
 
 	/**
-	* Gets the out server name of this message boards mailing list.
+	* Returns the out server name of this message boards mailing list.
 	*
 	* @return the out server name of this message boards mailing list
 	*/
@@ -453,7 +453,7 @@ public class MBMailingListWrapper implements MBMailingList {
 	}
 
 	/**
-	* Gets the out server port of this message boards mailing list.
+	* Returns the out server port of this message boards mailing list.
 	*
 	* @return the out server port of this message boards mailing list
 	*/
@@ -471,7 +471,7 @@ public class MBMailingListWrapper implements MBMailingList {
 	}
 
 	/**
-	* Gets the out use s s l of this message boards mailing list.
+	* Returns the out use s s l of this message boards mailing list.
 	*
 	* @return the out use s s l of this message boards mailing list
 	*/
@@ -498,7 +498,7 @@ public class MBMailingListWrapper implements MBMailingList {
 	}
 
 	/**
-	* Gets the out user name of this message boards mailing list.
+	* Returns the out user name of this message boards mailing list.
 	*
 	* @return the out user name of this message boards mailing list
 	*/
@@ -516,7 +516,7 @@ public class MBMailingListWrapper implements MBMailingList {
 	}
 
 	/**
-	* Gets the out password of this message boards mailing list.
+	* Returns the out password of this message boards mailing list.
 	*
 	* @return the out password of this message boards mailing list
 	*/
@@ -534,7 +534,7 @@ public class MBMailingListWrapper implements MBMailingList {
 	}
 
 	/**
-	* Gets the allow anonymous of this message boards mailing list.
+	* Returns the allow anonymous of this message boards mailing list.
 	*
 	* @return the allow anonymous of this message boards mailing list
 	*/
@@ -561,7 +561,7 @@ public class MBMailingListWrapper implements MBMailingList {
 	}
 
 	/**
-	* Gets the active of this message boards mailing list.
+	* Returns the active of this message boards mailing list.
 	*
 	* @return the active of this message boards mailing list
 	*/

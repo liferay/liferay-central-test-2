@@ -43,21 +43,21 @@ public interface RatingsStatsModel extends AttachedModel, BaseModel<RatingsStats
 	 */
 
 	/**
-	 * Gets the primary key of this ratings stats.
+	 * Returns the primary key of this ratings stats.
 	 *
 	 * @return the primary key of this ratings stats
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this ratings stats
+	 * Sets the primary key of this ratings stats.
 	 *
 	 * @param primaryKey the primary key of this ratings stats
 	 */
 	public void setPrimaryKey(long primaryKey);
 
 	/**
-	 * Gets the stats ID of this ratings stats.
+	 * Returns the stats ID of this ratings stats.
 	 *
 	 * @return the stats ID of this ratings stats
 	 */
@@ -71,14 +71,14 @@ public interface RatingsStatsModel extends AttachedModel, BaseModel<RatingsStats
 	public void setStatsId(long statsId);
 
 	/**
-	 * Gets the class name of the model instance this ratings stats is polymorphically associated with.
+	 * Returns the fully qualified class name of this ratings stats.
 	 *
-	 * @return the class name of the model instance this ratings stats is polymorphically associated with
+	 * @return the fully qualified class name of this ratings stats
 	 */
 	public String getClassName();
 
 	/**
-	 * Gets the class name ID of this ratings stats.
+	 * Returns the class name ID of this ratings stats.
 	 *
 	 * @return the class name ID of this ratings stats
 	 */
@@ -92,7 +92,7 @@ public interface RatingsStatsModel extends AttachedModel, BaseModel<RatingsStats
 	public void setClassNameId(long classNameId);
 
 	/**
-	 * Gets the class p k of this ratings stats.
+	 * Returns the class p k of this ratings stats.
 	 *
 	 * @return the class p k of this ratings stats
 	 */
@@ -106,7 +106,7 @@ public interface RatingsStatsModel extends AttachedModel, BaseModel<RatingsStats
 	public void setClassPK(long classPK);
 
 	/**
-	 * Gets the total entries of this ratings stats.
+	 * Returns the total entries of this ratings stats.
 	 *
 	 * @return the total entries of this ratings stats
 	 */
@@ -120,7 +120,7 @@ public interface RatingsStatsModel extends AttachedModel, BaseModel<RatingsStats
 	public void setTotalEntries(int totalEntries);
 
 	/**
-	 * Gets the total score of this ratings stats.
+	 * Returns the total score of this ratings stats.
 	 *
 	 * @return the total score of this ratings stats
 	 */
@@ -134,7 +134,7 @@ public interface RatingsStatsModel extends AttachedModel, BaseModel<RatingsStats
 	public void setTotalScore(double totalScore);
 
 	/**
-	 * Gets the average score of this ratings stats.
+	 * Returns the average score of this ratings stats.
 	 *
 	 * @return the average score of this ratings stats
 	 */

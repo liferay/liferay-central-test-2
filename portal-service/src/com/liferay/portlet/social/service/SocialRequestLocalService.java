@@ -45,7 +45,7 @@ public interface SocialRequestLocalService {
 	/**
 	* Adds the social request to the database. Also notifies the appropriate model listeners.
 	*
-	* @param socialRequest the social request to add
+	* @param socialRequest the social request
 	* @return the social request that was added
 	* @throws SystemException if a system exception occurred
 	*/
@@ -65,7 +65,7 @@ public interface SocialRequestLocalService {
 	/**
 	* Deletes the social request with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param requestId the primary key of the social request to delete
+	* @param requestId the primary key of the social request
 	* @throws PortalException if a social request with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -76,7 +76,7 @@ public interface SocialRequestLocalService {
 	/**
 	* Deletes the social request from the database. Also notifies the appropriate model listeners.
 	*
-	* @param socialRequest the social request to delete
+	* @param socialRequest the social request
 	* @throws SystemException if a system exception occurred
 	*/
 	public void deleteSocialRequest(
@@ -86,7 +86,7 @@ public interface SocialRequestLocalService {
 	/**
 	* Performs a dynamic query on the database and returns the matching rows.
 	*
-	* @param dynamicQuery the dynamic query to search with
+	* @param dynamicQuery the dynamic query
 	* @return the matching rows
 	* @throws SystemException if a system exception occurred
 	*/
@@ -102,9 +102,9 @@ public interface SocialRequestLocalService {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param dynamicQuery the dynamic query to search with
-	* @param start the lower bound of the range of model instances to return
-	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param dynamicQuery the dynamic query
+	* @param start the lower bound of the range of model instances
+	* @param end the upper bound of the range of model instances (not inclusive)
 	* @return the range of matching rows
 	* @throws SystemException if a system exception occurred
 	*/
@@ -120,9 +120,9 @@ public interface SocialRequestLocalService {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param dynamicQuery the dynamic query to search with
-	* @param start the lower bound of the range of model instances to return
-	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param dynamicQuery the dynamic query
+	* @param start the lower bound of the range of model instances
+	* @param end the upper bound of the range of model instances (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching rows
 	* @throws SystemException if a system exception occurred
@@ -135,9 +135,9 @@ public interface SocialRequestLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Counts the number of rows that match the dynamic query.
+	* Returns the number of rows that match the dynamic query.
 	*
-	* @param dynamicQuery the dynamic query to search with
+	* @param dynamicQuery the dynamic query
 	* @return the number of rows that match the dynamic query
 	* @throws SystemException if a system exception occurred
 	*/
@@ -146,9 +146,9 @@ public interface SocialRequestLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Gets the social request with the primary key.
+	* Returns the social request with the primary key.
 	*
-	* @param requestId the primary key of the social request to get
+	* @param requestId the primary key of the social request
 	* @return the social request
 	* @throws PortalException if a social request with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -160,12 +160,12 @@ public interface SocialRequestLocalService {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Gets the social request with the UUID and group id.
+	* Returns the social request with the UUID in the group.
 	*
-	* @param uuid the UUID of social request to get
-	* @param groupId the group id of the social request to get
+	* @param uuid the UUID of social request
+	* @param groupId the group id of the social request
 	* @return the social request
-	* @throws PortalException if a social request with the UUID and group id could not be found
+	* @throws PortalException if a social request with the UUID in the group could not be found
 	* @throws SystemException if a system exception occurred
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
@@ -175,14 +175,14 @@ public interface SocialRequestLocalService {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Gets a range of all the social requests.
+	* Returns a range of all the social requests.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of social requests to return
-	* @param end the upper bound of the range of social requests to return (not inclusive)
+	* @param start the lower bound of the range of social requests
+	* @param end the upper bound of the range of social requests (not inclusive)
 	* @return the range of social requests
 	* @throws SystemException if a system exception occurred
 	*/
@@ -192,7 +192,7 @@ public interface SocialRequestLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Gets the number of social requests.
+	* Returns the number of social requests.
 	*
 	* @return the number of social requests
 	* @throws SystemException if a system exception occurred
@@ -204,7 +204,7 @@ public interface SocialRequestLocalService {
 	/**
 	* Updates the social request in the database. Also notifies the appropriate model listeners.
 	*
-	* @param socialRequest the social request to update
+	* @param socialRequest the social request
 	* @return the social request that was updated
 	* @throws SystemException if a system exception occurred
 	*/
@@ -215,7 +215,7 @@ public interface SocialRequestLocalService {
 	/**
 	* Updates the social request in the database. Also notifies the appropriate model listeners.
 	*
-	* @param socialRequest the social request to update
+	* @param socialRequest the social request
 	* @param merge whether to merge the social request with the current session. See {@link com.liferay.portal.service.persistence.BatchSession#update(com.liferay.portal.kernel.dao.orm.Session, com.liferay.portal.model.BaseModel, boolean)} for an explanation.
 	* @return the social request that was updated
 	* @throws SystemException if a system exception occurred
@@ -226,7 +226,7 @@ public interface SocialRequestLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Gets the Spring bean ID for this bean.
+	* Returns the Spring bean ID for this bean.
 	*
 	* @return the Spring bean ID for this bean
 	*/

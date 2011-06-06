@@ -124,7 +124,7 @@ public class SCProductScreenshotUtil {
 	/**
 	* Caches the s c product screenshot in the entity cache if it is enabled.
 	*
-	* @param scProductScreenshot the s c product screenshot to cache
+	* @param scProductScreenshot the s c product screenshot
 	*/
 	public static void cacheResult(
 		com.liferay.portlet.softwarecatalog.model.SCProductScreenshot scProductScreenshot) {
@@ -134,7 +134,7 @@ public class SCProductScreenshotUtil {
 	/**
 	* Caches the s c product screenshots in the entity cache if it is enabled.
 	*
-	* @param scProductScreenshots the s c product screenshots to cache
+	* @param scProductScreenshots the s c product screenshots
 	*/
 	public static void cacheResult(
 		java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductScreenshot> scProductScreenshots) {
@@ -155,7 +155,7 @@ public class SCProductScreenshotUtil {
 	/**
 	* Removes the s c product screenshot with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param productScreenshotId the primary key of the s c product screenshot to remove
+	* @param productScreenshotId the primary key of the s c product screenshot
 	* @return the s c product screenshot that was removed
 	* @throws com.liferay.portlet.softwarecatalog.NoSuchProductScreenshotException if a s c product screenshot with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -175,9 +175,9 @@ public class SCProductScreenshotUtil {
 	}
 
 	/**
-	* Finds the s c product screenshot with the primary key or throws a {@link com.liferay.portlet.softwarecatalog.NoSuchProductScreenshotException} if it could not be found.
+	* Returns the s c product screenshot with the primary key or throws a {@link com.liferay.portlet.softwarecatalog.NoSuchProductScreenshotException} if it could not be found.
 	*
-	* @param productScreenshotId the primary key of the s c product screenshot to find
+	* @param productScreenshotId the primary key of the s c product screenshot
 	* @return the s c product screenshot
 	* @throws com.liferay.portlet.softwarecatalog.NoSuchProductScreenshotException if a s c product screenshot with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -190,9 +190,9 @@ public class SCProductScreenshotUtil {
 	}
 
 	/**
-	* Finds the s c product screenshot with the primary key or returns <code>null</code> if it could not be found.
+	* Returns the s c product screenshot with the primary key or returns <code>null</code> if it could not be found.
 	*
-	* @param productScreenshotId the primary key of the s c product screenshot to find
+	* @param productScreenshotId the primary key of the s c product screenshot
 	* @return the s c product screenshot, or <code>null</code> if a s c product screenshot with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -203,9 +203,9 @@ public class SCProductScreenshotUtil {
 	}
 
 	/**
-	* Finds all the s c product screenshots where productEntryId = &#63;.
+	* Returns all the s c product screenshots where productEntryId = &#63;.
 	*
-	* @param productEntryId the product entry ID to search with
+	* @param productEntryId the product entry ID
 	* @return the matching s c product screenshots
 	* @throws SystemException if a system exception occurred
 	*/
@@ -216,15 +216,15 @@ public class SCProductScreenshotUtil {
 	}
 
 	/**
-	* Finds a range of all the s c product screenshots where productEntryId = &#63;.
+	* Returns a range of all the s c product screenshots where productEntryId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param productEntryId the product entry ID to search with
-	* @param start the lower bound of the range of s c product screenshots to return
-	* @param end the upper bound of the range of s c product screenshots to return (not inclusive)
+	* @param productEntryId the product entry ID
+	* @param start the lower bound of the range of s c product screenshots
+	* @param end the upper bound of the range of s c product screenshots (not inclusive)
 	* @return the range of matching s c product screenshots
 	* @throws SystemException if a system exception occurred
 	*/
@@ -235,15 +235,15 @@ public class SCProductScreenshotUtil {
 	}
 
 	/**
-	* Finds an ordered range of all the s c product screenshots where productEntryId = &#63;.
+	* Returns an ordered range of all the s c product screenshots where productEntryId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param productEntryId the product entry ID to search with
-	* @param start the lower bound of the range of s c product screenshots to return
-	* @param end the upper bound of the range of s c product screenshots to return (not inclusive)
+	* @param productEntryId the product entry ID
+	* @param start the lower bound of the range of s c product screenshots
+	* @param end the upper bound of the range of s c product screenshots (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching s c product screenshots
 	* @throws SystemException if a system exception occurred
@@ -258,13 +258,13 @@ public class SCProductScreenshotUtil {
 	}
 
 	/**
-	* Finds the first s c product screenshot in the ordered set where productEntryId = &#63;.
+	* Returns the first s c product screenshot in the ordered set where productEntryId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param productEntryId the product entry ID to search with
+	* @param productEntryId the product entry ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching s c product screenshot
 	* @throws com.liferay.portlet.softwarecatalog.NoSuchProductScreenshotException if a matching s c product screenshot could not be found
@@ -280,13 +280,13 @@ public class SCProductScreenshotUtil {
 	}
 
 	/**
-	* Finds the last s c product screenshot in the ordered set where productEntryId = &#63;.
+	* Returns the last s c product screenshot in the ordered set where productEntryId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param productEntryId the product entry ID to search with
+	* @param productEntryId the product entry ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching s c product screenshot
 	* @throws com.liferay.portlet.softwarecatalog.NoSuchProductScreenshotException if a matching s c product screenshot could not be found
@@ -302,14 +302,14 @@ public class SCProductScreenshotUtil {
 	}
 
 	/**
-	* Finds the s c product screenshots before and after the current s c product screenshot in the ordered set where productEntryId = &#63;.
+	* Returns the s c product screenshots before and after the current s c product screenshot in the ordered set where productEntryId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
 	* @param productScreenshotId the primary key of the current s c product screenshot
-	* @param productEntryId the product entry ID to search with
+	* @param productEntryId the product entry ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next s c product screenshot
 	* @throws com.liferay.portlet.softwarecatalog.NoSuchProductScreenshotException if a s c product screenshot with the primary key could not be found
@@ -326,9 +326,9 @@ public class SCProductScreenshotUtil {
 	}
 
 	/**
-	* Finds the s c product screenshot where thumbnailId = &#63; or throws a {@link com.liferay.portlet.softwarecatalog.NoSuchProductScreenshotException} if it could not be found.
+	* Returns the s c product screenshot where thumbnailId = &#63; or throws a {@link com.liferay.portlet.softwarecatalog.NoSuchProductScreenshotException} if it could not be found.
 	*
-	* @param thumbnailId the thumbnail ID to search with
+	* @param thumbnailId the thumbnail ID
 	* @return the matching s c product screenshot
 	* @throws com.liferay.portlet.softwarecatalog.NoSuchProductScreenshotException if a matching s c product screenshot could not be found
 	* @throws SystemException if a system exception occurred
@@ -341,9 +341,9 @@ public class SCProductScreenshotUtil {
 	}
 
 	/**
-	* Finds the s c product screenshot where thumbnailId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	* Returns the s c product screenshot where thumbnailId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	*
-	* @param thumbnailId the thumbnail ID to search with
+	* @param thumbnailId the thumbnail ID
 	* @return the matching s c product screenshot, or <code>null</code> if a matching s c product screenshot could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -354,9 +354,9 @@ public class SCProductScreenshotUtil {
 	}
 
 	/**
-	* Finds the s c product screenshot where thumbnailId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	* Returns the s c product screenshot where thumbnailId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
-	* @param thumbnailId the thumbnail ID to search with
+	* @param thumbnailId the thumbnail ID
 	* @return the matching s c product screenshot, or <code>null</code> if a matching s c product screenshot could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -368,9 +368,9 @@ public class SCProductScreenshotUtil {
 	}
 
 	/**
-	* Finds the s c product screenshot where fullImageId = &#63; or throws a {@link com.liferay.portlet.softwarecatalog.NoSuchProductScreenshotException} if it could not be found.
+	* Returns the s c product screenshot where fullImageId = &#63; or throws a {@link com.liferay.portlet.softwarecatalog.NoSuchProductScreenshotException} if it could not be found.
 	*
-	* @param fullImageId the full image ID to search with
+	* @param fullImageId the full image ID
 	* @return the matching s c product screenshot
 	* @throws com.liferay.portlet.softwarecatalog.NoSuchProductScreenshotException if a matching s c product screenshot could not be found
 	* @throws SystemException if a system exception occurred
@@ -383,9 +383,9 @@ public class SCProductScreenshotUtil {
 	}
 
 	/**
-	* Finds the s c product screenshot where fullImageId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	* Returns the s c product screenshot where fullImageId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	*
-	* @param fullImageId the full image ID to search with
+	* @param fullImageId the full image ID
 	* @return the matching s c product screenshot, or <code>null</code> if a matching s c product screenshot could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -396,9 +396,9 @@ public class SCProductScreenshotUtil {
 	}
 
 	/**
-	* Finds the s c product screenshot where fullImageId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	* Returns the s c product screenshot where fullImageId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
-	* @param fullImageId the full image ID to search with
+	* @param fullImageId the full image ID
 	* @return the matching s c product screenshot, or <code>null</code> if a matching s c product screenshot could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -410,10 +410,10 @@ public class SCProductScreenshotUtil {
 	}
 
 	/**
-	* Finds the s c product screenshot where productEntryId = &#63; and priority = &#63; or throws a {@link com.liferay.portlet.softwarecatalog.NoSuchProductScreenshotException} if it could not be found.
+	* Returns the s c product screenshot where productEntryId = &#63; and priority = &#63; or throws a {@link com.liferay.portlet.softwarecatalog.NoSuchProductScreenshotException} if it could not be found.
 	*
-	* @param productEntryId the product entry ID to search with
-	* @param priority the priority to search with
+	* @param productEntryId the product entry ID
+	* @param priority the priority
 	* @return the matching s c product screenshot
 	* @throws com.liferay.portlet.softwarecatalog.NoSuchProductScreenshotException if a matching s c product screenshot could not be found
 	* @throws SystemException if a system exception occurred
@@ -426,10 +426,10 @@ public class SCProductScreenshotUtil {
 	}
 
 	/**
-	* Finds the s c product screenshot where productEntryId = &#63; and priority = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	* Returns the s c product screenshot where productEntryId = &#63; and priority = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	*
-	* @param productEntryId the product entry ID to search with
-	* @param priority the priority to search with
+	* @param productEntryId the product entry ID
+	* @param priority the priority
 	* @return the matching s c product screenshot, or <code>null</code> if a matching s c product screenshot could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -440,10 +440,10 @@ public class SCProductScreenshotUtil {
 	}
 
 	/**
-	* Finds the s c product screenshot where productEntryId = &#63; and priority = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	* Returns the s c product screenshot where productEntryId = &#63; and priority = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
-	* @param productEntryId the product entry ID to search with
-	* @param priority the priority to search with
+	* @param productEntryId the product entry ID
+	* @param priority the priority
 	* @return the matching s c product screenshot, or <code>null</code> if a matching s c product screenshot could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -455,7 +455,7 @@ public class SCProductScreenshotUtil {
 	}
 
 	/**
-	* Finds all the s c product screenshots.
+	* Returns all the s c product screenshots.
 	*
 	* @return the s c product screenshots
 	* @throws SystemException if a system exception occurred
@@ -466,14 +466,14 @@ public class SCProductScreenshotUtil {
 	}
 
 	/**
-	* Finds a range of all the s c product screenshots.
+	* Returns a range of all the s c product screenshots.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of s c product screenshots to return
-	* @param end the upper bound of the range of s c product screenshots to return (not inclusive)
+	* @param start the lower bound of the range of s c product screenshots
+	* @param end the upper bound of the range of s c product screenshots (not inclusive)
 	* @return the range of s c product screenshots
 	* @throws SystemException if a system exception occurred
 	*/
@@ -484,14 +484,14 @@ public class SCProductScreenshotUtil {
 	}
 
 	/**
-	* Finds an ordered range of all the s c product screenshots.
+	* Returns an ordered range of all the s c product screenshots.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of s c product screenshots to return
-	* @param end the upper bound of the range of s c product screenshots to return (not inclusive)
+	* @param start the lower bound of the range of s c product screenshots
+	* @param end the upper bound of the range of s c product screenshots (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of s c product screenshots
 	* @throws SystemException if a system exception occurred
@@ -506,7 +506,7 @@ public class SCProductScreenshotUtil {
 	/**
 	* Removes all the s c product screenshots where productEntryId = &#63; from the database.
 	*
-	* @param productEntryId the product entry ID to search with
+	* @param productEntryId the product entry ID
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByProductEntryId(long productEntryId)
@@ -517,7 +517,7 @@ public class SCProductScreenshotUtil {
 	/**
 	* Removes the s c product screenshot where thumbnailId = &#63; from the database.
 	*
-	* @param thumbnailId the thumbnail ID to search with
+	* @param thumbnailId the thumbnail ID
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByThumbnailId(long thumbnailId)
@@ -529,7 +529,7 @@ public class SCProductScreenshotUtil {
 	/**
 	* Removes the s c product screenshot where fullImageId = &#63; from the database.
 	*
-	* @param fullImageId the full image ID to search with
+	* @param fullImageId the full image ID
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByFullImageId(long fullImageId)
@@ -541,8 +541,8 @@ public class SCProductScreenshotUtil {
 	/**
 	* Removes the s c product screenshot where productEntryId = &#63; and priority = &#63; from the database.
 	*
-	* @param productEntryId the product entry ID to search with
-	* @param priority the priority to search with
+	* @param productEntryId the product entry ID
+	* @param priority the priority
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByP_P(long productEntryId, int priority)
@@ -562,9 +562,9 @@ public class SCProductScreenshotUtil {
 	}
 
 	/**
-	* Counts all the s c product screenshots where productEntryId = &#63;.
+	* Returns the number of s c product screenshots where productEntryId = &#63;.
 	*
-	* @param productEntryId the product entry ID to search with
+	* @param productEntryId the product entry ID
 	* @return the number of matching s c product screenshots
 	* @throws SystemException if a system exception occurred
 	*/
@@ -574,9 +574,9 @@ public class SCProductScreenshotUtil {
 	}
 
 	/**
-	* Counts all the s c product screenshots where thumbnailId = &#63;.
+	* Returns the number of s c product screenshots where thumbnailId = &#63;.
 	*
-	* @param thumbnailId the thumbnail ID to search with
+	* @param thumbnailId the thumbnail ID
 	* @return the number of matching s c product screenshots
 	* @throws SystemException if a system exception occurred
 	*/
@@ -586,9 +586,9 @@ public class SCProductScreenshotUtil {
 	}
 
 	/**
-	* Counts all the s c product screenshots where fullImageId = &#63;.
+	* Returns the number of s c product screenshots where fullImageId = &#63;.
 	*
-	* @param fullImageId the full image ID to search with
+	* @param fullImageId the full image ID
 	* @return the number of matching s c product screenshots
 	* @throws SystemException if a system exception occurred
 	*/
@@ -598,10 +598,10 @@ public class SCProductScreenshotUtil {
 	}
 
 	/**
-	* Counts all the s c product screenshots where productEntryId = &#63; and priority = &#63;.
+	* Returns the number of s c product screenshots where productEntryId = &#63; and priority = &#63;.
 	*
-	* @param productEntryId the product entry ID to search with
-	* @param priority the priority to search with
+	* @param productEntryId the product entry ID
+	* @param priority the priority
 	* @return the number of matching s c product screenshots
 	* @throws SystemException if a system exception occurred
 	*/
@@ -611,7 +611,7 @@ public class SCProductScreenshotUtil {
 	}
 
 	/**
-	* Counts all the s c product screenshots.
+	* Returns the number of s c product screenshots.
 	*
 	* @return the number of s c product screenshots
 	* @throws SystemException if a system exception occurred

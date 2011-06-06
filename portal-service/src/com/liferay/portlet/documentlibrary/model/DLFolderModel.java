@@ -47,21 +47,21 @@ public interface DLFolderModel extends BaseModel<DLFolder>, GroupedModel {
 	 */
 
 	/**
-	 * Gets the primary key of this d l folder.
+	 * Returns the primary key of this d l folder.
 	 *
 	 * @return the primary key of this d l folder
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this d l folder
+	 * Sets the primary key of this d l folder.
 	 *
 	 * @param primaryKey the primary key of this d l folder
 	 */
 	public void setPrimaryKey(long primaryKey);
 
 	/**
-	 * Gets the uuid of this d l folder.
+	 * Returns the uuid of this d l folder.
 	 *
 	 * @return the uuid of this d l folder
 	 */
@@ -76,7 +76,7 @@ public interface DLFolderModel extends BaseModel<DLFolder>, GroupedModel {
 	public void setUuid(String uuid);
 
 	/**
-	 * Gets the folder ID of this d l folder.
+	 * Returns the folder ID of this d l folder.
 	 *
 	 * @return the folder ID of this d l folder
 	 */
@@ -90,7 +90,7 @@ public interface DLFolderModel extends BaseModel<DLFolder>, GroupedModel {
 	public void setFolderId(long folderId);
 
 	/**
-	 * Gets the group ID of this d l folder.
+	 * Returns the group ID of this d l folder.
 	 *
 	 * @return the group ID of this d l folder
 	 */
@@ -104,7 +104,7 @@ public interface DLFolderModel extends BaseModel<DLFolder>, GroupedModel {
 	public void setGroupId(long groupId);
 
 	/**
-	 * Gets the company ID of this d l folder.
+	 * Returns the company ID of this d l folder.
 	 *
 	 * @return the company ID of this d l folder
 	 */
@@ -118,7 +118,7 @@ public interface DLFolderModel extends BaseModel<DLFolder>, GroupedModel {
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the user ID of this d l folder.
+	 * Returns the user ID of this d l folder.
 	 *
 	 * @return the user ID of this d l folder
 	 */
@@ -132,7 +132,7 @@ public interface DLFolderModel extends BaseModel<DLFolder>, GroupedModel {
 	public void setUserId(long userId);
 
 	/**
-	 * Gets the user uuid of this d l folder.
+	 * Returns the user uuid of this d l folder.
 	 *
 	 * @return the user uuid of this d l folder
 	 * @throws SystemException if a system exception occurred
@@ -147,7 +147,7 @@ public interface DLFolderModel extends BaseModel<DLFolder>, GroupedModel {
 	public void setUserUuid(String userUuid);
 
 	/**
-	 * Gets the user name of this d l folder.
+	 * Returns the user name of this d l folder.
 	 *
 	 * @return the user name of this d l folder
 	 */
@@ -162,7 +162,7 @@ public interface DLFolderModel extends BaseModel<DLFolder>, GroupedModel {
 	public void setUserName(String userName);
 
 	/**
-	 * Gets the create date of this d l folder.
+	 * Returns the create date of this d l folder.
 	 *
 	 * @return the create date of this d l folder
 	 */
@@ -176,7 +176,7 @@ public interface DLFolderModel extends BaseModel<DLFolder>, GroupedModel {
 	public void setCreateDate(Date createDate);
 
 	/**
-	 * Gets the modified date of this d l folder.
+	 * Returns the modified date of this d l folder.
 	 *
 	 * @return the modified date of this d l folder
 	 */
@@ -190,7 +190,7 @@ public interface DLFolderModel extends BaseModel<DLFolder>, GroupedModel {
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
-	 * Gets the repository ID of this d l folder.
+	 * Returns the repository ID of this d l folder.
 	 *
 	 * @return the repository ID of this d l folder
 	 */
@@ -204,7 +204,7 @@ public interface DLFolderModel extends BaseModel<DLFolder>, GroupedModel {
 	public void setRepositoryId(long repositoryId);
 
 	/**
-	 * Gets the mount point of this d l folder.
+	 * Returns the mount point of this d l folder.
 	 *
 	 * @return the mount point of this d l folder
 	 */
@@ -225,7 +225,7 @@ public interface DLFolderModel extends BaseModel<DLFolder>, GroupedModel {
 	public void setMountPoint(boolean mountPoint);
 
 	/**
-	 * Gets the parent folder ID of this d l folder.
+	 * Returns the parent folder ID of this d l folder.
 	 *
 	 * @return the parent folder ID of this d l folder
 	 */
@@ -239,7 +239,7 @@ public interface DLFolderModel extends BaseModel<DLFolder>, GroupedModel {
 	public void setParentFolderId(long parentFolderId);
 
 	/**
-	 * Gets the name of this d l folder.
+	 * Returns the name of this d l folder.
 	 *
 	 * @return the name of this d l folder
 	 */
@@ -254,7 +254,7 @@ public interface DLFolderModel extends BaseModel<DLFolder>, GroupedModel {
 	public void setName(String name);
 
 	/**
-	 * Gets the description of this d l folder.
+	 * Returns the description of this d l folder.
 	 *
 	 * @return the description of this d l folder
 	 */
@@ -269,7 +269,7 @@ public interface DLFolderModel extends BaseModel<DLFolder>, GroupedModel {
 	public void setDescription(String description);
 
 	/**
-	 * Gets the last post date of this d l folder.
+	 * Returns the last post date of this d l folder.
 	 *
 	 * @return the last post date of this d l folder
 	 */

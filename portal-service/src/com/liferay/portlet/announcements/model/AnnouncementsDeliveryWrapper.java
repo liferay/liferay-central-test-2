@@ -38,7 +38,7 @@ public class AnnouncementsDeliveryWrapper implements AnnouncementsDelivery {
 	}
 
 	/**
-	* Gets the primary key of this announcements delivery.
+	* Returns the primary key of this announcements delivery.
 	*
 	* @return the primary key of this announcements delivery
 	*/
@@ -47,7 +47,7 @@ public class AnnouncementsDeliveryWrapper implements AnnouncementsDelivery {
 	}
 
 	/**
-	* Sets the primary key of this announcements delivery
+	* Sets the primary key of this announcements delivery.
 	*
 	* @param primaryKey the primary key of this announcements delivery
 	*/
@@ -56,7 +56,7 @@ public class AnnouncementsDeliveryWrapper implements AnnouncementsDelivery {
 	}
 
 	/**
-	* Gets the delivery ID of this announcements delivery.
+	* Returns the delivery ID of this announcements delivery.
 	*
 	* @return the delivery ID of this announcements delivery
 	*/
@@ -74,7 +74,7 @@ public class AnnouncementsDeliveryWrapper implements AnnouncementsDelivery {
 	}
 
 	/**
-	* Gets the company ID of this announcements delivery.
+	* Returns the company ID of this announcements delivery.
 	*
 	* @return the company ID of this announcements delivery
 	*/
@@ -92,7 +92,7 @@ public class AnnouncementsDeliveryWrapper implements AnnouncementsDelivery {
 	}
 
 	/**
-	* Gets the user ID of this announcements delivery.
+	* Returns the user ID of this announcements delivery.
 	*
 	* @return the user ID of this announcements delivery
 	*/
@@ -110,7 +110,7 @@ public class AnnouncementsDeliveryWrapper implements AnnouncementsDelivery {
 	}
 
 	/**
-	* Gets the user uuid of this announcements delivery.
+	* Returns the user uuid of this announcements delivery.
 	*
 	* @return the user uuid of this announcements delivery
 	* @throws SystemException if a system exception occurred
@@ -130,7 +130,7 @@ public class AnnouncementsDeliveryWrapper implements AnnouncementsDelivery {
 	}
 
 	/**
-	* Gets the type of this announcements delivery.
+	* Returns the type of this announcements delivery.
 	*
 	* @return the type of this announcements delivery
 	*/
@@ -148,7 +148,7 @@ public class AnnouncementsDeliveryWrapper implements AnnouncementsDelivery {
 	}
 
 	/**
-	* Gets the email of this announcements delivery.
+	* Returns the email of this announcements delivery.
 	*
 	* @return the email of this announcements delivery
 	*/
@@ -175,7 +175,7 @@ public class AnnouncementsDeliveryWrapper implements AnnouncementsDelivery {
 	}
 
 	/**
-	* Gets the sms of this announcements delivery.
+	* Returns the sms of this announcements delivery.
 	*
 	* @return the sms of this announcements delivery
 	*/
@@ -202,7 +202,7 @@ public class AnnouncementsDeliveryWrapper implements AnnouncementsDelivery {
 	}
 
 	/**
-	* Gets the website of this announcements delivery.
+	* Returns the website of this announcements delivery.
 	*
 	* @return the website of this announcements delivery
 	*/

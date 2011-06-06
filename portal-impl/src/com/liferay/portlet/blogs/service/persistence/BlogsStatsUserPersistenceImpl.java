@@ -158,7 +158,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	/**
 	 * Caches the blogs stats user in the entity cache if it is enabled.
 	 *
-	 * @param blogsStatsUser the blogs stats user to cache
+	 * @param blogsStatsUser the blogs stats user
 	 */
 	public void cacheResult(BlogsStatsUser blogsStatsUser) {
 		EntityCacheUtil.putResult(BlogsStatsUserModelImpl.ENTITY_CACHE_ENABLED,
@@ -177,7 +177,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	/**
 	 * Caches the blogs stats users in the entity cache if it is enabled.
 	 *
-	 * @param blogsStatsUsers the blogs stats users to cache
+	 * @param blogsStatsUsers the blogs stats users
 	 */
 	public void cacheResult(List<BlogsStatsUser> blogsStatsUsers) {
 		for (BlogsStatsUser blogsStatsUser : blogsStatsUsers) {
@@ -243,7 +243,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	/**
 	 * Removes the blogs stats user with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param primaryKey the primary key of the blogs stats user to remove
+	 * @param primaryKey the primary key of the blogs stats user
 	 * @return the blogs stats user that was removed
 	 * @throws com.liferay.portal.NoSuchModelException if a blogs stats user with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -256,7 +256,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	/**
 	 * Removes the blogs stats user with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param statsUserId the primary key of the blogs stats user to remove
+	 * @param statsUserId the primary key of the blogs stats user
 	 * @return the blogs stats user that was removed
 	 * @throws com.liferay.portlet.blogs.NoSuchStatsUserException if a blogs stats user with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -296,7 +296,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	/**
 	 * Removes the blogs stats user from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param blogsStatsUser the blogs stats user to remove
+	 * @param blogsStatsUser the blogs stats user
 	 * @return the blogs stats user that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -417,9 +417,9 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	}
 
 	/**
-	 * Finds the blogs stats user with the primary key or throws a {@link com.liferay.portal.NoSuchModelException} if it could not be found.
+	 * Returns the blogs stats user with the primary key or throws a {@link com.liferay.portal.NoSuchModelException} if it could not be found.
 	 *
-	 * @param primaryKey the primary key of the blogs stats user to find
+	 * @param primaryKey the primary key of the blogs stats user
 	 * @return the blogs stats user
 	 * @throws com.liferay.portal.NoSuchModelException if a blogs stats user with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -430,9 +430,9 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	}
 
 	/**
-	 * Finds the blogs stats user with the primary key or throws a {@link com.liferay.portlet.blogs.NoSuchStatsUserException} if it could not be found.
+	 * Returns the blogs stats user with the primary key or throws a {@link com.liferay.portlet.blogs.NoSuchStatsUserException} if it could not be found.
 	 *
-	 * @param statsUserId the primary key of the blogs stats user to find
+	 * @param statsUserId the primary key of the blogs stats user
 	 * @return the blogs stats user
 	 * @throws com.liferay.portlet.blogs.NoSuchStatsUserException if a blogs stats user with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -454,9 +454,9 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	}
 
 	/**
-	 * Finds the blogs stats user with the primary key or returns <code>null</code> if it could not be found.
+	 * Returns the blogs stats user with the primary key or returns <code>null</code> if it could not be found.
 	 *
-	 * @param primaryKey the primary key of the blogs stats user to find
+	 * @param primaryKey the primary key of the blogs stats user
 	 * @return the blogs stats user, or <code>null</code> if a blogs stats user with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -466,9 +466,9 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	}
 
 	/**
-	 * Finds the blogs stats user with the primary key or returns <code>null</code> if it could not be found.
+	 * Returns the blogs stats user with the primary key or returns <code>null</code> if it could not be found.
 	 *
-	 * @param statsUserId the primary key of the blogs stats user to find
+	 * @param statsUserId the primary key of the blogs stats user
 	 * @return the blogs stats user, or <code>null</code> if a blogs stats user with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -502,9 +502,9 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	}
 
 	/**
-	 * Finds all the blogs stats users where groupId = &#63;.
+	 * Returns all the blogs stats users where groupId = &#63;.
 	 *
-	 * @param groupId the group ID to search with
+	 * @param groupId the group ID
 	 * @return the matching blogs stats users
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -514,15 +514,15 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	}
 
 	/**
-	 * Finds a range of all the blogs stats users where groupId = &#63;.
+	 * Returns a range of all the blogs stats users where groupId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group ID to search with
-	 * @param start the lower bound of the range of blogs stats users to return
-	 * @param end the upper bound of the range of blogs stats users to return (not inclusive)
+	 * @param groupId the group ID
+	 * @param start the lower bound of the range of blogs stats users
+	 * @param end the upper bound of the range of blogs stats users (not inclusive)
 	 * @return the range of matching blogs stats users
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -532,15 +532,15 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	}
 
 	/**
-	 * Finds an ordered range of all the blogs stats users where groupId = &#63;.
+	 * Returns an ordered range of all the blogs stats users where groupId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group ID to search with
-	 * @param start the lower bound of the range of blogs stats users to return
-	 * @param end the upper bound of the range of blogs stats users to return (not inclusive)
+	 * @param groupId the group ID
+	 * @param start the lower bound of the range of blogs stats users
+	 * @param end the upper bound of the range of blogs stats users (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching blogs stats users
 	 * @throws SystemException if a system exception occurred
@@ -620,13 +620,13 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	}
 
 	/**
-	 * Finds the first blogs stats user in the ordered set where groupId = &#63;.
+	 * Returns the first blogs stats user in the ordered set where groupId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group ID to search with
+	 * @param groupId the group ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching blogs stats user
 	 * @throws com.liferay.portlet.blogs.NoSuchStatsUserException if a matching blogs stats user could not be found
@@ -656,13 +656,13 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	}
 
 	/**
-	 * Finds the last blogs stats user in the ordered set where groupId = &#63;.
+	 * Returns the last blogs stats user in the ordered set where groupId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group ID to search with
+	 * @param groupId the group ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching blogs stats user
 	 * @throws com.liferay.portlet.blogs.NoSuchStatsUserException if a matching blogs stats user could not be found
@@ -694,14 +694,14 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	}
 
 	/**
-	 * Finds the blogs stats users before and after the current blogs stats user in the ordered set where groupId = &#63;.
+	 * Returns the blogs stats users before and after the current blogs stats user in the ordered set where groupId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
 	 * @param statsUserId the primary key of the current blogs stats user
-	 * @param groupId the group ID to search with
+	 * @param groupId the group ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next blogs stats user
 	 * @throws com.liferay.portlet.blogs.NoSuchStatsUserException if a blogs stats user with the primary key could not be found
@@ -842,9 +842,9 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	}
 
 	/**
-	 * Finds all the blogs stats users where userId = &#63;.
+	 * Returns all the blogs stats users where userId = &#63;.
 	 *
-	 * @param userId the user ID to search with
+	 * @param userId the user ID
 	 * @return the matching blogs stats users
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -854,15 +854,15 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	}
 
 	/**
-	 * Finds a range of all the blogs stats users where userId = &#63;.
+	 * Returns a range of all the blogs stats users where userId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param userId the user ID to search with
-	 * @param start the lower bound of the range of blogs stats users to return
-	 * @param end the upper bound of the range of blogs stats users to return (not inclusive)
+	 * @param userId the user ID
+	 * @param start the lower bound of the range of blogs stats users
+	 * @param end the upper bound of the range of blogs stats users (not inclusive)
 	 * @return the range of matching blogs stats users
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -872,15 +872,15 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	}
 
 	/**
-	 * Finds an ordered range of all the blogs stats users where userId = &#63;.
+	 * Returns an ordered range of all the blogs stats users where userId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param userId the user ID to search with
-	 * @param start the lower bound of the range of blogs stats users to return
-	 * @param end the upper bound of the range of blogs stats users to return (not inclusive)
+	 * @param userId the user ID
+	 * @param start the lower bound of the range of blogs stats users
+	 * @param end the upper bound of the range of blogs stats users (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching blogs stats users
 	 * @throws SystemException if a system exception occurred
@@ -960,13 +960,13 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	}
 
 	/**
-	 * Finds the first blogs stats user in the ordered set where userId = &#63;.
+	 * Returns the first blogs stats user in the ordered set where userId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param userId the user ID to search with
+	 * @param userId the user ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching blogs stats user
 	 * @throws com.liferay.portlet.blogs.NoSuchStatsUserException if a matching blogs stats user could not be found
@@ -995,13 +995,13 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	}
 
 	/**
-	 * Finds the last blogs stats user in the ordered set where userId = &#63;.
+	 * Returns the last blogs stats user in the ordered set where userId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param userId the user ID to search with
+	 * @param userId the user ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching blogs stats user
 	 * @throws com.liferay.portlet.blogs.NoSuchStatsUserException if a matching blogs stats user could not be found
@@ -1033,14 +1033,14 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	}
 
 	/**
-	 * Finds the blogs stats users before and after the current blogs stats user in the ordered set where userId = &#63;.
+	 * Returns the blogs stats users before and after the current blogs stats user in the ordered set where userId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
 	 * @param statsUserId the primary key of the current blogs stats user
-	 * @param userId the user ID to search with
+	 * @param userId the user ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next blogs stats user
 	 * @throws com.liferay.portlet.blogs.NoSuchStatsUserException if a blogs stats user with the primary key could not be found
@@ -1181,10 +1181,10 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	}
 
 	/**
-	 * Finds the blogs stats user where groupId = &#63; and userId = &#63; or throws a {@link com.liferay.portlet.blogs.NoSuchStatsUserException} if it could not be found.
+	 * Returns the blogs stats user where groupId = &#63; and userId = &#63; or throws a {@link com.liferay.portlet.blogs.NoSuchStatsUserException} if it could not be found.
 	 *
-	 * @param groupId the group ID to search with
-	 * @param userId the user ID to search with
+	 * @param groupId the group ID
+	 * @param userId the user ID
 	 * @return the matching blogs stats user
 	 * @throws com.liferay.portlet.blogs.NoSuchStatsUserException if a matching blogs stats user could not be found
 	 * @throws SystemException if a system exception occurred
@@ -1217,10 +1217,10 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	}
 
 	/**
-	 * Finds the blogs stats user where groupId = &#63; and userId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 * Returns the blogs stats user where groupId = &#63; and userId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	 *
-	 * @param groupId the group ID to search with
-	 * @param userId the user ID to search with
+	 * @param groupId the group ID
+	 * @param userId the user ID
 	 * @return the matching blogs stats user, or <code>null</code> if a matching blogs stats user could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1230,10 +1230,10 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	}
 
 	/**
-	 * Finds the blogs stats user where groupId = &#63; and userId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 * Returns the blogs stats user where groupId = &#63; and userId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	 *
-	 * @param groupId the group ID to search with
-	 * @param userId the user ID to search with
+	 * @param groupId the group ID
+	 * @param userId the user ID
 	 * @return the matching blogs stats user, or <code>null</code> if a matching blogs stats user could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1321,10 +1321,10 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	}
 
 	/**
-	 * Finds all the blogs stats users where groupId = &#63; and entryCount &ne; &#63;.
+	 * Returns all the blogs stats users where groupId = &#63; and entryCount &ne; &#63;.
 	 *
-	 * @param groupId the group ID to search with
-	 * @param entryCount the entry count to search with
+	 * @param groupId the group ID
+	 * @param entryCount the entry count
 	 * @return the matching blogs stats users
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1335,16 +1335,16 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	}
 
 	/**
-	 * Finds a range of all the blogs stats users where groupId = &#63; and entryCount &ne; &#63;.
+	 * Returns a range of all the blogs stats users where groupId = &#63; and entryCount &ne; &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group ID to search with
-	 * @param entryCount the entry count to search with
-	 * @param start the lower bound of the range of blogs stats users to return
-	 * @param end the upper bound of the range of blogs stats users to return (not inclusive)
+	 * @param groupId the group ID
+	 * @param entryCount the entry count
+	 * @param start the lower bound of the range of blogs stats users
+	 * @param end the upper bound of the range of blogs stats users (not inclusive)
 	 * @return the range of matching blogs stats users
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1354,16 +1354,16 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	}
 
 	/**
-	 * Finds an ordered range of all the blogs stats users where groupId = &#63; and entryCount &ne; &#63;.
+	 * Returns an ordered range of all the blogs stats users where groupId = &#63; and entryCount &ne; &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group ID to search with
-	 * @param entryCount the entry count to search with
-	 * @param start the lower bound of the range of blogs stats users to return
-	 * @param end the upper bound of the range of blogs stats users to return (not inclusive)
+	 * @param groupId the group ID
+	 * @param entryCount the entry count
+	 * @param start the lower bound of the range of blogs stats users
+	 * @param end the upper bound of the range of blogs stats users (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching blogs stats users
 	 * @throws SystemException if a system exception occurred
@@ -1448,14 +1448,14 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	}
 
 	/**
-	 * Finds the first blogs stats user in the ordered set where groupId = &#63; and entryCount &ne; &#63;.
+	 * Returns the first blogs stats user in the ordered set where groupId = &#63; and entryCount &ne; &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group ID to search with
-	 * @param entryCount the entry count to search with
+	 * @param groupId the group ID
+	 * @param entryCount the entry count
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching blogs stats user
 	 * @throws com.liferay.portlet.blogs.NoSuchStatsUserException if a matching blogs stats user could not be found
@@ -1488,14 +1488,14 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	}
 
 	/**
-	 * Finds the last blogs stats user in the ordered set where groupId = &#63; and entryCount &ne; &#63;.
+	 * Returns the last blogs stats user in the ordered set where groupId = &#63; and entryCount &ne; &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group ID to search with
-	 * @param entryCount the entry count to search with
+	 * @param groupId the group ID
+	 * @param entryCount the entry count
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching blogs stats user
 	 * @throws com.liferay.portlet.blogs.NoSuchStatsUserException if a matching blogs stats user could not be found
@@ -1530,15 +1530,15 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	}
 
 	/**
-	 * Finds the blogs stats users before and after the current blogs stats user in the ordered set where groupId = &#63; and entryCount &ne; &#63;.
+	 * Returns the blogs stats users before and after the current blogs stats user in the ordered set where groupId = &#63; and entryCount &ne; &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
 	 * @param statsUserId the primary key of the current blogs stats user
-	 * @param groupId the group ID to search with
-	 * @param entryCount the entry count to search with
+	 * @param groupId the group ID
+	 * @param entryCount the entry count
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next blogs stats user
 	 * @throws com.liferay.portlet.blogs.NoSuchStatsUserException if a blogs stats user with the primary key could not be found
@@ -1683,10 +1683,10 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	}
 
 	/**
-	 * Finds all the blogs stats users where companyId = &#63; and entryCount &ne; &#63;.
+	 * Returns all the blogs stats users where companyId = &#63; and entryCount &ne; &#63;.
 	 *
-	 * @param companyId the company ID to search with
-	 * @param entryCount the entry count to search with
+	 * @param companyId the company ID
+	 * @param entryCount the entry count
 	 * @return the matching blogs stats users
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1697,16 +1697,16 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	}
 
 	/**
-	 * Finds a range of all the blogs stats users where companyId = &#63; and entryCount &ne; &#63;.
+	 * Returns a range of all the blogs stats users where companyId = &#63; and entryCount &ne; &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param companyId the company ID to search with
-	 * @param entryCount the entry count to search with
-	 * @param start the lower bound of the range of blogs stats users to return
-	 * @param end the upper bound of the range of blogs stats users to return (not inclusive)
+	 * @param companyId the company ID
+	 * @param entryCount the entry count
+	 * @param start the lower bound of the range of blogs stats users
+	 * @param end the upper bound of the range of blogs stats users (not inclusive)
 	 * @return the range of matching blogs stats users
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1716,16 +1716,16 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	}
 
 	/**
-	 * Finds an ordered range of all the blogs stats users where companyId = &#63; and entryCount &ne; &#63;.
+	 * Returns an ordered range of all the blogs stats users where companyId = &#63; and entryCount &ne; &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param companyId the company ID to search with
-	 * @param entryCount the entry count to search with
-	 * @param start the lower bound of the range of blogs stats users to return
-	 * @param end the upper bound of the range of blogs stats users to return (not inclusive)
+	 * @param companyId the company ID
+	 * @param entryCount the entry count
+	 * @param start the lower bound of the range of blogs stats users
+	 * @param end the upper bound of the range of blogs stats users (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching blogs stats users
 	 * @throws SystemException if a system exception occurred
@@ -1810,14 +1810,14 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	}
 
 	/**
-	 * Finds the first blogs stats user in the ordered set where companyId = &#63; and entryCount &ne; &#63;.
+	 * Returns the first blogs stats user in the ordered set where companyId = &#63; and entryCount &ne; &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param companyId the company ID to search with
-	 * @param entryCount the entry count to search with
+	 * @param companyId the company ID
+	 * @param entryCount the entry count
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching blogs stats user
 	 * @throws com.liferay.portlet.blogs.NoSuchStatsUserException if a matching blogs stats user could not be found
@@ -1850,14 +1850,14 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	}
 
 	/**
-	 * Finds the last blogs stats user in the ordered set where companyId = &#63; and entryCount &ne; &#63;.
+	 * Returns the last blogs stats user in the ordered set where companyId = &#63; and entryCount &ne; &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param companyId the company ID to search with
-	 * @param entryCount the entry count to search with
+	 * @param companyId the company ID
+	 * @param entryCount the entry count
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching blogs stats user
 	 * @throws com.liferay.portlet.blogs.NoSuchStatsUserException if a matching blogs stats user could not be found
@@ -1892,15 +1892,15 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	}
 
 	/**
-	 * Finds the blogs stats users before and after the current blogs stats user in the ordered set where companyId = &#63; and entryCount &ne; &#63;.
+	 * Returns the blogs stats users before and after the current blogs stats user in the ordered set where companyId = &#63; and entryCount &ne; &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
 	 * @param statsUserId the primary key of the current blogs stats user
-	 * @param companyId the company ID to search with
-	 * @param entryCount the entry count to search with
+	 * @param companyId the company ID
+	 * @param entryCount the entry count
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next blogs stats user
 	 * @throws com.liferay.portlet.blogs.NoSuchStatsUserException if a blogs stats user with the primary key could not be found
@@ -2045,10 +2045,10 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	}
 
 	/**
-	 * Finds all the blogs stats users where userId = &#63; and lastPostDate = &#63;.
+	 * Returns all the blogs stats users where userId = &#63; and lastPostDate = &#63;.
 	 *
-	 * @param userId the user ID to search with
-	 * @param lastPostDate the last post date to search with
+	 * @param userId the user ID
+	 * @param lastPostDate the last post date
 	 * @return the matching blogs stats users
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2059,16 +2059,16 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	}
 
 	/**
-	 * Finds a range of all the blogs stats users where userId = &#63; and lastPostDate = &#63;.
+	 * Returns a range of all the blogs stats users where userId = &#63; and lastPostDate = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param userId the user ID to search with
-	 * @param lastPostDate the last post date to search with
-	 * @param start the lower bound of the range of blogs stats users to return
-	 * @param end the upper bound of the range of blogs stats users to return (not inclusive)
+	 * @param userId the user ID
+	 * @param lastPostDate the last post date
+	 * @param start the lower bound of the range of blogs stats users
+	 * @param end the upper bound of the range of blogs stats users (not inclusive)
 	 * @return the range of matching blogs stats users
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2078,16 +2078,16 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	}
 
 	/**
-	 * Finds an ordered range of all the blogs stats users where userId = &#63; and lastPostDate = &#63;.
+	 * Returns an ordered range of all the blogs stats users where userId = &#63; and lastPostDate = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param userId the user ID to search with
-	 * @param lastPostDate the last post date to search with
-	 * @param start the lower bound of the range of blogs stats users to return
-	 * @param end the upper bound of the range of blogs stats users to return (not inclusive)
+	 * @param userId the user ID
+	 * @param lastPostDate the last post date
+	 * @param start the lower bound of the range of blogs stats users
+	 * @param end the upper bound of the range of blogs stats users (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching blogs stats users
 	 * @throws SystemException if a system exception occurred
@@ -2179,14 +2179,14 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	}
 
 	/**
-	 * Finds the first blogs stats user in the ordered set where userId = &#63; and lastPostDate = &#63;.
+	 * Returns the first blogs stats user in the ordered set where userId = &#63; and lastPostDate = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param userId the user ID to search with
-	 * @param lastPostDate the last post date to search with
+	 * @param userId the user ID
+	 * @param lastPostDate the last post date
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching blogs stats user
 	 * @throws com.liferay.portlet.blogs.NoSuchStatsUserException if a matching blogs stats user could not be found
@@ -2219,14 +2219,14 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	}
 
 	/**
-	 * Finds the last blogs stats user in the ordered set where userId = &#63; and lastPostDate = &#63;.
+	 * Returns the last blogs stats user in the ordered set where userId = &#63; and lastPostDate = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param userId the user ID to search with
-	 * @param lastPostDate the last post date to search with
+	 * @param userId the user ID
+	 * @param lastPostDate the last post date
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching blogs stats user
 	 * @throws com.liferay.portlet.blogs.NoSuchStatsUserException if a matching blogs stats user could not be found
@@ -2261,15 +2261,15 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	}
 
 	/**
-	 * Finds the blogs stats users before and after the current blogs stats user in the ordered set where userId = &#63; and lastPostDate = &#63;.
+	 * Returns the blogs stats users before and after the current blogs stats user in the ordered set where userId = &#63; and lastPostDate = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
 	 * @param statsUserId the primary key of the current blogs stats user
-	 * @param userId the user ID to search with
-	 * @param lastPostDate the last post date to search with
+	 * @param userId the user ID
+	 * @param lastPostDate the last post date
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next blogs stats user
 	 * @throws com.liferay.portlet.blogs.NoSuchStatsUserException if a blogs stats user with the primary key could not be found
@@ -2421,7 +2421,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	}
 
 	/**
-	 * Finds all the blogs stats users.
+	 * Returns all the blogs stats users.
 	 *
 	 * @return the blogs stats users
 	 * @throws SystemException if a system exception occurred
@@ -2431,14 +2431,14 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	}
 
 	/**
-	 * Finds a range of all the blogs stats users.
+	 * Returns a range of all the blogs stats users.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param start the lower bound of the range of blogs stats users to return
-	 * @param end the upper bound of the range of blogs stats users to return (not inclusive)
+	 * @param start the lower bound of the range of blogs stats users
+	 * @param end the upper bound of the range of blogs stats users (not inclusive)
 	 * @return the range of blogs stats users
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2448,14 +2448,14 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	}
 
 	/**
-	 * Finds an ordered range of all the blogs stats users.
+	 * Returns an ordered range of all the blogs stats users.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param start the lower bound of the range of blogs stats users to return
-	 * @param end the upper bound of the range of blogs stats users to return (not inclusive)
+	 * @param start the lower bound of the range of blogs stats users
+	 * @param end the upper bound of the range of blogs stats users (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of blogs stats users
 	 * @throws SystemException if a system exception occurred
@@ -2532,7 +2532,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	/**
 	 * Removes all the blogs stats users where groupId = &#63; from the database.
 	 *
-	 * @param groupId the group ID to search with
+	 * @param groupId the group ID
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByGroupId(long groupId) throws SystemException {
@@ -2544,7 +2544,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	/**
 	 * Removes all the blogs stats users where userId = &#63; from the database.
 	 *
-	 * @param userId the user ID to search with
+	 * @param userId the user ID
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByUserId(long userId) throws SystemException {
@@ -2556,8 +2556,8 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	/**
 	 * Removes the blogs stats user where groupId = &#63; and userId = &#63; from the database.
 	 *
-	 * @param groupId the group ID to search with
-	 * @param userId the user ID to search with
+	 * @param groupId the group ID
+	 * @param userId the user ID
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByG_U(long groupId, long userId)
@@ -2570,8 +2570,8 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	/**
 	 * Removes all the blogs stats users where groupId = &#63; and entryCount &ne; &#63; from the database.
 	 *
-	 * @param groupId the group ID to search with
-	 * @param entryCount the entry count to search with
+	 * @param groupId the group ID
+	 * @param entryCount the entry count
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByG_NotE(long groupId, int entryCount)
@@ -2584,8 +2584,8 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	/**
 	 * Removes all the blogs stats users where companyId = &#63; and entryCount &ne; &#63; from the database.
 	 *
-	 * @param companyId the company ID to search with
-	 * @param entryCount the entry count to search with
+	 * @param companyId the company ID
+	 * @param entryCount the entry count
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByC_NotE(long companyId, int entryCount)
@@ -2598,8 +2598,8 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	/**
 	 * Removes all the blogs stats users where userId = &#63; and lastPostDate = &#63; from the database.
 	 *
-	 * @param userId the user ID to search with
-	 * @param lastPostDate the last post date to search with
+	 * @param userId the user ID
+	 * @param lastPostDate the last post date
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByU_L(long userId, Date lastPostDate)
@@ -2621,9 +2621,9 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	}
 
 	/**
-	 * Counts all the blogs stats users where groupId = &#63;.
+	 * Returns the number of blogs stats users where groupId = &#63;.
 	 *
-	 * @param groupId the group ID to search with
+	 * @param groupId the group ID
 	 * @return the number of matching blogs stats users
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2674,9 +2674,9 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	}
 
 	/**
-	 * Counts all the blogs stats users where userId = &#63;.
+	 * Returns the number of blogs stats users where userId = &#63;.
 	 *
-	 * @param userId the user ID to search with
+	 * @param userId the user ID
 	 * @return the number of matching blogs stats users
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2727,10 +2727,10 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	}
 
 	/**
-	 * Counts all the blogs stats users where groupId = &#63; and userId = &#63;.
+	 * Returns the number of blogs stats users where groupId = &#63; and userId = &#63;.
 	 *
-	 * @param groupId the group ID to search with
-	 * @param userId the user ID to search with
+	 * @param groupId the group ID
+	 * @param userId the user ID
 	 * @return the number of matching blogs stats users
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2785,10 +2785,10 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	}
 
 	/**
-	 * Counts all the blogs stats users where groupId = &#63; and entryCount &ne; &#63;.
+	 * Returns the number of blogs stats users where groupId = &#63; and entryCount &ne; &#63;.
 	 *
-	 * @param groupId the group ID to search with
-	 * @param entryCount the entry count to search with
+	 * @param groupId the group ID
+	 * @param entryCount the entry count
 	 * @return the number of matching blogs stats users
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2844,10 +2844,10 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	}
 
 	/**
-	 * Counts all the blogs stats users where companyId = &#63; and entryCount &ne; &#63;.
+	 * Returns the number of blogs stats users where companyId = &#63; and entryCount &ne; &#63;.
 	 *
-	 * @param companyId the company ID to search with
-	 * @param entryCount the entry count to search with
+	 * @param companyId the company ID
+	 * @param entryCount the entry count
 	 * @return the number of matching blogs stats users
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2903,10 +2903,10 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	}
 
 	/**
-	 * Counts all the blogs stats users where userId = &#63; and lastPostDate = &#63;.
+	 * Returns the number of blogs stats users where userId = &#63; and lastPostDate = &#63;.
 	 *
-	 * @param userId the user ID to search with
-	 * @param lastPostDate the last post date to search with
+	 * @param userId the user ID
+	 * @param lastPostDate the last post date
 	 * @return the number of matching blogs stats users
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2969,7 +2969,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	}
 
 	/**
-	 * Counts all the blogs stats users.
+	 * Returns the number of blogs stats users.
 	 *
 	 * @return the number of blogs stats users
 	 * @throws SystemException if a system exception occurred

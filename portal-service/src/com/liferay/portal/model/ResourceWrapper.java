@@ -37,7 +37,7 @@ public class ResourceWrapper implements Resource {
 	}
 
 	/**
-	* Gets the primary key of this resource.
+	* Returns the primary key of this resource.
 	*
 	* @return the primary key of this resource
 	*/
@@ -46,7 +46,7 @@ public class ResourceWrapper implements Resource {
 	}
 
 	/**
-	* Sets the primary key of this resource
+	* Sets the primary key of this resource.
 	*
 	* @param primaryKey the primary key of this resource
 	*/
@@ -55,7 +55,7 @@ public class ResourceWrapper implements Resource {
 	}
 
 	/**
-	* Gets the resource ID of this resource.
+	* Returns the resource ID of this resource.
 	*
 	* @return the resource ID of this resource
 	*/
@@ -73,7 +73,7 @@ public class ResourceWrapper implements Resource {
 	}
 
 	/**
-	* Gets the code ID of this resource.
+	* Returns the code ID of this resource.
 	*
 	* @return the code ID of this resource
 	*/
@@ -91,7 +91,7 @@ public class ResourceWrapper implements Resource {
 	}
 
 	/**
-	* Gets the prim key of this resource.
+	* Returns the prim key of this resource.
 	*
 	* @return the prim key of this resource
 	*/

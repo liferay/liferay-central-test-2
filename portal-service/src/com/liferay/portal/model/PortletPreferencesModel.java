@@ -42,21 +42,21 @@ public interface PortletPreferencesModel extends BaseModel<PortletPreferences> {
 	 */
 
 	/**
-	 * Gets the primary key of this portlet preferences.
+	 * Returns the primary key of this portlet preferences.
 	 *
 	 * @return the primary key of this portlet preferences
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this portlet preferences
+	 * Sets the primary key of this portlet preferences.
 	 *
 	 * @param primaryKey the primary key of this portlet preferences
 	 */
 	public void setPrimaryKey(long primaryKey);
 
 	/**
-	 * Gets the portlet preferences ID of this portlet preferences.
+	 * Returns the portlet preferences ID of this portlet preferences.
 	 *
 	 * @return the portlet preferences ID of this portlet preferences
 	 */
@@ -70,7 +70,7 @@ public interface PortletPreferencesModel extends BaseModel<PortletPreferences> {
 	public void setPortletPreferencesId(long portletPreferencesId);
 
 	/**
-	 * Gets the owner ID of this portlet preferences.
+	 * Returns the owner ID of this portlet preferences.
 	 *
 	 * @return the owner ID of this portlet preferences
 	 */
@@ -84,7 +84,7 @@ public interface PortletPreferencesModel extends BaseModel<PortletPreferences> {
 	public void setOwnerId(long ownerId);
 
 	/**
-	 * Gets the owner type of this portlet preferences.
+	 * Returns the owner type of this portlet preferences.
 	 *
 	 * @return the owner type of this portlet preferences
 	 */
@@ -98,7 +98,7 @@ public interface PortletPreferencesModel extends BaseModel<PortletPreferences> {
 	public void setOwnerType(int ownerType);
 
 	/**
-	 * Gets the plid of this portlet preferences.
+	 * Returns the plid of this portlet preferences.
 	 *
 	 * @return the plid of this portlet preferences
 	 */
@@ -112,7 +112,7 @@ public interface PortletPreferencesModel extends BaseModel<PortletPreferences> {
 	public void setPlid(long plid);
 
 	/**
-	 * Gets the portlet ID of this portlet preferences.
+	 * Returns the portlet ID of this portlet preferences.
 	 *
 	 * @return the portlet ID of this portlet preferences
 	 */
@@ -127,7 +127,7 @@ public interface PortletPreferencesModel extends BaseModel<PortletPreferences> {
 	public void setPortletId(String portletId);
 
 	/**
-	 * Gets the preferences of this portlet preferences.
+	 * Returns the preferences of this portlet preferences.
 	 *
 	 * @return the preferences of this portlet preferences
 	 */

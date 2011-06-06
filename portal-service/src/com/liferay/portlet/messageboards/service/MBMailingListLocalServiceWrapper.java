@@ -33,7 +33,7 @@ public class MBMailingListLocalServiceWrapper
 	/**
 	* Adds the message boards mailing list to the database. Also notifies the appropriate model listeners.
 	*
-	* @param mbMailingList the message boards mailing list to add
+	* @param mbMailingList the message boards mailing list
 	* @return the message boards mailing list that was added
 	* @throws SystemException if a system exception occurred
 	*/
@@ -57,7 +57,7 @@ public class MBMailingListLocalServiceWrapper
 	/**
 	* Deletes the message boards mailing list with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param mailingListId the primary key of the message boards mailing list to delete
+	* @param mailingListId the primary key of the message boards mailing list
 	* @throws PortalException if a message boards mailing list with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -70,7 +70,7 @@ public class MBMailingListLocalServiceWrapper
 	/**
 	* Deletes the message boards mailing list from the database. Also notifies the appropriate model listeners.
 	*
-	* @param mbMailingList the message boards mailing list to delete
+	* @param mbMailingList the message boards mailing list
 	* @throws SystemException if a system exception occurred
 	*/
 	public void deleteMBMailingList(
@@ -82,7 +82,7 @@ public class MBMailingListLocalServiceWrapper
 	/**
 	* Performs a dynamic query on the database and returns the matching rows.
 	*
-	* @param dynamicQuery the dynamic query to search with
+	* @param dynamicQuery the dynamic query
 	* @return the matching rows
 	* @throws SystemException if a system exception occurred
 	*/
@@ -100,9 +100,9 @@ public class MBMailingListLocalServiceWrapper
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param dynamicQuery the dynamic query to search with
-	* @param start the lower bound of the range of model instances to return
-	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param dynamicQuery the dynamic query
+	* @param start the lower bound of the range of model instances
+	* @param end the upper bound of the range of model instances (not inclusive)
 	* @return the range of matching rows
 	* @throws SystemException if a system exception occurred
 	*/
@@ -120,9 +120,9 @@ public class MBMailingListLocalServiceWrapper
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param dynamicQuery the dynamic query to search with
-	* @param start the lower bound of the range of model instances to return
-	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param dynamicQuery the dynamic query
+	* @param start the lower bound of the range of model instances
+	* @param end the upper bound of the range of model instances (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching rows
 	* @throws SystemException if a system exception occurred
@@ -138,9 +138,9 @@ public class MBMailingListLocalServiceWrapper
 	}
 
 	/**
-	* Counts the number of rows that match the dynamic query.
+	* Returns the number of rows that match the dynamic query.
 	*
-	* @param dynamicQuery the dynamic query to search with
+	* @param dynamicQuery the dynamic query
 	* @return the number of rows that match the dynamic query
 	* @throws SystemException if a system exception occurred
 	*/
@@ -151,9 +151,9 @@ public class MBMailingListLocalServiceWrapper
 	}
 
 	/**
-	* Gets the message boards mailing list with the primary key.
+	* Returns the message boards mailing list with the primary key.
 	*
-	* @param mailingListId the primary key of the message boards mailing list to get
+	* @param mailingListId the primary key of the message boards mailing list
 	* @return the message boards mailing list
 	* @throws PortalException if a message boards mailing list with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -166,12 +166,12 @@ public class MBMailingListLocalServiceWrapper
 	}
 
 	/**
-	* Gets the message boards mailing list with the UUID and group id.
+	* Returns the message boards mailing list with the UUID in the group.
 	*
-	* @param uuid the UUID of message boards mailing list to get
-	* @param groupId the group id of the message boards mailing list to get
+	* @param uuid the UUID of message boards mailing list
+	* @param groupId the group id of the message boards mailing list
 	* @return the message boards mailing list
-	* @throws PortalException if a message boards mailing list with the UUID and group id could not be found
+	* @throws PortalException if a message boards mailing list with the UUID in the group could not be found
 	* @throws SystemException if a system exception occurred
 	*/
 	public com.liferay.portlet.messageboards.model.MBMailingList getMBMailingListByUuidAndGroupId(
@@ -183,14 +183,14 @@ public class MBMailingListLocalServiceWrapper
 	}
 
 	/**
-	* Gets a range of all the message boards mailing lists.
+	* Returns a range of all the message boards mailing lists.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of message boards mailing lists to return
-	* @param end the upper bound of the range of message boards mailing lists to return (not inclusive)
+	* @param start the lower bound of the range of message boards mailing lists
+	* @param end the upper bound of the range of message boards mailing lists (not inclusive)
 	* @return the range of message boards mailing lists
 	* @throws SystemException if a system exception occurred
 	*/
@@ -201,7 +201,7 @@ public class MBMailingListLocalServiceWrapper
 	}
 
 	/**
-	* Gets the number of message boards mailing lists.
+	* Returns the number of message boards mailing lists.
 	*
 	* @return the number of message boards mailing lists
 	* @throws SystemException if a system exception occurred
@@ -214,7 +214,7 @@ public class MBMailingListLocalServiceWrapper
 	/**
 	* Updates the message boards mailing list in the database. Also notifies the appropriate model listeners.
 	*
-	* @param mbMailingList the message boards mailing list to update
+	* @param mbMailingList the message boards mailing list
 	* @return the message boards mailing list that was updated
 	* @throws SystemException if a system exception occurred
 	*/
@@ -227,7 +227,7 @@ public class MBMailingListLocalServiceWrapper
 	/**
 	* Updates the message boards mailing list in the database. Also notifies the appropriate model listeners.
 	*
-	* @param mbMailingList the message boards mailing list to update
+	* @param mbMailingList the message boards mailing list
 	* @param merge whether to merge the message boards mailing list with the current session. See {@link com.liferay.portal.service.persistence.BatchSession#update(com.liferay.portal.kernel.dao.orm.Session, com.liferay.portal.model.BaseModel, boolean)} for an explanation.
 	* @return the message boards mailing list that was updated
 	* @throws SystemException if a system exception occurred
@@ -241,7 +241,7 @@ public class MBMailingListLocalServiceWrapper
 	}
 
 	/**
-	* Gets the Spring bean ID for this bean.
+	* Returns the Spring bean ID for this bean.
 	*
 	* @return the Spring bean ID for this bean
 	*/

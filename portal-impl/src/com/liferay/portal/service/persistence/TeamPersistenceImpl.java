@@ -108,7 +108,7 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	/**
 	 * Caches the team in the entity cache if it is enabled.
 	 *
-	 * @param team the team to cache
+	 * @param team the team
 	 */
 	public void cacheResult(Team team) {
 		EntityCacheUtil.putResult(TeamModelImpl.ENTITY_CACHE_ENABLED,
@@ -124,7 +124,7 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	/**
 	 * Caches the teams in the entity cache if it is enabled.
 	 *
-	 * @param teams the teams to cache
+	 * @param teams the teams
 	 */
 	public void cacheResult(List<Team> teams) {
 		for (Team team : teams) {
@@ -185,7 +185,7 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	/**
 	 * Removes the team with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param primaryKey the primary key of the team to remove
+	 * @param primaryKey the primary key of the team
 	 * @return the team that was removed
 	 * @throws com.liferay.portal.NoSuchModelException if a team with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -198,7 +198,7 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	/**
 	 * Removes the team with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param teamId the primary key of the team to remove
+	 * @param teamId the primary key of the team
 	 * @return the team that was removed
 	 * @throws com.liferay.portal.NoSuchTeamException if a team with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -236,7 +236,7 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	/**
 	 * Removes the team from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param team the team to remove
+	 * @param team the team
 	 * @return the team that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -375,9 +375,9 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	}
 
 	/**
-	 * Finds the team with the primary key or throws a {@link com.liferay.portal.NoSuchModelException} if it could not be found.
+	 * Returns the team with the primary key or throws a {@link com.liferay.portal.NoSuchModelException} if it could not be found.
 	 *
-	 * @param primaryKey the primary key of the team to find
+	 * @param primaryKey the primary key of the team
 	 * @return the team
 	 * @throws com.liferay.portal.NoSuchModelException if a team with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -388,9 +388,9 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	}
 
 	/**
-	 * Finds the team with the primary key or throws a {@link com.liferay.portal.NoSuchTeamException} if it could not be found.
+	 * Returns the team with the primary key or throws a {@link com.liferay.portal.NoSuchTeamException} if it could not be found.
 	 *
-	 * @param teamId the primary key of the team to find
+	 * @param teamId the primary key of the team
 	 * @return the team
 	 * @throws com.liferay.portal.NoSuchTeamException if a team with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -412,9 +412,9 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	}
 
 	/**
-	 * Finds the team with the primary key or returns <code>null</code> if it could not be found.
+	 * Returns the team with the primary key or returns <code>null</code> if it could not be found.
 	 *
-	 * @param primaryKey the primary key of the team to find
+	 * @param primaryKey the primary key of the team
 	 * @return the team, or <code>null</code> if a team with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -424,9 +424,9 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	}
 
 	/**
-	 * Finds the team with the primary key or returns <code>null</code> if it could not be found.
+	 * Returns the team with the primary key or returns <code>null</code> if it could not be found.
 	 *
-	 * @param teamId the primary key of the team to find
+	 * @param teamId the primary key of the team
 	 * @return the team, or <code>null</code> if a team with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -458,9 +458,9 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	}
 
 	/**
-	 * Finds all the teams where groupId = &#63;.
+	 * Returns all the teams where groupId = &#63;.
 	 *
-	 * @param groupId the group ID to search with
+	 * @param groupId the group ID
 	 * @return the matching teams
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -469,15 +469,15 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	}
 
 	/**
-	 * Finds a range of all the teams where groupId = &#63;.
+	 * Returns a range of all the teams where groupId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group ID to search with
-	 * @param start the lower bound of the range of teams to return
-	 * @param end the upper bound of the range of teams to return (not inclusive)
+	 * @param groupId the group ID
+	 * @param start the lower bound of the range of teams
+	 * @param end the upper bound of the range of teams (not inclusive)
 	 * @return the range of matching teams
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -487,15 +487,15 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	}
 
 	/**
-	 * Finds an ordered range of all the teams where groupId = &#63;.
+	 * Returns an ordered range of all the teams where groupId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group ID to search with
-	 * @param start the lower bound of the range of teams to return
-	 * @param end the upper bound of the range of teams to return (not inclusive)
+	 * @param groupId the group ID
+	 * @param start the lower bound of the range of teams
+	 * @param end the upper bound of the range of teams (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching teams
 	 * @throws SystemException if a system exception occurred
@@ -574,13 +574,13 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	}
 
 	/**
-	 * Finds the first team in the ordered set where groupId = &#63;.
+	 * Returns the first team in the ordered set where groupId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group ID to search with
+	 * @param groupId the group ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching team
 	 * @throws com.liferay.portal.NoSuchTeamException if a matching team could not be found
@@ -609,13 +609,13 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	}
 
 	/**
-	 * Finds the last team in the ordered set where groupId = &#63;.
+	 * Returns the last team in the ordered set where groupId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group ID to search with
+	 * @param groupId the group ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching team
 	 * @throws com.liferay.portal.NoSuchTeamException if a matching team could not be found
@@ -647,14 +647,14 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	}
 
 	/**
-	 * Finds the teams before and after the current team in the ordered set where groupId = &#63;.
+	 * Returns the teams before and after the current team in the ordered set where groupId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
 	 * @param teamId the primary key of the current team
-	 * @param groupId the group ID to search with
+	 * @param groupId the group ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next team
 	 * @throws com.liferay.portal.NoSuchTeamException if a team with the primary key could not be found
@@ -794,9 +794,9 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	}
 
 	/**
-	 * Filters by the user's permissions and finds all the teams where groupId = &#63;.
+	 * Returns all the teams that the user has permission to view where groupId = &#63;.
 	 *
-	 * @param groupId the group ID to search with
+	 * @param groupId the group ID
 	 * @return the matching teams that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -807,15 +807,15 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	}
 
 	/**
-	 * Filters by the user's permissions and finds a range of all the teams where groupId = &#63;.
+	 * Returns a range of all the teams that the user has permission to view where groupId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group ID to search with
-	 * @param start the lower bound of the range of teams to return
-	 * @param end the upper bound of the range of teams to return (not inclusive)
+	 * @param groupId the group ID
+	 * @param start the lower bound of the range of teams
+	 * @param end the upper bound of the range of teams (not inclusive)
 	 * @return the range of matching teams that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -825,15 +825,15 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	}
 
 	/**
-	 * Filters by the user's permissions and finds an ordered range of all the teams where groupId = &#63;.
+	 * Returns an ordered range of all the teams that the user has permissions to view where groupId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group ID to search with
-	 * @param start the lower bound of the range of teams to return
-	 * @param end the upper bound of the range of teams to return (not inclusive)
+	 * @param groupId the group ID
+	 * @param start the lower bound of the range of teams
+	 * @param end the upper bound of the range of teams (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching teams that the user has permission to view
 	 * @throws SystemException if a system exception occurred
@@ -912,14 +912,10 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	}
 
 	/**
-	 * Filters the teams before and after the current team in the ordered set where groupId = &#63;.
-	 *
-	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
-	 * </p>
+	 * Returns the teams before and after the current team in the ordered set of teams that the user has permission to view where groupId = &#63;.
 	 *
 	 * @param teamId the primary key of the current team
-	 * @param groupId the group ID to search with
+	 * @param groupId the group ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next team
 	 * @throws com.liferay.portal.NoSuchTeamException if a team with the primary key could not be found
@@ -1090,10 +1086,10 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	}
 
 	/**
-	 * Finds the team where groupId = &#63; and name = &#63; or throws a {@link com.liferay.portal.NoSuchTeamException} if it could not be found.
+	 * Returns the team where groupId = &#63; and name = &#63; or throws a {@link com.liferay.portal.NoSuchTeamException} if it could not be found.
 	 *
-	 * @param groupId the group ID to search with
-	 * @param name the name to search with
+	 * @param groupId the group ID
+	 * @param name the name
 	 * @return the matching team
 	 * @throws com.liferay.portal.NoSuchTeamException if a matching team could not be found
 	 * @throws SystemException if a system exception occurred
@@ -1126,10 +1122,10 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	}
 
 	/**
-	 * Finds the team where groupId = &#63; and name = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 * Returns the team where groupId = &#63; and name = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	 *
-	 * @param groupId the group ID to search with
-	 * @param name the name to search with
+	 * @param groupId the group ID
+	 * @param name the name
 	 * @return the matching team, or <code>null</code> if a matching team could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1138,10 +1134,10 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	}
 
 	/**
-	 * Finds the team where groupId = &#63; and name = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 * Returns the team where groupId = &#63; and name = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	 *
-	 * @param groupId the group ID to search with
-	 * @param name the name to search with
+	 * @param groupId the group ID
+	 * @param name the name
 	 * @return the matching team, or <code>null</code> if a matching team could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1242,7 +1238,7 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	}
 
 	/**
-	 * Finds all the teams.
+	 * Returns all the teams.
 	 *
 	 * @return the teams
 	 * @throws SystemException if a system exception occurred
@@ -1252,14 +1248,14 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	}
 
 	/**
-	 * Finds a range of all the teams.
+	 * Returns a range of all the teams.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param start the lower bound of the range of teams to return
-	 * @param end the upper bound of the range of teams to return (not inclusive)
+	 * @param start the lower bound of the range of teams
+	 * @param end the upper bound of the range of teams (not inclusive)
 	 * @return the range of teams
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1268,14 +1264,14 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	}
 
 	/**
-	 * Finds an ordered range of all the teams.
+	 * Returns an ordered range of all the teams.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param start the lower bound of the range of teams to return
-	 * @param end the upper bound of the range of teams to return (not inclusive)
+	 * @param start the lower bound of the range of teams
+	 * @param end the upper bound of the range of teams (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of teams
 	 * @throws SystemException if a system exception occurred
@@ -1352,7 +1348,7 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	/**
 	 * Removes all the teams where groupId = &#63; from the database.
 	 *
-	 * @param groupId the group ID to search with
+	 * @param groupId the group ID
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByGroupId(long groupId) throws SystemException {
@@ -1364,8 +1360,8 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	/**
 	 * Removes the team where groupId = &#63; and name = &#63; from the database.
 	 *
-	 * @param groupId the group ID to search with
-	 * @param name the name to search with
+	 * @param groupId the group ID
+	 * @param name the name
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByG_N(long groupId, String name)
@@ -1387,9 +1383,9 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	}
 
 	/**
-	 * Counts all the teams where groupId = &#63;.
+	 * Returns the number of teams where groupId = &#63;.
 	 *
-	 * @param groupId the group ID to search with
+	 * @param groupId the group ID
 	 * @return the number of matching teams
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1440,9 +1436,9 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	}
 
 	/**
-	 * Filters by the user's permissions and counts all the teams where groupId = &#63;.
+	 * Returns the number of teams that the user has permission to view where groupId = &#63;.
 	 *
-	 * @param groupId the group ID to search with
+	 * @param groupId the group ID
 	 * @return the number of matching teams that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1487,10 +1483,10 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	}
 
 	/**
-	 * Counts all the teams where groupId = &#63; and name = &#63;.
+	 * Returns the number of teams where groupId = &#63; and name = &#63;.
 	 *
-	 * @param groupId the group ID to search with
-	 * @param name the name to search with
+	 * @param groupId the group ID
+	 * @param name the name
 	 * @return the number of matching teams
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1557,7 +1553,7 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	}
 
 	/**
-	 * Counts all the teams.
+	 * Returns the number of teams.
 	 *
 	 * @return the number of teams
 	 * @throws SystemException if a system exception occurred
@@ -1597,9 +1593,9 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	}
 
 	/**
-	 * Gets all the users associated with the team.
+	 * Returns all the users associated with the team.
 	 *
-	 * @param pk the primary key of the team to get the associated users for
+	 * @param pk the primary key of the team
 	 * @return the users associated with the team
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1609,15 +1605,15 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	}
 
 	/**
-	 * Gets a range of all the users associated with the team.
+	 * Returns a range of all the users associated with the team.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param pk the primary key of the team to get the associated users for
-	 * @param start the lower bound of the range of teams to return
-	 * @param end the upper bound of the range of teams to return (not inclusive)
+	 * @param pk the primary key of the team
+	 * @param start the lower bound of the range of teams
+	 * @param end the upper bound of the range of teams (not inclusive)
 	 * @return the range of users associated with the team
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1635,15 +1631,15 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 			});
 
 	/**
-	 * Gets an ordered range of all the users associated with the team.
+	 * Returns an ordered range of all the users associated with the team.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param pk the primary key of the team to get the associated users for
-	 * @param start the lower bound of the range of teams to return
-	 * @param end the upper bound of the range of teams to return (not inclusive)
+	 * @param pk the primary key of the team
+	 * @param start the lower bound of the range of teams
+	 * @param end the upper bound of the range of teams (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of users associated with the team
 	 * @throws SystemException if a system exception occurred
@@ -1714,9 +1710,9 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 			new String[] { Long.class.getName() });
 
 	/**
-	 * Gets the number of users associated with the team.
+	 * Returns the number of users associated with the team.
 	 *
-	 * @param pk the primary key of the team to get the number of associated users for
+	 * @param pk the primary key of the team
 	 * @return the number of users associated with the team
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2001,7 +1997,7 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	/**
 	 * Sets the users associated with the team, removing and adding associations as necessary. Also notifies the appropriate model listeners and clears the mapping table finder cache.
 	 *
-	 * @param pk the primary key of the team to set the associations for
+	 * @param pk the primary key of the team
 	 * @param userPKs the primary keys of the users to be associated with the team
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2032,7 +2028,7 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	/**
 	 * Sets the users associated with the team, removing and adding associations as necessary. Also notifies the appropriate model listeners and clears the mapping table finder cache.
 	 *
-	 * @param pk the primary key of the team to set the associations for
+	 * @param pk the primary key of the team
 	 * @param users the users to be associated with the team
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2058,9 +2054,9 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	}
 
 	/**
-	 * Gets all the user groups associated with the team.
+	 * Returns all the user groups associated with the team.
 	 *
-	 * @param pk the primary key of the team to get the associated user groups for
+	 * @param pk the primary key of the team
 	 * @return the user groups associated with the team
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2070,15 +2066,15 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	}
 
 	/**
-	 * Gets a range of all the user groups associated with the team.
+	 * Returns a range of all the user groups associated with the team.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param pk the primary key of the team to get the associated user groups for
-	 * @param start the lower bound of the range of teams to return
-	 * @param end the upper bound of the range of teams to return (not inclusive)
+	 * @param pk the primary key of the team
+	 * @param start the lower bound of the range of teams
+	 * @param end the upper bound of the range of teams (not inclusive)
 	 * @return the range of user groups associated with the team
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2096,15 +2092,15 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 			});
 
 	/**
-	 * Gets an ordered range of all the user groups associated with the team.
+	 * Returns an ordered range of all the user groups associated with the team.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param pk the primary key of the team to get the associated user groups for
-	 * @param start the lower bound of the range of teams to return
-	 * @param end the upper bound of the range of teams to return (not inclusive)
+	 * @param pk the primary key of the team
+	 * @param start the lower bound of the range of teams
+	 * @param end the upper bound of the range of teams (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of user groups associated with the team
 	 * @throws SystemException if a system exception occurred
@@ -2176,9 +2172,9 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 			"getUserGroupsSize", new String[] { Long.class.getName() });
 
 	/**
-	 * Gets the number of user groups associated with the team.
+	 * Returns the number of user groups associated with the team.
 	 *
-	 * @param pk the primary key of the team to get the number of associated user groups for
+	 * @param pk the primary key of the team
 	 * @return the number of user groups associated with the team
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2472,7 +2468,7 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	/**
 	 * Sets the user groups associated with the team, removing and adding associations as necessary. Also notifies the appropriate model listeners and clears the mapping table finder cache.
 	 *
-	 * @param pk the primary key of the team to set the associations for
+	 * @param pk the primary key of the team
 	 * @param userGroupPKs the primary keys of the user groups to be associated with the team
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2504,7 +2500,7 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	/**
 	 * Sets the user groups associated with the team, removing and adding associations as necessary. Also notifies the appropriate model listeners and clears the mapping table finder cache.
 	 *
-	 * @param pk the primary key of the team to set the associations for
+	 * @param pk the primary key of the team
 	 * @param userGroups the user groups to be associated with the team
 	 * @throws SystemException if a system exception occurred
 	 */

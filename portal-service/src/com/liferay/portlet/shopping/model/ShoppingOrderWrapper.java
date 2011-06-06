@@ -37,7 +37,7 @@ public class ShoppingOrderWrapper implements ShoppingOrder {
 	}
 
 	/**
-	* Gets the primary key of this shopping order.
+	* Returns the primary key of this shopping order.
 	*
 	* @return the primary key of this shopping order
 	*/
@@ -46,7 +46,7 @@ public class ShoppingOrderWrapper implements ShoppingOrder {
 	}
 
 	/**
-	* Sets the primary key of this shopping order
+	* Sets the primary key of this shopping order.
 	*
 	* @param primaryKey the primary key of this shopping order
 	*/
@@ -55,7 +55,7 @@ public class ShoppingOrderWrapper implements ShoppingOrder {
 	}
 
 	/**
-	* Gets the order ID of this shopping order.
+	* Returns the order ID of this shopping order.
 	*
 	* @return the order ID of this shopping order
 	*/
@@ -73,7 +73,7 @@ public class ShoppingOrderWrapper implements ShoppingOrder {
 	}
 
 	/**
-	* Gets the group ID of this shopping order.
+	* Returns the group ID of this shopping order.
 	*
 	* @return the group ID of this shopping order
 	*/
@@ -91,7 +91,7 @@ public class ShoppingOrderWrapper implements ShoppingOrder {
 	}
 
 	/**
-	* Gets the company ID of this shopping order.
+	* Returns the company ID of this shopping order.
 	*
 	* @return the company ID of this shopping order
 	*/
@@ -109,7 +109,7 @@ public class ShoppingOrderWrapper implements ShoppingOrder {
 	}
 
 	/**
-	* Gets the user ID of this shopping order.
+	* Returns the user ID of this shopping order.
 	*
 	* @return the user ID of this shopping order
 	*/
@@ -127,7 +127,7 @@ public class ShoppingOrderWrapper implements ShoppingOrder {
 	}
 
 	/**
-	* Gets the user uuid of this shopping order.
+	* Returns the user uuid of this shopping order.
 	*
 	* @return the user uuid of this shopping order
 	* @throws SystemException if a system exception occurred
@@ -147,7 +147,7 @@ public class ShoppingOrderWrapper implements ShoppingOrder {
 	}
 
 	/**
-	* Gets the user name of this shopping order.
+	* Returns the user name of this shopping order.
 	*
 	* @return the user name of this shopping order
 	*/
@@ -165,7 +165,7 @@ public class ShoppingOrderWrapper implements ShoppingOrder {
 	}
 
 	/**
-	* Gets the create date of this shopping order.
+	* Returns the create date of this shopping order.
 	*
 	* @return the create date of this shopping order
 	*/
@@ -183,7 +183,7 @@ public class ShoppingOrderWrapper implements ShoppingOrder {
 	}
 
 	/**
-	* Gets the modified date of this shopping order.
+	* Returns the modified date of this shopping order.
 	*
 	* @return the modified date of this shopping order
 	*/
@@ -201,7 +201,7 @@ public class ShoppingOrderWrapper implements ShoppingOrder {
 	}
 
 	/**
-	* Gets the number of this shopping order.
+	* Returns the number of this shopping order.
 	*
 	* @return the number of this shopping order
 	*/
@@ -219,7 +219,7 @@ public class ShoppingOrderWrapper implements ShoppingOrder {
 	}
 
 	/**
-	* Gets the tax of this shopping order.
+	* Returns the tax of this shopping order.
 	*
 	* @return the tax of this shopping order
 	*/
@@ -237,7 +237,7 @@ public class ShoppingOrderWrapper implements ShoppingOrder {
 	}
 
 	/**
-	* Gets the shipping of this shopping order.
+	* Returns the shipping of this shopping order.
 	*
 	* @return the shipping of this shopping order
 	*/
@@ -255,7 +255,7 @@ public class ShoppingOrderWrapper implements ShoppingOrder {
 	}
 
 	/**
-	* Gets the alt shipping of this shopping order.
+	* Returns the alt shipping of this shopping order.
 	*
 	* @return the alt shipping of this shopping order
 	*/
@@ -273,7 +273,7 @@ public class ShoppingOrderWrapper implements ShoppingOrder {
 	}
 
 	/**
-	* Gets the requires shipping of this shopping order.
+	* Returns the requires shipping of this shopping order.
 	*
 	* @return the requires shipping of this shopping order
 	*/
@@ -300,7 +300,7 @@ public class ShoppingOrderWrapper implements ShoppingOrder {
 	}
 
 	/**
-	* Gets the insure of this shopping order.
+	* Returns the insure of this shopping order.
 	*
 	* @return the insure of this shopping order
 	*/
@@ -327,7 +327,7 @@ public class ShoppingOrderWrapper implements ShoppingOrder {
 	}
 
 	/**
-	* Gets the insurance of this shopping order.
+	* Returns the insurance of this shopping order.
 	*
 	* @return the insurance of this shopping order
 	*/
@@ -345,7 +345,7 @@ public class ShoppingOrderWrapper implements ShoppingOrder {
 	}
 
 	/**
-	* Gets the coupon codes of this shopping order.
+	* Returns the coupon codes of this shopping order.
 	*
 	* @return the coupon codes of this shopping order
 	*/
@@ -363,7 +363,7 @@ public class ShoppingOrderWrapper implements ShoppingOrder {
 	}
 
 	/**
-	* Gets the coupon discount of this shopping order.
+	* Returns the coupon discount of this shopping order.
 	*
 	* @return the coupon discount of this shopping order
 	*/
@@ -381,7 +381,7 @@ public class ShoppingOrderWrapper implements ShoppingOrder {
 	}
 
 	/**
-	* Gets the billing first name of this shopping order.
+	* Returns the billing first name of this shopping order.
 	*
 	* @return the billing first name of this shopping order
 	*/
@@ -399,7 +399,7 @@ public class ShoppingOrderWrapper implements ShoppingOrder {
 	}
 
 	/**
-	* Gets the billing last name of this shopping order.
+	* Returns the billing last name of this shopping order.
 	*
 	* @return the billing last name of this shopping order
 	*/
@@ -417,7 +417,7 @@ public class ShoppingOrderWrapper implements ShoppingOrder {
 	}
 
 	/**
-	* Gets the billing email address of this shopping order.
+	* Returns the billing email address of this shopping order.
 	*
 	* @return the billing email address of this shopping order
 	*/
@@ -435,7 +435,7 @@ public class ShoppingOrderWrapper implements ShoppingOrder {
 	}
 
 	/**
-	* Gets the billing company of this shopping order.
+	* Returns the billing company of this shopping order.
 	*
 	* @return the billing company of this shopping order
 	*/
@@ -453,7 +453,7 @@ public class ShoppingOrderWrapper implements ShoppingOrder {
 	}
 
 	/**
-	* Gets the billing street of this shopping order.
+	* Returns the billing street of this shopping order.
 	*
 	* @return the billing street of this shopping order
 	*/
@@ -471,7 +471,7 @@ public class ShoppingOrderWrapper implements ShoppingOrder {
 	}
 
 	/**
-	* Gets the billing city of this shopping order.
+	* Returns the billing city of this shopping order.
 	*
 	* @return the billing city of this shopping order
 	*/
@@ -489,7 +489,7 @@ public class ShoppingOrderWrapper implements ShoppingOrder {
 	}
 
 	/**
-	* Gets the billing state of this shopping order.
+	* Returns the billing state of this shopping order.
 	*
 	* @return the billing state of this shopping order
 	*/
@@ -507,7 +507,7 @@ public class ShoppingOrderWrapper implements ShoppingOrder {
 	}
 
 	/**
-	* Gets the billing zip of this shopping order.
+	* Returns the billing zip of this shopping order.
 	*
 	* @return the billing zip of this shopping order
 	*/
@@ -525,7 +525,7 @@ public class ShoppingOrderWrapper implements ShoppingOrder {
 	}
 
 	/**
-	* Gets the billing country of this shopping order.
+	* Returns the billing country of this shopping order.
 	*
 	* @return the billing country of this shopping order
 	*/
@@ -543,7 +543,7 @@ public class ShoppingOrderWrapper implements ShoppingOrder {
 	}
 
 	/**
-	* Gets the billing phone of this shopping order.
+	* Returns the billing phone of this shopping order.
 	*
 	* @return the billing phone of this shopping order
 	*/
@@ -561,7 +561,7 @@ public class ShoppingOrderWrapper implements ShoppingOrder {
 	}
 
 	/**
-	* Gets the ship to billing of this shopping order.
+	* Returns the ship to billing of this shopping order.
 	*
 	* @return the ship to billing of this shopping order
 	*/
@@ -588,7 +588,7 @@ public class ShoppingOrderWrapper implements ShoppingOrder {
 	}
 
 	/**
-	* Gets the shipping first name of this shopping order.
+	* Returns the shipping first name of this shopping order.
 	*
 	* @return the shipping first name of this shopping order
 	*/
@@ -606,7 +606,7 @@ public class ShoppingOrderWrapper implements ShoppingOrder {
 	}
 
 	/**
-	* Gets the shipping last name of this shopping order.
+	* Returns the shipping last name of this shopping order.
 	*
 	* @return the shipping last name of this shopping order
 	*/
@@ -624,7 +624,7 @@ public class ShoppingOrderWrapper implements ShoppingOrder {
 	}
 
 	/**
-	* Gets the shipping email address of this shopping order.
+	* Returns the shipping email address of this shopping order.
 	*
 	* @return the shipping email address of this shopping order
 	*/
@@ -642,7 +642,7 @@ public class ShoppingOrderWrapper implements ShoppingOrder {
 	}
 
 	/**
-	* Gets the shipping company of this shopping order.
+	* Returns the shipping company of this shopping order.
 	*
 	* @return the shipping company of this shopping order
 	*/
@@ -660,7 +660,7 @@ public class ShoppingOrderWrapper implements ShoppingOrder {
 	}
 
 	/**
-	* Gets the shipping street of this shopping order.
+	* Returns the shipping street of this shopping order.
 	*
 	* @return the shipping street of this shopping order
 	*/
@@ -678,7 +678,7 @@ public class ShoppingOrderWrapper implements ShoppingOrder {
 	}
 
 	/**
-	* Gets the shipping city of this shopping order.
+	* Returns the shipping city of this shopping order.
 	*
 	* @return the shipping city of this shopping order
 	*/
@@ -696,7 +696,7 @@ public class ShoppingOrderWrapper implements ShoppingOrder {
 	}
 
 	/**
-	* Gets the shipping state of this shopping order.
+	* Returns the shipping state of this shopping order.
 	*
 	* @return the shipping state of this shopping order
 	*/
@@ -714,7 +714,7 @@ public class ShoppingOrderWrapper implements ShoppingOrder {
 	}
 
 	/**
-	* Gets the shipping zip of this shopping order.
+	* Returns the shipping zip of this shopping order.
 	*
 	* @return the shipping zip of this shopping order
 	*/
@@ -732,7 +732,7 @@ public class ShoppingOrderWrapper implements ShoppingOrder {
 	}
 
 	/**
-	* Gets the shipping country of this shopping order.
+	* Returns the shipping country of this shopping order.
 	*
 	* @return the shipping country of this shopping order
 	*/
@@ -750,7 +750,7 @@ public class ShoppingOrderWrapper implements ShoppingOrder {
 	}
 
 	/**
-	* Gets the shipping phone of this shopping order.
+	* Returns the shipping phone of this shopping order.
 	*
 	* @return the shipping phone of this shopping order
 	*/
@@ -768,7 +768,7 @@ public class ShoppingOrderWrapper implements ShoppingOrder {
 	}
 
 	/**
-	* Gets the cc name of this shopping order.
+	* Returns the cc name of this shopping order.
 	*
 	* @return the cc name of this shopping order
 	*/
@@ -786,7 +786,7 @@ public class ShoppingOrderWrapper implements ShoppingOrder {
 	}
 
 	/**
-	* Gets the cc type of this shopping order.
+	* Returns the cc type of this shopping order.
 	*
 	* @return the cc type of this shopping order
 	*/
@@ -804,7 +804,7 @@ public class ShoppingOrderWrapper implements ShoppingOrder {
 	}
 
 	/**
-	* Gets the cc number of this shopping order.
+	* Returns the cc number of this shopping order.
 	*
 	* @return the cc number of this shopping order
 	*/
@@ -822,7 +822,7 @@ public class ShoppingOrderWrapper implements ShoppingOrder {
 	}
 
 	/**
-	* Gets the cc exp month of this shopping order.
+	* Returns the cc exp month of this shopping order.
 	*
 	* @return the cc exp month of this shopping order
 	*/
@@ -840,7 +840,7 @@ public class ShoppingOrderWrapper implements ShoppingOrder {
 	}
 
 	/**
-	* Gets the cc exp year of this shopping order.
+	* Returns the cc exp year of this shopping order.
 	*
 	* @return the cc exp year of this shopping order
 	*/
@@ -858,7 +858,7 @@ public class ShoppingOrderWrapper implements ShoppingOrder {
 	}
 
 	/**
-	* Gets the cc ver number of this shopping order.
+	* Returns the cc ver number of this shopping order.
 	*
 	* @return the cc ver number of this shopping order
 	*/
@@ -876,7 +876,7 @@ public class ShoppingOrderWrapper implements ShoppingOrder {
 	}
 
 	/**
-	* Gets the comments of this shopping order.
+	* Returns the comments of this shopping order.
 	*
 	* @return the comments of this shopping order
 	*/
@@ -894,7 +894,7 @@ public class ShoppingOrderWrapper implements ShoppingOrder {
 	}
 
 	/**
-	* Gets the pp txn ID of this shopping order.
+	* Returns the pp txn ID of this shopping order.
 	*
 	* @return the pp txn ID of this shopping order
 	*/
@@ -912,7 +912,7 @@ public class ShoppingOrderWrapper implements ShoppingOrder {
 	}
 
 	/**
-	* Gets the pp payment status of this shopping order.
+	* Returns the pp payment status of this shopping order.
 	*
 	* @return the pp payment status of this shopping order
 	*/
@@ -930,7 +930,7 @@ public class ShoppingOrderWrapper implements ShoppingOrder {
 	}
 
 	/**
-	* Gets the pp payment gross of this shopping order.
+	* Returns the pp payment gross of this shopping order.
 	*
 	* @return the pp payment gross of this shopping order
 	*/
@@ -948,7 +948,7 @@ public class ShoppingOrderWrapper implements ShoppingOrder {
 	}
 
 	/**
-	* Gets the pp receiver email of this shopping order.
+	* Returns the pp receiver email of this shopping order.
 	*
 	* @return the pp receiver email of this shopping order
 	*/
@@ -966,7 +966,7 @@ public class ShoppingOrderWrapper implements ShoppingOrder {
 	}
 
 	/**
-	* Gets the pp payer email of this shopping order.
+	* Returns the pp payer email of this shopping order.
 	*
 	* @return the pp payer email of this shopping order
 	*/
@@ -984,7 +984,7 @@ public class ShoppingOrderWrapper implements ShoppingOrder {
 	}
 
 	/**
-	* Gets the send order email of this shopping order.
+	* Returns the send order email of this shopping order.
 	*
 	* @return the send order email of this shopping order
 	*/
@@ -1011,7 +1011,7 @@ public class ShoppingOrderWrapper implements ShoppingOrder {
 	}
 
 	/**
-	* Gets the send shipping email of this shopping order.
+	* Returns the send shipping email of this shopping order.
 	*
 	* @return the send shipping email of this shopping order
 	*/

@@ -42,21 +42,21 @@ public interface VirtualHostModel extends BaseModel<VirtualHost> {
 	 */
 
 	/**
-	 * Gets the primary key of this virtual host.
+	 * Returns the primary key of this virtual host.
 	 *
 	 * @return the primary key of this virtual host
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this virtual host
+	 * Sets the primary key of this virtual host.
 	 *
 	 * @param primaryKey the primary key of this virtual host
 	 */
 	public void setPrimaryKey(long primaryKey);
 
 	/**
-	 * Gets the virtual host ID of this virtual host.
+	 * Returns the virtual host ID of this virtual host.
 	 *
 	 * @return the virtual host ID of this virtual host
 	 */
@@ -70,7 +70,7 @@ public interface VirtualHostModel extends BaseModel<VirtualHost> {
 	public void setVirtualHostId(long virtualHostId);
 
 	/**
-	 * Gets the company ID of this virtual host.
+	 * Returns the company ID of this virtual host.
 	 *
 	 * @return the company ID of this virtual host
 	 */
@@ -84,7 +84,7 @@ public interface VirtualHostModel extends BaseModel<VirtualHost> {
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the layout set ID of this virtual host.
+	 * Returns the layout set ID of this virtual host.
 	 *
 	 * @return the layout set ID of this virtual host
 	 */
@@ -98,7 +98,7 @@ public interface VirtualHostModel extends BaseModel<VirtualHost> {
 	public void setLayoutSetId(long layoutSetId);
 
 	/**
-	 * Gets the hostname of this virtual host.
+	 * Returns the hostname of this virtual host.
 	 *
 	 * @return the hostname of this virtual host
 	 */

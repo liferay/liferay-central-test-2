@@ -29,7 +29,7 @@ public class DLAppLocalServiceWrapper implements DLAppLocalService {
 	}
 
 	/**
-	* Gets the Spring bean ID for this bean.
+	* Returns the Spring bean ID for this bean.
 	*
 	* @return the Spring bean ID for this bean
 	*/

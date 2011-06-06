@@ -43,21 +43,21 @@ public interface GroupModel extends AttachedModel, BaseModel<Group> {
 	 */
 
 	/**
-	 * Gets the primary key of this group.
+	 * Returns the primary key of this group.
 	 *
 	 * @return the primary key of this group
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this group
+	 * Sets the primary key of this group.
 	 *
 	 * @param primaryKey the primary key of this group
 	 */
 	public void setPrimaryKey(long primaryKey);
 
 	/**
-	 * Gets the group ID of this group.
+	 * Returns the group ID of this group.
 	 *
 	 * @return the group ID of this group
 	 */
@@ -71,7 +71,7 @@ public interface GroupModel extends AttachedModel, BaseModel<Group> {
 	public void setGroupId(long groupId);
 
 	/**
-	 * Gets the company ID of this group.
+	 * Returns the company ID of this group.
 	 *
 	 * @return the company ID of this group
 	 */
@@ -85,7 +85,7 @@ public interface GroupModel extends AttachedModel, BaseModel<Group> {
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the creator user ID of this group.
+	 * Returns the creator user ID of this group.
 	 *
 	 * @return the creator user ID of this group
 	 */
@@ -99,7 +99,7 @@ public interface GroupModel extends AttachedModel, BaseModel<Group> {
 	public void setCreatorUserId(long creatorUserId);
 
 	/**
-	 * Gets the creator user uuid of this group.
+	 * Returns the creator user uuid of this group.
 	 *
 	 * @return the creator user uuid of this group
 	 * @throws SystemException if a system exception occurred
@@ -114,14 +114,14 @@ public interface GroupModel extends AttachedModel, BaseModel<Group> {
 	public void setCreatorUserUuid(String creatorUserUuid);
 
 	/**
-	 * Gets the class name of the model instance this group is polymorphically associated with.
+	 * Returns the fully qualified class name of this group.
 	 *
-	 * @return the class name of the model instance this group is polymorphically associated with
+	 * @return the fully qualified class name of this group
 	 */
 	public String getClassName();
 
 	/**
-	 * Gets the class name ID of this group.
+	 * Returns the class name ID of this group.
 	 *
 	 * @return the class name ID of this group
 	 */
@@ -135,7 +135,7 @@ public interface GroupModel extends AttachedModel, BaseModel<Group> {
 	public void setClassNameId(long classNameId);
 
 	/**
-	 * Gets the class p k of this group.
+	 * Returns the class p k of this group.
 	 *
 	 * @return the class p k of this group
 	 */
@@ -149,7 +149,7 @@ public interface GroupModel extends AttachedModel, BaseModel<Group> {
 	public void setClassPK(long classPK);
 
 	/**
-	 * Gets the parent group ID of this group.
+	 * Returns the parent group ID of this group.
 	 *
 	 * @return the parent group ID of this group
 	 */
@@ -163,7 +163,7 @@ public interface GroupModel extends AttachedModel, BaseModel<Group> {
 	public void setParentGroupId(long parentGroupId);
 
 	/**
-	 * Gets the live group ID of this group.
+	 * Returns the live group ID of this group.
 	 *
 	 * @return the live group ID of this group
 	 */
@@ -177,7 +177,7 @@ public interface GroupModel extends AttachedModel, BaseModel<Group> {
 	public void setLiveGroupId(long liveGroupId);
 
 	/**
-	 * Gets the name of this group.
+	 * Returns the name of this group.
 	 *
 	 * @return the name of this group
 	 */
@@ -192,7 +192,7 @@ public interface GroupModel extends AttachedModel, BaseModel<Group> {
 	public void setName(String name);
 
 	/**
-	 * Gets the description of this group.
+	 * Returns the description of this group.
 	 *
 	 * @return the description of this group
 	 */
@@ -207,7 +207,7 @@ public interface GroupModel extends AttachedModel, BaseModel<Group> {
 	public void setDescription(String description);
 
 	/**
-	 * Gets the type of this group.
+	 * Returns the type of this group.
 	 *
 	 * @return the type of this group
 	 */
@@ -221,7 +221,7 @@ public interface GroupModel extends AttachedModel, BaseModel<Group> {
 	public void setType(int type);
 
 	/**
-	 * Gets the type settings of this group.
+	 * Returns the type settings of this group.
 	 *
 	 * @return the type settings of this group
 	 */
@@ -236,7 +236,7 @@ public interface GroupModel extends AttachedModel, BaseModel<Group> {
 	public void setTypeSettings(String typeSettings);
 
 	/**
-	 * Gets the friendly u r l of this group.
+	 * Returns the friendly u r l of this group.
 	 *
 	 * @return the friendly u r l of this group
 	 */
@@ -251,7 +251,7 @@ public interface GroupModel extends AttachedModel, BaseModel<Group> {
 	public void setFriendlyURL(String friendlyURL);
 
 	/**
-	 * Gets the site of this group.
+	 * Returns the site of this group.
 	 *
 	 * @return the site of this group
 	 */
@@ -272,7 +272,7 @@ public interface GroupModel extends AttachedModel, BaseModel<Group> {
 	public void setSite(boolean site);
 
 	/**
-	 * Gets the active of this group.
+	 * Returns the active of this group.
 	 *
 	 * @return the active of this group
 	 */

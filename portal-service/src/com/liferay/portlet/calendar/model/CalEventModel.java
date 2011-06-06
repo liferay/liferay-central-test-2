@@ -47,21 +47,21 @@ public interface CalEventModel extends BaseModel<CalEvent>, GroupedModel {
 	 */
 
 	/**
-	 * Gets the primary key of this cal event.
+	 * Returns the primary key of this cal event.
 	 *
 	 * @return the primary key of this cal event
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this cal event
+	 * Sets the primary key of this cal event.
 	 *
 	 * @param primaryKey the primary key of this cal event
 	 */
 	public void setPrimaryKey(long primaryKey);
 
 	/**
-	 * Gets the uuid of this cal event.
+	 * Returns the uuid of this cal event.
 	 *
 	 * @return the uuid of this cal event
 	 */
@@ -76,7 +76,7 @@ public interface CalEventModel extends BaseModel<CalEvent>, GroupedModel {
 	public void setUuid(String uuid);
 
 	/**
-	 * Gets the event ID of this cal event.
+	 * Returns the event ID of this cal event.
 	 *
 	 * @return the event ID of this cal event
 	 */
@@ -90,7 +90,7 @@ public interface CalEventModel extends BaseModel<CalEvent>, GroupedModel {
 	public void setEventId(long eventId);
 
 	/**
-	 * Gets the group ID of this cal event.
+	 * Returns the group ID of this cal event.
 	 *
 	 * @return the group ID of this cal event
 	 */
@@ -104,7 +104,7 @@ public interface CalEventModel extends BaseModel<CalEvent>, GroupedModel {
 	public void setGroupId(long groupId);
 
 	/**
-	 * Gets the company ID of this cal event.
+	 * Returns the company ID of this cal event.
 	 *
 	 * @return the company ID of this cal event
 	 */
@@ -118,7 +118,7 @@ public interface CalEventModel extends BaseModel<CalEvent>, GroupedModel {
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the user ID of this cal event.
+	 * Returns the user ID of this cal event.
 	 *
 	 * @return the user ID of this cal event
 	 */
@@ -132,7 +132,7 @@ public interface CalEventModel extends BaseModel<CalEvent>, GroupedModel {
 	public void setUserId(long userId);
 
 	/**
-	 * Gets the user uuid of this cal event.
+	 * Returns the user uuid of this cal event.
 	 *
 	 * @return the user uuid of this cal event
 	 * @throws SystemException if a system exception occurred
@@ -147,7 +147,7 @@ public interface CalEventModel extends BaseModel<CalEvent>, GroupedModel {
 	public void setUserUuid(String userUuid);
 
 	/**
-	 * Gets the user name of this cal event.
+	 * Returns the user name of this cal event.
 	 *
 	 * @return the user name of this cal event
 	 */
@@ -162,7 +162,7 @@ public interface CalEventModel extends BaseModel<CalEvent>, GroupedModel {
 	public void setUserName(String userName);
 
 	/**
-	 * Gets the create date of this cal event.
+	 * Returns the create date of this cal event.
 	 *
 	 * @return the create date of this cal event
 	 */
@@ -176,7 +176,7 @@ public interface CalEventModel extends BaseModel<CalEvent>, GroupedModel {
 	public void setCreateDate(Date createDate);
 
 	/**
-	 * Gets the modified date of this cal event.
+	 * Returns the modified date of this cal event.
 	 *
 	 * @return the modified date of this cal event
 	 */
@@ -190,7 +190,7 @@ public interface CalEventModel extends BaseModel<CalEvent>, GroupedModel {
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
-	 * Gets the title of this cal event.
+	 * Returns the title of this cal event.
 	 *
 	 * @return the title of this cal event
 	 */
@@ -205,7 +205,7 @@ public interface CalEventModel extends BaseModel<CalEvent>, GroupedModel {
 	public void setTitle(String title);
 
 	/**
-	 * Gets the description of this cal event.
+	 * Returns the description of this cal event.
 	 *
 	 * @return the description of this cal event
 	 */
@@ -220,7 +220,7 @@ public interface CalEventModel extends BaseModel<CalEvent>, GroupedModel {
 	public void setDescription(String description);
 
 	/**
-	 * Gets the location of this cal event.
+	 * Returns the location of this cal event.
 	 *
 	 * @return the location of this cal event
 	 */
@@ -235,7 +235,7 @@ public interface CalEventModel extends BaseModel<CalEvent>, GroupedModel {
 	public void setLocation(String location);
 
 	/**
-	 * Gets the start date of this cal event.
+	 * Returns the start date of this cal event.
 	 *
 	 * @return the start date of this cal event
 	 */
@@ -249,7 +249,7 @@ public interface CalEventModel extends BaseModel<CalEvent>, GroupedModel {
 	public void setStartDate(Date startDate);
 
 	/**
-	 * Gets the end date of this cal event.
+	 * Returns the end date of this cal event.
 	 *
 	 * @return the end date of this cal event
 	 */
@@ -263,7 +263,7 @@ public interface CalEventModel extends BaseModel<CalEvent>, GroupedModel {
 	public void setEndDate(Date endDate);
 
 	/**
-	 * Gets the duration hour of this cal event.
+	 * Returns the duration hour of this cal event.
 	 *
 	 * @return the duration hour of this cal event
 	 */
@@ -277,7 +277,7 @@ public interface CalEventModel extends BaseModel<CalEvent>, GroupedModel {
 	public void setDurationHour(int durationHour);
 
 	/**
-	 * Gets the duration minute of this cal event.
+	 * Returns the duration minute of this cal event.
 	 *
 	 * @return the duration minute of this cal event
 	 */
@@ -291,7 +291,7 @@ public interface CalEventModel extends BaseModel<CalEvent>, GroupedModel {
 	public void setDurationMinute(int durationMinute);
 
 	/**
-	 * Gets the all day of this cal event.
+	 * Returns the all day of this cal event.
 	 *
 	 * @return the all day of this cal event
 	 */
@@ -312,7 +312,7 @@ public interface CalEventModel extends BaseModel<CalEvent>, GroupedModel {
 	public void setAllDay(boolean allDay);
 
 	/**
-	 * Gets the time zone sensitive of this cal event.
+	 * Returns the time zone sensitive of this cal event.
 	 *
 	 * @return the time zone sensitive of this cal event
 	 */
@@ -333,7 +333,7 @@ public interface CalEventModel extends BaseModel<CalEvent>, GroupedModel {
 	public void setTimeZoneSensitive(boolean timeZoneSensitive);
 
 	/**
-	 * Gets the type of this cal event.
+	 * Returns the type of this cal event.
 	 *
 	 * @return the type of this cal event
 	 */
@@ -348,7 +348,7 @@ public interface CalEventModel extends BaseModel<CalEvent>, GroupedModel {
 	public void setType(String type);
 
 	/**
-	 * Gets the repeating of this cal event.
+	 * Returns the repeating of this cal event.
 	 *
 	 * @return the repeating of this cal event
 	 */
@@ -369,7 +369,7 @@ public interface CalEventModel extends BaseModel<CalEvent>, GroupedModel {
 	public void setRepeating(boolean repeating);
 
 	/**
-	 * Gets the recurrence of this cal event.
+	 * Returns the recurrence of this cal event.
 	 *
 	 * @return the recurrence of this cal event
 	 */
@@ -383,7 +383,7 @@ public interface CalEventModel extends BaseModel<CalEvent>, GroupedModel {
 	public void setRecurrence(String recurrence);
 
 	/**
-	 * Gets the remind by of this cal event.
+	 * Returns the remind by of this cal event.
 	 *
 	 * @return the remind by of this cal event
 	 */
@@ -397,7 +397,7 @@ public interface CalEventModel extends BaseModel<CalEvent>, GroupedModel {
 	public void setRemindBy(int remindBy);
 
 	/**
-	 * Gets the first reminder of this cal event.
+	 * Returns the first reminder of this cal event.
 	 *
 	 * @return the first reminder of this cal event
 	 */
@@ -411,7 +411,7 @@ public interface CalEventModel extends BaseModel<CalEvent>, GroupedModel {
 	public void setFirstReminder(int firstReminder);
 
 	/**
-	 * Gets the second reminder of this cal event.
+	 * Returns the second reminder of this cal event.
 	 *
 	 * @return the second reminder of this cal event
 	 */

@@ -33,7 +33,7 @@ public class WorkflowInstanceLinkLocalServiceWrapper
 	/**
 	* Adds the workflow instance link to the database. Also notifies the appropriate model listeners.
 	*
-	* @param workflowInstanceLink the workflow instance link to add
+	* @param workflowInstanceLink the workflow instance link
 	* @return the workflow instance link that was added
 	* @throws SystemException if a system exception occurred
 	*/
@@ -57,7 +57,7 @@ public class WorkflowInstanceLinkLocalServiceWrapper
 	/**
 	* Deletes the workflow instance link with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param workflowInstanceLinkId the primary key of the workflow instance link to delete
+	* @param workflowInstanceLinkId the primary key of the workflow instance link
 	* @throws PortalException if a workflow instance link with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -70,7 +70,7 @@ public class WorkflowInstanceLinkLocalServiceWrapper
 	/**
 	* Deletes the workflow instance link from the database. Also notifies the appropriate model listeners.
 	*
-	* @param workflowInstanceLink the workflow instance link to delete
+	* @param workflowInstanceLink the workflow instance link
 	* @throws SystemException if a system exception occurred
 	*/
 	public void deleteWorkflowInstanceLink(
@@ -82,7 +82,7 @@ public class WorkflowInstanceLinkLocalServiceWrapper
 	/**
 	* Performs a dynamic query on the database and returns the matching rows.
 	*
-	* @param dynamicQuery the dynamic query to search with
+	* @param dynamicQuery the dynamic query
 	* @return the matching rows
 	* @throws SystemException if a system exception occurred
 	*/
@@ -100,9 +100,9 @@ public class WorkflowInstanceLinkLocalServiceWrapper
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param dynamicQuery the dynamic query to search with
-	* @param start the lower bound of the range of model instances to return
-	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param dynamicQuery the dynamic query
+	* @param start the lower bound of the range of model instances
+	* @param end the upper bound of the range of model instances (not inclusive)
 	* @return the range of matching rows
 	* @throws SystemException if a system exception occurred
 	*/
@@ -121,9 +121,9 @@ public class WorkflowInstanceLinkLocalServiceWrapper
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param dynamicQuery the dynamic query to search with
-	* @param start the lower bound of the range of model instances to return
-	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param dynamicQuery the dynamic query
+	* @param start the lower bound of the range of model instances
+	* @param end the upper bound of the range of model instances (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching rows
 	* @throws SystemException if a system exception occurred
@@ -139,9 +139,9 @@ public class WorkflowInstanceLinkLocalServiceWrapper
 	}
 
 	/**
-	* Counts the number of rows that match the dynamic query.
+	* Returns the number of rows that match the dynamic query.
 	*
-	* @param dynamicQuery the dynamic query to search with
+	* @param dynamicQuery the dynamic query
 	* @return the number of rows that match the dynamic query
 	* @throws SystemException if a system exception occurred
 	*/
@@ -152,9 +152,9 @@ public class WorkflowInstanceLinkLocalServiceWrapper
 	}
 
 	/**
-	* Gets the workflow instance link with the primary key.
+	* Returns the workflow instance link with the primary key.
 	*
-	* @param workflowInstanceLinkId the primary key of the workflow instance link to get
+	* @param workflowInstanceLinkId the primary key of the workflow instance link
 	* @return the workflow instance link
 	* @throws PortalException if a workflow instance link with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -167,14 +167,14 @@ public class WorkflowInstanceLinkLocalServiceWrapper
 	}
 
 	/**
-	* Gets a range of all the workflow instance links.
+	* Returns a range of all the workflow instance links.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of workflow instance links to return
-	* @param end the upper bound of the range of workflow instance links to return (not inclusive)
+	* @param start the lower bound of the range of workflow instance links
+	* @param end the upper bound of the range of workflow instance links (not inclusive)
 	* @return the range of workflow instance links
 	* @throws SystemException if a system exception occurred
 	*/
@@ -186,7 +186,7 @@ public class WorkflowInstanceLinkLocalServiceWrapper
 	}
 
 	/**
-	* Gets the number of workflow instance links.
+	* Returns the number of workflow instance links.
 	*
 	* @return the number of workflow instance links
 	* @throws SystemException if a system exception occurred
@@ -199,7 +199,7 @@ public class WorkflowInstanceLinkLocalServiceWrapper
 	/**
 	* Updates the workflow instance link in the database. Also notifies the appropriate model listeners.
 	*
-	* @param workflowInstanceLink the workflow instance link to update
+	* @param workflowInstanceLink the workflow instance link
 	* @return the workflow instance link that was updated
 	* @throws SystemException if a system exception occurred
 	*/
@@ -212,7 +212,7 @@ public class WorkflowInstanceLinkLocalServiceWrapper
 	/**
 	* Updates the workflow instance link in the database. Also notifies the appropriate model listeners.
 	*
-	* @param workflowInstanceLink the workflow instance link to update
+	* @param workflowInstanceLink the workflow instance link
 	* @param merge whether to merge the workflow instance link with the current session. See {@link com.liferay.portal.service.persistence.BatchSession#update(com.liferay.portal.kernel.dao.orm.Session, com.liferay.portal.model.BaseModel, boolean)} for an explanation.
 	* @return the workflow instance link that was updated
 	* @throws SystemException if a system exception occurred
@@ -226,7 +226,7 @@ public class WorkflowInstanceLinkLocalServiceWrapper
 	}
 
 	/**
-	* Gets the Spring bean ID for this bean.
+	* Returns the Spring bean ID for this bean.
 	*
 	* @return the Spring bean ID for this bean
 	*/

@@ -43,21 +43,21 @@ public interface SCLicenseModel extends BaseModel<SCLicense> {
 	 */
 
 	/**
-	 * Gets the primary key of this s c license.
+	 * Returns the primary key of this s c license.
 	 *
 	 * @return the primary key of this s c license
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this s c license
+	 * Sets the primary key of this s c license.
 	 *
 	 * @param primaryKey the primary key of this s c license
 	 */
 	public void setPrimaryKey(long primaryKey);
 
 	/**
-	 * Gets the license ID of this s c license.
+	 * Returns the license ID of this s c license.
 	 *
 	 * @return the license ID of this s c license
 	 */
@@ -71,7 +71,7 @@ public interface SCLicenseModel extends BaseModel<SCLicense> {
 	public void setLicenseId(long licenseId);
 
 	/**
-	 * Gets the name of this s c license.
+	 * Returns the name of this s c license.
 	 *
 	 * @return the name of this s c license
 	 */
@@ -86,7 +86,7 @@ public interface SCLicenseModel extends BaseModel<SCLicense> {
 	public void setName(String name);
 
 	/**
-	 * Gets the url of this s c license.
+	 * Returns the url of this s c license.
 	 *
 	 * @return the url of this s c license
 	 */
@@ -101,7 +101,7 @@ public interface SCLicenseModel extends BaseModel<SCLicense> {
 	public void setUrl(String url);
 
 	/**
-	 * Gets the open source of this s c license.
+	 * Returns the open source of this s c license.
 	 *
 	 * @return the open source of this s c license
 	 */
@@ -122,7 +122,7 @@ public interface SCLicenseModel extends BaseModel<SCLicense> {
 	public void setOpenSource(boolean openSource);
 
 	/**
-	 * Gets the active of this s c license.
+	 * Returns the active of this s c license.
 	 *
 	 * @return the active of this s c license
 	 */
@@ -143,7 +143,7 @@ public interface SCLicenseModel extends BaseModel<SCLicense> {
 	public void setActive(boolean active);
 
 	/**
-	 * Gets the recommended of this s c license.
+	 * Returns the recommended of this s c license.
 	 *
 	 * @return the recommended of this s c license
 	 */

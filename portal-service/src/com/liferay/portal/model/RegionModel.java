@@ -42,21 +42,21 @@ public interface RegionModel extends BaseModel<Region> {
 	 */
 
 	/**
-	 * Gets the primary key of this region.
+	 * Returns the primary key of this region.
 	 *
 	 * @return the primary key of this region
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this region
+	 * Sets the primary key of this region.
 	 *
 	 * @param primaryKey the primary key of this region
 	 */
 	public void setPrimaryKey(long primaryKey);
 
 	/**
-	 * Gets the region ID of this region.
+	 * Returns the region ID of this region.
 	 *
 	 * @return the region ID of this region
 	 */
@@ -70,7 +70,7 @@ public interface RegionModel extends BaseModel<Region> {
 	public void setRegionId(long regionId);
 
 	/**
-	 * Gets the country ID of this region.
+	 * Returns the country ID of this region.
 	 *
 	 * @return the country ID of this region
 	 */
@@ -84,7 +84,7 @@ public interface RegionModel extends BaseModel<Region> {
 	public void setCountryId(long countryId);
 
 	/**
-	 * Gets the region code of this region.
+	 * Returns the region code of this region.
 	 *
 	 * @return the region code of this region
 	 */
@@ -99,7 +99,7 @@ public interface RegionModel extends BaseModel<Region> {
 	public void setRegionCode(String regionCode);
 
 	/**
-	 * Gets the name of this region.
+	 * Returns the name of this region.
 	 *
 	 * @return the name of this region
 	 */
@@ -114,7 +114,7 @@ public interface RegionModel extends BaseModel<Region> {
 	public void setName(String name);
 
 	/**
-	 * Gets the active of this region.
+	 * Returns the active of this region.
 	 *
 	 * @return the active of this region
 	 */

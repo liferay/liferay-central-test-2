@@ -37,7 +37,7 @@ public class EmailAddressWrapper implements EmailAddress {
 	}
 
 	/**
-	* Gets the primary key of this email address.
+	* Returns the primary key of this email address.
 	*
 	* @return the primary key of this email address
 	*/
@@ -46,7 +46,7 @@ public class EmailAddressWrapper implements EmailAddress {
 	}
 
 	/**
-	* Sets the primary key of this email address
+	* Sets the primary key of this email address.
 	*
 	* @param primaryKey the primary key of this email address
 	*/
@@ -55,7 +55,7 @@ public class EmailAddressWrapper implements EmailAddress {
 	}
 
 	/**
-	* Gets the email address ID of this email address.
+	* Returns the email address ID of this email address.
 	*
 	* @return the email address ID of this email address
 	*/
@@ -73,7 +73,7 @@ public class EmailAddressWrapper implements EmailAddress {
 	}
 
 	/**
-	* Gets the company ID of this email address.
+	* Returns the company ID of this email address.
 	*
 	* @return the company ID of this email address
 	*/
@@ -91,7 +91,7 @@ public class EmailAddressWrapper implements EmailAddress {
 	}
 
 	/**
-	* Gets the user ID of this email address.
+	* Returns the user ID of this email address.
 	*
 	* @return the user ID of this email address
 	*/
@@ -109,7 +109,7 @@ public class EmailAddressWrapper implements EmailAddress {
 	}
 
 	/**
-	* Gets the user uuid of this email address.
+	* Returns the user uuid of this email address.
 	*
 	* @return the user uuid of this email address
 	* @throws SystemException if a system exception occurred
@@ -129,7 +129,7 @@ public class EmailAddressWrapper implements EmailAddress {
 	}
 
 	/**
-	* Gets the user name of this email address.
+	* Returns the user name of this email address.
 	*
 	* @return the user name of this email address
 	*/
@@ -147,7 +147,7 @@ public class EmailAddressWrapper implements EmailAddress {
 	}
 
 	/**
-	* Gets the create date of this email address.
+	* Returns the create date of this email address.
 	*
 	* @return the create date of this email address
 	*/
@@ -165,7 +165,7 @@ public class EmailAddressWrapper implements EmailAddress {
 	}
 
 	/**
-	* Gets the modified date of this email address.
+	* Returns the modified date of this email address.
 	*
 	* @return the modified date of this email address
 	*/
@@ -183,16 +183,16 @@ public class EmailAddressWrapper implements EmailAddress {
 	}
 
 	/**
-	* Gets the class name of the model instance this email address is polymorphically associated with.
+	* Returns the fully qualified class name of this email address.
 	*
-	* @return the class name of the model instance this email address is polymorphically associated with
+	* @return the fully qualified class name of this email address
 	*/
 	public java.lang.String getClassName() {
 		return _emailAddress.getClassName();
 	}
 
 	/**
-	* Gets the class name ID of this email address.
+	* Returns the class name ID of this email address.
 	*
 	* @return the class name ID of this email address
 	*/
@@ -210,7 +210,7 @@ public class EmailAddressWrapper implements EmailAddress {
 	}
 
 	/**
-	* Gets the class p k of this email address.
+	* Returns the class p k of this email address.
 	*
 	* @return the class p k of this email address
 	*/
@@ -228,7 +228,7 @@ public class EmailAddressWrapper implements EmailAddress {
 	}
 
 	/**
-	* Gets the address of this email address.
+	* Returns the address of this email address.
 	*
 	* @return the address of this email address
 	*/
@@ -246,7 +246,7 @@ public class EmailAddressWrapper implements EmailAddress {
 	}
 
 	/**
-	* Gets the type ID of this email address.
+	* Returns the type ID of this email address.
 	*
 	* @return the type ID of this email address
 	*/
@@ -264,7 +264,7 @@ public class EmailAddressWrapper implements EmailAddress {
 	}
 
 	/**
-	* Gets the primary of this email address.
+	* Returns the primary of this email address.
 	*
 	* @return the primary of this email address
 	*/

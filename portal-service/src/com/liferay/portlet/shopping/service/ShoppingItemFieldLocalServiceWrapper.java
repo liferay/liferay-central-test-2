@@ -33,7 +33,7 @@ public class ShoppingItemFieldLocalServiceWrapper
 	/**
 	* Adds the shopping item field to the database. Also notifies the appropriate model listeners.
 	*
-	* @param shoppingItemField the shopping item field to add
+	* @param shoppingItemField the shopping item field
 	* @return the shopping item field that was added
 	* @throws SystemException if a system exception occurred
 	*/
@@ -57,7 +57,7 @@ public class ShoppingItemFieldLocalServiceWrapper
 	/**
 	* Deletes the shopping item field with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param itemFieldId the primary key of the shopping item field to delete
+	* @param itemFieldId the primary key of the shopping item field
 	* @throws PortalException if a shopping item field with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -70,7 +70,7 @@ public class ShoppingItemFieldLocalServiceWrapper
 	/**
 	* Deletes the shopping item field from the database. Also notifies the appropriate model listeners.
 	*
-	* @param shoppingItemField the shopping item field to delete
+	* @param shoppingItemField the shopping item field
 	* @throws SystemException if a system exception occurred
 	*/
 	public void deleteShoppingItemField(
@@ -82,7 +82,7 @@ public class ShoppingItemFieldLocalServiceWrapper
 	/**
 	* Performs a dynamic query on the database and returns the matching rows.
 	*
-	* @param dynamicQuery the dynamic query to search with
+	* @param dynamicQuery the dynamic query
 	* @return the matching rows
 	* @throws SystemException if a system exception occurred
 	*/
@@ -100,9 +100,9 @@ public class ShoppingItemFieldLocalServiceWrapper
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param dynamicQuery the dynamic query to search with
-	* @param start the lower bound of the range of model instances to return
-	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param dynamicQuery the dynamic query
+	* @param start the lower bound of the range of model instances
+	* @param end the upper bound of the range of model instances (not inclusive)
 	* @return the range of matching rows
 	* @throws SystemException if a system exception occurred
 	*/
@@ -121,9 +121,9 @@ public class ShoppingItemFieldLocalServiceWrapper
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param dynamicQuery the dynamic query to search with
-	* @param start the lower bound of the range of model instances to return
-	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param dynamicQuery the dynamic query
+	* @param start the lower bound of the range of model instances
+	* @param end the upper bound of the range of model instances (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching rows
 	* @throws SystemException if a system exception occurred
@@ -139,9 +139,9 @@ public class ShoppingItemFieldLocalServiceWrapper
 	}
 
 	/**
-	* Counts the number of rows that match the dynamic query.
+	* Returns the number of rows that match the dynamic query.
 	*
-	* @param dynamicQuery the dynamic query to search with
+	* @param dynamicQuery the dynamic query
 	* @return the number of rows that match the dynamic query
 	* @throws SystemException if a system exception occurred
 	*/
@@ -152,9 +152,9 @@ public class ShoppingItemFieldLocalServiceWrapper
 	}
 
 	/**
-	* Gets the shopping item field with the primary key.
+	* Returns the shopping item field with the primary key.
 	*
-	* @param itemFieldId the primary key of the shopping item field to get
+	* @param itemFieldId the primary key of the shopping item field
 	* @return the shopping item field
 	* @throws PortalException if a shopping item field with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -167,14 +167,14 @@ public class ShoppingItemFieldLocalServiceWrapper
 	}
 
 	/**
-	* Gets a range of all the shopping item fields.
+	* Returns a range of all the shopping item fields.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of shopping item fields to return
-	* @param end the upper bound of the range of shopping item fields to return (not inclusive)
+	* @param start the lower bound of the range of shopping item fields
+	* @param end the upper bound of the range of shopping item fields (not inclusive)
 	* @return the range of shopping item fields
 	* @throws SystemException if a system exception occurred
 	*/
@@ -185,7 +185,7 @@ public class ShoppingItemFieldLocalServiceWrapper
 	}
 
 	/**
-	* Gets the number of shopping item fields.
+	* Returns the number of shopping item fields.
 	*
 	* @return the number of shopping item fields
 	* @throws SystemException if a system exception occurred
@@ -198,7 +198,7 @@ public class ShoppingItemFieldLocalServiceWrapper
 	/**
 	* Updates the shopping item field in the database. Also notifies the appropriate model listeners.
 	*
-	* @param shoppingItemField the shopping item field to update
+	* @param shoppingItemField the shopping item field
 	* @return the shopping item field that was updated
 	* @throws SystemException if a system exception occurred
 	*/
@@ -211,7 +211,7 @@ public class ShoppingItemFieldLocalServiceWrapper
 	/**
 	* Updates the shopping item field in the database. Also notifies the appropriate model listeners.
 	*
-	* @param shoppingItemField the shopping item field to update
+	* @param shoppingItemField the shopping item field
 	* @param merge whether to merge the shopping item field with the current session. See {@link com.liferay.portal.service.persistence.BatchSession#update(com.liferay.portal.kernel.dao.orm.Session, com.liferay.portal.model.BaseModel, boolean)} for an explanation.
 	* @return the shopping item field that was updated
 	* @throws SystemException if a system exception occurred
@@ -225,7 +225,7 @@ public class ShoppingItemFieldLocalServiceWrapper
 	}
 
 	/**
-	* Gets the Spring bean ID for this bean.
+	* Returns the Spring bean ID for this bean.
 	*
 	* @return the Spring bean ID for this bean
 	*/

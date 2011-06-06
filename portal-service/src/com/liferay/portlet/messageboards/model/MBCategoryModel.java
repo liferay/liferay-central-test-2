@@ -47,21 +47,21 @@ public interface MBCategoryModel extends BaseModel<MBCategory>, GroupedModel {
 	 */
 
 	/**
-	 * Gets the primary key of this message boards category.
+	 * Returns the primary key of this message boards category.
 	 *
 	 * @return the primary key of this message boards category
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this message boards category
+	 * Sets the primary key of this message boards category.
 	 *
 	 * @param primaryKey the primary key of this message boards category
 	 */
 	public void setPrimaryKey(long primaryKey);
 
 	/**
-	 * Gets the uuid of this message boards category.
+	 * Returns the uuid of this message boards category.
 	 *
 	 * @return the uuid of this message boards category
 	 */
@@ -76,7 +76,7 @@ public interface MBCategoryModel extends BaseModel<MBCategory>, GroupedModel {
 	public void setUuid(String uuid);
 
 	/**
-	 * Gets the category ID of this message boards category.
+	 * Returns the category ID of this message boards category.
 	 *
 	 * @return the category ID of this message boards category
 	 */
@@ -90,7 +90,7 @@ public interface MBCategoryModel extends BaseModel<MBCategory>, GroupedModel {
 	public void setCategoryId(long categoryId);
 
 	/**
-	 * Gets the group ID of this message boards category.
+	 * Returns the group ID of this message boards category.
 	 *
 	 * @return the group ID of this message boards category
 	 */
@@ -104,7 +104,7 @@ public interface MBCategoryModel extends BaseModel<MBCategory>, GroupedModel {
 	public void setGroupId(long groupId);
 
 	/**
-	 * Gets the company ID of this message boards category.
+	 * Returns the company ID of this message boards category.
 	 *
 	 * @return the company ID of this message boards category
 	 */
@@ -118,7 +118,7 @@ public interface MBCategoryModel extends BaseModel<MBCategory>, GroupedModel {
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the user ID of this message boards category.
+	 * Returns the user ID of this message boards category.
 	 *
 	 * @return the user ID of this message boards category
 	 */
@@ -132,7 +132,7 @@ public interface MBCategoryModel extends BaseModel<MBCategory>, GroupedModel {
 	public void setUserId(long userId);
 
 	/**
-	 * Gets the user uuid of this message boards category.
+	 * Returns the user uuid of this message boards category.
 	 *
 	 * @return the user uuid of this message boards category
 	 * @throws SystemException if a system exception occurred
@@ -147,7 +147,7 @@ public interface MBCategoryModel extends BaseModel<MBCategory>, GroupedModel {
 	public void setUserUuid(String userUuid);
 
 	/**
-	 * Gets the user name of this message boards category.
+	 * Returns the user name of this message boards category.
 	 *
 	 * @return the user name of this message boards category
 	 */
@@ -162,7 +162,7 @@ public interface MBCategoryModel extends BaseModel<MBCategory>, GroupedModel {
 	public void setUserName(String userName);
 
 	/**
-	 * Gets the create date of this message boards category.
+	 * Returns the create date of this message boards category.
 	 *
 	 * @return the create date of this message boards category
 	 */
@@ -176,7 +176,7 @@ public interface MBCategoryModel extends BaseModel<MBCategory>, GroupedModel {
 	public void setCreateDate(Date createDate);
 
 	/**
-	 * Gets the modified date of this message boards category.
+	 * Returns the modified date of this message boards category.
 	 *
 	 * @return the modified date of this message boards category
 	 */
@@ -190,7 +190,7 @@ public interface MBCategoryModel extends BaseModel<MBCategory>, GroupedModel {
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
-	 * Gets the parent category ID of this message boards category.
+	 * Returns the parent category ID of this message boards category.
 	 *
 	 * @return the parent category ID of this message boards category
 	 */
@@ -204,7 +204,7 @@ public interface MBCategoryModel extends BaseModel<MBCategory>, GroupedModel {
 	public void setParentCategoryId(long parentCategoryId);
 
 	/**
-	 * Gets the name of this message boards category.
+	 * Returns the name of this message boards category.
 	 *
 	 * @return the name of this message boards category
 	 */
@@ -219,7 +219,7 @@ public interface MBCategoryModel extends BaseModel<MBCategory>, GroupedModel {
 	public void setName(String name);
 
 	/**
-	 * Gets the description of this message boards category.
+	 * Returns the description of this message boards category.
 	 *
 	 * @return the description of this message boards category
 	 */
@@ -234,7 +234,7 @@ public interface MBCategoryModel extends BaseModel<MBCategory>, GroupedModel {
 	public void setDescription(String description);
 
 	/**
-	 * Gets the display style of this message boards category.
+	 * Returns the display style of this message boards category.
 	 *
 	 * @return the display style of this message boards category
 	 */
@@ -249,7 +249,7 @@ public interface MBCategoryModel extends BaseModel<MBCategory>, GroupedModel {
 	public void setDisplayStyle(String displayStyle);
 
 	/**
-	 * Gets the thread count of this message boards category.
+	 * Returns the thread count of this message boards category.
 	 *
 	 * @return the thread count of this message boards category
 	 */
@@ -263,7 +263,7 @@ public interface MBCategoryModel extends BaseModel<MBCategory>, GroupedModel {
 	public void setThreadCount(int threadCount);
 
 	/**
-	 * Gets the message count of this message boards category.
+	 * Returns the message count of this message boards category.
 	 *
 	 * @return the message count of this message boards category
 	 */
@@ -277,7 +277,7 @@ public interface MBCategoryModel extends BaseModel<MBCategory>, GroupedModel {
 	public void setMessageCount(int messageCount);
 
 	/**
-	 * Gets the last post date of this message boards category.
+	 * Returns the last post date of this message boards category.
 	 *
 	 * @return the last post date of this message boards category
 	 */

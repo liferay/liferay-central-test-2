@@ -37,7 +37,7 @@ public class DLFileRankWrapper implements DLFileRank {
 	}
 
 	/**
-	* Gets the primary key of this d l file rank.
+	* Returns the primary key of this d l file rank.
 	*
 	* @return the primary key of this d l file rank
 	*/
@@ -46,7 +46,7 @@ public class DLFileRankWrapper implements DLFileRank {
 	}
 
 	/**
-	* Sets the primary key of this d l file rank
+	* Sets the primary key of this d l file rank.
 	*
 	* @param primaryKey the primary key of this d l file rank
 	*/
@@ -55,7 +55,7 @@ public class DLFileRankWrapper implements DLFileRank {
 	}
 
 	/**
-	* Gets the file rank ID of this d l file rank.
+	* Returns the file rank ID of this d l file rank.
 	*
 	* @return the file rank ID of this d l file rank
 	*/
@@ -73,7 +73,7 @@ public class DLFileRankWrapper implements DLFileRank {
 	}
 
 	/**
-	* Gets the group ID of this d l file rank.
+	* Returns the group ID of this d l file rank.
 	*
 	* @return the group ID of this d l file rank
 	*/
@@ -91,7 +91,7 @@ public class DLFileRankWrapper implements DLFileRank {
 	}
 
 	/**
-	* Gets the company ID of this d l file rank.
+	* Returns the company ID of this d l file rank.
 	*
 	* @return the company ID of this d l file rank
 	*/
@@ -109,7 +109,7 @@ public class DLFileRankWrapper implements DLFileRank {
 	}
 
 	/**
-	* Gets the user ID of this d l file rank.
+	* Returns the user ID of this d l file rank.
 	*
 	* @return the user ID of this d l file rank
 	*/
@@ -127,7 +127,7 @@ public class DLFileRankWrapper implements DLFileRank {
 	}
 
 	/**
-	* Gets the user uuid of this d l file rank.
+	* Returns the user uuid of this d l file rank.
 	*
 	* @return the user uuid of this d l file rank
 	* @throws SystemException if a system exception occurred
@@ -147,7 +147,7 @@ public class DLFileRankWrapper implements DLFileRank {
 	}
 
 	/**
-	* Gets the create date of this d l file rank.
+	* Returns the create date of this d l file rank.
 	*
 	* @return the create date of this d l file rank
 	*/
@@ -165,7 +165,7 @@ public class DLFileRankWrapper implements DLFileRank {
 	}
 
 	/**
-	* Gets the file entry ID of this d l file rank.
+	* Returns the file entry ID of this d l file rank.
 	*
 	* @return the file entry ID of this d l file rank
 	*/

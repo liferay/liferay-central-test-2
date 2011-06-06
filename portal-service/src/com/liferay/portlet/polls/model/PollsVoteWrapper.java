@@ -37,7 +37,7 @@ public class PollsVoteWrapper implements PollsVote {
 	}
 
 	/**
-	* Gets the primary key of this polls vote.
+	* Returns the primary key of this polls vote.
 	*
 	* @return the primary key of this polls vote
 	*/
@@ -46,7 +46,7 @@ public class PollsVoteWrapper implements PollsVote {
 	}
 
 	/**
-	* Sets the primary key of this polls vote
+	* Sets the primary key of this polls vote.
 	*
 	* @param primaryKey the primary key of this polls vote
 	*/
@@ -55,7 +55,7 @@ public class PollsVoteWrapper implements PollsVote {
 	}
 
 	/**
-	* Gets the vote ID of this polls vote.
+	* Returns the vote ID of this polls vote.
 	*
 	* @return the vote ID of this polls vote
 	*/
@@ -73,7 +73,7 @@ public class PollsVoteWrapper implements PollsVote {
 	}
 
 	/**
-	* Gets the user ID of this polls vote.
+	* Returns the user ID of this polls vote.
 	*
 	* @return the user ID of this polls vote
 	*/
@@ -91,7 +91,7 @@ public class PollsVoteWrapper implements PollsVote {
 	}
 
 	/**
-	* Gets the user uuid of this polls vote.
+	* Returns the user uuid of this polls vote.
 	*
 	* @return the user uuid of this polls vote
 	* @throws SystemException if a system exception occurred
@@ -111,7 +111,7 @@ public class PollsVoteWrapper implements PollsVote {
 	}
 
 	/**
-	* Gets the question ID of this polls vote.
+	* Returns the question ID of this polls vote.
 	*
 	* @return the question ID of this polls vote
 	*/
@@ -129,7 +129,7 @@ public class PollsVoteWrapper implements PollsVote {
 	}
 
 	/**
-	* Gets the choice ID of this polls vote.
+	* Returns the choice ID of this polls vote.
 	*
 	* @return the choice ID of this polls vote
 	*/
@@ -147,7 +147,7 @@ public class PollsVoteWrapper implements PollsVote {
 	}
 
 	/**
-	* Gets the vote date of this polls vote.
+	* Returns the vote date of this polls vote.
 	*
 	* @return the vote date of this polls vote
 	*/

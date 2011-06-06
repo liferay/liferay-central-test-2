@@ -32,7 +32,7 @@ public class SubscriptionLocalServiceWrapper implements SubscriptionLocalService
 	/**
 	* Adds the subscription to the database. Also notifies the appropriate model listeners.
 	*
-	* @param subscription the subscription to add
+	* @param subscription the subscription
 	* @return the subscription that was added
 	* @throws SystemException if a system exception occurred
 	*/
@@ -56,7 +56,7 @@ public class SubscriptionLocalServiceWrapper implements SubscriptionLocalService
 	/**
 	* Deletes the subscription with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param subscriptionId the primary key of the subscription to delete
+	* @param subscriptionId the primary key of the subscription
 	* @throws PortalException if a subscription with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -69,7 +69,7 @@ public class SubscriptionLocalServiceWrapper implements SubscriptionLocalService
 	/**
 	* Deletes the subscription from the database. Also notifies the appropriate model listeners.
 	*
-	* @param subscription the subscription to delete
+	* @param subscription the subscription
 	* @throws PortalException
 	* @throws SystemException if a system exception occurred
 	*/
@@ -83,7 +83,7 @@ public class SubscriptionLocalServiceWrapper implements SubscriptionLocalService
 	/**
 	* Performs a dynamic query on the database and returns the matching rows.
 	*
-	* @param dynamicQuery the dynamic query to search with
+	* @param dynamicQuery the dynamic query
 	* @return the matching rows
 	* @throws SystemException if a system exception occurred
 	*/
@@ -101,9 +101,9 @@ public class SubscriptionLocalServiceWrapper implements SubscriptionLocalService
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param dynamicQuery the dynamic query to search with
-	* @param start the lower bound of the range of model instances to return
-	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param dynamicQuery the dynamic query
+	* @param start the lower bound of the range of model instances
+	* @param end the upper bound of the range of model instances (not inclusive)
 	* @return the range of matching rows
 	* @throws SystemException if a system exception occurred
 	*/
@@ -121,9 +121,9 @@ public class SubscriptionLocalServiceWrapper implements SubscriptionLocalService
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param dynamicQuery the dynamic query to search with
-	* @param start the lower bound of the range of model instances to return
-	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param dynamicQuery the dynamic query
+	* @param start the lower bound of the range of model instances
+	* @param end the upper bound of the range of model instances (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching rows
 	* @throws SystemException if a system exception occurred
@@ -139,9 +139,9 @@ public class SubscriptionLocalServiceWrapper implements SubscriptionLocalService
 	}
 
 	/**
-	* Counts the number of rows that match the dynamic query.
+	* Returns the number of rows that match the dynamic query.
 	*
-	* @param dynamicQuery the dynamic query to search with
+	* @param dynamicQuery the dynamic query
 	* @return the number of rows that match the dynamic query
 	* @throws SystemException if a system exception occurred
 	*/
@@ -152,9 +152,9 @@ public class SubscriptionLocalServiceWrapper implements SubscriptionLocalService
 	}
 
 	/**
-	* Gets the subscription with the primary key.
+	* Returns the subscription with the primary key.
 	*
-	* @param subscriptionId the primary key of the subscription to get
+	* @param subscriptionId the primary key of the subscription
 	* @return the subscription
 	* @throws PortalException if a subscription with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -167,14 +167,14 @@ public class SubscriptionLocalServiceWrapper implements SubscriptionLocalService
 	}
 
 	/**
-	* Gets a range of all the subscriptions.
+	* Returns a range of all the subscriptions.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of subscriptions to return
-	* @param end the upper bound of the range of subscriptions to return (not inclusive)
+	* @param start the lower bound of the range of subscriptions
+	* @param end the upper bound of the range of subscriptions (not inclusive)
 	* @return the range of subscriptions
 	* @throws SystemException if a system exception occurred
 	*/
@@ -185,7 +185,7 @@ public class SubscriptionLocalServiceWrapper implements SubscriptionLocalService
 	}
 
 	/**
-	* Gets the number of subscriptions.
+	* Returns the number of subscriptions.
 	*
 	* @return the number of subscriptions
 	* @throws SystemException if a system exception occurred
@@ -198,7 +198,7 @@ public class SubscriptionLocalServiceWrapper implements SubscriptionLocalService
 	/**
 	* Updates the subscription in the database. Also notifies the appropriate model listeners.
 	*
-	* @param subscription the subscription to update
+	* @param subscription the subscription
 	* @return the subscription that was updated
 	* @throws SystemException if a system exception occurred
 	*/
@@ -211,7 +211,7 @@ public class SubscriptionLocalServiceWrapper implements SubscriptionLocalService
 	/**
 	* Updates the subscription in the database. Also notifies the appropriate model listeners.
 	*
-	* @param subscription the subscription to update
+	* @param subscription the subscription
 	* @param merge whether to merge the subscription with the current session. See {@link com.liferay.portal.service.persistence.BatchSession#update(com.liferay.portal.kernel.dao.orm.Session, com.liferay.portal.model.BaseModel, boolean)} for an explanation.
 	* @return the subscription that was updated
 	* @throws SystemException if a system exception occurred
@@ -223,7 +223,7 @@ public class SubscriptionLocalServiceWrapper implements SubscriptionLocalService
 	}
 
 	/**
-	* Gets the Spring bean ID for this bean.
+	* Returns the Spring bean ID for this bean.
 	*
 	* @return the Spring bean ID for this bean
 	*/

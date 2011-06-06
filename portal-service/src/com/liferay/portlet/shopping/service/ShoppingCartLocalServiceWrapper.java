@@ -32,7 +32,7 @@ public class ShoppingCartLocalServiceWrapper implements ShoppingCartLocalService
 	/**
 	* Adds the shopping cart to the database. Also notifies the appropriate model listeners.
 	*
-	* @param shoppingCart the shopping cart to add
+	* @param shoppingCart the shopping cart
 	* @return the shopping cart that was added
 	* @throws SystemException if a system exception occurred
 	*/
@@ -56,7 +56,7 @@ public class ShoppingCartLocalServiceWrapper implements ShoppingCartLocalService
 	/**
 	* Deletes the shopping cart with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param cartId the primary key of the shopping cart to delete
+	* @param cartId the primary key of the shopping cart
 	* @throws PortalException if a shopping cart with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -69,7 +69,7 @@ public class ShoppingCartLocalServiceWrapper implements ShoppingCartLocalService
 	/**
 	* Deletes the shopping cart from the database. Also notifies the appropriate model listeners.
 	*
-	* @param shoppingCart the shopping cart to delete
+	* @param shoppingCart the shopping cart
 	* @throws SystemException if a system exception occurred
 	*/
 	public void deleteShoppingCart(
@@ -81,7 +81,7 @@ public class ShoppingCartLocalServiceWrapper implements ShoppingCartLocalService
 	/**
 	* Performs a dynamic query on the database and returns the matching rows.
 	*
-	* @param dynamicQuery the dynamic query to search with
+	* @param dynamicQuery the dynamic query
 	* @return the matching rows
 	* @throws SystemException if a system exception occurred
 	*/
@@ -99,9 +99,9 @@ public class ShoppingCartLocalServiceWrapper implements ShoppingCartLocalService
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param dynamicQuery the dynamic query to search with
-	* @param start the lower bound of the range of model instances to return
-	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param dynamicQuery the dynamic query
+	* @param start the lower bound of the range of model instances
+	* @param end the upper bound of the range of model instances (not inclusive)
 	* @return the range of matching rows
 	* @throws SystemException if a system exception occurred
 	*/
@@ -119,9 +119,9 @@ public class ShoppingCartLocalServiceWrapper implements ShoppingCartLocalService
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param dynamicQuery the dynamic query to search with
-	* @param start the lower bound of the range of model instances to return
-	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param dynamicQuery the dynamic query
+	* @param start the lower bound of the range of model instances
+	* @param end the upper bound of the range of model instances (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching rows
 	* @throws SystemException if a system exception occurred
@@ -137,9 +137,9 @@ public class ShoppingCartLocalServiceWrapper implements ShoppingCartLocalService
 	}
 
 	/**
-	* Counts the number of rows that match the dynamic query.
+	* Returns the number of rows that match the dynamic query.
 	*
-	* @param dynamicQuery the dynamic query to search with
+	* @param dynamicQuery the dynamic query
 	* @return the number of rows that match the dynamic query
 	* @throws SystemException if a system exception occurred
 	*/
@@ -150,9 +150,9 @@ public class ShoppingCartLocalServiceWrapper implements ShoppingCartLocalService
 	}
 
 	/**
-	* Gets the shopping cart with the primary key.
+	* Returns the shopping cart with the primary key.
 	*
-	* @param cartId the primary key of the shopping cart to get
+	* @param cartId the primary key of the shopping cart
 	* @return the shopping cart
 	* @throws PortalException if a shopping cart with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -165,14 +165,14 @@ public class ShoppingCartLocalServiceWrapper implements ShoppingCartLocalService
 	}
 
 	/**
-	* Gets a range of all the shopping carts.
+	* Returns a range of all the shopping carts.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of shopping carts to return
-	* @param end the upper bound of the range of shopping carts to return (not inclusive)
+	* @param start the lower bound of the range of shopping carts
+	* @param end the upper bound of the range of shopping carts (not inclusive)
 	* @return the range of shopping carts
 	* @throws SystemException if a system exception occurred
 	*/
@@ -183,7 +183,7 @@ public class ShoppingCartLocalServiceWrapper implements ShoppingCartLocalService
 	}
 
 	/**
-	* Gets the number of shopping carts.
+	* Returns the number of shopping carts.
 	*
 	* @return the number of shopping carts
 	* @throws SystemException if a system exception occurred
@@ -196,7 +196,7 @@ public class ShoppingCartLocalServiceWrapper implements ShoppingCartLocalService
 	/**
 	* Updates the shopping cart in the database. Also notifies the appropriate model listeners.
 	*
-	* @param shoppingCart the shopping cart to update
+	* @param shoppingCart the shopping cart
 	* @return the shopping cart that was updated
 	* @throws SystemException if a system exception occurred
 	*/
@@ -209,7 +209,7 @@ public class ShoppingCartLocalServiceWrapper implements ShoppingCartLocalService
 	/**
 	* Updates the shopping cart in the database. Also notifies the appropriate model listeners.
 	*
-	* @param shoppingCart the shopping cart to update
+	* @param shoppingCart the shopping cart
 	* @param merge whether to merge the shopping cart with the current session. See {@link com.liferay.portal.service.persistence.BatchSession#update(com.liferay.portal.kernel.dao.orm.Session, com.liferay.portal.model.BaseModel, boolean)} for an explanation.
 	* @return the shopping cart that was updated
 	* @throws SystemException if a system exception occurred
@@ -222,7 +222,7 @@ public class ShoppingCartLocalServiceWrapper implements ShoppingCartLocalService
 	}
 
 	/**
-	* Gets the Spring bean ID for this bean.
+	* Returns the Spring bean ID for this bean.
 	*
 	* @return the Spring bean ID for this bean
 	*/

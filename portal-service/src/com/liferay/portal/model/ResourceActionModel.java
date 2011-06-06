@@ -42,21 +42,21 @@ public interface ResourceActionModel extends BaseModel<ResourceAction> {
 	 */
 
 	/**
-	 * Gets the primary key of this resource action.
+	 * Returns the primary key of this resource action.
 	 *
 	 * @return the primary key of this resource action
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this resource action
+	 * Sets the primary key of this resource action.
 	 *
 	 * @param primaryKey the primary key of this resource action
 	 */
 	public void setPrimaryKey(long primaryKey);
 
 	/**
-	 * Gets the resource action ID of this resource action.
+	 * Returns the resource action ID of this resource action.
 	 *
 	 * @return the resource action ID of this resource action
 	 */
@@ -70,7 +70,7 @@ public interface ResourceActionModel extends BaseModel<ResourceAction> {
 	public void setResourceActionId(long resourceActionId);
 
 	/**
-	 * Gets the name of this resource action.
+	 * Returns the name of this resource action.
 	 *
 	 * @return the name of this resource action
 	 */
@@ -85,7 +85,7 @@ public interface ResourceActionModel extends BaseModel<ResourceAction> {
 	public void setName(String name);
 
 	/**
-	 * Gets the action ID of this resource action.
+	 * Returns the action ID of this resource action.
 	 *
 	 * @return the action ID of this resource action
 	 */
@@ -100,7 +100,7 @@ public interface ResourceActionModel extends BaseModel<ResourceAction> {
 	public void setActionId(String actionId);
 
 	/**
-	 * Gets the bitwise value of this resource action.
+	 * Returns the bitwise value of this resource action.
 	 *
 	 * @return the bitwise value of this resource action
 	 */

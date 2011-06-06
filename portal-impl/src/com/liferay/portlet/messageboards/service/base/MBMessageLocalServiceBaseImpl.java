@@ -132,7 +132,7 @@ public abstract class MBMessageLocalServiceBaseImpl
 	/**
 	 * Adds the message-boards message to the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param mbMessage the message-boards message to add
+	 * @param mbMessage the message-boards message
 	 * @return the message-boards message that was added
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -156,7 +156,7 @@ public abstract class MBMessageLocalServiceBaseImpl
 	/**
 	 * Deletes the message-boards message with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param messageId the primary key of the message-boards message to delete
+	 * @param messageId the primary key of the message-boards message
 	 * @throws PortalException if a message-boards message with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -168,7 +168,7 @@ public abstract class MBMessageLocalServiceBaseImpl
 	/**
 	 * Deletes the message-boards message from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param mbMessage the message-boards message to delete
+	 * @param mbMessage the message-boards message
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void deleteMBMessage(MBMessage mbMessage) throws SystemException {
@@ -178,7 +178,7 @@ public abstract class MBMessageLocalServiceBaseImpl
 	/**
 	 * Performs a dynamic query on the database and returns the matching rows.
 	 *
-	 * @param dynamicQuery the dynamic query to search with
+	 * @param dynamicQuery the dynamic query
 	 * @return the matching rows
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -195,9 +195,9 @@ public abstract class MBMessageLocalServiceBaseImpl
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param dynamicQuery the dynamic query to search with
-	 * @param start the lower bound of the range of model instances to return
-	 * @param end the upper bound of the range of model instances to return (not inclusive)
+	 * @param dynamicQuery the dynamic query
+	 * @param start the lower bound of the range of model instances
+	 * @param end the upper bound of the range of model instances (not inclusive)
 	 * @return the range of matching rows
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -215,9 +215,9 @@ public abstract class MBMessageLocalServiceBaseImpl
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param dynamicQuery the dynamic query to search with
-	 * @param start the lower bound of the range of model instances to return
-	 * @param end the upper bound of the range of model instances to return (not inclusive)
+	 * @param dynamicQuery the dynamic query
+	 * @param start the lower bound of the range of model instances
+	 * @param end the upper bound of the range of model instances (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching rows
 	 * @throws SystemException if a system exception occurred
@@ -230,9 +230,9 @@ public abstract class MBMessageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Counts the number of rows that match the dynamic query.
+	 * Returns the number of rows that match the dynamic query.
 	 *
-	 * @param dynamicQuery the dynamic query to search with
+	 * @param dynamicQuery the dynamic query
 	 * @return the number of rows that match the dynamic query
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -242,9 +242,9 @@ public abstract class MBMessageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the message-boards message with the primary key.
+	 * Returns the message-boards message with the primary key.
 	 *
-	 * @param messageId the primary key of the message-boards message to get
+	 * @param messageId the primary key of the message-boards message
 	 * @return the message-boards message
 	 * @throws PortalException if a message-boards message with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -255,12 +255,12 @@ public abstract class MBMessageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the message-boards message with the UUID and group id.
+	 * Returns the message-boards message with the UUID in the group.
 	 *
-	 * @param uuid the UUID of message-boards message to get
-	 * @param groupId the group id of the message-boards message to get
+	 * @param uuid the UUID of message-boards message
+	 * @param groupId the group id of the message-boards message
 	 * @return the message-boards message
-	 * @throws PortalException if a message-boards message with the UUID and group id could not be found
+	 * @throws PortalException if a message-boards message with the UUID in the group could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	public MBMessage getMBMessageByUuidAndGroupId(String uuid, long groupId)
@@ -269,14 +269,14 @@ public abstract class MBMessageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets a range of all the message-boards messages.
+	 * Returns a range of all the message-boards messages.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param start the lower bound of the range of message-boards messages to return
-	 * @param end the upper bound of the range of message-boards messages to return (not inclusive)
+	 * @param start the lower bound of the range of message-boards messages
+	 * @param end the upper bound of the range of message-boards messages (not inclusive)
 	 * @return the range of message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -286,7 +286,7 @@ public abstract class MBMessageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the number of message-boards messages.
+	 * Returns the number of message-boards messages.
 	 *
 	 * @return the number of message-boards messages
 	 * @throws SystemException if a system exception occurred
@@ -298,7 +298,7 @@ public abstract class MBMessageLocalServiceBaseImpl
 	/**
 	 * Updates the message-boards message in the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param mbMessage the message-boards message to update
+	 * @param mbMessage the message-boards message
 	 * @return the message-boards message that was updated
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -312,7 +312,7 @@ public abstract class MBMessageLocalServiceBaseImpl
 	/**
 	 * Updates the message-boards message in the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param mbMessage the message-boards message to update
+	 * @param mbMessage the message-boards message
 	 * @param merge whether to merge the message-boards message with the current session. See {@link com.liferay.portal.service.persistence.BatchSession#update(com.liferay.portal.kernel.dao.orm.Session, com.liferay.portal.model.BaseModel, boolean)} for an explanation.
 	 * @return the message-boards message that was updated
 	 * @throws SystemException if a system exception occurred
@@ -325,7 +325,7 @@ public abstract class MBMessageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the message boards ban local service.
+	 * Returns the message boards ban local service.
 	 *
 	 * @return the message boards ban local service
 	 */
@@ -343,7 +343,7 @@ public abstract class MBMessageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the message boards ban remote service.
+	 * Returns the message boards ban remote service.
 	 *
 	 * @return the message boards ban remote service
 	 */
@@ -361,7 +361,7 @@ public abstract class MBMessageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the message boards ban persistence.
+	 * Returns the message boards ban persistence.
 	 *
 	 * @return the message boards ban persistence
 	 */
@@ -379,7 +379,7 @@ public abstract class MBMessageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the message boards category local service.
+	 * Returns the message boards category local service.
 	 *
 	 * @return the message boards category local service
 	 */
@@ -398,7 +398,7 @@ public abstract class MBMessageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the message boards category remote service.
+	 * Returns the message boards category remote service.
 	 *
 	 * @return the message boards category remote service
 	 */
@@ -416,7 +416,7 @@ public abstract class MBMessageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the message boards category persistence.
+	 * Returns the message boards category persistence.
 	 *
 	 * @return the message boards category persistence
 	 */
@@ -435,7 +435,7 @@ public abstract class MBMessageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the message boards category finder.
+	 * Returns the message boards category finder.
 	 *
 	 * @return the message boards category finder
 	 */
@@ -453,7 +453,7 @@ public abstract class MBMessageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the message boards discussion local service.
+	 * Returns the message boards discussion local service.
 	 *
 	 * @return the message boards discussion local service
 	 */
@@ -472,7 +472,7 @@ public abstract class MBMessageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the message boards discussion persistence.
+	 * Returns the message boards discussion persistence.
 	 *
 	 * @return the message boards discussion persistence
 	 */
@@ -491,7 +491,7 @@ public abstract class MBMessageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the message boards mailing list local service.
+	 * Returns the message boards mailing list local service.
 	 *
 	 * @return the message boards mailing list local service
 	 */
@@ -510,7 +510,7 @@ public abstract class MBMessageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the message boards mailing list persistence.
+	 * Returns the message boards mailing list persistence.
 	 *
 	 * @return the message boards mailing list persistence
 	 */
@@ -529,7 +529,7 @@ public abstract class MBMessageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the message-boards message local service.
+	 * Returns the message-boards message local service.
 	 *
 	 * @return the message-boards message local service
 	 */
@@ -548,7 +548,7 @@ public abstract class MBMessageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the message-boards message remote service.
+	 * Returns the message-boards message remote service.
 	 *
 	 * @return the message-boards message remote service
 	 */
@@ -566,7 +566,7 @@ public abstract class MBMessageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the message-boards message persistence.
+	 * Returns the message-boards message persistence.
 	 *
 	 * @return the message-boards message persistence
 	 */
@@ -585,7 +585,7 @@ public abstract class MBMessageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the message-boards message finder.
+	 * Returns the message-boards message finder.
 	 *
 	 * @return the message-boards message finder
 	 */
@@ -603,7 +603,7 @@ public abstract class MBMessageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the message boards message flag local service.
+	 * Returns the message boards message flag local service.
 	 *
 	 * @return the message boards message flag local service
 	 */
@@ -622,7 +622,7 @@ public abstract class MBMessageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the message boards message flag remote service.
+	 * Returns the message boards message flag remote service.
 	 *
 	 * @return the message boards message flag remote service
 	 */
@@ -641,7 +641,7 @@ public abstract class MBMessageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the message boards message flag persistence.
+	 * Returns the message boards message flag persistence.
 	 *
 	 * @return the message boards message flag persistence
 	 */
@@ -660,7 +660,7 @@ public abstract class MBMessageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the message boards stats user local service.
+	 * Returns the message boards stats user local service.
 	 *
 	 * @return the message boards stats user local service
 	 */
@@ -679,7 +679,7 @@ public abstract class MBMessageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the message boards stats user persistence.
+	 * Returns the message boards stats user persistence.
 	 *
 	 * @return the message boards stats user persistence
 	 */
@@ -698,7 +698,7 @@ public abstract class MBMessageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the message boards thread local service.
+	 * Returns the message boards thread local service.
 	 *
 	 * @return the message boards thread local service
 	 */
@@ -717,7 +717,7 @@ public abstract class MBMessageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the message boards thread remote service.
+	 * Returns the message boards thread remote service.
 	 *
 	 * @return the message boards thread remote service
 	 */
@@ -735,7 +735,7 @@ public abstract class MBMessageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the message boards thread persistence.
+	 * Returns the message boards thread persistence.
 	 *
 	 * @return the message boards thread persistence
 	 */
@@ -753,7 +753,7 @@ public abstract class MBMessageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the message boards thread finder.
+	 * Returns the message boards thread finder.
 	 *
 	 * @return the message boards thread finder
 	 */
@@ -771,7 +771,7 @@ public abstract class MBMessageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the counter local service.
+	 * Returns the counter local service.
 	 *
 	 * @return the counter local service
 	 */
@@ -789,7 +789,7 @@ public abstract class MBMessageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the d l local service.
+	 * Returns the d l local service.
 	 *
 	 * @return the d l local service
 	 */
@@ -807,7 +807,7 @@ public abstract class MBMessageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the mail remote service.
+	 * Returns the mail remote service.
 	 *
 	 * @return the mail remote service
 	 */
@@ -825,7 +825,7 @@ public abstract class MBMessageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the company local service.
+	 * Returns the company local service.
 	 *
 	 * @return the company local service
 	 */
@@ -843,7 +843,7 @@ public abstract class MBMessageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the company remote service.
+	 * Returns the company remote service.
 	 *
 	 * @return the company remote service
 	 */
@@ -861,7 +861,7 @@ public abstract class MBMessageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the company persistence.
+	 * Returns the company persistence.
 	 *
 	 * @return the company persistence
 	 */
@@ -879,7 +879,7 @@ public abstract class MBMessageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the group local service.
+	 * Returns the group local service.
 	 *
 	 * @return the group local service
 	 */
@@ -897,7 +897,7 @@ public abstract class MBMessageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the group remote service.
+	 * Returns the group remote service.
 	 *
 	 * @return the group remote service
 	 */
@@ -915,7 +915,7 @@ public abstract class MBMessageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the group persistence.
+	 * Returns the group persistence.
 	 *
 	 * @return the group persistence
 	 */
@@ -933,7 +933,7 @@ public abstract class MBMessageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the group finder.
+	 * Returns the group finder.
 	 *
 	 * @return the group finder
 	 */
@@ -951,7 +951,7 @@ public abstract class MBMessageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the lock local service.
+	 * Returns the lock local service.
 	 *
 	 * @return the lock local service
 	 */
@@ -969,7 +969,7 @@ public abstract class MBMessageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the lock persistence.
+	 * Returns the lock persistence.
 	 *
 	 * @return the lock persistence
 	 */
@@ -987,7 +987,7 @@ public abstract class MBMessageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the portlet preferences local service.
+	 * Returns the portlet preferences local service.
 	 *
 	 * @return the portlet preferences local service
 	 */
@@ -1006,7 +1006,7 @@ public abstract class MBMessageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the portlet preferences remote service.
+	 * Returns the portlet preferences remote service.
 	 *
 	 * @return the portlet preferences remote service
 	 */
@@ -1025,7 +1025,7 @@ public abstract class MBMessageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the portlet preferences persistence.
+	 * Returns the portlet preferences persistence.
 	 *
 	 * @return the portlet preferences persistence
 	 */
@@ -1044,7 +1044,7 @@ public abstract class MBMessageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the portlet preferences finder.
+	 * Returns the portlet preferences finder.
 	 *
 	 * @return the portlet preferences finder
 	 */
@@ -1063,7 +1063,7 @@ public abstract class MBMessageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the resource local service.
+	 * Returns the resource local service.
 	 *
 	 * @return the resource local service
 	 */
@@ -1082,7 +1082,7 @@ public abstract class MBMessageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the resource remote service.
+	 * Returns the resource remote service.
 	 *
 	 * @return the resource remote service
 	 */
@@ -1100,7 +1100,7 @@ public abstract class MBMessageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the resource persistence.
+	 * Returns the resource persistence.
 	 *
 	 * @return the resource persistence
 	 */
@@ -1118,7 +1118,7 @@ public abstract class MBMessageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the resource finder.
+	 * Returns the resource finder.
 	 *
 	 * @return the resource finder
 	 */
@@ -1136,7 +1136,7 @@ public abstract class MBMessageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the subscription local service.
+	 * Returns the subscription local service.
 	 *
 	 * @return the subscription local service
 	 */
@@ -1155,7 +1155,7 @@ public abstract class MBMessageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the subscription persistence.
+	 * Returns the subscription persistence.
 	 *
 	 * @return the subscription persistence
 	 */
@@ -1174,7 +1174,7 @@ public abstract class MBMessageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the user local service.
+	 * Returns the user local service.
 	 *
 	 * @return the user local service
 	 */
@@ -1192,7 +1192,7 @@ public abstract class MBMessageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the user remote service.
+	 * Returns the user remote service.
 	 *
 	 * @return the user remote service
 	 */
@@ -1210,7 +1210,7 @@ public abstract class MBMessageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the user persistence.
+	 * Returns the user persistence.
 	 *
 	 * @return the user persistence
 	 */
@@ -1228,7 +1228,7 @@ public abstract class MBMessageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the user finder.
+	 * Returns the user finder.
 	 *
 	 * @return the user finder
 	 */
@@ -1246,7 +1246,7 @@ public abstract class MBMessageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the workflow instance link local service.
+	 * Returns the workflow instance link local service.
 	 *
 	 * @return the workflow instance link local service
 	 */
@@ -1265,7 +1265,7 @@ public abstract class MBMessageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the workflow instance link persistence.
+	 * Returns the workflow instance link persistence.
 	 *
 	 * @return the workflow instance link persistence
 	 */
@@ -1284,7 +1284,7 @@ public abstract class MBMessageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the asset entry local service.
+	 * Returns the asset entry local service.
 	 *
 	 * @return the asset entry local service
 	 */
@@ -1303,7 +1303,7 @@ public abstract class MBMessageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the asset entry remote service.
+	 * Returns the asset entry remote service.
 	 *
 	 * @return the asset entry remote service
 	 */
@@ -1321,7 +1321,7 @@ public abstract class MBMessageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the asset entry persistence.
+	 * Returns the asset entry persistence.
 	 *
 	 * @return the asset entry persistence
 	 */
@@ -1340,7 +1340,7 @@ public abstract class MBMessageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the asset entry finder.
+	 * Returns the asset entry finder.
 	 *
 	 * @return the asset entry finder
 	 */
@@ -1358,7 +1358,7 @@ public abstract class MBMessageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the asset link local service.
+	 * Returns the asset link local service.
 	 *
 	 * @return the asset link local service
 	 */
@@ -1377,7 +1377,7 @@ public abstract class MBMessageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the asset link persistence.
+	 * Returns the asset link persistence.
 	 *
 	 * @return the asset link persistence
 	 */
@@ -1396,7 +1396,7 @@ public abstract class MBMessageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the asset tag local service.
+	 * Returns the asset tag local service.
 	 *
 	 * @return the asset tag local service
 	 */
@@ -1415,7 +1415,7 @@ public abstract class MBMessageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the asset tag remote service.
+	 * Returns the asset tag remote service.
 	 *
 	 * @return the asset tag remote service
 	 */
@@ -1433,7 +1433,7 @@ public abstract class MBMessageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the asset tag persistence.
+	 * Returns the asset tag persistence.
 	 *
 	 * @return the asset tag persistence
 	 */
@@ -1451,7 +1451,7 @@ public abstract class MBMessageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the asset tag finder.
+	 * Returns the asset tag finder.
 	 *
 	 * @return the asset tag finder
 	 */
@@ -1469,7 +1469,7 @@ public abstract class MBMessageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the blogs entry local service.
+	 * Returns the blogs entry local service.
 	 *
 	 * @return the blogs entry local service
 	 */
@@ -1488,7 +1488,7 @@ public abstract class MBMessageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the blogs entry remote service.
+	 * Returns the blogs entry remote service.
 	 *
 	 * @return the blogs entry remote service
 	 */
@@ -1506,7 +1506,7 @@ public abstract class MBMessageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the blogs entry persistence.
+	 * Returns the blogs entry persistence.
 	 *
 	 * @return the blogs entry persistence
 	 */
@@ -1525,7 +1525,7 @@ public abstract class MBMessageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the blogs entry finder.
+	 * Returns the blogs entry finder.
 	 *
 	 * @return the blogs entry finder
 	 */
@@ -1543,7 +1543,7 @@ public abstract class MBMessageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the expando value local service.
+	 * Returns the expando value local service.
 	 *
 	 * @return the expando value local service
 	 */
@@ -1562,7 +1562,7 @@ public abstract class MBMessageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the expando value remote service.
+	 * Returns the expando value remote service.
 	 *
 	 * @return the expando value remote service
 	 */
@@ -1580,7 +1580,7 @@ public abstract class MBMessageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the expando value persistence.
+	 * Returns the expando value persistence.
 	 *
 	 * @return the expando value persistence
 	 */
@@ -1599,7 +1599,7 @@ public abstract class MBMessageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the ratings stats local service.
+	 * Returns the ratings stats local service.
 	 *
 	 * @return the ratings stats local service
 	 */
@@ -1618,7 +1618,7 @@ public abstract class MBMessageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the ratings stats persistence.
+	 * Returns the ratings stats persistence.
 	 *
 	 * @return the ratings stats persistence
 	 */
@@ -1637,7 +1637,7 @@ public abstract class MBMessageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the ratings stats finder.
+	 * Returns the ratings stats finder.
 	 *
 	 * @return the ratings stats finder
 	 */
@@ -1655,7 +1655,7 @@ public abstract class MBMessageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the social activity local service.
+	 * Returns the social activity local service.
 	 *
 	 * @return the social activity local service
 	 */
@@ -1674,7 +1674,7 @@ public abstract class MBMessageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the social activity persistence.
+	 * Returns the social activity persistence.
 	 *
 	 * @return the social activity persistence
 	 */
@@ -1693,7 +1693,7 @@ public abstract class MBMessageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the social activity finder.
+	 * Returns the social activity finder.
 	 *
 	 * @return the social activity finder
 	 */
@@ -1712,7 +1712,7 @@ public abstract class MBMessageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the social equity log local service.
+	 * Returns the social equity log local service.
 	 *
 	 * @return the social equity log local service
 	 */
@@ -1731,7 +1731,7 @@ public abstract class MBMessageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the social equity log persistence.
+	 * Returns the social equity log persistence.
 	 *
 	 * @return the social equity log persistence
 	 */
@@ -1750,7 +1750,7 @@ public abstract class MBMessageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the Spring bean ID for this bean.
+	 * Returns the Spring bean ID for this bean.
 	 *
 	 * @return the Spring bean ID for this bean
 	 */
@@ -1770,7 +1770,7 @@ public abstract class MBMessageLocalServiceBaseImpl
 	/**
 	 * Performs an SQL query.
 	 *
-	 * @param sql the sql query to perform
+	 * @param sql the sql query
 	 */
 	protected void runSQL(String sql) throws SystemException {
 		try {

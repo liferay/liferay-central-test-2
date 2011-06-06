@@ -45,21 +45,21 @@ public interface MBMessageFlagModel extends BaseModel<MBMessageFlag> {
 	 */
 
 	/**
-	 * Gets the primary key of this message boards message flag.
+	 * Returns the primary key of this message boards message flag.
 	 *
 	 * @return the primary key of this message boards message flag
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this message boards message flag
+	 * Sets the primary key of this message boards message flag.
 	 *
 	 * @param primaryKey the primary key of this message boards message flag
 	 */
 	public void setPrimaryKey(long primaryKey);
 
 	/**
-	 * Gets the message flag ID of this message boards message flag.
+	 * Returns the message flag ID of this message boards message flag.
 	 *
 	 * @return the message flag ID of this message boards message flag
 	 */
@@ -73,7 +73,7 @@ public interface MBMessageFlagModel extends BaseModel<MBMessageFlag> {
 	public void setMessageFlagId(long messageFlagId);
 
 	/**
-	 * Gets the user ID of this message boards message flag.
+	 * Returns the user ID of this message boards message flag.
 	 *
 	 * @return the user ID of this message boards message flag
 	 */
@@ -87,7 +87,7 @@ public interface MBMessageFlagModel extends BaseModel<MBMessageFlag> {
 	public void setUserId(long userId);
 
 	/**
-	 * Gets the user uuid of this message boards message flag.
+	 * Returns the user uuid of this message boards message flag.
 	 *
 	 * @return the user uuid of this message boards message flag
 	 * @throws SystemException if a system exception occurred
@@ -102,7 +102,7 @@ public interface MBMessageFlagModel extends BaseModel<MBMessageFlag> {
 	public void setUserUuid(String userUuid);
 
 	/**
-	 * Gets the modified date of this message boards message flag.
+	 * Returns the modified date of this message boards message flag.
 	 *
 	 * @return the modified date of this message boards message flag
 	 */
@@ -116,7 +116,7 @@ public interface MBMessageFlagModel extends BaseModel<MBMessageFlag> {
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
-	 * Gets the thread ID of this message boards message flag.
+	 * Returns the thread ID of this message boards message flag.
 	 *
 	 * @return the thread ID of this message boards message flag
 	 */
@@ -130,7 +130,7 @@ public interface MBMessageFlagModel extends BaseModel<MBMessageFlag> {
 	public void setThreadId(long threadId);
 
 	/**
-	 * Gets the message ID of this message boards message flag.
+	 * Returns the message ID of this message boards message flag.
 	 *
 	 * @return the message ID of this message boards message flag
 	 */
@@ -144,7 +144,7 @@ public interface MBMessageFlagModel extends BaseModel<MBMessageFlag> {
 	public void setMessageId(long messageId);
 
 	/**
-	 * Gets the flag of this message boards message flag.
+	 * Returns the flag of this message boards message flag.
 	 *
 	 * @return the flag of this message boards message flag
 	 */

@@ -33,7 +33,7 @@ public class AssetCategoryLocalServiceWrapper
 	/**
 	* Adds the asset category to the database. Also notifies the appropriate model listeners.
 	*
-	* @param assetCategory the asset category to add
+	* @param assetCategory the asset category
 	* @return the asset category that was added
 	* @throws SystemException if a system exception occurred
 	*/
@@ -57,7 +57,7 @@ public class AssetCategoryLocalServiceWrapper
 	/**
 	* Deletes the asset category with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param categoryId the primary key of the asset category to delete
+	* @param categoryId the primary key of the asset category
 	* @throws PortalException if a asset category with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -70,7 +70,7 @@ public class AssetCategoryLocalServiceWrapper
 	/**
 	* Deletes the asset category from the database. Also notifies the appropriate model listeners.
 	*
-	* @param assetCategory the asset category to delete
+	* @param assetCategory the asset category
 	* @throws SystemException if a system exception occurred
 	*/
 	public void deleteAssetCategory(
@@ -82,7 +82,7 @@ public class AssetCategoryLocalServiceWrapper
 	/**
 	* Performs a dynamic query on the database and returns the matching rows.
 	*
-	* @param dynamicQuery the dynamic query to search with
+	* @param dynamicQuery the dynamic query
 	* @return the matching rows
 	* @throws SystemException if a system exception occurred
 	*/
@@ -100,9 +100,9 @@ public class AssetCategoryLocalServiceWrapper
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param dynamicQuery the dynamic query to search with
-	* @param start the lower bound of the range of model instances to return
-	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param dynamicQuery the dynamic query
+	* @param start the lower bound of the range of model instances
+	* @param end the upper bound of the range of model instances (not inclusive)
 	* @return the range of matching rows
 	* @throws SystemException if a system exception occurred
 	*/
@@ -120,9 +120,9 @@ public class AssetCategoryLocalServiceWrapper
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param dynamicQuery the dynamic query to search with
-	* @param start the lower bound of the range of model instances to return
-	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param dynamicQuery the dynamic query
+	* @param start the lower bound of the range of model instances
+	* @param end the upper bound of the range of model instances (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching rows
 	* @throws SystemException if a system exception occurred
@@ -138,9 +138,9 @@ public class AssetCategoryLocalServiceWrapper
 	}
 
 	/**
-	* Counts the number of rows that match the dynamic query.
+	* Returns the number of rows that match the dynamic query.
 	*
-	* @param dynamicQuery the dynamic query to search with
+	* @param dynamicQuery the dynamic query
 	* @return the number of rows that match the dynamic query
 	* @throws SystemException if a system exception occurred
 	*/
@@ -151,9 +151,9 @@ public class AssetCategoryLocalServiceWrapper
 	}
 
 	/**
-	* Gets the asset category with the primary key.
+	* Returns the asset category with the primary key.
 	*
-	* @param categoryId the primary key of the asset category to get
+	* @param categoryId the primary key of the asset category
 	* @return the asset category
 	* @throws PortalException if a asset category with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -166,12 +166,12 @@ public class AssetCategoryLocalServiceWrapper
 	}
 
 	/**
-	* Gets the asset category with the UUID and group id.
+	* Returns the asset category with the UUID in the group.
 	*
-	* @param uuid the UUID of asset category to get
-	* @param groupId the group id of the asset category to get
+	* @param uuid the UUID of asset category
+	* @param groupId the group id of the asset category
 	* @return the asset category
-	* @throws PortalException if a asset category with the UUID and group id could not be found
+	* @throws PortalException if a asset category with the UUID in the group could not be found
 	* @throws SystemException if a system exception occurred
 	*/
 	public com.liferay.portlet.asset.model.AssetCategory getAssetCategoryByUuidAndGroupId(
@@ -183,14 +183,14 @@ public class AssetCategoryLocalServiceWrapper
 	}
 
 	/**
-	* Gets a range of all the asset categories.
+	* Returns a range of all the asset categories.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of asset categories to return
-	* @param end the upper bound of the range of asset categories to return (not inclusive)
+	* @param start the lower bound of the range of asset categories
+	* @param end the upper bound of the range of asset categories (not inclusive)
 	* @return the range of asset categories
 	* @throws SystemException if a system exception occurred
 	*/
@@ -201,7 +201,7 @@ public class AssetCategoryLocalServiceWrapper
 	}
 
 	/**
-	* Gets the number of asset categories.
+	* Returns the number of asset categories.
 	*
 	* @return the number of asset categories
 	* @throws SystemException if a system exception occurred
@@ -214,7 +214,7 @@ public class AssetCategoryLocalServiceWrapper
 	/**
 	* Updates the asset category in the database. Also notifies the appropriate model listeners.
 	*
-	* @param assetCategory the asset category to update
+	* @param assetCategory the asset category
 	* @return the asset category that was updated
 	* @throws SystemException if a system exception occurred
 	*/
@@ -227,7 +227,7 @@ public class AssetCategoryLocalServiceWrapper
 	/**
 	* Updates the asset category in the database. Also notifies the appropriate model listeners.
 	*
-	* @param assetCategory the asset category to update
+	* @param assetCategory the asset category
 	* @param merge whether to merge the asset category with the current session. See {@link com.liferay.portal.service.persistence.BatchSession#update(com.liferay.portal.kernel.dao.orm.Session, com.liferay.portal.model.BaseModel, boolean)} for an explanation.
 	* @return the asset category that was updated
 	* @throws SystemException if a system exception occurred
@@ -241,7 +241,7 @@ public class AssetCategoryLocalServiceWrapper
 	}
 
 	/**
-	* Gets the Spring bean ID for this bean.
+	* Returns the Spring bean ID for this bean.
 	*
 	* @return the Spring bean ID for this bean
 	*/

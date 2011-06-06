@@ -47,21 +47,21 @@ public interface MBBanModel extends BaseModel<MBBan>, GroupedModel {
 	 */
 
 	/**
-	 * Gets the primary key of this message boards ban.
+	 * Returns the primary key of this message boards ban.
 	 *
 	 * @return the primary key of this message boards ban
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this message boards ban
+	 * Sets the primary key of this message boards ban.
 	 *
 	 * @param primaryKey the primary key of this message boards ban
 	 */
 	public void setPrimaryKey(long primaryKey);
 
 	/**
-	 * Gets the ban ID of this message boards ban.
+	 * Returns the ban ID of this message boards ban.
 	 *
 	 * @return the ban ID of this message boards ban
 	 */
@@ -75,7 +75,7 @@ public interface MBBanModel extends BaseModel<MBBan>, GroupedModel {
 	public void setBanId(long banId);
 
 	/**
-	 * Gets the group ID of this message boards ban.
+	 * Returns the group ID of this message boards ban.
 	 *
 	 * @return the group ID of this message boards ban
 	 */
@@ -89,7 +89,7 @@ public interface MBBanModel extends BaseModel<MBBan>, GroupedModel {
 	public void setGroupId(long groupId);
 
 	/**
-	 * Gets the company ID of this message boards ban.
+	 * Returns the company ID of this message boards ban.
 	 *
 	 * @return the company ID of this message boards ban
 	 */
@@ -103,7 +103,7 @@ public interface MBBanModel extends BaseModel<MBBan>, GroupedModel {
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the user ID of this message boards ban.
+	 * Returns the user ID of this message boards ban.
 	 *
 	 * @return the user ID of this message boards ban
 	 */
@@ -117,7 +117,7 @@ public interface MBBanModel extends BaseModel<MBBan>, GroupedModel {
 	public void setUserId(long userId);
 
 	/**
-	 * Gets the user uuid of this message boards ban.
+	 * Returns the user uuid of this message boards ban.
 	 *
 	 * @return the user uuid of this message boards ban
 	 * @throws SystemException if a system exception occurred
@@ -132,7 +132,7 @@ public interface MBBanModel extends BaseModel<MBBan>, GroupedModel {
 	public void setUserUuid(String userUuid);
 
 	/**
-	 * Gets the user name of this message boards ban.
+	 * Returns the user name of this message boards ban.
 	 *
 	 * @return the user name of this message boards ban
 	 */
@@ -147,7 +147,7 @@ public interface MBBanModel extends BaseModel<MBBan>, GroupedModel {
 	public void setUserName(String userName);
 
 	/**
-	 * Gets the create date of this message boards ban.
+	 * Returns the create date of this message boards ban.
 	 *
 	 * @return the create date of this message boards ban
 	 */
@@ -161,7 +161,7 @@ public interface MBBanModel extends BaseModel<MBBan>, GroupedModel {
 	public void setCreateDate(Date createDate);
 
 	/**
-	 * Gets the modified date of this message boards ban.
+	 * Returns the modified date of this message boards ban.
 	 *
 	 * @return the modified date of this message boards ban
 	 */
@@ -175,7 +175,7 @@ public interface MBBanModel extends BaseModel<MBBan>, GroupedModel {
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
-	 * Gets the ban user ID of this message boards ban.
+	 * Returns the ban user ID of this message boards ban.
 	 *
 	 * @return the ban user ID of this message boards ban
 	 */
@@ -189,7 +189,7 @@ public interface MBBanModel extends BaseModel<MBBan>, GroupedModel {
 	public void setBanUserId(long banUserId);
 
 	/**
-	 * Gets the ban user uuid of this message boards ban.
+	 * Returns the ban user uuid of this message boards ban.
 	 *
 	 * @return the ban user uuid of this message boards ban
 	 * @throws SystemException if a system exception occurred

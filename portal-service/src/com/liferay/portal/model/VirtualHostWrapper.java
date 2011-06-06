@@ -37,7 +37,7 @@ public class VirtualHostWrapper implements VirtualHost {
 	}
 
 	/**
-	* Gets the primary key of this virtual host.
+	* Returns the primary key of this virtual host.
 	*
 	* @return the primary key of this virtual host
 	*/
@@ -46,7 +46,7 @@ public class VirtualHostWrapper implements VirtualHost {
 	}
 
 	/**
-	* Sets the primary key of this virtual host
+	* Sets the primary key of this virtual host.
 	*
 	* @param primaryKey the primary key of this virtual host
 	*/
@@ -55,7 +55,7 @@ public class VirtualHostWrapper implements VirtualHost {
 	}
 
 	/**
-	* Gets the virtual host ID of this virtual host.
+	* Returns the virtual host ID of this virtual host.
 	*
 	* @return the virtual host ID of this virtual host
 	*/
@@ -73,7 +73,7 @@ public class VirtualHostWrapper implements VirtualHost {
 	}
 
 	/**
-	* Gets the company ID of this virtual host.
+	* Returns the company ID of this virtual host.
 	*
 	* @return the company ID of this virtual host
 	*/
@@ -91,7 +91,7 @@ public class VirtualHostWrapper implements VirtualHost {
 	}
 
 	/**
-	* Gets the layout set ID of this virtual host.
+	* Returns the layout set ID of this virtual host.
 	*
 	* @return the layout set ID of this virtual host
 	*/
@@ -109,7 +109,7 @@ public class VirtualHostWrapper implements VirtualHost {
 	}
 
 	/**
-	* Gets the hostname of this virtual host.
+	* Returns the hostname of this virtual host.
 	*
 	* @return the hostname of this virtual host
 	*/

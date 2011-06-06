@@ -121,7 +121,7 @@ public class ExpandoColumnUtil {
 	/**
 	* Caches the expando column in the entity cache if it is enabled.
 	*
-	* @param expandoColumn the expando column to cache
+	* @param expandoColumn the expando column
 	*/
 	public static void cacheResult(
 		com.liferay.portlet.expando.model.ExpandoColumn expandoColumn) {
@@ -131,7 +131,7 @@ public class ExpandoColumnUtil {
 	/**
 	* Caches the expando columns in the entity cache if it is enabled.
 	*
-	* @param expandoColumns the expando columns to cache
+	* @param expandoColumns the expando columns
 	*/
 	public static void cacheResult(
 		java.util.List<com.liferay.portlet.expando.model.ExpandoColumn> expandoColumns) {
@@ -152,7 +152,7 @@ public class ExpandoColumnUtil {
 	/**
 	* Removes the expando column with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param columnId the primary key of the expando column to remove
+	* @param columnId the primary key of the expando column
 	* @return the expando column that was removed
 	* @throws com.liferay.portlet.expando.NoSuchColumnException if a expando column with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -172,9 +172,9 @@ public class ExpandoColumnUtil {
 	}
 
 	/**
-	* Finds the expando column with the primary key or throws a {@link com.liferay.portlet.expando.NoSuchColumnException} if it could not be found.
+	* Returns the expando column with the primary key or throws a {@link com.liferay.portlet.expando.NoSuchColumnException} if it could not be found.
 	*
-	* @param columnId the primary key of the expando column to find
+	* @param columnId the primary key of the expando column
 	* @return the expando column
 	* @throws com.liferay.portlet.expando.NoSuchColumnException if a expando column with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -187,9 +187,9 @@ public class ExpandoColumnUtil {
 	}
 
 	/**
-	* Finds the expando column with the primary key or returns <code>null</code> if it could not be found.
+	* Returns the expando column with the primary key or returns <code>null</code> if it could not be found.
 	*
-	* @param columnId the primary key of the expando column to find
+	* @param columnId the primary key of the expando column
 	* @return the expando column, or <code>null</code> if a expando column with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -200,9 +200,9 @@ public class ExpandoColumnUtil {
 	}
 
 	/**
-	* Finds all the expando columns where tableId = &#63;.
+	* Returns all the expando columns where tableId = &#63;.
 	*
-	* @param tableId the table ID to search with
+	* @param tableId the table ID
 	* @return the matching expando columns
 	* @throws SystemException if a system exception occurred
 	*/
@@ -213,15 +213,15 @@ public class ExpandoColumnUtil {
 	}
 
 	/**
-	* Finds a range of all the expando columns where tableId = &#63;.
+	* Returns a range of all the expando columns where tableId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param tableId the table ID to search with
-	* @param start the lower bound of the range of expando columns to return
-	* @param end the upper bound of the range of expando columns to return (not inclusive)
+	* @param tableId the table ID
+	* @param start the lower bound of the range of expando columns
+	* @param end the upper bound of the range of expando columns (not inclusive)
 	* @return the range of matching expando columns
 	* @throws SystemException if a system exception occurred
 	*/
@@ -232,15 +232,15 @@ public class ExpandoColumnUtil {
 	}
 
 	/**
-	* Finds an ordered range of all the expando columns where tableId = &#63;.
+	* Returns an ordered range of all the expando columns where tableId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param tableId the table ID to search with
-	* @param start the lower bound of the range of expando columns to return
-	* @param end the upper bound of the range of expando columns to return (not inclusive)
+	* @param tableId the table ID
+	* @param start the lower bound of the range of expando columns
+	* @param end the upper bound of the range of expando columns (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching expando columns
 	* @throws SystemException if a system exception occurred
@@ -254,13 +254,13 @@ public class ExpandoColumnUtil {
 	}
 
 	/**
-	* Finds the first expando column in the ordered set where tableId = &#63;.
+	* Returns the first expando column in the ordered set where tableId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param tableId the table ID to search with
+	* @param tableId the table ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching expando column
 	* @throws com.liferay.portlet.expando.NoSuchColumnException if a matching expando column could not be found
@@ -275,13 +275,13 @@ public class ExpandoColumnUtil {
 	}
 
 	/**
-	* Finds the last expando column in the ordered set where tableId = &#63;.
+	* Returns the last expando column in the ordered set where tableId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param tableId the table ID to search with
+	* @param tableId the table ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching expando column
 	* @throws com.liferay.portlet.expando.NoSuchColumnException if a matching expando column could not be found
@@ -296,14 +296,14 @@ public class ExpandoColumnUtil {
 	}
 
 	/**
-	* Finds the expando columns before and after the current expando column in the ordered set where tableId = &#63;.
+	* Returns the expando columns before and after the current expando column in the ordered set where tableId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
 	* @param columnId the primary key of the current expando column
-	* @param tableId the table ID to search with
+	* @param tableId the table ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next expando column
 	* @throws com.liferay.portlet.expando.NoSuchColumnException if a expando column with the primary key could not be found
@@ -320,9 +320,9 @@ public class ExpandoColumnUtil {
 	}
 
 	/**
-	* Filters by the user's permissions and finds all the expando columns where tableId = &#63;.
+	* Returns all the expando columns that the user has permission to view where tableId = &#63;.
 	*
-	* @param tableId the table ID to search with
+	* @param tableId the table ID
 	* @return the matching expando columns that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -333,15 +333,15 @@ public class ExpandoColumnUtil {
 	}
 
 	/**
-	* Filters by the user's permissions and finds a range of all the expando columns where tableId = &#63;.
+	* Returns a range of all the expando columns that the user has permission to view where tableId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param tableId the table ID to search with
-	* @param start the lower bound of the range of expando columns to return
-	* @param end the upper bound of the range of expando columns to return (not inclusive)
+	* @param tableId the table ID
+	* @param start the lower bound of the range of expando columns
+	* @param end the upper bound of the range of expando columns (not inclusive)
 	* @return the range of matching expando columns that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -352,15 +352,15 @@ public class ExpandoColumnUtil {
 	}
 
 	/**
-	* Filters by the user's permissions and finds an ordered range of all the expando columns where tableId = &#63;.
+	* Returns an ordered range of all the expando columns that the user has permissions to view where tableId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param tableId the table ID to search with
-	* @param start the lower bound of the range of expando columns to return
-	* @param end the upper bound of the range of expando columns to return (not inclusive)
+	* @param tableId the table ID
+	* @param start the lower bound of the range of expando columns
+	* @param end the upper bound of the range of expando columns (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching expando columns that the user has permission to view
 	* @throws SystemException if a system exception occurred
@@ -374,14 +374,10 @@ public class ExpandoColumnUtil {
 	}
 
 	/**
-	* Filters the expando columns before and after the current expando column in the ordered set where tableId = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
-	* </p>
+	* Returns the expando columns before and after the current expando column in the ordered set of expando columns that the user has permission to view where tableId = &#63;.
 	*
 	* @param columnId the primary key of the current expando column
-	* @param tableId the table ID to search with
+	* @param tableId the table ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next expando column
 	* @throws com.liferay.portlet.expando.NoSuchColumnException if a expando column with the primary key could not be found
@@ -398,10 +394,10 @@ public class ExpandoColumnUtil {
 	}
 
 	/**
-	* Finds the expando column where tableId = &#63; and name = &#63; or throws a {@link com.liferay.portlet.expando.NoSuchColumnException} if it could not be found.
+	* Returns the expando column where tableId = &#63; and name = &#63; or throws a {@link com.liferay.portlet.expando.NoSuchColumnException} if it could not be found.
 	*
-	* @param tableId the table ID to search with
-	* @param name the name to search with
+	* @param tableId the table ID
+	* @param name the name
 	* @return the matching expando column
 	* @throws com.liferay.portlet.expando.NoSuchColumnException if a matching expando column could not be found
 	* @throws SystemException if a system exception occurred
@@ -414,10 +410,10 @@ public class ExpandoColumnUtil {
 	}
 
 	/**
-	* Finds the expando column where tableId = &#63; and name = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	* Returns the expando column where tableId = &#63; and name = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	*
-	* @param tableId the table ID to search with
-	* @param name the name to search with
+	* @param tableId the table ID
+	* @param name the name
 	* @return the matching expando column, or <code>null</code> if a matching expando column could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -428,10 +424,10 @@ public class ExpandoColumnUtil {
 	}
 
 	/**
-	* Finds the expando column where tableId = &#63; and name = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	* Returns the expando column where tableId = &#63; and name = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
-	* @param tableId the table ID to search with
-	* @param name the name to search with
+	* @param tableId the table ID
+	* @param name the name
 	* @return the matching expando column, or <code>null</code> if a matching expando column could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -442,7 +438,7 @@ public class ExpandoColumnUtil {
 	}
 
 	/**
-	* Finds all the expando columns.
+	* Returns all the expando columns.
 	*
 	* @return the expando columns
 	* @throws SystemException if a system exception occurred
@@ -453,14 +449,14 @@ public class ExpandoColumnUtil {
 	}
 
 	/**
-	* Finds a range of all the expando columns.
+	* Returns a range of all the expando columns.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of expando columns to return
-	* @param end the upper bound of the range of expando columns to return (not inclusive)
+	* @param start the lower bound of the range of expando columns
+	* @param end the upper bound of the range of expando columns (not inclusive)
 	* @return the range of expando columns
 	* @throws SystemException if a system exception occurred
 	*/
@@ -471,14 +467,14 @@ public class ExpandoColumnUtil {
 	}
 
 	/**
-	* Finds an ordered range of all the expando columns.
+	* Returns an ordered range of all the expando columns.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of expando columns to return
-	* @param end the upper bound of the range of expando columns to return (not inclusive)
+	* @param start the lower bound of the range of expando columns
+	* @param end the upper bound of the range of expando columns (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of expando columns
 	* @throws SystemException if a system exception occurred
@@ -493,7 +489,7 @@ public class ExpandoColumnUtil {
 	/**
 	* Removes all the expando columns where tableId = &#63; from the database.
 	*
-	* @param tableId the table ID to search with
+	* @param tableId the table ID
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByTableId(long tableId)
@@ -504,8 +500,8 @@ public class ExpandoColumnUtil {
 	/**
 	* Removes the expando column where tableId = &#63; and name = &#63; from the database.
 	*
-	* @param tableId the table ID to search with
-	* @param name the name to search with
+	* @param tableId the table ID
+	* @param name the name
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByT_N(long tableId, java.lang.String name)
@@ -525,9 +521,9 @@ public class ExpandoColumnUtil {
 	}
 
 	/**
-	* Counts all the expando columns where tableId = &#63;.
+	* Returns the number of expando columns where tableId = &#63;.
 	*
-	* @param tableId the table ID to search with
+	* @param tableId the table ID
 	* @return the number of matching expando columns
 	* @throws SystemException if a system exception occurred
 	*/
@@ -537,9 +533,9 @@ public class ExpandoColumnUtil {
 	}
 
 	/**
-	* Filters by the user's permissions and counts all the expando columns where tableId = &#63;.
+	* Returns the number of expando columns that the user has permission to view where tableId = &#63;.
 	*
-	* @param tableId the table ID to search with
+	* @param tableId the table ID
 	* @return the number of matching expando columns that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -549,10 +545,10 @@ public class ExpandoColumnUtil {
 	}
 
 	/**
-	* Counts all the expando columns where tableId = &#63; and name = &#63;.
+	* Returns the number of expando columns where tableId = &#63; and name = &#63;.
 	*
-	* @param tableId the table ID to search with
-	* @param name the name to search with
+	* @param tableId the table ID
+	* @param name the name
 	* @return the number of matching expando columns
 	* @throws SystemException if a system exception occurred
 	*/
@@ -562,7 +558,7 @@ public class ExpandoColumnUtil {
 	}
 
 	/**
-	* Counts all the expando columns.
+	* Returns the number of expando columns.
 	*
 	* @return the number of expando columns
 	* @throws SystemException if a system exception occurred

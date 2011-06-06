@@ -37,7 +37,7 @@ public class UserTrackerWrapper implements UserTracker {
 	}
 
 	/**
-	* Gets the primary key of this user tracker.
+	* Returns the primary key of this user tracker.
 	*
 	* @return the primary key of this user tracker
 	*/
@@ -46,7 +46,7 @@ public class UserTrackerWrapper implements UserTracker {
 	}
 
 	/**
-	* Sets the primary key of this user tracker
+	* Sets the primary key of this user tracker.
 	*
 	* @param primaryKey the primary key of this user tracker
 	*/
@@ -55,7 +55,7 @@ public class UserTrackerWrapper implements UserTracker {
 	}
 
 	/**
-	* Gets the user tracker ID of this user tracker.
+	* Returns the user tracker ID of this user tracker.
 	*
 	* @return the user tracker ID of this user tracker
 	*/
@@ -73,7 +73,7 @@ public class UserTrackerWrapper implements UserTracker {
 	}
 
 	/**
-	* Gets the company ID of this user tracker.
+	* Returns the company ID of this user tracker.
 	*
 	* @return the company ID of this user tracker
 	*/
@@ -91,7 +91,7 @@ public class UserTrackerWrapper implements UserTracker {
 	}
 
 	/**
-	* Gets the user ID of this user tracker.
+	* Returns the user ID of this user tracker.
 	*
 	* @return the user ID of this user tracker
 	*/
@@ -109,7 +109,7 @@ public class UserTrackerWrapper implements UserTracker {
 	}
 
 	/**
-	* Gets the user uuid of this user tracker.
+	* Returns the user uuid of this user tracker.
 	*
 	* @return the user uuid of this user tracker
 	* @throws SystemException if a system exception occurred
@@ -129,7 +129,7 @@ public class UserTrackerWrapper implements UserTracker {
 	}
 
 	/**
-	* Gets the modified date of this user tracker.
+	* Returns the modified date of this user tracker.
 	*
 	* @return the modified date of this user tracker
 	*/
@@ -147,7 +147,7 @@ public class UserTrackerWrapper implements UserTracker {
 	}
 
 	/**
-	* Gets the session ID of this user tracker.
+	* Returns the session ID of this user tracker.
 	*
 	* @return the session ID of this user tracker
 	*/
@@ -165,7 +165,7 @@ public class UserTrackerWrapper implements UserTracker {
 	}
 
 	/**
-	* Gets the remote addr of this user tracker.
+	* Returns the remote addr of this user tracker.
 	*
 	* @return the remote addr of this user tracker
 	*/
@@ -183,7 +183,7 @@ public class UserTrackerWrapper implements UserTracker {
 	}
 
 	/**
-	* Gets the remote host of this user tracker.
+	* Returns the remote host of this user tracker.
 	*
 	* @return the remote host of this user tracker
 	*/
@@ -201,7 +201,7 @@ public class UserTrackerWrapper implements UserTracker {
 	}
 
 	/**
-	* Gets the user agent of this user tracker.
+	* Returns the user agent of this user tracker.
 	*
 	* @return the user agent of this user tracker
 	*/

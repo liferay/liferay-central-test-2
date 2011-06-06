@@ -41,7 +41,7 @@ public class JournalContentSearchLocalServiceUtil {
 	/**
 	* Adds the journal content search to the database. Also notifies the appropriate model listeners.
 	*
-	* @param journalContentSearch the journal content search to add
+	* @param journalContentSearch the journal content search
 	* @return the journal content search that was added
 	* @throws SystemException if a system exception occurred
 	*/
@@ -65,7 +65,7 @@ public class JournalContentSearchLocalServiceUtil {
 	/**
 	* Deletes the journal content search with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param contentSearchId the primary key of the journal content search to delete
+	* @param contentSearchId the primary key of the journal content search
 	* @throws PortalException if a journal content search with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -78,7 +78,7 @@ public class JournalContentSearchLocalServiceUtil {
 	/**
 	* Deletes the journal content search from the database. Also notifies the appropriate model listeners.
 	*
-	* @param journalContentSearch the journal content search to delete
+	* @param journalContentSearch the journal content search
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void deleteJournalContentSearch(
@@ -90,7 +90,7 @@ public class JournalContentSearchLocalServiceUtil {
 	/**
 	* Performs a dynamic query on the database and returns the matching rows.
 	*
-	* @param dynamicQuery the dynamic query to search with
+	* @param dynamicQuery the dynamic query
 	* @return the matching rows
 	* @throws SystemException if a system exception occurred
 	*/
@@ -108,9 +108,9 @@ public class JournalContentSearchLocalServiceUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param dynamicQuery the dynamic query to search with
-	* @param start the lower bound of the range of model instances to return
-	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param dynamicQuery the dynamic query
+	* @param start the lower bound of the range of model instances
+	* @param end the upper bound of the range of model instances (not inclusive)
 	* @return the range of matching rows
 	* @throws SystemException if a system exception occurred
 	*/
@@ -128,9 +128,9 @@ public class JournalContentSearchLocalServiceUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param dynamicQuery the dynamic query to search with
-	* @param start the lower bound of the range of model instances to return
-	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param dynamicQuery the dynamic query
+	* @param start the lower bound of the range of model instances
+	* @param end the upper bound of the range of model instances (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching rows
 	* @throws SystemException if a system exception occurred
@@ -146,9 +146,9 @@ public class JournalContentSearchLocalServiceUtil {
 	}
 
 	/**
-	* Counts the number of rows that match the dynamic query.
+	* Returns the number of rows that match the dynamic query.
 	*
-	* @param dynamicQuery the dynamic query to search with
+	* @param dynamicQuery the dynamic query
 	* @return the number of rows that match the dynamic query
 	* @throws SystemException if a system exception occurred
 	*/
@@ -159,9 +159,9 @@ public class JournalContentSearchLocalServiceUtil {
 	}
 
 	/**
-	* Gets the journal content search with the primary key.
+	* Returns the journal content search with the primary key.
 	*
-	* @param contentSearchId the primary key of the journal content search to get
+	* @param contentSearchId the primary key of the journal content search
 	* @return the journal content search
 	* @throws PortalException if a journal content search with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -174,14 +174,14 @@ public class JournalContentSearchLocalServiceUtil {
 	}
 
 	/**
-	* Gets a range of all the journal content searchs.
+	* Returns a range of all the journal content searchs.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of journal content searchs to return
-	* @param end the upper bound of the range of journal content searchs to return (not inclusive)
+	* @param start the lower bound of the range of journal content searchs
+	* @param end the upper bound of the range of journal content searchs (not inclusive)
 	* @return the range of journal content searchs
 	* @throws SystemException if a system exception occurred
 	*/
@@ -192,7 +192,7 @@ public class JournalContentSearchLocalServiceUtil {
 	}
 
 	/**
-	* Gets the number of journal content searchs.
+	* Returns the number of journal content searchs.
 	*
 	* @return the number of journal content searchs
 	* @throws SystemException if a system exception occurred
@@ -205,7 +205,7 @@ public class JournalContentSearchLocalServiceUtil {
 	/**
 	* Updates the journal content search in the database. Also notifies the appropriate model listeners.
 	*
-	* @param journalContentSearch the journal content search to update
+	* @param journalContentSearch the journal content search
 	* @return the journal content search that was updated
 	* @throws SystemException if a system exception occurred
 	*/
@@ -218,7 +218,7 @@ public class JournalContentSearchLocalServiceUtil {
 	/**
 	* Updates the journal content search in the database. Also notifies the appropriate model listeners.
 	*
-	* @param journalContentSearch the journal content search to update
+	* @param journalContentSearch the journal content search
 	* @param merge whether to merge the journal content search with the current session. See {@link com.liferay.portal.service.persistence.BatchSession#update(com.liferay.portal.kernel.dao.orm.Session, com.liferay.portal.model.BaseModel, boolean)} for an explanation.
 	* @return the journal content search that was updated
 	* @throws SystemException if a system exception occurred
@@ -232,7 +232,7 @@ public class JournalContentSearchLocalServiceUtil {
 	}
 
 	/**
-	* Gets the Spring bean ID for this bean.
+	* Returns the Spring bean ID for this bean.
 	*
 	* @return the Spring bean ID for this bean
 	*/

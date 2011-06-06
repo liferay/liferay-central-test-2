@@ -41,7 +41,7 @@ public class WikiPageResourceLocalServiceUtil {
 	/**
 	* Adds the wiki page resource to the database. Also notifies the appropriate model listeners.
 	*
-	* @param wikiPageResource the wiki page resource to add
+	* @param wikiPageResource the wiki page resource
 	* @return the wiki page resource that was added
 	* @throws SystemException if a system exception occurred
 	*/
@@ -65,7 +65,7 @@ public class WikiPageResourceLocalServiceUtil {
 	/**
 	* Deletes the wiki page resource with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param resourcePrimKey the primary key of the wiki page resource to delete
+	* @param resourcePrimKey the primary key of the wiki page resource
 	* @throws PortalException if a wiki page resource with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -78,7 +78,7 @@ public class WikiPageResourceLocalServiceUtil {
 	/**
 	* Deletes the wiki page resource from the database. Also notifies the appropriate model listeners.
 	*
-	* @param wikiPageResource the wiki page resource to delete
+	* @param wikiPageResource the wiki page resource
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void deleteWikiPageResource(
@@ -90,7 +90,7 @@ public class WikiPageResourceLocalServiceUtil {
 	/**
 	* Performs a dynamic query on the database and returns the matching rows.
 	*
-	* @param dynamicQuery the dynamic query to search with
+	* @param dynamicQuery the dynamic query
 	* @return the matching rows
 	* @throws SystemException if a system exception occurred
 	*/
@@ -108,9 +108,9 @@ public class WikiPageResourceLocalServiceUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param dynamicQuery the dynamic query to search with
-	* @param start the lower bound of the range of model instances to return
-	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param dynamicQuery the dynamic query
+	* @param start the lower bound of the range of model instances
+	* @param end the upper bound of the range of model instances (not inclusive)
 	* @return the range of matching rows
 	* @throws SystemException if a system exception occurred
 	*/
@@ -128,9 +128,9 @@ public class WikiPageResourceLocalServiceUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param dynamicQuery the dynamic query to search with
-	* @param start the lower bound of the range of model instances to return
-	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param dynamicQuery the dynamic query
+	* @param start the lower bound of the range of model instances
+	* @param end the upper bound of the range of model instances (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching rows
 	* @throws SystemException if a system exception occurred
@@ -146,9 +146,9 @@ public class WikiPageResourceLocalServiceUtil {
 	}
 
 	/**
-	* Counts the number of rows that match the dynamic query.
+	* Returns the number of rows that match the dynamic query.
 	*
-	* @param dynamicQuery the dynamic query to search with
+	* @param dynamicQuery the dynamic query
 	* @return the number of rows that match the dynamic query
 	* @throws SystemException if a system exception occurred
 	*/
@@ -159,9 +159,9 @@ public class WikiPageResourceLocalServiceUtil {
 	}
 
 	/**
-	* Gets the wiki page resource with the primary key.
+	* Returns the wiki page resource with the primary key.
 	*
-	* @param resourcePrimKey the primary key of the wiki page resource to get
+	* @param resourcePrimKey the primary key of the wiki page resource
 	* @return the wiki page resource
 	* @throws PortalException if a wiki page resource with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -174,14 +174,14 @@ public class WikiPageResourceLocalServiceUtil {
 	}
 
 	/**
-	* Gets a range of all the wiki page resources.
+	* Returns a range of all the wiki page resources.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of wiki page resources to return
-	* @param end the upper bound of the range of wiki page resources to return (not inclusive)
+	* @param start the lower bound of the range of wiki page resources
+	* @param end the upper bound of the range of wiki page resources (not inclusive)
 	* @return the range of wiki page resources
 	* @throws SystemException if a system exception occurred
 	*/
@@ -192,7 +192,7 @@ public class WikiPageResourceLocalServiceUtil {
 	}
 
 	/**
-	* Gets the number of wiki page resources.
+	* Returns the number of wiki page resources.
 	*
 	* @return the number of wiki page resources
 	* @throws SystemException if a system exception occurred
@@ -205,7 +205,7 @@ public class WikiPageResourceLocalServiceUtil {
 	/**
 	* Updates the wiki page resource in the database. Also notifies the appropriate model listeners.
 	*
-	* @param wikiPageResource the wiki page resource to update
+	* @param wikiPageResource the wiki page resource
 	* @return the wiki page resource that was updated
 	* @throws SystemException if a system exception occurred
 	*/
@@ -218,7 +218,7 @@ public class WikiPageResourceLocalServiceUtil {
 	/**
 	* Updates the wiki page resource in the database. Also notifies the appropriate model listeners.
 	*
-	* @param wikiPageResource the wiki page resource to update
+	* @param wikiPageResource the wiki page resource
 	* @param merge whether to merge the wiki page resource with the current session. See {@link com.liferay.portal.service.persistence.BatchSession#update(com.liferay.portal.kernel.dao.orm.Session, com.liferay.portal.model.BaseModel, boolean)} for an explanation.
 	* @return the wiki page resource that was updated
 	* @throws SystemException if a system exception occurred
@@ -231,7 +231,7 @@ public class WikiPageResourceLocalServiceUtil {
 	}
 
 	/**
-	* Gets the Spring bean ID for this bean.
+	* Returns the Spring bean ID for this bean.
 	*
 	* @return the Spring bean ID for this bean
 	*/

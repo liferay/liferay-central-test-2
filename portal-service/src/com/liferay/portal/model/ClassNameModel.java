@@ -42,28 +42,28 @@ public interface ClassNameModel extends BaseModel<ClassName> {
 	 */
 
 	/**
-	 * Gets the primary key of this class name.
+	 * Returns the primary key of this class name.
 	 *
 	 * @return the primary key of this class name
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this class name
+	 * Sets the primary key of this class name.
 	 *
 	 * @param primaryKey the primary key of this class name
 	 */
 	public void setPrimaryKey(long primaryKey);
 
 	/**
-	 * Gets the class name of the model instance this class name is polymorphically associated with.
+	 * Returns the fully qualified class name of this class name.
 	 *
-	 * @return the class name of the model instance this class name is polymorphically associated with
+	 * @return the fully qualified class name of this class name
 	 */
 	public String getClassName();
 
 	/**
-	 * Gets the class name ID of this class name.
+	 * Returns the class name ID of this class name.
 	 *
 	 * @return the class name ID of this class name
 	 */
@@ -77,7 +77,7 @@ public interface ClassNameModel extends BaseModel<ClassName> {
 	public void setClassNameId(long classNameId);
 
 	/**
-	 * Gets the value of this class name.
+	 * Returns the value of this class name.
 	 *
 	 * @return the value of this class name
 	 */

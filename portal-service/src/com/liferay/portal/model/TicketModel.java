@@ -44,21 +44,21 @@ public interface TicketModel extends AttachedModel, BaseModel<Ticket> {
 	 */
 
 	/**
-	 * Gets the primary key of this ticket.
+	 * Returns the primary key of this ticket.
 	 *
 	 * @return the primary key of this ticket
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this ticket
+	 * Sets the primary key of this ticket.
 	 *
 	 * @param primaryKey the primary key of this ticket
 	 */
 	public void setPrimaryKey(long primaryKey);
 
 	/**
-	 * Gets the ticket ID of this ticket.
+	 * Returns the ticket ID of this ticket.
 	 *
 	 * @return the ticket ID of this ticket
 	 */
@@ -72,7 +72,7 @@ public interface TicketModel extends AttachedModel, BaseModel<Ticket> {
 	public void setTicketId(long ticketId);
 
 	/**
-	 * Gets the company ID of this ticket.
+	 * Returns the company ID of this ticket.
 	 *
 	 * @return the company ID of this ticket
 	 */
@@ -86,7 +86,7 @@ public interface TicketModel extends AttachedModel, BaseModel<Ticket> {
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the create date of this ticket.
+	 * Returns the create date of this ticket.
 	 *
 	 * @return the create date of this ticket
 	 */
@@ -100,14 +100,14 @@ public interface TicketModel extends AttachedModel, BaseModel<Ticket> {
 	public void setCreateDate(Date createDate);
 
 	/**
-	 * Gets the class name of the model instance this ticket is polymorphically associated with.
+	 * Returns the fully qualified class name of this ticket.
 	 *
-	 * @return the class name of the model instance this ticket is polymorphically associated with
+	 * @return the fully qualified class name of this ticket
 	 */
 	public String getClassName();
 
 	/**
-	 * Gets the class name ID of this ticket.
+	 * Returns the class name ID of this ticket.
 	 *
 	 * @return the class name ID of this ticket
 	 */
@@ -121,7 +121,7 @@ public interface TicketModel extends AttachedModel, BaseModel<Ticket> {
 	public void setClassNameId(long classNameId);
 
 	/**
-	 * Gets the class p k of this ticket.
+	 * Returns the class p k of this ticket.
 	 *
 	 * @return the class p k of this ticket
 	 */
@@ -135,7 +135,7 @@ public interface TicketModel extends AttachedModel, BaseModel<Ticket> {
 	public void setClassPK(long classPK);
 
 	/**
-	 * Gets the key of this ticket.
+	 * Returns the key of this ticket.
 	 *
 	 * @return the key of this ticket
 	 */
@@ -150,7 +150,7 @@ public interface TicketModel extends AttachedModel, BaseModel<Ticket> {
 	public void setKey(String key);
 
 	/**
-	 * Gets the expiration date of this ticket.
+	 * Returns the expiration date of this ticket.
 	 *
 	 * @return the expiration date of this ticket
 	 */

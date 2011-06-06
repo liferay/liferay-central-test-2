@@ -37,7 +37,7 @@ public class DDMTemplateWrapper implements DDMTemplate {
 	}
 
 	/**
-	* Gets the primary key of this d d m template.
+	* Returns the primary key of this d d m template.
 	*
 	* @return the primary key of this d d m template
 	*/
@@ -46,7 +46,7 @@ public class DDMTemplateWrapper implements DDMTemplate {
 	}
 
 	/**
-	* Sets the primary key of this d d m template
+	* Sets the primary key of this d d m template.
 	*
 	* @param primaryKey the primary key of this d d m template
 	*/
@@ -55,7 +55,7 @@ public class DDMTemplateWrapper implements DDMTemplate {
 	}
 
 	/**
-	* Gets the uuid of this d d m template.
+	* Returns the uuid of this d d m template.
 	*
 	* @return the uuid of this d d m template
 	*/
@@ -73,7 +73,7 @@ public class DDMTemplateWrapper implements DDMTemplate {
 	}
 
 	/**
-	* Gets the template ID of this d d m template.
+	* Returns the template ID of this d d m template.
 	*
 	* @return the template ID of this d d m template
 	*/
@@ -91,7 +91,7 @@ public class DDMTemplateWrapper implements DDMTemplate {
 	}
 
 	/**
-	* Gets the group ID of this d d m template.
+	* Returns the group ID of this d d m template.
 	*
 	* @return the group ID of this d d m template
 	*/
@@ -109,7 +109,7 @@ public class DDMTemplateWrapper implements DDMTemplate {
 	}
 
 	/**
-	* Gets the company ID of this d d m template.
+	* Returns the company ID of this d d m template.
 	*
 	* @return the company ID of this d d m template
 	*/
@@ -127,7 +127,7 @@ public class DDMTemplateWrapper implements DDMTemplate {
 	}
 
 	/**
-	* Gets the user ID of this d d m template.
+	* Returns the user ID of this d d m template.
 	*
 	* @return the user ID of this d d m template
 	*/
@@ -145,7 +145,7 @@ public class DDMTemplateWrapper implements DDMTemplate {
 	}
 
 	/**
-	* Gets the user uuid of this d d m template.
+	* Returns the user uuid of this d d m template.
 	*
 	* @return the user uuid of this d d m template
 	* @throws SystemException if a system exception occurred
@@ -165,7 +165,7 @@ public class DDMTemplateWrapper implements DDMTemplate {
 	}
 
 	/**
-	* Gets the user name of this d d m template.
+	* Returns the user name of this d d m template.
 	*
 	* @return the user name of this d d m template
 	*/
@@ -183,7 +183,7 @@ public class DDMTemplateWrapper implements DDMTemplate {
 	}
 
 	/**
-	* Gets the create date of this d d m template.
+	* Returns the create date of this d d m template.
 	*
 	* @return the create date of this d d m template
 	*/
@@ -201,7 +201,7 @@ public class DDMTemplateWrapper implements DDMTemplate {
 	}
 
 	/**
-	* Gets the modified date of this d d m template.
+	* Returns the modified date of this d d m template.
 	*
 	* @return the modified date of this d d m template
 	*/
@@ -219,7 +219,7 @@ public class DDMTemplateWrapper implements DDMTemplate {
 	}
 
 	/**
-	* Gets the structure ID of this d d m template.
+	* Returns the structure ID of this d d m template.
 	*
 	* @return the structure ID of this d d m template
 	*/
@@ -237,7 +237,7 @@ public class DDMTemplateWrapper implements DDMTemplate {
 	}
 
 	/**
-	* Gets the name of this d d m template.
+	* Returns the name of this d d m template.
 	*
 	* @return the name of this d d m template
 	*/
@@ -255,7 +255,7 @@ public class DDMTemplateWrapper implements DDMTemplate {
 	}
 
 	/**
-	* Gets the description of this d d m template.
+	* Returns the description of this d d m template.
 	*
 	* @return the description of this d d m template
 	*/
@@ -273,7 +273,7 @@ public class DDMTemplateWrapper implements DDMTemplate {
 	}
 
 	/**
-	* Gets the type of this d d m template.
+	* Returns the type of this d d m template.
 	*
 	* @return the type of this d d m template
 	*/
@@ -291,7 +291,7 @@ public class DDMTemplateWrapper implements DDMTemplate {
 	}
 
 	/**
-	* Gets the language of this d d m template.
+	* Returns the language of this d d m template.
 	*
 	* @return the language of this d d m template
 	*/
@@ -309,7 +309,7 @@ public class DDMTemplateWrapper implements DDMTemplate {
 	}
 
 	/**
-	* Gets the script of this d d m template.
+	* Returns the script of this d d m template.
 	*
 	* @return the script of this d d m template
 	*/

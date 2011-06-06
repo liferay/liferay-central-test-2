@@ -45,21 +45,21 @@ public interface UserTrackerModel extends BaseModel<UserTracker> {
 	 */
 
 	/**
-	 * Gets the primary key of this user tracker.
+	 * Returns the primary key of this user tracker.
 	 *
 	 * @return the primary key of this user tracker
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this user tracker
+	 * Sets the primary key of this user tracker.
 	 *
 	 * @param primaryKey the primary key of this user tracker
 	 */
 	public void setPrimaryKey(long primaryKey);
 
 	/**
-	 * Gets the user tracker ID of this user tracker.
+	 * Returns the user tracker ID of this user tracker.
 	 *
 	 * @return the user tracker ID of this user tracker
 	 */
@@ -73,7 +73,7 @@ public interface UserTrackerModel extends BaseModel<UserTracker> {
 	public void setUserTrackerId(long userTrackerId);
 
 	/**
-	 * Gets the company ID of this user tracker.
+	 * Returns the company ID of this user tracker.
 	 *
 	 * @return the company ID of this user tracker
 	 */
@@ -87,7 +87,7 @@ public interface UserTrackerModel extends BaseModel<UserTracker> {
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the user ID of this user tracker.
+	 * Returns the user ID of this user tracker.
 	 *
 	 * @return the user ID of this user tracker
 	 */
@@ -101,7 +101,7 @@ public interface UserTrackerModel extends BaseModel<UserTracker> {
 	public void setUserId(long userId);
 
 	/**
-	 * Gets the user uuid of this user tracker.
+	 * Returns the user uuid of this user tracker.
 	 *
 	 * @return the user uuid of this user tracker
 	 * @throws SystemException if a system exception occurred
@@ -116,7 +116,7 @@ public interface UserTrackerModel extends BaseModel<UserTracker> {
 	public void setUserUuid(String userUuid);
 
 	/**
-	 * Gets the modified date of this user tracker.
+	 * Returns the modified date of this user tracker.
 	 *
 	 * @return the modified date of this user tracker
 	 */
@@ -130,7 +130,7 @@ public interface UserTrackerModel extends BaseModel<UserTracker> {
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
-	 * Gets the session ID of this user tracker.
+	 * Returns the session ID of this user tracker.
 	 *
 	 * @return the session ID of this user tracker
 	 */
@@ -145,7 +145,7 @@ public interface UserTrackerModel extends BaseModel<UserTracker> {
 	public void setSessionId(String sessionId);
 
 	/**
-	 * Gets the remote addr of this user tracker.
+	 * Returns the remote addr of this user tracker.
 	 *
 	 * @return the remote addr of this user tracker
 	 */
@@ -160,7 +160,7 @@ public interface UserTrackerModel extends BaseModel<UserTracker> {
 	public void setRemoteAddr(String remoteAddr);
 
 	/**
-	 * Gets the remote host of this user tracker.
+	 * Returns the remote host of this user tracker.
 	 *
 	 * @return the remote host of this user tracker
 	 */
@@ -175,7 +175,7 @@ public interface UserTrackerModel extends BaseModel<UserTracker> {
 	public void setRemoteHost(String remoteHost);
 
 	/**
-	 * Gets the user agent of this user tracker.
+	 * Returns the user agent of this user tracker.
 	 *
 	 * @return the user agent of this user tracker
 	 */

@@ -126,7 +126,7 @@ public class SocialEquityGroupSettingUtil {
 	/**
 	* Caches the social equity group setting in the entity cache if it is enabled.
 	*
-	* @param socialEquityGroupSetting the social equity group setting to cache
+	* @param socialEquityGroupSetting the social equity group setting
 	*/
 	public static void cacheResult(
 		com.liferay.portlet.social.model.SocialEquityGroupSetting socialEquityGroupSetting) {
@@ -136,7 +136,7 @@ public class SocialEquityGroupSettingUtil {
 	/**
 	* Caches the social equity group settings in the entity cache if it is enabled.
 	*
-	* @param socialEquityGroupSettings the social equity group settings to cache
+	* @param socialEquityGroupSettings the social equity group settings
 	*/
 	public static void cacheResult(
 		java.util.List<com.liferay.portlet.social.model.SocialEquityGroupSetting> socialEquityGroupSettings) {
@@ -157,7 +157,7 @@ public class SocialEquityGroupSettingUtil {
 	/**
 	* Removes the social equity group setting with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param equityGroupSettingId the primary key of the social equity group setting to remove
+	* @param equityGroupSettingId the primary key of the social equity group setting
 	* @return the social equity group setting that was removed
 	* @throws com.liferay.portlet.social.NoSuchEquityGroupSettingException if a social equity group setting with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -177,9 +177,9 @@ public class SocialEquityGroupSettingUtil {
 	}
 
 	/**
-	* Finds the social equity group setting with the primary key or throws a {@link com.liferay.portlet.social.NoSuchEquityGroupSettingException} if it could not be found.
+	* Returns the social equity group setting with the primary key or throws a {@link com.liferay.portlet.social.NoSuchEquityGroupSettingException} if it could not be found.
 	*
-	* @param equityGroupSettingId the primary key of the social equity group setting to find
+	* @param equityGroupSettingId the primary key of the social equity group setting
 	* @return the social equity group setting
 	* @throws com.liferay.portlet.social.NoSuchEquityGroupSettingException if a social equity group setting with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -192,9 +192,9 @@ public class SocialEquityGroupSettingUtil {
 	}
 
 	/**
-	* Finds the social equity group setting with the primary key or returns <code>null</code> if it could not be found.
+	* Returns the social equity group setting with the primary key or returns <code>null</code> if it could not be found.
 	*
-	* @param equityGroupSettingId the primary key of the social equity group setting to find
+	* @param equityGroupSettingId the primary key of the social equity group setting
 	* @return the social equity group setting, or <code>null</code> if a social equity group setting with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -205,11 +205,11 @@ public class SocialEquityGroupSettingUtil {
 	}
 
 	/**
-	* Finds the social equity group setting where groupId = &#63; and classNameId = &#63; and type = &#63; or throws a {@link com.liferay.portlet.social.NoSuchEquityGroupSettingException} if it could not be found.
+	* Returns the social equity group setting where groupId = &#63; and classNameId = &#63; and type = &#63; or throws a {@link com.liferay.portlet.social.NoSuchEquityGroupSettingException} if it could not be found.
 	*
-	* @param groupId the group ID to search with
-	* @param classNameId the class name ID to search with
-	* @param type the type to search with
+	* @param groupId the group ID
+	* @param classNameId the class name ID
+	* @param type the type
 	* @return the matching social equity group setting
 	* @throws com.liferay.portlet.social.NoSuchEquityGroupSettingException if a matching social equity group setting could not be found
 	* @throws SystemException if a system exception occurred
@@ -222,11 +222,11 @@ public class SocialEquityGroupSettingUtil {
 	}
 
 	/**
-	* Finds the social equity group setting where groupId = &#63; and classNameId = &#63; and type = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	* Returns the social equity group setting where groupId = &#63; and classNameId = &#63; and type = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	*
-	* @param groupId the group ID to search with
-	* @param classNameId the class name ID to search with
-	* @param type the type to search with
+	* @param groupId the group ID
+	* @param classNameId the class name ID
+	* @param type the type
 	* @return the matching social equity group setting, or <code>null</code> if a matching social equity group setting could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -237,11 +237,11 @@ public class SocialEquityGroupSettingUtil {
 	}
 
 	/**
-	* Finds the social equity group setting where groupId = &#63; and classNameId = &#63; and type = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	* Returns the social equity group setting where groupId = &#63; and classNameId = &#63; and type = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
-	* @param groupId the group ID to search with
-	* @param classNameId the class name ID to search with
-	* @param type the type to search with
+	* @param groupId the group ID
+	* @param classNameId the class name ID
+	* @param type the type
 	* @return the matching social equity group setting, or <code>null</code> if a matching social equity group setting could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -253,7 +253,7 @@ public class SocialEquityGroupSettingUtil {
 	}
 
 	/**
-	* Finds all the social equity group settings.
+	* Returns all the social equity group settings.
 	*
 	* @return the social equity group settings
 	* @throws SystemException if a system exception occurred
@@ -264,14 +264,14 @@ public class SocialEquityGroupSettingUtil {
 	}
 
 	/**
-	* Finds a range of all the social equity group settings.
+	* Returns a range of all the social equity group settings.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of social equity group settings to return
-	* @param end the upper bound of the range of social equity group settings to return (not inclusive)
+	* @param start the lower bound of the range of social equity group settings
+	* @param end the upper bound of the range of social equity group settings (not inclusive)
 	* @return the range of social equity group settings
 	* @throws SystemException if a system exception occurred
 	*/
@@ -282,14 +282,14 @@ public class SocialEquityGroupSettingUtil {
 	}
 
 	/**
-	* Finds an ordered range of all the social equity group settings.
+	* Returns an ordered range of all the social equity group settings.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of social equity group settings to return
-	* @param end the upper bound of the range of social equity group settings to return (not inclusive)
+	* @param start the lower bound of the range of social equity group settings
+	* @param end the upper bound of the range of social equity group settings (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of social equity group settings
 	* @throws SystemException if a system exception occurred
@@ -304,9 +304,9 @@ public class SocialEquityGroupSettingUtil {
 	/**
 	* Removes the social equity group setting where groupId = &#63; and classNameId = &#63; and type = &#63; from the database.
 	*
-	* @param groupId the group ID to search with
-	* @param classNameId the class name ID to search with
-	* @param type the type to search with
+	* @param groupId the group ID
+	* @param classNameId the class name ID
+	* @param type the type
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByG_C_T(long groupId, long classNameId, int type)
@@ -326,11 +326,11 @@ public class SocialEquityGroupSettingUtil {
 	}
 
 	/**
-	* Counts all the social equity group settings where groupId = &#63; and classNameId = &#63; and type = &#63;.
+	* Returns the number of social equity group settings where groupId = &#63; and classNameId = &#63; and type = &#63;.
 	*
-	* @param groupId the group ID to search with
-	* @param classNameId the class name ID to search with
-	* @param type the type to search with
+	* @param groupId the group ID
+	* @param classNameId the class name ID
+	* @param type the type
 	* @return the number of matching social equity group settings
 	* @throws SystemException if a system exception occurred
 	*/
@@ -340,7 +340,7 @@ public class SocialEquityGroupSettingUtil {
 	}
 
 	/**
-	* Counts all the social equity group settings.
+	* Returns the number of social equity group settings.
 	*
 	* @return the number of social equity group settings
 	* @throws SystemException if a system exception occurred

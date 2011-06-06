@@ -37,7 +37,7 @@ public class WikiPageResourceWrapper implements WikiPageResource {
 	}
 
 	/**
-	* Gets the primary key of this wiki page resource.
+	* Returns the primary key of this wiki page resource.
 	*
 	* @return the primary key of this wiki page resource
 	*/
@@ -46,7 +46,7 @@ public class WikiPageResourceWrapper implements WikiPageResource {
 	}
 
 	/**
-	* Sets the primary key of this wiki page resource
+	* Sets the primary key of this wiki page resource.
 	*
 	* @param primaryKey the primary key of this wiki page resource
 	*/
@@ -55,7 +55,7 @@ public class WikiPageResourceWrapper implements WikiPageResource {
 	}
 
 	/**
-	* Gets the uuid of this wiki page resource.
+	* Returns the uuid of this wiki page resource.
 	*
 	* @return the uuid of this wiki page resource
 	*/
@@ -73,7 +73,7 @@ public class WikiPageResourceWrapper implements WikiPageResource {
 	}
 
 	/**
-	* Gets the resource prim key of this wiki page resource.
+	* Returns the resource prim key of this wiki page resource.
 	*
 	* @return the resource prim key of this wiki page resource
 	*/
@@ -91,7 +91,7 @@ public class WikiPageResourceWrapper implements WikiPageResource {
 	}
 
 	/**
-	* Gets the node ID of this wiki page resource.
+	* Returns the node ID of this wiki page resource.
 	*
 	* @return the node ID of this wiki page resource
 	*/
@@ -109,7 +109,7 @@ public class WikiPageResourceWrapper implements WikiPageResource {
 	}
 
 	/**
-	* Gets the title of this wiki page resource.
+	* Returns the title of this wiki page resource.
 	*
 	* @return the title of this wiki page resource
 	*/

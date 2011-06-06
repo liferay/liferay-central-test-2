@@ -86,7 +86,7 @@ public abstract class MBBanLocalServiceBaseImpl implements MBBanLocalService,
 	/**
 	 * Adds the message boards ban to the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param mbBan the message boards ban to add
+	 * @param mbBan the message boards ban
 	 * @return the message boards ban that was added
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -109,7 +109,7 @@ public abstract class MBBanLocalServiceBaseImpl implements MBBanLocalService,
 	/**
 	 * Deletes the message boards ban with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param banId the primary key of the message boards ban to delete
+	 * @param banId the primary key of the message boards ban
 	 * @throws PortalException if a message boards ban with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -120,7 +120,7 @@ public abstract class MBBanLocalServiceBaseImpl implements MBBanLocalService,
 	/**
 	 * Deletes the message boards ban from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param mbBan the message boards ban to delete
+	 * @param mbBan the message boards ban
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void deleteMBBan(MBBan mbBan) throws SystemException {
@@ -130,7 +130,7 @@ public abstract class MBBanLocalServiceBaseImpl implements MBBanLocalService,
 	/**
 	 * Performs a dynamic query on the database and returns the matching rows.
 	 *
-	 * @param dynamicQuery the dynamic query to search with
+	 * @param dynamicQuery the dynamic query
 	 * @return the matching rows
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -147,9 +147,9 @@ public abstract class MBBanLocalServiceBaseImpl implements MBBanLocalService,
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param dynamicQuery the dynamic query to search with
-	 * @param start the lower bound of the range of model instances to return
-	 * @param end the upper bound of the range of model instances to return (not inclusive)
+	 * @param dynamicQuery the dynamic query
+	 * @param start the lower bound of the range of model instances
+	 * @param end the upper bound of the range of model instances (not inclusive)
 	 * @return the range of matching rows
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -166,9 +166,9 @@ public abstract class MBBanLocalServiceBaseImpl implements MBBanLocalService,
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param dynamicQuery the dynamic query to search with
-	 * @param start the lower bound of the range of model instances to return
-	 * @param end the upper bound of the range of model instances to return (not inclusive)
+	 * @param dynamicQuery the dynamic query
+	 * @param start the lower bound of the range of model instances
+	 * @param end the upper bound of the range of model instances (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching rows
 	 * @throws SystemException if a system exception occurred
@@ -181,9 +181,9 @@ public abstract class MBBanLocalServiceBaseImpl implements MBBanLocalService,
 	}
 
 	/**
-	 * Counts the number of rows that match the dynamic query.
+	 * Returns the number of rows that match the dynamic query.
 	 *
-	 * @param dynamicQuery the dynamic query to search with
+	 * @param dynamicQuery the dynamic query
 	 * @return the number of rows that match the dynamic query
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -193,9 +193,9 @@ public abstract class MBBanLocalServiceBaseImpl implements MBBanLocalService,
 	}
 
 	/**
-	 * Gets the message boards ban with the primary key.
+	 * Returns the message boards ban with the primary key.
 	 *
-	 * @param banId the primary key of the message boards ban to get
+	 * @param banId the primary key of the message boards ban
 	 * @return the message boards ban
 	 * @throws PortalException if a message boards ban with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -205,14 +205,14 @@ public abstract class MBBanLocalServiceBaseImpl implements MBBanLocalService,
 	}
 
 	/**
-	 * Gets a range of all the message boards bans.
+	 * Returns a range of all the message boards bans.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param start the lower bound of the range of message boards bans to return
-	 * @param end the upper bound of the range of message boards bans to return (not inclusive)
+	 * @param start the lower bound of the range of message boards bans
+	 * @param end the upper bound of the range of message boards bans (not inclusive)
 	 * @return the range of message boards bans
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -221,7 +221,7 @@ public abstract class MBBanLocalServiceBaseImpl implements MBBanLocalService,
 	}
 
 	/**
-	 * Gets the number of message boards bans.
+	 * Returns the number of message boards bans.
 	 *
 	 * @return the number of message boards bans
 	 * @throws SystemException if a system exception occurred
@@ -233,7 +233,7 @@ public abstract class MBBanLocalServiceBaseImpl implements MBBanLocalService,
 	/**
 	 * Updates the message boards ban in the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param mbBan the message boards ban to update
+	 * @param mbBan the message boards ban
 	 * @return the message boards ban that was updated
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -246,7 +246,7 @@ public abstract class MBBanLocalServiceBaseImpl implements MBBanLocalService,
 	/**
 	 * Updates the message boards ban in the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param mbBan the message boards ban to update
+	 * @param mbBan the message boards ban
 	 * @param merge whether to merge the message boards ban with the current session. See {@link com.liferay.portal.service.persistence.BatchSession#update(com.liferay.portal.kernel.dao.orm.Session, com.liferay.portal.model.BaseModel, boolean)} for an explanation.
 	 * @return the message boards ban that was updated
 	 * @throws SystemException if a system exception occurred
@@ -259,7 +259,7 @@ public abstract class MBBanLocalServiceBaseImpl implements MBBanLocalService,
 	}
 
 	/**
-	 * Gets the message boards ban local service.
+	 * Returns the message boards ban local service.
 	 *
 	 * @return the message boards ban local service
 	 */
@@ -277,7 +277,7 @@ public abstract class MBBanLocalServiceBaseImpl implements MBBanLocalService,
 	}
 
 	/**
-	 * Gets the message boards ban remote service.
+	 * Returns the message boards ban remote service.
 	 *
 	 * @return the message boards ban remote service
 	 */
@@ -295,7 +295,7 @@ public abstract class MBBanLocalServiceBaseImpl implements MBBanLocalService,
 	}
 
 	/**
-	 * Gets the message boards ban persistence.
+	 * Returns the message boards ban persistence.
 	 *
 	 * @return the message boards ban persistence
 	 */
@@ -313,7 +313,7 @@ public abstract class MBBanLocalServiceBaseImpl implements MBBanLocalService,
 	}
 
 	/**
-	 * Gets the message boards category local service.
+	 * Returns the message boards category local service.
 	 *
 	 * @return the message boards category local service
 	 */
@@ -332,7 +332,7 @@ public abstract class MBBanLocalServiceBaseImpl implements MBBanLocalService,
 	}
 
 	/**
-	 * Gets the message boards category remote service.
+	 * Returns the message boards category remote service.
 	 *
 	 * @return the message boards category remote service
 	 */
@@ -350,7 +350,7 @@ public abstract class MBBanLocalServiceBaseImpl implements MBBanLocalService,
 	}
 
 	/**
-	 * Gets the message boards category persistence.
+	 * Returns the message boards category persistence.
 	 *
 	 * @return the message boards category persistence
 	 */
@@ -369,7 +369,7 @@ public abstract class MBBanLocalServiceBaseImpl implements MBBanLocalService,
 	}
 
 	/**
-	 * Gets the message boards category finder.
+	 * Returns the message boards category finder.
 	 *
 	 * @return the message boards category finder
 	 */
@@ -387,7 +387,7 @@ public abstract class MBBanLocalServiceBaseImpl implements MBBanLocalService,
 	}
 
 	/**
-	 * Gets the message boards discussion local service.
+	 * Returns the message boards discussion local service.
 	 *
 	 * @return the message boards discussion local service
 	 */
@@ -406,7 +406,7 @@ public abstract class MBBanLocalServiceBaseImpl implements MBBanLocalService,
 	}
 
 	/**
-	 * Gets the message boards discussion persistence.
+	 * Returns the message boards discussion persistence.
 	 *
 	 * @return the message boards discussion persistence
 	 */
@@ -425,7 +425,7 @@ public abstract class MBBanLocalServiceBaseImpl implements MBBanLocalService,
 	}
 
 	/**
-	 * Gets the message boards mailing list local service.
+	 * Returns the message boards mailing list local service.
 	 *
 	 * @return the message boards mailing list local service
 	 */
@@ -444,7 +444,7 @@ public abstract class MBBanLocalServiceBaseImpl implements MBBanLocalService,
 	}
 
 	/**
-	 * Gets the message boards mailing list persistence.
+	 * Returns the message boards mailing list persistence.
 	 *
 	 * @return the message boards mailing list persistence
 	 */
@@ -463,7 +463,7 @@ public abstract class MBBanLocalServiceBaseImpl implements MBBanLocalService,
 	}
 
 	/**
-	 * Gets the message-boards message local service.
+	 * Returns the message-boards message local service.
 	 *
 	 * @return the message-boards message local service
 	 */
@@ -482,7 +482,7 @@ public abstract class MBBanLocalServiceBaseImpl implements MBBanLocalService,
 	}
 
 	/**
-	 * Gets the message-boards message remote service.
+	 * Returns the message-boards message remote service.
 	 *
 	 * @return the message-boards message remote service
 	 */
@@ -500,7 +500,7 @@ public abstract class MBBanLocalServiceBaseImpl implements MBBanLocalService,
 	}
 
 	/**
-	 * Gets the message-boards message persistence.
+	 * Returns the message-boards message persistence.
 	 *
 	 * @return the message-boards message persistence
 	 */
@@ -519,7 +519,7 @@ public abstract class MBBanLocalServiceBaseImpl implements MBBanLocalService,
 	}
 
 	/**
-	 * Gets the message-boards message finder.
+	 * Returns the message-boards message finder.
 	 *
 	 * @return the message-boards message finder
 	 */
@@ -537,7 +537,7 @@ public abstract class MBBanLocalServiceBaseImpl implements MBBanLocalService,
 	}
 
 	/**
-	 * Gets the message boards message flag local service.
+	 * Returns the message boards message flag local service.
 	 *
 	 * @return the message boards message flag local service
 	 */
@@ -556,7 +556,7 @@ public abstract class MBBanLocalServiceBaseImpl implements MBBanLocalService,
 	}
 
 	/**
-	 * Gets the message boards message flag remote service.
+	 * Returns the message boards message flag remote service.
 	 *
 	 * @return the message boards message flag remote service
 	 */
@@ -575,7 +575,7 @@ public abstract class MBBanLocalServiceBaseImpl implements MBBanLocalService,
 	}
 
 	/**
-	 * Gets the message boards message flag persistence.
+	 * Returns the message boards message flag persistence.
 	 *
 	 * @return the message boards message flag persistence
 	 */
@@ -594,7 +594,7 @@ public abstract class MBBanLocalServiceBaseImpl implements MBBanLocalService,
 	}
 
 	/**
-	 * Gets the message boards stats user local service.
+	 * Returns the message boards stats user local service.
 	 *
 	 * @return the message boards stats user local service
 	 */
@@ -613,7 +613,7 @@ public abstract class MBBanLocalServiceBaseImpl implements MBBanLocalService,
 	}
 
 	/**
-	 * Gets the message boards stats user persistence.
+	 * Returns the message boards stats user persistence.
 	 *
 	 * @return the message boards stats user persistence
 	 */
@@ -632,7 +632,7 @@ public abstract class MBBanLocalServiceBaseImpl implements MBBanLocalService,
 	}
 
 	/**
-	 * Gets the message boards thread local service.
+	 * Returns the message boards thread local service.
 	 *
 	 * @return the message boards thread local service
 	 */
@@ -651,7 +651,7 @@ public abstract class MBBanLocalServiceBaseImpl implements MBBanLocalService,
 	}
 
 	/**
-	 * Gets the message boards thread remote service.
+	 * Returns the message boards thread remote service.
 	 *
 	 * @return the message boards thread remote service
 	 */
@@ -669,7 +669,7 @@ public abstract class MBBanLocalServiceBaseImpl implements MBBanLocalService,
 	}
 
 	/**
-	 * Gets the message boards thread persistence.
+	 * Returns the message boards thread persistence.
 	 *
 	 * @return the message boards thread persistence
 	 */
@@ -687,7 +687,7 @@ public abstract class MBBanLocalServiceBaseImpl implements MBBanLocalService,
 	}
 
 	/**
-	 * Gets the message boards thread finder.
+	 * Returns the message boards thread finder.
 	 *
 	 * @return the message boards thread finder
 	 */
@@ -705,7 +705,7 @@ public abstract class MBBanLocalServiceBaseImpl implements MBBanLocalService,
 	}
 
 	/**
-	 * Gets the counter local service.
+	 * Returns the counter local service.
 	 *
 	 * @return the counter local service
 	 */
@@ -723,7 +723,7 @@ public abstract class MBBanLocalServiceBaseImpl implements MBBanLocalService,
 	}
 
 	/**
-	 * Gets the resource local service.
+	 * Returns the resource local service.
 	 *
 	 * @return the resource local service
 	 */
@@ -742,7 +742,7 @@ public abstract class MBBanLocalServiceBaseImpl implements MBBanLocalService,
 	}
 
 	/**
-	 * Gets the resource remote service.
+	 * Returns the resource remote service.
 	 *
 	 * @return the resource remote service
 	 */
@@ -760,7 +760,7 @@ public abstract class MBBanLocalServiceBaseImpl implements MBBanLocalService,
 	}
 
 	/**
-	 * Gets the resource persistence.
+	 * Returns the resource persistence.
 	 *
 	 * @return the resource persistence
 	 */
@@ -778,7 +778,7 @@ public abstract class MBBanLocalServiceBaseImpl implements MBBanLocalService,
 	}
 
 	/**
-	 * Gets the resource finder.
+	 * Returns the resource finder.
 	 *
 	 * @return the resource finder
 	 */
@@ -796,7 +796,7 @@ public abstract class MBBanLocalServiceBaseImpl implements MBBanLocalService,
 	}
 
 	/**
-	 * Gets the user local service.
+	 * Returns the user local service.
 	 *
 	 * @return the user local service
 	 */
@@ -814,7 +814,7 @@ public abstract class MBBanLocalServiceBaseImpl implements MBBanLocalService,
 	}
 
 	/**
-	 * Gets the user remote service.
+	 * Returns the user remote service.
 	 *
 	 * @return the user remote service
 	 */
@@ -832,7 +832,7 @@ public abstract class MBBanLocalServiceBaseImpl implements MBBanLocalService,
 	}
 
 	/**
-	 * Gets the user persistence.
+	 * Returns the user persistence.
 	 *
 	 * @return the user persistence
 	 */
@@ -850,7 +850,7 @@ public abstract class MBBanLocalServiceBaseImpl implements MBBanLocalService,
 	}
 
 	/**
-	 * Gets the user finder.
+	 * Returns the user finder.
 	 *
 	 * @return the user finder
 	 */
@@ -868,7 +868,7 @@ public abstract class MBBanLocalServiceBaseImpl implements MBBanLocalService,
 	}
 
 	/**
-	 * Gets the Spring bean ID for this bean.
+	 * Returns the Spring bean ID for this bean.
 	 *
 	 * @return the Spring bean ID for this bean
 	 */
@@ -888,7 +888,7 @@ public abstract class MBBanLocalServiceBaseImpl implements MBBanLocalService,
 	/**
 	 * Performs an SQL query.
 	 *
-	 * @param sql the sql query to perform
+	 * @param sql the sql query
 	 */
 	protected void runSQL(String sql) throws SystemException {
 		try {

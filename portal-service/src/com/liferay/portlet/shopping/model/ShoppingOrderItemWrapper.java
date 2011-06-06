@@ -37,7 +37,7 @@ public class ShoppingOrderItemWrapper implements ShoppingOrderItem {
 	}
 
 	/**
-	* Gets the primary key of this shopping order item.
+	* Returns the primary key of this shopping order item.
 	*
 	* @return the primary key of this shopping order item
 	*/
@@ -46,7 +46,7 @@ public class ShoppingOrderItemWrapper implements ShoppingOrderItem {
 	}
 
 	/**
-	* Sets the primary key of this shopping order item
+	* Sets the primary key of this shopping order item.
 	*
 	* @param primaryKey the primary key of this shopping order item
 	*/
@@ -55,7 +55,7 @@ public class ShoppingOrderItemWrapper implements ShoppingOrderItem {
 	}
 
 	/**
-	* Gets the order item ID of this shopping order item.
+	* Returns the order item ID of this shopping order item.
 	*
 	* @return the order item ID of this shopping order item
 	*/
@@ -73,7 +73,7 @@ public class ShoppingOrderItemWrapper implements ShoppingOrderItem {
 	}
 
 	/**
-	* Gets the order ID of this shopping order item.
+	* Returns the order ID of this shopping order item.
 	*
 	* @return the order ID of this shopping order item
 	*/
@@ -91,7 +91,7 @@ public class ShoppingOrderItemWrapper implements ShoppingOrderItem {
 	}
 
 	/**
-	* Gets the item ID of this shopping order item.
+	* Returns the item ID of this shopping order item.
 	*
 	* @return the item ID of this shopping order item
 	*/
@@ -109,7 +109,7 @@ public class ShoppingOrderItemWrapper implements ShoppingOrderItem {
 	}
 
 	/**
-	* Gets the sku of this shopping order item.
+	* Returns the sku of this shopping order item.
 	*
 	* @return the sku of this shopping order item
 	*/
@@ -127,7 +127,7 @@ public class ShoppingOrderItemWrapper implements ShoppingOrderItem {
 	}
 
 	/**
-	* Gets the name of this shopping order item.
+	* Returns the name of this shopping order item.
 	*
 	* @return the name of this shopping order item
 	*/
@@ -145,7 +145,7 @@ public class ShoppingOrderItemWrapper implements ShoppingOrderItem {
 	}
 
 	/**
-	* Gets the description of this shopping order item.
+	* Returns the description of this shopping order item.
 	*
 	* @return the description of this shopping order item
 	*/
@@ -163,7 +163,7 @@ public class ShoppingOrderItemWrapper implements ShoppingOrderItem {
 	}
 
 	/**
-	* Gets the properties of this shopping order item.
+	* Returns the properties of this shopping order item.
 	*
 	* @return the properties of this shopping order item
 	*/
@@ -181,7 +181,7 @@ public class ShoppingOrderItemWrapper implements ShoppingOrderItem {
 	}
 
 	/**
-	* Gets the price of this shopping order item.
+	* Returns the price of this shopping order item.
 	*
 	* @return the price of this shopping order item
 	*/
@@ -199,7 +199,7 @@ public class ShoppingOrderItemWrapper implements ShoppingOrderItem {
 	}
 
 	/**
-	* Gets the quantity of this shopping order item.
+	* Returns the quantity of this shopping order item.
 	*
 	* @return the quantity of this shopping order item
 	*/
@@ -217,7 +217,7 @@ public class ShoppingOrderItemWrapper implements ShoppingOrderItem {
 	}
 
 	/**
-	* Gets the shipped date of this shopping order item.
+	* Returns the shipped date of this shopping order item.
 	*
 	* @return the shipped date of this shopping order item
 	*/

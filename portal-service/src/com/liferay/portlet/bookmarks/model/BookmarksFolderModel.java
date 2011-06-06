@@ -48,21 +48,21 @@ public interface BookmarksFolderModel extends BaseModel<BookmarksFolder>,
 	 */
 
 	/**
-	 * Gets the primary key of this bookmarks folder.
+	 * Returns the primary key of this bookmarks folder.
 	 *
 	 * @return the primary key of this bookmarks folder
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this bookmarks folder
+	 * Sets the primary key of this bookmarks folder.
 	 *
 	 * @param primaryKey the primary key of this bookmarks folder
 	 */
 	public void setPrimaryKey(long primaryKey);
 
 	/**
-	 * Gets the uuid of this bookmarks folder.
+	 * Returns the uuid of this bookmarks folder.
 	 *
 	 * @return the uuid of this bookmarks folder
 	 */
@@ -77,7 +77,7 @@ public interface BookmarksFolderModel extends BaseModel<BookmarksFolder>,
 	public void setUuid(String uuid);
 
 	/**
-	 * Gets the folder ID of this bookmarks folder.
+	 * Returns the folder ID of this bookmarks folder.
 	 *
 	 * @return the folder ID of this bookmarks folder
 	 */
@@ -91,7 +91,7 @@ public interface BookmarksFolderModel extends BaseModel<BookmarksFolder>,
 	public void setFolderId(long folderId);
 
 	/**
-	 * Gets the group ID of this bookmarks folder.
+	 * Returns the group ID of this bookmarks folder.
 	 *
 	 * @return the group ID of this bookmarks folder
 	 */
@@ -105,7 +105,7 @@ public interface BookmarksFolderModel extends BaseModel<BookmarksFolder>,
 	public void setGroupId(long groupId);
 
 	/**
-	 * Gets the company ID of this bookmarks folder.
+	 * Returns the company ID of this bookmarks folder.
 	 *
 	 * @return the company ID of this bookmarks folder
 	 */
@@ -119,7 +119,7 @@ public interface BookmarksFolderModel extends BaseModel<BookmarksFolder>,
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the user ID of this bookmarks folder.
+	 * Returns the user ID of this bookmarks folder.
 	 *
 	 * @return the user ID of this bookmarks folder
 	 */
@@ -133,7 +133,7 @@ public interface BookmarksFolderModel extends BaseModel<BookmarksFolder>,
 	public void setUserId(long userId);
 
 	/**
-	 * Gets the user uuid of this bookmarks folder.
+	 * Returns the user uuid of this bookmarks folder.
 	 *
 	 * @return the user uuid of this bookmarks folder
 	 * @throws SystemException if a system exception occurred
@@ -148,7 +148,7 @@ public interface BookmarksFolderModel extends BaseModel<BookmarksFolder>,
 	public void setUserUuid(String userUuid);
 
 	/**
-	 * Gets the user name of this bookmarks folder.
+	 * Returns the user name of this bookmarks folder.
 	 *
 	 * @return the user name of this bookmarks folder
 	 */
@@ -163,7 +163,7 @@ public interface BookmarksFolderModel extends BaseModel<BookmarksFolder>,
 	public void setUserName(String userName);
 
 	/**
-	 * Gets the create date of this bookmarks folder.
+	 * Returns the create date of this bookmarks folder.
 	 *
 	 * @return the create date of this bookmarks folder
 	 */
@@ -177,7 +177,7 @@ public interface BookmarksFolderModel extends BaseModel<BookmarksFolder>,
 	public void setCreateDate(Date createDate);
 
 	/**
-	 * Gets the modified date of this bookmarks folder.
+	 * Returns the modified date of this bookmarks folder.
 	 *
 	 * @return the modified date of this bookmarks folder
 	 */
@@ -191,7 +191,7 @@ public interface BookmarksFolderModel extends BaseModel<BookmarksFolder>,
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
-	 * Gets the parent folder ID of this bookmarks folder.
+	 * Returns the parent folder ID of this bookmarks folder.
 	 *
 	 * @return the parent folder ID of this bookmarks folder
 	 */
@@ -205,7 +205,7 @@ public interface BookmarksFolderModel extends BaseModel<BookmarksFolder>,
 	public void setParentFolderId(long parentFolderId);
 
 	/**
-	 * Gets the name of this bookmarks folder.
+	 * Returns the name of this bookmarks folder.
 	 *
 	 * @return the name of this bookmarks folder
 	 */
@@ -220,7 +220,7 @@ public interface BookmarksFolderModel extends BaseModel<BookmarksFolder>,
 	public void setName(String name);
 
 	/**
-	 * Gets the description of this bookmarks folder.
+	 * Returns the description of this bookmarks folder.
 	 *
 	 * @return the description of this bookmarks folder
 	 */

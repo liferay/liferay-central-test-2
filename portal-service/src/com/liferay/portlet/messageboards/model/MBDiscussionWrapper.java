@@ -37,7 +37,7 @@ public class MBDiscussionWrapper implements MBDiscussion {
 	}
 
 	/**
-	* Gets the primary key of this message boards discussion.
+	* Returns the primary key of this message boards discussion.
 	*
 	* @return the primary key of this message boards discussion
 	*/
@@ -46,7 +46,7 @@ public class MBDiscussionWrapper implements MBDiscussion {
 	}
 
 	/**
-	* Sets the primary key of this message boards discussion
+	* Sets the primary key of this message boards discussion.
 	*
 	* @param primaryKey the primary key of this message boards discussion
 	*/
@@ -55,7 +55,7 @@ public class MBDiscussionWrapper implements MBDiscussion {
 	}
 
 	/**
-	* Gets the discussion ID of this message boards discussion.
+	* Returns the discussion ID of this message boards discussion.
 	*
 	* @return the discussion ID of this message boards discussion
 	*/
@@ -73,16 +73,16 @@ public class MBDiscussionWrapper implements MBDiscussion {
 	}
 
 	/**
-	* Gets the class name of the model instance this message boards discussion is polymorphically associated with.
+	* Returns the fully qualified class name of this message boards discussion.
 	*
-	* @return the class name of the model instance this message boards discussion is polymorphically associated with
+	* @return the fully qualified class name of this message boards discussion
 	*/
 	public java.lang.String getClassName() {
 		return _mbDiscussion.getClassName();
 	}
 
 	/**
-	* Gets the class name ID of this message boards discussion.
+	* Returns the class name ID of this message boards discussion.
 	*
 	* @return the class name ID of this message boards discussion
 	*/
@@ -100,7 +100,7 @@ public class MBDiscussionWrapper implements MBDiscussion {
 	}
 
 	/**
-	* Gets the class p k of this message boards discussion.
+	* Returns the class p k of this message boards discussion.
 	*
 	* @return the class p k of this message boards discussion
 	*/
@@ -118,7 +118,7 @@ public class MBDiscussionWrapper implements MBDiscussion {
 	}
 
 	/**
-	* Gets the thread ID of this message boards discussion.
+	* Returns the thread ID of this message boards discussion.
 	*
 	* @return the thread ID of this message boards discussion
 	*/

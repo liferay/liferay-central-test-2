@@ -41,7 +41,7 @@ public class IGImageLocalServiceUtil {
 	/**
 	* Adds the i g image to the database. Also notifies the appropriate model listeners.
 	*
-	* @param igImage the i g image to add
+	* @param igImage the i g image
 	* @return the i g image that was added
 	* @throws SystemException if a system exception occurred
 	*/
@@ -65,7 +65,7 @@ public class IGImageLocalServiceUtil {
 	/**
 	* Deletes the i g image with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param imageId the primary key of the i g image to delete
+	* @param imageId the primary key of the i g image
 	* @throws PortalException if a i g image with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -78,7 +78,7 @@ public class IGImageLocalServiceUtil {
 	/**
 	* Deletes the i g image from the database. Also notifies the appropriate model listeners.
 	*
-	* @param igImage the i g image to delete
+	* @param igImage the i g image
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void deleteIGImage(
@@ -90,7 +90,7 @@ public class IGImageLocalServiceUtil {
 	/**
 	* Performs a dynamic query on the database and returns the matching rows.
 	*
-	* @param dynamicQuery the dynamic query to search with
+	* @param dynamicQuery the dynamic query
 	* @return the matching rows
 	* @throws SystemException if a system exception occurred
 	*/
@@ -108,9 +108,9 @@ public class IGImageLocalServiceUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param dynamicQuery the dynamic query to search with
-	* @param start the lower bound of the range of model instances to return
-	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param dynamicQuery the dynamic query
+	* @param start the lower bound of the range of model instances
+	* @param end the upper bound of the range of model instances (not inclusive)
 	* @return the range of matching rows
 	* @throws SystemException if a system exception occurred
 	*/
@@ -128,9 +128,9 @@ public class IGImageLocalServiceUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param dynamicQuery the dynamic query to search with
-	* @param start the lower bound of the range of model instances to return
-	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param dynamicQuery the dynamic query
+	* @param start the lower bound of the range of model instances
+	* @param end the upper bound of the range of model instances (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching rows
 	* @throws SystemException if a system exception occurred
@@ -146,9 +146,9 @@ public class IGImageLocalServiceUtil {
 	}
 
 	/**
-	* Counts the number of rows that match the dynamic query.
+	* Returns the number of rows that match the dynamic query.
 	*
-	* @param dynamicQuery the dynamic query to search with
+	* @param dynamicQuery the dynamic query
 	* @return the number of rows that match the dynamic query
 	* @throws SystemException if a system exception occurred
 	*/
@@ -159,9 +159,9 @@ public class IGImageLocalServiceUtil {
 	}
 
 	/**
-	* Gets the i g image with the primary key.
+	* Returns the i g image with the primary key.
 	*
-	* @param imageId the primary key of the i g image to get
+	* @param imageId the primary key of the i g image
 	* @return the i g image
 	* @throws PortalException if a i g image with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -174,12 +174,12 @@ public class IGImageLocalServiceUtil {
 	}
 
 	/**
-	* Gets the i g image with the UUID and group id.
+	* Returns the i g image with the UUID in the group.
 	*
-	* @param uuid the UUID of i g image to get
-	* @param groupId the group id of the i g image to get
+	* @param uuid the UUID of i g image
+	* @param groupId the group id of the i g image
 	* @return the i g image
-	* @throws PortalException if a i g image with the UUID and group id could not be found
+	* @throws PortalException if a i g image with the UUID in the group could not be found
 	* @throws SystemException if a system exception occurred
 	*/
 	public static com.liferay.portlet.imagegallery.model.IGImage getIGImageByUuidAndGroupId(
@@ -190,14 +190,14 @@ public class IGImageLocalServiceUtil {
 	}
 
 	/**
-	* Gets a range of all the i g images.
+	* Returns a range of all the i g images.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of i g images to return
-	* @param end the upper bound of the range of i g images to return (not inclusive)
+	* @param start the lower bound of the range of i g images
+	* @param end the upper bound of the range of i g images (not inclusive)
 	* @return the range of i g images
 	* @throws SystemException if a system exception occurred
 	*/
@@ -208,7 +208,7 @@ public class IGImageLocalServiceUtil {
 	}
 
 	/**
-	* Gets the number of i g images.
+	* Returns the number of i g images.
 	*
 	* @return the number of i g images
 	* @throws SystemException if a system exception occurred
@@ -221,7 +221,7 @@ public class IGImageLocalServiceUtil {
 	/**
 	* Updates the i g image in the database. Also notifies the appropriate model listeners.
 	*
-	* @param igImage the i g image to update
+	* @param igImage the i g image
 	* @return the i g image that was updated
 	* @throws SystemException if a system exception occurred
 	*/
@@ -234,7 +234,7 @@ public class IGImageLocalServiceUtil {
 	/**
 	* Updates the i g image in the database. Also notifies the appropriate model listeners.
 	*
-	* @param igImage the i g image to update
+	* @param igImage the i g image
 	* @param merge whether to merge the i g image with the current session. See {@link com.liferay.portal.service.persistence.BatchSession#update(com.liferay.portal.kernel.dao.orm.Session, com.liferay.portal.model.BaseModel, boolean)} for an explanation.
 	* @return the i g image that was updated
 	* @throws SystemException if a system exception occurred
@@ -246,7 +246,7 @@ public class IGImageLocalServiceUtil {
 	}
 
 	/**
-	* Gets the Spring bean ID for this bean.
+	* Returns the Spring bean ID for this bean.
 	*
 	* @return the Spring bean ID for this bean
 	*/
@@ -305,8 +305,7 @@ public class IGImageLocalServiceUtil {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		getService()
-			.addImageResources(image, addGroupPermissions,
-			addGuestPermissions);
+			.addImageResources(image, addGroupPermissions, addGuestPermissions);
 	}
 
 	public static void addImageResources(
@@ -324,8 +323,7 @@ public class IGImageLocalServiceUtil {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		getService()
-			.addImageResources(imageId, addGroupPermissions,
-			addGuestPermissions);
+			.addImageResources(imageId, addGroupPermissions, addGuestPermissions);
 	}
 
 	public static void addImageResources(long imageId,

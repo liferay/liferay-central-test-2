@@ -45,7 +45,7 @@ public interface DLFolderLocalService {
 	/**
 	* Adds the d l folder to the database. Also notifies the appropriate model listeners.
 	*
-	* @param dlFolder the d l folder to add
+	* @param dlFolder the d l folder
 	* @return the d l folder that was added
 	* @throws SystemException if a system exception occurred
 	*/
@@ -65,7 +65,7 @@ public interface DLFolderLocalService {
 	/**
 	* Deletes the d l folder with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param folderId the primary key of the d l folder to delete
+	* @param folderId the primary key of the d l folder
 	* @throws PortalException if a d l folder with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -76,7 +76,7 @@ public interface DLFolderLocalService {
 	/**
 	* Deletes the d l folder from the database. Also notifies the appropriate model listeners.
 	*
-	* @param dlFolder the d l folder to delete
+	* @param dlFolder the d l folder
 	* @throws SystemException if a system exception occurred
 	*/
 	public void deleteDLFolder(
@@ -86,7 +86,7 @@ public interface DLFolderLocalService {
 	/**
 	* Performs a dynamic query on the database and returns the matching rows.
 	*
-	* @param dynamicQuery the dynamic query to search with
+	* @param dynamicQuery the dynamic query
 	* @return the matching rows
 	* @throws SystemException if a system exception occurred
 	*/
@@ -102,9 +102,9 @@ public interface DLFolderLocalService {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param dynamicQuery the dynamic query to search with
-	* @param start the lower bound of the range of model instances to return
-	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param dynamicQuery the dynamic query
+	* @param start the lower bound of the range of model instances
+	* @param end the upper bound of the range of model instances (not inclusive)
 	* @return the range of matching rows
 	* @throws SystemException if a system exception occurred
 	*/
@@ -120,9 +120,9 @@ public interface DLFolderLocalService {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param dynamicQuery the dynamic query to search with
-	* @param start the lower bound of the range of model instances to return
-	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param dynamicQuery the dynamic query
+	* @param start the lower bound of the range of model instances
+	* @param end the upper bound of the range of model instances (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching rows
 	* @throws SystemException if a system exception occurred
@@ -135,9 +135,9 @@ public interface DLFolderLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Counts the number of rows that match the dynamic query.
+	* Returns the number of rows that match the dynamic query.
 	*
-	* @param dynamicQuery the dynamic query to search with
+	* @param dynamicQuery the dynamic query
 	* @return the number of rows that match the dynamic query
 	* @throws SystemException if a system exception occurred
 	*/
@@ -146,9 +146,9 @@ public interface DLFolderLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Gets the d l folder with the primary key.
+	* Returns the d l folder with the primary key.
 	*
-	* @param folderId the primary key of the d l folder to get
+	* @param folderId the primary key of the d l folder
 	* @return the d l folder
 	* @throws PortalException if a d l folder with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -160,12 +160,12 @@ public interface DLFolderLocalService {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Gets the d l folder with the UUID and group id.
+	* Returns the d l folder with the UUID in the group.
 	*
-	* @param uuid the UUID of d l folder to get
-	* @param groupId the group id of the d l folder to get
+	* @param uuid the UUID of d l folder
+	* @param groupId the group id of the d l folder
 	* @return the d l folder
-	* @throws PortalException if a d l folder with the UUID and group id could not be found
+	* @throws PortalException if a d l folder with the UUID in the group could not be found
 	* @throws SystemException if a system exception occurred
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
@@ -175,14 +175,14 @@ public interface DLFolderLocalService {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Gets a range of all the d l folders.
+	* Returns a range of all the d l folders.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of d l folders to return
-	* @param end the upper bound of the range of d l folders to return (not inclusive)
+	* @param start the lower bound of the range of d l folders
+	* @param end the upper bound of the range of d l folders (not inclusive)
 	* @return the range of d l folders
 	* @throws SystemException if a system exception occurred
 	*/
@@ -192,7 +192,7 @@ public interface DLFolderLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Gets the number of d l folders.
+	* Returns the number of d l folders.
 	*
 	* @return the number of d l folders
 	* @throws SystemException if a system exception occurred
@@ -204,7 +204,7 @@ public interface DLFolderLocalService {
 	/**
 	* Updates the d l folder in the database. Also notifies the appropriate model listeners.
 	*
-	* @param dlFolder the d l folder to update
+	* @param dlFolder the d l folder
 	* @return the d l folder that was updated
 	* @throws SystemException if a system exception occurred
 	*/
@@ -215,7 +215,7 @@ public interface DLFolderLocalService {
 	/**
 	* Updates the d l folder in the database. Also notifies the appropriate model listeners.
 	*
-	* @param dlFolder the d l folder to update
+	* @param dlFolder the d l folder
 	* @param merge whether to merge the d l folder with the current session. See {@link com.liferay.portal.service.persistence.BatchSession#update(com.liferay.portal.kernel.dao.orm.Session, com.liferay.portal.model.BaseModel, boolean)} for an explanation.
 	* @return the d l folder that was updated
 	* @throws SystemException if a system exception occurred
@@ -226,7 +226,7 @@ public interface DLFolderLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Gets the Spring bean ID for this bean.
+	* Returns the Spring bean ID for this bean.
 	*
 	* @return the Spring bean ID for this bean
 	*/

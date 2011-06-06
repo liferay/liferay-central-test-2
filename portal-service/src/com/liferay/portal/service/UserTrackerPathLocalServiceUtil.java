@@ -41,7 +41,7 @@ public class UserTrackerPathLocalServiceUtil {
 	/**
 	* Adds the user tracker path to the database. Also notifies the appropriate model listeners.
 	*
-	* @param userTrackerPath the user tracker path to add
+	* @param userTrackerPath the user tracker path
 	* @return the user tracker path that was added
 	* @throws SystemException if a system exception occurred
 	*/
@@ -65,7 +65,7 @@ public class UserTrackerPathLocalServiceUtil {
 	/**
 	* Deletes the user tracker path with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param userTrackerPathId the primary key of the user tracker path to delete
+	* @param userTrackerPathId the primary key of the user tracker path
 	* @throws PortalException if a user tracker path with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -78,7 +78,7 @@ public class UserTrackerPathLocalServiceUtil {
 	/**
 	* Deletes the user tracker path from the database. Also notifies the appropriate model listeners.
 	*
-	* @param userTrackerPath the user tracker path to delete
+	* @param userTrackerPath the user tracker path
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void deleteUserTrackerPath(
@@ -90,7 +90,7 @@ public class UserTrackerPathLocalServiceUtil {
 	/**
 	* Performs a dynamic query on the database and returns the matching rows.
 	*
-	* @param dynamicQuery the dynamic query to search with
+	* @param dynamicQuery the dynamic query
 	* @return the matching rows
 	* @throws SystemException if a system exception occurred
 	*/
@@ -108,9 +108,9 @@ public class UserTrackerPathLocalServiceUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param dynamicQuery the dynamic query to search with
-	* @param start the lower bound of the range of model instances to return
-	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param dynamicQuery the dynamic query
+	* @param start the lower bound of the range of model instances
+	* @param end the upper bound of the range of model instances (not inclusive)
 	* @return the range of matching rows
 	* @throws SystemException if a system exception occurred
 	*/
@@ -128,9 +128,9 @@ public class UserTrackerPathLocalServiceUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param dynamicQuery the dynamic query to search with
-	* @param start the lower bound of the range of model instances to return
-	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param dynamicQuery the dynamic query
+	* @param start the lower bound of the range of model instances
+	* @param end the upper bound of the range of model instances (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching rows
 	* @throws SystemException if a system exception occurred
@@ -146,9 +146,9 @@ public class UserTrackerPathLocalServiceUtil {
 	}
 
 	/**
-	* Counts the number of rows that match the dynamic query.
+	* Returns the number of rows that match the dynamic query.
 	*
-	* @param dynamicQuery the dynamic query to search with
+	* @param dynamicQuery the dynamic query
 	* @return the number of rows that match the dynamic query
 	* @throws SystemException if a system exception occurred
 	*/
@@ -159,9 +159,9 @@ public class UserTrackerPathLocalServiceUtil {
 	}
 
 	/**
-	* Gets the user tracker path with the primary key.
+	* Returns the user tracker path with the primary key.
 	*
-	* @param userTrackerPathId the primary key of the user tracker path to get
+	* @param userTrackerPathId the primary key of the user tracker path
 	* @return the user tracker path
 	* @throws PortalException if a user tracker path with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -174,14 +174,14 @@ public class UserTrackerPathLocalServiceUtil {
 	}
 
 	/**
-	* Gets a range of all the user tracker paths.
+	* Returns a range of all the user tracker paths.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of user tracker paths to return
-	* @param end the upper bound of the range of user tracker paths to return (not inclusive)
+	* @param start the lower bound of the range of user tracker paths
+	* @param end the upper bound of the range of user tracker paths (not inclusive)
 	* @return the range of user tracker paths
 	* @throws SystemException if a system exception occurred
 	*/
@@ -192,7 +192,7 @@ public class UserTrackerPathLocalServiceUtil {
 	}
 
 	/**
-	* Gets the number of user tracker paths.
+	* Returns the number of user tracker paths.
 	*
 	* @return the number of user tracker paths
 	* @throws SystemException if a system exception occurred
@@ -205,7 +205,7 @@ public class UserTrackerPathLocalServiceUtil {
 	/**
 	* Updates the user tracker path in the database. Also notifies the appropriate model listeners.
 	*
-	* @param userTrackerPath the user tracker path to update
+	* @param userTrackerPath the user tracker path
 	* @return the user tracker path that was updated
 	* @throws SystemException if a system exception occurred
 	*/
@@ -218,7 +218,7 @@ public class UserTrackerPathLocalServiceUtil {
 	/**
 	* Updates the user tracker path in the database. Also notifies the appropriate model listeners.
 	*
-	* @param userTrackerPath the user tracker path to update
+	* @param userTrackerPath the user tracker path
 	* @param merge whether to merge the user tracker path with the current session. See {@link com.liferay.portal.service.persistence.BatchSession#update(com.liferay.portal.kernel.dao.orm.Session, com.liferay.portal.model.BaseModel, boolean)} for an explanation.
 	* @return the user tracker path that was updated
 	* @throws SystemException if a system exception occurred
@@ -230,7 +230,7 @@ public class UserTrackerPathLocalServiceUtil {
 	}
 
 	/**
-	* Gets the Spring bean ID for this bean.
+	* Returns the Spring bean ID for this bean.
 	*
 	* @return the Spring bean ID for this bean
 	*/

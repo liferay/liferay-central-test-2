@@ -43,21 +43,21 @@ public interface SocialEquitySettingModel extends BaseModel<SocialEquitySetting>
 	 */
 
 	/**
-	 * Gets the primary key of this social equity setting.
+	 * Returns the primary key of this social equity setting.
 	 *
 	 * @return the primary key of this social equity setting
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this social equity setting
+	 * Sets the primary key of this social equity setting.
 	 *
 	 * @param primaryKey the primary key of this social equity setting
 	 */
 	public void setPrimaryKey(long primaryKey);
 
 	/**
-	 * Gets the equity setting ID of this social equity setting.
+	 * Returns the equity setting ID of this social equity setting.
 	 *
 	 * @return the equity setting ID of this social equity setting
 	 */
@@ -71,7 +71,7 @@ public interface SocialEquitySettingModel extends BaseModel<SocialEquitySetting>
 	public void setEquitySettingId(long equitySettingId);
 
 	/**
-	 * Gets the group ID of this social equity setting.
+	 * Returns the group ID of this social equity setting.
 	 *
 	 * @return the group ID of this social equity setting
 	 */
@@ -85,7 +85,7 @@ public interface SocialEquitySettingModel extends BaseModel<SocialEquitySetting>
 	public void setGroupId(long groupId);
 
 	/**
-	 * Gets the company ID of this social equity setting.
+	 * Returns the company ID of this social equity setting.
 	 *
 	 * @return the company ID of this social equity setting
 	 */
@@ -99,14 +99,14 @@ public interface SocialEquitySettingModel extends BaseModel<SocialEquitySetting>
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the class name of the model instance this social equity setting is polymorphically associated with.
+	 * Returns the fully qualified class name of this social equity setting.
 	 *
-	 * @return the class name of the model instance this social equity setting is polymorphically associated with
+	 * @return the fully qualified class name of this social equity setting
 	 */
 	public String getClassName();
 
 	/**
-	 * Gets the class name ID of this social equity setting.
+	 * Returns the class name ID of this social equity setting.
 	 *
 	 * @return the class name ID of this social equity setting
 	 */
@@ -120,7 +120,7 @@ public interface SocialEquitySettingModel extends BaseModel<SocialEquitySetting>
 	public void setClassNameId(long classNameId);
 
 	/**
-	 * Gets the action ID of this social equity setting.
+	 * Returns the action ID of this social equity setting.
 	 *
 	 * @return the action ID of this social equity setting
 	 */
@@ -135,7 +135,7 @@ public interface SocialEquitySettingModel extends BaseModel<SocialEquitySetting>
 	public void setActionId(String actionId);
 
 	/**
-	 * Gets the daily limit of this social equity setting.
+	 * Returns the daily limit of this social equity setting.
 	 *
 	 * @return the daily limit of this social equity setting
 	 */
@@ -149,7 +149,7 @@ public interface SocialEquitySettingModel extends BaseModel<SocialEquitySetting>
 	public void setDailyLimit(int dailyLimit);
 
 	/**
-	 * Gets the lifespan of this social equity setting.
+	 * Returns the lifespan of this social equity setting.
 	 *
 	 * @return the lifespan of this social equity setting
 	 */
@@ -163,7 +163,7 @@ public interface SocialEquitySettingModel extends BaseModel<SocialEquitySetting>
 	public void setLifespan(int lifespan);
 
 	/**
-	 * Gets the type of this social equity setting.
+	 * Returns the type of this social equity setting.
 	 *
 	 * @return the type of this social equity setting
 	 */
@@ -177,7 +177,7 @@ public interface SocialEquitySettingModel extends BaseModel<SocialEquitySetting>
 	public void setType(int type);
 
 	/**
-	 * Gets the unique entry of this social equity setting.
+	 * Returns the unique entry of this social equity setting.
 	 *
 	 * @return the unique entry of this social equity setting
 	 */
@@ -198,7 +198,7 @@ public interface SocialEquitySettingModel extends BaseModel<SocialEquitySetting>
 	public void setUniqueEntry(boolean uniqueEntry);
 
 	/**
-	 * Gets the value of this social equity setting.
+	 * Returns the value of this social equity setting.
 	 *
 	 * @return the value of this social equity setting
 	 */

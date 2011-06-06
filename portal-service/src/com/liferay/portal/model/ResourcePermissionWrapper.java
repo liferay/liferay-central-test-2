@@ -37,7 +37,7 @@ public class ResourcePermissionWrapper implements ResourcePermission {
 	}
 
 	/**
-	* Gets the primary key of this resource permission.
+	* Returns the primary key of this resource permission.
 	*
 	* @return the primary key of this resource permission
 	*/
@@ -46,7 +46,7 @@ public class ResourcePermissionWrapper implements ResourcePermission {
 	}
 
 	/**
-	* Sets the primary key of this resource permission
+	* Sets the primary key of this resource permission.
 	*
 	* @param primaryKey the primary key of this resource permission
 	*/
@@ -55,7 +55,7 @@ public class ResourcePermissionWrapper implements ResourcePermission {
 	}
 
 	/**
-	* Gets the resource permission ID of this resource permission.
+	* Returns the resource permission ID of this resource permission.
 	*
 	* @return the resource permission ID of this resource permission
 	*/
@@ -73,7 +73,7 @@ public class ResourcePermissionWrapper implements ResourcePermission {
 	}
 
 	/**
-	* Gets the company ID of this resource permission.
+	* Returns the company ID of this resource permission.
 	*
 	* @return the company ID of this resource permission
 	*/
@@ -91,7 +91,7 @@ public class ResourcePermissionWrapper implements ResourcePermission {
 	}
 
 	/**
-	* Gets the name of this resource permission.
+	* Returns the name of this resource permission.
 	*
 	* @return the name of this resource permission
 	*/
@@ -109,7 +109,7 @@ public class ResourcePermissionWrapper implements ResourcePermission {
 	}
 
 	/**
-	* Gets the scope of this resource permission.
+	* Returns the scope of this resource permission.
 	*
 	* @return the scope of this resource permission
 	*/
@@ -127,7 +127,7 @@ public class ResourcePermissionWrapper implements ResourcePermission {
 	}
 
 	/**
-	* Gets the prim key of this resource permission.
+	* Returns the prim key of this resource permission.
 	*
 	* @return the prim key of this resource permission
 	*/
@@ -145,7 +145,7 @@ public class ResourcePermissionWrapper implements ResourcePermission {
 	}
 
 	/**
-	* Gets the role ID of this resource permission.
+	* Returns the role ID of this resource permission.
 	*
 	* @return the role ID of this resource permission
 	*/
@@ -163,7 +163,7 @@ public class ResourcePermissionWrapper implements ResourcePermission {
 	}
 
 	/**
-	* Gets the owner ID of this resource permission.
+	* Returns the owner ID of this resource permission.
 	*
 	* @return the owner ID of this resource permission
 	*/
@@ -181,7 +181,7 @@ public class ResourcePermissionWrapper implements ResourcePermission {
 	}
 
 	/**
-	* Gets the action IDs of this resource permission.
+	* Returns the action IDs of this resource permission.
 	*
 	* @return the action IDs of this resource permission
 	*/

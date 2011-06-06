@@ -37,7 +37,7 @@ public class ExpandoTableWrapper implements ExpandoTable {
 	}
 
 	/**
-	* Gets the primary key of this expando table.
+	* Returns the primary key of this expando table.
 	*
 	* @return the primary key of this expando table
 	*/
@@ -46,7 +46,7 @@ public class ExpandoTableWrapper implements ExpandoTable {
 	}
 
 	/**
-	* Sets the primary key of this expando table
+	* Sets the primary key of this expando table.
 	*
 	* @param primaryKey the primary key of this expando table
 	*/
@@ -55,7 +55,7 @@ public class ExpandoTableWrapper implements ExpandoTable {
 	}
 
 	/**
-	* Gets the table ID of this expando table.
+	* Returns the table ID of this expando table.
 	*
 	* @return the table ID of this expando table
 	*/
@@ -73,7 +73,7 @@ public class ExpandoTableWrapper implements ExpandoTable {
 	}
 
 	/**
-	* Gets the company ID of this expando table.
+	* Returns the company ID of this expando table.
 	*
 	* @return the company ID of this expando table
 	*/
@@ -91,16 +91,16 @@ public class ExpandoTableWrapper implements ExpandoTable {
 	}
 
 	/**
-	* Gets the class name of the model instance this expando table is polymorphically associated with.
+	* Returns the fully qualified class name of this expando table.
 	*
-	* @return the class name of the model instance this expando table is polymorphically associated with
+	* @return the fully qualified class name of this expando table
 	*/
 	public java.lang.String getClassName() {
 		return _expandoTable.getClassName();
 	}
 
 	/**
-	* Gets the class name ID of this expando table.
+	* Returns the class name ID of this expando table.
 	*
 	* @return the class name ID of this expando table
 	*/
@@ -118,7 +118,7 @@ public class ExpandoTableWrapper implements ExpandoTable {
 	}
 
 	/**
-	* Gets the name of this expando table.
+	* Returns the name of this expando table.
 	*
 	* @return the name of this expando table
 	*/

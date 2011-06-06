@@ -90,7 +90,7 @@ public abstract class AssetLinkLocalServiceBaseImpl
 	/**
 	 * Adds the asset link to the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param assetLink the asset link to add
+	 * @param assetLink the asset link
 	 * @return the asset link that was added
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -114,7 +114,7 @@ public abstract class AssetLinkLocalServiceBaseImpl
 	/**
 	 * Deletes the asset link with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param linkId the primary key of the asset link to delete
+	 * @param linkId the primary key of the asset link
 	 * @throws PortalException if a asset link with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -126,7 +126,7 @@ public abstract class AssetLinkLocalServiceBaseImpl
 	/**
 	 * Deletes the asset link from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param assetLink the asset link to delete
+	 * @param assetLink the asset link
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void deleteAssetLink(AssetLink assetLink) throws SystemException {
@@ -136,7 +136,7 @@ public abstract class AssetLinkLocalServiceBaseImpl
 	/**
 	 * Performs a dynamic query on the database and returns the matching rows.
 	 *
-	 * @param dynamicQuery the dynamic query to search with
+	 * @param dynamicQuery the dynamic query
 	 * @return the matching rows
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -153,9 +153,9 @@ public abstract class AssetLinkLocalServiceBaseImpl
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param dynamicQuery the dynamic query to search with
-	 * @param start the lower bound of the range of model instances to return
-	 * @param end the upper bound of the range of model instances to return (not inclusive)
+	 * @param dynamicQuery the dynamic query
+	 * @param start the lower bound of the range of model instances
+	 * @param end the upper bound of the range of model instances (not inclusive)
 	 * @return the range of matching rows
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -173,9 +173,9 @@ public abstract class AssetLinkLocalServiceBaseImpl
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param dynamicQuery the dynamic query to search with
-	 * @param start the lower bound of the range of model instances to return
-	 * @param end the upper bound of the range of model instances to return (not inclusive)
+	 * @param dynamicQuery the dynamic query
+	 * @param start the lower bound of the range of model instances
+	 * @param end the upper bound of the range of model instances (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching rows
 	 * @throws SystemException if a system exception occurred
@@ -188,9 +188,9 @@ public abstract class AssetLinkLocalServiceBaseImpl
 	}
 
 	/**
-	 * Counts the number of rows that match the dynamic query.
+	 * Returns the number of rows that match the dynamic query.
 	 *
-	 * @param dynamicQuery the dynamic query to search with
+	 * @param dynamicQuery the dynamic query
 	 * @return the number of rows that match the dynamic query
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -200,9 +200,9 @@ public abstract class AssetLinkLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the asset link with the primary key.
+	 * Returns the asset link with the primary key.
 	 *
-	 * @param linkId the primary key of the asset link to get
+	 * @param linkId the primary key of the asset link
 	 * @return the asset link
 	 * @throws PortalException if a asset link with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -213,14 +213,14 @@ public abstract class AssetLinkLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets a range of all the asset links.
+	 * Returns a range of all the asset links.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param start the lower bound of the range of asset links to return
-	 * @param end the upper bound of the range of asset links to return (not inclusive)
+	 * @param start the lower bound of the range of asset links
+	 * @param end the upper bound of the range of asset links (not inclusive)
 	 * @return the range of asset links
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -230,7 +230,7 @@ public abstract class AssetLinkLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the number of asset links.
+	 * Returns the number of asset links.
 	 *
 	 * @return the number of asset links
 	 * @throws SystemException if a system exception occurred
@@ -242,7 +242,7 @@ public abstract class AssetLinkLocalServiceBaseImpl
 	/**
 	 * Updates the asset link in the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param assetLink the asset link to update
+	 * @param assetLink the asset link
 	 * @return the asset link that was updated
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -256,7 +256,7 @@ public abstract class AssetLinkLocalServiceBaseImpl
 	/**
 	 * Updates the asset link in the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param assetLink the asset link to update
+	 * @param assetLink the asset link
 	 * @param merge whether to merge the asset link with the current session. See {@link com.liferay.portal.service.persistence.BatchSession#update(com.liferay.portal.kernel.dao.orm.Session, com.liferay.portal.model.BaseModel, boolean)} for an explanation.
 	 * @return the asset link that was updated
 	 * @throws SystemException if a system exception occurred
@@ -269,7 +269,7 @@ public abstract class AssetLinkLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the asset category local service.
+	 * Returns the asset category local service.
 	 *
 	 * @return the asset category local service
 	 */
@@ -288,7 +288,7 @@ public abstract class AssetLinkLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the asset category remote service.
+	 * Returns the asset category remote service.
 	 *
 	 * @return the asset category remote service
 	 */
@@ -307,7 +307,7 @@ public abstract class AssetLinkLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the asset category persistence.
+	 * Returns the asset category persistence.
 	 *
 	 * @return the asset category persistence
 	 */
@@ -326,7 +326,7 @@ public abstract class AssetLinkLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the asset category finder.
+	 * Returns the asset category finder.
 	 *
 	 * @return the asset category finder
 	 */
@@ -344,7 +344,7 @@ public abstract class AssetLinkLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the asset category property local service.
+	 * Returns the asset category property local service.
 	 *
 	 * @return the asset category property local service
 	 */
@@ -363,7 +363,7 @@ public abstract class AssetLinkLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the asset category property remote service.
+	 * Returns the asset category property remote service.
 	 *
 	 * @return the asset category property remote service
 	 */
@@ -382,7 +382,7 @@ public abstract class AssetLinkLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the asset category property persistence.
+	 * Returns the asset category property persistence.
 	 *
 	 * @return the asset category property persistence
 	 */
@@ -401,7 +401,7 @@ public abstract class AssetLinkLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the asset category property finder.
+	 * Returns the asset category property finder.
 	 *
 	 * @return the asset category property finder
 	 */
@@ -420,7 +420,7 @@ public abstract class AssetLinkLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the asset entry local service.
+	 * Returns the asset entry local service.
 	 *
 	 * @return the asset entry local service
 	 */
@@ -439,7 +439,7 @@ public abstract class AssetLinkLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the asset entry remote service.
+	 * Returns the asset entry remote service.
 	 *
 	 * @return the asset entry remote service
 	 */
@@ -457,7 +457,7 @@ public abstract class AssetLinkLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the asset entry persistence.
+	 * Returns the asset entry persistence.
 	 *
 	 * @return the asset entry persistence
 	 */
@@ -476,7 +476,7 @@ public abstract class AssetLinkLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the asset entry finder.
+	 * Returns the asset entry finder.
 	 *
 	 * @return the asset entry finder
 	 */
@@ -494,7 +494,7 @@ public abstract class AssetLinkLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the asset link local service.
+	 * Returns the asset link local service.
 	 *
 	 * @return the asset link local service
 	 */
@@ -513,7 +513,7 @@ public abstract class AssetLinkLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the asset link persistence.
+	 * Returns the asset link persistence.
 	 *
 	 * @return the asset link persistence
 	 */
@@ -532,7 +532,7 @@ public abstract class AssetLinkLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the asset tag local service.
+	 * Returns the asset tag local service.
 	 *
 	 * @return the asset tag local service
 	 */
@@ -551,7 +551,7 @@ public abstract class AssetLinkLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the asset tag remote service.
+	 * Returns the asset tag remote service.
 	 *
 	 * @return the asset tag remote service
 	 */
@@ -569,7 +569,7 @@ public abstract class AssetLinkLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the asset tag persistence.
+	 * Returns the asset tag persistence.
 	 *
 	 * @return the asset tag persistence
 	 */
@@ -587,7 +587,7 @@ public abstract class AssetLinkLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the asset tag finder.
+	 * Returns the asset tag finder.
 	 *
 	 * @return the asset tag finder
 	 */
@@ -605,7 +605,7 @@ public abstract class AssetLinkLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the asset tag property local service.
+	 * Returns the asset tag property local service.
 	 *
 	 * @return the asset tag property local service
 	 */
@@ -624,7 +624,7 @@ public abstract class AssetLinkLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the asset tag property remote service.
+	 * Returns the asset tag property remote service.
 	 *
 	 * @return the asset tag property remote service
 	 */
@@ -643,7 +643,7 @@ public abstract class AssetLinkLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the asset tag property persistence.
+	 * Returns the asset tag property persistence.
 	 *
 	 * @return the asset tag property persistence
 	 */
@@ -662,7 +662,7 @@ public abstract class AssetLinkLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the asset tag property finder.
+	 * Returns the asset tag property finder.
 	 *
 	 * @return the asset tag property finder
 	 */
@@ -681,7 +681,7 @@ public abstract class AssetLinkLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the asset tag property key finder.
+	 * Returns the asset tag property key finder.
 	 *
 	 * @return the asset tag property key finder
 	 */
@@ -700,7 +700,7 @@ public abstract class AssetLinkLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the asset tag stats local service.
+	 * Returns the asset tag stats local service.
 	 *
 	 * @return the asset tag stats local service
 	 */
@@ -719,7 +719,7 @@ public abstract class AssetLinkLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the asset tag stats persistence.
+	 * Returns the asset tag stats persistence.
 	 *
 	 * @return the asset tag stats persistence
 	 */
@@ -738,7 +738,7 @@ public abstract class AssetLinkLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the asset vocabulary local service.
+	 * Returns the asset vocabulary local service.
 	 *
 	 * @return the asset vocabulary local service
 	 */
@@ -757,7 +757,7 @@ public abstract class AssetLinkLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the asset vocabulary remote service.
+	 * Returns the asset vocabulary remote service.
 	 *
 	 * @return the asset vocabulary remote service
 	 */
@@ -776,7 +776,7 @@ public abstract class AssetLinkLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the asset vocabulary persistence.
+	 * Returns the asset vocabulary persistence.
 	 *
 	 * @return the asset vocabulary persistence
 	 */
@@ -795,7 +795,7 @@ public abstract class AssetLinkLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the counter local service.
+	 * Returns the counter local service.
 	 *
 	 * @return the counter local service
 	 */
@@ -813,7 +813,7 @@ public abstract class AssetLinkLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the resource local service.
+	 * Returns the resource local service.
 	 *
 	 * @return the resource local service
 	 */
@@ -832,7 +832,7 @@ public abstract class AssetLinkLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the resource remote service.
+	 * Returns the resource remote service.
 	 *
 	 * @return the resource remote service
 	 */
@@ -850,7 +850,7 @@ public abstract class AssetLinkLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the resource persistence.
+	 * Returns the resource persistence.
 	 *
 	 * @return the resource persistence
 	 */
@@ -868,7 +868,7 @@ public abstract class AssetLinkLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the resource finder.
+	 * Returns the resource finder.
 	 *
 	 * @return the resource finder
 	 */
@@ -886,7 +886,7 @@ public abstract class AssetLinkLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the user local service.
+	 * Returns the user local service.
 	 *
 	 * @return the user local service
 	 */
@@ -904,7 +904,7 @@ public abstract class AssetLinkLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the user remote service.
+	 * Returns the user remote service.
 	 *
 	 * @return the user remote service
 	 */
@@ -922,7 +922,7 @@ public abstract class AssetLinkLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the user persistence.
+	 * Returns the user persistence.
 	 *
 	 * @return the user persistence
 	 */
@@ -940,7 +940,7 @@ public abstract class AssetLinkLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the user finder.
+	 * Returns the user finder.
 	 *
 	 * @return the user finder
 	 */
@@ -958,7 +958,7 @@ public abstract class AssetLinkLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the Spring bean ID for this bean.
+	 * Returns the Spring bean ID for this bean.
 	 *
 	 * @return the Spring bean ID for this bean
 	 */
@@ -978,7 +978,7 @@ public abstract class AssetLinkLocalServiceBaseImpl
 	/**
 	 * Performs an SQL query.
 	 *
-	 * @param sql the sql query to perform
+	 * @param sql the sql query
 	 */
 	protected void runSQL(String sql) throws SystemException {
 		try {

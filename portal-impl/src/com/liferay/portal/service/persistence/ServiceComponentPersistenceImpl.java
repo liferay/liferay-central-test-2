@@ -100,7 +100,7 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 	/**
 	 * Caches the service component in the entity cache if it is enabled.
 	 *
-	 * @param serviceComponent the service component to cache
+	 * @param serviceComponent the service component
 	 */
 	public void cacheResult(ServiceComponent serviceComponent) {
 		EntityCacheUtil.putResult(ServiceComponentModelImpl.ENTITY_CACHE_ENABLED,
@@ -119,7 +119,7 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 	/**
 	 * Caches the service components in the entity cache if it is enabled.
 	 *
-	 * @param serviceComponents the service components to cache
+	 * @param serviceComponents the service components
 	 */
 	public void cacheResult(List<ServiceComponent> serviceComponents) {
 		for (ServiceComponent serviceComponent : serviceComponents) {
@@ -185,7 +185,7 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 	/**
 	 * Removes the service component with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param primaryKey the primary key of the service component to remove
+	 * @param primaryKey the primary key of the service component
 	 * @return the service component that was removed
 	 * @throws com.liferay.portal.NoSuchModelException if a service component with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -198,7 +198,7 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 	/**
 	 * Removes the service component with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param serviceComponentId the primary key of the service component to remove
+	 * @param serviceComponentId the primary key of the service component
 	 * @return the service component that was removed
 	 * @throws com.liferay.portal.NoSuchServiceComponentException if a service component with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -239,7 +239,7 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 	/**
 	 * Removes the service component from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param serviceComponent the service component to remove
+	 * @param serviceComponent the service component
 	 * @return the service component that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -360,9 +360,9 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 	}
 
 	/**
-	 * Finds the service component with the primary key or throws a {@link com.liferay.portal.NoSuchModelException} if it could not be found.
+	 * Returns the service component with the primary key or throws a {@link com.liferay.portal.NoSuchModelException} if it could not be found.
 	 *
-	 * @param primaryKey the primary key of the service component to find
+	 * @param primaryKey the primary key of the service component
 	 * @return the service component
 	 * @throws com.liferay.portal.NoSuchModelException if a service component with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -373,9 +373,9 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 	}
 
 	/**
-	 * Finds the service component with the primary key or throws a {@link com.liferay.portal.NoSuchServiceComponentException} if it could not be found.
+	 * Returns the service component with the primary key or throws a {@link com.liferay.portal.NoSuchServiceComponentException} if it could not be found.
 	 *
-	 * @param serviceComponentId the primary key of the service component to find
+	 * @param serviceComponentId the primary key of the service component
 	 * @return the service component
 	 * @throws com.liferay.portal.NoSuchServiceComponentException if a service component with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -398,9 +398,9 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 	}
 
 	/**
-	 * Finds the service component with the primary key or returns <code>null</code> if it could not be found.
+	 * Returns the service component with the primary key or returns <code>null</code> if it could not be found.
 	 *
-	 * @param primaryKey the primary key of the service component to find
+	 * @param primaryKey the primary key of the service component
 	 * @return the service component, or <code>null</code> if a service component with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -410,9 +410,9 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 	}
 
 	/**
-	 * Finds the service component with the primary key or returns <code>null</code> if it could not be found.
+	 * Returns the service component with the primary key or returns <code>null</code> if it could not be found.
 	 *
-	 * @param serviceComponentId the primary key of the service component to find
+	 * @param serviceComponentId the primary key of the service component
 	 * @return the service component, or <code>null</code> if a service component with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -446,9 +446,9 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 	}
 
 	/**
-	 * Finds all the service components where buildNamespace = &#63;.
+	 * Returns all the service components where buildNamespace = &#63;.
 	 *
-	 * @param buildNamespace the build namespace to search with
+	 * @param buildNamespace the build namespace
 	 * @return the matching service components
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -459,15 +459,15 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 	}
 
 	/**
-	 * Finds a range of all the service components where buildNamespace = &#63;.
+	 * Returns a range of all the service components where buildNamespace = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param buildNamespace the build namespace to search with
-	 * @param start the lower bound of the range of service components to return
-	 * @param end the upper bound of the range of service components to return (not inclusive)
+	 * @param buildNamespace the build namespace
+	 * @param start the lower bound of the range of service components
+	 * @param end the upper bound of the range of service components (not inclusive)
 	 * @return the range of matching service components
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -477,15 +477,15 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 	}
 
 	/**
-	 * Finds an ordered range of all the service components where buildNamespace = &#63;.
+	 * Returns an ordered range of all the service components where buildNamespace = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param buildNamespace the build namespace to search with
-	 * @param start the lower bound of the range of service components to return
-	 * @param end the upper bound of the range of service components to return (not inclusive)
+	 * @param buildNamespace the build namespace
+	 * @param start the lower bound of the range of service components
+	 * @param end the upper bound of the range of service components (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching service components
 	 * @throws SystemException if a system exception occurred
@@ -578,13 +578,13 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 	}
 
 	/**
-	 * Finds the first service component in the ordered set where buildNamespace = &#63;.
+	 * Returns the first service component in the ordered set where buildNamespace = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param buildNamespace the build namespace to search with
+	 * @param buildNamespace the build namespace
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching service component
 	 * @throws com.liferay.portal.NoSuchServiceComponentException if a matching service component could not be found
@@ -614,13 +614,13 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 	}
 
 	/**
-	 * Finds the last service component in the ordered set where buildNamespace = &#63;.
+	 * Returns the last service component in the ordered set where buildNamespace = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param buildNamespace the build namespace to search with
+	 * @param buildNamespace the build namespace
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching service component
 	 * @throws com.liferay.portal.NoSuchServiceComponentException if a matching service component could not be found
@@ -652,14 +652,14 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 	}
 
 	/**
-	 * Finds the service components before and after the current service component in the ordered set where buildNamespace = &#63;.
+	 * Returns the service components before and after the current service component in the ordered set where buildNamespace = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
 	 * @param serviceComponentId the primary key of the current service component
-	 * @param buildNamespace the build namespace to search with
+	 * @param buildNamespace the build namespace
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next service component
 	 * @throws com.liferay.portal.NoSuchServiceComponentException if a service component with the primary key could not be found
@@ -814,10 +814,10 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 	}
 
 	/**
-	 * Finds the service component where buildNamespace = &#63; and buildNumber = &#63; or throws a {@link com.liferay.portal.NoSuchServiceComponentException} if it could not be found.
+	 * Returns the service component where buildNamespace = &#63; and buildNumber = &#63; or throws a {@link com.liferay.portal.NoSuchServiceComponentException} if it could not be found.
 	 *
-	 * @param buildNamespace the build namespace to search with
-	 * @param buildNumber the build number to search with
+	 * @param buildNamespace the build namespace
+	 * @param buildNumber the build number
 	 * @return the matching service component
 	 * @throws com.liferay.portal.NoSuchServiceComponentException if a matching service component could not be found
 	 * @throws SystemException if a system exception occurred
@@ -852,10 +852,10 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 	}
 
 	/**
-	 * Finds the service component where buildNamespace = &#63; and buildNumber = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 * Returns the service component where buildNamespace = &#63; and buildNumber = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	 *
-	 * @param buildNamespace the build namespace to search with
-	 * @param buildNumber the build number to search with
+	 * @param buildNamespace the build namespace
+	 * @param buildNumber the build number
 	 * @return the matching service component, or <code>null</code> if a matching service component could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -865,10 +865,10 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 	}
 
 	/**
-	 * Finds the service component where buildNamespace = &#63; and buildNumber = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 * Returns the service component where buildNamespace = &#63; and buildNumber = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	 *
-	 * @param buildNamespace the build namespace to search with
-	 * @param buildNumber the build number to search with
+	 * @param buildNamespace the build namespace
+	 * @param buildNumber the build number
 	 * @return the matching service component, or <code>null</code> if a matching service component could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -970,7 +970,7 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 	}
 
 	/**
-	 * Finds all the service components.
+	 * Returns all the service components.
 	 *
 	 * @return the service components
 	 * @throws SystemException if a system exception occurred
@@ -980,14 +980,14 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 	}
 
 	/**
-	 * Finds a range of all the service components.
+	 * Returns a range of all the service components.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param start the lower bound of the range of service components to return
-	 * @param end the upper bound of the range of service components to return (not inclusive)
+	 * @param start the lower bound of the range of service components
+	 * @param end the upper bound of the range of service components (not inclusive)
 	 * @return the range of service components
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -997,14 +997,14 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 	}
 
 	/**
-	 * Finds an ordered range of all the service components.
+	 * Returns an ordered range of all the service components.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param start the lower bound of the range of service components to return
-	 * @param end the upper bound of the range of service components to return (not inclusive)
+	 * @param start the lower bound of the range of service components
+	 * @param end the upper bound of the range of service components (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of service components
 	 * @throws SystemException if a system exception occurred
@@ -1081,7 +1081,7 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 	/**
 	 * Removes all the service components where buildNamespace = &#63; from the database.
 	 *
-	 * @param buildNamespace the build namespace to search with
+	 * @param buildNamespace the build namespace
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByBuildNamespace(String buildNamespace)
@@ -1095,8 +1095,8 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 	/**
 	 * Removes the service component where buildNamespace = &#63; and buildNumber = &#63; from the database.
 	 *
-	 * @param buildNamespace the build namespace to search with
-	 * @param buildNumber the build number to search with
+	 * @param buildNamespace the build namespace
+	 * @param buildNumber the build number
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByBNS_BNU(String buildNamespace, long buildNumber)
@@ -1119,9 +1119,9 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 	}
 
 	/**
-	 * Counts all the service components where buildNamespace = &#63;.
+	 * Returns the number of service components where buildNamespace = &#63;.
 	 *
-	 * @param buildNamespace the build namespace to search with
+	 * @param buildNamespace the build namespace
 	 * @return the number of matching service components
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1185,10 +1185,10 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 	}
 
 	/**
-	 * Counts all the service components where buildNamespace = &#63; and buildNumber = &#63;.
+	 * Returns the number of service components where buildNamespace = &#63; and buildNumber = &#63;.
 	 *
-	 * @param buildNamespace the build namespace to search with
-	 * @param buildNumber the build number to search with
+	 * @param buildNamespace the build namespace
+	 * @param buildNumber the build number
 	 * @return the number of matching service components
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1256,7 +1256,7 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 	}
 
 	/**
-	 * Counts all the service components.
+	 * Returns the number of service components.
 	 *
 	 * @return the number of service components
 	 * @throws SystemException if a system exception occurred

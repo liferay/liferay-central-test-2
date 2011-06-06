@@ -45,7 +45,7 @@ public interface PollsVoteLocalService {
 	/**
 	* Adds the polls vote to the database. Also notifies the appropriate model listeners.
 	*
-	* @param pollsVote the polls vote to add
+	* @param pollsVote the polls vote
 	* @return the polls vote that was added
 	* @throws SystemException if a system exception occurred
 	*/
@@ -65,7 +65,7 @@ public interface PollsVoteLocalService {
 	/**
 	* Deletes the polls vote with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param voteId the primary key of the polls vote to delete
+	* @param voteId the primary key of the polls vote
 	* @throws PortalException if a polls vote with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -76,7 +76,7 @@ public interface PollsVoteLocalService {
 	/**
 	* Deletes the polls vote from the database. Also notifies the appropriate model listeners.
 	*
-	* @param pollsVote the polls vote to delete
+	* @param pollsVote the polls vote
 	* @throws SystemException if a system exception occurred
 	*/
 	public void deletePollsVote(
@@ -86,7 +86,7 @@ public interface PollsVoteLocalService {
 	/**
 	* Performs a dynamic query on the database and returns the matching rows.
 	*
-	* @param dynamicQuery the dynamic query to search with
+	* @param dynamicQuery the dynamic query
 	* @return the matching rows
 	* @throws SystemException if a system exception occurred
 	*/
@@ -102,9 +102,9 @@ public interface PollsVoteLocalService {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param dynamicQuery the dynamic query to search with
-	* @param start the lower bound of the range of model instances to return
-	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param dynamicQuery the dynamic query
+	* @param start the lower bound of the range of model instances
+	* @param end the upper bound of the range of model instances (not inclusive)
 	* @return the range of matching rows
 	* @throws SystemException if a system exception occurred
 	*/
@@ -120,9 +120,9 @@ public interface PollsVoteLocalService {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param dynamicQuery the dynamic query to search with
-	* @param start the lower bound of the range of model instances to return
-	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param dynamicQuery the dynamic query
+	* @param start the lower bound of the range of model instances
+	* @param end the upper bound of the range of model instances (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching rows
 	* @throws SystemException if a system exception occurred
@@ -135,9 +135,9 @@ public interface PollsVoteLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Counts the number of rows that match the dynamic query.
+	* Returns the number of rows that match the dynamic query.
 	*
-	* @param dynamicQuery the dynamic query to search with
+	* @param dynamicQuery the dynamic query
 	* @return the number of rows that match the dynamic query
 	* @throws SystemException if a system exception occurred
 	*/
@@ -146,9 +146,9 @@ public interface PollsVoteLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Gets the polls vote with the primary key.
+	* Returns the polls vote with the primary key.
 	*
-	* @param voteId the primary key of the polls vote to get
+	* @param voteId the primary key of the polls vote
 	* @return the polls vote
 	* @throws PortalException if a polls vote with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -159,14 +159,14 @@ public interface PollsVoteLocalService {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Gets a range of all the polls votes.
+	* Returns a range of all the polls votes.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of polls votes to return
-	* @param end the upper bound of the range of polls votes to return (not inclusive)
+	* @param start the lower bound of the range of polls votes
+	* @param end the upper bound of the range of polls votes (not inclusive)
 	* @return the range of polls votes
 	* @throws SystemException if a system exception occurred
 	*/
@@ -176,7 +176,7 @@ public interface PollsVoteLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Gets the number of polls votes.
+	* Returns the number of polls votes.
 	*
 	* @return the number of polls votes
 	* @throws SystemException if a system exception occurred
@@ -188,7 +188,7 @@ public interface PollsVoteLocalService {
 	/**
 	* Updates the polls vote in the database. Also notifies the appropriate model listeners.
 	*
-	* @param pollsVote the polls vote to update
+	* @param pollsVote the polls vote
 	* @return the polls vote that was updated
 	* @throws SystemException if a system exception occurred
 	*/
@@ -199,7 +199,7 @@ public interface PollsVoteLocalService {
 	/**
 	* Updates the polls vote in the database. Also notifies the appropriate model listeners.
 	*
-	* @param pollsVote the polls vote to update
+	* @param pollsVote the polls vote
 	* @param merge whether to merge the polls vote with the current session. See {@link com.liferay.portal.service.persistence.BatchSession#update(com.liferay.portal.kernel.dao.orm.Session, com.liferay.portal.model.BaseModel, boolean)} for an explanation.
 	* @return the polls vote that was updated
 	* @throws SystemException if a system exception occurred
@@ -209,7 +209,7 @@ public interface PollsVoteLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Gets the Spring bean ID for this bean.
+	* Returns the Spring bean ID for this bean.
 	*
 	* @return the Spring bean ID for this bean
 	*/

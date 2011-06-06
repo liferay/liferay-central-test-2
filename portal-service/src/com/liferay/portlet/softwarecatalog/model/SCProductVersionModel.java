@@ -48,21 +48,21 @@ public interface SCProductVersionModel extends AuditedModel,
 	 */
 
 	/**
-	 * Gets the primary key of this s c product version.
+	 * Returns the primary key of this s c product version.
 	 *
 	 * @return the primary key of this s c product version
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this s c product version
+	 * Sets the primary key of this s c product version.
 	 *
 	 * @param primaryKey the primary key of this s c product version
 	 */
 	public void setPrimaryKey(long primaryKey);
 
 	/**
-	 * Gets the product version ID of this s c product version.
+	 * Returns the product version ID of this s c product version.
 	 *
 	 * @return the product version ID of this s c product version
 	 */
@@ -76,7 +76,7 @@ public interface SCProductVersionModel extends AuditedModel,
 	public void setProductVersionId(long productVersionId);
 
 	/**
-	 * Gets the company ID of this s c product version.
+	 * Returns the company ID of this s c product version.
 	 *
 	 * @return the company ID of this s c product version
 	 */
@@ -90,7 +90,7 @@ public interface SCProductVersionModel extends AuditedModel,
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the user ID of this s c product version.
+	 * Returns the user ID of this s c product version.
 	 *
 	 * @return the user ID of this s c product version
 	 */
@@ -104,7 +104,7 @@ public interface SCProductVersionModel extends AuditedModel,
 	public void setUserId(long userId);
 
 	/**
-	 * Gets the user uuid of this s c product version.
+	 * Returns the user uuid of this s c product version.
 	 *
 	 * @return the user uuid of this s c product version
 	 * @throws SystemException if a system exception occurred
@@ -119,7 +119,7 @@ public interface SCProductVersionModel extends AuditedModel,
 	public void setUserUuid(String userUuid);
 
 	/**
-	 * Gets the user name of this s c product version.
+	 * Returns the user name of this s c product version.
 	 *
 	 * @return the user name of this s c product version
 	 */
@@ -134,7 +134,7 @@ public interface SCProductVersionModel extends AuditedModel,
 	public void setUserName(String userName);
 
 	/**
-	 * Gets the create date of this s c product version.
+	 * Returns the create date of this s c product version.
 	 *
 	 * @return the create date of this s c product version
 	 */
@@ -148,7 +148,7 @@ public interface SCProductVersionModel extends AuditedModel,
 	public void setCreateDate(Date createDate);
 
 	/**
-	 * Gets the modified date of this s c product version.
+	 * Returns the modified date of this s c product version.
 	 *
 	 * @return the modified date of this s c product version
 	 */
@@ -162,7 +162,7 @@ public interface SCProductVersionModel extends AuditedModel,
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
-	 * Gets the product entry ID of this s c product version.
+	 * Returns the product entry ID of this s c product version.
 	 *
 	 * @return the product entry ID of this s c product version
 	 */
@@ -176,7 +176,7 @@ public interface SCProductVersionModel extends AuditedModel,
 	public void setProductEntryId(long productEntryId);
 
 	/**
-	 * Gets the version of this s c product version.
+	 * Returns the version of this s c product version.
 	 *
 	 * @return the version of this s c product version
 	 */
@@ -191,7 +191,7 @@ public interface SCProductVersionModel extends AuditedModel,
 	public void setVersion(String version);
 
 	/**
-	 * Gets the change log of this s c product version.
+	 * Returns the change log of this s c product version.
 	 *
 	 * @return the change log of this s c product version
 	 */
@@ -206,7 +206,7 @@ public interface SCProductVersionModel extends AuditedModel,
 	public void setChangeLog(String changeLog);
 
 	/**
-	 * Gets the download page u r l of this s c product version.
+	 * Returns the download page u r l of this s c product version.
 	 *
 	 * @return the download page u r l of this s c product version
 	 */
@@ -221,7 +221,7 @@ public interface SCProductVersionModel extends AuditedModel,
 	public void setDownloadPageURL(String downloadPageURL);
 
 	/**
-	 * Gets the direct download u r l of this s c product version.
+	 * Returns the direct download u r l of this s c product version.
 	 *
 	 * @return the direct download u r l of this s c product version
 	 */
@@ -236,7 +236,7 @@ public interface SCProductVersionModel extends AuditedModel,
 	public void setDirectDownloadURL(String directDownloadURL);
 
 	/**
-	 * Gets the repo store artifact of this s c product version.
+	 * Returns the repo store artifact of this s c product version.
 	 *
 	 * @return the repo store artifact of this s c product version
 	 */

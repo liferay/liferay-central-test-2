@@ -38,7 +38,7 @@ public class JournalContentSearchWrapper implements JournalContentSearch {
 	}
 
 	/**
-	* Gets the primary key of this journal content search.
+	* Returns the primary key of this journal content search.
 	*
 	* @return the primary key of this journal content search
 	*/
@@ -47,7 +47,7 @@ public class JournalContentSearchWrapper implements JournalContentSearch {
 	}
 
 	/**
-	* Sets the primary key of this journal content search
+	* Sets the primary key of this journal content search.
 	*
 	* @param primaryKey the primary key of this journal content search
 	*/
@@ -56,7 +56,7 @@ public class JournalContentSearchWrapper implements JournalContentSearch {
 	}
 
 	/**
-	* Gets the content search ID of this journal content search.
+	* Returns the content search ID of this journal content search.
 	*
 	* @return the content search ID of this journal content search
 	*/
@@ -74,7 +74,7 @@ public class JournalContentSearchWrapper implements JournalContentSearch {
 	}
 
 	/**
-	* Gets the group ID of this journal content search.
+	* Returns the group ID of this journal content search.
 	*
 	* @return the group ID of this journal content search
 	*/
@@ -92,7 +92,7 @@ public class JournalContentSearchWrapper implements JournalContentSearch {
 	}
 
 	/**
-	* Gets the company ID of this journal content search.
+	* Returns the company ID of this journal content search.
 	*
 	* @return the company ID of this journal content search
 	*/
@@ -110,7 +110,7 @@ public class JournalContentSearchWrapper implements JournalContentSearch {
 	}
 
 	/**
-	* Gets the private layout of this journal content search.
+	* Returns the private layout of this journal content search.
 	*
 	* @return the private layout of this journal content search
 	*/
@@ -137,7 +137,7 @@ public class JournalContentSearchWrapper implements JournalContentSearch {
 	}
 
 	/**
-	* Gets the layout ID of this journal content search.
+	* Returns the layout ID of this journal content search.
 	*
 	* @return the layout ID of this journal content search
 	*/
@@ -155,7 +155,7 @@ public class JournalContentSearchWrapper implements JournalContentSearch {
 	}
 
 	/**
-	* Gets the portlet ID of this journal content search.
+	* Returns the portlet ID of this journal content search.
 	*
 	* @return the portlet ID of this journal content search
 	*/
@@ -173,7 +173,7 @@ public class JournalContentSearchWrapper implements JournalContentSearch {
 	}
 
 	/**
-	* Gets the article ID of this journal content search.
+	* Returns the article ID of this journal content search.
 	*
 	* @return the article ID of this journal content search
 	*/

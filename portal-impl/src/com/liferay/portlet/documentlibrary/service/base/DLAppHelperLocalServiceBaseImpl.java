@@ -126,7 +126,7 @@ public abstract class DLAppHelperLocalServiceBaseImpl
 	 */
 
 	/**
-	 * Gets the d l app local service.
+	 * Returns the d l app local service.
 	 *
 	 * @return the d l app local service
 	 */
@@ -144,7 +144,7 @@ public abstract class DLAppHelperLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the d l app remote service.
+	 * Returns the d l app remote service.
 	 *
 	 * @return the d l app remote service
 	 */
@@ -162,7 +162,7 @@ public abstract class DLAppHelperLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the d l app helper local service.
+	 * Returns the d l app helper local service.
 	 *
 	 * @return the d l app helper local service
 	 */
@@ -181,7 +181,7 @@ public abstract class DLAppHelperLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the d l document metadata set local service.
+	 * Returns the d l document metadata set local service.
 	 *
 	 * @return the d l document metadata set local service
 	 */
@@ -200,7 +200,7 @@ public abstract class DLAppHelperLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the d l document metadata set persistence.
+	 * Returns the d l document metadata set persistence.
 	 *
 	 * @return the d l document metadata set persistence
 	 */
@@ -219,7 +219,7 @@ public abstract class DLAppHelperLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the d l document type local service.
+	 * Returns the d l document type local service.
 	 *
 	 * @return the d l document type local service
 	 */
@@ -238,7 +238,7 @@ public abstract class DLAppHelperLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the d l document type remote service.
+	 * Returns the d l document type remote service.
 	 *
 	 * @return the d l document type remote service
 	 */
@@ -257,7 +257,7 @@ public abstract class DLAppHelperLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the d l document type persistence.
+	 * Returns the d l document type persistence.
 	 *
 	 * @return the d l document type persistence
 	 */
@@ -276,7 +276,7 @@ public abstract class DLAppHelperLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the d l document type finder.
+	 * Returns the d l document type finder.
 	 *
 	 * @return the d l document type finder
 	 */
@@ -295,7 +295,7 @@ public abstract class DLAppHelperLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the d l file entry local service.
+	 * Returns the d l file entry local service.
 	 *
 	 * @return the d l file entry local service
 	 */
@@ -314,7 +314,7 @@ public abstract class DLAppHelperLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the d l file entry remote service.
+	 * Returns the d l file entry remote service.
 	 *
 	 * @return the d l file entry remote service
 	 */
@@ -332,7 +332,7 @@ public abstract class DLAppHelperLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the d l file entry persistence.
+	 * Returns the d l file entry persistence.
 	 *
 	 * @return the d l file entry persistence
 	 */
@@ -351,7 +351,7 @@ public abstract class DLAppHelperLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the d l file entry finder.
+	 * Returns the d l file entry finder.
 	 *
 	 * @return the d l file entry finder
 	 */
@@ -369,7 +369,7 @@ public abstract class DLAppHelperLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the d l file rank local service.
+	 * Returns the d l file rank local service.
 	 *
 	 * @return the d l file rank local service
 	 */
@@ -388,7 +388,7 @@ public abstract class DLAppHelperLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the d l file rank persistence.
+	 * Returns the d l file rank persistence.
 	 *
 	 * @return the d l file rank persistence
 	 */
@@ -407,7 +407,7 @@ public abstract class DLAppHelperLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the d l file rank finder.
+	 * Returns the d l file rank finder.
 	 *
 	 * @return the d l file rank finder
 	 */
@@ -425,7 +425,7 @@ public abstract class DLAppHelperLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the d l file shortcut local service.
+	 * Returns the d l file shortcut local service.
 	 *
 	 * @return the d l file shortcut local service
 	 */
@@ -444,7 +444,7 @@ public abstract class DLAppHelperLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the d l file shortcut remote service.
+	 * Returns the d l file shortcut remote service.
 	 *
 	 * @return the d l file shortcut remote service
 	 */
@@ -463,7 +463,7 @@ public abstract class DLAppHelperLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the d l file shortcut persistence.
+	 * Returns the d l file shortcut persistence.
 	 *
 	 * @return the d l file shortcut persistence
 	 */
@@ -482,7 +482,7 @@ public abstract class DLAppHelperLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the d l file version persistence.
+	 * Returns the d l file version persistence.
 	 *
 	 * @return the d l file version persistence
 	 */
@@ -501,7 +501,7 @@ public abstract class DLAppHelperLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the d l folder local service.
+	 * Returns the d l folder local service.
 	 *
 	 * @return the d l folder local service
 	 */
@@ -520,7 +520,7 @@ public abstract class DLAppHelperLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the d l folder remote service.
+	 * Returns the d l folder remote service.
 	 *
 	 * @return the d l folder remote service
 	 */
@@ -538,7 +538,7 @@ public abstract class DLAppHelperLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the d l folder persistence.
+	 * Returns the d l folder persistence.
 	 *
 	 * @return the d l folder persistence
 	 */
@@ -556,7 +556,7 @@ public abstract class DLAppHelperLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the d l folder finder.
+	 * Returns the d l folder finder.
 	 *
 	 * @return the d l folder finder
 	 */
@@ -574,7 +574,7 @@ public abstract class DLAppHelperLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the counter local service.
+	 * Returns the counter local service.
 	 *
 	 * @return the counter local service
 	 */
@@ -592,7 +592,7 @@ public abstract class DLAppHelperLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the group local service.
+	 * Returns the group local service.
 	 *
 	 * @return the group local service
 	 */
@@ -610,7 +610,7 @@ public abstract class DLAppHelperLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the group remote service.
+	 * Returns the group remote service.
 	 *
 	 * @return the group remote service
 	 */
@@ -628,7 +628,7 @@ public abstract class DLAppHelperLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the group persistence.
+	 * Returns the group persistence.
 	 *
 	 * @return the group persistence
 	 */
@@ -646,7 +646,7 @@ public abstract class DLAppHelperLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the group finder.
+	 * Returns the group finder.
 	 *
 	 * @return the group finder
 	 */
@@ -664,7 +664,7 @@ public abstract class DLAppHelperLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the layout local service.
+	 * Returns the layout local service.
 	 *
 	 * @return the layout local service
 	 */
@@ -682,7 +682,7 @@ public abstract class DLAppHelperLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the layout remote service.
+	 * Returns the layout remote service.
 	 *
 	 * @return the layout remote service
 	 */
@@ -700,7 +700,7 @@ public abstract class DLAppHelperLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the layout persistence.
+	 * Returns the layout persistence.
 	 *
 	 * @return the layout persistence
 	 */
@@ -718,7 +718,7 @@ public abstract class DLAppHelperLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the layout finder.
+	 * Returns the layout finder.
 	 *
 	 * @return the layout finder
 	 */
@@ -736,7 +736,7 @@ public abstract class DLAppHelperLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the lock local service.
+	 * Returns the lock local service.
 	 *
 	 * @return the lock local service
 	 */
@@ -754,7 +754,7 @@ public abstract class DLAppHelperLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the lock persistence.
+	 * Returns the lock persistence.
 	 *
 	 * @return the lock persistence
 	 */
@@ -772,7 +772,7 @@ public abstract class DLAppHelperLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the resource local service.
+	 * Returns the resource local service.
 	 *
 	 * @return the resource local service
 	 */
@@ -791,7 +791,7 @@ public abstract class DLAppHelperLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the resource remote service.
+	 * Returns the resource remote service.
 	 *
 	 * @return the resource remote service
 	 */
@@ -809,7 +809,7 @@ public abstract class DLAppHelperLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the resource persistence.
+	 * Returns the resource persistence.
 	 *
 	 * @return the resource persistence
 	 */
@@ -827,7 +827,7 @@ public abstract class DLAppHelperLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the resource finder.
+	 * Returns the resource finder.
 	 *
 	 * @return the resource finder
 	 */
@@ -845,7 +845,7 @@ public abstract class DLAppHelperLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the user local service.
+	 * Returns the user local service.
 	 *
 	 * @return the user local service
 	 */
@@ -863,7 +863,7 @@ public abstract class DLAppHelperLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the user remote service.
+	 * Returns the user remote service.
 	 *
 	 * @return the user remote service
 	 */
@@ -881,7 +881,7 @@ public abstract class DLAppHelperLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the user persistence.
+	 * Returns the user persistence.
 	 *
 	 * @return the user persistence
 	 */
@@ -899,7 +899,7 @@ public abstract class DLAppHelperLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the user finder.
+	 * Returns the user finder.
 	 *
 	 * @return the user finder
 	 */
@@ -917,7 +917,7 @@ public abstract class DLAppHelperLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the web d a v props local service.
+	 * Returns the web d a v props local service.
 	 *
 	 * @return the web d a v props local service
 	 */
@@ -936,7 +936,7 @@ public abstract class DLAppHelperLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the web d a v props persistence.
+	 * Returns the web d a v props persistence.
 	 *
 	 * @return the web d a v props persistence
 	 */
@@ -955,7 +955,7 @@ public abstract class DLAppHelperLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the workflow instance link local service.
+	 * Returns the workflow instance link local service.
 	 *
 	 * @return the workflow instance link local service
 	 */
@@ -974,7 +974,7 @@ public abstract class DLAppHelperLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the workflow instance link persistence.
+	 * Returns the workflow instance link persistence.
 	 *
 	 * @return the workflow instance link persistence
 	 */
@@ -993,7 +993,7 @@ public abstract class DLAppHelperLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the asset category local service.
+	 * Returns the asset category local service.
 	 *
 	 * @return the asset category local service
 	 */
@@ -1012,7 +1012,7 @@ public abstract class DLAppHelperLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the asset category remote service.
+	 * Returns the asset category remote service.
 	 *
 	 * @return the asset category remote service
 	 */
@@ -1031,7 +1031,7 @@ public abstract class DLAppHelperLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the asset category persistence.
+	 * Returns the asset category persistence.
 	 *
 	 * @return the asset category persistence
 	 */
@@ -1050,7 +1050,7 @@ public abstract class DLAppHelperLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the asset category finder.
+	 * Returns the asset category finder.
 	 *
 	 * @return the asset category finder
 	 */
@@ -1068,7 +1068,7 @@ public abstract class DLAppHelperLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the asset entry local service.
+	 * Returns the asset entry local service.
 	 *
 	 * @return the asset entry local service
 	 */
@@ -1087,7 +1087,7 @@ public abstract class DLAppHelperLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the asset entry remote service.
+	 * Returns the asset entry remote service.
 	 *
 	 * @return the asset entry remote service
 	 */
@@ -1105,7 +1105,7 @@ public abstract class DLAppHelperLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the asset entry persistence.
+	 * Returns the asset entry persistence.
 	 *
 	 * @return the asset entry persistence
 	 */
@@ -1124,7 +1124,7 @@ public abstract class DLAppHelperLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the asset entry finder.
+	 * Returns the asset entry finder.
 	 *
 	 * @return the asset entry finder
 	 */
@@ -1142,7 +1142,7 @@ public abstract class DLAppHelperLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the asset link local service.
+	 * Returns the asset link local service.
 	 *
 	 * @return the asset link local service
 	 */
@@ -1161,7 +1161,7 @@ public abstract class DLAppHelperLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the asset link persistence.
+	 * Returns the asset link persistence.
 	 *
 	 * @return the asset link persistence
 	 */
@@ -1180,7 +1180,7 @@ public abstract class DLAppHelperLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the asset tag local service.
+	 * Returns the asset tag local service.
 	 *
 	 * @return the asset tag local service
 	 */
@@ -1199,7 +1199,7 @@ public abstract class DLAppHelperLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the asset tag remote service.
+	 * Returns the asset tag remote service.
 	 *
 	 * @return the asset tag remote service
 	 */
@@ -1217,7 +1217,7 @@ public abstract class DLAppHelperLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the asset tag persistence.
+	 * Returns the asset tag persistence.
 	 *
 	 * @return the asset tag persistence
 	 */
@@ -1235,7 +1235,7 @@ public abstract class DLAppHelperLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the asset tag finder.
+	 * Returns the asset tag finder.
 	 *
 	 * @return the asset tag finder
 	 */
@@ -1253,7 +1253,7 @@ public abstract class DLAppHelperLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the expando value local service.
+	 * Returns the expando value local service.
 	 *
 	 * @return the expando value local service
 	 */
@@ -1272,7 +1272,7 @@ public abstract class DLAppHelperLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the expando value remote service.
+	 * Returns the expando value remote service.
 	 *
 	 * @return the expando value remote service
 	 */
@@ -1290,7 +1290,7 @@ public abstract class DLAppHelperLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the expando value persistence.
+	 * Returns the expando value persistence.
 	 *
 	 * @return the expando value persistence
 	 */
@@ -1309,7 +1309,7 @@ public abstract class DLAppHelperLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the message boards discussion local service.
+	 * Returns the message boards discussion local service.
 	 *
 	 * @return the message boards discussion local service
 	 */
@@ -1328,7 +1328,7 @@ public abstract class DLAppHelperLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the message boards discussion persistence.
+	 * Returns the message boards discussion persistence.
 	 *
 	 * @return the message boards discussion persistence
 	 */
@@ -1347,7 +1347,7 @@ public abstract class DLAppHelperLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the message-boards message local service.
+	 * Returns the message-boards message local service.
 	 *
 	 * @return the message-boards message local service
 	 */
@@ -1366,7 +1366,7 @@ public abstract class DLAppHelperLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the message-boards message remote service.
+	 * Returns the message-boards message remote service.
 	 *
 	 * @return the message-boards message remote service
 	 */
@@ -1384,7 +1384,7 @@ public abstract class DLAppHelperLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the message-boards message persistence.
+	 * Returns the message-boards message persistence.
 	 *
 	 * @return the message-boards message persistence
 	 */
@@ -1403,7 +1403,7 @@ public abstract class DLAppHelperLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the message-boards message finder.
+	 * Returns the message-boards message finder.
 	 *
 	 * @return the message-boards message finder
 	 */
@@ -1421,7 +1421,7 @@ public abstract class DLAppHelperLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the ratings entry local service.
+	 * Returns the ratings entry local service.
 	 *
 	 * @return the ratings entry local service
 	 */
@@ -1440,7 +1440,7 @@ public abstract class DLAppHelperLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the ratings entry remote service.
+	 * Returns the ratings entry remote service.
 	 *
 	 * @return the ratings entry remote service
 	 */
@@ -1458,7 +1458,7 @@ public abstract class DLAppHelperLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the ratings entry persistence.
+	 * Returns the ratings entry persistence.
 	 *
 	 * @return the ratings entry persistence
 	 */
@@ -1477,7 +1477,7 @@ public abstract class DLAppHelperLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the ratings entry finder.
+	 * Returns the ratings entry finder.
 	 *
 	 * @return the ratings entry finder
 	 */
@@ -1495,7 +1495,7 @@ public abstract class DLAppHelperLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the ratings stats local service.
+	 * Returns the ratings stats local service.
 	 *
 	 * @return the ratings stats local service
 	 */
@@ -1514,7 +1514,7 @@ public abstract class DLAppHelperLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the ratings stats persistence.
+	 * Returns the ratings stats persistence.
 	 *
 	 * @return the ratings stats persistence
 	 */
@@ -1533,7 +1533,7 @@ public abstract class DLAppHelperLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the ratings stats finder.
+	 * Returns the ratings stats finder.
 	 *
 	 * @return the ratings stats finder
 	 */
@@ -1551,7 +1551,7 @@ public abstract class DLAppHelperLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the social activity local service.
+	 * Returns the social activity local service.
 	 *
 	 * @return the social activity local service
 	 */
@@ -1570,7 +1570,7 @@ public abstract class DLAppHelperLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the social activity persistence.
+	 * Returns the social activity persistence.
 	 *
 	 * @return the social activity persistence
 	 */
@@ -1589,7 +1589,7 @@ public abstract class DLAppHelperLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the social activity finder.
+	 * Returns the social activity finder.
 	 *
 	 * @return the social activity finder
 	 */
@@ -1608,7 +1608,7 @@ public abstract class DLAppHelperLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the Spring bean ID for this bean.
+	 * Returns the Spring bean ID for this bean.
 	 *
 	 * @return the Spring bean ID for this bean
 	 */
@@ -1628,7 +1628,7 @@ public abstract class DLAppHelperLocalServiceBaseImpl
 	/**
 	 * Performs an SQL query.
 	 *
-	 * @param sql the sql query to perform
+	 * @param sql the sql query
 	 */
 	protected void runSQL(String sql) throws SystemException {
 		try {

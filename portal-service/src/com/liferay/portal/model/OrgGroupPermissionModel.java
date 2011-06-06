@@ -42,21 +42,21 @@ public interface OrgGroupPermissionModel extends BaseModel<OrgGroupPermission> {
 	 */
 
 	/**
-	 * Gets the primary key of this org group permission.
+	 * Returns the primary key of this org group permission.
 	 *
 	 * @return the primary key of this org group permission
 	 */
 	public OrgGroupPermissionPK getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this org group permission
+	 * Sets the primary key of this org group permission.
 	 *
 	 * @param primaryKey the primary key of this org group permission
 	 */
 	public void setPrimaryKey(OrgGroupPermissionPK primaryKey);
 
 	/**
-	 * Gets the organization ID of this org group permission.
+	 * Returns the organization ID of this org group permission.
 	 *
 	 * @return the organization ID of this org group permission
 	 */
@@ -70,7 +70,7 @@ public interface OrgGroupPermissionModel extends BaseModel<OrgGroupPermission> {
 	public void setOrganizationId(long organizationId);
 
 	/**
-	 * Gets the group ID of this org group permission.
+	 * Returns the group ID of this org group permission.
 	 *
 	 * @return the group ID of this org group permission
 	 */
@@ -84,7 +84,7 @@ public interface OrgGroupPermissionModel extends BaseModel<OrgGroupPermission> {
 	public void setGroupId(long groupId);
 
 	/**
-	 * Gets the permission ID of this org group permission.
+	 * Returns the permission ID of this org group permission.
 	 *
 	 * @return the permission ID of this org group permission
 	 */

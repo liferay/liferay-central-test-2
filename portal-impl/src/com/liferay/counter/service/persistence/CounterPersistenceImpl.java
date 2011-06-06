@@ -80,7 +80,7 @@ public class CounterPersistenceImpl extends BasePersistenceImpl<Counter>
 	/**
 	 * Caches the counter in the entity cache if it is enabled.
 	 *
-	 * @param counter the counter to cache
+	 * @param counter the counter
 	 */
 	public void cacheResult(Counter counter) {
 		EntityCacheUtil.putResult(CounterModelImpl.ENTITY_CACHE_ENABLED,
@@ -92,7 +92,7 @@ public class CounterPersistenceImpl extends BasePersistenceImpl<Counter>
 	/**
 	 * Caches the counters in the entity cache if it is enabled.
 	 *
-	 * @param counters the counters to cache
+	 * @param counters the counters
 	 */
 	public void cacheResult(List<Counter> counters) {
 		for (Counter counter : counters) {
@@ -151,7 +151,7 @@ public class CounterPersistenceImpl extends BasePersistenceImpl<Counter>
 	/**
 	 * Removes the counter with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param primaryKey the primary key of the counter to remove
+	 * @param primaryKey the primary key of the counter
 	 * @return the counter that was removed
 	 * @throws com.liferay.portal.NoSuchModelException if a counter with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -164,7 +164,7 @@ public class CounterPersistenceImpl extends BasePersistenceImpl<Counter>
 	/**
 	 * Removes the counter with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param name the primary key of the counter to remove
+	 * @param name the primary key of the counter
 	 * @return the counter that was removed
 	 * @throws com.liferay.counter.NoSuchCounterException if a counter with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -203,7 +203,7 @@ public class CounterPersistenceImpl extends BasePersistenceImpl<Counter>
 	/**
 	 * Removes the counter from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param counter the counter to remove
+	 * @param counter the counter
 	 * @return the counter that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -281,9 +281,9 @@ public class CounterPersistenceImpl extends BasePersistenceImpl<Counter>
 	}
 
 	/**
-	 * Finds the counter with the primary key or throws a {@link com.liferay.portal.NoSuchModelException} if it could not be found.
+	 * Returns the counter with the primary key or throws a {@link com.liferay.portal.NoSuchModelException} if it could not be found.
 	 *
-	 * @param primaryKey the primary key of the counter to find
+	 * @param primaryKey the primary key of the counter
 	 * @return the counter
 	 * @throws com.liferay.portal.NoSuchModelException if a counter with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -294,9 +294,9 @@ public class CounterPersistenceImpl extends BasePersistenceImpl<Counter>
 	}
 
 	/**
-	 * Finds the counter with the primary key or throws a {@link com.liferay.counter.NoSuchCounterException} if it could not be found.
+	 * Returns the counter with the primary key or throws a {@link com.liferay.counter.NoSuchCounterException} if it could not be found.
 	 *
-	 * @param name the primary key of the counter to find
+	 * @param name the primary key of the counter
 	 * @return the counter
 	 * @throws com.liferay.counter.NoSuchCounterException if a counter with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -318,9 +318,9 @@ public class CounterPersistenceImpl extends BasePersistenceImpl<Counter>
 	}
 
 	/**
-	 * Finds the counter with the primary key or returns <code>null</code> if it could not be found.
+	 * Returns the counter with the primary key or returns <code>null</code> if it could not be found.
 	 *
-	 * @param primaryKey the primary key of the counter to find
+	 * @param primaryKey the primary key of the counter
 	 * @return the counter, or <code>null</code> if a counter with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -330,9 +330,9 @@ public class CounterPersistenceImpl extends BasePersistenceImpl<Counter>
 	}
 
 	/**
-	 * Finds the counter with the primary key or returns <code>null</code> if it could not be found.
+	 * Returns the counter with the primary key or returns <code>null</code> if it could not be found.
 	 *
-	 * @param name the primary key of the counter to find
+	 * @param name the primary key of the counter
 	 * @return the counter, or <code>null</code> if a counter with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -364,7 +364,7 @@ public class CounterPersistenceImpl extends BasePersistenceImpl<Counter>
 	}
 
 	/**
-	 * Finds all the counters.
+	 * Returns all the counters.
 	 *
 	 * @return the counters
 	 * @throws SystemException if a system exception occurred
@@ -374,14 +374,14 @@ public class CounterPersistenceImpl extends BasePersistenceImpl<Counter>
 	}
 
 	/**
-	 * Finds a range of all the counters.
+	 * Returns a range of all the counters.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param start the lower bound of the range of counters to return
-	 * @param end the upper bound of the range of counters to return (not inclusive)
+	 * @param start the lower bound of the range of counters
+	 * @param end the upper bound of the range of counters (not inclusive)
 	 * @return the range of counters
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -390,14 +390,14 @@ public class CounterPersistenceImpl extends BasePersistenceImpl<Counter>
 	}
 
 	/**
-	 * Finds an ordered range of all the counters.
+	 * Returns an ordered range of all the counters.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param start the lower bound of the range of counters to return
-	 * @param end the upper bound of the range of counters to return (not inclusive)
+	 * @param start the lower bound of the range of counters
+	 * @param end the upper bound of the range of counters (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of counters
 	 * @throws SystemException if a system exception occurred
@@ -483,7 +483,7 @@ public class CounterPersistenceImpl extends BasePersistenceImpl<Counter>
 	}
 
 	/**
-	 * Counts all the counters.
+	 * Returns the number of counters.
 	 *
 	 * @return the number of counters
 	 * @throws SystemException if a system exception occurred

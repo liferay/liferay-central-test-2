@@ -37,7 +37,7 @@ public class SCProductScreenshotWrapper implements SCProductScreenshot {
 	}
 
 	/**
-	* Gets the primary key of this s c product screenshot.
+	* Returns the primary key of this s c product screenshot.
 	*
 	* @return the primary key of this s c product screenshot
 	*/
@@ -46,7 +46,7 @@ public class SCProductScreenshotWrapper implements SCProductScreenshot {
 	}
 
 	/**
-	* Sets the primary key of this s c product screenshot
+	* Sets the primary key of this s c product screenshot.
 	*
 	* @param primaryKey the primary key of this s c product screenshot
 	*/
@@ -55,7 +55,7 @@ public class SCProductScreenshotWrapper implements SCProductScreenshot {
 	}
 
 	/**
-	* Gets the product screenshot ID of this s c product screenshot.
+	* Returns the product screenshot ID of this s c product screenshot.
 	*
 	* @return the product screenshot ID of this s c product screenshot
 	*/
@@ -73,7 +73,7 @@ public class SCProductScreenshotWrapper implements SCProductScreenshot {
 	}
 
 	/**
-	* Gets the company ID of this s c product screenshot.
+	* Returns the company ID of this s c product screenshot.
 	*
 	* @return the company ID of this s c product screenshot
 	*/
@@ -91,7 +91,7 @@ public class SCProductScreenshotWrapper implements SCProductScreenshot {
 	}
 
 	/**
-	* Gets the group ID of this s c product screenshot.
+	* Returns the group ID of this s c product screenshot.
 	*
 	* @return the group ID of this s c product screenshot
 	*/
@@ -109,7 +109,7 @@ public class SCProductScreenshotWrapper implements SCProductScreenshot {
 	}
 
 	/**
-	* Gets the product entry ID of this s c product screenshot.
+	* Returns the product entry ID of this s c product screenshot.
 	*
 	* @return the product entry ID of this s c product screenshot
 	*/
@@ -127,7 +127,7 @@ public class SCProductScreenshotWrapper implements SCProductScreenshot {
 	}
 
 	/**
-	* Gets the thumbnail ID of this s c product screenshot.
+	* Returns the thumbnail ID of this s c product screenshot.
 	*
 	* @return the thumbnail ID of this s c product screenshot
 	*/
@@ -145,7 +145,7 @@ public class SCProductScreenshotWrapper implements SCProductScreenshot {
 	}
 
 	/**
-	* Gets the full image ID of this s c product screenshot.
+	* Returns the full image ID of this s c product screenshot.
 	*
 	* @return the full image ID of this s c product screenshot
 	*/
@@ -163,7 +163,7 @@ public class SCProductScreenshotWrapper implements SCProductScreenshot {
 	}
 
 	/**
-	* Gets the priority of this s c product screenshot.
+	* Returns the priority of this s c product screenshot.
 	*
 	* @return the priority of this s c product screenshot
 	*/

@@ -37,7 +37,7 @@ public class ListTypeWrapper implements ListType {
 	}
 
 	/**
-	* Gets the primary key of this list type.
+	* Returns the primary key of this list type.
 	*
 	* @return the primary key of this list type
 	*/
@@ -46,7 +46,7 @@ public class ListTypeWrapper implements ListType {
 	}
 
 	/**
-	* Sets the primary key of this list type
+	* Sets the primary key of this list type.
 	*
 	* @param primaryKey the primary key of this list type
 	*/
@@ -55,7 +55,7 @@ public class ListTypeWrapper implements ListType {
 	}
 
 	/**
-	* Gets the list type ID of this list type.
+	* Returns the list type ID of this list type.
 	*
 	* @return the list type ID of this list type
 	*/
@@ -73,7 +73,7 @@ public class ListTypeWrapper implements ListType {
 	}
 
 	/**
-	* Gets the name of this list type.
+	* Returns the name of this list type.
 	*
 	* @return the name of this list type
 	*/
@@ -91,7 +91,7 @@ public class ListTypeWrapper implements ListType {
 	}
 
 	/**
-	* Gets the type of this list type.
+	* Returns the type of this list type.
 	*
 	* @return the type of this list type
 	*/

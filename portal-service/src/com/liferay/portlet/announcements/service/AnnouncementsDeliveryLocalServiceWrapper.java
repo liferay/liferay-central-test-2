@@ -33,7 +33,7 @@ public class AnnouncementsDeliveryLocalServiceWrapper
 	/**
 	* Adds the announcements delivery to the database. Also notifies the appropriate model listeners.
 	*
-	* @param announcementsDelivery the announcements delivery to add
+	* @param announcementsDelivery the announcements delivery
 	* @return the announcements delivery that was added
 	* @throws SystemException if a system exception occurred
 	*/
@@ -57,7 +57,7 @@ public class AnnouncementsDeliveryLocalServiceWrapper
 	/**
 	* Deletes the announcements delivery with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param deliveryId the primary key of the announcements delivery to delete
+	* @param deliveryId the primary key of the announcements delivery
 	* @throws PortalException if a announcements delivery with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -70,7 +70,7 @@ public class AnnouncementsDeliveryLocalServiceWrapper
 	/**
 	* Deletes the announcements delivery from the database. Also notifies the appropriate model listeners.
 	*
-	* @param announcementsDelivery the announcements delivery to delete
+	* @param announcementsDelivery the announcements delivery
 	* @throws SystemException if a system exception occurred
 	*/
 	public void deleteAnnouncementsDelivery(
@@ -82,7 +82,7 @@ public class AnnouncementsDeliveryLocalServiceWrapper
 	/**
 	* Performs a dynamic query on the database and returns the matching rows.
 	*
-	* @param dynamicQuery the dynamic query to search with
+	* @param dynamicQuery the dynamic query
 	* @return the matching rows
 	* @throws SystemException if a system exception occurred
 	*/
@@ -100,9 +100,9 @@ public class AnnouncementsDeliveryLocalServiceWrapper
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param dynamicQuery the dynamic query to search with
-	* @param start the lower bound of the range of model instances to return
-	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param dynamicQuery the dynamic query
+	* @param start the lower bound of the range of model instances
+	* @param end the upper bound of the range of model instances (not inclusive)
 	* @return the range of matching rows
 	* @throws SystemException if a system exception occurred
 	*/
@@ -121,9 +121,9 @@ public class AnnouncementsDeliveryLocalServiceWrapper
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param dynamicQuery the dynamic query to search with
-	* @param start the lower bound of the range of model instances to return
-	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param dynamicQuery the dynamic query
+	* @param start the lower bound of the range of model instances
+	* @param end the upper bound of the range of model instances (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching rows
 	* @throws SystemException if a system exception occurred
@@ -139,9 +139,9 @@ public class AnnouncementsDeliveryLocalServiceWrapper
 	}
 
 	/**
-	* Counts the number of rows that match the dynamic query.
+	* Returns the number of rows that match the dynamic query.
 	*
-	* @param dynamicQuery the dynamic query to search with
+	* @param dynamicQuery the dynamic query
 	* @return the number of rows that match the dynamic query
 	* @throws SystemException if a system exception occurred
 	*/
@@ -152,9 +152,9 @@ public class AnnouncementsDeliveryLocalServiceWrapper
 	}
 
 	/**
-	* Gets the announcements delivery with the primary key.
+	* Returns the announcements delivery with the primary key.
 	*
-	* @param deliveryId the primary key of the announcements delivery to get
+	* @param deliveryId the primary key of the announcements delivery
 	* @return the announcements delivery
 	* @throws PortalException if a announcements delivery with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -167,14 +167,14 @@ public class AnnouncementsDeliveryLocalServiceWrapper
 	}
 
 	/**
-	* Gets a range of all the announcements deliveries.
+	* Returns a range of all the announcements deliveries.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of announcements deliveries to return
-	* @param end the upper bound of the range of announcements deliveries to return (not inclusive)
+	* @param start the lower bound of the range of announcements deliveries
+	* @param end the upper bound of the range of announcements deliveries (not inclusive)
 	* @return the range of announcements deliveries
 	* @throws SystemException if a system exception occurred
 	*/
@@ -186,7 +186,7 @@ public class AnnouncementsDeliveryLocalServiceWrapper
 	}
 
 	/**
-	* Gets the number of announcements deliveries.
+	* Returns the number of announcements deliveries.
 	*
 	* @return the number of announcements deliveries
 	* @throws SystemException if a system exception occurred
@@ -199,7 +199,7 @@ public class AnnouncementsDeliveryLocalServiceWrapper
 	/**
 	* Updates the announcements delivery in the database. Also notifies the appropriate model listeners.
 	*
-	* @param announcementsDelivery the announcements delivery to update
+	* @param announcementsDelivery the announcements delivery
 	* @return the announcements delivery that was updated
 	* @throws SystemException if a system exception occurred
 	*/
@@ -212,7 +212,7 @@ public class AnnouncementsDeliveryLocalServiceWrapper
 	/**
 	* Updates the announcements delivery in the database. Also notifies the appropriate model listeners.
 	*
-	* @param announcementsDelivery the announcements delivery to update
+	* @param announcementsDelivery the announcements delivery
 	* @param merge whether to merge the announcements delivery with the current session. See {@link com.liferay.portal.service.persistence.BatchSession#update(com.liferay.portal.kernel.dao.orm.Session, com.liferay.portal.model.BaseModel, boolean)} for an explanation.
 	* @return the announcements delivery that was updated
 	* @throws SystemException if a system exception occurred
@@ -226,7 +226,7 @@ public class AnnouncementsDeliveryLocalServiceWrapper
 	}
 
 	/**
-	* Gets the Spring bean ID for this bean.
+	* Returns the Spring bean ID for this bean.
 	*
 	* @return the Spring bean ID for this bean
 	*/

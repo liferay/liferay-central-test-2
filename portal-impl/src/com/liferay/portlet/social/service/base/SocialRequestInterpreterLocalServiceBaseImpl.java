@@ -75,7 +75,7 @@ public abstract class SocialRequestInterpreterLocalServiceBaseImpl
 	 */
 
 	/**
-	 * Gets the social activity local service.
+	 * Returns the social activity local service.
 	 *
 	 * @return the social activity local service
 	 */
@@ -94,7 +94,7 @@ public abstract class SocialRequestInterpreterLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the social activity persistence.
+	 * Returns the social activity persistence.
 	 *
 	 * @return the social activity persistence
 	 */
@@ -113,7 +113,7 @@ public abstract class SocialRequestInterpreterLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the social activity finder.
+	 * Returns the social activity finder.
 	 *
 	 * @return the social activity finder
 	 */
@@ -132,7 +132,7 @@ public abstract class SocialRequestInterpreterLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the social activity interpreter local service.
+	 * Returns the social activity interpreter local service.
 	 *
 	 * @return the social activity interpreter local service
 	 */
@@ -151,7 +151,7 @@ public abstract class SocialRequestInterpreterLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the social equity asset entry persistence.
+	 * Returns the social equity asset entry persistence.
 	 *
 	 * @return the social equity asset entry persistence
 	 */
@@ -170,7 +170,7 @@ public abstract class SocialRequestInterpreterLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the social equity group setting local service.
+	 * Returns the social equity group setting local service.
 	 *
 	 * @return the social equity group setting local service
 	 */
@@ -189,7 +189,7 @@ public abstract class SocialRequestInterpreterLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the social equity group setting persistence.
+	 * Returns the social equity group setting persistence.
 	 *
 	 * @return the social equity group setting persistence
 	 */
@@ -208,7 +208,7 @@ public abstract class SocialRequestInterpreterLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the social equity history local service.
+	 * Returns the social equity history local service.
 	 *
 	 * @return the social equity history local service
 	 */
@@ -227,7 +227,7 @@ public abstract class SocialRequestInterpreterLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the social equity history persistence.
+	 * Returns the social equity history persistence.
 	 *
 	 * @return the social equity history persistence
 	 */
@@ -246,7 +246,7 @@ public abstract class SocialRequestInterpreterLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the social equity log local service.
+	 * Returns the social equity log local service.
 	 *
 	 * @return the social equity log local service
 	 */
@@ -265,7 +265,7 @@ public abstract class SocialRequestInterpreterLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the social equity log persistence.
+	 * Returns the social equity log persistence.
 	 *
 	 * @return the social equity log persistence
 	 */
@@ -284,7 +284,7 @@ public abstract class SocialRequestInterpreterLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the social equity setting local service.
+	 * Returns the social equity setting local service.
 	 *
 	 * @return the social equity setting local service
 	 */
@@ -303,7 +303,7 @@ public abstract class SocialRequestInterpreterLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the social equity setting persistence.
+	 * Returns the social equity setting persistence.
 	 *
 	 * @return the social equity setting persistence
 	 */
@@ -322,7 +322,7 @@ public abstract class SocialRequestInterpreterLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the social equity user local service.
+	 * Returns the social equity user local service.
 	 *
 	 * @return the social equity user local service
 	 */
@@ -341,7 +341,7 @@ public abstract class SocialRequestInterpreterLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the social equity user persistence.
+	 * Returns the social equity user persistence.
 	 *
 	 * @return the social equity user persistence
 	 */
@@ -360,7 +360,7 @@ public abstract class SocialRequestInterpreterLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the social relation local service.
+	 * Returns the social relation local service.
 	 *
 	 * @return the social relation local service
 	 */
@@ -379,7 +379,7 @@ public abstract class SocialRequestInterpreterLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the social relation persistence.
+	 * Returns the social relation persistence.
 	 *
 	 * @return the social relation persistence
 	 */
@@ -398,7 +398,7 @@ public abstract class SocialRequestInterpreterLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the social request local service.
+	 * Returns the social request local service.
 	 *
 	 * @return the social request local service
 	 */
@@ -417,7 +417,7 @@ public abstract class SocialRequestInterpreterLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the social request persistence.
+	 * Returns the social request persistence.
 	 *
 	 * @return the social request persistence
 	 */
@@ -436,7 +436,7 @@ public abstract class SocialRequestInterpreterLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the social request interpreter local service.
+	 * Returns the social request interpreter local service.
 	 *
 	 * @return the social request interpreter local service
 	 */
@@ -455,7 +455,7 @@ public abstract class SocialRequestInterpreterLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the counter local service.
+	 * Returns the counter local service.
 	 *
 	 * @return the counter local service
 	 */
@@ -473,7 +473,7 @@ public abstract class SocialRequestInterpreterLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the resource local service.
+	 * Returns the resource local service.
 	 *
 	 * @return the resource local service
 	 */
@@ -492,7 +492,7 @@ public abstract class SocialRequestInterpreterLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the resource remote service.
+	 * Returns the resource remote service.
 	 *
 	 * @return the resource remote service
 	 */
@@ -510,7 +510,7 @@ public abstract class SocialRequestInterpreterLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the resource persistence.
+	 * Returns the resource persistence.
 	 *
 	 * @return the resource persistence
 	 */
@@ -528,7 +528,7 @@ public abstract class SocialRequestInterpreterLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the resource finder.
+	 * Returns the resource finder.
 	 *
 	 * @return the resource finder
 	 */
@@ -546,7 +546,7 @@ public abstract class SocialRequestInterpreterLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the user local service.
+	 * Returns the user local service.
 	 *
 	 * @return the user local service
 	 */
@@ -564,7 +564,7 @@ public abstract class SocialRequestInterpreterLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the user remote service.
+	 * Returns the user remote service.
 	 *
 	 * @return the user remote service
 	 */
@@ -582,7 +582,7 @@ public abstract class SocialRequestInterpreterLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the user persistence.
+	 * Returns the user persistence.
 	 *
 	 * @return the user persistence
 	 */
@@ -600,7 +600,7 @@ public abstract class SocialRequestInterpreterLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the user finder.
+	 * Returns the user finder.
 	 *
 	 * @return the user finder
 	 */
@@ -618,7 +618,7 @@ public abstract class SocialRequestInterpreterLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the Spring bean ID for this bean.
+	 * Returns the Spring bean ID for this bean.
 	 *
 	 * @return the Spring bean ID for this bean
 	 */
@@ -638,7 +638,7 @@ public abstract class SocialRequestInterpreterLocalServiceBaseImpl
 	/**
 	 * Performs an SQL query.
 	 *
-	 * @param sql the sql query to perform
+	 * @param sql the sql query
 	 */
 	protected void runSQL(String sql) throws SystemException {
 		try {

@@ -37,7 +37,7 @@ public class AssetVocabularyWrapper implements AssetVocabulary {
 	}
 
 	/**
-	* Gets the primary key of this asset vocabulary.
+	* Returns the primary key of this asset vocabulary.
 	*
 	* @return the primary key of this asset vocabulary
 	*/
@@ -46,7 +46,7 @@ public class AssetVocabularyWrapper implements AssetVocabulary {
 	}
 
 	/**
-	* Sets the primary key of this asset vocabulary
+	* Sets the primary key of this asset vocabulary.
 	*
 	* @param primaryKey the primary key of this asset vocabulary
 	*/
@@ -55,7 +55,7 @@ public class AssetVocabularyWrapper implements AssetVocabulary {
 	}
 
 	/**
-	* Gets the uuid of this asset vocabulary.
+	* Returns the uuid of this asset vocabulary.
 	*
 	* @return the uuid of this asset vocabulary
 	*/
@@ -73,7 +73,7 @@ public class AssetVocabularyWrapper implements AssetVocabulary {
 	}
 
 	/**
-	* Gets the vocabulary ID of this asset vocabulary.
+	* Returns the vocabulary ID of this asset vocabulary.
 	*
 	* @return the vocabulary ID of this asset vocabulary
 	*/
@@ -91,7 +91,7 @@ public class AssetVocabularyWrapper implements AssetVocabulary {
 	}
 
 	/**
-	* Gets the group ID of this asset vocabulary.
+	* Returns the group ID of this asset vocabulary.
 	*
 	* @return the group ID of this asset vocabulary
 	*/
@@ -109,7 +109,7 @@ public class AssetVocabularyWrapper implements AssetVocabulary {
 	}
 
 	/**
-	* Gets the company ID of this asset vocabulary.
+	* Returns the company ID of this asset vocabulary.
 	*
 	* @return the company ID of this asset vocabulary
 	*/
@@ -127,7 +127,7 @@ public class AssetVocabularyWrapper implements AssetVocabulary {
 	}
 
 	/**
-	* Gets the user ID of this asset vocabulary.
+	* Returns the user ID of this asset vocabulary.
 	*
 	* @return the user ID of this asset vocabulary
 	*/
@@ -145,7 +145,7 @@ public class AssetVocabularyWrapper implements AssetVocabulary {
 	}
 
 	/**
-	* Gets the user uuid of this asset vocabulary.
+	* Returns the user uuid of this asset vocabulary.
 	*
 	* @return the user uuid of this asset vocabulary
 	* @throws SystemException if a system exception occurred
@@ -165,7 +165,7 @@ public class AssetVocabularyWrapper implements AssetVocabulary {
 	}
 
 	/**
-	* Gets the user name of this asset vocabulary.
+	* Returns the user name of this asset vocabulary.
 	*
 	* @return the user name of this asset vocabulary
 	*/
@@ -183,7 +183,7 @@ public class AssetVocabularyWrapper implements AssetVocabulary {
 	}
 
 	/**
-	* Gets the create date of this asset vocabulary.
+	* Returns the create date of this asset vocabulary.
 	*
 	* @return the create date of this asset vocabulary
 	*/
@@ -201,7 +201,7 @@ public class AssetVocabularyWrapper implements AssetVocabulary {
 	}
 
 	/**
-	* Gets the modified date of this asset vocabulary.
+	* Returns the modified date of this asset vocabulary.
 	*
 	* @return the modified date of this asset vocabulary
 	*/
@@ -219,7 +219,7 @@ public class AssetVocabularyWrapper implements AssetVocabulary {
 	}
 
 	/**
-	* Gets the name of this asset vocabulary.
+	* Returns the name of this asset vocabulary.
 	*
 	* @return the name of this asset vocabulary
 	*/
@@ -237,7 +237,7 @@ public class AssetVocabularyWrapper implements AssetVocabulary {
 	}
 
 	/**
-	* Gets the title of this asset vocabulary.
+	* Returns the title of this asset vocabulary.
 	*
 	* @return the title of this asset vocabulary
 	*/
@@ -246,9 +246,9 @@ public class AssetVocabularyWrapper implements AssetVocabulary {
 	}
 
 	/**
-	* Gets the localized title of this asset vocabulary. Uses the default language if no localization exists for the requested language.
+	* Returns the localized title of this asset vocabulary in the language. Uses the default language if no localization exists for the requested language.
 	*
-	* @param locale the locale to get the localized title for
+	* @param locale the locale of the language
 	* @return the localized title of this asset vocabulary
 	*/
 	public java.lang.String getTitle(java.util.Locale locale) {
@@ -256,9 +256,9 @@ public class AssetVocabularyWrapper implements AssetVocabulary {
 	}
 
 	/**
-	* Gets the localized title of this asset vocabulary, optionally using the default language if no localization exists for the requested language.
+	* Returns the localized title of this asset vocabulary in the language, optionally using the default language if no localization exists for the requested language.
 	*
-	* @param locale the local to get the localized title for
+	* @param locale the local of the language
 	* @param useDefault whether to use the default language if no localization exists for the requested language
 	* @return the localized title of this asset vocabulary. If <code>useDefault</code> is <code>false</code> and no localization exists for the requested language, an empty string will be returned.
 	*/
@@ -267,9 +267,9 @@ public class AssetVocabularyWrapper implements AssetVocabulary {
 	}
 
 	/**
-	* Gets the localized title of this asset vocabulary. Uses the default language if no localization exists for the requested language.
+	* Returns the localized title of this asset vocabulary in the language. Uses the default language if no localization exists for the requested language.
 	*
-	* @param languageId the id of the language to get the localized title for
+	* @param languageId the ID of the language
 	* @return the localized title of this asset vocabulary
 	*/
 	public java.lang.String getTitle(java.lang.String languageId) {
@@ -277,9 +277,9 @@ public class AssetVocabularyWrapper implements AssetVocabulary {
 	}
 
 	/**
-	* Gets the localized title of this asset vocabulary, optionally using the default language if no localization exists for the requested language.
+	* Returns the localized title of this asset vocabulary in the language, optionally using the default language if no localization exists for the requested language.
 	*
-	* @param languageId the id of the language to get the localized title for
+	* @param languageId the ID of the language
 	* @param useDefault whether to use the default language if no localization exists for the requested language
 	* @return the localized title of this asset vocabulary
 	*/
@@ -289,9 +289,9 @@ public class AssetVocabularyWrapper implements AssetVocabulary {
 	}
 
 	/**
-	* Gets a map of the locales and localized title of this asset vocabulary.
+	* Returns a map of the locales and localized titles of this asset vocabulary.
 	*
-	* @return the locales and localized title
+	* @return the locales and localized titles of this asset vocabulary
 	*/
 	public java.util.Map<java.util.Locale, java.lang.String> getTitleMap() {
 		return _assetVocabulary.getTitleMap();
@@ -307,15 +307,22 @@ public class AssetVocabularyWrapper implements AssetVocabulary {
 	}
 
 	/**
-	* Sets the localized title of this asset vocabulary.
+	* Sets the localized title of this asset vocabulary in the language.
 	*
 	* @param title the localized title of this asset vocabulary
-	* @param locale the locale to set the localized title for
+	* @param locale the locale of the language
 	*/
 	public void setTitle(java.lang.String title, java.util.Locale locale) {
 		_assetVocabulary.setTitle(title, locale);
 	}
 
+	/**
+	* Sets the localized title of this asset vocabulary in the language, and sets the default locale.
+	*
+	* @param title the localized title of this asset vocabulary
+	* @param locale the locale of the language
+	* @param defaultLocale the default locale
+	*/
 	public void setTitle(java.lang.String title, java.util.Locale locale,
 		java.util.Locale defaultLocale) {
 		_assetVocabulary.setTitle(title, locale, defaultLocale);
@@ -331,6 +338,12 @@ public class AssetVocabularyWrapper implements AssetVocabulary {
 		_assetVocabulary.setTitleMap(titleMap);
 	}
 
+	/**
+	* Sets the localized titles of this asset vocabulary from the map of locales and localized titles, and sets the default locale.
+	*
+	* @param titleMap the locales and localized titles of this asset vocabulary
+	* @param defaultLocale the default locale
+	*/
 	public void setTitleMap(
 		java.util.Map<java.util.Locale, java.lang.String> titleMap,
 		java.util.Locale defaultLocale) {
@@ -338,7 +351,7 @@ public class AssetVocabularyWrapper implements AssetVocabulary {
 	}
 
 	/**
-	* Gets the description of this asset vocabulary.
+	* Returns the description of this asset vocabulary.
 	*
 	* @return the description of this asset vocabulary
 	*/
@@ -347,9 +360,9 @@ public class AssetVocabularyWrapper implements AssetVocabulary {
 	}
 
 	/**
-	* Gets the localized description of this asset vocabulary. Uses the default language if no localization exists for the requested language.
+	* Returns the localized description of this asset vocabulary in the language. Uses the default language if no localization exists for the requested language.
 	*
-	* @param locale the locale to get the localized description for
+	* @param locale the locale of the language
 	* @return the localized description of this asset vocabulary
 	*/
 	public java.lang.String getDescription(java.util.Locale locale) {
@@ -357,9 +370,9 @@ public class AssetVocabularyWrapper implements AssetVocabulary {
 	}
 
 	/**
-	* Gets the localized description of this asset vocabulary, optionally using the default language if no localization exists for the requested language.
+	* Returns the localized description of this asset vocabulary in the language, optionally using the default language if no localization exists for the requested language.
 	*
-	* @param locale the local to get the localized description for
+	* @param locale the local of the language
 	* @param useDefault whether to use the default language if no localization exists for the requested language
 	* @return the localized description of this asset vocabulary. If <code>useDefault</code> is <code>false</code> and no localization exists for the requested language, an empty string will be returned.
 	*/
@@ -369,9 +382,9 @@ public class AssetVocabularyWrapper implements AssetVocabulary {
 	}
 
 	/**
-	* Gets the localized description of this asset vocabulary. Uses the default language if no localization exists for the requested language.
+	* Returns the localized description of this asset vocabulary in the language. Uses the default language if no localization exists for the requested language.
 	*
-	* @param languageId the id of the language to get the localized description for
+	* @param languageId the ID of the language
 	* @return the localized description of this asset vocabulary
 	*/
 	public java.lang.String getDescription(java.lang.String languageId) {
@@ -379,9 +392,9 @@ public class AssetVocabularyWrapper implements AssetVocabulary {
 	}
 
 	/**
-	* Gets the localized description of this asset vocabulary, optionally using the default language if no localization exists for the requested language.
+	* Returns the localized description of this asset vocabulary in the language, optionally using the default language if no localization exists for the requested language.
 	*
-	* @param languageId the id of the language to get the localized description for
+	* @param languageId the ID of the language
 	* @param useDefault whether to use the default language if no localization exists for the requested language
 	* @return the localized description of this asset vocabulary
 	*/
@@ -391,9 +404,9 @@ public class AssetVocabularyWrapper implements AssetVocabulary {
 	}
 
 	/**
-	* Gets a map of the locales and localized description of this asset vocabulary.
+	* Returns a map of the locales and localized descriptions of this asset vocabulary.
 	*
-	* @return the locales and localized description
+	* @return the locales and localized descriptions of this asset vocabulary
 	*/
 	public java.util.Map<java.util.Locale, java.lang.String> getDescriptionMap() {
 		return _assetVocabulary.getDescriptionMap();
@@ -409,16 +422,23 @@ public class AssetVocabularyWrapper implements AssetVocabulary {
 	}
 
 	/**
-	* Sets the localized description of this asset vocabulary.
+	* Sets the localized description of this asset vocabulary in the language.
 	*
 	* @param description the localized description of this asset vocabulary
-	* @param locale the locale to set the localized description for
+	* @param locale the locale of the language
 	*/
 	public void setDescription(java.lang.String description,
 		java.util.Locale locale) {
 		_assetVocabulary.setDescription(description, locale);
 	}
 
+	/**
+	* Sets the localized description of this asset vocabulary in the language, and sets the default locale.
+	*
+	* @param description the localized description of this asset vocabulary
+	* @param locale the locale of the language
+	* @param defaultLocale the default locale
+	*/
 	public void setDescription(java.lang.String description,
 		java.util.Locale locale, java.util.Locale defaultLocale) {
 		_assetVocabulary.setDescription(description, locale, defaultLocale);
@@ -434,6 +454,12 @@ public class AssetVocabularyWrapper implements AssetVocabulary {
 		_assetVocabulary.setDescriptionMap(descriptionMap);
 	}
 
+	/**
+	* Sets the localized descriptions of this asset vocabulary from the map of locales and localized descriptions, and sets the default locale.
+	*
+	* @param descriptionMap the locales and localized descriptions of this asset vocabulary
+	* @param defaultLocale the default locale
+	*/
 	public void setDescriptionMap(
 		java.util.Map<java.util.Locale, java.lang.String> descriptionMap,
 		java.util.Locale defaultLocale) {
@@ -441,7 +467,7 @@ public class AssetVocabularyWrapper implements AssetVocabulary {
 	}
 
 	/**
-	* Gets the settings of this asset vocabulary.
+	* Returns the settings of this asset vocabulary.
 	*
 	* @return the settings of this asset vocabulary
 	*/

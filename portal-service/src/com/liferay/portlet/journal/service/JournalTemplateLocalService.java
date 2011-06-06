@@ -45,7 +45,7 @@ public interface JournalTemplateLocalService {
 	/**
 	* Adds the journal template to the database. Also notifies the appropriate model listeners.
 	*
-	* @param journalTemplate the journal template to add
+	* @param journalTemplate the journal template
 	* @return the journal template that was added
 	* @throws SystemException if a system exception occurred
 	*/
@@ -65,7 +65,7 @@ public interface JournalTemplateLocalService {
 	/**
 	* Deletes the journal template with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param id the primary key of the journal template to delete
+	* @param id the primary key of the journal template
 	* @throws PortalException if a journal template with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -76,7 +76,7 @@ public interface JournalTemplateLocalService {
 	/**
 	* Deletes the journal template from the database. Also notifies the appropriate model listeners.
 	*
-	* @param journalTemplate the journal template to delete
+	* @param journalTemplate the journal template
 	* @throws SystemException if a system exception occurred
 	*/
 	public void deleteJournalTemplate(
@@ -86,7 +86,7 @@ public interface JournalTemplateLocalService {
 	/**
 	* Performs a dynamic query on the database and returns the matching rows.
 	*
-	* @param dynamicQuery the dynamic query to search with
+	* @param dynamicQuery the dynamic query
 	* @return the matching rows
 	* @throws SystemException if a system exception occurred
 	*/
@@ -102,9 +102,9 @@ public interface JournalTemplateLocalService {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param dynamicQuery the dynamic query to search with
-	* @param start the lower bound of the range of model instances to return
-	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param dynamicQuery the dynamic query
+	* @param start the lower bound of the range of model instances
+	* @param end the upper bound of the range of model instances (not inclusive)
 	* @return the range of matching rows
 	* @throws SystemException if a system exception occurred
 	*/
@@ -120,9 +120,9 @@ public interface JournalTemplateLocalService {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param dynamicQuery the dynamic query to search with
-	* @param start the lower bound of the range of model instances to return
-	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param dynamicQuery the dynamic query
+	* @param start the lower bound of the range of model instances
+	* @param end the upper bound of the range of model instances (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching rows
 	* @throws SystemException if a system exception occurred
@@ -135,9 +135,9 @@ public interface JournalTemplateLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Counts the number of rows that match the dynamic query.
+	* Returns the number of rows that match the dynamic query.
 	*
-	* @param dynamicQuery the dynamic query to search with
+	* @param dynamicQuery the dynamic query
 	* @return the number of rows that match the dynamic query
 	* @throws SystemException if a system exception occurred
 	*/
@@ -146,9 +146,9 @@ public interface JournalTemplateLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Gets the journal template with the primary key.
+	* Returns the journal template with the primary key.
 	*
-	* @param id the primary key of the journal template to get
+	* @param id the primary key of the journal template
 	* @return the journal template
 	* @throws PortalException if a journal template with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -160,12 +160,12 @@ public interface JournalTemplateLocalService {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Gets the journal template with the UUID and group id.
+	* Returns the journal template with the UUID in the group.
 	*
-	* @param uuid the UUID of journal template to get
-	* @param groupId the group id of the journal template to get
+	* @param uuid the UUID of journal template
+	* @param groupId the group id of the journal template
 	* @return the journal template
-	* @throws PortalException if a journal template with the UUID and group id could not be found
+	* @throws PortalException if a journal template with the UUID in the group could not be found
 	* @throws SystemException if a system exception occurred
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
@@ -175,14 +175,14 @@ public interface JournalTemplateLocalService {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Gets a range of all the journal templates.
+	* Returns a range of all the journal templates.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of journal templates to return
-	* @param end the upper bound of the range of journal templates to return (not inclusive)
+	* @param start the lower bound of the range of journal templates
+	* @param end the upper bound of the range of journal templates (not inclusive)
 	* @return the range of journal templates
 	* @throws SystemException if a system exception occurred
 	*/
@@ -192,7 +192,7 @@ public interface JournalTemplateLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Gets the number of journal templates.
+	* Returns the number of journal templates.
 	*
 	* @return the number of journal templates
 	* @throws SystemException if a system exception occurred
@@ -204,7 +204,7 @@ public interface JournalTemplateLocalService {
 	/**
 	* Updates the journal template in the database. Also notifies the appropriate model listeners.
 	*
-	* @param journalTemplate the journal template to update
+	* @param journalTemplate the journal template
 	* @return the journal template that was updated
 	* @throws SystemException if a system exception occurred
 	*/
@@ -215,7 +215,7 @@ public interface JournalTemplateLocalService {
 	/**
 	* Updates the journal template in the database. Also notifies the appropriate model listeners.
 	*
-	* @param journalTemplate the journal template to update
+	* @param journalTemplate the journal template
 	* @param merge whether to merge the journal template with the current session. See {@link com.liferay.portal.service.persistence.BatchSession#update(com.liferay.portal.kernel.dao.orm.Session, com.liferay.portal.model.BaseModel, boolean)} for an explanation.
 	* @return the journal template that was updated
 	* @throws SystemException if a system exception occurred
@@ -226,7 +226,7 @@ public interface JournalTemplateLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Gets the Spring bean ID for this bean.
+	* Returns the Spring bean ID for this bean.
 	*
 	* @return the Spring bean ID for this bean
 	*/

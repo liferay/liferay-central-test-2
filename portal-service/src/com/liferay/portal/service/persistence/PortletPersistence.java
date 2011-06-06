@@ -39,14 +39,14 @@ public interface PortletPersistence extends BasePersistence<Portlet> {
 	/**
 	* Caches the portlet in the entity cache if it is enabled.
 	*
-	* @param portlet the portlet to cache
+	* @param portlet the portlet
 	*/
 	public void cacheResult(com.liferay.portal.model.Portlet portlet);
 
 	/**
 	* Caches the portlets in the entity cache if it is enabled.
 	*
-	* @param portlets the portlets to cache
+	* @param portlets the portlets
 	*/
 	public void cacheResult(
 		java.util.List<com.liferay.portal.model.Portlet> portlets);
@@ -62,7 +62,7 @@ public interface PortletPersistence extends BasePersistence<Portlet> {
 	/**
 	* Removes the portlet with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param id the primary key of the portlet to remove
+	* @param id the primary key of the portlet
 	* @return the portlet that was removed
 	* @throws com.liferay.portal.NoSuchPortletException if a portlet with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -76,9 +76,9 @@ public interface PortletPersistence extends BasePersistence<Portlet> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the portlet with the primary key or throws a {@link com.liferay.portal.NoSuchPortletException} if it could not be found.
+	* Returns the portlet with the primary key or throws a {@link com.liferay.portal.NoSuchPortletException} if it could not be found.
 	*
-	* @param id the primary key of the portlet to find
+	* @param id the primary key of the portlet
 	* @return the portlet
 	* @throws com.liferay.portal.NoSuchPortletException if a portlet with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -88,9 +88,9 @@ public interface PortletPersistence extends BasePersistence<Portlet> {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the portlet with the primary key or returns <code>null</code> if it could not be found.
+	* Returns the portlet with the primary key or returns <code>null</code> if it could not be found.
 	*
-	* @param id the primary key of the portlet to find
+	* @param id the primary key of the portlet
 	* @return the portlet, or <code>null</code> if a portlet with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -98,9 +98,9 @@ public interface PortletPersistence extends BasePersistence<Portlet> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds all the portlets where companyId = &#63;.
+	* Returns all the portlets where companyId = &#63;.
 	*
-	* @param companyId the company ID to search with
+	* @param companyId the company ID
 	* @return the matching portlets
 	* @throws SystemException if a system exception occurred
 	*/
@@ -109,15 +109,15 @@ public interface PortletPersistence extends BasePersistence<Portlet> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds a range of all the portlets where companyId = &#63;.
+	* Returns a range of all the portlets where companyId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company ID to search with
-	* @param start the lower bound of the range of portlets to return
-	* @param end the upper bound of the range of portlets to return (not inclusive)
+	* @param companyId the company ID
+	* @param start the lower bound of the range of portlets
+	* @param end the upper bound of the range of portlets (not inclusive)
 	* @return the range of matching portlets
 	* @throws SystemException if a system exception occurred
 	*/
@@ -126,15 +126,15 @@ public interface PortletPersistence extends BasePersistence<Portlet> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds an ordered range of all the portlets where companyId = &#63;.
+	* Returns an ordered range of all the portlets where companyId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company ID to search with
-	* @param start the lower bound of the range of portlets to return
-	* @param end the upper bound of the range of portlets to return (not inclusive)
+	* @param companyId the company ID
+	* @param start the lower bound of the range of portlets
+	* @param end the upper bound of the range of portlets (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching portlets
 	* @throws SystemException if a system exception occurred
@@ -145,13 +145,13 @@ public interface PortletPersistence extends BasePersistence<Portlet> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the first portlet in the ordered set where companyId = &#63;.
+	* Returns the first portlet in the ordered set where companyId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company ID to search with
+	* @param companyId the company ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching portlet
 	* @throws com.liferay.portal.NoSuchPortletException if a matching portlet could not be found
@@ -164,13 +164,13 @@ public interface PortletPersistence extends BasePersistence<Portlet> {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the last portlet in the ordered set where companyId = &#63;.
+	* Returns the last portlet in the ordered set where companyId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company ID to search with
+	* @param companyId the company ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching portlet
 	* @throws com.liferay.portal.NoSuchPortletException if a matching portlet could not be found
@@ -183,14 +183,14 @@ public interface PortletPersistence extends BasePersistence<Portlet> {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the portlets before and after the current portlet in the ordered set where companyId = &#63;.
+	* Returns the portlets before and after the current portlet in the ordered set where companyId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
 	* @param id the primary key of the current portlet
-	* @param companyId the company ID to search with
+	* @param companyId the company ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next portlet
 	* @throws com.liferay.portal.NoSuchPortletException if a portlet with the primary key could not be found
@@ -203,10 +203,10 @@ public interface PortletPersistence extends BasePersistence<Portlet> {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the portlet where companyId = &#63; and portletId = &#63; or throws a {@link com.liferay.portal.NoSuchPortletException} if it could not be found.
+	* Returns the portlet where companyId = &#63; and portletId = &#63; or throws a {@link com.liferay.portal.NoSuchPortletException} if it could not be found.
 	*
-	* @param companyId the company ID to search with
-	* @param portletId the portlet ID to search with
+	* @param companyId the company ID
+	* @param portletId the portlet ID
 	* @return the matching portlet
 	* @throws com.liferay.portal.NoSuchPortletException if a matching portlet could not be found
 	* @throws SystemException if a system exception occurred
@@ -217,10 +217,10 @@ public interface PortletPersistence extends BasePersistence<Portlet> {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the portlet where companyId = &#63; and portletId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	* Returns the portlet where companyId = &#63; and portletId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	*
-	* @param companyId the company ID to search with
-	* @param portletId the portlet ID to search with
+	* @param companyId the company ID
+	* @param portletId the portlet ID
 	* @return the matching portlet, or <code>null</code> if a matching portlet could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -229,10 +229,10 @@ public interface PortletPersistence extends BasePersistence<Portlet> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the portlet where companyId = &#63; and portletId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	* Returns the portlet where companyId = &#63; and portletId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
-	* @param companyId the company ID to search with
-	* @param portletId the portlet ID to search with
+	* @param companyId the company ID
+	* @param portletId the portlet ID
 	* @return the matching portlet, or <code>null</code> if a matching portlet could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -241,7 +241,7 @@ public interface PortletPersistence extends BasePersistence<Portlet> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds all the portlets.
+	* Returns all the portlets.
 	*
 	* @return the portlets
 	* @throws SystemException if a system exception occurred
@@ -250,14 +250,14 @@ public interface PortletPersistence extends BasePersistence<Portlet> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds a range of all the portlets.
+	* Returns a range of all the portlets.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of portlets to return
-	* @param end the upper bound of the range of portlets to return (not inclusive)
+	* @param start the lower bound of the range of portlets
+	* @param end the upper bound of the range of portlets (not inclusive)
 	* @return the range of portlets
 	* @throws SystemException if a system exception occurred
 	*/
@@ -265,14 +265,14 @@ public interface PortletPersistence extends BasePersistence<Portlet> {
 		int end) throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds an ordered range of all the portlets.
+	* Returns an ordered range of all the portlets.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of portlets to return
-	* @param end the upper bound of the range of portlets to return (not inclusive)
+	* @param start the lower bound of the range of portlets
+	* @param end the upper bound of the range of portlets (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of portlets
 	* @throws SystemException if a system exception occurred
@@ -285,7 +285,7 @@ public interface PortletPersistence extends BasePersistence<Portlet> {
 	/**
 	* Removes all the portlets where companyId = &#63; from the database.
 	*
-	* @param companyId the company ID to search with
+	* @param companyId the company ID
 	* @throws SystemException if a system exception occurred
 	*/
 	public void removeByCompanyId(long companyId)
@@ -294,8 +294,8 @@ public interface PortletPersistence extends BasePersistence<Portlet> {
 	/**
 	* Removes the portlet where companyId = &#63; and portletId = &#63; from the database.
 	*
-	* @param companyId the company ID to search with
-	* @param portletId the portlet ID to search with
+	* @param companyId the company ID
+	* @param portletId the portlet ID
 	* @throws SystemException if a system exception occurred
 	*/
 	public void removeByC_P(long companyId, java.lang.String portletId)
@@ -311,9 +311,9 @@ public interface PortletPersistence extends BasePersistence<Portlet> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Counts all the portlets where companyId = &#63;.
+	* Returns the number of portlets where companyId = &#63;.
 	*
-	* @param companyId the company ID to search with
+	* @param companyId the company ID
 	* @return the number of matching portlets
 	* @throws SystemException if a system exception occurred
 	*/
@@ -321,10 +321,10 @@ public interface PortletPersistence extends BasePersistence<Portlet> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Counts all the portlets where companyId = &#63; and portletId = &#63;.
+	* Returns the number of portlets where companyId = &#63; and portletId = &#63;.
 	*
-	* @param companyId the company ID to search with
-	* @param portletId the portlet ID to search with
+	* @param companyId the company ID
+	* @param portletId the portlet ID
 	* @return the number of matching portlets
 	* @throws SystemException if a system exception occurred
 	*/
@@ -332,7 +332,7 @@ public interface PortletPersistence extends BasePersistence<Portlet> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Counts all the portlets.
+	* Returns the number of portlets.
 	*
 	* @return the number of portlets
 	* @throws SystemException if a system exception occurred

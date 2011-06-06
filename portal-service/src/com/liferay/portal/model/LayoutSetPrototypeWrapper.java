@@ -37,7 +37,7 @@ public class LayoutSetPrototypeWrapper implements LayoutSetPrototype {
 	}
 
 	/**
-	* Gets the primary key of this layout set prototype.
+	* Returns the primary key of this layout set prototype.
 	*
 	* @return the primary key of this layout set prototype
 	*/
@@ -46,7 +46,7 @@ public class LayoutSetPrototypeWrapper implements LayoutSetPrototype {
 	}
 
 	/**
-	* Sets the primary key of this layout set prototype
+	* Sets the primary key of this layout set prototype.
 	*
 	* @param primaryKey the primary key of this layout set prototype
 	*/
@@ -55,7 +55,7 @@ public class LayoutSetPrototypeWrapper implements LayoutSetPrototype {
 	}
 
 	/**
-	* Gets the uuid of this layout set prototype.
+	* Returns the uuid of this layout set prototype.
 	*
 	* @return the uuid of this layout set prototype
 	*/
@@ -73,7 +73,7 @@ public class LayoutSetPrototypeWrapper implements LayoutSetPrototype {
 	}
 
 	/**
-	* Gets the layout set prototype ID of this layout set prototype.
+	* Returns the layout set prototype ID of this layout set prototype.
 	*
 	* @return the layout set prototype ID of this layout set prototype
 	*/
@@ -91,7 +91,7 @@ public class LayoutSetPrototypeWrapper implements LayoutSetPrototype {
 	}
 
 	/**
-	* Gets the company ID of this layout set prototype.
+	* Returns the company ID of this layout set prototype.
 	*
 	* @return the company ID of this layout set prototype
 	*/
@@ -109,7 +109,7 @@ public class LayoutSetPrototypeWrapper implements LayoutSetPrototype {
 	}
 
 	/**
-	* Gets the name of this layout set prototype.
+	* Returns the name of this layout set prototype.
 	*
 	* @return the name of this layout set prototype
 	*/
@@ -118,9 +118,9 @@ public class LayoutSetPrototypeWrapper implements LayoutSetPrototype {
 	}
 
 	/**
-	* Gets the localized name of this layout set prototype. Uses the default language if no localization exists for the requested language.
+	* Returns the localized name of this layout set prototype in the language. Uses the default language if no localization exists for the requested language.
 	*
-	* @param locale the locale to get the localized name for
+	* @param locale the locale of the language
 	* @return the localized name of this layout set prototype
 	*/
 	public java.lang.String getName(java.util.Locale locale) {
@@ -128,9 +128,9 @@ public class LayoutSetPrototypeWrapper implements LayoutSetPrototype {
 	}
 
 	/**
-	* Gets the localized name of this layout set prototype, optionally using the default language if no localization exists for the requested language.
+	* Returns the localized name of this layout set prototype in the language, optionally using the default language if no localization exists for the requested language.
 	*
-	* @param locale the local to get the localized name for
+	* @param locale the local of the language
 	* @param useDefault whether to use the default language if no localization exists for the requested language
 	* @return the localized name of this layout set prototype. If <code>useDefault</code> is <code>false</code> and no localization exists for the requested language, an empty string will be returned.
 	*/
@@ -139,9 +139,9 @@ public class LayoutSetPrototypeWrapper implements LayoutSetPrototype {
 	}
 
 	/**
-	* Gets the localized name of this layout set prototype. Uses the default language if no localization exists for the requested language.
+	* Returns the localized name of this layout set prototype in the language. Uses the default language if no localization exists for the requested language.
 	*
-	* @param languageId the id of the language to get the localized name for
+	* @param languageId the ID of the language
 	* @return the localized name of this layout set prototype
 	*/
 	public java.lang.String getName(java.lang.String languageId) {
@@ -149,9 +149,9 @@ public class LayoutSetPrototypeWrapper implements LayoutSetPrototype {
 	}
 
 	/**
-	* Gets the localized name of this layout set prototype, optionally using the default language if no localization exists for the requested language.
+	* Returns the localized name of this layout set prototype in the language, optionally using the default language if no localization exists for the requested language.
 	*
-	* @param languageId the id of the language to get the localized name for
+	* @param languageId the ID of the language
 	* @param useDefault whether to use the default language if no localization exists for the requested language
 	* @return the localized name of this layout set prototype
 	*/
@@ -161,9 +161,9 @@ public class LayoutSetPrototypeWrapper implements LayoutSetPrototype {
 	}
 
 	/**
-	* Gets a map of the locales and localized name of this layout set prototype.
+	* Returns a map of the locales and localized names of this layout set prototype.
 	*
-	* @return the locales and localized name
+	* @return the locales and localized names of this layout set prototype
 	*/
 	public java.util.Map<java.util.Locale, java.lang.String> getNameMap() {
 		return _layoutSetPrototype.getNameMap();
@@ -179,15 +179,22 @@ public class LayoutSetPrototypeWrapper implements LayoutSetPrototype {
 	}
 
 	/**
-	* Sets the localized name of this layout set prototype.
+	* Sets the localized name of this layout set prototype in the language.
 	*
 	* @param name the localized name of this layout set prototype
-	* @param locale the locale to set the localized name for
+	* @param locale the locale of the language
 	*/
 	public void setName(java.lang.String name, java.util.Locale locale) {
 		_layoutSetPrototype.setName(name, locale);
 	}
 
+	/**
+	* Sets the localized name of this layout set prototype in the language, and sets the default locale.
+	*
+	* @param name the localized name of this layout set prototype
+	* @param locale the locale of the language
+	* @param defaultLocale the default locale
+	*/
 	public void setName(java.lang.String name, java.util.Locale locale,
 		java.util.Locale defaultLocale) {
 		_layoutSetPrototype.setName(name, locale, defaultLocale);
@@ -203,6 +210,12 @@ public class LayoutSetPrototypeWrapper implements LayoutSetPrototype {
 		_layoutSetPrototype.setNameMap(nameMap);
 	}
 
+	/**
+	* Sets the localized names of this layout set prototype from the map of locales and localized names, and sets the default locale.
+	*
+	* @param nameMap the locales and localized names of this layout set prototype
+	* @param defaultLocale the default locale
+	*/
 	public void setNameMap(
 		java.util.Map<java.util.Locale, java.lang.String> nameMap,
 		java.util.Locale defaultLocale) {
@@ -210,7 +223,7 @@ public class LayoutSetPrototypeWrapper implements LayoutSetPrototype {
 	}
 
 	/**
-	* Gets the description of this layout set prototype.
+	* Returns the description of this layout set prototype.
 	*
 	* @return the description of this layout set prototype
 	*/
@@ -228,7 +241,7 @@ public class LayoutSetPrototypeWrapper implements LayoutSetPrototype {
 	}
 
 	/**
-	* Gets the settings of this layout set prototype.
+	* Returns the settings of this layout set prototype.
 	*
 	* @return the settings of this layout set prototype
 	*/
@@ -246,7 +259,7 @@ public class LayoutSetPrototypeWrapper implements LayoutSetPrototype {
 	}
 
 	/**
-	* Gets the active of this layout set prototype.
+	* Returns the active of this layout set prototype.
 	*
 	* @return the active of this layout set prototype
 	*/

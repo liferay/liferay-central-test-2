@@ -37,7 +37,7 @@ public class OrganizationWrapper implements Organization {
 	}
 
 	/**
-	* Gets the primary key of this organization.
+	* Returns the primary key of this organization.
 	*
 	* @return the primary key of this organization
 	*/
@@ -46,7 +46,7 @@ public class OrganizationWrapper implements Organization {
 	}
 
 	/**
-	* Sets the primary key of this organization
+	* Sets the primary key of this organization.
 	*
 	* @param primaryKey the primary key of this organization
 	*/
@@ -55,7 +55,7 @@ public class OrganizationWrapper implements Organization {
 	}
 
 	/**
-	* Gets the organization ID of this organization.
+	* Returns the organization ID of this organization.
 	*
 	* @return the organization ID of this organization
 	*/
@@ -73,7 +73,7 @@ public class OrganizationWrapper implements Organization {
 	}
 
 	/**
-	* Gets the company ID of this organization.
+	* Returns the company ID of this organization.
 	*
 	* @return the company ID of this organization
 	*/
@@ -91,7 +91,7 @@ public class OrganizationWrapper implements Organization {
 	}
 
 	/**
-	* Gets the parent organization ID of this organization.
+	* Returns the parent organization ID of this organization.
 	*
 	* @return the parent organization ID of this organization
 	*/
@@ -109,7 +109,7 @@ public class OrganizationWrapper implements Organization {
 	}
 
 	/**
-	* Gets the left organization ID of this organization.
+	* Returns the left organization ID of this organization.
 	*
 	* @return the left organization ID of this organization
 	*/
@@ -127,7 +127,7 @@ public class OrganizationWrapper implements Organization {
 	}
 
 	/**
-	* Gets the right organization ID of this organization.
+	* Returns the right organization ID of this organization.
 	*
 	* @return the right organization ID of this organization
 	*/
@@ -145,7 +145,7 @@ public class OrganizationWrapper implements Organization {
 	}
 
 	/**
-	* Gets the name of this organization.
+	* Returns the name of this organization.
 	*
 	* @return the name of this organization
 	*/
@@ -163,7 +163,7 @@ public class OrganizationWrapper implements Organization {
 	}
 
 	/**
-	* Gets the type of this organization.
+	* Returns the type of this organization.
 	*
 	* @return the type of this organization
 	*/
@@ -181,7 +181,7 @@ public class OrganizationWrapper implements Organization {
 	}
 
 	/**
-	* Gets the recursable of this organization.
+	* Returns the recursable of this organization.
 	*
 	* @return the recursable of this organization
 	*/
@@ -208,7 +208,7 @@ public class OrganizationWrapper implements Organization {
 	}
 
 	/**
-	* Gets the region ID of this organization.
+	* Returns the region ID of this organization.
 	*
 	* @return the region ID of this organization
 	*/
@@ -226,7 +226,7 @@ public class OrganizationWrapper implements Organization {
 	}
 
 	/**
-	* Gets the country ID of this organization.
+	* Returns the country ID of this organization.
 	*
 	* @return the country ID of this organization
 	*/
@@ -244,7 +244,7 @@ public class OrganizationWrapper implements Organization {
 	}
 
 	/**
-	* Gets the status ID of this organization.
+	* Returns the status ID of this organization.
 	*
 	* @return the status ID of this organization
 	*/
@@ -262,7 +262,7 @@ public class OrganizationWrapper implements Organization {
 	}
 
 	/**
-	* Gets the comments of this organization.
+	* Returns the comments of this organization.
 	*
 	* @return the comments of this organization
 	*/

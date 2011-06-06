@@ -37,7 +37,7 @@ public class PortletItemWrapper implements PortletItem {
 	}
 
 	/**
-	* Gets the primary key of this portlet item.
+	* Returns the primary key of this portlet item.
 	*
 	* @return the primary key of this portlet item
 	*/
@@ -46,7 +46,7 @@ public class PortletItemWrapper implements PortletItem {
 	}
 
 	/**
-	* Sets the primary key of this portlet item
+	* Sets the primary key of this portlet item.
 	*
 	* @param primaryKey the primary key of this portlet item
 	*/
@@ -55,7 +55,7 @@ public class PortletItemWrapper implements PortletItem {
 	}
 
 	/**
-	* Gets the portlet item ID of this portlet item.
+	* Returns the portlet item ID of this portlet item.
 	*
 	* @return the portlet item ID of this portlet item
 	*/
@@ -73,7 +73,7 @@ public class PortletItemWrapper implements PortletItem {
 	}
 
 	/**
-	* Gets the group ID of this portlet item.
+	* Returns the group ID of this portlet item.
 	*
 	* @return the group ID of this portlet item
 	*/
@@ -91,7 +91,7 @@ public class PortletItemWrapper implements PortletItem {
 	}
 
 	/**
-	* Gets the company ID of this portlet item.
+	* Returns the company ID of this portlet item.
 	*
 	* @return the company ID of this portlet item
 	*/
@@ -109,7 +109,7 @@ public class PortletItemWrapper implements PortletItem {
 	}
 
 	/**
-	* Gets the user ID of this portlet item.
+	* Returns the user ID of this portlet item.
 	*
 	* @return the user ID of this portlet item
 	*/
@@ -127,7 +127,7 @@ public class PortletItemWrapper implements PortletItem {
 	}
 
 	/**
-	* Gets the user uuid of this portlet item.
+	* Returns the user uuid of this portlet item.
 	*
 	* @return the user uuid of this portlet item
 	* @throws SystemException if a system exception occurred
@@ -147,7 +147,7 @@ public class PortletItemWrapper implements PortletItem {
 	}
 
 	/**
-	* Gets the user name of this portlet item.
+	* Returns the user name of this portlet item.
 	*
 	* @return the user name of this portlet item
 	*/
@@ -165,7 +165,7 @@ public class PortletItemWrapper implements PortletItem {
 	}
 
 	/**
-	* Gets the create date of this portlet item.
+	* Returns the create date of this portlet item.
 	*
 	* @return the create date of this portlet item
 	*/
@@ -183,7 +183,7 @@ public class PortletItemWrapper implements PortletItem {
 	}
 
 	/**
-	* Gets the modified date of this portlet item.
+	* Returns the modified date of this portlet item.
 	*
 	* @return the modified date of this portlet item
 	*/
@@ -201,7 +201,7 @@ public class PortletItemWrapper implements PortletItem {
 	}
 
 	/**
-	* Gets the name of this portlet item.
+	* Returns the name of this portlet item.
 	*
 	* @return the name of this portlet item
 	*/
@@ -219,7 +219,7 @@ public class PortletItemWrapper implements PortletItem {
 	}
 
 	/**
-	* Gets the portlet ID of this portlet item.
+	* Returns the portlet ID of this portlet item.
 	*
 	* @return the portlet ID of this portlet item
 	*/
@@ -237,16 +237,16 @@ public class PortletItemWrapper implements PortletItem {
 	}
 
 	/**
-	* Gets the class name of the model instance this portlet item is polymorphically associated with.
+	* Returns the fully qualified class name of this portlet item.
 	*
-	* @return the class name of the model instance this portlet item is polymorphically associated with
+	* @return the fully qualified class name of this portlet item
 	*/
 	public java.lang.String getClassName() {
 		return _portletItem.getClassName();
 	}
 
 	/**
-	* Gets the class name ID of this portlet item.
+	* Returns the class name ID of this portlet item.
 	*
 	* @return the class name ID of this portlet item
 	*/

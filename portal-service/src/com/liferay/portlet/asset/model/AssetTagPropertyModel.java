@@ -48,21 +48,21 @@ public interface AssetTagPropertyModel extends AuditedModel,
 	 */
 
 	/**
-	 * Gets the primary key of this asset tag property.
+	 * Returns the primary key of this asset tag property.
 	 *
 	 * @return the primary key of this asset tag property
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this asset tag property
+	 * Sets the primary key of this asset tag property.
 	 *
 	 * @param primaryKey the primary key of this asset tag property
 	 */
 	public void setPrimaryKey(long primaryKey);
 
 	/**
-	 * Gets the tag property ID of this asset tag property.
+	 * Returns the tag property ID of this asset tag property.
 	 *
 	 * @return the tag property ID of this asset tag property
 	 */
@@ -76,7 +76,7 @@ public interface AssetTagPropertyModel extends AuditedModel,
 	public void setTagPropertyId(long tagPropertyId);
 
 	/**
-	 * Gets the company ID of this asset tag property.
+	 * Returns the company ID of this asset tag property.
 	 *
 	 * @return the company ID of this asset tag property
 	 */
@@ -90,7 +90,7 @@ public interface AssetTagPropertyModel extends AuditedModel,
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the user ID of this asset tag property.
+	 * Returns the user ID of this asset tag property.
 	 *
 	 * @return the user ID of this asset tag property
 	 */
@@ -104,7 +104,7 @@ public interface AssetTagPropertyModel extends AuditedModel,
 	public void setUserId(long userId);
 
 	/**
-	 * Gets the user uuid of this asset tag property.
+	 * Returns the user uuid of this asset tag property.
 	 *
 	 * @return the user uuid of this asset tag property
 	 * @throws SystemException if a system exception occurred
@@ -119,7 +119,7 @@ public interface AssetTagPropertyModel extends AuditedModel,
 	public void setUserUuid(String userUuid);
 
 	/**
-	 * Gets the user name of this asset tag property.
+	 * Returns the user name of this asset tag property.
 	 *
 	 * @return the user name of this asset tag property
 	 */
@@ -134,7 +134,7 @@ public interface AssetTagPropertyModel extends AuditedModel,
 	public void setUserName(String userName);
 
 	/**
-	 * Gets the create date of this asset tag property.
+	 * Returns the create date of this asset tag property.
 	 *
 	 * @return the create date of this asset tag property
 	 */
@@ -148,7 +148,7 @@ public interface AssetTagPropertyModel extends AuditedModel,
 	public void setCreateDate(Date createDate);
 
 	/**
-	 * Gets the modified date of this asset tag property.
+	 * Returns the modified date of this asset tag property.
 	 *
 	 * @return the modified date of this asset tag property
 	 */
@@ -162,7 +162,7 @@ public interface AssetTagPropertyModel extends AuditedModel,
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
-	 * Gets the tag ID of this asset tag property.
+	 * Returns the tag ID of this asset tag property.
 	 *
 	 * @return the tag ID of this asset tag property
 	 */
@@ -176,7 +176,7 @@ public interface AssetTagPropertyModel extends AuditedModel,
 	public void setTagId(long tagId);
 
 	/**
-	 * Gets the key of this asset tag property.
+	 * Returns the key of this asset tag property.
 	 *
 	 * @return the key of this asset tag property
 	 */
@@ -191,7 +191,7 @@ public interface AssetTagPropertyModel extends AuditedModel,
 	public void setKey(String key);
 
 	/**
-	 * Gets the value of this asset tag property.
+	 * Returns the value of this asset tag property.
 	 *
 	 * @return the value of this asset tag property
 	 */

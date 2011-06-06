@@ -124,7 +124,7 @@ public class JournalArticleImageUtil {
 	/**
 	* Caches the journal article image in the entity cache if it is enabled.
 	*
-	* @param journalArticleImage the journal article image to cache
+	* @param journalArticleImage the journal article image
 	*/
 	public static void cacheResult(
 		com.liferay.portlet.journal.model.JournalArticleImage journalArticleImage) {
@@ -134,7 +134,7 @@ public class JournalArticleImageUtil {
 	/**
 	* Caches the journal article images in the entity cache if it is enabled.
 	*
-	* @param journalArticleImages the journal article images to cache
+	* @param journalArticleImages the journal article images
 	*/
 	public static void cacheResult(
 		java.util.List<com.liferay.portlet.journal.model.JournalArticleImage> journalArticleImages) {
@@ -155,7 +155,7 @@ public class JournalArticleImageUtil {
 	/**
 	* Removes the journal article image with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param articleImageId the primary key of the journal article image to remove
+	* @param articleImageId the primary key of the journal article image
 	* @return the journal article image that was removed
 	* @throws com.liferay.portlet.journal.NoSuchArticleImageException if a journal article image with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -175,9 +175,9 @@ public class JournalArticleImageUtil {
 	}
 
 	/**
-	* Finds the journal article image with the primary key or throws a {@link com.liferay.portlet.journal.NoSuchArticleImageException} if it could not be found.
+	* Returns the journal article image with the primary key or throws a {@link com.liferay.portlet.journal.NoSuchArticleImageException} if it could not be found.
 	*
-	* @param articleImageId the primary key of the journal article image to find
+	* @param articleImageId the primary key of the journal article image
 	* @return the journal article image
 	* @throws com.liferay.portlet.journal.NoSuchArticleImageException if a journal article image with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -190,9 +190,9 @@ public class JournalArticleImageUtil {
 	}
 
 	/**
-	* Finds the journal article image with the primary key or returns <code>null</code> if it could not be found.
+	* Returns the journal article image with the primary key or returns <code>null</code> if it could not be found.
 	*
-	* @param articleImageId the primary key of the journal article image to find
+	* @param articleImageId the primary key of the journal article image
 	* @return the journal article image, or <code>null</code> if a journal article image with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -203,9 +203,9 @@ public class JournalArticleImageUtil {
 	}
 
 	/**
-	* Finds all the journal article images where groupId = &#63;.
+	* Returns all the journal article images where groupId = &#63;.
 	*
-	* @param groupId the group ID to search with
+	* @param groupId the group ID
 	* @return the matching journal article images
 	* @throws SystemException if a system exception occurred
 	*/
@@ -216,15 +216,15 @@ public class JournalArticleImageUtil {
 	}
 
 	/**
-	* Finds a range of all the journal article images where groupId = &#63;.
+	* Returns a range of all the journal article images where groupId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param start the lower bound of the range of journal article images to return
-	* @param end the upper bound of the range of journal article images to return (not inclusive)
+	* @param groupId the group ID
+	* @param start the lower bound of the range of journal article images
+	* @param end the upper bound of the range of journal article images (not inclusive)
 	* @return the range of matching journal article images
 	* @throws SystemException if a system exception occurred
 	*/
@@ -235,15 +235,15 @@ public class JournalArticleImageUtil {
 	}
 
 	/**
-	* Finds an ordered range of all the journal article images where groupId = &#63;.
+	* Returns an ordered range of all the journal article images where groupId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param start the lower bound of the range of journal article images to return
-	* @param end the upper bound of the range of journal article images to return (not inclusive)
+	* @param groupId the group ID
+	* @param start the lower bound of the range of journal article images
+	* @param end the upper bound of the range of journal article images (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching journal article images
 	* @throws SystemException if a system exception occurred
@@ -257,13 +257,13 @@ public class JournalArticleImageUtil {
 	}
 
 	/**
-	* Finds the first journal article image in the ordered set where groupId = &#63;.
+	* Returns the first journal article image in the ordered set where groupId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
+	* @param groupId the group ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching journal article image
 	* @throws com.liferay.portlet.journal.NoSuchArticleImageException if a matching journal article image could not be found
@@ -278,13 +278,13 @@ public class JournalArticleImageUtil {
 	}
 
 	/**
-	* Finds the last journal article image in the ordered set where groupId = &#63;.
+	* Returns the last journal article image in the ordered set where groupId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
+	* @param groupId the group ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching journal article image
 	* @throws com.liferay.portlet.journal.NoSuchArticleImageException if a matching journal article image could not be found
@@ -299,14 +299,14 @@ public class JournalArticleImageUtil {
 	}
 
 	/**
-	* Finds the journal article images before and after the current journal article image in the ordered set where groupId = &#63;.
+	* Returns the journal article images before and after the current journal article image in the ordered set where groupId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
 	* @param articleImageId the primary key of the current journal article image
-	* @param groupId the group ID to search with
+	* @param groupId the group ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next journal article image
 	* @throws com.liferay.portlet.journal.NoSuchArticleImageException if a journal article image with the primary key could not be found
@@ -323,9 +323,9 @@ public class JournalArticleImageUtil {
 	}
 
 	/**
-	* Finds all the journal article images where tempImage = &#63;.
+	* Returns all the journal article images where tempImage = &#63;.
 	*
-	* @param tempImage the temp image to search with
+	* @param tempImage the temp image
 	* @return the matching journal article images
 	* @throws SystemException if a system exception occurred
 	*/
@@ -336,15 +336,15 @@ public class JournalArticleImageUtil {
 	}
 
 	/**
-	* Finds a range of all the journal article images where tempImage = &#63;.
+	* Returns a range of all the journal article images where tempImage = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param tempImage the temp image to search with
-	* @param start the lower bound of the range of journal article images to return
-	* @param end the upper bound of the range of journal article images to return (not inclusive)
+	* @param tempImage the temp image
+	* @param start the lower bound of the range of journal article images
+	* @param end the upper bound of the range of journal article images (not inclusive)
 	* @return the range of matching journal article images
 	* @throws SystemException if a system exception occurred
 	*/
@@ -355,15 +355,15 @@ public class JournalArticleImageUtil {
 	}
 
 	/**
-	* Finds an ordered range of all the journal article images where tempImage = &#63;.
+	* Returns an ordered range of all the journal article images where tempImage = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param tempImage the temp image to search with
-	* @param start the lower bound of the range of journal article images to return
-	* @param end the upper bound of the range of journal article images to return (not inclusive)
+	* @param tempImage the temp image
+	* @param start the lower bound of the range of journal article images
+	* @param end the upper bound of the range of journal article images (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching journal article images
 	* @throws SystemException if a system exception occurred
@@ -377,13 +377,13 @@ public class JournalArticleImageUtil {
 	}
 
 	/**
-	* Finds the first journal article image in the ordered set where tempImage = &#63;.
+	* Returns the first journal article image in the ordered set where tempImage = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param tempImage the temp image to search with
+	* @param tempImage the temp image
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching journal article image
 	* @throws com.liferay.portlet.journal.NoSuchArticleImageException if a matching journal article image could not be found
@@ -399,13 +399,13 @@ public class JournalArticleImageUtil {
 	}
 
 	/**
-	* Finds the last journal article image in the ordered set where tempImage = &#63;.
+	* Returns the last journal article image in the ordered set where tempImage = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param tempImage the temp image to search with
+	* @param tempImage the temp image
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching journal article image
 	* @throws com.liferay.portlet.journal.NoSuchArticleImageException if a matching journal article image could not be found
@@ -421,14 +421,14 @@ public class JournalArticleImageUtil {
 	}
 
 	/**
-	* Finds the journal article images before and after the current journal article image in the ordered set where tempImage = &#63;.
+	* Returns the journal article images before and after the current journal article image in the ordered set where tempImage = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
 	* @param articleImageId the primary key of the current journal article image
-	* @param tempImage the temp image to search with
+	* @param tempImage the temp image
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next journal article image
 	* @throws com.liferay.portlet.journal.NoSuchArticleImageException if a journal article image with the primary key could not be found
@@ -445,11 +445,11 @@ public class JournalArticleImageUtil {
 	}
 
 	/**
-	* Finds all the journal article images where groupId = &#63; and articleId = &#63; and version = &#63;.
+	* Returns all the journal article images where groupId = &#63; and articleId = &#63; and version = &#63;.
 	*
-	* @param groupId the group ID to search with
-	* @param articleId the article ID to search with
-	* @param version the version to search with
+	* @param groupId the group ID
+	* @param articleId the article ID
+	* @param version the version
 	* @return the matching journal article images
 	* @throws SystemException if a system exception occurred
 	*/
@@ -460,17 +460,17 @@ public class JournalArticleImageUtil {
 	}
 
 	/**
-	* Finds a range of all the journal article images where groupId = &#63; and articleId = &#63; and version = &#63;.
+	* Returns a range of all the journal article images where groupId = &#63; and articleId = &#63; and version = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param articleId the article ID to search with
-	* @param version the version to search with
-	* @param start the lower bound of the range of journal article images to return
-	* @param end the upper bound of the range of journal article images to return (not inclusive)
+	* @param groupId the group ID
+	* @param articleId the article ID
+	* @param version the version
+	* @param start the lower bound of the range of journal article images
+	* @param end the upper bound of the range of journal article images (not inclusive)
 	* @return the range of matching journal article images
 	* @throws SystemException if a system exception occurred
 	*/
@@ -482,17 +482,17 @@ public class JournalArticleImageUtil {
 	}
 
 	/**
-	* Finds an ordered range of all the journal article images where groupId = &#63; and articleId = &#63; and version = &#63;.
+	* Returns an ordered range of all the journal article images where groupId = &#63; and articleId = &#63; and version = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param articleId the article ID to search with
-	* @param version the version to search with
-	* @param start the lower bound of the range of journal article images to return
-	* @param end the upper bound of the range of journal article images to return (not inclusive)
+	* @param groupId the group ID
+	* @param articleId the article ID
+	* @param version the version
+	* @param start the lower bound of the range of journal article images
+	* @param end the upper bound of the range of journal article images (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching journal article images
 	* @throws SystemException if a system exception occurred
@@ -508,15 +508,15 @@ public class JournalArticleImageUtil {
 	}
 
 	/**
-	* Finds the first journal article image in the ordered set where groupId = &#63; and articleId = &#63; and version = &#63;.
+	* Returns the first journal article image in the ordered set where groupId = &#63; and articleId = &#63; and version = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param articleId the article ID to search with
-	* @param version the version to search with
+	* @param groupId the group ID
+	* @param articleId the article ID
+	* @param version the version
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching journal article image
 	* @throws com.liferay.portlet.journal.NoSuchArticleImageException if a matching journal article image could not be found
@@ -533,15 +533,15 @@ public class JournalArticleImageUtil {
 	}
 
 	/**
-	* Finds the last journal article image in the ordered set where groupId = &#63; and articleId = &#63; and version = &#63;.
+	* Returns the last journal article image in the ordered set where groupId = &#63; and articleId = &#63; and version = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param articleId the article ID to search with
-	* @param version the version to search with
+	* @param groupId the group ID
+	* @param articleId the article ID
+	* @param version the version
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching journal article image
 	* @throws com.liferay.portlet.journal.NoSuchArticleImageException if a matching journal article image could not be found
@@ -558,16 +558,16 @@ public class JournalArticleImageUtil {
 	}
 
 	/**
-	* Finds the journal article images before and after the current journal article image in the ordered set where groupId = &#63; and articleId = &#63; and version = &#63;.
+	* Returns the journal article images before and after the current journal article image in the ordered set where groupId = &#63; and articleId = &#63; and version = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
 	* @param articleImageId the primary key of the current journal article image
-	* @param groupId the group ID to search with
-	* @param articleId the article ID to search with
-	* @param version the version to search with
+	* @param groupId the group ID
+	* @param articleId the article ID
+	* @param version the version
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next journal article image
 	* @throws com.liferay.portlet.journal.NoSuchArticleImageException if a journal article image with the primary key could not be found
@@ -585,14 +585,14 @@ public class JournalArticleImageUtil {
 	}
 
 	/**
-	* Finds the journal article image where groupId = &#63; and articleId = &#63; and version = &#63; and elInstanceId = &#63; and elName = &#63; and languageId = &#63; or throws a {@link com.liferay.portlet.journal.NoSuchArticleImageException} if it could not be found.
+	* Returns the journal article image where groupId = &#63; and articleId = &#63; and version = &#63; and elInstanceId = &#63; and elName = &#63; and languageId = &#63; or throws a {@link com.liferay.portlet.journal.NoSuchArticleImageException} if it could not be found.
 	*
-	* @param groupId the group ID to search with
-	* @param articleId the article ID to search with
-	* @param version the version to search with
-	* @param elInstanceId the el instance ID to search with
-	* @param elName the el name to search with
-	* @param languageId the language ID to search with
+	* @param groupId the group ID
+	* @param articleId the article ID
+	* @param version the version
+	* @param elInstanceId the el instance ID
+	* @param elName the el name
+	* @param languageId the language ID
 	* @return the matching journal article image
 	* @throws com.liferay.portlet.journal.NoSuchArticleImageException if a matching journal article image could not be found
 	* @throws SystemException if a system exception occurred
@@ -609,14 +609,14 @@ public class JournalArticleImageUtil {
 	}
 
 	/**
-	* Finds the journal article image where groupId = &#63; and articleId = &#63; and version = &#63; and elInstanceId = &#63; and elName = &#63; and languageId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	* Returns the journal article image where groupId = &#63; and articleId = &#63; and version = &#63; and elInstanceId = &#63; and elName = &#63; and languageId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	*
-	* @param groupId the group ID to search with
-	* @param articleId the article ID to search with
-	* @param version the version to search with
-	* @param elInstanceId the el instance ID to search with
-	* @param elName the el name to search with
-	* @param languageId the language ID to search with
+	* @param groupId the group ID
+	* @param articleId the article ID
+	* @param version the version
+	* @param elInstanceId the el instance ID
+	* @param elName the el name
+	* @param languageId the language ID
 	* @return the matching journal article image, or <code>null</code> if a matching journal article image could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -631,14 +631,14 @@ public class JournalArticleImageUtil {
 	}
 
 	/**
-	* Finds the journal article image where groupId = &#63; and articleId = &#63; and version = &#63; and elInstanceId = &#63; and elName = &#63; and languageId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	* Returns the journal article image where groupId = &#63; and articleId = &#63; and version = &#63; and elInstanceId = &#63; and elName = &#63; and languageId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
-	* @param groupId the group ID to search with
-	* @param articleId the article ID to search with
-	* @param version the version to search with
-	* @param elInstanceId the el instance ID to search with
-	* @param elName the el name to search with
-	* @param languageId the language ID to search with
+	* @param groupId the group ID
+	* @param articleId the article ID
+	* @param version the version
+	* @param elInstanceId the el instance ID
+	* @param elName the el name
+	* @param languageId the language ID
 	* @return the matching journal article image, or <code>null</code> if a matching journal article image could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -653,7 +653,7 @@ public class JournalArticleImageUtil {
 	}
 
 	/**
-	* Finds all the journal article images.
+	* Returns all the journal article images.
 	*
 	* @return the journal article images
 	* @throws SystemException if a system exception occurred
@@ -664,14 +664,14 @@ public class JournalArticleImageUtil {
 	}
 
 	/**
-	* Finds a range of all the journal article images.
+	* Returns a range of all the journal article images.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of journal article images to return
-	* @param end the upper bound of the range of journal article images to return (not inclusive)
+	* @param start the lower bound of the range of journal article images
+	* @param end the upper bound of the range of journal article images (not inclusive)
 	* @return the range of journal article images
 	* @throws SystemException if a system exception occurred
 	*/
@@ -682,14 +682,14 @@ public class JournalArticleImageUtil {
 	}
 
 	/**
-	* Finds an ordered range of all the journal article images.
+	* Returns an ordered range of all the journal article images.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of journal article images to return
-	* @param end the upper bound of the range of journal article images to return (not inclusive)
+	* @param start the lower bound of the range of journal article images
+	* @param end the upper bound of the range of journal article images (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of journal article images
 	* @throws SystemException if a system exception occurred
@@ -704,7 +704,7 @@ public class JournalArticleImageUtil {
 	/**
 	* Removes all the journal article images where groupId = &#63; from the database.
 	*
-	* @param groupId the group ID to search with
+	* @param groupId the group ID
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByGroupId(long groupId)
@@ -715,7 +715,7 @@ public class JournalArticleImageUtil {
 	/**
 	* Removes all the journal article images where tempImage = &#63; from the database.
 	*
-	* @param tempImage the temp image to search with
+	* @param tempImage the temp image
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByTempImage(boolean tempImage)
@@ -726,9 +726,9 @@ public class JournalArticleImageUtil {
 	/**
 	* Removes all the journal article images where groupId = &#63; and articleId = &#63; and version = &#63; from the database.
 	*
-	* @param groupId the group ID to search with
-	* @param articleId the article ID to search with
-	* @param version the version to search with
+	* @param groupId the group ID
+	* @param articleId the article ID
+	* @param version the version
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByG_A_V(long groupId, java.lang.String articleId,
@@ -740,12 +740,12 @@ public class JournalArticleImageUtil {
 	/**
 	* Removes the journal article image where groupId = &#63; and articleId = &#63; and version = &#63; and elInstanceId = &#63; and elName = &#63; and languageId = &#63; from the database.
 	*
-	* @param groupId the group ID to search with
-	* @param articleId the article ID to search with
-	* @param version the version to search with
-	* @param elInstanceId the el instance ID to search with
-	* @param elName the el name to search with
-	* @param languageId the language ID to search with
+	* @param groupId the group ID
+	* @param articleId the article ID
+	* @param version the version
+	* @param elInstanceId the el instance ID
+	* @param elName the el name
+	* @param languageId the language ID
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByG_A_V_E_E_L(long groupId,
@@ -770,9 +770,9 @@ public class JournalArticleImageUtil {
 	}
 
 	/**
-	* Counts all the journal article images where groupId = &#63;.
+	* Returns the number of journal article images where groupId = &#63;.
 	*
-	* @param groupId the group ID to search with
+	* @param groupId the group ID
 	* @return the number of matching journal article images
 	* @throws SystemException if a system exception occurred
 	*/
@@ -782,9 +782,9 @@ public class JournalArticleImageUtil {
 	}
 
 	/**
-	* Counts all the journal article images where tempImage = &#63;.
+	* Returns the number of journal article images where tempImage = &#63;.
 	*
-	* @param tempImage the temp image to search with
+	* @param tempImage the temp image
 	* @return the number of matching journal article images
 	* @throws SystemException if a system exception occurred
 	*/
@@ -794,11 +794,11 @@ public class JournalArticleImageUtil {
 	}
 
 	/**
-	* Counts all the journal article images where groupId = &#63; and articleId = &#63; and version = &#63;.
+	* Returns the number of journal article images where groupId = &#63; and articleId = &#63; and version = &#63;.
 	*
-	* @param groupId the group ID to search with
-	* @param articleId the article ID to search with
-	* @param version the version to search with
+	* @param groupId the group ID
+	* @param articleId the article ID
+	* @param version the version
 	* @return the number of matching journal article images
 	* @throws SystemException if a system exception occurred
 	*/
@@ -809,14 +809,14 @@ public class JournalArticleImageUtil {
 	}
 
 	/**
-	* Counts all the journal article images where groupId = &#63; and articleId = &#63; and version = &#63; and elInstanceId = &#63; and elName = &#63; and languageId = &#63;.
+	* Returns the number of journal article images where groupId = &#63; and articleId = &#63; and version = &#63; and elInstanceId = &#63; and elName = &#63; and languageId = &#63;.
 	*
-	* @param groupId the group ID to search with
-	* @param articleId the article ID to search with
-	* @param version the version to search with
-	* @param elInstanceId the el instance ID to search with
-	* @param elName the el name to search with
-	* @param languageId the language ID to search with
+	* @param groupId the group ID
+	* @param articleId the article ID
+	* @param version the version
+	* @param elInstanceId the el instance ID
+	* @param elName the el name
+	* @param languageId the language ID
 	* @return the number of matching journal article images
 	* @throws SystemException if a system exception occurred
 	*/
@@ -831,7 +831,7 @@ public class JournalArticleImageUtil {
 	}
 
 	/**
-	* Counts all the journal article images.
+	* Returns the number of journal article images.
 	*
 	* @return the number of journal article images
 	* @throws SystemException if a system exception occurred

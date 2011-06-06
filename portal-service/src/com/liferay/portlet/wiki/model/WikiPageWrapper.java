@@ -37,7 +37,7 @@ public class WikiPageWrapper implements WikiPage {
 	}
 
 	/**
-	* Gets the primary key of this wiki page.
+	* Returns the primary key of this wiki page.
 	*
 	* @return the primary key of this wiki page
 	*/
@@ -46,7 +46,7 @@ public class WikiPageWrapper implements WikiPage {
 	}
 
 	/**
-	* Sets the primary key of this wiki page
+	* Sets the primary key of this wiki page.
 	*
 	* @param primaryKey the primary key of this wiki page
 	*/
@@ -55,7 +55,7 @@ public class WikiPageWrapper implements WikiPage {
 	}
 
 	/**
-	* Gets the uuid of this wiki page.
+	* Returns the uuid of this wiki page.
 	*
 	* @return the uuid of this wiki page
 	*/
@@ -73,7 +73,7 @@ public class WikiPageWrapper implements WikiPage {
 	}
 
 	/**
-	* Gets the page ID of this wiki page.
+	* Returns the page ID of this wiki page.
 	*
 	* @return the page ID of this wiki page
 	*/
@@ -91,7 +91,7 @@ public class WikiPageWrapper implements WikiPage {
 	}
 
 	/**
-	* Gets the resource prim key of this wiki page.
+	* Returns the resource prim key of this wiki page.
 	*
 	* @return the resource prim key of this wiki page
 	*/
@@ -113,7 +113,7 @@ public class WikiPageWrapper implements WikiPage {
 	}
 
 	/**
-	* Gets the group ID of this wiki page.
+	* Returns the group ID of this wiki page.
 	*
 	* @return the group ID of this wiki page
 	*/
@@ -131,7 +131,7 @@ public class WikiPageWrapper implements WikiPage {
 	}
 
 	/**
-	* Gets the company ID of this wiki page.
+	* Returns the company ID of this wiki page.
 	*
 	* @return the company ID of this wiki page
 	*/
@@ -149,7 +149,7 @@ public class WikiPageWrapper implements WikiPage {
 	}
 
 	/**
-	* Gets the user ID of this wiki page.
+	* Returns the user ID of this wiki page.
 	*
 	* @return the user ID of this wiki page
 	*/
@@ -167,7 +167,7 @@ public class WikiPageWrapper implements WikiPage {
 	}
 
 	/**
-	* Gets the user uuid of this wiki page.
+	* Returns the user uuid of this wiki page.
 	*
 	* @return the user uuid of this wiki page
 	* @throws SystemException if a system exception occurred
@@ -187,7 +187,7 @@ public class WikiPageWrapper implements WikiPage {
 	}
 
 	/**
-	* Gets the user name of this wiki page.
+	* Returns the user name of this wiki page.
 	*
 	* @return the user name of this wiki page
 	*/
@@ -205,7 +205,7 @@ public class WikiPageWrapper implements WikiPage {
 	}
 
 	/**
-	* Gets the create date of this wiki page.
+	* Returns the create date of this wiki page.
 	*
 	* @return the create date of this wiki page
 	*/
@@ -223,7 +223,7 @@ public class WikiPageWrapper implements WikiPage {
 	}
 
 	/**
-	* Gets the modified date of this wiki page.
+	* Returns the modified date of this wiki page.
 	*
 	* @return the modified date of this wiki page
 	*/
@@ -241,7 +241,7 @@ public class WikiPageWrapper implements WikiPage {
 	}
 
 	/**
-	* Gets the node ID of this wiki page.
+	* Returns the node ID of this wiki page.
 	*
 	* @return the node ID of this wiki page
 	*/
@@ -259,7 +259,7 @@ public class WikiPageWrapper implements WikiPage {
 	}
 
 	/**
-	* Gets the title of this wiki page.
+	* Returns the title of this wiki page.
 	*
 	* @return the title of this wiki page
 	*/
@@ -277,7 +277,7 @@ public class WikiPageWrapper implements WikiPage {
 	}
 
 	/**
-	* Gets the version of this wiki page.
+	* Returns the version of this wiki page.
 	*
 	* @return the version of this wiki page
 	*/
@@ -295,7 +295,7 @@ public class WikiPageWrapper implements WikiPage {
 	}
 
 	/**
-	* Gets the minor edit of this wiki page.
+	* Returns the minor edit of this wiki page.
 	*
 	* @return the minor edit of this wiki page
 	*/
@@ -322,7 +322,7 @@ public class WikiPageWrapper implements WikiPage {
 	}
 
 	/**
-	* Gets the content of this wiki page.
+	* Returns the content of this wiki page.
 	*
 	* @return the content of this wiki page
 	*/
@@ -340,7 +340,7 @@ public class WikiPageWrapper implements WikiPage {
 	}
 
 	/**
-	* Gets the summary of this wiki page.
+	* Returns the summary of this wiki page.
 	*
 	* @return the summary of this wiki page
 	*/
@@ -358,7 +358,7 @@ public class WikiPageWrapper implements WikiPage {
 	}
 
 	/**
-	* Gets the format of this wiki page.
+	* Returns the format of this wiki page.
 	*
 	* @return the format of this wiki page
 	*/
@@ -376,7 +376,7 @@ public class WikiPageWrapper implements WikiPage {
 	}
 
 	/**
-	* Gets the head of this wiki page.
+	* Returns the head of this wiki page.
 	*
 	* @return the head of this wiki page
 	*/
@@ -403,7 +403,7 @@ public class WikiPageWrapper implements WikiPage {
 	}
 
 	/**
-	* Gets the parent title of this wiki page.
+	* Returns the parent title of this wiki page.
 	*
 	* @return the parent title of this wiki page
 	*/
@@ -421,7 +421,7 @@ public class WikiPageWrapper implements WikiPage {
 	}
 
 	/**
-	* Gets the redirect title of this wiki page.
+	* Returns the redirect title of this wiki page.
 	*
 	* @return the redirect title of this wiki page
 	*/
@@ -439,7 +439,7 @@ public class WikiPageWrapper implements WikiPage {
 	}
 
 	/**
-	* Gets the status of this wiki page.
+	* Returns the status of this wiki page.
 	*
 	* @return the status of this wiki page
 	*/
@@ -457,7 +457,7 @@ public class WikiPageWrapper implements WikiPage {
 	}
 
 	/**
-	* Gets the status by user ID of this wiki page.
+	* Returns the status by user ID of this wiki page.
 	*
 	* @return the status by user ID of this wiki page
 	*/
@@ -475,7 +475,7 @@ public class WikiPageWrapper implements WikiPage {
 	}
 
 	/**
-	* Gets the status by user uuid of this wiki page.
+	* Returns the status by user uuid of this wiki page.
 	*
 	* @return the status by user uuid of this wiki page
 	* @throws SystemException if a system exception occurred
@@ -495,7 +495,7 @@ public class WikiPageWrapper implements WikiPage {
 	}
 
 	/**
-	* Gets the status by user name of this wiki page.
+	* Returns the status by user name of this wiki page.
 	*
 	* @return the status by user name of this wiki page
 	*/
@@ -513,7 +513,7 @@ public class WikiPageWrapper implements WikiPage {
 	}
 
 	/**
-	* Gets the status date of this wiki page.
+	* Returns the status date of this wiki page.
 	*
 	* @return the status date of this wiki page
 	*/
@@ -531,7 +531,7 @@ public class WikiPageWrapper implements WikiPage {
 	}
 
 	/**
-	* @deprecated {@link #isApproved}
+	* @deprecated Renamed to {@link #isApproved()}
 	*/
 	public boolean getApproved() {
 		return _wikiPage.getApproved();

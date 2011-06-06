@@ -37,7 +37,7 @@ public class BookmarksEntryWrapper implements BookmarksEntry {
 	}
 
 	/**
-	* Gets the primary key of this bookmarks entry.
+	* Returns the primary key of this bookmarks entry.
 	*
 	* @return the primary key of this bookmarks entry
 	*/
@@ -46,7 +46,7 @@ public class BookmarksEntryWrapper implements BookmarksEntry {
 	}
 
 	/**
-	* Sets the primary key of this bookmarks entry
+	* Sets the primary key of this bookmarks entry.
 	*
 	* @param primaryKey the primary key of this bookmarks entry
 	*/
@@ -55,7 +55,7 @@ public class BookmarksEntryWrapper implements BookmarksEntry {
 	}
 
 	/**
-	* Gets the uuid of this bookmarks entry.
+	* Returns the uuid of this bookmarks entry.
 	*
 	* @return the uuid of this bookmarks entry
 	*/
@@ -73,7 +73,7 @@ public class BookmarksEntryWrapper implements BookmarksEntry {
 	}
 
 	/**
-	* Gets the entry ID of this bookmarks entry.
+	* Returns the entry ID of this bookmarks entry.
 	*
 	* @return the entry ID of this bookmarks entry
 	*/
@@ -91,7 +91,7 @@ public class BookmarksEntryWrapper implements BookmarksEntry {
 	}
 
 	/**
-	* Gets the group ID of this bookmarks entry.
+	* Returns the group ID of this bookmarks entry.
 	*
 	* @return the group ID of this bookmarks entry
 	*/
@@ -109,7 +109,7 @@ public class BookmarksEntryWrapper implements BookmarksEntry {
 	}
 
 	/**
-	* Gets the company ID of this bookmarks entry.
+	* Returns the company ID of this bookmarks entry.
 	*
 	* @return the company ID of this bookmarks entry
 	*/
@@ -127,7 +127,7 @@ public class BookmarksEntryWrapper implements BookmarksEntry {
 	}
 
 	/**
-	* Gets the user ID of this bookmarks entry.
+	* Returns the user ID of this bookmarks entry.
 	*
 	* @return the user ID of this bookmarks entry
 	*/
@@ -145,7 +145,7 @@ public class BookmarksEntryWrapper implements BookmarksEntry {
 	}
 
 	/**
-	* Gets the user uuid of this bookmarks entry.
+	* Returns the user uuid of this bookmarks entry.
 	*
 	* @return the user uuid of this bookmarks entry
 	* @throws SystemException if a system exception occurred
@@ -165,7 +165,7 @@ public class BookmarksEntryWrapper implements BookmarksEntry {
 	}
 
 	/**
-	* Gets the user name of this bookmarks entry.
+	* Returns the user name of this bookmarks entry.
 	*
 	* @return the user name of this bookmarks entry
 	*/
@@ -183,7 +183,7 @@ public class BookmarksEntryWrapper implements BookmarksEntry {
 	}
 
 	/**
-	* Gets the create date of this bookmarks entry.
+	* Returns the create date of this bookmarks entry.
 	*
 	* @return the create date of this bookmarks entry
 	*/
@@ -201,7 +201,7 @@ public class BookmarksEntryWrapper implements BookmarksEntry {
 	}
 
 	/**
-	* Gets the modified date of this bookmarks entry.
+	* Returns the modified date of this bookmarks entry.
 	*
 	* @return the modified date of this bookmarks entry
 	*/
@@ -219,7 +219,7 @@ public class BookmarksEntryWrapper implements BookmarksEntry {
 	}
 
 	/**
-	* Gets the folder ID of this bookmarks entry.
+	* Returns the folder ID of this bookmarks entry.
 	*
 	* @return the folder ID of this bookmarks entry
 	*/
@@ -237,7 +237,7 @@ public class BookmarksEntryWrapper implements BookmarksEntry {
 	}
 
 	/**
-	* Gets the name of this bookmarks entry.
+	* Returns the name of this bookmarks entry.
 	*
 	* @return the name of this bookmarks entry
 	*/
@@ -255,7 +255,7 @@ public class BookmarksEntryWrapper implements BookmarksEntry {
 	}
 
 	/**
-	* Gets the url of this bookmarks entry.
+	* Returns the url of this bookmarks entry.
 	*
 	* @return the url of this bookmarks entry
 	*/
@@ -273,7 +273,7 @@ public class BookmarksEntryWrapper implements BookmarksEntry {
 	}
 
 	/**
-	* Gets the description of this bookmarks entry.
+	* Returns the description of this bookmarks entry.
 	*
 	* @return the description of this bookmarks entry
 	*/
@@ -291,7 +291,7 @@ public class BookmarksEntryWrapper implements BookmarksEntry {
 	}
 
 	/**
-	* Gets the visits of this bookmarks entry.
+	* Returns the visits of this bookmarks entry.
 	*
 	* @return the visits of this bookmarks entry
 	*/
@@ -309,7 +309,7 @@ public class BookmarksEntryWrapper implements BookmarksEntry {
 	}
 
 	/**
-	* Gets the priority of this bookmarks entry.
+	* Returns the priority of this bookmarks entry.
 	*
 	* @return the priority of this bookmarks entry
 	*/

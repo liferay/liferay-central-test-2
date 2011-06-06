@@ -41,7 +41,7 @@ public class MBStatsUserLocalServiceUtil {
 	/**
 	* Adds the message boards stats user to the database. Also notifies the appropriate model listeners.
 	*
-	* @param mbStatsUser the message boards stats user to add
+	* @param mbStatsUser the message boards stats user
 	* @return the message boards stats user that was added
 	* @throws SystemException if a system exception occurred
 	*/
@@ -65,7 +65,7 @@ public class MBStatsUserLocalServiceUtil {
 	/**
 	* Deletes the message boards stats user with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param statsUserId the primary key of the message boards stats user to delete
+	* @param statsUserId the primary key of the message boards stats user
 	* @throws PortalException if a message boards stats user with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -78,7 +78,7 @@ public class MBStatsUserLocalServiceUtil {
 	/**
 	* Deletes the message boards stats user from the database. Also notifies the appropriate model listeners.
 	*
-	* @param mbStatsUser the message boards stats user to delete
+	* @param mbStatsUser the message boards stats user
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void deleteMBStatsUser(
@@ -90,7 +90,7 @@ public class MBStatsUserLocalServiceUtil {
 	/**
 	* Performs a dynamic query on the database and returns the matching rows.
 	*
-	* @param dynamicQuery the dynamic query to search with
+	* @param dynamicQuery the dynamic query
 	* @return the matching rows
 	* @throws SystemException if a system exception occurred
 	*/
@@ -108,9 +108,9 @@ public class MBStatsUserLocalServiceUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param dynamicQuery the dynamic query to search with
-	* @param start the lower bound of the range of model instances to return
-	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param dynamicQuery the dynamic query
+	* @param start the lower bound of the range of model instances
+	* @param end the upper bound of the range of model instances (not inclusive)
 	* @return the range of matching rows
 	* @throws SystemException if a system exception occurred
 	*/
@@ -128,9 +128,9 @@ public class MBStatsUserLocalServiceUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param dynamicQuery the dynamic query to search with
-	* @param start the lower bound of the range of model instances to return
-	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param dynamicQuery the dynamic query
+	* @param start the lower bound of the range of model instances
+	* @param end the upper bound of the range of model instances (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching rows
 	* @throws SystemException if a system exception occurred
@@ -146,9 +146,9 @@ public class MBStatsUserLocalServiceUtil {
 	}
 
 	/**
-	* Counts the number of rows that match the dynamic query.
+	* Returns the number of rows that match the dynamic query.
 	*
-	* @param dynamicQuery the dynamic query to search with
+	* @param dynamicQuery the dynamic query
 	* @return the number of rows that match the dynamic query
 	* @throws SystemException if a system exception occurred
 	*/
@@ -159,9 +159,9 @@ public class MBStatsUserLocalServiceUtil {
 	}
 
 	/**
-	* Gets the message boards stats user with the primary key.
+	* Returns the message boards stats user with the primary key.
 	*
-	* @param statsUserId the primary key of the message boards stats user to get
+	* @param statsUserId the primary key of the message boards stats user
 	* @return the message boards stats user
 	* @throws PortalException if a message boards stats user with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -174,14 +174,14 @@ public class MBStatsUserLocalServiceUtil {
 	}
 
 	/**
-	* Gets a range of all the message boards stats users.
+	* Returns a range of all the message boards stats users.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of message boards stats users to return
-	* @param end the upper bound of the range of message boards stats users to return (not inclusive)
+	* @param start the lower bound of the range of message boards stats users
+	* @param end the upper bound of the range of message boards stats users (not inclusive)
 	* @return the range of message boards stats users
 	* @throws SystemException if a system exception occurred
 	*/
@@ -192,7 +192,7 @@ public class MBStatsUserLocalServiceUtil {
 	}
 
 	/**
-	* Gets the number of message boards stats users.
+	* Returns the number of message boards stats users.
 	*
 	* @return the number of message boards stats users
 	* @throws SystemException if a system exception occurred
@@ -205,7 +205,7 @@ public class MBStatsUserLocalServiceUtil {
 	/**
 	* Updates the message boards stats user in the database. Also notifies the appropriate model listeners.
 	*
-	* @param mbStatsUser the message boards stats user to update
+	* @param mbStatsUser the message boards stats user
 	* @return the message boards stats user that was updated
 	* @throws SystemException if a system exception occurred
 	*/
@@ -218,7 +218,7 @@ public class MBStatsUserLocalServiceUtil {
 	/**
 	* Updates the message boards stats user in the database. Also notifies the appropriate model listeners.
 	*
-	* @param mbStatsUser the message boards stats user to update
+	* @param mbStatsUser the message boards stats user
 	* @param merge whether to merge the message boards stats user with the current session. See {@link com.liferay.portal.service.persistence.BatchSession#update(com.liferay.portal.kernel.dao.orm.Session, com.liferay.portal.model.BaseModel, boolean)} for an explanation.
 	* @return the message boards stats user that was updated
 	* @throws SystemException if a system exception occurred
@@ -231,7 +231,7 @@ public class MBStatsUserLocalServiceUtil {
 	}
 
 	/**
-	* Gets the Spring bean ID for this bean.
+	* Returns the Spring bean ID for this bean.
 	*
 	* @return the Spring bean ID for this bean
 	*/

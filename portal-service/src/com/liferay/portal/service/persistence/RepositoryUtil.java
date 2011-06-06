@@ -120,7 +120,7 @@ public class RepositoryUtil {
 	/**
 	* Caches the repository in the entity cache if it is enabled.
 	*
-	* @param repository the repository to cache
+	* @param repository the repository
 	*/
 	public static void cacheResult(
 		com.liferay.portal.model.Repository repository) {
@@ -130,7 +130,7 @@ public class RepositoryUtil {
 	/**
 	* Caches the repositories in the entity cache if it is enabled.
 	*
-	* @param repositories the repositories to cache
+	* @param repositories the repositories
 	*/
 	public static void cacheResult(
 		java.util.List<com.liferay.portal.model.Repository> repositories) {
@@ -150,7 +150,7 @@ public class RepositoryUtil {
 	/**
 	* Removes the repository with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param repositoryId the primary key of the repository to remove
+	* @param repositoryId the primary key of the repository
 	* @return the repository that was removed
 	* @throws com.liferay.portal.NoSuchRepositoryException if a repository with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -168,9 +168,9 @@ public class RepositoryUtil {
 	}
 
 	/**
-	* Finds the repository with the primary key or throws a {@link com.liferay.portal.NoSuchRepositoryException} if it could not be found.
+	* Returns the repository with the primary key or throws a {@link com.liferay.portal.NoSuchRepositoryException} if it could not be found.
 	*
-	* @param repositoryId the primary key of the repository to find
+	* @param repositoryId the primary key of the repository
 	* @return the repository
 	* @throws com.liferay.portal.NoSuchRepositoryException if a repository with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -183,9 +183,9 @@ public class RepositoryUtil {
 	}
 
 	/**
-	* Finds the repository with the primary key or returns <code>null</code> if it could not be found.
+	* Returns the repository with the primary key or returns <code>null</code> if it could not be found.
 	*
-	* @param repositoryId the primary key of the repository to find
+	* @param repositoryId the primary key of the repository
 	* @return the repository, or <code>null</code> if a repository with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -196,9 +196,9 @@ public class RepositoryUtil {
 	}
 
 	/**
-	* Finds all the repositories where groupId = &#63;.
+	* Returns all the repositories where groupId = &#63;.
 	*
-	* @param groupId the group ID to search with
+	* @param groupId the group ID
 	* @return the matching repositories
 	* @throws SystemException if a system exception occurred
 	*/
@@ -209,15 +209,15 @@ public class RepositoryUtil {
 	}
 
 	/**
-	* Finds a range of all the repositories where groupId = &#63;.
+	* Returns a range of all the repositories where groupId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param start the lower bound of the range of repositories to return
-	* @param end the upper bound of the range of repositories to return (not inclusive)
+	* @param groupId the group ID
+	* @param start the lower bound of the range of repositories
+	* @param end the upper bound of the range of repositories (not inclusive)
 	* @return the range of matching repositories
 	* @throws SystemException if a system exception occurred
 	*/
@@ -228,15 +228,15 @@ public class RepositoryUtil {
 	}
 
 	/**
-	* Finds an ordered range of all the repositories where groupId = &#63;.
+	* Returns an ordered range of all the repositories where groupId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param start the lower bound of the range of repositories to return
-	* @param end the upper bound of the range of repositories to return (not inclusive)
+	* @param groupId the group ID
+	* @param start the lower bound of the range of repositories
+	* @param end the upper bound of the range of repositories (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching repositories
 	* @throws SystemException if a system exception occurred
@@ -250,13 +250,13 @@ public class RepositoryUtil {
 	}
 
 	/**
-	* Finds the first repository in the ordered set where groupId = &#63;.
+	* Returns the first repository in the ordered set where groupId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
+	* @param groupId the group ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching repository
 	* @throws com.liferay.portal.NoSuchRepositoryException if a matching repository could not be found
@@ -271,13 +271,13 @@ public class RepositoryUtil {
 	}
 
 	/**
-	* Finds the last repository in the ordered set where groupId = &#63;.
+	* Returns the last repository in the ordered set where groupId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
+	* @param groupId the group ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching repository
 	* @throws com.liferay.portal.NoSuchRepositoryException if a matching repository could not be found
@@ -292,14 +292,14 @@ public class RepositoryUtil {
 	}
 
 	/**
-	* Finds the repositories before and after the current repository in the ordered set where groupId = &#63;.
+	* Returns the repositories before and after the current repository in the ordered set where groupId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
 	* @param repositoryId the primary key of the current repository
-	* @param groupId the group ID to search with
+	* @param groupId the group ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next repository
 	* @throws com.liferay.portal.NoSuchRepositoryException if a repository with the primary key could not be found
@@ -316,7 +316,7 @@ public class RepositoryUtil {
 	}
 
 	/**
-	* Finds all the repositories.
+	* Returns all the repositories.
 	*
 	* @return the repositories
 	* @throws SystemException if a system exception occurred
@@ -327,14 +327,14 @@ public class RepositoryUtil {
 	}
 
 	/**
-	* Finds a range of all the repositories.
+	* Returns a range of all the repositories.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of repositories to return
-	* @param end the upper bound of the range of repositories to return (not inclusive)
+	* @param start the lower bound of the range of repositories
+	* @param end the upper bound of the range of repositories (not inclusive)
 	* @return the range of repositories
 	* @throws SystemException if a system exception occurred
 	*/
@@ -345,14 +345,14 @@ public class RepositoryUtil {
 	}
 
 	/**
-	* Finds an ordered range of all the repositories.
+	* Returns an ordered range of all the repositories.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of repositories to return
-	* @param end the upper bound of the range of repositories to return (not inclusive)
+	* @param start the lower bound of the range of repositories
+	* @param end the upper bound of the range of repositories (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of repositories
 	* @throws SystemException if a system exception occurred
@@ -367,7 +367,7 @@ public class RepositoryUtil {
 	/**
 	* Removes all the repositories where groupId = &#63; from the database.
 	*
-	* @param groupId the group ID to search with
+	* @param groupId the group ID
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByGroupId(long groupId)
@@ -386,9 +386,9 @@ public class RepositoryUtil {
 	}
 
 	/**
-	* Counts all the repositories where groupId = &#63;.
+	* Returns the number of repositories where groupId = &#63;.
 	*
-	* @param groupId the group ID to search with
+	* @param groupId the group ID
 	* @return the number of matching repositories
 	* @throws SystemException if a system exception occurred
 	*/
@@ -398,7 +398,7 @@ public class RepositoryUtil {
 	}
 
 	/**
-	* Counts all the repositories.
+	* Returns the number of repositories.
 	*
 	* @return the number of repositories
 	* @throws SystemException if a system exception occurred

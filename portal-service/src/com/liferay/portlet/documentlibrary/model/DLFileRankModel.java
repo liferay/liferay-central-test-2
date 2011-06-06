@@ -45,21 +45,21 @@ public interface DLFileRankModel extends BaseModel<DLFileRank> {
 	 */
 
 	/**
-	 * Gets the primary key of this d l file rank.
+	 * Returns the primary key of this d l file rank.
 	 *
 	 * @return the primary key of this d l file rank
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this d l file rank
+	 * Sets the primary key of this d l file rank.
 	 *
 	 * @param primaryKey the primary key of this d l file rank
 	 */
 	public void setPrimaryKey(long primaryKey);
 
 	/**
-	 * Gets the file rank ID of this d l file rank.
+	 * Returns the file rank ID of this d l file rank.
 	 *
 	 * @return the file rank ID of this d l file rank
 	 */
@@ -73,7 +73,7 @@ public interface DLFileRankModel extends BaseModel<DLFileRank> {
 	public void setFileRankId(long fileRankId);
 
 	/**
-	 * Gets the group ID of this d l file rank.
+	 * Returns the group ID of this d l file rank.
 	 *
 	 * @return the group ID of this d l file rank
 	 */
@@ -87,7 +87,7 @@ public interface DLFileRankModel extends BaseModel<DLFileRank> {
 	public void setGroupId(long groupId);
 
 	/**
-	 * Gets the company ID of this d l file rank.
+	 * Returns the company ID of this d l file rank.
 	 *
 	 * @return the company ID of this d l file rank
 	 */
@@ -101,7 +101,7 @@ public interface DLFileRankModel extends BaseModel<DLFileRank> {
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the user ID of this d l file rank.
+	 * Returns the user ID of this d l file rank.
 	 *
 	 * @return the user ID of this d l file rank
 	 */
@@ -115,7 +115,7 @@ public interface DLFileRankModel extends BaseModel<DLFileRank> {
 	public void setUserId(long userId);
 
 	/**
-	 * Gets the user uuid of this d l file rank.
+	 * Returns the user uuid of this d l file rank.
 	 *
 	 * @return the user uuid of this d l file rank
 	 * @throws SystemException if a system exception occurred
@@ -130,7 +130,7 @@ public interface DLFileRankModel extends BaseModel<DLFileRank> {
 	public void setUserUuid(String userUuid);
 
 	/**
-	 * Gets the create date of this d l file rank.
+	 * Returns the create date of this d l file rank.
 	 *
 	 * @return the create date of this d l file rank
 	 */
@@ -144,7 +144,7 @@ public interface DLFileRankModel extends BaseModel<DLFileRank> {
 	public void setCreateDate(Date createDate);
 
 	/**
-	 * Gets the file entry ID of this d l file rank.
+	 * Returns the file entry ID of this d l file rank.
 	 *
 	 * @return the file entry ID of this d l file rank
 	 */

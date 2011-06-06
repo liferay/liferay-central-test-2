@@ -41,7 +41,7 @@ public class AccountLocalServiceUtil {
 	/**
 	* Adds the account to the database. Also notifies the appropriate model listeners.
 	*
-	* @param account the account to add
+	* @param account the account
 	* @return the account that was added
 	* @throws SystemException if a system exception occurred
 	*/
@@ -64,7 +64,7 @@ public class AccountLocalServiceUtil {
 	/**
 	* Deletes the account with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param accountId the primary key of the account to delete
+	* @param accountId the primary key of the account
 	* @throws PortalException if a account with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -77,7 +77,7 @@ public class AccountLocalServiceUtil {
 	/**
 	* Deletes the account from the database. Also notifies the appropriate model listeners.
 	*
-	* @param account the account to delete
+	* @param account the account
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void deleteAccount(com.liferay.portal.model.Account account)
@@ -88,7 +88,7 @@ public class AccountLocalServiceUtil {
 	/**
 	* Performs a dynamic query on the database and returns the matching rows.
 	*
-	* @param dynamicQuery the dynamic query to search with
+	* @param dynamicQuery the dynamic query
 	* @return the matching rows
 	* @throws SystemException if a system exception occurred
 	*/
@@ -106,9 +106,9 @@ public class AccountLocalServiceUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param dynamicQuery the dynamic query to search with
-	* @param start the lower bound of the range of model instances to return
-	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param dynamicQuery the dynamic query
+	* @param start the lower bound of the range of model instances
+	* @param end the upper bound of the range of model instances (not inclusive)
 	* @return the range of matching rows
 	* @throws SystemException if a system exception occurred
 	*/
@@ -126,9 +126,9 @@ public class AccountLocalServiceUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param dynamicQuery the dynamic query to search with
-	* @param start the lower bound of the range of model instances to return
-	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param dynamicQuery the dynamic query
+	* @param start the lower bound of the range of model instances
+	* @param end the upper bound of the range of model instances (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching rows
 	* @throws SystemException if a system exception occurred
@@ -144,9 +144,9 @@ public class AccountLocalServiceUtil {
 	}
 
 	/**
-	* Counts the number of rows that match the dynamic query.
+	* Returns the number of rows that match the dynamic query.
 	*
-	* @param dynamicQuery the dynamic query to search with
+	* @param dynamicQuery the dynamic query
 	* @return the number of rows that match the dynamic query
 	* @throws SystemException if a system exception occurred
 	*/
@@ -157,9 +157,9 @@ public class AccountLocalServiceUtil {
 	}
 
 	/**
-	* Gets the account with the primary key.
+	* Returns the account with the primary key.
 	*
-	* @param accountId the primary key of the account to get
+	* @param accountId the primary key of the account
 	* @return the account
 	* @throws PortalException if a account with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -171,14 +171,14 @@ public class AccountLocalServiceUtil {
 	}
 
 	/**
-	* Gets a range of all the accounts.
+	* Returns a range of all the accounts.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of accounts to return
-	* @param end the upper bound of the range of accounts to return (not inclusive)
+	* @param start the lower bound of the range of accounts
+	* @param end the upper bound of the range of accounts (not inclusive)
 	* @return the range of accounts
 	* @throws SystemException if a system exception occurred
 	*/
@@ -189,7 +189,7 @@ public class AccountLocalServiceUtil {
 	}
 
 	/**
-	* Gets the number of accounts.
+	* Returns the number of accounts.
 	*
 	* @return the number of accounts
 	* @throws SystemException if a system exception occurred
@@ -202,7 +202,7 @@ public class AccountLocalServiceUtil {
 	/**
 	* Updates the account in the database. Also notifies the appropriate model listeners.
 	*
-	* @param account the account to update
+	* @param account the account
 	* @return the account that was updated
 	* @throws SystemException if a system exception occurred
 	*/
@@ -215,7 +215,7 @@ public class AccountLocalServiceUtil {
 	/**
 	* Updates the account in the database. Also notifies the appropriate model listeners.
 	*
-	* @param account the account to update
+	* @param account the account
 	* @param merge whether to merge the account with the current session. See {@link com.liferay.portal.service.persistence.BatchSession#update(com.liferay.portal.kernel.dao.orm.Session, com.liferay.portal.model.BaseModel, boolean)} for an explanation.
 	* @return the account that was updated
 	* @throws SystemException if a system exception occurred
@@ -227,7 +227,7 @@ public class AccountLocalServiceUtil {
 	}
 
 	/**
-	* Gets the Spring bean ID for this bean.
+	* Returns the Spring bean ID for this bean.
 	*
 	* @return the Spring bean ID for this bean
 	*/

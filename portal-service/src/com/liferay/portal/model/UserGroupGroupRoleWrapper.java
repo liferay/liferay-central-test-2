@@ -37,7 +37,7 @@ public class UserGroupGroupRoleWrapper implements UserGroupGroupRole {
 	}
 
 	/**
-	* Gets the primary key of this user group group role.
+	* Returns the primary key of this user group group role.
 	*
 	* @return the primary key of this user group group role
 	*/
@@ -46,7 +46,7 @@ public class UserGroupGroupRoleWrapper implements UserGroupGroupRole {
 	}
 
 	/**
-	* Sets the primary key of this user group group role
+	* Sets the primary key of this user group group role.
 	*
 	* @param primaryKey the primary key of this user group group role
 	*/
@@ -56,7 +56,7 @@ public class UserGroupGroupRoleWrapper implements UserGroupGroupRole {
 	}
 
 	/**
-	* Gets the user group ID of this user group group role.
+	* Returns the user group ID of this user group group role.
 	*
 	* @return the user group ID of this user group group role
 	*/
@@ -74,7 +74,7 @@ public class UserGroupGroupRoleWrapper implements UserGroupGroupRole {
 	}
 
 	/**
-	* Gets the group ID of this user group group role.
+	* Returns the group ID of this user group group role.
 	*
 	* @return the group ID of this user group group role
 	*/
@@ -92,7 +92,7 @@ public class UserGroupGroupRoleWrapper implements UserGroupGroupRole {
 	}
 
 	/**
-	* Gets the role ID of this user group group role.
+	* Returns the role ID of this user group group role.
 	*
 	* @return the role ID of this user group group role
 	*/

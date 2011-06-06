@@ -89,7 +89,7 @@ public abstract class DLDocumentMetadataSetLocalServiceBaseImpl
 	/**
 	 * Adds the d l document metadata set to the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param dlDocumentMetadataSet the d l document metadata set to add
+	 * @param dlDocumentMetadataSet the d l document metadata set
 	 * @return the d l document metadata set that was added
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -115,7 +115,7 @@ public abstract class DLDocumentMetadataSetLocalServiceBaseImpl
 	/**
 	 * Deletes the d l document metadata set with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param documentMetadataSetId the primary key of the d l document metadata set to delete
+	 * @param documentMetadataSetId the primary key of the d l document metadata set
 	 * @throws PortalException if a d l document metadata set with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -127,7 +127,7 @@ public abstract class DLDocumentMetadataSetLocalServiceBaseImpl
 	/**
 	 * Deletes the d l document metadata set from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param dlDocumentMetadataSet the d l document metadata set to delete
+	 * @param dlDocumentMetadataSet the d l document metadata set
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void deleteDLDocumentMetadataSet(
@@ -138,7 +138,7 @@ public abstract class DLDocumentMetadataSetLocalServiceBaseImpl
 	/**
 	 * Performs a dynamic query on the database and returns the matching rows.
 	 *
-	 * @param dynamicQuery the dynamic query to search with
+	 * @param dynamicQuery the dynamic query
 	 * @return the matching rows
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -155,9 +155,9 @@ public abstract class DLDocumentMetadataSetLocalServiceBaseImpl
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param dynamicQuery the dynamic query to search with
-	 * @param start the lower bound of the range of model instances to return
-	 * @param end the upper bound of the range of model instances to return (not inclusive)
+	 * @param dynamicQuery the dynamic query
+	 * @param start the lower bound of the range of model instances
+	 * @param end the upper bound of the range of model instances (not inclusive)
 	 * @return the range of matching rows
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -175,9 +175,9 @@ public abstract class DLDocumentMetadataSetLocalServiceBaseImpl
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param dynamicQuery the dynamic query to search with
-	 * @param start the lower bound of the range of model instances to return
-	 * @param end the upper bound of the range of model instances to return (not inclusive)
+	 * @param dynamicQuery the dynamic query
+	 * @param start the lower bound of the range of model instances
+	 * @param end the upper bound of the range of model instances (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching rows
 	 * @throws SystemException if a system exception occurred
@@ -190,9 +190,9 @@ public abstract class DLDocumentMetadataSetLocalServiceBaseImpl
 	}
 
 	/**
-	 * Counts the number of rows that match the dynamic query.
+	 * Returns the number of rows that match the dynamic query.
 	 *
-	 * @param dynamicQuery the dynamic query to search with
+	 * @param dynamicQuery the dynamic query
 	 * @return the number of rows that match the dynamic query
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -202,9 +202,9 @@ public abstract class DLDocumentMetadataSetLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the d l document metadata set with the primary key.
+	 * Returns the d l document metadata set with the primary key.
 	 *
-	 * @param documentMetadataSetId the primary key of the d l document metadata set to get
+	 * @param documentMetadataSetId the primary key of the d l document metadata set
 	 * @return the d l document metadata set
 	 * @throws PortalException if a d l document metadata set with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -215,14 +215,14 @@ public abstract class DLDocumentMetadataSetLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets a range of all the d l document metadata sets.
+	 * Returns a range of all the d l document metadata sets.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param start the lower bound of the range of d l document metadata sets to return
-	 * @param end the upper bound of the range of d l document metadata sets to return (not inclusive)
+	 * @param start the lower bound of the range of d l document metadata sets
+	 * @param end the upper bound of the range of d l document metadata sets (not inclusive)
 	 * @return the range of d l document metadata sets
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -232,7 +232,7 @@ public abstract class DLDocumentMetadataSetLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the number of d l document metadata sets.
+	 * Returns the number of d l document metadata sets.
 	 *
 	 * @return the number of d l document metadata sets
 	 * @throws SystemException if a system exception occurred
@@ -244,7 +244,7 @@ public abstract class DLDocumentMetadataSetLocalServiceBaseImpl
 	/**
 	 * Updates the d l document metadata set in the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param dlDocumentMetadataSet the d l document metadata set to update
+	 * @param dlDocumentMetadataSet the d l document metadata set
 	 * @return the d l document metadata set that was updated
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -259,7 +259,7 @@ public abstract class DLDocumentMetadataSetLocalServiceBaseImpl
 	/**
 	 * Updates the d l document metadata set in the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param dlDocumentMetadataSet the d l document metadata set to update
+	 * @param dlDocumentMetadataSet the d l document metadata set
 	 * @param merge whether to merge the d l document metadata set with the current session. See {@link com.liferay.portal.service.persistence.BatchSession#update(com.liferay.portal.kernel.dao.orm.Session, com.liferay.portal.model.BaseModel, boolean)} for an explanation.
 	 * @return the d l document metadata set that was updated
 	 * @throws SystemException if a system exception occurred
@@ -274,7 +274,7 @@ public abstract class DLDocumentMetadataSetLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the d l app local service.
+	 * Returns the d l app local service.
 	 *
 	 * @return the d l app local service
 	 */
@@ -292,7 +292,7 @@ public abstract class DLDocumentMetadataSetLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the d l app remote service.
+	 * Returns the d l app remote service.
 	 *
 	 * @return the d l app remote service
 	 */
@@ -310,7 +310,7 @@ public abstract class DLDocumentMetadataSetLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the d l app helper local service.
+	 * Returns the d l app helper local service.
 	 *
 	 * @return the d l app helper local service
 	 */
@@ -329,7 +329,7 @@ public abstract class DLDocumentMetadataSetLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the d l document metadata set local service.
+	 * Returns the d l document metadata set local service.
 	 *
 	 * @return the d l document metadata set local service
 	 */
@@ -348,7 +348,7 @@ public abstract class DLDocumentMetadataSetLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the d l document metadata set persistence.
+	 * Returns the d l document metadata set persistence.
 	 *
 	 * @return the d l document metadata set persistence
 	 */
@@ -367,7 +367,7 @@ public abstract class DLDocumentMetadataSetLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the d l document type local service.
+	 * Returns the d l document type local service.
 	 *
 	 * @return the d l document type local service
 	 */
@@ -386,7 +386,7 @@ public abstract class DLDocumentMetadataSetLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the d l document type remote service.
+	 * Returns the d l document type remote service.
 	 *
 	 * @return the d l document type remote service
 	 */
@@ -405,7 +405,7 @@ public abstract class DLDocumentMetadataSetLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the d l document type persistence.
+	 * Returns the d l document type persistence.
 	 *
 	 * @return the d l document type persistence
 	 */
@@ -424,7 +424,7 @@ public abstract class DLDocumentMetadataSetLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the d l document type finder.
+	 * Returns the d l document type finder.
 	 *
 	 * @return the d l document type finder
 	 */
@@ -443,7 +443,7 @@ public abstract class DLDocumentMetadataSetLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the d l file entry local service.
+	 * Returns the d l file entry local service.
 	 *
 	 * @return the d l file entry local service
 	 */
@@ -462,7 +462,7 @@ public abstract class DLDocumentMetadataSetLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the d l file entry remote service.
+	 * Returns the d l file entry remote service.
 	 *
 	 * @return the d l file entry remote service
 	 */
@@ -480,7 +480,7 @@ public abstract class DLDocumentMetadataSetLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the d l file entry persistence.
+	 * Returns the d l file entry persistence.
 	 *
 	 * @return the d l file entry persistence
 	 */
@@ -499,7 +499,7 @@ public abstract class DLDocumentMetadataSetLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the d l file entry finder.
+	 * Returns the d l file entry finder.
 	 *
 	 * @return the d l file entry finder
 	 */
@@ -517,7 +517,7 @@ public abstract class DLDocumentMetadataSetLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the d l file rank local service.
+	 * Returns the d l file rank local service.
 	 *
 	 * @return the d l file rank local service
 	 */
@@ -536,7 +536,7 @@ public abstract class DLDocumentMetadataSetLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the d l file rank persistence.
+	 * Returns the d l file rank persistence.
 	 *
 	 * @return the d l file rank persistence
 	 */
@@ -555,7 +555,7 @@ public abstract class DLDocumentMetadataSetLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the d l file rank finder.
+	 * Returns the d l file rank finder.
 	 *
 	 * @return the d l file rank finder
 	 */
@@ -573,7 +573,7 @@ public abstract class DLDocumentMetadataSetLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the d l file shortcut local service.
+	 * Returns the d l file shortcut local service.
 	 *
 	 * @return the d l file shortcut local service
 	 */
@@ -592,7 +592,7 @@ public abstract class DLDocumentMetadataSetLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the d l file shortcut remote service.
+	 * Returns the d l file shortcut remote service.
 	 *
 	 * @return the d l file shortcut remote service
 	 */
@@ -611,7 +611,7 @@ public abstract class DLDocumentMetadataSetLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the d l file shortcut persistence.
+	 * Returns the d l file shortcut persistence.
 	 *
 	 * @return the d l file shortcut persistence
 	 */
@@ -630,7 +630,7 @@ public abstract class DLDocumentMetadataSetLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the d l file version persistence.
+	 * Returns the d l file version persistence.
 	 *
 	 * @return the d l file version persistence
 	 */
@@ -649,7 +649,7 @@ public abstract class DLDocumentMetadataSetLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the d l folder local service.
+	 * Returns the d l folder local service.
 	 *
 	 * @return the d l folder local service
 	 */
@@ -668,7 +668,7 @@ public abstract class DLDocumentMetadataSetLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the d l folder remote service.
+	 * Returns the d l folder remote service.
 	 *
 	 * @return the d l folder remote service
 	 */
@@ -686,7 +686,7 @@ public abstract class DLDocumentMetadataSetLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the d l folder persistence.
+	 * Returns the d l folder persistence.
 	 *
 	 * @return the d l folder persistence
 	 */
@@ -704,7 +704,7 @@ public abstract class DLDocumentMetadataSetLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the d l folder finder.
+	 * Returns the d l folder finder.
 	 *
 	 * @return the d l folder finder
 	 */
@@ -722,7 +722,7 @@ public abstract class DLDocumentMetadataSetLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the counter local service.
+	 * Returns the counter local service.
 	 *
 	 * @return the counter local service
 	 */
@@ -740,7 +740,7 @@ public abstract class DLDocumentMetadataSetLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the resource local service.
+	 * Returns the resource local service.
 	 *
 	 * @return the resource local service
 	 */
@@ -759,7 +759,7 @@ public abstract class DLDocumentMetadataSetLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the resource remote service.
+	 * Returns the resource remote service.
 	 *
 	 * @return the resource remote service
 	 */
@@ -777,7 +777,7 @@ public abstract class DLDocumentMetadataSetLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the resource persistence.
+	 * Returns the resource persistence.
 	 *
 	 * @return the resource persistence
 	 */
@@ -795,7 +795,7 @@ public abstract class DLDocumentMetadataSetLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the resource finder.
+	 * Returns the resource finder.
 	 *
 	 * @return the resource finder
 	 */
@@ -813,7 +813,7 @@ public abstract class DLDocumentMetadataSetLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the user local service.
+	 * Returns the user local service.
 	 *
 	 * @return the user local service
 	 */
@@ -831,7 +831,7 @@ public abstract class DLDocumentMetadataSetLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the user remote service.
+	 * Returns the user remote service.
 	 *
 	 * @return the user remote service
 	 */
@@ -849,7 +849,7 @@ public abstract class DLDocumentMetadataSetLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the user persistence.
+	 * Returns the user persistence.
 	 *
 	 * @return the user persistence
 	 */
@@ -867,7 +867,7 @@ public abstract class DLDocumentMetadataSetLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the user finder.
+	 * Returns the user finder.
 	 *
 	 * @return the user finder
 	 */
@@ -885,7 +885,7 @@ public abstract class DLDocumentMetadataSetLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the d d m structure link local service.
+	 * Returns the d d m structure link local service.
 	 *
 	 * @return the d d m structure link local service
 	 */
@@ -904,7 +904,7 @@ public abstract class DLDocumentMetadataSetLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the d d m structure link remote service.
+	 * Returns the d d m structure link remote service.
 	 *
 	 * @return the d d m structure link remote service
 	 */
@@ -923,7 +923,7 @@ public abstract class DLDocumentMetadataSetLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the d d m structure link persistence.
+	 * Returns the d d m structure link persistence.
 	 *
 	 * @return the d d m structure link persistence
 	 */
@@ -942,7 +942,7 @@ public abstract class DLDocumentMetadataSetLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the Spring bean ID for this bean.
+	 * Returns the Spring bean ID for this bean.
 	 *
 	 * @return the Spring bean ID for this bean
 	 */
@@ -962,7 +962,7 @@ public abstract class DLDocumentMetadataSetLocalServiceBaseImpl
 	/**
 	 * Performs an SQL query.
 	 *
-	 * @param sql the sql query to perform
+	 * @param sql the sql query
 	 */
 	protected void runSQL(String sql) throws SystemException {
 		try {

@@ -116,7 +116,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 	/**
 	 * Caches the s c license in the entity cache if it is enabled.
 	 *
-	 * @param scLicense the s c license to cache
+	 * @param scLicense the s c license
 	 */
 	public void cacheResult(SCLicense scLicense) {
 		EntityCacheUtil.putResult(SCLicenseModelImpl.ENTITY_CACHE_ENABLED,
@@ -128,7 +128,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 	/**
 	 * Caches the s c licenses in the entity cache if it is enabled.
 	 *
-	 * @param scLicenses the s c licenses to cache
+	 * @param scLicenses the s c licenses
 	 */
 	public void cacheResult(List<SCLicense> scLicenses) {
 		for (SCLicense scLicense : scLicenses) {
@@ -187,7 +187,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 	/**
 	 * Removes the s c license with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param primaryKey the primary key of the s c license to remove
+	 * @param primaryKey the primary key of the s c license
 	 * @return the s c license that was removed
 	 * @throws com.liferay.portal.NoSuchModelException if a s c license with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -200,7 +200,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 	/**
 	 * Removes the s c license with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param licenseId the primary key of the s c license to remove
+	 * @param licenseId the primary key of the s c license
 	 * @return the s c license that was removed
 	 * @throws com.liferay.portlet.softwarecatalog.NoSuchLicenseException if a s c license with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -240,7 +240,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 	/**
 	 * Removes the s c license from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param scLicense the s c license to remove
+	 * @param scLicense the s c license
 	 * @return the s c license that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -334,9 +334,9 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 	}
 
 	/**
-	 * Finds the s c license with the primary key or throws a {@link com.liferay.portal.NoSuchModelException} if it could not be found.
+	 * Returns the s c license with the primary key or throws a {@link com.liferay.portal.NoSuchModelException} if it could not be found.
 	 *
-	 * @param primaryKey the primary key of the s c license to find
+	 * @param primaryKey the primary key of the s c license
 	 * @return the s c license
 	 * @throws com.liferay.portal.NoSuchModelException if a s c license with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -347,9 +347,9 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 	}
 
 	/**
-	 * Finds the s c license with the primary key or throws a {@link com.liferay.portlet.softwarecatalog.NoSuchLicenseException} if it could not be found.
+	 * Returns the s c license with the primary key or throws a {@link com.liferay.portlet.softwarecatalog.NoSuchLicenseException} if it could not be found.
 	 *
-	 * @param licenseId the primary key of the s c license to find
+	 * @param licenseId the primary key of the s c license
 	 * @return the s c license
 	 * @throws com.liferay.portlet.softwarecatalog.NoSuchLicenseException if a s c license with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -371,9 +371,9 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 	}
 
 	/**
-	 * Finds the s c license with the primary key or returns <code>null</code> if it could not be found.
+	 * Returns the s c license with the primary key or returns <code>null</code> if it could not be found.
 	 *
-	 * @param primaryKey the primary key of the s c license to find
+	 * @param primaryKey the primary key of the s c license
 	 * @return the s c license, or <code>null</code> if a s c license with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -383,9 +383,9 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 	}
 
 	/**
-	 * Finds the s c license with the primary key or returns <code>null</code> if it could not be found.
+	 * Returns the s c license with the primary key or returns <code>null</code> if it could not be found.
 	 *
-	 * @param licenseId the primary key of the s c license to find
+	 * @param licenseId the primary key of the s c license
 	 * @return the s c license, or <code>null</code> if a s c license with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -419,9 +419,9 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 	}
 
 	/**
-	 * Finds all the s c licenses where active = &#63;.
+	 * Returns all the s c licenses where active = &#63;.
 	 *
-	 * @param active the active to search with
+	 * @param active the active
 	 * @return the matching s c licenses
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -431,15 +431,15 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 	}
 
 	/**
-	 * Finds a range of all the s c licenses where active = &#63;.
+	 * Returns a range of all the s c licenses where active = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param active the active to search with
-	 * @param start the lower bound of the range of s c licenses to return
-	 * @param end the upper bound of the range of s c licenses to return (not inclusive)
+	 * @param active the active
+	 * @param start the lower bound of the range of s c licenses
+	 * @param end the upper bound of the range of s c licenses (not inclusive)
 	 * @return the range of matching s c licenses
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -449,15 +449,15 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 	}
 
 	/**
-	 * Finds an ordered range of all the s c licenses where active = &#63;.
+	 * Returns an ordered range of all the s c licenses where active = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param active the active to search with
-	 * @param start the lower bound of the range of s c licenses to return
-	 * @param end the upper bound of the range of s c licenses to return (not inclusive)
+	 * @param active the active
+	 * @param start the lower bound of the range of s c licenses
+	 * @param end the upper bound of the range of s c licenses (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching s c licenses
 	 * @throws SystemException if a system exception occurred
@@ -537,13 +537,13 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 	}
 
 	/**
-	 * Finds the first s c license in the ordered set where active = &#63;.
+	 * Returns the first s c license in the ordered set where active = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param active the active to search with
+	 * @param active the active
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching s c license
 	 * @throws com.liferay.portlet.softwarecatalog.NoSuchLicenseException if a matching s c license could not be found
@@ -572,13 +572,13 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 	}
 
 	/**
-	 * Finds the last s c license in the ordered set where active = &#63;.
+	 * Returns the last s c license in the ordered set where active = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param active the active to search with
+	 * @param active the active
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching s c license
 	 * @throws com.liferay.portlet.softwarecatalog.NoSuchLicenseException if a matching s c license could not be found
@@ -610,14 +610,14 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 	}
 
 	/**
-	 * Finds the s c licenses before and after the current s c license in the ordered set where active = &#63;.
+	 * Returns the s c licenses before and after the current s c license in the ordered set where active = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
 	 * @param licenseId the primary key of the current s c license
-	 * @param active the active to search with
+	 * @param active the active
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next s c license
 	 * @throws com.liferay.portlet.softwarecatalog.NoSuchLicenseException if a s c license with the primary key could not be found
@@ -758,9 +758,9 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 	}
 
 	/**
-	 * Filters by the user's permissions and finds all the s c licenses where active = &#63;.
+	 * Returns all the s c licenses that the user has permission to view where active = &#63;.
 	 *
-	 * @param active the active to search with
+	 * @param active the active
 	 * @return the matching s c licenses that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -771,15 +771,15 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 	}
 
 	/**
-	 * Filters by the user's permissions and finds a range of all the s c licenses where active = &#63;.
+	 * Returns a range of all the s c licenses that the user has permission to view where active = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param active the active to search with
-	 * @param start the lower bound of the range of s c licenses to return
-	 * @param end the upper bound of the range of s c licenses to return (not inclusive)
+	 * @param active the active
+	 * @param start the lower bound of the range of s c licenses
+	 * @param end the upper bound of the range of s c licenses (not inclusive)
 	 * @return the range of matching s c licenses that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -789,15 +789,15 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 	}
 
 	/**
-	 * Filters by the user's permissions and finds an ordered range of all the s c licenses where active = &#63;.
+	 * Returns an ordered range of all the s c licenses that the user has permissions to view where active = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param active the active to search with
-	 * @param start the lower bound of the range of s c licenses to return
-	 * @param end the upper bound of the range of s c licenses to return (not inclusive)
+	 * @param active the active
+	 * @param start the lower bound of the range of s c licenses
+	 * @param end the upper bound of the range of s c licenses (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching s c licenses that the user has permission to view
 	 * @throws SystemException if a system exception occurred
@@ -876,14 +876,10 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 	}
 
 	/**
-	 * Filters the s c licenses before and after the current s c license in the ordered set where active = &#63;.
-	 *
-	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
-	 * </p>
+	 * Returns the s c licenses before and after the current s c license in the ordered set of s c licenses that the user has permission to view where active = &#63;.
 	 *
 	 * @param licenseId the primary key of the current s c license
-	 * @param active the active to search with
+	 * @param active the active
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next s c license
 	 * @throws com.liferay.portlet.softwarecatalog.NoSuchLicenseException if a s c license with the primary key could not be found
@@ -1055,10 +1051,10 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 	}
 
 	/**
-	 * Finds all the s c licenses where active = &#63; and recommended = &#63;.
+	 * Returns all the s c licenses where active = &#63; and recommended = &#63;.
 	 *
-	 * @param active the active to search with
-	 * @param recommended the recommended to search with
+	 * @param active the active
+	 * @param recommended the recommended
 	 * @return the matching s c licenses
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1069,16 +1065,16 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 	}
 
 	/**
-	 * Finds a range of all the s c licenses where active = &#63; and recommended = &#63;.
+	 * Returns a range of all the s c licenses where active = &#63; and recommended = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param active the active to search with
-	 * @param recommended the recommended to search with
-	 * @param start the lower bound of the range of s c licenses to return
-	 * @param end the upper bound of the range of s c licenses to return (not inclusive)
+	 * @param active the active
+	 * @param recommended the recommended
+	 * @param start the lower bound of the range of s c licenses
+	 * @param end the upper bound of the range of s c licenses (not inclusive)
 	 * @return the range of matching s c licenses
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1088,16 +1084,16 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 	}
 
 	/**
-	 * Finds an ordered range of all the s c licenses where active = &#63; and recommended = &#63;.
+	 * Returns an ordered range of all the s c licenses where active = &#63; and recommended = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param active the active to search with
-	 * @param recommended the recommended to search with
-	 * @param start the lower bound of the range of s c licenses to return
-	 * @param end the upper bound of the range of s c licenses to return (not inclusive)
+	 * @param active the active
+	 * @param recommended the recommended
+	 * @param start the lower bound of the range of s c licenses
+	 * @param end the upper bound of the range of s c licenses (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching s c licenses
 	 * @throws SystemException if a system exception occurred
@@ -1182,14 +1178,14 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 	}
 
 	/**
-	 * Finds the first s c license in the ordered set where active = &#63; and recommended = &#63;.
+	 * Returns the first s c license in the ordered set where active = &#63; and recommended = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param active the active to search with
-	 * @param recommended the recommended to search with
+	 * @param active the active
+	 * @param recommended the recommended
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching s c license
 	 * @throws com.liferay.portlet.softwarecatalog.NoSuchLicenseException if a matching s c license could not be found
@@ -1222,14 +1218,14 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 	}
 
 	/**
-	 * Finds the last s c license in the ordered set where active = &#63; and recommended = &#63;.
+	 * Returns the last s c license in the ordered set where active = &#63; and recommended = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param active the active to search with
-	 * @param recommended the recommended to search with
+	 * @param active the active
+	 * @param recommended the recommended
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching s c license
 	 * @throws com.liferay.portlet.softwarecatalog.NoSuchLicenseException if a matching s c license could not be found
@@ -1264,15 +1260,15 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 	}
 
 	/**
-	 * Finds the s c licenses before and after the current s c license in the ordered set where active = &#63; and recommended = &#63;.
+	 * Returns the s c licenses before and after the current s c license in the ordered set where active = &#63; and recommended = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
 	 * @param licenseId the primary key of the current s c license
-	 * @param active the active to search with
-	 * @param recommended the recommended to search with
+	 * @param active the active
+	 * @param recommended the recommended
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next s c license
 	 * @throws com.liferay.portlet.softwarecatalog.NoSuchLicenseException if a s c license with the primary key could not be found
@@ -1417,10 +1413,10 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 	}
 
 	/**
-	 * Filters by the user's permissions and finds all the s c licenses where active = &#63; and recommended = &#63;.
+	 * Returns all the s c licenses that the user has permission to view where active = &#63; and recommended = &#63;.
 	 *
-	 * @param active the active to search with
-	 * @param recommended the recommended to search with
+	 * @param active the active
+	 * @param recommended the recommended
 	 * @return the matching s c licenses that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1431,16 +1427,16 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 	}
 
 	/**
-	 * Filters by the user's permissions and finds a range of all the s c licenses where active = &#63; and recommended = &#63;.
+	 * Returns a range of all the s c licenses that the user has permission to view where active = &#63; and recommended = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param active the active to search with
-	 * @param recommended the recommended to search with
-	 * @param start the lower bound of the range of s c licenses to return
-	 * @param end the upper bound of the range of s c licenses to return (not inclusive)
+	 * @param active the active
+	 * @param recommended the recommended
+	 * @param start the lower bound of the range of s c licenses
+	 * @param end the upper bound of the range of s c licenses (not inclusive)
 	 * @return the range of matching s c licenses that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1450,16 +1446,16 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 	}
 
 	/**
-	 * Filters by the user's permissions and finds an ordered range of all the s c licenses where active = &#63; and recommended = &#63;.
+	 * Returns an ordered range of all the s c licenses that the user has permissions to view where active = &#63; and recommended = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param active the active to search with
-	 * @param recommended the recommended to search with
-	 * @param start the lower bound of the range of s c licenses to return
-	 * @param end the upper bound of the range of s c licenses to return (not inclusive)
+	 * @param active the active
+	 * @param recommended the recommended
+	 * @param start the lower bound of the range of s c licenses
+	 * @param end the upper bound of the range of s c licenses (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching s c licenses that the user has permission to view
 	 * @throws SystemException if a system exception occurred
@@ -1543,15 +1539,11 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 	}
 
 	/**
-	 * Filters the s c licenses before and after the current s c license in the ordered set where active = &#63; and recommended = &#63;.
-	 *
-	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
-	 * </p>
+	 * Returns the s c licenses before and after the current s c license in the ordered set of s c licenses that the user has permission to view where active = &#63; and recommended = &#63;.
 	 *
 	 * @param licenseId the primary key of the current s c license
-	 * @param active the active to search with
-	 * @param recommended the recommended to search with
+	 * @param active the active
+	 * @param recommended the recommended
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next s c license
 	 * @throws com.liferay.portlet.softwarecatalog.NoSuchLicenseException if a s c license with the primary key could not be found
@@ -1728,7 +1720,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 	}
 
 	/**
-	 * Finds all the s c licenses.
+	 * Returns all the s c licenses.
 	 *
 	 * @return the s c licenses
 	 * @throws SystemException if a system exception occurred
@@ -1738,14 +1730,14 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 	}
 
 	/**
-	 * Finds a range of all the s c licenses.
+	 * Returns a range of all the s c licenses.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param start the lower bound of the range of s c licenses to return
-	 * @param end the upper bound of the range of s c licenses to return (not inclusive)
+	 * @param start the lower bound of the range of s c licenses
+	 * @param end the upper bound of the range of s c licenses (not inclusive)
 	 * @return the range of s c licenses
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1755,14 +1747,14 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 	}
 
 	/**
-	 * Finds an ordered range of all the s c licenses.
+	 * Returns an ordered range of all the s c licenses.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param start the lower bound of the range of s c licenses to return
-	 * @param end the upper bound of the range of s c licenses to return (not inclusive)
+	 * @param start the lower bound of the range of s c licenses
+	 * @param end the upper bound of the range of s c licenses (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of s c licenses
 	 * @throws SystemException if a system exception occurred
@@ -1839,7 +1831,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 	/**
 	 * Removes all the s c licenses where active = &#63; from the database.
 	 *
-	 * @param active the active to search with
+	 * @param active the active
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByActive(boolean active) throws SystemException {
@@ -1851,8 +1843,8 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 	/**
 	 * Removes all the s c licenses where active = &#63; and recommended = &#63; from the database.
 	 *
-	 * @param active the active to search with
-	 * @param recommended the recommended to search with
+	 * @param active the active
+	 * @param recommended the recommended
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByA_R(boolean active, boolean recommended)
@@ -1874,9 +1866,9 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 	}
 
 	/**
-	 * Counts all the s c licenses where active = &#63;.
+	 * Returns the number of s c licenses where active = &#63;.
 	 *
-	 * @param active the active to search with
+	 * @param active the active
 	 * @return the number of matching s c licenses
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1927,9 +1919,9 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 	}
 
 	/**
-	 * Filters by the user's permissions and counts all the s c licenses where active = &#63;.
+	 * Returns the number of s c licenses that the user has permission to view where active = &#63;.
 	 *
-	 * @param active the active to search with
+	 * @param active the active
 	 * @return the number of matching s c licenses that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1974,10 +1966,10 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 	}
 
 	/**
-	 * Counts all the s c licenses where active = &#63; and recommended = &#63;.
+	 * Returns the number of s c licenses where active = &#63; and recommended = &#63;.
 	 *
-	 * @param active the active to search with
-	 * @param recommended the recommended to search with
+	 * @param active the active
+	 * @param recommended the recommended
 	 * @return the number of matching s c licenses
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2033,10 +2025,10 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 	}
 
 	/**
-	 * Filters by the user's permissions and counts all the s c licenses where active = &#63; and recommended = &#63;.
+	 * Returns the number of s c licenses that the user has permission to view where active = &#63; and recommended = &#63;.
 	 *
-	 * @param active the active to search with
-	 * @param recommended the recommended to search with
+	 * @param active the active
+	 * @param recommended the recommended
 	 * @return the number of matching s c licenses that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2086,7 +2078,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 	}
 
 	/**
-	 * Counts all the s c licenses.
+	 * Returns the number of s c licenses.
 	 *
 	 * @return the number of s c licenses
 	 * @throws SystemException if a system exception occurred
@@ -2126,9 +2118,9 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 	}
 
 	/**
-	 * Gets all the s c product entries associated with the s c license.
+	 * Returns all the s c product entries associated with the s c license.
 	 *
-	 * @param pk the primary key of the s c license to get the associated s c product entries for
+	 * @param pk the primary key of the s c license
 	 * @return the s c product entries associated with the s c license
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2138,15 +2130,15 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 	}
 
 	/**
-	 * Gets a range of all the s c product entries associated with the s c license.
+	 * Returns a range of all the s c product entries associated with the s c license.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param pk the primary key of the s c license to get the associated s c product entries for
-	 * @param start the lower bound of the range of s c licenses to return
-	 * @param end the upper bound of the range of s c licenses to return (not inclusive)
+	 * @param pk the primary key of the s c license
+	 * @param start the lower bound of the range of s c licenses
+	 * @param end the upper bound of the range of s c licenses (not inclusive)
 	 * @return the range of s c product entries associated with the s c license
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2165,15 +2157,15 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 			});
 
 	/**
-	 * Gets an ordered range of all the s c product entries associated with the s c license.
+	 * Returns an ordered range of all the s c product entries associated with the s c license.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param pk the primary key of the s c license to get the associated s c product entries for
-	 * @param start the lower bound of the range of s c licenses to return
-	 * @param end the upper bound of the range of s c licenses to return (not inclusive)
+	 * @param pk the primary key of the s c license
+	 * @param start the lower bound of the range of s c licenses
+	 * @param end the upper bound of the range of s c licenses (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of s c product entries associated with the s c license
 	 * @throws SystemException if a system exception occurred
@@ -2245,9 +2237,9 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 			"getSCProductEntriesSize", new String[] { Long.class.getName() });
 
 	/**
-	 * Gets the number of s c product entries associated with the s c license.
+	 * Returns the number of s c product entries associated with the s c license.
 	 *
-	 * @param pk the primary key of the s c license to get the number of associated s c product entries for
+	 * @param pk the primary key of the s c license
 	 * @return the number of s c product entries associated with the s c license
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2543,7 +2535,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 	/**
 	 * Sets the s c product entries associated with the s c license, removing and adding associations as necessary. Also notifies the appropriate model listeners and clears the mapping table finder cache.
 	 *
-	 * @param pk the primary key of the s c license to set the associations for
+	 * @param pk the primary key of the s c license
 	 * @param scProductEntryPKs the primary keys of the s c product entries to be associated with the s c license
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2577,7 +2569,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 	/**
 	 * Sets the s c product entries associated with the s c license, removing and adding associations as necessary. Also notifies the appropriate model listeners and clears the mapping table finder cache.
 	 *
-	 * @param pk the primary key of the s c license to set the associations for
+	 * @param pk the primary key of the s c license
 	 * @param scProductEntries the s c product entries to be associated with the s c license
 	 * @throws SystemException if a system exception occurred
 	 */

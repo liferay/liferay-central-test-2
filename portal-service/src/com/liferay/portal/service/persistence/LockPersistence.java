@@ -39,14 +39,14 @@ public interface LockPersistence extends BasePersistence<Lock> {
 	/**
 	* Caches the lock in the entity cache if it is enabled.
 	*
-	* @param lock the lock to cache
+	* @param lock the lock
 	*/
 	public void cacheResult(com.liferay.portal.model.Lock lock);
 
 	/**
 	* Caches the locks in the entity cache if it is enabled.
 	*
-	* @param locks the locks to cache
+	* @param locks the locks
 	*/
 	public void cacheResult(java.util.List<com.liferay.portal.model.Lock> locks);
 
@@ -61,7 +61,7 @@ public interface LockPersistence extends BasePersistence<Lock> {
 	/**
 	* Removes the lock with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param lockId the primary key of the lock to remove
+	* @param lockId the primary key of the lock
 	* @return the lock that was removed
 	* @throws com.liferay.portal.NoSuchLockException if a lock with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -75,9 +75,9 @@ public interface LockPersistence extends BasePersistence<Lock> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the lock with the primary key or throws a {@link com.liferay.portal.NoSuchLockException} if it could not be found.
+	* Returns the lock with the primary key or throws a {@link com.liferay.portal.NoSuchLockException} if it could not be found.
 	*
-	* @param lockId the primary key of the lock to find
+	* @param lockId the primary key of the lock
 	* @return the lock
 	* @throws com.liferay.portal.NoSuchLockException if a lock with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -87,9 +87,9 @@ public interface LockPersistence extends BasePersistence<Lock> {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the lock with the primary key or returns <code>null</code> if it could not be found.
+	* Returns the lock with the primary key or returns <code>null</code> if it could not be found.
 	*
-	* @param lockId the primary key of the lock to find
+	* @param lockId the primary key of the lock
 	* @return the lock, or <code>null</code> if a lock with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -97,9 +97,9 @@ public interface LockPersistence extends BasePersistence<Lock> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds all the locks where uuid = &#63;.
+	* Returns all the locks where uuid = &#63;.
 	*
-	* @param uuid the uuid to search with
+	* @param uuid the uuid
 	* @return the matching locks
 	* @throws SystemException if a system exception occurred
 	*/
@@ -108,15 +108,15 @@ public interface LockPersistence extends BasePersistence<Lock> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds a range of all the locks where uuid = &#63;.
+	* Returns a range of all the locks where uuid = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param uuid the uuid to search with
-	* @param start the lower bound of the range of locks to return
-	* @param end the upper bound of the range of locks to return (not inclusive)
+	* @param uuid the uuid
+	* @param start the lower bound of the range of locks
+	* @param end the upper bound of the range of locks (not inclusive)
 	* @return the range of matching locks
 	* @throws SystemException if a system exception occurred
 	*/
@@ -125,15 +125,15 @@ public interface LockPersistence extends BasePersistence<Lock> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds an ordered range of all the locks where uuid = &#63;.
+	* Returns an ordered range of all the locks where uuid = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param uuid the uuid to search with
-	* @param start the lower bound of the range of locks to return
-	* @param end the upper bound of the range of locks to return (not inclusive)
+	* @param uuid the uuid
+	* @param start the lower bound of the range of locks
+	* @param end the upper bound of the range of locks (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching locks
 	* @throws SystemException if a system exception occurred
@@ -144,13 +144,13 @@ public interface LockPersistence extends BasePersistence<Lock> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the first lock in the ordered set where uuid = &#63;.
+	* Returns the first lock in the ordered set where uuid = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param uuid the uuid to search with
+	* @param uuid the uuid
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching lock
 	* @throws com.liferay.portal.NoSuchLockException if a matching lock could not be found
@@ -163,13 +163,13 @@ public interface LockPersistence extends BasePersistence<Lock> {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the last lock in the ordered set where uuid = &#63;.
+	* Returns the last lock in the ordered set where uuid = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param uuid the uuid to search with
+	* @param uuid the uuid
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching lock
 	* @throws com.liferay.portal.NoSuchLockException if a matching lock could not be found
@@ -182,14 +182,14 @@ public interface LockPersistence extends BasePersistence<Lock> {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the locks before and after the current lock in the ordered set where uuid = &#63;.
+	* Returns the locks before and after the current lock in the ordered set where uuid = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
 	* @param lockId the primary key of the current lock
-	* @param uuid the uuid to search with
+	* @param uuid the uuid
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next lock
 	* @throws com.liferay.portal.NoSuchLockException if a lock with the primary key could not be found
@@ -202,9 +202,9 @@ public interface LockPersistence extends BasePersistence<Lock> {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds all the locks where expirationDate &lt; &#63;.
+	* Returns all the locks where expirationDate &lt; &#63;.
 	*
-	* @param expirationDate the expiration date to search with
+	* @param expirationDate the expiration date
 	* @return the matching locks
 	* @throws SystemException if a system exception occurred
 	*/
@@ -213,15 +213,15 @@ public interface LockPersistence extends BasePersistence<Lock> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds a range of all the locks where expirationDate &lt; &#63;.
+	* Returns a range of all the locks where expirationDate &lt; &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param expirationDate the expiration date to search with
-	* @param start the lower bound of the range of locks to return
-	* @param end the upper bound of the range of locks to return (not inclusive)
+	* @param expirationDate the expiration date
+	* @param start the lower bound of the range of locks
+	* @param end the upper bound of the range of locks (not inclusive)
 	* @return the range of matching locks
 	* @throws SystemException if a system exception occurred
 	*/
@@ -230,15 +230,15 @@ public interface LockPersistence extends BasePersistence<Lock> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds an ordered range of all the locks where expirationDate &lt; &#63;.
+	* Returns an ordered range of all the locks where expirationDate &lt; &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param expirationDate the expiration date to search with
-	* @param start the lower bound of the range of locks to return
-	* @param end the upper bound of the range of locks to return (not inclusive)
+	* @param expirationDate the expiration date
+	* @param start the lower bound of the range of locks
+	* @param end the upper bound of the range of locks (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching locks
 	* @throws SystemException if a system exception occurred
@@ -249,13 +249,13 @@ public interface LockPersistence extends BasePersistence<Lock> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the first lock in the ordered set where expirationDate &lt; &#63;.
+	* Returns the first lock in the ordered set where expirationDate &lt; &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param expirationDate the expiration date to search with
+	* @param expirationDate the expiration date
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching lock
 	* @throws com.liferay.portal.NoSuchLockException if a matching lock could not be found
@@ -268,13 +268,13 @@ public interface LockPersistence extends BasePersistence<Lock> {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the last lock in the ordered set where expirationDate &lt; &#63;.
+	* Returns the last lock in the ordered set where expirationDate &lt; &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param expirationDate the expiration date to search with
+	* @param expirationDate the expiration date
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching lock
 	* @throws com.liferay.portal.NoSuchLockException if a matching lock could not be found
@@ -287,14 +287,14 @@ public interface LockPersistence extends BasePersistence<Lock> {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the locks before and after the current lock in the ordered set where expirationDate &lt; &#63;.
+	* Returns the locks before and after the current lock in the ordered set where expirationDate &lt; &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
 	* @param lockId the primary key of the current lock
-	* @param expirationDate the expiration date to search with
+	* @param expirationDate the expiration date
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next lock
 	* @throws com.liferay.portal.NoSuchLockException if a lock with the primary key could not be found
@@ -307,10 +307,10 @@ public interface LockPersistence extends BasePersistence<Lock> {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the lock where className = &#63; and key = &#63; or throws a {@link com.liferay.portal.NoSuchLockException} if it could not be found.
+	* Returns the lock where className = &#63; and key = &#63; or throws a {@link com.liferay.portal.NoSuchLockException} if it could not be found.
 	*
-	* @param className the class name to search with
-	* @param key the key to search with
+	* @param className the class name
+	* @param key the key
 	* @return the matching lock
 	* @throws com.liferay.portal.NoSuchLockException if a matching lock could not be found
 	* @throws SystemException if a system exception occurred
@@ -321,10 +321,10 @@ public interface LockPersistence extends BasePersistence<Lock> {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the lock where className = &#63; and key = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	* Returns the lock where className = &#63; and key = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	*
-	* @param className the class name to search with
-	* @param key the key to search with
+	* @param className the class name
+	* @param key the key
 	* @return the matching lock, or <code>null</code> if a matching lock could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -333,10 +333,10 @@ public interface LockPersistence extends BasePersistence<Lock> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the lock where className = &#63; and key = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	* Returns the lock where className = &#63; and key = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
-	* @param className the class name to search with
-	* @param key the key to search with
+	* @param className the class name
+	* @param key the key
 	* @return the matching lock, or <code>null</code> if a matching lock could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -346,7 +346,7 @@ public interface LockPersistence extends BasePersistence<Lock> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds all the locks.
+	* Returns all the locks.
 	*
 	* @return the locks
 	* @throws SystemException if a system exception occurred
@@ -355,14 +355,14 @@ public interface LockPersistence extends BasePersistence<Lock> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds a range of all the locks.
+	* Returns a range of all the locks.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of locks to return
-	* @param end the upper bound of the range of locks to return (not inclusive)
+	* @param start the lower bound of the range of locks
+	* @param end the upper bound of the range of locks (not inclusive)
 	* @return the range of locks
 	* @throws SystemException if a system exception occurred
 	*/
@@ -370,14 +370,14 @@ public interface LockPersistence extends BasePersistence<Lock> {
 		int end) throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds an ordered range of all the locks.
+	* Returns an ordered range of all the locks.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of locks to return
-	* @param end the upper bound of the range of locks to return (not inclusive)
+	* @param start the lower bound of the range of locks
+	* @param end the upper bound of the range of locks (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of locks
 	* @throws SystemException if a system exception occurred
@@ -390,7 +390,7 @@ public interface LockPersistence extends BasePersistence<Lock> {
 	/**
 	* Removes all the locks where uuid = &#63; from the database.
 	*
-	* @param uuid the uuid to search with
+	* @param uuid the uuid
 	* @throws SystemException if a system exception occurred
 	*/
 	public void removeByUuid(java.lang.String uuid)
@@ -399,7 +399,7 @@ public interface LockPersistence extends BasePersistence<Lock> {
 	/**
 	* Removes all the locks where expirationDate &lt; &#63; from the database.
 	*
-	* @param expirationDate the expiration date to search with
+	* @param expirationDate the expiration date
 	* @throws SystemException if a system exception occurred
 	*/
 	public void removeByLtExpirationDate(java.util.Date expirationDate)
@@ -408,8 +408,8 @@ public interface LockPersistence extends BasePersistence<Lock> {
 	/**
 	* Removes the lock where className = &#63; and key = &#63; from the database.
 	*
-	* @param className the class name to search with
-	* @param key the key to search with
+	* @param className the class name
+	* @param key the key
 	* @throws SystemException if a system exception occurred
 	*/
 	public void removeByC_K(java.lang.String className, java.lang.String key)
@@ -425,9 +425,9 @@ public interface LockPersistence extends BasePersistence<Lock> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Counts all the locks where uuid = &#63;.
+	* Returns the number of locks where uuid = &#63;.
 	*
-	* @param uuid the uuid to search with
+	* @param uuid the uuid
 	* @return the number of matching locks
 	* @throws SystemException if a system exception occurred
 	*/
@@ -435,9 +435,9 @@ public interface LockPersistence extends BasePersistence<Lock> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Counts all the locks where expirationDate &lt; &#63;.
+	* Returns the number of locks where expirationDate &lt; &#63;.
 	*
-	* @param expirationDate the expiration date to search with
+	* @param expirationDate the expiration date
 	* @return the number of matching locks
 	* @throws SystemException if a system exception occurred
 	*/
@@ -445,10 +445,10 @@ public interface LockPersistence extends BasePersistence<Lock> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Counts all the locks where className = &#63; and key = &#63;.
+	* Returns the number of locks where className = &#63; and key = &#63;.
 	*
-	* @param className the class name to search with
-	* @param key the key to search with
+	* @param className the class name
+	* @param key the key
 	* @return the number of matching locks
 	* @throws SystemException if a system exception occurred
 	*/
@@ -456,7 +456,7 @@ public interface LockPersistence extends BasePersistence<Lock> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Counts all the locks.
+	* Returns the number of locks.
 	*
 	* @return the number of locks
 	* @throws SystemException if a system exception occurred

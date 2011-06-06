@@ -45,7 +45,7 @@ public interface BlogsEntryLocalService {
 	/**
 	* Adds the blogs entry to the database. Also notifies the appropriate model listeners.
 	*
-	* @param blogsEntry the blogs entry to add
+	* @param blogsEntry the blogs entry
 	* @return the blogs entry that was added
 	* @throws SystemException if a system exception occurred
 	*/
@@ -65,7 +65,7 @@ public interface BlogsEntryLocalService {
 	/**
 	* Deletes the blogs entry with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param entryId the primary key of the blogs entry to delete
+	* @param entryId the primary key of the blogs entry
 	* @throws PortalException if a blogs entry with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -76,7 +76,7 @@ public interface BlogsEntryLocalService {
 	/**
 	* Deletes the blogs entry from the database. Also notifies the appropriate model listeners.
 	*
-	* @param blogsEntry the blogs entry to delete
+	* @param blogsEntry the blogs entry
 	* @throws SystemException if a system exception occurred
 	*/
 	public void deleteBlogsEntry(
@@ -86,7 +86,7 @@ public interface BlogsEntryLocalService {
 	/**
 	* Performs a dynamic query on the database and returns the matching rows.
 	*
-	* @param dynamicQuery the dynamic query to search with
+	* @param dynamicQuery the dynamic query
 	* @return the matching rows
 	* @throws SystemException if a system exception occurred
 	*/
@@ -102,9 +102,9 @@ public interface BlogsEntryLocalService {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param dynamicQuery the dynamic query to search with
-	* @param start the lower bound of the range of model instances to return
-	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param dynamicQuery the dynamic query
+	* @param start the lower bound of the range of model instances
+	* @param end the upper bound of the range of model instances (not inclusive)
 	* @return the range of matching rows
 	* @throws SystemException if a system exception occurred
 	*/
@@ -120,9 +120,9 @@ public interface BlogsEntryLocalService {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param dynamicQuery the dynamic query to search with
-	* @param start the lower bound of the range of model instances to return
-	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param dynamicQuery the dynamic query
+	* @param start the lower bound of the range of model instances
+	* @param end the upper bound of the range of model instances (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching rows
 	* @throws SystemException if a system exception occurred
@@ -135,9 +135,9 @@ public interface BlogsEntryLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Counts the number of rows that match the dynamic query.
+	* Returns the number of rows that match the dynamic query.
 	*
-	* @param dynamicQuery the dynamic query to search with
+	* @param dynamicQuery the dynamic query
 	* @return the number of rows that match the dynamic query
 	* @throws SystemException if a system exception occurred
 	*/
@@ -146,9 +146,9 @@ public interface BlogsEntryLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Gets the blogs entry with the primary key.
+	* Returns the blogs entry with the primary key.
 	*
-	* @param entryId the primary key of the blogs entry to get
+	* @param entryId the primary key of the blogs entry
 	* @return the blogs entry
 	* @throws PortalException if a blogs entry with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -160,12 +160,12 @@ public interface BlogsEntryLocalService {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Gets the blogs entry with the UUID and group id.
+	* Returns the blogs entry with the UUID in the group.
 	*
-	* @param uuid the UUID of blogs entry to get
-	* @param groupId the group id of the blogs entry to get
+	* @param uuid the UUID of blogs entry
+	* @param groupId the group id of the blogs entry
 	* @return the blogs entry
-	* @throws PortalException if a blogs entry with the UUID and group id could not be found
+	* @throws PortalException if a blogs entry with the UUID in the group could not be found
 	* @throws SystemException if a system exception occurred
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
@@ -175,14 +175,14 @@ public interface BlogsEntryLocalService {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Gets a range of all the blogs entries.
+	* Returns a range of all the blogs entries.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of blogs entries to return
-	* @param end the upper bound of the range of blogs entries to return (not inclusive)
+	* @param start the lower bound of the range of blogs entries
+	* @param end the upper bound of the range of blogs entries (not inclusive)
 	* @return the range of blogs entries
 	* @throws SystemException if a system exception occurred
 	*/
@@ -192,7 +192,7 @@ public interface BlogsEntryLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Gets the number of blogs entries.
+	* Returns the number of blogs entries.
 	*
 	* @return the number of blogs entries
 	* @throws SystemException if a system exception occurred
@@ -204,7 +204,7 @@ public interface BlogsEntryLocalService {
 	/**
 	* Updates the blogs entry in the database. Also notifies the appropriate model listeners.
 	*
-	* @param blogsEntry the blogs entry to update
+	* @param blogsEntry the blogs entry
 	* @return the blogs entry that was updated
 	* @throws SystemException if a system exception occurred
 	*/
@@ -215,7 +215,7 @@ public interface BlogsEntryLocalService {
 	/**
 	* Updates the blogs entry in the database. Also notifies the appropriate model listeners.
 	*
-	* @param blogsEntry the blogs entry to update
+	* @param blogsEntry the blogs entry
 	* @param merge whether to merge the blogs entry with the current session. See {@link com.liferay.portal.service.persistence.BatchSession#update(com.liferay.portal.kernel.dao.orm.Session, com.liferay.portal.model.BaseModel, boolean)} for an explanation.
 	* @return the blogs entry that was updated
 	* @throws SystemException if a system exception occurred
@@ -225,7 +225,7 @@ public interface BlogsEntryLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Gets the Spring bean ID for this bean.
+	* Returns the Spring bean ID for this bean.
 	*
 	* @return the Spring bean ID for this bean
 	*/
@@ -262,8 +262,8 @@ public interface BlogsEntryLocalService {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
-	public void addEntryResources(long entryId,
-		boolean addGroupPermissions, boolean addGuestPermissions)
+	public void addEntryResources(long entryId, boolean addGroupPermissions,
+		boolean addGuestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 

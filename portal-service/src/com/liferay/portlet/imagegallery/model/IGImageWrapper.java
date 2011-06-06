@@ -37,7 +37,7 @@ public class IGImageWrapper implements IGImage {
 	}
 
 	/**
-	* Gets the primary key of this i g image.
+	* Returns the primary key of this i g image.
 	*
 	* @return the primary key of this i g image
 	*/
@@ -46,7 +46,7 @@ public class IGImageWrapper implements IGImage {
 	}
 
 	/**
-	* Sets the primary key of this i g image
+	* Sets the primary key of this i g image.
 	*
 	* @param primaryKey the primary key of this i g image
 	*/
@@ -55,7 +55,7 @@ public class IGImageWrapper implements IGImage {
 	}
 
 	/**
-	* Gets the uuid of this i g image.
+	* Returns the uuid of this i g image.
 	*
 	* @return the uuid of this i g image
 	*/
@@ -73,7 +73,7 @@ public class IGImageWrapper implements IGImage {
 	}
 
 	/**
-	* Gets the image ID of this i g image.
+	* Returns the image ID of this i g image.
 	*
 	* @return the image ID of this i g image
 	*/
@@ -91,7 +91,7 @@ public class IGImageWrapper implements IGImage {
 	}
 
 	/**
-	* Gets the group ID of this i g image.
+	* Returns the group ID of this i g image.
 	*
 	* @return the group ID of this i g image
 	*/
@@ -109,7 +109,7 @@ public class IGImageWrapper implements IGImage {
 	}
 
 	/**
-	* Gets the company ID of this i g image.
+	* Returns the company ID of this i g image.
 	*
 	* @return the company ID of this i g image
 	*/
@@ -127,7 +127,7 @@ public class IGImageWrapper implements IGImage {
 	}
 
 	/**
-	* Gets the user ID of this i g image.
+	* Returns the user ID of this i g image.
 	*
 	* @return the user ID of this i g image
 	*/
@@ -145,7 +145,7 @@ public class IGImageWrapper implements IGImage {
 	}
 
 	/**
-	* Gets the user uuid of this i g image.
+	* Returns the user uuid of this i g image.
 	*
 	* @return the user uuid of this i g image
 	* @throws SystemException if a system exception occurred
@@ -165,7 +165,7 @@ public class IGImageWrapper implements IGImage {
 	}
 
 	/**
-	* Gets the user name of this i g image.
+	* Returns the user name of this i g image.
 	*
 	* @return the user name of this i g image
 	*/
@@ -183,7 +183,7 @@ public class IGImageWrapper implements IGImage {
 	}
 
 	/**
-	* Gets the create date of this i g image.
+	* Returns the create date of this i g image.
 	*
 	* @return the create date of this i g image
 	*/
@@ -201,7 +201,7 @@ public class IGImageWrapper implements IGImage {
 	}
 
 	/**
-	* Gets the modified date of this i g image.
+	* Returns the modified date of this i g image.
 	*
 	* @return the modified date of this i g image
 	*/
@@ -219,7 +219,7 @@ public class IGImageWrapper implements IGImage {
 	}
 
 	/**
-	* Gets the folder ID of this i g image.
+	* Returns the folder ID of this i g image.
 	*
 	* @return the folder ID of this i g image
 	*/
@@ -237,7 +237,7 @@ public class IGImageWrapper implements IGImage {
 	}
 
 	/**
-	* Gets the name of this i g image.
+	* Returns the name of this i g image.
 	*
 	* @return the name of this i g image
 	*/
@@ -255,7 +255,7 @@ public class IGImageWrapper implements IGImage {
 	}
 
 	/**
-	* Gets the description of this i g image.
+	* Returns the description of this i g image.
 	*
 	* @return the description of this i g image
 	*/
@@ -273,7 +273,7 @@ public class IGImageWrapper implements IGImage {
 	}
 
 	/**
-	* Gets the small image ID of this i g image.
+	* Returns the small image ID of this i g image.
 	*
 	* @return the small image ID of this i g image
 	*/
@@ -291,7 +291,7 @@ public class IGImageWrapper implements IGImage {
 	}
 
 	/**
-	* Gets the large image ID of this i g image.
+	* Returns the large image ID of this i g image.
 	*
 	* @return the large image ID of this i g image
 	*/
@@ -309,7 +309,7 @@ public class IGImageWrapper implements IGImage {
 	}
 
 	/**
-	* Gets the custom1 image ID of this i g image.
+	* Returns the custom1 image ID of this i g image.
 	*
 	* @return the custom1 image ID of this i g image
 	*/
@@ -327,7 +327,7 @@ public class IGImageWrapper implements IGImage {
 	}
 
 	/**
-	* Gets the custom2 image ID of this i g image.
+	* Returns the custom2 image ID of this i g image.
 	*
 	* @return the custom2 image ID of this i g image
 	*/

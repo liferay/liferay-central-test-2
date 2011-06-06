@@ -37,7 +37,7 @@ public class TeamWrapper implements Team {
 	}
 
 	/**
-	* Gets the primary key of this team.
+	* Returns the primary key of this team.
 	*
 	* @return the primary key of this team
 	*/
@@ -46,7 +46,7 @@ public class TeamWrapper implements Team {
 	}
 
 	/**
-	* Sets the primary key of this team
+	* Sets the primary key of this team.
 	*
 	* @param primaryKey the primary key of this team
 	*/
@@ -55,7 +55,7 @@ public class TeamWrapper implements Team {
 	}
 
 	/**
-	* Gets the team ID of this team.
+	* Returns the team ID of this team.
 	*
 	* @return the team ID of this team
 	*/
@@ -73,7 +73,7 @@ public class TeamWrapper implements Team {
 	}
 
 	/**
-	* Gets the company ID of this team.
+	* Returns the company ID of this team.
 	*
 	* @return the company ID of this team
 	*/
@@ -91,7 +91,7 @@ public class TeamWrapper implements Team {
 	}
 
 	/**
-	* Gets the user ID of this team.
+	* Returns the user ID of this team.
 	*
 	* @return the user ID of this team
 	*/
@@ -109,7 +109,7 @@ public class TeamWrapper implements Team {
 	}
 
 	/**
-	* Gets the user uuid of this team.
+	* Returns the user uuid of this team.
 	*
 	* @return the user uuid of this team
 	* @throws SystemException if a system exception occurred
@@ -129,7 +129,7 @@ public class TeamWrapper implements Team {
 	}
 
 	/**
-	* Gets the user name of this team.
+	* Returns the user name of this team.
 	*
 	* @return the user name of this team
 	*/
@@ -147,7 +147,7 @@ public class TeamWrapper implements Team {
 	}
 
 	/**
-	* Gets the create date of this team.
+	* Returns the create date of this team.
 	*
 	* @return the create date of this team
 	*/
@@ -165,7 +165,7 @@ public class TeamWrapper implements Team {
 	}
 
 	/**
-	* Gets the modified date of this team.
+	* Returns the modified date of this team.
 	*
 	* @return the modified date of this team
 	*/
@@ -183,7 +183,7 @@ public class TeamWrapper implements Team {
 	}
 
 	/**
-	* Gets the group ID of this team.
+	* Returns the group ID of this team.
 	*
 	* @return the group ID of this team
 	*/
@@ -201,7 +201,7 @@ public class TeamWrapper implements Team {
 	}
 
 	/**
-	* Gets the name of this team.
+	* Returns the name of this team.
 	*
 	* @return the name of this team
 	*/
@@ -219,7 +219,7 @@ public class TeamWrapper implements Team {
 	}
 
 	/**
-	* Gets the description of this team.
+	* Returns the description of this team.
 	*
 	* @return the description of this team
 	*/

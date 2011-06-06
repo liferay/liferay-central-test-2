@@ -122,7 +122,7 @@ public class RepositoryEntryPersistenceImpl extends BasePersistenceImpl<Reposito
 	/**
 	 * Caches the repository entry in the entity cache if it is enabled.
 	 *
-	 * @param repositoryEntry the repository entry to cache
+	 * @param repositoryEntry the repository entry
 	 */
 	public void cacheResult(RepositoryEntry repositoryEntry) {
 		EntityCacheUtil.putResult(RepositoryEntryModelImpl.ENTITY_CACHE_ENABLED,
@@ -148,7 +148,7 @@ public class RepositoryEntryPersistenceImpl extends BasePersistenceImpl<Reposito
 	/**
 	 * Caches the repository entries in the entity cache if it is enabled.
 	 *
-	 * @param repositoryEntries the repository entries to cache
+	 * @param repositoryEntries the repository entries
 	 */
 	public void cacheResult(List<RepositoryEntry> repositoryEntries) {
 		for (RepositoryEntry repositoryEntry : repositoryEntries) {
@@ -225,7 +225,7 @@ public class RepositoryEntryPersistenceImpl extends BasePersistenceImpl<Reposito
 	/**
 	 * Removes the repository entry with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param primaryKey the primary key of the repository entry to remove
+	 * @param primaryKey the primary key of the repository entry
 	 * @return the repository entry that was removed
 	 * @throws com.liferay.portal.NoSuchModelException if a repository entry with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -238,7 +238,7 @@ public class RepositoryEntryPersistenceImpl extends BasePersistenceImpl<Reposito
 	/**
 	 * Removes the repository entry with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param repositoryEntryId the primary key of the repository entry to remove
+	 * @param repositoryEntryId the primary key of the repository entry
 	 * @return the repository entry that was removed
 	 * @throws com.liferay.portal.NoSuchRepositoryEntryException if a repository entry with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -279,7 +279,7 @@ public class RepositoryEntryPersistenceImpl extends BasePersistenceImpl<Reposito
 	/**
 	 * Removes the repository entry from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param repositoryEntry the repository entry to remove
+	 * @param repositoryEntry the repository entry
 	 * @return the repository entry that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -436,9 +436,9 @@ public class RepositoryEntryPersistenceImpl extends BasePersistenceImpl<Reposito
 	}
 
 	/**
-	 * Finds the repository entry with the primary key or throws a {@link com.liferay.portal.NoSuchModelException} if it could not be found.
+	 * Returns the repository entry with the primary key or throws a {@link com.liferay.portal.NoSuchModelException} if it could not be found.
 	 *
-	 * @param primaryKey the primary key of the repository entry to find
+	 * @param primaryKey the primary key of the repository entry
 	 * @return the repository entry
 	 * @throws com.liferay.portal.NoSuchModelException if a repository entry with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -449,9 +449,9 @@ public class RepositoryEntryPersistenceImpl extends BasePersistenceImpl<Reposito
 	}
 
 	/**
-	 * Finds the repository entry with the primary key or throws a {@link com.liferay.portal.NoSuchRepositoryEntryException} if it could not be found.
+	 * Returns the repository entry with the primary key or throws a {@link com.liferay.portal.NoSuchRepositoryEntryException} if it could not be found.
 	 *
-	 * @param repositoryEntryId the primary key of the repository entry to find
+	 * @param repositoryEntryId the primary key of the repository entry
 	 * @return the repository entry
 	 * @throws com.liferay.portal.NoSuchRepositoryEntryException if a repository entry with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -473,9 +473,9 @@ public class RepositoryEntryPersistenceImpl extends BasePersistenceImpl<Reposito
 	}
 
 	/**
-	 * Finds the repository entry with the primary key or returns <code>null</code> if it could not be found.
+	 * Returns the repository entry with the primary key or returns <code>null</code> if it could not be found.
 	 *
-	 * @param primaryKey the primary key of the repository entry to find
+	 * @param primaryKey the primary key of the repository entry
 	 * @return the repository entry, or <code>null</code> if a repository entry with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -485,9 +485,9 @@ public class RepositoryEntryPersistenceImpl extends BasePersistenceImpl<Reposito
 	}
 
 	/**
-	 * Finds the repository entry with the primary key or returns <code>null</code> if it could not be found.
+	 * Returns the repository entry with the primary key or returns <code>null</code> if it could not be found.
 	 *
-	 * @param repositoryEntryId the primary key of the repository entry to find
+	 * @param repositoryEntryId the primary key of the repository entry
 	 * @return the repository entry, or <code>null</code> if a repository entry with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -521,9 +521,9 @@ public class RepositoryEntryPersistenceImpl extends BasePersistenceImpl<Reposito
 	}
 
 	/**
-	 * Finds all the repository entries where uuid = &#63;.
+	 * Returns all the repository entries where uuid = &#63;.
 	 *
-	 * @param uuid the uuid to search with
+	 * @param uuid the uuid
 	 * @return the matching repository entries
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -533,15 +533,15 @@ public class RepositoryEntryPersistenceImpl extends BasePersistenceImpl<Reposito
 	}
 
 	/**
-	 * Finds a range of all the repository entries where uuid = &#63;.
+	 * Returns a range of all the repository entries where uuid = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param uuid the uuid to search with
-	 * @param start the lower bound of the range of repository entries to return
-	 * @param end the upper bound of the range of repository entries to return (not inclusive)
+	 * @param uuid the uuid
+	 * @param start the lower bound of the range of repository entries
+	 * @param end the upper bound of the range of repository entries (not inclusive)
 	 * @return the range of matching repository entries
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -551,15 +551,15 @@ public class RepositoryEntryPersistenceImpl extends BasePersistenceImpl<Reposito
 	}
 
 	/**
-	 * Finds an ordered range of all the repository entries where uuid = &#63;.
+	 * Returns an ordered range of all the repository entries where uuid = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param uuid the uuid to search with
-	 * @param start the lower bound of the range of repository entries to return
-	 * @param end the upper bound of the range of repository entries to return (not inclusive)
+	 * @param uuid the uuid
+	 * @param start the lower bound of the range of repository entries
+	 * @param end the upper bound of the range of repository entries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching repository entries
 	 * @throws SystemException if a system exception occurred
@@ -647,13 +647,13 @@ public class RepositoryEntryPersistenceImpl extends BasePersistenceImpl<Reposito
 	}
 
 	/**
-	 * Finds the first repository entry in the ordered set where uuid = &#63;.
+	 * Returns the first repository entry in the ordered set where uuid = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param uuid the uuid to search with
+	 * @param uuid the uuid
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching repository entry
 	 * @throws com.liferay.portal.NoSuchRepositoryEntryException if a matching repository entry could not be found
@@ -682,13 +682,13 @@ public class RepositoryEntryPersistenceImpl extends BasePersistenceImpl<Reposito
 	}
 
 	/**
-	 * Finds the last repository entry in the ordered set where uuid = &#63;.
+	 * Returns the last repository entry in the ordered set where uuid = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param uuid the uuid to search with
+	 * @param uuid the uuid
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching repository entry
 	 * @throws com.liferay.portal.NoSuchRepositoryEntryException if a matching repository entry could not be found
@@ -720,14 +720,14 @@ public class RepositoryEntryPersistenceImpl extends BasePersistenceImpl<Reposito
 	}
 
 	/**
-	 * Finds the repository entries before and after the current repository entry in the ordered set where uuid = &#63;.
+	 * Returns the repository entries before and after the current repository entry in the ordered set where uuid = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
 	 * @param repositoryEntryId the primary key of the current repository entry
-	 * @param uuid the uuid to search with
+	 * @param uuid the uuid
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next repository entry
 	 * @throws com.liferay.portal.NoSuchRepositoryEntryException if a repository entry with the primary key could not be found
@@ -876,10 +876,10 @@ public class RepositoryEntryPersistenceImpl extends BasePersistenceImpl<Reposito
 	}
 
 	/**
-	 * Finds the repository entry where uuid = &#63; and groupId = &#63; or throws a {@link com.liferay.portal.NoSuchRepositoryEntryException} if it could not be found.
+	 * Returns the repository entry where uuid = &#63; and groupId = &#63; or throws a {@link com.liferay.portal.NoSuchRepositoryEntryException} if it could not be found.
 	 *
-	 * @param uuid the uuid to search with
-	 * @param groupId the group ID to search with
+	 * @param uuid the uuid
+	 * @param groupId the group ID
 	 * @return the matching repository entry
 	 * @throws com.liferay.portal.NoSuchRepositoryEntryException if a matching repository entry could not be found
 	 * @throws SystemException if a system exception occurred
@@ -912,10 +912,10 @@ public class RepositoryEntryPersistenceImpl extends BasePersistenceImpl<Reposito
 	}
 
 	/**
-	 * Finds the repository entry where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 * Returns the repository entry where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	 *
-	 * @param uuid the uuid to search with
-	 * @param groupId the group ID to search with
+	 * @param uuid the uuid
+	 * @param groupId the group ID
 	 * @return the matching repository entry, or <code>null</code> if a matching repository entry could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -925,10 +925,10 @@ public class RepositoryEntryPersistenceImpl extends BasePersistenceImpl<Reposito
 	}
 
 	/**
-	 * Finds the repository entry where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 * Returns the repository entry where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	 *
-	 * @param uuid the uuid to search with
-	 * @param groupId the group ID to search with
+	 * @param uuid the uuid
+	 * @param groupId the group ID
 	 * @return the matching repository entry, or <code>null</code> if a matching repository entry could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1027,9 +1027,9 @@ public class RepositoryEntryPersistenceImpl extends BasePersistenceImpl<Reposito
 	}
 
 	/**
-	 * Finds all the repository entries where repositoryId = &#63;.
+	 * Returns all the repository entries where repositoryId = &#63;.
 	 *
-	 * @param repositoryId the repository ID to search with
+	 * @param repositoryId the repository ID
 	 * @return the matching repository entries
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1040,15 +1040,15 @@ public class RepositoryEntryPersistenceImpl extends BasePersistenceImpl<Reposito
 	}
 
 	/**
-	 * Finds a range of all the repository entries where repositoryId = &#63;.
+	 * Returns a range of all the repository entries where repositoryId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param repositoryId the repository ID to search with
-	 * @param start the lower bound of the range of repository entries to return
-	 * @param end the upper bound of the range of repository entries to return (not inclusive)
+	 * @param repositoryId the repository ID
+	 * @param start the lower bound of the range of repository entries
+	 * @param end the upper bound of the range of repository entries (not inclusive)
 	 * @return the range of matching repository entries
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1058,15 +1058,15 @@ public class RepositoryEntryPersistenceImpl extends BasePersistenceImpl<Reposito
 	}
 
 	/**
-	 * Finds an ordered range of all the repository entries where repositoryId = &#63;.
+	 * Returns an ordered range of all the repository entries where repositoryId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param repositoryId the repository ID to search with
-	 * @param start the lower bound of the range of repository entries to return
-	 * @param end the upper bound of the range of repository entries to return (not inclusive)
+	 * @param repositoryId the repository ID
+	 * @param start the lower bound of the range of repository entries
+	 * @param end the upper bound of the range of repository entries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching repository entries
 	 * @throws SystemException if a system exception occurred
@@ -1143,13 +1143,13 @@ public class RepositoryEntryPersistenceImpl extends BasePersistenceImpl<Reposito
 	}
 
 	/**
-	 * Finds the first repository entry in the ordered set where repositoryId = &#63;.
+	 * Returns the first repository entry in the ordered set where repositoryId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param repositoryId the repository ID to search with
+	 * @param repositoryId the repository ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching repository entry
 	 * @throws com.liferay.portal.NoSuchRepositoryEntryException if a matching repository entry could not be found
@@ -1179,13 +1179,13 @@ public class RepositoryEntryPersistenceImpl extends BasePersistenceImpl<Reposito
 	}
 
 	/**
-	 * Finds the last repository entry in the ordered set where repositoryId = &#63;.
+	 * Returns the last repository entry in the ordered set where repositoryId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param repositoryId the repository ID to search with
+	 * @param repositoryId the repository ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching repository entry
 	 * @throws com.liferay.portal.NoSuchRepositoryEntryException if a matching repository entry could not be found
@@ -1217,14 +1217,14 @@ public class RepositoryEntryPersistenceImpl extends BasePersistenceImpl<Reposito
 	}
 
 	/**
-	 * Finds the repository entries before and after the current repository entry in the ordered set where repositoryId = &#63;.
+	 * Returns the repository entries before and after the current repository entry in the ordered set where repositoryId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
 	 * @param repositoryEntryId the primary key of the current repository entry
-	 * @param repositoryId the repository ID to search with
+	 * @param repositoryId the repository ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next repository entry
 	 * @throws com.liferay.portal.NoSuchRepositoryEntryException if a repository entry with the primary key could not be found
@@ -1362,10 +1362,10 @@ public class RepositoryEntryPersistenceImpl extends BasePersistenceImpl<Reposito
 	}
 
 	/**
-	 * Finds the repository entry where repositoryId = &#63; and mappedId = &#63; or throws a {@link com.liferay.portal.NoSuchRepositoryEntryException} if it could not be found.
+	 * Returns the repository entry where repositoryId = &#63; and mappedId = &#63; or throws a {@link com.liferay.portal.NoSuchRepositoryEntryException} if it could not be found.
 	 *
-	 * @param repositoryId the repository ID to search with
-	 * @param mappedId the mapped ID to search with
+	 * @param repositoryId the repository ID
+	 * @param mappedId the mapped ID
 	 * @return the matching repository entry
 	 * @throws com.liferay.portal.NoSuchRepositoryEntryException if a matching repository entry could not be found
 	 * @throws SystemException if a system exception occurred
@@ -1398,10 +1398,10 @@ public class RepositoryEntryPersistenceImpl extends BasePersistenceImpl<Reposito
 	}
 
 	/**
-	 * Finds the repository entry where repositoryId = &#63; and mappedId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 * Returns the repository entry where repositoryId = &#63; and mappedId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	 *
-	 * @param repositoryId the repository ID to search with
-	 * @param mappedId the mapped ID to search with
+	 * @param repositoryId the repository ID
+	 * @param mappedId the mapped ID
 	 * @return the matching repository entry, or <code>null</code> if a matching repository entry could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1411,10 +1411,10 @@ public class RepositoryEntryPersistenceImpl extends BasePersistenceImpl<Reposito
 	}
 
 	/**
-	 * Finds the repository entry where repositoryId = &#63; and mappedId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 * Returns the repository entry where repositoryId = &#63; and mappedId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	 *
-	 * @param repositoryId the repository ID to search with
-	 * @param mappedId the mapped ID to search with
+	 * @param repositoryId the repository ID
+	 * @param mappedId the mapped ID
 	 * @return the matching repository entry, or <code>null</code> if a matching repository entry could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1513,7 +1513,7 @@ public class RepositoryEntryPersistenceImpl extends BasePersistenceImpl<Reposito
 	}
 
 	/**
-	 * Finds all the repository entries.
+	 * Returns all the repository entries.
 	 *
 	 * @return the repository entries
 	 * @throws SystemException if a system exception occurred
@@ -1523,14 +1523,14 @@ public class RepositoryEntryPersistenceImpl extends BasePersistenceImpl<Reposito
 	}
 
 	/**
-	 * Finds a range of all the repository entries.
+	 * Returns a range of all the repository entries.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param start the lower bound of the range of repository entries to return
-	 * @param end the upper bound of the range of repository entries to return (not inclusive)
+	 * @param start the lower bound of the range of repository entries
+	 * @param end the upper bound of the range of repository entries (not inclusive)
 	 * @return the range of repository entries
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1540,14 +1540,14 @@ public class RepositoryEntryPersistenceImpl extends BasePersistenceImpl<Reposito
 	}
 
 	/**
-	 * Finds an ordered range of all the repository entries.
+	 * Returns an ordered range of all the repository entries.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param start the lower bound of the range of repository entries to return
-	 * @param end the upper bound of the range of repository entries to return (not inclusive)
+	 * @param start the lower bound of the range of repository entries
+	 * @param end the upper bound of the range of repository entries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of repository entries
 	 * @throws SystemException if a system exception occurred
@@ -1624,7 +1624,7 @@ public class RepositoryEntryPersistenceImpl extends BasePersistenceImpl<Reposito
 	/**
 	 * Removes all the repository entries where uuid = &#63; from the database.
 	 *
-	 * @param uuid the uuid to search with
+	 * @param uuid the uuid
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByUuid(String uuid) throws SystemException {
@@ -1636,8 +1636,8 @@ public class RepositoryEntryPersistenceImpl extends BasePersistenceImpl<Reposito
 	/**
 	 * Removes the repository entry where uuid = &#63; and groupId = &#63; from the database.
 	 *
-	 * @param uuid the uuid to search with
-	 * @param groupId the group ID to search with
+	 * @param uuid the uuid
+	 * @param groupId the group ID
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByUUID_G(String uuid, long groupId)
@@ -1650,7 +1650,7 @@ public class RepositoryEntryPersistenceImpl extends BasePersistenceImpl<Reposito
 	/**
 	 * Removes all the repository entries where repositoryId = &#63; from the database.
 	 *
-	 * @param repositoryId the repository ID to search with
+	 * @param repositoryId the repository ID
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByRepositoryId(long repositoryId)
@@ -1663,8 +1663,8 @@ public class RepositoryEntryPersistenceImpl extends BasePersistenceImpl<Reposito
 	/**
 	 * Removes the repository entry where repositoryId = &#63; and mappedId = &#63; from the database.
 	 *
-	 * @param repositoryId the repository ID to search with
-	 * @param mappedId the mapped ID to search with
+	 * @param repositoryId the repository ID
+	 * @param mappedId the mapped ID
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByR_M(long repositoryId, String mappedId)
@@ -1686,9 +1686,9 @@ public class RepositoryEntryPersistenceImpl extends BasePersistenceImpl<Reposito
 	}
 
 	/**
-	 * Counts all the repository entries where uuid = &#63;.
+	 * Returns the number of repository entries where uuid = &#63;.
 	 *
-	 * @param uuid the uuid to search with
+	 * @param uuid the uuid
 	 * @return the number of matching repository entries
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1751,10 +1751,10 @@ public class RepositoryEntryPersistenceImpl extends BasePersistenceImpl<Reposito
 	}
 
 	/**
-	 * Counts all the repository entries where uuid = &#63; and groupId = &#63;.
+	 * Returns the number of repository entries where uuid = &#63; and groupId = &#63;.
 	 *
-	 * @param uuid the uuid to search with
-	 * @param groupId the group ID to search with
+	 * @param uuid the uuid
+	 * @param groupId the group ID
 	 * @return the number of matching repository entries
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1822,9 +1822,9 @@ public class RepositoryEntryPersistenceImpl extends BasePersistenceImpl<Reposito
 	}
 
 	/**
-	 * Counts all the repository entries where repositoryId = &#63;.
+	 * Returns the number of repository entries where repositoryId = &#63;.
 	 *
-	 * @param repositoryId the repository ID to search with
+	 * @param repositoryId the repository ID
 	 * @return the number of matching repository entries
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1875,10 +1875,10 @@ public class RepositoryEntryPersistenceImpl extends BasePersistenceImpl<Reposito
 	}
 
 	/**
-	 * Counts all the repository entries where repositoryId = &#63; and mappedId = &#63;.
+	 * Returns the number of repository entries where repositoryId = &#63; and mappedId = &#63;.
 	 *
-	 * @param repositoryId the repository ID to search with
-	 * @param mappedId the mapped ID to search with
+	 * @param repositoryId the repository ID
+	 * @param mappedId the mapped ID
 	 * @return the number of matching repository entries
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1946,7 +1946,7 @@ public class RepositoryEntryPersistenceImpl extends BasePersistenceImpl<Reposito
 	}
 
 	/**
-	 * Counts all the repository entries.
+	 * Returns the number of repository entries.
 	 *
 	 * @return the number of repository entries
 	 * @throws SystemException if a system exception occurred

@@ -94,7 +94,7 @@ public abstract class ShoppingOrderLocalServiceBaseImpl
 	/**
 	 * Adds the shopping order to the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param shoppingOrder the shopping order to add
+	 * @param shoppingOrder the shopping order
 	 * @return the shopping order that was added
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -118,7 +118,7 @@ public abstract class ShoppingOrderLocalServiceBaseImpl
 	/**
 	 * Deletes the shopping order with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param orderId the primary key of the shopping order to delete
+	 * @param orderId the primary key of the shopping order
 	 * @throws PortalException if a shopping order with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -130,7 +130,7 @@ public abstract class ShoppingOrderLocalServiceBaseImpl
 	/**
 	 * Deletes the shopping order from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param shoppingOrder the shopping order to delete
+	 * @param shoppingOrder the shopping order
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void deleteShoppingOrder(ShoppingOrder shoppingOrder)
@@ -141,7 +141,7 @@ public abstract class ShoppingOrderLocalServiceBaseImpl
 	/**
 	 * Performs a dynamic query on the database and returns the matching rows.
 	 *
-	 * @param dynamicQuery the dynamic query to search with
+	 * @param dynamicQuery the dynamic query
 	 * @return the matching rows
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -158,9 +158,9 @@ public abstract class ShoppingOrderLocalServiceBaseImpl
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param dynamicQuery the dynamic query to search with
-	 * @param start the lower bound of the range of model instances to return
-	 * @param end the upper bound of the range of model instances to return (not inclusive)
+	 * @param dynamicQuery the dynamic query
+	 * @param start the lower bound of the range of model instances
+	 * @param end the upper bound of the range of model instances (not inclusive)
 	 * @return the range of matching rows
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -178,9 +178,9 @@ public abstract class ShoppingOrderLocalServiceBaseImpl
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param dynamicQuery the dynamic query to search with
-	 * @param start the lower bound of the range of model instances to return
-	 * @param end the upper bound of the range of model instances to return (not inclusive)
+	 * @param dynamicQuery the dynamic query
+	 * @param start the lower bound of the range of model instances
+	 * @param end the upper bound of the range of model instances (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching rows
 	 * @throws SystemException if a system exception occurred
@@ -193,9 +193,9 @@ public abstract class ShoppingOrderLocalServiceBaseImpl
 	}
 
 	/**
-	 * Counts the number of rows that match the dynamic query.
+	 * Returns the number of rows that match the dynamic query.
 	 *
-	 * @param dynamicQuery the dynamic query to search with
+	 * @param dynamicQuery the dynamic query
 	 * @return the number of rows that match the dynamic query
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -205,9 +205,9 @@ public abstract class ShoppingOrderLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the shopping order with the primary key.
+	 * Returns the shopping order with the primary key.
 	 *
-	 * @param orderId the primary key of the shopping order to get
+	 * @param orderId the primary key of the shopping order
 	 * @return the shopping order
 	 * @throws PortalException if a shopping order with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -218,14 +218,14 @@ public abstract class ShoppingOrderLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets a range of all the shopping orders.
+	 * Returns a range of all the shopping orders.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param start the lower bound of the range of shopping orders to return
-	 * @param end the upper bound of the range of shopping orders to return (not inclusive)
+	 * @param start the lower bound of the range of shopping orders
+	 * @param end the upper bound of the range of shopping orders (not inclusive)
 	 * @return the range of shopping orders
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -235,7 +235,7 @@ public abstract class ShoppingOrderLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the number of shopping orders.
+	 * Returns the number of shopping orders.
 	 *
 	 * @return the number of shopping orders
 	 * @throws SystemException if a system exception occurred
@@ -247,7 +247,7 @@ public abstract class ShoppingOrderLocalServiceBaseImpl
 	/**
 	 * Updates the shopping order in the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param shoppingOrder the shopping order to update
+	 * @param shoppingOrder the shopping order
 	 * @return the shopping order that was updated
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -261,7 +261,7 @@ public abstract class ShoppingOrderLocalServiceBaseImpl
 	/**
 	 * Updates the shopping order in the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param shoppingOrder the shopping order to update
+	 * @param shoppingOrder the shopping order
 	 * @param merge whether to merge the shopping order with the current session. See {@link com.liferay.portal.service.persistence.BatchSession#update(com.liferay.portal.kernel.dao.orm.Session, com.liferay.portal.model.BaseModel, boolean)} for an explanation.
 	 * @return the shopping order that was updated
 	 * @throws SystemException if a system exception occurred
@@ -274,7 +274,7 @@ public abstract class ShoppingOrderLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the shopping cart local service.
+	 * Returns the shopping cart local service.
 	 *
 	 * @return the shopping cart local service
 	 */
@@ -293,7 +293,7 @@ public abstract class ShoppingOrderLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the shopping cart persistence.
+	 * Returns the shopping cart persistence.
 	 *
 	 * @return the shopping cart persistence
 	 */
@@ -312,7 +312,7 @@ public abstract class ShoppingOrderLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the shopping category local service.
+	 * Returns the shopping category local service.
 	 *
 	 * @return the shopping category local service
 	 */
@@ -331,7 +331,7 @@ public abstract class ShoppingOrderLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the shopping category remote service.
+	 * Returns the shopping category remote service.
 	 *
 	 * @return the shopping category remote service
 	 */
@@ -350,7 +350,7 @@ public abstract class ShoppingOrderLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the shopping category persistence.
+	 * Returns the shopping category persistence.
 	 *
 	 * @return the shopping category persistence
 	 */
@@ -369,7 +369,7 @@ public abstract class ShoppingOrderLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the shopping coupon local service.
+	 * Returns the shopping coupon local service.
 	 *
 	 * @return the shopping coupon local service
 	 */
@@ -388,7 +388,7 @@ public abstract class ShoppingOrderLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the shopping coupon remote service.
+	 * Returns the shopping coupon remote service.
 	 *
 	 * @return the shopping coupon remote service
 	 */
@@ -407,7 +407,7 @@ public abstract class ShoppingOrderLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the shopping coupon persistence.
+	 * Returns the shopping coupon persistence.
 	 *
 	 * @return the shopping coupon persistence
 	 */
@@ -426,7 +426,7 @@ public abstract class ShoppingOrderLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the shopping coupon finder.
+	 * Returns the shopping coupon finder.
 	 *
 	 * @return the shopping coupon finder
 	 */
@@ -445,7 +445,7 @@ public abstract class ShoppingOrderLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the shopping item local service.
+	 * Returns the shopping item local service.
 	 *
 	 * @return the shopping item local service
 	 */
@@ -464,7 +464,7 @@ public abstract class ShoppingOrderLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the shopping item remote service.
+	 * Returns the shopping item remote service.
 	 *
 	 * @return the shopping item remote service
 	 */
@@ -482,7 +482,7 @@ public abstract class ShoppingOrderLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the shopping item persistence.
+	 * Returns the shopping item persistence.
 	 *
 	 * @return the shopping item persistence
 	 */
@@ -501,7 +501,7 @@ public abstract class ShoppingOrderLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the shopping item finder.
+	 * Returns the shopping item finder.
 	 *
 	 * @return the shopping item finder
 	 */
@@ -519,7 +519,7 @@ public abstract class ShoppingOrderLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the shopping item field local service.
+	 * Returns the shopping item field local service.
 	 *
 	 * @return the shopping item field local service
 	 */
@@ -538,7 +538,7 @@ public abstract class ShoppingOrderLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the shopping item field persistence.
+	 * Returns the shopping item field persistence.
 	 *
 	 * @return the shopping item field persistence
 	 */
@@ -557,7 +557,7 @@ public abstract class ShoppingOrderLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the shopping item price local service.
+	 * Returns the shopping item price local service.
 	 *
 	 * @return the shopping item price local service
 	 */
@@ -576,7 +576,7 @@ public abstract class ShoppingOrderLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the shopping item price persistence.
+	 * Returns the shopping item price persistence.
 	 *
 	 * @return the shopping item price persistence
 	 */
@@ -595,7 +595,7 @@ public abstract class ShoppingOrderLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the shopping order local service.
+	 * Returns the shopping order local service.
 	 *
 	 * @return the shopping order local service
 	 */
@@ -614,7 +614,7 @@ public abstract class ShoppingOrderLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the shopping order remote service.
+	 * Returns the shopping order remote service.
 	 *
 	 * @return the shopping order remote service
 	 */
@@ -633,7 +633,7 @@ public abstract class ShoppingOrderLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the shopping order persistence.
+	 * Returns the shopping order persistence.
 	 *
 	 * @return the shopping order persistence
 	 */
@@ -652,7 +652,7 @@ public abstract class ShoppingOrderLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the shopping order finder.
+	 * Returns the shopping order finder.
 	 *
 	 * @return the shopping order finder
 	 */
@@ -670,7 +670,7 @@ public abstract class ShoppingOrderLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the shopping order item local service.
+	 * Returns the shopping order item local service.
 	 *
 	 * @return the shopping order item local service
 	 */
@@ -689,7 +689,7 @@ public abstract class ShoppingOrderLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the shopping order item persistence.
+	 * Returns the shopping order item persistence.
 	 *
 	 * @return the shopping order item persistence
 	 */
@@ -708,7 +708,7 @@ public abstract class ShoppingOrderLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the counter local service.
+	 * Returns the counter local service.
 	 *
 	 * @return the counter local service
 	 */
@@ -726,7 +726,7 @@ public abstract class ShoppingOrderLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the mail remote service.
+	 * Returns the mail remote service.
 	 *
 	 * @return the mail remote service
 	 */
@@ -744,7 +744,7 @@ public abstract class ShoppingOrderLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the company local service.
+	 * Returns the company local service.
 	 *
 	 * @return the company local service
 	 */
@@ -762,7 +762,7 @@ public abstract class ShoppingOrderLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the company remote service.
+	 * Returns the company remote service.
 	 *
 	 * @return the company remote service
 	 */
@@ -780,7 +780,7 @@ public abstract class ShoppingOrderLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the company persistence.
+	 * Returns the company persistence.
 	 *
 	 * @return the company persistence
 	 */
@@ -798,7 +798,7 @@ public abstract class ShoppingOrderLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the resource local service.
+	 * Returns the resource local service.
 	 *
 	 * @return the resource local service
 	 */
@@ -817,7 +817,7 @@ public abstract class ShoppingOrderLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the resource remote service.
+	 * Returns the resource remote service.
 	 *
 	 * @return the resource remote service
 	 */
@@ -835,7 +835,7 @@ public abstract class ShoppingOrderLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the resource persistence.
+	 * Returns the resource persistence.
 	 *
 	 * @return the resource persistence
 	 */
@@ -853,7 +853,7 @@ public abstract class ShoppingOrderLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the resource finder.
+	 * Returns the resource finder.
 	 *
 	 * @return the resource finder
 	 */
@@ -871,7 +871,7 @@ public abstract class ShoppingOrderLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the user local service.
+	 * Returns the user local service.
 	 *
 	 * @return the user local service
 	 */
@@ -889,7 +889,7 @@ public abstract class ShoppingOrderLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the user remote service.
+	 * Returns the user remote service.
 	 *
 	 * @return the user remote service
 	 */
@@ -907,7 +907,7 @@ public abstract class ShoppingOrderLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the user persistence.
+	 * Returns the user persistence.
 	 *
 	 * @return the user persistence
 	 */
@@ -925,7 +925,7 @@ public abstract class ShoppingOrderLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the user finder.
+	 * Returns the user finder.
 	 *
 	 * @return the user finder
 	 */
@@ -943,7 +943,7 @@ public abstract class ShoppingOrderLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the message-boards message local service.
+	 * Returns the message-boards message local service.
 	 *
 	 * @return the message-boards message local service
 	 */
@@ -962,7 +962,7 @@ public abstract class ShoppingOrderLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the message-boards message remote service.
+	 * Returns the message-boards message remote service.
 	 *
 	 * @return the message-boards message remote service
 	 */
@@ -980,7 +980,7 @@ public abstract class ShoppingOrderLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the message-boards message persistence.
+	 * Returns the message-boards message persistence.
 	 *
 	 * @return the message-boards message persistence
 	 */
@@ -999,7 +999,7 @@ public abstract class ShoppingOrderLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the message-boards message finder.
+	 * Returns the message-boards message finder.
 	 *
 	 * @return the message-boards message finder
 	 */
@@ -1017,7 +1017,7 @@ public abstract class ShoppingOrderLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the Spring bean ID for this bean.
+	 * Returns the Spring bean ID for this bean.
 	 *
 	 * @return the Spring bean ID for this bean
 	 */
@@ -1037,7 +1037,7 @@ public abstract class ShoppingOrderLocalServiceBaseImpl
 	/**
 	 * Performs an SQL query.
 	 *
-	 * @param sql the sql query to perform
+	 * @param sql the sql query
 	 */
 	protected void runSQL(String sql) throws SystemException {
 		try {

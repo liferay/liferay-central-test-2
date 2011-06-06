@@ -91,7 +91,7 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl<UserTrac
 	/**
 	 * Caches the user tracker path in the entity cache if it is enabled.
 	 *
-	 * @param userTrackerPath the user tracker path to cache
+	 * @param userTrackerPath the user tracker path
 	 */
 	public void cacheResult(UserTrackerPath userTrackerPath) {
 		EntityCacheUtil.putResult(UserTrackerPathModelImpl.ENTITY_CACHE_ENABLED,
@@ -104,7 +104,7 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl<UserTrac
 	/**
 	 * Caches the user tracker paths in the entity cache if it is enabled.
 	 *
-	 * @param userTrackerPaths the user tracker paths to cache
+	 * @param userTrackerPaths the user tracker paths
 	 */
 	public void cacheResult(List<UserTrackerPath> userTrackerPaths) {
 		for (UserTrackerPath userTrackerPath : userTrackerPaths) {
@@ -164,7 +164,7 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl<UserTrac
 	/**
 	 * Removes the user tracker path with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param primaryKey the primary key of the user tracker path to remove
+	 * @param primaryKey the primary key of the user tracker path
 	 * @return the user tracker path that was removed
 	 * @throws com.liferay.portal.NoSuchModelException if a user tracker path with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -177,7 +177,7 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl<UserTrac
 	/**
 	 * Removes the user tracker path with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param userTrackerPathId the primary key of the user tracker path to remove
+	 * @param userTrackerPathId the primary key of the user tracker path
 	 * @return the user tracker path that was removed
 	 * @throws com.liferay.portal.NoSuchUserTrackerPathException if a user tracker path with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -218,7 +218,7 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl<UserTrac
 	/**
 	 * Removes the user tracker path from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param userTrackerPath the user tracker path to remove
+	 * @param userTrackerPath the user tracker path
 	 * @return the user tracker path that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -302,9 +302,9 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl<UserTrac
 	}
 
 	/**
-	 * Finds the user tracker path with the primary key or throws a {@link com.liferay.portal.NoSuchModelException} if it could not be found.
+	 * Returns the user tracker path with the primary key or throws a {@link com.liferay.portal.NoSuchModelException} if it could not be found.
 	 *
-	 * @param primaryKey the primary key of the user tracker path to find
+	 * @param primaryKey the primary key of the user tracker path
 	 * @return the user tracker path
 	 * @throws com.liferay.portal.NoSuchModelException if a user tracker path with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -315,9 +315,9 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl<UserTrac
 	}
 
 	/**
-	 * Finds the user tracker path with the primary key or throws a {@link com.liferay.portal.NoSuchUserTrackerPathException} if it could not be found.
+	 * Returns the user tracker path with the primary key or throws a {@link com.liferay.portal.NoSuchUserTrackerPathException} if it could not be found.
 	 *
-	 * @param userTrackerPathId the primary key of the user tracker path to find
+	 * @param userTrackerPathId the primary key of the user tracker path
 	 * @return the user tracker path
 	 * @throws com.liferay.portal.NoSuchUserTrackerPathException if a user tracker path with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -339,9 +339,9 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl<UserTrac
 	}
 
 	/**
-	 * Finds the user tracker path with the primary key or returns <code>null</code> if it could not be found.
+	 * Returns the user tracker path with the primary key or returns <code>null</code> if it could not be found.
 	 *
-	 * @param primaryKey the primary key of the user tracker path to find
+	 * @param primaryKey the primary key of the user tracker path
 	 * @return the user tracker path, or <code>null</code> if a user tracker path with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -351,9 +351,9 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl<UserTrac
 	}
 
 	/**
-	 * Finds the user tracker path with the primary key or returns <code>null</code> if it could not be found.
+	 * Returns the user tracker path with the primary key or returns <code>null</code> if it could not be found.
 	 *
-	 * @param userTrackerPathId the primary key of the user tracker path to find
+	 * @param userTrackerPathId the primary key of the user tracker path
 	 * @return the user tracker path, or <code>null</code> if a user tracker path with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -387,9 +387,9 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl<UserTrac
 	}
 
 	/**
-	 * Finds all the user tracker paths where userTrackerId = &#63;.
+	 * Returns all the user tracker paths where userTrackerId = &#63;.
 	 *
-	 * @param userTrackerId the user tracker ID to search with
+	 * @param userTrackerId the user tracker ID
 	 * @return the matching user tracker paths
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -400,15 +400,15 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl<UserTrac
 	}
 
 	/**
-	 * Finds a range of all the user tracker paths where userTrackerId = &#63;.
+	 * Returns a range of all the user tracker paths where userTrackerId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param userTrackerId the user tracker ID to search with
-	 * @param start the lower bound of the range of user tracker paths to return
-	 * @param end the upper bound of the range of user tracker paths to return (not inclusive)
+	 * @param userTrackerId the user tracker ID
+	 * @param start the lower bound of the range of user tracker paths
+	 * @param end the upper bound of the range of user tracker paths (not inclusive)
 	 * @return the range of matching user tracker paths
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -418,15 +418,15 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl<UserTrac
 	}
 
 	/**
-	 * Finds an ordered range of all the user tracker paths where userTrackerId = &#63;.
+	 * Returns an ordered range of all the user tracker paths where userTrackerId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param userTrackerId the user tracker ID to search with
-	 * @param start the lower bound of the range of user tracker paths to return
-	 * @param end the upper bound of the range of user tracker paths to return (not inclusive)
+	 * @param userTrackerId the user tracker ID
+	 * @param start the lower bound of the range of user tracker paths
+	 * @param end the upper bound of the range of user tracker paths (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching user tracker paths
 	 * @throws SystemException if a system exception occurred
@@ -503,13 +503,13 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl<UserTrac
 	}
 
 	/**
-	 * Finds the first user tracker path in the ordered set where userTrackerId = &#63;.
+	 * Returns the first user tracker path in the ordered set where userTrackerId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param userTrackerId the user tracker ID to search with
+	 * @param userTrackerId the user tracker ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching user tracker path
 	 * @throws com.liferay.portal.NoSuchUserTrackerPathException if a matching user tracker path could not be found
@@ -539,13 +539,13 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl<UserTrac
 	}
 
 	/**
-	 * Finds the last user tracker path in the ordered set where userTrackerId = &#63;.
+	 * Returns the last user tracker path in the ordered set where userTrackerId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param userTrackerId the user tracker ID to search with
+	 * @param userTrackerId the user tracker ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching user tracker path
 	 * @throws com.liferay.portal.NoSuchUserTrackerPathException if a matching user tracker path could not be found
@@ -577,14 +577,14 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl<UserTrac
 	}
 
 	/**
-	 * Finds the user tracker paths before and after the current user tracker path in the ordered set where userTrackerId = &#63;.
+	 * Returns the user tracker paths before and after the current user tracker path in the ordered set where userTrackerId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
 	 * @param userTrackerPathId the primary key of the current user tracker path
-	 * @param userTrackerId the user tracker ID to search with
+	 * @param userTrackerId the user tracker ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next user tracker path
 	 * @throws com.liferay.portal.NoSuchUserTrackerPathException if a user tracker path with the primary key could not be found
@@ -722,7 +722,7 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl<UserTrac
 	}
 
 	/**
-	 * Finds all the user tracker paths.
+	 * Returns all the user tracker paths.
 	 *
 	 * @return the user tracker paths
 	 * @throws SystemException if a system exception occurred
@@ -732,14 +732,14 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl<UserTrac
 	}
 
 	/**
-	 * Finds a range of all the user tracker paths.
+	 * Returns a range of all the user tracker paths.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param start the lower bound of the range of user tracker paths to return
-	 * @param end the upper bound of the range of user tracker paths to return (not inclusive)
+	 * @param start the lower bound of the range of user tracker paths
+	 * @param end the upper bound of the range of user tracker paths (not inclusive)
 	 * @return the range of user tracker paths
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -749,14 +749,14 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl<UserTrac
 	}
 
 	/**
-	 * Finds an ordered range of all the user tracker paths.
+	 * Returns an ordered range of all the user tracker paths.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param start the lower bound of the range of user tracker paths to return
-	 * @param end the upper bound of the range of user tracker paths to return (not inclusive)
+	 * @param start the lower bound of the range of user tracker paths
+	 * @param end the upper bound of the range of user tracker paths (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of user tracker paths
 	 * @throws SystemException if a system exception occurred
@@ -833,7 +833,7 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl<UserTrac
 	/**
 	 * Removes all the user tracker paths where userTrackerId = &#63; from the database.
 	 *
-	 * @param userTrackerId the user tracker ID to search with
+	 * @param userTrackerId the user tracker ID
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByUserTrackerId(long userTrackerId)
@@ -856,9 +856,9 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl<UserTrac
 	}
 
 	/**
-	 * Counts all the user tracker paths where userTrackerId = &#63;.
+	 * Returns the number of user tracker paths where userTrackerId = &#63;.
 	 *
-	 * @param userTrackerId the user tracker ID to search with
+	 * @param userTrackerId the user tracker ID
 	 * @return the number of matching user tracker paths
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -910,7 +910,7 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl<UserTrac
 	}
 
 	/**
-	 * Counts all the user tracker paths.
+	 * Returns the number of user tracker paths.
 	 *
 	 * @return the number of user tracker paths
 	 * @throws SystemException if a system exception occurred

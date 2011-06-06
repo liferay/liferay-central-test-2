@@ -94,7 +94,7 @@ public class VirtualHostPersistenceImpl extends BasePersistenceImpl<VirtualHost>
 	/**
 	 * Caches the virtual host in the entity cache if it is enabled.
 	 *
-	 * @param virtualHost the virtual host to cache
+	 * @param virtualHost the virtual host
 	 */
 	public void cacheResult(VirtualHost virtualHost) {
 		EntityCacheUtil.putResult(VirtualHostModelImpl.ENTITY_CACHE_ENABLED,
@@ -115,7 +115,7 @@ public class VirtualHostPersistenceImpl extends BasePersistenceImpl<VirtualHost>
 	/**
 	 * Caches the virtual hosts in the entity cache if it is enabled.
 	 *
-	 * @param virtualHosts the virtual hosts to cache
+	 * @param virtualHosts the virtual hosts
 	 */
 	public void cacheResult(List<VirtualHost> virtualHosts) {
 		for (VirtualHost virtualHost : virtualHosts) {
@@ -183,7 +183,7 @@ public class VirtualHostPersistenceImpl extends BasePersistenceImpl<VirtualHost>
 	/**
 	 * Removes the virtual host with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param primaryKey the primary key of the virtual host to remove
+	 * @param primaryKey the primary key of the virtual host
 	 * @return the virtual host that was removed
 	 * @throws com.liferay.portal.NoSuchModelException if a virtual host with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -196,7 +196,7 @@ public class VirtualHostPersistenceImpl extends BasePersistenceImpl<VirtualHost>
 	/**
 	 * Removes the virtual host with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param virtualHostId the primary key of the virtual host to remove
+	 * @param virtualHostId the primary key of the virtual host
 	 * @return the virtual host that was removed
 	 * @throws com.liferay.portal.NoSuchVirtualHostException if a virtual host with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -236,7 +236,7 @@ public class VirtualHostPersistenceImpl extends BasePersistenceImpl<VirtualHost>
 	/**
 	 * Removes the virtual host from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param virtualHost the virtual host to remove
+	 * @param virtualHost the virtual host
 	 * @return the virtual host that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -368,9 +368,9 @@ public class VirtualHostPersistenceImpl extends BasePersistenceImpl<VirtualHost>
 	}
 
 	/**
-	 * Finds the virtual host with the primary key or throws a {@link com.liferay.portal.NoSuchModelException} if it could not be found.
+	 * Returns the virtual host with the primary key or throws a {@link com.liferay.portal.NoSuchModelException} if it could not be found.
 	 *
-	 * @param primaryKey the primary key of the virtual host to find
+	 * @param primaryKey the primary key of the virtual host
 	 * @return the virtual host
 	 * @throws com.liferay.portal.NoSuchModelException if a virtual host with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -381,9 +381,9 @@ public class VirtualHostPersistenceImpl extends BasePersistenceImpl<VirtualHost>
 	}
 
 	/**
-	 * Finds the virtual host with the primary key or throws a {@link com.liferay.portal.NoSuchVirtualHostException} if it could not be found.
+	 * Returns the virtual host with the primary key or throws a {@link com.liferay.portal.NoSuchVirtualHostException} if it could not be found.
 	 *
-	 * @param virtualHostId the primary key of the virtual host to find
+	 * @param virtualHostId the primary key of the virtual host
 	 * @return the virtual host
 	 * @throws com.liferay.portal.NoSuchVirtualHostException if a virtual host with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -405,9 +405,9 @@ public class VirtualHostPersistenceImpl extends BasePersistenceImpl<VirtualHost>
 	}
 
 	/**
-	 * Finds the virtual host with the primary key or returns <code>null</code> if it could not be found.
+	 * Returns the virtual host with the primary key or returns <code>null</code> if it could not be found.
 	 *
-	 * @param primaryKey the primary key of the virtual host to find
+	 * @param primaryKey the primary key of the virtual host
 	 * @return the virtual host, or <code>null</code> if a virtual host with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -417,9 +417,9 @@ public class VirtualHostPersistenceImpl extends BasePersistenceImpl<VirtualHost>
 	}
 
 	/**
-	 * Finds the virtual host with the primary key or returns <code>null</code> if it could not be found.
+	 * Returns the virtual host with the primary key or returns <code>null</code> if it could not be found.
 	 *
-	 * @param virtualHostId the primary key of the virtual host to find
+	 * @param virtualHostId the primary key of the virtual host
 	 * @return the virtual host, or <code>null</code> if a virtual host with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -453,9 +453,9 @@ public class VirtualHostPersistenceImpl extends BasePersistenceImpl<VirtualHost>
 	}
 
 	/**
-	 * Finds the virtual host where hostname = &#63; or throws a {@link com.liferay.portal.NoSuchVirtualHostException} if it could not be found.
+	 * Returns the virtual host where hostname = &#63; or throws a {@link com.liferay.portal.NoSuchVirtualHostException} if it could not be found.
 	 *
-	 * @param hostname the hostname to search with
+	 * @param hostname the hostname
 	 * @return the matching virtual host
 	 * @throws com.liferay.portal.NoSuchVirtualHostException if a matching virtual host could not be found
 	 * @throws SystemException if a system exception occurred
@@ -485,9 +485,9 @@ public class VirtualHostPersistenceImpl extends BasePersistenceImpl<VirtualHost>
 	}
 
 	/**
-	 * Finds the virtual host where hostname = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 * Returns the virtual host where hostname = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	 *
-	 * @param hostname the hostname to search with
+	 * @param hostname the hostname
 	 * @return the matching virtual host, or <code>null</code> if a matching virtual host could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -497,9 +497,9 @@ public class VirtualHostPersistenceImpl extends BasePersistenceImpl<VirtualHost>
 	}
 
 	/**
-	 * Finds the virtual host where hostname = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 * Returns the virtual host where hostname = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	 *
-	 * @param hostname the hostname to search with
+	 * @param hostname the hostname
 	 * @return the matching virtual host, or <code>null</code> if a matching virtual host could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -593,10 +593,10 @@ public class VirtualHostPersistenceImpl extends BasePersistenceImpl<VirtualHost>
 	}
 
 	/**
-	 * Finds the virtual host where companyId = &#63; and layoutSetId = &#63; or throws a {@link com.liferay.portal.NoSuchVirtualHostException} if it could not be found.
+	 * Returns the virtual host where companyId = &#63; and layoutSetId = &#63; or throws a {@link com.liferay.portal.NoSuchVirtualHostException} if it could not be found.
 	 *
-	 * @param companyId the company ID to search with
-	 * @param layoutSetId the layout set ID to search with
+	 * @param companyId the company ID
+	 * @param layoutSetId the layout set ID
 	 * @return the matching virtual host
 	 * @throws com.liferay.portal.NoSuchVirtualHostException if a matching virtual host could not be found
 	 * @throws SystemException if a system exception occurred
@@ -629,10 +629,10 @@ public class VirtualHostPersistenceImpl extends BasePersistenceImpl<VirtualHost>
 	}
 
 	/**
-	 * Finds the virtual host where companyId = &#63; and layoutSetId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 * Returns the virtual host where companyId = &#63; and layoutSetId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	 *
-	 * @param companyId the company ID to search with
-	 * @param layoutSetId the layout set ID to search with
+	 * @param companyId the company ID
+	 * @param layoutSetId the layout set ID
 	 * @return the matching virtual host, or <code>null</code> if a matching virtual host could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -642,10 +642,10 @@ public class VirtualHostPersistenceImpl extends BasePersistenceImpl<VirtualHost>
 	}
 
 	/**
-	 * Finds the virtual host where companyId = &#63; and layoutSetId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 * Returns the virtual host where companyId = &#63; and layoutSetId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	 *
-	 * @param companyId the company ID to search with
-	 * @param layoutSetId the layout set ID to search with
+	 * @param companyId the company ID
+	 * @param layoutSetId the layout set ID
 	 * @return the matching virtual host, or <code>null</code> if a matching virtual host could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -731,7 +731,7 @@ public class VirtualHostPersistenceImpl extends BasePersistenceImpl<VirtualHost>
 	}
 
 	/**
-	 * Finds all the virtual hosts.
+	 * Returns all the virtual hosts.
 	 *
 	 * @return the virtual hosts
 	 * @throws SystemException if a system exception occurred
@@ -741,14 +741,14 @@ public class VirtualHostPersistenceImpl extends BasePersistenceImpl<VirtualHost>
 	}
 
 	/**
-	 * Finds a range of all the virtual hosts.
+	 * Returns a range of all the virtual hosts.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param start the lower bound of the range of virtual hosts to return
-	 * @param end the upper bound of the range of virtual hosts to return (not inclusive)
+	 * @param start the lower bound of the range of virtual hosts
+	 * @param end the upper bound of the range of virtual hosts (not inclusive)
 	 * @return the range of virtual hosts
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -758,14 +758,14 @@ public class VirtualHostPersistenceImpl extends BasePersistenceImpl<VirtualHost>
 	}
 
 	/**
-	 * Finds an ordered range of all the virtual hosts.
+	 * Returns an ordered range of all the virtual hosts.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param start the lower bound of the range of virtual hosts to return
-	 * @param end the upper bound of the range of virtual hosts to return (not inclusive)
+	 * @param start the lower bound of the range of virtual hosts
+	 * @param end the upper bound of the range of virtual hosts (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of virtual hosts
 	 * @throws SystemException if a system exception occurred
@@ -842,7 +842,7 @@ public class VirtualHostPersistenceImpl extends BasePersistenceImpl<VirtualHost>
 	/**
 	 * Removes the virtual host where hostname = &#63; from the database.
 	 *
-	 * @param hostname the hostname to search with
+	 * @param hostname the hostname
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByHostname(String hostname)
@@ -855,8 +855,8 @@ public class VirtualHostPersistenceImpl extends BasePersistenceImpl<VirtualHost>
 	/**
 	 * Removes the virtual host where companyId = &#63; and layoutSetId = &#63; from the database.
 	 *
-	 * @param companyId the company ID to search with
-	 * @param layoutSetId the layout set ID to search with
+	 * @param companyId the company ID
+	 * @param layoutSetId the layout set ID
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByC_L(long companyId, long layoutSetId)
@@ -878,9 +878,9 @@ public class VirtualHostPersistenceImpl extends BasePersistenceImpl<VirtualHost>
 	}
 
 	/**
-	 * Counts all the virtual hosts where hostname = &#63;.
+	 * Returns the number of virtual hosts where hostname = &#63;.
 	 *
-	 * @param hostname the hostname to search with
+	 * @param hostname the hostname
 	 * @return the number of matching virtual hosts
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -943,10 +943,10 @@ public class VirtualHostPersistenceImpl extends BasePersistenceImpl<VirtualHost>
 	}
 
 	/**
-	 * Counts all the virtual hosts where companyId = &#63; and layoutSetId = &#63;.
+	 * Returns the number of virtual hosts where companyId = &#63; and layoutSetId = &#63;.
 	 *
-	 * @param companyId the company ID to search with
-	 * @param layoutSetId the layout set ID to search with
+	 * @param companyId the company ID
+	 * @param layoutSetId the layout set ID
 	 * @return the number of matching virtual hosts
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1002,7 +1002,7 @@ public class VirtualHostPersistenceImpl extends BasePersistenceImpl<VirtualHost>
 	}
 
 	/**
-	 * Counts all the virtual hosts.
+	 * Returns the number of virtual hosts.
 	 *
 	 * @return the number of virtual hosts
 	 * @throws SystemException if a system exception occurred

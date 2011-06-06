@@ -37,7 +37,7 @@ public class SubscriptionWrapper implements Subscription {
 	}
 
 	/**
-	* Gets the primary key of this subscription.
+	* Returns the primary key of this subscription.
 	*
 	* @return the primary key of this subscription
 	*/
@@ -46,7 +46,7 @@ public class SubscriptionWrapper implements Subscription {
 	}
 
 	/**
-	* Sets the primary key of this subscription
+	* Sets the primary key of this subscription.
 	*
 	* @param primaryKey the primary key of this subscription
 	*/
@@ -55,7 +55,7 @@ public class SubscriptionWrapper implements Subscription {
 	}
 
 	/**
-	* Gets the subscription ID of this subscription.
+	* Returns the subscription ID of this subscription.
 	*
 	* @return the subscription ID of this subscription
 	*/
@@ -73,7 +73,7 @@ public class SubscriptionWrapper implements Subscription {
 	}
 
 	/**
-	* Gets the company ID of this subscription.
+	* Returns the company ID of this subscription.
 	*
 	* @return the company ID of this subscription
 	*/
@@ -91,7 +91,7 @@ public class SubscriptionWrapper implements Subscription {
 	}
 
 	/**
-	* Gets the user ID of this subscription.
+	* Returns the user ID of this subscription.
 	*
 	* @return the user ID of this subscription
 	*/
@@ -109,7 +109,7 @@ public class SubscriptionWrapper implements Subscription {
 	}
 
 	/**
-	* Gets the user uuid of this subscription.
+	* Returns the user uuid of this subscription.
 	*
 	* @return the user uuid of this subscription
 	* @throws SystemException if a system exception occurred
@@ -129,7 +129,7 @@ public class SubscriptionWrapper implements Subscription {
 	}
 
 	/**
-	* Gets the user name of this subscription.
+	* Returns the user name of this subscription.
 	*
 	* @return the user name of this subscription
 	*/
@@ -147,7 +147,7 @@ public class SubscriptionWrapper implements Subscription {
 	}
 
 	/**
-	* Gets the create date of this subscription.
+	* Returns the create date of this subscription.
 	*
 	* @return the create date of this subscription
 	*/
@@ -165,7 +165,7 @@ public class SubscriptionWrapper implements Subscription {
 	}
 
 	/**
-	* Gets the modified date of this subscription.
+	* Returns the modified date of this subscription.
 	*
 	* @return the modified date of this subscription
 	*/
@@ -183,16 +183,16 @@ public class SubscriptionWrapper implements Subscription {
 	}
 
 	/**
-	* Gets the class name of the model instance this subscription is polymorphically associated with.
+	* Returns the fully qualified class name of this subscription.
 	*
-	* @return the class name of the model instance this subscription is polymorphically associated with
+	* @return the fully qualified class name of this subscription
 	*/
 	public java.lang.String getClassName() {
 		return _subscription.getClassName();
 	}
 
 	/**
-	* Gets the class name ID of this subscription.
+	* Returns the class name ID of this subscription.
 	*
 	* @return the class name ID of this subscription
 	*/
@@ -210,7 +210,7 @@ public class SubscriptionWrapper implements Subscription {
 	}
 
 	/**
-	* Gets the class p k of this subscription.
+	* Returns the class p k of this subscription.
 	*
 	* @return the class p k of this subscription
 	*/
@@ -228,7 +228,7 @@ public class SubscriptionWrapper implements Subscription {
 	}
 
 	/**
-	* Gets the frequency of this subscription.
+	* Returns the frequency of this subscription.
 	*
 	* @return the frequency of this subscription
 	*/

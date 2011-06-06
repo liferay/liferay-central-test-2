@@ -37,7 +37,7 @@ public class MBThreadWrapper implements MBThread {
 	}
 
 	/**
-	* Gets the primary key of this message boards thread.
+	* Returns the primary key of this message boards thread.
 	*
 	* @return the primary key of this message boards thread
 	*/
@@ -46,7 +46,7 @@ public class MBThreadWrapper implements MBThread {
 	}
 
 	/**
-	* Sets the primary key of this message boards thread
+	* Sets the primary key of this message boards thread.
 	*
 	* @param primaryKey the primary key of this message boards thread
 	*/
@@ -55,7 +55,7 @@ public class MBThreadWrapper implements MBThread {
 	}
 
 	/**
-	* Gets the thread ID of this message boards thread.
+	* Returns the thread ID of this message boards thread.
 	*
 	* @return the thread ID of this message boards thread
 	*/
@@ -73,7 +73,7 @@ public class MBThreadWrapper implements MBThread {
 	}
 
 	/**
-	* Gets the group ID of this message boards thread.
+	* Returns the group ID of this message boards thread.
 	*
 	* @return the group ID of this message boards thread
 	*/
@@ -91,7 +91,7 @@ public class MBThreadWrapper implements MBThread {
 	}
 
 	/**
-	* Gets the company ID of this message boards thread.
+	* Returns the company ID of this message boards thread.
 	*
 	* @return the company ID of this message boards thread
 	*/
@@ -109,7 +109,7 @@ public class MBThreadWrapper implements MBThread {
 	}
 
 	/**
-	* Gets the category ID of this message boards thread.
+	* Returns the category ID of this message boards thread.
 	*
 	* @return the category ID of this message boards thread
 	*/
@@ -127,7 +127,7 @@ public class MBThreadWrapper implements MBThread {
 	}
 
 	/**
-	* Gets the root message ID of this message boards thread.
+	* Returns the root message ID of this message boards thread.
 	*
 	* @return the root message ID of this message boards thread
 	*/
@@ -145,7 +145,7 @@ public class MBThreadWrapper implements MBThread {
 	}
 
 	/**
-	* Gets the root message user ID of this message boards thread.
+	* Returns the root message user ID of this message boards thread.
 	*
 	* @return the root message user ID of this message boards thread
 	*/
@@ -163,7 +163,7 @@ public class MBThreadWrapper implements MBThread {
 	}
 
 	/**
-	* Gets the root message user uuid of this message boards thread.
+	* Returns the root message user uuid of this message boards thread.
 	*
 	* @return the root message user uuid of this message boards thread
 	* @throws SystemException if a system exception occurred
@@ -183,7 +183,7 @@ public class MBThreadWrapper implements MBThread {
 	}
 
 	/**
-	* Gets the message count of this message boards thread.
+	* Returns the message count of this message boards thread.
 	*
 	* @return the message count of this message boards thread
 	*/
@@ -201,7 +201,7 @@ public class MBThreadWrapper implements MBThread {
 	}
 
 	/**
-	* Gets the view count of this message boards thread.
+	* Returns the view count of this message boards thread.
 	*
 	* @return the view count of this message boards thread
 	*/
@@ -219,7 +219,7 @@ public class MBThreadWrapper implements MBThread {
 	}
 
 	/**
-	* Gets the last post by user ID of this message boards thread.
+	* Returns the last post by user ID of this message boards thread.
 	*
 	* @return the last post by user ID of this message boards thread
 	*/
@@ -237,7 +237,7 @@ public class MBThreadWrapper implements MBThread {
 	}
 
 	/**
-	* Gets the last post by user uuid of this message boards thread.
+	* Returns the last post by user uuid of this message boards thread.
 	*
 	* @return the last post by user uuid of this message boards thread
 	* @throws SystemException if a system exception occurred
@@ -257,7 +257,7 @@ public class MBThreadWrapper implements MBThread {
 	}
 
 	/**
-	* Gets the last post date of this message boards thread.
+	* Returns the last post date of this message boards thread.
 	*
 	* @return the last post date of this message boards thread
 	*/
@@ -275,7 +275,7 @@ public class MBThreadWrapper implements MBThread {
 	}
 
 	/**
-	* Gets the priority of this message boards thread.
+	* Returns the priority of this message boards thread.
 	*
 	* @return the priority of this message boards thread
 	*/
@@ -293,7 +293,7 @@ public class MBThreadWrapper implements MBThread {
 	}
 
 	/**
-	* Gets the status of this message boards thread.
+	* Returns the status of this message boards thread.
 	*
 	* @return the status of this message boards thread
 	*/
@@ -311,7 +311,7 @@ public class MBThreadWrapper implements MBThread {
 	}
 
 	/**
-	* Gets the status by user ID of this message boards thread.
+	* Returns the status by user ID of this message boards thread.
 	*
 	* @return the status by user ID of this message boards thread
 	*/
@@ -329,7 +329,7 @@ public class MBThreadWrapper implements MBThread {
 	}
 
 	/**
-	* Gets the status by user uuid of this message boards thread.
+	* Returns the status by user uuid of this message boards thread.
 	*
 	* @return the status by user uuid of this message boards thread
 	* @throws SystemException if a system exception occurred
@@ -349,7 +349,7 @@ public class MBThreadWrapper implements MBThread {
 	}
 
 	/**
-	* Gets the status by user name of this message boards thread.
+	* Returns the status by user name of this message boards thread.
 	*
 	* @return the status by user name of this message boards thread
 	*/
@@ -367,7 +367,7 @@ public class MBThreadWrapper implements MBThread {
 	}
 
 	/**
-	* Gets the status date of this message boards thread.
+	* Returns the status date of this message boards thread.
 	*
 	* @return the status date of this message boards thread
 	*/
@@ -385,7 +385,7 @@ public class MBThreadWrapper implements MBThread {
 	}
 
 	/**
-	* @deprecated {@link #isApproved}
+	* @deprecated Renamed to {@link #isApproved()}
 	*/
 	public boolean getApproved() {
 		return _mbThread.getApproved();

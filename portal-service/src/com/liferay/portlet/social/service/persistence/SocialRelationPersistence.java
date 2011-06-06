@@ -41,7 +41,7 @@ public interface SocialRelationPersistence extends BasePersistence<SocialRelatio
 	/**
 	* Caches the social relation in the entity cache if it is enabled.
 	*
-	* @param socialRelation the social relation to cache
+	* @param socialRelation the social relation
 	*/
 	public void cacheResult(
 		com.liferay.portlet.social.model.SocialRelation socialRelation);
@@ -49,7 +49,7 @@ public interface SocialRelationPersistence extends BasePersistence<SocialRelatio
 	/**
 	* Caches the social relations in the entity cache if it is enabled.
 	*
-	* @param socialRelations the social relations to cache
+	* @param socialRelations the social relations
 	*/
 	public void cacheResult(
 		java.util.List<com.liferay.portlet.social.model.SocialRelation> socialRelations);
@@ -66,7 +66,7 @@ public interface SocialRelationPersistence extends BasePersistence<SocialRelatio
 	/**
 	* Removes the social relation with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param relationId the primary key of the social relation to remove
+	* @param relationId the primary key of the social relation
 	* @return the social relation that was removed
 	* @throws com.liferay.portlet.social.NoSuchRelationException if a social relation with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -82,9 +82,9 @@ public interface SocialRelationPersistence extends BasePersistence<SocialRelatio
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the social relation with the primary key or throws a {@link com.liferay.portlet.social.NoSuchRelationException} if it could not be found.
+	* Returns the social relation with the primary key or throws a {@link com.liferay.portlet.social.NoSuchRelationException} if it could not be found.
 	*
-	* @param relationId the primary key of the social relation to find
+	* @param relationId the primary key of the social relation
 	* @return the social relation
 	* @throws com.liferay.portlet.social.NoSuchRelationException if a social relation with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -95,9 +95,9 @@ public interface SocialRelationPersistence extends BasePersistence<SocialRelatio
 			com.liferay.portlet.social.NoSuchRelationException;
 
 	/**
-	* Finds the social relation with the primary key or returns <code>null</code> if it could not be found.
+	* Returns the social relation with the primary key or returns <code>null</code> if it could not be found.
 	*
-	* @param relationId the primary key of the social relation to find
+	* @param relationId the primary key of the social relation
 	* @return the social relation, or <code>null</code> if a social relation with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -106,9 +106,9 @@ public interface SocialRelationPersistence extends BasePersistence<SocialRelatio
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds all the social relations where uuid = &#63;.
+	* Returns all the social relations where uuid = &#63;.
 	*
-	* @param uuid the uuid to search with
+	* @param uuid the uuid
 	* @return the matching social relations
 	* @throws SystemException if a system exception occurred
 	*/
@@ -117,15 +117,15 @@ public interface SocialRelationPersistence extends BasePersistence<SocialRelatio
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds a range of all the social relations where uuid = &#63;.
+	* Returns a range of all the social relations where uuid = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param uuid the uuid to search with
-	* @param start the lower bound of the range of social relations to return
-	* @param end the upper bound of the range of social relations to return (not inclusive)
+	* @param uuid the uuid
+	* @param start the lower bound of the range of social relations
+	* @param end the upper bound of the range of social relations (not inclusive)
 	* @return the range of matching social relations
 	* @throws SystemException if a system exception occurred
 	*/
@@ -134,15 +134,15 @@ public interface SocialRelationPersistence extends BasePersistence<SocialRelatio
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds an ordered range of all the social relations where uuid = &#63;.
+	* Returns an ordered range of all the social relations where uuid = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param uuid the uuid to search with
-	* @param start the lower bound of the range of social relations to return
-	* @param end the upper bound of the range of social relations to return (not inclusive)
+	* @param uuid the uuid
+	* @param start the lower bound of the range of social relations
+	* @param end the upper bound of the range of social relations (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching social relations
 	* @throws SystemException if a system exception occurred
@@ -153,13 +153,13 @@ public interface SocialRelationPersistence extends BasePersistence<SocialRelatio
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the first social relation in the ordered set where uuid = &#63;.
+	* Returns the first social relation in the ordered set where uuid = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param uuid the uuid to search with
+	* @param uuid the uuid
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching social relation
 	* @throws com.liferay.portlet.social.NoSuchRelationException if a matching social relation could not be found
@@ -172,13 +172,13 @@ public interface SocialRelationPersistence extends BasePersistence<SocialRelatio
 			com.liferay.portlet.social.NoSuchRelationException;
 
 	/**
-	* Finds the last social relation in the ordered set where uuid = &#63;.
+	* Returns the last social relation in the ordered set where uuid = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param uuid the uuid to search with
+	* @param uuid the uuid
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching social relation
 	* @throws com.liferay.portlet.social.NoSuchRelationException if a matching social relation could not be found
@@ -191,14 +191,14 @@ public interface SocialRelationPersistence extends BasePersistence<SocialRelatio
 			com.liferay.portlet.social.NoSuchRelationException;
 
 	/**
-	* Finds the social relations before and after the current social relation in the ordered set where uuid = &#63;.
+	* Returns the social relations before and after the current social relation in the ordered set where uuid = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
 	* @param relationId the primary key of the current social relation
-	* @param uuid the uuid to search with
+	* @param uuid the uuid
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next social relation
 	* @throws com.liferay.portlet.social.NoSuchRelationException if a social relation with the primary key could not be found
@@ -211,9 +211,9 @@ public interface SocialRelationPersistence extends BasePersistence<SocialRelatio
 			com.liferay.portlet.social.NoSuchRelationException;
 
 	/**
-	* Finds all the social relations where companyId = &#63;.
+	* Returns all the social relations where companyId = &#63;.
 	*
-	* @param companyId the company ID to search with
+	* @param companyId the company ID
 	* @return the matching social relations
 	* @throws SystemException if a system exception occurred
 	*/
@@ -222,15 +222,15 @@ public interface SocialRelationPersistence extends BasePersistence<SocialRelatio
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds a range of all the social relations where companyId = &#63;.
+	* Returns a range of all the social relations where companyId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company ID to search with
-	* @param start the lower bound of the range of social relations to return
-	* @param end the upper bound of the range of social relations to return (not inclusive)
+	* @param companyId the company ID
+	* @param start the lower bound of the range of social relations
+	* @param end the upper bound of the range of social relations (not inclusive)
 	* @return the range of matching social relations
 	* @throws SystemException if a system exception occurred
 	*/
@@ -239,15 +239,15 @@ public interface SocialRelationPersistence extends BasePersistence<SocialRelatio
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds an ordered range of all the social relations where companyId = &#63;.
+	* Returns an ordered range of all the social relations where companyId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company ID to search with
-	* @param start the lower bound of the range of social relations to return
-	* @param end the upper bound of the range of social relations to return (not inclusive)
+	* @param companyId the company ID
+	* @param start the lower bound of the range of social relations
+	* @param end the upper bound of the range of social relations (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching social relations
 	* @throws SystemException if a system exception occurred
@@ -258,13 +258,13 @@ public interface SocialRelationPersistence extends BasePersistence<SocialRelatio
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the first social relation in the ordered set where companyId = &#63;.
+	* Returns the first social relation in the ordered set where companyId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company ID to search with
+	* @param companyId the company ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching social relation
 	* @throws com.liferay.portlet.social.NoSuchRelationException if a matching social relation could not be found
@@ -277,13 +277,13 @@ public interface SocialRelationPersistence extends BasePersistence<SocialRelatio
 			com.liferay.portlet.social.NoSuchRelationException;
 
 	/**
-	* Finds the last social relation in the ordered set where companyId = &#63;.
+	* Returns the last social relation in the ordered set where companyId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company ID to search with
+	* @param companyId the company ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching social relation
 	* @throws com.liferay.portlet.social.NoSuchRelationException if a matching social relation could not be found
@@ -296,14 +296,14 @@ public interface SocialRelationPersistence extends BasePersistence<SocialRelatio
 			com.liferay.portlet.social.NoSuchRelationException;
 
 	/**
-	* Finds the social relations before and after the current social relation in the ordered set where companyId = &#63;.
+	* Returns the social relations before and after the current social relation in the ordered set where companyId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
 	* @param relationId the primary key of the current social relation
-	* @param companyId the company ID to search with
+	* @param companyId the company ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next social relation
 	* @throws com.liferay.portlet.social.NoSuchRelationException if a social relation with the primary key could not be found
@@ -316,9 +316,9 @@ public interface SocialRelationPersistence extends BasePersistence<SocialRelatio
 			com.liferay.portlet.social.NoSuchRelationException;
 
 	/**
-	* Finds all the social relations where userId1 = &#63;.
+	* Returns all the social relations where userId1 = &#63;.
 	*
-	* @param userId1 the user id1 to search with
+	* @param userId1 the user id1
 	* @return the matching social relations
 	* @throws SystemException if a system exception occurred
 	*/
@@ -327,15 +327,15 @@ public interface SocialRelationPersistence extends BasePersistence<SocialRelatio
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds a range of all the social relations where userId1 = &#63;.
+	* Returns a range of all the social relations where userId1 = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param userId1 the user id1 to search with
-	* @param start the lower bound of the range of social relations to return
-	* @param end the upper bound of the range of social relations to return (not inclusive)
+	* @param userId1 the user id1
+	* @param start the lower bound of the range of social relations
+	* @param end the upper bound of the range of social relations (not inclusive)
 	* @return the range of matching social relations
 	* @throws SystemException if a system exception occurred
 	*/
@@ -344,15 +344,15 @@ public interface SocialRelationPersistence extends BasePersistence<SocialRelatio
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds an ordered range of all the social relations where userId1 = &#63;.
+	* Returns an ordered range of all the social relations where userId1 = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param userId1 the user id1 to search with
-	* @param start the lower bound of the range of social relations to return
-	* @param end the upper bound of the range of social relations to return (not inclusive)
+	* @param userId1 the user id1
+	* @param start the lower bound of the range of social relations
+	* @param end the upper bound of the range of social relations (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching social relations
 	* @throws SystemException if a system exception occurred
@@ -363,13 +363,13 @@ public interface SocialRelationPersistence extends BasePersistence<SocialRelatio
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the first social relation in the ordered set where userId1 = &#63;.
+	* Returns the first social relation in the ordered set where userId1 = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param userId1 the user id1 to search with
+	* @param userId1 the user id1
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching social relation
 	* @throws com.liferay.portlet.social.NoSuchRelationException if a matching social relation could not be found
@@ -382,13 +382,13 @@ public interface SocialRelationPersistence extends BasePersistence<SocialRelatio
 			com.liferay.portlet.social.NoSuchRelationException;
 
 	/**
-	* Finds the last social relation in the ordered set where userId1 = &#63;.
+	* Returns the last social relation in the ordered set where userId1 = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param userId1 the user id1 to search with
+	* @param userId1 the user id1
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching social relation
 	* @throws com.liferay.portlet.social.NoSuchRelationException if a matching social relation could not be found
@@ -401,14 +401,14 @@ public interface SocialRelationPersistence extends BasePersistence<SocialRelatio
 			com.liferay.portlet.social.NoSuchRelationException;
 
 	/**
-	* Finds the social relations before and after the current social relation in the ordered set where userId1 = &#63;.
+	* Returns the social relations before and after the current social relation in the ordered set where userId1 = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
 	* @param relationId the primary key of the current social relation
-	* @param userId1 the user id1 to search with
+	* @param userId1 the user id1
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next social relation
 	* @throws com.liferay.portlet.social.NoSuchRelationException if a social relation with the primary key could not be found
@@ -421,9 +421,9 @@ public interface SocialRelationPersistence extends BasePersistence<SocialRelatio
 			com.liferay.portlet.social.NoSuchRelationException;
 
 	/**
-	* Finds all the social relations where userId2 = &#63;.
+	* Returns all the social relations where userId2 = &#63;.
 	*
-	* @param userId2 the user id2 to search with
+	* @param userId2 the user id2
 	* @return the matching social relations
 	* @throws SystemException if a system exception occurred
 	*/
@@ -432,15 +432,15 @@ public interface SocialRelationPersistence extends BasePersistence<SocialRelatio
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds a range of all the social relations where userId2 = &#63;.
+	* Returns a range of all the social relations where userId2 = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param userId2 the user id2 to search with
-	* @param start the lower bound of the range of social relations to return
-	* @param end the upper bound of the range of social relations to return (not inclusive)
+	* @param userId2 the user id2
+	* @param start the lower bound of the range of social relations
+	* @param end the upper bound of the range of social relations (not inclusive)
 	* @return the range of matching social relations
 	* @throws SystemException if a system exception occurred
 	*/
@@ -449,15 +449,15 @@ public interface SocialRelationPersistence extends BasePersistence<SocialRelatio
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds an ordered range of all the social relations where userId2 = &#63;.
+	* Returns an ordered range of all the social relations where userId2 = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param userId2 the user id2 to search with
-	* @param start the lower bound of the range of social relations to return
-	* @param end the upper bound of the range of social relations to return (not inclusive)
+	* @param userId2 the user id2
+	* @param start the lower bound of the range of social relations
+	* @param end the upper bound of the range of social relations (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching social relations
 	* @throws SystemException if a system exception occurred
@@ -468,13 +468,13 @@ public interface SocialRelationPersistence extends BasePersistence<SocialRelatio
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the first social relation in the ordered set where userId2 = &#63;.
+	* Returns the first social relation in the ordered set where userId2 = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param userId2 the user id2 to search with
+	* @param userId2 the user id2
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching social relation
 	* @throws com.liferay.portlet.social.NoSuchRelationException if a matching social relation could not be found
@@ -487,13 +487,13 @@ public interface SocialRelationPersistence extends BasePersistence<SocialRelatio
 			com.liferay.portlet.social.NoSuchRelationException;
 
 	/**
-	* Finds the last social relation in the ordered set where userId2 = &#63;.
+	* Returns the last social relation in the ordered set where userId2 = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param userId2 the user id2 to search with
+	* @param userId2 the user id2
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching social relation
 	* @throws com.liferay.portlet.social.NoSuchRelationException if a matching social relation could not be found
@@ -506,14 +506,14 @@ public interface SocialRelationPersistence extends BasePersistence<SocialRelatio
 			com.liferay.portlet.social.NoSuchRelationException;
 
 	/**
-	* Finds the social relations before and after the current social relation in the ordered set where userId2 = &#63;.
+	* Returns the social relations before and after the current social relation in the ordered set where userId2 = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
 	* @param relationId the primary key of the current social relation
-	* @param userId2 the user id2 to search with
+	* @param userId2 the user id2
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next social relation
 	* @throws com.liferay.portlet.social.NoSuchRelationException if a social relation with the primary key could not be found
@@ -526,9 +526,9 @@ public interface SocialRelationPersistence extends BasePersistence<SocialRelatio
 			com.liferay.portlet.social.NoSuchRelationException;
 
 	/**
-	* Finds all the social relations where type = &#63;.
+	* Returns all the social relations where type = &#63;.
 	*
-	* @param type the type to search with
+	* @param type the type
 	* @return the matching social relations
 	* @throws SystemException if a system exception occurred
 	*/
@@ -536,15 +536,15 @@ public interface SocialRelationPersistence extends BasePersistence<SocialRelatio
 		int type) throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds a range of all the social relations where type = &#63;.
+	* Returns a range of all the social relations where type = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param type the type to search with
-	* @param start the lower bound of the range of social relations to return
-	* @param end the upper bound of the range of social relations to return (not inclusive)
+	* @param type the type
+	* @param start the lower bound of the range of social relations
+	* @param end the upper bound of the range of social relations (not inclusive)
 	* @return the range of matching social relations
 	* @throws SystemException if a system exception occurred
 	*/
@@ -553,15 +553,15 @@ public interface SocialRelationPersistence extends BasePersistence<SocialRelatio
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds an ordered range of all the social relations where type = &#63;.
+	* Returns an ordered range of all the social relations where type = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param type the type to search with
-	* @param start the lower bound of the range of social relations to return
-	* @param end the upper bound of the range of social relations to return (not inclusive)
+	* @param type the type
+	* @param start the lower bound of the range of social relations
+	* @param end the upper bound of the range of social relations (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching social relations
 	* @throws SystemException if a system exception occurred
@@ -572,13 +572,13 @@ public interface SocialRelationPersistence extends BasePersistence<SocialRelatio
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the first social relation in the ordered set where type = &#63;.
+	* Returns the first social relation in the ordered set where type = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param type the type to search with
+	* @param type the type
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching social relation
 	* @throws com.liferay.portlet.social.NoSuchRelationException if a matching social relation could not be found
@@ -591,13 +591,13 @@ public interface SocialRelationPersistence extends BasePersistence<SocialRelatio
 			com.liferay.portlet.social.NoSuchRelationException;
 
 	/**
-	* Finds the last social relation in the ordered set where type = &#63;.
+	* Returns the last social relation in the ordered set where type = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param type the type to search with
+	* @param type the type
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching social relation
 	* @throws com.liferay.portlet.social.NoSuchRelationException if a matching social relation could not be found
@@ -610,14 +610,14 @@ public interface SocialRelationPersistence extends BasePersistence<SocialRelatio
 			com.liferay.portlet.social.NoSuchRelationException;
 
 	/**
-	* Finds the social relations before and after the current social relation in the ordered set where type = &#63;.
+	* Returns the social relations before and after the current social relation in the ordered set where type = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
 	* @param relationId the primary key of the current social relation
-	* @param type the type to search with
+	* @param type the type
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next social relation
 	* @throws com.liferay.portlet.social.NoSuchRelationException if a social relation with the primary key could not be found
@@ -630,10 +630,10 @@ public interface SocialRelationPersistence extends BasePersistence<SocialRelatio
 			com.liferay.portlet.social.NoSuchRelationException;
 
 	/**
-	* Finds all the social relations where companyId = &#63; and type = &#63;.
+	* Returns all the social relations where companyId = &#63; and type = &#63;.
 	*
-	* @param companyId the company ID to search with
-	* @param type the type to search with
+	* @param companyId the company ID
+	* @param type the type
 	* @return the matching social relations
 	* @throws SystemException if a system exception occurred
 	*/
@@ -642,16 +642,16 @@ public interface SocialRelationPersistence extends BasePersistence<SocialRelatio
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds a range of all the social relations where companyId = &#63; and type = &#63;.
+	* Returns a range of all the social relations where companyId = &#63; and type = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company ID to search with
-	* @param type the type to search with
-	* @param start the lower bound of the range of social relations to return
-	* @param end the upper bound of the range of social relations to return (not inclusive)
+	* @param companyId the company ID
+	* @param type the type
+	* @param start the lower bound of the range of social relations
+	* @param end the upper bound of the range of social relations (not inclusive)
 	* @return the range of matching social relations
 	* @throws SystemException if a system exception occurred
 	*/
@@ -660,16 +660,16 @@ public interface SocialRelationPersistence extends BasePersistence<SocialRelatio
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds an ordered range of all the social relations where companyId = &#63; and type = &#63;.
+	* Returns an ordered range of all the social relations where companyId = &#63; and type = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company ID to search with
-	* @param type the type to search with
-	* @param start the lower bound of the range of social relations to return
-	* @param end the upper bound of the range of social relations to return (not inclusive)
+	* @param companyId the company ID
+	* @param type the type
+	* @param start the lower bound of the range of social relations
+	* @param end the upper bound of the range of social relations (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching social relations
 	* @throws SystemException if a system exception occurred
@@ -680,14 +680,14 @@ public interface SocialRelationPersistence extends BasePersistence<SocialRelatio
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the first social relation in the ordered set where companyId = &#63; and type = &#63;.
+	* Returns the first social relation in the ordered set where companyId = &#63; and type = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company ID to search with
-	* @param type the type to search with
+	* @param companyId the company ID
+	* @param type the type
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching social relation
 	* @throws com.liferay.portlet.social.NoSuchRelationException if a matching social relation could not be found
@@ -700,14 +700,14 @@ public interface SocialRelationPersistence extends BasePersistence<SocialRelatio
 			com.liferay.portlet.social.NoSuchRelationException;
 
 	/**
-	* Finds the last social relation in the ordered set where companyId = &#63; and type = &#63;.
+	* Returns the last social relation in the ordered set where companyId = &#63; and type = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company ID to search with
-	* @param type the type to search with
+	* @param companyId the company ID
+	* @param type the type
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching social relation
 	* @throws com.liferay.portlet.social.NoSuchRelationException if a matching social relation could not be found
@@ -720,15 +720,15 @@ public interface SocialRelationPersistence extends BasePersistence<SocialRelatio
 			com.liferay.portlet.social.NoSuchRelationException;
 
 	/**
-	* Finds the social relations before and after the current social relation in the ordered set where companyId = &#63; and type = &#63;.
+	* Returns the social relations before and after the current social relation in the ordered set where companyId = &#63; and type = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
 	* @param relationId the primary key of the current social relation
-	* @param companyId the company ID to search with
-	* @param type the type to search with
+	* @param companyId the company ID
+	* @param type the type
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next social relation
 	* @throws com.liferay.portlet.social.NoSuchRelationException if a social relation with the primary key could not be found
@@ -741,10 +741,10 @@ public interface SocialRelationPersistence extends BasePersistence<SocialRelatio
 			com.liferay.portlet.social.NoSuchRelationException;
 
 	/**
-	* Finds all the social relations where userId1 = &#63; and type = &#63;.
+	* Returns all the social relations where userId1 = &#63; and type = &#63;.
 	*
-	* @param userId1 the user id1 to search with
-	* @param type the type to search with
+	* @param userId1 the user id1
+	* @param type the type
 	* @return the matching social relations
 	* @throws SystemException if a system exception occurred
 	*/
@@ -753,16 +753,16 @@ public interface SocialRelationPersistence extends BasePersistence<SocialRelatio
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds a range of all the social relations where userId1 = &#63; and type = &#63;.
+	* Returns a range of all the social relations where userId1 = &#63; and type = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param userId1 the user id1 to search with
-	* @param type the type to search with
-	* @param start the lower bound of the range of social relations to return
-	* @param end the upper bound of the range of social relations to return (not inclusive)
+	* @param userId1 the user id1
+	* @param type the type
+	* @param start the lower bound of the range of social relations
+	* @param end the upper bound of the range of social relations (not inclusive)
 	* @return the range of matching social relations
 	* @throws SystemException if a system exception occurred
 	*/
@@ -771,16 +771,16 @@ public interface SocialRelationPersistence extends BasePersistence<SocialRelatio
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds an ordered range of all the social relations where userId1 = &#63; and type = &#63;.
+	* Returns an ordered range of all the social relations where userId1 = &#63; and type = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param userId1 the user id1 to search with
-	* @param type the type to search with
-	* @param start the lower bound of the range of social relations to return
-	* @param end the upper bound of the range of social relations to return (not inclusive)
+	* @param userId1 the user id1
+	* @param type the type
+	* @param start the lower bound of the range of social relations
+	* @param end the upper bound of the range of social relations (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching social relations
 	* @throws SystemException if a system exception occurred
@@ -791,14 +791,14 @@ public interface SocialRelationPersistence extends BasePersistence<SocialRelatio
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the first social relation in the ordered set where userId1 = &#63; and type = &#63;.
+	* Returns the first social relation in the ordered set where userId1 = &#63; and type = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param userId1 the user id1 to search with
-	* @param type the type to search with
+	* @param userId1 the user id1
+	* @param type the type
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching social relation
 	* @throws com.liferay.portlet.social.NoSuchRelationException if a matching social relation could not be found
@@ -811,14 +811,14 @@ public interface SocialRelationPersistence extends BasePersistence<SocialRelatio
 			com.liferay.portlet.social.NoSuchRelationException;
 
 	/**
-	* Finds the last social relation in the ordered set where userId1 = &#63; and type = &#63;.
+	* Returns the last social relation in the ordered set where userId1 = &#63; and type = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param userId1 the user id1 to search with
-	* @param type the type to search with
+	* @param userId1 the user id1
+	* @param type the type
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching social relation
 	* @throws com.liferay.portlet.social.NoSuchRelationException if a matching social relation could not be found
@@ -831,15 +831,15 @@ public interface SocialRelationPersistence extends BasePersistence<SocialRelatio
 			com.liferay.portlet.social.NoSuchRelationException;
 
 	/**
-	* Finds the social relations before and after the current social relation in the ordered set where userId1 = &#63; and type = &#63;.
+	* Returns the social relations before and after the current social relation in the ordered set where userId1 = &#63; and type = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
 	* @param relationId the primary key of the current social relation
-	* @param userId1 the user id1 to search with
-	* @param type the type to search with
+	* @param userId1 the user id1
+	* @param type the type
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next social relation
 	* @throws com.liferay.portlet.social.NoSuchRelationException if a social relation with the primary key could not be found
@@ -852,10 +852,10 @@ public interface SocialRelationPersistence extends BasePersistence<SocialRelatio
 			com.liferay.portlet.social.NoSuchRelationException;
 
 	/**
-	* Finds all the social relations where userId2 = &#63; and type = &#63;.
+	* Returns all the social relations where userId2 = &#63; and type = &#63;.
 	*
-	* @param userId2 the user id2 to search with
-	* @param type the type to search with
+	* @param userId2 the user id2
+	* @param type the type
 	* @return the matching social relations
 	* @throws SystemException if a system exception occurred
 	*/
@@ -864,16 +864,16 @@ public interface SocialRelationPersistence extends BasePersistence<SocialRelatio
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds a range of all the social relations where userId2 = &#63; and type = &#63;.
+	* Returns a range of all the social relations where userId2 = &#63; and type = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param userId2 the user id2 to search with
-	* @param type the type to search with
-	* @param start the lower bound of the range of social relations to return
-	* @param end the upper bound of the range of social relations to return (not inclusive)
+	* @param userId2 the user id2
+	* @param type the type
+	* @param start the lower bound of the range of social relations
+	* @param end the upper bound of the range of social relations (not inclusive)
 	* @return the range of matching social relations
 	* @throws SystemException if a system exception occurred
 	*/
@@ -882,16 +882,16 @@ public interface SocialRelationPersistence extends BasePersistence<SocialRelatio
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds an ordered range of all the social relations where userId2 = &#63; and type = &#63;.
+	* Returns an ordered range of all the social relations where userId2 = &#63; and type = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param userId2 the user id2 to search with
-	* @param type the type to search with
-	* @param start the lower bound of the range of social relations to return
-	* @param end the upper bound of the range of social relations to return (not inclusive)
+	* @param userId2 the user id2
+	* @param type the type
+	* @param start the lower bound of the range of social relations
+	* @param end the upper bound of the range of social relations (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching social relations
 	* @throws SystemException if a system exception occurred
@@ -902,14 +902,14 @@ public interface SocialRelationPersistence extends BasePersistence<SocialRelatio
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the first social relation in the ordered set where userId2 = &#63; and type = &#63;.
+	* Returns the first social relation in the ordered set where userId2 = &#63; and type = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param userId2 the user id2 to search with
-	* @param type the type to search with
+	* @param userId2 the user id2
+	* @param type the type
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching social relation
 	* @throws com.liferay.portlet.social.NoSuchRelationException if a matching social relation could not be found
@@ -922,14 +922,14 @@ public interface SocialRelationPersistence extends BasePersistence<SocialRelatio
 			com.liferay.portlet.social.NoSuchRelationException;
 
 	/**
-	* Finds the last social relation in the ordered set where userId2 = &#63; and type = &#63;.
+	* Returns the last social relation in the ordered set where userId2 = &#63; and type = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param userId2 the user id2 to search with
-	* @param type the type to search with
+	* @param userId2 the user id2
+	* @param type the type
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching social relation
 	* @throws com.liferay.portlet.social.NoSuchRelationException if a matching social relation could not be found
@@ -942,15 +942,15 @@ public interface SocialRelationPersistence extends BasePersistence<SocialRelatio
 			com.liferay.portlet.social.NoSuchRelationException;
 
 	/**
-	* Finds the social relations before and after the current social relation in the ordered set where userId2 = &#63; and type = &#63;.
+	* Returns the social relations before and after the current social relation in the ordered set where userId2 = &#63; and type = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
 	* @param relationId the primary key of the current social relation
-	* @param userId2 the user id2 to search with
-	* @param type the type to search with
+	* @param userId2 the user id2
+	* @param type the type
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next social relation
 	* @throws com.liferay.portlet.social.NoSuchRelationException if a social relation with the primary key could not be found
@@ -963,11 +963,11 @@ public interface SocialRelationPersistence extends BasePersistence<SocialRelatio
 			com.liferay.portlet.social.NoSuchRelationException;
 
 	/**
-	* Finds the social relation where userId1 = &#63; and userId2 = &#63; and type = &#63; or throws a {@link com.liferay.portlet.social.NoSuchRelationException} if it could not be found.
+	* Returns the social relation where userId1 = &#63; and userId2 = &#63; and type = &#63; or throws a {@link com.liferay.portlet.social.NoSuchRelationException} if it could not be found.
 	*
-	* @param userId1 the user id1 to search with
-	* @param userId2 the user id2 to search with
-	* @param type the type to search with
+	* @param userId1 the user id1
+	* @param userId2 the user id2
+	* @param type the type
 	* @return the matching social relation
 	* @throws com.liferay.portlet.social.NoSuchRelationException if a matching social relation could not be found
 	* @throws SystemException if a system exception occurred
@@ -978,11 +978,11 @@ public interface SocialRelationPersistence extends BasePersistence<SocialRelatio
 			com.liferay.portlet.social.NoSuchRelationException;
 
 	/**
-	* Finds the social relation where userId1 = &#63; and userId2 = &#63; and type = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	* Returns the social relation where userId1 = &#63; and userId2 = &#63; and type = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	*
-	* @param userId1 the user id1 to search with
-	* @param userId2 the user id2 to search with
-	* @param type the type to search with
+	* @param userId1 the user id1
+	* @param userId2 the user id2
+	* @param type the type
 	* @return the matching social relation, or <code>null</code> if a matching social relation could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -991,11 +991,11 @@ public interface SocialRelationPersistence extends BasePersistence<SocialRelatio
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the social relation where userId1 = &#63; and userId2 = &#63; and type = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	* Returns the social relation where userId1 = &#63; and userId2 = &#63; and type = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
-	* @param userId1 the user id1 to search with
-	* @param userId2 the user id2 to search with
-	* @param type the type to search with
+	* @param userId1 the user id1
+	* @param userId2 the user id2
+	* @param type the type
 	* @return the matching social relation, or <code>null</code> if a matching social relation could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1004,7 +1004,7 @@ public interface SocialRelationPersistence extends BasePersistence<SocialRelatio
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds all the social relations.
+	* Returns all the social relations.
 	*
 	* @return the social relations
 	* @throws SystemException if a system exception occurred
@@ -1013,14 +1013,14 @@ public interface SocialRelationPersistence extends BasePersistence<SocialRelatio
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds a range of all the social relations.
+	* Returns a range of all the social relations.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of social relations to return
-	* @param end the upper bound of the range of social relations to return (not inclusive)
+	* @param start the lower bound of the range of social relations
+	* @param end the upper bound of the range of social relations (not inclusive)
 	* @return the range of social relations
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1029,14 +1029,14 @@ public interface SocialRelationPersistence extends BasePersistence<SocialRelatio
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds an ordered range of all the social relations.
+	* Returns an ordered range of all the social relations.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of social relations to return
-	* @param end the upper bound of the range of social relations to return (not inclusive)
+	* @param start the lower bound of the range of social relations
+	* @param end the upper bound of the range of social relations (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of social relations
 	* @throws SystemException if a system exception occurred
@@ -1049,7 +1049,7 @@ public interface SocialRelationPersistence extends BasePersistence<SocialRelatio
 	/**
 	* Removes all the social relations where uuid = &#63; from the database.
 	*
-	* @param uuid the uuid to search with
+	* @param uuid the uuid
 	* @throws SystemException if a system exception occurred
 	*/
 	public void removeByUuid(java.lang.String uuid)
@@ -1058,7 +1058,7 @@ public interface SocialRelationPersistence extends BasePersistence<SocialRelatio
 	/**
 	* Removes all the social relations where companyId = &#63; from the database.
 	*
-	* @param companyId the company ID to search with
+	* @param companyId the company ID
 	* @throws SystemException if a system exception occurred
 	*/
 	public void removeByCompanyId(long companyId)
@@ -1067,7 +1067,7 @@ public interface SocialRelationPersistence extends BasePersistence<SocialRelatio
 	/**
 	* Removes all the social relations where userId1 = &#63; from the database.
 	*
-	* @param userId1 the user id1 to search with
+	* @param userId1 the user id1
 	* @throws SystemException if a system exception occurred
 	*/
 	public void removeByUserId1(long userId1)
@@ -1076,7 +1076,7 @@ public interface SocialRelationPersistence extends BasePersistence<SocialRelatio
 	/**
 	* Removes all the social relations where userId2 = &#63; from the database.
 	*
-	* @param userId2 the user id2 to search with
+	* @param userId2 the user id2
 	* @throws SystemException if a system exception occurred
 	*/
 	public void removeByUserId2(long userId2)
@@ -1085,7 +1085,7 @@ public interface SocialRelationPersistence extends BasePersistence<SocialRelatio
 	/**
 	* Removes all the social relations where type = &#63; from the database.
 	*
-	* @param type the type to search with
+	* @param type the type
 	* @throws SystemException if a system exception occurred
 	*/
 	public void removeByType(int type)
@@ -1094,8 +1094,8 @@ public interface SocialRelationPersistence extends BasePersistence<SocialRelatio
 	/**
 	* Removes all the social relations where companyId = &#63; and type = &#63; from the database.
 	*
-	* @param companyId the company ID to search with
-	* @param type the type to search with
+	* @param companyId the company ID
+	* @param type the type
 	* @throws SystemException if a system exception occurred
 	*/
 	public void removeByC_T(long companyId, int type)
@@ -1104,8 +1104,8 @@ public interface SocialRelationPersistence extends BasePersistence<SocialRelatio
 	/**
 	* Removes all the social relations where userId1 = &#63; and type = &#63; from the database.
 	*
-	* @param userId1 the user id1 to search with
-	* @param type the type to search with
+	* @param userId1 the user id1
+	* @param type the type
 	* @throws SystemException if a system exception occurred
 	*/
 	public void removeByU1_T(long userId1, int type)
@@ -1114,8 +1114,8 @@ public interface SocialRelationPersistence extends BasePersistence<SocialRelatio
 	/**
 	* Removes all the social relations where userId2 = &#63; and type = &#63; from the database.
 	*
-	* @param userId2 the user id2 to search with
-	* @param type the type to search with
+	* @param userId2 the user id2
+	* @param type the type
 	* @throws SystemException if a system exception occurred
 	*/
 	public void removeByU2_T(long userId2, int type)
@@ -1124,9 +1124,9 @@ public interface SocialRelationPersistence extends BasePersistence<SocialRelatio
 	/**
 	* Removes the social relation where userId1 = &#63; and userId2 = &#63; and type = &#63; from the database.
 	*
-	* @param userId1 the user id1 to search with
-	* @param userId2 the user id2 to search with
-	* @param type the type to search with
+	* @param userId1 the user id1
+	* @param userId2 the user id2
+	* @param type the type
 	* @throws SystemException if a system exception occurred
 	*/
 	public void removeByU1_U2_T(long userId1, long userId2, int type)
@@ -1142,9 +1142,9 @@ public interface SocialRelationPersistence extends BasePersistence<SocialRelatio
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Counts all the social relations where uuid = &#63;.
+	* Returns the number of social relations where uuid = &#63;.
 	*
-	* @param uuid the uuid to search with
+	* @param uuid the uuid
 	* @return the number of matching social relations
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1152,9 +1152,9 @@ public interface SocialRelationPersistence extends BasePersistence<SocialRelatio
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Counts all the social relations where companyId = &#63;.
+	* Returns the number of social relations where companyId = &#63;.
 	*
-	* @param companyId the company ID to search with
+	* @param companyId the company ID
 	* @return the number of matching social relations
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1162,9 +1162,9 @@ public interface SocialRelationPersistence extends BasePersistence<SocialRelatio
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Counts all the social relations where userId1 = &#63;.
+	* Returns the number of social relations where userId1 = &#63;.
 	*
-	* @param userId1 the user id1 to search with
+	* @param userId1 the user id1
 	* @return the number of matching social relations
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1172,9 +1172,9 @@ public interface SocialRelationPersistence extends BasePersistence<SocialRelatio
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Counts all the social relations where userId2 = &#63;.
+	* Returns the number of social relations where userId2 = &#63;.
 	*
-	* @param userId2 the user id2 to search with
+	* @param userId2 the user id2
 	* @return the number of matching social relations
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1182,9 +1182,9 @@ public interface SocialRelationPersistence extends BasePersistence<SocialRelatio
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Counts all the social relations where type = &#63;.
+	* Returns the number of social relations where type = &#63;.
 	*
-	* @param type the type to search with
+	* @param type the type
 	* @return the number of matching social relations
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1192,10 +1192,10 @@ public interface SocialRelationPersistence extends BasePersistence<SocialRelatio
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Counts all the social relations where companyId = &#63; and type = &#63;.
+	* Returns the number of social relations where companyId = &#63; and type = &#63;.
 	*
-	* @param companyId the company ID to search with
-	* @param type the type to search with
+	* @param companyId the company ID
+	* @param type the type
 	* @return the number of matching social relations
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1203,10 +1203,10 @@ public interface SocialRelationPersistence extends BasePersistence<SocialRelatio
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Counts all the social relations where userId1 = &#63; and type = &#63;.
+	* Returns the number of social relations where userId1 = &#63; and type = &#63;.
 	*
-	* @param userId1 the user id1 to search with
-	* @param type the type to search with
+	* @param userId1 the user id1
+	* @param type the type
 	* @return the number of matching social relations
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1214,10 +1214,10 @@ public interface SocialRelationPersistence extends BasePersistence<SocialRelatio
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Counts all the social relations where userId2 = &#63; and type = &#63;.
+	* Returns the number of social relations where userId2 = &#63; and type = &#63;.
 	*
-	* @param userId2 the user id2 to search with
-	* @param type the type to search with
+	* @param userId2 the user id2
+	* @param type the type
 	* @return the number of matching social relations
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1225,11 +1225,11 @@ public interface SocialRelationPersistence extends BasePersistence<SocialRelatio
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Counts all the social relations where userId1 = &#63; and userId2 = &#63; and type = &#63;.
+	* Returns the number of social relations where userId1 = &#63; and userId2 = &#63; and type = &#63;.
 	*
-	* @param userId1 the user id1 to search with
-	* @param userId2 the user id2 to search with
-	* @param type the type to search with
+	* @param userId1 the user id1
+	* @param userId2 the user id2
+	* @param type the type
 	* @return the number of matching social relations
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1237,7 +1237,7 @@ public interface SocialRelationPersistence extends BasePersistence<SocialRelatio
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Counts all the social relations.
+	* Returns the number of social relations.
 	*
 	* @return the number of social relations
 	* @throws SystemException if a system exception occurred

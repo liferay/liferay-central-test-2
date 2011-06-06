@@ -84,7 +84,7 @@ public abstract class DLAppLocalServiceBaseImpl implements DLAppLocalService,
 	 */
 
 	/**
-	 * Gets the d l app local service.
+	 * Returns the d l app local service.
 	 *
 	 * @return the d l app local service
 	 */
@@ -102,7 +102,7 @@ public abstract class DLAppLocalServiceBaseImpl implements DLAppLocalService,
 	}
 
 	/**
-	 * Gets the d l app remote service.
+	 * Returns the d l app remote service.
 	 *
 	 * @return the d l app remote service
 	 */
@@ -120,7 +120,7 @@ public abstract class DLAppLocalServiceBaseImpl implements DLAppLocalService,
 	}
 
 	/**
-	 * Gets the d l app helper local service.
+	 * Returns the d l app helper local service.
 	 *
 	 * @return the d l app helper local service
 	 */
@@ -139,7 +139,7 @@ public abstract class DLAppLocalServiceBaseImpl implements DLAppLocalService,
 	}
 
 	/**
-	 * Gets the d l document metadata set local service.
+	 * Returns the d l document metadata set local service.
 	 *
 	 * @return the d l document metadata set local service
 	 */
@@ -158,7 +158,7 @@ public abstract class DLAppLocalServiceBaseImpl implements DLAppLocalService,
 	}
 
 	/**
-	 * Gets the d l document metadata set persistence.
+	 * Returns the d l document metadata set persistence.
 	 *
 	 * @return the d l document metadata set persistence
 	 */
@@ -177,7 +177,7 @@ public abstract class DLAppLocalServiceBaseImpl implements DLAppLocalService,
 	}
 
 	/**
-	 * Gets the d l document type local service.
+	 * Returns the d l document type local service.
 	 *
 	 * @return the d l document type local service
 	 */
@@ -196,7 +196,7 @@ public abstract class DLAppLocalServiceBaseImpl implements DLAppLocalService,
 	}
 
 	/**
-	 * Gets the d l document type remote service.
+	 * Returns the d l document type remote service.
 	 *
 	 * @return the d l document type remote service
 	 */
@@ -215,7 +215,7 @@ public abstract class DLAppLocalServiceBaseImpl implements DLAppLocalService,
 	}
 
 	/**
-	 * Gets the d l document type persistence.
+	 * Returns the d l document type persistence.
 	 *
 	 * @return the d l document type persistence
 	 */
@@ -234,7 +234,7 @@ public abstract class DLAppLocalServiceBaseImpl implements DLAppLocalService,
 	}
 
 	/**
-	 * Gets the d l document type finder.
+	 * Returns the d l document type finder.
 	 *
 	 * @return the d l document type finder
 	 */
@@ -253,7 +253,7 @@ public abstract class DLAppLocalServiceBaseImpl implements DLAppLocalService,
 	}
 
 	/**
-	 * Gets the d l file entry local service.
+	 * Returns the d l file entry local service.
 	 *
 	 * @return the d l file entry local service
 	 */
@@ -272,7 +272,7 @@ public abstract class DLAppLocalServiceBaseImpl implements DLAppLocalService,
 	}
 
 	/**
-	 * Gets the d l file entry remote service.
+	 * Returns the d l file entry remote service.
 	 *
 	 * @return the d l file entry remote service
 	 */
@@ -290,7 +290,7 @@ public abstract class DLAppLocalServiceBaseImpl implements DLAppLocalService,
 	}
 
 	/**
-	 * Gets the d l file entry persistence.
+	 * Returns the d l file entry persistence.
 	 *
 	 * @return the d l file entry persistence
 	 */
@@ -309,7 +309,7 @@ public abstract class DLAppLocalServiceBaseImpl implements DLAppLocalService,
 	}
 
 	/**
-	 * Gets the d l file entry finder.
+	 * Returns the d l file entry finder.
 	 *
 	 * @return the d l file entry finder
 	 */
@@ -327,7 +327,7 @@ public abstract class DLAppLocalServiceBaseImpl implements DLAppLocalService,
 	}
 
 	/**
-	 * Gets the d l file rank local service.
+	 * Returns the d l file rank local service.
 	 *
 	 * @return the d l file rank local service
 	 */
@@ -346,7 +346,7 @@ public abstract class DLAppLocalServiceBaseImpl implements DLAppLocalService,
 	}
 
 	/**
-	 * Gets the d l file rank persistence.
+	 * Returns the d l file rank persistence.
 	 *
 	 * @return the d l file rank persistence
 	 */
@@ -365,7 +365,7 @@ public abstract class DLAppLocalServiceBaseImpl implements DLAppLocalService,
 	}
 
 	/**
-	 * Gets the d l file rank finder.
+	 * Returns the d l file rank finder.
 	 *
 	 * @return the d l file rank finder
 	 */
@@ -383,7 +383,7 @@ public abstract class DLAppLocalServiceBaseImpl implements DLAppLocalService,
 	}
 
 	/**
-	 * Gets the d l file shortcut local service.
+	 * Returns the d l file shortcut local service.
 	 *
 	 * @return the d l file shortcut local service
 	 */
@@ -402,7 +402,7 @@ public abstract class DLAppLocalServiceBaseImpl implements DLAppLocalService,
 	}
 
 	/**
-	 * Gets the d l file shortcut remote service.
+	 * Returns the d l file shortcut remote service.
 	 *
 	 * @return the d l file shortcut remote service
 	 */
@@ -421,7 +421,7 @@ public abstract class DLAppLocalServiceBaseImpl implements DLAppLocalService,
 	}
 
 	/**
-	 * Gets the d l file shortcut persistence.
+	 * Returns the d l file shortcut persistence.
 	 *
 	 * @return the d l file shortcut persistence
 	 */
@@ -440,7 +440,7 @@ public abstract class DLAppLocalServiceBaseImpl implements DLAppLocalService,
 	}
 
 	/**
-	 * Gets the d l file version persistence.
+	 * Returns the d l file version persistence.
 	 *
 	 * @return the d l file version persistence
 	 */
@@ -459,7 +459,7 @@ public abstract class DLAppLocalServiceBaseImpl implements DLAppLocalService,
 	}
 
 	/**
-	 * Gets the d l folder local service.
+	 * Returns the d l folder local service.
 	 *
 	 * @return the d l folder local service
 	 */
@@ -478,7 +478,7 @@ public abstract class DLAppLocalServiceBaseImpl implements DLAppLocalService,
 	}
 
 	/**
-	 * Gets the d l folder remote service.
+	 * Returns the d l folder remote service.
 	 *
 	 * @return the d l folder remote service
 	 */
@@ -496,7 +496,7 @@ public abstract class DLAppLocalServiceBaseImpl implements DLAppLocalService,
 	}
 
 	/**
-	 * Gets the d l folder persistence.
+	 * Returns the d l folder persistence.
 	 *
 	 * @return the d l folder persistence
 	 */
@@ -514,7 +514,7 @@ public abstract class DLAppLocalServiceBaseImpl implements DLAppLocalService,
 	}
 
 	/**
-	 * Gets the d l folder finder.
+	 * Returns the d l folder finder.
 	 *
 	 * @return the d l folder finder
 	 */
@@ -532,7 +532,7 @@ public abstract class DLAppLocalServiceBaseImpl implements DLAppLocalService,
 	}
 
 	/**
-	 * Gets the counter local service.
+	 * Returns the counter local service.
 	 *
 	 * @return the counter local service
 	 */
@@ -550,7 +550,7 @@ public abstract class DLAppLocalServiceBaseImpl implements DLAppLocalService,
 	}
 
 	/**
-	 * Gets the lock local service.
+	 * Returns the lock local service.
 	 *
 	 * @return the lock local service
 	 */
@@ -568,7 +568,7 @@ public abstract class DLAppLocalServiceBaseImpl implements DLAppLocalService,
 	}
 
 	/**
-	 * Gets the lock persistence.
+	 * Returns the lock persistence.
 	 *
 	 * @return the lock persistence
 	 */
@@ -586,7 +586,7 @@ public abstract class DLAppLocalServiceBaseImpl implements DLAppLocalService,
 	}
 
 	/**
-	 * Gets the repository remote service.
+	 * Returns the repository remote service.
 	 *
 	 * @return the repository remote service
 	 */
@@ -604,7 +604,7 @@ public abstract class DLAppLocalServiceBaseImpl implements DLAppLocalService,
 	}
 
 	/**
-	 * Gets the repository persistence.
+	 * Returns the repository persistence.
 	 *
 	 * @return the repository persistence
 	 */
@@ -623,7 +623,7 @@ public abstract class DLAppLocalServiceBaseImpl implements DLAppLocalService,
 	}
 
 	/**
-	 * Gets the repository entry persistence.
+	 * Returns the repository entry persistence.
 	 *
 	 * @return the repository entry persistence
 	 */
@@ -642,7 +642,7 @@ public abstract class DLAppLocalServiceBaseImpl implements DLAppLocalService,
 	}
 
 	/**
-	 * Gets the resource local service.
+	 * Returns the resource local service.
 	 *
 	 * @return the resource local service
 	 */
@@ -661,7 +661,7 @@ public abstract class DLAppLocalServiceBaseImpl implements DLAppLocalService,
 	}
 
 	/**
-	 * Gets the resource remote service.
+	 * Returns the resource remote service.
 	 *
 	 * @return the resource remote service
 	 */
@@ -679,7 +679,7 @@ public abstract class DLAppLocalServiceBaseImpl implements DLAppLocalService,
 	}
 
 	/**
-	 * Gets the resource persistence.
+	 * Returns the resource persistence.
 	 *
 	 * @return the resource persistence
 	 */
@@ -697,7 +697,7 @@ public abstract class DLAppLocalServiceBaseImpl implements DLAppLocalService,
 	}
 
 	/**
-	 * Gets the resource finder.
+	 * Returns the resource finder.
 	 *
 	 * @return the resource finder
 	 */
@@ -715,7 +715,7 @@ public abstract class DLAppLocalServiceBaseImpl implements DLAppLocalService,
 	}
 
 	/**
-	 * Gets the user local service.
+	 * Returns the user local service.
 	 *
 	 * @return the user local service
 	 */
@@ -733,7 +733,7 @@ public abstract class DLAppLocalServiceBaseImpl implements DLAppLocalService,
 	}
 
 	/**
-	 * Gets the user remote service.
+	 * Returns the user remote service.
 	 *
 	 * @return the user remote service
 	 */
@@ -751,7 +751,7 @@ public abstract class DLAppLocalServiceBaseImpl implements DLAppLocalService,
 	}
 
 	/**
-	 * Gets the user persistence.
+	 * Returns the user persistence.
 	 *
 	 * @return the user persistence
 	 */
@@ -769,7 +769,7 @@ public abstract class DLAppLocalServiceBaseImpl implements DLAppLocalService,
 	}
 
 	/**
-	 * Gets the user finder.
+	 * Returns the user finder.
 	 *
 	 * @return the user finder
 	 */
@@ -787,7 +787,7 @@ public abstract class DLAppLocalServiceBaseImpl implements DLAppLocalService,
 	}
 
 	/**
-	 * Gets the Spring bean ID for this bean.
+	 * Returns the Spring bean ID for this bean.
 	 *
 	 * @return the Spring bean ID for this bean
 	 */
@@ -807,7 +807,7 @@ public abstract class DLAppLocalServiceBaseImpl implements DLAppLocalService,
 	/**
 	 * Performs an SQL query.
 	 *
-	 * @param sql the sql query to perform
+	 * @param sql the sql query
 	 */
 	protected void runSQL(String sql) throws SystemException {
 		try {

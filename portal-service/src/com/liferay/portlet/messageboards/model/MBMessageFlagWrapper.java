@@ -37,7 +37,7 @@ public class MBMessageFlagWrapper implements MBMessageFlag {
 	}
 
 	/**
-	* Gets the primary key of this message boards message flag.
+	* Returns the primary key of this message boards message flag.
 	*
 	* @return the primary key of this message boards message flag
 	*/
@@ -46,7 +46,7 @@ public class MBMessageFlagWrapper implements MBMessageFlag {
 	}
 
 	/**
-	* Sets the primary key of this message boards message flag
+	* Sets the primary key of this message boards message flag.
 	*
 	* @param primaryKey the primary key of this message boards message flag
 	*/
@@ -55,7 +55,7 @@ public class MBMessageFlagWrapper implements MBMessageFlag {
 	}
 
 	/**
-	* Gets the message flag ID of this message boards message flag.
+	* Returns the message flag ID of this message boards message flag.
 	*
 	* @return the message flag ID of this message boards message flag
 	*/
@@ -73,7 +73,7 @@ public class MBMessageFlagWrapper implements MBMessageFlag {
 	}
 
 	/**
-	* Gets the user ID of this message boards message flag.
+	* Returns the user ID of this message boards message flag.
 	*
 	* @return the user ID of this message boards message flag
 	*/
@@ -91,7 +91,7 @@ public class MBMessageFlagWrapper implements MBMessageFlag {
 	}
 
 	/**
-	* Gets the user uuid of this message boards message flag.
+	* Returns the user uuid of this message boards message flag.
 	*
 	* @return the user uuid of this message boards message flag
 	* @throws SystemException if a system exception occurred
@@ -111,7 +111,7 @@ public class MBMessageFlagWrapper implements MBMessageFlag {
 	}
 
 	/**
-	* Gets the modified date of this message boards message flag.
+	* Returns the modified date of this message boards message flag.
 	*
 	* @return the modified date of this message boards message flag
 	*/
@@ -129,7 +129,7 @@ public class MBMessageFlagWrapper implements MBMessageFlag {
 	}
 
 	/**
-	* Gets the thread ID of this message boards message flag.
+	* Returns the thread ID of this message boards message flag.
 	*
 	* @return the thread ID of this message boards message flag
 	*/
@@ -147,7 +147,7 @@ public class MBMessageFlagWrapper implements MBMessageFlag {
 	}
 
 	/**
-	* Gets the message ID of this message boards message flag.
+	* Returns the message ID of this message boards message flag.
 	*
 	* @return the message ID of this message boards message flag
 	*/
@@ -165,7 +165,7 @@ public class MBMessageFlagWrapper implements MBMessageFlag {
 	}
 
 	/**
-	* Gets the flag of this message boards message flag.
+	* Returns the flag of this message boards message flag.
 	*
 	* @return the flag of this message boards message flag
 	*/

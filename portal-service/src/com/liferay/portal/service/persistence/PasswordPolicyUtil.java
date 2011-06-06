@@ -120,7 +120,7 @@ public class PasswordPolicyUtil {
 	/**
 	* Caches the password policy in the entity cache if it is enabled.
 	*
-	* @param passwordPolicy the password policy to cache
+	* @param passwordPolicy the password policy
 	*/
 	public static void cacheResult(
 		com.liferay.portal.model.PasswordPolicy passwordPolicy) {
@@ -130,7 +130,7 @@ public class PasswordPolicyUtil {
 	/**
 	* Caches the password policies in the entity cache if it is enabled.
 	*
-	* @param passwordPolicies the password policies to cache
+	* @param passwordPolicies the password policies
 	*/
 	public static void cacheResult(
 		java.util.List<com.liferay.portal.model.PasswordPolicy> passwordPolicies) {
@@ -151,7 +151,7 @@ public class PasswordPolicyUtil {
 	/**
 	* Removes the password policy with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param passwordPolicyId the primary key of the password policy to remove
+	* @param passwordPolicyId the primary key of the password policy
 	* @return the password policy that was removed
 	* @throws com.liferay.portal.NoSuchPasswordPolicyException if a password policy with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -170,9 +170,9 @@ public class PasswordPolicyUtil {
 	}
 
 	/**
-	* Finds the password policy with the primary key or throws a {@link com.liferay.portal.NoSuchPasswordPolicyException} if it could not be found.
+	* Returns the password policy with the primary key or throws a {@link com.liferay.portal.NoSuchPasswordPolicyException} if it could not be found.
 	*
-	* @param passwordPolicyId the primary key of the password policy to find
+	* @param passwordPolicyId the primary key of the password policy
 	* @return the password policy
 	* @throws com.liferay.portal.NoSuchPasswordPolicyException if a password policy with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -185,9 +185,9 @@ public class PasswordPolicyUtil {
 	}
 
 	/**
-	* Finds the password policy with the primary key or returns <code>null</code> if it could not be found.
+	* Returns the password policy with the primary key or returns <code>null</code> if it could not be found.
 	*
-	* @param passwordPolicyId the primary key of the password policy to find
+	* @param passwordPolicyId the primary key of the password policy
 	* @return the password policy, or <code>null</code> if a password policy with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -198,10 +198,10 @@ public class PasswordPolicyUtil {
 	}
 
 	/**
-	* Finds the password policy where companyId = &#63; and defaultPolicy = &#63; or throws a {@link com.liferay.portal.NoSuchPasswordPolicyException} if it could not be found.
+	* Returns the password policy where companyId = &#63; and defaultPolicy = &#63; or throws a {@link com.liferay.portal.NoSuchPasswordPolicyException} if it could not be found.
 	*
-	* @param companyId the company ID to search with
-	* @param defaultPolicy the default policy to search with
+	* @param companyId the company ID
+	* @param defaultPolicy the default policy
 	* @return the matching password policy
 	* @throws com.liferay.portal.NoSuchPasswordPolicyException if a matching password policy could not be found
 	* @throws SystemException if a system exception occurred
@@ -214,10 +214,10 @@ public class PasswordPolicyUtil {
 	}
 
 	/**
-	* Finds the password policy where companyId = &#63; and defaultPolicy = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	* Returns the password policy where companyId = &#63; and defaultPolicy = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	*
-	* @param companyId the company ID to search with
-	* @param defaultPolicy the default policy to search with
+	* @param companyId the company ID
+	* @param defaultPolicy the default policy
 	* @return the matching password policy, or <code>null</code> if a matching password policy could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -228,10 +228,10 @@ public class PasswordPolicyUtil {
 	}
 
 	/**
-	* Finds the password policy where companyId = &#63; and defaultPolicy = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	* Returns the password policy where companyId = &#63; and defaultPolicy = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
-	* @param companyId the company ID to search with
-	* @param defaultPolicy the default policy to search with
+	* @param companyId the company ID
+	* @param defaultPolicy the default policy
 	* @return the matching password policy, or <code>null</code> if a matching password policy could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -243,10 +243,10 @@ public class PasswordPolicyUtil {
 	}
 
 	/**
-	* Finds the password policy where companyId = &#63; and name = &#63; or throws a {@link com.liferay.portal.NoSuchPasswordPolicyException} if it could not be found.
+	* Returns the password policy where companyId = &#63; and name = &#63; or throws a {@link com.liferay.portal.NoSuchPasswordPolicyException} if it could not be found.
 	*
-	* @param companyId the company ID to search with
-	* @param name the name to search with
+	* @param companyId the company ID
+	* @param name the name
 	* @return the matching password policy
 	* @throws com.liferay.portal.NoSuchPasswordPolicyException if a matching password policy could not be found
 	* @throws SystemException if a system exception occurred
@@ -259,10 +259,10 @@ public class PasswordPolicyUtil {
 	}
 
 	/**
-	* Finds the password policy where companyId = &#63; and name = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	* Returns the password policy where companyId = &#63; and name = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	*
-	* @param companyId the company ID to search with
-	* @param name the name to search with
+	* @param companyId the company ID
+	* @param name the name
 	* @return the matching password policy, or <code>null</code> if a matching password policy could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -273,10 +273,10 @@ public class PasswordPolicyUtil {
 	}
 
 	/**
-	* Finds the password policy where companyId = &#63; and name = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	* Returns the password policy where companyId = &#63; and name = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
-	* @param companyId the company ID to search with
-	* @param name the name to search with
+	* @param companyId the company ID
+	* @param name the name
 	* @return the matching password policy, or <code>null</code> if a matching password policy could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -287,7 +287,7 @@ public class PasswordPolicyUtil {
 	}
 
 	/**
-	* Finds all the password policies.
+	* Returns all the password policies.
 	*
 	* @return the password policies
 	* @throws SystemException if a system exception occurred
@@ -298,14 +298,14 @@ public class PasswordPolicyUtil {
 	}
 
 	/**
-	* Finds a range of all the password policies.
+	* Returns a range of all the password policies.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of password policies to return
-	* @param end the upper bound of the range of password policies to return (not inclusive)
+	* @param start the lower bound of the range of password policies
+	* @param end the upper bound of the range of password policies (not inclusive)
 	* @return the range of password policies
 	* @throws SystemException if a system exception occurred
 	*/
@@ -316,14 +316,14 @@ public class PasswordPolicyUtil {
 	}
 
 	/**
-	* Finds an ordered range of all the password policies.
+	* Returns an ordered range of all the password policies.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of password policies to return
-	* @param end the upper bound of the range of password policies to return (not inclusive)
+	* @param start the lower bound of the range of password policies
+	* @param end the upper bound of the range of password policies (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of password policies
 	* @throws SystemException if a system exception occurred
@@ -338,8 +338,8 @@ public class PasswordPolicyUtil {
 	/**
 	* Removes the password policy where companyId = &#63; and defaultPolicy = &#63; from the database.
 	*
-	* @param companyId the company ID to search with
-	* @param defaultPolicy the default policy to search with
+	* @param companyId the company ID
+	* @param defaultPolicy the default policy
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByC_DP(long companyId, boolean defaultPolicy)
@@ -351,8 +351,8 @@ public class PasswordPolicyUtil {
 	/**
 	* Removes the password policy where companyId = &#63; and name = &#63; from the database.
 	*
-	* @param companyId the company ID to search with
-	* @param name the name to search with
+	* @param companyId the company ID
+	* @param name the name
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByC_N(long companyId, java.lang.String name)
@@ -372,10 +372,10 @@ public class PasswordPolicyUtil {
 	}
 
 	/**
-	* Counts all the password policies where companyId = &#63; and defaultPolicy = &#63;.
+	* Returns the number of password policies where companyId = &#63; and defaultPolicy = &#63;.
 	*
-	* @param companyId the company ID to search with
-	* @param defaultPolicy the default policy to search with
+	* @param companyId the company ID
+	* @param defaultPolicy the default policy
 	* @return the number of matching password policies
 	* @throws SystemException if a system exception occurred
 	*/
@@ -385,10 +385,10 @@ public class PasswordPolicyUtil {
 	}
 
 	/**
-	* Counts all the password policies where companyId = &#63; and name = &#63;.
+	* Returns the number of password policies where companyId = &#63; and name = &#63;.
 	*
-	* @param companyId the company ID to search with
-	* @param name the name to search with
+	* @param companyId the company ID
+	* @param name the name
 	* @return the number of matching password policies
 	* @throws SystemException if a system exception occurred
 	*/
@@ -398,7 +398,7 @@ public class PasswordPolicyUtil {
 	}
 
 	/**
-	* Counts all the password policies.
+	* Returns the number of password policies.
 	*
 	* @return the number of password policies
 	* @throws SystemException if a system exception occurred

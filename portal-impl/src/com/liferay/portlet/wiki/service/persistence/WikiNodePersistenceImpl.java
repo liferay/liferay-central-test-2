@@ -140,7 +140,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	/**
 	 * Caches the wiki node in the entity cache if it is enabled.
 	 *
-	 * @param wikiNode the wiki node to cache
+	 * @param wikiNode the wiki node
 	 */
 	public void cacheResult(WikiNode wikiNode) {
 		EntityCacheUtil.putResult(WikiNodeModelImpl.ENTITY_CACHE_ENABLED,
@@ -160,7 +160,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	/**
 	 * Caches the wiki nodes in the entity cache if it is enabled.
 	 *
-	 * @param wikiNodes the wiki nodes to cache
+	 * @param wikiNodes the wiki nodes
 	 */
 	public void cacheResult(List<WikiNode> wikiNodes) {
 		for (WikiNode wikiNode : wikiNodes) {
@@ -230,7 +230,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	/**
 	 * Removes the wiki node with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param primaryKey the primary key of the wiki node to remove
+	 * @param primaryKey the primary key of the wiki node
 	 * @return the wiki node that was removed
 	 * @throws com.liferay.portal.NoSuchModelException if a wiki node with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -243,7 +243,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	/**
 	 * Removes the wiki node with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param nodeId the primary key of the wiki node to remove
+	 * @param nodeId the primary key of the wiki node
 	 * @return the wiki node that was removed
 	 * @throws com.liferay.portlet.wiki.NoSuchNodeException if a wiki node with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -283,7 +283,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	/**
 	 * Removes the wiki node from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param wikiNode the wiki node to remove
+	 * @param wikiNode the wiki node
 	 * @return the wiki node that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -441,9 +441,9 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	}
 
 	/**
-	 * Finds the wiki node with the primary key or throws a {@link com.liferay.portal.NoSuchModelException} if it could not be found.
+	 * Returns the wiki node with the primary key or throws a {@link com.liferay.portal.NoSuchModelException} if it could not be found.
 	 *
-	 * @param primaryKey the primary key of the wiki node to find
+	 * @param primaryKey the primary key of the wiki node
 	 * @return the wiki node
 	 * @throws com.liferay.portal.NoSuchModelException if a wiki node with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -454,9 +454,9 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	}
 
 	/**
-	 * Finds the wiki node with the primary key or throws a {@link com.liferay.portlet.wiki.NoSuchNodeException} if it could not be found.
+	 * Returns the wiki node with the primary key or throws a {@link com.liferay.portlet.wiki.NoSuchNodeException} if it could not be found.
 	 *
-	 * @param nodeId the primary key of the wiki node to find
+	 * @param nodeId the primary key of the wiki node
 	 * @return the wiki node
 	 * @throws com.liferay.portlet.wiki.NoSuchNodeException if a wiki node with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -478,9 +478,9 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	}
 
 	/**
-	 * Finds the wiki node with the primary key or returns <code>null</code> if it could not be found.
+	 * Returns the wiki node with the primary key or returns <code>null</code> if it could not be found.
 	 *
-	 * @param primaryKey the primary key of the wiki node to find
+	 * @param primaryKey the primary key of the wiki node
 	 * @return the wiki node, or <code>null</code> if a wiki node with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -490,9 +490,9 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	}
 
 	/**
-	 * Finds the wiki node with the primary key or returns <code>null</code> if it could not be found.
+	 * Returns the wiki node with the primary key or returns <code>null</code> if it could not be found.
 	 *
-	 * @param nodeId the primary key of the wiki node to find
+	 * @param nodeId the primary key of the wiki node
 	 * @return the wiki node, or <code>null</code> if a wiki node with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -525,9 +525,9 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	}
 
 	/**
-	 * Finds all the wiki nodes where uuid = &#63;.
+	 * Returns all the wiki nodes where uuid = &#63;.
 	 *
-	 * @param uuid the uuid to search with
+	 * @param uuid the uuid
 	 * @return the matching wiki nodes
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -536,15 +536,15 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	}
 
 	/**
-	 * Finds a range of all the wiki nodes where uuid = &#63;.
+	 * Returns a range of all the wiki nodes where uuid = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param uuid the uuid to search with
-	 * @param start the lower bound of the range of wiki nodes to return
-	 * @param end the upper bound of the range of wiki nodes to return (not inclusive)
+	 * @param uuid the uuid
+	 * @param start the lower bound of the range of wiki nodes
+	 * @param end the upper bound of the range of wiki nodes (not inclusive)
 	 * @return the range of matching wiki nodes
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -554,15 +554,15 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	}
 
 	/**
-	 * Finds an ordered range of all the wiki nodes where uuid = &#63;.
+	 * Returns an ordered range of all the wiki nodes where uuid = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param uuid the uuid to search with
-	 * @param start the lower bound of the range of wiki nodes to return
-	 * @param end the upper bound of the range of wiki nodes to return (not inclusive)
+	 * @param uuid the uuid
+	 * @param start the lower bound of the range of wiki nodes
+	 * @param end the upper bound of the range of wiki nodes (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching wiki nodes
 	 * @throws SystemException if a system exception occurred
@@ -654,13 +654,13 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	}
 
 	/**
-	 * Finds the first wiki node in the ordered set where uuid = &#63;.
+	 * Returns the first wiki node in the ordered set where uuid = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param uuid the uuid to search with
+	 * @param uuid the uuid
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching wiki node
 	 * @throws com.liferay.portlet.wiki.NoSuchNodeException if a matching wiki node could not be found
@@ -689,13 +689,13 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	}
 
 	/**
-	 * Finds the last wiki node in the ordered set where uuid = &#63;.
+	 * Returns the last wiki node in the ordered set where uuid = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param uuid the uuid to search with
+	 * @param uuid the uuid
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching wiki node
 	 * @throws com.liferay.portlet.wiki.NoSuchNodeException if a matching wiki node could not be found
@@ -727,14 +727,14 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	}
 
 	/**
-	 * Finds the wiki nodes before and after the current wiki node in the ordered set where uuid = &#63;.
+	 * Returns the wiki nodes before and after the current wiki node in the ordered set where uuid = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
 	 * @param nodeId the primary key of the current wiki node
-	 * @param uuid the uuid to search with
+	 * @param uuid the uuid
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next wiki node
 	 * @throws com.liferay.portlet.wiki.NoSuchNodeException if a wiki node with the primary key could not be found
@@ -887,10 +887,10 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	}
 
 	/**
-	 * Finds the wiki node where uuid = &#63; and groupId = &#63; or throws a {@link com.liferay.portlet.wiki.NoSuchNodeException} if it could not be found.
+	 * Returns the wiki node where uuid = &#63; and groupId = &#63; or throws a {@link com.liferay.portlet.wiki.NoSuchNodeException} if it could not be found.
 	 *
-	 * @param uuid the uuid to search with
-	 * @param groupId the group ID to search with
+	 * @param uuid the uuid
+	 * @param groupId the group ID
 	 * @return the matching wiki node
 	 * @throws com.liferay.portlet.wiki.NoSuchNodeException if a matching wiki node could not be found
 	 * @throws SystemException if a system exception occurred
@@ -923,10 +923,10 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	}
 
 	/**
-	 * Finds the wiki node where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 * Returns the wiki node where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	 *
-	 * @param uuid the uuid to search with
-	 * @param groupId the group ID to search with
+	 * @param uuid the uuid
+	 * @param groupId the group ID
 	 * @return the matching wiki node, or <code>null</code> if a matching wiki node could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -936,10 +936,10 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	}
 
 	/**
-	 * Finds the wiki node where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 * Returns the wiki node where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	 *
-	 * @param uuid the uuid to search with
-	 * @param groupId the group ID to search with
+	 * @param uuid the uuid
+	 * @param groupId the group ID
 	 * @return the matching wiki node, or <code>null</code> if a matching wiki node could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1040,9 +1040,9 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	}
 
 	/**
-	 * Finds all the wiki nodes where groupId = &#63;.
+	 * Returns all the wiki nodes where groupId = &#63;.
 	 *
-	 * @param groupId the group ID to search with
+	 * @param groupId the group ID
 	 * @return the matching wiki nodes
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1051,15 +1051,15 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	}
 
 	/**
-	 * Finds a range of all the wiki nodes where groupId = &#63;.
+	 * Returns a range of all the wiki nodes where groupId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group ID to search with
-	 * @param start the lower bound of the range of wiki nodes to return
-	 * @param end the upper bound of the range of wiki nodes to return (not inclusive)
+	 * @param groupId the group ID
+	 * @param start the lower bound of the range of wiki nodes
+	 * @param end the upper bound of the range of wiki nodes (not inclusive)
 	 * @return the range of matching wiki nodes
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1069,15 +1069,15 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	}
 
 	/**
-	 * Finds an ordered range of all the wiki nodes where groupId = &#63;.
+	 * Returns an ordered range of all the wiki nodes where groupId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group ID to search with
-	 * @param start the lower bound of the range of wiki nodes to return
-	 * @param end the upper bound of the range of wiki nodes to return (not inclusive)
+	 * @param groupId the group ID
+	 * @param start the lower bound of the range of wiki nodes
+	 * @param end the upper bound of the range of wiki nodes (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching wiki nodes
 	 * @throws SystemException if a system exception occurred
@@ -1157,13 +1157,13 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	}
 
 	/**
-	 * Finds the first wiki node in the ordered set where groupId = &#63;.
+	 * Returns the first wiki node in the ordered set where groupId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group ID to search with
+	 * @param groupId the group ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching wiki node
 	 * @throws com.liferay.portlet.wiki.NoSuchNodeException if a matching wiki node could not be found
@@ -1192,13 +1192,13 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	}
 
 	/**
-	 * Finds the last wiki node in the ordered set where groupId = &#63;.
+	 * Returns the last wiki node in the ordered set where groupId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group ID to search with
+	 * @param groupId the group ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching wiki node
 	 * @throws com.liferay.portlet.wiki.NoSuchNodeException if a matching wiki node could not be found
@@ -1230,14 +1230,14 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	}
 
 	/**
-	 * Finds the wiki nodes before and after the current wiki node in the ordered set where groupId = &#63;.
+	 * Returns the wiki nodes before and after the current wiki node in the ordered set where groupId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
 	 * @param nodeId the primary key of the current wiki node
-	 * @param groupId the group ID to search with
+	 * @param groupId the group ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next wiki node
 	 * @throws com.liferay.portlet.wiki.NoSuchNodeException if a wiki node with the primary key could not be found
@@ -1378,9 +1378,9 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	}
 
 	/**
-	 * Filters by the user's permissions and finds all the wiki nodes where groupId = &#63;.
+	 * Returns all the wiki nodes that the user has permission to view where groupId = &#63;.
 	 *
-	 * @param groupId the group ID to search with
+	 * @param groupId the group ID
 	 * @return the matching wiki nodes that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1391,15 +1391,15 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	}
 
 	/**
-	 * Filters by the user's permissions and finds a range of all the wiki nodes where groupId = &#63;.
+	 * Returns a range of all the wiki nodes that the user has permission to view where groupId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group ID to search with
-	 * @param start the lower bound of the range of wiki nodes to return
-	 * @param end the upper bound of the range of wiki nodes to return (not inclusive)
+	 * @param groupId the group ID
+	 * @param start the lower bound of the range of wiki nodes
+	 * @param end the upper bound of the range of wiki nodes (not inclusive)
 	 * @return the range of matching wiki nodes that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1409,15 +1409,15 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	}
 
 	/**
-	 * Filters by the user's permissions and finds an ordered range of all the wiki nodes where groupId = &#63;.
+	 * Returns an ordered range of all the wiki nodes that the user has permissions to view where groupId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group ID to search with
-	 * @param start the lower bound of the range of wiki nodes to return
-	 * @param end the upper bound of the range of wiki nodes to return (not inclusive)
+	 * @param groupId the group ID
+	 * @param start the lower bound of the range of wiki nodes
+	 * @param end the upper bound of the range of wiki nodes (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching wiki nodes that the user has permission to view
 	 * @throws SystemException if a system exception occurred
@@ -1496,14 +1496,10 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	}
 
 	/**
-	 * Filters the wiki nodes before and after the current wiki node in the ordered set where groupId = &#63;.
-	 *
-	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
-	 * </p>
+	 * Returns the wiki nodes before and after the current wiki node in the ordered set of wiki nodes that the user has permission to view where groupId = &#63;.
 	 *
 	 * @param nodeId the primary key of the current wiki node
-	 * @param groupId the group ID to search with
+	 * @param groupId the group ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next wiki node
 	 * @throws com.liferay.portlet.wiki.NoSuchNodeException if a wiki node with the primary key could not be found
@@ -1675,9 +1671,9 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	}
 
 	/**
-	 * Finds all the wiki nodes where companyId = &#63;.
+	 * Returns all the wiki nodes where companyId = &#63;.
 	 *
-	 * @param companyId the company ID to search with
+	 * @param companyId the company ID
 	 * @return the matching wiki nodes
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1688,15 +1684,15 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	}
 
 	/**
-	 * Finds a range of all the wiki nodes where companyId = &#63;.
+	 * Returns a range of all the wiki nodes where companyId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param companyId the company ID to search with
-	 * @param start the lower bound of the range of wiki nodes to return
-	 * @param end the upper bound of the range of wiki nodes to return (not inclusive)
+	 * @param companyId the company ID
+	 * @param start the lower bound of the range of wiki nodes
+	 * @param end the upper bound of the range of wiki nodes (not inclusive)
 	 * @return the range of matching wiki nodes
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1706,15 +1702,15 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	}
 
 	/**
-	 * Finds an ordered range of all the wiki nodes where companyId = &#63;.
+	 * Returns an ordered range of all the wiki nodes where companyId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param companyId the company ID to search with
-	 * @param start the lower bound of the range of wiki nodes to return
-	 * @param end the upper bound of the range of wiki nodes to return (not inclusive)
+	 * @param companyId the company ID
+	 * @param start the lower bound of the range of wiki nodes
+	 * @param end the upper bound of the range of wiki nodes (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching wiki nodes
 	 * @throws SystemException if a system exception occurred
@@ -1794,13 +1790,13 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	}
 
 	/**
-	 * Finds the first wiki node in the ordered set where companyId = &#63;.
+	 * Returns the first wiki node in the ordered set where companyId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param companyId the company ID to search with
+	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching wiki node
 	 * @throws com.liferay.portlet.wiki.NoSuchNodeException if a matching wiki node could not be found
@@ -1829,13 +1825,13 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	}
 
 	/**
-	 * Finds the last wiki node in the ordered set where companyId = &#63;.
+	 * Returns the last wiki node in the ordered set where companyId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param companyId the company ID to search with
+	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching wiki node
 	 * @throws com.liferay.portlet.wiki.NoSuchNodeException if a matching wiki node could not be found
@@ -1867,14 +1863,14 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	}
 
 	/**
-	 * Finds the wiki nodes before and after the current wiki node in the ordered set where companyId = &#63;.
+	 * Returns the wiki nodes before and after the current wiki node in the ordered set where companyId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
 	 * @param nodeId the primary key of the current wiki node
-	 * @param companyId the company ID to search with
+	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next wiki node
 	 * @throws com.liferay.portlet.wiki.NoSuchNodeException if a wiki node with the primary key could not be found
@@ -2015,10 +2011,10 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	}
 
 	/**
-	 * Finds the wiki node where groupId = &#63; and name = &#63; or throws a {@link com.liferay.portlet.wiki.NoSuchNodeException} if it could not be found.
+	 * Returns the wiki node where groupId = &#63; and name = &#63; or throws a {@link com.liferay.portlet.wiki.NoSuchNodeException} if it could not be found.
 	 *
-	 * @param groupId the group ID to search with
-	 * @param name the name to search with
+	 * @param groupId the group ID
+	 * @param name the name
 	 * @return the matching wiki node
 	 * @throws com.liferay.portlet.wiki.NoSuchNodeException if a matching wiki node could not be found
 	 * @throws SystemException if a system exception occurred
@@ -2051,10 +2047,10 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	}
 
 	/**
-	 * Finds the wiki node where groupId = &#63; and name = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 * Returns the wiki node where groupId = &#63; and name = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	 *
-	 * @param groupId the group ID to search with
-	 * @param name the name to search with
+	 * @param groupId the group ID
+	 * @param name the name
 	 * @return the matching wiki node, or <code>null</code> if a matching wiki node could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2064,10 +2060,10 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	}
 
 	/**
-	 * Finds the wiki node where groupId = &#63; and name = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 * Returns the wiki node where groupId = &#63; and name = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	 *
-	 * @param groupId the group ID to search with
-	 * @param name the name to search with
+	 * @param groupId the group ID
+	 * @param name the name
 	 * @return the matching wiki node, or <code>null</code> if a matching wiki node could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2168,7 +2164,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	}
 
 	/**
-	 * Finds all the wiki nodes.
+	 * Returns all the wiki nodes.
 	 *
 	 * @return the wiki nodes
 	 * @throws SystemException if a system exception occurred
@@ -2178,14 +2174,14 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	}
 
 	/**
-	 * Finds a range of all the wiki nodes.
+	 * Returns a range of all the wiki nodes.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param start the lower bound of the range of wiki nodes to return
-	 * @param end the upper bound of the range of wiki nodes to return (not inclusive)
+	 * @param start the lower bound of the range of wiki nodes
+	 * @param end the upper bound of the range of wiki nodes (not inclusive)
 	 * @return the range of wiki nodes
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2194,14 +2190,14 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	}
 
 	/**
-	 * Finds an ordered range of all the wiki nodes.
+	 * Returns an ordered range of all the wiki nodes.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param start the lower bound of the range of wiki nodes to return
-	 * @param end the upper bound of the range of wiki nodes to return (not inclusive)
+	 * @param start the lower bound of the range of wiki nodes
+	 * @param end the upper bound of the range of wiki nodes (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of wiki nodes
 	 * @throws SystemException if a system exception occurred
@@ -2278,7 +2274,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	/**
 	 * Removes all the wiki nodes where uuid = &#63; from the database.
 	 *
-	 * @param uuid the uuid to search with
+	 * @param uuid the uuid
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByUuid(String uuid) throws SystemException {
@@ -2290,8 +2286,8 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	/**
 	 * Removes the wiki node where uuid = &#63; and groupId = &#63; from the database.
 	 *
-	 * @param uuid the uuid to search with
-	 * @param groupId the group ID to search with
+	 * @param uuid the uuid
+	 * @param groupId the group ID
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByUUID_G(String uuid, long groupId)
@@ -2304,7 +2300,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	/**
 	 * Removes all the wiki nodes where groupId = &#63; from the database.
 	 *
-	 * @param groupId the group ID to search with
+	 * @param groupId the group ID
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByGroupId(long groupId) throws SystemException {
@@ -2316,7 +2312,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	/**
 	 * Removes all the wiki nodes where companyId = &#63; from the database.
 	 *
-	 * @param companyId the company ID to search with
+	 * @param companyId the company ID
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByCompanyId(long companyId) throws SystemException {
@@ -2328,8 +2324,8 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	/**
 	 * Removes the wiki node where groupId = &#63; and name = &#63; from the database.
 	 *
-	 * @param groupId the group ID to search with
-	 * @param name the name to search with
+	 * @param groupId the group ID
+	 * @param name the name
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByG_N(long groupId, String name)
@@ -2351,9 +2347,9 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	}
 
 	/**
-	 * Counts all the wiki nodes where uuid = &#63;.
+	 * Returns the number of wiki nodes where uuid = &#63;.
 	 *
-	 * @param uuid the uuid to search with
+	 * @param uuid the uuid
 	 * @return the number of matching wiki nodes
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2416,10 +2412,10 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	}
 
 	/**
-	 * Counts all the wiki nodes where uuid = &#63; and groupId = &#63;.
+	 * Returns the number of wiki nodes where uuid = &#63; and groupId = &#63;.
 	 *
-	 * @param uuid the uuid to search with
-	 * @param groupId the group ID to search with
+	 * @param uuid the uuid
+	 * @param groupId the group ID
 	 * @return the number of matching wiki nodes
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2487,9 +2483,9 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	}
 
 	/**
-	 * Counts all the wiki nodes where groupId = &#63;.
+	 * Returns the number of wiki nodes where groupId = &#63;.
 	 *
-	 * @param groupId the group ID to search with
+	 * @param groupId the group ID
 	 * @return the number of matching wiki nodes
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2540,9 +2536,9 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	}
 
 	/**
-	 * Filters by the user's permissions and counts all the wiki nodes where groupId = &#63;.
+	 * Returns the number of wiki nodes that the user has permission to view where groupId = &#63;.
 	 *
-	 * @param groupId the group ID to search with
+	 * @param groupId the group ID
 	 * @return the number of matching wiki nodes that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2587,9 +2583,9 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	}
 
 	/**
-	 * Counts all the wiki nodes where companyId = &#63;.
+	 * Returns the number of wiki nodes where companyId = &#63;.
 	 *
-	 * @param companyId the company ID to search with
+	 * @param companyId the company ID
 	 * @return the number of matching wiki nodes
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2640,10 +2636,10 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	}
 
 	/**
-	 * Counts all the wiki nodes where groupId = &#63; and name = &#63;.
+	 * Returns the number of wiki nodes where groupId = &#63; and name = &#63;.
 	 *
-	 * @param groupId the group ID to search with
-	 * @param name the name to search with
+	 * @param groupId the group ID
+	 * @param name the name
 	 * @return the number of matching wiki nodes
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2710,7 +2706,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	}
 
 	/**
-	 * Counts all the wiki nodes.
+	 * Returns the number of wiki nodes.
 	 *
 	 * @return the number of wiki nodes
 	 * @throws SystemException if a system exception occurred

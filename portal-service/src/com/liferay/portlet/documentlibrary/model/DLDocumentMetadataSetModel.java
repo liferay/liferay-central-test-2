@@ -45,21 +45,21 @@ public interface DLDocumentMetadataSetModel extends AttachedModel,
 	 */
 
 	/**
-	 * Gets the primary key of this d l document metadata set.
+	 * Returns the primary key of this d l document metadata set.
 	 *
 	 * @return the primary key of this d l document metadata set
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this d l document metadata set
+	 * Sets the primary key of this d l document metadata set.
 	 *
 	 * @param primaryKey the primary key of this d l document metadata set
 	 */
 	public void setPrimaryKey(long primaryKey);
 
 	/**
-	 * Gets the uuid of this d l document metadata set.
+	 * Returns the uuid of this d l document metadata set.
 	 *
 	 * @return the uuid of this d l document metadata set
 	 */
@@ -74,7 +74,7 @@ public interface DLDocumentMetadataSetModel extends AttachedModel,
 	public void setUuid(String uuid);
 
 	/**
-	 * Gets the document metadata set ID of this d l document metadata set.
+	 * Returns the document metadata set ID of this d l document metadata set.
 	 *
 	 * @return the document metadata set ID of this d l document metadata set
 	 */
@@ -88,14 +88,14 @@ public interface DLDocumentMetadataSetModel extends AttachedModel,
 	public void setDocumentMetadataSetId(long documentMetadataSetId);
 
 	/**
-	 * Gets the class name of the model instance this d l document metadata set is polymorphically associated with.
+	 * Returns the fully qualified class name of this d l document metadata set.
 	 *
-	 * @return the class name of the model instance this d l document metadata set is polymorphically associated with
+	 * @return the fully qualified class name of this d l document metadata set
 	 */
 	public String getClassName();
 
 	/**
-	 * Gets the class name ID of this d l document metadata set.
+	 * Returns the class name ID of this d l document metadata set.
 	 *
 	 * @return the class name ID of this d l document metadata set
 	 */
@@ -109,7 +109,7 @@ public interface DLDocumentMetadataSetModel extends AttachedModel,
 	public void setClassNameId(long classNameId);
 
 	/**
-	 * Gets the class p k of this d l document metadata set.
+	 * Returns the class p k of this d l document metadata set.
 	 *
 	 * @return the class p k of this d l document metadata set
 	 */
@@ -123,7 +123,7 @@ public interface DLDocumentMetadataSetModel extends AttachedModel,
 	public void setClassPK(long classPK);
 
 	/**
-	 * Gets the d d m structure ID of this d l document metadata set.
+	 * Returns the d d m structure ID of this d l document metadata set.
 	 *
 	 * @return the d d m structure ID of this d l document metadata set
 	 */
@@ -137,7 +137,7 @@ public interface DLDocumentMetadataSetModel extends AttachedModel,
 	public void setDDMStructureId(long DDMStructureId);
 
 	/**
-	 * Gets the document type ID of this d l document metadata set.
+	 * Returns the document type ID of this d l document metadata set.
 	 *
 	 * @return the document type ID of this d l document metadata set
 	 */
@@ -151,7 +151,7 @@ public interface DLDocumentMetadataSetModel extends AttachedModel,
 	public void setDocumentTypeId(long documentTypeId);
 
 	/**
-	 * Gets the file version ID of this d l document metadata set.
+	 * Returns the file version ID of this d l document metadata set.
 	 *
 	 * @return the file version ID of this d l document metadata set
 	 */

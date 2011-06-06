@@ -121,7 +121,7 @@ public class ShoppingCouponUtil {
 	/**
 	* Caches the shopping coupon in the entity cache if it is enabled.
 	*
-	* @param shoppingCoupon the shopping coupon to cache
+	* @param shoppingCoupon the shopping coupon
 	*/
 	public static void cacheResult(
 		com.liferay.portlet.shopping.model.ShoppingCoupon shoppingCoupon) {
@@ -131,7 +131,7 @@ public class ShoppingCouponUtil {
 	/**
 	* Caches the shopping coupons in the entity cache if it is enabled.
 	*
-	* @param shoppingCoupons the shopping coupons to cache
+	* @param shoppingCoupons the shopping coupons
 	*/
 	public static void cacheResult(
 		java.util.List<com.liferay.portlet.shopping.model.ShoppingCoupon> shoppingCoupons) {
@@ -152,7 +152,7 @@ public class ShoppingCouponUtil {
 	/**
 	* Removes the shopping coupon with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param couponId the primary key of the shopping coupon to remove
+	* @param couponId the primary key of the shopping coupon
 	* @return the shopping coupon that was removed
 	* @throws com.liferay.portlet.shopping.NoSuchCouponException if a shopping coupon with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -172,9 +172,9 @@ public class ShoppingCouponUtil {
 	}
 
 	/**
-	* Finds the shopping coupon with the primary key or throws a {@link com.liferay.portlet.shopping.NoSuchCouponException} if it could not be found.
+	* Returns the shopping coupon with the primary key or throws a {@link com.liferay.portlet.shopping.NoSuchCouponException} if it could not be found.
 	*
-	* @param couponId the primary key of the shopping coupon to find
+	* @param couponId the primary key of the shopping coupon
 	* @return the shopping coupon
 	* @throws com.liferay.portlet.shopping.NoSuchCouponException if a shopping coupon with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -187,9 +187,9 @@ public class ShoppingCouponUtil {
 	}
 
 	/**
-	* Finds the shopping coupon with the primary key or returns <code>null</code> if it could not be found.
+	* Returns the shopping coupon with the primary key or returns <code>null</code> if it could not be found.
 	*
-	* @param couponId the primary key of the shopping coupon to find
+	* @param couponId the primary key of the shopping coupon
 	* @return the shopping coupon, or <code>null</code> if a shopping coupon with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -200,9 +200,9 @@ public class ShoppingCouponUtil {
 	}
 
 	/**
-	* Finds all the shopping coupons where groupId = &#63;.
+	* Returns all the shopping coupons where groupId = &#63;.
 	*
-	* @param groupId the group ID to search with
+	* @param groupId the group ID
 	* @return the matching shopping coupons
 	* @throws SystemException if a system exception occurred
 	*/
@@ -213,15 +213,15 @@ public class ShoppingCouponUtil {
 	}
 
 	/**
-	* Finds a range of all the shopping coupons where groupId = &#63;.
+	* Returns a range of all the shopping coupons where groupId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param start the lower bound of the range of shopping coupons to return
-	* @param end the upper bound of the range of shopping coupons to return (not inclusive)
+	* @param groupId the group ID
+	* @param start the lower bound of the range of shopping coupons
+	* @param end the upper bound of the range of shopping coupons (not inclusive)
 	* @return the range of matching shopping coupons
 	* @throws SystemException if a system exception occurred
 	*/
@@ -232,15 +232,15 @@ public class ShoppingCouponUtil {
 	}
 
 	/**
-	* Finds an ordered range of all the shopping coupons where groupId = &#63;.
+	* Returns an ordered range of all the shopping coupons where groupId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param start the lower bound of the range of shopping coupons to return
-	* @param end the upper bound of the range of shopping coupons to return (not inclusive)
+	* @param groupId the group ID
+	* @param start the lower bound of the range of shopping coupons
+	* @param end the upper bound of the range of shopping coupons (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching shopping coupons
 	* @throws SystemException if a system exception occurred
@@ -254,13 +254,13 @@ public class ShoppingCouponUtil {
 	}
 
 	/**
-	* Finds the first shopping coupon in the ordered set where groupId = &#63;.
+	* Returns the first shopping coupon in the ordered set where groupId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
+	* @param groupId the group ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching shopping coupon
 	* @throws com.liferay.portlet.shopping.NoSuchCouponException if a matching shopping coupon could not be found
@@ -275,13 +275,13 @@ public class ShoppingCouponUtil {
 	}
 
 	/**
-	* Finds the last shopping coupon in the ordered set where groupId = &#63;.
+	* Returns the last shopping coupon in the ordered set where groupId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
+	* @param groupId the group ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching shopping coupon
 	* @throws com.liferay.portlet.shopping.NoSuchCouponException if a matching shopping coupon could not be found
@@ -296,14 +296,14 @@ public class ShoppingCouponUtil {
 	}
 
 	/**
-	* Finds the shopping coupons before and after the current shopping coupon in the ordered set where groupId = &#63;.
+	* Returns the shopping coupons before and after the current shopping coupon in the ordered set where groupId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
 	* @param couponId the primary key of the current shopping coupon
-	* @param groupId the group ID to search with
+	* @param groupId the group ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next shopping coupon
 	* @throws com.liferay.portlet.shopping.NoSuchCouponException if a shopping coupon with the primary key could not be found
@@ -320,9 +320,9 @@ public class ShoppingCouponUtil {
 	}
 
 	/**
-	* Finds the shopping coupon where code = &#63; or throws a {@link com.liferay.portlet.shopping.NoSuchCouponException} if it could not be found.
+	* Returns the shopping coupon where code = &#63; or throws a {@link com.liferay.portlet.shopping.NoSuchCouponException} if it could not be found.
 	*
-	* @param code the code to search with
+	* @param code the code
 	* @return the matching shopping coupon
 	* @throws com.liferay.portlet.shopping.NoSuchCouponException if a matching shopping coupon could not be found
 	* @throws SystemException if a system exception occurred
@@ -335,9 +335,9 @@ public class ShoppingCouponUtil {
 	}
 
 	/**
-	* Finds the shopping coupon where code = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	* Returns the shopping coupon where code = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	*
-	* @param code the code to search with
+	* @param code the code
 	* @return the matching shopping coupon, or <code>null</code> if a matching shopping coupon could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -348,9 +348,9 @@ public class ShoppingCouponUtil {
 	}
 
 	/**
-	* Finds the shopping coupon where code = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	* Returns the shopping coupon where code = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
-	* @param code the code to search with
+	* @param code the code
 	* @return the matching shopping coupon, or <code>null</code> if a matching shopping coupon could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -361,7 +361,7 @@ public class ShoppingCouponUtil {
 	}
 
 	/**
-	* Finds all the shopping coupons.
+	* Returns all the shopping coupons.
 	*
 	* @return the shopping coupons
 	* @throws SystemException if a system exception occurred
@@ -372,14 +372,14 @@ public class ShoppingCouponUtil {
 	}
 
 	/**
-	* Finds a range of all the shopping coupons.
+	* Returns a range of all the shopping coupons.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of shopping coupons to return
-	* @param end the upper bound of the range of shopping coupons to return (not inclusive)
+	* @param start the lower bound of the range of shopping coupons
+	* @param end the upper bound of the range of shopping coupons (not inclusive)
 	* @return the range of shopping coupons
 	* @throws SystemException if a system exception occurred
 	*/
@@ -390,14 +390,14 @@ public class ShoppingCouponUtil {
 	}
 
 	/**
-	* Finds an ordered range of all the shopping coupons.
+	* Returns an ordered range of all the shopping coupons.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of shopping coupons to return
-	* @param end the upper bound of the range of shopping coupons to return (not inclusive)
+	* @param start the lower bound of the range of shopping coupons
+	* @param end the upper bound of the range of shopping coupons (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of shopping coupons
 	* @throws SystemException if a system exception occurred
@@ -412,7 +412,7 @@ public class ShoppingCouponUtil {
 	/**
 	* Removes all the shopping coupons where groupId = &#63; from the database.
 	*
-	* @param groupId the group ID to search with
+	* @param groupId the group ID
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByGroupId(long groupId)
@@ -423,7 +423,7 @@ public class ShoppingCouponUtil {
 	/**
 	* Removes the shopping coupon where code = &#63; from the database.
 	*
-	* @param code the code to search with
+	* @param code the code
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByCode(java.lang.String code)
@@ -443,9 +443,9 @@ public class ShoppingCouponUtil {
 	}
 
 	/**
-	* Counts all the shopping coupons where groupId = &#63;.
+	* Returns the number of shopping coupons where groupId = &#63;.
 	*
-	* @param groupId the group ID to search with
+	* @param groupId the group ID
 	* @return the number of matching shopping coupons
 	* @throws SystemException if a system exception occurred
 	*/
@@ -455,9 +455,9 @@ public class ShoppingCouponUtil {
 	}
 
 	/**
-	* Counts all the shopping coupons where code = &#63;.
+	* Returns the number of shopping coupons where code = &#63;.
 	*
-	* @param code the code to search with
+	* @param code the code
 	* @return the number of matching shopping coupons
 	* @throws SystemException if a system exception occurred
 	*/
@@ -467,7 +467,7 @@ public class ShoppingCouponUtil {
 	}
 
 	/**
-	* Counts all the shopping coupons.
+	* Returns the number of shopping coupons.
 	*
 	* @return the number of shopping coupons
 	* @throws SystemException if a system exception occurred

@@ -33,7 +33,7 @@ public class SocialEquityUserLocalServiceWrapper
 	/**
 	* Adds the social equity user to the database. Also notifies the appropriate model listeners.
 	*
-	* @param socialEquityUser the social equity user to add
+	* @param socialEquityUser the social equity user
 	* @return the social equity user that was added
 	* @throws SystemException if a system exception occurred
 	*/
@@ -57,7 +57,7 @@ public class SocialEquityUserLocalServiceWrapper
 	/**
 	* Deletes the social equity user with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param equityUserId the primary key of the social equity user to delete
+	* @param equityUserId the primary key of the social equity user
 	* @throws PortalException if a social equity user with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -70,7 +70,7 @@ public class SocialEquityUserLocalServiceWrapper
 	/**
 	* Deletes the social equity user from the database. Also notifies the appropriate model listeners.
 	*
-	* @param socialEquityUser the social equity user to delete
+	* @param socialEquityUser the social equity user
 	* @throws SystemException if a system exception occurred
 	*/
 	public void deleteSocialEquityUser(
@@ -82,7 +82,7 @@ public class SocialEquityUserLocalServiceWrapper
 	/**
 	* Performs a dynamic query on the database and returns the matching rows.
 	*
-	* @param dynamicQuery the dynamic query to search with
+	* @param dynamicQuery the dynamic query
 	* @return the matching rows
 	* @throws SystemException if a system exception occurred
 	*/
@@ -100,9 +100,9 @@ public class SocialEquityUserLocalServiceWrapper
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param dynamicQuery the dynamic query to search with
-	* @param start the lower bound of the range of model instances to return
-	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param dynamicQuery the dynamic query
+	* @param start the lower bound of the range of model instances
+	* @param end the upper bound of the range of model instances (not inclusive)
 	* @return the range of matching rows
 	* @throws SystemException if a system exception occurred
 	*/
@@ -121,9 +121,9 @@ public class SocialEquityUserLocalServiceWrapper
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param dynamicQuery the dynamic query to search with
-	* @param start the lower bound of the range of model instances to return
-	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param dynamicQuery the dynamic query
+	* @param start the lower bound of the range of model instances
+	* @param end the upper bound of the range of model instances (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching rows
 	* @throws SystemException if a system exception occurred
@@ -139,9 +139,9 @@ public class SocialEquityUserLocalServiceWrapper
 	}
 
 	/**
-	* Counts the number of rows that match the dynamic query.
+	* Returns the number of rows that match the dynamic query.
 	*
-	* @param dynamicQuery the dynamic query to search with
+	* @param dynamicQuery the dynamic query
 	* @return the number of rows that match the dynamic query
 	* @throws SystemException if a system exception occurred
 	*/
@@ -152,9 +152,9 @@ public class SocialEquityUserLocalServiceWrapper
 	}
 
 	/**
-	* Gets the social equity user with the primary key.
+	* Returns the social equity user with the primary key.
 	*
-	* @param equityUserId the primary key of the social equity user to get
+	* @param equityUserId the primary key of the social equity user
 	* @return the social equity user
 	* @throws PortalException if a social equity user with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -167,14 +167,14 @@ public class SocialEquityUserLocalServiceWrapper
 	}
 
 	/**
-	* Gets a range of all the social equity users.
+	* Returns a range of all the social equity users.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of social equity users to return
-	* @param end the upper bound of the range of social equity users to return (not inclusive)
+	* @param start the lower bound of the range of social equity users
+	* @param end the upper bound of the range of social equity users (not inclusive)
 	* @return the range of social equity users
 	* @throws SystemException if a system exception occurred
 	*/
@@ -185,7 +185,7 @@ public class SocialEquityUserLocalServiceWrapper
 	}
 
 	/**
-	* Gets the number of social equity users.
+	* Returns the number of social equity users.
 	*
 	* @return the number of social equity users
 	* @throws SystemException if a system exception occurred
@@ -198,7 +198,7 @@ public class SocialEquityUserLocalServiceWrapper
 	/**
 	* Updates the social equity user in the database. Also notifies the appropriate model listeners.
 	*
-	* @param socialEquityUser the social equity user to update
+	* @param socialEquityUser the social equity user
 	* @return the social equity user that was updated
 	* @throws SystemException if a system exception occurred
 	*/
@@ -211,7 +211,7 @@ public class SocialEquityUserLocalServiceWrapper
 	/**
 	* Updates the social equity user in the database. Also notifies the appropriate model listeners.
 	*
-	* @param socialEquityUser the social equity user to update
+	* @param socialEquityUser the social equity user
 	* @param merge whether to merge the social equity user with the current session. See {@link com.liferay.portal.service.persistence.BatchSession#update(com.liferay.portal.kernel.dao.orm.Session, com.liferay.portal.model.BaseModel, boolean)} for an explanation.
 	* @return the social equity user that was updated
 	* @throws SystemException if a system exception occurred
@@ -225,7 +225,7 @@ public class SocialEquityUserLocalServiceWrapper
 	}
 
 	/**
-	* Gets the Spring bean ID for this bean.
+	* Returns the Spring bean ID for this bean.
 	*
 	* @return the Spring bean ID for this bean
 	*/

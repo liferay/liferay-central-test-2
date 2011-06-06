@@ -121,7 +121,7 @@ public class LayoutSetPrototypePersistenceImpl extends BasePersistenceImpl<Layou
 	/**
 	 * Caches the layout set prototype in the entity cache if it is enabled.
 	 *
-	 * @param layoutSetPrototype the layout set prototype to cache
+	 * @param layoutSetPrototype the layout set prototype
 	 */
 	public void cacheResult(LayoutSetPrototype layoutSetPrototype) {
 		EntityCacheUtil.putResult(LayoutSetPrototypeModelImpl.ENTITY_CACHE_ENABLED,
@@ -134,7 +134,7 @@ public class LayoutSetPrototypePersistenceImpl extends BasePersistenceImpl<Layou
 	/**
 	 * Caches the layout set prototypes in the entity cache if it is enabled.
 	 *
-	 * @param layoutSetPrototypes the layout set prototypes to cache
+	 * @param layoutSetPrototypes the layout set prototypes
 	 */
 	public void cacheResult(List<LayoutSetPrototype> layoutSetPrototypes) {
 		for (LayoutSetPrototype layoutSetPrototype : layoutSetPrototypes) {
@@ -198,7 +198,7 @@ public class LayoutSetPrototypePersistenceImpl extends BasePersistenceImpl<Layou
 	/**
 	 * Removes the layout set prototype with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param primaryKey the primary key of the layout set prototype to remove
+	 * @param primaryKey the primary key of the layout set prototype
 	 * @return the layout set prototype that was removed
 	 * @throws com.liferay.portal.NoSuchModelException if a layout set prototype with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -211,7 +211,7 @@ public class LayoutSetPrototypePersistenceImpl extends BasePersistenceImpl<Layou
 	/**
 	 * Removes the layout set prototype with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param layoutSetPrototypeId the primary key of the layout set prototype to remove
+	 * @param layoutSetPrototypeId the primary key of the layout set prototype
 	 * @return the layout set prototype that was removed
 	 * @throws com.liferay.portal.NoSuchLayoutSetPrototypeException if a layout set prototype with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -252,7 +252,7 @@ public class LayoutSetPrototypePersistenceImpl extends BasePersistenceImpl<Layou
 	/**
 	 * Removes the layout set prototype from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param layoutSetPrototype the layout set prototype to remove
+	 * @param layoutSetPrototype the layout set prototype
 	 * @return the layout set prototype that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -346,9 +346,9 @@ public class LayoutSetPrototypePersistenceImpl extends BasePersistenceImpl<Layou
 	}
 
 	/**
-	 * Finds the layout set prototype with the primary key or throws a {@link com.liferay.portal.NoSuchModelException} if it could not be found.
+	 * Returns the layout set prototype with the primary key or throws a {@link com.liferay.portal.NoSuchModelException} if it could not be found.
 	 *
-	 * @param primaryKey the primary key of the layout set prototype to find
+	 * @param primaryKey the primary key of the layout set prototype
 	 * @return the layout set prototype
 	 * @throws com.liferay.portal.NoSuchModelException if a layout set prototype with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -359,9 +359,9 @@ public class LayoutSetPrototypePersistenceImpl extends BasePersistenceImpl<Layou
 	}
 
 	/**
-	 * Finds the layout set prototype with the primary key or throws a {@link com.liferay.portal.NoSuchLayoutSetPrototypeException} if it could not be found.
+	 * Returns the layout set prototype with the primary key or throws a {@link com.liferay.portal.NoSuchLayoutSetPrototypeException} if it could not be found.
 	 *
-	 * @param layoutSetPrototypeId the primary key of the layout set prototype to find
+	 * @param layoutSetPrototypeId the primary key of the layout set prototype
 	 * @return the layout set prototype
 	 * @throws com.liferay.portal.NoSuchLayoutSetPrototypeException if a layout set prototype with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -384,9 +384,9 @@ public class LayoutSetPrototypePersistenceImpl extends BasePersistenceImpl<Layou
 	}
 
 	/**
-	 * Finds the layout set prototype with the primary key or returns <code>null</code> if it could not be found.
+	 * Returns the layout set prototype with the primary key or returns <code>null</code> if it could not be found.
 	 *
-	 * @param primaryKey the primary key of the layout set prototype to find
+	 * @param primaryKey the primary key of the layout set prototype
 	 * @return the layout set prototype, or <code>null</code> if a layout set prototype with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -396,9 +396,9 @@ public class LayoutSetPrototypePersistenceImpl extends BasePersistenceImpl<Layou
 	}
 
 	/**
-	 * Finds the layout set prototype with the primary key or returns <code>null</code> if it could not be found.
+	 * Returns the layout set prototype with the primary key or returns <code>null</code> if it could not be found.
 	 *
-	 * @param layoutSetPrototypeId the primary key of the layout set prototype to find
+	 * @param layoutSetPrototypeId the primary key of the layout set prototype
 	 * @return the layout set prototype, or <code>null</code> if a layout set prototype with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -432,9 +432,9 @@ public class LayoutSetPrototypePersistenceImpl extends BasePersistenceImpl<Layou
 	}
 
 	/**
-	 * Finds all the layout set prototypes where uuid = &#63;.
+	 * Returns all the layout set prototypes where uuid = &#63;.
 	 *
-	 * @param uuid the uuid to search with
+	 * @param uuid the uuid
 	 * @return the matching layout set prototypes
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -444,15 +444,15 @@ public class LayoutSetPrototypePersistenceImpl extends BasePersistenceImpl<Layou
 	}
 
 	/**
-	 * Finds a range of all the layout set prototypes where uuid = &#63;.
+	 * Returns a range of all the layout set prototypes where uuid = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param uuid the uuid to search with
-	 * @param start the lower bound of the range of layout set prototypes to return
-	 * @param end the upper bound of the range of layout set prototypes to return (not inclusive)
+	 * @param uuid the uuid
+	 * @param start the lower bound of the range of layout set prototypes
+	 * @param end the upper bound of the range of layout set prototypes (not inclusive)
 	 * @return the range of matching layout set prototypes
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -462,15 +462,15 @@ public class LayoutSetPrototypePersistenceImpl extends BasePersistenceImpl<Layou
 	}
 
 	/**
-	 * Finds an ordered range of all the layout set prototypes where uuid = &#63;.
+	 * Returns an ordered range of all the layout set prototypes where uuid = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param uuid the uuid to search with
-	 * @param start the lower bound of the range of layout set prototypes to return
-	 * @param end the upper bound of the range of layout set prototypes to return (not inclusive)
+	 * @param uuid the uuid
+	 * @param start the lower bound of the range of layout set prototypes
+	 * @param end the upper bound of the range of layout set prototypes (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching layout set prototypes
 	 * @throws SystemException if a system exception occurred
@@ -558,13 +558,13 @@ public class LayoutSetPrototypePersistenceImpl extends BasePersistenceImpl<Layou
 	}
 
 	/**
-	 * Finds the first layout set prototype in the ordered set where uuid = &#63;.
+	 * Returns the first layout set prototype in the ordered set where uuid = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param uuid the uuid to search with
+	 * @param uuid the uuid
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching layout set prototype
 	 * @throws com.liferay.portal.NoSuchLayoutSetPrototypeException if a matching layout set prototype could not be found
@@ -593,13 +593,13 @@ public class LayoutSetPrototypePersistenceImpl extends BasePersistenceImpl<Layou
 	}
 
 	/**
-	 * Finds the last layout set prototype in the ordered set where uuid = &#63;.
+	 * Returns the last layout set prototype in the ordered set where uuid = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param uuid the uuid to search with
+	 * @param uuid the uuid
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching layout set prototype
 	 * @throws com.liferay.portal.NoSuchLayoutSetPrototypeException if a matching layout set prototype could not be found
@@ -631,14 +631,14 @@ public class LayoutSetPrototypePersistenceImpl extends BasePersistenceImpl<Layou
 	}
 
 	/**
-	 * Finds the layout set prototypes before and after the current layout set prototype in the ordered set where uuid = &#63;.
+	 * Returns the layout set prototypes before and after the current layout set prototype in the ordered set where uuid = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
 	 * @param layoutSetPrototypeId the primary key of the current layout set prototype
-	 * @param uuid the uuid to search with
+	 * @param uuid the uuid
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next layout set prototype
 	 * @throws com.liferay.portal.NoSuchLayoutSetPrototypeException if a layout set prototype with the primary key could not be found
@@ -788,9 +788,9 @@ public class LayoutSetPrototypePersistenceImpl extends BasePersistenceImpl<Layou
 	}
 
 	/**
-	 * Filters by the user's permissions and finds all the layout set prototypes where uuid = &#63;.
+	 * Returns all the layout set prototypes that the user has permission to view where uuid = &#63;.
 	 *
-	 * @param uuid the uuid to search with
+	 * @param uuid the uuid
 	 * @return the matching layout set prototypes that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -800,15 +800,15 @@ public class LayoutSetPrototypePersistenceImpl extends BasePersistenceImpl<Layou
 	}
 
 	/**
-	 * Filters by the user's permissions and finds a range of all the layout set prototypes where uuid = &#63;.
+	 * Returns a range of all the layout set prototypes that the user has permission to view where uuid = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param uuid the uuid to search with
-	 * @param start the lower bound of the range of layout set prototypes to return
-	 * @param end the upper bound of the range of layout set prototypes to return (not inclusive)
+	 * @param uuid the uuid
+	 * @param start the lower bound of the range of layout set prototypes
+	 * @param end the upper bound of the range of layout set prototypes (not inclusive)
 	 * @return the range of matching layout set prototypes that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -818,15 +818,15 @@ public class LayoutSetPrototypePersistenceImpl extends BasePersistenceImpl<Layou
 	}
 
 	/**
-	 * Filters by the user's permissions and finds an ordered range of all the layout set prototypes where uuid = &#63;.
+	 * Returns an ordered range of all the layout set prototypes that the user has permissions to view where uuid = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param uuid the uuid to search with
-	 * @param start the lower bound of the range of layout set prototypes to return
-	 * @param end the upper bound of the range of layout set prototypes to return (not inclusive)
+	 * @param uuid the uuid
+	 * @param start the lower bound of the range of layout set prototypes
+	 * @param end the upper bound of the range of layout set prototypes (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching layout set prototypes that the user has permission to view
 	 * @throws SystemException if a system exception occurred
@@ -909,14 +909,10 @@ public class LayoutSetPrototypePersistenceImpl extends BasePersistenceImpl<Layou
 	}
 
 	/**
-	 * Filters the layout set prototypes before and after the current layout set prototype in the ordered set where uuid = &#63;.
-	 *
-	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
-	 * </p>
+	 * Returns the layout set prototypes before and after the current layout set prototype in the ordered set of layout set prototypes that the user has permission to view where uuid = &#63;.
 	 *
 	 * @param layoutSetPrototypeId the primary key of the current layout set prototype
-	 * @param uuid the uuid to search with
+	 * @param uuid the uuid
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next layout set prototype
 	 * @throws com.liferay.portal.NoSuchLayoutSetPrototypeException if a layout set prototype with the primary key could not be found
@@ -1093,9 +1089,9 @@ public class LayoutSetPrototypePersistenceImpl extends BasePersistenceImpl<Layou
 	}
 
 	/**
-	 * Finds all the layout set prototypes where companyId = &#63;.
+	 * Returns all the layout set prototypes where companyId = &#63;.
 	 *
-	 * @param companyId the company ID to search with
+	 * @param companyId the company ID
 	 * @return the matching layout set prototypes
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1106,15 +1102,15 @@ public class LayoutSetPrototypePersistenceImpl extends BasePersistenceImpl<Layou
 	}
 
 	/**
-	 * Finds a range of all the layout set prototypes where companyId = &#63;.
+	 * Returns a range of all the layout set prototypes where companyId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param companyId the company ID to search with
-	 * @param start the lower bound of the range of layout set prototypes to return
-	 * @param end the upper bound of the range of layout set prototypes to return (not inclusive)
+	 * @param companyId the company ID
+	 * @param start the lower bound of the range of layout set prototypes
+	 * @param end the upper bound of the range of layout set prototypes (not inclusive)
 	 * @return the range of matching layout set prototypes
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1124,15 +1120,15 @@ public class LayoutSetPrototypePersistenceImpl extends BasePersistenceImpl<Layou
 	}
 
 	/**
-	 * Finds an ordered range of all the layout set prototypes where companyId = &#63;.
+	 * Returns an ordered range of all the layout set prototypes where companyId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param companyId the company ID to search with
-	 * @param start the lower bound of the range of layout set prototypes to return
-	 * @param end the upper bound of the range of layout set prototypes to return (not inclusive)
+	 * @param companyId the company ID
+	 * @param start the lower bound of the range of layout set prototypes
+	 * @param end the upper bound of the range of layout set prototypes (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching layout set prototypes
 	 * @throws SystemException if a system exception occurred
@@ -1208,13 +1204,13 @@ public class LayoutSetPrototypePersistenceImpl extends BasePersistenceImpl<Layou
 	}
 
 	/**
-	 * Finds the first layout set prototype in the ordered set where companyId = &#63;.
+	 * Returns the first layout set prototype in the ordered set where companyId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param companyId the company ID to search with
+	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching layout set prototype
 	 * @throws com.liferay.portal.NoSuchLayoutSetPrototypeException if a matching layout set prototype could not be found
@@ -1244,13 +1240,13 @@ public class LayoutSetPrototypePersistenceImpl extends BasePersistenceImpl<Layou
 	}
 
 	/**
-	 * Finds the last layout set prototype in the ordered set where companyId = &#63;.
+	 * Returns the last layout set prototype in the ordered set where companyId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param companyId the company ID to search with
+	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching layout set prototype
 	 * @throws com.liferay.portal.NoSuchLayoutSetPrototypeException if a matching layout set prototype could not be found
@@ -1282,14 +1278,14 @@ public class LayoutSetPrototypePersistenceImpl extends BasePersistenceImpl<Layou
 	}
 
 	/**
-	 * Finds the layout set prototypes before and after the current layout set prototype in the ordered set where companyId = &#63;.
+	 * Returns the layout set prototypes before and after the current layout set prototype in the ordered set where companyId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
 	 * @param layoutSetPrototypeId the primary key of the current layout set prototype
-	 * @param companyId the company ID to search with
+	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next layout set prototype
 	 * @throws com.liferay.portal.NoSuchLayoutSetPrototypeException if a layout set prototype with the primary key could not be found
@@ -1427,9 +1423,9 @@ public class LayoutSetPrototypePersistenceImpl extends BasePersistenceImpl<Layou
 	}
 
 	/**
-	 * Filters by the user's permissions and finds all the layout set prototypes where companyId = &#63;.
+	 * Returns all the layout set prototypes that the user has permission to view where companyId = &#63;.
 	 *
-	 * @param companyId the company ID to search with
+	 * @param companyId the company ID
 	 * @return the matching layout set prototypes that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1440,15 +1436,15 @@ public class LayoutSetPrototypePersistenceImpl extends BasePersistenceImpl<Layou
 	}
 
 	/**
-	 * Filters by the user's permissions and finds a range of all the layout set prototypes where companyId = &#63;.
+	 * Returns a range of all the layout set prototypes that the user has permission to view where companyId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param companyId the company ID to search with
-	 * @param start the lower bound of the range of layout set prototypes to return
-	 * @param end the upper bound of the range of layout set prototypes to return (not inclusive)
+	 * @param companyId the company ID
+	 * @param start the lower bound of the range of layout set prototypes
+	 * @param end the upper bound of the range of layout set prototypes (not inclusive)
 	 * @return the range of matching layout set prototypes that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1458,15 +1454,15 @@ public class LayoutSetPrototypePersistenceImpl extends BasePersistenceImpl<Layou
 	}
 
 	/**
-	 * Filters by the user's permissions and finds an ordered range of all the layout set prototypes where companyId = &#63;.
+	 * Returns an ordered range of all the layout set prototypes that the user has permissions to view where companyId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param companyId the company ID to search with
-	 * @param start the lower bound of the range of layout set prototypes to return
-	 * @param end the upper bound of the range of layout set prototypes to return (not inclusive)
+	 * @param companyId the company ID
+	 * @param start the lower bound of the range of layout set prototypes
+	 * @param end the upper bound of the range of layout set prototypes (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching layout set prototypes that the user has permission to view
 	 * @throws SystemException if a system exception occurred
@@ -1538,14 +1534,10 @@ public class LayoutSetPrototypePersistenceImpl extends BasePersistenceImpl<Layou
 	}
 
 	/**
-	 * Filters the layout set prototypes before and after the current layout set prototype in the ordered set where companyId = &#63;.
-	 *
-	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
-	 * </p>
+	 * Returns the layout set prototypes before and after the current layout set prototype in the ordered set of layout set prototypes that the user has permission to view where companyId = &#63;.
 	 *
 	 * @param layoutSetPrototypeId the primary key of the current layout set prototype
-	 * @param companyId the company ID to search with
+	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next layout set prototype
 	 * @throws com.liferay.portal.NoSuchLayoutSetPrototypeException if a layout set prototype with the primary key could not be found
@@ -1710,10 +1702,10 @@ public class LayoutSetPrototypePersistenceImpl extends BasePersistenceImpl<Layou
 	}
 
 	/**
-	 * Finds all the layout set prototypes where companyId = &#63; and active = &#63;.
+	 * Returns all the layout set prototypes where companyId = &#63; and active = &#63;.
 	 *
-	 * @param companyId the company ID to search with
-	 * @param active the active to search with
+	 * @param companyId the company ID
+	 * @param active the active
 	 * @return the matching layout set prototypes
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1724,16 +1716,16 @@ public class LayoutSetPrototypePersistenceImpl extends BasePersistenceImpl<Layou
 	}
 
 	/**
-	 * Finds a range of all the layout set prototypes where companyId = &#63; and active = &#63;.
+	 * Returns a range of all the layout set prototypes where companyId = &#63; and active = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param companyId the company ID to search with
-	 * @param active the active to search with
-	 * @param start the lower bound of the range of layout set prototypes to return
-	 * @param end the upper bound of the range of layout set prototypes to return (not inclusive)
+	 * @param companyId the company ID
+	 * @param active the active
+	 * @param start the lower bound of the range of layout set prototypes
+	 * @param end the upper bound of the range of layout set prototypes (not inclusive)
 	 * @return the range of matching layout set prototypes
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1743,16 +1735,16 @@ public class LayoutSetPrototypePersistenceImpl extends BasePersistenceImpl<Layou
 	}
 
 	/**
-	 * Finds an ordered range of all the layout set prototypes where companyId = &#63; and active = &#63;.
+	 * Returns an ordered range of all the layout set prototypes where companyId = &#63; and active = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param companyId the company ID to search with
-	 * @param active the active to search with
-	 * @param start the lower bound of the range of layout set prototypes to return
-	 * @param end the upper bound of the range of layout set prototypes to return (not inclusive)
+	 * @param companyId the company ID
+	 * @param active the active
+	 * @param start the lower bound of the range of layout set prototypes
+	 * @param end the upper bound of the range of layout set prototypes (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching layout set prototypes
 	 * @throws SystemException if a system exception occurred
@@ -1833,14 +1825,14 @@ public class LayoutSetPrototypePersistenceImpl extends BasePersistenceImpl<Layou
 	}
 
 	/**
-	 * Finds the first layout set prototype in the ordered set where companyId = &#63; and active = &#63;.
+	 * Returns the first layout set prototype in the ordered set where companyId = &#63; and active = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param companyId the company ID to search with
-	 * @param active the active to search with
+	 * @param companyId the company ID
+	 * @param active the active
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching layout set prototype
 	 * @throws com.liferay.portal.NoSuchLayoutSetPrototypeException if a matching layout set prototype could not be found
@@ -1873,14 +1865,14 @@ public class LayoutSetPrototypePersistenceImpl extends BasePersistenceImpl<Layou
 	}
 
 	/**
-	 * Finds the last layout set prototype in the ordered set where companyId = &#63; and active = &#63;.
+	 * Returns the last layout set prototype in the ordered set where companyId = &#63; and active = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param companyId the company ID to search with
-	 * @param active the active to search with
+	 * @param companyId the company ID
+	 * @param active the active
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching layout set prototype
 	 * @throws com.liferay.portal.NoSuchLayoutSetPrototypeException if a matching layout set prototype could not be found
@@ -1915,15 +1907,15 @@ public class LayoutSetPrototypePersistenceImpl extends BasePersistenceImpl<Layou
 	}
 
 	/**
-	 * Finds the layout set prototypes before and after the current layout set prototype in the ordered set where companyId = &#63; and active = &#63;.
+	 * Returns the layout set prototypes before and after the current layout set prototype in the ordered set where companyId = &#63; and active = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
 	 * @param layoutSetPrototypeId the primary key of the current layout set prototype
-	 * @param companyId the company ID to search with
-	 * @param active the active to search with
+	 * @param companyId the company ID
+	 * @param active the active
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next layout set prototype
 	 * @throws com.liferay.portal.NoSuchLayoutSetPrototypeException if a layout set prototype with the primary key could not be found
@@ -2065,10 +2057,10 @@ public class LayoutSetPrototypePersistenceImpl extends BasePersistenceImpl<Layou
 	}
 
 	/**
-	 * Filters by the user's permissions and finds all the layout set prototypes where companyId = &#63; and active = &#63;.
+	 * Returns all the layout set prototypes that the user has permission to view where companyId = &#63; and active = &#63;.
 	 *
-	 * @param companyId the company ID to search with
-	 * @param active the active to search with
+	 * @param companyId the company ID
+	 * @param active the active
 	 * @return the matching layout set prototypes that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2079,16 +2071,16 @@ public class LayoutSetPrototypePersistenceImpl extends BasePersistenceImpl<Layou
 	}
 
 	/**
-	 * Filters by the user's permissions and finds a range of all the layout set prototypes where companyId = &#63; and active = &#63;.
+	 * Returns a range of all the layout set prototypes that the user has permission to view where companyId = &#63; and active = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param companyId the company ID to search with
-	 * @param active the active to search with
-	 * @param start the lower bound of the range of layout set prototypes to return
-	 * @param end the upper bound of the range of layout set prototypes to return (not inclusive)
+	 * @param companyId the company ID
+	 * @param active the active
+	 * @param start the lower bound of the range of layout set prototypes
+	 * @param end the upper bound of the range of layout set prototypes (not inclusive)
 	 * @return the range of matching layout set prototypes that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2098,16 +2090,16 @@ public class LayoutSetPrototypePersistenceImpl extends BasePersistenceImpl<Layou
 	}
 
 	/**
-	 * Filters by the user's permissions and finds an ordered range of all the layout set prototypes where companyId = &#63; and active = &#63;.
+	 * Returns an ordered range of all the layout set prototypes that the user has permissions to view where companyId = &#63; and active = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param companyId the company ID to search with
-	 * @param active the active to search with
-	 * @param start the lower bound of the range of layout set prototypes to return
-	 * @param end the upper bound of the range of layout set prototypes to return (not inclusive)
+	 * @param companyId the company ID
+	 * @param active the active
+	 * @param start the lower bound of the range of layout set prototypes
+	 * @param end the upper bound of the range of layout set prototypes (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching layout set prototypes that the user has permission to view
 	 * @throws SystemException if a system exception occurred
@@ -2183,15 +2175,11 @@ public class LayoutSetPrototypePersistenceImpl extends BasePersistenceImpl<Layou
 	}
 
 	/**
-	 * Filters the layout set prototypes before and after the current layout set prototype in the ordered set where companyId = &#63; and active = &#63;.
-	 *
-	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
-	 * </p>
+	 * Returns the layout set prototypes before and after the current layout set prototype in the ordered set of layout set prototypes that the user has permission to view where companyId = &#63; and active = &#63;.
 	 *
 	 * @param layoutSetPrototypeId the primary key of the current layout set prototype
-	 * @param companyId the company ID to search with
-	 * @param active the active to search with
+	 * @param companyId the company ID
+	 * @param active the active
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next layout set prototype
 	 * @throws com.liferay.portal.NoSuchLayoutSetPrototypeException if a layout set prototype with the primary key could not be found
@@ -2360,7 +2348,7 @@ public class LayoutSetPrototypePersistenceImpl extends BasePersistenceImpl<Layou
 	}
 
 	/**
-	 * Finds all the layout set prototypes.
+	 * Returns all the layout set prototypes.
 	 *
 	 * @return the layout set prototypes
 	 * @throws SystemException if a system exception occurred
@@ -2370,14 +2358,14 @@ public class LayoutSetPrototypePersistenceImpl extends BasePersistenceImpl<Layou
 	}
 
 	/**
-	 * Finds a range of all the layout set prototypes.
+	 * Returns a range of all the layout set prototypes.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param start the lower bound of the range of layout set prototypes to return
-	 * @param end the upper bound of the range of layout set prototypes to return (not inclusive)
+	 * @param start the lower bound of the range of layout set prototypes
+	 * @param end the upper bound of the range of layout set prototypes (not inclusive)
 	 * @return the range of layout set prototypes
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2387,14 +2375,14 @@ public class LayoutSetPrototypePersistenceImpl extends BasePersistenceImpl<Layou
 	}
 
 	/**
-	 * Finds an ordered range of all the layout set prototypes.
+	 * Returns an ordered range of all the layout set prototypes.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param start the lower bound of the range of layout set prototypes to return
-	 * @param end the upper bound of the range of layout set prototypes to return (not inclusive)
+	 * @param start the lower bound of the range of layout set prototypes
+	 * @param end the upper bound of the range of layout set prototypes (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of layout set prototypes
 	 * @throws SystemException if a system exception occurred
@@ -2471,7 +2459,7 @@ public class LayoutSetPrototypePersistenceImpl extends BasePersistenceImpl<Layou
 	/**
 	 * Removes all the layout set prototypes where uuid = &#63; from the database.
 	 *
-	 * @param uuid the uuid to search with
+	 * @param uuid the uuid
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByUuid(String uuid) throws SystemException {
@@ -2483,7 +2471,7 @@ public class LayoutSetPrototypePersistenceImpl extends BasePersistenceImpl<Layou
 	/**
 	 * Removes all the layout set prototypes where companyId = &#63; from the database.
 	 *
-	 * @param companyId the company ID to search with
+	 * @param companyId the company ID
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByCompanyId(long companyId) throws SystemException {
@@ -2495,8 +2483,8 @@ public class LayoutSetPrototypePersistenceImpl extends BasePersistenceImpl<Layou
 	/**
 	 * Removes all the layout set prototypes where companyId = &#63; and active = &#63; from the database.
 	 *
-	 * @param companyId the company ID to search with
-	 * @param active the active to search with
+	 * @param companyId the company ID
+	 * @param active the active
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByC_A(long companyId, boolean active)
@@ -2518,9 +2506,9 @@ public class LayoutSetPrototypePersistenceImpl extends BasePersistenceImpl<Layou
 	}
 
 	/**
-	 * Counts all the layout set prototypes where uuid = &#63;.
+	 * Returns the number of layout set prototypes where uuid = &#63;.
 	 *
-	 * @param uuid the uuid to search with
+	 * @param uuid the uuid
 	 * @return the number of matching layout set prototypes
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2583,9 +2571,9 @@ public class LayoutSetPrototypePersistenceImpl extends BasePersistenceImpl<Layou
 	}
 
 	/**
-	 * Filters by the user's permissions and counts all the layout set prototypes where uuid = &#63;.
+	 * Returns the number of layout set prototypes that the user has permission to view where uuid = &#63;.
 	 *
-	 * @param uuid the uuid to search with
+	 * @param uuid the uuid
 	 * @return the number of matching layout set prototypes that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2642,9 +2630,9 @@ public class LayoutSetPrototypePersistenceImpl extends BasePersistenceImpl<Layou
 	}
 
 	/**
-	 * Counts all the layout set prototypes where companyId = &#63;.
+	 * Returns the number of layout set prototypes where companyId = &#63;.
 	 *
-	 * @param companyId the company ID to search with
+	 * @param companyId the company ID
 	 * @return the number of matching layout set prototypes
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2695,9 +2683,9 @@ public class LayoutSetPrototypePersistenceImpl extends BasePersistenceImpl<Layou
 	}
 
 	/**
-	 * Filters by the user's permissions and counts all the layout set prototypes where companyId = &#63;.
+	 * Returns the number of layout set prototypes that the user has permission to view where companyId = &#63;.
 	 *
-	 * @param companyId the company ID to search with
+	 * @param companyId the company ID
 	 * @return the number of matching layout set prototypes that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2742,10 +2730,10 @@ public class LayoutSetPrototypePersistenceImpl extends BasePersistenceImpl<Layou
 	}
 
 	/**
-	 * Counts all the layout set prototypes where companyId = &#63; and active = &#63;.
+	 * Returns the number of layout set prototypes where companyId = &#63; and active = &#63;.
 	 *
-	 * @param companyId the company ID to search with
-	 * @param active the active to search with
+	 * @param companyId the company ID
+	 * @param active the active
 	 * @return the number of matching layout set prototypes
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2801,10 +2789,10 @@ public class LayoutSetPrototypePersistenceImpl extends BasePersistenceImpl<Layou
 	}
 
 	/**
-	 * Filters by the user's permissions and counts all the layout set prototypes where companyId = &#63; and active = &#63;.
+	 * Returns the number of layout set prototypes that the user has permission to view where companyId = &#63; and active = &#63;.
 	 *
-	 * @param companyId the company ID to search with
-	 * @param active the active to search with
+	 * @param companyId the company ID
+	 * @param active the active
 	 * @return the number of matching layout set prototypes that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2854,7 +2842,7 @@ public class LayoutSetPrototypePersistenceImpl extends BasePersistenceImpl<Layou
 	}
 
 	/**
-	 * Counts all the layout set prototypes.
+	 * Returns the number of layout set prototypes.
 	 *
 	 * @return the number of layout set prototypes
 	 * @throws SystemException if a system exception occurred

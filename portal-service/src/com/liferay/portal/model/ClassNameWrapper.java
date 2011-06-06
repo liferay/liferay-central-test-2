@@ -37,7 +37,7 @@ public class ClassNameWrapper implements ClassName {
 	}
 
 	/**
-	* Gets the primary key of this class name.
+	* Returns the primary key of this class name.
 	*
 	* @return the primary key of this class name
 	*/
@@ -46,7 +46,7 @@ public class ClassNameWrapper implements ClassName {
 	}
 
 	/**
-	* Sets the primary key of this class name
+	* Sets the primary key of this class name.
 	*
 	* @param primaryKey the primary key of this class name
 	*/
@@ -55,16 +55,16 @@ public class ClassNameWrapper implements ClassName {
 	}
 
 	/**
-	* Gets the class name of the model instance this class name is polymorphically associated with.
+	* Returns the fully qualified class name of this class name.
 	*
-	* @return the class name of the model instance this class name is polymorphically associated with
+	* @return the fully qualified class name of this class name
 	*/
 	public java.lang.String getClassName() {
 		return _className.getClassName();
 	}
 
 	/**
-	* Gets the class name ID of this class name.
+	* Returns the class name ID of this class name.
 	*
 	* @return the class name ID of this class name
 	*/
@@ -82,7 +82,7 @@ public class ClassNameWrapper implements ClassName {
 	}
 
 	/**
-	* Gets the value of this class name.
+	* Returns the value of this class name.
 	*
 	* @return the value of this class name
 	*/

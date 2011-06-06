@@ -48,21 +48,21 @@ public interface JournalStructureModel extends BaseModel<JournalStructure>,
 	 */
 
 	/**
-	 * Gets the primary key of this journal structure.
+	 * Returns the primary key of this journal structure.
 	 *
 	 * @return the primary key of this journal structure
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this journal structure
+	 * Sets the primary key of this journal structure.
 	 *
 	 * @param primaryKey the primary key of this journal structure
 	 */
 	public void setPrimaryKey(long primaryKey);
 
 	/**
-	 * Gets the uuid of this journal structure.
+	 * Returns the uuid of this journal structure.
 	 *
 	 * @return the uuid of this journal structure
 	 */
@@ -77,7 +77,7 @@ public interface JournalStructureModel extends BaseModel<JournalStructure>,
 	public void setUuid(String uuid);
 
 	/**
-	 * Gets the ID of this journal structure.
+	 * Returns the ID of this journal structure.
 	 *
 	 * @return the ID of this journal structure
 	 */
@@ -91,7 +91,7 @@ public interface JournalStructureModel extends BaseModel<JournalStructure>,
 	public void setId(long id);
 
 	/**
-	 * Gets the group ID of this journal structure.
+	 * Returns the group ID of this journal structure.
 	 *
 	 * @return the group ID of this journal structure
 	 */
@@ -105,7 +105,7 @@ public interface JournalStructureModel extends BaseModel<JournalStructure>,
 	public void setGroupId(long groupId);
 
 	/**
-	 * Gets the company ID of this journal structure.
+	 * Returns the company ID of this journal structure.
 	 *
 	 * @return the company ID of this journal structure
 	 */
@@ -119,7 +119,7 @@ public interface JournalStructureModel extends BaseModel<JournalStructure>,
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the user ID of this journal structure.
+	 * Returns the user ID of this journal structure.
 	 *
 	 * @return the user ID of this journal structure
 	 */
@@ -133,7 +133,7 @@ public interface JournalStructureModel extends BaseModel<JournalStructure>,
 	public void setUserId(long userId);
 
 	/**
-	 * Gets the user uuid of this journal structure.
+	 * Returns the user uuid of this journal structure.
 	 *
 	 * @return the user uuid of this journal structure
 	 * @throws SystemException if a system exception occurred
@@ -148,7 +148,7 @@ public interface JournalStructureModel extends BaseModel<JournalStructure>,
 	public void setUserUuid(String userUuid);
 
 	/**
-	 * Gets the user name of this journal structure.
+	 * Returns the user name of this journal structure.
 	 *
 	 * @return the user name of this journal structure
 	 */
@@ -163,7 +163,7 @@ public interface JournalStructureModel extends BaseModel<JournalStructure>,
 	public void setUserName(String userName);
 
 	/**
-	 * Gets the create date of this journal structure.
+	 * Returns the create date of this journal structure.
 	 *
 	 * @return the create date of this journal structure
 	 */
@@ -177,7 +177,7 @@ public interface JournalStructureModel extends BaseModel<JournalStructure>,
 	public void setCreateDate(Date createDate);
 
 	/**
-	 * Gets the modified date of this journal structure.
+	 * Returns the modified date of this journal structure.
 	 *
 	 * @return the modified date of this journal structure
 	 */
@@ -191,7 +191,7 @@ public interface JournalStructureModel extends BaseModel<JournalStructure>,
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
-	 * Gets the structure ID of this journal structure.
+	 * Returns the structure ID of this journal structure.
 	 *
 	 * @return the structure ID of this journal structure
 	 */
@@ -205,7 +205,7 @@ public interface JournalStructureModel extends BaseModel<JournalStructure>,
 	public void setStructureId(String structureId);
 
 	/**
-	 * Gets the parent structure ID of this journal structure.
+	 * Returns the parent structure ID of this journal structure.
 	 *
 	 * @return the parent structure ID of this journal structure
 	 */
@@ -220,7 +220,7 @@ public interface JournalStructureModel extends BaseModel<JournalStructure>,
 	public void setParentStructureId(String parentStructureId);
 
 	/**
-	 * Gets the name of this journal structure.
+	 * Returns the name of this journal structure.
 	 *
 	 * @return the name of this journal structure
 	 */
@@ -235,7 +235,7 @@ public interface JournalStructureModel extends BaseModel<JournalStructure>,
 	public void setName(String name);
 
 	/**
-	 * Gets the description of this journal structure.
+	 * Returns the description of this journal structure.
 	 *
 	 * @return the description of this journal structure
 	 */
@@ -250,7 +250,7 @@ public interface JournalStructureModel extends BaseModel<JournalStructure>,
 	public void setDescription(String description);
 
 	/**
-	 * Gets the xsd of this journal structure.
+	 * Returns the xsd of this journal structure.
 	 *
 	 * @return the xsd of this journal structure
 	 */

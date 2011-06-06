@@ -37,7 +37,7 @@ public class CompanyWrapper implements Company {
 	}
 
 	/**
-	* Gets the primary key of this company.
+	* Returns the primary key of this company.
 	*
 	* @return the primary key of this company
 	*/
@@ -46,7 +46,7 @@ public class CompanyWrapper implements Company {
 	}
 
 	/**
-	* Sets the primary key of this company
+	* Sets the primary key of this company.
 	*
 	* @param primaryKey the primary key of this company
 	*/
@@ -55,7 +55,7 @@ public class CompanyWrapper implements Company {
 	}
 
 	/**
-	* Gets the company ID of this company.
+	* Returns the company ID of this company.
 	*
 	* @return the company ID of this company
 	*/
@@ -73,7 +73,7 @@ public class CompanyWrapper implements Company {
 	}
 
 	/**
-	* Gets the account ID of this company.
+	* Returns the account ID of this company.
 	*
 	* @return the account ID of this company
 	*/
@@ -91,7 +91,7 @@ public class CompanyWrapper implements Company {
 	}
 
 	/**
-	* Gets the web ID of this company.
+	* Returns the web ID of this company.
 	*
 	* @return the web ID of this company
 	*/
@@ -109,7 +109,7 @@ public class CompanyWrapper implements Company {
 	}
 
 	/**
-	* Gets the key of this company.
+	* Returns the key of this company.
 	*
 	* @return the key of this company
 	*/
@@ -127,7 +127,7 @@ public class CompanyWrapper implements Company {
 	}
 
 	/**
-	* Gets the mx of this company.
+	* Returns the mx of this company.
 	*
 	* @return the mx of this company
 	*/
@@ -145,7 +145,7 @@ public class CompanyWrapper implements Company {
 	}
 
 	/**
-	* Gets the home u r l of this company.
+	* Returns the home u r l of this company.
 	*
 	* @return the home u r l of this company
 	*/
@@ -163,7 +163,7 @@ public class CompanyWrapper implements Company {
 	}
 
 	/**
-	* Gets the logo ID of this company.
+	* Returns the logo ID of this company.
 	*
 	* @return the logo ID of this company
 	*/
@@ -181,7 +181,7 @@ public class CompanyWrapper implements Company {
 	}
 
 	/**
-	* Gets the system of this company.
+	* Returns the system of this company.
 	*
 	* @return the system of this company
 	*/
@@ -208,7 +208,7 @@ public class CompanyWrapper implements Company {
 	}
 
 	/**
-	* Gets the max users of this company.
+	* Returns the max users of this company.
 	*
 	* @return the max users of this company
 	*/

@@ -37,7 +37,7 @@ public class MembershipRequestWrapper implements MembershipRequest {
 	}
 
 	/**
-	* Gets the primary key of this membership request.
+	* Returns the primary key of this membership request.
 	*
 	* @return the primary key of this membership request
 	*/
@@ -46,7 +46,7 @@ public class MembershipRequestWrapper implements MembershipRequest {
 	}
 
 	/**
-	* Sets the primary key of this membership request
+	* Sets the primary key of this membership request.
 	*
 	* @param primaryKey the primary key of this membership request
 	*/
@@ -55,7 +55,7 @@ public class MembershipRequestWrapper implements MembershipRequest {
 	}
 
 	/**
-	* Gets the membership request ID of this membership request.
+	* Returns the membership request ID of this membership request.
 	*
 	* @return the membership request ID of this membership request
 	*/
@@ -73,7 +73,7 @@ public class MembershipRequestWrapper implements MembershipRequest {
 	}
 
 	/**
-	* Gets the group ID of this membership request.
+	* Returns the group ID of this membership request.
 	*
 	* @return the group ID of this membership request
 	*/
@@ -91,7 +91,7 @@ public class MembershipRequestWrapper implements MembershipRequest {
 	}
 
 	/**
-	* Gets the company ID of this membership request.
+	* Returns the company ID of this membership request.
 	*
 	* @return the company ID of this membership request
 	*/
@@ -109,7 +109,7 @@ public class MembershipRequestWrapper implements MembershipRequest {
 	}
 
 	/**
-	* Gets the user ID of this membership request.
+	* Returns the user ID of this membership request.
 	*
 	* @return the user ID of this membership request
 	*/
@@ -127,7 +127,7 @@ public class MembershipRequestWrapper implements MembershipRequest {
 	}
 
 	/**
-	* Gets the user uuid of this membership request.
+	* Returns the user uuid of this membership request.
 	*
 	* @return the user uuid of this membership request
 	* @throws SystemException if a system exception occurred
@@ -147,7 +147,7 @@ public class MembershipRequestWrapper implements MembershipRequest {
 	}
 
 	/**
-	* Gets the create date of this membership request.
+	* Returns the create date of this membership request.
 	*
 	* @return the create date of this membership request
 	*/
@@ -165,7 +165,7 @@ public class MembershipRequestWrapper implements MembershipRequest {
 	}
 
 	/**
-	* Gets the comments of this membership request.
+	* Returns the comments of this membership request.
 	*
 	* @return the comments of this membership request
 	*/
@@ -183,7 +183,7 @@ public class MembershipRequestWrapper implements MembershipRequest {
 	}
 
 	/**
-	* Gets the reply comments of this membership request.
+	* Returns the reply comments of this membership request.
 	*
 	* @return the reply comments of this membership request
 	*/
@@ -201,7 +201,7 @@ public class MembershipRequestWrapper implements MembershipRequest {
 	}
 
 	/**
-	* Gets the reply date of this membership request.
+	* Returns the reply date of this membership request.
 	*
 	* @return the reply date of this membership request
 	*/
@@ -219,7 +219,7 @@ public class MembershipRequestWrapper implements MembershipRequest {
 	}
 
 	/**
-	* Gets the replier user ID of this membership request.
+	* Returns the replier user ID of this membership request.
 	*
 	* @return the replier user ID of this membership request
 	*/
@@ -237,7 +237,7 @@ public class MembershipRequestWrapper implements MembershipRequest {
 	}
 
 	/**
-	* Gets the replier user uuid of this membership request.
+	* Returns the replier user uuid of this membership request.
 	*
 	* @return the replier user uuid of this membership request
 	* @throws SystemException if a system exception occurred
@@ -257,7 +257,7 @@ public class MembershipRequestWrapper implements MembershipRequest {
 	}
 
 	/**
-	* Gets the status ID of this membership request.
+	* Returns the status ID of this membership request.
 	*
 	* @return the status ID of this membership request
 	*/

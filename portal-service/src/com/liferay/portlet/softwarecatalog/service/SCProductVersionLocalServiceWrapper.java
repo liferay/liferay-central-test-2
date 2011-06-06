@@ -33,7 +33,7 @@ public class SCProductVersionLocalServiceWrapper
 	/**
 	* Adds the s c product version to the database. Also notifies the appropriate model listeners.
 	*
-	* @param scProductVersion the s c product version to add
+	* @param scProductVersion the s c product version
 	* @return the s c product version that was added
 	* @throws SystemException if a system exception occurred
 	*/
@@ -57,7 +57,7 @@ public class SCProductVersionLocalServiceWrapper
 	/**
 	* Deletes the s c product version with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param productVersionId the primary key of the s c product version to delete
+	* @param productVersionId the primary key of the s c product version
 	* @throws PortalException if a s c product version with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -70,7 +70,7 @@ public class SCProductVersionLocalServiceWrapper
 	/**
 	* Deletes the s c product version from the database. Also notifies the appropriate model listeners.
 	*
-	* @param scProductVersion the s c product version to delete
+	* @param scProductVersion the s c product version
 	* @throws SystemException if a system exception occurred
 	*/
 	public void deleteSCProductVersion(
@@ -82,7 +82,7 @@ public class SCProductVersionLocalServiceWrapper
 	/**
 	* Performs a dynamic query on the database and returns the matching rows.
 	*
-	* @param dynamicQuery the dynamic query to search with
+	* @param dynamicQuery the dynamic query
 	* @return the matching rows
 	* @throws SystemException if a system exception occurred
 	*/
@@ -100,9 +100,9 @@ public class SCProductVersionLocalServiceWrapper
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param dynamicQuery the dynamic query to search with
-	* @param start the lower bound of the range of model instances to return
-	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param dynamicQuery the dynamic query
+	* @param start the lower bound of the range of model instances
+	* @param end the upper bound of the range of model instances (not inclusive)
 	* @return the range of matching rows
 	* @throws SystemException if a system exception occurred
 	*/
@@ -121,9 +121,9 @@ public class SCProductVersionLocalServiceWrapper
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param dynamicQuery the dynamic query to search with
-	* @param start the lower bound of the range of model instances to return
-	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param dynamicQuery the dynamic query
+	* @param start the lower bound of the range of model instances
+	* @param end the upper bound of the range of model instances (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching rows
 	* @throws SystemException if a system exception occurred
@@ -139,9 +139,9 @@ public class SCProductVersionLocalServiceWrapper
 	}
 
 	/**
-	* Counts the number of rows that match the dynamic query.
+	* Returns the number of rows that match the dynamic query.
 	*
-	* @param dynamicQuery the dynamic query to search with
+	* @param dynamicQuery the dynamic query
 	* @return the number of rows that match the dynamic query
 	* @throws SystemException if a system exception occurred
 	*/
@@ -152,9 +152,9 @@ public class SCProductVersionLocalServiceWrapper
 	}
 
 	/**
-	* Gets the s c product version with the primary key.
+	* Returns the s c product version with the primary key.
 	*
-	* @param productVersionId the primary key of the s c product version to get
+	* @param productVersionId the primary key of the s c product version
 	* @return the s c product version
 	* @throws PortalException if a s c product version with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -167,14 +167,14 @@ public class SCProductVersionLocalServiceWrapper
 	}
 
 	/**
-	* Gets a range of all the s c product versions.
+	* Returns a range of all the s c product versions.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of s c product versions to return
-	* @param end the upper bound of the range of s c product versions to return (not inclusive)
+	* @param start the lower bound of the range of s c product versions
+	* @param end the upper bound of the range of s c product versions (not inclusive)
 	* @return the range of s c product versions
 	* @throws SystemException if a system exception occurred
 	*/
@@ -185,7 +185,7 @@ public class SCProductVersionLocalServiceWrapper
 	}
 
 	/**
-	* Gets the number of s c product versions.
+	* Returns the number of s c product versions.
 	*
 	* @return the number of s c product versions
 	* @throws SystemException if a system exception occurred
@@ -198,7 +198,7 @@ public class SCProductVersionLocalServiceWrapper
 	/**
 	* Updates the s c product version in the database. Also notifies the appropriate model listeners.
 	*
-	* @param scProductVersion the s c product version to update
+	* @param scProductVersion the s c product version
 	* @return the s c product version that was updated
 	* @throws SystemException if a system exception occurred
 	*/
@@ -211,7 +211,7 @@ public class SCProductVersionLocalServiceWrapper
 	/**
 	* Updates the s c product version in the database. Also notifies the appropriate model listeners.
 	*
-	* @param scProductVersion the s c product version to update
+	* @param scProductVersion the s c product version
 	* @param merge whether to merge the s c product version with the current session. See {@link com.liferay.portal.service.persistence.BatchSession#update(com.liferay.portal.kernel.dao.orm.Session, com.liferay.portal.model.BaseModel, boolean)} for an explanation.
 	* @return the s c product version that was updated
 	* @throws SystemException if a system exception occurred
@@ -225,7 +225,7 @@ public class SCProductVersionLocalServiceWrapper
 	}
 
 	/**
-	* Gets the Spring bean ID for this bean.
+	* Returns the Spring bean ID for this bean.
 	*
 	* @return the Spring bean ID for this bean
 	*/

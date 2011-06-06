@@ -37,7 +37,7 @@ public class ResourceActionWrapper implements ResourceAction {
 	}
 
 	/**
-	* Gets the primary key of this resource action.
+	* Returns the primary key of this resource action.
 	*
 	* @return the primary key of this resource action
 	*/
@@ -46,7 +46,7 @@ public class ResourceActionWrapper implements ResourceAction {
 	}
 
 	/**
-	* Sets the primary key of this resource action
+	* Sets the primary key of this resource action.
 	*
 	* @param primaryKey the primary key of this resource action
 	*/
@@ -55,7 +55,7 @@ public class ResourceActionWrapper implements ResourceAction {
 	}
 
 	/**
-	* Gets the resource action ID of this resource action.
+	* Returns the resource action ID of this resource action.
 	*
 	* @return the resource action ID of this resource action
 	*/
@@ -73,7 +73,7 @@ public class ResourceActionWrapper implements ResourceAction {
 	}
 
 	/**
-	* Gets the name of this resource action.
+	* Returns the name of this resource action.
 	*
 	* @return the name of this resource action
 	*/
@@ -91,7 +91,7 @@ public class ResourceActionWrapper implements ResourceAction {
 	}
 
 	/**
-	* Gets the action ID of this resource action.
+	* Returns the action ID of this resource action.
 	*
 	* @return the action ID of this resource action
 	*/
@@ -109,7 +109,7 @@ public class ResourceActionWrapper implements ResourceAction {
 	}
 
 	/**
-	* Gets the bitwise value of this resource action.
+	* Returns the bitwise value of this resource action.
 	*
 	* @return the bitwise value of this resource action
 	*/

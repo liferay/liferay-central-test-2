@@ -90,7 +90,7 @@ public abstract class SCProductEntryLocalServiceBaseImpl
 	/**
 	 * Adds the s c product entry to the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param scProductEntry the s c product entry to add
+	 * @param scProductEntry the s c product entry
 	 * @return the s c product entry that was added
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -114,7 +114,7 @@ public abstract class SCProductEntryLocalServiceBaseImpl
 	/**
 	 * Deletes the s c product entry with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param productEntryId the primary key of the s c product entry to delete
+	 * @param productEntryId the primary key of the s c product entry
 	 * @throws PortalException if a s c product entry with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -126,7 +126,7 @@ public abstract class SCProductEntryLocalServiceBaseImpl
 	/**
 	 * Deletes the s c product entry from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param scProductEntry the s c product entry to delete
+	 * @param scProductEntry the s c product entry
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void deleteSCProductEntry(SCProductEntry scProductEntry)
@@ -137,7 +137,7 @@ public abstract class SCProductEntryLocalServiceBaseImpl
 	/**
 	 * Performs a dynamic query on the database and returns the matching rows.
 	 *
-	 * @param dynamicQuery the dynamic query to search with
+	 * @param dynamicQuery the dynamic query
 	 * @return the matching rows
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -154,9 +154,9 @@ public abstract class SCProductEntryLocalServiceBaseImpl
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param dynamicQuery the dynamic query to search with
-	 * @param start the lower bound of the range of model instances to return
-	 * @param end the upper bound of the range of model instances to return (not inclusive)
+	 * @param dynamicQuery the dynamic query
+	 * @param start the lower bound of the range of model instances
+	 * @param end the upper bound of the range of model instances (not inclusive)
 	 * @return the range of matching rows
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -174,9 +174,9 @@ public abstract class SCProductEntryLocalServiceBaseImpl
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param dynamicQuery the dynamic query to search with
-	 * @param start the lower bound of the range of model instances to return
-	 * @param end the upper bound of the range of model instances to return (not inclusive)
+	 * @param dynamicQuery the dynamic query
+	 * @param start the lower bound of the range of model instances
+	 * @param end the upper bound of the range of model instances (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching rows
 	 * @throws SystemException if a system exception occurred
@@ -189,9 +189,9 @@ public abstract class SCProductEntryLocalServiceBaseImpl
 	}
 
 	/**
-	 * Counts the number of rows that match the dynamic query.
+	 * Returns the number of rows that match the dynamic query.
 	 *
-	 * @param dynamicQuery the dynamic query to search with
+	 * @param dynamicQuery the dynamic query
 	 * @return the number of rows that match the dynamic query
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -201,9 +201,9 @@ public abstract class SCProductEntryLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the s c product entry with the primary key.
+	 * Returns the s c product entry with the primary key.
 	 *
-	 * @param productEntryId the primary key of the s c product entry to get
+	 * @param productEntryId the primary key of the s c product entry
 	 * @return the s c product entry
 	 * @throws PortalException if a s c product entry with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -214,14 +214,14 @@ public abstract class SCProductEntryLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets a range of all the s c product entries.
+	 * Returns a range of all the s c product entries.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param start the lower bound of the range of s c product entries to return
-	 * @param end the upper bound of the range of s c product entries to return (not inclusive)
+	 * @param start the lower bound of the range of s c product entries
+	 * @param end the upper bound of the range of s c product entries (not inclusive)
 	 * @return the range of s c product entries
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -231,7 +231,7 @@ public abstract class SCProductEntryLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the number of s c product entries.
+	 * Returns the number of s c product entries.
 	 *
 	 * @return the number of s c product entries
 	 * @throws SystemException if a system exception occurred
@@ -243,7 +243,7 @@ public abstract class SCProductEntryLocalServiceBaseImpl
 	/**
 	 * Updates the s c product entry in the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param scProductEntry the s c product entry to update
+	 * @param scProductEntry the s c product entry
 	 * @return the s c product entry that was updated
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -257,7 +257,7 @@ public abstract class SCProductEntryLocalServiceBaseImpl
 	/**
 	 * Updates the s c product entry in the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param scProductEntry the s c product entry to update
+	 * @param scProductEntry the s c product entry
 	 * @param merge whether to merge the s c product entry with the current session. See {@link com.liferay.portal.service.persistence.BatchSession#update(com.liferay.portal.kernel.dao.orm.Session, com.liferay.portal.model.BaseModel, boolean)} for an explanation.
 	 * @return the s c product entry that was updated
 	 * @throws SystemException if a system exception occurred
@@ -270,7 +270,7 @@ public abstract class SCProductEntryLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the s c framework version local service.
+	 * Returns the s c framework version local service.
 	 *
 	 * @return the s c framework version local service
 	 */
@@ -289,7 +289,7 @@ public abstract class SCProductEntryLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the s c framework version remote service.
+	 * Returns the s c framework version remote service.
 	 *
 	 * @return the s c framework version remote service
 	 */
@@ -308,7 +308,7 @@ public abstract class SCProductEntryLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the s c framework version persistence.
+	 * Returns the s c framework version persistence.
 	 *
 	 * @return the s c framework version persistence
 	 */
@@ -327,7 +327,7 @@ public abstract class SCProductEntryLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the s c license local service.
+	 * Returns the s c license local service.
 	 *
 	 * @return the s c license local service
 	 */
@@ -346,7 +346,7 @@ public abstract class SCProductEntryLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the s c license remote service.
+	 * Returns the s c license remote service.
 	 *
 	 * @return the s c license remote service
 	 */
@@ -364,7 +364,7 @@ public abstract class SCProductEntryLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the s c license persistence.
+	 * Returns the s c license persistence.
 	 *
 	 * @return the s c license persistence
 	 */
@@ -383,7 +383,7 @@ public abstract class SCProductEntryLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the s c product entry local service.
+	 * Returns the s c product entry local service.
 	 *
 	 * @return the s c product entry local service
 	 */
@@ -402,7 +402,7 @@ public abstract class SCProductEntryLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the s c product entry remote service.
+	 * Returns the s c product entry remote service.
 	 *
 	 * @return the s c product entry remote service
 	 */
@@ -421,7 +421,7 @@ public abstract class SCProductEntryLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the s c product entry persistence.
+	 * Returns the s c product entry persistence.
 	 *
 	 * @return the s c product entry persistence
 	 */
@@ -440,7 +440,7 @@ public abstract class SCProductEntryLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the s c product screenshot local service.
+	 * Returns the s c product screenshot local service.
 	 *
 	 * @return the s c product screenshot local service
 	 */
@@ -459,7 +459,7 @@ public abstract class SCProductEntryLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the s c product screenshot persistence.
+	 * Returns the s c product screenshot persistence.
 	 *
 	 * @return the s c product screenshot persistence
 	 */
@@ -478,7 +478,7 @@ public abstract class SCProductEntryLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the s c product version local service.
+	 * Returns the s c product version local service.
 	 *
 	 * @return the s c product version local service
 	 */
@@ -497,7 +497,7 @@ public abstract class SCProductEntryLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the s c product version remote service.
+	 * Returns the s c product version remote service.
 	 *
 	 * @return the s c product version remote service
 	 */
@@ -516,7 +516,7 @@ public abstract class SCProductEntryLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the s c product version persistence.
+	 * Returns the s c product version persistence.
 	 *
 	 * @return the s c product version persistence
 	 */
@@ -535,7 +535,7 @@ public abstract class SCProductEntryLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the counter local service.
+	 * Returns the counter local service.
 	 *
 	 * @return the counter local service
 	 */
@@ -553,7 +553,7 @@ public abstract class SCProductEntryLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the group local service.
+	 * Returns the group local service.
 	 *
 	 * @return the group local service
 	 */
@@ -571,7 +571,7 @@ public abstract class SCProductEntryLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the group remote service.
+	 * Returns the group remote service.
 	 *
 	 * @return the group remote service
 	 */
@@ -589,7 +589,7 @@ public abstract class SCProductEntryLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the group persistence.
+	 * Returns the group persistence.
 	 *
 	 * @return the group persistence
 	 */
@@ -607,7 +607,7 @@ public abstract class SCProductEntryLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the group finder.
+	 * Returns the group finder.
 	 *
 	 * @return the group finder
 	 */
@@ -625,7 +625,7 @@ public abstract class SCProductEntryLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the image local service.
+	 * Returns the image local service.
 	 *
 	 * @return the image local service
 	 */
@@ -643,7 +643,7 @@ public abstract class SCProductEntryLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the image remote service.
+	 * Returns the image remote service.
 	 *
 	 * @return the image remote service
 	 */
@@ -661,7 +661,7 @@ public abstract class SCProductEntryLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the image persistence.
+	 * Returns the image persistence.
 	 *
 	 * @return the image persistence
 	 */
@@ -679,7 +679,7 @@ public abstract class SCProductEntryLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the resource local service.
+	 * Returns the resource local service.
 	 *
 	 * @return the resource local service
 	 */
@@ -698,7 +698,7 @@ public abstract class SCProductEntryLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the resource remote service.
+	 * Returns the resource remote service.
 	 *
 	 * @return the resource remote service
 	 */
@@ -716,7 +716,7 @@ public abstract class SCProductEntryLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the resource persistence.
+	 * Returns the resource persistence.
 	 *
 	 * @return the resource persistence
 	 */
@@ -734,7 +734,7 @@ public abstract class SCProductEntryLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the resource finder.
+	 * Returns the resource finder.
 	 *
 	 * @return the resource finder
 	 */
@@ -752,7 +752,7 @@ public abstract class SCProductEntryLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the user local service.
+	 * Returns the user local service.
 	 *
 	 * @return the user local service
 	 */
@@ -770,7 +770,7 @@ public abstract class SCProductEntryLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the user remote service.
+	 * Returns the user remote service.
 	 *
 	 * @return the user remote service
 	 */
@@ -788,7 +788,7 @@ public abstract class SCProductEntryLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the user persistence.
+	 * Returns the user persistence.
 	 *
 	 * @return the user persistence
 	 */
@@ -806,7 +806,7 @@ public abstract class SCProductEntryLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the user finder.
+	 * Returns the user finder.
 	 *
 	 * @return the user finder
 	 */
@@ -824,7 +824,7 @@ public abstract class SCProductEntryLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the message-boards message local service.
+	 * Returns the message-boards message local service.
 	 *
 	 * @return the message-boards message local service
 	 */
@@ -843,7 +843,7 @@ public abstract class SCProductEntryLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the message-boards message remote service.
+	 * Returns the message-boards message remote service.
 	 *
 	 * @return the message-boards message remote service
 	 */
@@ -861,7 +861,7 @@ public abstract class SCProductEntryLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the message-boards message persistence.
+	 * Returns the message-boards message persistence.
 	 *
 	 * @return the message-boards message persistence
 	 */
@@ -880,7 +880,7 @@ public abstract class SCProductEntryLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the message-boards message finder.
+	 * Returns the message-boards message finder.
 	 *
 	 * @return the message-boards message finder
 	 */
@@ -898,7 +898,7 @@ public abstract class SCProductEntryLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the ratings stats local service.
+	 * Returns the ratings stats local service.
 	 *
 	 * @return the ratings stats local service
 	 */
@@ -917,7 +917,7 @@ public abstract class SCProductEntryLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the ratings stats persistence.
+	 * Returns the ratings stats persistence.
 	 *
 	 * @return the ratings stats persistence
 	 */
@@ -936,7 +936,7 @@ public abstract class SCProductEntryLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the ratings stats finder.
+	 * Returns the ratings stats finder.
 	 *
 	 * @return the ratings stats finder
 	 */
@@ -954,7 +954,7 @@ public abstract class SCProductEntryLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the Spring bean ID for this bean.
+	 * Returns the Spring bean ID for this bean.
 	 *
 	 * @return the Spring bean ID for this bean
 	 */
@@ -974,7 +974,7 @@ public abstract class SCProductEntryLocalServiceBaseImpl
 	/**
 	 * Performs an SQL query.
 	 *
-	 * @param sql the sql query to perform
+	 * @param sql the sql query
 	 */
 	protected void runSQL(String sql) throws SystemException {
 		try {

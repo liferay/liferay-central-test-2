@@ -48,21 +48,21 @@ public interface AssetCategoryPropertyModel extends AuditedModel,
 	 */
 
 	/**
-	 * Gets the primary key of this asset category property.
+	 * Returns the primary key of this asset category property.
 	 *
 	 * @return the primary key of this asset category property
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this asset category property
+	 * Sets the primary key of this asset category property.
 	 *
 	 * @param primaryKey the primary key of this asset category property
 	 */
 	public void setPrimaryKey(long primaryKey);
 
 	/**
-	 * Gets the category property ID of this asset category property.
+	 * Returns the category property ID of this asset category property.
 	 *
 	 * @return the category property ID of this asset category property
 	 */
@@ -76,7 +76,7 @@ public interface AssetCategoryPropertyModel extends AuditedModel,
 	public void setCategoryPropertyId(long categoryPropertyId);
 
 	/**
-	 * Gets the company ID of this asset category property.
+	 * Returns the company ID of this asset category property.
 	 *
 	 * @return the company ID of this asset category property
 	 */
@@ -90,7 +90,7 @@ public interface AssetCategoryPropertyModel extends AuditedModel,
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the user ID of this asset category property.
+	 * Returns the user ID of this asset category property.
 	 *
 	 * @return the user ID of this asset category property
 	 */
@@ -104,7 +104,7 @@ public interface AssetCategoryPropertyModel extends AuditedModel,
 	public void setUserId(long userId);
 
 	/**
-	 * Gets the user uuid of this asset category property.
+	 * Returns the user uuid of this asset category property.
 	 *
 	 * @return the user uuid of this asset category property
 	 * @throws SystemException if a system exception occurred
@@ -119,7 +119,7 @@ public interface AssetCategoryPropertyModel extends AuditedModel,
 	public void setUserUuid(String userUuid);
 
 	/**
-	 * Gets the user name of this asset category property.
+	 * Returns the user name of this asset category property.
 	 *
 	 * @return the user name of this asset category property
 	 */
@@ -134,7 +134,7 @@ public interface AssetCategoryPropertyModel extends AuditedModel,
 	public void setUserName(String userName);
 
 	/**
-	 * Gets the create date of this asset category property.
+	 * Returns the create date of this asset category property.
 	 *
 	 * @return the create date of this asset category property
 	 */
@@ -148,7 +148,7 @@ public interface AssetCategoryPropertyModel extends AuditedModel,
 	public void setCreateDate(Date createDate);
 
 	/**
-	 * Gets the modified date of this asset category property.
+	 * Returns the modified date of this asset category property.
 	 *
 	 * @return the modified date of this asset category property
 	 */
@@ -162,7 +162,7 @@ public interface AssetCategoryPropertyModel extends AuditedModel,
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
-	 * Gets the category ID of this asset category property.
+	 * Returns the category ID of this asset category property.
 	 *
 	 * @return the category ID of this asset category property
 	 */
@@ -176,7 +176,7 @@ public interface AssetCategoryPropertyModel extends AuditedModel,
 	public void setCategoryId(long categoryId);
 
 	/**
-	 * Gets the key of this asset category property.
+	 * Returns the key of this asset category property.
 	 *
 	 * @return the key of this asset category property
 	 */
@@ -191,7 +191,7 @@ public interface AssetCategoryPropertyModel extends AuditedModel,
 	public void setKey(String key);
 
 	/**
-	 * Gets the value of this asset category property.
+	 * Returns the value of this asset category property.
 	 *
 	 * @return the value of this asset category property
 	 */

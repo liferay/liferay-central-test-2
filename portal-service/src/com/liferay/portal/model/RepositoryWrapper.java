@@ -37,7 +37,7 @@ public class RepositoryWrapper implements Repository {
 	}
 
 	/**
-	* Gets the primary key of this repository.
+	* Returns the primary key of this repository.
 	*
 	* @return the primary key of this repository
 	*/
@@ -46,7 +46,7 @@ public class RepositoryWrapper implements Repository {
 	}
 
 	/**
-	* Sets the primary key of this repository
+	* Sets the primary key of this repository.
 	*
 	* @param primaryKey the primary key of this repository
 	*/
@@ -55,7 +55,7 @@ public class RepositoryWrapper implements Repository {
 	}
 
 	/**
-	* Gets the repository ID of this repository.
+	* Returns the repository ID of this repository.
 	*
 	* @return the repository ID of this repository
 	*/
@@ -73,7 +73,7 @@ public class RepositoryWrapper implements Repository {
 	}
 
 	/**
-	* Gets the group ID of this repository.
+	* Returns the group ID of this repository.
 	*
 	* @return the group ID of this repository
 	*/
@@ -91,7 +91,7 @@ public class RepositoryWrapper implements Repository {
 	}
 
 	/**
-	* Gets the company ID of this repository.
+	* Returns the company ID of this repository.
 	*
 	* @return the company ID of this repository
 	*/
@@ -109,7 +109,7 @@ public class RepositoryWrapper implements Repository {
 	}
 
 	/**
-	* Gets the create date of this repository.
+	* Returns the create date of this repository.
 	*
 	* @return the create date of this repository
 	*/
@@ -127,7 +127,7 @@ public class RepositoryWrapper implements Repository {
 	}
 
 	/**
-	* Gets the modified date of this repository.
+	* Returns the modified date of this repository.
 	*
 	* @return the modified date of this repository
 	*/
@@ -145,16 +145,16 @@ public class RepositoryWrapper implements Repository {
 	}
 
 	/**
-	* Gets the class name of the model instance this repository is polymorphically associated with.
+	* Returns the fully qualified class name of this repository.
 	*
-	* @return the class name of the model instance this repository is polymorphically associated with
+	* @return the fully qualified class name of this repository
 	*/
 	public java.lang.String getClassName() {
 		return _repository.getClassName();
 	}
 
 	/**
-	* Gets the class name ID of this repository.
+	* Returns the class name ID of this repository.
 	*
 	* @return the class name ID of this repository
 	*/
@@ -172,7 +172,7 @@ public class RepositoryWrapper implements Repository {
 	}
 
 	/**
-	* Gets the name of this repository.
+	* Returns the name of this repository.
 	*
 	* @return the name of this repository
 	*/
@@ -190,7 +190,7 @@ public class RepositoryWrapper implements Repository {
 	}
 
 	/**
-	* Gets the description of this repository.
+	* Returns the description of this repository.
 	*
 	* @return the description of this repository
 	*/
@@ -208,7 +208,7 @@ public class RepositoryWrapper implements Repository {
 	}
 
 	/**
-	* Gets the portlet ID of this repository.
+	* Returns the portlet ID of this repository.
 	*
 	* @return the portlet ID of this repository
 	*/
@@ -226,7 +226,7 @@ public class RepositoryWrapper implements Repository {
 	}
 
 	/**
-	* Gets the type settings of this repository.
+	* Returns the type settings of this repository.
 	*
 	* @return the type settings of this repository
 	*/
@@ -244,7 +244,7 @@ public class RepositoryWrapper implements Repository {
 	}
 
 	/**
-	* Gets the dl folder ID of this repository.
+	* Returns the dl folder ID of this repository.
 	*
 	* @return the dl folder ID of this repository
 	*/

@@ -117,7 +117,7 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 	/**
 	 * Caches the resource code in the entity cache if it is enabled.
 	 *
-	 * @param resourceCode the resource code to cache
+	 * @param resourceCode the resource code
 	 */
 	public void cacheResult(ResourceCode resourceCode) {
 		EntityCacheUtil.putResult(ResourceCodeModelImpl.ENTITY_CACHE_ENABLED,
@@ -136,7 +136,7 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 	/**
 	 * Caches the resource codes in the entity cache if it is enabled.
 	 *
-	 * @param resourceCodes the resource codes to cache
+	 * @param resourceCodes the resource codes
 	 */
 	public void cacheResult(List<ResourceCode> resourceCodes) {
 		for (ResourceCode resourceCode : resourceCodes) {
@@ -203,7 +203,7 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 	/**
 	 * Removes the resource code with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param primaryKey the primary key of the resource code to remove
+	 * @param primaryKey the primary key of the resource code
 	 * @return the resource code that was removed
 	 * @throws com.liferay.portal.NoSuchModelException if a resource code with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -216,7 +216,7 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 	/**
 	 * Removes the resource code with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param codeId the primary key of the resource code to remove
+	 * @param codeId the primary key of the resource code
 	 * @return the resource code that was removed
 	 * @throws com.liferay.portal.NoSuchResourceCodeException if a resource code with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -256,7 +256,7 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 	/**
 	 * Removes the resource code from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param resourceCode the resource code to remove
+	 * @param resourceCode the resource code
 	 * @return the resource code that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -380,9 +380,9 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 	}
 
 	/**
-	 * Finds the resource code with the primary key or throws a {@link com.liferay.portal.NoSuchModelException} if it could not be found.
+	 * Returns the resource code with the primary key or throws a {@link com.liferay.portal.NoSuchModelException} if it could not be found.
 	 *
-	 * @param primaryKey the primary key of the resource code to find
+	 * @param primaryKey the primary key of the resource code
 	 * @return the resource code
 	 * @throws com.liferay.portal.NoSuchModelException if a resource code with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -393,9 +393,9 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 	}
 
 	/**
-	 * Finds the resource code with the primary key or throws a {@link com.liferay.portal.NoSuchResourceCodeException} if it could not be found.
+	 * Returns the resource code with the primary key or throws a {@link com.liferay.portal.NoSuchResourceCodeException} if it could not be found.
 	 *
-	 * @param codeId the primary key of the resource code to find
+	 * @param codeId the primary key of the resource code
 	 * @return the resource code
 	 * @throws com.liferay.portal.NoSuchResourceCodeException if a resource code with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -417,9 +417,9 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 	}
 
 	/**
-	 * Finds the resource code with the primary key or returns <code>null</code> if it could not be found.
+	 * Returns the resource code with the primary key or returns <code>null</code> if it could not be found.
 	 *
-	 * @param primaryKey the primary key of the resource code to find
+	 * @param primaryKey the primary key of the resource code
 	 * @return the resource code, or <code>null</code> if a resource code with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -429,9 +429,9 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 	}
 
 	/**
-	 * Finds the resource code with the primary key or returns <code>null</code> if it could not be found.
+	 * Returns the resource code with the primary key or returns <code>null</code> if it could not be found.
 	 *
-	 * @param codeId the primary key of the resource code to find
+	 * @param codeId the primary key of the resource code
 	 * @return the resource code, or <code>null</code> if a resource code with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -465,9 +465,9 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 	}
 
 	/**
-	 * Finds all the resource codes where companyId = &#63;.
+	 * Returns all the resource codes where companyId = &#63;.
 	 *
-	 * @param companyId the company ID to search with
+	 * @param companyId the company ID
 	 * @return the matching resource codes
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -478,15 +478,15 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 	}
 
 	/**
-	 * Finds a range of all the resource codes where companyId = &#63;.
+	 * Returns a range of all the resource codes where companyId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param companyId the company ID to search with
-	 * @param start the lower bound of the range of resource codes to return
-	 * @param end the upper bound of the range of resource codes to return (not inclusive)
+	 * @param companyId the company ID
+	 * @param start the lower bound of the range of resource codes
+	 * @param end the upper bound of the range of resource codes (not inclusive)
 	 * @return the range of matching resource codes
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -496,15 +496,15 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 	}
 
 	/**
-	 * Finds an ordered range of all the resource codes where companyId = &#63;.
+	 * Returns an ordered range of all the resource codes where companyId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param companyId the company ID to search with
-	 * @param start the lower bound of the range of resource codes to return
-	 * @param end the upper bound of the range of resource codes to return (not inclusive)
+	 * @param companyId the company ID
+	 * @param start the lower bound of the range of resource codes
+	 * @param end the upper bound of the range of resource codes (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching resource codes
 	 * @throws SystemException if a system exception occurred
@@ -580,13 +580,13 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 	}
 
 	/**
-	 * Finds the first resource code in the ordered set where companyId = &#63;.
+	 * Returns the first resource code in the ordered set where companyId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param companyId the company ID to search with
+	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching resource code
 	 * @throws com.liferay.portal.NoSuchResourceCodeException if a matching resource code could not be found
@@ -616,13 +616,13 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 	}
 
 	/**
-	 * Finds the last resource code in the ordered set where companyId = &#63;.
+	 * Returns the last resource code in the ordered set where companyId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param companyId the company ID to search with
+	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching resource code
 	 * @throws com.liferay.portal.NoSuchResourceCodeException if a matching resource code could not be found
@@ -654,14 +654,14 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 	}
 
 	/**
-	 * Finds the resource codes before and after the current resource code in the ordered set where companyId = &#63;.
+	 * Returns the resource codes before and after the current resource code in the ordered set where companyId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
 	 * @param codeId the primary key of the current resource code
-	 * @param companyId the company ID to search with
+	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next resource code
 	 * @throws com.liferay.portal.NoSuchResourceCodeException if a resource code with the primary key could not be found
@@ -798,9 +798,9 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 	}
 
 	/**
-	 * Finds all the resource codes where name = &#63;.
+	 * Returns all the resource codes where name = &#63;.
 	 *
-	 * @param name the name to search with
+	 * @param name the name
 	 * @return the matching resource codes
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -809,15 +809,15 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 	}
 
 	/**
-	 * Finds a range of all the resource codes where name = &#63;.
+	 * Returns a range of all the resource codes where name = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param name the name to search with
-	 * @param start the lower bound of the range of resource codes to return
-	 * @param end the upper bound of the range of resource codes to return (not inclusive)
+	 * @param name the name
+	 * @param start the lower bound of the range of resource codes
+	 * @param end the upper bound of the range of resource codes (not inclusive)
 	 * @return the range of matching resource codes
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -827,15 +827,15 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 	}
 
 	/**
-	 * Finds an ordered range of all the resource codes where name = &#63;.
+	 * Returns an ordered range of all the resource codes where name = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param name the name to search with
-	 * @param start the lower bound of the range of resource codes to return
-	 * @param end the upper bound of the range of resource codes to return (not inclusive)
+	 * @param name the name
+	 * @param start the lower bound of the range of resource codes
+	 * @param end the upper bound of the range of resource codes (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching resource codes
 	 * @throws SystemException if a system exception occurred
@@ -923,13 +923,13 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 	}
 
 	/**
-	 * Finds the first resource code in the ordered set where name = &#63;.
+	 * Returns the first resource code in the ordered set where name = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param name the name to search with
+	 * @param name the name
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching resource code
 	 * @throws com.liferay.portal.NoSuchResourceCodeException if a matching resource code could not be found
@@ -958,13 +958,13 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 	}
 
 	/**
-	 * Finds the last resource code in the ordered set where name = &#63;.
+	 * Returns the last resource code in the ordered set where name = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param name the name to search with
+	 * @param name the name
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching resource code
 	 * @throws com.liferay.portal.NoSuchResourceCodeException if a matching resource code could not be found
@@ -996,14 +996,14 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 	}
 
 	/**
-	 * Finds the resource codes before and after the current resource code in the ordered set where name = &#63;.
+	 * Returns the resource codes before and after the current resource code in the ordered set where name = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
 	 * @param codeId the primary key of the current resource code
-	 * @param name the name to search with
+	 * @param name the name
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next resource code
 	 * @throws com.liferay.portal.NoSuchResourceCodeException if a resource code with the primary key could not be found
@@ -1152,11 +1152,11 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 	}
 
 	/**
-	 * Finds the resource code where companyId = &#63; and name = &#63; and scope = &#63; or throws a {@link com.liferay.portal.NoSuchResourceCodeException} if it could not be found.
+	 * Returns the resource code where companyId = &#63; and name = &#63; and scope = &#63; or throws a {@link com.liferay.portal.NoSuchResourceCodeException} if it could not be found.
 	 *
-	 * @param companyId the company ID to search with
-	 * @param name the name to search with
-	 * @param scope the scope to search with
+	 * @param companyId the company ID
+	 * @param name the name
+	 * @param scope the scope
 	 * @return the matching resource code
 	 * @throws com.liferay.portal.NoSuchResourceCodeException if a matching resource code could not be found
 	 * @throws SystemException if a system exception occurred
@@ -1192,11 +1192,11 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 	}
 
 	/**
-	 * Finds the resource code where companyId = &#63; and name = &#63; and scope = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 * Returns the resource code where companyId = &#63; and name = &#63; and scope = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	 *
-	 * @param companyId the company ID to search with
-	 * @param name the name to search with
-	 * @param scope the scope to search with
+	 * @param companyId the company ID
+	 * @param name the name
+	 * @param scope the scope
 	 * @return the matching resource code, or <code>null</code> if a matching resource code could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1206,11 +1206,11 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 	}
 
 	/**
-	 * Finds the resource code where companyId = &#63; and name = &#63; and scope = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 * Returns the resource code where companyId = &#63; and name = &#63; and scope = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	 *
-	 * @param companyId the company ID to search with
-	 * @param name the name to search with
-	 * @param scope the scope to search with
+	 * @param companyId the company ID
+	 * @param name the name
+	 * @param scope the scope
 	 * @return the matching resource code, or <code>null</code> if a matching resource code could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1314,7 +1314,7 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 	}
 
 	/**
-	 * Finds all the resource codes.
+	 * Returns all the resource codes.
 	 *
 	 * @return the resource codes
 	 * @throws SystemException if a system exception occurred
@@ -1324,14 +1324,14 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 	}
 
 	/**
-	 * Finds a range of all the resource codes.
+	 * Returns a range of all the resource codes.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param start the lower bound of the range of resource codes to return
-	 * @param end the upper bound of the range of resource codes to return (not inclusive)
+	 * @param start the lower bound of the range of resource codes
+	 * @param end the upper bound of the range of resource codes (not inclusive)
 	 * @return the range of resource codes
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1341,14 +1341,14 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 	}
 
 	/**
-	 * Finds an ordered range of all the resource codes.
+	 * Returns an ordered range of all the resource codes.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param start the lower bound of the range of resource codes to return
-	 * @param end the upper bound of the range of resource codes to return (not inclusive)
+	 * @param start the lower bound of the range of resource codes
+	 * @param end the upper bound of the range of resource codes (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of resource codes
 	 * @throws SystemException if a system exception occurred
@@ -1425,7 +1425,7 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 	/**
 	 * Removes all the resource codes where companyId = &#63; from the database.
 	 *
-	 * @param companyId the company ID to search with
+	 * @param companyId the company ID
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByCompanyId(long companyId) throws SystemException {
@@ -1437,7 +1437,7 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 	/**
 	 * Removes all the resource codes where name = &#63; from the database.
 	 *
-	 * @param name the name to search with
+	 * @param name the name
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByName(String name) throws SystemException {
@@ -1449,9 +1449,9 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 	/**
 	 * Removes the resource code where companyId = &#63; and name = &#63; and scope = &#63; from the database.
 	 *
-	 * @param companyId the company ID to search with
-	 * @param name the name to search with
-	 * @param scope the scope to search with
+	 * @param companyId the company ID
+	 * @param name the name
+	 * @param scope the scope
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByC_N_S(long companyId, String name, int scope)
@@ -1473,9 +1473,9 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 	}
 
 	/**
-	 * Counts all the resource codes where companyId = &#63;.
+	 * Returns the number of resource codes where companyId = &#63;.
 	 *
-	 * @param companyId the company ID to search with
+	 * @param companyId the company ID
 	 * @return the number of matching resource codes
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1526,9 +1526,9 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 	}
 
 	/**
-	 * Counts all the resource codes where name = &#63;.
+	 * Returns the number of resource codes where name = &#63;.
 	 *
-	 * @param name the name to search with
+	 * @param name the name
 	 * @return the number of matching resource codes
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1591,11 +1591,11 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 	}
 
 	/**
-	 * Counts all the resource codes where companyId = &#63; and name = &#63; and scope = &#63;.
+	 * Returns the number of resource codes where companyId = &#63; and name = &#63; and scope = &#63;.
 	 *
-	 * @param companyId the company ID to search with
-	 * @param name the name to search with
-	 * @param scope the scope to search with
+	 * @param companyId the company ID
+	 * @param name the name
+	 * @param scope the scope
 	 * @return the number of matching resource codes
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1667,7 +1667,7 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 	}
 
 	/**
-	 * Counts all the resource codes.
+	 * Returns the number of resource codes.
 	 *
 	 * @return the number of resource codes
 	 * @throws SystemException if a system exception occurred

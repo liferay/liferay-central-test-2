@@ -135,7 +135,7 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 	/**
 	 * Caches the subscription in the entity cache if it is enabled.
 	 *
-	 * @param subscription the subscription to cache
+	 * @param subscription the subscription
 	 */
 	public void cacheResult(Subscription subscription) {
 		EntityCacheUtil.putResult(SubscriptionModelImpl.ENTITY_CACHE_ENABLED,
@@ -155,7 +155,7 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 	/**
 	 * Caches the subscriptions in the entity cache if it is enabled.
 	 *
-	 * @param subscriptions the subscriptions to cache
+	 * @param subscriptions the subscriptions
 	 */
 	public void cacheResult(List<Subscription> subscriptions) {
 		for (Subscription subscription : subscriptions) {
@@ -223,7 +223,7 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 	/**
 	 * Removes the subscription with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param primaryKey the primary key of the subscription to remove
+	 * @param primaryKey the primary key of the subscription
 	 * @return the subscription that was removed
 	 * @throws com.liferay.portal.NoSuchModelException if a subscription with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -236,7 +236,7 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 	/**
 	 * Removes the subscription with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param subscriptionId the primary key of the subscription to remove
+	 * @param subscriptionId the primary key of the subscription
 	 * @return the subscription that was removed
 	 * @throws com.liferay.portal.NoSuchSubscriptionException if a subscription with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -277,7 +277,7 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 	/**
 	 * Removes the subscription from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param subscription the subscription to remove
+	 * @param subscription the subscription
 	 * @return the subscription that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -407,9 +407,9 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 	}
 
 	/**
-	 * Finds the subscription with the primary key or throws a {@link com.liferay.portal.NoSuchModelException} if it could not be found.
+	 * Returns the subscription with the primary key or throws a {@link com.liferay.portal.NoSuchModelException} if it could not be found.
 	 *
-	 * @param primaryKey the primary key of the subscription to find
+	 * @param primaryKey the primary key of the subscription
 	 * @return the subscription
 	 * @throws com.liferay.portal.NoSuchModelException if a subscription with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -420,9 +420,9 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 	}
 
 	/**
-	 * Finds the subscription with the primary key or throws a {@link com.liferay.portal.NoSuchSubscriptionException} if it could not be found.
+	 * Returns the subscription with the primary key or throws a {@link com.liferay.portal.NoSuchSubscriptionException} if it could not be found.
 	 *
-	 * @param subscriptionId the primary key of the subscription to find
+	 * @param subscriptionId the primary key of the subscription
 	 * @return the subscription
 	 * @throws com.liferay.portal.NoSuchSubscriptionException if a subscription with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -444,9 +444,9 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 	}
 
 	/**
-	 * Finds the subscription with the primary key or returns <code>null</code> if it could not be found.
+	 * Returns the subscription with the primary key or returns <code>null</code> if it could not be found.
 	 *
-	 * @param primaryKey the primary key of the subscription to find
+	 * @param primaryKey the primary key of the subscription
 	 * @return the subscription, or <code>null</code> if a subscription with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -456,9 +456,9 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 	}
 
 	/**
-	 * Finds the subscription with the primary key or returns <code>null</code> if it could not be found.
+	 * Returns the subscription with the primary key or returns <code>null</code> if it could not be found.
 	 *
-	 * @param subscriptionId the primary key of the subscription to find
+	 * @param subscriptionId the primary key of the subscription
 	 * @return the subscription, or <code>null</code> if a subscription with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -492,9 +492,9 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 	}
 
 	/**
-	 * Finds all the subscriptions where userId = &#63;.
+	 * Returns all the subscriptions where userId = &#63;.
 	 *
-	 * @param userId the user ID to search with
+	 * @param userId the user ID
 	 * @return the matching subscriptions
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -504,15 +504,15 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 	}
 
 	/**
-	 * Finds a range of all the subscriptions where userId = &#63;.
+	 * Returns a range of all the subscriptions where userId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param userId the user ID to search with
-	 * @param start the lower bound of the range of subscriptions to return
-	 * @param end the upper bound of the range of subscriptions to return (not inclusive)
+	 * @param userId the user ID
+	 * @param start the lower bound of the range of subscriptions
+	 * @param end the upper bound of the range of subscriptions (not inclusive)
 	 * @return the range of matching subscriptions
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -522,15 +522,15 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 	}
 
 	/**
-	 * Finds an ordered range of all the subscriptions where userId = &#63;.
+	 * Returns an ordered range of all the subscriptions where userId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param userId the user ID to search with
-	 * @param start the lower bound of the range of subscriptions to return
-	 * @param end the upper bound of the range of subscriptions to return (not inclusive)
+	 * @param userId the user ID
+	 * @param start the lower bound of the range of subscriptions
+	 * @param end the upper bound of the range of subscriptions (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching subscriptions
 	 * @throws SystemException if a system exception occurred
@@ -606,13 +606,13 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 	}
 
 	/**
-	 * Finds the first subscription in the ordered set where userId = &#63;.
+	 * Returns the first subscription in the ordered set where userId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param userId the user ID to search with
+	 * @param userId the user ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching subscription
 	 * @throws com.liferay.portal.NoSuchSubscriptionException if a matching subscription could not be found
@@ -641,13 +641,13 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 	}
 
 	/**
-	 * Finds the last subscription in the ordered set where userId = &#63;.
+	 * Returns the last subscription in the ordered set where userId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param userId the user ID to search with
+	 * @param userId the user ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching subscription
 	 * @throws com.liferay.portal.NoSuchSubscriptionException if a matching subscription could not be found
@@ -679,14 +679,14 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 	}
 
 	/**
-	 * Finds the subscriptions before and after the current subscription in the ordered set where userId = &#63;.
+	 * Returns the subscriptions before and after the current subscription in the ordered set where userId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
 	 * @param subscriptionId the primary key of the current subscription
-	 * @param userId the user ID to search with
+	 * @param userId the user ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next subscription
 	 * @throws com.liferay.portal.NoSuchSubscriptionException if a subscription with the primary key could not be found
@@ -823,10 +823,10 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 	}
 
 	/**
-	 * Finds all the subscriptions where userId = &#63; and classNameId = &#63;.
+	 * Returns all the subscriptions where userId = &#63; and classNameId = &#63;.
 	 *
-	 * @param userId the user ID to search with
-	 * @param classNameId the class name ID to search with
+	 * @param userId the user ID
+	 * @param classNameId the class name ID
 	 * @return the matching subscriptions
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -837,16 +837,16 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 	}
 
 	/**
-	 * Finds a range of all the subscriptions where userId = &#63; and classNameId = &#63;.
+	 * Returns a range of all the subscriptions where userId = &#63; and classNameId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param userId the user ID to search with
-	 * @param classNameId the class name ID to search with
-	 * @param start the lower bound of the range of subscriptions to return
-	 * @param end the upper bound of the range of subscriptions to return (not inclusive)
+	 * @param userId the user ID
+	 * @param classNameId the class name ID
+	 * @param start the lower bound of the range of subscriptions
+	 * @param end the upper bound of the range of subscriptions (not inclusive)
 	 * @return the range of matching subscriptions
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -856,16 +856,16 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 	}
 
 	/**
-	 * Finds an ordered range of all the subscriptions where userId = &#63; and classNameId = &#63;.
+	 * Returns an ordered range of all the subscriptions where userId = &#63; and classNameId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param userId the user ID to search with
-	 * @param classNameId the class name ID to search with
-	 * @param start the lower bound of the range of subscriptions to return
-	 * @param end the upper bound of the range of subscriptions to return (not inclusive)
+	 * @param userId the user ID
+	 * @param classNameId the class name ID
+	 * @param start the lower bound of the range of subscriptions
+	 * @param end the upper bound of the range of subscriptions (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching subscriptions
 	 * @throws SystemException if a system exception occurred
@@ -946,14 +946,14 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 	}
 
 	/**
-	 * Finds the first subscription in the ordered set where userId = &#63; and classNameId = &#63;.
+	 * Returns the first subscription in the ordered set where userId = &#63; and classNameId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param userId the user ID to search with
-	 * @param classNameId the class name ID to search with
+	 * @param userId the user ID
+	 * @param classNameId the class name ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching subscription
 	 * @throws com.liferay.portal.NoSuchSubscriptionException if a matching subscription could not be found
@@ -986,14 +986,14 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 	}
 
 	/**
-	 * Finds the last subscription in the ordered set where userId = &#63; and classNameId = &#63;.
+	 * Returns the last subscription in the ordered set where userId = &#63; and classNameId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param userId the user ID to search with
-	 * @param classNameId the class name ID to search with
+	 * @param userId the user ID
+	 * @param classNameId the class name ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching subscription
 	 * @throws com.liferay.portal.NoSuchSubscriptionException if a matching subscription could not be found
@@ -1028,15 +1028,15 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 	}
 
 	/**
-	 * Finds the subscriptions before and after the current subscription in the ordered set where userId = &#63; and classNameId = &#63;.
+	 * Returns the subscriptions before and after the current subscription in the ordered set where userId = &#63; and classNameId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
 	 * @param subscriptionId the primary key of the current subscription
-	 * @param userId the user ID to search with
-	 * @param classNameId the class name ID to search with
+	 * @param userId the user ID
+	 * @param classNameId the class name ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next subscription
 	 * @throws com.liferay.portal.NoSuchSubscriptionException if a subscription with the primary key could not be found
@@ -1177,11 +1177,11 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 	}
 
 	/**
-	 * Finds all the subscriptions where companyId = &#63; and classNameId = &#63; and classPK = &#63;.
+	 * Returns all the subscriptions where companyId = &#63; and classNameId = &#63; and classPK = &#63;.
 	 *
-	 * @param companyId the company ID to search with
-	 * @param classNameId the class name ID to search with
-	 * @param classPK the class p k to search with
+	 * @param companyId the company ID
+	 * @param classNameId the class name ID
+	 * @param classPK the class p k
 	 * @return the matching subscriptions
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1192,17 +1192,17 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 	}
 
 	/**
-	 * Finds a range of all the subscriptions where companyId = &#63; and classNameId = &#63; and classPK = &#63;.
+	 * Returns a range of all the subscriptions where companyId = &#63; and classNameId = &#63; and classPK = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param companyId the company ID to search with
-	 * @param classNameId the class name ID to search with
-	 * @param classPK the class p k to search with
-	 * @param start the lower bound of the range of subscriptions to return
-	 * @param end the upper bound of the range of subscriptions to return (not inclusive)
+	 * @param companyId the company ID
+	 * @param classNameId the class name ID
+	 * @param classPK the class p k
+	 * @param start the lower bound of the range of subscriptions
+	 * @param end the upper bound of the range of subscriptions (not inclusive)
 	 * @return the range of matching subscriptions
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1212,17 +1212,17 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 	}
 
 	/**
-	 * Finds an ordered range of all the subscriptions where companyId = &#63; and classNameId = &#63; and classPK = &#63;.
+	 * Returns an ordered range of all the subscriptions where companyId = &#63; and classNameId = &#63; and classPK = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param companyId the company ID to search with
-	 * @param classNameId the class name ID to search with
-	 * @param classPK the class p k to search with
-	 * @param start the lower bound of the range of subscriptions to return
-	 * @param end the upper bound of the range of subscriptions to return (not inclusive)
+	 * @param companyId the company ID
+	 * @param classNameId the class name ID
+	 * @param classPK the class p k
+	 * @param start the lower bound of the range of subscriptions
+	 * @param end the upper bound of the range of subscriptions (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching subscriptions
 	 * @throws SystemException if a system exception occurred
@@ -1307,15 +1307,15 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 	}
 
 	/**
-	 * Finds the first subscription in the ordered set where companyId = &#63; and classNameId = &#63; and classPK = &#63;.
+	 * Returns the first subscription in the ordered set where companyId = &#63; and classNameId = &#63; and classPK = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param companyId the company ID to search with
-	 * @param classNameId the class name ID to search with
-	 * @param classPK the class p k to search with
+	 * @param companyId the company ID
+	 * @param classNameId the class name ID
+	 * @param classPK the class p k
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching subscription
 	 * @throws com.liferay.portal.NoSuchSubscriptionException if a matching subscription could not be found
@@ -1351,15 +1351,15 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 	}
 
 	/**
-	 * Finds the last subscription in the ordered set where companyId = &#63; and classNameId = &#63; and classPK = &#63;.
+	 * Returns the last subscription in the ordered set where companyId = &#63; and classNameId = &#63; and classPK = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param companyId the company ID to search with
-	 * @param classNameId the class name ID to search with
-	 * @param classPK the class p k to search with
+	 * @param companyId the company ID
+	 * @param classNameId the class name ID
+	 * @param classPK the class p k
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching subscription
 	 * @throws com.liferay.portal.NoSuchSubscriptionException if a matching subscription could not be found
@@ -1397,16 +1397,16 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 	}
 
 	/**
-	 * Finds the subscriptions before and after the current subscription in the ordered set where companyId = &#63; and classNameId = &#63; and classPK = &#63;.
+	 * Returns the subscriptions before and after the current subscription in the ordered set where companyId = &#63; and classNameId = &#63; and classPK = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
 	 * @param subscriptionId the primary key of the current subscription
-	 * @param companyId the company ID to search with
-	 * @param classNameId the class name ID to search with
-	 * @param classPK the class p k to search with
+	 * @param companyId the company ID
+	 * @param classNameId the class name ID
+	 * @param classPK the class p k
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next subscription
 	 * @throws com.liferay.portal.NoSuchSubscriptionException if a subscription with the primary key could not be found
@@ -1552,12 +1552,12 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 	}
 
 	/**
-	 * Finds the subscription where companyId = &#63; and userId = &#63; and classNameId = &#63; and classPK = &#63; or throws a {@link com.liferay.portal.NoSuchSubscriptionException} if it could not be found.
+	 * Returns the subscription where companyId = &#63; and userId = &#63; and classNameId = &#63; and classPK = &#63; or throws a {@link com.liferay.portal.NoSuchSubscriptionException} if it could not be found.
 	 *
-	 * @param companyId the company ID to search with
-	 * @param userId the user ID to search with
-	 * @param classNameId the class name ID to search with
-	 * @param classPK the class p k to search with
+	 * @param companyId the company ID
+	 * @param userId the user ID
+	 * @param classNameId the class name ID
+	 * @param classPK the class p k
 	 * @return the matching subscription
 	 * @throws com.liferay.portal.NoSuchSubscriptionException if a matching subscription could not be found
 	 * @throws SystemException if a system exception occurred
@@ -1598,12 +1598,12 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 	}
 
 	/**
-	 * Finds the subscription where companyId = &#63; and userId = &#63; and classNameId = &#63; and classPK = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 * Returns the subscription where companyId = &#63; and userId = &#63; and classNameId = &#63; and classPK = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	 *
-	 * @param companyId the company ID to search with
-	 * @param userId the user ID to search with
-	 * @param classNameId the class name ID to search with
-	 * @param classPK the class p k to search with
+	 * @param companyId the company ID
+	 * @param userId the user ID
+	 * @param classNameId the class name ID
+	 * @param classPK the class p k
 	 * @return the matching subscription, or <code>null</code> if a matching subscription could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1613,12 +1613,12 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 	}
 
 	/**
-	 * Finds the subscription where companyId = &#63; and userId = &#63; and classNameId = &#63; and classPK = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 * Returns the subscription where companyId = &#63; and userId = &#63; and classNameId = &#63; and classPK = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	 *
-	 * @param companyId the company ID to search with
-	 * @param userId the user ID to search with
-	 * @param classNameId the class name ID to search with
-	 * @param classPK the class p k to search with
+	 * @param companyId the company ID
+	 * @param userId the user ID
+	 * @param classNameId the class name ID
+	 * @param classPK the class p k
 	 * @return the matching subscription, or <code>null</code> if a matching subscription could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1717,7 +1717,7 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 	}
 
 	/**
-	 * Finds all the subscriptions.
+	 * Returns all the subscriptions.
 	 *
 	 * @return the subscriptions
 	 * @throws SystemException if a system exception occurred
@@ -1727,14 +1727,14 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 	}
 
 	/**
-	 * Finds a range of all the subscriptions.
+	 * Returns a range of all the subscriptions.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param start the lower bound of the range of subscriptions to return
-	 * @param end the upper bound of the range of subscriptions to return (not inclusive)
+	 * @param start the lower bound of the range of subscriptions
+	 * @param end the upper bound of the range of subscriptions (not inclusive)
 	 * @return the range of subscriptions
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1744,14 +1744,14 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 	}
 
 	/**
-	 * Finds an ordered range of all the subscriptions.
+	 * Returns an ordered range of all the subscriptions.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param start the lower bound of the range of subscriptions to return
-	 * @param end the upper bound of the range of subscriptions to return (not inclusive)
+	 * @param start the lower bound of the range of subscriptions
+	 * @param end the upper bound of the range of subscriptions (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of subscriptions
 	 * @throws SystemException if a system exception occurred
@@ -1828,7 +1828,7 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 	/**
 	 * Removes all the subscriptions where userId = &#63; from the database.
 	 *
-	 * @param userId the user ID to search with
+	 * @param userId the user ID
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByUserId(long userId) throws SystemException {
@@ -1840,8 +1840,8 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 	/**
 	 * Removes all the subscriptions where userId = &#63; and classNameId = &#63; from the database.
 	 *
-	 * @param userId the user ID to search with
-	 * @param classNameId the class name ID to search with
+	 * @param userId the user ID
+	 * @param classNameId the class name ID
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByU_C(long userId, long classNameId)
@@ -1854,9 +1854,9 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 	/**
 	 * Removes all the subscriptions where companyId = &#63; and classNameId = &#63; and classPK = &#63; from the database.
 	 *
-	 * @param companyId the company ID to search with
-	 * @param classNameId the class name ID to search with
-	 * @param classPK the class p k to search with
+	 * @param companyId the company ID
+	 * @param classNameId the class name ID
+	 * @param classPK the class p k
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByC_C_C(long companyId, long classNameId, long classPK)
@@ -1870,10 +1870,10 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 	/**
 	 * Removes the subscription where companyId = &#63; and userId = &#63; and classNameId = &#63; and classPK = &#63; from the database.
 	 *
-	 * @param companyId the company ID to search with
-	 * @param userId the user ID to search with
-	 * @param classNameId the class name ID to search with
-	 * @param classPK the class p k to search with
+	 * @param companyId the company ID
+	 * @param userId the user ID
+	 * @param classNameId the class name ID
+	 * @param classPK the class p k
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByC_U_C_C(long companyId, long userId, long classNameId,
@@ -1896,9 +1896,9 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 	}
 
 	/**
-	 * Counts all the subscriptions where userId = &#63;.
+	 * Returns the number of subscriptions where userId = &#63;.
 	 *
-	 * @param userId the user ID to search with
+	 * @param userId the user ID
 	 * @return the number of matching subscriptions
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1949,10 +1949,10 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 	}
 
 	/**
-	 * Counts all the subscriptions where userId = &#63; and classNameId = &#63;.
+	 * Returns the number of subscriptions where userId = &#63; and classNameId = &#63;.
 	 *
-	 * @param userId the user ID to search with
-	 * @param classNameId the class name ID to search with
+	 * @param userId the user ID
+	 * @param classNameId the class name ID
 	 * @return the number of matching subscriptions
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2008,11 +2008,11 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 	}
 
 	/**
-	 * Counts all the subscriptions where companyId = &#63; and classNameId = &#63; and classPK = &#63;.
+	 * Returns the number of subscriptions where companyId = &#63; and classNameId = &#63; and classPK = &#63;.
 	 *
-	 * @param companyId the company ID to search with
-	 * @param classNameId the class name ID to search with
-	 * @param classPK the class p k to search with
+	 * @param companyId the company ID
+	 * @param classNameId the class name ID
+	 * @param classPK the class p k
 	 * @return the number of matching subscriptions
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2072,12 +2072,12 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 	}
 
 	/**
-	 * Counts all the subscriptions where companyId = &#63; and userId = &#63; and classNameId = &#63; and classPK = &#63;.
+	 * Returns the number of subscriptions where companyId = &#63; and userId = &#63; and classNameId = &#63; and classPK = &#63;.
 	 *
-	 * @param companyId the company ID to search with
-	 * @param userId the user ID to search with
-	 * @param classNameId the class name ID to search with
-	 * @param classPK the class p k to search with
+	 * @param companyId the company ID
+	 * @param userId the user ID
+	 * @param classNameId the class name ID
+	 * @param classPK the class p k
 	 * @return the number of matching subscriptions
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2143,7 +2143,7 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 	}
 
 	/**
-	 * Counts all the subscriptions.
+	 * Returns the number of subscriptions.
 	 *
 	 * @return the number of subscriptions
 	 * @throws SystemException if a system exception occurred

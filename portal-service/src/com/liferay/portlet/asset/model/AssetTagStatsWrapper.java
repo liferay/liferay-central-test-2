@@ -37,7 +37,7 @@ public class AssetTagStatsWrapper implements AssetTagStats {
 	}
 
 	/**
-	* Gets the primary key of this asset tag stats.
+	* Returns the primary key of this asset tag stats.
 	*
 	* @return the primary key of this asset tag stats
 	*/
@@ -46,7 +46,7 @@ public class AssetTagStatsWrapper implements AssetTagStats {
 	}
 
 	/**
-	* Sets the primary key of this asset tag stats
+	* Sets the primary key of this asset tag stats.
 	*
 	* @param primaryKey the primary key of this asset tag stats
 	*/
@@ -55,7 +55,7 @@ public class AssetTagStatsWrapper implements AssetTagStats {
 	}
 
 	/**
-	* Gets the tag stats ID of this asset tag stats.
+	* Returns the tag stats ID of this asset tag stats.
 	*
 	* @return the tag stats ID of this asset tag stats
 	*/
@@ -73,7 +73,7 @@ public class AssetTagStatsWrapper implements AssetTagStats {
 	}
 
 	/**
-	* Gets the tag ID of this asset tag stats.
+	* Returns the tag ID of this asset tag stats.
 	*
 	* @return the tag ID of this asset tag stats
 	*/
@@ -91,16 +91,16 @@ public class AssetTagStatsWrapper implements AssetTagStats {
 	}
 
 	/**
-	* Gets the class name of the model instance this asset tag stats is polymorphically associated with.
+	* Returns the fully qualified class name of this asset tag stats.
 	*
-	* @return the class name of the model instance this asset tag stats is polymorphically associated with
+	* @return the fully qualified class name of this asset tag stats
 	*/
 	public java.lang.String getClassName() {
 		return _assetTagStats.getClassName();
 	}
 
 	/**
-	* Gets the class name ID of this asset tag stats.
+	* Returns the class name ID of this asset tag stats.
 	*
 	* @return the class name ID of this asset tag stats
 	*/
@@ -118,7 +118,7 @@ public class AssetTagStatsWrapper implements AssetTagStats {
 	}
 
 	/**
-	* Gets the asset count of this asset tag stats.
+	* Returns the asset count of this asset tag stats.
 	*
 	* @return the asset count of this asset tag stats
 	*/

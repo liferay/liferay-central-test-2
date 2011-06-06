@@ -37,7 +37,7 @@ public class AssetTagWrapper implements AssetTag {
 	}
 
 	/**
-	* Gets the primary key of this asset tag.
+	* Returns the primary key of this asset tag.
 	*
 	* @return the primary key of this asset tag
 	*/
@@ -46,7 +46,7 @@ public class AssetTagWrapper implements AssetTag {
 	}
 
 	/**
-	* Sets the primary key of this asset tag
+	* Sets the primary key of this asset tag.
 	*
 	* @param primaryKey the primary key of this asset tag
 	*/
@@ -55,7 +55,7 @@ public class AssetTagWrapper implements AssetTag {
 	}
 
 	/**
-	* Gets the tag ID of this asset tag.
+	* Returns the tag ID of this asset tag.
 	*
 	* @return the tag ID of this asset tag
 	*/
@@ -73,7 +73,7 @@ public class AssetTagWrapper implements AssetTag {
 	}
 
 	/**
-	* Gets the group ID of this asset tag.
+	* Returns the group ID of this asset tag.
 	*
 	* @return the group ID of this asset tag
 	*/
@@ -91,7 +91,7 @@ public class AssetTagWrapper implements AssetTag {
 	}
 
 	/**
-	* Gets the company ID of this asset tag.
+	* Returns the company ID of this asset tag.
 	*
 	* @return the company ID of this asset tag
 	*/
@@ -109,7 +109,7 @@ public class AssetTagWrapper implements AssetTag {
 	}
 
 	/**
-	* Gets the user ID of this asset tag.
+	* Returns the user ID of this asset tag.
 	*
 	* @return the user ID of this asset tag
 	*/
@@ -127,7 +127,7 @@ public class AssetTagWrapper implements AssetTag {
 	}
 
 	/**
-	* Gets the user uuid of this asset tag.
+	* Returns the user uuid of this asset tag.
 	*
 	* @return the user uuid of this asset tag
 	* @throws SystemException if a system exception occurred
@@ -147,7 +147,7 @@ public class AssetTagWrapper implements AssetTag {
 	}
 
 	/**
-	* Gets the user name of this asset tag.
+	* Returns the user name of this asset tag.
 	*
 	* @return the user name of this asset tag
 	*/
@@ -165,7 +165,7 @@ public class AssetTagWrapper implements AssetTag {
 	}
 
 	/**
-	* Gets the create date of this asset tag.
+	* Returns the create date of this asset tag.
 	*
 	* @return the create date of this asset tag
 	*/
@@ -183,7 +183,7 @@ public class AssetTagWrapper implements AssetTag {
 	}
 
 	/**
-	* Gets the modified date of this asset tag.
+	* Returns the modified date of this asset tag.
 	*
 	* @return the modified date of this asset tag
 	*/
@@ -201,7 +201,7 @@ public class AssetTagWrapper implements AssetTag {
 	}
 
 	/**
-	* Gets the name of this asset tag.
+	* Returns the name of this asset tag.
 	*
 	* @return the name of this asset tag
 	*/
@@ -219,7 +219,7 @@ public class AssetTagWrapper implements AssetTag {
 	}
 
 	/**
-	* Gets the asset count of this asset tag.
+	* Returns the asset count of this asset tag.
 	*
 	* @return the asset count of this asset tag
 	*/

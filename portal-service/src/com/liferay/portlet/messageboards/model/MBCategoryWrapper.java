@@ -37,7 +37,7 @@ public class MBCategoryWrapper implements MBCategory {
 	}
 
 	/**
-	* Gets the primary key of this message boards category.
+	* Returns the primary key of this message boards category.
 	*
 	* @return the primary key of this message boards category
 	*/
@@ -46,7 +46,7 @@ public class MBCategoryWrapper implements MBCategory {
 	}
 
 	/**
-	* Sets the primary key of this message boards category
+	* Sets the primary key of this message boards category.
 	*
 	* @param primaryKey the primary key of this message boards category
 	*/
@@ -55,7 +55,7 @@ public class MBCategoryWrapper implements MBCategory {
 	}
 
 	/**
-	* Gets the uuid of this message boards category.
+	* Returns the uuid of this message boards category.
 	*
 	* @return the uuid of this message boards category
 	*/
@@ -73,7 +73,7 @@ public class MBCategoryWrapper implements MBCategory {
 	}
 
 	/**
-	* Gets the category ID of this message boards category.
+	* Returns the category ID of this message boards category.
 	*
 	* @return the category ID of this message boards category
 	*/
@@ -91,7 +91,7 @@ public class MBCategoryWrapper implements MBCategory {
 	}
 
 	/**
-	* Gets the group ID of this message boards category.
+	* Returns the group ID of this message boards category.
 	*
 	* @return the group ID of this message boards category
 	*/
@@ -109,7 +109,7 @@ public class MBCategoryWrapper implements MBCategory {
 	}
 
 	/**
-	* Gets the company ID of this message boards category.
+	* Returns the company ID of this message boards category.
 	*
 	* @return the company ID of this message boards category
 	*/
@@ -127,7 +127,7 @@ public class MBCategoryWrapper implements MBCategory {
 	}
 
 	/**
-	* Gets the user ID of this message boards category.
+	* Returns the user ID of this message boards category.
 	*
 	* @return the user ID of this message boards category
 	*/
@@ -145,7 +145,7 @@ public class MBCategoryWrapper implements MBCategory {
 	}
 
 	/**
-	* Gets the user uuid of this message boards category.
+	* Returns the user uuid of this message boards category.
 	*
 	* @return the user uuid of this message boards category
 	* @throws SystemException if a system exception occurred
@@ -165,7 +165,7 @@ public class MBCategoryWrapper implements MBCategory {
 	}
 
 	/**
-	* Gets the user name of this message boards category.
+	* Returns the user name of this message boards category.
 	*
 	* @return the user name of this message boards category
 	*/
@@ -183,7 +183,7 @@ public class MBCategoryWrapper implements MBCategory {
 	}
 
 	/**
-	* Gets the create date of this message boards category.
+	* Returns the create date of this message boards category.
 	*
 	* @return the create date of this message boards category
 	*/
@@ -201,7 +201,7 @@ public class MBCategoryWrapper implements MBCategory {
 	}
 
 	/**
-	* Gets the modified date of this message boards category.
+	* Returns the modified date of this message boards category.
 	*
 	* @return the modified date of this message boards category
 	*/
@@ -219,7 +219,7 @@ public class MBCategoryWrapper implements MBCategory {
 	}
 
 	/**
-	* Gets the parent category ID of this message boards category.
+	* Returns the parent category ID of this message boards category.
 	*
 	* @return the parent category ID of this message boards category
 	*/
@@ -237,7 +237,7 @@ public class MBCategoryWrapper implements MBCategory {
 	}
 
 	/**
-	* Gets the name of this message boards category.
+	* Returns the name of this message boards category.
 	*
 	* @return the name of this message boards category
 	*/
@@ -255,7 +255,7 @@ public class MBCategoryWrapper implements MBCategory {
 	}
 
 	/**
-	* Gets the description of this message boards category.
+	* Returns the description of this message boards category.
 	*
 	* @return the description of this message boards category
 	*/
@@ -273,7 +273,7 @@ public class MBCategoryWrapper implements MBCategory {
 	}
 
 	/**
-	* Gets the display style of this message boards category.
+	* Returns the display style of this message boards category.
 	*
 	* @return the display style of this message boards category
 	*/
@@ -291,7 +291,7 @@ public class MBCategoryWrapper implements MBCategory {
 	}
 
 	/**
-	* Gets the thread count of this message boards category.
+	* Returns the thread count of this message boards category.
 	*
 	* @return the thread count of this message boards category
 	*/
@@ -309,7 +309,7 @@ public class MBCategoryWrapper implements MBCategory {
 	}
 
 	/**
-	* Gets the message count of this message boards category.
+	* Returns the message count of this message boards category.
 	*
 	* @return the message count of this message boards category
 	*/
@@ -327,7 +327,7 @@ public class MBCategoryWrapper implements MBCategory {
 	}
 
 	/**
-	* Gets the last post date of this message boards category.
+	* Returns the last post date of this message boards category.
 	*
 	* @return the last post date of this message boards category
 	*/

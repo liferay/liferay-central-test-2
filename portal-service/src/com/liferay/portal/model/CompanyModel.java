@@ -42,21 +42,21 @@ public interface CompanyModel extends BaseModel<Company> {
 	 */
 
 	/**
-	 * Gets the primary key of this company.
+	 * Returns the primary key of this company.
 	 *
 	 * @return the primary key of this company
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this company
+	 * Sets the primary key of this company.
 	 *
 	 * @param primaryKey the primary key of this company
 	 */
 	public void setPrimaryKey(long primaryKey);
 
 	/**
-	 * Gets the company ID of this company.
+	 * Returns the company ID of this company.
 	 *
 	 * @return the company ID of this company
 	 */
@@ -70,7 +70,7 @@ public interface CompanyModel extends BaseModel<Company> {
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the account ID of this company.
+	 * Returns the account ID of this company.
 	 *
 	 * @return the account ID of this company
 	 */
@@ -84,7 +84,7 @@ public interface CompanyModel extends BaseModel<Company> {
 	public void setAccountId(long accountId);
 
 	/**
-	 * Gets the web ID of this company.
+	 * Returns the web ID of this company.
 	 *
 	 * @return the web ID of this company
 	 */
@@ -99,7 +99,7 @@ public interface CompanyModel extends BaseModel<Company> {
 	public void setWebId(String webId);
 
 	/**
-	 * Gets the key of this company.
+	 * Returns the key of this company.
 	 *
 	 * @return the key of this company
 	 */
@@ -114,7 +114,7 @@ public interface CompanyModel extends BaseModel<Company> {
 	public void setKey(String key);
 
 	/**
-	 * Gets the mx of this company.
+	 * Returns the mx of this company.
 	 *
 	 * @return the mx of this company
 	 */
@@ -129,7 +129,7 @@ public interface CompanyModel extends BaseModel<Company> {
 	public void setMx(String mx);
 
 	/**
-	 * Gets the home u r l of this company.
+	 * Returns the home u r l of this company.
 	 *
 	 * @return the home u r l of this company
 	 */
@@ -144,7 +144,7 @@ public interface CompanyModel extends BaseModel<Company> {
 	public void setHomeURL(String homeURL);
 
 	/**
-	 * Gets the logo ID of this company.
+	 * Returns the logo ID of this company.
 	 *
 	 * @return the logo ID of this company
 	 */
@@ -158,7 +158,7 @@ public interface CompanyModel extends BaseModel<Company> {
 	public void setLogoId(long logoId);
 
 	/**
-	 * Gets the system of this company.
+	 * Returns the system of this company.
 	 *
 	 * @return the system of this company
 	 */
@@ -179,7 +179,7 @@ public interface CompanyModel extends BaseModel<Company> {
 	public void setSystem(boolean system);
 
 	/**
-	 * Gets the max users of this company.
+	 * Returns the max users of this company.
 	 *
 	 * @return the max users of this company
 	 */

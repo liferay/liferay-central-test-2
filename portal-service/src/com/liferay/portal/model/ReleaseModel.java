@@ -44,21 +44,21 @@ public interface ReleaseModel extends BaseModel<Release> {
 	 */
 
 	/**
-	 * Gets the primary key of this release.
+	 * Returns the primary key of this release.
 	 *
 	 * @return the primary key of this release
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this release
+	 * Sets the primary key of this release.
 	 *
 	 * @param primaryKey the primary key of this release
 	 */
 	public void setPrimaryKey(long primaryKey);
 
 	/**
-	 * Gets the release ID of this release.
+	 * Returns the release ID of this release.
 	 *
 	 * @return the release ID of this release
 	 */
@@ -72,7 +72,7 @@ public interface ReleaseModel extends BaseModel<Release> {
 	public void setReleaseId(long releaseId);
 
 	/**
-	 * Gets the create date of this release.
+	 * Returns the create date of this release.
 	 *
 	 * @return the create date of this release
 	 */
@@ -86,7 +86,7 @@ public interface ReleaseModel extends BaseModel<Release> {
 	public void setCreateDate(Date createDate);
 
 	/**
-	 * Gets the modified date of this release.
+	 * Returns the modified date of this release.
 	 *
 	 * @return the modified date of this release
 	 */
@@ -100,7 +100,7 @@ public interface ReleaseModel extends BaseModel<Release> {
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
-	 * Gets the servlet context name of this release.
+	 * Returns the servlet context name of this release.
 	 *
 	 * @return the servlet context name of this release
 	 */
@@ -115,7 +115,7 @@ public interface ReleaseModel extends BaseModel<Release> {
 	public void setServletContextName(String servletContextName);
 
 	/**
-	 * Gets the build number of this release.
+	 * Returns the build number of this release.
 	 *
 	 * @return the build number of this release
 	 */
@@ -129,7 +129,7 @@ public interface ReleaseModel extends BaseModel<Release> {
 	public void setBuildNumber(int buildNumber);
 
 	/**
-	 * Gets the build date of this release.
+	 * Returns the build date of this release.
 	 *
 	 * @return the build date of this release
 	 */
@@ -143,7 +143,7 @@ public interface ReleaseModel extends BaseModel<Release> {
 	public void setBuildDate(Date buildDate);
 
 	/**
-	 * Gets the verified of this release.
+	 * Returns the verified of this release.
 	 *
 	 * @return the verified of this release
 	 */
@@ -164,7 +164,7 @@ public interface ReleaseModel extends BaseModel<Release> {
 	public void setVerified(boolean verified);
 
 	/**
-	 * Gets the test string of this release.
+	 * Returns the test string of this release.
 	 *
 	 * @return the test string of this release
 	 */

@@ -37,7 +37,7 @@ public class PortletWrapper implements Portlet {
 	}
 
 	/**
-	* Gets the primary key of this portlet.
+	* Returns the primary key of this portlet.
 	*
 	* @return the primary key of this portlet
 	*/
@@ -46,7 +46,7 @@ public class PortletWrapper implements Portlet {
 	}
 
 	/**
-	* Sets the primary key of this portlet
+	* Sets the primary key of this portlet.
 	*
 	* @param primaryKey the primary key of this portlet
 	*/
@@ -55,7 +55,7 @@ public class PortletWrapper implements Portlet {
 	}
 
 	/**
-	* Gets the ID of this portlet.
+	* Returns the ID of this portlet.
 	*
 	* @return the ID of this portlet
 	*/
@@ -73,7 +73,7 @@ public class PortletWrapper implements Portlet {
 	}
 
 	/**
-	* Gets the company ID of this portlet.
+	* Returns the company ID of this portlet.
 	*
 	* @return the company ID of this portlet
 	*/
@@ -91,7 +91,7 @@ public class PortletWrapper implements Portlet {
 	}
 
 	/**
-	* Gets the portlet ID of this portlet.
+	* Returns the portlet ID of this portlet.
 	*
 	* @return the portlet ID of this portlet
 	*/
@@ -109,7 +109,7 @@ public class PortletWrapper implements Portlet {
 	}
 
 	/**
-	* Gets the roles of this portlet.
+	* Returns the roles of this portlet.
 	*
 	* @return the roles of this portlet
 	*/
@@ -127,7 +127,7 @@ public class PortletWrapper implements Portlet {
 	}
 
 	/**
-	* Gets the active of this portlet.
+	* Returns the active of this portlet.
 	*
 	* @return the active of this portlet
 	*/
@@ -264,18 +264,18 @@ public class PortletWrapper implements Portlet {
 	}
 
 	/**
-	* Get the package to which the portlet belongs to.
+	* Gets this portlet's plugin package.
 	*
-	* @return the plugin package of the portlet
+	* @return this portlet's plugin package
 	*/
 	public com.liferay.portal.kernel.plugin.PluginPackage getPluginPackage() {
 		return _portlet.getPluginPackage();
 	}
 
 	/**
-	* Sets the plugin package this portlet belongs to.
+	* Sets this portlet's plugin package.
 	*
-	* @param pluginPackage the plugin package
+	* @param pluginPackage this portlet's plugin package
 	*/
 	public void setPluginPackage(
 		com.liferay.portal.kernel.plugin.PluginPackage pluginPackage) {
@@ -2577,18 +2577,18 @@ public class PortletWrapper implements Portlet {
 	}
 
 	/**
-	* Get the application this portlet belongs to.
+	* Gets this portlet's application.
 	*
-	* @return the application this portlet belongs to
+	* @return this portlet's application
 	*/
 	public com.liferay.portal.model.PortletApp getPortletApp() {
 		return _portlet.getPortletApp();
 	}
 
 	/**
-	* Sets the application this portlet belongs to.
+	* Sets this portlet's application.
 	*
-	* @param portletApp the application this portlet belongs to
+	* @param portletApp this portlet's application
 	*/
 	public void setPortletApp(com.liferay.portal.model.PortletApp portletApp) {
 		_portlet.setPortletApp(portletApp);

@@ -42,21 +42,21 @@ public interface SocialEquityGroupSettingModel extends BaseModel<SocialEquityGro
 	 */
 
 	/**
-	 * Gets the primary key of this social equity group setting.
+	 * Returns the primary key of this social equity group setting.
 	 *
 	 * @return the primary key of this social equity group setting
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this social equity group setting
+	 * Sets the primary key of this social equity group setting.
 	 *
 	 * @param primaryKey the primary key of this social equity group setting
 	 */
 	public void setPrimaryKey(long primaryKey);
 
 	/**
-	 * Gets the equity group setting ID of this social equity group setting.
+	 * Returns the equity group setting ID of this social equity group setting.
 	 *
 	 * @return the equity group setting ID of this social equity group setting
 	 */
@@ -70,7 +70,7 @@ public interface SocialEquityGroupSettingModel extends BaseModel<SocialEquityGro
 	public void setEquityGroupSettingId(long equityGroupSettingId);
 
 	/**
-	 * Gets the group ID of this social equity group setting.
+	 * Returns the group ID of this social equity group setting.
 	 *
 	 * @return the group ID of this social equity group setting
 	 */
@@ -84,7 +84,7 @@ public interface SocialEquityGroupSettingModel extends BaseModel<SocialEquityGro
 	public void setGroupId(long groupId);
 
 	/**
-	 * Gets the company ID of this social equity group setting.
+	 * Returns the company ID of this social equity group setting.
 	 *
 	 * @return the company ID of this social equity group setting
 	 */
@@ -98,14 +98,14 @@ public interface SocialEquityGroupSettingModel extends BaseModel<SocialEquityGro
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the class name of the model instance this social equity group setting is polymorphically associated with.
+	 * Returns the fully qualified class name of this social equity group setting.
 	 *
-	 * @return the class name of the model instance this social equity group setting is polymorphically associated with
+	 * @return the fully qualified class name of this social equity group setting
 	 */
 	public String getClassName();
 
 	/**
-	 * Gets the class name ID of this social equity group setting.
+	 * Returns the class name ID of this social equity group setting.
 	 *
 	 * @return the class name ID of this social equity group setting
 	 */
@@ -119,7 +119,7 @@ public interface SocialEquityGroupSettingModel extends BaseModel<SocialEquityGro
 	public void setClassNameId(long classNameId);
 
 	/**
-	 * Gets the type of this social equity group setting.
+	 * Returns the type of this social equity group setting.
 	 *
 	 * @return the type of this social equity group setting
 	 */
@@ -133,7 +133,7 @@ public interface SocialEquityGroupSettingModel extends BaseModel<SocialEquityGro
 	public void setType(int type);
 
 	/**
-	 * Gets the enabled of this social equity group setting.
+	 * Returns the enabled of this social equity group setting.
 	 *
 	 * @return the enabled of this social equity group setting
 	 */

@@ -37,7 +37,7 @@ public class JournalArticleImageWrapper implements JournalArticleImage {
 	}
 
 	/**
-	* Gets the primary key of this journal article image.
+	* Returns the primary key of this journal article image.
 	*
 	* @return the primary key of this journal article image
 	*/
@@ -46,7 +46,7 @@ public class JournalArticleImageWrapper implements JournalArticleImage {
 	}
 
 	/**
-	* Sets the primary key of this journal article image
+	* Sets the primary key of this journal article image.
 	*
 	* @param primaryKey the primary key of this journal article image
 	*/
@@ -55,7 +55,7 @@ public class JournalArticleImageWrapper implements JournalArticleImage {
 	}
 
 	/**
-	* Gets the article image ID of this journal article image.
+	* Returns the article image ID of this journal article image.
 	*
 	* @return the article image ID of this journal article image
 	*/
@@ -73,7 +73,7 @@ public class JournalArticleImageWrapper implements JournalArticleImage {
 	}
 
 	/**
-	* Gets the group ID of this journal article image.
+	* Returns the group ID of this journal article image.
 	*
 	* @return the group ID of this journal article image
 	*/
@@ -91,7 +91,7 @@ public class JournalArticleImageWrapper implements JournalArticleImage {
 	}
 
 	/**
-	* Gets the article ID of this journal article image.
+	* Returns the article ID of this journal article image.
 	*
 	* @return the article ID of this journal article image
 	*/
@@ -109,7 +109,7 @@ public class JournalArticleImageWrapper implements JournalArticleImage {
 	}
 
 	/**
-	* Gets the version of this journal article image.
+	* Returns the version of this journal article image.
 	*
 	* @return the version of this journal article image
 	*/
@@ -127,7 +127,7 @@ public class JournalArticleImageWrapper implements JournalArticleImage {
 	}
 
 	/**
-	* Gets the el instance ID of this journal article image.
+	* Returns the el instance ID of this journal article image.
 	*
 	* @return the el instance ID of this journal article image
 	*/
@@ -145,7 +145,7 @@ public class JournalArticleImageWrapper implements JournalArticleImage {
 	}
 
 	/**
-	* Gets the el name of this journal article image.
+	* Returns the el name of this journal article image.
 	*
 	* @return the el name of this journal article image
 	*/
@@ -163,7 +163,7 @@ public class JournalArticleImageWrapper implements JournalArticleImage {
 	}
 
 	/**
-	* Gets the language ID of this journal article image.
+	* Returns the language ID of this journal article image.
 	*
 	* @return the language ID of this journal article image
 	*/
@@ -181,7 +181,7 @@ public class JournalArticleImageWrapper implements JournalArticleImage {
 	}
 
 	/**
-	* Gets the temp image of this journal article image.
+	* Returns the temp image of this journal article image.
 	*
 	* @return the temp image of this journal article image
 	*/

@@ -77,7 +77,7 @@ public abstract class DDMStorageLinkLocalServiceBaseImpl
 	/**
 	 * Adds the d d m storage link to the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param ddmStorageLink the d d m storage link to add
+	 * @param ddmStorageLink the d d m storage link
 	 * @return the d d m storage link that was added
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -101,7 +101,7 @@ public abstract class DDMStorageLinkLocalServiceBaseImpl
 	/**
 	 * Deletes the d d m storage link with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param storageLinkId the primary key of the d d m storage link to delete
+	 * @param storageLinkId the primary key of the d d m storage link
 	 * @throws PortalException if a d d m storage link with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -113,7 +113,7 @@ public abstract class DDMStorageLinkLocalServiceBaseImpl
 	/**
 	 * Deletes the d d m storage link from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param ddmStorageLink the d d m storage link to delete
+	 * @param ddmStorageLink the d d m storage link
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void deleteDDMStorageLink(DDMStorageLink ddmStorageLink)
@@ -124,7 +124,7 @@ public abstract class DDMStorageLinkLocalServiceBaseImpl
 	/**
 	 * Performs a dynamic query on the database and returns the matching rows.
 	 *
-	 * @param dynamicQuery the dynamic query to search with
+	 * @param dynamicQuery the dynamic query
 	 * @return the matching rows
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -141,9 +141,9 @@ public abstract class DDMStorageLinkLocalServiceBaseImpl
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param dynamicQuery the dynamic query to search with
-	 * @param start the lower bound of the range of model instances to return
-	 * @param end the upper bound of the range of model instances to return (not inclusive)
+	 * @param dynamicQuery the dynamic query
+	 * @param start the lower bound of the range of model instances
+	 * @param end the upper bound of the range of model instances (not inclusive)
 	 * @return the range of matching rows
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -161,9 +161,9 @@ public abstract class DDMStorageLinkLocalServiceBaseImpl
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param dynamicQuery the dynamic query to search with
-	 * @param start the lower bound of the range of model instances to return
-	 * @param end the upper bound of the range of model instances to return (not inclusive)
+	 * @param dynamicQuery the dynamic query
+	 * @param start the lower bound of the range of model instances
+	 * @param end the upper bound of the range of model instances (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching rows
 	 * @throws SystemException if a system exception occurred
@@ -176,9 +176,9 @@ public abstract class DDMStorageLinkLocalServiceBaseImpl
 	}
 
 	/**
-	 * Counts the number of rows that match the dynamic query.
+	 * Returns the number of rows that match the dynamic query.
 	 *
-	 * @param dynamicQuery the dynamic query to search with
+	 * @param dynamicQuery the dynamic query
 	 * @return the number of rows that match the dynamic query
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -188,9 +188,9 @@ public abstract class DDMStorageLinkLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the d d m storage link with the primary key.
+	 * Returns the d d m storage link with the primary key.
 	 *
-	 * @param storageLinkId the primary key of the d d m storage link to get
+	 * @param storageLinkId the primary key of the d d m storage link
 	 * @return the d d m storage link
 	 * @throws PortalException if a d d m storage link with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -201,14 +201,14 @@ public abstract class DDMStorageLinkLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets a range of all the d d m storage links.
+	 * Returns a range of all the d d m storage links.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param start the lower bound of the range of d d m storage links to return
-	 * @param end the upper bound of the range of d d m storage links to return (not inclusive)
+	 * @param start the lower bound of the range of d d m storage links
+	 * @param end the upper bound of the range of d d m storage links (not inclusive)
 	 * @return the range of d d m storage links
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -218,7 +218,7 @@ public abstract class DDMStorageLinkLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the number of d d m storage links.
+	 * Returns the number of d d m storage links.
 	 *
 	 * @return the number of d d m storage links
 	 * @throws SystemException if a system exception occurred
@@ -230,7 +230,7 @@ public abstract class DDMStorageLinkLocalServiceBaseImpl
 	/**
 	 * Updates the d d m storage link in the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param ddmStorageLink the d d m storage link to update
+	 * @param ddmStorageLink the d d m storage link
 	 * @return the d d m storage link that was updated
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -244,7 +244,7 @@ public abstract class DDMStorageLinkLocalServiceBaseImpl
 	/**
 	 * Updates the d d m storage link in the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param ddmStorageLink the d d m storage link to update
+	 * @param ddmStorageLink the d d m storage link
 	 * @param merge whether to merge the d d m storage link with the current session. See {@link com.liferay.portal.service.persistence.BatchSession#update(com.liferay.portal.kernel.dao.orm.Session, com.liferay.portal.model.BaseModel, boolean)} for an explanation.
 	 * @return the d d m storage link that was updated
 	 * @throws SystemException if a system exception occurred
@@ -257,7 +257,7 @@ public abstract class DDMStorageLinkLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the d d m content local service.
+	 * Returns the d d m content local service.
 	 *
 	 * @return the d d m content local service
 	 */
@@ -276,7 +276,7 @@ public abstract class DDMStorageLinkLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the d d m content persistence.
+	 * Returns the d d m content persistence.
 	 *
 	 * @return the d d m content persistence
 	 */
@@ -295,7 +295,7 @@ public abstract class DDMStorageLinkLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the d d m storage link local service.
+	 * Returns the d d m storage link local service.
 	 *
 	 * @return the d d m storage link local service
 	 */
@@ -314,7 +314,7 @@ public abstract class DDMStorageLinkLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the d d m storage link persistence.
+	 * Returns the d d m storage link persistence.
 	 *
 	 * @return the d d m storage link persistence
 	 */
@@ -333,7 +333,7 @@ public abstract class DDMStorageLinkLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the d d m structure local service.
+	 * Returns the d d m structure local service.
 	 *
 	 * @return the d d m structure local service
 	 */
@@ -352,7 +352,7 @@ public abstract class DDMStorageLinkLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the d d m structure remote service.
+	 * Returns the d d m structure remote service.
 	 *
 	 * @return the d d m structure remote service
 	 */
@@ -370,7 +370,7 @@ public abstract class DDMStorageLinkLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the d d m structure persistence.
+	 * Returns the d d m structure persistence.
 	 *
 	 * @return the d d m structure persistence
 	 */
@@ -389,7 +389,7 @@ public abstract class DDMStorageLinkLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the d d m structure finder.
+	 * Returns the d d m structure finder.
 	 *
 	 * @return the d d m structure finder
 	 */
@@ -407,7 +407,7 @@ public abstract class DDMStorageLinkLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the d d m structure link local service.
+	 * Returns the d d m structure link local service.
 	 *
 	 * @return the d d m structure link local service
 	 */
@@ -426,7 +426,7 @@ public abstract class DDMStorageLinkLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the d d m structure link remote service.
+	 * Returns the d d m structure link remote service.
 	 *
 	 * @return the d d m structure link remote service
 	 */
@@ -445,7 +445,7 @@ public abstract class DDMStorageLinkLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the d d m structure link persistence.
+	 * Returns the d d m structure link persistence.
 	 *
 	 * @return the d d m structure link persistence
 	 */
@@ -464,7 +464,7 @@ public abstract class DDMStorageLinkLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the d d m template local service.
+	 * Returns the d d m template local service.
 	 *
 	 * @return the d d m template local service
 	 */
@@ -483,7 +483,7 @@ public abstract class DDMStorageLinkLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the d d m template remote service.
+	 * Returns the d d m template remote service.
 	 *
 	 * @return the d d m template remote service
 	 */
@@ -501,7 +501,7 @@ public abstract class DDMStorageLinkLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the d d m template persistence.
+	 * Returns the d d m template persistence.
 	 *
 	 * @return the d d m template persistence
 	 */
@@ -520,7 +520,7 @@ public abstract class DDMStorageLinkLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the d d m template finder.
+	 * Returns the d d m template finder.
 	 *
 	 * @return the d d m template finder
 	 */
@@ -538,7 +538,7 @@ public abstract class DDMStorageLinkLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the counter local service.
+	 * Returns the counter local service.
 	 *
 	 * @return the counter local service
 	 */
@@ -556,7 +556,7 @@ public abstract class DDMStorageLinkLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the resource local service.
+	 * Returns the resource local service.
 	 *
 	 * @return the resource local service
 	 */
@@ -575,7 +575,7 @@ public abstract class DDMStorageLinkLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the resource remote service.
+	 * Returns the resource remote service.
 	 *
 	 * @return the resource remote service
 	 */
@@ -593,7 +593,7 @@ public abstract class DDMStorageLinkLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the resource persistence.
+	 * Returns the resource persistence.
 	 *
 	 * @return the resource persistence
 	 */
@@ -611,7 +611,7 @@ public abstract class DDMStorageLinkLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the resource finder.
+	 * Returns the resource finder.
 	 *
 	 * @return the resource finder
 	 */
@@ -629,7 +629,7 @@ public abstract class DDMStorageLinkLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the user local service.
+	 * Returns the user local service.
 	 *
 	 * @return the user local service
 	 */
@@ -647,7 +647,7 @@ public abstract class DDMStorageLinkLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the user remote service.
+	 * Returns the user remote service.
 	 *
 	 * @return the user remote service
 	 */
@@ -665,7 +665,7 @@ public abstract class DDMStorageLinkLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the user persistence.
+	 * Returns the user persistence.
 	 *
 	 * @return the user persistence
 	 */
@@ -683,7 +683,7 @@ public abstract class DDMStorageLinkLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the user finder.
+	 * Returns the user finder.
 	 *
 	 * @return the user finder
 	 */
@@ -701,7 +701,7 @@ public abstract class DDMStorageLinkLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the Spring bean ID for this bean.
+	 * Returns the Spring bean ID for this bean.
 	 *
 	 * @return the Spring bean ID for this bean
 	 */
@@ -721,7 +721,7 @@ public abstract class DDMStorageLinkLocalServiceBaseImpl
 	/**
 	 * Performs an SQL query.
 	 *
-	 * @param sql the sql query to perform
+	 * @param sql the sql query
 	 */
 	protected void runSQL(String sql) throws SystemException {
 		try {

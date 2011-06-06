@@ -43,21 +43,21 @@ public interface CounterModel extends BaseModel<Counter> {
 	 */
 
 	/**
-	 * Gets the primary key of this counter.
+	 * Returns the primary key of this counter.
 	 *
 	 * @return the primary key of this counter
 	 */
 	public String getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this counter
+	 * Sets the primary key of this counter.
 	 *
 	 * @param primaryKey the primary key of this counter
 	 */
 	public void setPrimaryKey(String primaryKey);
 
 	/**
-	 * Gets the name of this counter.
+	 * Returns the name of this counter.
 	 *
 	 * @return the name of this counter
 	 */
@@ -72,7 +72,7 @@ public interface CounterModel extends BaseModel<Counter> {
 	public void setName(String name);
 
 	/**
-	 * Gets the current ID of this counter.
+	 * Returns the current ID of this counter.
 	 *
 	 * @return the current ID of this counter
 	 */

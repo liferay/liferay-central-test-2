@@ -77,7 +77,7 @@ public abstract class WikiNodeLocalServiceBaseImpl
 	/**
 	 * Adds the wiki node to the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param wikiNode the wiki node to add
+	 * @param wikiNode the wiki node
 	 * @return the wiki node that was added
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -100,7 +100,7 @@ public abstract class WikiNodeLocalServiceBaseImpl
 	/**
 	 * Deletes the wiki node with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param nodeId the primary key of the wiki node to delete
+	 * @param nodeId the primary key of the wiki node
 	 * @throws PortalException if a wiki node with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -112,7 +112,7 @@ public abstract class WikiNodeLocalServiceBaseImpl
 	/**
 	 * Deletes the wiki node from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param wikiNode the wiki node to delete
+	 * @param wikiNode the wiki node
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void deleteWikiNode(WikiNode wikiNode) throws SystemException {
@@ -122,7 +122,7 @@ public abstract class WikiNodeLocalServiceBaseImpl
 	/**
 	 * Performs a dynamic query on the database and returns the matching rows.
 	 *
-	 * @param dynamicQuery the dynamic query to search with
+	 * @param dynamicQuery the dynamic query
 	 * @return the matching rows
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -139,9 +139,9 @@ public abstract class WikiNodeLocalServiceBaseImpl
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param dynamicQuery the dynamic query to search with
-	 * @param start the lower bound of the range of model instances to return
-	 * @param end the upper bound of the range of model instances to return (not inclusive)
+	 * @param dynamicQuery the dynamic query
+	 * @param start the lower bound of the range of model instances
+	 * @param end the upper bound of the range of model instances (not inclusive)
 	 * @return the range of matching rows
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -158,9 +158,9 @@ public abstract class WikiNodeLocalServiceBaseImpl
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param dynamicQuery the dynamic query to search with
-	 * @param start the lower bound of the range of model instances to return
-	 * @param end the upper bound of the range of model instances to return (not inclusive)
+	 * @param dynamicQuery the dynamic query
+	 * @param start the lower bound of the range of model instances
+	 * @param end the upper bound of the range of model instances (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching rows
 	 * @throws SystemException if a system exception occurred
@@ -173,9 +173,9 @@ public abstract class WikiNodeLocalServiceBaseImpl
 	}
 
 	/**
-	 * Counts the number of rows that match the dynamic query.
+	 * Returns the number of rows that match the dynamic query.
 	 *
-	 * @param dynamicQuery the dynamic query to search with
+	 * @param dynamicQuery the dynamic query
 	 * @return the number of rows that match the dynamic query
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -185,9 +185,9 @@ public abstract class WikiNodeLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the wiki node with the primary key.
+	 * Returns the wiki node with the primary key.
 	 *
-	 * @param nodeId the primary key of the wiki node to get
+	 * @param nodeId the primary key of the wiki node
 	 * @return the wiki node
 	 * @throws PortalException if a wiki node with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -198,12 +198,12 @@ public abstract class WikiNodeLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the wiki node with the UUID and group id.
+	 * Returns the wiki node with the UUID in the group.
 	 *
-	 * @param uuid the UUID of wiki node to get
-	 * @param groupId the group id of the wiki node to get
+	 * @param uuid the UUID of wiki node
+	 * @param groupId the group id of the wiki node
 	 * @return the wiki node
-	 * @throws PortalException if a wiki node with the UUID and group id could not be found
+	 * @throws PortalException if a wiki node with the UUID in the group could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	public WikiNode getWikiNodeByUuidAndGroupId(String uuid, long groupId)
@@ -212,14 +212,14 @@ public abstract class WikiNodeLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets a range of all the wiki nodes.
+	 * Returns a range of all the wiki nodes.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param start the lower bound of the range of wiki nodes to return
-	 * @param end the upper bound of the range of wiki nodes to return (not inclusive)
+	 * @param start the lower bound of the range of wiki nodes
+	 * @param end the upper bound of the range of wiki nodes (not inclusive)
 	 * @return the range of wiki nodes
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -229,7 +229,7 @@ public abstract class WikiNodeLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the number of wiki nodes.
+	 * Returns the number of wiki nodes.
 	 *
 	 * @return the number of wiki nodes
 	 * @throws SystemException if a system exception occurred
@@ -241,7 +241,7 @@ public abstract class WikiNodeLocalServiceBaseImpl
 	/**
 	 * Updates the wiki node in the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param wikiNode the wiki node to update
+	 * @param wikiNode the wiki node
 	 * @return the wiki node that was updated
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -254,7 +254,7 @@ public abstract class WikiNodeLocalServiceBaseImpl
 	/**
 	 * Updates the wiki node in the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param wikiNode the wiki node to update
+	 * @param wikiNode the wiki node
 	 * @param merge whether to merge the wiki node with the current session. See {@link com.liferay.portal.service.persistence.BatchSession#update(com.liferay.portal.kernel.dao.orm.Session, com.liferay.portal.model.BaseModel, boolean)} for an explanation.
 	 * @return the wiki node that was updated
 	 * @throws SystemException if a system exception occurred
@@ -267,7 +267,7 @@ public abstract class WikiNodeLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the wiki node local service.
+	 * Returns the wiki node local service.
 	 *
 	 * @return the wiki node local service
 	 */
@@ -286,7 +286,7 @@ public abstract class WikiNodeLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the wiki node remote service.
+	 * Returns the wiki node remote service.
 	 *
 	 * @return the wiki node remote service
 	 */
@@ -304,7 +304,7 @@ public abstract class WikiNodeLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the wiki node persistence.
+	 * Returns the wiki node persistence.
 	 *
 	 * @return the wiki node persistence
 	 */
@@ -322,7 +322,7 @@ public abstract class WikiNodeLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the wiki page local service.
+	 * Returns the wiki page local service.
 	 *
 	 * @return the wiki page local service
 	 */
@@ -341,7 +341,7 @@ public abstract class WikiNodeLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the wiki page remote service.
+	 * Returns the wiki page remote service.
 	 *
 	 * @return the wiki page remote service
 	 */
@@ -359,7 +359,7 @@ public abstract class WikiNodeLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the wiki page persistence.
+	 * Returns the wiki page persistence.
 	 *
 	 * @return the wiki page persistence
 	 */
@@ -377,7 +377,7 @@ public abstract class WikiNodeLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the wiki page finder.
+	 * Returns the wiki page finder.
 	 *
 	 * @return the wiki page finder
 	 */
@@ -395,7 +395,7 @@ public abstract class WikiNodeLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the wiki page resource local service.
+	 * Returns the wiki page resource local service.
 	 *
 	 * @return the wiki page resource local service
 	 */
@@ -414,7 +414,7 @@ public abstract class WikiNodeLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the wiki page resource persistence.
+	 * Returns the wiki page resource persistence.
 	 *
 	 * @return the wiki page resource persistence
 	 */
@@ -433,7 +433,7 @@ public abstract class WikiNodeLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the counter local service.
+	 * Returns the counter local service.
 	 *
 	 * @return the counter local service
 	 */
@@ -451,7 +451,7 @@ public abstract class WikiNodeLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the group local service.
+	 * Returns the group local service.
 	 *
 	 * @return the group local service
 	 */
@@ -469,7 +469,7 @@ public abstract class WikiNodeLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the group remote service.
+	 * Returns the group remote service.
 	 *
 	 * @return the group remote service
 	 */
@@ -487,7 +487,7 @@ public abstract class WikiNodeLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the group persistence.
+	 * Returns the group persistence.
 	 *
 	 * @return the group persistence
 	 */
@@ -505,7 +505,7 @@ public abstract class WikiNodeLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the group finder.
+	 * Returns the group finder.
 	 *
 	 * @return the group finder
 	 */
@@ -523,7 +523,7 @@ public abstract class WikiNodeLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the resource local service.
+	 * Returns the resource local service.
 	 *
 	 * @return the resource local service
 	 */
@@ -542,7 +542,7 @@ public abstract class WikiNodeLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the resource remote service.
+	 * Returns the resource remote service.
 	 *
 	 * @return the resource remote service
 	 */
@@ -560,7 +560,7 @@ public abstract class WikiNodeLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the resource persistence.
+	 * Returns the resource persistence.
 	 *
 	 * @return the resource persistence
 	 */
@@ -578,7 +578,7 @@ public abstract class WikiNodeLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the resource finder.
+	 * Returns the resource finder.
 	 *
 	 * @return the resource finder
 	 */
@@ -596,7 +596,7 @@ public abstract class WikiNodeLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the subscription local service.
+	 * Returns the subscription local service.
 	 *
 	 * @return the subscription local service
 	 */
@@ -615,7 +615,7 @@ public abstract class WikiNodeLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the subscription persistence.
+	 * Returns the subscription persistence.
 	 *
 	 * @return the subscription persistence
 	 */
@@ -634,7 +634,7 @@ public abstract class WikiNodeLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the user local service.
+	 * Returns the user local service.
 	 *
 	 * @return the user local service
 	 */
@@ -652,7 +652,7 @@ public abstract class WikiNodeLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the user remote service.
+	 * Returns the user remote service.
 	 *
 	 * @return the user remote service
 	 */
@@ -670,7 +670,7 @@ public abstract class WikiNodeLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the user persistence.
+	 * Returns the user persistence.
 	 *
 	 * @return the user persistence
 	 */
@@ -688,7 +688,7 @@ public abstract class WikiNodeLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the user finder.
+	 * Returns the user finder.
 	 *
 	 * @return the user finder
 	 */
@@ -706,7 +706,7 @@ public abstract class WikiNodeLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the Spring bean ID for this bean.
+	 * Returns the Spring bean ID for this bean.
 	 *
 	 * @return the Spring bean ID for this bean
 	 */
@@ -726,7 +726,7 @@ public abstract class WikiNodeLocalServiceBaseImpl
 	/**
 	 * Performs an SQL query.
 	 *
-	 * @param sql the sql query to perform
+	 * @param sql the sql query
 	 */
 	protected void runSQL(String sql) throws SystemException {
 		try {

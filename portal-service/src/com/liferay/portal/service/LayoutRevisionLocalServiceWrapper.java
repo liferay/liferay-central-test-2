@@ -33,7 +33,7 @@ public class LayoutRevisionLocalServiceWrapper
 	/**
 	* Adds the layout revision to the database. Also notifies the appropriate model listeners.
 	*
-	* @param layoutRevision the layout revision to add
+	* @param layoutRevision the layout revision
 	* @return the layout revision that was added
 	* @throws SystemException if a system exception occurred
 	*/
@@ -57,7 +57,7 @@ public class LayoutRevisionLocalServiceWrapper
 	/**
 	* Deletes the layout revision with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param layoutRevisionId the primary key of the layout revision to delete
+	* @param layoutRevisionId the primary key of the layout revision
 	* @throws PortalException if a layout revision with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -70,7 +70,7 @@ public class LayoutRevisionLocalServiceWrapper
 	/**
 	* Deletes the layout revision from the database. Also notifies the appropriate model listeners.
 	*
-	* @param layoutRevision the layout revision to delete
+	* @param layoutRevision the layout revision
 	* @throws PortalException
 	* @throws SystemException if a system exception occurred
 	*/
@@ -84,7 +84,7 @@ public class LayoutRevisionLocalServiceWrapper
 	/**
 	* Performs a dynamic query on the database and returns the matching rows.
 	*
-	* @param dynamicQuery the dynamic query to search with
+	* @param dynamicQuery the dynamic query
 	* @return the matching rows
 	* @throws SystemException if a system exception occurred
 	*/
@@ -102,9 +102,9 @@ public class LayoutRevisionLocalServiceWrapper
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param dynamicQuery the dynamic query to search with
-	* @param start the lower bound of the range of model instances to return
-	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param dynamicQuery the dynamic query
+	* @param start the lower bound of the range of model instances
+	* @param end the upper bound of the range of model instances (not inclusive)
 	* @return the range of matching rows
 	* @throws SystemException if a system exception occurred
 	*/
@@ -122,9 +122,9 @@ public class LayoutRevisionLocalServiceWrapper
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param dynamicQuery the dynamic query to search with
-	* @param start the lower bound of the range of model instances to return
-	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param dynamicQuery the dynamic query
+	* @param start the lower bound of the range of model instances
+	* @param end the upper bound of the range of model instances (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching rows
 	* @throws SystemException if a system exception occurred
@@ -140,9 +140,9 @@ public class LayoutRevisionLocalServiceWrapper
 	}
 
 	/**
-	* Counts the number of rows that match the dynamic query.
+	* Returns the number of rows that match the dynamic query.
 	*
-	* @param dynamicQuery the dynamic query to search with
+	* @param dynamicQuery the dynamic query
 	* @return the number of rows that match the dynamic query
 	* @throws SystemException if a system exception occurred
 	*/
@@ -153,9 +153,9 @@ public class LayoutRevisionLocalServiceWrapper
 	}
 
 	/**
-	* Gets the layout revision with the primary key.
+	* Returns the layout revision with the primary key.
 	*
-	* @param layoutRevisionId the primary key of the layout revision to get
+	* @param layoutRevisionId the primary key of the layout revision
 	* @return the layout revision
 	* @throws PortalException if a layout revision with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -168,14 +168,14 @@ public class LayoutRevisionLocalServiceWrapper
 	}
 
 	/**
-	* Gets a range of all the layout revisions.
+	* Returns a range of all the layout revisions.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of layout revisions to return
-	* @param end the upper bound of the range of layout revisions to return (not inclusive)
+	* @param start the lower bound of the range of layout revisions
+	* @param end the upper bound of the range of layout revisions (not inclusive)
 	* @return the range of layout revisions
 	* @throws SystemException if a system exception occurred
 	*/
@@ -186,7 +186,7 @@ public class LayoutRevisionLocalServiceWrapper
 	}
 
 	/**
-	* Gets the number of layout revisions.
+	* Returns the number of layout revisions.
 	*
 	* @return the number of layout revisions
 	* @throws SystemException if a system exception occurred
@@ -199,7 +199,7 @@ public class LayoutRevisionLocalServiceWrapper
 	/**
 	* Updates the layout revision in the database. Also notifies the appropriate model listeners.
 	*
-	* @param layoutRevision the layout revision to update
+	* @param layoutRevision the layout revision
 	* @return the layout revision that was updated
 	* @throws SystemException if a system exception occurred
 	*/
@@ -212,7 +212,7 @@ public class LayoutRevisionLocalServiceWrapper
 	/**
 	* Updates the layout revision in the database. Also notifies the appropriate model listeners.
 	*
-	* @param layoutRevision the layout revision to update
+	* @param layoutRevision the layout revision
 	* @param merge whether to merge the layout revision with the current session. See {@link com.liferay.portal.service.persistence.BatchSession#update(com.liferay.portal.kernel.dao.orm.Session, com.liferay.portal.model.BaseModel, boolean)} for an explanation.
 	* @return the layout revision that was updated
 	* @throws SystemException if a system exception occurred
@@ -225,7 +225,7 @@ public class LayoutRevisionLocalServiceWrapper
 	}
 
 	/**
-	* Gets the Spring bean ID for this bean.
+	* Returns the Spring bean ID for this bean.
 	*
 	* @return the Spring bean ID for this bean
 	*/

@@ -95,7 +95,7 @@ public class WorkflowInstanceLinkPersistenceImpl extends BasePersistenceImpl<Wor
 	/**
 	 * Caches the workflow instance link in the entity cache if it is enabled.
 	 *
-	 * @param workflowInstanceLink the workflow instance link to cache
+	 * @param workflowInstanceLink the workflow instance link
 	 */
 	public void cacheResult(WorkflowInstanceLink workflowInstanceLink) {
 		EntityCacheUtil.putResult(WorkflowInstanceLinkModelImpl.ENTITY_CACHE_ENABLED,
@@ -108,7 +108,7 @@ public class WorkflowInstanceLinkPersistenceImpl extends BasePersistenceImpl<Wor
 	/**
 	 * Caches the workflow instance links in the entity cache if it is enabled.
 	 *
-	 * @param workflowInstanceLinks the workflow instance links to cache
+	 * @param workflowInstanceLinks the workflow instance links
 	 */
 	public void cacheResult(List<WorkflowInstanceLink> workflowInstanceLinks) {
 		for (WorkflowInstanceLink workflowInstanceLink : workflowInstanceLinks) {
@@ -168,7 +168,7 @@ public class WorkflowInstanceLinkPersistenceImpl extends BasePersistenceImpl<Wor
 	/**
 	 * Removes the workflow instance link with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param primaryKey the primary key of the workflow instance link to remove
+	 * @param primaryKey the primary key of the workflow instance link
 	 * @return the workflow instance link that was removed
 	 * @throws com.liferay.portal.NoSuchModelException if a workflow instance link with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -181,7 +181,7 @@ public class WorkflowInstanceLinkPersistenceImpl extends BasePersistenceImpl<Wor
 	/**
 	 * Removes the workflow instance link with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param workflowInstanceLinkId the primary key of the workflow instance link to remove
+	 * @param workflowInstanceLinkId the primary key of the workflow instance link
 	 * @return the workflow instance link that was removed
 	 * @throws com.liferay.portal.NoSuchWorkflowInstanceLinkException if a workflow instance link with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -222,7 +222,7 @@ public class WorkflowInstanceLinkPersistenceImpl extends BasePersistenceImpl<Wor
 	/**
 	 * Removes the workflow instance link from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param workflowInstanceLink the workflow instance link to remove
+	 * @param workflowInstanceLink the workflow instance link
 	 * @return the workflow instance link that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -313,9 +313,9 @@ public class WorkflowInstanceLinkPersistenceImpl extends BasePersistenceImpl<Wor
 	}
 
 	/**
-	 * Finds the workflow instance link with the primary key or throws a {@link com.liferay.portal.NoSuchModelException} if it could not be found.
+	 * Returns the workflow instance link with the primary key or throws a {@link com.liferay.portal.NoSuchModelException} if it could not be found.
 	 *
-	 * @param primaryKey the primary key of the workflow instance link to find
+	 * @param primaryKey the primary key of the workflow instance link
 	 * @return the workflow instance link
 	 * @throws com.liferay.portal.NoSuchModelException if a workflow instance link with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -326,9 +326,9 @@ public class WorkflowInstanceLinkPersistenceImpl extends BasePersistenceImpl<Wor
 	}
 
 	/**
-	 * Finds the workflow instance link with the primary key or throws a {@link com.liferay.portal.NoSuchWorkflowInstanceLinkException} if it could not be found.
+	 * Returns the workflow instance link with the primary key or throws a {@link com.liferay.portal.NoSuchWorkflowInstanceLinkException} if it could not be found.
 	 *
-	 * @param workflowInstanceLinkId the primary key of the workflow instance link to find
+	 * @param workflowInstanceLinkId the primary key of the workflow instance link
 	 * @return the workflow instance link
 	 * @throws com.liferay.portal.NoSuchWorkflowInstanceLinkException if a workflow instance link with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -351,9 +351,9 @@ public class WorkflowInstanceLinkPersistenceImpl extends BasePersistenceImpl<Wor
 	}
 
 	/**
-	 * Finds the workflow instance link with the primary key or returns <code>null</code> if it could not be found.
+	 * Returns the workflow instance link with the primary key or returns <code>null</code> if it could not be found.
 	 *
-	 * @param primaryKey the primary key of the workflow instance link to find
+	 * @param primaryKey the primary key of the workflow instance link
 	 * @return the workflow instance link, or <code>null</code> if a workflow instance link with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -363,9 +363,9 @@ public class WorkflowInstanceLinkPersistenceImpl extends BasePersistenceImpl<Wor
 	}
 
 	/**
-	 * Finds the workflow instance link with the primary key or returns <code>null</code> if it could not be found.
+	 * Returns the workflow instance link with the primary key or returns <code>null</code> if it could not be found.
 	 *
-	 * @param workflowInstanceLinkId the primary key of the workflow instance link to find
+	 * @param workflowInstanceLinkId the primary key of the workflow instance link
 	 * @return the workflow instance link, or <code>null</code> if a workflow instance link with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -399,12 +399,12 @@ public class WorkflowInstanceLinkPersistenceImpl extends BasePersistenceImpl<Wor
 	}
 
 	/**
-	 * Finds all the workflow instance links where groupId = &#63; and companyId = &#63; and classNameId = &#63; and classPK = &#63;.
+	 * Returns all the workflow instance links where groupId = &#63; and companyId = &#63; and classNameId = &#63; and classPK = &#63;.
 	 *
-	 * @param groupId the group ID to search with
-	 * @param companyId the company ID to search with
-	 * @param classNameId the class name ID to search with
-	 * @param classPK the class p k to search with
+	 * @param groupId the group ID
+	 * @param companyId the company ID
+	 * @param classNameId the class name ID
+	 * @param classPK the class p k
 	 * @return the matching workflow instance links
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -416,18 +416,18 @@ public class WorkflowInstanceLinkPersistenceImpl extends BasePersistenceImpl<Wor
 	}
 
 	/**
-	 * Finds a range of all the workflow instance links where groupId = &#63; and companyId = &#63; and classNameId = &#63; and classPK = &#63;.
+	 * Returns a range of all the workflow instance links where groupId = &#63; and companyId = &#63; and classNameId = &#63; and classPK = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group ID to search with
-	 * @param companyId the company ID to search with
-	 * @param classNameId the class name ID to search with
-	 * @param classPK the class p k to search with
-	 * @param start the lower bound of the range of workflow instance links to return
-	 * @param end the upper bound of the range of workflow instance links to return (not inclusive)
+	 * @param groupId the group ID
+	 * @param companyId the company ID
+	 * @param classNameId the class name ID
+	 * @param classPK the class p k
+	 * @param start the lower bound of the range of workflow instance links
+	 * @param end the upper bound of the range of workflow instance links (not inclusive)
 	 * @return the range of matching workflow instance links
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -439,18 +439,18 @@ public class WorkflowInstanceLinkPersistenceImpl extends BasePersistenceImpl<Wor
 	}
 
 	/**
-	 * Finds an ordered range of all the workflow instance links where groupId = &#63; and companyId = &#63; and classNameId = &#63; and classPK = &#63;.
+	 * Returns an ordered range of all the workflow instance links where groupId = &#63; and companyId = &#63; and classNameId = &#63; and classPK = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group ID to search with
-	 * @param companyId the company ID to search with
-	 * @param classNameId the class name ID to search with
-	 * @param classPK the class p k to search with
-	 * @param start the lower bound of the range of workflow instance links to return
-	 * @param end the upper bound of the range of workflow instance links to return (not inclusive)
+	 * @param groupId the group ID
+	 * @param companyId the company ID
+	 * @param classNameId the class name ID
+	 * @param classPK the class p k
+	 * @param start the lower bound of the range of workflow instance links
+	 * @param end the upper bound of the range of workflow instance links (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching workflow instance links
 	 * @throws SystemException if a system exception occurred
@@ -543,16 +543,16 @@ public class WorkflowInstanceLinkPersistenceImpl extends BasePersistenceImpl<Wor
 	}
 
 	/**
-	 * Finds the first workflow instance link in the ordered set where groupId = &#63; and companyId = &#63; and classNameId = &#63; and classPK = &#63;.
+	 * Returns the first workflow instance link in the ordered set where groupId = &#63; and companyId = &#63; and classNameId = &#63; and classPK = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group ID to search with
-	 * @param companyId the company ID to search with
-	 * @param classNameId the class name ID to search with
-	 * @param classPK the class p k to search with
+	 * @param groupId the group ID
+	 * @param companyId the company ID
+	 * @param classNameId the class name ID
+	 * @param classPK the class p k
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching workflow instance link
 	 * @throws com.liferay.portal.NoSuchWorkflowInstanceLinkException if a matching workflow instance link could not be found
@@ -592,16 +592,16 @@ public class WorkflowInstanceLinkPersistenceImpl extends BasePersistenceImpl<Wor
 	}
 
 	/**
-	 * Finds the last workflow instance link in the ordered set where groupId = &#63; and companyId = &#63; and classNameId = &#63; and classPK = &#63;.
+	 * Returns the last workflow instance link in the ordered set where groupId = &#63; and companyId = &#63; and classNameId = &#63; and classPK = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group ID to search with
-	 * @param companyId the company ID to search with
-	 * @param classNameId the class name ID to search with
-	 * @param classPK the class p k to search with
+	 * @param groupId the group ID
+	 * @param companyId the company ID
+	 * @param classNameId the class name ID
+	 * @param classPK the class p k
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching workflow instance link
 	 * @throws com.liferay.portal.NoSuchWorkflowInstanceLinkException if a matching workflow instance link could not be found
@@ -643,17 +643,17 @@ public class WorkflowInstanceLinkPersistenceImpl extends BasePersistenceImpl<Wor
 	}
 
 	/**
-	 * Finds the workflow instance links before and after the current workflow instance link in the ordered set where groupId = &#63; and companyId = &#63; and classNameId = &#63; and classPK = &#63;.
+	 * Returns the workflow instance links before and after the current workflow instance link in the ordered set where groupId = &#63; and companyId = &#63; and classNameId = &#63; and classPK = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
 	 * @param workflowInstanceLinkId the primary key of the current workflow instance link
-	 * @param groupId the group ID to search with
-	 * @param companyId the company ID to search with
-	 * @param classNameId the class name ID to search with
-	 * @param classPK the class p k to search with
+	 * @param groupId the group ID
+	 * @param companyId the company ID
+	 * @param classNameId the class name ID
+	 * @param classPK the class p k
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next workflow instance link
 	 * @throws com.liferay.portal.NoSuchWorkflowInstanceLinkException if a workflow instance link with the primary key could not be found
@@ -810,7 +810,7 @@ public class WorkflowInstanceLinkPersistenceImpl extends BasePersistenceImpl<Wor
 	}
 
 	/**
-	 * Finds all the workflow instance links.
+	 * Returns all the workflow instance links.
 	 *
 	 * @return the workflow instance links
 	 * @throws SystemException if a system exception occurred
@@ -820,14 +820,14 @@ public class WorkflowInstanceLinkPersistenceImpl extends BasePersistenceImpl<Wor
 	}
 
 	/**
-	 * Finds a range of all the workflow instance links.
+	 * Returns a range of all the workflow instance links.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param start the lower bound of the range of workflow instance links to return
-	 * @param end the upper bound of the range of workflow instance links to return (not inclusive)
+	 * @param start the lower bound of the range of workflow instance links
+	 * @param end the upper bound of the range of workflow instance links (not inclusive)
 	 * @return the range of workflow instance links
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -837,14 +837,14 @@ public class WorkflowInstanceLinkPersistenceImpl extends BasePersistenceImpl<Wor
 	}
 
 	/**
-	 * Finds an ordered range of all the workflow instance links.
+	 * Returns an ordered range of all the workflow instance links.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param start the lower bound of the range of workflow instance links to return
-	 * @param end the upper bound of the range of workflow instance links to return (not inclusive)
+	 * @param start the lower bound of the range of workflow instance links
+	 * @param end the upper bound of the range of workflow instance links (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of workflow instance links
 	 * @throws SystemException if a system exception occurred
@@ -921,10 +921,10 @@ public class WorkflowInstanceLinkPersistenceImpl extends BasePersistenceImpl<Wor
 	/**
 	 * Removes all the workflow instance links where groupId = &#63; and companyId = &#63; and classNameId = &#63; and classPK = &#63; from the database.
 	 *
-	 * @param groupId the group ID to search with
-	 * @param companyId the company ID to search with
-	 * @param classNameId the class name ID to search with
-	 * @param classPK the class p k to search with
+	 * @param groupId the group ID
+	 * @param companyId the company ID
+	 * @param classNameId the class name ID
+	 * @param classPK the class p k
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByG_C_C_C(long groupId, long companyId, long classNameId,
@@ -947,12 +947,12 @@ public class WorkflowInstanceLinkPersistenceImpl extends BasePersistenceImpl<Wor
 	}
 
 	/**
-	 * Counts all the workflow instance links where groupId = &#63; and companyId = &#63; and classNameId = &#63; and classPK = &#63;.
+	 * Returns the number of workflow instance links where groupId = &#63; and companyId = &#63; and classNameId = &#63; and classPK = &#63;.
 	 *
-	 * @param groupId the group ID to search with
-	 * @param companyId the company ID to search with
-	 * @param classNameId the class name ID to search with
-	 * @param classPK the class p k to search with
+	 * @param groupId the group ID
+	 * @param companyId the company ID
+	 * @param classNameId the class name ID
+	 * @param classPK the class p k
 	 * @return the number of matching workflow instance links
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1018,7 +1018,7 @@ public class WorkflowInstanceLinkPersistenceImpl extends BasePersistenceImpl<Wor
 	}
 
 	/**
-	 * Counts all the workflow instance links.
+	 * Returns the number of workflow instance links.
 	 *
 	 * @return the number of workflow instance links
 	 * @throws SystemException if a system exception occurred

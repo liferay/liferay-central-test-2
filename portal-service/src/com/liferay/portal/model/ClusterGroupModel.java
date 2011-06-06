@@ -42,21 +42,21 @@ public interface ClusterGroupModel extends BaseModel<ClusterGroup> {
 	 */
 
 	/**
-	 * Gets the primary key of this cluster group.
+	 * Returns the primary key of this cluster group.
 	 *
 	 * @return the primary key of this cluster group
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this cluster group
+	 * Sets the primary key of this cluster group.
 	 *
 	 * @param primaryKey the primary key of this cluster group
 	 */
 	public void setPrimaryKey(long primaryKey);
 
 	/**
-	 * Gets the cluster group ID of this cluster group.
+	 * Returns the cluster group ID of this cluster group.
 	 *
 	 * @return the cluster group ID of this cluster group
 	 */
@@ -70,7 +70,7 @@ public interface ClusterGroupModel extends BaseModel<ClusterGroup> {
 	public void setClusterGroupId(long clusterGroupId);
 
 	/**
-	 * Gets the name of this cluster group.
+	 * Returns the name of this cluster group.
 	 *
 	 * @return the name of this cluster group
 	 */
@@ -85,7 +85,7 @@ public interface ClusterGroupModel extends BaseModel<ClusterGroup> {
 	public void setName(String name);
 
 	/**
-	 * Gets the cluster node IDs of this cluster group.
+	 * Returns the cluster node IDs of this cluster group.
 	 *
 	 * @return the cluster node IDs of this cluster group
 	 */
@@ -100,7 +100,7 @@ public interface ClusterGroupModel extends BaseModel<ClusterGroup> {
 	public void setClusterNodeIds(String clusterNodeIds);
 
 	/**
-	 * Gets the whole cluster of this cluster group.
+	 * Returns the whole cluster of this cluster group.
 	 *
 	 * @return the whole cluster of this cluster group
 	 */

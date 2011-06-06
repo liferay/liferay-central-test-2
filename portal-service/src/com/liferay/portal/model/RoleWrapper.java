@@ -37,7 +37,7 @@ public class RoleWrapper implements Role {
 	}
 
 	/**
-	* Gets the primary key of this role.
+	* Returns the primary key of this role.
 	*
 	* @return the primary key of this role
 	*/
@@ -46,7 +46,7 @@ public class RoleWrapper implements Role {
 	}
 
 	/**
-	* Sets the primary key of this role
+	* Sets the primary key of this role.
 	*
 	* @param primaryKey the primary key of this role
 	*/
@@ -55,7 +55,7 @@ public class RoleWrapper implements Role {
 	}
 
 	/**
-	* Gets the role ID of this role.
+	* Returns the role ID of this role.
 	*
 	* @return the role ID of this role
 	*/
@@ -73,7 +73,7 @@ public class RoleWrapper implements Role {
 	}
 
 	/**
-	* Gets the company ID of this role.
+	* Returns the company ID of this role.
 	*
 	* @return the company ID of this role
 	*/
@@ -91,16 +91,16 @@ public class RoleWrapper implements Role {
 	}
 
 	/**
-	* Gets the class name of the model instance this role is polymorphically associated with.
+	* Returns the fully qualified class name of this role.
 	*
-	* @return the class name of the model instance this role is polymorphically associated with
+	* @return the fully qualified class name of this role
 	*/
 	public java.lang.String getClassName() {
 		return _role.getClassName();
 	}
 
 	/**
-	* Gets the class name ID of this role.
+	* Returns the class name ID of this role.
 	*
 	* @return the class name ID of this role
 	*/
@@ -118,7 +118,7 @@ public class RoleWrapper implements Role {
 	}
 
 	/**
-	* Gets the class p k of this role.
+	* Returns the class p k of this role.
 	*
 	* @return the class p k of this role
 	*/
@@ -136,7 +136,7 @@ public class RoleWrapper implements Role {
 	}
 
 	/**
-	* Gets the name of this role.
+	* Returns the name of this role.
 	*
 	* @return the name of this role
 	*/
@@ -154,7 +154,7 @@ public class RoleWrapper implements Role {
 	}
 
 	/**
-	* Gets the title of this role.
+	* Returns the title of this role.
 	*
 	* @return the title of this role
 	*/
@@ -163,9 +163,9 @@ public class RoleWrapper implements Role {
 	}
 
 	/**
-	* Gets the localized title of this role. Uses the default language if no localization exists for the requested language.
+	* Returns the localized title of this role in the language. Uses the default language if no localization exists for the requested language.
 	*
-	* @param locale the locale to get the localized title for
+	* @param locale the locale of the language
 	* @return the localized title of this role
 	*/
 	public java.lang.String getTitle(java.util.Locale locale) {
@@ -173,9 +173,9 @@ public class RoleWrapper implements Role {
 	}
 
 	/**
-	* Gets the localized title of this role, optionally using the default language if no localization exists for the requested language.
+	* Returns the localized title of this role in the language, optionally using the default language if no localization exists for the requested language.
 	*
-	* @param locale the local to get the localized title for
+	* @param locale the local of the language
 	* @param useDefault whether to use the default language if no localization exists for the requested language
 	* @return the localized title of this role. If <code>useDefault</code> is <code>false</code> and no localization exists for the requested language, an empty string will be returned.
 	*/
@@ -184,9 +184,9 @@ public class RoleWrapper implements Role {
 	}
 
 	/**
-	* Gets the localized title of this role. Uses the default language if no localization exists for the requested language.
+	* Returns the localized title of this role in the language. Uses the default language if no localization exists for the requested language.
 	*
-	* @param languageId the id of the language to get the localized title for
+	* @param languageId the ID of the language
 	* @return the localized title of this role
 	*/
 	public java.lang.String getTitle(java.lang.String languageId) {
@@ -194,9 +194,9 @@ public class RoleWrapper implements Role {
 	}
 
 	/**
-	* Gets the localized title of this role, optionally using the default language if no localization exists for the requested language.
+	* Returns the localized title of this role in the language, optionally using the default language if no localization exists for the requested language.
 	*
-	* @param languageId the id of the language to get the localized title for
+	* @param languageId the ID of the language
 	* @param useDefault whether to use the default language if no localization exists for the requested language
 	* @return the localized title of this role
 	*/
@@ -206,9 +206,9 @@ public class RoleWrapper implements Role {
 	}
 
 	/**
-	* Gets a map of the locales and localized title of this role.
+	* Returns a map of the locales and localized titles of this role.
 	*
-	* @return the locales and localized title
+	* @return the locales and localized titles of this role
 	*/
 	public java.util.Map<java.util.Locale, java.lang.String> getTitleMap() {
 		return _role.getTitleMap();
@@ -224,15 +224,22 @@ public class RoleWrapper implements Role {
 	}
 
 	/**
-	* Sets the localized title of this role.
+	* Sets the localized title of this role in the language.
 	*
 	* @param title the localized title of this role
-	* @param locale the locale to set the localized title for
+	* @param locale the locale of the language
 	*/
 	public void setTitle(java.lang.String title, java.util.Locale locale) {
 		_role.setTitle(title, locale);
 	}
 
+	/**
+	* Sets the localized title of this role in the language, and sets the default locale.
+	*
+	* @param title the localized title of this role
+	* @param locale the locale of the language
+	* @param defaultLocale the default locale
+	*/
 	public void setTitle(java.lang.String title, java.util.Locale locale,
 		java.util.Locale defaultLocale) {
 		_role.setTitle(title, locale, defaultLocale);
@@ -248,6 +255,12 @@ public class RoleWrapper implements Role {
 		_role.setTitleMap(titleMap);
 	}
 
+	/**
+	* Sets the localized titles of this role from the map of locales and localized titles, and sets the default locale.
+	*
+	* @param titleMap the locales and localized titles of this role
+	* @param defaultLocale the default locale
+	*/
 	public void setTitleMap(
 		java.util.Map<java.util.Locale, java.lang.String> titleMap,
 		java.util.Locale defaultLocale) {
@@ -255,7 +268,7 @@ public class RoleWrapper implements Role {
 	}
 
 	/**
-	* Gets the description of this role.
+	* Returns the description of this role.
 	*
 	* @return the description of this role
 	*/
@@ -273,7 +286,7 @@ public class RoleWrapper implements Role {
 	}
 
 	/**
-	* Gets the type of this role.
+	* Returns the type of this role.
 	*
 	* @return the type of this role
 	*/
@@ -291,7 +304,7 @@ public class RoleWrapper implements Role {
 	}
 
 	/**
-	* Gets the subtype of this role.
+	* Returns the subtype of this role.
 	*
 	* @return the subtype of this role
 	*/

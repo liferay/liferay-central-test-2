@@ -32,7 +32,7 @@ public class IGFolderLocalServiceWrapper implements IGFolderLocalService {
 	/**
 	* Adds the i g folder to the database. Also notifies the appropriate model listeners.
 	*
-	* @param igFolder the i g folder to add
+	* @param igFolder the i g folder
 	* @return the i g folder that was added
 	* @throws SystemException if a system exception occurred
 	*/
@@ -56,7 +56,7 @@ public class IGFolderLocalServiceWrapper implements IGFolderLocalService {
 	/**
 	* Deletes the i g folder with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param folderId the primary key of the i g folder to delete
+	* @param folderId the primary key of the i g folder
 	* @throws PortalException if a i g folder with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -69,7 +69,7 @@ public class IGFolderLocalServiceWrapper implements IGFolderLocalService {
 	/**
 	* Deletes the i g folder from the database. Also notifies the appropriate model listeners.
 	*
-	* @param igFolder the i g folder to delete
+	* @param igFolder the i g folder
 	* @throws SystemException if a system exception occurred
 	*/
 	public void deleteIGFolder(
@@ -81,7 +81,7 @@ public class IGFolderLocalServiceWrapper implements IGFolderLocalService {
 	/**
 	* Performs a dynamic query on the database and returns the matching rows.
 	*
-	* @param dynamicQuery the dynamic query to search with
+	* @param dynamicQuery the dynamic query
 	* @return the matching rows
 	* @throws SystemException if a system exception occurred
 	*/
@@ -99,9 +99,9 @@ public class IGFolderLocalServiceWrapper implements IGFolderLocalService {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param dynamicQuery the dynamic query to search with
-	* @param start the lower bound of the range of model instances to return
-	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param dynamicQuery the dynamic query
+	* @param start the lower bound of the range of model instances
+	* @param end the upper bound of the range of model instances (not inclusive)
 	* @return the range of matching rows
 	* @throws SystemException if a system exception occurred
 	*/
@@ -119,9 +119,9 @@ public class IGFolderLocalServiceWrapper implements IGFolderLocalService {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param dynamicQuery the dynamic query to search with
-	* @param start the lower bound of the range of model instances to return
-	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param dynamicQuery the dynamic query
+	* @param start the lower bound of the range of model instances
+	* @param end the upper bound of the range of model instances (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching rows
 	* @throws SystemException if a system exception occurred
@@ -137,9 +137,9 @@ public class IGFolderLocalServiceWrapper implements IGFolderLocalService {
 	}
 
 	/**
-	* Counts the number of rows that match the dynamic query.
+	* Returns the number of rows that match the dynamic query.
 	*
-	* @param dynamicQuery the dynamic query to search with
+	* @param dynamicQuery the dynamic query
 	* @return the number of rows that match the dynamic query
 	* @throws SystemException if a system exception occurred
 	*/
@@ -150,9 +150,9 @@ public class IGFolderLocalServiceWrapper implements IGFolderLocalService {
 	}
 
 	/**
-	* Gets the i g folder with the primary key.
+	* Returns the i g folder with the primary key.
 	*
-	* @param folderId the primary key of the i g folder to get
+	* @param folderId the primary key of the i g folder
 	* @return the i g folder
 	* @throws PortalException if a i g folder with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -165,12 +165,12 @@ public class IGFolderLocalServiceWrapper implements IGFolderLocalService {
 	}
 
 	/**
-	* Gets the i g folder with the UUID and group id.
+	* Returns the i g folder with the UUID in the group.
 	*
-	* @param uuid the UUID of i g folder to get
-	* @param groupId the group id of the i g folder to get
+	* @param uuid the UUID of i g folder
+	* @param groupId the group id of the i g folder
 	* @return the i g folder
-	* @throws PortalException if a i g folder with the UUID and group id could not be found
+	* @throws PortalException if a i g folder with the UUID in the group could not be found
 	* @throws SystemException if a system exception occurred
 	*/
 	public com.liferay.portlet.imagegallery.model.IGFolder getIGFolderByUuidAndGroupId(
@@ -181,14 +181,14 @@ public class IGFolderLocalServiceWrapper implements IGFolderLocalService {
 	}
 
 	/**
-	* Gets a range of all the i g folders.
+	* Returns a range of all the i g folders.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of i g folders to return
-	* @param end the upper bound of the range of i g folders to return (not inclusive)
+	* @param start the lower bound of the range of i g folders
+	* @param end the upper bound of the range of i g folders (not inclusive)
 	* @return the range of i g folders
 	* @throws SystemException if a system exception occurred
 	*/
@@ -199,7 +199,7 @@ public class IGFolderLocalServiceWrapper implements IGFolderLocalService {
 	}
 
 	/**
-	* Gets the number of i g folders.
+	* Returns the number of i g folders.
 	*
 	* @return the number of i g folders
 	* @throws SystemException if a system exception occurred
@@ -212,7 +212,7 @@ public class IGFolderLocalServiceWrapper implements IGFolderLocalService {
 	/**
 	* Updates the i g folder in the database. Also notifies the appropriate model listeners.
 	*
-	* @param igFolder the i g folder to update
+	* @param igFolder the i g folder
 	* @return the i g folder that was updated
 	* @throws SystemException if a system exception occurred
 	*/
@@ -225,7 +225,7 @@ public class IGFolderLocalServiceWrapper implements IGFolderLocalService {
 	/**
 	* Updates the i g folder in the database. Also notifies the appropriate model listeners.
 	*
-	* @param igFolder the i g folder to update
+	* @param igFolder the i g folder
 	* @param merge whether to merge the i g folder with the current session. See {@link com.liferay.portal.service.persistence.BatchSession#update(com.liferay.portal.kernel.dao.orm.Session, com.liferay.portal.model.BaseModel, boolean)} for an explanation.
 	* @return the i g folder that was updated
 	* @throws SystemException if a system exception occurred
@@ -237,7 +237,7 @@ public class IGFolderLocalServiceWrapper implements IGFolderLocalService {
 	}
 
 	/**
-	* Gets the Spring bean ID for this bean.
+	* Returns the Spring bean ID for this bean.
 	*
 	* @return the Spring bean ID for this bean
 	*/
@@ -269,8 +269,8 @@ public class IGFolderLocalServiceWrapper implements IGFolderLocalService {
 		boolean addGroupPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		_igFolderLocalService.addFolderResources(folder,
-			addGroupPermissions, addGuestPermissions);
+		_igFolderLocalService.addFolderResources(folder, addGroupPermissions,
+			addGuestPermissions);
 	}
 
 	public void addFolderResources(
@@ -283,12 +283,12 @@ public class IGFolderLocalServiceWrapper implements IGFolderLocalService {
 			guestPermissions);
 	}
 
-	public void addFolderResources(long folderId,
-		boolean addGroupPermissions, boolean addGuestPermissions)
+	public void addFolderResources(long folderId, boolean addGroupPermissions,
+		boolean addGuestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		_igFolderLocalService.addFolderResources(folderId,
-			addGroupPermissions, addGuestPermissions);
+		_igFolderLocalService.addFolderResources(folderId, addGroupPermissions,
+			addGuestPermissions);
 	}
 
 	public void addFolderResources(long folderId,

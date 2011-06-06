@@ -156,7 +156,7 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 	/**
 	 * Caches the journal structure in the entity cache if it is enabled.
 	 *
-	 * @param journalStructure the journal structure to cache
+	 * @param journalStructure the journal structure
 	 */
 	public void cacheResult(JournalStructure journalStructure) {
 		EntityCacheUtil.putResult(JournalStructureModelImpl.ENTITY_CACHE_ENABLED,
@@ -182,7 +182,7 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 	/**
 	 * Caches the journal structures in the entity cache if it is enabled.
 	 *
-	 * @param journalStructures the journal structures to cache
+	 * @param journalStructures the journal structures
 	 */
 	public void cacheResult(List<JournalStructure> journalStructures) {
 		for (JournalStructure journalStructure : journalStructures) {
@@ -259,7 +259,7 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 	/**
 	 * Removes the journal structure with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param primaryKey the primary key of the journal structure to remove
+	 * @param primaryKey the primary key of the journal structure
 	 * @return the journal structure that was removed
 	 * @throws com.liferay.portal.NoSuchModelException if a journal structure with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -272,7 +272,7 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 	/**
 	 * Removes the journal structure with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param id the primary key of the journal structure to remove
+	 * @param id the primary key of the journal structure
 	 * @return the journal structure that was removed
 	 * @throws com.liferay.portlet.journal.NoSuchStructureException if a journal structure with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -312,7 +312,7 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 	/**
 	 * Removes the journal structure from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param journalStructure the journal structure to remove
+	 * @param journalStructure the journal structure
 	 * @return the journal structure that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -477,9 +477,9 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 	}
 
 	/**
-	 * Finds the journal structure with the primary key or throws a {@link com.liferay.portal.NoSuchModelException} if it could not be found.
+	 * Returns the journal structure with the primary key or throws a {@link com.liferay.portal.NoSuchModelException} if it could not be found.
 	 *
-	 * @param primaryKey the primary key of the journal structure to find
+	 * @param primaryKey the primary key of the journal structure
 	 * @return the journal structure
 	 * @throws com.liferay.portal.NoSuchModelException if a journal structure with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -490,9 +490,9 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 	}
 
 	/**
-	 * Finds the journal structure with the primary key or throws a {@link com.liferay.portlet.journal.NoSuchStructureException} if it could not be found.
+	 * Returns the journal structure with the primary key or throws a {@link com.liferay.portlet.journal.NoSuchStructureException} if it could not be found.
 	 *
-	 * @param id the primary key of the journal structure to find
+	 * @param id the primary key of the journal structure
 	 * @return the journal structure
 	 * @throws com.liferay.portlet.journal.NoSuchStructureException if a journal structure with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -514,9 +514,9 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 	}
 
 	/**
-	 * Finds the journal structure with the primary key or returns <code>null</code> if it could not be found.
+	 * Returns the journal structure with the primary key or returns <code>null</code> if it could not be found.
 	 *
-	 * @param primaryKey the primary key of the journal structure to find
+	 * @param primaryKey the primary key of the journal structure
 	 * @return the journal structure, or <code>null</code> if a journal structure with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -526,9 +526,9 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 	}
 
 	/**
-	 * Finds the journal structure with the primary key or returns <code>null</code> if it could not be found.
+	 * Returns the journal structure with the primary key or returns <code>null</code> if it could not be found.
 	 *
-	 * @param id the primary key of the journal structure to find
+	 * @param id the primary key of the journal structure
 	 * @return the journal structure, or <code>null</code> if a journal structure with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -562,9 +562,9 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 	}
 
 	/**
-	 * Finds all the journal structures where uuid = &#63;.
+	 * Returns all the journal structures where uuid = &#63;.
 	 *
-	 * @param uuid the uuid to search with
+	 * @param uuid the uuid
 	 * @return the matching journal structures
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -574,15 +574,15 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 	}
 
 	/**
-	 * Finds a range of all the journal structures where uuid = &#63;.
+	 * Returns a range of all the journal structures where uuid = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param uuid the uuid to search with
-	 * @param start the lower bound of the range of journal structures to return
-	 * @param end the upper bound of the range of journal structures to return (not inclusive)
+	 * @param uuid the uuid
+	 * @param start the lower bound of the range of journal structures
+	 * @param end the upper bound of the range of journal structures (not inclusive)
 	 * @return the range of matching journal structures
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -592,15 +592,15 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 	}
 
 	/**
-	 * Finds an ordered range of all the journal structures where uuid = &#63;.
+	 * Returns an ordered range of all the journal structures where uuid = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param uuid the uuid to search with
-	 * @param start the lower bound of the range of journal structures to return
-	 * @param end the upper bound of the range of journal structures to return (not inclusive)
+	 * @param uuid the uuid
+	 * @param start the lower bound of the range of journal structures
+	 * @param end the upper bound of the range of journal structures (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching journal structures
 	 * @throws SystemException if a system exception occurred
@@ -692,13 +692,13 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 	}
 
 	/**
-	 * Finds the first journal structure in the ordered set where uuid = &#63;.
+	 * Returns the first journal structure in the ordered set where uuid = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param uuid the uuid to search with
+	 * @param uuid the uuid
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching journal structure
 	 * @throws com.liferay.portlet.journal.NoSuchStructureException if a matching journal structure could not be found
@@ -727,13 +727,13 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 	}
 
 	/**
-	 * Finds the last journal structure in the ordered set where uuid = &#63;.
+	 * Returns the last journal structure in the ordered set where uuid = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param uuid the uuid to search with
+	 * @param uuid the uuid
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching journal structure
 	 * @throws com.liferay.portlet.journal.NoSuchStructureException if a matching journal structure could not be found
@@ -765,14 +765,14 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 	}
 
 	/**
-	 * Finds the journal structures before and after the current journal structure in the ordered set where uuid = &#63;.
+	 * Returns the journal structures before and after the current journal structure in the ordered set where uuid = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
 	 * @param id the primary key of the current journal structure
-	 * @param uuid the uuid to search with
+	 * @param uuid the uuid
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next journal structure
 	 * @throws com.liferay.portlet.journal.NoSuchStructureException if a journal structure with the primary key could not be found
@@ -925,10 +925,10 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 	}
 
 	/**
-	 * Finds the journal structure where uuid = &#63; and groupId = &#63; or throws a {@link com.liferay.portlet.journal.NoSuchStructureException} if it could not be found.
+	 * Returns the journal structure where uuid = &#63; and groupId = &#63; or throws a {@link com.liferay.portlet.journal.NoSuchStructureException} if it could not be found.
 	 *
-	 * @param uuid the uuid to search with
-	 * @param groupId the group ID to search with
+	 * @param uuid the uuid
+	 * @param groupId the group ID
 	 * @return the matching journal structure
 	 * @throws com.liferay.portlet.journal.NoSuchStructureException if a matching journal structure could not be found
 	 * @throws SystemException if a system exception occurred
@@ -961,10 +961,10 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 	}
 
 	/**
-	 * Finds the journal structure where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 * Returns the journal structure where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	 *
-	 * @param uuid the uuid to search with
-	 * @param groupId the group ID to search with
+	 * @param uuid the uuid
+	 * @param groupId the group ID
 	 * @return the matching journal structure, or <code>null</code> if a matching journal structure could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -974,10 +974,10 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 	}
 
 	/**
-	 * Finds the journal structure where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 * Returns the journal structure where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	 *
-	 * @param uuid the uuid to search with
-	 * @param groupId the group ID to search with
+	 * @param uuid the uuid
+	 * @param groupId the group ID
 	 * @return the matching journal structure, or <code>null</code> if a matching journal structure could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1078,9 +1078,9 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 	}
 
 	/**
-	 * Finds all the journal structures where groupId = &#63;.
+	 * Returns all the journal structures where groupId = &#63;.
 	 *
-	 * @param groupId the group ID to search with
+	 * @param groupId the group ID
 	 * @return the matching journal structures
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1090,15 +1090,15 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 	}
 
 	/**
-	 * Finds a range of all the journal structures where groupId = &#63;.
+	 * Returns a range of all the journal structures where groupId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group ID to search with
-	 * @param start the lower bound of the range of journal structures to return
-	 * @param end the upper bound of the range of journal structures to return (not inclusive)
+	 * @param groupId the group ID
+	 * @param start the lower bound of the range of journal structures
+	 * @param end the upper bound of the range of journal structures (not inclusive)
 	 * @return the range of matching journal structures
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1108,15 +1108,15 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 	}
 
 	/**
-	 * Finds an ordered range of all the journal structures where groupId = &#63;.
+	 * Returns an ordered range of all the journal structures where groupId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group ID to search with
-	 * @param start the lower bound of the range of journal structures to return
-	 * @param end the upper bound of the range of journal structures to return (not inclusive)
+	 * @param groupId the group ID
+	 * @param start the lower bound of the range of journal structures
+	 * @param end the upper bound of the range of journal structures (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching journal structures
 	 * @throws SystemException if a system exception occurred
@@ -1196,13 +1196,13 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 	}
 
 	/**
-	 * Finds the first journal structure in the ordered set where groupId = &#63;.
+	 * Returns the first journal structure in the ordered set where groupId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group ID to search with
+	 * @param groupId the group ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching journal structure
 	 * @throws com.liferay.portlet.journal.NoSuchStructureException if a matching journal structure could not be found
@@ -1232,13 +1232,13 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 	}
 
 	/**
-	 * Finds the last journal structure in the ordered set where groupId = &#63;.
+	 * Returns the last journal structure in the ordered set where groupId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group ID to search with
+	 * @param groupId the group ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching journal structure
 	 * @throws com.liferay.portlet.journal.NoSuchStructureException if a matching journal structure could not be found
@@ -1270,14 +1270,14 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 	}
 
 	/**
-	 * Finds the journal structures before and after the current journal structure in the ordered set where groupId = &#63;.
+	 * Returns the journal structures before and after the current journal structure in the ordered set where groupId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
 	 * @param id the primary key of the current journal structure
-	 * @param groupId the group ID to search with
+	 * @param groupId the group ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next journal structure
 	 * @throws com.liferay.portlet.journal.NoSuchStructureException if a journal structure with the primary key could not be found
@@ -1418,9 +1418,9 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 	}
 
 	/**
-	 * Filters by the user's permissions and finds all the journal structures where groupId = &#63;.
+	 * Returns all the journal structures that the user has permission to view where groupId = &#63;.
 	 *
-	 * @param groupId the group ID to search with
+	 * @param groupId the group ID
 	 * @return the matching journal structures that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1431,15 +1431,15 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 	}
 
 	/**
-	 * Filters by the user's permissions and finds a range of all the journal structures where groupId = &#63;.
+	 * Returns a range of all the journal structures that the user has permission to view where groupId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group ID to search with
-	 * @param start the lower bound of the range of journal structures to return
-	 * @param end the upper bound of the range of journal structures to return (not inclusive)
+	 * @param groupId the group ID
+	 * @param start the lower bound of the range of journal structures
+	 * @param end the upper bound of the range of journal structures (not inclusive)
 	 * @return the range of matching journal structures that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1449,15 +1449,15 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 	}
 
 	/**
-	 * Filters by the user's permissions and finds an ordered range of all the journal structures where groupId = &#63;.
+	 * Returns an ordered range of all the journal structures that the user has permissions to view where groupId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group ID to search with
-	 * @param start the lower bound of the range of journal structures to return
-	 * @param end the upper bound of the range of journal structures to return (not inclusive)
+	 * @param groupId the group ID
+	 * @param start the lower bound of the range of journal structures
+	 * @param end the upper bound of the range of journal structures (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching journal structures that the user has permission to view
 	 * @throws SystemException if a system exception occurred
@@ -1537,14 +1537,10 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 	}
 
 	/**
-	 * Filters the journal structures before and after the current journal structure in the ordered set where groupId = &#63;.
-	 *
-	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
-	 * </p>
+	 * Returns the journal structures before and after the current journal structure in the ordered set of journal structures that the user has permission to view where groupId = &#63;.
 	 *
 	 * @param id the primary key of the current journal structure
-	 * @param groupId the group ID to search with
+	 * @param groupId the group ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next journal structure
 	 * @throws com.liferay.portlet.journal.NoSuchStructureException if a journal structure with the primary key could not be found
@@ -1716,9 +1712,9 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 	}
 
 	/**
-	 * Finds all the journal structures where structureId = &#63;.
+	 * Returns all the journal structures where structureId = &#63;.
 	 *
-	 * @param structureId the structure ID to search with
+	 * @param structureId the structure ID
 	 * @return the matching journal structures
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1729,15 +1725,15 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 	}
 
 	/**
-	 * Finds a range of all the journal structures where structureId = &#63;.
+	 * Returns a range of all the journal structures where structureId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param structureId the structure ID to search with
-	 * @param start the lower bound of the range of journal structures to return
-	 * @param end the upper bound of the range of journal structures to return (not inclusive)
+	 * @param structureId the structure ID
+	 * @param start the lower bound of the range of journal structures
+	 * @param end the upper bound of the range of journal structures (not inclusive)
 	 * @return the range of matching journal structures
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1747,15 +1743,15 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 	}
 
 	/**
-	 * Finds an ordered range of all the journal structures where structureId = &#63;.
+	 * Returns an ordered range of all the journal structures where structureId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param structureId the structure ID to search with
-	 * @param start the lower bound of the range of journal structures to return
-	 * @param end the upper bound of the range of journal structures to return (not inclusive)
+	 * @param structureId the structure ID
+	 * @param start the lower bound of the range of journal structures
+	 * @param end the upper bound of the range of journal structures (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching journal structures
 	 * @throws SystemException if a system exception occurred
@@ -1848,13 +1844,13 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 	}
 
 	/**
-	 * Finds the first journal structure in the ordered set where structureId = &#63;.
+	 * Returns the first journal structure in the ordered set where structureId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param structureId the structure ID to search with
+	 * @param structureId the structure ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching journal structure
 	 * @throws com.liferay.portlet.journal.NoSuchStructureException if a matching journal structure could not be found
@@ -1884,13 +1880,13 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 	}
 
 	/**
-	 * Finds the last journal structure in the ordered set where structureId = &#63;.
+	 * Returns the last journal structure in the ordered set where structureId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param structureId the structure ID to search with
+	 * @param structureId the structure ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching journal structure
 	 * @throws com.liferay.portlet.journal.NoSuchStructureException if a matching journal structure could not be found
@@ -1922,14 +1918,14 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 	}
 
 	/**
-	 * Finds the journal structures before and after the current journal structure in the ordered set where structureId = &#63;.
+	 * Returns the journal structures before and after the current journal structure in the ordered set where structureId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
 	 * @param id the primary key of the current journal structure
-	 * @param structureId the structure ID to search with
+	 * @param structureId the structure ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next journal structure
 	 * @throws com.liferay.portlet.journal.NoSuchStructureException if a journal structure with the primary key could not be found
@@ -2082,10 +2078,10 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 	}
 
 	/**
-	 * Finds the journal structure where groupId = &#63; and structureId = &#63; or throws a {@link com.liferay.portlet.journal.NoSuchStructureException} if it could not be found.
+	 * Returns the journal structure where groupId = &#63; and structureId = &#63; or throws a {@link com.liferay.portlet.journal.NoSuchStructureException} if it could not be found.
 	 *
-	 * @param groupId the group ID to search with
-	 * @param structureId the structure ID to search with
+	 * @param groupId the group ID
+	 * @param structureId the structure ID
 	 * @return the matching journal structure
 	 * @throws com.liferay.portlet.journal.NoSuchStructureException if a matching journal structure could not be found
 	 * @throws SystemException if a system exception occurred
@@ -2118,10 +2114,10 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 	}
 
 	/**
-	 * Finds the journal structure where groupId = &#63; and structureId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 * Returns the journal structure where groupId = &#63; and structureId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	 *
-	 * @param groupId the group ID to search with
-	 * @param structureId the structure ID to search with
+	 * @param groupId the group ID
+	 * @param structureId the structure ID
 	 * @return the matching journal structure, or <code>null</code> if a matching journal structure could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2131,10 +2127,10 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 	}
 
 	/**
-	 * Finds the journal structure where groupId = &#63; and structureId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 * Returns the journal structure where groupId = &#63; and structureId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	 *
-	 * @param groupId the group ID to search with
-	 * @param structureId the structure ID to search with
+	 * @param groupId the group ID
+	 * @param structureId the structure ID
 	 * @return the matching journal structure, or <code>null</code> if a matching journal structure could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2236,10 +2232,10 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 	}
 
 	/**
-	 * Finds all the journal structures where groupId = &#63; and parentStructureId = &#63;.
+	 * Returns all the journal structures where groupId = &#63; and parentStructureId = &#63;.
 	 *
-	 * @param groupId the group ID to search with
-	 * @param parentStructureId the parent structure ID to search with
+	 * @param groupId the group ID
+	 * @param parentStructureId the parent structure ID
 	 * @return the matching journal structures
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2250,16 +2246,16 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 	}
 
 	/**
-	 * Finds a range of all the journal structures where groupId = &#63; and parentStructureId = &#63;.
+	 * Returns a range of all the journal structures where groupId = &#63; and parentStructureId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group ID to search with
-	 * @param parentStructureId the parent structure ID to search with
-	 * @param start the lower bound of the range of journal structures to return
-	 * @param end the upper bound of the range of journal structures to return (not inclusive)
+	 * @param groupId the group ID
+	 * @param parentStructureId the parent structure ID
+	 * @param start the lower bound of the range of journal structures
+	 * @param end the upper bound of the range of journal structures (not inclusive)
 	 * @return the range of matching journal structures
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2269,16 +2265,16 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 	}
 
 	/**
-	 * Finds an ordered range of all the journal structures where groupId = &#63; and parentStructureId = &#63;.
+	 * Returns an ordered range of all the journal structures where groupId = &#63; and parentStructureId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group ID to search with
-	 * @param parentStructureId the parent structure ID to search with
-	 * @param start the lower bound of the range of journal structures to return
-	 * @param end the upper bound of the range of journal structures to return (not inclusive)
+	 * @param groupId the group ID
+	 * @param parentStructureId the parent structure ID
+	 * @param start the lower bound of the range of journal structures
+	 * @param end the upper bound of the range of journal structures (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching journal structures
 	 * @throws SystemException if a system exception occurred
@@ -2375,14 +2371,14 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 	}
 
 	/**
-	 * Finds the first journal structure in the ordered set where groupId = &#63; and parentStructureId = &#63;.
+	 * Returns the first journal structure in the ordered set where groupId = &#63; and parentStructureId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group ID to search with
-	 * @param parentStructureId the parent structure ID to search with
+	 * @param groupId the group ID
+	 * @param parentStructureId the parent structure ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching journal structure
 	 * @throws com.liferay.portlet.journal.NoSuchStructureException if a matching journal structure could not be found
@@ -2415,14 +2411,14 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 	}
 
 	/**
-	 * Finds the last journal structure in the ordered set where groupId = &#63; and parentStructureId = &#63;.
+	 * Returns the last journal structure in the ordered set where groupId = &#63; and parentStructureId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group ID to search with
-	 * @param parentStructureId the parent structure ID to search with
+	 * @param groupId the group ID
+	 * @param parentStructureId the parent structure ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching journal structure
 	 * @throws com.liferay.portlet.journal.NoSuchStructureException if a matching journal structure could not be found
@@ -2457,15 +2453,15 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 	}
 
 	/**
-	 * Finds the journal structures before and after the current journal structure in the ordered set where groupId = &#63; and parentStructureId = &#63;.
+	 * Returns the journal structures before and after the current journal structure in the ordered set where groupId = &#63; and parentStructureId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
 	 * @param id the primary key of the current journal structure
-	 * @param groupId the group ID to search with
-	 * @param parentStructureId the parent structure ID to search with
+	 * @param groupId the group ID
+	 * @param parentStructureId the parent structure ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next journal structure
 	 * @throws com.liferay.portlet.journal.NoSuchStructureException if a journal structure with the primary key could not be found
@@ -2623,10 +2619,10 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 	}
 
 	/**
-	 * Filters by the user's permissions and finds all the journal structures where groupId = &#63; and parentStructureId = &#63;.
+	 * Returns all the journal structures that the user has permission to view where groupId = &#63; and parentStructureId = &#63;.
 	 *
-	 * @param groupId the group ID to search with
-	 * @param parentStructureId the parent structure ID to search with
+	 * @param groupId the group ID
+	 * @param parentStructureId the parent structure ID
 	 * @return the matching journal structures that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2637,16 +2633,16 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 	}
 
 	/**
-	 * Filters by the user's permissions and finds a range of all the journal structures where groupId = &#63; and parentStructureId = &#63;.
+	 * Returns a range of all the journal structures that the user has permission to view where groupId = &#63; and parentStructureId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group ID to search with
-	 * @param parentStructureId the parent structure ID to search with
-	 * @param start the lower bound of the range of journal structures to return
-	 * @param end the upper bound of the range of journal structures to return (not inclusive)
+	 * @param groupId the group ID
+	 * @param parentStructureId the parent structure ID
+	 * @param start the lower bound of the range of journal structures
+	 * @param end the upper bound of the range of journal structures (not inclusive)
 	 * @return the range of matching journal structures that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2656,16 +2652,16 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 	}
 
 	/**
-	 * Filters by the user's permissions and finds an ordered range of all the journal structures where groupId = &#63; and parentStructureId = &#63;.
+	 * Returns an ordered range of all the journal structures that the user has permissions to view where groupId = &#63; and parentStructureId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group ID to search with
-	 * @param parentStructureId the parent structure ID to search with
-	 * @param start the lower bound of the range of journal structures to return
-	 * @param end the upper bound of the range of journal structures to return (not inclusive)
+	 * @param groupId the group ID
+	 * @param parentStructureId the parent structure ID
+	 * @param start the lower bound of the range of journal structures
+	 * @param end the upper bound of the range of journal structures (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching journal structures that the user has permission to view
 	 * @throws SystemException if a system exception occurred
@@ -2763,15 +2759,11 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 	}
 
 	/**
-	 * Filters the journal structures before and after the current journal structure in the ordered set where groupId = &#63; and parentStructureId = &#63;.
-	 *
-	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
-	 * </p>
+	 * Returns the journal structures before and after the current journal structure in the ordered set of journal structures that the user has permission to view where groupId = &#63; and parentStructureId = &#63;.
 	 *
 	 * @param id the primary key of the current journal structure
-	 * @param groupId the group ID to search with
-	 * @param parentStructureId the parent structure ID to search with
+	 * @param groupId the group ID
+	 * @param parentStructureId the parent structure ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next journal structure
 	 * @throws com.liferay.portlet.journal.NoSuchStructureException if a journal structure with the primary key could not be found
@@ -2962,7 +2954,7 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 	}
 
 	/**
-	 * Finds all the journal structures.
+	 * Returns all the journal structures.
 	 *
 	 * @return the journal structures
 	 * @throws SystemException if a system exception occurred
@@ -2972,14 +2964,14 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 	}
 
 	/**
-	 * Finds a range of all the journal structures.
+	 * Returns a range of all the journal structures.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param start the lower bound of the range of journal structures to return
-	 * @param end the upper bound of the range of journal structures to return (not inclusive)
+	 * @param start the lower bound of the range of journal structures
+	 * @param end the upper bound of the range of journal structures (not inclusive)
 	 * @return the range of journal structures
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2989,14 +2981,14 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 	}
 
 	/**
-	 * Finds an ordered range of all the journal structures.
+	 * Returns an ordered range of all the journal structures.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param start the lower bound of the range of journal structures to return
-	 * @param end the upper bound of the range of journal structures to return (not inclusive)
+	 * @param start the lower bound of the range of journal structures
+	 * @param end the upper bound of the range of journal structures (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of journal structures
 	 * @throws SystemException if a system exception occurred
@@ -3073,7 +3065,7 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 	/**
 	 * Removes all the journal structures where uuid = &#63; from the database.
 	 *
-	 * @param uuid the uuid to search with
+	 * @param uuid the uuid
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByUuid(String uuid) throws SystemException {
@@ -3085,8 +3077,8 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 	/**
 	 * Removes the journal structure where uuid = &#63; and groupId = &#63; from the database.
 	 *
-	 * @param uuid the uuid to search with
-	 * @param groupId the group ID to search with
+	 * @param uuid the uuid
+	 * @param groupId the group ID
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByUUID_G(String uuid, long groupId)
@@ -3099,7 +3091,7 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 	/**
 	 * Removes all the journal structures where groupId = &#63; from the database.
 	 *
-	 * @param groupId the group ID to search with
+	 * @param groupId the group ID
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByGroupId(long groupId) throws SystemException {
@@ -3111,7 +3103,7 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 	/**
 	 * Removes all the journal structures where structureId = &#63; from the database.
 	 *
-	 * @param structureId the structure ID to search with
+	 * @param structureId the structure ID
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByStructureId(String structureId)
@@ -3124,8 +3116,8 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 	/**
 	 * Removes the journal structure where groupId = &#63; and structureId = &#63; from the database.
 	 *
-	 * @param groupId the group ID to search with
-	 * @param structureId the structure ID to search with
+	 * @param groupId the group ID
+	 * @param structureId the structure ID
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByG_S(long groupId, String structureId)
@@ -3138,8 +3130,8 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 	/**
 	 * Removes all the journal structures where groupId = &#63; and parentStructureId = &#63; from the database.
 	 *
-	 * @param groupId the group ID to search with
-	 * @param parentStructureId the parent structure ID to search with
+	 * @param groupId the group ID
+	 * @param parentStructureId the parent structure ID
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByG_P(long groupId, String parentStructureId)
@@ -3162,9 +3154,9 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 	}
 
 	/**
-	 * Counts all the journal structures where uuid = &#63;.
+	 * Returns the number of journal structures where uuid = &#63;.
 	 *
-	 * @param uuid the uuid to search with
+	 * @param uuid the uuid
 	 * @return the number of matching journal structures
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -3227,10 +3219,10 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 	}
 
 	/**
-	 * Counts all the journal structures where uuid = &#63; and groupId = &#63;.
+	 * Returns the number of journal structures where uuid = &#63; and groupId = &#63;.
 	 *
-	 * @param uuid the uuid to search with
-	 * @param groupId the group ID to search with
+	 * @param uuid the uuid
+	 * @param groupId the group ID
 	 * @return the number of matching journal structures
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -3298,9 +3290,9 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 	}
 
 	/**
-	 * Counts all the journal structures where groupId = &#63;.
+	 * Returns the number of journal structures where groupId = &#63;.
 	 *
-	 * @param groupId the group ID to search with
+	 * @param groupId the group ID
 	 * @return the number of matching journal structures
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -3351,9 +3343,9 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 	}
 
 	/**
-	 * Filters by the user's permissions and counts all the journal structures where groupId = &#63;.
+	 * Returns the number of journal structures that the user has permission to view where groupId = &#63;.
 	 *
-	 * @param groupId the group ID to search with
+	 * @param groupId the group ID
 	 * @return the number of matching journal structures that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -3398,9 +3390,9 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 	}
 
 	/**
-	 * Counts all the journal structures where structureId = &#63;.
+	 * Returns the number of journal structures where structureId = &#63;.
 	 *
-	 * @param structureId the structure ID to search with
+	 * @param structureId the structure ID
 	 * @return the number of matching journal structures
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -3463,10 +3455,10 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 	}
 
 	/**
-	 * Counts all the journal structures where groupId = &#63; and structureId = &#63;.
+	 * Returns the number of journal structures where groupId = &#63; and structureId = &#63;.
 	 *
-	 * @param groupId the group ID to search with
-	 * @param structureId the structure ID to search with
+	 * @param groupId the group ID
+	 * @param structureId the structure ID
 	 * @return the number of matching journal structures
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -3534,10 +3526,10 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 	}
 
 	/**
-	 * Counts all the journal structures where groupId = &#63; and parentStructureId = &#63;.
+	 * Returns the number of journal structures where groupId = &#63; and parentStructureId = &#63;.
 	 *
-	 * @param groupId the group ID to search with
-	 * @param parentStructureId the parent structure ID to search with
+	 * @param groupId the group ID
+	 * @param parentStructureId the parent structure ID
 	 * @return the number of matching journal structures
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -3605,10 +3597,10 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 	}
 
 	/**
-	 * Filters by the user's permissions and counts all the journal structures where groupId = &#63; and parentStructureId = &#63;.
+	 * Returns the number of journal structures that the user has permission to view where groupId = &#63; and parentStructureId = &#63;.
 	 *
-	 * @param groupId the group ID to search with
-	 * @param parentStructureId the parent structure ID to search with
+	 * @param groupId the group ID
+	 * @param parentStructureId the parent structure ID
 	 * @return the number of matching journal structures that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -3670,7 +3662,7 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 	}
 
 	/**
-	 * Counts all the journal structures.
+	 * Returns the number of journal structures.
 	 *
 	 * @return the number of journal structures
 	 * @throws SystemException if a system exception occurred

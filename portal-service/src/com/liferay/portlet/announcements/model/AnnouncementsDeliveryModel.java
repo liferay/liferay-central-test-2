@@ -44,21 +44,21 @@ public interface AnnouncementsDeliveryModel extends BaseModel<AnnouncementsDeliv
 	 */
 
 	/**
-	 * Gets the primary key of this announcements delivery.
+	 * Returns the primary key of this announcements delivery.
 	 *
 	 * @return the primary key of this announcements delivery
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this announcements delivery
+	 * Sets the primary key of this announcements delivery.
 	 *
 	 * @param primaryKey the primary key of this announcements delivery
 	 */
 	public void setPrimaryKey(long primaryKey);
 
 	/**
-	 * Gets the delivery ID of this announcements delivery.
+	 * Returns the delivery ID of this announcements delivery.
 	 *
 	 * @return the delivery ID of this announcements delivery
 	 */
@@ -72,7 +72,7 @@ public interface AnnouncementsDeliveryModel extends BaseModel<AnnouncementsDeliv
 	public void setDeliveryId(long deliveryId);
 
 	/**
-	 * Gets the company ID of this announcements delivery.
+	 * Returns the company ID of this announcements delivery.
 	 *
 	 * @return the company ID of this announcements delivery
 	 */
@@ -86,7 +86,7 @@ public interface AnnouncementsDeliveryModel extends BaseModel<AnnouncementsDeliv
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the user ID of this announcements delivery.
+	 * Returns the user ID of this announcements delivery.
 	 *
 	 * @return the user ID of this announcements delivery
 	 */
@@ -100,7 +100,7 @@ public interface AnnouncementsDeliveryModel extends BaseModel<AnnouncementsDeliv
 	public void setUserId(long userId);
 
 	/**
-	 * Gets the user uuid of this announcements delivery.
+	 * Returns the user uuid of this announcements delivery.
 	 *
 	 * @return the user uuid of this announcements delivery
 	 * @throws SystemException if a system exception occurred
@@ -115,7 +115,7 @@ public interface AnnouncementsDeliveryModel extends BaseModel<AnnouncementsDeliv
 	public void setUserUuid(String userUuid);
 
 	/**
-	 * Gets the type of this announcements delivery.
+	 * Returns the type of this announcements delivery.
 	 *
 	 * @return the type of this announcements delivery
 	 */
@@ -130,7 +130,7 @@ public interface AnnouncementsDeliveryModel extends BaseModel<AnnouncementsDeliv
 	public void setType(String type);
 
 	/**
-	 * Gets the email of this announcements delivery.
+	 * Returns the email of this announcements delivery.
 	 *
 	 * @return the email of this announcements delivery
 	 */
@@ -151,7 +151,7 @@ public interface AnnouncementsDeliveryModel extends BaseModel<AnnouncementsDeliv
 	public void setEmail(boolean email);
 
 	/**
-	 * Gets the sms of this announcements delivery.
+	 * Returns the sms of this announcements delivery.
 	 *
 	 * @return the sms of this announcements delivery
 	 */
@@ -172,7 +172,7 @@ public interface AnnouncementsDeliveryModel extends BaseModel<AnnouncementsDeliv
 	public void setSms(boolean sms);
 
 	/**
-	 * Gets the website of this announcements delivery.
+	 * Returns the website of this announcements delivery.
 	 *
 	 * @return the website of this announcements delivery
 	 */

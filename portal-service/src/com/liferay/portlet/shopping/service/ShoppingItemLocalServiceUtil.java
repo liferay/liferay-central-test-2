@@ -41,7 +41,7 @@ public class ShoppingItemLocalServiceUtil {
 	/**
 	* Adds the shopping item to the database. Also notifies the appropriate model listeners.
 	*
-	* @param shoppingItem the shopping item to add
+	* @param shoppingItem the shopping item
 	* @return the shopping item that was added
 	* @throws SystemException if a system exception occurred
 	*/
@@ -65,7 +65,7 @@ public class ShoppingItemLocalServiceUtil {
 	/**
 	* Deletes the shopping item with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param itemId the primary key of the shopping item to delete
+	* @param itemId the primary key of the shopping item
 	* @throws PortalException if a shopping item with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -78,7 +78,7 @@ public class ShoppingItemLocalServiceUtil {
 	/**
 	* Deletes the shopping item from the database. Also notifies the appropriate model listeners.
 	*
-	* @param shoppingItem the shopping item to delete
+	* @param shoppingItem the shopping item
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void deleteShoppingItem(
@@ -90,7 +90,7 @@ public class ShoppingItemLocalServiceUtil {
 	/**
 	* Performs a dynamic query on the database and returns the matching rows.
 	*
-	* @param dynamicQuery the dynamic query to search with
+	* @param dynamicQuery the dynamic query
 	* @return the matching rows
 	* @throws SystemException if a system exception occurred
 	*/
@@ -108,9 +108,9 @@ public class ShoppingItemLocalServiceUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param dynamicQuery the dynamic query to search with
-	* @param start the lower bound of the range of model instances to return
-	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param dynamicQuery the dynamic query
+	* @param start the lower bound of the range of model instances
+	* @param end the upper bound of the range of model instances (not inclusive)
 	* @return the range of matching rows
 	* @throws SystemException if a system exception occurred
 	*/
@@ -128,9 +128,9 @@ public class ShoppingItemLocalServiceUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param dynamicQuery the dynamic query to search with
-	* @param start the lower bound of the range of model instances to return
-	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param dynamicQuery the dynamic query
+	* @param start the lower bound of the range of model instances
+	* @param end the upper bound of the range of model instances (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching rows
 	* @throws SystemException if a system exception occurred
@@ -146,9 +146,9 @@ public class ShoppingItemLocalServiceUtil {
 	}
 
 	/**
-	* Counts the number of rows that match the dynamic query.
+	* Returns the number of rows that match the dynamic query.
 	*
-	* @param dynamicQuery the dynamic query to search with
+	* @param dynamicQuery the dynamic query
 	* @return the number of rows that match the dynamic query
 	* @throws SystemException if a system exception occurred
 	*/
@@ -159,9 +159,9 @@ public class ShoppingItemLocalServiceUtil {
 	}
 
 	/**
-	* Gets the shopping item with the primary key.
+	* Returns the shopping item with the primary key.
 	*
-	* @param itemId the primary key of the shopping item to get
+	* @param itemId the primary key of the shopping item
 	* @return the shopping item
 	* @throws PortalException if a shopping item with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -174,14 +174,14 @@ public class ShoppingItemLocalServiceUtil {
 	}
 
 	/**
-	* Gets a range of all the shopping items.
+	* Returns a range of all the shopping items.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of shopping items to return
-	* @param end the upper bound of the range of shopping items to return (not inclusive)
+	* @param start the lower bound of the range of shopping items
+	* @param end the upper bound of the range of shopping items (not inclusive)
 	* @return the range of shopping items
 	* @throws SystemException if a system exception occurred
 	*/
@@ -192,7 +192,7 @@ public class ShoppingItemLocalServiceUtil {
 	}
 
 	/**
-	* Gets the number of shopping items.
+	* Returns the number of shopping items.
 	*
 	* @return the number of shopping items
 	* @throws SystemException if a system exception occurred
@@ -205,7 +205,7 @@ public class ShoppingItemLocalServiceUtil {
 	/**
 	* Updates the shopping item in the database. Also notifies the appropriate model listeners.
 	*
-	* @param shoppingItem the shopping item to update
+	* @param shoppingItem the shopping item
 	* @return the shopping item that was updated
 	* @throws SystemException if a system exception occurred
 	*/
@@ -218,7 +218,7 @@ public class ShoppingItemLocalServiceUtil {
 	/**
 	* Updates the shopping item in the database. Also notifies the appropriate model listeners.
 	*
-	* @param shoppingItem the shopping item to update
+	* @param shoppingItem the shopping item
 	* @param merge whether to merge the shopping item with the current session. See {@link com.liferay.portal.service.persistence.BatchSession#update(com.liferay.portal.kernel.dao.orm.Session, com.liferay.portal.model.BaseModel, boolean)} for an explanation.
 	* @return the shopping item that was updated
 	* @throws SystemException if a system exception occurred
@@ -231,7 +231,7 @@ public class ShoppingItemLocalServiceUtil {
 	}
 
 	/**
-	* Gets the Spring bean ID for this bean.
+	* Returns the Spring bean ID for this bean.
 	*
 	* @return the Spring bean ID for this bean
 	*/
@@ -283,8 +283,7 @@ public class ShoppingItemLocalServiceUtil {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		getService()
-			.addItemResources(itemId, addGroupPermissions,
-			addGuestPermissions);
+			.addItemResources(itemId, addGroupPermissions, addGuestPermissions);
 	}
 
 	public static void addItemResources(long itemId,

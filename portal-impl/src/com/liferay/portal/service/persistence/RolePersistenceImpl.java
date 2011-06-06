@@ -157,7 +157,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	/**
 	 * Caches the role in the entity cache if it is enabled.
 	 *
-	 * @param role the role to cache
+	 * @param role the role
 	 */
 	public void cacheResult(Role role) {
 		EntityCacheUtil.putResult(RoleModelImpl.ENTITY_CACHE_ENABLED,
@@ -180,7 +180,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	/**
 	 * Caches the roles in the entity cache if it is enabled.
 	 *
-	 * @param roles the roles to cache
+	 * @param roles the roles
 	 */
 	public void cacheResult(List<Role> roles) {
 		for (Role role : roles) {
@@ -248,7 +248,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	/**
 	 * Removes the role with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param primaryKey the primary key of the role to remove
+	 * @param primaryKey the primary key of the role
 	 * @return the role that was removed
 	 * @throws com.liferay.portal.NoSuchModelException if a role with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -261,7 +261,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	/**
 	 * Removes the role with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param roleId the primary key of the role to remove
+	 * @param roleId the primary key of the role
 	 * @return the role that was removed
 	 * @throws com.liferay.portal.NoSuchRoleException if a role with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -299,7 +299,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	/**
 	 * Removes the role from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param role the role to remove
+	 * @param role the role
 	 * @return the role that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -479,9 +479,9 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	}
 
 	/**
-	 * Finds the role with the primary key or throws a {@link com.liferay.portal.NoSuchModelException} if it could not be found.
+	 * Returns the role with the primary key or throws a {@link com.liferay.portal.NoSuchModelException} if it could not be found.
 	 *
-	 * @param primaryKey the primary key of the role to find
+	 * @param primaryKey the primary key of the role
 	 * @return the role
 	 * @throws com.liferay.portal.NoSuchModelException if a role with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -492,9 +492,9 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	}
 
 	/**
-	 * Finds the role with the primary key or throws a {@link com.liferay.portal.NoSuchRoleException} if it could not be found.
+	 * Returns the role with the primary key or throws a {@link com.liferay.portal.NoSuchRoleException} if it could not be found.
 	 *
-	 * @param roleId the primary key of the role to find
+	 * @param roleId the primary key of the role
 	 * @return the role
 	 * @throws com.liferay.portal.NoSuchRoleException if a role with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -516,9 +516,9 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	}
 
 	/**
-	 * Finds the role with the primary key or returns <code>null</code> if it could not be found.
+	 * Returns the role with the primary key or returns <code>null</code> if it could not be found.
 	 *
-	 * @param primaryKey the primary key of the role to find
+	 * @param primaryKey the primary key of the role
 	 * @return the role, or <code>null</code> if a role with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -528,9 +528,9 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	}
 
 	/**
-	 * Finds the role with the primary key or returns <code>null</code> if it could not be found.
+	 * Returns the role with the primary key or returns <code>null</code> if it could not be found.
 	 *
-	 * @param roleId the primary key of the role to find
+	 * @param roleId the primary key of the role
 	 * @return the role, or <code>null</code> if a role with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -562,9 +562,9 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	}
 
 	/**
-	 * Finds all the roles where companyId = &#63;.
+	 * Returns all the roles where companyId = &#63;.
 	 *
-	 * @param companyId the company ID to search with
+	 * @param companyId the company ID
 	 * @return the matching roles
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -574,15 +574,15 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	}
 
 	/**
-	 * Finds a range of all the roles where companyId = &#63;.
+	 * Returns a range of all the roles where companyId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param companyId the company ID to search with
-	 * @param start the lower bound of the range of roles to return
-	 * @param end the upper bound of the range of roles to return (not inclusive)
+	 * @param companyId the company ID
+	 * @param start the lower bound of the range of roles
+	 * @param end the upper bound of the range of roles (not inclusive)
 	 * @return the range of matching roles
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -592,15 +592,15 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	}
 
 	/**
-	 * Finds an ordered range of all the roles where companyId = &#63;.
+	 * Returns an ordered range of all the roles where companyId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param companyId the company ID to search with
-	 * @param start the lower bound of the range of roles to return
-	 * @param end the upper bound of the range of roles to return (not inclusive)
+	 * @param companyId the company ID
+	 * @param start the lower bound of the range of roles
+	 * @param end the upper bound of the range of roles (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching roles
 	 * @throws SystemException if a system exception occurred
@@ -679,13 +679,13 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	}
 
 	/**
-	 * Finds the first role in the ordered set where companyId = &#63;.
+	 * Returns the first role in the ordered set where companyId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param companyId the company ID to search with
+	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching role
 	 * @throws com.liferay.portal.NoSuchRoleException if a matching role could not be found
@@ -714,13 +714,13 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	}
 
 	/**
-	 * Finds the last role in the ordered set where companyId = &#63;.
+	 * Returns the last role in the ordered set where companyId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param companyId the company ID to search with
+	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching role
 	 * @throws com.liferay.portal.NoSuchRoleException if a matching role could not be found
@@ -752,14 +752,14 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	}
 
 	/**
-	 * Finds the roles before and after the current role in the ordered set where companyId = &#63;.
+	 * Returns the roles before and after the current role in the ordered set where companyId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
 	 * @param roleId the primary key of the current role
-	 * @param companyId the company ID to search with
+	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next role
 	 * @throws com.liferay.portal.NoSuchRoleException if a role with the primary key could not be found
@@ -899,9 +899,9 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	}
 
 	/**
-	 * Filters by the user's permissions and finds all the roles where companyId = &#63;.
+	 * Returns all the roles that the user has permission to view where companyId = &#63;.
 	 *
-	 * @param companyId the company ID to search with
+	 * @param companyId the company ID
 	 * @return the matching roles that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -912,15 +912,15 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	}
 
 	/**
-	 * Filters by the user's permissions and finds a range of all the roles where companyId = &#63;.
+	 * Returns a range of all the roles that the user has permission to view where companyId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param companyId the company ID to search with
-	 * @param start the lower bound of the range of roles to return
-	 * @param end the upper bound of the range of roles to return (not inclusive)
+	 * @param companyId the company ID
+	 * @param start the lower bound of the range of roles
+	 * @param end the upper bound of the range of roles (not inclusive)
 	 * @return the range of matching roles that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -930,15 +930,15 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	}
 
 	/**
-	 * Filters by the user's permissions and finds an ordered range of all the roles where companyId = &#63;.
+	 * Returns an ordered range of all the roles that the user has permissions to view where companyId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param companyId the company ID to search with
-	 * @param start the lower bound of the range of roles to return
-	 * @param end the upper bound of the range of roles to return (not inclusive)
+	 * @param companyId the company ID
+	 * @param start the lower bound of the range of roles
+	 * @param end the upper bound of the range of roles (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching roles that the user has permission to view
 	 * @throws SystemException if a system exception occurred
@@ -1017,14 +1017,10 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	}
 
 	/**
-	 * Filters the roles before and after the current role in the ordered set where companyId = &#63;.
-	 *
-	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
-	 * </p>
+	 * Returns the roles before and after the current role in the ordered set of roles that the user has permission to view where companyId = &#63;.
 	 *
 	 * @param roleId the primary key of the current role
-	 * @param companyId the company ID to search with
+	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next role
 	 * @throws com.liferay.portal.NoSuchRoleException if a role with the primary key could not be found
@@ -1196,9 +1192,9 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	}
 
 	/**
-	 * Finds all the roles where name = &#63;.
+	 * Returns all the roles where name = &#63;.
 	 *
-	 * @param name the name to search with
+	 * @param name the name
 	 * @return the matching roles
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1207,15 +1203,15 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	}
 
 	/**
-	 * Finds a range of all the roles where name = &#63;.
+	 * Returns a range of all the roles where name = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param name the name to search with
-	 * @param start the lower bound of the range of roles to return
-	 * @param end the upper bound of the range of roles to return (not inclusive)
+	 * @param name the name
+	 * @param start the lower bound of the range of roles
+	 * @param end the upper bound of the range of roles (not inclusive)
 	 * @return the range of matching roles
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1225,15 +1221,15 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	}
 
 	/**
-	 * Finds an ordered range of all the roles where name = &#63;.
+	 * Returns an ordered range of all the roles where name = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param name the name to search with
-	 * @param start the lower bound of the range of roles to return
-	 * @param end the upper bound of the range of roles to return (not inclusive)
+	 * @param name the name
+	 * @param start the lower bound of the range of roles
+	 * @param end the upper bound of the range of roles (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching roles
 	 * @throws SystemException if a system exception occurred
@@ -1324,13 +1320,13 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	}
 
 	/**
-	 * Finds the first role in the ordered set where name = &#63;.
+	 * Returns the first role in the ordered set where name = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param name the name to search with
+	 * @param name the name
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching role
 	 * @throws com.liferay.portal.NoSuchRoleException if a matching role could not be found
@@ -1359,13 +1355,13 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	}
 
 	/**
-	 * Finds the last role in the ordered set where name = &#63;.
+	 * Returns the last role in the ordered set where name = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param name the name to search with
+	 * @param name the name
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching role
 	 * @throws com.liferay.portal.NoSuchRoleException if a matching role could not be found
@@ -1395,14 +1391,14 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	}
 
 	/**
-	 * Finds the roles before and after the current role in the ordered set where name = &#63;.
+	 * Returns the roles before and after the current role in the ordered set where name = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
 	 * @param roleId the primary key of the current role
-	 * @param name the name to search with
+	 * @param name the name
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next role
 	 * @throws com.liferay.portal.NoSuchRoleException if a role with the primary key could not be found
@@ -1554,9 +1550,9 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	}
 
 	/**
-	 * Filters by the user's permissions and finds all the roles where name = &#63;.
+	 * Returns all the roles that the user has permission to view where name = &#63;.
 	 *
-	 * @param name the name to search with
+	 * @param name the name
 	 * @return the matching roles that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1565,15 +1561,15 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	}
 
 	/**
-	 * Filters by the user's permissions and finds a range of all the roles where name = &#63;.
+	 * Returns a range of all the roles that the user has permission to view where name = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param name the name to search with
-	 * @param start the lower bound of the range of roles to return
-	 * @param end the upper bound of the range of roles to return (not inclusive)
+	 * @param name the name
+	 * @param start the lower bound of the range of roles
+	 * @param end the upper bound of the range of roles (not inclusive)
 	 * @return the range of matching roles that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1583,15 +1579,15 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	}
 
 	/**
-	 * Filters by the user's permissions and finds an ordered range of all the roles where name = &#63;.
+	 * Returns an ordered range of all the roles that the user has permissions to view where name = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param name the name to search with
-	 * @param start the lower bound of the range of roles to return
-	 * @param end the upper bound of the range of roles to return (not inclusive)
+	 * @param name the name
+	 * @param start the lower bound of the range of roles
+	 * @param end the upper bound of the range of roles (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching roles that the user has permission to view
 	 * @throws SystemException if a system exception occurred
@@ -1682,14 +1678,10 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	}
 
 	/**
-	 * Filters the roles before and after the current role in the ordered set where name = &#63;.
-	 *
-	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
-	 * </p>
+	 * Returns the roles before and after the current role in the ordered set of roles that the user has permission to view where name = &#63;.
 	 *
 	 * @param roleId the primary key of the current role
-	 * @param name the name to search with
+	 * @param name the name
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next role
 	 * @throws com.liferay.portal.NoSuchRoleException if a role with the primary key could not be found
@@ -1872,9 +1864,9 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	}
 
 	/**
-	 * Finds all the roles where subtype = &#63;.
+	 * Returns all the roles where subtype = &#63;.
 	 *
-	 * @param subtype the subtype to search with
+	 * @param subtype the subtype
 	 * @return the matching roles
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1883,15 +1875,15 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	}
 
 	/**
-	 * Finds a range of all the roles where subtype = &#63;.
+	 * Returns a range of all the roles where subtype = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param subtype the subtype to search with
-	 * @param start the lower bound of the range of roles to return
-	 * @param end the upper bound of the range of roles to return (not inclusive)
+	 * @param subtype the subtype
+	 * @param start the lower bound of the range of roles
+	 * @param end the upper bound of the range of roles (not inclusive)
 	 * @return the range of matching roles
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1901,15 +1893,15 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	}
 
 	/**
-	 * Finds an ordered range of all the roles where subtype = &#63;.
+	 * Returns an ordered range of all the roles where subtype = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param subtype the subtype to search with
-	 * @param start the lower bound of the range of roles to return
-	 * @param end the upper bound of the range of roles to return (not inclusive)
+	 * @param subtype the subtype
+	 * @param start the lower bound of the range of roles
+	 * @param end the upper bound of the range of roles (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching roles
 	 * @throws SystemException if a system exception occurred
@@ -2000,13 +1992,13 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	}
 
 	/**
-	 * Finds the first role in the ordered set where subtype = &#63;.
+	 * Returns the first role in the ordered set where subtype = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param subtype the subtype to search with
+	 * @param subtype the subtype
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching role
 	 * @throws com.liferay.portal.NoSuchRoleException if a matching role could not be found
@@ -2035,13 +2027,13 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	}
 
 	/**
-	 * Finds the last role in the ordered set where subtype = &#63;.
+	 * Returns the last role in the ordered set where subtype = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param subtype the subtype to search with
+	 * @param subtype the subtype
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching role
 	 * @throws com.liferay.portal.NoSuchRoleException if a matching role could not be found
@@ -2073,14 +2065,14 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	}
 
 	/**
-	 * Finds the roles before and after the current role in the ordered set where subtype = &#63;.
+	 * Returns the roles before and after the current role in the ordered set where subtype = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
 	 * @param roleId the primary key of the current role
-	 * @param subtype the subtype to search with
+	 * @param subtype the subtype
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next role
 	 * @throws com.liferay.portal.NoSuchRoleException if a role with the primary key could not be found
@@ -2232,9 +2224,9 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	}
 
 	/**
-	 * Filters by the user's permissions and finds all the roles where subtype = &#63;.
+	 * Returns all the roles that the user has permission to view where subtype = &#63;.
 	 *
-	 * @param subtype the subtype to search with
+	 * @param subtype the subtype
 	 * @return the matching roles that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2245,15 +2237,15 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	}
 
 	/**
-	 * Filters by the user's permissions and finds a range of all the roles where subtype = &#63;.
+	 * Returns a range of all the roles that the user has permission to view where subtype = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param subtype the subtype to search with
-	 * @param start the lower bound of the range of roles to return
-	 * @param end the upper bound of the range of roles to return (not inclusive)
+	 * @param subtype the subtype
+	 * @param start the lower bound of the range of roles
+	 * @param end the upper bound of the range of roles (not inclusive)
 	 * @return the range of matching roles that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2263,15 +2255,15 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	}
 
 	/**
-	 * Filters by the user's permissions and finds an ordered range of all the roles where subtype = &#63;.
+	 * Returns an ordered range of all the roles that the user has permissions to view where subtype = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param subtype the subtype to search with
-	 * @param start the lower bound of the range of roles to return
-	 * @param end the upper bound of the range of roles to return (not inclusive)
+	 * @param subtype the subtype
+	 * @param start the lower bound of the range of roles
+	 * @param end the upper bound of the range of roles (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching roles that the user has permission to view
 	 * @throws SystemException if a system exception occurred
@@ -2362,14 +2354,10 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	}
 
 	/**
-	 * Filters the roles before and after the current role in the ordered set where subtype = &#63;.
-	 *
-	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
-	 * </p>
+	 * Returns the roles before and after the current role in the ordered set of roles that the user has permission to view where subtype = &#63;.
 	 *
 	 * @param roleId the primary key of the current role
-	 * @param subtype the subtype to search with
+	 * @param subtype the subtype
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next role
 	 * @throws com.liferay.portal.NoSuchRoleException if a role with the primary key could not be found
@@ -2552,10 +2540,10 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	}
 
 	/**
-	 * Finds the role where companyId = &#63; and name = &#63; or throws a {@link com.liferay.portal.NoSuchRoleException} if it could not be found.
+	 * Returns the role where companyId = &#63; and name = &#63; or throws a {@link com.liferay.portal.NoSuchRoleException} if it could not be found.
 	 *
-	 * @param companyId the company ID to search with
-	 * @param name the name to search with
+	 * @param companyId the company ID
+	 * @param name the name
 	 * @return the matching role
 	 * @throws com.liferay.portal.NoSuchRoleException if a matching role could not be found
 	 * @throws SystemException if a system exception occurred
@@ -2588,10 +2576,10 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	}
 
 	/**
-	 * Finds the role where companyId = &#63; and name = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 * Returns the role where companyId = &#63; and name = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	 *
-	 * @param companyId the company ID to search with
-	 * @param name the name to search with
+	 * @param companyId the company ID
+	 * @param name the name
 	 * @return the matching role, or <code>null</code> if a matching role could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2601,10 +2589,10 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	}
 
 	/**
-	 * Finds the role where companyId = &#63; and name = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 * Returns the role where companyId = &#63; and name = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	 *
-	 * @param companyId the company ID to search with
-	 * @param name the name to search with
+	 * @param companyId the company ID
+	 * @param name the name
 	 * @return the matching role, or <code>null</code> if a matching role could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2705,10 +2693,10 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	}
 
 	/**
-	 * Finds all the roles where type = &#63; and subtype = &#63;.
+	 * Returns all the roles where type = &#63; and subtype = &#63;.
 	 *
-	 * @param type the type to search with
-	 * @param subtype the subtype to search with
+	 * @param type the type
+	 * @param subtype the subtype
 	 * @return the matching roles
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2719,16 +2707,16 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	}
 
 	/**
-	 * Finds a range of all the roles where type = &#63; and subtype = &#63;.
+	 * Returns a range of all the roles where type = &#63; and subtype = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param type the type to search with
-	 * @param subtype the subtype to search with
-	 * @param start the lower bound of the range of roles to return
-	 * @param end the upper bound of the range of roles to return (not inclusive)
+	 * @param type the type
+	 * @param subtype the subtype
+	 * @param start the lower bound of the range of roles
+	 * @param end the upper bound of the range of roles (not inclusive)
 	 * @return the range of matching roles
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2738,16 +2726,16 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	}
 
 	/**
-	 * Finds an ordered range of all the roles where type = &#63; and subtype = &#63;.
+	 * Returns an ordered range of all the roles where type = &#63; and subtype = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param type the type to search with
-	 * @param subtype the subtype to search with
-	 * @param start the lower bound of the range of roles to return
-	 * @param end the upper bound of the range of roles to return (not inclusive)
+	 * @param type the type
+	 * @param subtype the subtype
+	 * @param start the lower bound of the range of roles
+	 * @param end the upper bound of the range of roles (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching roles
 	 * @throws SystemException if a system exception occurred
@@ -2842,14 +2830,14 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	}
 
 	/**
-	 * Finds the first role in the ordered set where type = &#63; and subtype = &#63;.
+	 * Returns the first role in the ordered set where type = &#63; and subtype = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param type the type to search with
-	 * @param subtype the subtype to search with
+	 * @param type the type
+	 * @param subtype the subtype
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching role
 	 * @throws com.liferay.portal.NoSuchRoleException if a matching role could not be found
@@ -2881,14 +2869,14 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	}
 
 	/**
-	 * Finds the last role in the ordered set where type = &#63; and subtype = &#63;.
+	 * Returns the last role in the ordered set where type = &#63; and subtype = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param type the type to search with
-	 * @param subtype the subtype to search with
+	 * @param type the type
+	 * @param subtype the subtype
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching role
 	 * @throws com.liferay.portal.NoSuchRoleException if a matching role could not be found
@@ -2923,15 +2911,15 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	}
 
 	/**
-	 * Finds the roles before and after the current role in the ordered set where type = &#63; and subtype = &#63;.
+	 * Returns the roles before and after the current role in the ordered set where type = &#63; and subtype = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
 	 * @param roleId the primary key of the current role
-	 * @param type the type to search with
-	 * @param subtype the subtype to search with
+	 * @param type the type
+	 * @param subtype the subtype
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next role
 	 * @throws com.liferay.portal.NoSuchRoleException if a role with the primary key could not be found
@@ -3087,10 +3075,10 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	}
 
 	/**
-	 * Filters by the user's permissions and finds all the roles where type = &#63; and subtype = &#63;.
+	 * Returns all the roles that the user has permission to view where type = &#63; and subtype = &#63;.
 	 *
-	 * @param type the type to search with
-	 * @param subtype the subtype to search with
+	 * @param type the type
+	 * @param subtype the subtype
 	 * @return the matching roles that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -3101,16 +3089,16 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	}
 
 	/**
-	 * Filters by the user's permissions and finds a range of all the roles where type = &#63; and subtype = &#63;.
+	 * Returns a range of all the roles that the user has permission to view where type = &#63; and subtype = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param type the type to search with
-	 * @param subtype the subtype to search with
-	 * @param start the lower bound of the range of roles to return
-	 * @param end the upper bound of the range of roles to return (not inclusive)
+	 * @param type the type
+	 * @param subtype the subtype
+	 * @param start the lower bound of the range of roles
+	 * @param end the upper bound of the range of roles (not inclusive)
 	 * @return the range of matching roles that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -3120,16 +3108,16 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	}
 
 	/**
-	 * Filters by the user's permissions and finds an ordered range of all the roles where type = &#63; and subtype = &#63;.
+	 * Returns an ordered range of all the roles that the user has permissions to view where type = &#63; and subtype = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param type the type to search with
-	 * @param subtype the subtype to search with
-	 * @param start the lower bound of the range of roles to return
-	 * @param end the upper bound of the range of roles to return (not inclusive)
+	 * @param type the type
+	 * @param subtype the subtype
+	 * @param start the lower bound of the range of roles
+	 * @param end the upper bound of the range of roles (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching roles that the user has permission to view
 	 * @throws SystemException if a system exception occurred
@@ -3224,15 +3212,11 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	}
 
 	/**
-	 * Filters the roles before and after the current role in the ordered set where type = &#63; and subtype = &#63;.
-	 *
-	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
-	 * </p>
+	 * Returns the roles before and after the current role in the ordered set of roles that the user has permission to view where type = &#63; and subtype = &#63;.
 	 *
 	 * @param roleId the primary key of the current role
-	 * @param type the type to search with
-	 * @param subtype the subtype to search with
+	 * @param type the type
+	 * @param subtype the subtype
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next role
 	 * @throws com.liferay.portal.NoSuchRoleException if a role with the primary key could not be found
@@ -3421,11 +3405,11 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	}
 
 	/**
-	 * Finds the role where companyId = &#63; and classNameId = &#63; and classPK = &#63; or throws a {@link com.liferay.portal.NoSuchRoleException} if it could not be found.
+	 * Returns the role where companyId = &#63; and classNameId = &#63; and classPK = &#63; or throws a {@link com.liferay.portal.NoSuchRoleException} if it could not be found.
 	 *
-	 * @param companyId the company ID to search with
-	 * @param classNameId the class name ID to search with
-	 * @param classPK the class p k to search with
+	 * @param companyId the company ID
+	 * @param classNameId the class name ID
+	 * @param classPK the class p k
 	 * @return the matching role
 	 * @throws com.liferay.portal.NoSuchRoleException if a matching role could not be found
 	 * @throws SystemException if a system exception occurred
@@ -3461,11 +3445,11 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	}
 
 	/**
-	 * Finds the role where companyId = &#63; and classNameId = &#63; and classPK = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 * Returns the role where companyId = &#63; and classNameId = &#63; and classPK = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	 *
-	 * @param companyId the company ID to search with
-	 * @param classNameId the class name ID to search with
-	 * @param classPK the class p k to search with
+	 * @param companyId the company ID
+	 * @param classNameId the class name ID
+	 * @param classPK the class p k
 	 * @return the matching role, or <code>null</code> if a matching role could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -3475,11 +3459,11 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	}
 
 	/**
-	 * Finds the role where companyId = &#63; and classNameId = &#63; and classPK = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 * Returns the role where companyId = &#63; and classNameId = &#63; and classPK = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	 *
-	 * @param companyId the company ID to search with
-	 * @param classNameId the class name ID to search with
-	 * @param classPK the class p k to search with
+	 * @param companyId the company ID
+	 * @param classNameId the class name ID
+	 * @param classPK the class p k
 	 * @return the matching role, or <code>null</code> if a matching role could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -3572,7 +3556,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	}
 
 	/**
-	 * Finds all the roles.
+	 * Returns all the roles.
 	 *
 	 * @return the roles
 	 * @throws SystemException if a system exception occurred
@@ -3582,14 +3566,14 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	}
 
 	/**
-	 * Finds a range of all the roles.
+	 * Returns a range of all the roles.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param start the lower bound of the range of roles to return
-	 * @param end the upper bound of the range of roles to return (not inclusive)
+	 * @param start the lower bound of the range of roles
+	 * @param end the upper bound of the range of roles (not inclusive)
 	 * @return the range of roles
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -3598,14 +3582,14 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	}
 
 	/**
-	 * Finds an ordered range of all the roles.
+	 * Returns an ordered range of all the roles.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param start the lower bound of the range of roles to return
-	 * @param end the upper bound of the range of roles to return (not inclusive)
+	 * @param start the lower bound of the range of roles
+	 * @param end the upper bound of the range of roles (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of roles
 	 * @throws SystemException if a system exception occurred
@@ -3682,7 +3666,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	/**
 	 * Removes all the roles where companyId = &#63; from the database.
 	 *
-	 * @param companyId the company ID to search with
+	 * @param companyId the company ID
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByCompanyId(long companyId) throws SystemException {
@@ -3694,7 +3678,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	/**
 	 * Removes all the roles where name = &#63; from the database.
 	 *
-	 * @param name the name to search with
+	 * @param name the name
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByName(String name) throws SystemException {
@@ -3706,7 +3690,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	/**
 	 * Removes all the roles where subtype = &#63; from the database.
 	 *
-	 * @param subtype the subtype to search with
+	 * @param subtype the subtype
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeBySubtype(String subtype) throws SystemException {
@@ -3718,8 +3702,8 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	/**
 	 * Removes the role where companyId = &#63; and name = &#63; from the database.
 	 *
-	 * @param companyId the company ID to search with
-	 * @param name the name to search with
+	 * @param companyId the company ID
+	 * @param name the name
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByC_N(long companyId, String name)
@@ -3732,8 +3716,8 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	/**
 	 * Removes all the roles where type = &#63; and subtype = &#63; from the database.
 	 *
-	 * @param type the type to search with
-	 * @param subtype the subtype to search with
+	 * @param type the type
+	 * @param subtype the subtype
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByT_S(int type, String subtype) throws SystemException {
@@ -3745,9 +3729,9 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	/**
 	 * Removes the role where companyId = &#63; and classNameId = &#63; and classPK = &#63; from the database.
 	 *
-	 * @param companyId the company ID to search with
-	 * @param classNameId the class name ID to search with
-	 * @param classPK the class p k to search with
+	 * @param companyId the company ID
+	 * @param classNameId the class name ID
+	 * @param classPK the class p k
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByC_C_C(long companyId, long classNameId, long classPK)
@@ -3769,9 +3753,9 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	}
 
 	/**
-	 * Counts all the roles where companyId = &#63;.
+	 * Returns the number of roles where companyId = &#63;.
 	 *
-	 * @param companyId the company ID to search with
+	 * @param companyId the company ID
 	 * @return the number of matching roles
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -3822,9 +3806,9 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	}
 
 	/**
-	 * Filters by the user's permissions and counts all the roles where companyId = &#63;.
+	 * Returns the number of roles that the user has permission to view where companyId = &#63;.
 	 *
-	 * @param companyId the company ID to search with
+	 * @param companyId the company ID
 	 * @return the number of matching roles that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -3869,9 +3853,9 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	}
 
 	/**
-	 * Counts all the roles where name = &#63;.
+	 * Returns the number of roles where name = &#63;.
 	 *
-	 * @param name the name to search with
+	 * @param name the name
 	 * @return the number of matching roles
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -3934,9 +3918,9 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	}
 
 	/**
-	 * Filters by the user's permissions and counts all the roles where name = &#63;.
+	 * Returns the number of roles that the user has permission to view where name = &#63;.
 	 *
-	 * @param name the name to search with
+	 * @param name the name
 	 * @return the number of matching roles that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -3993,9 +3977,9 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	}
 
 	/**
-	 * Counts all the roles where subtype = &#63;.
+	 * Returns the number of roles where subtype = &#63;.
 	 *
-	 * @param subtype the subtype to search with
+	 * @param subtype the subtype
 	 * @return the number of matching roles
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -4058,9 +4042,9 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	}
 
 	/**
-	 * Filters by the user's permissions and counts all the roles where subtype = &#63;.
+	 * Returns the number of roles that the user has permission to view where subtype = &#63;.
 	 *
-	 * @param subtype the subtype to search with
+	 * @param subtype the subtype
 	 * @return the number of matching roles that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -4117,10 +4101,10 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	}
 
 	/**
-	 * Counts all the roles where companyId = &#63; and name = &#63;.
+	 * Returns the number of roles where companyId = &#63; and name = &#63;.
 	 *
-	 * @param companyId the company ID to search with
-	 * @param name the name to search with
+	 * @param companyId the company ID
+	 * @param name the name
 	 * @return the number of matching roles
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -4188,10 +4172,10 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	}
 
 	/**
-	 * Counts all the roles where type = &#63; and subtype = &#63;.
+	 * Returns the number of roles where type = &#63; and subtype = &#63;.
 	 *
-	 * @param type the type to search with
-	 * @param subtype the subtype to search with
+	 * @param type the type
+	 * @param subtype the subtype
 	 * @return the number of matching roles
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -4258,10 +4242,10 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	}
 
 	/**
-	 * Filters by the user's permissions and counts all the roles where type = &#63; and subtype = &#63;.
+	 * Returns the number of roles that the user has permission to view where type = &#63; and subtype = &#63;.
 	 *
-	 * @param type the type to search with
-	 * @param subtype the subtype to search with
+	 * @param type the type
+	 * @param subtype the subtype
 	 * @return the number of matching roles that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -4323,11 +4307,11 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	}
 
 	/**
-	 * Counts all the roles where companyId = &#63; and classNameId = &#63; and classPK = &#63;.
+	 * Returns the number of roles where companyId = &#63; and classNameId = &#63; and classPK = &#63;.
 	 *
-	 * @param companyId the company ID to search with
-	 * @param classNameId the class name ID to search with
-	 * @param classPK the class p k to search with
+	 * @param companyId the company ID
+	 * @param classNameId the class name ID
+	 * @param classPK the class p k
 	 * @return the number of matching roles
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -4387,7 +4371,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	}
 
 	/**
-	 * Counts all the roles.
+	 * Returns the number of roles.
 	 *
 	 * @return the number of roles
 	 * @throws SystemException if a system exception occurred
@@ -4427,9 +4411,9 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	}
 
 	/**
-	 * Gets all the groups associated with the role.
+	 * Returns all the groups associated with the role.
 	 *
-	 * @param pk the primary key of the role to get the associated groups for
+	 * @param pk the primary key of the role
 	 * @return the groups associated with the role
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -4439,15 +4423,15 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	}
 
 	/**
-	 * Gets a range of all the groups associated with the role.
+	 * Returns a range of all the groups associated with the role.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param pk the primary key of the role to get the associated groups for
-	 * @param start the lower bound of the range of roles to return
-	 * @param end the upper bound of the range of roles to return (not inclusive)
+	 * @param pk the primary key of the role
+	 * @param start the lower bound of the range of roles
+	 * @param end the upper bound of the range of roles (not inclusive)
 	 * @return the range of groups associated with the role
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -4465,15 +4449,15 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 			});
 
 	/**
-	 * Gets an ordered range of all the groups associated with the role.
+	 * Returns an ordered range of all the groups associated with the role.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param pk the primary key of the role to get the associated groups for
-	 * @param start the lower bound of the range of roles to return
-	 * @param end the upper bound of the range of roles to return (not inclusive)
+	 * @param pk the primary key of the role
+	 * @param start the lower bound of the range of roles
+	 * @param end the upper bound of the range of roles (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of groups associated with the role
 	 * @throws SystemException if a system exception occurred
@@ -4544,9 +4528,9 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 			new String[] { Long.class.getName() });
 
 	/**
-	 * Gets the number of groups associated with the role.
+	 * Returns the number of groups associated with the role.
 	 *
-	 * @param pk the primary key of the role to get the number of associated groups for
+	 * @param pk the primary key of the role
 	 * @return the number of groups associated with the role
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -4833,7 +4817,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	/**
 	 * Sets the groups associated with the role, removing and adding associations as necessary. Also notifies the appropriate model listeners and clears the mapping table finder cache.
 	 *
-	 * @param pk the primary key of the role to set the associations for
+	 * @param pk the primary key of the role
 	 * @param groupPKs the primary keys of the groups to be associated with the role
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -4864,7 +4848,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	/**
 	 * Sets the groups associated with the role, removing and adding associations as necessary. Also notifies the appropriate model listeners and clears the mapping table finder cache.
 	 *
-	 * @param pk the primary key of the role to set the associations for
+	 * @param pk the primary key of the role
 	 * @param groups the groups to be associated with the role
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -4890,9 +4874,9 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	}
 
 	/**
-	 * Gets all the permissions associated with the role.
+	 * Returns all the permissions associated with the role.
 	 *
-	 * @param pk the primary key of the role to get the associated permissions for
+	 * @param pk the primary key of the role
 	 * @return the permissions associated with the role
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -4902,15 +4886,15 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	}
 
 	/**
-	 * Gets a range of all the permissions associated with the role.
+	 * Returns a range of all the permissions associated with the role.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param pk the primary key of the role to get the associated permissions for
-	 * @param start the lower bound of the range of roles to return
-	 * @param end the upper bound of the range of roles to return (not inclusive)
+	 * @param pk the primary key of the role
+	 * @param start the lower bound of the range of roles
+	 * @param end the upper bound of the range of roles (not inclusive)
 	 * @return the range of permissions associated with the role
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -4929,15 +4913,15 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 			});
 
 	/**
-	 * Gets an ordered range of all the permissions associated with the role.
+	 * Returns an ordered range of all the permissions associated with the role.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param pk the primary key of the role to get the associated permissions for
-	 * @param start the lower bound of the range of roles to return
-	 * @param end the upper bound of the range of roles to return (not inclusive)
+	 * @param pk the primary key of the role
+	 * @param start the lower bound of the range of roles
+	 * @param end the upper bound of the range of roles (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of permissions associated with the role
 	 * @throws SystemException if a system exception occurred
@@ -5009,9 +4993,9 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 			"getPermissionsSize", new String[] { Long.class.getName() });
 
 	/**
-	 * Gets the number of permissions associated with the role.
+	 * Returns the number of permissions associated with the role.
 	 *
-	 * @param pk the primary key of the role to get the number of associated permissions for
+	 * @param pk the primary key of the role
 	 * @return the number of permissions associated with the role
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -5307,7 +5291,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	/**
 	 * Sets the permissions associated with the role, removing and adding associations as necessary. Also notifies the appropriate model listeners and clears the mapping table finder cache.
 	 *
-	 * @param pk the primary key of the role to set the associations for
+	 * @param pk the primary key of the role
 	 * @param permissionPKs the primary keys of the permissions to be associated with the role
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -5339,7 +5323,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	/**
 	 * Sets the permissions associated with the role, removing and adding associations as necessary. Also notifies the appropriate model listeners and clears the mapping table finder cache.
 	 *
-	 * @param pk the primary key of the role to set the associations for
+	 * @param pk the primary key of the role
 	 * @param permissions the permissions to be associated with the role
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -5366,9 +5350,9 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	}
 
 	/**
-	 * Gets all the users associated with the role.
+	 * Returns all the users associated with the role.
 	 *
-	 * @param pk the primary key of the role to get the associated users for
+	 * @param pk the primary key of the role
 	 * @return the users associated with the role
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -5378,15 +5362,15 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	}
 
 	/**
-	 * Gets a range of all the users associated with the role.
+	 * Returns a range of all the users associated with the role.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param pk the primary key of the role to get the associated users for
-	 * @param start the lower bound of the range of roles to return
-	 * @param end the upper bound of the range of roles to return (not inclusive)
+	 * @param pk the primary key of the role
+	 * @param start the lower bound of the range of roles
+	 * @param end the upper bound of the range of roles (not inclusive)
 	 * @return the range of users associated with the role
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -5404,15 +5388,15 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 			});
 
 	/**
-	 * Gets an ordered range of all the users associated with the role.
+	 * Returns an ordered range of all the users associated with the role.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param pk the primary key of the role to get the associated users for
-	 * @param start the lower bound of the range of roles to return
-	 * @param end the upper bound of the range of roles to return (not inclusive)
+	 * @param pk the primary key of the role
+	 * @param start the lower bound of the range of roles
+	 * @param end the upper bound of the range of roles (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of users associated with the role
 	 * @throws SystemException if a system exception occurred
@@ -5483,9 +5467,9 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 			new String[] { Long.class.getName() });
 
 	/**
-	 * Gets the number of users associated with the role.
+	 * Returns the number of users associated with the role.
 	 *
-	 * @param pk the primary key of the role to get the number of associated users for
+	 * @param pk the primary key of the role
 	 * @return the number of users associated with the role
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -5770,7 +5754,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	/**
 	 * Sets the users associated with the role, removing and adding associations as necessary. Also notifies the appropriate model listeners and clears the mapping table finder cache.
 	 *
-	 * @param pk the primary key of the role to set the associations for
+	 * @param pk the primary key of the role
 	 * @param userPKs the primary keys of the users to be associated with the role
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -5801,7 +5785,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	/**
 	 * Sets the users associated with the role, removing and adding associations as necessary. Also notifies the appropriate model listeners and clears the mapping table finder cache.
 	 *
-	 * @param pk the primary key of the role to set the associations for
+	 * @param pk the primary key of the role
 	 * @param users the users to be associated with the role
 	 * @throws SystemException if a system exception occurred
 	 */

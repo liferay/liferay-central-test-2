@@ -37,7 +37,7 @@ public class ShoppingItemWrapper implements ShoppingItem {
 	}
 
 	/**
-	* Gets the primary key of this shopping item.
+	* Returns the primary key of this shopping item.
 	*
 	* @return the primary key of this shopping item
 	*/
@@ -46,7 +46,7 @@ public class ShoppingItemWrapper implements ShoppingItem {
 	}
 
 	/**
-	* Sets the primary key of this shopping item
+	* Sets the primary key of this shopping item.
 	*
 	* @param primaryKey the primary key of this shopping item
 	*/
@@ -55,7 +55,7 @@ public class ShoppingItemWrapper implements ShoppingItem {
 	}
 
 	/**
-	* Gets the item ID of this shopping item.
+	* Returns the item ID of this shopping item.
 	*
 	* @return the item ID of this shopping item
 	*/
@@ -73,7 +73,7 @@ public class ShoppingItemWrapper implements ShoppingItem {
 	}
 
 	/**
-	* Gets the group ID of this shopping item.
+	* Returns the group ID of this shopping item.
 	*
 	* @return the group ID of this shopping item
 	*/
@@ -91,7 +91,7 @@ public class ShoppingItemWrapper implements ShoppingItem {
 	}
 
 	/**
-	* Gets the company ID of this shopping item.
+	* Returns the company ID of this shopping item.
 	*
 	* @return the company ID of this shopping item
 	*/
@@ -109,7 +109,7 @@ public class ShoppingItemWrapper implements ShoppingItem {
 	}
 
 	/**
-	* Gets the user ID of this shopping item.
+	* Returns the user ID of this shopping item.
 	*
 	* @return the user ID of this shopping item
 	*/
@@ -127,7 +127,7 @@ public class ShoppingItemWrapper implements ShoppingItem {
 	}
 
 	/**
-	* Gets the user uuid of this shopping item.
+	* Returns the user uuid of this shopping item.
 	*
 	* @return the user uuid of this shopping item
 	* @throws SystemException if a system exception occurred
@@ -147,7 +147,7 @@ public class ShoppingItemWrapper implements ShoppingItem {
 	}
 
 	/**
-	* Gets the user name of this shopping item.
+	* Returns the user name of this shopping item.
 	*
 	* @return the user name of this shopping item
 	*/
@@ -165,7 +165,7 @@ public class ShoppingItemWrapper implements ShoppingItem {
 	}
 
 	/**
-	* Gets the create date of this shopping item.
+	* Returns the create date of this shopping item.
 	*
 	* @return the create date of this shopping item
 	*/
@@ -183,7 +183,7 @@ public class ShoppingItemWrapper implements ShoppingItem {
 	}
 
 	/**
-	* Gets the modified date of this shopping item.
+	* Returns the modified date of this shopping item.
 	*
 	* @return the modified date of this shopping item
 	*/
@@ -201,7 +201,7 @@ public class ShoppingItemWrapper implements ShoppingItem {
 	}
 
 	/**
-	* Gets the category ID of this shopping item.
+	* Returns the category ID of this shopping item.
 	*
 	* @return the category ID of this shopping item
 	*/
@@ -219,7 +219,7 @@ public class ShoppingItemWrapper implements ShoppingItem {
 	}
 
 	/**
-	* Gets the sku of this shopping item.
+	* Returns the sku of this shopping item.
 	*
 	* @return the sku of this shopping item
 	*/
@@ -237,7 +237,7 @@ public class ShoppingItemWrapper implements ShoppingItem {
 	}
 
 	/**
-	* Gets the name of this shopping item.
+	* Returns the name of this shopping item.
 	*
 	* @return the name of this shopping item
 	*/
@@ -255,7 +255,7 @@ public class ShoppingItemWrapper implements ShoppingItem {
 	}
 
 	/**
-	* Gets the description of this shopping item.
+	* Returns the description of this shopping item.
 	*
 	* @return the description of this shopping item
 	*/
@@ -273,7 +273,7 @@ public class ShoppingItemWrapper implements ShoppingItem {
 	}
 
 	/**
-	* Gets the properties of this shopping item.
+	* Returns the properties of this shopping item.
 	*
 	* @return the properties of this shopping item
 	*/
@@ -291,7 +291,7 @@ public class ShoppingItemWrapper implements ShoppingItem {
 	}
 
 	/**
-	* Gets the fields of this shopping item.
+	* Returns the fields of this shopping item.
 	*
 	* @return the fields of this shopping item
 	*/
@@ -318,7 +318,7 @@ public class ShoppingItemWrapper implements ShoppingItem {
 	}
 
 	/**
-	* Gets the fields quantities of this shopping item.
+	* Returns the fields quantities of this shopping item.
 	*
 	* @return the fields quantities of this shopping item
 	*/
@@ -336,7 +336,7 @@ public class ShoppingItemWrapper implements ShoppingItem {
 	}
 
 	/**
-	* Gets the min quantity of this shopping item.
+	* Returns the min quantity of this shopping item.
 	*
 	* @return the min quantity of this shopping item
 	*/
@@ -354,7 +354,7 @@ public class ShoppingItemWrapper implements ShoppingItem {
 	}
 
 	/**
-	* Gets the max quantity of this shopping item.
+	* Returns the max quantity of this shopping item.
 	*
 	* @return the max quantity of this shopping item
 	*/
@@ -372,7 +372,7 @@ public class ShoppingItemWrapper implements ShoppingItem {
 	}
 
 	/**
-	* Gets the price of this shopping item.
+	* Returns the price of this shopping item.
 	*
 	* @return the price of this shopping item
 	*/
@@ -390,7 +390,7 @@ public class ShoppingItemWrapper implements ShoppingItem {
 	}
 
 	/**
-	* Gets the discount of this shopping item.
+	* Returns the discount of this shopping item.
 	*
 	* @return the discount of this shopping item
 	*/
@@ -408,7 +408,7 @@ public class ShoppingItemWrapper implements ShoppingItem {
 	}
 
 	/**
-	* Gets the taxable of this shopping item.
+	* Returns the taxable of this shopping item.
 	*
 	* @return the taxable of this shopping item
 	*/
@@ -435,7 +435,7 @@ public class ShoppingItemWrapper implements ShoppingItem {
 	}
 
 	/**
-	* Gets the shipping of this shopping item.
+	* Returns the shipping of this shopping item.
 	*
 	* @return the shipping of this shopping item
 	*/
@@ -453,7 +453,7 @@ public class ShoppingItemWrapper implements ShoppingItem {
 	}
 
 	/**
-	* Gets the use shipping formula of this shopping item.
+	* Returns the use shipping formula of this shopping item.
 	*
 	* @return the use shipping formula of this shopping item
 	*/
@@ -480,7 +480,7 @@ public class ShoppingItemWrapper implements ShoppingItem {
 	}
 
 	/**
-	* Gets the requires shipping of this shopping item.
+	* Returns the requires shipping of this shopping item.
 	*
 	* @return the requires shipping of this shopping item
 	*/
@@ -507,7 +507,7 @@ public class ShoppingItemWrapper implements ShoppingItem {
 	}
 
 	/**
-	* Gets the stock quantity of this shopping item.
+	* Returns the stock quantity of this shopping item.
 	*
 	* @return the stock quantity of this shopping item
 	*/
@@ -525,7 +525,7 @@ public class ShoppingItemWrapper implements ShoppingItem {
 	}
 
 	/**
-	* Gets the featured of this shopping item.
+	* Returns the featured of this shopping item.
 	*
 	* @return the featured of this shopping item
 	*/
@@ -552,7 +552,7 @@ public class ShoppingItemWrapper implements ShoppingItem {
 	}
 
 	/**
-	* Gets the sale of this shopping item.
+	* Returns the sale of this shopping item.
 	*
 	* @return the sale of this shopping item
 	*/
@@ -579,7 +579,7 @@ public class ShoppingItemWrapper implements ShoppingItem {
 	}
 
 	/**
-	* Gets the small image of this shopping item.
+	* Returns the small image of this shopping item.
 	*
 	* @return the small image of this shopping item
 	*/
@@ -606,7 +606,7 @@ public class ShoppingItemWrapper implements ShoppingItem {
 	}
 
 	/**
-	* Gets the small image ID of this shopping item.
+	* Returns the small image ID of this shopping item.
 	*
 	* @return the small image ID of this shopping item
 	*/
@@ -624,7 +624,7 @@ public class ShoppingItemWrapper implements ShoppingItem {
 	}
 
 	/**
-	* Gets the small image u r l of this shopping item.
+	* Returns the small image u r l of this shopping item.
 	*
 	* @return the small image u r l of this shopping item
 	*/
@@ -642,7 +642,7 @@ public class ShoppingItemWrapper implements ShoppingItem {
 	}
 
 	/**
-	* Gets the medium image of this shopping item.
+	* Returns the medium image of this shopping item.
 	*
 	* @return the medium image of this shopping item
 	*/
@@ -669,7 +669,7 @@ public class ShoppingItemWrapper implements ShoppingItem {
 	}
 
 	/**
-	* Gets the medium image ID of this shopping item.
+	* Returns the medium image ID of this shopping item.
 	*
 	* @return the medium image ID of this shopping item
 	*/
@@ -687,7 +687,7 @@ public class ShoppingItemWrapper implements ShoppingItem {
 	}
 
 	/**
-	* Gets the medium image u r l of this shopping item.
+	* Returns the medium image u r l of this shopping item.
 	*
 	* @return the medium image u r l of this shopping item
 	*/
@@ -705,7 +705,7 @@ public class ShoppingItemWrapper implements ShoppingItem {
 	}
 
 	/**
-	* Gets the large image of this shopping item.
+	* Returns the large image of this shopping item.
 	*
 	* @return the large image of this shopping item
 	*/
@@ -732,7 +732,7 @@ public class ShoppingItemWrapper implements ShoppingItem {
 	}
 
 	/**
-	* Gets the large image ID of this shopping item.
+	* Returns the large image ID of this shopping item.
 	*
 	* @return the large image ID of this shopping item
 	*/
@@ -750,7 +750,7 @@ public class ShoppingItemWrapper implements ShoppingItem {
 	}
 
 	/**
-	* Gets the large image u r l of this shopping item.
+	* Returns the large image u r l of this shopping item.
 	*
 	* @return the large image u r l of this shopping item
 	*/

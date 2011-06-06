@@ -37,7 +37,7 @@ public class PasswordTrackerWrapper implements PasswordTracker {
 	}
 
 	/**
-	* Gets the primary key of this password tracker.
+	* Returns the primary key of this password tracker.
 	*
 	* @return the primary key of this password tracker
 	*/
@@ -46,7 +46,7 @@ public class PasswordTrackerWrapper implements PasswordTracker {
 	}
 
 	/**
-	* Sets the primary key of this password tracker
+	* Sets the primary key of this password tracker.
 	*
 	* @param primaryKey the primary key of this password tracker
 	*/
@@ -55,7 +55,7 @@ public class PasswordTrackerWrapper implements PasswordTracker {
 	}
 
 	/**
-	* Gets the password tracker ID of this password tracker.
+	* Returns the password tracker ID of this password tracker.
 	*
 	* @return the password tracker ID of this password tracker
 	*/
@@ -73,7 +73,7 @@ public class PasswordTrackerWrapper implements PasswordTracker {
 	}
 
 	/**
-	* Gets the user ID of this password tracker.
+	* Returns the user ID of this password tracker.
 	*
 	* @return the user ID of this password tracker
 	*/
@@ -91,7 +91,7 @@ public class PasswordTrackerWrapper implements PasswordTracker {
 	}
 
 	/**
-	* Gets the user uuid of this password tracker.
+	* Returns the user uuid of this password tracker.
 	*
 	* @return the user uuid of this password tracker
 	* @throws SystemException if a system exception occurred
@@ -111,7 +111,7 @@ public class PasswordTrackerWrapper implements PasswordTracker {
 	}
 
 	/**
-	* Gets the create date of this password tracker.
+	* Returns the create date of this password tracker.
 	*
 	* @return the create date of this password tracker
 	*/
@@ -129,7 +129,7 @@ public class PasswordTrackerWrapper implements PasswordTracker {
 	}
 
 	/**
-	* Gets the password of this password tracker.
+	* Returns the password of this password tracker.
 	*
 	* @return the password of this password tracker
 	*/

@@ -41,7 +41,7 @@ public interface DLDocumentTypePersistence extends BasePersistence<DLDocumentTyp
 	/**
 	* Caches the d l document type in the entity cache if it is enabled.
 	*
-	* @param dlDocumentType the d l document type to cache
+	* @param dlDocumentType the d l document type
 	*/
 	public void cacheResult(
 		com.liferay.portlet.documentlibrary.model.DLDocumentType dlDocumentType);
@@ -49,7 +49,7 @@ public interface DLDocumentTypePersistence extends BasePersistence<DLDocumentTyp
 	/**
 	* Caches the d l document types in the entity cache if it is enabled.
 	*
-	* @param dlDocumentTypes the d l document types to cache
+	* @param dlDocumentTypes the d l document types
 	*/
 	public void cacheResult(
 		java.util.List<com.liferay.portlet.documentlibrary.model.DLDocumentType> dlDocumentTypes);
@@ -66,7 +66,7 @@ public interface DLDocumentTypePersistence extends BasePersistence<DLDocumentTyp
 	/**
 	* Removes the d l document type with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param documentTypeId the primary key of the d l document type to remove
+	* @param documentTypeId the primary key of the d l document type
 	* @return the d l document type that was removed
 	* @throws com.liferay.portlet.documentlibrary.NoSuchDocumentTypeException if a d l document type with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -82,9 +82,9 @@ public interface DLDocumentTypePersistence extends BasePersistence<DLDocumentTyp
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the d l document type with the primary key or throws a {@link com.liferay.portlet.documentlibrary.NoSuchDocumentTypeException} if it could not be found.
+	* Returns the d l document type with the primary key or throws a {@link com.liferay.portlet.documentlibrary.NoSuchDocumentTypeException} if it could not be found.
 	*
-	* @param documentTypeId the primary key of the d l document type to find
+	* @param documentTypeId the primary key of the d l document type
 	* @return the d l document type
 	* @throws com.liferay.portlet.documentlibrary.NoSuchDocumentTypeException if a d l document type with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -95,9 +95,9 @@ public interface DLDocumentTypePersistence extends BasePersistence<DLDocumentTyp
 			com.liferay.portlet.documentlibrary.NoSuchDocumentTypeException;
 
 	/**
-	* Finds the d l document type with the primary key or returns <code>null</code> if it could not be found.
+	* Returns the d l document type with the primary key or returns <code>null</code> if it could not be found.
 	*
-	* @param documentTypeId the primary key of the d l document type to find
+	* @param documentTypeId the primary key of the d l document type
 	* @return the d l document type, or <code>null</code> if a d l document type with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -106,9 +106,9 @@ public interface DLDocumentTypePersistence extends BasePersistence<DLDocumentTyp
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds all the d l document types where groupId = &#63;.
+	* Returns all the d l document types where groupId = &#63;.
 	*
-	* @param groupId the group ID to search with
+	* @param groupId the group ID
 	* @return the matching d l document types
 	* @throws SystemException if a system exception occurred
 	*/
@@ -117,15 +117,15 @@ public interface DLDocumentTypePersistence extends BasePersistence<DLDocumentTyp
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds a range of all the d l document types where groupId = &#63;.
+	* Returns a range of all the d l document types where groupId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param start the lower bound of the range of d l document types to return
-	* @param end the upper bound of the range of d l document types to return (not inclusive)
+	* @param groupId the group ID
+	* @param start the lower bound of the range of d l document types
+	* @param end the upper bound of the range of d l document types (not inclusive)
 	* @return the range of matching d l document types
 	* @throws SystemException if a system exception occurred
 	*/
@@ -134,15 +134,15 @@ public interface DLDocumentTypePersistence extends BasePersistence<DLDocumentTyp
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds an ordered range of all the d l document types where groupId = &#63;.
+	* Returns an ordered range of all the d l document types where groupId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param start the lower bound of the range of d l document types to return
-	* @param end the upper bound of the range of d l document types to return (not inclusive)
+	* @param groupId the group ID
+	* @param start the lower bound of the range of d l document types
+	* @param end the upper bound of the range of d l document types (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching d l document types
 	* @throws SystemException if a system exception occurred
@@ -153,13 +153,13 @@ public interface DLDocumentTypePersistence extends BasePersistence<DLDocumentTyp
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the first d l document type in the ordered set where groupId = &#63;.
+	* Returns the first d l document type in the ordered set where groupId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
+	* @param groupId the group ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching d l document type
 	* @throws com.liferay.portlet.documentlibrary.NoSuchDocumentTypeException if a matching d l document type could not be found
@@ -172,13 +172,13 @@ public interface DLDocumentTypePersistence extends BasePersistence<DLDocumentTyp
 			com.liferay.portlet.documentlibrary.NoSuchDocumentTypeException;
 
 	/**
-	* Finds the last d l document type in the ordered set where groupId = &#63;.
+	* Returns the last d l document type in the ordered set where groupId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
+	* @param groupId the group ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching d l document type
 	* @throws com.liferay.portlet.documentlibrary.NoSuchDocumentTypeException if a matching d l document type could not be found
@@ -191,14 +191,14 @@ public interface DLDocumentTypePersistence extends BasePersistence<DLDocumentTyp
 			com.liferay.portlet.documentlibrary.NoSuchDocumentTypeException;
 
 	/**
-	* Finds the d l document types before and after the current d l document type in the ordered set where groupId = &#63;.
+	* Returns the d l document types before and after the current d l document type in the ordered set where groupId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
 	* @param documentTypeId the primary key of the current d l document type
-	* @param groupId the group ID to search with
+	* @param groupId the group ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next d l document type
 	* @throws com.liferay.portlet.documentlibrary.NoSuchDocumentTypeException if a d l document type with the primary key could not be found
@@ -211,9 +211,9 @@ public interface DLDocumentTypePersistence extends BasePersistence<DLDocumentTyp
 			com.liferay.portlet.documentlibrary.NoSuchDocumentTypeException;
 
 	/**
-	* Filters by the user's permissions and finds all the d l document types where groupId = &#63;.
+	* Returns all the d l document types that the user has permission to view where groupId = &#63;.
 	*
-	* @param groupId the group ID to search with
+	* @param groupId the group ID
 	* @return the matching d l document types that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -222,15 +222,15 @@ public interface DLDocumentTypePersistence extends BasePersistence<DLDocumentTyp
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Filters by the user's permissions and finds a range of all the d l document types where groupId = &#63;.
+	* Returns a range of all the d l document types that the user has permission to view where groupId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param start the lower bound of the range of d l document types to return
-	* @param end the upper bound of the range of d l document types to return (not inclusive)
+	* @param groupId the group ID
+	* @param start the lower bound of the range of d l document types
+	* @param end the upper bound of the range of d l document types (not inclusive)
 	* @return the range of matching d l document types that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -239,15 +239,15 @@ public interface DLDocumentTypePersistence extends BasePersistence<DLDocumentTyp
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Filters by the user's permissions and finds an ordered range of all the d l document types where groupId = &#63;.
+	* Returns an ordered range of all the d l document types that the user has permissions to view where groupId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param start the lower bound of the range of d l document types to return
-	* @param end the upper bound of the range of d l document types to return (not inclusive)
+	* @param groupId the group ID
+	* @param start the lower bound of the range of d l document types
+	* @param end the upper bound of the range of d l document types (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching d l document types that the user has permission to view
 	* @throws SystemException if a system exception occurred
@@ -258,14 +258,10 @@ public interface DLDocumentTypePersistence extends BasePersistence<DLDocumentTyp
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Filters the d l document types before and after the current d l document type in the ordered set where groupId = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
-	* </p>
+	* Returns the d l document types before and after the current d l document type in the ordered set of d l document types that the user has permission to view where groupId = &#63;.
 	*
 	* @param documentTypeId the primary key of the current d l document type
-	* @param groupId the group ID to search with
+	* @param groupId the group ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next d l document type
 	* @throws com.liferay.portlet.documentlibrary.NoSuchDocumentTypeException if a d l document type with the primary key could not be found
@@ -278,11 +274,11 @@ public interface DLDocumentTypePersistence extends BasePersistence<DLDocumentTyp
 			com.liferay.portlet.documentlibrary.NoSuchDocumentTypeException;
 
 	/**
-	* Finds all the d l document types where groupId = &#63; and name = &#63; and description = &#63;.
+	* Returns all the d l document types where groupId = &#63; and name = &#63; and description = &#63;.
 	*
-	* @param groupId the group ID to search with
-	* @param name the name to search with
-	* @param description the description to search with
+	* @param groupId the group ID
+	* @param name the name
+	* @param description the description
 	* @return the matching d l document types
 	* @throws SystemException if a system exception occurred
 	*/
@@ -291,17 +287,17 @@ public interface DLDocumentTypePersistence extends BasePersistence<DLDocumentTyp
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds a range of all the d l document types where groupId = &#63; and name = &#63; and description = &#63;.
+	* Returns a range of all the d l document types where groupId = &#63; and name = &#63; and description = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param name the name to search with
-	* @param description the description to search with
-	* @param start the lower bound of the range of d l document types to return
-	* @param end the upper bound of the range of d l document types to return (not inclusive)
+	* @param groupId the group ID
+	* @param name the name
+	* @param description the description
+	* @param start the lower bound of the range of d l document types
+	* @param end the upper bound of the range of d l document types (not inclusive)
 	* @return the range of matching d l document types
 	* @throws SystemException if a system exception occurred
 	*/
@@ -311,17 +307,17 @@ public interface DLDocumentTypePersistence extends BasePersistence<DLDocumentTyp
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds an ordered range of all the d l document types where groupId = &#63; and name = &#63; and description = &#63;.
+	* Returns an ordered range of all the d l document types where groupId = &#63; and name = &#63; and description = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param name the name to search with
-	* @param description the description to search with
-	* @param start the lower bound of the range of d l document types to return
-	* @param end the upper bound of the range of d l document types to return (not inclusive)
+	* @param groupId the group ID
+	* @param name the name
+	* @param description the description
+	* @param start the lower bound of the range of d l document types
+	* @param end the upper bound of the range of d l document types (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching d l document types
 	* @throws SystemException if a system exception occurred
@@ -333,15 +329,15 @@ public interface DLDocumentTypePersistence extends BasePersistence<DLDocumentTyp
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the first d l document type in the ordered set where groupId = &#63; and name = &#63; and description = &#63;.
+	* Returns the first d l document type in the ordered set where groupId = &#63; and name = &#63; and description = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param name the name to search with
-	* @param description the description to search with
+	* @param groupId the group ID
+	* @param name the name
+	* @param description the description
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching d l document type
 	* @throws com.liferay.portlet.documentlibrary.NoSuchDocumentTypeException if a matching d l document type could not be found
@@ -354,15 +350,15 @@ public interface DLDocumentTypePersistence extends BasePersistence<DLDocumentTyp
 			com.liferay.portlet.documentlibrary.NoSuchDocumentTypeException;
 
 	/**
-	* Finds the last d l document type in the ordered set where groupId = &#63; and name = &#63; and description = &#63;.
+	* Returns the last d l document type in the ordered set where groupId = &#63; and name = &#63; and description = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param name the name to search with
-	* @param description the description to search with
+	* @param groupId the group ID
+	* @param name the name
+	* @param description the description
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching d l document type
 	* @throws com.liferay.portlet.documentlibrary.NoSuchDocumentTypeException if a matching d l document type could not be found
@@ -375,16 +371,16 @@ public interface DLDocumentTypePersistence extends BasePersistence<DLDocumentTyp
 			com.liferay.portlet.documentlibrary.NoSuchDocumentTypeException;
 
 	/**
-	* Finds the d l document types before and after the current d l document type in the ordered set where groupId = &#63; and name = &#63; and description = &#63;.
+	* Returns the d l document types before and after the current d l document type in the ordered set where groupId = &#63; and name = &#63; and description = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
 	* @param documentTypeId the primary key of the current d l document type
-	* @param groupId the group ID to search with
-	* @param name the name to search with
-	* @param description the description to search with
+	* @param groupId the group ID
+	* @param name the name
+	* @param description the description
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next d l document type
 	* @throws com.liferay.portlet.documentlibrary.NoSuchDocumentTypeException if a d l document type with the primary key could not be found
@@ -398,11 +394,11 @@ public interface DLDocumentTypePersistence extends BasePersistence<DLDocumentTyp
 			com.liferay.portlet.documentlibrary.NoSuchDocumentTypeException;
 
 	/**
-	* Filters by the user's permissions and finds all the d l document types where groupId = &#63; and name = &#63; and description = &#63;.
+	* Returns all the d l document types that the user has permission to view where groupId = &#63; and name = &#63; and description = &#63;.
 	*
-	* @param groupId the group ID to search with
-	* @param name the name to search with
-	* @param description the description to search with
+	* @param groupId the group ID
+	* @param name the name
+	* @param description the description
 	* @return the matching d l document types that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -411,17 +407,17 @@ public interface DLDocumentTypePersistence extends BasePersistence<DLDocumentTyp
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Filters by the user's permissions and finds a range of all the d l document types where groupId = &#63; and name = &#63; and description = &#63;.
+	* Returns a range of all the d l document types that the user has permission to view where groupId = &#63; and name = &#63; and description = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param name the name to search with
-	* @param description the description to search with
-	* @param start the lower bound of the range of d l document types to return
-	* @param end the upper bound of the range of d l document types to return (not inclusive)
+	* @param groupId the group ID
+	* @param name the name
+	* @param description the description
+	* @param start the lower bound of the range of d l document types
+	* @param end the upper bound of the range of d l document types (not inclusive)
 	* @return the range of matching d l document types that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -431,17 +427,17 @@ public interface DLDocumentTypePersistence extends BasePersistence<DLDocumentTyp
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Filters by the user's permissions and finds an ordered range of all the d l document types where groupId = &#63; and name = &#63; and description = &#63;.
+	* Returns an ordered range of all the d l document types that the user has permissions to view where groupId = &#63; and name = &#63; and description = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param name the name to search with
-	* @param description the description to search with
-	* @param start the lower bound of the range of d l document types to return
-	* @param end the upper bound of the range of d l document types to return (not inclusive)
+	* @param groupId the group ID
+	* @param name the name
+	* @param description the description
+	* @param start the lower bound of the range of d l document types
+	* @param end the upper bound of the range of d l document types (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching d l document types that the user has permission to view
 	* @throws SystemException if a system exception occurred
@@ -453,16 +449,12 @@ public interface DLDocumentTypePersistence extends BasePersistence<DLDocumentTyp
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Filters the d l document types before and after the current d l document type in the ordered set where groupId = &#63; and name = &#63; and description = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
-	* </p>
+	* Returns the d l document types before and after the current d l document type in the ordered set of d l document types that the user has permission to view where groupId = &#63; and name = &#63; and description = &#63;.
 	*
 	* @param documentTypeId the primary key of the current d l document type
-	* @param groupId the group ID to search with
-	* @param name the name to search with
-	* @param description the description to search with
+	* @param groupId the group ID
+	* @param name the name
+	* @param description the description
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next d l document type
 	* @throws com.liferay.portlet.documentlibrary.NoSuchDocumentTypeException if a d l document type with the primary key could not be found
@@ -476,7 +468,7 @@ public interface DLDocumentTypePersistence extends BasePersistence<DLDocumentTyp
 			com.liferay.portlet.documentlibrary.NoSuchDocumentTypeException;
 
 	/**
-	* Finds all the d l document types.
+	* Returns all the d l document types.
 	*
 	* @return the d l document types
 	* @throws SystemException if a system exception occurred
@@ -485,14 +477,14 @@ public interface DLDocumentTypePersistence extends BasePersistence<DLDocumentTyp
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds a range of all the d l document types.
+	* Returns a range of all the d l document types.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of d l document types to return
-	* @param end the upper bound of the range of d l document types to return (not inclusive)
+	* @param start the lower bound of the range of d l document types
+	* @param end the upper bound of the range of d l document types (not inclusive)
 	* @return the range of d l document types
 	* @throws SystemException if a system exception occurred
 	*/
@@ -501,14 +493,14 @@ public interface DLDocumentTypePersistence extends BasePersistence<DLDocumentTyp
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds an ordered range of all the d l document types.
+	* Returns an ordered range of all the d l document types.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of d l document types to return
-	* @param end the upper bound of the range of d l document types to return (not inclusive)
+	* @param start the lower bound of the range of d l document types
+	* @param end the upper bound of the range of d l document types (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of d l document types
 	* @throws SystemException if a system exception occurred
@@ -521,7 +513,7 @@ public interface DLDocumentTypePersistence extends BasePersistence<DLDocumentTyp
 	/**
 	* Removes all the d l document types where groupId = &#63; from the database.
 	*
-	* @param groupId the group ID to search with
+	* @param groupId the group ID
 	* @throws SystemException if a system exception occurred
 	*/
 	public void removeByGroupId(long groupId)
@@ -530,9 +522,9 @@ public interface DLDocumentTypePersistence extends BasePersistence<DLDocumentTyp
 	/**
 	* Removes all the d l document types where groupId = &#63; and name = &#63; and description = &#63; from the database.
 	*
-	* @param groupId the group ID to search with
-	* @param name the name to search with
-	* @param description the description to search with
+	* @param groupId the group ID
+	* @param name the name
+	* @param description the description
 	* @throws SystemException if a system exception occurred
 	*/
 	public void removeByG_N_D(long groupId, java.lang.String name,
@@ -548,9 +540,9 @@ public interface DLDocumentTypePersistence extends BasePersistence<DLDocumentTyp
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Counts all the d l document types where groupId = &#63;.
+	* Returns the number of d l document types where groupId = &#63;.
 	*
-	* @param groupId the group ID to search with
+	* @param groupId the group ID
 	* @return the number of matching d l document types
 	* @throws SystemException if a system exception occurred
 	*/
@@ -558,9 +550,9 @@ public interface DLDocumentTypePersistence extends BasePersistence<DLDocumentTyp
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Filters by the user's permissions and counts all the d l document types where groupId = &#63;.
+	* Returns the number of d l document types that the user has permission to view where groupId = &#63;.
 	*
-	* @param groupId the group ID to search with
+	* @param groupId the group ID
 	* @return the number of matching d l document types that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -568,11 +560,11 @@ public interface DLDocumentTypePersistence extends BasePersistence<DLDocumentTyp
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Counts all the d l document types where groupId = &#63; and name = &#63; and description = &#63;.
+	* Returns the number of d l document types where groupId = &#63; and name = &#63; and description = &#63;.
 	*
-	* @param groupId the group ID to search with
-	* @param name the name to search with
-	* @param description the description to search with
+	* @param groupId the group ID
+	* @param name the name
+	* @param description the description
 	* @return the number of matching d l document types
 	* @throws SystemException if a system exception occurred
 	*/
@@ -581,11 +573,11 @@ public interface DLDocumentTypePersistence extends BasePersistence<DLDocumentTyp
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Filters by the user's permissions and counts all the d l document types where groupId = &#63; and name = &#63; and description = &#63;.
+	* Returns the number of d l document types that the user has permission to view where groupId = &#63; and name = &#63; and description = &#63;.
 	*
-	* @param groupId the group ID to search with
-	* @param name the name to search with
-	* @param description the description to search with
+	* @param groupId the group ID
+	* @param name the name
+	* @param description the description
 	* @return the number of matching d l document types that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -594,7 +586,7 @@ public interface DLDocumentTypePersistence extends BasePersistence<DLDocumentTyp
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Counts all the d l document types.
+	* Returns the number of d l document types.
 	*
 	* @return the number of d l document types
 	* @throws SystemException if a system exception occurred
@@ -603,9 +595,9 @@ public interface DLDocumentTypePersistence extends BasePersistence<DLDocumentTyp
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Gets all the d d m structures associated with the d l document type.
+	* Returns all the d d m structures associated with the d l document type.
 	*
-	* @param pk the primary key of the d l document type to get the associated d d m structures for
+	* @param pk the primary key of the d l document type
 	* @return the d d m structures associated with the d l document type
 	* @throws SystemException if a system exception occurred
 	*/
@@ -613,15 +605,15 @@ public interface DLDocumentTypePersistence extends BasePersistence<DLDocumentTyp
 		long pk) throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Gets a range of all the d d m structures associated with the d l document type.
+	* Returns a range of all the d d m structures associated with the d l document type.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param pk the primary key of the d l document type to get the associated d d m structures for
-	* @param start the lower bound of the range of d l document types to return
-	* @param end the upper bound of the range of d l document types to return (not inclusive)
+	* @param pk the primary key of the d l document type
+	* @param start the lower bound of the range of d l document types
+	* @param end the upper bound of the range of d l document types (not inclusive)
 	* @return the range of d d m structures associated with the d l document type
 	* @throws SystemException if a system exception occurred
 	*/
@@ -630,15 +622,15 @@ public interface DLDocumentTypePersistence extends BasePersistence<DLDocumentTyp
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Gets an ordered range of all the d d m structures associated with the d l document type.
+	* Returns an ordered range of all the d d m structures associated with the d l document type.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param pk the primary key of the d l document type to get the associated d d m structures for
-	* @param start the lower bound of the range of d l document types to return
-	* @param end the upper bound of the range of d l document types to return (not inclusive)
+	* @param pk the primary key of the d l document type
+	* @param start the lower bound of the range of d l document types
+	* @param end the upper bound of the range of d l document types (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of d d m structures associated with the d l document type
 	* @throws SystemException if a system exception occurred
@@ -649,9 +641,9 @@ public interface DLDocumentTypePersistence extends BasePersistence<DLDocumentTyp
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Gets the number of d d m structures associated with the d l document type.
+	* Returns the number of d d m structures associated with the d l document type.
 	*
-	* @param pk the primary key of the d l document type to get the number of associated d d m structures for
+	* @param pk the primary key of the d l document type
 	* @return the number of d d m structures associated with the d l document type
 	* @throws SystemException if a system exception occurred
 	*/
@@ -775,7 +767,7 @@ public interface DLDocumentTypePersistence extends BasePersistence<DLDocumentTyp
 	/**
 	* Sets the d d m structures associated with the d l document type, removing and adding associations as necessary. Also notifies the appropriate model listeners and clears the mapping table finder cache.
 	*
-	* @param pk the primary key of the d l document type to set the associations for
+	* @param pk the primary key of the d l document type
 	* @param ddmStructurePKs the primary keys of the d d m structures to be associated with the d l document type
 	* @throws SystemException if a system exception occurred
 	*/
@@ -785,7 +777,7 @@ public interface DLDocumentTypePersistence extends BasePersistence<DLDocumentTyp
 	/**
 	* Sets the d d m structures associated with the d l document type, removing and adding associations as necessary. Also notifies the appropriate model listeners and clears the mapping table finder cache.
 	*
-	* @param pk the primary key of the d l document type to set the associations for
+	* @param pk the primary key of the d l document type
 	* @param ddmStructures the d d m structures to be associated with the d l document type
 	* @throws SystemException if a system exception occurred
 	*/

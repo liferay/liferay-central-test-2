@@ -33,7 +33,7 @@ public class DLFileShortcutLocalServiceWrapper
 	/**
 	* Adds the d l file shortcut to the database. Also notifies the appropriate model listeners.
 	*
-	* @param dlFileShortcut the d l file shortcut to add
+	* @param dlFileShortcut the d l file shortcut
 	* @return the d l file shortcut that was added
 	* @throws SystemException if a system exception occurred
 	*/
@@ -57,7 +57,7 @@ public class DLFileShortcutLocalServiceWrapper
 	/**
 	* Deletes the d l file shortcut with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param fileShortcutId the primary key of the d l file shortcut to delete
+	* @param fileShortcutId the primary key of the d l file shortcut
 	* @throws PortalException if a d l file shortcut with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -70,7 +70,7 @@ public class DLFileShortcutLocalServiceWrapper
 	/**
 	* Deletes the d l file shortcut from the database. Also notifies the appropriate model listeners.
 	*
-	* @param dlFileShortcut the d l file shortcut to delete
+	* @param dlFileShortcut the d l file shortcut
 	* @throws SystemException if a system exception occurred
 	*/
 	public void deleteDLFileShortcut(
@@ -82,7 +82,7 @@ public class DLFileShortcutLocalServiceWrapper
 	/**
 	* Performs a dynamic query on the database and returns the matching rows.
 	*
-	* @param dynamicQuery the dynamic query to search with
+	* @param dynamicQuery the dynamic query
 	* @return the matching rows
 	* @throws SystemException if a system exception occurred
 	*/
@@ -100,9 +100,9 @@ public class DLFileShortcutLocalServiceWrapper
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param dynamicQuery the dynamic query to search with
-	* @param start the lower bound of the range of model instances to return
-	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param dynamicQuery the dynamic query
+	* @param start the lower bound of the range of model instances
+	* @param end the upper bound of the range of model instances (not inclusive)
 	* @return the range of matching rows
 	* @throws SystemException if a system exception occurred
 	*/
@@ -120,9 +120,9 @@ public class DLFileShortcutLocalServiceWrapper
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param dynamicQuery the dynamic query to search with
-	* @param start the lower bound of the range of model instances to return
-	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param dynamicQuery the dynamic query
+	* @param start the lower bound of the range of model instances
+	* @param end the upper bound of the range of model instances (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching rows
 	* @throws SystemException if a system exception occurred
@@ -138,9 +138,9 @@ public class DLFileShortcutLocalServiceWrapper
 	}
 
 	/**
-	* Counts the number of rows that match the dynamic query.
+	* Returns the number of rows that match the dynamic query.
 	*
-	* @param dynamicQuery the dynamic query to search with
+	* @param dynamicQuery the dynamic query
 	* @return the number of rows that match the dynamic query
 	* @throws SystemException if a system exception occurred
 	*/
@@ -151,9 +151,9 @@ public class DLFileShortcutLocalServiceWrapper
 	}
 
 	/**
-	* Gets the d l file shortcut with the primary key.
+	* Returns the d l file shortcut with the primary key.
 	*
-	* @param fileShortcutId the primary key of the d l file shortcut to get
+	* @param fileShortcutId the primary key of the d l file shortcut
 	* @return the d l file shortcut
 	* @throws PortalException if a d l file shortcut with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -166,12 +166,12 @@ public class DLFileShortcutLocalServiceWrapper
 	}
 
 	/**
-	* Gets the d l file shortcut with the UUID and group id.
+	* Returns the d l file shortcut with the UUID in the group.
 	*
-	* @param uuid the UUID of d l file shortcut to get
-	* @param groupId the group id of the d l file shortcut to get
+	* @param uuid the UUID of d l file shortcut
+	* @param groupId the group id of the d l file shortcut
 	* @return the d l file shortcut
-	* @throws PortalException if a d l file shortcut with the UUID and group id could not be found
+	* @throws PortalException if a d l file shortcut with the UUID in the group could not be found
 	* @throws SystemException if a system exception occurred
 	*/
 	public com.liferay.portlet.documentlibrary.model.DLFileShortcut getDLFileShortcutByUuidAndGroupId(
@@ -183,14 +183,14 @@ public class DLFileShortcutLocalServiceWrapper
 	}
 
 	/**
-	* Gets a range of all the d l file shortcuts.
+	* Returns a range of all the d l file shortcuts.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of d l file shortcuts to return
-	* @param end the upper bound of the range of d l file shortcuts to return (not inclusive)
+	* @param start the lower bound of the range of d l file shortcuts
+	* @param end the upper bound of the range of d l file shortcuts (not inclusive)
 	* @return the range of d l file shortcuts
 	* @throws SystemException if a system exception occurred
 	*/
@@ -201,7 +201,7 @@ public class DLFileShortcutLocalServiceWrapper
 	}
 
 	/**
-	* Gets the number of d l file shortcuts.
+	* Returns the number of d l file shortcuts.
 	*
 	* @return the number of d l file shortcuts
 	* @throws SystemException if a system exception occurred
@@ -214,7 +214,7 @@ public class DLFileShortcutLocalServiceWrapper
 	/**
 	* Updates the d l file shortcut in the database. Also notifies the appropriate model listeners.
 	*
-	* @param dlFileShortcut the d l file shortcut to update
+	* @param dlFileShortcut the d l file shortcut
 	* @return the d l file shortcut that was updated
 	* @throws SystemException if a system exception occurred
 	*/
@@ -227,7 +227,7 @@ public class DLFileShortcutLocalServiceWrapper
 	/**
 	* Updates the d l file shortcut in the database. Also notifies the appropriate model listeners.
 	*
-	* @param dlFileShortcut the d l file shortcut to update
+	* @param dlFileShortcut the d l file shortcut
 	* @param merge whether to merge the d l file shortcut with the current session. See {@link com.liferay.portal.service.persistence.BatchSession#update(com.liferay.portal.kernel.dao.orm.Session, com.liferay.portal.model.BaseModel, boolean)} for an explanation.
 	* @return the d l file shortcut that was updated
 	* @throws SystemException if a system exception occurred
@@ -241,7 +241,7 @@ public class DLFileShortcutLocalServiceWrapper
 	}
 
 	/**
-	* Gets the Spring bean ID for this bean.
+	* Returns the Spring bean ID for this bean.
 	*
 	* @return the Spring bean ID for this bean
 	*/

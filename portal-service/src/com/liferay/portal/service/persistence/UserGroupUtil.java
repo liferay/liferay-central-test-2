@@ -120,7 +120,7 @@ public class UserGroupUtil {
 	/**
 	* Caches the user group in the entity cache if it is enabled.
 	*
-	* @param userGroup the user group to cache
+	* @param userGroup the user group
 	*/
 	public static void cacheResult(com.liferay.portal.model.UserGroup userGroup) {
 		getPersistence().cacheResult(userGroup);
@@ -129,7 +129,7 @@ public class UserGroupUtil {
 	/**
 	* Caches the user groups in the entity cache if it is enabled.
 	*
-	* @param userGroups the user groups to cache
+	* @param userGroups the user groups
 	*/
 	public static void cacheResult(
 		java.util.List<com.liferay.portal.model.UserGroup> userGroups) {
@@ -149,7 +149,7 @@ public class UserGroupUtil {
 	/**
 	* Removes the user group with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param userGroupId the primary key of the user group to remove
+	* @param userGroupId the primary key of the user group
 	* @return the user group that was removed
 	* @throws com.liferay.portal.NoSuchUserGroupException if a user group with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -167,9 +167,9 @@ public class UserGroupUtil {
 	}
 
 	/**
-	* Finds the user group with the primary key or throws a {@link com.liferay.portal.NoSuchUserGroupException} if it could not be found.
+	* Returns the user group with the primary key or throws a {@link com.liferay.portal.NoSuchUserGroupException} if it could not be found.
 	*
-	* @param userGroupId the primary key of the user group to find
+	* @param userGroupId the primary key of the user group
 	* @return the user group
 	* @throws com.liferay.portal.NoSuchUserGroupException if a user group with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -182,9 +182,9 @@ public class UserGroupUtil {
 	}
 
 	/**
-	* Finds the user group with the primary key or returns <code>null</code> if it could not be found.
+	* Returns the user group with the primary key or returns <code>null</code> if it could not be found.
 	*
-	* @param userGroupId the primary key of the user group to find
+	* @param userGroupId the primary key of the user group
 	* @return the user group, or <code>null</code> if a user group with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -195,9 +195,9 @@ public class UserGroupUtil {
 	}
 
 	/**
-	* Finds all the user groups where companyId = &#63;.
+	* Returns all the user groups where companyId = &#63;.
 	*
-	* @param companyId the company ID to search with
+	* @param companyId the company ID
 	* @return the matching user groups
 	* @throws SystemException if a system exception occurred
 	*/
@@ -208,15 +208,15 @@ public class UserGroupUtil {
 	}
 
 	/**
-	* Finds a range of all the user groups where companyId = &#63;.
+	* Returns a range of all the user groups where companyId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company ID to search with
-	* @param start the lower bound of the range of user groups to return
-	* @param end the upper bound of the range of user groups to return (not inclusive)
+	* @param companyId the company ID
+	* @param start the lower bound of the range of user groups
+	* @param end the upper bound of the range of user groups (not inclusive)
 	* @return the range of matching user groups
 	* @throws SystemException if a system exception occurred
 	*/
@@ -227,15 +227,15 @@ public class UserGroupUtil {
 	}
 
 	/**
-	* Finds an ordered range of all the user groups where companyId = &#63;.
+	* Returns an ordered range of all the user groups where companyId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company ID to search with
-	* @param start the lower bound of the range of user groups to return
-	* @param end the upper bound of the range of user groups to return (not inclusive)
+	* @param companyId the company ID
+	* @param start the lower bound of the range of user groups
+	* @param end the upper bound of the range of user groups (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching user groups
 	* @throws SystemException if a system exception occurred
@@ -249,13 +249,13 @@ public class UserGroupUtil {
 	}
 
 	/**
-	* Finds the first user group in the ordered set where companyId = &#63;.
+	* Returns the first user group in the ordered set where companyId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company ID to search with
+	* @param companyId the company ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching user group
 	* @throws com.liferay.portal.NoSuchUserGroupException if a matching user group could not be found
@@ -271,13 +271,13 @@ public class UserGroupUtil {
 	}
 
 	/**
-	* Finds the last user group in the ordered set where companyId = &#63;.
+	* Returns the last user group in the ordered set where companyId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company ID to search with
+	* @param companyId the company ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching user group
 	* @throws com.liferay.portal.NoSuchUserGroupException if a matching user group could not be found
@@ -293,14 +293,14 @@ public class UserGroupUtil {
 	}
 
 	/**
-	* Finds the user groups before and after the current user group in the ordered set where companyId = &#63;.
+	* Returns the user groups before and after the current user group in the ordered set where companyId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
 	* @param userGroupId the primary key of the current user group
-	* @param companyId the company ID to search with
+	* @param companyId the company ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next user group
 	* @throws com.liferay.portal.NoSuchUserGroupException if a user group with the primary key could not be found
@@ -317,9 +317,9 @@ public class UserGroupUtil {
 	}
 
 	/**
-	* Filters by the user's permissions and finds all the user groups where companyId = &#63;.
+	* Returns all the user groups that the user has permission to view where companyId = &#63;.
 	*
-	* @param companyId the company ID to search with
+	* @param companyId the company ID
 	* @return the matching user groups that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -330,15 +330,15 @@ public class UserGroupUtil {
 	}
 
 	/**
-	* Filters by the user's permissions and finds a range of all the user groups where companyId = &#63;.
+	* Returns a range of all the user groups that the user has permission to view where companyId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company ID to search with
-	* @param start the lower bound of the range of user groups to return
-	* @param end the upper bound of the range of user groups to return (not inclusive)
+	* @param companyId the company ID
+	* @param start the lower bound of the range of user groups
+	* @param end the upper bound of the range of user groups (not inclusive)
 	* @return the range of matching user groups that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -349,15 +349,15 @@ public class UserGroupUtil {
 	}
 
 	/**
-	* Filters by the user's permissions and finds an ordered range of all the user groups where companyId = &#63;.
+	* Returns an ordered range of all the user groups that the user has permissions to view where companyId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company ID to search with
-	* @param start the lower bound of the range of user groups to return
-	* @param end the upper bound of the range of user groups to return (not inclusive)
+	* @param companyId the company ID
+	* @param start the lower bound of the range of user groups
+	* @param end the upper bound of the range of user groups (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching user groups that the user has permission to view
 	* @throws SystemException if a system exception occurred
@@ -372,14 +372,10 @@ public class UserGroupUtil {
 	}
 
 	/**
-	* Filters the user groups before and after the current user group in the ordered set where companyId = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
-	* </p>
+	* Returns the user groups before and after the current user group in the ordered set of user groups that the user has permission to view where companyId = &#63;.
 	*
 	* @param userGroupId the primary key of the current user group
-	* @param companyId the company ID to search with
+	* @param companyId the company ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next user group
 	* @throws com.liferay.portal.NoSuchUserGroupException if a user group with the primary key could not be found
@@ -396,10 +392,10 @@ public class UserGroupUtil {
 	}
 
 	/**
-	* Finds all the user groups where companyId = &#63; and parentUserGroupId = &#63;.
+	* Returns all the user groups where companyId = &#63; and parentUserGroupId = &#63;.
 	*
-	* @param companyId the company ID to search with
-	* @param parentUserGroupId the parent user group ID to search with
+	* @param companyId the company ID
+	* @param parentUserGroupId the parent user group ID
 	* @return the matching user groups
 	* @throws SystemException if a system exception occurred
 	*/
@@ -410,16 +406,16 @@ public class UserGroupUtil {
 	}
 
 	/**
-	* Finds a range of all the user groups where companyId = &#63; and parentUserGroupId = &#63;.
+	* Returns a range of all the user groups where companyId = &#63; and parentUserGroupId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company ID to search with
-	* @param parentUserGroupId the parent user group ID to search with
-	* @param start the lower bound of the range of user groups to return
-	* @param end the upper bound of the range of user groups to return (not inclusive)
+	* @param companyId the company ID
+	* @param parentUserGroupId the parent user group ID
+	* @param start the lower bound of the range of user groups
+	* @param end the upper bound of the range of user groups (not inclusive)
 	* @return the range of matching user groups
 	* @throws SystemException if a system exception occurred
 	*/
@@ -431,16 +427,16 @@ public class UserGroupUtil {
 	}
 
 	/**
-	* Finds an ordered range of all the user groups where companyId = &#63; and parentUserGroupId = &#63;.
+	* Returns an ordered range of all the user groups where companyId = &#63; and parentUserGroupId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company ID to search with
-	* @param parentUserGroupId the parent user group ID to search with
-	* @param start the lower bound of the range of user groups to return
-	* @param end the upper bound of the range of user groups to return (not inclusive)
+	* @param companyId the company ID
+	* @param parentUserGroupId the parent user group ID
+	* @param start the lower bound of the range of user groups
+	* @param end the upper bound of the range of user groups (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching user groups
 	* @throws SystemException if a system exception occurred
@@ -455,14 +451,14 @@ public class UserGroupUtil {
 	}
 
 	/**
-	* Finds the first user group in the ordered set where companyId = &#63; and parentUserGroupId = &#63;.
+	* Returns the first user group in the ordered set where companyId = &#63; and parentUserGroupId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company ID to search with
-	* @param parentUserGroupId the parent user group ID to search with
+	* @param companyId the company ID
+	* @param parentUserGroupId the parent user group ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching user group
 	* @throws com.liferay.portal.NoSuchUserGroupException if a matching user group could not be found
@@ -479,14 +475,14 @@ public class UserGroupUtil {
 	}
 
 	/**
-	* Finds the last user group in the ordered set where companyId = &#63; and parentUserGroupId = &#63;.
+	* Returns the last user group in the ordered set where companyId = &#63; and parentUserGroupId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company ID to search with
-	* @param parentUserGroupId the parent user group ID to search with
+	* @param companyId the company ID
+	* @param parentUserGroupId the parent user group ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching user group
 	* @throws com.liferay.portal.NoSuchUserGroupException if a matching user group could not be found
@@ -503,15 +499,15 @@ public class UserGroupUtil {
 	}
 
 	/**
-	* Finds the user groups before and after the current user group in the ordered set where companyId = &#63; and parentUserGroupId = &#63;.
+	* Returns the user groups before and after the current user group in the ordered set where companyId = &#63; and parentUserGroupId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
 	* @param userGroupId the primary key of the current user group
-	* @param companyId the company ID to search with
-	* @param parentUserGroupId the parent user group ID to search with
+	* @param companyId the company ID
+	* @param parentUserGroupId the parent user group ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next user group
 	* @throws com.liferay.portal.NoSuchUserGroupException if a user group with the primary key could not be found
@@ -528,10 +524,10 @@ public class UserGroupUtil {
 	}
 
 	/**
-	* Filters by the user's permissions and finds all the user groups where companyId = &#63; and parentUserGroupId = &#63;.
+	* Returns all the user groups that the user has permission to view where companyId = &#63; and parentUserGroupId = &#63;.
 	*
-	* @param companyId the company ID to search with
-	* @param parentUserGroupId the parent user group ID to search with
+	* @param companyId the company ID
+	* @param parentUserGroupId the parent user group ID
 	* @return the matching user groups that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -542,16 +538,16 @@ public class UserGroupUtil {
 	}
 
 	/**
-	* Filters by the user's permissions and finds a range of all the user groups where companyId = &#63; and parentUserGroupId = &#63;.
+	* Returns a range of all the user groups that the user has permission to view where companyId = &#63; and parentUserGroupId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company ID to search with
-	* @param parentUserGroupId the parent user group ID to search with
-	* @param start the lower bound of the range of user groups to return
-	* @param end the upper bound of the range of user groups to return (not inclusive)
+	* @param companyId the company ID
+	* @param parentUserGroupId the parent user group ID
+	* @param start the lower bound of the range of user groups
+	* @param end the upper bound of the range of user groups (not inclusive)
 	* @return the range of matching user groups that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -563,16 +559,16 @@ public class UserGroupUtil {
 	}
 
 	/**
-	* Filters by the user's permissions and finds an ordered range of all the user groups where companyId = &#63; and parentUserGroupId = &#63;.
+	* Returns an ordered range of all the user groups that the user has permissions to view where companyId = &#63; and parentUserGroupId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company ID to search with
-	* @param parentUserGroupId the parent user group ID to search with
-	* @param start the lower bound of the range of user groups to return
-	* @param end the upper bound of the range of user groups to return (not inclusive)
+	* @param companyId the company ID
+	* @param parentUserGroupId the parent user group ID
+	* @param start the lower bound of the range of user groups
+	* @param end the upper bound of the range of user groups (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching user groups that the user has permission to view
 	* @throws SystemException if a system exception occurred
@@ -587,15 +583,11 @@ public class UserGroupUtil {
 	}
 
 	/**
-	* Filters the user groups before and after the current user group in the ordered set where companyId = &#63; and parentUserGroupId = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
-	* </p>
+	* Returns the user groups before and after the current user group in the ordered set of user groups that the user has permission to view where companyId = &#63; and parentUserGroupId = &#63;.
 	*
 	* @param userGroupId the primary key of the current user group
-	* @param companyId the company ID to search with
-	* @param parentUserGroupId the parent user group ID to search with
+	* @param companyId the company ID
+	* @param parentUserGroupId the parent user group ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next user group
 	* @throws com.liferay.portal.NoSuchUserGroupException if a user group with the primary key could not be found
@@ -612,10 +604,10 @@ public class UserGroupUtil {
 	}
 
 	/**
-	* Finds the user group where companyId = &#63; and name = &#63; or throws a {@link com.liferay.portal.NoSuchUserGroupException} if it could not be found.
+	* Returns the user group where companyId = &#63; and name = &#63; or throws a {@link com.liferay.portal.NoSuchUserGroupException} if it could not be found.
 	*
-	* @param companyId the company ID to search with
-	* @param name the name to search with
+	* @param companyId the company ID
+	* @param name the name
 	* @return the matching user group
 	* @throws com.liferay.portal.NoSuchUserGroupException if a matching user group could not be found
 	* @throws SystemException if a system exception occurred
@@ -628,10 +620,10 @@ public class UserGroupUtil {
 	}
 
 	/**
-	* Finds the user group where companyId = &#63; and name = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	* Returns the user group where companyId = &#63; and name = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	*
-	* @param companyId the company ID to search with
-	* @param name the name to search with
+	* @param companyId the company ID
+	* @param name the name
 	* @return the matching user group, or <code>null</code> if a matching user group could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -642,10 +634,10 @@ public class UserGroupUtil {
 	}
 
 	/**
-	* Finds the user group where companyId = &#63; and name = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	* Returns the user group where companyId = &#63; and name = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
-	* @param companyId the company ID to search with
-	* @param name the name to search with
+	* @param companyId the company ID
+	* @param name the name
 	* @return the matching user group, or <code>null</code> if a matching user group could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -656,7 +648,7 @@ public class UserGroupUtil {
 	}
 
 	/**
-	* Finds all the user groups.
+	* Returns all the user groups.
 	*
 	* @return the user groups
 	* @throws SystemException if a system exception occurred
@@ -667,14 +659,14 @@ public class UserGroupUtil {
 	}
 
 	/**
-	* Finds a range of all the user groups.
+	* Returns a range of all the user groups.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of user groups to return
-	* @param end the upper bound of the range of user groups to return (not inclusive)
+	* @param start the lower bound of the range of user groups
+	* @param end the upper bound of the range of user groups (not inclusive)
 	* @return the range of user groups
 	* @throws SystemException if a system exception occurred
 	*/
@@ -685,14 +677,14 @@ public class UserGroupUtil {
 	}
 
 	/**
-	* Finds an ordered range of all the user groups.
+	* Returns an ordered range of all the user groups.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of user groups to return
-	* @param end the upper bound of the range of user groups to return (not inclusive)
+	* @param start the lower bound of the range of user groups
+	* @param end the upper bound of the range of user groups (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of user groups
 	* @throws SystemException if a system exception occurred
@@ -707,7 +699,7 @@ public class UserGroupUtil {
 	/**
 	* Removes all the user groups where companyId = &#63; from the database.
 	*
-	* @param companyId the company ID to search with
+	* @param companyId the company ID
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByCompanyId(long companyId)
@@ -718,8 +710,8 @@ public class UserGroupUtil {
 	/**
 	* Removes all the user groups where companyId = &#63; and parentUserGroupId = &#63; from the database.
 	*
-	* @param companyId the company ID to search with
-	* @param parentUserGroupId the parent user group ID to search with
+	* @param companyId the company ID
+	* @param parentUserGroupId the parent user group ID
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByC_P(long companyId, long parentUserGroupId)
@@ -730,8 +722,8 @@ public class UserGroupUtil {
 	/**
 	* Removes the user group where companyId = &#63; and name = &#63; from the database.
 	*
-	* @param companyId the company ID to search with
-	* @param name the name to search with
+	* @param companyId the company ID
+	* @param name the name
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByC_N(long companyId, java.lang.String name)
@@ -751,9 +743,9 @@ public class UserGroupUtil {
 	}
 
 	/**
-	* Counts all the user groups where companyId = &#63;.
+	* Returns the number of user groups where companyId = &#63;.
 	*
-	* @param companyId the company ID to search with
+	* @param companyId the company ID
 	* @return the number of matching user groups
 	* @throws SystemException if a system exception occurred
 	*/
@@ -763,9 +755,9 @@ public class UserGroupUtil {
 	}
 
 	/**
-	* Filters by the user's permissions and counts all the user groups where companyId = &#63;.
+	* Returns the number of user groups that the user has permission to view where companyId = &#63;.
 	*
-	* @param companyId the company ID to search with
+	* @param companyId the company ID
 	* @return the number of matching user groups that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -775,10 +767,10 @@ public class UserGroupUtil {
 	}
 
 	/**
-	* Counts all the user groups where companyId = &#63; and parentUserGroupId = &#63;.
+	* Returns the number of user groups where companyId = &#63; and parentUserGroupId = &#63;.
 	*
-	* @param companyId the company ID to search with
-	* @param parentUserGroupId the parent user group ID to search with
+	* @param companyId the company ID
+	* @param parentUserGroupId the parent user group ID
 	* @return the number of matching user groups
 	* @throws SystemException if a system exception occurred
 	*/
@@ -788,10 +780,10 @@ public class UserGroupUtil {
 	}
 
 	/**
-	* Filters by the user's permissions and counts all the user groups where companyId = &#63; and parentUserGroupId = &#63;.
+	* Returns the number of user groups that the user has permission to view where companyId = &#63; and parentUserGroupId = &#63;.
 	*
-	* @param companyId the company ID to search with
-	* @param parentUserGroupId the parent user group ID to search with
+	* @param companyId the company ID
+	* @param parentUserGroupId the parent user group ID
 	* @return the number of matching user groups that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -801,10 +793,10 @@ public class UserGroupUtil {
 	}
 
 	/**
-	* Counts all the user groups where companyId = &#63; and name = &#63;.
+	* Returns the number of user groups where companyId = &#63; and name = &#63;.
 	*
-	* @param companyId the company ID to search with
-	* @param name the name to search with
+	* @param companyId the company ID
+	* @param name the name
 	* @return the number of matching user groups
 	* @throws SystemException if a system exception occurred
 	*/
@@ -814,7 +806,7 @@ public class UserGroupUtil {
 	}
 
 	/**
-	* Counts all the user groups.
+	* Returns the number of user groups.
 	*
 	* @return the number of user groups
 	* @throws SystemException if a system exception occurred
@@ -825,9 +817,9 @@ public class UserGroupUtil {
 	}
 
 	/**
-	* Gets all the groups associated with the user group.
+	* Returns all the groups associated with the user group.
 	*
-	* @param pk the primary key of the user group to get the associated groups for
+	* @param pk the primary key of the user group
 	* @return the groups associated with the user group
 	* @throws SystemException if a system exception occurred
 	*/
@@ -837,15 +829,15 @@ public class UserGroupUtil {
 	}
 
 	/**
-	* Gets a range of all the groups associated with the user group.
+	* Returns a range of all the groups associated with the user group.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param pk the primary key of the user group to get the associated groups for
-	* @param start the lower bound of the range of user groups to return
-	* @param end the upper bound of the range of user groups to return (not inclusive)
+	* @param pk the primary key of the user group
+	* @param start the lower bound of the range of user groups
+	* @param end the upper bound of the range of user groups (not inclusive)
 	* @return the range of groups associated with the user group
 	* @throws SystemException if a system exception occurred
 	*/
@@ -856,15 +848,15 @@ public class UserGroupUtil {
 	}
 
 	/**
-	* Gets an ordered range of all the groups associated with the user group.
+	* Returns an ordered range of all the groups associated with the user group.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param pk the primary key of the user group to get the associated groups for
-	* @param start the lower bound of the range of user groups to return
-	* @param end the upper bound of the range of user groups to return (not inclusive)
+	* @param pk the primary key of the user group
+	* @param start the lower bound of the range of user groups
+	* @param end the upper bound of the range of user groups (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of groups associated with the user group
 	* @throws SystemException if a system exception occurred
@@ -877,9 +869,9 @@ public class UserGroupUtil {
 	}
 
 	/**
-	* Gets the number of groups associated with the user group.
+	* Returns the number of groups associated with the user group.
 	*
-	* @param pk the primary key of the user group to get the number of associated groups for
+	* @param pk the primary key of the user group
 	* @return the number of groups associated with the user group
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1025,7 +1017,7 @@ public class UserGroupUtil {
 	/**
 	* Sets the groups associated with the user group, removing and adding associations as necessary. Also notifies the appropriate model listeners and clears the mapping table finder cache.
 	*
-	* @param pk the primary key of the user group to set the associations for
+	* @param pk the primary key of the user group
 	* @param groupPKs the primary keys of the groups to be associated with the user group
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1037,7 +1029,7 @@ public class UserGroupUtil {
 	/**
 	* Sets the groups associated with the user group, removing and adding associations as necessary. Also notifies the appropriate model listeners and clears the mapping table finder cache.
 	*
-	* @param pk the primary key of the user group to set the associations for
+	* @param pk the primary key of the user group
 	* @param groups the groups to be associated with the user group
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1048,9 +1040,9 @@ public class UserGroupUtil {
 	}
 
 	/**
-	* Gets all the teams associated with the user group.
+	* Returns all the teams associated with the user group.
 	*
-	* @param pk the primary key of the user group to get the associated teams for
+	* @param pk the primary key of the user group
 	* @return the teams associated with the user group
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1060,15 +1052,15 @@ public class UserGroupUtil {
 	}
 
 	/**
-	* Gets a range of all the teams associated with the user group.
+	* Returns a range of all the teams associated with the user group.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param pk the primary key of the user group to get the associated teams for
-	* @param start the lower bound of the range of user groups to return
-	* @param end the upper bound of the range of user groups to return (not inclusive)
+	* @param pk the primary key of the user group
+	* @param start the lower bound of the range of user groups
+	* @param end the upper bound of the range of user groups (not inclusive)
 	* @return the range of teams associated with the user group
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1079,15 +1071,15 @@ public class UserGroupUtil {
 	}
 
 	/**
-	* Gets an ordered range of all the teams associated with the user group.
+	* Returns an ordered range of all the teams associated with the user group.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param pk the primary key of the user group to get the associated teams for
-	* @param start the lower bound of the range of user groups to return
-	* @param end the upper bound of the range of user groups to return (not inclusive)
+	* @param pk the primary key of the user group
+	* @param start the lower bound of the range of user groups
+	* @param end the upper bound of the range of user groups (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of teams associated with the user group
 	* @throws SystemException if a system exception occurred
@@ -1100,9 +1092,9 @@ public class UserGroupUtil {
 	}
 
 	/**
-	* Gets the number of teams associated with the user group.
+	* Returns the number of teams associated with the user group.
 	*
-	* @param pk the primary key of the user group to get the number of associated teams for
+	* @param pk the primary key of the user group
 	* @return the number of teams associated with the user group
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1248,7 +1240,7 @@ public class UserGroupUtil {
 	/**
 	* Sets the teams associated with the user group, removing and adding associations as necessary. Also notifies the appropriate model listeners and clears the mapping table finder cache.
 	*
-	* @param pk the primary key of the user group to set the associations for
+	* @param pk the primary key of the user group
 	* @param teamPKs the primary keys of the teams to be associated with the user group
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1260,7 +1252,7 @@ public class UserGroupUtil {
 	/**
 	* Sets the teams associated with the user group, removing and adding associations as necessary. Also notifies the appropriate model listeners and clears the mapping table finder cache.
 	*
-	* @param pk the primary key of the user group to set the associations for
+	* @param pk the primary key of the user group
 	* @param teams the teams to be associated with the user group
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1271,9 +1263,9 @@ public class UserGroupUtil {
 	}
 
 	/**
-	* Gets all the users associated with the user group.
+	* Returns all the users associated with the user group.
 	*
-	* @param pk the primary key of the user group to get the associated users for
+	* @param pk the primary key of the user group
 	* @return the users associated with the user group
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1283,15 +1275,15 @@ public class UserGroupUtil {
 	}
 
 	/**
-	* Gets a range of all the users associated with the user group.
+	* Returns a range of all the users associated with the user group.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param pk the primary key of the user group to get the associated users for
-	* @param start the lower bound of the range of user groups to return
-	* @param end the upper bound of the range of user groups to return (not inclusive)
+	* @param pk the primary key of the user group
+	* @param start the lower bound of the range of user groups
+	* @param end the upper bound of the range of user groups (not inclusive)
 	* @return the range of users associated with the user group
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1302,15 +1294,15 @@ public class UserGroupUtil {
 	}
 
 	/**
-	* Gets an ordered range of all the users associated with the user group.
+	* Returns an ordered range of all the users associated with the user group.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param pk the primary key of the user group to get the associated users for
-	* @param start the lower bound of the range of user groups to return
-	* @param end the upper bound of the range of user groups to return (not inclusive)
+	* @param pk the primary key of the user group
+	* @param start the lower bound of the range of user groups
+	* @param end the upper bound of the range of user groups (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of users associated with the user group
 	* @throws SystemException if a system exception occurred
@@ -1323,9 +1315,9 @@ public class UserGroupUtil {
 	}
 
 	/**
-	* Gets the number of users associated with the user group.
+	* Returns the number of users associated with the user group.
 	*
-	* @param pk the primary key of the user group to get the number of associated users for
+	* @param pk the primary key of the user group
 	* @return the number of users associated with the user group
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1471,7 +1463,7 @@ public class UserGroupUtil {
 	/**
 	* Sets the users associated with the user group, removing and adding associations as necessary. Also notifies the appropriate model listeners and clears the mapping table finder cache.
 	*
-	* @param pk the primary key of the user group to set the associations for
+	* @param pk the primary key of the user group
 	* @param userPKs the primary keys of the users to be associated with the user group
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1483,7 +1475,7 @@ public class UserGroupUtil {
 	/**
 	* Sets the users associated with the user group, removing and adding associations as necessary. Also notifies the appropriate model listeners and clears the mapping table finder cache.
 	*
-	* @param pk the primary key of the user group to set the associations for
+	* @param pk the primary key of the user group
 	* @param users the users to be associated with the user group
 	* @throws SystemException if a system exception occurred
 	*/

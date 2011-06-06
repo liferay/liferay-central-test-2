@@ -32,7 +32,7 @@ public class CalEventLocalServiceWrapper implements CalEventLocalService {
 	/**
 	* Adds the cal event to the database. Also notifies the appropriate model listeners.
 	*
-	* @param calEvent the cal event to add
+	* @param calEvent the cal event
 	* @return the cal event that was added
 	* @throws SystemException if a system exception occurred
 	*/
@@ -56,7 +56,7 @@ public class CalEventLocalServiceWrapper implements CalEventLocalService {
 	/**
 	* Deletes the cal event with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param eventId the primary key of the cal event to delete
+	* @param eventId the primary key of the cal event
 	* @throws PortalException if a cal event with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -69,7 +69,7 @@ public class CalEventLocalServiceWrapper implements CalEventLocalService {
 	/**
 	* Deletes the cal event from the database. Also notifies the appropriate model listeners.
 	*
-	* @param calEvent the cal event to delete
+	* @param calEvent the cal event
 	* @throws SystemException if a system exception occurred
 	*/
 	public void deleteCalEvent(
@@ -81,7 +81,7 @@ public class CalEventLocalServiceWrapper implements CalEventLocalService {
 	/**
 	* Performs a dynamic query on the database and returns the matching rows.
 	*
-	* @param dynamicQuery the dynamic query to search with
+	* @param dynamicQuery the dynamic query
 	* @return the matching rows
 	* @throws SystemException if a system exception occurred
 	*/
@@ -99,9 +99,9 @@ public class CalEventLocalServiceWrapper implements CalEventLocalService {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param dynamicQuery the dynamic query to search with
-	* @param start the lower bound of the range of model instances to return
-	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param dynamicQuery the dynamic query
+	* @param start the lower bound of the range of model instances
+	* @param end the upper bound of the range of model instances (not inclusive)
 	* @return the range of matching rows
 	* @throws SystemException if a system exception occurred
 	*/
@@ -119,9 +119,9 @@ public class CalEventLocalServiceWrapper implements CalEventLocalService {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param dynamicQuery the dynamic query to search with
-	* @param start the lower bound of the range of model instances to return
-	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param dynamicQuery the dynamic query
+	* @param start the lower bound of the range of model instances
+	* @param end the upper bound of the range of model instances (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching rows
 	* @throws SystemException if a system exception occurred
@@ -137,9 +137,9 @@ public class CalEventLocalServiceWrapper implements CalEventLocalService {
 	}
 
 	/**
-	* Counts the number of rows that match the dynamic query.
+	* Returns the number of rows that match the dynamic query.
 	*
-	* @param dynamicQuery the dynamic query to search with
+	* @param dynamicQuery the dynamic query
 	* @return the number of rows that match the dynamic query
 	* @throws SystemException if a system exception occurred
 	*/
@@ -150,9 +150,9 @@ public class CalEventLocalServiceWrapper implements CalEventLocalService {
 	}
 
 	/**
-	* Gets the cal event with the primary key.
+	* Returns the cal event with the primary key.
 	*
-	* @param eventId the primary key of the cal event to get
+	* @param eventId the primary key of the cal event
 	* @return the cal event
 	* @throws PortalException if a cal event with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -164,12 +164,12 @@ public class CalEventLocalServiceWrapper implements CalEventLocalService {
 	}
 
 	/**
-	* Gets the cal event with the UUID and group id.
+	* Returns the cal event with the UUID in the group.
 	*
-	* @param uuid the UUID of cal event to get
-	* @param groupId the group id of the cal event to get
+	* @param uuid the UUID of cal event
+	* @param groupId the group id of the cal event
 	* @return the cal event
-	* @throws PortalException if a cal event with the UUID and group id could not be found
+	* @throws PortalException if a cal event with the UUID in the group could not be found
 	* @throws SystemException if a system exception occurred
 	*/
 	public com.liferay.portlet.calendar.model.CalEvent getCalEventByUuidAndGroupId(
@@ -180,14 +180,14 @@ public class CalEventLocalServiceWrapper implements CalEventLocalService {
 	}
 
 	/**
-	* Gets a range of all the cal events.
+	* Returns a range of all the cal events.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of cal events to return
-	* @param end the upper bound of the range of cal events to return (not inclusive)
+	* @param start the lower bound of the range of cal events
+	* @param end the upper bound of the range of cal events (not inclusive)
 	* @return the range of cal events
 	* @throws SystemException if a system exception occurred
 	*/
@@ -198,7 +198,7 @@ public class CalEventLocalServiceWrapper implements CalEventLocalService {
 	}
 
 	/**
-	* Gets the number of cal events.
+	* Returns the number of cal events.
 	*
 	* @return the number of cal events
 	* @throws SystemException if a system exception occurred
@@ -211,7 +211,7 @@ public class CalEventLocalServiceWrapper implements CalEventLocalService {
 	/**
 	* Updates the cal event in the database. Also notifies the appropriate model listeners.
 	*
-	* @param calEvent the cal event to update
+	* @param calEvent the cal event
 	* @return the cal event that was updated
 	* @throws SystemException if a system exception occurred
 	*/
@@ -224,7 +224,7 @@ public class CalEventLocalServiceWrapper implements CalEventLocalService {
 	/**
 	* Updates the cal event in the database. Also notifies the appropriate model listeners.
 	*
-	* @param calEvent the cal event to update
+	* @param calEvent the cal event
 	* @param merge whether to merge the cal event with the current session. See {@link com.liferay.portal.service.persistence.BatchSession#update(com.liferay.portal.kernel.dao.orm.Session, com.liferay.portal.model.BaseModel, boolean)} for an explanation.
 	* @return the cal event that was updated
 	* @throws SystemException if a system exception occurred
@@ -236,7 +236,7 @@ public class CalEventLocalServiceWrapper implements CalEventLocalService {
 	}
 
 	/**
-	* Gets the Spring bean ID for this bean.
+	* Returns the Spring bean ID for this bean.
 	*
 	* @return the Spring bean ID for this bean
 	*/
@@ -292,12 +292,12 @@ public class CalEventLocalServiceWrapper implements CalEventLocalService {
 			guestPermissions);
 	}
 
-	public void addEventResources(long eventId,
-		boolean addGroupPermissions, boolean addGuestPermissions)
+	public void addEventResources(long eventId, boolean addGroupPermissions,
+		boolean addGuestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		_calEventLocalService.addEventResources(eventId,
-			addGroupPermissions, addGuestPermissions);
+		_calEventLocalService.addEventResources(eventId, addGroupPermissions,
+			addGuestPermissions);
 	}
 
 	public void addEventResources(long eventId,

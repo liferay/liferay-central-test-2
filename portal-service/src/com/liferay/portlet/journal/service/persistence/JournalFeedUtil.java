@@ -121,7 +121,7 @@ public class JournalFeedUtil {
 	/**
 	* Caches the journal feed in the entity cache if it is enabled.
 	*
-	* @param journalFeed the journal feed to cache
+	* @param journalFeed the journal feed
 	*/
 	public static void cacheResult(
 		com.liferay.portlet.journal.model.JournalFeed journalFeed) {
@@ -131,7 +131,7 @@ public class JournalFeedUtil {
 	/**
 	* Caches the journal feeds in the entity cache if it is enabled.
 	*
-	* @param journalFeeds the journal feeds to cache
+	* @param journalFeeds the journal feeds
 	*/
 	public static void cacheResult(
 		java.util.List<com.liferay.portlet.journal.model.JournalFeed> journalFeeds) {
@@ -151,7 +151,7 @@ public class JournalFeedUtil {
 	/**
 	* Removes the journal feed with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param id the primary key of the journal feed to remove
+	* @param id the primary key of the journal feed
 	* @return the journal feed that was removed
 	* @throws com.liferay.portlet.journal.NoSuchFeedException if a journal feed with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -169,9 +169,9 @@ public class JournalFeedUtil {
 	}
 
 	/**
-	* Finds the journal feed with the primary key or throws a {@link com.liferay.portlet.journal.NoSuchFeedException} if it could not be found.
+	* Returns the journal feed with the primary key or throws a {@link com.liferay.portlet.journal.NoSuchFeedException} if it could not be found.
 	*
-	* @param id the primary key of the journal feed to find
+	* @param id the primary key of the journal feed
 	* @return the journal feed
 	* @throws com.liferay.portlet.journal.NoSuchFeedException if a journal feed with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -184,9 +184,9 @@ public class JournalFeedUtil {
 	}
 
 	/**
-	* Finds the journal feed with the primary key or returns <code>null</code> if it could not be found.
+	* Returns the journal feed with the primary key or returns <code>null</code> if it could not be found.
 	*
-	* @param id the primary key of the journal feed to find
+	* @param id the primary key of the journal feed
 	* @return the journal feed, or <code>null</code> if a journal feed with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -196,9 +196,9 @@ public class JournalFeedUtil {
 	}
 
 	/**
-	* Finds all the journal feeds where uuid = &#63;.
+	* Returns all the journal feeds where uuid = &#63;.
 	*
-	* @param uuid the uuid to search with
+	* @param uuid the uuid
 	* @return the matching journal feeds
 	* @throws SystemException if a system exception occurred
 	*/
@@ -209,15 +209,15 @@ public class JournalFeedUtil {
 	}
 
 	/**
-	* Finds a range of all the journal feeds where uuid = &#63;.
+	* Returns a range of all the journal feeds where uuid = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param uuid the uuid to search with
-	* @param start the lower bound of the range of journal feeds to return
-	* @param end the upper bound of the range of journal feeds to return (not inclusive)
+	* @param uuid the uuid
+	* @param start the lower bound of the range of journal feeds
+	* @param end the upper bound of the range of journal feeds (not inclusive)
 	* @return the range of matching journal feeds
 	* @throws SystemException if a system exception occurred
 	*/
@@ -228,15 +228,15 @@ public class JournalFeedUtil {
 	}
 
 	/**
-	* Finds an ordered range of all the journal feeds where uuid = &#63;.
+	* Returns an ordered range of all the journal feeds where uuid = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param uuid the uuid to search with
-	* @param start the lower bound of the range of journal feeds to return
-	* @param end the upper bound of the range of journal feeds to return (not inclusive)
+	* @param uuid the uuid
+	* @param start the lower bound of the range of journal feeds
+	* @param end the upper bound of the range of journal feeds (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching journal feeds
 	* @throws SystemException if a system exception occurred
@@ -249,13 +249,13 @@ public class JournalFeedUtil {
 	}
 
 	/**
-	* Finds the first journal feed in the ordered set where uuid = &#63;.
+	* Returns the first journal feed in the ordered set where uuid = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param uuid the uuid to search with
+	* @param uuid the uuid
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching journal feed
 	* @throws com.liferay.portlet.journal.NoSuchFeedException if a matching journal feed could not be found
@@ -270,13 +270,13 @@ public class JournalFeedUtil {
 	}
 
 	/**
-	* Finds the last journal feed in the ordered set where uuid = &#63;.
+	* Returns the last journal feed in the ordered set where uuid = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param uuid the uuid to search with
+	* @param uuid the uuid
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching journal feed
 	* @throws com.liferay.portlet.journal.NoSuchFeedException if a matching journal feed could not be found
@@ -291,14 +291,14 @@ public class JournalFeedUtil {
 	}
 
 	/**
-	* Finds the journal feeds before and after the current journal feed in the ordered set where uuid = &#63;.
+	* Returns the journal feeds before and after the current journal feed in the ordered set where uuid = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
 	* @param id the primary key of the current journal feed
-	* @param uuid the uuid to search with
+	* @param uuid the uuid
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next journal feed
 	* @throws com.liferay.portlet.journal.NoSuchFeedException if a journal feed with the primary key could not be found
@@ -314,10 +314,10 @@ public class JournalFeedUtil {
 	}
 
 	/**
-	* Finds the journal feed where uuid = &#63; and groupId = &#63; or throws a {@link com.liferay.portlet.journal.NoSuchFeedException} if it could not be found.
+	* Returns the journal feed where uuid = &#63; and groupId = &#63; or throws a {@link com.liferay.portlet.journal.NoSuchFeedException} if it could not be found.
 	*
-	* @param uuid the uuid to search with
-	* @param groupId the group ID to search with
+	* @param uuid the uuid
+	* @param groupId the group ID
 	* @return the matching journal feed
 	* @throws com.liferay.portlet.journal.NoSuchFeedException if a matching journal feed could not be found
 	* @throws SystemException if a system exception occurred
@@ -330,10 +330,10 @@ public class JournalFeedUtil {
 	}
 
 	/**
-	* Finds the journal feed where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	* Returns the journal feed where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	*
-	* @param uuid the uuid to search with
-	* @param groupId the group ID to search with
+	* @param uuid the uuid
+	* @param groupId the group ID
 	* @return the matching journal feed, or <code>null</code> if a matching journal feed could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -344,10 +344,10 @@ public class JournalFeedUtil {
 	}
 
 	/**
-	* Finds the journal feed where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	* Returns the journal feed where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
-	* @param uuid the uuid to search with
-	* @param groupId the group ID to search with
+	* @param uuid the uuid
+	* @param groupId the group ID
 	* @return the matching journal feed, or <code>null</code> if a matching journal feed could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -358,9 +358,9 @@ public class JournalFeedUtil {
 	}
 
 	/**
-	* Finds all the journal feeds where groupId = &#63;.
+	* Returns all the journal feeds where groupId = &#63;.
 	*
-	* @param groupId the group ID to search with
+	* @param groupId the group ID
 	* @return the matching journal feeds
 	* @throws SystemException if a system exception occurred
 	*/
@@ -371,15 +371,15 @@ public class JournalFeedUtil {
 	}
 
 	/**
-	* Finds a range of all the journal feeds where groupId = &#63;.
+	* Returns a range of all the journal feeds where groupId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param start the lower bound of the range of journal feeds to return
-	* @param end the upper bound of the range of journal feeds to return (not inclusive)
+	* @param groupId the group ID
+	* @param start the lower bound of the range of journal feeds
+	* @param end the upper bound of the range of journal feeds (not inclusive)
 	* @return the range of matching journal feeds
 	* @throws SystemException if a system exception occurred
 	*/
@@ -390,15 +390,15 @@ public class JournalFeedUtil {
 	}
 
 	/**
-	* Finds an ordered range of all the journal feeds where groupId = &#63;.
+	* Returns an ordered range of all the journal feeds where groupId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param start the lower bound of the range of journal feeds to return
-	* @param end the upper bound of the range of journal feeds to return (not inclusive)
+	* @param groupId the group ID
+	* @param start the lower bound of the range of journal feeds
+	* @param end the upper bound of the range of journal feeds (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching journal feeds
 	* @throws SystemException if a system exception occurred
@@ -412,13 +412,13 @@ public class JournalFeedUtil {
 	}
 
 	/**
-	* Finds the first journal feed in the ordered set where groupId = &#63;.
+	* Returns the first journal feed in the ordered set where groupId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
+	* @param groupId the group ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching journal feed
 	* @throws com.liferay.portlet.journal.NoSuchFeedException if a matching journal feed could not be found
@@ -433,13 +433,13 @@ public class JournalFeedUtil {
 	}
 
 	/**
-	* Finds the last journal feed in the ordered set where groupId = &#63;.
+	* Returns the last journal feed in the ordered set where groupId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
+	* @param groupId the group ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching journal feed
 	* @throws com.liferay.portlet.journal.NoSuchFeedException if a matching journal feed could not be found
@@ -454,14 +454,14 @@ public class JournalFeedUtil {
 	}
 
 	/**
-	* Finds the journal feeds before and after the current journal feed in the ordered set where groupId = &#63;.
+	* Returns the journal feeds before and after the current journal feed in the ordered set where groupId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
 	* @param id the primary key of the current journal feed
-	* @param groupId the group ID to search with
+	* @param groupId the group ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next journal feed
 	* @throws com.liferay.portlet.journal.NoSuchFeedException if a journal feed with the primary key could not be found
@@ -477,9 +477,9 @@ public class JournalFeedUtil {
 	}
 
 	/**
-	* Filters by the user's permissions and finds all the journal feeds where groupId = &#63;.
+	* Returns all the journal feeds that the user has permission to view where groupId = &#63;.
 	*
-	* @param groupId the group ID to search with
+	* @param groupId the group ID
 	* @return the matching journal feeds that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -490,15 +490,15 @@ public class JournalFeedUtil {
 	}
 
 	/**
-	* Filters by the user's permissions and finds a range of all the journal feeds where groupId = &#63;.
+	* Returns a range of all the journal feeds that the user has permission to view where groupId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param start the lower bound of the range of journal feeds to return
-	* @param end the upper bound of the range of journal feeds to return (not inclusive)
+	* @param groupId the group ID
+	* @param start the lower bound of the range of journal feeds
+	* @param end the upper bound of the range of journal feeds (not inclusive)
 	* @return the range of matching journal feeds that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -509,15 +509,15 @@ public class JournalFeedUtil {
 	}
 
 	/**
-	* Filters by the user's permissions and finds an ordered range of all the journal feeds where groupId = &#63;.
+	* Returns an ordered range of all the journal feeds that the user has permissions to view where groupId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID to search with
-	* @param start the lower bound of the range of journal feeds to return
-	* @param end the upper bound of the range of journal feeds to return (not inclusive)
+	* @param groupId the group ID
+	* @param start the lower bound of the range of journal feeds
+	* @param end the upper bound of the range of journal feeds (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching journal feeds that the user has permission to view
 	* @throws SystemException if a system exception occurred
@@ -531,14 +531,10 @@ public class JournalFeedUtil {
 	}
 
 	/**
-	* Filters the journal feeds before and after the current journal feed in the ordered set where groupId = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
-	* </p>
+	* Returns the journal feeds before and after the current journal feed in the ordered set of journal feeds that the user has permission to view where groupId = &#63;.
 	*
 	* @param id the primary key of the current journal feed
-	* @param groupId the group ID to search with
+	* @param groupId the group ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next journal feed
 	* @throws com.liferay.portlet.journal.NoSuchFeedException if a journal feed with the primary key could not be found
@@ -555,10 +551,10 @@ public class JournalFeedUtil {
 	}
 
 	/**
-	* Finds the journal feed where groupId = &#63; and feedId = &#63; or throws a {@link com.liferay.portlet.journal.NoSuchFeedException} if it could not be found.
+	* Returns the journal feed where groupId = &#63; and feedId = &#63; or throws a {@link com.liferay.portlet.journal.NoSuchFeedException} if it could not be found.
 	*
-	* @param groupId the group ID to search with
-	* @param feedId the feed ID to search with
+	* @param groupId the group ID
+	* @param feedId the feed ID
 	* @return the matching journal feed
 	* @throws com.liferay.portlet.journal.NoSuchFeedException if a matching journal feed could not be found
 	* @throws SystemException if a system exception occurred
@@ -571,10 +567,10 @@ public class JournalFeedUtil {
 	}
 
 	/**
-	* Finds the journal feed where groupId = &#63; and feedId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	* Returns the journal feed where groupId = &#63; and feedId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	*
-	* @param groupId the group ID to search with
-	* @param feedId the feed ID to search with
+	* @param groupId the group ID
+	* @param feedId the feed ID
 	* @return the matching journal feed, or <code>null</code> if a matching journal feed could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -585,10 +581,10 @@ public class JournalFeedUtil {
 	}
 
 	/**
-	* Finds the journal feed where groupId = &#63; and feedId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	* Returns the journal feed where groupId = &#63; and feedId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
-	* @param groupId the group ID to search with
-	* @param feedId the feed ID to search with
+	* @param groupId the group ID
+	* @param feedId the feed ID
 	* @return the matching journal feed, or <code>null</code> if a matching journal feed could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -599,7 +595,7 @@ public class JournalFeedUtil {
 	}
 
 	/**
-	* Finds all the journal feeds.
+	* Returns all the journal feeds.
 	*
 	* @return the journal feeds
 	* @throws SystemException if a system exception occurred
@@ -610,14 +606,14 @@ public class JournalFeedUtil {
 	}
 
 	/**
-	* Finds a range of all the journal feeds.
+	* Returns a range of all the journal feeds.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of journal feeds to return
-	* @param end the upper bound of the range of journal feeds to return (not inclusive)
+	* @param start the lower bound of the range of journal feeds
+	* @param end the upper bound of the range of journal feeds (not inclusive)
 	* @return the range of journal feeds
 	* @throws SystemException if a system exception occurred
 	*/
@@ -628,14 +624,14 @@ public class JournalFeedUtil {
 	}
 
 	/**
-	* Finds an ordered range of all the journal feeds.
+	* Returns an ordered range of all the journal feeds.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of journal feeds to return
-	* @param end the upper bound of the range of journal feeds to return (not inclusive)
+	* @param start the lower bound of the range of journal feeds
+	* @param end the upper bound of the range of journal feeds (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of journal feeds
 	* @throws SystemException if a system exception occurred
@@ -650,7 +646,7 @@ public class JournalFeedUtil {
 	/**
 	* Removes all the journal feeds where uuid = &#63; from the database.
 	*
-	* @param uuid the uuid to search with
+	* @param uuid the uuid
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByUuid(java.lang.String uuid)
@@ -661,8 +657,8 @@ public class JournalFeedUtil {
 	/**
 	* Removes the journal feed where uuid = &#63; and groupId = &#63; from the database.
 	*
-	* @param uuid the uuid to search with
-	* @param groupId the group ID to search with
+	* @param uuid the uuid
+	* @param groupId the group ID
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByUUID_G(java.lang.String uuid, long groupId)
@@ -674,7 +670,7 @@ public class JournalFeedUtil {
 	/**
 	* Removes all the journal feeds where groupId = &#63; from the database.
 	*
-	* @param groupId the group ID to search with
+	* @param groupId the group ID
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByGroupId(long groupId)
@@ -685,8 +681,8 @@ public class JournalFeedUtil {
 	/**
 	* Removes the journal feed where groupId = &#63; and feedId = &#63; from the database.
 	*
-	* @param groupId the group ID to search with
-	* @param feedId the feed ID to search with
+	* @param groupId the group ID
+	* @param feedId the feed ID
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByG_F(long groupId, java.lang.String feedId)
@@ -706,9 +702,9 @@ public class JournalFeedUtil {
 	}
 
 	/**
-	* Counts all the journal feeds where uuid = &#63;.
+	* Returns the number of journal feeds where uuid = &#63;.
 	*
-	* @param uuid the uuid to search with
+	* @param uuid the uuid
 	* @return the number of matching journal feeds
 	* @throws SystemException if a system exception occurred
 	*/
@@ -718,10 +714,10 @@ public class JournalFeedUtil {
 	}
 
 	/**
-	* Counts all the journal feeds where uuid = &#63; and groupId = &#63;.
+	* Returns the number of journal feeds where uuid = &#63; and groupId = &#63;.
 	*
-	* @param uuid the uuid to search with
-	* @param groupId the group ID to search with
+	* @param uuid the uuid
+	* @param groupId the group ID
 	* @return the number of matching journal feeds
 	* @throws SystemException if a system exception occurred
 	*/
@@ -731,9 +727,9 @@ public class JournalFeedUtil {
 	}
 
 	/**
-	* Counts all the journal feeds where groupId = &#63;.
+	* Returns the number of journal feeds where groupId = &#63;.
 	*
-	* @param groupId the group ID to search with
+	* @param groupId the group ID
 	* @return the number of matching journal feeds
 	* @throws SystemException if a system exception occurred
 	*/
@@ -743,9 +739,9 @@ public class JournalFeedUtil {
 	}
 
 	/**
-	* Filters by the user's permissions and counts all the journal feeds where groupId = &#63;.
+	* Returns the number of journal feeds that the user has permission to view where groupId = &#63;.
 	*
-	* @param groupId the group ID to search with
+	* @param groupId the group ID
 	* @return the number of matching journal feeds that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -755,10 +751,10 @@ public class JournalFeedUtil {
 	}
 
 	/**
-	* Counts all the journal feeds where groupId = &#63; and feedId = &#63;.
+	* Returns the number of journal feeds where groupId = &#63; and feedId = &#63;.
 	*
-	* @param groupId the group ID to search with
-	* @param feedId the feed ID to search with
+	* @param groupId the group ID
+	* @param feedId the feed ID
 	* @return the number of matching journal feeds
 	* @throws SystemException if a system exception occurred
 	*/
@@ -768,7 +764,7 @@ public class JournalFeedUtil {
 	}
 
 	/**
-	* Counts all the journal feeds.
+	* Returns the number of journal feeds.
 	*
 	* @return the number of journal feeds
 	* @throws SystemException if a system exception occurred

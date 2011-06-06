@@ -49,21 +49,21 @@ public interface AnnouncementsEntryModel extends AttachedModel, AuditedModel,
 	 */
 
 	/**
-	 * Gets the primary key of this announcements entry.
+	 * Returns the primary key of this announcements entry.
 	 *
 	 * @return the primary key of this announcements entry
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this announcements entry
+	 * Sets the primary key of this announcements entry.
 	 *
 	 * @param primaryKey the primary key of this announcements entry
 	 */
 	public void setPrimaryKey(long primaryKey);
 
 	/**
-	 * Gets the uuid of this announcements entry.
+	 * Returns the uuid of this announcements entry.
 	 *
 	 * @return the uuid of this announcements entry
 	 */
@@ -78,7 +78,7 @@ public interface AnnouncementsEntryModel extends AttachedModel, AuditedModel,
 	public void setUuid(String uuid);
 
 	/**
-	 * Gets the entry ID of this announcements entry.
+	 * Returns the entry ID of this announcements entry.
 	 *
 	 * @return the entry ID of this announcements entry
 	 */
@@ -92,7 +92,7 @@ public interface AnnouncementsEntryModel extends AttachedModel, AuditedModel,
 	public void setEntryId(long entryId);
 
 	/**
-	 * Gets the company ID of this announcements entry.
+	 * Returns the company ID of this announcements entry.
 	 *
 	 * @return the company ID of this announcements entry
 	 */
@@ -106,7 +106,7 @@ public interface AnnouncementsEntryModel extends AttachedModel, AuditedModel,
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the user ID of this announcements entry.
+	 * Returns the user ID of this announcements entry.
 	 *
 	 * @return the user ID of this announcements entry
 	 */
@@ -120,7 +120,7 @@ public interface AnnouncementsEntryModel extends AttachedModel, AuditedModel,
 	public void setUserId(long userId);
 
 	/**
-	 * Gets the user uuid of this announcements entry.
+	 * Returns the user uuid of this announcements entry.
 	 *
 	 * @return the user uuid of this announcements entry
 	 * @throws SystemException if a system exception occurred
@@ -135,7 +135,7 @@ public interface AnnouncementsEntryModel extends AttachedModel, AuditedModel,
 	public void setUserUuid(String userUuid);
 
 	/**
-	 * Gets the user name of this announcements entry.
+	 * Returns the user name of this announcements entry.
 	 *
 	 * @return the user name of this announcements entry
 	 */
@@ -150,7 +150,7 @@ public interface AnnouncementsEntryModel extends AttachedModel, AuditedModel,
 	public void setUserName(String userName);
 
 	/**
-	 * Gets the create date of this announcements entry.
+	 * Returns the create date of this announcements entry.
 	 *
 	 * @return the create date of this announcements entry
 	 */
@@ -164,7 +164,7 @@ public interface AnnouncementsEntryModel extends AttachedModel, AuditedModel,
 	public void setCreateDate(Date createDate);
 
 	/**
-	 * Gets the modified date of this announcements entry.
+	 * Returns the modified date of this announcements entry.
 	 *
 	 * @return the modified date of this announcements entry
 	 */
@@ -178,14 +178,14 @@ public interface AnnouncementsEntryModel extends AttachedModel, AuditedModel,
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
-	 * Gets the class name of the model instance this announcements entry is polymorphically associated with.
+	 * Returns the fully qualified class name of this announcements entry.
 	 *
-	 * @return the class name of the model instance this announcements entry is polymorphically associated with
+	 * @return the fully qualified class name of this announcements entry
 	 */
 	public String getClassName();
 
 	/**
-	 * Gets the class name ID of this announcements entry.
+	 * Returns the class name ID of this announcements entry.
 	 *
 	 * @return the class name ID of this announcements entry
 	 */
@@ -199,7 +199,7 @@ public interface AnnouncementsEntryModel extends AttachedModel, AuditedModel,
 	public void setClassNameId(long classNameId);
 
 	/**
-	 * Gets the class p k of this announcements entry.
+	 * Returns the class p k of this announcements entry.
 	 *
 	 * @return the class p k of this announcements entry
 	 */
@@ -213,7 +213,7 @@ public interface AnnouncementsEntryModel extends AttachedModel, AuditedModel,
 	public void setClassPK(long classPK);
 
 	/**
-	 * Gets the title of this announcements entry.
+	 * Returns the title of this announcements entry.
 	 *
 	 * @return the title of this announcements entry
 	 */
@@ -228,7 +228,7 @@ public interface AnnouncementsEntryModel extends AttachedModel, AuditedModel,
 	public void setTitle(String title);
 
 	/**
-	 * Gets the content of this announcements entry.
+	 * Returns the content of this announcements entry.
 	 *
 	 * @return the content of this announcements entry
 	 */
@@ -243,7 +243,7 @@ public interface AnnouncementsEntryModel extends AttachedModel, AuditedModel,
 	public void setContent(String content);
 
 	/**
-	 * Gets the url of this announcements entry.
+	 * Returns the url of this announcements entry.
 	 *
 	 * @return the url of this announcements entry
 	 */
@@ -258,7 +258,7 @@ public interface AnnouncementsEntryModel extends AttachedModel, AuditedModel,
 	public void setUrl(String url);
 
 	/**
-	 * Gets the type of this announcements entry.
+	 * Returns the type of this announcements entry.
 	 *
 	 * @return the type of this announcements entry
 	 */
@@ -273,7 +273,7 @@ public interface AnnouncementsEntryModel extends AttachedModel, AuditedModel,
 	public void setType(String type);
 
 	/**
-	 * Gets the display date of this announcements entry.
+	 * Returns the display date of this announcements entry.
 	 *
 	 * @return the display date of this announcements entry
 	 */
@@ -287,7 +287,7 @@ public interface AnnouncementsEntryModel extends AttachedModel, AuditedModel,
 	public void setDisplayDate(Date displayDate);
 
 	/**
-	 * Gets the expiration date of this announcements entry.
+	 * Returns the expiration date of this announcements entry.
 	 *
 	 * @return the expiration date of this announcements entry
 	 */
@@ -301,7 +301,7 @@ public interface AnnouncementsEntryModel extends AttachedModel, AuditedModel,
 	public void setExpirationDate(Date expirationDate);
 
 	/**
-	 * Gets the priority of this announcements entry.
+	 * Returns the priority of this announcements entry.
 	 *
 	 * @return the priority of this announcements entry
 	 */
@@ -315,7 +315,7 @@ public interface AnnouncementsEntryModel extends AttachedModel, AuditedModel,
 	public void setPriority(int priority);
 
 	/**
-	 * Gets the alert of this announcements entry.
+	 * Returns the alert of this announcements entry.
 	 *
 	 * @return the alert of this announcements entry
 	 */

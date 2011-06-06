@@ -42,21 +42,21 @@ public interface ResourceModel extends BaseModel<Resource> {
 	 */
 
 	/**
-	 * Gets the primary key of this resource.
+	 * Returns the primary key of this resource.
 	 *
 	 * @return the primary key of this resource
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this resource
+	 * Sets the primary key of this resource.
 	 *
 	 * @param primaryKey the primary key of this resource
 	 */
 	public void setPrimaryKey(long primaryKey);
 
 	/**
-	 * Gets the resource ID of this resource.
+	 * Returns the resource ID of this resource.
 	 *
 	 * @return the resource ID of this resource
 	 */
@@ -70,7 +70,7 @@ public interface ResourceModel extends BaseModel<Resource> {
 	public void setResourceId(long resourceId);
 
 	/**
-	 * Gets the code ID of this resource.
+	 * Returns the code ID of this resource.
 	 *
 	 * @return the code ID of this resource
 	 */
@@ -84,7 +84,7 @@ public interface ResourceModel extends BaseModel<Resource> {
 	public void setCodeId(long codeId);
 
 	/**
-	 * Gets the prim key of this resource.
+	 * Returns the prim key of this resource.
 	 *
 	 * @return the prim key of this resource
 	 */

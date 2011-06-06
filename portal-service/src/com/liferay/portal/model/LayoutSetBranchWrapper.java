@@ -37,7 +37,7 @@ public class LayoutSetBranchWrapper implements LayoutSetBranch {
 	}
 
 	/**
-	* Gets the primary key of this layout set branch.
+	* Returns the primary key of this layout set branch.
 	*
 	* @return the primary key of this layout set branch
 	*/
@@ -46,7 +46,7 @@ public class LayoutSetBranchWrapper implements LayoutSetBranch {
 	}
 
 	/**
-	* Sets the primary key of this layout set branch
+	* Sets the primary key of this layout set branch.
 	*
 	* @param primaryKey the primary key of this layout set branch
 	*/
@@ -55,7 +55,7 @@ public class LayoutSetBranchWrapper implements LayoutSetBranch {
 	}
 
 	/**
-	* Gets the layout set branch ID of this layout set branch.
+	* Returns the layout set branch ID of this layout set branch.
 	*
 	* @return the layout set branch ID of this layout set branch
 	*/
@@ -73,7 +73,7 @@ public class LayoutSetBranchWrapper implements LayoutSetBranch {
 	}
 
 	/**
-	* Gets the group ID of this layout set branch.
+	* Returns the group ID of this layout set branch.
 	*
 	* @return the group ID of this layout set branch
 	*/
@@ -91,7 +91,7 @@ public class LayoutSetBranchWrapper implements LayoutSetBranch {
 	}
 
 	/**
-	* Gets the company ID of this layout set branch.
+	* Returns the company ID of this layout set branch.
 	*
 	* @return the company ID of this layout set branch
 	*/
@@ -109,7 +109,7 @@ public class LayoutSetBranchWrapper implements LayoutSetBranch {
 	}
 
 	/**
-	* Gets the user ID of this layout set branch.
+	* Returns the user ID of this layout set branch.
 	*
 	* @return the user ID of this layout set branch
 	*/
@@ -127,7 +127,7 @@ public class LayoutSetBranchWrapper implements LayoutSetBranch {
 	}
 
 	/**
-	* Gets the user uuid of this layout set branch.
+	* Returns the user uuid of this layout set branch.
 	*
 	* @return the user uuid of this layout set branch
 	* @throws SystemException if a system exception occurred
@@ -147,7 +147,7 @@ public class LayoutSetBranchWrapper implements LayoutSetBranch {
 	}
 
 	/**
-	* Gets the user name of this layout set branch.
+	* Returns the user name of this layout set branch.
 	*
 	* @return the user name of this layout set branch
 	*/
@@ -165,7 +165,7 @@ public class LayoutSetBranchWrapper implements LayoutSetBranch {
 	}
 
 	/**
-	* Gets the create date of this layout set branch.
+	* Returns the create date of this layout set branch.
 	*
 	* @return the create date of this layout set branch
 	*/
@@ -183,7 +183,7 @@ public class LayoutSetBranchWrapper implements LayoutSetBranch {
 	}
 
 	/**
-	* Gets the modified date of this layout set branch.
+	* Returns the modified date of this layout set branch.
 	*
 	* @return the modified date of this layout set branch
 	*/
@@ -201,7 +201,7 @@ public class LayoutSetBranchWrapper implements LayoutSetBranch {
 	}
 
 	/**
-	* Gets the private layout of this layout set branch.
+	* Returns the private layout of this layout set branch.
 	*
 	* @return the private layout of this layout set branch
 	*/
@@ -228,7 +228,7 @@ public class LayoutSetBranchWrapper implements LayoutSetBranch {
 	}
 
 	/**
-	* Gets the name of this layout set branch.
+	* Returns the name of this layout set branch.
 	*
 	* @return the name of this layout set branch
 	*/
@@ -246,7 +246,7 @@ public class LayoutSetBranchWrapper implements LayoutSetBranch {
 	}
 
 	/**
-	* Gets the description of this layout set branch.
+	* Returns the description of this layout set branch.
 	*
 	* @return the description of this layout set branch
 	*/

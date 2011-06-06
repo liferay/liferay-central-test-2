@@ -47,21 +47,21 @@ public interface IGImageModel extends BaseModel<IGImage>, GroupedModel {
 	 */
 
 	/**
-	 * Gets the primary key of this i g image.
+	 * Returns the primary key of this i g image.
 	 *
 	 * @return the primary key of this i g image
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this i g image
+	 * Sets the primary key of this i g image.
 	 *
 	 * @param primaryKey the primary key of this i g image
 	 */
 	public void setPrimaryKey(long primaryKey);
 
 	/**
-	 * Gets the uuid of this i g image.
+	 * Returns the uuid of this i g image.
 	 *
 	 * @return the uuid of this i g image
 	 */
@@ -76,7 +76,7 @@ public interface IGImageModel extends BaseModel<IGImage>, GroupedModel {
 	public void setUuid(String uuid);
 
 	/**
-	 * Gets the image ID of this i g image.
+	 * Returns the image ID of this i g image.
 	 *
 	 * @return the image ID of this i g image
 	 */
@@ -90,7 +90,7 @@ public interface IGImageModel extends BaseModel<IGImage>, GroupedModel {
 	public void setImageId(long imageId);
 
 	/**
-	 * Gets the group ID of this i g image.
+	 * Returns the group ID of this i g image.
 	 *
 	 * @return the group ID of this i g image
 	 */
@@ -104,7 +104,7 @@ public interface IGImageModel extends BaseModel<IGImage>, GroupedModel {
 	public void setGroupId(long groupId);
 
 	/**
-	 * Gets the company ID of this i g image.
+	 * Returns the company ID of this i g image.
 	 *
 	 * @return the company ID of this i g image
 	 */
@@ -118,7 +118,7 @@ public interface IGImageModel extends BaseModel<IGImage>, GroupedModel {
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the user ID of this i g image.
+	 * Returns the user ID of this i g image.
 	 *
 	 * @return the user ID of this i g image
 	 */
@@ -132,7 +132,7 @@ public interface IGImageModel extends BaseModel<IGImage>, GroupedModel {
 	public void setUserId(long userId);
 
 	/**
-	 * Gets the user uuid of this i g image.
+	 * Returns the user uuid of this i g image.
 	 *
 	 * @return the user uuid of this i g image
 	 * @throws SystemException if a system exception occurred
@@ -147,7 +147,7 @@ public interface IGImageModel extends BaseModel<IGImage>, GroupedModel {
 	public void setUserUuid(String userUuid);
 
 	/**
-	 * Gets the user name of this i g image.
+	 * Returns the user name of this i g image.
 	 *
 	 * @return the user name of this i g image
 	 */
@@ -162,7 +162,7 @@ public interface IGImageModel extends BaseModel<IGImage>, GroupedModel {
 	public void setUserName(String userName);
 
 	/**
-	 * Gets the create date of this i g image.
+	 * Returns the create date of this i g image.
 	 *
 	 * @return the create date of this i g image
 	 */
@@ -176,7 +176,7 @@ public interface IGImageModel extends BaseModel<IGImage>, GroupedModel {
 	public void setCreateDate(Date createDate);
 
 	/**
-	 * Gets the modified date of this i g image.
+	 * Returns the modified date of this i g image.
 	 *
 	 * @return the modified date of this i g image
 	 */
@@ -190,7 +190,7 @@ public interface IGImageModel extends BaseModel<IGImage>, GroupedModel {
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
-	 * Gets the folder ID of this i g image.
+	 * Returns the folder ID of this i g image.
 	 *
 	 * @return the folder ID of this i g image
 	 */
@@ -204,7 +204,7 @@ public interface IGImageModel extends BaseModel<IGImage>, GroupedModel {
 	public void setFolderId(long folderId);
 
 	/**
-	 * Gets the name of this i g image.
+	 * Returns the name of this i g image.
 	 *
 	 * @return the name of this i g image
 	 */
@@ -219,7 +219,7 @@ public interface IGImageModel extends BaseModel<IGImage>, GroupedModel {
 	public void setName(String name);
 
 	/**
-	 * Gets the description of this i g image.
+	 * Returns the description of this i g image.
 	 *
 	 * @return the description of this i g image
 	 */
@@ -234,7 +234,7 @@ public interface IGImageModel extends BaseModel<IGImage>, GroupedModel {
 	public void setDescription(String description);
 
 	/**
-	 * Gets the small image ID of this i g image.
+	 * Returns the small image ID of this i g image.
 	 *
 	 * @return the small image ID of this i g image
 	 */
@@ -248,7 +248,7 @@ public interface IGImageModel extends BaseModel<IGImage>, GroupedModel {
 	public void setSmallImageId(long smallImageId);
 
 	/**
-	 * Gets the large image ID of this i g image.
+	 * Returns the large image ID of this i g image.
 	 *
 	 * @return the large image ID of this i g image
 	 */
@@ -262,7 +262,7 @@ public interface IGImageModel extends BaseModel<IGImage>, GroupedModel {
 	public void setLargeImageId(long largeImageId);
 
 	/**
-	 * Gets the custom1 image ID of this i g image.
+	 * Returns the custom1 image ID of this i g image.
 	 *
 	 * @return the custom1 image ID of this i g image
 	 */
@@ -276,7 +276,7 @@ public interface IGImageModel extends BaseModel<IGImage>, GroupedModel {
 	public void setCustom1ImageId(long custom1ImageId);
 
 	/**
-	 * Gets the custom2 image ID of this i g image.
+	 * Returns the custom2 image ID of this i g image.
 	 *
 	 * @return the custom2 image ID of this i g image
 	 */

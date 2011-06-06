@@ -44,21 +44,21 @@ public interface DDMStructureLinkModel extends AttachedModel,
 	 */
 
 	/**
-	 * Gets the primary key of this d d m structure link.
+	 * Returns the primary key of this d d m structure link.
 	 *
 	 * @return the primary key of this d d m structure link
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this d d m structure link
+	 * Sets the primary key of this d d m structure link.
 	 *
 	 * @param primaryKey the primary key of this d d m structure link
 	 */
 	public void setPrimaryKey(long primaryKey);
 
 	/**
-	 * Gets the structure link ID of this d d m structure link.
+	 * Returns the structure link ID of this d d m structure link.
 	 *
 	 * @return the structure link ID of this d d m structure link
 	 */
@@ -72,14 +72,14 @@ public interface DDMStructureLinkModel extends AttachedModel,
 	public void setStructureLinkId(long structureLinkId);
 
 	/**
-	 * Gets the class name of the model instance this d d m structure link is polymorphically associated with.
+	 * Returns the fully qualified class name of this d d m structure link.
 	 *
-	 * @return the class name of the model instance this d d m structure link is polymorphically associated with
+	 * @return the fully qualified class name of this d d m structure link
 	 */
 	public String getClassName();
 
 	/**
-	 * Gets the class name ID of this d d m structure link.
+	 * Returns the class name ID of this d d m structure link.
 	 *
 	 * @return the class name ID of this d d m structure link
 	 */
@@ -93,7 +93,7 @@ public interface DDMStructureLinkModel extends AttachedModel,
 	public void setClassNameId(long classNameId);
 
 	/**
-	 * Gets the class p k of this d d m structure link.
+	 * Returns the class p k of this d d m structure link.
 	 *
 	 * @return the class p k of this d d m structure link
 	 */
@@ -107,7 +107,7 @@ public interface DDMStructureLinkModel extends AttachedModel,
 	public void setClassPK(long classPK);
 
 	/**
-	 * Gets the structure ID of this d d m structure link.
+	 * Returns the structure ID of this d d m structure link.
 	 *
 	 * @return the structure ID of this d d m structure link
 	 */

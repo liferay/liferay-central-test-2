@@ -119,7 +119,7 @@ public class CountryUtil {
 	/**
 	* Caches the country in the entity cache if it is enabled.
 	*
-	* @param country the country to cache
+	* @param country the country
 	*/
 	public static void cacheResult(com.liferay.portal.model.Country country) {
 		getPersistence().cacheResult(country);
@@ -128,7 +128,7 @@ public class CountryUtil {
 	/**
 	* Caches the countries in the entity cache if it is enabled.
 	*
-	* @param countries the countries to cache
+	* @param countries the countries
 	*/
 	public static void cacheResult(
 		java.util.List<com.liferay.portal.model.Country> countries) {
@@ -148,7 +148,7 @@ public class CountryUtil {
 	/**
 	* Removes the country with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param countryId the primary key of the country to remove
+	* @param countryId the primary key of the country
 	* @return the country that was removed
 	* @throws com.liferay.portal.NoSuchCountryException if a country with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -166,9 +166,9 @@ public class CountryUtil {
 	}
 
 	/**
-	* Finds the country with the primary key or throws a {@link com.liferay.portal.NoSuchCountryException} if it could not be found.
+	* Returns the country with the primary key or throws a {@link com.liferay.portal.NoSuchCountryException} if it could not be found.
 	*
-	* @param countryId the primary key of the country to find
+	* @param countryId the primary key of the country
 	* @return the country
 	* @throws com.liferay.portal.NoSuchCountryException if a country with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -181,9 +181,9 @@ public class CountryUtil {
 	}
 
 	/**
-	* Finds the country with the primary key or returns <code>null</code> if it could not be found.
+	* Returns the country with the primary key or returns <code>null</code> if it could not be found.
 	*
-	* @param countryId the primary key of the country to find
+	* @param countryId the primary key of the country
 	* @return the country, or <code>null</code> if a country with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -194,9 +194,9 @@ public class CountryUtil {
 	}
 
 	/**
-	* Finds the country where name = &#63; or throws a {@link com.liferay.portal.NoSuchCountryException} if it could not be found.
+	* Returns the country where name = &#63; or throws a {@link com.liferay.portal.NoSuchCountryException} if it could not be found.
 	*
-	* @param name the name to search with
+	* @param name the name
 	* @return the matching country
 	* @throws com.liferay.portal.NoSuchCountryException if a matching country could not be found
 	* @throws SystemException if a system exception occurred
@@ -209,9 +209,9 @@ public class CountryUtil {
 	}
 
 	/**
-	* Finds the country where name = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	* Returns the country where name = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	*
-	* @param name the name to search with
+	* @param name the name
 	* @return the matching country, or <code>null</code> if a matching country could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -222,9 +222,9 @@ public class CountryUtil {
 	}
 
 	/**
-	* Finds the country where name = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	* Returns the country where name = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
-	* @param name the name to search with
+	* @param name the name
 	* @return the matching country, or <code>null</code> if a matching country could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -235,9 +235,9 @@ public class CountryUtil {
 	}
 
 	/**
-	* Finds the country where a2 = &#63; or throws a {@link com.liferay.portal.NoSuchCountryException} if it could not be found.
+	* Returns the country where a2 = &#63; or throws a {@link com.liferay.portal.NoSuchCountryException} if it could not be found.
 	*
-	* @param a2 the a2 to search with
+	* @param a2 the a2
 	* @return the matching country
 	* @throws com.liferay.portal.NoSuchCountryException if a matching country could not be found
 	* @throws SystemException if a system exception occurred
@@ -249,9 +249,9 @@ public class CountryUtil {
 	}
 
 	/**
-	* Finds the country where a2 = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	* Returns the country where a2 = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	*
-	* @param a2 the a2 to search with
+	* @param a2 the a2
 	* @return the matching country, or <code>null</code> if a matching country could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -262,9 +262,9 @@ public class CountryUtil {
 	}
 
 	/**
-	* Finds the country where a2 = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	* Returns the country where a2 = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
-	* @param a2 the a2 to search with
+	* @param a2 the a2
 	* @return the matching country, or <code>null</code> if a matching country could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -275,9 +275,9 @@ public class CountryUtil {
 	}
 
 	/**
-	* Finds the country where a3 = &#63; or throws a {@link com.liferay.portal.NoSuchCountryException} if it could not be found.
+	* Returns the country where a3 = &#63; or throws a {@link com.liferay.portal.NoSuchCountryException} if it could not be found.
 	*
-	* @param a3 the a3 to search with
+	* @param a3 the a3
 	* @return the matching country
 	* @throws com.liferay.portal.NoSuchCountryException if a matching country could not be found
 	* @throws SystemException if a system exception occurred
@@ -289,9 +289,9 @@ public class CountryUtil {
 	}
 
 	/**
-	* Finds the country where a3 = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	* Returns the country where a3 = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	*
-	* @param a3 the a3 to search with
+	* @param a3 the a3
 	* @return the matching country, or <code>null</code> if a matching country could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -302,9 +302,9 @@ public class CountryUtil {
 	}
 
 	/**
-	* Finds the country where a3 = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	* Returns the country where a3 = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
-	* @param a3 the a3 to search with
+	* @param a3 the a3
 	* @return the matching country, or <code>null</code> if a matching country could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -315,9 +315,9 @@ public class CountryUtil {
 	}
 
 	/**
-	* Finds all the countries where active = &#63;.
+	* Returns all the countries where active = &#63;.
 	*
-	* @param active the active to search with
+	* @param active the active
 	* @return the matching countries
 	* @throws SystemException if a system exception occurred
 	*/
@@ -328,15 +328,15 @@ public class CountryUtil {
 	}
 
 	/**
-	* Finds a range of all the countries where active = &#63;.
+	* Returns a range of all the countries where active = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param active the active to search with
-	* @param start the lower bound of the range of countries to return
-	* @param end the upper bound of the range of countries to return (not inclusive)
+	* @param active the active
+	* @param start the lower bound of the range of countries
+	* @param end the upper bound of the range of countries (not inclusive)
 	* @return the range of matching countries
 	* @throws SystemException if a system exception occurred
 	*/
@@ -347,15 +347,15 @@ public class CountryUtil {
 	}
 
 	/**
-	* Finds an ordered range of all the countries where active = &#63;.
+	* Returns an ordered range of all the countries where active = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param active the active to search with
-	* @param start the lower bound of the range of countries to return
-	* @param end the upper bound of the range of countries to return (not inclusive)
+	* @param active the active
+	* @param start the lower bound of the range of countries
+	* @param end the upper bound of the range of countries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching countries
 	* @throws SystemException if a system exception occurred
@@ -369,13 +369,13 @@ public class CountryUtil {
 	}
 
 	/**
-	* Finds the first country in the ordered set where active = &#63;.
+	* Returns the first country in the ordered set where active = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param active the active to search with
+	* @param active the active
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching country
 	* @throws com.liferay.portal.NoSuchCountryException if a matching country could not be found
@@ -390,13 +390,13 @@ public class CountryUtil {
 	}
 
 	/**
-	* Finds the last country in the ordered set where active = &#63;.
+	* Returns the last country in the ordered set where active = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param active the active to search with
+	* @param active the active
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching country
 	* @throws com.liferay.portal.NoSuchCountryException if a matching country could not be found
@@ -411,14 +411,14 @@ public class CountryUtil {
 	}
 
 	/**
-	* Finds the countries before and after the current country in the ordered set where active = &#63;.
+	* Returns the countries before and after the current country in the ordered set where active = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
 	* @param countryId the primary key of the current country
-	* @param active the active to search with
+	* @param active the active
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next country
 	* @throws com.liferay.portal.NoSuchCountryException if a country with the primary key could not be found
@@ -435,7 +435,7 @@ public class CountryUtil {
 	}
 
 	/**
-	* Finds all the countries.
+	* Returns all the countries.
 	*
 	* @return the countries
 	* @throws SystemException if a system exception occurred
@@ -446,14 +446,14 @@ public class CountryUtil {
 	}
 
 	/**
-	* Finds a range of all the countries.
+	* Returns a range of all the countries.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of countries to return
-	* @param end the upper bound of the range of countries to return (not inclusive)
+	* @param start the lower bound of the range of countries
+	* @param end the upper bound of the range of countries (not inclusive)
 	* @return the range of countries
 	* @throws SystemException if a system exception occurred
 	*/
@@ -464,14 +464,14 @@ public class CountryUtil {
 	}
 
 	/**
-	* Finds an ordered range of all the countries.
+	* Returns an ordered range of all the countries.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of countries to return
-	* @param end the upper bound of the range of countries to return (not inclusive)
+	* @param start the lower bound of the range of countries
+	* @param end the upper bound of the range of countries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of countries
 	* @throws SystemException if a system exception occurred
@@ -486,7 +486,7 @@ public class CountryUtil {
 	/**
 	* Removes the country where name = &#63; from the database.
 	*
-	* @param name the name to search with
+	* @param name the name
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByName(java.lang.String name)
@@ -498,7 +498,7 @@ public class CountryUtil {
 	/**
 	* Removes the country where a2 = &#63; from the database.
 	*
-	* @param a2 the a2 to search with
+	* @param a2 the a2
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByA2(java.lang.String a2)
@@ -510,7 +510,7 @@ public class CountryUtil {
 	/**
 	* Removes the country where a3 = &#63; from the database.
 	*
-	* @param a3 the a3 to search with
+	* @param a3 the a3
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByA3(java.lang.String a3)
@@ -522,7 +522,7 @@ public class CountryUtil {
 	/**
 	* Removes all the countries where active = &#63; from the database.
 	*
-	* @param active the active to search with
+	* @param active the active
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByActive(boolean active)
@@ -541,9 +541,9 @@ public class CountryUtil {
 	}
 
 	/**
-	* Counts all the countries where name = &#63;.
+	* Returns the number of countries where name = &#63;.
 	*
-	* @param name the name to search with
+	* @param name the name
 	* @return the number of matching countries
 	* @throws SystemException if a system exception occurred
 	*/
@@ -553,9 +553,9 @@ public class CountryUtil {
 	}
 
 	/**
-	* Counts all the countries where a2 = &#63;.
+	* Returns the number of countries where a2 = &#63;.
 	*
-	* @param a2 the a2 to search with
+	* @param a2 the a2
 	* @return the number of matching countries
 	* @throws SystemException if a system exception occurred
 	*/
@@ -565,9 +565,9 @@ public class CountryUtil {
 	}
 
 	/**
-	* Counts all the countries where a3 = &#63;.
+	* Returns the number of countries where a3 = &#63;.
 	*
-	* @param a3 the a3 to search with
+	* @param a3 the a3
 	* @return the number of matching countries
 	* @throws SystemException if a system exception occurred
 	*/
@@ -577,9 +577,9 @@ public class CountryUtil {
 	}
 
 	/**
-	* Counts all the countries where active = &#63;.
+	* Returns the number of countries where active = &#63;.
 	*
-	* @param active the active to search with
+	* @param active the active
 	* @return the number of matching countries
 	* @throws SystemException if a system exception occurred
 	*/
@@ -589,7 +589,7 @@ public class CountryUtil {
 	}
 
 	/**
-	* Counts all the countries.
+	* Returns the number of countries.
 	*
 	* @return the number of countries
 	* @throws SystemException if a system exception occurred

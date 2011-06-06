@@ -37,7 +37,7 @@ public class OrgGroupPermissionWrapper implements OrgGroupPermission {
 	}
 
 	/**
-	* Gets the primary key of this org group permission.
+	* Returns the primary key of this org group permission.
 	*
 	* @return the primary key of this org group permission
 	*/
@@ -46,7 +46,7 @@ public class OrgGroupPermissionWrapper implements OrgGroupPermission {
 	}
 
 	/**
-	* Sets the primary key of this org group permission
+	* Sets the primary key of this org group permission.
 	*
 	* @param primaryKey the primary key of this org group permission
 	*/
@@ -56,7 +56,7 @@ public class OrgGroupPermissionWrapper implements OrgGroupPermission {
 	}
 
 	/**
-	* Gets the organization ID of this org group permission.
+	* Returns the organization ID of this org group permission.
 	*
 	* @return the organization ID of this org group permission
 	*/
@@ -74,7 +74,7 @@ public class OrgGroupPermissionWrapper implements OrgGroupPermission {
 	}
 
 	/**
-	* Gets the group ID of this org group permission.
+	* Returns the group ID of this org group permission.
 	*
 	* @return the group ID of this org group permission
 	*/
@@ -92,7 +92,7 @@ public class OrgGroupPermissionWrapper implements OrgGroupPermission {
 	}
 
 	/**
-	* Gets the permission ID of this org group permission.
+	* Returns the permission ID of this org group permission.
 	*
 	* @return the permission ID of this org group permission
 	*/

@@ -48,21 +48,21 @@ public interface MBMailingListModel extends BaseModel<MBMailingList>,
 	 */
 
 	/**
-	 * Gets the primary key of this message boards mailing list.
+	 * Returns the primary key of this message boards mailing list.
 	 *
 	 * @return the primary key of this message boards mailing list
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this message boards mailing list
+	 * Sets the primary key of this message boards mailing list.
 	 *
 	 * @param primaryKey the primary key of this message boards mailing list
 	 */
 	public void setPrimaryKey(long primaryKey);
 
 	/**
-	 * Gets the uuid of this message boards mailing list.
+	 * Returns the uuid of this message boards mailing list.
 	 *
 	 * @return the uuid of this message boards mailing list
 	 */
@@ -77,7 +77,7 @@ public interface MBMailingListModel extends BaseModel<MBMailingList>,
 	public void setUuid(String uuid);
 
 	/**
-	 * Gets the mailing list ID of this message boards mailing list.
+	 * Returns the mailing list ID of this message boards mailing list.
 	 *
 	 * @return the mailing list ID of this message boards mailing list
 	 */
@@ -91,7 +91,7 @@ public interface MBMailingListModel extends BaseModel<MBMailingList>,
 	public void setMailingListId(long mailingListId);
 
 	/**
-	 * Gets the group ID of this message boards mailing list.
+	 * Returns the group ID of this message boards mailing list.
 	 *
 	 * @return the group ID of this message boards mailing list
 	 */
@@ -105,7 +105,7 @@ public interface MBMailingListModel extends BaseModel<MBMailingList>,
 	public void setGroupId(long groupId);
 
 	/**
-	 * Gets the company ID of this message boards mailing list.
+	 * Returns the company ID of this message boards mailing list.
 	 *
 	 * @return the company ID of this message boards mailing list
 	 */
@@ -119,7 +119,7 @@ public interface MBMailingListModel extends BaseModel<MBMailingList>,
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the user ID of this message boards mailing list.
+	 * Returns the user ID of this message boards mailing list.
 	 *
 	 * @return the user ID of this message boards mailing list
 	 */
@@ -133,7 +133,7 @@ public interface MBMailingListModel extends BaseModel<MBMailingList>,
 	public void setUserId(long userId);
 
 	/**
-	 * Gets the user uuid of this message boards mailing list.
+	 * Returns the user uuid of this message boards mailing list.
 	 *
 	 * @return the user uuid of this message boards mailing list
 	 * @throws SystemException if a system exception occurred
@@ -148,7 +148,7 @@ public interface MBMailingListModel extends BaseModel<MBMailingList>,
 	public void setUserUuid(String userUuid);
 
 	/**
-	 * Gets the user name of this message boards mailing list.
+	 * Returns the user name of this message boards mailing list.
 	 *
 	 * @return the user name of this message boards mailing list
 	 */
@@ -163,7 +163,7 @@ public interface MBMailingListModel extends BaseModel<MBMailingList>,
 	public void setUserName(String userName);
 
 	/**
-	 * Gets the create date of this message boards mailing list.
+	 * Returns the create date of this message boards mailing list.
 	 *
 	 * @return the create date of this message boards mailing list
 	 */
@@ -177,7 +177,7 @@ public interface MBMailingListModel extends BaseModel<MBMailingList>,
 	public void setCreateDate(Date createDate);
 
 	/**
-	 * Gets the modified date of this message boards mailing list.
+	 * Returns the modified date of this message boards mailing list.
 	 *
 	 * @return the modified date of this message boards mailing list
 	 */
@@ -191,7 +191,7 @@ public interface MBMailingListModel extends BaseModel<MBMailingList>,
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
-	 * Gets the category ID of this message boards mailing list.
+	 * Returns the category ID of this message boards mailing list.
 	 *
 	 * @return the category ID of this message boards mailing list
 	 */
@@ -205,7 +205,7 @@ public interface MBMailingListModel extends BaseModel<MBMailingList>,
 	public void setCategoryId(long categoryId);
 
 	/**
-	 * Gets the email address of this message boards mailing list.
+	 * Returns the email address of this message boards mailing list.
 	 *
 	 * @return the email address of this message boards mailing list
 	 */
@@ -220,7 +220,7 @@ public interface MBMailingListModel extends BaseModel<MBMailingList>,
 	public void setEmailAddress(String emailAddress);
 
 	/**
-	 * Gets the in protocol of this message boards mailing list.
+	 * Returns the in protocol of this message boards mailing list.
 	 *
 	 * @return the in protocol of this message boards mailing list
 	 */
@@ -235,7 +235,7 @@ public interface MBMailingListModel extends BaseModel<MBMailingList>,
 	public void setInProtocol(String inProtocol);
 
 	/**
-	 * Gets the in server name of this message boards mailing list.
+	 * Returns the in server name of this message boards mailing list.
 	 *
 	 * @return the in server name of this message boards mailing list
 	 */
@@ -250,7 +250,7 @@ public interface MBMailingListModel extends BaseModel<MBMailingList>,
 	public void setInServerName(String inServerName);
 
 	/**
-	 * Gets the in server port of this message boards mailing list.
+	 * Returns the in server port of this message boards mailing list.
 	 *
 	 * @return the in server port of this message boards mailing list
 	 */
@@ -264,7 +264,7 @@ public interface MBMailingListModel extends BaseModel<MBMailingList>,
 	public void setInServerPort(int inServerPort);
 
 	/**
-	 * Gets the in use s s l of this message boards mailing list.
+	 * Returns the in use s s l of this message boards mailing list.
 	 *
 	 * @return the in use s s l of this message boards mailing list
 	 */
@@ -285,7 +285,7 @@ public interface MBMailingListModel extends BaseModel<MBMailingList>,
 	public void setInUseSSL(boolean inUseSSL);
 
 	/**
-	 * Gets the in user name of this message boards mailing list.
+	 * Returns the in user name of this message boards mailing list.
 	 *
 	 * @return the in user name of this message boards mailing list
 	 */
@@ -300,7 +300,7 @@ public interface MBMailingListModel extends BaseModel<MBMailingList>,
 	public void setInUserName(String inUserName);
 
 	/**
-	 * Gets the in password of this message boards mailing list.
+	 * Returns the in password of this message boards mailing list.
 	 *
 	 * @return the in password of this message boards mailing list
 	 */
@@ -315,7 +315,7 @@ public interface MBMailingListModel extends BaseModel<MBMailingList>,
 	public void setInPassword(String inPassword);
 
 	/**
-	 * Gets the in read interval of this message boards mailing list.
+	 * Returns the in read interval of this message boards mailing list.
 	 *
 	 * @return the in read interval of this message boards mailing list
 	 */
@@ -329,7 +329,7 @@ public interface MBMailingListModel extends BaseModel<MBMailingList>,
 	public void setInReadInterval(int inReadInterval);
 
 	/**
-	 * Gets the out email address of this message boards mailing list.
+	 * Returns the out email address of this message boards mailing list.
 	 *
 	 * @return the out email address of this message boards mailing list
 	 */
@@ -344,7 +344,7 @@ public interface MBMailingListModel extends BaseModel<MBMailingList>,
 	public void setOutEmailAddress(String outEmailAddress);
 
 	/**
-	 * Gets the out custom of this message boards mailing list.
+	 * Returns the out custom of this message boards mailing list.
 	 *
 	 * @return the out custom of this message boards mailing list
 	 */
@@ -365,7 +365,7 @@ public interface MBMailingListModel extends BaseModel<MBMailingList>,
 	public void setOutCustom(boolean outCustom);
 
 	/**
-	 * Gets the out server name of this message boards mailing list.
+	 * Returns the out server name of this message boards mailing list.
 	 *
 	 * @return the out server name of this message boards mailing list
 	 */
@@ -380,7 +380,7 @@ public interface MBMailingListModel extends BaseModel<MBMailingList>,
 	public void setOutServerName(String outServerName);
 
 	/**
-	 * Gets the out server port of this message boards mailing list.
+	 * Returns the out server port of this message boards mailing list.
 	 *
 	 * @return the out server port of this message boards mailing list
 	 */
@@ -394,7 +394,7 @@ public interface MBMailingListModel extends BaseModel<MBMailingList>,
 	public void setOutServerPort(int outServerPort);
 
 	/**
-	 * Gets the out use s s l of this message boards mailing list.
+	 * Returns the out use s s l of this message boards mailing list.
 	 *
 	 * @return the out use s s l of this message boards mailing list
 	 */
@@ -415,7 +415,7 @@ public interface MBMailingListModel extends BaseModel<MBMailingList>,
 	public void setOutUseSSL(boolean outUseSSL);
 
 	/**
-	 * Gets the out user name of this message boards mailing list.
+	 * Returns the out user name of this message boards mailing list.
 	 *
 	 * @return the out user name of this message boards mailing list
 	 */
@@ -430,7 +430,7 @@ public interface MBMailingListModel extends BaseModel<MBMailingList>,
 	public void setOutUserName(String outUserName);
 
 	/**
-	 * Gets the out password of this message boards mailing list.
+	 * Returns the out password of this message boards mailing list.
 	 *
 	 * @return the out password of this message boards mailing list
 	 */
@@ -445,7 +445,7 @@ public interface MBMailingListModel extends BaseModel<MBMailingList>,
 	public void setOutPassword(String outPassword);
 
 	/**
-	 * Gets the allow anonymous of this message boards mailing list.
+	 * Returns the allow anonymous of this message boards mailing list.
 	 *
 	 * @return the allow anonymous of this message boards mailing list
 	 */
@@ -466,7 +466,7 @@ public interface MBMailingListModel extends BaseModel<MBMailingList>,
 	public void setAllowAnonymous(boolean allowAnonymous);
 
 	/**
-	 * Gets the active of this message boards mailing list.
+	 * Returns the active of this message boards mailing list.
 	 *
 	 * @return the active of this message boards mailing list
 	 */

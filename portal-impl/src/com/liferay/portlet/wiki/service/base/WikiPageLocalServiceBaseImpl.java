@@ -114,7 +114,7 @@ public abstract class WikiPageLocalServiceBaseImpl
 	/**
 	 * Adds the wiki page to the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param wikiPage the wiki page to add
+	 * @param wikiPage the wiki page
 	 * @return the wiki page that was added
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -137,7 +137,7 @@ public abstract class WikiPageLocalServiceBaseImpl
 	/**
 	 * Deletes the wiki page with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param pageId the primary key of the wiki page to delete
+	 * @param pageId the primary key of the wiki page
 	 * @throws PortalException if a wiki page with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -149,7 +149,7 @@ public abstract class WikiPageLocalServiceBaseImpl
 	/**
 	 * Deletes the wiki page from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param wikiPage the wiki page to delete
+	 * @param wikiPage the wiki page
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void deleteWikiPage(WikiPage wikiPage) throws SystemException {
@@ -159,7 +159,7 @@ public abstract class WikiPageLocalServiceBaseImpl
 	/**
 	 * Performs a dynamic query on the database and returns the matching rows.
 	 *
-	 * @param dynamicQuery the dynamic query to search with
+	 * @param dynamicQuery the dynamic query
 	 * @return the matching rows
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -176,9 +176,9 @@ public abstract class WikiPageLocalServiceBaseImpl
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param dynamicQuery the dynamic query to search with
-	 * @param start the lower bound of the range of model instances to return
-	 * @param end the upper bound of the range of model instances to return (not inclusive)
+	 * @param dynamicQuery the dynamic query
+	 * @param start the lower bound of the range of model instances
+	 * @param end the upper bound of the range of model instances (not inclusive)
 	 * @return the range of matching rows
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -195,9 +195,9 @@ public abstract class WikiPageLocalServiceBaseImpl
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param dynamicQuery the dynamic query to search with
-	 * @param start the lower bound of the range of model instances to return
-	 * @param end the upper bound of the range of model instances to return (not inclusive)
+	 * @param dynamicQuery the dynamic query
+	 * @param start the lower bound of the range of model instances
+	 * @param end the upper bound of the range of model instances (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching rows
 	 * @throws SystemException if a system exception occurred
@@ -210,9 +210,9 @@ public abstract class WikiPageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Counts the number of rows that match the dynamic query.
+	 * Returns the number of rows that match the dynamic query.
 	 *
-	 * @param dynamicQuery the dynamic query to search with
+	 * @param dynamicQuery the dynamic query
 	 * @return the number of rows that match the dynamic query
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -222,9 +222,9 @@ public abstract class WikiPageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the wiki page with the primary key.
+	 * Returns the wiki page with the primary key.
 	 *
-	 * @param pageId the primary key of the wiki page to get
+	 * @param pageId the primary key of the wiki page
 	 * @return the wiki page
 	 * @throws PortalException if a wiki page with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -235,12 +235,12 @@ public abstract class WikiPageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the wiki page with the UUID and group id.
+	 * Returns the wiki page with the UUID in the group.
 	 *
-	 * @param uuid the UUID of wiki page to get
-	 * @param groupId the group id of the wiki page to get
+	 * @param uuid the UUID of wiki page
+	 * @param groupId the group id of the wiki page
 	 * @return the wiki page
-	 * @throws PortalException if a wiki page with the UUID and group id could not be found
+	 * @throws PortalException if a wiki page with the UUID in the group could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	public WikiPage getWikiPageByUuidAndGroupId(String uuid, long groupId)
@@ -249,14 +249,14 @@ public abstract class WikiPageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets a range of all the wiki pages.
+	 * Returns a range of all the wiki pages.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param start the lower bound of the range of wiki pages to return
-	 * @param end the upper bound of the range of wiki pages to return (not inclusive)
+	 * @param start the lower bound of the range of wiki pages
+	 * @param end the upper bound of the range of wiki pages (not inclusive)
 	 * @return the range of wiki pages
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -266,7 +266,7 @@ public abstract class WikiPageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the number of wiki pages.
+	 * Returns the number of wiki pages.
 	 *
 	 * @return the number of wiki pages
 	 * @throws SystemException if a system exception occurred
@@ -278,7 +278,7 @@ public abstract class WikiPageLocalServiceBaseImpl
 	/**
 	 * Updates the wiki page in the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param wikiPage the wiki page to update
+	 * @param wikiPage the wiki page
 	 * @return the wiki page that was updated
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -291,7 +291,7 @@ public abstract class WikiPageLocalServiceBaseImpl
 	/**
 	 * Updates the wiki page in the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param wikiPage the wiki page to update
+	 * @param wikiPage the wiki page
 	 * @param merge whether to merge the wiki page with the current session. See {@link com.liferay.portal.service.persistence.BatchSession#update(com.liferay.portal.kernel.dao.orm.Session, com.liferay.portal.model.BaseModel, boolean)} for an explanation.
 	 * @return the wiki page that was updated
 	 * @throws SystemException if a system exception occurred
@@ -304,7 +304,7 @@ public abstract class WikiPageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the wiki node local service.
+	 * Returns the wiki node local service.
 	 *
 	 * @return the wiki node local service
 	 */
@@ -323,7 +323,7 @@ public abstract class WikiPageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the wiki node remote service.
+	 * Returns the wiki node remote service.
 	 *
 	 * @return the wiki node remote service
 	 */
@@ -341,7 +341,7 @@ public abstract class WikiPageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the wiki node persistence.
+	 * Returns the wiki node persistence.
 	 *
 	 * @return the wiki node persistence
 	 */
@@ -359,7 +359,7 @@ public abstract class WikiPageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the wiki page local service.
+	 * Returns the wiki page local service.
 	 *
 	 * @return the wiki page local service
 	 */
@@ -378,7 +378,7 @@ public abstract class WikiPageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the wiki page remote service.
+	 * Returns the wiki page remote service.
 	 *
 	 * @return the wiki page remote service
 	 */
@@ -396,7 +396,7 @@ public abstract class WikiPageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the wiki page persistence.
+	 * Returns the wiki page persistence.
 	 *
 	 * @return the wiki page persistence
 	 */
@@ -414,7 +414,7 @@ public abstract class WikiPageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the wiki page finder.
+	 * Returns the wiki page finder.
 	 *
 	 * @return the wiki page finder
 	 */
@@ -432,7 +432,7 @@ public abstract class WikiPageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the wiki page resource local service.
+	 * Returns the wiki page resource local service.
 	 *
 	 * @return the wiki page resource local service
 	 */
@@ -451,7 +451,7 @@ public abstract class WikiPageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the wiki page resource persistence.
+	 * Returns the wiki page resource persistence.
 	 *
 	 * @return the wiki page resource persistence
 	 */
@@ -470,7 +470,7 @@ public abstract class WikiPageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the counter local service.
+	 * Returns the counter local service.
 	 *
 	 * @return the counter local service
 	 */
@@ -488,7 +488,7 @@ public abstract class WikiPageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the d l local service.
+	 * Returns the d l local service.
 	 *
 	 * @return the d l local service
 	 */
@@ -506,7 +506,7 @@ public abstract class WikiPageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the company local service.
+	 * Returns the company local service.
 	 *
 	 * @return the company local service
 	 */
@@ -524,7 +524,7 @@ public abstract class WikiPageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the company remote service.
+	 * Returns the company remote service.
 	 *
 	 * @return the company remote service
 	 */
@@ -542,7 +542,7 @@ public abstract class WikiPageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the company persistence.
+	 * Returns the company persistence.
 	 *
 	 * @return the company persistence
 	 */
@@ -560,7 +560,7 @@ public abstract class WikiPageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the group local service.
+	 * Returns the group local service.
 	 *
 	 * @return the group local service
 	 */
@@ -578,7 +578,7 @@ public abstract class WikiPageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the group remote service.
+	 * Returns the group remote service.
 	 *
 	 * @return the group remote service
 	 */
@@ -596,7 +596,7 @@ public abstract class WikiPageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the group persistence.
+	 * Returns the group persistence.
 	 *
 	 * @return the group persistence
 	 */
@@ -614,7 +614,7 @@ public abstract class WikiPageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the group finder.
+	 * Returns the group finder.
 	 *
 	 * @return the group finder
 	 */
@@ -632,7 +632,7 @@ public abstract class WikiPageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the portlet preferences local service.
+	 * Returns the portlet preferences local service.
 	 *
 	 * @return the portlet preferences local service
 	 */
@@ -651,7 +651,7 @@ public abstract class WikiPageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the portlet preferences remote service.
+	 * Returns the portlet preferences remote service.
 	 *
 	 * @return the portlet preferences remote service
 	 */
@@ -670,7 +670,7 @@ public abstract class WikiPageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the portlet preferences persistence.
+	 * Returns the portlet preferences persistence.
 	 *
 	 * @return the portlet preferences persistence
 	 */
@@ -689,7 +689,7 @@ public abstract class WikiPageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the portlet preferences finder.
+	 * Returns the portlet preferences finder.
 	 *
 	 * @return the portlet preferences finder
 	 */
@@ -708,7 +708,7 @@ public abstract class WikiPageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the resource local service.
+	 * Returns the resource local service.
 	 *
 	 * @return the resource local service
 	 */
@@ -727,7 +727,7 @@ public abstract class WikiPageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the resource remote service.
+	 * Returns the resource remote service.
 	 *
 	 * @return the resource remote service
 	 */
@@ -745,7 +745,7 @@ public abstract class WikiPageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the resource persistence.
+	 * Returns the resource persistence.
 	 *
 	 * @return the resource persistence
 	 */
@@ -763,7 +763,7 @@ public abstract class WikiPageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the resource finder.
+	 * Returns the resource finder.
 	 *
 	 * @return the resource finder
 	 */
@@ -781,7 +781,7 @@ public abstract class WikiPageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the subscription local service.
+	 * Returns the subscription local service.
 	 *
 	 * @return the subscription local service
 	 */
@@ -800,7 +800,7 @@ public abstract class WikiPageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the subscription persistence.
+	 * Returns the subscription persistence.
 	 *
 	 * @return the subscription persistence
 	 */
@@ -819,7 +819,7 @@ public abstract class WikiPageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the user local service.
+	 * Returns the user local service.
 	 *
 	 * @return the user local service
 	 */
@@ -837,7 +837,7 @@ public abstract class WikiPageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the user remote service.
+	 * Returns the user remote service.
 	 *
 	 * @return the user remote service
 	 */
@@ -855,7 +855,7 @@ public abstract class WikiPageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the user persistence.
+	 * Returns the user persistence.
 	 *
 	 * @return the user persistence
 	 */
@@ -873,7 +873,7 @@ public abstract class WikiPageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the user finder.
+	 * Returns the user finder.
 	 *
 	 * @return the user finder
 	 */
@@ -891,7 +891,7 @@ public abstract class WikiPageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the workflow instance link local service.
+	 * Returns the workflow instance link local service.
 	 *
 	 * @return the workflow instance link local service
 	 */
@@ -910,7 +910,7 @@ public abstract class WikiPageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the workflow instance link persistence.
+	 * Returns the workflow instance link persistence.
 	 *
 	 * @return the workflow instance link persistence
 	 */
@@ -929,7 +929,7 @@ public abstract class WikiPageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the asset category local service.
+	 * Returns the asset category local service.
 	 *
 	 * @return the asset category local service
 	 */
@@ -948,7 +948,7 @@ public abstract class WikiPageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the asset category remote service.
+	 * Returns the asset category remote service.
 	 *
 	 * @return the asset category remote service
 	 */
@@ -967,7 +967,7 @@ public abstract class WikiPageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the asset category persistence.
+	 * Returns the asset category persistence.
 	 *
 	 * @return the asset category persistence
 	 */
@@ -986,7 +986,7 @@ public abstract class WikiPageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the asset category finder.
+	 * Returns the asset category finder.
 	 *
 	 * @return the asset category finder
 	 */
@@ -1004,7 +1004,7 @@ public abstract class WikiPageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the asset entry local service.
+	 * Returns the asset entry local service.
 	 *
 	 * @return the asset entry local service
 	 */
@@ -1023,7 +1023,7 @@ public abstract class WikiPageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the asset entry remote service.
+	 * Returns the asset entry remote service.
 	 *
 	 * @return the asset entry remote service
 	 */
@@ -1041,7 +1041,7 @@ public abstract class WikiPageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the asset entry persistence.
+	 * Returns the asset entry persistence.
 	 *
 	 * @return the asset entry persistence
 	 */
@@ -1060,7 +1060,7 @@ public abstract class WikiPageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the asset entry finder.
+	 * Returns the asset entry finder.
 	 *
 	 * @return the asset entry finder
 	 */
@@ -1078,7 +1078,7 @@ public abstract class WikiPageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the asset link local service.
+	 * Returns the asset link local service.
 	 *
 	 * @return the asset link local service
 	 */
@@ -1097,7 +1097,7 @@ public abstract class WikiPageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the asset link persistence.
+	 * Returns the asset link persistence.
 	 *
 	 * @return the asset link persistence
 	 */
@@ -1116,7 +1116,7 @@ public abstract class WikiPageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the asset tag local service.
+	 * Returns the asset tag local service.
 	 *
 	 * @return the asset tag local service
 	 */
@@ -1135,7 +1135,7 @@ public abstract class WikiPageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the asset tag remote service.
+	 * Returns the asset tag remote service.
 	 *
 	 * @return the asset tag remote service
 	 */
@@ -1153,7 +1153,7 @@ public abstract class WikiPageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the asset tag persistence.
+	 * Returns the asset tag persistence.
 	 *
 	 * @return the asset tag persistence
 	 */
@@ -1171,7 +1171,7 @@ public abstract class WikiPageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the asset tag finder.
+	 * Returns the asset tag finder.
 	 *
 	 * @return the asset tag finder
 	 */
@@ -1189,7 +1189,7 @@ public abstract class WikiPageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the expando value local service.
+	 * Returns the expando value local service.
 	 *
 	 * @return the expando value local service
 	 */
@@ -1208,7 +1208,7 @@ public abstract class WikiPageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the expando value remote service.
+	 * Returns the expando value remote service.
 	 *
 	 * @return the expando value remote service
 	 */
@@ -1226,7 +1226,7 @@ public abstract class WikiPageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the expando value persistence.
+	 * Returns the expando value persistence.
 	 *
 	 * @return the expando value persistence
 	 */
@@ -1245,7 +1245,7 @@ public abstract class WikiPageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the message-boards message local service.
+	 * Returns the message-boards message local service.
 	 *
 	 * @return the message-boards message local service
 	 */
@@ -1264,7 +1264,7 @@ public abstract class WikiPageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the message-boards message remote service.
+	 * Returns the message-boards message remote service.
 	 *
 	 * @return the message-boards message remote service
 	 */
@@ -1282,7 +1282,7 @@ public abstract class WikiPageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the message-boards message persistence.
+	 * Returns the message-boards message persistence.
 	 *
 	 * @return the message-boards message persistence
 	 */
@@ -1301,7 +1301,7 @@ public abstract class WikiPageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the message-boards message finder.
+	 * Returns the message-boards message finder.
 	 *
 	 * @return the message-boards message finder
 	 */
@@ -1319,7 +1319,7 @@ public abstract class WikiPageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the social activity local service.
+	 * Returns the social activity local service.
 	 *
 	 * @return the social activity local service
 	 */
@@ -1338,7 +1338,7 @@ public abstract class WikiPageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the social activity persistence.
+	 * Returns the social activity persistence.
 	 *
 	 * @return the social activity persistence
 	 */
@@ -1357,7 +1357,7 @@ public abstract class WikiPageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the social activity finder.
+	 * Returns the social activity finder.
 	 *
 	 * @return the social activity finder
 	 */
@@ -1376,7 +1376,7 @@ public abstract class WikiPageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the social equity log local service.
+	 * Returns the social equity log local service.
 	 *
 	 * @return the social equity log local service
 	 */
@@ -1395,7 +1395,7 @@ public abstract class WikiPageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the social equity log persistence.
+	 * Returns the social equity log persistence.
 	 *
 	 * @return the social equity log persistence
 	 */
@@ -1414,7 +1414,7 @@ public abstract class WikiPageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the Spring bean ID for this bean.
+	 * Returns the Spring bean ID for this bean.
 	 *
 	 * @return the Spring bean ID for this bean
 	 */
@@ -1434,7 +1434,7 @@ public abstract class WikiPageLocalServiceBaseImpl
 	/**
 	 * Performs an SQL query.
 	 *
-	 * @param sql the sql query to perform
+	 * @param sql the sql query
 	 */
 	protected void runSQL(String sql) throws SystemException {
 		try {

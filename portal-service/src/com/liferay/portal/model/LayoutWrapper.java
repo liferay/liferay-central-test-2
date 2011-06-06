@@ -37,7 +37,7 @@ public class LayoutWrapper implements Layout {
 	}
 
 	/**
-	* Gets the primary key of this layout.
+	* Returns the primary key of this layout.
 	*
 	* @return the primary key of this layout
 	*/
@@ -46,7 +46,7 @@ public class LayoutWrapper implements Layout {
 	}
 
 	/**
-	* Sets the primary key of this layout
+	* Sets the primary key of this layout.
 	*
 	* @param primaryKey the primary key of this layout
 	*/
@@ -55,7 +55,7 @@ public class LayoutWrapper implements Layout {
 	}
 
 	/**
-	* Gets the uuid of this layout.
+	* Returns the uuid of this layout.
 	*
 	* @return the uuid of this layout
 	*/
@@ -73,7 +73,7 @@ public class LayoutWrapper implements Layout {
 	}
 
 	/**
-	* Gets the plid of this layout.
+	* Returns the plid of this layout.
 	*
 	* @return the plid of this layout
 	*/
@@ -91,7 +91,7 @@ public class LayoutWrapper implements Layout {
 	}
 
 	/**
-	* Gets the group ID of this layout.
+	* Returns the group ID of this layout.
 	*
 	* @return the group ID of this layout
 	*/
@@ -109,7 +109,7 @@ public class LayoutWrapper implements Layout {
 	}
 
 	/**
-	* Gets the company ID of this layout.
+	* Returns the company ID of this layout.
 	*
 	* @return the company ID of this layout
 	*/
@@ -127,7 +127,7 @@ public class LayoutWrapper implements Layout {
 	}
 
 	/**
-	* Gets the create date of this layout.
+	* Returns the create date of this layout.
 	*
 	* @return the create date of this layout
 	*/
@@ -145,7 +145,7 @@ public class LayoutWrapper implements Layout {
 	}
 
 	/**
-	* Gets the modified date of this layout.
+	* Returns the modified date of this layout.
 	*
 	* @return the modified date of this layout
 	*/
@@ -163,7 +163,7 @@ public class LayoutWrapper implements Layout {
 	}
 
 	/**
-	* Gets the private layout of this layout.
+	* Returns the private layout of this layout.
 	*
 	* @return the private layout of this layout
 	*/
@@ -190,7 +190,7 @@ public class LayoutWrapper implements Layout {
 	}
 
 	/**
-	* Gets the layout ID of this layout.
+	* Returns the layout ID of this layout.
 	*
 	* @return the layout ID of this layout
 	*/
@@ -208,7 +208,7 @@ public class LayoutWrapper implements Layout {
 	}
 
 	/**
-	* Gets the parent layout ID of this layout.
+	* Returns the parent layout ID of this layout.
 	*
 	* @return the parent layout ID of this layout
 	*/
@@ -226,7 +226,7 @@ public class LayoutWrapper implements Layout {
 	}
 
 	/**
-	* Gets the name of this layout.
+	* Returns the name of this layout.
 	*
 	* @return the name of this layout
 	*/
@@ -235,9 +235,9 @@ public class LayoutWrapper implements Layout {
 	}
 
 	/**
-	* Gets the localized name of this layout. Uses the default language if no localization exists for the requested language.
+	* Returns the localized name of this layout in the language. Uses the default language if no localization exists for the requested language.
 	*
-	* @param locale the locale to get the localized name for
+	* @param locale the locale of the language
 	* @return the localized name of this layout
 	*/
 	public java.lang.String getName(java.util.Locale locale) {
@@ -245,9 +245,9 @@ public class LayoutWrapper implements Layout {
 	}
 
 	/**
-	* Gets the localized name of this layout, optionally using the default language if no localization exists for the requested language.
+	* Returns the localized name of this layout in the language, optionally using the default language if no localization exists for the requested language.
 	*
-	* @param locale the local to get the localized name for
+	* @param locale the local of the language
 	* @param useDefault whether to use the default language if no localization exists for the requested language
 	* @return the localized name of this layout. If <code>useDefault</code> is <code>false</code> and no localization exists for the requested language, an empty string will be returned.
 	*/
@@ -256,9 +256,9 @@ public class LayoutWrapper implements Layout {
 	}
 
 	/**
-	* Gets the localized name of this layout. Uses the default language if no localization exists for the requested language.
+	* Returns the localized name of this layout in the language. Uses the default language if no localization exists for the requested language.
 	*
-	* @param languageId the id of the language to get the localized name for
+	* @param languageId the ID of the language
 	* @return the localized name of this layout
 	*/
 	public java.lang.String getName(java.lang.String languageId) {
@@ -266,9 +266,9 @@ public class LayoutWrapper implements Layout {
 	}
 
 	/**
-	* Gets the localized name of this layout, optionally using the default language if no localization exists for the requested language.
+	* Returns the localized name of this layout in the language, optionally using the default language if no localization exists for the requested language.
 	*
-	* @param languageId the id of the language to get the localized name for
+	* @param languageId the ID of the language
 	* @param useDefault whether to use the default language if no localization exists for the requested language
 	* @return the localized name of this layout
 	*/
@@ -278,9 +278,9 @@ public class LayoutWrapper implements Layout {
 	}
 
 	/**
-	* Gets a map of the locales and localized name of this layout.
+	* Returns a map of the locales and localized names of this layout.
 	*
-	* @return the locales and localized name
+	* @return the locales and localized names of this layout
 	*/
 	public java.util.Map<java.util.Locale, java.lang.String> getNameMap() {
 		return _layout.getNameMap();
@@ -296,15 +296,22 @@ public class LayoutWrapper implements Layout {
 	}
 
 	/**
-	* Sets the localized name of this layout.
+	* Sets the localized name of this layout in the language.
 	*
 	* @param name the localized name of this layout
-	* @param locale the locale to set the localized name for
+	* @param locale the locale of the language
 	*/
 	public void setName(java.lang.String name, java.util.Locale locale) {
 		_layout.setName(name, locale);
 	}
 
+	/**
+	* Sets the localized name of this layout in the language, and sets the default locale.
+	*
+	* @param name the localized name of this layout
+	* @param locale the locale of the language
+	* @param defaultLocale the default locale
+	*/
 	public void setName(java.lang.String name, java.util.Locale locale,
 		java.util.Locale defaultLocale) {
 		_layout.setName(name, locale, defaultLocale);
@@ -320,6 +327,12 @@ public class LayoutWrapper implements Layout {
 		_layout.setNameMap(nameMap);
 	}
 
+	/**
+	* Sets the localized names of this layout from the map of locales and localized names, and sets the default locale.
+	*
+	* @param nameMap the locales and localized names of this layout
+	* @param defaultLocale the default locale
+	*/
 	public void setNameMap(
 		java.util.Map<java.util.Locale, java.lang.String> nameMap,
 		java.util.Locale defaultLocale) {
@@ -327,7 +340,7 @@ public class LayoutWrapper implements Layout {
 	}
 
 	/**
-	* Gets the title of this layout.
+	* Returns the title of this layout.
 	*
 	* @return the title of this layout
 	*/
@@ -336,9 +349,9 @@ public class LayoutWrapper implements Layout {
 	}
 
 	/**
-	* Gets the localized title of this layout. Uses the default language if no localization exists for the requested language.
+	* Returns the localized title of this layout in the language. Uses the default language if no localization exists for the requested language.
 	*
-	* @param locale the locale to get the localized title for
+	* @param locale the locale of the language
 	* @return the localized title of this layout
 	*/
 	public java.lang.String getTitle(java.util.Locale locale) {
@@ -346,9 +359,9 @@ public class LayoutWrapper implements Layout {
 	}
 
 	/**
-	* Gets the localized title of this layout, optionally using the default language if no localization exists for the requested language.
+	* Returns the localized title of this layout in the language, optionally using the default language if no localization exists for the requested language.
 	*
-	* @param locale the local to get the localized title for
+	* @param locale the local of the language
 	* @param useDefault whether to use the default language if no localization exists for the requested language
 	* @return the localized title of this layout. If <code>useDefault</code> is <code>false</code> and no localization exists for the requested language, an empty string will be returned.
 	*/
@@ -357,9 +370,9 @@ public class LayoutWrapper implements Layout {
 	}
 
 	/**
-	* Gets the localized title of this layout. Uses the default language if no localization exists for the requested language.
+	* Returns the localized title of this layout in the language. Uses the default language if no localization exists for the requested language.
 	*
-	* @param languageId the id of the language to get the localized title for
+	* @param languageId the ID of the language
 	* @return the localized title of this layout
 	*/
 	public java.lang.String getTitle(java.lang.String languageId) {
@@ -367,9 +380,9 @@ public class LayoutWrapper implements Layout {
 	}
 
 	/**
-	* Gets the localized title of this layout, optionally using the default language if no localization exists for the requested language.
+	* Returns the localized title of this layout in the language, optionally using the default language if no localization exists for the requested language.
 	*
-	* @param languageId the id of the language to get the localized title for
+	* @param languageId the ID of the language
 	* @param useDefault whether to use the default language if no localization exists for the requested language
 	* @return the localized title of this layout
 	*/
@@ -379,9 +392,9 @@ public class LayoutWrapper implements Layout {
 	}
 
 	/**
-	* Gets a map of the locales and localized title of this layout.
+	* Returns a map of the locales and localized titles of this layout.
 	*
-	* @return the locales and localized title
+	* @return the locales and localized titles of this layout
 	*/
 	public java.util.Map<java.util.Locale, java.lang.String> getTitleMap() {
 		return _layout.getTitleMap();
@@ -397,15 +410,22 @@ public class LayoutWrapper implements Layout {
 	}
 
 	/**
-	* Sets the localized title of this layout.
+	* Sets the localized title of this layout in the language.
 	*
 	* @param title the localized title of this layout
-	* @param locale the locale to set the localized title for
+	* @param locale the locale of the language
 	*/
 	public void setTitle(java.lang.String title, java.util.Locale locale) {
 		_layout.setTitle(title, locale);
 	}
 
+	/**
+	* Sets the localized title of this layout in the language, and sets the default locale.
+	*
+	* @param title the localized title of this layout
+	* @param locale the locale of the language
+	* @param defaultLocale the default locale
+	*/
 	public void setTitle(java.lang.String title, java.util.Locale locale,
 		java.util.Locale defaultLocale) {
 		_layout.setTitle(title, locale, defaultLocale);
@@ -421,6 +441,12 @@ public class LayoutWrapper implements Layout {
 		_layout.setTitleMap(titleMap);
 	}
 
+	/**
+	* Sets the localized titles of this layout from the map of locales and localized titles, and sets the default locale.
+	*
+	* @param titleMap the locales and localized titles of this layout
+	* @param defaultLocale the default locale
+	*/
 	public void setTitleMap(
 		java.util.Map<java.util.Locale, java.lang.String> titleMap,
 		java.util.Locale defaultLocale) {
@@ -428,7 +454,7 @@ public class LayoutWrapper implements Layout {
 	}
 
 	/**
-	* Gets the description of this layout.
+	* Returns the description of this layout.
 	*
 	* @return the description of this layout
 	*/
@@ -437,9 +463,9 @@ public class LayoutWrapper implements Layout {
 	}
 
 	/**
-	* Gets the localized description of this layout. Uses the default language if no localization exists for the requested language.
+	* Returns the localized description of this layout in the language. Uses the default language if no localization exists for the requested language.
 	*
-	* @param locale the locale to get the localized description for
+	* @param locale the locale of the language
 	* @return the localized description of this layout
 	*/
 	public java.lang.String getDescription(java.util.Locale locale) {
@@ -447,9 +473,9 @@ public class LayoutWrapper implements Layout {
 	}
 
 	/**
-	* Gets the localized description of this layout, optionally using the default language if no localization exists for the requested language.
+	* Returns the localized description of this layout in the language, optionally using the default language if no localization exists for the requested language.
 	*
-	* @param locale the local to get the localized description for
+	* @param locale the local of the language
 	* @param useDefault whether to use the default language if no localization exists for the requested language
 	* @return the localized description of this layout. If <code>useDefault</code> is <code>false</code> and no localization exists for the requested language, an empty string will be returned.
 	*/
@@ -459,9 +485,9 @@ public class LayoutWrapper implements Layout {
 	}
 
 	/**
-	* Gets the localized description of this layout. Uses the default language if no localization exists for the requested language.
+	* Returns the localized description of this layout in the language. Uses the default language if no localization exists for the requested language.
 	*
-	* @param languageId the id of the language to get the localized description for
+	* @param languageId the ID of the language
 	* @return the localized description of this layout
 	*/
 	public java.lang.String getDescription(java.lang.String languageId) {
@@ -469,9 +495,9 @@ public class LayoutWrapper implements Layout {
 	}
 
 	/**
-	* Gets the localized description of this layout, optionally using the default language if no localization exists for the requested language.
+	* Returns the localized description of this layout in the language, optionally using the default language if no localization exists for the requested language.
 	*
-	* @param languageId the id of the language to get the localized description for
+	* @param languageId the ID of the language
 	* @param useDefault whether to use the default language if no localization exists for the requested language
 	* @return the localized description of this layout
 	*/
@@ -481,9 +507,9 @@ public class LayoutWrapper implements Layout {
 	}
 
 	/**
-	* Gets a map of the locales and localized description of this layout.
+	* Returns a map of the locales and localized descriptions of this layout.
 	*
-	* @return the locales and localized description
+	* @return the locales and localized descriptions of this layout
 	*/
 	public java.util.Map<java.util.Locale, java.lang.String> getDescriptionMap() {
 		return _layout.getDescriptionMap();
@@ -499,16 +525,23 @@ public class LayoutWrapper implements Layout {
 	}
 
 	/**
-	* Sets the localized description of this layout.
+	* Sets the localized description of this layout in the language.
 	*
 	* @param description the localized description of this layout
-	* @param locale the locale to set the localized description for
+	* @param locale the locale of the language
 	*/
 	public void setDescription(java.lang.String description,
 		java.util.Locale locale) {
 		_layout.setDescription(description, locale);
 	}
 
+	/**
+	* Sets the localized description of this layout in the language, and sets the default locale.
+	*
+	* @param description the localized description of this layout
+	* @param locale the locale of the language
+	* @param defaultLocale the default locale
+	*/
 	public void setDescription(java.lang.String description,
 		java.util.Locale locale, java.util.Locale defaultLocale) {
 		_layout.setDescription(description, locale, defaultLocale);
@@ -524,6 +557,12 @@ public class LayoutWrapper implements Layout {
 		_layout.setDescriptionMap(descriptionMap);
 	}
 
+	/**
+	* Sets the localized descriptions of this layout from the map of locales and localized descriptions, and sets the default locale.
+	*
+	* @param descriptionMap the locales and localized descriptions of this layout
+	* @param defaultLocale the default locale
+	*/
 	public void setDescriptionMap(
 		java.util.Map<java.util.Locale, java.lang.String> descriptionMap,
 		java.util.Locale defaultLocale) {
@@ -531,7 +570,7 @@ public class LayoutWrapper implements Layout {
 	}
 
 	/**
-	* Gets the keywords of this layout.
+	* Returns the keywords of this layout.
 	*
 	* @return the keywords of this layout
 	*/
@@ -540,9 +579,9 @@ public class LayoutWrapper implements Layout {
 	}
 
 	/**
-	* Gets the localized keywords of this layout. Uses the default language if no localization exists for the requested language.
+	* Returns the localized keywords of this layout in the language. Uses the default language if no localization exists for the requested language.
 	*
-	* @param locale the locale to get the localized keywords for
+	* @param locale the locale of the language
 	* @return the localized keywords of this layout
 	*/
 	public java.lang.String getKeywords(java.util.Locale locale) {
@@ -550,9 +589,9 @@ public class LayoutWrapper implements Layout {
 	}
 
 	/**
-	* Gets the localized keywords of this layout, optionally using the default language if no localization exists for the requested language.
+	* Returns the localized keywords of this layout in the language, optionally using the default language if no localization exists for the requested language.
 	*
-	* @param locale the local to get the localized keywords for
+	* @param locale the local of the language
 	* @param useDefault whether to use the default language if no localization exists for the requested language
 	* @return the localized keywords of this layout. If <code>useDefault</code> is <code>false</code> and no localization exists for the requested language, an empty string will be returned.
 	*/
@@ -562,9 +601,9 @@ public class LayoutWrapper implements Layout {
 	}
 
 	/**
-	* Gets the localized keywords of this layout. Uses the default language if no localization exists for the requested language.
+	* Returns the localized keywords of this layout in the language. Uses the default language if no localization exists for the requested language.
 	*
-	* @param languageId the id of the language to get the localized keywords for
+	* @param languageId the ID of the language
 	* @return the localized keywords of this layout
 	*/
 	public java.lang.String getKeywords(java.lang.String languageId) {
@@ -572,9 +611,9 @@ public class LayoutWrapper implements Layout {
 	}
 
 	/**
-	* Gets the localized keywords of this layout, optionally using the default language if no localization exists for the requested language.
+	* Returns the localized keywords of this layout in the language, optionally using the default language if no localization exists for the requested language.
 	*
-	* @param languageId the id of the language to get the localized keywords for
+	* @param languageId the ID of the language
 	* @param useDefault whether to use the default language if no localization exists for the requested language
 	* @return the localized keywords of this layout
 	*/
@@ -584,9 +623,9 @@ public class LayoutWrapper implements Layout {
 	}
 
 	/**
-	* Gets a map of the locales and localized keywords of this layout.
+	* Returns a map of the locales and localized keywordses of this layout.
 	*
-	* @return the locales and localized keywords
+	* @return the locales and localized keywordses of this layout
 	*/
 	public java.util.Map<java.util.Locale, java.lang.String> getKeywordsMap() {
 		return _layout.getKeywordsMap();
@@ -602,15 +641,22 @@ public class LayoutWrapper implements Layout {
 	}
 
 	/**
-	* Sets the localized keywords of this layout.
+	* Sets the localized keywords of this layout in the language.
 	*
 	* @param keywords the localized keywords of this layout
-	* @param locale the locale to set the localized keywords for
+	* @param locale the locale of the language
 	*/
 	public void setKeywords(java.lang.String keywords, java.util.Locale locale) {
 		_layout.setKeywords(keywords, locale);
 	}
 
+	/**
+	* Sets the localized keywords of this layout in the language, and sets the default locale.
+	*
+	* @param keywords the localized keywords of this layout
+	* @param locale the locale of the language
+	* @param defaultLocale the default locale
+	*/
 	public void setKeywords(java.lang.String keywords, java.util.Locale locale,
 		java.util.Locale defaultLocale) {
 		_layout.setKeywords(keywords, locale, defaultLocale);
@@ -626,6 +672,12 @@ public class LayoutWrapper implements Layout {
 		_layout.setKeywordsMap(keywordsMap);
 	}
 
+	/**
+	* Sets the localized keywordses of this layout from the map of locales and localized keywordses, and sets the default locale.
+	*
+	* @param keywordsMap the locales and localized keywordses of this layout
+	* @param defaultLocale the default locale
+	*/
 	public void setKeywordsMap(
 		java.util.Map<java.util.Locale, java.lang.String> keywordsMap,
 		java.util.Locale defaultLocale) {
@@ -633,7 +685,7 @@ public class LayoutWrapper implements Layout {
 	}
 
 	/**
-	* Gets the robots of this layout.
+	* Returns the robots of this layout.
 	*
 	* @return the robots of this layout
 	*/
@@ -642,9 +694,9 @@ public class LayoutWrapper implements Layout {
 	}
 
 	/**
-	* Gets the localized robots of this layout. Uses the default language if no localization exists for the requested language.
+	* Returns the localized robots of this layout in the language. Uses the default language if no localization exists for the requested language.
 	*
-	* @param locale the locale to get the localized robots for
+	* @param locale the locale of the language
 	* @return the localized robots of this layout
 	*/
 	public java.lang.String getRobots(java.util.Locale locale) {
@@ -652,9 +704,9 @@ public class LayoutWrapper implements Layout {
 	}
 
 	/**
-	* Gets the localized robots of this layout, optionally using the default language if no localization exists for the requested language.
+	* Returns the localized robots of this layout in the language, optionally using the default language if no localization exists for the requested language.
 	*
-	* @param locale the local to get the localized robots for
+	* @param locale the local of the language
 	* @param useDefault whether to use the default language if no localization exists for the requested language
 	* @return the localized robots of this layout. If <code>useDefault</code> is <code>false</code> and no localization exists for the requested language, an empty string will be returned.
 	*/
@@ -664,9 +716,9 @@ public class LayoutWrapper implements Layout {
 	}
 
 	/**
-	* Gets the localized robots of this layout. Uses the default language if no localization exists for the requested language.
+	* Returns the localized robots of this layout in the language. Uses the default language if no localization exists for the requested language.
 	*
-	* @param languageId the id of the language to get the localized robots for
+	* @param languageId the ID of the language
 	* @return the localized robots of this layout
 	*/
 	public java.lang.String getRobots(java.lang.String languageId) {
@@ -674,9 +726,9 @@ public class LayoutWrapper implements Layout {
 	}
 
 	/**
-	* Gets the localized robots of this layout, optionally using the default language if no localization exists for the requested language.
+	* Returns the localized robots of this layout in the language, optionally using the default language if no localization exists for the requested language.
 	*
-	* @param languageId the id of the language to get the localized robots for
+	* @param languageId the ID of the language
 	* @param useDefault whether to use the default language if no localization exists for the requested language
 	* @return the localized robots of this layout
 	*/
@@ -686,9 +738,9 @@ public class LayoutWrapper implements Layout {
 	}
 
 	/**
-	* Gets a map of the locales and localized robots of this layout.
+	* Returns a map of the locales and localized robotses of this layout.
 	*
-	* @return the locales and localized robots
+	* @return the locales and localized robotses of this layout
 	*/
 	public java.util.Map<java.util.Locale, java.lang.String> getRobotsMap() {
 		return _layout.getRobotsMap();
@@ -704,15 +756,22 @@ public class LayoutWrapper implements Layout {
 	}
 
 	/**
-	* Sets the localized robots of this layout.
+	* Sets the localized robots of this layout in the language.
 	*
 	* @param robots the localized robots of this layout
-	* @param locale the locale to set the localized robots for
+	* @param locale the locale of the language
 	*/
 	public void setRobots(java.lang.String robots, java.util.Locale locale) {
 		_layout.setRobots(robots, locale);
 	}
 
+	/**
+	* Sets the localized robots of this layout in the language, and sets the default locale.
+	*
+	* @param robots the localized robots of this layout
+	* @param locale the locale of the language
+	* @param defaultLocale the default locale
+	*/
 	public void setRobots(java.lang.String robots, java.util.Locale locale,
 		java.util.Locale defaultLocale) {
 		_layout.setRobots(robots, locale, defaultLocale);
@@ -728,6 +787,12 @@ public class LayoutWrapper implements Layout {
 		_layout.setRobotsMap(robotsMap);
 	}
 
+	/**
+	* Sets the localized robotses of this layout from the map of locales and localized robotses, and sets the default locale.
+	*
+	* @param robotsMap the locales and localized robotses of this layout
+	* @param defaultLocale the default locale
+	*/
 	public void setRobotsMap(
 		java.util.Map<java.util.Locale, java.lang.String> robotsMap,
 		java.util.Locale defaultLocale) {
@@ -735,7 +800,7 @@ public class LayoutWrapper implements Layout {
 	}
 
 	/**
-	* Gets the type of this layout.
+	* Returns the type of this layout.
 	*
 	* @return the type of this layout
 	*/
@@ -753,7 +818,7 @@ public class LayoutWrapper implements Layout {
 	}
 
 	/**
-	* Gets the type settings of this layout.
+	* Returns the type settings of this layout.
 	*
 	* @return the type settings of this layout
 	*/
@@ -771,7 +836,7 @@ public class LayoutWrapper implements Layout {
 	}
 
 	/**
-	* Gets the hidden of this layout.
+	* Returns the hidden of this layout.
 	*
 	* @return the hidden of this layout
 	*/
@@ -798,7 +863,7 @@ public class LayoutWrapper implements Layout {
 	}
 
 	/**
-	* Gets the friendly u r l of this layout.
+	* Returns the friendly u r l of this layout.
 	*
 	* @return the friendly u r l of this layout
 	*/
@@ -816,7 +881,7 @@ public class LayoutWrapper implements Layout {
 	}
 
 	/**
-	* Gets the icon image of this layout.
+	* Returns the icon image of this layout.
 	*
 	* @return the icon image of this layout
 	*/
@@ -843,7 +908,7 @@ public class LayoutWrapper implements Layout {
 	}
 
 	/**
-	* Gets the icon image ID of this layout.
+	* Returns the icon image ID of this layout.
 	*
 	* @return the icon image ID of this layout
 	*/
@@ -861,7 +926,7 @@ public class LayoutWrapper implements Layout {
 	}
 
 	/**
-	* Gets the theme ID of this layout.
+	* Returns the theme ID of this layout.
 	*
 	* @return the theme ID of this layout
 	*/
@@ -879,7 +944,7 @@ public class LayoutWrapper implements Layout {
 	}
 
 	/**
-	* Gets the color scheme ID of this layout.
+	* Returns the color scheme ID of this layout.
 	*
 	* @return the color scheme ID of this layout
 	*/
@@ -897,7 +962,7 @@ public class LayoutWrapper implements Layout {
 	}
 
 	/**
-	* Gets the wap theme ID of this layout.
+	* Returns the wap theme ID of this layout.
 	*
 	* @return the wap theme ID of this layout
 	*/
@@ -915,7 +980,7 @@ public class LayoutWrapper implements Layout {
 	}
 
 	/**
-	* Gets the wap color scheme ID of this layout.
+	* Returns the wap color scheme ID of this layout.
 	*
 	* @return the wap color scheme ID of this layout
 	*/
@@ -933,7 +998,7 @@ public class LayoutWrapper implements Layout {
 	}
 
 	/**
-	* Gets the css of this layout.
+	* Returns the css of this layout.
 	*
 	* @return the css of this layout
 	*/
@@ -951,7 +1016,7 @@ public class LayoutWrapper implements Layout {
 	}
 
 	/**
-	* Gets the priority of this layout.
+	* Returns the priority of this layout.
 	*
 	* @return the priority of this layout
 	*/
@@ -969,7 +1034,7 @@ public class LayoutWrapper implements Layout {
 	}
 
 	/**
-	* Gets the layout prototype ID of this layout.
+	* Returns the layout prototype ID of this layout.
 	*
 	* @return the layout prototype ID of this layout
 	*/

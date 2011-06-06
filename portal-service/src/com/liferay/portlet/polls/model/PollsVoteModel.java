@@ -45,21 +45,21 @@ public interface PollsVoteModel extends BaseModel<PollsVote> {
 	 */
 
 	/**
-	 * Gets the primary key of this polls vote.
+	 * Returns the primary key of this polls vote.
 	 *
 	 * @return the primary key of this polls vote
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this polls vote
+	 * Sets the primary key of this polls vote.
 	 *
 	 * @param primaryKey the primary key of this polls vote
 	 */
 	public void setPrimaryKey(long primaryKey);
 
 	/**
-	 * Gets the vote ID of this polls vote.
+	 * Returns the vote ID of this polls vote.
 	 *
 	 * @return the vote ID of this polls vote
 	 */
@@ -73,7 +73,7 @@ public interface PollsVoteModel extends BaseModel<PollsVote> {
 	public void setVoteId(long voteId);
 
 	/**
-	 * Gets the user ID of this polls vote.
+	 * Returns the user ID of this polls vote.
 	 *
 	 * @return the user ID of this polls vote
 	 */
@@ -87,7 +87,7 @@ public interface PollsVoteModel extends BaseModel<PollsVote> {
 	public void setUserId(long userId);
 
 	/**
-	 * Gets the user uuid of this polls vote.
+	 * Returns the user uuid of this polls vote.
 	 *
 	 * @return the user uuid of this polls vote
 	 * @throws SystemException if a system exception occurred
@@ -102,7 +102,7 @@ public interface PollsVoteModel extends BaseModel<PollsVote> {
 	public void setUserUuid(String userUuid);
 
 	/**
-	 * Gets the question ID of this polls vote.
+	 * Returns the question ID of this polls vote.
 	 *
 	 * @return the question ID of this polls vote
 	 */
@@ -116,7 +116,7 @@ public interface PollsVoteModel extends BaseModel<PollsVote> {
 	public void setQuestionId(long questionId);
 
 	/**
-	 * Gets the choice ID of this polls vote.
+	 * Returns the choice ID of this polls vote.
 	 *
 	 * @return the choice ID of this polls vote
 	 */
@@ -130,7 +130,7 @@ public interface PollsVoteModel extends BaseModel<PollsVote> {
 	public void setChoiceId(long choiceId);
 
 	/**
-	 * Gets the vote date of this polls vote.
+	 * Returns the vote date of this polls vote.
 	 *
 	 * @return the vote date of this polls vote
 	 */

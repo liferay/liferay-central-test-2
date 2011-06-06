@@ -37,7 +37,7 @@ public class ShoppingItemPriceWrapper implements ShoppingItemPrice {
 	}
 
 	/**
-	* Gets the primary key of this shopping item price.
+	* Returns the primary key of this shopping item price.
 	*
 	* @return the primary key of this shopping item price
 	*/
@@ -46,7 +46,7 @@ public class ShoppingItemPriceWrapper implements ShoppingItemPrice {
 	}
 
 	/**
-	* Sets the primary key of this shopping item price
+	* Sets the primary key of this shopping item price.
 	*
 	* @param primaryKey the primary key of this shopping item price
 	*/
@@ -55,7 +55,7 @@ public class ShoppingItemPriceWrapper implements ShoppingItemPrice {
 	}
 
 	/**
-	* Gets the item price ID of this shopping item price.
+	* Returns the item price ID of this shopping item price.
 	*
 	* @return the item price ID of this shopping item price
 	*/
@@ -73,7 +73,7 @@ public class ShoppingItemPriceWrapper implements ShoppingItemPrice {
 	}
 
 	/**
-	* Gets the item ID of this shopping item price.
+	* Returns the item ID of this shopping item price.
 	*
 	* @return the item ID of this shopping item price
 	*/
@@ -91,7 +91,7 @@ public class ShoppingItemPriceWrapper implements ShoppingItemPrice {
 	}
 
 	/**
-	* Gets the min quantity of this shopping item price.
+	* Returns the min quantity of this shopping item price.
 	*
 	* @return the min quantity of this shopping item price
 	*/
@@ -109,7 +109,7 @@ public class ShoppingItemPriceWrapper implements ShoppingItemPrice {
 	}
 
 	/**
-	* Gets the max quantity of this shopping item price.
+	* Returns the max quantity of this shopping item price.
 	*
 	* @return the max quantity of this shopping item price
 	*/
@@ -127,7 +127,7 @@ public class ShoppingItemPriceWrapper implements ShoppingItemPrice {
 	}
 
 	/**
-	* Gets the price of this shopping item price.
+	* Returns the price of this shopping item price.
 	*
 	* @return the price of this shopping item price
 	*/
@@ -145,7 +145,7 @@ public class ShoppingItemPriceWrapper implements ShoppingItemPrice {
 	}
 
 	/**
-	* Gets the discount of this shopping item price.
+	* Returns the discount of this shopping item price.
 	*
 	* @return the discount of this shopping item price
 	*/
@@ -163,7 +163,7 @@ public class ShoppingItemPriceWrapper implements ShoppingItemPrice {
 	}
 
 	/**
-	* Gets the taxable of this shopping item price.
+	* Returns the taxable of this shopping item price.
 	*
 	* @return the taxable of this shopping item price
 	*/
@@ -190,7 +190,7 @@ public class ShoppingItemPriceWrapper implements ShoppingItemPrice {
 	}
 
 	/**
-	* Gets the shipping of this shopping item price.
+	* Returns the shipping of this shopping item price.
 	*
 	* @return the shipping of this shopping item price
 	*/
@@ -208,7 +208,7 @@ public class ShoppingItemPriceWrapper implements ShoppingItemPrice {
 	}
 
 	/**
-	* Gets the use shipping formula of this shopping item price.
+	* Returns the use shipping formula of this shopping item price.
 	*
 	* @return the use shipping formula of this shopping item price
 	*/
@@ -235,7 +235,7 @@ public class ShoppingItemPriceWrapper implements ShoppingItemPrice {
 	}
 
 	/**
-	* Gets the status of this shopping item price.
+	* Returns the status of this shopping item price.
 	*
 	* @return the status of this shopping item price
 	*/

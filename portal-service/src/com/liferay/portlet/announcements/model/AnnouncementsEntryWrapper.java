@@ -37,7 +37,7 @@ public class AnnouncementsEntryWrapper implements AnnouncementsEntry {
 	}
 
 	/**
-	* Gets the primary key of this announcements entry.
+	* Returns the primary key of this announcements entry.
 	*
 	* @return the primary key of this announcements entry
 	*/
@@ -46,7 +46,7 @@ public class AnnouncementsEntryWrapper implements AnnouncementsEntry {
 	}
 
 	/**
-	* Sets the primary key of this announcements entry
+	* Sets the primary key of this announcements entry.
 	*
 	* @param primaryKey the primary key of this announcements entry
 	*/
@@ -55,7 +55,7 @@ public class AnnouncementsEntryWrapper implements AnnouncementsEntry {
 	}
 
 	/**
-	* Gets the uuid of this announcements entry.
+	* Returns the uuid of this announcements entry.
 	*
 	* @return the uuid of this announcements entry
 	*/
@@ -73,7 +73,7 @@ public class AnnouncementsEntryWrapper implements AnnouncementsEntry {
 	}
 
 	/**
-	* Gets the entry ID of this announcements entry.
+	* Returns the entry ID of this announcements entry.
 	*
 	* @return the entry ID of this announcements entry
 	*/
@@ -91,7 +91,7 @@ public class AnnouncementsEntryWrapper implements AnnouncementsEntry {
 	}
 
 	/**
-	* Gets the company ID of this announcements entry.
+	* Returns the company ID of this announcements entry.
 	*
 	* @return the company ID of this announcements entry
 	*/
@@ -109,7 +109,7 @@ public class AnnouncementsEntryWrapper implements AnnouncementsEntry {
 	}
 
 	/**
-	* Gets the user ID of this announcements entry.
+	* Returns the user ID of this announcements entry.
 	*
 	* @return the user ID of this announcements entry
 	*/
@@ -127,7 +127,7 @@ public class AnnouncementsEntryWrapper implements AnnouncementsEntry {
 	}
 
 	/**
-	* Gets the user uuid of this announcements entry.
+	* Returns the user uuid of this announcements entry.
 	*
 	* @return the user uuid of this announcements entry
 	* @throws SystemException if a system exception occurred
@@ -147,7 +147,7 @@ public class AnnouncementsEntryWrapper implements AnnouncementsEntry {
 	}
 
 	/**
-	* Gets the user name of this announcements entry.
+	* Returns the user name of this announcements entry.
 	*
 	* @return the user name of this announcements entry
 	*/
@@ -165,7 +165,7 @@ public class AnnouncementsEntryWrapper implements AnnouncementsEntry {
 	}
 
 	/**
-	* Gets the create date of this announcements entry.
+	* Returns the create date of this announcements entry.
 	*
 	* @return the create date of this announcements entry
 	*/
@@ -183,7 +183,7 @@ public class AnnouncementsEntryWrapper implements AnnouncementsEntry {
 	}
 
 	/**
-	* Gets the modified date of this announcements entry.
+	* Returns the modified date of this announcements entry.
 	*
 	* @return the modified date of this announcements entry
 	*/
@@ -201,16 +201,16 @@ public class AnnouncementsEntryWrapper implements AnnouncementsEntry {
 	}
 
 	/**
-	* Gets the class name of the model instance this announcements entry is polymorphically associated with.
+	* Returns the fully qualified class name of this announcements entry.
 	*
-	* @return the class name of the model instance this announcements entry is polymorphically associated with
+	* @return the fully qualified class name of this announcements entry
 	*/
 	public java.lang.String getClassName() {
 		return _announcementsEntry.getClassName();
 	}
 
 	/**
-	* Gets the class name ID of this announcements entry.
+	* Returns the class name ID of this announcements entry.
 	*
 	* @return the class name ID of this announcements entry
 	*/
@@ -228,7 +228,7 @@ public class AnnouncementsEntryWrapper implements AnnouncementsEntry {
 	}
 
 	/**
-	* Gets the class p k of this announcements entry.
+	* Returns the class p k of this announcements entry.
 	*
 	* @return the class p k of this announcements entry
 	*/
@@ -246,7 +246,7 @@ public class AnnouncementsEntryWrapper implements AnnouncementsEntry {
 	}
 
 	/**
-	* Gets the title of this announcements entry.
+	* Returns the title of this announcements entry.
 	*
 	* @return the title of this announcements entry
 	*/
@@ -264,7 +264,7 @@ public class AnnouncementsEntryWrapper implements AnnouncementsEntry {
 	}
 
 	/**
-	* Gets the content of this announcements entry.
+	* Returns the content of this announcements entry.
 	*
 	* @return the content of this announcements entry
 	*/
@@ -282,7 +282,7 @@ public class AnnouncementsEntryWrapper implements AnnouncementsEntry {
 	}
 
 	/**
-	* Gets the url of this announcements entry.
+	* Returns the url of this announcements entry.
 	*
 	* @return the url of this announcements entry
 	*/
@@ -300,7 +300,7 @@ public class AnnouncementsEntryWrapper implements AnnouncementsEntry {
 	}
 
 	/**
-	* Gets the type of this announcements entry.
+	* Returns the type of this announcements entry.
 	*
 	* @return the type of this announcements entry
 	*/
@@ -318,7 +318,7 @@ public class AnnouncementsEntryWrapper implements AnnouncementsEntry {
 	}
 
 	/**
-	* Gets the display date of this announcements entry.
+	* Returns the display date of this announcements entry.
 	*
 	* @return the display date of this announcements entry
 	*/
@@ -336,7 +336,7 @@ public class AnnouncementsEntryWrapper implements AnnouncementsEntry {
 	}
 
 	/**
-	* Gets the expiration date of this announcements entry.
+	* Returns the expiration date of this announcements entry.
 	*
 	* @return the expiration date of this announcements entry
 	*/
@@ -354,7 +354,7 @@ public class AnnouncementsEntryWrapper implements AnnouncementsEntry {
 	}
 
 	/**
-	* Gets the priority of this announcements entry.
+	* Returns the priority of this announcements entry.
 	*
 	* @return the priority of this announcements entry
 	*/
@@ -372,7 +372,7 @@ public class AnnouncementsEntryWrapper implements AnnouncementsEntry {
 	}
 
 	/**
-	* Gets the alert of this announcements entry.
+	* Returns the alert of this announcements entry.
 	*
 	* @return the alert of this announcements entry
 	*/

@@ -119,7 +119,7 @@ public class CompanyUtil {
 	/**
 	* Caches the company in the entity cache if it is enabled.
 	*
-	* @param company the company to cache
+	* @param company the company
 	*/
 	public static void cacheResult(com.liferay.portal.model.Company company) {
 		getPersistence().cacheResult(company);
@@ -128,7 +128,7 @@ public class CompanyUtil {
 	/**
 	* Caches the companies in the entity cache if it is enabled.
 	*
-	* @param companies the companies to cache
+	* @param companies the companies
 	*/
 	public static void cacheResult(
 		java.util.List<com.liferay.portal.model.Company> companies) {
@@ -148,7 +148,7 @@ public class CompanyUtil {
 	/**
 	* Removes the company with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param companyId the primary key of the company to remove
+	* @param companyId the primary key of the company
 	* @return the company that was removed
 	* @throws com.liferay.portal.NoSuchCompanyException if a company with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -166,9 +166,9 @@ public class CompanyUtil {
 	}
 
 	/**
-	* Finds the company with the primary key or throws a {@link com.liferay.portal.NoSuchCompanyException} if it could not be found.
+	* Returns the company with the primary key or throws a {@link com.liferay.portal.NoSuchCompanyException} if it could not be found.
 	*
-	* @param companyId the primary key of the company to find
+	* @param companyId the primary key of the company
 	* @return the company
 	* @throws com.liferay.portal.NoSuchCompanyException if a company with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -181,9 +181,9 @@ public class CompanyUtil {
 	}
 
 	/**
-	* Finds the company with the primary key or returns <code>null</code> if it could not be found.
+	* Returns the company with the primary key or returns <code>null</code> if it could not be found.
 	*
-	* @param companyId the primary key of the company to find
+	* @param companyId the primary key of the company
 	* @return the company, or <code>null</code> if a company with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -194,9 +194,9 @@ public class CompanyUtil {
 	}
 
 	/**
-	* Finds the company where webId = &#63; or throws a {@link com.liferay.portal.NoSuchCompanyException} if it could not be found.
+	* Returns the company where webId = &#63; or throws a {@link com.liferay.portal.NoSuchCompanyException} if it could not be found.
 	*
-	* @param webId the web ID to search with
+	* @param webId the web ID
 	* @return the matching company
 	* @throws com.liferay.portal.NoSuchCompanyException if a matching company could not be found
 	* @throws SystemException if a system exception occurred
@@ -209,9 +209,9 @@ public class CompanyUtil {
 	}
 
 	/**
-	* Finds the company where webId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	* Returns the company where webId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	*
-	* @param webId the web ID to search with
+	* @param webId the web ID
 	* @return the matching company, or <code>null</code> if a matching company could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -222,9 +222,9 @@ public class CompanyUtil {
 	}
 
 	/**
-	* Finds the company where webId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	* Returns the company where webId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
-	* @param webId the web ID to search with
+	* @param webId the web ID
 	* @return the matching company, or <code>null</code> if a matching company could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -235,9 +235,9 @@ public class CompanyUtil {
 	}
 
 	/**
-	* Finds the company where mx = &#63; or throws a {@link com.liferay.portal.NoSuchCompanyException} if it could not be found.
+	* Returns the company where mx = &#63; or throws a {@link com.liferay.portal.NoSuchCompanyException} if it could not be found.
 	*
-	* @param mx the mx to search with
+	* @param mx the mx
 	* @return the matching company
 	* @throws com.liferay.portal.NoSuchCompanyException if a matching company could not be found
 	* @throws SystemException if a system exception occurred
@@ -249,9 +249,9 @@ public class CompanyUtil {
 	}
 
 	/**
-	* Finds the company where mx = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	* Returns the company where mx = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	*
-	* @param mx the mx to search with
+	* @param mx the mx
 	* @return the matching company, or <code>null</code> if a matching company could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -262,9 +262,9 @@ public class CompanyUtil {
 	}
 
 	/**
-	* Finds the company where mx = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	* Returns the company where mx = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
-	* @param mx the mx to search with
+	* @param mx the mx
 	* @return the matching company, or <code>null</code> if a matching company could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -275,9 +275,9 @@ public class CompanyUtil {
 	}
 
 	/**
-	* Finds the company where logoId = &#63; or throws a {@link com.liferay.portal.NoSuchCompanyException} if it could not be found.
+	* Returns the company where logoId = &#63; or throws a {@link com.liferay.portal.NoSuchCompanyException} if it could not be found.
 	*
-	* @param logoId the logo ID to search with
+	* @param logoId the logo ID
 	* @return the matching company
 	* @throws com.liferay.portal.NoSuchCompanyException if a matching company could not be found
 	* @throws SystemException if a system exception occurred
@@ -289,9 +289,9 @@ public class CompanyUtil {
 	}
 
 	/**
-	* Finds the company where logoId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	* Returns the company where logoId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	*
-	* @param logoId the logo ID to search with
+	* @param logoId the logo ID
 	* @return the matching company, or <code>null</code> if a matching company could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -301,9 +301,9 @@ public class CompanyUtil {
 	}
 
 	/**
-	* Finds the company where logoId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	* Returns the company where logoId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
-	* @param logoId the logo ID to search with
+	* @param logoId the logo ID
 	* @return the matching company, or <code>null</code> if a matching company could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -314,9 +314,9 @@ public class CompanyUtil {
 	}
 
 	/**
-	* Finds all the companies where system = &#63;.
+	* Returns all the companies where system = &#63;.
 	*
-	* @param system the system to search with
+	* @param system the system
 	* @return the matching companies
 	* @throws SystemException if a system exception occurred
 	*/
@@ -327,15 +327,15 @@ public class CompanyUtil {
 	}
 
 	/**
-	* Finds a range of all the companies where system = &#63;.
+	* Returns a range of all the companies where system = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param system the system to search with
-	* @param start the lower bound of the range of companies to return
-	* @param end the upper bound of the range of companies to return (not inclusive)
+	* @param system the system
+	* @param start the lower bound of the range of companies
+	* @param end the upper bound of the range of companies (not inclusive)
 	* @return the range of matching companies
 	* @throws SystemException if a system exception occurred
 	*/
@@ -346,15 +346,15 @@ public class CompanyUtil {
 	}
 
 	/**
-	* Finds an ordered range of all the companies where system = &#63;.
+	* Returns an ordered range of all the companies where system = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param system the system to search with
-	* @param start the lower bound of the range of companies to return
-	* @param end the upper bound of the range of companies to return (not inclusive)
+	* @param system the system
+	* @param start the lower bound of the range of companies
+	* @param end the upper bound of the range of companies (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching companies
 	* @throws SystemException if a system exception occurred
@@ -368,13 +368,13 @@ public class CompanyUtil {
 	}
 
 	/**
-	* Finds the first company in the ordered set where system = &#63;.
+	* Returns the first company in the ordered set where system = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param system the system to search with
+	* @param system the system
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching company
 	* @throws com.liferay.portal.NoSuchCompanyException if a matching company could not be found
@@ -389,13 +389,13 @@ public class CompanyUtil {
 	}
 
 	/**
-	* Finds the last company in the ordered set where system = &#63;.
+	* Returns the last company in the ordered set where system = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param system the system to search with
+	* @param system the system
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching company
 	* @throws com.liferay.portal.NoSuchCompanyException if a matching company could not be found
@@ -410,14 +410,14 @@ public class CompanyUtil {
 	}
 
 	/**
-	* Finds the companies before and after the current company in the ordered set where system = &#63;.
+	* Returns the companies before and after the current company in the ordered set where system = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
 	* @param companyId the primary key of the current company
-	* @param system the system to search with
+	* @param system the system
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next company
 	* @throws com.liferay.portal.NoSuchCompanyException if a company with the primary key could not be found
@@ -434,7 +434,7 @@ public class CompanyUtil {
 	}
 
 	/**
-	* Finds all the companies.
+	* Returns all the companies.
 	*
 	* @return the companies
 	* @throws SystemException if a system exception occurred
@@ -445,14 +445,14 @@ public class CompanyUtil {
 	}
 
 	/**
-	* Finds a range of all the companies.
+	* Returns a range of all the companies.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of companies to return
-	* @param end the upper bound of the range of companies to return (not inclusive)
+	* @param start the lower bound of the range of companies
+	* @param end the upper bound of the range of companies (not inclusive)
 	* @return the range of companies
 	* @throws SystemException if a system exception occurred
 	*/
@@ -463,14 +463,14 @@ public class CompanyUtil {
 	}
 
 	/**
-	* Finds an ordered range of all the companies.
+	* Returns an ordered range of all the companies.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of companies to return
-	* @param end the upper bound of the range of companies to return (not inclusive)
+	* @param start the lower bound of the range of companies
+	* @param end the upper bound of the range of companies (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of companies
 	* @throws SystemException if a system exception occurred
@@ -485,7 +485,7 @@ public class CompanyUtil {
 	/**
 	* Removes the company where webId = &#63; from the database.
 	*
-	* @param webId the web ID to search with
+	* @param webId the web ID
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByWebId(java.lang.String webId)
@@ -497,7 +497,7 @@ public class CompanyUtil {
 	/**
 	* Removes the company where mx = &#63; from the database.
 	*
-	* @param mx the mx to search with
+	* @param mx the mx
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByMx(java.lang.String mx)
@@ -509,7 +509,7 @@ public class CompanyUtil {
 	/**
 	* Removes the company where logoId = &#63; from the database.
 	*
-	* @param logoId the logo ID to search with
+	* @param logoId the logo ID
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByLogoId(long logoId)
@@ -521,7 +521,7 @@ public class CompanyUtil {
 	/**
 	* Removes all the companies where system = &#63; from the database.
 	*
-	* @param system the system to search with
+	* @param system the system
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeBySystem(boolean system)
@@ -540,9 +540,9 @@ public class CompanyUtil {
 	}
 
 	/**
-	* Counts all the companies where webId = &#63;.
+	* Returns the number of companies where webId = &#63;.
 	*
-	* @param webId the web ID to search with
+	* @param webId the web ID
 	* @return the number of matching companies
 	* @throws SystemException if a system exception occurred
 	*/
@@ -552,9 +552,9 @@ public class CompanyUtil {
 	}
 
 	/**
-	* Counts all the companies where mx = &#63;.
+	* Returns the number of companies where mx = &#63;.
 	*
-	* @param mx the mx to search with
+	* @param mx the mx
 	* @return the number of matching companies
 	* @throws SystemException if a system exception occurred
 	*/
@@ -564,9 +564,9 @@ public class CompanyUtil {
 	}
 
 	/**
-	* Counts all the companies where logoId = &#63;.
+	* Returns the number of companies where logoId = &#63;.
 	*
-	* @param logoId the logo ID to search with
+	* @param logoId the logo ID
 	* @return the number of matching companies
 	* @throws SystemException if a system exception occurred
 	*/
@@ -576,9 +576,9 @@ public class CompanyUtil {
 	}
 
 	/**
-	* Counts all the companies where system = &#63;.
+	* Returns the number of companies where system = &#63;.
 	*
-	* @param system the system to search with
+	* @param system the system
 	* @return the number of matching companies
 	* @throws SystemException if a system exception occurred
 	*/
@@ -588,7 +588,7 @@ public class CompanyUtil {
 	}
 
 	/**
-	* Counts all the companies.
+	* Returns the number of companies.
 	*
 	* @return the number of companies
 	* @throws SystemException if a system exception occurred
