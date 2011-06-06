@@ -37,8 +37,10 @@ public class LiferayResourceManager extends ResourceManagerImpl {
 		// Velocity's default implementation makes its cache useless because
 		// getResourceStream is called to test the availability of a template
 
-		if ((globalCache.get(ResourceManager.RESOURCE_TEMPLATE + source) != null) ||
-			(globalCache.get(ResourceManager.RESOURCE_CONTENT + source) != null)) {
+		if ((globalCache.get(ResourceManager.RESOURCE_CONTENT + source) !=
+				null) ||
+			(globalCache.get(ResourceManager.RESOURCE_TEMPLATE + source) !=
+				null)) {
 
 			return LiferayResourceLoader.class.getName();
 		}
