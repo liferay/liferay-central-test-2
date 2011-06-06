@@ -92,167 +92,47 @@ import javax.sql.DataSource;
 		 */
 </#if>
 
-<#if sessionTypeName == "Local" && entity.hasColumns()>
-	<#assign serviceBaseExceptions = serviceBuilder.getServiceBaseExceptions(methods, "add" + entity.name, [packagePath + ".model." + entity.name], ["SystemException"])>
+	<#if sessionTypeName == "Local" && entity.hasColumns()>
+		<#assign serviceBaseExceptions = serviceBuilder.getServiceBaseExceptions(methods, "add" + entity.name, [packagePath + ".model." + entity.name], ["SystemException"])>
 
-	/**
-	 * Adds the ${entity.humanName} to the database. Also notifies the appropriate model listeners.
-	 *
-	 * @param ${entity.varName} the ${entity.humanName}
-	 * @return the ${entity.humanName} that was added
-	<#list serviceBaseExceptions as exception>
-	<#if exception == "SystemException">
-	 * @throws SystemException if a system exception occurred
-	<#else>
-	 * @throws ${exception}
-	</#if>
-	</#list>
-	 */
-	public ${entity.name} add${entity.name}(${entity.name} ${entity.varName}) throws ${stringUtil.merge(serviceBaseExceptions)} {
-		${entity.varName}.setNew(true);
-
-		return ${entity.varName}Persistence.update(${entity.varName}, false);
-	}
-
-	/**
-	 * Creates a new ${entity.humanName} with the primary key. Does not add the ${entity.humanName} to the database.
-	 *
-	 * @param ${entity.PKVarName} the primary key for the new ${entity.humanName}
-	 * @return the new ${entity.humanName}
-	 */
-	public ${entity.name} create${entity.name}(${entity.PKClassName} ${entity.PKVarName}) {
-		return ${entity.varName}Persistence.create(${entity.PKVarName});
-	}
-
-	<#assign serviceBaseExceptions = serviceBuilder.getServiceBaseExceptions(methods, "delete" + entity.name, [entity.PKClassName], ["PortalException", "SystemException"])>
-
-	/**
-	 * Deletes the ${entity.humanName} with the primary key from the database. Also notifies the appropriate model listeners.
-	 *
-	 * @param ${entity.PKVarName} the primary key of the ${entity.humanName}
-	<#list serviceBaseExceptions as exception>
-	<#if exception == "PortalException">
-	 * @throws PortalException if a ${entity.humanName} with the primary key could not be found
-	<#elseif exception == "SystemException">
-	 * @throws SystemException if a system exception occurred
-	<#else>
-	 * @throws ${exception}
-	</#if>
-	</#list>
-	 */
-	public void delete${entity.name}(${entity.PKClassName} ${entity.PKVarName}) throws ${stringUtil.merge(serviceBaseExceptions)} {
-		${entity.varName}Persistence.remove(${entity.PKVarName});
-	}
-
-	<#assign serviceBaseExceptions = serviceBuilder.getServiceBaseExceptions(methods, "delete" + entity.name, [packagePath + ".model." + entity.name], ["SystemException"])>
-
-	/**
-	 * Deletes the ${entity.humanName} from the database. Also notifies the appropriate model listeners.
-	 *
-	 * @param ${entity.varName} the ${entity.humanName}
-	<#list serviceBaseExceptions as exception>
-	<#if exception == "SystemException">
-	 * @throws SystemException if a system exception occurred
-	<#else>
-	 * @throws ${exception}
-	</#if>
-	</#list>
-	 */
-	public void delete${entity.name}(${entity.name} ${entity.varName}) throws ${stringUtil.merge(serviceBaseExceptions)} {
-		${entity.varName}Persistence.remove(${entity.varName});
-	}
-
-	/**
-	 * Performs a dynamic query on the database and returns the matching rows.
-	 *
-	 * @param dynamicQuery the dynamic query
-	 * @return the matching rows
-	 * @throws SystemException if a system exception occurred
-	 */
-	@SuppressWarnings("rawtypes")
-	public List dynamicQuery(DynamicQuery dynamicQuery) throws SystemException {
-		return ${entity.varName}Persistence.findWithDynamicQuery(dynamicQuery);
-	}
-
-	/**
-	 * Performs a dynamic query on the database and returns a range of the matching rows.
-	 *
-	 * <p>
-	 * <#include "range_comment.ftl">
-	 * </p>
-	 *
-	 * @param dynamicQuery the dynamic query
-	 * @param start the lower bound of the range of model instances
-	 * @param end the upper bound of the range of model instances (not inclusive)
-	 * @return the range of matching rows
-	 * @throws SystemException if a system exception occurred
-	 */
-	@SuppressWarnings("rawtypes")
-	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end) throws SystemException {
-		return ${entity.varName}Persistence.findWithDynamicQuery(dynamicQuery, start, end);
-	}
-
-	/**
-	 * Performs a dynamic query on the database and returns an ordered range of the matching rows.
-	 *
-	 * <p>
-	 * <#include "range_comment.ftl">
-	 * </p>
-	 *
-	 * @param dynamicQuery the dynamic query
-	 * @param start the lower bound of the range of model instances
-	 * @param end the upper bound of the range of model instances (not inclusive)
-	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @return the ordered range of matching rows
-	 * @throws SystemException if a system exception occurred
-	 */
-	@SuppressWarnings("rawtypes")
-	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end, OrderByComparator orderByComparator) throws SystemException {
-		return ${entity.varName}Persistence.findWithDynamicQuery(dynamicQuery, start, end, orderByComparator);
-	}
-
-	/**
-	 * Returns the number of rows that match the dynamic query.
-	 *
-	 * @param dynamicQuery the dynamic query
-	 * @return the number of rows that match the dynamic query
-	 * @throws SystemException if a system exception occurred
-	 */
-	public long dynamicQueryCount(DynamicQuery dynamicQuery) throws SystemException {
-		return ${entity.varName}Persistence.countWithDynamicQuery(dynamicQuery);
-	}
-
-	<#assign serviceBaseExceptions = serviceBuilder.getServiceBaseExceptions(methods, "get" + entity.name, [entity.PKClassName], ["PortalException", "SystemException"])>
-
-	/**
-	 * Returns the ${entity.humanName} with the primary key.
-	 *
-	 * @param ${entity.PKVarName} the primary key of the ${entity.humanName}
-	 * @return the ${entity.humanName}
-	<#list serviceBaseExceptions as exception>
-	<#if exception == "PortalException">
-	 * @throws PortalException if a ${entity.humanName} with the primary key could not be found
-	<#elseif exception == "SystemException">
-	 * @throws SystemException if a system exception occurred
-	<#else>
-	 * @throws ${exception}
-	</#if>
-	</#list>
-	 */
-	public ${entity.name} get${entity.name}(${entity.PKClassName} ${entity.PKVarName}) throws ${stringUtil.merge(serviceBaseExceptions)} {
-		return ${entity.varName}Persistence.findByPrimaryKey(${entity.PKVarName});
-	}
-
-	<#if entity.hasUuid() && entity.hasColumn("groupId")>
 		/**
-		 * Returns the ${entity.humanName} with the UUID in the group.
+		 * Adds the ${entity.humanName} to the database. Also notifies the appropriate model listeners.
 		 *
-		 * @param uuid the UUID of ${entity.humanName}
-		 * @param groupId the group id of the ${entity.humanName}
-		 * @return the ${entity.humanName}
+		 * @param ${entity.varName} the ${entity.humanName}
+		 * @return the ${entity.humanName} that was added
+		<#list serviceBaseExceptions as exception>
+		<#if exception == "SystemException">
+		 * @throws SystemException if a system exception occurred
+		<#else>
+		 * @throws ${exception}
+		</#if>
+		</#list>
+		 */
+		public ${entity.name} add${entity.name}(${entity.name} ${entity.varName}) throws ${stringUtil.merge(serviceBaseExceptions)} {
+			${entity.varName}.setNew(true);
+
+			return ${entity.varName}Persistence.update(${entity.varName}, false);
+		}
+
+		/**
+		 * Creates a new ${entity.humanName} with the primary key. Does not add the ${entity.humanName} to the database.
+		 *
+		 * @param ${entity.PKVarName} the primary key for the new ${entity.humanName}
+		 * @return the new ${entity.humanName}
+		 */
+		public ${entity.name} create${entity.name}(${entity.PKClassName} ${entity.PKVarName}) {
+			return ${entity.varName}Persistence.create(${entity.PKVarName});
+		}
+
+		<#assign serviceBaseExceptions = serviceBuilder.getServiceBaseExceptions(methods, "delete" + entity.name, [entity.PKClassName], ["PortalException", "SystemException"])>
+
+		/**
+		 * Deletes the ${entity.humanName} with the primary key from the database. Also notifies the appropriate model listeners.
+		 *
+		 * @param ${entity.PKVarName} the primary key of the ${entity.humanName}
 		<#list serviceBaseExceptions as exception>
 		<#if exception == "PortalException">
-		 * @throws PortalException if a ${entity.humanName} with the UUID in the group could not be found
+		 * @throws PortalException if a ${entity.humanName} with the primary key could not be found
 		<#elseif exception == "SystemException">
 		 * @throws SystemException if a system exception occurred
 		<#else>
@@ -260,222 +140,342 @@ import javax.sql.DataSource;
 		</#if>
 		</#list>
 		 */
-		public ${entity.name} get${entity.name}ByUuidAndGroupId(String uuid, long groupId) throws ${stringUtil.merge(serviceBaseExceptions)} {
-			return ${entity.varName}Persistence.findByUUID_G(uuid, groupId);
+		public void delete${entity.name}(${entity.PKClassName} ${entity.PKVarName}) throws ${stringUtil.merge(serviceBaseExceptions)} {
+			${entity.varName}Persistence.remove(${entity.PKVarName});
 		}
-	</#if>
 
-	/**
-	 * Returns a range of all the ${entity.humanNames}.
-	 *
-	 * <p>
-	 * <#include "range_comment.ftl">
-	 * </p>
-	 *
-	 * @param start the lower bound of the range of ${entity.humanNames}
-	 * @param end the upper bound of the range of ${entity.humanNames} (not inclusive)
-	 * @return the range of ${entity.humanNames}
-	 * @throws SystemException if a system exception occurred
-	 */
-	public List<${entity.name}> get${entity.names}(int start, int end) throws SystemException {
-		return ${entity.varName}Persistence.findAll(start, end);
-	}
-
-	/**
-	 * Returns the number of ${entity.humanNames}.
-	 *
-	 * @return the number of ${entity.humanNames}
-	 * @throws SystemException if a system exception occurred
-	 */
-	public int get${entity.names}Count() throws SystemException {
-		return ${entity.varName}Persistence.countAll();
-	}
-
-	<#assign serviceBaseExceptions = serviceBuilder.getServiceBaseExceptions(methods, "update" + entity.name, [packagePath + ".model." + entity.name], ["SystemException"])>
-
-	/**
-	 * Updates the ${entity.humanName} in the database. Also notifies the appropriate model listeners.
-	 *
-	 * @param ${entity.varName} the ${entity.humanName}
-	 * @return the ${entity.humanName} that was updated
-	<#list serviceBaseExceptions as exception>
-	<#if exception == "SystemException">
-	 * @throws SystemException if a system exception occurred
-	<#else>
-	 * @throws ${exception}
-	</#if>
-	</#list>
-	 */
-	public ${entity.name} update${entity.name}(${entity.name} ${entity.varName}) throws ${stringUtil.merge(serviceBaseExceptions)} {
-		${entity.varName}.setNew(false);
-
-		return ${entity.varName}Persistence.update(${entity.varName}, true);
-	}
-
-	/**
-	 * Updates the ${entity.humanName} in the database. Also notifies the appropriate model listeners.
-	 *
-	 * @param ${entity.varName} the ${entity.humanName}
-	 * @param merge whether to merge the ${entity.humanName} with the current session. See {@link com.liferay.portal.service.persistence.BatchSession#update(com.liferay.portal.kernel.dao.orm.Session, com.liferay.portal.model.BaseModel, boolean)} for an explanation.
-	 * @return the ${entity.humanName} that was updated
-	<#list serviceBaseExceptions as exception>
-	<#if exception == "SystemException">
-	 * @throws SystemException if a system exception occurred
-	<#else>
-	 * @throws ${exception}
-	</#if>
-	</#list>
-	 */
-	public ${entity.name} update${entity.name}(${entity.name} ${entity.varName}, boolean merge) throws ${stringUtil.merge(serviceBaseExceptions)} {
-		${entity.varName}.setNew(false);
-
-		return ${entity.varName}Persistence.update(${entity.varName}, merge);
-	}
-</#if>
-
-<#list referenceList as tempEntity>
-	<#if tempEntity.hasLocalService()>
-		/**
-		 * Returns the ${tempEntity.humanName} local service.
-		 *
-		 * @return the ${tempEntity.humanName} local service
-		 */
-		public ${tempEntity.name}LocalService get${tempEntity.name}LocalService() {
-			return ${tempEntity.varName}LocalService;
-		}
+		<#assign serviceBaseExceptions = serviceBuilder.getServiceBaseExceptions(methods, "delete" + entity.name, [packagePath + ".model." + entity.name], ["SystemException"])>
 
 		/**
-		 * Sets the ${tempEntity.humanName} local service.
+		 * Deletes the ${entity.humanName} from the database. Also notifies the appropriate model listeners.
 		 *
-		 * @param ${tempEntity.varName}LocalService the ${tempEntity.humanName} local service
-		 */
-		public void set${tempEntity.name}LocalService(${tempEntity.name}LocalService ${tempEntity.varName}LocalService) {
-			this.${tempEntity.varName}LocalService = ${tempEntity.varName}LocalService;
-		}
-	</#if>
-
-	<#if tempEntity.hasRemoteService()>
-		/**
-		 * Returns the ${tempEntity.humanName} remote service.
-		 *
-		 * @return the ${tempEntity.humanName} remote service
-		 */
-		public ${tempEntity.name}Service get${tempEntity.name}Service() {
-			return ${tempEntity.varName}Service;
-		}
-
-		/**
-		 * Sets the ${tempEntity.humanName} remote service.
-		 *
-		 * @param ${tempEntity.varName}Service the ${tempEntity.humanName} remote service
-		 */
-		public void set${tempEntity.name}Service(${tempEntity.name}Service ${tempEntity.varName}Service) {
-			this.${tempEntity.varName}Service = ${tempEntity.varName}Service;
-		}
-	</#if>
-
-	<#if tempEntity.hasColumns() && (entity.name == "Counter" || tempEntity.name != "Counter")>
-		/**
-		 * Returns the ${tempEntity.humanName} persistence.
-		 *
-		 * @return the ${tempEntity.humanName} persistence
-		 */
-		public ${tempEntity.name}Persistence get${tempEntity.name}Persistence() {
-			return ${tempEntity.varName}Persistence;
-		}
-
-		/**
-		 * Sets the ${tempEntity.humanName} persistence.
-		 *
-		 * @param ${tempEntity.varName}Persistence the ${tempEntity.humanName} persistence
-		 */
-		public void set${tempEntity.name}Persistence(${tempEntity.name}Persistence ${tempEntity.varName}Persistence) {
-			this.${tempEntity.varName}Persistence = ${tempEntity.varName}Persistence;
-		}
-	</#if>
-
-	<#if tempEntity.hasFinderClass() && (entity.name == "Counter" || tempEntity.name != "Counter")>
-		/**
-		 * Returns the ${tempEntity.humanName} finder.
-		 *
-		 * @return the ${tempEntity.humanName} finder
-		 */
-		public ${tempEntity.name}Finder get${tempEntity.name}Finder() {
-			return ${tempEntity.varName}Finder;
-		}
-
-		/**
-		 * Sets the ${tempEntity.humanName} finder.
-		 *
-		 * @param ${tempEntity.varName}Finder the ${tempEntity.humanName} finder
-		 */
-		public void set${tempEntity.name}Finder(${tempEntity.name}Finder ${tempEntity.varName}Finder) {
-			this.${tempEntity.varName}Finder = ${tempEntity.varName}Finder;
-		}
-	</#if>
-</#list>
-
-/**
- * Returns the Spring bean ID for this bean.
- *
- * @return the Spring bean ID for this bean
- */
-public String getBeanIdentifier() {
-	return _beanIdentifier;
-}
-
-/**
- * Sets the Spring bean ID for this bean.
- *
- * @param beanIdentifier the Spring bean ID for this bean
- */
-public void setBeanIdentifier(String beanIdentifier) {
-	_beanIdentifier = beanIdentifier;
-}
-
-/**
- * Performs an SQL query.
- *
- * @param sql the sql query
- */
-protected void runSQL(String sql) throws SystemException {
-	try {
-		<#if entity.hasColumns()>
-			DataSource dataSource = ${entity.varName}Persistence.getDataSource();
+		 * @param ${entity.varName} the ${entity.humanName}
+		<#list serviceBaseExceptions as exception>
+		<#if exception == "SystemException">
+		 * @throws SystemException if a system exception occurred
 		<#else>
-			DataSource dataSource = InfrastructureUtil.getDataSource();
+		 * @throws ${exception}
+		</#if>
+		</#list>
+		 */
+		public void delete${entity.name}(${entity.name} ${entity.varName}) throws ${stringUtil.merge(serviceBaseExceptions)} {
+			${entity.varName}Persistence.remove(${entity.varName});
+		}
+
+		/**
+		 * Performs a dynamic query on the database and returns the matching rows.
+		 *
+		 * @param dynamicQuery the dynamic query
+		 * @return the matching rows
+		 * @throws SystemException if a system exception occurred
+		 */
+		@SuppressWarnings("rawtypes")
+		public List dynamicQuery(DynamicQuery dynamicQuery) throws SystemException {
+			return ${entity.varName}Persistence.findWithDynamicQuery(dynamicQuery);
+		}
+
+		/**
+		 * Performs a dynamic query on the database and returns a range of the matching rows.
+		 *
+		 * <p>
+		 * <#include "range_comment.ftl">
+		 * </p>
+		 *
+		 * @param dynamicQuery the dynamic query
+		 * @param start the lower bound of the range of model instances
+		 * @param end the upper bound of the range of model instances (not inclusive)
+		 * @return the range of matching rows
+		 * @throws SystemException if a system exception occurred
+		 */
+		@SuppressWarnings("rawtypes")
+		public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end) throws SystemException {
+			return ${entity.varName}Persistence.findWithDynamicQuery(dynamicQuery, start, end);
+		}
+
+		/**
+		 * Performs a dynamic query on the database and returns an ordered range of the matching rows.
+		 *
+		 * <p>
+		 * <#include "range_comment.ftl">
+		 * </p>
+		 *
+		 * @param dynamicQuery the dynamic query
+		 * @param start the lower bound of the range of model instances
+		 * @param end the upper bound of the range of model instances (not inclusive)
+		 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+		 * @return the ordered range of matching rows
+		 * @throws SystemException if a system exception occurred
+		 */
+		@SuppressWarnings("rawtypes")
+		public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end, OrderByComparator orderByComparator) throws SystemException {
+			return ${entity.varName}Persistence.findWithDynamicQuery(dynamicQuery, start, end, orderByComparator);
+		}
+
+		/**
+		 * Returns the number of rows that match the dynamic query.
+		 *
+		 * @param dynamicQuery the dynamic query
+		 * @return the number of rows that match the dynamic query
+		 * @throws SystemException if a system exception occurred
+		 */
+		public long dynamicQueryCount(DynamicQuery dynamicQuery) throws SystemException {
+			return ${entity.varName}Persistence.countWithDynamicQuery(dynamicQuery);
+		}
+
+		<#assign serviceBaseExceptions = serviceBuilder.getServiceBaseExceptions(methods, "get" + entity.name, [entity.PKClassName], ["PortalException", "SystemException"])>
+
+		/**
+		 * Returns the ${entity.humanName} with the primary key.
+		 *
+		 * @param ${entity.PKVarName} the primary key of the ${entity.humanName}
+		 * @return the ${entity.humanName}
+		<#list serviceBaseExceptions as exception>
+		<#if exception == "PortalException">
+		 * @throws PortalException if a ${entity.humanName} with the primary key could not be found
+		<#elseif exception == "SystemException">
+		 * @throws SystemException if a system exception occurred
+		<#else>
+		 * @throws ${exception}
+		</#if>
+		</#list>
+		 */
+		public ${entity.name} get${entity.name}(${entity.PKClassName} ${entity.PKVarName}) throws ${stringUtil.merge(serviceBaseExceptions)} {
+			return ${entity.varName}Persistence.findByPrimaryKey(${entity.PKVarName});
+		}
+
+		<#if entity.hasUuid() && entity.hasColumn("groupId")>
+			/**
+			 * Returns the ${entity.humanName} with the UUID in the group.
+			 *
+			 * @param uuid the UUID of ${entity.humanName}
+			 * @param groupId the group id of the ${entity.humanName}
+			 * @return the ${entity.humanName}
+			<#list serviceBaseExceptions as exception>
+			<#if exception == "PortalException">
+			 * @throws PortalException if a ${entity.humanName} with the UUID in the group could not be found
+			<#elseif exception == "SystemException">
+			 * @throws SystemException if a system exception occurred
+			<#else>
+			 * @throws ${exception}
+			</#if>
+			</#list>
+			 */
+			public ${entity.name} get${entity.name}ByUuidAndGroupId(String uuid, long groupId) throws ${stringUtil.merge(serviceBaseExceptions)} {
+				return ${entity.varName}Persistence.findByUUID_G(uuid, groupId);
+			}
 		</#if>
 
-		SqlUpdate sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(dataSource, sql, new int[0]);
+		/**
+		 * Returns a range of all the ${entity.humanNames}.
+		 *
+		 * <p>
+		 * <#include "range_comment.ftl">
+		 * </p>
+		 *
+		 * @param start the lower bound of the range of ${entity.humanNames}
+		 * @param end the upper bound of the range of ${entity.humanNames} (not inclusive)
+		 * @return the range of ${entity.humanNames}
+		 * @throws SystemException if a system exception occurred
+		 */
+		public List<${entity.name}> get${entity.names}(int start, int end) throws SystemException {
+			return ${entity.varName}Persistence.findAll(start, end);
+		}
 
-		sqlUpdate.update();
+		/**
+		 * Returns the number of ${entity.humanNames}.
+		 *
+		 * @return the number of ${entity.humanNames}
+		 * @throws SystemException if a system exception occurred
+		 */
+		public int get${entity.names}Count() throws SystemException {
+			return ${entity.varName}Persistence.countAll();
+		}
+
+		<#assign serviceBaseExceptions = serviceBuilder.getServiceBaseExceptions(methods, "update" + entity.name, [packagePath + ".model." + entity.name], ["SystemException"])>
+
+		/**
+		 * Updates the ${entity.humanName} in the database. Also notifies the appropriate model listeners.
+		 *
+		 * @param ${entity.varName} the ${entity.humanName}
+		 * @return the ${entity.humanName} that was updated
+		<#list serviceBaseExceptions as exception>
+		<#if exception == "SystemException">
+		 * @throws SystemException if a system exception occurred
+		<#else>
+		 * @throws ${exception}
+		</#if>
+		</#list>
+		 */
+		public ${entity.name} update${entity.name}(${entity.name} ${entity.varName}) throws ${stringUtil.merge(serviceBaseExceptions)} {
+			${entity.varName}.setNew(false);
+
+			return ${entity.varName}Persistence.update(${entity.varName}, true);
+		}
+
+		/**
+		 * Updates the ${entity.humanName} in the database. Also notifies the appropriate model listeners.
+		 *
+		 * @param ${entity.varName} the ${entity.humanName}
+		 * @param merge whether to merge the ${entity.humanName} with the current session. See {@link com.liferay.portal.service.persistence.BatchSession#update(com.liferay.portal.kernel.dao.orm.Session, com.liferay.portal.model.BaseModel, boolean)} for an explanation.
+		 * @return the ${entity.humanName} that was updated
+		<#list serviceBaseExceptions as exception>
+		<#if exception == "SystemException">
+		 * @throws SystemException if a system exception occurred
+		<#else>
+		 * @throws ${exception}
+		</#if>
+		</#list>
+		 */
+		public ${entity.name} update${entity.name}(${entity.name} ${entity.varName}, boolean merge) throws ${stringUtil.merge(serviceBaseExceptions)} {
+			${entity.varName}.setNew(false);
+
+			return ${entity.varName}Persistence.update(${entity.varName}, merge);
+		}
+	</#if>
+
+	<#list referenceList as tempEntity>
+		<#if tempEntity.hasLocalService()>
+			/**
+			 * Returns the ${tempEntity.humanName} local service.
+			 *
+			 * @return the ${tempEntity.humanName} local service
+			 */
+			public ${tempEntity.name}LocalService get${tempEntity.name}LocalService() {
+				return ${tempEntity.varName}LocalService;
+			}
+
+			/**
+			 * Sets the ${tempEntity.humanName} local service.
+			 *
+			 * @param ${tempEntity.varName}LocalService the ${tempEntity.humanName} local service
+			 */
+			public void set${tempEntity.name}LocalService(${tempEntity.name}LocalService ${tempEntity.varName}LocalService) {
+				this.${tempEntity.varName}LocalService = ${tempEntity.varName}LocalService;
+			}
+		</#if>
+
+		<#if tempEntity.hasRemoteService()>
+			/**
+			 * Returns the ${tempEntity.humanName} remote service.
+			 *
+			 * @return the ${tempEntity.humanName} remote service
+			 */
+			public ${tempEntity.name}Service get${tempEntity.name}Service() {
+				return ${tempEntity.varName}Service;
+			}
+
+			/**
+			 * Sets the ${tempEntity.humanName} remote service.
+			 *
+			 * @param ${tempEntity.varName}Service the ${tempEntity.humanName} remote service
+			 */
+			public void set${tempEntity.name}Service(${tempEntity.name}Service ${tempEntity.varName}Service) {
+				this.${tempEntity.varName}Service = ${tempEntity.varName}Service;
+			}
+		</#if>
+
+		<#if tempEntity.hasColumns() && (entity.name == "Counter" || tempEntity.name != "Counter")>
+			/**
+			 * Returns the ${tempEntity.humanName} persistence.
+			 *
+			 * @return the ${tempEntity.humanName} persistence
+			 */
+			public ${tempEntity.name}Persistence get${tempEntity.name}Persistence() {
+				return ${tempEntity.varName}Persistence;
+			}
+
+			/**
+			 * Sets the ${tempEntity.humanName} persistence.
+			 *
+			 * @param ${tempEntity.varName}Persistence the ${tempEntity.humanName} persistence
+			 */
+			public void set${tempEntity.name}Persistence(${tempEntity.name}Persistence ${tempEntity.varName}Persistence) {
+				this.${tempEntity.varName}Persistence = ${tempEntity.varName}Persistence;
+			}
+		</#if>
+
+		<#if tempEntity.hasFinderClass() && (entity.name == "Counter" || tempEntity.name != "Counter")>
+			/**
+			 * Returns the ${tempEntity.humanName} finder.
+			 *
+			 * @return the ${tempEntity.humanName} finder
+			 */
+			public ${tempEntity.name}Finder get${tempEntity.name}Finder() {
+				return ${tempEntity.varName}Finder;
+			}
+
+			/**
+			 * Sets the ${tempEntity.humanName} finder.
+			 *
+			 * @param ${tempEntity.varName}Finder the ${tempEntity.humanName} finder
+			 */
+			public void set${tempEntity.name}Finder(${tempEntity.name}Finder ${tempEntity.varName}Finder) {
+				this.${tempEntity.varName}Finder = ${tempEntity.varName}Finder;
+			}
+		</#if>
+	</#list>
+
+	/**
+	 * Returns the Spring bean ID for this bean.
+	 *
+	 * @return the Spring bean ID for this bean
+	 */
+	public String getBeanIdentifier() {
+		return _beanIdentifier;
 	}
-	catch (Exception e) {
-		throw new SystemException(e);
+
+	/**
+	 * Sets the Spring bean ID for this bean.
+	 *
+	 * @param beanIdentifier the Spring bean ID for this bean
+	 */
+	public void setBeanIdentifier(String beanIdentifier) {
+		_beanIdentifier = beanIdentifier;
 	}
-}
 
-<#list referenceList as tempEntity>
-	<#if tempEntity.hasLocalService()>
-		@BeanReference(type = ${tempEntity.name}LocalService.class)
-		protected ${tempEntity.name}LocalService ${tempEntity.varName}LocalService;
-	</#if>
+	/**
+	 * Performs an SQL query.
+	 *
+	 * @param sql the sql query
+	 */
+	protected void runSQL(String sql) throws SystemException {
+		try {
+			<#if entity.hasColumns()>
+				DataSource dataSource = ${entity.varName}Persistence.getDataSource();
+			<#else>
+				DataSource dataSource = InfrastructureUtil.getDataSource();
+			</#if>
 
-	<#if tempEntity.hasRemoteService()>
-		@BeanReference(type = ${tempEntity.name}Service.class)
-		protected ${tempEntity.name}Service ${tempEntity.varName}Service;
-	</#if>
+			SqlUpdate sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(dataSource, sql, new int[0]);
 
-	<#if tempEntity.hasColumns() && (entity.name == "Counter" || tempEntity.name != "Counter")>
-		@BeanReference(type = ${tempEntity.name}Persistence.class)
-		protected ${tempEntity.name}Persistence ${tempEntity.varName}Persistence;
-	</#if>
+			sqlUpdate.update();
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+	}
 
-	<#if tempEntity.hasFinderClass() && (entity.name == "Counter" || tempEntity.name != "Counter")>
-		@BeanReference(type = ${tempEntity.name}Finder.class)
-		protected ${tempEntity.name}Finder ${tempEntity.varName}Finder;
-	</#if>
-</#list>
+	<#list referenceList as tempEntity>
+		<#if tempEntity.hasLocalService()>
+			@BeanReference(type = ${tempEntity.name}LocalService.class)
+			protected ${tempEntity.name}LocalService ${tempEntity.varName}LocalService;
+		</#if>
+
+		<#if tempEntity.hasRemoteService()>
+			@BeanReference(type = ${tempEntity.name}Service.class)
+			protected ${tempEntity.name}Service ${tempEntity.varName}Service;
+		</#if>
+
+		<#if tempEntity.hasColumns() && (entity.name == "Counter" || tempEntity.name != "Counter")>
+			@BeanReference(type = ${tempEntity.name}Persistence.class)
+			protected ${tempEntity.name}Persistence ${tempEntity.varName}Persistence;
+		</#if>
+
+		<#if tempEntity.hasFinderClass() && (entity.name == "Counter" || tempEntity.name != "Counter")>
+			@BeanReference(type = ${tempEntity.name}Finder.class)
+			protected ${tempEntity.name}Finder ${tempEntity.varName}Finder;
+		</#if>
+	</#list>
 
 	private String _beanIdentifier;
 
