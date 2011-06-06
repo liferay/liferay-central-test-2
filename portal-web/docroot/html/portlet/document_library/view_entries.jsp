@@ -73,7 +73,7 @@ headerNames.add(StringPool.BLANK);
 
 searchContainer.setHeaderNames(headerNames);
 
-searchContainer.setRowChecker(new RowChecker(liferayPortletResponse));
+searchContainer.setRowChecker(new EntriesChecker(liferayPortletResponse));
 
 Map<String, String> orderableHeaders = new HashMap<String, String>();
 
@@ -92,8 +92,6 @@ searchContainer.setOrderableHeaders(orderableHeaders);
 searchContainer.setOrderByCol(orderByCol);
 searchContainer.setOrderByType(orderByType);
 searchContainer.setOrderByComparator(orderByComparator);
-
-searchContainer.setRowChecker(new RowChecker(liferayPortletResponse));
 
 int start = ParamUtil.getInteger(request, "start", searchContainer.getStart());
 int end = ParamUtil.getInteger(request, "end", searchContainer.getEnd());

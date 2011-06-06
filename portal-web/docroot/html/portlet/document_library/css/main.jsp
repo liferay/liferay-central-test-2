@@ -328,10 +328,6 @@
 		}
 	}
 
-	.taglib-search-iterator .results-header input {
-		display: none;
-	}
-
 	.document-display-style .overlay, .lfr-search-container .overlay {
 		clip: rect(0 0 0 0);
 	}
