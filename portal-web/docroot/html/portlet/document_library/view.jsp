@@ -171,7 +171,7 @@ if (folder != null) {
 		function(event) {
 			markSelected(event.currentTarget);
 
-			Liferay.Util.checkAllBox(documentContainer, '<portlet:namespace /><%= RowChecker.ROW_IDS %>Checkbox', '#<portlet:namespace /><%= RowChecker.ALL_ROW_IDS %>Checkbox');
+			Liferay.Util.checkAllBox(documentContainer, '<portlet:namespace /><%= RowChecker.ROW_IDS %>', '#<portlet:namespace /><%= RowChecker.ALL_ROW_IDS %>Checkbox');
 		},
 		'.document-selector'
 	);
