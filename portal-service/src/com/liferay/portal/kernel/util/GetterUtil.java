@@ -327,7 +327,7 @@ public class GetterUtil {
 
 		value = value.trim();
 
-		if (value.contains(CharPool.RETURN)) {
+		if (value.indexOf(CharPool.RETURN) != -1) {
 			value = StringUtil.replace(
 				value, StringPool.RETURN_NEW_LINE, StringPool.NEW_LINE);
 		}
