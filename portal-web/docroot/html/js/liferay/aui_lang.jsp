@@ -14,26 +14,26 @@
  */
 --%>
 
-<%@ taglib uri="http://liferay.com/tld/util" prefix="liferay-util" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-<%@ page import="com.liferay.portal.kernel.servlet.HttpHeaders" %>
-<%@ page import="com.liferay.portal.kernel.util.ContentTypes" %>
-<%@ page import="com.liferay.portal.kernel.util.CalendarUtil" %>
+<%@ taglib uri="http://liferay.com/tld/util" prefix="liferay-util" %>
+
 <%@ page import="com.liferay.portal.kernel.language.LanguageUtil" %>
-<%@ page import="com.liferay.portal.kernel.util.LocalizationUtil" %>
+<%@ page import="com.liferay.portal.kernel.servlet.HttpHeaders" %>
+<%@ page import="com.liferay.portal.kernel.util.CalendarUtil" %>
+<%@ page import="com.liferay.portal.kernel.util.ContentTypes" %>
 <%@ page import="com.liferay.portal.kernel.util.LocaleUtil" %>
+<%@ page import="com.liferay.portal.kernel.util.LocalizationUtil" %>
 <%@ page import="com.liferay.portal.model.Theme" %>
 <%@ page import="com.liferay.portal.service.ThemeLocalServiceUtil" %>
 <%@ page import="com.liferay.portal.util.PortalUtil" %>
-
 <%@ page import="com.liferay.util.JS" %>
 
 <%@ page import="java.text.DateFormat" %>
 <%@ page import="java.text.SimpleDateFormat" %>
 
-<%@ page import="java.util.Date" %>
 <%@ page import="java.util.Calendar" %>
+<%@ page import="java.util.Date" %>
 <%@ page import="java.util.GregorianCalendar" %>
 <%@ page import="java.util.Locale" %>
 
@@ -42,7 +42,7 @@ response.addHeader(HttpHeaders.CONTENT_TYPE, ContentTypes.TEXT_JAVASCRIPT);
 
 String languageId = LanguageUtil.getLanguageId(request);
 
-Locale locale =  LocaleUtil.fromLanguageId(languageId);
+Locale locale = LocaleUtil.fromLanguageId(languageId);
 
 String timeFormatPattern = ((SimpleDateFormat)(DateFormat.getTimeInstance(DateFormat.SHORT, locale))).toPattern();
 
