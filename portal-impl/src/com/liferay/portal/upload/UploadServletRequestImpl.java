@@ -21,7 +21,6 @@ import com.liferay.portal.kernel.upload.UploadServletRequest;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PrefsPropsUtil;
-import com.liferay.portal.util.WebKeys;
 import com.liferay.util.SystemProperties;
 
 import java.io.File;
@@ -285,11 +284,6 @@ public class UploadServletRequestImpl
 
 			for (int i = 0; i < values.length; i++) {
 				values[i] = liferayFileItems[i].getString();
-			}
-
-			if (values[0].getBytes().length > LiferayFileItem.THRESHOLD_SIZE) {
-				this.getRequest().setAttribute(
-					WebKeys.JOURNAL_OVERSIZED_CONTENT, true);
 			}
 
 			return values;

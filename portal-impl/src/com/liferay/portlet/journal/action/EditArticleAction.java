@@ -45,7 +45,6 @@ import com.liferay.portlet.journal.ArticleContentException;
 import com.liferay.portlet.journal.ArticleDisplayDateException;
 import com.liferay.portlet.journal.ArticleExpirationDateException;
 import com.liferay.portlet.journal.ArticleIdException;
-import com.liferay.portlet.journal.ArticleSizeException;
 import com.liferay.portlet.journal.ArticleSmallImageNameException;
 import com.liferay.portlet.journal.ArticleSmallImageSizeException;
 import com.liferay.portlet.journal.ArticleTitleException;
@@ -106,18 +105,8 @@ public class EditArticleAction extends PortletAction {
 
 		JournalArticle article = null;
 		String oldUrlTitle = StringPool.BLANK;
-		boolean overSizedContent = ParamUtil.getBoolean(
-			actionRequest, WebKeys.JOURNAL_OVERSIZED_CONTENT);
 
 		try {
-
-			if (overSizedContent) {
-				actionRequest.removeAttribute(
-					WebKeys.JOURNAL_OVERSIZED_CONTENT);
-
-				throw new ArticleSizeException();
-			}
-
 			if (cmd.equals(Constants.ADD) || cmd.equals(Constants.TRANSLATE) ||
 				cmd.equals(Constants.UPDATE)) {
 
@@ -217,7 +206,6 @@ public class EditArticleAction extends PortletAction {
 					 e instanceof ArticleDisplayDateException ||
 					 e instanceof ArticleExpirationDateException ||
 					 e instanceof ArticleIdException ||
-					 e instanceof ArticleSizeException ||
 					 e instanceof ArticleSmallImageNameException ||
 					 e instanceof ArticleSmallImageSizeException ||
 					 e instanceof ArticleTitleException ||
