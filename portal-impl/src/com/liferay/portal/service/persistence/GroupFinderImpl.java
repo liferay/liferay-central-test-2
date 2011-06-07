@@ -152,9 +152,13 @@ public class GroupFinderImpl
 			LinkedHashMap<String, Object> params)
 		throws SystemException {
 
+		long[] classNameIds = {
+			PortalUtil.getClassNameId(Group.class),
+			PortalUtil.getClassNameId(Organization.class)
+		};
+
 		return countByC_C_N_D(
-			companyId, new long[] {PortalUtil.getClassNameId(Group.class)},
-			name, realName, description, params);
+			companyId, classNameIds, name, realName, description, params);
 	}
 
 	public int countByC_C_N_D(
