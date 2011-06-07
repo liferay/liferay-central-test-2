@@ -181,12 +181,12 @@ public class EditRecordSetAction extends PortletAction {
 				DDLRecordSet.class.getName(), recordSet.getRecordSetId());
 		}
 		else {
-			String[] values = StringUtil.split(
+			String[] workflowDefinitionParts = StringUtil.split(
 				workflowDefinition, StringPool.AT);
 
-			String workflowDefinitionName = values[0];
+			String workflowDefinitionName = workflowDefinitionParts[0];
 			int workflowDefinitionVersion = GetterUtil.getInteger(
-				values[1]);
+				workflowDefinitionParts[1]);
 
 			WorkflowDefinitionLinkLocalServiceUtil.updateWorkflowDefinitionLink(
 				serviceContext.getUserId(), serviceContext.getCompanyId(),

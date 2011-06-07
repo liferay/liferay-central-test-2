@@ -40,8 +40,6 @@ public class DDLRecordWorkflowHandler extends BaseWorkflowHandler {
 
 	public static final String CLASS_NAME = DDLRecord.class.getName();
 
-	public static final String SCOPE_CLASS_NAME = DDLRecordSet.class.getName();
-
 	public String getClassName() {
 		return CLASS_NAME;
 	}
@@ -57,7 +55,8 @@ public class DDLRecordWorkflowHandler extends BaseWorkflowHandler {
 		DDLRecord record = DDLRecordLocalServiceUtil.getDDLRecord(classPK);
 
 		return WorkflowDefinitionLinkLocalServiceUtil.getWorkflowDefinitionLink(
-			companyId, groupId, SCOPE_CLASS_NAME, record.getRecordSetId());
+			companyId, groupId, DDLRecordSet.class.getName(),
+			record.getRecordSetId());
 	}
 
 	public boolean isVisible() {

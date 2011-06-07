@@ -350,3 +350,5 @@ create table VirtualHost (
 	layoutSetId LONG,
 	hostname VARCHAR(75) null
 );
+
+alter table WorkflowDefinitionLink add classPK LONG;

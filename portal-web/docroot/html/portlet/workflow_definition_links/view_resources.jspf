@@ -28,11 +28,11 @@ else {
 	workflowHandlers = WorkflowHandlerRegistryUtil.getScopeableWorkflowHandlers();
 }
 
-List<WorkflowHandler> visibleWorkflowHandlers = new ArrayList();
+Iterator<WorkflowHandler> itr = workflowHandlers.iterator();
 
-for (WorkflowHandler workflowHandler : workflowHandlers) {
-	if (workflowHandler.isVisible()) {
-		visibleWorkflowHandlers.add(workflowHandler);
+while (itr.hasNext()) {
+	if (!workflowHandler.isVisible()) {
+		itr.remove();
 	}
 }
 
@@ -55,8 +55,8 @@ portletURL.setParameter("struts_action", "/workflow_definition_links/view");
 		iteratorURL="<%= portletURL %>"
 	>
 		<liferay-ui:search-container-results
-			results="<%= ListUtil.subList(visibleWorkflowHandlers, searchContainer.getStart(), searchContainer.getEnd()) %>"
-			total="<%= visibleWorkflowHandlers.size() %>"
+			results="<%= ListUtil.subList(workflowHandlers, searchContainer.getStart(), searchContainer.getEnd()) %>"
+			total="<%= workflowHandlers.size() %>"
 		/>
 
 		<liferay-ui:search-container-row
