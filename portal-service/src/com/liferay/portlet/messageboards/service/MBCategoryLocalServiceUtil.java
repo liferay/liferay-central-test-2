@@ -296,13 +296,11 @@ public class MBCategoryLocalServiceUtil {
 	}
 
 	public static void addCategoryResources(long categoryId,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
+		java.lang.String[] groupPermissions, java.lang.String[] guestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		getService()
-			.addCategoryResources(categoryId, communityPermissions,
-			guestPermissions);
+			.addCategoryResources(categoryId, groupPermissions, guestPermissions);
 	}
 
 	public static void addCategoryResources(
@@ -317,13 +315,11 @@ public class MBCategoryLocalServiceUtil {
 
 	public static void addCategoryResources(
 		com.liferay.portlet.messageboards.model.MBCategory category,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
+		java.lang.String[] groupPermissions, java.lang.String[] guestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		getService()
-			.addCategoryResources(category, communityPermissions,
-			guestPermissions);
+			.addCategoryResources(category, groupPermissions, guestPermissions);
 	}
 
 	public static void deleteCategories(long groupId)

@@ -281,12 +281,11 @@ public class DDMStructureLocalServiceWrapper implements DDMStructureLocalService
 
 	public void addStructureResources(
 		com.liferay.portlet.dynamicdatamapping.model.DDMStructure structure,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
+		java.lang.String[] groupPermissions, java.lang.String[] guestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		_ddmStructureLocalService.addStructureResources(structure,
-			communityPermissions, guestPermissions);
+			groupPermissions, guestPermissions);
 	}
 
 	public void deleteStructure(

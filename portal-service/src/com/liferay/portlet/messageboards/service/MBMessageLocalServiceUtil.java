@@ -326,13 +326,11 @@ public class MBMessageLocalServiceUtil {
 	}
 
 	public static void addMessageResources(long messageId,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
+		java.lang.String[] groupPermissions, java.lang.String[] guestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		getService()
-			.addMessageResources(messageId, communityPermissions,
-			guestPermissions);
+			.addMessageResources(messageId, groupPermissions, guestPermissions);
 	}
 
 	public static void addMessageResources(
@@ -347,12 +345,11 @@ public class MBMessageLocalServiceUtil {
 
 	public static void addMessageResources(
 		com.liferay.portlet.messageboards.model.MBMessage message,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
+		java.lang.String[] groupPermissions, java.lang.String[] guestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		getService()
-			.addMessageResources(message, communityPermissions, guestPermissions);
+			.addMessageResources(message, groupPermissions, guestPermissions);
 	}
 
 	public static void deleteDiscussionMessage(long messageId)

@@ -295,12 +295,10 @@ public class CalEventLocalServiceUtil {
 
 	public static void addEventResources(
 		com.liferay.portlet.calendar.model.CalEvent event,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
+		java.lang.String[] groupPermissions, java.lang.String[] guestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		getService()
-			.addEventResources(event, communityPermissions, guestPermissions);
+		getService().addEventResources(event, groupPermissions, guestPermissions);
 	}
 
 	public static void addEventResources(long eventId,
@@ -312,12 +310,11 @@ public class CalEventLocalServiceUtil {
 	}
 
 	public static void addEventResources(long eventId,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
+		java.lang.String[] groupPermissions, java.lang.String[] guestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		getService()
-			.addEventResources(eventId, communityPermissions, guestPermissions);
+			.addEventResources(eventId, groupPermissions, guestPermissions);
 	}
 
 	public static void checkEvents()

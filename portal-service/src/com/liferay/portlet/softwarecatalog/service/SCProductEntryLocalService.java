@@ -241,8 +241,7 @@ public interface SCProductEntryLocalService {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public void addProductEntryResources(long productEntryId,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
+		java.lang.String[] groupPermissions, java.lang.String[] guestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -254,8 +253,7 @@ public interface SCProductEntryLocalService {
 
 	public void addProductEntryResources(
 		com.liferay.portlet.softwarecatalog.model.SCProductEntry productEntry,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
+		java.lang.String[] groupPermissions, java.lang.String[] guestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 

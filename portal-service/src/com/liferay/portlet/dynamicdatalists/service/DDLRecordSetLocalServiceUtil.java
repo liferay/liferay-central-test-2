@@ -290,13 +290,11 @@ public class DDLRecordSetLocalServiceUtil {
 
 	public static void addRecordSetResources(
 		com.liferay.portlet.dynamicdatalists.model.DDLRecordSet recordSet,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
+		java.lang.String[] groupPermissions, java.lang.String[] guestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		getService()
-			.addRecordSetResources(recordSet, communityPermissions,
-			guestPermissions);
+			.addRecordSetResources(recordSet, groupPermissions, guestPermissions);
 	}
 
 	public static void deleteRecordSet(

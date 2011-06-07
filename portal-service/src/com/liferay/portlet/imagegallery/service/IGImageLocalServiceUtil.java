@@ -310,12 +310,10 @@ public class IGImageLocalServiceUtil {
 
 	public static void addImageResources(
 		com.liferay.portlet.imagegallery.model.IGImage image,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
+		java.lang.String[] groupPermissions, java.lang.String[] guestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		getService()
-			.addImageResources(image, communityPermissions, guestPermissions);
+		getService().addImageResources(image, groupPermissions, guestPermissions);
 	}
 
 	public static void addImageResources(long imageId,
@@ -327,12 +325,11 @@ public class IGImageLocalServiceUtil {
 	}
 
 	public static void addImageResources(long imageId,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
+		java.lang.String[] groupPermissions, java.lang.String[] guestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		getService()
-			.addImageResources(imageId, communityPermissions, guestPermissions);
+			.addImageResources(imageId, groupPermissions, guestPermissions);
 	}
 
 	public static void deleteImage(

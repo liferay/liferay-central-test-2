@@ -301,24 +301,22 @@ public class JournalTemplateLocalServiceUtil {
 	}
 
 	public static void addTemplateResources(long groupId,
-		java.lang.String templateId, java.lang.String[] communityPermissions,
+		java.lang.String templateId, java.lang.String[] groupPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		getService()
-			.addTemplateResources(groupId, templateId, communityPermissions,
+			.addTemplateResources(groupId, templateId, groupPermissions,
 			guestPermissions);
 	}
 
 	public static void addTemplateResources(
 		com.liferay.portlet.journal.model.JournalTemplate template,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
+		java.lang.String[] groupPermissions, java.lang.String[] guestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		getService()
-			.addTemplateResources(template, communityPermissions,
-			guestPermissions);
+			.addTemplateResources(template, groupPermissions, guestPermissions);
 	}
 
 	public static void checkNewLine(long groupId, java.lang.String templateId)

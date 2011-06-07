@@ -300,12 +300,11 @@ public class WikiPageLocalServiceWrapper implements WikiPageLocalService {
 	}
 
 	public void addPageResources(long nodeId, java.lang.String title,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
+		java.lang.String[] groupPermissions, java.lang.String[] guestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		_wikiPageLocalService.addPageResources(nodeId, title,
-			communityPermissions, guestPermissions);
+		_wikiPageLocalService.addPageResources(nodeId, title, groupPermissions,
+			guestPermissions);
 	}
 
 	public void addPageResources(com.liferay.portlet.wiki.model.WikiPage page,
@@ -317,11 +316,10 @@ public class WikiPageLocalServiceWrapper implements WikiPageLocalService {
 	}
 
 	public void addPageResources(com.liferay.portlet.wiki.model.WikiPage page,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
+		java.lang.String[] groupPermissions, java.lang.String[] guestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		_wikiPageLocalService.addPageResources(page, communityPermissions,
+		_wikiPageLocalService.addPageResources(page, groupPermissions,
 			guestPermissions);
 	}
 

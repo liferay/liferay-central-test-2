@@ -297,11 +297,10 @@ public class IGImageLocalServiceWrapper implements IGImageLocalService {
 
 	public void addImageResources(
 		com.liferay.portlet.imagegallery.model.IGImage image,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
+		java.lang.String[] groupPermissions, java.lang.String[] guestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		_igImageLocalService.addImageResources(image, communityPermissions,
+		_igImageLocalService.addImageResources(image, groupPermissions,
 			guestPermissions);
 	}
 
@@ -314,11 +313,10 @@ public class IGImageLocalServiceWrapper implements IGImageLocalService {
 	}
 
 	public void addImageResources(long imageId,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
+		java.lang.String[] groupPermissions, java.lang.String[] guestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		_igImageLocalService.addImageResources(imageId, communityPermissions,
+		_igImageLocalService.addImageResources(imageId, groupPermissions,
 			guestPermissions);
 	}
 

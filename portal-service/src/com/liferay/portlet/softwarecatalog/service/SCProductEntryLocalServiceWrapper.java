@@ -266,12 +266,11 @@ public class SCProductEntryLocalServiceWrapper
 	}
 
 	public void addProductEntryResources(long productEntryId,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
+		java.lang.String[] groupPermissions, java.lang.String[] guestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		_scProductEntryLocalService.addProductEntryResources(productEntryId,
-			communityPermissions, guestPermissions);
+			groupPermissions, guestPermissions);
 	}
 
 	public void addProductEntryResources(
@@ -285,12 +284,11 @@ public class SCProductEntryLocalServiceWrapper
 
 	public void addProductEntryResources(
 		com.liferay.portlet.softwarecatalog.model.SCProductEntry productEntry,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
+		java.lang.String[] groupPermissions, java.lang.String[] guestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		_scProductEntryLocalService.addProductEntryResources(productEntry,
-			communityPermissions, guestPermissions);
+			groupPermissions, guestPermissions);
 	}
 
 	public void deleteProductEntries(long groupId)

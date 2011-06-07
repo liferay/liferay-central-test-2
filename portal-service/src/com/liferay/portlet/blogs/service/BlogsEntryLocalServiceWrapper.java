@@ -283,11 +283,10 @@ public class BlogsEntryLocalServiceWrapper implements BlogsEntryLocalService {
 
 	public void addEntryResources(
 		com.liferay.portlet.blogs.model.BlogsEntry entry,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
+		java.lang.String[] groupPermissions, java.lang.String[] guestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		_blogsEntryLocalService.addEntryResources(entry, communityPermissions,
+		_blogsEntryLocalService.addEntryResources(entry, groupPermissions,
 			guestPermissions);
 	}
 
@@ -300,12 +299,11 @@ public class BlogsEntryLocalServiceWrapper implements BlogsEntryLocalService {
 	}
 
 	public void addEntryResources(long entryId,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
+		java.lang.String[] groupPermissions, java.lang.String[] guestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		_blogsEntryLocalService.addEntryResources(entryId,
-			communityPermissions, guestPermissions);
+		_blogsEntryLocalService.addEntryResources(entryId, groupPermissions,
+			guestPermissions);
 	}
 
 	public void deleteEntries(long groupId)
@@ -473,12 +471,11 @@ public class BlogsEntryLocalServiceWrapper implements BlogsEntryLocalService {
 
 	public void updateEntryResources(
 		com.liferay.portlet.blogs.model.BlogsEntry entry,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
+		java.lang.String[] groupPermissions, java.lang.String[] guestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		_blogsEntryLocalService.updateEntryResources(entry,
-			communityPermissions, guestPermissions);
+		_blogsEntryLocalService.updateEntryResources(entry, groupPermissions,
+			guestPermissions);
 	}
 
 	public com.liferay.portlet.blogs.model.BlogsEntry updateStatus(

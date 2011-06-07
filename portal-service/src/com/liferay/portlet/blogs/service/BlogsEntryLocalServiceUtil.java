@@ -291,12 +291,10 @@ public class BlogsEntryLocalServiceUtil {
 
 	public static void addEntryResources(
 		com.liferay.portlet.blogs.model.BlogsEntry entry,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
+		java.lang.String[] groupPermissions, java.lang.String[] guestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		getService()
-			.addEntryResources(entry, communityPermissions, guestPermissions);
+		getService().addEntryResources(entry, groupPermissions, guestPermissions);
 	}
 
 	public static void addEntryResources(long entryId,
@@ -308,12 +306,11 @@ public class BlogsEntryLocalServiceUtil {
 	}
 
 	public static void addEntryResources(long entryId,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
+		java.lang.String[] groupPermissions, java.lang.String[] guestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		getService()
-			.addEntryResources(entryId, communityPermissions, guestPermissions);
+			.addEntryResources(entryId, groupPermissions, guestPermissions);
 	}
 
 	public static void deleteEntries(long groupId)
@@ -479,12 +476,11 @@ public class BlogsEntryLocalServiceUtil {
 
 	public static void updateEntryResources(
 		com.liferay.portlet.blogs.model.BlogsEntry entry,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
+		java.lang.String[] groupPermissions, java.lang.String[] guestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		getService()
-			.updateEntryResources(entry, communityPermissions, guestPermissions);
+			.updateEntryResources(entry, groupPermissions, guestPermissions);
 	}
 
 	public static com.liferay.portlet.blogs.model.BlogsEntry updateStatus(

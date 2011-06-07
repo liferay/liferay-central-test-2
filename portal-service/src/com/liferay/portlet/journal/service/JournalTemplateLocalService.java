@@ -262,15 +262,13 @@ public interface JournalTemplateLocalService {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public void addTemplateResources(long groupId, java.lang.String templateId,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
+		java.lang.String[] groupPermissions, java.lang.String[] guestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public void addTemplateResources(
 		com.liferay.portlet.journal.model.JournalTemplate template,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
+		java.lang.String[] groupPermissions, java.lang.String[] guestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 

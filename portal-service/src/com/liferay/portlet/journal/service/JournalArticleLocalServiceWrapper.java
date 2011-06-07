@@ -300,12 +300,11 @@ public class JournalArticleLocalServiceWrapper
 
 	public void addArticleResources(
 		com.liferay.portlet.journal.model.JournalArticle article,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
+		java.lang.String[] groupPermissions, java.lang.String[] guestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		_journalArticleLocalService.addArticleResources(article,
-			communityPermissions, guestPermissions);
+			groupPermissions, guestPermissions);
 	}
 
 	public void addArticleResources(long groupId, java.lang.String articleId,
@@ -317,12 +316,11 @@ public class JournalArticleLocalServiceWrapper
 	}
 
 	public void addArticleResources(long groupId, java.lang.String articleId,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
+		java.lang.String[] groupPermissions, java.lang.String[] guestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		_journalArticleLocalService.addArticleResources(groupId, articleId,
-			communityPermissions, guestPermissions);
+			groupPermissions, guestPermissions);
 	}
 
 	public com.liferay.portlet.journal.model.JournalArticle checkArticleResourcePrimKey(

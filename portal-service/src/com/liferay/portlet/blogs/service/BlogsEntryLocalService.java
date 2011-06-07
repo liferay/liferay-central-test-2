@@ -257,8 +257,7 @@ public interface BlogsEntryLocalService {
 
 	public void addEntryResources(
 		com.liferay.portlet.blogs.model.BlogsEntry entry,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
+		java.lang.String[] groupPermissions, java.lang.String[] guestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -268,8 +267,7 @@ public interface BlogsEntryLocalService {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public void addEntryResources(long entryId,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
+		java.lang.String[] groupPermissions, java.lang.String[] guestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -393,8 +391,7 @@ public interface BlogsEntryLocalService {
 
 	public void updateEntryResources(
 		com.liferay.portlet.blogs.model.BlogsEntry entry,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
+		java.lang.String[] groupPermissions, java.lang.String[] guestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 

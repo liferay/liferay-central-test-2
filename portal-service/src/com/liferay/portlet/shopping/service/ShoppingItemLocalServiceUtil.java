@@ -287,12 +287,10 @@ public class ShoppingItemLocalServiceUtil {
 	}
 
 	public static void addItemResources(long itemId,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
+		java.lang.String[] groupPermissions, java.lang.String[] guestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		getService()
-			.addItemResources(itemId, communityPermissions, guestPermissions);
+		getService().addItemResources(itemId, groupPermissions, guestPermissions);
 	}
 
 	public static void addItemResources(
@@ -306,12 +304,10 @@ public class ShoppingItemLocalServiceUtil {
 
 	public static void addItemResources(
 		com.liferay.portlet.shopping.model.ShoppingItem item,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
+		java.lang.String[] groupPermissions, java.lang.String[] guestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		getService()
-			.addItemResources(item, communityPermissions, guestPermissions);
+		getService().addItemResources(item, groupPermissions, guestPermissions);
 	}
 
 	public static void deleteItem(long itemId)

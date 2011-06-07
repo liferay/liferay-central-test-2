@@ -296,22 +296,18 @@ public class WikiNodeLocalServiceUtil {
 	}
 
 	public static void addNodeResources(long nodeId,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
+		java.lang.String[] groupPermissions, java.lang.String[] guestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		getService()
-			.addNodeResources(nodeId, communityPermissions, guestPermissions);
+		getService().addNodeResources(nodeId, groupPermissions, guestPermissions);
 	}
 
 	public static void addNodeResources(
 		com.liferay.portlet.wiki.model.WikiNode node,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
+		java.lang.String[] groupPermissions, java.lang.String[] guestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		getService()
-			.addNodeResources(node, communityPermissions, guestPermissions);
+		getService().addNodeResources(node, groupPermissions, guestPermissions);
 	}
 
 	public static void deleteNode(long nodeId)

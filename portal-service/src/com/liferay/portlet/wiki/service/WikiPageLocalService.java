@@ -269,8 +269,7 @@ public interface WikiPageLocalService {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public void addPageResources(long nodeId, java.lang.String title,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
+		java.lang.String[] groupPermissions, java.lang.String[] guestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -280,8 +279,7 @@ public interface WikiPageLocalService {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public void addPageResources(com.liferay.portlet.wiki.model.WikiPage page,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
+		java.lang.String[] groupPermissions, java.lang.String[] guestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 

@@ -279,12 +279,11 @@ public class BookmarksEntryLocalServiceWrapper
 
 	public void addEntryResources(
 		com.liferay.portlet.bookmarks.model.BookmarksEntry entry,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
+		java.lang.String[] groupPermissions, java.lang.String[] guestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		_bookmarksEntryLocalService.addEntryResources(entry,
-			communityPermissions, guestPermissions);
+		_bookmarksEntryLocalService.addEntryResources(entry, groupPermissions,
+			guestPermissions);
 	}
 
 	public void addEntryResources(long entryId, boolean addGroupPermissions,
@@ -296,12 +295,11 @@ public class BookmarksEntryLocalServiceWrapper
 	}
 
 	public void addEntryResources(long entryId,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
+		java.lang.String[] groupPermissions, java.lang.String[] guestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		_bookmarksEntryLocalService.addEntryResources(entryId,
-			communityPermissions, guestPermissions);
+			groupPermissions, guestPermissions);
 	}
 
 	public void deleteEntries(long groupId, long folderId)

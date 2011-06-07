@@ -280,12 +280,11 @@ public class BookmarksFolderLocalServiceWrapper
 
 	public void addFolderResources(
 		com.liferay.portlet.bookmarks.model.BookmarksFolder folder,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
+		java.lang.String[] groupPermissions, java.lang.String[] guestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		_bookmarksFolderLocalService.addFolderResources(folder,
-			communityPermissions, guestPermissions);
+			groupPermissions, guestPermissions);
 	}
 
 	public void addFolderResources(long folderId, boolean addGroupPermissions,
@@ -297,12 +296,11 @@ public class BookmarksFolderLocalServiceWrapper
 	}
 
 	public void addFolderResources(long folderId,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
+		java.lang.String[] groupPermissions, java.lang.String[] guestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		_bookmarksFolderLocalService.addFolderResources(folderId,
-			communityPermissions, guestPermissions);
+			groupPermissions, guestPermissions);
 	}
 
 	public void deleteFolder(

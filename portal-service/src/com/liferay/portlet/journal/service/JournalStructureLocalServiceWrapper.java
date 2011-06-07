@@ -283,12 +283,11 @@ public class JournalStructureLocalServiceWrapper
 
 	public void addStructureResources(
 		com.liferay.portlet.journal.model.JournalStructure structure,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
+		java.lang.String[] groupPermissions, java.lang.String[] guestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		_journalStructureLocalService.addStructureResources(structure,
-			communityPermissions, guestPermissions);
+			groupPermissions, guestPermissions);
 	}
 
 	public void addStructureResources(long groupId,
@@ -301,12 +300,12 @@ public class JournalStructureLocalServiceWrapper
 	}
 
 	public void addStructureResources(long groupId,
-		java.lang.String structureId, java.lang.String[] communityPermissions,
+		java.lang.String structureId, java.lang.String[] groupPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		_journalStructureLocalService.addStructureResources(groupId,
-			structureId, communityPermissions, guestPermissions);
+			structureId, groupPermissions, guestPermissions);
 	}
 
 	public void checkNewLine(long groupId, java.lang.String structureId)

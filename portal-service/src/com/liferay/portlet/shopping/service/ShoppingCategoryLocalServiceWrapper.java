@@ -261,12 +261,11 @@ public class ShoppingCategoryLocalServiceWrapper
 	}
 
 	public void addCategoryResources(long categoryId,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
+		java.lang.String[] groupPermissions, java.lang.String[] guestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		_shoppingCategoryLocalService.addCategoryResources(categoryId,
-			communityPermissions, guestPermissions);
+			groupPermissions, guestPermissions);
 	}
 
 	public void addCategoryResources(
@@ -280,12 +279,11 @@ public class ShoppingCategoryLocalServiceWrapper
 
 	public void addCategoryResources(
 		com.liferay.portlet.shopping.model.ShoppingCategory category,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
+		java.lang.String[] groupPermissions, java.lang.String[] guestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		_shoppingCategoryLocalService.addCategoryResources(category,
-			communityPermissions, guestPermissions);
+			groupPermissions, guestPermissions);
 	}
 
 	public void deleteCategories(long groupId)

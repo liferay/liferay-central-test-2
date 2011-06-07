@@ -278,12 +278,11 @@ public class DDMTemplateLocalServiceWrapper implements DDMTemplateLocalService {
 
 	public void addTemplateResources(
 		com.liferay.portlet.dynamicdatamapping.model.DDMTemplate template,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
+		java.lang.String[] groupPermissions, java.lang.String[] guestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		_ddmTemplateLocalService.addTemplateResources(template,
-			communityPermissions, guestPermissions);
+			groupPermissions, guestPermissions);
 	}
 
 	public void deleteTemplate(

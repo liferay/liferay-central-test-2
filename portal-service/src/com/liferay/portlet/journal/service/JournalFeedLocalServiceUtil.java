@@ -300,22 +300,18 @@ public class JournalFeedLocalServiceUtil {
 	}
 
 	public static void addFeedResources(long feedId,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
+		java.lang.String[] groupPermissions, java.lang.String[] guestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		getService()
-			.addFeedResources(feedId, communityPermissions, guestPermissions);
+		getService().addFeedResources(feedId, groupPermissions, guestPermissions);
 	}
 
 	public static void addFeedResources(
 		com.liferay.portlet.journal.model.JournalFeed feed,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
+		java.lang.String[] groupPermissions, java.lang.String[] guestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		getService()
-			.addFeedResources(feed, communityPermissions, guestPermissions);
+		getService().addFeedResources(feed, groupPermissions, guestPermissions);
 	}
 
 	public static void deleteFeed(long feedId)

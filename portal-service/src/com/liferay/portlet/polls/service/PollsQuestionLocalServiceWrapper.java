@@ -283,12 +283,11 @@ public class PollsQuestionLocalServiceWrapper
 	}
 
 	public void addQuestionResources(long questionId,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
+		java.lang.String[] groupPermissions, java.lang.String[] guestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		_pollsQuestionLocalService.addQuestionResources(questionId,
-			communityPermissions, guestPermissions);
+			groupPermissions, guestPermissions);
 	}
 
 	public void addQuestionResources(
@@ -302,12 +301,11 @@ public class PollsQuestionLocalServiceWrapper
 
 	public void addQuestionResources(
 		com.liferay.portlet.polls.model.PollsQuestion question,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
+		java.lang.String[] groupPermissions, java.lang.String[] guestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		_pollsQuestionLocalService.addQuestionResources(question,
-			communityPermissions, guestPermissions);
+			groupPermissions, guestPermissions);
 	}
 
 	public void deleteQuestion(long questionId)

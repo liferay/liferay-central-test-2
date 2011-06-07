@@ -256,8 +256,7 @@ public interface JournalStructureLocalService {
 
 	public void addStructureResources(
 		com.liferay.portlet.journal.model.JournalStructure structure,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
+		java.lang.String[] groupPermissions, java.lang.String[] guestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -268,7 +267,7 @@ public interface JournalStructureLocalService {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public void addStructureResources(long groupId,
-		java.lang.String structureId, java.lang.String[] communityPermissions,
+		java.lang.String structureId, java.lang.String[] groupPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;

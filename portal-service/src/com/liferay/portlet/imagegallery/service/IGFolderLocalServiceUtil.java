@@ -285,12 +285,11 @@ public class IGFolderLocalServiceUtil {
 
 	public static void addFolderResources(
 		com.liferay.portlet.imagegallery.model.IGFolder folder,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
+		java.lang.String[] groupPermissions, java.lang.String[] guestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		getService()
-			.addFolderResources(folder, communityPermissions, guestPermissions);
+			.addFolderResources(folder, groupPermissions, guestPermissions);
 	}
 
 	public static void addFolderResources(long folderId,
@@ -303,12 +302,11 @@ public class IGFolderLocalServiceUtil {
 	}
 
 	public static void addFolderResources(long folderId,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
+		java.lang.String[] groupPermissions, java.lang.String[] guestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		getService()
-			.addFolderResources(folderId, communityPermissions, guestPermissions);
+			.addFolderResources(folderId, groupPermissions, guestPermissions);
 	}
 
 	public static void deleteFolder(

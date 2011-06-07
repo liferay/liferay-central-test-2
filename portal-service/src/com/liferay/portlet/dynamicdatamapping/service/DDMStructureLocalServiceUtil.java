@@ -291,13 +291,11 @@ public class DDMStructureLocalServiceUtil {
 
 	public static void addStructureResources(
 		com.liferay.portlet.dynamicdatamapping.model.DDMStructure structure,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
+		java.lang.String[] groupPermissions, java.lang.String[] guestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		getService()
-			.addStructureResources(structure, communityPermissions,
-			guestPermissions);
+			.addStructureResources(structure, groupPermissions, guestPermissions);
 	}
 
 	public static void deleteStructure(

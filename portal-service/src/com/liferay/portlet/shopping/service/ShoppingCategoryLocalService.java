@@ -237,8 +237,7 @@ public interface ShoppingCategoryLocalService {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public void addCategoryResources(long categoryId,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
+		java.lang.String[] groupPermissions, java.lang.String[] guestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -250,8 +249,7 @@ public interface ShoppingCategoryLocalService {
 
 	public void addCategoryResources(
 		com.liferay.portlet.shopping.model.ShoppingCategory category,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
+		java.lang.String[] groupPermissions, java.lang.String[] guestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
