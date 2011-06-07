@@ -1089,15 +1089,7 @@ public class PluginPackageUtil {
 				servletContext.getResource(
 					"/WEB-INF/liferay-plugin-package.properties"));
 
-			if (propertiesString == null) {
-				if (_log.isDebugEnabled()) {
-					_log.debug("Reading plugin package from MANIFEST.MF");
-				}
-
-				pluginPackage =_readPluginPackageServletManifest(
-					servletContext);
-			}
-			else {
+			if (propertiesString != null) {
 				if (_log.isDebugEnabled()) {
 					_log.debug(
 						"Reading plugin package from " +
@@ -1114,6 +1106,15 @@ public class PluginPackageUtil {
 
 				pluginPackage = _readPluginPackageProperties(
 					displayName, properties);
+			}
+
+			if (pluginPackage == null) {
+				if (_log.isDebugEnabled()) {
+					_log.debug("Reading plugin package from MANIFEST.MF");
+				}
+
+				pluginPackage =_readPluginPackageServletManifest(
+					servletContext);
 			}
 		}
 		else {
