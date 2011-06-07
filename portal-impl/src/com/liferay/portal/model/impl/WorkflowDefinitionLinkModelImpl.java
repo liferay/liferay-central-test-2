@@ -65,10 +65,11 @@ public class WorkflowDefinitionLinkModelImpl extends BaseModelImpl<WorkflowDefin
 			{ "createDate", Types.TIMESTAMP },
 			{ "modifiedDate", Types.TIMESTAMP },
 			{ "classNameId", Types.BIGINT },
+			{ "classPK", Types.BIGINT },
 			{ "workflowDefinitionName", Types.VARCHAR },
 			{ "workflowDefinitionVersion", Types.INTEGER }
 		};
-	public static final String TABLE_SQL_CREATE = "create table WorkflowDefinitionLink (workflowDefinitionLinkId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,classNameId LONG,workflowDefinitionName VARCHAR(75) null,workflowDefinitionVersion INTEGER)";
+	public static final String TABLE_SQL_CREATE = "create table WorkflowDefinitionLink (workflowDefinitionLinkId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,classNameId LONG,classPK LONG,workflowDefinitionName VARCHAR(75) null,workflowDefinitionVersion INTEGER)";
 	public static final String TABLE_SQL_DROP = "drop table WorkflowDefinitionLink";
 	public static final String ORDER_BY_JPQL = " ORDER BY workflowDefinitionLink.workflowDefinitionName ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY WorkflowDefinitionLink.workflowDefinitionName ASC";
@@ -227,6 +228,24 @@ public class WorkflowDefinitionLinkModelImpl extends BaseModelImpl<WorkflowDefin
 		return _originalClassNameId;
 	}
 
+	public long getClassPK() {
+		return _classPK;
+	}
+
+	public void setClassPK(long classPK) {
+		if (!_setOriginalClassPK) {
+			_setOriginalClassPK = true;
+
+			_originalClassPK = _classPK;
+		}
+
+		_classPK = classPK;
+	}
+
+	public long getOriginalClassPK() {
+		return _originalClassPK;
+	}
+
 	public String getWorkflowDefinitionName() {
 		if (_workflowDefinitionName == null) {
 			return StringPool.BLANK;
@@ -283,6 +302,7 @@ public class WorkflowDefinitionLinkModelImpl extends BaseModelImpl<WorkflowDefin
 		workflowDefinitionLinkImpl.setCreateDate(getCreateDate());
 		workflowDefinitionLinkImpl.setModifiedDate(getModifiedDate());
 		workflowDefinitionLinkImpl.setClassNameId(getClassNameId());
+		workflowDefinitionLinkImpl.setClassPK(getClassPK());
 		workflowDefinitionLinkImpl.setWorkflowDefinitionName(getWorkflowDefinitionName());
 		workflowDefinitionLinkImpl.setWorkflowDefinitionVersion(getWorkflowDefinitionVersion());
 
@@ -346,10 +366,14 @@ public class WorkflowDefinitionLinkModelImpl extends BaseModelImpl<WorkflowDefin
 		workflowDefinitionLinkModelImpl._originalClassNameId = workflowDefinitionLinkModelImpl._classNameId;
 
 		workflowDefinitionLinkModelImpl._setOriginalClassNameId = false;
+
+		workflowDefinitionLinkModelImpl._originalClassPK = workflowDefinitionLinkModelImpl._classPK;
+
+		workflowDefinitionLinkModelImpl._setOriginalClassPK = false;
 	}
 
 	public String toString() {
-		StringBundler sb = new StringBundler(21);
+		StringBundler sb = new StringBundler(23);
 
 		sb.append("{workflowDefinitionLinkId=");
 		sb.append(getWorkflowDefinitionLinkId());
@@ -367,6 +391,8 @@ public class WorkflowDefinitionLinkModelImpl extends BaseModelImpl<WorkflowDefin
 		sb.append(getModifiedDate());
 		sb.append(", classNameId=");
 		sb.append(getClassNameId());
+		sb.append(", classPK=");
+		sb.append(getClassPK());
 		sb.append(", workflowDefinitionName=");
 		sb.append(getWorkflowDefinitionName());
 		sb.append(", workflowDefinitionVersion=");
@@ -377,7 +403,7 @@ public class WorkflowDefinitionLinkModelImpl extends BaseModelImpl<WorkflowDefin
 	}
 
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(34);
+		StringBundler sb = new StringBundler(37);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.portal.model.WorkflowDefinitionLink");
@@ -416,6 +442,10 @@ public class WorkflowDefinitionLinkModelImpl extends BaseModelImpl<WorkflowDefin
 		sb.append(getClassNameId());
 		sb.append("]]></column-value></column>");
 		sb.append(
+			"<column><column-name>classPK</column-name><column-value><![CDATA[");
+		sb.append(getClassPK());
+		sb.append("]]></column-value></column>");
+		sb.append(
 			"<column><column-name>workflowDefinitionName</column-name><column-value><![CDATA[");
 		sb.append(getWorkflowDefinitionName());
 		sb.append("]]></column-value></column>");
@@ -444,6 +474,9 @@ public class WorkflowDefinitionLinkModelImpl extends BaseModelImpl<WorkflowDefin
 	private long _classNameId;
 	private long _originalClassNameId;
 	private boolean _setOriginalClassNameId;
+	private long _classPK;
+	private long _originalClassPK;
+	private boolean _setOriginalClassPK;
 	private String _workflowDefinitionName;
 	private int _workflowDefinitionVersion;
 	private transient ExpandoBridge _expandoBridge;

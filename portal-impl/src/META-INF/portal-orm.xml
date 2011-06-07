@@ -1155,6 +1155,7 @@
 				<temporal>TIMESTAMP</temporal>
 			</basic>
 			<basic name="classNameId" />
+			<basic name="classPK" />
 			<basic name="workflowDefinitionName" />
 			<basic name="workflowDefinitionVersion" />
 			<transient name="primaryKey" />

@@ -229,6 +229,24 @@ public class WorkflowDefinitionLinkWrapper implements WorkflowDefinitionLink {
 	}
 
 	/**
+	* Returns the class p k of this workflow definition link.
+	*
+	* @return the class p k of this workflow definition link
+	*/
+	public long getClassPK() {
+		return _workflowDefinitionLink.getClassPK();
+	}
+
+	/**
+	* Sets the class p k of this workflow definition link.
+	*
+	* @param classPK the class p k of this workflow definition link
+	*/
+	public void setClassPK(long classPK) {
+		_workflowDefinitionLink.setClassPK(classPK);
+	}
+
+	/**
 	* Returns the workflow definition name of this workflow definition link.
 	*
 	* @return the workflow definition name of this workflow definition link

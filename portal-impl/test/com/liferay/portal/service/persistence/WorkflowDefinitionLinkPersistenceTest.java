@@ -75,6 +75,7 @@ public class WorkflowDefinitionLinkPersistenceTest
 		newWorkflowDefinitionLink.setCreateDate(nextDate());
 		newWorkflowDefinitionLink.setModifiedDate(nextDate());
 		newWorkflowDefinitionLink.setClassNameId(nextLong());
+		newWorkflowDefinitionLink.setClassPK(nextLong());
 		newWorkflowDefinitionLink.setWorkflowDefinitionName(randomString());
 		newWorkflowDefinitionLink.setWorkflowDefinitionVersion(nextInt());
 
@@ -100,6 +101,8 @@ public class WorkflowDefinitionLinkPersistenceTest
 			Time.getShortTimestamp(newWorkflowDefinitionLink.getModifiedDate()));
 		assertEquals(existingWorkflowDefinitionLink.getClassNameId(),
 			newWorkflowDefinitionLink.getClassNameId());
+		assertEquals(existingWorkflowDefinitionLink.getClassPK(),
+			newWorkflowDefinitionLink.getClassPK());
 		assertEquals(existingWorkflowDefinitionLink.getWorkflowDefinitionName(),
 			newWorkflowDefinitionLink.getWorkflowDefinitionName());
 		assertEquals(existingWorkflowDefinitionLink.getWorkflowDefinitionVersion(),
@@ -233,6 +236,8 @@ public class WorkflowDefinitionLinkPersistenceTest
 			existingWorkflowDefinitionLinkModelImpl.getOriginalCompanyId());
 		assertEquals(existingWorkflowDefinitionLinkModelImpl.getClassNameId(),
 			existingWorkflowDefinitionLinkModelImpl.getOriginalClassNameId());
+		assertEquals(existingWorkflowDefinitionLinkModelImpl.getClassPK(),
+			existingWorkflowDefinitionLinkModelImpl.getOriginalClassPK());
 	}
 
 	protected WorkflowDefinitionLink addWorkflowDefinitionLink()
@@ -248,6 +253,7 @@ public class WorkflowDefinitionLinkPersistenceTest
 		workflowDefinitionLink.setCreateDate(nextDate());
 		workflowDefinitionLink.setModifiedDate(nextDate());
 		workflowDefinitionLink.setClassNameId(nextLong());
+		workflowDefinitionLink.setClassPK(nextLong());
 		workflowDefinitionLink.setWorkflowDefinitionName(randomString());
 		workflowDefinitionLink.setWorkflowDefinitionVersion(nextInt());
 

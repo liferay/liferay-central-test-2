@@ -37,8 +37,8 @@ import java.util.Date;
  * @see com.liferay.portal.model.impl.WorkflowDefinitionLinkModelImpl
  * @generated
  */
-public interface WorkflowDefinitionLinkModel extends BaseModel<WorkflowDefinitionLink>,
-	GroupedModel {
+public interface WorkflowDefinitionLinkModel extends AttachedModel,
+	BaseModel<WorkflowDefinitionLink>, GroupedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
@@ -193,6 +193,20 @@ public interface WorkflowDefinitionLinkModel extends BaseModel<WorkflowDefinitio
 	 * @param classNameId the class name ID of this workflow definition link
 	 */
 	public void setClassNameId(long classNameId);
+
+	/**
+	 * Returns the class p k of this workflow definition link.
+	 *
+	 * @return the class p k of this workflow definition link
+	 */
+	public long getClassPK();
+
+	/**
+	 * Sets the class p k of this workflow definition link.
+	 *
+	 * @param classPK the class p k of this workflow definition link
+	 */
+	public void setClassPK(long classPK);
 
 	/**
 	 * Returns the workflow definition name of this workflow definition link.
