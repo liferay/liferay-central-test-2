@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.search.Summary;
 import com.liferay.portal.kernel.util.CharPool;
@@ -126,10 +127,10 @@ public class PortalOpenSearchImpl extends BaseOpenSearchImpl {
 
 				String content = StringPool.BLANK;
 
-				if (Validator.isNotNull(portlet.getIndexerClass())) {
-					Indexer indexer = (Indexer)InstancePool.get(
-						portlet.getIndexerClass());
+				Indexer indexer =
+					IndexerRegistryUtil.getIndexer(entryClassName);
 
+				if (indexer != null) {
 					String snippet = results.snippet(i);
 
 					Summary summary = indexer.getSummary(

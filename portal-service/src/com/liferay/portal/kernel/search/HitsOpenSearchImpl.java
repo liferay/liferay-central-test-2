@@ -41,6 +41,8 @@ import javax.servlet.http.HttpServletRequest;
  */
 public abstract class HitsOpenSearchImpl extends BaseOpenSearchImpl {
 
+	public abstract Indexer getIndexer();
+
 	public abstract String getPortletId();
 
 	public abstract String getSearchPath();
@@ -99,10 +101,7 @@ public abstract class HitsOpenSearchImpl extends BaseOpenSearchImpl {
 
 			searchContext.setUserId(userId);
 
-			Portlet portlet = PortletLocalServiceUtil.getPortletById(
-				themeDisplay.getCompanyId(), getPortletId());
-
-			Indexer indexer = portlet.getIndexerInstance();
+			Indexer indexer = getIndexer();
 
 			Hits results = indexer.search(searchContext);
 

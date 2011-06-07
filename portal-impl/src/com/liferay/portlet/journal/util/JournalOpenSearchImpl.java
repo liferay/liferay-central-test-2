@@ -17,6 +17,8 @@ package com.liferay.portlet.journal.util;
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.HitsOpenSearchImpl;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.security.permission.ActionKeys;
@@ -45,6 +47,10 @@ public class JournalOpenSearchImpl extends HitsOpenSearchImpl {
 	public static final String SEARCH_PATH = "/c/journal/open_search";
 
 	public static final String TITLE = "Liferay Journal Search: ";
+
+	public Indexer getIndexer() {
+		return IndexerRegistryUtil.getIndexer(JournalArticle.class);
+	}
 
 	public String getPortletId() {
 		return JournalIndexer.PORTLET_ID;

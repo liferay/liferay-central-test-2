@@ -15,6 +15,9 @@
 package com.liferay.portlet.imagegallery.util;
 
 import com.liferay.portal.kernel.search.HitsOpenSearchImpl;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portlet.imagegallery.model.IGImage;
 
 /**
  * @author Brian Wing Shun Chan
@@ -24,6 +27,10 @@ public class IGOpenSearchImpl extends HitsOpenSearchImpl {
 	public static final String SEARCH_PATH = "/c/image_gallery/open_search";
 
 	public static final String TITLE = "Liferay Image Gallery Search: ";
+
+	public Indexer getIndexer() {
+		return IndexerRegistryUtil.getIndexer(IGImage.class);
+	}
 
 	public String getPortletId() {
 		return IGIndexer.PORTLET_ID;

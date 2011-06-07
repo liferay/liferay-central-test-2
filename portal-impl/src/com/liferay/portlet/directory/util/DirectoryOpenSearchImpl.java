@@ -17,6 +17,7 @@ package com.liferay.portlet.directory.util;
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.HitsOpenSearchImpl;
 import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.search.Summary;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -46,6 +47,10 @@ public class DirectoryOpenSearchImpl extends HitsOpenSearchImpl {
 	public static final String SEARCH_PATH = "/c/directory/open_search";
 
 	public static final String TITLE = "Liferay Directory Search: ";
+
+	public Indexer getIndexer() {
+		return IndexerRegistryUtil.getIndexer(User.class);
+	}
 
 	public String getPortletId() {
 		return UserIndexer.PORTLET_ID;

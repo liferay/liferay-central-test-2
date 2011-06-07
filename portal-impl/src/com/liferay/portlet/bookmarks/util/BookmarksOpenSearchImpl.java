@@ -15,6 +15,9 @@
 package com.liferay.portlet.bookmarks.util;
 
 import com.liferay.portal.kernel.search.HitsOpenSearchImpl;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portlet.bookmarks.model.BookmarksEntry;
 
 /**
  * @author Brian Wing Shun Chan
@@ -24,6 +27,10 @@ public class BookmarksOpenSearchImpl extends HitsOpenSearchImpl {
 	public static final String SEARCH_PATH = "/c/bookmarks/open_search";
 
 	public static final String TITLE = "Liferay Bookmarks Search: ";
+
+	public Indexer getIndexer() {
+		return IndexerRegistryUtil.getIndexer(BookmarksEntry.class);
+	}
 
 	public String getPortletId() {
 		return BookmarksIndexer.PORTLET_ID;

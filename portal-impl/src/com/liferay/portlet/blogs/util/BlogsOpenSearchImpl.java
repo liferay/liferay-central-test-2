@@ -15,6 +15,9 @@
 package com.liferay.portlet.blogs.util;
 
 import com.liferay.portal.kernel.search.HitsOpenSearchImpl;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portlet.blogs.model.BlogsEntry;
 
 /**
  * @author Brian Wing Shun Chan
@@ -24,6 +27,10 @@ public class BlogsOpenSearchImpl extends HitsOpenSearchImpl {
 	public static final String SEARCH_PATH = "/c/blogs/open_search";
 
 	public static final String TITLE = "Liferay Blogs Search: ";
+
+	public Indexer getIndexer() {
+		return IndexerRegistryUtil.getIndexer(BlogsEntry.class);
+	}
 
 	public String getPortletId() {
 		return BlogsIndexer.PORTLET_ID;

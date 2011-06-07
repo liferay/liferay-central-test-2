@@ -15,6 +15,9 @@
 package com.liferay.portlet.documentlibrary.util;
 
 import com.liferay.portal.kernel.search.HitsOpenSearchImpl;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 
 /**
  * @author Brian Wing Shun Chan
@@ -24,6 +27,10 @@ public class DLOpenSearchImpl extends HitsOpenSearchImpl {
 	public static final String SEARCH_PATH = "/c/document_library/open_search";
 
 	public static final String TITLE = "Liferay Document Library Search: ";
+
+	public Indexer getIndexer() {
+		return IndexerRegistryUtil.getIndexer(DLFileEntry.class);
+	}
 
 	public String getPortletId() {
 		return DLIndexer.PORTLET_ID;

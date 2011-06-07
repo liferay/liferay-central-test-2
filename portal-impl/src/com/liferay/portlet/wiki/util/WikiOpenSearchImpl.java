@@ -15,6 +15,9 @@
 package com.liferay.portlet.wiki.util;
 
 import com.liferay.portal.kernel.search.HitsOpenSearchImpl;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portlet.wiki.model.WikiPage;
 
 /**
  * @author Brian Wing Shun Chan
@@ -24,6 +27,10 @@ public class WikiOpenSearchImpl extends HitsOpenSearchImpl {
 	public static final String SEARCH_PATH = "/c/wiki/open_search";
 
 	public static final String TITLE = "Liferay Wiki Search: ";
+
+	public Indexer getIndexer() {
+		return IndexerRegistryUtil.getIndexer(WikiPage.class);
+	}
 
 	public String getPortletId() {
 		return WikiIndexer.PORTLET_ID;
