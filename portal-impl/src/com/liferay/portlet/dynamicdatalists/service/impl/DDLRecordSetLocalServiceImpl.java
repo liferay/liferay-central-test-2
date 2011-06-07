@@ -47,7 +47,7 @@ public class DDLRecordSetLocalServiceImpl
 	public DDLRecordSet addRecordSet(
 			long userId, long groupId, long ddmStructureId, String recordSetKey,
 			boolean autoRecordSetKey, Map<Locale, String> nameMap,
-			String description, int minDisplayRows,
+			Map<Locale, String> descriptionMap, int minDisplayRows,
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
@@ -80,7 +80,7 @@ public class DDLRecordSetLocalServiceImpl
 		recordSet.setDDMStructureId(ddmStructureId);
 		recordSet.setRecordSetKey(recordSetKey);
 		recordSet.setNameMap(nameMap);
-		recordSet.setDescription(description);
+		recordSet.setDescriptionMap(descriptionMap);
 		recordSet.setMinDisplayRows(minDisplayRows);
 
 		ddlRecordSetPersistence.update(recordSet, false);
@@ -260,7 +260,7 @@ public class DDLRecordSetLocalServiceImpl
 
 	public DDLRecordSet updateRecordSet(
 			long groupId, long ddmStructureId, String recordSetKey,
-			Map<Locale, String> nameMap, String description,
+			Map<Locale, String> nameMap, Map<Locale, String> descriptionMap,
 			int minDisplayRows, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
@@ -273,7 +273,7 @@ public class DDLRecordSetLocalServiceImpl
 		recordSet.setModifiedDate(serviceContext.getModifiedDate(null));
 		recordSet.setDDMStructureId(ddmStructureId);
 		recordSet.setNameMap(nameMap);
-		recordSet.setDescription(description);
+		recordSet.setDescriptionMap(descriptionMap);
 		recordSet.setMinDisplayRows(minDisplayRows);
 
 		ddlRecordSetPersistence.update(recordSet, false);

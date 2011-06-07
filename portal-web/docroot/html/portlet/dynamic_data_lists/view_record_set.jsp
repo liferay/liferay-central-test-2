@@ -73,7 +73,7 @@ boolean spreadsheet = ParamUtil.getBoolean(request, "spreadsheet");
 
 <%
 PortalUtil.setPageSubtitle(recordSet.getName(locale), request);
-PortalUtil.setPageDescription(recordSet.getDescription(), request);
+PortalUtil.setPageDescription(recordSet.getDescription(locale), request);
 
 PortalUtil.addPortletBreadcrumbEntry(request, recordSet.getName(locale), currentURL);
 %>

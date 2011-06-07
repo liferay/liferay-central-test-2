@@ -148,7 +148,8 @@ public class EditRecordSetAction extends PortletAction {
 			actionRequest, "autoRecordSetKey");
 		Map<Locale, String> nameMap = LocalizationUtil.getLocalizationMap(
 			actionRequest, "name");
-		String description = ParamUtil.getString(actionRequest, "description");
+		Map<Locale, String> descriptionMap =
+			LocalizationUtil.getLocalizationMap(actionRequest, "description");
 
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			DDLRecordSet.class.getName(), actionRequest);
@@ -158,12 +159,12 @@ public class EditRecordSetAction extends PortletAction {
 		if (cmd.equals(Constants.ADD)) {
 			recordSet = DDLRecordSetServiceUtil.addRecordSet(
 				groupId, ddmStructureId, recordSetKey, autoRecordSetKey,
-				nameMap, description, DDLConstants.MIN_DISPLAY_ROWS_DEFAULT,
+				nameMap, descriptionMap, DDLConstants.MIN_DISPLAY_ROWS_DEFAULT,
 				serviceContext);
 		}
 		else {
 			recordSet = DDLRecordSetServiceUtil.updateRecordSet(
-				groupId, ddmStructureId, recordSetKey, nameMap, description,
+				groupId, ddmStructureId, recordSetKey, nameMap, descriptionMap,
 				DDLConstants.MIN_DISPLAY_ROWS_DEFAULT, serviceContext);
 		}
 
