@@ -107,32 +107,35 @@ public class LuceneIndexer implements Runnable {
 					continue;
 				}
 
-				Indexer indexer = portlet.getIndexerInstance();
+				List<Indexer> indexers = portlet.getIndexerInstances();
 
-				if (indexer == null) {
+				if (indexers == null) {
 					continue;
 				}
 
-				String indexerClass = portlet.getIndexerClass();
+				for (Indexer indexer : indexers) {
+					StopWatch stopWatch2 = null;
 
-				StopWatch stopWatch2 = null;
+					if (_log.isInfoEnabled()) {
+						stopWatch2 = new StopWatch();
 
-				if (_log.isInfoEnabled()) {
-					stopWatch2 = new StopWatch();
+						stopWatch2.start();
+					}
 
-					stopWatch2.start();
-				}
+					if (_log.isInfoEnabled()) {
+						_log.info("Reindexing with " +
+							indexer.getClass().getName() + " started");
+					}
 
-				if (_log.isInfoEnabled()) {
-					_log.info("Reindexing with " + indexerClass + " started");
-				}
+					indexer.reindex(new String[] {String.valueOf(_companyId)});
 
-				indexer.reindex(new String[] {String.valueOf(_companyId)});
-
-				if (_log.isInfoEnabled()) {
-					_log.info(
-						"Reindexing with " + indexerClass + " completed in " +
-							(stopWatch2.getTime() / Time.SECOND) + " seconds");
+					if (_log.isInfoEnabled()) {
+						_log.info(
+							"Reindexing with " + indexer.getClass().getName() +
+								" completed in " +
+									(stopWatch2.getTime() / Time.SECOND) +
+										" seconds");
+					}
 				}
 			}
 

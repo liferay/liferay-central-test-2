@@ -18,7 +18,7 @@ The portlet element contains the declarative data of a portlet.
 -->
 <!ELEMENT portlet (portlet-name, icon?, virtual-path?, struts-path?,
 parent-struts-path?, configuration-path?, configuration-action-class?,
-indexer-class?, open-search-class?, scheduler-entry*, portlet-url-class?,
+indexer-class*, open-search-class?, scheduler-entry*, portlet-url-class?,
 friendly-url-mapper-class?, friendly-url-mapping?, friendly-url-routes?,
 url-encoder-class?, portlet-data-handler-class?, portlet-layout-listener-class?,
 poller-processor-class?, pop-message-listener-class?,

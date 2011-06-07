@@ -56,7 +56,7 @@ public interface PortletBag extends Cloneable {
 
 	public FriendlyURLMapper getFriendlyURLMapperInstance();
 
-	public Indexer getIndexerInstance();
+	public List<Indexer> getIndexerInstances();
 
 	public OpenSearch getOpenSearchInstance();
 

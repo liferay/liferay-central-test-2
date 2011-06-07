@@ -3309,7 +3309,7 @@
 			<transient name="headerPortletJavaScript" />
 			<transient name="icon" />
 			<transient name="include" />
-			<transient name="indexerClass" />
+			<transient name="indexerClasses" />
 			<transient name="initParams" />
 			<transient name="instanceable" />
 			<transient name="layoutCacheable" />

@@ -142,9 +142,9 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 			PortletURLListenerFactory.destroy(portletURLListener);
 		}
 
-		Indexer indexer = portlet.getIndexerInstance();
+		List<Indexer> indexers = portlet.getIndexerInstances();
 
-		if (indexer != null) {
+		for (Indexer indexer : indexers) {
 			IndexerRegistryUtil.unregister(indexer);
 		}
 

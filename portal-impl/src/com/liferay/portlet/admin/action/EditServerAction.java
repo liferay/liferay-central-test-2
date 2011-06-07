@@ -75,6 +75,7 @@ import com.liferay.util.log4j.Log4JUtil;
 import java.io.File;
 
 import java.util.Enumeration;
+import java.util.List;
 import java.util.Map;
 
 import javax.portlet.ActionRequest;
@@ -297,21 +298,24 @@ public class EditServerAction extends PortletAction {
 				return;
 			}
 
-			Indexer indexer = portlet.getIndexerInstance();
+			List<Indexer> indexers = portlet.getIndexerInstances();
 
-			if (indexer == null) {
+			if (indexers == null) {
 				return;
 			}
 
-			for (long companyId : companyIds) {
-				try {
-					SearchEngineUtil.deletePortletDocuments(
-						companyId, portletId);
+			for (Indexer indexer : indexers) {
+				for (long companyId : companyIds) {
+					try {
+						SearchEngineUtil.deletePortletDocuments(
+							companyId, portletId);
 
-					indexer.reindex(new String[] {String.valueOf(companyId)});
-				}
-				catch (Exception e) {
-					_log.error(e, e);
+						indexer.reindex(
+							new String[] {String.valueOf(companyId)});
+					}
+					catch (Exception e) {
+						_log.error(e, e);
+					}
 				}
 			}
 		}

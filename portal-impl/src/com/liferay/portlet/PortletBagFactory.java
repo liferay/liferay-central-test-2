@@ -130,7 +130,7 @@ public class PortletBagFactory {
 		ConfigurationAction configurationActionInstance =
 			newConfigurationAction(portlet);
 
-		Indexer indexerInstance = newIndexer(portlet);
+		List<Indexer> indexerInstances = newIndexers(portlet);
 
 		OpenSearch openSearchInstance = newOpenSearch(portlet);
 
@@ -284,7 +284,7 @@ public class PortletBagFactory {
 
 		PortletBag portletBag = new PortletBagImpl(
 			portlet.getPortletId(), _servletContext, portletInstance,
-			configurationActionInstance, indexerInstance, openSearchInstance,
+			configurationActionInstance, indexerInstances, openSearchInstance,
 			friendlyURLMapperInstance, urlEncoderInstance,
 			portletDataHandlerInstance, portletLayoutListenerInstance,
 			pollerProcessorInstance, popMessageListenerInstance,
@@ -667,17 +667,25 @@ public class PortletBagFactory {
 		return router;
 	}
 
-	protected Indexer newIndexer(Portlet portlet) throws Exception {
-		if (Validator.isNull(portlet.getIndexerClass())) {
+	protected List<Indexer> newIndexers(Portlet portlet) throws Exception {
+		List<String> indexerClasses = portlet.getIndexerClasses();
+
+		if (Validator.isNull(indexerClasses)) {
 			return null;
 		}
 
-		Indexer indexerInstance = (Indexer)newInstance(
-			Indexer.class, portlet.getIndexerClass());
+		List<Indexer> indexerInstances = new ArrayList<Indexer>();
 
-		IndexerRegistryUtil.register(indexerInstance);
+		for (String indexerClass : indexerClasses) {
+			Indexer indexerInstance = (Indexer)newInstance(
+				Indexer.class, indexerClass);
 
-		return indexerInstance;
+			IndexerRegistryUtil.register(indexerInstance);
+
+			indexerInstances.add(indexerInstance);
+		}
+
+		return indexerInstances;
 	}
 
 	protected Object newInstance(Class<?> interfaceClass, String implClassName)

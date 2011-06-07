@@ -100,6 +100,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		_schedulerEntries = new ArrayList<SchedulerEntry>();
 		_assetRendererFactoryClasses = new ArrayList<String>();
 		_customAttributesDisplayClasses = new ArrayList<String>();
+		_indexerClasses = new ArrayList<String>();
 		_workflowHandlerClasses = new ArrayList<String>();
 		_autopropagatedParameters = new LinkedHashSet<String>();
 		_headerPortalCss = new ArrayList<String>();
@@ -131,7 +132,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		String icon, String virtualPath, String strutsPath,
 		String parentStrutsPath, String portletName, String displayName,
 		String portletClass, String configurationActionClass,
-		String indexerClass, String openSearchClass,
+		List <String> indexerClasses, String openSearchClass,
 		List<SchedulerEntry> schedulerEntries, String portletURLClass,
 		String friendlyURLMapperClass, String friendlyURLMapping,
 		String friendlyURLRoutes, String urlEncoderClass,
@@ -185,7 +186,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		_displayName = displayName;
 		_portletClass = portletClass;
 		_configurationActionClass = configurationActionClass;
-		_indexerClass = indexerClass;
+		_indexerClasses = indexerClasses;
 		_openSearchClass = openSearchClass;
 		_schedulerEntries = schedulerEntries;
 		_portletURLClass = portletURLClass;
@@ -533,36 +534,36 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Returns the name of the indexer class of the portlet.
+	 * Returns the name of the indexer classes of the portlet.
 	 *
-	 * @return the name of the indexer class of the portlet
+	 * @return the name of the indexer classes of the portlet
 	 */
-	public String getIndexerClass() {
-		return _indexerClass;
+	public List<String> getIndexerClasses() {
+		return _indexerClasses;
 	}
 
 	/**
-	 * Sets the name of the indexer class of the portlet.
+	 * Sets the name of the indexer classes of the portlet.
 	 *
-	 * @param indexerClass the name of the indexer class of the portlet
+	 * @param indexerClasses the name of the indexer classes of the portlet
 	 */
-	public void setIndexerClass(String indexerClass) {
-		_indexerClass = indexerClass;
+	public void setIndexerClasses(List<String> indexerClasses) {
+		_indexerClasses = indexerClasses;
 	}
 
 	/**
-	 * Returns the indexer instance of the portlet.
+	 * Returns the indexer instances of the portlet.
 	 *
-	 * @return the indexer instance of the portlet
+	 * @return the indexer instances of the portlet
 	 */
-	public Indexer getIndexerInstance() {
-		if (Validator.isNull(getIndexerClass())) {
+	public List<Indexer> getIndexerInstances() {
+		if (Validator.isNull(getIndexerClasses())) {
 			return null;
 		}
 
 		PortletBag portletBag = PortletBagPool.get(getRootPortletId());
 
-		return portletBag.getIndexerInstance();
+		return portletBag.getIndexerInstances();
 	}
 
 	/**
@@ -3125,7 +3126,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 			getDefaultPluginSetting(), getCompanyId(), getTimestamp(),
 			getIcon(), getVirtualPath(), getStrutsPath(), getParentStrutsPath(),
 			getPortletName(), getDisplayName(), getPortletClass(),
-			getConfigurationActionClass(), getIndexerClass(),
+			getConfigurationActionClass(), getIndexerClasses(),
 			getOpenSearchClass(), getSchedulerEntries(), getPortletURLClass(),
 			getFriendlyURLMapperClass(), getFriendlyURLMapping(),
 			getFriendlyURLRoutes(), getURLEncoderClass(),
@@ -3265,7 +3266,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	/**
 	 * The name of the indexer class of the portlet.
 	 */
-	private String _indexerClass;
+	private List<String> _indexerClasses;
 
 	/**
 	 * The name of the open search class of the portlet.

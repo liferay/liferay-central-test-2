@@ -1071,10 +1071,15 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 			GetterUtil.getString(
 				portletElement.elementText("configuration-action-class"),
 				portletModel.getConfigurationActionClass()));
-		portletModel.setIndexerClass(
-			GetterUtil.getString(
-				portletElement.elementText("indexer-class"),
-				portletModel.getIndexerClass()));
+
+		List<String> indexerClasses = portletModel.getIndexerClasses();
+
+		for (Element indexerClassElement :
+				portletElement.elements("indexer-class")) {
+
+			indexerClasses.add(indexerClassElement.getText());
+		}
+
 		portletModel.setOpenSearchClass(
 			GetterUtil.getString(
 				portletElement.elementText("open-search-class"),

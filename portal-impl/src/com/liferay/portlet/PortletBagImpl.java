@@ -53,7 +53,7 @@ public class PortletBagImpl implements PortletBag {
 		String portletName, ServletContext servletContext,
 		Portlet portletInstance,
 		ConfigurationAction configurationActionInstance,
-		Indexer indexerInstance, OpenSearch openSearchInstance,
+		List<Indexer> indexerInstances, OpenSearch openSearchInstance,
 		FriendlyURLMapper friendlyURLMapperInstance,
 		URLEncoder urlEncoderInstance,
 		PortletDataHandler portletDataHandlerInstance,
@@ -74,7 +74,7 @@ public class PortletBagImpl implements PortletBag {
 		_servletContext = servletContext;
 		_portletInstance = portletInstance;
 		_configurationActionInstance = configurationActionInstance;
-		_indexerInstance = indexerInstance;
+		_indexerInstances = indexerInstances;
 		_openSearchInstance = openSearchInstance;
 		_friendlyURLMapperInstance = friendlyURLMapperInstance;
 		_urlEncoderInstance = urlEncoderInstance;
@@ -97,7 +97,7 @@ public class PortletBagImpl implements PortletBag {
 	public Object clone() {
 		return new PortletBagImpl(
 			getPortletName(), getServletContext(), getPortletInstance(),
-			getConfigurationActionInstance(), getIndexerInstance(),
+			getConfigurationActionInstance(), getIndexerInstances(),
 			getOpenSearchInstance(), getFriendlyURLMapperInstance(),
 			getURLEncoderInstance(), getPortletDataHandlerInstance(),
 			getPortletLayoutListenerInstance(), getPollerProcessorInstance(),
@@ -131,8 +131,8 @@ public class PortletBagImpl implements PortletBag {
 		return _friendlyURLMapperInstance;
 	}
 
-	public Indexer getIndexerInstance() {
-		return _indexerInstance;
+	public List<Indexer> getIndexerInstances() {
+		return _indexerInstances;
 	}
 
 	public OpenSearch getOpenSearchInstance() {
@@ -228,7 +228,7 @@ public class PortletBagImpl implements PortletBag {
 	private ControlPanelEntry _controlPanelEntryInstance;
 	private List<CustomAttributesDisplay> _customAttributesDisplayInstances;
 	private FriendlyURLMapper _friendlyURLMapperInstance;
-	private Indexer _indexerInstance;
+	private List<Indexer> _indexerInstances;
 	private OpenSearch _openSearchInstance;
 	private PollerProcessor _pollerProcessorInstance;
 	private MessageListener _popMessageListenerInstance;

@@ -231,25 +231,26 @@ public interface Portlet extends PortletModel {
 	public com.liferay.portal.kernel.portlet.ConfigurationAction getConfigurationActionInstance();
 
 	/**
-	* Returns the name of the indexer class of the portlet.
+	* Returns the name of the indexer classes of the portlet.
 	*
-	* @return the name of the indexer class of the portlet
+	* @return the name of the indexer classes of the portlet
 	*/
-	public java.lang.String getIndexerClass();
+	public java.util.List<java.lang.String> getIndexerClasses();
 
 	/**
-	* Sets the name of the indexer class of the portlet.
+	* Sets the name of the indexer classes of the portlet.
 	*
-	* @param indexerClass the name of the indexer class of the portlet
+	* @param indexerClasses the name of the indexer classes of the portlet
 	*/
-	public void setIndexerClass(java.lang.String indexerClass);
+	public void setIndexerClasses(
+		java.util.List<java.lang.String> indexerClasses);
 
 	/**
-	* Returns the indexer instance of the portlet.
+	* Returns the indexer instances of the portlet.
 	*
-	* @return the indexer instance of the portlet
+	* @return the indexer instances of the portlet
 	*/
-	public com.liferay.portal.kernel.search.Indexer getIndexerInstance();
+	public java.util.List<com.liferay.portal.kernel.search.Indexer> getIndexerInstances();
 
 	/**
 	* Returns the name of the open search class of the portlet.

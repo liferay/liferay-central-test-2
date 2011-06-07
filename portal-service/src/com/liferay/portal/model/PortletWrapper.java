@@ -475,30 +475,31 @@ public class PortletWrapper implements Portlet {
 	}
 
 	/**
-	* Returns the name of the indexer class of the portlet.
+	* Returns the name of the indexer classes of the portlet.
 	*
-	* @return the name of the indexer class of the portlet
+	* @return the name of the indexer classes of the portlet
 	*/
-	public java.lang.String getIndexerClass() {
-		return _portlet.getIndexerClass();
+	public java.util.List<java.lang.String> getIndexerClasses() {
+		return _portlet.getIndexerClasses();
 	}
 
 	/**
-	* Sets the name of the indexer class of the portlet.
+	* Sets the name of the indexer classes of the portlet.
 	*
-	* @param indexerClass the name of the indexer class of the portlet
+	* @param indexerClasses the name of the indexer classes of the portlet
 	*/
-	public void setIndexerClass(java.lang.String indexerClass) {
-		_portlet.setIndexerClass(indexerClass);
+	public void setIndexerClasses(
+		java.util.List<java.lang.String> indexerClasses) {
+		_portlet.setIndexerClasses(indexerClasses);
 	}
 
 	/**
-	* Returns the indexer instance of the portlet.
+	* Returns the indexer instances of the portlet.
 	*
-	* @return the indexer instance of the portlet
+	* @return the indexer instances of the portlet
 	*/
-	public com.liferay.portal.kernel.search.Indexer getIndexerInstance() {
-		return _portlet.getIndexerInstance();
+	public java.util.List<com.liferay.portal.kernel.search.Indexer> getIndexerInstances() {
+		return _portlet.getIndexerInstances();
 	}
 
 	/**
