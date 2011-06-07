@@ -226,14 +226,14 @@ if ((renderResponse != null) && !portletName.equals(PortletKeys.GROUP_PAGES) && 
 	else if (group.isLayoutPrototype()) {
 		PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "page-template"), null);
 
-		PortalUtil.addPortletBreadcrumbEntry(request, group.getDescriptiveName(), currentURL);
+		PortalUtil.addPortletBreadcrumbEntry(request, group.getDescriptiveName(), redirectURL.toString());
 	}
 	else {
 		PortalUtil.addPortletBreadcrumbEntry(request, group.getDescriptiveName(), null);
 	}
 
 	if (!group.isLayoutPrototype()) {
-		PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, pagesName), portletURL.toString());
+		PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, pagesName), redirectURL.toString());
 	}
 }
 

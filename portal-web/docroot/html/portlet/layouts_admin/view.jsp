@@ -50,9 +50,11 @@
 		/>
 
 		<%
-		PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, TextFormatter.format(tabs1, TextFormatter.O)), currentURL);
+		PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, TextFormatter.format(tabs1, TextFormatter.O)), redirectURL.toString());
 
 		if ((selLayout != null) && !group.isLayoutPrototype()) {
+			redirectURL.setParameter("selPlid", String.valueOf(selLayout.getPlid()));
+
 			PortalUtil.addPortletBreadcrumbEntry(request, selLayout.getName(locale), currentURL);
 		}
 		%>
@@ -61,7 +63,9 @@
 
 		<%
 		if ((selLayout != null) && !group.isLayoutPrototype()) {
-			PortalUtil.addPortletBreadcrumbEntry(request, selLayout.getName(locale), currentURL);
+			redirectURL.setParameter("selPlid", String.valueOf(selLayout.getPlid()));
+
+			PortalUtil.addPortletBreadcrumbEntry(request, selLayout.getName(locale), redirectURL.toString());
 		}
 		%>
 
@@ -73,7 +77,9 @@
 
 <%
 if ((selLayout != null) && !group.isLayoutPrototype()) {
-	PortalUtil.addPortletBreadcrumbEntry(request, selLayout.getName(locale), currentURL);
+	redirectURL.setParameter("selPlid", String.valueOf(selLayout.getPlid()));
+
+	PortalUtil.addPortletBreadcrumbEntry(request, selLayout.getName(locale), redirectURL.toString());
 }
 %>
 
