@@ -33,6 +33,7 @@
 <%@ page import="com.liferay.portlet.journal.ArticleDisplayDateException" %>
 <%@ page import="com.liferay.portlet.journal.ArticleExpirationDateException" %>
 <%@ page import="com.liferay.portlet.journal.ArticleIdException" %>
+<%@ page import="com.liferay.portlet.journal.ArticleSizeException" %>
 <%@ page import="com.liferay.portlet.journal.ArticleSmallImageNameException" %>
 <%@ page import="com.liferay.portlet.journal.ArticleSmallImageSizeException" %>
 <%@ page import="com.liferay.portlet.journal.ArticleTitleException" %>
