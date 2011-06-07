@@ -56,13 +56,13 @@ public class RateCategoryMessageTest extends BaseTestCase {
 		assertTrue(selenium.isPartialText(
 				"//div[@class='taglib-ratings thumbs']/div/div/div", "0 Votes"));
 		assertTrue(selenium.isElementPresent(
-				"//a[@class='yui3-aui-rating-element yui3-aui-rating-element-off yui3-aui-rating-thumb-up']"));
+				"//a[@class='aui-rating-element aui-rating-element-off aui-rating-thumb-up']"));
 		assertTrue(selenium.isElementPresent(
-				"//a[@class='yui3-aui-rating-element yui3-aui-rating-element-off yui3-aui-rating-thumb-down']"));
+				"//a[@class='aui-rating-element aui-rating-element-off aui-rating-thumb-down']"));
 		assertFalse(selenium.isElementPresent(
-				"//a[@class='yui3-aui-rating-element yui3-aui-rating-element-off yui3-aui-rating-thumb-up yui3-aui-rating-element-on']"));
+				"//a[@class='aui-rating-element aui-rating-element-off aui-rating-thumb-up aui-rating-element-on']"));
 		assertFalse(selenium.isElementPresent(
-				"//a[@class='yui3-aui-rating-element yui3-aui-rating-element-off yui3-aui-rating-thumb-down yui3-aui-rating-element-on']"));
+				"//a[@class='aui-rating-element aui-rating-element-off aui-rating-thumb-down aui-rating-element-on']"));
 		selenium.clickAt("//div[@class='taglib-ratings thumbs']/div/div/a[1]",
 			RuntimeVariables.replace(""));
 
@@ -89,13 +89,13 @@ public class RateCategoryMessageTest extends BaseTestCase {
 			selenium.getText(
 				"//div[@class='taglib-ratings thumbs']/div/div/div"));
 		assertFalse(selenium.isElementPresent(
-				"//a[@class='yui3-aui-rating-element yui3-aui-rating-element-off yui3-aui-rating-thumb-up']"));
+				"//a[@class='aui-rating-element aui-rating-element-off aui-rating-thumb-up']"));
 		assertTrue(selenium.isElementPresent(
-				"//a[@class='yui3-aui-rating-element yui3-aui-rating-element-off yui3-aui-rating-thumb-down']"));
+				"//a[@class='aui-rating-element aui-rating-element-off aui-rating-thumb-down']"));
 		assertTrue(selenium.isElementPresent(
-				"//a[@class='yui3-aui-rating-element yui3-aui-rating-element-off yui3-aui-rating-thumb-up yui3-aui-rating-element-on']"));
+				"//a[@class='aui-rating-element aui-rating-element-off aui-rating-thumb-up aui-rating-element-on']"));
 		assertFalse(selenium.isElementPresent(
-				"//a[@class='yui3-aui-rating-element yui3-aui-rating-element-off yui3-aui-rating-thumb-down yui3-aui-rating-element-on']"));
+				"//a[@class='aui-rating-element aui-rating-element-off aui-rating-thumb-down aui-rating-element-on']"));
 		selenium.clickAt("//div[@class='taglib-ratings thumbs']/div/div/a[2]",
 			RuntimeVariables.replace(""));
 
@@ -122,13 +122,13 @@ public class RateCategoryMessageTest extends BaseTestCase {
 			selenium.getText(
 				"//div[@class='taglib-ratings thumbs']/div/div/div"));
 		assertTrue(selenium.isElementPresent(
-				"//a[@class='yui3-aui-rating-element yui3-aui-rating-element-off yui3-aui-rating-thumb-up']"));
+				"//a[@class='aui-rating-element aui-rating-element-off aui-rating-thumb-up']"));
 		assertFalse(selenium.isElementPresent(
-				"//a[@class='yui3-aui-rating-element yui3-aui-rating-element-off yui3-aui-rating-thumb-down']"));
+				"//a[@class='aui-rating-element aui-rating-element-off aui-rating-thumb-down']"));
 		assertFalse(selenium.isElementPresent(
-				"//a[@class='yui3-aui-rating-element yui3-aui-rating-element-off yui3-aui-rating-thumb-up yui3-aui-rating-element-on']"));
+				"//a[@class='aui-rating-element aui-rating-element-off aui-rating-thumb-up aui-rating-element-on']"));
 		assertTrue(selenium.isElementPresent(
-				"//a[@class='yui3-aui-rating-element yui3-aui-rating-element-off yui3-aui-rating-thumb-down yui3-aui-rating-element-on']"));
+				"//a[@class='aui-rating-element aui-rating-element-off aui-rating-thumb-down aui-rating-element-on']"));
 		selenium.clickAt("//div[@class='taglib-ratings thumbs']/div/div/a[2]",
 			RuntimeVariables.replace(""));
 
@@ -155,12 +155,12 @@ public class RateCategoryMessageTest extends BaseTestCase {
 			selenium.getText(
 				"//div[@class='taglib-ratings thumbs']/div/div/div"));
 		assertTrue(selenium.isElementPresent(
-				"//a[@class='yui3-aui-rating-element yui3-aui-rating-element-off yui3-aui-rating-thumb-up']"));
+				"//a[@class='aui-rating-element aui-rating-element-off aui-rating-thumb-up']"));
 		assertTrue(selenium.isElementPresent(
-				"//a[@class='yui3-aui-rating-element yui3-aui-rating-element-off yui3-aui-rating-thumb-down']"));
+				"//a[@class='aui-rating-element aui-rating-element-off aui-rating-thumb-down']"));
 		assertFalse(selenium.isElementPresent(
-				"//a[@class='yui3-aui-rating-element yui3-aui-rating-element-off yui3-aui-rating-thumb-up yui3-aui-rating-element-on']"));
+				"//a[@class='aui-rating-element aui-rating-element-off aui-rating-thumb-up aui-rating-element-on']"));
 		assertFalse(selenium.isElementPresent(
-				"//a[@class='yui3-aui-rating-element yui3-aui-rating-element-off yui3-aui-rating-thumb-down yui3-aui-rating-element-on']"));
+				"//a[@class='aui-rating-element aui-rating-element-off aui-rating-thumb-down aui-rating-element-on']"));
 	}
 }

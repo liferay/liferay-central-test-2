@@ -53,7 +53,7 @@ public class RateWCWebContentCommentAPTest extends BaseTestCase {
 
 			try {
 				if (selenium.isPartialText(
-							"//div[@class='yui3-aui-rating-label-element']",
+							"//div[@class='aui-rating-label-element']",
 							"0 Votes")) {
 					break;
 				}
@@ -66,7 +66,7 @@ public class RateWCWebContentCommentAPTest extends BaseTestCase {
 
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isPartialText(
-				"//div[@class='yui3-aui-rating-label-element']", "0 Votes"));
+				"//div[@class='aui-rating-label-element']", "0 Votes"));
 		selenium.clickAt("//div/div[1]/div/div/div/div/a[1]",
 			RuntimeVariables.replace("Rate this as good."));
 
@@ -78,7 +78,7 @@ public class RateWCWebContentCommentAPTest extends BaseTestCase {
 			try {
 				if (RuntimeVariables.replace("+1 (1 Vote)")
 										.equals(selenium.getText(
-								"//div[@class='yui3-aui-rating-label-element']"))) {
+								"//div[@class='aui-rating-label-element']"))) {
 					break;
 				}
 			}
@@ -90,9 +90,9 @@ public class RateWCWebContentCommentAPTest extends BaseTestCase {
 
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("+1 (1 Vote)"),
-			selenium.getText("//div[@class='yui3-aui-rating-label-element']"));
+			selenium.getText("//div[@class='aui-rating-label-element']"));
 		assertTrue(selenium.isElementPresent(
-				"//a[@class='yui3-aui-rating-element yui3-aui-rating-element-off yui3-aui-rating-thumb-up yui3-aui-rating-element-on']"));
+				"//a[@class='aui-rating-element aui-rating-element-off aui-rating-thumb-up aui-rating-element-on']"));
 		selenium.clickAt("//div/div[1]/div/div/div/div/a[2]",
 			RuntimeVariables.replace("Rate this as bad."));
 
@@ -104,7 +104,7 @@ public class RateWCWebContentCommentAPTest extends BaseTestCase {
 			try {
 				if (RuntimeVariables.replace("-1 (1 Vote)")
 										.equals(selenium.getText(
-								"//div[@class='yui3-aui-rating-label-element']"))) {
+								"//div[@class='aui-rating-label-element']"))) {
 					break;
 				}
 			}
@@ -116,14 +116,14 @@ public class RateWCWebContentCommentAPTest extends BaseTestCase {
 
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("-1 (1 Vote)"),
-			selenium.getText("//div[@class='yui3-aui-rating-label-element']"));
+			selenium.getText("//div[@class='aui-rating-label-element']"));
 		assertTrue(selenium.isElementPresent(
-				"//a[@class='yui3-aui-rating-element yui3-aui-rating-element-off yui3-aui-rating-thumb-down yui3-aui-rating-element-on']"));
+				"//a[@class='aui-rating-element aui-rating-element-off aui-rating-thumb-down aui-rating-element-on']"));
 		selenium.clickAt("//div/div[1]/div/div/div/div/a[2]",
 			RuntimeVariables.replace("Rate this as bad."));
 		assertFalse(selenium.isElementPresent(
-				"//a[@class='yui3-aui-rating-element yui3-aui-rating-element-off yui3-aui-rating-thumb-up yui3-aui-rating-element-on']"));
+				"//a[@class='aui-rating-element aui-rating-element-off aui-rating-thumb-up aui-rating-element-on']"));
 		assertFalse(selenium.isElementPresent(
-				"//a[@class='yui3-aui-rating-element yui3-aui-rating-element-off yui3-aui-rating-thumb-down yui3-aui-rating-element-on']"));
+				"//a[@class='aui-rating-element aui-rating-element-off aui-rating-thumb-down aui-rating-element-on']"));
 	}
 }

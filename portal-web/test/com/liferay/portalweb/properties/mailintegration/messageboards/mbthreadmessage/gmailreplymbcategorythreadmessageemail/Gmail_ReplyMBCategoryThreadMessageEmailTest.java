@@ -160,7 +160,8 @@ public class Gmail_ReplyMBCategoryThreadMessageEmailTest extends BaseTestCase {
 						"[MB Category Name] MB Message Subject"),
 					selenium.getText("//h1/span[1]"));
 				assertTrue(selenium.isPartialText(
-						"//div/div[2]/div/div/div[2]/div[5]", "MB Message Body"));
+						"//div[contains(child::text(),'MB Message Body')]",
+						"MB Message Body"));
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {

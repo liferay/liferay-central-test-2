@@ -63,6 +63,6 @@ public class AddFolderEntryURLNullTest extends BaseTestCase {
 			RuntimeVariables.replace("Save"));
 		assertEquals(RuntimeVariables.replace("This field is required."),
 			selenium.getText(
-				"//div[@class='yui3-aui-form-validator-message required']"));
+				"//div[@class='aui-form-validator-message required']"));
 	}
 }

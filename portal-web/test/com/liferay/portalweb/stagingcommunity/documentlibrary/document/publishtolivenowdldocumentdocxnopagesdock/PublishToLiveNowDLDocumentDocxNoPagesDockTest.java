@@ -141,9 +141,9 @@ public class PublishToLiveNowDLDocumentDocxNoPagesDockTest extends BaseTestCase 
 		assertEquals(RuntimeVariables.replace("Document Library Test Page"),
 			selenium.getText("//li/ul/li[1]/div/div[4]"));
 		assertTrue(selenium.isElementPresent(
-				"//div[@class='yui3-aui-helper-clearfix yui3-aui-tree-node-content yui3-aui-tree-data-content yui3-aui-tree-node-content yui3-aui-tree-node-io-content yui3-aui-tree-node-check-content yui3-aui-tree-node-task-content lfr-root-node yui3-aui-tree-node-selected yui3-aui-tree-expanded']"));
+				"//div[@class='aui-helper-clearfix aui-tree-node-content aui-tree-data-content aui-tree-node-content aui-tree-node-io-content aui-tree-node-check-content aui-tree-node-task-content lfr-root-node aui-tree-node-selected aui-tree-expanded']"));
 		assertTrue(selenium.isElementPresent(
-				"//div[@class='yui3-aui-helper-clearfix yui3-aui-tree-node-content yui3-aui-tree-data-content yui3-aui-tree-node-content yui3-aui-tree-node-io-content yui3-aui-tree-node-check-content yui3-aui-tree-node-task-content yui3-aui-tree-collapsed']"));
+				"//div[@class='aui-helper-clearfix aui-tree-node-content aui-tree-data-content aui-tree-node-content aui-tree-node-io-content aui-tree-node-check-content aui-tree-node-task-content aui-tree-collapsed']"));
 		selenium.clickAt("//input[@value='Select']",
 			RuntimeVariables.replace("Select"));
 		Thread.sleep(5000);

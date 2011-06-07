@@ -61,7 +61,6 @@ public class AddFolderEntryURLInvalidTest extends BaseTestCase {
 		assertFalse(selenium.isTextPresent("Please enter a valid URL."));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		assertEquals(RuntimeVariables.replace("Please enter a valid URL."),
-			selenium.getText(
-				"//div[@class='yui3-aui-form-validator-message url']"));
+			selenium.getText("//div[@class='aui-form-validator-message url']"));
 	}
 }

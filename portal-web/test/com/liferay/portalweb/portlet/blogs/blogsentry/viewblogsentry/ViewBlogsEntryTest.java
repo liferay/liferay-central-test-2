@@ -55,13 +55,11 @@ public class ViewBlogsEntryTest extends BaseTestCase {
 			selenium.getText("//span[@class='comments']/a"));
 		assertEquals(RuntimeVariables.replace("Your Rating"),
 			selenium.getText(
-				"xPath=(//div[@class='yui3-aui-rating-label-element'])[1]"));
+				"xPath=(//div[@class='aui-rating-label-element'])[1]"));
 		assertTrue(selenium.isPartialText(
-				"xPath=(//div[@class='yui3-aui-rating-label-element'])[2]",
-				"Average"));
+				"xPath=(//div[@class='aui-rating-label-element'])[2]", "Average"));
 		assertTrue(selenium.isPartialText(
-				"xPath=(//div[@class='yui3-aui-rating-label-element'])[2]",
-				"0 Votes"));
+				"xPath=(//div[@class='aui-rating-label-element'])[2]", "0 Votes"));
 		assertEquals(RuntimeVariables.replace("Showing 1 result."),
 			selenium.getText("//div[@class='search-results']"));
 	}

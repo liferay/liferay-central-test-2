@@ -84,6 +84,6 @@ public class AddUserPassword1NullTest extends BaseTestCase {
 		assertEquals(RuntimeVariables.replace(
 				"Please enter the same value again."),
 			selenium.getText(
-				"//div[@class='yui3-aui-form-validator-message equalTo']"));
+				"//div[@class='aui-form-validator-message equalTo']"));
 	}
 }

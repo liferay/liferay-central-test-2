@@ -54,8 +54,7 @@ public class AddBlogsEntryRatingCPTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isPartialText(
-				"xPath=(//div[@class='yui3-aui-rating-label-element'])[2]",
-				"0 Votes"));
+				"xPath=(//div[@class='aui-rating-label-element'])[2]", "0 Votes"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -83,7 +82,7 @@ public class AddBlogsEntryRatingCPTest extends BaseTestCase {
 
 			try {
 				if (selenium.isPartialText(
-							"xPath=(//div[@class='yui3-aui-rating-label-element'])[2]",
+							"xPath=(//div[@class='aui-rating-label-element'])[2]",
 							"1 Vote")) {
 					break;
 				}
@@ -96,7 +95,6 @@ public class AddBlogsEntryRatingCPTest extends BaseTestCase {
 
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isPartialText(
-				"xPath=(//div[@class='yui3-aui-rating-label-element'])[2]",
-				"1 Vote"));
+				"xPath=(//div[@class='aui-rating-label-element'])[2]", "1 Vote"));
 	}
 }

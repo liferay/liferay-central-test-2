@@ -77,8 +77,7 @@ public class ViewFolderImageEditingWindowTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible(
-							"//a[@class='yui3-aui-image-viewer-close']")) {
+				if (selenium.isVisible("//a[@class='aui-image-viewer-close']")) {
 					break;
 				}
 			}
@@ -95,6 +94,6 @@ public class ViewFolderImageEditingWindowTest extends BaseTestCase {
 		assertTrue(selenium.isElementPresent("//img[@alt='Edit']"));
 		assertTrue(selenium.isElementPresent("//img[@alt='Permissions']"));
 		assertTrue(selenium.isElementPresent("//img[@alt='Delete']"));
-		selenium.click("//a[@class='yui3-aui-image-viewer-close']");
+		selenium.click("//a[@class='aui-image-viewer-close']");
 	}
 }

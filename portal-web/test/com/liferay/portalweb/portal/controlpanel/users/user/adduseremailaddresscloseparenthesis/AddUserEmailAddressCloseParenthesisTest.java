@@ -67,7 +67,6 @@ public class AddUserEmailAddressCloseParenthesisTest extends BaseTestCase {
 			RuntimeVariables.replace("Save"));
 		assertEquals(RuntimeVariables.replace(
 				"Please enter a valid email address."),
-			selenium.getText(
-				"//div[@class='yui3-aui-form-validator-message email']"));
+			selenium.getText("//div[@class='aui-form-validator-message email']"));
 	}
 }

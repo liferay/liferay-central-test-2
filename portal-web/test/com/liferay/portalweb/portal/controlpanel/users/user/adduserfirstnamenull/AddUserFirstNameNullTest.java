@@ -81,6 +81,6 @@ public class AddUserFirstNameNullTest extends BaseTestCase {
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		assertEquals(RuntimeVariables.replace("This field is required."),
 			selenium.getText(
-				"//div[@class='yui3-aui-form-validator-message required']"));
+				"//div[@class='aui-form-validator-message required']"));
 	}
 }

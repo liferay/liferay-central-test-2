@@ -53,7 +53,7 @@ public class RateCommentTest extends BaseTestCase {
 
 			try {
 				if (selenium.isPartialText(
-							"//div[@class='yui3-aui-rating-label-element']",
+							"//div[@class='aui-rating-label-element']",
 							"0 Votes")) {
 					break;
 				}
@@ -66,7 +66,7 @@ public class RateCommentTest extends BaseTestCase {
 
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isPartialText(
-				"//div[@class='yui3-aui-rating-label-element']", "0 Votes"));
+				"//div[@class='aui-rating-label-element']", "0 Votes"));
 		selenium.clickAt("//div[@class='taglib-ratings thumbs']/div/div/a",
 			RuntimeVariables.replace(""));
 
@@ -78,7 +78,7 @@ public class RateCommentTest extends BaseTestCase {
 			try {
 				if (RuntimeVariables.replace("+1 (1 Vote)")
 										.equals(selenium.getText(
-								"//div[@class='yui3-aui-rating-label-element']"))) {
+								"//div[@class='aui-rating-label-element']"))) {
 					break;
 				}
 			}
@@ -90,7 +90,7 @@ public class RateCommentTest extends BaseTestCase {
 
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("+1 (1 Vote)"),
-			selenium.getText("//div[@class='yui3-aui-rating-label-element']"));
+			selenium.getText("//div[@class='aui-rating-label-element']"));
 		selenium.clickAt("//div[@class='taglib-ratings thumbs']/div/div/a",
 			RuntimeVariables.replace(""));
 
@@ -102,7 +102,7 @@ public class RateCommentTest extends BaseTestCase {
 			try {
 				if (RuntimeVariables.replace("0 (0 Votes)")
 										.equals(selenium.getText(
-								"//div[@class='yui3-aui-rating-label-element']"))) {
+								"//div[@class='aui-rating-label-element']"))) {
 					break;
 				}
 			}
@@ -114,7 +114,7 @@ public class RateCommentTest extends BaseTestCase {
 
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("0 (0 Votes)"),
-			selenium.getText("//div[@class='yui3-aui-rating-label-element']"));
+			selenium.getText("//div[@class='aui-rating-label-element']"));
 		selenium.clickAt("//div[@class='taglib-ratings thumbs']/div/div/a[2]",
 			RuntimeVariables.replace(""));
 
@@ -126,7 +126,7 @@ public class RateCommentTest extends BaseTestCase {
 			try {
 				if (RuntimeVariables.replace("-1 (1 Vote)")
 										.equals(selenium.getText(
-								"//div[@class='yui3-aui-rating-label-element']"))) {
+								"//div[@class='aui-rating-label-element']"))) {
 					break;
 				}
 			}
@@ -138,7 +138,7 @@ public class RateCommentTest extends BaseTestCase {
 
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("-1 (1 Vote)"),
-			selenium.getText("//div[@class='yui3-aui-rating-label-element']"));
+			selenium.getText("//div[@class='aui-rating-label-element']"));
 		selenium.clickAt("//div[@class='taglib-ratings thumbs']/div/div/a[2]",
 			RuntimeVariables.replace(""));
 
@@ -150,7 +150,7 @@ public class RateCommentTest extends BaseTestCase {
 			try {
 				if (RuntimeVariables.replace("0 (0 Votes)")
 										.equals(selenium.getText(
-								"//div[@class='yui3-aui-rating-label-element']"))) {
+								"//div[@class='aui-rating-label-element']"))) {
 					break;
 				}
 			}
@@ -162,7 +162,7 @@ public class RateCommentTest extends BaseTestCase {
 
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("0 (0 Votes)"),
-			selenium.getText("//div[@class='yui3-aui-rating-label-element']"));
+			selenium.getText("//div[@class='aui-rating-label-element']"));
 		selenium.clickAt("//div[@class='taglib-ratings thumbs']/div/div/a",
 			RuntimeVariables.replace(""));
 
@@ -174,7 +174,7 @@ public class RateCommentTest extends BaseTestCase {
 			try {
 				if (RuntimeVariables.replace("+1 (1 Vote)")
 										.equals(selenium.getText(
-								"//div[@class='yui3-aui-rating-label-element']"))) {
+								"//div[@class='aui-rating-label-element']"))) {
 					break;
 				}
 			}
@@ -186,7 +186,7 @@ public class RateCommentTest extends BaseTestCase {
 
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("+1 (1 Vote)"),
-			selenium.getText("//div[@class='yui3-aui-rating-label-element']"));
+			selenium.getText("//div[@class='aui-rating-label-element']"));
 		selenium.clickAt("//div[@class='taglib-ratings thumbs']/div/div/a[2]",
 			RuntimeVariables.replace(""));
 
@@ -198,7 +198,7 @@ public class RateCommentTest extends BaseTestCase {
 			try {
 				if (RuntimeVariables.replace("-1 (1 Vote)")
 										.equals(selenium.getText(
-								"//div[@class='yui3-aui-rating-label-element']"))) {
+								"//div[@class='aui-rating-label-element']"))) {
 					break;
 				}
 			}
@@ -210,7 +210,7 @@ public class RateCommentTest extends BaseTestCase {
 
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("-1 (1 Vote)"),
-			selenium.getText("//div[@class='yui3-aui-rating-label-element']"));
+			selenium.getText("//div[@class='aui-rating-label-element']"));
 		selenium.clickAt("//div[@class='taglib-ratings thumbs']/div/div/a[2]",
 			RuntimeVariables.replace(""));
 
@@ -222,7 +222,7 @@ public class RateCommentTest extends BaseTestCase {
 			try {
 				if (RuntimeVariables.replace("0 (0 Votes)")
 										.equals(selenium.getText(
-								"//div[@class='yui3-aui-rating-label-element']"))) {
+								"//div[@class='aui-rating-label-element']"))) {
 					break;
 				}
 			}
@@ -234,7 +234,7 @@ public class RateCommentTest extends BaseTestCase {
 
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("0 (0 Votes)"),
-			selenium.getText("//div[@class='yui3-aui-rating-label-element']"));
+			selenium.getText("//div[@class='aui-rating-label-element']"));
 		selenium.clickAt("//div[@class='taglib-ratings thumbs']/div/div/a[2]",
 			RuntimeVariables.replace(""));
 
@@ -246,7 +246,7 @@ public class RateCommentTest extends BaseTestCase {
 			try {
 				if (RuntimeVariables.replace("-1 (1 Vote)")
 										.equals(selenium.getText(
-								"//div[@class='yui3-aui-rating-label-element']"))) {
+								"//div[@class='aui-rating-label-element']"))) {
 					break;
 				}
 			}
@@ -258,7 +258,7 @@ public class RateCommentTest extends BaseTestCase {
 
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("-1 (1 Vote)"),
-			selenium.getText("//div[@class='yui3-aui-rating-label-element']"));
+			selenium.getText("//div[@class='aui-rating-label-element']"));
 		selenium.clickAt("//div[@class='taglib-ratings thumbs']/div/div/a",
 			RuntimeVariables.replace(""));
 
@@ -270,7 +270,7 @@ public class RateCommentTest extends BaseTestCase {
 			try {
 				if (RuntimeVariables.replace("+1 (1 Vote)")
 										.equals(selenium.getText(
-								"//div[@class='yui3-aui-rating-label-element']"))) {
+								"//div[@class='aui-rating-label-element']"))) {
 					break;
 				}
 			}
@@ -282,7 +282,7 @@ public class RateCommentTest extends BaseTestCase {
 
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("+1 (1 Vote)"),
-			selenium.getText("//div[@class='yui3-aui-rating-label-element']"));
+			selenium.getText("//div[@class='aui-rating-label-element']"));
 		selenium.clickAt("//div[@class='taglib-ratings thumbs']/div/div/a",
 			RuntimeVariables.replace(""));
 
@@ -294,7 +294,7 @@ public class RateCommentTest extends BaseTestCase {
 			try {
 				if (RuntimeVariables.replace("0 (0 Votes)")
 										.equals(selenium.getText(
-								"//div[@class='yui3-aui-rating-label-element']"))) {
+								"//div[@class='aui-rating-label-element']"))) {
 					break;
 				}
 			}

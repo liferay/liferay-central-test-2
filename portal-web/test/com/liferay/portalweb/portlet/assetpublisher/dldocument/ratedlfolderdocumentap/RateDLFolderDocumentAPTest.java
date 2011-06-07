@@ -47,7 +47,7 @@ public class RateDLFolderDocumentAPTest extends BaseTestCase {
 		selenium.saveScreenShotAndSource();
 
 		String voteCount = selenium.getFirstNumberIncrement(
-				"xPath=(//div[@class='yui3-aui-rating-label-element'])[2]");
+				"xPath=(//div[@class='aui-rating-label-element'])[2]");
 		RuntimeVariables.setValue("voteCount", voteCount);
 		selenium.clickAt("//a[5]", RuntimeVariables.replace("5 Stars"));
 
@@ -58,7 +58,7 @@ public class RateDLFolderDocumentAPTest extends BaseTestCase {
 
 			try {
 				if (selenium.isPartialText(
-							"xPath=(//div[@class='yui3-aui-rating-label-element'])[2]",
+							"xPath=(//div[@class='aui-rating-label-element'])[2]",
 							RuntimeVariables.getValue("voteCount"))) {
 					break;
 				}
@@ -71,7 +71,7 @@ public class RateDLFolderDocumentAPTest extends BaseTestCase {
 
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isPartialText(
-				"xPath=(//div[@class='yui3-aui-rating-label-element'])[2]",
+				"xPath=(//div[@class='aui-rating-label-element'])[2]",
 				RuntimeVariables.getValue("voteCount")));
 	}
 }

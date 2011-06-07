@@ -98,7 +98,7 @@ public class TearDownTest extends BaseTestCase {
 
 					try {
 						if (selenium.isVisible(
-									"//ul[@class='yui3-aui-tree-container']")) {
+									"//ul[@class='aui-tree-container']")) {
 							break;
 						}
 					}
@@ -143,7 +143,7 @@ public class TearDownTest extends BaseTestCase {
 
 					try {
 						if (selenium.isVisible(
-									"//ul[@class='yui3-aui-tree-container']")) {
+									"//ul[@class='aui-tree-container']")) {
 							break;
 						}
 					}
@@ -188,7 +188,7 @@ public class TearDownTest extends BaseTestCase {
 
 					try {
 						if (selenium.isVisible(
-									"//ul[@class='yui3-aui-tree-container']")) {
+									"//ul[@class='aui-tree-container']")) {
 							break;
 						}
 					}
@@ -233,7 +233,7 @@ public class TearDownTest extends BaseTestCase {
 
 					try {
 						if (selenium.isVisible(
-									"//ul[@class='yui3-aui-tree-container']")) {
+									"//ul[@class='aui-tree-container']")) {
 							break;
 						}
 					}
@@ -278,7 +278,7 @@ public class TearDownTest extends BaseTestCase {
 
 					try {
 						if (selenium.isVisible(
-									"//ul[@class='yui3-aui-tree-container']")) {
+									"//ul[@class='aui-tree-container']")) {
 							break;
 						}
 					}

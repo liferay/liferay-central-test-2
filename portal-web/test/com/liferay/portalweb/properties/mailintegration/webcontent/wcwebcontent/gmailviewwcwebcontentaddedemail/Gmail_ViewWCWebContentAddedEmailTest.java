@@ -138,8 +138,8 @@ public class Gmail_ViewWCWebContentAddedEmailTest extends BaseTestCase {
 				assertTrue(selenium.isPartialText("//h1/span[1]",
 						"Web Content: Article Added"));
 				assertTrue(selenium.isPartialText(
-						"//div/div[2]/div/div/div[2]/div[5]",
-						"version 1.0 and title was added."));
+						"//p[contains(.,'Web Content Name')]",
+						"Web Content Name was added."));
 				Thread.sleep(5000);
 
 				boolean signedIn3 = selenium.isElementPresent(

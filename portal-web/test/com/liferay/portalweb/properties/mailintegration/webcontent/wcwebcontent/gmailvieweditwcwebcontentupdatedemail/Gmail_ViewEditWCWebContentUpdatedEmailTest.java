@@ -137,8 +137,8 @@ public class Gmail_ViewEditWCWebContentUpdatedEmailTest extends BaseTestCase {
 				assertTrue(selenium.isPartialText("//h1/span[1]",
 						"Web Content: Article Updated"));
 				assertTrue(selenium.isPartialText(
-						"//div/div[2]/div/div/div[2]/div[5]",
-						"version 1.1 and title was updated"));
+						"//p[contains(.,'Web Content Name Edit')]",
+						"Web Content Name Edit was updated."));
 				Thread.sleep(5000);
 
 				boolean signedIn3 = selenium.isElementPresent(

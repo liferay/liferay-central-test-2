@@ -115,7 +115,7 @@ public class AddDocumentTest extends BaseTestCase {
 		selenium.saveScreenShotAndSource();
 		selenium.type("_20_file",
 			RuntimeVariables.replace(
-				"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portal\\dbupgrade\\sampledata605\\documentlibrary\\documentversion\\dependencies\\test_document.txt"));
+				"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portal\\dbupgrade\\sampledata606\\documentlibrary\\documentversion\\dependencies\\test_document.txt"));
 		selenium.saveScreenShotAndSource();
 		selenium.type("_20_title",
 			RuntimeVariables.replace("Test1 Document1.txt"));

@@ -113,7 +113,7 @@ public class AddIGFolderImageTest extends BaseTestCase {
 		selenium.saveScreenShotAndSource();
 		selenium.type("_31_file",
 			RuntimeVariables.replace(
-				"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portal\\dbupgrade\\sampledata605\\webcontent\\imageassociation\\dependencies\\ImageGallery.jpg"));
+				"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portal\\dbupgrade\\sampledata606\\webcontent\\imageassociation\\dependencies\\ImageGallery.jpg"));
 		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");

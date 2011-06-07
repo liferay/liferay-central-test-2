@@ -134,8 +134,7 @@ public class SelectBirthdayTest extends BaseTestCase {
 
 			try {
 				if (selenium.isPartialText(
-							"//div[@class='yui3-aui-calendar-title']",
-							"April 1986")) {
+							"//div[@class='aui-calendar-title']", "April 1986")) {
 					break;
 				}
 			}
@@ -155,8 +154,7 @@ public class SelectBirthdayTest extends BaseTestCase {
 
 			try {
 				if (selenium.isPartialText(
-							"//div[@class='yui3-aui-calendar-title']",
-							"May 1986")) {
+							"//div[@class='aui-calendar-title']", "May 1986")) {
 					break;
 				}
 			}
@@ -193,8 +191,7 @@ public class SelectBirthdayTest extends BaseTestCase {
 			}
 
 			try {
-				if (!selenium.isVisible(
-							"//div[@class='yui3-aui-calendar-title']")) {
+				if (!selenium.isVisible("//div[@class='aui-calendar-title']")) {
 					break;
 				}
 			}
