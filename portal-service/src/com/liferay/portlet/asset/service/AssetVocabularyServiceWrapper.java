@@ -96,6 +96,13 @@ public class AssetVocabularyServiceWrapper implements AssetVocabularyService {
 		return _assetVocabularyService.getVocabulary(vocabularyId);
 	}
 
+	public java.util.List<com.liferay.portlet.asset.model.AssetVocabulary> getVocabularies(
+		long[] vocabularyIds)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _assetVocabularyService.getVocabularies(vocabularyIds);
+	}
+
 	/**
 	* @deprecated
 	*/
