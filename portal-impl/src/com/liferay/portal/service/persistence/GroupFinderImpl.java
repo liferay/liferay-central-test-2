@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
+import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.impl.GroupImpl;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.portal.util.PortalUtil;
@@ -371,9 +372,14 @@ public class GroupFinderImpl
 			OrderByComparator obc)
 		throws SystemException {
 
+		long[] classNameIds = {
+			PortalUtil.getClassNameId(Group.class),
+			PortalUtil.getClassNameId(Organization.class)
+		};
+
 		return findByC_C_N_D(
-			companyId, new long[] {PortalUtil.getClassNameId(Group.class)},
-			name, realName, description,params, start, end, obc);
+			companyId, classNameIds, name, realName, description,params, start,
+			end, obc);
 	}
 
 	public List<Group> findByC_C_N_D(
