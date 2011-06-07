@@ -61,8 +61,6 @@ String redirect = ParamUtil.getString(request, "redirect");
 			if (Arrays.binarySearch(assetVocabularyIds, vocabularyId) < 0) {
 				AssetVocabulary vocabulary = AssetVocabularyLocalServiceUtil.getVocabulary(vocabularyId);
 
-				vocabulary = vocabulary.toEscapedModel();
-
 				typesRightList.add(new KeyValuePair(String.valueOf(vocabularyId), _getName(vocabulary, themeDisplay)));
 			}
 		}

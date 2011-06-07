@@ -337,7 +337,7 @@ public class AssetVocabularyLocalServiceImpl
 	protected void validate(long groupId, String name)
 		throws PortalException, SystemException {
 
-		if (Validator.isNull(name)) {
+		if (!AssetUtil.isValidWord(name)) {
 			throw new VocabularyNameException();
 		}
 

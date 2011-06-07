@@ -215,7 +215,7 @@ AUI().add(
 									{
 										alwaysShowHitArea: false,
 										id: 'categoryNode' + item.categoryId,
-										label: Liferay.Util.escapeHTML(item.name),
+										label: item.name,
 										leaf: false,
 										on: {
 											select: function(event) {
@@ -604,11 +604,7 @@ AUI().add(
 											item.cssClassSelected = '';
 										}
 
-										var auxItem = A.clone(item);
-										
-										auxItem.name = Liferay.Util.escapeHTML(auxItem.name);
-											
-										buffer.push(Lang.sub(TPL_VOCABULARY_LIST, auxItem));
+										buffer.push(Lang.sub(TPL_VOCABULARY_LIST, item));
 									}
 								);
 

@@ -51,8 +51,6 @@ if (Validator.isNotNull(curCategoryIds)) {
 		for (long curCategoryId : curCategoryIdsArray) {
 			AssetCategory category = AssetCategoryServiceUtil.getCategory(curCategoryId);
 
-			category = category.toEscapedModel();
-
 			sb.append(category.getName());
 			sb.append(StringPool.COMMA);
 		}

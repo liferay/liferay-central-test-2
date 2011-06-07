@@ -32,8 +32,6 @@ List<AssetCategory> categories = AssetCategoryServiceUtil.getCategories(classNam
 
 <%
 for (AssetVocabulary vocabulary : vocabularies) {
-	vocabulary = vocabulary.toEscapedModel();
-
 	String vocabularyName = vocabulary.getName();
 
 	List<AssetCategory> curCategories = _filterCategories(categories, vocabulary);
@@ -48,8 +46,6 @@ for (AssetVocabulary vocabulary : vocabularies) {
 
 					<%
 					for (AssetCategory category : curCategories) {
-						category = category.toEscapedModel();
-
 						portletURL.setParameter("categoryId", String.valueOf(category.getCategoryId()));
 					%>
 
@@ -64,7 +60,6 @@ for (AssetVocabulary vocabulary : vocabularies) {
 
 					<%
 					for (AssetCategory category : curCategories) {
-						category = category.toEscapedModel();
 					%>
 
 						<span class="asset-category">
@@ -96,8 +91,6 @@ private String _buildCategoryPath(AssetCategory category) throws PortalException
 	StringBundler sb = new StringBundler(ancestorCategories.size() * 2 + 1);
 
 	for (AssetCategory ancestorCategory : ancestorCategories) {
-		ancestorCategory = ancestorCategory.toEscapedModel();
-
 		sb.append(ancestorCategory.getName());
 		sb.append(" &raquo; ");
 	}

@@ -169,13 +169,9 @@ if (assetCategoryId > 0) {
 
 	AssetCategory assetCategory = AssetCategoryLocalServiceUtil.getCategory(assetCategoryId);
 
-	assetCategory = assetCategory.toEscapedModel();
-
 	assetCategoryName = assetCategory.getName();
 
 	AssetVocabulary assetVocabulary = AssetVocabularyLocalServiceUtil.getAssetVocabulary(assetCategory.getVocabularyId());
-
-	assetVocabulary = assetVocabulary.toEscapedModel();
 
 	assetVocabularyName = assetVocabulary.getName();
 

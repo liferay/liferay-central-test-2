@@ -498,7 +498,6 @@ Group scopeGroup = themeDisplay.getScopeGroup();
 
 												<%
 												for (AssetVocabulary assetVocabulary : assetVocabularies) {
-													assetVocabulary = assetVocabulary.toEscapedModel();
 												%>
 
 													<aui:option label="<%= assetVocabulary.getName() %>" selected="<%= assetVocabularyId == assetVocabulary.getVocabularyId() %>" value="<%= assetVocabulary.getVocabularyId() %>" />
@@ -524,7 +523,6 @@ Group scopeGroup = themeDisplay.getScopeGroup();
 
 											<%
 											for (AssetVocabulary assetVocabulary : assetVocabularies) {
-												assetVocabulary = assetVocabulary.toEscapedModel();
 											%>
 
 												<aui:option label="<%= assetVocabulary.getName() %>" selected="<%= assetVocabularyId == assetVocabulary.getVocabularyId() %>" value="<%= assetVocabulary.getVocabularyId() %>" />
