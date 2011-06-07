@@ -130,8 +130,19 @@ UnicodeProperties liveGroupTypeSettings = (UnicodeProperties)request.getAttribut
 
 			portlets = ListUtil.sort(portlets, new PortletTitleComparator(application, locale));
 
+			Set<String> portletDataHandlerClasses = new HashSet<String>();
+
 			for (Portlet curPortlet : portlets) {
 				if (!curPortlet.isActive()) {
+					continue;
+				}
+
+				String portletDataHandlerClass = curPortlet.getPortletDataHandlerClass();
+
+				if (!portletDataHandlerClasses.contains(portletDataHandlerClass)) {
+					portletDataHandlerClasses.add(portletDataHandlerClass);
+				}
+				else {
 					continue;
 				}
 
