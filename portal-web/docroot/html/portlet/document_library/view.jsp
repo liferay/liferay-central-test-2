@@ -90,8 +90,10 @@ request.setAttribute("view.jsp-repositoryId", String.valueOf(repositoryId));
 			<aui:form action="<%= editFileEntryURL.toString() %>" method="get" name="fm2">
 				<aui:input name="<%= Constants.CMD %>" type="hidden" />
 				<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
-				<aui:input name="deleteEntryIds" type="hidden" />
+				<aui:input name="repositoryId" type="hidden" value="<%= repositoryId %>" />
 				<aui:input name="fileEntryIds" type="hidden" />
+				<aui:input name="fileShortcutIds" type="hidden" />
+				<aui:input name="folderIds" type="hidden" />
 
 				<div class="header-row">
 					<div class="header-row-content">
@@ -132,14 +134,14 @@ if (folder != null) {
 	function <portlet:namespace />editFileEntry(action) {
 		if (action == '<%= Constants.DELETE %>') {
 			if (confirm('<%= UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-delete-the-selected-entries") %>')) {
-				<portlet:namespace />doFileEntryAction(action, '<portlet:actionURL><portlet:param name="struts_action" value="/document_library/edit_file_entry" /></portlet:actionURL>');
+				<portlet:namespace />doFileEntryAction(action, '<portlet:actionURL><portlet:param name="struts_action" value="/document_library/edit_entry" /></portlet:actionURL>');
 			}
 		}
 		else if (action == '<%= Constants.MOVE %>') {
-			<portlet:namespace />doFileEntryAction(action, '<portlet:renderURL><portlet:param name="struts_action" value="/document_library/move_file_entry" /></portlet:renderURL>');
+			<portlet:namespace />doFileEntryAction(action, '<portlet:renderURL><portlet:param name="struts_action" value="/document_library/move_entry" /></portlet:renderURL>');
 		}
 		else {
-			<portlet:namespace />doFileEntryAction(action, '<portlet:actionURL><portlet:param name="struts_action" value="/document_library/edit_file_entry" /></portlet:actionURL>');
+			<portlet:namespace />doFileEntryAction(action, '<portlet:actionURL><portlet:param name="struts_action" value="/document_library/edit_entry" /></portlet:actionURL>');
 		}
 	}
 
@@ -149,7 +151,9 @@ if (folder != null) {
 		function(action, url) {
 			document.<portlet:namespace />fm2.method = "post";
 			document.<portlet:namespace />fm2.<portlet:namespace /><%= Constants.CMD %>.value = action;
-			document.<portlet:namespace />fm2.<portlet:namespace />fileEntryIds.value = Liferay.Util.listCheckedExcept(document.<portlet:namespace />fm2, '<portlet:namespace /><%= RowChecker.ALL_ROW_IDS %>Checkbox');
+			document.<portlet:namespace />fm2.<portlet:namespace />fileEntryIds.value = Liferay.Util.listCheckedExcept(document.<portlet:namespace />fm2, '<portlet:namespace /><%= RowChecker.ALL_ROW_IDS %>Checkbox', '<portlet:namespace /><%= RowChecker.ROW_IDS + StringPool.UNDERLINE + FileEntry.class.getName() %>');
+			document.<portlet:namespace />fm2.<portlet:namespace />fileShortcutIds.value = Liferay.Util.listCheckedExcept(document.<portlet:namespace />fm2, '<portlet:namespace /><%= RowChecker.ALL_ROW_IDS %>Checkbox', '<portlet:namespace /><%= RowChecker.ROW_IDS + StringPool.UNDERLINE + DLFileShortcut.class.getName() %>');
+			document.<portlet:namespace />fm2.<portlet:namespace />folderIds.value = Liferay.Util.listCheckedExcept(document.<portlet:namespace />fm2, '<portlet:namespace /><%= RowChecker.ALL_ROW_IDS %>Checkbox', '<portlet:namespace /><%= RowChecker.ROW_IDS  + StringPool.UNDERLINE + Folder.class.getName() %>');
 
 			submitForm(document.<portlet:namespace />fm2, url);
 		},
@@ -188,7 +192,7 @@ if (folder != null) {
 
 			<portlet:namespace />toggleActionsButton();
 
-			Liferay.Util.checkAllBox(documentContainer, '<portlet:namespace /><%= RowChecker.ROW_IDS %>', '#<portlet:namespace /><%= RowChecker.ALL_ROW_IDS %>Checkbox');
+			Liferay.Util.checkAllBox(documentContainer, ['<portlet:namespace /><%= RowChecker.ROW_IDS + StringPool.UNDERLINE + FileEntry.class.getName() %>', '<portlet:namespace /><%= RowChecker.ROW_IDS + StringPool.UNDERLINE + DLFileShortcut.class.getName() %>', '<portlet:namespace /><%= RowChecker.ROW_IDS + StringPool.UNDERLINE + Folder.class.getName() %>'], '#<portlet:namespace /><%= RowChecker.ALL_ROW_IDS %>Checkbox');
 		},
 		'.document-selector'
 	);

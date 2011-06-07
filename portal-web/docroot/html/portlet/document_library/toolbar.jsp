@@ -143,7 +143,9 @@ String orderByType = ParamUtil.getString(request, "orderByType");
 			var documentContainer = A.one('.document-container');
 			var documentDisplayStyle = A.all('.document-display-style')
 
-			Liferay.Util.checkAll(documentContainer, '<portlet:namespace /><%= RowChecker.ROW_IDS %>', event.currentTarget);
+			Liferay.Util.checkAll(documentContainer, '<portlet:namespace /><%= RowChecker.ROW_IDS + StringPool.UNDERLINE + FileEntry.class.getName() %>', event.currentTarget);
+			Liferay.Util.checkAll(documentContainer, '<portlet:namespace /><%= RowChecker.ROW_IDS + StringPool.UNDERLINE + DLFileShortcut.class.getName() %>', event.currentTarget);
+			Liferay.Util.checkAll(documentContainer, '<portlet:namespace /><%= RowChecker.ROW_IDS + StringPool.UNDERLINE + Folder.class.getName() %>', event.currentTarget);
 
 			<portlet:namespace />toggleActionsButton();
 

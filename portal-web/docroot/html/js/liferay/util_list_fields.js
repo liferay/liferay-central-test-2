@@ -3,13 +3,19 @@ AUI().add(
 	function(A) {
 		var Util = Liferay.Util;
 
-		Util.listChecked = function(form) {
+		Util.listChecked = function(form, name) {
 			var buffer = [];
 
 			form = AUI().one(form);
 
 			if (form) {
-				form.all('input[type=checkbox]').each(
+				var selection = 'input[type=checkbox]';
+
+				if (name) {
+					selection = 'input[type=checkbox][name='+ name +']';
+				}
+
+				form.all(selection).each(
 					function(item, index, collection) {
 						var val = item.val();
 
@@ -23,13 +29,19 @@ AUI().add(
 			return buffer.join(',');
 		};
 
-		Util.listCheckedExcept = function(form, except) {
+		Util.listCheckedExcept = function(form, except, name) {
 			var buffer = [];
 
 			form = AUI().one(form);
 
 			if (form) {
-				form.all('input[type=checkbox]').each(
+				var selection = 'input[type=checkbox]';
+
+				if (name) {
+					selection = 'input[type=checkbox][name='+ name +']';
+				}
+
+				form.all(selection).each(
 					function(item, index, collection) {
 						var val = item.val();
 
@@ -76,13 +88,19 @@ AUI().add(
 			}
 		};
 
-		Util.listUncheckedExcept = function(form, except) {
+		Util.listUncheckedExcept = function(form, except, name) {
 			var buffer = [];
 
 			form = AUI().one(form);
 
 			if (form) {
-				form.all('input[type=checkbox]').each(
+				var selection = 'input[type=checkbox]';
+
+				if (name) {
+					selection = 'input[type=checkbox][name='+ name +']';
+				}
+
+				form.all(selection).each(
 					function(item, index, collection) {
 						var val = item.val();
 
