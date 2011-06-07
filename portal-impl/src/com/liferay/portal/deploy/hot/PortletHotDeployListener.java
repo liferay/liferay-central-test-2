@@ -32,6 +32,7 @@ import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.servlet.DirectServletRegistry;
 import com.liferay.portal.kernel.servlet.PortletServlet;
+import com.liferay.portal.kernel.servlet.ServletContextPool;
 import com.liferay.portal.kernel.servlet.ServletContextProvider;
 import com.liferay.portal.kernel.util.ClassUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -453,6 +454,8 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 				destroyPortlet(portlet, portletIds);
 			}
 		}
+
+		ServletContextPool.remove(servletContextName);
 
 		if (portletIds.size() > 0) {
 			for (long companyId : companyIds) {

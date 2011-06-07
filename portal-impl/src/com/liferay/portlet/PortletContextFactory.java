@@ -18,11 +18,9 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.PortletBag;
 import com.liferay.portal.kernel.portlet.PortletBagPool;
-import com.liferay.portal.kernel.servlet.ServletContextPool;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletApp;
 
-import java.util.Iterator;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -96,23 +94,7 @@ public class PortletContextFactory {
 	}
 
 	private void _destroy(Portlet portlet) {
-		Map<String, PortletContext> portletContexts = _pool.remove(
-			portlet.getRootPortletId());
-
-		if (portletContexts == null) {
-			return;
-		}
-
-		Iterator<Map.Entry<String, PortletContext>> itr =
-			portletContexts.entrySet().iterator();
-
-		if (itr.hasNext()) {
-			Map.Entry<String, PortletContext> entry = itr.next();
-
-			PortletContext portletContext = entry.getValue();
-
-			ServletContextPool.remove(portletContext.getPortletContextName());
-		}
+		_pool.remove(portlet.getRootPortletId());
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(
