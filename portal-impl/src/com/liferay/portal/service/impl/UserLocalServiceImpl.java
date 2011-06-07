@@ -3042,8 +3042,10 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	 * @param  params the finder parameters (optionally <code>null</code>). For
 	 *         more information see {@link
 	 *         com.liferay.portal.service.persistence.UserFinder}.
-	 * @param  andSearch whether the users must match all of the keywords in
-	 *         every field or any of them in any field
+	 * @param  andSearch whether every field must match its keywords, or just
+	 *         one. For example, &quot;users with the first name 'bob' and last
+	 *         name 'smith'&quot; vs &quot;users with the first name 'bob' or
+	 *         the last name 'smith'&quot;.
 	 * @param  start the lower bound of the range of users
 	 * @param  end the upper bound of the range of users (not inclusive)
 	 * @param  obc the comparator to order the users by (optionally
@@ -3091,8 +3093,10 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	 * @param  params the indexer parameters (optionally <code>null</code>). For
 	 *         more information see {@link
 	 *         com.liferay.portlet.enterpriseadmin.util.UserIndexer}.
-	 * @param  andSearch whether the users must match all of the keywords in
-	 *         every field or any of them in any field
+	 * @param  andSearch whether every field must match its keywords, or just
+	 *         one. For example, &quot;users with the first name 'bob' and last
+	 *         name 'smith'&quot; vs &quot;users with the first name 'bob' or
+	 *         the last name 'smith'&quot;.
 	 * @param  start the lower bound of the range of users
 	 * @param  end the upper bound of the range of users (not inclusive)
 	 * @param  sort the field and direction to sort by (optionally
@@ -3151,8 +3155,10 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	 * @param  params the finder parameters (optionally <code>null</code>). For
 	 *         more information see {@link
 	 *         com.liferay.portal.service.persistence.UserFinder}.
-	 * @param  andSearch whether the users must match all of the keywords in
-	 *         every field or any of them in any field
+	 * @param  andSearch whether every field must match its keywords, or just
+	 *         one. For example, &quot;users with the first name 'bob' and last
+	 *         name 'smith'&quot; vs &quot;users with the first name 'bob' or
+	 *         the last name 'smith'&quot;.
 	 * @return the number of matching users
 	 * @throws SystemException if a system exception occurred
 	 */
