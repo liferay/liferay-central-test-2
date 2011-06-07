@@ -58,34 +58,31 @@ AUI().add(
 		Util.listSelect = function(box, delimeter) {
 			var buffer = [];
 
-			delimeter = delimeter || ',';
+			var selectList = '';
 
-			if (box == null) {
-				return '';
-			}
+			if (box != null) {
+				var select = AUI().one(box);
 
-			var select = AUI().one(box);
+				if (select) {
+					var options = select.all('option');
 
-			if (select) {
-				var options = select.all('option');
+					options.each(
+						function(item, index, collection) {
+							var val = item.val();
 
-				options.each(
-					function(item, index, collection) {
-						var val = item.val();
-
-						if (val) {
-							buffer.push(val);
+							if (val) {
+								buffer.push(val);
+							}
 						}
-					}
-				);
+					);
+				}
+
+				if (buffer[0] != '.none') {
+					selectList = buffer.join(delimeter);
+				}
 			}
 
-			if (buffer[0] == '.none') {
-				return '';
-			}
-			else {
-				return buffer.join(delimeter);
-			}
+			return selectList;
 		};
 
 		Util.listUncheckedExcept = function(form, except, name) {
