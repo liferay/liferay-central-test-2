@@ -23,6 +23,11 @@ import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.service.GroupLocalService;
 import com.liferay.portal.service.GroupService;
@@ -81,7 +86,22 @@ public abstract class BlogsStatsUserLocalServiceBaseImpl
 		throws SystemException {
 		blogsStatsUser.setNew(true);
 
-		return blogsStatsUserPersistence.update(blogsStatsUser, false);
+		blogsStatsUser = blogsStatsUserPersistence.update(blogsStatsUser, false);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(blogsStatsUser);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return blogsStatsUser;
 	}
 
 	/**
@@ -103,7 +123,20 @@ public abstract class BlogsStatsUserLocalServiceBaseImpl
 	 */
 	public void deleteBlogsStatsUser(long statsUserId)
 		throws PortalException, SystemException {
-		blogsStatsUserPersistence.remove(statsUserId);
+		BlogsStatsUser blogsStatsUser = blogsStatsUserPersistence.remove(statsUserId);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(blogsStatsUser);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -115,6 +148,19 @@ public abstract class BlogsStatsUserLocalServiceBaseImpl
 	public void deleteBlogsStatsUser(BlogsStatsUser blogsStatsUser)
 		throws SystemException {
 		blogsStatsUserPersistence.remove(blogsStatsUser);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(blogsStatsUser);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -232,9 +278,7 @@ public abstract class BlogsStatsUserLocalServiceBaseImpl
 	 */
 	public BlogsStatsUser updateBlogsStatsUser(BlogsStatsUser blogsStatsUser)
 		throws SystemException {
-		blogsStatsUser.setNew(false);
-
-		return blogsStatsUserPersistence.update(blogsStatsUser, true);
+		return updateBlogsStatsUser(blogsStatsUser, true);
 	}
 
 	/**
@@ -249,7 +293,22 @@ public abstract class BlogsStatsUserLocalServiceBaseImpl
 		boolean merge) throws SystemException {
 		blogsStatsUser.setNew(false);
 
-		return blogsStatsUserPersistence.update(blogsStatsUser, merge);
+		blogsStatsUser = blogsStatsUserPersistence.update(blogsStatsUser, merge);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(blogsStatsUser);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return blogsStatsUser;
 	}
 
 	/**
@@ -636,6 +695,14 @@ public abstract class BlogsStatsUserLocalServiceBaseImpl
 		_beanIdentifier = beanIdentifier;
 	}
 
+	protected Class<?> getModelClass() {
+		return BlogsStatsUser.class;
+	}
+
+	protected String getModelClassName() {
+		return BlogsStatsUser.class.getName();
+	}
+
 	/**
 	 * Performs an SQL query.
 	 *
@@ -695,5 +762,6 @@ public abstract class BlogsStatsUserLocalServiceBaseImpl
 	protected UserPersistence userPersistence;
 	@BeanReference(type = UserFinder.class)
 	protected UserFinder userFinder;
+	private static Log _log = LogFactoryUtil.getLog(BlogsStatsUserLocalServiceBaseImpl.class);
 	private String _beanIdentifier;
 }

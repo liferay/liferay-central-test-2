@@ -23,6 +23,11 @@ import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.service.ResourceLocalService;
 import com.liferay.portal.service.ResourceService;
@@ -84,7 +89,22 @@ public abstract class SCLicenseLocalServiceBaseImpl
 		throws SystemException {
 		scLicense.setNew(true);
 
-		return scLicensePersistence.update(scLicense, false);
+		scLicense = scLicensePersistence.update(scLicense, false);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(scLicense);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return scLicense;
 	}
 
 	/**
@@ -106,7 +126,20 @@ public abstract class SCLicenseLocalServiceBaseImpl
 	 */
 	public void deleteSCLicense(long licenseId)
 		throws PortalException, SystemException {
-		scLicensePersistence.remove(licenseId);
+		SCLicense scLicense = scLicensePersistence.remove(licenseId);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(scLicense);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -117,6 +150,19 @@ public abstract class SCLicenseLocalServiceBaseImpl
 	 */
 	public void deleteSCLicense(SCLicense scLicense) throws SystemException {
 		scLicensePersistence.remove(scLicense);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(scLicense);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -234,9 +280,7 @@ public abstract class SCLicenseLocalServiceBaseImpl
 	 */
 	public SCLicense updateSCLicense(SCLicense scLicense)
 		throws SystemException {
-		scLicense.setNew(false);
-
-		return scLicensePersistence.update(scLicense, true);
+		return updateSCLicense(scLicense, true);
 	}
 
 	/**
@@ -251,7 +295,22 @@ public abstract class SCLicenseLocalServiceBaseImpl
 		throws SystemException {
 		scLicense.setNew(false);
 
-		return scLicensePersistence.update(scLicense, merge);
+		scLicense = scLicensePersistence.update(scLicense, merge);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(scLicense);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return scLicense;
 	}
 
 	/**
@@ -700,6 +759,14 @@ public abstract class SCLicenseLocalServiceBaseImpl
 		_beanIdentifier = beanIdentifier;
 	}
 
+	protected Class<?> getModelClass() {
+		return SCLicense.class;
+	}
+
+	protected String getModelClassName() {
+		return SCLicense.class.getName();
+	}
+
 	/**
 	 * Performs an SQL query.
 	 *
@@ -765,5 +832,6 @@ public abstract class SCLicenseLocalServiceBaseImpl
 	protected UserPersistence userPersistence;
 	@BeanReference(type = UserFinder.class)
 	protected UserFinder userFinder;
+	private static Log _log = LogFactoryUtil.getLog(SCLicenseLocalServiceBaseImpl.class);
 	private String _beanIdentifier;
 }

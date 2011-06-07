@@ -44,6 +44,7 @@ import com.liferay.portlet.asset.service.persistence.AssetTagPersistence;
 import com.liferay.portlet.expando.service.ExpandoValueLocalService;
 import com.liferay.portlet.expando.service.ExpandoValueService;
 import com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence;
+import com.liferay.portlet.messageboards.model.MBCategory;
 import com.liferay.portlet.messageboards.service.MBBanLocalService;
 import com.liferay.portlet.messageboards.service.MBBanService;
 import com.liferay.portlet.messageboards.service.MBCategoryLocalService;
@@ -955,6 +956,14 @@ public abstract class MBCategoryServiceBaseImpl extends PrincipalBean
 	 */
 	public void setBeanIdentifier(String beanIdentifier) {
 		_beanIdentifier = beanIdentifier;
+	}
+
+	protected Class<?> getModelClass() {
+		return MBCategory.class;
+	}
+
+	protected String getModelClassName() {
+		return MBCategory.class.getName();
 	}
 
 	/**

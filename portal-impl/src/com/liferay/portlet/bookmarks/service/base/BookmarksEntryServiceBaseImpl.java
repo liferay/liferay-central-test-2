@@ -41,6 +41,7 @@ import com.liferay.portlet.asset.service.persistence.AssetEntryPersistence;
 import com.liferay.portlet.asset.service.persistence.AssetLinkPersistence;
 import com.liferay.portlet.asset.service.persistence.AssetTagFinder;
 import com.liferay.portlet.asset.service.persistence.AssetTagPersistence;
+import com.liferay.portlet.bookmarks.model.BookmarksEntry;
 import com.liferay.portlet.bookmarks.service.BookmarksEntryLocalService;
 import com.liferay.portlet.bookmarks.service.BookmarksEntryService;
 import com.liferay.portlet.bookmarks.service.BookmarksFolderLocalService;
@@ -627,6 +628,14 @@ public abstract class BookmarksEntryServiceBaseImpl extends PrincipalBean
 	 */
 	public void setBeanIdentifier(String beanIdentifier) {
 		_beanIdentifier = beanIdentifier;
+	}
+
+	protected Class<?> getModelClass() {
+		return BookmarksEntry.class;
+	}
+
+	protected String getModelClassName() {
+		return BookmarksEntry.class.getName();
 	}
 
 	/**

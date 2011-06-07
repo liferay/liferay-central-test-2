@@ -1817,11 +1817,10 @@ public class UserLocalServiceUtil {
 	}
 
 	/**
-	* Searches for an ordered range of all the users with the status who match
-	* the keywords, without using the indexer. It is preferable to use the
-	* indexed version {@link #search(long, String, int, LinkedHashMap, int,
-	* int, Sort)} instead of this method wherever possible for performance
-	* reasons.
+	* Returns an ordered range of all the users who match the keywords and
+	* status, without using the indexer. It is preferable to use the indexed
+	* version {@link #search(long, String, int, LinkedHashMap, int, int, Sort)}
+	* instead of this method wherever possible for performance reasons.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end -
@@ -1845,7 +1844,7 @@ public class UserLocalServiceUtil {
 	* @param end the upper bound of the range of users (not inclusive)
 	* @param obc the comparator to order the users by (optionally
 	<code>null</code>)
-	* @return the users with the status who match the keywords
+	* @return the matching users
 	* @throws SystemException if a system exception occurred
 	* @see com.liferay.portal.service.persistence.UserFinder
 	*/
@@ -1859,10 +1858,9 @@ public class UserLocalServiceUtil {
 	}
 
 	/**
-	* Searches for an ordered range of all the users with the status who match
-	* the keywords, using the indexer. It is preferable to use this method
-	* instead of the non-indexed version whenever possible for performance
-	* reasons.
+	* Returns an ordered range of all the users who match the keywords and
+	* status, using the indexer. It is preferable to use this method instead of
+	* the non-indexed version whenever possible for performance reasons.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end -
@@ -1886,7 +1884,7 @@ public class UserLocalServiceUtil {
 	* @param end the upper bound of the range of users (not inclusive)
 	* @param sort the field and direction to sort by (optionally
 	<code>null</code>)
-	* @return the users with the status who match the keywords
+	* @return the matching users
 	* @throws SystemException if a system exception occurred
 	* @see com.liferay.portlet.enterpriseadmin.util.UserIndexer
 	*/
@@ -1900,7 +1898,7 @@ public class UserLocalServiceUtil {
 	}
 
 	/**
-	* Searches for an ordered range of all the users with the status whose
+	* Returns an ordered range of all the users with the status, and whose
 	* first name, middle name, last name, screen name, or email address match
 	* the keywords specified for them, without using the indexer. It is
 	* preferable to use the indexed version {@link #search(long, String,
@@ -1933,7 +1931,7 @@ public class UserLocalServiceUtil {
 	* @param end the upper bound of the range of users (not inclusive)
 	* @param obc the comparator to order the users by (optionally
 	<code>null</code>)
-	* @return the users with the status who match the keywords
+	* @return the matching users
 	* @throws SystemException if a system exception occurred
 	* @see com.liferay.portal.service.persistence.UserFinder
 	*/
@@ -1951,7 +1949,7 @@ public class UserLocalServiceUtil {
 	}
 
 	/**
-	* Searches for an ordered range of all the users with the status whose
+	* Returns an ordered range of all the users with the status, and whose
 	* first name, middle name, last name, screen name, or email address match
 	* the keywords specified for them, using the indexer. It is preferable to
 	* use this method instead of the non-indexed version whenever possible for
@@ -1983,7 +1981,7 @@ public class UserLocalServiceUtil {
 	* @param end the upper bound of the range of users (not inclusive)
 	* @param sort the field and direction to sort by (optionally
 	<code>null</code>)
-	* @return the users with the status who match the keywords
+	* @return the matching users
 	* @throws SystemException if a system exception occurred
 	* @see com.liferay.portlet.enterpriseadmin.util.UserIndexer
 	*/
@@ -2002,7 +2000,7 @@ public class UserLocalServiceUtil {
 	}
 
 	/**
-	* Returns the number of users with the status who match the keywords.
+	* Returns the number of users who match the keywords and status.
 	*
 	* @param companyId the primary key of the user's company
 	* @param keywords the keywords (space separated), which may occur in the
@@ -2012,7 +2010,7 @@ public class UserLocalServiceUtil {
 	* @param params the finder parameters (optionally <code>null</code>). For
 	more information see {@link
 	com.liferay.portal.service.persistence.UserFinder}.
-	* @return the number of users with the status who match the keywords
+	* @return the number matching users
 	* @throws SystemException if a system exception occurred
 	*/
 	public static int searchCount(long companyId, java.lang.String keywords,
@@ -2023,7 +2021,7 @@ public class UserLocalServiceUtil {
 	}
 
 	/**
-	* Returns the number of users with the status whose first name, middle
+	* Returns the number of users with the status, and whose first name, middle
 	* name, last name, screen name, or email address match the keywords
 	* specified for them.
 	*
@@ -2039,7 +2037,7 @@ public class UserLocalServiceUtil {
 	com.liferay.portal.service.persistence.UserFinder}.
 	* @param andSearch whether the users must match all of the keywords in
 	every field or any of them in any field
-	* @return the number of users with the status who match the keywords
+	* @return the number of matching users
 	* @throws SystemException if a system exception occurred
 	*/
 	public static int searchCount(long companyId, java.lang.String firstName,

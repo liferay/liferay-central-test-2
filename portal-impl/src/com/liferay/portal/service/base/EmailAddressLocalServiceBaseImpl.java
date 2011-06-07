@@ -23,6 +23,11 @@ import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.model.EmailAddress;
 import com.liferay.portal.service.AccountLocalService;
@@ -231,7 +236,22 @@ public abstract class EmailAddressLocalServiceBaseImpl
 		throws SystemException {
 		emailAddress.setNew(true);
 
-		return emailAddressPersistence.update(emailAddress, false);
+		emailAddress = emailAddressPersistence.update(emailAddress, false);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(emailAddress);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return emailAddress;
 	}
 
 	/**
@@ -253,7 +273,20 @@ public abstract class EmailAddressLocalServiceBaseImpl
 	 */
 	public void deleteEmailAddress(long emailAddressId)
 		throws PortalException, SystemException {
-		emailAddressPersistence.remove(emailAddressId);
+		EmailAddress emailAddress = emailAddressPersistence.remove(emailAddressId);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(emailAddress);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -265,6 +298,19 @@ public abstract class EmailAddressLocalServiceBaseImpl
 	public void deleteEmailAddress(EmailAddress emailAddress)
 		throws SystemException {
 		emailAddressPersistence.remove(emailAddress);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(emailAddress);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -382,9 +428,7 @@ public abstract class EmailAddressLocalServiceBaseImpl
 	 */
 	public EmailAddress updateEmailAddress(EmailAddress emailAddress)
 		throws SystemException {
-		emailAddress.setNew(false);
-
-		return emailAddressPersistence.update(emailAddress, true);
+		return updateEmailAddress(emailAddress, true);
 	}
 
 	/**
@@ -399,7 +443,22 @@ public abstract class EmailAddressLocalServiceBaseImpl
 		boolean merge) throws SystemException {
 		emailAddress.setNew(false);
 
-		return emailAddressPersistence.update(emailAddress, merge);
+		emailAddress = emailAddressPersistence.update(emailAddress, merge);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(emailAddress);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return emailAddress;
 	}
 
 	/**
@@ -3589,6 +3648,14 @@ public abstract class EmailAddressLocalServiceBaseImpl
 		_beanIdentifier = beanIdentifier;
 	}
 
+	protected Class<?> getModelClass() {
+		return EmailAddress.class;
+	}
+
+	protected String getModelClassName() {
+		return EmailAddress.class.getName();
+	}
+
 	/**
 	 * Performs an SQL query.
 	 *
@@ -3950,5 +4017,6 @@ public abstract class EmailAddressLocalServiceBaseImpl
 	protected WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
 	@BeanReference(type = CounterLocalService.class)
 	protected CounterLocalService counterLocalService;
+	private static Log _log = LogFactoryUtil.getLog(EmailAddressLocalServiceBaseImpl.class);
 	private String _beanIdentifier;
 }

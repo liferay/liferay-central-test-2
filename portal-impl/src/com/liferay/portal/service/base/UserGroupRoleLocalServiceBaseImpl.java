@@ -23,6 +23,11 @@ import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.model.UserGroupRole;
 import com.liferay.portal.service.AccountLocalService;
@@ -232,7 +237,22 @@ public abstract class UserGroupRoleLocalServiceBaseImpl
 		throws SystemException {
 		userGroupRole.setNew(true);
 
-		return userGroupRolePersistence.update(userGroupRole, false);
+		userGroupRole = userGroupRolePersistence.update(userGroupRole, false);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(userGroupRole);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return userGroupRole;
 	}
 
 	/**
@@ -254,7 +274,20 @@ public abstract class UserGroupRoleLocalServiceBaseImpl
 	 */
 	public void deleteUserGroupRole(UserGroupRolePK userGroupRolePK)
 		throws PortalException, SystemException {
-		userGroupRolePersistence.remove(userGroupRolePK);
+		UserGroupRole userGroupRole = userGroupRolePersistence.remove(userGroupRolePK);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(userGroupRole);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -266,6 +299,19 @@ public abstract class UserGroupRoleLocalServiceBaseImpl
 	public void deleteUserGroupRole(UserGroupRole userGroupRole)
 		throws SystemException {
 		userGroupRolePersistence.remove(userGroupRole);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(userGroupRole);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -383,9 +429,7 @@ public abstract class UserGroupRoleLocalServiceBaseImpl
 	 */
 	public UserGroupRole updateUserGroupRole(UserGroupRole userGroupRole)
 		throws SystemException {
-		userGroupRole.setNew(false);
-
-		return userGroupRolePersistence.update(userGroupRole, true);
+		return updateUserGroupRole(userGroupRole, true);
 	}
 
 	/**
@@ -400,7 +444,22 @@ public abstract class UserGroupRoleLocalServiceBaseImpl
 		boolean merge) throws SystemException {
 		userGroupRole.setNew(false);
 
-		return userGroupRolePersistence.update(userGroupRole, merge);
+		userGroupRole = userGroupRolePersistence.update(userGroupRole, merge);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(userGroupRole);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return userGroupRole;
 	}
 
 	/**
@@ -3590,6 +3649,14 @@ public abstract class UserGroupRoleLocalServiceBaseImpl
 		_beanIdentifier = beanIdentifier;
 	}
 
+	protected Class<?> getModelClass() {
+		return UserGroupRole.class;
+	}
+
+	protected String getModelClassName() {
+		return UserGroupRole.class.getName();
+	}
+
 	/**
 	 * Performs an SQL query.
 	 *
@@ -3951,5 +4018,6 @@ public abstract class UserGroupRoleLocalServiceBaseImpl
 	protected WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
 	@BeanReference(type = CounterLocalService.class)
 	protected CounterLocalService counterLocalService;
+	private static Log _log = LogFactoryUtil.getLog(UserGroupRoleLocalServiceBaseImpl.class);
 	private String _beanIdentifier;
 }

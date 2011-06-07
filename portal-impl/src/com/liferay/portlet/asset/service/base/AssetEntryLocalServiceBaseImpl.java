@@ -23,6 +23,11 @@ import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.service.CompanyLocalService;
 import com.liferay.portal.service.CompanyService;
@@ -141,7 +146,22 @@ public abstract class AssetEntryLocalServiceBaseImpl
 		throws SystemException {
 		assetEntry.setNew(true);
 
-		return assetEntryPersistence.update(assetEntry, false);
+		assetEntry = assetEntryPersistence.update(assetEntry, false);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(assetEntry);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return assetEntry;
 	}
 
 	/**
@@ -163,7 +183,20 @@ public abstract class AssetEntryLocalServiceBaseImpl
 	 */
 	public void deleteAssetEntry(long entryId)
 		throws PortalException, SystemException {
-		assetEntryPersistence.remove(entryId);
+		AssetEntry assetEntry = assetEntryPersistence.remove(entryId);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(assetEntry);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -175,6 +208,19 @@ public abstract class AssetEntryLocalServiceBaseImpl
 	public void deleteAssetEntry(AssetEntry assetEntry)
 		throws SystemException {
 		assetEntryPersistence.remove(assetEntry);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(assetEntry);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -292,9 +338,7 @@ public abstract class AssetEntryLocalServiceBaseImpl
 	 */
 	public AssetEntry updateAssetEntry(AssetEntry assetEntry)
 		throws SystemException {
-		assetEntry.setNew(false);
-
-		return assetEntryPersistence.update(assetEntry, true);
+		return updateAssetEntry(assetEntry, true);
 	}
 
 	/**
@@ -309,7 +353,22 @@ public abstract class AssetEntryLocalServiceBaseImpl
 		throws SystemException {
 		assetEntry.setNew(false);
 
-		return assetEntryPersistence.update(assetEntry, merge);
+		assetEntry = assetEntryPersistence.update(assetEntry, merge);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(assetEntry);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return assetEntry;
 	}
 
 	/**
@@ -1815,6 +1874,14 @@ public abstract class AssetEntryLocalServiceBaseImpl
 		_beanIdentifier = beanIdentifier;
 	}
 
+	protected Class<?> getModelClass() {
+		return AssetEntry.class;
+	}
+
+	protected String getModelClassName() {
+		return AssetEntry.class.getName();
+	}
+
 	/**
 	 * Performs an SQL query.
 	 *
@@ -1994,5 +2061,6 @@ public abstract class AssetEntryLocalServiceBaseImpl
 	protected WikiPageResourceLocalService wikiPageResourceLocalService;
 	@BeanReference(type = WikiPageResourcePersistence.class)
 	protected WikiPageResourcePersistence wikiPageResourcePersistence;
+	private static Log _log = LogFactoryUtil.getLog(AssetEntryLocalServiceBaseImpl.class);
 	private String _beanIdentifier;
 }

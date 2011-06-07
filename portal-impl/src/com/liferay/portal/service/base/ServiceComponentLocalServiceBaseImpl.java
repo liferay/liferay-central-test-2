@@ -23,6 +23,11 @@ import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.model.ServiceComponent;
 import com.liferay.portal.service.AccountLocalService;
@@ -231,7 +236,23 @@ public abstract class ServiceComponentLocalServiceBaseImpl
 		ServiceComponent serviceComponent) throws SystemException {
 		serviceComponent.setNew(true);
 
-		return serviceComponentPersistence.update(serviceComponent, false);
+		serviceComponent = serviceComponentPersistence.update(serviceComponent,
+				false);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(serviceComponent);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return serviceComponent;
 	}
 
 	/**
@@ -253,7 +274,20 @@ public abstract class ServiceComponentLocalServiceBaseImpl
 	 */
 	public void deleteServiceComponent(long serviceComponentId)
 		throws PortalException, SystemException {
-		serviceComponentPersistence.remove(serviceComponentId);
+		ServiceComponent serviceComponent = serviceComponentPersistence.remove(serviceComponentId);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(serviceComponent);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -265,6 +299,19 @@ public abstract class ServiceComponentLocalServiceBaseImpl
 	public void deleteServiceComponent(ServiceComponent serviceComponent)
 		throws SystemException {
 		serviceComponentPersistence.remove(serviceComponent);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(serviceComponent);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -382,9 +429,7 @@ public abstract class ServiceComponentLocalServiceBaseImpl
 	 */
 	public ServiceComponent updateServiceComponent(
 		ServiceComponent serviceComponent) throws SystemException {
-		serviceComponent.setNew(false);
-
-		return serviceComponentPersistence.update(serviceComponent, true);
+		return updateServiceComponent(serviceComponent, true);
 	}
 
 	/**
@@ -400,7 +445,23 @@ public abstract class ServiceComponentLocalServiceBaseImpl
 		throws SystemException {
 		serviceComponent.setNew(false);
 
-		return serviceComponentPersistence.update(serviceComponent, merge);
+		serviceComponent = serviceComponentPersistence.update(serviceComponent,
+				merge);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(serviceComponent);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return serviceComponent;
 	}
 
 	/**
@@ -3590,6 +3651,14 @@ public abstract class ServiceComponentLocalServiceBaseImpl
 		_beanIdentifier = beanIdentifier;
 	}
 
+	protected Class<?> getModelClass() {
+		return ServiceComponent.class;
+	}
+
+	protected String getModelClassName() {
+		return ServiceComponent.class.getName();
+	}
+
 	/**
 	 * Performs an SQL query.
 	 *
@@ -3951,5 +4020,6 @@ public abstract class ServiceComponentLocalServiceBaseImpl
 	protected WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
 	@BeanReference(type = CounterLocalService.class)
 	protected CounterLocalService counterLocalService;
+	private static Log _log = LogFactoryUtil.getLog(ServiceComponentLocalServiceBaseImpl.class);
 	private String _beanIdentifier;
 }

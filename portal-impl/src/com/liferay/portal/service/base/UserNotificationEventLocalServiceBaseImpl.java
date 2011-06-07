@@ -23,6 +23,11 @@ import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.model.UserNotificationEvent;
 import com.liferay.portal.service.AccountLocalService;
@@ -231,8 +236,23 @@ public abstract class UserNotificationEventLocalServiceBaseImpl
 		UserNotificationEvent userNotificationEvent) throws SystemException {
 		userNotificationEvent.setNew(true);
 
-		return userNotificationEventPersistence.update(userNotificationEvent,
-			false);
+		userNotificationEvent = userNotificationEventPersistence.update(userNotificationEvent,
+				false);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(userNotificationEvent);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return userNotificationEvent;
 	}
 
 	/**
@@ -255,7 +275,20 @@ public abstract class UserNotificationEventLocalServiceBaseImpl
 	 */
 	public void deleteUserNotificationEvent(long userNotificationEventId)
 		throws PortalException, SystemException {
-		userNotificationEventPersistence.remove(userNotificationEventId);
+		UserNotificationEvent userNotificationEvent = userNotificationEventPersistence.remove(userNotificationEventId);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(userNotificationEvent);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -267,6 +300,19 @@ public abstract class UserNotificationEventLocalServiceBaseImpl
 	public void deleteUserNotificationEvent(
 		UserNotificationEvent userNotificationEvent) throws SystemException {
 		userNotificationEventPersistence.remove(userNotificationEvent);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(userNotificationEvent);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -384,10 +430,7 @@ public abstract class UserNotificationEventLocalServiceBaseImpl
 	 */
 	public UserNotificationEvent updateUserNotificationEvent(
 		UserNotificationEvent userNotificationEvent) throws SystemException {
-		userNotificationEvent.setNew(false);
-
-		return userNotificationEventPersistence.update(userNotificationEvent,
-			true);
+		return updateUserNotificationEvent(userNotificationEvent, true);
 	}
 
 	/**
@@ -403,8 +446,23 @@ public abstract class UserNotificationEventLocalServiceBaseImpl
 		throws SystemException {
 		userNotificationEvent.setNew(false);
 
-		return userNotificationEventPersistence.update(userNotificationEvent,
-			merge);
+		userNotificationEvent = userNotificationEventPersistence.update(userNotificationEvent,
+				merge);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(userNotificationEvent);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return userNotificationEvent;
 	}
 
 	/**
@@ -3594,6 +3652,14 @@ public abstract class UserNotificationEventLocalServiceBaseImpl
 		_beanIdentifier = beanIdentifier;
 	}
 
+	protected Class<?> getModelClass() {
+		return UserNotificationEvent.class;
+	}
+
+	protected String getModelClassName() {
+		return UserNotificationEvent.class.getName();
+	}
+
 	/**
 	 * Performs an SQL query.
 	 *
@@ -3955,5 +4021,6 @@ public abstract class UserNotificationEventLocalServiceBaseImpl
 	protected WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
 	@BeanReference(type = CounterLocalService.class)
 	protected CounterLocalService counterLocalService;
+	private static Log _log = LogFactoryUtil.getLog(UserNotificationEventLocalServiceBaseImpl.class);
 	private String _beanIdentifier;
 }

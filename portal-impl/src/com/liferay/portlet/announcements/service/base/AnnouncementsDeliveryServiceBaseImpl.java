@@ -31,6 +31,7 @@ import com.liferay.portal.service.persistence.ResourcePersistence;
 import com.liferay.portal.service.persistence.UserFinder;
 import com.liferay.portal.service.persistence.UserPersistence;
 
+import com.liferay.portlet.announcements.model.AnnouncementsDelivery;
 import com.liferay.portlet.announcements.service.AnnouncementsDeliveryLocalService;
 import com.liferay.portlet.announcements.service.AnnouncementsDeliveryService;
 import com.liferay.portlet.announcements.service.AnnouncementsEntryLocalService;
@@ -433,6 +434,14 @@ public abstract class AnnouncementsDeliveryServiceBaseImpl extends PrincipalBean
 	 */
 	public void setBeanIdentifier(String beanIdentifier) {
 		_beanIdentifier = beanIdentifier;
+	}
+
+	protected Class<?> getModelClass() {
+		return AnnouncementsDelivery.class;
+	}
+
+	protected String getModelClassName() {
+		return AnnouncementsDelivery.class.getName();
 	}
 
 	/**

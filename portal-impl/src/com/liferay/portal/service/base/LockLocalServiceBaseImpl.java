@@ -23,6 +23,11 @@ import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.model.Lock;
 import com.liferay.portal.service.AccountLocalService;
@@ -230,7 +235,22 @@ public abstract class LockLocalServiceBaseImpl implements LockLocalService,
 	public Lock addLock(Lock lock) throws SystemException {
 		lock.setNew(true);
 
-		return lockPersistence.update(lock, false);
+		lock = lockPersistence.update(lock, false);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(lock);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return lock;
 	}
 
 	/**
@@ -251,7 +271,20 @@ public abstract class LockLocalServiceBaseImpl implements LockLocalService,
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void deleteLock(long lockId) throws PortalException, SystemException {
-		lockPersistence.remove(lockId);
+		Lock lock = lockPersistence.remove(lockId);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(lock);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -262,6 +295,19 @@ public abstract class LockLocalServiceBaseImpl implements LockLocalService,
 	 */
 	public void deleteLock(Lock lock) throws SystemException {
 		lockPersistence.remove(lock);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(lock);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -375,9 +421,7 @@ public abstract class LockLocalServiceBaseImpl implements LockLocalService,
 	 * @throws SystemException if a system exception occurred
 	 */
 	public Lock updateLock(Lock lock) throws SystemException {
-		lock.setNew(false);
-
-		return lockPersistence.update(lock, true);
+		return updateLock(lock, true);
 	}
 
 	/**
@@ -391,7 +435,22 @@ public abstract class LockLocalServiceBaseImpl implements LockLocalService,
 	public Lock updateLock(Lock lock, boolean merge) throws SystemException {
 		lock.setNew(false);
 
-		return lockPersistence.update(lock, merge);
+		lock = lockPersistence.update(lock, merge);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(lock);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return lock;
 	}
 
 	/**
@@ -3581,6 +3640,14 @@ public abstract class LockLocalServiceBaseImpl implements LockLocalService,
 		_beanIdentifier = beanIdentifier;
 	}
 
+	protected Class<?> getModelClass() {
+		return Lock.class;
+	}
+
+	protected String getModelClassName() {
+		return Lock.class.getName();
+	}
+
 	/**
 	 * Performs an SQL query.
 	 *
@@ -3942,5 +4009,6 @@ public abstract class LockLocalServiceBaseImpl implements LockLocalService,
 	protected WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
 	@BeanReference(type = CounterLocalService.class)
 	protected CounterLocalService counterLocalService;
+	private static Log _log = LogFactoryUtil.getLog(LockLocalServiceBaseImpl.class);
 	private String _beanIdentifier;
 }

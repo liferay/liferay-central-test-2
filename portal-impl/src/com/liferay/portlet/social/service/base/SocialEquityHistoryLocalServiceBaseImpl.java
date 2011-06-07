@@ -23,6 +23,11 @@ import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.service.ResourceLocalService;
 import com.liferay.portal.service.ResourceService;
@@ -90,7 +95,23 @@ public abstract class SocialEquityHistoryLocalServiceBaseImpl
 		SocialEquityHistory socialEquityHistory) throws SystemException {
 		socialEquityHistory.setNew(true);
 
-		return socialEquityHistoryPersistence.update(socialEquityHistory, false);
+		socialEquityHistory = socialEquityHistoryPersistence.update(socialEquityHistory,
+				false);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(socialEquityHistory);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return socialEquityHistory;
 	}
 
 	/**
@@ -112,7 +133,20 @@ public abstract class SocialEquityHistoryLocalServiceBaseImpl
 	 */
 	public void deleteSocialEquityHistory(long equityHistoryId)
 		throws PortalException, SystemException {
-		socialEquityHistoryPersistence.remove(equityHistoryId);
+		SocialEquityHistory socialEquityHistory = socialEquityHistoryPersistence.remove(equityHistoryId);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(socialEquityHistory);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -124,6 +158,19 @@ public abstract class SocialEquityHistoryLocalServiceBaseImpl
 	public void deleteSocialEquityHistory(
 		SocialEquityHistory socialEquityHistory) throws SystemException {
 		socialEquityHistoryPersistence.remove(socialEquityHistory);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(socialEquityHistory);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -241,9 +288,7 @@ public abstract class SocialEquityHistoryLocalServiceBaseImpl
 	 */
 	public SocialEquityHistory updateSocialEquityHistory(
 		SocialEquityHistory socialEquityHistory) throws SystemException {
-		socialEquityHistory.setNew(false);
-
-		return socialEquityHistoryPersistence.update(socialEquityHistory, true);
+		return updateSocialEquityHistory(socialEquityHistory, true);
 	}
 
 	/**
@@ -259,7 +304,23 @@ public abstract class SocialEquityHistoryLocalServiceBaseImpl
 		throws SystemException {
 		socialEquityHistory.setNew(false);
 
-		return socialEquityHistoryPersistence.update(socialEquityHistory, merge);
+		socialEquityHistory = socialEquityHistoryPersistence.update(socialEquityHistory,
+				merge);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(socialEquityHistory);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return socialEquityHistory;
 	}
 
 	/**
@@ -823,6 +884,14 @@ public abstract class SocialEquityHistoryLocalServiceBaseImpl
 		_beanIdentifier = beanIdentifier;
 	}
 
+	protected Class<?> getModelClass() {
+		return SocialEquityHistory.class;
+	}
+
+	protected String getModelClassName() {
+		return SocialEquityHistory.class.getName();
+	}
+
 	/**
 	 * Performs an SQL query.
 	 *
@@ -900,5 +969,6 @@ public abstract class SocialEquityHistoryLocalServiceBaseImpl
 	protected UserPersistence userPersistence;
 	@BeanReference(type = UserFinder.class)
 	protected UserFinder userFinder;
+	private static Log _log = LogFactoryUtil.getLog(SocialEquityHistoryLocalServiceBaseImpl.class);
 	private String _beanIdentifier;
 }

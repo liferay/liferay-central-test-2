@@ -25,6 +25,11 @@ import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.service.GroupLocalService;
 import com.liferay.portal.service.GroupService;
@@ -108,7 +113,22 @@ public abstract class DLFolderLocalServiceBaseImpl
 	public DLFolder addDLFolder(DLFolder dlFolder) throws SystemException {
 		dlFolder.setNew(true);
 
-		return dlFolderPersistence.update(dlFolder, false);
+		dlFolder = dlFolderPersistence.update(dlFolder, false);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(dlFolder);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return dlFolder;
 	}
 
 	/**
@@ -130,7 +150,20 @@ public abstract class DLFolderLocalServiceBaseImpl
 	 */
 	public void deleteDLFolder(long folderId)
 		throws PortalException, SystemException {
-		dlFolderPersistence.remove(folderId);
+		DLFolder dlFolder = dlFolderPersistence.remove(folderId);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(dlFolder);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -141,6 +174,19 @@ public abstract class DLFolderLocalServiceBaseImpl
 	 */
 	public void deleteDLFolder(DLFolder dlFolder) throws SystemException {
 		dlFolderPersistence.remove(dlFolder);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(dlFolder);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -270,9 +316,7 @@ public abstract class DLFolderLocalServiceBaseImpl
 	 * @throws SystemException if a system exception occurred
 	 */
 	public DLFolder updateDLFolder(DLFolder dlFolder) throws SystemException {
-		dlFolder.setNew(false);
-
-		return dlFolderPersistence.update(dlFolder, true);
+		return updateDLFolder(dlFolder, true);
 	}
 
 	/**
@@ -287,7 +331,22 @@ public abstract class DLFolderLocalServiceBaseImpl
 		throws SystemException {
 		dlFolder.setNew(false);
 
-		return dlFolderPersistence.update(dlFolder, merge);
+		dlFolder = dlFolderPersistence.update(dlFolder, merge);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(dlFolder);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return dlFolder;
 	}
 
 	/**
@@ -1177,6 +1236,14 @@ public abstract class DLFolderLocalServiceBaseImpl
 		_beanIdentifier = beanIdentifier;
 	}
 
+	protected Class<?> getModelClass() {
+		return DLFolder.class;
+	}
+
+	protected String getModelClassName() {
+		return DLFolder.class.getName();
+	}
+
 	/**
 	 * Performs an SQL query.
 	 *
@@ -1290,5 +1357,6 @@ public abstract class DLFolderLocalServiceBaseImpl
 	protected ExpandoValueService expandoValueService;
 	@BeanReference(type = ExpandoValuePersistence.class)
 	protected ExpandoValuePersistence expandoValuePersistence;
+	private static Log _log = LogFactoryUtil.getLog(DLFolderLocalServiceBaseImpl.class);
 	private String _beanIdentifier;
 }

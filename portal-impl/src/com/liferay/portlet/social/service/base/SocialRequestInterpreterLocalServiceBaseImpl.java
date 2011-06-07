@@ -635,6 +635,14 @@ public abstract class SocialRequestInterpreterLocalServiceBaseImpl
 		_beanIdentifier = beanIdentifier;
 	}
 
+	protected Class<?> getModelClass() {
+		return SocialRequestInterpreter.class;
+	}
+
+	protected String getModelClassName() {
+		return SocialRequestInterpreter.class.getName();
+	}
+
 	/**
 	 * Performs an SQL query.
 	 *

@@ -23,6 +23,11 @@ import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.service.ResourceLocalService;
 import com.liferay.portal.service.ResourceService;
@@ -97,7 +102,22 @@ public abstract class AssetTagLocalServiceBaseImpl
 	public AssetTag addAssetTag(AssetTag assetTag) throws SystemException {
 		assetTag.setNew(true);
 
-		return assetTagPersistence.update(assetTag, false);
+		assetTag = assetTagPersistence.update(assetTag, false);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(assetTag);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return assetTag;
 	}
 
 	/**
@@ -119,7 +139,20 @@ public abstract class AssetTagLocalServiceBaseImpl
 	 */
 	public void deleteAssetTag(long tagId)
 		throws PortalException, SystemException {
-		assetTagPersistence.remove(tagId);
+		AssetTag assetTag = assetTagPersistence.remove(tagId);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(assetTag);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -130,6 +163,19 @@ public abstract class AssetTagLocalServiceBaseImpl
 	 */
 	public void deleteAssetTag(AssetTag assetTag) throws SystemException {
 		assetTagPersistence.remove(assetTag);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(assetTag);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -245,9 +291,7 @@ public abstract class AssetTagLocalServiceBaseImpl
 	 * @throws SystemException if a system exception occurred
 	 */
 	public AssetTag updateAssetTag(AssetTag assetTag) throws SystemException {
-		assetTag.setNew(false);
-
-		return assetTagPersistence.update(assetTag, true);
+		return updateAssetTag(assetTag, true);
 	}
 
 	/**
@@ -262,7 +306,22 @@ public abstract class AssetTagLocalServiceBaseImpl
 		throws SystemException {
 		assetTag.setNew(false);
 
-		return assetTagPersistence.update(assetTag, merge);
+		assetTag = assetTagPersistence.update(assetTag, merge);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(assetTag);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return assetTag;
 	}
 
 	/**
@@ -972,6 +1031,14 @@ public abstract class AssetTagLocalServiceBaseImpl
 		_beanIdentifier = beanIdentifier;
 	}
 
+	protected Class<?> getModelClass() {
+		return AssetTag.class;
+	}
+
+	protected String getModelClassName() {
+		return AssetTag.class.getName();
+	}
+
 	/**
 	 * Performs an SQL query.
 	 *
@@ -1065,5 +1132,6 @@ public abstract class AssetTagLocalServiceBaseImpl
 	protected UserPersistence userPersistence;
 	@BeanReference(type = UserFinder.class)
 	protected UserFinder userFinder;
+	private static Log _log = LogFactoryUtil.getLog(AssetTagLocalServiceBaseImpl.class);
 	private String _beanIdentifier;
 }

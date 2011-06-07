@@ -52,6 +52,7 @@ import com.liferay.portal.service.persistence.UserGroupFinder;
 import com.liferay.portal.service.persistence.UserGroupPersistence;
 import com.liferay.portal.service.persistence.UserPersistence;
 
+import com.liferay.portlet.announcements.model.AnnouncementsEntry;
 import com.liferay.portlet.announcements.service.AnnouncementsDeliveryLocalService;
 import com.liferay.portlet.announcements.service.AnnouncementsDeliveryService;
 import com.liferay.portlet.announcements.service.AnnouncementsEntryLocalService;
@@ -818,6 +819,14 @@ public abstract class AnnouncementsEntryServiceBaseImpl extends PrincipalBean
 	 */
 	public void setBeanIdentifier(String beanIdentifier) {
 		_beanIdentifier = beanIdentifier;
+	}
+
+	protected Class<?> getModelClass() {
+		return AnnouncementsEntry.class;
+	}
+
+	protected String getModelClassName() {
+		return AnnouncementsEntry.class.getName();
 	}
 
 	/**

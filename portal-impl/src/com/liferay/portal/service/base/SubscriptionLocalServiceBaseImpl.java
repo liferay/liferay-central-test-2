@@ -23,6 +23,11 @@ import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.model.Subscription;
 import com.liferay.portal.service.AccountLocalService;
@@ -238,7 +243,22 @@ public abstract class SubscriptionLocalServiceBaseImpl
 		throws SystemException {
 		subscription.setNew(true);
 
-		return subscriptionPersistence.update(subscription, false);
+		subscription = subscriptionPersistence.update(subscription, false);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(subscription);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return subscription;
 	}
 
 	/**
@@ -260,7 +280,20 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	 */
 	public void deleteSubscription(long subscriptionId)
 		throws PortalException, SystemException {
-		subscriptionPersistence.remove(subscriptionId);
+		Subscription subscription = subscriptionPersistence.remove(subscriptionId);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(subscription);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -273,6 +306,19 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	public void deleteSubscription(Subscription subscription)
 		throws PortalException, SystemException {
 		subscriptionPersistence.remove(subscription);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(subscription);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -390,9 +436,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	 */
 	public Subscription updateSubscription(Subscription subscription)
 		throws SystemException {
-		subscription.setNew(false);
-
-		return subscriptionPersistence.update(subscription, true);
+		return updateSubscription(subscription, true);
 	}
 
 	/**
@@ -407,7 +451,22 @@ public abstract class SubscriptionLocalServiceBaseImpl
 		boolean merge) throws SystemException {
 		subscription.setNew(false);
 
-		return subscriptionPersistence.update(subscription, merge);
+		subscription = subscriptionPersistence.update(subscription, merge);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(subscription);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return subscription;
 	}
 
 	/**
@@ -3709,6 +3768,14 @@ public abstract class SubscriptionLocalServiceBaseImpl
 		_beanIdentifier = beanIdentifier;
 	}
 
+	protected Class<?> getModelClass() {
+		return Subscription.class;
+	}
+
+	protected String getModelClassName() {
+		return Subscription.class.getName();
+	}
+
 	/**
 	 * Performs an SQL query.
 	 *
@@ -4082,5 +4149,6 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	protected SocialEquityLogLocalService socialEquityLogLocalService;
 	@BeanReference(type = SocialEquityLogPersistence.class)
 	protected SocialEquityLogPersistence socialEquityLogPersistence;
+	private static Log _log = LogFactoryUtil.getLog(SubscriptionLocalServiceBaseImpl.class);
 	private String _beanIdentifier;
 }

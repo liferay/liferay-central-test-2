@@ -23,6 +23,11 @@ import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.service.ResourceLocalService;
 import com.liferay.portal.service.ResourceService;
@@ -93,7 +98,23 @@ public abstract class ShoppingItemPriceLocalServiceBaseImpl
 		ShoppingItemPrice shoppingItemPrice) throws SystemException {
 		shoppingItemPrice.setNew(true);
 
-		return shoppingItemPricePersistence.update(shoppingItemPrice, false);
+		shoppingItemPrice = shoppingItemPricePersistence.update(shoppingItemPrice,
+				false);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(shoppingItemPrice);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return shoppingItemPrice;
 	}
 
 	/**
@@ -115,7 +136,20 @@ public abstract class ShoppingItemPriceLocalServiceBaseImpl
 	 */
 	public void deleteShoppingItemPrice(long itemPriceId)
 		throws PortalException, SystemException {
-		shoppingItemPricePersistence.remove(itemPriceId);
+		ShoppingItemPrice shoppingItemPrice = shoppingItemPricePersistence.remove(itemPriceId);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(shoppingItemPrice);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -127,6 +161,19 @@ public abstract class ShoppingItemPriceLocalServiceBaseImpl
 	public void deleteShoppingItemPrice(ShoppingItemPrice shoppingItemPrice)
 		throws SystemException {
 		shoppingItemPricePersistence.remove(shoppingItemPrice);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(shoppingItemPrice);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -244,9 +291,7 @@ public abstract class ShoppingItemPriceLocalServiceBaseImpl
 	 */
 	public ShoppingItemPrice updateShoppingItemPrice(
 		ShoppingItemPrice shoppingItemPrice) throws SystemException {
-		shoppingItemPrice.setNew(false);
-
-		return shoppingItemPricePersistence.update(shoppingItemPrice, true);
+		return updateShoppingItemPrice(shoppingItemPrice, true);
 	}
 
 	/**
@@ -262,7 +307,23 @@ public abstract class ShoppingItemPriceLocalServiceBaseImpl
 		throws SystemException {
 		shoppingItemPrice.setNew(false);
 
-		return shoppingItemPricePersistence.update(shoppingItemPrice, merge);
+		shoppingItemPrice = shoppingItemPricePersistence.update(shoppingItemPrice,
+				merge);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(shoppingItemPrice);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return shoppingItemPrice;
 	}
 
 	/**
@@ -880,6 +941,14 @@ public abstract class ShoppingItemPriceLocalServiceBaseImpl
 		_beanIdentifier = beanIdentifier;
 	}
 
+	protected Class<?> getModelClass() {
+		return ShoppingItemPrice.class;
+	}
+
+	protected String getModelClassName() {
+		return ShoppingItemPrice.class.getName();
+	}
+
 	/**
 	 * Performs an SQL query.
 	 *
@@ -963,5 +1032,6 @@ public abstract class ShoppingItemPriceLocalServiceBaseImpl
 	protected UserPersistence userPersistence;
 	@BeanReference(type = UserFinder.class)
 	protected UserFinder userFinder;
+	private static Log _log = LogFactoryUtil.getLog(ShoppingItemPriceLocalServiceBaseImpl.class);
 	private String _beanIdentifier;
 }

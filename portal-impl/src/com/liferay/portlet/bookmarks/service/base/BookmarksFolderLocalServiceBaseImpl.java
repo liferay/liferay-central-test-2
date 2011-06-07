@@ -23,6 +23,11 @@ import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.service.GroupLocalService;
 import com.liferay.portal.service.GroupService;
@@ -84,7 +89,23 @@ public abstract class BookmarksFolderLocalServiceBaseImpl
 		throws SystemException {
 		bookmarksFolder.setNew(true);
 
-		return bookmarksFolderPersistence.update(bookmarksFolder, false);
+		bookmarksFolder = bookmarksFolderPersistence.update(bookmarksFolder,
+				false);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(bookmarksFolder);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return bookmarksFolder;
 	}
 
 	/**
@@ -106,7 +127,20 @@ public abstract class BookmarksFolderLocalServiceBaseImpl
 	 */
 	public void deleteBookmarksFolder(long folderId)
 		throws PortalException, SystemException {
-		bookmarksFolderPersistence.remove(folderId);
+		BookmarksFolder bookmarksFolder = bookmarksFolderPersistence.remove(folderId);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(bookmarksFolder);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -118,6 +152,19 @@ public abstract class BookmarksFolderLocalServiceBaseImpl
 	public void deleteBookmarksFolder(BookmarksFolder bookmarksFolder)
 		throws SystemException {
 		bookmarksFolderPersistence.remove(bookmarksFolder);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(bookmarksFolder);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -249,9 +296,7 @@ public abstract class BookmarksFolderLocalServiceBaseImpl
 	 */
 	public BookmarksFolder updateBookmarksFolder(
 		BookmarksFolder bookmarksFolder) throws SystemException {
-		bookmarksFolder.setNew(false);
-
-		return bookmarksFolderPersistence.update(bookmarksFolder, true);
+		return updateBookmarksFolder(bookmarksFolder, true);
 	}
 
 	/**
@@ -267,7 +312,23 @@ public abstract class BookmarksFolderLocalServiceBaseImpl
 		throws SystemException {
 		bookmarksFolder.setNew(false);
 
-		return bookmarksFolderPersistence.update(bookmarksFolder, merge);
+		bookmarksFolder = bookmarksFolderPersistence.update(bookmarksFolder,
+				merge);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(bookmarksFolder);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return bookmarksFolder;
 	}
 
 	/**
@@ -712,6 +773,14 @@ public abstract class BookmarksFolderLocalServiceBaseImpl
 		_beanIdentifier = beanIdentifier;
 	}
 
+	protected Class<?> getModelClass() {
+		return BookmarksFolder.class;
+	}
+
+	protected String getModelClassName() {
+		return BookmarksFolder.class.getName();
+	}
+
 	/**
 	 * Performs an SQL query.
 	 *
@@ -777,5 +846,6 @@ public abstract class BookmarksFolderLocalServiceBaseImpl
 	protected ExpandoValueService expandoValueService;
 	@BeanReference(type = ExpandoValuePersistence.class)
 	protected ExpandoValuePersistence expandoValuePersistence;
+	private static Log _log = LogFactoryUtil.getLog(BookmarksFolderLocalServiceBaseImpl.class);
 	private String _beanIdentifier;
 }

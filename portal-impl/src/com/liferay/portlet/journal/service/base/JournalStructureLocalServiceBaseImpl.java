@@ -23,6 +23,11 @@ import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.service.ResourceLocalService;
 import com.liferay.portal.service.ResourceService;
@@ -97,7 +102,23 @@ public abstract class JournalStructureLocalServiceBaseImpl
 		JournalStructure journalStructure) throws SystemException {
 		journalStructure.setNew(true);
 
-		return journalStructurePersistence.update(journalStructure, false);
+		journalStructure = journalStructurePersistence.update(journalStructure,
+				false);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(journalStructure);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return journalStructure;
 	}
 
 	/**
@@ -119,7 +140,20 @@ public abstract class JournalStructureLocalServiceBaseImpl
 	 */
 	public void deleteJournalStructure(long id)
 		throws PortalException, SystemException {
-		journalStructurePersistence.remove(id);
+		JournalStructure journalStructure = journalStructurePersistence.remove(id);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(journalStructure);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -131,6 +165,19 @@ public abstract class JournalStructureLocalServiceBaseImpl
 	public void deleteJournalStructure(JournalStructure journalStructure)
 		throws SystemException {
 		journalStructurePersistence.remove(journalStructure);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(journalStructure);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -262,9 +309,7 @@ public abstract class JournalStructureLocalServiceBaseImpl
 	 */
 	public JournalStructure updateJournalStructure(
 		JournalStructure journalStructure) throws SystemException {
-		journalStructure.setNew(false);
-
-		return journalStructurePersistence.update(journalStructure, true);
+		return updateJournalStructure(journalStructure, true);
 	}
 
 	/**
@@ -280,7 +325,23 @@ public abstract class JournalStructureLocalServiceBaseImpl
 		throws SystemException {
 		journalStructure.setNew(false);
 
-		return journalStructurePersistence.update(journalStructure, merge);
+		journalStructure = journalStructurePersistence.update(journalStructure,
+				merge);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(journalStructure);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return journalStructure;
 	}
 
 	/**
@@ -974,6 +1035,14 @@ public abstract class JournalStructureLocalServiceBaseImpl
 		_beanIdentifier = beanIdentifier;
 	}
 
+	protected Class<?> getModelClass() {
+		return JournalStructure.class;
+	}
+
+	protected String getModelClassName() {
+		return JournalStructure.class.getName();
+	}
+
 	/**
 	 * Performs an SQL query.
 	 *
@@ -1065,5 +1134,6 @@ public abstract class JournalStructureLocalServiceBaseImpl
 	protected ExpandoValueService expandoValueService;
 	@BeanReference(type = ExpandoValuePersistence.class)
 	protected ExpandoValuePersistence expandoValuePersistence;
+	private static Log _log = LogFactoryUtil.getLog(JournalStructureLocalServiceBaseImpl.class);
 	private String _beanIdentifier;
 }

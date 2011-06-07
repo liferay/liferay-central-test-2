@@ -23,6 +23,11 @@ import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.model.UserGroupGroupRole;
 import com.liferay.portal.service.AccountLocalService;
@@ -232,7 +237,23 @@ public abstract class UserGroupGroupRoleLocalServiceBaseImpl
 		UserGroupGroupRole userGroupGroupRole) throws SystemException {
 		userGroupGroupRole.setNew(true);
 
-		return userGroupGroupRolePersistence.update(userGroupGroupRole, false);
+		userGroupGroupRole = userGroupGroupRolePersistence.update(userGroupGroupRole,
+				false);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(userGroupGroupRole);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return userGroupGroupRole;
 	}
 
 	/**
@@ -256,7 +277,20 @@ public abstract class UserGroupGroupRoleLocalServiceBaseImpl
 	public void deleteUserGroupGroupRole(
 		UserGroupGroupRolePK userGroupGroupRolePK)
 		throws PortalException, SystemException {
-		userGroupGroupRolePersistence.remove(userGroupGroupRolePK);
+		UserGroupGroupRole userGroupGroupRole = userGroupGroupRolePersistence.remove(userGroupGroupRolePK);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(userGroupGroupRole);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -268,6 +302,19 @@ public abstract class UserGroupGroupRoleLocalServiceBaseImpl
 	public void deleteUserGroupGroupRole(UserGroupGroupRole userGroupGroupRole)
 		throws SystemException {
 		userGroupGroupRolePersistence.remove(userGroupGroupRole);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(userGroupGroupRole);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -386,9 +433,7 @@ public abstract class UserGroupGroupRoleLocalServiceBaseImpl
 	 */
 	public UserGroupGroupRole updateUserGroupGroupRole(
 		UserGroupGroupRole userGroupGroupRole) throws SystemException {
-		userGroupGroupRole.setNew(false);
-
-		return userGroupGroupRolePersistence.update(userGroupGroupRole, true);
+		return updateUserGroupGroupRole(userGroupGroupRole, true);
 	}
 
 	/**
@@ -404,7 +449,23 @@ public abstract class UserGroupGroupRoleLocalServiceBaseImpl
 		throws SystemException {
 		userGroupGroupRole.setNew(false);
 
-		return userGroupGroupRolePersistence.update(userGroupGroupRole, merge);
+		userGroupGroupRole = userGroupGroupRolePersistence.update(userGroupGroupRole,
+				merge);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(userGroupGroupRole);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return userGroupGroupRole;
 	}
 
 	/**
@@ -3594,6 +3655,14 @@ public abstract class UserGroupGroupRoleLocalServiceBaseImpl
 		_beanIdentifier = beanIdentifier;
 	}
 
+	protected Class<?> getModelClass() {
+		return UserGroupGroupRole.class;
+	}
+
+	protected String getModelClassName() {
+		return UserGroupGroupRole.class.getName();
+	}
+
 	/**
 	 * Performs an SQL query.
 	 *
@@ -3955,5 +4024,6 @@ public abstract class UserGroupGroupRoleLocalServiceBaseImpl
 	protected WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
 	@BeanReference(type = CounterLocalService.class)
 	protected CounterLocalService counterLocalService;
+	private static Log _log = LogFactoryUtil.getLog(UserGroupGroupRoleLocalServiceBaseImpl.class);
 	private String _beanIdentifier;
 }

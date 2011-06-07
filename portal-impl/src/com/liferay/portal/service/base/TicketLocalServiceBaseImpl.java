@@ -23,6 +23,11 @@ import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.model.Ticket;
 import com.liferay.portal.service.AccountLocalService;
@@ -230,7 +235,22 @@ public abstract class TicketLocalServiceBaseImpl implements TicketLocalService,
 	public Ticket addTicket(Ticket ticket) throws SystemException {
 		ticket.setNew(true);
 
-		return ticketPersistence.update(ticket, false);
+		ticket = ticketPersistence.update(ticket, false);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(ticket);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return ticket;
 	}
 
 	/**
@@ -252,7 +272,20 @@ public abstract class TicketLocalServiceBaseImpl implements TicketLocalService,
 	 */
 	public void deleteTicket(long ticketId)
 		throws PortalException, SystemException {
-		ticketPersistence.remove(ticketId);
+		Ticket ticket = ticketPersistence.remove(ticketId);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(ticket);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -263,6 +296,19 @@ public abstract class TicketLocalServiceBaseImpl implements TicketLocalService,
 	 */
 	public void deleteTicket(Ticket ticket) throws SystemException {
 		ticketPersistence.remove(ticket);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(ticket);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -378,9 +424,7 @@ public abstract class TicketLocalServiceBaseImpl implements TicketLocalService,
 	 * @throws SystemException if a system exception occurred
 	 */
 	public Ticket updateTicket(Ticket ticket) throws SystemException {
-		ticket.setNew(false);
-
-		return ticketPersistence.update(ticket, true);
+		return updateTicket(ticket, true);
 	}
 
 	/**
@@ -395,7 +439,22 @@ public abstract class TicketLocalServiceBaseImpl implements TicketLocalService,
 		throws SystemException {
 		ticket.setNew(false);
 
-		return ticketPersistence.update(ticket, merge);
+		ticket = ticketPersistence.update(ticket, merge);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(ticket);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return ticket;
 	}
 
 	/**
@@ -3585,6 +3644,14 @@ public abstract class TicketLocalServiceBaseImpl implements TicketLocalService,
 		_beanIdentifier = beanIdentifier;
 	}
 
+	protected Class<?> getModelClass() {
+		return Ticket.class;
+	}
+
+	protected String getModelClassName() {
+		return Ticket.class.getName();
+	}
+
 	/**
 	 * Performs an SQL query.
 	 *
@@ -3946,5 +4013,6 @@ public abstract class TicketLocalServiceBaseImpl implements TicketLocalService,
 	protected WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
 	@BeanReference(type = CounterLocalService.class)
 	protected CounterLocalService counterLocalService;
+	private static Log _log = LogFactoryUtil.getLog(TicketLocalServiceBaseImpl.class);
 	private String _beanIdentifier;
 }

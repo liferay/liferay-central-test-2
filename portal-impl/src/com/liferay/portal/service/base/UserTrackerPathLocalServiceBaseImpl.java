@@ -23,6 +23,11 @@ import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.model.UserTrackerPath;
 import com.liferay.portal.service.AccountLocalService;
@@ -231,7 +236,23 @@ public abstract class UserTrackerPathLocalServiceBaseImpl
 		throws SystemException {
 		userTrackerPath.setNew(true);
 
-		return userTrackerPathPersistence.update(userTrackerPath, false);
+		userTrackerPath = userTrackerPathPersistence.update(userTrackerPath,
+				false);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(userTrackerPath);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return userTrackerPath;
 	}
 
 	/**
@@ -253,7 +274,20 @@ public abstract class UserTrackerPathLocalServiceBaseImpl
 	 */
 	public void deleteUserTrackerPath(long userTrackerPathId)
 		throws PortalException, SystemException {
-		userTrackerPathPersistence.remove(userTrackerPathId);
+		UserTrackerPath userTrackerPath = userTrackerPathPersistence.remove(userTrackerPathId);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(userTrackerPath);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -265,6 +299,19 @@ public abstract class UserTrackerPathLocalServiceBaseImpl
 	public void deleteUserTrackerPath(UserTrackerPath userTrackerPath)
 		throws SystemException {
 		userTrackerPathPersistence.remove(userTrackerPath);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(userTrackerPath);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -382,9 +429,7 @@ public abstract class UserTrackerPathLocalServiceBaseImpl
 	 */
 	public UserTrackerPath updateUserTrackerPath(
 		UserTrackerPath userTrackerPath) throws SystemException {
-		userTrackerPath.setNew(false);
-
-		return userTrackerPathPersistence.update(userTrackerPath, true);
+		return updateUserTrackerPath(userTrackerPath, true);
 	}
 
 	/**
@@ -400,7 +445,23 @@ public abstract class UserTrackerPathLocalServiceBaseImpl
 		throws SystemException {
 		userTrackerPath.setNew(false);
 
-		return userTrackerPathPersistence.update(userTrackerPath, merge);
+		userTrackerPath = userTrackerPathPersistence.update(userTrackerPath,
+				merge);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(userTrackerPath);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return userTrackerPath;
 	}
 
 	/**
@@ -3590,6 +3651,14 @@ public abstract class UserTrackerPathLocalServiceBaseImpl
 		_beanIdentifier = beanIdentifier;
 	}
 
+	protected Class<?> getModelClass() {
+		return UserTrackerPath.class;
+	}
+
+	protected String getModelClassName() {
+		return UserTrackerPath.class.getName();
+	}
+
 	/**
 	 * Performs an SQL query.
 	 *
@@ -3951,5 +4020,6 @@ public abstract class UserTrackerPathLocalServiceBaseImpl
 	protected WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
 	@BeanReference(type = CounterLocalService.class)
 	protected CounterLocalService counterLocalService;
+	private static Log _log = LogFactoryUtil.getLog(UserTrackerPathLocalServiceBaseImpl.class);
 	private String _beanIdentifier;
 }

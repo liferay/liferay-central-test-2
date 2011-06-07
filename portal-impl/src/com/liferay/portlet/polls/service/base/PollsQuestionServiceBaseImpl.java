@@ -31,6 +31,7 @@ import com.liferay.portal.service.persistence.ResourcePersistence;
 import com.liferay.portal.service.persistence.UserFinder;
 import com.liferay.portal.service.persistence.UserPersistence;
 
+import com.liferay.portlet.polls.model.PollsQuestion;
 import com.liferay.portlet.polls.service.PollsChoiceLocalService;
 import com.liferay.portlet.polls.service.PollsQuestionLocalService;
 import com.liferay.portlet.polls.service.PollsQuestionService;
@@ -411,6 +412,14 @@ public abstract class PollsQuestionServiceBaseImpl extends PrincipalBean
 	 */
 	public void setBeanIdentifier(String beanIdentifier) {
 		_beanIdentifier = beanIdentifier;
+	}
+
+	protected Class<?> getModelClass() {
+		return PollsQuestion.class;
+	}
+
+	protected String getModelClassName() {
+		return PollsQuestion.class.getName();
 	}
 
 	/**

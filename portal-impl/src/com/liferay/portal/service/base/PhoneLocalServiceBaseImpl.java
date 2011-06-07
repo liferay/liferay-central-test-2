@@ -23,6 +23,11 @@ import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.model.Phone;
 import com.liferay.portal.service.AccountLocalService;
@@ -230,7 +235,22 @@ public abstract class PhoneLocalServiceBaseImpl implements PhoneLocalService,
 	public Phone addPhone(Phone phone) throws SystemException {
 		phone.setNew(true);
 
-		return phonePersistence.update(phone, false);
+		phone = phonePersistence.update(phone, false);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(phone);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return phone;
 	}
 
 	/**
@@ -252,7 +272,20 @@ public abstract class PhoneLocalServiceBaseImpl implements PhoneLocalService,
 	 */
 	public void deletePhone(long phoneId)
 		throws PortalException, SystemException {
-		phonePersistence.remove(phoneId);
+		Phone phone = phonePersistence.remove(phoneId);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(phone);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -263,6 +296,19 @@ public abstract class PhoneLocalServiceBaseImpl implements PhoneLocalService,
 	 */
 	public void deletePhone(Phone phone) throws SystemException {
 		phonePersistence.remove(phone);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(phone);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -376,9 +422,7 @@ public abstract class PhoneLocalServiceBaseImpl implements PhoneLocalService,
 	 * @throws SystemException if a system exception occurred
 	 */
 	public Phone updatePhone(Phone phone) throws SystemException {
-		phone.setNew(false);
-
-		return phonePersistence.update(phone, true);
+		return updatePhone(phone, true);
 	}
 
 	/**
@@ -393,7 +437,22 @@ public abstract class PhoneLocalServiceBaseImpl implements PhoneLocalService,
 		throws SystemException {
 		phone.setNew(false);
 
-		return phonePersistence.update(phone, merge);
+		phone = phonePersistence.update(phone, merge);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(phone);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return phone;
 	}
 
 	/**
@@ -3583,6 +3642,14 @@ public abstract class PhoneLocalServiceBaseImpl implements PhoneLocalService,
 		_beanIdentifier = beanIdentifier;
 	}
 
+	protected Class<?> getModelClass() {
+		return Phone.class;
+	}
+
+	protected String getModelClassName() {
+		return Phone.class.getName();
+	}
+
 	/**
 	 * Performs an SQL query.
 	 *
@@ -3944,5 +4011,6 @@ public abstract class PhoneLocalServiceBaseImpl implements PhoneLocalService,
 	protected WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
 	@BeanReference(type = CounterLocalService.class)
 	protected CounterLocalService counterLocalService;
+	private static Log _log = LogFactoryUtil.getLog(PhoneLocalServiceBaseImpl.class);
 	private String _beanIdentifier;
 }

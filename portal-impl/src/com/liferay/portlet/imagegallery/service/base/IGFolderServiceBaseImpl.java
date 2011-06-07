@@ -45,6 +45,7 @@ import com.liferay.portal.service.persistence.UserPersistence;
 import com.liferay.portlet.expando.service.ExpandoValueLocalService;
 import com.liferay.portlet.expando.service.ExpandoValueService;
 import com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence;
+import com.liferay.portlet.imagegallery.model.IGFolder;
 import com.liferay.portlet.imagegallery.service.IGFolderLocalService;
 import com.liferay.portlet.imagegallery.service.IGFolderService;
 import com.liferay.portlet.imagegallery.service.IGImageLocalService;
@@ -635,6 +636,14 @@ public abstract class IGFolderServiceBaseImpl extends PrincipalBean
 	 */
 	public void setBeanIdentifier(String beanIdentifier) {
 		_beanIdentifier = beanIdentifier;
+	}
+
+	protected Class<?> getModelClass() {
+		return IGFolder.class;
+	}
+
+	protected String getModelClassName() {
+		return IGFolder.class.getName();
 	}
 
 	/**

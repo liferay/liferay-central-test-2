@@ -23,6 +23,11 @@ import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.service.ResourceLocalService;
 import com.liferay.portal.service.ResourceService;
@@ -84,7 +89,22 @@ public abstract class DDLRecordSetLocalServiceBaseImpl
 		throws SystemException {
 		ddlRecordSet.setNew(true);
 
-		return ddlRecordSetPersistence.update(ddlRecordSet, false);
+		ddlRecordSet = ddlRecordSetPersistence.update(ddlRecordSet, false);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(ddlRecordSet);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return ddlRecordSet;
 	}
 
 	/**
@@ -106,7 +126,20 @@ public abstract class DDLRecordSetLocalServiceBaseImpl
 	 */
 	public void deleteDDLRecordSet(long recordSetId)
 		throws PortalException, SystemException {
-		ddlRecordSetPersistence.remove(recordSetId);
+		DDLRecordSet ddlRecordSet = ddlRecordSetPersistence.remove(recordSetId);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(ddlRecordSet);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -118,6 +151,19 @@ public abstract class DDLRecordSetLocalServiceBaseImpl
 	public void deleteDDLRecordSet(DDLRecordSet ddlRecordSet)
 		throws SystemException {
 		ddlRecordSetPersistence.remove(ddlRecordSet);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(ddlRecordSet);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -249,9 +295,7 @@ public abstract class DDLRecordSetLocalServiceBaseImpl
 	 */
 	public DDLRecordSet updateDDLRecordSet(DDLRecordSet ddlRecordSet)
 		throws SystemException {
-		ddlRecordSet.setNew(false);
-
-		return ddlRecordSetPersistence.update(ddlRecordSet, true);
+		return updateDDLRecordSet(ddlRecordSet, true);
 	}
 
 	/**
@@ -266,7 +310,22 @@ public abstract class DDLRecordSetLocalServiceBaseImpl
 		boolean merge) throws SystemException {
 		ddlRecordSet.setNew(false);
 
-		return ddlRecordSetPersistence.update(ddlRecordSet, merge);
+		ddlRecordSet = ddlRecordSetPersistence.update(ddlRecordSet, merge);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(ddlRecordSet);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return ddlRecordSet;
 	}
 
 	/**
@@ -711,6 +770,14 @@ public abstract class DDLRecordSetLocalServiceBaseImpl
 		_beanIdentifier = beanIdentifier;
 	}
 
+	protected Class<?> getModelClass() {
+		return DDLRecordSet.class;
+	}
+
+	protected String getModelClassName() {
+		return DDLRecordSet.class.getName();
+	}
+
 	/**
 	 * Performs an SQL query.
 	 *
@@ -776,5 +843,6 @@ public abstract class DDLRecordSetLocalServiceBaseImpl
 	protected DDMStructureLinkService ddmStructureLinkService;
 	@BeanReference(type = DDMStructureLinkPersistence.class)
 	protected DDMStructureLinkPersistence ddmStructureLinkPersistence;
+	private static Log _log = LogFactoryUtil.getLog(DDLRecordSetLocalServiceBaseImpl.class);
 	private String _beanIdentifier;
 }

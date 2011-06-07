@@ -23,6 +23,11 @@ import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.service.ResourceLocalService;
 import com.liferay.portal.service.ResourceService;
@@ -98,7 +103,23 @@ public abstract class AssetTagPropertyLocalServiceBaseImpl
 		AssetTagProperty assetTagProperty) throws SystemException {
 		assetTagProperty.setNew(true);
 
-		return assetTagPropertyPersistence.update(assetTagProperty, false);
+		assetTagProperty = assetTagPropertyPersistence.update(assetTagProperty,
+				false);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(assetTagProperty);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return assetTagProperty;
 	}
 
 	/**
@@ -120,7 +141,20 @@ public abstract class AssetTagPropertyLocalServiceBaseImpl
 	 */
 	public void deleteAssetTagProperty(long tagPropertyId)
 		throws PortalException, SystemException {
-		assetTagPropertyPersistence.remove(tagPropertyId);
+		AssetTagProperty assetTagProperty = assetTagPropertyPersistence.remove(tagPropertyId);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(assetTagProperty);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -132,6 +166,19 @@ public abstract class AssetTagPropertyLocalServiceBaseImpl
 	public void deleteAssetTagProperty(AssetTagProperty assetTagProperty)
 		throws SystemException {
 		assetTagPropertyPersistence.remove(assetTagProperty);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(assetTagProperty);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -249,9 +296,7 @@ public abstract class AssetTagPropertyLocalServiceBaseImpl
 	 */
 	public AssetTagProperty updateAssetTagProperty(
 		AssetTagProperty assetTagProperty) throws SystemException {
-		assetTagProperty.setNew(false);
-
-		return assetTagPropertyPersistence.update(assetTagProperty, true);
+		return updateAssetTagProperty(assetTagProperty, true);
 	}
 
 	/**
@@ -267,7 +312,23 @@ public abstract class AssetTagPropertyLocalServiceBaseImpl
 		throws SystemException {
 		assetTagProperty.setNew(false);
 
-		return assetTagPropertyPersistence.update(assetTagProperty, merge);
+		assetTagProperty = assetTagPropertyPersistence.update(assetTagProperty,
+				merge);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(assetTagProperty);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return assetTagProperty;
 	}
 
 	/**
@@ -977,6 +1038,14 @@ public abstract class AssetTagPropertyLocalServiceBaseImpl
 		_beanIdentifier = beanIdentifier;
 	}
 
+	protected Class<?> getModelClass() {
+		return AssetTagProperty.class;
+	}
+
+	protected String getModelClassName() {
+		return AssetTagProperty.class.getName();
+	}
+
 	/**
 	 * Performs an SQL query.
 	 *
@@ -1070,5 +1139,6 @@ public abstract class AssetTagPropertyLocalServiceBaseImpl
 	protected UserPersistence userPersistence;
 	@BeanReference(type = UserFinder.class)
 	protected UserFinder userFinder;
+	private static Log _log = LogFactoryUtil.getLog(AssetTagPropertyLocalServiceBaseImpl.class);
 	private String _beanIdentifier;
 }

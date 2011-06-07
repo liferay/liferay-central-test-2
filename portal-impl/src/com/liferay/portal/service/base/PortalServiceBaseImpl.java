@@ -3402,6 +3402,14 @@ public abstract class PortalServiceBaseImpl extends PrincipalBean
 		_beanIdentifier = beanIdentifier;
 	}
 
+	protected Class<?> getModelClass() {
+		return Portal.class;
+	}
+
+	protected String getModelClassName() {
+		return Portal.class.getName();
+	}
+
 	/**
 	 * Performs an SQL query.
 	 *

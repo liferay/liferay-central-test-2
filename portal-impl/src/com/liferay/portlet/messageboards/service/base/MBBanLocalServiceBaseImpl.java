@@ -23,6 +23,11 @@ import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.service.ResourceLocalService;
 import com.liferay.portal.service.ResourceService;
@@ -93,7 +98,22 @@ public abstract class MBBanLocalServiceBaseImpl implements MBBanLocalService,
 	public MBBan addMBBan(MBBan mbBan) throws SystemException {
 		mbBan.setNew(true);
 
-		return mbBanPersistence.update(mbBan, false);
+		mbBan = mbBanPersistence.update(mbBan, false);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(mbBan);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return mbBan;
 	}
 
 	/**
@@ -114,7 +134,20 @@ public abstract class MBBanLocalServiceBaseImpl implements MBBanLocalService,
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void deleteMBBan(long banId) throws PortalException, SystemException {
-		mbBanPersistence.remove(banId);
+		MBBan mbBan = mbBanPersistence.remove(banId);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(mbBan);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -125,6 +158,19 @@ public abstract class MBBanLocalServiceBaseImpl implements MBBanLocalService,
 	 */
 	public void deleteMBBan(MBBan mbBan) throws SystemException {
 		mbBanPersistence.remove(mbBan);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(mbBan);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -238,9 +284,7 @@ public abstract class MBBanLocalServiceBaseImpl implements MBBanLocalService,
 	 * @throws SystemException if a system exception occurred
 	 */
 	public MBBan updateMBBan(MBBan mbBan) throws SystemException {
-		mbBan.setNew(false);
-
-		return mbBanPersistence.update(mbBan, true);
+		return updateMBBan(mbBan, true);
 	}
 
 	/**
@@ -255,7 +299,22 @@ public abstract class MBBanLocalServiceBaseImpl implements MBBanLocalService,
 		throws SystemException {
 		mbBan.setNew(false);
 
-		return mbBanPersistence.update(mbBan, merge);
+		mbBan = mbBanPersistence.update(mbBan, merge);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(mbBan);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return mbBan;
 	}
 
 	/**
@@ -885,6 +944,14 @@ public abstract class MBBanLocalServiceBaseImpl implements MBBanLocalService,
 		_beanIdentifier = beanIdentifier;
 	}
 
+	protected Class<?> getModelClass() {
+		return MBBan.class;
+	}
+
+	protected String getModelClassName() {
+		return MBBan.class.getName();
+	}
+
 	/**
 	 * Performs an SQL query.
 	 *
@@ -970,5 +1037,6 @@ public abstract class MBBanLocalServiceBaseImpl implements MBBanLocalService,
 	protected UserPersistence userPersistence;
 	@BeanReference(type = UserFinder.class)
 	protected UserFinder userFinder;
+	private static Log _log = LogFactoryUtil.getLog(MBBanLocalServiceBaseImpl.class);
 	private String _beanIdentifier;
 }

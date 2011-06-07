@@ -27,6 +27,11 @@ import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.service.CompanyLocalService;
 import com.liferay.portal.service.CompanyService;
@@ -140,7 +145,22 @@ public abstract class MBMessageLocalServiceBaseImpl
 		throws SystemException {
 		mbMessage.setNew(true);
 
-		return mbMessagePersistence.update(mbMessage, false);
+		mbMessage = mbMessagePersistence.update(mbMessage, false);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(mbMessage);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return mbMessage;
 	}
 
 	/**
@@ -162,7 +182,20 @@ public abstract class MBMessageLocalServiceBaseImpl
 	 */
 	public void deleteMBMessage(long messageId)
 		throws PortalException, SystemException {
-		mbMessagePersistence.remove(messageId);
+		MBMessage mbMessage = mbMessagePersistence.remove(messageId);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(mbMessage);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -173,6 +206,19 @@ public abstract class MBMessageLocalServiceBaseImpl
 	 */
 	public void deleteMBMessage(MBMessage mbMessage) throws SystemException {
 		mbMessagePersistence.remove(mbMessage);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(mbMessage);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -304,9 +350,7 @@ public abstract class MBMessageLocalServiceBaseImpl
 	 */
 	public MBMessage updateMBMessage(MBMessage mbMessage)
 		throws SystemException {
-		mbMessage.setNew(false);
-
-		return mbMessagePersistence.update(mbMessage, true);
+		return updateMBMessage(mbMessage, true);
 	}
 
 	/**
@@ -321,7 +365,22 @@ public abstract class MBMessageLocalServiceBaseImpl
 		throws SystemException {
 		mbMessage.setNew(false);
 
-		return mbMessagePersistence.update(mbMessage, merge);
+		mbMessage = mbMessagePersistence.update(mbMessage, merge);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(mbMessage);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return mbMessage;
 	}
 
 	/**
@@ -1767,6 +1826,14 @@ public abstract class MBMessageLocalServiceBaseImpl
 		_beanIdentifier = beanIdentifier;
 	}
 
+	protected Class<?> getModelClass() {
+		return MBMessage.class;
+	}
+
+	protected String getModelClassName() {
+		return MBMessage.class.getName();
+	}
+
 	/**
 	 * Performs an SQL query.
 	 *
@@ -1940,5 +2007,6 @@ public abstract class MBMessageLocalServiceBaseImpl
 	protected SocialEquityLogLocalService socialEquityLogLocalService;
 	@BeanReference(type = SocialEquityLogPersistence.class)
 	protected SocialEquityLogPersistence socialEquityLogPersistence;
+	private static Log _log = LogFactoryUtil.getLog(MBMessageLocalServiceBaseImpl.class);
 	private String _beanIdentifier;
 }

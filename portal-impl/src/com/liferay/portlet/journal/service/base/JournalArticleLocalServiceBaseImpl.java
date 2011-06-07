@@ -25,6 +25,11 @@ import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.service.CompanyLocalService;
 import com.liferay.portal.service.CompanyService;
@@ -138,7 +143,22 @@ public abstract class JournalArticleLocalServiceBaseImpl
 		throws SystemException {
 		journalArticle.setNew(true);
 
-		return journalArticlePersistence.update(journalArticle, false);
+		journalArticle = journalArticlePersistence.update(journalArticle, false);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(journalArticle);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return journalArticle;
 	}
 
 	/**
@@ -160,7 +180,20 @@ public abstract class JournalArticleLocalServiceBaseImpl
 	 */
 	public void deleteJournalArticle(long id)
 		throws PortalException, SystemException {
-		journalArticlePersistence.remove(id);
+		JournalArticle journalArticle = journalArticlePersistence.remove(id);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(journalArticle);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -172,6 +205,19 @@ public abstract class JournalArticleLocalServiceBaseImpl
 	public void deleteJournalArticle(JournalArticle journalArticle)
 		throws SystemException {
 		journalArticlePersistence.remove(journalArticle);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(journalArticle);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -303,9 +349,7 @@ public abstract class JournalArticleLocalServiceBaseImpl
 	 */
 	public JournalArticle updateJournalArticle(JournalArticle journalArticle)
 		throws SystemException {
-		journalArticle.setNew(false);
-
-		return journalArticlePersistence.update(journalArticle, true);
+		return updateJournalArticle(journalArticle, true);
 	}
 
 	/**
@@ -320,7 +364,22 @@ public abstract class JournalArticleLocalServiceBaseImpl
 		boolean merge) throws SystemException {
 		journalArticle.setNew(false);
 
-		return journalArticlePersistence.update(journalArticle, merge);
+		journalArticle = journalArticlePersistence.update(journalArticle, merge);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(journalArticle);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return journalArticle;
 	}
 
 	/**
@@ -1754,6 +1813,14 @@ public abstract class JournalArticleLocalServiceBaseImpl
 		_beanIdentifier = beanIdentifier;
 	}
 
+	protected Class<?> getModelClass() {
+		return JournalArticle.class;
+	}
+
+	protected String getModelClassName() {
+		return JournalArticle.class.getName();
+	}
+
 	/**
 	 * Performs an SQL query.
 	 *
@@ -1925,5 +1992,6 @@ public abstract class JournalArticleLocalServiceBaseImpl
 	protected SocialEquityLogLocalService socialEquityLogLocalService;
 	@BeanReference(type = SocialEquityLogPersistence.class)
 	protected SocialEquityLogPersistence socialEquityLogPersistence;
+	private static Log _log = LogFactoryUtil.getLog(JournalArticleLocalServiceBaseImpl.class);
 	private String _beanIdentifier;
 }

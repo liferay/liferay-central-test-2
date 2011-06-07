@@ -23,6 +23,11 @@ import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.model.UserGroup;
 import com.liferay.portal.service.AccountLocalService;
@@ -231,7 +236,22 @@ public abstract class UserGroupLocalServiceBaseImpl
 		throws SystemException {
 		userGroup.setNew(true);
 
-		return userGroupPersistence.update(userGroup, false);
+		userGroup = userGroupPersistence.update(userGroup, false);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(userGroup);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return userGroup;
 	}
 
 	/**
@@ -253,7 +273,20 @@ public abstract class UserGroupLocalServiceBaseImpl
 	 */
 	public void deleteUserGroup(long userGroupId)
 		throws PortalException, SystemException {
-		userGroupPersistence.remove(userGroupId);
+		UserGroup userGroup = userGroupPersistence.remove(userGroupId);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(userGroup);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -266,6 +299,19 @@ public abstract class UserGroupLocalServiceBaseImpl
 	public void deleteUserGroup(UserGroup userGroup)
 		throws PortalException, SystemException {
 		userGroupPersistence.remove(userGroup);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(userGroup);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -383,9 +429,7 @@ public abstract class UserGroupLocalServiceBaseImpl
 	 */
 	public UserGroup updateUserGroup(UserGroup userGroup)
 		throws SystemException {
-		userGroup.setNew(false);
-
-		return userGroupPersistence.update(userGroup, true);
+		return updateUserGroup(userGroup, true);
 	}
 
 	/**
@@ -400,7 +444,22 @@ public abstract class UserGroupLocalServiceBaseImpl
 		throws SystemException {
 		userGroup.setNew(false);
 
-		return userGroupPersistence.update(userGroup, merge);
+		userGroup = userGroupPersistence.update(userGroup, merge);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(userGroup);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return userGroup;
 	}
 
 	/**
@@ -3590,6 +3649,14 @@ public abstract class UserGroupLocalServiceBaseImpl
 		_beanIdentifier = beanIdentifier;
 	}
 
+	protected Class<?> getModelClass() {
+		return UserGroup.class;
+	}
+
+	protected String getModelClassName() {
+		return UserGroup.class.getName();
+	}
+
 	/**
 	 * Performs an SQL query.
 	 *
@@ -3951,5 +4018,6 @@ public abstract class UserGroupLocalServiceBaseImpl
 	protected WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
 	@BeanReference(type = CounterLocalService.class)
 	protected CounterLocalService counterLocalService;
+	private static Log _log = LogFactoryUtil.getLog(UserGroupLocalServiceBaseImpl.class);
 	private String _beanIdentifier;
 }

@@ -23,6 +23,11 @@ import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.model.Shard;
 import com.liferay.portal.service.AccountLocalService;
@@ -230,7 +235,22 @@ public abstract class ShardLocalServiceBaseImpl implements ShardLocalService,
 	public Shard addShard(Shard shard) throws SystemException {
 		shard.setNew(true);
 
-		return shardPersistence.update(shard, false);
+		shard = shardPersistence.update(shard, false);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(shard);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return shard;
 	}
 
 	/**
@@ -252,7 +272,20 @@ public abstract class ShardLocalServiceBaseImpl implements ShardLocalService,
 	 */
 	public void deleteShard(long shardId)
 		throws PortalException, SystemException {
-		shardPersistence.remove(shardId);
+		Shard shard = shardPersistence.remove(shardId);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(shard);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -263,6 +296,19 @@ public abstract class ShardLocalServiceBaseImpl implements ShardLocalService,
 	 */
 	public void deleteShard(Shard shard) throws SystemException {
 		shardPersistence.remove(shard);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(shard);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -376,9 +422,7 @@ public abstract class ShardLocalServiceBaseImpl implements ShardLocalService,
 	 * @throws SystemException if a system exception occurred
 	 */
 	public Shard updateShard(Shard shard) throws SystemException {
-		shard.setNew(false);
-
-		return shardPersistence.update(shard, true);
+		return updateShard(shard, true);
 	}
 
 	/**
@@ -393,7 +437,22 @@ public abstract class ShardLocalServiceBaseImpl implements ShardLocalService,
 		throws SystemException {
 		shard.setNew(false);
 
-		return shardPersistence.update(shard, merge);
+		shard = shardPersistence.update(shard, merge);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(shard);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return shard;
 	}
 
 	/**
@@ -3583,6 +3642,14 @@ public abstract class ShardLocalServiceBaseImpl implements ShardLocalService,
 		_beanIdentifier = beanIdentifier;
 	}
 
+	protected Class<?> getModelClass() {
+		return Shard.class;
+	}
+
+	protected String getModelClassName() {
+		return Shard.class.getName();
+	}
+
 	/**
 	 * Performs an SQL query.
 	 *
@@ -3944,5 +4011,6 @@ public abstract class ShardLocalServiceBaseImpl implements ShardLocalService,
 	protected WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
 	@BeanReference(type = CounterLocalService.class)
 	protected CounterLocalService counterLocalService;
+	private static Log _log = LogFactoryUtil.getLog(ShardLocalServiceBaseImpl.class);
 	private String _beanIdentifier;
 }

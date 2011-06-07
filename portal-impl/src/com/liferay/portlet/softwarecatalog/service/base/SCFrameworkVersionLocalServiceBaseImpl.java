@@ -23,6 +23,11 @@ import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.service.ResourceLocalService;
 import com.liferay.portal.service.ResourceService;
@@ -84,7 +89,23 @@ public abstract class SCFrameworkVersionLocalServiceBaseImpl
 		SCFrameworkVersion scFrameworkVersion) throws SystemException {
 		scFrameworkVersion.setNew(true);
 
-		return scFrameworkVersionPersistence.update(scFrameworkVersion, false);
+		scFrameworkVersion = scFrameworkVersionPersistence.update(scFrameworkVersion,
+				false);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(scFrameworkVersion);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return scFrameworkVersion;
 	}
 
 	/**
@@ -106,7 +127,20 @@ public abstract class SCFrameworkVersionLocalServiceBaseImpl
 	 */
 	public void deleteSCFrameworkVersion(long frameworkVersionId)
 		throws PortalException, SystemException {
-		scFrameworkVersionPersistence.remove(frameworkVersionId);
+		SCFrameworkVersion scFrameworkVersion = scFrameworkVersionPersistence.remove(frameworkVersionId);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(scFrameworkVersion);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -118,6 +152,19 @@ public abstract class SCFrameworkVersionLocalServiceBaseImpl
 	public void deleteSCFrameworkVersion(SCFrameworkVersion scFrameworkVersion)
 		throws SystemException {
 		scFrameworkVersionPersistence.remove(scFrameworkVersion);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(scFrameworkVersion);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -235,9 +282,7 @@ public abstract class SCFrameworkVersionLocalServiceBaseImpl
 	 */
 	public SCFrameworkVersion updateSCFrameworkVersion(
 		SCFrameworkVersion scFrameworkVersion) throws SystemException {
-		scFrameworkVersion.setNew(false);
-
-		return scFrameworkVersionPersistence.update(scFrameworkVersion, true);
+		return updateSCFrameworkVersion(scFrameworkVersion, true);
 	}
 
 	/**
@@ -253,7 +298,23 @@ public abstract class SCFrameworkVersionLocalServiceBaseImpl
 		throws SystemException {
 		scFrameworkVersion.setNew(false);
 
-		return scFrameworkVersionPersistence.update(scFrameworkVersion, merge);
+		scFrameworkVersion = scFrameworkVersionPersistence.update(scFrameworkVersion,
+				merge);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(scFrameworkVersion);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return scFrameworkVersion;
 	}
 
 	/**
@@ -702,6 +763,14 @@ public abstract class SCFrameworkVersionLocalServiceBaseImpl
 		_beanIdentifier = beanIdentifier;
 	}
 
+	protected Class<?> getModelClass() {
+		return SCFrameworkVersion.class;
+	}
+
+	protected String getModelClassName() {
+		return SCFrameworkVersion.class.getName();
+	}
+
 	/**
 	 * Performs an SQL query.
 	 *
@@ -767,5 +836,6 @@ public abstract class SCFrameworkVersionLocalServiceBaseImpl
 	protected UserPersistence userPersistence;
 	@BeanReference(type = UserFinder.class)
 	protected UserFinder userFinder;
+	private static Log _log = LogFactoryUtil.getLog(SCFrameworkVersionLocalServiceBaseImpl.class);
 	private String _beanIdentifier;
 }

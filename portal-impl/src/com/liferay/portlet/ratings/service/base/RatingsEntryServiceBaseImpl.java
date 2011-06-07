@@ -38,6 +38,7 @@ import com.liferay.portlet.blogs.service.persistence.BlogsEntryFinder;
 import com.liferay.portlet.blogs.service.persistence.BlogsEntryPersistence;
 import com.liferay.portlet.blogs.service.persistence.BlogsStatsUserFinder;
 import com.liferay.portlet.blogs.service.persistence.BlogsStatsUserPersistence;
+import com.liferay.portlet.ratings.model.RatingsEntry;
 import com.liferay.portlet.ratings.service.RatingsEntryLocalService;
 import com.liferay.portlet.ratings.service.RatingsEntryService;
 import com.liferay.portlet.ratings.service.RatingsStatsLocalService;
@@ -548,6 +549,14 @@ public abstract class RatingsEntryServiceBaseImpl extends PrincipalBean
 	 */
 	public void setBeanIdentifier(String beanIdentifier) {
 		_beanIdentifier = beanIdentifier;
+	}
+
+	protected Class<?> getModelClass() {
+		return RatingsEntry.class;
+	}
+
+	protected String getModelClassName() {
+		return RatingsEntry.class.getName();
 	}
 
 	/**

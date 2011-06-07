@@ -31,6 +31,7 @@ import com.liferay.portal.service.persistence.ResourcePersistence;
 import com.liferay.portal.service.persistence.UserFinder;
 import com.liferay.portal.service.persistence.UserPersistence;
 
+import com.liferay.portlet.dynamicdatamapping.model.DDMTemplate;
 import com.liferay.portlet.dynamicdatamapping.service.DDMContentLocalService;
 import com.liferay.portlet.dynamicdatamapping.service.DDMStorageLinkLocalService;
 import com.liferay.portlet.dynamicdatamapping.service.DDMStructureLinkLocalService;
@@ -529,6 +530,14 @@ public abstract class DDMTemplateServiceBaseImpl extends PrincipalBean
 	 */
 	public void setBeanIdentifier(String beanIdentifier) {
 		_beanIdentifier = beanIdentifier;
+	}
+
+	protected Class<?> getModelClass() {
+		return DDMTemplate.class;
+	}
+
+	protected String getModelClassName() {
+		return DDMTemplate.class.getName();
 	}
 
 	/**

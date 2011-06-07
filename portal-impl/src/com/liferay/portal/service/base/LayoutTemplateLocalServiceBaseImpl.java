@@ -3402,6 +3402,14 @@ public abstract class LayoutTemplateLocalServiceBaseImpl
 		_beanIdentifier = beanIdentifier;
 	}
 
+	protected Class<?> getModelClass() {
+		return LayoutTemplate.class;
+	}
+
+	protected String getModelClassName() {
+		return LayoutTemplate.class.getName();
+	}
+
 	/**
 	 * Performs an SQL query.
 	 *

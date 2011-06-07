@@ -23,6 +23,11 @@ import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.model.Release;
 import com.liferay.portal.service.AccountLocalService;
@@ -230,7 +235,22 @@ public abstract class ReleaseLocalServiceBaseImpl implements ReleaseLocalService
 	public Release addRelease(Release release) throws SystemException {
 		release.setNew(true);
 
-		return releasePersistence.update(release, false);
+		release = releasePersistence.update(release, false);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(release);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return release;
 	}
 
 	/**
@@ -252,7 +272,20 @@ public abstract class ReleaseLocalServiceBaseImpl implements ReleaseLocalService
 	 */
 	public void deleteRelease(long releaseId)
 		throws PortalException, SystemException {
-		releasePersistence.remove(releaseId);
+		Release release = releasePersistence.remove(releaseId);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(release);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -263,6 +296,19 @@ public abstract class ReleaseLocalServiceBaseImpl implements ReleaseLocalService
 	 */
 	public void deleteRelease(Release release) throws SystemException {
 		releasePersistence.remove(release);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(release);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -378,9 +424,7 @@ public abstract class ReleaseLocalServiceBaseImpl implements ReleaseLocalService
 	 * @throws SystemException if a system exception occurred
 	 */
 	public Release updateRelease(Release release) throws SystemException {
-		release.setNew(false);
-
-		return releasePersistence.update(release, true);
+		return updateRelease(release, true);
 	}
 
 	/**
@@ -395,7 +439,22 @@ public abstract class ReleaseLocalServiceBaseImpl implements ReleaseLocalService
 		throws SystemException {
 		release.setNew(false);
 
-		return releasePersistence.update(release, merge);
+		release = releasePersistence.update(release, merge);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(release);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return release;
 	}
 
 	/**
@@ -3585,6 +3644,14 @@ public abstract class ReleaseLocalServiceBaseImpl implements ReleaseLocalService
 		_beanIdentifier = beanIdentifier;
 	}
 
+	protected Class<?> getModelClass() {
+		return Release.class;
+	}
+
+	protected String getModelClassName() {
+		return Release.class.getName();
+	}
+
 	/**
 	 * Performs an SQL query.
 	 *
@@ -3946,5 +4013,6 @@ public abstract class ReleaseLocalServiceBaseImpl implements ReleaseLocalService
 	protected WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
 	@BeanReference(type = CounterLocalService.class)
 	protected CounterLocalService counterLocalService;
+	private static Log _log = LogFactoryUtil.getLog(ReleaseLocalServiceBaseImpl.class);
 	private String _beanIdentifier;
 }

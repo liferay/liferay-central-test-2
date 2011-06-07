@@ -25,6 +25,11 @@ import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.service.LockLocalService;
 import com.liferay.portal.service.ResourceLocalService;
@@ -109,7 +114,22 @@ public abstract class MBThreadLocalServiceBaseImpl
 	public MBThread addMBThread(MBThread mbThread) throws SystemException {
 		mbThread.setNew(true);
 
-		return mbThreadPersistence.update(mbThread, false);
+		mbThread = mbThreadPersistence.update(mbThread, false);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(mbThread);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return mbThread;
 	}
 
 	/**
@@ -131,7 +151,20 @@ public abstract class MBThreadLocalServiceBaseImpl
 	 */
 	public void deleteMBThread(long threadId)
 		throws PortalException, SystemException {
-		mbThreadPersistence.remove(threadId);
+		MBThread mbThread = mbThreadPersistence.remove(threadId);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(mbThread);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -142,6 +175,19 @@ public abstract class MBThreadLocalServiceBaseImpl
 	 */
 	public void deleteMBThread(MBThread mbThread) throws SystemException {
 		mbThreadPersistence.remove(mbThread);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(mbThread);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -257,9 +303,7 @@ public abstract class MBThreadLocalServiceBaseImpl
 	 * @throws SystemException if a system exception occurred
 	 */
 	public MBThread updateMBThread(MBThread mbThread) throws SystemException {
-		mbThread.setNew(false);
-
-		return mbThreadPersistence.update(mbThread, true);
+		return updateMBThread(mbThread, true);
 	}
 
 	/**
@@ -274,7 +318,22 @@ public abstract class MBThreadLocalServiceBaseImpl
 		throws SystemException {
 		mbThread.setNew(false);
 
-		return mbThreadPersistence.update(mbThread, merge);
+		mbThread = mbThreadPersistence.update(mbThread, merge);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(mbThread);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return mbThread;
 	}
 
 	/**
@@ -1183,6 +1242,14 @@ public abstract class MBThreadLocalServiceBaseImpl
 		_beanIdentifier = beanIdentifier;
 	}
 
+	protected Class<?> getModelClass() {
+		return MBThread.class;
+	}
+
+	protected String getModelClassName() {
+		return MBThread.class.getName();
+	}
+
 	/**
 	 * Performs an SQL query.
 	 *
@@ -1298,5 +1365,6 @@ public abstract class MBThreadLocalServiceBaseImpl
 	protected SocialActivityPersistence socialActivityPersistence;
 	@BeanReference(type = SocialActivityFinder.class)
 	protected SocialActivityFinder socialActivityFinder;
+	private static Log _log = LogFactoryUtil.getLog(MBThreadLocalServiceBaseImpl.class);
 	private String _beanIdentifier;
 }

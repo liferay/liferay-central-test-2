@@ -23,6 +23,11 @@ import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.model.PasswordPolicy;
 import com.liferay.portal.service.AccountLocalService;
@@ -231,7 +236,22 @@ public abstract class PasswordPolicyLocalServiceBaseImpl
 		throws SystemException {
 		passwordPolicy.setNew(true);
 
-		return passwordPolicyPersistence.update(passwordPolicy, false);
+		passwordPolicy = passwordPolicyPersistence.update(passwordPolicy, false);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(passwordPolicy);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return passwordPolicy;
 	}
 
 	/**
@@ -253,7 +273,20 @@ public abstract class PasswordPolicyLocalServiceBaseImpl
 	 */
 	public void deletePasswordPolicy(long passwordPolicyId)
 		throws PortalException, SystemException {
-		passwordPolicyPersistence.remove(passwordPolicyId);
+		PasswordPolicy passwordPolicy = passwordPolicyPersistence.remove(passwordPolicyId);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(passwordPolicy);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -266,6 +299,19 @@ public abstract class PasswordPolicyLocalServiceBaseImpl
 	public void deletePasswordPolicy(PasswordPolicy passwordPolicy)
 		throws PortalException, SystemException {
 		passwordPolicyPersistence.remove(passwordPolicy);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(passwordPolicy);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -383,9 +429,7 @@ public abstract class PasswordPolicyLocalServiceBaseImpl
 	 */
 	public PasswordPolicy updatePasswordPolicy(PasswordPolicy passwordPolicy)
 		throws SystemException {
-		passwordPolicy.setNew(false);
-
-		return passwordPolicyPersistence.update(passwordPolicy, true);
+		return updatePasswordPolicy(passwordPolicy, true);
 	}
 
 	/**
@@ -400,7 +444,22 @@ public abstract class PasswordPolicyLocalServiceBaseImpl
 		boolean merge) throws SystemException {
 		passwordPolicy.setNew(false);
 
-		return passwordPolicyPersistence.update(passwordPolicy, merge);
+		passwordPolicy = passwordPolicyPersistence.update(passwordPolicy, merge);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(passwordPolicy);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return passwordPolicy;
 	}
 
 	/**
@@ -3590,6 +3649,14 @@ public abstract class PasswordPolicyLocalServiceBaseImpl
 		_beanIdentifier = beanIdentifier;
 	}
 
+	protected Class<?> getModelClass() {
+		return PasswordPolicy.class;
+	}
+
+	protected String getModelClassName() {
+		return PasswordPolicy.class.getName();
+	}
+
 	/**
 	 * Performs an SQL query.
 	 *
@@ -3951,5 +4018,6 @@ public abstract class PasswordPolicyLocalServiceBaseImpl
 	protected WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
 	@BeanReference(type = CounterLocalService.class)
 	protected CounterLocalService counterLocalService;
+	private static Log _log = LogFactoryUtil.getLog(PasswordPolicyLocalServiceBaseImpl.class);
 	private String _beanIdentifier;
 }

@@ -23,6 +23,11 @@ import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.model.Account;
 import com.liferay.portal.service.AccountLocalService;
@@ -230,7 +235,22 @@ public abstract class AccountLocalServiceBaseImpl implements AccountLocalService
 	public Account addAccount(Account account) throws SystemException {
 		account.setNew(true);
 
-		return accountPersistence.update(account, false);
+		account = accountPersistence.update(account, false);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(account);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return account;
 	}
 
 	/**
@@ -252,7 +272,20 @@ public abstract class AccountLocalServiceBaseImpl implements AccountLocalService
 	 */
 	public void deleteAccount(long accountId)
 		throws PortalException, SystemException {
-		accountPersistence.remove(accountId);
+		Account account = accountPersistence.remove(accountId);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(account);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -263,6 +296,19 @@ public abstract class AccountLocalServiceBaseImpl implements AccountLocalService
 	 */
 	public void deleteAccount(Account account) throws SystemException {
 		accountPersistence.remove(account);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(account);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -378,9 +424,7 @@ public abstract class AccountLocalServiceBaseImpl implements AccountLocalService
 	 * @throws SystemException if a system exception occurred
 	 */
 	public Account updateAccount(Account account) throws SystemException {
-		account.setNew(false);
-
-		return accountPersistence.update(account, true);
+		return updateAccount(account, true);
 	}
 
 	/**
@@ -395,7 +439,22 @@ public abstract class AccountLocalServiceBaseImpl implements AccountLocalService
 		throws SystemException {
 		account.setNew(false);
 
-		return accountPersistence.update(account, merge);
+		account = accountPersistence.update(account, merge);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(account);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return account;
 	}
 
 	/**
@@ -3585,6 +3644,14 @@ public abstract class AccountLocalServiceBaseImpl implements AccountLocalService
 		_beanIdentifier = beanIdentifier;
 	}
 
+	protected Class<?> getModelClass() {
+		return Account.class;
+	}
+
+	protected String getModelClassName() {
+		return Account.class.getName();
+	}
+
 	/**
 	 * Performs an SQL query.
 	 *
@@ -3946,5 +4013,6 @@ public abstract class AccountLocalServiceBaseImpl implements AccountLocalService
 	protected WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
 	@BeanReference(type = CounterLocalService.class)
 	protected CounterLocalService counterLocalService;
+	private static Log _log = LogFactoryUtil.getLog(AccountLocalServiceBaseImpl.class);
 	private String _beanIdentifier;
 }

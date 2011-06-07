@@ -35,6 +35,7 @@ import com.liferay.portal.service.persistence.ResourcePersistence;
 import com.liferay.portal.service.persistence.UserFinder;
 import com.liferay.portal.service.persistence.UserPersistence;
 
+import com.liferay.portlet.asset.model.AssetVocabulary;
 import com.liferay.portlet.asset.service.AssetCategoryLocalService;
 import com.liferay.portlet.asset.service.AssetCategoryPropertyLocalService;
 import com.liferay.portlet.asset.service.AssetCategoryPropertyService;
@@ -863,6 +864,14 @@ public abstract class AssetVocabularyServiceBaseImpl extends PrincipalBean
 	 */
 	public void setBeanIdentifier(String beanIdentifier) {
 		_beanIdentifier = beanIdentifier;
+	}
+
+	protected Class<?> getModelClass() {
+		return AssetVocabulary.class;
+	}
+
+	protected String getModelClassName() {
+		return AssetVocabulary.class.getName();
 	}
 
 	/**

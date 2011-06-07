@@ -23,6 +23,11 @@ import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.model.PluginSetting;
 import com.liferay.portal.service.AccountLocalService;
@@ -231,7 +236,22 @@ public abstract class PluginSettingLocalServiceBaseImpl
 		throws SystemException {
 		pluginSetting.setNew(true);
 
-		return pluginSettingPersistence.update(pluginSetting, false);
+		pluginSetting = pluginSettingPersistence.update(pluginSetting, false);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(pluginSetting);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return pluginSetting;
 	}
 
 	/**
@@ -253,7 +273,20 @@ public abstract class PluginSettingLocalServiceBaseImpl
 	 */
 	public void deletePluginSetting(long pluginSettingId)
 		throws PortalException, SystemException {
-		pluginSettingPersistence.remove(pluginSettingId);
+		PluginSetting pluginSetting = pluginSettingPersistence.remove(pluginSettingId);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(pluginSetting);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -265,6 +298,19 @@ public abstract class PluginSettingLocalServiceBaseImpl
 	public void deletePluginSetting(PluginSetting pluginSetting)
 		throws SystemException {
 		pluginSettingPersistence.remove(pluginSetting);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(pluginSetting);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -382,9 +428,7 @@ public abstract class PluginSettingLocalServiceBaseImpl
 	 */
 	public PluginSetting updatePluginSetting(PluginSetting pluginSetting)
 		throws SystemException {
-		pluginSetting.setNew(false);
-
-		return pluginSettingPersistence.update(pluginSetting, true);
+		return updatePluginSetting(pluginSetting, true);
 	}
 
 	/**
@@ -399,7 +443,22 @@ public abstract class PluginSettingLocalServiceBaseImpl
 		boolean merge) throws SystemException {
 		pluginSetting.setNew(false);
 
-		return pluginSettingPersistence.update(pluginSetting, merge);
+		pluginSetting = pluginSettingPersistence.update(pluginSetting, merge);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(pluginSetting);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return pluginSetting;
 	}
 
 	/**
@@ -3589,6 +3648,14 @@ public abstract class PluginSettingLocalServiceBaseImpl
 		_beanIdentifier = beanIdentifier;
 	}
 
+	protected Class<?> getModelClass() {
+		return PluginSetting.class;
+	}
+
+	protected String getModelClassName() {
+		return PluginSetting.class.getName();
+	}
+
 	/**
 	 * Performs an SQL query.
 	 *
@@ -3950,5 +4017,6 @@ public abstract class PluginSettingLocalServiceBaseImpl
 	protected WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
 	@BeanReference(type = CounterLocalService.class)
 	protected CounterLocalService counterLocalService;
+	private static Log _log = LogFactoryUtil.getLog(PluginSettingLocalServiceBaseImpl.class);
 	private String _beanIdentifier;
 }

@@ -23,6 +23,11 @@ import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.service.ResourceLocalService;
 import com.liferay.portal.service.ResourceService;
@@ -93,7 +98,22 @@ public abstract class ShoppingCartLocalServiceBaseImpl
 		throws SystemException {
 		shoppingCart.setNew(true);
 
-		return shoppingCartPersistence.update(shoppingCart, false);
+		shoppingCart = shoppingCartPersistence.update(shoppingCart, false);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(shoppingCart);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return shoppingCart;
 	}
 
 	/**
@@ -115,7 +135,20 @@ public abstract class ShoppingCartLocalServiceBaseImpl
 	 */
 	public void deleteShoppingCart(long cartId)
 		throws PortalException, SystemException {
-		shoppingCartPersistence.remove(cartId);
+		ShoppingCart shoppingCart = shoppingCartPersistence.remove(cartId);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(shoppingCart);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -127,6 +160,19 @@ public abstract class ShoppingCartLocalServiceBaseImpl
 	public void deleteShoppingCart(ShoppingCart shoppingCart)
 		throws SystemException {
 		shoppingCartPersistence.remove(shoppingCart);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(shoppingCart);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -244,9 +290,7 @@ public abstract class ShoppingCartLocalServiceBaseImpl
 	 */
 	public ShoppingCart updateShoppingCart(ShoppingCart shoppingCart)
 		throws SystemException {
-		shoppingCart.setNew(false);
-
-		return shoppingCartPersistence.update(shoppingCart, true);
+		return updateShoppingCart(shoppingCart, true);
 	}
 
 	/**
@@ -261,7 +305,22 @@ public abstract class ShoppingCartLocalServiceBaseImpl
 		boolean merge) throws SystemException {
 		shoppingCart.setNew(false);
 
-		return shoppingCartPersistence.update(shoppingCart, merge);
+		shoppingCart = shoppingCartPersistence.update(shoppingCart, merge);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(shoppingCart);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return shoppingCart;
 	}
 
 	/**
@@ -879,6 +938,14 @@ public abstract class ShoppingCartLocalServiceBaseImpl
 		_beanIdentifier = beanIdentifier;
 	}
 
+	protected Class<?> getModelClass() {
+		return ShoppingCart.class;
+	}
+
+	protected String getModelClassName() {
+		return ShoppingCart.class.getName();
+	}
+
 	/**
 	 * Performs an SQL query.
 	 *
@@ -962,5 +1029,6 @@ public abstract class ShoppingCartLocalServiceBaseImpl
 	protected UserPersistence userPersistence;
 	@BeanReference(type = UserFinder.class)
 	protected UserFinder userFinder;
+	private static Log _log = LogFactoryUtil.getLog(ShoppingCartLocalServiceBaseImpl.class);
 	private String _beanIdentifier;
 }

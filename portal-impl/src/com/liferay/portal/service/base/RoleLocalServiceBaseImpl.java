@@ -23,6 +23,11 @@ import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.service.AccountLocalService;
@@ -230,7 +235,22 @@ public abstract class RoleLocalServiceBaseImpl implements RoleLocalService,
 	public Role addRole(Role role) throws SystemException {
 		role.setNew(true);
 
-		return rolePersistence.update(role, false);
+		role = rolePersistence.update(role, false);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(role);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return role;
 	}
 
 	/**
@@ -251,7 +271,20 @@ public abstract class RoleLocalServiceBaseImpl implements RoleLocalService,
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void deleteRole(long roleId) throws PortalException, SystemException {
-		rolePersistence.remove(roleId);
+		Role role = rolePersistence.remove(roleId);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(role);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -263,6 +296,19 @@ public abstract class RoleLocalServiceBaseImpl implements RoleLocalService,
 	 */
 	public void deleteRole(Role role) throws PortalException, SystemException {
 		rolePersistence.remove(role);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(role);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -376,9 +422,7 @@ public abstract class RoleLocalServiceBaseImpl implements RoleLocalService,
 	 * @throws SystemException if a system exception occurred
 	 */
 	public Role updateRole(Role role) throws SystemException {
-		role.setNew(false);
-
-		return rolePersistence.update(role, true);
+		return updateRole(role, true);
 	}
 
 	/**
@@ -392,7 +436,22 @@ public abstract class RoleLocalServiceBaseImpl implements RoleLocalService,
 	public Role updateRole(Role role, boolean merge) throws SystemException {
 		role.setNew(false);
 
-		return rolePersistence.update(role, merge);
+		role = rolePersistence.update(role, merge);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(role);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return role;
 	}
 
 	/**
@@ -3582,6 +3641,14 @@ public abstract class RoleLocalServiceBaseImpl implements RoleLocalService,
 		_beanIdentifier = beanIdentifier;
 	}
 
+	protected Class<?> getModelClass() {
+		return Role.class;
+	}
+
+	protected String getModelClassName() {
+		return Role.class.getName();
+	}
+
 	/**
 	 * Performs an SQL query.
 	 *
@@ -3943,5 +4010,6 @@ public abstract class RoleLocalServiceBaseImpl implements RoleLocalService,
 	protected WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
 	@BeanReference(type = CounterLocalService.class)
 	protected CounterLocalService counterLocalService;
+	private static Log _log = LogFactoryUtil.getLog(RoleLocalServiceBaseImpl.class);
 	private String _beanIdentifier;
 }

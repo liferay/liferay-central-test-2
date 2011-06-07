@@ -23,6 +23,11 @@ import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.model.WebDAVProps;
 import com.liferay.portal.service.AccountLocalService;
@@ -231,7 +236,22 @@ public abstract class WebDAVPropsLocalServiceBaseImpl
 		throws SystemException {
 		webDAVProps.setNew(true);
 
-		return webDAVPropsPersistence.update(webDAVProps, false);
+		webDAVProps = webDAVPropsPersistence.update(webDAVProps, false);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(webDAVProps);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return webDAVProps;
 	}
 
 	/**
@@ -253,7 +273,20 @@ public abstract class WebDAVPropsLocalServiceBaseImpl
 	 */
 	public void deleteWebDAVProps(long webDavPropsId)
 		throws PortalException, SystemException {
-		webDAVPropsPersistence.remove(webDavPropsId);
+		WebDAVProps webDAVProps = webDAVPropsPersistence.remove(webDavPropsId);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(webDAVProps);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -265,6 +298,19 @@ public abstract class WebDAVPropsLocalServiceBaseImpl
 	public void deleteWebDAVProps(WebDAVProps webDAVProps)
 		throws SystemException {
 		webDAVPropsPersistence.remove(webDAVProps);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(webDAVProps);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -382,9 +428,7 @@ public abstract class WebDAVPropsLocalServiceBaseImpl
 	 */
 	public WebDAVProps updateWebDAVProps(WebDAVProps webDAVProps)
 		throws SystemException {
-		webDAVProps.setNew(false);
-
-		return webDAVPropsPersistence.update(webDAVProps, true);
+		return updateWebDAVProps(webDAVProps, true);
 	}
 
 	/**
@@ -399,7 +443,22 @@ public abstract class WebDAVPropsLocalServiceBaseImpl
 		throws SystemException {
 		webDAVProps.setNew(false);
 
-		return webDAVPropsPersistence.update(webDAVProps, merge);
+		webDAVProps = webDAVPropsPersistence.update(webDAVProps, merge);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(webDAVProps);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return webDAVProps;
 	}
 
 	/**
@@ -3589,6 +3648,14 @@ public abstract class WebDAVPropsLocalServiceBaseImpl
 		_beanIdentifier = beanIdentifier;
 	}
 
+	protected Class<?> getModelClass() {
+		return WebDAVProps.class;
+	}
+
+	protected String getModelClassName() {
+		return WebDAVProps.class.getName();
+	}
+
 	/**
 	 * Performs an SQL query.
 	 *
@@ -3950,5 +4017,6 @@ public abstract class WebDAVPropsLocalServiceBaseImpl
 	protected WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
 	@BeanReference(type = CounterLocalService.class)
 	protected CounterLocalService counterLocalService;
+	private static Log _log = LogFactoryUtil.getLog(WebDAVPropsLocalServiceBaseImpl.class);
 	private String _beanIdentifier;
 }

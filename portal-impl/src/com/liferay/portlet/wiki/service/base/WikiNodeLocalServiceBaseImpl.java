@@ -23,6 +23,11 @@ import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.service.GroupLocalService;
 import com.liferay.portal.service.GroupService;
@@ -84,7 +89,22 @@ public abstract class WikiNodeLocalServiceBaseImpl
 	public WikiNode addWikiNode(WikiNode wikiNode) throws SystemException {
 		wikiNode.setNew(true);
 
-		return wikiNodePersistence.update(wikiNode, false);
+		wikiNode = wikiNodePersistence.update(wikiNode, false);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(wikiNode);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return wikiNode;
 	}
 
 	/**
@@ -106,7 +126,20 @@ public abstract class WikiNodeLocalServiceBaseImpl
 	 */
 	public void deleteWikiNode(long nodeId)
 		throws PortalException, SystemException {
-		wikiNodePersistence.remove(nodeId);
+		WikiNode wikiNode = wikiNodePersistence.remove(nodeId);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(wikiNode);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -117,6 +150,19 @@ public abstract class WikiNodeLocalServiceBaseImpl
 	 */
 	public void deleteWikiNode(WikiNode wikiNode) throws SystemException {
 		wikiNodePersistence.remove(wikiNode);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(wikiNode);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -246,9 +292,7 @@ public abstract class WikiNodeLocalServiceBaseImpl
 	 * @throws SystemException if a system exception occurred
 	 */
 	public WikiNode updateWikiNode(WikiNode wikiNode) throws SystemException {
-		wikiNode.setNew(false);
-
-		return wikiNodePersistence.update(wikiNode, true);
+		return updateWikiNode(wikiNode, true);
 	}
 
 	/**
@@ -263,7 +307,22 @@ public abstract class WikiNodeLocalServiceBaseImpl
 		throws SystemException {
 		wikiNode.setNew(false);
 
-		return wikiNodePersistence.update(wikiNode, merge);
+		wikiNode = wikiNodePersistence.update(wikiNode, merge);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(wikiNode);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return wikiNode;
 	}
 
 	/**
@@ -723,6 +782,14 @@ public abstract class WikiNodeLocalServiceBaseImpl
 		_beanIdentifier = beanIdentifier;
 	}
 
+	protected Class<?> getModelClass() {
+		return WikiNode.class;
+	}
+
+	protected String getModelClassName() {
+		return WikiNode.class.getName();
+	}
+
 	/**
 	 * Performs an SQL query.
 	 *
@@ -790,5 +857,6 @@ public abstract class WikiNodeLocalServiceBaseImpl
 	protected UserPersistence userPersistence;
 	@BeanReference(type = UserFinder.class)
 	protected UserFinder userFinder;
+	private static Log _log = LogFactoryUtil.getLog(WikiNodeLocalServiceBaseImpl.class);
 	private String _beanIdentifier;
 }

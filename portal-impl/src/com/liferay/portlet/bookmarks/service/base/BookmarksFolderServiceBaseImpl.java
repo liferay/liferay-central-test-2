@@ -35,6 +35,7 @@ import com.liferay.portal.service.persistence.ResourcePersistence;
 import com.liferay.portal.service.persistence.UserFinder;
 import com.liferay.portal.service.persistence.UserPersistence;
 
+import com.liferay.portlet.bookmarks.model.BookmarksFolder;
 import com.liferay.portlet.bookmarks.service.BookmarksEntryLocalService;
 import com.liferay.portlet.bookmarks.service.BookmarksEntryService;
 import com.liferay.portlet.bookmarks.service.BookmarksFolderLocalService;
@@ -508,6 +509,14 @@ public abstract class BookmarksFolderServiceBaseImpl extends PrincipalBean
 	 */
 	public void setBeanIdentifier(String beanIdentifier) {
 		_beanIdentifier = beanIdentifier;
+	}
+
+	protected Class<?> getModelClass() {
+		return BookmarksFolder.class;
+	}
+
+	protected String getModelClassName() {
+		return BookmarksFolder.class.getName();
 	}
 
 	/**

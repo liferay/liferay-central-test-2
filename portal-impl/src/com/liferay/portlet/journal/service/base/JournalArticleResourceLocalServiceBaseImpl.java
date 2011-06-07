@@ -23,6 +23,11 @@ import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.service.ResourceLocalService;
 import com.liferay.portal.service.ResourceService;
@@ -93,8 +98,23 @@ public abstract class JournalArticleResourceLocalServiceBaseImpl
 		throws SystemException {
 		journalArticleResource.setNew(true);
 
-		return journalArticleResourcePersistence.update(journalArticleResource,
-			false);
+		journalArticleResource = journalArticleResourcePersistence.update(journalArticleResource,
+				false);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(journalArticleResource);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return journalArticleResource;
 	}
 
 	/**
@@ -117,7 +137,20 @@ public abstract class JournalArticleResourceLocalServiceBaseImpl
 	 */
 	public void deleteJournalArticleResource(long resourcePrimKey)
 		throws PortalException, SystemException {
-		journalArticleResourcePersistence.remove(resourcePrimKey);
+		JournalArticleResource journalArticleResource = journalArticleResourcePersistence.remove(resourcePrimKey);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(journalArticleResource);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -130,6 +163,19 @@ public abstract class JournalArticleResourceLocalServiceBaseImpl
 		JournalArticleResource journalArticleResource)
 		throws SystemException {
 		journalArticleResourcePersistence.remove(journalArticleResource);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(journalArticleResource);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -262,10 +308,7 @@ public abstract class JournalArticleResourceLocalServiceBaseImpl
 	public JournalArticleResource updateJournalArticleResource(
 		JournalArticleResource journalArticleResource)
 		throws SystemException {
-		journalArticleResource.setNew(false);
-
-		return journalArticleResourcePersistence.update(journalArticleResource,
-			true);
+		return updateJournalArticleResource(journalArticleResource, true);
 	}
 
 	/**
@@ -281,8 +324,23 @@ public abstract class JournalArticleResourceLocalServiceBaseImpl
 		throws SystemException {
 		journalArticleResource.setNew(false);
 
-		return journalArticleResourcePersistence.update(journalArticleResource,
-			merge);
+		journalArticleResource = journalArticleResourcePersistence.update(journalArticleResource,
+				merge);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(journalArticleResource);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return journalArticleResource;
 	}
 
 	/**
@@ -882,6 +940,14 @@ public abstract class JournalArticleResourceLocalServiceBaseImpl
 		_beanIdentifier = beanIdentifier;
 	}
 
+	protected Class<?> getModelClass() {
+		return JournalArticleResource.class;
+	}
+
+	protected String getModelClassName() {
+		return JournalArticleResource.class.getName();
+	}
+
 	/**
 	 * Performs an SQL query.
 	 *
@@ -963,5 +1029,6 @@ public abstract class JournalArticleResourceLocalServiceBaseImpl
 	protected UserPersistence userPersistence;
 	@BeanReference(type = UserFinder.class)
 	protected UserFinder userFinder;
+	private static Log _log = LogFactoryUtil.getLog(JournalArticleResourceLocalServiceBaseImpl.class);
 	private String _beanIdentifier;
 }

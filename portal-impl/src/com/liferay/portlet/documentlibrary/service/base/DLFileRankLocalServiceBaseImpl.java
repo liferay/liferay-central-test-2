@@ -23,6 +23,11 @@ import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.service.LayoutLocalService;
 import com.liferay.portal.service.LayoutService;
@@ -98,7 +103,22 @@ public abstract class DLFileRankLocalServiceBaseImpl
 		throws SystemException {
 		dlFileRank.setNew(true);
 
-		return dlFileRankPersistence.update(dlFileRank, false);
+		dlFileRank = dlFileRankPersistence.update(dlFileRank, false);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(dlFileRank);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return dlFileRank;
 	}
 
 	/**
@@ -120,7 +140,20 @@ public abstract class DLFileRankLocalServiceBaseImpl
 	 */
 	public void deleteDLFileRank(long fileRankId)
 		throws PortalException, SystemException {
-		dlFileRankPersistence.remove(fileRankId);
+		DLFileRank dlFileRank = dlFileRankPersistence.remove(fileRankId);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(dlFileRank);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -132,6 +165,19 @@ public abstract class DLFileRankLocalServiceBaseImpl
 	public void deleteDLFileRank(DLFileRank dlFileRank)
 		throws SystemException {
 		dlFileRankPersistence.remove(dlFileRank);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(dlFileRank);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -249,9 +295,7 @@ public abstract class DLFileRankLocalServiceBaseImpl
 	 */
 	public DLFileRank updateDLFileRank(DLFileRank dlFileRank)
 		throws SystemException {
-		dlFileRank.setNew(false);
-
-		return dlFileRankPersistence.update(dlFileRank, true);
+		return updateDLFileRank(dlFileRank, true);
 	}
 
 	/**
@@ -266,7 +310,22 @@ public abstract class DLFileRankLocalServiceBaseImpl
 		throws SystemException {
 		dlFileRank.setNew(false);
 
-		return dlFileRankPersistence.update(dlFileRank, merge);
+		dlFileRank = dlFileRankPersistence.update(dlFileRank, merge);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(dlFileRank);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return dlFileRank;
 	}
 
 	/**
@@ -970,6 +1029,14 @@ public abstract class DLFileRankLocalServiceBaseImpl
 		_beanIdentifier = beanIdentifier;
 	}
 
+	protected Class<?> getModelClass() {
+		return DLFileRank.class;
+	}
+
+	protected String getModelClassName() {
+		return DLFileRank.class.getName();
+	}
+
 	/**
 	 * Performs an SQL query.
 	 *
@@ -1063,5 +1130,6 @@ public abstract class DLFileRankLocalServiceBaseImpl
 	protected UserPersistence userPersistence;
 	@BeanReference(type = UserFinder.class)
 	protected UserFinder userFinder;
+	private static Log _log = LogFactoryUtil.getLog(DLFileRankLocalServiceBaseImpl.class);
 	private String _beanIdentifier;
 }

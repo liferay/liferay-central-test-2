@@ -23,6 +23,11 @@ import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.model.UserTracker;
 import com.liferay.portal.service.AccountLocalService;
@@ -231,7 +236,22 @@ public abstract class UserTrackerLocalServiceBaseImpl
 		throws SystemException {
 		userTracker.setNew(true);
 
-		return userTrackerPersistence.update(userTracker, false);
+		userTracker = userTrackerPersistence.update(userTracker, false);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(userTracker);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return userTracker;
 	}
 
 	/**
@@ -253,7 +273,20 @@ public abstract class UserTrackerLocalServiceBaseImpl
 	 */
 	public void deleteUserTracker(long userTrackerId)
 		throws PortalException, SystemException {
-		userTrackerPersistence.remove(userTrackerId);
+		UserTracker userTracker = userTrackerPersistence.remove(userTrackerId);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(userTracker);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -265,6 +298,19 @@ public abstract class UserTrackerLocalServiceBaseImpl
 	public void deleteUserTracker(UserTracker userTracker)
 		throws SystemException {
 		userTrackerPersistence.remove(userTracker);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(userTracker);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -382,9 +428,7 @@ public abstract class UserTrackerLocalServiceBaseImpl
 	 */
 	public UserTracker updateUserTracker(UserTracker userTracker)
 		throws SystemException {
-		userTracker.setNew(false);
-
-		return userTrackerPersistence.update(userTracker, true);
+		return updateUserTracker(userTracker, true);
 	}
 
 	/**
@@ -399,7 +443,22 @@ public abstract class UserTrackerLocalServiceBaseImpl
 		throws SystemException {
 		userTracker.setNew(false);
 
-		return userTrackerPersistence.update(userTracker, merge);
+		userTracker = userTrackerPersistence.update(userTracker, merge);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(userTracker);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return userTracker;
 	}
 
 	/**
@@ -3589,6 +3648,14 @@ public abstract class UserTrackerLocalServiceBaseImpl
 		_beanIdentifier = beanIdentifier;
 	}
 
+	protected Class<?> getModelClass() {
+		return UserTracker.class;
+	}
+
+	protected String getModelClassName() {
+		return UserTracker.class.getName();
+	}
+
 	/**
 	 * Performs an SQL query.
 	 *
@@ -3950,5 +4017,6 @@ public abstract class UserTrackerLocalServiceBaseImpl
 	protected WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
 	@BeanReference(type = CounterLocalService.class)
 	protected CounterLocalService counterLocalService;
+	private static Log _log = LogFactoryUtil.getLog(UserTrackerLocalServiceBaseImpl.class);
 	private String _beanIdentifier;
 }

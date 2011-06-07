@@ -37,6 +37,7 @@ import com.liferay.portlet.asset.service.AssetEntryLocalService;
 import com.liferay.portlet.asset.service.AssetEntryService;
 import com.liferay.portlet.asset.service.persistence.AssetEntryFinder;
 import com.liferay.portlet.asset.service.persistence.AssetEntryPersistence;
+import com.liferay.portlet.dynamicdatalists.model.DDLRecord;
 import com.liferay.portlet.dynamicdatalists.service.DDLRecordLocalService;
 import com.liferay.portlet.dynamicdatalists.service.DDLRecordService;
 import com.liferay.portlet.dynamicdatalists.service.DDLRecordSetLocalService;
@@ -488,6 +489,14 @@ public abstract class DDLRecordServiceBaseImpl extends PrincipalBean
 	 */
 	public void setBeanIdentifier(String beanIdentifier) {
 		_beanIdentifier = beanIdentifier;
+	}
+
+	protected Class<?> getModelClass() {
+		return DDLRecord.class;
+	}
+
+	protected String getModelClassName() {
+		return DDLRecord.class.getName();
 	}
 
 	/**

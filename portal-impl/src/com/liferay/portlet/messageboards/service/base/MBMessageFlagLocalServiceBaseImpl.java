@@ -23,6 +23,11 @@ import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.service.ResourceLocalService;
 import com.liferay.portal.service.ResourceService;
@@ -94,7 +99,22 @@ public abstract class MBMessageFlagLocalServiceBaseImpl
 		throws SystemException {
 		mbMessageFlag.setNew(true);
 
-		return mbMessageFlagPersistence.update(mbMessageFlag, false);
+		mbMessageFlag = mbMessageFlagPersistence.update(mbMessageFlag, false);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(mbMessageFlag);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return mbMessageFlag;
 	}
 
 	/**
@@ -116,7 +136,20 @@ public abstract class MBMessageFlagLocalServiceBaseImpl
 	 */
 	public void deleteMBMessageFlag(long messageFlagId)
 		throws PortalException, SystemException {
-		mbMessageFlagPersistence.remove(messageFlagId);
+		MBMessageFlag mbMessageFlag = mbMessageFlagPersistence.remove(messageFlagId);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(mbMessageFlag);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -128,6 +161,19 @@ public abstract class MBMessageFlagLocalServiceBaseImpl
 	public void deleteMBMessageFlag(MBMessageFlag mbMessageFlag)
 		throws SystemException {
 		mbMessageFlagPersistence.remove(mbMessageFlag);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(mbMessageFlag);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -245,9 +291,7 @@ public abstract class MBMessageFlagLocalServiceBaseImpl
 	 */
 	public MBMessageFlag updateMBMessageFlag(MBMessageFlag mbMessageFlag)
 		throws SystemException {
-		mbMessageFlag.setNew(false);
-
-		return mbMessageFlagPersistence.update(mbMessageFlag, true);
+		return updateMBMessageFlag(mbMessageFlag, true);
 	}
 
 	/**
@@ -262,7 +306,22 @@ public abstract class MBMessageFlagLocalServiceBaseImpl
 		boolean merge) throws SystemException {
 		mbMessageFlag.setNew(false);
 
-		return mbMessageFlagPersistence.update(mbMessageFlag, merge);
+		mbMessageFlag = mbMessageFlagPersistence.update(mbMessageFlag, merge);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(mbMessageFlag);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return mbMessageFlag;
 	}
 
 	/**
@@ -892,6 +951,14 @@ public abstract class MBMessageFlagLocalServiceBaseImpl
 		_beanIdentifier = beanIdentifier;
 	}
 
+	protected Class<?> getModelClass() {
+		return MBMessageFlag.class;
+	}
+
+	protected String getModelClassName() {
+		return MBMessageFlag.class.getName();
+	}
+
 	/**
 	 * Performs an SQL query.
 	 *
@@ -977,5 +1044,6 @@ public abstract class MBMessageFlagLocalServiceBaseImpl
 	protected UserPersistence userPersistence;
 	@BeanReference(type = UserFinder.class)
 	protected UserFinder userFinder;
+	private static Log _log = LogFactoryUtil.getLog(MBMessageFlagLocalServiceBaseImpl.class);
 	private String _beanIdentifier;
 }

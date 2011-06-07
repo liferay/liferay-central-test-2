@@ -23,6 +23,11 @@ import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.model.Image;
 import com.liferay.portal.service.AccountLocalService;
@@ -235,7 +240,22 @@ public abstract class ImageLocalServiceBaseImpl implements ImageLocalService,
 	public Image addImage(Image image) throws SystemException {
 		image.setNew(true);
 
-		return imagePersistence.update(image, false);
+		image = imagePersistence.update(image, false);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(image);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return image;
 	}
 
 	/**
@@ -257,7 +277,20 @@ public abstract class ImageLocalServiceBaseImpl implements ImageLocalService,
 	 */
 	public void deleteImage(long imageId)
 		throws PortalException, SystemException {
-		imagePersistence.remove(imageId);
+		Image image = imagePersistence.remove(imageId);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(image);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -268,6 +301,19 @@ public abstract class ImageLocalServiceBaseImpl implements ImageLocalService,
 	 */
 	public void deleteImage(Image image) throws SystemException {
 		imagePersistence.remove(image);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(image);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -381,9 +427,7 @@ public abstract class ImageLocalServiceBaseImpl implements ImageLocalService,
 	 * @throws SystemException if a system exception occurred
 	 */
 	public Image updateImage(Image image) throws SystemException {
-		image.setNew(false);
-
-		return imagePersistence.update(image, true);
+		return updateImage(image, true);
 	}
 
 	/**
@@ -398,7 +442,22 @@ public abstract class ImageLocalServiceBaseImpl implements ImageLocalService,
 		throws SystemException {
 		image.setNew(false);
 
-		return imagePersistence.update(image, merge);
+		image = imagePersistence.update(image, merge);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(image);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return image;
 	}
 
 	/**
@@ -3660,6 +3719,14 @@ public abstract class ImageLocalServiceBaseImpl implements ImageLocalService,
 		_beanIdentifier = beanIdentifier;
 	}
 
+	protected Class<?> getModelClass() {
+		return Image.class;
+	}
+
+	protected String getModelClassName() {
+		return Image.class.getName();
+	}
+
 	/**
 	 * Performs an SQL query.
 	 *
@@ -4029,5 +4096,6 @@ public abstract class ImageLocalServiceBaseImpl implements ImageLocalService,
 	protected IGImagePersistence igImagePersistence;
 	@BeanReference(type = IGImageFinder.class)
 	protected IGImageFinder igImageFinder;
+	private static Log _log = LogFactoryUtil.getLog(ImageLocalServiceBaseImpl.class);
 	private String _beanIdentifier;
 }

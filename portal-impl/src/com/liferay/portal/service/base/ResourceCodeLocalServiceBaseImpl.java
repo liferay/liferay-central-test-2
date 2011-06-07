@@ -23,6 +23,11 @@ import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.model.ResourceCode;
 import com.liferay.portal.service.AccountLocalService;
@@ -231,7 +236,22 @@ public abstract class ResourceCodeLocalServiceBaseImpl
 		throws SystemException {
 		resourceCode.setNew(true);
 
-		return resourceCodePersistence.update(resourceCode, false);
+		resourceCode = resourceCodePersistence.update(resourceCode, false);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(resourceCode);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return resourceCode;
 	}
 
 	/**
@@ -253,7 +273,20 @@ public abstract class ResourceCodeLocalServiceBaseImpl
 	 */
 	public void deleteResourceCode(long codeId)
 		throws PortalException, SystemException {
-		resourceCodePersistence.remove(codeId);
+		ResourceCode resourceCode = resourceCodePersistence.remove(codeId);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(resourceCode);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -265,6 +298,19 @@ public abstract class ResourceCodeLocalServiceBaseImpl
 	public void deleteResourceCode(ResourceCode resourceCode)
 		throws SystemException {
 		resourceCodePersistence.remove(resourceCode);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(resourceCode);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -382,9 +428,7 @@ public abstract class ResourceCodeLocalServiceBaseImpl
 	 */
 	public ResourceCode updateResourceCode(ResourceCode resourceCode)
 		throws SystemException {
-		resourceCode.setNew(false);
-
-		return resourceCodePersistence.update(resourceCode, true);
+		return updateResourceCode(resourceCode, true);
 	}
 
 	/**
@@ -399,7 +443,22 @@ public abstract class ResourceCodeLocalServiceBaseImpl
 		boolean merge) throws SystemException {
 		resourceCode.setNew(false);
 
-		return resourceCodePersistence.update(resourceCode, merge);
+		resourceCode = resourceCodePersistence.update(resourceCode, merge);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(resourceCode);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return resourceCode;
 	}
 
 	/**
@@ -3589,6 +3648,14 @@ public abstract class ResourceCodeLocalServiceBaseImpl
 		_beanIdentifier = beanIdentifier;
 	}
 
+	protected Class<?> getModelClass() {
+		return ResourceCode.class;
+	}
+
+	protected String getModelClassName() {
+		return ResourceCode.class.getName();
+	}
+
 	/**
 	 * Performs an SQL query.
 	 *
@@ -3950,5 +4017,6 @@ public abstract class ResourceCodeLocalServiceBaseImpl
 	protected WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
 	@BeanReference(type = CounterLocalService.class)
 	protected CounterLocalService counterLocalService;
+	private static Log _log = LogFactoryUtil.getLog(ResourceCodeLocalServiceBaseImpl.class);
 	private String _beanIdentifier;
 }

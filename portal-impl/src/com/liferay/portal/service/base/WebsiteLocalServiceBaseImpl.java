@@ -23,6 +23,11 @@ import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.model.Website;
 import com.liferay.portal.service.AccountLocalService;
@@ -230,7 +235,22 @@ public abstract class WebsiteLocalServiceBaseImpl implements WebsiteLocalService
 	public Website addWebsite(Website website) throws SystemException {
 		website.setNew(true);
 
-		return websitePersistence.update(website, false);
+		website = websitePersistence.update(website, false);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(website);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return website;
 	}
 
 	/**
@@ -252,7 +272,20 @@ public abstract class WebsiteLocalServiceBaseImpl implements WebsiteLocalService
 	 */
 	public void deleteWebsite(long websiteId)
 		throws PortalException, SystemException {
-		websitePersistence.remove(websiteId);
+		Website website = websitePersistence.remove(websiteId);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(website);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -263,6 +296,19 @@ public abstract class WebsiteLocalServiceBaseImpl implements WebsiteLocalService
 	 */
 	public void deleteWebsite(Website website) throws SystemException {
 		websitePersistence.remove(website);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(website);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -378,9 +424,7 @@ public abstract class WebsiteLocalServiceBaseImpl implements WebsiteLocalService
 	 * @throws SystemException if a system exception occurred
 	 */
 	public Website updateWebsite(Website website) throws SystemException {
-		website.setNew(false);
-
-		return websitePersistence.update(website, true);
+		return updateWebsite(website, true);
 	}
 
 	/**
@@ -395,7 +439,22 @@ public abstract class WebsiteLocalServiceBaseImpl implements WebsiteLocalService
 		throws SystemException {
 		website.setNew(false);
 
-		return websitePersistence.update(website, merge);
+		website = websitePersistence.update(website, merge);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(website);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return website;
 	}
 
 	/**
@@ -3585,6 +3644,14 @@ public abstract class WebsiteLocalServiceBaseImpl implements WebsiteLocalService
 		_beanIdentifier = beanIdentifier;
 	}
 
+	protected Class<?> getModelClass() {
+		return Website.class;
+	}
+
+	protected String getModelClassName() {
+		return Website.class.getName();
+	}
+
 	/**
 	 * Performs an SQL query.
 	 *
@@ -3946,5 +4013,6 @@ public abstract class WebsiteLocalServiceBaseImpl implements WebsiteLocalService
 	protected WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
 	@BeanReference(type = CounterLocalService.class)
 	protected CounterLocalService counterLocalService;
+	private static Log _log = LogFactoryUtil.getLog(WebsiteLocalServiceBaseImpl.class);
 	private String _beanIdentifier;
 }

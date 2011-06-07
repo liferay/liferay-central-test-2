@@ -23,6 +23,11 @@ import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.model.Resource;
 import com.liferay.portal.service.AccountLocalService;
@@ -230,7 +235,22 @@ public abstract class ResourceLocalServiceBaseImpl
 	public Resource addResource(Resource resource) throws SystemException {
 		resource.setNew(true);
 
-		return resourcePersistence.update(resource, false);
+		resource = resourcePersistence.update(resource, false);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(resource);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return resource;
 	}
 
 	/**
@@ -252,7 +272,20 @@ public abstract class ResourceLocalServiceBaseImpl
 	 */
 	public void deleteResource(long resourceId)
 		throws PortalException, SystemException {
-		resourcePersistence.remove(resourceId);
+		Resource resource = resourcePersistence.remove(resourceId);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(resource);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -263,6 +296,19 @@ public abstract class ResourceLocalServiceBaseImpl
 	 */
 	public void deleteResource(Resource resource) throws SystemException {
 		resourcePersistence.remove(resource);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(resource);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -378,9 +424,7 @@ public abstract class ResourceLocalServiceBaseImpl
 	 * @throws SystemException if a system exception occurred
 	 */
 	public Resource updateResource(Resource resource) throws SystemException {
-		resource.setNew(false);
-
-		return resourcePersistence.update(resource, true);
+		return updateResource(resource, true);
 	}
 
 	/**
@@ -395,7 +439,22 @@ public abstract class ResourceLocalServiceBaseImpl
 		throws SystemException {
 		resource.setNew(false);
 
-		return resourcePersistence.update(resource, merge);
+		resource = resourcePersistence.update(resource, merge);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(resource);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return resource;
 	}
 
 	/**
@@ -3585,6 +3644,14 @@ public abstract class ResourceLocalServiceBaseImpl
 		_beanIdentifier = beanIdentifier;
 	}
 
+	protected Class<?> getModelClass() {
+		return Resource.class;
+	}
+
+	protected String getModelClassName() {
+		return Resource.class.getName();
+	}
+
 	/**
 	 * Performs an SQL query.
 	 *
@@ -3946,5 +4013,6 @@ public abstract class ResourceLocalServiceBaseImpl
 	protected WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
 	@BeanReference(type = CounterLocalService.class)
 	protected CounterLocalService counterLocalService;
+	private static Log _log = LogFactoryUtil.getLog(ResourceLocalServiceBaseImpl.class);
 	private String _beanIdentifier;
 }

@@ -23,6 +23,11 @@ import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.model.PasswordPolicyRel;
 import com.liferay.portal.service.AccountLocalService;
@@ -231,7 +236,23 @@ public abstract class PasswordPolicyRelLocalServiceBaseImpl
 		PasswordPolicyRel passwordPolicyRel) throws SystemException {
 		passwordPolicyRel.setNew(true);
 
-		return passwordPolicyRelPersistence.update(passwordPolicyRel, false);
+		passwordPolicyRel = passwordPolicyRelPersistence.update(passwordPolicyRel,
+				false);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(passwordPolicyRel);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return passwordPolicyRel;
 	}
 
 	/**
@@ -253,7 +274,20 @@ public abstract class PasswordPolicyRelLocalServiceBaseImpl
 	 */
 	public void deletePasswordPolicyRel(long passwordPolicyRelId)
 		throws PortalException, SystemException {
-		passwordPolicyRelPersistence.remove(passwordPolicyRelId);
+		PasswordPolicyRel passwordPolicyRel = passwordPolicyRelPersistence.remove(passwordPolicyRelId);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(passwordPolicyRel);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -265,6 +299,19 @@ public abstract class PasswordPolicyRelLocalServiceBaseImpl
 	public void deletePasswordPolicyRel(PasswordPolicyRel passwordPolicyRel)
 		throws SystemException {
 		passwordPolicyRelPersistence.remove(passwordPolicyRel);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(passwordPolicyRel);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -382,9 +429,7 @@ public abstract class PasswordPolicyRelLocalServiceBaseImpl
 	 */
 	public PasswordPolicyRel updatePasswordPolicyRel(
 		PasswordPolicyRel passwordPolicyRel) throws SystemException {
-		passwordPolicyRel.setNew(false);
-
-		return passwordPolicyRelPersistence.update(passwordPolicyRel, true);
+		return updatePasswordPolicyRel(passwordPolicyRel, true);
 	}
 
 	/**
@@ -400,7 +445,23 @@ public abstract class PasswordPolicyRelLocalServiceBaseImpl
 		throws SystemException {
 		passwordPolicyRel.setNew(false);
 
-		return passwordPolicyRelPersistence.update(passwordPolicyRel, merge);
+		passwordPolicyRel = passwordPolicyRelPersistence.update(passwordPolicyRel,
+				merge);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(passwordPolicyRel);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return passwordPolicyRel;
 	}
 
 	/**
@@ -3590,6 +3651,14 @@ public abstract class PasswordPolicyRelLocalServiceBaseImpl
 		_beanIdentifier = beanIdentifier;
 	}
 
+	protected Class<?> getModelClass() {
+		return PasswordPolicyRel.class;
+	}
+
+	protected String getModelClassName() {
+		return PasswordPolicyRel.class.getName();
+	}
+
 	/**
 	 * Performs an SQL query.
 	 *
@@ -3951,5 +4020,6 @@ public abstract class PasswordPolicyRelLocalServiceBaseImpl
 	protected WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
 	@BeanReference(type = CounterLocalService.class)
 	protected CounterLocalService counterLocalService;
+	private static Log _log = LogFactoryUtil.getLog(PasswordPolicyRelLocalServiceBaseImpl.class);
 	private String _beanIdentifier;
 }

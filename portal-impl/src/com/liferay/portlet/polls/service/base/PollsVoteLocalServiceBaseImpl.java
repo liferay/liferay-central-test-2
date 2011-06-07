@@ -23,6 +23,11 @@ import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.service.ResourceLocalService;
 import com.liferay.portal.service.ResourceService;
@@ -79,7 +84,22 @@ public abstract class PollsVoteLocalServiceBaseImpl
 		throws SystemException {
 		pollsVote.setNew(true);
 
-		return pollsVotePersistence.update(pollsVote, false);
+		pollsVote = pollsVotePersistence.update(pollsVote, false);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(pollsVote);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return pollsVote;
 	}
 
 	/**
@@ -101,7 +121,20 @@ public abstract class PollsVoteLocalServiceBaseImpl
 	 */
 	public void deletePollsVote(long voteId)
 		throws PortalException, SystemException {
-		pollsVotePersistence.remove(voteId);
+		PollsVote pollsVote = pollsVotePersistence.remove(voteId);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(pollsVote);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -112,6 +145,19 @@ public abstract class PollsVoteLocalServiceBaseImpl
 	 */
 	public void deletePollsVote(PollsVote pollsVote) throws SystemException {
 		pollsVotePersistence.remove(pollsVote);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(pollsVote);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -229,9 +275,7 @@ public abstract class PollsVoteLocalServiceBaseImpl
 	 */
 	public PollsVote updatePollsVote(PollsVote pollsVote)
 		throws SystemException {
-		pollsVote.setNew(false);
-
-		return pollsVotePersistence.update(pollsVote, true);
+		return updatePollsVote(pollsVote, true);
 	}
 
 	/**
@@ -246,7 +290,22 @@ public abstract class PollsVoteLocalServiceBaseImpl
 		throws SystemException {
 		pollsVote.setNew(false);
 
-		return pollsVotePersistence.update(pollsVote, merge);
+		pollsVote = pollsVotePersistence.update(pollsVote, merge);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(pollsVote);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return pollsVote;
 	}
 
 	/**
@@ -599,6 +658,14 @@ public abstract class PollsVoteLocalServiceBaseImpl
 		_beanIdentifier = beanIdentifier;
 	}
 
+	protected Class<?> getModelClass() {
+		return PollsVote.class;
+	}
+
+	protected String getModelClassName() {
+		return PollsVote.class.getName();
+	}
+
 	/**
 	 * Performs an SQL query.
 	 *
@@ -654,5 +721,6 @@ public abstract class PollsVoteLocalServiceBaseImpl
 	protected UserPersistence userPersistence;
 	@BeanReference(type = UserFinder.class)
 	protected UserFinder userFinder;
+	private static Log _log = LogFactoryUtil.getLog(PollsVoteLocalServiceBaseImpl.class);
 	private String _beanIdentifier;
 }

@@ -23,6 +23,11 @@ import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.model.PortletPreferences;
 import com.liferay.portal.service.AccountLocalService;
@@ -231,7 +236,23 @@ public abstract class PortletPreferencesLocalServiceBaseImpl
 		PortletPreferences portletPreferences) throws SystemException {
 		portletPreferences.setNew(true);
 
-		return portletPreferencesPersistence.update(portletPreferences, false);
+		portletPreferences = portletPreferencesPersistence.update(portletPreferences,
+				false);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(portletPreferences);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return portletPreferences;
 	}
 
 	/**
@@ -254,7 +275,20 @@ public abstract class PortletPreferencesLocalServiceBaseImpl
 	 */
 	public void deletePortletPreferences(long portletPreferencesId)
 		throws PortalException, SystemException {
-		portletPreferencesPersistence.remove(portletPreferencesId);
+		PortletPreferences portletPreferences = portletPreferencesPersistence.remove(portletPreferencesId);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(portletPreferences);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -266,6 +300,19 @@ public abstract class PortletPreferencesLocalServiceBaseImpl
 	public void deletePortletPreferences(PortletPreferences portletPreferences)
 		throws SystemException {
 		portletPreferencesPersistence.remove(portletPreferences);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(portletPreferences);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -383,9 +430,7 @@ public abstract class PortletPreferencesLocalServiceBaseImpl
 	 */
 	public PortletPreferences updatePortletPreferences(
 		PortletPreferences portletPreferences) throws SystemException {
-		portletPreferences.setNew(false);
-
-		return portletPreferencesPersistence.update(portletPreferences, true);
+		return updatePortletPreferences(portletPreferences, true);
 	}
 
 	/**
@@ -401,7 +446,23 @@ public abstract class PortletPreferencesLocalServiceBaseImpl
 		throws SystemException {
 		portletPreferences.setNew(false);
 
-		return portletPreferencesPersistence.update(portletPreferences, merge);
+		portletPreferences = portletPreferencesPersistence.update(portletPreferences,
+				merge);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(portletPreferences);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return portletPreferences;
 	}
 
 	/**
@@ -3591,6 +3652,14 @@ public abstract class PortletPreferencesLocalServiceBaseImpl
 		_beanIdentifier = beanIdentifier;
 	}
 
+	protected Class<?> getModelClass() {
+		return PortletPreferences.class;
+	}
+
+	protected String getModelClassName() {
+		return PortletPreferences.class.getName();
+	}
+
 	/**
 	 * Performs an SQL query.
 	 *
@@ -3952,5 +4021,6 @@ public abstract class PortletPreferencesLocalServiceBaseImpl
 	protected WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
 	@BeanReference(type = CounterLocalService.class)
 	protected CounterLocalService counterLocalService;
+	private static Log _log = LogFactoryUtil.getLog(PortletPreferencesLocalServiceBaseImpl.class);
 	private String _beanIdentifier;
 }

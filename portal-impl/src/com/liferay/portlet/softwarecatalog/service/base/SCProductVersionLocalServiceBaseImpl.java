@@ -23,6 +23,11 @@ import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.service.ResourceLocalService;
 import com.liferay.portal.service.ResourceService;
@@ -84,7 +89,23 @@ public abstract class SCProductVersionLocalServiceBaseImpl
 		SCProductVersion scProductVersion) throws SystemException {
 		scProductVersion.setNew(true);
 
-		return scProductVersionPersistence.update(scProductVersion, false);
+		scProductVersion = scProductVersionPersistence.update(scProductVersion,
+				false);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(scProductVersion);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return scProductVersion;
 	}
 
 	/**
@@ -106,7 +127,20 @@ public abstract class SCProductVersionLocalServiceBaseImpl
 	 */
 	public void deleteSCProductVersion(long productVersionId)
 		throws PortalException, SystemException {
-		scProductVersionPersistence.remove(productVersionId);
+		SCProductVersion scProductVersion = scProductVersionPersistence.remove(productVersionId);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(scProductVersion);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -118,6 +152,19 @@ public abstract class SCProductVersionLocalServiceBaseImpl
 	public void deleteSCProductVersion(SCProductVersion scProductVersion)
 		throws SystemException {
 		scProductVersionPersistence.remove(scProductVersion);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(scProductVersion);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -235,9 +282,7 @@ public abstract class SCProductVersionLocalServiceBaseImpl
 	 */
 	public SCProductVersion updateSCProductVersion(
 		SCProductVersion scProductVersion) throws SystemException {
-		scProductVersion.setNew(false);
-
-		return scProductVersionPersistence.update(scProductVersion, true);
+		return updateSCProductVersion(scProductVersion, true);
 	}
 
 	/**
@@ -253,7 +298,23 @@ public abstract class SCProductVersionLocalServiceBaseImpl
 		throws SystemException {
 		scProductVersion.setNew(false);
 
-		return scProductVersionPersistence.update(scProductVersion, merge);
+		scProductVersion = scProductVersionPersistence.update(scProductVersion,
+				merge);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(scProductVersion);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return scProductVersion;
 	}
 
 	/**
@@ -702,6 +763,14 @@ public abstract class SCProductVersionLocalServiceBaseImpl
 		_beanIdentifier = beanIdentifier;
 	}
 
+	protected Class<?> getModelClass() {
+		return SCProductVersion.class;
+	}
+
+	protected String getModelClassName() {
+		return SCProductVersion.class.getName();
+	}
+
 	/**
 	 * Performs an SQL query.
 	 *
@@ -767,5 +836,6 @@ public abstract class SCProductVersionLocalServiceBaseImpl
 	protected UserPersistence userPersistence;
 	@BeanReference(type = UserFinder.class)
 	protected UserFinder userFinder;
+	private static Log _log = LogFactoryUtil.getLog(SCProductVersionLocalServiceBaseImpl.class);
 	private String _beanIdentifier;
 }

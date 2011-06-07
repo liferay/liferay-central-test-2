@@ -23,6 +23,11 @@ import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.model.Permission;
 import com.liferay.portal.service.AccountLocalService;
@@ -231,7 +236,22 @@ public abstract class PermissionLocalServiceBaseImpl
 		throws SystemException {
 		permission.setNew(true);
 
-		return permissionPersistence.update(permission, false);
+		permission = permissionPersistence.update(permission, false);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(permission);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return permission;
 	}
 
 	/**
@@ -253,7 +273,20 @@ public abstract class PermissionLocalServiceBaseImpl
 	 */
 	public void deletePermission(long permissionId)
 		throws PortalException, SystemException {
-		permissionPersistence.remove(permissionId);
+		Permission permission = permissionPersistence.remove(permissionId);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(permission);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -265,6 +298,19 @@ public abstract class PermissionLocalServiceBaseImpl
 	public void deletePermission(Permission permission)
 		throws SystemException {
 		permissionPersistence.remove(permission);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(permission);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -382,9 +428,7 @@ public abstract class PermissionLocalServiceBaseImpl
 	 */
 	public Permission updatePermission(Permission permission)
 		throws SystemException {
-		permission.setNew(false);
-
-		return permissionPersistence.update(permission, true);
+		return updatePermission(permission, true);
 	}
 
 	/**
@@ -399,7 +443,22 @@ public abstract class PermissionLocalServiceBaseImpl
 		throws SystemException {
 		permission.setNew(false);
 
-		return permissionPersistence.update(permission, merge);
+		permission = permissionPersistence.update(permission, merge);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(permission);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return permission;
 	}
 
 	/**
@@ -3589,6 +3648,14 @@ public abstract class PermissionLocalServiceBaseImpl
 		_beanIdentifier = beanIdentifier;
 	}
 
+	protected Class<?> getModelClass() {
+		return Permission.class;
+	}
+
+	protected String getModelClassName() {
+		return Permission.class.getName();
+	}
+
 	/**
 	 * Performs an SQL query.
 	 *
@@ -3950,5 +4017,6 @@ public abstract class PermissionLocalServiceBaseImpl
 	protected WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
 	@BeanReference(type = CounterLocalService.class)
 	protected CounterLocalService counterLocalService;
+	private static Log _log = LogFactoryUtil.getLog(PermissionLocalServiceBaseImpl.class);
 	private String _beanIdentifier;
 }

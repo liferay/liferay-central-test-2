@@ -25,6 +25,11 @@ import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.service.CompanyLocalService;
 import com.liferay.portal.service.CompanyService;
@@ -121,7 +126,22 @@ public abstract class WikiPageLocalServiceBaseImpl
 	public WikiPage addWikiPage(WikiPage wikiPage) throws SystemException {
 		wikiPage.setNew(true);
 
-		return wikiPagePersistence.update(wikiPage, false);
+		wikiPage = wikiPagePersistence.update(wikiPage, false);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(wikiPage);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return wikiPage;
 	}
 
 	/**
@@ -143,7 +163,20 @@ public abstract class WikiPageLocalServiceBaseImpl
 	 */
 	public void deleteWikiPage(long pageId)
 		throws PortalException, SystemException {
-		wikiPagePersistence.remove(pageId);
+		WikiPage wikiPage = wikiPagePersistence.remove(pageId);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(wikiPage);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -154,6 +187,19 @@ public abstract class WikiPageLocalServiceBaseImpl
 	 */
 	public void deleteWikiPage(WikiPage wikiPage) throws SystemException {
 		wikiPagePersistence.remove(wikiPage);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(wikiPage);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -283,9 +329,7 @@ public abstract class WikiPageLocalServiceBaseImpl
 	 * @throws SystemException if a system exception occurred
 	 */
 	public WikiPage updateWikiPage(WikiPage wikiPage) throws SystemException {
-		wikiPage.setNew(false);
-
-		return wikiPagePersistence.update(wikiPage, true);
+		return updateWikiPage(wikiPage, true);
 	}
 
 	/**
@@ -300,7 +344,22 @@ public abstract class WikiPageLocalServiceBaseImpl
 		throws SystemException {
 		wikiPage.setNew(false);
 
-		return wikiPagePersistence.update(wikiPage, merge);
+		wikiPage = wikiPagePersistence.update(wikiPage, merge);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(wikiPage);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return wikiPage;
 	}
 
 	/**
@@ -1431,6 +1490,14 @@ public abstract class WikiPageLocalServiceBaseImpl
 		_beanIdentifier = beanIdentifier;
 	}
 
+	protected Class<?> getModelClass() {
+		return WikiPage.class;
+	}
+
+	protected String getModelClassName() {
+		return WikiPage.class.getName();
+	}
+
 	/**
 	 * Performs an SQL query.
 	 *
@@ -1570,5 +1637,6 @@ public abstract class WikiPageLocalServiceBaseImpl
 	protected SocialEquityLogLocalService socialEquityLogLocalService;
 	@BeanReference(type = SocialEquityLogPersistence.class)
 	protected SocialEquityLogPersistence socialEquityLogPersistence;
+	private static Log _log = LogFactoryUtil.getLog(WikiPageLocalServiceBaseImpl.class);
 	private String _beanIdentifier;
 }

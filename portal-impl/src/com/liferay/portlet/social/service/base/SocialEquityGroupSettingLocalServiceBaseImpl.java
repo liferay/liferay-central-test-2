@@ -23,6 +23,11 @@ import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.service.GroupLocalService;
 import com.liferay.portal.service.GroupService;
@@ -95,8 +100,23 @@ public abstract class SocialEquityGroupSettingLocalServiceBaseImpl
 		throws SystemException {
 		socialEquityGroupSetting.setNew(true);
 
-		return socialEquityGroupSettingPersistence.update(socialEquityGroupSetting,
-			false);
+		socialEquityGroupSetting = socialEquityGroupSettingPersistence.update(socialEquityGroupSetting,
+				false);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(socialEquityGroupSetting);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return socialEquityGroupSetting;
 	}
 
 	/**
@@ -119,7 +139,20 @@ public abstract class SocialEquityGroupSettingLocalServiceBaseImpl
 	 */
 	public void deleteSocialEquityGroupSetting(long equityGroupSettingId)
 		throws PortalException, SystemException {
-		socialEquityGroupSettingPersistence.remove(equityGroupSettingId);
+		SocialEquityGroupSetting socialEquityGroupSetting = socialEquityGroupSettingPersistence.remove(equityGroupSettingId);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(socialEquityGroupSetting);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -132,6 +165,19 @@ public abstract class SocialEquityGroupSettingLocalServiceBaseImpl
 		SocialEquityGroupSetting socialEquityGroupSetting)
 		throws SystemException {
 		socialEquityGroupSettingPersistence.remove(socialEquityGroupSetting);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(socialEquityGroupSetting);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -250,10 +296,7 @@ public abstract class SocialEquityGroupSettingLocalServiceBaseImpl
 	public SocialEquityGroupSetting updateSocialEquityGroupSetting(
 		SocialEquityGroupSetting socialEquityGroupSetting)
 		throws SystemException {
-		socialEquityGroupSetting.setNew(false);
-
-		return socialEquityGroupSettingPersistence.update(socialEquityGroupSetting,
-			true);
+		return updateSocialEquityGroupSetting(socialEquityGroupSetting, true);
 	}
 
 	/**
@@ -269,8 +312,23 @@ public abstract class SocialEquityGroupSettingLocalServiceBaseImpl
 		throws SystemException {
 		socialEquityGroupSetting.setNew(false);
 
-		return socialEquityGroupSettingPersistence.update(socialEquityGroupSetting,
-			merge);
+		socialEquityGroupSetting = socialEquityGroupSettingPersistence.update(socialEquityGroupSetting,
+				merge);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(socialEquityGroupSetting);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return socialEquityGroupSetting;
 	}
 
 	/**
@@ -906,6 +964,14 @@ public abstract class SocialEquityGroupSettingLocalServiceBaseImpl
 		_beanIdentifier = beanIdentifier;
 	}
 
+	protected Class<?> getModelClass() {
+		return SocialEquityGroupSetting.class;
+	}
+
+	protected String getModelClassName() {
+		return SocialEquityGroupSetting.class.getName();
+	}
+
 	/**
 	 * Performs an SQL query.
 	 *
@@ -991,5 +1057,6 @@ public abstract class SocialEquityGroupSettingLocalServiceBaseImpl
 	protected UserPersistence userPersistence;
 	@BeanReference(type = UserFinder.class)
 	protected UserFinder userFinder;
+	private static Log _log = LogFactoryUtil.getLog(SocialEquityGroupSettingLocalServiceBaseImpl.class);
 	private String _beanIdentifier;
 }

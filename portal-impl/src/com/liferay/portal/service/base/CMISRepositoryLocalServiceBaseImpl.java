@@ -3402,6 +3402,14 @@ public abstract class CMISRepositoryLocalServiceBaseImpl
 		_beanIdentifier = beanIdentifier;
 	}
 
+	protected Class<?> getModelClass() {
+		return CMISRepository.class;
+	}
+
+	protected String getModelClassName() {
+		return CMISRepository.class.getName();
+	}
+
 	/**
 	 * Performs an SQL query.
 	 *

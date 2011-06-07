@@ -23,6 +23,11 @@ import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.service.ResourceLocalService;
 import com.liferay.portal.service.ResourceService;
@@ -80,8 +85,23 @@ public abstract class AnnouncementsDeliveryLocalServiceBaseImpl
 		AnnouncementsDelivery announcementsDelivery) throws SystemException {
 		announcementsDelivery.setNew(true);
 
-		return announcementsDeliveryPersistence.update(announcementsDelivery,
-			false);
+		announcementsDelivery = announcementsDeliveryPersistence.update(announcementsDelivery,
+				false);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(announcementsDelivery);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return announcementsDelivery;
 	}
 
 	/**
@@ -103,7 +123,20 @@ public abstract class AnnouncementsDeliveryLocalServiceBaseImpl
 	 */
 	public void deleteAnnouncementsDelivery(long deliveryId)
 		throws PortalException, SystemException {
-		announcementsDeliveryPersistence.remove(deliveryId);
+		AnnouncementsDelivery announcementsDelivery = announcementsDeliveryPersistence.remove(deliveryId);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(announcementsDelivery);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -115,6 +148,19 @@ public abstract class AnnouncementsDeliveryLocalServiceBaseImpl
 	public void deleteAnnouncementsDelivery(
 		AnnouncementsDelivery announcementsDelivery) throws SystemException {
 		announcementsDeliveryPersistence.remove(announcementsDelivery);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(announcementsDelivery);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -232,10 +278,7 @@ public abstract class AnnouncementsDeliveryLocalServiceBaseImpl
 	 */
 	public AnnouncementsDelivery updateAnnouncementsDelivery(
 		AnnouncementsDelivery announcementsDelivery) throws SystemException {
-		announcementsDelivery.setNew(false);
-
-		return announcementsDeliveryPersistence.update(announcementsDelivery,
-			true);
+		return updateAnnouncementsDelivery(announcementsDelivery, true);
 	}
 
 	/**
@@ -251,8 +294,23 @@ public abstract class AnnouncementsDeliveryLocalServiceBaseImpl
 		throws SystemException {
 		announcementsDelivery.setNew(false);
 
-		return announcementsDeliveryPersistence.update(announcementsDelivery,
-			merge);
+		announcementsDelivery = announcementsDeliveryPersistence.update(announcementsDelivery,
+				merge);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(announcementsDelivery);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return announcementsDelivery;
 	}
 
 	/**
@@ -626,6 +684,14 @@ public abstract class AnnouncementsDeliveryLocalServiceBaseImpl
 		_beanIdentifier = beanIdentifier;
 	}
 
+	protected Class<?> getModelClass() {
+		return AnnouncementsDelivery.class;
+	}
+
+	protected String getModelClassName() {
+		return AnnouncementsDelivery.class.getName();
+	}
+
 	/**
 	 * Performs an SQL query.
 	 *
@@ -683,5 +749,6 @@ public abstract class AnnouncementsDeliveryLocalServiceBaseImpl
 	protected UserPersistence userPersistence;
 	@BeanReference(type = UserFinder.class)
 	protected UserFinder userFinder;
+	private static Log _log = LogFactoryUtil.getLog(AnnouncementsDeliveryLocalServiceBaseImpl.class);
 	private String _beanIdentifier;
 }

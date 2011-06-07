@@ -23,6 +23,11 @@ import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.model.Team;
 import com.liferay.portal.service.AccountLocalService;
@@ -230,7 +235,22 @@ public abstract class TeamLocalServiceBaseImpl implements TeamLocalService,
 	public Team addTeam(Team team) throws SystemException {
 		team.setNew(true);
 
-		return teamPersistence.update(team, false);
+		team = teamPersistence.update(team, false);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(team);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return team;
 	}
 
 	/**
@@ -251,7 +271,20 @@ public abstract class TeamLocalServiceBaseImpl implements TeamLocalService,
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void deleteTeam(long teamId) throws PortalException, SystemException {
-		teamPersistence.remove(teamId);
+		Team team = teamPersistence.remove(teamId);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(team);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -263,6 +296,19 @@ public abstract class TeamLocalServiceBaseImpl implements TeamLocalService,
 	 */
 	public void deleteTeam(Team team) throws PortalException, SystemException {
 		teamPersistence.remove(team);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(team);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -376,9 +422,7 @@ public abstract class TeamLocalServiceBaseImpl implements TeamLocalService,
 	 * @throws SystemException if a system exception occurred
 	 */
 	public Team updateTeam(Team team) throws SystemException {
-		team.setNew(false);
-
-		return teamPersistence.update(team, true);
+		return updateTeam(team, true);
 	}
 
 	/**
@@ -392,7 +436,22 @@ public abstract class TeamLocalServiceBaseImpl implements TeamLocalService,
 	public Team updateTeam(Team team, boolean merge) throws SystemException {
 		team.setNew(false);
 
-		return teamPersistence.update(team, merge);
+		team = teamPersistence.update(team, merge);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(team);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return team;
 	}
 
 	/**
@@ -3582,6 +3641,14 @@ public abstract class TeamLocalServiceBaseImpl implements TeamLocalService,
 		_beanIdentifier = beanIdentifier;
 	}
 
+	protected Class<?> getModelClass() {
+		return Team.class;
+	}
+
+	protected String getModelClassName() {
+		return Team.class.getName();
+	}
+
 	/**
 	 * Performs an SQL query.
 	 *
@@ -3943,5 +4010,6 @@ public abstract class TeamLocalServiceBaseImpl implements TeamLocalService,
 	protected WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
 	@BeanReference(type = CounterLocalService.class)
 	protected CounterLocalService counterLocalService;
+	private static Log _log = LogFactoryUtil.getLog(TeamLocalServiceBaseImpl.class);
 	private String _beanIdentifier;
 }

@@ -23,6 +23,11 @@ import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.service.ResourceLocalService;
 import com.liferay.portal.service.ResourceService;
@@ -94,7 +99,22 @@ public abstract class MBMailingListLocalServiceBaseImpl
 		throws SystemException {
 		mbMailingList.setNew(true);
 
-		return mbMailingListPersistence.update(mbMailingList, false);
+		mbMailingList = mbMailingListPersistence.update(mbMailingList, false);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(mbMailingList);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return mbMailingList;
 	}
 
 	/**
@@ -116,7 +136,20 @@ public abstract class MBMailingListLocalServiceBaseImpl
 	 */
 	public void deleteMBMailingList(long mailingListId)
 		throws PortalException, SystemException {
-		mbMailingListPersistence.remove(mailingListId);
+		MBMailingList mbMailingList = mbMailingListPersistence.remove(mailingListId);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(mbMailingList);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -128,6 +161,19 @@ public abstract class MBMailingListLocalServiceBaseImpl
 	public void deleteMBMailingList(MBMailingList mbMailingList)
 		throws SystemException {
 		mbMailingListPersistence.remove(mbMailingList);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(mbMailingList);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -259,9 +305,7 @@ public abstract class MBMailingListLocalServiceBaseImpl
 	 */
 	public MBMailingList updateMBMailingList(MBMailingList mbMailingList)
 		throws SystemException {
-		mbMailingList.setNew(false);
-
-		return mbMailingListPersistence.update(mbMailingList, true);
+		return updateMBMailingList(mbMailingList, true);
 	}
 
 	/**
@@ -276,7 +320,22 @@ public abstract class MBMailingListLocalServiceBaseImpl
 		boolean merge) throws SystemException {
 		mbMailingList.setNew(false);
 
-		return mbMailingListPersistence.update(mbMailingList, merge);
+		mbMailingList = mbMailingListPersistence.update(mbMailingList, merge);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(mbMailingList);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return mbMailingList;
 	}
 
 	/**
@@ -906,6 +965,14 @@ public abstract class MBMailingListLocalServiceBaseImpl
 		_beanIdentifier = beanIdentifier;
 	}
 
+	protected Class<?> getModelClass() {
+		return MBMailingList.class;
+	}
+
+	protected String getModelClassName() {
+		return MBMailingList.class.getName();
+	}
+
 	/**
 	 * Performs an SQL query.
 	 *
@@ -991,5 +1058,6 @@ public abstract class MBMailingListLocalServiceBaseImpl
 	protected UserPersistence userPersistence;
 	@BeanReference(type = UserFinder.class)
 	protected UserFinder userFinder;
+	private static Log _log = LogFactoryUtil.getLog(MBMailingListLocalServiceBaseImpl.class);
 	private String _beanIdentifier;
 }

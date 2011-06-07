@@ -23,6 +23,11 @@ import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.service.GroupLocalService;
 import com.liferay.portal.service.GroupService;
@@ -107,7 +112,22 @@ public abstract class MBCategoryLocalServiceBaseImpl
 		throws SystemException {
 		mbCategory.setNew(true);
 
-		return mbCategoryPersistence.update(mbCategory, false);
+		mbCategory = mbCategoryPersistence.update(mbCategory, false);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(mbCategory);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return mbCategory;
 	}
 
 	/**
@@ -129,7 +149,20 @@ public abstract class MBCategoryLocalServiceBaseImpl
 	 */
 	public void deleteMBCategory(long categoryId)
 		throws PortalException, SystemException {
-		mbCategoryPersistence.remove(categoryId);
+		MBCategory mbCategory = mbCategoryPersistence.remove(categoryId);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(mbCategory);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -141,6 +174,19 @@ public abstract class MBCategoryLocalServiceBaseImpl
 	public void deleteMBCategory(MBCategory mbCategory)
 		throws SystemException {
 		mbCategoryPersistence.remove(mbCategory);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(mbCategory);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -272,9 +318,7 @@ public abstract class MBCategoryLocalServiceBaseImpl
 	 */
 	public MBCategory updateMBCategory(MBCategory mbCategory)
 		throws SystemException {
-		mbCategory.setNew(false);
-
-		return mbCategoryPersistence.update(mbCategory, true);
+		return updateMBCategory(mbCategory, true);
 	}
 
 	/**
@@ -289,7 +333,22 @@ public abstract class MBCategoryLocalServiceBaseImpl
 		throws SystemException {
 		mbCategory.setNew(false);
 
-		return mbCategoryPersistence.update(mbCategory, merge);
+		mbCategory = mbCategoryPersistence.update(mbCategory, merge);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(mbCategory);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return mbCategory;
 	}
 
 	/**
@@ -1158,6 +1217,14 @@ public abstract class MBCategoryLocalServiceBaseImpl
 		_beanIdentifier = beanIdentifier;
 	}
 
+	protected Class<?> getModelClass() {
+		return MBCategory.class;
+	}
+
+	protected String getModelClassName() {
+		return MBCategory.class.getName();
+	}
+
 	/**
 	 * Performs an SQL query.
 	 *
@@ -1269,5 +1336,6 @@ public abstract class MBCategoryLocalServiceBaseImpl
 	protected ExpandoValueService expandoValueService;
 	@BeanReference(type = ExpandoValuePersistence.class)
 	protected ExpandoValuePersistence expandoValuePersistence;
+	private static Log _log = LogFactoryUtil.getLog(MBCategoryLocalServiceBaseImpl.class);
 	private String _beanIdentifier;
 }

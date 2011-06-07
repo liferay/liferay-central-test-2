@@ -23,6 +23,11 @@ import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.model.PasswordTracker;
 import com.liferay.portal.service.AccountLocalService;
@@ -231,7 +236,23 @@ public abstract class PasswordTrackerLocalServiceBaseImpl
 		throws SystemException {
 		passwordTracker.setNew(true);
 
-		return passwordTrackerPersistence.update(passwordTracker, false);
+		passwordTracker = passwordTrackerPersistence.update(passwordTracker,
+				false);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(passwordTracker);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return passwordTracker;
 	}
 
 	/**
@@ -253,7 +274,20 @@ public abstract class PasswordTrackerLocalServiceBaseImpl
 	 */
 	public void deletePasswordTracker(long passwordTrackerId)
 		throws PortalException, SystemException {
-		passwordTrackerPersistence.remove(passwordTrackerId);
+		PasswordTracker passwordTracker = passwordTrackerPersistence.remove(passwordTrackerId);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(passwordTracker);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -265,6 +299,19 @@ public abstract class PasswordTrackerLocalServiceBaseImpl
 	public void deletePasswordTracker(PasswordTracker passwordTracker)
 		throws SystemException {
 		passwordTrackerPersistence.remove(passwordTracker);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(passwordTracker);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -382,9 +429,7 @@ public abstract class PasswordTrackerLocalServiceBaseImpl
 	 */
 	public PasswordTracker updatePasswordTracker(
 		PasswordTracker passwordTracker) throws SystemException {
-		passwordTracker.setNew(false);
-
-		return passwordTrackerPersistence.update(passwordTracker, true);
+		return updatePasswordTracker(passwordTracker, true);
 	}
 
 	/**
@@ -400,7 +445,23 @@ public abstract class PasswordTrackerLocalServiceBaseImpl
 		throws SystemException {
 		passwordTracker.setNew(false);
 
-		return passwordTrackerPersistence.update(passwordTracker, merge);
+		passwordTracker = passwordTrackerPersistence.update(passwordTracker,
+				merge);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(passwordTracker);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return passwordTracker;
 	}
 
 	/**
@@ -3590,6 +3651,14 @@ public abstract class PasswordTrackerLocalServiceBaseImpl
 		_beanIdentifier = beanIdentifier;
 	}
 
+	protected Class<?> getModelClass() {
+		return PasswordTracker.class;
+	}
+
+	protected String getModelClassName() {
+		return PasswordTracker.class.getName();
+	}
+
 	/**
 	 * Performs an SQL query.
 	 *
@@ -3951,5 +4020,6 @@ public abstract class PasswordTrackerLocalServiceBaseImpl
 	protected WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
 	@BeanReference(type = CounterLocalService.class)
 	protected CounterLocalService counterLocalService;
+	private static Log _log = LogFactoryUtil.getLog(PasswordTrackerLocalServiceBaseImpl.class);
 	private String _beanIdentifier;
 }

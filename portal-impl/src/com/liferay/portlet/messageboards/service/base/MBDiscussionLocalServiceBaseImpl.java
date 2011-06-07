@@ -23,6 +23,11 @@ import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.service.ResourceLocalService;
 import com.liferay.portal.service.ResourceService;
@@ -94,7 +99,22 @@ public abstract class MBDiscussionLocalServiceBaseImpl
 		throws SystemException {
 		mbDiscussion.setNew(true);
 
-		return mbDiscussionPersistence.update(mbDiscussion, false);
+		mbDiscussion = mbDiscussionPersistence.update(mbDiscussion, false);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(mbDiscussion);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return mbDiscussion;
 	}
 
 	/**
@@ -116,7 +136,20 @@ public abstract class MBDiscussionLocalServiceBaseImpl
 	 */
 	public void deleteMBDiscussion(long discussionId)
 		throws PortalException, SystemException {
-		mbDiscussionPersistence.remove(discussionId);
+		MBDiscussion mbDiscussion = mbDiscussionPersistence.remove(discussionId);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(mbDiscussion);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -128,6 +161,19 @@ public abstract class MBDiscussionLocalServiceBaseImpl
 	public void deleteMBDiscussion(MBDiscussion mbDiscussion)
 		throws SystemException {
 		mbDiscussionPersistence.remove(mbDiscussion);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(mbDiscussion);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -245,9 +291,7 @@ public abstract class MBDiscussionLocalServiceBaseImpl
 	 */
 	public MBDiscussion updateMBDiscussion(MBDiscussion mbDiscussion)
 		throws SystemException {
-		mbDiscussion.setNew(false);
-
-		return mbDiscussionPersistence.update(mbDiscussion, true);
+		return updateMBDiscussion(mbDiscussion, true);
 	}
 
 	/**
@@ -262,7 +306,22 @@ public abstract class MBDiscussionLocalServiceBaseImpl
 		boolean merge) throws SystemException {
 		mbDiscussion.setNew(false);
 
-		return mbDiscussionPersistence.update(mbDiscussion, merge);
+		mbDiscussion = mbDiscussionPersistence.update(mbDiscussion, merge);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(mbDiscussion);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return mbDiscussion;
 	}
 
 	/**
@@ -892,6 +951,14 @@ public abstract class MBDiscussionLocalServiceBaseImpl
 		_beanIdentifier = beanIdentifier;
 	}
 
+	protected Class<?> getModelClass() {
+		return MBDiscussion.class;
+	}
+
+	protected String getModelClassName() {
+		return MBDiscussion.class.getName();
+	}
+
 	/**
 	 * Performs an SQL query.
 	 *
@@ -977,5 +1044,6 @@ public abstract class MBDiscussionLocalServiceBaseImpl
 	protected UserPersistence userPersistence;
 	@BeanReference(type = UserFinder.class)
 	protected UserFinder userFinder;
+	private static Log _log = LogFactoryUtil.getLog(MBDiscussionLocalServiceBaseImpl.class);
 	private String _beanIdentifier;
 }

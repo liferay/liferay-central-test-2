@@ -25,6 +25,11 @@ import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.AccountLocalService;
@@ -268,7 +273,22 @@ public abstract class UserLocalServiceBaseImpl implements UserLocalService,
 	public User addUser(User user) throws SystemException {
 		user.setNew(true);
 
-		return userPersistence.update(user, false);
+		user = userPersistence.update(user, false);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(user);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return user;
 	}
 
 	/**
@@ -289,7 +309,20 @@ public abstract class UserLocalServiceBaseImpl implements UserLocalService,
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void deleteUser(long userId) throws PortalException, SystemException {
-		userPersistence.remove(userId);
+		User user = userPersistence.remove(userId);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(user);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -301,6 +334,19 @@ public abstract class UserLocalServiceBaseImpl implements UserLocalService,
 	 */
 	public void deleteUser(User user) throws PortalException, SystemException {
 		userPersistence.remove(user);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(user);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -414,9 +460,7 @@ public abstract class UserLocalServiceBaseImpl implements UserLocalService,
 	 * @throws SystemException if a system exception occurred
 	 */
 	public User updateUser(User user) throws SystemException {
-		user.setNew(false);
-
-		return userPersistence.update(user, true);
+		return updateUser(user, true);
 	}
 
 	/**
@@ -430,7 +474,22 @@ public abstract class UserLocalServiceBaseImpl implements UserLocalService,
 	public User updateUser(User user, boolean merge) throws SystemException {
 		user.setNew(false);
 
-		return userPersistence.update(user, merge);
+		user = userPersistence.update(user, merge);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(user);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return user;
 	}
 
 	/**
@@ -4294,6 +4353,14 @@ public abstract class UserLocalServiceBaseImpl implements UserLocalService,
 		_beanIdentifier = beanIdentifier;
 	}
 
+	protected Class<?> getModelClass() {
+		return User.class;
+	}
+
+	protected String getModelClassName() {
+		return User.class.getName();
+	}
+
 	/**
 	 * Performs an SQL query.
 	 *
@@ -4727,5 +4794,6 @@ public abstract class UserLocalServiceBaseImpl implements UserLocalService,
 	protected SocialRequestLocalService socialRequestLocalService;
 	@BeanReference(type = SocialRequestPersistence.class)
 	protected SocialRequestPersistence socialRequestPersistence;
+	private static Log _log = LogFactoryUtil.getLog(UserLocalServiceBaseImpl.class);
 	private String _beanIdentifier;
 }

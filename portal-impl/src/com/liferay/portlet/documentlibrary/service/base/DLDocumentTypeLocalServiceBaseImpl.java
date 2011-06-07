@@ -23,6 +23,11 @@ import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.service.ResourceLocalService;
 import com.liferay.portal.service.ResourceService;
@@ -98,7 +103,22 @@ public abstract class DLDocumentTypeLocalServiceBaseImpl
 		throws SystemException {
 		dlDocumentType.setNew(true);
 
-		return dlDocumentTypePersistence.update(dlDocumentType, false);
+		dlDocumentType = dlDocumentTypePersistence.update(dlDocumentType, false);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(dlDocumentType);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return dlDocumentType;
 	}
 
 	/**
@@ -120,7 +140,20 @@ public abstract class DLDocumentTypeLocalServiceBaseImpl
 	 */
 	public void deleteDLDocumentType(long documentTypeId)
 		throws PortalException, SystemException {
-		dlDocumentTypePersistence.remove(documentTypeId);
+		DLDocumentType dlDocumentType = dlDocumentTypePersistence.remove(documentTypeId);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(dlDocumentType);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -132,6 +165,19 @@ public abstract class DLDocumentTypeLocalServiceBaseImpl
 	public void deleteDLDocumentType(DLDocumentType dlDocumentType)
 		throws SystemException {
 		dlDocumentTypePersistence.remove(dlDocumentType);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(dlDocumentType);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -249,9 +295,7 @@ public abstract class DLDocumentTypeLocalServiceBaseImpl
 	 */
 	public DLDocumentType updateDLDocumentType(DLDocumentType dlDocumentType)
 		throws SystemException {
-		dlDocumentType.setNew(false);
-
-		return dlDocumentTypePersistence.update(dlDocumentType, true);
+		return updateDLDocumentType(dlDocumentType, true);
 	}
 
 	/**
@@ -266,7 +310,22 @@ public abstract class DLDocumentTypeLocalServiceBaseImpl
 		boolean merge) throws SystemException {
 		dlDocumentType.setNew(false);
 
-		return dlDocumentTypePersistence.update(dlDocumentType, merge);
+		dlDocumentType = dlDocumentTypePersistence.update(dlDocumentType, merge);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(dlDocumentType);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return dlDocumentType;
 	}
 
 	/**
@@ -972,6 +1031,14 @@ public abstract class DLDocumentTypeLocalServiceBaseImpl
 		_beanIdentifier = beanIdentifier;
 	}
 
+	protected Class<?> getModelClass() {
+		return DLDocumentType.class;
+	}
+
+	protected String getModelClassName() {
+		return DLDocumentType.class.getName();
+	}
+
 	/**
 	 * Performs an SQL query.
 	 *
@@ -1065,5 +1132,6 @@ public abstract class DLDocumentTypeLocalServiceBaseImpl
 	protected DDMStructurePersistence ddmStructurePersistence;
 	@BeanReference(type = DDMStructureFinder.class)
 	protected DDMStructureFinder ddmStructureFinder;
+	private static Log _log = LogFactoryUtil.getLog(DLDocumentTypeLocalServiceBaseImpl.class);
 	private String _beanIdentifier;
 }

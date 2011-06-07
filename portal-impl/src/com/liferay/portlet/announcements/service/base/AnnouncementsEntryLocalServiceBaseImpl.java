@@ -25,6 +25,11 @@ import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.service.CompanyLocalService;
 import com.liferay.portal.service.CompanyService;
@@ -101,7 +106,23 @@ public abstract class AnnouncementsEntryLocalServiceBaseImpl
 		AnnouncementsEntry announcementsEntry) throws SystemException {
 		announcementsEntry.setNew(true);
 
-		return announcementsEntryPersistence.update(announcementsEntry, false);
+		announcementsEntry = announcementsEntryPersistence.update(announcementsEntry,
+				false);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(announcementsEntry);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return announcementsEntry;
 	}
 
 	/**
@@ -123,7 +144,20 @@ public abstract class AnnouncementsEntryLocalServiceBaseImpl
 	 */
 	public void deleteAnnouncementsEntry(long entryId)
 		throws PortalException, SystemException {
-		announcementsEntryPersistence.remove(entryId);
+		AnnouncementsEntry announcementsEntry = announcementsEntryPersistence.remove(entryId);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(announcementsEntry);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -135,6 +169,19 @@ public abstract class AnnouncementsEntryLocalServiceBaseImpl
 	public void deleteAnnouncementsEntry(AnnouncementsEntry announcementsEntry)
 		throws SystemException {
 		announcementsEntryPersistence.remove(announcementsEntry);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(announcementsEntry);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -252,9 +299,7 @@ public abstract class AnnouncementsEntryLocalServiceBaseImpl
 	 */
 	public AnnouncementsEntry updateAnnouncementsEntry(
 		AnnouncementsEntry announcementsEntry) throws SystemException {
-		announcementsEntry.setNew(false);
-
-		return announcementsEntryPersistence.update(announcementsEntry, true);
+		return updateAnnouncementsEntry(announcementsEntry, true);
 	}
 
 	/**
@@ -270,7 +315,23 @@ public abstract class AnnouncementsEntryLocalServiceBaseImpl
 		throws SystemException {
 		announcementsEntry.setNew(false);
 
-		return announcementsEntryPersistence.update(announcementsEntry, merge);
+		announcementsEntry = announcementsEntryPersistence.update(announcementsEntry,
+				merge);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(announcementsEntry);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return announcementsEntry;
 	}
 
 	/**
@@ -1008,6 +1069,14 @@ public abstract class AnnouncementsEntryLocalServiceBaseImpl
 		_beanIdentifier = beanIdentifier;
 	}
 
+	protected Class<?> getModelClass() {
+		return AnnouncementsEntry.class;
+	}
+
+	protected String getModelClassName() {
+		return AnnouncementsEntry.class.getName();
+	}
+
 	/**
 	 * Performs an SQL query.
 	 *
@@ -1105,5 +1174,6 @@ public abstract class AnnouncementsEntryLocalServiceBaseImpl
 	protected UserGroupPersistence userGroupPersistence;
 	@BeanReference(type = UserGroupFinder.class)
 	protected UserGroupFinder userGroupFinder;
+	private static Log _log = LogFactoryUtil.getLog(AnnouncementsEntryLocalServiceBaseImpl.class);
 	private String _beanIdentifier;
 }

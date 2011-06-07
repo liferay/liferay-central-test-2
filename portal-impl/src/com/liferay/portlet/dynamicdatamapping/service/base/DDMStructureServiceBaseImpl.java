@@ -35,6 +35,7 @@ import com.liferay.portlet.documentlibrary.service.DLDocumentTypeLocalService;
 import com.liferay.portlet.documentlibrary.service.DLDocumentTypeService;
 import com.liferay.portlet.documentlibrary.service.persistence.DLDocumentTypeFinder;
 import com.liferay.portlet.documentlibrary.service.persistence.DLDocumentTypePersistence;
+import com.liferay.portlet.dynamicdatamapping.model.DDMStructure;
 import com.liferay.portlet.dynamicdatamapping.service.DDMContentLocalService;
 import com.liferay.portlet.dynamicdatamapping.service.DDMStorageLinkLocalService;
 import com.liferay.portlet.dynamicdatamapping.service.DDMStructureLinkLocalService;
@@ -609,6 +610,14 @@ public abstract class DDMStructureServiceBaseImpl extends PrincipalBean
 	 */
 	public void setBeanIdentifier(String beanIdentifier) {
 		_beanIdentifier = beanIdentifier;
+	}
+
+	protected Class<?> getModelClass() {
+		return DDMStructure.class;
+	}
+
+	protected String getModelClassName() {
+		return DDMStructure.class.getName();
 	}
 
 	/**

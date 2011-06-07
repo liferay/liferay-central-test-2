@@ -23,6 +23,11 @@ import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.service.GroupLocalService;
 import com.liferay.portal.service.GroupService;
@@ -98,7 +103,22 @@ public abstract class SCProductEntryLocalServiceBaseImpl
 		throws SystemException {
 		scProductEntry.setNew(true);
 
-		return scProductEntryPersistence.update(scProductEntry, false);
+		scProductEntry = scProductEntryPersistence.update(scProductEntry, false);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(scProductEntry);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return scProductEntry;
 	}
 
 	/**
@@ -120,7 +140,20 @@ public abstract class SCProductEntryLocalServiceBaseImpl
 	 */
 	public void deleteSCProductEntry(long productEntryId)
 		throws PortalException, SystemException {
-		scProductEntryPersistence.remove(productEntryId);
+		SCProductEntry scProductEntry = scProductEntryPersistence.remove(productEntryId);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(scProductEntry);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -132,6 +165,19 @@ public abstract class SCProductEntryLocalServiceBaseImpl
 	public void deleteSCProductEntry(SCProductEntry scProductEntry)
 		throws SystemException {
 		scProductEntryPersistence.remove(scProductEntry);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(scProductEntry);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -249,9 +295,7 @@ public abstract class SCProductEntryLocalServiceBaseImpl
 	 */
 	public SCProductEntry updateSCProductEntry(SCProductEntry scProductEntry)
 		throws SystemException {
-		scProductEntry.setNew(false);
-
-		return scProductEntryPersistence.update(scProductEntry, true);
+		return updateSCProductEntry(scProductEntry, true);
 	}
 
 	/**
@@ -266,7 +310,22 @@ public abstract class SCProductEntryLocalServiceBaseImpl
 		boolean merge) throws SystemException {
 		scProductEntry.setNew(false);
 
-		return scProductEntryPersistence.update(scProductEntry, merge);
+		scProductEntry = scProductEntryPersistence.update(scProductEntry, merge);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(scProductEntry);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return scProductEntry;
 	}
 
 	/**
@@ -971,6 +1030,14 @@ public abstract class SCProductEntryLocalServiceBaseImpl
 		_beanIdentifier = beanIdentifier;
 	}
 
+	protected Class<?> getModelClass() {
+		return SCProductEntry.class;
+	}
+
+	protected String getModelClassName() {
+		return SCProductEntry.class.getName();
+	}
+
 	/**
 	 * Performs an SQL query.
 	 *
@@ -1064,5 +1131,6 @@ public abstract class SCProductEntryLocalServiceBaseImpl
 	protected RatingsStatsPersistence ratingsStatsPersistence;
 	@BeanReference(type = RatingsStatsFinder.class)
 	protected RatingsStatsFinder ratingsStatsFinder;
+	private static Log _log = LogFactoryUtil.getLog(SCProductEntryLocalServiceBaseImpl.class);
 	private String _beanIdentifier;
 }

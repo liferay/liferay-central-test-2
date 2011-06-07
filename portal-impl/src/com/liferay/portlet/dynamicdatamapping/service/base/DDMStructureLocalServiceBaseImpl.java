@@ -23,6 +23,11 @@ import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.service.ResourceLocalService;
 import com.liferay.portal.service.ResourceService;
@@ -89,7 +94,22 @@ public abstract class DDMStructureLocalServiceBaseImpl
 		throws SystemException {
 		ddmStructure.setNew(true);
 
-		return ddmStructurePersistence.update(ddmStructure, false);
+		ddmStructure = ddmStructurePersistence.update(ddmStructure, false);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(ddmStructure);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return ddmStructure;
 	}
 
 	/**
@@ -111,7 +131,20 @@ public abstract class DDMStructureLocalServiceBaseImpl
 	 */
 	public void deleteDDMStructure(long structureId)
 		throws PortalException, SystemException {
-		ddmStructurePersistence.remove(structureId);
+		DDMStructure ddmStructure = ddmStructurePersistence.remove(structureId);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(ddmStructure);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -123,6 +156,19 @@ public abstract class DDMStructureLocalServiceBaseImpl
 	public void deleteDDMStructure(DDMStructure ddmStructure)
 		throws SystemException {
 		ddmStructurePersistence.remove(ddmStructure);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(ddmStructure);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -254,9 +300,7 @@ public abstract class DDMStructureLocalServiceBaseImpl
 	 */
 	public DDMStructure updateDDMStructure(DDMStructure ddmStructure)
 		throws SystemException {
-		ddmStructure.setNew(false);
-
-		return ddmStructurePersistence.update(ddmStructure, true);
+		return updateDDMStructure(ddmStructure, true);
 	}
 
 	/**
@@ -271,7 +315,22 @@ public abstract class DDMStructureLocalServiceBaseImpl
 		boolean merge) throws SystemException {
 		ddmStructure.setNew(false);
 
-		return ddmStructurePersistence.update(ddmStructure, merge);
+		ddmStructure = ddmStructurePersistence.update(ddmStructure, merge);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(ddmStructure);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return ddmStructure;
 	}
 
 	/**
@@ -812,6 +871,14 @@ public abstract class DDMStructureLocalServiceBaseImpl
 		_beanIdentifier = beanIdentifier;
 	}
 
+	protected Class<?> getModelClass() {
+		return DDMStructure.class;
+	}
+
+	protected String getModelClassName() {
+		return DDMStructure.class.getName();
+	}
+
 	/**
 	 * Performs an SQL query.
 	 *
@@ -887,5 +954,6 @@ public abstract class DDMStructureLocalServiceBaseImpl
 	protected DLDocumentTypePersistence dlDocumentTypePersistence;
 	@BeanReference(type = DLDocumentTypeFinder.class)
 	protected DLDocumentTypeFinder dlDocumentTypeFinder;
+	private static Log _log = LogFactoryUtil.getLog(DDMStructureLocalServiceBaseImpl.class);
 	private String _beanIdentifier;
 }

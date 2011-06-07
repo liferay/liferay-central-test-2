@@ -31,6 +31,7 @@ import com.liferay.portal.service.persistence.ResourcePersistence;
 import com.liferay.portal.service.persistence.UserFinder;
 import com.liferay.portal.service.persistence.UserPersistence;
 
+import com.liferay.portlet.shopping.model.ShoppingCategory;
 import com.liferay.portlet.shopping.service.ShoppingCartLocalService;
 import com.liferay.portlet.shopping.service.ShoppingCategoryLocalService;
 import com.liferay.portlet.shopping.service.ShoppingCategoryService;
@@ -690,6 +691,14 @@ public abstract class ShoppingCategoryServiceBaseImpl extends PrincipalBean
 	 */
 	public void setBeanIdentifier(String beanIdentifier) {
 		_beanIdentifier = beanIdentifier;
+	}
+
+	protected Class<?> getModelClass() {
+		return ShoppingCategory.class;
+	}
+
+	protected String getModelClassName() {
+		return ShoppingCategory.class.getName();
 	}
 
 	/**

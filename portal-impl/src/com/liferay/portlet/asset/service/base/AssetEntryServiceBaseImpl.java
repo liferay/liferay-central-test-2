@@ -38,6 +38,7 @@ import com.liferay.portal.service.persistence.ResourcePersistence;
 import com.liferay.portal.service.persistence.UserFinder;
 import com.liferay.portal.service.persistence.UserPersistence;
 
+import com.liferay.portlet.asset.model.AssetEntry;
 import com.liferay.portlet.asset.service.AssetCategoryLocalService;
 import com.liferay.portlet.asset.service.AssetCategoryPropertyLocalService;
 import com.liferay.portlet.asset.service.AssetCategoryPropertyService;
@@ -1626,6 +1627,14 @@ public abstract class AssetEntryServiceBaseImpl extends PrincipalBean
 	 */
 	public void setBeanIdentifier(String beanIdentifier) {
 		_beanIdentifier = beanIdentifier;
+	}
+
+	protected Class<?> getModelClass() {
+		return AssetEntry.class;
+	}
+
+	protected String getModelClassName() {
+		return AssetEntry.class.getName();
 	}
 
 	/**

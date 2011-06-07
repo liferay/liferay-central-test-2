@@ -23,6 +23,11 @@ import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.service.ResourceLocalService;
 import com.liferay.portal.service.ResourceService;
@@ -80,7 +85,23 @@ public abstract class AnnouncementsFlagLocalServiceBaseImpl
 		AnnouncementsFlag announcementsFlag) throws SystemException {
 		announcementsFlag.setNew(true);
 
-		return announcementsFlagPersistence.update(announcementsFlag, false);
+		announcementsFlag = announcementsFlagPersistence.update(announcementsFlag,
+				false);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(announcementsFlag);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return announcementsFlag;
 	}
 
 	/**
@@ -102,7 +123,20 @@ public abstract class AnnouncementsFlagLocalServiceBaseImpl
 	 */
 	public void deleteAnnouncementsFlag(long flagId)
 		throws PortalException, SystemException {
-		announcementsFlagPersistence.remove(flagId);
+		AnnouncementsFlag announcementsFlag = announcementsFlagPersistence.remove(flagId);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(announcementsFlag);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -114,6 +148,19 @@ public abstract class AnnouncementsFlagLocalServiceBaseImpl
 	public void deleteAnnouncementsFlag(AnnouncementsFlag announcementsFlag)
 		throws SystemException {
 		announcementsFlagPersistence.remove(announcementsFlag);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(announcementsFlag);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -231,9 +278,7 @@ public abstract class AnnouncementsFlagLocalServiceBaseImpl
 	 */
 	public AnnouncementsFlag updateAnnouncementsFlag(
 		AnnouncementsFlag announcementsFlag) throws SystemException {
-		announcementsFlag.setNew(false);
-
-		return announcementsFlagPersistence.update(announcementsFlag, true);
+		return updateAnnouncementsFlag(announcementsFlag, true);
 	}
 
 	/**
@@ -249,7 +294,23 @@ public abstract class AnnouncementsFlagLocalServiceBaseImpl
 		throws SystemException {
 		announcementsFlag.setNew(false);
 
-		return announcementsFlagPersistence.update(announcementsFlag, merge);
+		announcementsFlag = announcementsFlagPersistence.update(announcementsFlag,
+				merge);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(announcementsFlag);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return announcementsFlag;
 	}
 
 	/**
@@ -623,6 +684,14 @@ public abstract class AnnouncementsFlagLocalServiceBaseImpl
 		_beanIdentifier = beanIdentifier;
 	}
 
+	protected Class<?> getModelClass() {
+		return AnnouncementsFlag.class;
+	}
+
+	protected String getModelClassName() {
+		return AnnouncementsFlag.class.getName();
+	}
+
 	/**
 	 * Performs an SQL query.
 	 *
@@ -680,5 +749,6 @@ public abstract class AnnouncementsFlagLocalServiceBaseImpl
 	protected UserPersistence userPersistence;
 	@BeanReference(type = UserFinder.class)
 	protected UserFinder userFinder;
+	private static Log _log = LogFactoryUtil.getLog(AnnouncementsFlagLocalServiceBaseImpl.class);
 	private String _beanIdentifier;
 }

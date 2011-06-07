@@ -40,6 +40,7 @@ import com.liferay.portlet.messageboards.service.MBMessageLocalService;
 import com.liferay.portlet.messageboards.service.MBMessageService;
 import com.liferay.portlet.messageboards.service.persistence.MBMessageFinder;
 import com.liferay.portlet.messageboards.service.persistence.MBMessagePersistence;
+import com.liferay.portlet.shopping.model.ShoppingOrder;
 import com.liferay.portlet.shopping.service.ShoppingCartLocalService;
 import com.liferay.portlet.shopping.service.ShoppingCategoryLocalService;
 import com.liferay.portlet.shopping.service.ShoppingCategoryService;
@@ -845,6 +846,14 @@ public abstract class ShoppingOrderServiceBaseImpl extends PrincipalBean
 	 */
 	public void setBeanIdentifier(String beanIdentifier) {
 		_beanIdentifier = beanIdentifier;
+	}
+
+	protected Class<?> getModelClass() {
+		return ShoppingOrder.class;
+	}
+
+	protected String getModelClassName() {
+		return ShoppingOrder.class.getName();
 	}
 
 	/**

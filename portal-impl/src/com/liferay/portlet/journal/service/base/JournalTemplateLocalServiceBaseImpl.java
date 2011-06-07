@@ -23,6 +23,11 @@ import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.service.ImageLocalService;
 import com.liferay.portal.service.ImageService;
@@ -100,7 +105,23 @@ public abstract class JournalTemplateLocalServiceBaseImpl
 		throws SystemException {
 		journalTemplate.setNew(true);
 
-		return journalTemplatePersistence.update(journalTemplate, false);
+		journalTemplate = journalTemplatePersistence.update(journalTemplate,
+				false);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(journalTemplate);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return journalTemplate;
 	}
 
 	/**
@@ -122,7 +143,20 @@ public abstract class JournalTemplateLocalServiceBaseImpl
 	 */
 	public void deleteJournalTemplate(long id)
 		throws PortalException, SystemException {
-		journalTemplatePersistence.remove(id);
+		JournalTemplate journalTemplate = journalTemplatePersistence.remove(id);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(journalTemplate);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -134,6 +168,19 @@ public abstract class JournalTemplateLocalServiceBaseImpl
 	public void deleteJournalTemplate(JournalTemplate journalTemplate)
 		throws SystemException {
 		journalTemplatePersistence.remove(journalTemplate);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(journalTemplate);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -265,9 +312,7 @@ public abstract class JournalTemplateLocalServiceBaseImpl
 	 */
 	public JournalTemplate updateJournalTemplate(
 		JournalTemplate journalTemplate) throws SystemException {
-		journalTemplate.setNew(false);
-
-		return journalTemplatePersistence.update(journalTemplate, true);
+		return updateJournalTemplate(journalTemplate, true);
 	}
 
 	/**
@@ -283,7 +328,23 @@ public abstract class JournalTemplateLocalServiceBaseImpl
 		throws SystemException {
 		journalTemplate.setNew(false);
 
-		return journalTemplatePersistence.update(journalTemplate, merge);
+		journalTemplate = journalTemplatePersistence.update(journalTemplate,
+				merge);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(journalTemplate);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return journalTemplate;
 	}
 
 	/**
@@ -1031,6 +1092,14 @@ public abstract class JournalTemplateLocalServiceBaseImpl
 		_beanIdentifier = beanIdentifier;
 	}
 
+	protected Class<?> getModelClass() {
+		return JournalTemplate.class;
+	}
+
+	protected String getModelClassName() {
+		return JournalTemplate.class.getName();
+	}
+
 	/**
 	 * Performs an SQL query.
 	 *
@@ -1128,5 +1197,6 @@ public abstract class JournalTemplateLocalServiceBaseImpl
 	protected ExpandoValueService expandoValueService;
 	@BeanReference(type = ExpandoValuePersistence.class)
 	protected ExpandoValuePersistence expandoValuePersistence;
+	private static Log _log = LogFactoryUtil.getLog(JournalTemplateLocalServiceBaseImpl.class);
 	private String _beanIdentifier;
 }

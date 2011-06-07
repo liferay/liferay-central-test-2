@@ -23,6 +23,11 @@ import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.service.ResourceLocalService;
 import com.liferay.portal.service.ResourceService;
@@ -98,8 +103,23 @@ public abstract class AssetCategoryPropertyLocalServiceBaseImpl
 		AssetCategoryProperty assetCategoryProperty) throws SystemException {
 		assetCategoryProperty.setNew(true);
 
-		return assetCategoryPropertyPersistence.update(assetCategoryProperty,
-			false);
+		assetCategoryProperty = assetCategoryPropertyPersistence.update(assetCategoryProperty,
+				false);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(assetCategoryProperty);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return assetCategoryProperty;
 	}
 
 	/**
@@ -122,7 +142,20 @@ public abstract class AssetCategoryPropertyLocalServiceBaseImpl
 	 */
 	public void deleteAssetCategoryProperty(long categoryPropertyId)
 		throws PortalException, SystemException {
-		assetCategoryPropertyPersistence.remove(categoryPropertyId);
+		AssetCategoryProperty assetCategoryProperty = assetCategoryPropertyPersistence.remove(categoryPropertyId);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(assetCategoryProperty);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -134,6 +167,19 @@ public abstract class AssetCategoryPropertyLocalServiceBaseImpl
 	public void deleteAssetCategoryProperty(
 		AssetCategoryProperty assetCategoryProperty) throws SystemException {
 		assetCategoryPropertyPersistence.remove(assetCategoryProperty);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(assetCategoryProperty);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -251,10 +297,7 @@ public abstract class AssetCategoryPropertyLocalServiceBaseImpl
 	 */
 	public AssetCategoryProperty updateAssetCategoryProperty(
 		AssetCategoryProperty assetCategoryProperty) throws SystemException {
-		assetCategoryProperty.setNew(false);
-
-		return assetCategoryPropertyPersistence.update(assetCategoryProperty,
-			true);
+		return updateAssetCategoryProperty(assetCategoryProperty, true);
 	}
 
 	/**
@@ -270,8 +313,23 @@ public abstract class AssetCategoryPropertyLocalServiceBaseImpl
 		throws SystemException {
 		assetCategoryProperty.setNew(false);
 
-		return assetCategoryPropertyPersistence.update(assetCategoryProperty,
-			merge);
+		assetCategoryProperty = assetCategoryPropertyPersistence.update(assetCategoryProperty,
+				merge);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(assetCategoryProperty);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return assetCategoryProperty;
 	}
 
 	/**
@@ -981,6 +1039,14 @@ public abstract class AssetCategoryPropertyLocalServiceBaseImpl
 		_beanIdentifier = beanIdentifier;
 	}
 
+	protected Class<?> getModelClass() {
+		return AssetCategoryProperty.class;
+	}
+
+	protected String getModelClassName() {
+		return AssetCategoryProperty.class.getName();
+	}
+
 	/**
 	 * Performs an SQL query.
 	 *
@@ -1074,5 +1140,6 @@ public abstract class AssetCategoryPropertyLocalServiceBaseImpl
 	protected UserPersistence userPersistence;
 	@BeanReference(type = UserFinder.class)
 	protected UserFinder userFinder;
+	private static Log _log = LogFactoryUtil.getLog(AssetCategoryPropertyLocalServiceBaseImpl.class);
 	private String _beanIdentifier;
 }

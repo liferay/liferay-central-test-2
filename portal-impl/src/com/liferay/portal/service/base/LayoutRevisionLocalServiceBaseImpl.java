@@ -23,6 +23,11 @@ import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.model.LayoutRevision;
 import com.liferay.portal.service.AccountLocalService;
@@ -231,7 +236,22 @@ public abstract class LayoutRevisionLocalServiceBaseImpl
 		throws SystemException {
 		layoutRevision.setNew(true);
 
-		return layoutRevisionPersistence.update(layoutRevision, false);
+		layoutRevision = layoutRevisionPersistence.update(layoutRevision, false);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(layoutRevision);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return layoutRevision;
 	}
 
 	/**
@@ -253,7 +273,20 @@ public abstract class LayoutRevisionLocalServiceBaseImpl
 	 */
 	public void deleteLayoutRevision(long layoutRevisionId)
 		throws PortalException, SystemException {
-		layoutRevisionPersistence.remove(layoutRevisionId);
+		LayoutRevision layoutRevision = layoutRevisionPersistence.remove(layoutRevisionId);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(layoutRevision);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -266,6 +299,19 @@ public abstract class LayoutRevisionLocalServiceBaseImpl
 	public void deleteLayoutRevision(LayoutRevision layoutRevision)
 		throws PortalException, SystemException {
 		layoutRevisionPersistence.remove(layoutRevision);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(layoutRevision);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -383,9 +429,7 @@ public abstract class LayoutRevisionLocalServiceBaseImpl
 	 */
 	public LayoutRevision updateLayoutRevision(LayoutRevision layoutRevision)
 		throws SystemException {
-		layoutRevision.setNew(false);
-
-		return layoutRevisionPersistence.update(layoutRevision, true);
+		return updateLayoutRevision(layoutRevision, true);
 	}
 
 	/**
@@ -400,7 +444,22 @@ public abstract class LayoutRevisionLocalServiceBaseImpl
 		boolean merge) throws SystemException {
 		layoutRevision.setNew(false);
 
-		return layoutRevisionPersistence.update(layoutRevision, merge);
+		layoutRevision = layoutRevisionPersistence.update(layoutRevision, merge);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(layoutRevision);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return layoutRevision;
 	}
 
 	/**
@@ -3590,6 +3649,14 @@ public abstract class LayoutRevisionLocalServiceBaseImpl
 		_beanIdentifier = beanIdentifier;
 	}
 
+	protected Class<?> getModelClass() {
+		return LayoutRevision.class;
+	}
+
+	protected String getModelClassName() {
+		return LayoutRevision.class.getName();
+	}
+
 	/**
 	 * Performs an SQL query.
 	 *
@@ -3951,5 +4018,6 @@ public abstract class LayoutRevisionLocalServiceBaseImpl
 	protected WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
 	@BeanReference(type = CounterLocalService.class)
 	protected CounterLocalService counterLocalService;
+	private static Log _log = LogFactoryUtil.getLog(LayoutRevisionLocalServiceBaseImpl.class);
 	private String _beanIdentifier;
 }

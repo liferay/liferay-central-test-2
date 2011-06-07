@@ -41,6 +41,7 @@ import com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence;
 
 import com.liferay.portlet.asset.service.AssetLinkLocalService;
 import com.liferay.portlet.asset.service.persistence.AssetLinkPersistence;
+import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.service.DLAppHelperLocalService;
 import com.liferay.portlet.documentlibrary.service.DLAppLocalService;
 import com.liferay.portlet.documentlibrary.service.DLAppService;
@@ -942,6 +943,14 @@ public abstract class DLFileEntryServiceBaseImpl extends PrincipalBean
 	 */
 	public void setBeanIdentifier(String beanIdentifier) {
 		_beanIdentifier = beanIdentifier;
+	}
+
+	protected Class<?> getModelClass() {
+		return DLFileEntry.class;
+	}
+
+	protected String getModelClassName() {
+		return DLFileEntry.class.getName();
 	}
 
 	/**

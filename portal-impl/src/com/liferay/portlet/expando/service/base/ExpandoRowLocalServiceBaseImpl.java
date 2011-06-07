@@ -23,6 +23,11 @@ import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.service.ResourceLocalService;
 import com.liferay.portal.service.ResourceService;
@@ -80,7 +85,22 @@ public abstract class ExpandoRowLocalServiceBaseImpl
 		throws SystemException {
 		expandoRow.setNew(true);
 
-		return expandoRowPersistence.update(expandoRow, false);
+		expandoRow = expandoRowPersistence.update(expandoRow, false);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(expandoRow);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return expandoRow;
 	}
 
 	/**
@@ -102,7 +122,20 @@ public abstract class ExpandoRowLocalServiceBaseImpl
 	 */
 	public void deleteExpandoRow(long rowId)
 		throws PortalException, SystemException {
-		expandoRowPersistence.remove(rowId);
+		ExpandoRow expandoRow = expandoRowPersistence.remove(rowId);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(expandoRow);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -114,6 +147,19 @@ public abstract class ExpandoRowLocalServiceBaseImpl
 	public void deleteExpandoRow(ExpandoRow expandoRow)
 		throws SystemException {
 		expandoRowPersistence.remove(expandoRow);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(expandoRow);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -231,9 +277,7 @@ public abstract class ExpandoRowLocalServiceBaseImpl
 	 */
 	public ExpandoRow updateExpandoRow(ExpandoRow expandoRow)
 		throws SystemException {
-		expandoRow.setNew(false);
-
-		return expandoRowPersistence.update(expandoRow, true);
+		return updateExpandoRow(expandoRow, true);
 	}
 
 	/**
@@ -248,7 +292,22 @@ public abstract class ExpandoRowLocalServiceBaseImpl
 		throws SystemException {
 		expandoRow.setNew(false);
 
-		return expandoRowPersistence.update(expandoRow, merge);
+		expandoRow = expandoRowPersistence.update(expandoRow, merge);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(expandoRow);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return expandoRow;
 	}
 
 	/**
@@ -621,6 +680,14 @@ public abstract class ExpandoRowLocalServiceBaseImpl
 		_beanIdentifier = beanIdentifier;
 	}
 
+	protected Class<?> getModelClass() {
+		return ExpandoRow.class;
+	}
+
+	protected String getModelClassName() {
+		return ExpandoRow.class.getName();
+	}
+
 	/**
 	 * Performs an SQL query.
 	 *
@@ -678,5 +745,6 @@ public abstract class ExpandoRowLocalServiceBaseImpl
 	protected UserPersistence userPersistence;
 	@BeanReference(type = UserFinder.class)
 	protected UserFinder userFinder;
+	private static Log _log = LogFactoryUtil.getLog(ExpandoRowLocalServiceBaseImpl.class);
 	private String _beanIdentifier;
 }

@@ -23,6 +23,11 @@ import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.service.ResourceLocalService;
 import com.liferay.portal.service.ResourceService;
@@ -85,7 +90,22 @@ public abstract class DDMStorageLinkLocalServiceBaseImpl
 		throws SystemException {
 		ddmStorageLink.setNew(true);
 
-		return ddmStorageLinkPersistence.update(ddmStorageLink, false);
+		ddmStorageLink = ddmStorageLinkPersistence.update(ddmStorageLink, false);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(ddmStorageLink);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return ddmStorageLink;
 	}
 
 	/**
@@ -107,7 +127,20 @@ public abstract class DDMStorageLinkLocalServiceBaseImpl
 	 */
 	public void deleteDDMStorageLink(long storageLinkId)
 		throws PortalException, SystemException {
-		ddmStorageLinkPersistence.remove(storageLinkId);
+		DDMStorageLink ddmStorageLink = ddmStorageLinkPersistence.remove(storageLinkId);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(ddmStorageLink);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -119,6 +152,19 @@ public abstract class DDMStorageLinkLocalServiceBaseImpl
 	public void deleteDDMStorageLink(DDMStorageLink ddmStorageLink)
 		throws SystemException {
 		ddmStorageLinkPersistence.remove(ddmStorageLink);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(ddmStorageLink);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -236,9 +282,7 @@ public abstract class DDMStorageLinkLocalServiceBaseImpl
 	 */
 	public DDMStorageLink updateDDMStorageLink(DDMStorageLink ddmStorageLink)
 		throws SystemException {
-		ddmStorageLink.setNew(false);
-
-		return ddmStorageLinkPersistence.update(ddmStorageLink, true);
+		return updateDDMStorageLink(ddmStorageLink, true);
 	}
 
 	/**
@@ -253,7 +297,22 @@ public abstract class DDMStorageLinkLocalServiceBaseImpl
 		boolean merge) throws SystemException {
 		ddmStorageLink.setNew(false);
 
-		return ddmStorageLinkPersistence.update(ddmStorageLink, merge);
+		ddmStorageLink = ddmStorageLinkPersistence.update(ddmStorageLink, merge);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(ddmStorageLink);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return ddmStorageLink;
 	}
 
 	/**
@@ -718,6 +777,14 @@ public abstract class DDMStorageLinkLocalServiceBaseImpl
 		_beanIdentifier = beanIdentifier;
 	}
 
+	protected Class<?> getModelClass() {
+		return DDMStorageLink.class;
+	}
+
+	protected String getModelClassName() {
+		return DDMStorageLink.class.getName();
+	}
+
 	/**
 	 * Performs an SQL query.
 	 *
@@ -785,5 +852,6 @@ public abstract class DDMStorageLinkLocalServiceBaseImpl
 	protected UserPersistence userPersistence;
 	@BeanReference(type = UserFinder.class)
 	protected UserFinder userFinder;
+	private static Log _log = LogFactoryUtil.getLog(DDMStorageLinkLocalServiceBaseImpl.class);
 	private String _beanIdentifier;
 }

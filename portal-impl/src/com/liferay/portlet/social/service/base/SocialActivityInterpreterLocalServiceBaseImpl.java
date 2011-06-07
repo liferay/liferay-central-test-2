@@ -635,6 +635,14 @@ public abstract class SocialActivityInterpreterLocalServiceBaseImpl
 		_beanIdentifier = beanIdentifier;
 	}
 
+	protected Class<?> getModelClass() {
+		return SocialActivityInterpreter.class;
+	}
+
+	protected String getModelClassName() {
+		return SocialActivityInterpreter.class.getName();
+	}
+
 	/**
 	 * Performs an SQL query.
 	 *

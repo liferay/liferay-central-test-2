@@ -23,6 +23,11 @@ import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.model.Address;
 import com.liferay.portal.service.AccountLocalService;
@@ -230,7 +235,22 @@ public abstract class AddressLocalServiceBaseImpl implements AddressLocalService
 	public Address addAddress(Address address) throws SystemException {
 		address.setNew(true);
 
-		return addressPersistence.update(address, false);
+		address = addressPersistence.update(address, false);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(address);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return address;
 	}
 
 	/**
@@ -252,7 +272,20 @@ public abstract class AddressLocalServiceBaseImpl implements AddressLocalService
 	 */
 	public void deleteAddress(long addressId)
 		throws PortalException, SystemException {
-		addressPersistence.remove(addressId);
+		Address address = addressPersistence.remove(addressId);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(address);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -263,6 +296,19 @@ public abstract class AddressLocalServiceBaseImpl implements AddressLocalService
 	 */
 	public void deleteAddress(Address address) throws SystemException {
 		addressPersistence.remove(address);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(address);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -378,9 +424,7 @@ public abstract class AddressLocalServiceBaseImpl implements AddressLocalService
 	 * @throws SystemException if a system exception occurred
 	 */
 	public Address updateAddress(Address address) throws SystemException {
-		address.setNew(false);
-
-		return addressPersistence.update(address, true);
+		return updateAddress(address, true);
 	}
 
 	/**
@@ -395,7 +439,22 @@ public abstract class AddressLocalServiceBaseImpl implements AddressLocalService
 		throws SystemException {
 		address.setNew(false);
 
-		return addressPersistence.update(address, merge);
+		address = addressPersistence.update(address, merge);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(address);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return address;
 	}
 
 	/**
@@ -3585,6 +3644,14 @@ public abstract class AddressLocalServiceBaseImpl implements AddressLocalService
 		_beanIdentifier = beanIdentifier;
 	}
 
+	protected Class<?> getModelClass() {
+		return Address.class;
+	}
+
+	protected String getModelClassName() {
+		return Address.class.getName();
+	}
+
 	/**
 	 * Performs an SQL query.
 	 *
@@ -3946,5 +4013,6 @@ public abstract class AddressLocalServiceBaseImpl implements AddressLocalService
 	protected WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
 	@BeanReference(type = CounterLocalService.class)
 	protected CounterLocalService counterLocalService;
+	private static Log _log = LogFactoryUtil.getLog(AddressLocalServiceBaseImpl.class);
 	private String _beanIdentifier;
 }

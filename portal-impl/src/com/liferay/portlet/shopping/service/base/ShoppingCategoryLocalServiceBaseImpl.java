@@ -23,6 +23,11 @@ import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.service.ResourceLocalService;
 import com.liferay.portal.service.ResourceService;
@@ -93,7 +98,23 @@ public abstract class ShoppingCategoryLocalServiceBaseImpl
 		ShoppingCategory shoppingCategory) throws SystemException {
 		shoppingCategory.setNew(true);
 
-		return shoppingCategoryPersistence.update(shoppingCategory, false);
+		shoppingCategory = shoppingCategoryPersistence.update(shoppingCategory,
+				false);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(shoppingCategory);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return shoppingCategory;
 	}
 
 	/**
@@ -115,7 +136,20 @@ public abstract class ShoppingCategoryLocalServiceBaseImpl
 	 */
 	public void deleteShoppingCategory(long categoryId)
 		throws PortalException, SystemException {
-		shoppingCategoryPersistence.remove(categoryId);
+		ShoppingCategory shoppingCategory = shoppingCategoryPersistence.remove(categoryId);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(shoppingCategory);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -127,6 +161,19 @@ public abstract class ShoppingCategoryLocalServiceBaseImpl
 	public void deleteShoppingCategory(ShoppingCategory shoppingCategory)
 		throws SystemException {
 		shoppingCategoryPersistence.remove(shoppingCategory);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(shoppingCategory);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -244,9 +291,7 @@ public abstract class ShoppingCategoryLocalServiceBaseImpl
 	 */
 	public ShoppingCategory updateShoppingCategory(
 		ShoppingCategory shoppingCategory) throws SystemException {
-		shoppingCategory.setNew(false);
-
-		return shoppingCategoryPersistence.update(shoppingCategory, true);
+		return updateShoppingCategory(shoppingCategory, true);
 	}
 
 	/**
@@ -262,7 +307,23 @@ public abstract class ShoppingCategoryLocalServiceBaseImpl
 		throws SystemException {
 		shoppingCategory.setNew(false);
 
-		return shoppingCategoryPersistence.update(shoppingCategory, merge);
+		shoppingCategory = shoppingCategoryPersistence.update(shoppingCategory,
+				merge);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(shoppingCategory);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return shoppingCategory;
 	}
 
 	/**
@@ -880,6 +941,14 @@ public abstract class ShoppingCategoryLocalServiceBaseImpl
 		_beanIdentifier = beanIdentifier;
 	}
 
+	protected Class<?> getModelClass() {
+		return ShoppingCategory.class;
+	}
+
+	protected String getModelClassName() {
+		return ShoppingCategory.class.getName();
+	}
+
 	/**
 	 * Performs an SQL query.
 	 *
@@ -963,5 +1032,6 @@ public abstract class ShoppingCategoryLocalServiceBaseImpl
 	protected UserPersistence userPersistence;
 	@BeanReference(type = UserFinder.class)
 	protected UserFinder userFinder;
+	private static Log _log = LogFactoryUtil.getLog(ShoppingCategoryLocalServiceBaseImpl.class);
 	private String _beanIdentifier;
 }

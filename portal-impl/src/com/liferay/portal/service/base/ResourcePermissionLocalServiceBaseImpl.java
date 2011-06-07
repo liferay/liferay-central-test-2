@@ -23,6 +23,11 @@ import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.model.ResourcePermission;
 import com.liferay.portal.service.AccountLocalService;
@@ -231,7 +236,23 @@ public abstract class ResourcePermissionLocalServiceBaseImpl
 		ResourcePermission resourcePermission) throws SystemException {
 		resourcePermission.setNew(true);
 
-		return resourcePermissionPersistence.update(resourcePermission, false);
+		resourcePermission = resourcePermissionPersistence.update(resourcePermission,
+				false);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(resourcePermission);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return resourcePermission;
 	}
 
 	/**
@@ -254,7 +275,20 @@ public abstract class ResourcePermissionLocalServiceBaseImpl
 	 */
 	public void deleteResourcePermission(long resourcePermissionId)
 		throws PortalException, SystemException {
-		resourcePermissionPersistence.remove(resourcePermissionId);
+		ResourcePermission resourcePermission = resourcePermissionPersistence.remove(resourcePermissionId);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(resourcePermission);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -266,6 +300,19 @@ public abstract class ResourcePermissionLocalServiceBaseImpl
 	public void deleteResourcePermission(ResourcePermission resourcePermission)
 		throws SystemException {
 		resourcePermissionPersistence.remove(resourcePermission);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(resourcePermission);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -383,9 +430,7 @@ public abstract class ResourcePermissionLocalServiceBaseImpl
 	 */
 	public ResourcePermission updateResourcePermission(
 		ResourcePermission resourcePermission) throws SystemException {
-		resourcePermission.setNew(false);
-
-		return resourcePermissionPersistence.update(resourcePermission, true);
+		return updateResourcePermission(resourcePermission, true);
 	}
 
 	/**
@@ -401,7 +446,23 @@ public abstract class ResourcePermissionLocalServiceBaseImpl
 		throws SystemException {
 		resourcePermission.setNew(false);
 
-		return resourcePermissionPersistence.update(resourcePermission, merge);
+		resourcePermission = resourcePermissionPersistence.update(resourcePermission,
+				merge);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(resourcePermission);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return resourcePermission;
 	}
 
 	/**
@@ -3591,6 +3652,14 @@ public abstract class ResourcePermissionLocalServiceBaseImpl
 		_beanIdentifier = beanIdentifier;
 	}
 
+	protected Class<?> getModelClass() {
+		return ResourcePermission.class;
+	}
+
+	protected String getModelClassName() {
+		return ResourcePermission.class.getName();
+	}
+
 	/**
 	 * Performs an SQL query.
 	 *
@@ -3952,5 +4021,6 @@ public abstract class ResourcePermissionLocalServiceBaseImpl
 	protected WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
 	@BeanReference(type = CounterLocalService.class)
 	protected CounterLocalService counterLocalService;
+	private static Log _log = LogFactoryUtil.getLog(ResourcePermissionLocalServiceBaseImpl.class);
 	private String _beanIdentifier;
 }

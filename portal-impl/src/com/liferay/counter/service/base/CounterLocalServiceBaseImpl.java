@@ -26,6 +26,11 @@ import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.service.ResourceLocalService;
 import com.liferay.portal.service.ResourceService;
@@ -70,7 +75,22 @@ public abstract class CounterLocalServiceBaseImpl implements CounterLocalService
 	public Counter addCounter(Counter counter) throws SystemException {
 		counter.setNew(true);
 
-		return counterPersistence.update(counter, false);
+		counter = counterPersistence.update(counter, false);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(counter);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return counter;
 	}
 
 	/**
@@ -92,7 +112,20 @@ public abstract class CounterLocalServiceBaseImpl implements CounterLocalService
 	 */
 	public void deleteCounter(String name)
 		throws PortalException, SystemException {
-		counterPersistence.remove(name);
+		Counter counter = counterPersistence.remove(name);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(counter);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -103,6 +136,19 @@ public abstract class CounterLocalServiceBaseImpl implements CounterLocalService
 	 */
 	public void deleteCounter(Counter counter) throws SystemException {
 		counterPersistence.remove(counter);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(counter);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -218,9 +264,7 @@ public abstract class CounterLocalServiceBaseImpl implements CounterLocalService
 	 * @throws SystemException if a system exception occurred
 	 */
 	public Counter updateCounter(Counter counter) throws SystemException {
-		counter.setNew(false);
-
-		return counterPersistence.update(counter, true);
+		return updateCounter(counter, true);
 	}
 
 	/**
@@ -235,7 +279,22 @@ public abstract class CounterLocalServiceBaseImpl implements CounterLocalService
 		throws SystemException {
 		counter.setNew(false);
 
-		return counterPersistence.update(counter, merge);
+		counter = counterPersistence.update(counter, merge);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(counter);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return counter;
 	}
 
 	/**
@@ -455,6 +514,14 @@ public abstract class CounterLocalServiceBaseImpl implements CounterLocalService
 		_beanIdentifier = beanIdentifier;
 	}
 
+	protected Class<?> getModelClass() {
+		return Counter.class;
+	}
+
+	protected String getModelClassName() {
+		return Counter.class.getName();
+	}
+
 	/**
 	 * Performs an SQL query.
 	 *
@@ -496,5 +563,6 @@ public abstract class CounterLocalServiceBaseImpl implements CounterLocalService
 	protected UserPersistence userPersistence;
 	@BeanReference(type = UserFinder.class)
 	protected UserFinder userFinder;
+	private static Log _log = LogFactoryUtil.getLog(CounterLocalServiceBaseImpl.class);
 	private String _beanIdentifier;
 }

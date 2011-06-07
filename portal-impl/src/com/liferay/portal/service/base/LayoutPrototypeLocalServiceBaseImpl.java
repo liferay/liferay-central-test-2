@@ -23,6 +23,11 @@ import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.model.LayoutPrototype;
 import com.liferay.portal.service.AccountLocalService;
@@ -231,7 +236,23 @@ public abstract class LayoutPrototypeLocalServiceBaseImpl
 		throws SystemException {
 		layoutPrototype.setNew(true);
 
-		return layoutPrototypePersistence.update(layoutPrototype, false);
+		layoutPrototype = layoutPrototypePersistence.update(layoutPrototype,
+				false);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(layoutPrototype);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return layoutPrototype;
 	}
 
 	/**
@@ -253,7 +274,20 @@ public abstract class LayoutPrototypeLocalServiceBaseImpl
 	 */
 	public void deleteLayoutPrototype(long layoutPrototypeId)
 		throws PortalException, SystemException {
-		layoutPrototypePersistence.remove(layoutPrototypeId);
+		LayoutPrototype layoutPrototype = layoutPrototypePersistence.remove(layoutPrototypeId);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(layoutPrototype);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -266,6 +300,19 @@ public abstract class LayoutPrototypeLocalServiceBaseImpl
 	public void deleteLayoutPrototype(LayoutPrototype layoutPrototype)
 		throws PortalException, SystemException {
 		layoutPrototypePersistence.remove(layoutPrototype);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(layoutPrototype);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -383,9 +430,7 @@ public abstract class LayoutPrototypeLocalServiceBaseImpl
 	 */
 	public LayoutPrototype updateLayoutPrototype(
 		LayoutPrototype layoutPrototype) throws SystemException {
-		layoutPrototype.setNew(false);
-
-		return layoutPrototypePersistence.update(layoutPrototype, true);
+		return updateLayoutPrototype(layoutPrototype, true);
 	}
 
 	/**
@@ -401,7 +446,23 @@ public abstract class LayoutPrototypeLocalServiceBaseImpl
 		throws SystemException {
 		layoutPrototype.setNew(false);
 
-		return layoutPrototypePersistence.update(layoutPrototype, merge);
+		layoutPrototype = layoutPrototypePersistence.update(layoutPrototype,
+				merge);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(layoutPrototype);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return layoutPrototype;
 	}
 
 	/**
@@ -3591,6 +3652,14 @@ public abstract class LayoutPrototypeLocalServiceBaseImpl
 		_beanIdentifier = beanIdentifier;
 	}
 
+	protected Class<?> getModelClass() {
+		return LayoutPrototype.class;
+	}
+
+	protected String getModelClassName() {
+		return LayoutPrototype.class.getName();
+	}
+
 	/**
 	 * Performs an SQL query.
 	 *
@@ -3952,5 +4021,6 @@ public abstract class LayoutPrototypeLocalServiceBaseImpl
 	protected WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
 	@BeanReference(type = CounterLocalService.class)
 	protected CounterLocalService counterLocalService;
+	private static Log _log = LogFactoryUtil.getLog(LayoutPrototypeLocalServiceBaseImpl.class);
 	private String _beanIdentifier;
 }

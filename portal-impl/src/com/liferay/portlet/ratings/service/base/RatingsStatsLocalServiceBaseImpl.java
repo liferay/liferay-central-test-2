@@ -23,6 +23,11 @@ import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.service.ResourceLocalService;
 import com.liferay.portal.service.ResourceService;
@@ -77,7 +82,22 @@ public abstract class RatingsStatsLocalServiceBaseImpl
 		throws SystemException {
 		ratingsStats.setNew(true);
 
-		return ratingsStatsPersistence.update(ratingsStats, false);
+		ratingsStats = ratingsStatsPersistence.update(ratingsStats, false);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(ratingsStats);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return ratingsStats;
 	}
 
 	/**
@@ -99,7 +119,20 @@ public abstract class RatingsStatsLocalServiceBaseImpl
 	 */
 	public void deleteRatingsStats(long statsId)
 		throws PortalException, SystemException {
-		ratingsStatsPersistence.remove(statsId);
+		RatingsStats ratingsStats = ratingsStatsPersistence.remove(statsId);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(ratingsStats);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -111,6 +144,19 @@ public abstract class RatingsStatsLocalServiceBaseImpl
 	public void deleteRatingsStats(RatingsStats ratingsStats)
 		throws SystemException {
 		ratingsStatsPersistence.remove(ratingsStats);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(ratingsStats);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -228,9 +274,7 @@ public abstract class RatingsStatsLocalServiceBaseImpl
 	 */
 	public RatingsStats updateRatingsStats(RatingsStats ratingsStats)
 		throws SystemException {
-		ratingsStats.setNew(false);
-
-		return ratingsStatsPersistence.update(ratingsStats, true);
+		return updateRatingsStats(ratingsStats, true);
 	}
 
 	/**
@@ -245,7 +289,22 @@ public abstract class RatingsStatsLocalServiceBaseImpl
 		boolean merge) throws SystemException {
 		ratingsStats.setNew(false);
 
-		return ratingsStatsPersistence.update(ratingsStats, merge);
+		ratingsStats = ratingsStatsPersistence.update(ratingsStats, merge);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(ratingsStats);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return ratingsStats;
 	}
 
 	/**
@@ -559,6 +618,14 @@ public abstract class RatingsStatsLocalServiceBaseImpl
 		_beanIdentifier = beanIdentifier;
 	}
 
+	protected Class<?> getModelClass() {
+		return RatingsStats.class;
+	}
+
+	protected String getModelClassName() {
+		return RatingsStats.class.getName();
+	}
+
 	/**
 	 * Performs an SQL query.
 	 *
@@ -610,5 +677,6 @@ public abstract class RatingsStatsLocalServiceBaseImpl
 	protected UserPersistence userPersistence;
 	@BeanReference(type = UserFinder.class)
 	protected UserFinder userFinder;
+	private static Log _log = LogFactoryUtil.getLog(RatingsStatsLocalServiceBaseImpl.class);
 	private String _beanIdentifier;
 }

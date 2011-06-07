@@ -23,6 +23,11 @@ import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.model.WorkflowDefinitionLink;
 import com.liferay.portal.service.AccountLocalService;
@@ -232,8 +237,23 @@ public abstract class WorkflowDefinitionLinkLocalServiceBaseImpl
 		throws SystemException {
 		workflowDefinitionLink.setNew(true);
 
-		return workflowDefinitionLinkPersistence.update(workflowDefinitionLink,
-			false);
+		workflowDefinitionLink = workflowDefinitionLinkPersistence.update(workflowDefinitionLink,
+				false);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(workflowDefinitionLink);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return workflowDefinitionLink;
 	}
 
 	/**
@@ -256,7 +276,20 @@ public abstract class WorkflowDefinitionLinkLocalServiceBaseImpl
 	 */
 	public void deleteWorkflowDefinitionLink(long workflowDefinitionLinkId)
 		throws PortalException, SystemException {
-		workflowDefinitionLinkPersistence.remove(workflowDefinitionLinkId);
+		WorkflowDefinitionLink workflowDefinitionLink = workflowDefinitionLinkPersistence.remove(workflowDefinitionLinkId);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(workflowDefinitionLink);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -269,6 +302,19 @@ public abstract class WorkflowDefinitionLinkLocalServiceBaseImpl
 		WorkflowDefinitionLink workflowDefinitionLink)
 		throws SystemException {
 		workflowDefinitionLinkPersistence.remove(workflowDefinitionLink);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(workflowDefinitionLink);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -387,10 +433,7 @@ public abstract class WorkflowDefinitionLinkLocalServiceBaseImpl
 	public WorkflowDefinitionLink updateWorkflowDefinitionLink(
 		WorkflowDefinitionLink workflowDefinitionLink)
 		throws SystemException {
-		workflowDefinitionLink.setNew(false);
-
-		return workflowDefinitionLinkPersistence.update(workflowDefinitionLink,
-			true);
+		return updateWorkflowDefinitionLink(workflowDefinitionLink, true);
 	}
 
 	/**
@@ -406,8 +449,23 @@ public abstract class WorkflowDefinitionLinkLocalServiceBaseImpl
 		throws SystemException {
 		workflowDefinitionLink.setNew(false);
 
-		return workflowDefinitionLinkPersistence.update(workflowDefinitionLink,
-			merge);
+		workflowDefinitionLink = workflowDefinitionLinkPersistence.update(workflowDefinitionLink,
+				merge);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(workflowDefinitionLink);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return workflowDefinitionLink;
 	}
 
 	/**
@@ -3597,6 +3655,14 @@ public abstract class WorkflowDefinitionLinkLocalServiceBaseImpl
 		_beanIdentifier = beanIdentifier;
 	}
 
+	protected Class<?> getModelClass() {
+		return WorkflowDefinitionLink.class;
+	}
+
+	protected String getModelClassName() {
+		return WorkflowDefinitionLink.class.getName();
+	}
+
 	/**
 	 * Performs an SQL query.
 	 *
@@ -3958,5 +4024,6 @@ public abstract class WorkflowDefinitionLinkLocalServiceBaseImpl
 	protected WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
 	@BeanReference(type = CounterLocalService.class)
 	protected CounterLocalService counterLocalService;
+	private static Log _log = LogFactoryUtil.getLog(WorkflowDefinitionLinkLocalServiceBaseImpl.class);
 	private String _beanIdentifier;
 }

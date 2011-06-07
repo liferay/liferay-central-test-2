@@ -25,6 +25,11 @@ import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.model.MembershipRequest;
 import com.liferay.portal.service.AccountLocalService;
@@ -233,7 +238,23 @@ public abstract class MembershipRequestLocalServiceBaseImpl
 		MembershipRequest membershipRequest) throws SystemException {
 		membershipRequest.setNew(true);
 
-		return membershipRequestPersistence.update(membershipRequest, false);
+		membershipRequest = membershipRequestPersistence.update(membershipRequest,
+				false);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(membershipRequest);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return membershipRequest;
 	}
 
 	/**
@@ -255,7 +276,20 @@ public abstract class MembershipRequestLocalServiceBaseImpl
 	 */
 	public void deleteMembershipRequest(long membershipRequestId)
 		throws PortalException, SystemException {
-		membershipRequestPersistence.remove(membershipRequestId);
+		MembershipRequest membershipRequest = membershipRequestPersistence.remove(membershipRequestId);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(membershipRequest);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -267,6 +301,19 @@ public abstract class MembershipRequestLocalServiceBaseImpl
 	public void deleteMembershipRequest(MembershipRequest membershipRequest)
 		throws SystemException {
 		membershipRequestPersistence.remove(membershipRequest);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(membershipRequest);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -384,9 +431,7 @@ public abstract class MembershipRequestLocalServiceBaseImpl
 	 */
 	public MembershipRequest updateMembershipRequest(
 		MembershipRequest membershipRequest) throws SystemException {
-		membershipRequest.setNew(false);
-
-		return membershipRequestPersistence.update(membershipRequest, true);
+		return updateMembershipRequest(membershipRequest, true);
 	}
 
 	/**
@@ -402,7 +447,23 @@ public abstract class MembershipRequestLocalServiceBaseImpl
 		throws SystemException {
 		membershipRequest.setNew(false);
 
-		return membershipRequestPersistence.update(membershipRequest, merge);
+		membershipRequest = membershipRequestPersistence.update(membershipRequest,
+				merge);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(membershipRequest);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return membershipRequest;
 	}
 
 	/**
@@ -3610,6 +3671,14 @@ public abstract class MembershipRequestLocalServiceBaseImpl
 		_beanIdentifier = beanIdentifier;
 	}
 
+	protected Class<?> getModelClass() {
+		return MembershipRequest.class;
+	}
+
+	protected String getModelClassName() {
+		return MembershipRequest.class.getName();
+	}
+
 	/**
 	 * Performs an SQL query.
 	 *
@@ -3973,5 +4042,6 @@ public abstract class MembershipRequestLocalServiceBaseImpl
 	protected CounterLocalService counterLocalService;
 	@BeanReference(type = MailService.class)
 	protected MailService mailService;
+	private static Log _log = LogFactoryUtil.getLog(MembershipRequestLocalServiceBaseImpl.class);
 	private String _beanIdentifier;
 }

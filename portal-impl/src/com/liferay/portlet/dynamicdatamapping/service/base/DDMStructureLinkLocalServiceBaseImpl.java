@@ -23,6 +23,11 @@ import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.service.ResourceLocalService;
 import com.liferay.portal.service.ResourceService;
@@ -85,7 +90,23 @@ public abstract class DDMStructureLinkLocalServiceBaseImpl
 		DDMStructureLink ddmStructureLink) throws SystemException {
 		ddmStructureLink.setNew(true);
 
-		return ddmStructureLinkPersistence.update(ddmStructureLink, false);
+		ddmStructureLink = ddmStructureLinkPersistence.update(ddmStructureLink,
+				false);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(ddmStructureLink);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return ddmStructureLink;
 	}
 
 	/**
@@ -107,7 +128,20 @@ public abstract class DDMStructureLinkLocalServiceBaseImpl
 	 */
 	public void deleteDDMStructureLink(long structureLinkId)
 		throws PortalException, SystemException {
-		ddmStructureLinkPersistence.remove(structureLinkId);
+		DDMStructureLink ddmStructureLink = ddmStructureLinkPersistence.remove(structureLinkId);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(ddmStructureLink);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -119,6 +153,19 @@ public abstract class DDMStructureLinkLocalServiceBaseImpl
 	public void deleteDDMStructureLink(DDMStructureLink ddmStructureLink)
 		throws SystemException {
 		ddmStructureLinkPersistence.remove(ddmStructureLink);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(ddmStructureLink);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -236,9 +283,7 @@ public abstract class DDMStructureLinkLocalServiceBaseImpl
 	 */
 	public DDMStructureLink updateDDMStructureLink(
 		DDMStructureLink ddmStructureLink) throws SystemException {
-		ddmStructureLink.setNew(false);
-
-		return ddmStructureLinkPersistence.update(ddmStructureLink, true);
+		return updateDDMStructureLink(ddmStructureLink, true);
 	}
 
 	/**
@@ -254,7 +299,23 @@ public abstract class DDMStructureLinkLocalServiceBaseImpl
 		throws SystemException {
 		ddmStructureLink.setNew(false);
 
-		return ddmStructureLinkPersistence.update(ddmStructureLink, merge);
+		ddmStructureLink = ddmStructureLinkPersistence.update(ddmStructureLink,
+				merge);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(ddmStructureLink);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return ddmStructureLink;
 	}
 
 	/**
@@ -719,6 +780,14 @@ public abstract class DDMStructureLinkLocalServiceBaseImpl
 		_beanIdentifier = beanIdentifier;
 	}
 
+	protected Class<?> getModelClass() {
+		return DDMStructureLink.class;
+	}
+
+	protected String getModelClassName() {
+		return DDMStructureLink.class.getName();
+	}
+
 	/**
 	 * Performs an SQL query.
 	 *
@@ -786,5 +855,6 @@ public abstract class DDMStructureLinkLocalServiceBaseImpl
 	protected UserPersistence userPersistence;
 	@BeanReference(type = UserFinder.class)
 	protected UserFinder userFinder;
+	private static Log _log = LogFactoryUtil.getLog(DDMStructureLinkLocalServiceBaseImpl.class);
 	private String _beanIdentifier;
 }

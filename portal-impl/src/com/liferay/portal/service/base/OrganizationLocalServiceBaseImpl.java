@@ -23,6 +23,11 @@ import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.service.AccountLocalService;
@@ -239,7 +244,22 @@ public abstract class OrganizationLocalServiceBaseImpl
 		throws SystemException {
 		organization.setNew(true);
 
-		return organizationPersistence.update(organization, false);
+		organization = organizationPersistence.update(organization, false);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(organization);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return organization;
 	}
 
 	/**
@@ -261,7 +281,20 @@ public abstract class OrganizationLocalServiceBaseImpl
 	 */
 	public void deleteOrganization(long organizationId)
 		throws PortalException, SystemException {
-		organizationPersistence.remove(organizationId);
+		Organization organization = organizationPersistence.remove(organizationId);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(organization);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -274,6 +307,19 @@ public abstract class OrganizationLocalServiceBaseImpl
 	public void deleteOrganization(Organization organization)
 		throws PortalException, SystemException {
 		organizationPersistence.remove(organization);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(organization);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -391,9 +437,7 @@ public abstract class OrganizationLocalServiceBaseImpl
 	 */
 	public Organization updateOrganization(Organization organization)
 		throws SystemException {
-		organization.setNew(false);
-
-		return organizationPersistence.update(organization, true);
+		return updateOrganization(organization, true);
 	}
 
 	/**
@@ -408,7 +452,22 @@ public abstract class OrganizationLocalServiceBaseImpl
 		boolean merge) throws SystemException {
 		organization.setNew(false);
 
-		return organizationPersistence.update(organization, merge);
+		organization = organizationPersistence.update(organization, merge);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(organization);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return organization;
 	}
 
 	/**
@@ -3728,6 +3787,14 @@ public abstract class OrganizationLocalServiceBaseImpl
 		_beanIdentifier = beanIdentifier;
 	}
 
+	protected Class<?> getModelClass() {
+		return Organization.class;
+	}
+
+	protected String getModelClassName() {
+		return Organization.class.getName();
+	}
+
 	/**
 	 * Performs an SQL query.
 	 *
@@ -4103,5 +4170,6 @@ public abstract class OrganizationLocalServiceBaseImpl
 	protected ExpandoValueService expandoValueService;
 	@BeanReference(type = ExpandoValuePersistence.class)
 	protected ExpandoValuePersistence expandoValuePersistence;
+	private static Log _log = LogFactoryUtil.getLog(OrganizationLocalServiceBaseImpl.class);
 	private String _beanIdentifier;
 }

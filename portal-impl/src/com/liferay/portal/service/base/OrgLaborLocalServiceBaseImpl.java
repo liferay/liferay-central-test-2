@@ -23,6 +23,11 @@ import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.model.OrgLabor;
 import com.liferay.portal.service.AccountLocalService;
@@ -230,7 +235,22 @@ public abstract class OrgLaborLocalServiceBaseImpl
 	public OrgLabor addOrgLabor(OrgLabor orgLabor) throws SystemException {
 		orgLabor.setNew(true);
 
-		return orgLaborPersistence.update(orgLabor, false);
+		orgLabor = orgLaborPersistence.update(orgLabor, false);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(orgLabor);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return orgLabor;
 	}
 
 	/**
@@ -252,7 +272,20 @@ public abstract class OrgLaborLocalServiceBaseImpl
 	 */
 	public void deleteOrgLabor(long orgLaborId)
 		throws PortalException, SystemException {
-		orgLaborPersistence.remove(orgLaborId);
+		OrgLabor orgLabor = orgLaborPersistence.remove(orgLaborId);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(orgLabor);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -263,6 +296,19 @@ public abstract class OrgLaborLocalServiceBaseImpl
 	 */
 	public void deleteOrgLabor(OrgLabor orgLabor) throws SystemException {
 		orgLaborPersistence.remove(orgLabor);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(orgLabor);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -378,9 +424,7 @@ public abstract class OrgLaborLocalServiceBaseImpl
 	 * @throws SystemException if a system exception occurred
 	 */
 	public OrgLabor updateOrgLabor(OrgLabor orgLabor) throws SystemException {
-		orgLabor.setNew(false);
-
-		return orgLaborPersistence.update(orgLabor, true);
+		return updateOrgLabor(orgLabor, true);
 	}
 
 	/**
@@ -395,7 +439,22 @@ public abstract class OrgLaborLocalServiceBaseImpl
 		throws SystemException {
 		orgLabor.setNew(false);
 
-		return orgLaborPersistence.update(orgLabor, merge);
+		orgLabor = orgLaborPersistence.update(orgLabor, merge);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(orgLabor);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return orgLabor;
 	}
 
 	/**
@@ -3585,6 +3644,14 @@ public abstract class OrgLaborLocalServiceBaseImpl
 		_beanIdentifier = beanIdentifier;
 	}
 
+	protected Class<?> getModelClass() {
+		return OrgLabor.class;
+	}
+
+	protected String getModelClassName() {
+		return OrgLabor.class.getName();
+	}
+
 	/**
 	 * Performs an SQL query.
 	 *
@@ -3946,5 +4013,6 @@ public abstract class OrgLaborLocalServiceBaseImpl
 	protected WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
 	@BeanReference(type = CounterLocalService.class)
 	protected CounterLocalService counterLocalService;
+	private static Log _log = LogFactoryUtil.getLog(OrgLaborLocalServiceBaseImpl.class);
 	private String _beanIdentifier;
 }

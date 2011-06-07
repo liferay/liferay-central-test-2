@@ -23,6 +23,11 @@ import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.service.CompanyLocalService;
 import com.liferay.portal.service.CompanyService;
@@ -124,7 +129,22 @@ public abstract class BlogsEntryLocalServiceBaseImpl
 		throws SystemException {
 		blogsEntry.setNew(true);
 
-		return blogsEntryPersistence.update(blogsEntry, false);
+		blogsEntry = blogsEntryPersistence.update(blogsEntry, false);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(blogsEntry);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return blogsEntry;
 	}
 
 	/**
@@ -146,7 +166,20 @@ public abstract class BlogsEntryLocalServiceBaseImpl
 	 */
 	public void deleteBlogsEntry(long entryId)
 		throws PortalException, SystemException {
-		blogsEntryPersistence.remove(entryId);
+		BlogsEntry blogsEntry = blogsEntryPersistence.remove(entryId);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(blogsEntry);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -158,6 +191,19 @@ public abstract class BlogsEntryLocalServiceBaseImpl
 	public void deleteBlogsEntry(BlogsEntry blogsEntry)
 		throws SystemException {
 		blogsEntryPersistence.remove(blogsEntry);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(blogsEntry);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -289,9 +335,7 @@ public abstract class BlogsEntryLocalServiceBaseImpl
 	 */
 	public BlogsEntry updateBlogsEntry(BlogsEntry blogsEntry)
 		throws SystemException {
-		blogsEntry.setNew(false);
-
-		return blogsEntryPersistence.update(blogsEntry, true);
+		return updateBlogsEntry(blogsEntry, true);
 	}
 
 	/**
@@ -306,7 +350,22 @@ public abstract class BlogsEntryLocalServiceBaseImpl
 		throws SystemException {
 		blogsEntry.setNew(false);
 
-		return blogsEntryPersistence.update(blogsEntry, merge);
+		blogsEntry = blogsEntryPersistence.update(blogsEntry, merge);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(blogsEntry);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return blogsEntry;
 	}
 
 	/**
@@ -1493,6 +1552,14 @@ public abstract class BlogsEntryLocalServiceBaseImpl
 		_beanIdentifier = beanIdentifier;
 	}
 
+	protected Class<?> getModelClass() {
+		return BlogsEntry.class;
+	}
+
+	protected String getModelClassName() {
+		return BlogsEntry.class.getName();
+	}
+
 	/**
 	 * Performs an SQL query.
 	 *
@@ -1638,5 +1705,6 @@ public abstract class BlogsEntryLocalServiceBaseImpl
 	protected SocialEquityLogLocalService socialEquityLogLocalService;
 	@BeanReference(type = SocialEquityLogPersistence.class)
 	protected SocialEquityLogPersistence socialEquityLogPersistence;
+	private static Log _log = LogFactoryUtil.getLog(BlogsEntryLocalServiceBaseImpl.class);
 	private String _beanIdentifier;
 }

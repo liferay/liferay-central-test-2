@@ -23,6 +23,11 @@ import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.service.ImageLocalService;
 import com.liferay.portal.service.ImageService;
@@ -99,7 +104,22 @@ public abstract class IGImageLocalServiceBaseImpl implements IGImageLocalService
 	public IGImage addIGImage(IGImage igImage) throws SystemException {
 		igImage.setNew(true);
 
-		return igImagePersistence.update(igImage, false);
+		igImage = igImagePersistence.update(igImage, false);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(igImage);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return igImage;
 	}
 
 	/**
@@ -121,7 +141,20 @@ public abstract class IGImageLocalServiceBaseImpl implements IGImageLocalService
 	 */
 	public void deleteIGImage(long imageId)
 		throws PortalException, SystemException {
-		igImagePersistence.remove(imageId);
+		IGImage igImage = igImagePersistence.remove(imageId);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(igImage);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -132,6 +165,19 @@ public abstract class IGImageLocalServiceBaseImpl implements IGImageLocalService
 	 */
 	public void deleteIGImage(IGImage igImage) throws SystemException {
 		igImagePersistence.remove(igImage);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(igImage);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -261,9 +307,7 @@ public abstract class IGImageLocalServiceBaseImpl implements IGImageLocalService
 	 * @throws SystemException if a system exception occurred
 	 */
 	public IGImage updateIGImage(IGImage igImage) throws SystemException {
-		igImage.setNew(false);
-
-		return igImagePersistence.update(igImage, true);
+		return updateIGImage(igImage, true);
 	}
 
 	/**
@@ -278,7 +322,22 @@ public abstract class IGImageLocalServiceBaseImpl implements IGImageLocalService
 		throws SystemException {
 		igImage.setNew(false);
 
-		return igImagePersistence.update(igImage, merge);
+		igImage = igImagePersistence.update(igImage, merge);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(igImage);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return igImage;
 	}
 
 	/**
@@ -1016,6 +1075,14 @@ public abstract class IGImageLocalServiceBaseImpl implements IGImageLocalService
 		_beanIdentifier = beanIdentifier;
 	}
 
+	protected Class<?> getModelClass() {
+		return IGImage.class;
+	}
+
+	protected String getModelClassName() {
+		return IGImage.class.getName();
+	}
+
 	/**
 	 * Performs an SQL query.
 	 *
@@ -1113,5 +1180,6 @@ public abstract class IGImageLocalServiceBaseImpl implements IGImageLocalService
 	protected SocialActivityPersistence socialActivityPersistence;
 	@BeanReference(type = SocialActivityFinder.class)
 	protected SocialActivityFinder socialActivityFinder;
+	private static Log _log = LogFactoryUtil.getLog(IGImageLocalServiceBaseImpl.class);
 	private String _beanIdentifier;
 }

@@ -23,6 +23,11 @@ import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.service.ResourceLocalService;
 import com.liferay.portal.service.ResourceService;
@@ -93,7 +98,23 @@ public abstract class ShoppingItemFieldLocalServiceBaseImpl
 		ShoppingItemField shoppingItemField) throws SystemException {
 		shoppingItemField.setNew(true);
 
-		return shoppingItemFieldPersistence.update(shoppingItemField, false);
+		shoppingItemField = shoppingItemFieldPersistence.update(shoppingItemField,
+				false);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(shoppingItemField);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return shoppingItemField;
 	}
 
 	/**
@@ -115,7 +136,20 @@ public abstract class ShoppingItemFieldLocalServiceBaseImpl
 	 */
 	public void deleteShoppingItemField(long itemFieldId)
 		throws PortalException, SystemException {
-		shoppingItemFieldPersistence.remove(itemFieldId);
+		ShoppingItemField shoppingItemField = shoppingItemFieldPersistence.remove(itemFieldId);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(shoppingItemField);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -127,6 +161,19 @@ public abstract class ShoppingItemFieldLocalServiceBaseImpl
 	public void deleteShoppingItemField(ShoppingItemField shoppingItemField)
 		throws SystemException {
 		shoppingItemFieldPersistence.remove(shoppingItemField);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(shoppingItemField);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -244,9 +291,7 @@ public abstract class ShoppingItemFieldLocalServiceBaseImpl
 	 */
 	public ShoppingItemField updateShoppingItemField(
 		ShoppingItemField shoppingItemField) throws SystemException {
-		shoppingItemField.setNew(false);
-
-		return shoppingItemFieldPersistence.update(shoppingItemField, true);
+		return updateShoppingItemField(shoppingItemField, true);
 	}
 
 	/**
@@ -262,7 +307,23 @@ public abstract class ShoppingItemFieldLocalServiceBaseImpl
 		throws SystemException {
 		shoppingItemField.setNew(false);
 
-		return shoppingItemFieldPersistence.update(shoppingItemField, merge);
+		shoppingItemField = shoppingItemFieldPersistence.update(shoppingItemField,
+				merge);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(shoppingItemField);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return shoppingItemField;
 	}
 
 	/**
@@ -880,6 +941,14 @@ public abstract class ShoppingItemFieldLocalServiceBaseImpl
 		_beanIdentifier = beanIdentifier;
 	}
 
+	protected Class<?> getModelClass() {
+		return ShoppingItemField.class;
+	}
+
+	protected String getModelClassName() {
+		return ShoppingItemField.class.getName();
+	}
+
 	/**
 	 * Performs an SQL query.
 	 *
@@ -963,5 +1032,6 @@ public abstract class ShoppingItemFieldLocalServiceBaseImpl
 	protected UserPersistence userPersistence;
 	@BeanReference(type = UserFinder.class)
 	protected UserFinder userFinder;
+	private static Log _log = LogFactoryUtil.getLog(ShoppingItemFieldLocalServiceBaseImpl.class);
 	private String _beanIdentifier;
 }

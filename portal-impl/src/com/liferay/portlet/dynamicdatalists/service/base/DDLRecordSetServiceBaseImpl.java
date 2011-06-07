@@ -31,6 +31,7 @@ import com.liferay.portal.service.persistence.ResourcePersistence;
 import com.liferay.portal.service.persistence.UserFinder;
 import com.liferay.portal.service.persistence.UserPersistence;
 
+import com.liferay.portlet.dynamicdatalists.model.DDLRecordSet;
 import com.liferay.portlet.dynamicdatalists.service.DDLRecordLocalService;
 import com.liferay.portlet.dynamicdatalists.service.DDLRecordService;
 import com.liferay.portlet.dynamicdatalists.service.DDLRecordSetLocalService;
@@ -508,6 +509,14 @@ public abstract class DDLRecordSetServiceBaseImpl extends PrincipalBean
 	 */
 	public void setBeanIdentifier(String beanIdentifier) {
 		_beanIdentifier = beanIdentifier;
+	}
+
+	protected Class<?> getModelClass() {
+		return DDLRecordSet.class;
+	}
+
+	protected String getModelClassName() {
+		return DDLRecordSet.class.getName();
 	}
 
 	/**

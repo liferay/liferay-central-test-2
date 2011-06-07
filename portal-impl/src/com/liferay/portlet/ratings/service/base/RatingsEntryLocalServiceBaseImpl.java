@@ -23,6 +23,11 @@ import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.service.ResourceLocalService;
 import com.liferay.portal.service.ResourceService;
@@ -86,7 +91,22 @@ public abstract class RatingsEntryLocalServiceBaseImpl
 		throws SystemException {
 		ratingsEntry.setNew(true);
 
-		return ratingsEntryPersistence.update(ratingsEntry, false);
+		ratingsEntry = ratingsEntryPersistence.update(ratingsEntry, false);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(ratingsEntry);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return ratingsEntry;
 	}
 
 	/**
@@ -108,7 +128,20 @@ public abstract class RatingsEntryLocalServiceBaseImpl
 	 */
 	public void deleteRatingsEntry(long entryId)
 		throws PortalException, SystemException {
-		ratingsEntryPersistence.remove(entryId);
+		RatingsEntry ratingsEntry = ratingsEntryPersistence.remove(entryId);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(ratingsEntry);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -120,6 +153,19 @@ public abstract class RatingsEntryLocalServiceBaseImpl
 	public void deleteRatingsEntry(RatingsEntry ratingsEntry)
 		throws SystemException {
 		ratingsEntryPersistence.remove(ratingsEntry);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(ratingsEntry);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -237,9 +283,7 @@ public abstract class RatingsEntryLocalServiceBaseImpl
 	 */
 	public RatingsEntry updateRatingsEntry(RatingsEntry ratingsEntry)
 		throws SystemException {
-		ratingsEntry.setNew(false);
-
-		return ratingsEntryPersistence.update(ratingsEntry, true);
+		return updateRatingsEntry(ratingsEntry, true);
 	}
 
 	/**
@@ -254,7 +298,22 @@ public abstract class RatingsEntryLocalServiceBaseImpl
 		boolean merge) throws SystemException {
 		ratingsEntry.setNew(false);
 
-		return ratingsEntryPersistence.update(ratingsEntry, merge);
+		ratingsEntry = ratingsEntryPersistence.update(ratingsEntry, merge);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(ratingsEntry);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return ratingsEntry;
 	}
 
 	/**
@@ -737,6 +796,14 @@ public abstract class RatingsEntryLocalServiceBaseImpl
 		_beanIdentifier = beanIdentifier;
 	}
 
+	protected Class<?> getModelClass() {
+		return RatingsEntry.class;
+	}
+
+	protected String getModelClassName() {
+		return RatingsEntry.class.getName();
+	}
+
 	/**
 	 * Performs an SQL query.
 	 *
@@ -806,5 +873,6 @@ public abstract class RatingsEntryLocalServiceBaseImpl
 	protected SocialEquityLogLocalService socialEquityLogLocalService;
 	@BeanReference(type = SocialEquityLogPersistence.class)
 	protected SocialEquityLogPersistence socialEquityLogPersistence;
+	private static Log _log = LogFactoryUtil.getLog(RatingsEntryLocalServiceBaseImpl.class);
 	private String _beanIdentifier;
 }

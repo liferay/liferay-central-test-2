@@ -23,6 +23,11 @@ import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.service.GroupLocalService;
 import com.liferay.portal.service.GroupService;
@@ -90,7 +95,22 @@ public abstract class IGFolderLocalServiceBaseImpl
 	public IGFolder addIGFolder(IGFolder igFolder) throws SystemException {
 		igFolder.setNew(true);
 
-		return igFolderPersistence.update(igFolder, false);
+		igFolder = igFolderPersistence.update(igFolder, false);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(igFolder);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return igFolder;
 	}
 
 	/**
@@ -112,7 +132,20 @@ public abstract class IGFolderLocalServiceBaseImpl
 	 */
 	public void deleteIGFolder(long folderId)
 		throws PortalException, SystemException {
-		igFolderPersistence.remove(folderId);
+		IGFolder igFolder = igFolderPersistence.remove(folderId);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(igFolder);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -123,6 +156,19 @@ public abstract class IGFolderLocalServiceBaseImpl
 	 */
 	public void deleteIGFolder(IGFolder igFolder) throws SystemException {
 		igFolderPersistence.remove(igFolder);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(igFolder);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -252,9 +298,7 @@ public abstract class IGFolderLocalServiceBaseImpl
 	 * @throws SystemException if a system exception occurred
 	 */
 	public IGFolder updateIGFolder(IGFolder igFolder) throws SystemException {
-		igFolder.setNew(false);
-
-		return igFolderPersistence.update(igFolder, true);
+		return updateIGFolder(igFolder, true);
 	}
 
 	/**
@@ -269,7 +313,22 @@ public abstract class IGFolderLocalServiceBaseImpl
 		throws SystemException {
 		igFolder.setNew(false);
 
-		return igFolderPersistence.update(igFolder, merge);
+		igFolder = igFolderPersistence.update(igFolder, merge);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(igFolder);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return igFolder;
 	}
 
 	/**
@@ -834,6 +893,14 @@ public abstract class IGFolderLocalServiceBaseImpl
 		_beanIdentifier = beanIdentifier;
 	}
 
+	protected Class<?> getModelClass() {
+		return IGFolder.class;
+	}
+
+	protected String getModelClassName() {
+		return IGFolder.class.getName();
+	}
+
 	/**
 	 * Performs an SQL query.
 	 *
@@ -913,5 +980,6 @@ public abstract class IGFolderLocalServiceBaseImpl
 	protected ExpandoValueService expandoValueService;
 	@BeanReference(type = ExpandoValuePersistence.class)
 	protected ExpandoValuePersistence expandoValuePersistence;
+	private static Log _log = LogFactoryUtil.getLog(IGFolderLocalServiceBaseImpl.class);
 	private String _beanIdentifier;
 }

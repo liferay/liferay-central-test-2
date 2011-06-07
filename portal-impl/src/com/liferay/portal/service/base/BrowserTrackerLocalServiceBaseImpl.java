@@ -23,6 +23,11 @@ import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.model.BrowserTracker;
 import com.liferay.portal.service.AccountLocalService;
@@ -231,7 +236,22 @@ public abstract class BrowserTrackerLocalServiceBaseImpl
 		throws SystemException {
 		browserTracker.setNew(true);
 
-		return browserTrackerPersistence.update(browserTracker, false);
+		browserTracker = browserTrackerPersistence.update(browserTracker, false);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(browserTracker);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return browserTracker;
 	}
 
 	/**
@@ -253,7 +273,20 @@ public abstract class BrowserTrackerLocalServiceBaseImpl
 	 */
 	public void deleteBrowserTracker(long browserTrackerId)
 		throws PortalException, SystemException {
-		browserTrackerPersistence.remove(browserTrackerId);
+		BrowserTracker browserTracker = browserTrackerPersistence.remove(browserTrackerId);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(browserTracker);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -265,6 +298,19 @@ public abstract class BrowserTrackerLocalServiceBaseImpl
 	public void deleteBrowserTracker(BrowserTracker browserTracker)
 		throws SystemException {
 		browserTrackerPersistence.remove(browserTracker);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(browserTracker);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -382,9 +428,7 @@ public abstract class BrowserTrackerLocalServiceBaseImpl
 	 */
 	public BrowserTracker updateBrowserTracker(BrowserTracker browserTracker)
 		throws SystemException {
-		browserTracker.setNew(false);
-
-		return browserTrackerPersistence.update(browserTracker, true);
+		return updateBrowserTracker(browserTracker, true);
 	}
 
 	/**
@@ -399,7 +443,22 @@ public abstract class BrowserTrackerLocalServiceBaseImpl
 		boolean merge) throws SystemException {
 		browserTracker.setNew(false);
 
-		return browserTrackerPersistence.update(browserTracker, merge);
+		browserTracker = browserTrackerPersistence.update(browserTracker, merge);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(browserTracker);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return browserTracker;
 	}
 
 	/**
@@ -3589,6 +3648,14 @@ public abstract class BrowserTrackerLocalServiceBaseImpl
 		_beanIdentifier = beanIdentifier;
 	}
 
+	protected Class<?> getModelClass() {
+		return BrowserTracker.class;
+	}
+
+	protected String getModelClassName() {
+		return BrowserTracker.class.getName();
+	}
+
 	/**
 	 * Performs an SQL query.
 	 *
@@ -3950,5 +4017,6 @@ public abstract class BrowserTrackerLocalServiceBaseImpl
 	protected WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
 	@BeanReference(type = CounterLocalService.class)
 	protected CounterLocalService counterLocalService;
+	private static Log _log = LogFactoryUtil.getLog(BrowserTrackerLocalServiceBaseImpl.class);
 	private String _beanIdentifier;
 }

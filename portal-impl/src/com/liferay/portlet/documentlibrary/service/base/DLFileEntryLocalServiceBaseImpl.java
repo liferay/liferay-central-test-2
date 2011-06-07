@@ -25,6 +25,11 @@ import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.service.LockLocalService;
 import com.liferay.portal.service.ResourceLocalService;
@@ -107,7 +112,22 @@ public abstract class DLFileEntryLocalServiceBaseImpl
 		throws SystemException {
 		dlFileEntry.setNew(true);
 
-		return dlFileEntryPersistence.update(dlFileEntry, false);
+		dlFileEntry = dlFileEntryPersistence.update(dlFileEntry, false);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(dlFileEntry);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return dlFileEntry;
 	}
 
 	/**
@@ -129,7 +149,20 @@ public abstract class DLFileEntryLocalServiceBaseImpl
 	 */
 	public void deleteDLFileEntry(long fileEntryId)
 		throws PortalException, SystemException {
-		dlFileEntryPersistence.remove(fileEntryId);
+		DLFileEntry dlFileEntry = dlFileEntryPersistence.remove(fileEntryId);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(dlFileEntry);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -141,6 +174,19 @@ public abstract class DLFileEntryLocalServiceBaseImpl
 	public void deleteDLFileEntry(DLFileEntry dlFileEntry)
 		throws SystemException {
 		dlFileEntryPersistence.remove(dlFileEntry);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(dlFileEntry);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -272,9 +318,7 @@ public abstract class DLFileEntryLocalServiceBaseImpl
 	 */
 	public DLFileEntry updateDLFileEntry(DLFileEntry dlFileEntry)
 		throws SystemException {
-		dlFileEntry.setNew(false);
-
-		return dlFileEntryPersistence.update(dlFileEntry, true);
+		return updateDLFileEntry(dlFileEntry, true);
 	}
 
 	/**
@@ -289,7 +333,22 @@ public abstract class DLFileEntryLocalServiceBaseImpl
 		throws SystemException {
 		dlFileEntry.setNew(false);
 
-		return dlFileEntryPersistence.update(dlFileEntry, merge);
+		dlFileEntry = dlFileEntryPersistence.update(dlFileEntry, merge);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(dlFileEntry);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return dlFileEntry;
 	}
 
 	/**
@@ -1145,6 +1204,14 @@ public abstract class DLFileEntryLocalServiceBaseImpl
 		_beanIdentifier = beanIdentifier;
 	}
 
+	protected Class<?> getModelClass() {
+		return DLFileEntry.class;
+	}
+
+	protected String getModelClassName() {
+		return DLFileEntry.class.getName();
+	}
+
 	/**
 	 * Performs an SQL query.
 	 *
@@ -1254,5 +1321,6 @@ public abstract class DLFileEntryLocalServiceBaseImpl
 	protected ExpandoValueService expandoValueService;
 	@BeanReference(type = ExpandoValuePersistence.class)
 	protected ExpandoValuePersistence expandoValuePersistence;
+	private static Log _log = LogFactoryUtil.getLog(DLFileEntryLocalServiceBaseImpl.class);
 	private String _beanIdentifier;
 }

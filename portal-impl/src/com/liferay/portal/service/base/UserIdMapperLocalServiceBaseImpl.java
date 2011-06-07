@@ -23,6 +23,11 @@ import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.model.UserIdMapper;
 import com.liferay.portal.service.AccountLocalService;
@@ -231,7 +236,22 @@ public abstract class UserIdMapperLocalServiceBaseImpl
 		throws SystemException {
 		userIdMapper.setNew(true);
 
-		return userIdMapperPersistence.update(userIdMapper, false);
+		userIdMapper = userIdMapperPersistence.update(userIdMapper, false);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(userIdMapper);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return userIdMapper;
 	}
 
 	/**
@@ -253,7 +273,20 @@ public abstract class UserIdMapperLocalServiceBaseImpl
 	 */
 	public void deleteUserIdMapper(long userIdMapperId)
 		throws PortalException, SystemException {
-		userIdMapperPersistence.remove(userIdMapperId);
+		UserIdMapper userIdMapper = userIdMapperPersistence.remove(userIdMapperId);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(userIdMapper);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -265,6 +298,19 @@ public abstract class UserIdMapperLocalServiceBaseImpl
 	public void deleteUserIdMapper(UserIdMapper userIdMapper)
 		throws SystemException {
 		userIdMapperPersistence.remove(userIdMapper);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(userIdMapper);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -382,9 +428,7 @@ public abstract class UserIdMapperLocalServiceBaseImpl
 	 */
 	public UserIdMapper updateUserIdMapper(UserIdMapper userIdMapper)
 		throws SystemException {
-		userIdMapper.setNew(false);
-
-		return userIdMapperPersistence.update(userIdMapper, true);
+		return updateUserIdMapper(userIdMapper, true);
 	}
 
 	/**
@@ -399,7 +443,22 @@ public abstract class UserIdMapperLocalServiceBaseImpl
 		boolean merge) throws SystemException {
 		userIdMapper.setNew(false);
 
-		return userIdMapperPersistence.update(userIdMapper, merge);
+		userIdMapper = userIdMapperPersistence.update(userIdMapper, merge);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(userIdMapper);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return userIdMapper;
 	}
 
 	/**
@@ -3589,6 +3648,14 @@ public abstract class UserIdMapperLocalServiceBaseImpl
 		_beanIdentifier = beanIdentifier;
 	}
 
+	protected Class<?> getModelClass() {
+		return UserIdMapper.class;
+	}
+
+	protected String getModelClassName() {
+		return UserIdMapper.class.getName();
+	}
+
 	/**
 	 * Performs an SQL query.
 	 *
@@ -3950,5 +4017,6 @@ public abstract class UserIdMapperLocalServiceBaseImpl
 	protected WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
 	@BeanReference(type = CounterLocalService.class)
 	protected CounterLocalService counterLocalService;
+	private static Log _log = LogFactoryUtil.getLog(UserIdMapperLocalServiceBaseImpl.class);
 	private String _beanIdentifier;
 }

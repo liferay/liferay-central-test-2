@@ -23,6 +23,11 @@ import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.model.VirtualHost;
 import com.liferay.portal.service.AccountLocalService;
@@ -231,7 +236,22 @@ public abstract class VirtualHostLocalServiceBaseImpl
 		throws SystemException {
 		virtualHost.setNew(true);
 
-		return virtualHostPersistence.update(virtualHost, false);
+		virtualHost = virtualHostPersistence.update(virtualHost, false);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(virtualHost);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return virtualHost;
 	}
 
 	/**
@@ -253,7 +273,20 @@ public abstract class VirtualHostLocalServiceBaseImpl
 	 */
 	public void deleteVirtualHost(long virtualHostId)
 		throws PortalException, SystemException {
-		virtualHostPersistence.remove(virtualHostId);
+		VirtualHost virtualHost = virtualHostPersistence.remove(virtualHostId);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(virtualHost);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -265,6 +298,19 @@ public abstract class VirtualHostLocalServiceBaseImpl
 	public void deleteVirtualHost(VirtualHost virtualHost)
 		throws SystemException {
 		virtualHostPersistence.remove(virtualHost);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(virtualHost);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -382,9 +428,7 @@ public abstract class VirtualHostLocalServiceBaseImpl
 	 */
 	public VirtualHost updateVirtualHost(VirtualHost virtualHost)
 		throws SystemException {
-		virtualHost.setNew(false);
-
-		return virtualHostPersistence.update(virtualHost, true);
+		return updateVirtualHost(virtualHost, true);
 	}
 
 	/**
@@ -399,7 +443,22 @@ public abstract class VirtualHostLocalServiceBaseImpl
 		throws SystemException {
 		virtualHost.setNew(false);
 
-		return virtualHostPersistence.update(virtualHost, merge);
+		virtualHost = virtualHostPersistence.update(virtualHost, merge);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(virtualHost);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return virtualHost;
 	}
 
 	/**
@@ -3589,6 +3648,14 @@ public abstract class VirtualHostLocalServiceBaseImpl
 		_beanIdentifier = beanIdentifier;
 	}
 
+	protected Class<?> getModelClass() {
+		return VirtualHost.class;
+	}
+
+	protected String getModelClassName() {
+		return VirtualHost.class.getName();
+	}
+
 	/**
 	 * Performs an SQL query.
 	 *
@@ -3950,5 +4017,6 @@ public abstract class VirtualHostLocalServiceBaseImpl
 	protected WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
 	@BeanReference(type = CounterLocalService.class)
 	protected CounterLocalService counterLocalService;
+	private static Log _log = LogFactoryUtil.getLog(VirtualHostLocalServiceBaseImpl.class);
 	private String _beanIdentifier;
 }

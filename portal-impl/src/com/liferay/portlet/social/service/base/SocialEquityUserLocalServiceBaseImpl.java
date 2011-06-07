@@ -23,6 +23,11 @@ import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.service.ResourceLocalService;
 import com.liferay.portal.service.ResourceService;
@@ -90,7 +95,23 @@ public abstract class SocialEquityUserLocalServiceBaseImpl
 		SocialEquityUser socialEquityUser) throws SystemException {
 		socialEquityUser.setNew(true);
 
-		return socialEquityUserPersistence.update(socialEquityUser, false);
+		socialEquityUser = socialEquityUserPersistence.update(socialEquityUser,
+				false);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(socialEquityUser);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return socialEquityUser;
 	}
 
 	/**
@@ -112,7 +133,20 @@ public abstract class SocialEquityUserLocalServiceBaseImpl
 	 */
 	public void deleteSocialEquityUser(long equityUserId)
 		throws PortalException, SystemException {
-		socialEquityUserPersistence.remove(equityUserId);
+		SocialEquityUser socialEquityUser = socialEquityUserPersistence.remove(equityUserId);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(socialEquityUser);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -124,6 +158,19 @@ public abstract class SocialEquityUserLocalServiceBaseImpl
 	public void deleteSocialEquityUser(SocialEquityUser socialEquityUser)
 		throws SystemException {
 		socialEquityUserPersistence.remove(socialEquityUser);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(socialEquityUser);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -241,9 +288,7 @@ public abstract class SocialEquityUserLocalServiceBaseImpl
 	 */
 	public SocialEquityUser updateSocialEquityUser(
 		SocialEquityUser socialEquityUser) throws SystemException {
-		socialEquityUser.setNew(false);
-
-		return socialEquityUserPersistence.update(socialEquityUser, true);
+		return updateSocialEquityUser(socialEquityUser, true);
 	}
 
 	/**
@@ -259,7 +304,23 @@ public abstract class SocialEquityUserLocalServiceBaseImpl
 		throws SystemException {
 		socialEquityUser.setNew(false);
 
-		return socialEquityUserPersistence.update(socialEquityUser, merge);
+		socialEquityUser = socialEquityUserPersistence.update(socialEquityUser,
+				merge);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(socialEquityUser);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return socialEquityUser;
 	}
 
 	/**
@@ -823,6 +884,14 @@ public abstract class SocialEquityUserLocalServiceBaseImpl
 		_beanIdentifier = beanIdentifier;
 	}
 
+	protected Class<?> getModelClass() {
+		return SocialEquityUser.class;
+	}
+
+	protected String getModelClassName() {
+		return SocialEquityUser.class.getName();
+	}
+
 	/**
 	 * Performs an SQL query.
 	 *
@@ -900,5 +969,6 @@ public abstract class SocialEquityUserLocalServiceBaseImpl
 	protected UserPersistence userPersistence;
 	@BeanReference(type = UserFinder.class)
 	protected UserFinder userFinder;
+	private static Log _log = LogFactoryUtil.getLog(SocialEquityUserLocalServiceBaseImpl.class);
 	private String _beanIdentifier;
 }

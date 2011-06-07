@@ -54,6 +54,7 @@ import com.liferay.portlet.asset.service.persistence.AssetEntryPersistence;
 import com.liferay.portlet.asset.service.persistence.AssetLinkPersistence;
 import com.liferay.portlet.asset.service.persistence.AssetTagFinder;
 import com.liferay.portlet.asset.service.persistence.AssetTagPersistence;
+import com.liferay.portlet.calendar.model.CalEvent;
 import com.liferay.portlet.calendar.service.CalEventLocalService;
 import com.liferay.portlet.calendar.service.CalEventService;
 import com.liferay.portlet.calendar.service.persistence.CalEventFinder;
@@ -857,6 +858,14 @@ public abstract class CalEventServiceBaseImpl extends PrincipalBean
 	 */
 	public void setBeanIdentifier(String beanIdentifier) {
 		_beanIdentifier = beanIdentifier;
+	}
+
+	protected Class<?> getModelClass() {
+		return CalEvent.class;
+	}
+
+	protected String getModelClassName() {
+		return CalEvent.class.getName();
 	}
 
 	/**

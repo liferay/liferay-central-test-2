@@ -23,6 +23,11 @@ import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.service.ImageLocalService;
 import com.liferay.portal.service.ImageService;
@@ -95,7 +100,23 @@ public abstract class JournalArticleImageLocalServiceBaseImpl
 		JournalArticleImage journalArticleImage) throws SystemException {
 		journalArticleImage.setNew(true);
 
-		return journalArticleImagePersistence.update(journalArticleImage, false);
+		journalArticleImage = journalArticleImagePersistence.update(journalArticleImage,
+				false);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(journalArticleImage);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return journalArticleImage;
 	}
 
 	/**
@@ -117,7 +138,20 @@ public abstract class JournalArticleImageLocalServiceBaseImpl
 	 */
 	public void deleteJournalArticleImage(long articleImageId)
 		throws PortalException, SystemException {
-		journalArticleImagePersistence.remove(articleImageId);
+		JournalArticleImage journalArticleImage = journalArticleImagePersistence.remove(articleImageId);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(journalArticleImage);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -129,6 +163,19 @@ public abstract class JournalArticleImageLocalServiceBaseImpl
 	public void deleteJournalArticleImage(
 		JournalArticleImage journalArticleImage) throws SystemException {
 		journalArticleImagePersistence.remove(journalArticleImage);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(journalArticleImage);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -246,9 +293,7 @@ public abstract class JournalArticleImageLocalServiceBaseImpl
 	 */
 	public JournalArticleImage updateJournalArticleImage(
 		JournalArticleImage journalArticleImage) throws SystemException {
-		journalArticleImage.setNew(false);
-
-		return journalArticleImagePersistence.update(journalArticleImage, true);
+		return updateJournalArticleImage(journalArticleImage, true);
 	}
 
 	/**
@@ -264,7 +309,23 @@ public abstract class JournalArticleImageLocalServiceBaseImpl
 		throws SystemException {
 		journalArticleImage.setNew(false);
 
-		return journalArticleImagePersistence.update(journalArticleImage, merge);
+		journalArticleImage = journalArticleImagePersistence.update(journalArticleImage,
+				merge);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(journalArticleImage);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return journalArticleImage;
 	}
 
 	/**
@@ -918,6 +979,14 @@ public abstract class JournalArticleImageLocalServiceBaseImpl
 		_beanIdentifier = beanIdentifier;
 	}
 
+	protected Class<?> getModelClass() {
+		return JournalArticleImage.class;
+	}
+
+	protected String getModelClassName() {
+		return JournalArticleImage.class.getName();
+	}
+
 	/**
 	 * Performs an SQL query.
 	 *
@@ -1005,5 +1074,6 @@ public abstract class JournalArticleImageLocalServiceBaseImpl
 	protected UserPersistence userPersistence;
 	@BeanReference(type = UserFinder.class)
 	protected UserFinder userFinder;
+	private static Log _log = LogFactoryUtil.getLog(JournalArticleImageLocalServiceBaseImpl.class);
 	private String _beanIdentifier;
 }

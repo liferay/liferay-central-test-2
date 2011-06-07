@@ -23,6 +23,11 @@ import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.service.ResourceLocalService;
 import com.liferay.portal.service.ResourceService;
@@ -94,7 +99,23 @@ public abstract class SocialEquityLogLocalServiceBaseImpl
 		throws SystemException {
 		socialEquityLog.setNew(true);
 
-		return socialEquityLogPersistence.update(socialEquityLog, false);
+		socialEquityLog = socialEquityLogPersistence.update(socialEquityLog,
+				false);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(socialEquityLog);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return socialEquityLog;
 	}
 
 	/**
@@ -116,7 +137,20 @@ public abstract class SocialEquityLogLocalServiceBaseImpl
 	 */
 	public void deleteSocialEquityLog(long equityLogId)
 		throws PortalException, SystemException {
-		socialEquityLogPersistence.remove(equityLogId);
+		SocialEquityLog socialEquityLog = socialEquityLogPersistence.remove(equityLogId);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(socialEquityLog);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -128,6 +162,19 @@ public abstract class SocialEquityLogLocalServiceBaseImpl
 	public void deleteSocialEquityLog(SocialEquityLog socialEquityLog)
 		throws SystemException {
 		socialEquityLogPersistence.remove(socialEquityLog);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(socialEquityLog);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -245,9 +292,7 @@ public abstract class SocialEquityLogLocalServiceBaseImpl
 	 */
 	public SocialEquityLog updateSocialEquityLog(
 		SocialEquityLog socialEquityLog) throws SystemException {
-		socialEquityLog.setNew(false);
-
-		return socialEquityLogPersistence.update(socialEquityLog, true);
+		return updateSocialEquityLog(socialEquityLog, true);
 	}
 
 	/**
@@ -263,7 +308,23 @@ public abstract class SocialEquityLogLocalServiceBaseImpl
 		throws SystemException {
 		socialEquityLog.setNew(false);
 
-		return socialEquityLogPersistence.update(socialEquityLog, merge);
+		socialEquityLog = socialEquityLogPersistence.update(socialEquityLog,
+				merge);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(socialEquityLog);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return socialEquityLog;
 	}
 
 	/**
@@ -901,6 +962,14 @@ public abstract class SocialEquityLogLocalServiceBaseImpl
 		_beanIdentifier = beanIdentifier;
 	}
 
+	protected Class<?> getModelClass() {
+		return SocialEquityLog.class;
+	}
+
+	protected String getModelClassName() {
+		return SocialEquityLog.class.getName();
+	}
+
 	/**
 	 * Performs an SQL query.
 	 *
@@ -986,5 +1055,6 @@ public abstract class SocialEquityLogLocalServiceBaseImpl
 	protected AssetEntryPersistence assetEntryPersistence;
 	@BeanReference(type = AssetEntryFinder.class)
 	protected AssetEntryFinder assetEntryFinder;
+	private static Log _log = LogFactoryUtil.getLog(SocialEquityLogLocalServiceBaseImpl.class);
 	private String _beanIdentifier;
 }

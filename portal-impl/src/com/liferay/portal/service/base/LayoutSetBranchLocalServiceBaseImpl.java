@@ -23,6 +23,11 @@ import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.model.LayoutSetBranch;
 import com.liferay.portal.service.AccountLocalService;
@@ -231,7 +236,23 @@ public abstract class LayoutSetBranchLocalServiceBaseImpl
 		throws SystemException {
 		layoutSetBranch.setNew(true);
 
-		return layoutSetBranchPersistence.update(layoutSetBranch, false);
+		layoutSetBranch = layoutSetBranchPersistence.update(layoutSetBranch,
+				false);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(layoutSetBranch);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return layoutSetBranch;
 	}
 
 	/**
@@ -253,7 +274,20 @@ public abstract class LayoutSetBranchLocalServiceBaseImpl
 	 */
 	public void deleteLayoutSetBranch(long layoutSetBranchId)
 		throws PortalException, SystemException {
-		layoutSetBranchPersistence.remove(layoutSetBranchId);
+		LayoutSetBranch layoutSetBranch = layoutSetBranchPersistence.remove(layoutSetBranchId);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(layoutSetBranch);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -266,6 +300,19 @@ public abstract class LayoutSetBranchLocalServiceBaseImpl
 	public void deleteLayoutSetBranch(LayoutSetBranch layoutSetBranch)
 		throws PortalException, SystemException {
 		layoutSetBranchPersistence.remove(layoutSetBranch);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(layoutSetBranch);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -383,9 +430,7 @@ public abstract class LayoutSetBranchLocalServiceBaseImpl
 	 */
 	public LayoutSetBranch updateLayoutSetBranch(
 		LayoutSetBranch layoutSetBranch) throws SystemException {
-		layoutSetBranch.setNew(false);
-
-		return layoutSetBranchPersistence.update(layoutSetBranch, true);
+		return updateLayoutSetBranch(layoutSetBranch, true);
 	}
 
 	/**
@@ -401,7 +446,23 @@ public abstract class LayoutSetBranchLocalServiceBaseImpl
 		throws SystemException {
 		layoutSetBranch.setNew(false);
 
-		return layoutSetBranchPersistence.update(layoutSetBranch, merge);
+		layoutSetBranch = layoutSetBranchPersistence.update(layoutSetBranch,
+				merge);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(layoutSetBranch);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return layoutSetBranch;
 	}
 
 	/**
@@ -3591,6 +3652,14 @@ public abstract class LayoutSetBranchLocalServiceBaseImpl
 		_beanIdentifier = beanIdentifier;
 	}
 
+	protected Class<?> getModelClass() {
+		return LayoutSetBranch.class;
+	}
+
+	protected String getModelClassName() {
+		return LayoutSetBranch.class.getName();
+	}
+
 	/**
 	 * Performs an SQL query.
 	 *
@@ -3952,5 +4021,6 @@ public abstract class LayoutSetBranchLocalServiceBaseImpl
 	protected WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
 	@BeanReference(type = CounterLocalService.class)
 	protected CounterLocalService counterLocalService;
+	private static Log _log = LogFactoryUtil.getLog(LayoutSetBranchLocalServiceBaseImpl.class);
 	private String _beanIdentifier;
 }

@@ -23,6 +23,11 @@ import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.model.PortletItem;
 import com.liferay.portal.service.AccountLocalService;
@@ -231,7 +236,22 @@ public abstract class PortletItemLocalServiceBaseImpl
 		throws SystemException {
 		portletItem.setNew(true);
 
-		return portletItemPersistence.update(portletItem, false);
+		portletItem = portletItemPersistence.update(portletItem, false);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(portletItem);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return portletItem;
 	}
 
 	/**
@@ -253,7 +273,20 @@ public abstract class PortletItemLocalServiceBaseImpl
 	 */
 	public void deletePortletItem(long portletItemId)
 		throws PortalException, SystemException {
-		portletItemPersistence.remove(portletItemId);
+		PortletItem portletItem = portletItemPersistence.remove(portletItemId);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(portletItem);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -265,6 +298,19 @@ public abstract class PortletItemLocalServiceBaseImpl
 	public void deletePortletItem(PortletItem portletItem)
 		throws SystemException {
 		portletItemPersistence.remove(portletItem);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(portletItem);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -382,9 +428,7 @@ public abstract class PortletItemLocalServiceBaseImpl
 	 */
 	public PortletItem updatePortletItem(PortletItem portletItem)
 		throws SystemException {
-		portletItem.setNew(false);
-
-		return portletItemPersistence.update(portletItem, true);
+		return updatePortletItem(portletItem, true);
 	}
 
 	/**
@@ -399,7 +443,22 @@ public abstract class PortletItemLocalServiceBaseImpl
 		throws SystemException {
 		portletItem.setNew(false);
 
-		return portletItemPersistence.update(portletItem, merge);
+		portletItem = portletItemPersistence.update(portletItem, merge);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(portletItem);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return portletItem;
 	}
 
 	/**
@@ -3589,6 +3648,14 @@ public abstract class PortletItemLocalServiceBaseImpl
 		_beanIdentifier = beanIdentifier;
 	}
 
+	protected Class<?> getModelClass() {
+		return PortletItem.class;
+	}
+
+	protected String getModelClassName() {
+		return PortletItem.class.getName();
+	}
+
 	/**
 	 * Performs an SQL query.
 	 *
@@ -3950,5 +4017,6 @@ public abstract class PortletItemLocalServiceBaseImpl
 	protected WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
 	@BeanReference(type = CounterLocalService.class)
 	protected CounterLocalService counterLocalService;
+	private static Log _log = LogFactoryUtil.getLog(PortletItemLocalServiceBaseImpl.class);
 	private String _beanIdentifier;
 }

@@ -23,6 +23,11 @@ import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.service.ResourceLocalService;
 import com.liferay.portal.service.ResourceService;
@@ -90,7 +95,22 @@ public abstract class SocialRequestLocalServiceBaseImpl
 		throws SystemException {
 		socialRequest.setNew(true);
 
-		return socialRequestPersistence.update(socialRequest, false);
+		socialRequest = socialRequestPersistence.update(socialRequest, false);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(socialRequest);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return socialRequest;
 	}
 
 	/**
@@ -112,7 +132,20 @@ public abstract class SocialRequestLocalServiceBaseImpl
 	 */
 	public void deleteSocialRequest(long requestId)
 		throws PortalException, SystemException {
-		socialRequestPersistence.remove(requestId);
+		SocialRequest socialRequest = socialRequestPersistence.remove(requestId);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(socialRequest);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -124,6 +157,19 @@ public abstract class SocialRequestLocalServiceBaseImpl
 	public void deleteSocialRequest(SocialRequest socialRequest)
 		throws SystemException {
 		socialRequestPersistence.remove(socialRequest);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(socialRequest);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -255,9 +301,7 @@ public abstract class SocialRequestLocalServiceBaseImpl
 	 */
 	public SocialRequest updateSocialRequest(SocialRequest socialRequest)
 		throws SystemException {
-		socialRequest.setNew(false);
-
-		return socialRequestPersistence.update(socialRequest, true);
+		return updateSocialRequest(socialRequest, true);
 	}
 
 	/**
@@ -272,7 +316,22 @@ public abstract class SocialRequestLocalServiceBaseImpl
 		boolean merge) throws SystemException {
 		socialRequest.setNew(false);
 
-		return socialRequestPersistence.update(socialRequest, merge);
+		socialRequest = socialRequestPersistence.update(socialRequest, merge);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(socialRequest);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return socialRequest;
 	}
 
 	/**
@@ -836,6 +895,14 @@ public abstract class SocialRequestLocalServiceBaseImpl
 		_beanIdentifier = beanIdentifier;
 	}
 
+	protected Class<?> getModelClass() {
+		return SocialRequest.class;
+	}
+
+	protected String getModelClassName() {
+		return SocialRequest.class.getName();
+	}
+
 	/**
 	 * Performs an SQL query.
 	 *
@@ -913,5 +980,6 @@ public abstract class SocialRequestLocalServiceBaseImpl
 	protected UserPersistence userPersistence;
 	@BeanReference(type = UserFinder.class)
 	protected UserFinder userFinder;
+	private static Log _log = LogFactoryUtil.getLog(SocialRequestLocalServiceBaseImpl.class);
 	private String _beanIdentifier;
 }

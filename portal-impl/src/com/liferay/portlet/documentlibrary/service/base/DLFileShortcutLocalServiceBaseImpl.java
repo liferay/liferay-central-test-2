@@ -23,6 +23,11 @@ import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.service.ResourceLocalService;
 import com.liferay.portal.service.ResourceService;
@@ -102,7 +107,22 @@ public abstract class DLFileShortcutLocalServiceBaseImpl
 		throws SystemException {
 		dlFileShortcut.setNew(true);
 
-		return dlFileShortcutPersistence.update(dlFileShortcut, false);
+		dlFileShortcut = dlFileShortcutPersistence.update(dlFileShortcut, false);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(dlFileShortcut);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return dlFileShortcut;
 	}
 
 	/**
@@ -124,7 +144,20 @@ public abstract class DLFileShortcutLocalServiceBaseImpl
 	 */
 	public void deleteDLFileShortcut(long fileShortcutId)
 		throws PortalException, SystemException {
-		dlFileShortcutPersistence.remove(fileShortcutId);
+		DLFileShortcut dlFileShortcut = dlFileShortcutPersistence.remove(fileShortcutId);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(dlFileShortcut);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -136,6 +169,19 @@ public abstract class DLFileShortcutLocalServiceBaseImpl
 	public void deleteDLFileShortcut(DLFileShortcut dlFileShortcut)
 		throws SystemException {
 		dlFileShortcutPersistence.remove(dlFileShortcut);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(dlFileShortcut);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -267,9 +313,7 @@ public abstract class DLFileShortcutLocalServiceBaseImpl
 	 */
 	public DLFileShortcut updateDLFileShortcut(DLFileShortcut dlFileShortcut)
 		throws SystemException {
-		dlFileShortcut.setNew(false);
-
-		return dlFileShortcutPersistence.update(dlFileShortcut, true);
+		return updateDLFileShortcut(dlFileShortcut, true);
 	}
 
 	/**
@@ -284,7 +328,22 @@ public abstract class DLFileShortcutLocalServiceBaseImpl
 		boolean merge) throws SystemException {
 		dlFileShortcut.setNew(false);
 
-		return dlFileShortcutPersistence.update(dlFileShortcut, merge);
+		dlFileShortcut = dlFileShortcutPersistence.update(dlFileShortcut, merge);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(dlFileShortcut);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return dlFileShortcut;
 	}
 
 	/**
@@ -1063,6 +1122,14 @@ public abstract class DLFileShortcutLocalServiceBaseImpl
 		_beanIdentifier = beanIdentifier;
 	}
 
+	protected Class<?> getModelClass() {
+		return DLFileShortcut.class;
+	}
+
+	protected String getModelClassName() {
+		return DLFileShortcut.class.getName();
+	}
+
 	/**
 	 * Performs an SQL query.
 	 *
@@ -1164,5 +1231,6 @@ public abstract class DLFileShortcutLocalServiceBaseImpl
 	protected AssetTagPersistence assetTagPersistence;
 	@BeanReference(type = AssetTagFinder.class)
 	protected AssetTagFinder assetTagFinder;
+	private static Log _log = LogFactoryUtil.getLog(DLFileShortcutLocalServiceBaseImpl.class);
 	private String _beanIdentifier;
 }

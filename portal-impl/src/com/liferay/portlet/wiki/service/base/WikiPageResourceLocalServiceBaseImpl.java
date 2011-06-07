@@ -23,6 +23,11 @@ import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.service.ResourceLocalService;
 import com.liferay.portal.service.ResourceService;
@@ -79,7 +84,23 @@ public abstract class WikiPageResourceLocalServiceBaseImpl
 		WikiPageResource wikiPageResource) throws SystemException {
 		wikiPageResource.setNew(true);
 
-		return wikiPageResourcePersistence.update(wikiPageResource, false);
+		wikiPageResource = wikiPageResourcePersistence.update(wikiPageResource,
+				false);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(wikiPageResource);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return wikiPageResource;
 	}
 
 	/**
@@ -101,7 +122,20 @@ public abstract class WikiPageResourceLocalServiceBaseImpl
 	 */
 	public void deleteWikiPageResource(long resourcePrimKey)
 		throws PortalException, SystemException {
-		wikiPageResourcePersistence.remove(resourcePrimKey);
+		WikiPageResource wikiPageResource = wikiPageResourcePersistence.remove(resourcePrimKey);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(wikiPageResource);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -113,6 +147,19 @@ public abstract class WikiPageResourceLocalServiceBaseImpl
 	public void deleteWikiPageResource(WikiPageResource wikiPageResource)
 		throws SystemException {
 		wikiPageResourcePersistence.remove(wikiPageResource);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(wikiPageResource);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -230,9 +277,7 @@ public abstract class WikiPageResourceLocalServiceBaseImpl
 	 */
 	public WikiPageResource updateWikiPageResource(
 		WikiPageResource wikiPageResource) throws SystemException {
-		wikiPageResource.setNew(false);
-
-		return wikiPageResourcePersistence.update(wikiPageResource, true);
+		return updateWikiPageResource(wikiPageResource, true);
 	}
 
 	/**
@@ -248,7 +293,23 @@ public abstract class WikiPageResourceLocalServiceBaseImpl
 		throws SystemException {
 		wikiPageResource.setNew(false);
 
-		return wikiPageResourcePersistence.update(wikiPageResource, merge);
+		wikiPageResource = wikiPageResourcePersistence.update(wikiPageResource,
+				merge);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(wikiPageResource);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return wikiPageResource;
 	}
 
 	/**
@@ -598,6 +659,14 @@ public abstract class WikiPageResourceLocalServiceBaseImpl
 		_beanIdentifier = beanIdentifier;
 	}
 
+	protected Class<?> getModelClass() {
+		return WikiPageResource.class;
+	}
+
+	protected String getModelClassName() {
+		return WikiPageResource.class.getName();
+	}
+
 	/**
 	 * Performs an SQL query.
 	 *
@@ -653,5 +722,6 @@ public abstract class WikiPageResourceLocalServiceBaseImpl
 	protected UserPersistence userPersistence;
 	@BeanReference(type = UserFinder.class)
 	protected UserFinder userFinder;
+	private static Log _log = LogFactoryUtil.getLog(WikiPageResourceLocalServiceBaseImpl.class);
 	private String _beanIdentifier;
 }

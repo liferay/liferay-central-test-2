@@ -795,6 +795,14 @@ public abstract class FlagsEntryServiceBaseImpl extends PrincipalBean
 		_beanIdentifier = beanIdentifier;
 	}
 
+	protected Class<?> getModelClass() {
+		return FlagsEntry.class;
+	}
+
+	protected String getModelClassName() {
+		return FlagsEntry.class.getName();
+	}
+
 	/**
 	 * Performs an SQL query.
 	 *

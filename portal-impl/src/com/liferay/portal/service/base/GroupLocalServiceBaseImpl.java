@@ -23,6 +23,11 @@ import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.service.AccountLocalService;
@@ -300,7 +305,22 @@ public abstract class GroupLocalServiceBaseImpl implements GroupLocalService,
 	public Group addGroup(Group group) throws SystemException {
 		group.setNew(true);
 
-		return groupPersistence.update(group, false);
+		group = groupPersistence.update(group, false);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(group);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return group;
 	}
 
 	/**
@@ -322,7 +342,20 @@ public abstract class GroupLocalServiceBaseImpl implements GroupLocalService,
 	 */
 	public void deleteGroup(long groupId)
 		throws PortalException, SystemException {
-		groupPersistence.remove(groupId);
+		Group group = groupPersistence.remove(groupId);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(group);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -335,6 +368,19 @@ public abstract class GroupLocalServiceBaseImpl implements GroupLocalService,
 	public void deleteGroup(Group group)
 		throws PortalException, SystemException {
 		groupPersistence.remove(group);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(group);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -448,9 +494,7 @@ public abstract class GroupLocalServiceBaseImpl implements GroupLocalService,
 	 * @throws SystemException if a system exception occurred
 	 */
 	public Group updateGroup(Group group) throws SystemException {
-		group.setNew(false);
-
-		return groupPersistence.update(group, true);
+		return updateGroup(group, true);
 	}
 
 	/**
@@ -465,7 +509,22 @@ public abstract class GroupLocalServiceBaseImpl implements GroupLocalService,
 		throws SystemException {
 		group.setNew(false);
 
-		return groupPersistence.update(group, merge);
+		group = groupPersistence.update(group, merge);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(group);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return group;
 	}
 
 	/**
@@ -4947,6 +5006,14 @@ public abstract class GroupLocalServiceBaseImpl implements GroupLocalService,
 		_beanIdentifier = beanIdentifier;
 	}
 
+	protected Class<?> getModelClass() {
+		return Group.class;
+	}
+
+	protected String getModelClassName() {
+		return Group.class.getName();
+	}
+
 	/**
 	 * Performs an SQL query.
 	 *
@@ -5446,5 +5513,6 @@ public abstract class GroupLocalServiceBaseImpl implements GroupLocalService,
 	protected WikiNodeService wikiNodeService;
 	@BeanReference(type = WikiNodePersistence.class)
 	protected WikiNodePersistence wikiNodePersistence;
+	private static Log _log = LogFactoryUtil.getLog(GroupLocalServiceBaseImpl.class);
 	private String _beanIdentifier;
 }

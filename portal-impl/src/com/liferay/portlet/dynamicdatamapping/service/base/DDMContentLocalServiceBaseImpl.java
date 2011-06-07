@@ -23,6 +23,11 @@ import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.service.ResourceLocalService;
 import com.liferay.portal.service.ResourceService;
@@ -85,7 +90,22 @@ public abstract class DDMContentLocalServiceBaseImpl
 		throws SystemException {
 		ddmContent.setNew(true);
 
-		return ddmContentPersistence.update(ddmContent, false);
+		ddmContent = ddmContentPersistence.update(ddmContent, false);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(ddmContent);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return ddmContent;
 	}
 
 	/**
@@ -107,7 +127,20 @@ public abstract class DDMContentLocalServiceBaseImpl
 	 */
 	public void deleteDDMContent(long contentId)
 		throws PortalException, SystemException {
-		ddmContentPersistence.remove(contentId);
+		DDMContent ddmContent = ddmContentPersistence.remove(contentId);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(ddmContent);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -119,6 +152,19 @@ public abstract class DDMContentLocalServiceBaseImpl
 	public void deleteDDMContent(DDMContent ddmContent)
 		throws SystemException {
 		ddmContentPersistence.remove(ddmContent);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(ddmContent);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -250,9 +296,7 @@ public abstract class DDMContentLocalServiceBaseImpl
 	 */
 	public DDMContent updateDDMContent(DDMContent ddmContent)
 		throws SystemException {
-		ddmContent.setNew(false);
-
-		return ddmContentPersistence.update(ddmContent, true);
+		return updateDDMContent(ddmContent, true);
 	}
 
 	/**
@@ -267,7 +311,22 @@ public abstract class DDMContentLocalServiceBaseImpl
 		throws SystemException {
 		ddmContent.setNew(false);
 
-		return ddmContentPersistence.update(ddmContent, merge);
+		ddmContent = ddmContentPersistence.update(ddmContent, merge);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(ddmContent);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return ddmContent;
 	}
 
 	/**
@@ -732,6 +791,14 @@ public abstract class DDMContentLocalServiceBaseImpl
 		_beanIdentifier = beanIdentifier;
 	}
 
+	protected Class<?> getModelClass() {
+		return DDMContent.class;
+	}
+
+	protected String getModelClassName() {
+		return DDMContent.class.getName();
+	}
+
 	/**
 	 * Performs an SQL query.
 	 *
@@ -799,5 +866,6 @@ public abstract class DDMContentLocalServiceBaseImpl
 	protected UserPersistence userPersistence;
 	@BeanReference(type = UserFinder.class)
 	protected UserFinder userFinder;
+	private static Log _log = LogFactoryUtil.getLog(DDMContentLocalServiceBaseImpl.class);
 	private String _beanIdentifier;
 }

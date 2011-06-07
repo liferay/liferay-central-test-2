@@ -23,6 +23,11 @@ import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.model.Contact;
 import com.liferay.portal.service.AccountLocalService;
@@ -230,7 +235,22 @@ public abstract class ContactLocalServiceBaseImpl implements ContactLocalService
 	public Contact addContact(Contact contact) throws SystemException {
 		contact.setNew(true);
 
-		return contactPersistence.update(contact, false);
+		contact = contactPersistence.update(contact, false);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(contact);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return contact;
 	}
 
 	/**
@@ -252,7 +272,20 @@ public abstract class ContactLocalServiceBaseImpl implements ContactLocalService
 	 */
 	public void deleteContact(long contactId)
 		throws PortalException, SystemException {
-		contactPersistence.remove(contactId);
+		Contact contact = contactPersistence.remove(contactId);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(contact);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -263,6 +296,19 @@ public abstract class ContactLocalServiceBaseImpl implements ContactLocalService
 	 */
 	public void deleteContact(Contact contact) throws SystemException {
 		contactPersistence.remove(contact);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(contact);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -378,9 +424,7 @@ public abstract class ContactLocalServiceBaseImpl implements ContactLocalService
 	 * @throws SystemException if a system exception occurred
 	 */
 	public Contact updateContact(Contact contact) throws SystemException {
-		contact.setNew(false);
-
-		return contactPersistence.update(contact, true);
+		return updateContact(contact, true);
 	}
 
 	/**
@@ -395,7 +439,22 @@ public abstract class ContactLocalServiceBaseImpl implements ContactLocalService
 		throws SystemException {
 		contact.setNew(false);
 
-		return contactPersistence.update(contact, merge);
+		contact = contactPersistence.update(contact, merge);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(contact);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return contact;
 	}
 
 	/**
@@ -3585,6 +3644,14 @@ public abstract class ContactLocalServiceBaseImpl implements ContactLocalService
 		_beanIdentifier = beanIdentifier;
 	}
 
+	protected Class<?> getModelClass() {
+		return Contact.class;
+	}
+
+	protected String getModelClassName() {
+		return Contact.class.getName();
+	}
+
 	/**
 	 * Performs an SQL query.
 	 *
@@ -3946,5 +4013,6 @@ public abstract class ContactLocalServiceBaseImpl implements ContactLocalService
 	protected WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
 	@BeanReference(type = CounterLocalService.class)
 	protected CounterLocalService counterLocalService;
+	private static Log _log = LogFactoryUtil.getLog(ContactLocalServiceBaseImpl.class);
 	private String _beanIdentifier;
 }

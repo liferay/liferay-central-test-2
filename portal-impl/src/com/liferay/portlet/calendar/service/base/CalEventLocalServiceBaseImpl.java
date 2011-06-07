@@ -25,6 +25,11 @@ import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.service.CompanyLocalService;
 import com.liferay.portal.service.CompanyService;
@@ -102,7 +107,22 @@ public abstract class CalEventLocalServiceBaseImpl
 	public CalEvent addCalEvent(CalEvent calEvent) throws SystemException {
 		calEvent.setNew(true);
 
-		return calEventPersistence.update(calEvent, false);
+		calEvent = calEventPersistence.update(calEvent, false);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(calEvent);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return calEvent;
 	}
 
 	/**
@@ -124,7 +144,20 @@ public abstract class CalEventLocalServiceBaseImpl
 	 */
 	public void deleteCalEvent(long eventId)
 		throws PortalException, SystemException {
-		calEventPersistence.remove(eventId);
+		CalEvent calEvent = calEventPersistence.remove(eventId);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(calEvent);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -135,6 +168,19 @@ public abstract class CalEventLocalServiceBaseImpl
 	 */
 	public void deleteCalEvent(CalEvent calEvent) throws SystemException {
 		calEventPersistence.remove(calEvent);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(calEvent);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -264,9 +310,7 @@ public abstract class CalEventLocalServiceBaseImpl
 	 * @throws SystemException if a system exception occurred
 	 */
 	public CalEvent updateCalEvent(CalEvent calEvent) throws SystemException {
-		calEvent.setNew(false);
-
-		return calEventPersistence.update(calEvent, true);
+		return updateCalEvent(calEvent, true);
 	}
 
 	/**
@@ -281,7 +325,22 @@ public abstract class CalEventLocalServiceBaseImpl
 		throws SystemException {
 		calEvent.setNew(false);
 
-		return calEventPersistence.update(calEvent, merge);
+		calEvent = calEventPersistence.update(calEvent, merge);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(calEvent);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return calEvent;
 	}
 
 	/**
@@ -1056,6 +1115,14 @@ public abstract class CalEventLocalServiceBaseImpl
 		_beanIdentifier = beanIdentifier;
 	}
 
+	protected Class<?> getModelClass() {
+		return CalEvent.class;
+	}
+
+	protected String getModelClassName() {
+		return CalEvent.class.getName();
+	}
+
 	/**
 	 * Performs an SQL query.
 	 *
@@ -1157,5 +1224,6 @@ public abstract class CalEventLocalServiceBaseImpl
 	protected SocialActivityPersistence socialActivityPersistence;
 	@BeanReference(type = SocialActivityFinder.class)
 	protected SocialActivityFinder socialActivityFinder;
+	private static Log _log = LogFactoryUtil.getLog(CalEventLocalServiceBaseImpl.class);
 	private String _beanIdentifier;
 }

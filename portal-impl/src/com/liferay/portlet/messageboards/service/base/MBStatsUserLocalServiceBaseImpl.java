@@ -23,6 +23,11 @@ import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.service.ResourceLocalService;
 import com.liferay.portal.service.ResourceService;
@@ -94,7 +99,22 @@ public abstract class MBStatsUserLocalServiceBaseImpl
 		throws SystemException {
 		mbStatsUser.setNew(true);
 
-		return mbStatsUserPersistence.update(mbStatsUser, false);
+		mbStatsUser = mbStatsUserPersistence.update(mbStatsUser, false);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(mbStatsUser);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return mbStatsUser;
 	}
 
 	/**
@@ -116,7 +136,20 @@ public abstract class MBStatsUserLocalServiceBaseImpl
 	 */
 	public void deleteMBStatsUser(long statsUserId)
 		throws PortalException, SystemException {
-		mbStatsUserPersistence.remove(statsUserId);
+		MBStatsUser mbStatsUser = mbStatsUserPersistence.remove(statsUserId);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(mbStatsUser);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -128,6 +161,19 @@ public abstract class MBStatsUserLocalServiceBaseImpl
 	public void deleteMBStatsUser(MBStatsUser mbStatsUser)
 		throws SystemException {
 		mbStatsUserPersistence.remove(mbStatsUser);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(mbStatsUser);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -245,9 +291,7 @@ public abstract class MBStatsUserLocalServiceBaseImpl
 	 */
 	public MBStatsUser updateMBStatsUser(MBStatsUser mbStatsUser)
 		throws SystemException {
-		mbStatsUser.setNew(false);
-
-		return mbStatsUserPersistence.update(mbStatsUser, true);
+		return updateMBStatsUser(mbStatsUser, true);
 	}
 
 	/**
@@ -262,7 +306,22 @@ public abstract class MBStatsUserLocalServiceBaseImpl
 		throws SystemException {
 		mbStatsUser.setNew(false);
 
-		return mbStatsUserPersistence.update(mbStatsUser, merge);
+		mbStatsUser = mbStatsUserPersistence.update(mbStatsUser, merge);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(mbStatsUser);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return mbStatsUser;
 	}
 
 	/**
@@ -892,6 +951,14 @@ public abstract class MBStatsUserLocalServiceBaseImpl
 		_beanIdentifier = beanIdentifier;
 	}
 
+	protected Class<?> getModelClass() {
+		return MBStatsUser.class;
+	}
+
+	protected String getModelClassName() {
+		return MBStatsUser.class.getName();
+	}
+
 	/**
 	 * Performs an SQL query.
 	 *
@@ -977,5 +1044,6 @@ public abstract class MBStatsUserLocalServiceBaseImpl
 	protected UserPersistence userPersistence;
 	@BeanReference(type = UserFinder.class)
 	protected UserFinder userFinder;
+	private static Log _log = LogFactoryUtil.getLog(MBStatsUserLocalServiceBaseImpl.class);
 	private String _beanIdentifier;
 }

@@ -23,6 +23,11 @@ import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.service.ResourceLocalService;
 import com.liferay.portal.service.ResourceService;
@@ -80,7 +85,22 @@ public abstract class ExpandoValueLocalServiceBaseImpl
 		throws SystemException {
 		expandoValue.setNew(true);
 
-		return expandoValuePersistence.update(expandoValue, false);
+		expandoValue = expandoValuePersistence.update(expandoValue, false);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(expandoValue);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return expandoValue;
 	}
 
 	/**
@@ -102,7 +122,20 @@ public abstract class ExpandoValueLocalServiceBaseImpl
 	 */
 	public void deleteExpandoValue(long valueId)
 		throws PortalException, SystemException {
-		expandoValuePersistence.remove(valueId);
+		ExpandoValue expandoValue = expandoValuePersistence.remove(valueId);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(expandoValue);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -114,6 +147,19 @@ public abstract class ExpandoValueLocalServiceBaseImpl
 	public void deleteExpandoValue(ExpandoValue expandoValue)
 		throws SystemException {
 		expandoValuePersistence.remove(expandoValue);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(expandoValue);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -231,9 +277,7 @@ public abstract class ExpandoValueLocalServiceBaseImpl
 	 */
 	public ExpandoValue updateExpandoValue(ExpandoValue expandoValue)
 		throws SystemException {
-		expandoValue.setNew(false);
-
-		return expandoValuePersistence.update(expandoValue, true);
+		return updateExpandoValue(expandoValue, true);
 	}
 
 	/**
@@ -248,7 +292,22 @@ public abstract class ExpandoValueLocalServiceBaseImpl
 		boolean merge) throws SystemException {
 		expandoValue.setNew(false);
 
-		return expandoValuePersistence.update(expandoValue, merge);
+		expandoValue = expandoValuePersistence.update(expandoValue, merge);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(expandoValue);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return expandoValue;
 	}
 
 	/**
@@ -621,6 +680,14 @@ public abstract class ExpandoValueLocalServiceBaseImpl
 		_beanIdentifier = beanIdentifier;
 	}
 
+	protected Class<?> getModelClass() {
+		return ExpandoValue.class;
+	}
+
+	protected String getModelClassName() {
+		return ExpandoValue.class.getName();
+	}
+
 	/**
 	 * Performs an SQL query.
 	 *
@@ -678,5 +745,6 @@ public abstract class ExpandoValueLocalServiceBaseImpl
 	protected UserPersistence userPersistence;
 	@BeanReference(type = UserFinder.class)
 	protected UserFinder userFinder;
+	private static Log _log = LogFactoryUtil.getLog(ExpandoValueLocalServiceBaseImpl.class);
 	private String _beanIdentifier;
 }

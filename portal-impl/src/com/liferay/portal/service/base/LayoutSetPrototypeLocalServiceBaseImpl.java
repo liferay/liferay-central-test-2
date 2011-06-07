@@ -23,6 +23,11 @@ import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.model.LayoutSetPrototype;
 import com.liferay.portal.service.AccountLocalService;
@@ -231,7 +236,23 @@ public abstract class LayoutSetPrototypeLocalServiceBaseImpl
 		LayoutSetPrototype layoutSetPrototype) throws SystemException {
 		layoutSetPrototype.setNew(true);
 
-		return layoutSetPrototypePersistence.update(layoutSetPrototype, false);
+		layoutSetPrototype = layoutSetPrototypePersistence.update(layoutSetPrototype,
+				false);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(layoutSetPrototype);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return layoutSetPrototype;
 	}
 
 	/**
@@ -254,7 +275,20 @@ public abstract class LayoutSetPrototypeLocalServiceBaseImpl
 	 */
 	public void deleteLayoutSetPrototype(long layoutSetPrototypeId)
 		throws PortalException, SystemException {
-		layoutSetPrototypePersistence.remove(layoutSetPrototypeId);
+		LayoutSetPrototype layoutSetPrototype = layoutSetPrototypePersistence.remove(layoutSetPrototypeId);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(layoutSetPrototype);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -267,6 +301,19 @@ public abstract class LayoutSetPrototypeLocalServiceBaseImpl
 	public void deleteLayoutSetPrototype(LayoutSetPrototype layoutSetPrototype)
 		throws PortalException, SystemException {
 		layoutSetPrototypePersistence.remove(layoutSetPrototype);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(layoutSetPrototype);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -384,9 +431,7 @@ public abstract class LayoutSetPrototypeLocalServiceBaseImpl
 	 */
 	public LayoutSetPrototype updateLayoutSetPrototype(
 		LayoutSetPrototype layoutSetPrototype) throws SystemException {
-		layoutSetPrototype.setNew(false);
-
-		return layoutSetPrototypePersistence.update(layoutSetPrototype, true);
+		return updateLayoutSetPrototype(layoutSetPrototype, true);
 	}
 
 	/**
@@ -402,7 +447,23 @@ public abstract class LayoutSetPrototypeLocalServiceBaseImpl
 		throws SystemException {
 		layoutSetPrototype.setNew(false);
 
-		return layoutSetPrototypePersistence.update(layoutSetPrototype, merge);
+		layoutSetPrototype = layoutSetPrototypePersistence.update(layoutSetPrototype,
+				merge);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(layoutSetPrototype);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return layoutSetPrototype;
 	}
 
 	/**
@@ -3592,6 +3653,14 @@ public abstract class LayoutSetPrototypeLocalServiceBaseImpl
 		_beanIdentifier = beanIdentifier;
 	}
 
+	protected Class<?> getModelClass() {
+		return LayoutSetPrototype.class;
+	}
+
+	protected String getModelClassName() {
+		return LayoutSetPrototype.class.getName();
+	}
+
 	/**
 	 * Performs an SQL query.
 	 *
@@ -3953,5 +4022,6 @@ public abstract class LayoutSetPrototypeLocalServiceBaseImpl
 	protected WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
 	@BeanReference(type = CounterLocalService.class)
 	protected CounterLocalService counterLocalService;
+	private static Log _log = LogFactoryUtil.getLog(LayoutSetPrototypeLocalServiceBaseImpl.class);
 	private String _beanIdentifier;
 }

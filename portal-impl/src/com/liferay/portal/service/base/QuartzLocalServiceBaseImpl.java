@@ -3402,6 +3402,14 @@ public abstract class QuartzLocalServiceBaseImpl implements QuartzLocalService,
 		_beanIdentifier = beanIdentifier;
 	}
 
+	protected Class<?> getModelClass() {
+		return Quartz.class;
+	}
+
+	protected String getModelClassName() {
+		return Quartz.class.getName();
+	}
+
 	/**
 	 * Performs an SQL query.
 	 *

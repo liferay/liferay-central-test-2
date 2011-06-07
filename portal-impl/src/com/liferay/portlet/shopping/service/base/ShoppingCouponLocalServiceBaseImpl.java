@@ -23,6 +23,11 @@ import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.service.ResourceLocalService;
 import com.liferay.portal.service.ResourceService;
@@ -93,7 +98,22 @@ public abstract class ShoppingCouponLocalServiceBaseImpl
 		throws SystemException {
 		shoppingCoupon.setNew(true);
 
-		return shoppingCouponPersistence.update(shoppingCoupon, false);
+		shoppingCoupon = shoppingCouponPersistence.update(shoppingCoupon, false);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(shoppingCoupon);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return shoppingCoupon;
 	}
 
 	/**
@@ -115,7 +135,20 @@ public abstract class ShoppingCouponLocalServiceBaseImpl
 	 */
 	public void deleteShoppingCoupon(long couponId)
 		throws PortalException, SystemException {
-		shoppingCouponPersistence.remove(couponId);
+		ShoppingCoupon shoppingCoupon = shoppingCouponPersistence.remove(couponId);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(shoppingCoupon);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -127,6 +160,19 @@ public abstract class ShoppingCouponLocalServiceBaseImpl
 	public void deleteShoppingCoupon(ShoppingCoupon shoppingCoupon)
 		throws SystemException {
 		shoppingCouponPersistence.remove(shoppingCoupon);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(shoppingCoupon);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -244,9 +290,7 @@ public abstract class ShoppingCouponLocalServiceBaseImpl
 	 */
 	public ShoppingCoupon updateShoppingCoupon(ShoppingCoupon shoppingCoupon)
 		throws SystemException {
-		shoppingCoupon.setNew(false);
-
-		return shoppingCouponPersistence.update(shoppingCoupon, true);
+		return updateShoppingCoupon(shoppingCoupon, true);
 	}
 
 	/**
@@ -261,7 +305,22 @@ public abstract class ShoppingCouponLocalServiceBaseImpl
 		boolean merge) throws SystemException {
 		shoppingCoupon.setNew(false);
 
-		return shoppingCouponPersistence.update(shoppingCoupon, merge);
+		shoppingCoupon = shoppingCouponPersistence.update(shoppingCoupon, merge);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(shoppingCoupon);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return shoppingCoupon;
 	}
 
 	/**
@@ -879,6 +938,14 @@ public abstract class ShoppingCouponLocalServiceBaseImpl
 		_beanIdentifier = beanIdentifier;
 	}
 
+	protected Class<?> getModelClass() {
+		return ShoppingCoupon.class;
+	}
+
+	protected String getModelClassName() {
+		return ShoppingCoupon.class.getName();
+	}
+
 	/**
 	 * Performs an SQL query.
 	 *
@@ -962,5 +1029,6 @@ public abstract class ShoppingCouponLocalServiceBaseImpl
 	protected UserPersistence userPersistence;
 	@BeanReference(type = UserFinder.class)
 	protected UserFinder userFinder;
+	private static Log _log = LogFactoryUtil.getLog(ShoppingCouponLocalServiceBaseImpl.class);
 	private String _beanIdentifier;
 }

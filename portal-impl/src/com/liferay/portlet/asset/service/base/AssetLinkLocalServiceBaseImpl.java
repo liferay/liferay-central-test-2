@@ -23,6 +23,11 @@ import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.service.ResourceLocalService;
 import com.liferay.portal.service.ResourceService;
@@ -98,7 +103,22 @@ public abstract class AssetLinkLocalServiceBaseImpl
 		throws SystemException {
 		assetLink.setNew(true);
 
-		return assetLinkPersistence.update(assetLink, false);
+		assetLink = assetLinkPersistence.update(assetLink, false);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(assetLink);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return assetLink;
 	}
 
 	/**
@@ -120,7 +140,20 @@ public abstract class AssetLinkLocalServiceBaseImpl
 	 */
 	public void deleteAssetLink(long linkId)
 		throws PortalException, SystemException {
-		assetLinkPersistence.remove(linkId);
+		AssetLink assetLink = assetLinkPersistence.remove(linkId);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(assetLink);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -131,6 +164,19 @@ public abstract class AssetLinkLocalServiceBaseImpl
 	 */
 	public void deleteAssetLink(AssetLink assetLink) throws SystemException {
 		assetLinkPersistence.remove(assetLink);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(assetLink);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -248,9 +294,7 @@ public abstract class AssetLinkLocalServiceBaseImpl
 	 */
 	public AssetLink updateAssetLink(AssetLink assetLink)
 		throws SystemException {
-		assetLink.setNew(false);
-
-		return assetLinkPersistence.update(assetLink, true);
+		return updateAssetLink(assetLink, true);
 	}
 
 	/**
@@ -265,7 +309,22 @@ public abstract class AssetLinkLocalServiceBaseImpl
 		throws SystemException {
 		assetLink.setNew(false);
 
-		return assetLinkPersistence.update(assetLink, merge);
+		assetLink = assetLinkPersistence.update(assetLink, merge);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(assetLink);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return assetLink;
 	}
 
 	/**
@@ -975,6 +1034,14 @@ public abstract class AssetLinkLocalServiceBaseImpl
 		_beanIdentifier = beanIdentifier;
 	}
 
+	protected Class<?> getModelClass() {
+		return AssetLink.class;
+	}
+
+	protected String getModelClassName() {
+		return AssetLink.class.getName();
+	}
+
 	/**
 	 * Performs an SQL query.
 	 *
@@ -1068,5 +1135,6 @@ public abstract class AssetLinkLocalServiceBaseImpl
 	protected UserPersistence userPersistence;
 	@BeanReference(type = UserFinder.class)
 	protected UserFinder userFinder;
+	private static Log _log = LogFactoryUtil.getLog(AssetLinkLocalServiceBaseImpl.class);
 	private String _beanIdentifier;
 }

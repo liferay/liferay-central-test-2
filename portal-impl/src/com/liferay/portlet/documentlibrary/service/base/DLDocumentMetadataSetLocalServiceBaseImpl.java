@@ -23,6 +23,11 @@ import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.service.ResourceLocalService;
 import com.liferay.portal.service.ResourceService;
@@ -97,8 +102,23 @@ public abstract class DLDocumentMetadataSetLocalServiceBaseImpl
 		DLDocumentMetadataSet dlDocumentMetadataSet) throws SystemException {
 		dlDocumentMetadataSet.setNew(true);
 
-		return dlDocumentMetadataSetPersistence.update(dlDocumentMetadataSet,
-			false);
+		dlDocumentMetadataSet = dlDocumentMetadataSetPersistence.update(dlDocumentMetadataSet,
+				false);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(dlDocumentMetadataSet);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return dlDocumentMetadataSet;
 	}
 
 	/**
@@ -121,7 +141,20 @@ public abstract class DLDocumentMetadataSetLocalServiceBaseImpl
 	 */
 	public void deleteDLDocumentMetadataSet(long documentMetadataSetId)
 		throws PortalException, SystemException {
-		dlDocumentMetadataSetPersistence.remove(documentMetadataSetId);
+		DLDocumentMetadataSet dlDocumentMetadataSet = dlDocumentMetadataSetPersistence.remove(documentMetadataSetId);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(dlDocumentMetadataSet);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -133,6 +166,19 @@ public abstract class DLDocumentMetadataSetLocalServiceBaseImpl
 	public void deleteDLDocumentMetadataSet(
 		DLDocumentMetadataSet dlDocumentMetadataSet) throws SystemException {
 		dlDocumentMetadataSetPersistence.remove(dlDocumentMetadataSet);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.delete(dlDocumentMetadataSet);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
 	}
 
 	/**
@@ -250,10 +296,7 @@ public abstract class DLDocumentMetadataSetLocalServiceBaseImpl
 	 */
 	public DLDocumentMetadataSet updateDLDocumentMetadataSet(
 		DLDocumentMetadataSet dlDocumentMetadataSet) throws SystemException {
-		dlDocumentMetadataSet.setNew(false);
-
-		return dlDocumentMetadataSetPersistence.update(dlDocumentMetadataSet,
-			true);
+		return updateDLDocumentMetadataSet(dlDocumentMetadataSet, true);
 	}
 
 	/**
@@ -269,8 +312,23 @@ public abstract class DLDocumentMetadataSetLocalServiceBaseImpl
 		throws SystemException {
 		dlDocumentMetadataSet.setNew(false);
 
-		return dlDocumentMetadataSetPersistence.update(dlDocumentMetadataSet,
-			merge);
+		dlDocumentMetadataSet = dlDocumentMetadataSetPersistence.update(dlDocumentMetadataSet,
+				merge);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
+
+		if (indexer != null) {
+			try {
+				indexer.reindex(dlDocumentMetadataSet);
+			}
+			catch (SearchException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(se, se);
+				}
+			}
+		}
+
+		return dlDocumentMetadataSet;
 	}
 
 	/**
@@ -959,6 +1017,14 @@ public abstract class DLDocumentMetadataSetLocalServiceBaseImpl
 		_beanIdentifier = beanIdentifier;
 	}
 
+	protected Class<?> getModelClass() {
+		return DLDocumentMetadataSet.class;
+	}
+
+	protected String getModelClassName() {
+		return DLDocumentMetadataSet.class.getName();
+	}
+
 	/**
 	 * Performs an SQL query.
 	 *
@@ -1050,5 +1116,6 @@ public abstract class DLDocumentMetadataSetLocalServiceBaseImpl
 	protected DDMStructureLinkService ddmStructureLinkService;
 	@BeanReference(type = DDMStructureLinkPersistence.class)
 	protected DDMStructureLinkPersistence ddmStructureLinkPersistence;
+	private static Log _log = LogFactoryUtil.getLog(DLDocumentMetadataSetLocalServiceBaseImpl.class);
 	private String _beanIdentifier;
 }
