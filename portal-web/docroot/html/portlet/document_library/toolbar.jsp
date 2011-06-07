@@ -65,6 +65,7 @@ String orderByType = ParamUtil.getString(request, "orderByType");
 		%>
 
 		<liferay-ui:icon-delete
+			deleteMessage='<%= LanguageUtil.get(pageContext, "are-you-sure-you-want-to-delete-the-selected-entries") %>'
 			url="<%= taglibUrl %>"
 		/>
 	</liferay-ui:icon-menu>
