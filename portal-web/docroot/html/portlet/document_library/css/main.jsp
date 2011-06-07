@@ -68,8 +68,7 @@
 	}
 
 	.move-list {
-		.move-file {
-			background: #f0faf0 url(<%= themeImagesPath %>/file_system/small/jpg.png) no-repeat 5px 50%;
+		.move-file, .move-folder {
 			border-bottom: 1px solid #ccc;
 			display: block;
 			font-weight: bold;
@@ -77,6 +76,14 @@
 			padding: 5px;
 			padding-left: 25px;
 			position: relative;
+		}
+
+		.move-file {
+			background: #f0faf0 url(<%= themeImagesPath %>/file_system/small/jpg.png) no-repeat 5px 50%;
+		}
+
+		.move-folder {
+			background: #f0faf0 url(<%= themeImagesPath %>/common/folder.png) no-repeat 5px 50%;
 		}
 
 		.move-error {
