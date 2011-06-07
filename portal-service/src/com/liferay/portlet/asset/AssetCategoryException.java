@@ -27,8 +27,8 @@ public class AssetCategoryException extends PortalException {
 	public static final int TOO_MANY_CATEGORIES = 2;
 
 	public AssetCategoryException(AssetVocabulary vocabulary, int type) {
-		_type = type;
 		_vocabulary = vocabulary;
+		_type = type;
 	}
 
 	public int getType() {

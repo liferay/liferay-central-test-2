@@ -17,15 +17,19 @@
 <%@ include file="/html/taglib/init.jsp" %>
 
 <%@ page import="com.liferay.portlet.asset.AssetCategoryException" %>
+<%@ page import="com.liferay.portlet.asset.model.AssetVocabulary" %>
 
 <liferay-ui:error exception="<%= AssetCategoryException.class %>">
 
 	<%
 	AssetCategoryException ace = (AssetCategoryException)errorException;
+
+	AssetVocabulary vocabulary = ace.getVocabulary();
+
 	String vocabularyTitle = StringPool.BLANK;
 
-	if (ace.getVocabulary() != null) {
-		vocabularyTitle = ace.getVocabulary().getTitle(locale);
+	if (vocabulary != null) {
+		vocabularyTitle = vocabulary.getTitle(locale);
 	}
 	%>
 

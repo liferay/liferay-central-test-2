@@ -119,8 +119,8 @@ public class BaseAssetEntryValidator implements AssetEntryValidator {
 			}
 
 			if (!found && !categories.isEmpty()) {
-				throw new AssetCategoryException(vocabulary,
-					AssetCategoryException.AT_LEAST_ONE_CATEGORY);
+				throw new AssetCategoryException(
+					vocabulary, AssetCategoryException.AT_LEAST_ONE_CATEGORY);
 			}
 		}
 
@@ -136,7 +136,8 @@ public class BaseAssetEntryValidator implements AssetEntryValidator {
 						duplicate = true;
 					}
 					else {
-						throw new AssetCategoryException(vocabulary,
+						throw new AssetCategoryException(
+							vocabulary,
 							AssetCategoryException.TOO_MANY_CATEGORIES);
 					}
 				}
