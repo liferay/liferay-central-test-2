@@ -104,10 +104,9 @@ String[][] categorySections = {mainSections};
 			windowState="<%= LiferayWindowState.POP_UP.toString() %>"
 		/>
 
-		<aui:script use="aui-dialog,aui-dialog-iframe,aui-toolbar,liferay-util-window">
+		<aui:script use="aui-dialog,aui-dialog-iframe,aui-toolbar">
 			var buttonRow = A.one('#<portlet:namespace />layoutToolbar');
 
-			var permissionPopUp = null;
 			var popUp = null;
 
 			var layoutToolbar = new A.Toolbar(
@@ -142,6 +141,7 @@ String[][] categorySections = {mainSections};
 							handler: function(event) {
 								Liferay.Util.openWindow(
 									{
+										cache: false,
 										dialog: {
 											width: 700
 										},
