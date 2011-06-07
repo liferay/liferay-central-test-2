@@ -97,10 +97,10 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		setPortletId(portletId);
 		setStrutsPath(portletId);
 		setActive(true);
+		_indexerClasses = new ArrayList<String>();
 		_schedulerEntries = new ArrayList<SchedulerEntry>();
 		_assetRendererFactoryClasses = new ArrayList<String>();
 		_customAttributesDisplayClasses = new ArrayList<String>();
-		_indexerClasses = new ArrayList<String>();
 		_workflowHandlerClasses = new ArrayList<String>();
 		_autopropagatedParameters = new LinkedHashSet<String>();
 		_headerPortalCss = new ArrayList<String>();
@@ -534,18 +534,18 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Returns the name of the indexer classes of the portlet.
+	 * Returns the indexer class names of the portlet.
 	 *
-	 * @return the name of the indexer classes of the portlet
+	 * @return the indexer class names of the portlet
 	 */
 	public List<String> getIndexerClasses() {
 		return _indexerClasses;
 	}
 
 	/**
-	 * Sets the name of the indexer classes of the portlet.
+	 * Sets the indexer class names of the portlet.
 	 *
-	 * @param indexerClasses the name of the indexer classes of the portlet
+	 * @param indexerClasses the indexer class names of the portlet
 	 */
 	public void setIndexerClasses(List<String> indexerClasses) {
 		_indexerClasses = indexerClasses;
@@ -3264,7 +3264,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	private String _configurationActionClass;
 
 	/**
-	 * The name of the indexer class of the portlet.
+	 * The indexer class names of the portlet.
 	 */
 	private List<String> _indexerClasses;
 

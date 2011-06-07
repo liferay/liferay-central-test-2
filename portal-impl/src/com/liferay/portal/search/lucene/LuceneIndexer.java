@@ -86,12 +86,12 @@ public class LuceneIndexer implements Runnable {
 		catch (InterruptedException ie) {
 		}
 
-		StopWatch stopWatch1 = null;
+		StopWatch stopWatch = null;
 
 		if (_log.isInfoEnabled()) {
-			stopWatch1 = new StopWatch();
+			stopWatch = new StopWatch();
 
-			stopWatch1.start();
+			stopWatch.start();
 		}
 
 		try {
@@ -114,35 +114,14 @@ public class LuceneIndexer implements Runnable {
 				}
 
 				for (Indexer indexer : indexers) {
-					StopWatch stopWatch2 = null;
-
-					if (_log.isInfoEnabled()) {
-						stopWatch2 = new StopWatch();
-
-						stopWatch2.start();
-					}
-
-					if (_log.isInfoEnabled()) {
-						_log.info("Reindexing with " +
-							indexer.getClass().getName() + " started");
-					}
-
-					indexer.reindex(new String[] {String.valueOf(_companyId)});
-
-					if (_log.isInfoEnabled()) {
-						_log.info(
-							"Reindexing with " + indexer.getClass().getName() +
-								" completed in " +
-									(stopWatch2.getTime() / Time.SECOND) +
-										" seconds");
-					}
+					reindex(indexer);
 				}
 			}
 
 			if (_log.isInfoEnabled()) {
 				_log.info(
 					"Reindexing Lucene completed in " +
-						(stopWatch1.getTime() / Time.SECOND) + " seconds");
+						(stopWatch.getTime() / Time.SECOND) + " seconds");
 			}
 		}
 		catch (Exception e) {
@@ -154,6 +133,29 @@ public class LuceneIndexer implements Runnable {
 		}
 
 		_finished = true;
+	}
+
+	protected void reindex(Indexer indexer) throws Exception {
+		StopWatch stopWatch = null;
+
+		if (_log.isInfoEnabled()) {
+			stopWatch = new StopWatch();
+
+			stopWatch.start();
+		}
+
+		if (_log.isInfoEnabled()) {
+			_log.info("Reindexing with " + indexer.getClass() + " started");
+		}
+
+		indexer.reindex(new String[] {String.valueOf(_companyId)});
+
+		if (_log.isInfoEnabled()) {
+			_log.info(
+				"Reindexing with " + indexer.getClass() +
+					" completed in " + (stopWatch.getTime() / Time.SECOND) +
+						" seconds");
+		}
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(LuceneIndexer.class);

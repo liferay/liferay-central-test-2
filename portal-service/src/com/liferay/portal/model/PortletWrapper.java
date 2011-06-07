@@ -475,18 +475,18 @@ public class PortletWrapper implements Portlet {
 	}
 
 	/**
-	* Returns the name of the indexer classes of the portlet.
+	* Returns the indexer class names of the portlet.
 	*
-	* @return the name of the indexer classes of the portlet
+	* @return the indexer class names of the portlet
 	*/
 	public java.util.List<java.lang.String> getIndexerClasses() {
 		return _portlet.getIndexerClasses();
 	}
 
 	/**
-	* Sets the name of the indexer classes of the portlet.
+	* Sets the indexer class names of the portlet.
 	*
-	* @param indexerClasses the name of the indexer classes of the portlet
+	* @param indexerClasses the indexer class names of the portlet
 	*/
 	public void setIndexerClasses(
 		java.util.List<java.lang.String> indexerClasses) {

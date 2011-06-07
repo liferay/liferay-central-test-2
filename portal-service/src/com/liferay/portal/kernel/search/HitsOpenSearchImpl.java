@@ -29,6 +29,7 @@ import com.liferay.portlet.ratings.model.RatingsStats;
 import com.liferay.portlet.ratings.service.RatingsStatsLocalServiceUtil;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 import javax.portlet.PortletURL;
@@ -41,7 +42,13 @@ import javax.servlet.http.HttpServletRequest;
  */
 public abstract class HitsOpenSearchImpl extends BaseOpenSearchImpl {
 
-	public abstract Indexer getIndexer();
+	public Indexer getIndexer() {
+		if (_log.isWarnEnabled()) {
+			_log.warn(getClass() + " does not implement getIndexer()");
+		}
+
+		return null;
+	}
 
 	public abstract String getPortletId();
 
@@ -102,6 +109,15 @@ public abstract class HitsOpenSearchImpl extends BaseOpenSearchImpl {
 			searchContext.setUserId(userId);
 
 			Indexer indexer = getIndexer();
+
+			if (indexer == null) {
+				Portlet portlet = PortletLocalServiceUtil.getPortletById(
+					themeDisplay.getCompanyId(), getPortletId());
+
+				List<Indexer> indexers = portlet.getIndexerInstances();
+
+				indexer = indexers.get(0);
+			}
 
 			Hits results = indexer.search(searchContext);
 

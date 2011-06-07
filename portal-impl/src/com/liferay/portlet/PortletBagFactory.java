@@ -668,13 +668,9 @@ public class PortletBagFactory {
 	}
 
 	protected List<Indexer> newIndexers(Portlet portlet) throws Exception {
-		List<String> indexerClasses = portlet.getIndexerClasses();
-
-		if (Validator.isNull(indexerClasses)) {
-			return null;
-		}
-
 		List<Indexer> indexerInstances = new ArrayList<Indexer>();
+
+		List<String> indexerClasses = portlet.getIndexerClasses();
 
 		for (String indexerClass : indexerClasses) {
 			Indexer indexerInstance = (Indexer)newInstance(
