@@ -80,7 +80,7 @@ AUI().add(
 				);
 			}
 
-			if (s[0] == '.none') {
+			if (buffer[0] == '.none') {
 				return '';
 			}
 			else {
