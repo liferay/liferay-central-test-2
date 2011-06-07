@@ -1549,13 +1549,13 @@ public interface PropsKeys {
 
 	public static final String ROBOTS_TXT_WITHOUT_SITEMAP = "robots.txt.without.sitemap";
 
-	public static final String ROLES_COMMUNITY_SUBTYPES = "roles.community.subtypes";
-
 	public static final String ROLES_NAME_ALLOW_NUMERIC = "roles.name.allow.numeric";
 
 	public static final String ROLES_ORGANIZATION_SUBTYPES = "roles.organization.subtypes";
 
 	public static final String ROLES_REGULAR_SUBTYPES = "roles.regular.subtypes";
+
+	public static final String ROLES_SITE_SUBTYPES = "roles.site.subtypes";
 
 	public static final String RSS_CONNECTION_TIMEOUT = "rss.connection.timeout";
 

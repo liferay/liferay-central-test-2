@@ -174,7 +174,7 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 
 		for (String name : systemSiteRoles) {
 			String description = PropsUtil.get(
-				"system.community.role." +
+				"system.site.role." +
 				StringUtil.replace(name, CharPool.SPACE, CharPool.PERIOD) +
 				".description");
 			int type = RoleConstants.TYPE_SITE;

@@ -87,9 +87,9 @@ for (int i = 0; i < results.size(); i++) {
 
 	// Subtype
 
-	if ((PropsValues.ROLES_COMMUNITY_SUBTYPES.length > 0) ||
-		(PropsValues.ROLES_ORGANIZATION_SUBTYPES.length > 0) ||
-		(PropsValues.ROLES_REGULAR_SUBTYPES.length > 0)) {
+	if ((PropsValues.ROLES_ORGANIZATION_SUBTYPES.length > 0) ||
+		(PropsValues.ROLES_REGULAR_SUBTYPES.length > 0) ||
+		(PropsValues.ROLES_SITE_SUBTYPES.length > 0)) {
 
 		row.addText(LanguageUtil.get(pageContext, role.getSubtype()), rowURL);
 	}

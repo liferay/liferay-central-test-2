@@ -206,7 +206,7 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 					companyId, groupId, userId, resource, portletActions);
 			}
 
-			// Community permissions
+			// Group permissions
 
 			if ((groupId > 0) && addGroupPermissions) {
 				addGroupPermissions(
@@ -432,7 +432,7 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 			PermissionsListFilterFactory.getInstance();
 
 		groupPermissionsList =
-			permissionsListFilter.filterCommunityPermissions(
+			permissionsListFilter.filterGroupPermissions(
 				companyId, groupId, userId, name, primKey, portletActions,
 				groupPermissionsList);
 
@@ -569,7 +569,7 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 			}
 		}
 
-		// Community permissions
+		// Group permissions
 
 		if (groupId > 0) {
 			if (groupPermissions == null) {
@@ -581,7 +581,7 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 					companyId, groupPermissions, resource.getResourceId());
 
 			groupPermissionsList =
-				permissionsListFilter.filterCommunityPermissions(
+				permissionsListFilter.filterGroupPermissions(
 					companyId, groupId, userId, resource.getName(),
 					resource.getPrimKey(), false, groupPermissionsList);
 
@@ -645,7 +645,7 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 			resource.getPrimKey(), ownerRole.getRoleId(), userId,
 			actionIds.toArray(new String[actionIds.size()]));
 
-		// Community permissions
+		// Group permissions
 
 		if (groupId > 0) {
 			Role role = roleLocalService.getDefaultGroupRole(groupId);

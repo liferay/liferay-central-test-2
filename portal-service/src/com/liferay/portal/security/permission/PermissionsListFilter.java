@@ -23,7 +23,7 @@ import java.util.List;
  */
 public interface PermissionsListFilter {
 
-	public List<Permission> filterCommunityPermissions(
+	public List<Permission> filterGroupPermissions(
 		long companyId, long groupId, long userId, String name, String primKey,
 		boolean portletActions, List<Permission> permissions);
 

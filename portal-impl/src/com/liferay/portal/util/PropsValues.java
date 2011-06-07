@@ -1090,13 +1090,13 @@ public class PropsValues {
 
 	public static final String ROBOTS_TXT_WITHOUT_SITEMAP = PropsUtil.get(PropsKeys.ROBOTS_TXT_WITHOUT_SITEMAP);
 
-	public static final String[] ROLES_COMMUNITY_SUBTYPES = PropsUtil.getArray(PropsKeys.ROLES_COMMUNITY_SUBTYPES);
-
 	public static boolean ROLES_NAME_ALLOW_NUMERIC = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.ROLES_NAME_ALLOW_NUMERIC));
 
 	public static final String[] ROLES_ORGANIZATION_SUBTYPES = PropsUtil.getArray(PropsKeys.ROLES_ORGANIZATION_SUBTYPES);
 
 	public static final String[] ROLES_REGULAR_SUBTYPES = PropsUtil.getArray(PropsKeys.ROLES_REGULAR_SUBTYPES);
+
+	public static final String[] ROLES_SITE_SUBTYPES = PropsUtil.getArray(PropsKeys.ROLES_SITE_SUBTYPES);
 
 	public static final int RSS_CONNECTION_TIMEOUT = GetterUtil.getInteger(PropsUtil.get(PropsKeys.RSS_CONNECTION_TIMEOUT));
 

@@ -47,9 +47,9 @@ public class RoleSearch extends SearchContainer<Role> {
 		headerNames.add("name");
 		headerNames.add("type");
 
-		if ((PropsValues.ROLES_COMMUNITY_SUBTYPES.length > 0) ||
-			(PropsValues.ROLES_ORGANIZATION_SUBTYPES.length > 0) ||
-			(PropsValues.ROLES_REGULAR_SUBTYPES.length > 0)) {
+		if ((PropsValues.ROLES_ORGANIZATION_SUBTYPES.length > 0) ||
+			(PropsValues.ROLES_REGULAR_SUBTYPES.length > 0) ||
+			(PropsValues.ROLES_SITE_SUBTYPES.length > 0)) {
 
 			headerNames.add("subtype");
 		}

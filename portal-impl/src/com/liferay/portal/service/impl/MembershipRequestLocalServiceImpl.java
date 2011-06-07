@@ -72,7 +72,7 @@ public class MembershipRequestLocalServiceImpl
 		membershipRequestPersistence.update(membershipRequest, false);
 
 		try {
-			notifyCommunityAdministrators(membershipRequest);
+			notifySiteAdministrators(membershipRequest);
 		}
 		catch (IOException ioe) {
 			throw new SystemException(ioe);
@@ -345,30 +345,30 @@ public class MembershipRequestLocalServiceImpl
 		mailService.sendEmail(message);
 	}
 
-	protected void notifyCommunityAdministrators(
+	protected void notifySiteAdministrators(
 			MembershipRequest membershipRequest)
 		throws IOException, PortalException, SystemException {
 
 		List<UserGroupRole> admins = new UniqueList<UserGroupRole>();
 
-		Role communityAdminRole = roleLocalService.getRole(
+		Role siteAdminRole = roleLocalService.getRole(
 			membershipRequest.getCompanyId(),
 			RoleConstants.SITE_ADMINISTRATOR);
 
-		List<UserGroupRole> communityAdmins =
+		List<UserGroupRole> siteAdmins =
 			userGroupRoleLocalService.getUserGroupRolesByGroupAndRole(
-				membershipRequest.getGroupId(), communityAdminRole.getRoleId());
+				membershipRequest.getGroupId(), siteAdminRole.getRoleId());
 
-		admins.addAll(communityAdmins);
+		admins.addAll(siteAdmins);
 
-		Role communityOwnerRole = rolePersistence.findByC_N(
+		Role siteOwnerRole = rolePersistence.findByC_N(
 			membershipRequest.getCompanyId(), RoleConstants.SITE_OWNER);
 
-		List<UserGroupRole> communityOwners =
+		List<UserGroupRole> siteOwners =
 			userGroupRoleLocalService.getUserGroupRolesByGroupAndRole(
-				membershipRequest.getGroupId(), communityOwnerRole.getRoleId());
+				membershipRequest.getGroupId(), siteOwnerRole.getRoleId());
 
-		admins.addAll(communityOwners);
+		admins.addAll(siteOwners);
 
 		for (UserGroupRole userGroupRole : admins) {
 			notify(

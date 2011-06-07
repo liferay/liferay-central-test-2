@@ -476,7 +476,7 @@ public class ServicePreAction extends Action {
 
 		if (layout == null) {
 
-			// Check the guest community
+			// Check the Guest site
 
 			Group guestGroup = GroupLocalServiceUtil.getGroup(
 				user.getCompanyId(), GroupConstants.GUEST);

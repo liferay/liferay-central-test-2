@@ -146,13 +146,13 @@ public class SearchPermissionCheckerImpl implements SearchPermissionChecker {
 		throws Exception {
 
 		if (group.isSite()) {
-			Role communityMemberRole = RoleLocalServiceUtil.getRole(
+			Role siteMemberRole = RoleLocalServiceUtil.getRole(
 				group.getCompanyId(), RoleConstants.SITE_MEMBER);
 
 			permissionQuery.addTerm(
 				Field.GROUP_ROLE_ID,
 				group.getGroupId() + StringPool.DASH +
-					communityMemberRole.getRoleId());
+				siteMemberRole.getRoleId());
 		}
 
 		if (group.isOrganization()) {

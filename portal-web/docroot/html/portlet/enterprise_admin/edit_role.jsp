@@ -103,7 +103,7 @@ String subtype = BeanParamUtil.getString(role, request, "subtype");
 				subtypes = PropsValues.ROLES_REGULAR_SUBTYPES;
 			}
 			else if (role.getType() == RoleConstants.TYPE_SITE) {
-				subtypes = PropsValues.ROLES_COMMUNITY_SUBTYPES;
+				subtypes = PropsValues.ROLES_SITE_SUBTYPES;
 			}
 			else {
 				subtypes = new String[0];
