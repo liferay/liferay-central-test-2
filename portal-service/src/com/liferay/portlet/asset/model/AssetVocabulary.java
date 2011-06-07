@@ -38,8 +38,6 @@ public interface AssetVocabulary extends AssetVocabularyModel {
 	public java.lang.String getTitle(java.lang.String languageId,
 		boolean useDefault);
 
-	public boolean isRequired(long classNameId);
-
 	public void setSettings(java.lang.String settings);
 
 	public void setSettingsProperties(
