@@ -133,7 +133,7 @@ if (folder != null) {
 <aui:script>
 	function <portlet:namespace />editFileEntry(action) {
 		if (action == '<%= Constants.DELETE %>') {
-				<portlet:namespace />doFileEntryAction(action, '<portlet:actionURL><portlet:param name="struts_action" value="/document_library/edit_entry" /></portlet:actionURL>');
+			<portlet:namespace />doFileEntryAction(action, '<portlet:actionURL><portlet:param name="struts_action" value="/document_library/edit_entry" /></portlet:actionURL>');
 		}
 		else if (action == '<%= Constants.MOVE %>') {
 			<portlet:namespace />doFileEntryAction(action, '<portlet:renderURL><portlet:param name="struts_action" value="/document_library/move_entry" /></portlet:renderURL>');

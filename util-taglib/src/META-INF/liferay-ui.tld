@@ -840,12 +840,12 @@
 		<tag-class>com.liferay.taglib.ui.IconDeleteTag</tag-class>
 		<body-content>JSP</body-content>
 		<attribute>
-			<name>label</name>
+			<name>confirmation</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
-			<name>deleteMessage</name>
+			<name>label</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>

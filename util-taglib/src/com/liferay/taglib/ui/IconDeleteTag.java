@@ -28,6 +28,10 @@ import com.liferay.portal.kernel.util.Validator;
  */
 public class IconDeleteTag extends IconTag {
 
+	public void setConfirmation(String confirmation) {
+		_confirmation = confirmation;
+	}
+
 	protected String getPage() {
 		if (FileAvailabilityUtil.isAvailable(getServletContext(), _PAGE)) {
 			return _PAGE;
@@ -58,8 +62,8 @@ public class IconDeleteTag extends IconTag {
 
 		sb.append("javascript:if (confirm('");
 
-		if (Validator.isNotNull(_deleteMessage)) {
-			sb.append(_deleteMessage);
+		if (Validator.isNotNull(_confirmation)) {
+			sb.append(UnicodeLanguageUtil.get(pageContext, _confirmation));
 		}
 		else {
 			sb.append(
@@ -79,12 +83,8 @@ public class IconDeleteTag extends IconTag {
 		return super.getPage();
 	}
 
-	public void setDeleteMessage(String deleteMessage) {
-		_deleteMessage = deleteMessage;
-	}
-
 	private static final String _PAGE = "/html/taglib/ui/icon_delete/page.jsp";
 
-	private String _deleteMessage;
+	private String _confirmation;
 
 }
