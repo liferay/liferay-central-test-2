@@ -114,6 +114,13 @@ public class AssetVocabularyServiceImpl
 		return assetVocabularyLocalService.getVocabulary(vocabularyId);
 	}
 
+	public List<AssetVocabulary> getVocabularies(long[] vocabularyIds)
+		throws PortalException, SystemException {
+
+		return filterVocabularies(
+			assetVocabularyLocalService.getVocabularies(vocabularyIds));
+	}
+
 	/**
 	 * @deprecated
 	 */

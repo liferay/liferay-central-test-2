@@ -14,6 +14,8 @@
 
 package com.liferay.portlet.asset.model.impl;
 
+import com.liferay.portal.kernel.util.ArrayUtil;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portlet.asset.model.AssetVocabulary;
@@ -65,6 +67,17 @@ public class AssetVocabularyImpl
 		}
 
 		return value;
+	}
+
+	public boolean isRequired(long classNameId) {
+		if (Validator.isNull(_settingsProperties)) {
+			_settingsProperties = getSettingsProperties();
+		}
+
+		long[] requiredClassNameIds = StringUtil.split(
+			_settingsProperties.getProperty("requiredClassNameIds"), 0L);
+
+		return ArrayUtil.contains(requiredClassNameIds, classNameId);
 	}
 
 	public void setSettings(String settings) {
