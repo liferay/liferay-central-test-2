@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.portlet.LiferayPortletRequest;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
+import com.liferay.portal.model.WorkflowDefinitionLink;
 import com.liferay.portlet.asset.model.AssetRenderer;
 import com.liferay.portlet.asset.model.AssetRendererFactory;
 
@@ -62,7 +63,13 @@ public interface WorkflowHandler {
 		LiferayPortletResponse liferayPortletResponse,
 		String noSuchEntryRedirect);
 
+	public WorkflowDefinitionLink getWorkflowDefinitionLink(
+			long companyId, long groupId, long classPK)
+		throws PortalException, SystemException;
+
 	public boolean isScopeable();
+
+	public boolean isVisible();
 
 	public String render(
 		long classPK, RenderRequest renderRequest,

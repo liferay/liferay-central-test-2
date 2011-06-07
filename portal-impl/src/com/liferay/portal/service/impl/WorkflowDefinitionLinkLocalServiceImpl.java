@@ -32,13 +32,15 @@ import java.util.Date;
  * @author Bruno Farache
  * @author Brian Wing Shun Chan
  * @author Juan Fernández
+ * @author Marcellus Tavares
  */
 public class WorkflowDefinitionLinkLocalServiceImpl
 	extends WorkflowDefinitionLinkLocalServiceBaseImpl {
 
 	public WorkflowDefinitionLink addWorkflowDefinitionLink(
 			long userId, long companyId, long groupId, String className,
-			String workflowDefinitionName, int workflowDefinitionVersion)
+			long classPK, String workflowDefinitionName,
+			int workflowDefinitionVersion)
 		throws PortalException, SystemException {
 
 		User user = userPersistence.findByPrimaryKey(userId);
@@ -57,6 +59,7 @@ public class WorkflowDefinitionLinkLocalServiceImpl
 		workflowDefinitionLink.setGroupId(groupId);
 		workflowDefinitionLink.setCompanyId(companyId);
 		workflowDefinitionLink.setClassNameId(classNameId);
+		workflowDefinitionLink.setClassPK(classPK);
 		workflowDefinitionLink.setWorkflowDefinitionName(
 			workflowDefinitionName);
 		workflowDefinitionLink.setWorkflowDefinitionVersion(
@@ -68,12 +71,13 @@ public class WorkflowDefinitionLinkLocalServiceImpl
 	}
 
 	public void deleteWorkflowDefinitionLink(
-			long companyId, long groupId, String className)
+			long companyId, long groupId, String className, long classPK)
 		throws PortalException, SystemException {
 
 		try {
 			WorkflowDefinitionLink workflowDefinitionLink =
-				getWorkflowDefinitionLink(companyId, groupId, className, true);
+				getWorkflowDefinitionLink(
+					companyId, groupId, className, classPK, true);
 
 			deleteWorkflowDefinitionLink(workflowDefinitionLink);
 		}
@@ -82,7 +86,7 @@ public class WorkflowDefinitionLinkLocalServiceImpl
 	}
 
 	public WorkflowDefinitionLink getDefaultWorkflowDefinitionLink(
-			long companyId, String className)
+			long companyId, String className, long classPK)
 		throws PortalException, SystemException {
 
 		if (!WorkflowEngineManagerUtil.isDeployed()) {
@@ -91,19 +95,22 @@ public class WorkflowDefinitionLinkLocalServiceImpl
 
 		long classNameId = PortalUtil.getClassNameId(className);
 
-		return workflowDefinitionLinkPersistence.findByG_C_C(
-			WorkflowConstants.DEFAULT_GROUP_ID, companyId, classNameId);
+		return workflowDefinitionLinkPersistence.findByG_C_C_C(
+			WorkflowConstants.DEFAULT_GROUP_ID, companyId, classNameId,
+			classPK);
 	}
 
 	public WorkflowDefinitionLink getWorkflowDefinitionLink(
-			long companyId, long groupId, String className)
+			long companyId, long groupId, String className, long classPK)
 		throws PortalException, SystemException {
 
-		return getWorkflowDefinitionLink(companyId, groupId, className, false);
+		return getWorkflowDefinitionLink(
+			companyId, groupId, className, classPK, false);
 	}
 
 	public WorkflowDefinitionLink getWorkflowDefinitionLink(
-			long companyId, long groupId, String className, boolean strict)
+			long companyId, long groupId, String className, long classPK,
+			boolean strict)
 		throws PortalException, SystemException {
 
 		if (!WorkflowEngineManagerUtil.isDeployed()) {
@@ -122,13 +129,15 @@ public class WorkflowDefinitionLinkLocalServiceImpl
 			}
 		}
 
-		workflowDefinitionLink = workflowDefinitionLinkPersistence.fetchByG_C_C(
-			groupId, companyId, classNameId);
+		workflowDefinitionLink =
+			workflowDefinitionLinkPersistence.fetchByG_C_C_C(
+				groupId, companyId, classNameId, classPK);
 
 		if (!strict && (workflowDefinitionLink == null)) {
 			workflowDefinitionLink =
-				workflowDefinitionLinkPersistence.fetchByG_C_C(
-					WorkflowConstants.DEFAULT_GROUP_ID, companyId, classNameId);
+				workflowDefinitionLinkPersistence.fetchByG_C_C_C(
+					WorkflowConstants.DEFAULT_GROUP_ID, companyId, classNameId,
+					classPK);
 		}
 
 		if (workflowDefinitionLink == null) {
@@ -157,12 +166,19 @@ public class WorkflowDefinitionLinkLocalServiceImpl
 			long companyId, long groupId, String className)
 		throws PortalException, SystemException {
 
+		return hasWorkflowDefinitionLink(companyId, groupId, className, 0);
+	}
+
+	public boolean hasWorkflowDefinitionLink(
+			long companyId, long groupId, String className, long classPK)
+		throws PortalException, SystemException {
+
 		if (!WorkflowEngineManagerUtil.isDeployed()) {
 			return false;
 		}
 
 		try {
-			getWorkflowDefinitionLink(companyId, groupId, className);
+			getWorkflowDefinitionLink(companyId, groupId, className, classPK);
 
 			return true;
 		}
@@ -173,7 +189,8 @@ public class WorkflowDefinitionLinkLocalServiceImpl
 
 	public WorkflowDefinitionLink updateWorkflowDefinitionLink(
 			long userId, long companyId, long groupId, String className,
-			String workflowDefinitionName, int workflowDefinitionVersion)
+			long classPK, String workflowDefinitionName,
+			int workflowDefinitionVersion)
 		throws PortalException, SystemException {
 
 		User user = userPersistence.findByPrimaryKey(userId);
@@ -181,13 +198,13 @@ public class WorkflowDefinitionLinkLocalServiceImpl
 		Date now = new Date();
 
 		WorkflowDefinitionLink workflowDefinitionLink =
-			workflowDefinitionLinkPersistence.fetchByG_C_C(
-				groupId, companyId, classNameId);
+			workflowDefinitionLinkPersistence.fetchByG_C_C_C(
+				groupId, companyId, classNameId, classPK);
 
 		if (workflowDefinitionLink == null) {
 			workflowDefinitionLink = addWorkflowDefinitionLink(
-				userId, companyId, groupId, className, workflowDefinitionName,
-				workflowDefinitionVersion);
+				userId, companyId, groupId, className, classPK,
+				workflowDefinitionName, workflowDefinitionVersion);
 		}
 
 		workflowDefinitionLink.setModifiedDate(now);
@@ -196,6 +213,7 @@ public class WorkflowDefinitionLinkLocalServiceImpl
 		workflowDefinitionLink.setGroupId(groupId);
 		workflowDefinitionLink.setCompanyId(companyId);
 		workflowDefinitionLink.setClassNameId(classNameId);
+		workflowDefinitionLink.setClassPK(classPK);
 		workflowDefinitionLink.setWorkflowDefinitionName(
 			workflowDefinitionName);
 		workflowDefinitionLink.setWorkflowDefinitionVersion(

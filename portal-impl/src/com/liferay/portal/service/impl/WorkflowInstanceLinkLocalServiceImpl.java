@@ -192,9 +192,12 @@ public class WorkflowInstanceLinkLocalServiceImpl
 			return;
 		}
 
+		WorkflowHandler workflowHandler =
+			WorkflowHandlerRegistryUtil.getWorkflowHandler(className);
+
 		WorkflowDefinitionLink workflowDefinitionLink =
-			workflowDefinitionLinkLocalService.getWorkflowDefinitionLink(
-				companyId, groupId, className);
+			workflowHandler.getWorkflowDefinitionLink(
+				companyId, groupId, classPK);
 
 		String workflowDefinitionName =
 			workflowDefinitionLink.getWorkflowDefinitionName();
@@ -217,10 +220,6 @@ public class WorkflowInstanceLinkLocalServiceImpl
 			WorkflowConstants.CONTEXT_ENTRY_CLASS_NAME, className);
 		workflowContext.put(
 			WorkflowConstants.CONTEXT_ENTRY_CLASS_PK, String.valueOf(classPK));
-
-		WorkflowHandler workflowHandler =
-			WorkflowHandlerRegistryUtil.getWorkflowHandler(className);
-
 		workflowContext.put(
 			WorkflowConstants.CONTEXT_ENTRY_TYPE,
 			workflowHandler.getType(LocaleUtil.getDefault()));

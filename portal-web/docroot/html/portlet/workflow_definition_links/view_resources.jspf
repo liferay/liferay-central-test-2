@@ -28,6 +28,14 @@ else {
 	workflowHandlers = WorkflowHandlerRegistryUtil.getScopeableWorkflowHandlers();
 }
 
+List<WorkflowHandler> visibleWorkflowHandlers = new ArrayList();
+
+for (WorkflowHandler workflowHandler : workflowHandlers) {
+	if (workflowHandler.isVisible()) {
+		visibleWorkflowHandlers.add(workflowHandler);
+	}
+}
+
 List<WorkflowDefinition> workflowDefinitions = WorkflowDefinitionManagerUtil.getActiveWorkflowDefinitions(company.getCompanyId(), 0, 100, null);
 
 PortletURL portletURL = renderResponse.createRenderURL();
@@ -47,8 +55,8 @@ portletURL.setParameter("struts_action", "/workflow_definition_links/view");
 		iteratorURL="<%= portletURL %>"
 	>
 		<liferay-ui:search-container-results
-			results="<%= ListUtil.subList(workflowHandlers, searchContainer.getStart(), searchContainer.getEnd()) %>"
-			total="<%= workflowHandlers.size() %>"
+			results="<%= ListUtil.subList(visibleWorkflowHandlers, searchContainer.getStart(), searchContainer.getEnd()) %>"
+			total="<%= visibleWorkflowHandlers.size() %>"
 		/>
 
 		<liferay-ui:search-container-row
@@ -85,10 +93,10 @@ portletURL.setParameter("struts_action", "/workflow_definition_links/view");
 
 					try {
 						if (portletName.equals(PortletKeys.WORKFLOW_DEFINITIONS)) {
-							workflowDefinitionLink = WorkflowDefinitionLinkLocalServiceUtil.getDefaultWorkflowDefinitionLink(company.getCompanyId(), workflowHandler.getClassName());
+							workflowDefinitionLink = WorkflowDefinitionLinkLocalServiceUtil.getDefaultWorkflowDefinitionLink(company.getCompanyId(), workflowHandler.getClassName(), 0);
 						}
 						else {
-							workflowDefinitionLink = WorkflowDefinitionLinkLocalServiceUtil.getWorkflowDefinitionLink(company.getCompanyId(), themeDisplay.getScopeGroupId(), workflowHandler.getClassName(), true);
+							workflowDefinitionLink = WorkflowDefinitionLinkLocalServiceUtil.getWorkflowDefinitionLink(company.getCompanyId(), themeDisplay.getScopeGroupId(), workflowHandler.getClassName(), 0, true);
 						}
 					}
 					catch (NoSuchWorkflowDefinitionLinkException nswdle) {
@@ -98,7 +106,7 @@ portletURL.setParameter("struts_action", "/workflow_definition_links/view");
 
 					if (!portletName.equals(PortletKeys.WORKFLOW_DEFINITIONS)) {
 						try {
-							WorkflowDefinitionLink defaultWorkflowDefinitionLink = WorkflowDefinitionLinkLocalServiceUtil.getDefaultWorkflowDefinitionLink(company.getCompanyId(), workflowHandler.getClassName());
+							WorkflowDefinitionLink defaultWorkflowDefinitionLink = WorkflowDefinitionLinkLocalServiceUtil.getDefaultWorkflowDefinitionLink(company.getCompanyId(), workflowHandler.getClassName(), 0);
 
 							defaultOptionMessage = LanguageUtil.get(pageContext, "default") + StringPool.COLON + StringPool.SPACE + defaultWorkflowDefinitionLink.getWorkflowDefinitionName();
 						}

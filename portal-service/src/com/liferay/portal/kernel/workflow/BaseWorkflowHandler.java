@@ -21,6 +21,8 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.LiferayPortletRequest;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portal.kernel.util.WebKeys;
+import com.liferay.portal.model.WorkflowDefinitionLink;
+import com.liferay.portal.service.WorkflowDefinitionLinkLocalServiceUtil;
 import com.liferay.portal.service.WorkflowInstanceLinkLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portlet.asset.AssetRendererFactoryRegistryUtil;
@@ -150,8 +152,20 @@ public abstract class BaseWorkflowHandler implements WorkflowHandler {
 		return null;
 	}
 
+	public WorkflowDefinitionLink getWorkflowDefinitionLink(
+			long companyId, long groupId, long classPK)
+		throws PortalException, SystemException {
+
+		return WorkflowDefinitionLinkLocalServiceUtil.getWorkflowDefinitionLink(
+			companyId, groupId, getClassName(), 0);
+	}
+
 	public boolean isScopeable() {
 		return _SCOPEABLE;
+	}
+
+	public boolean isVisible() {
+		return _VISIBLE;
 	}
 
 	public String render(
@@ -190,6 +204,8 @@ public abstract class BaseWorkflowHandler implements WorkflowHandler {
 	}
 
 	private static final boolean _SCOPEABLE = true;
+
+	private static final boolean _VISIBLE = true;
 
 	private static Log _log = LogFactoryUtil.getLog(BaseWorkflowHandler.class);
 

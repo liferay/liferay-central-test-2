@@ -88,7 +88,7 @@ public class EditWorkflowDefinitionLinkAction extends PortletAction {
 
 		if (Validator.isNull(value)) {
 			WorkflowDefinitionLinkLocalServiceUtil.deleteWorkflowDefinitionLink(
-				themeDisplay.getCompanyId(), groupId, className);
+				themeDisplay.getCompanyId(), groupId, className, 0);
 		}
 		else {
 			String[] values = StringUtil.split(value, StringPool.AT);
@@ -99,7 +99,7 @@ public class EditWorkflowDefinitionLinkAction extends PortletAction {
 
 			WorkflowDefinitionLinkLocalServiceUtil.updateWorkflowDefinitionLink(
 				themeDisplay.getUserId(), themeDisplay.getCompanyId(),
-				groupId, className, workflowDefinitionName,
+				groupId, className, 0, workflowDefinitionName,
 				workflowDefinitionVersion);
 		}
 	}
