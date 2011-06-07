@@ -207,9 +207,9 @@ portletsList = ListUtil.sort(portletsList, new PortletTitleComparator(applicatio
 						<ul>
 
 							<%
-							itr1 = portletsList.iterator();
-
 							Set<String> portletDataHandlerClasses = new HashSet<String>();
+
+							itr1 = portletsList.iterator();
 
 							while (itr1.hasNext()) {
 								Portlet curPortlet = (Portlet)itr1.next();

@@ -126,11 +126,11 @@ UnicodeProperties liveGroupTypeSettings = (UnicodeProperties)request.getAttribut
 			</div>
 
 			<%
+			Set<String> portletDataHandlerClasses = new HashSet<String>();
+
 			List<Portlet> portlets = PortletLocalServiceUtil.getPortlets(company.getCompanyId());
 
 			portlets = ListUtil.sort(portlets, new PortletTitleComparator(application, locale));
-
-			Set<String> portletDataHandlerClasses = new HashSet<String>();
 
 			for (Portlet curPortlet : portlets) {
 				if (!curPortlet.isActive()) {

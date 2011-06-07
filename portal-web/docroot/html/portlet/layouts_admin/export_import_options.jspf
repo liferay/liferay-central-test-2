@@ -194,9 +194,9 @@
 						<ul id="<portlet:namespace />portletDataList" style="display: none;">
 
 							<%
-							itr1 = portletsList.iterator();
-
 							Set<String> portletDataHandlerClasses = new HashSet<String>();
+
+							itr1 = portletsList.iterator();
 
 							while (itr1.hasNext()) {
 								Portlet curPortlet = (Portlet)itr1.next();
