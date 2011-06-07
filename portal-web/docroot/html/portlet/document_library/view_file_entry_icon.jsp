@@ -27,11 +27,11 @@ if (PDFProcessorUtil.hasImages(fileEntry)) {
 	thumbnailSrc = themeDisplay.getPortalURL() + themeDisplay.getPathContext() + "/documents/" + themeDisplay.getScopeGroupId() + StringPool.SLASH + fileEntry.getFolderId() + StringPool.SLASH + HttpUtil.encodeURL(HtmlUtil.unescape(fileEntry.getTitle())) + "?version=" + fileEntry.getVersion() + "&thumbnail=1";
 }
 
-boolean showCheckbox = DLFileEntryPermission.contains(permissionChecker, fileEntry, ActionKeys.DELETE) || DLFileEntryPermission.contains(permissionChecker, fileEntry, ActionKeys.UPDATE);
+boolean showCheckBox = DLFileEntryPermission.contains(permissionChecker, fileEntry, ActionKeys.DELETE) || DLFileEntryPermission.contains(permissionChecker, fileEntry, ActionKeys.UPDATE);
 %>
 
-<div class="document-display-style icon <%= showCheckbox ? "selectable" : StringPool.BLANK %>">
-	<c:if test="<%= showCheckbox %>">
+<div class="document-display-style icon <%= showCheckBox ? "selectable" : StringPool.BLANK %>">
+	<c:if test="<%= showCheckBox %>">
 		<input class="overlay document-selector" name="<portlet:namespace /><%= RowChecker.ROW_IDS + StringPool.UNDERLINE + FileEntry.class.getName() %>" type="checkbox" value="<%= fileEntry.getFileEntryId() %>" />
 	</c:if>
 

@@ -27,10 +27,10 @@ if (PDFProcessorUtil.hasImages(fileEntry)) {
 	thumbnailSrc = themeDisplay.getPortalURL() + themeDisplay.getPathContext() + "/documents/" + themeDisplay.getScopeGroupId() + StringPool.SLASH + fileEntry.getFolderId() + StringPool.SLASH + HttpUtil.encodeURL(HtmlUtil.unescape(fileEntry.getTitle())) + "?version=" + fileEntry.getVersion() + "&thumbnail=1";
 }
 
-boolean showCheckbox = DLFileEntryPermission.contains(permissionChecker, fileEntry, ActionKeys.DELETE) || DLFileEntryPermission.contains(permissionChecker, fileEntry, ActionKeys.UPDATE);
+boolean showCheckBox = DLFileEntryPermission.contains(permissionChecker, fileEntry, ActionKeys.DELETE) || DLFileEntryPermission.contains(permissionChecker, fileEntry, ActionKeys.UPDATE);
 %>
 
-<div class="document-display-style descriptive <%= showCheckbox ? "selectable" : StringPool.BLANK %>">
+<div class="document-display-style descriptive <%= showCheckBox ? "selectable" : StringPool.BLANK %>">
 	<a class="document-link" data-folder="<%= Boolean.FALSE.toString() %>" href="<%= tempRowURL.toString() %>" title="<%= HtmlUtil.escape(fileEntry.getTitle()) + " - " + HtmlUtil.escape(fileEntry.getDescription()) %>">
 		<c:if test="<%= fileEntry.isLocked() %>">
 			<img alt="<%= LanguageUtil.get(pageContext, "locked") %>" class="locked-icon" src="<%= themeDisplay.getPathThemeImages() %>/file_system/large/overlay_lock.png">
@@ -45,7 +45,7 @@ boolean showCheckbox = DLFileEntryPermission.contains(permissionChecker, fileEnt
 
 	<liferay-util:include page="/html/portlet/document_library/file_entry_action.jsp" />
 
-	<c:if test="<%= showCheckbox %>">
+	<c:if test="<%= showCheckBox %>">
 		<input class="overlay document-selector" name="<portlet:namespace /><%= RowChecker.ROW_IDS + StringPool.UNDERLINE + FileEntry.class.getName() %>" type="checkbox" value="<%= fileEntry.getFileEntryId() %>" />
 	</c:if>
 </div>

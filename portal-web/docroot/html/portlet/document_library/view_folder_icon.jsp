@@ -24,11 +24,11 @@ PortletURL viewEntriesURL = (PortletURL)request.getAttribute("view_entries.jsp-v
 
 String thumbnailSrc = themeDisplay.getPathThemeImages() + "/file_system/large/folder_full_document.png";
 
-boolean showCheckbox = DLFolderPermission.contains(permissionChecker, folder, ActionKeys.DELETE) || DLFolderPermission.contains(permissionChecker, folder, ActionKeys.UPDATE);
+boolean showCheckBox = DLFolderPermission.contains(permissionChecker, folder, ActionKeys.DELETE) || DLFolderPermission.contains(permissionChecker, folder, ActionKeys.UPDATE);
 %>
 
-<div class="document-display-style icon <%= showCheckbox ? "selectable" : StringPool.BLANK %>">
-	<c:if test="<%= showCheckbox %>">
+<div class="document-display-style icon <%= showCheckBox ? "selectable" : StringPool.BLANK %>">
+	<c:if test="<%= showCheckBox %>">
 		<input class="overlay document-selector" name="<portlet:namespace /><%= RowChecker.ROW_IDS + StringPool.UNDERLINE + Folder.class.getName() %>" type="checkbox" value="<%= folder.getFolderId() %>" />
 	</c:if>
 

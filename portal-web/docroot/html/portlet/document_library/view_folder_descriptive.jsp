@@ -24,10 +24,10 @@ PortletURL viewEntriesURL = (PortletURL)request.getAttribute("view_entries.jsp-v
 
 String thumbnailSrc = themeDisplay.getPathThemeImages() + "/file_system/large/folder_full_document.png";
 
-boolean showCheckbox = DLFolderPermission.contains(permissionChecker, folder, ActionKeys.DELETE) || DLFolderPermission.contains(permissionChecker, folder, ActionKeys.UPDATE);
+boolean showCheckBox = DLFolderPermission.contains(permissionChecker, folder, ActionKeys.DELETE) || DLFolderPermission.contains(permissionChecker, folder, ActionKeys.UPDATE);
 %>
 
-<div class="document-display-style descriptive <%= showCheckbox ? "selectable" : StringPool.BLANK %>">
+<div class="document-display-style descriptive <%= showCheckBox ? "selectable" : StringPool.BLANK %>">
 	<a class="document-link" data-folder="<%= Boolean.TRUE.toString() %>" data-resource-url="<%= viewEntriesURL.toString() %>" href="<%= tempRowURL.toString() %>" title="<%= HtmlUtil.escape(folder.getName()) + " - " + HtmlUtil.escape(folder.getDescription()) %>">
 		<img border="no" class="document-thumbnail" src="<%= thumbnailSrc %>" style="width: <%= PropsValues.DL_FILE_ENTRY_THUMBNAIL_WIDTH %>;" />
 
@@ -38,7 +38,7 @@ boolean showCheckbox = DLFolderPermission.contains(permissionChecker, folder, Ac
 
 	<liferay-util:include page="/html/portlet/document_library/folder_action.jsp" />
 
-	<c:if test="<%= showCheckbox %>">
+	<c:if test="<%= showCheckBox %>">
 		<input class="overlay document-selector" name="<portlet:namespace /><%= RowChecker.ROW_IDS + StringPool.UNDERLINE + Folder.class.getName() %>" type="checkbox" value="<%= folder.getFolderId() %>" />
 	</c:if>
 </div>
