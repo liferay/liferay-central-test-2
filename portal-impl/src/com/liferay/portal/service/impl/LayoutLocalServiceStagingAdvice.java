@@ -121,8 +121,6 @@ public class LayoutLocalServiceStagingAdvice
 		Layout layout = layoutPersistence.findByG_P_L(
 			groupId, privateLayout, layoutId);
 
-		layout = wrapLayout(layout);
-
 		LayoutRevision layoutRevision = LayoutStagingUtil.getLayoutRevision(
 			layout);
 
@@ -162,6 +160,8 @@ public class LayoutLocalServiceStagingAdvice
 			}
 		}
 
+		layoutPersistence.update(layout, false);
+
 		serviceContext.setWorkflowAction(WorkflowConstants.ACTION_SAVE_DRAFT);
 
 		layoutRevisionLocalService.updateLayoutRevision(
@@ -190,7 +190,7 @@ public class LayoutLocalServiceStagingAdvice
 
 		expandoBridge.setAttributes(serviceContext);
 
-		return layout;
+		return wrapLayout(layout);
 	}
 
 	public Layout updateLayout(
