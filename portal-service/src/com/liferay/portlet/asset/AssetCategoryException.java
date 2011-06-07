@@ -15,6 +15,7 @@
 package com.liferay.portlet.asset;
 
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portlet.asset.model.AssetVocabulary;
 
 /**
  * @author Juan Fernández
@@ -25,14 +26,20 @@ public class AssetCategoryException extends PortalException {
 
 	public static final int TOO_MANY_CATEGORIES = 2;
 
-	public AssetCategoryException(int type) {
+	public AssetCategoryException(AssetVocabulary vocabulary, int type) {
 		_type = type;
+		_vocabulary = vocabulary;
 	}
 
 	public int getType() {
 		return _type;
 	}
 
+	public AssetVocabulary getVocabulary() {
+		return _vocabulary;
+	}
+
 	private int _type;
+	private AssetVocabulary _vocabulary;
 
 }
