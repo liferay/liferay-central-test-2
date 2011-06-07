@@ -4,35 +4,7 @@ AUI().add(
 		var Util = Liferay.Util;
 
 		Util.listChecked = function(form) {
-			return Util.listChecked(form).join(',');
-		};
-
-		Util.listCheckedExcept = function(form, except) {
-			return Util.listCheckedExceptItem(form, except).join(',');
-		};
-
-		Util.listCheckedExceptItem = function(form, except) {
-			var s = [];
-
-			form = AUI().one(form);
-
-			if (form) {
-				form.all('input[type=checkbox]').each(
-					function(item, index, collection) {
-						var val = item.val();
-
-						if (val && item.get('name') != except && item.get('checked')) {
-							s.push(val);
-						}
-					}
-				);
-			}
-
-			return s;
-		};
-
-		Util.listCheckedItem = function(form) {
-			var s = [];
+			var buffer = [];
 
 			form = AUI().one(form);
 
@@ -42,17 +14,37 @@ AUI().add(
 						var val = item.val();
 
 						if (val && item.get('checked')) {
-							s.push(val);
+							buffer.push(val);
 						}
 					}
 				);
 			}
 
-			return s;
+			return buffer.join(',');
+		};
+
+		Util.listCheckedExcept = function(form, except) {
+			var buffer = [];
+
+			form = AUI().one(form);
+
+			if (form) {
+				form.all('input[type=checkbox]').each(
+					function(item, index, collection) {
+						var val = item.val();
+
+						if (val && item.get('name') != except && item.get('checked')) {
+							buffer.push(val);
+						}
+					}
+				);
+			}
+
+			return buffer.join(',');
 		};
 
 		Util.listSelect = function(box, delimeter) {
-			var s = [];
+			var buffer = [];
 
 			delimeter = delimeter || ',';
 
@@ -70,7 +62,7 @@ AUI().add(
 						var val = item.val();
 
 						if (val) {
-							s.push(val);
+							buffer.push(val);
 						}
 					}
 				);
@@ -80,12 +72,12 @@ AUI().add(
 				return '';
 			}
 			else {
-				return s.join(delimeter);
+				return buffer.join(delimeter);
 			}
 		};
 
 		Util.listUncheckedExcept = function(form, except) {
-			var s = [];
+			var buffer = [];
 
 			form = AUI().one(form);
 
@@ -95,15 +87,14 @@ AUI().add(
 						var val = item.val();
 
 						if (val && item.get('name') != except && !item.get('checked')) {
-							s.push(val);
+							buffer.push(val);
 						}
 					}
 				);
 			}
 
-			return s.join(',');
+			return buffer.join();
 		};
-
 	},
 	'',
 	{
