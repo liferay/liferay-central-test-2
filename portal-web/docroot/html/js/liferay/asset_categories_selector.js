@@ -3,9 +3,9 @@ AUI().add(
 	function(A) {
 		var Lang = A.Lang;
 
-		var EMPTY_FN = Lang.emptyFn;
+		var BOUNDING_BOX = 'boundingBox';
 
-		var	getClassName = A.ClassNameManager.getClassName;
+		var EMPTY_FN = Lang.emptyFn;
 
 		var CSS_TAGS_LIST = 'lfr-categories-selector-list';
 
@@ -21,7 +21,7 @@ AUI().add(
 		 * curEntries (string): The names of the current categories.
 		 * instanceVar {string}: The instance variable for this class.
 		 * hiddenInput {string}: The hidden input used to pass in the current categories.
-		 * labelNode {String}: The node of the label element for this selector.
+		 * labelNode {String|A.Node}: The node of the label element for this selector.
 		 *
 		 * Optional
 		 * portalModelResource {boolean}: Whether the asset model is on the portal level.
@@ -55,9 +55,19 @@ AUI().add(
 						},
 						value: ''
 					},
-				labelNode: {
-					value: ''
-				}
+					labelNode: {
+						setter: function(value) {
+							if (Lang.isString(value)) {
+								value = A.one(value);
+							}
+
+							return value;
+						},
+						validator: function(value) {
+							return Lang.isString(value) || value instanceof A.Node;
+						},
+						value: null
+					}
 				},
 
 				EXTENDS: Liferay.AssetTagsSelector,
@@ -76,6 +86,8 @@ AUI().add(
 						instance._renderIcons();
 
 						instance.inputContainer.addClass('aui-helper-hidden-accessible');
+
+						instance._applyARIARoles();
 					},
 
 					bindUI: function() {
@@ -115,6 +127,17 @@ AUI().add(
 					_afterTBLFocusedChange: EMPTY_FN,
 
 					_bindTagsSelector: EMPTY_FN,
+
+					_applyARIARoles: function() {
+						var instance = this;
+
+						var boundingBox = instance.get(BOUNDING_BOX);
+						var labelNode = instance.get('labelNode');
+
+						if (labelNode) {
+							boundingBox.attr('aria-labelledby', labelNode.get('id'));
+						}
+					},
 
 					_formatJSONResult: function(json) {
 						var instance = this;
@@ -230,12 +253,12 @@ AUI().add(
 										results,
 										function(item, index, collection) {
 											var nodeWidget = A.Widget.getByNode(item.node);
-											var nodeVisible = nodeWidget.get('boundingBox').hasClass('aui-helper-hidden');
+											var nodeVisible = nodeWidget.get(BOUNDING_BOX).hasClass('aui-helper-hidden');
 
 											if (!nodeVisible) {
 												nodeWidget.eachParent(
 													function(parent) {
-														parent.get('boundingBox').show();
+														parent.get(BOUNDING_BOX).show();
 													}
 												);
 											}
@@ -309,14 +332,14 @@ AUI().add(
 											fn: instance._showSelectPopup
 										},
 										icon: 'search',
-										id: 'selectCategories',
+										id: A.guid(),
 										label: Liferay.Language.get('select')
 									}
 								]
 							}
 						).render(contentBox);
 
-						var iconsBoundingBox = instance.icons.get('boundingBox');
+						var iconsBoundingBox = instance.icons.get(BOUNDING_BOX);
 
 						instance.entryHolder.placeAfter(iconsBoundingBox);
 					},
@@ -354,7 +377,7 @@ AUI().add(
 							instance._bindSearchHandle.detach();
 						}
 
-						var searchField = popup.searchField.get('boundingBox');
+						var searchField = popup.searchField.get(BOUNDING_BOX);
 
 						instance._bindSearchHandle = searchField.on('focus', A.bind(instance._initSearch, instance));
 					},
