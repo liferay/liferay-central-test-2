@@ -142,7 +142,7 @@ String orderByType = ParamUtil.getString(request, "orderByType");
 		'click',
 		function(event) {
 			var documentContainer = A.one('.document-container');
-			var documentDisplayStyle = A.all('.document-display-style')
+			var documentDisplayStyle = A.all('.document-display-style.selectable')
 
 			Liferay.Util.checkAll(documentContainer, '<portlet:namespace /><%= RowChecker.ROW_IDS + StringPool.UNDERLINE + FileEntry.class.getName() %>', event.currentTarget);
 			Liferay.Util.checkAll(documentContainer, '<portlet:namespace /><%= RowChecker.ROW_IDS + StringPool.UNDERLINE + DLFileShortcut.class.getName() %>', event.currentTarget);

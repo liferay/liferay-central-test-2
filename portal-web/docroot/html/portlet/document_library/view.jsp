@@ -176,7 +176,7 @@ if (folder != null) {
 
 <aui:script use="aui-dialog,aui-dialog-iframe">
 	var markSelected = function(node) {
-		var documentThumbnail = node.ancestor('.document-display-style');
+		var documentThumbnail = node.ancestor('.document-display-style.selectable');
 
 		documentThumbnail.toggleClass('selected');
 	};
