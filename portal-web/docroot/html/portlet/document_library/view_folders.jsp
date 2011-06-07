@@ -194,7 +194,37 @@ if (folder != null) {
 
 					<%
 					List<DLDocumentType> documentTypes = DLDocumentTypeServiceUtil.getDocumentTypes(scopeGroupId, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+					%>
 
+					<c:if test="<%= !documentTypes.isEmpty() %>">
+						<liferay-portlet:renderURL varImpl="viewBasicDocumentTypeURL">
+							<portlet:param name="struts_action" value="/document_library/view" />
+							<portlet:param name="folderId" value="<%= String.valueOf(parentFolderId) %>" />
+							<portlet:param name="documentTypeId" value="<%= String.valueOf(0) %>" />
+						</liferay-portlet:renderURL>
+
+						<liferay-portlet:resourceURL copyCurrentRenderParameters="<%= false %>" varImpl="viewBasicDocumentTypeEntriesURL">
+							<portlet:param name="struts_action" value="/document_library/view" />
+							<portlet:param name="documentTypeId" value="<%= String.valueOf(0) %>" />
+							<portlet:param name="viewAddButton" value="<%= Boolean.TRUE.toString() %>" />
+							<portlet:param name="viewBreadcrumb" value="<%= Boolean.TRUE.toString() %>" />
+							<portlet:param name="viewDisplayStyleButtons" value="<%= Boolean.TRUE.toString() %>" />
+							<portlet:param name="viewEntries" value="<%= Boolean.TRUE.toString() %>" />
+							<portlet:param name="viewFileEntrySearch" value="<%= Boolean.TRUE.toString() %>" />
+							<portlet:param name="start" value="0" />
+							<portlet:param name="end" value="<%= String.valueOf(end - start) %>" />
+						</liferay-portlet:resourceURL>
+
+						<li class="folder document-type">
+							<a href="<%= viewBasicDocumentTypeURL.toString() %>" data-refresh-entries="<%= Boolean.TRUE.toString() %>" data-resource-url="<%= viewBasicDocumentTypeEntriesURL.toString() %>"
+								<liferay-ui:icon image="copy" />
+
+								<%= LanguageUtil.get(pageContext, "basic-document") %>
+							</a>
+						</li>
+					</c:if>
+
+					<%
 					for (DLDocumentType documentType : documentTypes) {
 					%>
 
