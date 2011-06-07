@@ -99,7 +99,7 @@ public abstract class BaseFriendlyURLMapper implements FriendlyURLMapper {
 	 * properly namespace parameter names.</b>
 	 * </p>
 	 *
-	 * @param parameterMap the parameter map to populate
+	 * @param parameterMap the parameter map
 	 * @param name the name of the parameter
 	 * @param value the value of the parameter
 	 * @see   #addParameter(Map, String, String)
@@ -118,7 +118,7 @@ public abstract class BaseFriendlyURLMapper implements FriendlyURLMapper {
 	 * properly namespace parameter names.</b>
 	 * </p>
 	 *
-	 * @param parameterMap the parameter map to populate
+	 * @param parameterMap the parameter map
 	 * @param name the name of the parameter
 	 * @param value the value of the parameter
 	 * @see   #getNamespace()
@@ -134,7 +134,7 @@ public abstract class BaseFriendlyURLMapper implements FriendlyURLMapper {
 	 *
 	 * @param namespace the namespace for portlet parameters. For instanceable
 	 *        portlets this must include the instance ID.
-	 * @param parameterMap the parameter map to populate
+	 * @param parameterMap the parameter map
 	 * @param name space the namespace for portlet parameters. For instanceable
 	 *        portlets this must include the instance ID.
 	 * @param value the value of the parameter
@@ -152,7 +152,7 @@ public abstract class BaseFriendlyURLMapper implements FriendlyURLMapper {
 	 *
 	 * @param namespace the namespace for portlet parameters. For instanceable
 	 *        portlets this must include the instance ID.
-	 * @param parameterMap the parameter map to populate
+	 * @param parameterMap the parameter map
 	 * @param name space the namespace for portlet parameters. For instanceable
 	 *        portlets this must include the instance ID.
 	 * @param value the value of the parameter
@@ -184,7 +184,7 @@ public abstract class BaseFriendlyURLMapper implements FriendlyURLMapper {
 	}
 
 	/**
-	 * Gets the default namespace.
+	 * Returns the default namespace.
 	 *
 	 * <p>
 	 * <b>Do not use this method with an instanceable portlet, it will not

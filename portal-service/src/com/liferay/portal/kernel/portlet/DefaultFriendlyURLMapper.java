@@ -74,7 +74,7 @@ public class DefaultFriendlyURLMapper extends BaseFriendlyURLMapper {
 	 * A default ignored parameter will always be hidden in friendly URLs.
 	 * </p>
 	 *
-	 * @param name the name of the parameter to hide
+	 * @param name the name of the parameter
 	 */
 	public void addDefaultIgnoredParameter(String name) {
 		defaultIgnoredParameters.add(name);
@@ -88,7 +88,7 @@ public class DefaultFriendlyURLMapper extends BaseFriendlyURLMapper {
 	 * set to its default value.
 	 * </p>
 	 *
-	 * @param name the name of the parameter to hide
+	 * @param name the name of the parameter
 	 * @param value the default value of the parameter
 	 */
 	public void addDefaultReservedParameter(String name, String value) {
@@ -115,7 +115,7 @@ public class DefaultFriendlyURLMapper extends BaseFriendlyURLMapper {
 	}
 
 	/**
-	 * Gets the default ignored parameters.
+	 * Returns the default ignored parameters.
 	 *
 	 * @return the ignored parameter names
 	 * @see    #addDefaultIgnoredParameter(String)
@@ -125,7 +125,7 @@ public class DefaultFriendlyURLMapper extends BaseFriendlyURLMapper {
 	}
 
 	/**
-	 * Gets the default reserved parameters.
+	 * Returns the default reserved parameters.
 	 *
 	 * @return the default reserved parameter names and values
 	 * @see    #addDefaultReservedParameter(String, String)
@@ -225,12 +225,12 @@ public class DefaultFriendlyURLMapper extends BaseFriendlyURLMapper {
 	}
 
 	/**
-	 * Gets the portlet ID, including the instance ID if applicable, from the
+	 * Returns the portlet ID, including the instance ID if applicable, from the
 	 * parameter map.
 	 *
-	 * @param  routeParameters the parameter map to get the portlet ID from. For
-	 *         an instanceable portlet, this must contain either
-	 *         <code>p_p_id</code> or <code>instanceId</code>.
+	 * @param  routeParameters the parameter map. For an instanceable portlet,
+	 *         this must contain either <code>p_p_id</code> or
+	 *         <code>instanceId</code>.
 	 * @return the portlet ID, including the instance ID if applicable, or
 	 *         <code>null</code> if it cannot be determined
 	 */
@@ -307,8 +307,8 @@ public class DefaultFriendlyURLMapper extends BaseFriendlyURLMapper {
 	 * parameters set to their defaults.
 	 * </p>
 	 *
-	 * @param liferayPortletURL the portlet URL to add the parameters included
-	 *        in the path to
+	 * @param liferayPortletURL the portlet URL to which to add the parameters
+	 *        included in the path
 	 * @param routeParameters the parameter map populated by the router
 	 * @see   com.liferay.portlet.PortletURLImpl#addParameterIncludedInPath(
 	 *        String)

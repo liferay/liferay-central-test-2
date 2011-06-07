@@ -87,7 +87,7 @@ public interface BaseModel<T>
 	public void setEscapedModel(boolean escapedModel);
 
 	/**
-	 * Gets the primary key of this model instance.
+	 * Returns the primary key of this model instance.
 	 *
 	 * @return the primary key of this model instance
 	 */
@@ -101,7 +101,7 @@ public interface BaseModel<T>
 	public void setPrimaryKeyObj(Serializable primaryKeyObj);
 
 	/**
-	 * Gets the expando bridge for this model instance.
+	 * Returns the expando bridge for this model instance.
 	 *
 	 * @return the expando bridge for this model instance
 	 */
@@ -111,8 +111,7 @@ public interface BaseModel<T>
 	 * Sets the expando bridge attributes for this model instance to the
 	 * attributes stored in the service context.
 	 *
-	 * @param serviceContext the service context to retrieve the expando bridge
-	 *        attributes from
+	 * @param serviceContext the service context
 	 * @see   com.liferay.portal.service.ServiceContext#getExpandoBridgeAttributes(
 	 *        )
 	 */
@@ -131,7 +130,7 @@ public interface BaseModel<T>
 	public void resetOriginalValues();
 
 	/**
-	 * Gets a copy of this entity as an escaped model instance by wrapping it
+	 * Returns a copy of this entity as an escaped model instance by wrapping it
 	 * with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
 	 *
 	 * @return the escaped model instance
@@ -140,7 +139,7 @@ public interface BaseModel<T>
 	public T toEscapedModel();
 
 	/**
-	 * Gets the XML representation of this model instance.
+	 * Returns the XML representation of this model instance.
 	 *
 	 * @return the XML representation of this model instance
 	 */

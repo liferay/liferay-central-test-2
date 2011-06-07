@@ -151,7 +151,7 @@ public interface Route {
 	public void addOverriddenParameter(String name, String value);
 
 	/**
-	 * Gets the generated parameters for this route.
+	 * Returns the generated parameters for this route.
 	 *
 	 * @return the generated parameter names and string parsers
 	 * @see    #addGeneratedParameter(String, String)
@@ -159,7 +159,7 @@ public interface Route {
 	public Map<String, StringParser> getGeneratedParameters();
 
 	/**
-	 * Gets the ignored parameters for this route.
+	 * Returns the ignored parameters for this route.
 	 *
 	 * @return the ignored parameter names
 	 * @see    #addIgnoredParameter(String)
@@ -167,7 +167,7 @@ public interface Route {
 	public Set<String> getIgnoredParameters();
 
 	/**
-	 * Gets the implicit parameters for this route.
+	 * Returns the implicit parameters for this route.
 	 *
 	 * @return the implicit parameter names and values
 	 * @see    #addImplicitParameter(String, String)
@@ -175,7 +175,7 @@ public interface Route {
 	public Map<String, String> getImplicitParameters();
 
 	/**
-	 * Gets the overridden parameters for this route.
+	 * Returns the overridden parameters for this route.
 	 *
 	 * @return the overridden parameter names and values
 	 * @see    #addOverriddenParameter(String, String)
@@ -203,7 +203,7 @@ public interface Route {
 	 * </li>
 	 * </ol>
 	 *
-	 * @param  parameters the parameter map to build the URL from
+	 * @param  parameters the parameter map
 	 * @return the URL path, or <code>null</code> if this route is not
 	 *         appropriate
 	 */
@@ -224,9 +224,9 @@ public interface Route {
 	 * Virtual parameters will not be present in <code>parameters</code>.
 	 * </p>
 	 *
-	 * @param  url the URL path to parse
-	 * @param  parameters the parameter map to populate if this route matches
-	 *         the URL
+	 * @param  url the URL path
+	 * @param  parameters the parameter map. If this route does not match, the
+	 *         parameter map will not be modified.
 	 * @return <code>true</code> if the route matches; <code>false</code>
 	 *         otherwise
 	 */

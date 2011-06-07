@@ -58,7 +58,7 @@ public class PluginSettingImpl
 	}
 
 	/**
-	 * Gets an array of required roles of the plugin.
+	 * Returns an array of required roles of the plugin.
 	 *
 	 * @return an array of required roles of the plugin
 	 */

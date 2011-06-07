@@ -128,8 +128,8 @@ public interface BatchSession {
 	 * com.liferay.portal.model.User)} for an example.
 	 * </p>
 	 *
-	 * @param  session the session to perform the update on
-	 * @param  model the model instance to update
+	 * @param  session the session
+	 * @param  model the model instance
 	 * @param  merge whether to merge the model instance with the current
 	 *         session
 	 * @throws ORMException if a database exception occurred

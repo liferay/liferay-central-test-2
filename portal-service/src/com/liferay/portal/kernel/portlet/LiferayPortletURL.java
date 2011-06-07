@@ -40,7 +40,7 @@ public interface LiferayPortletURL
 	public void addParameterIncludedInPath(String name);
 
 	/**
-	 * Gets the portlet lifecycle of this URL's target portlet.
+	 * Returns the portlet lifecycle of this URL's target portlet.
 	 *
 	 * @return the portlet lifecycle of this URL's target portlet
 	 * @see    #setLifecycle(String)
@@ -48,7 +48,7 @@ public interface LiferayPortletURL
 	public String getLifecycle();
 
 	/**
-	 * Gets the first value of the URL parameter.
+	 * Returns the first value of the URL parameter.
 	 *
 	 * @param  name the name of the URL parameter
 	 * @return the first value of the URL parameter
@@ -56,14 +56,14 @@ public interface LiferayPortletURL
 	public String getParameter(String name);
 
 	/**
-	 * Gets the ID of this URL's target portlet.
+	 * Returns the ID of this URL's target portlet.
 	 *
 	 * @return the ID of this URL's target portlet
 	 */
 	public String getPortletId();
 
 	/**
-	 * Gets the map of reserved parameters for this URL.
+	 * Returns the map of reserved parameters for this URL.
 	 *
 	 * <p>
 	 * This method is only used internally. Reserved parameters contain special,
@@ -76,7 +76,7 @@ public interface LiferayPortletURL
 	public Map<String, String> getReservedParameterMap();
 
 	/**
-	 * Gets the ID of this URL's target resource.
+	 * Returns the ID of this URL's target resource.
 	 *
 	 * @return the ID of this URL's target resource
 	 */

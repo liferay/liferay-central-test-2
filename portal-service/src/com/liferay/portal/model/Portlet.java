@@ -31,42 +31,42 @@ public interface Portlet extends PortletModel {
 	 */
 
 	/**
-	* Gets the root portlet of this portlet instance.
+	* Returns the root portlet of this portlet instance.
 	*
 	* @return the root portlet of this portlet instance
 	*/
 	public com.liferay.portal.model.Portlet getRootPortlet();
 
 	/**
-	* Gets the root portlet ID of the portlet.
+	* Returns the root portlet ID of the portlet.
 	*
 	* @return the root portlet ID of the portlet
 	*/
 	public java.lang.String getRootPortletId();
 
 	/**
-	* Gets the instance ID of the portlet.
+	* Returns the instance ID of the portlet.
 	*
 	* @return the instance ID of the portlet
 	*/
 	public java.lang.String getInstanceId();
 
 	/**
-	* Gets the plugin ID of the portlet.
+	* Returns the plugin ID of the portlet.
 	*
 	* @return the plugin ID of the portlet
 	*/
 	public java.lang.String getPluginId();
 
 	/**
-	* Gets the plugin type of the portlet.
+	* Returns the plugin type of the portlet.
 	*
 	* @return the plugin type of the portlet
 	*/
 	public java.lang.String getPluginType();
 
 	/**
-	* Gets this portlet's plugin package.
+	* Returns this portlet's plugin package.
 	*
 	* @return this portlet's plugin package
 	*/
@@ -96,7 +96,7 @@ public interface Portlet extends PortletModel {
 		com.liferay.portal.model.PluginSetting pluginSetting);
 
 	/**
-	* Gets the timestamp of the portlet.
+	* Returns the timestamp of the portlet.
 	*
 	* @return the timestamp of the portlet
 	*/
@@ -110,7 +110,7 @@ public interface Portlet extends PortletModel {
 	public void setTimestamp(long timestamp);
 
 	/**
-	* Gets the icon of the portlet.
+	* Returns the icon of the portlet.
 	*
 	* @return the icon of the portlet
 	*/
@@ -124,7 +124,7 @@ public interface Portlet extends PortletModel {
 	public void setIcon(java.lang.String icon);
 
 	/**
-	* Gets the virtual path of the portlet.
+	* Returns the virtual path of the portlet.
 	*
 	* @return the virtual path of the portlet
 	*/
@@ -138,7 +138,7 @@ public interface Portlet extends PortletModel {
 	public void setVirtualPath(java.lang.String virtualPath);
 
 	/**
-	* Gets the struts path of the portlet.
+	* Returns the struts path of the portlet.
 	*
 	* @return the struts path of the portlet
 	*/
@@ -152,7 +152,7 @@ public interface Portlet extends PortletModel {
 	public void setStrutsPath(java.lang.String strutsPath);
 
 	/**
-	* Gets the parent struts path of the portlet.
+	* Returns the parent struts path of the portlet.
 	*
 	* @return the parent struts path of the portlet.
 	*/
@@ -166,7 +166,7 @@ public interface Portlet extends PortletModel {
 	public void setParentStrutsPath(java.lang.String parentStrutsPath);
 
 	/**
-	* Gets the name of the portlet.
+	* Returns the name of the portlet.
 	*
 	* @return the display name of the portlet
 	*/
@@ -180,7 +180,7 @@ public interface Portlet extends PortletModel {
 	public void setPortletName(java.lang.String portletName);
 
 	/**
-	* Gets the display name of the portlet.
+	* Returns the display name of the portlet.
 	*
 	* @return the display name of the portlet
 	*/
@@ -194,7 +194,7 @@ public interface Portlet extends PortletModel {
 	public void setDisplayName(java.lang.String displayName);
 
 	/**
-	* Gets the name of the portlet class of the portlet.
+	* Returns the name of the portlet class of the portlet.
 	*
 	* @return the name of the portlet class of the portlet
 	*/
@@ -208,7 +208,7 @@ public interface Portlet extends PortletModel {
 	public void setPortletClass(java.lang.String portletClass);
 
 	/**
-	* Gets the configuration action class of the portlet.
+	* Returns the configuration action class of the portlet.
 	*
 	* @return the configuration action class of the portlet
 	*/
@@ -224,14 +224,14 @@ public interface Portlet extends PortletModel {
 		java.lang.String configurationActionClass);
 
 	/**
-	* Gets the configuration action instance of the portlet.
+	* Returns the configuration action instance of the portlet.
 	*
 	* @return the configuration action instance of the portlet
 	*/
 	public com.liferay.portal.kernel.portlet.ConfigurationAction getConfigurationActionInstance();
 
 	/**
-	* Gets the name of the indexer class of the portlet.
+	* Returns the name of the indexer class of the portlet.
 	*
 	* @return the name of the indexer class of the portlet
 	*/
@@ -245,14 +245,14 @@ public interface Portlet extends PortletModel {
 	public void setIndexerClass(java.lang.String indexerClass);
 
 	/**
-	* Gets the indexer instance of the portlet.
+	* Returns the indexer instance of the portlet.
 	*
 	* @return the indexer instance of the portlet
 	*/
 	public com.liferay.portal.kernel.search.Indexer getIndexerInstance();
 
 	/**
-	* Gets the name of the open search class of the portlet.
+	* Returns the name of the open search class of the portlet.
 	*
 	* @return the name of the open search class of the portlet
 	*/
@@ -266,7 +266,7 @@ public interface Portlet extends PortletModel {
 	public void setOpenSearchClass(java.lang.String openSearchClass);
 
 	/**
-	* Gets the indexer instance of the portlet.
+	* Returns the indexer instance of the portlet.
 	*
 	* @return the indexer instance of the portlet
 	*/
@@ -279,7 +279,7 @@ public interface Portlet extends PortletModel {
 		com.liferay.portal.kernel.scheduler.SchedulerEntry schedulerEntry);
 
 	/**
-	* Gets the scheduler entries of the portlet.
+	* Returns the scheduler entries of the portlet.
 	*
 	* @return the scheduler entries of the portlet
 	*/
@@ -294,7 +294,7 @@ public interface Portlet extends PortletModel {
 		java.util.List<com.liferay.portal.kernel.scheduler.SchedulerEntry> schedulerEntries);
 
 	/**
-	* Gets the name of the portlet URL class of the portlet.
+	* Returns the name of the portlet URL class of the portlet.
 	*
 	* @return the name of the portlet URL class of the portlet
 	*/
@@ -308,7 +308,7 @@ public interface Portlet extends PortletModel {
 	public void setPortletURLClass(java.lang.String portletURLClass);
 
 	/**
-	* Gets the name of the friendly URL mapper class of the portlet.
+	* Returns the name of the friendly URL mapper class of the portlet.
 	*
 	* @return the name of the friendly URL mapper class of the portlet
 	*/
@@ -324,14 +324,14 @@ public interface Portlet extends PortletModel {
 		java.lang.String friendlyURLMapperClass);
 
 	/**
-	* Gets the friendly URL mapper instance of the portlet.
+	* Returns the friendly URL mapper instance of the portlet.
 	*
 	* @return the friendly URL mapper instance of the portlet
 	*/
 	public com.liferay.portal.kernel.portlet.FriendlyURLMapper getFriendlyURLMapperInstance();
 
 	/**
-	* Gets the name of the friendly URL mapping of the portlet.
+	* Returns the name of the friendly URL mapping of the portlet.
 	*
 	* @return the name of the friendly URL mapping of the portlet
 	*/
@@ -346,7 +346,7 @@ public interface Portlet extends PortletModel {
 	public void setFriendlyURLMapping(java.lang.String friendlyURLMapping);
 
 	/**
-	* Gets the class loader resource path to the friendly URL routes of the
+	* Returns the class loader resource path to the friendly URL routes of the
 	* portlet.
 	*
 	* @return the class loader resource path to the friendly URL routes of the
@@ -364,7 +364,7 @@ public interface Portlet extends PortletModel {
 	public void setFriendlyURLRoutes(java.lang.String friendlyURLRoutes);
 
 	/**
-	* Gets the name of the URL encoder class of the portlet.
+	* Returns the name of the URL encoder class of the portlet.
 	*
 	* @return the name of the URL encoder class of the portlet
 	*/
@@ -378,14 +378,14 @@ public interface Portlet extends PortletModel {
 	public void setURLEncoderClass(java.lang.String urlEncoderClass);
 
 	/**
-	* Gets the URL encoder instance of the portlet.
+	* Returns the URL encoder instance of the portlet.
 	*
 	* @return the URL encoder instance of the portlet
 	*/
 	public com.liferay.portal.kernel.servlet.URLEncoder getURLEncoderInstance();
 
 	/**
-	* Gets the name of the portlet data handler class of the portlet.
+	* Returns the name of the portlet data handler class of the portlet.
 	*
 	* @return the name of the portlet data handler class of the portlet
 	*/
@@ -401,14 +401,14 @@ public interface Portlet extends PortletModel {
 		java.lang.String portletDataHandlerClass);
 
 	/**
-	* Gets the portlet data handler instance of the portlet.
+	* Returns the portlet data handler instance of the portlet.
 	*
 	* @return the portlet data handler instance of the portlet
 	*/
 	public com.liferay.portal.kernel.lar.PortletDataHandler getPortletDataHandlerInstance();
 
 	/**
-	* Gets the name of the portlet layout listener class of the portlet.
+	* Returns the name of the portlet layout listener class of the portlet.
 	*
 	* @return the name of the portlet layout listener class of the portlet
 	*/
@@ -424,14 +424,14 @@ public interface Portlet extends PortletModel {
 		java.lang.String portletLayoutListenerClass);
 
 	/**
-	* Gets the portlet layout listener instance of the portlet.
+	* Returns the portlet layout listener instance of the portlet.
 	*
 	* @return the portlet layout listener instance of the portlet
 	*/
 	public com.liferay.portal.kernel.portlet.PortletLayoutListener getPortletLayoutListenerInstance();
 
 	/**
-	* Gets the name of the poller processor class of the portlet.
+	* Returns the name of the poller processor class of the portlet.
 	*
 	* @return the name of the poller processor class of the portlet
 	*/
@@ -446,14 +446,14 @@ public interface Portlet extends PortletModel {
 	public void setPollerProcessorClass(java.lang.String pollerProcessorClass);
 
 	/**
-	* Gets the poller processor instance of the portlet.
+	* Returns the poller processor instance of the portlet.
 	*
 	* @return the poller processor instance of the portlet
 	*/
 	public com.liferay.portal.kernel.poller.PollerProcessor getPollerProcessorInstance();
 
 	/**
-	* Gets the name of the POP message listener class of the portlet.
+	* Returns the name of the POP message listener class of the portlet.
 	*
 	* @return the name of the POP message listener class of the portlet
 	*/
@@ -469,14 +469,14 @@ public interface Portlet extends PortletModel {
 		java.lang.String popMessageListenerClass);
 
 	/**
-	* Gets the POP message listener instance of the portlet.
+	* Returns the POP message listener instance of the portlet.
 	*
 	* @return the POP message listener instance of the portlet
 	*/
 	public com.liferay.portal.kernel.pop.MessageListener getPopMessageListenerInstance();
 
 	/**
-	* Gets the name of the social activity interpreter class of the portlet.
+	* Returns the name of the social activity interpreter class of the portlet.
 	*
 	* @return the name of the social activity interpreter class of the portlet
 	*/
@@ -492,7 +492,7 @@ public interface Portlet extends PortletModel {
 		java.lang.String socialActivityInterpreterClass);
 
 	/**
-	* Gets the name of the social activity interpreter instance of the portlet.
+	* Returns the name of the social activity interpreter instance of the portlet.
 	*
 	* @return the name of the social activity interpreter instance of the
 	portlet
@@ -500,7 +500,7 @@ public interface Portlet extends PortletModel {
 	public com.liferay.portlet.social.model.SocialActivityInterpreter getSocialActivityInterpreterInstance();
 
 	/**
-	* Gets the name of the social request interpreter class of the portlet.
+	* Returns the name of the social request interpreter class of the portlet.
 	*
 	* @return the name of the social request interpreter class of the portlet
 	*/
@@ -516,7 +516,7 @@ public interface Portlet extends PortletModel {
 		java.lang.String socialRequestInterpreterClass);
 
 	/**
-	* Gets the name of the social request interpreter instance of the portlet.
+	* Returns the name of the social request interpreter instance of the portlet.
 	*
 	* @return the name of the social request interpreter instance of the
 	portlet
@@ -524,7 +524,7 @@ public interface Portlet extends PortletModel {
 	public com.liferay.portlet.social.model.SocialRequestInterpreter getSocialRequestInterpreterInstance();
 
 	/**
-	* Gets the name of the WebDAV storage token of the portlet.
+	* Returns the name of the WebDAV storage token of the portlet.
 	*
 	* @return the name of the WebDAV storage token of the portlet
 	*/
@@ -539,7 +539,7 @@ public interface Portlet extends PortletModel {
 	public void setWebDAVStorageToken(java.lang.String webDAVStorageToken);
 
 	/**
-	* Gets the name of the WebDAV storage class of the portlet.
+	* Returns the name of the WebDAV storage class of the portlet.
 	*
 	* @return the name of the WebDAV storage class of the portlet
 	*/
@@ -554,14 +554,14 @@ public interface Portlet extends PortletModel {
 	public void setWebDAVStorageClass(java.lang.String webDAVStorageClass);
 
 	/**
-	* Gets the name of the WebDAV storage instance of the portlet.
+	* Returns the name of the WebDAV storage instance of the portlet.
 	*
 	* @return the name of the WebDAV storage instance of the portlet
 	*/
 	public com.liferay.portal.kernel.webdav.WebDAVStorage getWebDAVStorageInstance();
 
 	/**
-	* Gets the name of the XML-RPC method class of the portlet.
+	* Returns the name of the XML-RPC method class of the portlet.
 	*
 	* @return the name of the XML-RPC method class of the portlet
 	*/
@@ -576,14 +576,14 @@ public interface Portlet extends PortletModel {
 	public void setXmlRpcMethodClass(java.lang.String xmlRpcMethodClass);
 
 	/**
-	* Gets the name of the XML-RPC method instance of the portlet.
+	* Returns the name of the XML-RPC method instance of the portlet.
 	*
 	* @return the name of the XML-RPC method instance of the portlet
 	*/
 	public com.liferay.portal.kernel.xmlrpc.Method getXmlRpcMethodInstance();
 
 	/**
-	* Gets the name of the category of the Control Panel where the portlet will
+	* Returns the name of the category of the Control Panel where the portlet will
 	* be shown.
 	*
 	* @return the name of the category of the Control Panel where the portlet
@@ -602,7 +602,7 @@ public interface Portlet extends PortletModel {
 		java.lang.String controlPanelEntryCategory);
 
 	/**
-	* Gets the relative weight of the portlet with respect to the other
+	* Returns the relative weight of the portlet with respect to the other
 	* portlets in the same category of the Control Panel.
 	*
 	* @return the relative weight of the portlet with respect to the other
@@ -621,7 +621,7 @@ public interface Portlet extends PortletModel {
 	public void setControlPanelEntryWeight(double controlPanelEntryWeight);
 
 	/**
-	* Gets the name of the class that will control when the portlet will be
+	* Returns the name of the class that will control when the portlet will be
 	* shown in the Control Panel.
 	*
 	* @return the name of the class that will control when the portlet will be
@@ -640,7 +640,7 @@ public interface Portlet extends PortletModel {
 		java.lang.String controlPanelEntryClass);
 
 	/**
-	* Gets an instance of the class that will control when the portlet will be
+	* Returns an instance of the class that will control when the portlet will be
 	* shown in the Control Panel.
 	*
 	* @return the instance of the class that will control when the portlet will
@@ -649,7 +649,7 @@ public interface Portlet extends PortletModel {
 	public com.liferay.portlet.ControlPanelEntry getControlPanelEntryInstance();
 
 	/**
-	* Gets the names of the classes that represent asset types associated to
+	* Returns the names of the classes that represent asset types associated to
 	* the portlet.
 	*
 	* @return the names of the classes that represent asset types associated to
@@ -668,14 +668,14 @@ public interface Portlet extends PortletModel {
 		java.util.List<java.lang.String> assetRendererFactoryClasses);
 
 	/**
-	* Gets the asset type instances of the portlet.
+	* Returns the asset type instances of the portlet.
 	*
 	* @return the asset type instances of the portlet
 	*/
 	public java.util.List<com.liferay.portlet.asset.model.AssetRendererFactory> getAssetRendererFactoryInstances();
 
 	/**
-	* Gets the names of the classes that represent custom attribute displays
+	* Returns the names of the classes that represent custom attribute displays
 	* associated to the portlet.
 	*
 	* @return the names of the classes that represent asset types associated to
@@ -694,14 +694,14 @@ public interface Portlet extends PortletModel {
 		java.util.List<java.lang.String> customAttributesDisplayClasses);
 
 	/**
-	* Gets the custom attribute display instances of the portlet.
+	* Returns the custom attribute display instances of the portlet.
 	*
 	* @return the custom attribute display instances of the portlet
 	*/
 	public java.util.List<com.liferay.portlet.expando.model.CustomAttributesDisplay> getCustomAttributesDisplayInstances();
 
 	/**
-	* Gets the names of the classes that represent workflow handlers associated
+	* Returns the names of the classes that represent workflow handlers associated
 	* to the portlet.
 	*
 	* @return the names of the classes that represent workflow handlers
@@ -720,14 +720,14 @@ public interface Portlet extends PortletModel {
 		java.util.List<java.lang.String> workflowHandlerClasses);
 
 	/**
-	* Gets the workflow handler instances of the portlet.
+	* Returns the workflow handler instances of the portlet.
 	*
 	* @return the workflow handler instances of the portlet
 	*/
 	public java.util.List<com.liferay.portal.kernel.workflow.WorkflowHandler> getWorkflowHandlerInstances();
 
 	/**
-	* Gets the default preferences of the portlet.
+	* Returns the default preferences of the portlet.
 	*
 	* @return the default preferences of the portlet
 	*/
@@ -741,7 +741,7 @@ public interface Portlet extends PortletModel {
 	public void setDefaultPreferences(java.lang.String defaultPreferences);
 
 	/**
-	* Gets the name of the preferences validator class of the portlet.
+	* Returns the name of the preferences validator class of the portlet.
 	*
 	* @return the name of the preferences validator class of the portlet
 	*/
@@ -1143,7 +1143,7 @@ public interface Portlet extends PortletModel {
 	public void setScopeable(boolean scopeable);
 
 	/**
-	* Gets the user principal strategy of the portlet.
+	* Returns the user principal strategy of the portlet.
 	*
 	* @return the user principal strategy of the portlet
 	*/
@@ -1212,7 +1212,7 @@ public interface Portlet extends PortletModel {
 	public void setPrivateSessionAttributes(boolean privateSessionAttributes);
 
 	/**
-	* Gets the names of the parameters that will be automatically propagated
+	* Returns the names of the parameters that will be automatically propagated
 	* through the portlet.
 	*
 	* @return the names of the parameters that will be automatically propagated
@@ -1231,7 +1231,7 @@ public interface Portlet extends PortletModel {
 		java.util.Set<java.lang.String> autopropagatedParameters);
 
 	/**
-	* Gets the action timeout of the portlet.
+	* Returns the action timeout of the portlet.
 	*
 	* @return the action timeout of the portlet
 	*/
@@ -1245,7 +1245,7 @@ public interface Portlet extends PortletModel {
 	public void setActionTimeout(int actionTimeout);
 
 	/**
-	* Gets the render timeout of the portlet.
+	* Returns the render timeout of the portlet.
 	*
 	* @return the render timeout of the portlet
 	*/
@@ -1295,7 +1295,7 @@ public interface Portlet extends PortletModel {
 	public void setAjaxable(boolean ajaxable);
 
 	/**
-	* Gets a list of CSS files that will be referenced from the page's header
+	* Returns a list of CSS files that will be referenced from the page's header
 	* relative to the portal's context path.
 	*
 	* @return a list of CSS files that will be referenced from the page's
@@ -1314,7 +1314,7 @@ public interface Portlet extends PortletModel {
 		java.util.List<java.lang.String> headerPortalCss);
 
 	/**
-	* Gets a list of CSS files that will be referenced from the page's header
+	* Returns a list of CSS files that will be referenced from the page's header
 	* relative to the portlet's context path.
 	*
 	* @return a list of CSS files that will be referenced from the page's
@@ -1333,7 +1333,7 @@ public interface Portlet extends PortletModel {
 		java.util.List<java.lang.String> headerPortletCss);
 
 	/**
-	* Gets a list of JavaScript files that will be referenced from the page's
+	* Returns a list of JavaScript files that will be referenced from the page's
 	* header relative to the portal's context path.
 	*
 	* @return a list of JavaScript files that will be referenced from the
@@ -1353,7 +1353,7 @@ public interface Portlet extends PortletModel {
 		java.util.List<java.lang.String> headerPortalJavaScript);
 
 	/**
-	* Gets a list of JavaScript files that will be referenced from the page's
+	* Returns a list of JavaScript files that will be referenced from the page's
 	* header relative to the portlet's context path.
 	*
 	* @return a list of JavaScript files that will be referenced from the
@@ -1373,7 +1373,7 @@ public interface Portlet extends PortletModel {
 		java.util.List<java.lang.String> headerPortletJavaScript);
 
 	/**
-	* Gets a list of CSS files that will be referenced from the page's footer
+	* Returns a list of CSS files that will be referenced from the page's footer
 	* relative to the portal's context path.
 	*
 	* @return a list of CSS files that will be referenced from the page's
@@ -1392,7 +1392,7 @@ public interface Portlet extends PortletModel {
 		java.util.List<java.lang.String> footerPortalCss);
 
 	/**
-	* Gets a list of CSS files that will be referenced from the page's footer
+	* Returns a list of CSS files that will be referenced from the page's footer
 	* relative to the portlet's context path.
 	*
 	* @return a list of CSS files that will be referenced from the page's
@@ -1411,7 +1411,7 @@ public interface Portlet extends PortletModel {
 		java.util.List<java.lang.String> footerPortletCss);
 
 	/**
-	* Gets a list of JavaScript files that will be referenced from the page's
+	* Returns a list of JavaScript files that will be referenced from the page's
 	* footer relative to the portal's context path.
 	*
 	* @return a list of JavaScript files that will be referenced from the
@@ -1431,7 +1431,7 @@ public interface Portlet extends PortletModel {
 		java.util.List<java.lang.String> footerPortalJavaScript);
 
 	/**
-	* Gets a list of JavaScript files that will be referenced from the page's
+	* Returns a list of JavaScript files that will be referenced from the page's
 	* footer relative to the portlet's context path.
 	*
 	* @return a list of JavaScript files that will be referenced from the
@@ -1451,7 +1451,7 @@ public interface Portlet extends PortletModel {
 		java.util.List<java.lang.String> footerPortletJavaScript);
 
 	/**
-	* Gets the name of the CSS class that will be injected in the DIV that
+	* Returns the name of the CSS class that will be injected in the DIV that
 	* wraps this portlet.
 	*
 	* @return the name of the CSS class that will be injected in the DIV that
@@ -1469,7 +1469,7 @@ public interface Portlet extends PortletModel {
 	public void setCssClassWrapper(java.lang.String cssClassWrapper);
 
 	/**
-	* Gets the Facebook integration method of the portlet.
+	* Returns the Facebook integration method of the portlet.
 	*
 	* @return the Facebook integration method of the portlet
 	*/
@@ -1517,7 +1517,7 @@ public interface Portlet extends PortletModel {
 	public void setRoles(java.lang.String roles);
 
 	/**
-	* Gets an array of required roles of the portlet.
+	* Returns an array of required roles of the portlet.
 	*
 	* @return an array of required roles of the portlet
 	*/
@@ -1531,7 +1531,7 @@ public interface Portlet extends PortletModel {
 	public void setRolesArray(java.lang.String[] rolesArray);
 
 	/**
-	* Gets the unlinked roles of the portlet.
+	* Returns the unlinked roles of the portlet.
 	*
 	* @return unlinked roles of the portlet
 	*/
@@ -1545,7 +1545,7 @@ public interface Portlet extends PortletModel {
 	public void setUnlinkedRoles(java.util.Set<java.lang.String> unlinkedRoles);
 
 	/**
-	* Gets the role mappers of the portlet.
+	* Returns the role mappers of the portlet.
 	*
 	* @return role mappers of the portlet
 	*/
@@ -1659,7 +1659,7 @@ public interface Portlet extends PortletModel {
 	public void setReady(boolean ready);
 
 	/**
-	* Gets the init parameters of the portlet.
+	* Returns the init parameters of the portlet.
 	*
 	* @return init parameters of the portlet
 	*/
@@ -1674,7 +1674,7 @@ public interface Portlet extends PortletModel {
 		java.util.Map<java.lang.String, java.lang.String> initParams);
 
 	/**
-	* Gets expiration cache of the portlet.
+	* Returns expiration cache of the portlet.
 	*
 	* @return expiration cache of the portlet
 	*/
@@ -1688,7 +1688,7 @@ public interface Portlet extends PortletModel {
 	public void setExpCache(java.lang.Integer expCache);
 
 	/**
-	* Gets the portlet modes of the portlet.
+	* Returns the portlet modes of the portlet.
 	*
 	* @return portlet modes of the portlet
 	*/
@@ -1713,7 +1713,7 @@ public interface Portlet extends PortletModel {
 		javax.portlet.PortletMode portletMode);
 
 	/**
-	* Gets a list of all portlet modes supported by the portlet.
+	* Returns a list of all portlet modes supported by the portlet.
 	*
 	* @return a list of all portlet modes supported by the portlet
 	*/
@@ -1728,7 +1728,7 @@ public interface Portlet extends PortletModel {
 	public boolean hasMultipleMimeTypes();
 
 	/**
-	* Gets the window states of the portlet.
+	* Returns the window states of the portlet.
 	*
 	* @return window states of the portlet
 	*/
@@ -1753,14 +1753,14 @@ public interface Portlet extends PortletModel {
 		javax.portlet.WindowState windowState);
 
 	/**
-	* Gets a list of all window states supported by the portlet.
+	* Returns a list of all window states supported by the portlet.
 	*
 	* @return a list of all window states supported by the portlet
 	*/
 	public java.util.Set<java.lang.String> getAllWindowStates();
 
 	/**
-	* Gets the supported locales of the portlet.
+	* Returns the supported locales of the portlet.
 	*
 	* @return supported locales of the portlet
 	*/
@@ -1775,7 +1775,7 @@ public interface Portlet extends PortletModel {
 		java.util.Set<java.lang.String> supportedLocales);
 
 	/**
-	* Gets the resource bundle of the portlet.
+	* Returns the resource bundle of the portlet.
 	*
 	* @return resource bundle of the portlet
 	*/
@@ -1789,7 +1789,7 @@ public interface Portlet extends PortletModel {
 	public void setResourceBundle(java.lang.String resourceBundle);
 
 	/**
-	* Gets the portlet info of the portlet.
+	* Returns the portlet info of the portlet.
 	*
 	* @return portlet info of the portlet
 	*/
@@ -1803,7 +1803,7 @@ public interface Portlet extends PortletModel {
 	public void setPortletInfo(com.liferay.portal.model.PortletInfo portletInfo);
 
 	/**
-	* Gets the filters of the portlet.
+	* Returns the filters of the portlet.
 	*
 	* @return filters of the portlet
 	*/
@@ -1824,7 +1824,7 @@ public interface Portlet extends PortletModel {
 		com.liferay.portal.kernel.xml.QName processingEvent);
 
 	/**
-	* Gets the supported processing event from a namespace URI and a local
+	* Returns the supported processing event from a namespace URI and a local
 	* part.
 	*
 	* @return the supported processing event from a namespace URI and a local
@@ -1834,7 +1834,7 @@ public interface Portlet extends PortletModel {
 		java.lang.String uri, java.lang.String localPart);
 
 	/**
-	* Gets the supported processing events of the portlet.
+	* Returns the supported processing events of the portlet.
 	*
 	* @return supported processing events of the portlet
 	*/
@@ -1855,7 +1855,7 @@ public interface Portlet extends PortletModel {
 		com.liferay.portal.kernel.xml.QName publishingEvent);
 
 	/**
-	* Gets the supported publishing events of the portlet.
+	* Returns the supported publishing events of the portlet.
 	*
 	* @return supported publishing events of the portlet
 	*/
@@ -1878,7 +1878,7 @@ public interface Portlet extends PortletModel {
 		com.liferay.portal.model.PublicRenderParameter publicRenderParameter);
 
 	/**
-	* Gets the supported public render parameter from an identifier.
+	* Returns the supported public render parameter from an identifier.
 	*
 	* @return the supported public render parameter from an identifier
 	*/
@@ -1886,7 +1886,7 @@ public interface Portlet extends PortletModel {
 		java.lang.String identifier);
 
 	/**
-	* Gets the supported public render parameter from a namespace URI and a
+	* Returns the supported public render parameter from a namespace URI and a
 	* local part.
 	*
 	* @return the supported public render parameter from a namespace URI and a
@@ -1896,7 +1896,7 @@ public interface Portlet extends PortletModel {
 		java.lang.String uri, java.lang.String localPart);
 
 	/**
-	* Gets the supported public render parameters of the portlet.
+	* Returns the supported public render parameters of the portlet.
 	*
 	* @return the supported public render parameters of the portlet
 	*/
@@ -1912,21 +1912,21 @@ public interface Portlet extends PortletModel {
 		java.util.Set<com.liferay.portal.model.PublicRenderParameter> publicRenderParameters);
 
 	/**
-	* Gets the servlet context path of the portlet.
+	* Returns the servlet context path of the portlet.
 	*
 	* @return the servlet context path of the portlet
 	*/
 	public java.lang.String getContextPath();
 
 	/**
-	* Gets the path for static resources served by this portlet.
+	* Returns the path for static resources served by this portlet.
 	*
 	* @return the path for static resources served by this portlet
 	*/
 	public java.lang.String getStaticResourcePath();
 
 	/**
-	* Gets this portlet's application.
+	* Returns this portlet's application.
 	*
 	* @return this portlet's application
 	*/

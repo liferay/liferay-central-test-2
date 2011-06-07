@@ -228,7 +228,7 @@ public interface Portal {
 		throws PortalException, SystemException;
 
 	/**
-	 * Gets the set of struts actions that should not be checked for an
+	 * Returns the set of struts actions that should not be checked for an
 	 * authentication token.
 	 *
 	 * @return the set of struts actions that should not be checked for an
@@ -237,7 +237,7 @@ public interface Portal {
 	public Set<String> getAuthTokenIgnoreActions();
 
 	/**
-	 * Gets the set of IDs of portlets that should not be checked for an
+	 * Returns the set of IDs of portlets that should not be checked for an
 	 * authentication token.
 	 *
 	 * @return the set of IDs of portlets that should not be checked for an
@@ -246,7 +246,7 @@ public interface Portal {
 	public Set<String> getAuthTokenIgnorePortlets();
 
 	/**
-	 * Gets the base model instance for the resource.
+	 * Returns the base model instance for the resource.
 	 *
 	 * @param  resource the resource to get the base model instance for
 	 * @return the base model instance, or <code>null</code> if the resource
@@ -259,7 +259,7 @@ public interface Portal {
 		throws PortalException, SystemException;
 
 	/**
-	 * Gets the base model instance for the resource permission.
+	 * Returns the base model instance for the resource permission.
 	 *
 	 * @param  resourcePermission the resource permission to get the base model
 	 *         instance for
@@ -274,7 +274,7 @@ public interface Portal {
 		throws PortalException, SystemException;
 
 	/**
-	 * Gets the base model instance for the model name and primary key.
+	 * Returns the base model instance for the model name and primary key.
 	 *
 	 * @param  modelName the fully qualified class name of the model
 	 * @param  primKey the primary key of the model instance to get
@@ -288,8 +288,8 @@ public interface Portal {
 		throws PortalException, SystemException;
 
 	/**
-	 * Gets the user's ID from the HTTP authentication headers after validating
-	 * their credentials.
+	 * Returns the user's ID from the HTTP authentication headers after
+	 * validating their credentials.
 	 *
 	 * @param  request the servlet request to retrieve the HTTP authentication
 	 *         headers from
@@ -302,8 +302,8 @@ public interface Portal {
 		throws PortalException, SystemException;
 
 	/**
-	 * Gets the user's ID from the HTTP authentication headers after validation
-	 * their credentials.
+	 * Returns the user's ID from the HTTP authentication headers after
+	 * validation their credentials.
 	 *
 	 * @param  request the servlet request to retrieve the HTTP authentication
 	 *         headers from
@@ -322,8 +322,8 @@ public interface Portal {
 	public String getCDNHost();
 
 	/**
-	 * Gets the secure (HTTPS) or insecure (HTTP) content distribution network
-	 * (CDN) host address for this portal.
+	 * Returns the secure (HTTPS) or insecure (HTTP) content distribution
+	 * network (CDN) host address for this portal.
 	 *
 	 * @param  secure whether to get the secure or insecure CDN host address
 	 * @return the CDN host address
@@ -331,21 +331,23 @@ public interface Portal {
 	public String getCDNHost(boolean secure);
 
 	/**
-	 * Gets the insecure (HTTP) content distribution network (CDN) host address
+	 * Returns the insecure (HTTP) content distribution network (CDN) host
+	 * address
 	 *
 	 * @return the CDN host address
 	 */
 	public String getCDNHostHttp();
 
 	/**
-	 * Gets the secure (HTTPS) content distribution network (CDN) host address
+	 * Returns the secure (HTTPS) content distribution network (CDN) host
+	 * address
 	 *
 	 * @return the CDN host address
 	 */
 	public String getCDNHostHttps();
 
 	/**
-	 * Gets the fully qualified name of the class from its ID.
+	 * Returns the fully qualified name of the class from its ID.
 	 *
 	 * @param  classNameId the ID of the class
 	 * @return the fully qualified name of the class
@@ -353,7 +355,7 @@ public interface Portal {
 	public String getClassName(long classNameId);
 
 	/**
-	 * Gets the ID of the class from its class object.
+	 * Returns the ID of the class from its class object.
 	 *
 	 * @param  clazz the class object
 	 * @return the ID of the class
@@ -361,7 +363,7 @@ public interface Portal {
 	public long getClassNameId(Class<?> clazz);
 
 	/**
-	 * Gets the ID of the class from its fully qualified name.
+	 * Returns the ID of the class from its fully qualified name.
 	 *
 	 * @param  value the fully qualified name of the class
 	 * @return the ID of the class
@@ -369,10 +371,10 @@ public interface Portal {
 	public long getClassNameId(String value);
 
 	/**
-	 * Gets the ID of certain portlets from the fully qualified name of one of
-	 * their classes. The portlets this method supports are: blogs, bookmarks,
-	 * calendar, document library, image gallery, journal, message boards, and
-	 * wiki.
+	 * Returns the ID of certain portlets from the fully qualified name of one
+	 * of their classes. The portlets this method supports are: blogs,
+	 * bookmarks, calendar, document library, image gallery, journal, message
+	 * boards, and wiki.
 	 *
 	 * @param  className the fully qualified name of a class in a portlet
 	 * @return the ID of the portlet the class is a part of, or an empty string
@@ -422,7 +424,7 @@ public interface Portal {
 	public String getCustomSQLFunctionIsNull();
 
 	/**
-	 * Gets the date object for the specified month, day, and year.
+	 * Returns the date object for the specified month, day, and year.
 	 *
 	 * @param  month the month (0-based, meaning 0 for January)
 	 * @param  day the day of the month
@@ -432,7 +434,7 @@ public interface Portal {
 	public Date getDate(int month, int day, int year);
 
 	/**
-	 * Gets the date object for the specified month, day, year, hour, and
+	 * Returns the date object for the specified month, day, year, hour, and
 	 * minute, optionally throwing an exception if the date is invalid.
 	 *
 	 * @param  month the month (0-based, meaning 0 for January)
@@ -453,7 +455,7 @@ public interface Portal {
 		throws PortalException;
 
 	/**
-	 * Gets the date object for the specified month, day, year, hour, minute,
+	 * Returns the date object for the specified month, day, year, hour, minute,
 	 * and time zone, optionally throwing an exception if the date is invalid.
 	 *
 	 * @param  month the month (0-based, meaning 0 for January)
@@ -476,8 +478,8 @@ public interface Portal {
 		throws PortalException;
 
 	/**
-	 * Gets the date object for the specified month, day, and year, optionally
-	 * throwing an exception if the date is invalid.
+	 * Returns the date object for the specified month, day, and year,
+	 * optionally throwing an exception if the date is invalid.
 	 *
 	 * @param  month the month (0-based, meaning 0 for January)
 	 * @param  day the day of the month
@@ -494,8 +496,8 @@ public interface Portal {
 		throws PortalException;
 
 	/**
-	 * Gets the date object for the specified month, day, year, and time zone,
-	 * optionally throwing an exception if the date is invalid.
+	 * Returns the date object for the specified month, day, year, and time
+	 * zone, optionally throwing an exception if the date is invalid.
 	 *
 	 * @param  month the month (0-based, meaning 0 for January)
 	 * @param  day the day of the month
@@ -790,7 +792,8 @@ public interface Portal {
 		Portlet portlet, ServletContext servletContext);
 
 	/**
-	 * Gets the URL of the login page for the current site if one is available.
+	 * Returns the URL of the login page for the current site if one is
+	 * available.
 	 *
 	 * @param  themeDisplay the theme display for the current page
 	 * @return the URL of the login page for the current site, or

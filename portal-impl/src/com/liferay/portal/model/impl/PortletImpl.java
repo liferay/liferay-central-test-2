@@ -270,7 +270,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Gets the root portlet of this portlet instance.
+	 * Returns the root portlet of this portlet instance.
 	 *
 	 * @return the root portlet of this portlet instance
 	 */
@@ -279,7 +279,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Gets the root portlet ID of the portlet.
+	 * Returns the root portlet ID of the portlet.
 	 *
 	 * @return the root portlet ID of the portlet
 	 */
@@ -288,7 +288,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Gets the instance ID of the portlet.
+	 * Returns the instance ID of the portlet.
 	 *
 	 * @return the instance ID of the portlet
 	 */
@@ -297,7 +297,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Gets the plugin ID of the portlet.
+	 * Returns the plugin ID of the portlet.
 	 *
 	 * @return the plugin ID of the portlet
 	 */
@@ -306,7 +306,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Gets the plugin type of the portlet.
+	 * Returns the plugin type of the portlet.
 	 *
 	 * @return the plugin type of the portlet
 	 */
@@ -315,7 +315,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Gets this portlet's plugin package.
+	 * Returns this portlet's plugin package.
 	 *
 	 * @return this portlet's plugin package
 	 */
@@ -351,7 +351,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Gets the timestamp of the portlet.
+	 * Returns the timestamp of the portlet.
 	 *
 	 * @return the timestamp of the portlet
 	 */
@@ -369,7 +369,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Gets the icon of the portlet.
+	 * Returns the icon of the portlet.
 	 *
 	 * @return the icon of the portlet
 	 */
@@ -387,7 +387,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Gets the virtual path of the portlet.
+	 * Returns the virtual path of the portlet.
 	 *
 	 * @return the virtual path of the portlet
 	 */
@@ -409,7 +409,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Gets the struts path of the portlet.
+	 * Returns the struts path of the portlet.
 	 *
 	 * @return the struts path of the portlet
 	 */
@@ -427,7 +427,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Gets the parent struts path of the portlet.
+	 * Returns the parent struts path of the portlet.
 	 *
 	 * @return the parent struts path of the portlet.
 	 */
@@ -445,7 +445,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Gets the name of the portlet.
+	 * Returns the name of the portlet.
 	 *
 	 * @return the display name of the portlet
 	 */
@@ -463,7 +463,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Gets the display name of the portlet.
+	 * Returns the display name of the portlet.
 	 *
 	 * @return the display name of the portlet
 	 */
@@ -481,7 +481,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Gets the name of the portlet class of the portlet.
+	 * Returns the name of the portlet class of the portlet.
 	 *
 	 * @return the name of the portlet class of the portlet
 	 */
@@ -499,7 +499,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Gets the configuration action class of the portlet.
+	 * Returns the configuration action class of the portlet.
 	 *
 	 * @return the configuration action class of the portlet
 	 */
@@ -518,7 +518,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Gets the configuration action instance of the portlet.
+	 * Returns the configuration action instance of the portlet.
 	 *
 	 * @return the configuration action instance of the portlet
 	 */
@@ -533,7 +533,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Gets the name of the indexer class of the portlet.
+	 * Returns the name of the indexer class of the portlet.
 	 *
 	 * @return the name of the indexer class of the portlet
 	 */
@@ -551,7 +551,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Gets the indexer instance of the portlet.
+	 * Returns the indexer instance of the portlet.
 	 *
 	 * @return the indexer instance of the portlet
 	 */
@@ -566,7 +566,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Gets the name of the open search class of the portlet.
+	 * Returns the name of the open search class of the portlet.
 	 *
 	 * @return the name of the open search class of the portlet
 	 */
@@ -584,7 +584,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Gets the indexer instance of the portlet.
+	 * Returns the indexer instance of the portlet.
 	 *
 	 * @return the indexer instance of the portlet
 	 */
@@ -606,7 +606,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Gets the scheduler entries of the portlet.
+	 * Returns the scheduler entries of the portlet.
 	 *
 	 * @return the scheduler entries of the portlet
 	 */
@@ -626,7 +626,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Gets the name of the portlet URL class of the portlet.
+	 * Returns the name of the portlet URL class of the portlet.
 	 *
 	 * @return the name of the portlet URL class of the portlet
 	 */
@@ -644,7 +644,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Gets the name of the friendly URL mapper class of the portlet.
+	 * Returns the name of the friendly URL mapper class of the portlet.
 	 *
 	 * @return the name of the friendly URL mapper class of the portlet
 	 */
@@ -663,7 +663,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Gets the friendly URL mapper instance of the portlet.
+	 * Returns the friendly URL mapper instance of the portlet.
 	 *
 	 * @return the friendly URL mapper instance of the portlet
 	 */
@@ -678,7 +678,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Gets the name of the friendly URL mapping of the portlet.
+	 * Returns the name of the friendly URL mapping of the portlet.
 	 *
 	 * @return the name of the friendly URL mapping of the portlet
 	 */
@@ -697,7 +697,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Gets the class loader resource path to the friendly URL routes of the
+	 * Returns the class loader resource path to the friendly URL routes of the
 	 * portlet.
 	 *
 	 * @return the class loader resource path to the friendly URL routes of the
@@ -719,7 +719,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Gets the name of the URL encoder class of the portlet.
+	 * Returns the name of the URL encoder class of the portlet.
 	 *
 	 * @return the name of the URL encoder class of the portlet
 	 */
@@ -737,7 +737,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Gets the URL encoder instance of the portlet.
+	 * Returns the URL encoder instance of the portlet.
 	 *
 	 * @return the URL encoder instance of the portlet
 	 */
@@ -752,7 +752,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Gets the name of the portlet data handler class of the portlet.
+	 * Returns the name of the portlet data handler class of the portlet.
 	 *
 	 * @return the name of the portlet data handler class of the portlet
 	 */
@@ -771,7 +771,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Gets the portlet data handler instance of the portlet.
+	 * Returns the portlet data handler instance of the portlet.
 	 *
 	 * @return the portlet data handler instance of the portlet
 	 */
@@ -786,7 +786,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Gets the name of the portlet layout listener class of the portlet.
+	 * Returns the name of the portlet layout listener class of the portlet.
 	 *
 	 * @return the name of the portlet layout listener class of the portlet
 	 */
@@ -807,7 +807,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Gets the portlet layout listener instance of the portlet.
+	 * Returns the portlet layout listener instance of the portlet.
 	 *
 	 * @return the portlet layout listener instance of the portlet
 	 */
@@ -822,7 +822,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Gets the name of the poller processor class of the portlet.
+	 * Returns the name of the poller processor class of the portlet.
 	 *
 	 * @return the name of the poller processor class of the portlet
 	 */
@@ -841,7 +841,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Gets the poller processor instance of the portlet.
+	 * Returns the poller processor instance of the portlet.
 	 *
 	 * @return the poller processor instance of the portlet
 	 */
@@ -856,7 +856,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Gets the name of the POP message listener class of the portlet.
+	 * Returns the name of the POP message listener class of the portlet.
 	 *
 	 * @return the name of the POP message listener class of the portlet
 	 */
@@ -875,7 +875,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Gets the POP message listener instance of the portlet.
+	 * Returns the POP message listener instance of the portlet.
 	 *
 	 * @return the POP message listener instance of the portlet
 	 */
@@ -890,7 +890,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Gets the name of the social activity interpreter class of the portlet.
+	 * Returns the name of the social activity interpreter class of the portlet.
 	 *
 	 * @return the name of the social activity interpreter class of the portlet
 	 */
@@ -911,7 +911,8 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Gets the name of the social activity interpreter instance of the portlet.
+	 * Returns the name of the social activity interpreter instance of the
+	 * portlet.
 	 *
 	 * @return the name of the social activity interpreter instance of the
 	 *         portlet
@@ -927,7 +928,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Gets the name of the social request interpreter class of the portlet.
+	 * Returns the name of the social request interpreter class of the portlet.
 	 *
 	 * @return the name of the social request interpreter class of the portlet
 	 */
@@ -948,7 +949,8 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Gets the name of the social request interpreter instance of the portlet.
+	 * Returns the name of the social request interpreter instance of the
+	 * portlet.
 	 *
 	 * @return the name of the social request interpreter instance of the
 	 *         portlet
@@ -964,7 +966,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Gets the name of the WebDAV storage token of the portlet.
+	 * Returns the name of the WebDAV storage token of the portlet.
 	 *
 	 * @return the name of the WebDAV storage token of the portlet
 	 */
@@ -983,7 +985,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Gets the name of the WebDAV storage class of the portlet.
+	 * Returns the name of the WebDAV storage class of the portlet.
 	 *
 	 * @return the name of the WebDAV storage class of the portlet
 	 */
@@ -1002,7 +1004,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Gets the name of the WebDAV storage instance of the portlet.
+	 * Returns the name of the WebDAV storage instance of the portlet.
 	 *
 	 * @return the name of the WebDAV storage instance of the portlet
 	 */
@@ -1017,7 +1019,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Gets the name of the XML-RPC method class of the portlet.
+	 * Returns the name of the XML-RPC method class of the portlet.
 	 *
 	 * @return the name of the XML-RPC method class of the portlet
 	 */
@@ -1036,7 +1038,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Gets the name of the XML-RPC method instance of the portlet.
+	 * Returns the name of the XML-RPC method instance of the portlet.
 	 *
 	 * @return the name of the XML-RPC method instance of the portlet
 	 */
@@ -1051,8 +1053,8 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Gets the name of the category of the Control Panel where the portlet will
-	 * be shown.
+	 * Returns the name of the category of the Control Panel where the portlet
+	 * will be shown.
 	 *
 	 * @return the name of the category of the Control Panel where the portlet
 	 *         will be shown
@@ -1073,7 +1075,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Gets the relative weight of the portlet with respect to the other
+	 * Returns the relative weight of the portlet with respect to the other
 	 * portlets in the same category of the Control Panel.
 	 *
 	 * @return the relative weight of the portlet with respect to the other
@@ -1096,7 +1098,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Gets the name of the class that will control when the portlet will be
+	 * Returns the name of the class that will control when the portlet will be
 	 * shown in the Control Panel.
 	 *
 	 * @return the name of the class that will control when the portlet will be
@@ -1118,8 +1120,8 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Gets an instance of the class that will control when the portlet will be
-	 * shown in the Control Panel.
+	 * Returns an instance of the class that will control when the portlet will
+	 * be shown in the Control Panel.
 	 *
 	 * @return the instance of the class that will control when the portlet will
 	 *         be shown in the Control Panel
@@ -1135,7 +1137,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Gets the names of the classes that represent asset types associated to
+	 * Returns the names of the classes that represent asset types associated to
 	 * the portlet.
 	 *
 	 * @return the names of the classes that represent asset types associated to
@@ -1159,7 +1161,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Gets the asset type instances of the portlet.
+	 * Returns the asset type instances of the portlet.
 	 *
 	 * @return the asset type instances of the portlet
 	 */
@@ -1174,7 +1176,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Gets the names of the classes that represent custom attribute displays
+	 * Returns the names of the classes that represent custom attribute displays
 	 * associated to the portlet.
 	 *
 	 * @return the names of the classes that represent asset types associated to
@@ -1198,7 +1200,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Gets the custom attribute display instances of the portlet.
+	 * Returns the custom attribute display instances of the portlet.
 	 *
 	 * @return the custom attribute display instances of the portlet
 	 */
@@ -1213,8 +1215,8 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Gets the names of the classes that represent workflow handlers associated
-	 * to the portlet.
+	 * Returns the names of the classes that represent workflow handlers
+	 * associated to the portlet.
 	 *
 	 * @return the names of the classes that represent workflow handlers
 	 *         associated to the portlet
@@ -1235,7 +1237,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Gets the workflow handler instances of the portlet.
+	 * Returns the workflow handler instances of the portlet.
 	 *
 	 * @return the workflow handler instances of the portlet
 	 */
@@ -1250,7 +1252,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Gets the default preferences of the portlet.
+	 * Returns the default preferences of the portlet.
 	 *
 	 * @return the default preferences of the portlet
 	 */
@@ -1273,7 +1275,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Gets the name of the preferences validator class of the portlet.
+	 * Returns the name of the preferences validator class of the portlet.
 	 *
 	 * @return the name of the preferences validator class of the portlet
 	 */
@@ -1779,7 +1781,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Gets the user principal strategy of the portlet.
+	 * Returns the user principal strategy of the portlet.
 	 *
 	 * @return the user principal strategy of the portlet
 	 */
@@ -1866,7 +1868,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Gets the names of the parameters that will be automatically propagated
+	 * Returns the names of the parameters that will be automatically propagated
 	 * through the portlet.
 	 *
 	 * @return the names of the parameters that will be automatically propagated
@@ -1890,7 +1892,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Gets the action timeout of the portlet.
+	 * Returns the action timeout of the portlet.
 	 *
 	 * @return the action timeout of the portlet
 	 */
@@ -1908,7 +1910,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Gets the render timeout of the portlet.
+	 * Returns the render timeout of the portlet.
 	 *
 	 * @return the render timeout of the portlet
 	 */
@@ -1972,8 +1974,8 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Gets a list of CSS files that will be referenced from the page's header
-	 * relative to the portal's context path.
+	 * Returns a list of CSS files that will be referenced from the page's
+	 * header relative to the portal's context path.
 	 *
 	 * @return a list of CSS files that will be referenced from the page's
 	 *         header relative to the portal's context path
@@ -1994,8 +1996,8 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Gets a list of CSS files that will be referenced from the page's header
-	 * relative to the portlet's context path.
+	 * Returns a list of CSS files that will be referenced from the page's
+	 * header relative to the portlet's context path.
 	 *
 	 * @return a list of CSS files that will be referenced from the page's
 	 *         header relative to the portlet's context path
@@ -2016,8 +2018,8 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Gets a list of JavaScript files that will be referenced from the page's
-	 * header relative to the portal's context path.
+	 * Returns a list of JavaScript files that will be referenced from the
+	 * page's header relative to the portal's context path.
 	 *
 	 * @return a list of JavaScript files that will be referenced from the
 	 *         page's header relative to the portal's context path
@@ -2039,8 +2041,8 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Gets a list of JavaScript files that will be referenced from the page's
-	 * header relative to the portlet's context path.
+	 * Returns a list of JavaScript files that will be referenced from the
+	 * page's header relative to the portlet's context path.
 	 *
 	 * @return a list of JavaScript files that will be referenced from the
 	 *         page's header relative to the portlet's context path
@@ -2064,8 +2066,8 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Gets a list of CSS files that will be referenced from the page's footer
-	 * relative to the portal's context path.
+	 * Returns a list of CSS files that will be referenced from the page's
+	 * footer relative to the portal's context path.
 	 *
 	 * @return a list of CSS files that will be referenced from the page's
 	 *         footer relative to the portal's context path
@@ -2086,8 +2088,8 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Gets a list of CSS files that will be referenced from the page's footer
-	 * relative to the portlet's context path.
+	 * Returns a list of CSS files that will be referenced from the page's
+	 * footer relative to the portlet's context path.
 	 *
 	 * @return a list of CSS files that will be referenced from the page's
 	 *         footer relative to the portlet's context path
@@ -2108,8 +2110,8 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Gets a list of JavaScript files that will be referenced from the page's
-	 * footer relative to the portal's context path.
+	 * Returns a list of JavaScript files that will be referenced from the
+	 * page's footer relative to the portal's context path.
 	 *
 	 * @return a list of JavaScript files that will be referenced from the
 	 *         page's footer relative to the portal's context path
@@ -2131,8 +2133,8 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Gets a list of JavaScript files that will be referenced from the page's
-	 * footer relative to the portlet's context path.
+	 * Returns a list of JavaScript files that will be referenced from the
+	 * page's footer relative to the portlet's context path.
 	 *
 	 * @return a list of JavaScript files that will be referenced from the
 	 *         page's footer relative to the portlet's context path
@@ -2156,7 +2158,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Gets the name of the CSS class that will be injected in the DIV that
+	 * Returns the name of the CSS class that will be injected in the DIV that
 	 * wraps this portlet.
 	 *
 	 * @return the name of the CSS class that will be injected in the DIV that
@@ -2178,7 +2180,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Gets the Facebook integration method of the portlet.
+	 * Returns the Facebook integration method of the portlet.
 	 *
 	 * @return the Facebook integration method of the portlet
 	 */
@@ -2242,7 +2244,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Gets an array of required roles of the portlet.
+	 * Returns an array of required roles of the portlet.
 	 *
 	 * @return an array of required roles of the portlet
 	 */
@@ -2262,7 +2264,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Gets the unlinked roles of the portlet.
+	 * Returns the unlinked roles of the portlet.
 	 *
 	 * @return unlinked roles of the portlet
 	 */
@@ -2280,7 +2282,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Gets the role mappers of the portlet.
+	 * Returns the role mappers of the portlet.
 	 *
 	 * @return role mappers of the portlet
 	 */
@@ -2493,7 +2495,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Gets the init parameters of the portlet.
+	 * Returns the init parameters of the portlet.
 	 *
 	 * @return init parameters of the portlet
 	 */
@@ -2511,7 +2513,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Gets expiration cache of the portlet.
+	 * Returns expiration cache of the portlet.
 	 *
 	 * @return expiration cache of the portlet
 	 */
@@ -2529,7 +2531,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Gets the portlet modes of the portlet.
+	 * Returns the portlet modes of the portlet.
 	 *
 	 * @return portlet modes of the portlet
 	 */
@@ -2573,7 +2575,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Gets a list of all portlet modes supported by the portlet.
+	 * Returns a list of all portlet modes supported by the portlet.
 	 *
 	 * @return a list of all portlet modes supported by the portlet
 	 */
@@ -2616,7 +2618,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Gets the window states of the portlet.
+	 * Returns the window states of the portlet.
 	 *
 	 * @return window states of the portlet
 	 */
@@ -2660,7 +2662,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Gets a list of all window states supported by the portlet.
+	 * Returns a list of all window states supported by the portlet.
 	 *
 	 * @return a list of all window states supported by the portlet
 	 */
@@ -2688,7 +2690,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Gets the supported locales of the portlet.
+	 * Returns the supported locales of the portlet.
 	 *
 	 * @return supported locales of the portlet
 	 */
@@ -2706,7 +2708,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Gets the resource bundle of the portlet.
+	 * Returns the resource bundle of the portlet.
 	 *
 	 * @return resource bundle of the portlet
 	 */
@@ -2724,7 +2726,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Gets the portlet info of the portlet.
+	 * Returns the portlet info of the portlet.
 	 *
 	 * @return portlet info of the portlet
 	 */
@@ -2742,7 +2744,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Gets the filters of the portlet.
+	 * Returns the filters of the portlet.
 	 *
 	 * @return filters of the portlet
 	 */
@@ -2769,7 +2771,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Gets the supported processing event from a namespace URI and a local
+	 * Returns the supported processing event from a namespace URI and a local
 	 * part.
 	 *
 	 * @return the supported processing event from a namespace URI and a local
@@ -2781,7 +2783,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Gets the supported processing events of the portlet.
+	 * Returns the supported processing events of the portlet.
 	 *
 	 * @return supported processing events of the portlet
 	 */
@@ -2808,7 +2810,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Gets the supported publishing events of the portlet.
+	 * Returns the supported publishing events of the portlet.
 	 *
 	 * @return supported publishing events of the portlet
 	 */
@@ -2855,7 +2857,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Gets the supported public render parameter from an identifier.
+	 * Returns the supported public render parameter from an identifier.
 	 *
 	 * @return the supported public render parameter from an identifier
 	 */
@@ -2864,7 +2866,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Gets the supported public render parameter from a namespace URI and a
+	 * Returns the supported public render parameter from a namespace URI and a
 	 * local part.
 	 *
 	 * @return the supported public render parameter from a namespace URI and a
@@ -2878,7 +2880,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Gets the supported public render parameters of the portlet.
+	 * Returns the supported public render parameters of the portlet.
 	 *
 	 * @return the supported public render parameters of the portlet
 	 */
@@ -2903,7 +2905,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Gets the servlet context path of the portlet.
+	 * Returns the servlet context path of the portlet.
 	 *
 	 * @return the servlet context path of the portlet
 	 */
@@ -2917,7 +2919,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Gets the path for static resources served by this portlet.
+	 * Returns the path for static resources served by this portlet.
 	 *
 	 * @return the path for static resources served by this portlet
 	 */
@@ -2941,7 +2943,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Gets this portlet's application.
+	 * Returns this portlet's application.
 	 *
 	 * @return this portlet's application
 	 */

@@ -61,7 +61,7 @@ public class PortletConstants {
 	public static final String FACEBOOK_INTEGRATION_IFRAME = "iframe";
 
 	/**
-	 * Gets the root portlet ID of the portlet.
+	 * Returns the root portlet ID of the portlet.
 	 *
 	 * @return the root portlet ID of the portlet
 	 */
@@ -77,7 +77,7 @@ public class PortletConstants {
 	}
 
 	/**
-	 * Gets the instance ID of the portlet.
+	 * Returns the instance ID of the portlet.
 	 *
 	 * @return the instance ID of the portlet
 	 */

@@ -41,7 +41,7 @@ public interface PluginSetting extends PluginSettingModel {
 	public void setRoles(java.lang.String roles);
 
 	/**
-	* Gets an array of required roles of the plugin.
+	* Returns an array of required roles of the plugin.
 	*
 	* @return an array of required roles of the plugin
 	*/

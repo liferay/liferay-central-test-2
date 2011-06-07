@@ -46,7 +46,7 @@ public interface FriendlyURLMapper {
 	public String buildPath(LiferayPortletURL liferayPortletURL);
 
 	/**
-	 * Gets the friendly URL mapping for this portlet.
+	 * Returns the friendly URL mapping for this portlet.
 	 *
 	 * <p>
 	 * The friendly URL mapping is used by Liferay to identify the portlet a
@@ -66,14 +66,14 @@ public interface FriendlyURLMapper {
 	public String getMapping();
 
 	/**
-	 * Gets the ID of this portlet
+	 * Returns the ID of this portlet
 	 *
 	 * @return the ID of this portlet, not including the instance ID
 	 */
 	public String getPortletId();
 
 	/**
-	 * Gets the router for this friendly URL mapper
+	 * Returns the router for this friendly URL mapper
 	 *
 	 * @return the router, or <code>null</code> if one has not been set
 	 */
@@ -128,11 +128,11 @@ public interface FriendlyURLMapper {
 	 * a friendly URL is processed.
 	 * </p>
 	 *
-	 * @param friendlyURLPath the friendly URL path to parse, including a
-	 *        leading slash and the friendly URL mapping. For example:
+	 * @param friendlyURLPath the friendly URL path, including a leading slash
+	 *        and the friendly URL mapping. For example:
 	 *        <code>/blogs/example-post</code>
-	 * @param parameterMap the parameter map to populate. Entries added to this
-	 *        map must be namespaced.
+	 * @param parameterMap the parameter map. Entries added to this map must be
+	 *        namespaced.
 	 * @param requestContext the request context
 	 * @see   BaseFriendlyURLMapper#addParameter(Map, String, String)
 	 * @see   BaseFriendlyURLMapper#addParameter(String, Map, String, String)
