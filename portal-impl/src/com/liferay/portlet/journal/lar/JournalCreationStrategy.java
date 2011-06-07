@@ -56,8 +56,8 @@ public interface JournalCreationStrategy {
 	/**
 	 * Gives the content creation strategy an opportunity to transform the
 	 * content before the new article is saved to the database. Possible use
-	 * cases include using Velocity to merge in group specific values into
-	 * the text. Returns the new content to assign to the article. If
+	 * cases include using Velocity to merge in group specific values into the
+	 * text. Returns the new content to assign to the article. If
 	 * <code>null</code> is returned, the article content will be added
 	 * unchanged.
 	 *
@@ -73,8 +73,8 @@ public interface JournalCreationStrategy {
 	 * Returns <code>true</code> if the default group permissions should be
 	 * added when the specified journalObj is created.
 	 *
-	 * @return <code>true</code> if default group permissions should be
-	 *         added to the specified journalObj
+	 * @return <code>true</code> if default group permissions should be added to
+	 *         the specified journalObj
 	 */
 	public boolean addGroupPermissions(
 			PortletDataContext context, Object journalObj)

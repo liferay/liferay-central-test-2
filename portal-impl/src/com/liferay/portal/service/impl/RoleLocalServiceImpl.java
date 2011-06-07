@@ -144,10 +144,12 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 		String[] systemRoles = PortalUtil.getSystemRoles();
 
 		for (String name : systemRoles) {
-			String description = PropsUtil.get(
+			String key =
 				"system.role." +
-				StringUtil.replace(name, CharPool.SPACE, CharPool.PERIOD) +
-				".description");
+					StringUtil.replace(name, CharPool.SPACE, CharPool.PERIOD) +
+						".description";
+
+			String description = PropsUtil.get(key);
 			int type = RoleConstants.TYPE_REGULAR;
 
 			checkSystemRole(companyId, name, description, type);
@@ -159,10 +161,12 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 			PortalUtil.getSystemOrganizationRoles();
 
 		for (String name : systemOrganizationRoles) {
-			String description = PropsUtil.get(
+			String key =
 				"system.organization.role." +
 					StringUtil.replace(name, CharPool.SPACE, CharPool.PERIOD) +
-					".description");
+						".description";
+
+			String description = PropsUtil.get(key);
 			int type = RoleConstants.TYPE_ORGANIZATION;
 
 			checkSystemRole(companyId, name, description, type);
@@ -173,10 +177,12 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 		String[] systemSiteRoles = PortalUtil.getSystemSiteRoles();
 
 		for (String name : systemSiteRoles) {
-			String description = PropsUtil.get(
+			String key =
 				"system.site.role." +
-				StringUtil.replace(name, CharPool.SPACE, CharPool.PERIOD) +
-				".description");
+					StringUtil.replace(name, CharPool.SPACE, CharPool.PERIOD) +
+						".description";
+
+			String description = PropsUtil.get(key);
 			int type = RoleConstants.TYPE_SITE;
 
 			checkSystemRole(companyId, name, description, type);

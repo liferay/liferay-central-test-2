@@ -198,7 +198,7 @@ public class AddDefaultLayoutSetPrototypesAction extends SimpleAction {
 
 		LayoutSet layoutSet = addLayoutSetPrototype(
 			companyId, defaultUserId, "Site with Blog, Wiki and Forum",
-			"Pages that are available to both guests and members of this site",
+			"Pages that are available to both guests and members of this site.",
 			layoutSetPrototypes);
 
 		if (layoutSet == null) {
