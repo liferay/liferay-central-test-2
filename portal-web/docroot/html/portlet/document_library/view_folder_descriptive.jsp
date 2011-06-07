@@ -37,6 +37,6 @@ String thumbnailSrc = themeDisplay.getPathThemeImages() + "/file_system/large/fo
 	<liferay-util:include page="/html/portlet/document_library/folder_action.jsp" />
 
 	<c:if test="<%= DLFolderPermission.contains(permissionChecker, folder, ActionKeys.DELETE) %>">
-		<aui:input inputCssClass="overlay document-selector" label="" name="<%= RowChecker.ROW_IDS %>" type="checkbox" value="<%= fileEntry.getFileEntryId() %>" />
+		<aui:input inputCssClass="overlay document-selector" label="" name="<%= RowChecker.ROW_IDS %>" type="checkbox" value="<%= folder.getFolderId() %>" />
 	</c:if>
 </div>
