@@ -40,10 +40,6 @@
 	left: 100%;
 }
 
-.lfr-actions.disabled .taglib-text {
-	color: #AAA;
-}
-
 .lfr-actions .lfr-trigger, .lfr-actions .lfr-trigger strong {
 	background: url(<%= themeImagesPath %>/common/button_bg.png) no-repeat;
 	font-weight: normal;

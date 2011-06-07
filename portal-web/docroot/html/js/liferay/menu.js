@@ -90,16 +90,18 @@ AUI().add(
 					function(event) {
 						var trigger = event.currentTarget;
 
-						var menu = instance._getMenu(trigger);
+						if (!trigger.hasClass('disabled')) {
+							var menu = instance._getMenu(trigger);
 
-						instance._activeMenu = menu;
-						instance._activeTrigger = trigger;
+							instance._activeMenu = menu;
+							instance._activeTrigger = trigger;
 
-						instance._positionActiveMenu();
+							instance._positionActiveMenu();
 
-						event.halt();
+							event.halt();
+						}
 					},
-					'.lfr-actions:not(.disabled)'
+					'.lfr-actions'
 				);
 
 				A.getDoc().on(EVENT_CLICK, instance._closeActiveMenu, instance);

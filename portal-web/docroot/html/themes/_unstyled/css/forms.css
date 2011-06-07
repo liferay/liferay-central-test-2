@@ -55,16 +55,22 @@ input[type="submit"], input[type="button"], input[type="reset"], button {
 input[type="submit"]:hover, input[type="button"]:hover, input[type="reset"]:hover, input[type="submit"]:focus, input[type="button"]:focus, input[type="reset"]:focus, button:hover, button:focus {
 }
 
-input[type="submit"], input[type="button"], input[type="reset"], button, .lfr-actions, .lfr-actions ul {
+input[type="submit"], input[type="button"], input[type="reset"], button, .lfr-actions.lfr-extended, .lfr-actions.lfr-extended ul {
 }
 
-.aui-button-disabled input[type], .aui-button-disabled button, .aui-button-disabled input[type]:hover, .aui-button-disabled input[type]:focus, .aui-button-disabled button:hover, .aui-button-disabled button:focus, .aui-buttonitem-disabled, .aui-buttonitem-disabled:hover  {
+.aui-button-disabled input[type], .aui-button-disabled button, .aui-button-disabled input[type]:hover, .aui-button-disabled input[type]:focus, .aui-button-disabled button:hover, .aui-button-disabled button:focus, .aui-buttonitem-disabled, .aui-buttonitem-disabled:hover, .lfr-actions.lfr-extended.disabled, .lfr-actions.lfr-extended.disabled ul, .lfr-actions.lfr-extended.disabled:hover, .lfr-actions.lfr-extended.disabled:hover ul {
 }
 
-input[type="submit"]:hover, input[type="button"]:hover, input[type="reset"]:hover, button:hover, .lfr-actions:hover, .lfr-actions:hover ul {
+.lfr-actions.disabled .taglib-text {
 }
 
-input[type="submit"]:focus, input[type="button"]:focus, input[type="reset"]:focus, button:focus, .lfr-actions:focus, .lfr-actions:focus ul {
+input[type="submit"]:hover, input[type="button"]:hover, input[type="reset"]:hover, button:hover, .lfr-actions.lfr-extended:hover, .lfr-actions.lfr-extended:hover ul {
+}
+
+input[type="submit"]:focus, input[type="button"]:focus, input[type="reset"]:focus, button:focus, .lfr-actions.lfr-extended:focus, .lfr-actions.lfr-extended:focus ul {
+}
+
+input.aui-form-validator-error, textarea.aui-form-validator-error, select.aui-form-validator-error {
 }
 
 /* ---------- IE6 chokes on attribute selectors in a chain, so we separate them into their own rule ---------- */
@@ -81,5 +87,5 @@ input.focus, textarea.focus, .ie6 input.focus, .ie6 textarea.focus {
 .ie6 .aui-button-disabled input.submit, .ie6 .aui-button-disabled input.button, .ie6 .aui-button-disabled button {
 }
 
-.ie .aui-button-disabled input, .aui-buttonitem-disabled, .aui-buttonitem-disabled:hover {
+.ie .aui-button-disabled input {
 }
