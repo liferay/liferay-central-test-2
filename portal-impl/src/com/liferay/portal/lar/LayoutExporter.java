@@ -45,6 +45,7 @@ import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portal.model.LayoutRevision;
 import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.LayoutSetPrototype;
+import com.liferay.portal.model.LayoutStagingHandler;
 import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletConstants;
@@ -59,6 +60,7 @@ import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextThreadLocal;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.service.permission.PortletPermissionUtil;
+import com.liferay.portal.service.persistence.LayoutRevisionUtil;
 import com.liferay.portal.theme.ThemeLoader;
 import com.liferay.portal.theme.ThemeLoaderFactory;
 import com.liferay.portal.util.PortletKeys;
@@ -555,8 +557,19 @@ public class LayoutExporter {
 		if (LayoutStagingUtil.isBranchingLayout(layout)) {
 			layoutRevision = LayoutStagingUtil.getLayoutRevision(layout);
 
-			if (!layoutRevision.isHead()) {
-				return;
+			layoutRevision = LayoutRevisionUtil.fetchByL_H_P(
+				layoutRevision.getLayoutSetBranchId(), true, layout.getPlid());
+
+			if (layoutRevision != null) {
+				if (!layoutRevision.isHead()) {
+					return;
+				}
+				else {
+					LayoutStagingHandler layoutStagingHandler =
+						LayoutStagingUtil.getLayoutStagingHandler(layout);
+
+					layoutStagingHandler.setLayoutRevision(layoutRevision);
+				}
 			}
 		}
 

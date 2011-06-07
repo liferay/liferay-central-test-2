@@ -14,7 +14,8 @@
 
 package com.liferay.portal.model;
 
-import com.liferay.portal.service.LayoutLocalServiceUtil;
+import com.liferay.portal.service.persistence.LayoutRevisionUtil;
+import com.liferay.portal.service.persistence.LayoutUtil;
 import com.liferay.portal.servlet.filters.cache.CacheUtil;
 
 /**
@@ -34,11 +35,28 @@ public class PortletPreferencesListener
 
 	protected void clearCache(PortletPreferences portletPreferences) {
 		try {
-			Layout layout = LayoutLocalServiceUtil.getLayout(
+			long companyId = 0;
+
+			Layout layout = LayoutUtil.fetchByPrimaryKey(
 				portletPreferences.getPlid());
 
-			if (!layout.isPrivateLayout()) {
-				CacheUtil.clearCache(layout.getCompanyId());
+			if ((layout != null) && !layout.isPrivateLayout()) {
+				companyId = layout.getCompanyId();
+			}
+			else {
+				LayoutRevision layoutRevision =
+					LayoutRevisionUtil.fetchByPrimaryKey(
+						portletPreferences.getPlid());
+
+				if ((layoutRevision != null) &&
+						!layoutRevision.isPrivateLayout()) {
+
+					companyId = layoutRevision.getCompanyId();
+				}
+			}
+
+			if (companyId > 0) {
+				CacheUtil.clearCache(companyId);
 			}
 		}
 		catch (Exception e) {

@@ -27,6 +27,7 @@ import com.liferay.portal.service.ServiceContextThreadLocal;
 import com.liferay.portal.service.persistence.LayoutRevisionUtil;
 import com.liferay.portal.util.PortletKeys;
 
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 import org.aopalliance.intercept.MethodInterceptor;
@@ -58,6 +59,10 @@ public class PortletPreferencesLocalServiceStagingAdvice
 			}
 		}
 		catch (Throwable throwable) {
+			if (throwable instanceof InvocationTargetException) {
+				throw throwable.getCause();
+			}
+
 			throw throwable;
 		}
 	}

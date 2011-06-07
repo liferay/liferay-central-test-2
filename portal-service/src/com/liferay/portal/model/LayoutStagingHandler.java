@@ -105,6 +105,10 @@ public class LayoutStagingHandler implements InvocationHandler {
 		}
 	}
 
+	public void setLayoutRevision(LayoutRevision layoutRevision) {
+		_layoutRevision = layoutRevision;
+	}
+
 	private LayoutStagingHandler(
 		Layout layout, LayoutRevision layoutRevision) {
 
