@@ -12,18 +12,12 @@
  * details.
  */
 
-package com.liferay.portal.upgrade.v6_0_0;
+package com.liferay.portal.upgrade.v6_1_0;
 
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
-import com.liferay.portal.kernel.upgrade.util.TempUpgradeColumnImpl;
-import com.liferay.portal.kernel.upgrade.util.UpgradeColumn;
-import com.liferay.portal.kernel.upgrade.util.UpgradeTable;
-import com.liferay.portal.kernel.upgrade.util.UpgradeTableFactoryUtil;
-import com.liferay.portal.upgrade.v5_1_0.util.BlogsEntryUrlTitleUpgradeColumnImpl;
-import com.liferay.portal.upgrade.v6_0_0.util.BlogsEntryTable;
 
 /**
- * @author Brian Wing Shun Chan
+ * @author Minhchau Dang
  */
 public class UpgradeBlogs extends UpgradeProcess {
 
@@ -41,19 +35,6 @@ public class UpgradeBlogs extends UpgradeProcess {
 		catch (Exception e) {
 
 		}
-
-		UpgradeColumn entryIdColumn = new TempUpgradeColumnImpl("entryId");
-
-		UpgradeColumn titleColumn = new TempUpgradeColumnImpl("title");
-
-		UpgradeColumn urlTitleColumn = new BlogsEntryUrlTitleUpgradeColumnImpl(
-			entryIdColumn, titleColumn);
-
-		UpgradeTable upgradeTable = UpgradeTableFactoryUtil.getUpgradeTable(
-			BlogsEntryTable.TABLE_NAME, BlogsEntryTable.TABLE_COLUMNS,
-			entryIdColumn, titleColumn, urlTitleColumn);
-
-		upgradeTable.updateTable();
 	}
 
 }
