@@ -22,19 +22,14 @@
 
 	<%
 	AssetCategoryException ace = (AssetCategoryException)errorException;
-	String vocabularyTitle = StringPool.BLANK;
-
-	if (ace.getVocabulary() != null) {
-		vocabularyTitle = ace.getVocabulary().getTitle(locale);
-	}
 	%>
 
 	<c:choose>
 		<c:when test="<%= ace.getType() == AssetCategoryException.AT_LEAST_ONE_CATEGORY %>">
-			<liferay-ui:message key='<%= LanguageUtil.format(pageContext, "please-select-at-least-one-category-for-x", vocabularyTitle, false) %>' />
+			<liferay-ui:message key='<%= LanguageUtil.format(pageContext, "please-select-at-least-one-category-for-x", ace.getVocabulary().getTitle(locale), false) %>' />
 		</c:when>
 		<c:when test="<%= ace.getType() == AssetCategoryException.TOO_MANY_CATEGORIES %>">
-			<liferay-ui:message key='<%= LanguageUtil.format(pageContext, "you-cannot-select-more-than-one-category-for-x", vocabularyTitle, false) %>' />
+			<liferay-ui:message key='<%= LanguageUtil.format(pageContext, "you-cannot-select-more-than-one-category-for-x", ace.getVocabulary().getTitle(locale), false) %>' />
 		</c:when>
 	</c:choose>
 </liferay-ui:error>
