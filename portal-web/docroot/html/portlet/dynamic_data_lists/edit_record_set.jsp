@@ -113,6 +113,41 @@ String newRecordSetKey = ParamUtil.getString(request, "newRecordSetKey");
 			<aui:button name="selectDDMStructureButton" onClick='<%= renderResponse.getNamespace() + "openDDMPortlet();" %>' value="select" />
 		</aui:field-wrapper>
 
+		<c:if test="<%= WorkflowEngineManagerUtil.isDeployed() && (WorkflowHandlerRegistryUtil.getWorkflowHandler(DDLRecord.class.getName()) != null) %>">
+			<aui:select label="workflow" name='workflowDefinition'>
+
+				<%
+				WorkflowDefinitionLink workflowDefinitionLink = null;
+
+				try {
+					workflowDefinitionLink = WorkflowDefinitionLinkLocalServiceUtil.getWorkflowDefinitionLink(company.getCompanyId(), themeDisplay.getScopeGroupId(), DDLRecordSet.class.getName(), recordSetId, true);
+				}
+				catch (NoSuchWorkflowDefinitionLinkException nswdle) {
+				}
+				%>
+
+				<aui:option><%= LanguageUtil.get(pageContext, "no-workflow") %></aui:option>
+
+				<%
+				List<WorkflowDefinition> workflowDefinitions = WorkflowDefinitionManagerUtil.getActiveWorkflowDefinitions(company.getCompanyId(), 0, 100, null);
+
+				for (WorkflowDefinition workflowDefinition : workflowDefinitions) {
+					boolean selected = false;
+
+					if ((workflowDefinitionLink != null) && (workflowDefinitionLink.getWorkflowDefinitionName().equals(workflowDefinition.getName())) && (workflowDefinitionLink.getWorkflowDefinitionVersion() == workflowDefinition.getVersion())) {
+						selected = true;
+					}
+				%>
+
+					<aui:option label='<%= workflowDefinition.getName() + " (" + LanguageUtil.format(locale, "version-x", workflowDefinition.getVersion()) + ")" %>' selected="<%= selected %>" value="<%= workflowDefinition.getName() + StringPool.AT + workflowDefinition.getVersion() %>" />
+
+				<%
+				}
+				%>
+
+			</aui:select>
+		</c:if>
+
 		<aui:button-row>
 			<aui:button name="saveButton" type="submit" value="save" />
 

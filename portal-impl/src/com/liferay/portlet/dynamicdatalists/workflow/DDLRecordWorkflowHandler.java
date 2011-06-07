@@ -19,10 +19,13 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.workflow.BaseWorkflowHandler;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
+import com.liferay.portal.model.WorkflowDefinitionLink;
 import com.liferay.portal.security.permission.ResourceActionsUtil;
 import com.liferay.portal.service.ServiceContext;
+import com.liferay.portal.service.WorkflowDefinitionLinkLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portlet.dynamicdatalists.model.DDLRecord;
+import com.liferay.portlet.dynamicdatalists.model.DDLRecordSet;
 import com.liferay.portlet.dynamicdatalists.service.DDLRecordLocalServiceUtil;
 
 import java.io.Serializable;
@@ -37,12 +40,28 @@ public class DDLRecordWorkflowHandler extends BaseWorkflowHandler {
 
 	public static final String CLASS_NAME = DDLRecord.class.getName();
 
+	public static final String SCOPE_CLASS_NAME = DDLRecordSet.class.getName();
+
 	public String getClassName() {
 		return CLASS_NAME;
 	}
 
 	public String getType(Locale locale) {
 		return ResourceActionsUtil.getModelResource(locale, CLASS_NAME);
+	}
+
+	public WorkflowDefinitionLink getWorkflowDefinitionLink(
+			long companyId, long groupId, long classPK)
+		throws PortalException, SystemException {
+
+		DDLRecord record = DDLRecordLocalServiceUtil.getDDLRecord(classPK);
+
+		return WorkflowDefinitionLinkLocalServiceUtil.getWorkflowDefinitionLink(
+			companyId, groupId, SCOPE_CLASS_NAME, record.getRecordSetId());
+	}
+
+	public boolean isVisible() {
+		return false;
 	}
 
 	public DDLRecord updateStatus(

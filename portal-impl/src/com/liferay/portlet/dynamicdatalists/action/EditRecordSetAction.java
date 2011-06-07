@@ -16,12 +16,16 @@ package com.liferay.portlet.dynamicdatalists.action;
 
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Constants;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.LocalizationUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
+import com.liferay.portal.service.WorkflowDefinitionLinkLocalServiceUtil;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.portlet.dynamicdatalists.NoSuchRecordSetException;
@@ -166,6 +170,29 @@ public class EditRecordSetAction extends PortletAction {
 			recordSet = DDLRecordSetServiceUtil.updateRecordSet(
 				groupId, ddmStructureId, recordSetKey, nameMap, descriptionMap,
 				DDLConstants.MIN_DISPLAY_ROWS_DEFAULT, serviceContext);
+		}
+
+		String workflowDefinition = ParamUtil.getString(
+			actionRequest, "workflowDefinition");
+
+		if (Validator.isNull(workflowDefinition)) {
+			WorkflowDefinitionLinkLocalServiceUtil.deleteWorkflowDefinitionLink(
+				serviceContext.getCompanyId(), groupId,
+				DDLRecordSet.class.getName(), recordSet.getRecordSetId());
+		}
+		else {
+			String[] values = StringUtil.split(
+				workflowDefinition, StringPool.AT);
+
+			String workflowDefinitionName = values[0];
+			int workflowDefinitionVersion = GetterUtil.getInteger(
+				values[1]);
+
+			WorkflowDefinitionLinkLocalServiceUtil.updateWorkflowDefinitionLink(
+				serviceContext.getUserId(), serviceContext.getCompanyId(),
+				groupId, DDLRecordSet.class.getName(),
+				recordSet.getRecordSetId(), workflowDefinitionName,
+				workflowDefinitionVersion);
 		}
 
 		String portletResource = ParamUtil.getString(

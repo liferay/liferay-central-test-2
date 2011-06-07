@@ -99,7 +99,7 @@ long detailDDMTemplateId = ParamUtil.getLong(request, "detailDDMTemplateId");
 
 			String publishButtonLabel = "publish";
 
-			if (WorkflowDefinitionLinkLocalServiceUtil.hasWorkflowDefinitionLink(themeDisplay.getCompanyId(), scopeGroupId, DDLRecord.class.getName())) {
+			if (WorkflowDefinitionLinkLocalServiceUtil.hasWorkflowDefinitionLink(themeDisplay.getCompanyId(), scopeGroupId, DDLRecordSet.class.getName(), recordSetId)) {
 				publishButtonLabel = "submit-for-publication";
 			}
 			%>

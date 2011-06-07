@@ -16,6 +16,11 @@
 
 <%@ include file="/html/portlet/init.jsp" %>
 
+<%@ page import="com.liferay.portal.kernel.workflow.WorkflowDefinition" %>
+<%@ page import="com.liferay.portal.kernel.workflow.WorkflowDefinitionManagerUtil" %>
+<%@ page import="com.liferay.portal.kernel.workflow.WorkflowEngineManagerUtil" %>
+<%@ page import="com.liferay.portal.kernel.workflow.WorkflowHandlerRegistryUtil" %>
+<%@ page import="com.liferay.portal.NoSuchWorkflowDefinitionLinkException" %>
 <%@ page import="com.liferay.portal.service.permission.PortalPermissionUtil" %>
 <%@ page import="com.liferay.portlet.dynamicdatalists.RecordSetDDMStructureIdException" %>
 <%@ page import="com.liferay.portlet.dynamicdatalists.RecordSetDuplicateRecordSetKeyException" %>
