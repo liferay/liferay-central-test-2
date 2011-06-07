@@ -58,11 +58,10 @@ public class PortletPreferencesLocalServiceStagingAdvice
 				return methodInvocation.proceed();
 			}
 		}
+		catch (InvocationTargetException ite) {
+			throw ite.getCause();
+		}
 		catch (Throwable throwable) {
-			if (throwable instanceof InvocationTargetException) {
-				throw throwable.getCause();
-			}
-
 			throw throwable;
 		}
 	}

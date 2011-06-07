@@ -49,7 +49,7 @@ public class PortletPreferencesListener
 						portletPreferences.getPlid());
 
 				if ((layoutRevision != null) &&
-						!layoutRevision.isPrivateLayout()) {
+					!layoutRevision.isPrivateLayout()) {
 
 					companyId = layoutRevision.getCompanyId();
 				}
