@@ -60,9 +60,13 @@ String vocabularyName = null;
 if (categoryId != 0) {
 	AssetCategory assetCategory = AssetCategoryLocalServiceUtil.getAssetCategory(categoryId);
 
+	assetCategory = assetCategory.toEscapedModel();
+	
 	categoryName = assetCategory.getName();
 
 	AssetVocabulary assetVocabulary = AssetVocabularyLocalServiceUtil.getAssetVocabulary(assetCategory.getVocabularyId());
+	
+	assetVocabulary = assetVocabulary.toEscapedModel();
 
 	vocabularyName = assetVocabulary.getName();
 }
