@@ -25,33 +25,53 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 String referringPortletResource = ParamUtil.getString(request, "referringPortletResource");
 
-List<FileEntry> fileEntries = (List<FileEntry>)request.getAttribute(WebKeys.DOCUMENT_LIBRARY_FILE_ENTRIES);
+FileEntry fileEntry = (FileEntry)request.getAttribute(WebKeys.DOCUMENT_LIBRARY_FILE_ENTRY);
 
-long folderId = DLFolderConstants.DEFAULT_PARENT_FOLDER_ID;
+long fileEntryId = BeanParamUtil.getLong(fileEntry, request, "fileEntryId");
 
-if (fileEntries != null) {
-	FileEntry fileEntry = fileEntries.get(0);
+long folderId = BeanParamUtil.getLong(fileEntry, request, "folderId");
 
-	folderId = fileEntry.getFolderId();
-}
+Boolean isLocked = fileEntry.isLocked();
+Boolean hasLock = fileEntry.hasLock();
+Lock lock = fileEntry.getLock();
 
-List<FileEntry> validMoveFileEntries = new ArrayList<FileEntry>();
-List<FileEntry> invalidMoveFileEntries = new ArrayList<FileEntry>();
+PortletURL portletURL = renderResponse.createRenderURL();
 
-for (FileEntry fileEntry : fileEntries) {
-	boolean movePermission = DLFileEntryPermission.contains(permissionChecker, fileEntry, ActionKeys.UPDATE) && (!fileEntry.isLocked() || fileEntry.hasLock());
-
-	if (movePermission) {
-		validMoveFileEntries.add(fileEntry);
-	}
-	else {
-		invalidMoveFileEntries.add(fileEntry);
-	}
-}
+portletURL.setParameter("struts_action", strutsAction);
+portletURL.setParameter("tabs2", tabs2);
+portletURL.setParameter("redirect", redirect);
+portletURL.setParameter("fileEntryId", String.valueOf(fileEntryId));
 %>
 
 <c:if test="<%= Validator.isNull(referringPortletResource) %>">
 	<liferay-util:include page="/html/portlet/document_library/top_links.jsp" />
+</c:if>
+
+<c:if test="<%= isLocked %>">
+	<c:choose>
+		<c:when test="<%= hasLock %>">
+			<div class="portlet-msg-success">
+				<c:choose>
+					<c:when test="<%= lock.isNeverExpires() %>">
+						<liferay-ui:message key="you-now-have-an-indefinite-lock-on-this-document" />
+					</c:when>
+					<c:otherwise>
+
+						<%
+						String lockExpirationTime = LanguageUtil.getTimeDescription(pageContext, DLFileEntryConstants.LOCK_EXPIRATION_TIME).toLowerCase();
+						%>
+
+						<%= LanguageUtil.format(pageContext, "you-now-have-a-lock-on-this-document", lockExpirationTime, false) %>
+					</c:otherwise>
+				</c:choose>
+			</div>
+		</c:when>
+		<c:otherwise>
+			<div class="portlet-msg-error">
+				<%= LanguageUtil.format(pageContext, "you-cannot-modify-this-document-because-it-was-locked-by-x-on-x", new Object[] {HtmlUtil.escape(PortalUtil.getUserName(lock.getUserId(), String.valueOf(lock.getUserId()))), dateFormatDateTime.format(lock.getCreateDate())}, false) %>
+			</div>
+		</c:otherwise>
+	</c:choose>
 </c:if>
 
 <portlet:actionURL var="moveFileEntryURL">
@@ -61,83 +81,19 @@ for (FileEntry fileEntry : fileEntries) {
 <aui:form action="<%= moveFileEntryURL %>" enctype="multipart/form-data" method="post" name="fm" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "saveFileEntry(false);" %>'>
 	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.MOVE %>" />
 	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
+	<aui:input name="fileEntryId" type="hidden" value="<%= fileEntryId %>" />
 	<aui:input name="newFolderId" type="hidden" value="<%= folderId %>" />
 
 	<liferay-ui:header
 		backURL="<%= redirect %>"
-		title='<%= LanguageUtil.get(pageContext, "move-files") %>'
+		title='<%= LanguageUtil.get(pageContext, "move") + StringPool.SPACE + fileEntry.getTitle() %>'
 	/>
 
 	<liferay-ui:error exception="<%= DuplicateFileException.class %>" message="the-folder-you-selected-already-has-an-entry-with-this-name.-please-select-a-different-folder" />
 	<liferay-ui:error exception="<%= DuplicateFolderNameException.class %>" message="the-folder-you-selected-already-has-an-entry-with-this-name.-please-select-a-different-folder" />
 	<liferay-ui:error exception="<%= NoSuchFolderException.class %>" message="please-enter-a-valid-folder" />
 
-	<c:if test="<%= !validMoveFileEntries.isEmpty() %>">
-		<div class="move-list-info">
-			<h4><%= LanguageUtil.format(pageContext, "x-files-ready-to-be-moved", validMoveFileEntries.size()) %></h4>
-		</div>
-
-		<div class="move-list">
-			<ul class="lfr-component">
-
-				<%
-				for (int i = 0; i < validMoveFileEntries.size(); i++) {
-					FileEntry fileEntry = validMoveFileEntries.get(i);
-				%>
-
-					<li class="move-file">
-						<span class=file-title>
-							<%= fileEntry.getTitle() %>
-						</span>
-					</li>
-
-				<%
-				}
-				%>
-
-			</ul>
-		</div>
-	</c:if>
-
-	<c:if test="<%= !invalidMoveFileEntries.isEmpty() %>">
-		<div class="move-list-info">
-			<h4><%= LanguageUtil.format(pageContext, "x-files-cannot-be-moved", invalidMoveFileEntries.size()) %></h4>
-		</div>
-
-		<div class="move-list">
-			<ul class="lfr-component">
-
-				<%
-				for (FileEntry fileEntry : invalidMoveFileEntries) {
-					Lock lock = fileEntry.getLock();
-				%>
-
-					<li class="move-file move-error">
-						<span class="file-title">
-							<%= fileEntry.getTitle() %>
-						</span>
-
-						<span class="error-message">
-							<c:choose>
-								<c:when test="<%= fileEntry.isLocked() && !fileEntry.hasLock() %>">
-									<%= LanguageUtil.format(pageContext, "you-cannot-modify-this-document-because-it-was-locked-by-x-on-x", new Object[] {HtmlUtil.escape(PortalUtil.getUserName(lock.getUserId(), String.valueOf(lock.getUserId()))), dateFormatDateTime.format(lock.getCreateDate())}, false) %>
-								</c:when>
-								<c:otherwise>
-									<%= LanguageUtil.get(pageContext, "you-do-not-have-the-required-permissions") %>
-								</c:otherwise>
-							</c:choose>
-						</span>
-					</li>
-
-				<%
-				}
-				%>
-
-			</ul>
-		</div>
-	</c:if>
-
-	<aui:input name="fileEntryIds" type="hidden" value='<%= ListUtil.toString(validMoveFileEntries, "fileEntryId") %>' />
+	<aui:model-context bean="<%= fileEntry %>" model="<%= DLFileEntry.class %>" />
 
 	<aui:fieldset>
 
@@ -188,7 +144,7 @@ for (FileEntry fileEntry : fileEntries) {
 		</aui:field-wrapper>
 
 		<aui:button-row>
-			<aui:button type="submit" value="move" />
+			<aui:button disabled="<%= isLocked && !hasLock %>" type="submit" value="move" />
 
 			<aui:button href="<%= redirect %>" type="cancel" />
 		</aui:button-row>
@@ -215,5 +171,7 @@ for (FileEntry fileEntry : fileEntries) {
 </aui:script>
 
 <%
-PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "move-files"), currentURL);
+DLUtil.addPortletBreadcrumbEntries(fileEntry, request, renderResponse);
+
+PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "move"), currentURL);
 %>

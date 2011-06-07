@@ -193,7 +193,7 @@ public class EditFileEntryAction extends PortletAction {
 		throws Exception {
 
 		try {
-			ActionUtil.getFileEntries(renderRequest);
+			ActionUtil.getFileEntry(renderRequest);
 		}
 		catch (Exception e) {
 			if (e instanceof NoSuchFileEntryException ||
