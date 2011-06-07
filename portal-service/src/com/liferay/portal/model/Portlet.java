@@ -492,7 +492,8 @@ public interface Portlet extends PortletModel {
 		java.lang.String socialActivityInterpreterClass);
 
 	/**
-	* Returns the name of the social activity interpreter instance of the portlet.
+	* Returns the name of the social activity interpreter instance of the
+	* portlet.
 	*
 	* @return the name of the social activity interpreter instance of the
 	portlet
@@ -516,7 +517,8 @@ public interface Portlet extends PortletModel {
 		java.lang.String socialRequestInterpreterClass);
 
 	/**
-	* Returns the name of the social request interpreter instance of the portlet.
+	* Returns the name of the social request interpreter instance of the
+	* portlet.
 	*
 	* @return the name of the social request interpreter instance of the
 	portlet
@@ -583,8 +585,8 @@ public interface Portlet extends PortletModel {
 	public com.liferay.portal.kernel.xmlrpc.Method getXmlRpcMethodInstance();
 
 	/**
-	* Returns the name of the category of the Control Panel where the portlet will
-	* be shown.
+	* Returns the name of the category of the Control Panel where the portlet
+	* will be shown.
 	*
 	* @return the name of the category of the Control Panel where the portlet
 	will be shown
@@ -640,8 +642,8 @@ public interface Portlet extends PortletModel {
 		java.lang.String controlPanelEntryClass);
 
 	/**
-	* Returns an instance of the class that will control when the portlet will be
-	* shown in the Control Panel.
+	* Returns an instance of the class that will control when the portlet will
+	* be shown in the Control Panel.
 	*
 	* @return the instance of the class that will control when the portlet will
 	be shown in the Control Panel
@@ -701,8 +703,8 @@ public interface Portlet extends PortletModel {
 	public java.util.List<com.liferay.portlet.expando.model.CustomAttributesDisplay> getCustomAttributesDisplayInstances();
 
 	/**
-	* Returns the names of the classes that represent workflow handlers associated
-	* to the portlet.
+	* Returns the names of the classes that represent workflow handlers
+	* associated to the portlet.
 	*
 	* @return the names of the classes that represent workflow handlers
 	associated to the portlet
@@ -1295,8 +1297,8 @@ public interface Portlet extends PortletModel {
 	public void setAjaxable(boolean ajaxable);
 
 	/**
-	* Returns a list of CSS files that will be referenced from the page's header
-	* relative to the portal's context path.
+	* Returns a list of CSS files that will be referenced from the page's
+	* header relative to the portal's context path.
 	*
 	* @return a list of CSS files that will be referenced from the page's
 	header relative to the portal's context path
@@ -1314,8 +1316,8 @@ public interface Portlet extends PortletModel {
 		java.util.List<java.lang.String> headerPortalCss);
 
 	/**
-	* Returns a list of CSS files that will be referenced from the page's header
-	* relative to the portlet's context path.
+	* Returns a list of CSS files that will be referenced from the page's
+	* header relative to the portlet's context path.
 	*
 	* @return a list of CSS files that will be referenced from the page's
 	header relative to the portlet's context path
@@ -1333,8 +1335,8 @@ public interface Portlet extends PortletModel {
 		java.util.List<java.lang.String> headerPortletCss);
 
 	/**
-	* Returns a list of JavaScript files that will be referenced from the page's
-	* header relative to the portal's context path.
+	* Returns a list of JavaScript files that will be referenced from the
+	* page's header relative to the portal's context path.
 	*
 	* @return a list of JavaScript files that will be referenced from the
 	page's header relative to the portal's context path
@@ -1353,8 +1355,8 @@ public interface Portlet extends PortletModel {
 		java.util.List<java.lang.String> headerPortalJavaScript);
 
 	/**
-	* Returns a list of JavaScript files that will be referenced from the page's
-	* header relative to the portlet's context path.
+	* Returns a list of JavaScript files that will be referenced from the
+	* page's header relative to the portlet's context path.
 	*
 	* @return a list of JavaScript files that will be referenced from the
 	page's header relative to the portlet's context path
@@ -1373,8 +1375,8 @@ public interface Portlet extends PortletModel {
 		java.util.List<java.lang.String> headerPortletJavaScript);
 
 	/**
-	* Returns a list of CSS files that will be referenced from the page's footer
-	* relative to the portal's context path.
+	* Returns a list of CSS files that will be referenced from the page's
+	* footer relative to the portal's context path.
 	*
 	* @return a list of CSS files that will be referenced from the page's
 	footer relative to the portal's context path
@@ -1392,8 +1394,8 @@ public interface Portlet extends PortletModel {
 		java.util.List<java.lang.String> footerPortalCss);
 
 	/**
-	* Returns a list of CSS files that will be referenced from the page's footer
-	* relative to the portlet's context path.
+	* Returns a list of CSS files that will be referenced from the page's
+	* footer relative to the portlet's context path.
 	*
 	* @return a list of CSS files that will be referenced from the page's
 	footer relative to the portlet's context path
@@ -1411,8 +1413,8 @@ public interface Portlet extends PortletModel {
 		java.util.List<java.lang.String> footerPortletCss);
 
 	/**
-	* Returns a list of JavaScript files that will be referenced from the page's
-	* footer relative to the portal's context path.
+	* Returns a list of JavaScript files that will be referenced from the
+	* page's footer relative to the portal's context path.
 	*
 	* @return a list of JavaScript files that will be referenced from the
 	page's footer relative to the portal's context path
@@ -1431,8 +1433,8 @@ public interface Portlet extends PortletModel {
 		java.util.List<java.lang.String> footerPortalJavaScript);
 
 	/**
-	* Returns a list of JavaScript files that will be referenced from the page's
-	* footer relative to the portlet's context path.
+	* Returns a list of JavaScript files that will be referenced from the
+	* page's footer relative to the portlet's context path.
 	*
 	* @return a list of JavaScript files that will be referenced from the
 	page's footer relative to the portlet's context path

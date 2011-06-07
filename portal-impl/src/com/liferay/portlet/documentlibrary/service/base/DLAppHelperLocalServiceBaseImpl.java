@@ -1625,14 +1625,6 @@ public abstract class DLAppHelperLocalServiceBaseImpl
 		_beanIdentifier = beanIdentifier;
 	}
 
-	protected Class<?> getModelClass() {
-		return DLAppHelper.class;
-	}
-
-	protected String getModelClassName() {
-		return DLAppHelper.class.getName();
-	}
-
 	/**
 	 * Performs an SQL query.
 	 *

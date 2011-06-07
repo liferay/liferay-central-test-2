@@ -806,7 +806,8 @@ public class PortletWrapper implements Portlet {
 	}
 
 	/**
-	* Returns the name of the social activity interpreter instance of the portlet.
+	* Returns the name of the social activity interpreter instance of the
+	* portlet.
 	*
 	* @return the name of the social activity interpreter instance of the
 	portlet
@@ -836,7 +837,8 @@ public class PortletWrapper implements Portlet {
 	}
 
 	/**
-	* Returns the name of the social request interpreter instance of the portlet.
+	* Returns the name of the social request interpreter instance of the
+	* portlet.
 	*
 	* @return the name of the social request interpreter instance of the
 	portlet
@@ -921,8 +923,8 @@ public class PortletWrapper implements Portlet {
 	}
 
 	/**
-	* Returns the name of the category of the Control Panel where the portlet will
-	* be shown.
+	* Returns the name of the category of the Control Panel where the portlet
+	* will be shown.
 	*
 	* @return the name of the category of the Control Panel where the portlet
 	will be shown
@@ -990,8 +992,8 @@ public class PortletWrapper implements Portlet {
 	}
 
 	/**
-	* Returns an instance of the class that will control when the portlet will be
-	* shown in the Control Panel.
+	* Returns an instance of the class that will control when the portlet will
+	* be shown in the Control Panel.
 	*
 	* @return the instance of the class that will control when the portlet will
 	be shown in the Control Panel
@@ -1065,8 +1067,8 @@ public class PortletWrapper implements Portlet {
 	}
 
 	/**
-	* Returns the names of the classes that represent workflow handlers associated
-	* to the portlet.
+	* Returns the names of the classes that represent workflow handlers
+	* associated to the portlet.
 	*
 	* @return the names of the classes that represent workflow handlers
 	associated to the portlet
@@ -1801,8 +1803,8 @@ public class PortletWrapper implements Portlet {
 	}
 
 	/**
-	* Returns a list of CSS files that will be referenced from the page's header
-	* relative to the portal's context path.
+	* Returns a list of CSS files that will be referenced from the page's
+	* header relative to the portal's context path.
 	*
 	* @return a list of CSS files that will be referenced from the page's
 	header relative to the portal's context path
@@ -1824,8 +1826,8 @@ public class PortletWrapper implements Portlet {
 	}
 
 	/**
-	* Returns a list of CSS files that will be referenced from the page's header
-	* relative to the portlet's context path.
+	* Returns a list of CSS files that will be referenced from the page's
+	* header relative to the portlet's context path.
 	*
 	* @return a list of CSS files that will be referenced from the page's
 	header relative to the portlet's context path
@@ -1847,8 +1849,8 @@ public class PortletWrapper implements Portlet {
 	}
 
 	/**
-	* Returns a list of JavaScript files that will be referenced from the page's
-	* header relative to the portal's context path.
+	* Returns a list of JavaScript files that will be referenced from the
+	* page's header relative to the portal's context path.
 	*
 	* @return a list of JavaScript files that will be referenced from the
 	page's header relative to the portal's context path
@@ -1871,8 +1873,8 @@ public class PortletWrapper implements Portlet {
 	}
 
 	/**
-	* Returns a list of JavaScript files that will be referenced from the page's
-	* header relative to the portlet's context path.
+	* Returns a list of JavaScript files that will be referenced from the
+	* page's header relative to the portlet's context path.
 	*
 	* @return a list of JavaScript files that will be referenced from the
 	page's header relative to the portlet's context path
@@ -1895,8 +1897,8 @@ public class PortletWrapper implements Portlet {
 	}
 
 	/**
-	* Returns a list of CSS files that will be referenced from the page's footer
-	* relative to the portal's context path.
+	* Returns a list of CSS files that will be referenced from the page's
+	* footer relative to the portal's context path.
 	*
 	* @return a list of CSS files that will be referenced from the page's
 	footer relative to the portal's context path
@@ -1918,8 +1920,8 @@ public class PortletWrapper implements Portlet {
 	}
 
 	/**
-	* Returns a list of CSS files that will be referenced from the page's footer
-	* relative to the portlet's context path.
+	* Returns a list of CSS files that will be referenced from the page's
+	* footer relative to the portlet's context path.
 	*
 	* @return a list of CSS files that will be referenced from the page's
 	footer relative to the portlet's context path
@@ -1941,8 +1943,8 @@ public class PortletWrapper implements Portlet {
 	}
 
 	/**
-	* Returns a list of JavaScript files that will be referenced from the page's
-	* footer relative to the portal's context path.
+	* Returns a list of JavaScript files that will be referenced from the
+	* page's footer relative to the portal's context path.
 	*
 	* @return a list of JavaScript files that will be referenced from the
 	page's footer relative to the portal's context path
@@ -1965,8 +1967,8 @@ public class PortletWrapper implements Portlet {
 	}
 
 	/**
-	* Returns a list of JavaScript files that will be referenced from the page's
-	* footer relative to the portlet's context path.
+	* Returns a list of JavaScript files that will be referenced from the
+	* page's footer relative to the portlet's context path.
 	*
 	* @return a list of JavaScript files that will be referenced from the
 	page's footer relative to the portlet's context path

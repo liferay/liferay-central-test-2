@@ -3402,14 +3402,6 @@ public abstract class ThemeLocalServiceBaseImpl implements ThemeLocalService,
 		_beanIdentifier = beanIdentifier;
 	}
 
-	protected Class<?> getModelClass() {
-		return Theme.class;
-	}
-
-	protected String getModelClassName() {
-		return Theme.class.getName();
-	}
-
 	/**
 	 * Performs an SQL query.
 	 *

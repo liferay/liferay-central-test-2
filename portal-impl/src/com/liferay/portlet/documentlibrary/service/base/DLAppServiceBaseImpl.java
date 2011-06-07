@@ -805,14 +805,6 @@ public abstract class DLAppServiceBaseImpl extends PrincipalBean
 		_beanIdentifier = beanIdentifier;
 	}
 
-	protected Class<?> getModelClass() {
-		return DLApp.class;
-	}
-
-	protected String getModelClassName() {
-		return DLApp.class.getName();
-	}
-
 	/**
 	 * Performs an SQL query.
 	 *
