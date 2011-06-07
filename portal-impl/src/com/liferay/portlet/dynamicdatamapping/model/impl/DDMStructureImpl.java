@@ -158,7 +158,7 @@ public class DDMStructureImpl
 
 		return field;
 	}
-	
+
 	private Map<String, Map<String, String>> _getFieldsMap() {
 		if (_fieldsMap == null) {
 			synchronized (this) {
