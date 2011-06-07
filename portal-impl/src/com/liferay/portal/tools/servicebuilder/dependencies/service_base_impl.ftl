@@ -492,13 +492,15 @@ import javax.sql.DataSource;
 		_beanIdentifier = beanIdentifier;
 	}
 
-	protected Class<?> getModelClass() {
-		return ${entity.name}.class;
-	}
+	<#if entity.hasColumns()>
+		protected Class<?> getModelClass() {
+			return ${entity.name}.class;
+		}
 
-	protected String getModelClassName() {
-		return ${entity.name}.class.getName();
-	}
+		protected String getModelClassName() {
+			return ${entity.name}.class.getName();
+		}
+	</#if>
 
 	/**
 	 * Performs an SQL query.
