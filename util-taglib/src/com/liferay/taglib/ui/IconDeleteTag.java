@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.util.Http;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Validator;
 
 /**
  * @author Brian Wing Shun Chan
@@ -56,9 +57,16 @@ public class IconDeleteTag extends IconTag {
 		StringBundler sb = new StringBundler(5);
 
 		sb.append("javascript:if (confirm('");
-		sb.append(
-			UnicodeLanguageUtil.get(
-				pageContext, "are-you-sure-you-want-to-delete-this"));
+
+		if (Validator.isNotNull(_deleteMessage)) {
+			sb.append(_deleteMessage);
+		}
+		else {
+			sb.append(
+				UnicodeLanguageUtil.get(
+					pageContext, "are-you-sure-you-want-to-delete-this"));
+		}
+
 		sb.append("')) { ");
 		sb.append(url);
 		sb.append(" } else { self.focus(); }");
@@ -71,6 +79,12 @@ public class IconDeleteTag extends IconTag {
 		return super.getPage();
 	}
 
+	public void setDeleteMessage(String deleteMessage) {
+		_deleteMessage = deleteMessage;
+	}
+
 	private static final String _PAGE = "/html/taglib/ui/icon_delete/page.jsp";
+
+	private String _deleteMessage;
 
 }
