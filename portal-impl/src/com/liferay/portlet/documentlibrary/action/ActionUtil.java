@@ -186,8 +186,7 @@ public class ActionUtil {
 			}
 		}
 
-		request.setAttribute(
-			WebKeys.DOCUMENT_LIBRARY_FOLDERS, folders);
+		request.setAttribute(WebKeys.DOCUMENT_LIBRARY_FOLDERS, folders);
 	}
 
 	public static void getFolders(PortletRequest portletRequest)
