@@ -1144,7 +1144,7 @@ AUI().add(
 							return;
 						}
 
-						var portletTitle = instance._curPortlet.one('.portlet-title');
+						var portletTitle = instance._curPortlet.one('.portlet-title, .portlet-title-default');
 
 						if (portletTitle) {
 							var cruft = portletTitle.html().match(/<\/?[^>]+>|\n|\r|\t/gim);
