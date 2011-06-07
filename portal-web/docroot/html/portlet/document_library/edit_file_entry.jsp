@@ -261,82 +261,80 @@ else if (documentType != null) {
 
 		<aui:input name="title" />
 
-		<c:if test="<%= folder != null %>">
-			<c:if test="<%= folder.isSupportsMetadata() %>">
-				<aui:input name="description" />
+		<c:if test="<%= (folder == null) || folder.isSupportsMetadata() %>">
+			<aui:input name="description" />
 
-				<%
-				List<DLDocumentType> documentTypes = DLDocumentTypeServiceUtil.getDocumentTypes(scopeGroupId, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
-				%>
+			<%
+			List<DLDocumentType> documentTypes = DLDocumentTypeServiceUtil.getDocumentTypes(scopeGroupId, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+			%>
 
-				<c:choose>
-					<c:when test="<%= !cmd.equals(Constants.ADD) %>">
-						<aui:select changesContext="<%= true %>" label="document-type" name="documentTypeId" onChange='<%= renderResponse.getNamespace() + "changeDocumentType();" %>'>
-							<aui:option label="none" value="0" />
+			<c:choose>
+				<c:when test="<%= !cmd.equals(Constants.ADD) %>">
+					<aui:select changesContext="<%= true %>" label="document-type" name="documentTypeId" onChange='<%= renderResponse.getNamespace() + "changeDocumentType();" %>'>
+						<aui:option label="none" value="0" />
 
-							<%
-							for (DLDocumentType curDocumentType : documentTypes) {
-							%>
+						<%
+						for (DLDocumentType curDocumentType : documentTypes) {
+						%>
 
-								<aui:option label="<%= curDocumentType.getName() %>" selected="<%= (documentTypeId == curDocumentType.getPrimaryKey()) %>" value="<%= curDocumentType.getPrimaryKey() %>" />
+							<aui:option label="<%= curDocumentType.getName() %>" selected="<%= (documentTypeId == curDocumentType.getPrimaryKey()) %>" value="<%= curDocumentType.getPrimaryKey() %>" />
 
-							<%
-							}
-							%>
-
-						</aui:select>
-					</c:when>
-					<c:otherwise>
-						<aui:input name="documentTypeId" type="hidden" value="<%= documentTypeId %>" />
-					</c:otherwise>
-				</c:choose>
-
-				<%
-				if (documentTypeId > 0) {
-					try {
-						List<DDMStructure> ddmStructures = documentType.getDDMStructures();
-
-						for (DDMStructure ddmStructure : ddmStructures) {
-							Fields fields = null;
-
-							try {
-								DLDocumentMetadataSet documentMetadataSet = DLDocumentMetadataSetLocalServiceUtil.getDocumentMetadataSet(ddmStructure.getStructureId(), fileVersionId);
-
-								fields = StorageEngineUtil.getFields(documentMetadataSet.getClassPK());
-							}
-							catch (Exception e) {
-							}
-				%>
-
-							<%= DDMXSDUtil.getHTML(pageContext, ddmStructure.getXsd(), fields, String.valueOf(ddmStructure.getPrimaryKey())) %>
-
-				<%
+						<%
 						}
-					}
-					catch (Exception e) {
+						%>
+
+					</aui:select>
+				</c:when>
+				<c:otherwise>
+					<aui:input name="documentTypeId" type="hidden" value="<%= documentTypeId %>" />
+				</c:otherwise>
+			</c:choose>
+
+			<%
+			if (documentTypeId > 0) {
+				try {
+					List<DDMStructure> ddmStructures = documentType.getDDMStructures();
+
+					for (DDMStructure ddmStructure : ddmStructures) {
+						Fields fields = null;
+
+						try {
+							DLDocumentMetadataSet documentMetadataSet = DLDocumentMetadataSetLocalServiceUtil.getDocumentMetadataSet(ddmStructure.getStructureId(), fileVersionId);
+
+							fields = StorageEngineUtil.getFields(documentMetadataSet.getClassPK());
+						}
+						catch (Exception e) {
+						}
+			%>
+
+						<%= DDMXSDUtil.getHTML(pageContext, ddmStructure.getXsd(), fields, String.valueOf(ddmStructure.getPrimaryKey())) %>
+
+			<%
 					}
 				}
-				%>
+				catch (Exception e) {
+				}
+			}
+			%>
 
-				<liferay-ui:custom-attributes-available className="<%= DLFileEntryConstants.getClassName() %>">
-					<liferay-ui:custom-attribute-list
-						className="<%= DLFileEntryConstants.getClassName() %>"
-						classPK="<%= fileVersionId %>"
-						editable="<%= true %>"
-						label="<%= true %>"
-					/>
-				</liferay-ui:custom-attributes-available>
-			</c:if>
+			<liferay-ui:custom-attributes-available className="<%= DLFileEntryConstants.getClassName() %>">
+				<liferay-ui:custom-attribute-list
+					className="<%= DLFileEntryConstants.getClassName() %>"
+					classPK="<%= fileVersionId %>"
+					editable="<%= true %>"
+					label="<%= true %>"
+				/>
+			</liferay-ui:custom-attributes-available>
+		</c:if>
 
-			<c:if test="<%= folder.isSupportsSocial() %>">
-				<liferay-ui:panel defaultState="closed" extended="<%= false %>" id="dlFileEntryCategorizationPanel" persistState="<%= true %>" title="categorization">
-					<aui:fieldset>
-						<aui:input classPK="<%= assetClassPK %>" model="<%= DLFileEntry.class %>" name="categories" type="assetCategories" />
+		<c:if test="<%= (folder == null) || folder.isSupportsSocial() %>">
+			<liferay-ui:panel defaultState="closed" extended="<%= false %>" id="dlFileEntryCategorizationPanel" persistState="<%= true %>" title="categorization">
+				<aui:fieldset>
+					<aui:input classPK="<%= assetClassPK %>" model="<%= DLFileEntry.class %>" name="categories" type="assetCategories" />
 
-						<aui:input classPK="<%= assetClassPK %>" model="<%= DLFileEntry.class %>" name="tags" type="assetTags" />
-					</aui:fieldset>
-				</liferay-ui:panel>
-			</c:if>
+					<aui:input classPK="<%= assetClassPK %>" model="<%= DLFileEntry.class %>" name="tags" type="assetTags" />
+				</aui:fieldset>
+			</liferay-ui:panel>
 		</c:if>
 
 		<liferay-ui:panel defaultState="closed" extended="<%= false %>" id="dlFileEntryAssetLinksPanel" persistState="<%= true %>" title="related-assets">

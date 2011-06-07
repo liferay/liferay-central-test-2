@@ -24,6 +24,9 @@ Folder folder = (Folder)request.getAttribute(WebKeys.DOCUMENT_LIBRARY_FOLDER);
 long folderId = BeanParamUtil.getLong(folder, request, "folderId");
 
 long repositoryId = BeanParamUtil.getLong(folder, request, "repositoryId");
+
+Folder parentFolder = null;
+
 long parentFolderId = BeanParamUtil.getLong(folder, request, "parentFolderId", DLFolderConstants.DEFAULT_PARENT_FOLDER_ID);
 %>
 
@@ -60,7 +63,7 @@ long parentFolderId = BeanParamUtil.getLong(folder, request, "parentFolderId", D
 
 				try {
 					if (parentFolderId != DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
-						Folder parentFolder = DLAppLocalServiceUtil.getFolder(parentFolderId);
+						parentFolder = DLAppLocalServiceUtil.getFolder(parentFolderId);
 
 						parentFolderName = parentFolder.getName();
 					}
@@ -80,16 +83,18 @@ long parentFolderId = BeanParamUtil.getLong(folder, request, "parentFolderId", D
 
 		<aui:input name="name" />
 
-		<aui:input name="description" />
+		<c:if test="<%= (parentFolder == null) || parentFolder.isSupportsMetadata() %>">
+			<aui:input name="description" />
 
-		<liferay-ui:custom-attributes-available className="<%= DLFolderConstants.getClassName() %>">
-			<liferay-ui:custom-attribute-list
-				className="<%= DLFolderConstants.getClassName() %>"
-				classPK="<%= (folder != null) ? folder.getFolderId() : 0 %>"
-				editable="<%= true %>"
-				label="<%= true %>"
-			/>
-		</liferay-ui:custom-attributes-available>
+			<liferay-ui:custom-attributes-available className="<%= DLFolderConstants.getClassName() %>">
+				<liferay-ui:custom-attribute-list
+					className="<%= DLFolderConstants.getClassName() %>"
+					classPK="<%= (folder != null) ? folder.getFolderId() : 0 %>"
+					editable="<%= true %>"
+					label="<%= true %>"
+				/>
+			</liferay-ui:custom-attributes-available>
+		</c:if>
 
 		<c:if test="<%= folder == null %>">
 			<aui:field-wrapper label="permissions">
