@@ -1188,11 +1188,11 @@ public class PluginPackageUtil {
 	private PluginPackage _readPluginPackageXml(String xml)
 		throws DocumentException {
 
-		Document doc = SAXReaderUtil.read(xml);
+		Document document = SAXReaderUtil.read(xml);
 
-		Element root = doc.getRootElement();
+		Element rootElement = document.getRootElement();
 
-		return _readPluginPackageXml(root);
+		return _readPluginPackageXml(rootElement);
 	}
 
 	private Properties _readProperties(Element parentElement, String name) {
