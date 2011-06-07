@@ -22,7 +22,7 @@
 	<bean id="com.liferay.portal.kernel.cluster.ClusterLinkUtil" class="com.liferay.portal.kernel.cluster.ClusterLinkUtil">
 		<property name="clusterLink" ref="com.liferay.portal.kernel.cluster.ClusterLink" />
 	</bean>
-	<bean id="com.liferay.portal.spring.aop.ChainableMethodAdviceInjector" class="com.liferay.portal.spring.aop.ChainableMethodAdviceInjector">
+	<bean id="clusterableAdviceInjector" class="com.liferay.portal.spring.aop.ChainableMethodAdviceInjector">
 		<property name="injectCondition">
 			<util:constant static-field="com.liferay.portal.util.PropsValues.CLUSTER_LINK_ENABLED" />
 		</property>
