@@ -18,12 +18,14 @@
 	var STR_UNDERSCORE = '_';
 
 	var addPlugin = function(config) {
+		var group = config.group || 'liferay';
 		var trigger = config.trigger;
 		var name = config.name;
 
+		delete config.group;
 		delete config.name;
 
-		var module = GROUPS.liferay.modules[trigger];
+		var module = GROUPS[group].modules[trigger];
 
 		var pluginObj = module.plugins;
 
@@ -109,16 +111,6 @@
 		}
 	};
 
-	addPlugin(
-		{
-			name: 'liferay-navigation-touch',
-			test: function(A) {
-				return A.UA.touch;
-			},
-			trigger: 'liferay-navigation'
-		}
-	);
-
 	GROUPS.misc = {
 		base: PATH_MISC,
 		root: PATH_MISC,
@@ -133,4 +125,36 @@
 			}
 		}
 	};
+
+	GROUPS.portal = {
+		base: PATH_LIFERAY,
+		combine: false,
+		modules: {
+			'portal-aui-lang': {
+				requires: ['aui-calendar'],
+				path: LiferayAUI.getLangPath()
+			}
+		}
+	};
+
+	addPlugin(
+		{
+			name: 'liferay-navigation-touch',
+			test: function(A) {
+				return A.UA.touch;
+			},
+			trigger: 'liferay-navigation'
+		}
+	);
+
+	addPlugin(
+		{
+			group: 'alloy',
+			name: 'portal-aui-lang',
+			test: function(A) {
+				return true;
+			},
+			trigger: 'aui-calendar'
+		}
+	);
 })(AUI(), Liferay);

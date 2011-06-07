@@ -161,8 +161,21 @@ if (yearValue > 0) {
 								<%= cal.get(Calendar.DATE) %>
 							)
 						],
-						dateFormat: '%m/%e/%Y',
-						firstDayOfWeek: <%= firstDayOfWeek %>
+
+						<c:choose>
+							<c:when test="<%= dateFormatOrder.equals(_DATE_FORMAT_ORDER_MDY) %>">
+								dateFormat: '%m/%d/%y',
+							</c:when>
+							<c:when test="<%= dateFormatOrder.equals(_DATE_FORMAT_ORDER_YMD) %>">
+								dateFormat: '%y/%m/%d',
+							</c:when>
+							<c:otherwise>
+								dateFormat: '%d/%m/%y',
+							</c:otherwise>
+						</c:choose>
+
+						firstDayOfWeek: <%= firstDayOfWeek %>,
+						locale: '<%= LanguageUtil.getLanguageId(request) %>'
 					},
 					dayNode: '#<%= dayParam %>',
 					disabled: <%= disabled %>,

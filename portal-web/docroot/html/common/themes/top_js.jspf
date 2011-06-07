@@ -246,6 +246,9 @@
 			getJavaScriptRootPath: function() {
 				return '<%= javaScriptRootPath %>';
 			},
+			getLangPath: function () {
+				return '<%= PortalUtil.getStaticResourceURL(request, "aui_lang.jsp", javaScriptLastModified) %>';
+			},
 			getRootPath: function() {
 				return '<%= alloyRootPath %>';
 			}
