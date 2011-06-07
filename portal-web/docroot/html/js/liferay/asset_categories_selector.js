@@ -16,12 +16,10 @@ AUI().add(
 		 *
 		 * Required
 		 * className {String}: The class name of the current asset.
-		 * vocabularyIds (string): The ids of the vocabularies
 		 * curEntryIds (string): The ids of the current categories.
 		 * curEntries (string): The names of the current categories.
 		 * instanceVar {string}: The instance variable for this class.
 		 * hiddenInput {string}: The hidden input used to pass in the current categories.
-		 * labelNode {String}: The node of the label element for this selector.
 		 *
 		 * Optional
 		 * portalModelResource {boolean}: Whether the asset model is on the portal level.
@@ -30,19 +28,6 @@ AUI().add(
 		var AssetCategoriesSelector = A.Component.create(
 			{
 				ATTRS: {
-					vocabularyIds: {
-						setter: function(value) {
-							var instance = this;
-
-							if (Lang.isString(value) && value) {
-								value = value.split(',');
-							}
-
-							return value;
-						},
-
-						value: []
-					},
 					curEntryIds: {
 						setter: function(value) {
 							var instance = this;
@@ -54,10 +39,7 @@ AUI().add(
 							return value;
 						},
 						value: ''
-					},
-				labelNode: {
-					value: ''
-				}
+					}
 				},
 
 				EXTENDS: Liferay.AssetTagsSelector,
@@ -175,31 +157,19 @@ AUI().add(
 
 						var groupIds = [];
 
-						var vocabularyIds = instance.get('vocabularyIds');
-
-						if (vocabularyIds.length > 0) {
-							Liferay.Service.Asset.AssetVocabulary.getVocabularies(
-								{
-									vocabularyIds: vocabularyIds
-								},
-								callback
-							);
+						if (!portalModelResource && (themeDisplay.getParentGroupId() != themeDisplay.getCompanyGroupId())) {
+							groupIds.push(themeDisplay.getParentGroupId());
 						}
-						else {
-							if (!portalModelResource && (themeDisplay.getParentGroupId() != themeDisplay.getCompanyGroupId())) {
-								groupIds.push(themeDisplay.getParentGroupId());
-							}
 
-							groupIds.push(themeDisplay.getCompanyGroupId());
+						groupIds.push(themeDisplay.getCompanyGroupId());
 
-							Liferay.Service.Asset.AssetVocabulary.getGroupsVocabularies(
-								{
-									groupIds: groupIds,
-									className: className
-								},
-								callback
-							);
-						}
+						Liferay.Service.Asset.AssetVocabulary.getGroupsVocabularies(
+							{
+								groupIds: groupIds,
+								className: className
+							},
+							callback
+						);
 					},
 
 					_getTreeNodeAssetId: function(treeNode) {

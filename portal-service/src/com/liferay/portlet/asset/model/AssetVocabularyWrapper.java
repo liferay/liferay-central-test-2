@@ -554,10 +554,6 @@ public class AssetVocabularyWrapper implements AssetVocabulary {
 		return _assetVocabulary.getSettingsProperties();
 	}
 
-	public boolean isRequired(long classNameId) {
-		return _assetVocabulary.isRequired(classNameId);
-	}
-
 	public void setSettingsProperties(
 		com.liferay.portal.kernel.util.UnicodeProperties settingsProperties) {
 		_assetVocabulary.setSettingsProperties(settingsProperties);

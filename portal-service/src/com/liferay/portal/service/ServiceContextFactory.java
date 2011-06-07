@@ -16,7 +16,6 @@ package com.liferay.portal.service;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -31,10 +30,8 @@ import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 
 import java.io.Serializable;
 
-import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.portlet.PortletRequest;
@@ -223,24 +220,8 @@ public class ServiceContextFactory {
 
 		// Asset
 
-		Map<String, String[]> parameterMap = portletRequest.getParameterMap();
-
-		List<Long> assetCategories = new ArrayList<Long>();
-
-		for (Map.Entry<String, String[]> parameter : parameterMap.entrySet()) {
-			if (parameter.getKey().startsWith("assetCategoryIds")) {
-				long[] vocabularyCategoryIds = StringUtil.split(
-					ParamUtil.getString(portletRequest, parameter.getKey()),
-					0L);
-
-				for (long categoryId : vocabularyCategoryIds) {
-					assetCategories.add(categoryId);
-				}
-			}
-		}
-
-		long[] assetCategoryIds = ArrayUtil.toArray(assetCategories.toArray(
-			new Long[assetCategories.size()]));
+		long[] assetCategoryIds = StringUtil.split(
+			ParamUtil.getString(portletRequest, "assetCategoryIds"), 0L);
 		long[] assetLinkEntryIds = StringUtil.split(
 			ParamUtil.getString(
 				portletRequest, "assetLinkSearchContainerPrimaryKeys"), 0L);
