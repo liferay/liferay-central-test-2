@@ -806,6 +806,13 @@ public class SourceFormatter {
 					"if (");
 			}
 
+			if (newContent.indexOf("for(") != -1) {
+				newContent = StringUtil.replace(
+					newContent,
+					"for(",
+					"for (");
+			}
+
 			if (newContent.indexOf("while(") != -1) {
 				newContent = StringUtil.replace(
 					newContent,
