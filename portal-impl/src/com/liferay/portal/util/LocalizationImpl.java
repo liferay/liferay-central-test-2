@@ -320,7 +320,7 @@ public class LocalizationImpl implements Localization {
 				preferences, portletRequest, localParameter);
 
 			if (Validator.isNotNull(value)) {
-				xml = updateLocalization(xml, parameter, value ,languageId);
+				xml = updateLocalization(xml, parameter, value, languageId);
 			}
 		}
 
