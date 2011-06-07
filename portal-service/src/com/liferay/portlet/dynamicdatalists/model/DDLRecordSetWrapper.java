@@ -378,12 +378,110 @@ public class DDLRecordSetWrapper implements DDLRecordSet {
 	}
 
 	/**
+	* Returns the localized description of this d d l record set in the language. Uses the default language if no localization exists for the requested language.
+	*
+	* @param locale the locale of the language
+	* @return the localized description of this d d l record set
+	*/
+	public java.lang.String getDescription(java.util.Locale locale) {
+		return _ddlRecordSet.getDescription(locale);
+	}
+
+	/**
+	* Returns the localized description of this d d l record set in the language, optionally using the default language if no localization exists for the requested language.
+	*
+	* @param locale the local of the language
+	* @param useDefault whether to use the default language if no localization exists for the requested language
+	* @return the localized description of this d d l record set. If <code>useDefault</code> is <code>false</code> and no localization exists for the requested language, an empty string will be returned.
+	*/
+	public java.lang.String getDescription(java.util.Locale locale,
+		boolean useDefault) {
+		return _ddlRecordSet.getDescription(locale, useDefault);
+	}
+
+	/**
+	* Returns the localized description of this d d l record set in the language. Uses the default language if no localization exists for the requested language.
+	*
+	* @param languageId the ID of the language
+	* @return the localized description of this d d l record set
+	*/
+	public java.lang.String getDescription(java.lang.String languageId) {
+		return _ddlRecordSet.getDescription(languageId);
+	}
+
+	/**
+	* Returns the localized description of this d d l record set in the language, optionally using the default language if no localization exists for the requested language.
+	*
+	* @param languageId the ID of the language
+	* @param useDefault whether to use the default language if no localization exists for the requested language
+	* @return the localized description of this d d l record set
+	*/
+	public java.lang.String getDescription(java.lang.String languageId,
+		boolean useDefault) {
+		return _ddlRecordSet.getDescription(languageId, useDefault);
+	}
+
+	/**
+	* Returns a map of the locales and localized descriptions of this d d l record set.
+	*
+	* @return the locales and localized descriptions of this d d l record set
+	*/
+	public java.util.Map<java.util.Locale, java.lang.String> getDescriptionMap() {
+		return _ddlRecordSet.getDescriptionMap();
+	}
+
+	/**
 	* Sets the description of this d d l record set.
 	*
 	* @param description the description of this d d l record set
 	*/
 	public void setDescription(java.lang.String description) {
 		_ddlRecordSet.setDescription(description);
+	}
+
+	/**
+	* Sets the localized description of this d d l record set in the language.
+	*
+	* @param description the localized description of this d d l record set
+	* @param locale the locale of the language
+	*/
+	public void setDescription(java.lang.String description,
+		java.util.Locale locale) {
+		_ddlRecordSet.setDescription(description, locale);
+	}
+
+	/**
+	* Sets the localized description of this d d l record set in the language, and sets the default locale.
+	*
+	* @param description the localized description of this d d l record set
+	* @param locale the locale of the language
+	* @param defaultLocale the default locale
+	*/
+	public void setDescription(java.lang.String description,
+		java.util.Locale locale, java.util.Locale defaultLocale) {
+		_ddlRecordSet.setDescription(description, locale, defaultLocale);
+	}
+
+	/**
+	* Sets the localized descriptions of this d d l record set from the map of locales and localized descriptions.
+	*
+	* @param descriptionMap the locales and localized descriptions of this d d l record set
+	*/
+	public void setDescriptionMap(
+		java.util.Map<java.util.Locale, java.lang.String> descriptionMap) {
+		_ddlRecordSet.setDescriptionMap(descriptionMap);
+	}
+
+	/**
+	* Sets the localized descriptions of this d d l record set from the map of locales and localized descriptions, and sets the default locale.
+	*
+	* @param descriptionMap the locales and localized descriptions of this d d l record set
+	* @param defaultLocale the default locale
+	*/
+	public void setDescriptionMap(
+		java.util.Map<java.util.Locale, java.lang.String> descriptionMap,
+		java.util.Locale defaultLocale) {
+		_ddlRecordSet.setDescriptionMap(descriptionMap, defaultLocale);
 	}
 
 	/**

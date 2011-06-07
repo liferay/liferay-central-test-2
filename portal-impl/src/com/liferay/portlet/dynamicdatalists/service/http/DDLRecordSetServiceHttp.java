@@ -58,7 +58,8 @@ public class DDLRecordSetServiceHttp {
 		HttpPrincipal httpPrincipal, long groupId, long ddmStructureId,
 		java.lang.String recordSetKey, boolean autoRecordSetKey,
 		java.util.Map<java.util.Locale, java.lang.String> nameMap,
-		java.lang.String description, int minDisplayRows,
+		java.util.Map<java.util.Locale, java.lang.String> descriptionMap,
+		int minDisplayRows,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -68,7 +69,7 @@ public class DDLRecordSetServiceHttp {
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					ddmStructureId, recordSetKey, autoRecordSetKey, nameMap,
-					description, minDisplayRows, serviceContext);
+					descriptionMap, minDisplayRows, serviceContext);
 
 			Object returnObj = null;
 
@@ -278,7 +279,8 @@ public class DDLRecordSetServiceHttp {
 		HttpPrincipal httpPrincipal, long groupId, long ddmStructureId,
 		java.lang.String recordSetKey,
 		java.util.Map<java.util.Locale, java.lang.String> nameMap,
-		java.lang.String description, int minDisplayRows,
+		java.util.Map<java.util.Locale, java.lang.String> descriptionMap,
+		int minDisplayRows,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -287,7 +289,7 @@ public class DDLRecordSetServiceHttp {
 					"updateRecordSet", _updateRecordSetParameterTypes6);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
-					ddmStructureId, recordSetKey, nameMap, description,
+					ddmStructureId, recordSetKey, nameMap, descriptionMap,
 					minDisplayRows, serviceContext);
 
 			Object returnObj = null;
@@ -319,7 +321,7 @@ public class DDLRecordSetServiceHttp {
 	private static Log _log = LogFactoryUtil.getLog(DDLRecordSetServiceHttp.class);
 	private static final Class<?>[] _addRecordSetParameterTypes0 = new Class[] {
 			long.class, long.class, java.lang.String.class, boolean.class,
-			java.util.Map.class, java.lang.String.class, int.class,
+			java.util.Map.class, java.util.Map.class, int.class,
 			com.liferay.portal.service.ServiceContext.class
 		};
 	private static final Class<?>[] _deleteRecordSetParameterTypes1 = new Class[] {
@@ -340,7 +342,7 @@ public class DDLRecordSetServiceHttp {
 		};
 	private static final Class<?>[] _updateRecordSetParameterTypes6 = new Class[] {
 			long.class, long.class, java.lang.String.class, java.util.Map.class,
-			java.lang.String.class, int.class,
+			java.util.Map.class, int.class,
 			com.liferay.portal.service.ServiceContext.class
 		};
 }
