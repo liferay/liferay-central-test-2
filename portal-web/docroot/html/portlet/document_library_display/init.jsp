@@ -194,6 +194,7 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 		<%@ include file="/html/portlet/document_library_display/init-ext.jsp" %>
 	</c:otherwise>
 </c:choose>
+
 <%!
 private static final String _getFileEntryImage(FileEntry fileEntry, ThemeDisplay themeDisplay) {
 	StringBundler sb = new StringBundler(5);
