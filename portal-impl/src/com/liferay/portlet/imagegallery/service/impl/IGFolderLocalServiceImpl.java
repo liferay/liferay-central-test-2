@@ -101,14 +101,14 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 	}
 
 	public void addFolderResources(
-			IGFolder folder, String[] communityPermissions,
+			IGFolder folder, String[] groupPermissions,
 			String[] guestPermissions)
 		throws PortalException, SystemException {
 
 		resourceLocalService.addModelResources(
 			folder.getCompanyId(), folder.getGroupId(), folder.getUserId(),
-			IGFolder.class.getName(), folder.getFolderId(),
-			communityPermissions, guestPermissions);
+			IGFolder.class.getName(), folder.getFolderId(), groupPermissions,
+			guestPermissions);
 	}
 
 	public void addFolderResources(
@@ -123,13 +123,12 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 	}
 
 	public void addFolderResources(
-			long folderId, String[] communityPermissions,
-			String[] guestPermissions)
+			long folderId, String[] groupPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
 
 		IGFolder folder = igFolderPersistence.findByPrimaryKey(folderId);
 
-		addFolderResources(folder, communityPermissions, guestPermissions);
+		addFolderResources(folder, groupPermissions, guestPermissions);
 	}
 
 	public void deleteFolder(IGFolder folder)

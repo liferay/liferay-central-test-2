@@ -127,14 +127,14 @@ public class PollsQuestionLocalServiceImpl
 	}
 
 	public void addQuestionResources(
-			long questionId, String[] communityPermissions,
+			long questionId, String[] groupPermissions,
 			String[] guestPermissions)
 		throws PortalException, SystemException {
 
 		PollsQuestion question = pollsQuestionPersistence.findByPrimaryKey(
 			questionId);
 
-		addQuestionResources(question, communityPermissions, guestPermissions);
+		addQuestionResources(question, groupPermissions, guestPermissions);
 	}
 
 	public void addQuestionResources(
@@ -150,14 +150,14 @@ public class PollsQuestionLocalServiceImpl
 	}
 
 	public void addQuestionResources(
-			PollsQuestion question, String[] communityPermissions,
+			PollsQuestion question, String[] groupPermissions,
 			String[] guestPermissions)
 		throws PortalException, SystemException {
 
 		resourceLocalService.addModelResources(
 			question.getCompanyId(), question.getGroupId(),
 			question.getUserId(), PollsQuestion.class.getName(),
-			question.getQuestionId(), communityPermissions, guestPermissions);
+			question.getQuestionId(), groupPermissions, guestPermissions);
 	}
 
 	public void deleteQuestion(long questionId)

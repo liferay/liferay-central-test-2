@@ -121,14 +121,14 @@ public class DLFileShortcutLocalServiceImpl
 	}
 
 	public void addFileShortcutResources(
-			DLFileShortcut fileShortcut, String[] communityPermissions,
+			DLFileShortcut fileShortcut, String[] groupPermissions,
 			String[] guestPermissions)
 		throws PortalException, SystemException {
 
 		resourceLocalService.addModelResources(
 			fileShortcut.getCompanyId(), fileShortcut.getGroupId(),
 			fileShortcut.getUserId(), DLFileShortcut.class.getName(),
-			fileShortcut.getFileShortcutId(), communityPermissions,
+			fileShortcut.getFileShortcutId(), groupPermissions,
 			guestPermissions);
 	}
 
@@ -145,7 +145,7 @@ public class DLFileShortcutLocalServiceImpl
 	}
 
 	public void addFileShortcutResources(
-			long fileShortcutId, String[] communityPermissions,
+			long fileShortcutId, String[] groupPermissions,
 			String[] guestPermissions)
 		throws PortalException, SystemException {
 
@@ -153,7 +153,7 @@ public class DLFileShortcutLocalServiceImpl
 			dlFileShortcutPersistence.findByPrimaryKey(fileShortcutId);
 
 		addFileShortcutResources(
-			fileShortcut, communityPermissions, guestPermissions);
+			fileShortcut, groupPermissions, guestPermissions);
 	}
 
 	public void deleteFileShortcut(DLFileShortcut fileShortcut)

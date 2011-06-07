@@ -100,15 +100,14 @@ public class DDMTemplateLocalServiceImpl
 	}
 
 	public void addTemplateResources(
-			DDMTemplate template, String[] communityPermissions,
+			DDMTemplate template, String[] groupPermissions,
 			String[] guestPermissions)
 		throws PortalException, SystemException {
 
 		resourceLocalService.addModelResources(
 			template.getCompanyId(), template.getGroupId(),
 			template.getUserId(), DDMTemplate.class.getName(),
-			template.getTemplateId(), communityPermissions,
-			guestPermissions);
+			template.getTemplateId(), groupPermissions, guestPermissions);
 	}
 
 	public void deleteTemplate(DDMTemplate template)

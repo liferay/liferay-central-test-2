@@ -231,13 +231,12 @@ public class ShoppingItemLocalServiceImpl
 	}
 
 	public void addItemResources(
-			long itemId, String[] communityPermissions,
-			String[] guestPermissions)
+			long itemId, String[] groupPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
 
 		ShoppingItem item = shoppingItemPersistence.findByPrimaryKey(itemId);
 
-		addItemResources(item, communityPermissions, guestPermissions);
+		addItemResources(item, groupPermissions, guestPermissions);
 	}
 
 	public void addItemResources(
@@ -252,14 +251,14 @@ public class ShoppingItemLocalServiceImpl
 	}
 
 	public void addItemResources(
-			ShoppingItem item, String[] communityPermissions,
+			ShoppingItem item, String[] groupPermissions,
 			String[] guestPermissions)
 		throws PortalException, SystemException {
 
 		resourceLocalService.addModelResources(
 			item.getCompanyId(), item.getGroupId(), item.getUserId(),
-			ShoppingItem.class.getName(), item.getItemId(),
-			communityPermissions, guestPermissions);
+			ShoppingItem.class.getName(), item.getItemId(), groupPermissions,
+			guestPermissions);
 	}
 
 	public void deleteItem(long itemId)

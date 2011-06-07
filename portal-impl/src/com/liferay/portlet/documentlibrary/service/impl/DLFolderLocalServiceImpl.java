@@ -351,14 +351,14 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 	}
 
 	protected void addFolderResources(
-			DLFolder dlFolder, String[] communityPermissions,
+			DLFolder dlFolder, String[] groupPermissions,
 			String[] guestPermissions)
 		throws PortalException, SystemException {
 
 		resourceLocalService.addModelResources(
 			dlFolder.getCompanyId(), dlFolder.getGroupId(),
 			dlFolder.getUserId(), DLFolder.class.getName(),
-			dlFolder.getFolderId(), communityPermissions, guestPermissions);
+			dlFolder.getFolderId(), groupPermissions, guestPermissions);
 	}
 
 	protected void addFolderResources(
@@ -372,13 +372,12 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 	}
 
 	protected void addFolderResources(
-			long folderId, String[] communityPermissions,
-			String[] guestPermissions)
+			long folderId, String[] groupPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
 
 		DLFolder dlFolder = dlFolderPersistence.findByPrimaryKey(folderId);
 
-		addFolderResources(dlFolder, communityPermissions, guestPermissions);
+		addFolderResources(dlFolder, groupPermissions, guestPermissions);
 	}
 
 	protected void deleteFolder(DLFolder dlFolder)

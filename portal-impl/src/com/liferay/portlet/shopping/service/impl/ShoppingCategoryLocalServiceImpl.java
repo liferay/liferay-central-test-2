@@ -99,14 +99,14 @@ public class ShoppingCategoryLocalServiceImpl
 	}
 
 	public void addCategoryResources(
-			long categoryId, String[] communityPermissions,
+			long categoryId, String[] groupPermissions,
 			String[] guestPermissions)
 		throws PortalException, SystemException {
 
 		ShoppingCategory category =
 			shoppingCategoryPersistence.findByPrimaryKey(categoryId);
 
-		addCategoryResources(category, communityPermissions, guestPermissions);
+		addCategoryResources(category, groupPermissions, guestPermissions);
 	}
 
 	public void addCategoryResources(
@@ -122,14 +122,14 @@ public class ShoppingCategoryLocalServiceImpl
 	}
 
 	public void addCategoryResources(
-			ShoppingCategory category, String[] communityPermissions,
+			ShoppingCategory category, String[] groupPermissions,
 			String[] guestPermissions)
 		throws PortalException, SystemException {
 
 		resourceLocalService.addModelResources(
 			category.getCompanyId(), category.getGroupId(),
 			category.getUserId(), ShoppingCategory.class.getName(),
-			category.getCategoryId(), communityPermissions, guestPermissions);
+			category.getCategoryId(), groupPermissions, guestPermissions);
 	}
 
 	public void deleteCategories(long groupId)

@@ -132,15 +132,14 @@ public class DDMStructureLocalServiceImpl
 	}
 
 	public void addStructureResources(
-			DDMStructure structure, String[] communityPermissions,
+			DDMStructure structure, String[] groupPermissions,
 			String[] guestPermissions)
 		throws PortalException, SystemException {
 
 		resourceLocalService.addModelResources(
 			structure.getCompanyId(), structure.getGroupId(),
 			structure.getUserId(), DDMStructure.class.getName(),
-			structure.getStructureId(), communityPermissions,
-			guestPermissions);
+			structure.getStructureId(), groupPermissions, guestPermissions);
 	}
 
 	public void deleteStructure(DDMStructure structure)

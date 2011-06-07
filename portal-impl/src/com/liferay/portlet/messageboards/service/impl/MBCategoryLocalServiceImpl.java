@@ -133,7 +133,7 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 	}
 
 	public void addCategoryResources(
-			long categoryId, String[] communityPermissions,
+			long categoryId, String[] groupPermissions,
 			String[] guestPermissions)
 		throws PortalException, SystemException {
 
@@ -146,7 +146,7 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 		MBCategory category = mbCategoryPersistence.findByPrimaryKey(
 			categoryId);
 
-		addCategoryResources(category, communityPermissions, guestPermissions);
+		addCategoryResources(category, groupPermissions, guestPermissions);
 	}
 
 	public void addCategoryResources(
@@ -162,14 +162,14 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 	}
 
 	public void addCategoryResources(
-			MBCategory category, String[] communityPermissions,
+			MBCategory category, String[] groupPermissions,
 			String[] guestPermissions)
 		throws PortalException, SystemException {
 
 		resourceLocalService.addModelResources(
 			category.getCompanyId(), category.getGroupId(),
 			category.getUserId(), MBCategory.class.getName(),
-			category.getCategoryId(), communityPermissions, guestPermissions);
+			category.getCategoryId(), groupPermissions, guestPermissions);
 	}
 
 	public void deleteCategories(long groupId)

@@ -137,15 +137,14 @@ public class AssetVocabularyLocalServiceImpl
 	}
 
 	public void addVocabularyResources(
-			AssetVocabulary vocabulary, String[] communityPermissions,
+			AssetVocabulary vocabulary, String[] groupPermissions,
 			String[] guestPermissions)
 		throws PortalException, SystemException {
 
 		resourceLocalService.addModelResources(
 			vocabulary.getCompanyId(), vocabulary.getGroupId(),
 			vocabulary.getUserId(), AssetVocabulary.class.getName(),
-			vocabulary.getVocabularyId(), communityPermissions,
-			guestPermissions);
+			vocabulary.getVocabularyId(), groupPermissions, guestPermissions);
 	}
 
 	public void deleteVocabulary(AssetVocabulary vocabulary)

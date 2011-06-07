@@ -426,13 +426,13 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 	}
 
 	public void addMessageResources(
-			long messageId, String[] communityPermissions,
+			long messageId, String[] groupPermissions,
 			String[] guestPermissions)
 		throws PortalException, SystemException {
 
 		MBMessage message = mbMessagePersistence.findByPrimaryKey(messageId);
 
-		addMessageResources(message, communityPermissions, guestPermissions);
+		addMessageResources(message, groupPermissions, guestPermissions);
 	}
 
 	public void addMessageResources(
@@ -447,14 +447,14 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 	}
 
 	public void addMessageResources(
-			MBMessage message, String[] communityPermissions,
+			MBMessage message, String[] groupPermissions,
 			String[] guestPermissions)
 		throws PortalException, SystemException {
 
 		resourceLocalService.addModelResources(
 			message.getCompanyId(), message.getGroupId(), message.getUserId(),
-			MBMessage.class.getName(), message.getMessageId(),
-			communityPermissions, guestPermissions);
+			MBMessage.class.getName(), message.getMessageId(), groupPermissions,
+			guestPermissions);
 	}
 
 	public void deleteDiscussionMessage(long messageId)

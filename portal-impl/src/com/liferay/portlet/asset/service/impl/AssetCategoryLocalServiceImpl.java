@@ -149,14 +149,14 @@ public class AssetCategoryLocalServiceImpl
 	}
 
 	public void addCategoryResources(
-			AssetCategory category, String[] communityPermissions,
+			AssetCategory category, String[] groupPermissions,
 			String[] guestPermissions)
 		throws PortalException, SystemException {
 
 		resourceLocalService.addModelResources(
 			category.getCompanyId(), category.getGroupId(),
 			category.getUserId(), AssetCategory.class.getName(),
-			category.getCategoryId(), communityPermissions, guestPermissions);
+			category.getCategoryId(), groupPermissions, guestPermissions);
 	}
 
 	public void deleteCategory(AssetCategory category)

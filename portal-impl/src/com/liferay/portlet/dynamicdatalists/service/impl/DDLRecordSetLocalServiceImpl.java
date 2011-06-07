@@ -123,14 +123,14 @@ public class DDLRecordSetLocalServiceImpl
 	}
 
 	public void addRecordSetResources(
-			DDLRecordSet recordSet, String[] communityPermissions,
+			DDLRecordSet recordSet, String[] groupPermissions,
 			String[] guestPermissions)
 		throws PortalException, SystemException {
 
 		resourceLocalService.addModelResources(
 			recordSet.getCompanyId(), recordSet.getGroupId(),
 			recordSet.getUserId(), DDLRecordSet.class.getName(),
-			recordSet.getRecordSetId(), communityPermissions, guestPermissions);
+			recordSet.getRecordSetId(), groupPermissions, guestPermissions);
 	}
 
 	public void deleteRecordSet(DDLRecordSet recordSet)

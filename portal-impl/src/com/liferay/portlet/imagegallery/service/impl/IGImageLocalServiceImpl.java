@@ -222,13 +222,12 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 	}
 
 	public void addImageResources(
-			IGImage image, String[] communityPermissions,
-			String[] guestPermissions)
+			IGImage image, String[] groupPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
 
 		resourceLocalService.addModelResources(
 			image.getCompanyId(), image.getGroupId(), image.getUserId(),
-			IGImage.class.getName(), image.getImageId(), communityPermissions,
+			IGImage.class.getName(), image.getImageId(), groupPermissions,
 			guestPermissions);
 	}
 
@@ -243,13 +242,12 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 	}
 
 	public void addImageResources(
-			long imageId, String[] communityPermissions,
-			String[] guestPermissions)
+			long imageId, String[] groupPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
 
 		IGImage image = igImagePersistence.findByPrimaryKey(imageId);
 
-		addImageResources(image, communityPermissions, guestPermissions);
+		addImageResources(image, groupPermissions, guestPermissions);
 	}
 
 	public void deleteImage(IGImage image)

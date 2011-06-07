@@ -147,13 +147,12 @@ public class AssetTagLocalServiceImpl extends AssetTagLocalServiceBaseImpl {
 	}
 
 	public void addTagResources(
-			AssetTag tag, String[] communityPermissions,
-			String[] guestPermissions)
+			AssetTag tag, String[] groupPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
 
 		resourceLocalService.addModelResources(
 			tag.getCompanyId(), tag.getGroupId(), tag.getUserId(),
-			AssetTag.class.getName(), tag.getTagId(), communityPermissions,
+			AssetTag.class.getName(), tag.getTagId(), groupPermissions,
 			guestPermissions);
 	}
 

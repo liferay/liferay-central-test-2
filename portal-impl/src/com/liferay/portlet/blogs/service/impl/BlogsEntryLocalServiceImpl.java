@@ -209,14 +209,14 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 	}
 
 	public void addEntryResources(
-			BlogsEntry entry, String[] communityPermissions,
+			BlogsEntry entry, String[] groupPermissions,
 			String[] guestPermissions)
 		throws PortalException, SystemException {
 
 		resourceLocalService.addModelResources(
 			entry.getCompanyId(), entry.getGroupId(), entry.getUserId(),
-			BlogsEntry.class.getName(), entry.getEntryId(),
-			communityPermissions, guestPermissions);
+			BlogsEntry.class.getName(), entry.getEntryId(), groupPermissions,
+			guestPermissions);
 	}
 
 	public void addEntryResources(
@@ -230,13 +230,12 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 	}
 
 	public void addEntryResources(
-			long entryId, String[] communityPermissions,
-			String[] guestPermissions)
+			long entryId, String[] groupPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
 
 		BlogsEntry entry = blogsEntryPersistence.findByPrimaryKey(entryId);
 
-		addEntryResources(entry, communityPermissions, guestPermissions);
+		addEntryResources(entry, groupPermissions, guestPermissions);
 	}
 
 	public void deleteEntries(long groupId)
@@ -636,14 +635,14 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 	}
 
 	public void updateEntryResources(
-			BlogsEntry entry, String[] communityPermissions,
+			BlogsEntry entry, String[] groupPermissions,
 			String[] guestPermissions)
 		throws PortalException, SystemException {
 
 		resourceLocalService.updateResources(
 			entry.getCompanyId(), entry.getGroupId(),
-			BlogsEntry.class.getName(), entry.getEntryId(),
-			communityPermissions, guestPermissions);
+			BlogsEntry.class.getName(), entry.getEntryId(), groupPermissions,
+			guestPermissions);
 	}
 
 	public BlogsEntry updateStatus(

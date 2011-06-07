@@ -153,7 +153,7 @@ public class InputPermissionsParamsTagUtil {
 					if (groupChecked) {
 						sb.append(StringPool.AMPERSAND);
 						sb.append(renderResponse.getNamespace());
-						sb.append("communityPermissions=");
+						sb.append("groupPermissions=");
 						sb.append(HttpUtil.encodeURL(action));
 					}
 				}

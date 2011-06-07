@@ -101,14 +101,14 @@ public class BookmarksFolderLocalServiceImpl
 	}
 
 	public void addFolderResources(
-			BookmarksFolder folder, String[] communityPermissions,
+			BookmarksFolder folder, String[] groupPermissions,
 			String[] guestPermissions)
 		throws PortalException, SystemException {
 
 		resourceLocalService.addModelResources(
 			folder.getCompanyId(), folder.getGroupId(), folder.getUserId(),
 			BookmarksFolder.class.getName(), folder.getFolderId(),
-			communityPermissions, guestPermissions);
+			groupPermissions, guestPermissions);
 	}
 
 	public void addFolderResources(
@@ -124,14 +124,13 @@ public class BookmarksFolderLocalServiceImpl
 	}
 
 	public void addFolderResources(
-			long folderId, String[] communityPermissions,
-			String[] guestPermissions)
+			long folderId, String[] groupPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
 
 		BookmarksFolder folder = bookmarksFolderPersistence.findByPrimaryKey(
 			folderId);
 
-		addFolderResources(folder, communityPermissions, guestPermissions);
+		addFolderResources(folder, groupPermissions, guestPermissions);
 	}
 
 	public void deleteFolder(BookmarksFolder folder)

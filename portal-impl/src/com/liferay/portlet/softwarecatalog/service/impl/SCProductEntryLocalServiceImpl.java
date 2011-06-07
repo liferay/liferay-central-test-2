@@ -162,7 +162,7 @@ public class SCProductEntryLocalServiceImpl
 	}
 
 	public void addProductEntryResources(
-			long productEntryId, String[] communityPermissions,
+			long productEntryId, String[] groupPermissions,
 			String[] guestPermissions)
 		throws PortalException, SystemException {
 
@@ -170,7 +170,7 @@ public class SCProductEntryLocalServiceImpl
 			scProductEntryPersistence.findByPrimaryKey(productEntryId);
 
 		addProductEntryResources(
-			productEntry, communityPermissions, guestPermissions);
+			productEntry, groupPermissions, guestPermissions);
 	}
 
 	public void addProductEntryResources(
@@ -186,14 +186,14 @@ public class SCProductEntryLocalServiceImpl
 	}
 
 	public void addProductEntryResources(
-			SCProductEntry productEntry, String[] communityPermissions,
+			SCProductEntry productEntry, String[] groupPermissions,
 			String[] guestPermissions)
 		throws PortalException, SystemException {
 
 		resourceLocalService.addModelResources(
 			productEntry.getCompanyId(), productEntry.getGroupId(),
 			productEntry.getUserId(), SCProductEntry.class.getName(),
-			productEntry.getProductEntryId(), communityPermissions,
+			productEntry.getProductEntryId(), groupPermissions,
 			guestPermissions);
 	}
 

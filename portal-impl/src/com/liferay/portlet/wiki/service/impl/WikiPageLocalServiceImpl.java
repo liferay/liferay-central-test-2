@@ -302,13 +302,13 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 	}
 
 	public void addPageResources(
-			long nodeId, String title, String[] communityPermissions,
+			long nodeId, String title, String[] groupPermissions,
 			String[] guestPermissions)
 		throws PortalException, SystemException {
 
 		WikiPage page = getPage(nodeId, title);
 
-		addPageResources(page, communityPermissions, guestPermissions);
+		addPageResources(page, groupPermissions, guestPermissions);
 	}
 
 	public void addPageResources(
@@ -323,14 +323,13 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 	}
 
 	public void addPageResources(
-			WikiPage page, String[] communityPermissions,
-			String[] guestPermissions)
+			WikiPage page, String[] groupPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
 
 		resourceLocalService.addModelResources(
 			page.getCompanyId(), page.getGroupId(),	page.getUserId(),
 			WikiPage.class.getName(), page.getResourcePrimKey(),
-			communityPermissions, guestPermissions);
+			groupPermissions, guestPermissions);
 	}
 
 	public void changeParent(

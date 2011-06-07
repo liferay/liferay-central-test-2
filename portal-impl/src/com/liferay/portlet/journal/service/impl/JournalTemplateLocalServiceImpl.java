@@ -183,25 +183,25 @@ public class JournalTemplateLocalServiceImpl
 	}
 
 	public void addTemplateResources(
-			long groupId, String templateId, String[] communityPermissions,
+			long groupId, String templateId, String[] groupPermissions,
 			String[] guestPermissions)
 		throws PortalException, SystemException {
 
 		JournalTemplate template = journalTemplatePersistence.findByG_T(
 			groupId, templateId);
 
-		addTemplateResources(template, communityPermissions, guestPermissions);
+		addTemplateResources(template, groupPermissions, guestPermissions);
 	}
 
 	public void addTemplateResources(
-			JournalTemplate template, String[] communityPermissions,
+			JournalTemplate template, String[] groupPermissions,
 			String[] guestPermissions)
 		throws PortalException, SystemException {
 
 		resourceLocalService.addModelResources(
 			template.getCompanyId(), template.getGroupId(),
 			template.getUserId(), JournalTemplate.class.getName(),
-			template.getId(), communityPermissions, guestPermissions);
+			template.getId(), groupPermissions, guestPermissions);
 	}
 
 	public void checkNewLine(long groupId, String templateId)
