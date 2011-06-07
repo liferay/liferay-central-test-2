@@ -38,6 +38,7 @@ import com.liferay.util.ContentUtil;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 /**
  * @author Sergio González
@@ -84,11 +85,11 @@ public class AddDefaultDocumentLibraryStructuresAction extends SimpleAction {
 
 			String xsd = structureElementRootElement.asXML();
 
-			HashMap<Locale, String> nameMap = new HashMap<Locale, String>();
+			Map<Locale, String> nameMap = new HashMap<Locale, String>();
 
 			nameMap.put(LocaleUtil.getDefault(), name);
 
-			HashMap<Locale, String> descriptionMap = new HashMap<Locale, String>();
+			Map<Locale, String> descriptionMap = new HashMap<Locale, String>();
 
 			descriptionMap.put(LocaleUtil.getDefault(), description);
 
