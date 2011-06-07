@@ -93,33 +93,9 @@ public class RowChecker {
 	}
 
 	public String getRowCheckBox(boolean checked, String primaryKey) {
-		StringBundler sb = new StringBundler();
-
-		sb.append("<input ");
-
-		if (checked) {
-			sb.append("checked ");
-		}
-
-		sb.append("name=\"");
-		sb.append(_rowIds);
-		sb.append("\" type=\"checkbox\" value=\"");
-		sb.append(primaryKey);
-		sb.append("\" ");
-
-		if (Validator.isNotNull(_allRowIds)) {
-			sb.append("onClick=\"Liferay.Util.checkAllBox(");
-			sb.append("AUI().one(this).ancestor('");
-			sb.append("table.taglib-search-iterator'), '");
-			sb.append(_rowIds);
-			sb.append("', ");
-			sb.append(_allRowIds);
-			sb.append(");\"");
-		}
-
-		sb.append(">");
-
-		return sb.toString();
+		return getRowCheckBox(
+			checked, _rowIds, primaryKey, "'" + _rowIds + "'", _allRowIds,
+			StringPool.BLANK);
 	}
 
 	public String getRowId() {
@@ -177,6 +153,45 @@ public class RowChecker {
 
 			return value;
 		}
+	}
+
+	protected String getRowCheckBox(
+		boolean checked, String name, String value, String checkBoxRowIds,
+		String checkBoxAllRowIds, String checkBoxPostOnClick) {
+
+		StringBundler sb = new StringBundler();
+
+		sb.append("<input ");
+
+		if (checked) {
+			sb.append("checked ");
+		}
+
+		sb.append("name=\"");
+		sb.append(name);
+		sb.append("\" type=\"checkbox\" value=\"");
+		sb.append(value);
+		sb.append("\" ");
+
+		if (Validator.isNotNull(_allRowIds)) {
+			sb.append("onClick=\"Liferay.Util.checkAllBox(");
+			sb.append("AUI().one(this).ancestor('");
+			sb.append("table.taglib-search-iterator'), ");
+			sb.append(checkBoxRowIds);
+			sb.append(", ");
+			sb.append(checkBoxAllRowIds);
+			sb.append(");");
+
+			if (Validator.isNotNull(checkBoxPostOnClick)) {
+				sb.append(checkBoxPostOnClick);
+			}
+
+			sb.append("\"");
+		}
+
+		sb.append(">");
+
+		return sb.toString();
 	}
 
 	private String _align = ALIGN;

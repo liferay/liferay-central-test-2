@@ -23,7 +23,6 @@ import com.liferay.portal.kernel.repository.model.Folder;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
@@ -96,7 +95,8 @@ public class EntriesChecker extends RowChecker {
 			}
 		}
 
-		boolean showSelect = false;
+		boolean showInput = false;
+
 		String name = null;
 
 		if (fileEntry != null) {
@@ -108,7 +108,7 @@ public class EntriesChecker extends RowChecker {
 					DLFileEntryPermission.contains(
 						_permissionChecker, fileEntry, ActionKeys.UPDATE)) {
 
-					showSelect = true;
+					showInput = true;
 				}
 			}
 			catch (Exception e) {
@@ -122,7 +122,7 @@ public class EntriesChecker extends RowChecker {
 						_permissionChecker, dlFileShortcut,
 						ActionKeys.DELETE)) {
 
-					showSelect = true;
+					showInput = true;
 				}
 			}
 			catch (Exception e) {
@@ -135,62 +135,46 @@ public class EntriesChecker extends RowChecker {
 				if (DLFolderPermission.contains(
 						_permissionChecker, folder, ActionKeys.DELETE)) {
 
-					showSelect = true;
+					showInput = true;
 				}
 			}
 			catch (Exception e) {
 			}
 		}
 
-		if (!showSelect) {
+		if (!showInput) {
 			return StringPool.BLANK;
 		}
 
 		StringBundler sb = new StringBundler();
 
-		sb.append("<input ");
-
-		if (checked) {
-			sb.append("checked ");
-		}
-
-		sb.append("name=\"");
+		sb.append("['");
 		sb.append(_liferayPortletResponse.getNamespace());
 		sb.append(RowChecker.ROW_IDS);
 		sb.append(StringPool.UNDERLINE);
-		sb.append(name);
-		sb.append("\" type=\"checkbox\" value=\"");
-		sb.append(primaryKey);
-		sb.append("\" ");
+		sb.append(Folder.class.getName());
+		sb.append("', '");
+		sb.append(_liferayPortletResponse.getNamespace());
+		sb.append(RowChecker.ROW_IDS);
+		sb.append(StringPool.UNDERLINE);
+		sb.append(DLFileShortcut.class.getName());
+		sb.append("', '");
+		sb.append(_liferayPortletResponse.getNamespace());
+		sb.append(RowChecker.ROW_IDS);
+		sb.append(StringPool.UNDERLINE);
+		sb.append(FileEntry.class.getName());
+		sb.append("']");
 
-		if (Validator.isNotNull(getAllRowIds())) {
-			sb.append("onClick=\"Liferay.Util.checkAllBox(");
-			sb.append("AUI().one(this).ancestor('");
-			sb.append("table.taglib-search-iterator'), ['");
-			sb.append(_liferayPortletResponse.getNamespace());
-			sb.append(RowChecker.ROW_IDS);
-			sb.append(StringPool.UNDERLINE);
-			sb.append(FileEntry.class.getName());
-			sb.append("', '");
-			sb.append(_liferayPortletResponse.getNamespace());
-			sb.append(RowChecker.ROW_IDS);
-			sb.append(StringPool.UNDERLINE);
-			sb.append(DLFileShortcut.class.getName());
-			sb.append("', '");
-			sb.append(_liferayPortletResponse.getNamespace());
-			sb.append(RowChecker.ROW_IDS);
-			sb.append(StringPool.UNDERLINE);
-			sb.append(Folder.class.getName());
-			sb.append("'], '#");
-			sb.append(getAllRowIds());
-			sb.append("Checkbox'); ");
-			sb.append(_liferayPortletResponse.getNamespace());
-			sb.append("toggleActionsButton();\"");
-		}
+		String checkBoxRowIds = sb.toString();
 
-		sb.append(">");
-
-		return sb.toString();
+		return getRowCheckBox(
+			checked,
+			_liferayPortletResponse.getNamespace() + RowChecker.ROW_IDS +
+				StringPool.UNDERLINE + name,
+			primaryKey,
+			checkBoxRowIds,
+			"'#" + getAllRowIds() + "Checkbox'",
+			_liferayPortletResponse.getNamespace() + "toggleActionsButton();");
 	}
 
 	private LiferayPortletResponse _liferayPortletResponse;
