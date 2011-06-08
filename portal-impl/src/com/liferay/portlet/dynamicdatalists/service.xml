@@ -28,8 +28,8 @@
 		<column name="classNameId" type="long" />
 		<column name="classPK" type="long" />
 		<column name="recordSetId" type="long" />
-		<column name="displayIndex" type="int" />
 		<column name="version" type="String" />
+		<column name="displayIndex" type="int" />
 
 		<!-- Finder methods -->
 
@@ -61,12 +61,12 @@
 
 		<!-- Other fields -->
 
-		<column name="recordId" type="long" />
-		<column name="recordSetId" type="long" />
 		<column name="classNameId" type="long" />
 		<column name="classPK" type="long" />
-		<column name="displayIndex" type="int" />
+		<column name="recordSetId" type="long" />
+		<column name="recordId" type="long" />
 		<column name="version" type="String" />
+		<column name="displayIndex" type="int" />
 		<column name="status" type="int" />
 		<column name="statusByUserId" type="long" />
 		<column name="statusByUserName" type="String" />
@@ -77,7 +77,7 @@
 		<finder name="RecordId" return-type="Collection">
 			<finder-column name="recordId" />
 		</finder>
-		<finder name="R_V" return-type="Collection" unique="true">
+		<finder name="R_V" return-type="DDLRecordVersion" unique="true">
 			<finder-column name="recordId" />
 			<finder-column name="version" />
 		</finder>

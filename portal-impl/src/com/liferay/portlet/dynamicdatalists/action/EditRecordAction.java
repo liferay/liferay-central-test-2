@@ -164,13 +164,13 @@ public class EditRecordAction extends PortletAction {
 
 		if (recordId <= 0) {
 			record = DDLRecordServiceUtil.addRecord(
-				themeDisplay.getScopeGroupId(), recordSetId, fields,
-				DDLConstants.DISPLAY_INDEX_DEFAULT, serviceContext);
+				themeDisplay.getScopeGroupId(), recordSetId,
+				DDLConstants.DISPLAY_INDEX_DEFAULT, fields, serviceContext);
 		}
 		else {
 			record = DDLRecordServiceUtil.updateRecord(
-				recordId, fields, DDLConstants.DISPLAY_INDEX_DEFAULT, false,
-				majorVersion, serviceContext);
+				recordId, majorVersion, DDLConstants.DISPLAY_INDEX_DEFAULT,
+				fields, false, serviceContext);
 		}
 
 		return record;

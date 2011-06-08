@@ -57,8 +57,8 @@ public class DDLRecordLocalServiceImpl
 	extends DDLRecordLocalServiceBaseImpl {
 
 	public DDLRecord addRecord(
-			long userId, long groupId, long recordSetId, Fields fields,
-			int displayIndex, ServiceContext serviceContext)
+			long userId, long groupId, long recordSetId, int displayIndex,
+			Fields fields, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		// Record
@@ -94,27 +94,25 @@ public class DDLRecordLocalServiceImpl
 		record.setClassPK(classPK);
 
 		record.setRecordSetId(recordSetId);
-		record.setDisplayIndex(displayIndex);
 		record.setVersion(DDLRecordConstants.DEFAULT_VERSION);
+		record.setDisplayIndex(displayIndex);
 
 		ddlRecordPersistence.update(record, false);
 
 		// Record version
 
 		DDLRecordVersion recordVersion = addRecordVersion(
-			user, record, serviceContext.getModifiedDate(now),
-			recordSetId, ddmStructure.getClassNameId(), classPK, displayIndex,
-			DDLRecordConstants.DEFAULT_VERSION, WorkflowConstants.STATUS_DRAFT,
-			serviceContext);
+			user, record, classPK, DDLRecordConstants.DEFAULT_VERSION,
+			displayIndex, WorkflowConstants.STATUS_DRAFT);
 
 		// Asset
 
 		Locale locale = ServiceContextUtil.getLocale(serviceContext);
 
 		updateAsset(
-			userId, record, recordVersion, locale,
-			serviceContext.getAssetCategoryIds(),
-			serviceContext.getAssetTagNames());
+			userId, record, recordVersion, serviceContext.getAssetCategoryIds(),
+			serviceContext.getAssetTagNames(),
+			locale);
 
 		// Workflow
 
@@ -127,14 +125,14 @@ public class DDLRecordLocalServiceImpl
 
 	public DDLRecord addRecord(
 			long userId, long groupId, long recordSetId,
-			Map<String, Serializable> fieldsMap, int displayIndex,
+			int displayIndex, Map<String, Serializable> fieldsMap,
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		Fields fields = toFields(fieldsMap);
 
 		return addRecord(
-			userId, groupId, recordSetId, fields, displayIndex, serviceContext);
+			userId, groupId, recordSetId, displayIndex, fields, serviceContext);
 	}
 
 	public void deleteRecord(DDLRecord record)
@@ -231,7 +229,7 @@ public class DDLRecordLocalServiceImpl
 
 	public void updateAsset(
 			long userId, DDLRecord record, DDLRecordVersion recordVersion,
-			Locale locale, long[] assetCategoryIds, String[] assetTagNames)
+			long[] assetCategoryIds, String[] assetTagNames, Locale locale)
 		throws PortalException, SystemException {
 
 		boolean addDraftAssetEntry = false;
@@ -240,12 +238,12 @@ public class DDLRecordLocalServiceImpl
 			String version = recordVersion.getVersion();
 
 			if (!version.equals(DDLRecordConstants.DEFAULT_VERSION)) {
-				int approvedRecordsCount =
+				int approvedRecordVersionsCount =
 					ddlRecordVersionPersistence.countByR_S(
 						record.getRecordId(),
 						WorkflowConstants.STATUS_APPROVED);
 
-				if (approvedRecordsCount > 0) {
+				if (approvedRecordVersionsCount > 0) {
 					addDraftAssetEntry = true;
 				}
 			}
@@ -281,18 +279,23 @@ public class DDLRecordLocalServiceImpl
 	}
 
 	public DDLRecord updateRecord(
-			long userId, long recordId, Fields fields, int displayIndex,
-			boolean mergeFields, boolean majorVersion,
-			ServiceContext serviceContext)
+			long userId, long recordId, boolean majorVersion, int displayIndex,
+			Fields fields, boolean mergeFields, ServiceContext serviceContext)
 		throws PortalException, SystemException {
+
+		// Record
 
 		User user = userPersistence.findByPrimaryKey(userId);
 
 		DDLRecord record = ddlRecordPersistence.findByPrimaryKey(recordId);
 
-		DDLRecordVersion recordVersion = record.getLatestRecordVersion();
+		record.setModifiedDate(serviceContext.getModifiedDate(null));
 
-		String version = null;
+		ddlRecordPersistence.update(record, false);
+
+		// Record version
+
+		DDLRecordVersion recordVersion = record.getLatestRecordVersion();
 
 		if (recordVersion.isApproved()) {
 			DDLRecordSet recordSet = record.getRecordSet();
@@ -300,27 +303,23 @@ public class DDLRecordLocalServiceImpl
 			long classPK = StorageEngineUtil.create(
 				recordSet.getCompanyId(), recordSet.getDDMStructureId(), fields,
 				serviceContext);
-
-			version = getNextVersion(
+			String version = getNextVersion(
 				record, majorVersion, serviceContext.getWorkflowAction());
 
 			addRecordVersion(
-				user, record, serviceContext.getModifiedDate(null),
-				record.getRecordSetId(), record.getClassNameId(), classPK,
-				displayIndex, version, WorkflowConstants.STATUS_DRAFT,
-				serviceContext);
+				user, record, classPK, version, displayIndex,
+				WorkflowConstants.STATUS_DRAFT);
 		}
 		else {
 			StorageEngineUtil.update(
 				recordVersion.getClassPK(), fields, mergeFields,
 				serviceContext);
 
-			version = recordVersion.getVersion();
+			String version = recordVersion.getVersion();
 
 			updateRecordVersion(
-				user, recordVersion, displayIndex, fields, mergeFields, version,
-				recordVersion.getStatus(), serviceContext.getModifiedDate(null),
-				serviceContext);
+				user, recordVersion, version, displayIndex,
+				recordVersion.getStatus(), serviceContext);
 		}
 
 		// Workflow
@@ -334,15 +333,15 @@ public class DDLRecordLocalServiceImpl
 	}
 
 	public DDLRecord updateRecord(
-			long userId, long recordId, Map<String, Serializable> fieldsMap,
-			int displayIndex, boolean mergeFields,
+			long userId, long recordId, int displayIndex,
+			Map<String, Serializable> fieldsMap, boolean mergeFields,
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		Fields fields = toFields(fieldsMap);
 
 		return updateRecord(
-			userId, recordId, fields, displayIndex, mergeFields, false,
+			userId, recordId, false, displayIndex, fields, mergeFields,
 			serviceContext);
 	}
 
@@ -412,15 +411,17 @@ public class DDLRecordLocalServiceImpl
 	}
 
 	protected DDLRecordVersion addRecordVersion(
-			User user, DDLRecord record, Date modifiedDate, long recordSetId,
-			long classNameId, long classPK, int displayIndex, String version,
-			int status, ServiceContext serviceContext)
-		throws PortalException, SystemException {
+			User user, DDLRecord record, long classPK, String version,
+			int displayIndex, int status)
+		throws SystemException {
 
 		long recordVersionId = counterLocalService.increment();
 
 		DDLRecordVersion recordVersion = ddlRecordVersionPersistence.create(
 			recordVersionId);
+
+		recordVersion.setGroupId(record.getGroupId());
+		recordVersion.setCompanyId(record.getCompanyId());
 
 		long versionUserId = record.getVersionUserId();
 
@@ -428,20 +429,20 @@ public class DDLRecordLocalServiceImpl
 			versionUserId = record.getUserId();
 		}
 
+		recordVersion.setUserId(versionUserId);
+
 		String versionUserName = GetterUtil.getString(
 			record.getVersionUserName(), record.getUserName());
 
-		recordVersion.setGroupId(record.getGroupId());
-		recordVersion.setCompanyId(record.getCompanyId());
-		recordVersion.setUserId(versionUserId);
 		recordVersion.setUserName(versionUserName);
-		recordVersion.setCreateDate(modifiedDate);
-		recordVersion.setRecordId(record.getRecordId());
-		recordVersion.setRecordSetId(recordSetId);
-		recordVersion.setClassNameId(classNameId);
+
+		recordVersion.setCreateDate(record.getModifiedDate());
+		recordVersion.setClassNameId(record.getClassNameId());
 		recordVersion.setClassPK(classPK);
-		recordVersion.setDisplayIndex(displayIndex);
+		recordVersion.setRecordSetId(record.getRecordSetId());
+		recordVersion.setRecordId(record.getRecordId());
 		recordVersion.setVersion(version);
+		recordVersion.setDisplayIndex(displayIndex);
 		recordVersion.setStatus(status);
 		recordVersion.setStatusByUserId(user.getUserId());
 		recordVersion.setStatusByUserName(user.getFullName());
@@ -453,8 +454,7 @@ public class DDLRecordLocalServiceImpl
 	}
 
 	protected String getNextVersion(
-			DDLRecord record, boolean majorVersion, int workflowAction)
-		throws PortalException, SystemException {
+		DDLRecord record, boolean majorVersion, int workflowAction) {
 
 		if (workflowAction == WorkflowConstants.ACTION_SAVE_DRAFT) {
 			majorVersion = false;
@@ -474,22 +474,6 @@ public class DDLRecordLocalServiceImpl
 		return versionParts[0] + StringPool.PERIOD + versionParts[1];
 	}
 
-	protected void updateRecordVersion(
-			User user, DDLRecordVersion recordVersion, int displayIndex,
-			Fields fields, boolean mergeFields, String version, int status,
-			Date statusDate, ServiceContext serviceContext)
-		throws PortalException, SystemException {
-
-		recordVersion.setDisplayIndex(displayIndex);
-		recordVersion.setVersion(version);
-		recordVersion.setStatus(status);
-		recordVersion.setStatusByUserId(user.getUserId());
-		recordVersion.setStatusByUserName(user.getFullName());
-		recordVersion.setStatusDate(statusDate);
-
-		ddlRecordVersionPersistence.update(recordVersion, false);
-	}
-
 	protected Fields toFields(Map<String, Serializable> fieldsMap) {
 		Fields fields = new Fields();
 
@@ -502,6 +486,21 @@ public class DDLRecordLocalServiceImpl
 		}
 
 		return fields;
+	}
+
+	protected void updateRecordVersion(
+			User user, DDLRecordVersion recordVersion, String version,
+			int displayIndex, int status, ServiceContext serviceContext)
+		throws SystemException {
+
+		recordVersion.setVersion(version);
+		recordVersion.setDisplayIndex(displayIndex);
+		recordVersion.setStatus(status);
+		recordVersion.setStatusByUserId(user.getUserId());
+		recordVersion.setStatusByUserName(user.getFullName());
+		recordVersion.setStatusDate(serviceContext.getModifiedDate(null));
+
+		ddlRecordVersionPersistence.update(recordVersion, false);
 	}
 
 }

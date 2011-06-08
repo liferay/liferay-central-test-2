@@ -34,34 +34,34 @@ import java.util.Map;
 public class DDLRecordServiceImpl extends DDLRecordServiceBaseImpl {
 
 	public DDLRecord addRecord(
-			long groupId, long recordSetId, Fields fields,
-			int displayIndex, ServiceContext serviceContext)
+			long groupId, long recordSetId, int displayIndex,
+			Fields fields, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		DDLRecordSetPermission.check(
 			getPermissionChecker(), recordSetId, ActionKeys.ADD_RECORD);
 
 		return ddlRecordLocalService.addRecord(
-			getUserId(), groupId, recordSetId, fields, displayIndex,
+			getUserId(), groupId, recordSetId, displayIndex, fields,
 			serviceContext);
 	}
 
 	public DDLRecord addRecord(
-			long groupId, long recordSetId, Map<String, Serializable> fieldsMap,
-			int displayIndex, ServiceContext serviceContext)
+			long groupId, long recordSetId, int displayIndex,
+			Map<String, Serializable> fieldsMap, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		DDLRecordSetPermission.check(
 			getPermissionChecker(), recordSetId, ActionKeys.ADD_RECORD);
 
 		return ddlRecordLocalService.addRecord(
-			getUserId(), groupId, recordSetId, fieldsMap, displayIndex,
+			getUserId(), groupId, recordSetId, displayIndex, fieldsMap,
 			serviceContext);
 	}
 
 	public DDLRecord updateRecord(
-			long recordId, Fields fields, int displayIndex, boolean merge,
-			boolean majorVersion, ServiceContext serviceContext)
+			long recordId, boolean majorVersion, int displayIndex,
+			Fields fields, boolean mergeFields, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		DDLRecord record = ddlRecordLocalService.getDDLRecord(recordId);
@@ -70,13 +70,14 @@ public class DDLRecordServiceImpl extends DDLRecordServiceBaseImpl {
 			getPermissionChecker(), record.getRecordSetId(), ActionKeys.UPDATE);
 
 		return ddlRecordLocalService.updateRecord(
-			getUserId(), recordId, fields, displayIndex, merge, majorVersion,
-			serviceContext);
+			getUserId(), recordId, majorVersion, displayIndex, fields,
+			mergeFields, serviceContext);
 	}
 
 	public DDLRecord updateRecord(
-			long recordId, Map<String, Serializable> fieldsMap,
-			int displayIndex, boolean merge, ServiceContext serviceContext)
+			long recordId, int displayIndex,
+			Map<String, Serializable> fieldsMap, boolean mergeFields,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		DDLRecord record = ddlRecordLocalService.getDDLRecord(recordId);
@@ -85,7 +86,7 @@ public class DDLRecordServiceImpl extends DDLRecordServiceBaseImpl {
 			getPermissionChecker(), record.getRecordSetId(), ActionKeys.UPDATE);
 
 		return ddlRecordLocalService.updateRecord(
-			getUserId(), recordId, fieldsMap, displayIndex, merge,
+			getUserId(), recordId, displayIndex, fieldsMap, mergeFields,
 			serviceContext);
 	}
 

@@ -41,6 +41,7 @@ import com.liferay.portlet.documentlibrary.service.persistence.DLFileVersionPers
 import com.liferay.portlet.documentlibrary.service.persistence.DLFolderPersistenceTest;
 import com.liferay.portlet.dynamicdatalists.service.persistence.DDLRecordPersistenceTest;
 import com.liferay.portlet.dynamicdatalists.service.persistence.DDLRecordSetPersistenceTest;
+import com.liferay.portlet.dynamicdatalists.service.persistence.DDLRecordVersionPersistenceTest;
 import com.liferay.portlet.dynamicdatamapping.service.persistence.DDMContentPersistenceTest;
 import com.liferay.portlet.dynamicdatamapping.service.persistence.DDMStorageLinkPersistenceTest;
 import com.liferay.portlet.dynamicdatamapping.service.persistence.DDMStructureLinkPersistenceTest;
@@ -205,6 +206,7 @@ public class PersistenceTestSuite extends TestSuite {
 
 		testSuite.addTestSuite(DDLRecordPersistenceTest.class);
 		testSuite.addTestSuite(DDLRecordSetPersistenceTest.class);
+		testSuite.addTestSuite(DDLRecordVersionPersistenceTest.class);
 
 		testSuite.addTestSuite(DDMContentPersistenceTest.class);
 		testSuite.addTestSuite(DDMStorageLinkPersistenceTest.class);
