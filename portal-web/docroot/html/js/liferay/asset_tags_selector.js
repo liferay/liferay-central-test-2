@@ -179,7 +179,7 @@ AUI().add(
 							var popup = new A.Dialog(
 								{
 									bodyContent: TPL_LOADING,
-									constrain2view: true,
+									constrain: true,
 									draggable: true,
 									hideClass: 'aui-helper-hidden-accessible',
 									preventOverlap: true,
