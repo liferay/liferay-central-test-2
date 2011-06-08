@@ -244,7 +244,7 @@ app.server.glassfish.zip.url=http://download.java.net/glassfish/v3/release/${app
 	</target>
 
 	<target name="build-dist-tcat-profile">
-		<mkdir dir="${tcat.dir}/profile/lib/ext" />
+		<mkdir dir="${tcat.dir}/profile/files/lib/ext" />
 
 		<copy file="tools/servers/tcat/profile.xml" todir="${tcat.dir}/profile">
 			<filterset>
@@ -252,7 +252,7 @@ app.server.glassfish.zip.url=http://download.java.net/glassfish/v3/release/${app
 			</filterset>
 		</copy>
 
-		<copy todir="${tcat.dir}/profile/lib/ext">
+		<copy todir="${tcat.dir}/profile/files/lib/ext">
 			<fileset dir="${app.server.tomcat.dir}/lib/ext" />
 		</copy>
 
