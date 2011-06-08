@@ -69,6 +69,7 @@
 
 	.move-list {
 		.move-file, .move-folder {
+			background: #f0faf0 url() no-repeat 5px 50%;
 			border-bottom: 1px solid #ccc;
 			display: block;
 			font-weight: bold;
@@ -79,11 +80,11 @@
 		}
 
 		.move-file {
-			background: #f0faf0 url(<%= themeImagesPath %>/file_system/small/jpg.png) no-repeat 5px 50%;
+			background-image: url(<%= themeImagesPath %>/file_system/small/jpg.png);
 		}
 
 		.move-folder {
-			background: #f0faf0 url(<%= themeImagesPath %>/common/folder.png) no-repeat 5px 50%;
+			background-image: url(<%= themeImagesPath %>/common/folder.png);
 		}
 
 		.move-error {

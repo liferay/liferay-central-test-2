@@ -9,13 +9,13 @@ AUI().add(
 			form = AUI().one(form);
 
 			if (form) {
-				var selection = 'input[type=checkbox]';
+				var selector = 'input[type=checkbox]';
 
 				if (name) {
-					selection = 'input[type=checkbox][name='+ name +']';
+					selector += '[name='+ name +']';
 				}
 
-				form.all(selection).each(
+				form.all(selector).each(
 					function(item, index, collection) {
 						var val = item.val();
 
@@ -26,7 +26,7 @@ AUI().add(
 				);
 			}
 
-			return buffer.join(',');
+			return buffer.join();
 		};
 
 		Util.listCheckedExcept = function(form, except, name) {
@@ -35,13 +35,13 @@ AUI().add(
 			form = AUI().one(form);
 
 			if (form) {
-				var selection = 'input[type=checkbox]';
+				var selector = 'input[type=checkbox]';
 
 				if (name) {
-					selection = 'input[type=checkbox][name='+ name +']';
+					selector += '[name='+ name +']';
 				}
 
-				form.all(selection).each(
+				form.all(selector).each(
 					function(item, index, collection) {
 						var val = item.val();
 
@@ -52,7 +52,7 @@ AUI().add(
 				);
 			}
 
-			return buffer.join(',');
+			return buffer.join();
 		};
 
 		Util.listSelect = function(box, delimeter) {
@@ -91,13 +91,13 @@ AUI().add(
 			form = AUI().one(form);
 
 			if (form) {
-				var selection = 'input[type=checkbox]';
+				var selector = 'input[type=checkbox]';
 
 				if (name) {
-					selection = 'input[type=checkbox][name='+ name +']';
+					selector += '[name='+ name +']';
 				}
 
-				form.all(selection).each(
+				form.all(selector).each(
 					function(item, index, collection) {
 						var val = item.val();
 
