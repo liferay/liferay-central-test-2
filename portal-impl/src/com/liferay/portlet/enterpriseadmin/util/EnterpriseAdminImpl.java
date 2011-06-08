@@ -44,27 +44,28 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.model.UserGroup;
 import com.liferay.portal.model.UserGroupRole;
 import com.liferay.portal.model.Website;
-import com.liferay.portal.model.impl.AddressImpl;
-import com.liferay.portal.model.impl.EmailAddressImpl;
-import com.liferay.portal.model.impl.OrgLaborImpl;
-import com.liferay.portal.model.impl.PhoneImpl;
-import com.liferay.portal.model.impl.UserGroupRoleImpl;
-import com.liferay.portal.model.impl.WebsiteImpl;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
+import com.liferay.portal.service.AddressLocalServiceUtil;
 import com.liferay.portal.service.AddressServiceUtil;
+import com.liferay.portal.service.EmailAddressLocalServiceUtil;
 import com.liferay.portal.service.EmailAddressServiceUtil;
+import com.liferay.portal.service.OrgLaborLocalServiceUtil;
 import com.liferay.portal.service.OrgLaborServiceUtil;
 import com.liferay.portal.service.OrganizationLocalServiceUtil;
+import com.liferay.portal.service.PhoneLocalServiceUtil;
 import com.liferay.portal.service.PhoneServiceUtil;
 import com.liferay.portal.service.RoleLocalServiceUtil;
+import com.liferay.portal.service.UserGroupRoleLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
+import com.liferay.portal.service.WebsiteLocalServiceUtil;
 import com.liferay.portal.service.WebsiteServiceUtil;
 import com.liferay.portal.service.permission.GroupPermissionUtil;
 import com.liferay.portal.service.permission.OrganizationPermissionUtil;
 import com.liferay.portal.service.permission.RolePermissionUtil;
 import com.liferay.portal.service.permission.UserGroupPermissionUtil;
 import com.liferay.portal.service.permission.UserGroupRolePermissionUtil;
+import com.liferay.portal.service.persistence.UserGroupRolePK;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.comparator.GroupNameComparator;
@@ -444,9 +445,8 @@ public class EnterpriseAdminImpl implements EnterpriseAdmin {
 				primary = true;
 			}
 
-			Address address = new AddressImpl();
+			Address address = AddressLocalServiceUtil.createAddress(addressId);
 
-			address.setAddressId(addressId);
 			address.setStreet1(street1);
 			address.setStreet2(street2);
 			address.setStreet3(street3);
@@ -493,9 +493,9 @@ public class EnterpriseAdminImpl implements EnterpriseAdmin {
 				primary = true;
 			}
 
-			EmailAddress emailAddress = new EmailAddressImpl();
+			EmailAddress emailAddress =
+				EmailAddressLocalServiceUtil.createEmailAddress(emailAddressId);
 
-			emailAddress.setEmailAddressId(emailAddressId);
 			emailAddress.setAddress(address);
 			emailAddress.setTypeId(typeId);
 			emailAddress.setPrimary(primary);
@@ -683,9 +683,9 @@ public class EnterpriseAdminImpl implements EnterpriseAdmin {
 			int satClose = ParamUtil.getInteger(
 				actionRequest, "satClose" + orgLaborsIndex, -1);
 
-			OrgLabor orgLabor = new OrgLaborImpl();
+			OrgLabor orgLabor = OrgLaborLocalServiceUtil.createOrgLabor(
+				orgLaborId);
 
-			orgLabor.setOrgLaborId(orgLaborId);
 			orgLabor.setTypeId(typeId);
 			orgLabor.setSunOpen(sunOpen);
 			orgLabor.setSunClose(sunClose);
@@ -763,9 +763,8 @@ public class EnterpriseAdminImpl implements EnterpriseAdmin {
 				primary = true;
 			}
 
-			Phone phone = new PhoneImpl();
+			Phone phone = PhoneLocalServiceUtil.createPhone(phoneId);
 
-			phone.setPhoneId(phoneId);
 			phone.setNumber(number);
 			phone.setExtension(extension);
 			phone.setTypeId(typeId);
@@ -857,11 +856,12 @@ public class EnterpriseAdminImpl implements EnterpriseAdmin {
 				continue;
 			}
 
-			UserGroupRole userGroupRole = new UserGroupRoleImpl();
+			UserGroupRolePK userGroupRolePK = new UserGroupRolePK(
+				userId, groupRolesGroupIds[i], groupRolesRoleIds[i]);
 
-			userGroupRole.setUserId(userId);
-			userGroupRole.setGroupId(groupRolesGroupIds[i]);
-			userGroupRole.setRoleId(groupRolesRoleIds[i]);
+			UserGroupRole userGroupRole =
+				UserGroupRoleLocalServiceUtil.createUserGroupRole(
+					userGroupRolePK);
 
 			userGroupRoles.add(userGroupRole);
 		}
@@ -956,9 +956,8 @@ public class EnterpriseAdminImpl implements EnterpriseAdmin {
 				primary = true;
 			}
 
-			Website website = new WebsiteImpl();
+			Website website = WebsiteLocalServiceUtil.createWebsite(websiteId);
 
-			website.setWebsiteId(websiteId);
 			website.setUrl(url);
 			website.setTypeId(typeId);
 			website.setPrimary(primary);
