@@ -27,8 +27,6 @@ String uploadProgressId = "dlFileEntryUploadProgress";
 
 FileEntry fileEntry = (FileEntry)request.getAttribute(WebKeys.DOCUMENT_LIBRARY_FILE_ENTRY);
 
-fileEntry = fileEntry.toEscapedModel();
-
 long fileEntryId = fileEntry.getFileEntryId();
 long folderId = fileEntry.getFolderId();
 String extension = fileEntry.getExtension();
@@ -72,7 +70,7 @@ Boolean isLocked = fileEntry.isLocked();
 Boolean hasLock = fileEntry.hasLock();
 Lock lock = fileEntry.getLock();
 
-String fileUrl = themeDisplay.getPortalURL() + themeDisplay.getPathContext() + "/documents/" + themeDisplay.getScopeGroupId() + StringPool.SLASH + folderId + StringPool.SLASH + HttpUtil.encodeURL(HtmlUtil.unescape(title));
+String fileUrl = themeDisplay.getPortalURL() + themeDisplay.getPathContext() + "/documents/" + themeDisplay.getScopeGroupId() + StringPool.SLASH + folderId + StringPool.SLASH + HttpUtil.encodeURL(title);
 String webDavUrl = StringPool.BLANK;
 
 if (portletDisplay.isWebDAVEnabled()) {
@@ -95,7 +93,7 @@ if (portletDisplay.isWebDAVEnabled()) {
 	}
 
 	sb.append(StringPool.SLASH);
-	sb.append(HttpUtil.encodeURL(HtmlUtil.unescape(title), true));
+	sb.append(HttpUtil.encodeURL(title, true));
 
 	Group group = themeDisplay.getScopeGroup();
 
@@ -129,7 +127,6 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 
 	<liferay-ui:header
 		backURL="<%= redirect %>"
-		escapeXml="<%= false %>"
 		title="<%= fileEntry.getTitle() %>"
 	/>
 </c:if>
@@ -178,7 +175,7 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 						String thumbnailSrc = themeDisplay.getPathThemeImages() + "/file_system/large/" + DLUtil.getGenericName(fileEntry.getExtension()) + ".png";
 
 						if (PDFProcessorUtil.hasImages(fileEntry)) {
-							thumbnailSrc = themeDisplay.getPortalURL() + themeDisplay.getPathContext() + "/documents/" + themeDisplay.getScopeGroupId() + StringPool.SLASH + fileEntry.getFolderId() + StringPool.SLASH + HttpUtil.encodeURL(HtmlUtil.unescape(fileEntry.getTitle())) + "?version=" + fileEntry.getVersion() + "&thumbnail=1";
+							thumbnailSrc = themeDisplay.getPortalURL() + themeDisplay.getPathContext() + "/documents/" + themeDisplay.getScopeGroupId() + StringPool.SLASH + fileEntry.getFolderId() + StringPool.SLASH + HttpUtil.encodeURL(fileEntry.getTitle()) + "?version=" + fileEntry.getVersion() + "&thumbnail=1";
 						}
 						%>
 
@@ -186,7 +183,7 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 					</span>
 
 					<span class="user-date">
-						<liferay-ui:icon image="../document_library/add_document" label="<%= true %>" message='<%= LanguageUtil.format(pageContext, "uploaded-by-x-x", new Object[] {userDisplay.getDisplayURL(themeDisplay), fileEntry.getUserName(), fileEntry.getCreateDate().toString()}) %>' />
+						<liferay-ui:icon image="../document_library/add_document" label="<%= true %>" message='<%= LanguageUtil.format(pageContext, "uploaded-by-x-x", new Object[] {userDisplay.getDisplayURL(themeDisplay), HtmlUtil.escape(fileEntry.getUserName()), fileEntry.getCreateDate().toString()}) %>' />
 					</span>
 
 					<c:if test="<%= fileEntry.isSupportsSocial() %>">
@@ -206,7 +203,7 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 					</div>
 
 					<span class="document-description">
-						<%= fileEntry.getDescription() %>
+						<%= HtmlUtil.escape(fileEntry.getDescription()) %>
 					</span>
 
 					<c:if test="<%= fileEntry.isSupportsSocial() %>">
@@ -235,7 +232,7 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 						<%
 						int previewFileCount = PDFProcessorUtil.getPreviewFileCount(fileEntry);
 
-						String previewFileURL = themeDisplay.getPortalURL() + themeDisplay.getPathContext() + "/documents/" + themeDisplay.getScopeGroupId() + StringPool.SLASH + fileEntry.getFolderId() + StringPool.SLASH + HttpUtil.encodeURL(HtmlUtil.unescape(fileEntry.getTitle())) + "?version=" + fileEntry.getVersion() + "&previewFileIndex=";
+						String previewFileURL = themeDisplay.getPortalURL() + themeDisplay.getPathContext() + "/documents/" + themeDisplay.getScopeGroupId() + StringPool.SLASH + fileEntry.getFolderId() + StringPool.SLASH + HttpUtil.encodeURL(fileEntry.getTitle()) + "?version=" + fileEntry.getVersion() + "&previewFileIndex=";
 						%>
 
 						<c:choose>
@@ -327,7 +324,7 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 					%>
 
 					<span class="last-updated">
-						<liferay-ui:icon image="../document_library/add_document" label="<%= true %>" message='<%= LanguageUtil.format(pageContext, "by-x-x", new Object[] {userDisplay.getDisplayURL(themeDisplay), fileEntry.getVersionUserName(), fileEntry.getFileVersion().getCreateDate()}) %>' />
+						<liferay-ui:icon image="../document_library/add_document" label="<%= true %>" message='<%= LanguageUtil.format(pageContext, "by-x-x", new Object[] {userDisplay.getDisplayURL(themeDisplay), HtmlUtil.escape(fileEntry.getVersionUserName()), fileEntry.getFileVersion().getCreateDate()}) %>' />
 					</span>
 
 					<span class="download-document">
@@ -336,7 +333,7 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 								image="download"
 								label="<%= true %>"
 								message='<%= LanguageUtil.get(pageContext, "download") + " (" + TextFormatter.formatKB(fileEntry.getSize(), locale) + "k)" %>'
-								url='<%= themeDisplay.getPortalURL() + themeDisplay.getPathContext() + "/documents/" + themeDisplay.getScopeGroupId() + StringPool.SLASH + fileEntry.getFolderId() + StringPool.SLASH + HttpUtil.encodeURL(HtmlUtil.unescape(fileEntry.getTitle())) %>'
+								url='<%= themeDisplay.getPortalURL() + themeDisplay.getPathContext() + "/documents/" + themeDisplay.getScopeGroupId() + StringPool.SLASH + fileEntry.getFolderId() + StringPool.SLASH + HttpUtil.encodeURL(fileEntry.getTitle()) %>'
 							/>
 						</c:if>
 					</span>
@@ -352,7 +349,7 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 								image='<%= "../file_system/small/" + conversion %>'
 								label="<%= true %>"
 								message="<%= conversion.toUpperCase() %>"
-								url='<%= themeDisplay.getPortalURL() + themeDisplay.getPathContext() + "/documents/" + themeDisplay.getScopeGroupId() + StringPool.SLASH + fileEntry.getFolderId() + StringPool.SLASH + HttpUtil.encodeURL(HtmlUtil.unescape(fileEntry.getTitle())) + "?version=" + fileVersion.getVersion() + "&targetExtension=" + conversion %>'
+								url='<%= themeDisplay.getPortalURL() + themeDisplay.getPathContext() + "/documents/" + themeDisplay.getScopeGroupId() + StringPool.SLASH + fileEntry.getFolderId() + StringPool.SLASH + HttpUtil.encodeURL(fileEntry.getTitle()) + "?version=" + fileVersion.getVersion() + "&targetExtension=" + conversion %>'
 							/>
 
 						<%
@@ -504,7 +501,7 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 								sb.append(StringPool.SLASH);
 								sb.append(folderId);
 								sb.append(StringPool.SLASH);
-								sb.append(HttpUtil.encodeURL(HtmlUtil.unescape(title)));
+								sb.append(HttpUtil.encodeURL(title));
 								sb.append("?version=");
 								sb.append(String.valueOf(curFileVersion.getVersion()));
 
@@ -702,7 +699,7 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 
 					<liferay-security:permissionsURL
 						modelResource="<%= DLFileEntryConstants.getClassName() %>"
-						modelResourceDescription="<%= HtmlUtil.unescape(fileEntry.getTitle()) %>"
+						modelResourceDescription="<%= fileEntry.getTitle() %>"
 						resourcePrimKey="<%= String.valueOf(fileEntry.getFileEntryId()) %>"
 						var="permissionsURL"
 					/>
