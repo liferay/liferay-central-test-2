@@ -7,9 +7,6 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd"
 >
-	<bean id="serviceMonitorAdvice" class="com.liferay.portal.monitoring.statistics.service.ServiceMonitorAdvice">
-		<property name="monitoringDestinationName" value="liferay/monitoring" />
-	</bean>	
 	<bean id="chainableMethodAdviceInjector.serviceMonitorAdvice" class="com.liferay.portal.spring.aop.ChainableMethodAdviceInjector">
 		<property name="injectCondition" value="true" />
 		<property name="newChainableMethodAdvice" ref="serviceMonitorAdvice" />
@@ -20,6 +17,9 @@
 	</bean>
 	<bean id="portletStatistics" class="com.liferay.portal.monitoring.statistics.portlet.ServerStatistics">
 		<property name="companyLocalService" ref="com.liferay.portal.service.CompanyLocalService" />
+	</bean>
+	<bean id="serviceMonitorAdvice" class="com.liferay.portal.monitoring.statistics.service.ServiceMonitorAdvice">
+		<property name="monitoringDestinationName" value="liferay/monitoring" />
 	</bean>
 	<bean id="serviceStatistics" class="com.liferay.portal.monitoring.statistics.service.ServerStatistics" />
 	<bean id="com.liferay.portal.monitoring.MonitoringProcessor" class="com.liferay.portal.kernel.monitoring.DefaultMonitoringProcessor">
