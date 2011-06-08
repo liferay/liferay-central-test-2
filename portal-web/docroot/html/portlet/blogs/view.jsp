@@ -76,8 +76,12 @@ portletURL.setParameter("struts_action", "/blogs/view");
 			status = WorkflowConstants.STATUS_ANY;
 		}
 
-		total = BlogsEntryLocalServiceUtil.getGroupEntriesCount(scopeGroupId, status);
-		results = BlogsEntryServiceUtil.getGroupEntries(scopeGroupId, status, searchContainer.getStart(), searchContainer.getEnd());
+		results = BlogsEntryServiceUtil.getGroupEntries(scopeGroupId, status, searchContainer.getStart(), searchContainer.getEnd() + pageDelta);
+		total = searchContainer.getStart() + results.size();
+
+		if (results.size() > pageDelta) {
+			results = ListUtil.subList(results, 0, pageDelta);
+		}
 	}
 
 	searchContainer.setTotal(total);
