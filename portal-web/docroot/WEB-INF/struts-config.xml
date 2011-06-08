@@ -656,7 +656,7 @@
 			<forward name="portlet.enterprise_admin.error" path="portlet.enterprise_admin.error" />
 		</action>
 
-		<action path="/enterprise_admin/edit_plugin" type="com.liferay.portlet.enterpriseadmin.action.EditPluginAction">
+		<action path="/enterprise_admin/edit_plugin" type="com.liferay.portlet.pluginsadmin.action.EditPluginAction">
 			<forward name="portlet.enterprise_admin.edit_plugin" path="portlet.enterprise_admin.edit_plugin" />
 			<forward name="portlet.enterprise_admin.error" path="portlet.enterprise_admin.error" />
 		</action>
@@ -881,7 +881,7 @@
 
 		<!-- Enterprise Admin Plugins -->
 
-		<action path="/enterprise_admin_plugins/edit_plugin" type="com.liferay.portlet.enterpriseadmin.action.EditPluginAction">
+		<action path="/enterprise_admin_plugins/edit_plugin" type="com.liferay.portlet.pluginsadmin.action.EditPluginAction">
 			<forward name="portlet.enterprise_admin.edit_plugin" path="portlet.enterprise_admin.edit_plugin" />
 			<forward name="portlet.enterprise_admin.error" path="portlet.enterprise_admin.error" />
 		</action>
