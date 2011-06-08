@@ -261,7 +261,7 @@ else if (documentType != null) {
 
 		<aui:input name="title" />
 
-		<div class='<%= ((folder == null) || folder.isSupportsMetadata()) ? "aui-helper-hidden" : StringPool.BLANK %>' id="<portlet:namespace />metadata">
+		<div class='<%= ((folder == null) || folder.isSupportsMetadata()) ? StringPool.BLANK : "aui-helper-hidden" %>' id="<portlet:namespace />metadata">
 			<aui:input name="description" />
 
 			<%
@@ -327,7 +327,7 @@ else if (documentType != null) {
 			</liferay-ui:custom-attributes-available>
 		</div>
 
-		<div class='<%= ((folder == null) || folder.isSupportsSocial()) ? "aui-helper-hidden" : StringPool.BLANK %>' id="<portlet:namespace />social">
+		<div class='<%= ((folder == null) || folder.isSupportsSocial()) ? StringPool.BLANK : "aui-helper-hidden" %>' id="<portlet:namespace />social">
 			<liferay-ui:panel defaultState="closed" extended="<%= false %>" id="dlFileEntryCategorizationPanel" persistState="<%= true %>" title="categorization">
 				<aui:fieldset>
 					<aui:input classPK="<%= assetClassPK %>" model="<%= DLFileEntry.class %>" name="categories" type="assetCategories" />
