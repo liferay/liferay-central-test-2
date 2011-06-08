@@ -1,6 +1,36 @@
 <?xml version="1.0"?>
 
 <custom-sql>
+	<sql id="com.liferay.portlet.dynamicdatalists.service.persistence.DDLRecordFinder.countByR_S">
+		<![CDATA[
+			SELECT
+				COUNT(DISTINCT DDLRecord.recordId) AS COUNT_VALUE
+			FROM
+				DDLRecord
+			INNER JOIN
+				DDLRecordVersion ON
+					(DDLRecordVersion.recordId = DDLRecord.recordId)
+			WHERE
+				(DDLRecordVersion.status = ?) AND
+				(DDLRecord.recordSetId = ?)
+		]]>
+	</sql>
+	<sql id="com.liferay.portlet.dynamicdatalists.service.persistence.DDLRecordFinder.findByR_S">
+		<![CDATA[
+			SELECT
+				DISTINCT {DDLRecord.*}
+			FROM
+				DDLRecord
+			INNER JOIN
+				DDLRecordVersion ON
+					(DDLRecordVersion.recordId = DDLRecord.recordId)
+			WHERE
+				(DDLRecordVersion.status = ?) AND
+				(DDLRecord.recordSetId = ?)
+			ORDER BY
+				DDLRecord.recordId DESC
+		]]>
+	</sql>
 	<sql id="com.liferay.portlet.dynamicdatalists.service.persistence.DDLRecordSetFinder.countByC_G_R_N_D">
 		<![CDATA[
 			SELECT

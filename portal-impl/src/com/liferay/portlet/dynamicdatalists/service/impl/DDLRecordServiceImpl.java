@@ -61,7 +61,7 @@ public class DDLRecordServiceImpl extends DDLRecordServiceBaseImpl {
 
 	public DDLRecord updateRecord(
 			long recordId, Fields fields, int displayIndex, boolean merge,
-			ServiceContext serviceContext)
+			boolean majorVersion, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		DDLRecord record = ddlRecordLocalService.getDDLRecord(recordId);
@@ -70,7 +70,8 @@ public class DDLRecordServiceImpl extends DDLRecordServiceBaseImpl {
 			getPermissionChecker(), record.getRecordSetId(), ActionKeys.UPDATE);
 
 		return ddlRecordLocalService.updateRecord(
-			getUserId(), recordId, fields, displayIndex, merge, serviceContext);
+			getUserId(), recordId, fields, displayIndex, merge, majorVersion,
+			serviceContext);
 	}
 
 	public DDLRecord updateRecord(

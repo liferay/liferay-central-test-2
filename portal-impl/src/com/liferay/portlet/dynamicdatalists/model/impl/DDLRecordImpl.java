@@ -18,6 +18,8 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portlet.dynamicdatalists.model.DDLRecord;
 import com.liferay.portlet.dynamicdatalists.model.DDLRecordSet;
+import com.liferay.portlet.dynamicdatalists.model.DDLRecordVersion;
+import com.liferay.portlet.dynamicdatalists.service.DDLRecordLocalServiceUtil;
 import com.liferay.portlet.dynamicdatalists.service.DDLRecordSetLocalServiceUtil;
 import com.liferay.portlet.dynamicdatamapping.StorageException;
 import com.liferay.portlet.dynamicdatamapping.model.DDMStructure;
@@ -71,6 +73,12 @@ public class DDLRecordImpl
 		Field field = getField(fieldName);
 
 		return field.getValue();
+	}
+
+	public DDLRecordVersion getLatestRecordVersion()
+		throws PortalException, SystemException {
+
+		return DDLRecordLocalServiceUtil.getLatestRecordVersion(getRecordId());
 	}
 
 	public DDLRecordSet getRecordSet() throws PortalException, SystemException {

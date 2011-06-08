@@ -18,6 +18,8 @@
 		<column name="companyId" type="long" />
 		<column name="userId" type="long" />
 		<column name="userName" type="String" />
+		<column name="versionUserId" type="long" />
+		<column name="versionUserName" type="String" />
 		<column name="createDate" type="Date" />
 		<column name="modifiedDate" type="Date" />
 
@@ -27,6 +29,44 @@
 		<column name="classPK" type="long" />
 		<column name="recordSetId" type="long" />
 		<column name="displayIndex" type="int" />
+		<column name="version" type="String" />
+
+		<!-- Finder methods -->
+
+		<finder name="RecordSetId" return-type="Collection">
+			<finder-column name="recordSetId" />
+		</finder>
+
+		<!-- References -->
+
+		<reference package-path="com.liferay.portlet.asset" entity="AssetEntry" />
+		<reference package-path="com.liferay.portal" entity="WorkflowInstanceLink" />
+	</entity>
+	<entity name="DDLRecordVersion" local-service="false" remote-service="false">
+
+		<!-- PK fields -->
+
+		<column name="recordVersionId" type="long" primary="true" />
+
+		<!-- Group instance -->
+
+		<column name="groupId" type="long" />
+
+		<!-- Audit fields -->
+
+		<column name="companyId" type="long" />
+		<column name="userId" type="long" />
+		<column name="userName" type="String" />
+		<column name="createDate" type="Date" />
+
+		<!-- Other fields -->
+
+		<column name="recordId" type="long" />
+		<column name="recordSetId" type="long" />
+		<column name="classNameId" type="long" />
+		<column name="classPK" type="long" />
+		<column name="displayIndex" type="int" />
+		<column name="version" type="String" />
 		<column name="status" type="int" />
 		<column name="statusByUserId" type="long" />
 		<column name="statusByUserName" type="String" />
@@ -34,18 +74,17 @@
 
 		<!-- Finder methods -->
 
-		<finder name="RecordSetId" return-type="Collection">
-			<finder-column name="recordSetId" />
+		<finder name="RecordId" return-type="Collection">
+			<finder-column name="recordId" />
+		</finder>
+		<finder name="R_V" return-type="Collection" unique="true">
+			<finder-column name="recordId" />
+			<finder-column name="version" />
 		</finder>
 		<finder name="R_S" return-type="Collection">
-			<finder-column name="recordSetId" />
+			<finder-column name="recordId" />
 			<finder-column name="status" />
 		</finder>
-
-		<!-- References -->
-
-		<reference package-path="com.liferay.portlet.asset" entity="AssetEntry" />
-		<reference package-path="com.liferay.portal" entity="WorkflowInstanceLink" />
 	</entity>
 	<entity name="DDLRecordSet" uuid="true" local-service="true" remote-service="true">
 

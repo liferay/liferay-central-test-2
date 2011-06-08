@@ -133,6 +133,8 @@ public class EditRecordAction extends PortletAction {
 		long recordId = ParamUtil.getLong(actionRequest, "recordId");
 
 		long recordSetId = ParamUtil.getLong(actionRequest, "recordSetId");
+		boolean majorVersion = ParamUtil.getBoolean(
+			actionRequest, "majorVersion");
 
 		DDLRecordSet recordSet = DDLRecordSetLocalServiceUtil.getRecordSet(
 			recordSetId);
@@ -168,7 +170,7 @@ public class EditRecordAction extends PortletAction {
 		else {
 			record = DDLRecordServiceUtil.updateRecord(
 				recordId, fields, DDLConstants.DISPLAY_INDEX_DEFAULT, false,
-				serviceContext);
+				majorVersion, serviceContext);
 		}
 
 		return record;

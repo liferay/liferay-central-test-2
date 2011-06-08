@@ -27,6 +27,12 @@ long recordId = BeanParamUtil.getLong(record, request, "recordId");
 long recordSetId = BeanParamUtil.getLong(record, request, "recordSetId");
 
 long detailDDMTemplateId = ParamUtil.getLong(request, "detailDDMTemplateId");
+
+DDLRecordVersion recordVersion = null;
+
+if (record != null) {
+	recordVersion = record.getLatestRecordVersion();
+}
 %>
 
 <liferay-ui:header
@@ -77,8 +83,8 @@ long detailDDMTemplateId = ParamUtil.getLong(request, "detailDDMTemplateId");
 		<%
 		boolean pending = false;
 
-		if (record != null) {
-			pending = record.isPending();
+		if (recordVersion != null) {
+			pending = recordVersion.isPending();
 		}
 		%>
 
@@ -93,7 +99,7 @@ long detailDDMTemplateId = ParamUtil.getLong(request, "detailDDMTemplateId");
 			<%
 			String saveButtonLabel = "save";
 
-			if ((record == null) || record.isDraft() || record.isApproved()) {
+			if ((recordVersion == null) || recordVersion.isDraft() || recordVersion.isApproved()) {
 				saveButtonLabel = "save-as-draft";
 			}
 

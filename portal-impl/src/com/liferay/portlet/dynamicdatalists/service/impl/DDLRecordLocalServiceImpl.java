@@ -18,16 +18,24 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
+import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.kernel.workflow.WorkflowHandlerRegistryUtil;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextUtil;
+import com.liferay.portlet.documentlibrary.util.DLUtil;
+import com.liferay.portlet.dynamicdatalists.NoSuchRecordVersionException;
 import com.liferay.portlet.dynamicdatalists.model.DDLRecord;
+import com.liferay.portlet.dynamicdatalists.model.DDLRecordConstants;
 import com.liferay.portlet.dynamicdatalists.model.DDLRecordSet;
+import com.liferay.portlet.dynamicdatalists.model.DDLRecordVersion;
 import com.liferay.portlet.dynamicdatalists.service.base.DDLRecordLocalServiceBaseImpl;
+import com.liferay.portlet.dynamicdatalists.util.comparator.DDLRecordVersionVersionComparator;
 import com.liferay.portlet.dynamicdatamapping.model.DDMStructure;
 import com.liferay.portlet.dynamicdatamapping.storage.Field;
 import com.liferay.portlet.dynamicdatamapping.storage.Fields;
@@ -35,6 +43,7 @@ import com.liferay.portlet.dynamicdatamapping.storage.StorageEngineUtil;
 
 import java.io.Serializable;
 
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -69,6 +78,8 @@ public class DDLRecordLocalServiceImpl
 		record.setCompanyId(user.getCompanyId());
 		record.setUserId(user.getUserId());
 		record.setUserName(user.getFullName());
+		record.setVersionUserId(user.getUserId());
+		record.setVersionUserName(user.getFullName());
 		record.setCreateDate(serviceContext.getCreateDate(now));
 		record.setModifiedDate(serviceContext.getModifiedDate(now));
 
@@ -84,17 +95,25 @@ public class DDLRecordLocalServiceImpl
 
 		record.setRecordSetId(recordSetId);
 		record.setDisplayIndex(displayIndex);
-		record.setStatus(WorkflowConstants.STATUS_DRAFT);
-		record.setStatusDate(serviceContext.getModifiedDate(now));
+		record.setVersion(DDLRecordConstants.DEFAULT_VERSION);
 
 		ddlRecordPersistence.update(record, false);
+
+		// Record version
+
+		DDLRecordVersion recordVersion = addRecordVersion(
+			user, record, serviceContext.getModifiedDate(now),
+			recordSetId, ddmStructure.getClassNameId(), classPK, displayIndex,
+			DDLRecordConstants.DEFAULT_VERSION, WorkflowConstants.STATUS_DRAFT,
+			serviceContext);
 
 		// Asset
 
 		Locale locale = ServiceContextUtil.getLocale(serviceContext);
 
 		updateAsset(
-			userId, record, locale, serviceContext.getAssetCategoryIds(),
+			userId, record, recordVersion, locale,
+			serviceContext.getAssetCategoryIds(),
 			serviceContext.getAssetTagNames());
 
 		// Workflow
@@ -125,9 +144,18 @@ public class DDLRecordLocalServiceImpl
 
 		ddlRecordPersistence.remove(record);
 
-		// Dynamic data mapping storage
+		// Record Versions
 
-		StorageEngineUtil.deleteByClass(record.getClassPK());
+		List<DDLRecordVersion> recordVersions =
+			ddlRecordVersionPersistence.findByRecordId(record.getRecordId());
+
+		for (DDLRecordVersion recordVersion : recordVersions) {
+			ddlRecordVersionPersistence.remove(recordVersion);
+
+			// Dynamic data mapping storage
+
+			StorageEngineUtil.deleteByClass(recordVersion.getClassPK());
+		}
 
 		// Workflow
 
@@ -156,6 +184,24 @@ public class DDLRecordLocalServiceImpl
 		}
 	}
 
+	public DDLRecordVersion getLatestRecordVersion(long recordId)
+		throws PortalException, SystemException {
+
+		List<DDLRecordVersion> recordVersions =
+			ddlRecordVersionPersistence.findByRecordId(recordId);
+
+		if (recordVersions.isEmpty()) {
+			throw new NoSuchRecordVersionException();
+		}
+
+		recordVersions = ListUtil.copy(recordVersions);
+
+		Collections.sort(
+			recordVersions, new DDLRecordVersionVersionComparator());
+
+		return recordVersions.get(0);
+	}
+
 	public DDLRecord getRecord(long recordId)
 		throws PortalException, SystemException {
 
@@ -173,36 +219,42 @@ public class DDLRecordLocalServiceImpl
 			OrderByComparator orderByComparator)
 		throws SystemException {
 
-		if (status == WorkflowConstants.STATUS_ANY) {
-			return ddlRecordPersistence.findByRecordSetId(
-				recordSetId, start, end, orderByComparator);
-		}
-		else {
-			return ddlRecordPersistence.findByR_S(
-				recordSetId, status, start, end, orderByComparator);
-		}
+		return ddlRecordFinder.findByR_S(
+			recordSetId, status, start, end, orderByComparator);
 	}
 
 	public int getRecordsCount(long recordSetId, int status)
 		throws SystemException {
 
-		if (status == WorkflowConstants.STATUS_ANY) {
-			return ddlRecordPersistence.countByRecordSetId(recordSetId);
-		}
-		else {
-			return ddlRecordPersistence.countByR_S(recordSetId, status);
-		}
+		return ddlRecordFinder.countByR_S(recordSetId, status);
 	}
 
 	public void updateAsset(
-			long userId, DDLRecord record, Locale locale,
-			long[] assetCategoryIds, String[] assetTagNames)
+			long userId, DDLRecord record, DDLRecordVersion recordVersion,
+			Locale locale, long[] assetCategoryIds, String[] assetTagNames)
 		throws PortalException, SystemException {
+
+		boolean addDraftAssetEntry = false;
+
+		if ((recordVersion != null) && !recordVersion.isApproved()) {
+			String version = recordVersion.getVersion();
+
+			if (!version.equals(DDLRecordConstants.DEFAULT_VERSION)) {
+				int approvedRecordsCount =
+					ddlRecordVersionPersistence.countByR_S(
+						record.getRecordId(),
+						WorkflowConstants.STATUS_APPROVED);
+
+				if (approvedRecordsCount > 0) {
+					addDraftAssetEntry = true;
+				}
+			}
+		}
 
 		boolean visible = false;
 
-		if (record.getStatus() == WorkflowConstants.STATUS_APPROVED) {
-			visible = true;
+		if ((recordVersion != null) && !recordVersion.isApproved()) {
+			visible = false;
 		}
 
 		DDLRecordSet recordSet = record.getRecordSet();
@@ -210,38 +262,66 @@ public class DDLRecordLocalServiceImpl
 		String title = LanguageUtil.format(
 			locale, "new-record-for-list-x", recordSet.getName(locale));
 
-		assetEntryLocalService.updateEntry(
-			userId, record.getGroupId(), DDLRecord.class.getName(),
-			record.getRecordId(), record.getUuid(), assetCategoryIds,
-			assetTagNames, visible, null, null, null, null,
-			ContentTypes.TEXT_HTML, title, null, StringPool.BLANK, null, null,
-			0, 0, null, false);
+		if (addDraftAssetEntry) {
+			assetEntryLocalService.updateEntry(
+				userId, record.getGroupId(), DDLRecordConstants.getClassName(),
+				recordVersion.getRecordVersionId(), record.getUuid(),
+				assetCategoryIds, assetTagNames, false, null, null, null, null,
+				ContentTypes.TEXT_HTML, title, null, StringPool.BLANK, null,
+				null, 0, 0, null, false);
+		}
+		else {
+			assetEntryLocalService.updateEntry(
+				userId, record.getGroupId(), DDLRecordConstants.getClassName(),
+				record.getRecordId(), record.getUuid(), assetCategoryIds,
+				assetTagNames, visible, null, null, null, null,
+				ContentTypes.TEXT_HTML, title, null, StringPool.BLANK, null,
+				null, 0, 0, null, false);
+		}
 	}
 
 	public DDLRecord updateRecord(
 			long userId, long recordId, Fields fields, int displayIndex,
-			boolean mergeFields, ServiceContext serviceContext)
+			boolean mergeFields, boolean majorVersion,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
-
-		// Record
 
 		User user = userPersistence.findByPrimaryKey(userId);
 
 		DDLRecord record = ddlRecordPersistence.findByPrimaryKey(recordId);
 
-		record.setModifiedDate(serviceContext.getModifiedDate(null));
-		record.setDisplayIndex(displayIndex);
+		DDLRecordVersion recordVersion = record.getLatestRecordVersion();
 
-		if (!record.isPending()) {
-			record.setStatus(WorkflowConstants.STATUS_DRAFT);
+		String version = null;
+
+		if (recordVersion.isApproved()) {
+			DDLRecordSet recordSet = record.getRecordSet();
+
+			long classPK = StorageEngineUtil.create(
+				recordSet.getCompanyId(), recordSet.getDDMStructureId(), fields,
+				serviceContext);
+
+			version = getNextVersion(
+				record, majorVersion, serviceContext.getWorkflowAction());
+
+			addRecordVersion(
+				user, record, serviceContext.getModifiedDate(null),
+				record.getRecordSetId(), record.getClassNameId(), classPK,
+				displayIndex, version, WorkflowConstants.STATUS_DRAFT,
+				serviceContext);
 		}
+		else {
+			StorageEngineUtil.update(
+				recordVersion.getClassPK(), fields, mergeFields,
+				serviceContext);
 
-		ddlRecordPersistence.update(record, false);
+			version = recordVersion.getVersion();
 
-		// Dynamic data mapping storage
-
-		StorageEngineUtil.update(
-			record.getClassPK(), fields, mergeFields, serviceContext);
+			updateRecordVersion(
+				user, recordVersion, displayIndex, fields, mergeFields, version,
+				recordVersion.getStatus(), serviceContext.getModifiedDate(null),
+				serviceContext);
+		}
 
 		// Workflow
 
@@ -262,7 +342,7 @@ public class DDLRecordLocalServiceImpl
 		Fields fields = toFields(fieldsMap);
 
 		return updateRecord(
-			userId, recordId, fields, displayIndex, mergeFields,
+			userId, recordId, fields, displayIndex, mergeFields, false,
 			serviceContext);
 	}
 
@@ -271,18 +351,143 @@ public class DDLRecordLocalServiceImpl
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
+		// Record
+
 		User user = userPersistence.findByPrimaryKey(userId);
-		Date now = new Date();
 
 		DDLRecord record = ddlRecordPersistence.findByPrimaryKey(recordId);
 
-		record.setModifiedDate(serviceContext.getModifiedDate(now));
-		record.setStatus(status);
-		record.setStatusByUserId(user.getUserId());
-		record.setStatusByUserName(user.getFullName());
-		record.setStatusDate(serviceContext.getModifiedDate(now));
+		// Record version
 
-		return ddlRecordPersistence.update(record, false);
+		DDLRecordVersion latestRecordVersion = getLatestRecordVersion(
+			record.getRecordId());
+
+		latestRecordVersion.setStatus(status);
+		latestRecordVersion.setStatusByUserId(user.getUserId());
+		latestRecordVersion.setStatusByUserName(user.getFullName());
+		latestRecordVersion.setStatusDate(new Date());
+
+		ddlRecordVersionPersistence.update(latestRecordVersion, false);
+
+		if (status == WorkflowConstants.STATUS_APPROVED) {
+			if (DLUtil.compareVersions(
+					record.getVersion(),
+					latestRecordVersion.getVersion()) <= 0) {
+
+				record.setClassNameId(latestRecordVersion.getClassNameId());
+				record.setClassPK(latestRecordVersion.getClassPK());
+				record.setVersion(latestRecordVersion.getVersion());
+				record.setRecordSetId(latestRecordVersion.getRecordSetId());
+				record.setDisplayIndex(latestRecordVersion.getDisplayIndex());
+				record.setVersion(latestRecordVersion.getVersion());
+				record.setVersionUserId(latestRecordVersion.getUserId());
+				record.setVersionUserName(latestRecordVersion.getUserName());
+				record.setModifiedDate(latestRecordVersion.getCreateDate());
+
+				ddlRecordPersistence.update(record, false);
+			}
+		}
+		else {
+			if (record.getVersion().equals(
+					latestRecordVersion.getVersion())) {
+
+				String newVersion = DDLRecordConstants.DEFAULT_VERSION;
+
+				List<DDLRecordVersion> approvedRecordVersions =
+					ddlRecordVersionPersistence.findByR_S(
+						record.getRecordId(),
+						WorkflowConstants.STATUS_APPROVED);
+
+				if (!approvedRecordVersions.isEmpty()) {
+					newVersion = approvedRecordVersions.get(0).getVersion();
+				}
+
+				record.setVersion(newVersion);
+
+				ddlRecordPersistence.update(record, false);
+			}
+		}
+
+		return record;
+	}
+
+	protected DDLRecordVersion addRecordVersion(
+			User user, DDLRecord record, Date modifiedDate, long recordSetId,
+			long classNameId, long classPK, int displayIndex, String version,
+			int status, ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		long recordVersionId = counterLocalService.increment();
+
+		DDLRecordVersion recordVersion = ddlRecordVersionPersistence.create(
+			recordVersionId);
+
+		long versionUserId = record.getVersionUserId();
+
+		if (versionUserId <= 0) {
+			versionUserId = record.getUserId();
+		}
+
+		String versionUserName = GetterUtil.getString(
+			record.getVersionUserName(), record.getUserName());
+
+		recordVersion.setGroupId(record.getGroupId());
+		recordVersion.setCompanyId(record.getCompanyId());
+		recordVersion.setUserId(versionUserId);
+		recordVersion.setUserName(versionUserName);
+		recordVersion.setCreateDate(modifiedDate);
+		recordVersion.setRecordId(record.getRecordId());
+		recordVersion.setRecordSetId(recordSetId);
+		recordVersion.setClassNameId(classNameId);
+		recordVersion.setClassPK(classPK);
+		recordVersion.setDisplayIndex(displayIndex);
+		recordVersion.setVersion(version);
+		recordVersion.setStatus(status);
+		recordVersion.setStatusByUserId(user.getUserId());
+		recordVersion.setStatusByUserName(user.getFullName());
+		recordVersion.setStatusDate(record.getModifiedDate());
+
+		ddlRecordVersionPersistence.update(recordVersion, false);
+
+		return recordVersion;
+	}
+
+	protected String getNextVersion(
+			DDLRecord record, boolean majorVersion, int workflowAction)
+		throws PortalException, SystemException {
+
+		if (workflowAction == WorkflowConstants.ACTION_SAVE_DRAFT) {
+			majorVersion = false;
+		}
+
+		int[] versionParts = StringUtil.split(
+			record.getVersion(), StringPool.PERIOD, 0);
+
+		if (majorVersion) {
+			versionParts[0]++;
+			versionParts[1] = 0;
+		}
+		else {
+			versionParts[1]++;
+		}
+
+		return versionParts[0] + StringPool.PERIOD + versionParts[1];
+	}
+
+	protected void updateRecordVersion(
+			User user, DDLRecordVersion recordVersion, int displayIndex,
+			Fields fields, boolean mergeFields, String version, int status,
+			Date statusDate, ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		recordVersion.setDisplayIndex(displayIndex);
+		recordVersion.setVersion(version);
+		recordVersion.setStatus(status);
+		recordVersion.setStatusByUserId(user.getUserId());
+		recordVersion.setStatusByUserName(user.getFullName());
+		recordVersion.setStatusDate(statusDate);
+
+		ddlRecordVersionPersistence.update(recordVersion, false);
 	}
 
 	protected Fields toFields(Map<String, Serializable> fieldsMap) {
