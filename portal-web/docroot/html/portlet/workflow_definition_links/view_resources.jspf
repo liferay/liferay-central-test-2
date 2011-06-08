@@ -31,6 +31,8 @@ else {
 Iterator<WorkflowHandler> itr = workflowHandlers.iterator();
 
 while (itr.hasNext()) {
+	WorkflowHandler workflowHandler = itr.next();
+
 	if (!workflowHandler.isVisible()) {
 		itr.remove();
 	}
