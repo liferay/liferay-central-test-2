@@ -56,8 +56,8 @@ import com.liferay.portlet.dynamicdatalists.service.DDLRecordServiceUtil;
 public class DDLRecordServiceHttp {
 	public static com.liferay.portlet.dynamicdatalists.model.DDLRecord addRecord(
 		HttpPrincipal httpPrincipal, long groupId, long recordSetId,
-		com.liferay.portlet.dynamicdatamapping.storage.Fields fields,
 		int displayIndex,
+		com.liferay.portlet.dynamicdatamapping.storage.Fields fields,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -66,7 +66,7 @@ public class DDLRecordServiceHttp {
 					"addRecord", _addRecordParameterTypes0);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
-					recordSetId, fields, displayIndex, serviceContext);
+					recordSetId, displayIndex, fields, serviceContext);
 
 			Object returnObj = null;
 
@@ -96,8 +96,8 @@ public class DDLRecordServiceHttp {
 
 	public static com.liferay.portlet.dynamicdatalists.model.DDLRecord addRecord(
 		HttpPrincipal httpPrincipal, long groupId, long recordSetId,
-		java.util.Map<java.lang.String, java.io.Serializable> fieldsMap,
 		int displayIndex,
+		java.util.Map<java.lang.String, java.io.Serializable> fieldsMap,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -106,7 +106,7 @@ public class DDLRecordServiceHttp {
 					"addRecord", _addRecordParameterTypes1);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
-					recordSetId, fieldsMap, displayIndex, serviceContext);
+					recordSetId, displayIndex, fieldsMap, serviceContext);
 
 			Object returnObj = null;
 
@@ -135,9 +135,10 @@ public class DDLRecordServiceHttp {
 	}
 
 	public static com.liferay.portlet.dynamicdatalists.model.DDLRecord updateRecord(
-		HttpPrincipal httpPrincipal, long recordId,
+		HttpPrincipal httpPrincipal, long recordId, boolean majorVersion,
+		int displayIndex,
 		com.liferay.portlet.dynamicdatamapping.storage.Fields fields,
-		int displayIndex, boolean merge, boolean majorVersion,
+		boolean mergeFields,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -146,7 +147,7 @@ public class DDLRecordServiceHttp {
 					"updateRecord", _updateRecordParameterTypes2);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
-					recordId, fields, displayIndex, merge, majorVersion,
+					recordId, majorVersion, displayIndex, fields, mergeFields,
 					serviceContext);
 
 			Object returnObj = null;
@@ -176,9 +177,9 @@ public class DDLRecordServiceHttp {
 	}
 
 	public static com.liferay.portlet.dynamicdatalists.model.DDLRecord updateRecord(
-		HttpPrincipal httpPrincipal, long recordId,
+		HttpPrincipal httpPrincipal, long recordId, int displayIndex,
 		java.util.Map<java.lang.String, java.io.Serializable> fieldsMap,
-		int displayIndex, boolean merge,
+		boolean mergeFields,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -187,7 +188,8 @@ public class DDLRecordServiceHttp {
 					"updateRecord", _updateRecordParameterTypes3);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
-					recordId, fieldsMap, displayIndex, merge, serviceContext);
+					recordId, displayIndex, fieldsMap, mergeFields,
+					serviceContext);
 
 			Object returnObj = null;
 
@@ -217,22 +219,21 @@ public class DDLRecordServiceHttp {
 
 	private static Log _log = LogFactoryUtil.getLog(DDLRecordServiceHttp.class);
 	private static final Class<?>[] _addRecordParameterTypes0 = new Class[] {
-			long.class, long.class,
+			long.class, long.class, int.class,
 			com.liferay.portlet.dynamicdatamapping.storage.Fields.class,
-			int.class, com.liferay.portal.service.ServiceContext.class
+			com.liferay.portal.service.ServiceContext.class
 		};
 	private static final Class<?>[] _addRecordParameterTypes1 = new Class[] {
-			long.class, long.class, java.util.Map.class, int.class,
+			long.class, long.class, int.class, java.util.Map.class,
 			com.liferay.portal.service.ServiceContext.class
 		};
 	private static final Class<?>[] _updateRecordParameterTypes2 = new Class[] {
-			long.class,
+			long.class, boolean.class, int.class,
 			com.liferay.portlet.dynamicdatamapping.storage.Fields.class,
-			int.class, boolean.class, boolean.class,
-			com.liferay.portal.service.ServiceContext.class
+			boolean.class, com.liferay.portal.service.ServiceContext.class
 		};
 	private static final Class<?>[] _updateRecordParameterTypes3 = new Class[] {
-			long.class, java.util.Map.class, int.class, boolean.class,
+			long.class, int.class, java.util.Map.class, boolean.class,
 			com.liferay.portal.service.ServiceContext.class
 		};
 }

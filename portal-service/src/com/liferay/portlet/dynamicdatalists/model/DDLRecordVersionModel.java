@@ -163,34 +163,6 @@ public interface DDLRecordVersionModel extends AttachedModel,
 	public void setCreateDate(Date createDate);
 
 	/**
-	 * Returns the record ID of this d d l record version.
-	 *
-	 * @return the record ID of this d d l record version
-	 */
-	public long getRecordId();
-
-	/**
-	 * Sets the record ID of this d d l record version.
-	 *
-	 * @param recordId the record ID of this d d l record version
-	 */
-	public void setRecordId(long recordId);
-
-	/**
-	 * Returns the record set ID of this d d l record version.
-	 *
-	 * @return the record set ID of this d d l record version
-	 */
-	public long getRecordSetId();
-
-	/**
-	 * Sets the record set ID of this d d l record version.
-	 *
-	 * @param recordSetId the record set ID of this d d l record version
-	 */
-	public void setRecordSetId(long recordSetId);
-
-	/**
 	 * Returns the fully qualified class name of this d d l record version.
 	 *
 	 * @return the fully qualified class name of this d d l record version
@@ -226,18 +198,32 @@ public interface DDLRecordVersionModel extends AttachedModel,
 	public void setClassPK(long classPK);
 
 	/**
-	 * Returns the display index of this d d l record version.
+	 * Returns the record set ID of this d d l record version.
 	 *
-	 * @return the display index of this d d l record version
+	 * @return the record set ID of this d d l record version
 	 */
-	public int getDisplayIndex();
+	public long getRecordSetId();
 
 	/**
-	 * Sets the display index of this d d l record version.
+	 * Sets the record set ID of this d d l record version.
 	 *
-	 * @param displayIndex the display index of this d d l record version
+	 * @param recordSetId the record set ID of this d d l record version
 	 */
-	public void setDisplayIndex(int displayIndex);
+	public void setRecordSetId(long recordSetId);
+
+	/**
+	 * Returns the record ID of this d d l record version.
+	 *
+	 * @return the record ID of this d d l record version
+	 */
+	public long getRecordId();
+
+	/**
+	 * Sets the record ID of this d d l record version.
+	 *
+	 * @param recordId the record ID of this d d l record version
+	 */
+	public void setRecordId(long recordId);
 
 	/**
 	 * Returns the version of this d d l record version.
@@ -253,6 +239,20 @@ public interface DDLRecordVersionModel extends AttachedModel,
 	 * @param version the version of this d d l record version
 	 */
 	public void setVersion(String version);
+
+	/**
+	 * Returns the display index of this d d l record version.
+	 *
+	 * @return the display index of this d d l record version
+	 */
+	public int getDisplayIndex();
+
+	/**
+	 * Sets the display index of this d d l record version.
+	 *
+	 * @param displayIndex the display index of this d d l record version
+	 */
+	public void setDisplayIndex(int displayIndex);
 
 	/**
 	 * Returns the status of this d d l record version.

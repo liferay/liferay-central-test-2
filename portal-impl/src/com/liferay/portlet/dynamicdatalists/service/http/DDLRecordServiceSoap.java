@@ -66,14 +66,13 @@ import java.rmi.RemoteException;
  */
 public class DDLRecordServiceSoap {
 	public static com.liferay.portlet.dynamicdatalists.model.DDLRecordSoap addRecord(
-		long groupId, long recordSetId,
+		long groupId, long recordSetId, int displayIndex,
 		com.liferay.portlet.dynamicdatamapping.storage.Fields fields,
-		int displayIndex,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
 			com.liferay.portlet.dynamicdatalists.model.DDLRecord returnValue = DDLRecordServiceUtil.addRecord(groupId,
-					recordSetId, fields, displayIndex, serviceContext);
+					recordSetId, displayIndex, fields, serviceContext);
 
 			return com.liferay.portlet.dynamicdatalists.model.DDLRecordSoap.toSoapModel(returnValue);
 		}
@@ -85,14 +84,15 @@ public class DDLRecordServiceSoap {
 	}
 
 	public static com.liferay.portlet.dynamicdatalists.model.DDLRecordSoap updateRecord(
-		long recordId,
+		long recordId, boolean majorVersion, int displayIndex,
 		com.liferay.portlet.dynamicdatamapping.storage.Fields fields,
-		int displayIndex, boolean merge, boolean majorVersion,
+		boolean mergeFields,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
 			com.liferay.portlet.dynamicdatalists.model.DDLRecord returnValue = DDLRecordServiceUtil.updateRecord(recordId,
-					fields, displayIndex, merge, majorVersion, serviceContext);
+					majorVersion, displayIndex, fields, mergeFields,
+					serviceContext);
 
 			return com.liferay.portlet.dynamicdatalists.model.DDLRecordSoap.toSoapModel(returnValue);
 		}

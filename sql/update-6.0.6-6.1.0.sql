@@ -37,8 +37,8 @@ create table DDLRecord (
 	classNameId LONG,
 	classPK LONG,
 	recordSetId LONG,
-	displayIndex INTEGER,
-	version VARCHAR(75) null
+	version VARCHAR(75) null,
+	displayIndex INTEGER
 );
 
 create table DDLRecordSet (

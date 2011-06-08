@@ -76,10 +76,10 @@ public class DDLRecordModelImpl extends BaseModelImpl<DDLRecord>
 			{ "classNameId", Types.BIGINT },
 			{ "classPK", Types.BIGINT },
 			{ "recordSetId", Types.BIGINT },
-			{ "displayIndex", Types.INTEGER },
-			{ "version", Types.VARCHAR }
+			{ "version", Types.VARCHAR },
+			{ "displayIndex", Types.INTEGER }
 		};
-	public static final String TABLE_SQL_CREATE = "create table DDLRecord (uuid_ VARCHAR(75) null,recordId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,versionUserId LONG,versionUserName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,classNameId LONG,classPK LONG,recordSetId LONG,displayIndex INTEGER,version VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table DDLRecord (uuid_ VARCHAR(75) null,recordId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,versionUserId LONG,versionUserName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,classNameId LONG,classPK LONG,recordSetId LONG,version VARCHAR(75) null,displayIndex INTEGER)";
 	public static final String TABLE_SQL_DROP = "drop table DDLRecord";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
@@ -113,8 +113,8 @@ public class DDLRecordModelImpl extends BaseModelImpl<DDLRecord>
 		model.setClassNameId(soapModel.getClassNameId());
 		model.setClassPK(soapModel.getClassPK());
 		model.setRecordSetId(soapModel.getRecordSetId());
-		model.setDisplayIndex(soapModel.getDisplayIndex());
 		model.setVersion(soapModel.getVersion());
+		model.setDisplayIndex(soapModel.getDisplayIndex());
 
 		return model;
 	}
@@ -341,15 +341,6 @@ public class DDLRecordModelImpl extends BaseModelImpl<DDLRecord>
 	}
 
 	@JSON
-	public int getDisplayIndex() {
-		return _displayIndex;
-	}
-
-	public void setDisplayIndex(int displayIndex) {
-		_displayIndex = displayIndex;
-	}
-
-	@JSON
 	public String getVersion() {
 		if (_version == null) {
 			return StringPool.BLANK;
@@ -361,6 +352,15 @@ public class DDLRecordModelImpl extends BaseModelImpl<DDLRecord>
 
 	public void setVersion(String version) {
 		_version = version;
+	}
+
+	@JSON
+	public int getDisplayIndex() {
+		return _displayIndex;
+	}
+
+	public void setDisplayIndex(int displayIndex) {
+		_displayIndex = displayIndex;
 	}
 
 	public DDLRecord toEscapedModel() {
@@ -402,8 +402,8 @@ public class DDLRecordModelImpl extends BaseModelImpl<DDLRecord>
 		ddlRecordImpl.setClassNameId(getClassNameId());
 		ddlRecordImpl.setClassPK(getClassPK());
 		ddlRecordImpl.setRecordSetId(getRecordSetId());
-		ddlRecordImpl.setDisplayIndex(getDisplayIndex());
 		ddlRecordImpl.setVersion(getVersion());
+		ddlRecordImpl.setDisplayIndex(getDisplayIndex());
 
 		ddlRecordImpl.resetOriginalValues();
 
@@ -491,10 +491,10 @@ public class DDLRecordModelImpl extends BaseModelImpl<DDLRecord>
 		sb.append(getClassPK());
 		sb.append(", recordSetId=");
 		sb.append(getRecordSetId());
-		sb.append(", displayIndex=");
-		sb.append(getDisplayIndex());
 		sb.append(", version=");
 		sb.append(getVersion());
+		sb.append(", displayIndex=");
+		sb.append(getDisplayIndex());
 		sb.append("}");
 
 		return sb.toString();
@@ -560,12 +560,12 @@ public class DDLRecordModelImpl extends BaseModelImpl<DDLRecord>
 		sb.append(getRecordSetId());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>displayIndex</column-name><column-value><![CDATA[");
-		sb.append(getDisplayIndex());
-		sb.append("]]></column-value></column>");
-		sb.append(
 			"<column><column-name>version</column-name><column-value><![CDATA[");
 		sb.append(getVersion());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>displayIndex</column-name><column-value><![CDATA[");
+		sb.append(getDisplayIndex());
 		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
@@ -591,7 +591,7 @@ public class DDLRecordModelImpl extends BaseModelImpl<DDLRecord>
 	private long _classNameId;
 	private long _classPK;
 	private long _recordSetId;
-	private int _displayIndex;
 	private String _version;
+	private int _displayIndex;
 	private transient ExpandoBridge _expandoBridge;
 }

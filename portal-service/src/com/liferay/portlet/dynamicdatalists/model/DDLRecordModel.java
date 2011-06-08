@@ -285,20 +285,6 @@ public interface DDLRecordModel extends AttachedModel, BaseModel<DDLRecord>,
 	public void setRecordSetId(long recordSetId);
 
 	/**
-	 * Returns the display index of this d d l record.
-	 *
-	 * @return the display index of this d d l record
-	 */
-	public int getDisplayIndex();
-
-	/**
-	 * Sets the display index of this d d l record.
-	 *
-	 * @param displayIndex the display index of this d d l record
-	 */
-	public void setDisplayIndex(int displayIndex);
-
-	/**
 	 * Returns the version of this d d l record.
 	 *
 	 * @return the version of this d d l record
@@ -312,6 +298,20 @@ public interface DDLRecordModel extends AttachedModel, BaseModel<DDLRecord>,
 	 * @param version the version of this d d l record
 	 */
 	public void setVersion(String version);
+
+	/**
+	 * Returns the display index of this d d l record.
+	 *
+	 * @return the display index of this d d l record
+	 */
+	public int getDisplayIndex();
+
+	/**
+	 * Sets the display index of this d d l record.
+	 *
+	 * @param displayIndex the display index of this d d l record
+	 */
+	public void setDisplayIndex(int displayIndex);
 
 	public boolean isNew();
 

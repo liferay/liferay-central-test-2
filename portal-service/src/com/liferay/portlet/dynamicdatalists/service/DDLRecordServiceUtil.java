@@ -38,51 +38,49 @@ public class DDLRecordServiceUtil {
 	 * Never modify this class directly. Add custom service methods to {@link com.liferay.portlet.dynamicdatalists.service.impl.DDLRecordServiceImpl} and rerun ServiceBuilder to regenerate this class.
 	 */
 	public static com.liferay.portlet.dynamicdatalists.model.DDLRecord addRecord(
-		long groupId, long recordSetId,
+		long groupId, long recordSetId, int displayIndex,
 		com.liferay.portlet.dynamicdatamapping.storage.Fields fields,
-		int displayIndex,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
-				   .addRecord(groupId, recordSetId, fields, displayIndex,
+				   .addRecord(groupId, recordSetId, displayIndex, fields,
 			serviceContext);
 	}
 
 	public static com.liferay.portlet.dynamicdatalists.model.DDLRecord addRecord(
-		long groupId, long recordSetId,
+		long groupId, long recordSetId, int displayIndex,
 		java.util.Map<java.lang.String, java.io.Serializable> fieldsMap,
-		int displayIndex,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
-				   .addRecord(groupId, recordSetId, fieldsMap, displayIndex,
+				   .addRecord(groupId, recordSetId, displayIndex, fieldsMap,
 			serviceContext);
 	}
 
 	public static com.liferay.portlet.dynamicdatalists.model.DDLRecord updateRecord(
-		long recordId,
+		long recordId, boolean majorVersion, int displayIndex,
 		com.liferay.portlet.dynamicdatamapping.storage.Fields fields,
-		int displayIndex, boolean merge, boolean majorVersion,
+		boolean mergeFields,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
-				   .updateRecord(recordId, fields, displayIndex, merge,
-			majorVersion, serviceContext);
+				   .updateRecord(recordId, majorVersion, displayIndex, fields,
+			mergeFields, serviceContext);
 	}
 
 	public static com.liferay.portlet.dynamicdatalists.model.DDLRecord updateRecord(
-		long recordId,
+		long recordId, int displayIndex,
 		java.util.Map<java.lang.String, java.io.Serializable> fieldsMap,
-		int displayIndex, boolean merge,
+		boolean mergeFields,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
-				   .updateRecord(recordId, fieldsMap, displayIndex, merge,
-			serviceContext);
+				   .updateRecord(recordId, displayIndex, fieldsMap,
+			mergeFields, serviceContext);
 	}
 
 	public static DDLRecordService getService() {

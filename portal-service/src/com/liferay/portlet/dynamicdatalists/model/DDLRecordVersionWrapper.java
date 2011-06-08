@@ -183,42 +183,6 @@ public class DDLRecordVersionWrapper implements DDLRecordVersion {
 	}
 
 	/**
-	* Returns the record ID of this d d l record version.
-	*
-	* @return the record ID of this d d l record version
-	*/
-	public long getRecordId() {
-		return _ddlRecordVersion.getRecordId();
-	}
-
-	/**
-	* Sets the record ID of this d d l record version.
-	*
-	* @param recordId the record ID of this d d l record version
-	*/
-	public void setRecordId(long recordId) {
-		_ddlRecordVersion.setRecordId(recordId);
-	}
-
-	/**
-	* Returns the record set ID of this d d l record version.
-	*
-	* @return the record set ID of this d d l record version
-	*/
-	public long getRecordSetId() {
-		return _ddlRecordVersion.getRecordSetId();
-	}
-
-	/**
-	* Sets the record set ID of this d d l record version.
-	*
-	* @param recordSetId the record set ID of this d d l record version
-	*/
-	public void setRecordSetId(long recordSetId) {
-		_ddlRecordVersion.setRecordSetId(recordSetId);
-	}
-
-	/**
 	* Returns the fully qualified class name of this d d l record version.
 	*
 	* @return the fully qualified class name of this d d l record version
@@ -264,21 +228,39 @@ public class DDLRecordVersionWrapper implements DDLRecordVersion {
 	}
 
 	/**
-	* Returns the display index of this d d l record version.
+	* Returns the record set ID of this d d l record version.
 	*
-	* @return the display index of this d d l record version
+	* @return the record set ID of this d d l record version
 	*/
-	public int getDisplayIndex() {
-		return _ddlRecordVersion.getDisplayIndex();
+	public long getRecordSetId() {
+		return _ddlRecordVersion.getRecordSetId();
 	}
 
 	/**
-	* Sets the display index of this d d l record version.
+	* Sets the record set ID of this d d l record version.
 	*
-	* @param displayIndex the display index of this d d l record version
+	* @param recordSetId the record set ID of this d d l record version
 	*/
-	public void setDisplayIndex(int displayIndex) {
-		_ddlRecordVersion.setDisplayIndex(displayIndex);
+	public void setRecordSetId(long recordSetId) {
+		_ddlRecordVersion.setRecordSetId(recordSetId);
+	}
+
+	/**
+	* Returns the record ID of this d d l record version.
+	*
+	* @return the record ID of this d d l record version
+	*/
+	public long getRecordId() {
+		return _ddlRecordVersion.getRecordId();
+	}
+
+	/**
+	* Sets the record ID of this d d l record version.
+	*
+	* @param recordId the record ID of this d d l record version
+	*/
+	public void setRecordId(long recordId) {
+		_ddlRecordVersion.setRecordId(recordId);
 	}
 
 	/**
@@ -297,6 +279,24 @@ public class DDLRecordVersionWrapper implements DDLRecordVersion {
 	*/
 	public void setVersion(java.lang.String version) {
 		_ddlRecordVersion.setVersion(version);
+	}
+
+	/**
+	* Returns the display index of this d d l record version.
+	*
+	* @return the display index of this d d l record version
+	*/
+	public int getDisplayIndex() {
+		return _ddlRecordVersion.getDisplayIndex();
+	}
+
+	/**
+	* Sets the display index of this d d l record version.
+	*
+	* @param displayIndex the display index of this d d l record version
+	*/
+	public void setDisplayIndex(int displayIndex) {
+		_ddlRecordVersion.setDisplayIndex(displayIndex);
 	}
 
 	/**

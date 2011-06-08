@@ -20,10 +20,13 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.util.Time;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
+import com.liferay.portal.util.PropsValues;
 
 import com.liferay.portlet.dynamicdatalists.NoSuchRecordVersionException;
 import com.liferay.portlet.dynamicdatalists.model.DDLRecordVersion;
+import com.liferay.portlet.dynamicdatalists.model.impl.DDLRecordVersionModelImpl;
 
 import java.util.List;
 
@@ -71,12 +74,12 @@ public class DDLRecordVersionPersistenceTest extends BasePersistenceTestCase {
 		newDDLRecordVersion.setUserId(nextLong());
 		newDDLRecordVersion.setUserName(randomString());
 		newDDLRecordVersion.setCreateDate(nextDate());
-		newDDLRecordVersion.setRecordId(nextLong());
-		newDDLRecordVersion.setRecordSetId(nextLong());
 		newDDLRecordVersion.setClassNameId(nextLong());
 		newDDLRecordVersion.setClassPK(nextLong());
-		newDDLRecordVersion.setDisplayIndex(nextInt());
+		newDDLRecordVersion.setRecordSetId(nextLong());
+		newDDLRecordVersion.setRecordId(nextLong());
 		newDDLRecordVersion.setVersion(randomString());
+		newDDLRecordVersion.setDisplayIndex(nextInt());
 		newDDLRecordVersion.setStatus(nextInt());
 		newDDLRecordVersion.setStatusByUserId(nextLong());
 		newDDLRecordVersion.setStatusByUserName(randomString());
@@ -99,18 +102,18 @@ public class DDLRecordVersionPersistenceTest extends BasePersistenceTestCase {
 		assertEquals(Time.getShortTimestamp(
 				existingDDLRecordVersion.getCreateDate()),
 			Time.getShortTimestamp(newDDLRecordVersion.getCreateDate()));
-		assertEquals(existingDDLRecordVersion.getRecordId(),
-			newDDLRecordVersion.getRecordId());
-		assertEquals(existingDDLRecordVersion.getRecordSetId(),
-			newDDLRecordVersion.getRecordSetId());
 		assertEquals(existingDDLRecordVersion.getClassNameId(),
 			newDDLRecordVersion.getClassNameId());
 		assertEquals(existingDDLRecordVersion.getClassPK(),
 			newDDLRecordVersion.getClassPK());
-		assertEquals(existingDDLRecordVersion.getDisplayIndex(),
-			newDDLRecordVersion.getDisplayIndex());
+		assertEquals(existingDDLRecordVersion.getRecordSetId(),
+			newDDLRecordVersion.getRecordSetId());
+		assertEquals(existingDDLRecordVersion.getRecordId(),
+			newDDLRecordVersion.getRecordId());
 		assertEquals(existingDDLRecordVersion.getVersion(),
 			newDDLRecordVersion.getVersion());
+		assertEquals(existingDDLRecordVersion.getDisplayIndex(),
+			newDDLRecordVersion.getDisplayIndex());
 		assertEquals(existingDDLRecordVersion.getStatus(),
 			newDDLRecordVersion.getStatus());
 		assertEquals(existingDDLRecordVersion.getStatusByUserId(),
@@ -228,6 +231,24 @@ public class DDLRecordVersionPersistenceTest extends BasePersistenceTestCase {
 		assertEquals(0, result.size());
 	}
 
+	public void testResetOriginalValues() throws Exception {
+		if (!PropsValues.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
+			return;
+		}
+
+		DDLRecordVersion newDDLRecordVersion = addDDLRecordVersion();
+
+		_persistence.clearCache();
+
+		DDLRecordVersionModelImpl existingDDLRecordVersionModelImpl = (DDLRecordVersionModelImpl)_persistence.findByPrimaryKey(newDDLRecordVersion.getPrimaryKey());
+
+		assertEquals(existingDDLRecordVersionModelImpl.getRecordId(),
+			existingDDLRecordVersionModelImpl.getOriginalRecordId());
+		assertTrue(Validator.equals(
+				existingDDLRecordVersionModelImpl.getVersion(),
+				existingDDLRecordVersionModelImpl.getOriginalVersion()));
+	}
+
 	protected DDLRecordVersion addDDLRecordVersion() throws Exception {
 		long pk = nextLong();
 
@@ -238,12 +259,12 @@ public class DDLRecordVersionPersistenceTest extends BasePersistenceTestCase {
 		ddlRecordVersion.setUserId(nextLong());
 		ddlRecordVersion.setUserName(randomString());
 		ddlRecordVersion.setCreateDate(nextDate());
-		ddlRecordVersion.setRecordId(nextLong());
-		ddlRecordVersion.setRecordSetId(nextLong());
 		ddlRecordVersion.setClassNameId(nextLong());
 		ddlRecordVersion.setClassPK(nextLong());
-		ddlRecordVersion.setDisplayIndex(nextInt());
+		ddlRecordVersion.setRecordSetId(nextLong());
+		ddlRecordVersion.setRecordId(nextLong());
 		ddlRecordVersion.setVersion(randomString());
+		ddlRecordVersion.setDisplayIndex(nextInt());
 		ddlRecordVersion.setStatus(nextInt());
 		ddlRecordVersion.setStatusByUserId(nextLong());
 		ddlRecordVersion.setStatusByUserName(randomString());

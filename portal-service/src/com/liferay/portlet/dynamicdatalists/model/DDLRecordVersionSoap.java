@@ -36,12 +36,12 @@ public class DDLRecordVersionSoap implements Serializable {
 		soapModel.setUserId(model.getUserId());
 		soapModel.setUserName(model.getUserName());
 		soapModel.setCreateDate(model.getCreateDate());
-		soapModel.setRecordId(model.getRecordId());
-		soapModel.setRecordSetId(model.getRecordSetId());
 		soapModel.setClassNameId(model.getClassNameId());
 		soapModel.setClassPK(model.getClassPK());
-		soapModel.setDisplayIndex(model.getDisplayIndex());
+		soapModel.setRecordSetId(model.getRecordSetId());
+		soapModel.setRecordId(model.getRecordId());
 		soapModel.setVersion(model.getVersion());
+		soapModel.setDisplayIndex(model.getDisplayIndex());
 		soapModel.setStatus(model.getStatus());
 		soapModel.setStatusByUserId(model.getStatusByUserId());
 		soapModel.setStatusByUserName(model.getStatusByUserName());
@@ -148,22 +148,6 @@ public class DDLRecordVersionSoap implements Serializable {
 		_createDate = createDate;
 	}
 
-	public long getRecordId() {
-		return _recordId;
-	}
-
-	public void setRecordId(long recordId) {
-		_recordId = recordId;
-	}
-
-	public long getRecordSetId() {
-		return _recordSetId;
-	}
-
-	public void setRecordSetId(long recordSetId) {
-		_recordSetId = recordSetId;
-	}
-
 	public long getClassNameId() {
 		return _classNameId;
 	}
@@ -180,12 +164,20 @@ public class DDLRecordVersionSoap implements Serializable {
 		_classPK = classPK;
 	}
 
-	public int getDisplayIndex() {
-		return _displayIndex;
+	public long getRecordSetId() {
+		return _recordSetId;
 	}
 
-	public void setDisplayIndex(int displayIndex) {
-		_displayIndex = displayIndex;
+	public void setRecordSetId(long recordSetId) {
+		_recordSetId = recordSetId;
+	}
+
+	public long getRecordId() {
+		return _recordId;
+	}
+
+	public void setRecordId(long recordId) {
+		_recordId = recordId;
 	}
 
 	public String getVersion() {
@@ -194,6 +186,14 @@ public class DDLRecordVersionSoap implements Serializable {
 
 	public void setVersion(String version) {
 		_version = version;
+	}
+
+	public int getDisplayIndex() {
+		return _displayIndex;
+	}
+
+	public void setDisplayIndex(int displayIndex) {
+		_displayIndex = displayIndex;
 	}
 
 	public int getStatus() {
@@ -234,12 +234,12 @@ public class DDLRecordVersionSoap implements Serializable {
 	private long _userId;
 	private String _userName;
 	private Date _createDate;
-	private long _recordId;
-	private long _recordSetId;
 	private long _classNameId;
 	private long _classPK;
-	private int _displayIndex;
+	private long _recordSetId;
+	private long _recordId;
 	private String _version;
+	private int _displayIndex;
 	private int _status;
 	private long _statusByUserId;
 	private String _statusByUserName;

@@ -265,27 +265,25 @@ public class DDLRecordLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.dynamicdatalists.model.DDLRecord addRecord(
-		long userId, long groupId, long recordSetId,
+		long userId, long groupId, long recordSetId, int displayIndex,
 		com.liferay.portlet.dynamicdatamapping.storage.Fields fields,
-		int displayIndex,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
-				   .addRecord(userId, groupId, recordSetId, fields,
-			displayIndex, serviceContext);
+				   .addRecord(userId, groupId, recordSetId, displayIndex,
+			fields, serviceContext);
 	}
 
 	public static com.liferay.portlet.dynamicdatalists.model.DDLRecord addRecord(
-		long userId, long groupId, long recordSetId,
+		long userId, long groupId, long recordSetId, int displayIndex,
 		java.util.Map<java.lang.String, java.io.Serializable> fieldsMap,
-		int displayIndex,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
-				   .addRecord(userId, groupId, recordSetId, fieldsMap,
-			displayIndex, serviceContext);
+				   .addRecord(userId, groupId, recordSetId, displayIndex,
+			fieldsMap, serviceContext);
 	}
 
 	public static void deleteRecord(
@@ -344,36 +342,36 @@ public class DDLRecordLocalServiceUtil {
 	public static void updateAsset(long userId,
 		com.liferay.portlet.dynamicdatalists.model.DDLRecord record,
 		com.liferay.portlet.dynamicdatalists.model.DDLRecordVersion recordVersion,
-		java.util.Locale locale, long[] assetCategoryIds,
-		java.lang.String[] assetTagNames)
+		long[] assetCategoryIds, java.lang.String[] assetTagNames,
+		java.util.Locale locale)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		getService()
-			.updateAsset(userId, record, recordVersion, locale,
-			assetCategoryIds, assetTagNames);
+			.updateAsset(userId, record, recordVersion, assetCategoryIds,
+			assetTagNames, locale);
 	}
 
 	public static com.liferay.portlet.dynamicdatalists.model.DDLRecord updateRecord(
-		long userId, long recordId,
+		long userId, long recordId, boolean majorVersion, int displayIndex,
 		com.liferay.portlet.dynamicdatamapping.storage.Fields fields,
-		int displayIndex, boolean mergeFields, boolean majorVersion,
+		boolean mergeFields,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
-				   .updateRecord(userId, recordId, fields, displayIndex,
-			mergeFields, majorVersion, serviceContext);
+				   .updateRecord(userId, recordId, majorVersion, displayIndex,
+			fields, mergeFields, serviceContext);
 	}
 
 	public static com.liferay.portlet.dynamicdatalists.model.DDLRecord updateRecord(
-		long userId, long recordId,
+		long userId, long recordId, int displayIndex,
 		java.util.Map<java.lang.String, java.io.Serializable> fieldsMap,
-		int displayIndex, boolean mergeFields,
+		boolean mergeFields,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
-				   .updateRecord(userId, recordId, fieldsMap, displayIndex,
+				   .updateRecord(userId, recordId, displayIndex, fieldsMap,
 			mergeFields, serviceContext);
 	}
 

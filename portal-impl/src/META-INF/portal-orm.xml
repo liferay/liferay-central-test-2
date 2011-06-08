@@ -1804,8 +1804,8 @@
 			<basic name="classNameId" />
 			<basic name="classPK" />
 			<basic name="recordSetId" />
-			<basic name="displayIndex" />
 			<basic name="version" />
+			<basic name="displayIndex" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />
 			<transient name="userUuid" />
@@ -1850,12 +1850,12 @@
 			<basic name="createDate">
 				<temporal>TIMESTAMP</temporal>
 			</basic>
-			<basic name="recordId" />
-			<basic name="recordSetId" />
 			<basic name="classNameId" />
 			<basic name="classPK" />
-			<basic name="displayIndex" />
+			<basic name="recordSetId" />
+			<basic name="recordId" />
 			<basic name="version" />
+			<basic name="displayIndex" />
 			<basic name="status" />
 			<basic name="statusByUserId" />
 			<basic name="statusByUserName" />

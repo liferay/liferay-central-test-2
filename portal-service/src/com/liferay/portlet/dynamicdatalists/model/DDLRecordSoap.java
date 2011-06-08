@@ -44,8 +44,8 @@ public class DDLRecordSoap implements Serializable {
 		soapModel.setClassNameId(model.getClassNameId());
 		soapModel.setClassPK(model.getClassPK());
 		soapModel.setRecordSetId(model.getRecordSetId());
-		soapModel.setDisplayIndex(model.getDisplayIndex());
 		soapModel.setVersion(model.getVersion());
+		soapModel.setDisplayIndex(model.getDisplayIndex());
 
 		return soapModel;
 	}
@@ -202,20 +202,20 @@ public class DDLRecordSoap implements Serializable {
 		_recordSetId = recordSetId;
 	}
 
-	public int getDisplayIndex() {
-		return _displayIndex;
-	}
-
-	public void setDisplayIndex(int displayIndex) {
-		_displayIndex = displayIndex;
-	}
-
 	public String getVersion() {
 		return _version;
 	}
 
 	public void setVersion(String version) {
 		_version = version;
+	}
+
+	public int getDisplayIndex() {
+		return _displayIndex;
+	}
+
+	public void setDisplayIndex(int displayIndex) {
+		_displayIndex = displayIndex;
 	}
 
 	private String _uuid;
@@ -231,6 +231,6 @@ public class DDLRecordSoap implements Serializable {
 	private long _classNameId;
 	private long _classPK;
 	private long _recordSetId;
-	private int _displayIndex;
 	private String _version;
+	private int _displayIndex;
 }

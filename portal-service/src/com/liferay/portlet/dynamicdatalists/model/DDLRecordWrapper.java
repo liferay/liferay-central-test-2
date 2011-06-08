@@ -338,24 +338,6 @@ public class DDLRecordWrapper implements DDLRecord {
 	}
 
 	/**
-	* Returns the display index of this d d l record.
-	*
-	* @return the display index of this d d l record
-	*/
-	public int getDisplayIndex() {
-		return _ddlRecord.getDisplayIndex();
-	}
-
-	/**
-	* Sets the display index of this d d l record.
-	*
-	* @param displayIndex the display index of this d d l record
-	*/
-	public void setDisplayIndex(int displayIndex) {
-		_ddlRecord.setDisplayIndex(displayIndex);
-	}
-
-	/**
 	* Returns the version of this d d l record.
 	*
 	* @return the version of this d d l record
@@ -371,6 +353,24 @@ public class DDLRecordWrapper implements DDLRecord {
 	*/
 	public void setVersion(java.lang.String version) {
 		_ddlRecord.setVersion(version);
+	}
+
+	/**
+	* Returns the display index of this d d l record.
+	*
+	* @return the display index of this d d l record
+	*/
+	public int getDisplayIndex() {
+		return _ddlRecord.getDisplayIndex();
+	}
+
+	/**
+	* Sets the display index of this d d l record.
+	*
+	* @param displayIndex the display index of this d d l record
+	*/
+	public void setDisplayIndex(int displayIndex) {
+		_ddlRecord.setDisplayIndex(displayIndex);
 	}
 
 	public boolean isNew() {

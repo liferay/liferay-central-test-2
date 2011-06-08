@@ -413,8 +413,8 @@ create table DDLRecord (
 	classNameId LONG,
 	classPK LONG,
 	recordSetId LONG,
-	displayIndex INTEGER,
-	version VARCHAR(75) null
+	version VARCHAR(75) null,
+	displayIndex INTEGER
 );
 
 create table DDLRecordSet (
@@ -440,12 +440,12 @@ create table DDLRecordVersion (
 	userId LONG,
 	userName VARCHAR(75) null,
 	createDate DATE null,
-	recordId LONG,
-	recordSetId LONG,
 	classNameId LONG,
 	classPK LONG,
-	displayIndex INTEGER,
+	recordSetId LONG,
+	recordId LONG,
 	version VARCHAR(75) null,
+	displayIndex INTEGER,
 	status INTEGER,
 	statusByUserId LONG,
 	statusByUserName VARCHAR(75) null,

@@ -65,18 +65,18 @@ public class DDLRecordVersionModelImpl extends BaseModelImpl<DDLRecordVersion>
 			{ "userId", Types.BIGINT },
 			{ "userName", Types.VARCHAR },
 			{ "createDate", Types.TIMESTAMP },
-			{ "recordId", Types.BIGINT },
-			{ "recordSetId", Types.BIGINT },
 			{ "classNameId", Types.BIGINT },
 			{ "classPK", Types.BIGINT },
-			{ "displayIndex", Types.INTEGER },
+			{ "recordSetId", Types.BIGINT },
+			{ "recordId", Types.BIGINT },
 			{ "version", Types.VARCHAR },
+			{ "displayIndex", Types.INTEGER },
 			{ "status", Types.INTEGER },
 			{ "statusByUserId", Types.BIGINT },
 			{ "statusByUserName", Types.VARCHAR },
 			{ "statusDate", Types.TIMESTAMP }
 		};
-	public static final String TABLE_SQL_CREATE = "create table DDLRecordVersion (recordVersionId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,recordId LONG,recordSetId LONG,classNameId LONG,classPK LONG,displayIndex INTEGER,version VARCHAR(75) null,status INTEGER,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null)";
+	public static final String TABLE_SQL_CREATE = "create table DDLRecordVersion (recordVersionId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,classNameId LONG,classPK LONG,recordSetId LONG,recordId LONG,version VARCHAR(75) null,displayIndex INTEGER,status INTEGER,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null)";
 	public static final String TABLE_SQL_DROP = "drop table DDLRecordVersion";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
@@ -179,22 +179,6 @@ public class DDLRecordVersionModelImpl extends BaseModelImpl<DDLRecordVersion>
 		_createDate = createDate;
 	}
 
-	public long getRecordId() {
-		return _recordId;
-	}
-
-	public void setRecordId(long recordId) {
-		_recordId = recordId;
-	}
-
-	public long getRecordSetId() {
-		return _recordSetId;
-	}
-
-	public void setRecordSetId(long recordSetId) {
-		_recordSetId = recordSetId;
-	}
-
 	public String getClassName() {
 		if (getClassNameId() <= 0) {
 			return StringPool.BLANK;
@@ -219,12 +203,30 @@ public class DDLRecordVersionModelImpl extends BaseModelImpl<DDLRecordVersion>
 		_classPK = classPK;
 	}
 
-	public int getDisplayIndex() {
-		return _displayIndex;
+	public long getRecordSetId() {
+		return _recordSetId;
 	}
 
-	public void setDisplayIndex(int displayIndex) {
-		_displayIndex = displayIndex;
+	public void setRecordSetId(long recordSetId) {
+		_recordSetId = recordSetId;
+	}
+
+	public long getRecordId() {
+		return _recordId;
+	}
+
+	public void setRecordId(long recordId) {
+		if (!_setOriginalRecordId) {
+			_setOriginalRecordId = true;
+
+			_originalRecordId = _recordId;
+		}
+
+		_recordId = recordId;
+	}
+
+	public long getOriginalRecordId() {
+		return _originalRecordId;
 	}
 
 	public String getVersion() {
@@ -237,7 +239,23 @@ public class DDLRecordVersionModelImpl extends BaseModelImpl<DDLRecordVersion>
 	}
 
 	public void setVersion(String version) {
+		if (_originalVersion == null) {
+			_originalVersion = _version;
+		}
+
 		_version = version;
+	}
+
+	public String getOriginalVersion() {
+		return GetterUtil.getString(_originalVersion);
+	}
+
+	public int getDisplayIndex() {
+		return _displayIndex;
+	}
+
+	public void setDisplayIndex(int displayIndex) {
+		_displayIndex = displayIndex;
 	}
 
 	public int getStatus() {
@@ -362,12 +380,12 @@ public class DDLRecordVersionModelImpl extends BaseModelImpl<DDLRecordVersion>
 		ddlRecordVersionImpl.setUserId(getUserId());
 		ddlRecordVersionImpl.setUserName(getUserName());
 		ddlRecordVersionImpl.setCreateDate(getCreateDate());
-		ddlRecordVersionImpl.setRecordId(getRecordId());
-		ddlRecordVersionImpl.setRecordSetId(getRecordSetId());
 		ddlRecordVersionImpl.setClassNameId(getClassNameId());
 		ddlRecordVersionImpl.setClassPK(getClassPK());
-		ddlRecordVersionImpl.setDisplayIndex(getDisplayIndex());
+		ddlRecordVersionImpl.setRecordSetId(getRecordSetId());
+		ddlRecordVersionImpl.setRecordId(getRecordId());
 		ddlRecordVersionImpl.setVersion(getVersion());
+		ddlRecordVersionImpl.setDisplayIndex(getDisplayIndex());
 		ddlRecordVersionImpl.setStatus(getStatus());
 		ddlRecordVersionImpl.setStatusByUserId(getStatusByUserId());
 		ddlRecordVersionImpl.setStatusByUserName(getStatusByUserName());
@@ -421,6 +439,13 @@ public class DDLRecordVersionModelImpl extends BaseModelImpl<DDLRecordVersion>
 	}
 
 	public void resetOriginalValues() {
+		DDLRecordVersionModelImpl ddlRecordVersionModelImpl = this;
+
+		ddlRecordVersionModelImpl._originalRecordId = ddlRecordVersionModelImpl._recordId;
+
+		ddlRecordVersionModelImpl._setOriginalRecordId = false;
+
+		ddlRecordVersionModelImpl._originalVersion = ddlRecordVersionModelImpl._version;
 	}
 
 	public String toString() {
@@ -438,18 +463,18 @@ public class DDLRecordVersionModelImpl extends BaseModelImpl<DDLRecordVersion>
 		sb.append(getUserName());
 		sb.append(", createDate=");
 		sb.append(getCreateDate());
-		sb.append(", recordId=");
-		sb.append(getRecordId());
-		sb.append(", recordSetId=");
-		sb.append(getRecordSetId());
 		sb.append(", classNameId=");
 		sb.append(getClassNameId());
 		sb.append(", classPK=");
 		sb.append(getClassPK());
-		sb.append(", displayIndex=");
-		sb.append(getDisplayIndex());
+		sb.append(", recordSetId=");
+		sb.append(getRecordSetId());
+		sb.append(", recordId=");
+		sb.append(getRecordId());
 		sb.append(", version=");
 		sb.append(getVersion());
+		sb.append(", displayIndex=");
+		sb.append(getDisplayIndex());
 		sb.append(", status=");
 		sb.append(getStatus());
 		sb.append(", statusByUserId=");
@@ -495,14 +520,6 @@ public class DDLRecordVersionModelImpl extends BaseModelImpl<DDLRecordVersion>
 		sb.append(getCreateDate());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>recordId</column-name><column-value><![CDATA[");
-		sb.append(getRecordId());
-		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>recordSetId</column-name><column-value><![CDATA[");
-		sb.append(getRecordSetId());
-		sb.append("]]></column-value></column>");
-		sb.append(
 			"<column><column-name>classNameId</column-name><column-value><![CDATA[");
 		sb.append(getClassNameId());
 		sb.append("]]></column-value></column>");
@@ -511,12 +528,20 @@ public class DDLRecordVersionModelImpl extends BaseModelImpl<DDLRecordVersion>
 		sb.append(getClassPK());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>displayIndex</column-name><column-value><![CDATA[");
-		sb.append(getDisplayIndex());
+			"<column><column-name>recordSetId</column-name><column-value><![CDATA[");
+		sb.append(getRecordSetId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>recordId</column-name><column-value><![CDATA[");
+		sb.append(getRecordId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>version</column-name><column-value><![CDATA[");
 		sb.append(getVersion());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>displayIndex</column-name><column-value><![CDATA[");
+		sb.append(getDisplayIndex());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>status</column-name><column-value><![CDATA[");
@@ -547,12 +572,15 @@ public class DDLRecordVersionModelImpl extends BaseModelImpl<DDLRecordVersion>
 	private String _userUuid;
 	private String _userName;
 	private Date _createDate;
-	private long _recordId;
-	private long _recordSetId;
 	private long _classNameId;
 	private long _classPK;
-	private int _displayIndex;
+	private long _recordSetId;
+	private long _recordId;
+	private long _originalRecordId;
+	private boolean _setOriginalRecordId;
 	private String _version;
+	private String _originalVersion;
+	private int _displayIndex;
 	private int _status;
 	private long _statusByUserId;
 	private String _statusByUserUuid;

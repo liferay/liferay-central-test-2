@@ -33,6 +33,7 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.service.persistence.BatchSessionUtil;
 import com.liferay.portal.service.persistence.ResourcePersistence;
@@ -85,15 +86,10 @@ public class DDLRecordVersionPersistenceImpl extends BasePersistenceImpl<DDLReco
 			DDLRecordVersionModelImpl.FINDER_CACHE_ENABLED,
 			FINDER_CLASS_NAME_LIST, "countByRecordId",
 			new String[] { Long.class.getName() });
-	public static final FinderPath FINDER_PATH_FIND_BY_R_V = new FinderPath(DDLRecordVersionModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_FETCH_BY_R_V = new FinderPath(DDLRecordVersionModelImpl.ENTITY_CACHE_ENABLED,
 			DDLRecordVersionModelImpl.FINDER_CACHE_ENABLED,
-			FINDER_CLASS_NAME_LIST, "findByR_V",
-			new String[] {
-				Long.class.getName(), String.class.getName(),
-				
-			"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			});
+			FINDER_CLASS_NAME_ENTITY, "fetchByR_V",
+			new String[] { Long.class.getName(), String.class.getName() });
 	public static final FinderPath FINDER_PATH_COUNT_BY_R_V = new FinderPath(DDLRecordVersionModelImpl.ENTITY_CACHE_ENABLED,
 			DDLRecordVersionModelImpl.FINDER_CACHE_ENABLED,
 			FINDER_CLASS_NAME_LIST, "countByR_V",
@@ -127,6 +123,13 @@ public class DDLRecordVersionPersistenceImpl extends BasePersistenceImpl<DDLReco
 		EntityCacheUtil.putResult(DDLRecordVersionModelImpl.ENTITY_CACHE_ENABLED,
 			DDLRecordVersionImpl.class, ddlRecordVersion.getPrimaryKey(),
 			ddlRecordVersion);
+
+		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_R_V,
+			new Object[] {
+				Long.valueOf(ddlRecordVersion.getRecordId()),
+				
+			ddlRecordVersion.getVersion()
+			}, ddlRecordVersion);
 
 		ddlRecordVersion.resetOriginalValues();
 	}
@@ -174,6 +177,13 @@ public class DDLRecordVersionPersistenceImpl extends BasePersistenceImpl<DDLReco
 	public void clearCache(DDLRecordVersion ddlRecordVersion) {
 		EntityCacheUtil.removeResult(DDLRecordVersionModelImpl.ENTITY_CACHE_ENABLED,
 			DDLRecordVersionImpl.class, ddlRecordVersion.getPrimaryKey());
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_R_V,
+			new Object[] {
+				Long.valueOf(ddlRecordVersion.getRecordId()),
+				
+			ddlRecordVersion.getVersion()
+			});
 	}
 
 	/**
@@ -277,6 +287,15 @@ public class DDLRecordVersionPersistenceImpl extends BasePersistenceImpl<DDLReco
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 
+		DDLRecordVersionModelImpl ddlRecordVersionModelImpl = (DDLRecordVersionModelImpl)ddlRecordVersion;
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_R_V,
+			new Object[] {
+				Long.valueOf(ddlRecordVersionModelImpl.getRecordId()),
+				
+			ddlRecordVersionModelImpl.getVersion()
+			});
+
 		EntityCacheUtil.removeResult(DDLRecordVersionModelImpl.ENTITY_CACHE_ENABLED,
 			DDLRecordVersionImpl.class, ddlRecordVersion.getPrimaryKey());
 
@@ -287,6 +306,10 @@ public class DDLRecordVersionPersistenceImpl extends BasePersistenceImpl<DDLReco
 		com.liferay.portlet.dynamicdatalists.model.DDLRecordVersion ddlRecordVersion,
 		boolean merge) throws SystemException {
 		ddlRecordVersion = toUnwrappedModel(ddlRecordVersion);
+
+		boolean isNew = ddlRecordVersion.isNew();
+
+		DDLRecordVersionModelImpl ddlRecordVersionModelImpl = (DDLRecordVersionModelImpl)ddlRecordVersion;
 
 		Session session = null;
 
@@ -310,6 +333,31 @@ public class DDLRecordVersionPersistenceImpl extends BasePersistenceImpl<DDLReco
 			DDLRecordVersionImpl.class, ddlRecordVersion.getPrimaryKey(),
 			ddlRecordVersion);
 
+		if (!isNew &&
+				((ddlRecordVersion.getRecordId() != ddlRecordVersionModelImpl.getOriginalRecordId()) ||
+				!Validator.equals(ddlRecordVersion.getVersion(),
+					ddlRecordVersionModelImpl.getOriginalVersion()))) {
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_R_V,
+				new Object[] {
+					Long.valueOf(
+						ddlRecordVersionModelImpl.getOriginalRecordId()),
+					
+				ddlRecordVersionModelImpl.getOriginalVersion()
+				});
+		}
+
+		if (isNew ||
+				((ddlRecordVersion.getRecordId() != ddlRecordVersionModelImpl.getOriginalRecordId()) ||
+				!Validator.equals(ddlRecordVersion.getVersion(),
+					ddlRecordVersionModelImpl.getOriginalVersion()))) {
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_R_V,
+				new Object[] {
+					Long.valueOf(ddlRecordVersion.getRecordId()),
+					
+				ddlRecordVersion.getVersion()
+				}, ddlRecordVersion);
+		}
+
 		return ddlRecordVersion;
 	}
 
@@ -330,12 +378,12 @@ public class DDLRecordVersionPersistenceImpl extends BasePersistenceImpl<DDLReco
 		ddlRecordVersionImpl.setUserId(ddlRecordVersion.getUserId());
 		ddlRecordVersionImpl.setUserName(ddlRecordVersion.getUserName());
 		ddlRecordVersionImpl.setCreateDate(ddlRecordVersion.getCreateDate());
-		ddlRecordVersionImpl.setRecordId(ddlRecordVersion.getRecordId());
-		ddlRecordVersionImpl.setRecordSetId(ddlRecordVersion.getRecordSetId());
 		ddlRecordVersionImpl.setClassNameId(ddlRecordVersion.getClassNameId());
 		ddlRecordVersionImpl.setClassPK(ddlRecordVersion.getClassPK());
-		ddlRecordVersionImpl.setDisplayIndex(ddlRecordVersion.getDisplayIndex());
+		ddlRecordVersionImpl.setRecordSetId(ddlRecordVersion.getRecordSetId());
+		ddlRecordVersionImpl.setRecordId(ddlRecordVersion.getRecordId());
 		ddlRecordVersionImpl.setVersion(ddlRecordVersion.getVersion());
+		ddlRecordVersionImpl.setDisplayIndex(ddlRecordVersion.getDisplayIndex());
 		ddlRecordVersionImpl.setStatus(ddlRecordVersion.getStatus());
 		ddlRecordVersionImpl.setStatusByUserId(ddlRecordVersion.getStatusByUserId());
 		ddlRecordVersionImpl.setStatusByUserName(ddlRecordVersion.getStatusByUserName());
@@ -763,76 +811,75 @@ public class DDLRecordVersionPersistenceImpl extends BasePersistenceImpl<DDLReco
 	}
 
 	/**
-	 * Returns all the d d l record versions where recordId = &#63; and version = &#63;.
+	 * Returns the d d l record version where recordId = &#63; and version = &#63; or throws a {@link com.liferay.portlet.dynamicdatalists.NoSuchRecordVersionException} if it could not be found.
 	 *
 	 * @param recordId the record ID
 	 * @param version the version
-	 * @return the matching d d l record versions
+	 * @return the matching d d l record version
+	 * @throws com.liferay.portlet.dynamicdatalists.NoSuchRecordVersionException if a matching d d l record version could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public List<DDLRecordVersion> findByR_V(long recordId, String version)
-		throws SystemException {
-		return findByR_V(recordId, version, QueryUtil.ALL_POS,
-			QueryUtil.ALL_POS, null);
+	public DDLRecordVersion findByR_V(long recordId, String version)
+		throws NoSuchRecordVersionException, SystemException {
+		DDLRecordVersion ddlRecordVersion = fetchByR_V(recordId, version);
+
+		if (ddlRecordVersion == null) {
+			StringBundler msg = new StringBundler(6);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("recordId=");
+			msg.append(recordId);
+
+			msg.append(", version=");
+			msg.append(version);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			if (_log.isWarnEnabled()) {
+				_log.warn(msg.toString());
+			}
+
+			throw new NoSuchRecordVersionException(msg.toString());
+		}
+
+		return ddlRecordVersion;
 	}
 
 	/**
-	 * Returns a range of all the d d l record versions where recordId = &#63; and version = &#63;.
-	 *
-	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
-	 * </p>
+	 * Returns the d d l record version where recordId = &#63; and version = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	 *
 	 * @param recordId the record ID
 	 * @param version the version
-	 * @param start the lower bound of the range of d d l record versions
-	 * @param end the upper bound of the range of d d l record versions (not inclusive)
-	 * @return the range of matching d d l record versions
+	 * @return the matching d d l record version, or <code>null</code> if a matching d d l record version could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public List<DDLRecordVersion> findByR_V(long recordId, String version,
-		int start, int end) throws SystemException {
-		return findByR_V(recordId, version, start, end, null);
+	public DDLRecordVersion fetchByR_V(long recordId, String version)
+		throws SystemException {
+		return fetchByR_V(recordId, version, true);
 	}
 
 	/**
-	 * Returns an ordered range of all the d d l record versions where recordId = &#63; and version = &#63;.
-	 *
-	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
-	 * </p>
+	 * Returns the d d l record version where recordId = &#63; and version = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	 *
 	 * @param recordId the record ID
 	 * @param version the version
-	 * @param start the lower bound of the range of d d l record versions
-	 * @param end the upper bound of the range of d d l record versions (not inclusive)
-	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @return the ordered range of matching d d l record versions
+	 * @return the matching d d l record version, or <code>null</code> if a matching d d l record version could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public List<DDLRecordVersion> findByR_V(long recordId, String version,
-		int start, int end, OrderByComparator orderByComparator)
-		throws SystemException {
-		Object[] finderArgs = new Object[] {
-				recordId, version,
-				
-				String.valueOf(start), String.valueOf(end),
-				String.valueOf(orderByComparator)
-			};
+	public DDLRecordVersion fetchByR_V(long recordId, String version,
+		boolean retrieveFromCache) throws SystemException {
+		Object[] finderArgs = new Object[] { recordId, version };
 
-		List<DDLRecordVersion> list = (List<DDLRecordVersion>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_R_V,
-				finderArgs, this);
+		Object result = null;
 
-		if (list == null) {
-			StringBundler query = null;
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_R_V,
+					finderArgs, this);
+		}
 
-			if (orderByComparator != null) {
-				query = new StringBundler(4 +
-						(orderByComparator.getOrderByFields().length * 3));
-			}
-			else {
-				query = new StringBundler(3);
-			}
+		if (result == null) {
+			StringBundler query = new StringBundler(3);
 
 			query.append(_SQL_SELECT_DDLRECORDVERSION_WHERE);
 
@@ -848,11 +895,6 @@ public class DDLRecordVersionPersistenceImpl extends BasePersistenceImpl<DDLReco
 				else {
 					query.append(_FINDER_COLUMN_R_V_VERSION_2);
 				}
-			}
-
-			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
 			}
 
 			String sql = query.toString();
@@ -872,271 +914,50 @@ public class DDLRecordVersionPersistenceImpl extends BasePersistenceImpl<DDLReco
 					qPos.add(version);
 				}
 
-				list = (List<DDLRecordVersion>)QueryUtil.list(q, getDialect(),
-						start, end);
+				List<DDLRecordVersion> list = q.list();
+
+				result = list;
+
+				DDLRecordVersion ddlRecordVersion = null;
+
+				if (list.isEmpty()) {
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_R_V,
+						finderArgs, list);
+				}
+				else {
+					ddlRecordVersion = list.get(0);
+
+					cacheResult(ddlRecordVersion);
+
+					if ((ddlRecordVersion.getRecordId() != recordId) ||
+							(ddlRecordVersion.getVersion() == null) ||
+							!ddlRecordVersion.getVersion().equals(version)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_R_V,
+							finderArgs, ddlRecordVersion);
+					}
+				}
+
+				return ddlRecordVersion;
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
-				if (list == null) {
-					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_R_V,
+				if (result == null) {
+					FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_R_V,
 						finderArgs);
-				}
-				else {
-					cacheResult(list);
-
-					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_R_V,
-						finderArgs, list);
 				}
 
 				closeSession(session);
 			}
 		}
-
-		return list;
-	}
-
-	/**
-	 * Returns the first d d l record version in the ordered set where recordId = &#63; and version = &#63;.
-	 *
-	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
-	 * </p>
-	 *
-	 * @param recordId the record ID
-	 * @param version the version
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the first matching d d l record version
-	 * @throws com.liferay.portlet.dynamicdatalists.NoSuchRecordVersionException if a matching d d l record version could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	public DDLRecordVersion findByR_V_First(long recordId, String version,
-		OrderByComparator orderByComparator)
-		throws NoSuchRecordVersionException, SystemException {
-		List<DDLRecordVersion> list = findByR_V(recordId, version, 0, 1,
-				orderByComparator);
-
-		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(6);
-
-			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
-
-			msg.append("recordId=");
-			msg.append(recordId);
-
-			msg.append(", version=");
-			msg.append(version);
-
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
-			throw new NoSuchRecordVersionException(msg.toString());
-		}
 		else {
-			return list.get(0);
-		}
-	}
-
-	/**
-	 * Returns the last d d l record version in the ordered set where recordId = &#63; and version = &#63;.
-	 *
-	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
-	 * </p>
-	 *
-	 * @param recordId the record ID
-	 * @param version the version
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the last matching d d l record version
-	 * @throws com.liferay.portlet.dynamicdatalists.NoSuchRecordVersionException if a matching d d l record version could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	public DDLRecordVersion findByR_V_Last(long recordId, String version,
-		OrderByComparator orderByComparator)
-		throws NoSuchRecordVersionException, SystemException {
-		int count = countByR_V(recordId, version);
-
-		List<DDLRecordVersion> list = findByR_V(recordId, version, count - 1,
-				count, orderByComparator);
-
-		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(6);
-
-			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
-
-			msg.append("recordId=");
-			msg.append(recordId);
-
-			msg.append(", version=");
-			msg.append(version);
-
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
-			throw new NoSuchRecordVersionException(msg.toString());
-		}
-		else {
-			return list.get(0);
-		}
-	}
-
-	/**
-	 * Returns the d d l record versions before and after the current d d l record version in the ordered set where recordId = &#63; and version = &#63;.
-	 *
-	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
-	 * </p>
-	 *
-	 * @param recordVersionId the primary key of the current d d l record version
-	 * @param recordId the record ID
-	 * @param version the version
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the previous, current, and next d d l record version
-	 * @throws com.liferay.portlet.dynamicdatalists.NoSuchRecordVersionException if a d d l record version with the primary key could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	public DDLRecordVersion[] findByR_V_PrevAndNext(long recordVersionId,
-		long recordId, String version, OrderByComparator orderByComparator)
-		throws NoSuchRecordVersionException, SystemException {
-		DDLRecordVersion ddlRecordVersion = findByPrimaryKey(recordVersionId);
-
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			DDLRecordVersion[] array = new DDLRecordVersionImpl[3];
-
-			array[0] = getByR_V_PrevAndNext(session, ddlRecordVersion,
-					recordId, version, orderByComparator, true);
-
-			array[1] = ddlRecordVersion;
-
-			array[2] = getByR_V_PrevAndNext(session, ddlRecordVersion,
-					recordId, version, orderByComparator, false);
-
-			return array;
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	protected DDLRecordVersion getByR_V_PrevAndNext(Session session,
-		DDLRecordVersion ddlRecordVersion, long recordId, String version,
-		OrderByComparator orderByComparator, boolean previous) {
-		StringBundler query = null;
-
-		if (orderByComparator != null) {
-			query = new StringBundler(6 +
-					(orderByComparator.getOrderByFields().length * 6));
-		}
-		else {
-			query = new StringBundler(3);
-		}
-
-		query.append(_SQL_SELECT_DDLRECORDVERSION_WHERE);
-
-		query.append(_FINDER_COLUMN_R_V_RECORDID_2);
-
-		if (version == null) {
-			query.append(_FINDER_COLUMN_R_V_VERSION_1);
-		}
-		else {
-			if (version.equals(StringPool.BLANK)) {
-				query.append(_FINDER_COLUMN_R_V_VERSION_3);
+			if (result instanceof List<?>) {
+				return null;
 			}
 			else {
-				query.append(_FINDER_COLUMN_R_V_VERSION_2);
+				return (DDLRecordVersion)result;
 			}
-		}
-
-		if (orderByComparator != null) {
-			String[] orderByFields = orderByComparator.getOrderByFields();
-
-			if (orderByFields.length > 0) {
-				query.append(WHERE_AND);
-			}
-
-			for (int i = 0; i < orderByFields.length; i++) {
-				query.append(_ORDER_BY_ENTITY_ALIAS);
-				query.append(orderByFields[i]);
-
-				if ((i + 1) < orderByFields.length) {
-					if (orderByComparator.isAscending() ^ previous) {
-						query.append(WHERE_GREATER_THAN_HAS_NEXT);
-					}
-					else {
-						query.append(WHERE_LESSER_THAN_HAS_NEXT);
-					}
-				}
-				else {
-					if (orderByComparator.isAscending() ^ previous) {
-						query.append(WHERE_GREATER_THAN);
-					}
-					else {
-						query.append(WHERE_LESSER_THAN);
-					}
-				}
-			}
-
-			query.append(ORDER_BY_CLAUSE);
-
-			for (int i = 0; i < orderByFields.length; i++) {
-				query.append(_ORDER_BY_ENTITY_ALIAS);
-				query.append(orderByFields[i]);
-
-				if ((i + 1) < orderByFields.length) {
-					if (orderByComparator.isAscending() ^ previous) {
-						query.append(ORDER_BY_ASC_HAS_NEXT);
-					}
-					else {
-						query.append(ORDER_BY_DESC_HAS_NEXT);
-					}
-				}
-				else {
-					if (orderByComparator.isAscending() ^ previous) {
-						query.append(ORDER_BY_ASC);
-					}
-					else {
-						query.append(ORDER_BY_DESC);
-					}
-				}
-			}
-		}
-
-		String sql = query.toString();
-
-		Query q = session.createQuery(sql);
-
-		q.setFirstResult(0);
-		q.setMaxResults(2);
-
-		QueryPos qPos = QueryPos.getInstance(q);
-
-		qPos.add(recordId);
-
-		if (version != null) {
-			qPos.add(version);
-		}
-
-		if (orderByComparator != null) {
-			Object[] values = orderByComparator.getOrderByValues(ddlRecordVersion);
-
-			for (Object value : values) {
-				qPos.add(value);
-			}
-		}
-
-		List<DDLRecordVersion> list = q.list();
-
-		if (list.size() == 2) {
-			return list.get(1);
-		}
-		else {
-			return null;
 		}
 	}
 
@@ -1616,17 +1437,17 @@ public class DDLRecordVersionPersistenceImpl extends BasePersistenceImpl<DDLReco
 	}
 
 	/**
-	 * Removes all the d d l record versions where recordId = &#63; and version = &#63; from the database.
+	 * Removes the d d l record version where recordId = &#63; and version = &#63; from the database.
 	 *
 	 * @param recordId the record ID
 	 * @param version the version
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByR_V(long recordId, String version)
-		throws SystemException {
-		for (DDLRecordVersion ddlRecordVersion : findByR_V(recordId, version)) {
-			ddlRecordVersionPersistence.remove(ddlRecordVersion);
-		}
+		throws NoSuchRecordVersionException, SystemException {
+		DDLRecordVersion ddlRecordVersion = findByR_V(recordId, version);
+
+		ddlRecordVersionPersistence.remove(ddlRecordVersion);
 	}
 
 	/**

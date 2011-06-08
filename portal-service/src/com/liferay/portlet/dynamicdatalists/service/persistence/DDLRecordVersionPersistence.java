@@ -211,115 +211,42 @@ public interface DDLRecordVersionPersistence extends BasePersistence<DDLRecordVe
 			com.liferay.portlet.dynamicdatalists.NoSuchRecordVersionException;
 
 	/**
-	* Returns all the d d l record versions where recordId = &#63; and version = &#63;.
+	* Returns the d d l record version where recordId = &#63; and version = &#63; or throws a {@link com.liferay.portlet.dynamicdatalists.NoSuchRecordVersionException} if it could not be found.
 	*
 	* @param recordId the record ID
 	* @param version the version
-	* @return the matching d d l record versions
+	* @return the matching d d l record version
+	* @throws com.liferay.portlet.dynamicdatalists.NoSuchRecordVersionException if a matching d d l record version could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public java.util.List<com.liferay.portlet.dynamicdatalists.model.DDLRecordVersion> findByR_V(
+	public com.liferay.portlet.dynamicdatalists.model.DDLRecordVersion findByR_V(
+		long recordId, java.lang.String version)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.dynamicdatalists.NoSuchRecordVersionException;
+
+	/**
+	* Returns the d d l record version where recordId = &#63; and version = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	*
+	* @param recordId the record ID
+	* @param version the version
+	* @return the matching d d l record version, or <code>null</code> if a matching d d l record version could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.liferay.portlet.dynamicdatalists.model.DDLRecordVersion fetchByR_V(
 		long recordId, java.lang.String version)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Returns a range of all the d d l record versions where recordId = &#63; and version = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
-	* </p>
+	* Returns the d d l record version where recordId = &#63; and version = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
 	* @param recordId the record ID
 	* @param version the version
-	* @param start the lower bound of the range of d d l record versions
-	* @param end the upper bound of the range of d d l record versions (not inclusive)
-	* @return the range of matching d d l record versions
+	* @return the matching d d l record version, or <code>null</code> if a matching d d l record version could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public java.util.List<com.liferay.portlet.dynamicdatalists.model.DDLRecordVersion> findByR_V(
-		long recordId, java.lang.String version, int start, int end)
+	public com.liferay.portlet.dynamicdatalists.model.DDLRecordVersion fetchByR_V(
+		long recordId, java.lang.String version, boolean retrieveFromCache)
 		throws com.liferay.portal.kernel.exception.SystemException;
-
-	/**
-	* Returns an ordered range of all the d d l record versions where recordId = &#63; and version = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
-	* </p>
-	*
-	* @param recordId the record ID
-	* @param version the version
-	* @param start the lower bound of the range of d d l record versions
-	* @param end the upper bound of the range of d d l record versions (not inclusive)
-	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @return the ordered range of matching d d l record versions
-	* @throws SystemException if a system exception occurred
-	*/
-	public java.util.List<com.liferay.portlet.dynamicdatalists.model.DDLRecordVersion> findByR_V(
-		long recordId, java.lang.String version, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	/**
-	* Returns the first d d l record version in the ordered set where recordId = &#63; and version = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
-	* </p>
-	*
-	* @param recordId the record ID
-	* @param version the version
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the first matching d d l record version
-	* @throws com.liferay.portlet.dynamicdatalists.NoSuchRecordVersionException if a matching d d l record version could not be found
-	* @throws SystemException if a system exception occurred
-	*/
-	public com.liferay.portlet.dynamicdatalists.model.DDLRecordVersion findByR_V_First(
-		long recordId, java.lang.String version,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-		throws com.liferay.portal.kernel.exception.SystemException,
-			com.liferay.portlet.dynamicdatalists.NoSuchRecordVersionException;
-
-	/**
-	* Returns the last d d l record version in the ordered set where recordId = &#63; and version = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
-	* </p>
-	*
-	* @param recordId the record ID
-	* @param version the version
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the last matching d d l record version
-	* @throws com.liferay.portlet.dynamicdatalists.NoSuchRecordVersionException if a matching d d l record version could not be found
-	* @throws SystemException if a system exception occurred
-	*/
-	public com.liferay.portlet.dynamicdatalists.model.DDLRecordVersion findByR_V_Last(
-		long recordId, java.lang.String version,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-		throws com.liferay.portal.kernel.exception.SystemException,
-			com.liferay.portlet.dynamicdatalists.NoSuchRecordVersionException;
-
-	/**
-	* Returns the d d l record versions before and after the current d d l record version in the ordered set where recordId = &#63; and version = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
-	* </p>
-	*
-	* @param recordVersionId the primary key of the current d d l record version
-	* @param recordId the record ID
-	* @param version the version
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the previous, current, and next d d l record version
-	* @throws com.liferay.portlet.dynamicdatalists.NoSuchRecordVersionException if a d d l record version with the primary key could not be found
-	* @throws SystemException if a system exception occurred
-	*/
-	public com.liferay.portlet.dynamicdatalists.model.DDLRecordVersion[] findByR_V_PrevAndNext(
-		long recordVersionId, long recordId, java.lang.String version,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-		throws com.liferay.portal.kernel.exception.SystemException,
-			com.liferay.portlet.dynamicdatalists.NoSuchRecordVersionException;
 
 	/**
 	* Returns all the d d l record versions where recordId = &#63; and status = &#63;.
@@ -485,14 +412,15 @@ public interface DDLRecordVersionPersistence extends BasePersistence<DDLRecordVe
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Removes all the d d l record versions where recordId = &#63; and version = &#63; from the database.
+	* Removes the d d l record version where recordId = &#63; and version = &#63; from the database.
 	*
 	* @param recordId the record ID
 	* @param version the version
 	* @throws SystemException if a system exception occurred
 	*/
 	public void removeByR_V(long recordId, java.lang.String version)
-		throws com.liferay.portal.kernel.exception.SystemException;
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.dynamicdatalists.NoSuchRecordVersionException;
 
 	/**
 	* Removes all the d d l record versions where recordId = &#63; and status = &#63; from the database.
