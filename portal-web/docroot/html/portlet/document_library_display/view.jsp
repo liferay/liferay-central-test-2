@@ -88,7 +88,7 @@ request.setAttribute("view.jsp-viewFolder", Boolean.TRUE.toString());
 request.setAttribute("view.jsp-useAssetEntryQuery", String.valueOf(useAssetEntryQuery));
 %>
 
-<liferay-util:include page="/html/portlet/document_library_display/top_links.jsp" />
+<liferay-util:include page="/html/portlet/document_library/top_links.jsp" />
 
 <c:choose>
 	<c:when test="<%= useAssetEntryQuery %>">
