@@ -87,6 +87,8 @@ public class ExpandoStorageAdapter extends BaseStorageAdapter {
 
 	protected void doDeleteByClass(long classPK) throws Exception {
 		_deleteExpandoRows(new long[] {classPK});
+
+		DDMStorageLinkLocalServiceUtil.deleteClassStorageLink(classPK);
 	}
 
 	protected void doDeleteByDDMStructure(long ddmStructureId)
@@ -95,6 +97,9 @@ public class ExpandoStorageAdapter extends BaseStorageAdapter {
 		long[] expandoRowIds = _getExpandoRowIds(ddmStructureId);
 
 		_deleteExpandoRows(expandoRowIds);
+
+		DDMStorageLinkLocalServiceUtil.deleteStructureStorageLinks(
+			ddmStructureId);
 	}
 
 	protected List<Fields> doGetFieldsListByClasses(
