@@ -111,6 +111,10 @@ if (folder != null) {
 		sb.append(curFolder.getFolderId());
 		sb.append("', '");
 		sb.append(UnicodeFormatter.toString(curFolder.getName()));
+		sb.append("', '");
+		sb.append(curFolder.isSupportsMetadata());
+		sb.append("', '");
+		sb.append(curFolder.isSupportsSocial());
 		sb.append("'); window.close();");
 
 		row.addButton("right", SearchEntry.DEFAULT_VALIGN, LanguageUtil.get(pageContext, "choose"), sb.toString());
@@ -136,7 +140,7 @@ if (folder != null) {
 		</c:if>
 
 		<%
-		String taglibSelectOnClick = "opener." + renderResponse.getNamespace() + "selectFolder('" + folderId + "','" + folderName + "');window.close();";
+		String taglibSelectOnClick = "opener." + renderResponse.getNamespace() + "selectFolder('" + folderId + "','" + folderName + "','" + ((folder != null) ? folder.isSupportsMetadata() : Boolean.TRUE.toString()) + "','" + ((folder != null) ? folder.isSupportsSocial() : Boolean.TRUE.toString()) + "');window.close();";
 		%>
 
 		<aui:button onClick="<%= taglibSelectOnClick %>" value="choose-this-folder" />

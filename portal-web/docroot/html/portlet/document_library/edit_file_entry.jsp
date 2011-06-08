@@ -261,7 +261,7 @@ else if (documentType != null) {
 
 		<aui:input name="title" />
 
-		<c:if test="<%= (folder == null) || folder.isSupportsMetadata() %>">
+		<div class='<%= ((folder == null) || folder.isSupportsMetadata()) ? "aui-helper-hidden" : StringPool.BLANK %>' id="<portlet:namespace />metadata">
 			<aui:input name="description" />
 
 			<%
@@ -325,9 +325,9 @@ else if (documentType != null) {
 					label="<%= true %>"
 				/>
 			</liferay-ui:custom-attributes-available>
-		</c:if>
+		</div>
 
-		<c:if test="<%= (folder == null) || folder.isSupportsSocial() %>">
+		<div class='<%= ((folder == null) || folder.isSupportsSocial()) ? "aui-helper-hidden" : StringPool.BLANK %>' id="<portlet:namespace />social">
 			<liferay-ui:panel defaultState="closed" extended="<%= false %>" id="dlFileEntryCategorizationPanel" persistState="<%= true %>" title="categorization">
 				<aui:fieldset>
 					<aui:input classPK="<%= assetClassPK %>" model="<%= DLFileEntry.class %>" name="categories" type="assetCategories" />
@@ -335,7 +335,7 @@ else if (documentType != null) {
 					<aui:input classPK="<%= assetClassPK %>" model="<%= DLFileEntry.class %>" name="tags" type="assetTags" />
 				</aui:fieldset>
 			</liferay-ui:panel>
-		</c:if>
+		</div>
 
 		<liferay-ui:panel defaultState="closed" extended="<%= false %>" id="dlFileEntryAssetLinksPanel" persistState="<%= true %>" title="related-assets">
 			<aui:fieldset>
@@ -456,13 +456,33 @@ else if (documentType != null) {
 		submitForm(document.<portlet:namespace />fm);
 	}
 
-	function <portlet:namespace />selectFolder(folderId, folderName) {
+	function <portlet:namespace />selectFolder(folderId, folderName, isSupportsMetadata, isSupportsSocial) {
+		var A = AUI();
+
 		document.<portlet:namespace />fm.<portlet:namespace />folderId.value = folderId;
 
 		var nameEl = document.getElementById("<portlet:namespace />folderName");
 
 		nameEl.href = "javascript:location = '<portlet:renderURL><portlet:param name="struts_action" value="/document_library/view" /></portlet:renderURL>&<portlet:namespace />folderId=" + folderId + "'; void('');";
 		nameEl.innerHTML = folderName + "&nbsp;";
+
+		var metadata = A.one('#<portlet:namespace />metadata');
+
+		if (isSupportsMetadata) {
+			metadata.show();
+		}
+		else {
+			metadata.hide();
+		}
+
+		var social = A.one('#<portlet:namespace />social');
+
+		if (isSupportsSocial) {
+			social.show();
+		}
+		else {
+			social.hide();
+		}
 	}
 
 	function <portlet:namespace />unlock() {
