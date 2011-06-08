@@ -1594,30 +1594,26 @@ public class ServicePreAction extends Action {
 		themeDisplay.setShowSignInIcon(!signedIn);
 		themeDisplay.setShowSignOutIcon(signedIn);
 
-		boolean showSiteContentIcon = false;
+		Group controlPanelGroup = GroupLocalServiceUtil.getGroup(
+			companyId, GroupConstants.CONTROL_PANEL);
 
-		if (signedIn) {
-			Group controlPanelGroup = GroupLocalServiceUtil.getGroup(
-				companyId, GroupConstants.CONTROL_PANEL);
+		long controlPanelPlid = LayoutLocalServiceUtil.getDefaultPlid(
+			controlPanelGroup.getGroupId(), true);
 
-			long controlPanelPlid = LayoutLocalServiceUtil.getDefaultPlid(
-				controlPanelGroup.getGroupId(), true);
+		List<Portlet> siteContentPortlets = PortalUtil.getControlPanelPortlets(
+			PortletCategoryKeys.CONTENT, themeDisplay);
 
-			List<Portlet> siteContentPortlets = PortalUtil.getControlPanelPortlets(
-				PortletCategoryKeys.CONTENT, themeDisplay);
+		Portlet groupPagesPortlet = PortletLocalServiceUtil.getPortletById(
+			PortletKeys.GROUP_PAGES);
+		Portlet siteSettingsPortlet = PortletLocalServiceUtil.getPortletById(
+			PortletKeys.SITE_SETTINGS);
 
-			Portlet groupPagesPortlet = PortletLocalServiceUtil.getPortletById(
-				PortletKeys.GROUP_PAGES);
-			Portlet siteSettingsPortlet = PortletLocalServiceUtil.getPortletById(
-				PortletKeys.SITE_SETTINGS);
+		siteContentPortlets.remove(groupPagesPortlet);
+		siteContentPortlets.remove(siteSettingsPortlet);
 
-			siteContentPortlets.remove(groupPagesPortlet);
-			siteContentPortlets.remove(siteSettingsPortlet);
-
-			showSiteContentIcon = PortletPermissionUtil.contains(
-				permissionChecker, controlPanelGroup.getGroupId(), controlPanelPlid,
-				siteContentPortlets, ActionKeys.VIEW);
-		}
+		boolean showSiteContentIcon = PortletPermissionUtil.contains(
+			permissionChecker, controlPanelGroup.getGroupId(), controlPanelPlid,
+			siteContentPortlets, ActionKeys.VIEW);
 
 		themeDisplay.setShowSiteContentIcon(showSiteContentIcon);
 
