@@ -370,13 +370,18 @@ public class EditEntryAction extends PortletAction {
 		boolean ajax = ParamUtil.getBoolean(actionRequest, "ajax");
 
 		if (!ajax) {
-			UploadPortletRequest uploadRequest =
-				PortalUtil.getUploadPortletRequest(actionRequest);
+			boolean attachments = ParamUtil.getBoolean(
+				actionRequest, "attachments", false);
 
-			smallImage = ParamUtil.getBoolean(uploadRequest, "smallImage");
-			smallImageURL = ParamUtil.getString(
-				uploadRequest, "smallImageURL");
-			smallFile = uploadRequest.getFile("smallFile");
+			if (attachments) {
+				UploadPortletRequest uploadRequest =
+					PortalUtil.getUploadPortletRequest(actionRequest);
+
+				smallImage = ParamUtil.getBoolean(uploadRequest, "smallImage");
+				smallImageURL = ParamUtil.getString(
+					uploadRequest, "smallImageURL");
+				smallFile = uploadRequest.getFile("smallFile");
+			}
 		}
 
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(

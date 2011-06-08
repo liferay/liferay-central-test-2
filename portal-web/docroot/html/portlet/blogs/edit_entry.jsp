@@ -51,6 +51,7 @@ boolean allowTrackbacks = PropsValues.BLOGS_TRACKBACK_ENABLED && BeanParamUtil.g
 	<aui:input name="entryId" type="hidden" value="<%= entryId %>" />
 	<aui:input name="preview" type="hidden" value="<%= false %>" />
 	<aui:input name="workflowAction" type="hidden" value="<%= WorkflowConstants.ACTION_PUBLISH %>" />
+	<aui:input name="attachments" type="hidden" />
 
 	<liferay-ui:error exception="<%= EntryTitleException.class %>" message="please-enter-a-valid-title" />
 
@@ -171,7 +172,7 @@ boolean allowTrackbacks = PropsValues.BLOGS_TRACKBACK_ENABLED && BeanParamUtil.g
 
 				<span style="font-size: xx-small;">-- <%= LanguageUtil.get(pageContext, "or").toUpperCase() %> --</span>
 
-				<aui:input cssClass="lfr-input-text-container" label="small-image" name="smallFile" type="file" />
+				<aui:input cssClass="lfr-input-text-container" label="small-image" name="smallFile" onChange='<%= renderResponse.getNamespace() + "manageAttachments();" %>' type="file" />
 			</aui:fieldset>
 		</liferay-ui:panel>
 
@@ -261,6 +262,10 @@ boolean allowTrackbacks = PropsValues.BLOGS_TRACKBACK_ENABLED && BeanParamUtil.g
 
 	function <portlet:namespace />initEditor() {
 		return "<%= UnicodeFormatter.toString(content) %>";
+	}
+
+	function <portlet:namespace />manageAttachments() {
+		document.<portlet:namespace />fm.<portlet:namespace />attachments.value = "true";
 	}
 
 	function <portlet:namespace />previewEntry() {
