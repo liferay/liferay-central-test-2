@@ -2,7 +2,12 @@ AUI().add(
 	'liferay-tags-admin',
 	function(A) {
 		var Lang = A.Lang;
+
 		var Node = A.Node;
+
+		var AObject = A.Object;
+
+		var owns = AObject.owns;
 
 		var ACTION_ADD = 0;
 
@@ -380,10 +385,8 @@ AUI().add(
 						url.setParameter('struts_action', path);
 
 						if (params) {
-							var hasOwnProperty = Object.prototype.hasOwnProperty;
-
 							for (var key in params) {
-								if (hasOwnProperty.call(params, key)) {
+								if (owns(params, key)) {
 									url.setParameter(key, params[key]);
 								}
 							}
@@ -645,19 +648,16 @@ AUI().add(
 								rowsPerPageOptions: instanceConfig.tagsPerPageOptions
 							};
 
-							var hasOwnProperty = Object.prototype.hasOwnProperty;
-
 							var paginatorMap = instance._getTagsPaginatorMap();
 
 							var history = instance._history;
 
-							for (var item in paginatorMap) {
-								if (hasOwnProperty.call(paginatorMap, item)) {
-									var paginatorItem = paginatorMap[item];
-
-									config[item] = instance._toNumber(history.get(paginatorItem.historyEntry)) || paginatorItem.defaultValue;
+							AObject.each(
+								paginatorMap,
+								function(item, index, collection) {
+									config[index] = Number(history.get(item.historyEntry)) || item.defaultValue;
 								}
-							}
+							);
 
 							tagsPaginator = new A.Paginator(config).render();
 
@@ -679,12 +679,12 @@ AUI().add(
 								page: {
 									historyEntry: instance._prefixedPortletId + 'page',
 									defaultValue: 1,
-									formatter: instance._toNumber
+									formatter: Number
 								},
 								rowsPerPage: {
 									historyEntry: instance._prefixedPortletId + 'rowsPerPage',
 									defaultValue: instance._config.tagsPerPage,
-									formatter: instance._toNumber
+									formatter: Number
 								}
 							};
 
@@ -901,23 +901,6 @@ AUI().add(
 						Liferay.Util.focusFormField(inputTagNameNode);
 					},
 
-					_hasOwnProperties: function(obj) {
-						if (Object.keys && Object.keys(obj).length) {
-							return true;
-						}
-						else {
-							var hasOwnProperty = Object.prototype.hasOwnProperty;
-
-							for (var item in obj) {
-								if (hasOwnProperty.call(obj, item)) {
-									return true;
-								}
-							}
-						}
-
-						return false;
-					},
-
 					_hideAllMessages: function() {
 						var instance = this;
 
@@ -1131,26 +1114,29 @@ AUI().add(
 
 							var paginatorState = {};
 
-							var hasOwnProperty = Object.prototype.hasOwnProperty;
-
 							var paginatorMap = instance._getTagsPaginatorMap();
 
-							for (var item in paginatorMap) {
-								if (hasOwnProperty.call(paginatorMap, item)) {
-									var paginatorItem = paginatorMap[item];
+							AObject.each(
+								paginatorMap,
+								function(item, index, collection) {
+									var historyEntry = item.historyEntry;
 
-									var paginatorItemHistoryEntry = paginatorItem.historyEntry;
+									var value;
 
-									if (hasOwnProperty.call(changed, paginatorItemHistoryEntry)) {
-										paginatorState[item] = paginatorItem.formatter(changed[paginatorItemHistoryEntry].newVal);
+									if (owns(changed, historyEntry)) {
+										value = item.formatter(changed[historyEntry].newVal);
 									}
-									else if (hasOwnProperty.call(removed, paginatorItemHistoryEntry)) {
-										paginatorState[item] = paginatorItem.defaultValue;
+									else if (owns(removed, historyEntry)) {
+										value = item.defaultValue;
+									}
+
+									if (value) {
+										paginatorState[index] = value;
 									}
 								}
-							}
+							);
 
-							if (instance._hasOwnProperties(paginatorState)) {
+							if (AObject.size(paginatorState)) {
 								instance._tagsPaginator.setState(paginatorState);
 
 								instance._reloadData();
@@ -1227,34 +1213,37 @@ AUI().add(
 
 						var historyState = {};
 
-						var hasOwnProperty = Object.prototype.hasOwnProperty;
-
 						var paginatorMap = instance._getTagsPaginatorMap();
 
 						var history = instance._history;
 
-						for (var item in paginatorMap) {
-							if (hasOwnProperty.call(paginatorMap, item)) {
-								var paginatorItem = paginatorMap[item];
+						AObject.each(
+							paginatorMap,
+							function(item, index, collection) {
+								if (owns(state, index)) {
+									var historyEntry = item.historyEntry;
 
-								if (hasOwnProperty.call(state, item)) {
-									var newItemValue = state[item];
+									var newItemValue = state[index];
 
-									if (newItemValue === paginatorItem.defaultValue) {
-										var itemInHistory = history.get(paginatorItem.historyEntry);
+									var value;
 
-										if (Lang.isValue(itemInHistory)) {
-											historyState[paginatorItem.historyEntry] = null;
-										}
+									if (newItemValue === item.defaultValue &&
+										Lang.isValue(history.get(historyEntry))) {
+
+										value = null;
 									}
-									else if(newItemValue !== stateBefore[item]) {
-										historyState[paginatorItem.historyEntry] = newItemValue;
+									else if (newItemValue !== stateBefore[index]) {
+										value = newItemValue;
+									}
+
+									if (value) {
+										historyState[historyEntry] = value;
 									}
 								}
 							}
-						}
+						);
 
-						if (instance._hasOwnProperties(historyState)) {
+						if (AObject.size(historyState)) {
 							history.add(historyState);
 						}
 
@@ -1570,10 +1559,6 @@ AUI().add(
 						}
 					},
 
-					_toNumber: function(value) {
-						return +value;
-					},
-
 					_updateMergeItemsTarget: function() {
 						var instance = this;
 
@@ -1597,7 +1582,7 @@ AUI().add(
 								previousTagNextSibling.placeBefore(previousTag);
 							}
 							else if (previousTagPrevSibling){
-								previousTagPrevSibling.placeAfter(previousTag)
+								previousTagPrevSibling.placeAfter(previousTag);
 							}
 							else {
 								selectedTagsList.append(previousTag);
