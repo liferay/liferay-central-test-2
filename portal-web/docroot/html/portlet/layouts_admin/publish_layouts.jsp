@@ -1,3 +1,4 @@
+<%@ page import="com.liferay.portal.kernel.staging.LayoutStagingUtil" %>
 <%--
 /**
  * Copyright (c) 2000-2011 Liferay, Inc. All rights reserved.
@@ -338,21 +339,7 @@ response.setHeader("Ajax-ID", request.getHeader("Ajax-ID"));
 						<aui:input name="layoutSetBranchId" type="hidden" value="<%= layoutSetBranchId %>" />
 					</c:when>
 					<c:otherwise>
-						<%
-						String branchingKey = "branchingPublic";
-
-						if (privateLayout) {
-							branchingKey = "branchingPrivate";
-						}
-
-						boolean branchingEnabled = false;
-
-						if (liveGroup.isStaged() && GetterUtil.getBoolean(liveGroupTypeSettings.getProperty(branchingKey))) {
-							branchingEnabled = true;
-						}
-						%>
-
-						<c:if test="<%= branchingEnabled %>">
+						<c:if test="<%= LayoutStagingUtil.isBranchingLayoutSet(selGroup, privateLayout) %>">
 
 							<%
 							List<LayoutSetBranch> layoutSetBranches = LayoutSetBranchLocalServiceUtil.getLayoutSetBranches(stagingGroup.getGroupId(), privateLayout);

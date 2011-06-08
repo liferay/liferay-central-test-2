@@ -14,6 +14,7 @@
 
 package com.liferay.portal.kernel.staging;
 
+import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutRevision;
 import com.liferay.portal.model.LayoutStagingHandler;
@@ -37,6 +38,12 @@ public class LayoutStagingUtil {
 
 	public static boolean isBranchingLayout(Layout layout) {
 		return getLayoutStaging().isBranchingLayout(layout);
+	}
+
+	public static boolean isBranchingLayoutSet(
+		Group group, boolean privateLayout) {
+
+		return getLayoutStaging().isBranchingLayoutSet(group, privateLayout);
 	}
 
 	public void setLayoutStaging(LayoutStaging layoutStaging) {

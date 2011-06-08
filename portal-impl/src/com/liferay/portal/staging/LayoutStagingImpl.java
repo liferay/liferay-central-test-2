@@ -58,41 +58,46 @@ public class LayoutStagingImpl implements LayoutStaging {
 
 	public boolean isBranchingLayout(Layout layout) {
 		try {
-			Group group = layout.getGroup();
-
-			if (group.isStagingGroup()) {
-				group = group.getLiveGroup();
-			}
-
-			UnicodeProperties typeSettingsProperties =
-				group.getTypeSettingsProperties();
-
-			boolean branchingEnabled = false;
-
-			if (layout.isPrivateLayout()) {
-				branchingEnabled = GetterUtil.getBoolean(
-					typeSettingsProperties.getProperty("branchingPrivate"));
-			}
-			else {
-				branchingEnabled = GetterUtil.getBoolean(
-					typeSettingsProperties.getProperty("branchingPublic"));
-			}
-
-			if (group.isStaged() && branchingEnabled) {
-				if (!group.isStagedRemotely() &&
-					(layout.getGroupId() == group.getGroupId())) {
-
-					return false;
-				}
-
-				return true;
-			}
-
-			return false;
+			return isBranchingLayoutSet(
+				layout.getGroup(), layout.isPrivateLayout());
 		}
 		catch (Exception e) {
 			throw new IllegalStateException(e);
 		}
+	}
+
+	public boolean isBranchingLayoutSet(Group group, boolean privateLayout) {
+		boolean isStagingGroup = false;
+
+		if (group.isStagingGroup()) {
+			isStagingGroup = true;
+
+			group = group.getLiveGroup();
+		}
+
+		UnicodeProperties typeSettingsProperties =
+			group.getTypeSettingsProperties();
+
+		boolean branchingEnabled = false;
+
+		if (privateLayout) {
+			branchingEnabled = GetterUtil.getBoolean(
+				typeSettingsProperties.getProperty("branchingPrivate"));
+		}
+		else {
+			branchingEnabled = GetterUtil.getBoolean(
+				typeSettingsProperties.getProperty("branchingPublic"));
+		}
+
+		if (group.isStaged() && branchingEnabled) {
+			if (!group.isStagedRemotely() &&  !isStagingGroup) {
+				return false;
+			}
+
+			return true;
+		}
+
+		return false;
 	}
 
 }
