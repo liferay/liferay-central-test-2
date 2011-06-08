@@ -108,25 +108,6 @@ try {
 catch (NoSuchLayoutException nsle) {
 }
 
-long[] selectedPlids = new long[0];
-
-if (selPlid > 0) {
-	selectedPlids = new long[] {selPlid};
-}
-else {
-	selectedPlids = GetterUtil.getLongValues(StringUtil.split(SessionTreeJSClicks.getOpenNodes(request, treeKey + "SelectedNode"), ","));
-}
-
-List results = new ArrayList();
-
-for (int i = 0; i < selectedPlids.length; i++) {
-	try {
-		results.add(LayoutLocalServiceUtil.getLayout(selectedPlids[i]));
-	}
-	catch (NoSuchLayoutException nsle) {
-	}
-}
-
 boolean privateLayout = tabs1.equals("private-pages");
 
 if (privateLayout) {
@@ -134,6 +115,25 @@ if (privateLayout) {
 }
 else {
 	pagesCount = selGroup.getPublicLayoutsPageCount();
+}
+
+long[] selectedLayoutIds = new long[0];
+
+if (selLayout != null) {
+	selectedLayoutIds = new long[] {selLayout.getLayoutId()};
+}
+else {
+	selectedLayoutIds = GetterUtil.getLongValues(StringUtil.split(SessionTreeJSClicks.getAddedNodes(request, "CHECK_NAMESPACE_" + treeKey), ","));
+}
+
+List results = new ArrayList();
+
+for (int i = 0; i < selectedLayoutIds.length; i++) {
+	try {
+		results.add(LayoutLocalServiceUtil.getLayout(selGroupId, privateLayout, selectedLayoutIds[i]));
+	}
+	catch (NoSuchLayoutException nsle) {
+	}
 }
 
 UnicodeProperties groupTypeSettings = selGroup.getTypeSettingsProperties();
