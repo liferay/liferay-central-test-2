@@ -1596,7 +1596,7 @@ public class ServicePreAction extends Action {
 
 		boolean showSiteContentIcon = false;
 
-		long controlPanelPlid = -1;
+		long controlPanelPlid = 0;
 
 		if (signedIn) {
 			Group controlPanelGroup = GroupLocalServiceUtil.getGroup(
@@ -1605,13 +1605,15 @@ public class ServicePreAction extends Action {
 			controlPanelPlid = LayoutLocalServiceUtil.getDefaultPlid(
 				controlPanelGroup.getGroupId(), true);
 
-			List<Portlet> siteContentPortlets = PortalUtil.getControlPanelPortlets(
-				PortletCategoryKeys.CONTENT, themeDisplay);
+			List<Portlet> siteContentPortlets =
+				PortalUtil.getControlPanelPortlets(
+					PortletCategoryKeys.CONTENT, themeDisplay);
 
 			Portlet groupPagesPortlet = PortletLocalServiceUtil.getPortletById(
 				PortletKeys.GROUP_PAGES);
-			Portlet siteSettingsPortlet = PortletLocalServiceUtil.getPortletById(
-				PortletKeys.SITE_SETTINGS);
+			Portlet siteSettingsPortlet =
+				PortletLocalServiceUtil.getPortletById(
+					PortletKeys.SITE_SETTINGS);
 
 			siteContentPortlets.remove(groupPagesPortlet);
 			siteContentPortlets.remove(siteSettingsPortlet);
