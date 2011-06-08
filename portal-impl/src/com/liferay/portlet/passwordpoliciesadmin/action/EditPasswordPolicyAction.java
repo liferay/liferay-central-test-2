@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portlet.enterpriseadmin.action;
+package com.liferay.portlet.passwordpoliciesadmin.action;
 
 import com.liferay.portal.DuplicatePasswordPolicyException;
 import com.liferay.portal.NoSuchPasswordPolicyException;
@@ -26,6 +26,7 @@ import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.PasswordPolicyServiceUtil;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portlet.enterpriseadmin.action.ActionUtil;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
