@@ -288,6 +288,12 @@ Group scopeGroup = themeDisplay.getScopeGroup();
 
 								// Title
 
+								AssetRendererFactory assetRendererFactory = AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(assetEntry.getClassName());
+
+								AssetRenderer assetRenderer = assetRendererFactory.getAssetRenderer(assetEntry.getClassPK());
+
+								String title = assetRenderer.getTitle(locale);
+
 								if (assetEntryClassName.equals(DLFileEntryConstants.getClassName())) {
 									FileEntry fileEntry = DLAppLocalServiceUtil.getFileEntry(assetEntry.getClassPK());
 
@@ -300,7 +306,7 @@ Group scopeGroup = themeDisplay.getScopeGroup();
 									sb.append("/file_system/small/");
 									sb.append(fileEntry.getIcon());
 									sb.append(".png\" />");
-									sb.append(assetEntry.getTitle());
+									sb.append(title);
 
 									row.addText(sb.toString(), rowURL);
 								}
@@ -326,7 +332,7 @@ Group scopeGroup = themeDisplay.getScopeGroup();
 									row.addText(sb.toString(), rowURL);
 								}
 								else {
-									row.addText(assetEntry.getTitle(), rowURL);
+									row.addText(title, rowURL);
 								}
 
 								// Action
