@@ -143,6 +143,15 @@ public class PasswordPolicyRelLocalServiceImpl
 		}
 	}
 
+	public PasswordPolicyRel fetchPasswordPolicyRel(
+			String className, long classPK)
+		throws SystemException {
+
+		long classNameId = PortalUtil.getClassNameId(className);
+
+		return passwordPolicyRelPersistence.fetchByC_C(classNameId, classPK);
+	}
+
 	public PasswordPolicyRel getPasswordPolicyRel(
 			long passwordPolicyId, String className, long classPK)
 		throws PortalException, SystemException {

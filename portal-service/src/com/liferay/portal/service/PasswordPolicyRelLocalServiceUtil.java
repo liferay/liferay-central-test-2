@@ -159,6 +159,20 @@ public class PasswordPolicyRelLocalServiceUtil {
 	}
 
 	/**
+	* Returns the password policy rel with the className and classPK.
+	*
+	* @param className the name of the class assigned to the password policy
+	* @param classPK the primary key for the class assigned to the password policy
+	* @return the password policy rel, null if not found
+	* @throws com.liferay.portal.kernel.exception.SystemException if a system exception occurred
+	*/
+	public com.liferay.portal.model.PasswordPolicyRel fetchPasswordPolicyRel(
+		java.lang.String className, long classPK)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().fetchPasswordPolicyRel(className, classPK);
+	}
+
+	/**
 	* Returns the password policy rel with the primary key.
 	*
 	* @param passwordPolicyRelId the primary key of the password policy rel
