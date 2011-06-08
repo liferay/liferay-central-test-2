@@ -48,6 +48,7 @@
 <%@ page import="com.liferay.portal.kernel.scheduler.Trigger" %>
 <%@ page import="com.liferay.portal.kernel.scheduler.messaging.SchedulerResponse" %>
 <%@ page import="com.liferay.portal.kernel.servlet.ServletContextPool" %>
+<%@ page import="com.liferay.portal.kernel.staging.LayoutStagingUtil" %>
 <%@ page import="com.liferay.portal.kernel.staging.StagingConstants" %>
 <%@ page import="com.liferay.portal.kernel.staging.StagingUtil" %>
 <%@ page import="com.liferay.portal.lar.LayoutExporter" %>
