@@ -30,7 +30,7 @@ import org.hibernate.usertype.CompositeUserType;
  */
 public class FloatType implements CompositeUserType, Serializable {
 
-	public static final Float DEFAULT_VALUE = Float.valueOf(0.0F);
+	public static final Float DEFAULT_VALUE = Float.valueOf(0);
 
 	public Object assemble(
 		Serializable cached, SessionImplementor session, Object owner) {

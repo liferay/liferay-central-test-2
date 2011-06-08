@@ -30,7 +30,7 @@ import org.hibernate.usertype.CompositeUserType;
  */
 public class DoubleType implements CompositeUserType, Serializable {
 
-	public static final Double DEFAULT_VALUE = Double.valueOf(0.0);
+	public static final Double DEFAULT_VALUE = Double.valueOf(0);
 
 	public Object assemble(
 		Serializable cached, SessionImplementor session, Object owner) {

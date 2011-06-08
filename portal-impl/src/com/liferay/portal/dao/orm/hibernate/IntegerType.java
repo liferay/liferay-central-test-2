@@ -80,9 +80,8 @@ public class IntegerType implements CompositeUserType, Serializable {
 	}
 
 	public Object nullSafeGet(
-			ResultSet rs, String[] names, SessionImplementor session,
-			Object owner)
-		throws SQLException {
+		ResultSet rs, String[] names, SessionImplementor session,
+		Object owner) {
 
 		Integer value = null;
 

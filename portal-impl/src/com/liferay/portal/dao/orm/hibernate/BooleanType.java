@@ -79,9 +79,9 @@ public class BooleanType implements CompositeUserType, Serializable {
 	}
 
 	public Object nullSafeGet(
-		ResultSet rs, String[] names, SessionImplementor session,
-		Object owner)
-	throws SQLException {
+			ResultSet rs, String[] names, SessionImplementor session,
+			Object owner)
+		throws SQLException {
 
 		Boolean value = StandardBasicTypes.BOOLEAN.nullSafeGet(
 			rs, names[0], session);
