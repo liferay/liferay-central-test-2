@@ -165,6 +165,11 @@ String labelTag = AUIUtil.buildLabel(inlineLabel, showForLabel, forLabel);
 			valueString = value.toString();
 		}
 
+		if (valueString.equalsIgnoreCase("true") ||
+			valueString.equalsIgnoreCase("false")) {
+			checked = GetterUtil.getBoolean(valueString);
+		}
+
 		if (!ignoreRequestValue) {
 			String requestValue = ParamUtil.getString(request, name);
 
@@ -185,6 +190,11 @@ String labelTag = AUIUtil.buildLabel(inlineLabel, showForLabel, forLabel);
 
 		if (value != null) {
 			valueString = value.toString();
+		}
+
+		if (valueString.equalsIgnoreCase("true") ||
+			valueString.equalsIgnoreCase("false")) {
+			checked = GetterUtil.getBoolean(valueString);
 		}
 
 		if (!ignoreRequestValue) {
