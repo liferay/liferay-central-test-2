@@ -27,7 +27,6 @@ import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
 import com.liferay.portal.kernel.lar.UserIdStrategy;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.KeyValuePair;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.MapUtil;
@@ -212,25 +211,26 @@ public class PortletDataContextImpl implements PortletDataContext {
 		AssetEntry assetEntry = AssetEntryLocalServiceUtil.getEntry(
 			clazz.getName(), classPK);
 
-		List<AssetLink> allDirectAssetLinks =
+		List<AssetLink> directAssetLinks =
 			AssetLinkLocalServiceUtil.getDirectLinks(assetEntry.getEntryId());
 
-		if (allDirectAssetLinks.isEmpty()) {
+		if (directAssetLinks.isEmpty()) {
 			return;
 		}
 
 		Map<Integer, List<AssetLink>> assetLinksMap =
 			new HashMap<Integer, List<AssetLink>>();
 
-		for (AssetLink assetLink : allDirectAssetLinks) {
-			List assetLinks = assetLinksMap.get(assetLink.getType());
+		for (AssetLink assetLink : directAssetLinks) {
+			List<AssetLink> assetLinks = assetLinksMap.get(assetLink.getType());
 
 			if (assetLinks == null) {
 				assetLinks = new ArrayList<AssetLink>();
+
+				assetLinksMap.put(assetLink.getType(), assetLinks);
 			}
 
 			assetLinks.add(assetLink);
-			assetLinksMap.put(assetLink.getType(), assetLinks);
 		}
 
 		for (Map.Entry<Integer, List<AssetLink>> entry :
@@ -240,7 +240,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 			List<AssetLink> assetLinks = entry.getValue();
 
 			List<String> assetLinkUuids = new ArrayList<String>(
-				allDirectAssetLinks.size());
+				directAssetLinks.size());
 
 			for (AssetLink assetLink : assetLinks) {
 				try {

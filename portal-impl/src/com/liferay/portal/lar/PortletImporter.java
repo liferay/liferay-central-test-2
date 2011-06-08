@@ -1048,11 +1048,11 @@ public class PortletImporter {
 		for (Element assetLinkElement : assetLinkElements) {
 			String sourceUuid = GetterUtil.getString(
 				assetLinkElement.attributeValue("source-uuid"));
-			int assetLinkType = GetterUtil.getInteger(
-				assetLinkElement.attributeValue("type"));
 			String[] assetEntryUuidArray = StringUtil.split(
 				GetterUtil.getString(
 					assetLinkElement.attributeValue("target-uuids")));
+			int assetLinkType = GetterUtil.getInteger(
+				assetLinkElement.attributeValue("type"));
 
 			List<Long> assetEntryIds = new ArrayList<Long>();
 

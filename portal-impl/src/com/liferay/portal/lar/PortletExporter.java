@@ -445,9 +445,9 @@ public class PortletExporter {
 			Element assetElement = rootElement.addElement("asset-link");
 
 			assetElement.addAttribute("source-uuid", sourceAssetEntryUuid);
-			assetElement.addAttribute("type", assetLinkType);
 			assetElement.addAttribute(
 				"target-uuids", StringUtil.merge(targetAssetEntryUuids));
+			assetElement.addAttribute("type", assetLinkType);
 		}
 
 		portletDataContext.addZipEntry(

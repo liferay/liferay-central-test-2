@@ -117,9 +117,7 @@ public class AssetLinkLocalServiceImpl extends AssetLinkLocalServiceBaseImpl {
 		}
 	}
 
-	public List<AssetLink> getDirectLinks(long entryId)
-		throws SystemException {
-
+	public List<AssetLink> getDirectLinks(long entryId) throws SystemException {
 		return assetLinkPersistence.findByE1(entryId);
 	}
 
@@ -130,7 +128,6 @@ public class AssetLinkLocalServiceImpl extends AssetLinkLocalServiceBaseImpl {
 	}
 
 	public List<AssetLink> getLinks(long entryId) throws SystemException {
-
 		List<AssetLink> e1Links = assetLinkPersistence.findByE1(entryId);
 		List<AssetLink> e2Links = assetLinkPersistence.findByE2(entryId);
 
