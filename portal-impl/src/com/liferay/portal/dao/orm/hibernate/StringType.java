@@ -31,7 +31,7 @@ import org.hibernate.usertype.CompositeUserType;
 /**
  * @author Brian Wing Shun Chan
  */
-public class StringType implements CompositeUserType {
+public class StringType implements CompositeUserType, Serializable {
 
 	public Object assemble(
 		Serializable cached, SessionImplementor session, Object owner) {
@@ -66,7 +66,7 @@ public class StringType implements CompositeUserType {
 	}
 
 	public Type[] getPropertyTypes() {
-		return new Type[] {new org.hibernate.type.StringType()};
+		return new Type[] {StandardBasicTypes.STRING};
 	}
 
 	public Object getPropertyValue(Object component, int property) {

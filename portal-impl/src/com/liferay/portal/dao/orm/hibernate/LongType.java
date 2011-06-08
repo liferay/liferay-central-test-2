@@ -21,21 +21,22 @@ import java.io.Serializable;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Types;
 
+import org.hibernate.engine.SessionImplementor;
 import org.hibernate.type.StandardBasicTypes;
-import org.hibernate.usertype.UserType;
+import org.hibernate.type.Type;
+import org.hibernate.usertype.CompositeUserType;
 
 /**
  * @author Brian Wing Shun Chan
  */
-public class LongType implements Serializable, UserType {
+public class LongType implements CompositeUserType, Serializable {
 
-	public static final long DEFAULT_VALUE = 0;
+	public static final Long DEFAULT_VALUE = Long.valueOf(0);
 
-	public static final int[] SQL_TYPES = new int[] {Types.BIGINT};
+	public Object assemble(
+		Serializable cached, SessionImplementor session, Object owner) {
 
-	public Object assemble(Serializable cached, Object owner) {
 		return cached;
 	}
 
@@ -43,7 +44,7 @@ public class LongType implements Serializable, UserType {
 		return obj;
 	}
 
-	public Serializable disassemble(Object value) {
+	public Serializable disassemble(Object value, SessionImplementor session) {
 		return (Serializable)value;
 	}
 
@@ -59,6 +60,18 @@ public class LongType implements Serializable, UserType {
 		}
 	}
 
+	public String[] getPropertyNames() {
+		return new String[0];
+	}
+
+	public Type[] getPropertyTypes() {
+		return new Type[] {StandardBasicTypes.LONG};
+	}
+
+	public Object getPropertyValue(Object component, int property) {
+		return component;
+	}
+
 	public int hashCode(Object x) {
 		return x.hashCode();
 	}
@@ -67,13 +80,16 @@ public class LongType implements Serializable, UserType {
 		return false;
 	}
 
-	public Object nullSafeGet(ResultSet rs, String[] names, Object owner)
+	public Object nullSafeGet(
+			ResultSet rs, String[] names, SessionImplementor session,
+			Object owner)
 		throws SQLException {
 
 		Object value = null;
 
 		try {
-			value = StandardBasicTypes.LONG.nullSafeGet(rs, names[0]);
+			value = StandardBasicTypes.LONG.nullSafeGet(
+				rs, names[0], session);
 		}
 		catch (SQLException sqle1) {
 
@@ -83,7 +99,8 @@ public class LongType implements Serializable, UserType {
 			try {
 				value = new Long(
 					GetterUtil.getLong(
-						StandardBasicTypes.STRING.nullSafeGet(rs, names[0])));
+						StandardBasicTypes.STRING.nullSafeGet(
+							rs, names[0], session)));
 			}
 			catch (SQLException sqle2) {
 				throw sqle1;
@@ -91,24 +108,29 @@ public class LongType implements Serializable, UserType {
 		}
 
 		if (value == null) {
-			return new Long(DEFAULT_VALUE);
+			return DEFAULT_VALUE;
 		}
 		else {
 			return value;
 		}
 	}
 
-	public void nullSafeSet(PreparedStatement ps, Object obj, int index)
+	public void nullSafeSet(
+			PreparedStatement ps, Object target, int index,
+			SessionImplementor session)
 		throws SQLException {
 
-		if (obj == null) {
-			obj = new Long(DEFAULT_VALUE);
+		if (target == null) {
+			target = DEFAULT_VALUE;
 		}
 
-		ps.setLong(index, (Long)obj);
+		ps.setLong(index, (Long)target);
 	}
 
-	public Object replace(Object original, Object target, Object owner) {
+	public Object replace(
+		Object original, Object target, SessionImplementor session,
+		Object owner) {
+
 		return original;
 	}
 
@@ -116,8 +138,7 @@ public class LongType implements Serializable, UserType {
 		return Long.class;
 	}
 
-	public int[] sqlTypes() {
-		return SQL_TYPES;
+	public void setPropertyValue(Object component, int property, Object value) {
 	}
 
 }

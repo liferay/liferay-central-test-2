@@ -19,21 +19,22 @@ import java.io.Serializable;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Types;
 
+import org.hibernate.engine.SessionImplementor;
 import org.hibernate.type.StandardBasicTypes;
-import org.hibernate.usertype.UserType;
+import org.hibernate.type.Type;
+import org.hibernate.usertype.CompositeUserType;
 
 /**
  * @author Brian Wing Shun Chan
  */
-public class FloatType implements Serializable, UserType {
+public class FloatType implements CompositeUserType, Serializable {
 
-	public static final float DEFAULT_VALUE = 0.0F;
+	public static final Float DEFAULT_VALUE = Float.valueOf(0.0F);
 
-	public static final int[] SQL_TYPES = new int[] {Types.FLOAT};
+	public Object assemble(
+		Serializable cached, SessionImplementor session, Object owner) {
 
-	public Object assemble(Serializable cached, Object owner) {
 		return cached;
 	}
 
@@ -41,7 +42,7 @@ public class FloatType implements Serializable, UserType {
 		return obj;
 	}
 
-	public Serializable disassemble(Object value) {
+	public Serializable disassemble(Object value, SessionImplementor session) {
 		return (Serializable)value;
 	}
 
@@ -57,6 +58,18 @@ public class FloatType implements Serializable, UserType {
 		}
 	}
 
+	public String[] getPropertyNames() {
+		return new String[0];
+	}
+
+	public Type[] getPropertyTypes() {
+		return new Type[] {StandardBasicTypes.FLOAT};
+	}
+
+	public Object getPropertyValue(Object component, int property) {
+		return component;
+	}
+
 	public int hashCode(Object x) {
 		return x.hashCode();
 	}
@@ -65,30 +78,38 @@ public class FloatType implements Serializable, UserType {
 		return false;
 	}
 
-	public Object nullSafeGet(ResultSet rs, String[] names, Object owner)
+	public Object nullSafeGet(
+			ResultSet rs, String[] names, SessionImplementor session,
+			Object owner)
 		throws SQLException {
 
-		Float value = StandardBasicTypes.FLOAT.nullSafeGet(rs, names[0]);
+		Float value = StandardBasicTypes.FLOAT.nullSafeGet(
+			rs, names[0], session);
 
 		if (value == null) {
-			return new Float(DEFAULT_VALUE);
+			return DEFAULT_VALUE;
 		}
 		else {
 			return value;
 		}
 	}
 
-	public void nullSafeSet(PreparedStatement ps, Object obj, int index)
+	public void nullSafeSet(
+			PreparedStatement ps, Object target, int index,
+			SessionImplementor session)
 		throws SQLException {
 
-		if (obj == null) {
-			obj = new Float(DEFAULT_VALUE);
+		if (target == null) {
+			target = DEFAULT_VALUE;
 		}
 
-		ps.setFloat(index, (Float)obj);
+		ps.setFloat(index, (Float)target);
 	}
 
-	public Object replace(Object original, Object target, Object owner) {
+	public Object replace(
+		Object original, Object target, SessionImplementor session,
+		Object owner) {
+
 		return original;
 	}
 
@@ -96,8 +117,7 @@ public class FloatType implements Serializable, UserType {
 		return Float.class;
 	}
 
-	public int[] sqlTypes() {
-		return SQL_TYPES;
+	public void setPropertyValue(Object component, int property, Object value) {
 	}
 
 }

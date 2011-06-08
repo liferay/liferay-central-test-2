@@ -19,21 +19,22 @@ import java.io.Serializable;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Types;
 
+import org.hibernate.engine.SessionImplementor;
 import org.hibernate.type.StandardBasicTypes;
-import org.hibernate.usertype.UserType;
+import org.hibernate.type.Type;
+import org.hibernate.usertype.CompositeUserType;
 
 /**
  * @author Brian Wing Shun Chan
  */
-public class BooleanType implements Serializable, UserType {
+public class BooleanType implements CompositeUserType, Serializable {
 
-	public static final boolean DEFAULT_VALUE = false;
+	public static final Boolean DEFAULT_VALUE = Boolean.FALSE;
 
-	public static final int[] SQL_TYPES = new int[] {Types.BIT};
+	public Object assemble(
+		Serializable cached, SessionImplementor session, Object owner) {
 
-	public Object assemble(Serializable cached, Object owner) {
 		return cached;
 	}
 
@@ -41,7 +42,7 @@ public class BooleanType implements Serializable, UserType {
 		return obj;
 	}
 
-	public Serializable disassemble(Object value) {
+	public Serializable disassemble(Object value, SessionImplementor session) {
 		return (Serializable)value;
 	}
 
@@ -57,6 +58,18 @@ public class BooleanType implements Serializable, UserType {
 		}
 	}
 
+	public String[] getPropertyNames() {
+		return new String[0];
+	}
+
+	public Type[] getPropertyTypes() {
+		return new Type[] {StandardBasicTypes.BOOLEAN};
+	}
+
+	public Object getPropertyValue(Object component, int property) {
+		return component;
+	}
+
 	public int hashCode(Object x) {
 		return x.hashCode();
 	}
@@ -65,30 +78,38 @@ public class BooleanType implements Serializable, UserType {
 		return false;
 	}
 
-	public Object nullSafeGet(ResultSet rs, String[] names, Object owner)
-		throws SQLException {
+	public Object nullSafeGet(
+		ResultSet rs, String[] names, SessionImplementor session,
+		Object owner)
+	throws SQLException {
 
-		Boolean value = StandardBasicTypes.BOOLEAN.nullSafeGet(rs, names[0]);
+		Boolean value = StandardBasicTypes.BOOLEAN.nullSafeGet(
+			rs, names[0], session);
 
 		if (value == null) {
-			return Boolean.valueOf(DEFAULT_VALUE);
+			return DEFAULT_VALUE;
 		}
 		else {
 			return value;
 		}
 	}
 
-	public void nullSafeSet(PreparedStatement ps, Object obj, int index)
+	public void nullSafeSet(
+			PreparedStatement ps, Object target, int index,
+			SessionImplementor session)
 		throws SQLException {
 
-		if (obj == null) {
-			obj = Boolean.valueOf(DEFAULT_VALUE);
+		if (target == null) {
+			target = DEFAULT_VALUE;
 		}
 
-		ps.setBoolean(index, (Boolean)obj);
+		ps.setBoolean(index, (Boolean)target);
 	}
 
-	public Object replace(Object original, Object target, Object owner) {
+	public Object replace(
+		Object original, Object target, SessionImplementor session,
+		Object owner) {
+
 		return original;
 	}
 
@@ -96,8 +117,7 @@ public class BooleanType implements Serializable, UserType {
 		return Boolean.class;
 	}
 
-	public int[] sqlTypes() {
-		return SQL_TYPES;
+	public void setPropertyValue(Object component, int property, Object value) {
 	}
 
 }

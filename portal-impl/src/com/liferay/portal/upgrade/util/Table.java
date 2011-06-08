@@ -14,12 +14,6 @@
 
 package com.liferay.portal.upgrade.util;
 
-import com.liferay.portal.dao.orm.hibernate.BooleanType;
-import com.liferay.portal.dao.orm.hibernate.DoubleType;
-import com.liferay.portal.dao.orm.hibernate.FloatType;
-import com.liferay.portal.dao.orm.hibernate.IntegerType;
-import com.liferay.portal.dao.orm.hibernate.LongType;
-import com.liferay.portal.dao.orm.hibernate.ShortType;
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.io.unsync.UnsyncBufferedReader;
 import com.liferay.portal.kernel.io.unsync.UnsyncBufferedWriter;
@@ -56,12 +50,10 @@ import java.util.Date;
 
 import org.apache.commons.lang.time.StopWatch;
 
-import org.hibernate.usertype.UserType;
-
 /**
  * @author Alexander Chow
  * @author Brian Wing Shun Chan
- * @author Raymond Augé
+ * @author Raymond AugÃ©
  */
 public class Table {
 
@@ -276,13 +268,16 @@ public class Table {
 
 		int t = type.intValue();
 
-		UserType userType = null;
-
 		if (t == Types.BIGINT) {
-			userType = new LongType();
+			try {
+				value = GetterUtil.getLong(rs.getLong(name));
+			}
+			catch (SQLException e) {
+				value = GetterUtil.getLong(rs.getString(name));
+			}
 		}
 		else if (t == Types.BOOLEAN) {
-			userType = new BooleanType();
+			value = GetterUtil.getBoolean(rs.getBoolean(name));
 		}
 		else if (t == Types.CLOB) {
 			try {
@@ -319,16 +314,16 @@ public class Table {
 			}
 		}
 		else if (t == Types.DOUBLE) {
-			userType = new DoubleType();
+			value = GetterUtil.getDouble(rs.getDouble(name));
 		}
 		else if (t == Types.FLOAT) {
-			userType = new FloatType();
+			value = GetterUtil.getFloat(rs.getFloat(name));
 		}
 		else if (t == Types.INTEGER) {
-			userType = new IntegerType();
+			value = GetterUtil.getInteger(rs.getInt(name));
 		}
 		else if (t == Types.SMALLINT) {
-			userType = new ShortType();
+			value = GetterUtil.getShort(rs.getShort(name));
 		}
 		else if (t == Types.TIMESTAMP) {
 			try {
@@ -347,19 +342,6 @@ public class Table {
 		else {
 			throw new UpgradeException(
 				"Upgrade code using unsupported class type " + type);
-		}
-
-		if (userType != null) {
-			try {
-				value = userType.nullSafeGet(rs, new String[] {name}, null);
-			}
-			catch (Exception e) {
-				_log.error(
-					"Unable to nullSafeGet " + name + " with " +
-						userType.getClass().getName());
-
-				throw e;
-			}
 		}
 
 		return value;
