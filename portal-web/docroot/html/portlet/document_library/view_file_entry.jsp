@@ -129,6 +129,7 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 
 	<liferay-ui:header
 		backURL="<%= redirect %>"
+		escapeXml="<%= false %>"
 		title="<%= fileEntry.getTitle() %>"
 	/>
 </c:if>

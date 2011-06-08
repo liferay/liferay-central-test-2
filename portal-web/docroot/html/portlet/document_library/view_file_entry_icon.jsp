@@ -37,7 +37,7 @@ boolean showCheckBox = DLFileEntryPermission.contains(permissionChecker, fileEnt
 
 	<liferay-util:include page="/html/portlet/document_library/file_entry_action.jsp" />
 
-	<a class="document-link" data-folder="<%= Boolean.FALSE.toString() %>" href="<%= tempRowURL.toString() %>" title="<%= HtmlUtil.escape(fileEntry.getTitle()) + " - " + HtmlUtil.escape(fileEntry.getDescription()) %>">
+	<a class="document-link" data-folder="<%= Boolean.FALSE.toString() %>" href="<%= tempRowURL.toString() %>" title="<%= HtmlUtil.escapeAttribute(HtmlUtil.unescape(fileEntry.getTitle()) + " - " + HtmlUtil.unescape(fileEntry.getDescription())) %>">
 		<c:if test="<%= fileEntry.isLocked() %>">
 			<img alt="<%= LanguageUtil.get(pageContext, "locked") %>" class="locked-icon" src="<%= themeDisplay.getPathThemeImages() %>/file_system/large/overlay_lock.png">
 		</c:if>
@@ -45,7 +45,7 @@ boolean showCheckBox = DLFileEntryPermission.contains(permissionChecker, fileEnt
 		<img border="no" class="document-thumbnail" src="<%= thumbnailSrc %>" style="height: <%= PropsValues.DL_FILE_ENTRY_THUMBNAIL_HEIGHT %>; width: <%= PropsValues.DL_FILE_ENTRY_THUMBNAIL_WIDTH %>;" />
 
 		<span class="document-title">
-			<%= HtmlUtil.escape(StringUtil.shorten(fileEntry.getTitle(), 60)) %>
+			<%= StringUtil.shorten(fileEntry.getTitle(), 60) %>
 		</span>
 	</a>
 </div>
