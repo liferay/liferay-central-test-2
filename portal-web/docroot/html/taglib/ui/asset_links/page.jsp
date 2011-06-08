@@ -27,7 +27,7 @@ List<AssetLink> assetLinks = new ArrayList<AssetLink>();
 if (classPK > 0) {
 	assetEntry = AssetEntryLocalServiceUtil.getEntry(className, classPK);
 
-	assetLinks = AssetLinkLocalServiceUtil.getDirectLinks(assetEntry.getEntryId(), AssetLinkConstants.TYPE_RELATED);
+	assetLinks = AssetLinkLocalServiceUtil.getDirectLinks(assetEntry.getEntryId());
 }
 %>
 

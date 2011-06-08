@@ -277,9 +277,21 @@ public class AssetLinkLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.asset.model.AssetLink> getDirectLinks(
+		long entryId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getDirectLinks(entryId);
+	}
+
+	public static java.util.List<com.liferay.portlet.asset.model.AssetLink> getDirectLinks(
 		long entryId, int typeId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getDirectLinks(entryId, typeId);
+	}
+
+	public static java.util.List<com.liferay.portlet.asset.model.AssetLink> getLinks(
+		long entryId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getLinks(entryId);
 	}
 
 	public static java.util.List<com.liferay.portlet.asset.model.AssetLink> getLinks(

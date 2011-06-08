@@ -267,9 +267,21 @@ public class AssetLinkLocalServiceWrapper implements AssetLinkLocalService {
 	}
 
 	public java.util.List<com.liferay.portlet.asset.model.AssetLink> getDirectLinks(
+		long entryId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _assetLinkLocalService.getDirectLinks(entryId);
+	}
+
+	public java.util.List<com.liferay.portlet.asset.model.AssetLink> getDirectLinks(
 		long entryId, int typeId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _assetLinkLocalService.getDirectLinks(entryId, typeId);
+	}
+
+	public java.util.List<com.liferay.portlet.asset.model.AssetLink> getLinks(
+		long entryId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _assetLinkLocalService.getLinks(entryId);
 	}
 
 	public java.util.List<com.liferay.portlet.asset.model.AssetLink> getLinks(
