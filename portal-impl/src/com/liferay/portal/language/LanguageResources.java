@@ -17,6 +17,7 @@ package com.liferay.portal.language;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.PropertiesUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
@@ -106,11 +107,11 @@ public class LanguageResources {
 				}
 			}
 
-			return new Locale(locale.getLanguage());
+			return LocaleUtil.fromLanguageId(locale.getLanguage());
 		}
 
 		if (Validator.isNotNull(locale.getLanguage())) {
-			return new Locale(StringPool.BLANK);
+			return _blankLocale;
 		}
 
 		return null;
@@ -217,6 +218,7 @@ public class LanguageResources {
 
 	private static Log _log = LogFactoryUtil.getLog(LanguageResources.class);
 
+	private static Locale _blankLocale = new Locale(StringPool.BLANK);
 	private static String _config;
 	private static Map<Locale, Map<String, String>> _languageMaps =
 		new ConcurrentHashMap<Locale, Map<String, String>>(64);
