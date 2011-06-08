@@ -347,9 +347,7 @@ if (row == null && portletName.equals(PortletKeys.DOCUMENT_LIBRARY_DISPLAY)) {
 	if (A.SWF.isFlashVersionAtLeast(9)) {
 		var uploadMultipleDocumentsIcon = A.all('.upload-multiple-documents:hidden');
 
-		if (uploadMultipleDocumentsIcon) {
-			uploadMultipleDocumentsIcon.show();
-		}
+		uploadMultipleDocumentsIcon.show();
 	}
 
 	var webdavAction = A.one('.<%= randomNamespace %>-webdav-action');
