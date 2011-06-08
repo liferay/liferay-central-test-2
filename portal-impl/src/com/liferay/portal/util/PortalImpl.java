@@ -639,6 +639,7 @@ public class PortalImpl implements Portal {
 
 	public void copyRequestParameters(
 		ActionRequest actionRequest, ActionResponse actionResponse) {
+
 		if (actionResponse instanceof StateAwareResponseImpl) {
 			StateAwareResponseImpl stateAwareResponseImpl =
 				(StateAwareResponseImpl)actionResponse;
@@ -646,9 +647,10 @@ public class PortalImpl implements Portal {
 			if (stateAwareResponseImpl.getRedirectLocation() != null) {
 				if (_log.isDebugEnabled()) {
 					_log.debug(
-						"Can not copy parameters on a redirected " +
-						"StateAwareResponseImpl.");
+						"Cannot copy parameters on a redirected " +
+							"StateAwareResponseImpl");
 				}
+
 				return;
 			}
 		}
