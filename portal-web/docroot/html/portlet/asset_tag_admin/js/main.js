@@ -148,6 +148,12 @@ AUI().add(
 
 						instance._createTagSearch();
 
+						var history = new A.HistoryHash();
+
+						history.on('change', instance._onHistoryChange, instance);
+
+						instance._history = history;
+
 						instance._loadData();
 
 						instance.after('drag:drag', instance._afterDrag);
@@ -636,9 +642,22 @@ AUI().add(
 								lastPageLinkLabel: '>>',
 								nextPageLinkLabel: '>',
 								prevPageLinkLabel: '<',
-								rowsPerPage: instanceConfig.tagsPerPage,
 								rowsPerPageOptions: instanceConfig.tagsPerPageOptions
 							};
+
+							var hasOwnProperty = Object.prototype.hasOwnProperty;
+
+							var paginatorMap = instance._getTagsPaginatorMap();
+
+							var history = instance._history;
+
+							for (var item in paginatorMap) {
+								if (hasOwnProperty.call(paginatorMap, item)) {
+									var paginatorItem = paginatorMap[item];
+
+									config[item] = instance._toNumber(history.get(paginatorItem.historyEntry)) || paginatorItem.defaultValue;
+								}
+							}
 
 							tagsPaginator = new A.Paginator(config).render();
 
@@ -648,6 +667,31 @@ AUI().add(
 						}
 
 						return tagsPaginator;
+					},
+
+					_getTagsPaginatorMap: function() {
+						var instance = this;
+
+						var paginatorMap = instance._mapPaginator;
+
+						if (!paginatorMap) {
+							paginatorMap = {
+								page: {
+									historyEntry: instance._prefixedPortletId + 'page',
+									defaultValue: 1,
+									formatter: instance._toNumber
+								},
+								rowsPerPage: {
+									historyEntry: instance._prefixedPortletId + 'rowsPerPage',
+									defaultValue: instance._config.tagsPerPage,
+									formatter: instance._toNumber
+								}
+							};
+
+							instance._mapPaginator = paginatorMap;
+						}
+
+						return paginatorMap;
 					},
 
 					_getTagPanelMerge: function() {
@@ -665,7 +709,7 @@ AUI().add(
 							var panelBodyContent = Lang.sub(TPL_TAG_MERGE_BODY, tplValues);
 							var panelFooterContent = Lang.sub(TPL_TAG_MERGE_FOOTER, tplValues);
 
-							var tagPanelMerge = new A.Dialog(
+							tagPanelMerge = new A.Dialog(
 								{
 									align: instance._dialogAlignConfig,
 									bodyContent: panelBodyContent,
@@ -855,6 +899,23 @@ AUI().add(
 						var inputTagNameNode = tagFormEdit.one('.tag-name input');
 
 						Liferay.Util.focusFormField(inputTagNameNode);
+					},
+
+					_hasOwnProperties: function(obj) {
+						if (Object.keys && Object.keys(obj).length) {
+							return true;
+						}
+						else {
+							var hasOwnProperty = Object.prototype.hasOwnProperty;
+
+							for (var item in obj) {
+								if (hasOwnProperty.call(obj, item)) {
+									return true;
+								}
+							}
+						}
+
+						return false;
 					},
 
 					_hideAllMessages: function() {
@@ -1061,6 +1122,42 @@ AUI().add(
 						instance._updateTag(form);
 					},
 
+					_onHistoryChange: function(event) {
+						var instance = this;
+
+						if (event.src === A.HistoryHash.SRC_HASH) {
+							var changed = event.changed;
+							var removed = event.removed;
+
+							var paginatorState = {};
+
+							var hasOwnProperty = Object.prototype.hasOwnProperty;
+
+							var paginatorMap = instance._getTagsPaginatorMap();
+
+							for (var item in paginatorMap) {
+								if (hasOwnProperty.call(paginatorMap, item)) {
+									var paginatorItem = paginatorMap[item];
+
+									var paginatorItemHistoryEntry = paginatorItem.historyEntry;
+
+									if (hasOwnProperty.call(changed, paginatorItemHistoryEntry)) {
+										paginatorState[item] = paginatorItem.formatter(changed[paginatorItemHistoryEntry].newVal);
+									}
+									else if (hasOwnProperty.call(removed, paginatorItemHistoryEntry)) {
+										paginatorState[item] = paginatorItem.defaultValue;
+									}
+								}
+							}
+
+							if (instance._hasOwnProperties(paginatorState)) {
+								instance._tagsPaginator.setState(paginatorState);
+
+								instance._reloadData();
+							}
+						}
+					},
+
 					_onTagsListClick: function(event) {
 						var instance = this;
 
@@ -1125,9 +1222,43 @@ AUI().add(
 					_onTagsPaginatorChangeRequest: function(event) {
 						var instance = this;
 
-						instance._checkAllTagsCheckbox.attr('checked', false);
+						var stateBefore = event.state.before;
+						var state = event.state;
 
-						instance._displayTags();
+						var historyState = {};
+
+						var hasOwnProperty = Object.prototype.hasOwnProperty;
+
+						var paginatorMap = instance._getTagsPaginatorMap();
+
+						var history = instance._history;
+
+						for (var item in paginatorMap) {
+							if (hasOwnProperty.call(paginatorMap, item)) {
+								var paginatorItem = paginatorMap[item];
+
+								if (hasOwnProperty.call(state, item)) {
+									var newItemValue = state[item];
+
+									if (newItemValue === paginatorItem.defaultValue) {
+										var itemInHistory = history.get(paginatorItem.historyEntry);
+
+										if (Lang.isValue(itemInHistory)) {
+											historyState[paginatorItem.historyEntry] = null;
+										}
+									}
+									else if(newItemValue !== stateBefore[item]) {
+										historyState[paginatorItem.historyEntry] = newItemValue;
+									}
+								}
+							}
+						}
+
+						if (instance._hasOwnProperties(historyState)) {
+							history.add(historyState);
+						}
+
+						instance._reloadData();
 					},
 
 					_onTagUpdateFailure: function(response) {
@@ -1288,6 +1419,14 @@ AUI().add(
 						}
 					},
 
+					_reloadData: function() {
+						var instance = this;
+
+						instance._checkAllTagsCheckbox.attr('checked', false);
+
+						instance._displayTags();
+					},
+
 					_resetTagsProperties: function(event) {
 						var instance = this;
 
@@ -1431,6 +1570,10 @@ AUI().add(
 						}
 					},
 
+					_toNumber: function(value) {
+						return +value;
+					},
+
 					_updateMergeItemsTarget: function() {
 						var instance = this;
 
@@ -1518,6 +1661,6 @@ AUI().add(
 	},
 	'',
 	{
-		requires: ['aui-dialog', 'aui-dialog-iframe', 'aui-loading-mask', 'aui-paginator', 'autocomplete-base', 'aui-tree-view', 'dd', 'json', 'liferay-portlet-url', 'liferay-util-window']
+		requires: ['aui-dialog', 'aui-dialog-iframe', 'aui-loading-mask', 'aui-paginator', 'autocomplete-base', 'aui-tree-view', 'dd', 'json', 'history-hash', 'liferay-portlet-url', 'liferay-util-window']
 	}
 );
