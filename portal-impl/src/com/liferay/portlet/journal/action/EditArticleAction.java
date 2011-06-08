@@ -503,7 +503,7 @@ public class EditArticleAction extends PortletAction {
 
 		String content = ParamUtil.getString(uploadRequest, "content");
 
-		boolean overSizedContent = (Boolean)uploadRequest.getAttribute(
+		Boolean overSizedContent = (Boolean)uploadRequest.getAttribute(
 			WebKeys.OVERSIZED_CONTENT);
 
 		if (overSizedContent) {
