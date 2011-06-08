@@ -95,6 +95,7 @@ import com.liferay.portlet.journal.StructureXsdException;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.model.JournalArticleConstants;
 import com.liferay.portlet.journal.model.JournalArticleDisplay;
+import com.liferay.portlet.journal.model.JournalArticleResource;
 import com.liferay.portlet.journal.model.JournalStructure;
 import com.liferay.portlet.journal.model.JournalTemplate;
 import com.liferay.portlet.journal.model.impl.JournalArticleDisplayImpl;
@@ -2195,14 +2196,18 @@ public class JournalArticleLocalServiceImpl
 				null, article.getLayoutUuid(), 0, 0, null, false);
 		}
 		else {
+			JournalArticleResource journalArticleResource =
+				journalArticleResourceLocalService.getArticleResource(
+					article.getResourcePrimKey());
+
 			assetEntry = assetEntryLocalService.updateEntry(
 				userId, article.getGroupId(), JournalArticle.class.getName(),
-				article.getResourcePrimKey(), article.getUuid(),
-				assetCategoryIds, assetTagNames, visible, null, null,
-				displayDate, expirationDate, ContentTypes.TEXT_HTML,
-				article.getTitle(), article.getDescription(),
-				article.getDescription(), null, article.getLayoutUuid(), 0, 0,
-				null, false);
+				journalArticleResource.getResourcePrimKey(),
+				journalArticleResource.getUuid(), assetCategoryIds,
+				assetTagNames, visible, null, null, displayDate, expirationDate,
+				ContentTypes.TEXT_HTML, article.getTitle(),
+				article.getDescription(), article.getDescription(), null,
+				article.getLayoutUuid(), 0, 0, null, false);
 		}
 
 		assetLinkLocalService.updateLinks(
