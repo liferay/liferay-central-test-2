@@ -290,6 +290,8 @@ public class WebKeys implements com.liferay.portal.kernel.util.WebKeys {
 
 	public static final String OUTER_PORTLET_ID = "OUTER_PORTLET_ID";
 
+	public static final String OVERSIZED_CONTENT = "OVERSIZED_CONTENT";
+
 	public static final String PASSWORD_POLICY = "PASSWORD_POLICY";
 
 	public static final String PHONE = "PHONE";

@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.upload.UploadServletRequest;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PrefsPropsUtil;
+import com.liferay.portal.util.WebKeys;
 import com.liferay.util.SystemProperties;
 
 import java.io.File;
@@ -232,6 +233,14 @@ public class UploadServletRequestImpl
 		LiferayFileItem[] liferayFileItems = _params.get(name);
 
 		if ((liferayFileItems != null) && (liferayFileItems.length > 0)) {
+			if (liferayFileItems[0].getStoreLocation().length() >
+				LiferayFileItem.THRESHOLD_SIZE) {
+
+				_liferayServletRequest.setAttribute(
+					WebKeys.OVERSIZED_CONTENT, Boolean.TRUE);
+
+				return liferayFileItems[0].getEncodedString();
+			}
 			return liferayFileItems[0].getString();
 		}
 		else {

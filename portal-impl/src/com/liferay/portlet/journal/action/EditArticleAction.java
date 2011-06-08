@@ -45,6 +45,7 @@ import com.liferay.portlet.journal.ArticleContentException;
 import com.liferay.portlet.journal.ArticleDisplayDateException;
 import com.liferay.portlet.journal.ArticleExpirationDateException;
 import com.liferay.portlet.journal.ArticleIdException;
+import com.liferay.portlet.journal.ArticleSizeException;
 import com.liferay.portlet.journal.ArticleSmallImageNameException;
 import com.liferay.portlet.journal.ArticleSmallImageSizeException;
 import com.liferay.portlet.journal.ArticleTitleException;
@@ -206,6 +207,7 @@ public class EditArticleAction extends PortletAction {
 					 e instanceof ArticleDisplayDateException ||
 					 e instanceof ArticleExpirationDateException ||
 					 e instanceof ArticleIdException ||
+					 e instanceof ArticleSizeException ||
 					 e instanceof ArticleSmallImageNameException ||
 					 e instanceof ArticleSmallImageSizeException ||
 					 e instanceof ArticleTitleException ||
@@ -500,6 +502,15 @@ public class EditArticleAction extends PortletAction {
 		}
 
 		String content = ParamUtil.getString(uploadRequest, "content");
+
+		boolean overSizedContent = (Boolean)uploadRequest.getAttribute(
+			WebKeys.OVERSIZED_CONTENT);
+
+		if (overSizedContent) {
+			uploadRequest.removeAttribute(WebKeys.OVERSIZED_CONTENT);
+			throw new ArticleSizeException();
+		}
+
 		String type = ParamUtil.getString(uploadRequest, "type");
 		String structureId = ParamUtil.getString(uploadRequest, "structureId");
 		String templateId = ParamUtil.getString(uploadRequest, "templateId");

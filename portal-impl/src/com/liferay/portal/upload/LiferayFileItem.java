@@ -46,6 +46,10 @@ public class LiferayFileItem extends DiskFileItem {
 		_repository = repository;
 	}
 
+	public String getEncodedString() {
+		return _encodedString;
+	}
+
 	public String getFileName() {
 		if (_fileName == null) {
 			return null;
