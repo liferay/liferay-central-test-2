@@ -29,6 +29,8 @@ try {
 		<c:when test="<%= (recordSet != null) %>">
 
 			<%
+			portletDisplay.setTitle(recordSet.getName(locale));
+
 			renderRequest.setAttribute(WebKeys.DYNAMIC_DATA_LISTS_RECORD_SET, recordSet);
 			%>
 
