@@ -149,6 +149,7 @@ import com.liferay.portlet.PortletResponseImpl;
 import com.liferay.portlet.PortletURLImpl;
 import com.liferay.portlet.RenderRequestImpl;
 import com.liferay.portlet.RenderResponseImpl;
+import com.liferay.portlet.StateAwareResponseImpl;
 import com.liferay.portlet.UserAttributes;
 import com.liferay.portlet.admin.util.OmniadminUtil;
 import com.liferay.portlet.blogs.model.BlogsEntry;
@@ -638,34 +639,39 @@ public class PortalImpl implements Portal {
 
 	public void copyRequestParameters(
 		ActionRequest actionRequest, ActionResponse actionResponse) {
+		if (actionResponse instanceof StateAwareResponseImpl) {
+			StateAwareResponseImpl stateAwareResponseImpl =
+				(StateAwareResponseImpl)actionResponse;
 
-		try {
-			ActionResponseImpl actionResponseImpl =
-				(ActionResponseImpl)actionResponse;
-
-			Map<String, String[]> renderParameters =
-				actionResponseImpl.getRenderParameterMap();
-
-			actionResponse.setRenderParameter("p_p_lifecycle", "1");
-
-			Enumeration<String> enu = actionRequest.getParameterNames();
-
-			while (enu.hasMoreElements()) {
-				String param = enu.nextElement();
-				String[] values = actionRequest.getParameterValues(param);
-
-				if (renderParameters.get(
-						actionResponseImpl.getNamespace() + param) == null) {
-
-					actionResponse.setRenderParameter(param, values);
+			if (stateAwareResponseImpl.getRedirectLocation() != null) {
+				if (_log.isDebugEnabled()) {
+					_log.debug(
+						"Can not copy parameters on a redirected " +
+						"StateAwareResponseImpl.");
 				}
+				return;
 			}
 		}
-		catch (IllegalStateException ise) {
 
-			// This should only happen if the developer called
-			// sendRedirect of javax.portlet.ActionResponse
+		ActionResponseImpl actionResponseImpl =
+			(ActionResponseImpl)actionResponse;
 
+		Map<String, String[]> renderParameters =
+			actionResponseImpl.getRenderParameterMap();
+
+		actionResponse.setRenderParameter("p_p_lifecycle", "1");
+
+		Enumeration<String> enu = actionRequest.getParameterNames();
+
+		while (enu.hasMoreElements()) {
+			String param = enu.nextElement();
+			String[] values = actionRequest.getParameterValues(param);
+
+			if (renderParameters.get(
+					actionResponseImpl.getNamespace() + param) == null) {
+
+				actionResponse.setRenderParameter(param, values);
+			}
 		}
 	}
 
