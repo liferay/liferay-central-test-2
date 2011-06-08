@@ -29,7 +29,7 @@ boolean showCheckBox = DLFolderPermission.contains(permissionChecker, folder, Ac
 
 <div class="document-display-style icon <%= showCheckBox ? "selectable" : StringPool.BLANK %>">
 	<c:if test="<%= showCheckBox %>">
-		<input class="overlay document-selector" name="<portlet:namespace /><%= RowChecker.ROW_IDS + StringPool.UNDERLINE + Folder.class.getName() %>" type="checkbox" value="<%= folder.getFolderId() %>" />
+		<aui:input inputCssClass="overlay document-selector" label="" name="<%= RowChecker.ROW_IDS + StringPool.UNDERLINE + Folder.class.getName() %>" type="checkbox" value="<%= folder.getFolderId() %>" />
 	</c:if>
 
 	<liferay-util:include page="/html/portlet/document_library/folder_action.jsp" />
