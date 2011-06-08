@@ -84,7 +84,8 @@ public class VelocityEngineImpl implements VelocityEngine {
 
 		extendedProperties.setProperty(
 			"string." + _RESOURCE_LOADER + ".cache",
-			PropsValues.VELOCITY_ENGINE_RESOURCE_MANAGER_CACHE_ENABLED);
+			String.valueOf(
+				PropsValues.VELOCITY_ENGINE_RESOURCE_MANAGER_CACHE_ENABLED));
 
 		extendedProperties.setProperty(
 			"string." + _RESOURCE_LOADER + ".class",
@@ -96,7 +97,8 @@ public class VelocityEngineImpl implements VelocityEngine {
 
 		extendedProperties.setProperty(
 			"servlet." + _RESOURCE_LOADER + ".cache",
-			PropsValues.VELOCITY_ENGINE_RESOURCE_MANAGER_CACHE_ENABLED);
+			String.valueOf(
+				PropsValues.VELOCITY_ENGINE_RESOURCE_MANAGER_CACHE_ENABLED));
 
 		extendedProperties.setProperty(
 			"servlet." + _RESOURCE_LOADER + ".class",
