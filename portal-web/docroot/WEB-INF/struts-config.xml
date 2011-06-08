@@ -676,7 +676,7 @@
 			<forward name="portlet.enterprise_admin.error" path="portlet.enterprise_admin.error" />
 		</action>
 
-		<action path="/enterprise_admin/edit_session" type="com.liferay.portlet.enterpriseadmin.action.EditSessionAction">
+		<action path="/enterprise_admin/edit_session" type="com.liferay.portlet.monitoring.action.EditSessionAction">
 			<forward name="portlet.enterprise_admin.edit_session" path="portlet.enterprise_admin.edit_session" />
 			<forward name="portlet.enterprise_admin.error" path="portlet.enterprise_admin.error" />
 		</action>
@@ -767,7 +767,7 @@
 
 		<!-- Enterprise Admin Monitoring -->
 
-		<action path="/enterprise_admin_monitoring/edit_session" type="com.liferay.portlet.enterpriseadmin.action.EditSessionAction">
+		<action path="/enterprise_admin_monitoring/edit_session" type="com.liferay.portlet.monitoring.action.EditSessionAction">
 			<forward name="portlet.enterprise_admin.edit_session" path="portlet.enterprise_admin.edit_session" />
 			<forward name="portlet.enterprise_admin.error" path="portlet.enterprise_admin.error" />
 		</action>
