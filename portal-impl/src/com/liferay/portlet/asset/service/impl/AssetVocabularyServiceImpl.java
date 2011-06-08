@@ -105,6 +105,13 @@ public class AssetVocabularyServiceImpl
 			assetVocabularyLocalService.getGroupVocabularies(groupId));
 	}
 
+	public List<AssetVocabulary> getVocabularies(long[] vocabularyIds)
+		throws PortalException, SystemException {
+
+		return filterVocabularies(
+			assetVocabularyLocalService.getVocabularies(vocabularyIds));
+	}
+
 	public AssetVocabulary getVocabulary(long vocabularyId)
 		throws PortalException, SystemException {
 

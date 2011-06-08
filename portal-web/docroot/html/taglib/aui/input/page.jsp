@@ -99,7 +99,7 @@ String inputCss = AUIUtil.buildCss(AUIUtil.INPUT_PREFIX, baseTypeCss, false, fal
 String labelTag = AUIUtil.buildLabel(inlineLabel, showForLabel, forLabel);
 %>
 
-<c:if test='<%= !type.equals("hidden") %>'>
+<c:if test='<%= !type.equals("hidden") && !type.equals("assetCategories") %>'>
 	<span class="<%= fieldCss %>">
 		<span class="aui-field-content">
 			<c:if test='<%= Validator.isNotNull(label) && !inlineLabel.equals("right") %>'>
@@ -250,7 +250,7 @@ String labelTag = AUIUtil.buildLabel(inlineLabel, showForLabel, forLabel);
 	</c:otherwise>
 </c:choose>
 
-<c:if test='<%= !type.equals("hidden") %>'>
+<c:if test='<%= !type.equals("hidden") && !type.equals("assetCategories") %>'>
 			</span>
 
 			<c:if test="<%= Validator.isNotNull(suffix) %>">
