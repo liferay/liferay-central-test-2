@@ -470,10 +470,6 @@
 		<put name="portlet_content" value="/portlet/document_library_display/view.jsp" />
 	</definition>
 
-	<definition name="portlet.document_library_display.view_file_entry" extends="portlet.document_library_display">
-		<put name="portlet_content" value="/portlet/document_library_display/view_file_entry.jsp" />
-	</definition>
-
 	<!-- Dynamic Data List Display -->
 
 	<definition name="portlet.dynamic_data_list_display" extends="portlet" />
