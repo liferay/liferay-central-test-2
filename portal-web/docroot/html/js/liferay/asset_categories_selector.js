@@ -21,7 +21,7 @@ AUI().add(
 		 * hiddenInput {string}: The hidden input used to pass in the current categories.
 		 * instanceVar {string}: The instance variable for this class.
 		 * labelNode {String|A.Node}: The node of the label element for this selector.
-		 * vocabularyIds (string): The ids of the vocabularies.
+		 * vocabularyIds (string): The ids of the vocabularies
 		 *
 		 * Optional
 		 * portalModelResource {boolean}: Whether the asset model is on the portal level.

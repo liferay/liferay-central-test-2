@@ -225,24 +225,22 @@ public class ServiceContextFactory {
 
 		Map<String, String[]> parameterMap = portletRequest.getParameterMap();
 
-		List<Long> assetCategoryIdsList = new ArrayList<Long>();
+		List<Long> assetCategories = new ArrayList<Long>();
 
-		for (Map.Entry<String, String[]> entry : parameterMap.entrySet()) {
-			String name = entry.getKey();
+		for (Map.Entry<String, String[]> parameter : parameterMap.entrySet()) {
+			if (parameter.getKey().startsWith("assetCategoryIds")) {
+				long[] vocabularyCategoryIds = StringUtil.split(
+					ParamUtil.getString(portletRequest, parameter.getKey()),
+					0L);
 
-			if (name.startsWith("assetCategoryIds")) {
-				long[] assetVocabularyAssetCategoryIds = StringUtil.split(
-					ParamUtil.getString(portletRequest, name), 0L);
-
-				for (long assetCategoryId : assetVocabularyAssetCategoryIds) {
-					assetCategoryIdsList.add(assetCategoryId);
+				for (long categoryId : vocabularyCategoryIds) {
+					assetCategories.add(categoryId);
 				}
 			}
 		}
 
-		long[] assetCategoryIds = ArrayUtil.toArray(
-			assetCategoryIdsList.toArray(
-				new Long[assetCategoryIdsList.size()]));
+		long[] assetCategoryIds = ArrayUtil.toArray(assetCategories.toArray(
+			new Long[assetCategories.size()]));
 		long[] assetLinkEntryIds = StringUtil.split(
 			ParamUtil.getString(
 				portletRequest, "assetLinkSearchContainerPrimaryKeys"), 0L);

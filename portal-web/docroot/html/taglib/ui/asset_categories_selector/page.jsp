@@ -88,9 +88,9 @@ for (AssetVocabulary vocabulary : groupVocabularies) {
 			StringBundler sb = new StringBundler(curCategoryIdsArray.length * 2);
 			for (long curCategoryId : curCategoryIdsArray) {
 				AssetCategory category = AssetCategoryServiceUtil.getCategory(curCategoryId);
-
+				
 				category = category.toEscapedModel();
-
+				
 				sb.append(category.getName());
 				sb.append(StringPool.COMMA);
 			}
@@ -114,7 +114,7 @@ for (AssetVocabulary vocabulary : groupVocabularies) {
 				instanceVar: '<%= namespace + randomNamespace %>',
 				labelNode: '#<%= namespace %>assetCategoriesLabel_<%= vocabulary.getVocabularyId() %>',
 				portalModelResource: <%= Validator.isNotNull(className) && (ResourceActionsUtil.isPortalModelResource(className) || className.equals(Group.class.getName())) %>,
-				vocabularyIds: '<%= String.valueOf(vocabulary.getVocabularyId()) %>'
+				vocabularyIds: '<%= String.valueOf(vocabulary.getVocabularyId()) %>',
 			}
 		).render();
 	</aui:script>
