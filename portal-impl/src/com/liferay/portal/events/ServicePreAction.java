@@ -1594,26 +1594,30 @@ public class ServicePreAction extends Action {
 		themeDisplay.setShowSignInIcon(!signedIn);
 		themeDisplay.setShowSignOutIcon(signedIn);
 
-		Group controlPanelGroup = GroupLocalServiceUtil.getGroup(
-			companyId, GroupConstants.CONTROL_PANEL);
+		boolean showSiteContentIcon = false;
 
-		long controlPanelPlid = LayoutLocalServiceUtil.getDefaultPlid(
-			controlPanelGroup.getGroupId(), true);
+		if (signedIn) {
+			Group controlPanelGroup = GroupLocalServiceUtil.getGroup(
+				companyId, GroupConstants.CONTROL_PANEL);
 
-		List<Portlet> siteContentPortlets = PortalUtil.getControlPanelPortlets(
-			PortletCategoryKeys.CONTENT, themeDisplay);
+			long controlPanelPlid = LayoutLocalServiceUtil.getDefaultPlid(
+				controlPanelGroup.getGroupId(), true);
 
-		Portlet groupPagesPortlet = PortletLocalServiceUtil.getPortletById(
-			PortletKeys.GROUP_PAGES);
-		Portlet siteSettingsPortlet = PortletLocalServiceUtil.getPortletById(
-			PortletKeys.SITE_SETTINGS);
+			List<Portlet> siteContentPortlets = PortalUtil.getControlPanelPortlets(
+				PortletCategoryKeys.CONTENT, themeDisplay);
 
-		siteContentPortlets.remove(groupPagesPortlet);
-		siteContentPortlets.remove(siteSettingsPortlet);
+			Portlet groupPagesPortlet = PortletLocalServiceUtil.getPortletById(
+				PortletKeys.GROUP_PAGES);
+			Portlet siteSettingsPortlet = PortletLocalServiceUtil.getPortletById(
+				PortletKeys.SITE_SETTINGS);
 
-		boolean showSiteContentIcon = PortletPermissionUtil.contains(
-			permissionChecker, controlPanelGroup.getGroupId(), controlPanelPlid,
-			siteContentPortlets, ActionKeys.VIEW);
+			siteContentPortlets.remove(groupPagesPortlet);
+			siteContentPortlets.remove(siteSettingsPortlet);
+
+			showSiteContentIcon = PortletPermissionUtil.contains(
+				permissionChecker, controlPanelGroup.getGroupId(), controlPanelPlid,
+				siteContentPortlets, ActionKeys.VIEW);
+		}
 
 		themeDisplay.setShowSiteContentIcon(showSiteContentIcon);
 
