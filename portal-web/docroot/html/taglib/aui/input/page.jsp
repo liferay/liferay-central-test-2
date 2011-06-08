@@ -165,8 +165,7 @@ String labelTag = AUIUtil.buildLabel(inlineLabel, showForLabel, forLabel);
 			valueString = value.toString();
 		}
 
-		if (valueString.equalsIgnoreCase("true") ||
-			valueString.equalsIgnoreCase("false")) {
+		if (valueString.equalsIgnoreCase("false") || valueString.equalsIgnoreCase("true")) {
 			checked = GetterUtil.getBoolean(valueString);
 		}
 
@@ -192,8 +191,7 @@ String labelTag = AUIUtil.buildLabel(inlineLabel, showForLabel, forLabel);
 			valueString = value.toString();
 		}
 
-		if (valueString.equalsIgnoreCase("true") ||
-			valueString.equalsIgnoreCase("false")) {
+		if (valueString.equalsIgnoreCase("false") || valueString.equalsIgnoreCase("true")) {
 			checked = GetterUtil.getBoolean(valueString);
 		}
 
