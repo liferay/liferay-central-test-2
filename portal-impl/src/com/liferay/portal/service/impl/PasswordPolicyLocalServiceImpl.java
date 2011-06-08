@@ -234,12 +234,18 @@ public class PasswordPolicyLocalServiceImpl
 			return null;
 		}
 
-		PasswordPolicyRel passwordPolicyRel =
-			passwordPolicyRelLocalService.fetchPasswordPolicyRel(
-				User.class.getName(), userId);
+		PasswordPolicyRel passwordPolicyRel = null;
 
-		if (passwordPolicyRel != null) {
+		// Check for password policy specifically assigned to this user
+
+		try {
+			passwordPolicyRel =
+				passwordPolicyRelLocalService.getPasswordPolicyRel(
+					User.class.getName(), userId);
+
 			return getPasswordPolicy(passwordPolicyRel.getPasswordPolicyId());
+		}
+		catch (NoSuchPasswordPolicyRelException nsppre) {
 		}
 
 		long[] organizationIds = user.getOrganizationIds();
