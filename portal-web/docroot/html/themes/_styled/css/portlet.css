@@ -154,11 +154,11 @@ body.portlet {
 	float: left;
 }
 
-.aui-dd-draggable .portlet-topper {
+.yui3-dd-draggable .portlet-topper {
 	cursor: move;
 }
 
-.aui-dd-draggable .portlet-title-default {
+.yui3-dd-draggable .portlet-title-default {
 	background: url(../images/portlet/draggable_borderless.png) no-repeat 0 50%;
 	cursor: move;
 	padding-left: 20px;

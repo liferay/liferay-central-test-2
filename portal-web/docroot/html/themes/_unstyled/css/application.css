@@ -41,13 +41,13 @@
 .active-area {
 }
 
-.portlet-boundary.aui-dd-dragging {
+.portlet-boundary.yui3-dd-dragging {
 }
 
-.ie .portlet-boundary.aui-dd-dragging {
+.ie .portlet-boundary.yui3-dd-dragging {
 }
 
-.portlet-boundary.aui-dd-dragging .portlet {
+.portlet-boundary.yui3-dd-dragging .portlet {
 }
 
 .aui-portal-layout-proxy {
