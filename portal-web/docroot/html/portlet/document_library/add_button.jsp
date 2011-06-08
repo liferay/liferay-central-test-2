@@ -107,10 +107,10 @@ List<DLDocumentType> documentTypes = DLDocumentTypeServiceUtil.getDocumentTypes(
 
 <aui:script use="aui-base,aui-swf">
 	if (A.SWF.isFlashVersionAtLeast(9)) {
-		var uploadMultipleDocumentsIcon = A.one('.aui-helper-hidden.upload-multiple-documents');
+		var uploadMultipleDocumentsIcon = A.all('.upload-multiple-documents:hidden');
 
 		if (uploadMultipleDocumentsIcon) {
-			uploadMultipleDocumentsIcon.removeClass('aui-helper-hidden');
+			uploadMultipleDocumentsIcon.show();
 		}
 	}
 </aui:script>
