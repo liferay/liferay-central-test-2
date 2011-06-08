@@ -30,16 +30,15 @@ create table DDLRecord (
 	companyId LONG,
 	userId LONG,
 	userName VARCHAR(75) null,
+	versionUserId LONG,
+	versionUserName VARCHAR(75) null,
 	createDate DATE null,
 	modifiedDate DATE null,
 	classNameId LONG,
 	classPK LONG,
 	recordSetId LONG,
 	displayIndex INTEGER,
-	status INTEGER,
-	statusByUserId LONG,
-	statusByUserName VARCHAR(75) null,
-	statusDate DATE null
+	version VARCHAR(75) null
 );
 
 create table DDLRecordSet (

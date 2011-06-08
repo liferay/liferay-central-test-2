@@ -296,6 +296,13 @@ public class DDLRecordLocalServiceWrapper implements DDLRecordLocalService {
 		_ddlRecordLocalService.deleteRecords(recordSetId);
 	}
 
+	public com.liferay.portlet.dynamicdatalists.model.DDLRecordVersion getLatestRecordVersion(
+		long recordId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _ddlRecordLocalService.getLatestRecordVersion(recordId);
+	}
+
 	public com.liferay.portlet.dynamicdatalists.model.DDLRecord getRecord(
 		long recordId)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -324,23 +331,24 @@ public class DDLRecordLocalServiceWrapper implements DDLRecordLocalService {
 
 	public void updateAsset(long userId,
 		com.liferay.portlet.dynamicdatalists.model.DDLRecord record,
+		com.liferay.portlet.dynamicdatalists.model.DDLRecordVersion recordVersion,
 		java.util.Locale locale, long[] assetCategoryIds,
 		java.lang.String[] assetTagNames)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		_ddlRecordLocalService.updateAsset(userId, record, locale,
-			assetCategoryIds, assetTagNames);
+		_ddlRecordLocalService.updateAsset(userId, record, recordVersion,
+			locale, assetCategoryIds, assetTagNames);
 	}
 
 	public com.liferay.portlet.dynamicdatalists.model.DDLRecord updateRecord(
 		long userId, long recordId,
 		com.liferay.portlet.dynamicdatamapping.storage.Fields fields,
-		int displayIndex, boolean mergeFields,
+		int displayIndex, boolean mergeFields, boolean majorVersion,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _ddlRecordLocalService.updateRecord(userId, recordId, fields,
-			displayIndex, mergeFields, serviceContext);
+			displayIndex, mergeFields, majorVersion, serviceContext);
 	}
 
 	public com.liferay.portlet.dynamicdatalists.model.DDLRecord updateRecord(

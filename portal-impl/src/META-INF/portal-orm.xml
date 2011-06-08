@@ -1793,6 +1793,8 @@
 			<basic name="companyId" />
 			<basic name="userId" />
 			<basic name="userName" />
+			<basic name="versionUserId" />
+			<basic name="versionUserName" />
 			<basic name="createDate">
 				<temporal>TIMESTAMP</temporal>
 			</basic>
@@ -1803,16 +1805,11 @@
 			<basic name="classPK" />
 			<basic name="recordSetId" />
 			<basic name="displayIndex" />
-			<basic name="status" />
-			<basic name="statusByUserId" />
-			<basic name="statusByUserName" />
-			<basic name="statusDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
+			<basic name="version" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />
-			<transient name="statusByUserUuid" />
 			<transient name="userUuid" />
+			<transient name="versionUserUuid" />
 		</attributes>
 	</mapped-superclass>
 	<mapped-superclass class="com.liferay.portlet.dynamicdatalists.model.impl.DDLRecordSetModelImpl">
@@ -1840,6 +1837,34 @@
 			<transient name="nameMap" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portlet.dynamicdatalists.model.impl.DDLRecordVersionModelImpl">
+		<attributes>
+			<id name="recordVersionId" />
+			<basic name="groupId" />
+			<basic name="companyId" />
+			<basic name="userId" />
+			<basic name="userName" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="recordId" />
+			<basic name="recordSetId" />
+			<basic name="classNameId" />
+			<basic name="classPK" />
+			<basic name="displayIndex" />
+			<basic name="version" />
+			<basic name="status" />
+			<basic name="statusByUserId" />
+			<basic name="statusByUserName" />
+			<basic name="statusDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+			<transient name="statusByUserUuid" />
 			<transient name="userUuid" />
 		</attributes>
 	</mapped-superclass>
@@ -3604,6 +3629,10 @@
 	</entity>
 	<entity class="com.liferay.portlet.dynamicdatalists.model.impl.DDLRecordSetImpl" name="DDLRecordSet">
 		<table name="DDLRecordSet" />
+		<attributes />
+	</entity>
+	<entity class="com.liferay.portlet.dynamicdatalists.model.impl.DDLRecordVersionImpl" name="DDLRecordVersion">
+		<table name="DDLRecordVersion" />
 		<attributes />
 	</entity>
 	<entity class="com.liferay.portlet.dynamicdatamapping.model.impl.DDMContentImpl" name="DDMContent">

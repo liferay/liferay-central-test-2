@@ -484,134 +484,6 @@ public class DDLRecordUtil {
 	}
 
 	/**
-	* Returns all the d d l records where recordSetId = &#63; and status = &#63;.
-	*
-	* @param recordSetId the record set ID
-	* @param status the status
-	* @return the matching d d l records
-	* @throws SystemException if a system exception occurred
-	*/
-	public static java.util.List<com.liferay.portlet.dynamicdatalists.model.DDLRecord> findByR_S(
-		long recordSetId, int status)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByR_S(recordSetId, status);
-	}
-
-	/**
-	* Returns a range of all the d d l records where recordSetId = &#63; and status = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
-	* </p>
-	*
-	* @param recordSetId the record set ID
-	* @param status the status
-	* @param start the lower bound of the range of d d l records
-	* @param end the upper bound of the range of d d l records (not inclusive)
-	* @return the range of matching d d l records
-	* @throws SystemException if a system exception occurred
-	*/
-	public static java.util.List<com.liferay.portlet.dynamicdatalists.model.DDLRecord> findByR_S(
-		long recordSetId, int status, int start, int end)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByR_S(recordSetId, status, start, end);
-	}
-
-	/**
-	* Returns an ordered range of all the d d l records where recordSetId = &#63; and status = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
-	* </p>
-	*
-	* @param recordSetId the record set ID
-	* @param status the status
-	* @param start the lower bound of the range of d d l records
-	* @param end the upper bound of the range of d d l records (not inclusive)
-	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @return the ordered range of matching d d l records
-	* @throws SystemException if a system exception occurred
-	*/
-	public static java.util.List<com.liferay.portlet.dynamicdatalists.model.DDLRecord> findByR_S(
-		long recordSetId, int status, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence()
-				   .findByR_S(recordSetId, status, start, end, orderByComparator);
-	}
-
-	/**
-	* Returns the first d d l record in the ordered set where recordSetId = &#63; and status = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
-	* </p>
-	*
-	* @param recordSetId the record set ID
-	* @param status the status
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the first matching d d l record
-	* @throws com.liferay.portlet.dynamicdatalists.NoSuchRecordException if a matching d d l record could not be found
-	* @throws SystemException if a system exception occurred
-	*/
-	public static com.liferay.portlet.dynamicdatalists.model.DDLRecord findByR_S_First(
-		long recordSetId, int status,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-		throws com.liferay.portal.kernel.exception.SystemException,
-			com.liferay.portlet.dynamicdatalists.NoSuchRecordException {
-		return getPersistence()
-				   .findByR_S_First(recordSetId, status, orderByComparator);
-	}
-
-	/**
-	* Returns the last d d l record in the ordered set where recordSetId = &#63; and status = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
-	* </p>
-	*
-	* @param recordSetId the record set ID
-	* @param status the status
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the last matching d d l record
-	* @throws com.liferay.portlet.dynamicdatalists.NoSuchRecordException if a matching d d l record could not be found
-	* @throws SystemException if a system exception occurred
-	*/
-	public static com.liferay.portlet.dynamicdatalists.model.DDLRecord findByR_S_Last(
-		long recordSetId, int status,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-		throws com.liferay.portal.kernel.exception.SystemException,
-			com.liferay.portlet.dynamicdatalists.NoSuchRecordException {
-		return getPersistence()
-				   .findByR_S_Last(recordSetId, status, orderByComparator);
-	}
-
-	/**
-	* Returns the d d l records before and after the current d d l record in the ordered set where recordSetId = &#63; and status = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
-	* </p>
-	*
-	* @param recordId the primary key of the current d d l record
-	* @param recordSetId the record set ID
-	* @param status the status
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the previous, current, and next d d l record
-	* @throws com.liferay.portlet.dynamicdatalists.NoSuchRecordException if a d d l record with the primary key could not be found
-	* @throws SystemException if a system exception occurred
-	*/
-	public static com.liferay.portlet.dynamicdatalists.model.DDLRecord[] findByR_S_PrevAndNext(
-		long recordId, long recordSetId, int status,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-		throws com.liferay.portal.kernel.exception.SystemException,
-			com.liferay.portlet.dynamicdatalists.NoSuchRecordException {
-		return getPersistence()
-				   .findByR_S_PrevAndNext(recordId, recordSetId, status,
-			orderByComparator);
-	}
-
-	/**
 	* Returns all the d d l records.
 	*
 	* @return the d d l records
@@ -696,18 +568,6 @@ public class DDLRecordUtil {
 	}
 
 	/**
-	* Removes all the d d l records where recordSetId = &#63; and status = &#63; from the database.
-	*
-	* @param recordSetId the record set ID
-	* @param status the status
-	* @throws SystemException if a system exception occurred
-	*/
-	public static void removeByR_S(long recordSetId, int status)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		getPersistence().removeByR_S(recordSetId, status);
-	}
-
-	/**
 	* Removes all the d d l records from the database.
 	*
 	* @throws SystemException if a system exception occurred
@@ -752,19 +612,6 @@ public class DDLRecordUtil {
 	public static int countByRecordSetId(long recordSetId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByRecordSetId(recordSetId);
-	}
-
-	/**
-	* Returns the number of d d l records where recordSetId = &#63; and status = &#63;.
-	*
-	* @param recordSetId the record set ID
-	* @param status the status
-	* @return the number of matching d d l records
-	* @throws SystemException if a system exception occurred
-	*/
-	public static int countByR_S(long recordSetId, int status)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().countByR_S(recordSetId, status);
 	}
 
 	/**

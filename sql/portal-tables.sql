@@ -406,16 +406,15 @@ create table DDLRecord (
 	companyId LONG,
 	userId LONG,
 	userName VARCHAR(75) null,
+	versionUserId LONG,
+	versionUserName VARCHAR(75) null,
 	createDate DATE null,
 	modifiedDate DATE null,
 	classNameId LONG,
 	classPK LONG,
 	recordSetId LONG,
 	displayIndex INTEGER,
-	status INTEGER,
-	statusByUserId LONG,
-	statusByUserName VARCHAR(75) null,
-	statusDate DATE null
+	version VARCHAR(75) null
 );
 
 create table DDLRecordSet (
@@ -432,6 +431,25 @@ create table DDLRecordSet (
 	name STRING null,
 	description STRING null,
 	minDisplayRows INTEGER
+);
+
+create table DDLRecordVersion (
+	recordVersionId LONG not null primary key,
+	groupId LONG,
+	companyId LONG,
+	userId LONG,
+	userName VARCHAR(75) null,
+	createDate DATE null,
+	recordId LONG,
+	recordSetId LONG,
+	classNameId LONG,
+	classPK LONG,
+	displayIndex INTEGER,
+	version VARCHAR(75) null,
+	status INTEGER,
+	statusByUserId LONG,
+	statusByUserName VARCHAR(75) null,
+	statusDate DATE null
 );
 
 create table DDMContent (

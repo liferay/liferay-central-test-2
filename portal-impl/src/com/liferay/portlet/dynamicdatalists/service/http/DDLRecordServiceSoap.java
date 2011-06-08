@@ -87,12 +87,12 @@ public class DDLRecordServiceSoap {
 	public static com.liferay.portlet.dynamicdatalists.model.DDLRecordSoap updateRecord(
 		long recordId,
 		com.liferay.portlet.dynamicdatamapping.storage.Fields fields,
-		int displayIndex, boolean merge,
+		int displayIndex, boolean merge, boolean majorVersion,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
 			com.liferay.portlet.dynamicdatalists.model.DDLRecord returnValue = DDLRecordServiceUtil.updateRecord(recordId,
-					fields, displayIndex, merge, serviceContext);
+					fields, displayIndex, merge, majorVersion, serviceContext);
 
 			return com.liferay.portlet.dynamicdatalists.model.DDLRecordSoap.toSoapModel(returnValue);
 		}

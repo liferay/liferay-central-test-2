@@ -20,7 +20,6 @@ import com.liferay.portal.kernel.json.JSON;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortalUtil;
@@ -70,18 +69,17 @@ public class DDLRecordModelImpl extends BaseModelImpl<DDLRecord>
 			{ "companyId", Types.BIGINT },
 			{ "userId", Types.BIGINT },
 			{ "userName", Types.VARCHAR },
+			{ "versionUserId", Types.BIGINT },
+			{ "versionUserName", Types.VARCHAR },
 			{ "createDate", Types.TIMESTAMP },
 			{ "modifiedDate", Types.TIMESTAMP },
 			{ "classNameId", Types.BIGINT },
 			{ "classPK", Types.BIGINT },
 			{ "recordSetId", Types.BIGINT },
 			{ "displayIndex", Types.INTEGER },
-			{ "status", Types.INTEGER },
-			{ "statusByUserId", Types.BIGINT },
-			{ "statusByUserName", Types.VARCHAR },
-			{ "statusDate", Types.TIMESTAMP }
+			{ "version", Types.VARCHAR }
 		};
-	public static final String TABLE_SQL_CREATE = "create table DDLRecord (uuid_ VARCHAR(75) null,recordId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,classNameId LONG,classPK LONG,recordSetId LONG,displayIndex INTEGER,status INTEGER,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null)";
+	public static final String TABLE_SQL_CREATE = "create table DDLRecord (uuid_ VARCHAR(75) null,recordId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,versionUserId LONG,versionUserName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,classNameId LONG,classPK LONG,recordSetId LONG,displayIndex INTEGER,version VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table DDLRecord";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
@@ -108,16 +106,15 @@ public class DDLRecordModelImpl extends BaseModelImpl<DDLRecord>
 		model.setCompanyId(soapModel.getCompanyId());
 		model.setUserId(soapModel.getUserId());
 		model.setUserName(soapModel.getUserName());
+		model.setVersionUserId(soapModel.getVersionUserId());
+		model.setVersionUserName(soapModel.getVersionUserName());
 		model.setCreateDate(soapModel.getCreateDate());
 		model.setModifiedDate(soapModel.getModifiedDate());
 		model.setClassNameId(soapModel.getClassNameId());
 		model.setClassPK(soapModel.getClassPK());
 		model.setRecordSetId(soapModel.getRecordSetId());
 		model.setDisplayIndex(soapModel.getDisplayIndex());
-		model.setStatus(soapModel.getStatus());
-		model.setStatusByUserId(soapModel.getStatusByUserId());
-		model.setStatusByUserName(soapModel.getStatusByUserName());
-		model.setStatusDate(soapModel.getStatusDate());
+		model.setVersion(soapModel.getVersion());
 
 		return model;
 	}
@@ -259,6 +256,38 @@ public class DDLRecordModelImpl extends BaseModelImpl<DDLRecord>
 	}
 
 	@JSON
+	public long getVersionUserId() {
+		return _versionUserId;
+	}
+
+	public void setVersionUserId(long versionUserId) {
+		_versionUserId = versionUserId;
+	}
+
+	public String getVersionUserUuid() throws SystemException {
+		return PortalUtil.getUserValue(getVersionUserId(), "uuid",
+			_versionUserUuid);
+	}
+
+	public void setVersionUserUuid(String versionUserUuid) {
+		_versionUserUuid = versionUserUuid;
+	}
+
+	@JSON
+	public String getVersionUserName() {
+		if (_versionUserName == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _versionUserName;
+		}
+	}
+
+	public void setVersionUserName(String versionUserName) {
+		_versionUserName = versionUserName;
+	}
+
+	@JSON
 	public Date getCreateDate() {
 		return _createDate;
 	}
@@ -321,96 +350,17 @@ public class DDLRecordModelImpl extends BaseModelImpl<DDLRecord>
 	}
 
 	@JSON
-	public int getStatus() {
-		return _status;
-	}
-
-	public void setStatus(int status) {
-		_status = status;
-	}
-
-	@JSON
-	public long getStatusByUserId() {
-		return _statusByUserId;
-	}
-
-	public void setStatusByUserId(long statusByUserId) {
-		_statusByUserId = statusByUserId;
-	}
-
-	public String getStatusByUserUuid() throws SystemException {
-		return PortalUtil.getUserValue(getStatusByUserId(), "uuid",
-			_statusByUserUuid);
-	}
-
-	public void setStatusByUserUuid(String statusByUserUuid) {
-		_statusByUserUuid = statusByUserUuid;
-	}
-
-	@JSON
-	public String getStatusByUserName() {
-		if (_statusByUserName == null) {
+	public String getVersion() {
+		if (_version == null) {
 			return StringPool.BLANK;
 		}
 		else {
-			return _statusByUserName;
+			return _version;
 		}
 	}
 
-	public void setStatusByUserName(String statusByUserName) {
-		_statusByUserName = statusByUserName;
-	}
-
-	@JSON
-	public Date getStatusDate() {
-		return _statusDate;
-	}
-
-	public void setStatusDate(Date statusDate) {
-		_statusDate = statusDate;
-	}
-
-	/**
-	 * @deprecated {@link #isApproved}
-	 */
-	public boolean getApproved() {
-		return isApproved();
-	}
-
-	public boolean isApproved() {
-		if (getStatus() == WorkflowConstants.STATUS_APPROVED) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-
-	public boolean isDraft() {
-		if (getStatus() == WorkflowConstants.STATUS_DRAFT) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-
-	public boolean isExpired() {
-		if (getStatus() == WorkflowConstants.STATUS_EXPIRED) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-
-	public boolean isPending() {
-		if (getStatus() == WorkflowConstants.STATUS_PENDING) {
-			return true;
-		}
-		else {
-			return false;
-		}
+	public void setVersion(String version) {
+		_version = version;
 	}
 
 	public DDLRecord toEscapedModel() {
@@ -445,16 +395,15 @@ public class DDLRecordModelImpl extends BaseModelImpl<DDLRecord>
 		ddlRecordImpl.setCompanyId(getCompanyId());
 		ddlRecordImpl.setUserId(getUserId());
 		ddlRecordImpl.setUserName(getUserName());
+		ddlRecordImpl.setVersionUserId(getVersionUserId());
+		ddlRecordImpl.setVersionUserName(getVersionUserName());
 		ddlRecordImpl.setCreateDate(getCreateDate());
 		ddlRecordImpl.setModifiedDate(getModifiedDate());
 		ddlRecordImpl.setClassNameId(getClassNameId());
 		ddlRecordImpl.setClassPK(getClassPK());
 		ddlRecordImpl.setRecordSetId(getRecordSetId());
 		ddlRecordImpl.setDisplayIndex(getDisplayIndex());
-		ddlRecordImpl.setStatus(getStatus());
-		ddlRecordImpl.setStatusByUserId(getStatusByUserId());
-		ddlRecordImpl.setStatusByUserName(getStatusByUserName());
-		ddlRecordImpl.setStatusDate(getStatusDate());
+		ddlRecordImpl.setVersion(getVersion());
 
 		ddlRecordImpl.resetOriginalValues();
 
@@ -514,7 +463,7 @@ public class DDLRecordModelImpl extends BaseModelImpl<DDLRecord>
 	}
 
 	public String toString() {
-		StringBundler sb = new StringBundler(33);
+		StringBundler sb = new StringBundler(31);
 
 		sb.append("{uuid=");
 		sb.append(getUuid());
@@ -528,6 +477,10 @@ public class DDLRecordModelImpl extends BaseModelImpl<DDLRecord>
 		sb.append(getUserId());
 		sb.append(", userName=");
 		sb.append(getUserName());
+		sb.append(", versionUserId=");
+		sb.append(getVersionUserId());
+		sb.append(", versionUserName=");
+		sb.append(getVersionUserName());
 		sb.append(", createDate=");
 		sb.append(getCreateDate());
 		sb.append(", modifiedDate=");
@@ -540,21 +493,15 @@ public class DDLRecordModelImpl extends BaseModelImpl<DDLRecord>
 		sb.append(getRecordSetId());
 		sb.append(", displayIndex=");
 		sb.append(getDisplayIndex());
-		sb.append(", status=");
-		sb.append(getStatus());
-		sb.append(", statusByUserId=");
-		sb.append(getStatusByUserId());
-		sb.append(", statusByUserName=");
-		sb.append(getStatusByUserName());
-		sb.append(", statusDate=");
-		sb.append(getStatusDate());
+		sb.append(", version=");
+		sb.append(getVersion());
 		sb.append("}");
 
 		return sb.toString();
 	}
 
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(52);
+		StringBundler sb = new StringBundler(49);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.portlet.dynamicdatalists.model.DDLRecord");
@@ -585,6 +532,14 @@ public class DDLRecordModelImpl extends BaseModelImpl<DDLRecord>
 		sb.append(getUserName());
 		sb.append("]]></column-value></column>");
 		sb.append(
+			"<column><column-name>versionUserId</column-name><column-value><![CDATA[");
+		sb.append(getVersionUserId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>versionUserName</column-name><column-value><![CDATA[");
+		sb.append(getVersionUserName());
+		sb.append("]]></column-value></column>");
+		sb.append(
 			"<column><column-name>createDate</column-name><column-value><![CDATA[");
 		sb.append(getCreateDate());
 		sb.append("]]></column-value></column>");
@@ -609,20 +564,8 @@ public class DDLRecordModelImpl extends BaseModelImpl<DDLRecord>
 		sb.append(getDisplayIndex());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>status</column-name><column-value><![CDATA[");
-		sb.append(getStatus());
-		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>statusByUserId</column-name><column-value><![CDATA[");
-		sb.append(getStatusByUserId());
-		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>statusByUserName</column-name><column-value><![CDATA[");
-		sb.append(getStatusByUserName());
-		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>statusDate</column-name><column-value><![CDATA[");
-		sb.append(getStatusDate());
+			"<column><column-name>version</column-name><column-value><![CDATA[");
+		sb.append(getVersion());
 		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
@@ -640,16 +583,15 @@ public class DDLRecordModelImpl extends BaseModelImpl<DDLRecord>
 	private long _userId;
 	private String _userUuid;
 	private String _userName;
+	private long _versionUserId;
+	private String _versionUserUuid;
+	private String _versionUserName;
 	private Date _createDate;
 	private Date _modifiedDate;
 	private long _classNameId;
 	private long _classPK;
 	private long _recordSetId;
 	private int _displayIndex;
-	private int _status;
-	private long _statusByUserId;
-	private String _statusByUserUuid;
-	private String _statusByUserName;
-	private Date _statusDate;
+	private String _version;
 	private transient ExpandoBridge _expandoBridge;
 }

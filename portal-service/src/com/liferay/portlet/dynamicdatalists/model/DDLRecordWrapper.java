@@ -183,6 +183,62 @@ public class DDLRecordWrapper implements DDLRecord {
 	}
 
 	/**
+	* Returns the version user ID of this d d l record.
+	*
+	* @return the version user ID of this d d l record
+	*/
+	public long getVersionUserId() {
+		return _ddlRecord.getVersionUserId();
+	}
+
+	/**
+	* Sets the version user ID of this d d l record.
+	*
+	* @param versionUserId the version user ID of this d d l record
+	*/
+	public void setVersionUserId(long versionUserId) {
+		_ddlRecord.setVersionUserId(versionUserId);
+	}
+
+	/**
+	* Returns the version user uuid of this d d l record.
+	*
+	* @return the version user uuid of this d d l record
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.lang.String getVersionUserUuid()
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _ddlRecord.getVersionUserUuid();
+	}
+
+	/**
+	* Sets the version user uuid of this d d l record.
+	*
+	* @param versionUserUuid the version user uuid of this d d l record
+	*/
+	public void setVersionUserUuid(java.lang.String versionUserUuid) {
+		_ddlRecord.setVersionUserUuid(versionUserUuid);
+	}
+
+	/**
+	* Returns the version user name of this d d l record.
+	*
+	* @return the version user name of this d d l record
+	*/
+	public java.lang.String getVersionUserName() {
+		return _ddlRecord.getVersionUserName();
+	}
+
+	/**
+	* Sets the version user name of this d d l record.
+	*
+	* @param versionUserName the version user name of this d d l record
+	*/
+	public void setVersionUserName(java.lang.String versionUserName) {
+		_ddlRecord.setVersionUserName(versionUserName);
+	}
+
+	/**
 	* Returns the create date of this d d l record.
 	*
 	* @return the create date of this d d l record
@@ -300,138 +356,21 @@ public class DDLRecordWrapper implements DDLRecord {
 	}
 
 	/**
-	* Returns the status of this d d l record.
+	* Returns the version of this d d l record.
 	*
-	* @return the status of this d d l record
+	* @return the version of this d d l record
 	*/
-	public int getStatus() {
-		return _ddlRecord.getStatus();
+	public java.lang.String getVersion() {
+		return _ddlRecord.getVersion();
 	}
 
 	/**
-	* Sets the status of this d d l record.
+	* Sets the version of this d d l record.
 	*
-	* @param status the status of this d d l record
+	* @param version the version of this d d l record
 	*/
-	public void setStatus(int status) {
-		_ddlRecord.setStatus(status);
-	}
-
-	/**
-	* Returns the status by user ID of this d d l record.
-	*
-	* @return the status by user ID of this d d l record
-	*/
-	public long getStatusByUserId() {
-		return _ddlRecord.getStatusByUserId();
-	}
-
-	/**
-	* Sets the status by user ID of this d d l record.
-	*
-	* @param statusByUserId the status by user ID of this d d l record
-	*/
-	public void setStatusByUserId(long statusByUserId) {
-		_ddlRecord.setStatusByUserId(statusByUserId);
-	}
-
-	/**
-	* Returns the status by user uuid of this d d l record.
-	*
-	* @return the status by user uuid of this d d l record
-	* @throws SystemException if a system exception occurred
-	*/
-	public java.lang.String getStatusByUserUuid()
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return _ddlRecord.getStatusByUserUuid();
-	}
-
-	/**
-	* Sets the status by user uuid of this d d l record.
-	*
-	* @param statusByUserUuid the status by user uuid of this d d l record
-	*/
-	public void setStatusByUserUuid(java.lang.String statusByUserUuid) {
-		_ddlRecord.setStatusByUserUuid(statusByUserUuid);
-	}
-
-	/**
-	* Returns the status by user name of this d d l record.
-	*
-	* @return the status by user name of this d d l record
-	*/
-	public java.lang.String getStatusByUserName() {
-		return _ddlRecord.getStatusByUserName();
-	}
-
-	/**
-	* Sets the status by user name of this d d l record.
-	*
-	* @param statusByUserName the status by user name of this d d l record
-	*/
-	public void setStatusByUserName(java.lang.String statusByUserName) {
-		_ddlRecord.setStatusByUserName(statusByUserName);
-	}
-
-	/**
-	* Returns the status date of this d d l record.
-	*
-	* @return the status date of this d d l record
-	*/
-	public java.util.Date getStatusDate() {
-		return _ddlRecord.getStatusDate();
-	}
-
-	/**
-	* Sets the status date of this d d l record.
-	*
-	* @param statusDate the status date of this d d l record
-	*/
-	public void setStatusDate(java.util.Date statusDate) {
-		_ddlRecord.setStatusDate(statusDate);
-	}
-
-	/**
-	* @deprecated Renamed to {@link #isApproved()}
-	*/
-	public boolean getApproved() {
-		return _ddlRecord.getApproved();
-	}
-
-	/**
-	* Determines if this d d l record is approved.
-	*
-	* @return <code>true</code> if this d d l record is approved; <code>false</code> otherwise
-	*/
-	public boolean isApproved() {
-		return _ddlRecord.isApproved();
-	}
-
-	/**
-	* Determines if this d d l record is a draft.
-	*
-	* @return <code>true</code> if this d d l record is a draft; <code>false</code> otherwise
-	*/
-	public boolean isDraft() {
-		return _ddlRecord.isDraft();
-	}
-
-	/**
-	* Determines if this d d l record is expired.
-	*
-	* @return <code>true</code> if this d d l record is expired; <code>false</code> otherwise
-	*/
-	public boolean isExpired() {
-		return _ddlRecord.isExpired();
-	}
-
-	/**
-	* Determines if this d d l record is pending.
-	*
-	* @return <code>true</code> if this d d l record is pending; <code>false</code> otherwise
-	*/
-	public boolean isPending() {
-		return _ddlRecord.isPending();
+	public void setVersion(java.lang.String version) {
+		_ddlRecord.setVersion(version);
 	}
 
 	public boolean isNew() {
@@ -525,6 +464,12 @@ public class DDLRecordWrapper implements DDLRecord {
 	public java.io.Serializable getFieldValue(java.lang.String fieldName)
 		throws com.liferay.portlet.dynamicdatamapping.StorageException {
 		return _ddlRecord.getFieldValue(fieldName);
+	}
+
+	public com.liferay.portlet.dynamicdatalists.model.DDLRecordVersion getLatestRecordVersion()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _ddlRecord.getLatestRecordVersion();
 	}
 
 	public com.liferay.portlet.dynamicdatalists.model.DDLRecordSet getRecordSet()

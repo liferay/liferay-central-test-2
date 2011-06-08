@@ -19,7 +19,6 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.AttachedModel;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.model.GroupedModel;
-import com.liferay.portal.model.WorkflowedModel;
 import com.liferay.portal.service.ServiceContext;
 
 import com.liferay.portlet.expando.model.ExpandoBridge;
@@ -42,7 +41,7 @@ import java.util.Date;
  * @generated
  */
 public interface DDLRecordModel extends AttachedModel, BaseModel<DDLRecord>,
-	GroupedModel, WorkflowedModel {
+	GroupedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
@@ -165,6 +164,50 @@ public interface DDLRecordModel extends AttachedModel, BaseModel<DDLRecord>,
 	public void setUserName(String userName);
 
 	/**
+	 * Returns the version user ID of this d d l record.
+	 *
+	 * @return the version user ID of this d d l record
+	 */
+	public long getVersionUserId();
+
+	/**
+	 * Sets the version user ID of this d d l record.
+	 *
+	 * @param versionUserId the version user ID of this d d l record
+	 */
+	public void setVersionUserId(long versionUserId);
+
+	/**
+	 * Returns the version user uuid of this d d l record.
+	 *
+	 * @return the version user uuid of this d d l record
+	 * @throws SystemException if a system exception occurred
+	 */
+	public String getVersionUserUuid() throws SystemException;
+
+	/**
+	 * Sets the version user uuid of this d d l record.
+	 *
+	 * @param versionUserUuid the version user uuid of this d d l record
+	 */
+	public void setVersionUserUuid(String versionUserUuid);
+
+	/**
+	 * Returns the version user name of this d d l record.
+	 *
+	 * @return the version user name of this d d l record
+	 */
+	@AutoEscape
+	public String getVersionUserName();
+
+	/**
+	 * Sets the version user name of this d d l record.
+	 *
+	 * @param versionUserName the version user name of this d d l record
+	 */
+	public void setVersionUserName(String versionUserName);
+
+	/**
 	 * Returns the create date of this d d l record.
 	 *
 	 * @return the create date of this d d l record
@@ -256,109 +299,19 @@ public interface DDLRecordModel extends AttachedModel, BaseModel<DDLRecord>,
 	public void setDisplayIndex(int displayIndex);
 
 	/**
-	 * Returns the status of this d d l record.
+	 * Returns the version of this d d l record.
 	 *
-	 * @return the status of this d d l record
-	 */
-	public int getStatus();
-
-	/**
-	 * Sets the status of this d d l record.
-	 *
-	 * @param status the status of this d d l record
-	 */
-	public void setStatus(int status);
-
-	/**
-	 * Returns the status by user ID of this d d l record.
-	 *
-	 * @return the status by user ID of this d d l record
-	 */
-	public long getStatusByUserId();
-
-	/**
-	 * Sets the status by user ID of this d d l record.
-	 *
-	 * @param statusByUserId the status by user ID of this d d l record
-	 */
-	public void setStatusByUserId(long statusByUserId);
-
-	/**
-	 * Returns the status by user uuid of this d d l record.
-	 *
-	 * @return the status by user uuid of this d d l record
-	 * @throws SystemException if a system exception occurred
-	 */
-	public String getStatusByUserUuid() throws SystemException;
-
-	/**
-	 * Sets the status by user uuid of this d d l record.
-	 *
-	 * @param statusByUserUuid the status by user uuid of this d d l record
-	 */
-	public void setStatusByUserUuid(String statusByUserUuid);
-
-	/**
-	 * Returns the status by user name of this d d l record.
-	 *
-	 * @return the status by user name of this d d l record
+	 * @return the version of this d d l record
 	 */
 	@AutoEscape
-	public String getStatusByUserName();
+	public String getVersion();
 
 	/**
-	 * Sets the status by user name of this d d l record.
+	 * Sets the version of this d d l record.
 	 *
-	 * @param statusByUserName the status by user name of this d d l record
+	 * @param version the version of this d d l record
 	 */
-	public void setStatusByUserName(String statusByUserName);
-
-	/**
-	 * Returns the status date of this d d l record.
-	 *
-	 * @return the status date of this d d l record
-	 */
-	public Date getStatusDate();
-
-	/**
-	 * Sets the status date of this d d l record.
-	 *
-	 * @param statusDate the status date of this d d l record
-	 */
-	public void setStatusDate(Date statusDate);
-
-	/**
-	 * @deprecated Renamed to {@link #isApproved()}
-	 */
-	public boolean getApproved();
-
-	/**
-	 * Determines if this d d l record is approved.
-	 *
-	 * @return <code>true</code> if this d d l record is approved; <code>false</code> otherwise
-	 */
-	public boolean isApproved();
-
-	/**
-	 * Determines if this d d l record is a draft.
-	 *
-	 * @return <code>true</code> if this d d l record is a draft; <code>false</code> otherwise
-	 */
-	public boolean isDraft();
-
-	/**
-	 * Determines if this d d l record is expired.
-	 *
-	 * @return <code>true</code> if this d d l record is expired; <code>false</code> otherwise
-	 */
-	public boolean isExpired();
-
-	/**
-	 * Determines if this d d l record is pending.
-	 *
-	 * @return <code>true</code> if this d d l record is pending; <code>false</code> otherwise
-	 */
-	public boolean isPending();
+	public void setVersion(String version);
 
 	public boolean isNew();
 

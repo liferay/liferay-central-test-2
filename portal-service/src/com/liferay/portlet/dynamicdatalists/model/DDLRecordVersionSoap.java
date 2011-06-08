@@ -21,37 +21,37 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * This class is used by SOAP remote services, specifically {@link com.liferay.portlet.dynamicdatalists.service.http.DDLRecordServiceSoap}.
+ * This class is used by SOAP remote services.
  *
  * @author    Brian Wing Shun Chan
- * @see       com.liferay.portlet.dynamicdatalists.service.http.DDLRecordServiceSoap
  * @generated
  */
-public class DDLRecordSoap implements Serializable {
-	public static DDLRecordSoap toSoapModel(DDLRecord model) {
-		DDLRecordSoap soapModel = new DDLRecordSoap();
+public class DDLRecordVersionSoap implements Serializable {
+	public static DDLRecordVersionSoap toSoapModel(DDLRecordVersion model) {
+		DDLRecordVersionSoap soapModel = new DDLRecordVersionSoap();
 
-		soapModel.setUuid(model.getUuid());
-		soapModel.setRecordId(model.getRecordId());
+		soapModel.setRecordVersionId(model.getRecordVersionId());
 		soapModel.setGroupId(model.getGroupId());
 		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setUserId(model.getUserId());
 		soapModel.setUserName(model.getUserName());
-		soapModel.setVersionUserId(model.getVersionUserId());
-		soapModel.setVersionUserName(model.getVersionUserName());
 		soapModel.setCreateDate(model.getCreateDate());
-		soapModel.setModifiedDate(model.getModifiedDate());
+		soapModel.setRecordId(model.getRecordId());
+		soapModel.setRecordSetId(model.getRecordSetId());
 		soapModel.setClassNameId(model.getClassNameId());
 		soapModel.setClassPK(model.getClassPK());
-		soapModel.setRecordSetId(model.getRecordSetId());
 		soapModel.setDisplayIndex(model.getDisplayIndex());
 		soapModel.setVersion(model.getVersion());
+		soapModel.setStatus(model.getStatus());
+		soapModel.setStatusByUserId(model.getStatusByUserId());
+		soapModel.setStatusByUserName(model.getStatusByUserName());
+		soapModel.setStatusDate(model.getStatusDate());
 
 		return soapModel;
 	}
 
-	public static DDLRecordSoap[] toSoapModels(DDLRecord[] models) {
-		DDLRecordSoap[] soapModels = new DDLRecordSoap[models.length];
+	public static DDLRecordVersionSoap[] toSoapModels(DDLRecordVersion[] models) {
+		DDLRecordVersionSoap[] soapModels = new DDLRecordVersionSoap[models.length];
 
 		for (int i = 0; i < models.length; i++) {
 			soapModels[i] = toSoapModel(models[i]);
@@ -60,14 +60,15 @@ public class DDLRecordSoap implements Serializable {
 		return soapModels;
 	}
 
-	public static DDLRecordSoap[][] toSoapModels(DDLRecord[][] models) {
-		DDLRecordSoap[][] soapModels = null;
+	public static DDLRecordVersionSoap[][] toSoapModels(
+		DDLRecordVersion[][] models) {
+		DDLRecordVersionSoap[][] soapModels = null;
 
 		if (models.length > 0) {
-			soapModels = new DDLRecordSoap[models.length][models[0].length];
+			soapModels = new DDLRecordVersionSoap[models.length][models[0].length];
 		}
 		else {
-			soapModels = new DDLRecordSoap[0][0];
+			soapModels = new DDLRecordVersionSoap[0][0];
 		}
 
 		for (int i = 0; i < models.length; i++) {
@@ -77,41 +78,34 @@ public class DDLRecordSoap implements Serializable {
 		return soapModels;
 	}
 
-	public static DDLRecordSoap[] toSoapModels(List<DDLRecord> models) {
-		List<DDLRecordSoap> soapModels = new ArrayList<DDLRecordSoap>(models.size());
+	public static DDLRecordVersionSoap[] toSoapModels(
+		List<DDLRecordVersion> models) {
+		List<DDLRecordVersionSoap> soapModels = new ArrayList<DDLRecordVersionSoap>(models.size());
 
-		for (DDLRecord model : models) {
+		for (DDLRecordVersion model : models) {
 			soapModels.add(toSoapModel(model));
 		}
 
-		return soapModels.toArray(new DDLRecordSoap[soapModels.size()]);
+		return soapModels.toArray(new DDLRecordVersionSoap[soapModels.size()]);
 	}
 
-	public DDLRecordSoap() {
+	public DDLRecordVersionSoap() {
 	}
 
 	public long getPrimaryKey() {
-		return _recordId;
+		return _recordVersionId;
 	}
 
 	public void setPrimaryKey(long pk) {
-		setRecordId(pk);
+		setRecordVersionId(pk);
 	}
 
-	public String getUuid() {
-		return _uuid;
+	public long getRecordVersionId() {
+		return _recordVersionId;
 	}
 
-	public void setUuid(String uuid) {
-		_uuid = uuid;
-	}
-
-	public long getRecordId() {
-		return _recordId;
-	}
-
-	public void setRecordId(long recordId) {
-		_recordId = recordId;
+	public void setRecordVersionId(long recordVersionId) {
+		_recordVersionId = recordVersionId;
 	}
 
 	public long getGroupId() {
@@ -146,22 +140,6 @@ public class DDLRecordSoap implements Serializable {
 		_userName = userName;
 	}
 
-	public long getVersionUserId() {
-		return _versionUserId;
-	}
-
-	public void setVersionUserId(long versionUserId) {
-		_versionUserId = versionUserId;
-	}
-
-	public String getVersionUserName() {
-		return _versionUserName;
-	}
-
-	public void setVersionUserName(String versionUserName) {
-		_versionUserName = versionUserName;
-	}
-
 	public Date getCreateDate() {
 		return _createDate;
 	}
@@ -170,12 +148,20 @@ public class DDLRecordSoap implements Serializable {
 		_createDate = createDate;
 	}
 
-	public Date getModifiedDate() {
-		return _modifiedDate;
+	public long getRecordId() {
+		return _recordId;
 	}
 
-	public void setModifiedDate(Date modifiedDate) {
-		_modifiedDate = modifiedDate;
+	public void setRecordId(long recordId) {
+		_recordId = recordId;
+	}
+
+	public long getRecordSetId() {
+		return _recordSetId;
+	}
+
+	public void setRecordSetId(long recordSetId) {
+		_recordSetId = recordSetId;
 	}
 
 	public long getClassNameId() {
@@ -194,14 +180,6 @@ public class DDLRecordSoap implements Serializable {
 		_classPK = classPK;
 	}
 
-	public long getRecordSetId() {
-		return _recordSetId;
-	}
-
-	public void setRecordSetId(long recordSetId) {
-		_recordSetId = recordSetId;
-	}
-
 	public int getDisplayIndex() {
 		return _displayIndex;
 	}
@@ -218,19 +196,52 @@ public class DDLRecordSoap implements Serializable {
 		_version = version;
 	}
 
-	private String _uuid;
-	private long _recordId;
+	public int getStatus() {
+		return _status;
+	}
+
+	public void setStatus(int status) {
+		_status = status;
+	}
+
+	public long getStatusByUserId() {
+		return _statusByUserId;
+	}
+
+	public void setStatusByUserId(long statusByUserId) {
+		_statusByUserId = statusByUserId;
+	}
+
+	public String getStatusByUserName() {
+		return _statusByUserName;
+	}
+
+	public void setStatusByUserName(String statusByUserName) {
+		_statusByUserName = statusByUserName;
+	}
+
+	public Date getStatusDate() {
+		return _statusDate;
+	}
+
+	public void setStatusDate(Date statusDate) {
+		_statusDate = statusDate;
+	}
+
+	private long _recordVersionId;
 	private long _groupId;
 	private long _companyId;
 	private long _userId;
 	private String _userName;
-	private long _versionUserId;
-	private String _versionUserName;
 	private Date _createDate;
-	private Date _modifiedDate;
+	private long _recordId;
+	private long _recordSetId;
 	private long _classNameId;
 	private long _classPK;
-	private long _recordSetId;
 	private int _displayIndex;
 	private String _version;
+	private int _status;
+	private long _statusByUserId;
+	private String _statusByUserName;
+	private Date _statusDate;
 }

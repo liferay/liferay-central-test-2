@@ -137,6 +137,10 @@ create unique index IX_56DAB121 on DDLRecordSet (groupId, recordSetKey);
 create index IX_561E44E9 on DDLRecordSet (uuid_);
 create unique index IX_270BA5E1 on DDLRecordSet (uuid_, groupId);
 
+create index IX_2F4DDFE1 on DDLRecordVersion (recordId);
+create index IX_762ADC7 on DDLRecordVersion (recordId, status);
+create unique index IX_C79E347 on DDLRecordVersion (recordId, version);
+
 create index IX_E3BAF436 on DDMContent (companyId);
 create index IX_50BF1038 on DDMContent (groupId);
 create index IX_AE4B50C2 on DDMContent (uuid_);

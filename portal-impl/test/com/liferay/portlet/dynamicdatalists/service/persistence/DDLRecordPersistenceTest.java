@@ -74,16 +74,15 @@ public class DDLRecordPersistenceTest extends BasePersistenceTestCase {
 		newDDLRecord.setCompanyId(nextLong());
 		newDDLRecord.setUserId(nextLong());
 		newDDLRecord.setUserName(randomString());
+		newDDLRecord.setVersionUserId(nextLong());
+		newDDLRecord.setVersionUserName(randomString());
 		newDDLRecord.setCreateDate(nextDate());
 		newDDLRecord.setModifiedDate(nextDate());
 		newDDLRecord.setClassNameId(nextLong());
 		newDDLRecord.setClassPK(nextLong());
 		newDDLRecord.setRecordSetId(nextLong());
 		newDDLRecord.setDisplayIndex(nextInt());
-		newDDLRecord.setStatus(nextInt());
-		newDDLRecord.setStatusByUserId(nextLong());
-		newDDLRecord.setStatusByUserName(randomString());
-		newDDLRecord.setStatusDate(nextDate());
+		newDDLRecord.setVersion(randomString());
 
 		_persistence.update(newDDLRecord, false);
 
@@ -96,6 +95,10 @@ public class DDLRecordPersistenceTest extends BasePersistenceTestCase {
 			newDDLRecord.getCompanyId());
 		assertEquals(existingDDLRecord.getUserId(), newDDLRecord.getUserId());
 		assertEquals(existingDDLRecord.getUserName(), newDDLRecord.getUserName());
+		assertEquals(existingDDLRecord.getVersionUserId(),
+			newDDLRecord.getVersionUserId());
+		assertEquals(existingDDLRecord.getVersionUserName(),
+			newDDLRecord.getVersionUserName());
 		assertEquals(Time.getShortTimestamp(existingDDLRecord.getCreateDate()),
 			Time.getShortTimestamp(newDDLRecord.getCreateDate()));
 		assertEquals(Time.getShortTimestamp(existingDDLRecord.getModifiedDate()),
@@ -107,13 +110,7 @@ public class DDLRecordPersistenceTest extends BasePersistenceTestCase {
 			newDDLRecord.getRecordSetId());
 		assertEquals(existingDDLRecord.getDisplayIndex(),
 			newDDLRecord.getDisplayIndex());
-		assertEquals(existingDDLRecord.getStatus(), newDDLRecord.getStatus());
-		assertEquals(existingDDLRecord.getStatusByUserId(),
-			newDDLRecord.getStatusByUserId());
-		assertEquals(existingDDLRecord.getStatusByUserName(),
-			newDDLRecord.getStatusByUserName());
-		assertEquals(Time.getShortTimestamp(existingDDLRecord.getStatusDate()),
-			Time.getShortTimestamp(newDDLRecord.getStatusDate()));
+		assertEquals(existingDDLRecord.getVersion(), newDDLRecord.getVersion());
 	}
 
 	public void testFindByPrimaryKeyExisting() throws Exception {
@@ -246,16 +243,15 @@ public class DDLRecordPersistenceTest extends BasePersistenceTestCase {
 		ddlRecord.setCompanyId(nextLong());
 		ddlRecord.setUserId(nextLong());
 		ddlRecord.setUserName(randomString());
+		ddlRecord.setVersionUserId(nextLong());
+		ddlRecord.setVersionUserName(randomString());
 		ddlRecord.setCreateDate(nextDate());
 		ddlRecord.setModifiedDate(nextDate());
 		ddlRecord.setClassNameId(nextLong());
 		ddlRecord.setClassPK(nextLong());
 		ddlRecord.setRecordSetId(nextLong());
 		ddlRecord.setDisplayIndex(nextInt());
-		ddlRecord.setStatus(nextInt());
-		ddlRecord.setStatusByUserId(nextLong());
-		ddlRecord.setStatusByUserName(randomString());
-		ddlRecord.setStatusDate(nextDate());
+		ddlRecord.setVersion(randomString());
 
 		_persistence.update(ddlRecord, false);
 

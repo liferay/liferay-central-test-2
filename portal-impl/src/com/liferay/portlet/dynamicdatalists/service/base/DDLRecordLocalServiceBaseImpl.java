@@ -49,9 +49,11 @@ import com.liferay.portlet.dynamicdatalists.service.DDLRecordLocalService;
 import com.liferay.portlet.dynamicdatalists.service.DDLRecordService;
 import com.liferay.portlet.dynamicdatalists.service.DDLRecordSetLocalService;
 import com.liferay.portlet.dynamicdatalists.service.DDLRecordSetService;
+import com.liferay.portlet.dynamicdatalists.service.persistence.DDLRecordFinder;
 import com.liferay.portlet.dynamicdatalists.service.persistence.DDLRecordPersistence;
 import com.liferay.portlet.dynamicdatalists.service.persistence.DDLRecordSetFinder;
 import com.liferay.portlet.dynamicdatalists.service.persistence.DDLRecordSetPersistence;
+import com.liferay.portlet.dynamicdatalists.service.persistence.DDLRecordVersionPersistence;
 
 import java.util.List;
 
@@ -383,6 +385,24 @@ public abstract class DDLRecordLocalServiceBaseImpl
 	}
 
 	/**
+	 * Returns the d d l record finder.
+	 *
+	 * @return the d d l record finder
+	 */
+	public DDLRecordFinder getDDLRecordFinder() {
+		return ddlRecordFinder;
+	}
+
+	/**
+	 * Sets the d d l record finder.
+	 *
+	 * @param ddlRecordFinder the d d l record finder
+	 */
+	public void setDDLRecordFinder(DDLRecordFinder ddlRecordFinder) {
+		this.ddlRecordFinder = ddlRecordFinder;
+	}
+
+	/**
 	 * Returns the d d l record set local service.
 	 *
 	 * @return the d d l record set local service
@@ -454,6 +474,25 @@ public abstract class DDLRecordLocalServiceBaseImpl
 	 */
 	public void setDDLRecordSetFinder(DDLRecordSetFinder ddlRecordSetFinder) {
 		this.ddlRecordSetFinder = ddlRecordSetFinder;
+	}
+
+	/**
+	 * Returns the d d l record version persistence.
+	 *
+	 * @return the d d l record version persistence
+	 */
+	public DDLRecordVersionPersistence getDDLRecordVersionPersistence() {
+		return ddlRecordVersionPersistence;
+	}
+
+	/**
+	 * Sets the d d l record version persistence.
+	 *
+	 * @param ddlRecordVersionPersistence the d d l record version persistence
+	 */
+	public void setDDLRecordVersionPersistence(
+		DDLRecordVersionPersistence ddlRecordVersionPersistence) {
+		this.ddlRecordVersionPersistence = ddlRecordVersionPersistence;
 	}
 
 	/**
@@ -782,6 +821,8 @@ public abstract class DDLRecordLocalServiceBaseImpl
 	protected DDLRecordService ddlRecordService;
 	@BeanReference(type = DDLRecordPersistence.class)
 	protected DDLRecordPersistence ddlRecordPersistence;
+	@BeanReference(type = DDLRecordFinder.class)
+	protected DDLRecordFinder ddlRecordFinder;
 	@BeanReference(type = DDLRecordSetLocalService.class)
 	protected DDLRecordSetLocalService ddlRecordSetLocalService;
 	@BeanReference(type = DDLRecordSetService.class)
@@ -790,6 +831,8 @@ public abstract class DDLRecordLocalServiceBaseImpl
 	protected DDLRecordSetPersistence ddlRecordSetPersistence;
 	@BeanReference(type = DDLRecordSetFinder.class)
 	protected DDLRecordSetFinder ddlRecordSetFinder;
+	@BeanReference(type = DDLRecordVersionPersistence.class)
+	protected DDLRecordVersionPersistence ddlRecordVersionPersistence;
 	@BeanReference(type = CounterLocalService.class)
 	protected CounterLocalService counterLocalService;
 	@BeanReference(type = ResourceLocalService.class)

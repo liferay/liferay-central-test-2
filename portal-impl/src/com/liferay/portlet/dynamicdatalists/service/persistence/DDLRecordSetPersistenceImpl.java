@@ -2346,6 +2346,8 @@ public class DDLRecordSetPersistenceImpl extends BasePersistenceImpl<DDLRecordSe
 	protected DDLRecordPersistence ddlRecordPersistence;
 	@BeanReference(type = DDLRecordSetPersistence.class)
 	protected DDLRecordSetPersistence ddlRecordSetPersistence;
+	@BeanReference(type = DDLRecordVersionPersistence.class)
+	protected DDLRecordVersionPersistence ddlRecordVersionPersistence;
 	@BeanReference(type = ResourcePersistence.class)
 	protected ResourcePersistence resourcePersistence;
 	@BeanReference(type = UserPersistence.class)
