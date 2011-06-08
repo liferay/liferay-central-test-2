@@ -20,15 +20,15 @@
 <%@ page import="com.liferay.portal.NoSuchUserGroupException" %>
 <%@ page import="com.liferay.portal.NoSuchUserException" %>
 <%@ page import="com.liferay.portal.service.permission.OrganizationPermissionUtil" %>
-<%@ page import="com.liferay.portlet.enterpriseadmin.search.OrganizationDisplayTerms" %>
-<%@ page import="com.liferay.portlet.enterpriseadmin.search.OrganizationSearch" %>
-<%@ page import="com.liferay.portlet.enterpriseadmin.search.OrganizationSearchTerms" %>
-<%@ page import="com.liferay.portlet.enterpriseadmin.search.UserDisplayTerms" %>
-<%@ page import="com.liferay.portlet.enterpriseadmin.search.UserGroupDisplayTerms" %>
-<%@ page import="com.liferay.portlet.enterpriseadmin.search.UserGroupSearch" %>
-<%@ page import="com.liferay.portlet.enterpriseadmin.search.UserGroupSearchTerms" %>
-<%@ page import="com.liferay.portlet.enterpriseadmin.search.UserSearch" %>
-<%@ page import="com.liferay.portlet.enterpriseadmin.search.UserSearchTerms" %>
+<%@ page import="com.liferay.portlet.usersadmin.search.OrganizationDisplayTerms" %>
+<%@ page import="com.liferay.portlet.usersadmin.search.OrganizationSearch" %>
+<%@ page import="com.liferay.portlet.usersadmin.search.OrganizationSearchTerms" %>
+<%@ page import="com.liferay.portlet.usersadmin.search.UserDisplayTerms" %>
+<%@ page import="com.liferay.portlet.usersadmin.search.UserGroupDisplayTerms" %>
+<%@ page import="com.liferay.portlet.usersadmin.search.UserGroupSearch" %>
+<%@ page import="com.liferay.portlet.usersadmin.search.UserGroupSearchTerms" %>
+<%@ page import="com.liferay.portlet.usersadmin.search.UserSearch" %>
+<%@ page import="com.liferay.portlet.usersadmin.search.UserSearchTerms" %>
 <%
 String tabs1 = ParamUtil.getString(request, "tabs1", "users");
 

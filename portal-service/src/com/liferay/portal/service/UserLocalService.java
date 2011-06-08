@@ -1702,14 +1702,14 @@ public interface UserLocalService {
 	* @param status the workflow status
 	* @param params the indexer parameters (optionally <code>null</code>). For
 	more information see {@link
-	com.liferay.portlet.enterpriseadmin.util.UserIndexer}.
+	com.liferay.portlet.usersadmin.util.UserIndexer}.
 	* @param start the lower bound of the range of users
 	* @param end the upper bound of the range of users (not inclusive)
 	* @param sort the field and direction to sort by (optionally
 	<code>null</code>)
 	* @return the matching users
 	* @throws SystemException if a system exception occurred
-	* @see com.liferay.portlet.enterpriseadmin.util.UserIndexer
+	* @see com.liferay.portlet.usersadmin.util.UserIndexer
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.kernel.search.Hits search(long companyId,
@@ -1794,7 +1794,7 @@ public interface UserLocalService {
 	* @param status the workflow status
 	* @param params the indexer parameters (optionally <code>null</code>). For
 	more information see {@link
-	com.liferay.portlet.enterpriseadmin.util.UserIndexer}.
+	com.liferay.portlet.usersadmin.util.UserIndexer}.
 	* @param andSearch whether every field must match its keywords, or just
 	one. For example, &quot;users with the first name 'bob' and last
 	name 'smith'&quot; vs &quot;users with the first name 'bob' or
@@ -1805,7 +1805,7 @@ public interface UserLocalService {
 	<code>null</code>)
 	* @return the matching users
 	* @throws SystemException if a system exception occurred
-	* @see com.liferay.portlet.enterpriseadmin.util.UserIndexer
+	* @see com.liferay.portlet.usersadmin.util.UserIndexer
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.kernel.search.Hits search(long companyId,

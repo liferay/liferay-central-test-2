@@ -45,12 +45,12 @@ import com.liferay.portlet.bookmarks.util.BookmarksIndexer;
 import com.liferay.portlet.directory.workflow.UserWorkflowHandler;
 import com.liferay.portlet.documentlibrary.util.DLIndexer;
 import com.liferay.portlet.documentlibrary.workflow.DLFileEntryWorkflowHandler;
-import com.liferay.portlet.enterpriseadmin.util.UserIndexer;
 import com.liferay.portlet.imagegallery.util.IGIndexer;
 import com.liferay.portlet.journal.workflow.JournalArticleWorkflowHandler;
 import com.liferay.portlet.messageboards.util.MBIndexer;
 import com.liferay.portlet.messageboards.workflow.MBDiscussionWorkflowHandler;
 import com.liferay.portlet.messageboards.workflow.MBMessageWorkflowHandler;
+import com.liferay.portlet.usersadmin.util.UserIndexer;
 
 import java.util.HashMap;
 import java.util.List;

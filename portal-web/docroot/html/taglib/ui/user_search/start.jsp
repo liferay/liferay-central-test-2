@@ -16,8 +16,8 @@
 
 <%@ include file="/html/taglib/init.jsp" %>
 
-<%@ page import="com.liferay.portlet.enterpriseadmin.search.UserSearch" %>
-<%@ page import="com.liferay.portlet.enterpriseadmin.search.UserSearchTerms" %>
+<%@ page import="com.liferay.portlet.usersadmin.search.UserSearch" %>
+<%@ page import="com.liferay.portlet.usersadmin.search.UserSearchTerms" %>
 
 <portlet:defineObjects />
 

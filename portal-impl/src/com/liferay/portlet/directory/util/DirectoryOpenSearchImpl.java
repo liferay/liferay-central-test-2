@@ -24,10 +24,10 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.model.User;
 import com.liferay.portal.util.PortletKeys;
-import com.liferay.portlet.enterpriseadmin.util.UserIndexer;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.model.ExpandoColumnConstants;
 import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
+import com.liferay.portlet.usersadmin.util.UserIndexer;
 
 import java.util.Enumeration;
 import java.util.LinkedHashMap;

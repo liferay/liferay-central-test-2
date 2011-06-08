@@ -151,7 +151,7 @@
 			<forward name="portlet.admin.error" path="portlet.admin.error" />
 		</action>
 
-		<action path="/admin_server/edit_organization" type="com.liferay.portlet.enterpriseadmin.action.EditOrganizationAction">
+		<action path="/admin_server/edit_organization" type="com.liferay.portlet.usersadmin.action.EditOrganizationAction">
 			<forward name="portlet.enterprise_admin.edit_organization" path="portlet.directory.view_organization" />
 			<forward name="portlet.enterprise_admin.error" path="portlet.directory.error" />
 		</action>
@@ -171,7 +171,7 @@
 			<forward name="portlet.admin.error" path="portlet.admin.error" />
 		</action>
 
-		<action path="/admin_server/edit_user" type="com.liferay.portlet.enterpriseadmin.action.EditUserAction">
+		<action path="/admin_server/edit_user" type="com.liferay.portlet.usersadmin.action.EditUserAction">
 			<forward name="portlet.enterprise_admin.edit_user" path="portlet.directory.view_user" />
 			<forward name="portlet.enterprise_admin.error" path="portlet.directory.error" />
 		</action>
@@ -435,12 +435,12 @@
 
 		<!-- Directory -->
 
-		<action path="/directory/view_organization" type="com.liferay.portlet.enterpriseadmin.action.EditOrganizationAction">
+		<action path="/directory/view_organization" type="com.liferay.portlet.usersadmin.action.EditOrganizationAction">
 			<forward name="portlet.enterprise_admin.edit_organization" path="portlet.directory.view_organization" />
 			<forward name="portlet.enterprise_admin.error" path="portlet.directory.error" />
 		</action>
 
-		<action path="/directory/view_user" type="com.liferay.portlet.enterpriseadmin.action.EditUserAction">
+		<action path="/directory/view_user" type="com.liferay.portlet.usersadmin.action.EditUserAction">
 			<forward name="portlet.enterprise_admin.edit_user" path="portlet.directory.view_user" />
 			<forward name="portlet.enterprise_admin.error" path="portlet.directory.error" />
 		</action>
@@ -631,17 +631,17 @@
 			<forward name="portlet.layouts_admin.error" path="portlet.layouts_admin.error" />
 		</action>
 
-		<action path="/enterprise_admin/edit_organization" type="com.liferay.portlet.enterpriseadmin.action.EditOrganizationAction">
+		<action path="/enterprise_admin/edit_organization" type="com.liferay.portlet.usersadmin.action.EditOrganizationAction">
 			<forward name="portlet.enterprise_admin.edit_organization" path="portlet.enterprise_admin.edit_organization" />
 			<forward name="portlet.enterprise_admin.error" path="portlet.enterprise_admin.error" />
 		</action>
 
-		<action path="/enterprise_admin/edit_organization_assignments" type="com.liferay.portlet.enterpriseadmin.action.EditOrganizationAssignmentsAction">
+		<action path="/enterprise_admin/edit_organization_assignments" type="com.liferay.portlet.usersadmin.action.EditOrganizationAssignmentsAction">
 			<forward name="portlet.enterprise_admin.edit_organization_assignments" path="portlet.enterprise_admin.edit_organization_assignments" />
 			<forward name="portlet.enterprise_admin.error" path="portlet.enterprise_admin.error" />
 		</action>
 
-		<action path="/enterprise_admin/edit_organization_logo" type="com.liferay.portlet.enterpriseadmin.action.EditOrganizationLogoAction">
+		<action path="/enterprise_admin/edit_organization_logo" type="com.liferay.portlet.usersadmin.action.EditOrganizationLogoAction">
 			<forward name="portlet.enterprise_admin.edit_organization_logo" path="portlet.enterprise_admin.edit_organization_logo" />
 			<forward name="portlet.enterprise_admin.error" path="portlet.enterprise_admin.error" />
 		</action>
@@ -696,22 +696,22 @@
 			<forward name="portlet.sites_admin.error" path="portlet.sites_admin.error" />
 		</action>
 
-		<action path="/enterprise_admin/edit_user" type="com.liferay.portlet.enterpriseadmin.action.EditUserAction">
+		<action path="/enterprise_admin/edit_user" type="com.liferay.portlet.usersadmin.action.EditUserAction">
 			<forward name="portlet.enterprise_admin.edit_user" path="portlet.enterprise_admin.edit_user" />
 			<forward name="portlet.enterprise_admin.error" path="portlet.enterprise_admin.error" />
 		</action>
 
-		<action path="/enterprise_admin/edit_user_group" type="com.liferay.portlet.enterpriseadmin.action.EditUserGroupAction">
+		<action path="/enterprise_admin/edit_user_group" type="com.liferay.portlet.usersadmin.action.EditUserGroupAction">
 			<forward name="portlet.enterprise_admin.edit_user_group" path="portlet.enterprise_admin.edit_user_group" />
 			<forward name="portlet.enterprise_admin.error" path="portlet.enterprise_admin.error" />
 		</action>
 
-		<action path="/enterprise_admin/edit_user_group_assignments" type="com.liferay.portlet.enterpriseadmin.action.EditUserGroupAssignmentsAction">
+		<action path="/enterprise_admin/edit_user_group_assignments" type="com.liferay.portlet.usersadmin.action.EditUserGroupAssignmentsAction">
 			<forward name="portlet.enterprise_admin.edit_user_group_assignments" path="portlet.enterprise_admin.edit_user_group_assignments" />
 			<forward name="portlet.enterprise_admin.error" path="portlet.enterprise_admin.error" />
 		</action>
 
-		<action path="/enterprise_admin/edit_user_portrait" type="com.liferay.portlet.enterpriseadmin.action.EditUserPortraitAction">
+		<action path="/enterprise_admin/edit_user_portrait" type="com.liferay.portlet.usersadmin.action.EditUserPortraitAction">
 			<forward name="portlet.enterprise_admin.edit_user_portrait" path="portlet.enterprise_admin.edit_user_portrait" />
 			<forward name="portlet.enterprise_admin.error" path="portlet.enterprise_admin.error" />
 		</action>
@@ -726,7 +726,7 @@
 			<forward name="portlet.layouts_admin.export_layouts" path="portlet.layouts_admin.export_layouts" />
 		</action>
 
-		<action path="/enterprise_admin/get_users_count" type="com.liferay.portlet.enterpriseadmin.action.GetUsersCountAction" />
+		<action path="/enterprise_admin/get_users_count" type="com.liferay.portlet.usersadmin.action.GetUsersCountAction" />
 
 		<action path="/enterprise_admin/import_layouts" type="com.liferay.portlet.layoutsadmin.action.ImportLayoutsAction">
 			<forward name="portlet.layouts_admin.edit_layouts" path="portlet.layouts_admin.edit_layouts" />
@@ -786,17 +786,17 @@
 			<forward name="portlet.layouts_admin.error" path="portlet.layouts_admin.error" />
 		</action>
 
-		<action path="/enterprise_admin_organizations/edit_organization" type="com.liferay.portlet.enterpriseadmin.action.EditOrganizationAction">
+		<action path="/enterprise_admin_organizations/edit_organization" type="com.liferay.portlet.usersadmin.action.EditOrganizationAction">
 			<forward name="portlet.enterprise_admin.edit_organization" path="portlet.enterprise_admin.edit_organization" />
 			<forward name="portlet.enterprise_admin.error" path="portlet.enterprise_admin.error" />
 		</action>
 
-		<action path="/enterprise_admin_organizations/edit_organization_assignments" type="com.liferay.portlet.enterpriseadmin.action.EditOrganizationAssignmentsAction">
+		<action path="/enterprise_admin_organizations/edit_organization_assignments" type="com.liferay.portlet.usersadmin.action.EditOrganizationAssignmentsAction">
 			<forward name="portlet.enterprise_admin.edit_organization_assignments" path="portlet.enterprise_admin.edit_organization_assignments" />
 			<forward name="portlet.enterprise_admin.error" path="portlet.enterprise_admin.error" />
 		</action>
 
-		<action path="/enterprise_admin_organizations/edit_organization_logo" type="com.liferay.portlet.enterpriseadmin.action.EditOrganizationLogoAction">
+		<action path="/enterprise_admin_organizations/edit_organization_logo" type="com.liferay.portlet.usersadmin.action.EditOrganizationLogoAction">
 			<forward name="portlet.enterprise_admin.edit_organization_logo" path="portlet.enterprise_admin.edit_organization_logo" />
 			<forward name="portlet.enterprise_admin.error" path="portlet.enterprise_admin.error" />
 		</action>
@@ -816,12 +816,12 @@
 			<forward name="portlet.sites_admin.error" path="portlet.sites_admin.error" />
 		</action>
 
-		<action path="/enterprise_admin_organizations/edit_user" type="com.liferay.portlet.enterpriseadmin.action.EditUserAction">
+		<action path="/enterprise_admin_organizations/edit_user" type="com.liferay.portlet.usersadmin.action.EditUserAction">
 			<forward name="portlet.enterprise_admin.edit_user" path="portlet.enterprise_admin.edit_user" />
 			<forward name="portlet.enterprise_admin.error" path="portlet.enterprise_admin.error" />
 		</action>
 
-		<action path="/enterprise_admin_organizations/edit_user_portrait" type="com.liferay.portlet.enterpriseadmin.action.EditUserPortraitAction">
+		<action path="/enterprise_admin_organizations/edit_user_portrait" type="com.liferay.portlet.usersadmin.action.EditUserPortraitAction">
 			<forward name="portlet.enterprise_admin.edit_user_portrait" path="portlet.enterprise_admin.edit_user_portrait" />
 			<forward name="portlet.enterprise_admin.error" path="portlet.enterprise_admin.error" />
 		</action>
@@ -836,7 +836,7 @@
 			<forward name="portlet.layouts_admin.export_layouts" path="portlet.layouts_admin.export_layouts" />
 		</action>
 
-		<action path="/enterprise_admin_organizations/get_users_count" type="com.liferay.portlet.enterpriseadmin.action.GetUsersCountAction" />
+		<action path="/enterprise_admin_organizations/get_users_count" type="com.liferay.portlet.usersadmin.action.GetUsersCountAction" />
 
 		<action path="/enterprise_admin_organizations/import_layouts" type="com.liferay.portlet.layoutsadmin.action.ImportLayoutsAction">
 			<forward name="portlet.layouts_admin.edit_layouts" path="portlet.layouts_admin.edit_layouts" />
@@ -905,7 +905,7 @@
 			<forward name="portlet.enterprise_admin.error" path="portlet.enterprise_admin.error" />
 		</action>
 
-		<action path="/enterprise_admin_roles/edit_user" type="com.liferay.portlet.enterpriseadmin.action.EditUserAction">
+		<action path="/enterprise_admin_roles/edit_user" type="com.liferay.portlet.usersadmin.action.EditUserAction">
 			<forward name="portlet.enterprise_admin.edit_user" path="portlet.enterprise_admin.edit_user" />
 			<forward name="portlet.enterprise_admin.error" path="portlet.enterprise_admin.error" />
 		</action>
@@ -1046,17 +1046,17 @@
 			<forward name="portlet.layouts_admin.error" path="portlet.layouts_admin.error" />
 		</action>
 
-		<action path="/enterprise_admin_user_groups/edit_user" type="com.liferay.portlet.enterpriseadmin.action.EditUserAction">
+		<action path="/enterprise_admin_user_groups/edit_user" type="com.liferay.portlet.usersadmin.action.EditUserAction">
 			<forward name="portlet.enterprise_admin.edit_user" path="portlet.enterprise_admin.edit_user" />
 			<forward name="portlet.enterprise_admin.error" path="portlet.enterprise_admin.error" />
 		</action>
 
-		<action path="/enterprise_admin_user_groups/edit_user_group" type="com.liferay.portlet.enterpriseadmin.action.EditUserGroupAction">
+		<action path="/enterprise_admin_user_groups/edit_user_group" type="com.liferay.portlet.usersadmin.action.EditUserGroupAction">
 			<forward name="portlet.enterprise_admin.edit_user_group" path="portlet.enterprise_admin.edit_user_group" />
 			<forward name="portlet.enterprise_admin.error" path="portlet.enterprise_admin.error" />
 		</action>
 
-		<action path="/enterprise_admin_user_groups/edit_user_group_assignments" type="com.liferay.portlet.enterpriseadmin.action.EditUserGroupAssignmentsAction">
+		<action path="/enterprise_admin_user_groups/edit_user_group_assignments" type="com.liferay.portlet.usersadmin.action.EditUserGroupAssignmentsAction">
 			<forward name="portlet.enterprise_admin.edit_user_group_assignments" path="portlet.enterprise_admin.edit_user_group_assignments" />
 			<forward name="portlet.enterprise_admin.error" path="portlet.enterprise_admin.error" />
 		</action>
@@ -1066,7 +1066,7 @@
 			<forward name="portlet.layouts_admin.export_layouts" path="portlet.layouts_admin.export_layouts" />
 		</action>
 
-		<action path="/enterprise_admin_user_groups/get_users_count" type="com.liferay.portlet.enterpriseadmin.action.GetUsersCountAction" />
+		<action path="/enterprise_admin_user_groups/get_users_count" type="com.liferay.portlet.usersadmin.action.GetUsersCountAction" />
 
 		<action path="/enterprise_admin_user_groups/import_layouts" type="com.liferay.portlet.layoutsadmin.action.ImportLayoutsAction">
 			<forward name="portlet.layouts_admin.edit_layouts" path="portlet.layouts_admin.edit_layouts" />
@@ -1093,17 +1093,17 @@
 			<forward name="portlet.layouts_admin.error" path="portlet.layouts_admin.error" />
 		</action>
 
-		<action path="/enterprise_admin_users/edit_organization" type="com.liferay.portlet.enterpriseadmin.action.EditOrganizationAction">
+		<action path="/enterprise_admin_users/edit_organization" type="com.liferay.portlet.usersadmin.action.EditOrganizationAction">
 			<forward name="portlet.enterprise_admin.edit_organization" path="portlet.enterprise_admin.edit_organization" />
 			<forward name="portlet.enterprise_admin.error" path="portlet.enterprise_admin.error" />
 		</action>
 
-		<action path="/enterprise_admin_users/edit_organization_assignments" type="com.liferay.portlet.enterpriseadmin.action.EditOrganizationAssignmentsAction">
+		<action path="/enterprise_admin_users/edit_organization_assignments" type="com.liferay.portlet.usersadmin.action.EditOrganizationAssignmentsAction">
 			<forward name="portlet.enterprise_admin.edit_organization_assignments" path="portlet.enterprise_admin.edit_organization_assignments" />
 			<forward name="portlet.enterprise_admin.error" path="portlet.enterprise_admin.error" />
 		</action>
 
-		<action path="/enterprise_admin_users/edit_organization_logo" type="com.liferay.portlet.enterpriseadmin.action.EditOrganizationLogoAction">
+		<action path="/enterprise_admin_users/edit_organization_logo" type="com.liferay.portlet.usersadmin.action.EditOrganizationLogoAction">
 			<forward name="portlet.enterprise_admin.edit_organization_logo" path="portlet.enterprise_admin.edit_organization_logo" />
 			<forward name="portlet.enterprise_admin.error" path="portlet.enterprise_admin.error" />
 		</action>
@@ -1123,22 +1123,22 @@
 			<forward name="portlet.sites_admin.error" path="portlet.sites_admin.error" />
 		</action>
 
-		<action path="/enterprise_admin_users/edit_user" type="com.liferay.portlet.enterpriseadmin.action.EditUserAction">
+		<action path="/enterprise_admin_users/edit_user" type="com.liferay.portlet.usersadmin.action.EditUserAction">
 			<forward name="portlet.enterprise_admin.edit_user" path="portlet.enterprise_admin.edit_user" />
 			<forward name="portlet.enterprise_admin.error" path="portlet.enterprise_admin.error" />
 		</action>
 
-		<action path="/enterprise_admin_users/edit_user_group" type="com.liferay.portlet.enterpriseadmin.action.EditUserGroupAction">
+		<action path="/enterprise_admin_users/edit_user_group" type="com.liferay.portlet.usersadmin.action.EditUserGroupAction">
 			<forward name="portlet.enterprise_admin.edit_user_group" path="portlet.enterprise_admin.edit_user_group" />
 			<forward name="portlet.enterprise_admin.error" path="portlet.enterprise_admin.error" />
 		</action>
 
-		<action path="/enterprise_admin_users/edit_user_group_assignments" type="com.liferay.portlet.enterpriseadmin.action.EditUserGroupAssignmentsAction">
+		<action path="/enterprise_admin_users/edit_user_group_assignments" type="com.liferay.portlet.usersadmin.action.EditUserGroupAssignmentsAction">
 			<forward name="portlet.enterprise_admin.edit_user_group_assignments" path="portlet.enterprise_admin.edit_user_group_assignments" />
 			<forward name="portlet.enterprise_admin.error" path="portlet.enterprise_admin.error" />
 		</action>
 
-		<action path="/enterprise_admin_users/edit_user_portrait" type="com.liferay.portlet.enterpriseadmin.action.EditUserPortraitAction">
+		<action path="/enterprise_admin_users/edit_user_portrait" type="com.liferay.portlet.usersadmin.action.EditUserPortraitAction">
 			<forward name="portlet.enterprise_admin.edit_user_portrait" path="portlet.enterprise_admin.edit_user_portrait" />
 			<forward name="portlet.enterprise_admin.error" path="portlet.enterprise_admin.error" />
 		</action>
@@ -1153,11 +1153,11 @@
 			<forward name="portlet.layouts_admin.export_layouts" path="portlet.layouts_admin.export_layouts" />
 		</action>
 
-		<action path="/enterprise_admin_users/export_users" type="com.liferay.portlet.enterpriseadmin.action.ExportUsersAction">
+		<action path="/enterprise_admin_users/export_users" type="com.liferay.portlet.usersadmin.action.ExportUsersAction">
 			<forward name="portlet.enterprise_admin.error" path="portlet.enterprise_admin.error" />
 		</action>
 
-		<action path="/enterprise_admin_users/get_users_count" type="com.liferay.portlet.enterpriseadmin.action.GetUsersCountAction" />
+		<action path="/enterprise_admin_users/get_users_count" type="com.liferay.portlet.usersadmin.action.GetUsersCountAction" />
 
 		<action path="/enterprise_admin_users/import_layouts" type="com.liferay.portlet.layoutsadmin.action.ImportLayoutsAction">
 			<forward name="portlet.layouts_admin.edit_layouts" path="portlet.layouts_admin.edit_layouts" />
@@ -1720,7 +1720,7 @@
 			<forward name="portlet.enterprise_admin.error" path="portlet.enterprise_admin.error" />
 		</action>
 
-		<action path="/my_account/edit_user_portrait" type="com.liferay.portlet.enterpriseadmin.action.EditUserPortraitAction">
+		<action path="/my_account/edit_user_portrait" type="com.liferay.portlet.usersadmin.action.EditUserPortraitAction">
 			<forward name="portlet.enterprise_admin.edit_user_portrait" path="portlet.enterprise_admin.edit_user_portrait" />
 			<forward name="portlet.enterprise_admin.error" path="portlet.enterprise_admin.error" />
 		</action>

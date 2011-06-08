@@ -1135,14 +1135,14 @@
 		<portlet-name>125</portlet-name>
 		<icon>/html/icons/enterprise_admin_users.png</icon>
 		<struts-path>enterprise_admin_users</struts-path>
-		<indexer-class>com.liferay.portlet.enterpriseadmin.util.UserIndexer</indexer-class>
+		<indexer-class>com.liferay.portlet.usersadmin.util.UserIndexer</indexer-class>
 		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
 		<control-panel-entry-category>portal</control-panel-entry-category>
 		<control-panel-entry-weight>1.0</control-panel-entry-weight>
-		<control-panel-entry-class>com.liferay.portlet.enterpriseadmin.UsersControlPanelEntry</control-panel-entry-class>
-		<custom-attributes-display>com.liferay.portlet.enterpriseadmin.LayoutCustomAttributesDisplay</custom-attributes-display>
-		<custom-attributes-display>com.liferay.portlet.enterpriseadmin.OrganizationCustomAttributesDisplay</custom-attributes-display>
-		<custom-attributes-display>com.liferay.portlet.enterpriseadmin.UserCustomAttributesDisplay</custom-attributes-display>
+		<control-panel-entry-class>com.liferay.portlet.usersadmin.UsersControlPanelEntry</control-panel-entry-class>
+		<custom-attributes-display>com.liferay.portlet.usersadmin.LayoutCustomAttributesDisplay</custom-attributes-display>
+		<custom-attributes-display>com.liferay.portlet.usersadmin.OrganizationCustomAttributesDisplay</custom-attributes-display>
+		<custom-attributes-display>com.liferay.portlet.usersadmin.UserCustomAttributesDisplay</custom-attributes-display>
 		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<use-default-template>false</use-default-template>
 		<private-request-attributes>false</private-request-attributes>
@@ -1157,7 +1157,7 @@
 		<portlet-name>126</portlet-name>
 		<icon>/html/icons/enterprise_admin_organizations.png</icon>
 		<struts-path>enterprise_admin_organizations</struts-path>
-		<indexer-class>com.liferay.portlet.enterpriseadmin.util.OrganizationIndexer</indexer-class>
+		<indexer-class>com.liferay.portlet.usersadmin.util.OrganizationIndexer</indexer-class>
 		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
 		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<use-default-template>false</use-default-template>

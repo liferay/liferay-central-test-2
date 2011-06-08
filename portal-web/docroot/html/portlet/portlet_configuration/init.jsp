@@ -39,17 +39,17 @@
 <%@ page import="com.liferay.portal.service.permission.RolePermissionUtil" %>
 <%@ page import="com.liferay.portlet.PortletContextImpl" %>
 <%@ page import="com.liferay.portlet.PortletQNameUtil" %>
-<%@ page import="com.liferay.portlet.enterpriseadmin.search.OrganizationSearch" %>
-<%@ page import="com.liferay.portlet.enterpriseadmin.search.OrganizationSearchTerms" %>
 <%@ page import="com.liferay.portlet.enterpriseadmin.search.RoleSearch" %>
 <%@ page import="com.liferay.portlet.enterpriseadmin.search.RoleSearchTerms" %>
-<%@ page import="com.liferay.portlet.enterpriseadmin.search.UserGroupSearch" %>
-<%@ page import="com.liferay.portlet.enterpriseadmin.search.UserGroupSearchTerms" %>
-<%@ page import="com.liferay.portlet.enterpriseadmin.search.UserSearch" %>
-<%@ page import="com.liferay.portlet.enterpriseadmin.search.UserSearchTerms" %>
 <%@ page import="com.liferay.portlet.enterpriseadmin.util.EnterpriseAdminUtil" %>
 <%@ page import="com.liferay.portlet.portletconfiguration.util.PublicRenderParameterConfiguration" %>
 <%@ page import="com.liferay.portlet.social.util.FacebookUtil" %>
+<%@ page import="com.liferay.portlet.usersadmin.search.OrganizationSearch" %>
+<%@ page import="com.liferay.portlet.usersadmin.search.OrganizationSearchTerms" %>
+<%@ page import="com.liferay.portlet.usersadmin.search.UserGroupSearch" %>
+<%@ page import="com.liferay.portlet.usersadmin.search.UserGroupSearchTerms" %>
+<%@ page import="com.liferay.portlet.usersadmin.search.UserSearch" %>
+<%@ page import="com.liferay.portlet.usersadmin.search.UserSearchTerms" %>
 
 <%
 String portletResource = ParamUtil.getString(request, "portletResource");
