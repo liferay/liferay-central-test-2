@@ -317,50 +317,13 @@ public class AssetVocabularyServiceHttp {
 		}
 	}
 
-	public static java.util.List<com.liferay.portlet.asset.model.AssetVocabulary> getVocabularies(
-		HttpPrincipal httpPrincipal, long[] vocabularyIds)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		try {
-			MethodKey methodKey = new MethodKey(AssetVocabularyServiceUtil.class.getName(),
-					"getVocabularies", _getVocabulariesParameterTypes7);
-
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					vocabularyIds);
-
-			Object returnObj = null;
-
-			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
-			}
-			catch (Exception e) {
-				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
-					throw (com.liferay.portal.kernel.exception.PortalException)e;
-				}
-
-				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
-					throw (com.liferay.portal.kernel.exception.SystemException)e;
-				}
-
-				throw new com.liferay.portal.kernel.exception.SystemException(e);
-			}
-
-			return (java.util.List<com.liferay.portlet.asset.model.AssetVocabulary>)returnObj;
-		}
-		catch (com.liferay.portal.kernel.exception.SystemException se) {
-			_log.error(se, se);
-
-			throw se;
-		}
-	}
-
 	public static com.liferay.portlet.asset.model.AssetVocabulary getVocabulary(
 		HttpPrincipal httpPrincipal, long vocabularyId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(AssetVocabularyServiceUtil.class.getName(),
-					"getVocabulary", _getVocabularyParameterTypes8);
+					"getVocabulary", _getVocabularyParameterTypes7);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					vocabularyId);
@@ -401,7 +364,7 @@ public class AssetVocabularyServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(AssetVocabularyServiceUtil.class.getName(),
-					"updateVocabulary", _updateVocabularyParameterTypes9);
+					"updateVocabulary", _updateVocabularyParameterTypes8);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					vocabularyId, titleMap, descriptionMap, settings,
@@ -443,7 +406,7 @@ public class AssetVocabularyServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(AssetVocabularyServiceUtil.class.getName(),
-					"updateVocabulary", _updateVocabularyParameterTypes10);
+					"updateVocabulary", _updateVocabularyParameterTypes9);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					vocabularyId, title, titleMap, descriptionMap, settings,
@@ -500,18 +463,15 @@ public class AssetVocabularyServiceHttp {
 	private static final Class<?>[] _getGroupVocabulariesParameterTypes6 = new Class[] {
 			long.class
 		};
-	private static final Class<?>[] _getVocabulariesParameterTypes7 = new Class[] {
-			long[].class
-		};
-	private static final Class<?>[] _getVocabularyParameterTypes8 = new Class[] {
+	private static final Class<?>[] _getVocabularyParameterTypes7 = new Class[] {
 			long.class
 		};
-	private static final Class<?>[] _updateVocabularyParameterTypes9 = new Class[] {
+	private static final Class<?>[] _updateVocabularyParameterTypes8 = new Class[] {
 			long.class, java.util.Map.class, java.util.Map.class,
 			java.lang.String.class,
 			com.liferay.portal.service.ServiceContext.class
 		};
-	private static final Class<?>[] _updateVocabularyParameterTypes10 = new Class[] {
+	private static final Class<?>[] _updateVocabularyParameterTypes9 = new Class[] {
 			long.class, java.lang.String.class, java.util.Map.class,
 			java.util.Map.class, java.lang.String.class,
 			com.liferay.portal.service.ServiceContext.class
