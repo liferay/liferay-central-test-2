@@ -32,7 +32,6 @@ import com.liferay.portlet.asset.DuplicateVocabularyException;
 import com.liferay.portlet.asset.VocabularyNameException;
 import com.liferay.portlet.asset.model.AssetVocabulary;
 import com.liferay.portlet.asset.service.base.AssetVocabularyLocalServiceBaseImpl;
-import com.liferay.portlet.asset.util.AssetUtil;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -337,7 +336,7 @@ public class AssetVocabularyLocalServiceImpl
 	protected void validate(long groupId, String name)
 		throws PortalException, SystemException {
 
-		if (!AssetUtil.isValidWord(name)) {
+		if (Validator.isNull(name)) {
 			throw new VocabularyNameException();
 		}
 

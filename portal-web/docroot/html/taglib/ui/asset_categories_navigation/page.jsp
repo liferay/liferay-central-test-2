@@ -48,6 +48,8 @@ PortletURL portletURL = renderResponse.createRenderURL();
 	for (int i = 0; i < vocabularies.size(); i++) {
 		AssetVocabulary vocabulary = vocabularies.get(i);
 
+		vocabulary = vocabulary.toEscapedModel();
+
 		String vocabularyNavigation = _buildVocabularyNavigation(vocabulary, categoryId, portletURL);
 
 		if (Validator.isNotNull(vocabularyNavigation)) {
@@ -113,6 +115,8 @@ if (hidePortletWhenEmpty) {
 <%!
 private void _buildCategoriesNavigation(List<AssetCategory> categories, long curCategoryId, PortletURL portletURL, StringBundler sb) throws Exception {
 	for (AssetCategory category : categories) {
+		category = category.toEscapedModel();
+
 		long categoryId = category.getCategoryId();
 		String name = category.getName();
 

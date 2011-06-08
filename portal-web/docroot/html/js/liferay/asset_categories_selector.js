@@ -119,7 +119,7 @@ AUI().add(
 									},
 									checked: checked,
 									id: treeId,
-									label: item.name,
+									label: Liferay.Util.escapeHTML(item.name),
 									leaf: !item.hasChildren,
 									type: 'check'
 								};
@@ -345,7 +345,7 @@ AUI().add(
 						var vocabularyRootNode = {
 							alwaysShowHitArea: true,
 							id: treeId,
-							label: vocabularyName,
+							label: Liferay.Util.escapeHTML(vocabularyName),
 							leaf: false,
 							type: 'io'
 						};

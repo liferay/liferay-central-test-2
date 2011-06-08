@@ -36,7 +36,6 @@ import com.liferay.portlet.asset.model.AssetCategoryConstants;
 import com.liferay.portlet.asset.model.AssetCategoryProperty;
 import com.liferay.portlet.asset.model.AssetEntry;
 import com.liferay.portlet.asset.service.base.AssetCategoryLocalServiceBaseImpl;
-import com.liferay.portlet.asset.util.AssetUtil;
 
 import java.util.Date;
 import java.util.List;
@@ -490,7 +489,7 @@ public class AssetCategoryLocalServiceImpl
 			long vocabularyId)
 		throws PortalException, SystemException {
 
-		if (!AssetUtil.isValidWord(name)) {
+		if (Validator.isNull(name)) {
 			throw new AssetCategoryNameException();
 		}
 
