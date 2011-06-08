@@ -25,6 +25,6 @@ public class DummyOutputStreamFactory {
 
 	public static OutputStream getDummyOutputStream() {
 		return new DummyOutputStream();
-	};
+	}
 
 }

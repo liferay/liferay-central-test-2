@@ -51,7 +51,7 @@ import javax.servlet.http.HttpSession;
  * @author Brian Wing Shun Chan
  * @author Brian Myunghun Kim
  */
-public class PortletServletRequest extends HttpServletRequestWrapper {;
+public class PortletServletRequest extends HttpServletRequestWrapper {
 
 	public PortletServletRequest(
 		HttpServletRequest request, PortletRequest portletRequest,

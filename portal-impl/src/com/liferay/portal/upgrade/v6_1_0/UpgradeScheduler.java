@@ -153,7 +153,7 @@ public class UpgradeScheduler extends UpgradeProcess {
 						SchedulerEngine.MESSAGE);
 
 					Message message = (Message)JSONFactoryUtil.deserialize(
-						messageJSON);;
+						messageJSON);
 
 					int exceptionsMaxSize = message.getInteger(
 						SchedulerEngine.EXCEPTIONS_MAX_SIZE);
