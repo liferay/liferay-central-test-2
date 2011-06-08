@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portlet.enterpriseadmin.action;
+package com.liferay.portlet.rolesadmin.action;
 
 import com.liferay.portal.DuplicateRoleException;
 import com.liferay.portal.NoSuchRoleException;
@@ -28,6 +28,7 @@ import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.RoleServiceUtil;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portlet.enterpriseadmin.action.ActionUtil;
 
 import java.util.Locale;
 import java.util.Map;

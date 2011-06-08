@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portlet.enterpriseadmin.action;
+package com.liferay.portlet.rolesadmin.action;
 
 import com.liferay.portal.NoSuchRoleException;
 import com.liferay.portal.RolePermissionsException;
@@ -39,6 +39,7 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.portlet.enterpriseadmin.action.ActionUtil;
 
 import java.util.HashMap;
 import java.util.List;

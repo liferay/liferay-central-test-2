@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portlet.enterpriseadmin.action;
+package com.liferay.portlet.rolesadmin.action;
 
 import com.liferay.portal.NoSuchRoleException;
 import com.liferay.portal.RoleAssignmentException;
@@ -28,6 +28,7 @@ import com.liferay.portal.service.GroupServiceUtil;
 import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.service.UserServiceUtil;
 import com.liferay.portal.struts.PortletAction;
+import com.liferay.portlet.enterpriseadmin.action.ActionUtil;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;

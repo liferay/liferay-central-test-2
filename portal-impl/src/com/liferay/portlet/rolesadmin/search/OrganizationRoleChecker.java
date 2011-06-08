@@ -12,34 +12,34 @@
  * details.
  */
 
-package com.liferay.portlet.enterpriseadmin.search;
+package com.liferay.portlet.rolesadmin.search;
 
 import com.liferay.portal.kernel.dao.search.RowChecker;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.Role;
-import com.liferay.portal.model.UserGroup;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 
 import javax.portlet.RenderResponse;
 
 /**
- * @author Charles May
+ * @author Brian Wing Shun Chan
  */
-public class UserGroupRoleChecker extends RowChecker {
+public class OrganizationRoleChecker extends RowChecker {
 
-	public UserGroupRoleChecker(RenderResponse renderResponse, Role role) {
+	public OrganizationRoleChecker(RenderResponse renderResponse, Role role) {
 		super(renderResponse);
 
 		_role = role;
 	}
 
 	public boolean isChecked(Object obj) {
-		UserGroup userGroup = (UserGroup)obj;
+		Organization organization = (Organization)obj;
 
 		try {
 			return GroupLocalServiceUtil.hasRoleGroup(
-				_role.getRoleId(), userGroup.getGroup().getGroupId());
+				_role.getRoleId(), organization.getGroup().getGroupId());
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -48,7 +48,8 @@ public class UserGroupRoleChecker extends RowChecker {
 		}
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(UserGroupRoleChecker.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		OrganizationRoleChecker.class);
 
 	private Role _role;
 

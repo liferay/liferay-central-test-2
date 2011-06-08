@@ -161,7 +161,7 @@
 			<forward name="portlet.admin.error" path="portlet.admin.error" />
 		</action>
 
-		<action path="/admin_server/edit_role_permissions" type="com.liferay.portlet.enterpriseadmin.action.EditRolePermissionsAction">
+		<action path="/admin_server/edit_role_permissions" type="com.liferay.portlet.rolesadmin.action.EditRolePermissionsAction">
 			<forward name="portlet.enterprise_admin.edit_role_permissions" path="portlet.enterprise_admin.edit_role_permissions" />
 			<forward name="portlet.enterprise_admin.error" path="portlet.enterprise_admin.error" />
 		</action>
@@ -661,17 +661,17 @@
 			<forward name="portlet.enterprise_admin.error" path="portlet.enterprise_admin.error" />
 		</action>
 
-		<action path="/enterprise_admin/edit_role" type="com.liferay.portlet.enterpriseadmin.action.EditRoleAction">
+		<action path="/enterprise_admin/edit_role" type="com.liferay.portlet.rolesadmin.action.EditRoleAction">
 			<forward name="portlet.enterprise_admin.edit_role" path="portlet.enterprise_admin.edit_role" />
 			<forward name="portlet.enterprise_admin.error" path="portlet.enterprise_admin.error" />
 		</action>
 
-		<action path="/enterprise_admin/edit_role_assignments" type="com.liferay.portlet.enterpriseadmin.action.EditRoleAssignmentsAction">
+		<action path="/enterprise_admin/edit_role_assignments" type="com.liferay.portlet.rolesadmin.action.EditRoleAssignmentsAction">
 			<forward name="portlet.enterprise_admin.edit_role_assignments" path="portlet.enterprise_admin.edit_role_assignments" />
 			<forward name="portlet.enterprise_admin.error" path="portlet.enterprise_admin.error" />
 		</action>
 
-		<action path="/enterprise_admin/edit_role_permissions" type="com.liferay.portlet.enterpriseadmin.action.EditRolePermissionsAction">
+		<action path="/enterprise_admin/edit_role_permissions" type="com.liferay.portlet.rolesadmin.action.EditRolePermissionsAction">
 			<forward name="portlet.enterprise_admin.edit_role_permissions" path="portlet.enterprise_admin.edit_role_permissions" />
 			<forward name="portlet.enterprise_admin.error" path="portlet.enterprise_admin.error" />
 		</action>
@@ -890,17 +890,17 @@
 
 		<!-- Enterprise Admin Roles -->
 
-		<action path="/enterprise_admin_roles/edit_role" type="com.liferay.portlet.enterpriseadmin.action.EditRoleAction">
+		<action path="/enterprise_admin_roles/edit_role" type="com.liferay.portlet.rolesadmin.action.EditRoleAction">
 			<forward name="portlet.enterprise_admin.edit_role" path="portlet.enterprise_admin.edit_role" />
 			<forward name="portlet.enterprise_admin.error" path="portlet.enterprise_admin.error" />
 		</action>
 
-		<action path="/enterprise_admin_roles/edit_role_assignments" type="com.liferay.portlet.enterpriseadmin.action.EditRoleAssignmentsAction">
+		<action path="/enterprise_admin_roles/edit_role_assignments" type="com.liferay.portlet.rolesadmin.action.EditRoleAssignmentsAction">
 			<forward name="portlet.enterprise_admin.edit_role_assignments" path="portlet.enterprise_admin.edit_role_assignments" />
 			<forward name="portlet.enterprise_admin.error" path="portlet.enterprise_admin.error" />
 		</action>
 
-		<action path="/enterprise_admin_roles/edit_role_permissions" type="com.liferay.portlet.enterpriseadmin.action.EditRolePermissionsAction">
+		<action path="/enterprise_admin_roles/edit_role_permissions" type="com.liferay.portlet.rolesadmin.action.EditRolePermissionsAction">
 			<forward name="portlet.enterprise_admin.edit_role_permissions" path="portlet.enterprise_admin.edit_role_permissions" />
 			<forward name="portlet.enterprise_admin.error" path="portlet.enterprise_admin.error" />
 		</action>
