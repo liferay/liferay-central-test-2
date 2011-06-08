@@ -270,18 +270,6 @@ public class AssetVocabularyLocalServiceImpl
 		return assetVocabularyPersistence.findByG_N(groupId, name);
 	}
 
-	public List<AssetVocabulary> getVocabularies(long[] vocabularyIds)
-		throws PortalException, SystemException {
-
-		List<AssetVocabulary> vocabularies = new ArrayList<AssetVocabulary>();
-
-		for (long vocabularyId : vocabularyIds) {
-			vocabularies.add(getVocabulary(vocabularyId));
-		}
-
-		return vocabularies;
-	}
-
 	public AssetVocabulary getVocabulary(long vocabularyId)
 		throws PortalException, SystemException {
 
