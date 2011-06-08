@@ -360,6 +360,13 @@ public class AssetVocabularyLocalServiceWrapper
 		return _assetVocabularyLocalService.getGroupVocabulary(groupId, name);
 	}
 
+	public java.util.List<com.liferay.portlet.asset.model.AssetVocabulary> getVocabularies(
+		long[] vocabularyIds)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _assetVocabularyLocalService.getVocabularies(vocabularyIds);
+	}
+
 	public com.liferay.portlet.asset.model.AssetVocabulary getVocabulary(
 		long vocabularyId)
 		throws com.liferay.portal.kernel.exception.PortalException,
