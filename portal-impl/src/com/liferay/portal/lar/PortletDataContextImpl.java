@@ -60,10 +60,10 @@ import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.TeamLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsValues;
+import com.liferay.portlet.asset.NoSuchEntryException;
 import com.liferay.portlet.asset.model.AssetCategory;
 import com.liferay.portlet.asset.model.AssetEntry;
 import com.liferay.portlet.asset.model.AssetLink;
-import com.liferay.portlet.asset.model.AssetLinkConstants;
 import com.liferay.portlet.asset.service.AssetCategoryLocalServiceUtil;
 import com.liferay.portlet.asset.service.AssetEntryLocalServiceUtil;
 import com.liferay.portlet.asset.service.AssetLinkLocalServiceUtil;
@@ -212,26 +212,53 @@ public class PortletDataContextImpl implements PortletDataContext {
 		AssetEntry assetEntry = AssetEntryLocalServiceUtil.getEntry(
 			clazz.getName(), classPK);
 
-		List<AssetLink> assetLinks =
-			AssetLinkLocalServiceUtil.getDirectLinks(
-				assetEntry.getEntryId(), AssetLinkConstants.TYPE_RELATED);
+		List<AssetLink> allDirectAssetLinks =
+			AssetLinkLocalServiceUtil.getDirectLinks(assetEntry.getEntryId());
 
-		if (assetLinks.isEmpty()) {
+		if (allDirectAssetLinks.isEmpty()) {
 			return;
 		}
 
-		List<String> assetLinkUuids = new ArrayList<String>(assetLinks.size());
+		Map<Integer, List<AssetLink>> assetLinksMap =
+			new HashMap<Integer, List<AssetLink>>();
 
-		for (AssetLink assetLink : assetLinks) {
-			AssetEntry assetLinkEntry = AssetEntryLocalServiceUtil.getEntry(
-				assetLink.getEntryId2());
+		for (AssetLink assetLink : allDirectAssetLinks) {
+			List assetLinks = assetLinksMap.get(assetLink.getType());
 
-			assetLinkUuids.add(assetLinkEntry.getClassUuid());
+			if (assetLinks == null) {
+				assetLinks = new ArrayList<AssetLink>();
+			}
+
+			assetLinks.add(assetLink);
+			assetLinksMap.put(assetLink.getType(), assetLinks);
 		}
 
-		_assetLinkUuidsMap.put(
-			assetEntry.getClassUuid(),
-			ArrayUtil.toStringArray(assetLinkUuids.toArray()));
+		for (Map.Entry<Integer, List<AssetLink>> entry :
+				assetLinksMap.entrySet()) {
+
+			int assetLinkType = entry.getKey();
+			List<AssetLink> assetLinks = entry.getValue();
+
+			List<String> assetLinkUuids = new ArrayList<String>(
+				allDirectAssetLinks.size());
+
+			for (AssetLink assetLink : assetLinks) {
+				try {
+					AssetEntry assetLinkEntry =
+						AssetEntryLocalServiceUtil.getEntry(
+							assetLink.getEntryId2());
+
+					assetLinkUuids.add(assetLinkEntry.getClassUuid());
+				}
+				catch (NoSuchEntryException nsee) {
+				}
+			}
+
+			_assetLinkUuidsMap.put(
+				getPrimaryKeyString(
+					assetEntry.getClassUuid(), String.valueOf(assetLinkType)),
+				assetLinkUuids.toArray(new String[assetLinkUuids.size()]));
+		}
 	}
 
 	public void addAssetTags(Class<?> clazz, long classPK)

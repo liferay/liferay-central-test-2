@@ -435,11 +435,19 @@ public class PortletExporter {
 			portletDataContext.getAssetLinkUuidsMap();
 
 		for (Map.Entry<String, String[]> entry : assetLinkUuidsMap.entrySet()) {
+			String[] assetLinkNameParts = StringUtil.split(
+				entry.getKey(), StringPool.POUND);
+			String[] targetAssetEntryUuids = entry.getValue();
+
+			String sourceAssetEntryUuid = assetLinkNameParts[0];
+			String assetLinkType = assetLinkNameParts[1];
+
 			Element assetElement = rootElement.addElement("asset-link");
 
-			assetElement.addAttribute("source-uuid", entry.getKey());
+			assetElement.addAttribute("source-uuid", sourceAssetEntryUuid);
+			assetElement.addAttribute("type", assetLinkType);
 			assetElement.addAttribute(
-				"target-uuids", StringUtil.merge(entry.getValue()));
+				"target-uuids", StringUtil.merge(targetAssetEntryUuids));
 		}
 
 		portletDataContext.addZipEntry(

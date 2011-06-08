@@ -117,17 +117,39 @@ public class AssetLinkLocalServiceImpl extends AssetLinkLocalServiceBaseImpl {
 		}
 	}
 
+	public List<AssetLink> getDirectLinks(long entryId)
+		throws SystemException {
+
+		return assetLinkPersistence.findByE1(entryId);
+	}
+
 	public List<AssetLink> getDirectLinks(long entryId, int typeId)
 		throws SystemException {
 
 		return assetLinkPersistence.findByE1_T(entryId, typeId);
 	}
 
-	public List<AssetLink> getLinks(long entryId, int typeId)
-		throws SystemException {
+	public List<AssetLink> getLinks(long entryId) throws SystemException {
 
 		List<AssetLink> e1Links = assetLinkPersistence.findByE1(entryId);
 		List<AssetLink> e2Links = assetLinkPersistence.findByE2(entryId);
+
+		List<AssetLink> links = new ArrayList<AssetLink>(
+			e1Links.size() + e2Links.size());
+
+		links.addAll(e1Links);
+		links.addAll(e2Links);
+
+		return links;
+	}
+
+	public List<AssetLink> getLinks(long entryId, int typeId)
+		throws SystemException {
+
+		List<AssetLink> e1Links = assetLinkPersistence.findByE1_T(
+			entryId, typeId);
+		List<AssetLink> e2Links = assetLinkPersistence.findByE2_T(
+			entryId, typeId);
 
 		List<AssetLink> links = new ArrayList<AssetLink>(
 			e1Links.size() + e2Links.size());

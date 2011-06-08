@@ -69,7 +69,6 @@ import com.liferay.portlet.asset.NoSuchEntryException;
 import com.liferay.portlet.asset.model.AssetCategory;
 import com.liferay.portlet.asset.model.AssetCategoryConstants;
 import com.liferay.portlet.asset.model.AssetEntry;
-import com.liferay.portlet.asset.model.AssetLinkConstants;
 import com.liferay.portlet.asset.model.AssetVocabulary;
 import com.liferay.portlet.asset.service.AssetCategoryLocalServiceUtil;
 import com.liferay.portlet.asset.service.AssetEntryLocalServiceUtil;
@@ -1049,6 +1048,8 @@ public class PortletImporter {
 		for (Element assetLinkElement : assetLinkElements) {
 			String sourceUuid = GetterUtil.getString(
 				assetLinkElement.attributeValue("source-uuid"));
+			int assetLinkType = GetterUtil.getInteger(
+				assetLinkElement.attributeValue("type"));
 			String[] assetEntryUuidArray = StringUtil.split(
 				GetterUtil.getString(
 					assetLinkElement.attributeValue("target-uuids")));
@@ -1079,7 +1080,7 @@ public class PortletImporter {
 
 				AssetLinkLocalServiceUtil.updateLinks(
 					assetEntry.getUserId(), assetEntry.getEntryId(),
-					assetEntryIdsArray, AssetLinkConstants.TYPE_RELATED);
+					assetEntryIdsArray, assetLinkType);
 			}
 			catch (NoSuchEntryException nsee) {
 			}
