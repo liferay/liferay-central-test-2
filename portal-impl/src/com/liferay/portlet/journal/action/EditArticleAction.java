@@ -506,7 +506,7 @@ public class EditArticleAction extends PortletAction {
 		Boolean overSizedContent = (Boolean)uploadRequest.getAttribute(
 			WebKeys.OVERSIZED_CONTENT);
 
-		if (overSizedContent) {
+		if (Validator.isNotNull(overSizedContent) && overSizedContent) {
 			uploadRequest.removeAttribute(WebKeys.OVERSIZED_CONTENT);
 			throw new ArticleSizeException();
 		}
