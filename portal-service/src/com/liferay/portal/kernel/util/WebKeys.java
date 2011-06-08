@@ -37,6 +37,8 @@ public interface WebKeys {
 
 	public static final String CURRENT_URL = "CURRENT_URL";
 
+	public static final String FILE_ITEM_THRESHOLD_SIZE_EXCEEDED = "FILE_ITEM_THRESHOLD_SIZE_EXCEEDED";
+
 	public static final String INVOKER_FILTER_URI = "INVOKER_FILTER_URI";
 
 	public static final String LAST_PATH = "LAST_PATH";

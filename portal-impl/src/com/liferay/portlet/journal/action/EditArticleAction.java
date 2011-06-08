@@ -42,10 +42,10 @@ import com.liferay.portlet.asset.AssetCategoryException;
 import com.liferay.portlet.asset.AssetTagException;
 import com.liferay.portlet.assetpublisher.util.AssetPublisherUtil;
 import com.liferay.portlet.journal.ArticleContentException;
+import com.liferay.portlet.journal.ArticleContentSizeException;
 import com.liferay.portlet.journal.ArticleDisplayDateException;
 import com.liferay.portlet.journal.ArticleExpirationDateException;
 import com.liferay.portlet.journal.ArticleIdException;
-import com.liferay.portlet.journal.ArticleSizeException;
 import com.liferay.portlet.journal.ArticleSmallImageNameException;
 import com.liferay.portlet.journal.ArticleSmallImageSizeException;
 import com.liferay.portlet.journal.ArticleTitleException;
@@ -204,10 +204,10 @@ public class EditArticleAction extends PortletAction {
 				setForward(actionRequest, "portlet.journal.error");
 			}
 			else if (e instanceof ArticleContentException ||
+					 e instanceof ArticleContentSizeException ||
 					 e instanceof ArticleDisplayDateException ||
 					 e instanceof ArticleExpirationDateException ||
 					 e instanceof ArticleIdException ||
-					 e instanceof ArticleSizeException ||
 					 e instanceof ArticleSmallImageNameException ||
 					 e instanceof ArticleSmallImageSizeException ||
 					 e instanceof ArticleTitleException ||
@@ -503,12 +503,14 @@ public class EditArticleAction extends PortletAction {
 
 		String content = ParamUtil.getString(uploadRequest, "content");
 
-		Boolean overSizedContent = (Boolean)uploadRequest.getAttribute(
-			WebKeys.OVERSIZED_CONTENT);
+		Boolean fileItemThresholdSizeExceeded =
+				(Boolean)uploadRequest.getAttribute(
+			WebKeys.FILE_ITEM_THRESHOLD_SIZE_EXCEEDED);
 
-		if (Validator.isNotNull(overSizedContent) && overSizedContent) {
-			uploadRequest.removeAttribute(WebKeys.OVERSIZED_CONTENT);
-			throw new ArticleSizeException();
+		if ((fileItemThresholdSizeExceeded != null) &&
+			fileItemThresholdSizeExceeded.booleanValue()) {
+
+			throw new ArticleContentSizeException();
 		}
 
 		String type = ParamUtil.getString(uploadRequest, "type");

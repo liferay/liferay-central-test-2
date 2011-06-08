@@ -166,9 +166,9 @@ request.setAttribute("edit_article.jsp-toLanguageId", toLanguageId);
 	<aui:input name="deleteArticleIds" type="hidden" value="<%= articleId + EditArticleAction.VERSION_SEPARATOR + version %>" />
 	<aui:input name="expireArticleIds" type="hidden" value="<%= articleId + EditArticleAction.VERSION_SEPARATOR + version %>" />
 
-	<aui:model-context bean="<%= article %>" model="<%= JournalArticle.class %>" />
+	<liferay-ui:error exception="<%= ArticleContentSizeException.class %>" message="you-have-exceeded-the-maximum-article-content-size-allowed" />
 
-	<liferay-ui:error exception="<%= ArticleSizeException.class %>" message="you-have-exceeded-the-maximum-article-size-allowed" />
+	<aui:model-context bean="<%= article %>" model="<%= JournalArticle.class %>" />
 
 	<table class="lfr-table" id="<portlet:namespace />journalArticleWrapper" width="100%">
 	<tr>

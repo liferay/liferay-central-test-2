@@ -233,15 +233,18 @@ public class UploadServletRequestImpl
 		LiferayFileItem[] liferayFileItems = _params.get(name);
 
 		if ((liferayFileItems != null) && (liferayFileItems.length > 0)) {
-			if (liferayFileItems[0].getStoreLocation().length() >
-				LiferayFileItem.THRESHOLD_SIZE) {
+			LiferayFileItem liferayFileItem = liferayFileItems[0];
 
+			File storeLocationFile = liferayFileItem.getStoreLocation();
+
+			if (storeLocationFile.length() > LiferayFileItem.THRESHOLD_SIZE) {
 				_liferayServletRequest.setAttribute(
-					WebKeys.OVERSIZED_CONTENT, Boolean.TRUE);
+					WebKeys.FILE_ITEM_THRESHOLD_SIZE_EXCEEDED, Boolean.TRUE);
 
-				return liferayFileItems[0].getEncodedString();
+				return liferayFileItem.getEncodedString();
 			}
-			return liferayFileItems[0].getString();
+
+			return liferayFileItem.getString();
 		}
 		else {
 			return super.getParameter(name);

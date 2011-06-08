@@ -17,25 +17,24 @@ package com.liferay.portlet.journal;
 import com.liferay.portal.kernel.exception.PortalException;
 
 /**
- *
  * @author Brian Wing Shun Chan
  * @author Vilmos Papp
  */
-public class ArticleSizeException extends PortalException {
+public class ArticleContentSizeException extends PortalException {
 
-	public ArticleSizeException() {
+	public ArticleContentSizeException() {
 		super();
 	}
 
-	public ArticleSizeException(String msg) {
+	public ArticleContentSizeException(String msg) {
 		super(msg);
 	}
 
-	public ArticleSizeException(String msg, Throwable cause) {
+	public ArticleContentSizeException(String msg, Throwable cause) {
 		super(msg, cause);
 	}
 
-	public ArticleSizeException(Throwable cause) {
+	public ArticleContentSizeException(Throwable cause) {
 		super(cause);
 	}
 
