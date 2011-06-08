@@ -68,8 +68,7 @@ public class DLFolderServiceImpl extends DLFolderServiceBaseImpl {
 		DLFolderPermission.check(
 			getPermissionChecker(), dlFolder, ActionKeys.DELETE);
 
-		boolean hasLock = lockLocalService.hasLock(
-			getUserId(), DLFolder.class.getName(), folderId);
+		boolean hasLock = hasFolderLock(folderId);
 
 		Lock lock = null;
 
@@ -77,7 +76,8 @@ public class DLFolderServiceImpl extends DLFolderServiceBaseImpl {
 
 			// Lock
 
-			lock = lockFolder(folderId);
+			lock = _lockFolder(
+				folderId, null, false, DLFolderImpl.LOCK_EXPIRATION_TIME);
 		}
 
 		try {
@@ -88,7 +88,7 @@ public class DLFolderServiceImpl extends DLFolderServiceBaseImpl {
 
 				// Unlock
 
-				unlockFolder(dlFolder.getGroupId(), folderId, lock.getUuid());
+				_unlockFolder(dlFolder.getGroupId(), folderId, lock.getUuid());
 			}
 		}
 	}
@@ -207,7 +207,7 @@ public class DLFolderServiceImpl extends DLFolderServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		return lockLocalService.hasLock(
-			getUserId(), DLFileEntry.class.getName(), folderId);
+			getUserId(), DLFolder.class.getName(), folderId);
 	}
 
 	public boolean hasInheritableLock(long folderId)
@@ -252,52 +252,7 @@ public class DLFolderServiceImpl extends DLFolderServiceBaseImpl {
 		DLFolderPermission.check(
 			getPermissionChecker(), dlFolder, ActionKeys.UPDATE);
 
-		if ((expirationTime <= 0) ||
-			(expirationTime > DLFolderImpl.LOCK_EXPIRATION_TIME)) {
-
-			expirationTime = DLFolderImpl.LOCK_EXPIRATION_TIME;
-		}
-
-		Lock lock = lockLocalService.lock(
-			getUserId(), DLFolder.class.getName(), folderId, owner, inheritable,
-			expirationTime);
-
-		Set<Long> fileFileEntryIds = new HashSet<Long>();
-
-		long groupId = dlFolder.getGroupId();
-
-		try {
-			List<DLFileEntry> dlFileEntries =
-				dlFileEntryLocalService.getFileEntries(
-					groupId, folderId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
-					null);
-
-			for (DLFileEntry dlFileEntry : dlFileEntries) {
-				dlFileEntryService.lockFileEntry(
-					dlFileEntry.getFileEntryId(), owner, expirationTime);
-
-				fileFileEntryIds.add(dlFileEntry.getFileEntryId());
-			}
-		}
-		catch (Exception e) {
-			for (long fileEntryId : fileFileEntryIds) {
-				dlFileEntryService.unlockFileEntry(fileEntryId);
-			}
-
-			unlockFolder(groupId, folderId, lock.getUuid());
-
-			if (e instanceof PortalException) {
-				throw (PortalException)e;
-			}
-			else if (e instanceof SystemException) {
-				throw (SystemException)e;
-			}
-			else {
-				throw new PortalException(e);
-			}
-		}
-
-		return lock;
+		return _lockFolder(folderId, owner, inheritable, expirationTime);
 	}
 
 	public DLFolder moveFolder(
@@ -353,41 +308,7 @@ public class DLFolderServiceImpl extends DLFolderServiceBaseImpl {
 		catch (NoSuchFolderException nsfe) {
 		}
 
-		if (Validator.isNotNull(lockUuid)) {
-			try {
-				Lock lock = lockLocalService.getLock(
-					DLFolder.class.getName(), folderId);
-
-				if (!lock.getUuid().equals(lockUuid)) {
-					throw new InvalidLockException("UUIDs do not match");
-				}
-			}
-			catch (PortalException pe) {
-				if (pe instanceof ExpiredLockException ||
-					pe instanceof NoSuchLockException) {
-				}
-				else {
-					throw pe;
-				}
-			}
-		}
-
-		lockLocalService.unlock(DLFolder.class.getName(), folderId);
-
-		try {
-			List<DLFileEntry> dlFileEntries =
-				dlFileEntryLocalService.getFileEntries(
-					groupId, folderId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
-					null);
-
-			for (DLFileEntry dlFileEntry : dlFileEntries) {
-				dlFileEntryService.unlockFileEntry(
-					dlFileEntry.getFileEntryId());
-			}
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-		}
+		_unlockFolder(groupId, folderId, lockUuid);
 	}
 
 	public void unlockFolder(
@@ -457,6 +378,100 @@ public class DLFolderServiceImpl extends DLFolderServiceBaseImpl {
 		}
 
 		return verified;
+	}
+
+	private Lock _lockFolder(long folderId, String owner, boolean inheritable,
+			long expirationTime)
+		throws PortalException, SystemException {
+
+		DLFolder dlFolder = dlFolderLocalService.getFolder(folderId);
+
+		if ((expirationTime <= 0) ||
+			(expirationTime > DLFolderImpl.LOCK_EXPIRATION_TIME)) {
+
+			expirationTime = DLFolderImpl.LOCK_EXPIRATION_TIME;
+		}
+
+		Lock lock = lockLocalService.lock(
+			getUserId(), DLFolder.class.getName(), folderId, owner,
+			inheritable, expirationTime);
+
+		Set<Long> fileFileEntryIds = new HashSet<Long>();
+
+		long groupId = dlFolder.getGroupId();
+
+		try {
+			List<DLFileEntry> dlFileEntries =
+				dlFileEntryLocalService.getFileEntries(
+					groupId, folderId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+					null);
+
+			for (DLFileEntry dlFileEntry : dlFileEntries) {
+				dlFileEntryService.lockFileEntry(
+					dlFileEntry.getFileEntryId(), owner, expirationTime);
+
+				fileFileEntryIds.add(dlFileEntry.getFileEntryId());
+			}
+		}
+		catch (Exception e) {
+			for (long fileEntryId : fileFileEntryIds) {
+				dlFileEntryService.unlockFileEntry(fileEntryId);
+			}
+
+			unlockFolder(groupId, folderId, lock.getUuid());
+
+			if (e instanceof PortalException) {
+				throw (PortalException)e;
+			}
+			else if (e instanceof SystemException) {
+				throw (SystemException)e;
+			}
+			else {
+				throw new PortalException(e);
+			}
+		}
+
+		return lock;
+	}
+
+	private void _unlockFolder(long groupId, long folderId, String lockUuid)
+		throws PortalException, SystemException {
+
+		if (Validator.isNotNull(lockUuid)) {
+			try {
+				Lock lock = lockLocalService.getLock(
+					DLFolder.class.getName(), folderId);
+
+				if (!lock.getUuid().equals(lockUuid)) {
+					throw new InvalidLockException("UUIDs do not match");
+				}
+			}
+			catch (PortalException pe) {
+				if (pe instanceof ExpiredLockException ||
+					pe instanceof NoSuchLockException) {
+				}
+				else {
+					throw pe;
+				}
+			}
+		}
+
+		lockLocalService.unlock(DLFolder.class.getName(), folderId);
+
+		try {
+			List<DLFileEntry> dlFileEntries =
+				dlFileEntryLocalService.getFileEntries(
+					groupId, folderId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+					null);
+
+			for (DLFileEntry dlFileEntry : dlFileEntries) {
+				dlFileEntryService.unlockFileEntry(
+					dlFileEntry.getFileEntryId());
+			}
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(
