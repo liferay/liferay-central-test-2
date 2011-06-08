@@ -57,7 +57,6 @@
 						<liferay-ui:icon
 							id="deleteSelectedTags"
 							image="delete"
-							message="delete"
 							url="javascript:;"
 						/>
 
