@@ -1594,26 +1594,32 @@ public class ServicePreAction extends Action {
 		themeDisplay.setShowSignInIcon(!signedIn);
 		themeDisplay.setShowSignOutIcon(signedIn);
 
-		Group controlPanelGroup = GroupLocalServiceUtil.getGroup(
-			companyId, GroupConstants.CONTROL_PANEL);
+		boolean showSiteContentIcon = false;
 
-		long controlPanelPlid = LayoutLocalServiceUtil.getDefaultPlid(
-			controlPanelGroup.getGroupId(), true);
+		long controlPanelPlid = -1;
 
-		List<Portlet> siteContentPortlets = PortalUtil.getControlPanelPortlets(
-			PortletCategoryKeys.CONTENT, themeDisplay);
+		if (signedIn) {
+			Group controlPanelGroup = GroupLocalServiceUtil.getGroup(
+				companyId, GroupConstants.CONTROL_PANEL);
 
-		Portlet groupPagesPortlet = PortletLocalServiceUtil.getPortletById(
-			PortletKeys.GROUP_PAGES);
-		Portlet siteSettingsPortlet = PortletLocalServiceUtil.getPortletById(
-			PortletKeys.SITE_SETTINGS);
+			controlPanelPlid = LayoutLocalServiceUtil.getDefaultPlid(
+				controlPanelGroup.getGroupId(), true);
 
-		siteContentPortlets.remove(groupPagesPortlet);
-		siteContentPortlets.remove(siteSettingsPortlet);
+			List<Portlet> siteContentPortlets = PortalUtil.getControlPanelPortlets(
+				PortletCategoryKeys.CONTENT, themeDisplay);
 
-		boolean showSiteContentIcon = PortletPermissionUtil.contains(
-			permissionChecker, controlPanelGroup.getGroupId(), controlPanelPlid,
-			siteContentPortlets, ActionKeys.VIEW);
+			Portlet groupPagesPortlet = PortletLocalServiceUtil.getPortletById(
+				PortletKeys.GROUP_PAGES);
+			Portlet siteSettingsPortlet = PortletLocalServiceUtil.getPortletById(
+				PortletKeys.SITE_SETTINGS);
+
+			siteContentPortlets.remove(groupPagesPortlet);
+			siteContentPortlets.remove(siteSettingsPortlet);
+
+			showSiteContentIcon = PortletPermissionUtil.contains(
+				permissionChecker, controlPanelGroup.getGroupId(),
+				controlPanelPlid, siteContentPortlets, ActionKeys.VIEW);
+		}
 
 		themeDisplay.setShowSiteContentIcon(showSiteContentIcon);
 
@@ -1732,17 +1738,20 @@ public class ServicePreAction extends Action {
 				}
 			}
 
-			boolean hasManageLayoutsPermission =
-				GroupPermissionUtil.contains(
+			boolean hasManageLayoutsPermission = false;
+
+			if (signedIn) {
+				hasManageLayoutsPermission = GroupPermissionUtil.contains(
 					permissionChecker, scopeGroupId, ActionKeys.MANAGE_LAYOUTS);
 
-			if (group.isUser()) {
-				if ((layout.isPrivateLayout() &&
-					 !PropsValues.LAYOUT_USER_PRIVATE_LAYOUTS_MODIFIABLE) ||
-					(layout.isPublicLayout() &&
-					 !PropsValues.LAYOUT_USER_PUBLIC_LAYOUTS_MODIFIABLE)) {
+				if (group.isUser()) {
+					if ((layout.isPrivateLayout() &&
+						 !PropsValues.LAYOUT_USER_PRIVATE_LAYOUTS_MODIFIABLE) ||
+						(layout.isPublicLayout() &&
+						 !PropsValues.LAYOUT_USER_PUBLIC_LAYOUTS_MODIFIABLE)) {
 
-					hasManageLayoutsPermission = false;
+						hasManageLayoutsPermission = false;
+					}
 				}
 			}
 
