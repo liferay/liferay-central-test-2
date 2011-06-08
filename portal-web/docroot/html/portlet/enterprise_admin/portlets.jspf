@@ -126,9 +126,9 @@ for (int i = 0; i < results.size(); i++) {
 	// Search index
 
 	if (showReindexButton) {
-		String[] indexerClasses = portlet.getIndexerClasses();
+		List<String> indexerClasses = portlet.getIndexerClasses();
 
-		if (indexerClasses.length() > 0) {
+		if (indexerClasses.size() > 0) {
 			sb.setIndex(0);
 
 			sb.append("<input onclick=\"");
