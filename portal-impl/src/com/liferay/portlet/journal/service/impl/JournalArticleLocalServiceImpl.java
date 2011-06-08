@@ -642,9 +642,11 @@ public class JournalArticleLocalServiceImpl
 
 		// Workflow
 
-		workflowInstanceLinkLocalService.deleteWorkflowInstanceLink(
-			article.getCompanyId(), article.getGroupId(),
-			JournalArticle.class.getName(), article.getResourcePrimKey());
+		if (!article.isDraft()) {
+			workflowInstanceLinkLocalService.deleteWorkflowInstanceLink(
+				article.getCompanyId(), article.getGroupId(),
+				JournalArticle.class.getName(), article.getResourcePrimKey());
+		}
 
 		int articlesCount = journalArticlePersistence.countByG_A(
 			article.getGroupId(), article.getArticleId());
