@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portlet.enterpriseadmin.action;
+package com.liferay.portlet.portalsettings.action;
 
 import com.liferay.portal.AccountNameException;
 import com.liferay.portal.AddressCityException;

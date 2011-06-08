@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portlet.enterpriseadmin.action;
+package com.liferay.portlet.portalsettings.action;
 
 import com.liferay.portal.ImageTypeException;
 import com.liferay.portal.kernel.servlet.SessionErrors;

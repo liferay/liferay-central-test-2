@@ -611,12 +611,12 @@
 
 		<!-- Enterprise Admin -->
 
-		<action path="/enterprise_admin/edit_company" type="com.liferay.portlet.enterpriseadmin.action.EditCompanyAction">
+		<action path="/enterprise_admin/edit_company" type="com.liferay.portlet.portalsettings.action.EditCompanyAction">
 			<forward name="portlet.enterprise_admin.edit_company" path="portlet.enterprise_admin.edit_company" />
 			<forward name="portlet.enterprise_admin.error" path="portlet.enterprise_admin.error" />
 		</action>
 
-		<action path="/enterprise_admin/edit_company_logo" type="com.liferay.portlet.enterpriseadmin.action.EditCompanyLogoAction">
+		<action path="/enterprise_admin/edit_company_logo" type="com.liferay.portlet.portalsettings.action.EditCompanyLogoAction">
 			<forward name="portlet.enterprise_admin.edit_company_logo" path="portlet.enterprise_admin.edit_company_logo" />
 			<forward name="portlet.enterprise_admin.error" path="portlet.enterprise_admin.error" />
 		</action>
@@ -923,12 +923,12 @@
 
 		<!-- Enterprise Admin Settings -->
 
-		<action path="/enterprise_admin_settings/edit_company" type="com.liferay.portlet.enterpriseadmin.action.EditCompanyAction">
+		<action path="/enterprise_admin_settings/edit_company" type="com.liferay.portlet.portalsettings.action.EditCompanyAction">
 			<forward name="portlet.enterprise_admin.edit_company" path="portlet.enterprise_admin.edit_company" />
 			<forward name="portlet.enterprise_admin.error" path="portlet.enterprise_admin.error" />
 		</action>
 
-		<action path="/enterprise_admin_settings/edit_company_logo" type="com.liferay.portlet.enterpriseadmin.action.EditCompanyLogoAction">
+		<action path="/enterprise_admin_settings/edit_company_logo" type="com.liferay.portlet.portalsettings.action.EditCompanyLogoAction">
 			<forward name="portlet.enterprise_admin.edit_company_logo" path="portlet.enterprise_admin.edit_company_logo" />
 			<forward name="portlet.enterprise_admin.error" path="portlet.enterprise_admin.error" />
 		</action>
@@ -937,7 +937,7 @@
 
 		<action path="/enterprise_admin_settings/test_ldap_groups" forward="portlet.enterprise_admin.test_ldap_groups" />
 
-		<action path="/enterprise_admin_settings/edit_ldap_server" type="com.liferay.portlet.enterpriseadmin.action.EditLDAPServerAction">
+		<action path="/enterprise_admin_settings/edit_ldap_server" type="com.liferay.portlet.portalsettings.action.EditLDAPServerAction">
 			<forward name="portlet.enterprise_admin.edit_ldap_server" path="portlet.enterprise_admin.edit_ldap_server" />
 			<forward name="portlet.enterprise_admin.error" path="portlet.enterprise_admin.error" />
 		</action>
