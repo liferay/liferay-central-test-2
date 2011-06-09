@@ -35,11 +35,11 @@ public class OutputTag extends PositionTagSupport {
 	}
 
 	public int doEndTag() throws JspException {
-		if (!_output) {
-			return EVAL_PAGE;
-		}
-
 		try {
+			if (!_output) {
+				return EVAL_PAGE;
+			}
+
 			if (isPositionInLine()) {
 				JspWriter jspWriter = pageContext.getOut();
 
