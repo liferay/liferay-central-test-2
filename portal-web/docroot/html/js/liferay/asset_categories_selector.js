@@ -11,6 +11,10 @@ AUI().add(
 
 		var NAME = 'categoriesselector';
 
+		var STR_EXPANDED = 'expanded';
+
+		var STR_PREV_EXPANDED = '_LFR_prevExpanded';
+
 		/**
 		 * OPTIONS
 		 *
@@ -44,14 +48,7 @@ AUI().add(
 					},
 					labelNode: {
 						setter: function(value) {
-							if (Lang.isString(value)) {
-								value = A.one(value);
-							}
-
-							return value;
-						},
-						validator: function(value) {
-							return Lang.isString(value) || value instanceof A.Node;
+							return A.one(value) || A.Attribute.INVALID_VALUE;
 						},
 						value: null
 					},
@@ -248,19 +245,31 @@ AUI().add(
 								search: function(event) {
 									var results = event.liveSearch.results;
 
+									var searchValue = event.currentTarget.get('searchValue');
+
 									A.each(
 										results,
 										function(item, index, collection) {
-											var nodeWidget = A.Widget.getByNode(item.node);
-											var nodeVisible = nodeWidget.get(BOUNDING_BOX).hasClass('aui-helper-hidden');
+											var widget = A.Widget.getByNode(item.node);
 
-											if (!nodeVisible) {
-												nodeWidget.eachParent(
-													function(parent) {
+											widget.eachParent(
+												function(parent) {
+													if (searchValue) {
 														parent.get(BOUNDING_BOX).show();
+
+														if (!(STR_PREV_EXPANDED in parent)) {
+															parent[STR_PREV_EXPANDED] = parent.get(STR_EXPANDED);
+														}
+
+														parent.set(STR_EXPANDED, true);
 													}
-												);
-											}
+													else if (STR_PREV_EXPANDED in parent) {
+														parent.set(STR_EXPANDED, parent[STR_PREV_EXPANDED]);
+
+														delete parent[STR_PREV_EXPANDED];
+													}
+												}
+											);
 										}
 									);
 								}
@@ -331,7 +340,6 @@ AUI().add(
 											fn: instance._showSelectPopup
 										},
 										icon: 'search',
-										id: A.guid(),
 										label: Liferay.Language.get('select')
 									}
 								]
