@@ -25,6 +25,8 @@ AUI().add(
 
 		var EVENT_SUBMIT = 'submit';
 
+		var INVALID_VALUE = A.Attribute.INVALID_VALUE;
+
 		var LIFECYCLE_RENDER = 0;
 
 		var LIFECYCLE_PROCESS = 1;
@@ -1225,7 +1227,7 @@ AUI().add(
 
 									var newItemValue = state[index];
 
-									var value;
+									var value = INVALID_VALUE;
 
 									if (newItemValue === item.defaultValue &&
 										Lang.isValue(history.get(historyEntry))) {
@@ -1236,7 +1238,7 @@ AUI().add(
 										value = newItemValue;
 									}
 
-									if (value) {
+									if (value !== INVALID_VALUE) {
 										historyState[historyEntry] = value;
 									}
 								}
