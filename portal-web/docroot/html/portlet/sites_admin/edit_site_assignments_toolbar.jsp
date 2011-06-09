@@ -17,8 +17,6 @@
 <%@ include file="/html/portlet/enterprise_admin/init.jsp" %>
 
 <%
-String redirect = ParamUtil.getString(request, "redirect");
-
 String toolbarItem = ParamUtil.getString(request, "toolbarItem", "view-memberships");
 
 Group group = (Group)request.getAttribute(WebKeys.GROUP);
@@ -33,7 +31,7 @@ if (group == null) {
 <div class="lfr-portlet-toolbar">
 	<liferay-portlet:renderURL varImpl="assignMembersURL">
 		<liferay-portlet:param name="struts_action" value="/sites_admin/edit_site_assignments" />
-		<liferay-portlet:param name="redirect" value="<%= redirect %>" />
+		<liferay-portlet:param name="redirect" value="<%= currentURL %>" />
 		<liferay-portlet:param name="groupId" value="<%= String.valueOf(group.getGroupId()) %>" />
 	</liferay-portlet:renderURL>
 
@@ -44,7 +42,7 @@ if (group == null) {
 	<c:if test="<%= group.getType() == GroupConstants.TYPE_SITE_RESTRICTED %>">
 		<portlet:renderURL var="viewMembershipRequestsURL">
 			<portlet:param name="struts_action" value="/sites_admin/view_membership_requests" />
-			<portlet:param name="redirect" value="<%= redirect %>" />
+			<portlet:param name="redirect" value="<%= currentURL %>" />
 			<portlet:param name="groupId" value="<%= String.valueOf(group.getGroupId()) %>" />
 		</portlet:renderURL>
 
@@ -54,7 +52,7 @@ if (group == null) {
 	<c:if test="<%= GroupPermissionUtil.contains(permissionChecker, group.getGroupId(), ActionKeys.MANAGE_TEAMS) %>">
 		<portlet:renderURL var="manageTeamsURL">
 			<portlet:param name="struts_action" value="/sites_admin/view_teams" />
-			<portlet:param name="redirect" value="<%= redirect %>" />
+			<portlet:param name="redirect" value="<%= currentURL %>" />
 			<portlet:param name="groupId" value="<%= String.valueOf(group.getGroupId()) %>" />
 		</portlet:renderURL>
 
@@ -106,7 +104,7 @@ if (group == null) {
 		<liferay-ui:icon-menu align="left" direction="down" extended="<%= false %>" icon='<%= themeDisplay.getPathThemeImages() + "/common/assign_user_roles.png" %>' message="add-site-roles-to">
 			<portlet:renderURL var="assignUserRolesURL">
 				<portlet:param name="struts_action" value="/sites_admin/edit_user_roles" />
-				<portlet:param name="redirect" value="<%= redirect %>" />
+				<portlet:param name="redirect" value="<%= currentURL %>" />
 				<portlet:param name="groupId" value="<%= String.valueOf(group.getGroupId()) %>" />
 			</portlet:renderURL>
 
@@ -118,7 +116,7 @@ if (group == null) {
 
 			<portlet:renderURL var="assignUserGroupRolesURL">
 				<portlet:param name="struts_action" value="/sites_admin/edit_user_group_roles" />
-				<portlet:param name="redirect" value="<%= redirect %>" />
+				<portlet:param name="redirect" value="<%= currentURL %>" />
 				<portlet:param name="groupId" value="<%= String.valueOf(group.getGroupId()) %>" />
 			</portlet:renderURL>
 
