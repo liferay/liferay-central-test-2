@@ -238,7 +238,7 @@ String labelTag = AUIUtil.buildLabel(inlineLabel, showForLabel, forLabel);
 			valueString = value.toString();
 		}
 
-		if (!ignoreRequestValue && (type.equals("text") || type.equals("textarea"))) {
+		if (!ignoreRequestValue && (type.equals("hidden") || type.equals("text") || type.equals("textarea"))) {
 			valueString = BeanParamUtil.getStringSilent(bean, request, name, valueString);
 
 			if (Validator.isNotNull(fieldParam)) {
