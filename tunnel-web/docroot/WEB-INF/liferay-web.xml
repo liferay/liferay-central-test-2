@@ -2,18 +2,6 @@
 
 <web-app version="2.4" xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
 	<filter>
-		<filter-name>Atom Servlet Filter</filter-name>
-		<filter-class>com.liferay.portal.kernel.servlet.PortalClassLoaderFilter</filter-class>
-		<init-param>
-			<param-name>filter-class</param-name>
-			<param-value>com.liferay.portal.servlet.filters.secure.SecureFilter</param-value>
-		</init-param>
-		<init-param>
-			<param-name>portal_property_prefix</param-name>
-			<param-value>atom.servlet.</param-value>
-		</init-param>
-	</filter>
-	<filter>
 		<filter-name>Axis Servlet Filter</filter-name>
 		<filter-class>com.liferay.portal.kernel.servlet.PortalClassLoaderFilter</filter-class>
 		<init-param>
@@ -91,22 +79,6 @@
 		<init-param>
 			<param-name>portal_property_prefix</param-name>
 			<param-value>webdav.servlet.</param-value>
-		</init-param>
-	</filter>
-	<filter>
-		<filter-name>Secure Atom Servlet Filter</filter-name>
-		<filter-class>com.liferay.portal.kernel.servlet.PortalClassLoaderFilter</filter-class>
-		<init-param>
-			<param-name>filter-class</param-name>
-			<param-value>com.liferay.portal.servlet.filters.secure.SecureFilter</param-value>
-		</init-param>
-		<init-param>
-			<param-name>basic_auth</param-name>
-			<param-value>true</param-value>
-		</init-param>
-		<init-param>
-			<param-name>portal_property_prefix</param-name>
-			<param-value>atom.servlet.</param-value>
 		</init-param>
 	</filter>
 	<filter>
@@ -210,10 +182,6 @@
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 	<filter-mapping>
-		<filter-name>Atom Servlet Filter</filter-name>
-		<url-pattern>/atom/*</url-pattern>
-	</filter-mapping>
-	<filter-mapping>
 		<filter-name>Axis Servlet Filter</filter-name>
 		<url-pattern>/axis/*</url-pattern>
 	</filter-mapping>
@@ -236,10 +204,6 @@
 	<filter-mapping>
 		<filter-name>WebDAV Servlet Filter</filter-name>
 		<url-pattern>/webdav/*</url-pattern>
-	</filter-mapping>
-	<filter-mapping>
-		<filter-name>Secure Atom Servlet Filter</filter-name>
-		<url-pattern>/secure/atom/*</url-pattern>
 	</filter-mapping>
 	<filter-mapping>
 		<filter-name>Secure Axis Servlet Filter</filter-name>
