@@ -56,7 +56,7 @@ RoleSearchTerms searchTerms = (RoleSearchTerms)searchContainer.getSearchTerms();
 
 List<Role> roles = RoleLocalServiceUtil.search(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), new Integer[] {RoleConstants.TYPE_SITE}, QueryUtil.ALL_POS, QueryUtil.ALL_POS, searchContainer.getOrderByComparator());
 
-roles = EnterpriseAdminUtil.filterGroupRoles(permissionChecker, group.getGroupId(), roles);
+roles = UsersAdminUtil.filterGroupRoles(permissionChecker, group.getGroupId(), roles);
 
 int total = roles.size();
 
@@ -110,8 +110,8 @@ for (int i = 0; i < results.size(); i++) {
 
 	// CSS
 
-	row.setClassName(EnterpriseAdminUtil.getCssClassName(role));
-	row.setClassHoverName(EnterpriseAdminUtil.getCssClassName(role));
+	row.setClassName(RolesAdminUtil.getCssClassName(role));
+	row.setClassHoverName(RolesAdminUtil.getCssClassName(role));
 
 	// Add result row
 

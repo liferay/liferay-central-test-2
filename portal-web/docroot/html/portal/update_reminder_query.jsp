@@ -46,7 +46,7 @@
 			%>
 
 			<c:if test="<%= PropsValues.USERS_REMINDER_QUERIES_CUSTOM_QUESTION_ENABLED %>">
-				<aui:option label="<%= EnterpriseAdminUtil.CUSTOM_QUESTION %>" />
+				<aui:option label="<%= UsersAdminUtil.CUSTOM_QUESTION %>" />
 			</c:if>
 		</aui:select>
 
@@ -69,7 +69,7 @@
 	var customQuestionContainer = A.one('#customQuestionContainer');
 
 	if (reminderQueryQuestion && customQuestionContainer) {
-		if (reminderQueryQuestion.val() != '<%= EnterpriseAdminUtil.CUSTOM_QUESTION %>') {
+		if (reminderQueryQuestion.val() != '<%= UsersAdminUtil.CUSTOM_QUESTION %>') {
 			customQuestionContainer.hide();
 		}
 		else {
@@ -79,7 +79,7 @@
 		reminderQueryQuestion.on(
 			'change',
 			function(event) {
-				if (this.val() == '<%= EnterpriseAdminUtil.CUSTOM_QUESTION %>') {
+				if (this.val() == '<%= UsersAdminUtil.CUSTOM_QUESTION %>') {
 					<c:if test="<%= PropsValues.USERS_REMINDER_QUERIES_CUSTOM_QUESTION_ENABLED %>">
 						customQuestionContainer.show();
 

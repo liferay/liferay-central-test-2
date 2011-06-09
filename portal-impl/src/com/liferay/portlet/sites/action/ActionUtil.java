@@ -51,7 +51,7 @@ import javax.servlet.http.HttpServletRequest;
  * @author Brian Wing Shun Chan
  */
 public class ActionUtil
-	extends com.liferay.portlet.enterpriseadmin.action.ActionUtil {
+	extends com.liferay.portlet.rolesadmin.action.ActionUtil {
 
 	public static void copyLayoutPrototypePermissions(
 			HttpServletRequest request, Layout targetLayout,

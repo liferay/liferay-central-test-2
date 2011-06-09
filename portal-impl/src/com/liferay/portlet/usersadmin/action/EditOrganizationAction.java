@@ -48,9 +48,8 @@ import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portlet.enterpriseadmin.action.ActionUtil;
-import com.liferay.portlet.enterpriseadmin.util.EnterpriseAdminUtil;
 import com.liferay.portlet.sites.util.SitesUtil;
+import com.liferay.portlet.usersadmin.util.UsersAdminUtil;
 
 import java.util.List;
 
@@ -201,14 +200,12 @@ public class EditOrganizationAction extends PortletAction {
 		long countryId = ParamUtil.getLong(actionRequest, "countryId");
 		String comments = ParamUtil.getString(actionRequest, "comments");
 		boolean site = ParamUtil.getBoolean(actionRequest, "site");
-		List<Address> addresses = EnterpriseAdminUtil.getAddresses(
-			actionRequest);
+		List<Address> addresses = UsersAdminUtil.getAddresses(actionRequest);
 		List<EmailAddress> emailAddresses =
-			EnterpriseAdminUtil.getEmailAddresses(actionRequest);
-		List<OrgLabor> orgLabors = EnterpriseAdminUtil.getOrgLabors(
-			actionRequest);
-		List<Phone> phones = EnterpriseAdminUtil.getPhones(actionRequest);
-		List<Website> websites = EnterpriseAdminUtil.getWebsites(actionRequest);
+			UsersAdminUtil.getEmailAddresses(actionRequest);
+		List<OrgLabor> orgLabors = UsersAdminUtil.getOrgLabors(actionRequest);
+		List<Phone> phones = UsersAdminUtil.getPhones(actionRequest);
+		List<Website> websites = UsersAdminUtil.getWebsites(actionRequest);
 
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			Organization.class.getName(), actionRequest);

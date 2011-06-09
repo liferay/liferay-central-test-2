@@ -20,7 +20,7 @@
 User selUser = (User)request.getAttribute("user.selUser");
 List<Group> groups = (List<Group>)request.getAttribute("user.groups");
 List<Organization> organizations = (List<Organization>)request.getAttribute("user.organizations");
-Long[] organizationIds = EnterpriseAdminUtil.getOrganizationIds(organizations);
+Long[] organizationIds = UsersAdminUtil.getOrganizationIds(organizations);
 List<Role> roles = (List<Role>)request.getAttribute("user.roles");
 List<UserGroupRole> communityRoles = (List<UserGroupRole>)request.getAttribute("user.communityRoles");
 List<UserGroupRole> organizationRoles = (List<UserGroupRole>)request.getAttribute("user.organizationRoles");
@@ -59,8 +59,8 @@ userGroupRoles.addAll(organizationRoles);
 		keyProperty="roleId"
 		modelVar="role"
 	>
-		<liferay-util:param name="className" value="<%= EnterpriseAdminUtil.getCssClassName(role) %>" />
-		<liferay-util:param name="classHoverName" value="<%= EnterpriseAdminUtil.getCssClassName(role) %>" />
+		<liferay-util:param name="className" value="<%= RolesAdminUtil.getCssClassName(role) %>" />
+		<liferay-util:param name="classHoverName" value="<%= RolesAdminUtil.getCssClassName(role) %>" />
 
 		<liferay-ui:search-container-column-text
 			name="title"
@@ -113,8 +113,8 @@ userGroupRoles.addAll(organizationRoles);
 			Role groupRole = groupRoles.get(0);
 		%>
 
-			<liferay-util:param name="className" value="<%= EnterpriseAdminUtil.getCssClassName(groupRole) %>" />
-			<liferay-util:param name="classHoverName" value="<%= EnterpriseAdminUtil.getCssClassName(groupRole) %>" />
+			<liferay-util:param name="className" value="<%= RolesAdminUtil.getCssClassName(groupRole) %>" />
+			<liferay-util:param name="classHoverName" value="<%= RolesAdminUtil.getCssClassName(groupRole) %>" />
 
 			<liferay-ui:search-container-column-text
 				name="group"
@@ -157,8 +157,8 @@ userGroupRoles.addAll(organizationRoles);
 				keyProperty="roleId"
 				modelVar="userGroupRole"
 			>
-				<liferay-util:param name="className" value="<%= EnterpriseAdminUtil.getCssClassName(userGroupRole.getRole()) %>" />
-				<liferay-util:param name="classHoverName" value="<%= EnterpriseAdminUtil.getCssClassName(userGroupRole.getRole()) %>" />
+				<liferay-util:param name="className" value="<%= RolesAdminUtil.getCssClassName(userGroupRole.getRole()) %>" />
+				<liferay-util:param name="classHoverName" value="<%= RolesAdminUtil.getCssClassName(userGroupRole.getRole()) %>" />
 
 				<liferay-ui:search-container-column-text
 					name="title"
@@ -235,8 +235,8 @@ userGroupRoles.addAll(organizationRoles);
 				keyProperty="roleId"
 				modelVar="userGroupRole"
 			>
-				<liferay-util:param name="className" value="<%= EnterpriseAdminUtil.getCssClassName(userGroupRole.getRole()) %>" />
-				<liferay-util:param name="classHoverName" value="<%= EnterpriseAdminUtil.getCssClassName(userGroupRole.getRole()) %>" />
+				<liferay-util:param name="className" value="<%= RolesAdminUtil.getCssClassName(userGroupRole.getRole()) %>" />
+				<liferay-util:param name="classHoverName" value="<%= RolesAdminUtil.getCssClassName(userGroupRole.getRole()) %>" />
 
 				<liferay-ui:search-container-column-text
 					name="title"

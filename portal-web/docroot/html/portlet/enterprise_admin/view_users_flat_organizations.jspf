@@ -33,7 +33,7 @@
 	Long[][] leftAndRightOrganizationIds = null;
 
 	if (filterManageableOrganizations) {
-		leftAndRightOrganizationIds = EnterpriseAdminUtil.getLeftAndRightOrganizationIds(user.getOrganizations());
+		leftAndRightOrganizationIds = UsersAdminUtil.getLeftAndRightOrganizationIds(user.getOrganizations());
 
 		organizationParams.put("organizationsTree", leftAndRightOrganizationIds);
 	}

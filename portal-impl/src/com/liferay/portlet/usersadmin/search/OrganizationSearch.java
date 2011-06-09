@@ -24,7 +24,7 @@ import com.liferay.portal.model.Organization;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.PortalPreferences;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
-import com.liferay.portlet.enterpriseadmin.util.EnterpriseAdminUtil;
+import com.liferay.portlet.usersadmin.util.UsersAdminUtil;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -116,7 +116,7 @@ public class OrganizationSearch extends SearchContainer<Organization> {
 			}
 
 			OrderByComparator orderByComparator =
-				EnterpriseAdminUtil.getOrganizationOrderByComparator(
+				UsersAdminUtil.getOrganizationOrderByComparator(
 					orderByCol, orderByType);
 
 			setOrderableHeaders(orderableHeaders);

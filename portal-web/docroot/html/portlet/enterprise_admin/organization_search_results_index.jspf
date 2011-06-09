@@ -17,7 +17,7 @@
 <%@ page import="com.liferay.portal.kernel.search.Hits" %>
 <%@ page import="com.liferay.portal.kernel.search.Sort" %>
 <%@ page import="com.liferay.portal.kernel.search.SortFactoryUtil" %>
-<%@ page import="com.liferay.portlet.enterpriseadmin.util.EnterpriseAdminUtil" %>
+<%@ page import="com.liferay.portlet.usersadmin.util.UsersAdminUtil" %>
 
 <%
 organizationParams.put("expandoAttributes", searchTerms.getKeywords());
@@ -33,7 +33,7 @@ else {
 	hits = OrganizationLocalServiceUtil.search(company.getCompanyId(), parentOrganizationId, searchTerms.getKeywords(), organizationParams, searchContainer.getStart(), searchContainer.getEnd(), sort);
 }
 
-Tuple tuple = EnterpriseAdminUtil.getOrganizations(hits);
+Tuple tuple = UsersAdminUtil.getOrganizations(hits);
 
 boolean corruptIndex = (Boolean)tuple.getObject(1);
 

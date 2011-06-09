@@ -55,8 +55,8 @@ import com.liferay.portal.service.base.OrganizationLocalServiceBaseImpl;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.comparator.OrganizationNameComparator;
-import com.liferay.portlet.enterpriseadmin.util.EnterpriseAdminUtil;
 import com.liferay.portlet.expando.model.ExpandoBridge;
+import com.liferay.portlet.usersadmin.util.UsersAdminUtil;
 
 import java.io.Serializable;
 
@@ -544,8 +544,7 @@ public class OrganizationLocalServiceImpl
 				new LinkedHashMap<String, Object>();
 
 			Long[][] leftAndRightOrganizationIds =
-				EnterpriseAdminUtil.getLeftAndRightOrganizationIds(
-					organizationId);
+				UsersAdminUtil.getLeftAndRightOrganizationIds(organizationId);
 
 			if (!includeSpecifiedOrganization) {
 				leftAndRightOrganizationIds[0][0] =

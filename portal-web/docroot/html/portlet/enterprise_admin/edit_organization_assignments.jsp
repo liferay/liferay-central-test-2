@@ -118,7 +118,7 @@ if (PropsValues.ORGANIZATIONS_USER_GROUP_MEMBERSHIP_ENABLED) {
 </aui:script>
 
 <%
-EnterpriseAdminUtil.addPortletBreadcrumbEntries(organization, request, renderResponse);
+UsersAdminUtil.addPortletBreadcrumbEntries(organization, request, renderResponse);
 
 PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "assign-members"), currentURL);
 %>

@@ -22,7 +22,6 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.OrgLaborServiceUtil;
 import com.liferay.portal.struts.PortletAction;
-import com.liferay.portlet.enterpriseadmin.action.ActionUtil;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;

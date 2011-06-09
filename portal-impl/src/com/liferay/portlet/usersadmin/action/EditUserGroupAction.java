@@ -30,7 +30,6 @@ import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.service.UserGroupServiceUtil;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portlet.enterpriseadmin.action.ActionUtil;
 import com.liferay.portlet.sites.util.SitesUtil;
 
 import javax.portlet.ActionRequest;

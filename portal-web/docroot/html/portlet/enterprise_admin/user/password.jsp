@@ -141,7 +141,7 @@ else {
 			%>
 
 			<c:if test="<%= PropsValues.USERS_REMINDER_QUERIES_CUSTOM_QUESTION_ENABLED %>">
-				<aui:option label="write-my-own-question" selected="<%= hasCustomQuestion %>" value="<%= EnterpriseAdminUtil.CUSTOM_QUESTION %>" />
+				<aui:option label="write-my-own-question" selected="<%= hasCustomQuestion %>" value="<%= UsersAdminUtil.CUSTOM_QUESTION %>" />
 			</c:if>
 		</aui:select>
 
@@ -166,7 +166,7 @@ else {
 			reminderQueryQuestion.on(
 				'change',
 				function(event) {
-					if (event.target.val() == '<%= EnterpriseAdminUtil.CUSTOM_QUESTION %>') {
+					if (event.target.val() == '<%= UsersAdminUtil.CUSTOM_QUESTION %>') {
 						var reminderQueryCustomQuestion = A.one('#<portlet:namespace />reminderQueryCustomQuestion');
 
 						if (customQuestionDiv) {

@@ -51,7 +51,7 @@ import com.liferay.portal.service.permission.UserGroupRolePermissionUtil;
 import com.liferay.portal.service.permission.UserPermissionUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.announcements.model.AnnouncementsDelivery;
-import com.liferay.portlet.enterpriseadmin.util.EnterpriseAdminUtil;
+import com.liferay.portlet.usersadmin.util.UsersAdminUtil;
 
 import java.util.List;
 import java.util.Locale;
@@ -227,16 +227,16 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 			birthdayDay, birthdayYear, jobTitle, groupIds, organizationIds,
 			roleIds, userGroupIds, sendEmail, serviceContext);
 
-		EnterpriseAdminUtil.updateAddresses(
+		UsersAdminUtil.updateAddresses(
 			Contact.class.getName(), user.getContactId(), addresses);
 
-		EnterpriseAdminUtil.updateEmailAddresses(
+		UsersAdminUtil.updateEmailAddresses(
 			Contact.class.getName(), user.getContactId(), emailAddresses);
 
-		EnterpriseAdminUtil.updatePhones(
+		UsersAdminUtil.updatePhones(
 			Contact.class.getName(), user.getContactId(), phones);
 
-		EnterpriseAdminUtil.updateWebsites(
+		UsersAdminUtil.updateWebsites(
 			Contact.class.getName(), user.getContactId(), websites);
 
 		updateAnnouncementsDeliveries(user.getUserId(), announcementsDelivers);
@@ -700,16 +700,16 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 			jobTitle, groupIds, organizationIds, roleIds,
 			userGroupRoles, userGroupIds, serviceContext);
 
-		EnterpriseAdminUtil.updateAddresses(
+		UsersAdminUtil.updateAddresses(
 			Contact.class.getName(), user.getContactId(), addresses);
 
-		EnterpriseAdminUtil.updateEmailAddresses(
+		UsersAdminUtil.updateEmailAddresses(
 			Contact.class.getName(), user.getContactId(), emailAddresses);
 
-		EnterpriseAdminUtil.updatePhones(
+		UsersAdminUtil.updatePhones(
 			Contact.class.getName(), user.getContactId(), phones);
 
-		EnterpriseAdminUtil.updateWebsites(
+		UsersAdminUtil.updateWebsites(
 			Contact.class.getName(), user.getContactId(), websites);
 
 		updateAnnouncementsDeliveries(user.getUserId(), announcementsDelivers);
@@ -937,9 +937,7 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 
 		PermissionChecker permissionChecker = getPermissionChecker();
 
-		if (!EnterpriseAdminUtil.hasUpdateEmailAddress(
-				permissionChecker, user)) {
-
+		if (!UsersAdminUtil.hasUpdateEmailAddress(permissionChecker, user)) {
 			throw new UserEmailAddressException();
 		}
 
@@ -1016,7 +1014,7 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 
 		PermissionChecker permissionChecker = getPermissionChecker();
 
-		if (!EnterpriseAdminUtil.hasUpdateScreenName(permissionChecker, user)) {
+		if (!UsersAdminUtil.hasUpdateScreenName(permissionChecker, user)) {
 			throw new UserScreenNameException();
 		}
 	}

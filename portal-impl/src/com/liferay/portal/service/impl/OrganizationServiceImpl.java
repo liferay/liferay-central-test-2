@@ -34,7 +34,7 @@ import com.liferay.portal.service.permission.GroupPermissionUtil;
 import com.liferay.portal.service.permission.OrganizationPermissionUtil;
 import com.liferay.portal.service.permission.PasswordPolicyPermissionUtil;
 import com.liferay.portal.service.permission.PortalPermissionUtil;
-import com.liferay.portlet.enterpriseadmin.util.EnterpriseAdminUtil;
+import com.liferay.portlet.usersadmin.util.UsersAdminUtil;
 
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -70,22 +70,22 @@ public class OrganizationServiceImpl extends OrganizationServiceBaseImpl {
 			parentOrganizationId, name, type, recursable, regionId, countryId,
 			statusId, comments, site, serviceContext);
 
-		EnterpriseAdminUtil.updateAddresses(
+		UsersAdminUtil.updateAddresses(
 			Organization.class.getName(), organization.getOrganizationId(),
 			addresses);
 
-		EnterpriseAdminUtil.updateEmailAddresses(
+		UsersAdminUtil.updateEmailAddresses(
 			Organization.class.getName(), organization.getOrganizationId(),
 			emailAddresses);
 
-		EnterpriseAdminUtil.updateOrgLabors(organization.getOrganizationId(),
+		UsersAdminUtil.updateOrgLabors(organization.getOrganizationId(),
 			orgLabors);
 
-		EnterpriseAdminUtil.updatePhones(
+		UsersAdminUtil.updatePhones(
 			Organization.class.getName(), organization.getOrganizationId(),
 			phones);
 
-		EnterpriseAdminUtil.updateWebsites(
+		UsersAdminUtil.updateWebsites(
 			Organization.class.getName(), organization.getOrganizationId(),
 			websites);
 
@@ -164,8 +164,7 @@ public class OrganizationServiceImpl extends OrganizationServiceBaseImpl {
 				permissionChecker.getUserId());
 
 		Long[][] leftAndRightOrganizationIds =
-			EnterpriseAdminUtil.getLeftAndRightOrganizationIds(
-				userOrganizations);
+			UsersAdminUtil.getLeftAndRightOrganizationIds(userOrganizations);
 
 		params.put("organizationsTree", leftAndRightOrganizationIds);
 
@@ -285,18 +284,18 @@ public class OrganizationServiceImpl extends OrganizationServiceBaseImpl {
 			List<Website> websites, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		EnterpriseAdminUtil.updateAddresses(
+		UsersAdminUtil.updateAddresses(
 			Organization.class.getName(), organizationId, addresses);
 
-		EnterpriseAdminUtil.updateEmailAddresses(
+		UsersAdminUtil.updateEmailAddresses(
 			Organization.class.getName(), organizationId, emailAddresses);
 
-		EnterpriseAdminUtil.updateOrgLabors(organizationId, orgLabors);
+		UsersAdminUtil.updateOrgLabors(organizationId, orgLabors);
 
-		EnterpriseAdminUtil.updatePhones(
+		UsersAdminUtil.updatePhones(
 			Organization.class.getName(), organizationId, phones);
 
-		EnterpriseAdminUtil.updateWebsites(
+		UsersAdminUtil.updateWebsites(
 			Organization.class.getName(), organizationId, websites);
 
 		Organization organization = updateOrganization(

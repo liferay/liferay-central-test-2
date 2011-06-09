@@ -39,10 +39,10 @@
 <%@ page import="com.liferay.portal.service.permission.RolePermissionUtil" %>
 <%@ page import="com.liferay.portlet.PortletContextImpl" %>
 <%@ page import="com.liferay.portlet.PortletQNameUtil" %>
-<%@ page import="com.liferay.portlet.enterpriseadmin.util.EnterpriseAdminUtil" %>
 <%@ page import="com.liferay.portlet.portletconfiguration.util.PublicRenderParameterConfiguration" %>
 <%@ page import="com.liferay.portlet.rolesadmin.search.RoleSearch" %>
 <%@ page import="com.liferay.portlet.rolesadmin.search.RoleSearchTerms" %>
+<%@ page import="com.liferay.portlet.rolesadmin.util.RolesAdminUtil" %>
 <%@ page import="com.liferay.portlet.social.util.FacebookUtil" %>
 <%@ page import="com.liferay.portlet.usersadmin.search.OrganizationSearch" %>
 <%@ page import="com.liferay.portlet.usersadmin.search.OrganizationSearchTerms" %>
@@ -50,6 +50,7 @@
 <%@ page import="com.liferay.portlet.usersadmin.search.UserGroupSearchTerms" %>
 <%@ page import="com.liferay.portlet.usersadmin.search.UserSearch" %>
 <%@ page import="com.liferay.portlet.usersadmin.search.UserSearchTerms" %>
+<%@ page import="com.liferay.portlet.usersadmin.util.UsersAdminUtil" %>
 
 <%
 String portletResource = ParamUtil.getString(request, "portletResource");

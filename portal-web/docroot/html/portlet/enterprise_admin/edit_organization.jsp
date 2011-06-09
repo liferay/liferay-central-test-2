@@ -120,7 +120,7 @@ String[][] categorySections = {mainSections, identificationSections, miscellaneo
 
 <%
 if (organization != null) {
-	EnterpriseAdminUtil.addPortletBreadcrumbEntries(organization, request, renderResponse);
+	UsersAdminUtil.addPortletBreadcrumbEntries(organization, request, renderResponse);
 
 	PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "edit"), currentURL);
 }

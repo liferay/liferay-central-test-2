@@ -45,7 +45,7 @@ portletURL.setParameter("struts_action", "/enterprise_admin/select_regular_role"
 			if (filterManageableRoles) {
 				List<Role> roles = RoleLocalServiceUtil.search(company.getCompanyId(), searchTerms.getKeywords(), new Integer[] {RoleConstants.TYPE_REGULAR}, QueryUtil.ALL_POS, QueryUtil.ALL_POS, searchContainer.getOrderByComparator());
 
-				roles = EnterpriseAdminUtil.filterRoles(permissionChecker, roles);
+				roles = UsersAdminUtil.filterRoles(permissionChecker, roles);
 
 				total = roles.size();
 				results = ListUtil.subList(roles, searchContainer.getStart(), searchContainer.getEnd());
@@ -66,8 +66,8 @@ portletURL.setParameter("struts_action", "/enterprise_admin/select_regular_role"
 			keyProperty="roleId"
 			modelVar="role"
 		>
-			<liferay-util:param name="className" value="<%= EnterpriseAdminUtil.getCssClassName(role) %>" />
-			<liferay-util:param name="classHoverName" value="<%= EnterpriseAdminUtil.getCssClassName(role) %>" />
+			<liferay-util:param name="className" value="<%= RolesAdminUtil.getCssClassName(role) %>" />
+			<liferay-util:param name="classHoverName" value="<%= RolesAdminUtil.getCssClassName(role) %>" />
 
 			<%
 			StringBundler sb = new StringBundler(10);

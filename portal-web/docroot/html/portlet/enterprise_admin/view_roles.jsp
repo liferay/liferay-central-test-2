@@ -104,8 +104,8 @@ for (int i = 0; i < results.size(); i++) {
 
 	// CSS
 
-	row.setClassName(EnterpriseAdminUtil.getCssClassName(role));
-	row.setClassHoverName(EnterpriseAdminUtil.getCssClassName(role));
+	row.setClassName(RolesAdminUtil.getCssClassName(role));
+	row.setClassHoverName(RolesAdminUtil.getCssClassName(role));
 
 	// Add result row
 

@@ -113,9 +113,9 @@ import com.liferay.portal.service.base.UserLocalServiceBaseImpl;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsValues;
-import com.liferay.portlet.enterpriseadmin.util.EnterpriseAdminUtil;
 import com.liferay.portlet.imagegallery.ImageSizeException;
 import com.liferay.portlet.messageboards.model.MBMessage;
+import com.liferay.portlet.usersadmin.util.UsersAdminUtil;
 import com.liferay.util.Encryptor;
 import com.liferay.util.EncryptorException;
 
@@ -239,7 +239,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		long[] roleIds = ArrayUtil.toArray(
 			roleIdSet.toArray(new Long[roleIdSet.size()]));
 
-		roleIds = EnterpriseAdminUtil.addRequiredRoles(user, roleIds);
+		roleIds = UsersAdminUtil.addRequiredRoles(user, roleIds);
 
 		userPersistence.addRoles(userId, roleIds);
 	}
@@ -734,7 +734,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		// Roles
 
 		if (roleIds != null) {
-			roleIds = EnterpriseAdminUtil.addRequiredRoles(user, roleIds);
+			roleIds = UsersAdminUtil.addRequiredRoles(user, roleIds);
 
 			userPersistence.setRoles(userId, roleIds);
 		}
@@ -4375,7 +4375,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		// Roles
 
 		if (roleIds != null) {
-			roleIds = EnterpriseAdminUtil.addRequiredRoles(user, roleIds);
+			roleIds = UsersAdminUtil.addRequiredRoles(user, roleIds);
 
 			userPersistence.setRoles(userId, roleIds);
 		}

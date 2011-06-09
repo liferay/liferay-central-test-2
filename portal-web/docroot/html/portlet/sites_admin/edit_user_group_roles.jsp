@@ -52,7 +52,7 @@ portletURL.setParameter("groupId", String.valueOf(group.getGroupId()));
 // Breadcrumbs
 
 if (organization != null) {
-	EnterpriseAdminUtil.addPortletBreadcrumbEntries(organization, request, renderResponse);
+	UsersAdminUtil.addPortletBreadcrumbEntries(organization, request, renderResponse);
 }
 else if (group != null) {
 	PortalUtil.addPortletBreadcrumbEntry(request, group.getDescriptiveName(), null);

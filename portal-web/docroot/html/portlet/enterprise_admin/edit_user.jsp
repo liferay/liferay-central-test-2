@@ -52,7 +52,7 @@ else if (selUser != null) {
 	groups = selUser.getGroups();
 
 	if (filterManageableGroups) {
-		groups = EnterpriseAdminUtil.filterGroups(permissionChecker, groups);
+		groups = UsersAdminUtil.filterGroups(permissionChecker, groups);
 	}
 }
 
@@ -71,7 +71,7 @@ else {
 	}
 
 	if (filterManageableOrganizations) {
-		organizations = EnterpriseAdminUtil.filterOrganizations(permissionChecker, organizations);
+		organizations = UsersAdminUtil.filterOrganizations(permissionChecker, organizations);
 	}
 }
 
@@ -88,11 +88,11 @@ else if (selUser != null) {
 	roles = selUser.getRoles();
 
 	if (filterManageableRoles) {
-		roles = EnterpriseAdminUtil.filterRoles(permissionChecker, roles);
+		roles = UsersAdminUtil.filterRoles(permissionChecker, roles);
 	}
 }
 
-List<UserGroupRole> userGroupRoles = EnterpriseAdminUtil.getUserGroupRoles(renderRequest);
+List<UserGroupRole> userGroupRoles = UsersAdminUtil.getUserGroupRoles(renderRequest);
 
 List<UserGroupRole> communityRoles = new ArrayList<UserGroupRole>();
 List<UserGroupRole> organizationRoles = new ArrayList<UserGroupRole>();
@@ -101,7 +101,7 @@ if (userGroupRoles.isEmpty() && (selUser != null)) {
 	userGroupRoles = UserGroupRoleLocalServiceUtil.getUserGroupRoles(selUser.getUserId());
 
 	if (filterManageableUserGroupRoles) {
-		userGroupRoles = EnterpriseAdminUtil.filterUserGroupRoles(permissionChecker, userGroupRoles);
+		userGroupRoles = UsersAdminUtil.filterUserGroupRoles(permissionChecker, userGroupRoles);
 	}
 }
 
@@ -129,7 +129,7 @@ else if (selUser != null) {
 	userGroups = selUser.getUserGroups();
 
 	if (filterManageableUserGroups) {
-		userGroups = EnterpriseAdminUtil.filterUserGroups(permissionChecker, userGroups);
+		userGroups = UsersAdminUtil.filterUserGroups(permissionChecker, userGroups);
 	}
 }
 

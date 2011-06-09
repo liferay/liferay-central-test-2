@@ -115,8 +115,8 @@ if (pluginType.equals(Plugin.TYPE_PORTLET)) {
 									modelVar="role"
 
 								>
-									<liferay-util:param name="className" value="<%= EnterpriseAdminUtil.getCssClassName(role) %>" />
-									<liferay-util:param name="classHoverName" value="<%= EnterpriseAdminUtil.getCssClassName(role) %>" />
+									<liferay-util:param name="className" value="<%= RolesAdminUtil.getCssClassName(role) %>" />
+									<liferay-util:param name="classHoverName" value="<%= RolesAdminUtil.getCssClassName(role) %>" />
 
 									<liferay-ui:search-container-column-text
 										name="name"
@@ -158,8 +158,8 @@ if (pluginType.equals(Plugin.TYPE_PORTLET)) {
 									keyProperty="name"
 									modelVar="role"
 								>
-									<liferay-util:param name="className" value="<%= EnterpriseAdminUtil.getCssClassName(role) %>" />
-									<liferay-util:param name="classHoverName" value="<%= EnterpriseAdminUtil.getCssClassName(role) %>" />
+									<liferay-util:param name="className" value="<%= RolesAdminUtil.getCssClassName(role) %>" />
+									<liferay-util:param name="classHoverName" value="<%= RolesAdminUtil.getCssClassName(role) %>" />
 
 									<liferay-ui:search-container-column-text
 										name="name"

@@ -47,7 +47,7 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
-import com.liferay.portlet.enterpriseadmin.util.EnterpriseAdminUtil;
+import com.liferay.portlet.usersadmin.util.UsersAdminUtil;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -528,7 +528,7 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 	public void setUserRoles(long userId, long[] roleIds)
 		throws PortalException, SystemException {
 
-		roleIds = EnterpriseAdminUtil.addRequiredRoles(userId, roleIds);
+		roleIds = UsersAdminUtil.addRequiredRoles(userId, roleIds);
 
 		userPersistence.setRoles(userId, roleIds);
 
@@ -542,7 +542,7 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 	public void unsetUserRoles(long userId, long[] roleIds)
 		throws PortalException, SystemException {
 
-		roleIds = EnterpriseAdminUtil.removeRequiredRoles(userId, roleIds);
+		roleIds = UsersAdminUtil.removeRequiredRoles(userId, roleIds);
 
 		userPersistence.removeRoles(userId, roleIds);
 

@@ -25,7 +25,7 @@ import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.PortalPreferences;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
-import com.liferay.portlet.enterpriseadmin.util.EnterpriseAdminUtil;
+import com.liferay.portlet.usersadmin.util.UsersAdminUtil;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -105,7 +105,7 @@ public class RoleSearch extends SearchContainer<Role> {
 			}
 
 			OrderByComparator orderByComparator =
-				EnterpriseAdminUtil.getRoleOrderByComparator(
+				UsersAdminUtil.getRoleOrderByComparator(
 					orderByCol, orderByType);
 
 			setOrderableHeaders(orderableHeaders);

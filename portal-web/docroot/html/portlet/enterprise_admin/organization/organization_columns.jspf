@@ -48,7 +48,7 @@
 
 		Hits hits = OrganizationLocalServiceUtil.search(company.getCompanyId(), curOrganization.getOrganizationId(), null, organizationParams, 0, 5, sort);
 
-		Tuple tuple = EnterpriseAdminUtil.getOrganizations(hits);
+		Tuple tuple = UsersAdminUtil.getOrganizations(hits);
 
 		corruptIndex = (Boolean)tuple.getObject(1);
 
@@ -139,7 +139,7 @@
 
 		Hits hits = UserLocalServiceUtil.search(company.getCompanyId(), null, 0, userParams, 0, 5, sort);
 
-		Tuple tuple = EnterpriseAdminUtil.getUsers(hits);
+		Tuple tuple = UsersAdminUtil.getUsers(hits);
 
 		corruptIndex = (Boolean)tuple.getObject(1);
 

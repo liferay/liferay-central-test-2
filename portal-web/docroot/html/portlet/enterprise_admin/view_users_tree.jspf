@@ -36,11 +36,11 @@ LinkedHashMap organizationParams = new LinkedHashMap();
 Long[][] leftAndRightOrganizationIds = null;
 
 if (filterManageableOrganizations) {
-	leftAndRightOrganizationIds = EnterpriseAdminUtil.getLeftAndRightOrganizationIds(user.getOrganizations());
+	leftAndRightOrganizationIds = UsersAdminUtil.getLeftAndRightOrganizationIds(user.getOrganizations());
 }
 
 if (organizationId != OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID) {
-	Long[][] leftAndRightParentOrganizationIds = EnterpriseAdminUtil.getLeftAndRightOrganizationIds(organizationId);
+	Long[][] leftAndRightParentOrganizationIds = UsersAdminUtil.getLeftAndRightOrganizationIds(organizationId);
 
 	leftAndRightOrganizationIds = _filterSuborganizations(leftAndRightOrganizationIds, leftAndRightParentOrganizationIds);
 }
@@ -331,7 +331,7 @@ int organizationsCount = OrganizationLocalServiceUtil.searchCount(company.getCom
 		</aui:column>
 
 		<%
-		EnterpriseAdminUtil.addPortletBreadcrumbEntries(organization, request, renderResponse);
+		UsersAdminUtil.addPortletBreadcrumbEntries(organization, request, renderResponse);
 		%>
 
 	</c:if>

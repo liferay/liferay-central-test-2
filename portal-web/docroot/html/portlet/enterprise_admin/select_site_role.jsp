@@ -36,7 +36,7 @@ if (step == 1) {
 	groups = selUser.getGroups();
 
 	if (filterManageableGroups) {
-		groups = EnterpriseAdminUtil.filterGroups(permissionChecker, groups);
+		groups = UsersAdminUtil.filterGroups(permissionChecker, groups);
 	}
 
 	if (groups.size() == 1) {
@@ -173,7 +173,7 @@ if (step == 1) {
 					if (filterManageableRoles) {
 						List<Role> roles = RoleLocalServiceUtil.search(company.getCompanyId(), searchTerms.getKeywords(), new Integer[] {RoleConstants.TYPE_SITE}, QueryUtil.ALL_POS, QueryUtil.ALL_POS, searchContainer.getOrderByComparator());
 
-						roles = EnterpriseAdminUtil.filterGroupRoles(permissionChecker, groupId, roles);
+						roles = UsersAdminUtil.filterGroupRoles(permissionChecker, groupId, roles);
 
 						total = roles.size();
 						results = ListUtil.subList(roles, searchContainer.getStart(), searchContainer.getEnd());
@@ -194,8 +194,8 @@ if (step == 1) {
 					keyProperty="roleId"
 					modelVar="role"
 				>
-					<liferay-util:param name="className" value="<%= EnterpriseAdminUtil.getCssClassName(role) %>" />
-					<liferay-util:param name="classHoverName" value="<%= EnterpriseAdminUtil.getCssClassName(role) %>" />
+					<liferay-util:param name="className" value="<%= RolesAdminUtil.getCssClassName(role) %>" />
+					<liferay-util:param name="classHoverName" value="<%= RolesAdminUtil.getCssClassName(role) %>" />
 
 					<%
 					StringBundler sb = new StringBundler(14);

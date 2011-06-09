@@ -26,7 +26,7 @@ import com.liferay.portal.model.RoleConstants;
 import com.liferay.portal.model.Website;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.base.CompanyServiceBaseImpl;
-import com.liferay.portlet.enterpriseadmin.util.EnterpriseAdminUtil;
+import com.liferay.portlet.usersadmin.util.UsersAdminUtil;
 
 import java.io.File;
 
@@ -153,16 +153,16 @@ public class CompanyServiceImpl extends CompanyServiceBaseImpl {
 
 		updatePreferences(company.getCompanyId(), properties);
 
-		EnterpriseAdminUtil.updateAddresses(
+		UsersAdminUtil.updateAddresses(
 			Account.class.getName(), company.getAccountId(), addresses);
 
-		EnterpriseAdminUtil.updateEmailAddresses(
+		UsersAdminUtil.updateEmailAddresses(
 			Account.class.getName(), company.getAccountId(), emailAddresses);
 
-		EnterpriseAdminUtil.updatePhones(
+		UsersAdminUtil.updatePhones(
 			Account.class.getName(), company.getAccountId(), phones);
 
-		EnterpriseAdminUtil.updateWebsites(
+		UsersAdminUtil.updateWebsites(
 			Account.class.getName(), company.getAccountId(), websites);
 
 		return company;

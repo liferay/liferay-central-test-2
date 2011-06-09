@@ -79,8 +79,8 @@ import com.liferay.portlet.admin.util.AdminUtil;
 import com.liferay.portlet.announcements.model.AnnouncementsDelivery;
 import com.liferay.portlet.announcements.model.AnnouncementsEntryConstants;
 import com.liferay.portlet.announcements.model.impl.AnnouncementsDeliveryImpl;
-import com.liferay.portlet.enterpriseadmin.util.EnterpriseAdminUtil;
 import com.liferay.portlet.sites.util.SitesUtil;
+import com.liferay.portlet.usersadmin.util.UsersAdminUtil;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -320,7 +320,7 @@ public class EditUserAction extends PortletAction {
 		String reminderQueryQuestion = ParamUtil.getString(
 			actionRequest, "reminderQueryQuestion");
 
-		if (reminderQueryQuestion.equals(EnterpriseAdminUtil.CUSTOM_QUESTION)) {
+		if (reminderQueryQuestion.equals(UsersAdminUtil.CUSTOM_QUESTION)) {
 			reminderQueryQuestion = ParamUtil.getString(
 				actionRequest, "reminderQueryCustomQuestion");
 		}
@@ -366,16 +366,16 @@ public class EditUserAction extends PortletAction {
 		long[] roleIds = getLongArray(
 			actionRequest, "rolesSearchContainerPrimaryKeys");
 		List<UserGroupRole> userGroupRoles =
-			EnterpriseAdminUtil.getUserGroupRoles(actionRequest);
+			UsersAdminUtil.getUserGroupRoles(actionRequest);
 		long[] userGroupIds = getLongArray(
 			actionRequest, "userGroupsSearchContainerPrimaryKeys");
 		boolean sendEmail = true;
-		List<Address> addresses = EnterpriseAdminUtil.getAddresses(
+		List<Address> addresses = UsersAdminUtil.getAddresses(
 			actionRequest);
 		List<EmailAddress> emailAddresses =
-			EnterpriseAdminUtil.getEmailAddresses(actionRequest);
-		List<Phone> phones = EnterpriseAdminUtil.getPhones(actionRequest);
-		List<Website> websites = EnterpriseAdminUtil.getWebsites(actionRequest);
+			UsersAdminUtil.getEmailAddresses(actionRequest);
+		List<Phone> phones = UsersAdminUtil.getPhones(actionRequest);
+		List<Website> websites = UsersAdminUtil.getWebsites(actionRequest);
 		List<AnnouncementsDelivery> announcementsDeliveries =
 			getAnnouncementsDeliveries(actionRequest);
 
@@ -520,7 +520,7 @@ public class EditUserAction extends PortletAction {
 		String reminderQueryQuestion = BeanParamUtil.getString(
 			user, actionRequest, "reminderQueryQuestion");
 
-		if (reminderQueryQuestion.equals(EnterpriseAdminUtil.CUSTOM_QUESTION)) {
+		if (reminderQueryQuestion.equals(UsersAdminUtil.CUSTOM_QUESTION)) {
 			reminderQueryQuestion = BeanParamUtil.getString(
 				user, actionRequest, "reminderQueryCustomQuestion");
 		}
@@ -595,18 +595,16 @@ public class EditUserAction extends PortletAction {
 		if ((actionRequest.getParameter("groupRolesGroupIds") != null) ||
 			(actionRequest.getParameter("groupRolesRoleIds") != null)) {
 
-			userGroupRoles = EnterpriseAdminUtil.getUserGroupRoles(
-				actionRequest);
+			userGroupRoles = UsersAdminUtil.getUserGroupRoles(actionRequest);
 		}
 
 		long[] userGroupIds = getLongArray(
 			actionRequest, "userGroupsSearchContainerPrimaryKeys");
-		List<Address> addresses = EnterpriseAdminUtil.getAddresses(
-			actionRequest);
+		List<Address> addresses = UsersAdminUtil.getAddresses(actionRequest);
 		List<EmailAddress> emailAddresses =
-			EnterpriseAdminUtil.getEmailAddresses(actionRequest);
-		List<Phone> phones = EnterpriseAdminUtil.getPhones(actionRequest);
-		List<Website> websites = EnterpriseAdminUtil.getWebsites(actionRequest);
+			UsersAdminUtil.getEmailAddresses(actionRequest);
+		List<Phone> phones = UsersAdminUtil.getPhones(actionRequest);
+		List<Website> websites = UsersAdminUtil.getWebsites(actionRequest);
 		List<AnnouncementsDelivery> announcementsDeliveries =
 			getAnnouncementsDeliveries(actionRequest);
 

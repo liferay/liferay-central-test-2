@@ -65,9 +65,9 @@
 <%@ page import="com.liferay.portal.security.permission.comparator.ActionComparator" %>
 <%@ page import="com.liferay.portal.security.permission.comparator.ModelResourceComparator" %>
 <%@ page import="com.liferay.portal.service.permission.PortalPermissionUtil" %>
-<%@ page import="com.liferay.portlet.enterpriseadmin.util.EnterpriseAdminUtil" %>
 <%@ page import="com.liferay.portlet.rolesadmin.search.RoleSearch" %>
 <%@ page import="com.liferay.portlet.rolesadmin.search.RoleSearchTerms" %>
+<%@ page import="com.liferay.portlet.rolesadmin.util.RolesAdminUtil" %>
 <%@ page import="com.liferay.portlet.sites.action.ActionUtil" %>
 <%@ page import="com.liferay.portlet.sites.search.UserGroupGroupRoleRoleChecker" %>
 <%@ page import="com.liferay.portlet.sites.search.UserGroupGroupRoleUserGroupChecker" %>
@@ -88,6 +88,7 @@
 <%@ page import="com.liferay.portlet.usersadmin.search.UserGroupSearchTerms" %>
 <%@ page import="com.liferay.portlet.usersadmin.search.UserSearch" %>
 <%@ page import="com.liferay.portlet.usersadmin.search.UserSearchTerms" %>
+<%@ page import="com.liferay.portlet.usersadmin.util.UsersAdminUtil" %>
 
 <%
 long[] classNameIds = new long[] {PortalUtil.getClassNameId(Group.class), PortalUtil.getClassNameId(Organization.class)};

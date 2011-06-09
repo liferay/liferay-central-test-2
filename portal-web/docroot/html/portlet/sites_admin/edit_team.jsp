@@ -86,7 +86,7 @@ if (group.isOrganization()) {
 
 <%
 if (group.isOrganization()) {
-	EnterpriseAdminUtil.addPortletBreadcrumbEntries(organization, request, renderResponse);
+	UsersAdminUtil.addPortletBreadcrumbEntries(organization, request, renderResponse);
 }
 else {
 	PortalUtil.addPortletBreadcrumbEntry(request, group.getDescriptiveName(), null);

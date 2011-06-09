@@ -39,7 +39,7 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.enterpriseadmin.action.ActionUtil;
+import com.liferay.portlet.rolesadmin.action.ActionUtil;
 
 import java.util.HashMap;
 import java.util.List;

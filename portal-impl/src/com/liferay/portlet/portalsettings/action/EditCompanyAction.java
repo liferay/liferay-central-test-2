@@ -43,7 +43,7 @@ import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.CompanyServiceUtil;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portlet.enterpriseadmin.util.EnterpriseAdminUtil;
+import com.liferay.portlet.usersadmin.util.UsersAdminUtil;
 
 import java.util.List;
 
@@ -154,12 +154,11 @@ public class EditCompanyAction extends PortletAction {
 		String size = ParamUtil.getString(actionRequest, "size");
 		String languageId = ParamUtil.getString(actionRequest, "languageId");
 		String timeZoneId = ParamUtil.getString(actionRequest, "timeZoneId");
-		List<Address> addresses = EnterpriseAdminUtil.getAddresses(
-			actionRequest);
+		List<Address> addresses = UsersAdminUtil.getAddresses(actionRequest);
 		List<EmailAddress> emailAddresses =
-			EnterpriseAdminUtil.getEmailAddresses(actionRequest);
-		List<Phone> phones = EnterpriseAdminUtil.getPhones(actionRequest);
-		List<Website> websites = EnterpriseAdminUtil.getWebsites(actionRequest);
+			UsersAdminUtil.getEmailAddresses(actionRequest);
+		List<Phone> phones = UsersAdminUtil.getPhones(actionRequest);
+		List<Website> websites = UsersAdminUtil.getWebsites(actionRequest);
 		UnicodeProperties properties = PropertiesParamUtil.getProperties(
 			actionRequest, "settings--");
 

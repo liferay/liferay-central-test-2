@@ -79,7 +79,7 @@
 			/>
 
 			<%
-			EnterpriseAdminUtil.addPortletBreadcrumbEntries(userOrganization, request, renderResponse);
+			UsersAdminUtil.addPortletBreadcrumbEntries(userOrganization, request, renderResponse);
 
 			PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "view-users"), currentURL);
 			%>
@@ -135,7 +135,7 @@
 	}
 	else {
 		if (filterManageableOrganizations && !UserPermissionUtil.contains(permissionChecker, ResourceConstants.PRIMKEY_DNE, ActionKeys.VIEW)) {
-			Long[] organizationIds = EnterpriseAdminUtil.getOrganizationIds(user.getOrganizations());
+			Long[] organizationIds = UsersAdminUtil.getOrganizationIds(user.getOrganizations());
 
 			userParams.put("usersOrgs", organizationIds);
 		}

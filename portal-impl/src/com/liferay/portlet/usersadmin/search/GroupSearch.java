@@ -24,7 +24,7 @@ import com.liferay.portal.model.Group;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.PortalPreferences;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
-import com.liferay.portlet.enterpriseadmin.util.EnterpriseAdminUtil;
+import com.liferay.portlet.usersadmin.util.UsersAdminUtil;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -95,7 +95,7 @@ public class GroupSearch extends SearchContainer<Group> {
 			}
 
 			OrderByComparator orderByComparator =
-				EnterpriseAdminUtil.getGroupOrderByComparator(
+				UsersAdminUtil.getGroupOrderByComparator(
 					orderByCol, orderByType);
 
 			setOrderableHeaders(orderableHeaders);

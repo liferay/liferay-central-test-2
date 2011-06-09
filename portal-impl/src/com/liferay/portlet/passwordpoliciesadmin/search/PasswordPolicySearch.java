@@ -24,7 +24,7 @@ import com.liferay.portal.model.PasswordPolicy;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.PortalPreferences;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
-import com.liferay.portlet.enterpriseadmin.util.EnterpriseAdminUtil;
+import com.liferay.portlet.passwordpoliciesadmin.util.PasswordPoliciesAdminUtil;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -97,7 +97,7 @@ public class PasswordPolicySearch extends SearchContainer<PasswordPolicy> {
 			}
 
 			OrderByComparator orderByComparator =
-				EnterpriseAdminUtil.getPasswordPolicyOrderByComparator(
+				PasswordPoliciesAdminUtil.getPasswordPolicyOrderByComparator(
 					orderByCol, orderByType);
 
 			setOrderableHeaders(orderableHeaders);
