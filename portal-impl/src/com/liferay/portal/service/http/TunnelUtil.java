@@ -165,7 +165,9 @@ public class TunnelUtil {
 		HttpURLConnection httpURLConnection =
 			(HttpURLConnection)url.openConnection();
 
-		if (_OVERRIDE_HOSTNAME_VERIFICATION) {
+		if ((httpURLConnection instanceof HttpsURLConnection) &&
+			_OVERRIDE_HOSTNAME_VERIFICATION) {
+
 			HttpsURLConnection httpsURLConnection =
 				(HttpsURLConnection)httpURLConnection;
 
