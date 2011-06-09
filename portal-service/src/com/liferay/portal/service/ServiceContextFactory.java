@@ -223,7 +223,6 @@ public class ServiceContextFactory {
 
 		// Asset
 
-		Map<String, String[]> parameterMap = portletRequest.getParameterMap();
 
 		List<Long> assetCategories = new ArrayList<Long>();
 
