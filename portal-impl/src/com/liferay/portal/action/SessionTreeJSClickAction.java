@@ -43,14 +43,14 @@ public class SessionTreeJSClickAction extends Action {
 
 			String treeId = ParamUtil.getString(request, "treeId");
 
-			if (cmd.equals("expand")) {
+			if (cmd.equals("collapse")) {
+				SessionTreeJSClicks.closeNodes(request, treeId);
+			}
+			else if (cmd.equals("expand")) {
 				String[] nodeIds = StringUtil.split(
 					ParamUtil.getString(request, "nodeIds"));
 
 				SessionTreeJSClicks.openNodes(request, treeId, nodeIds);
-			}
-			else if (cmd.equals("collapse")) {
-				SessionTreeJSClicks.closeNodes(request, treeId);
 			}
 			else {
 				String nodeId = ParamUtil.getString(request, "nodeId");
