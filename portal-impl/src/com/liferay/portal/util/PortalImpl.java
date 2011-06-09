@@ -2497,13 +2497,22 @@ public class PortalImpl implements Portal {
 
 				if (urlParts.length == 4) {
 					layoutFriendlyURL = StringPool.SLASH + urlParts[3];
+
+					layout = LayoutLocalServiceUtil.getFriendlyURLLayout(
+						group.getGroupId(), privateLayout, layoutFriendlyURL);
 				}
 				else {
-					layoutFriendlyURL = "/1";
-				}
+					List<Layout> layouts = LayoutLocalServiceUtil.getLayouts(
+						group.getGroupId(), privateLayout,
+						LayoutConstants.DEFAULT_PARENT_LAYOUT_ID, 0, 1);
 
-				layout = LayoutLocalServiceUtil.getFriendlyURLLayout(
-					group.getGroupId(), privateLayout, layoutFriendlyURL);
+					if (layouts.size() > 0) {
+						layout = layouts.get(0);
+					}
+					else {
+						return LayoutConstants.DEFAULT_PLID;
+					}
+				}
 
 				return layout.getPlid();
 			}
