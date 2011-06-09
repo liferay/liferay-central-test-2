@@ -276,7 +276,9 @@ public class AssetVocabularyLocalServiceImpl
 		List<AssetVocabulary> vocabularies = new ArrayList<AssetVocabulary>();
 
 		for (long vocabularyId : vocabularyIds) {
-			vocabularies.add(getVocabulary(vocabularyId));
+			AssetVocabulary vocabulary = getVocabulary(vocabularyId);
+
+			vocabularies.add(vocabulary);
 		}
 
 		return vocabularies;

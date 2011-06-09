@@ -35,9 +35,7 @@ if (Validator.isNotNull(className)) {
 	vocabularies.addAll(AssetVocabularyLocalServiceUtil.getGroupVocabularies(scopeGroupId, false));
 
 	if (scopeGroupId != themeDisplay.getCompanyGroupId()) {
-		vocabularies.addAll(
-			AssetVocabularyLocalServiceUtil.getGroupVocabularies(
-				themeDisplay.getCompanyGroupId(), false));
+		vocabularies.addAll(AssetVocabularyLocalServiceUtil.getGroupVocabularies(themeDisplay.getCompanyGroupId(), false));
 	}
 
 	for (AssetVocabulary vocabulary : vocabularies) {
@@ -74,7 +72,6 @@ if (Validator.isNotNull(className)) {
 
 		<span class="aui-field-content">
 			<label class="aui-field-label" id="<%= namespace %>assetCategoriesLabel_<%= vocabulary.getVocabularyId() %>">
-
 				<%= vocabulary.getTitle(locale) %>
 
 				<c:if test="<%= vocabulary.getGroupId() == themeDisplay.getCompanyGroupId() %>">
@@ -159,20 +156,21 @@ private long[] _filterCategoryIds(long vocabularyId, long[] categoryIds) throws 
 
 private String[] _getCategoryIdsNames(String categoryIds, String categoryNames, long vocabularyId) throws PortalException, SystemException {
 	if (Validator.isNotNull(categoryIds)) {
-		long[] curCategoryIdsArray = GetterUtil.getLongValues(StringUtil.split(categoryIds));
+		long[] categoryIdsArray = GetterUtil.getLongValues(StringUtil.split(categoryIds));
 
 		if (vocabularyId > 0) {
-			curCategoryIdsArray = _filterCategoryIds(vocabularyId, curCategoryIdsArray);
+			categoryIdsArray = _filterCategoryIds(vocabularyId, categoryIdsArray);
 		}
 
-		if (curCategoryIdsArray.length == 0) {
+		if (categoryIdsArray.length == 0) {
 			categoryIds = StringPool.BLANK;
 			categoryNames = StringPool.BLANK;
 		}
 		else {
-			StringBundler sb = new StringBundler(curCategoryIdsArray.length * 2);
-			for (long curCategoryId : curCategoryIdsArray) {
-				AssetCategory category = AssetCategoryLocalServiceUtil.getCategory(curCategoryId);
+			StringBundler sb = new StringBundler(categoryIdsArray.length * 2);
+
+			for (long categoryId : categoryIdsArray) {
+				AssetCategory category = AssetCategoryLocalServiceUtil.getCategory(categoryId);
 
 				category = category.toEscapedModel();
 
@@ -182,11 +180,11 @@ private String[] _getCategoryIdsNames(String categoryIds, String categoryNames, 
 
 			sb.setIndex(sb.index() - 1);
 
-			categoryIds = StringUtil.merge(curCategoryIdsArray);
+			categoryIds = StringUtil.merge(categoryIdsArray);
 			categoryNames = sb.toString();
 		}
 	}
 
-	return new String[]{categoryIds, categoryNames};
+	return new String[] {categoryIds, categoryNames};
 }
 %>
