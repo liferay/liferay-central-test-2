@@ -43,6 +43,7 @@ import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFileRank;
 import com.liferay.portlet.documentlibrary.model.DLFileShortcut;
+import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
 import com.liferay.portlet.documentlibrary.service.DLAppLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileRankUtil;
@@ -182,7 +183,7 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		Map<Long, Long> folderPKs =
 			(Map<Long, Long>)portletDataContext.getNewPrimaryKeysMap(
-				Folder.class);
+				DLFolder.class);
 
 		long folderId = MapUtil.getLong(
 			folderPKs, fileEntry.getFolderId(), fileEntry.getFolderId());
@@ -669,7 +670,7 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		Map<Long, Long> folderPKs =
 			(Map<Long, Long>)portletDataContext.getNewPrimaryKeysMap(
-				Folder.class);
+				DLFolder.class);
 
 		long folderId = MapUtil.getLong(
 			folderPKs, fileShortcut.getFolderId(), fileShortcut.getFolderId());
@@ -742,7 +743,7 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		Map<Long, Long> folderPKs =
 			(Map<Long, Long>)portletDataContext.getNewPrimaryKeysMap(
-				Folder.class);
+				DLFolder.class);
 
 		long parentFolderId = MapUtil.getLong(
 			folderPKs, folder.getParentFolderId(), folder.getParentFolderId());
@@ -970,7 +971,7 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 		if (rootFolderId > 0) {
 			Map<Long, Long> folderPKs =
 				(Map<Long, Long>)portletDataContext.getNewPrimaryKeysMap(
-					Folder.class);
+					DLFolder.class);
 
 			rootFolderId = MapUtil.getLong(
 				folderPKs, rootFolderId, rootFolderId);
