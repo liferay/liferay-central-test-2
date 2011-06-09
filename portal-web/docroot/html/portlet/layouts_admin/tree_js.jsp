@@ -122,29 +122,32 @@ PortletURL portletURL = (PortletURL)request.getAttribute("edit_pages.jsp-portlet
 			var firstParentLayoutId = 0;
 			var results = [];
 
-			A.Array.each(json, function(node, index) {
-				var layoutId = node.layoutId;
-				var parentLayoutId = node.parentLayoutId;
+			A.Array.each(
+				json,
+				function(node, index) {
+					var layoutId = node.layoutId;
+					var parentLayoutId = node.parentLayoutId;
 
-				if (index === 0) {
-					firstParentLayoutId = parentLayoutId;
+					if (index === 0) {
+						firstParentLayoutId = parentLayoutId;
+					}
+
+					childrenSet[layoutId] = [];
+
+					if (!childrenSet[parentLayoutId]) {
+						childrenSet[parentLayoutId] = [];
+					}
+
+					var treeNode = TreeUtil.createTreeNode(node, childrenSet);
+
+					if (parentLayoutId === firstParentLayoutId) {
+						results.push(treeNode);
+					}
+					else {
+						childrenSet[parentLayoutId].push(treeNode);
+					}
 				}
-
-				childrenSet[layoutId] = [];
-
-				if (!childrenSet[parentLayoutId]) {
-					childrenSet[parentLayoutId] = [];
-				}
-
-				var treeNode = TreeUtil.createTreeNode(node, childrenSet);
-
-				if (parentLayoutId === firstParentLayoutId) {
-					results.push(treeNode);
-				}
-				else {
-					childrenSet[parentLayoutId].push(treeNode);
-				}
-			});
+			);
 
 			return results;
 		},
