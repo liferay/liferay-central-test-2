@@ -365,15 +365,15 @@ public class EditUserAction extends PortletAction {
 			actionRequest, "organizationsSearchContainerPrimaryKeys");
 		long[] roleIds = getLongArray(
 			actionRequest, "rolesSearchContainerPrimaryKeys");
-		List<UserGroupRole> userGroupRoles =
-			UsersAdminUtil.getUserGroupRoles(actionRequest);
+		List<UserGroupRole> userGroupRoles = UsersAdminUtil.getUserGroupRoles(
+			actionRequest);
 		long[] userGroupIds = getLongArray(
 			actionRequest, "userGroupsSearchContainerPrimaryKeys");
 		boolean sendEmail = true;
 		List<Address> addresses = UsersAdminUtil.getAddresses(
 			actionRequest);
-		List<EmailAddress> emailAddresses =
-			UsersAdminUtil.getEmailAddresses(actionRequest);
+		List<EmailAddress> emailAddresses = UsersAdminUtil.getEmailAddresses(
+			actionRequest);
 		List<Phone> phones = UsersAdminUtil.getPhones(actionRequest);
 		List<Website> websites = UsersAdminUtil.getWebsites(actionRequest);
 		List<AnnouncementsDelivery> announcementsDeliveries =
