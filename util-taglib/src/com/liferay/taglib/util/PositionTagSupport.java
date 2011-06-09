@@ -61,13 +61,23 @@ public class PositionTagSupport extends BaseBodyTagSupport implements BodyTag {
 	public boolean isPositionAuto() {
 		String position = getPosition();
 
-		return position.equals(_POSITION_AUTO);
+		if (position.equals(_POSITION_AUTO)) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 	public boolean isPositionInLine() {
 		String position = getPosition();
 
-		return position.equals(_POSITION_INLINE);
+		if (position.equals(_POSITION_INLINE)) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 	public void setPosition(String position) {

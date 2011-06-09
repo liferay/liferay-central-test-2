@@ -95,10 +95,12 @@ public class ScriptTag extends PositionTagSupport {
 		HttpServletRequest request =
 			(HttpServletRequest)pageContext.getRequest();
 
+		boolean positionInline = isPositionInLine();
+
 		try {
 			StringBundler bodyContentSB = getBodyContentAsStringBundler();
 
-			if (isPositionInLine()) {
+			if (positionInline) {
 				ScriptData scriptData = new ScriptData();
 
 				request.setAttribute(ScriptTag.class.getName(), scriptData);
@@ -133,7 +135,7 @@ public class ScriptTag extends PositionTagSupport {
 			throw new JspException(e);
 		}
 		finally {
-			if (isPositionInLine()) {
+			if (positionInline) {
 				request.removeAttribute(ScriptTag.class.getName());
 			}
 
