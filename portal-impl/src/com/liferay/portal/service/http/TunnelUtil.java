@@ -17,9 +17,11 @@ package com.liferay.portal.service.http;
 import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.util.Base64;
 import com.liferay.portal.kernel.util.ContentTypes;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.MethodHandler;
 import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.kernel.util.ObjectValuePair;
+import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.security.auth.HttpPrincipal;
@@ -33,6 +35,9 @@ import java.io.ObjectOutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import javax.net.ssl.HostnameVerifier;
+import javax.net.ssl.HttpsURLConnection;
+import javax.net.ssl.SSLSession;
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -160,6 +165,17 @@ public class TunnelUtil {
 		HttpURLConnection httpURLConnection =
 			(HttpURLConnection)url.openConnection();
 
+		if (_OVERRIDE_HOSTNAME_VERIFICATION) {
+			HttpsURLConnection httpsURLConnection =
+				(HttpsURLConnection)httpURLConnection;
+
+			httpsURLConnection.setHostnameVerifier(new HostnameVerifier() {
+				public boolean verify(String hostname, SSLSession session) {
+					return true;
+				}
+			});
+		}
+
 		httpURLConnection.setDoInput(true);
 		httpURLConnection.setDoOutput(true);
 		httpURLConnection.setRequestProperty(
@@ -184,5 +200,9 @@ public class TunnelUtil {
 
 		return httpURLConnection;
 	}
+
+	private static final boolean _OVERRIDE_HOSTNAME_VERIFICATION =
+		GetterUtil.getBoolean(PropsUtil.get(
+			TunnelUtil.class.getName() + ".override.hostname.verification"));
 
 }
