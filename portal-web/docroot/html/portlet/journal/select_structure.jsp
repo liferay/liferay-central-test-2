@@ -16,7 +16,9 @@
 
 <%@ include file="/html/portlet/journal/init.jsp" %>
 
-<% long groupId = ParamUtil.getLong(request, "groupId"); %>
+<%
+long groupId = ParamUtil.getLong(request, "groupId");
+%>
 
 <liferay-portlet:renderURL varImpl="portletURL">
 	<portlet:param name="struts_action" value="/journal/select_structure" />
@@ -26,6 +28,7 @@
 
 	<%
 	DynamicRenderRequest dynamicRenderRequest = new DynamicRenderRequest(renderRequest);
+
 	dynamicRenderRequest.setParameter("groupId", String.valueOf(groupId));
 
 	StructureSearch searchContainer = new StructureSearch(renderRequest, 10, portletURL);

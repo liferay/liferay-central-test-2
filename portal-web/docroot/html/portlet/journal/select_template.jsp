@@ -17,8 +17,8 @@
 <%@ include file="/html/portlet/journal/init.jsp" %>
 
 <%
-	long groupId = ParamUtil.getLong(request, "groupId");
-	long companyId = ParamUtil.getLong(request, "companyId");
+long companyId = ParamUtil.getLong(request, "companyId");
+long groupId = ParamUtil.getLong(request, "groupId");
 %>
 
 <liferay-portlet:renderURL varImpl="portletURL">
@@ -29,8 +29,9 @@
 
 	<%
 	DynamicRenderRequest dynamicRenderRequest = new DynamicRenderRequest(renderRequest);
-	dynamicRenderRequest.setParameter("groupId", String.valueOf(groupId));
+
 	dynamicRenderRequest.setParameter("companyId", String.valueOf(companyId));
+	dynamicRenderRequest.setParameter("groupId", String.valueOf(groupId));
 
 	TemplateSearch searchContainer = new TemplateSearch(renderRequest, 10, portletURL);
 	%>

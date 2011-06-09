@@ -68,18 +68,19 @@ public class TemplateDisplayTerms extends DisplayTerms {
 	}
 
 	public String getGroupIds(PortletRequest portletRequest) {
-		long groupId = ParamUtil.getLong(portletRequest, "groupId");
-
 		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
 		String strutsAction = ParamUtil.getString(
 			portletRequest, "struts_action");
 
+		long groupId = ParamUtil.getLong(portletRequest, "groupId");
+
 		StringBundler sb = new StringBundler();
 
-		if ((groupId==0) && Validator.isNull(structureId) &&
-				Validator.isNull(templateId)) {
+		if ((groupId == 0) && Validator.isNull(structureId) &&
+			Validator.isNull(templateId)) {
+
 			sb.append(themeDisplay.getScopeGroupId());
 		}
 		else {
