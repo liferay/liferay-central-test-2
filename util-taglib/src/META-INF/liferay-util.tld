@@ -67,6 +67,11 @@
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
+		<attribute>
+			<name>position</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
 	</tag>
 	<tag>
 		<name>html-top</name>
@@ -74,6 +79,11 @@
 		<body-content>JSP</body-content>
 		<attribute>
 			<name>outputKey</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>position</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>

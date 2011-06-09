@@ -14,7 +14,7 @@
 
 package com.liferay.taglib.util;
 
-import com.liferay.portal.kernel.servlet.taglib.BaseBodyTagSupport;
+import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.Validator;
 
@@ -22,36 +22,56 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.jsp.tagext.BodyTag;
+import javax.servlet.jsp.JspException;
+import javax.servlet.jsp.JspWriter;
 
 /**
  * @author Shuyang Zhou
  */
-public class OutputTag extends BaseBodyTagSupport implements BodyTag {
+public class OutputTag extends PositionTagSupport {
 
 	public OutputTag(String stringBundlerKey) {
 		_webKey = stringBundlerKey;
 	}
 
-	public int doEndTag() {
+	public int doEndTag() throws JspException {
 		if (!_output) {
 			return EVAL_PAGE;
 		}
 
-		HttpServletRequest request =
-			(HttpServletRequest)pageContext.getRequest();
+		try {
+			if (isPositionInLine()) {
+				JspWriter jspWriter = pageContext.getOut();
 
-		StringBundler sb = (StringBundler)request.getAttribute(_webKey);
+				StringBundler bodyContent = getBodyContentAsStringBundler();
 
-		if (sb == null) {
-			sb = new StringBundler();
+				jspWriter.write(bodyContent.toString());
+			}
+			else {
+				HttpServletRequest request =
+					(HttpServletRequest)pageContext.getRequest();
 
-			request.setAttribute(_webKey, sb);
+				StringBundler sb = (StringBundler)request.getAttribute(_webKey);
+
+				if (sb == null) {
+					sb = new StringBundler();
+
+					request.setAttribute(_webKey, sb);
+				}
+
+				sb.append(getBodyContentAsStringBundler());
+			}
+
+			return EVAL_PAGE;
 		}
-
-		sb.append(getBodyContentAsStringBundler());
-
-		return EVAL_PAGE;
+		catch (Exception e) {
+			throw new JspException(e);
+		}
+		finally {
+			if (!ServerDetector.isResin()) {
+				cleanUp();
+			}
+		}
 	}
 
 	public int doStartTag() {
