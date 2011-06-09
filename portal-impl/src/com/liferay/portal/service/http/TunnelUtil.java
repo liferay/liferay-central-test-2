@@ -165,21 +165,26 @@ public class TunnelUtil {
 		HttpURLConnection httpURLConnection =
 			(HttpURLConnection)url.openConnection();
 
-		if ((httpURLConnection instanceof HttpsURLConnection) &&
-			_OVERRIDE_HOSTNAME_VERIFICATION) {
+		httpURLConnection.setDoInput(true);
+		httpURLConnection.setDoOutput(true);
+
+		if (!_VERIFY_SSL_HOSTNAME &&
+			(httpURLConnection instanceof HttpsURLConnection)) {
 
 			HttpsURLConnection httpsURLConnection =
 				(HttpsURLConnection)httpURLConnection;
 
-			httpsURLConnection.setHostnameVerifier(new HostnameVerifier() {
-				public boolean verify(String hostname, SSLSession session) {
-					return true;
+			httpsURLConnection.setHostnameVerifier(
+				new HostnameVerifier() {
+
+					public boolean verify(String hostname, SSLSession session) {
+						return true;
+					}
+
 				}
-			});
+			);
 		}
 
-		httpURLConnection.setDoInput(true);
-		httpURLConnection.setDoOutput(true);
 		httpURLConnection.setRequestProperty(
 			HttpHeaders.CONTENT_TYPE,
 			ContentTypes.APPLICATION_X_JAVA_SERIALIZED_OBJECT);
@@ -203,8 +208,8 @@ public class TunnelUtil {
 		return httpURLConnection;
 	}
 
-	private static final boolean _OVERRIDE_HOSTNAME_VERIFICATION =
-		GetterUtil.getBoolean(PropsUtil.get(
-			TunnelUtil.class.getName() + ".override.hostname.verification"));
+	private static final boolean _VERIFY_SSL_HOSTNAME =
+		GetterUtil.getBoolean(
+			PropsUtil.get(TunnelUtil.class.getName() + ".verify.ssl.hostname"));
 
 }
