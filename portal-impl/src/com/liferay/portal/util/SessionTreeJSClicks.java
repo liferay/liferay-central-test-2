@@ -34,14 +34,11 @@ public class SessionTreeJSClicks {
 		HttpServletRequest request, String treeId, String nodeId) {
 
 		try {
-			PortalPreferences preferences =
-				PortletPreferencesFactoryUtil.getPortalPreferences(request);
-
-			String openNodesString = preferences.getValue(CLASS_NAME, treeId);
+			String openNodesString = get(request, treeId);
 
 			openNodesString = StringUtil.remove(openNodesString, nodeId);
 
-			preferences.setValue(CLASS_NAME, treeId, openNodesString);
+			put(request, treeId, openNodesString);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -50,12 +47,9 @@ public class SessionTreeJSClicks {
 
 	public static void closeNodes(HttpServletRequest request, String treeId) {
 		try {
-			PortalPreferences preferences =
-				PortletPreferencesFactoryUtil.getPortalPreferences(request);
-
 			String openNodesString = StringPool.BLANK;
 
-			preferences.setValue(CLASS_NAME, treeId, openNodesString);
+			put(request, treeId, openNodesString);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -66,10 +60,7 @@ public class SessionTreeJSClicks {
 		HttpServletRequest request, String treeId) {
 
 		try {
-			PortalPreferences preferences =
-				PortletPreferencesFactoryUtil.getPortalPreferences(request);
-
-			return preferences.getValue(CLASS_NAME, treeId);
+			return get(request, treeId);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -82,14 +73,11 @@ public class SessionTreeJSClicks {
 		HttpServletRequest request, String treeId, String nodeId) {
 
 		try {
-			PortalPreferences preferences =
-				PortletPreferencesFactoryUtil.getPortalPreferences(request);
-
-			String openNodesString = preferences.getValue(CLASS_NAME, treeId);
+			String openNodesString = get(request, treeId);
 
 			openNodesString = StringUtil.add(openNodesString, nodeId);
 
-			preferences.setValue(CLASS_NAME, treeId, openNodesString);
+			put(request, treeId, openNodesString);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -100,16 +88,41 @@ public class SessionTreeJSClicks {
 		HttpServletRequest request, String treeId, String[] nodeIds) {
 
 		try {
-			PortalPreferences preferences =
-				PortletPreferencesFactoryUtil.getPortalPreferences(request);
-
-			String openNodesString = preferences.getValue(CLASS_NAME, treeId);
+			String openNodesString = get(request, treeId);
 
 			for (int i = 0; i < nodeIds.length; i++) {
 				openNodesString = StringUtil.add(openNodesString, nodeIds[i]);
 			}
 
-			preferences.setValue(CLASS_NAME, treeId, openNodesString);
+			put(request, treeId, openNodesString);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
+	}
+
+	protected static String get(HttpServletRequest request, String key) {
+		try {
+			PortalPreferences preferences =
+				PortletPreferencesFactoryUtil.getPortalPreferences(request);
+
+			return preferences.getValue(CLASS_NAME, key);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			return null;
+		}
+	}
+
+	protected static void put(
+		HttpServletRequest request, String key, String value) {
+
+		try {
+			PortalPreferences preferences =
+				PortletPreferencesFactoryUtil.getPortalPreferences(request);
+
+			preferences.setValue(CLASS_NAME, key, value);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
