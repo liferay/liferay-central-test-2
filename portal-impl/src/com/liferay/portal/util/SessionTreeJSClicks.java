@@ -16,19 +16,48 @@ package com.liferay.portal.util;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.model.Layout;
+import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portlet.PortalPreferences;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author Brian Wing Shun Chan
+ * @author Eduardo Lundgren
  */
 public class SessionTreeJSClicks {
 
 	public static final String CLASS_NAME = SessionTreeJSClicks.class.getName();
+
+	public static void closeLayoutNodes(
+		HttpServletRequest request, String treeId, boolean privateLayout,
+		long layoutId, boolean recursive) {
+
+		try {
+			List<String> layoutIds = new ArrayList<String>();
+
+			layoutIds.add(String.valueOf(layoutId));
+
+			if (recursive) {
+				getLayoutIds(request, privateLayout, layoutId, layoutIds);
+			}
+
+			closeNodes(
+				request, treeId,
+				layoutIds.toArray(new String[layoutIds.size()]));
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
+	}
 
 	public static void closeNode(
 		HttpServletRequest request, String treeId, String nodeId) {
@@ -86,6 +115,28 @@ public class SessionTreeJSClicks {
 		}
 	}
 
+	public static void openLayoutNodes(
+		HttpServletRequest request, String treeId, boolean privateLayout,
+		long layoutId, boolean recursive) {
+
+		try {
+			List<String> layoutIds = new ArrayList<String>();
+
+			layoutIds.add(String.valueOf(layoutId));
+
+			if (recursive) {
+				getLayoutIds(request, privateLayout, layoutId, layoutIds);
+			}
+
+			openNodes(
+				request, treeId,
+				layoutIds.toArray(new String[layoutIds.size()]));
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
+	}
+
 	public static void openNode(
 		HttpServletRequest request, String treeId, String nodeId) {
 
@@ -130,6 +181,26 @@ public class SessionTreeJSClicks {
 
 			return null;
 		}
+	}
+
+	protected static List<String> getLayoutIds(
+			HttpServletRequest request, boolean privateLayout,
+			long parentLayoutId, List<String> layoutIds)
+		throws Exception {
+
+		long groupId = ParamUtil.getLong(request, "groupId");
+
+		List<Layout> layouts = LayoutLocalServiceUtil.getLayouts(
+			groupId, privateLayout, parentLayoutId);
+
+		for (Layout layout : layouts) {
+			layoutIds.add(String.valueOf(layout.getLayoutId()));
+
+			getLayoutIds(
+				request, privateLayout, layout.getLayoutId(), layoutIds);
+		}
+
+		return layoutIds;
 	}
 
 	protected static void put(
