@@ -29,14 +29,14 @@ public class DDMTemplateServiceWrapper implements DDMTemplateService {
 	}
 
 	public com.liferay.portlet.dynamicdatamapping.model.DDMTemplate addTemplate(
-		long structureId, java.lang.String name, java.lang.String description,
-		java.lang.String type, java.lang.String language,
-		java.lang.String script,
+		long groupId, long structureId, java.lang.String name,
+		java.lang.String description, java.lang.String type,
+		java.lang.String language, java.lang.String script,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return _ddmTemplateService.addTemplate(structureId, name, description,
-			type, language, script, serviceContext);
+		return _ddmTemplateService.addTemplate(groupId, structureId, name,
+			description, type, language, script, serviceContext);
 	}
 
 	public void deleteTemplate(long templateId)

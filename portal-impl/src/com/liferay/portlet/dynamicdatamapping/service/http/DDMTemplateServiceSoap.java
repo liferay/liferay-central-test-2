@@ -66,14 +66,14 @@ import java.rmi.RemoteException;
  */
 public class DDMTemplateServiceSoap {
 	public static com.liferay.portlet.dynamicdatamapping.model.DDMTemplateSoap addTemplate(
-		long structureId, java.lang.String name, java.lang.String description,
-		java.lang.String type, java.lang.String language,
-		java.lang.String script,
+		long groupId, long structureId, java.lang.String name,
+		java.lang.String description, java.lang.String type,
+		java.lang.String language, java.lang.String script,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
 			com.liferay.portlet.dynamicdatamapping.model.DDMTemplate returnValue =
-				DDMTemplateServiceUtil.addTemplate(structureId, name,
+				DDMTemplateServiceUtil.addTemplate(groupId, structureId, name,
 					description, type, language, script, serviceContext);
 
 			return com.liferay.portlet.dynamicdatamapping.model.DDMTemplateSoap.toSoapModel(returnValue);

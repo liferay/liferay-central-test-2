@@ -257,14 +257,15 @@ public class DDMTemplateLocalServiceWrapper implements DDMTemplateLocalService {
 	}
 
 	public com.liferay.portlet.dynamicdatamapping.model.DDMTemplate addTemplate(
-		long structureId, java.lang.String name, java.lang.String description,
-		java.lang.String type, java.lang.String language,
-		java.lang.String script,
+		long userId, long groupId, long structureId, java.lang.String name,
+		java.lang.String description, java.lang.String type,
+		java.lang.String language, java.lang.String script,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return _ddmTemplateLocalService.addTemplate(structureId, name,
-			description, type, language, script, serviceContext);
+		return _ddmTemplateLocalService.addTemplate(userId, groupId,
+			structureId, name, description, type, language, script,
+			serviceContext);
 	}
 
 	public void addTemplateResources(
@@ -296,6 +297,12 @@ public class DDMTemplateLocalServiceWrapper implements DDMTemplateLocalService {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		_ddmTemplateLocalService.deleteTemplate(templateId);
+	}
+
+	public void deleteTemplates(long groupId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		_ddmTemplateLocalService.deleteTemplates(groupId);
 	}
 
 	public com.liferay.portlet.dynamicdatamapping.model.DDMTemplate getTemplate(

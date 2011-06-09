@@ -55,9 +55,10 @@ import com.liferay.portlet.dynamicdatamapping.service.DDMTemplateServiceUtil;
  */
 public class DDMTemplateServiceHttp {
 	public static com.liferay.portlet.dynamicdatamapping.model.DDMTemplate addTemplate(
-		HttpPrincipal httpPrincipal, long structureId, java.lang.String name,
-		java.lang.String description, java.lang.String type,
-		java.lang.String language, java.lang.String script,
+		HttpPrincipal httpPrincipal, long groupId, long structureId,
+		java.lang.String name, java.lang.String description,
+		java.lang.String type, java.lang.String language,
+		java.lang.String script,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -65,7 +66,7 @@ public class DDMTemplateServiceHttp {
 			MethodKey methodKey = new MethodKey(DDMTemplateServiceUtil.class.getName(),
 					"addTemplate", _addTemplateParameterTypes0);
 
-			MethodHandler methodHandler = new MethodHandler(methodKey,
+			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					structureId, name, description, type, language, script,
 					serviceContext);
 
@@ -171,9 +172,9 @@ public class DDMTemplateServiceHttp {
 
 	private static Log _log = LogFactoryUtil.getLog(DDMTemplateServiceHttp.class);
 	private static final Class<?>[] _addTemplateParameterTypes0 = new Class[] {
-			long.class, java.lang.String.class, java.lang.String.class,
+			long.class, long.class, java.lang.String.class,
 			java.lang.String.class, java.lang.String.class,
-			java.lang.String.class,
+			java.lang.String.class, java.lang.String.class,
 			com.liferay.portal.service.ServiceContext.class
 		};
 	private static final Class<?>[] _deleteTemplateParameterTypes1 = new Class[] {
