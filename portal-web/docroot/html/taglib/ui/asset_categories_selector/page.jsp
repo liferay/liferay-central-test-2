@@ -27,57 +27,166 @@ String hiddenInput = (String)request.getAttribute("liferay-ui:asset-categories-s
 String curCategoryIds = GetterUtil.getString((String)request.getAttribute("liferay-ui:asset-categories-selector:curCategoryIds"), "");
 String curCategoryNames = StringPool.BLANK;
 
-if (Validator.isNotNull(className) && (classPK > 0)) {
-	List<AssetCategory> categories = AssetCategoryServiceUtil.getCategories(className, classPK);
+if (Validator.isNotNull(className)) {
+	long classNameId = PortalUtil.getClassNameId(className);
 
-	curCategoryIds = ListUtil.toString(categories, "categoryId");
-	curCategoryNames = ListUtil.toString(categories, "name");
-}
+	List<AssetVocabulary> vocabularies = new ArrayList<AssetVocabulary>();
 
-String curCategoryIdsParam = request.getParameter(hiddenInput);
+	vocabularies.addAll(AssetVocabularyLocalServiceUtil.getGroupVocabularies(scopeGroupId, false));
 
-if (curCategoryIdsParam != null) {
-	curCategoryIds = curCategoryIdsParam;
-}
-
-if (Validator.isNotNull(curCategoryIds)) {
-	long[] curCategoryIdsArray = GetterUtil.getLongValues(StringUtil.split(curCategoryIds));
-
-	if(curCategoryIdsArray.length == 0) {
-		curCategoryNames = StringPool.BLANK;
+	if (scopeGroupId != themeDisplay.getCompanyGroupId()) {
+		vocabularies.addAll(
+			AssetVocabularyLocalServiceUtil.getGroupVocabularies(
+				themeDisplay.getCompanyGroupId(), false));
 	}
-	else {
-		StringBundler sb = new StringBundler(curCategoryIdsArray.length * 2);
-		for (long curCategoryId : curCategoryIdsArray) {
-			AssetCategory category = AssetCategoryServiceUtil.getCategory(curCategoryId);
 
-			category = category.toEscapedModel();
+	for (AssetVocabulary vocabulary : vocabularies) {
+		int vocabularyCategoriesCount = AssetCategoryLocalServiceUtil.getVocabularyCategoriesCount(vocabulary.getVocabularyId());
 
-			sb.append(category.getName());
-			sb.append(StringPool.COMMA);
+		if (vocabularyCategoriesCount == 0) {
+			continue;
 		}
 
-		sb.setIndex(sb.index() - 1);
+		UnicodeProperties settingsProperties = vocabulary.getSettingsProperties();
 
-		curCategoryNames = sb.toString();
+		long[] selectedClassNameIds = StringUtil.split(settingsProperties.getProperty("selectedClassNameIds"), 0L);
+
+		if ((selectedClassNameIds.length > 0) && (selectedClassNameIds[0] != AssetCategoryConstants.ALL_CLASS_NAME_IDS) && !ArrayUtil.contains(selectedClassNameIds, classNameId)) {
+			continue;
+		}
+
+		if (Validator.isNotNull(className) && (classPK > 0)) {
+			List<AssetCategory> categories = AssetCategoryLocalServiceUtil.getCategories(className, classPK);
+
+			curCategoryIds = ListUtil.toString(categories, "categoryId");
+			curCategoryNames = ListUtil.toString(categories, "name");
+		}
+
+		String curCategoryIdsParam = request.getParameter(hiddenInput + StringPool.UNDERLINE + vocabulary.getVocabularyId());
+
+		if (curCategoryIdsParam != null) {
+			curCategoryIds = curCategoryIdsParam;
+			curCategoryNames = StringPool.BLANK;
+		}
+
+		String[] categoryIdsNames = _getCategoryIdsNames(curCategoryIds, curCategoryNames, vocabulary.getVocabularyId());
+	%>
+
+		<span class="aui-field-content">
+			<label class="aui-field-label" id="<%= namespace %>assetCategoriesLabel_<%= vocabulary.getVocabularyId() %>">
+
+				<%= vocabulary.getTitle(locale) %>
+
+				<c:if test="<%= vocabulary.getGroupId() == themeDisplay.getCompanyGroupId() %>">
+					(<liferay-ui:message key="global" />)
+				</c:if>
+
+				<c:if test="<%= vocabulary.isRequired(classNameId) %>">
+					<span class="aui-label-required">(<liferay-ui:message key="required" />)</span>
+				</c:if>
+			</label>
+
+			<div class="lfr-tags-selector-content" id="<%= namespace + randomNamespace %>assetCategoriesSelector_<%= vocabulary.getVocabularyId() %>">
+				<aui:input name="<%= hiddenInput + StringPool.UNDERLINE + vocabulary.getVocabularyId() %>" type="hidden" />
+			</div>
+		</span>
+
+		<aui:script use="liferay-asset-categories-selector">
+			new Liferay.AssetCategoriesSelector(
+				{
+					className: '<%= className %>',
+					contentBox: '#<%= namespace + randomNamespace %>assetCategoriesSelector_<%= vocabulary.getVocabularyId() %>',
+					curEntries: '<%= HtmlUtil.escapeJS(categoryIdsNames[1]) %>',
+					curEntryIds: '<%= categoryIdsNames[0] %>',
+					hiddenInput: '#<%= namespace + hiddenInput + StringPool.UNDERLINE + vocabulary.getVocabularyId() %>',
+					instanceVar: '<%= namespace + randomNamespace %>',
+					labelNode: '#<%= namespace %>assetCategoriesLabel_<%= vocabulary.getVocabularyId() %>',
+					portalModelResource: <%= Validator.isNotNull(className) && (ResourceActionsUtil.isPortalModelResource(className) || className.equals(Group.class.getName())) %>,
+					vocabularyIds: '<%= String.valueOf(vocabulary.getVocabularyId()) %>',
+				}
+			).render();
+		</aui:script>
+
+	<%
 	}
+}
+else {
+	String curCategoryIdsParam = request.getParameter(hiddenInput);
+
+	if (curCategoryIdsParam != null) {
+		curCategoryIds = curCategoryIdsParam;
+	}
+
+	String[] categoryIdsNames = _getCategoryIdsNames(curCategoryIds, curCategoryNames, 0);
+%>
+
+	<div class="lfr-tags-selector-content" id="<%= namespace + randomNamespace %>assetCategoriesSelector">
+		<aui:input name="<%= hiddenInput %>" type="hidden" />
+	</div>
+
+	<aui:script use="liferay-asset-categories-selector">
+		new Liferay.AssetCategoriesSelector(
+			{
+				className: '<%= className %>',
+				contentBox: '#<%= namespace + randomNamespace %>assetCategoriesSelector',
+				curEntries: '<%= HtmlUtil.escapeJS(categoryIdsNames[1]) %>',
+				curEntryIds: '<%= categoryIdsNames[0] %>',
+				hiddenInput: '#<%= namespace + hiddenInput %>',
+				instanceVar: '<%= namespace + randomNamespace %>',
+				portalModelResource: <%= Validator.isNotNull(className) && (ResourceActionsUtil.isPortalModelResource(className) || className.equals(Group.class.getName())) %>
+			}
+		).render();
+	</aui:script>
+
+<%
 }
 %>
 
-<div class="lfr-tags-selector-content" id="<%= namespace + randomNamespace %>assetCategoriesSelector">
-	<aui:input name="<%= hiddenInput %>" type="hidden" />
-</div>
+<%!
+private long[] _filterCategoryIds(long vocabularyId, long[] categoryIds) throws PortalException, SystemException {
+	List<Long> filteredCategoryIds = new ArrayList<Long>();
 
-<aui:script use="liferay-asset-categories-selector">
-	new Liferay.AssetCategoriesSelector(
-		{
-			className: '<%= className %>',
-			contentBox: '#<%= namespace + randomNamespace %>assetCategoriesSelector',
-			curEntries: '<%= HtmlUtil.escapeJS(curCategoryNames) %>',
-			curEntryIds: '<%= curCategoryIds %>',
-			hiddenInput: '#<%= namespace + hiddenInput %>',
-			instanceVar: '<%= namespace + randomNamespace %>',
-			portalModelResource: <%= Validator.isNotNull(className) && (ResourceActionsUtil.isPortalModelResource(className) || className.equals(Group.class.getName())) %>
+	for (long categoryId : categoryIds) {
+		AssetCategory category = AssetCategoryLocalServiceUtil.getCategory(categoryId);
+
+		if (category.getVocabularyId() == vocabularyId) {
+			filteredCategoryIds.add(category.getCategoryId());
 		}
-	).render();
-</aui:script>
+	}
+
+	return ArrayUtil.toArray(filteredCategoryIds.toArray(new Long[filteredCategoryIds.size()]));
+}
+
+private String[] _getCategoryIdsNames(String categoryIds, String categoryNames, long vocabularyId) throws PortalException, SystemException {
+	if (Validator.isNotNull(categoryIds)) {
+		long[] curCategoryIdsArray = GetterUtil.getLongValues(StringUtil.split(categoryIds));
+
+		if (vocabularyId > 0) {
+			curCategoryIdsArray = _filterCategoryIds(vocabularyId, curCategoryIdsArray);
+		}
+
+		if (curCategoryIdsArray.length == 0) {
+			categoryIds = StringPool.BLANK;
+			categoryNames = StringPool.BLANK;
+		}
+		else {
+			StringBundler sb = new StringBundler(curCategoryIdsArray.length * 2);
+			for (long curCategoryId : curCategoryIdsArray) {
+				AssetCategory category = AssetCategoryLocalServiceUtil.getCategory(curCategoryId);
+
+				category = category.toEscapedModel();
+
+				sb.append(category.getName());
+				sb.append(StringPool.COMMA);
+			}
+
+			sb.setIndex(sb.index() - 1);
+
+			categoryIds = StringUtil.merge(curCategoryIdsArray);
+			categoryNames = sb.toString();
+		}
+	}
+
+	return new String[]{categoryIds, categoryNames};
+}
+%>

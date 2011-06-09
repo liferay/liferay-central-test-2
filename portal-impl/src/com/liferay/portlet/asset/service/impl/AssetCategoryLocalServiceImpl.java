@@ -298,6 +298,12 @@ public class AssetCategoryLocalServiceImpl
 			parentCategoryId, vocabularyId, start, end, obc);
 	}
 
+	public int getVocabularyCategoriesCount(long vocabularyId)
+		throws SystemException {
+
+		return assetCategoryPersistence.countByVocabularyId(vocabularyId);
+	}
+
 	public List<AssetCategory> getVocabularyRootCategories(
 			long vocabularyId, int start, int end, OrderByComparator obc)
 		throws SystemException {
