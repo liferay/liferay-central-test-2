@@ -527,6 +527,12 @@
 		_handleLink: function(element, listTagsIn, listTagsOut) {
 			var hrefAttribute = element.getAttribute('href');
 
+			var decodedLink = decodeURIComponent(hrefAttribute);
+
+			if (CKEDITOR.config.newThreadURL === decodedLink) {
+				hrefAttribute = decodedLink;
+			}
+
 			listTagsIn.push('[url=', hrefAttribute, ']');
 
 			listTagsOut.push('[/url]');

@@ -85,6 +85,8 @@ CKEDITOR.config.imagesPath = '<%= HtmlUtil.escape(imagesPath) %>/message_boards/
 
 CKEDITOR.config.language = '<%= HtmlUtil.escape(languageId) %>';
 
+CKEDITOR.config.newThreadURL = '<%= BBCodeUtil.NEW_THREAD_URL %>';
+
 CKEDITOR.config.smiley_descriptions = ['<%= StringUtil.merge(BBCodeUtil.EMOTICONS_DESCRIPTIONS, "','") %>'];
 
 CKEDITOR.config.smiley_images = ['<%= StringUtil.merge(BBCodeUtil.EMOTICONS_FILES, "','") %>'];
