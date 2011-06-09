@@ -394,6 +394,11 @@ public class AssetCategoryLocalServiceWrapper
 			vocabularyId, start, end, obc);
 	}
 
+	public int getVocabularyCategoriesCount(long vocabularyId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _assetCategoryLocalService.getVocabularyCategoriesCount(vocabularyId);
+	}
+
 	public java.util.List<com.liferay.portlet.asset.model.AssetCategory> getVocabularyRootCategories(
 		long vocabularyId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)

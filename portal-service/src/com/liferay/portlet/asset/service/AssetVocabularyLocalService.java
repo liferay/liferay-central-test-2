@@ -317,6 +317,12 @@ public interface AssetVocabularyLocalService {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<com.liferay.portlet.asset.model.AssetVocabulary> getVocabularies(
+		long[] vocabularyIds)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.asset.model.AssetVocabulary getVocabulary(
 		long vocabularyId)
 		throws com.liferay.portal.kernel.exception.PortalException,
