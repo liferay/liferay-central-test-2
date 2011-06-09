@@ -297,7 +297,7 @@
 
 /* ---------- Page Personalization ---------- */
 
-.controls-visible .portlet-column.personalizable {
+.aui-dragging .portlet-column.personalizable {
 }
 
 .customizable-layout-column-content.yui3-widget-content-expanded {

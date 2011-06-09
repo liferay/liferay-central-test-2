@@ -487,9 +487,9 @@
 
 /* ---------- Page Personalization ---------- */
 
-.controls-visible .portlet-column.personalizable {
+.aui-dragging .portlet-column.personalizable {
 	background-color: #CFFCCF;
-	border: 2px dashed #9CC97B;
+	outline: 3px solid #9CC97B;
 }
 
 .customizable-layout-column-content.yui3-widget-content-expanded {

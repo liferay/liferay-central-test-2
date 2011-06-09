@@ -7,6 +7,8 @@ AUI().add(
 
 		var CSS_DRAGGABLE = A.ClassNameManager.getClassName('dd', 'draggable');
 
+		var CSS_DRAGGING = 'aui-dragging';
+
 		var getTitle = A.cached(
 			function(id) {
 				var portletBoundary = A.one('#' + id);
@@ -55,6 +57,7 @@ AUI().add(
 				Layout.PROXY_NODE.append(Layout.PORTLET_TOPPER);
 
 				Layout.DEFAULT_LAYOUT_OPTIONS = {
+					columnContainer: '#main-content',
 					delegateConfig: {
 						dragConfig: {
 							clickPixelThresh: 0,
@@ -317,10 +320,18 @@ AUI().add(
 								var nodeId = node.get('id');
 
 								Layout.PORTLET_TOPPER.html(getTitle(nodeId));
+
+								Layout._columnContainer.addClass(CSS_DRAGGING);
+							},
+
+							'drag:end': function(event) {
+								Layout._columnContainer.removeClass(CSS_DRAGGING);
 							}
 						}
 					}
 				);
+
+				Layout._columnContainer = A.all(columnLayoutDefaults.columnContainer);
 
 				Layout.layoutHandler = new Layout.ColumnLayout(columnLayoutDefaults);
 
