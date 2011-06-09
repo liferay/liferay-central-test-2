@@ -1777,7 +1777,6 @@ public class ServicePreAction extends Action {
 					pageSettingsURL.setParameter("tabs1", "public-pages");
 				}
 
-				pageSettingsURL.setParameter("redirect", currentURL);
 				pageSettingsURL.setParameter(
 					"groupId", String.valueOf(scopeGroupId));
 				pageSettingsURL.setParameter("selPlid", String.valueOf(plid));
@@ -1796,7 +1795,6 @@ public class ServicePreAction extends Action {
 
 				manageSiteMembershipsURL.setParameter(
 					"struts_action", "/sites_admin/edit_site_assignments");
-				manageSiteMembershipsURL.setParameter("redirect", currentURL);
 				manageSiteMembershipsURL.setParameter(
 					"groupId", String.valueOf(scopeGroupId));
 				manageSiteMembershipsURL.setParameter(
@@ -1827,7 +1825,6 @@ public class ServicePreAction extends Action {
 				siteSettingsURL.setParameter(
 					"struts_action", "/site_settings/edit_settings");
 
-				siteSettingsURL.setParameter("redirect", currentURL);
 				siteSettingsURL.setParameter(
 					"groupId", String.valueOf(scopeGroupId));
 
@@ -1854,7 +1851,6 @@ public class ServicePreAction extends Action {
 					siteMapSettingsURL.setParameter("tabs1", "public-pages");
 				}
 
-				siteMapSettingsURL.setParameter("redirect", currentURL);
 				siteMapSettingsURL.setParameter(
 					"groupId", String.valueOf(scopeGroupId));
 
