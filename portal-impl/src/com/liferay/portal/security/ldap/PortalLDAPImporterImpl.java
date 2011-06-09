@@ -771,7 +771,6 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 			}
 		}
 		else {
-
 			String userMappingsGroup = userMappings.getProperty("group");
 
 			if (Validator.isNull(userMappingsGroup)) {
