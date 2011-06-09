@@ -16,11 +16,8 @@ package com.liferay.portlet.dynamicdatalists.action;
 
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Constants;
-import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.LocalizationUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.ServiceContext;
@@ -175,25 +172,10 @@ public class EditRecordSetAction extends PortletAction {
 		String workflowDefinition = ParamUtil.getString(
 			actionRequest, "workflowDefinition");
 
-		if (Validator.isNull(workflowDefinition)) {
-			WorkflowDefinitionLinkLocalServiceUtil.deleteWorkflowDefinitionLink(
-				serviceContext.getCompanyId(), groupId,
-				DDLRecordSet.class.getName(), recordSet.getRecordSetId());
-		}
-		else {
-			String[] workflowDefinitionParts = StringUtil.split(
-				workflowDefinition, StringPool.AT);
-
-			String workflowDefinitionName = workflowDefinitionParts[0];
-			int workflowDefinitionVersion = GetterUtil.getInteger(
-				workflowDefinitionParts[1]);
-
-			WorkflowDefinitionLinkLocalServiceUtil.updateWorkflowDefinitionLink(
-				serviceContext.getUserId(), serviceContext.getCompanyId(),
-				groupId, DDLRecordSet.class.getName(),
-				recordSet.getRecordSetId(), workflowDefinitionName,
-				workflowDefinitionVersion);
-		}
+		WorkflowDefinitionLinkLocalServiceUtil.updateWorkflowDefinitionLink(
+			serviceContext.getUserId(), serviceContext.getCompanyId(), groupId,
+			DDLRecordSet.class.getName(), recordSet.getRecordSetId(),
+			workflowDefinition);
 
 		String portletResource = ParamUtil.getString(
 			actionRequest, "portletResource");

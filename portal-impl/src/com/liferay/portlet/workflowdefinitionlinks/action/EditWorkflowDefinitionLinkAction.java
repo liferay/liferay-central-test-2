@@ -15,11 +15,7 @@
 package com.liferay.portlet.workflowdefinitionlinks.action;
 
 import com.liferay.portal.kernel.servlet.SessionErrors;
-import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.WorkflowException;
 import com.liferay.portal.service.WorkflowDefinitionLinkLocalServiceUtil;
 import com.liferay.portal.struts.PortletAction;
@@ -77,35 +73,13 @@ public class EditWorkflowDefinitionLinkAction extends PortletAction {
 			renderRequest, "portlet.workflow_definition_links.view"));
 	}
 
-	protected void updateWorkflowDefinitionLink(
-			ActionRequest actionRequest, String className, String value)
+	protected void updateWorkflowDefinitionLinks(ActionRequest actionRequest)
 		throws Exception {
 
 		long groupId = ParamUtil.getLong(actionRequest, "groupId");
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
-
-		if (Validator.isNull(value)) {
-			WorkflowDefinitionLinkLocalServiceUtil.deleteWorkflowDefinitionLink(
-				themeDisplay.getCompanyId(), groupId, className, 0);
-		}
-		else {
-			String[] values = StringUtil.split(value, StringPool.AT);
-
-			String workflowDefinitionName = values[0];
-			int workflowDefinitionVersion = GetterUtil.getInteger(
-				values[1]);
-
-			WorkflowDefinitionLinkLocalServiceUtil.updateWorkflowDefinitionLink(
-				themeDisplay.getUserId(), themeDisplay.getCompanyId(),
-				groupId, className, 0, workflowDefinitionName,
-				workflowDefinitionVersion);
-		}
-	}
-
-	protected void updateWorkflowDefinitionLinks(ActionRequest actionRequest)
-		throws Exception {
 
 		Enumeration<String> enu = actionRequest.getParameterNames();
 
@@ -117,9 +91,12 @@ public class EditWorkflowDefinitionLinkAction extends PortletAction {
 			}
 
 			String className = name.substring(_PREFIX.length(), name.length());
-			String value = ParamUtil.getString(actionRequest, name);
+			String workflowDefinition = ParamUtil.getString(
+				actionRequest, name);
 
-			updateWorkflowDefinitionLink(actionRequest, className, value);
+			WorkflowDefinitionLinkLocalServiceUtil.updateWorkflowDefinitionLink(
+				themeDisplay.getUserId(), themeDisplay.getCompanyId(), groupId,
+				className, 0, workflowDefinition);
 		}
 	}
 

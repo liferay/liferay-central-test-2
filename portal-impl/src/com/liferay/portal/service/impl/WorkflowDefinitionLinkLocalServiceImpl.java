@@ -17,6 +17,10 @@ package com.liferay.portal.service.impl;
 import com.liferay.portal.NoSuchWorkflowDefinitionLinkException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.kernel.workflow.WorkflowEngineManagerUtil;
 import com.liferay.portal.model.Group;
@@ -184,6 +188,29 @@ public class WorkflowDefinitionLinkLocalServiceImpl
 		}
 		catch (NoSuchWorkflowDefinitionLinkException nswdle) {
 			return false;
+		}
+	}
+
+	public void updateWorkflowDefinitionLink(
+			long userId, long companyId, long groupId, String className,
+			long classPK, String workflowDefinition)
+		throws PortalException, SystemException {
+
+		if (Validator.isNull(workflowDefinition)) {
+			deleteWorkflowDefinitionLink(
+				companyId, groupId, className, classPK);
+		}
+		else {
+			String[] workflowDefinitionParts = StringUtil.split(
+				workflowDefinition, StringPool.AT);
+
+			String workflowDefinitionName = workflowDefinitionParts[0];
+			int workflowDefinitionVersion = GetterUtil.getInteger(
+				workflowDefinitionParts[1]);
+
+			updateWorkflowDefinitionLink(
+				userId, companyId, groupId, className, classPK,
+				workflowDefinitionName, workflowDefinitionVersion);
 		}
 	}
 
