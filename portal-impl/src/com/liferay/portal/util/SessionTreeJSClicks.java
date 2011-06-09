@@ -56,6 +56,23 @@ public class SessionTreeJSClicks {
 		}
 	}
 
+	public static void closeNodes(
+		HttpServletRequest request, String treeId, String[] nodeIds) {
+
+		try {
+			String openNodesString = get(request, treeId);
+
+			for (String nodeId : nodeIds) {
+				openNodesString = StringUtil.remove(openNodesString, nodeId);
+			}
+
+			put(request, treeId, openNodesString);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
+	}
+
 	public static String getOpenNodes(
 		HttpServletRequest request, String treeId) {
 
@@ -90,8 +107,8 @@ public class SessionTreeJSClicks {
 		try {
 			String openNodesString = get(request, treeId);
 
-			for (int i = 0; i < nodeIds.length; i++) {
-				openNodesString = StringUtil.add(openNodesString, nodeIds[i]);
+			for (String nodeId : nodeIds) {
+				openNodesString = StringUtil.add(openNodesString, nodeId);
 			}
 
 			put(request, treeId, openNodesString);
