@@ -911,7 +911,7 @@ AUI().add(
 
 										vocabularyEl.value = item.vocabularyId;
 
-										var vocabularyTextEl = document.createTextNode(Liferay.Util.escapeHTML(item.name));
+										var vocabularyTextEl = document.createTextNode(item.name);
 
 										vocabularyEl.appendChild(vocabularyTextEl);
 
