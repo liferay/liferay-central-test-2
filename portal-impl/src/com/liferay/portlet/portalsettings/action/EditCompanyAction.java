@@ -155,8 +155,8 @@ public class EditCompanyAction extends PortletAction {
 		String languageId = ParamUtil.getString(actionRequest, "languageId");
 		String timeZoneId = ParamUtil.getString(actionRequest, "timeZoneId");
 		List<Address> addresses = UsersAdminUtil.getAddresses(actionRequest);
-		List<EmailAddress> emailAddresses =
-			UsersAdminUtil.getEmailAddresses(actionRequest);
+		List<EmailAddress> emailAddresses = UsersAdminUtil.getEmailAddresses(
+			actionRequest);
 		List<Phone> phones = UsersAdminUtil.getPhones(actionRequest);
 		List<Website> websites = UsersAdminUtil.getWebsites(actionRequest);
 		UnicodeProperties properties = PropertiesParamUtil.getProperties(

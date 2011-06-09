@@ -201,8 +201,8 @@ public class EditOrganizationAction extends PortletAction {
 		String comments = ParamUtil.getString(actionRequest, "comments");
 		boolean site = ParamUtil.getBoolean(actionRequest, "site");
 		List<Address> addresses = UsersAdminUtil.getAddresses(actionRequest);
-		List<EmailAddress> emailAddresses =
-			UsersAdminUtil.getEmailAddresses(actionRequest);
+		List<EmailAddress> emailAddresses = UsersAdminUtil.getEmailAddresses(
+			actionRequest);
 		List<OrgLabor> orgLabors = UsersAdminUtil.getOrgLabors(actionRequest);
 		List<Phone> phones = UsersAdminUtil.getPhones(actionRequest);
 		List<Website> websites = UsersAdminUtil.getWebsites(actionRequest);
