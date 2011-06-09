@@ -221,6 +221,7 @@ if (Validator.isNotNull(content)) {
 									<aui:input name="structureName" type="hidden" value="<%= structureName %>" />
 									<aui:input name="structureDescription" type="hidden" value="<%= structureDescription %>" />
 									<aui:input name="structureXSD" type="hidden" value="<%= JS.encodeURIComponent(structureXSD) %>" />
+									<aui:input name="groupId" type="hidden" value="<%= groupId %>" />
 
 									<span id="<portlet:namespace />structureNameLabel" class="structure-name-label">
 										<%= HtmlUtil.escape(structureName) %>

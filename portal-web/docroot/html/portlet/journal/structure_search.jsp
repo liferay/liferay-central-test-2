@@ -18,7 +18,7 @@
 
 <%
 String strutsAction = ParamUtil.getString(request, "struts_action");
-
+long groupId = ParamUtil.getLong(request, "groupId");
 StructureSearch searchContainer = (StructureSearch)request.getAttribute("liferay-ui:search:searchContainer");
 
 StructureDisplayTerms displayTerms = (StructureDisplayTerms)searchContainer.getDisplayTerms();
@@ -93,7 +93,7 @@ if (portletName.equals(PortletKeys.JOURNAL)) {
 
 <aui:script>
 	function <portlet:namespace />addStructure() {
-		var url = '<portlet:renderURL><portlet:param name="struts_action" value="/journal/edit_structure" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';
+		var url = '<portlet:renderURL><portlet:param name="struts_action" value="/journal/edit_structure" /><portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';
 
 		if (toggle_id_journal_structure_searchcurClickValue == 'basic') {
 			url += '&<portlet:namespace /><%= displayTerms.NAME %>=' + document.<portlet:namespace />fm.<portlet:namespace /><%= displayTerms.KEYWORDS %>.value;

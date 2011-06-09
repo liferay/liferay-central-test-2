@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.WebKeys;
 
@@ -67,6 +68,8 @@ public class TemplateDisplayTerms extends DisplayTerms {
 	}
 
 	public String getGroupIds(PortletRequest portletRequest) {
+		long groupId = ParamUtil.getLong(portletRequest, "groupId");
+
 		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
@@ -75,7 +78,13 @@ public class TemplateDisplayTerms extends DisplayTerms {
 
 		StringBundler sb = new StringBundler();
 
-		sb.append(themeDisplay.getScopeGroupId());
+		if ((groupId==0) && Validator.isNull(structureId) &&
+				Validator.isNull(templateId)) {
+			sb.append(themeDisplay.getScopeGroupId());
+		}
+		else {
+			sb.append(groupId);
+		}
 
 		if (strutsAction.equalsIgnoreCase("/journal/select_template")) {
 			sb.append(StringPool.COMMA);

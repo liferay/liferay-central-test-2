@@ -354,10 +354,8 @@ AUI().add(
 		};
 
 		Journal.prototype = {
-			addStructure: function(structureId, autoStructureId, name, description, xsd, callback) {
+			addStructure: function(structureId, autoStructureId, name, description, xsd, callback, groupId) {
 				var instance = this;
-
-				var groupId = instance.getGroupId();
 				var addGroupPermissions = true;
 				var addGuestPermissions = true;
 				var parentStructureId = '';
@@ -883,6 +881,8 @@ AUI().add(
 					var structureDescriptionInput = instance.getByName(form, 'structureDescription');
 					var storedStructureXSD = instance.getByName(form, 'structureXSD');
 
+					var groupId = instance.getByName(form, 'groupId');
+
 					var saveCallback = function() {
 						var dialogFields = instance._saveDialog.fields;
 
@@ -906,7 +906,8 @@ AUI().add(
 								dialogFields.dialogStructureName.val(),
 								dialogFields.dialogDescription.val(),
 								dialogFields.contentXSD,
-								serviceCallback
+								serviceCallback,
+								groupId.val()
 							);
 						}
 						else {

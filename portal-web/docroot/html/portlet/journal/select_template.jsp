@@ -16,6 +16,11 @@
 
 <%@ include file="/html/portlet/journal/init.jsp" %>
 
+<%
+	long groupId = ParamUtil.getLong(request, "groupId");
+	long companyId = ParamUtil.getLong(request, "companyId");
+%>
+
 <liferay-portlet:renderURL varImpl="portletURL">
 	<portlet:param name="struts_action" value="/journal/select_template" />
 </liferay-portlet:renderURL>
@@ -23,6 +28,10 @@
 <aui:form action="<%= portletURL.toString() %>" method="post" name="fm">
 
 	<%
+	DynamicRenderRequest dynamicRenderRequest = new DynamicRenderRequest(renderRequest);
+	dynamicRenderRequest.setParameter("groupId", String.valueOf(groupId));
+	dynamicRenderRequest.setParameter("companyId", String.valueOf(companyId));
+
 	TemplateSearch searchContainer = new TemplateSearch(renderRequest, 10, portletURL);
 	%>
 
