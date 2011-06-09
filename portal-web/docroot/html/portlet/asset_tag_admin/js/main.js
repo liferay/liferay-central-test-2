@@ -1243,7 +1243,7 @@ AUI().add(
 							}
 						);
 
-						if (AObject.size(historyState)) {
+						if (!AObject.isEmpty(historyState)) {
 							history.add(historyState);
 						}
 
