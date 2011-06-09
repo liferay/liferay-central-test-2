@@ -16,16 +16,13 @@ package com.liferay.taglib.aui;
 
 import com.liferay.portal.kernel.servlet.BrowserSnifferUtil;
 import com.liferay.portal.kernel.servlet.PortalIncludeUtil;
-import com.liferay.portal.kernel.servlet.taglib.BaseBodyTagSupport;
 import com.liferay.portal.kernel.servlet.taglib.FileAvailabilityUtil;
 import com.liferay.portal.kernel.servlet.taglib.aui.ScriptData;
-import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
-import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.taglib.util.PositionTagSupport;
 
 import java.util.Set;
 
@@ -34,13 +31,12 @@ import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.tagext.BodyContent;
-import javax.servlet.jsp.tagext.BodyTag;
 
 /**
  * @author Brian Wing Shun Chan
  * @author Shuyang Zhou
  */
-public class ScriptTag extends BaseBodyTagSupport implements BodyTag {
+public class ScriptTag extends PositionTagSupport {
 
 	public static final String PAGE = "/html/taglib/aui/script/page.jsp";
 
@@ -99,33 +95,10 @@ public class ScriptTag extends BaseBodyTagSupport implements BodyTag {
 		HttpServletRequest request =
 			(HttpServletRequest)pageContext.getRequest();
 
-		String position = _position;
-
-		String fragmentId = ParamUtil.getString(request, "p_f_id");
-
-		if (Validator.isNotNull(fragmentId)) {
-			position = _POSITION_INLINE;
-		}
-
 		try {
-			if (Validator.isNull(position)) {
-				ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
-					WebKeys.THEME_DISPLAY);
-
-				if (themeDisplay.isIsolated() ||
-					themeDisplay.isLifecycleResource() ||
-					themeDisplay.isStateExclusive()) {
-
-					position = _POSITION_INLINE;
-				}
-				else {
-					position = _POSITION_AUTO;
-				}
-			}
-
 			StringBundler bodyContentSB = getBodyContentAsStringBundler();
 
-			if (position.equals(_POSITION_INLINE)) {
+			if (isPositionInLine()) {
 				ScriptData scriptData = new ScriptData();
 
 				request.setAttribute(ScriptTag.class.getName(), scriptData);
@@ -160,7 +133,7 @@ public class ScriptTag extends BaseBodyTagSupport implements BodyTag {
 			throw new JspException(e);
 		}
 		finally {
-			if (position.equals(_POSITION_INLINE)) {
+			if (isPositionInLine()) {
 				request.removeAttribute(ScriptTag.class.getName());
 			}
 
@@ -170,16 +143,13 @@ public class ScriptTag extends BaseBodyTagSupport implements BodyTag {
 		}
 	}
 
-	public void setPosition(String position) {
-		_position = position;
-	}
-
 	public void setUse(String use) {
 		_use = use;
 	}
 
 	protected void cleanUp() {
-		_position = null;
+		super.cleanUp();
+
 		_use = null;
 	}
 
@@ -229,11 +199,6 @@ public class ScriptTag extends BaseBodyTagSupport implements BodyTag {
 		jspWriter.write("\n// ]]>\n</script>");
 	}
 
-	private static final String _POSITION_AUTO = "auto";
-
-	private static final String _POSITION_INLINE = "inline";
-
-	private String _position;
 	private String _use;
 
 }
