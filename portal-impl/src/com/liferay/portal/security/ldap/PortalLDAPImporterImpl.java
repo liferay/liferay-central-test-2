@@ -715,18 +715,6 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 			Properties groupMappings)
 		throws Exception {
 
-		String userMappingsGroup = userMappings.getProperty("group");
-
-		if (Validator.isNull(userMappingsGroup)) {
-			return;
-		}
-
-		Attribute userGroupAttribute = attributes.get(userMappingsGroup);
-
-		if (userGroupAttribute == null) {
-			return;
-		}
-
 		List<Long> newUserGroupIds = new ArrayList<Long>();
 
 		if (PrefsPropsUtil.getBoolean(
@@ -783,6 +771,19 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 			}
 		}
 		else {
+
+			String userMappingsGroup = userMappings.getProperty("group");
+
+			if (Validator.isNull(userMappingsGroup)) {
+				return;
+			}
+
+			Attribute userGroupAttribute = attributes.get(userMappingsGroup);
+
+			if (userGroupAttribute == null) {
+				return;
+			}
+
 			for (int i = 0; i < userGroupAttribute.size(); i++) {
 				String fullGroupDN = (String)userGroupAttribute.get(i);
 
