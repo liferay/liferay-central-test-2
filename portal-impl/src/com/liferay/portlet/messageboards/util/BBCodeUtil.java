@@ -127,6 +127,8 @@ public class BBCodeUtil {
 
 	public static final String[] EMOTICONS_SYMBOLS = emoticonSymbols;
 
+	public static final String NEW_THREAD_URL = "${newThreadURL}";
+
 	public static String getHTML(MBMessage message) {
 		String body = message.getBody();
 
