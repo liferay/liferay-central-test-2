@@ -1931,7 +1931,7 @@ public class PortalImpl implements Portal {
 				groupId, privateLayout,
 				LayoutConstants.DEFAULT_PARENT_LAYOUT_ID);
 
-			if (layouts.size() > 0) {
+			if (!layouts.isEmpty()) {
 				layout = layouts.get(0);
 			}
 			else {
@@ -2506,7 +2506,7 @@ public class PortalImpl implements Portal {
 						group.getGroupId(), privateLayout,
 						LayoutConstants.DEFAULT_PARENT_LAYOUT_ID, 0, 1);
 
-					if (layouts.size() > 0) {
+					if (!layouts.isEmpty()) {
 						layout = layouts.get(0);
 					}
 					else {
