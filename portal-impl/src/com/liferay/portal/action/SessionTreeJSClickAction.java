@@ -52,6 +52,14 @@ public class SessionTreeJSClickAction extends Action {
 
 				SessionTreeJSClicks.openNodes(request, treeId, nodeIds);
 			}
+			else if (cmd.equals("layoutCheck")) {
+			}
+			else if (cmd.equals("layoutCollpase")) {
+			}
+			else if (cmd.equals("layoutUncheck")) {
+			}
+			else if (cmd.equals("layoutUncollpase")) {
+			}
 			else {
 				String nodeId = ParamUtil.getString(request, "nodeId");
 				boolean openNode = ParamUtil.getBoolean(request, "openNode");
