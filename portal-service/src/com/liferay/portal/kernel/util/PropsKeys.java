@@ -101,6 +101,8 @@ public interface PropsKeys {
 
 	public static final String ASSET_VOCABULARY_DEFAULT = "asset.vocabulary.default";
 
+	public static final String ATOM_SERVLET_COLLECTIONADAPTERS = "atom.servlet.collectionAdapters";
+
 	public static final String AUDIT_MESSAGE_COM_LIFERAY_PORTAL_MODEL_LAYOUT_VIEW = "audit.message.com.liferay.portal.model.Layout.VIEW";
 
 	public static final String AUTH_FAILURE = "auth.failure";
