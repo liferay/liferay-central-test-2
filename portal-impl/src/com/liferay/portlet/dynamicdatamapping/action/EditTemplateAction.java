@@ -218,8 +218,8 @@ public class EditTemplateAction extends PortletAction {
 				groupId, structureKey);
 
 			template = DDMTemplateServiceUtil.addTemplate(
-				structure.getStructureId(), name, description, type, language,
-				script, serviceContext);
+				groupId, structure.getStructureId(), name, description, type,
+				language, script, serviceContext);
 		}
 		else {
 			template = DDMTemplateServiceUtil.updateTemplate(

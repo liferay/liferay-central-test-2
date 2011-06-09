@@ -61,8 +61,7 @@ public class DDMStructureLocalServiceImpl
 
 		// Structure
 
-		User user = userPersistence.findByPrimaryKey(
-			serviceContext.getUserId());
+		User user = userPersistence.findByPrimaryKey(userId);
 
 		structureKey = structureKey.trim().toUpperCase();
 

@@ -208,8 +208,15 @@ public class PortletDataContextImpl implements PortletDataContext {
 	public void addAssetLinks(Class<?> clazz, long classPK)
 		throws PortalException, SystemException {
 
-		AssetEntry assetEntry = AssetEntryLocalServiceUtil.getEntry(
-			clazz.getName(), classPK);
+		AssetEntry assetEntry = null;
+
+		try {
+			assetEntry = AssetEntryLocalServiceUtil.getEntry(
+				clazz.getName(), classPK);
+		}
+		catch (NoSuchEntryException nsee) {
+			return;
+		}
 
 		List<AssetLink> directAssetLinks =
 			AssetLinkLocalServiceUtil.getDirectLinks(assetEntry.getEntryId());

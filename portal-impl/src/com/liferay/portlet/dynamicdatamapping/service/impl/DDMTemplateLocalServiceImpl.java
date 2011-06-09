@@ -37,14 +37,14 @@ public class DDMTemplateLocalServiceImpl
 	extends DDMTemplateLocalServiceBaseImpl {
 
 	public DDMTemplate addTemplate(
-			long structureId, String name, String description, String type,
-			String language, String script, ServiceContext serviceContext)
+			long userId, long groupId, long structureId, String name,
+			String description, String type, String language, String script,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		// Template
 
-		User user = userPersistence.findByPrimaryKey(
-			serviceContext.getUserId());
+		User user = userPersistence.findByPrimaryKey(userId);
 		Date now = new Date();
 
 		validate(name, script);
@@ -54,7 +54,7 @@ public class DDMTemplateLocalServiceImpl
 		DDMTemplate template = ddmTemplatePersistence.create(templateId);
 
 		template.setUuid(serviceContext.getUuid());
-		template.setGroupId(serviceContext.getScopeGroupId());
+		template.setGroupId(groupId);
 		template.setCompanyId(user.getCompanyId());
 		template.setUserId(user.getUserId());
 		template.setUserName(user.getFullName());
@@ -131,6 +131,16 @@ public class DDMTemplateLocalServiceImpl
 			templateId);
 
 		deleteTemplate(template);
+	}
+
+	public void deleteTemplates(long groupId)
+		throws PortalException, SystemException {
+
+		for (DDMTemplate template :
+				ddmTemplatePersistence.findByGroupId(groupId)) {
+
+			deleteTemplate(template);
+		}
 	}
 
 	public DDMTemplate getTemplate(long templateId)

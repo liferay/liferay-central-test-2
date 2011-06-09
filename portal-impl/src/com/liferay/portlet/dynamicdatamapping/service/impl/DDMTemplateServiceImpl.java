@@ -30,8 +30,9 @@ import com.liferay.portlet.dynamicdatamapping.service.permission.DDMTemplatePerm
 public class DDMTemplateServiceImpl extends DDMTemplateServiceBaseImpl {
 
 	public DDMTemplate addTemplate(
-			long structureId, String name, String description, String type,
-			String language, String script, ServiceContext serviceContext)
+			long groupId, long structureId, String name, String description,
+			String type, String language, String script, 
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		DDMPermission.check(
@@ -39,8 +40,8 @@ public class DDMTemplateServiceImpl extends DDMTemplateServiceBaseImpl {
 			ActionKeys.ADD_TEMPLATE);
 
 		return ddmTemplateLocalService.addTemplate(
-			structureId, name, description, type, language, script,
-			serviceContext);
+			getUserId(), groupId, structureId, name, description, type,
+			language, script, serviceContext);
 	}
 
 	public void deleteTemplate(long templateId)
