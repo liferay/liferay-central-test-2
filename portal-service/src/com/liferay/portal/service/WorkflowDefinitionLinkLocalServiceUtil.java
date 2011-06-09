@@ -324,6 +324,16 @@ public class WorkflowDefinitionLinkLocalServiceUtil {
 			classPK);
 	}
 
+	public static void updateWorkflowDefinitionLink(long userId,
+		long companyId, long groupId, java.lang.String className, long classPK,
+		java.lang.String workflowDefinition)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		getService()
+			.updateWorkflowDefinitionLink(userId, companyId, groupId,
+			className, classPK, workflowDefinition);
+	}
+
 	public static com.liferay.portal.model.WorkflowDefinitionLink updateWorkflowDefinitionLink(
 		long userId, long companyId, long groupId, java.lang.String className,
 		long classPK, java.lang.String workflowDefinitionName,
