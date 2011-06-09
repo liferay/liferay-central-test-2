@@ -50,13 +50,31 @@ PortletURL portletURL = (PortletURL)request.getAttribute("edit_pages.jsp-portlet
 		afterRenderTree: function(event) {
 			var treeInstance = event.target;
 
-			var rootNode = treeInstance.item(0);
 			var loadingEl = A.one('#<portlet:namespace />treeLoading');
+
+			var rootNode = treeInstance.item(0);
 
 			loadingEl.hide();
 
 			TreeUtil.restoreNodeState(rootNode);
 		},
+
+		checkedChangeTask: A.debounce(
+			function(event) {
+				var instance = this;
+
+				var cmd = TreeUtil.CMD_UNCHECK;
+
+				var layoutId = TreeUtil.extractLayoutId(event.target);
+
+				if (event.newVal) {
+					cmd = TreeUtil.CMD_CHECK;
+				}
+
+				TreeUtil.updateSessionTreeClick(cmd, layoutId, '<%= HtmlUtil.escape(treeId) %>', true);
+			},
+			10
+		),
 
 		createId: function(layoutId, plid) {
 			return '<%= HtmlUtil.escape(treeId) %>' + TreeUtil.PREFIX_LAYOUT_ID + layoutId + TreeUtil.PREFIX_PLID + plid;
@@ -77,7 +95,7 @@ PortletURL portletURL = (PortletURL)request.getAttribute("edit_pages.jsp-portlet
 			};
 
 			if (node.layoutRevisionId) {
-				newNode.label = [newNode.label, " [", node.layoutSetBranchName, " ", node.layoutRevisionId, "]"].join('');
+				newNode.label = [newNode.label, ' [', node.layoutSetBranchName, ' ', node.layoutRevisionId, ']'].join('');
 			}
 
 			if (<%= selectableTree %>) {
@@ -89,23 +107,6 @@ PortletURL portletURL = (PortletURL)request.getAttribute("edit_pages.jsp-portlet
 
 			return newNode;
 		},
-
-		debouncedCheckedChange: A.debounce(
-			function(event) {
-				var instance = this;
-
-				var node = event.target;
-				var cmd = TreeUtil.CMD_UNCHECK;
-				var layoutId = TreeUtil.extractLayoutId(node);
-
-				if (event.newVal) {
-					cmd = TreeUtil.CMD_CHECK;
-				}
-
-				TreeUtil.updateSessionTreeClick(cmd, layoutId, '<%= HtmlUtil.escape(treeId) %>', true);
-			},
-			10
-		),
 
 		extractLayoutId: function(node) {
 			return node.get('id').match(/layoutId_(\d+)/)[1];
@@ -124,9 +125,9 @@ PortletURL portletURL = (PortletURL)request.getAttribute("edit_pages.jsp-portlet
 
 			A.Array.each(
 				json,
-				function(node, index) {
-					var layoutId = node.layoutId;
-					var parentLayoutId = node.parentLayoutId;
+				function(item, index, collection) {
+					var layoutId = item.layoutId;
+					var parentLayoutId = item.parentLayoutId;
 
 					if (index === 0) {
 						firstParentLayoutId = parentLayoutId;
@@ -138,7 +139,7 @@ PortletURL portletURL = (PortletURL)request.getAttribute("edit_pages.jsp-portlet
 						childrenSet[parentLayoutId] = [];
 					}
 
-					var treeNode = TreeUtil.createTreeNode(node, childrenSet);
+					var treeNode = TreeUtil.createTreeNode(item, childrenSet);
 
 					if (parentLayoutId === firstParentLayoutId) {
 						results.push(treeNode);
@@ -156,9 +157,7 @@ PortletURL portletURL = (PortletURL)request.getAttribute("edit_pages.jsp-portlet
 			var instance = this;
 
 			if (!TreeUtil.selectedNode) {
-				var node = A.one('[id$=' + TreeUtil.PREFIX_PLID + plid  + ']');
-
-				TreeUtil.selectedNode = A.Widget.getByNode(node);
+				TreeUtil.selectedNode = A.Widget.getByNode('[id$=' + TreeUtil.PREFIX_PLID + plid  + ']');
 			}
 
 			return TreeUtil.selectedNode;
@@ -263,6 +262,22 @@ PortletURL portletURL = (PortletURL)request.getAttribute("edit_pages.jsp-portlet
 	var treeview = new TreeViewType(
 		{
 			after: {
+				'*:checkedChange': TreeUtil.checkedChangeTask,
+				'*:expandedChange': function(event) {
+					var cmd = TreeUtil.CMD_COLLAPSE;
+
+					var recursive = true;
+
+					var layoutId = TreeUtil.extractLayoutId(event.target);
+
+					if (event.newVal) {
+						cmd = TreeUtil.CMD_EXPAND;
+
+						recursive = false;
+					}
+
+					TreeUtil.updateSessionTreeClick(cmd, layoutId, '<%= HtmlUtil.escape(treeId) %>', recursive);
+				},
 				render: TreeUtil.afterRenderTree
 			},
 			boundingBox: '#' + treeElId,
@@ -285,24 +300,6 @@ PortletURL portletURL = (PortletURL)request.getAttribute("edit_pages.jsp-portlet
 				url: getLayoutsURL
 			},
 			on: {
-				'*:checkedChange': TreeUtil.debouncedCheckedChange,
-				'*:expandedChange': function(event) {
-					var node = event.target;
-					var expanded = event.newVal;
-					var layoutId = TreeUtil.extractLayoutId(node);
-
-					if (event.prevVal !== event.newVal) {
-						var cmd = TreeUtil.CMD_COLLAPSE;
-						var recursive = true;
-
-						if (expanded) {
-							cmd = TreeUtil.CMD_EXPAND;
-							recursive = false;
-						}
-
-						TreeUtil.updateSessionTreeClick(cmd, layoutId, '<%= HtmlUtil.escape(treeId) %>', recursive);
-					}
-				},
 				append: function(event) {
 					TreeUtil.restoreNodeState(event.tree.node);
 				},
