@@ -157,7 +157,7 @@ request.setAttribute("view.jsp-viewCategory", Boolean.TRUE.toString());
 		<liferay-ui:panel-container cssClass="message-boards-panels" extended="<%= false %>" id="messageBoardsPanelContainer" persistState="<%= true %>">
 
 			<%
-			int categoriesCount = MBCategoryLocalServiceUtil.getCategoriesCount(scopeGroupId, categoryId);
+			int categoriesCount = MBCategoryServiceUtil.getCategoriesCount(scopeGroupId, categoryId);
 			%>
 
 			<c:if test="<%= categoriesCount > 0 %>">
@@ -199,7 +199,7 @@ request.setAttribute("view.jsp-viewCategory", Boolean.TRUE.toString());
 
 							<div class="separator"><!-- --></div>
 
-							<liferay-ui:search-iterator type="approximate" />
+							<liferay-ui:search-iterator />
 						</liferay-ui:search-container>
 					</aui:form>
 				</liferay-ui:panel>
@@ -220,7 +220,7 @@ request.setAttribute("view.jsp-viewCategory", Boolean.TRUE.toString());
 					>
 						<liferay-ui:search-container-results
 							results="<%= MBThreadServiceUtil.getThreads(scopeGroupId, categoryId, WorkflowConstants.STATUS_APPROVED, searchContainer.getStart(), searchContainer.getEnd()) %>"
-							total="<%= MBThreadLocalServiceUtil.getThreadsCount(scopeGroupId, categoryId, WorkflowConstants.STATUS_APPROVED) %>"
+							total="<%= MBThreadServiceUtil.getThreadsCount(scopeGroupId, categoryId, WorkflowConstants.STATUS_APPROVED) %>"
 						/>
 
 						<liferay-ui:search-container-row
@@ -370,7 +370,7 @@ request.setAttribute("view.jsp-viewCategory", Boolean.TRUE.toString());
 
 						<div class="separator"><!-- --></div>
 
-						<liferay-ui:search-iterator type="approximate" />
+						<liferay-ui:search-iterator />
 					</liferay-ui:search-container>
 				</aui:form>
 			</liferay-ui:panel>
@@ -417,7 +417,7 @@ request.setAttribute("view.jsp-viewCategory", Boolean.TRUE.toString());
 
 					<%
 					results = MBThreadServiceUtil.getGroupThreads(scopeGroupId, groupThreadsUserId, WorkflowConstants.STATUS_APPROVED, false, false, searchContainer.getStart(), searchContainer.getEnd());
-					total = MBThreadLocalServiceUtil.getGroupThreadsCount(scopeGroupId, groupThreadsUserId, WorkflowConstants.STATUS_APPROVED, false, false);
+					total = MBThreadServiceUtil.getGroupThreadsCount(scopeGroupId, groupThreadsUserId, WorkflowConstants.STATUS_APPROVED, false, false);
 
 					pageContext.setAttribute("results", results);
 					pageContext.setAttribute("total", total);
@@ -543,7 +543,7 @@ request.setAttribute("view.jsp-viewCategory", Boolean.TRUE.toString());
 
 				<div class="separator"><!-- --></div>
 
-				<liferay-ui:search-iterator type="approximate" />
+				<liferay-ui:search-iterator />
 			</liferay-ui:search-container>
 		</aui:form>
 
@@ -567,7 +567,7 @@ request.setAttribute("view.jsp-viewCategory", Boolean.TRUE.toString());
 						<liferay-ui:message key="num-of-posts" />:
 					</dt>
 					<dd>
-						<%= numberFormat.format(MBMessageLocalServiceUtil.getGroupMessagesCount(scopeGroupId, WorkflowConstants.STATUS_APPROVED)) %>
+						<%= numberFormat.format(MBMessageServiceUtil.getGroupMessagesCount(scopeGroupId, WorkflowConstants.STATUS_APPROVED)) %>
 					</dd>
 					<dt>
 						<liferay-ui:message key="num-of-participants" />:

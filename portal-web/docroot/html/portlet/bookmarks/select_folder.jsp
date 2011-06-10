@@ -48,7 +48,7 @@ if (folder != null) {
 
 	SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
 
-	int total = BookmarksFolderLocalServiceUtil.getFoldersCount(scopeGroupId, folderId);
+	int total = BookmarksFolderServiceUtil.getFoldersCount(scopeGroupId, folderId);
 
 	searchContainer.setTotal(total);
 
@@ -81,7 +81,7 @@ if (folder != null) {
 		BookmarksFolderServiceUtil.getSubfolderIds(subfolderIds, scopeGroupId, curFolder.getFolderId());
 
 		int foldersCount = subfolderIds.size() - 1;
-		int entriesCount = BookmarksEntryLocalServiceUtil.getFoldersEntriesCount(scopeGroupId, subfolderIds);
+		int entriesCount = BookmarksEntryServiceUtil.getFoldersEntriesCount(scopeGroupId, subfolderIds);
 
 		row.addText(String.valueOf(foldersCount), rowURL);
 		row.addText(String.valueOf(entriesCount), rowURL);
@@ -124,5 +124,5 @@ if (folder != null) {
 		</c:if>
 	</c:if>
 
-	<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" type="approximate" />
+	<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 </aui:form>

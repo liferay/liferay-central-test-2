@@ -38,7 +38,7 @@ portletURL.setParameter("mbCategoryId", String.valueOf(categoryId));
 <liferay-ui:panel-container cssClass="message-boards-panels" extended="<%= false %>" id="messageBoardsPanelContainer" persistState="<%= true %>">
 
 	<%
-	int categoriesCount = MBCategoryLocalServiceUtil.getCategoriesCount(scopeGroupId, categoryId);
+	int categoriesCount = MBCategoryServiceUtil.getCategoriesCount(scopeGroupId, categoryId);
 	%>
 
 	<c:if test="<%= categoriesCount > 0 %>">
@@ -70,7 +70,7 @@ portletURL.setParameter("mbCategoryId", String.valueOf(categoryId));
 					<%@ include file="/html/portlet/message_boards/category_columns.jspf" %>
 				</liferay-ui:search-container-row>
 
-				<liferay-ui:search-iterator type="approximate" />
+				<liferay-ui:search-iterator />
 			</liferay-ui:search-container>
 		</liferay-ui:panel>
 	</c:if>
@@ -84,7 +84,7 @@ portletURL.setParameter("mbCategoryId", String.valueOf(categoryId));
 >
 	<liferay-ui:search-container-results
 		results="<%= MBThreadServiceUtil.getThreads(scopeGroupId, categoryId, WorkflowConstants.STATUS_APPROVED, searchContainer.getStart(), searchContainer.getEnd()) %>"
-		total="<%= MBThreadLocalServiceUtil.getThreadsCount(scopeGroupId, categoryId, WorkflowConstants.STATUS_APPROVED) %>"
+		total="<%= MBThreadServiceUtil.getThreadsCount(scopeGroupId, categoryId, WorkflowConstants.STATUS_APPROVED) %>"
 	/>
 
 	<liferay-ui:search-container-row
@@ -128,7 +128,7 @@ portletURL.setParameter("mbCategoryId", String.valueOf(categoryId));
 		>
 
 			<%
-			int replies = MBMessageLocalServiceUtil.getThreadMessagesCount(thread.getThreadId(), WorkflowConstants.STATUS_ANY) - 1;
+			int replies = MBMessageServiceUtil.getThreadMessagesCount(scopeGroupId, categoryId, thread.getThreadId(), WorkflowConstants.STATUS_ANY) - 1;
 
 			RatingsStats ratingsStats = RatingsStatsLocalServiceUtil.getStats(MBMessage.class.getName(), message.getMessageId());
 
@@ -171,7 +171,7 @@ portletURL.setParameter("mbCategoryId", String.valueOf(categoryId));
 		</c:if>
 	</liferay-ui:search-container-row>
 
-	<liferay-ui:search-iterator type="approximate" />
+	<liferay-ui:search-iterator />
 </liferay-ui:search-container>
 
 <%!

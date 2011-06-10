@@ -57,7 +57,7 @@ OrderByComparator orderByComparator = BookmarksUtil.getEntriesOrderByComparator(
 		}
 		else {
 			results = BookmarksEntryServiceUtil.getEntries(scopeGroupId, folderId, searchContainer.getStart(), searchContainer.getEnd(), orderByComparator);
-			total = BookmarksEntryLocalServiceUtil.getEntriesCount(scopeGroupId, folderId);
+			total = BookmarksEntryServiceUtil.getEntriesCount(scopeGroupId, folderId);
 		}
 
 		pageContext.setAttribute("results", results);
@@ -90,5 +90,5 @@ OrderByComparator orderByComparator = BookmarksUtil.getEntriesOrderByComparator(
 		<%@ include file="/html/portlet/bookmarks/entry_columns.jspf" %>
 	</liferay-ui:search-container-row>
 
-	<liferay-ui:search-iterator type="approximate" />
+	<liferay-ui:search-iterator />
 </liferay-ui:search-container>

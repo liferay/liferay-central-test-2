@@ -181,4 +181,4 @@ if ((rssDelta != SearchContainer.DEFAULT_DELTA) || !rssFormatType.equals(RSSUtil
 	<link href="<%= rssURL %>" rel="alternate" title="RSS" type="application/rss+xml" />
 </liferay-util:html-top>
 
-<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" type="approximate" />
+<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />

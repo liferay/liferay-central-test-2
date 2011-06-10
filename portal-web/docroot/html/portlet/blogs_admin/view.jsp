@@ -78,7 +78,7 @@ portletURL.setParameter("struts_action", "/blogs_admin/view");
 
 		<div class="separator"><!-- --></div>
 
-		<liferay-ui:search-iterator type="approximate" />
+		<liferay-ui:search-iterator />
 	</liferay-ui:search-container>
 </aui:form>
 

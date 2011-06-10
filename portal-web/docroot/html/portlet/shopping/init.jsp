@@ -86,7 +86,6 @@
 <%@ page import="com.liferay.portlet.shopping.search.OrderSearchTerms" %>
 <%@ page import="com.liferay.portlet.shopping.service.ShoppingCartLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.shopping.service.ShoppingCategoryServiceUtil" %>
-<%@ page import="com.liferay.portlet.shopping.service.ShoppingCategoryLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.shopping.service.ShoppingCouponLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.shopping.service.ShoppingCouponServiceUtil" %>
 <%@ page import="com.liferay.portlet.shopping.service.ShoppingItemFieldLocalServiceUtil" %>

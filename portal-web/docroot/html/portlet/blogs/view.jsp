@@ -80,7 +80,7 @@ portletURL.setParameter("struts_action", "/blogs/view");
 			status = WorkflowConstants.STATUS_ANY;
 		}
 
-		total = BlogsEntryLocalServiceUtil.getGroupEntriesCount(scopeGroupId, status);
+		total = BlogsEntryServiceUtil.getGroupEntriesCount(scopeGroupId, status);
 		results = BlogsEntryServiceUtil.getGroupEntries(scopeGroupId, status, searchContainer.getStart(), searchContainer.getEnd());
 	}
 

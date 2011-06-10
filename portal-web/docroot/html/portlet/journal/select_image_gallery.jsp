@@ -54,7 +54,7 @@ if (folder != null) {
 
 	searchContainer.setTotal(total);
 
-	List results = IGFolderServiceUtil.getFolders(groupId, folderId, searchContainer.getStart(), searchContainer.getEnd());
+	List results = IGFolderLocalServiceUtil.getFolders(groupId, folderId, searchContainer.getStart(), searchContainer.getEnd());
 
 	searchContainer.setResults(results);
 
@@ -95,7 +95,7 @@ if (folder != null) {
 	}
 	%>
 
-	<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" type="approximate" />
+	<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 
 	<liferay-ui:header title="images" />
 
@@ -115,7 +115,7 @@ if (folder != null) {
 
 	searchContainer.setTotal(total);
 
-	results = IGImageServiceUtil.getImages(groupId, folderId, searchContainer.getStart(), searchContainer.getEnd());
+	results = IGImageLocalServiceUtil.getImages(groupId, folderId, searchContainer.getStart(), searchContainer.getEnd());
 
 	searchContainer.setResults(results);
 
@@ -166,5 +166,5 @@ if (folder != null) {
 	}
 	%>
 
-	<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" type="approximate" />
+	<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 </aui:form>

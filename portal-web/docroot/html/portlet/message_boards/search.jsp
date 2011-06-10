@@ -190,7 +190,7 @@ String keywords = ParamUtil.getString(request, "keywords");
 
 		<br /><br />
 
-		<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" type="approximate" />
+		<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" type="more" />
 
 	<%
 	}

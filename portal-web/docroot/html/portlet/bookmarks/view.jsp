@@ -34,8 +34,8 @@ if ((folder == null) && (defaultFolderId != BookmarksFolderConstants.DEFAULT_PAR
 	}
 }
 
-int foldersCount = BookmarksFolderLocalServiceUtil.getFoldersCount(scopeGroupId, folderId);
-int entriesCount = BookmarksEntryLocalServiceUtil.getEntriesCount(scopeGroupId, folderId);
+int foldersCount = BookmarksFolderServiceUtil.getFoldersCount(scopeGroupId, folderId);
+int entriesCount = BookmarksEntryServiceUtil.getEntriesCount(scopeGroupId, folderId);
 
 long categoryId = ParamUtil.getLong(request, "categoryId");
 String tagName = ParamUtil.getString(request, "tag");
@@ -150,7 +150,7 @@ request.setAttribute("view.jsp-useAssetEntryQuery", String.valueOf(useAssetEntry
 							>
 								<liferay-ui:search-container-results
 									results="<%= BookmarksFolderServiceUtil.getFolders(scopeGroupId, folderId, searchContainer.getStart(), searchContainer.getEnd()) %>"
-									total="<%= BookmarksFolderLocalServiceUtil.getFoldersCount(scopeGroupId, folderId) %>"
+									total="<%= BookmarksFolderServiceUtil.getFoldersCount(scopeGroupId, folderId) %>"
 								/>
 
 								<liferay-ui:search-container-row
@@ -168,7 +168,7 @@ request.setAttribute("view.jsp-useAssetEntryQuery", String.valueOf(useAssetEntry
 									<%@ include file="/html/portlet/bookmarks/folder_columns.jspf" %>
 								</liferay-ui:search-container-row>
 
-								<liferay-ui:search-iterator type="approximate" />
+								<liferay-ui:search-iterator />
 							</liferay-ui:search-container>
 						</liferay-ui:panel>
 					</c:if>
@@ -235,7 +235,7 @@ request.setAttribute("view.jsp-useAssetEntryQuery", String.valueOf(useAssetEntry
 
 				<liferay-ui:search-container-results
 					results="<%= BookmarksEntryServiceUtil.getGroupEntries(scopeGroupId, groupEntriesUserId, searchContainer.getStart(), searchContainer.getEnd()) %>"
-					total="<%= BookmarksEntryLocalServiceUtil.getGroupEntriesCount(scopeGroupId, groupEntriesUserId) %>"
+					total="<%= BookmarksEntryServiceUtil.getGroupEntriesCount(scopeGroupId, groupEntriesUserId) %>"
 				/>
 
 				<liferay-ui:search-container-row
@@ -262,7 +262,7 @@ request.setAttribute("view.jsp-useAssetEntryQuery", String.valueOf(useAssetEntry
 					<%@ include file="/html/portlet/bookmarks/entry_columns.jspf" %>
 				</liferay-ui:search-container-row>
 
-				<liferay-ui:search-iterator type="approximate" />
+				<liferay-ui:search-iterator />
 			</liferay-ui:search-container>
 		</aui:layout>
 

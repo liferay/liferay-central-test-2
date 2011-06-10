@@ -48,7 +48,7 @@ long categoryId = BeanParamUtil.getLong(category, request, "categoryId", Shoppin
 
 	SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
 
-	int total = ShoppingCategoryLocalServiceUtil.getCategoriesCount(scopeGroupId, categoryId);
+	int total = ShoppingCategoryServiceUtil.getCategoriesCount(scopeGroupId, categoryId);
 
 	searchContainer.setTotal(total);
 
@@ -88,7 +88,7 @@ long categoryId = BeanParamUtil.getLong(category, request, "categoryId", Shoppin
 		ShoppingCategoryServiceUtil.getSubcategoryIds(subcategoryIds, scopeGroupId, curCategory.getCategoryId());
 
 		int categoriesCount = subcategoryIds.size() - 1;
-		int itemsCount = ShoppingItemLocalServiceUtil.getCategoriesItemsCount(scopeGroupId, subcategoryIds);
+		int itemsCount = ShoppingItemServiceUtil.getCategoriesItemsCount(scopeGroupId, subcategoryIds);
 
 		row.addText(String.valueOf(categoriesCount), rowURL);
 		row.addText(String.valueOf(itemsCount), rowURL);
@@ -113,5 +113,5 @@ long categoryId = BeanParamUtil.getLong(category, request, "categoryId", Shoppin
 	}
 	%>
 
-	<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" type="approximate" />
+	<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 </aui:form>
