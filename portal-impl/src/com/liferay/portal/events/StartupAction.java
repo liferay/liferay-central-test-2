@@ -166,7 +166,7 @@ public class StartupAction extends SimpleAction {
 
 		JspFactorySwapper.swap();
 
-		// Jericho CachedLoggerProvider Installation
+		// Jericho
 
 		CachedLoggerProvider.install();
 	}

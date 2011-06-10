@@ -32,11 +32,11 @@ import net.htmlparser.jericho.LoggerProvider;
 public class CachedLoggerProvider implements LoggerProvider {
 
 	public static void install() throws Exception {
-		Class loggerFactoryClass = Class.forName(
+		Class<?> clazz = Class.forName(
 			"net.htmlparser.jericho.LoggerFactory");
 
 		Method method = ReflectionUtil.getDeclaredMethod(
-			loggerFactoryClass, "getDefaultLoggerProvider");
+			clazz, "getDefaultLoggerProvider");
 
 		LoggerProvider loggerProvider = (LoggerProvider)method.invoke(null);
 
@@ -46,24 +46,24 @@ public class CachedLoggerProvider implements LoggerProvider {
 		Config.LoggerProvider = cachedLoggerProvider;
 	}
 
-	public CachedLoggerProvider(LoggerProvider wrappedLoggerProvider) {
-		_wrappedLoggerProvider = wrappedLoggerProvider;
+	public CachedLoggerProvider(LoggerProvider loggerProvider) {
+		_loggerProvider = loggerProvider;
 	}
 
 	public Logger getLogger(String name) {
-		Logger logger = _loggerCache.get(name);
+		Logger logger = _loggers.get(name);
 
 		if (logger == null) {
-			logger = _wrappedLoggerProvider.getLogger(name);
-			_loggerCache.put(name, logger);
+			logger = _loggerProvider.getLogger(name);
+
+			_loggers.put(name, logger);
 		}
 
 		return logger;
 	}
 
-	private final Map<String, Logger> _loggerCache =
+	private LoggerProvider _loggerProvider;
+	private Map<String, Logger> _loggers =
 		new ConcurrentHashMap<String, Logger>();
-
-	private final LoggerProvider _wrappedLoggerProvider;
 
 }
