@@ -559,6 +559,14 @@
 		</field>
 		<field name="active" type="boolean" />
 	</model>
+	<model name="com.liferay.portal.model.PortalPreferences">
+		<field name="portalPreferencesId" type="long" />
+		<field name="ownerId" type="long" />
+		<field name="ownerType" type="int" />
+		<field name="preferences" type="String">
+			<hint-collection name="CLOB" />
+		</field>
+	</model>
 	<model name="com.liferay.portal.model.Portlet">
 		<field name="id" type="long" />
 		<field name="companyId" type="long" />

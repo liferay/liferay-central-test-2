@@ -33,6 +33,7 @@ import com.liferay.portal.service.CompanyLocalServiceUtil;
 import com.liferay.portal.service.ShardLocalServiceUtil;
 import com.liferay.portal.service.persistence.ClassNamePersistence;
 import com.liferay.portal.service.persistence.CompanyPersistence;
+import com.liferay.portal.service.persistence.PortalPreferencesPersistence;
 import com.liferay.portal.service.persistence.ReleasePersistence;
 import com.liferay.portal.service.persistence.ResourceActionPersistence;
 import com.liferay.portal.service.persistence.ServiceComponentPersistence;
@@ -256,6 +257,7 @@ public class ShardAdvice {
 			target instanceof CompanyPersistence ||
 			target instanceof CounterFinder ||
 			target instanceof CounterPersistence ||
+			target instanceof PortalPreferencesPersistence ||
 			target instanceof ReleasePersistence ||
 			target instanceof ResourceActionPersistence ||
 			target instanceof ServiceComponentPersistence ||

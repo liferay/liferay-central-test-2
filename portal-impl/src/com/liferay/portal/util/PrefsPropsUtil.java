@@ -19,7 +19,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.service.PortletPreferencesLocalServiceUtil;
+import com.liferay.portal.service.PortalPreferencesLocalServiceUtil;
 import com.liferay.util.ContentUtil;
 
 import javax.portlet.PortletPreferences;
@@ -235,7 +235,7 @@ public class PrefsPropsUtil {
 	}
 
 	public static PortletPreferences getPreferences() throws SystemException {
-		return getPreferences(0);
+		return getPreferences(PortletKeys.PREFS_OWNER_ID_DEFAULT);
 	}
 
 	public static PortletPreferences getPreferences(long companyId)
@@ -243,11 +243,9 @@ public class PrefsPropsUtil {
 
 		long ownerId = companyId;
 		int ownerType = PortletKeys.PREFS_OWNER_TYPE_COMPANY;
-		long plid = PortletKeys.PREFS_PLID_SHARED;
-		String portletId = PortletKeys.LIFERAY_PORTAL;
 
-		return PortletPreferencesLocalServiceUtil.getPreferences(
-			companyId, ownerId, ownerType, plid, portletId);
+		return PortalPreferencesLocalServiceUtil.getPreferences(
+			companyId, ownerId, ownerType);
 	}
 
 	public static short getShort(long companyId, String name)

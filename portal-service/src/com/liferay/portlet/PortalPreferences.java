@@ -23,7 +23,10 @@ public interface PortalPreferences extends Serializable {
 
 	public String getValue(String namespace, String key);
 
-	public String getValue(String namespace, String key, String defaultValue);
+	public String getValue(
+		String namespace, String key, String defaultValue);
+
+	public boolean isSignedIn();
 
 	public String[] getValues(String namespace, String key);
 
@@ -31,6 +34,8 @@ public interface PortalPreferences extends Serializable {
 		String namespace, String key, String[] defaultValue);
 
 	public void resetValues(String namespace);
+
+	public void setSignedIn(boolean signedIn);
 
 	public void setValue(String namespace, String key, String value);
 

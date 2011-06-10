@@ -34,6 +34,10 @@ public interface PortletPreferencesFactory {
 
 	public PortletPreferences fromDefaultXML(String xml) throws SystemException;
 
+	public PortalPreferences fromXML(
+			long companyId, long ownerId, int ownerType, String xml)
+		throws SystemException;
+
 	public PortletPreferences fromXML(
 			long companyId, long ownerId, int ownerType, long plid,
 			String portletId, String xml)
@@ -97,6 +101,8 @@ public interface PortletPreferencesFactory {
 	public PortletPreferences getPreferences(HttpServletRequest request);
 
 	public PreferencesValidator getPreferencesValidator(Portlet portlet);
+
+	public String toXML(PortalPreferences portalPreferences);
 
 	public String toXML(PortletPreferences portletPreferences);
 

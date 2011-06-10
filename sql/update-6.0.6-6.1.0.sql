@@ -287,6 +287,13 @@ update MBMessage set format = 'bbcode';
 alter table MBThread add companyId LONG;
 alter table MBThread add rootMessageUserId LONG;
 
+create table PortalPreferences (
+	portalPreferencesId LONG not null primary key,
+	ownerId LONG,
+	ownerType INTEGER,
+	preferences TEXT null
+);
+
 create table Repository (
 	repositoryId LONG not null primary key,
 	groupId LONG,

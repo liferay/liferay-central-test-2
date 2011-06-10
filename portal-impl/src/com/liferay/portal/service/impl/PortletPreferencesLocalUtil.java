@@ -19,7 +19,7 @@ import com.liferay.portal.kernel.cache.PortalCache;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portlet.PortletPreferencesImpl;
+import com.liferay.portlet.BasePreferencesImpl;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -43,16 +43,17 @@ public class PortletPreferencesLocalUtil {
 		_portalCache.remove(key);
 	}
 
-	protected static Map<String, PortletPreferencesImpl> getPreferencesPool(
-			long ownerId, int ownerType) {
+	protected static Map<String, BasePreferencesImpl>
+		getPortletPreferencesPool(long ownerId, int ownerType) {
+
 		String key = _encodeKey(ownerId, ownerType);
 
-		Map<String, PortletPreferencesImpl> preferencesPool =
-			(Map<String, PortletPreferencesImpl>)_portalCache.get(key);
+		Map<String, BasePreferencesImpl> preferencesPool =
+			(Map<String, BasePreferencesImpl>)_portalCache.get(key);
 
 		if (preferencesPool == null) {
 			preferencesPool =
-				new ConcurrentHashMap<String, PortletPreferencesImpl>();
+				new ConcurrentHashMap<String, BasePreferencesImpl>();
 
 			_portalCache.put(key, preferencesPool);
 		}

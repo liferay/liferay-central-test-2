@@ -673,6 +673,16 @@
 			<transient name="primaryKeyObj" />
 		</attributes>
 	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portal.model.impl.PortalPreferencesModelImpl">
+		<attributes>
+			<id name="portalPreferencesId" />
+			<basic name="ownerId" />
+			<basic name="ownerType" />
+			<basic name="preferences" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
 	<mapped-superclass class="com.liferay.portal.model.impl.PortletModelImpl">
 		<attributes>
 			<id name="id">
@@ -3299,6 +3309,10 @@
 		<attributes>
 			<transient name="rolesArray" />
 		</attributes>
+	</entity>
+	<entity class="com.liferay.portal.model.impl.PortalPreferencesImpl" name="PortalPreferences">
+		<table name="PortalPreferences" />
+		<attributes />
 	</entity>
 	<entity class="com.liferay.portal.model.impl.PortletImpl" name="Portlet">
 		<table name="Portlet" />

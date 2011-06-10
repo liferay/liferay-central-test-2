@@ -144,6 +144,7 @@ public class PersistenceTestSuite extends TestSuite {
 		testSuite.addTestSuite(PermissionPersistenceTest.class);
 		testSuite.addTestSuite(PhonePersistenceTest.class);
 		testSuite.addTestSuite(PluginSettingPersistenceTest.class);
+		testSuite.addTestSuite(PortalPreferencesPersistenceTest.class);
 		testSuite.addTestSuite(PortletItemPersistenceTest.class);
 		testSuite.addTestSuite(PortletPersistenceTest.class);
 		testSuite.addTestSuite(PortletPreferencesPersistenceTest.class);

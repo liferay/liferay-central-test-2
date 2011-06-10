@@ -17,6 +17,7 @@ package com.liferay.portal.upgrade.v6_1_0;
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.upgrade.CamelCaseUpgradePortletPreferences;
 import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.util.PortletKeys;
 
 import java.sql.Connection;
@@ -29,6 +30,32 @@ import java.sql.ResultSet;
  */
 public class UpgradePortletPreferences
 	extends CamelCaseUpgradePortletPreferences {
+
+	protected void addPortalPreferences(
+			long ownerId, int ownerType, String preferences)
+		throws Exception {
+
+		Connection con = null;
+		PreparedStatement ps = null;
+
+		try {
+			con = DataAccess.getConnection();
+
+			ps = con.prepareStatement(
+				"insert into PortalPreferences (portalPreferencesId, " +
+					"ownerId, ownerType, preferences) values (?, ?, ?, ?)");
+
+			ps.setLong(1, increment());
+			ps.setLong(2, ownerId);
+			ps.setInt(3, ownerType);
+			ps.setString(4, preferences);
+
+			ps.executeUpdate();
+		}
+		finally {
+			DataAccess.cleanUp(con, ps);
+		}
+	}
 
 	protected void addPortletPreferences(
 			long ownerId, int ownerType, long plid, String portletId,
@@ -61,6 +88,7 @@ public class UpgradePortletPreferences
 	}
 
 	protected void doUpgrade() throws Exception {
+		updatePortalPreferences();
 		updatePortletPreferences();
 		updatePortletPreferencesOwner();
 	}
@@ -125,6 +153,44 @@ public class UpgradePortletPreferences
 		}
 
 		return 0;
+	}
+
+	protected void updatePortalPreferences() throws Exception {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			con = DataAccess.getConnection();
+
+			StringBundler sb = new StringBundler(4);
+
+			sb.append("select ownerId, ownerType, preferences from ");
+			sb.append("PortletPreferences where portletId = '");
+			sb.append(PortletKeys.LIFERAY_PORTAL);
+			sb.append(StringPool.APOSTROPHE);
+
+			String sql = sb.toString();
+
+			ps = con.prepareStatement(sql);
+
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				long ownerId = rs.getLong("ownerId");
+				int ownerType = rs.getInt("ownerType");
+				String preferences = rs.getString("preferences");
+
+				addPortalPreferences(ownerId, ownerType, preferences);
+			}
+
+			runSQL(
+				"delete from PortletPreferences where portletId = '" +
+					PortletKeys.LIFERAY_PORTAL + "'");
+		}
+		finally {
+			DataAccess.cleanUp(con, ps, rs);
+		}
 	}
 
 	protected void updatePortletPreferencesOwner() throws Exception {

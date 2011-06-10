@@ -1328,6 +1328,13 @@ create table PollsVote (
 	voteDate DATE null
 );
 
+create table PortalPreferences (
+	portalPreferencesId LONG not null primary key,
+	ownerId LONG,
+	ownerType INTEGER,
+	preferences TEXT null
+);
+
 create table Portlet (
 	id_ LONG not null primary key,
 	companyId LONG,

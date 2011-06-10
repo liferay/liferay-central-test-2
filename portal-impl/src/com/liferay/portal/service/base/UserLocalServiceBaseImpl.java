@@ -84,6 +84,7 @@ import com.liferay.portal.service.PhoneService;
 import com.liferay.portal.service.PluginSettingLocalService;
 import com.liferay.portal.service.PluginSettingService;
 import com.liferay.portal.service.PortalLocalService;
+import com.liferay.portal.service.PortalPreferencesLocalService;
 import com.liferay.portal.service.PortalService;
 import com.liferay.portal.service.PortletItemLocalService;
 import com.liferay.portal.service.PortletLocalService;
@@ -164,6 +165,7 @@ import com.liferay.portal.service.persistence.PermissionFinder;
 import com.liferay.portal.service.persistence.PermissionPersistence;
 import com.liferay.portal.service.persistence.PhonePersistence;
 import com.liferay.portal.service.persistence.PluginSettingPersistence;
+import com.liferay.portal.service.persistence.PortalPreferencesPersistence;
 import com.liferay.portal.service.persistence.PortletItemPersistence;
 import com.liferay.portal.service.persistence.PortletPersistence;
 import com.liferay.portal.service.persistence.PortletPreferencesFinder;
@@ -2138,6 +2140,44 @@ public abstract class UserLocalServiceBaseImpl implements UserLocalService,
 	 */
 	public void setPortalService(PortalService portalService) {
 		this.portalService = portalService;
+	}
+
+	/**
+	 * Returns the portal preferences local service.
+	 *
+	 * @return the portal preferences local service
+	 */
+	public PortalPreferencesLocalService getPortalPreferencesLocalService() {
+		return portalPreferencesLocalService;
+	}
+
+	/**
+	 * Sets the portal preferences local service.
+	 *
+	 * @param portalPreferencesLocalService the portal preferences local service
+	 */
+	public void setPortalPreferencesLocalService(
+		PortalPreferencesLocalService portalPreferencesLocalService) {
+		this.portalPreferencesLocalService = portalPreferencesLocalService;
+	}
+
+	/**
+	 * Returns the portal preferences persistence.
+	 *
+	 * @return the portal preferences persistence
+	 */
+	public PortalPreferencesPersistence getPortalPreferencesPersistence() {
+		return portalPreferencesPersistence;
+	}
+
+	/**
+	 * Sets the portal preferences persistence.
+	 *
+	 * @param portalPreferencesPersistence the portal preferences persistence
+	 */
+	public void setPortalPreferencesPersistence(
+		PortalPreferencesPersistence portalPreferencesPersistence) {
+		this.portalPreferencesPersistence = portalPreferencesPersistence;
 	}
 
 	/**
@@ -4558,6 +4598,10 @@ public abstract class UserLocalServiceBaseImpl implements UserLocalService,
 	protected PortalLocalService portalLocalService;
 	@BeanReference(type = PortalService.class)
 	protected PortalService portalService;
+	@BeanReference(type = PortalPreferencesLocalService.class)
+	protected PortalPreferencesLocalService portalPreferencesLocalService;
+	@BeanReference(type = PortalPreferencesPersistence.class)
+	protected PortalPreferencesPersistence portalPreferencesPersistence;
 	@BeanReference(type = PortletLocalService.class)
 	protected PortletLocalService portletLocalService;
 	@BeanReference(type = PortletService.class)

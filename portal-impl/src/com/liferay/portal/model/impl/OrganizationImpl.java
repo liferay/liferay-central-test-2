@@ -36,7 +36,7 @@ import com.liferay.portal.service.AddressLocalServiceUtil;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.LayoutSetLocalServiceUtil;
 import com.liferay.portal.service.OrganizationLocalServiceUtil;
-import com.liferay.portal.service.PortletPreferencesLocalServiceUtil;
+import com.liferay.portal.service.PortalPreferencesLocalServiceUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
@@ -214,11 +214,9 @@ public class OrganizationImpl
 		long companyId = getCompanyId();
 		long ownerId = getOrganizationId();
 		int ownerType = PortletKeys.PREFS_OWNER_TYPE_ORGANIZATION;
-		long plid = PortletKeys.PREFS_PLID_SHARED;
-		String portletId = PortletKeys.LIFERAY_PORTAL;
 
-		return PortletPreferencesLocalServiceUtil.getPreferences(
-			companyId, ownerId, ownerType, plid, portletId);
+		return PortalPreferencesLocalServiceUtil.getPreferences(
+			companyId, ownerId, ownerType);
 	}
 
 	public int getPrivateLayoutsPageCount() {

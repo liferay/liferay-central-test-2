@@ -1218,6 +1218,25 @@
 		</finder>
 	</entity>
 	<entity name="Portal" local-service="true" remote-service="true" />
+	<entity name="PortalPreferences" local-service="true" remote-service="false">
+
+		<!-- PK fields -->
+
+		<column name="portalPreferencesId" type="long" primary="true" />
+
+		<!-- Other fields -->
+
+		<column name="ownerId" type="long" />
+		<column name="ownerType" type="int" />
+		<column name="preferences" type="String" />
+
+		<!-- Finder methods -->
+
+		<finder name="O_O" return-type="PortalPreferences">
+			<finder-column name="ownerId" />
+			<finder-column name="ownerType" />
+		</finder>
+	</entity>
 	<entity name="Portlet" local-service="true" remote-service="true">
 
 		<!-- PK fields -->

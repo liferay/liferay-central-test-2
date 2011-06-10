@@ -14,23 +14,82 @@
 
 package com.liferay.portlet;
 
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.HashCode;
+import com.liferay.portal.kernel.util.HashCodeFactoryUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.service.PortalPreferencesLocalServiceUtil;
 
+import java.io.IOException;
+import java.io.Serializable;
+
+import java.util.Collections;
 import java.util.Map;
+
+import javax.portlet.ReadOnlyException;
+import javax.portlet.ValidatorException;
 
 /**
  * @author Brian Wing Shun Chan
+ * @author Alexander Chow
  */
-public class PortalPreferencesImpl implements PortalPreferences {
+public class PortalPreferencesImpl extends BasePreferencesImpl
+	implements Cloneable, PortalPreferences, Serializable {
+
+	public PortalPreferencesImpl() {
+		this(0, 0, 0, Collections.<String, Preference>emptyMap(), false);
+	}
 
 	public PortalPreferencesImpl(
-		PortletPreferencesImpl preferences, boolean signedIn) {
+		long companyId, long ownerId, int ownerType,
+		Map<String, Preference> preferences, boolean signedIn) {
 
-		_preferences = preferences;
+		super(companyId, ownerId, ownerType, preferences);
+
 		_signedIn = signedIn;
+	}
+
+	public Object clone() {
+		return new PortalPreferencesImpl(
+			getCompanyId(), getOwnerId(), getOwnerType(),
+			getOriginalPreferences(), isSignedIn());
+	}
+
+	public boolean equals(Object obj) {
+		PortalPreferencesImpl portalPreferences = (PortalPreferencesImpl)obj;
+
+		if (this == portalPreferences) {
+			return true;
+		}
+
+		if ((getCompanyId() == portalPreferences.getCompanyId()) &&
+			(getOwnerId() == portalPreferences.getOwnerId()) &&
+			(getOwnerType() == portalPreferences.getOwnerType()) &&
+			(getMap().equals(portalPreferences.getMap()))) {
+
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	public int hashCode() {
+		HashCode hashCode = HashCodeFactoryUtil.getHashCode();
+
+		hashCode.append(getCompanyId());
+		hashCode.append(getOwnerId());
+		hashCode.append(getOwnerType());
+		hashCode.append(getPreferences());
+
+		return hashCode.toHashCode();
+	}
+
+	public boolean isSignedIn() {
+		return _signedIn;
 	}
 
 	public String getValue(String namespace, String key) {
@@ -40,7 +99,7 @@ public class PortalPreferencesImpl implements PortalPreferences {
 	public String getValue(String namespace, String key, String defaultValue) {
 		key = _encodeKey(namespace, key);
 
-		return _preferences.getValue(key, defaultValue);
+		return super.getValue(key, defaultValue);
 	}
 
 	public String[] getValues(String namespace, String key) {
@@ -52,28 +111,38 @@ public class PortalPreferencesImpl implements PortalPreferences {
 
 		key = _encodeKey(namespace, key);
 
-		return _preferences.getValues(key, defaultValue);
+		return super.getValues(key, defaultValue);
+	}
+
+	public void reset(String key) throws ReadOnlyException {
+		if (isReadOnly(key)) {
+			throw new ReadOnlyException(key);
+		}
+
+		getModifiedPreferences().remove(key);
 	}
 
 	public void resetValues(String namespace) {
 		try {
-			Map<String, Preference> preferences = _preferences.getPreferences();
+			Map<String, Preference> preferences = getPreferences();
 
 			for (Map.Entry<String, Preference> entry : preferences.entrySet()) {
 				String key = entry.getKey();
 
-				if (key.startsWith(namespace) &&
-					!_preferences.isReadOnly(key)) {
-
-					_preferences.reset(key);
+				if (key.startsWith(namespace) && !isReadOnly(key)) {
+					reset(key);
 				}
 			}
 
-			_preferences.store();
+			store();
 		}
 		catch (Exception e) {
 			_log.error(e, e);
 		}
+	}
+
+	public void setSignedIn(boolean signedIn) {
+		_signedIn = signedIn;
 	}
 
 	public void setValue(String namespace, String key, String value) {
@@ -85,14 +154,14 @@ public class PortalPreferencesImpl implements PortalPreferences {
 
 		try {
 			if (value != null) {
-				_preferences.setValue(key, value);
+				super.setValue(key, value);
 			}
 			else {
-				_preferences.reset(key);
+				reset(key);
 			}
 
 			if (_signedIn) {
-				_preferences.store();
+				store();
 			}
 		}
 		catch (Exception e) {
@@ -109,14 +178,14 @@ public class PortalPreferencesImpl implements PortalPreferences {
 
 		try {
 			if (values != null) {
-				_preferences.setValues(key, values);
+				super.setValues(key, values);
 			}
 			else {
-				_preferences.reset(key);
+				reset(key);
 			}
 
 			if (_signedIn) {
-				_preferences.store();
+				store();
 			}
 		}
 		catch (Exception e) {
@@ -124,15 +193,29 @@ public class PortalPreferencesImpl implements PortalPreferences {
 		}
 	}
 
+	public void store() throws IOException, ValidatorException {
+		try {
+			PortalPreferencesLocalServiceUtil.updatePreferences(
+				getOwnerId(), getOwnerType(), this);
+		}
+		catch (SystemException se) {
+			throw new IOException(se.getMessage());
+		}
+	}
+
 	private String _encodeKey(String namespace, String key) {
-		return namespace + StringPool.POUND + key;
+		if (Validator.isNull(namespace)) {
+			return key;
+		}
+		else {
+			return namespace + StringPool.POUND + key;
+		}
 	}
 
 	private static final String _RANDOM_KEY = "r";
 
 	private static Log _log = LogFactoryUtil.getLog(PortalPreferences.class);
 
-	private PortletPreferencesImpl _preferences;
 	private boolean _signedIn;
 
 }

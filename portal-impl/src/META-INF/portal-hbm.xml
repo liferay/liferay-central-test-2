@@ -37,6 +37,7 @@
 	<import class="com.liferay.portal.model.Phone" />
 	<import class="com.liferay.portal.model.PluginSetting" />
 	<import class="com.liferay.portal.model.Portal" />
+	<import class="com.liferay.portal.model.PortalPreferences" />
 	<import class="com.liferay.portal.model.Portlet" />
 	<import class="com.liferay.portal.model.PortletItem" />
 	<import class="com.liferay.portal.model.PortletPreferences" />
@@ -649,6 +650,15 @@
 		<property name="pluginType" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="roles" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="active" column="active_" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+	</class>
+	<class name="com.liferay.portal.model.impl.PortalPreferencesImpl" table="PortalPreferences">
+		<cache usage="read-write" />
+		<id name="portalPreferencesId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="ownerId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="ownerType" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="preferences" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>
 	<class name="com.liferay.portal.model.impl.PortletImpl" table="Portlet">
 		<cache usage="read-write" />

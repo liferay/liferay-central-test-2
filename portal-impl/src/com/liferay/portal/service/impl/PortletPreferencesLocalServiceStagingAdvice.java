@@ -25,7 +25,6 @@ import com.liferay.portal.service.LayoutRevisionLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextThreadLocal;
 import com.liferay.portal.service.persistence.LayoutRevisionUtil;
-import com.liferay.portal.util.PortletKeys;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -73,9 +72,8 @@ public class PortletPreferencesLocalServiceStagingAdvice
 		Object[] arguments = methodInvocation.getArguments();
 
 		long plid = (Long)arguments[2];
-		String portletId = (String)arguments[3];
 
-		if (portletId.equals(PortletKeys.LIFERAY_PORTAL) || (plid <= 0)) {
+		if (plid <= 0) {
 			return methodInvocation.proceed();
 		}
 
@@ -100,21 +98,18 @@ public class PortletPreferencesLocalServiceStagingAdvice
 		Object[] arguments = methodInvocation.getArguments();
 
 		long plid = 0;
-		String portletId = null;
 
 		if (arguments.length == 1) {
 			PortletPreferencesIds portletPreferencesIds =
 				(PortletPreferencesIds)arguments[0];
 
 			plid = portletPreferencesIds.getPlid();
-			portletId = portletPreferencesIds.getPortletId();
 		}
 		else {
 			plid = (Long)arguments[3];
-			portletId = (String)arguments[4];
 		}
 
-		if (portletId.equals(PortletKeys.LIFERAY_PORTAL) || (plid <= 0)) {
+		if (plid <= 0) {
 			return methodInvocation.proceed();
 		}
 
@@ -149,9 +144,8 @@ public class PortletPreferencesLocalServiceStagingAdvice
 		Object[] arguments = methodInvocation.getArguments();
 
 		long plid = (Long)arguments[2];
-		String portletId = (String)arguments[3];
 
-		if (portletId.equals(PortletKeys.LIFERAY_PORTAL) || (plid <= 0)) {
+		if (plid <= 0) {
 			return methodInvocation.proceed();
 		}
 

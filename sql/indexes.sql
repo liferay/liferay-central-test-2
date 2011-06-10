@@ -492,6 +492,8 @@ create index IX_D5DF7B54 on PollsVote (choiceId);
 create index IX_12112599 on PollsVote (questionId);
 create unique index IX_1BBFD4D3 on PollsVote (questionId, userId);
 
+create index IX_D1F795F1 on PortalPreferences (ownerId, ownerType);
+
 create index IX_80CC9508 on Portlet (companyId);
 create unique index IX_12B5E51D on Portlet (companyId, portletId);
 

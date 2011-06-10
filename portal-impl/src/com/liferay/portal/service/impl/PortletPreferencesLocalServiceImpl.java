@@ -30,6 +30,7 @@ import com.liferay.portal.model.PortletConstants;
 import com.liferay.portal.model.PortletPreferences;
 import com.liferay.portal.model.PortletPreferencesIds;
 import com.liferay.portal.service.base.PortletPreferencesLocalServiceBaseImpl;
+import com.liferay.portlet.BasePreferencesImpl;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.portlet.PortletPreferencesImpl;
 import com.liferay.portlet.PortletPreferencesThreadLocal;
@@ -289,14 +290,14 @@ public class PortletPreferencesLocalServiceImpl
 			String portletId, String defaultPreferences)
 		throws SystemException {
 
-		Map<String, PortletPreferencesImpl> preferencesPool =
-			PortletPreferencesLocalUtil.getPreferencesPool(
+		Map<String, BasePreferencesImpl> preferencesPool =
+			PortletPreferencesLocalUtil.getPortletPreferencesPool(
 				ownerId, ownerType);
 
 		String key = encodeKey(plid, portletId);
 
-		PortletPreferencesImpl portletPreferencesImpl = preferencesPool.get(
-			key);
+		PortletPreferencesImpl portletPreferencesImpl =
+			(PortletPreferencesImpl)preferencesPool.get(key);
 
 		if (portletPreferencesImpl == null) {
 			Portlet portlet = portletLocalService.getPortletById(

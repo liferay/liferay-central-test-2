@@ -90,6 +90,8 @@
 	<bean id="com.liferay.portal.service.persistence.PluginSettingPersistence" class="com.liferay.portal.service.persistence.PluginSettingPersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portal.service.PortalLocalService" class="com.liferay.portal.service.impl.PortalLocalServiceImpl" />
 	<bean id="com.liferay.portal.service.PortalService" class="com.liferay.portal.service.impl.PortalServiceImpl" />
+	<bean id="com.liferay.portal.service.PortalPreferencesLocalService" class="com.liferay.portal.service.impl.PortalPreferencesLocalServiceImpl" />
+	<bean id="com.liferay.portal.service.persistence.PortalPreferencesPersistence" class="com.liferay.portal.service.persistence.PortalPreferencesPersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portal.service.PortletLocalService" class="com.liferay.portal.service.impl.PortletLocalServiceImpl" />
 	<bean id="com.liferay.portal.service.PortletService" class="com.liferay.portal.service.impl.PortletServiceImpl" />
 	<bean id="com.liferay.portal.service.persistence.PortletPersistence" class="com.liferay.portal.service.persistence.PortletPersistenceImpl" parent="basePersistence" />
