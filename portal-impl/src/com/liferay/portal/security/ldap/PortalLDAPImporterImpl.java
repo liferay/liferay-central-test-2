@@ -62,9 +62,11 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
+import java.util.Set;
 
 import javax.naming.Binding;
 import javax.naming.NameNotFoundException;
@@ -795,6 +797,9 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 		if (!LDAPSettingsUtil.isExportEnabled(companyId) ||
 			!LDAPSettingsUtil.isExportGroupEnabled(companyId)) {
 
+			newUserGroupIds = addPortalUserGroups(
+				user.getUserId(), newUserGroupIds);
+
 			UserGroupLocalServiceUtil.setUserUserGroups(
 				user.getUserId(),
 				ArrayUtil.toArray(
@@ -807,6 +812,24 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 				UserLocalServiceUtil.addUserGroupUsers(newUserGroupId, userIds);
 			}
 		}
+	}
+
+	protected ArrayList<Long> addPortalUserGroups (
+			long userId, List<Long> newUserGroupIds)
+		throws Exception {
+
+		Set<Long> allUserGroups = new HashSet<Long>(newUserGroupIds);
+
+		List<UserGroup> portalUserGroups = 
+			UserGroupLocalServiceUtil.getUserUserGroups(userId);
+
+		for (UserGroup userGroup : portalUserGroups) {
+			if (!userGroup.isLdap()) {
+				allUserGroups.add(userGroup.getUserGroupId());
+			}
+		}
+
+		return new ArrayList<Long>(allUserGroups);
 	}
 
 	protected User importUser(
