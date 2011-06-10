@@ -838,7 +838,7 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 		}
 		else if (portletId.equals(PortletKeys.JOURNAL)) {
 			long groupId = GetterUtil.getLong(document.get(Field.GROUP_ID));
-			String articleId = document.get(Field.ENTRY_CLASS_PK);
+			String articleId = document.get("articleId");
 			//double version = GetterUtil.getDouble(document.get("version"));
 
 			long articleResourcePrimKey =

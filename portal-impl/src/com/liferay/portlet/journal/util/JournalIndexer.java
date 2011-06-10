@@ -181,6 +181,7 @@ public class JournalIndexer extends BaseIndexer {
 		document.addKeyword(Field.TYPE, article.getType());
 		document.addKeyword(Field.VERSION, article.getVersion());
 
+		document.addKeyword("articleId", article.getArticleId());
 		document.addDate("displayDate", article.getDisplayDate());
 		document.addKeyword("layoutUuid", article.getLayoutUuid());
 		document.addKeyword("structureId", article.getStructureId());
@@ -242,9 +243,9 @@ public class JournalIndexer extends BaseIndexer {
 				document.get(locale, Field.CONTENT), 200);
 		}
 
-		String groupId = document.get("groupId");
-		String articleId = document.get(Field.ENTRY_CLASS_PK);
-		String version = document.get("version");
+		String groupId = document.get(Field.GROUP_ID);
+		String articleId = document.get("articleId");
+		String version = document.get(Field.VERSION);
 
 		portletURL.setParameter("struts_action", "/journal/edit_article");
 		portletURL.setParameter("groupId", groupId);

@@ -71,14 +71,7 @@ portletURL.setParameter("typeSelection", typeSelection);
 
 			ResultRow row = new ResultRow(doc, i, i);
 
-			long entryId = 0;
-
-			if (typeSelection.equals(JournalArticle.class.getName())) {
-				entryId = GetterUtil.getLong(doc.get(Field.ROOT_ENTRY_CLASS_PK));
-			}
-			else {
-				entryId = GetterUtil.getLong(doc.get(Field.ENTRY_CLASS_PK));
-			}
+			long entryId = GetterUtil.getLong(doc.get(Field.ENTRY_CLASS_PK));
 
 			AssetEntry entry = AssetEntryLocalServiceUtil.getEntry(typeSelection, entryId);
 

@@ -33,8 +33,8 @@ if (Validator.isNull(snippet)) {
 
 content = StringUtil.highlight(content, queryTerms);
 
-String articleId = doc.get(Field.ENTRY_CLASS_PK);
 long articleGroupId = GetterUtil.getLong(doc.get(Field.GROUP_ID));
+String articleId = doc.get("articleId");
 
 List hitLayoutIds = JournalContentSearchLocalServiceUtil.getLayoutIds(layout.getGroupId(), layout.isPrivateLayout(), articleId);
 %>

@@ -341,7 +341,7 @@ public class JournalUtil {
 
 		for (com.liferay.portal.kernel.search.Document document : documents) {
 			long groupId = GetterUtil.getLong(document.get(Field.GROUP_ID));
-			String articleId = document.get(Field.ENTRY_CLASS_PK);
+			String articleId = document.get("articleId");
 
 			try {
 				JournalArticle article =
