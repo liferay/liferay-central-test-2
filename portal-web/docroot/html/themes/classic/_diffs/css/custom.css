@@ -321,6 +321,15 @@ body #banner .logo a {
 	display: inline;
 }
 
+.opens-new-window-accessible {
+	background: url(../images/common/open_window.png) no-repeat 3px 50%;
+	display: inline-block;
+	height: 20px;
+	overflow: hidden;
+	text-indent: -9999px;
+	width: 20px;
+}
+
 /* ---------- Extras ---------- */
 
 .portlet-borderless-bar {
