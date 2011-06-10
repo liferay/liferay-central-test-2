@@ -41,10 +41,10 @@ public class UserGroupServiceWrapper implements UserGroupService {
 	}
 
 	public com.liferay.portal.model.UserGroup addUserGroup(
-		java.lang.String name, java.lang.String description)
+		java.lang.String name, java.lang.String description, boolean ldap)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return _userGroupService.addUserGroup(name, description);
+		return _userGroupService.addUserGroup(name, description, ldap);
 	}
 
 	public void deleteUserGroup(long userGroupId)

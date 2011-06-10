@@ -89,11 +89,11 @@ public class UserGroupServiceSoap {
 	}
 
 	public static com.liferay.portal.model.UserGroupSoap addUserGroup(
-		java.lang.String name, java.lang.String description)
+		java.lang.String name, java.lang.String description, boolean ldap)
 		throws RemoteException {
 		try {
 			com.liferay.portal.model.UserGroup returnValue = UserGroupServiceUtil.addUserGroup(name,
-					description);
+					description, ldap);
 
 			return com.liferay.portal.model.UserGroupSoap.toSoapModel(returnValue);
 		}
