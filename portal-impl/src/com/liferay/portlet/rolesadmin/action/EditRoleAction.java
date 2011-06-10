@@ -28,7 +28,6 @@ import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.RoleServiceUtil;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portlet.rolesadmin.action.ActionUtil;
 
 import java.util.Locale;
 import java.util.Map;

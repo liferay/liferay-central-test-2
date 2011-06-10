@@ -26,7 +26,6 @@ import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.PasswordPolicyServiceUtil;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portlet.passwordpoliciesadmin.action.ActionUtil;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
