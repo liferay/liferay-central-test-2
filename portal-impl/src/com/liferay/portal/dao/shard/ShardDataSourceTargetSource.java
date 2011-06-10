@@ -14,6 +14,8 @@
 
 package com.liferay.portal.dao.shard;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.util.PropsValues;
 
 import java.util.Map;
@@ -26,6 +28,10 @@ import org.springframework.aop.TargetSource;
  * @author Michael Young
  */
 public class ShardDataSourceTargetSource implements TargetSource {
+
+	public String[] getAvailableShardNames() {
+		return _availableShardNames;
+	}
 
 	public DataSource getDataSource() {
 		return _dataSource.get();
@@ -56,6 +62,14 @@ public class ShardDataSourceTargetSource implements TargetSource {
 
 	public void setDataSources(Map<String, DataSource> dataSources) {
 		_dataSources = dataSources;
+
+		_availableShardNames = _dataSources.keySet().toArray(new String[0]);
+
+		if (_log.isInfoEnabled()) {
+			_log.info(
+				"Sharding configured with " + _availableShardNames.length +
+					" data sources");
+		}
 	}
 
 	private static ThreadLocal<DataSource> _dataSource =
@@ -67,6 +81,10 @@ public class ShardDataSourceTargetSource implements TargetSource {
 
 	};
 
+	private static Log _log = LogFactoryUtil.getLog(
+		ShardDataSourceTargetSource.class);
+
+	private static String[] _availableShardNames;
 	private static Map<String, DataSource> _dataSources;
 
 }

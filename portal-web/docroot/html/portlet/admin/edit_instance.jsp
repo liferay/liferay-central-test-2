@@ -80,7 +80,7 @@ catch (Exception e) {
 					<aui:select name="shardName">
 
 						<%
-						for (String shardName : PropsValues.SHARD_AVAILABLE_NAMES) {
+						for (String shardName : ShardUtil.getAvailableShardNames()) {
 						%>
 
 							<aui:option label="<%= shardName %>" selected="<%= shardName.equals(PropsValues.SHARD_DEFAULT_NAME) %>" />

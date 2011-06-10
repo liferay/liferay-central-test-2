@@ -21,6 +21,18 @@ import javax.sql.DataSource;
  */
 public class ShardUtil {
 
+	public static String[] getAvailableShardNames() {
+		if (_shard != null) {
+			String[] availableShardNames = _shard.getAvailableShardNames();
+
+			if (availableShardNames != null) {
+				return availableShardNames;
+			}
+		}
+
+		return _DEFAULT_SHARD_ARRAY;
+	}
+
 	public static String getCurrentShardName() {
 		if (_shard != null) {
 			return _shard.getCurrentShardName();
@@ -32,6 +44,14 @@ public class ShardUtil {
 	public static DataSource getDataSource() {
 		if (_shard != null) {
 			return _shard.getDataSource();
+		}
+
+		return null;
+	}
+
+	public static String getDefaultShardName() {
+		if (_shard != null) {
+			return _shard.getDefaultShardName();
 		}
 
 		return null;
@@ -72,5 +92,7 @@ public class ShardUtil {
 	}
 
 	private static Shard _shard;
+
+	private static final String[] _DEFAULT_SHARD_ARRAY = new String[0];
 
 }

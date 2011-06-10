@@ -17,6 +17,7 @@ package com.liferay.portal.dao.shard;
 import com.liferay.counter.service.persistence.CounterFinder;
 import com.liferay.counter.service.persistence.CounterPersistence;
 import com.liferay.portal.NoSuchCompanyException;
+import com.liferay.portal.kernel.dao.shard.ShardUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
@@ -199,7 +200,7 @@ public class ShardAdvice {
 						_getSignature(proceedingJoinPoint));
 			}
 
-			for (String shardName : PropsValues.SHARD_AVAILABLE_NAMES) {
+			for (String shardName : ShardUtil.getAvailableShardNames()) {
 				_shardDataSourceTargetSource.setDataSource(shardName);
 				_shardSessionFactoryTargetSource.setSessionFactory(shardName);
 
@@ -228,7 +229,7 @@ public class ShardAdvice {
 					_getSignature(proceedingJoinPoint));
 		}
 
-		for (String shardName : PropsValues.SHARD_AVAILABLE_NAMES) {
+		for (String shardName : ShardUtil.getAvailableShardNames()) {
 			pushCompanyService(shardName);
 
 			try {

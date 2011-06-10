@@ -14,8 +14,8 @@
 
 package com.liferay.portal.dao.shard;
 
+import com.liferay.portal.kernel.dao.shard.ShardUtil;
 import com.liferay.portal.util.PortalInstances;
-import com.liferay.portal.util.PropsValues;
 
 import java.util.Map;
 
@@ -28,13 +28,15 @@ public class RoundRobinShardSelector implements ShardSelector {
 		String scope, String shardName, Map<String, String> params) {
 
 		if (scope.equals(ShardSelector.COMPANY_SCOPE)) {
-			int instances = PortalInstances.getCompanyIds().length;
-			int shards = PropsValues.SHARD_AVAILABLE_NAMES.length;
+			String[] availableShardNames = ShardUtil.getAvailableShardNames();
 
-			return PropsValues.SHARD_AVAILABLE_NAMES[instances % shards];
+			int instances = PortalInstances.getCompanyIds().length;
+			int shards = availableShardNames.length;
+
+			return availableShardNames[instances % shards];
 		}
 		else {
-			return PropsValues.SHARD_DEFAULT_NAME;
+			return ShardUtil.getDefaultShardName();
 		}
 	}
 

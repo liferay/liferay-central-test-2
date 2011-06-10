@@ -15,6 +15,8 @@
 package com.liferay.portal.dao.shard;
 
 import com.liferay.portal.kernel.dao.shard.Shard;
+import com.liferay.portal.kernel.util.InfrastructureUtil;
+import com.liferay.portal.util.PropsValues;
 
 import javax.sql.DataSource;
 
@@ -23,12 +25,28 @@ import javax.sql.DataSource;
  */
 public class ShardImpl implements Shard {
 
+	public String[] getAvailableShardNames() {
+		ShardDataSourceTargetSource shardDataSourceTargetSource =
+			(ShardDataSourceTargetSource)
+				InfrastructureUtil.getShardDataSourceTargetSource();
+
+		if (shardDataSourceTargetSource != null) {
+			return shardDataSourceTargetSource.getAvailableShardNames();
+		}
+
+		return null;
+	}
+
 	public String getCurrentShardName() {
 		return _shardAdvice.getCurrentShardName();
 	}
 
 	public DataSource getDataSource() {
 		return _shardAdvice.getDataSource();
+	}
+
+	public String getDefaultShardName() {
+		return PropsValues.SHARD_DEFAULT_NAME;
 	}
 
 	public boolean isEnabled() {

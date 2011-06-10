@@ -23,6 +23,7 @@
 <%@ page import="com.liferay.portal.captcha.recaptcha.ReCaptchaImpl" %>
 <%@ page import="com.liferay.portal.convert.ConvertProcess" %>
 <%@ page import="com.liferay.portal.dao.shard.ManualShardSelector" %>
+<%@ page import="com.liferay.portal.kernel.dao.shard.ShardUtil" %>
 <%@ page import="com.liferay.portal.kernel.plugin.PluginPackage" %>
 <%@ page import="com.liferay.portal.kernel.scripting.ScriptingUtil" %>
 <%@ page import="com.liferay.portal.kernel.util.InstancePool" %>
@@ -57,7 +58,7 @@
 <%
 boolean showShardSelector = false;
 
-if (PropsValues.SHARD_SELECTOR.equals(ManualShardSelector.class.getName()) && PropsValues.SHARD_AVAILABLE_NAMES.length > 1) {
+if (PropsValues.SHARD_SELECTOR.equals(ManualShardSelector.class.getName()) && ShardUtil.getAvailableShardNames().length > 1) {
 	showShardSelector = true;
 }
 %>

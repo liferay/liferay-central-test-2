@@ -1176,8 +1176,6 @@ public class PropsValues {
 
 	public static final boolean SESSION_TRACKER_PERSISTENCE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.SESSION_TRACKER_PERSISTENCE_ENABLED));
 
-	public static final String[] SHARD_AVAILABLE_NAMES = PropsUtil.getArray(PropsKeys.SHARD_AVAILABLE_NAMES);
-
 	public static final String SHARD_DEFAULT_NAME = PropsUtil.get(PropsKeys.SHARD_DEFAULT_NAME);
 
 	public static final String SHARD_SELECTOR = PropsUtil.get(PropsKeys.SHARD_SELECTOR);
