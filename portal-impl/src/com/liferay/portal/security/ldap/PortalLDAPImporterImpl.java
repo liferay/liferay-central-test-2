@@ -477,6 +477,22 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 			ldapUser.isSendEmail(), ldapUser.getServiceContext());
 	}
 
+	protected void addUserGroupsNotAddedByLDAPImport(
+			long userId, List<Long> userGroupIds)
+		throws Exception {
+
+		List<UserGroup> userGroups =
+			UserGroupLocalServiceUtil.getUserUserGroups(userId);
+
+		for (UserGroup userGroup : userGroups) {
+			if (!userGroupIds.contains(userGroup.getUserGroupId()) &&
+				!userGroup.isAddedByLDAPImport()) {
+
+				userGroupIds.add(userGroup.getUserGroupId());
+			}
+		}
+	}
+
 	protected String escapeValue(String value) {
 		return StringUtil.replace(value, "\\,", "\\\\,");
 	}
@@ -795,6 +811,9 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 		if (!LDAPSettingsUtil.isExportEnabled(companyId) ||
 			!LDAPSettingsUtil.isExportGroupEnabled(companyId)) {
 
+			addUserGroupsNotAddedByLDAPImport(
+				user.getUserId(), newUserGroupIds);
+
 			UserGroupLocalServiceUtil.setUserUserGroups(
 				user.getUserId(),
 				ArrayUtil.toArray(
@@ -891,6 +910,8 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 			long defaultUserId = UserLocalServiceUtil.getDefaultUserId(
 				companyId);
 
+			LDAPUserGroupTransactionThreadLocal.setOriginatesFromLDAP(true);
+
 			try {
 				userGroup = UserGroupLocalServiceUtil.addUserGroup(
 					defaultUserId, companyId, ldapGroup.getGroupName(),
@@ -906,6 +927,10 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 				if (_log.isDebugEnabled()) {
 					_log.debug(e, e);
 				}
+			}
+			finally {
+				LDAPUserGroupTransactionThreadLocal.setOriginatesFromLDAP(
+					false);
 			}
 		}
 

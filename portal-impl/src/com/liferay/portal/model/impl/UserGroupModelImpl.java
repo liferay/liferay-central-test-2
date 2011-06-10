@@ -64,9 +64,9 @@ public class UserGroupModelImpl extends BaseModelImpl<UserGroup>
 			{ "parentUserGroupId", Types.BIGINT },
 			{ "name", Types.VARCHAR },
 			{ "description", Types.VARCHAR },
-			{ "ldap", Types.BOOLEAN }
+			{ "addedByLDAPImport", Types.BOOLEAN }
 		};
-	public static final String TABLE_SQL_CREATE = "create table UserGroup (userGroupId LONG not null primary key,companyId LONG,parentUserGroupId LONG,name VARCHAR(75) null,description STRING null,ldap BOOLEAN)";
+	public static final String TABLE_SQL_CREATE = "create table UserGroup (userGroupId LONG not null primary key,companyId LONG,parentUserGroupId LONG,name VARCHAR(75) null,description STRING null,addedByLDAPImport BOOLEAN)";
 	public static final String TABLE_SQL_DROP = "drop table UserGroup";
 	public static final String ORDER_BY_JPQL = " ORDER BY userGroup.name ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY UserGroup.name ASC";
@@ -94,7 +94,7 @@ public class UserGroupModelImpl extends BaseModelImpl<UserGroup>
 		model.setParentUserGroupId(soapModel.getParentUserGroupId());
 		model.setName(soapModel.getName());
 		model.setDescription(soapModel.getDescription());
-		model.setLdap(soapModel.getLdap());
+		model.setAddedByLDAPImport(soapModel.getAddedByLDAPImport());
 
 		return model;
 	}
@@ -231,16 +231,16 @@ public class UserGroupModelImpl extends BaseModelImpl<UserGroup>
 	}
 
 	@JSON
-	public boolean getLdap() {
-		return _ldap;
+	public boolean getAddedByLDAPImport() {
+		return _addedByLDAPImport;
 	}
 
-	public boolean isLdap() {
-		return _ldap;
+	public boolean isAddedByLDAPImport() {
+		return _addedByLDAPImport;
 	}
 
-	public void setLdap(boolean ldap) {
-		_ldap = ldap;
+	public void setAddedByLDAPImport(boolean addedByLDAPImport) {
+		_addedByLDAPImport = addedByLDAPImport;
 	}
 
 	public UserGroup toEscapedModel() {
@@ -274,7 +274,7 @@ public class UserGroupModelImpl extends BaseModelImpl<UserGroup>
 		userGroupImpl.setParentUserGroupId(getParentUserGroupId());
 		userGroupImpl.setName(getName());
 		userGroupImpl.setDescription(getDescription());
-		userGroupImpl.setLdap(getLdap());
+		userGroupImpl.setAddedByLDAPImport(getAddedByLDAPImport());
 
 		userGroupImpl.resetOriginalValues();
 
@@ -344,8 +344,8 @@ public class UserGroupModelImpl extends BaseModelImpl<UserGroup>
 		sb.append(getName());
 		sb.append(", description=");
 		sb.append(getDescription());
-		sb.append(", ldap=");
-		sb.append(getLdap());
+		sb.append(", addedByLDAPImport=");
+		sb.append(getAddedByLDAPImport());
 		sb.append("}");
 
 		return sb.toString();
@@ -379,8 +379,8 @@ public class UserGroupModelImpl extends BaseModelImpl<UserGroup>
 		sb.append(getDescription());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>ldap</column-name><column-value><![CDATA[");
-		sb.append(getLdap());
+			"<column><column-name>addedByLDAPImport</column-name><column-value><![CDATA[");
+		sb.append(getAddedByLDAPImport());
 		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
@@ -396,6 +396,6 @@ public class UserGroupModelImpl extends BaseModelImpl<UserGroup>
 	private String _name;
 	private String _originalName;
 	private String _description;
-	private boolean _ldap;
+	private boolean _addedByLDAPImport;
 	private transient ExpandoBridge _expandoBridge;
 }

@@ -34,6 +34,7 @@ import com.liferay.portal.model.Team;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.UserGroup;
 import com.liferay.portal.model.UserGroupConstants;
+import com.liferay.portal.security.ldap.LDAPUserGroupTransactionThreadLocal;
 import com.liferay.portal.security.permission.PermissionCacheUtil;
 import com.liferay.portal.service.base.UserGroupLocalServiceBaseImpl;
 import com.liferay.portal.util.PropsValues;
@@ -83,6 +84,8 @@ public class UserGroupLocalServiceImpl extends UserGroupLocalServiceBaseImpl {
 			UserGroupConstants.DEFAULT_PARENT_USER_GROUP_ID);
 		userGroup.setName(name);
 		userGroup.setDescription(description);
+		userGroup.setAddedByLDAPImport(
+			LDAPUserGroupTransactionThreadLocal.isOriginatesFromLDAP());
 
 		userGroupPersistence.update(userGroup, false);
 

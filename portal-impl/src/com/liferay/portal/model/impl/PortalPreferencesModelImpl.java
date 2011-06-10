@@ -56,9 +56,9 @@ public class PortalPreferencesModelImpl extends BaseModelImpl<PortalPreferences>
 			{ "portalPreferencesId", Types.BIGINT },
 			{ "ownerId", Types.BIGINT },
 			{ "ownerType", Types.INTEGER },
-			{ "preferences", Types.VARCHAR }
+			{ "preferences", Types.CLOB }
 		};
-	public static final String TABLE_SQL_CREATE = "create table PortalPreferences (portalPreferencesId LONG not null primary key,ownerId LONG,ownerType INTEGER,preferences VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table PortalPreferences (portalPreferencesId LONG not null primary key,ownerId LONG,ownerType INTEGER,preferences TEXT null)";
 	public static final String TABLE_SQL_DROP = "drop table PortalPreferences";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
