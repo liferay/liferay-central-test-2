@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.util.PropsValues;
 
 import java.util.Map;
+import java.util.Set;
 
 import javax.sql.DataSource;
 
@@ -63,7 +64,10 @@ public class ShardDataSourceTargetSource implements TargetSource {
 	public void setDataSources(Map<String, DataSource> dataSources) {
 		_dataSources = dataSources;
 
-		_availableShardNames = _dataSources.keySet().toArray(new String[0]);
+		Set<String> shardNames = _dataSources.keySet();
+
+		_availableShardNames = shardNames.toArray(
+			new String[shardNames.size()]);
 
 		if (_log.isInfoEnabled()) {
 			_log.info(

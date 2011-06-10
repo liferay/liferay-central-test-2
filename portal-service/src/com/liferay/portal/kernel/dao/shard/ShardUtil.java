@@ -91,8 +91,8 @@ public class ShardUtil {
 		_shard = shard;
 	}
 
-	private static Shard _shard;
-
 	private static final String[] _DEFAULT_SHARD_ARRAY = new String[0];
+
+	private static Shard _shard;
 
 }
