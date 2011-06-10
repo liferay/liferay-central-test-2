@@ -78,9 +78,9 @@ Map<String, String> hints = ModelHintsUtil.getHints(model, field);
 				fieldParam = field;
 			}
 
-			Calendar cal = null;
-
 			boolean checkDefaultDelta = false;
+
+			Calendar cal = null;
 
 			if (defaultValue != null) {
 				cal = (Calendar)defaultValue;
