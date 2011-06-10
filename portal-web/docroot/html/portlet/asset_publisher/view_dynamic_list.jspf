@@ -94,12 +94,29 @@ else if (!groupByClass) {
 		assetEntryQuery.setClassNameIds(classNameIds);
 	}
 
+	boolean filterByCategories = false;
+
+	if ((assetEntryQuery.getAllCategoryIds().length > 0) || (assetEntryQuery.getAnyCategoryIds().length > 0)) {
+		filterByCategories = true;
+	}
+
 	total = AssetEntryServiceUtil.getEntriesCount(assetEntryQuery);
 
-	searchContainer.setTotal(total);
+	boolean hasViewableCategories = false;
+
+	if ((assetEntryQuery.getAllCategoryIds().length > 0) || (assetEntryQuery.getAnyCategoryIds().length > 0)) {
+		hasViewableCategories = true;
+	}
 
 	List results = AssetEntryServiceUtil.getEntries(assetEntryQuery);
 
+	if (filterByCategories && !hasViewableCategories) {
+		results = new ArrayList<AssetEntry>();
+
+		total = 0;
+	}
+
+	searchContainer.setTotal(total);
 	searchContainer.setResults(results);
 
 	request.setAttribute("view.jsp-results", results);
@@ -124,15 +141,33 @@ else {
 
 		AssetRendererFactory groupAssetRendererFactory = AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(groupClassName);
 
+		boolean filterByCategories = false;
+
+		if ((assetEntryQuery.getAllCategoryIds().length > 0) || (assetEntryQuery.getAnyCategoryIds().length > 0)) {
+			filterByCategories = true;
+		}
+
 		int groupTotal = AssetEntryServiceUtil.getEntriesCount(assetEntryQuery);
 
 		if (groupTotal > maxGroupTotal) {
 			maxGroupTotal = groupTotal;
 		}
 
-		total += groupTotal;
+		boolean hasViewableCategories = false;
+
+		if ((assetEntryQuery.getAllCategoryIds().length > 0) || (assetEntryQuery.getAnyCategoryIds().length > 0)) {
+			hasViewableCategories = true;
+		}
 
 		List results = AssetEntryServiceUtil.getEntries(assetEntryQuery);
+
+		if (filterByCategories && !hasViewableCategories) {
+			groupTotal = 0;
+
+			results = new ArrayList<AssetEntry>();
+		}
+
+		total += groupTotal;
 
 		searchContainer.setResults(results);
 
