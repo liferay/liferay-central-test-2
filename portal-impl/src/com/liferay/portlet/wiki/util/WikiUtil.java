@@ -558,8 +558,6 @@ public class WikiUtil {
 		return _getEngine(format).validate(nodeId, content);
 	}
 
-	private static final String _WIKI_FRIENDLY_URL_MAPPING = "-/wiki/";
-
 	private static WikiUtil _instance = new WikiUtil();
 
 	private static Pattern _editPageURLPattern = Pattern.compile(
