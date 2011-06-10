@@ -2,6 +2,10 @@ alter table AssetCategory add description STRING null;
 
 alter table AssetEntry add layoutUuid VARCHAR(75) null;
 
+COMMIT_TRANSACTION;
+
+update AssetEntry set classUuid = (select uuid_ from JournalArticleResource where AssetEntry.classPK = JournalArticleResource.resourcePrimKey) where visible = TRUE and classNameId = (select classNameId from ClassName_ where value = 'com.liferay.portlet.journal.model.JournalArticle');
+
 alter table BlogsEntry add description STRING null;
 alter table BlogsEntry add smallImage BOOLEAN;
 alter table BlogsEntry add smallImageId VARCHAR(75) null;
