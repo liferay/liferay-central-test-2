@@ -750,6 +750,10 @@ public class PropsValues {
 
 	public static String[] LOCALES = PropsUtil.getArray(PropsKeys.LOCALES);
 
+	public static final String[] LOCALES_BETA = PropsUtil.getArray(PropsKeys.LOCALES_BETA);
+
+	public static String[] LOCALES_BETA_HIDE_FLAG = PropsUtil.getArray(PropsKeys.LOCALES_BETA_HIDE_FLAG);
+
 	public static boolean LOGIN_CREATE_ACCOUNT_ALLOW_CUSTOM_PASSWORD = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.LOGIN_CREATE_ACCOUNT_ALLOW_CUSTOM_PASSWORD));
 
 	public static final String LOGIN_EMAIL_FROM_ADDRESS = PropsUtil.get(PropsKeys.LOGIN_EMAIL_FROM_ADDRESS);

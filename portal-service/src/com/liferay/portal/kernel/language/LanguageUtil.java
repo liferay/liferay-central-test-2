@@ -228,6 +228,14 @@ public class LanguageUtil {
 		return getLanguage().isAvailableLocale(locale);
 	}
 
+	public static boolean isBetaLocale(Locale locale) {
+		return getLanguage().isBetaLocale(locale);
+	}
+
+	public static boolean isDisplayBetaFlagLocale(Locale locale) {
+		return getLanguage().isDisplayBetaFlagLocale(locale);
+	}
+
 	public static boolean isDuplicateLanguageCode(String languageCode) {
 		return getLanguage().isDuplicateLanguageCode(languageCode);
 	}
