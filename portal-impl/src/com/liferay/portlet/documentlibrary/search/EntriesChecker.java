@@ -153,24 +153,24 @@ public class EntriesChecker extends RowChecker {
 		sb.append(RowChecker.ROW_IDS);
 		sb.append(StringPool.UNDERLINE);
 		sb.append(Folder.class.getName());
-		sb.append("', '");
+		sb.append("Checkbox', '");
 		sb.append(_liferayPortletResponse.getNamespace());
 		sb.append(RowChecker.ROW_IDS);
 		sb.append(StringPool.UNDERLINE);
 		sb.append(DLFileShortcut.class.getName());
-		sb.append("', '");
+		sb.append("Checkbox', '");
 		sb.append(_liferayPortletResponse.getNamespace());
 		sb.append(RowChecker.ROW_IDS);
 		sb.append(StringPool.UNDERLINE);
 		sb.append(FileEntry.class.getName());
-		sb.append("']");
+		sb.append("Checkbox']");
 
 		String checkBoxRowIds = sb.toString();
 
 		return getRowCheckBox(
 			checked,
 			_liferayPortletResponse.getNamespace() + RowChecker.ROW_IDS +
-				StringPool.UNDERLINE + name,
+				StringPool.UNDERLINE + name + "Checkbox",
 			primaryKey,
 			checkBoxRowIds,
 			"'#" + getAllRowIds() + "Checkbox'",
