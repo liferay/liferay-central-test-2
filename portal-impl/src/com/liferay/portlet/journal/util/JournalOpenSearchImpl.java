@@ -15,7 +15,6 @@
 package com.liferay.portlet.journal.util;
 
 import com.liferay.portal.kernel.search.Document;
-import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.HitsOpenSearchImpl;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.IndexerRegistryUtil;
@@ -105,7 +104,7 @@ public class JournalOpenSearchImpl extends HitsOpenSearchImpl {
 			PortletURL portletURL)
 		throws Exception {
 
-		String articleId = result.get(Field.ENTRY_CLASS_PK);
+		String articleId = result.get("articleId");
 
 		JournalArticle article = JournalArticleServiceUtil.getArticle(
 			groupId, articleId);
