@@ -31,6 +31,7 @@ import com.liferay.portal.kernel.process.ClassPathUtil;
 import com.liferay.portal.kernel.servlet.DirectServletRegistry;
 import com.liferay.portal.kernel.servlet.ServletContextPool;
 import com.liferay.portal.kernel.util.CharBufferPool;
+import com.liferay.portal.kernel.util.ClearEhcacheReplicationThreadUtil;
 import com.liferay.portal.kernel.util.ClearThreadLocalUtil;
 import com.liferay.portal.kernel.util.ClearTimerThreadUtil;
 import com.liferay.portal.kernel.util.InstancePool;
@@ -159,7 +160,14 @@ public class PortalContextLoaderListener extends ContextLoaderListener {
 		try {
 			ClearTimerThreadUtil.clearTimerThread();
 		}
-		catch(Exception e) {
+		catch (Exception e) {
+			_log.error(e, e);
+		}
+
+		try {
+			ClearEhcacheReplicationThreadUtil.clearEhcacheReplicationThread();
+		}
+		catch (Exception e) {
 			_log.error(e, e);
 		}
 	}
