@@ -62,7 +62,7 @@
 			<liferay-ui:search-container-column-text
 				href="<%= rowHREF %>"
 				name="id"
-				value="<%= structure.getStructureId() %>"
+				value="<%= String.valueOf(structure.getStructureId()) %>"
 			/>
 
 			<liferay-ui:search-container-column-text
