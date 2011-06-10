@@ -120,7 +120,7 @@ public class UserGroupServiceHttp {
 
 	public static com.liferay.portal.model.UserGroup addUserGroup(
 		HttpPrincipal httpPrincipal, java.lang.String name,
-		java.lang.String description, boolean ldap)
+		java.lang.String description)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
@@ -128,7 +128,7 @@ public class UserGroupServiceHttp {
 					"addUserGroup", _addUserGroupParameterTypes2);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, name,
-					description, ldap);
+					description);
 
 			Object returnObj = null;
 
@@ -405,7 +405,7 @@ public class UserGroupServiceHttp {
 			long.class, long[].class
 		};
 	private static final Class<?>[] _addUserGroupParameterTypes2 = new Class[] {
-			java.lang.String.class, java.lang.String.class, boolean.class
+			java.lang.String.class, java.lang.String.class
 		};
 	private static final Class<?>[] _deleteUserGroupParameterTypes3 = new Class[] {
 			long.class

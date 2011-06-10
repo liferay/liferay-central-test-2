@@ -1963,7 +1963,6 @@
 		<column name="parentUserGroupId" type="long" />
 		<column name="name" type="String" />
 		<column name="description" type="String" />
-		<column name="ldap" type="boolean" />
 
 		<!-- Relationships -->
 

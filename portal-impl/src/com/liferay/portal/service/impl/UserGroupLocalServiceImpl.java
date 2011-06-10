@@ -67,8 +67,7 @@ public class UserGroupLocalServiceImpl extends UserGroupLocalServiceBaseImpl {
 	}
 
 	public UserGroup addUserGroup(
-			long userId, long companyId, String name, String description,
-			boolean ldap)
+			long userId, long companyId, String name, String description)
 		throws PortalException, SystemException {
 
 		// User Group
@@ -84,7 +83,6 @@ public class UserGroupLocalServiceImpl extends UserGroupLocalServiceBaseImpl {
 			UserGroupConstants.DEFAULT_PARENT_USER_GROUP_ID);
 		userGroup.setName(name);
 		userGroup.setDescription(description);
-		userGroup.setLdap(ldap);
 
 		userGroupPersistence.update(userGroup, false);
 

@@ -260,12 +260,10 @@ public class UserGroupLocalServiceUtil {
 	}
 
 	public static com.liferay.portal.model.UserGroup addUserGroup(long userId,
-		long companyId, java.lang.String name, java.lang.String description,
-		boolean ldap)
+		long companyId, java.lang.String name, java.lang.String description)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return getService()
-				   .addUserGroup(userId, companyId, name, description, ldap);
+		return getService().addUserGroup(userId, companyId, name, description);
 	}
 
 	public static void clearUserUserGroups(long userId)
