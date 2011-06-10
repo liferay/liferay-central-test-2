@@ -14,6 +14,7 @@
 
 package com.liferay.portal.events;
 
+import com.liferay.portal.jericho.CachedLoggerProvider;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.cluster.ClusterExecutorUtil;
 import com.liferay.portal.kernel.events.ActionException;
@@ -164,6 +165,10 @@ public class StartupAction extends SimpleAction {
 		// Liferay JspFactory
 
 		JspFactorySwapper.swap();
+
+		// Jericho CachedLoggerProvider Installation
+
+		CachedLoggerProvider.install();
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(StartupAction.class);
