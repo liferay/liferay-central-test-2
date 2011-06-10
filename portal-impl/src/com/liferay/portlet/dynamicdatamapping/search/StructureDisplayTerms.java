@@ -32,8 +32,6 @@ public class StructureDisplayTerms extends DisplayTerms {
 
 	public static final String STORAGE_TYPE = "storageType";
 
-	public static final String STRUCTURE_KEY = "structureKey";
-
 	public StructureDisplayTerms(PortletRequest portletRequest) {
 		super(portletRequest);
 
@@ -41,7 +39,6 @@ public class StructureDisplayTerms extends DisplayTerms {
 		description = ParamUtil.getString(portletRequest, DESCRIPTION);
 		name = ParamUtil.getString(portletRequest, NAME);
 		storageType = ParamUtil.getString(portletRequest, STORAGE_TYPE);
-		structureKey = ParamUtil.getString(portletRequest, STRUCTURE_KEY);
 	}
 
 	public long getClassNameId() {
@@ -60,14 +57,9 @@ public class StructureDisplayTerms extends DisplayTerms {
 		return storageType;
 	}
 
-	public String getStructureKey() {
-		return structureKey;
-	}
-
 	protected long classNameId;
 	protected String description;
 	protected String name;
 	protected String storageType;
-	protected String structureKey;
 
 }

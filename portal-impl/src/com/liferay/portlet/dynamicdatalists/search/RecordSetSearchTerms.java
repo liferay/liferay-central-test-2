@@ -28,7 +28,6 @@ public class RecordSetSearchTerms extends RecordSetDisplayTerms {
 
 		description = DAOParamUtil.getLike(portletRequest, DESCRIPTION);
 		name = DAOParamUtil.getLike(portletRequest, NAME);
-		recordSetKey = DAOParamUtil.getLike(portletRequest, RECORD_SET_KEY);
 	}
 
 }

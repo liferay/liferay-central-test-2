@@ -15,7 +15,6 @@
 package com.liferay.portlet.dynamicdatamapping.action;
 
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.dynamicdatamapping.model.DDMStructure;
@@ -37,14 +36,12 @@ public class ActionUtil {
 	public static void getStructure(HttpServletRequest request)
 		throws Exception {
 
-		long groupId = ParamUtil.getLong(request, "groupId");
-		String structureKey = ParamUtil.getString(request, "structureKey");
+		long structureId = ParamUtil.getLong(request, "structureId");
 
 		DDMStructure structure = null;
 
-		if (Validator.isNotNull(structureKey)) {
-			structure = DDMStructureServiceUtil.getStructure(
-				groupId, structureKey);
+		if (structureId > 0) {
+			structure = DDMStructureServiceUtil.getStructure(structureId);
 		}
 
 		request.setAttribute(WebKeys.DYNAMIC_DATA_MAPPING_STRUCTURE, structure);

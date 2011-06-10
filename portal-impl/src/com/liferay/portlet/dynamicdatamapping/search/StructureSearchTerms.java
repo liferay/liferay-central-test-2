@@ -30,7 +30,6 @@ public class StructureSearchTerms extends StructureDisplayTerms {
 		description = DAOParamUtil.getLike(portletRequest, DESCRIPTION);
 		name = DAOParamUtil.getLike(portletRequest, NAME);
 		storageType = DAOParamUtil.getString(portletRequest, STORAGE_TYPE);
-		structureKey = DAOParamUtil.getString(portletRequest, STRUCTURE_KEY);
 	}
 
 }

@@ -77,23 +77,11 @@ public class DDMStructureServiceSoap {
 		}
 	}
 
-	public static void deleteStructure(long groupId,
-		java.lang.String structureKey) throws RemoteException {
-		try {
-			DDMStructureServiceUtil.deleteStructure(groupId, structureKey);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
 	public static com.liferay.portlet.dynamicdatamapping.model.DDMStructureSoap getStructure(
-		long groupId, java.lang.String structureKey) throws RemoteException {
+		long structureId) throws RemoteException {
 		try {
 			com.liferay.portlet.dynamicdatamapping.model.DDMStructure returnValue =
-				DDMStructureServiceUtil.getStructure(groupId, structureKey);
+				DDMStructureServiceUtil.getStructure(structureId);
 
 			return com.liferay.portlet.dynamicdatamapping.model.DDMStructureSoap.toSoapModel(returnValue);
 		}

@@ -56,7 +56,6 @@ import com.liferay.portlet.dynamicdatamapping.service.DDMStructureServiceUtil;
 public class DDMStructureServiceHttp {
 	public static com.liferay.portlet.dynamicdatamapping.model.DDMStructure addStructure(
 		HttpPrincipal httpPrincipal, long groupId, long classNameId,
-		java.lang.String structureKey, boolean autoStructureKey,
 		java.util.Map<java.util.Locale, java.lang.String> nameMap,
 		java.util.Map<java.util.Locale, java.lang.String> descriptionMap,
 		java.lang.String xsd, java.lang.String storageType,
@@ -68,8 +67,8 @@ public class DDMStructureServiceHttp {
 					"addStructure", _addStructureParameterTypes0);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
-					classNameId, structureKey, autoStructureKey, nameMap,
-					descriptionMap, xsd, storageType, serviceContext);
+					classNameId, nameMap, descriptionMap, xsd, storageType,
+					serviceContext);
 
 			Object returnObj = null;
 
@@ -130,49 +129,16 @@ public class DDMStructureServiceHttp {
 		}
 	}
 
-	public static void deleteStructure(HttpPrincipal httpPrincipal,
-		long groupId, java.lang.String structureKey)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		try {
-			MethodKey methodKey = new MethodKey(DDMStructureServiceUtil.class.getName(),
-					"deleteStructure", _deleteStructureParameterTypes2);
-
-			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
-					structureKey);
-
-			try {
-				TunnelUtil.invoke(httpPrincipal, methodHandler);
-			}
-			catch (Exception e) {
-				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
-					throw (com.liferay.portal.kernel.exception.PortalException)e;
-				}
-
-				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
-					throw (com.liferay.portal.kernel.exception.SystemException)e;
-				}
-
-				throw new com.liferay.portal.kernel.exception.SystemException(e);
-			}
-		}
-		catch (com.liferay.portal.kernel.exception.SystemException se) {
-			_log.error(se, se);
-
-			throw se;
-		}
-	}
-
 	public static com.liferay.portlet.dynamicdatamapping.model.DDMStructure getStructure(
-		HttpPrincipal httpPrincipal, long groupId, java.lang.String structureKey)
+		HttpPrincipal httpPrincipal, long structureId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(DDMStructureServiceUtil.class.getName(),
-					"getStructure", _getStructureParameterTypes3);
+					"getStructure", _getStructureParameterTypes2);
 
-			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
-					structureKey);
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					structureId);
 
 			Object returnObj = null;
 
@@ -201,8 +167,7 @@ public class DDMStructureServiceHttp {
 	}
 
 	public static com.liferay.portlet.dynamicdatamapping.model.DDMStructure updateStructure(
-		HttpPrincipal httpPrincipal, long groupId,
-		java.lang.String structureKey,
+		HttpPrincipal httpPrincipal, long groupId, long structureId,
 		java.util.Map<java.util.Locale, java.lang.String> nameMap,
 		java.util.Map<java.util.Locale, java.lang.String> descriptionMap,
 		java.lang.String xsd,
@@ -211,10 +176,10 @@ public class DDMStructureServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(DDMStructureServiceUtil.class.getName(),
-					"updateStructure", _updateStructureParameterTypes4);
+					"updateStructure", _updateStructureParameterTypes3);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
-					structureKey, nameMap, descriptionMap, xsd, serviceContext);
+					structureId, nameMap, descriptionMap, xsd, serviceContext);
 
 			Object returnObj = null;
 
@@ -244,23 +209,19 @@ public class DDMStructureServiceHttp {
 
 	private static Log _log = LogFactoryUtil.getLog(DDMStructureServiceHttp.class);
 	private static final Class<?>[] _addStructureParameterTypes0 = new Class[] {
-			long.class, long.class, java.lang.String.class, boolean.class,
-			java.util.Map.class, java.util.Map.class, java.lang.String.class,
-			java.lang.String.class,
+			long.class, long.class, java.util.Map.class, java.util.Map.class,
+			java.lang.String.class, java.lang.String.class,
 			com.liferay.portal.service.ServiceContext.class
 		};
 	private static final Class<?>[] _deleteStructureParameterTypes1 = new Class[] {
 			long.class
 		};
-	private static final Class<?>[] _deleteStructureParameterTypes2 = new Class[] {
-			long.class, java.lang.String.class
+	private static final Class<?>[] _getStructureParameterTypes2 = new Class[] {
+			long.class
 		};
-	private static final Class<?>[] _getStructureParameterTypes3 = new Class[] {
-			long.class, java.lang.String.class
-		};
-	private static final Class<?>[] _updateStructureParameterTypes4 = new Class[] {
-			long.class, java.lang.String.class, java.util.Map.class,
-			java.util.Map.class, java.lang.String.class,
+	private static final Class<?>[] _updateStructureParameterTypes3 = new Class[] {
+			long.class, long.class, java.util.Map.class, java.util.Map.class,
+			java.lang.String.class,
 			com.liferay.portal.service.ServiceContext.class
 		};
 }

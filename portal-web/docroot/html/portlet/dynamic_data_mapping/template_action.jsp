@@ -31,7 +31,7 @@ DDMStructure structure = template.getStructure();
 			<portlet:param name="redirect" value="<%= currentURL %>" />
 			<portlet:param name="backURL" value="<%= currentURL %>" />
 			<portlet:param name="groupId" value="<%= String.valueOf(template.getGroupId()) %>" />
-			<portlet:param name="structureKey" value="<%= structure.getStructureKey() %>" />
+			<portlet:param name="structureId" value="<%= String.valueOf(structure.getStructureId()) %>" />
 			<portlet:param name="templateId" value="<%= String.valueOf(template.getTemplateId()) %>" />
 			<portlet:param name="type" value="<%= template.getType() %>" />
 			<portlet:param name="structureAvailableFields" value='<%= renderResponse.getNamespace() + "structureAvailableFields" %>' />

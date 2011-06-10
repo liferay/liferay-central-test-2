@@ -79,12 +79,11 @@ public class DDLRecordSetModelImpl extends BaseModelImpl<DDLRecordSet>
 			{ "createDate", Types.TIMESTAMP },
 			{ "modifiedDate", Types.TIMESTAMP },
 			{ "DDMStructureId", Types.BIGINT },
-			{ "recordSetKey", Types.VARCHAR },
 			{ "name", Types.VARCHAR },
 			{ "description", Types.VARCHAR },
 			{ "minDisplayRows", Types.INTEGER }
 		};
-	public static final String TABLE_SQL_CREATE = "create table DDLRecordSet (uuid_ VARCHAR(75) null,recordSetId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,DDMStructureId LONG,recordSetKey VARCHAR(75) null,name STRING null,description STRING null,minDisplayRows INTEGER)";
+	public static final String TABLE_SQL_CREATE = "create table DDLRecordSet (uuid_ VARCHAR(75) null,recordSetId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,DDMStructureId LONG,name STRING null,description STRING null,minDisplayRows INTEGER)";
 	public static final String TABLE_SQL_DROP = "drop table DDLRecordSet";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
@@ -114,7 +113,6 @@ public class DDLRecordSetModelImpl extends BaseModelImpl<DDLRecordSet>
 		model.setCreateDate(soapModel.getCreateDate());
 		model.setModifiedDate(soapModel.getModifiedDate());
 		model.setDDMStructureId(soapModel.getDDMStructureId());
-		model.setRecordSetKey(soapModel.getRecordSetKey());
 		model.setName(soapModel.getName());
 		model.setDescription(soapModel.getDescription());
 		model.setMinDisplayRows(soapModel.getMinDisplayRows());
@@ -283,28 +281,6 @@ public class DDLRecordSetModelImpl extends BaseModelImpl<DDLRecordSet>
 
 	public void setDDMStructureId(long DDMStructureId) {
 		_DDMStructureId = DDMStructureId;
-	}
-
-	@JSON
-	public String getRecordSetKey() {
-		if (_recordSetKey == null) {
-			return StringPool.BLANK;
-		}
-		else {
-			return _recordSetKey;
-		}
-	}
-
-	public void setRecordSetKey(String recordSetKey) {
-		if (_originalRecordSetKey == null) {
-			_originalRecordSetKey = _recordSetKey;
-		}
-
-		_recordSetKey = recordSetKey;
-	}
-
-	public String getOriginalRecordSetKey() {
-		return GetterUtil.getString(_originalRecordSetKey);
 	}
 
 	@JSON
@@ -534,7 +510,6 @@ public class DDLRecordSetModelImpl extends BaseModelImpl<DDLRecordSet>
 		ddlRecordSetImpl.setCreateDate(getCreateDate());
 		ddlRecordSetImpl.setModifiedDate(getModifiedDate());
 		ddlRecordSetImpl.setDDMStructureId(getDDMStructureId());
-		ddlRecordSetImpl.setRecordSetKey(getRecordSetKey());
 		ddlRecordSetImpl.setName(getName());
 		ddlRecordSetImpl.setDescription(getDescription());
 		ddlRecordSetImpl.setMinDisplayRows(getMinDisplayRows());
@@ -594,12 +569,10 @@ public class DDLRecordSetModelImpl extends BaseModelImpl<DDLRecordSet>
 		ddlRecordSetModelImpl._originalGroupId = ddlRecordSetModelImpl._groupId;
 
 		ddlRecordSetModelImpl._setOriginalGroupId = false;
-
-		ddlRecordSetModelImpl._originalRecordSetKey = ddlRecordSetModelImpl._recordSetKey;
 	}
 
 	public String toString() {
-		StringBundler sb = new StringBundler(27);
+		StringBundler sb = new StringBundler(25);
 
 		sb.append("{uuid=");
 		sb.append(getUuid());
@@ -619,8 +592,6 @@ public class DDLRecordSetModelImpl extends BaseModelImpl<DDLRecordSet>
 		sb.append(getModifiedDate());
 		sb.append(", DDMStructureId=");
 		sb.append(getDDMStructureId());
-		sb.append(", recordSetKey=");
-		sb.append(getRecordSetKey());
 		sb.append(", name=");
 		sb.append(getName());
 		sb.append(", description=");
@@ -633,7 +604,7 @@ public class DDLRecordSetModelImpl extends BaseModelImpl<DDLRecordSet>
 	}
 
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(43);
+		StringBundler sb = new StringBundler(40);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.portlet.dynamicdatalists.model.DDLRecordSet");
@@ -676,10 +647,6 @@ public class DDLRecordSetModelImpl extends BaseModelImpl<DDLRecordSet>
 		sb.append(getDDMStructureId());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>recordSetKey</column-name><column-value><![CDATA[");
-		sb.append(getRecordSetKey());
-		sb.append("]]></column-value></column>");
-		sb.append(
 			"<column><column-name>name</column-name><column-value><![CDATA[");
 		sb.append(getName());
 		sb.append("]]></column-value></column>");
@@ -710,8 +677,6 @@ public class DDLRecordSetModelImpl extends BaseModelImpl<DDLRecordSet>
 	private Date _createDate;
 	private Date _modifiedDate;
 	private long _DDMStructureId;
-	private String _recordSetKey;
-	private String _originalRecordSetKey;
 	private String _name;
 	private String _description;
 	private int _minDisplayRows;

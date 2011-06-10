@@ -132,7 +132,6 @@ create index IX_8BC2F891 on DDLRecord (uuid_);
 create unique index IX_B4328F39 on DDLRecord (uuid_, groupId);
 
 create index IX_4FA5969F on DDLRecordSet (groupId);
-create unique index IX_56DAB121 on DDLRecordSet (groupId, recordSetKey);
 create index IX_561E44E9 on DDLRecordSet (uuid_);
 create unique index IX_270BA5E1 on DDLRecordSet (uuid_, groupId);
 
@@ -151,7 +150,6 @@ create index IX_32A18526 on DDMStorageLink (uuid_);
 
 create index IX_31817A62 on DDMStructure (classNameId);
 create index IX_C8419FBE on DDMStructure (groupId);
-create unique index IX_490E7A1E on DDMStructure (groupId, structureKey);
 create index IX_E61809C8 on DDMStructure (uuid_);
 create unique index IX_85C7EBE2 on DDMStructure (uuid_, groupId);
 

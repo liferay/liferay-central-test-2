@@ -21,12 +21,12 @@ String tabs1 = ParamUtil.getString(request, "tabs1", "templates");
 
 String backURL = ParamUtil.getString(request, "backURL");
 
-String structureKey = ParamUtil.getString(request, "structureKey");
+String structureId = ParamUtil.getString(request, "structureId");
 
 DDMStructure structure = null;
 
-if (Validator.isNotNull(structureKey)) {
-	structure = DDMStructureLocalServiceUtil.getStructure(scopeGroupId, structureKey);
+if (Validator.isNotNull(structureId)) {
+	structure = DDMStructureLocalServiceUtil.getStructure(Long.parseLong(structureId));
 }
 
 PortletURL portletURL = renderResponse.createRenderURL();
@@ -34,7 +34,7 @@ PortletURL portletURL = renderResponse.createRenderURL();
 portletURL.setParameter("struts_action", "/dynamic_data_mapping/view_template");
 portletURL.setParameter("tabs1", tabs1);
 portletURL.setParameter("backURL", backURL);
-portletURL.setParameter("structureKey", structureKey);
+portletURL.setParameter("structureId", structureId);
 %>
 
 <c:if test="<%= (structure != null) %>">
@@ -45,7 +45,7 @@ portletURL.setParameter("structureKey", structureKey);
 </c:if>
 
 <liferay-util:include page="/html/portlet/dynamic_data_mapping/template_toolbar.jsp">
-	<liferay-util:param name="structureKey" value="<%= structureKey %>" />
+	<liferay-util:param name="structureId" value="<%= structureId %>" />
 	<liferay-util:param name="backURL" value="<%= backURL %>" />
 </liferay-util:include>
 

@@ -1390,10 +1390,6 @@
 		<field name="createDate" type="Date" />
 		<field name="modifiedDate" type="Date" />
 		<field name="DDMStructureId" type="long" />
-		<field name="recordSetKey" type="String">
-			<hint name="upper-case">true</hint>
-			<hint name="auto-escape">false</hint>
-		</field>
 		<field name="name" type="String" localized="true">
 			<validator name="required" />
 		</field>
@@ -1456,10 +1452,6 @@
 		<field name="createDate" type="Date" />
 		<field name="modifiedDate" type="Date" />
 		<field name="classNameId" type="long" />
-		<field name="structureKey" type="String">
-			<hint name="upper-case">true</hint>
-			<hint name="auto-escape">false</hint>
-		</field>
 		<field name="name" type="String" localized="true">
 			<validator name="required" />
 		</field>

@@ -29,8 +29,7 @@ public class DDLRecordSetServiceWrapper implements DDLRecordSetService {
 	}
 
 	public com.liferay.portlet.dynamicdatalists.model.DDLRecordSet addRecordSet(
-		long groupId, long ddmStructureId, java.lang.String recordSetKey,
-		boolean autoRecordSetKey,
+		long groupId, long ddmStructureId,
 		java.util.Map<java.util.Locale, java.lang.String> nameMap,
 		java.util.Map<java.util.Locale, java.lang.String> descriptionMap,
 		int minDisplayRows,
@@ -38,8 +37,7 @@ public class DDLRecordSetServiceWrapper implements DDLRecordSetService {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _ddlRecordSetService.addRecordSet(groupId, ddmStructureId,
-			recordSetKey, autoRecordSetKey, nameMap, descriptionMap,
-			minDisplayRows, serviceContext);
+			nameMap, descriptionMap, minDisplayRows, serviceContext);
 	}
 
 	public void deleteRecordSet(long recordSetId)
@@ -48,24 +46,11 @@ public class DDLRecordSetServiceWrapper implements DDLRecordSetService {
 		_ddlRecordSetService.deleteRecordSet(recordSetId);
 	}
 
-	public void deleteRecordSet(long groupId, java.lang.String recordSetKey)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		_ddlRecordSetService.deleteRecordSet(groupId, recordSetKey);
-	}
-
 	public com.liferay.portlet.dynamicdatalists.model.DDLRecordSet getRecordSet(
 		long recordSetId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _ddlRecordSetService.getRecordSet(recordSetId);
-	}
-
-	public com.liferay.portlet.dynamicdatalists.model.DDLRecordSet getRecordSet(
-		long groupId, java.lang.String recordSetKey)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return _ddlRecordSetService.getRecordSet(groupId, recordSetKey);
 	}
 
 	public com.liferay.portlet.dynamicdatalists.model.DDLRecordSet updateMinDisplayRows(
@@ -78,7 +63,7 @@ public class DDLRecordSetServiceWrapper implements DDLRecordSetService {
 	}
 
 	public com.liferay.portlet.dynamicdatalists.model.DDLRecordSet updateRecordSet(
-		long groupId, long ddmStructureId, java.lang.String recordSetKey,
+		long groupId, long ddmStructureId, long recordSetId,
 		java.util.Map<java.util.Locale, java.lang.String> nameMap,
 		java.util.Map<java.util.Locale, java.lang.String> descriptionMap,
 		int minDisplayRows,
@@ -86,8 +71,7 @@ public class DDLRecordSetServiceWrapper implements DDLRecordSetService {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _ddlRecordSetService.updateRecordSet(groupId, ddmStructureId,
-			recordSetKey, nameMap, descriptionMap, minDisplayRows,
-			serviceContext);
+			recordSetId, nameMap, descriptionMap, minDisplayRows, serviceContext);
 	}
 
 	public DDLRecordSetService getWrappedDDLRecordSetService() {

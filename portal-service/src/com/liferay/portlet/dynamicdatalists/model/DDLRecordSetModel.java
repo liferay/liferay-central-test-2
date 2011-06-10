@@ -206,20 +206,6 @@ public interface DDLRecordSetModel extends BaseModel<DDLRecordSet>, GroupedModel
 	public void setDDMStructureId(long DDMStructureId);
 
 	/**
-	 * Returns the record set key of this d d l record set.
-	 *
-	 * @return the record set key of this d d l record set
-	 */
-	public String getRecordSetKey();
-
-	/**
-	 * Sets the record set key of this d d l record set.
-	 *
-	 * @param recordSetKey the record set key of this d d l record set
-	 */
-	public void setRecordSetKey(String recordSetKey);
-
-	/**
 	 * Returns the name of this d d l record set.
 	 *
 	 * @return the name of this d d l record set

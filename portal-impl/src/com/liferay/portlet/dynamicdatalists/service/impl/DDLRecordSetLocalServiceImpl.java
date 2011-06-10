@@ -18,16 +18,13 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.dynamicdatalists.RecordSetDDMStructureIdException;
-import com.liferay.portlet.dynamicdatalists.RecordSetDuplicateRecordSetKeyException;
 import com.liferay.portlet.dynamicdatalists.RecordSetNameException;
-import com.liferay.portlet.dynamicdatalists.RecordSetRecordSetKeyException;
 import com.liferay.portlet.dynamicdatalists.model.DDLRecordSet;
 import com.liferay.portlet.dynamicdatalists.service.base.DDLRecordSetLocalServiceBaseImpl;
 import com.liferay.portlet.dynamicdatamapping.model.DDMStructure;
@@ -45,8 +42,8 @@ public class DDLRecordSetLocalServiceImpl
 	extends DDLRecordSetLocalServiceBaseImpl {
 
 	public DDLRecordSet addRecordSet(
-			long userId, long groupId, long ddmStructureId, String recordSetKey,
-			boolean autoRecordSetKey, Map<Locale, String> nameMap,
+			long userId, long groupId, long ddmStructureId,
+			Map<Locale, String> nameMap,
 			Map<Locale, String> descriptionMap, int minDisplayRows,
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
@@ -55,16 +52,9 @@ public class DDLRecordSetLocalServiceImpl
 
 		User user = userPersistence.findByPrimaryKey(userId);
 
-		recordSetKey = recordSetKey.trim().toUpperCase();
-
-		if (autoRecordSetKey) {
-			recordSetKey = String.valueOf(counterLocalService.increment());
-		}
-
 		Date now = new Date();
 
-		validate(
-			groupId, ddmStructureId, recordSetKey, autoRecordSetKey, nameMap);
+		validate(ddmStructureId, nameMap);
 
 		long recordSetId = counterLocalService.increment();
 
@@ -78,7 +68,6 @@ public class DDLRecordSetLocalServiceImpl
 		recordSet.setCreateDate(serviceContext.getCreateDate(now));
 		recordSet.setModifiedDate(serviceContext.getModifiedDate(now));
 		recordSet.setDDMStructureId(ddmStructureId);
-		recordSet.setRecordSetKey(recordSetKey);
 		recordSet.setNameMap(nameMap);
 		recordSet.setDescriptionMap(descriptionMap);
 		recordSet.setMinDisplayRows(minDisplayRows);
@@ -165,15 +154,6 @@ public class DDLRecordSetLocalServiceImpl
 		deleteRecordSet(recordSet);
 	}
 
-	public void deleteRecordSet(long groupId, String recordSetKey)
-		throws PortalException, SystemException {
-
-		DDLRecordSet recordSet = ddlRecordSetPersistence.findByG_R(
-			groupId, recordSetKey);
-
-		deleteRecordSet(recordSet);
-	}
-
 	public void deleteRecordSets(long groupId)
 		throws PortalException, SystemException {
 
@@ -189,12 +169,6 @@ public class DDLRecordSetLocalServiceImpl
 		throws PortalException, SystemException {
 
 		return ddlRecordSetPersistence.findByPrimaryKey(recordSetId);
-	}
-
-	public DDLRecordSet getRecordSet(long groupId, String recordSetKey)
-		throws PortalException, SystemException {
-
-		return ddlRecordSetPersistence.findByG_R(groupId, recordSetKey);
 	}
 
 	public List<DDLRecordSet> getRecordSets(long groupId)
@@ -217,13 +191,13 @@ public class DDLRecordSetLocalServiceImpl
 	}
 
 	public List<DDLRecordSet> search(
-			long companyId, long groupId, String recordSetKey, String name,
+			long companyId, long groupId, String name,
 			String description, boolean andOperator, int start, int end,
 			OrderByComparator orderByComparator)
 		throws SystemException {
 
-		return ddlRecordSetFinder.findByC_G_R_N_D(
-			companyId, groupId, recordSetKey, name, description, andOperator,
+		return ddlRecordSetFinder.findByC_G_N_D(
+			companyId, groupId, name, description, andOperator,
 			start, end, orderByComparator);
 	}
 
@@ -234,12 +208,12 @@ public class DDLRecordSetLocalServiceImpl
 	}
 
 	public int searchCount(
-			long companyId, long groupId, String recordSetKey, String name,
+			long companyId, long groupId, String name,
 			String description, boolean andOperator)
 		throws SystemException {
 
-		return ddlRecordSetFinder.countByC_G_R_N_D(
-			companyId, groupId, recordSetKey, name, description, andOperator);
+		return ddlRecordSetFinder.countByC_G_N_D(
+			companyId, groupId, name, description, andOperator);
 	}
 
 	public DDLRecordSet updateMinDisplayRows(
@@ -259,7 +233,7 @@ public class DDLRecordSetLocalServiceImpl
 	}
 
 	public DDLRecordSet updateRecordSet(
-			long groupId, long ddmStructureId, String recordSetKey,
+			long groupId, long ddmStructureId, long recordSetId,
 			Map<Locale, String> nameMap, Map<Locale, String> descriptionMap,
 			int minDisplayRows, ServiceContext serviceContext)
 		throws PortalException, SystemException {
@@ -267,8 +241,8 @@ public class DDLRecordSetLocalServiceImpl
 		validateDDMStructureId(ddmStructureId);
 		validateName(nameMap);
 
-		DDLRecordSet recordSet = ddlRecordSetPersistence.findByG_R(
-			groupId, recordSetKey);
+		DDLRecordSet recordSet = ddlRecordSetPersistence.findByPrimaryKey(
+			recordSetId);
 
 		recordSet.setModifiedDate(serviceContext.getModifiedDate(null));
 		recordSet.setDDMStructureId(ddmStructureId);
@@ -281,23 +255,10 @@ public class DDLRecordSetLocalServiceImpl
 		return recordSet;
 	}
 
-	protected void validate(
-			long groupId, long ddmStructureId, String recordSetKey,
-			boolean autoRecordSetKey, Map<Locale, String> nameMap)
+	protected void validate(long ddmStructureId, Map<Locale, String> nameMap)
 		throws PortalException, SystemException {
 
 		validateDDMStructureId(ddmStructureId);
-
-		if (!autoRecordSetKey) {
-			validateRecordSetKey(recordSetKey);
-
-			DDLRecordSet recordSet = ddlRecordSetPersistence.fetchByG_R(
-				groupId, recordSetKey);
-
-			if (recordSet != null) {
-				throw new RecordSetDuplicateRecordSetKeyException();
-			}
-		}
 
 		validateName(nameMap);
 	}
@@ -322,16 +283,4 @@ public class DDLRecordSetLocalServiceImpl
 			throw new RecordSetNameException();
 		}
 	}
-
-	protected void validateRecordSetKey(String recordSetKey)
-		throws PortalException {
-
-		if (Validator.isNull(recordSetKey) ||
-				Validator.isNumber(recordSetKey) ||
-				recordSetKey.contains(StringPool.SPACE)) {
-
-			throw new RecordSetRecordSetKeyException();
-		}
-	}
-
 }

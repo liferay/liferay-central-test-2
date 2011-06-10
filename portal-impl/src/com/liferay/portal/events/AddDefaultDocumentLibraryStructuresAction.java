@@ -18,7 +18,6 @@ import com.liferay.portal.kernel.events.ActionException;
 import com.liferay.portal.kernel.events.SimpleAction;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
@@ -96,8 +95,7 @@ public class AddDefaultDocumentLibraryStructuresAction extends SimpleAction {
 			DDMStructureLocalServiceUtil.addStructure(
 				userId, groupId,
 				PortalUtil.getClassNameId(DLDocumentMetadataSet.class),
-				StringPool.BLANK, true, nameMap, descriptionMap, xsd, "xml",
-				serviceContext);
+				nameMap, descriptionMap, xsd, "xml", serviceContext);
 		}
 	}
 

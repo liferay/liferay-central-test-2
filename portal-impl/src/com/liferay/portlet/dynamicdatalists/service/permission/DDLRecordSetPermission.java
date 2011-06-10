@@ -46,16 +46,6 @@ public class DDLRecordSetPermission {
 		}
 	}
 
-	public static void check(
-			PermissionChecker permissionChecker, long groupId,
-			String recordSetKey, String actionId)
-		throws PortalException, SystemException {
-
-		if (!contains(permissionChecker, groupId, recordSetKey, actionId)) {
-			throw new PrincipalException();
-		}
-	}
-
 	public static boolean contains(
 		PermissionChecker permissionChecker, DDLRecordSet recordSet,
 		String actionId) {
@@ -82,16 +72,4 @@ public class DDLRecordSetPermission {
 
 		return contains(permissionChecker, recordSet, actionId);
 	}
-
-	public static boolean contains(
-			PermissionChecker permissionChecker, long groupId,
-			String recordSetKey, String actionId)
-		throws PortalException, SystemException {
-
-		DDLRecordSet recordSet = DDLRecordSetLocalServiceUtil.getRecordSet(
-			groupId, recordSetKey);
-
-		return contains(permissionChecker, recordSet, actionId);
-	}
-
 }

@@ -556,51 +556,6 @@ public class DDLRecordSetUtil {
 	}
 
 	/**
-	* Returns the d d l record set where groupId = &#63; and recordSetKey = &#63; or throws a {@link com.liferay.portlet.dynamicdatalists.NoSuchRecordSetException} if it could not be found.
-	*
-	* @param groupId the group ID
-	* @param recordSetKey the record set key
-	* @return the matching d d l record set
-	* @throws com.liferay.portlet.dynamicdatalists.NoSuchRecordSetException if a matching d d l record set could not be found
-	* @throws SystemException if a system exception occurred
-	*/
-	public static com.liferay.portlet.dynamicdatalists.model.DDLRecordSet findByG_R(
-		long groupId, java.lang.String recordSetKey)
-		throws com.liferay.portal.kernel.exception.SystemException,
-			com.liferay.portlet.dynamicdatalists.NoSuchRecordSetException {
-		return getPersistence().findByG_R(groupId, recordSetKey);
-	}
-
-	/**
-	* Returns the d d l record set where groupId = &#63; and recordSetKey = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
-	*
-	* @param groupId the group ID
-	* @param recordSetKey the record set key
-	* @return the matching d d l record set, or <code>null</code> if a matching d d l record set could not be found
-	* @throws SystemException if a system exception occurred
-	*/
-	public static com.liferay.portlet.dynamicdatalists.model.DDLRecordSet fetchByG_R(
-		long groupId, java.lang.String recordSetKey)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().fetchByG_R(groupId, recordSetKey);
-	}
-
-	/**
-	* Returns the d d l record set where groupId = &#63; and recordSetKey = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
-	*
-	* @param groupId the group ID
-	* @param recordSetKey the record set key
-	* @return the matching d d l record set, or <code>null</code> if a matching d d l record set could not be found
-	* @throws SystemException if a system exception occurred
-	*/
-	public static com.liferay.portlet.dynamicdatalists.model.DDLRecordSet fetchByG_R(
-		long groupId, java.lang.String recordSetKey, boolean retrieveFromCache)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence()
-				   .fetchByG_R(groupId, recordSetKey, retrieveFromCache);
-	}
-
-	/**
 	* Returns all the d d l record sets.
 	*
 	* @return the d d l record sets
@@ -685,19 +640,6 @@ public class DDLRecordSetUtil {
 	}
 
 	/**
-	* Removes the d d l record set where groupId = &#63; and recordSetKey = &#63; from the database.
-	*
-	* @param groupId the group ID
-	* @param recordSetKey the record set key
-	* @throws SystemException if a system exception occurred
-	*/
-	public static void removeByG_R(long groupId, java.lang.String recordSetKey)
-		throws com.liferay.portal.kernel.exception.SystemException,
-			com.liferay.portlet.dynamicdatalists.NoSuchRecordSetException {
-		getPersistence().removeByG_R(groupId, recordSetKey);
-	}
-
-	/**
 	* Removes all the d d l record sets from the database.
 	*
 	* @throws SystemException if a system exception occurred
@@ -754,19 +696,6 @@ public class DDLRecordSetUtil {
 	public static int filterCountByGroupId(long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().filterCountByGroupId(groupId);
-	}
-
-	/**
-	* Returns the number of d d l record sets where groupId = &#63; and recordSetKey = &#63;.
-	*
-	* @param groupId the group ID
-	* @param recordSetKey the record set key
-	* @return the number of matching d d l record sets
-	* @throws SystemException if a system exception occurred
-	*/
-	public static int countByG_R(long groupId, java.lang.String recordSetKey)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().countByG_R(groupId, recordSetKey);
 	}
 
 	/**

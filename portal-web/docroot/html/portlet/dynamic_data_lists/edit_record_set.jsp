@@ -46,8 +46,6 @@ if (Validator.isNotNull(ddmStructureId)) {
 	}
 }
 
-String recordSetKey = BeanParamUtil.getString(recordSet, request, "recordSetKey");
-String newRecordSetKey = ParamUtil.getString(request, "newRecordSetKey");
 %>
 
 <liferay-ui:header
@@ -66,11 +64,9 @@ String newRecordSetKey = ParamUtil.getString(request, "newRecordSetKey");
 	<aui:input name="backURL" type="hidden" value="<%= backURL %>" />
 	<aui:input name="groupId" type="hidden" value="<%= groupId %>" />
 	<aui:input name="ddmStructureId" type="hidden" value="<%= ddmStructureId %>" />
-	<aui:input name="recordSetKey" type="hidden" value="<%= recordSetKey %>" />
+	<aui:input name="recordSetId" type="hidden" value="<%= recordSetId %>" />
 
 	<liferay-ui:error exception="<%= RecordSetDDMStructureIdException.class %>" message="please-enter-valid-definition" />
-	<liferay-ui:error exception="<%= RecordSetDuplicateRecordSetKeyException.class %>" message="please-enter-a-unique-id" />
-	<liferay-ui:error exception="<%= RecordSetRecordSetKeyException.class %>" message="please-enter-a-valid-id" />
 	<liferay-ui:error exception="<%= RecordSetNameException.class %>" message="please-enter-a-valid-name" />
 
 	<liferay-ui:asset-categories-error />
@@ -80,27 +76,6 @@ String newRecordSetKey = ParamUtil.getString(request, "newRecordSetKey");
 	<aui:model-context bean="<%= recordSet %>" model="<%= DDLRecordSet.class %>" />
 
 	<aui:fieldset>
-		<c:choose>
-			<c:when test="<%= recordSet == null %>">
-				<c:choose>
-					<c:when test="<%= PropsValues.DYNAMIC_DATA_LISTS_RECORD_SET_FORCE_AUTOGENERATE_KEY %>">
-						<aui:input name="newRecordSetKey" type="hidden" />
-						<aui:input name="autoRecordSetKey" type="hidden" value="<%= true %>" />
-					</c:when>
-					<c:otherwise>
-						<aui:input cssClass="lfr-input-text-container" field="recordSetKey" fieldParam="newRecordSetKey" label="id" name="newRecordSetKey" value="<%= newRecordSetKey %>" />
-
-						<aui:input label="autogenerate-id" name="autoRecordSetKey" type="checkbox" value="<%= true %>" />
-					</c:otherwise>
-				</c:choose>
-			</c:when>
-			<c:otherwise>
-				<aui:field-wrapper label="id">
-					<%= recordSetKey %>
-				</aui:field-wrapper>
-			</c:otherwise>
-		</c:choose>
-
 		<aui:input name="name" />
 
 		<aui:input name="description" />
@@ -174,10 +149,6 @@ String newRecordSetKey = ParamUtil.getString(request, "newRecordSetKey");
 
 	function <portlet:namespace />saveRecordSet() {
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= (recordSet == null) ? Constants.ADD : Constants.UPDATE %>";
-
-		<c:if test="<%= recordSet == null %>">
-			document.<portlet:namespace />fm.<portlet:namespace />recordSetKey.value = document.<portlet:namespace />fm.<portlet:namespace />newRecordSetKey.value;
-		</c:if>
 
 		submitForm(document.<portlet:namespace />fm);
 	}

@@ -50,8 +50,7 @@ DDMStructure structure = (DDMStructure)row.getObject();
 		<portlet:renderURL var="editURL">
 			<portlet:param name="struts_action" value="/dynamic_data_mapping/edit_structure" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
-			<portlet:param name="groupId" value="<%= String.valueOf(structure.getGroupId()) %>" />
-			<portlet:param name="structureKey" value="<%= structure.getStructureKey() %>" />
+			<portlet:param name="structureId" value="<%= String.valueOf(structure.getStructureId()) %>" />
 		</portlet:renderURL>
 
 		<liferay-ui:icon
@@ -65,8 +64,7 @@ DDMStructure structure = (DDMStructure)row.getObject();
 			<portlet:param name="struts_action" value="/dynamic_data_mapping/view_template" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
 			<portlet:param name="backURL" value="<%= currentURL %>" />
-			<portlet:param name="groupId" value="<%= String.valueOf(structure.getGroupId()) %>" />
-			<portlet:param name="structureKey" value="<%= structure.getStructureKey() %>" />
+			<portlet:param name="structureId" value="<%= String.valueOf(structure.getStructureId()) %>" />
 		</portlet:renderURL>
 
 		<liferay-ui:icon

@@ -40,7 +40,6 @@ public class DDLRecordSetSoap implements Serializable {
 		soapModel.setCreateDate(model.getCreateDate());
 		soapModel.setModifiedDate(model.getModifiedDate());
 		soapModel.setDDMStructureId(model.getDDMStructureId());
-		soapModel.setRecordSetKey(model.getRecordSetKey());
 		soapModel.setName(model.getName());
 		soapModel.setDescription(model.getDescription());
 		soapModel.setMinDisplayRows(model.getMinDisplayRows());
@@ -168,14 +167,6 @@ public class DDLRecordSetSoap implements Serializable {
 		_DDMStructureId = DDMStructureId;
 	}
 
-	public String getRecordSetKey() {
-		return _recordSetKey;
-	}
-
-	public void setRecordSetKey(String recordSetKey) {
-		_recordSetKey = recordSetKey;
-	}
-
 	public String getName() {
 		return _name;
 	}
@@ -209,7 +200,6 @@ public class DDLRecordSetSoap implements Serializable {
 	private Date _createDate;
 	private Date _modifiedDate;
 	private long _DDMStructureId;
-	private String _recordSetKey;
 	private String _name;
 	private String _description;
 	private int _minDisplayRows;

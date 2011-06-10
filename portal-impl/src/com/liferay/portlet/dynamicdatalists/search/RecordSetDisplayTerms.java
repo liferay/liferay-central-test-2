@@ -26,15 +26,12 @@ public class RecordSetDisplayTerms extends DisplayTerms {
 
 	public static final String DESCRIPTION = "description";
 
-	public static final String RECORD_SET_KEY = "recordSetKey";
-
 	public static final String NAME = "name";
 
 	public RecordSetDisplayTerms(PortletRequest portletRequest) {
 		super(portletRequest);
 
 		description = ParamUtil.getString(portletRequest, DESCRIPTION);
-		recordSetKey = ParamUtil.getString(portletRequest, RECORD_SET_KEY);
 		name = ParamUtil.getString(portletRequest, NAME);
 	}
 
@@ -46,12 +43,6 @@ public class RecordSetDisplayTerms extends DisplayTerms {
 		return name;
 	}
 
-	public String getRecordSetKey() {
-		return recordSetKey;
-	}
-
 	protected String description;
 	protected String name;
-	protected String recordSetKey;
-
 }

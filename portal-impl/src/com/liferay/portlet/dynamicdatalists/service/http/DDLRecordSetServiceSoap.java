@@ -77,37 +77,10 @@ public class DDLRecordSetServiceSoap {
 		}
 	}
 
-	public static void deleteRecordSet(long groupId,
-		java.lang.String recordSetKey) throws RemoteException {
-		try {
-			DDLRecordSetServiceUtil.deleteRecordSet(groupId, recordSetKey);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
 	public static com.liferay.portlet.dynamicdatalists.model.DDLRecordSetSoap getRecordSet(
 		long recordSetId) throws RemoteException {
 		try {
 			com.liferay.portlet.dynamicdatalists.model.DDLRecordSet returnValue = DDLRecordSetServiceUtil.getRecordSet(recordSetId);
-
-			return com.liferay.portlet.dynamicdatalists.model.DDLRecordSetSoap.toSoapModel(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static com.liferay.portlet.dynamicdatalists.model.DDLRecordSetSoap getRecordSet(
-		long groupId, java.lang.String recordSetKey) throws RemoteException {
-		try {
-			com.liferay.portlet.dynamicdatalists.model.DDLRecordSet returnValue = DDLRecordSetServiceUtil.getRecordSet(groupId,
-					recordSetKey);
 
 			return com.liferay.portlet.dynamicdatalists.model.DDLRecordSetSoap.toSoapModel(returnValue);
 		}

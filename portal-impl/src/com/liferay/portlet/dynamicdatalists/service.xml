@@ -107,7 +107,6 @@
 		<!-- Other fields -->
 
 		<column name="DDMStructureId" type="long" />
-		<column name="recordSetKey" type="String" />
 		<column name="name" type="String" localized="true" />
 		<column name="description" type="String" localized="true" />
 		<column name="minDisplayRows" type="int" />
@@ -117,10 +116,6 @@
 		<finder name="GroupId" return-type="Collection">
 			<finder-column name="groupId" />
 		</finder>
-		<finder name="G_R" return-type="DDLRecordSet" unique="true">
-			<finder-column name="groupId" />
-			<finder-column name="recordSetKey" />
-		</finder>
 
 		<!-- References -->
 
@@ -129,8 +124,6 @@
 	</entity>
 	<exceptions>
 		<exception>RecordSetDDMStructureId</exception>
-		<exception>RecordSetDuplicateRecordSetKey</exception>
-		<exception>RecordSetRecordSetKey</exception>
 		<exception>RecordSetName</exception>
 	</exceptions>
 </service-builder>

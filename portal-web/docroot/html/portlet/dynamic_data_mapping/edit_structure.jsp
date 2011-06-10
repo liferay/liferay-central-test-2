@@ -24,9 +24,7 @@ String portletResourceNamespace = ParamUtil.getString(request, "portletResourceN
 
 DDMStructure structure = (DDMStructure)request.getAttribute(WebKeys.DYNAMIC_DATA_MAPPING_STRUCTURE);
 
-long groupId = BeanParamUtil.getLong(structure, request, "groupId", scopeGroupId);
-String structureKey = BeanParamUtil.getString(structure, request, "structureKey");
-String newStructureKey = ParamUtil.getString(request, "newStructureKey");
+String structureId = BeanParamUtil.getString(structure, request, "structureId");
 String script = BeanParamUtil.getString(structure, request, "xsd");
 %>
 
@@ -37,15 +35,12 @@ String script = BeanParamUtil.getString(structure, request, "xsd");
 <aui:form action="<%= editStructureURL %>" method="post" name="fm" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "saveStructure();" %>'>
 	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= (structure != null) ? Constants.UPDATE : Constants.ADD %>" />
 	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
-	<aui:input name="groupId" type="hidden" value="<%= groupId %>" />
-	<aui:input name="structureKey" type="hidden" value="<%= structureKey %>" />
+	<aui:input name="structureId" type="hidden" value="<%= structureId %>" />
 	<aui:input name="script" type="hidden" />
 	<aui:input name="saveCallback" type="hidden" value="<%= saveCallback %>" />
 	<aui:input name="saveAndContinue" type="hidden" value="<%= false %>" />
 
 	<liferay-ui:error exception="<%= StructureDuplicateElementException.class %>" message="please-enter-unique-structure-field-names-(including-field-names-inherited-from-the-parent-structure)" />
-	<liferay-ui:error exception="<%= StructureDuplicateStructureKeyException.class %>" message="please-enter-a-unique-id" />
-	<liferay-ui:error exception="<%= StructureStructureKeyException.class %>" message="please-enter-a-valid-id" />
 	<liferay-ui:error exception="<%= StructureNameException.class %>" message="please-enter-a-valid-name" />
 	<liferay-ui:error exception="<%= StructureXsdException.class %>" message="please-enter-a-valid-xsd" />
 
@@ -116,27 +111,6 @@ String script = BeanParamUtil.getString(structure, request, "xsd");
 				</aui:layout>
 
 				<aui:input name="description" />
-
-				<c:choose>
-					<c:when test="<%= structure == null %>">
-						<c:choose>
-							<c:when test="<%= PropsValues.DYNAMIC_DATA_MAPPING_STRUCTURE_FORCE_AUTOGENERATE_KEY %>">
-								<aui:input name="newStructureKey" type="hidden" />
-								<aui:input name="autoStructureKey" type="hidden" value="<%= true %>" />
-							</c:when>
-							<c:otherwise>
-								<aui:input cssClass="lfr-input-text-container" field="structureKey" fieldParam="newStructureKey" label="id" name="newStructureKey" value="<%= newStructureKey %>" />
-
-								<aui:input label="autogenerate-id" name="autoStructureKey" type="checkbox" value="<%= true %>" />
-							</c:otherwise>
-						</c:choose>
-					</c:when>
-					<c:otherwise>
-						<aui:field-wrapper label="id">
-							<%= structureKey %>
-						</aui:field-wrapper>
-					</c:otherwise>
-				</c:choose>
 			</liferay-ui:panel>
 		</liferay-ui:panel-container>
 	</aui:fieldset>
@@ -159,16 +133,8 @@ String script = BeanParamUtil.getString(structure, request, "xsd");
 		function() {
 			document.<portlet:namespace />fm.<portlet:namespace />script.value = window.<portlet:namespace />formBuilder.getXSD();
 
-			<c:if test="<%= structure == null %>">
-				document.<portlet:namespace />fm.<portlet:namespace />structureKey.value = document.<portlet:namespace />fm.<portlet:namespace />newStructureKey.value;
-			</c:if>
-
 			submitForm(document.<portlet:namespace />fm);
 		},
 		['aui-base']
 	);
-
-	<c:if test="<%= Validator.isNotNull(saveCallback) && Validator.isNotNull(structureKey) %>">
-		window.parent.<%= HtmlUtil.escapeJS(saveCallback) %>('<%= HtmlUtil.escapeJS(structureKey) %>');
-	</c:if>
 </aui:script>

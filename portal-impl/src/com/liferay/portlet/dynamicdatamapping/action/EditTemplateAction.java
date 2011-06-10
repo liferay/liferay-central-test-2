@@ -154,8 +154,8 @@ public class EditTemplateAction extends PortletAction {
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		String structureKey = ParamUtil.getString(
-			actionRequest, "structureKey");
+		String structureId = ParamUtil.getString(
+			actionRequest, "structureId");
 		String availableFields = ParamUtil.getString(
 			actionRequest, "availableFields");
 		String saveCallback = ParamUtil.getString(
@@ -175,7 +175,7 @@ public class EditTemplateAction extends PortletAction {
 			"templateId", String.valueOf(template.getTemplateId()), false);
 		portletURL.setParameter(
 			"groupId", String.valueOf(template.getGroupId()), false);
-		portletURL.setParameter("structureKey", structureKey, false);
+		portletURL.setParameter("structureId", structureId, false);
 		portletURL.setParameter("type", template.getType(), false);
 		portletURL.setParameter("availableFields", availableFields, false);
 		portletURL.setParameter("saveCallback", saveCallback, false);
@@ -192,8 +192,7 @@ public class EditTemplateAction extends PortletAction {
 		long templateId = ParamUtil.getLong(uploadRequest, "templateId");
 
 		long groupId = ParamUtil.getLong(uploadRequest, "groupId");
-		String structureKey = ParamUtil.getString(
-			uploadRequest, "structureKey");
+		long structureId = ParamUtil.getLong(uploadRequest, "structureId");
 		String name = ParamUtil.getString(uploadRequest, "name");
 		String description = ParamUtil.getString(uploadRequest, "description");
 		String type = ParamUtil.getString(uploadRequest, "type");
@@ -215,7 +214,7 @@ public class EditTemplateAction extends PortletAction {
 
 		if (templateId <= 0) {
 			DDMStructure structure = DDMStructureLocalServiceUtil.getStructure(
-				groupId, structureKey);
+				structureId);
 
 			template = DDMTemplateServiceUtil.addTemplate(
 				groupId, structure.getStructureId(), name, description, type,

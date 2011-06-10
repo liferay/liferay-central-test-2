@@ -54,9 +54,6 @@ public class RecordSetSearch extends SearchContainer<DDLRecordSet> {
 			RecordSetDisplayTerms.DESCRIPTION, displayTerms.getDescription());
 		iteratorURL.setParameter(
 			RecordSetDisplayTerms.NAME, String.valueOf(displayTerms.getName()));
-		iteratorURL.setParameter(
-			RecordSetDisplayTerms.RECORD_SET_KEY,
-			displayTerms.getRecordSetKey());
 	}
 
 }

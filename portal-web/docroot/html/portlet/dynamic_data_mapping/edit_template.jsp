@@ -30,7 +30,7 @@ long groupId = BeanParamUtil.getLong(template, request, "groupId", scopeGroupId)
 
 DDMStructure structure = (DDMStructure)request.getAttribute(WebKeys.DYNAMIC_DATA_MAPPING_STRUCTURE);
 
-String structureKey = BeanParamUtil.getString(structure, request, "structureKey");
+long structureId = BeanParamUtil.getLong(structure, request, "structureId");
 
 String type = BeanParamUtil.getString(template, request, "type", "detail");
 String script = BeanParamUtil.getString(template, request, "script");
@@ -49,9 +49,9 @@ if (Validator.isNotNull(structureAvailableFields)) {
 <aui:form action="<%= editTemplateURL %>" enctype="multipart/form-data" method="post" name="fm" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "saveTemplate();" %>'>
 	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= (template != null) ? Constants.UPDATE : Constants.ADD %>" />
 	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
-	<aui:input name="templateId" type="hidden" value="<%= String.valueOf(templateId) %>" />
+	<aui:input name="templateId" type="hidden" value="<%= templateId %>" />
 	<aui:input name="groupId" type="hidden" value="<%= groupId %>" />
-	<aui:input name="structureKey" type="hidden" value="<%= structureKey %>" />
+	<aui:input name="structureId" type="hidden" value="<%= structureId %>" />
 	<aui:input name="type" type="hidden" value="<%= type %>" />
 	<aui:input name="saveCallback" type="hidden" value="<%= saveCallback %>" />
 	<aui:input name="saveAndContinue" type="hidden" value="<%= false %>" />

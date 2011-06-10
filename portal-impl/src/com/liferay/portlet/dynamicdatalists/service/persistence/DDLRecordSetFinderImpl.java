@@ -38,22 +38,20 @@ import java.util.List;
 public class DDLRecordSetFinderImpl extends BasePersistenceImpl<DDLRecordSet>
 	implements DDLRecordSetFinder {
 
-	public static String COUNT_BY_C_G_R_N_D =
-		DDLRecordSetFinder.class.getName() + ".countByC_G_R_N_D";
+	public static String COUNT_BY_C_G_N_D =
+		DDLRecordSetFinder.class.getName() + ".countByC_G_N_D";
 
-	public static String FIND_BY_C_G_R_N_D =
-		DDLRecordSetFinder.class.getName() + ".findByC_G_R_N_D";
+	public static String FIND_BY_C_G_N_D =
+		DDLRecordSetFinder.class.getName() + ".findByC_G_N_D";
 
 	public int countByKeywords(long companyId, long groupId, String keywords)
 		throws SystemException{
 
-		String[] recordSetKeys = null;
 		String[] names = null;
 		String[] descriptions = null;
 		boolean andOperator = false;
 
 		if (Validator.isNotNull(keywords)) {
-			recordSetKeys = CustomSQLUtil.keywords(keywords);
 			names = CustomSQLUtil.keywords(keywords);
 			descriptions = CustomSQLUtil.keywords(keywords, false);
 		}
@@ -61,19 +59,18 @@ public class DDLRecordSetFinderImpl extends BasePersistenceImpl<DDLRecordSet>
 			andOperator = true;
 		}
 
-		return doCountByC_G_R_N_D(
-			companyId, groupId, recordSetKeys, names, descriptions,
-			andOperator);
+		return doCountByC_G_N_D(
+			companyId, groupId, names, descriptions, andOperator);
 	}
 
-	public int countByC_G_R_N_D(
-			long companyId, long groupId, String recordSetKey, String name,
+	public int countByC_G_N_D(
+			long companyId, long groupId, String name,
 			String description, boolean andOperator)
 		throws SystemException {
 
-		return doCountByC_G_R_N_D(
-			companyId, groupId, new String[] {recordSetKey},
-			new String[] {name}, new String[] {description}, andOperator);
+		return doCountByC_G_N_D(
+			companyId, groupId, new String[] {name},
+			new String[] {description}, andOperator);
 	}
 
 	public List<DDLRecordSet> findByKeywords(
@@ -81,13 +78,11 @@ public class DDLRecordSetFinderImpl extends BasePersistenceImpl<DDLRecordSet>
 			OrderByComparator orderByComparator)
 		throws SystemException {
 
-		String[] recordSetKeys = null;
 		String[] names = null;
 		String[] descriptions = null;
 		boolean andOperator = false;
 
 		if (Validator.isNotNull(keywords)) {
-			recordSetKeys = CustomSQLUtil.keywords(keywords);
 			names = CustomSQLUtil.keywords(keywords);
 			descriptions = CustomSQLUtil.keywords(keywords, false);
 		}
@@ -95,40 +90,39 @@ public class DDLRecordSetFinderImpl extends BasePersistenceImpl<DDLRecordSet>
 			andOperator = true;
 		}
 
-		return findByC_G_R_N_D(
-			companyId, groupId, recordSetKeys, names, descriptions, andOperator,
+		return findByC_G_N_D(
+			companyId, groupId, names, descriptions, andOperator,
 			start, end, orderByComparator);
 	}
 
-	public List<DDLRecordSet> findByC_G_R_N_D(
-			long companyId, long groupId, String recordSetKey, String name,
+	public List<DDLRecordSet> findByC_G_N_D(
+			long companyId, long groupId, String name,
 			String description, boolean andOperator, int start, int end,
 			OrderByComparator orderByComparator)
 		throws SystemException {
 
-		return findByC_G_R_N_D(
-			companyId, groupId, new String[] {recordSetKey},
-			new String[] {name}, new String[] {description}, andOperator, start,
+		return findByC_G_N_D(
+			companyId, groupId, new String[] {name},
+			new String[] {description}, andOperator, start,
 			end, orderByComparator);
 	}
 
-	public List<DDLRecordSet> findByC_G_R_N_D(
-			long companyId, long groupId, String[] recordSetKeys,
-			String[] names, String[] descriptions, boolean andOperator,
-			int start, int end, OrderByComparator orderByComparator)
+	public List<DDLRecordSet> findByC_G_N_D(
+			long companyId, long groupId, String[] names,
+			String[] descriptions, boolean andOperator,int start, int end,
+			OrderByComparator orderByComparator)
 		throws SystemException {
 
-		return doFindByC_G_R_N_D(
-			companyId, groupId, recordSetKeys, names, descriptions, andOperator,
+		return doFindByC_G_N_D(
+			companyId, groupId, names, descriptions, andOperator,
 			start, end, orderByComparator);
 	}
 
-	protected int doCountByC_G_R_N_D(
-			long companyId, long groupId, String[] recordSetKeys,
-			String[] names, String[] descriptions, boolean andOperator)
+	protected int doCountByC_G_N_D(
+			long companyId, long groupId, String[] names,
+			String[] descriptions, boolean andOperator)
 		throws SystemException {
 
-		recordSetKeys = CustomSQLUtil.keywords(recordSetKeys, false);
 		names = CustomSQLUtil.keywords(names);
 		descriptions = CustomSQLUtil.keywords(descriptions, false);
 
@@ -137,14 +131,12 @@ public class DDLRecordSetFinderImpl extends BasePersistenceImpl<DDLRecordSet>
 		try {
 			session = openSession();
 
-			String sql = CustomSQLUtil.get(COUNT_BY_C_G_R_N_D);
+			String sql = CustomSQLUtil.get(COUNT_BY_C_G_N_D);
 
 			if (groupId <= 0) {
 				sql = StringUtil.replace(sql, "(groupId = ?) AND", "");
 			}
 
-			sql = CustomSQLUtil.replaceKeywords(
-				sql, "recordSetKey", StringPool.EQUAL, false, recordSetKeys);
 			sql = CustomSQLUtil.replaceKeywords(
 				sql, "lower(name)", StringPool.LIKE, false, names);
 			sql = CustomSQLUtil.replaceKeywords(
@@ -163,7 +155,6 @@ public class DDLRecordSetFinderImpl extends BasePersistenceImpl<DDLRecordSet>
 				qPos.add(groupId);
 			}
 
-			qPos.add(recordSetKeys, 2);
 			qPos.add(names, 2);
 			qPos.add(descriptions, 2);
 
@@ -187,13 +178,12 @@ public class DDLRecordSetFinderImpl extends BasePersistenceImpl<DDLRecordSet>
 		}
 	}
 
-	protected List<DDLRecordSet> doFindByC_G_R_N_D(
-			long companyId, long groupId, String[] recordSetKeys,
-			String[] names, String[] descriptions, boolean andOperator,
-			int start, int end, OrderByComparator orderByComparator)
+	protected List<DDLRecordSet> doFindByC_G_N_D(
+			long companyId, long groupId, String[] names,
+			String[] descriptions, boolean andOperator, int start, int end,
+			OrderByComparator orderByComparator)
 		throws SystemException {
 
-		recordSetKeys = CustomSQLUtil.keywords(recordSetKeys, false);
 		names = CustomSQLUtil.keywords(names);
 		descriptions = CustomSQLUtil.keywords(descriptions, false);
 
@@ -202,14 +192,12 @@ public class DDLRecordSetFinderImpl extends BasePersistenceImpl<DDLRecordSet>
 		try {
 			session = openSession();
 
-			String sql = CustomSQLUtil.get(FIND_BY_C_G_R_N_D);
+			String sql = CustomSQLUtil.get(FIND_BY_C_G_N_D);
 
 			if (groupId <= 0) {
 				sql = StringUtil.replace(sql, "(groupId = ?) AND", "");
 			}
 
-			sql = CustomSQLUtil.replaceKeywords(
-				sql, "recordSetKey", StringPool.EQUAL, false, recordSetKeys);
 			sql = CustomSQLUtil.replaceKeywords(
 				sql, "lower(name)", StringPool.LIKE, false, names);
 			sql = CustomSQLUtil.replaceKeywords(
@@ -229,7 +217,6 @@ public class DDLRecordSetFinderImpl extends BasePersistenceImpl<DDLRecordSet>
 				qPos.add(groupId);
 			}
 
-			qPos.add(recordSetKeys, 2);
 			qPos.add(names, 2);
 			qPos.add(descriptions, 2);
 

@@ -51,7 +51,6 @@ create table DDLRecordSet (
 	createDate DATE null,
 	modifiedDate DATE null,
 	DDMStructureId LONG,
-	recordSetKey VARCHAR(75) null,
 	name STRING null,
 	description STRING null,
 	minDisplayRows INTEGER
@@ -89,7 +88,6 @@ create table DDMStructure (
 	createDate DATE null,
 	modifiedDate DATE null,
 	classNameId LONG,
-	structureKey VARCHAR(75) null,
 	name STRING null,
 	description STRING null,
 	xsd TEXT null,

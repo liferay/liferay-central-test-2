@@ -79,8 +79,4 @@ while (itr.hasNext()) {
 		},
 		['aui-base']
 	);
-
-	<c:if test="<%= Validator.isNotNull(saveCallback) && Validator.isNotNull(structureKey) %>">
-		window.parent.<%= HtmlUtil.escapeJS(saveCallback) %>('<%= HtmlUtil.escapeJS(structureKey) %>');
-	</c:if>
 </aui:script>

@@ -29,9 +29,7 @@ import com.liferay.portlet.ActionRequestImpl;
 import com.liferay.portlet.PortletURLImpl;
 import com.liferay.portlet.dynamicdatamapping.NoSuchStructureException;
 import com.liferay.portlet.dynamicdatamapping.StructureDuplicateElementException;
-import com.liferay.portlet.dynamicdatamapping.StructureDuplicateStructureKeyException;
 import com.liferay.portlet.dynamicdatamapping.StructureNameException;
-import com.liferay.portlet.dynamicdatamapping.StructureStructureKeyException;
 import com.liferay.portlet.dynamicdatamapping.StructureXsdException;
 import com.liferay.portlet.dynamicdatamapping.model.DDMStructure;
 import com.liferay.portlet.dynamicdatamapping.service.DDMStructureServiceUtil;
@@ -101,9 +99,7 @@ public class EditStructureAction extends PortletAction {
 				setForward(actionRequest, "portlet.dynamic_data_mapping.error");
 			}
 			else if (e instanceof StructureDuplicateElementException ||
-					 e instanceof StructureDuplicateStructureKeyException ||
 					 e instanceof StructureNameException ||
-					 e instanceof StructureStructureKeyException ||
 					 e instanceof StructureXsdException) {
 
 				SessionErrors.add(actionRequest, e.getClass().getName(), e);
@@ -188,7 +184,7 @@ public class EditStructureAction extends PortletAction {
 		portletURL.setParameter(
 			"groupId", String.valueOf(structure.getGroupId()), false);
 		portletURL.setParameter(
-			"structureKey", structure.getStructureKey(), false);
+			"structureId", String.valueOf(structure.getStructureId()), false);
 		portletURL.setParameter("availableFields", availableFields, false);
 		portletURL.setParameter("saveCallback", saveCallback, false);
 
@@ -202,10 +198,7 @@ public class EditStructureAction extends PortletAction {
 
 		long groupId = ParamUtil.getLong(actionRequest, "groupId");
 		long classNameId = ParamUtil.getLong(actionRequest, "classNameId");
-		String structureKey = ParamUtil.getString(
-			actionRequest, "structureKey");
-		boolean autoStructureKey = ParamUtil.getBoolean(
-			actionRequest, "autoStructureKey");
+		long structureId = ParamUtil.getLong(actionRequest, "structureId");
 		Map<Locale, String> nameMap = LocalizationUtil.getLocalizationMap(
 			actionRequest, "name");
 		Map<Locale, String> descriptionMap =
@@ -220,12 +213,12 @@ public class EditStructureAction extends PortletAction {
 
 		if (cmd.equals(Constants.ADD)) {
 			structure = DDMStructureServiceUtil.addStructure(
-				groupId, classNameId, structureKey, autoStructureKey, nameMap,
+				groupId, classNameId, nameMap,
 				descriptionMap, xsd, storageType, serviceContext);
 		}
 		else if (cmd.equals(Constants.UPDATE)) {
 			structure = DDMStructureServiceUtil.updateStructure(
-				groupId, structureKey, nameMap, descriptionMap, xsd,
+				groupId, structureId, nameMap, descriptionMap, xsd,
 				serviceContext);
 		}
 

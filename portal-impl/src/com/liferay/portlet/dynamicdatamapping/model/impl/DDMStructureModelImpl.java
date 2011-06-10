@@ -79,13 +79,12 @@ public class DDMStructureModelImpl extends BaseModelImpl<DDMStructure>
 			{ "createDate", Types.TIMESTAMP },
 			{ "modifiedDate", Types.TIMESTAMP },
 			{ "classNameId", Types.BIGINT },
-			{ "structureKey", Types.VARCHAR },
 			{ "name", Types.VARCHAR },
 			{ "description", Types.VARCHAR },
 			{ "xsd", Types.CLOB },
 			{ "storageType", Types.VARCHAR }
 		};
-	public static final String TABLE_SQL_CREATE = "create table DDMStructure (uuid_ VARCHAR(75) null,structureId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,classNameId LONG,structureKey VARCHAR(75) null,name STRING null,description STRING null,xsd TEXT null,storageType VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table DDMStructure (uuid_ VARCHAR(75) null,structureId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,classNameId LONG,name STRING null,description STRING null,xsd TEXT null,storageType VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table DDMStructure";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
@@ -115,7 +114,6 @@ public class DDMStructureModelImpl extends BaseModelImpl<DDMStructure>
 		model.setCreateDate(soapModel.getCreateDate());
 		model.setModifiedDate(soapModel.getModifiedDate());
 		model.setClassNameId(soapModel.getClassNameId());
-		model.setStructureKey(soapModel.getStructureKey());
 		model.setName(soapModel.getName());
 		model.setDescription(soapModel.getDescription());
 		model.setXsd(soapModel.getXsd());
@@ -293,28 +291,6 @@ public class DDMStructureModelImpl extends BaseModelImpl<DDMStructure>
 
 	public void setClassNameId(long classNameId) {
 		_classNameId = classNameId;
-	}
-
-	@JSON
-	public String getStructureKey() {
-		if (_structureKey == null) {
-			return StringPool.BLANK;
-		}
-		else {
-			return _structureKey;
-		}
-	}
-
-	public void setStructureKey(String structureKey) {
-		if (_originalStructureKey == null) {
-			_originalStructureKey = _structureKey;
-		}
-
-		_structureKey = structureKey;
-	}
-
-	public String getOriginalStructureKey() {
-		return GetterUtil.getString(_originalStructureKey);
 	}
 
 	@JSON
@@ -563,7 +539,6 @@ public class DDMStructureModelImpl extends BaseModelImpl<DDMStructure>
 		ddmStructureImpl.setCreateDate(getCreateDate());
 		ddmStructureImpl.setModifiedDate(getModifiedDate());
 		ddmStructureImpl.setClassNameId(getClassNameId());
-		ddmStructureImpl.setStructureKey(getStructureKey());
 		ddmStructureImpl.setName(getName());
 		ddmStructureImpl.setDescription(getDescription());
 		ddmStructureImpl.setXsd(getXsd());
@@ -624,12 +599,10 @@ public class DDMStructureModelImpl extends BaseModelImpl<DDMStructure>
 		ddmStructureModelImpl._originalGroupId = ddmStructureModelImpl._groupId;
 
 		ddmStructureModelImpl._setOriginalGroupId = false;
-
-		ddmStructureModelImpl._originalStructureKey = ddmStructureModelImpl._structureKey;
 	}
 
 	public String toString() {
-		StringBundler sb = new StringBundler(29);
+		StringBundler sb = new StringBundler(27);
 
 		sb.append("{uuid=");
 		sb.append(getUuid());
@@ -649,8 +622,6 @@ public class DDMStructureModelImpl extends BaseModelImpl<DDMStructure>
 		sb.append(getModifiedDate());
 		sb.append(", classNameId=");
 		sb.append(getClassNameId());
-		sb.append(", structureKey=");
-		sb.append(getStructureKey());
 		sb.append(", name=");
 		sb.append(getName());
 		sb.append(", description=");
@@ -665,7 +636,7 @@ public class DDMStructureModelImpl extends BaseModelImpl<DDMStructure>
 	}
 
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(46);
+		StringBundler sb = new StringBundler(43);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.portlet.dynamicdatamapping.model.DDMStructure");
@@ -708,10 +679,6 @@ public class DDMStructureModelImpl extends BaseModelImpl<DDMStructure>
 		sb.append(getClassNameId());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>structureKey</column-name><column-value><![CDATA[");
-		sb.append(getStructureKey());
-		sb.append("]]></column-value></column>");
-		sb.append(
 			"<column><column-name>name</column-name><column-value><![CDATA[");
 		sb.append(getName());
 		sb.append("]]></column-value></column>");
@@ -746,8 +713,6 @@ public class DDMStructureModelImpl extends BaseModelImpl<DDMStructure>
 	private Date _createDate;
 	private Date _modifiedDate;
 	private long _classNameId;
-	private String _structureKey;
-	private String _originalStructureKey;
 	private String _name;
 	private String _description;
 	private String _xsd;

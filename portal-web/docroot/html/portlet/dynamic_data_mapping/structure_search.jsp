@@ -26,8 +26,6 @@ StructureDisplayTerms displayTerms = new StructureDisplayTerms(renderRequest);
 	id="toggle_id_ddm_structure_search"
 >
 	<aui:fieldset cssClass="lfr-ddm-search-form">
-		<aui:input label="id" name="<%= displayTerms.STRUCTURE_KEY %>" size="20" value="<%= displayTerms.getStructureKey() %>" />
-
 		<aui:input name="<%= displayTerms.NAME %>" size="20" value="<%= displayTerms.getName() %>" />
 
 		<aui:input name="<%= displayTerms.DESCRIPTION %>" size="20" value="<%= displayTerms.getDescription() %>" />
@@ -84,7 +82,7 @@ if (Validator.isNotNull(scopeStructureName)) {
 <c:if test="<%= showAddStructureButton %>">
 	<aui:button-row>
 		<aui:button onClick='<%= renderResponse.getNamespace() + "addStructure();" %>' value="<%= buttonLabel %>" />
-	</aui:button-row>
+	</aui:button-row>                  f
 </c:if>
 
 <aui:script>

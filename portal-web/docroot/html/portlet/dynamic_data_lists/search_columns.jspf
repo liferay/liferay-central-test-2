@@ -18,7 +18,7 @@
 	href="<%= rowURL %>"
 	name="id"
 	orderable="<%= false %>"
-	property="recordSetKey"
+	property="recordSetId"
 />
 
 <liferay-ui:search-container-column-text

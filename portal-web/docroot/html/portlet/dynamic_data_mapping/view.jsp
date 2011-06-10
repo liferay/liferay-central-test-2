@@ -53,7 +53,7 @@ portletURL.setParameter("tabs1", tabs1);
 	>
 		<liferay-ui:search-container-column-text
 			name="id"
-			property="structureKey"
+			property="structureId"
 		/>
 
 		<liferay-ui:search-container-column-text

@@ -16,8 +16,8 @@
 
 <%
 if (searchTerms.isAdvancedSearch()) {
-	total = DDLRecordSetLocalServiceUtil.searchCount(company.getCompanyId(), scopeGroupId, searchTerms.getRecordSetKey(), searchTerms.getName(), searchTerms.getDescription(), searchTerms.isAndOperator());
-	results = DDLRecordSetLocalServiceUtil.search(company.getCompanyId(), scopeGroupId, searchTerms.getRecordSetKey(), searchTerms.getName(), searchTerms.getDescription(), searchTerms.isAndOperator(), searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator());
+	total = DDLRecordSetLocalServiceUtil.searchCount(company.getCompanyId(), scopeGroupId, searchTerms.getName(), searchTerms.getDescription(), searchTerms.isAndOperator());
+	results = DDLRecordSetLocalServiceUtil.search(company.getCompanyId(), scopeGroupId, searchTerms.getName(), searchTerms.getDescription(), searchTerms.isAndOperator(), searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator());
 }
 else {
 	total = DDLRecordSetLocalServiceUtil.searchCount(company.getCompanyId(), scopeGroupId, searchTerms.getKeywords());

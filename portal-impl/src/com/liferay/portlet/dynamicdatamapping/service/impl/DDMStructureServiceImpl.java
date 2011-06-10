@@ -34,8 +34,7 @@ public class DDMStructureServiceImpl
 	extends DDMStructureServiceBaseImpl {
 
 	public DDMStructure addStructure(
-			long groupId, long classNameId, String structureKey,
-			boolean autoStructureKey, Map<Locale, String> nameMap,
+			long groupId, long classNameId, Map<Locale, String> nameMap,
 			Map<Locale, String> descriptionMap, String xsd, String storageType,
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
@@ -45,8 +44,8 @@ public class DDMStructureServiceImpl
 			ActionKeys.ADD_STRUCTURE);
 
 		return ddmStructureLocalService.addStructure(
-			getUserId(), groupId, classNameId, structureKey, autoStructureKey,
-			nameMap, descriptionMap, xsd, storageType, serviceContext);
+			getUserId(), groupId, classNameId, nameMap, descriptionMap,
+			xsd, storageType, serviceContext);
 	}
 
 	public void deleteStructure(long structureId)
@@ -58,36 +57,26 @@ public class DDMStructureServiceImpl
 		ddmStructureLocalService.deleteStructure(structureId);
 	}
 
-	public void deleteStructure(long groupId, String structureKey)
+	public DDMStructure getStructure(long structureId)
 		throws PortalException, SystemException {
 
 		DDMStructurePermission.check(
-			getPermissionChecker(), groupId, structureKey, ActionKeys.DELETE);
+			getPermissionChecker(), structureId, ActionKeys.VIEW);
 
-		ddmStructureLocalService.deleteStructure(
-			groupId, structureKey);
-	}
-
-	public DDMStructure getStructure(long groupId, String structureKey)
-		throws PortalException, SystemException {
-
-		DDMStructurePermission.check(
-			getPermissionChecker(), groupId, structureKey, ActionKeys.VIEW);
-
-		return ddmStructurePersistence.findByG_S(groupId, structureKey);
+		return ddmStructurePersistence.findByPrimaryKey(structureId);
 	}
 
 	public DDMStructure updateStructure(
-			long groupId, String structureKey, Map<Locale, String> nameMap,
+			long groupId, long structureId, Map<Locale, String> nameMap,
 			Map<Locale, String> descriptionMap, String xsd,
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		DDMStructurePermission.check(
-			getPermissionChecker(), groupId, structureKey, ActionKeys.UPDATE);
+			getPermissionChecker(), structureId, ActionKeys.UPDATE);
 
 		return ddmStructureLocalService.updateStructure(
-			groupId, structureKey, nameMap, descriptionMap, xsd,
+			groupId, structureId, nameMap, descriptionMap, xsd,
 			serviceContext);
 	}
 

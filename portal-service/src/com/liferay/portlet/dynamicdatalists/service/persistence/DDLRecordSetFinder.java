@@ -22,9 +22,8 @@ public interface DDLRecordSetFinder {
 		java.lang.String keywords)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public int countByC_G_R_N_D(long companyId, long groupId,
-		java.lang.String recordSetKey, java.lang.String name,
-		java.lang.String description, boolean andOperator)
+	public int countByC_G_N_D(long companyId, long groupId,
+		java.lang.String name, java.lang.String description, boolean andOperator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public java.util.List<com.liferay.portlet.dynamicdatalists.model.DDLRecordSet> findByKeywords(
@@ -33,17 +32,16 @@ public interface DDLRecordSetFinder {
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public java.util.List<com.liferay.portlet.dynamicdatalists.model.DDLRecordSet> findByC_G_R_N_D(
-		long companyId, long groupId, java.lang.String recordSetKey,
-		java.lang.String name, java.lang.String description,
-		boolean andOperator, int start, int end,
+	public java.util.List<com.liferay.portlet.dynamicdatalists.model.DDLRecordSet> findByC_G_N_D(
+		long companyId, long groupId, java.lang.String name,
+		java.lang.String description, boolean andOperator, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public java.util.List<com.liferay.portlet.dynamicdatalists.model.DDLRecordSet> findByC_G_R_N_D(
-		long companyId, long groupId, java.lang.String[] recordSetKeys,
-		java.lang.String[] names, java.lang.String[] descriptions,
-		boolean andOperator, int start, int end,
+	public java.util.List<com.liferay.portlet.dynamicdatalists.model.DDLRecordSet> findByC_G_N_D(
+		long companyId, long groupId, java.lang.String[] names,
+		java.lang.String[] descriptions, boolean andOperator, int start,
+		int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 }

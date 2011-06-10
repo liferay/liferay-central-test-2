@@ -678,51 +678,6 @@ public class DDMStructureUtil {
 	}
 
 	/**
-	* Returns the d d m structure where groupId = &#63; and structureKey = &#63; or throws a {@link com.liferay.portlet.dynamicdatamapping.NoSuchStructureException} if it could not be found.
-	*
-	* @param groupId the group ID
-	* @param structureKey the structure key
-	* @return the matching d d m structure
-	* @throws com.liferay.portlet.dynamicdatamapping.NoSuchStructureException if a matching d d m structure could not be found
-	* @throws SystemException if a system exception occurred
-	*/
-	public static com.liferay.portlet.dynamicdatamapping.model.DDMStructure findByG_S(
-		long groupId, java.lang.String structureKey)
-		throws com.liferay.portal.kernel.exception.SystemException,
-			com.liferay.portlet.dynamicdatamapping.NoSuchStructureException {
-		return getPersistence().findByG_S(groupId, structureKey);
-	}
-
-	/**
-	* Returns the d d m structure where groupId = &#63; and structureKey = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
-	*
-	* @param groupId the group ID
-	* @param structureKey the structure key
-	* @return the matching d d m structure, or <code>null</code> if a matching d d m structure could not be found
-	* @throws SystemException if a system exception occurred
-	*/
-	public static com.liferay.portlet.dynamicdatamapping.model.DDMStructure fetchByG_S(
-		long groupId, java.lang.String structureKey)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().fetchByG_S(groupId, structureKey);
-	}
-
-	/**
-	* Returns the d d m structure where groupId = &#63; and structureKey = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
-	*
-	* @param groupId the group ID
-	* @param structureKey the structure key
-	* @return the matching d d m structure, or <code>null</code> if a matching d d m structure could not be found
-	* @throws SystemException if a system exception occurred
-	*/
-	public static com.liferay.portlet.dynamicdatamapping.model.DDMStructure fetchByG_S(
-		long groupId, java.lang.String structureKey, boolean retrieveFromCache)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence()
-				   .fetchByG_S(groupId, structureKey, retrieveFromCache);
-	}
-
-	/**
 	* Returns all the d d m structures where groupId = &#63; and name = &#63; and description = &#63;.
 	*
 	* @param groupId the group ID
@@ -1046,19 +1001,6 @@ public class DDMStructureUtil {
 	}
 
 	/**
-	* Removes the d d m structure where groupId = &#63; and structureKey = &#63; from the database.
-	*
-	* @param groupId the group ID
-	* @param structureKey the structure key
-	* @throws SystemException if a system exception occurred
-	*/
-	public static void removeByG_S(long groupId, java.lang.String structureKey)
-		throws com.liferay.portal.kernel.exception.SystemException,
-			com.liferay.portlet.dynamicdatamapping.NoSuchStructureException {
-		getPersistence().removeByG_S(groupId, structureKey);
-	}
-
-	/**
 	* Removes all the d d m structures where groupId = &#63; and name = &#63; and description = &#63; from the database.
 	*
 	* @param groupId the group ID
@@ -1141,19 +1083,6 @@ public class DDMStructureUtil {
 	public static int countByClassNameId(long classNameId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByClassNameId(classNameId);
-	}
-
-	/**
-	* Returns the number of d d m structures where groupId = &#63; and structureKey = &#63;.
-	*
-	* @param groupId the group ID
-	* @param structureKey the structure key
-	* @return the number of matching d d m structures
-	* @throws SystemException if a system exception occurred
-	*/
-	public static int countByG_S(long groupId, java.lang.String structureKey)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().countByG_S(groupId, structureKey);
 	}
 
 	/**

@@ -27,8 +27,6 @@ RecordSetDisplayTerms displayTerms = new RecordSetDisplayTerms(renderRequest);
 >
 
 	<aui:fieldset>
-		<aui:input label="id" name="<%= displayTerms.RECORD_SET_KEY %>" size="20" value="<%= displayTerms.getRecordSetKey() %>" />
-
 		<aui:input name="<%= displayTerms.NAME %>" size="20" type="text" value="<%= displayTerms.getName() %>" />
 
 		<aui:input name="<%= displayTerms.DESCRIPTION %>" size="20" type="text" value="<%= displayTerms.getDescription() %>" />
@@ -37,7 +35,6 @@ RecordSetDisplayTerms displayTerms = new RecordSetDisplayTerms(renderRequest);
 
 <c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 	<aui:script>
-		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace /><%= displayTerms.RECORD_SET_KEY %>);
 		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace /><%= displayTerms.KEYWORDS %>);
 	</aui:script>
 </c:if>

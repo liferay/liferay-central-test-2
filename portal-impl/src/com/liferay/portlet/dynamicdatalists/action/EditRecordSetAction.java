@@ -27,9 +27,7 @@ import com.liferay.portal.struts.PortletAction;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.portlet.dynamicdatalists.NoSuchRecordSetException;
 import com.liferay.portlet.dynamicdatalists.RecordSetDDMStructureIdException;
-import com.liferay.portlet.dynamicdatalists.RecordSetDuplicateRecordSetKeyException;
 import com.liferay.portlet.dynamicdatalists.RecordSetNameException;
-import com.liferay.portlet.dynamicdatalists.RecordSetRecordSetKeyException;
 import com.liferay.portlet.dynamicdatalists.model.DDLRecordSet;
 import com.liferay.portlet.dynamicdatalists.service.DDLRecordSetServiceUtil;
 import com.liferay.portlet.dynamicdatalists.util.DDLConstants;
@@ -81,8 +79,6 @@ public class EditRecordSetAction extends PortletAction {
 				setForward(actionRequest, "portlet.dynamic_data_lists.error");
 			}
 			else if (e instanceof RecordSetDDMStructureIdException ||
-					 e instanceof RecordSetDuplicateRecordSetKeyException ||
-					 e instanceof RecordSetRecordSetKeyException ||
 					 e instanceof RecordSetNameException) {
 
 				SessionErrors.add(actionRequest, e.getClass().getName());
@@ -143,10 +139,7 @@ public class EditRecordSetAction extends PortletAction {
 		long groupId = ParamUtil.getLong(actionRequest, "groupId");
 		long ddmStructureId = ParamUtil.getLong(
 			actionRequest, "ddmStructureId");
-		String recordSetKey = ParamUtil.getString(
-			actionRequest, "recordSetKey");
-		boolean autoRecordSetKey = ParamUtil.getBoolean(
-			actionRequest, "autoRecordSetKey");
+		long recordSetId = ParamUtil.getLong(actionRequest, "recordSetId");
 		Map<Locale, String> nameMap = LocalizationUtil.getLocalizationMap(
 			actionRequest, "name");
 		Map<Locale, String> descriptionMap =
@@ -159,13 +152,12 @@ public class EditRecordSetAction extends PortletAction {
 
 		if (cmd.equals(Constants.ADD)) {
 			recordSet = DDLRecordSetServiceUtil.addRecordSet(
-				groupId, ddmStructureId, recordSetKey, autoRecordSetKey,
-				nameMap, descriptionMap, DDLConstants.MIN_DISPLAY_ROWS_DEFAULT,
-				serviceContext);
+				groupId, ddmStructureId, nameMap, descriptionMap,
+				DDLConstants.MIN_DISPLAY_ROWS_DEFAULT, serviceContext);
 		}
 		else {
 			recordSet = DDLRecordSetServiceUtil.updateRecordSet(
-				groupId, ddmStructureId, recordSetKey, nameMap, descriptionMap,
+				groupId, ddmStructureId, recordSetId, nameMap, descriptionMap,
 				DDLConstants.MIN_DISPLAY_ROWS_DEFAULT, serviceContext);
 		}
 
