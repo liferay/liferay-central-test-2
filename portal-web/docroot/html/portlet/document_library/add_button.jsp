@@ -85,6 +85,7 @@ List<DLDocumentType> documentTypes = DLDocumentTypeServiceUtil.getDocumentTypes(
 	</c:if>
 
 	<c:if test="<%= (folder == null) || folder.isSupportsMetadata() %>">
+
 		<%
 		for (DLDocumentType documentType : documentTypes) {
 		%>
@@ -103,8 +104,8 @@ List<DLDocumentType> documentTypes = DLDocumentTypeServiceUtil.getDocumentTypes(
 		<%
 		}
 		%>
-	</c:if>
 
+	</c:if>
 </liferay-ui:icon-menu>
 
 <aui:script use="aui-base,aui-swf">
