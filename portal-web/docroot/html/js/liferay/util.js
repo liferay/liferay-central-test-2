@@ -1514,7 +1514,13 @@
 		Util,
 		'updateCheckboxValue',
 		function(checkbox) {
-			A.one(checkbox).previous().val(checkbox.checked);
+			var value = "";
+
+			if (checkbox.checked) {
+				value = checkbox.value;
+			}
+
+			A.one(checkbox).previous().val(value);
 		},
 		['aui-base']
 	);
