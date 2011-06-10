@@ -1514,7 +1514,7 @@
 		Util,
 		'updateCheckboxValue',
 		function(checkbox) {
-			var value = "";
+			var value = '';
 
 			if (checkbox.checked) {
 				value = checkbox.value;

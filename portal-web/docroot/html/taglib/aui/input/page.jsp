@@ -160,7 +160,6 @@ String labelTag = AUIUtil.buildLabel(inlineLabel, showForLabel, forLabel);
 
 		<%
 		String valueString = StringPool.BLANK;
-		String defaultValueString = Boolean.TRUE.toString();
 
 		if (value != null) {
 			valueString = value.toString();
@@ -177,6 +176,8 @@ String labelTag = AUIUtil.buildLabel(inlineLabel, showForLabel, forLabel);
 				checked = requestValues[0].equalsIgnoreCase("true") || ArrayUtil.contains(requestValues, valueString);
 			}
 		}
+
+		String defaultValueString = Boolean.TRUE.toString();
 
 		if (Validator.isNotNull(valueString) && !valueString.equalsIgnoreCase("false") && !valueString.equalsIgnoreCase("true")) {
 			defaultValueString = valueString;
