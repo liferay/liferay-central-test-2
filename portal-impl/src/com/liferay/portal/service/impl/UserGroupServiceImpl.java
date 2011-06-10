@@ -50,7 +50,7 @@ public class UserGroupServiceImpl extends UserGroupServiceBaseImpl {
 		userGroupLocalService.addTeamUserGroups(teamId, userGroupIds);
 	}
 
-	public UserGroup addUserGroup(String name, String description)
+	public UserGroup addUserGroup(String name, String description, boolean ldap)
 		throws PortalException, SystemException {
 
 		PortalPermissionUtil.check(
@@ -59,7 +59,7 @@ public class UserGroupServiceImpl extends UserGroupServiceBaseImpl {
 		User user = getUser();
 
 		return userGroupLocalService.addUserGroup(
-			user.getUserId(), user.getCompanyId(), name, description);
+			user.getUserId(), user.getCompanyId(), name, description, ldap);
 	}
 
 	public void deleteUserGroup(long userGroupId)

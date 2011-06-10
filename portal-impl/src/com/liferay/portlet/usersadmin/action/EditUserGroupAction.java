@@ -145,7 +145,8 @@ public class EditUserGroupAction extends PortletAction {
 
 			// Add user group
 
-			userGroup = UserGroupServiceUtil.addUserGroup(name, description);
+			userGroup = UserGroupServiceUtil.addUserGroup(
+				name, description, false);
 		}
 		else {
 
