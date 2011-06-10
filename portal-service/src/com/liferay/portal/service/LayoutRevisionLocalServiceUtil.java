@@ -295,14 +295,6 @@ public class LayoutRevisionLocalServiceUtil {
 		return getService().getLayoutRevision(layoutSetBranchId, plid, head);
 	}
 
-	public static com.liferay.portal.model.LayoutRevision getLayoutRevision(
-		long layoutSetBranchId, long plid, java.lang.String variationName)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return getService()
-				   .getLayoutRevision(layoutSetBranchId, plid, variationName);
-	}
-
 	public static java.util.List<com.liferay.portal.model.LayoutRevision> getLayoutRevisions(
 		long plid) throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getLayoutRevisions(plid);
