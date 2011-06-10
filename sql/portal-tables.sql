@@ -1330,7 +1330,7 @@ create table PortalPreferences (
 	portalPreferencesId LONG not null primary key,
 	ownerId LONG,
 	ownerType INTEGER,
-	preferences VARCHAR(75) null
+	preferences TEXT null
 );
 
 create table Portlet (
@@ -1962,7 +1962,7 @@ create table UserGroup (
 	parentUserGroupId LONG,
 	name VARCHAR(75) null,
 	description STRING null,
-	ldap BOOLEAN
+	addedByLDAPImport BOOLEAN
 );
 
 create table UserGroupGroupRole (

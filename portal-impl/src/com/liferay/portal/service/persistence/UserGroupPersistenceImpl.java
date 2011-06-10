@@ -403,7 +403,7 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 		userGroupImpl.setParentUserGroupId(userGroup.getParentUserGroupId());
 		userGroupImpl.setName(userGroup.getName());
 		userGroupImpl.setDescription(userGroup.getDescription());
-		userGroupImpl.setLdap(userGroup.isLdap());
+		userGroupImpl.setAddedByLDAPImport(userGroup.isAddedByLDAPImport());
 
 		return userGroupImpl;
 	}

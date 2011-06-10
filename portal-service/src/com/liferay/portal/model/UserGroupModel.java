@@ -128,25 +128,25 @@ public interface UserGroupModel extends BaseModel<UserGroup> {
 	public void setDescription(String description);
 
 	/**
-	 * Returns the ldap of this user group.
+	 * Returns the added by l d a p import of this user group.
 	 *
-	 * @return the ldap of this user group
+	 * @return the added by l d a p import of this user group
 	 */
-	public boolean getLdap();
+	public boolean getAddedByLDAPImport();
 
 	/**
-	 * Determines if this user group is ldap.
+	 * Determines if this user group is added by l d a p import.
 	 *
-	 * @return <code>true</code> if this user group is ldap; <code>false</code> otherwise
+	 * @return <code>true</code> if this user group is added by l d a p import; <code>false</code> otherwise
 	 */
-	public boolean isLdap();
+	public boolean isAddedByLDAPImport();
 
 	/**
-	 * Sets whether this user group is ldap.
+	 * Sets whether this user group is added by l d a p import.
 	 *
-	 * @param ldap the ldap of this user group
+	 * @param addedByLDAPImport the added by l d a p import of this user group
 	 */
-	public void setLdap(boolean ldap);
+	public void setAddedByLDAPImport(boolean addedByLDAPImport);
 
 	public boolean isNew();
 

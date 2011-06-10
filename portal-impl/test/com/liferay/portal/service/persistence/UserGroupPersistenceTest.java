@@ -71,7 +71,7 @@ public class UserGroupPersistenceTest extends BasePersistenceTestCase {
 		newUserGroup.setParentUserGroupId(nextLong());
 		newUserGroup.setName(randomString());
 		newUserGroup.setDescription(randomString());
-		newUserGroup.setLdap(randomBoolean());
+		newUserGroup.setAddedByLDAPImport(randomBoolean());
 
 		_persistence.update(newUserGroup, false);
 
@@ -86,7 +86,8 @@ public class UserGroupPersistenceTest extends BasePersistenceTestCase {
 		assertEquals(existingUserGroup.getName(), newUserGroup.getName());
 		assertEquals(existingUserGroup.getDescription(),
 			newUserGroup.getDescription());
-		assertEquals(existingUserGroup.getLdap(), newUserGroup.getLdap());
+		assertEquals(existingUserGroup.getAddedByLDAPImport(),
+			newUserGroup.getAddedByLDAPImport());
 	}
 
 	public void testFindByPrimaryKeyExisting() throws Exception {
@@ -218,7 +219,7 @@ public class UserGroupPersistenceTest extends BasePersistenceTestCase {
 		userGroup.setParentUserGroupId(nextLong());
 		userGroup.setName(randomString());
 		userGroup.setDescription(randomString());
-		userGroup.setLdap(randomBoolean());
+		userGroup.setAddedByLDAPImport(randomBoolean());
 
 		_persistence.update(userGroup, false);
 

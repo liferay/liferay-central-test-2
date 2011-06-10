@@ -145,30 +145,30 @@ public class UserGroupWrapper implements UserGroup {
 	}
 
 	/**
-	* Returns the ldap of this user group.
+	* Returns the added by l d a p import of this user group.
 	*
-	* @return the ldap of this user group
+	* @return the added by l d a p import of this user group
 	*/
-	public boolean getLdap() {
-		return _userGroup.getLdap();
+	public boolean getAddedByLDAPImport() {
+		return _userGroup.getAddedByLDAPImport();
 	}
 
 	/**
-	* Determines if this user group is ldap.
+	* Determines if this user group is added by l d a p import.
 	*
-	* @return <code>true</code> if this user group is ldap; <code>false</code> otherwise
+	* @return <code>true</code> if this user group is added by l d a p import; <code>false</code> otherwise
 	*/
-	public boolean isLdap() {
-		return _userGroup.isLdap();
+	public boolean isAddedByLDAPImport() {
+		return _userGroup.isAddedByLDAPImport();
 	}
 
 	/**
-	* Sets whether this user group is ldap.
+	* Sets whether this user group is added by l d a p import.
 	*
-	* @param ldap the ldap of this user group
+	* @param addedByLDAPImport the added by l d a p import of this user group
 	*/
-	public void setLdap(boolean ldap) {
-		_userGroup.setLdap(ldap);
+	public void setAddedByLDAPImport(boolean addedByLDAPImport) {
+		_userGroup.setAddedByLDAPImport(addedByLDAPImport);
 	}
 
 	public boolean isNew() {
