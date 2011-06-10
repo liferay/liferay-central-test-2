@@ -44,9 +44,9 @@ public abstract class BasePreferencesImpl {
 	public Map<String, String[]> getMap() {
 		Map<String, String[]> map = new ConcurrentHashMap<String, String[]>();
 
-		for (Map.Entry<String, Preference> entry :
-				getPreferences().entrySet()) {
+		Map<String, Preference> preferences = getPreferences();
 
+		for (Map.Entry<String, Preference> entry : preferences.entrySet()) {
 			String key = entry.getKey();
 			Preference preference = entry.getValue();
 
@@ -61,15 +61,9 @@ public abstract class BasePreferencesImpl {
 	}
 
 	public Enumeration<String> getNames() {
-		return Collections.enumeration(getPreferences().keySet());
-	}
+		Map<String, Preference> preferences = getPreferences();
 
-	protected long getOwnerId() {
-		return _ownerId;
-	}
-
-	protected int getOwnerType() {
-		return _ownerType;
+		return Collections.enumeration(preferences.keySet());
 	}
 
 	public String getValue(String key, String def) {
@@ -77,7 +71,9 @@ public abstract class BasePreferencesImpl {
 			throw new IllegalArgumentException();
 		}
 
-		Preference preference = getPreferences().get(key);
+		Map<String, Preference> preferences = getPreferences();
+
+		Preference preference = preferences.get(key);
 
 		String[] values = null;
 
@@ -98,9 +94,12 @@ public abstract class BasePreferencesImpl {
 			throw new IllegalArgumentException();
 		}
 
-		Preference preference = getPreferences().get(key);
+		Map<String, Preference> preferences = getPreferences();
+
+		Preference preference = preferences.get(key);
 
 		String[] values = null;
+
 		if (preference != null) {
 			values = preference.getValues();
 		}
@@ -118,7 +117,9 @@ public abstract class BasePreferencesImpl {
 			throw new IllegalArgumentException();
 		}
 
-		Preference preference = getPreferences().get(key);
+		Map<String, Preference> preferences = getPreferences();
+
+		Preference preference = preferences.get(key);
 
 		if ((preference != null) && preference.isReadOnly()) {
 			return true;
@@ -129,7 +130,9 @@ public abstract class BasePreferencesImpl {
 	}
 
 	public void reset() {
-		getModifiedPreferences().clear();
+		Map<String, Preference> modifiedPreferences = getModifiedPreferences();
+
+		modifiedPreferences.clear();
 	}
 
 	public abstract void reset(String key) throws ReadOnlyException;
@@ -141,12 +144,14 @@ public abstract class BasePreferencesImpl {
 
 		value = getXmlSafeValue(value);
 
-		Preference preference = getModifiedPreferences().get(key);
+		Map<String, Preference> modifiedPreferences = getModifiedPreferences();
+
+		Preference preference = modifiedPreferences.get(key);
 
 		if (preference == null) {
 			preference = new Preference(key, value);
 
-			getModifiedPreferences().put(key, preference);
+			modifiedPreferences.put(key, preference);
 		}
 
 		if (preference.isReadOnly()) {
@@ -166,12 +171,14 @@ public abstract class BasePreferencesImpl {
 
 		values = getXmlSafeValues(values);
 
-		Preference preference = getModifiedPreferences().get(key);
+		Map<String, Preference> modifiedPreferences = getModifiedPreferences();
+
+		Preference preference = modifiedPreferences.get(key);
 
 		if (preference == null) {
 			preference = new Preference(key, values);
 
-			getModifiedPreferences().put(key, preference);
+			modifiedPreferences.put(key, preference);
 		}
 
 		if (preference.isReadOnly()) {
@@ -183,6 +190,15 @@ public abstract class BasePreferencesImpl {
 	}
 
 	public abstract void store() throws IOException, ValidatorException;
+
+	protected String getActualValue(String value) {
+		if ((value == null) || (value.equals(_NULL_VALUE))) {
+			return null;
+		}
+		else {
+			return XMLFormatter.fromCompactSafe(value);
+		}
+	}
 
 	protected String[] getActualValues(String[] values) {
 		if (values == null) {
@@ -202,31 +218,6 @@ public abstract class BasePreferencesImpl {
 		}
 
 		return actualValues;
-	}
-
-	protected Map<String, Preference> getPreferences() {
-		if (_modifiedPreferences == null) {
-			if (_originalPreferences ==
-					Collections.<String, Preference>emptyMap()) {
-
-				_originalPreferences =
-					new ConcurrentHashMap<String, Preference>();
-			}
-
-			return _originalPreferences;
-		}
-		else {
-			return _modifiedPreferences;
-		}
-	}
-
-	protected String getActualValue(String value) {
-		if ((value == null) || (value.equals(_NULL_VALUE))) {
-			return null;
-		}
-		else {
-			return XMLFormatter.fromCompactSafe(value);
-		}
 	}
 
 	protected long getCompanyId() {
@@ -252,6 +243,30 @@ public abstract class BasePreferencesImpl {
 
 	protected Map<String, Preference> getOriginalPreferences() {
 		return _originalPreferences;
+	}
+
+	protected long getOwnerId() {
+		return _ownerId;
+	}
+
+	protected int getOwnerType() {
+		return _ownerType;
+	}
+
+	protected Map<String, Preference> getPreferences() {
+		if (_modifiedPreferences == null) {
+			if (_originalPreferences ==
+					Collections.<String, Preference>emptyMap()) {
+
+				_originalPreferences =
+					new ConcurrentHashMap<String, Preference>();
+			}
+
+			return _originalPreferences;
+		}
+		else {
+			return _modifiedPreferences;
+		}
 	}
 
 	protected String getXmlSafeValue(String value) {
@@ -281,12 +296,12 @@ public abstract class BasePreferencesImpl {
 		return xmlSafeValues;
 	}
 
+	private static final String _NULL_VALUE = "NULL_VALUE";
+
 	private long _companyId;
-	private long _ownerId;
-	private int _ownerType;
 	private Map<String, Preference> _modifiedPreferences;
 	private Map<String, Preference> _originalPreferences;
-
-	private static final String _NULL_VALUE = "NULL_VALUE";
+	private long _ownerId;
+	private int _ownerType;
 
 }

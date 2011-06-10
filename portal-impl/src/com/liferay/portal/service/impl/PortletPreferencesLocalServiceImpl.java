@@ -291,8 +291,7 @@ public class PortletPreferencesLocalServiceImpl
 		throws SystemException {
 
 		Map<String, BasePreferencesImpl> preferencesPool =
-			PortletPreferencesLocalUtil.getPortletPreferencesPool(
-				ownerId, ownerType);
+			PortletPreferencesLocalUtil.getPreferencesPool(ownerId, ownerType);
 
 		String key = encodeKey(plid, portletId);
 

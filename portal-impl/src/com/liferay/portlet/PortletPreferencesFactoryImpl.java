@@ -88,24 +88,6 @@ public class PortletPreferencesFactoryImpl
 		return portletPreferencesImpl;
 	}
 
-	public PortalPreferencesImpl fromXML(
-			long companyId, long ownerId, int ownerType, String xml)
-		throws SystemException {
-
-		try {
-			Map<String, Preference> preferencesMap =
-				new HashMap<String, Preference>();
-
-			populateMap(xml, preferencesMap);
-
-			return new PortalPreferencesImpl(
-				companyId, ownerId, ownerType, preferencesMap, false);
-		}
-		catch (SystemException se) {
-			throw se;
-		}
-	}
-
 	public PortletPreferencesImpl fromXML(
 			long companyId, long ownerId, int ownerType, long plid,
 			String portletId, String xml)
@@ -120,6 +102,24 @@ public class PortletPreferencesFactoryImpl
 			return new PortletPreferencesImpl(
 				companyId, ownerId, ownerType, plid, portletId,
 				preferencesMap);
+		}
+		catch (SystemException se) {
+			throw se;
+		}
+	}
+
+	public PortalPreferencesImpl fromXML(
+			long companyId, long ownerId, int ownerType, String xml)
+		throws SystemException {
+
+		try {
+			Map<String, Preference> preferencesMap =
+				new HashMap<String, Preference>();
+
+			populateMap(xml, preferencesMap);
+
+			return new PortalPreferencesImpl(
+				companyId, ownerId, ownerType, preferencesMap, false);
 		}
 		catch (SystemException se) {
 			throw se;
@@ -204,8 +204,7 @@ public class PortletPreferencesFactoryImpl
 		return getPortalPreferences(null, companyId, userId, signedIn);
 	}
 
-	public PortalPreferences getPortalPreferences(
-			PortletRequest portletRequest)
+	public PortalPreferences getPortalPreferences(PortletRequest portletRequest)
 		throws SystemException {
 
 		HttpServletRequest request = PortalUtil.getHttpServletRequest(

@@ -248,6 +248,15 @@ public class PortalPreferencesLocalServiceUtil {
 		getService().setBeanIdentifier(beanIdentifier);
 	}
 
+	public static com.liferay.portal.model.PortalPreferences addPortalPreferences(
+		long companyId, long ownerId, int ownerType,
+		java.lang.String defaultPreferences)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .addPortalPreferences(companyId, ownerId, ownerType,
+			defaultPreferences);
+	}
+
 	public static javax.portlet.PortletPreferences getPreferences(
 		long companyId, long ownerId, int ownerType)
 		throws com.liferay.portal.kernel.exception.SystemException {

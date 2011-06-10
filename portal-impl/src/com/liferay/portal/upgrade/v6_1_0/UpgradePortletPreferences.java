@@ -17,7 +17,6 @@ package com.liferay.portal.upgrade.v6_1_0;
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.upgrade.CamelCaseUpgradePortletPreferences;
 import com.liferay.portal.kernel.util.StringBundler;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.util.PortletKeys;
 
 import java.sql.Connection;
@@ -163,16 +162,11 @@ public class UpgradePortletPreferences
 		try {
 			con = DataAccess.getConnection();
 
-			StringBundler sb = new StringBundler(4);
+			ps = con.prepareStatement(
+				"select ownerId, ownerType, preferences from " +
+					"PortletPreferences where portletId = ?");
 
-			sb.append("select ownerId, ownerType, preferences from ");
-			sb.append("PortletPreferences where portletId = '");
-			sb.append(PortletKeys.LIFERAY_PORTAL);
-			sb.append(StringPool.APOSTROPHE);
-
-			String sql = sb.toString();
-
-			ps = con.prepareStatement(sql);
+			ps.setString(1, PortletKeys.LIFERAY_PORTAL);
 
 			rs = ps.executeQuery();
 

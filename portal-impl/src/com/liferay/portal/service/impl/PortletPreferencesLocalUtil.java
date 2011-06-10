@@ -43,8 +43,8 @@ public class PortletPreferencesLocalUtil {
 		_portalCache.remove(key);
 	}
 
-	protected static Map<String, BasePreferencesImpl>
-		getPortletPreferencesPool(long ownerId, int ownerType) {
+	protected static Map<String, BasePreferencesImpl> getPreferencesPool(
+		long ownerId, int ownerType) {
 
 		String key = _encodeKey(ownerId, ownerType);
 

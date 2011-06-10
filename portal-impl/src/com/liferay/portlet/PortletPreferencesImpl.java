@@ -39,7 +39,8 @@ import javax.portlet.ValidatorException;
  * @author Brian Wing Shun Chan
  * @author Alexander Chow
  */
-public class PortletPreferencesImpl extends BasePreferencesImpl
+public class PortletPreferencesImpl
+	extends BasePreferencesImpl
 	implements Cloneable, PortletPreferences, Serializable {
 
 	public PortletPreferencesImpl() {
@@ -125,7 +126,10 @@ public class PortletPreferencesImpl extends BasePreferencesImpl
 			setValues(key, defaultValues);
 		}
 		else {
-			getModifiedPreferences().remove(key);
+			Map<String, Preference> modifiedPreferences =
+				getModifiedPreferences();
+
+			modifiedPreferences.remove(key);
 		}
 	}
 

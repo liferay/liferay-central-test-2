@@ -30,13 +30,13 @@ import java.util.Collections;
 import java.util.Map;
 
 import javax.portlet.ReadOnlyException;
-import javax.portlet.ValidatorException;
 
 /**
  * @author Brian Wing Shun Chan
  * @author Alexander Chow
  */
-public class PortalPreferencesImpl extends BasePreferencesImpl
+public class PortalPreferencesImpl
+	extends BasePreferencesImpl
 	implements Cloneable, PortalPreferences, Serializable {
 
 	public PortalPreferencesImpl() {
@@ -119,7 +119,9 @@ public class PortalPreferencesImpl extends BasePreferencesImpl
 			throw new ReadOnlyException(key);
 		}
 
-		getModifiedPreferences().remove(key);
+		Map<String, Preference> modifiedPreferences = getModifiedPreferences();
+
+		modifiedPreferences.remove(key);
 	}
 
 	public void resetValues(String namespace) {
@@ -193,7 +195,7 @@ public class PortalPreferencesImpl extends BasePreferencesImpl
 		}
 	}
 
-	public void store() throws IOException, ValidatorException {
+	public void store() throws IOException {
 		try {
 			PortalPreferencesLocalServiceUtil.updatePreferences(
 				getOwnerId(), getOwnerType(), this);

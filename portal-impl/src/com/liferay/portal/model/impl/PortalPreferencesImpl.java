@@ -19,8 +19,8 @@ import com.liferay.portal.model.PortalPreferences;
 /**
  * @author Alexander Chow
  */
-public class PortalPreferencesImpl extends PortalPreferencesModelImpl
-	implements PortalPreferences {
+public class PortalPreferencesImpl
+	extends PortalPreferencesModelImpl implements PortalPreferences {
 
 	public PortalPreferencesImpl() {
 	}

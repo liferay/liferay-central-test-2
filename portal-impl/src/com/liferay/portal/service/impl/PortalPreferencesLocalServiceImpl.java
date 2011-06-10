@@ -43,6 +43,47 @@ import javax.portlet.PortletPreferences;
 public class PortalPreferencesLocalServiceImpl
 	extends PortalPreferencesLocalServiceBaseImpl {
 
+	public PortalPreferences addPortalPreferences(
+			long companyId, long ownerId, int ownerType,
+			String defaultPreferences)
+		throws SystemException {
+
+		long portalPreferencesId = counterLocalService.increment();
+
+		PortalPreferences portalPreferences =
+			portalPreferencesPersistence.create(portalPreferencesId);
+
+		portalPreferences.setOwnerId(ownerId);
+		portalPreferences.setOwnerType(ownerType);
+
+		if (Validator.isNull(defaultPreferences)) {
+			defaultPreferences =
+				PortletConstants.DEFAULT_PREFERENCES;
+		}
+
+		portalPreferences.setPreferences(defaultPreferences);
+
+		try {
+			portalPreferencesPersistence.update(portalPreferences, false);
+		}
+		catch (SystemException se) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(
+					"Add failed, fetch {ownerId=" + ownerId + ", ownerType=" +
+						ownerType + "}");
+			}
+
+			portalPreferences = portalPreferencesPersistence.fetchByO_O(
+				ownerId, ownerType, false);
+
+			if (portalPreferences == null) {
+				throw se;
+			}
+		}
+
+		return portalPreferences;
+	}
+
 	public PortletPreferences getPreferences(
 			long companyId, long ownerId, int ownerType)
 		throws SystemException {
@@ -125,58 +166,15 @@ public class PortalPreferencesLocalServiceImpl
 		return portalPreferences;
 	}
 
-	protected PortalPreferences addPortalPreferences(
-			long companyId, long ownerId, int ownerType,
-			String defaultPreferences)
-		throws SystemException {
-
-		long portalPreferencesId = counterLocalService.increment();
-
-		PortalPreferences portalPreferences =
-			portalPreferencesPersistence.create(portalPreferencesId);
-
-		portalPreferences.setOwnerId(ownerId);
-		portalPreferences.setOwnerType(ownerType);
-
-		if (Validator.isNull(defaultPreferences)) {
-			defaultPreferences =
-				PortletConstants.DEFAULT_PREFERENCES;
-		}
-
-		portalPreferences.setPreferences(defaultPreferences);
-
-		try {
-			portalPreferencesPersistence.update(portalPreferences, false);
-		}
-		catch (SystemException se) {
-			if (_log.isWarnEnabled()) {
-				_log.warn(
-					"Add failed, fetch {ownerId=" + ownerId + ", ownerType=" +
-						ownerType + "}");
-
-			}
-
-			portalPreferences = portalPreferencesPersistence.fetchByO_O(
-				ownerId, ownerType, false);
-
-			if (portalPreferences == null) {
-				throw se;
-			}
-		}
-
-		return portalPreferences;
-	}
-
 	protected PortletPreferences doGetPreferences(
 			long companyId, long ownerId, int ownerType,
 			String defaultPreferences)
 		throws SystemException {
 
 		Map<String, BasePreferencesImpl> preferencesPool =
-			PortletPreferencesLocalUtil.getPortletPreferencesPool(
-				ownerId, ownerType);
+			PortletPreferencesLocalUtil.getPreferencesPool(ownerId, ownerType);
 
-		String key = Long.toString(companyId);
+		String key = String.valueOf(companyId);
 
 		PortalPreferencesImpl portalPreferencesImpl =
 			(PortalPreferencesImpl)preferencesPool.get(key);
@@ -193,8 +191,9 @@ public class PortalPreferencesLocalServiceImpl
 						new PortalPreferencesImpl());
 				}
 
-				portalPreferences = addPortalPreferences(
-					companyId, ownerId, ownerType, defaultPreferences);
+				portalPreferences =
+					portalPreferencesLocalService.addPortalPreferences(
+						companyId, ownerId, ownerType, defaultPreferences);
 			}
 
 			portalPreferencesImpl =

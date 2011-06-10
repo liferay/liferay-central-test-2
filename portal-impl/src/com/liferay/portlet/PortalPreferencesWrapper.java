@@ -21,7 +21,6 @@ import java.util.Map;
 
 import javax.portlet.PortletPreferences;
 import javax.portlet.ReadOnlyException;
-import javax.portlet.ValidatorException;
 
 /**
  * @author Alexander Chow
@@ -72,7 +71,7 @@ public class PortalPreferencesWrapper implements PortletPreferences {
 		_portalPreferencesImpl.setValues(key, values);
 	}
 
-	public void store() throws IOException, ValidatorException {
+	public void store() throws IOException {
 		_portalPreferencesImpl.store();
 	}
 

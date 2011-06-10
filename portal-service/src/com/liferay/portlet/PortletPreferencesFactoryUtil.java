@@ -38,14 +38,6 @@ public class PortletPreferencesFactoryUtil {
 		return getPortletPreferencesFactory().fromDefaultXML(xml);
 	}
 
-	public static PortalPreferences fromXML(
-			long companyId, long ownerId, int ownerType, String xml)
-		throws SystemException {
-
-		return getPortletPreferencesFactory().fromXML(
-			companyId, ownerId, ownerType, xml);
-	}
-
 	public static PortletPreferences fromXML(
 			long companyId, long ownerId, int ownerType, long plid,
 			String portletId, String xml)
@@ -53,6 +45,14 @@ public class PortletPreferencesFactoryUtil {
 
 		return getPortletPreferencesFactory().fromXML(
 			companyId, ownerId, ownerType, plid, portletId, xml);
+	}
+
+	public static PortalPreferences fromXML(
+			long companyId, long ownerId, int ownerType, String xml)
+		throws SystemException {
+
+		return getPortletPreferencesFactory().fromXML(
+			companyId, ownerId, ownerType, xml);
 	}
 
 	public static PortletPreferences getLayoutPortletSetup(
