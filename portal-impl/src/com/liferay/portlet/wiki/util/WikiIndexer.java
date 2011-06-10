@@ -148,8 +148,10 @@ public class WikiIndexer extends BaseIndexer {
 
 		document.addUID(PORTLET_ID, page.getNodeId(), page.getTitle());
 
+		String content = WikiUtil.convert(page, null, null, null);
+
 		document.addText(
-			Field.CONTENT, HtmlUtil.extractText(page.getContent()));
+			Field.CONTENT, HtmlUtil.extractText(content));
 		document.addKeyword(Field.NODE_ID, page.getNodeId());
 		document.addText(Field.TITLE, page.getTitle());
 
