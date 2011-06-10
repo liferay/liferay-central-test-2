@@ -19,7 +19,7 @@
 <%
 String strutsAction = ParamUtil.getString(request, "struts_action");
 
-long groupId = ParamUtil.getLong(request, "groupId");
+long groupId = ParamUtil.getLong(request, "groupId", scopeGroupId);
 
 TemplateSearch searchContainer = (TemplateSearch)request.getAttribute("liferay-ui:search:searchContainer");
 
