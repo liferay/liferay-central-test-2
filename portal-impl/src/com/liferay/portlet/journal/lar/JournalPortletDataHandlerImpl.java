@@ -2094,7 +2094,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 				_log.warn(
 					"A structure with the ID " + structureId + " already " +
 						"exists. The new generated ID is " +
-						importedStructure.getStructureId());
+							importedStructure.getStructureId());
 			}
 		}
 	}
