@@ -31,7 +31,7 @@ public class DDMTemplateServiceImpl extends DDMTemplateServiceBaseImpl {
 
 	public DDMTemplate addTemplate(
 			long groupId, long structureId, String name, String description,
-			String type, String language, String script, 
+			String type, String language, String script,
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 

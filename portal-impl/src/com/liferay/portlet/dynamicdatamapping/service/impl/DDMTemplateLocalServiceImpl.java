@@ -136,9 +136,10 @@ public class DDMTemplateLocalServiceImpl
 	public void deleteTemplates(long groupId)
 		throws PortalException, SystemException {
 
-		for (DDMTemplate template :
-				ddmTemplatePersistence.findByGroupId(groupId)) {
+		List<DDMTemplate> templates = ddmTemplatePersistence.findByGroupId(
+			groupId);
 
+		for (DDMTemplate template : templates) {
 			deleteTemplate(template);
 		}
 	}
