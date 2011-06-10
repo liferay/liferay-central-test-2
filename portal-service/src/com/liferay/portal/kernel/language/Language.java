@@ -123,10 +123,6 @@ public interface Language {
 
 	public boolean isAvailableLocale(Locale locale);
 
-	public boolean isBetaLocale(Locale locale);
-
-	public boolean isDisplayBetaFlagLocale(Locale locale);
-
 	public boolean isDuplicateLanguageCode(String languageCode);
 
 	public void resetAvailableLocales(long companyId);

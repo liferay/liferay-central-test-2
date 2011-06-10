@@ -82,14 +82,9 @@ for (int i = 0; i < locales.length; i++) {
 
 				<%
 				for (int i = 0; i < locales.length; i++) {
-					String label = locales[i].getDisplayName(locales[i]);
-
-					if (LanguageUtil.isDisplayBetaFlagLocale(locales[i])) {
-						label = label + " - " + LanguageUtil.get(pageContext, "beta");
-					}
 				%>
 
-					<aui:option cssClass="taglib-language-option" label="<%= label %>" lang="<%= LocaleUtil.toW3cLanguageId(locales[i]) %>" selected="<%= (locale.getLanguage().equals(locales[i].getLanguage()) && locale.getCountry().equals(locales[i].getCountry())) %>" value="<%= LocaleUtil.toLanguageId(locales[i]) %>" />
+					<aui:option cssClass="taglib-language-option" label="<%= locales[i].getDisplayName(locales[i]) %>" lang="<%= LocaleUtil.toW3cLanguageId(locales[i]) %>" selected="<%= (locale.getLanguage().equals(locales[i].getLanguage()) && locale.getCountry().equals(locales[i].getCountry())) %>" value="<%= LocaleUtil.toLanguageId(locales[i]) %>" />
 
 				<%
 				}
@@ -136,26 +131,13 @@ for (int i = 0; i < locales.length; i++) {
 						<c:if test="<%= duplicateLanguages.contains(locales[i].getLanguage()) %>">
 							(<%= country %>)
 						</c:if>
-
-						<c:if test="<%= LanguageUtil.isDisplayBetaFlagLocale(locales[i]) %>">
-							[<liferay-ui:message key="beta" />]
-						</c:if>
 					</a>
 				</c:when>
 				<c:otherwise>
-
-					<%
-					String message = locales[i].getDisplayName(locales[i]);
-
-					if (LanguageUtil.isDisplayBetaFlagLocale(locales[i])) {
-						message = message + " - " + LanguageUtil.get(pageContext, "beta");
-					}
-					%>
-
 					<liferay-ui:icon
 						image='<%= "../language/" + LocaleUtil.toLanguageId(locales[i]) %>'
 						lang="<%= LocaleUtil.toW3cLanguageId(locales[i]) %>"
-						message="<%= message %>"
+						message="<%= locales[i].getDisplayName(locales[i]) %>"
 						url='<%= formAction + "&" + name + "=" + LocaleUtil.toLanguageId(locales[i]) %>'
 					/>
 				</c:otherwise>

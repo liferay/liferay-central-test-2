@@ -467,26 +467,6 @@ public class LanguageImpl implements Language {
 		return _getInstance()._localesSet.contains(locale);
 	}
 
-	public boolean isBetaLocale(Locale locale) {
-		return _getInstance()._localesBetaSet.contains(locale);
-	}
-
-	public boolean isDisplayBetaFlagLocale(Locale locale) {
-		if (!isBetaLocale(locale)) {
-			return false;
-		}
-
-		String languageId = LocaleUtil.toLanguageId(locale);
-
-		for (String curLanguageId : PropsValues.LOCALES_BETA_HIDE_FLAG) {
-			if (languageId.equals(curLanguageId)) {
-				return false;
-			}
-		}
-
-		return true;
-	}
-
 	public boolean isDuplicateLanguageCode(String languageCode) {
 		return _getInstance()._duplicateLanguageCodes.contains(languageCode);
 	}
@@ -571,16 +551,6 @@ public class LanguageImpl implements Language {
 			}
 
 			_localesSet.add(locale);
-		}
-
-		String[] localesBetaArray = PropsValues.LOCALES_BETA;
-
-		_localesBetaSet = new HashSet<Locale>(localesBetaArray.length);
-
-		for (String languageId : localesBetaArray) {
-			Locale locale = LocaleUtil.fromLanguageId(languageId);
-
-			_localesBetaSet.add(locale);
 		}
 	}
 
@@ -719,7 +689,6 @@ public class LanguageImpl implements Language {
 	private Map<String, String> _charEncodings;
 	private Set<String> _duplicateLanguageCodes;
 	private Locale[] _locales;
-	private Set<Locale> _localesBetaSet;
 	private Map<String, Locale> _localesMap;
 	private Set<Locale> _localesSet;
 
