@@ -395,6 +395,24 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 		_ldapToPortalConverter = ldapToPortalConverter;
 	}
 
+	protected ArrayList<Long> addPortalUserGroups (
+			long userId, List<Long> newUserGroupIds)
+		throws Exception {
+
+		Set<Long> allUserGroups = new HashSet<Long>(newUserGroupIds);
+
+		List<UserGroup> portalUserGroups = 
+			UserGroupLocalServiceUtil.getUserUserGroups(userId);
+
+		for (UserGroup userGroup : portalUserGroups) {
+			if (!userGroup.isLdap()) {
+				allUserGroups.add(userGroup.getUserGroupId());
+			}
+		}
+
+		return new ArrayList<Long>(allUserGroups);
+	}
+
 	protected void addRole(
 			long companyId, LDAPGroup ldapGroup, UserGroup userGroup)
 		throws Exception {
@@ -812,24 +830,6 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 				UserLocalServiceUtil.addUserGroupUsers(newUserGroupId, userIds);
 			}
 		}
-	}
-
-	protected ArrayList<Long> addPortalUserGroups (
-			long userId, List<Long> newUserGroupIds)
-		throws Exception {
-
-		Set<Long> allUserGroups = new HashSet<Long>(newUserGroupIds);
-
-		List<UserGroup> portalUserGroups = 
-			UserGroupLocalServiceUtil.getUserUserGroups(userId);
-
-		for (UserGroup userGroup : portalUserGroups) {
-			if (!userGroup.isLdap()) {
-				allUserGroups.add(userGroup.getUserGroupId());
-			}
-		}
-
-		return new ArrayList<Long>(allUserGroups);
 	}
 
 	protected User importUser(
