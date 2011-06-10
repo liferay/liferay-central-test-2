@@ -79,6 +79,7 @@ Map<String, String> hints = ModelHintsUtil.getHints(model, field);
 			}
 
 			Calendar cal = null;
+			boolean checkDefaultDelta = false;
 
 			if (defaultValue != null) {
 				cal = (Calendar)defaultValue;
@@ -86,7 +87,13 @@ Map<String, String> hints = ModelHintsUtil.getHints(model, field);
 			else {
 				cal = CalendarFactoryUtil.getCalendar(timeZone, locale);
 
-				Date date = (Date)BeanPropertiesUtil.getObject(bean, field, new Date());
+				Date date = (Date)BeanPropertiesUtil.getObject(bean, field);
+
+				if (date == null) {
+					checkDefaultDelta = true;
+
+					date = new Date();
+				}
 
 				cal.setTime(date);
 			}
@@ -99,7 +106,7 @@ Map<String, String> hints = ModelHintsUtil.getHints(model, field);
 
 			int defaultMonthDelta = 0;
 
-			if (hints != null) {
+			if (checkDefaultDelta && (hints != null)) {
 				defaultMonthDelta = GetterUtil.getInteger(hints.get("default-month-delta"), defaultMonthDelta);
 			}
 
@@ -119,7 +126,7 @@ Map<String, String> hints = ModelHintsUtil.getHints(model, field);
 
 			int defaultDayDelta = 0;
 
-			if (hints != null) {
+			if (checkDefaultDelta && (hints != null)) {
 				defaultDayDelta = GetterUtil.getInteger(hints.get("default-day-delta"), defaultDayDelta);
 			}
 
@@ -139,7 +146,7 @@ Map<String, String> hints = ModelHintsUtil.getHints(model, field);
 
 			int defaultYearDelta = 0;
 
-			if (hints != null) {
+			if (checkDefaultDelta && (hints != null)) {
 				defaultYearDelta = GetterUtil.getInteger(hints.get("default-year-delta"), defaultYearDelta);
 			}
 
@@ -237,11 +244,11 @@ Map<String, String> hints = ModelHintsUtil.getHints(model, field);
 			%>
 
 			<liferay-ui:input-date
- 				cssClass="<%= cssClass %>"
+				cssClass="<%= cssClass %>"
 				dayParam='<%= fieldParam + "Day" %>'
 				dayValue="<%= day %>"
 				dayNullable="<%= dayNullable %>"
- 				disabled="<%= disabled %>"
+				disabled="<%= disabled %>"
 				firstDayOfWeek="<%= firstDayOfWeek %>"
 				formName="<%= formName %>"
 				imageInputId='<%= fieldParam + "ImageInputId" %>'
