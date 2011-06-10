@@ -63,9 +63,10 @@ public class UserGroupModelImpl extends BaseModelImpl<UserGroup>
 			{ "companyId", Types.BIGINT },
 			{ "parentUserGroupId", Types.BIGINT },
 			{ "name", Types.VARCHAR },
-			{ "description", Types.VARCHAR }
+			{ "description", Types.VARCHAR },
+			{ "ldap", Types.BOOLEAN }
 		};
-	public static final String TABLE_SQL_CREATE = "create table UserGroup (userGroupId LONG not null primary key,companyId LONG,parentUserGroupId LONG,name VARCHAR(75) null,description STRING null)";
+	public static final String TABLE_SQL_CREATE = "create table UserGroup (userGroupId LONG not null primary key,companyId LONG,parentUserGroupId LONG,name VARCHAR(75) null,description STRING null,ldap BOOLEAN)";
 	public static final String TABLE_SQL_DROP = "drop table UserGroup";
 	public static final String ORDER_BY_JPQL = " ORDER BY userGroup.name ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY UserGroup.name ASC";
@@ -93,6 +94,7 @@ public class UserGroupModelImpl extends BaseModelImpl<UserGroup>
 		model.setParentUserGroupId(soapModel.getParentUserGroupId());
 		model.setName(soapModel.getName());
 		model.setDescription(soapModel.getDescription());
+		model.setLdap(soapModel.getLdap());
 
 		return model;
 	}
@@ -228,6 +230,19 @@ public class UserGroupModelImpl extends BaseModelImpl<UserGroup>
 		_description = description;
 	}
 
+	@JSON
+	public boolean getLdap() {
+		return _ldap;
+	}
+
+	public boolean isLdap() {
+		return _ldap;
+	}
+
+	public void setLdap(boolean ldap) {
+		_ldap = ldap;
+	}
+
 	public UserGroup toEscapedModel() {
 		if (isEscapedModel()) {
 			return (UserGroup)this;
@@ -259,6 +274,7 @@ public class UserGroupModelImpl extends BaseModelImpl<UserGroup>
 		userGroupImpl.setParentUserGroupId(getParentUserGroupId());
 		userGroupImpl.setName(getName());
 		userGroupImpl.setDescription(getDescription());
+		userGroupImpl.setLdap(getLdap());
 
 		userGroupImpl.resetOriginalValues();
 
@@ -316,7 +332,7 @@ public class UserGroupModelImpl extends BaseModelImpl<UserGroup>
 	}
 
 	public String toString() {
-		StringBundler sb = new StringBundler(11);
+		StringBundler sb = new StringBundler(13);
 
 		sb.append("{userGroupId=");
 		sb.append(getUserGroupId());
@@ -328,13 +344,15 @@ public class UserGroupModelImpl extends BaseModelImpl<UserGroup>
 		sb.append(getName());
 		sb.append(", description=");
 		sb.append(getDescription());
+		sb.append(", ldap=");
+		sb.append(getLdap());
 		sb.append("}");
 
 		return sb.toString();
 	}
 
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(19);
+		StringBundler sb = new StringBundler(22);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.portal.model.UserGroup");
@@ -360,6 +378,10 @@ public class UserGroupModelImpl extends BaseModelImpl<UserGroup>
 			"<column><column-name>description</column-name><column-value><![CDATA[");
 		sb.append(getDescription());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>ldap</column-name><column-value><![CDATA[");
+		sb.append(getLdap());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -374,5 +396,6 @@ public class UserGroupModelImpl extends BaseModelImpl<UserGroup>
 	private String _name;
 	private String _originalName;
 	private String _description;
+	private boolean _ldap;
 	private transient ExpandoBridge _expandoBridge;
 }

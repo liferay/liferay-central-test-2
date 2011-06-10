@@ -127,6 +127,27 @@ public interface UserGroupModel extends BaseModel<UserGroup> {
 	 */
 	public void setDescription(String description);
 
+	/**
+	 * Returns the ldap of this user group.
+	 *
+	 * @return the ldap of this user group
+	 */
+	public boolean getLdap();
+
+	/**
+	 * Determines if this user group is ldap.
+	 *
+	 * @return <code>true</code> if this user group is ldap; <code>false</code> otherwise
+	 */
+	public boolean isLdap();
+
+	/**
+	 * Sets whether this user group is ldap.
+	 *
+	 * @param ldap the ldap of this user group
+	 */
+	public void setLdap(boolean ldap);
+
 	public boolean isNew();
 
 	public void setNew(boolean n);

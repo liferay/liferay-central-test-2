@@ -563,9 +563,7 @@
 		<field name="portalPreferencesId" type="long" />
 		<field name="ownerId" type="long" />
 		<field name="ownerType" type="int" />
-		<field name="preferences" type="String">
-			<hint-collection name="CLOB" />
-		</field>
+		<field name="preferences" type="String" />
 	</model>
 	<model name="com.liferay.portal.model.Portlet">
 		<field name="id" type="long" />
@@ -821,6 +819,7 @@
 		<field name="description" type="String">
 			<hint-collection name="TEXTAREA" />
 		</field>
+		<field name="ldap" type="boolean" />
 	</model>
 	<model name="com.liferay.portal.model.UserGroupGroupRole">
 		<field name="userGroupId" type="long" />

@@ -144,6 +144,33 @@ public class UserGroupWrapper implements UserGroup {
 		_userGroup.setDescription(description);
 	}
 
+	/**
+	* Returns the ldap of this user group.
+	*
+	* @return the ldap of this user group
+	*/
+	public boolean getLdap() {
+		return _userGroup.getLdap();
+	}
+
+	/**
+	* Determines if this user group is ldap.
+	*
+	* @return <code>true</code> if this user group is ldap; <code>false</code> otherwise
+	*/
+	public boolean isLdap() {
+		return _userGroup.isLdap();
+	}
+
+	/**
+	* Sets whether this user group is ldap.
+	*
+	* @param ldap the ldap of this user group
+	*/
+	public void setLdap(boolean ldap) {
+		_userGroup.setLdap(ldap);
+	}
+
 	public boolean isNew() {
 		return _userGroup.isNew();
 	}

@@ -1011,6 +1011,7 @@
 			<basic name="parentUserGroupId" />
 			<basic name="name" />
 			<basic name="description" />
+			<basic name="ldap" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />
 		</attributes>

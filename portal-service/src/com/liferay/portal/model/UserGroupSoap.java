@@ -35,6 +35,7 @@ public class UserGroupSoap implements Serializable {
 		soapModel.setParentUserGroupId(model.getParentUserGroupId());
 		soapModel.setName(model.getName());
 		soapModel.setDescription(model.getDescription());
+		soapModel.setLdap(model.getLdap());
 
 		return soapModel;
 	}
@@ -127,9 +128,22 @@ public class UserGroupSoap implements Serializable {
 		_description = description;
 	}
 
+	public boolean getLdap() {
+		return _ldap;
+	}
+
+	public boolean isLdap() {
+		return _ldap;
+	}
+
+	public void setLdap(boolean ldap) {
+		_ldap = ldap;
+	}
+
 	private long _userGroupId;
 	private long _companyId;
 	private long _parentUserGroupId;
 	private String _name;
 	private String _description;
+	private boolean _ldap;
 }
