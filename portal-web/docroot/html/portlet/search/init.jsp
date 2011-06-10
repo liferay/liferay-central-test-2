@@ -25,9 +25,6 @@
 <%@ page import="com.liferay.portal.kernel.xml.SAXReaderUtil" %>
 <%@ page import="com.liferay.portlet.documentlibrary.model.DLFileEntryConstants" %>
 <%@ page import="com.liferay.portlet.documentlibrary.service.DLAppLocalServiceUtil" %>
-<%@ page import="com.liferay.portlet.wiki.model.WikiPage" %>
-<%@ page import="com.liferay.portlet.wiki.service.WikiPageLocalServiceUtil" %>
-<%@ page import="com.liferay.portlet.wiki.util.WikiUtil" %>
 
 <%
 PortalPreferences portalPreferences = PortletPreferencesFactoryUtil.getPortalPreferences(request);

@@ -19,10 +19,8 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.io.unsync.UnsyncStringReader;
 import com.liferay.portal.kernel.portlet.LiferayPortletURL;
-import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.DiffHtmlUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.kernel.util.ListUtil;
@@ -281,19 +279,6 @@ public class WikiUtil {
 		return _instance._getLinks(page);
 	}
 
-	public static long getNodeIdFromUri(String uri) {
-		if ((uri == null) || !uri.contains(_WIKI_FRIENDLY_URL_MAPPING)) {
-			return 0;
-		}
-
-		int x =
-			uri.indexOf(_WIKI_FRIENDLY_URL_MAPPING) +
-				_WIKI_FRIENDLY_URL_MAPPING.length();
-		int y = x + uri.substring(x).indexOf(CharPool.SLASH);
-
-		return GetterUtil.getLong(uri.substring(x, y));
-	}
-
 	public static List<String> getNodeNames(List<WikiNode> nodes) {
 		List<String> nodeNames = new ArrayList<String>(nodes.size());
 
@@ -350,10 +335,6 @@ public class WikiUtil {
 		}
 
 		return orderByComparator;
-	}
-
-	public static String getSummary(WikiPage page) throws WikiFormatException {
-		return _instance._getSummary(page);
 	}
 
 	public static List<WikiNode> orderNodes(
@@ -541,24 +522,6 @@ public class WikiUtil {
 		catch (WikiFormatException wfe) {
 			return Collections.emptyMap();
 		}
-	}
-
-	private String _getSummary(WikiPage page) throws WikiFormatException {
-		WikiEngine engine = _getEngine(page.getFormat());
-
-		String content = null;
-
-		try {
-			content = engine.convert(page, null, null, null);
-
-			content = StringUtil.shorten(
-				HtmlUtil.stripHtml(content), 200);
-		}
-		catch (Exception e) {
-			content = null;
-		}
-
-		return content;
 	}
 
 	private String _readConfigurationFile(String propertyName, String format)
