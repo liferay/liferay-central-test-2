@@ -638,6 +638,8 @@
 				if (urlPieces.length > 1) {
 					params = A.QueryString.parse(urlPieces[1]);
 
+					delete params.dataType;
+
 				    url = urlPieces[0];
 				}
 
