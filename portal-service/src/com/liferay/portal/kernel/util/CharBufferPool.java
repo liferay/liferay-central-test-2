@@ -47,9 +47,7 @@ public class CharBufferPool {
 				index = -(index + 1);
 			}
 
-			poolSize = _charBufferHoldersPool.size();
-
-			while (index < poolSize) {
+			while (index < _charBufferHoldersPool.size()) {
 				CharBufferHolder charBufferHolder = _charBufferHoldersPool.get(
 					index);
 
@@ -75,6 +73,8 @@ public class CharBufferPool {
 			}
 		}
 		finally {
+			poolSize = _charBufferHoldersPool.size();
+
 			_modifyLock.unlock();
 		}
 
