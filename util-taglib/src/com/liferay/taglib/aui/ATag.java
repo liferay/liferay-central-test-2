@@ -94,11 +94,22 @@ public class ATag extends IncludeTag {
 		return _START_PAGE;
 	}
 
+	protected boolean isOpensNewWindow() {
+		if ((_target != null) &&
+			(_target.equals("_blank") || _target.equals("_new"))) {
+
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
 	protected int processEndTag() throws Exception {
 		JspWriter jspWriter = pageContext.getOut();
 
 		if (Validator.isNotNull(_href)) {
-			if (opensNewWindow()) {
+			if (isOpensNewWindow()) {
 				jspWriter.write("<span class=\"opens-new-window-accessible\">");
 				jspWriter.write(
 					LanguageUtil.get(pageContext, "opens-new-window"));
@@ -112,11 +123,6 @@ public class ATag extends IncludeTag {
 		}
 
 		return EVAL_PAGE;
-	}
-
-	protected boolean opensNewWindow () {
-		return (_target != null) &&
-			(_target.equals("_blank") || _target.equals("_new"));
 	}
 
 	protected int processStartTag() throws Exception {
@@ -162,14 +168,14 @@ public class ATag extends IncludeTag {
 				jspWriter.write("\" ");
 			}
 
-			if (Validator.isNotNull(_title) || opensNewWindow()) {
+			if (Validator.isNotNull(_title) || isOpensNewWindow()) {
 				jspWriter.write("title=\"");
 
 				if (Validator.isNotNull(_title)) {
 					jspWriter.write(LanguageUtil.get(pageContext, _title));
 				}
 
-				if (opensNewWindow()) {
+				if (isOpensNewWindow()) {
 					jspWriter.write(
 						LanguageUtil.get(pageContext, "opens-new-window"));
 				}
@@ -217,14 +223,14 @@ public class ATag extends IncludeTag {
 				jspWriter.write("\" ");
 			}
 
-			if (Validator.isNotNull(_title) || opensNewWindow()) {
+			if (Validator.isNotNull(_title) || isOpensNewWindow()) {
 				jspWriter.write("title=\"");
 
 				if (Validator.isNotNull(_title)) {
 					jspWriter.write(LanguageUtil.get(pageContext, _title));
 				}
 
-				if (opensNewWindow()) {
+				if (isOpensNewWindow()) {
 					jspWriter.write(
 						LanguageUtil.get(pageContext, "opens-new-window"));
 				}
