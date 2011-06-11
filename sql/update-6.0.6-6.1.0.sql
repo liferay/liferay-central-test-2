@@ -291,7 +291,7 @@ create table PortalPreferences (
 	portalPreferencesId LONG not null primary key,
 	ownerId LONG,
 	ownerType INTEGER,
-	preferences VARCHAR(75) null
+	preferences TEXT null
 );
 
 create table Repository (
