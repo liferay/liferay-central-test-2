@@ -90,6 +90,12 @@ AUI().add(
 					function(event) {
 						var trigger = event.currentTarget;
 
+						var activeTrigger = instance._activeTrigger;
+
+						if (activeTrigger && activeTrigger != trigger) {
+							activeTrigger.removeClass(CSS_STATE_ACTIVE)
+						}
+
 						if (!trigger.hasClass('disabled')) {
 							var menu = instance._getMenu(trigger);
 
