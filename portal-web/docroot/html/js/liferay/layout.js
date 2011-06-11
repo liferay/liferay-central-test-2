@@ -5,7 +5,7 @@ AUI().add(
 
 		var DDM = A.DD.DDM;
 
-		var CSS_DRAGGABLE = A.ClassNameManager.getClassName('dd', 'draggable');
+		var CSS_DRAGGABLE = 'portlet-draggable';
 
 		var CSS_DRAGGING = 'aui-dragging';
 
