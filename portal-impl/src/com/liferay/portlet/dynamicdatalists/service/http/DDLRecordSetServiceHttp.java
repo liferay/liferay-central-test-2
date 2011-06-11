@@ -205,8 +205,7 @@ public class DDLRecordSetServiceHttp {
 	}
 
 	public static com.liferay.portlet.dynamicdatalists.model.DDLRecordSet updateRecordSet(
-		HttpPrincipal httpPrincipal, long groupId, long ddmStructureId,
-		long recordSetId,
+		HttpPrincipal httpPrincipal, long recordSetId, long ddmStructureId,
 		java.util.Map<java.util.Locale, java.lang.String> nameMap,
 		java.util.Map<java.util.Locale, java.lang.String> descriptionMap,
 		int minDisplayRows,
@@ -217,8 +216,8 @@ public class DDLRecordSetServiceHttp {
 			MethodKey methodKey = new MethodKey(DDLRecordSetServiceUtil.class.getName(),
 					"updateRecordSet", _updateRecordSetParameterTypes4);
 
-			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
-					ddmStructureId, recordSetId, nameMap, descriptionMap,
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					recordSetId, ddmStructureId, nameMap, descriptionMap,
 					minDisplayRows, serviceContext);
 
 			Object returnObj = null;
@@ -263,8 +262,7 @@ public class DDLRecordSetServiceHttp {
 			com.liferay.portal.service.ServiceContext.class
 		};
 	private static final Class<?>[] _updateRecordSetParameterTypes4 = new Class[] {
-			long.class, long.class, long.class, java.util.Map.class,
-			java.util.Map.class, int.class,
-			com.liferay.portal.service.ServiceContext.class
+			long.class, long.class, java.util.Map.class, java.util.Map.class,
+			int.class, com.liferay.portal.service.ServiceContext.class
 		};
 }

@@ -63,15 +63,16 @@ public class DDLRecordSetServiceWrapper implements DDLRecordSetService {
 	}
 
 	public com.liferay.portlet.dynamicdatalists.model.DDLRecordSet updateRecordSet(
-		long groupId, long ddmStructureId, long recordSetId,
+		long recordSetId, long ddmStructureId,
 		java.util.Map<java.util.Locale, java.lang.String> nameMap,
 		java.util.Map<java.util.Locale, java.lang.String> descriptionMap,
 		int minDisplayRows,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return _ddlRecordSetService.updateRecordSet(groupId, ddmStructureId,
-			recordSetId, nameMap, descriptionMap, minDisplayRows, serviceContext);
+		return _ddlRecordSetService.updateRecordSet(recordSetId,
+			ddmStructureId, nameMap, descriptionMap, minDisplayRows,
+			serviceContext);
 	}
 
 	public DDLRecordSetService getWrappedDDLRecordSetService() {

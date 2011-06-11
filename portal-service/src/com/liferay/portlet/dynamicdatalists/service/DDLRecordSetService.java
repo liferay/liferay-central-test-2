@@ -67,7 +67,7 @@ public interface DDLRecordSetService {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portlet.dynamicdatalists.model.DDLRecordSet updateRecordSet(
-		long groupId, long ddmStructureId, long recordSetId,
+		long recordSetId, long ddmStructureId,
 		java.util.Map<java.util.Locale, java.lang.String> nameMap,
 		java.util.Map<java.util.Locale, java.lang.String> descriptionMap,
 		int minDisplayRows,
