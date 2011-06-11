@@ -38,9 +38,9 @@ Layout curLayout = (Layout)row.getObject();
 </div>
 
 <div class="aui-helper-hidden export-layout-detail" id="_detail_<%= curLayout.getPlid() %>" style="border-top: 1px solid #CCC; margin-top: 4px; padding-top: 4px; width: 95%;">
-	<aui:input label="delete-live-page" name='<%= "delete_" + curLayout.getPlid() %>' type="radio" value="<%= false %>" />
+	<aui:input label="delete-live-page" name='<%= "delete_" + curLayout.getPlid() %>' type="radio" value="<%= true %>" />
 
-	<aui:input label="publish" name='<%= "delete_" + curLayout.getPlid() %>' type="radio" value="<%= true %>" />
+	<aui:input checked="<%= true %>" label="publish" name='<%= "delete_" + curLayout.getPlid() %>' type="radio" value="<%= false %>" />
 
 	<div id="<portlet:namespace />publishChangesOptions_<%= curLayout.getPlid() %>" style="margin-left: 2em;">
 		<c:if test="<%= !curLayout.getAncestors().isEmpty() %>">
