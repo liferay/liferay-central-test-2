@@ -82,7 +82,7 @@ if (Validator.isNotNull(scopeStructureName)) {
 <c:if test="<%= showAddStructureButton %>">
 	<aui:button-row>
 		<aui:button onClick='<%= renderResponse.getNamespace() + "addStructure();" %>' value="<%= buttonLabel %>" />
-	</aui:button-row>                  f
+	</aui:button-row>
 </c:if>
 
 <aui:script>

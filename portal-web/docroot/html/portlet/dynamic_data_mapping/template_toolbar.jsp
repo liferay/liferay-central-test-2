@@ -21,14 +21,14 @@ String backURL = ParamUtil.getString(request, "backURL");
 
 String toolbarItem = ParamUtil.getString(request, "toolbarItem", "view-all");
 
-String structureId = ParamUtil.getString(request, "structureId");
+long structureId = ParamUtil.getLong(request, "structureId");
 %>
 
 <div class="lfr-portlet-toolbar">
 	<portlet:renderURL var="viewEntriesURL">
 		<portlet:param name="struts_action" value="/dynamic_data_mapping/view_template" />
 		<portlet:param name="backURL" value="<%= backURL %>" />
-		<portlet:param name="structureId" value="<%= structureId %>" />
+		<portlet:param name="structureId" value="<%= String.valueOf(structureId) %>" />
 	</portlet:renderURL>
 
 	<span class="lfr-toolbar-button view-button <%= toolbarItem.equals("view-all") ? "current" : StringPool.BLANK %>">
@@ -41,7 +41,7 @@ String structureId = ParamUtil.getString(request, "structureId");
 			<portlet:param name="redirect" value="<%= currentURL %>" />
 			<portlet:param name="backURL" value="<%= currentURL %>" />
 			<portlet:param name="groupId" value="<%= String.valueOf(scopeGroupId) %>" />
-			<portlet:param name="structureId" value="<%= structureId %>" />
+			<portlet:param name="structureId" value="<%= String.valueOf(structureId) %>" />
 			<portlet:param name="structureAvailableFields" value='<%= renderResponse.getNamespace() + "structureAvailableFields" %>' />
 		</portlet:renderURL>
 
@@ -54,8 +54,8 @@ String structureId = ParamUtil.getString(request, "structureId");
 			<portlet:param name="redirect" value="<%= currentURL %>" />
 			<portlet:param name="backURL" value="<%= currentURL %>" />
 			<portlet:param name="groupId" value="<%= String.valueOf(scopeGroupId) %>" />
+			<portlet:param name="structureId" value="<%= String.valueOf(structureId) %>" />
 			<portlet:param name="type" value="list" />
-			<portlet:param name="structureId" value="<%= structureId %>" />
 		</portlet:renderURL>
 
 		<span class="lfr-toolbar-button view-templates <%= toolbarItem.equals("add-list-template") ? "current" : StringPool.BLANK %>"><a href="<%= addEntryURL %>"><liferay-ui:message key="add-list-template" /></a></span>

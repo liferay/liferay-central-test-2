@@ -45,7 +45,6 @@ if (Validator.isNotNull(ddmStructureId)) {
 	catch (NoSuchStructureException nsse) {
 	}
 }
-
 %>
 
 <liferay-ui:header
@@ -63,8 +62,8 @@ if (Validator.isNotNull(ddmStructureId)) {
 	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
 	<aui:input name="backURL" type="hidden" value="<%= backURL %>" />
 	<aui:input name="groupId" type="hidden" value="<%= groupId %>" />
-	<aui:input name="ddmStructureId" type="hidden" value="<%= ddmStructureId %>" />
 	<aui:input name="recordSetId" type="hidden" value="<%= recordSetId %>" />
+	<aui:input name="ddmStructureId" type="hidden" value="<%= ddmStructureId %>" />
 
 	<liferay-ui:error exception="<%= RecordSetDDMStructureIdException.class %>" message="please-enter-valid-definition" />
 	<liferay-ui:error exception="<%= RecordSetNameException.class %>" message="please-enter-a-valid-name" />

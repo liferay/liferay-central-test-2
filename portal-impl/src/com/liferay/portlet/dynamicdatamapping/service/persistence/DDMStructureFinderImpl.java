@@ -61,26 +61,24 @@ public class DDMStructureFinderImpl
 		}
 
 		return countByC_G_C_N_D_S(
-			companyId, groupId, classNameIds, names, descriptions,
-			null, andOperator);
+			companyId, groupId, classNameIds, names, descriptions, null,
+			andOperator);
 	}
 
 	public int countByC_G_C_N_D_S(
-			long companyId, long groupId, long[] classNameIds,
-			String name, String description,
-			String storageType, boolean andOperator)
+			long companyId, long groupId, long[] classNameIds, String name,
+			String description, String storageType, boolean andOperator)
 		throws SystemException {
 
 		return countByC_G_C_N_D_S(
-			companyId, groupId, classNameIds,
-			new String[] {name}, new String[] {description},
-			new String[] {storageType}, andOperator);
+			companyId, groupId, classNameIds, new String[] {name},
+			new String[] {description}, new String[] {storageType},
+			andOperator);
 	}
 
 	public int countByC_G_C_N_D_S(
-			long companyId, long groupId, long[] classNameIds,
-			String[] names, String[] descriptions,
-			String[] storageTypes, boolean andOperator)
+			long companyId, long groupId, long[] classNameIds, String[] names,
+			String[] descriptions, String[] storageTypes, boolean andOperator)
 		throws SystemException {
 
 		String[] classNameIdsString = null;
@@ -171,30 +169,26 @@ public class DDMStructureFinderImpl
 		}
 
 		return findByC_G_C_N_D_S(
-			companyId, groupId, classNameIds, names,
-			descriptions, null, andOperator, start, end,
-			orderByComparator);
+			companyId, groupId, classNameIds, names, descriptions, null,
+			andOperator, start, end, orderByComparator);
 	}
 
 	public List<DDMStructure> findByC_G_C_N_D_S(
-			long companyId, long groupId, long[] classNameIds,
-			String name, String description,
-			String storageType, boolean andOperator, int start, int end,
-			OrderByComparator orderByComparator)
+			long companyId, long groupId, long[] classNameIds, String name,
+			String description, String storageType, boolean andOperator,
+			int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
 
 		return findByC_G_C_N_D_S(
-			companyId, groupId, classNameIds,
-			new String[] {name}, new String[] {description},
-			new String[] {storageType}, andOperator, start, end,
-			orderByComparator);
+			companyId, groupId, classNameIds, new String[] {name},
+			new String[] {description}, new String[] {storageType}, andOperator,
+			start, end, orderByComparator);
 	}
 
 	public List<DDMStructure> findByC_G_C_N_D_S(
-			long companyId, long groupId, long[] classNameIds,
-			String[] names, String[] descriptions,
-			String[] storageTypes, boolean andOperator, int start, int end,
-			OrderByComparator orderByComparator)
+			long companyId, long groupId, long[] classNameIds, String[] names,
+			String[] descriptions, String[] storageTypes, boolean andOperator,
+			int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
 
 		String[] classNameIdsString = null;

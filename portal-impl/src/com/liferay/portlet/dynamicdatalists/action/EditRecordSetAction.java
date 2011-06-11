@@ -136,10 +136,11 @@ public class EditRecordSetAction extends PortletAction {
 
 		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
+		long recordSetId = ParamUtil.getLong(actionRequest, "recordSetId");
+
 		long groupId = ParamUtil.getLong(actionRequest, "groupId");
 		long ddmStructureId = ParamUtil.getLong(
 			actionRequest, "ddmStructureId");
-		long recordSetId = ParamUtil.getLong(actionRequest, "recordSetId");
 		Map<Locale, String> nameMap = LocalizationUtil.getLocalizationMap(
 			actionRequest, "name");
 		Map<Locale, String> descriptionMap =
@@ -157,7 +158,7 @@ public class EditRecordSetAction extends PortletAction {
 		}
 		else {
 			recordSet = DDLRecordSetServiceUtil.updateRecordSet(
-				groupId, ddmStructureId, recordSetId, nameMap, descriptionMap,
+				recordSetId, ddmStructureId, nameMap, descriptionMap,
 				DDLConstants.MIN_DISPLAY_ROWS_DEFAULT, serviceContext);
 		}
 

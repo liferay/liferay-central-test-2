@@ -72,4 +72,5 @@ public class DDLRecordSetPermission {
 
 		return contains(permissionChecker, recordSet, actionId);
 	}
+
 }

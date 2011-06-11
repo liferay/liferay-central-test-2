@@ -154,8 +154,7 @@ public class EditTemplateAction extends PortletAction {
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		String structureId = ParamUtil.getString(
-			actionRequest, "structureId");
+		long structureId = ParamUtil.getLong(actionRequest, "structureId");
 		String availableFields = ParamUtil.getString(
 			actionRequest, "availableFields");
 		String saveCallback = ParamUtil.getString(
@@ -175,7 +174,8 @@ public class EditTemplateAction extends PortletAction {
 			"templateId", String.valueOf(template.getTemplateId()), false);
 		portletURL.setParameter(
 			"groupId", String.valueOf(template.getGroupId()), false);
-		portletURL.setParameter("structureId", structureId, false);
+		portletURL.setParameter(
+			"structureId", String.valueOf(structureId), false);
 		portletURL.setParameter("type", template.getType(), false);
 		portletURL.setParameter("availableFields", availableFields, false);
 		portletURL.setParameter("saveCallback", saveCallback, false);

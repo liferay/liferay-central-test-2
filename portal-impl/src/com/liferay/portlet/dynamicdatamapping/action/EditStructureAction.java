@@ -196,9 +196,10 @@ public class EditStructureAction extends PortletAction {
 
 		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
+		long structureId = ParamUtil.getLong(actionRequest, "structureId");
+
 		long groupId = ParamUtil.getLong(actionRequest, "groupId");
 		long classNameId = ParamUtil.getLong(actionRequest, "classNameId");
-		long structureId = ParamUtil.getLong(actionRequest, "structureId");
 		Map<Locale, String> nameMap = LocalizationUtil.getLocalizationMap(
 			actionRequest, "name");
 		Map<Locale, String> descriptionMap =
@@ -213,13 +214,12 @@ public class EditStructureAction extends PortletAction {
 
 		if (cmd.equals(Constants.ADD)) {
 			structure = DDMStructureServiceUtil.addStructure(
-				groupId, classNameId, nameMap,
-				descriptionMap, xsd, storageType, serviceContext);
+				groupId, classNameId, nameMap, descriptionMap, xsd, storageType,
+				serviceContext);
 		}
 		else if (cmd.equals(Constants.UPDATE)) {
 			structure = DDMStructureServiceUtil.updateStructure(
-				groupId, structureId, nameMap, descriptionMap, xsd,
-				serviceContext);
+				structureId, nameMap, descriptionMap, xsd, serviceContext);
 		}
 
 		return structure;

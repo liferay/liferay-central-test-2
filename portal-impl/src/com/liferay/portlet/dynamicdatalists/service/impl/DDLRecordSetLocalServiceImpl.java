@@ -43,9 +43,8 @@ public class DDLRecordSetLocalServiceImpl
 
 	public DDLRecordSet addRecordSet(
 			long userId, long groupId, long ddmStructureId,
-			Map<Locale, String> nameMap,
-			Map<Locale, String> descriptionMap, int minDisplayRows,
-			ServiceContext serviceContext)
+			Map<Locale, String> nameMap, Map<Locale, String> descriptionMap,
+			int minDisplayRows, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		// Record set
@@ -191,14 +190,14 @@ public class DDLRecordSetLocalServiceImpl
 	}
 
 	public List<DDLRecordSet> search(
-			long companyId, long groupId, String name,
-			String description, boolean andOperator, int start, int end,
+			long companyId, long groupId, String name, String description,
+			boolean andOperator, int start, int end,
 			OrderByComparator orderByComparator)
 		throws SystemException {
 
 		return ddlRecordSetFinder.findByC_G_N_D(
-			companyId, groupId, name, description, andOperator,
-			start, end, orderByComparator);
+			companyId, groupId, name, description, andOperator, start, end,
+			orderByComparator);
 	}
 
 	public int searchCount(long companyId, long groupId, String keywords)
@@ -208,8 +207,8 @@ public class DDLRecordSetLocalServiceImpl
 	}
 
 	public int searchCount(
-			long companyId, long groupId, String name,
-			String description, boolean andOperator)
+			long companyId, long groupId, String name, String description,
+			boolean andOperator)
 		throws SystemException {
 
 		return ddlRecordSetFinder.countByC_G_N_D(
@@ -233,9 +232,9 @@ public class DDLRecordSetLocalServiceImpl
 	}
 
 	public DDLRecordSet updateRecordSet(
-			long groupId, long ddmStructureId, long recordSetId,
-			Map<Locale, String> nameMap, Map<Locale, String> descriptionMap,
-			int minDisplayRows, ServiceContext serviceContext)
+			long recordSetId, long ddmStructureId, Map<Locale, String> nameMap,
+			Map<Locale, String> descriptionMap, int minDisplayRows,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		validateDDMStructureId(ddmStructureId);
@@ -283,4 +282,5 @@ public class DDLRecordSetLocalServiceImpl
 			throw new RecordSetNameException();
 		}
 	}
+
 }

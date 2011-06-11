@@ -45,4 +45,5 @@ public class RecordSetDisplayTerms extends DisplayTerms {
 
 	protected String description;
 	protected String name;
+
 }

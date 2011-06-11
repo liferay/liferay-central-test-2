@@ -228,15 +228,14 @@ public class DDMStructureLocalServiceImpl
 	}
 
 	public List<DDMStructure> search(
-			long companyId, long groupId, long[] classNameIds,
-			String name, String description, String storageType,
-			boolean andOperator, int start, int end,
-			OrderByComparator orderByComparator)
+			long companyId, long groupId, long[] classNameIds, String name,
+			String description, String storageType, boolean andOperator,
+			int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
 
 		return ddmStructureFinder.findByC_G_C_N_D_S(
-			companyId, groupId, classNameIds, name, description,
-			storageType, andOperator, start, end, orderByComparator);
+			companyId, groupId, classNameIds, name, description, storageType,
+			andOperator, start, end, orderByComparator);
 	}
 
 	public int searchCount(
@@ -248,18 +247,17 @@ public class DDMStructureLocalServiceImpl
 	}
 
 	public int searchCount(
-			long companyId, long groupId, long[] classNameIds,
-			String name, String description,
-			String storageType, boolean andOperator)
+			long companyId, long groupId, long[] classNameIds, String name,
+			String description, String storageType, boolean andOperator)
 		throws SystemException {
 
 		return ddmStructureFinder.countByC_G_C_N_D_S(
-			companyId, groupId, classNameIds, name, description,
-			storageType, andOperator);
+			companyId, groupId, classNameIds, name, description, storageType,
+			andOperator);
 	}
 
 	public DDMStructure updateStructure(
-			long groupId, long structureId, Map<Locale, String> nameMap,
+			long structureId, Map<Locale, String> nameMap,
 			Map<Locale, String> descriptionMap, String xsd,
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
@@ -274,7 +272,7 @@ public class DDMStructureLocalServiceImpl
 		DDMStructure structure = ddmStructurePersistence.findByPrimaryKey(
 			structureId);
 
-		validate(groupId, nameMap, xsd);
+		validate(structure.getGroupId(), nameMap, xsd);
 
 		structure.setModifiedDate(serviceContext.getModifiedDate(null));
 		structure.setNameMap(nameMap);

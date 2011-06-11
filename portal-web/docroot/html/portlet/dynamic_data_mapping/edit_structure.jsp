@@ -24,7 +24,8 @@ String portletResourceNamespace = ParamUtil.getString(request, "portletResourceN
 
 DDMStructure structure = (DDMStructure)request.getAttribute(WebKeys.DYNAMIC_DATA_MAPPING_STRUCTURE);
 
-String structureId = BeanParamUtil.getString(structure, request, "structureId");
+long structureId = BeanParamUtil.getLong(structure, request, "structureId");
+
 String script = BeanParamUtil.getString(structure, request, "xsd");
 %>
 
