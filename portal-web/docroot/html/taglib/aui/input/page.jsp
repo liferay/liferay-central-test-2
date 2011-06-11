@@ -159,14 +159,10 @@ String labelTag = AUIUtil.buildLabel(inlineLabel, showForLabel, forLabel);
 	<c:when test='<%= type.equals("checkbox") %>'>
 
 		<%
-		String valueString = StringPool.BLANK;
+		String valueString = GetterUtil.getString(checked);
 
 		if (value != null) {
 			valueString = value.toString();
-		}
-
-		if (valueString.equalsIgnoreCase("false") || valueString.equalsIgnoreCase("true")) {
-			checked = GetterUtil.getBoolean(valueString);
 		}
 
 		if (!ignoreRequestValue) {
@@ -176,29 +172,19 @@ String labelTag = AUIUtil.buildLabel(inlineLabel, showForLabel, forLabel);
 				checked = requestValues[0].equalsIgnoreCase("true") || ArrayUtil.contains(requestValues, valueString);
 			}
 		}
-
-		String defaultValueString = Boolean.TRUE.toString();
-
-		if (Validator.isNotNull(valueString) && !valueString.equalsIgnoreCase("false") && !valueString.equalsIgnoreCase("true")) {
-			defaultValueString = valueString;
-		}
 		%>
 
 		<input id="<%= id %>" name="<%= namespace + name %>" type="hidden" value="<%= checked ? valueString : StringPool.BLANK %>" />
 
-		<input <%= checked ? "checked" : StringPool.BLANK %> class="<%= inputCss %>" <%= disabled ? "disabled" : StringPool.BLANK %> id="<%= id %>Checkbox" name="<%= namespace + name %>Checkbox" <%= Validator.isNotNull(onChange) ? "onChange=\"" + onChange + "\"" : StringPool.BLANK %> onClick="Liferay.Util.updateCheckboxValue(this); <%= onClick %>" <%= Validator.isNotNull(title) ? "title=\"" + title + "\"" : StringPool.BLANK %> type="checkbox" value="<%= defaultValueString %>" <%= AUIUtil.buildData(data) %> <%= InlineUtil.buildDynamicAttributes(dynamicAttributes) %> />
+		<input <%= checked ? "checked" : StringPool.BLANK %> class="<%= inputCss %>" <%= disabled ? "disabled" : StringPool.BLANK %> id="<%= id %>Checkbox" name="<%= namespace + name %>Checkbox" <%= Validator.isNotNull(onChange) ? "onChange=\"" + onChange + "\"" : StringPool.BLANK %> onClick="Liferay.Util.updateCheckboxValue(this); <%= onClick %>" <%= Validator.isNotNull(title) ? "title=\"" + title + "\"" : StringPool.BLANK %> type="checkbox" value="<%= valueString %>" <%= AUIUtil.buildData(data) %> <%= InlineUtil.buildDynamicAttributes(dynamicAttributes) %> />
 	</c:when>
 	<c:when test='<%= type.equals("radio") %>'>
 
 		<%
-		String valueString = StringPool.BLANK;
+		String valueString = GetterUtil.getString(checked);
 
 		if (value != null) {
 			valueString = value.toString();
-		}
-
-		if (valueString.equalsIgnoreCase("false") || valueString.equalsIgnoreCase("true")) {
-			checked = GetterUtil.getBoolean(valueString);
 		}
 
 		if (!ignoreRequestValue) {
