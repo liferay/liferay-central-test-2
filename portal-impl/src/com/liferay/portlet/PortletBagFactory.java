@@ -15,6 +15,8 @@
 package com.liferay.portlet;
 
 import com.liferay.portal.dao.shard.ShardPollerProcessorWrapper;
+import com.liferay.portal.kernel.atom.AtomCollectionAdapter;
+import com.liferay.portal.kernel.atom.AtomCollectionAdapterRegistryUtil;
 import com.liferay.portal.kernel.lar.PortletDataHandler;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -221,6 +223,24 @@ public class PortletBagFactory {
 				customAttributesDisplayInstance);
 		}
 
+		List<AtomCollectionAdapter> atomCollectionAdapterInstances =
+			new ArrayList<AtomCollectionAdapter>();
+
+		for (String atomCollectionAdapterClass :
+			portlet.getAtomCollectionAdapterClasses()) {
+
+			AtomCollectionAdapter atomCollectionAdapterInstance =
+				(AtomCollectionAdapter)newInstance(
+					AtomCollectionAdapter.class,
+					atomCollectionAdapterClass
+				);
+
+			AtomCollectionAdapterRegistryUtil.
+				register(atomCollectionAdapterInstance);
+
+			atomCollectionAdapterInstances.add(atomCollectionAdapterInstance);
+		}
+
 		List<WorkflowHandler> workflowHandlerInstances =
 			new ArrayList<WorkflowHandler>();
 
@@ -291,8 +311,9 @@ public class PortletBagFactory {
 			socialActivityInterpreterInstance, socialRequestInterpreterInstance,
 			webDAVStorageInstance, xmlRpcMethodInstance,
 			controlPanelEntryInstance, assetRendererFactoryInstances,
-			customAttributesDisplayInstances, workflowHandlerInstances,
-			preferencesValidatorInstance, resourceBundles);
+			atomCollectionAdapterInstances, customAttributesDisplayInstances,
+			workflowHandlerInstances, preferencesValidatorInstance,
+			resourceBundles);
 
 		PortletBagPool.put(portlet.getRootPortletId(), portletBag);
 

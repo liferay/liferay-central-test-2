@@ -393,6 +393,7 @@
 		<xml-rpc-method-class>com.liferay.portlet.blogs.util.PingbackMethodImpl</xml-rpc-method-class>
 		<asset-renderer-factory>com.liferay.portlet.blogs.asset.BlogsEntryAssetRendererFactory</asset-renderer-factory>
 		<custom-attributes-display>com.liferay.portlet.blogs.BlogsEntryCustomAttributesDisplay</custom-attributes-display>
+		<atom-collection-adapter>com.liferay.portlet.blogs.atom.BlogsEntryCollectionAdapter</atom-collection-adapter>
 		<workflow-handler>com.liferay.portlet.blogs.workflow.BlogsEntryWorkflowHandler</workflow-handler>
 		<preferences-unique-per-layout>false</preferences-unique-per-layout>
 		<preferences-owned-by-group>true</preferences-owned-by-group>

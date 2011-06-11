@@ -1240,6 +1240,16 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 				assetRendererFactoryClassElement.getText());
 		}
 
+		List<String> atomCollectionAdapterClasses =
+			portletModel.getAtomCollectionAdapterClasses();
+
+		for (Element atomCollectionAdapterClassElement :
+				portletElement.elements("atom-collection-adapter")) {
+
+			atomCollectionAdapterClasses.add(
+				atomCollectionAdapterClassElement.getText());
+		}
+
 		List<String> customAttributesDisplayClasses =
 			portletModel.getCustomAttributesDisplayClasses();
 

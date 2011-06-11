@@ -14,6 +14,10 @@
 
 package com.liferay.portal.servlet;
 
+import com.liferay.portal.atom.AtomProvider;
+import com.liferay.portal.atom.AtomUtil;
+import com.liferay.portal.kernel.atom.AtomCollectionAdapter;
+import com.liferay.portal.kernel.atom.AtomCollectionAdapterRegistryUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -26,6 +30,8 @@ import com.liferay.portal.security.permission.PermissionCheckerFactoryUtil;
 import com.liferay.portal.security.permission.PermissionThreadLocal;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.util.PortalInstances;
+
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -40,7 +46,20 @@ import org.apache.abdera.protocol.server.servlet.AbderaServlet;
 public class AtomServlet extends AbderaServlet {
 
 	protected Provider createProvider() {
-		return null;
+		AtomProvider provider = new AtomProvider();
+
+		provider.init(getAbdera(), null);
+
+		List<AtomCollectionAdapter> atomCollectionAdapters =
+			AtomCollectionAdapterRegistryUtil.getAtomCollectionAdapters();
+
+		for (AtomCollectionAdapter atomCollectionAdapter :
+			atomCollectionAdapters) {
+
+			provider.addCollection(atomCollectionAdapter);
+		}
+
+		return provider;
 	}
 
 	protected void service(
@@ -85,7 +104,7 @@ public class AtomServlet extends AbderaServlet {
 
 				PermissionThreadLocal.setPermissionChecker(permissionChecker);
 
-				//AtomUtil.saveUserInRequest(request, user);
+				AtomUtil.saveUserInRequest(request, user);
 			}
 
 			CompanyThreadLocal.setCompanyId(companyId);

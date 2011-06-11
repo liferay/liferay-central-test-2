@@ -3322,6 +3322,7 @@
 			<transient name="addDefaultResource" />
 			<transient name="ajaxable" />
 			<transient name="assetRendererFactoryClasses" />
+			<transient name="atomCollectionAdapterClasses" />
 			<transient name="autopropagatedParameters" />
 			<transient name="configurationActionClass" />
 			<transient name="controlPanelEntryCategory" />

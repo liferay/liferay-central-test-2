@@ -98,6 +98,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		setStrutsPath(portletId);
 		setActive(true);
 		_indexerClasses = new ArrayList<String>();
+		_atomCollectionAdapterClasses = new ArrayList<String>();
 		_schedulerEntries = new ArrayList<SchedulerEntry>();
 		_assetRendererFactoryClasses = new ArrayList<String>();
 		_customAttributesDisplayClasses = new ArrayList<String>();
@@ -142,7 +143,9 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		String socialRequestInterpreterClass, String webDAVStorageToken,
 		String webDAVStorageClass, String xmlRpcMethodClass,
 		String controlPanelEntryCategory, double controlPanelEntryWeight,
-		String controlPanelClass, List<String> assetRendererFactoryClasses,
+		String controlPanelClass,
+		List<String> atomCollectionAdapterClasses,
+		List<String> assetRendererFactoryClasses,
 		List<String> customAttributesDisplayClasses,
 		List<String> workflowHandlerClasses, String defaultPreferences,
 		String preferencesValidator, boolean preferencesCompanyWide,
@@ -207,6 +210,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		_controlPanelEntryWeight = controlPanelEntryWeight;
 		_controlPanelEntryClass = controlPanelClass;
 		_assetRendererFactoryClasses = assetRendererFactoryClasses;
+		_atomCollectionAdapterClasses = atomCollectionAdapterClasses;
 		_customAttributesDisplayClasses = customAttributesDisplayClasses;
 		_workflowHandlerClasses = workflowHandlerClasses;
 		_defaultPreferences = defaultPreferences;
@@ -549,6 +553,16 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 */
 	public void setIndexerClasses(List<String> indexerClasses) {
 		_indexerClasses = indexerClasses;
+	}
+
+	public List<String> getAtomCollectionAdapterClasses() {
+		return _atomCollectionAdapterClasses;
+	}
+
+	public void setAtomCollectionAdapterClasses(
+		List<String> atomCollectionAdapterClasses) {
+
+		_atomCollectionAdapterClasses = atomCollectionAdapterClasses;
 	}
 
 	/**
@@ -3137,6 +3151,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 			getWebDAVStorageClass(), getXmlRpcMethodClass(),
 			getControlPanelEntryCategory(), getControlPanelEntryWeight(),
 			getControlPanelEntryClass(), getAssetRendererFactoryClasses(),
+			getAtomCollectionAdapterClasses(),
 			getCustomAttributesDisplayClasses(), getWorkflowHandlerClasses(),
 			getDefaultPreferences(), getPreferencesValidator(),
 			isPreferencesCompanyWide(),	isPreferencesUniquePerLayout(),
@@ -3267,6 +3282,11 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 * The indexer class names of the portlet.
 	 */
 	private List<String> _indexerClasses;
+
+	/**
+	 * The atom collection adapter classes.
+	 */
+	private List<String> _atomCollectionAdapterClasses;
 
 	/**
 	 * The name of the open search class of the portlet.

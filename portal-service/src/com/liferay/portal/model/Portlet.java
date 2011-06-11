@@ -245,6 +245,11 @@ public interface Portlet extends PortletModel {
 	public void setIndexerClasses(
 		java.util.List<java.lang.String> indexerClasses);
 
+	public java.util.List<java.lang.String> getAtomCollectionAdapterClasses();
+
+	public void setAtomCollectionAdapterClasses(
+		java.util.List<java.lang.String> atomCollectionAdapterClasses);
+
 	/**
 	* Returns the indexer instances of the portlet.
 	*

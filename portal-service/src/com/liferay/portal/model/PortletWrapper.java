@@ -493,6 +493,15 @@ public class PortletWrapper implements Portlet {
 		_portlet.setIndexerClasses(indexerClasses);
 	}
 
+	public java.util.List<java.lang.String> getAtomCollectionAdapterClasses() {
+		return _portlet.getAtomCollectionAdapterClasses();
+	}
+
+	public void setAtomCollectionAdapterClasses(
+		java.util.List<java.lang.String> atomCollectionAdapterClasses) {
+		_portlet.setAtomCollectionAdapterClasses(atomCollectionAdapterClasses);
+	}
+
 	/**
 	* Returns the indexer instances of the portlet.
 	*
