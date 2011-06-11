@@ -19,7 +19,6 @@ import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.PropsUtil;
-import com.liferay.portal.kernel.util.Validator;
 import com.liferay.taglib.util.IncludeTag;
 
 import java.util.HashMap;
@@ -62,12 +61,7 @@ public class SocialBookmarkTag extends IncludeTag {
 			PropsKeys.SOCIAL_BOOKMARK_TYPES);
 
 		if (ArrayUtil.contains(socialTypes, _type)) {
-			if (Validator.isNotNull(_jspPath)) {
-				return _jspPath;
-			}
-			else {
-				return _PAGE;
-			}
+			return _PAGE;
 		}
 		else {
 			return null;
@@ -75,14 +69,8 @@ public class SocialBookmarkTag extends IncludeTag {
 	}
 
 	protected void setAttributes(HttpServletRequest request) {
-		_jspPath = PropsUtil.get(
-			PropsKeys.SOCIAL_BOOKMARK_JSP, new Filter(_type));
-
-		if (Validator.isNull(_jspPath)) {
-			request.setAttribute(
-				"liferay-ui:social-bookmark:postUrl", getPostUrl());
-		}
-
+		request.setAttribute(
+			"liferay-ui:social-bookmark:postUrl", getPostUrl());
 		request.setAttribute("liferay-ui:social-bookmark:target", _target);
 		request.setAttribute("liferay-ui:social-bookmark:title", _title);
 		request.setAttribute("liferay-ui:social-bookmark:type", _type);
@@ -104,7 +92,6 @@ public class SocialBookmarkTag extends IncludeTag {
 	private static final String _PAGE =
 		"/html/taglib/ui/social_bookmark/page.jsp";
 
-	private String _jspPath;
 	private String _target;
 	private String _title;
 	private String _type;

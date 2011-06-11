@@ -24,10 +24,6 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class SocialBookmarksTag extends IncludeTag {
 
-	public void setDisplayStyle(String displayStyle) {
-		_displayStyle = displayStyle;
-	}
-
 	public void setTarget(String target) {
 		_target = target;
 	}
@@ -45,7 +41,6 @@ public class SocialBookmarksTag extends IncludeTag {
 	}
 
 	protected void cleanUp() {
-		_displayStyle = null;
 		_target = null;
 		_title = null;
 		_types = null;
@@ -57,8 +52,6 @@ public class SocialBookmarksTag extends IncludeTag {
 	}
 
 	protected void setAttributes(HttpServletRequest request) {
-		request.setAttribute(
-			"liferay-ui:social-bookmark:displayStyle", _displayStyle);
 		request.setAttribute("liferay-ui:social-bookmark:target", _target);
 		request.setAttribute("liferay-ui:social-bookmark:title", _title);
 		request.setAttribute("liferay-ui:social-bookmark:types", _types);
@@ -68,7 +61,6 @@ public class SocialBookmarksTag extends IncludeTag {
 	private static final String _PAGE =
 		"/html/taglib/ui/social_bookmarks/page.jsp";
 
-	private String _displayStyle;
 	private String _target;
 	private String _title;
 	private String _types;

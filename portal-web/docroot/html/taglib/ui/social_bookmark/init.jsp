@@ -17,7 +17,6 @@
 <%@ include file="/html/taglib/init.jsp" %>
 
 <%
-String displayStyle = GetterUtil.getString((String)request.getAttribute("liferay-ui:social-bookmark:displayStyle"), "horizontal");
 String type = (String)request.getAttribute("liferay-ui:social-bookmark:type");
 String url = GetterUtil.getString((String)request.getAttribute("liferay-ui:social-bookmark:url"));
 String title = GetterUtil.getString((String)request.getAttribute("liferay-ui:social-bookmark:title"));
