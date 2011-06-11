@@ -237,6 +237,24 @@ public class DDLRecordSetWrapper implements DDLRecordSet {
 	}
 
 	/**
+	* Returns the record set key of this d d l record set.
+	*
+	* @return the record set key of this d d l record set
+	*/
+	public java.lang.String getRecordSetKey() {
+		return _ddlRecordSet.getRecordSetKey();
+	}
+
+	/**
+	* Sets the record set key of this d d l record set.
+	*
+	* @param recordSetKey the record set key of this d d l record set
+	*/
+	public void setRecordSetKey(java.lang.String recordSetKey) {
+		_ddlRecordSet.setRecordSetKey(recordSetKey);
+	}
+
+	/**
 	* Returns the name of this d d l record set.
 	*
 	* @return the name of this d d l record set

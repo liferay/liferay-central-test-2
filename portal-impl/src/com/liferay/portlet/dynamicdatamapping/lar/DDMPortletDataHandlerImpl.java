@@ -160,7 +160,6 @@ public class DDMPortletDataHandlerImpl extends BasePortletDataHandler {
 			else {
 				importedStructure =
 					DDMStructureLocalServiceUtil.updateStructure(
-						existingStructure.getGroupId(),
 						existingStructure.getStructureId(),
 						structure.getNameMap(), structure.getDescriptionMap(),
 						structure.getXsd(), serviceContext);

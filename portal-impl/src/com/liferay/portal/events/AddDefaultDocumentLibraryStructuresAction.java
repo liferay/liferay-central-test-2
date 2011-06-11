@@ -71,11 +71,11 @@ public class AddDefaultDocumentLibraryStructuresAction extends SimpleAction {
 			String name = structureElement.elementText("name");
 			String description = structureElement.elementText("description");
 
-			List<DDMStructure> ddmStructures =
-				DDMStructureLocalServiceUtil.getStructure(
-					groupId, name, description);
+			DDMStructure ddmStructure =
+				DDMStructureLocalServiceUtil.fetchStructure(
+					groupId, name);
 
-			if (!ddmStructures.isEmpty()) {
+			if (ddmStructure != null) {
 				continue;
 			}
 
@@ -94,26 +94,24 @@ public class AddDefaultDocumentLibraryStructuresAction extends SimpleAction {
 
 			DDMStructureLocalServiceUtil.addStructure(
 				userId, groupId,
-				PortalUtil.getClassNameId(DLDocumentMetadataSet.class), nameMap,
-				descriptionMap, xsd, "xml", serviceContext);
+				PortalUtil.getClassNameId(DLDocumentMetadataSet.class),
+				name, nameMap, descriptionMap, xsd, "xml",
+				serviceContext);
 		}
 	}
 
 	protected void addDLDocumentType(
 			long userId, long groupId, String dlDocumentTypeName,
 			String dlDocumentTypeDescription, String ddmStructureName,
-			String ddmStructureDescription, ServiceContext serviceContext)
+			ServiceContext serviceContext)
 		throws Exception {
 
-		List<DDMStructure> ddmStructures =
-			DDMStructureLocalServiceUtil.getStructure(
-				groupId, ddmStructureName, ddmStructureDescription);
+		DDMStructure ddmStructure = DDMStructureLocalServiceUtil.fetchStructure(
+				groupId, ddmStructureName);
 
-		if (ddmStructures.isEmpty()) {
+		if (ddmStructure == null) {
 			return;
 		}
-
-		DDMStructure ddmStructure = ddmStructures.get(0);
 
 		long[] ddmStructureId = new long[] {ddmStructure.getStructureId()};
 
@@ -134,13 +132,11 @@ public class AddDefaultDocumentLibraryStructuresAction extends SimpleAction {
 
 		addDLDocumentType(
 			userId, groupId, "Image", "Image Document Type",
-			"Default Image's Metadata Set", "Default Image's Metadata Set",
-			serviceContext);
+			"Default Image's Metadata Set",  serviceContext);
 
 		addDLDocumentType(
 			userId, groupId, "Video", "Video Document Type",
-			"Default Videos's Metadata Set", "Default Videos's Metadata Set",
-			serviceContext);
+			"Default Videos's Metadata Set", serviceContext);
 	}
 
 	protected void doRun(long companyId) throws Exception {
@@ -155,8 +151,8 @@ public class AddDefaultDocumentLibraryStructuresAction extends SimpleAction {
 
 		serviceContext.setUserId(defaultUserId);
 
-		addDDMStructures(
-			defaultUserId, group.getGroupId(), serviceContext);
+		addDDMStructures(defaultUserId, group.getGroupId(), serviceContext);
+
 		addDLDocumentTypes(defaultUserId, group.getGroupId(), serviceContext);
 	}
 

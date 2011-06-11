@@ -24,6 +24,7 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.dynamicdatalists.RecordSetDDMStructureIdException;
+import com.liferay.portlet.dynamicdatalists.RecordSetDuplicateRecordSetKeyException;
 import com.liferay.portlet.dynamicdatalists.RecordSetNameException;
 import com.liferay.portlet.dynamicdatalists.model.DDLRecordSet;
 import com.liferay.portlet.dynamicdatalists.service.base.DDLRecordSetLocalServiceBaseImpl;
@@ -47,13 +48,30 @@ public class DDLRecordSetLocalServiceImpl
 			int minDisplayRows, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
+		String recordSetKey = String.valueOf(counterLocalService.increment());
+
+		return addRecordSet(
+			userId, groupId, ddmStructureId, recordSetKey, nameMap,
+			descriptionMap, minDisplayRows, serviceContext);
+	}
+
+	public DDLRecordSet addRecordSet(
+			long userId, long groupId, long ddmStructureId, String recordSetKey,
+			Map<Locale, String> nameMap, Map<Locale, String> descriptionMap,
+			int minDisplayRows, ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
 		// Record set
 
 		User user = userPersistence.findByPrimaryKey(userId);
 
+		if (Validator.isNull(recordSetKey)) {
+			recordSetKey = String.valueOf(counterLocalService.increment());
+		}
+
 		Date now = new Date();
 
-		validate(ddmStructureId, nameMap);
+		validate(groupId, ddmStructureId, recordSetKey, nameMap);
 
 		long recordSetId = counterLocalService.increment();
 
@@ -67,6 +85,7 @@ public class DDLRecordSetLocalServiceImpl
 		recordSet.setCreateDate(serviceContext.getCreateDate(now));
 		recordSet.setModifiedDate(serviceContext.getModifiedDate(now));
 		recordSet.setDDMStructureId(ddmStructureId);
+		recordSet.setRecordSetKey(recordSetKey);
 		recordSet.setNameMap(nameMap);
 		recordSet.setDescriptionMap(descriptionMap);
 		recordSet.setMinDisplayRows(minDisplayRows);
@@ -153,6 +172,15 @@ public class DDLRecordSetLocalServiceImpl
 		deleteRecordSet(recordSet);
 	}
 
+	public void deleteRecordSet(long groupId, String recordSetKey)
+		throws PortalException, SystemException {
+
+		DDLRecordSet recordSet = ddlRecordSetPersistence.findByG_R(
+			groupId, recordSetKey);
+
+		deleteRecordSet(recordSet);
+	}
+
 	public void deleteRecordSets(long groupId)
 		throws PortalException, SystemException {
 
@@ -164,10 +192,22 @@ public class DDLRecordSetLocalServiceImpl
 		}
 	}
 
+	public DDLRecordSet fetchRecordSet(long groupId, String recordSetKey)
+		throws PortalException, SystemException {
+
+		return ddlRecordSetPersistence.fetchByG_R(groupId, recordSetKey);
+	}
+
 	public DDLRecordSet getRecordSet(long recordSetId)
 		throws PortalException, SystemException {
 
 		return ddlRecordSetPersistence.findByPrimaryKey(recordSetId);
+	}
+
+	public DDLRecordSet getRecordSet(long groupId, String recordSetKey)
+		throws PortalException, SystemException {
+
+		return ddlRecordSetPersistence.findByG_R(groupId, recordSetKey);
 	}
 
 	public List<DDLRecordSet> getRecordSets(long groupId)
@@ -237,11 +277,37 @@ public class DDLRecordSetLocalServiceImpl
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		validateDDMStructureId(ddmStructureId);
-		validateName(nameMap);
-
 		DDLRecordSet recordSet = ddlRecordSetPersistence.findByPrimaryKey(
 			recordSetId);
+
+		return doUpdateRecordSet(
+			ddmStructureId, nameMap, descriptionMap, minDisplayRows,
+			serviceContext,
+			recordSet);
+	}
+
+	public DDLRecordSet updateRecordSet(
+			long groupId, String recordSetKey, long ddmStructureId,
+			Map<Locale, String> nameMap, Map<Locale, String> descriptionMap,
+			int minDisplayRows, ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		DDLRecordSet recordSet = ddlRecordSetPersistence.findByG_R(
+			groupId, recordSetKey);
+
+		return doUpdateRecordSet(
+			ddmStructureId, nameMap, descriptionMap, minDisplayRows,
+			serviceContext, recordSet);
+	}
+
+	protected DDLRecordSet doUpdateRecordSet(
+			long ddmStructureId, Map<Locale, String> nameMap,
+			Map<Locale, String> descriptionMap, int minDisplayRows,
+			ServiceContext serviceContext, DDLRecordSet recordSet)
+		throws PortalException, SystemException {
+
+		validateDDMStructureId(ddmStructureId);
+		validateName(nameMap);
 
 		recordSet.setModifiedDate(serviceContext.getModifiedDate(null));
 		recordSet.setDDMStructureId(ddmStructureId);
@@ -254,10 +320,23 @@ public class DDLRecordSetLocalServiceImpl
 		return recordSet;
 	}
 
-	protected void validate(long ddmStructureId, Map<Locale, String> nameMap)
+	protected void validate(
+			long groupId, long ddmStructureId, String recordSetKey,
+			Map<Locale, String> nameMap)
 		throws PortalException, SystemException {
 
 		validateDDMStructureId(ddmStructureId);
+
+		if (Validator.isNotNull(recordSetKey)) {
+			DDLRecordSet recordSet = ddlRecordSetPersistence.fetchByG_R(
+				groupId, recordSetKey);
+
+			if (recordSet != null) {
+				throw new RecordSetDuplicateRecordSetKeyException(
+					"Duplicate record set key: " + recordSetKey +
+					" found in group: " + groupId);
+			}
+		}
 
 		validateName(nameMap);
 	}
@@ -269,7 +348,8 @@ public class DDLRecordSetLocalServiceImpl
 			ddmStructureId);
 
 		if (ddmStructure == null) {
-			throw new RecordSetDDMStructureIdException();
+			throw new RecordSetDDMStructureIdException(
+				"No DDM Structure found for: " + ddmStructureId);
 		}
 	}
 
@@ -279,7 +359,7 @@ public class DDLRecordSetLocalServiceImpl
 		String name = nameMap.get(LocaleUtil.getDefault());
 
 		if (Validator.isNull(name)) {
-			throw new RecordSetNameException();
+			throw new RecordSetNameException("Invalid name: " + name);
 		}
 	}
 

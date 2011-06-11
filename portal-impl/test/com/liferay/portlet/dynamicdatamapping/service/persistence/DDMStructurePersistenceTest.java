@@ -77,6 +77,7 @@ public class DDMStructurePersistenceTest extends BasePersistenceTestCase {
 		newDDMStructure.setCreateDate(nextDate());
 		newDDMStructure.setModifiedDate(nextDate());
 		newDDMStructure.setClassNameId(nextLong());
+		newDDMStructure.setStructureKey(randomString());
 		newDDMStructure.setName(randomString());
 		newDDMStructure.setDescription(randomString());
 		newDDMStructure.setXsd(randomString());
@@ -105,6 +106,8 @@ public class DDMStructurePersistenceTest extends BasePersistenceTestCase {
 			Time.getShortTimestamp(newDDMStructure.getModifiedDate()));
 		assertEquals(existingDDMStructure.getClassNameId(),
 			newDDMStructure.getClassNameId());
+		assertEquals(existingDDMStructure.getStructureKey(),
+			newDDMStructure.getStructureKey());
 		assertEquals(existingDDMStructure.getName(), newDDMStructure.getName());
 		assertEquals(existingDDMStructure.getDescription(),
 			newDDMStructure.getDescription());
@@ -231,6 +234,12 @@ public class DDMStructurePersistenceTest extends BasePersistenceTestCase {
 				existingDDMStructureModelImpl.getOriginalUuid()));
 		assertEquals(existingDDMStructureModelImpl.getGroupId(),
 			existingDDMStructureModelImpl.getOriginalGroupId());
+
+		assertEquals(existingDDMStructureModelImpl.getGroupId(),
+			existingDDMStructureModelImpl.getOriginalGroupId());
+		assertTrue(Validator.equals(
+				existingDDMStructureModelImpl.getStructureKey(),
+				existingDDMStructureModelImpl.getOriginalStructureKey()));
 	}
 
 	protected DDMStructure addDDMStructure() throws Exception {
@@ -246,6 +255,7 @@ public class DDMStructurePersistenceTest extends BasePersistenceTestCase {
 		ddmStructure.setCreateDate(nextDate());
 		ddmStructure.setModifiedDate(nextDate());
 		ddmStructure.setClassNameId(nextLong());
+		ddmStructure.setStructureKey(randomString());
 		ddmStructure.setName(randomString());
 		ddmStructure.setDescription(randomString());
 		ddmStructure.setXsd(randomString());

@@ -77,6 +77,7 @@ public class DDLRecordSetPersistenceTest extends BasePersistenceTestCase {
 		newDDLRecordSet.setCreateDate(nextDate());
 		newDDLRecordSet.setModifiedDate(nextDate());
 		newDDLRecordSet.setDDMStructureId(nextLong());
+		newDDLRecordSet.setRecordSetKey(randomString());
 		newDDLRecordSet.setName(randomString());
 		newDDLRecordSet.setDescription(randomString());
 		newDDLRecordSet.setMinDisplayRows(nextInt());
@@ -104,6 +105,8 @@ public class DDLRecordSetPersistenceTest extends BasePersistenceTestCase {
 			Time.getShortTimestamp(newDDLRecordSet.getModifiedDate()));
 		assertEquals(existingDDLRecordSet.getDDMStructureId(),
 			newDDLRecordSet.getDDMStructureId());
+		assertEquals(existingDDLRecordSet.getRecordSetKey(),
+			newDDLRecordSet.getRecordSetKey());
 		assertEquals(existingDDLRecordSet.getName(), newDDLRecordSet.getName());
 		assertEquals(existingDDLRecordSet.getDescription(),
 			newDDLRecordSet.getDescription());
@@ -229,6 +232,12 @@ public class DDLRecordSetPersistenceTest extends BasePersistenceTestCase {
 				existingDDLRecordSetModelImpl.getOriginalUuid()));
 		assertEquals(existingDDLRecordSetModelImpl.getGroupId(),
 			existingDDLRecordSetModelImpl.getOriginalGroupId());
+
+		assertEquals(existingDDLRecordSetModelImpl.getGroupId(),
+			existingDDLRecordSetModelImpl.getOriginalGroupId());
+		assertTrue(Validator.equals(
+				existingDDLRecordSetModelImpl.getRecordSetKey(),
+				existingDDLRecordSetModelImpl.getOriginalRecordSetKey()));
 	}
 
 	protected DDLRecordSet addDDLRecordSet() throws Exception {
@@ -244,6 +253,7 @@ public class DDLRecordSetPersistenceTest extends BasePersistenceTestCase {
 		ddlRecordSet.setCreateDate(nextDate());
 		ddlRecordSet.setModifiedDate(nextDate());
 		ddlRecordSet.setDDMStructureId(nextLong());
+		ddlRecordSet.setRecordSetKey(randomString());
 		ddlRecordSet.setName(randomString());
 		ddlRecordSet.setDescription(randomString());
 		ddlRecordSet.setMinDisplayRows(nextInt());

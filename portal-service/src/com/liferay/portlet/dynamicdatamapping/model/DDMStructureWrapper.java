@@ -246,6 +246,24 @@ public class DDMStructureWrapper implements DDMStructure {
 	}
 
 	/**
+	* Returns the structure key of this d d m structure.
+	*
+	* @return the structure key of this d d m structure
+	*/
+	public java.lang.String getStructureKey() {
+		return _ddmStructure.getStructureKey();
+	}
+
+	/**
+	* Sets the structure key of this d d m structure.
+	*
+	* @param structureKey the structure key of this d d m structure
+	*/
+	public void setStructureKey(java.lang.String structureKey) {
+		_ddmStructure.setStructureKey(structureKey);
+	}
+
+	/**
 	* Returns the name of this d d m structure.
 	*
 	* @return the name of this d d m structure

@@ -121,6 +121,14 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	public static final FinderPath FINDER_PATH_COUNT_BY_CLASSNAMEID = new FinderPath(DDMStructureModelImpl.ENTITY_CACHE_ENABLED,
 			DDMStructureModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"countByClassNameId", new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FETCH_BY_G_S = new FinderPath(DDMStructureModelImpl.ENTITY_CACHE_ENABLED,
+			DDMStructureModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_ENTITY, "fetchByG_S",
+			new String[] { Long.class.getName(), String.class.getName() });
+	public static final FinderPath FINDER_PATH_COUNT_BY_G_S = new FinderPath(DDMStructureModelImpl.ENTITY_CACHE_ENABLED,
+			DDMStructureModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"countByG_S",
+			new String[] { Long.class.getName(), String.class.getName() });
 	public static final FinderPath FINDER_PATH_FIND_BY_G_N_D = new FinderPath(DDMStructureModelImpl.ENTITY_CACHE_ENABLED,
 			DDMStructureModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"findByG_N_D",
@@ -157,6 +165,13 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
 			new Object[] {
 				ddmStructure.getUuid(), Long.valueOf(ddmStructure.getGroupId())
+			}, ddmStructure);
+
+		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_S,
+			new Object[] {
+				Long.valueOf(ddmStructure.getGroupId()),
+				
+			ddmStructure.getStructureKey()
 			}, ddmStructure);
 
 		ddmStructure.resetOriginalValues();
@@ -209,6 +224,13 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
 			new Object[] {
 				ddmStructure.getUuid(), Long.valueOf(ddmStructure.getGroupId())
+			});
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_S,
+			new Object[] {
+				Long.valueOf(ddmStructure.getGroupId()),
+				
+			ddmStructure.getStructureKey()
 			});
 	}
 
@@ -324,6 +346,13 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 				Long.valueOf(ddmStructureModelImpl.getGroupId())
 			});
 
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_S,
+			new Object[] {
+				Long.valueOf(ddmStructureModelImpl.getGroupId()),
+				
+			ddmStructureModelImpl.getStructureKey()
+			});
+
 		EntityCacheUtil.removeResult(DDMStructureModelImpl.ENTITY_CACHE_ENABLED,
 			DDMStructureImpl.class, ddmStructure.getPrimaryKey());
 
@@ -388,6 +417,30 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 				}, ddmStructure);
 		}
 
+		if (!isNew &&
+				((ddmStructure.getGroupId() != ddmStructureModelImpl.getOriginalGroupId()) ||
+				!Validator.equals(ddmStructure.getStructureKey(),
+					ddmStructureModelImpl.getOriginalStructureKey()))) {
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_S,
+				new Object[] {
+					Long.valueOf(ddmStructureModelImpl.getOriginalGroupId()),
+					
+				ddmStructureModelImpl.getOriginalStructureKey()
+				});
+		}
+
+		if (isNew ||
+				((ddmStructure.getGroupId() != ddmStructureModelImpl.getOriginalGroupId()) ||
+				!Validator.equals(ddmStructure.getStructureKey(),
+					ddmStructureModelImpl.getOriginalStructureKey()))) {
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_S,
+				new Object[] {
+					Long.valueOf(ddmStructure.getGroupId()),
+					
+				ddmStructure.getStructureKey()
+				}, ddmStructure);
+		}
+
 		return ddmStructure;
 	}
 
@@ -410,6 +463,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 		ddmStructureImpl.setCreateDate(ddmStructure.getCreateDate());
 		ddmStructureImpl.setModifiedDate(ddmStructure.getModifiedDate());
 		ddmStructureImpl.setClassNameId(ddmStructure.getClassNameId());
+		ddmStructureImpl.setStructureKey(ddmStructure.getStructureKey());
 		ddmStructureImpl.setName(ddmStructure.getName());
 		ddmStructureImpl.setDescription(ddmStructure.getDescription());
 		ddmStructureImpl.setXsd(ddmStructure.getXsd());
@@ -1950,6 +2004,157 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	}
 
 	/**
+	 * Returns the d d m structure where groupId = &#63; and structureKey = &#63; or throws a {@link com.liferay.portlet.dynamicdatamapping.NoSuchStructureException} if it could not be found.
+	 *
+	 * @param groupId the group ID
+	 * @param structureKey the structure key
+	 * @return the matching d d m structure
+	 * @throws com.liferay.portlet.dynamicdatamapping.NoSuchStructureException if a matching d d m structure could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public DDMStructure findByG_S(long groupId, String structureKey)
+		throws NoSuchStructureException, SystemException {
+		DDMStructure ddmStructure = fetchByG_S(groupId, structureKey);
+
+		if (ddmStructure == null) {
+			StringBundler msg = new StringBundler(6);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("groupId=");
+			msg.append(groupId);
+
+			msg.append(", structureKey=");
+			msg.append(structureKey);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			if (_log.isWarnEnabled()) {
+				_log.warn(msg.toString());
+			}
+
+			throw new NoSuchStructureException(msg.toString());
+		}
+
+		return ddmStructure;
+	}
+
+	/**
+	 * Returns the d d m structure where groupId = &#63; and structureKey = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param groupId the group ID
+	 * @param structureKey the structure key
+	 * @return the matching d d m structure, or <code>null</code> if a matching d d m structure could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public DDMStructure fetchByG_S(long groupId, String structureKey)
+		throws SystemException {
+		return fetchByG_S(groupId, structureKey, true);
+	}
+
+	/**
+	 * Returns the d d m structure where groupId = &#63; and structureKey = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param groupId the group ID
+	 * @param structureKey the structure key
+	 * @return the matching d d m structure, or <code>null</code> if a matching d d m structure could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public DDMStructure fetchByG_S(long groupId, String structureKey,
+		boolean retrieveFromCache) throws SystemException {
+		Object[] finderArgs = new Object[] { groupId, structureKey };
+
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_G_S,
+					finderArgs, this);
+		}
+
+		if (result == null) {
+			StringBundler query = new StringBundler(3);
+
+			query.append(_SQL_SELECT_DDMSTRUCTURE_WHERE);
+
+			query.append(_FINDER_COLUMN_G_S_GROUPID_2);
+
+			if (structureKey == null) {
+				query.append(_FINDER_COLUMN_G_S_STRUCTUREKEY_1);
+			}
+			else {
+				if (structureKey.equals(StringPool.BLANK)) {
+					query.append(_FINDER_COLUMN_G_S_STRUCTUREKEY_3);
+				}
+				else {
+					query.append(_FINDER_COLUMN_G_S_STRUCTUREKEY_2);
+				}
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(groupId);
+
+				if (structureKey != null) {
+					qPos.add(structureKey);
+				}
+
+				List<DDMStructure> list = q.list();
+
+				result = list;
+
+				DDMStructure ddmStructure = null;
+
+				if (list.isEmpty()) {
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_S,
+						finderArgs, list);
+				}
+				else {
+					ddmStructure = list.get(0);
+
+					cacheResult(ddmStructure);
+
+					if ((ddmStructure.getGroupId() != groupId) ||
+							(ddmStructure.getStructureKey() == null) ||
+							!ddmStructure.getStructureKey().equals(structureKey)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_S,
+							finderArgs, ddmStructure);
+					}
+				}
+
+				return ddmStructure;
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (result == null) {
+					FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_S,
+						finderArgs);
+				}
+
+				closeSession(session);
+			}
+		}
+		else {
+			if (result instanceof List<?>) {
+				return null;
+			}
+			else {
+				return (DDMStructure)result;
+			}
+		}
+	}
+
+	/**
 	 * Returns all the d d m structures where groupId = &#63; and name = &#63; and description = &#63;.
 	 *
 	 * @param groupId the group ID
@@ -2886,6 +3091,20 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	}
 
 	/**
+	 * Removes the d d m structure where groupId = &#63; and structureKey = &#63; from the database.
+	 *
+	 * @param groupId the group ID
+	 * @param structureKey the structure key
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void removeByG_S(long groupId, String structureKey)
+		throws NoSuchStructureException, SystemException {
+		DDMStructure ddmStructure = findByG_S(groupId, structureKey);
+
+		ddmStructurePersistence.remove(ddmStructure);
+	}
+
+	/**
 	 * Removes all the d d m structures where groupId = &#63; and name = &#63; and description = &#63; from the database.
 	 *
 	 * @param groupId the group ID
@@ -3201,6 +3420,77 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	}
 
 	/**
+	 * Returns the number of d d m structures where groupId = &#63; and structureKey = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param structureKey the structure key
+	 * @return the number of matching d d m structures
+	 * @throws SystemException if a system exception occurred
+	 */
+	public int countByG_S(long groupId, String structureKey)
+		throws SystemException {
+		Object[] finderArgs = new Object[] { groupId, structureKey };
+
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_S,
+				finderArgs, this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(3);
+
+			query.append(_SQL_COUNT_DDMSTRUCTURE_WHERE);
+
+			query.append(_FINDER_COLUMN_G_S_GROUPID_2);
+
+			if (structureKey == null) {
+				query.append(_FINDER_COLUMN_G_S_STRUCTUREKEY_1);
+			}
+			else {
+				if (structureKey.equals(StringPool.BLANK)) {
+					query.append(_FINDER_COLUMN_G_S_STRUCTUREKEY_3);
+				}
+				else {
+					query.append(_FINDER_COLUMN_G_S_STRUCTUREKEY_2);
+				}
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(groupId);
+
+				if (structureKey != null) {
+					qPos.add(structureKey);
+				}
+
+				count = (Long)q.uniqueResult();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_G_S, finderArgs,
+					count);
+
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	/**
 	 * Returns the number of d d m structures where groupId = &#63; and name = &#63; and description = &#63;.
 	 *
 	 * @param groupId the group ID
@@ -3470,6 +3760,10 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	private static final String _FINDER_COLUMN_UUID_G_GROUPID_2 = "ddmStructure.groupId = ?";
 	private static final String _FINDER_COLUMN_GROUPID_GROUPID_2 = "ddmStructure.groupId = ?";
 	private static final String _FINDER_COLUMN_CLASSNAMEID_CLASSNAMEID_2 = "ddmStructure.classNameId = ?";
+	private static final String _FINDER_COLUMN_G_S_GROUPID_2 = "ddmStructure.groupId = ? AND ";
+	private static final String _FINDER_COLUMN_G_S_STRUCTUREKEY_1 = "ddmStructure.structureKey IS NULL";
+	private static final String _FINDER_COLUMN_G_S_STRUCTUREKEY_2 = "ddmStructure.structureKey = ?";
+	private static final String _FINDER_COLUMN_G_S_STRUCTUREKEY_3 = "(ddmStructure.structureKey IS NULL OR ddmStructure.structureKey = ?)";
 	private static final String _FINDER_COLUMN_G_N_D_GROUPID_2 = "ddmStructure.groupId = ? AND ";
 	private static final String _FINDER_COLUMN_G_N_D_NAME_1 = "ddmStructure.name IS NULL AND ";
 	private static final String _FINDER_COLUMN_G_N_D_NAME_2 = "ddmStructure.name = ? AND ";

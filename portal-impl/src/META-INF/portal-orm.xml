@@ -1840,6 +1840,7 @@
 				<temporal>TIMESTAMP</temporal>
 			</basic>
 			<basic name="DDMStructureId" />
+			<basic name="recordSetKey" />
 			<basic name="name" />
 			<basic name="description" />
 			<basic name="minDisplayRows" />
@@ -1933,6 +1934,7 @@
 				<temporal>TIMESTAMP</temporal>
 			</basic>
 			<basic name="classNameId" />
+			<basic name="structureKey" />
 			<basic name="name" />
 			<basic name="description" />
 			<basic name="xsd" />
