@@ -92,7 +92,7 @@ AUI().add(
 
 						var activeTrigger = instance._activeTrigger;
 
-						if (activeTrigger && activeTrigger != trigger) {
+						if (activeTrigger && (activeTrigger != trigger)) {
 							activeTrigger.removeClass(CSS_STATE_ACTIVE)
 						}
 
