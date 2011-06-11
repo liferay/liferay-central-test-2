@@ -47,7 +47,7 @@ if ((requiredClassNameIds == null) || (requiredClassNameIds.length == 0)) {
 }
 %>
 
-<aui:input cssClass="vocabulary-checkbox" helpMessage="multi-valued-help" name="multiValued" type="checkbox" value="<%= multiValued %>" />
+<aui:input cssClass="vocabulary-checkbox" helpMessage="multi-valued-help" label="allow-users-to-choose-multiple-categories" name="multiValued" type="checkbox" value="<%= multiValued %>" />
 
 <liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="vocabularyExtraFieldsPanelContainer" persistState="<%= true %>" title="associated-asset-types">
 	<aui:fieldset id="extraFields">
