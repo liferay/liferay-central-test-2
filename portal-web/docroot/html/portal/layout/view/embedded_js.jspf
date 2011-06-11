@@ -34,6 +34,5 @@
 		}
 
 		iframe.setStyle('height', height);
-
 	}
 </aui:script>
