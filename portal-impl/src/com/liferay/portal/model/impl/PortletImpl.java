@@ -538,18 +538,22 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Returns the indexer class names of the portlet.
+	 * Returns the name of the classes that represent indexers associated with
+	 * the portlet.
 	 *
-	 * @return the indexer class names of the portlet
+	 * @return the name of the classes that represent indexers associated with
+	 *         the portlet
 	 */
 	public List<String> getIndexerClasses() {
 		return _indexerClasses;
 	}
 
 	/**
-	 * Sets the indexer class names of the portlet.
+	 * Sets the name of the classes that represent indexers associated with the
+	 * portlet.
 	 *
-	 * @param indexerClasses the indexer class names of the portlet
+	 * @param indexerClasses the name of the classes that represent indexers
+	 *        associated with the portlet
 	 */
 	public void setIndexerClasses(List<String> indexerClasses) {
 		_indexerClasses = indexerClasses;
@@ -571,7 +575,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 * @return the indexer instances of the portlet
 	 */
 	public List<Indexer> getIndexerInstances() {
-		if (Validator.isNull(getIndexerClasses())) {
+		if (getIndexerClasses().isEmpty()) {
 			return null;
 		}
 
@@ -1152,22 +1156,22 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Returns the names of the classes that represent asset types associated to
-	 * the portlet.
+	 * Returns the names of the classes that represent asset types associated
+	 * with the portlet.
 	 *
-	 * @return the names of the classes that represent asset types associated to
-	 *         the portlet
+	 * @return the names of the classes that represent asset types associated
+	 *         with the portlet
 	 */
 	public List<String> getAssetRendererFactoryClasses() {
 		return _assetRendererFactoryClasses;
 	}
 
 	/**
-	 * Sets the name of the classes that represent asset types associated to the
-	 * portlet.
+	 * Sets the name of the classes that represent asset types associated with
+	 * the portlet.
 	 *
 	 * @param assetRendererFactoryClasses the names of the classes that
-	 *        represent asset types associated to the portlet
+	 *        represent asset types associated with the portlet
 	 */
 	public void setAssetRendererFactoryClasses(
 		List<String> assetRendererFactoryClasses) {
@@ -1192,10 +1196,10 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 
 	/**
 	 * Returns the names of the classes that represent custom attribute displays
-	 * associated to the portlet.
+	 * associated with the portlet.
 	 *
-	 * @return the names of the classes that represent asset types associated to
-	 *         the portlet
+	 * @return the names of the classes that represent asset types associated
+	 *         with the portlet
 	 */
 	public List<String> getCustomAttributesDisplayClasses() {
 		return _customAttributesDisplayClasses;
@@ -1203,10 +1207,10 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 
 	/**
 	 * Sets the name of the classes that represent custom attribute displays
-	 * associated to the portlet.
+	 * associated with the portlet.
 	 *
 	 * @param customAttributesDisplayClasses the names of the classes that
-	 *        represent custom attribute displays associated to the portlet
+	 *        represent custom attribute displays associated with the portlet
 	 */
 	public void setCustomAttributesDisplayClasses(
 		List<String> customAttributesDisplayClasses) {
@@ -1231,10 +1235,10 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 
 	/**
 	 * Returns the names of the classes that represent workflow handlers
-	 * associated to the portlet.
+	 * associated with the portlet.
 	 *
 	 * @return the names of the classes that represent workflow handlers
-	 *         associated to the portlet
+	 *         associated with the portlet
 	 */
 	public List<String> getWorkflowHandlerClasses() {
 		return _workflowHandlerClasses;
@@ -1245,7 +1249,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 * to the portlet.
 	 *
 	 * @param workflowHandlerClasses the names of the classes that represent
-	 *        workflow handlers associated to the portlet
+	 *        workflow handlers associated with the portlet
 	 */
 	public void setWorkflowHandlerClasses(List<String> workflowHandlerClasses) {
 		_workflowHandlerClasses = workflowHandlerClasses;
@@ -3279,7 +3283,8 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	private String _configurationActionClass;
 
 	/**
-	 * The indexer class names of the portlet.
+	 * The name of the classes that represent indexers associated with the
+	 * portlet.
 	 */
 	private List<String> _indexerClasses;
 
