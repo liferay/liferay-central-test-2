@@ -159,7 +159,6 @@ String labelTag = AUIUtil.buildLabel(inlineLabel, showForLabel, forLabel);
 	<c:when test='<%= type.equals("checkbox") %>'>
 
 		<%
-		String defaultValueString = Boolean.TRUE.toString();
 		String valueString = GetterUtil.getString(checked);
 
 		if (value != null) {
@@ -168,15 +167,18 @@ String labelTag = AUIUtil.buildLabel(inlineLabel, showForLabel, forLabel);
 
 		if (!ignoreRequestValue) {
 			String[] requestValues = request.getParameterValues(name);
-			String requestValue = ParamUtil.getString(request, name, valueString);
 
 			if ((requestValues != null) && (requestValues.length > 0)) {
 				checked = requestValues[0].equalsIgnoreCase("true") || ArrayUtil.contains(requestValues, valueString);
 			}
 			else {
+				String requestValue = ParamUtil.getString(request, name, valueString);
+
 				checked = requestValue.equalsIgnoreCase("true");
 			}
 		}
+
+		String defaultValueString = Boolean.TRUE.toString();
 
 		if (Validator.isNotNull(valueString) && !valueString.equalsIgnoreCase("false") && !valueString.equalsIgnoreCase("true")) {
 			defaultValueString = valueString;
