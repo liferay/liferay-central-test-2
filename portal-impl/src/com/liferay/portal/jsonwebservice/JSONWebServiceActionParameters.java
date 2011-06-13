@@ -16,12 +16,12 @@ package com.liferay.portal.jsonwebservice;
 
 import com.liferay.portal.kernel.upload.UploadServletRequest;
 import com.liferay.portal.kernel.util.CharPool;
-import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 
 import java.util.Enumeration;
-import java.util.HashSet;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
@@ -39,6 +39,7 @@ public class JSONWebServiceActionParameters {
 
 		_jsonRpcRequest = jsonRpcRequest;
 
+		_collectFromRequestAttributes(request);
 		_collectFromPath(pathParameters);
 		_collectFromRequestParameters(request);
 		_collectFromJSONRPCRequest(jsonRpcRequest);
@@ -49,15 +50,7 @@ public class JSONWebServiceActionParameters {
 	}
 
 	public Object getParameter(String name) {
-		for (ObjectValuePair<String, Object> parameter : _parameters) {
-			String key = parameter.getKey();
-
-			if (key.equals(name)) {
-				return parameter.getValue();
-			}
-		}
-
-		return null;
+		return _parameters.get(name);
 	}
 
 	public String[] getParameterNames() {
@@ -65,8 +58,8 @@ public class JSONWebServiceActionParameters {
 
 		int i = 0;
 
-		for (ObjectValuePair<String, Object> parameter : _parameters) {
-			names[i] = parameter.getKey();
+		for (String key : _parameters.keySet()) {
+			names[i] = key;
 
 			i++;
 		}
@@ -82,13 +75,9 @@ public class JSONWebServiceActionParameters {
 		Set<String> parameterNames = jsonRpcRequest.getParameterNames();
 
 		for (String parameterName : parameterNames) {
-			String parameterValue = jsonRpcRequest.getParameter(parameterName);
+			String value = jsonRpcRequest.getParameter(parameterName);
 
-			ObjectValuePair<String, Object> objectValuePair =
-				new ObjectValuePair<String, Object>(
-					parameterName, parameterValue);
-
-			_parameters.add(objectValuePair);
+			_parameters.put(parameterName, value);
 		}
 	}
 
@@ -113,13 +102,23 @@ public class JSONWebServiceActionParameters {
 
 			String value = pathParametersParts[i + 1];
 
-			ObjectValuePair<String, Object> objectValuePair =
-				new ObjectValuePair<String, Object>(name, value);
-
-			_parameters.add(objectValuePair);
+			_parameters.put(name, value);
 
 			i += 2;
 		}
+	}
+
+	private void _collectFromRequestAttributes(HttpServletRequest request) {
+		Enumeration<String> attributeNames = request.getAttributeNames();
+
+		while (attributeNames.hasMoreElements()) {
+			String attributeName = attributeNames.nextElement();
+
+			Object value = request.getAttribute(attributeName);
+
+			_parameters.put(attributeName, value);
+		}
+
 	}
 
 	private void _collectFromRequestParameters(HttpServletRequest request) {
@@ -153,15 +152,11 @@ public class JSONWebServiceActionParameters {
 				}
 			}
 
-			ObjectValuePair<String, Object> objectValuePair =
-				new ObjectValuePair<String, Object>(parameterName, value);
-
-			_parameters.add(objectValuePair);
+			_parameters.put(parameterName, value);
 		}
 	}
 
 	private JSONRPCRequest _jsonRpcRequest;
-	private Set<ObjectValuePair<String, Object>> _parameters =
-		new HashSet<ObjectValuePair<String, Object>>();
+	private Map<String, Object> _parameters = new HashMap<String, Object>();
 
 }

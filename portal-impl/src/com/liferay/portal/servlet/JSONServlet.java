@@ -56,24 +56,7 @@ public class JSONServlet extends HttpServlet {
 		throws IOException, ServletException {
 
 		try {
-			String remoteUser = request.getRemoteUser();
-
-			if (_log.isDebugEnabled()) {
-				_log.debug("Remote user " + remoteUser);
-			}
-
-			if (remoteUser != null) {
-				PrincipalThreadLocal.setName(remoteUser);
-
-				long userId = GetterUtil.getLong(remoteUser);
-
-				User user = UserLocalServiceUtil.getUserById(userId);
-
-				PermissionChecker permissionChecker =
-					PermissionCheckerFactoryUtil.create(user, true);
-
-				PermissionThreadLocal.setPermissionChecker(permissionChecker);
-			}
+			resolveRemoteUser(request);
 
 			if (_portletClassLoader == null) {
 				_jsonAction.execute(null, null, request, response);
@@ -105,6 +88,28 @@ public class JSONServlet extends HttpServlet {
 		jsonAction.setServletContext(servletContext);
 
 		return jsonAction;
+	}
+
+	protected void resolveRemoteUser(HttpServletRequest request)
+		throws Exception {
+		String remoteUser = request.getRemoteUser();
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Remote user " + remoteUser);
+		}
+
+		if (remoteUser != null) {
+			PrincipalThreadLocal.setName(remoteUser);
+
+			long userId = GetterUtil.getLong(remoteUser);
+
+			User user = UserLocalServiceUtil.getUserById(userId);
+
+			PermissionChecker permissionChecker =
+				PermissionCheckerFactoryUtil.create(user, true);
+
+			PermissionThreadLocal.setPermissionChecker(permissionChecker);
+		}
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(JSONServlet.class);
