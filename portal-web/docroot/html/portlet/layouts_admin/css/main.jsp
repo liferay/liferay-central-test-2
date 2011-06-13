@@ -307,7 +307,7 @@
 
 	.site-membership-type {
 		font-weight: bold;
-		padding: 0px 0px 15px;
+		padding: 0 0 15px;
 	}
 }
 
