@@ -218,6 +218,62 @@ public class MembershipRequestLocalServiceImpl
 		}
 	}
 
+	protected List<Long> getGroupAdministratorIds(long groupId)
+		throws PortalException, SystemException {
+
+		List<Long> administratorIds = new UniqueList();
+
+		Group group = groupLocalService.getGroup(groupId);
+
+		Role siteAdminRole = roleLocalService.getRole(
+			group.getCompanyId(), RoleConstants.SITE_ADMINISTRATOR);
+
+		List<UserGroupRole> siteAdmins =
+			userGroupRoleLocalService.getUserGroupRolesByGroupAndRole(
+				groupId, siteAdminRole.getRoleId());
+
+		for (UserGroupRole siteAdmin : siteAdmins) {
+			administratorIds.add(siteAdmin.getUserId());
+		}
+
+		Role siteOwnerRole = rolePersistence.findByC_N(
+			group.getCompanyId(), RoleConstants.SITE_OWNER);
+
+		List<UserGroupRole> siteOwners =
+			userGroupRoleLocalService.getUserGroupRolesByGroupAndRole(
+				groupId, siteOwnerRole.getRoleId());
+
+		for (UserGroupRole siteOwner : siteOwners) {
+			administratorIds.add(siteOwner.getUserId());
+		}
+
+		if (group.isOrganization()) {
+			Role orgAdminRole = roleLocalService.getRole(
+				group.getCompanyId(), RoleConstants.ORGANIZATION_ADMINISTRATOR);
+
+			List<UserGroupRole> orgAdmins =
+				userGroupRoleLocalService.getUserGroupRolesByGroupAndRole(
+					groupId, orgAdminRole.getRoleId());
+
+			for (UserGroupRole orgAdmin : orgAdmins) {
+				administratorIds.add(orgAdmin.getUserId());
+			}
+
+			Role orgOwnerRole = roleLocalService.getRole(
+				group.getCompanyId(), RoleConstants.ORGANIZATION_OWNER);
+
+			List<UserGroupRole> orgOwners =
+				userGroupRoleLocalService.getUserGroupRolesByGroupAndRole(
+					groupId, orgOwnerRole.getRoleId());
+
+			for (UserGroupRole orgOwner : orgOwners) {
+				administratorIds.add(orgOwner.getUserId());
+			}
+		}
+
+		return administratorIds;
+	}
+
 	protected void notify(
 			long userId, MembershipRequest membershipRequest,
 			String subjectProperty, String bodyProperty)
@@ -349,30 +405,12 @@ public class MembershipRequestLocalServiceImpl
 			MembershipRequest membershipRequest)
 		throws IOException, PortalException, SystemException {
 
-		List<UserGroupRole> admins = new UniqueList<UserGroupRole>();
+		List<Long> administratorIds = getGroupAdministratorIds(
+			membershipRequest.getGroupId());
 
-		Role siteAdminRole = roleLocalService.getRole(
-			membershipRequest.getCompanyId(),
-			RoleConstants.SITE_ADMINISTRATOR);
-
-		List<UserGroupRole> siteAdmins =
-			userGroupRoleLocalService.getUserGroupRolesByGroupAndRole(
-				membershipRequest.getGroupId(), siteAdminRole.getRoleId());
-
-		admins.addAll(siteAdmins);
-
-		Role siteOwnerRole = rolePersistence.findByC_N(
-			membershipRequest.getCompanyId(), RoleConstants.SITE_OWNER);
-
-		List<UserGroupRole> siteOwners =
-			userGroupRoleLocalService.getUserGroupRolesByGroupAndRole(
-				membershipRequest.getGroupId(), siteOwnerRole.getRoleId());
-
-		admins.addAll(siteOwners);
-
-		for (UserGroupRole userGroupRole : admins) {
+		for (Long userId : administratorIds) {
 			notify(
-				userGroupRole.getUserId(), membershipRequest,
+				userId, membershipRequest,
 				PropsKeys.COMMUNITIES_EMAIL_MEMBERSHIP_REQUEST_SUBJECT,
 				PropsKeys.COMMUNITIES_EMAIL_MEMBERSHIP_REQUEST_BODY);
 		}
