@@ -3659,30 +3659,6 @@ public class PortalImpl implements Portal {
 			alwaysAllowDoAsUser = true;
 		}
 
-		if ((!PropsValues.PORTAL_JAAS_ENABLE &&
-			  PropsValues.PORTAL_IMPERSONATION_ENABLE) ||
-			(alwaysAllowDoAsUser)) {
-
-			String doAsUserIdString = ParamUtil.getString(
-				request, "doAsUserId");
-
-			try {
-				long doAsUserId = getDoAsUserId(
-					request, doAsUserIdString, alwaysAllowDoAsUser);
-
-				if (doAsUserId > 0) {
-					if (_log.isDebugEnabled()) {
-						_log.debug("Impersonating user " + doAsUserId);
-					}
-
-					return doAsUserId;
-				}
-			}
-			catch (Exception e) {
-				_log.error("Unable to impersonate user " + doAsUserIdString, e);
-			}
-		}
-
 		HttpSession session = request.getSession();
 
 		String jRemoteUser = null;
@@ -3696,6 +3672,40 @@ public class PortalImpl implements Portal {
 		}
 		else {
 			userIdObj = (Long)session.getAttribute(WebKeys.USER_ID);
+		}
+
+		if ((userIdObj != null) && ((!PropsValues.PORTAL_JAAS_ENABLE &&
+			  PropsValues.PORTAL_IMPERSONATION_ENABLE) ||
+			(alwaysAllowDoAsUser))) {
+
+			String doAsUserIdString = ParamUtil.getString(
+				request, "doAsUserId");
+
+			try {
+				long doAsUserId = getDoAsUserId(
+					request, doAsUserIdString, alwaysAllowDoAsUser);
+
+				long userId = userIdObj.longValue();
+
+				User user = UserLocalServiceUtil.getUserById(userId);
+
+				PermissionChecker permissionChecker =
+					PermissionCheckerFactoryUtil.create(user, true);
+
+				if ((doAsUserId > 0) &&
+					UserPermissionUtil.contains(
+						permissionChecker, userId, ActionKeys.IMPERSONATE)) {
+
+					if (_log.isDebugEnabled()) {
+						_log.debug("Impersonating user " + doAsUserId);
+					}
+
+					return doAsUserId;
+				}
+			}
+			catch (Exception e) {
+				_log.error("Unable to impersonate user " + doAsUserIdString, e);
+			}
 		}
 
 		if (userIdObj != null) {
