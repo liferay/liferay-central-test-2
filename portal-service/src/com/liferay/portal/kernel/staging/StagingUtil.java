@@ -268,8 +268,9 @@ public class StagingUtil {
 	}
 
 	public static void setRecentLayoutRevisionId(
-		HttpServletRequest request, long layoutSetBranchId, long plid,
-		long layoutRevisionId) throws SystemException {
+			HttpServletRequest request, long layoutSetBranchId, long plid,
+			long layoutRevisionId)
+		throws SystemException {
 
 		getStaging().setRecentLayoutRevisionId(
 			request, layoutSetBranchId, plid, layoutRevisionId);
