@@ -133,12 +133,6 @@ public class DDMPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		long userId = portletDataContext.getUserId(structure.getUserUuid());
 
-		long structureId = structure.getStructureId();
-
-		Map<Long, Long> structureIds =
-			(Map<Long, Long>)portletDataContext.getNewPrimaryKeysMap(
-				DDMStructure.class + ".structureId");
-
 		ServiceContext serviceContext = portletDataContext.createServiceContext(
 			structureElement, structure, _NAMESPACE);
 
@@ -176,8 +170,6 @@ public class DDMPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		portletDataContext.importClassedModel(
 			structure, importedStructure, _NAMESPACE);
-
-		structureIds.put(structureId, importedStructure.getStructureId());
 	}
 
 	protected static void importTemplate(
@@ -197,7 +189,7 @@ public class DDMPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		Map<Long, Long> structureIds =
 			(Map<Long, Long>)portletDataContext.getNewPrimaryKeysMap(
-				DDMStructure.class + ".structureId");
+				DDMStructure.class);
 
 		long structureId = MapUtil.getLong(
 			structureIds, template.getStructureId(), template.getStructureId());
@@ -221,12 +213,11 @@ public class DDMPortletDataHandlerImpl extends BasePortletDataHandler {
 					template.getScript(), serviceContext);
 			}
 			else {
-				importedTemplate =
-					DDMTemplateLocalServiceUtil.updateTemplate(
-						existingTemplate.getTemplateId(), template.getName(),
-						template.getDescription(), template.getType(),
-						template.getLanguage(), template.getScript(),
-						serviceContext);
+				importedTemplate = DDMTemplateLocalServiceUtil.updateTemplate(
+					existingTemplate.getTemplateId(), template.getName(),
+					template.getDescription(), template.getType(),
+					template.getLanguage(), template.getScript(),
+					serviceContext);
 			}
 		}
 		else {
@@ -254,7 +245,6 @@ public class DDMPortletDataHandlerImpl extends BasePortletDataHandler {
 
 			DDMStructureLocalServiceUtil.deleteStructures(
 				portletDataContext.getScopeGroupId());
-
 		}
 
 		return portletPreferences;
