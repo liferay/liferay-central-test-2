@@ -168,7 +168,7 @@ String labelTag = AUIUtil.buildLabel(inlineLabel, showForLabel, forLabel);
 		if (!ignoreRequestValue) {
 			String[] requestValues = request.getParameterValues(name);
 
-			if ((requestValues != null) && !(requestValues.length > 0)) {
+			if ((requestValues != null) && (requestValues.length > 0)) {
 				checked = requestValues[0].equalsIgnoreCase("true") || ArrayUtil.contains(requestValues, valueString);
 			}
 		}
