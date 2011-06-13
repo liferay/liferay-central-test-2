@@ -3066,14 +3066,14 @@ public class PortalImpl implements Portal {
 			if (group.isControlPanel()) {
 				long doAsGroupId = ParamUtil.getLong(request, "doAsGroupId");
 
-				if (doAsGroupId <= 0) {
-					try {
-						Group guestGroup = GroupLocalServiceUtil.getGroup(
-							group.getCompanyId(), GroupConstants.GUEST);
+				Group doAsGroup = GroupLocalServiceUtil.fetchGroup(doAsGroupId);
 
+				if ((doAsGroupId <= 0) || (doAsGroup == null)) {
+					Group guestGroup = GroupLocalServiceUtil.fetchGroup(
+						group.getCompanyId(), GroupConstants.GUEST);
+
+					if (guestGroup != null) {
 						doAsGroupId = guestGroup.getGroupId();
-					}
-					catch (Exception e) {
 					}
 				}
 
@@ -3081,16 +3081,16 @@ public class PortalImpl implements Portal {
 					scopeGroupId = doAsGroupId;
 				}
 
-				try {
-					group = GroupLocalServiceUtil.getGroup(scopeGroupId);
+				group = GroupLocalServiceUtil.fetchGroup(scopeGroupId);
 
-					if (group.hasStagingGroup()) {
+				if ((group != null) && group.hasStagingGroup()) {
+					try {
 						Group stagingGroup = group.getStagingGroup();
 
 						scopeGroupId = stagingGroup.getGroupId();
 					}
-				}
-				catch (Exception e) {
+					catch (Exception e) {
+					}
 				}
 			}
 
