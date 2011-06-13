@@ -31,7 +31,7 @@ public class TicketLocalServiceImpl extends TicketLocalServiceBaseImpl {
 
 	public Ticket addTicket(
 			long companyId, String className, long classPK, Date expirationDate,
-			ServiceContext serviceContext)
+			String extraInfo, int type, ServiceContext serviceContext)
 		throws SystemException {
 
 		long classNameId = PortalUtil.getClassNameId(className);
@@ -47,6 +47,8 @@ public class TicketLocalServiceImpl extends TicketLocalServiceBaseImpl {
 		ticket.setClassPK(classPK);
 		ticket.setKey(PortalUUIDUtil.generate());
 		ticket.setExpirationDate(expirationDate);
+		ticket.setExtraInfo(extraInfo);
+		ticket.setType(type);
 
 		ticketPersistence.update(ticket, false);
 

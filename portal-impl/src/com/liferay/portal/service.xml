@@ -1819,6 +1819,8 @@
 		<column name="classPK" type="long" />
 		<column name="key" type="String" />
 		<column name="expirationDate" type="Date" />
+		<column name="type" type="int" />
+		<column name="extraInfo" type="String" />
 
 		<!-- Order -->
 
