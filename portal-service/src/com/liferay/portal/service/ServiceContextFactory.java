@@ -16,7 +16,11 @@ package com.liferay.portal.service;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+<<<<<<< HEAD
 import com.liferay.portal.kernel.util.ArrayUtil;
+=======
+import com.liferay.portal.kernel.servlet.HttpHeaders;
+>>>>>>> LPS-17928 Add remote address, host and request headers to ServiceContext
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -259,6 +263,30 @@ public class ServiceContextFactory {
 			portletRequest, "workflowAction", WorkflowConstants.ACTION_PUBLISH);
 
 		serviceContext.setWorkflowAction(workflowAction);
+
+		// Remote
+
+		String remoteAddr = request.getRemoteAddr();
+		String remoteHost = request.getRemoteHost();
+
+		serviceContext.setRemoteAddr(remoteAddr);
+		serviceContext.setRemoteHost(remoteHost);
+
+		// Headers
+
+		Map<String, String> headerMap = new HashMap<String, String>();
+
+		enu = request.getHeaderNames();
+
+		while (enu.hasMoreElements()) {
+			String header = enu.nextElement();
+
+			String value = request.getHeader(header);
+
+			headerMap.put(header, value);
+		}
+
+		serviceContext.setHeaders(headerMap);
 
 		return serviceContext;
 	}

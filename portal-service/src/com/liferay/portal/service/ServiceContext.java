@@ -53,6 +53,7 @@ public class ServiceContext implements Cloneable, Serializable {
 		serviceContext.setExpandoBridgeAttributes(getExpandoBridgeAttributes());
 		serviceContext.setGroupPermissions(getGroupPermissions());
 		serviceContext.setGuestPermissions(getGuestPermissions());
+		serviceContext.setHeaders(getHeaders());
 		serviceContext.setLanguageId(getLanguageId());
 		serviceContext.setLayoutFullURL(getLayoutFullURL());
 		serviceContext.setLayoutURL(getLayoutURL());
@@ -61,6 +62,8 @@ public class ServiceContext implements Cloneable, Serializable {
 		serviceContext.setPlid(getPlid());
 		serviceContext.setPortalURL(getPortalURL());
 		serviceContext.setPortletPreferencesIds(getPortletPreferencesIds());
+		serviceContext.setRemoteAddr(getRemoteAddr());
+		serviceContext.setRemoteHost(getRemoteHost());
 		serviceContext.setScopeGroupId(getScopeGroupId());
 		serviceContext.setSignedIn(isSignedIn());
 		serviceContext.setUserDisplayURL(getUserDisplayURL());
@@ -153,6 +156,10 @@ public class ServiceContext implements Cloneable, Serializable {
 		return _guestPermissions;
 	}
 
+	public Map<String, String> getHeaders() {
+		return _headers;
+	}
+
 	public String getLanguageId() {
 		return _languageId;
 	}
@@ -195,6 +202,14 @@ public class ServiceContext implements Cloneable, Serializable {
 
 	public PortletPreferencesIds getPortletPreferencesIds() {
 		return _portletPreferencesIds;
+	}
+
+	public String getRemoteAddr() {
+		return _remoteAddr;
+	}
+
+	public String getRemoteHost() {
+		return _remoteHost;
 	}
 
 	public long getScopeGroupId() {
@@ -320,6 +335,10 @@ public class ServiceContext implements Cloneable, Serializable {
 		_guestPermissions = guestPermissions;
 	}
 
+	public void setHeaders(Map<String, String> headers) {
+		_headers = headers;
+	}
+
 	public void setLanguageId(String languageId) {
 		_languageId = languageId;
 	}
@@ -352,6 +371,14 @@ public class ServiceContext implements Cloneable, Serializable {
 		PortletPreferencesIds portletPreferencesIds) {
 
 		_portletPreferencesIds = portletPreferencesIds;
+	}
+
+	public void setRemoteAddr(String remoteAddr) {
+		_remoteAddr = remoteAddr;
+	}
+
+	public void setRemoteHost(String remoteHost) {
+		_remoteHost = remoteHost;
 	}
 
 	public void setScopeGroupId(long scopeGroupId) {
@@ -391,6 +418,7 @@ public class ServiceContext implements Cloneable, Serializable {
 	private Map<String, Serializable> _expandoBridgeAttributes;
 	private String[] _groupPermissions;
 	private String[] _guestPermissions;
+	private Map<String, String> _headers;
 	private String _languageId;
 	private String _layoutFullURL;
 	private String _layoutURL;
@@ -398,6 +426,8 @@ public class ServiceContext implements Cloneable, Serializable {
 	private String _pathMain;
 	private String _portalURL;
 	private PortletPreferencesIds _portletPreferencesIds;
+	private String _remoteAddr;
+	private String _remoteHost;
 	private long _scopeGroupId;
 	private boolean _signedIn;
 	private String _userDisplayURL;
