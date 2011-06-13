@@ -26,9 +26,9 @@ if (group.isOrganization()) {
 
 	List<Role> roles = new ArrayList<Role>();
 
-	roles.add(RoleLocalServiceUtil.getRole(group.getCompanyId(), RoleConstants.ORGANIZATION_USER));
 	roles.add(RoleLocalServiceUtil.getRole(group.getCompanyId(), RoleConstants.ORGANIZATION_ADMINISTRATOR));
 	roles.add(RoleLocalServiceUtil.getRole(group.getCompanyId(), RoleConstants.ORGANIZATION_OWNER));
+	roles.add(RoleLocalServiceUtil.getRole(group.getCompanyId(), RoleConstants.ORGANIZATION_USER));
 %>
 
 	<aui:input name="tabs1" type="hidden" value="organizations" />
@@ -36,8 +36,8 @@ if (group.isOrganization()) {
 	<liferay-ui:search-container>
 
 		<liferay-ui:search-container-results
-				results="<%= roles %>"
-				total="<%= roles.size() %>"
+			results="<%= roles %>"
+			total="<%= roles.size() %>"
 		/>
 
 		<liferay-ui:search-container-row
@@ -91,21 +91,23 @@ if (group.isOrganization()) {
 			>
 
 				<%
-				Role linkedRole = RoleLocalServiceUtil.getRole(group.getCompanyId(), RoleConstants.SITE_MEMBER);
+				Role siteMemberRole = RoleLocalServiceUtil.getRole(group.getCompanyId(), RoleConstants.SITE_MEMBER);
 
-				buffer.append(linkedRole.getTitle(user.getLocale()));
+				buffer.append(siteMemberRole.getTitle(user.getLocale()));
 
-				if (role.getName().equals(RoleConstants.ORGANIZATION_ADMINISTRATOR)) {
-					linkedRole = RoleLocalServiceUtil.getRole(group.getCompanyId(), RoleConstants.SITE_ADMINISTRATOR);
+				String name = role.getName();
+
+				if (name.equals(RoleConstants.ORGANIZATION_ADMINISTRATOR)) {
+					Role siteAdministratorRole  = RoleLocalServiceUtil.getRole(group.getCompanyId(), RoleConstants.SITE_ADMINISTRATOR);
 
 					buffer.append(StringPool.COMMA_AND_SPACE);
-					buffer.append(linkedRole.getTitle(user.getLocale()));
+					buffer.append(siteAdministratorRole.getTitle(user.getLocale()));
 				}
-				else if (role.getName().equals(RoleConstants.ORGANIZATION_OWNER)) {
-					linkedRole = RoleLocalServiceUtil.getRole(group.getCompanyId(), RoleConstants.SITE_OWNER);
+				else if (name.equals(RoleConstants.ORGANIZATION_OWNER)) {
+					Role siteOwnerRole = RoleLocalServiceUtil.getRole(group.getCompanyId(), RoleConstants.SITE_OWNER);
 
 					buffer.append(StringPool.COMMA_AND_SPACE);
-					buffer.append(linkedRole.getTitle(user.getLocale()));
+					buffer.append(siteOwnerRole.getTitle(user.getLocale()));
 				}
 				%>
 
@@ -113,12 +115,12 @@ if (group.isOrganization()) {
 
 		</liferay-ui:search-container-row>
 
-		<liferay-ui:panel collapsible='<%= true %>' extended="<%= false %>" persistState="<%= true %>" title='<%= LanguageUtil.format(pageContext, "users-that-belong-to-x-x", new String[]{organization.getName(), String.valueOf(organizationUsersCount)}) %>'>
+		<liferay-ui:panel collapsible="<%= true %>" extended="<%= false %>" persistState="<%= true %>" title='<%= LanguageUtil.format(pageContext, "users-that-belong-to-x-x", new String[] {organization.getName(), String.valueOf(organizationUsersCount)}) %>'>
 			<div class="portlet-msg-info">
-				<liferay-ui:message key="this-site-belongs-to-x-which-is-an-organization-of-type-x" arguments="<%= new String[]{organization.getName(), LanguageUtil.get(pageContext, organization.getType())} %>" />
+				<liferay-ui:message key="this-site-belongs-to-x-which-is-an-organization-of-type-x" arguments="<%= new String[] {organization.getName(), LanguageUtil.get(pageContext, organization.getType())} %>" />
 			</div>
 
-			<liferay-ui:search-iterator paginate='<%= false %>' />
+			<liferay-ui:search-iterator paginate="<%= false %>" />
 		</liferay-ui:panel>
 
 	</liferay-ui:search-container>

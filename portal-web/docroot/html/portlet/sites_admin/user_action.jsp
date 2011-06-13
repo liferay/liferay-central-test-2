@@ -44,8 +44,8 @@ Group group = (Group)row.getParameter("group");
 			<portlet:param name="struts_action" value="/sites_admin/edit_site_assignments" />
 			<portlet:param name="<%= Constants.CMD %>" value="group_users" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
-			<portlet:param name="removeUserIds" value="<%= String.valueOf(user2.getUserId()) %>" />
 			<portlet:param name="groupId" value="<%= String.valueOf(group.getGroupId()) %>" />
+			<portlet:param name="removeUserIds" value="<%= String.valueOf(user2.getUserId()) %>" />
 		</portlet:actionURL>
 
 		<liferay-ui:icon

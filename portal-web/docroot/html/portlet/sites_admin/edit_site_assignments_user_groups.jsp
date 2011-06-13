@@ -139,14 +139,14 @@ userGroupSearch.setEmptyResultsMessage(emptyResultsMessage);
 
 	<c:choose>
 		<c:when test='<%= tabs1.equals("summary") && (total > 0) %>'>
-			<liferay-ui:panel collapsible='<%= true %>' extended="<%= false %>" persistState="<%= true %>" title='<%= LanguageUtil.format(pageContext, (total > 1) ? "x-user-groups" : "x-user-group", total) %>'>
+			<liferay-ui:panel collapsible="<%= true %>" extended="<%= false %>" persistState="<%= true %>" title='<%= LanguageUtil.format(pageContext, (total > 1) ? "x-user-groups" : "x-user-group", total) %>'>
 				<aui:input inlineField="<%= true %>" label="" name='<%= DisplayTerms.KEYWORDS + "_user_groups" %>' size="30" value="" />
 
 				<aui:button type="submit" value="search" />
 
 				<br /> <br />
 
-				<liferay-ui:search-iterator paginate='<%= false %>' />
+				<liferay-ui:search-iterator paginate="<%= false %>" />
 
 				<c:if test="<%= total > userGroupSearch.getDelta() %>">
 					<a href="<%= viewUserGroupsURL %>"><liferay-ui:message key="view-more" /> &raquo;</a>
