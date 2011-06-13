@@ -94,9 +94,8 @@ public class AddDefaultDocumentLibraryStructuresAction extends SimpleAction {
 
 			DDMStructureLocalServiceUtil.addStructure(
 				userId, groupId,
-				PortalUtil.getClassNameId(DLDocumentMetadataSet.class),
-				name, nameMap, descriptionMap, xsd, "xml",
-				serviceContext);
+				PortalUtil.getClassNameId(DLDocumentMetadataSet.class), name,
+				nameMap, descriptionMap, xsd, "xml", serviceContext);
 		}
 	}
 
@@ -152,7 +151,6 @@ public class AddDefaultDocumentLibraryStructuresAction extends SimpleAction {
 		serviceContext.setUserId(defaultUserId);
 
 		addDDMStructures(defaultUserId, group.getGroupId(), serviceContext);
-
 		addDLDocumentTypes(defaultUserId, group.getGroupId(), serviceContext);
 	}
 

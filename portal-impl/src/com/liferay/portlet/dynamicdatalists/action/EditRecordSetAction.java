@@ -153,7 +153,7 @@ public class EditRecordSetAction extends PortletAction {
 
 		if (cmd.equals(Constants.ADD)) {
 			recordSet = DDLRecordSetServiceUtil.addRecordSet(
-				groupId, ddmStructureId, nameMap, descriptionMap,
+				groupId, ddmStructureId, null, nameMap, descriptionMap,
 				DDLConstants.MIN_DISPLAY_ROWS_DEFAULT, serviceContext);
 		}
 		else {

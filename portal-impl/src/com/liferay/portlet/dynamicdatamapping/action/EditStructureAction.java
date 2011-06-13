@@ -214,8 +214,8 @@ public class EditStructureAction extends PortletAction {
 
 		if (cmd.equals(Constants.ADD)) {
 			structure = DDMStructureServiceUtil.addStructure(
-				groupId, classNameId, nameMap, descriptionMap, xsd, storageType,
-				serviceContext);
+				groupId, classNameId, null, nameMap, descriptionMap, xsd,
+				storageType, serviceContext);
 		}
 		else if (cmd.equals(Constants.UPDATE)) {
 			structure = DDMStructureServiceUtil.updateStructure(

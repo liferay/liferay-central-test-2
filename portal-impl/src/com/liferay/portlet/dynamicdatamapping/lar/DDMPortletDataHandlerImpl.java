@@ -153,9 +153,10 @@ public class DDMPortletDataHandlerImpl extends BasePortletDataHandler {
 
 				importedStructure = DDMStructureLocalServiceUtil.addStructure(
 					userId, portletDataContext.getScopeGroupId(),
-					structure.getClassNameId(), structure.getNameMap(),
-					structure.getDescriptionMap(), structure.getXsd(),
-					structure.getStorageType(), serviceContext);
+					structure.getClassNameId(), structure.getStructureKey(),
+					structure.getNameMap(), structure.getDescriptionMap(),
+					structure.getXsd(), structure.getStorageType(),
+					serviceContext);
 			}
 			else {
 				importedStructure =
@@ -168,9 +169,9 @@ public class DDMPortletDataHandlerImpl extends BasePortletDataHandler {
 		else {
 			importedStructure = DDMStructureLocalServiceUtil.addStructure(
 				userId, portletDataContext.getScopeGroupId(),
-				structure.getClassNameId(), structure.getNameMap(),
-				structure.getDescriptionMap(), structure.getXsd(),
-				structure.getStorageType(), serviceContext);
+				structure.getClassNameId(), structure.getStructureKey(),
+				structure.getNameMap(), structure.getDescriptionMap(),
+				structure.getXsd(), structure.getStorageType(), serviceContext);
 		}
 
 		portletDataContext.importClassedModel(

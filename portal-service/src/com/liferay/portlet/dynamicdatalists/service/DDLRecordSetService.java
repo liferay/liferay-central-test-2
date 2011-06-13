@@ -42,7 +42,7 @@ public interface DDLRecordSetService {
 	 * Never modify or reference this interface directly. Always use {@link DDLRecordSetServiceUtil} to access the d d l record set remote service. Add custom service methods to {@link com.liferay.portlet.dynamicdatalists.service.impl.DDLRecordSetServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
 	public com.liferay.portlet.dynamicdatalists.model.DDLRecordSet addRecordSet(
-		long groupId, long ddmStructureId,
+		long groupId, long ddmStructureId, java.lang.String recordSetKey,
 		java.util.Map<java.util.Locale, java.lang.String> nameMap,
 		java.util.Map<java.util.Locale, java.lang.String> descriptionMap,
 		int minDisplayRows,
@@ -68,6 +68,15 @@ public interface DDLRecordSetService {
 
 	public com.liferay.portlet.dynamicdatalists.model.DDLRecordSet updateRecordSet(
 		long recordSetId, long ddmStructureId,
+		java.util.Map<java.util.Locale, java.lang.String> nameMap,
+		java.util.Map<java.util.Locale, java.lang.String> descriptionMap,
+		int minDisplayRows,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	public com.liferay.portlet.dynamicdatalists.model.DDLRecordSet updateRecordSet(
+		long groupId, long ddmStructureId, java.lang.String recordSetKey,
 		java.util.Map<java.util.Locale, java.lang.String> nameMap,
 		java.util.Map<java.util.Locale, java.lang.String> descriptionMap,
 		int minDisplayRows,

@@ -52,18 +52,6 @@ public class DDMStructureLocalServiceImpl
 	extends DDMStructureLocalServiceBaseImpl {
 
 	public DDMStructure addStructure(
-			long userId, long groupId, long classNameId,
-			Map<Locale, String> nameMap, Map<Locale, String> descriptionMap,
-			String xsd, String storageType, ServiceContext serviceContext)
-		throws PortalException, SystemException {
-
-		String structureKey = String.valueOf(counterLocalService.increment());
-
-		return addStructure(userId, groupId, classNameId, structureKey,
-			nameMap, descriptionMap, xsd, storageType, serviceContext);
-
-	}
-	public DDMStructure addStructure(
 			long userId, long groupId, long classNameId, String structureKey,
 			Map<Locale, String> nameMap, Map<Locale, String> descriptionMap,
 			String xsd, String storageType, ServiceContext serviceContext)
@@ -189,21 +177,22 @@ public class DDMStructureLocalServiceImpl
 	public void deleteStructures(long groupId)
 		throws PortalException, SystemException {
 
-		for (DDMStructure structure :
-				ddmStructurePersistence.findByGroupId(groupId)) {
+		List<DDMStructure> structures = ddmStructurePersistence.findByGroupId(
+			groupId);
 
+		for (DDMStructure structure : structures) {
 			deleteStructure(structure);
 		}
 	}
 
 	public DDMStructure fetchStructure(long structureId)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		return ddmStructurePersistence.fetchByPrimaryKey(structureId);
 	}
 
 	public DDMStructure fetchStructure(long groupId, String structureKey)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		return ddmStructurePersistence.fetchByG_S(groupId, structureKey);
 	}
@@ -420,9 +409,7 @@ public class DDMStructureLocalServiceImpl
 			groupId, structureKey);
 
 		if (structure != null) {
-			throw new StructureDuplicateStructureKeyException(
-				"Duplicate structure key: " + structureKey +
-				" found in group: " + groupId);
+			throw new StructureDuplicateStructureKeyException();
 		}
 
 		validate(nameMap, xsd);

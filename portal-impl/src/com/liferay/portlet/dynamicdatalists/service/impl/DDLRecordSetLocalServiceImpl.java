@@ -43,19 +43,6 @@ public class DDLRecordSetLocalServiceImpl
 	extends DDLRecordSetLocalServiceBaseImpl {
 
 	public DDLRecordSet addRecordSet(
-			long userId, long groupId, long ddmStructureId,
-			Map<Locale, String> nameMap, Map<Locale, String> descriptionMap,
-			int minDisplayRows, ServiceContext serviceContext)
-		throws PortalException, SystemException {
-
-		String recordSetKey = String.valueOf(counterLocalService.increment());
-
-		return addRecordSet(
-			userId, groupId, ddmStructureId, recordSetKey, nameMap,
-			descriptionMap, minDisplayRows, serviceContext);
-	}
-
-	public DDLRecordSet addRecordSet(
 			long userId, long groupId, long ddmStructureId, String recordSetKey,
 			Map<Locale, String> nameMap, Map<Locale, String> descriptionMap,
 			int minDisplayRows, ServiceContext serviceContext)
@@ -193,7 +180,7 @@ public class DDLRecordSetLocalServiceImpl
 	}
 
 	public DDLRecordSet fetchRecordSet(long groupId, String recordSetKey)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		return ddlRecordSetPersistence.fetchByG_R(groupId, recordSetKey);
 	}
@@ -282,12 +269,11 @@ public class DDLRecordSetLocalServiceImpl
 
 		return doUpdateRecordSet(
 			ddmStructureId, nameMap, descriptionMap, minDisplayRows,
-			serviceContext,
-			recordSet);
+			serviceContext, recordSet);
 	}
 
 	public DDLRecordSet updateRecordSet(
-			long groupId, String recordSetKey, long ddmStructureId,
+			long groupId, long ddmStructureId, String recordSetKey,
 			Map<Locale, String> nameMap, Map<Locale, String> descriptionMap,
 			int minDisplayRows, ServiceContext serviceContext)
 		throws PortalException, SystemException {
@@ -332,9 +318,7 @@ public class DDLRecordSetLocalServiceImpl
 				groupId, recordSetKey);
 
 			if (recordSet != null) {
-				throw new RecordSetDuplicateRecordSetKeyException(
-					"Duplicate record set key: " + recordSetKey +
-					" found in group: " + groupId);
+				throw new RecordSetDuplicateRecordSetKeyException();
 			}
 		}
 
@@ -348,8 +332,7 @@ public class DDLRecordSetLocalServiceImpl
 			ddmStructureId);
 
 		if (ddmStructure == null) {
-			throw new RecordSetDDMStructureIdException(
-				"No DDM Structure found for: " + ddmStructureId);
+			throw new RecordSetDDMStructureIdException();
 		}
 	}
 
@@ -359,7 +342,7 @@ public class DDLRecordSetLocalServiceImpl
 		String name = nameMap.get(LocaleUtil.getDefault());
 
 		if (Validator.isNull(name)) {
-			throw new RecordSetNameException("Invalid name: " + name);
+			throw new RecordSetNameException();
 		}
 	}
 

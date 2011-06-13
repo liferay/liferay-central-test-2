@@ -29,7 +29,7 @@ public class DDLRecordSetServiceWrapper implements DDLRecordSetService {
 	}
 
 	public com.liferay.portlet.dynamicdatalists.model.DDLRecordSet addRecordSet(
-		long groupId, long ddmStructureId,
+		long groupId, long ddmStructureId, java.lang.String recordSetKey,
 		java.util.Map<java.util.Locale, java.lang.String> nameMap,
 		java.util.Map<java.util.Locale, java.lang.String> descriptionMap,
 		int minDisplayRows,
@@ -37,7 +37,8 @@ public class DDLRecordSetServiceWrapper implements DDLRecordSetService {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _ddlRecordSetService.addRecordSet(groupId, ddmStructureId,
-			nameMap, descriptionMap, minDisplayRows, serviceContext);
+			recordSetKey, nameMap, descriptionMap, minDisplayRows,
+			serviceContext);
 	}
 
 	public void deleteRecordSet(long recordSetId)
@@ -72,6 +73,19 @@ public class DDLRecordSetServiceWrapper implements DDLRecordSetService {
 			com.liferay.portal.kernel.exception.SystemException {
 		return _ddlRecordSetService.updateRecordSet(recordSetId,
 			ddmStructureId, nameMap, descriptionMap, minDisplayRows,
+			serviceContext);
+	}
+
+	public com.liferay.portlet.dynamicdatalists.model.DDLRecordSet updateRecordSet(
+		long groupId, long ddmStructureId, java.lang.String recordSetKey,
+		java.util.Map<java.util.Locale, java.lang.String> nameMap,
+		java.util.Map<java.util.Locale, java.lang.String> descriptionMap,
+		int minDisplayRows,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _ddlRecordSetService.updateRecordSet(groupId, ddmStructureId,
+			recordSetKey, nameMap, descriptionMap, minDisplayRows,
 			serviceContext);
 	}
 
