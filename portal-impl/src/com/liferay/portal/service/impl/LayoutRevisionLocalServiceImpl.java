@@ -364,9 +364,13 @@ public class LayoutRevisionLocalServiceImpl
 				layoutRevision, layoutRevision.getParentLayoutRevisionId(),
 				serviceContext);
 
-			StagingUtil.setRecentLayoutRevisionId(
+			StagingUtil.deleteRecentLayoutRevisionId(
 				user, layoutRevision.getLayoutSetBranchId(),
-				layoutRevision.getPlid(), layoutRevision.getLayoutRevisionId());
+				layoutRevision.getPlid());
+
+			StagingUtil.setRecentVariationName(
+				user, layoutRevision.getLayoutSetBranchId(),
+				layoutRevision.getPlid(), layoutRevision.getVariationName());
 		}
 		else {
 			layoutRevision = oldLayoutRevision;

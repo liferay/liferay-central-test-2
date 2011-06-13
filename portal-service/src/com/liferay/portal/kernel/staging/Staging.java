@@ -58,6 +58,14 @@ public interface Staging {
 	public void deleteLastImportSettings(Group liveGroup, boolean privateLayout)
 		throws Exception;
 
+	public void deleteRecentLayoutRevisionId(
+			HttpServletRequest request, long layoutSetBranchId, long plid)
+		throws SystemException;
+
+	public void deleteRecentLayoutRevisionId(
+			User user, long layoutSetBranchId, long plid)
+		throws SystemException;
+
 	public void disableStaging(
 			long scopeGroupId, long liveGroupId, ServiceContext serviceContext)
 		throws Exception;
@@ -84,7 +92,8 @@ public interface Staging {
 		throws Exception;
 
 	public long getRecentLayoutRevisionId(
-		HttpServletRequest request, long layoutSetBranchId, long plid);
+			HttpServletRequest request, long layoutSetBranchId, long plid)
+		throws SystemException;
 
 	public long getRecentLayoutRevisionId(
 			User user, long layoutSetBranchId, long plid)
@@ -141,7 +150,7 @@ public interface Staging {
 
 	public void setRecentLayoutRevisionId(
 		HttpServletRequest request, long layoutSetBranchId, long plid,
-		long layoutRevisionId);
+		long layoutRevisionId) throws SystemException;
 
 	public void setRecentLayoutRevisionId(
 			User user, long layoutSetBranchId, long plid, long layoutRevisionId)
@@ -151,6 +160,15 @@ public interface Staging {
 		HttpServletRequest request, long layoutSetBranchId);
 
 	public void setRecentLayoutSetBranchId(User user, long layoutSetBranchId)
+		throws SystemException;
+
+	public void setRecentVariationName(
+			HttpServletRequest request, long layoutSetBranchId, long plid,
+			String variationName)
+		throws SystemException;
+
+	public void setRecentVariationName(
+			User user, long layoutSetBranchId, long plid, String variationName)
 		throws SystemException;
 
 	public void unscheduleCopyFromLive(PortletRequest PortletRequest)

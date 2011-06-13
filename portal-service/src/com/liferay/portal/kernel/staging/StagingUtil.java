@@ -81,6 +81,22 @@ public class StagingUtil {
 		getStaging().deleteLastImportSettings(liveGroup, privateLayout);
 	}
 
+	public static void deleteRecentLayoutRevisionId(
+			HttpServletRequest request, long layoutSetBranchId, long plid)
+		throws SystemException {
+
+		getStaging().deleteRecentLayoutRevisionId(
+			request, layoutSetBranchId, plid);
+	}
+
+	public static void deleteRecentLayoutRevisionId(
+			User user, long layoutSetBranchId, long plid)
+		throws SystemException {
+
+		getStaging().deleteRecentLayoutRevisionId(
+			user, layoutSetBranchId, plid);
+	}
+
 	public static void disableStaging(
 			long scopeGroupId, long liveGroupId, ServiceContext serviceContext)
 		throws Exception {
@@ -129,7 +145,8 @@ public class StagingUtil {
 	}
 
 	public static long getRecentLayoutRevisionId(
-		HttpServletRequest request, long layoutSetBranchId, long plid) {
+			HttpServletRequest request, long layoutSetBranchId, long plid)
+		throws SystemException{
 
 		return getStaging().getRecentLayoutRevisionId(
 			request, layoutSetBranchId, plid);
@@ -252,7 +269,7 @@ public class StagingUtil {
 
 	public static void setRecentLayoutRevisionId(
 		HttpServletRequest request, long layoutSetBranchId, long plid,
-		long layoutRevisionId) {
+		long layoutRevisionId) throws SystemException {
 
 		getStaging().setRecentLayoutRevisionId(
 			request, layoutSetBranchId, plid, layoutRevisionId);
@@ -277,6 +294,23 @@ public class StagingUtil {
 		throws SystemException {
 
 		getStaging().setRecentLayoutSetBranchId(user, layoutSetBranchId);
+	}
+
+	public static void setRecentVariationName(
+			HttpServletRequest request, long layoutSetBranchId, long plid,
+			String variationName)
+		throws SystemException {
+
+		getStaging().setRecentVariationName(
+			request, layoutSetBranchId, plid, variationName);
+	}
+
+	public static void setRecentVariationName(
+			User user, long layoutSetBranchId, long plid, String variationName)
+		throws SystemException {
+
+		getStaging().setRecentVariationName(
+			user, layoutSetBranchId, plid, variationName);
 	}
 
 	public static void unscheduleCopyFromLive(PortletRequest PortletRequest)
