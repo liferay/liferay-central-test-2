@@ -539,14 +539,12 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 	}
 
 	@ThreadLocalCachable
-	public Group fetchGroup(long groupId)
-		throws PortalException, SystemException {
-
+	public Group fetchGroup(long groupId) throws SystemException {
 		return groupPersistence.fetchByPrimaryKey(groupId);
 	}
 
 	public Group fetchGroup(long companyId, String name)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		Group group = _systemGroupsMap.get(companyId + name);
 
