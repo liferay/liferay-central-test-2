@@ -74,6 +74,8 @@ public class TicketPersistenceTest extends BasePersistenceTestCase {
 		newTicket.setClassPK(nextLong());
 		newTicket.setKey(randomString());
 		newTicket.setExpirationDate(nextDate());
+		newTicket.setType(nextInt());
+		newTicket.setExtraInfo(randomString());
 
 		_persistence.update(newTicket, false);
 
@@ -88,6 +90,8 @@ public class TicketPersistenceTest extends BasePersistenceTestCase {
 		assertEquals(existingTicket.getKey(), newTicket.getKey());
 		assertEquals(Time.getShortTimestamp(existingTicket.getExpirationDate()),
 			Time.getShortTimestamp(newTicket.getExpirationDate()));
+		assertEquals(existingTicket.getType(), newTicket.getType());
+		assertEquals(existingTicket.getExtraInfo(), newTicket.getExtraInfo());
 	}
 
 	public void testFindByPrimaryKeyExisting() throws Exception {
@@ -219,6 +223,8 @@ public class TicketPersistenceTest extends BasePersistenceTestCase {
 		ticket.setClassPK(nextLong());
 		ticket.setKey(randomString());
 		ticket.setExpirationDate(nextDate());
+		ticket.setType(nextInt());
+		ticket.setExtraInfo(randomString());
 
 		_persistence.update(ticket, false);
 

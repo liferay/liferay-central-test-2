@@ -62,9 +62,11 @@ public class TicketModelImpl extends BaseModelImpl<Ticket>
 			{ "classNameId", Types.BIGINT },
 			{ "classPK", Types.BIGINT },
 			{ "key_", Types.VARCHAR },
-			{ "expirationDate", Types.TIMESTAMP }
+			{ "expirationDate", Types.TIMESTAMP },
+			{ "type_", Types.INTEGER },
+			{ "extraInfo", Types.CLOB }
 		};
-	public static final String TABLE_SQL_CREATE = "create table Ticket (ticketId LONG not null primary key,companyId LONG,createDate DATE null,classNameId LONG,classPK LONG,key_ VARCHAR(75) null,expirationDate DATE null)";
+	public static final String TABLE_SQL_CREATE = "create table Ticket (ticketId LONG not null primary key,companyId LONG,createDate DATE null,classNameId LONG,classPK LONG,key_ VARCHAR(75) null,expirationDate DATE null,type_ INTEGER,extraInfo TEXT null)";
 	public static final String TABLE_SQL_DROP = "drop table Ticket";
 	public static final String ORDER_BY_JPQL = " ORDER BY ticket.ticketId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY Ticket.ticketId ASC";
@@ -185,6 +187,27 @@ public class TicketModelImpl extends BaseModelImpl<Ticket>
 		_expirationDate = expirationDate;
 	}
 
+	public int getType() {
+		return _type;
+	}
+
+	public void setType(int type) {
+		_type = type;
+	}
+
+	public String getExtraInfo() {
+		if (_extraInfo == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _extraInfo;
+		}
+	}
+
+	public void setExtraInfo(String extraInfo) {
+		_extraInfo = extraInfo;
+	}
+
 	public Ticket toEscapedModel() {
 		if (isEscapedModel()) {
 			return (Ticket)this;
@@ -218,6 +241,8 @@ public class TicketModelImpl extends BaseModelImpl<Ticket>
 		ticketImpl.setClassPK(getClassPK());
 		ticketImpl.setKey(getKey());
 		ticketImpl.setExpirationDate(getExpirationDate());
+		ticketImpl.setType(getType());
+		ticketImpl.setExtraInfo(getExtraInfo());
 
 		ticketImpl.resetOriginalValues();
 
@@ -279,7 +304,7 @@ public class TicketModelImpl extends BaseModelImpl<Ticket>
 	}
 
 	public String toString() {
-		StringBundler sb = new StringBundler(15);
+		StringBundler sb = new StringBundler(19);
 
 		sb.append("{ticketId=");
 		sb.append(getTicketId());
@@ -295,13 +320,17 @@ public class TicketModelImpl extends BaseModelImpl<Ticket>
 		sb.append(getKey());
 		sb.append(", expirationDate=");
 		sb.append(getExpirationDate());
+		sb.append(", type=");
+		sb.append(getType());
+		sb.append(", extraInfo=");
+		sb.append(getExtraInfo());
 		sb.append("}");
 
 		return sb.toString();
 	}
 
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(25);
+		StringBundler sb = new StringBundler(31);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.portal.model.Ticket");
@@ -335,6 +364,14 @@ public class TicketModelImpl extends BaseModelImpl<Ticket>
 			"<column><column-name>expirationDate</column-name><column-value><![CDATA[");
 		sb.append(getExpirationDate());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>type</column-name><column-value><![CDATA[");
+		sb.append(getType());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>extraInfo</column-name><column-value><![CDATA[");
+		sb.append(getExtraInfo());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -349,5 +386,7 @@ public class TicketModelImpl extends BaseModelImpl<Ticket>
 	private String _key;
 	private String _originalKey;
 	private Date _expirationDate;
+	private int _type;
+	private String _extraInfo;
 	private transient ExpandoBridge _expandoBridge;
 }

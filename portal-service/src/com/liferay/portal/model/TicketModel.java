@@ -163,6 +163,35 @@ public interface TicketModel extends AttachedModel, BaseModel<Ticket> {
 	 */
 	public void setExpirationDate(Date expirationDate);
 
+	/**
+	 * Gets the type of this ticket.
+	 *
+	 * @return the type of this ticket
+	 */
+	public int getType();
+
+	/**
+	 * Sets the type of this ticket.
+	 *
+	 * @param type the type of this ticket
+	 */
+	public void setType(int type);
+
+	/**
+	 * Gets the extra info of this ticket.
+	 *
+	 * @return the extra info of this ticket
+	 */
+	@AutoEscape
+	public String getExtraInfo();
+
+	/**
+	 * Sets the extra info of this ticket.
+	 *
+	 * @param extraInfo the extra info of this ticket
+	 */
+	public void setExtraInfo(String extraInfo);
+
 	public boolean isNew();
 
 	public void setNew(boolean n);

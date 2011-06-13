@@ -246,12 +246,12 @@ public class TicketLocalServiceUtil {
 
 	public static com.liferay.portal.model.Ticket addTicket(long companyId,
 		java.lang.String className, long classPK,
-		java.util.Date expirationDate,
+		java.util.Date expirationDate, java.lang.String extraInfo, int type,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService()
 				   .addTicket(companyId, className, classPK, expirationDate,
-			serviceContext);
+			extraInfo, type, serviceContext);
 	}
 
 	public static com.liferay.portal.model.Ticket getTicket(

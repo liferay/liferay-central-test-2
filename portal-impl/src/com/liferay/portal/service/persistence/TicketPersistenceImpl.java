@@ -316,6 +316,8 @@ public class TicketPersistenceImpl extends BasePersistenceImpl<Ticket>
 		ticketImpl.setClassPK(ticket.getClassPK());
 		ticketImpl.setKey(ticket.getKey());
 		ticketImpl.setExpirationDate(ticket.getExpirationDate());
+		ticketImpl.setType(ticket.getType());
+		ticketImpl.setExtraInfo(ticket.getExtraInfo());
 
 		return ticketImpl;
 	}

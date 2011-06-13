@@ -937,6 +937,10 @@
 			<basic name="expirationDate">
 				<temporal>TIMESTAMP</temporal>
 			</basic>
+			<basic name="type">
+				<column name="TYPE_" />
+			</basic>
+			<basic name="extraInfo" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />
 		</attributes>

@@ -189,6 +189,42 @@ public class TicketWrapper implements Ticket {
 		_ticket.setExpirationDate(expirationDate);
 	}
 
+	/**
+	* Gets the type of this ticket.
+	*
+	* @return the type of this ticket
+	*/
+	public int getType() {
+		return _ticket.getType();
+	}
+
+	/**
+	* Sets the type of this ticket.
+	*
+	* @param type the type of this ticket
+	*/
+	public void setType(int type) {
+		_ticket.setType(type);
+	}
+
+	/**
+	* Gets the extra info of this ticket.
+	*
+	* @return the extra info of this ticket
+	*/
+	public java.lang.String getExtraInfo() {
+		return _ticket.getExtraInfo();
+	}
+
+	/**
+	* Sets the extra info of this ticket.
+	*
+	* @param extraInfo the extra info of this ticket
+	*/
+	public void setExtraInfo(java.lang.String extraInfo) {
+		_ticket.setExtraInfo(extraInfo);
+	}
+
 	public boolean isNew() {
 		return _ticket.isNew();
 	}
