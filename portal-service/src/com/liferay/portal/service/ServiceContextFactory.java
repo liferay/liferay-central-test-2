@@ -221,6 +221,25 @@ public class ServiceContextFactory {
 
 		serviceContext.setPortletPreferencesIds(portletPreferencesIds);
 
+		// Request
+
+		Map<String, String> headerMap = new HashMap<String, String>();
+
+		enu = request.getHeaderNames();
+
+		while (enu.hasMoreElements()) {
+			String header = enu.nextElement();
+
+			String value = request.getHeader(header);
+
+			headerMap.put(header, value);
+		}
+
+		serviceContext.setHeaders(headerMap);
+
+		serviceContext.setRemoteAddr(request.getRemoteAddr());
+		serviceContext.setRemoteHost(request.getRemoteHost());
+
 		// Asset
 
 		Map<String, String[]> parameterMap = portletRequest.getParameterMap();
@@ -259,30 +278,6 @@ public class ServiceContextFactory {
 			portletRequest, "workflowAction", WorkflowConstants.ACTION_PUBLISH);
 
 		serviceContext.setWorkflowAction(workflowAction);
-
-		// Remote
-
-		String remoteAddr = request.getRemoteAddr();
-		String remoteHost = request.getRemoteHost();
-
-		serviceContext.setRemoteAddr(remoteAddr);
-		serviceContext.setRemoteHost(remoteHost);
-
-		// Headers
-
-		Map<String, String> headerMap = new HashMap<String, String>();
-
-		enu = request.getHeaderNames();
-
-		while (enu.hasMoreElements()) {
-			String header = enu.nextElement();
-
-			String value = request.getHeader(header);
-
-			headerMap.put(header, value);
-		}
-
-		serviceContext.setHeaders(headerMap);
 
 		return serviceContext;
 	}
