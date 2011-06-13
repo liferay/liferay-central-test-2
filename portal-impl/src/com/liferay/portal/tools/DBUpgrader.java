@@ -90,6 +90,20 @@ public class DBUpgrader {
 			throw new RuntimeException(msg);
 		}
 
+		// Update company key
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Update company key");
+		}
+
+		_updateCompanyKey();
+
+		// Upgrade build
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Update build " + buildNumber);
+		}
+
 		StartupHelperUtil.upgradeProcess(buildNumber);
 
 		// Class names
@@ -182,6 +196,12 @@ public class DBUpgrader {
 
 		db.runSQL(_DELETE_TEMP_IMAGES_1);
 		db.runSQL(_DELETE_TEMP_IMAGES_2);
+	}
+
+	private static void _updateCompanyKey() throws Exception {
+		DB db = DBFactoryUtil.getDB();
+
+		db.runSQL("update Company set key_ = null");
 	}
 
 	private static final String _DELETE_TEMP_IMAGES_1 =
