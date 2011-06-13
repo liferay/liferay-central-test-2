@@ -1043,7 +1043,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 
 		// Asset
 
-		if ((serviceContext != null) && group.isRegularSite()) {
+		if ((serviceContext != null) && group.isSite()) {
 			User user = null;
 
 			try {
