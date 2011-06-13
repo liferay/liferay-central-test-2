@@ -327,6 +327,9 @@ update Role_ set name = 'Site Member' where name = 'Community Member';
 update Role_ set name = 'Site Owner' where name = 'Community Owner';
 update Role_ set name = 'Organization User' where name = 'Organization Member';
 
+alter table Ticket add type_ INTEGER;
+alter table Ticket add extraInfo TEXT null;
+
 alter table User_ add status int;
 alter table User_ add emailAddressVerified BOOLEAN;
 
