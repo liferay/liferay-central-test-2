@@ -26,7 +26,6 @@ import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.MembershipRequest;
 import com.liferay.portal.model.MembershipRequestConstants;
-import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.RoleConstants;
 import com.liferay.portal.model.User;
@@ -37,7 +36,6 @@ import com.liferay.util.UniqueList;
 
 import java.io.IOException;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -351,71 +349,33 @@ public class MembershipRequestLocalServiceImpl
 			MembershipRequest membershipRequest)
 		throws IOException, PortalException, SystemException {
 
-		List<Long> administratorIds = getGroupAdministratorIds(
-			membershipRequest.getGroupId());
-
-		for (Long userId : administratorIds) {
-			notify(
-				userId, membershipRequest,
-				PropsKeys.COMMUNITIES_EMAIL_MEMBERSHIP_REQUEST_SUBJECT,
-				PropsKeys.COMMUNITIES_EMAIL_MEMBERSHIP_REQUEST_BODY);
-		}
-	}
-
-	protected List<Long> getGroupAdministratorIds(long groupId)
-		throws PortalException, SystemException {
-
-		List<Long> administratorIds = new ArrayList();
-
-		Group group = groupLocalService.getGroup(groupId);
+		List<UserGroupRole> admins = new UniqueList<UserGroupRole>();
 
 		Role siteAdminRole = roleLocalService.getRole(
-			group.getCompanyId(), RoleConstants.SITE_ADMINISTRATOR);
+			membershipRequest.getCompanyId(),
+			RoleConstants.SITE_ADMINISTRATOR);
 
 		List<UserGroupRole> siteAdmins =
 			userGroupRoleLocalService.getUserGroupRolesByGroupAndRole(
-				groupId, siteAdminRole.getRoleId());
+				membershipRequest.getGroupId(), siteAdminRole.getRoleId());
 
-		for (UserGroupRole siteAdmin : siteAdmins) {
-			administratorIds.add(siteAdmin.getUserId());
-		}
+		admins.addAll(siteAdmins);
 
 		Role siteOwnerRole = rolePersistence.findByC_N(
-			group.getCompanyId(), RoleConstants.SITE_OWNER);
+			membershipRequest.getCompanyId(), RoleConstants.SITE_OWNER);
 
 		List<UserGroupRole> siteOwners =
 			userGroupRoleLocalService.getUserGroupRolesByGroupAndRole(
-				groupId, siteOwnerRole.getRoleId());
+				membershipRequest.getGroupId(), siteOwnerRole.getRoleId());
 
-		for (UserGroupRole siteOwner : siteOwners) {
-			administratorIds.add(siteOwner.getUserId());
+		admins.addAll(siteOwners);
+
+		for (UserGroupRole userGroupRole : admins) {
+			notify(
+				userGroupRole.getUserId(), membershipRequest,
+				PropsKeys.COMMUNITIES_EMAIL_MEMBERSHIP_REQUEST_SUBJECT,
+				PropsKeys.COMMUNITIES_EMAIL_MEMBERSHIP_REQUEST_BODY);
 		}
-
-		if (group.isOrganization()) {
-			Role orgAdminRole = roleLocalService.getRole(
-				group.getCompanyId(), RoleConstants.ORGANIZATION_ADMINISTRATOR);
-
-			List<UserGroupRole> orgAdmins =
-				userGroupRoleLocalService.getUserGroupRolesByGroupAndRole(
-					groupId, orgAdminRole.getRoleId());
-
-			for (UserGroupRole orgAdmin : orgAdmins) {
-				administratorIds.add(orgAdmin.getUserId());
-			}
-
-			Role orgOwnerRole = roleLocalService.getRole(
-				group.getCompanyId(), RoleConstants.ORGANIZATION_OWNER);
-
-			List<UserGroupRole> orgOwners =
-				userGroupRoleLocalService.getUserGroupRolesByGroupAndRole(
-					groupId, orgOwnerRole.getRoleId());
-
-			for (UserGroupRole orgOwner : orgOwners) {
-				administratorIds.add(orgOwner.getUserId());
-			}
-		}
-
-		return administratorIds;
 	}
 
 	protected void validate(String comments)
