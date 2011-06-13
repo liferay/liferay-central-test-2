@@ -35,10 +35,10 @@ public abstract class BaseAtomCollectionAdapter<E>
 			String className = clazz.getName();
 
 			if (className.startsWith("NoSuch")) {
-				throw new AtomException(404);
+				throw new AtomException(SC_NOT_FOUND);
 			}
 
-			throw new AtomException(500, e);
+			throw new AtomException(SC_INTERNAL_SERVER_ERROR, e);
 		}
 	}
 
@@ -52,10 +52,10 @@ public abstract class BaseAtomCollectionAdapter<E>
 			String className = clazz.getName();
 
 			if (className.startsWith("NoSuch")) {
-				throw new AtomException(404);
+				throw new AtomException(SC_NOT_FOUND);
 			}
 
-			throw new AtomException(500, e);
+			throw new AtomException(SC_INTERNAL_SERVER_ERROR, e);
 		}
 	}
 
@@ -69,10 +69,10 @@ public abstract class BaseAtomCollectionAdapter<E>
 			String className = e.getClass().getName();
 
 			if (className.startsWith("NoSuch")) {
-				throw new AtomException(404);
+				throw new AtomException(SC_NOT_FOUND);
 			}
 
-			throw new AtomException(500, e);
+			throw new AtomException(SC_INTERNAL_SERVER_ERROR, e);
 		}
 	}
 
@@ -102,10 +102,10 @@ public abstract class BaseAtomCollectionAdapter<E>
 			String className = clazz.getName();
 
 			if (className.startsWith("NoSuch")) {
-				throw new AtomException(404);
+				throw new AtomException(SC_NOT_FOUND);
 			}
 
-			throw new AtomException(500, e);
+			throw new AtomException(SC_INTERNAL_SERVER_ERROR, e);
 		}
 	}
 
@@ -124,10 +124,10 @@ public abstract class BaseAtomCollectionAdapter<E>
 			String className = clazz.getName();
 
 			if (className.startsWith("NoSuch")) {
-				throw new AtomException(404);
+				throw new AtomException(SC_NOT_FOUND);
 			}
 
-			throw new AtomException(500, e);
+			throw new AtomException(SC_INTERNAL_SERVER_ERROR, e);
 		}
 	}
 
