@@ -116,6 +116,25 @@ public class ServiceContextFactory {
 
 		serviceContext.setAttributes(attributes);
 
+		// Request
+
+		Map<String, String> headerMap = new HashMap<String, String>();
+
+		enu = request.getHeaderNames();
+
+		while (enu.hasMoreElements()) {
+			String header = enu.nextElement();
+
+			String value = request.getHeader(header);
+
+			headerMap.put(header, value);
+		}
+
+		serviceContext.setHeaders(headerMap);
+
+		serviceContext.setRemoteAddr(request.getRemoteAddr());
+		serviceContext.setRemoteHost(request.getRemoteHost());
+
 		return serviceContext;
 	}
 
