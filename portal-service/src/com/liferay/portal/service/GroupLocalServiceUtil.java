@@ -292,6 +292,19 @@ public class GroupLocalServiceUtil {
 		getService().checkSystemGroups(companyId);
 	}
 
+	public static com.liferay.portal.model.Group fetchGroup(long groupId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().fetchGroup(groupId);
+	}
+
+	public static com.liferay.portal.model.Group fetchGroup(long companyId,
+		java.lang.String name)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().fetchGroup(companyId, name);
+	}
+
 	public static com.liferay.portal.model.Group getCompanyGroup(long companyId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {

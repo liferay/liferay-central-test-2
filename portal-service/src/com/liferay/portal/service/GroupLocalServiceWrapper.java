@@ -280,6 +280,19 @@ public class GroupLocalServiceWrapper implements GroupLocalService {
 		_groupLocalService.checkSystemGroups(companyId);
 	}
 
+	public com.liferay.portal.model.Group fetchGroup(long groupId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _groupLocalService.fetchGroup(groupId);
+	}
+
+	public com.liferay.portal.model.Group fetchGroup(long companyId,
+		java.lang.String name)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _groupLocalService.fetchGroup(companyId, name);
+	}
+
 	public com.liferay.portal.model.Group getCompanyGroup(long companyId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {

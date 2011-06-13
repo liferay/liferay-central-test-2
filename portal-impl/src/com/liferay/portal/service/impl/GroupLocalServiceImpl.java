@@ -538,6 +538,25 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		deleteGroup(group);
 	}
 
+	@ThreadLocalCachable
+	public Group fetchGroup(long groupId)
+		throws PortalException, SystemException {
+
+		return groupPersistence.fetchByPrimaryKey(groupId);
+	}
+
+	public Group fetchGroup(long companyId, String name)
+		throws PortalException, SystemException {
+
+		Group group = _systemGroupsMap.get(companyId + name);
+
+		if (group != null) {
+			return group;
+		}
+
+		return groupPersistence.fetchByC_N(companyId, name);
+	}
+
 	public Group getCompanyGroup(long companyId)
 		throws PortalException, SystemException {
 
