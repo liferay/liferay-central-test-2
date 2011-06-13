@@ -3181,10 +3181,6 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	 *
 	 * @param  companyId the primary key of the user's company
 	 * @param  emailAddress the user's email address
-	 * @param  remoteAddr the IP address of the individual that made the new
-	 *         password request
-	 * @param  remoteHost the hostname of the individual that made the new
-	 *         password request
 	 * @param  fromName the name of the individual that the email should be from
 	 * @param  fromAddress the address of the individual that the email should
 	 *         be from
@@ -3198,16 +3194,15 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void sendPassword(
-			long companyId, String emailAddress, String remoteAddr,
-			String remoteHost, String userAgent, String fromName,
+			long companyId, String emailAddress, String fromName,
 			String fromAddress, String subject, String body,
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		try {
 			doSendPassword(
-				companyId, emailAddress, remoteAddr, remoteHost, userAgent,
-				fromName, fromAddress, subject, body, serviceContext);
+				companyId, emailAddress, fromName, fromAddress, subject, body,
+				serviceContext);
 		}
 		catch (IOException ioe) {
 			throw new SystemException(ioe);
@@ -4708,8 +4703,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	}
 
 	protected void doSendPassword(
-			long companyId, String emailAddress, String remoteAddr,
-			String remoteHost, String userAgent, String fromName,
+			long companyId, String emailAddress, String fromName,
 			String fromAddress, String subject, String body,
 			ServiceContext serviceContext)
 		throws IOException, PortalException, SystemException {
@@ -4725,6 +4719,14 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		if (Validator.isNull(emailAddress)) {
 			throw new UserEmailAddressException();
 		}
+
+		String remoteAddr = serviceContext.getRemoteAddr();
+
+		String remoteHost = serviceContext.getRemoteHost();
+
+		Map<String, String> headerMap = serviceContext.getHeaders();
+
+		String userAgent = headerMap.get("user-agent");
 
 		User user = userPersistence.findByC_EA(companyId, emailAddress);
 

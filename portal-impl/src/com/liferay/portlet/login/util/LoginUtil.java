@@ -443,16 +443,12 @@ public class LoginUtil {
 			return;
 		}
 
-		String remoteAddr = request.getRemoteAddr();
-		String remoteHost = request.getRemoteHost();
-		String userAgent = request.getHeader(HttpHeaders.USER_AGENT);
-
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			User.class.getName(), actionRequest);
 
 		UserLocalServiceUtil.sendPassword(
-			company.getCompanyId(), toAddress, remoteAddr, remoteHost,
-			userAgent, fromName, fromAddress, subject, body, serviceContext);
+			company.getCompanyId(), toAddress, fromName, fromAddress, subject,
+			body, serviceContext);
 
 		SessionMessages.add(actionRequest, "request_processed", toAddress);
 	}

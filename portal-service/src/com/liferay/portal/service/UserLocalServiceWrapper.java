@@ -2038,10 +2038,6 @@ public class UserLocalServiceWrapper implements UserLocalService {
 	*
 	* @param companyId the primary key of the user's company
 	* @param emailAddress the user's email address
-	* @param remoteAddr the IP address of the individual that made the new
-	password request
-	* @param remoteHost the hostname of the individual that made the new
-	password request
 	* @param fromName the name of the individual that the email should be from
 	* @param fromAddress the address of the individual that the email should
 	be from
@@ -2055,16 +2051,13 @@ public class UserLocalServiceWrapper implements UserLocalService {
 	* @throws SystemException if a system exception occurred
 	*/
 	public void sendPassword(long companyId, java.lang.String emailAddress,
-		java.lang.String remoteAddr, java.lang.String remoteHost,
-		java.lang.String userAgent, java.lang.String fromName,
-		java.lang.String fromAddress, java.lang.String subject,
-		java.lang.String body,
+		java.lang.String fromName, java.lang.String fromAddress,
+		java.lang.String subject, java.lang.String body,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		_userLocalService.sendPassword(companyId, emailAddress, remoteAddr,
-			remoteHost, userAgent, fromName, fromAddress, subject, body,
-			serviceContext);
+		_userLocalService.sendPassword(companyId, emailAddress, fromName,
+			fromAddress, subject, body, serviceContext);
 	}
 
 	/**
