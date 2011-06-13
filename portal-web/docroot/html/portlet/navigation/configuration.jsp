@@ -51,19 +51,26 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 					<%
 					String[] bulletStyleOptions = theme.getSettingOptions("bullet-style");
-
-					for (String bulletStyleOption : bulletStyleOptions) {
 					%>
 
-						<aui:option label="<%= LanguageUtil.get(pageContext, bulletStyleOption) %>" selected="<%= bulletStyle.equals(bulletStyleOption) %>" />
+					<c:choose>
+						<c:when test="<%= bulletStyleOptions == null || bulletStyleOptions.length == 0 %>">
+							<aui:option label="default" value="" />
+						</c:when>
+						<c:otherwise>
 
-					<%
-					}
-					%>
+							<%
+							for (String bulletStyleOption : bulletStyleOptions) {
+							%>
 
-					<c:if test="<%= bulletStyleOptions.length == 0 %>">
-						<aui:option label="default" value="" />
-					</c:if>
+								<aui:option label="<%= LanguageUtil.get(pageContext, bulletStyleOption) %>" selected="<%= bulletStyle.equals(bulletStyleOption) %>" />
+
+							<%
+							}
+							%>
+
+						</c:otherwise>
+					</c:choose>
 				</aui:select>
 			</aui:fieldset>
 
