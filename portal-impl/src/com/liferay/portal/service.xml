@@ -649,6 +649,11 @@
 			<finder-column name="plid" />
 			<finder-column name="status" />
 		</finder>
+		<finder name="L_P_V" return-type="Collection">
+			<finder-column name="layoutSetBranchId" />
+			<finder-column name="plid" />
+			<finder-column name="variationName" />
+		</finder>
 	</entity>
 	<entity name="LayoutSet" local-service="true" remote-service="true">
 

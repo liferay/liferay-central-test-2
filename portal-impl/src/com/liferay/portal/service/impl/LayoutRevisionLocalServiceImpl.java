@@ -29,6 +29,7 @@ import com.liferay.portal.model.PortletPreferences;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.base.LayoutRevisionLocalServiceBaseImpl;
+import com.liferay.portal.util.comparator.LayoutRevisionIdComparator;
 
 import java.util.Date;
 import java.util.List;
@@ -215,6 +216,22 @@ public class LayoutRevisionLocalServiceImpl
 
 		return layoutRevisionPersistence.findByL_H_P(
 			layoutSetBranchId, head, plid);
+	}
+
+	public LayoutRevision getLayoutRevision(
+			long layoutSetBranchId, long plid, String variationName)
+		throws PortalException, SystemException {
+
+		List<LayoutRevision> layoutRevisions =
+			layoutRevisionPersistence.findByL_P_V(
+				layoutSetBranchId, plid, variationName, 0, 1,
+				new LayoutRevisionIdComparator(false));
+
+		if (!layoutRevisions.isEmpty()) {
+			return layoutRevisions.get(0);
+		}
+
+		return null;
 	}
 
 	public List<LayoutRevision> getLayoutRevisions(long plid)
