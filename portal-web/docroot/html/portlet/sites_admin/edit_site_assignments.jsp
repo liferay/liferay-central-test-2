@@ -93,9 +93,18 @@ request.setAttribute("edit_site_assignments.jsp-portletURL", portletURL);
 		<c:when test='<%= tabs1.equals("summary") %>'>
 			<aui:input name="keywords" type="hidden" value="" />
 
-			<div class="portlet-msg-info">
-				<liferay-ui:message key="membership-type" />: <liferay-ui:message key="<%= GroupConstants.getTypeLabel(group.getType()) %>" />
+			<div class="site-membership-type">
+				<liferay-ui:icon
+					image="assign"
+					label="<%= true %>"
+					message='<%= LanguageUtil.get(pageContext, "membership-type") + StringPool.COLON + StringPool.SPACE + LanguageUtil.get(pageContext, GroupConstants.getTypeLabel(group.getType())) %>'
+				/>
+
+				<liferay-ui:icon-help message='<%= LanguageUtil.get(pageContext, "membership-type-" + GroupConstants.getTypeLabel(group.getType()) + "-help") %>' />
+
 			</div>
+
+			<liferay-util:include page="/html/portlet/sites_admin/edit_site_assignments_organization.jsp" />
 
 			<liferay-util:include page="/html/portlet/sites_admin/edit_site_assignments_users.jsp" />
 

@@ -124,6 +124,7 @@ if (row == null) {
 			<portlet:param name="struts_action" value="/enterprise_admin/edit_user_roles" />
 			<portlet:param name="redirect" value="<%= redirect %>" />
 			<portlet:param name="groupId" value="<%= String.valueOf(organizationGroupId) %>" />
+			<portlet:param name="roleType" value="<%= String.valueOf(RoleConstants.TYPE_ORGANIZATION) %>" />
 		</portlet:renderURL>
 
 		<liferay-ui:icon

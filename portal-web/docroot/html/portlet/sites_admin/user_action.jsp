@@ -28,6 +28,7 @@ Group group = (Group)row.getParameter("group");
 	<c:if test="<%= permissionChecker.isGroupOwner(group.getGroupId()) %>">
 		<portlet:renderURL var="assignURL">
 			<portlet:param name="struts_action" value="/sites_admin/edit_site_assignments" />
+			<portlet:param name="tabs1" value="users" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
 			<portlet:param name="p_u_i_d" value="<%= String.valueOf(user2.getUserId()) %>" />
 			<portlet:param name="groupId" value="<%= String.valueOf(group.getGroupId()) %>" />
@@ -39,17 +40,18 @@ Group group = (Group)row.getParameter("group");
 			url="<%= assignURL %>"
 		/>
 
-		<portlet:renderURL var="assignURL">
+		<portlet:actionURL var="removeURL">
 			<portlet:param name="struts_action" value="/sites_admin/edit_site_assignments" />
+			<portlet:param name="<%= Constants.CMD %>" value="group_users" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
-			<portlet:param name="p_u_i_d" value="<%= String.valueOf(user2.getUserId()) %>" />
+			<portlet:param name="removeUserIds" value="<%= String.valueOf(user2.getUserId()) %>" />
 			<portlet:param name="groupId" value="<%= String.valueOf(group.getGroupId()) %>" />
-		</portlet:renderURL>
+		</portlet:actionURL>
 
 		<liferay-ui:icon
 			image="assign_user_roles"
 			message="remove-membership"
-			url="<%= assignURL %>"
+			url="<%= removeURL %>"
 		/>
 	</c:if>
 </liferay-ui:icon-menu>

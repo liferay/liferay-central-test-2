@@ -39,5 +39,19 @@ Group group = (Group)row.getParameter("group");
 			message="assign-site-roles"
 			url="<%= assignURL %>"
 		/>
+
+		<portlet:actionURL var="removeURL">
+			<portlet:param name="struts_action" value="/sites_admin/edit_site_assignments" />
+			<portlet:param name="<%= Constants.CMD %>" value="group_user_groups" />
+			<portlet:param name="redirect" value="<%= currentURL %>" />
+			<portlet:param name="removeUserGroupIds" value="<%= String.valueOf(userGroup.getUserGroupId()) %>" />
+			<portlet:param name="groupId" value="<%= String.valueOf(group.getGroupId()) %>" />
+		</portlet:actionURL>
+
+		<liferay-ui:icon
+			image="assign_user_roles"
+			message="remove-membership"
+			url="<%= removeURL %>"
+		/>
 	</c:if>
 </liferay-ui:icon-menu>

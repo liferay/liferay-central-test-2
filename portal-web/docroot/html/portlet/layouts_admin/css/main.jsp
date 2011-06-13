@@ -304,6 +304,11 @@
 			}
 		}
 	}
+
+	.site-membership-type {
+		font-weight: bold;
+		padding: 0px 0px 15px;
+	}
 }
 
 .aui-tree-node-selected {

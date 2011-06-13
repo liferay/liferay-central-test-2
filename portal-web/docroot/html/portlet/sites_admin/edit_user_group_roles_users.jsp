@@ -62,10 +62,7 @@ PortletURL portletURL = (PortletURL)request.getAttribute("edit_user_group_roles.
 
 	LinkedHashMap userGroupParams = new LinkedHashMap();
 
-	if (group.isOrganization()) {
-		userGroupParams.put("userGroupsOrgs", new Long(organization.getOrganizationId()));
-	}
-	else {
+	if (group.isSite()) {
 		userGroupParams.put("userGroupsGroups", new Long(group.getGroupId()));
 	}
 
