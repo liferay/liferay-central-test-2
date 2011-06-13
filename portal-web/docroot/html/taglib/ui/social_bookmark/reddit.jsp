@@ -30,9 +30,9 @@ if (displayStyle.equals("vertical")) {
 	</c:when>
 	<c:otherwise>
 		<script type="text/javascript">
-			reddit_newwindow='1'
-			reddit_title = "<%= title %>";
-			reddit_url = "<%= url %>";
+			reddit_newwindow='1';
+			reddit_title = '<%= title %>';
+			reddit_url = '<%= url %>';
 		</script>
 
 		<script type="text/javascript" src="http://www.reddit.com/static/button/<%= redditDisplayStyle %>.js"></script>

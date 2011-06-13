@@ -26,7 +26,9 @@ if (displayStyle.equals("vertical")) {
 
 <liferay-util:html-bottom outputKey="plusone">
 	<script type="text/javascript" src="https://apis.google.com/js/plusone.js">
-	  {lang: '<%= locale.getDisplayLanguage() %>'}
+		{
+			lang: '<%= locale.getDisplayLanguage() %>'
+		}
 	</script>
 </liferay-util:html-bottom>
 
