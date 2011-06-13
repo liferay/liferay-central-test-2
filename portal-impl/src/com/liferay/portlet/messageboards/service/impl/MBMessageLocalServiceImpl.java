@@ -77,6 +77,7 @@ import com.liferay.portlet.messageboards.model.impl.MBCategoryImpl;
 import com.liferay.portlet.messageboards.model.impl.MBMessageDisplayImpl;
 import com.liferay.portlet.messageboards.service.base.MBMessageLocalServiceBaseImpl;
 import com.liferay.portlet.messageboards.social.MBActivityKeys;
+import com.liferay.portlet.messageboards.util.BBCodeUtil;
 import com.liferay.portlet.messageboards.util.MBSubscriptionSender;
 import com.liferay.portlet.messageboards.util.MBUtil;
 import com.liferay.portlet.messageboards.util.MailingListThreadLocal;
@@ -1687,6 +1688,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		}
 
 		String contentURL = (String)serviceContext.getAttribute("redirect");
+		String userName = (String)serviceContext.getAttribute("emailUserName");
 
 		String fromName = PrefsPropsUtil.getString(
 			message.getCompanyId(), PropsKeys.ADMIN_EMAIL_FROM_NAME);
@@ -1698,14 +1700,23 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		String body = PrefsPropsUtil.getContent(
 			message.getCompanyId(), PropsKeys.DISCUSSION_EMAIL_BODY);
 
+		String userAddress = StringPool.BLANK;
+
+		if (Validator.isNull(userName)) {
+			userAddress = PortalUtil.getUserEmailAddress(message.getUserId());
+
+			userName = PortalUtil.getUserName(
+				message.getUserId(), StringPool.BLANK);
+		}
+
 		SubscriptionSender subscriptionSender = new SubscriptionSender();
 
 		subscriptionSender.setBody(body);
 		subscriptionSender.setCompanyId(message.getCompanyId());
 		subscriptionSender.setContextAttributes(
-			"[$COMMENTS_BODY$]", message.getBody(), "[$CONTENT_URL$]",
-			contentURL);
-		subscriptionSender.setContextUserPrefix("COMMENTS");
+			"[$COMMENTS_BODY$]", BBCodeUtil.getHTML(message.getBody()),
+			"[$COMMENTS_USER_ADDRESS$]", userAddress, "[$COMMENTS_USER_NAME$]",
+			userName, "[$CONTENT_URL$]", contentURL);
 		subscriptionSender.setFrom(fromAddress, fromName);
 		subscriptionSender.setGroupId(message.getGroupId());
 		subscriptionSender.setHtmlFormat(true);

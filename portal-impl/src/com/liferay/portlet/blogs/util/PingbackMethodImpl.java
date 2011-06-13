@@ -22,6 +22,7 @@ import com.liferay.portal.kernel.portlet.FriendlyURLMapperThreadLocal;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -132,10 +133,34 @@ public class PingbackMethodImpl implements Method {
 				}
 			}
 
+			ServiceContext serviceContext = new ServiceContext();
+
+			String layoutFullURL = PortalUtil.getLayoutFullURL(
+				groupId, PortletKeys.BLOGS);
+
+			serviceContext.setLayoutFullURL(layoutFullURL);
+
+			String emailUserName = LanguageUtil.get(
+				LocaleUtil.getDefault(), "pingback");
+
+			serviceContext.setAttribute("emailUserName", emailUserName);
+
+			Portlet portlet = PortletLocalServiceUtil.getPortletById(
+				companyId, PortletKeys.BLOGS);
+
+			StringBundler sb = new StringBundler(5);
+
+			sb.append(layoutFullURL);
+			sb.append(Portal.FRIENDLY_URL_SEPARATOR);
+			sb.append(portlet.getFriendlyURLMapping());
+			sb.append(StringPool.SLASH);
+			sb.append(entry.getUrlTitle());
+
+			serviceContext.setAttribute("redirect", sb.toString());
+
 			MBMessageLocalServiceUtil.addDiscussionMessage(
-				userId, StringPool.BLANK, groupId, className, classPK,
-				threadId, parentMessageId, StringPool.BLANK, body,
-				new ServiceContext());
+				userId, StringPool.BLANK, groupId, className, classPK, threadId,
+				parentMessageId, StringPool.BLANK, body, serviceContext);
 
 			return XmlRpcUtil.createSuccess("Pingback accepted");
 		}
