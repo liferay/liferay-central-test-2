@@ -92,6 +92,7 @@ public class JSONServlet extends HttpServlet {
 
 	protected void resolveRemoteUser(HttpServletRequest request)
 		throws Exception {
+
 		String remoteUser = request.getRemoteUser();
 
 		if (_log.isDebugEnabled()) {
