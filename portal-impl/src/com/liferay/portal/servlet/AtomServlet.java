@@ -20,16 +20,11 @@ import com.liferay.portal.kernel.atom.AtomCollectionAdapter;
 import com.liferay.portal.kernel.atom.AtomCollectionAdapterRegistryUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.CompanyThreadLocal;
-import com.liferay.portal.security.auth.PrincipalThreadLocal;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.security.permission.PermissionCheckerFactoryUtil;
 import com.liferay.portal.security.permission.PermissionThreadLocal;
-import com.liferay.portal.service.UserLocalServiceUtil;
-import com.liferay.portal.util.PortalInstances;
 
 import java.util.List;
 
@@ -67,38 +62,17 @@ public class AtomServlet extends AbderaServlet {
 		throws ServletException {
 
 		try {
-			User user = null;
+			UserCompanyResolver userCompanyResolver =
+				new UserCompanyResolver(request);
 
-			long companyId = ParamUtil.getLong(request, "companyId");
-
-			String remoteUser = request.getRemoteUser();
-
-			if (_log.isDebugEnabled()) {
-				_log.debug("Remote user " + remoteUser);
-			}
-
-			if (remoteUser != null) {
-				PrincipalThreadLocal.setName(remoteUser);
-
-				long userId = GetterUtil.getLong(remoteUser);
-
-				user = UserLocalServiceUtil.getUserById(userId);
-
-				if (companyId == 0) {
-					companyId = user.getCompanyId();
-				}
-			}
-			else {
-				if (companyId == 0) {
-					companyId = PortalInstances.getCompanyId(request);
-				}
-
-				if (companyId != 0) {
-					user = UserLocalServiceUtil.getDefaultUser(companyId);
-				}
-			}
+			User user = userCompanyResolver.getUser();
 
 			if (user != null) {
+
+				if (_log.isDebugEnabled()) {
+					_log.debug("User " + user.getUserId());
+				}
+
 				PermissionChecker permissionChecker =
 					PermissionCheckerFactoryUtil.create(user, true);
 
@@ -106,6 +80,8 @@ public class AtomServlet extends AbderaServlet {
 
 				AtomUtil.saveUserInRequest(request, user);
 			}
+
+			long companyId = userCompanyResolver.getCompanyId();
 
 			CompanyThreadLocal.setCompanyId(companyId);
 
