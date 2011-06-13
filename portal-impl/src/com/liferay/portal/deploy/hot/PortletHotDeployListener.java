@@ -15,6 +15,8 @@
 package com.liferay.portal.deploy.hot;
 
 import com.liferay.portal.apache.bridges.struts.LiferayServletContextProvider;
+import com.liferay.portal.kernel.atom.AtomCollectionAdapter;
+import com.liferay.portal.kernel.atom.AtomCollectionAdapterRegistryUtil;
 import com.liferay.portal.kernel.concurrent.LockRegistry;
 import com.liferay.portal.kernel.configuration.Configuration;
 import com.liferay.portal.kernel.configuration.ConfigurationFactoryUtil;
@@ -179,6 +181,14 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 
 		if (assetRendererFactories != null) {
 			AssetRendererFactoryRegistryUtil.unregister(assetRendererFactories);
+		}
+
+		List<AtomCollectionAdapter<?>> atomCollectionAdapters =
+			portlet.getAtomCollectionAdapterInstances();
+
+		if (atomCollectionAdapters != null) {
+			AtomCollectionAdapterRegistryUtil.unregister(
+				atomCollectionAdapters);
 		}
 
 		List<WorkflowHandler> workflowHandlers =

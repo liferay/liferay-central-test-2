@@ -599,7 +599,7 @@ public class PortletBagFactory {
 					AtomCollectionAdapter.class, atomCollectionAdapterClass);
 
 			AtomCollectionAdapterRegistryUtil.register(
-				atomCollectionAdapterClass, atomCollectionAdapterInstance);
+				atomCollectionAdapterInstance);
 
 			atomCollectionAdapterInstances.add(atomCollectionAdapterInstance);
 		}
