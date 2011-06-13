@@ -101,7 +101,7 @@ public class PortletURLAction extends Action {
 		}
 
 		if (doAsUserId > 0) {
-			portletURL.setDoAsUserId(doAsUserId);
+			//portletURL.setDoAsUserId(doAsUserId);
 		}
 
 		if (Validator.isNotNull(doAsUserLanguageId)) {
