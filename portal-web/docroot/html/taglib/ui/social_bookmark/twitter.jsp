@@ -16,4 +16,16 @@
 
 <%@ include file="/html/taglib/ui/social_bookmark/init.jsp" %>
 
-<aui:a cssClass="social-bookmark-link" href="<%= postUrl %>" target="<%= target %>"><liferay-ui:message key="<%= messageKey %>" /></aui:a>
+<%
+String twitterDisplayStyle = displayStyle;
+
+if (displayStyle.equals("simple")) {
+	twitterDisplayStyle = "none";
+}
+%>
+
+<a class="twitter-share-button" data-count="<%= twitterDisplayStyle %>" data-lang="<%= locale.getDisplayLanguage() %>" data-text="<%= title %>" data-url="<%= url %>" href="http://twitter.com/share"><liferay-ui:message key="tweet" /></a>
+
+<liferay-util:html-bottom outputKey="twitter">
+	<script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+</liferay-util:html-bottom>

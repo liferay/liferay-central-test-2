@@ -16,4 +16,19 @@
 
 <%@ include file="/html/taglib/ui/social_bookmark/init.jsp" %>
 
-<aui:a cssClass="social-bookmark-link" href="<%= postUrl %>" target="<%= target %>"><liferay-ui:message key="<%= messageKey %>" /></aui:a>
+<%
+String diggDisplayStyle = "DiggCompact";
+
+if (displayStyle.equals("simple")) {
+	diggDisplayStyle = "DiggIcon";
+}
+else if (displayStyle.equals("vertical")) {
+	diggDisplayStyle = "DiggMedium";
+}
+%>
+
+<liferay-util:html-bottom outputKey="digg">
+	<script type="text/javascript" src="http://widgets.digg.com/buttons.js"></script>
+</liferay-util:html-bottom>
+
+<a class="DiggThisButton <%= diggDisplayStyle %>" href="http://digg.com/submit?url=<%= HttpUtil.encodeURL(url) %>&amp;title=<%= HttpUtil.encodeURL(title) %>"></a>

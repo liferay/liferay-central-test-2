@@ -1713,6 +1713,8 @@ public interface PropsKeys {
 
 	public static final String SITES_CONTROL_PANEL_MEMBERS_VISIBLE = "sites.control.panel.members.visible";
 
+	public static final String SOCIAL_BOOKMARK_JSP = "social.bookmark.jsp";
+
 	public static final String SOCIAL_BOOKMARK_POST_URL = "social.bookmark.post.url";
 
 	public static final String SOCIAL_BOOKMARK_TYPES = "social.bookmark.types";

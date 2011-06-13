@@ -16,4 +16,18 @@
 
 <%@ include file="/html/taglib/ui/social_bookmark/init.jsp" %>
 
-<aui:a cssClass="social-bookmark-link" href="<%= postUrl %>" target="<%= target %>"><liferay-ui:message key="<%= messageKey %>" /></aui:a>
+<%
+String plusOneDisplayStyle = "medium";
+
+if (displayStyle.equals("vertical")) {
+	plusOneDisplayStyle = "tall";
+}
+%>
+
+<liferay-util:html-bottom outputKey="plusone">
+	<script type="text/javascript" src="https://apis.google.com/js/plusone.js">
+	  {lang: '<%= locale.getDisplayLanguage() %>'}
+	</script>
+</liferay-util:html-bottom>
+
+<g:plusone count="<%= !displayStyle.equals("simple") %>" size="<%= plusOneDisplayStyle %>" href="<%= url %>"></g:plusone>

@@ -29,9 +29,10 @@
 
 			<%
 			for (int i = 0; i < typesArray.length; i++) {
+				String styleClass = "taglib-social-bookmark-" + typesArray[i];
 			%>
 
-				<li>
+				<li class="<%= styleClass%>">
 					<liferay-ui:social-bookmark type="<%= typesArray[i] %>" url="<%= url %>" title="<%= title %>" target="<%= target %>" />
 				</li>
 

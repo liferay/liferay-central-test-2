@@ -53,39 +53,23 @@
 	height: 1%;
 }
 
-.taglib-social-bookmarks li a {
+.taglib-social-bookmarks li .social-bookmark-link {
 	background: url() no-repeat 0 50%;
 	padding: 3px 2px 3px 20px;
 }
 
-.taglib-social-bookmarks a.taglib-social-bookmark-blinklist {
+.taglib-social-bookmarks .taglib-social-bookmark-blinklist a.social-bookmark-link {
 	background-image: url(<%= themeImagesPath %>/social_bookmarks/blinklist.png);
 }
 
-.taglib-social-bookmarks a.taglib-social-bookmark-delicious {
+.taglib-social-bookmarks .taglib-social-bookmark-delicious a.social-bookmark-link {
 	background-image: url(<%= themeImagesPath %>/social_bookmarks/delicious.png);
 }
 
-.taglib-social-bookmarks a.taglib-social-bookmark-digg {
-	background-image: url(<%= themeImagesPath %>/social_bookmarks/digg.png);
-}
-
-.taglib-social-bookmarks a.taglib-social-bookmark-facebook {
-	background-image: url(<%= themeImagesPath %>/social_bookmarks/facebook.png);
-}
-
-.taglib-social-bookmarks a.taglib-social-bookmark-furl {
-	background-image: url(<%= themeImagesPath %>/social_bookmarks/furl.png);
-}
-
-.taglib-social-bookmarks a.taglib-social-bookmark-newsvine {
+.taglib-social-bookmarks .taglib-social-bookmark-newsvine a.social-bookmark-link {
 	background-image: url(<%= themeImagesPath %>/social_bookmarks/newsvine.png);
 }
 
-.taglib-social-bookmarks a.taglib-social-bookmark-reddit {
-	background-image: url(<%= themeImagesPath %>/social_bookmarks/reddit.png);
-}
-
-.taglib-social-bookmarks a.taglib-social-bookmark-technorati {
+.taglib-social-bookmarks .taglib-social-bookmark-technorati a.social-bookmark-link {
 	background-image: url(<%= themeImagesPath %>/social_bookmarks/technorati.png);
 }

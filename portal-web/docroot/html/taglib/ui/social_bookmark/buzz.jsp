@@ -16,4 +16,19 @@
 
 <%@ include file="/html/taglib/ui/social_bookmark/init.jsp" %>
 
-<aui:a cssClass="social-bookmark-link" href="<%= postUrl %>" target="<%= target %>"><liferay-ui:message key="<%= messageKey %>" /></aui:a>
+<%
+String buzzDisplayStyle = "small-count";
+
+if (displayStyle.equals("simple")) {
+	buzzDisplayStyle = "small-button";
+}
+else if (displayStyle.equals("vertical")) {
+	buzzDisplayStyle = "normal-count";
+}
+%>
+
+<liferay-util:html-bottom outputKey="buzz">
+	<script type="text/javascript" src="http://www.google.com/buzz/api/button.js"></script>
+</liferay-util:html-bottom>
+
+<a class="google-buzz-button" data-button-style="<%= buzzDisplayStyle %>" data-locale="<%= locale.getLanguage() %>" data-url="<%= url %>" href="http://www.google.com/buzz/post"  title="<liferay-ui:message key="publish-in-google-buzz" />" >buzz</a>
