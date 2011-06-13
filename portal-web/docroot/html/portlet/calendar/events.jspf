@@ -28,9 +28,11 @@ headerNames.add(StringPool.BLANK);
 
 SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, iteratorURL, headerNames, null);
 
-List results = CalEventLocalServiceUtil.getEvents(scopeGroupId, eventType, searchContainer.getStart(), searchContainer.getEnd());
+int total = CalEventLocalServiceUtil.getEventsCount(scopeGroupId, eventType);
 
-searchContainer.setTotal(results.size());
+searchContainer.setTotal(total);
+
+List results = CalEventLocalServiceUtil.getEvents(scopeGroupId, eventType, searchContainer.getStart(), searchContainer.getEnd());
 
 searchContainer.setResults(results);
 

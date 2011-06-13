@@ -251,6 +251,10 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 
 		indexer.reindex(event);
 
+		// Pool
+
+		CalEventLocalUtil.clearEventsPool(event.getGroupId());
+
 		return event;
 	}
 
@@ -396,6 +400,9 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 
 		indexer.delete(event);
 
+		// Pool
+
+		CalEventLocalUtil.clearEventsPool(event.getGroupId());
 	}
 
 	public void deleteEvent(long eventId)
@@ -476,39 +483,49 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 			Arrays.sort(types);
 		}
 
-		List<CalEvent> events = new ArrayList<CalEvent>();
+		Map<String, List<CalEvent>> eventsPool =
+			CalEventLocalUtil.getEventsPool(groupId);
 
-		// Time zone sensitive
+		String key = CalUtil.toString(cal, types);
 
-		List<CalEvent> events1 = calEventFinder.filterFindByG_SD_T(
-			groupId, CalendarUtil.getGTDate(cal),
-			CalendarUtil.getLTDate(cal), true, types);
+		List<CalEvent> events = eventsPool.get(key);
 
-		// Time zone insensitive
+		if (events == null) {
 
-		Calendar tzICal = CalendarFactoryUtil.getCalendar(
-			TimeZoneUtil.getDefault());
+			// Time zone sensitive
 
-		tzICal.set(
-			cal.get(Calendar.YEAR), cal.get(Calendar.MONTH),
-			cal.get(Calendar.DATE));
+			List<CalEvent> events1 = calEventFinder.findByG_SD_T(
+				groupId, CalendarUtil.getGTDate(cal),
+				CalendarUtil.getLTDate(cal), true, types);
 
-		List<CalEvent> events2 = calEventFinder.filterFindByG_SD_T(
-			groupId, CalendarUtil.getGTDate(tzICal),
-			CalendarUtil.getLTDate(tzICal), false, types);
+			// Time zone insensitive
 
-		// Create new list
+			Calendar tzICal = CalendarFactoryUtil.getCalendar(
+				TimeZoneUtil.getDefault());
 
-		events = new ArrayList<CalEvent>();
+			tzICal.set(
+				cal.get(Calendar.YEAR), cal.get(Calendar.MONTH),
+				cal.get(Calendar.DATE));
 
-		events.addAll(events1);
-		events.addAll(events2);
+			List<CalEvent> events2 = calEventFinder.findByG_SD_T(
+				groupId, CalendarUtil.getGTDate(tzICal),
+				CalendarUtil.getLTDate(tzICal), false, types);
 
-		// Add repeating events
+			// Create new list
 
-		events.addAll(getRepeatingEvents(groupId, cal, types));
+			events = new ArrayList<CalEvent>();
 
-		events = new UnmodifiableList<CalEvent>(events);
+			events.addAll(events1);
+			events.addAll(events2);
+
+			// Add repeating events
+
+			events.addAll(getRepeatingEvents(groupId, cal, types));
+
+			events = new UnmodifiableList<CalEvent>(events);
+
+			eventsPool.put(key, events);
+		}
 
 		return events;
 	}
@@ -527,11 +544,10 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 		if ((types != null) && (types.length > 0) &&
 			((types.length > 1) || Validator.isNotNull(types[0]))) {
 
-			return calEventPersistence.filterFindByG_T(
-				groupId, types, start, end);
+			return calEventPersistence.findByG_T(groupId, types, start, end);
 		}
 		else {
-			return calEventPersistence.filterFindByGroupId(groupId, start, end);
+			return calEventPersistence.findByGroupId(groupId, start, end);
 		}
 	}
 
@@ -568,16 +584,25 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 			long groupId, Calendar cal, String[] types)
 		throws SystemException {
 
-		List<CalEvent> events = new ArrayList<CalEvent>();
+		Map<String, List<CalEvent>> eventsPool =
+			CalEventLocalUtil.getEventsPool(groupId);
 
-		if (types != null) {
-			events = calEventPersistence.findByG_T_R(groupId, types, true);
-		}
-		else {
-			events = calEventPersistence.findByG_R(groupId, true);
-		}
+		String key = "recurrence".concat(CalUtil.toString(null, types));
 
-		events = new UnmodifiableList<CalEvent>(events);
+		List<CalEvent> events = eventsPool.get(key);
+
+		if (events == null) {
+			if (types != null) {
+				events = calEventPersistence.findByG_T_R(groupId, types, true);
+			}
+			else {
+				events = calEventPersistence.findByG_R(groupId, true);
+			}
+
+			events = new UnmodifiableList<CalEvent>(events);
+
+			eventsPool.put(key, events);
+		}
 
 		if (cal != null) {
 
@@ -812,6 +837,10 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 		Indexer indexer = IndexerRegistryUtil.getIndexer(CalEvent.class);
 
 		indexer.reindex(event);
+
+		// Pool
+
+		CalEventLocalUtil.clearEventsPool(event.getGroupId());
 
 		return event;
 	}
