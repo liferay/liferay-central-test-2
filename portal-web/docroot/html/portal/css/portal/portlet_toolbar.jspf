@@ -78,18 +78,6 @@
 	background-image: url(<%= themeImagesPath %>/common/export.png);
 }
 
-.lfr-portlet-toolbar .lfr-toolbar-button.view-memberships-button a {
-	background-image: url(<%= themeImagesPath %>/common/assign.png);
-}
-
-.lfr-portlet-toolbar .lfr-toolbar-button.view-membership-requests-button a {
-	background-image: url(<%= themeImagesPath %>/common/manage_task.png);
-}
-
-.lfr-portlet-toolbar .lfr-toolbar-button.view-teams-button a {
-	background-image: url(<%= themeImagesPath %>/common/team_icon.png);
-}
-
 .lfr-portlet-toolbar .lfr-toolbar-button.view-templates a {
 	background-image: url(<%= themeImagesPath %>/common/view_templates.png);
 }
