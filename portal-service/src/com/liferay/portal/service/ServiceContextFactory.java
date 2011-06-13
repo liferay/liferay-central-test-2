@@ -16,11 +16,7 @@ package com.liferay.portal.service;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
-<<<<<<< HEAD
 import com.liferay.portal.kernel.util.ArrayUtil;
-=======
-import com.liferay.portal.kernel.servlet.HttpHeaders;
->>>>>>> LPS-17928 Add remote address, host and request headers to ServiceContext
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringUtil;
