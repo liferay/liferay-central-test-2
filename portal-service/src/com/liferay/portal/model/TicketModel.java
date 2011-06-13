@@ -150,21 +150,7 @@ public interface TicketModel extends AttachedModel, BaseModel<Ticket> {
 	public void setKey(String key);
 
 	/**
-	 * Returns the expiration date of this ticket.
-	 *
-	 * @return the expiration date of this ticket
-	 */
-	public Date getExpirationDate();
-
-	/**
-	 * Sets the expiration date of this ticket.
-	 *
-	 * @param expirationDate the expiration date of this ticket
-	 */
-	public void setExpirationDate(Date expirationDate);
-
-	/**
-	 * Gets the type of this ticket.
+	 * Returns the type of this ticket.
 	 *
 	 * @return the type of this ticket
 	 */
@@ -178,7 +164,7 @@ public interface TicketModel extends AttachedModel, BaseModel<Ticket> {
 	public void setType(int type);
 
 	/**
-	 * Gets the extra info of this ticket.
+	 * Returns the extra info of this ticket.
 	 *
 	 * @return the extra info of this ticket
 	 */
@@ -191,6 +177,20 @@ public interface TicketModel extends AttachedModel, BaseModel<Ticket> {
 	 * @param extraInfo the extra info of this ticket
 	 */
 	public void setExtraInfo(String extraInfo);
+
+	/**
+	 * Returns the expiration date of this ticket.
+	 *
+	 * @return the expiration date of this ticket
+	 */
+	public Date getExpirationDate();
+
+	/**
+	 * Sets the expiration date of this ticket.
+	 *
+	 * @param expirationDate the expiration date of this ticket
+	 */
+	public void setExpirationDate(Date expirationDate);
 
 	public boolean isNew();
 

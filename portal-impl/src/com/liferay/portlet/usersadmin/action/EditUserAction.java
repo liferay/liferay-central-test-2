@@ -683,7 +683,7 @@ public class EditUserAction extends PortletAction {
 		if (company.isStrangersVerify() &&
 			!oldEmailAddress.equalsIgnoreCase(emailAddress)) {
 
-			SessionMessages.add(actionRequest, "verify_email");
+			SessionMessages.add(actionRequest, "verificationEmailSent");
 		}
 
 		return new Object[] {user, oldScreenName, oldLanguageId};

@@ -221,8 +221,8 @@ public interface TicketLocalService {
 	public void setBeanIdentifier(java.lang.String beanIdentifier);
 
 	public com.liferay.portal.model.Ticket addTicket(long companyId,
-		java.lang.String className, long classPK,
-		java.util.Date expirationDate, java.lang.String extraInfo, int type,
+		java.lang.String className, long classPK, int type,
+		java.lang.String extraInfo, java.util.Date expirationDate,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.SystemException;
 

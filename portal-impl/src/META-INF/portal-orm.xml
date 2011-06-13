@@ -934,13 +934,13 @@
 			<basic name="key">
 				<column name="KEY_" />
 			</basic>
-			<basic name="expirationDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
 			<basic name="type">
 				<column name="TYPE_" />
 			</basic>
 			<basic name="extraInfo" />
+			<basic name="expirationDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />
 		</attributes>

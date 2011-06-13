@@ -645,10 +645,7 @@ public interface UserModel extends BaseModel<User> {
 	public void setAgreedToTermsOfUse(boolean agreedToTermsOfUse);
 
 	/**
-<<<<<<< HEAD
-	 * Returns the status of this user.
-=======
-	 * Gets the email address verified of this user.
+	 * Returns the email address verified of this user.
 	 *
 	 * @return the email address verified of this user
 	 */
@@ -669,8 +666,7 @@ public interface UserModel extends BaseModel<User> {
 	public void setEmailAddressVerified(boolean emailAddressVerified);
 
 	/**
-	 * Gets the status of this user.
->>>>>>> LPS-11606 Verify users email address - generated
+	 * Returns the status of this user.
 	 *
 	 * @return the status of this user
 	 */

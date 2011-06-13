@@ -17,7 +17,6 @@ package com.liferay.portal.struts;
 import com.liferay.portal.LayoutPermissionException;
 import com.liferay.portal.PortletActiveException;
 import com.liferay.portal.UserActiveException;
-import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -720,7 +719,7 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 				}
 			}
 
-			// Authenticated users should have verified email address
+			// Authenticated users should have a verified email address
 
 			boolean emailAddressVerificationRequired = false;
 

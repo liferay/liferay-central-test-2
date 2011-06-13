@@ -62,11 +62,11 @@ public class TicketModelImpl extends BaseModelImpl<Ticket>
 			{ "classNameId", Types.BIGINT },
 			{ "classPK", Types.BIGINT },
 			{ "key_", Types.VARCHAR },
-			{ "expirationDate", Types.TIMESTAMP },
 			{ "type_", Types.INTEGER },
-			{ "extraInfo", Types.CLOB }
+			{ "extraInfo", Types.CLOB },
+			{ "expirationDate", Types.TIMESTAMP }
 		};
-	public static final String TABLE_SQL_CREATE = "create table Ticket (ticketId LONG not null primary key,companyId LONG,createDate DATE null,classNameId LONG,classPK LONG,key_ VARCHAR(75) null,expirationDate DATE null,type_ INTEGER,extraInfo TEXT null)";
+	public static final String TABLE_SQL_CREATE = "create table Ticket (ticketId LONG not null primary key,companyId LONG,createDate DATE null,classNameId LONG,classPK LONG,key_ VARCHAR(75) null,type_ INTEGER,extraInfo TEXT null,expirationDate DATE null)";
 	public static final String TABLE_SQL_DROP = "drop table Ticket";
 	public static final String ORDER_BY_JPQL = " ORDER BY ticket.ticketId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY Ticket.ticketId ASC";
@@ -179,14 +179,6 @@ public class TicketModelImpl extends BaseModelImpl<Ticket>
 		return GetterUtil.getString(_originalKey);
 	}
 
-	public Date getExpirationDate() {
-		return _expirationDate;
-	}
-
-	public void setExpirationDate(Date expirationDate) {
-		_expirationDate = expirationDate;
-	}
-
 	public int getType() {
 		return _type;
 	}
@@ -206,6 +198,14 @@ public class TicketModelImpl extends BaseModelImpl<Ticket>
 
 	public void setExtraInfo(String extraInfo) {
 		_extraInfo = extraInfo;
+	}
+
+	public Date getExpirationDate() {
+		return _expirationDate;
+	}
+
+	public void setExpirationDate(Date expirationDate) {
+		_expirationDate = expirationDate;
 	}
 
 	public Ticket toEscapedModel() {
@@ -240,9 +240,9 @@ public class TicketModelImpl extends BaseModelImpl<Ticket>
 		ticketImpl.setClassNameId(getClassNameId());
 		ticketImpl.setClassPK(getClassPK());
 		ticketImpl.setKey(getKey());
-		ticketImpl.setExpirationDate(getExpirationDate());
 		ticketImpl.setType(getType());
 		ticketImpl.setExtraInfo(getExtraInfo());
+		ticketImpl.setExpirationDate(getExpirationDate());
 
 		ticketImpl.resetOriginalValues();
 
@@ -318,12 +318,12 @@ public class TicketModelImpl extends BaseModelImpl<Ticket>
 		sb.append(getClassPK());
 		sb.append(", key=");
 		sb.append(getKey());
-		sb.append(", expirationDate=");
-		sb.append(getExpirationDate());
 		sb.append(", type=");
 		sb.append(getType());
 		sb.append(", extraInfo=");
 		sb.append(getExtraInfo());
+		sb.append(", expirationDate=");
+		sb.append(getExpirationDate());
 		sb.append("}");
 
 		return sb.toString();
@@ -361,16 +361,16 @@ public class TicketModelImpl extends BaseModelImpl<Ticket>
 		sb.append(getKey());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>expirationDate</column-name><column-value><![CDATA[");
-		sb.append(getExpirationDate());
-		sb.append("]]></column-value></column>");
-		sb.append(
 			"<column><column-name>type</column-name><column-value><![CDATA[");
 		sb.append(getType());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>extraInfo</column-name><column-value><![CDATA[");
 		sb.append(getExtraInfo());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>expirationDate</column-name><column-value><![CDATA[");
+		sb.append(getExpirationDate());
 		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
@@ -385,8 +385,8 @@ public class TicketModelImpl extends BaseModelImpl<Ticket>
 	private long _classPK;
 	private String _key;
 	private String _originalKey;
-	private Date _expirationDate;
 	private int _type;
 	private String _extraInfo;
+	private Date _expirationDate;
 	private transient ExpandoBridge _expandoBridge;
 }

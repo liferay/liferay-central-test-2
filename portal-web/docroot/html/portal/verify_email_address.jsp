@@ -19,7 +19,7 @@
 <%
 PasswordPolicy passwordPolicy = user.getPasswordPolicy();
 
-String ticket = ParamUtil.getString(request, "ticket");
+String key = ParamUtil.getString(request, "key");
 %>
 
 <aui:form action='<%= themeDisplay.getPathMain() + "/portal/verify_email_address" %>' method="post" name="fm">
@@ -30,35 +30,35 @@ String ticket = ParamUtil.getString(request, "ticket");
 	<aui:input name="<%= WebKeys.REFERER %>" type="hidden" value='<%= themeDisplay.getPathMain() + "?doAsUserId=" + themeDisplay.getDoAsUserId() %>' />
 
 	<div class="portlet-msg-info">
-		<liferay-ui:message key="please-enter-verification-code" />
+		<liferay-ui:message key="please-enter-your-verification-code" />
 	</div>
 
 	<c:if test="<%= !SessionErrors.isEmpty(request) %>">
-	<c:choose>
-		<c:when test="<%= SessionErrors.contains(request, DuplicateUserEmailAddressException.class.getName()) %>">
-			<div class="portlet-msg-error">
-				<liferay-ui:message key="the-email-address-you-requested-is-already-taken" />
-			</div>
-		</c:when>
-		<c:when test="<%= SessionErrors.contains(request, ReservedUserEmailAddressException.class.getName()) %>">
-			<div class="portlet-msg-error">
-				<liferay-ui:message key="the-email-address-you-requested-is-reserved" />
-			</div>
-		</c:when>
-		<c:when test="<%= SessionErrors.contains(request, UserEmailAddressException.class.getName()) %>">
-			<div class="portlet-msg-error">
-				<liferay-ui:message key="please-enter-a-valid-email-address" />
-			</div>
-		</c:when>
-		<c:otherwise>
-			<div class="portlet-msg-error">
-				<liferay-ui:message key="please-enter-a-valid-verification-code" />
-			</div>
-		</c:otherwise>
-	</c:choose>
+		<c:choose>
+			<c:when test="<%= SessionErrors.contains(request, DuplicateUserEmailAddressException.class.getName()) %>">
+				<div class="portlet-msg-error">
+					<liferay-ui:message key="the-email-address-you-requested-is-already-taken" />
+				</div>
+			</c:when>
+			<c:when test="<%= SessionErrors.contains(request, ReservedUserEmailAddressException.class.getName()) %>">
+				<div class="portlet-msg-error">
+					<liferay-ui:message key="the-email-address-you-requested-is-reserved" />
+				</div>
+			</c:when>
+			<c:when test="<%= SessionErrors.contains(request, UserEmailAddressException.class.getName()) %>">
+				<div class="portlet-msg-error">
+					<liferay-ui:message key="please-enter-a-valid-email-address" />
+				</div>
+			</c:when>
+			<c:otherwise>
+				<div class="portlet-msg-error">
+					<liferay-ui:message key="please-enter-a-valid-verification-code" />
+				</div>
+			</c:otherwise>
+		</c:choose>
 	</c:if>
 
-	<aui:input class="lfr-input-text-container" label="email-verification-code" name="ticket" type="text" value="<%= ticket %>" size="36"/>
+	<aui:input class="lfr-input-text-container" label="email-verification-code" name="key" type="text" value="<%= key %>" size="36" />
 
 	<aui:button-row>
 		<aui:button type="submit" />
@@ -66,5 +66,5 @@ String ticket = ParamUtil.getString(request, "ticket");
 </aui:form>
 
 <aui:script>
-	Liferay.Util.focusFormField(document.fm.password1);
+	Liferay.Util.focusFormField(document.fm.key);
 </aui:script>

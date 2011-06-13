@@ -172,25 +172,7 @@ public class TicketWrapper implements Ticket {
 	}
 
 	/**
-	* Returns the expiration date of this ticket.
-	*
-	* @return the expiration date of this ticket
-	*/
-	public java.util.Date getExpirationDate() {
-		return _ticket.getExpirationDate();
-	}
-
-	/**
-	* Sets the expiration date of this ticket.
-	*
-	* @param expirationDate the expiration date of this ticket
-	*/
-	public void setExpirationDate(java.util.Date expirationDate) {
-		_ticket.setExpirationDate(expirationDate);
-	}
-
-	/**
-	* Gets the type of this ticket.
+	* Returns the type of this ticket.
 	*
 	* @return the type of this ticket
 	*/
@@ -208,7 +190,7 @@ public class TicketWrapper implements Ticket {
 	}
 
 	/**
-	* Gets the extra info of this ticket.
+	* Returns the extra info of this ticket.
 	*
 	* @return the extra info of this ticket
 	*/
@@ -223,6 +205,24 @@ public class TicketWrapper implements Ticket {
 	*/
 	public void setExtraInfo(java.lang.String extraInfo) {
 		_ticket.setExtraInfo(extraInfo);
+	}
+
+	/**
+	* Returns the expiration date of this ticket.
+	*
+	* @return the expiration date of this ticket
+	*/
+	public java.util.Date getExpirationDate() {
+		return _ticket.getExpirationDate();
+	}
+
+	/**
+	* Sets the expiration date of this ticket.
+	*
+	* @param expirationDate the expiration date of this ticket
+	*/
+	public void setExpirationDate(java.util.Date expirationDate) {
+		_ticket.setExpirationDate(expirationDate);
 	}
 
 	public boolean isNew() {

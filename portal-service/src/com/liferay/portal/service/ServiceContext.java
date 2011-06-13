@@ -14,6 +14,7 @@
 
 package com.liferay.portal.service;
 
+import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
@@ -214,6 +215,10 @@ public class ServiceContext implements Cloneable, Serializable {
 
 	public long getScopeGroupId() {
 		return _scopeGroupId;
+	}
+
+	public String getUserAgent() {
+		return _headers.get(HttpHeaders.USER_AGENT);
 	}
 
 	public String getUserDisplayURL() {

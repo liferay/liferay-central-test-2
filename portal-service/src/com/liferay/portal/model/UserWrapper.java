@@ -786,10 +786,7 @@ public class UserWrapper implements User {
 	}
 
 	/**
-<<<<<<< HEAD
-	* Returns the status of this user.
-=======
-	* Gets the email address verified of this user.
+	* Returns the email address verified of this user.
 	*
 	* @return the email address verified of this user
 	*/
@@ -816,8 +813,7 @@ public class UserWrapper implements User {
 	}
 
 	/**
-	* Gets the status of this user.
->>>>>>> LPS-11606 Verify users email address - generated
+	* Returns the status of this user.
 	*
 	* @return the status of this user
 	*/

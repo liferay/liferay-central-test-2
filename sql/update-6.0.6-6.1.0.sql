@@ -330,17 +330,16 @@ update Role_ set name = 'Organization User' where name = 'Organization Member';
 alter table Ticket add type_ INTEGER;
 alter table Ticket add extraInfo TEXT null;
 
-alter table User_ add status int;
 alter table User_ add emailAddressVerified BOOLEAN;
+alter table User_ add status int;
 
 COMMIT_TRANSACTION;
 
+update User_ set emailAddressVerified = TRUE;
 update User_ set status = 0;
 update User_ set status = 5 where active_ = FALSE;
 
 alter table User_ drop column active_;
-
-update User_ set emailAddressVerified = FALSE;
 
 create table UserGroups_Teams (
 	userGroupId LONG not null,

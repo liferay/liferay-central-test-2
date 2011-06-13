@@ -31,6 +31,7 @@ import com.liferay.portlet.PortletURLImpl;
 
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletURL;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -76,7 +77,7 @@ public class VerifyEmailAddressAction extends Action {
 		}
 		catch (Exception e) {
 			if (e instanceof PortalException ||
-					 e instanceof SystemException) {
+				e instanceof SystemException) {
 
 				SessionErrors.add(request, e.getClass().getName());
 
@@ -97,9 +98,9 @@ public class VerifyEmailAddressAction extends Action {
 
 		AuthTokenUtil.check(request);
 
-		String token = ParamUtil.getString(request, "ticket");
+		String key = ParamUtil.getString(request, "key");
 
-		UserLocalServiceUtil.verifyEmailAddress(token);
+		UserLocalServiceUtil.verifyEmailAddress(key);
 	}
 
 }

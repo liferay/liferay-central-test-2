@@ -36,9 +36,9 @@ public class TicketSoap implements Serializable {
 		soapModel.setClassNameId(model.getClassNameId());
 		soapModel.setClassPK(model.getClassPK());
 		soapModel.setKey(model.getKey());
-		soapModel.setExpirationDate(model.getExpirationDate());
 		soapModel.setType(model.getType());
 		soapModel.setExtraInfo(model.getExtraInfo());
+		soapModel.setExpirationDate(model.getExpirationDate());
 
 		return soapModel;
 	}
@@ -139,14 +139,6 @@ public class TicketSoap implements Serializable {
 		_key = key;
 	}
 
-	public Date getExpirationDate() {
-		return _expirationDate;
-	}
-
-	public void setExpirationDate(Date expirationDate) {
-		_expirationDate = expirationDate;
-	}
-
 	public int getType() {
 		return _type;
 	}
@@ -163,13 +155,21 @@ public class TicketSoap implements Serializable {
 		_extraInfo = extraInfo;
 	}
 
+	public Date getExpirationDate() {
+		return _expirationDate;
+	}
+
+	public void setExpirationDate(Date expirationDate) {
+		_expirationDate = expirationDate;
+	}
+
 	private long _ticketId;
 	private long _companyId;
 	private Date _createDate;
 	private long _classNameId;
 	private long _classPK;
 	private String _key;
-	private Date _expirationDate;
 	private int _type;
 	private String _extraInfo;
+	private Date _expirationDate;
 }

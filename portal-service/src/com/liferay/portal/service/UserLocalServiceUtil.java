@@ -2316,12 +2316,6 @@ public class UserLocalServiceUtil {
 				   .updateEmailAddressVerified(userId, emailAddressVerified);
 	}
 
-	public static void verifyEmailAddress(java.lang.String key)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		getService().verifyEmailAddress(key);
-	}
-
 	/**
 	* Updates the user's Facebook ID.
 	*
@@ -2741,6 +2735,12 @@ public class UserLocalServiceUtil {
 			smsSn, aimSn, facebookSn, icqSn, jabberSn, msnSn, mySpaceSn,
 			skypeSn, twitterSn, ymSn, jobTitle, groupIds, organizationIds,
 			roleIds, userGroupRoles, userGroupIds, serviceContext);
+	}
+
+	public static void verifyEmailAddress(java.lang.String key)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		getService().verifyEmailAddress(key);
 	}
 
 	public static UserLocalService getService() {

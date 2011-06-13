@@ -56,7 +56,6 @@ import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.search.QueryConfig;
 import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.search.Sort;
-import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
 import com.liferay.portal.kernel.util.ArrayUtil;
@@ -88,8 +87,8 @@ import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.RoleConstants;
 import com.liferay.portal.model.Ticket;
+import com.liferay.portal.model.TicketConstants;
 import com.liferay.portal.model.User;
-import com.liferay.portal.model.UserConstants;
 import com.liferay.portal.model.UserGroup;
 import com.liferay.portal.model.UserGroupRole;
 import com.liferay.portal.model.impl.LayoutImpl;
@@ -1449,9 +1448,8 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			}
 		}
 
-		long companyId = user.getCompanyId();
-
-		Company company = companyLocalService.getCompanyById(companyId);
+		Company company = companyPersistence.findByPrimaryKey(
+			user.getCompanyId());
 
 		if (company.isStrangersVerify()) {
 			sendEmailAddressVerification(
@@ -3191,108 +3189,100 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			User user, String emailAddress, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		long companyId = serviceContext.getCompanyId();
-
-		Company company = companyLocalService.getCompanyById(companyId);
+		Company company = companyLocalService.getCompanyById(
+			user.getCompanyId());
 
 		Ticket ticket = ticketLocalService.addTicket(
-			companyId, User.class.getName(), user.getUserId(),
-			null, emailAddress,
-			UserConstants.TICKET_TYPE_EMAIL_ADDRESS, serviceContext);
+			user.getCompanyId(), User.class.getName(), user.getUserId(),
+			TicketConstants.TYPE_EMAIL_ADDRESS, emailAddress, null,
+			serviceContext);
 
 		String verifyEmailAddressURL =
 			serviceContext.getPortalURL() + serviceContext.getPathMain() +
-				"/portal/verify_email_address?ticket=" + ticket.getKey();
+				"/portal/verify_email_address?key=" + ticket.getKey();
 
 		Layout layout = layoutLocalService.getLayout(serviceContext.getPlid());
 
-		if (!layout.isPrivateLayout() && !layout.getGroup().isUser()) {
+		Group group = layout.getGroup();
+
+		if (!layout.isPrivateLayout() && !group.isUser()) {
 			verifyEmailAddressURL += "&p_l_id=" + serviceContext.getPlid();
 		}
 
-		String remoteAddr = serviceContext.getRemoteAddr();
-
-		String remoteHost = serviceContext.getRemoteHost();
-
-		Map<String, String> headerMap = serviceContext.getHeaders();
-
-		String userAgent = headerMap.get("user-agent");
-
 		String fromName = PrefsPropsUtil.getString(
-				companyId, PropsKeys.ADMIN_EMAIL_FROM_NAME);
-
+			user.getCompanyId(), PropsKeys.ADMIN_EMAIL_FROM_NAME);
 		String fromAddress = PrefsPropsUtil.getString(
-			companyId, PropsKeys.ADMIN_EMAIL_FROM_ADDRESS);
+			user.getCompanyId(), PropsKeys.ADMIN_EMAIL_FROM_ADDRESS);
 
 		String toName = user.getFullName();
 		String toAddress = emailAddress;
 
 		String subject = PrefsPropsUtil.getContent(
-			companyId, PropsKeys.ADMIN_EMAIL_VERIFICATION_SUBJECT);
+			user.getCompanyId(), PropsKeys.ADMIN_EMAIL_VERIFICATION_SUBJECT);
 
 		String body = PrefsPropsUtil.getContent(
-			companyId, PropsKeys.ADMIN_EMAIL_VERIFICATION_BODY);
+			user.getCompanyId(), PropsKeys.ADMIN_EMAIL_VERIFICATION_BODY);
 
 		subject = StringUtil.replace(
 			subject,
 			new String[] {
-				"[$EMAIL_VERIFICATION_URL$]",
 				"[$EMAIL_VERIFICATION_CODE$]",
+				"[$EMAIL_VERIFICATION_URL$]",
 				"[$FROM_ADDRESS$]",
 				"[$FROM_NAME$]",
 				"[$PORTAL_URL$]",
+				"[$REMOTE_ADDRESS$]",
+				"[$REMOTE_HOST$]",
 				"[$TO_ADDRESS$]",
 				"[$TO_NAME$]",
 				"[$USER_AGENT$]",
 				"[$USER_ID$]",
-				"[$USER_SCREENNAME$]",
-				"[$REMOTE_ADDRESS$]",
-				"[$REMOTE_HOST$]"
+				"[$USER_SCREENNAME$]"
 			},
 			new String[] {
-				verifyEmailAddressURL,
 				ticket.getKey(),
+				verifyEmailAddressURL,
 				fromAddress,
 				fromName,
 				company.getVirtualHostname(),
+				serviceContext.getRemoteAddr(),
+				serviceContext.getRemoteHost(),
 				toAddress,
 				toName,
-				userAgent,
+				serviceContext.getUserAgent(),
 				String.valueOf(user.getUserId()),
-				user.getScreenName(),
-				remoteAddr,
-				remoteHost
+				user.getScreenName()
 			});
 
 		body = StringUtil.replace(
 			body,
 			new String[] {
-				"[$EMAIL_VERIFICATION_URL$]",
 				"[$EMAIL_VERIFICATION_CODE$]",
+				"[$EMAIL_VERIFICATION_URL$]",
 				"[$FROM_ADDRESS$]",
 				"[$FROM_NAME$]",
 				"[$PORTAL_URL$]",
+				"[$REMOTE_ADDRESS$]",
+				"[$REMOTE_HOST$]",
 				"[$TO_ADDRESS$]",
 				"[$TO_NAME$]",
 				"[$USER_AGENT$]",
 				"[$USER_ID$]",
-				"[$USER_SCREENNAME$]",
-				"[$REMOTE_ADDRESS$]",
-				"[$REMOTE_HOST$]"
+				"[$USER_SCREENNAME$]"
 			},
 			new String[] {
-				verifyEmailAddressURL,
 				ticket.getKey(),
+				verifyEmailAddressURL,
 				fromAddress,
 				fromName,
 				company.getVirtualHostname(),
+				serviceContext.getRemoteAddr(),
+				serviceContext.getRemoteHost(),
 				toAddress,
 				toName,
-				userAgent,
+				serviceContext.getUserAgent(),
 				String.valueOf(user.getUserId()),
-				user.getScreenName(),
-				remoteAddr,
-				remoteHost
+				user.getScreenName()
 			});
 
 		try {
@@ -3686,40 +3676,6 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		userPersistence.update(user, false);
 
 		return user;
-	}
-
-	public void verifyEmailAddress(String key)
-		throws PortalException, SystemException {
-
-		Ticket ticket = ticketLocalService.getTicket(key);
-
-		if (ticket.isExpired() &&
-			(ticket.getType() == UserConstants.TICKET_TYPE_EMAIL_ADDRESS)) {
-
-			throw new NoSuchTicketException();
-		}
-
-		User user = userPersistence.findByPrimaryKey(ticket.getClassPK());
-
-		String emailAddress = ticket.getExtraInfo().toLowerCase().trim();
-
-		if (!user.getEmailAddress().equalsIgnoreCase(emailAddress)) {
-			if (userPersistence.fetchByC_EA(
-				user.getCompanyId(), emailAddress) != null) {
-
-				throw new DuplicateUserEmailAddressException();
-			}
-
-			setEmailAddress(
-				user, StringPool.BLANK, user.getFirstName(),
-				user.getMiddleName(), user.getLastName(), emailAddress);
-		}
-
-		user.setEmailAddressVerified(true);
-
-		userPersistence.update(user, false);
-
-		ticketLocalService.deleteTicket(ticket);
 	}
 
 	/**
@@ -4617,15 +4573,53 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		indexer.reindex(user);
 
-		// Permission cache
-
-		PermissionCacheUtil.clearCache();
+		// Email address verification
 
 		if (sendEmailAddressVerification) {
 			sendEmailAddressVerification(user, emailAddress, serviceContext);
 		}
 
+		// Permission cache
+
+		PermissionCacheUtil.clearCache();
+
 		return user;
+	}
+
+	public void verifyEmailAddress(String key)
+		throws PortalException, SystemException {
+
+		Ticket ticket = ticketLocalService.getTicket(key);
+
+		if (ticket.isExpired() ||
+			(ticket.getType() != TicketConstants.TYPE_EMAIL_ADDRESS)) {
+
+			throw new NoSuchTicketException();
+		}
+
+		User user = userPersistence.findByPrimaryKey(ticket.getClassPK());
+
+		String emailAddress = ticket.getExtraInfo();
+
+		emailAddress = emailAddress.toLowerCase().trim();
+
+		if (!emailAddress.equals(user.getEmailAddress())) {
+			if (userPersistence.fetchByC_EA(
+					user.getCompanyId(), emailAddress) != null) {
+
+				throw new DuplicateUserEmailAddressException();
+			}
+
+			setEmailAddress(
+				user, StringPool.BLANK, user.getFirstName(),
+				user.getMiddleName(), user.getLastName(), emailAddress);
+		}
+
+		user.setEmailAddressVerified(true);
+
+		userPersistence.update(user, false);
+
+		ticketLocalService.deleteTicket(ticket);
 	}
 
 	/**
@@ -4923,14 +4917,6 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			throw new UserEmailAddressException();
 		}
 
-		String remoteAddr = serviceContext.getRemoteAddr();
-
-		String remoteHost = serviceContext.getRemoteHost();
-
-		Map<String, String> headerMap = serviceContext.getHeaders();
-
-		String userAgent = headerMap.get("user-agent");
-
 		User user = userPersistence.findByC_EA(companyId, emailAddress);
 
 		PasswordPolicy passwordPolicy = user.getPasswordPolicy();
@@ -4945,7 +4931,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 			Ticket ticket = ticketLocalService.addTicket(
 				companyId, User.class.getName(), user.getUserId(),
-				expirationDate, null, UserConstants.TICKET_TYPE_PASSWORD,
+				TicketConstants.TYPE_PASSWORD, null, expirationDate,
 				serviceContext);
 
 			passwordResetURL =
@@ -5039,11 +5025,11 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 				fromName,
 				passwordResetURL,
 				company.getVirtualHostname(),
-				remoteAddr,
-				remoteHost,
+				serviceContext.getRemoteAddr(),
+				serviceContext.getRemoteHost(),
 				toAddress,
 				toName,
-				HtmlUtil.escape(userAgent),
+				HtmlUtil.escape(serviceContext.getUserAgent()),
 				String.valueOf(user.getUserId()),
 				newPassword,
 				user.getScreenName()
@@ -5070,11 +5056,11 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 				fromName,
 				passwordResetURL,
 				company.getVirtualHostname(),
-				remoteAddr,
-				remoteHost,
+				serviceContext.getRemoteAddr(),
+				serviceContext.getRemoteHost(),
 				toAddress,
 				toName,
-				HtmlUtil.escape(userAgent),
+				HtmlUtil.escape(serviceContext.getUserAgent()),
 				String.valueOf(user.getUserId()),
 				newPassword,
 				user.getScreenName()

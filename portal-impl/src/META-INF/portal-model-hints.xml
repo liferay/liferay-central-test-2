@@ -746,11 +746,11 @@
 		<field name="classNameId" type="long" />
 		<field name="classPK" type="long" />
 		<field name="key" type="String" />
-		<field name="expirationDate" type="Date" />
 		<field name="type" type="int" />
 		<field name="extraInfo" type="String">
 			<hint-collection name="CLOB" />
 		</field>
+		<field name="expirationDate" type="Date" />
 	</model>
 	<model name="com.liferay.portal.model.User">
 		<default-hints>

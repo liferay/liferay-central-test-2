@@ -1914,9 +1914,9 @@ create table Ticket (
 	classNameId LONG,
 	classPK LONG,
 	key_ VARCHAR(75) null,
-	expirationDate DATE null,
 	type_ INTEGER,
-	extraInfo TEXT null
+	extraInfo TEXT null,
+	expirationDate DATE null
 );
 
 create table User_ (
