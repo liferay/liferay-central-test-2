@@ -38,9 +38,7 @@ import org.apache.abdera.protocol.server.impl.AbstractEntityCollectionAdapter;
 public abstract class BaseEntityCollectionAdapter<T>
 	extends AbstractEntityCollectionAdapter<T> {
 
-	public String getAuthor(RequestContext requestContext)
-		throws ResponseContextException {
-
+	public String getAuthor(RequestContext requestContext) {
 		String author = null;
 
 		try {
@@ -68,19 +66,16 @@ public abstract class BaseEntityCollectionAdapter<T>
 		return id;
 	}
 
-	public String getId(T entry) throws ResponseContextException {
+	public String getId(T entry) {
 		String id = AtomUtil.createIdTagPrefix(collectionName);
 
 		id = id.concat("entry:");
-
 		id = id.concat(getName(entry));
 
 		return id;
 	}
 
-	public String getName(T entry)
-		throws ResponseContextException {
-
+	public String getName(T entry) {
 		return getEntryId(entry);
 	}
 
@@ -89,59 +84,65 @@ public abstract class BaseEntityCollectionAdapter<T>
 	}
 
 	protected String addEntryDetails(
-		RequestContext requestContext, Entry entry, IRI feedIri, T entryObj)
+			RequestContext requestContext, Entry entry, IRI feedIri, T entryObj)
 		throws ResponseContextException {
 
 		String link = getLink(entryObj, feedIri, requestContext);
 
 		entry.addLink(link);
-		entry.setId(getId(entryObj));
-		entry.setTitle(getTitle(entryObj));
-		entry.setUpdated(getUpdated(entryObj));
 
 		List<Person> authors = getAuthors(entryObj, requestContext);
+
 		if (authors != null) {
-			for (Person a : authors) {
-				entry.addAuthor(a);
+			for (Person author : authors) {
+				entry.addAuthor(author);
 			}
 		}
 
-		Text t = getSummary(entryObj, requestContext);
-		if (t != null) {
-			entry.setSummaryElement(t);
+		entry.setId(getId(entryObj));
+
+		Text text = getSummary(entryObj, requestContext);
+
+		if (text != null) {
+			entry.setSummaryElement(text);
 		}
+
+		entry.setTitle(getTitle(entryObj));
+		entry.setUpdated(getUpdated(entryObj));
+
 		return link;
 	}
 
 	protected void addFeedDetails(Feed feed, RequestContext requestContext)
 		throws ResponseContextException {
 
-		String currentUrl = requestContext.getResolvedUri().toString();
-
 		super.addFeedDetails(feed, requestContext);
 
 		AtomPager atomPager = AtomUtil.getPager(requestContext);
 
 		if (atomPager != null) {
-			atomPager.setFeedPagingLinks(feed, currentUrl);
+			String url = String.valueOf(requestContext.getResolvedUri());
+
+			atomPager.setFeedPagingLinks(feed, url);
 		}
 	}
 
-	protected Feed createFeedBase(RequestContext requestContext)
-		throws ResponseContextException {
+	protected Feed createFeedBase(RequestContext requestContext) {
+		Factory factory = requestContext.getAbdera().getFactory();
 
-		String url = requestContext.getResolvedUri().toString();
+		Feed feed = factory.newFeed();
+
+		feed.addAuthor(getAuthor(requestContext));
+
+		String url = String.valueOf(requestContext.getResolvedUri());
 
 		url = AtomUtil.resolveCollectionUrl(url, collectionName);
 
-		Factory factory = requestContext.getAbdera().getFactory();
-		Feed feed = factory.newFeed();
+		feed.addLink(url);
+		feed.addLink(url, "self");
 
 		feed.setId(getId(requestContext));
 		feed.setTitle(getTitle(requestContext));
-		feed.addLink(url);
-		feed.addLink(url, "self");
-		feed.addAuthor(getAuthor(requestContext));
 		feed.setUpdated(new Date());
 
 		return feed;
@@ -149,7 +150,7 @@ public abstract class BaseEntityCollectionAdapter<T>
 
 	protected abstract String getEntryId(T entry);
 
-	protected final String collectionName;
+	protected String collectionName;
 
 	private static Log _log = LogFactoryUtil.getLog(
 		BaseEntityCollectionAdapter.class);

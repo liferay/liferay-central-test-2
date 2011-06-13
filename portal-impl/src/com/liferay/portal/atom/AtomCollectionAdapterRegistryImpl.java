@@ -25,19 +25,19 @@ import java.util.concurrent.ConcurrentHashMap;
 /**
  * @author Igor Spasic
  */
-public class AtomCollectionAdapterRegistryImpl implements
-	AtomCollectionAdapterRegistry {
+public class AtomCollectionAdapterRegistryImpl
+	implements AtomCollectionAdapterRegistry {
 
-	public AtomCollectionAdapter getAtomCollectionAdapter(String className) {
+	public AtomCollectionAdapter<?> getAtomCollectionAdapter(String className) {
 		return _atomCollectionAdapters.get(className);
 	}
 
-	public List<AtomCollectionAdapter> getAtomCollectionAdapters() {
+	public List<AtomCollectionAdapter<?>> getAtomCollectionAdapters() {
 		return ListUtil.fromCollection(_atomCollectionAdapters.values());
 	}
 
 	public void register(
-		String className, AtomCollectionAdapter atomCollectionAdapter) {
+		String className, AtomCollectionAdapter<?> atomCollectionAdapter) {
 
 		_atomCollectionAdapters.put(className, atomCollectionAdapter);
 	}
@@ -46,7 +46,7 @@ public class AtomCollectionAdapterRegistryImpl implements
 		_atomCollectionAdapters.remove(className);
 	}
 
-	private Map<String, AtomCollectionAdapter> _atomCollectionAdapters =
-		new ConcurrentHashMap<String, AtomCollectionAdapter>();
+	private Map<String, AtomCollectionAdapter<?>> _atomCollectionAdapters =
+		new ConcurrentHashMap<String, AtomCollectionAdapter<?>>();
 
 }

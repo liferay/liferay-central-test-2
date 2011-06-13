@@ -38,15 +38,19 @@ public interface AtomCollectionAdapter<E> {
 
 	public Date getEntryUpdated(E entry);
 
-	public Iterable<E> getFeedEntries(AtomRequestContext requestContext)
+	public Iterable<E> getFeedEntries(AtomRequestContext atomRequestContext)
 		throws AtomException;
 
-	public String getFeedTitle(AtomRequestContext requestContext);
+	public String getFeedTitle(AtomRequestContext atomRequestContext);
 
-	public E postEntry(String title, String summary, Date date, String content,
-		AtomRequestContext requestContext) throws AtomException;
+	public E postEntry(
+			String title, String summary, String content, Date date,
+			AtomRequestContext atomRequestContext)
+		throws AtomException;
 
-	public void putEntry(E entry, String title, Date date, String summary,
-		String content, AtomRequestContext requestContext) throws AtomException;
+	public void putEntry(
+			E entry, String title, String summary, String content, Date date,
+			AtomRequestContext atomRequestContext)
+		throws AtomException;
 
 }

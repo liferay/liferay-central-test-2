@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.abdera.Abdera;
 import org.apache.abdera.factory.Factory;
 import org.apache.abdera.i18n.iri.IRI;
 import org.apache.abdera.model.Content;
@@ -31,8 +32,8 @@ import org.apache.abdera.protocol.server.context.ResponseContextException;
 /**
  * @author Igor Spasic
  */
-public class AtomCollectionAdapterWrapper<E> extends
-	BaseEntityCollectionAdapter<E> {
+public class AtomCollectionAdapterWrapper<E>
+	extends BaseEntityCollectionAdapter<E> {
 
 	public AtomCollectionAdapterWrapper(
 		AtomCollectionAdapter<E> atomCollectionAdapter) {
@@ -48,22 +49,23 @@ public class AtomCollectionAdapterWrapper<E> extends
 		try {
 			_atomCollectionAdapter.deleteEntry(resourceName);
 		}
-		catch (AtomException e) {
-			throw new ResponseContextException(e.getErrorCode(), e.getCause());
+		catch (AtomException ae) {
+			throw new ResponseContextException(
+				ae.getErrorCode(), ae.getCause());
 		}
 	}
 
-	public List<Person> getAuthors(E entry, RequestContext requestContext)
-		throws ResponseContextException {
-
-		List<String> authorList = _atomCollectionAdapter.getEntryAuthors(entry);
-
+	public List<Person> getAuthors(E entry, RequestContext requestContext) {
 		List<Person> persons = new ArrayList<Person>();
 
-		Factory abderaFactory = requestContext.getAbdera().getFactory();
+		List<String> authors = _atomCollectionAdapter.getEntryAuthors(entry);
 
-		for (String author : authorList) {
-			Person person = abderaFactory.newAuthor();
+		for (String author : authors) {
+			Abdera abdera = requestContext.getAbdera();
+
+			Factory factory = abdera.getFactory();
+
+			Person person = factory.newAuthor();
 
 			person.setName(author);
 
@@ -73,11 +75,12 @@ public class AtomCollectionAdapterWrapper<E> extends
 		return persons;
 	}
 
-	public Object getContent(E entry, RequestContext requestContext)
-		throws ResponseContextException {
+	public Object getContent(E entry, RequestContext requestContext) {
+		Abdera abdera = requestContext.getAbdera();
 
-		Content content = requestContext.getAbdera().getFactory().newContent(
-			Content.Type.HTML);
+		Factory factory = abdera.getFactory();
+
+		Content content = factory.newContent(Content.Type.HTML);
 
 		content.setText(_atomCollectionAdapter.getEntryContent(entry));
 
@@ -91,8 +94,9 @@ public class AtomCollectionAdapterWrapper<E> extends
 			return _atomCollectionAdapter.getFeedEntries(
 				new AtomRequestContextImpl(requestContext));
 		}
-		catch (AtomException e) {
-			throw new ResponseContextException(e.getErrorCode(), e.getCause());
+		catch (AtomException ae) {
+			throw new ResponseContextException(
+				ae.getErrorCode(), ae.getCause());
 		}
 	}
 
@@ -102,12 +106,13 @@ public class AtomCollectionAdapterWrapper<E> extends
 		try {
 			return _atomCollectionAdapter.getEntry(resourceName);
 		}
-		catch (AtomException e) {
-			throw new ResponseContextException(e.getErrorCode(), e.getCause());
+		catch (AtomException ae) {
+			throw new ResponseContextException(
+				ae.getErrorCode(), ae.getCause());
 		}
 	}
 
-	public String getTitle(E entry) throws ResponseContextException {
+	public String getTitle(E entry) {
 		return _atomCollectionAdapter.getEntryTitle(entry);
 	}
 
@@ -116,35 +121,40 @@ public class AtomCollectionAdapterWrapper<E> extends
 			new AtomRequestContextImpl(requestContext));
 	}
 
-	public Date getUpdated(E entry) throws ResponseContextException {
+	public Date getUpdated(E entry) {
 		return _atomCollectionAdapter.getEntryUpdated(entry);
 	}
 
 	public E postEntry(
-		String title, IRI id, String summary, Date updated,
-		List<Person> authors, Content content, RequestContext requestContext)
+			String title, IRI id, String summary, Date updated,
+			List<Person> authors, Content content,
+			RequestContext requestContext)
 		throws ResponseContextException {
 
 		try {
-			return _atomCollectionAdapter.postEntry(title, summary, updated,
-				content.getText(), new AtomRequestContextImpl(requestContext));
+			return _atomCollectionAdapter.postEntry(
+				title, summary, content.getText(), updated,
+				new AtomRequestContextImpl(requestContext));
 		}
-		catch (AtomException e) {
-			throw new ResponseContextException(e.getErrorCode(), e.getCause());
+		catch (AtomException ae) {
+			throw new ResponseContextException(
+				ae.getErrorCode(), ae.getCause());
 		}
 	}
 
 	public void putEntry(
-		E entry, String title, Date updated, List<Person> authors,
-		String summary, Content content, RequestContext requestContext)
+			E entry, String title, Date updated, List<Person> authors,
+			String summary, Content content, RequestContext requestContext)
 		throws ResponseContextException {
 
 		try {
-			_atomCollectionAdapter.putEntry(entry, title, updated, summary,
-				content.getText(), new AtomRequestContextImpl(requestContext));
+			_atomCollectionAdapter.putEntry(
+				entry, title, summary, content.getText(), updated,
+				new AtomRequestContextImpl(requestContext));
 		}
-		catch (AtomException e) {
-			throw new ResponseContextException(e.getErrorCode(), e.getCause());
+		catch (AtomException ae) {
+			throw new ResponseContextException(
+				ae.getErrorCode(), ae.getCause());
 		}
 	}
 
@@ -152,6 +162,6 @@ public class AtomCollectionAdapterWrapper<E> extends
 		return _atomCollectionAdapter.getEntryId(entry);
 	}
 
-	private final AtomCollectionAdapter<E> _atomCollectionAdapter;
+	private AtomCollectionAdapter<E> _atomCollectionAdapter;
 
 }

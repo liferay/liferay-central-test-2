@@ -29,12 +29,11 @@ public class AtomPager {
 	}
 
 	public AtomPager(int page, int totalElements, int elementsPerPage) {
-
 		_firstPage = 1;
 
 		int lastPage = totalElements / elementsPerPage;
 
-		if (totalElements % elementsPerPage > 0) {
+		if ((totalElements % elementsPerPage) > 0) {
 			lastPage++;
 		}
 
@@ -51,7 +50,6 @@ public class AtomPager {
 		}
 
 		_totalElements = totalElements;
-
 		_elementsPerPage = elementsPerPage;
 
 		_start = (_page - 1) * _elementsPerPage;
@@ -112,37 +110,27 @@ public class AtomPager {
 
 	public void setFeedPagingLinks(Feed feed, String url) {
 		FeedPagingHelper.setFirst(feed, AtomUtil.setPageInUrl(url, 1));
+		FeedPagingHelper.setLast(feed, AtomUtil.setPageInUrl(url, _lastPage));
 
-		FeedPagingHelper.setLast(
-			feed, AtomUtil.setPageInUrl(url, getLastPage()));
-
-		if (getPreviousPage() != 0) {
+		if (_previousPage != 0) {
 			FeedPagingHelper.setPrevious(
-				feed, AtomUtil.setPageInUrl(url, getPreviousPage()));
+				feed, AtomUtil.setPageInUrl(url, _previousPage));
 		}
 
-		if (getNextPage() != 0) {
+		if (_nextPage != 0) {
 			FeedPagingHelper.setNext(
-				feed, AtomUtil.setPageInUrl(url, getNextPage()));
+				feed, AtomUtil.setPageInUrl(url, _nextPage));
 		}
 	}
 
-	private final int _elementsPerPage;
-
-	private final int _end;
-
-	private final int _firstPage;
-
-	private final int _lastPage;
-
-	private final int _nextPage;
-
-	private final int _page;
-
-	private final int _previousPage;
-
-	private final int _start;
-
-	private final int _totalElements;
+	private int _elementsPerPage;
+	private int _end;
+	private int _firstPage;
+	private int _lastPage;
+	private int _nextPage;
+	private int _page;
+	private int _previousPage;
+	private int _start;
+	private int _totalElements;
 
 }

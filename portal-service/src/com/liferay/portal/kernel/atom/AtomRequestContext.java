@@ -39,6 +39,6 @@ public interface AtomRequestContext {
 
 	public void setRequestAttribute(String name, Object value);
 
-	void setSessionAttribute(String name, Object value);
+	public void setSessionAttribute(String name, Object value);
 
 }

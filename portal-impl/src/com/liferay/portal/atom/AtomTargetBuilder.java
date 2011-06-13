@@ -14,6 +14,7 @@
 
 package com.liferay.portal.atom;
 
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.StringPool;
 
 import org.apache.abdera.protocol.server.RequestContext;
@@ -28,7 +29,7 @@ public class AtomTargetBuilder implements TargetBuilder {
 	public String urlFor(
 		RequestContext requestContext, Object key, Object param) {
 
-		String url = requestContext.getBaseUri().toString();
+		String url = String.valueOf(requestContext.getBaseUri());
 
 		if (url.endsWith(StringPool.SLASH)) {
 			url = url.substring(0, url.length() - 1);
@@ -38,12 +39,12 @@ public class AtomTargetBuilder implements TargetBuilder {
 
 		String query = StringPool.BLANK;
 
-		int markIndex = url.indexOf('?');
+		int questionIndex = url.indexOf(CharPool.QUESTION);
 
-		if (markIndex != -1) {
-			query = url.substring(markIndex);
+		if (questionIndex != -1) {
+			query = url.substring(questionIndex);
 
-			url = url.substring(0, markIndex);
+			url = url.substring(0, questionIndex);
 		}
 
 		String keyString = key.toString();
@@ -52,28 +53,27 @@ public class AtomTargetBuilder implements TargetBuilder {
 			return url + query;
 		}
 
-		if (keyString.equals(TargetType.COLLECTION)) {
-			String collectionName = (String) param;
-
-			collectionName = '/' + collectionName;
-
-			if (url.endsWith(collectionName) == true) {
-				return url + query;
-			} else if (url.contains(collectionName + '/')) {
-
-				int collectionIndex = url.indexOf(collectionName);
-
-				collectionIndex += collectionName.length() + 1;
-
-				url = url.substring(0, collectionIndex);
-
-				return url;
-			} else {
-				return url + collectionName + query;
-			}
+		if (!keyString.equals(TargetType.COLLECTION)) {
+			return null;
 		}
 
-		return null;
+		String collectionName = CharPool.SLASH + (String)param;
+
+		if (url.endsWith(collectionName)) {
+			return url + query;
+		}
+
+		if (url.contains(collectionName + CharPool.SLASH)) {
+			int collectionIndex = url.indexOf(collectionName);
+
+			collectionIndex += collectionName.length() + 1;
+
+			url = url.substring(0, collectionIndex);
+
+			return url;
+		}
+
+		return url + collectionName + query;
 	}
 
 }

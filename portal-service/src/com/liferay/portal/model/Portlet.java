@@ -231,24 +231,23 @@ public interface Portlet extends PortletModel {
 	public com.liferay.portal.kernel.portlet.ConfigurationAction getConfigurationActionInstance();
 
 	/**
-	* Returns the indexer class names of the portlet.
+	* Returns the name of the classes that represent indexers associated with
+	* the portlet.
 	*
-	* @return the indexer class names of the portlet
+	* @return the name of the classes that represent indexers associated with
+	the portlet
 	*/
 	public java.util.List<java.lang.String> getIndexerClasses();
 
 	/**
-	* Sets the indexer class names of the portlet.
+	* Sets the name of the classes that represent indexers associated with the
+	* portlet.
 	*
-	* @param indexerClasses the indexer class names of the portlet
+	* @param indexerClasses the name of the classes that represent indexers
+	associated with the portlet
 	*/
 	public void setIndexerClasses(
 		java.util.List<java.lang.String> indexerClasses);
-
-	public java.util.List<java.lang.String> getAtomCollectionAdapterClasses();
-
-	public void setAtomCollectionAdapterClasses(
-		java.util.List<java.lang.String> atomCollectionAdapterClasses);
 
 	/**
 	* Returns the indexer instances of the portlet.
@@ -657,20 +656,20 @@ public interface Portlet extends PortletModel {
 	public com.liferay.portlet.ControlPanelEntry getControlPanelEntryInstance();
 
 	/**
-	* Returns the names of the classes that represent asset types associated to
-	* the portlet.
+	* Returns the names of the classes that represent asset types associated
+	* with the portlet.
 	*
-	* @return the names of the classes that represent asset types associated to
-	the portlet
+	* @return the names of the classes that represent asset types associated
+	with the portlet
 	*/
 	public java.util.List<java.lang.String> getAssetRendererFactoryClasses();
 
 	/**
-	* Sets the name of the classes that represent asset types associated to the
-	* portlet.
+	* Sets the name of the classes that represent asset types associated with
+	* the portlet.
 	*
 	* @param assetRendererFactoryClasses the names of the classes that
-	represent asset types associated to the portlet
+	represent asset types associated with the portlet
 	*/
 	public void setAssetRendererFactoryClasses(
 		java.util.List<java.lang.String> assetRendererFactoryClasses);
@@ -683,20 +682,46 @@ public interface Portlet extends PortletModel {
 	public java.util.List<com.liferay.portlet.asset.model.AssetRendererFactory> getAssetRendererFactoryInstances();
 
 	/**
-	* Returns the names of the classes that represent custom attribute displays
-	* associated to the portlet.
+	* Returns the names of the classes that represent atom collection adapters
+	* associated with the portlet.
 	*
-	* @return the names of the classes that represent asset types associated to
-	the portlet
+	* @return the names of the classes that represent atom collection adapters
+	associated with the portlet
+	*/
+	public java.util.List<java.lang.String> getAtomCollectionAdapterClasses();
+
+	/**
+	* Sets the name of the classes that represent atom collection adapters
+	* associated with the portlet.
+	*
+	* @param atomCollectionAdapterClasses the names of the classes that
+	represent atom collection adapters associated with the portlet
+	*/
+	public void setAtomCollectionAdapterClasses(
+		java.util.List<java.lang.String> atomCollectionAdapterClasses);
+
+	/**
+	* Returns the atom collection adapter instances of the portlet.
+	*
+	* @return the atom collection adapter instances of the portlet
+	*/
+	public java.util.List<com.liferay.portal.kernel.atom.AtomCollectionAdapter<?>> getAtomCollectionAdapterInstances();
+
+	/**
+	* Returns the names of the classes that represent custom attribute displays
+	* associated with the portlet.
+	*
+	* @return the names of the classes that represent asset types associated
+	with the portlet
 	*/
 	public java.util.List<java.lang.String> getCustomAttributesDisplayClasses();
 
 	/**
 	* Sets the name of the classes that represent custom attribute displays
-	* associated to the portlet.
+	* associated with the portlet.
 	*
 	* @param customAttributesDisplayClasses the names of the classes that
-	represent custom attribute displays associated to the portlet
+	represent custom attribute displays associated with the portlet
 	*/
 	public void setCustomAttributesDisplayClasses(
 		java.util.List<java.lang.String> customAttributesDisplayClasses);
@@ -710,10 +735,10 @@ public interface Portlet extends PortletModel {
 
 	/**
 	* Returns the names of the classes that represent workflow handlers
-	* associated to the portlet.
+	* associated with the portlet.
 	*
 	* @return the names of the classes that represent workflow handlers
-	associated to the portlet
+	associated with the portlet
 	*/
 	public java.util.List<java.lang.String> getWorkflowHandlerClasses();
 
@@ -722,7 +747,7 @@ public interface Portlet extends PortletModel {
 	* to the portlet.
 	*
 	* @param workflowHandlerClasses the names of the classes that represent
-	workflow handlers associated to the portlet
+	workflow handlers associated with the portlet
 	*/
 	public void setWorkflowHandlerClasses(
 		java.util.List<java.lang.String> workflowHandlerClasses);

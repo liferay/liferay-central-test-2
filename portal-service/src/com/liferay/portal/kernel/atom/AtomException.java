@@ -21,14 +21,14 @@ import com.liferay.portal.kernel.exception.PortalException;
  */
 public class AtomException extends PortalException {
 
-	public AtomException(int errorCode, Throwable cause) {
-		super(String.valueOf(errorCode), cause);
+	public AtomException(int errorCode) {
+		super(String.valueOf(errorCode));
 
 		_errorCode = errorCode;
 	}
 
-	public AtomException(int errorCode) {
-		super(String.valueOf(errorCode));
+	public AtomException(int errorCode, Throwable cause) {
+		super(String.valueOf(errorCode), cause);
 
 		_errorCode = errorCode;
 	}

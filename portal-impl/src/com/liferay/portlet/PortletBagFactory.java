@@ -202,6 +202,9 @@ public class PortletBagFactory {
 		List<AssetRendererFactory> assetRendererFactoryInstances =
 			newAssetRendererFactoryInstances(portlet);
 
+		List<AtomCollectionAdapter<?>> atomCollectionAdapterInstances =
+			newAtomCollectionAdapterInstances(portlet);
+
 		List<CustomAttributesDisplay> customAttributesDisplayInstances =
 			new ArrayList<CustomAttributesDisplay>();
 
@@ -221,24 +224,6 @@ public class PortletBagFactory {
 
 			customAttributesDisplayInstances.add(
 				customAttributesDisplayInstance);
-		}
-
-		List<AtomCollectionAdapter> atomCollectionAdapterInstances =
-			new ArrayList<AtomCollectionAdapter>();
-
-		for (String atomCollectionAdapterClass :
-			portlet.getAtomCollectionAdapterClasses()) {
-
-			AtomCollectionAdapter atomCollectionAdapterInstance =
-				(AtomCollectionAdapter)newInstance(
-					AtomCollectionAdapter.class,
-					atomCollectionAdapterClass
-				);
-
-			AtomCollectionAdapterRegistryUtil.
-				register(atomCollectionAdapterInstance);
-
-			atomCollectionAdapterInstances.add(atomCollectionAdapterInstance);
 		}
 
 		List<WorkflowHandler> workflowHandlerInstances =
@@ -597,6 +582,29 @@ public class PortletBagFactory {
 		}
 
 		return assetRendererFactoryInstances;
+	}
+
+	protected List<AtomCollectionAdapter<?>> newAtomCollectionAdapterInstances(
+			Portlet portlet)
+		throws Exception {
+
+		List<AtomCollectionAdapter<?>> atomCollectionAdapterInstances =
+			new ArrayList<AtomCollectionAdapter<?>>();
+
+		for (String atomCollectionAdapterClass :
+				portlet.getAtomCollectionAdapterClasses()) {
+
+			AtomCollectionAdapter<?> atomCollectionAdapterInstance =
+				(AtomCollectionAdapter<?>)newInstance(
+					AtomCollectionAdapter.class, atomCollectionAdapterClass);
+
+			AtomCollectionAdapterRegistryUtil.register(
+				atomCollectionAdapterClass, atomCollectionAdapterInstance);
+
+			atomCollectionAdapterInstances.add(atomCollectionAdapterInstance);
+		}
+
+		return atomCollectionAdapterInstances;
 	}
 
 	protected ConfigurationAction newConfigurationAction(Portlet portlet)

@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<!DOCTYPE liferay-portlet-app PUBLIC "-//Liferay//DTD Portlet Application 6.0.0//EN" "http://www.liferay.com/dtd/liferay-portlet-app_6_0_0.dtd">
+<!DOCTYPE liferay-portlet-app PUBLIC "-//Liferay//DTD Portlet Application 6.1.0//EN" "http://www.liferay.com/dtd/liferay-portlet-app_6_1_0.dtd">
 
 <liferay-portlet-app>
 	<portlet>
@@ -392,8 +392,8 @@
 		<social-activity-interpreter-class>com.liferay.portlet.blogs.social.BlogsActivityInterpreter</social-activity-interpreter-class>
 		<xml-rpc-method-class>com.liferay.portlet.blogs.util.PingbackMethodImpl</xml-rpc-method-class>
 		<asset-renderer-factory>com.liferay.portlet.blogs.asset.BlogsEntryAssetRendererFactory</asset-renderer-factory>
+		<atom-collection-adapter>com.liferay.portlet.blogs.atom.BlogsEntryAtomCollectionAdapter</atom-collection-adapter>
 		<custom-attributes-display>com.liferay.portlet.blogs.BlogsEntryCustomAttributesDisplay</custom-attributes-display>
-		<atom-collection-adapter>com.liferay.portlet.blogs.atom.BlogsEntryCollectionAdapter</atom-collection-adapter>
 		<workflow-handler>com.liferay.portlet.blogs.workflow.BlogsEntryWorkflowHandler</workflow-handler>
 		<preferences-unique-per-layout>false</preferences-unique-per-layout>
 		<preferences-owned-by-group>true</preferences-owned-by-group>

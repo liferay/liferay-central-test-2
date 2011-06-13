@@ -49,7 +49,7 @@ public interface PortletBag extends Cloneable {
 
 	public List<AssetRendererFactory> getAssetRendererFactoryInstances();
 
-	public List<AtomCollectionAdapter> getAtomCollectionAdapterInstances();
+	public List<AtomCollectionAdapter<?>> getAtomCollectionAdapterInstances();
 
 	public ConfigurationAction getConfigurationActionInstance();
 

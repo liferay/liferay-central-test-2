@@ -14,6 +14,7 @@
 
 package com.liferay.portal.model.impl;
 
+import com.liferay.portal.kernel.atom.AtomCollectionAdapter;
 import com.liferay.portal.kernel.lar.PortletDataHandler;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -98,9 +99,9 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		setStrutsPath(portletId);
 		setActive(true);
 		_indexerClasses = new ArrayList<String>();
-		_atomCollectionAdapterClasses = new ArrayList<String>();
 		_schedulerEntries = new ArrayList<SchedulerEntry>();
 		_assetRendererFactoryClasses = new ArrayList<String>();
+		_atomCollectionAdapterClasses = new ArrayList<String>();
 		_customAttributesDisplayClasses = new ArrayList<String>();
 		_workflowHandlerClasses = new ArrayList<String>();
 		_autopropagatedParameters = new LinkedHashSet<String>();
@@ -143,9 +144,8 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		String socialRequestInterpreterClass, String webDAVStorageToken,
 		String webDAVStorageClass, String xmlRpcMethodClass,
 		String controlPanelEntryCategory, double controlPanelEntryWeight,
-		String controlPanelClass,
+		String controlPanelClass, List<String> assetRendererFactoryClasses,
 		List<String> atomCollectionAdapterClasses,
-		List<String> assetRendererFactoryClasses,
 		List<String> customAttributesDisplayClasses,
 		List<String> workflowHandlerClasses, String defaultPreferences,
 		String preferencesValidator, boolean preferencesCompanyWide,
@@ -557,16 +557,6 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 */
 	public void setIndexerClasses(List<String> indexerClasses) {
 		_indexerClasses = indexerClasses;
-	}
-
-	public List<String> getAtomCollectionAdapterClasses() {
-		return _atomCollectionAdapterClasses;
-	}
-
-	public void setAtomCollectionAdapterClasses(
-		List<String> atomCollectionAdapterClasses) {
-
-		_atomCollectionAdapterClasses = atomCollectionAdapterClasses;
 	}
 
 	/**
@@ -1192,6 +1182,45 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		PortletBag portletBag = PortletBagPool.get(getRootPortletId());
 
 		return portletBag.getAssetRendererFactoryInstances();
+	}
+
+	/**
+	 * Returns the names of the classes that represent atom collection adapters
+	 * associated with the portlet.
+	 *
+	 * @return the names of the classes that represent atom collection adapters
+	 *         associated with the portlet
+	 */
+	public List<String> getAtomCollectionAdapterClasses() {
+		return _atomCollectionAdapterClasses;
+	}
+
+	/**
+	 * Sets the name of the classes that represent atom collection adapters
+	 * associated with the portlet.
+	 *
+	 * @param atomCollectionAdapterClasses the names of the classes that
+	 *        represent atom collection adapters associated with the portlet
+	 */
+	public void setAtomCollectionAdapterClasses(
+		List<String> atomCollectionAdapterClasses) {
+
+		_atomCollectionAdapterClasses = atomCollectionAdapterClasses;
+	}
+
+	/**
+	 * Returns the atom collection adapter instances of the portlet.
+	 *
+	 * @return the atom collection adapter instances of the portlet
+	 */
+	public List<AtomCollectionAdapter<?>> getAtomCollectionAdapterInstances() {
+		if (getAtomCollectionAdapterClasses().isEmpty()) {
+			return null;
+		}
+
+		PortletBag portletBag = PortletBagPool.get(getRootPortletId());
+
+		return portletBag.getAtomCollectionAdapterInstances();
 	}
 
 	/**
@@ -3289,11 +3318,6 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	private List<String> _indexerClasses;
 
 	/**
-	 * The atom collection adapter classes.
-	 */
-	private List<String> _atomCollectionAdapterClasses;
-
-	/**
 	 * The name of the open search class of the portlet.
 	 */
 	private String _openSearchClass;
@@ -3424,6 +3448,12 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 * portlet.
 	 */
 	private List<String> _assetRendererFactoryClasses;
+
+	/**
+	 * The names of the classes that represents atom collection adapters
+	 * associated with the portlet.
+	 */
+	private List<String> _atomCollectionAdapterClasses;
 
 	/**
 	 * The names of the classes that represents custom attribute displays

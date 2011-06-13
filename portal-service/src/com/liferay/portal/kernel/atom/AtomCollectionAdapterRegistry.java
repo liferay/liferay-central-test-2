@@ -21,12 +21,12 @@ import java.util.List;
  */
 public interface AtomCollectionAdapterRegistry {
 
-	public AtomCollectionAdapter getAtomCollectionAdapter(String className);
+	public AtomCollectionAdapter<?> getAtomCollectionAdapter(String className);
 
-	public List<AtomCollectionAdapter> getAtomCollectionAdapters();
+	public List<AtomCollectionAdapter<?>> getAtomCollectionAdapters();
 
 	public void register(
-		String className, AtomCollectionAdapter atomCollectionAdapter);
+		String className, AtomCollectionAdapter<?> atomCollectionAdapter);
 
 	public void unregister(String className);
 

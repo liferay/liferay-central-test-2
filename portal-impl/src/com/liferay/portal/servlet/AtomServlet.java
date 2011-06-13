@@ -46,20 +46,20 @@ import org.apache.abdera.protocol.server.servlet.AbderaServlet;
 public class AtomServlet extends AbderaServlet {
 
 	protected Provider createProvider() {
-		AtomProvider provider = new AtomProvider();
+		AtomProvider atomProvider = new AtomProvider();
 
-		provider.init(getAbdera(), null);
+		atomProvider.init(getAbdera(), null);
 
-		List<AtomCollectionAdapter> atomCollectionAdapters =
+		List<AtomCollectionAdapter<?>> atomCollectionAdapters =
 			AtomCollectionAdapterRegistryUtil.getAtomCollectionAdapters();
 
-		for (AtomCollectionAdapter atomCollectionAdapter :
-			atomCollectionAdapters) {
+		for (AtomCollectionAdapter<?> atomCollectionAdapter :
+				atomCollectionAdapters) {
 
-			provider.addCollection(atomCollectionAdapter);
+			atomProvider.addCollection(atomCollectionAdapter);
 		}
 
-		return provider;
+		return atomProvider;
 	}
 
 	protected void service(

@@ -21,18 +21,11 @@ import java.util.List;
  */
 public class AtomCollectionAdapterRegistryUtil {
 
-	public static AtomCollectionAdapter getAtomCollectionAdapter(
-		Class<?> clazz) {
-
-		return getAtomCollectionAdapterRegistry().
-			getAtomCollectionAdapter(clazz.getName());
-	}
-
-	public static AtomCollectionAdapter getAtomCollectionAdapter(
+	public static AtomCollectionAdapter<?> getAtomCollectionAdapter(
 		String className) {
 
-		return getAtomCollectionAdapterRegistry().
-			getAtomCollectionAdapter(className);
+		return getAtomCollectionAdapterRegistry().getAtomCollectionAdapter(
+			className);
 	}
 
 	public static AtomCollectionAdapterRegistry
@@ -41,21 +34,15 @@ public class AtomCollectionAdapterRegistryUtil {
 		return _atomCollectionAdapterRegistry;
 	}
 
-	public static List<AtomCollectionAdapter> getAtomCollectionAdapters() {
+	public static List<AtomCollectionAdapter<?>> getAtomCollectionAdapters() {
 		return getAtomCollectionAdapterRegistry().getAtomCollectionAdapters();
 	}
 
 	public static void register(
-		String className, AtomCollectionAdapter atomCollectionAdapter) {
+		String className, AtomCollectionAdapter<?> atomCollectionAdapter) {
 
 		getAtomCollectionAdapterRegistry().register(
 			className, atomCollectionAdapter);
-	}
-
-	public static void register(AtomCollectionAdapter atomCollectionAdapter) {
-
-		getAtomCollectionAdapterRegistry().register(
-			atomCollectionAdapter.getClass().getName(), atomCollectionAdapter);
 	}
 
 	public static void unregister(String className) {

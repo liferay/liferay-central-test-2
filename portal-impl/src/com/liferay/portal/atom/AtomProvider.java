@@ -33,22 +33,19 @@ import org.apache.abdera.protocol.server.impl.SimpleWorkspaceInfo;
 public class AtomProvider extends AbstractWorkspaceProvider {
 
 	public AtomProvider() {
-
 		_initWorkspace();
-
 		_initTargetResolver();
-
 		_initTargetBuilder();
 	}
 
-	public void addCollection(AtomCollectionAdapter collectionAdapter) {
+	public <E> void addCollection(
+		AtomCollectionAdapter<E> atomCollectionAdapter) {
 
 		_workspace.addCollection(
-			new AtomCollectionAdapterWrapper(collectionAdapter));
+			new AtomCollectionAdapterWrapper<E>(atomCollectionAdapter));
 	}
 
 	public CollectionAdapter getCollectionAdapter(RequestContext request) {
-
 		String path = request.getTargetPath();
 
 		int index = path.indexOf('?');

@@ -17,6 +17,7 @@ package com.liferay.portal.atom;
 import com.liferay.portal.kernel.atom.AtomRequestContext;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Company;
@@ -34,98 +35,13 @@ import org.apache.abdera.protocol.server.RequestContext;
  */
 public class AtomUtil {
 
-	public static Company getCompany() throws SystemException, PortalException {
-
-		long companyId = CompanyThreadLocal.getCompanyId().longValue();
-
-		return CompanyLocalServiceUtil.getCompanyById(companyId);
-	}
-
-	public static AtomPager getPager(RequestContext requestContext) {
-
-		return (AtomPager)requestContext.getAttribute(
-			RequestContext.Scope.REQUEST, PAGER_ATTR_NAME);
-	}
-
-	public static User getUser(AtomRequestContext requestContext) {
-		return (User)requestContext.getRequestAttribute(USER_ATTR_NAME);
-	}
-
-	public static String resolveCollectionUrl(
-		String url, String collectionName) {
-
-		String collection = '/' + collectionName + '/';
-
-		int collectionIndex = url.indexOf(collection);
-
-		if (collectionIndex != -1) {
-
-			collectionIndex += collectionName.length() + 1;
-
-			int markIndex = url.indexOf('?', collectionIndex);
-
-			if (markIndex != -1) {
-				url = url.substring(0, collectionIndex) +
-					url.substring(markIndex);
-			}
-			else {
-				url = url.substring(0, collectionIndex);
-			}
-		}
-		return url;
-	}
-
-	public static void saveAtomPagerInRequest(
-		AtomRequestContext requestContext, AtomPager atomPager) {
-
-		requestContext.setRequestAttribute(PAGER_ATTR_NAME, atomPager);
-	}
-
-	public static void saveUserInRequest(
-		HttpServletRequest request, User user) {
-
-		request.setAttribute(USER_ATTR_NAME, user);
-	}
-
-	public static String setPageInUrl(String url, int page) {
-
-		int pageIndex = url.indexOf("page=");
-
-		if (pageIndex == -1) {
-			int markIndex = url.indexOf('?');
-
-			if (markIndex == -1) {
-				url += "?";
-			}
-			else {
-				url += "&";
-			}
-			return url + "page=" + page;
-		}
-
-		int endIndex = url.indexOf('&', pageIndex);
-
-		if (endIndex == -1) {
-			url = url.substring(0, pageIndex);
-		}
-		else {
-			url = url.substring(0, pageIndex) + url.substring(endIndex + 1);
-
-			url += '&';
-		}
-
-		url += "page=" + page;
-
-		return url;
-	}
-
 	public static String createFeedTitleFromPortletName(
-		AtomRequestContext requestContext, String portletId)
-		throws SystemException, PortalException {
+			AtomRequestContext atomRequestContext, String portletId)
+		throws PortalException, SystemException {
 
 		Company company = getCompany();
 
-		User user = getUser(requestContext);
+		User user = getUser(atomRequestContext);
 
 		String portletTitle = company.getName();
 
@@ -140,7 +56,6 @@ public class AtomUtil {
 	}
 
 	public static String createIdTagPrefix(String title) {
-
 		Company company = null;
 
 		try {
@@ -158,13 +73,101 @@ public class AtomUtil {
 		sb.append(title);
 		sb.append(StringPool.COLON);
 
-		return sb.toString().toLowerCase();
+		String idTagPrefix = sb.toString();
+
+		return idTagPrefix.toLowerCase();
 	}
 
-	private static final String PAGER_ATTR_NAME =
-		AtomUtil.class.getName() + ".atomPager";
+	public static Company getCompany() throws PortalException, SystemException {
+		long companyId = CompanyThreadLocal.getCompanyId();
 
-	private static final String USER_ATTR_NAME =
+		return CompanyLocalServiceUtil.getCompanyById(companyId);
+	}
+
+	public static AtomPager getPager(RequestContext requestContext) {
+		return (AtomPager)requestContext.getAttribute(
+			RequestContext.Scope.REQUEST, _PAGER);
+	}
+
+	public static User getUser(AtomRequestContext atomRequestContext) {
+		return (User)atomRequestContext.getRequestAttribute(_USER);
+	}
+
+	public static String resolveCollectionUrl(
+		String url, String collectionName) {
+
+		String collection = CharPool.SLASH + collectionName + CharPool.SLASH;
+
+		int collectionIndex = url.indexOf(collection);
+
+		if (collectionIndex == -1) {
+			return url;
+		}
+
+		collectionIndex += collectionName.length() + 1;
+
+		int questionIndex = url.indexOf(CharPool.QUESTION, collectionIndex);
+
+		if (questionIndex != -1) {
+			url =
+				url.substring(0, collectionIndex) +
+					url.substring(questionIndex);
+		}
+		else {
+			url = url.substring(0, collectionIndex);
+		}
+
+		return url;
+	}
+
+	public static void saveAtomPagerInRequest(
+		AtomRequestContext atomRequestContext, AtomPager atomPager) {
+
+		atomRequestContext.setRequestAttribute(_PAGER, atomPager);
+	}
+
+	public static void saveUserInRequest(
+		HttpServletRequest request, User user) {
+
+		request.setAttribute(_USER, user);
+	}
+
+	public static String setPageInUrl(String url, int page) {
+		int pageIndex = url.indexOf("page=");
+
+		if (pageIndex == -1) {
+			int questionIndex = url.indexOf(CharPool.QUESTION);
+
+			if (questionIndex == -1) {
+				url += CharPool.AMPERSAND;
+			}
+			else {
+				url += CharPool.AMPERSAND;
+			}
+
+			return url + "page=" + page;
+		}
+
+		int endIndex = url.indexOf(CharPool.AMPERSAND, pageIndex);
+
+		if (endIndex == -1) {
+			url = url.substring(0, pageIndex);
+		}
+		else {
+			url = url.substring(0, pageIndex) + url.substring(endIndex + 1);
+
+			url += CharPool.AMPERSAND;
+		}
+
+		url += "page=" + page;
+
+		return url;
+	}
+
+	private static final String _PAGER =
+		AtomUtil.class.getName() + ".pager";
+
+	private static final String _USER =
 		AtomUtil.class.getName() + ".user";
 
 }

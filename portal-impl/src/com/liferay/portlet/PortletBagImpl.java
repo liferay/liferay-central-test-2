@@ -66,7 +66,7 @@ public class PortletBagImpl implements PortletBag {
 		WebDAVStorage webDAVStorageInstance, Method xmlRpcMethodInstance,
 		ControlPanelEntry controlPanelEntryInstance,
 		List<AssetRendererFactory> assetRendererFactoryInstances,
-		List<AtomCollectionAdapter> atomCollectionAdapters,
+		List<AtomCollectionAdapter<?>> atomCollectionAdapters,
 		List<CustomAttributesDisplay> customAttributesDisplayInstances,
 		List<WorkflowHandler> workflowHandlerInstances,
 		PreferencesValidator preferencesValidatorInstance,
@@ -119,7 +119,7 @@ public class PortletBagImpl implements PortletBag {
 		return _assetRendererFactoryInstances;
 	}
 
-	public List<AtomCollectionAdapter> getAtomCollectionAdapterInstances() {
+	public List<AtomCollectionAdapter<?>> getAtomCollectionAdapterInstances() {
 		return _atomCollectionAdapterInstances;
 	}
 
@@ -232,7 +232,7 @@ public class PortletBagImpl implements PortletBag {
 	}
 
 	private List<AssetRendererFactory> _assetRendererFactoryInstances;
-	private List<AtomCollectionAdapter> _atomCollectionAdapterInstances;
+	private List<AtomCollectionAdapter<?>> _atomCollectionAdapterInstances;
 	private ConfigurationAction _configurationActionInstance;
 	private ControlPanelEntry _controlPanelEntryInstance;
 	private List<CustomAttributesDisplay> _customAttributesDisplayInstances;
