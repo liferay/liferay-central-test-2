@@ -153,38 +153,15 @@ if (selGroup.isLayoutSetPrototype()) {
 	privateLayout = true;
 }
 
-int publicPagesCount = group.getPublicLayoutsPageCount();
-int privatePagesCount = group.getPrivateLayoutsPageCount();
-
 LayoutLister layoutLister = new LayoutLister();
 
-String rootNodeName = liveGroup.getDescriptiveName();
+String pagesName = "public-pages";
 
-if (liveGroup.isOrganization()) {
-	rootNodeName = organization.getName();
-}
-else if (liveGroup.isUser()) {
-	rootNodeName = selUser.getFullName();
-}
-else if (liveGroup.isUserGroup()) {
-	rootNodeName = userGroup.getName();
-}
-else if (selGroup.isLayoutSetPrototype()) {
-	LayoutSetPrototype layoutSetPrototype = LayoutSetPrototypeLocalServiceUtil.getLayoutSetPrototype(selGroup.getClassPK());
-
-	rootNodeName = layoutSetPrototype.getName(user.getLanguageId());
-}
-
-String pagesName = "pages";
-
-if (privateLayout && publicPagesCount > 0) {
+if (privateLayout) {
 	pagesName = "private-pages";
 }
-else if (!privateLayout && privatePagesCount > 0) {
-	pagesName = "public-pages";
-}
 
-rootNodeName = LanguageUtil.get(pageContext, pagesName) + " (" + rootNodeName + ")";
+String rootNodeName = LanguageUtil.get(pageContext, pagesName);
 
 LayoutView layoutView = layoutLister.getLayoutView(groupId, privateLayout, rootNodeName, locale);
 
