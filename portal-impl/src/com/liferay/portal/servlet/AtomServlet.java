@@ -62,13 +62,13 @@ public class AtomServlet extends AbderaServlet {
 		throws ServletException {
 
 		try {
-			UserCompanyResolver userCompanyResolver =
-				new UserCompanyResolver(request);
+			UserResolver userResolver = new UserResolver(request);
 
-			User user = userCompanyResolver.getUser();
+			CompanyThreadLocal.setCompanyId(userResolver.getCompanyId());
+
+			User user = userResolver.getUser();
 
 			if (user != null) {
-
 				if (_log.isDebugEnabled()) {
 					_log.debug("User " + user.getUserId());
 				}
@@ -80,10 +80,6 @@ public class AtomServlet extends AbderaServlet {
 
 				AtomUtil.saveUserInRequest(request, user);
 			}
-
-			long companyId = userCompanyResolver.getCompanyId();
-
-			CompanyThreadLocal.setCompanyId(companyId);
 
 			super.service(request, response);
 		}

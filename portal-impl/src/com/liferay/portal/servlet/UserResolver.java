@@ -28,14 +28,14 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * @author Igor Spasic
  */
-public class UserCompanyResolver {
+public class UserResolver {
 
-	public UserCompanyResolver(HttpServletRequest httpServletRequest)
-		throws SystemException, PortalException {
+	public UserResolver(HttpServletRequest request)
+		throws PortalException, SystemException {
 
-		_companyId = ParamUtil.getLong(httpServletRequest, "companyId");
+		_companyId = ParamUtil.getLong(request, "companyId");
 
-		String remoteUser = httpServletRequest.getRemoteUser();
+		String remoteUser = request.getRemoteUser();
 
 		if (remoteUser != null) {
 			PrincipalThreadLocal.setName(remoteUser);
@@ -50,7 +50,7 @@ public class UserCompanyResolver {
 		}
 		else {
 			if (_companyId == 0) {
-				_companyId = PortalInstances.getCompanyId(httpServletRequest);
+				_companyId = PortalInstances.getCompanyId(request);
 			}
 
 			if (_companyId != 0) {
@@ -68,7 +68,6 @@ public class UserCompanyResolver {
 	}
 
 	private long _companyId;
-
 	private User _user;
 
 }
