@@ -45,6 +45,10 @@ public interface PropsKeys {
 
 	public static final String ADMIN_EMAIL_USER_ADDED_SUBJECT = "admin.email.user.added.subject";
 
+	public static final String ADMIN_EMAIL_VERIFICATION_BODY = "admin.email.verification.body";
+
+	public static final String ADMIN_EMAIL_VERIFICATION_SUBJECT = "admin.email.verification.subject";
+
 	public static final String ADMIN_MAIL_HOST_NAMES = "admin.mail.host.names";
 
 	public static final String ADMIN_RESERVED_EMAIL_ADDRESSES = "admin.reserved.email.addresses";

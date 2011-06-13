@@ -17,6 +17,20 @@
 <h4><liferay-ui:message key="definition-of-terms" /></h4>
 
 <dl>
+	<c:if test='<%= sectionName.equals("email-verification-notification") %>'>
+		<dt>
+			[$EMAIL_VERIFICATION_CODE$]
+		</dt>
+		<dd>
+			<liferay-ui:message key="the-email-verification-code" />
+		</dd>
+		<dt>
+			[$EMAIL_VERIFICATION_URL$]
+		</dt>
+		<dd>
+			<liferay-ui:message key="the-email-verification-url" />
+		</dd>
+	</c:if>
 	<dt>
 		[$FROM_ADDRESS$]
 	</dt>
@@ -82,7 +96,7 @@
 		<liferay-ui:message key="the-user-id" />
 	</dd>
 
-	<c:if test='<%= !sectionName.equals("password-reset-notification") %>'>
+	<c:if test='<%= !(sectionName.equals("password-reset-notification") || sectionName.equals("email-verification-notification"))%>'>
 		<dt>
 			[$USER_PASSWORD$]
 		</dt>

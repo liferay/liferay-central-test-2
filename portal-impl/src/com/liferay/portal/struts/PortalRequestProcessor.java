@@ -17,6 +17,7 @@ package com.liferay.portal.struts;
 import com.liferay.portal.LayoutPermissionException;
 import com.liferay.portal.PortletActiveException;
 import com.liferay.portal.UserActiveException;
+import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -34,6 +35,7 @@ import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.liveusers.LiveUsers;
+import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portal.model.Portlet;
@@ -127,6 +129,7 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 		_publicPaths.add(_PATH_PORTAL_RENDER_PORTLET);
 		_publicPaths.add(_PATH_PORTAL_TCK);
 		_publicPaths.add(_PATH_PORTAL_UPDATE_PASSWORD);
+		_publicPaths.add(_PATH_PORTAL_VERIFY_EMAIL_ADDRESS);
 		_publicPaths.add(PropsValues.AUTH_LOGIN_DISABLED_PATH);
 
 		_trackerIgnorePaths = new HashSet<String>();
@@ -717,6 +720,25 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 				}
 			}
 
+			// Authenticated users should have verified email address
+
+			boolean emailAddressVerificationRequired = false;
+
+			try {
+				Company company = PortalUtil.getCompany(request);
+
+				emailAddressVerificationRequired = company.isStrangersVerify();
+			}
+			catch (Exception e) {
+				_log.error(e, e);
+			}
+
+			if ((user != null) && !user.isEmailAddressVerified() &&
+				emailAddressVerificationRequired) {
+
+				return _PATH_PORTAL_VERIFY_EMAIL_ADDRESS;
+			}
+
 			// Authenticated users must have a current password
 
 			if ((user != null) && user.isPasswordReset()) {
@@ -958,6 +980,9 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 
 	private static String _PATH_PORTAL_UPDATE_TERMS_OF_USE =
 		"/portal/update_terms_of_use";
+
+	private static String _PATH_PORTAL_VERIFY_EMAIL_ADDRESS =
+		"/portal/verify_email_address";
 
 	private static Log _log = LogFactoryUtil.getLog(
 		PortalRequestProcessor.class);

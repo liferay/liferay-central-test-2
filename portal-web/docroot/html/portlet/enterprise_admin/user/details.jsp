@@ -48,6 +48,8 @@ boolean deletePortrait = ParamUtil.getBoolean(request, "deletePortrait");
 <aui:fieldset column="<%= true %>" cssClass="aui-w50">
 	<aui:select bean="<%= selContact %>" label="title[person]" model="<%= Contact.class %>" name="prefixId" listType="<%= ListTypeConstants.CONTACT_PREFIX %>" listTypeFieldName="prefixId" showEmptyOption="<%= true %>" />
 
+	<liferay-ui:success key="verify_email" message="your-email-verification-code-has-been-sent-and-the-new-email-address-will-be-applied-to-your-account-once-it-has-been-verified"/>
+
 	<liferay-ui:error exception="<%= DuplicateUserScreenNameException.class %>" message="the-screen-name-you-requested-is-already-taken" />
 
 	<liferay-ui:error exception="<%= GroupFriendlyURLException.class %>">

@@ -44,6 +44,7 @@ import com.liferay.portal.WebsiteURLException;
 import com.liferay.portal.kernel.bean.BeanParamUtil;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.servlet.SessionErrors;
+import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.Constants;
@@ -56,6 +57,7 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.model.Address;
+import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Contact;
 import com.liferay.portal.model.EmailAddress;
 import com.liferay.portal.model.Group;
@@ -530,6 +532,7 @@ public class EditUserAction extends PortletAction {
 		String oldScreenName = user.getScreenName();
 		String screenName = BeanParamUtil.getString(
 			user, actionRequest, "screenName");
+		String oldEmailAddress = user.getEmailAddress();
 		String emailAddress = BeanParamUtil.getString(
 			user, actionRequest, "emailAddress");
 		long facebookId = user.getFacebookId();
@@ -674,6 +677,14 @@ public class EditUserAction extends PortletAction {
 		SitesUtil.applyLayoutSetPrototypes(
 			user.getGroup(), publicLayoutSetPrototypeId,
 			privateLayoutSetPrototypeId, serviceContext);
+
+		Company company = PortalUtil.getCompany(actionRequest);
+
+		if (company.isStrangersVerify() &&
+			!oldEmailAddress.equalsIgnoreCase(emailAddress)) {
+
+			SessionMessages.add(actionRequest, "verify_email");
+		}
 
 		return new Object[] {user, oldScreenName, oldLanguageId};
 	}

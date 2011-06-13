@@ -328,6 +328,7 @@ update Role_ set name = 'Site Owner' where name = 'Community Owner';
 update Role_ set name = 'Organization User' where name = 'Organization Member';
 
 alter table User_ add status int;
+alter table User_ add emailAddressVerified BOOLEAN;
 
 COMMIT_TRANSACTION;
 
@@ -335,6 +336,8 @@ update User_ set status = 0;
 update User_ set status = 5 where active_ = FALSE;
 
 alter table User_ drop column active_;
+
+update User_ set emailAddressVerified = FALSE;
 
 create table UserGroups_Teams (
 	userGroupId LONG not null,

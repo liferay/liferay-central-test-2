@@ -32,12 +32,15 @@ String adminEmailPasswordSentBody = PrefsPropsUtil.getContent(company.getCompany
 
 String adminEmailPasswordResetSubject = PrefsPropsUtil.getContent(company.getCompanyId(), PropsKeys.ADMIN_EMAIL_PASSWORD_RESET_SUBJECT);
 String adminEmailPasswordResetBody = PrefsPropsUtil.getContent(company.getCompanyId(), PropsKeys.ADMIN_EMAIL_PASSWORD_RESET_BODY);
+
+String adminEmailVerificationSubject = PrefsPropsUtil.getContent(company.getCompanyId(), PropsKeys.ADMIN_EMAIL_VERIFICATION_SUBJECT);
+String adminEmailVerificationBody = PrefsPropsUtil.getContent(company.getCompanyId(), PropsKeys.ADMIN_EMAIL_VERIFICATION_BODY);
 %>
 
 <liferay-ui:error-marker key="errorSection" value="email_notifications" />
 
 <liferay-ui:tabs
-	names="sender,account-created-notification,password-changed-notification,password-reset-notification"
+	names="sender,account-created-notification,password-changed-notification,password-reset-notification,email-verification-notification"
 	refresh="<%= false %>"
 >
 	<liferay-ui:section>
@@ -118,6 +121,25 @@ String adminEmailPasswordResetBody = PrefsPropsUtil.getContent(company.getCompan
 			</div>
 		</aui:fieldset>
 	</liferay-ui:section>
+	<liferay-ui:section>
+		<aui:fieldset>
+			<liferay-ui:error key="emailVerificationSubject" message="please-enter-a-valid-subject" />
+
+			<aui:input cssClass="lfr-input-text-container" label="subject" name='<%= "settings--" + PropsKeys.ADMIN_EMAIL_VERIFICATION_SUBJECT + "--" %>' type="text" value="<%= adminEmailVerificationSubject %>" />
+
+			<liferay-ui:error key="emailVerificationBody" message="please-enter-a-valid-body" />
+
+			<aui:field-wrapper label="body">
+				<liferay-ui:input-editor editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>" initMethod='<%= "initEmailVerificationBodyEditor" %>' name="emailVerificationBody" toolbarSet="email" width="470" />
+
+				<aui:input name='<%= "settings--" + PropsKeys.ADMIN_EMAIL_VERIFICATION_BODY + "--" %>' type="hidden" value="<%= adminEmailPasswordResetBody %>" />
+			</aui:field-wrapper>
+
+			<div class="terms email-verification definition-of-terms">
+				<%@ include file="/html/portlet/enterprise_admin/settings/definition_of_terms.jspf" %>
+			</div>
+		</aui:fieldset>
+	</liferay-ui:section>
 </liferay-ui:tabs>
 
 <aui:script>
@@ -135,6 +157,10 @@ String adminEmailPasswordResetBody = PrefsPropsUtil.getContent(company.getCompan
 
 	function <portlet:namespace />initEmailPasswordResetBodyEditor() {
 		return "<%= UnicodeFormatter.toString(adminEmailPasswordResetBody) %>";
+	}
+
+	function <portlet:namespace />initEmailVerificationBodyEditor() {
+		return "<%= UnicodeFormatter.toString(adminEmailVerificationBody) %>";
 	}
 
 	function <portlet:namespace />saveEmails() {
@@ -158,6 +184,12 @@ String adminEmailPasswordResetBody = PrefsPropsUtil.getContent(company.getCompan
 
 		try {
 			document.<portlet:namespace />fm['<portlet:namespace />settings--<%= PropsKeys.ADMIN_EMAIL_PASSWORD_RESET_BODY %>--'].value = window['<portlet:namespace />emailPasswordResetBody'].getHTML();
+		}
+		catch (e) {
+		}
+
+		try {
+			document.<portlet:namespace />fm['<portlet:namespace />settings--<%= PropsKeys.ADMIN_EMAIL_VERIFICATION_BODY %>--'].value = window['<portlet:namespace />emailVerificationBody'].getHTML();
 		}
 		catch (e) {
 		}

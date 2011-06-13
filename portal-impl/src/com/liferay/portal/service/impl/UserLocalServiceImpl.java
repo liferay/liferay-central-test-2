@@ -26,6 +26,7 @@ import com.liferay.portal.ModelListenerException;
 import com.liferay.portal.NoSuchContactException;
 import com.liferay.portal.NoSuchGroupException;
 import com.liferay.portal.NoSuchRoleException;
+import com.liferay.portal.NoSuchTicketException;
 import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.NoSuchUserGroupException;
 import com.liferay.portal.PasswordExpiredException;
@@ -55,6 +56,7 @@ import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.search.QueryConfig;
 import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.search.Sort;
+import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
 import com.liferay.portal.kernel.util.ArrayUtil;
@@ -79,6 +81,7 @@ import com.liferay.portal.model.Contact;
 import com.liferay.portal.model.ContactConstants;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.GroupConstants;
+import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.PasswordPolicy;
 import com.liferay.portal.model.ResourceConstants;
@@ -86,6 +89,7 @@ import com.liferay.portal.model.Role;
 import com.liferay.portal.model.RoleConstants;
 import com.liferay.portal.model.Ticket;
 import com.liferay.portal.model.User;
+import com.liferay.portal.model.UserConstants;
 import com.liferay.portal.model.UserGroup;
 import com.liferay.portal.model.UserGroupRole;
 import com.liferay.portal.model.impl.LayoutImpl;
@@ -1443,6 +1447,15 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			catch (IOException ioe) {
 				throw new SystemException(ioe);
 			}
+		}
+
+		long companyId = user.getCompanyId();
+
+		Company company = companyLocalService.getCompanyById(companyId);
+
+		if (company.isStrangersVerify()) {
+			sendEmailAddressVerification(
+				user, user.getEmailAddress(), serviceContext);
 		}
 	}
 
@@ -3174,6 +3187,129 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			emailAddress, status, params, andSearch);
 	}
 
+	public void sendEmailAddressVerification(
+			User user, String emailAddress, ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		long companyId = serviceContext.getCompanyId();
+
+		Company company = companyLocalService.getCompanyById(companyId);
+
+		Ticket ticket = ticketLocalService.addTicket(
+			companyId, User.class.getName(), user.getUserId(),
+			null, emailAddress,
+			UserConstants.TICKET_TYPE_EMAIL_ADDRESS, serviceContext);
+
+		String verifyEmailAddressURL =
+			serviceContext.getPortalURL() + serviceContext.getPathMain() +
+				"/portal/verify_email_address?ticket=" + ticket.getKey();
+
+		Layout layout = layoutLocalService.getLayout(serviceContext.getPlid());
+
+		if (!layout.isPrivateLayout() && !layout.getGroup().isUser()) {
+			verifyEmailAddressURL += "&p_l_id=" + serviceContext.getPlid();
+		}
+
+		String remoteAddr = serviceContext.getRemoteAddr();
+
+		String remoteHost = serviceContext.getRemoteHost();
+
+		Map<String, String> headerMap = serviceContext.getHeaders();
+
+		String userAgent = headerMap.get("user-agent");
+
+		String fromName = PrefsPropsUtil.getString(
+				companyId, PropsKeys.ADMIN_EMAIL_FROM_NAME);
+
+		String fromAddress = PrefsPropsUtil.getString(
+			companyId, PropsKeys.ADMIN_EMAIL_FROM_ADDRESS);
+
+		String toName = user.getFullName();
+		String toAddress = emailAddress;
+
+		String subject = PrefsPropsUtil.getContent(
+			companyId, PropsKeys.ADMIN_EMAIL_VERIFICATION_SUBJECT);
+
+		String body = PrefsPropsUtil.getContent(
+			companyId, PropsKeys.ADMIN_EMAIL_VERIFICATION_BODY);
+
+		subject = StringUtil.replace(
+			subject,
+			new String[] {
+				"[$EMAIL_VERIFICATION_URL$]",
+				"[$EMAIL_VERIFICATION_CODE$]",
+				"[$FROM_ADDRESS$]",
+				"[$FROM_NAME$]",
+				"[$PORTAL_URL$]",
+				"[$TO_ADDRESS$]",
+				"[$TO_NAME$]",
+				"[$USER_AGENT$]",
+				"[$USER_ID$]",
+				"[$USER_SCREENNAME$]",
+				"[$REMOTE_ADDRESS$]",
+				"[$REMOTE_HOST$]"
+			},
+			new String[] {
+				verifyEmailAddressURL,
+				ticket.getKey(),
+				fromAddress,
+				fromName,
+				company.getVirtualHostname(),
+				toAddress,
+				toName,
+				userAgent,
+				String.valueOf(user.getUserId()),
+				user.getScreenName(),
+				remoteAddr,
+				remoteHost
+			});
+
+		body = StringUtil.replace(
+			body,
+			new String[] {
+				"[$EMAIL_VERIFICATION_URL$]",
+				"[$EMAIL_VERIFICATION_CODE$]",
+				"[$FROM_ADDRESS$]",
+				"[$FROM_NAME$]",
+				"[$PORTAL_URL$]",
+				"[$TO_ADDRESS$]",
+				"[$TO_NAME$]",
+				"[$USER_AGENT$]",
+				"[$USER_ID$]",
+				"[$USER_SCREENNAME$]",
+				"[$REMOTE_ADDRESS$]",
+				"[$REMOTE_HOST$]"
+			},
+			new String[] {
+				verifyEmailAddressURL,
+				ticket.getKey(),
+				fromAddress,
+				fromName,
+				company.getVirtualHostname(),
+				toAddress,
+				toName,
+				userAgent,
+				String.valueOf(user.getUserId()),
+				user.getScreenName(),
+				remoteAddr,
+				remoteHost
+			});
+
+		try {
+			InternetAddress from = new InternetAddress(fromAddress, fromName);
+
+			InternetAddress to = new InternetAddress(toAddress, toName);
+
+			MailMessage message = new MailMessage(
+				from, to, subject, body, true);
+
+			mailService.sendEmail(message);
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+	}
+
 	/**
 	 * Sends the password email to the user with the email address. The content
 	 * of this email can be specified in <code>portal.properties</code> with the
@@ -3528,6 +3664,62 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		userPersistence.update(user, false);
 
 		return user;
+	}
+
+	/**
+	 * Updates whether the user has verified email address.
+	 *
+	 * @param  userId the primary key of the user
+	 * @param  emailAddressVerified whether the user has verified email address
+	 * @return the user
+	 * @throws PortalException if a user with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public User updateEmailAddressVerified(
+			long userId, boolean emailAddressVerified)
+		throws PortalException, SystemException {
+
+		User user = userPersistence.findByPrimaryKey(userId);
+
+		user.setEmailAddressVerified(emailAddressVerified);
+
+		userPersistence.update(user, false);
+
+		return user;
+	}
+
+	public void verifyEmailAddress(String key)
+		throws PortalException, SystemException {
+
+		Ticket ticket = ticketLocalService.getTicket(key);
+
+		if (ticket.isExpired() &&
+			(ticket.getType() == UserConstants.TICKET_TYPE_EMAIL_ADDRESS)) {
+
+			throw new NoSuchTicketException();
+		}
+
+		User user = userPersistence.findByPrimaryKey(ticket.getClassPK());
+
+		String emailAddress = ticket.getExtraInfo().toLowerCase().trim();
+
+		if (!user.getEmailAddress().equalsIgnoreCase(emailAddress)) {
+			if (userPersistence.fetchByC_EA(
+				user.getCompanyId(), emailAddress) != null) {
+
+				throw new DuplicateUserEmailAddressException();
+			}
+
+			setEmailAddress(
+				user, StringPool.BLANK, user.getFirstName(),
+				user.getMiddleName(), user.getLastName(), emailAddress);
+		}
+
+		user.setEmailAddressVerified(true);
+
+		userPersistence.update(user, false);
+
+		ticketLocalService.deleteTicket(ticket);
 	}
 
 	/**
@@ -4284,8 +4476,15 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			user.setDigest(StringPool.BLANK);
 		}
 
-		setEmailAddress(
-			user, password, firstName, middleName, lastName, emailAddress);
+		boolean sendEmailAddressVerification = false;
+
+		if (!company.isStrangersVerify()) {
+			setEmailAddress(
+				user, password, firstName, middleName, lastName, emailAddress);
+		}
+		else {
+			sendEmailAddressVerification = true;
+		}
 
 		if (serviceContext != null) {
 			String uuid = serviceContext.getUuid();
@@ -4421,6 +4620,10 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		// Permission cache
 
 		PermissionCacheUtil.clearCache();
+
+		if (sendEmailAddressVerification) {
+			sendEmailAddressVerification(user, emailAddress, serviceContext);
+		}
 
 		return user;
 	}
