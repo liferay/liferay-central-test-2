@@ -775,7 +775,7 @@ public class UsersAdminImpl implements UsersAdmin {
 	}
 
 	public List<UserGroupRole> getUserGroupRoles(PortletRequest portletRequest)
-		throws SystemException, PortalException {
+		throws PortalException, SystemException {
 
 		List<UserGroupRole> userGroupRoles = new UniqueList<UserGroupRole>();
 

@@ -36,7 +36,7 @@ public class UserNotificationEventLocalServiceImpl
 
 	public UserNotificationEvent addUserNotificationEvent(
 			long userId, NotificationEvent notificationEvent)
-		throws SystemException, PortalException {
+		throws PortalException, SystemException {
 
 		JSONObject payloadJSONObject = notificationEvent.getPayload();
 
@@ -53,7 +53,7 @@ public class UserNotificationEventLocalServiceImpl
 	public UserNotificationEvent addUserNotificationEvent(
 			long userId, String type, long timestamp, long deliverBy,
 			String payload, ServiceContext serviceContext)
-		throws SystemException, PortalException {
+		throws PortalException, SystemException {
 
 		User user = userPersistence.findByPrimaryKey(userId);
 
@@ -77,7 +77,7 @@ public class UserNotificationEventLocalServiceImpl
 
 	public List<UserNotificationEvent> addUserNotificationEvents(
 			long userId, Collection<NotificationEvent> notificationEvents)
-		throws SystemException, PortalException {
+		throws PortalException, SystemException {
 
 		List<UserNotificationEvent> userNotificationEvents =
 			new ArrayList<UserNotificationEvent>(notificationEvents.size());

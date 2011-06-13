@@ -678,7 +678,7 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 
 	protected int moveChildrenMessages(
 			MBMessage parentMessage, MBCategory category, long oldThreadId)
-		throws SystemException, PortalException {
+		throws PortalException, SystemException {
 
 		int messagesMoved = 0;
 

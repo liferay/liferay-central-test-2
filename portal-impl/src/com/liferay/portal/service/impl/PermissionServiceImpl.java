@@ -189,7 +189,7 @@ public class PermissionServiceImpl extends PermissionServiceBaseImpl {
 
 	public void unsetRolePermission(
 			long roleId, long groupId, long permissionId)
-		throws SystemException, PortalException {
+		throws PortalException, SystemException {
 
 		checkPermission(
 			getPermissionChecker(), groupId, Role.class.getName(), roleId);

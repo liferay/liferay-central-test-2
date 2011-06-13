@@ -118,7 +118,7 @@ public class SoftwareCatalogServlet extends HttpServlet {
 	}
 
 	protected long getGroupId(HttpServletRequest request)
-		throws SystemException, PortalException {
+		throws PortalException, SystemException {
 
 		long groupId = ParamUtil.getLong(request, "groupId");
 

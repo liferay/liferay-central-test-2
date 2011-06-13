@@ -192,7 +192,7 @@ public class UsersAdminUtil {
 
 	public static List<UserGroupRole> getUserGroupRoles(
 			PortletRequest portletRequest)
-		throws SystemException, PortalException {
+		throws PortalException, SystemException {
 
 		return getUsersAdmin().getUserGroupRoles(portletRequest);
 	}

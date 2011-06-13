@@ -45,7 +45,7 @@ public class MembershipRequestServiceImpl
 	}
 
 	public MembershipRequest getMembershipRequest(long membershipRequestId)
-		throws SystemException, PortalException {
+		throws PortalException, SystemException {
 
 		return membershipRequestLocalService.getMembershipRequest(
 			membershipRequestId);

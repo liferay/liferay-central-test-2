@@ -75,7 +75,7 @@ public class SCProductVersionServiceImpl
 
 	public List<SCProductVersion> getProductVersions(
 			long productEntryId, int start, int end)
-		throws SystemException, PortalException {
+		throws PortalException, SystemException {
 
 		SCProductEntryPermission.check(
 			getPermissionChecker(), productEntryId, ActionKeys.VIEW);
@@ -85,7 +85,7 @@ public class SCProductVersionServiceImpl
 	}
 
 	public int getProductVersionsCount(long productEntryId)
-		throws SystemException, PortalException {
+		throws PortalException, SystemException {
 
 		SCProductEntryPermission.check(
 			getPermissionChecker(), productEntryId, ActionKeys.VIEW);

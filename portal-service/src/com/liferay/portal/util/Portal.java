@@ -658,7 +658,7 @@ public interface Portal {
 	public String getOuterPortletId(HttpServletRequest request);
 
 	public long getParentGroupId(long scopeGroupId)
-		throws SystemException, PortalException;
+		throws PortalException, SystemException;
 
 	public String getPathContext();
 

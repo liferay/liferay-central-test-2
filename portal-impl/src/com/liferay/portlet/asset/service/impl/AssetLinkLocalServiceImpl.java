@@ -165,7 +165,7 @@ public class AssetLinkLocalServiceImpl extends AssetLinkLocalServiceBaseImpl {
 
 	public void updateLinks(
 			long userId, long entryId, long[] linkEntryIds, int typeId)
-		throws SystemException, PortalException {
+		throws PortalException, SystemException {
 
 		if (linkEntryIds == null) {
 			return;

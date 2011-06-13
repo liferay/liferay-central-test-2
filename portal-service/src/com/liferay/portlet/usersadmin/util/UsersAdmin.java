@@ -118,7 +118,7 @@ public interface UsersAdmin {
 		String orderByCol, String orderByType);
 
 	public List<UserGroupRole> getUserGroupRoles(PortletRequest portletRequest)
-		throws SystemException, PortalException;
+		throws PortalException, SystemException;
 
 	public OrderByComparator getUserOrderByComparator(
 		String orderByCol, String orderByType);
