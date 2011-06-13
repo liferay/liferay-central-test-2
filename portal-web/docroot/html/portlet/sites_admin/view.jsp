@@ -176,11 +176,11 @@ pageContext.setAttribute("portletURL", portletURL);
 
 		ResultRow row = new ResultRow(new Object[] {group, tabs1}, group.getGroupId(), i);
 
-		PortletURL rowURL = renderResponse.createActionURL();
+		PortletURL rowURL = renderResponse.createRenderURL();
 
 		rowURL.setWindowState(WindowState.NORMAL);
 
-		rowURL.setParameter("struts_action", "/sites_admin/page");
+		rowURL.setParameter("struts_action", "/sites_admin/edit_site");
 		rowURL.setParameter("groupId", String.valueOf(group.getGroupId()));
 		rowURL.setParameter("redirect", currentURL);
 
@@ -188,103 +188,24 @@ pageContext.setAttribute("portletURL", portletURL);
 
 		StringBundler sb = new StringBundler();
 
+		sb.append("<a href=\"");
+		sb.append(rowURL.toString());
+		sb.append("\">");
 		sb.append(HtmlUtil.escape(group.getDescriptiveName()));
+		sb.append("</a>");
 
-		int publicLayoutsPageCount = group.getPublicLayoutsPageCount();
-		int privateLayoutsPageCount = group.getPrivateLayoutsPageCount();
-
-		Group stagingGroup = null;
-
-		if (group.hasStagingGroup()) {
-			stagingGroup = group.getStagingGroup();
-		}
-
-		if ((tabs1.equals("sites-owned") || tabs1.equals("sites-joined") || tabs1.equals("all-sites")) &&
-			((publicLayoutsPageCount > 0) || (privateLayoutsPageCount > 0))) {
+		if (group.isOrganization()) {
+			Organization organization = OrganizationLocalServiceUtil.getOrganization(group.getOrganizationId());
 
 			sb.append("<br />");
-
-			if (publicLayoutsPageCount > 0) {
-				rowURL.setParameter("groupId", String.valueOf(group.getGroupId()));
-				rowURL.setParameter("privateLayout", Boolean.FALSE.toString());
-
-				sb.append("<a href=\"");
-				sb.append(rowURL.toString());
-				sb.append("\">");
-				sb.append(LanguageUtil.get(pageContext, "public-pages"));
-				sb.append(" - ");
-				sb.append(LanguageUtil.get(pageContext, "live"));
-				sb.append(" (");
-				sb.append(group.getPublicLayoutsPageCount());
-				sb.append(")");
-				sb.append("</a>");
-			}
-			else {
-				sb.append(LanguageUtil.get(pageContext, "public-pages"));
-				sb.append(" (0)");
-			}
-
-			if ((stagingGroup != null) && GroupPermissionUtil.contains(permissionChecker, group.getGroupId(), ActionKeys.MANAGE_LAYOUTS)) {
-				rowURL.setParameter("groupId", String.valueOf(stagingGroup.getGroupId()));
-				rowURL.setParameter("privateLayout", Boolean.FALSE.toString());
-
-				if (stagingGroup.getPublicLayoutsPageCount() > 0) {
-					sb.append(" / ");
-					sb.append("<a href=\"");
-					sb.append(rowURL.toString());
-					sb.append("\">");
-					sb.append(LanguageUtil.get(pageContext, "staging"));
-					sb.append("</a>");
-				}
-			}
-
-			sb.append("<br />");
-
-			if (privateLayoutsPageCount > 0) {
-				rowURL.setParameter("groupId", String.valueOf(group.getGroupId()));
-				rowURL.setParameter("privateLayout", Boolean.TRUE.toString());
-
-				sb.append("<a href=\"");
-				sb.append(rowURL.toString());
-				sb.append("\">");
-				sb.append(LanguageUtil.get(pageContext, "private-pages"));
-				sb.append(" - ");
-				sb.append(LanguageUtil.get(pageContext, "live"));
-				sb.append(" (");
-				sb.append(group.getPrivateLayoutsPageCount());
-				sb.append(")");
-				sb.append("</a>");
-			}
-			else {
-				sb.append(LanguageUtil.get(pageContext, "private-pages"));
-				sb.append(" (0)");
-			}
-
-			if ((stagingGroup != null) && GroupPermissionUtil.contains(permissionChecker, group.getGroupId(), ActionKeys.MANAGE_LAYOUTS)) {
-				rowURL.setParameter("groupId", String.valueOf(stagingGroup.getGroupId()));
-				rowURL.setParameter("privateLayout", Boolean.TRUE.toString());
-
-				if (stagingGroup.getPrivateLayoutsPageCount() > 0) {
-					sb.append(" / ");
-					sb.append("<a href=\"");
-					sb.append(rowURL.toString());
-					sb.append("\">");
-					sb.append(LanguageUtil.get(pageContext, "staging"));
-					sb.append("</a>");
-				}
-			}
+			sb.append(LanguageUtil.format(pageContext, "belongs-to-an-organization-of-type-x", LanguageUtil.get(pageContext, organization.getType())));
 		}
 
 		row.addText(sb.toString());
 
 		// Type
 
-		if ((publicLayoutsPageCount > 0) || (privateLayoutsPageCount > 0)) {
-			row.addText(LanguageUtil.get(pageContext, group.getTypeLabel()), rowURL);
-		}
-		else {
-			row.addText(LanguageUtil.get(pageContext, group.getTypeLabel()));
-		}
+		row.addText(LanguageUtil.get(pageContext, group.getTypeLabel()), rowURL);
 
 		// Members
 
