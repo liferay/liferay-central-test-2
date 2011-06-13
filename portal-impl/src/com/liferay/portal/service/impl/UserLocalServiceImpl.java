@@ -4742,7 +4742,8 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 			Ticket ticket = ticketLocalService.addTicket(
 				companyId, User.class.getName(), user.getUserId(),
-				expirationDate, serviceContext);
+				expirationDate, null, UserConstants.TICKET_TYPE_PASSWORD,
+				serviceContext);
 
 			passwordResetURL =
 				serviceContext.getPortalURL() + serviceContext.getPathMain() +
