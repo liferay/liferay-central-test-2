@@ -31,4 +31,4 @@ else if (displayStyle.equals("vertical")) {
 	<script type="text/javascript" src="http://www.google.com/buzz/api/button.js"></script>
 </liferay-util:html-bottom>
 
-<a class="google-buzz-button" data-button-style="<%= buzzDisplayStyle %>" data-locale="<%= locale.getLanguage() %>" data-url="<%= url %>" href="http://www.google.com/buzz/post"  title="<liferay-ui:message key="publish-in-google-buzz" />" >buzz</a>
+<a class="google-buzz-button" data-button-style="<%= buzzDisplayStyle %>" data-locale="<%= locale.getLanguage() %>" data-url="<%= url %>" href="http://www.google.com/buzz/post"  title="<liferay-ui:message key="publish-in-google-buzz" />"></a>
