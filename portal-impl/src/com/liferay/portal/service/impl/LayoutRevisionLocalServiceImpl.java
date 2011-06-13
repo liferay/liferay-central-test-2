@@ -231,7 +231,7 @@ public class LayoutRevisionLocalServiceImpl
 			return layoutRevisions.get(0);
 		}
 
-		return null;
+		throw new NoSuchLayoutRevisionException();
 	}
 
 	public List<LayoutRevision> getLayoutRevisions(long plid)
