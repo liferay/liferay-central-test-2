@@ -180,6 +180,15 @@
 	<load-on-startup>1</load-on-startup>
 </servlet>
 <servlet>
+	<servlet-name>Atom Servlet</servlet-name>
+	<servlet-class>com.liferay.portal.kernel.servlet.PortalClassLoaderServlet</servlet-class>
+	<init-param>
+		<param-name>servlet-class</param-name>
+		<param-value>com.liferay.portal.servlet.AtomServlet</param-value>
+	</init-param>
+	<load-on-startup>0</load-on-startup>
+</servlet>
+<servlet>
 	<servlet-name>Axis Servlet</servlet-name>
 	<servlet-class>com.liferay.portal.kernel.servlet.PortalClassLoaderServlet</servlet-class>
 	<init-param>
