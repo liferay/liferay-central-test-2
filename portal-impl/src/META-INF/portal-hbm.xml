@@ -900,6 +900,7 @@
 		<property name="lockout" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
 		<property name="lockoutDate" type="org.hibernate.type.TimestampType" />
 		<property name="agreedToTermsOfUse" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="emailAddressVerified" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
 		<property name="status" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
 	</class>
 	<class name="com.liferay.portal.model.impl.UserGroupImpl" table="UserGroup">

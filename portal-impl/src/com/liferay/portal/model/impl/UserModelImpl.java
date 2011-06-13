@@ -98,9 +98,10 @@ public class UserModelImpl extends BaseModelImpl<User> implements UserModel {
 			{ "lockout", Types.BOOLEAN },
 			{ "lockoutDate", Types.TIMESTAMP },
 			{ "agreedToTermsOfUse", Types.BOOLEAN },
+			{ "emailAddressVerified", Types.BOOLEAN },
 			{ "status", Types.INTEGER }
 		};
-	public static final String TABLE_SQL_CREATE = "create table User_ (uuid_ VARCHAR(75) null,userId LONG not null primary key,companyId LONG,createDate DATE null,modifiedDate DATE null,defaultUser BOOLEAN,contactId LONG,password_ VARCHAR(75) null,passwordEncrypted BOOLEAN,passwordReset BOOLEAN,passwordModifiedDate DATE null,digest VARCHAR(255) null,reminderQueryQuestion VARCHAR(75) null,reminderQueryAnswer VARCHAR(75) null,graceLoginCount INTEGER,screenName VARCHAR(75) null,emailAddress VARCHAR(75) null,facebookId LONG,openId VARCHAR(1024) null,portraitId LONG,languageId VARCHAR(75) null,timeZoneId VARCHAR(75) null,greeting VARCHAR(255) null,comments STRING null,firstName VARCHAR(75) null,middleName VARCHAR(75) null,lastName VARCHAR(75) null,jobTitle VARCHAR(100) null,loginDate DATE null,loginIP VARCHAR(75) null,lastLoginDate DATE null,lastLoginIP VARCHAR(75) null,lastFailedLoginDate DATE null,failedLoginAttempts INTEGER,lockout BOOLEAN,lockoutDate DATE null,agreedToTermsOfUse BOOLEAN,status INTEGER)";
+	public static final String TABLE_SQL_CREATE = "create table User_ (uuid_ VARCHAR(75) null,userId LONG not null primary key,companyId LONG,createDate DATE null,modifiedDate DATE null,defaultUser BOOLEAN,contactId LONG,password_ VARCHAR(75) null,passwordEncrypted BOOLEAN,passwordReset BOOLEAN,passwordModifiedDate DATE null,digest VARCHAR(255) null,reminderQueryQuestion VARCHAR(75) null,reminderQueryAnswer VARCHAR(75) null,graceLoginCount INTEGER,screenName VARCHAR(75) null,emailAddress VARCHAR(75) null,facebookId LONG,openId VARCHAR(1024) null,portraitId LONG,languageId VARCHAR(75) null,timeZoneId VARCHAR(75) null,greeting VARCHAR(255) null,comments STRING null,firstName VARCHAR(75) null,middleName VARCHAR(75) null,lastName VARCHAR(75) null,jobTitle VARCHAR(100) null,loginDate DATE null,loginIP VARCHAR(75) null,lastLoginDate DATE null,lastLoginIP VARCHAR(75) null,lastFailedLoginDate DATE null,failedLoginAttempts INTEGER,lockout BOOLEAN,lockoutDate DATE null,agreedToTermsOfUse BOOLEAN,emailAddressVerified BOOLEAN,status INTEGER)";
 	public static final String TABLE_SQL_DROP = "drop table User_";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
@@ -158,6 +159,7 @@ public class UserModelImpl extends BaseModelImpl<User> implements UserModel {
 		model.setLockout(soapModel.getLockout());
 		model.setLockoutDate(soapModel.getLockoutDate());
 		model.setAgreedToTermsOfUse(soapModel.getAgreedToTermsOfUse());
+		model.setEmailAddressVerified(soapModel.getEmailAddressVerified());
 		model.setStatus(soapModel.getStatus());
 
 		return model;
@@ -793,6 +795,19 @@ public class UserModelImpl extends BaseModelImpl<User> implements UserModel {
 	}
 
 	@JSON
+	public boolean getEmailAddressVerified() {
+		return _emailAddressVerified;
+	}
+
+	public boolean isEmailAddressVerified() {
+		return _emailAddressVerified;
+	}
+
+	public void setEmailAddressVerified(boolean emailAddressVerified) {
+		_emailAddressVerified = emailAddressVerified;
+	}
+
+	@JSON
 	public int getStatus() {
 		return _status;
 	}
@@ -864,6 +879,7 @@ public class UserModelImpl extends BaseModelImpl<User> implements UserModel {
 		userImpl.setLockout(getLockout());
 		userImpl.setLockoutDate(getLockoutDate());
 		userImpl.setAgreedToTermsOfUse(getAgreedToTermsOfUse());
+		userImpl.setEmailAddressVerified(getEmailAddressVerified());
 		userImpl.setStatus(getStatus());
 
 		userImpl.resetOriginalValues();
@@ -948,7 +964,7 @@ public class UserModelImpl extends BaseModelImpl<User> implements UserModel {
 	}
 
 	public String toString() {
-		StringBundler sb = new StringBundler(77);
+		StringBundler sb = new StringBundler(79);
 
 		sb.append("{uuid=");
 		sb.append(getUuid());
@@ -1024,6 +1040,8 @@ public class UserModelImpl extends BaseModelImpl<User> implements UserModel {
 		sb.append(getLockoutDate());
 		sb.append(", agreedToTermsOfUse=");
 		sb.append(getAgreedToTermsOfUse());
+		sb.append(", emailAddressVerified=");
+		sb.append(getEmailAddressVerified());
 		sb.append(", status=");
 		sb.append(getStatus());
 		sb.append("}");
@@ -1032,7 +1050,7 @@ public class UserModelImpl extends BaseModelImpl<User> implements UserModel {
 	}
 
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(118);
+		StringBundler sb = new StringBundler(121);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.portal.model.User");
@@ -1187,6 +1205,10 @@ public class UserModelImpl extends BaseModelImpl<User> implements UserModel {
 		sb.append(getAgreedToTermsOfUse());
 		sb.append("]]></column-value></column>");
 		sb.append(
+			"<column><column-name>emailAddressVerified</column-name><column-value><![CDATA[");
+		sb.append(getEmailAddressVerified());
+		sb.append("]]></column-value></column>");
+		sb.append(
 			"<column><column-name>status</column-name><column-value><![CDATA[");
 		sb.append(getStatus());
 		sb.append("]]></column-value></column>");
@@ -1249,6 +1271,7 @@ public class UserModelImpl extends BaseModelImpl<User> implements UserModel {
 	private boolean _lockout;
 	private Date _lockoutDate;
 	private boolean _agreedToTermsOfUse;
+	private boolean _emailAddressVerified;
 	private int _status;
 	private transient ExpandoBridge _expandoBridge;
 }

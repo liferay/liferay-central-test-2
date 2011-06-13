@@ -1957,6 +1957,7 @@ create table User_ (
 	lockout BOOLEAN,
 	lockoutDate DATE null,
 	agreedToTermsOfUse BOOLEAN,
+	emailAddressVerified BOOLEAN,
 	status INTEGER
 );
 

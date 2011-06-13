@@ -1002,6 +1002,7 @@
 				<temporal>TIMESTAMP</temporal>
 			</basic>
 			<basic name="agreedToTermsOfUse" />
+			<basic name="emailAddressVerified" />
 			<basic name="status" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />

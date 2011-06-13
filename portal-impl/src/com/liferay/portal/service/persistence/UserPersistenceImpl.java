@@ -791,6 +791,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 		userImpl.setLockout(user.isLockout());
 		userImpl.setLockoutDate(user.getLockoutDate());
 		userImpl.setAgreedToTermsOfUse(user.isAgreedToTermsOfUse());
+		userImpl.setEmailAddressVerified(user.isEmailAddressVerified());
 		userImpl.setStatus(user.getStatus());
 
 		return userImpl;

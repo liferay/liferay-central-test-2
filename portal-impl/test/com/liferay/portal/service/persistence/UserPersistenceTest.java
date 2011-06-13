@@ -104,6 +104,7 @@ public class UserPersistenceTest extends BasePersistenceTestCase {
 		newUser.setLockout(randomBoolean());
 		newUser.setLockoutDate(nextDate());
 		newUser.setAgreedToTermsOfUse(randomBoolean());
+		newUser.setEmailAddressVerified(randomBoolean());
 		newUser.setStatus(nextInt());
 
 		_persistence.update(newUser, false);
@@ -162,6 +163,8 @@ public class UserPersistenceTest extends BasePersistenceTestCase {
 			Time.getShortTimestamp(newUser.getLockoutDate()));
 		assertEquals(existingUser.getAgreedToTermsOfUse(),
 			newUser.getAgreedToTermsOfUse());
+		assertEquals(existingUser.getEmailAddressVerified(),
+			newUser.getEmailAddressVerified());
 		assertEquals(existingUser.getStatus(), newUser.getStatus());
 	}
 
@@ -357,6 +360,7 @@ public class UserPersistenceTest extends BasePersistenceTestCase {
 		user.setLockout(randomBoolean());
 		user.setLockoutDate(nextDate());
 		user.setAgreedToTermsOfUse(randomBoolean());
+		user.setEmailAddressVerified(randomBoolean());
 		user.setStatus(nextInt());
 
 		_persistence.update(user, false);

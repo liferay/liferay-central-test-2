@@ -2057,6 +2057,15 @@ public class UserLocalServiceUtil {
 			screenName, emailAddress, status, params, andSearch);
 	}
 
+	public static void sendEmailAddressVerification(
+		com.liferay.portal.model.User user, java.lang.String emailAddress,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		getService()
+			.sendEmailAddressVerification(user, emailAddress, serviceContext);
+	}
+
 	/**
 	* Sends the password email to the user with the email address. The content
 	* of this email can be specified in <code>portal.properties</code> with the
@@ -2288,6 +2297,29 @@ public class UserLocalServiceUtil {
 		return getService()
 				   .updateEmailAddress(userId, password, emailAddress1,
 			emailAddress2);
+	}
+
+	/**
+	* Updates whether the user has verified email address.
+	*
+	* @param userId the primary key of the user
+	* @param emailAddressVerified whether the user has verified email address
+	* @return the user
+	* @throws PortalException if a user with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.portal.model.User updateEmailAddressVerified(
+		long userId, boolean emailAddressVerified)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .updateEmailAddressVerified(userId, emailAddressVerified);
+	}
+
+	public static void verifyEmailAddress(java.lang.String key)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		getService().verifyEmailAddress(key);
 	}
 
 	/**

@@ -68,6 +68,7 @@ public class UserSoap implements Serializable {
 		soapModel.setLockout(model.getLockout());
 		soapModel.setLockoutDate(model.getLockoutDate());
 		soapModel.setAgreedToTermsOfUse(model.getAgreedToTermsOfUse());
+		soapModel.setEmailAddressVerified(model.getEmailAddressVerified());
 		soapModel.setStatus(model.getStatus());
 
 		return soapModel;
@@ -437,6 +438,18 @@ public class UserSoap implements Serializable {
 		_agreedToTermsOfUse = agreedToTermsOfUse;
 	}
 
+	public boolean getEmailAddressVerified() {
+		return _emailAddressVerified;
+	}
+
+	public boolean isEmailAddressVerified() {
+		return _emailAddressVerified;
+	}
+
+	public void setEmailAddressVerified(boolean emailAddressVerified) {
+		_emailAddressVerified = emailAddressVerified;
+	}
+
 	public int getStatus() {
 		return _status;
 	}
@@ -482,5 +495,6 @@ public class UserSoap implements Serializable {
 	private boolean _lockout;
 	private Date _lockoutDate;
 	private boolean _agreedToTermsOfUse;
+	private boolean _emailAddressVerified;
 	private int _status;
 }
