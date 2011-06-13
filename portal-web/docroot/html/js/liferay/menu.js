@@ -93,7 +93,7 @@ AUI().add(
 						var activeTrigger = instance._activeTrigger;
 
 						if (activeTrigger && (activeTrigger != trigger)) {
-							activeTrigger.removeClass(CSS_STATE_ACTIVE)
+							activeTrigger.removeClass(CSS_STATE_ACTIVE);
 						}
 
 						if (!trigger.hasClass('disabled')) {
@@ -396,7 +396,11 @@ AUI().add(
 
 					var overlay = instance._overlay;
 
-					overlay.set('align.points', instance._getAlignPoints(cssClass));
+					var align = overlay.get('align');
+
+					align.points = instance._getAlignPoints(cssClass);
+
+					overlay.set('align', align);
 
 					overlay._syncUIPosAlign();
 
