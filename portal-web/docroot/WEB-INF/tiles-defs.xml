@@ -675,14 +675,6 @@
 		<put name="portlet_content" value="/portlet/users_admin/view.jsp" />
 	</definition>
 
-	<!-- Enterprise Admin Sites -->
-
-	<definition name="portlet.enterprise_admin_sites" extends="portlet" />
-
-	<definition name="portlet.enterprise_admin_sites.view" extends="portlet.enterprise_admin_sites">
-		<put name="portlet_content" value="/portlet/enterprise_admin_sites/view.jsp" />
-	</definition>
-
 	<!-- Expando -->
 
 	<definition name="portlet.expando" extends="portlet" />

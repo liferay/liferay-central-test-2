@@ -1897,11 +1897,11 @@
 	</portlet>
 	<portlet>
 		<portlet-name>134</portlet-name>
-		<display-name>Enterprise Admin Communities</display-name>
+		<display-name>Sites Admin</display-name>
 		<portlet-class>com.liferay.portlet.StrutsPortlet</portlet-class>
 		<init-param>
 			<name>view-action</name>
-			<value>/enterprise_admin_sites/view</value>
+			<value>/sites_admin/view</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
 		<supports>

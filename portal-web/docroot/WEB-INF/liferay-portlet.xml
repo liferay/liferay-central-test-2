@@ -321,7 +321,8 @@
 	<portlet>
 		<portlet-name>29</portlet-name>
 		<icon>/html/icons/communities.png</icon>
-		<struts-path>sites_admin</struts-path>
+		<struts-path>my_sites</struts-path>
+		<parent-struts-path>sites_admin</parent-struts-path>
 		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
 		<asset-renderer-factory>com.liferay.portal.asset.LayoutRevisionAssetRendererFactory</asset-renderer-factory>
 		<workflow-handler>com.liferay.portal.workflow.LayoutRevisionWorkflowHandler</workflow-handler>
@@ -1276,7 +1277,7 @@
 	<portlet>
 		<portlet-name>134</portlet-name>
 		<icon>/html/icons/enterprise_admin_communities.png</icon>
-		<struts-path>enterprise_admin_sites</struts-path>
+		<struts-path>sites_admin</struts-path>
 		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
 		<control-panel-entry-category>portal</control-panel-entry-category>
 		<control-panel-entry-weight>2.0</control-panel-entry-weight>
