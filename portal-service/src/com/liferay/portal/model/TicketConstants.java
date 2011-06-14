@@ -15,8 +15,8 @@
 package com.liferay.portal.model;
 
 /**
-  * @author Mika Koivisto
-  * @author Brian Wing Shun Chan
+ * @author Mika Koivisto
+ * @author Brian Wing Shun Chan
  */
 public class TicketConstants {
 
