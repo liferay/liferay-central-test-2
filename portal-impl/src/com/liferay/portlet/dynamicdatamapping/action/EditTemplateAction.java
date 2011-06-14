@@ -236,9 +236,7 @@ public class EditTemplateAction extends PortletAction {
 				PortletPreferencesFactoryUtil.getPortletSetup(
 					actionRequest, portletResource);
 
-			if (Validator.equals(
-					DDMTemplateConstants.TEMPLATE_TYPE_DETAIL, type)) {
-
+			if (type.equals(DDMTemplateConstants.TEMPLATE_TYPE_DETAIL)) {
 				preferences.setValue(
 					"detailDDMTemplateId",
 					String.valueOf(template.getTemplateId()));
