@@ -849,6 +849,10 @@ public class Validator {
 	 */
 	public static boolean isUrl(String url) {
 		if (Validator.isNotNull(url)) {
+			if (url.indexOf(CharPool.COLON) == -1) {
+				return false;
+			}
+
 			try {
 				new URL(url);
 
