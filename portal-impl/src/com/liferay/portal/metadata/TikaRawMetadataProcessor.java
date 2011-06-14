@@ -154,7 +154,8 @@ public class TikaRawMetadataProcessor implements RawMetadataProcessor {
 	private static Log _log = LogFactoryUtil.getLog(
 		TikaRawMetadataProcessor.class);
 
-	private static Map<String, Field[]> _fields = new HashMap<String, Field[]>();
+	private static Map<String, Field[]> _fields =
+		new HashMap<String, Field[]>();
 
 	private Tika _tika;
 
