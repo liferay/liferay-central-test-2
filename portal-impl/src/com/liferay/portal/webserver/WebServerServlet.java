@@ -367,7 +367,6 @@ public class WebServerServlet extends HttpServlet {
 			request, "documentThumbnail");
 		int previewFileIndex = ParamUtil.getInteger(
 			request, "previewFileIndex");
-
 		boolean videoPreview = ParamUtil.getBoolean(request, "videoPreview");
 		boolean videoThumbnail = ParamUtil.getBoolean(
 			request, "videoThumbnail");
@@ -423,8 +422,7 @@ public class WebServerServlet extends HttpServlet {
 			inputStream = new FileInputStream(thumbnailFile);
 
 			fileName = FileUtil.stripExtension(fileName).concat(
-				StringPool.PERIOD).concat(
-					VideoProcessorUtil.THUMBNAIL_TYPE);
+				StringPool.PERIOD).concat(VideoProcessorUtil.THUMBNAIL_TYPE);
 
 			converted = true;
 		}

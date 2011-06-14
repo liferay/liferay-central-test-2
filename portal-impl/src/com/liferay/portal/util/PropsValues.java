@@ -413,7 +413,7 @@ public class PropsValues {
 	public static final int DL_FILE_ENTRY_PREVIEW_VIDEO_HEIGHT = GetterUtil.getInteger(PropsUtil.get(PropsKeys.DL_FILE_ENTRY_PREVIEW_VIDEO_HEIGHT));
 
 	public static final int DL_FILE_ENTRY_PREVIEW_VIDEO_WIDTH = GetterUtil.getInteger(PropsUtil.get(PropsKeys.DL_FILE_ENTRY_PREVIEW_VIDEO_WIDTH));
-	
+
 	public static final boolean DL_FILE_ENTRY_READ_COUNT_ENABLED = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.DL_FILE_ENTRY_READ_COUNT_ENABLED));
 
 	public static final int DL_FILE_ENTRY_THUMBNAIL_DEPTH = GetterUtil.getInteger(PropsUtil.get(PropsKeys.DL_FILE_ENTRY_THUMBNAIL_DEPTH));

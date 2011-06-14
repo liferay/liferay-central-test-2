@@ -35,7 +35,6 @@ import com.xuggle.mediatool.ToolFactory;
 import java.awt.image.BufferedImage;
 
 import java.io.File;
-import java.io.IOException;
 import java.io.InputStream;
 
 import java.util.Arrays;
@@ -43,7 +42,6 @@ import java.util.List;
 import java.util.Vector;
 
 /**
- * @author Juan González
  * @author Sergio González
  */
 public class VideoProcessorUtil {
@@ -56,12 +54,12 @@ public class VideoProcessorUtil {
 		_instance._generateVideo(fileEntry);
 	}
 
-	public static File getThumbnailFile(String id) {
-		return _instance._getThumbnailFile(id);
-	}
-
 	public static File getPreviewFile(String id) {
 		return _instance._getPreviewFile(id);
+	}
+
+	public static File getThumbnailFile(String id) {
+		return _instance._getThumbnailFile(id);
 	}
 
 	public static boolean hasVideo(FileEntry fileEntry) {
@@ -78,9 +76,29 @@ public class VideoProcessorUtil {
 		return _instance._isSupportedVideo(fileEntry);
 	}
 
-	private VideoProcessorUtil() {
-		FileUtil.mkdirs(_PREVIEW_PATH);
-		FileUtil.mkdirs(_THUMBNAIL_PATH);
+	private void _generateThumbnailXuggler(
+			File srcFile, File thumbnailFile, int height, int width)
+		throws SystemException {
+
+		try {
+			IMediaReader iMediaReader = ToolFactory.makeReader(
+				srcFile.getCanonicalPath());
+
+			iMediaReader.setBufferedImageTypeToGenerate(
+				BufferedImage.TYPE_3BYTE_BGR);
+
+			CaptureFrameListener captureFrameListener =
+				new CaptureFrameListener(
+					thumbnailFile, THUMBNAIL_TYPE, height, width);
+
+			iMediaReader.addListener(captureFrameListener);
+
+			while (iMediaReader.readPacket() == null) {
+			}
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
 	}
 
 	private void _generateVideo(FileEntry fileEntry) {
@@ -111,8 +129,8 @@ public class VideoProcessorUtil {
 						PropsValues.DL_FILE_ENTRY_PREVIEW_VIDEO_WIDTH);
 
 					if (_log.isInfoEnabled()) {
-						_log.info("Xuggler generated a preview video for "
-							+ id);
+						_log.info(
+							"Xuggler generated a preview video for " + id);
 					}
 				}
 				finally {
@@ -131,8 +149,7 @@ public class VideoProcessorUtil {
 					PropsValues.DL_FILE_ENTRY_THUMBNAIL_WIDTH);
 
 				if (_log.isInfoEnabled()) {
-					_log.info("Xuggler generated a thumbnail from video of "
-						+ id);
+					_log.info("Xuggler generated a thumbnail for " + id);
 				}
 			}
 		}
@@ -149,56 +166,30 @@ public class VideoProcessorUtil {
 	private void _generateVideoXuggler(
 			FileEntry fileEntry, File srcFile, File destFile, int height,
 			int width)
-		throws IOException,	SystemException {
+		throws SystemException {
 
 		try {
-			IMediaReader reader = ToolFactory.makeReader(
+			IMediaReader iMediaReader = ToolFactory.makeReader(
 				srcFile.getCanonicalPath());
 
-			VideoListener myVideoListener = new VideoListener(height, width);
+			VideoResizer videoResizer = new VideoResizer(height, width);
 
-			VideoResizer resizer = new VideoResizer(height, width);
+			iMediaReader.addListener(videoResizer);
 
 			AudioListener audioListener = new AudioListener();
 
-			reader.addListener(resizer);
+			videoResizer.addListener(audioListener);
 
-			resizer.addListener(audioListener);
+			IMediaWriter iMediaWriter = ToolFactory.makeWriter(
+				destFile.getCanonicalPath(), iMediaReader);
 
-			IMediaWriter writer = ToolFactory.makeWriter(
-				destFile.getCanonicalPath(), reader);
+			audioListener.addListener(iMediaWriter);
 
-			audioListener.addListener(writer);
+			VideoListener videoListener = new VideoListener(height, width);
 
-			writer.addListener(myVideoListener);
+			iMediaWriter.addListener(videoListener);
 
-			while (reader.readPacket() == null) {
-				// continue coding
-			}
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
-	}
-
-	private void _generateThumbnailXuggler(
-			File srcFile, File thumbnailFile, int height, int width)
-		throws IOException, SystemException {
-
-		try {
-			IMediaReader reader = ToolFactory.makeReader(
-				srcFile.getCanonicalPath());
-
-			reader.setBufferedImageTypeToGenerate(BufferedImage.TYPE_3BYTE_BGR);
-
-			CaptureFrameListener captureFrameListener =
-				new CaptureFrameListener(
-					thumbnailFile, THUMBNAIL_TYPE, height, width);
-
-			reader.addListener(captureFrameListener);
-
-			while (reader.readPacket() == null) {
-				// continue coding
+			while (iMediaReader.readPacket() == null) {
 			}
 		}
 		catch (Exception e) {
@@ -212,12 +203,6 @@ public class VideoProcessorUtil {
 		return new File(filePath);
 	}
 
-	private File _getThumbnailFile(String id) {
-		String filePath = _getVideoThumbnailPath(id);
-
-		return new File(filePath);
-	}
-
 	private String _getPreviewFilePath(String id) {
 		StringBundler sb = new StringBundler(4);
 
@@ -227,6 +212,12 @@ public class VideoProcessorUtil {
 		sb.append(PREVIEW_TYPE);
 
 		return sb.toString();
+	}
+
+	private File _getThumbnailFile(String id) {
+		String filePath = _getVideoThumbnailPath(id);
+
+		return new File(filePath);
 	}
 
 	private String _getVideoThumbnailPath(String id) {
@@ -273,12 +264,12 @@ public class VideoProcessorUtil {
 			}
 		}
 		else if (PropsValues.DL_FILE_ENTRY_PREVIEW_ENABLED &&
-			previewFile.exists()) {
+				 previewFile.exists()) {
 
 			return true;
 		}
 		else if (PropsValues.DL_FILE_ENTRY_THUMBNAIL_ENABLED &&
-			thumbnailFile.exists()) {
+				 thumbnailFile.exists()) {
 
 			return true;
 		}
@@ -317,7 +308,7 @@ public class VideoProcessorUtil {
 			return false;
 		}
 
-		return videoMimeTypes.contains(fileEntry.getMimeType());
+		return _videoMimeTypes.contains(fileEntry.getMimeType());
 	}
 
 	private void _queueGeneration(FileEntry fileEntry) {
@@ -332,6 +323,11 @@ public class VideoProcessorUtil {
 		}
 	}
 
+	private VideoProcessorUtil() {
+		FileUtil.mkdirs(_PREVIEW_PATH);
+		FileUtil.mkdirs(_THUMBNAIL_PATH);
+	}
+
 	private static final String _PREVIEW_PATH =
 		SystemProperties.get(SystemProperties.TMP_DIR) +
 			"/liferay/document_preview/";
@@ -344,10 +340,10 @@ public class VideoProcessorUtil {
 
 	private static VideoProcessorUtil _instance = new VideoProcessorUtil();
 
-	private List<Long> _fileEntries = new Vector<Long>();
-
-	private static List<String> videoMimeTypes = Arrays.asList(
+	private static List<String> _videoMimeTypes = Arrays.asList(
 		"video/quicktime", "video/mpeg", "video/x-msvideo", "video/mp4",
 		"video/x-ms-wmv", "video/avi");
+
+	private List<Long> _fileEntries = new Vector<Long>();
 
 }

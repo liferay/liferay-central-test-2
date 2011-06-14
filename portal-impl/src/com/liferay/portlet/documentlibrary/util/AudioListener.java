@@ -21,35 +21,39 @@ import com.xuggle.xuggler.IAudioResampler;
 import com.xuggle.xuggler.IAudioSamples;
 
 /**
- * @author Juan González
  * @author Sergio González
  */
-public class AudioListener extends MediaToolAdapter{
-	@Override
-	public void onAudioSamples(IAudioSamplesEvent event) {
-		IAudioSamples samples = event.getAudioSamples();
+public class AudioListener extends MediaToolAdapter {
 
-		if (_resampler == null) {
-			_resampler = IAudioResampler.make(
-				samples.getChannels(), samples.getChannels(), 44100,
-				samples.getSampleRate());
+	public void onAudioSamples(IAudioSamplesEvent iAudioSamplesEvent) {
+		IAudioSamples iaudioSamples = iAudioSamplesEvent.getAudioSamples();
+
+		if (_iAudioResampler == null) {
+			_iAudioResampler = IAudioResampler.make(
+				iaudioSamples.getChannels(), iaudioSamples.getChannels(),
+				44100, iaudioSamples.getSampleRate());
 		}
 
-		if (event.getAudioSamples().getNumSamples() > 0) {
-			IAudioSamples out = IAudioSamples.make(
-				samples.getNumSamples(), samples.getChannels());
+		IAudioSamples iAudioSamples = iAudioSamplesEvent.getAudioSamples();
 
-			_resampler.resample(out, samples, samples.getNumSamples());
+		if (iAudioSamples.getNumSamples() > 0) {
+			IAudioSamples resampledIAudioSamples = IAudioSamples.make(
+				iaudioSamples.getNumSamples(), iaudioSamples.getChannels());
 
-			AudioSamplesEvent asc = new AudioSamplesEvent(
-				event.getSource(), out, event.getStreamIndex());
+			_iAudioResampler.resample(
+				resampledIAudioSamples, iaudioSamples,
+				iaudioSamples.getNumSamples());
 
-			super.onAudioSamples(asc);
+			AudioSamplesEvent audioSamplesEvent = new AudioSamplesEvent(
+				iAudioSamplesEvent.getSource(), resampledIAudioSamples,
+				iAudioSamplesEvent.getStreamIndex());
 
-			out.delete();
+			super.onAudioSamples(audioSamplesEvent);
+
+			resampledIAudioSamples.delete();
 		}
 	}
 
-	private IAudioResampler _resampler = null;
+	private IAudioResampler _iAudioResampler;
 
 }

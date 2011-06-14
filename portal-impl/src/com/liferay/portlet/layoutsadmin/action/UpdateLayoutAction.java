@@ -307,7 +307,7 @@ public class UpdateLayoutAction extends JSONAction {
 			LayoutServiceUtil.updateParentLayoutId(plid, parentPlid);
 		}
 
-		updatePriority(request); 
+		updatePriority(request);
 	}
 
 	protected void updatePriority(HttpServletRequest request) throws Exception {

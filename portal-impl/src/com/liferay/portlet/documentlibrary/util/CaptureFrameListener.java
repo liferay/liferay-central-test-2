@@ -29,28 +29,28 @@ import java.io.FileOutputStream;
 import javax.imageio.ImageIO;
 
 /**
- * @author Juan González
  * @author Sergio González
  */
 public class CaptureFrameListener extends MediaListenerAdapter {
-	public CaptureFrameListener(
-		File destFile, String extension, int height, int width) {
 
-		_destFile = destFile;
+	public CaptureFrameListener(
+		File file, String extension, int height, int width) {
+
+		_file = file;
 		_extension = extension;
 		_height = height;
 		_width = width;
 	}
 
-	public void onVideoPicture(IVideoPictureEvent event) {
+	public void onVideoPicture(IVideoPictureEvent iVideoPictureEvent) {
 		try {
 			if (_written) {
 				return;
 			}
 
-			if (event.getStreamIndex() != mVideoStreamIndex) {
-				if (mVideoStreamIndex == -1) {
-					mVideoStreamIndex = event.getStreamIndex();
+			if (iVideoPictureEvent.getStreamIndex() != _streamIndex) {
+				if (_streamIndex == -1) {
+					_streamIndex = iVideoPictureEvent.getStreamIndex();
 				}
 				else {
 					return;
@@ -59,28 +59,26 @@ public class CaptureFrameListener extends MediaListenerAdapter {
 
 			_written = true;
 
-			_destFile.createNewFile();
+			_file.createNewFile();
 
 			RenderedImage renderedImage = ImageProcessorUtil.scale(
-				event.getImage(), _height, _width);
+				iVideoPictureEvent.getImage(), _height, _width);
 
 			ImageIO.write(
-				renderedImage, _extension, new FileOutputStream(_destFile));
+				renderedImage, _extension, new FileOutputStream(_file));
 		}
 		catch (Exception e) {
 			_log.error(e, e);
 		}
 	}
 
-	private int mVideoStreamIndex = -1;
-
-	private File _destFile;
-	private String _extension;
-	private boolean _written = false;
-
-	private int _height;
-	private int _width;
-
 	private static Log _log = LogFactoryUtil.getLog(CaptureFrameListener.class);
+
+	private String _extension;
+	private File _file;
+	private int _height;
+	private int _streamIndex = -1;
+	private int _width;
+	private boolean _written;
 
 }

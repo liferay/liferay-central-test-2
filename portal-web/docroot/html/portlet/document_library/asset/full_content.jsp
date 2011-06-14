@@ -29,14 +29,14 @@ String src = themeDisplay.getPortalURL() + themeDisplay.getPathContext() + "/doc
 		<c:choose>
 			<c:when test="<%= PDFProcessorUtil.hasImages(fileEntry) %>">
 				<div>
-					<img src="<%= src + "&documentThumbnail=1" %>" />
+					<img src="<%= src %>&documentThumbnail=1" />
 
 					<%= fileVersion.getTitle() %>
 				</div>
 			</c:when>
 			<c:when test="<%= VideoProcessorUtil.hasVideo(fileEntry) %>">
 				<div>
-					<img src="<%= src + "&videoThumbnail=1" %>" />
+					<img src="<%= src %>&videoThumbnail=1" />
 
 					<%= fileVersion.getTitle() %>
 				</div>

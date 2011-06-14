@@ -27,47 +27,21 @@ import com.xuggle.xuggler.IStream;
 import com.xuggle.xuggler.IStreamCoder;
 
 /**
- * @author Juan González
  * @author Sergio González
  */
 public class VideoListener extends MediaToolAdapter {
-	public VideoListener(Integer aHeight, Integer aWidth) {
-		_height = aHeight;
-		_width = aWidth;
+
+	public VideoListener(Integer height, Integer width) {
+		_height = height;
+		_width = width;
 	}
 
-	@Override
-	public void onAudioSamples(IAudioSamplesEvent event) {
-		IAudioSamples samples = event.getAudioSamples();
-
-		if (_resampler == null) {
-			_resampler = IAudioResampler.make(
-				samples.getChannels(), samples.getChannels(), 44100,
-				samples.getSampleRate());
-		}
-
-		if (_resampler != null && samples.getNumSamples() > 0) {
-			IAudioSamples out = IAudioSamples.make(
-				samples.getNumSamples(), samples.getChannels());
-
-			_resampler.resample(out, samples, samples.getNumSamples());
-
-			AudioSamplesEvent asc = new AudioSamplesEvent(
-				event.getSource(), out, event.getStreamIndex());
-
-			super.onAudioSamples(asc);
-
-			out.delete();
-		}
-	}
-
-	@Override
-	public void onAddStream(IAddStreamEvent event) {
-		IMediaCoder mediaCoder = event.getSource();
+	public void onAddStream(IAddStreamEvent iAddStreamEvent) {
+		IMediaCoder mediaCoder = iAddStreamEvent.getSource();
 
 		IContainer container = mediaCoder.getContainer();
 
-		int streamIndex = event.getStreamIndex();
+		int streamIndex = iAddStreamEvent.getStreamIndex();
 
 		IStream stream = container.getStream(streamIndex);
 
@@ -81,12 +55,38 @@ public class VideoListener extends MediaToolAdapter {
 			streamCoder.setWidth(_width);
 		}
 
-		super.onAddStream(event);
+		super.onAddStream(iAddStreamEvent);
 	}
 
-	private IAudioResampler _resampler = null;
+	public void onAudioSamples(IAudioSamplesEvent iAudioSamplesEvent) {
+		IAudioSamples iAudioSamples = iAudioSamplesEvent.getAudioSamples();
+
+		if (_iAudioResampler == null) {
+			_iAudioResampler = IAudioResampler.make(
+				iAudioSamples.getChannels(), iAudioSamples.getChannels(),
+				44100, iAudioSamples.getSampleRate());
+		}
+
+		if ((_iAudioResampler != null) && iAudioSamples.getNumSamples() > 0) {
+			IAudioSamples resampledIAudioSamples = IAudioSamples.make(
+				iAudioSamples.getNumSamples(), iAudioSamples.getChannels());
+
+			_iAudioResampler.resample(
+				resampledIAudioSamples, iAudioSamples,
+				iAudioSamples.getNumSamples());
+
+			AudioSamplesEvent audioSamplesEvent = new AudioSamplesEvent(
+				iAudioSamplesEvent.getSource(), resampledIAudioSamples,
+				iAudioSamplesEvent.getStreamIndex());
+
+			super.onAudioSamples(audioSamplesEvent);
+
+			resampledIAudioSamples.delete();
+		}
+	}
 
 	private int _height;
+	private IAudioResampler _iAudioResampler;
 	private int _width;
 
 }

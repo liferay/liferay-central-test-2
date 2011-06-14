@@ -25,66 +25,68 @@ import com.xuggle.xuggler.IVideoPicture;
 import com.xuggle.xuggler.IVideoResampler;
 
 /**
- * @author Juan González
  * @author Sergio González
  */
 public class VideoResizer extends MediaToolAdapter {
-	public VideoResizer(Integer aHeight, Integer aWidth) {
-		_height = aHeight;
-		_width = aWidth;
+
+	public VideoResizer(Integer height, Integer width) {
+		_height = height;
+		_width = width;
 	}
 
-	@Override
-	public void onAudioSamples(IAudioSamplesEvent event) {
-		IAudioSamples samples = event.getAudioSamples();
+	public void onAudioSamples(IAudioSamplesEvent iAudioSamplesEvent) {
+		IAudioSamples iAudioSamples = iAudioSamplesEvent.getAudioSamples();
 
-		if (_resampler == null) {
-			_resampler = IAudioResampler.make(
-				samples.getChannels(), samples.getChannels(), 44100,
-				samples.getSampleRate());
+		if (_iAudioResampler == null) {
+			_iAudioResampler = IAudioResampler.make(
+				iAudioSamples.getChannels(), iAudioSamples.getChannels(), 44100,
+				iAudioSamples.getSampleRate());
 		}
 
-		if (event.getAudioSamples().getNumSamples() > 0) {
-			IAudioSamples out = IAudioSamples.make(
-				samples.getNumSamples(), samples.getChannels());
+		if (iAudioSamples.getNumSamples() > 0) {
+			IAudioSamples resampledIAudioSamples = IAudioSamples.make(
+				iAudioSamples.getNumSamples(), iAudioSamples.getChannels());
 
-			_resampler.resample(out, samples, samples.getNumSamples());
+			_iAudioResampler.resample(
+				resampledIAudioSamples, iAudioSamples,
+				iAudioSamples.getNumSamples());
 
-			AudioSamplesEvent asc = new AudioSamplesEvent(
-				event.getSource(), out, event.getStreamIndex());
+			AudioSamplesEvent audioSamplesEvent = new AudioSamplesEvent(
+				iAudioSamplesEvent.getSource(), resampledIAudioSamples,
+				iAudioSamplesEvent.getStreamIndex());
 
-			super.onAudioSamples(asc);
+			super.onAudioSamples(audioSamplesEvent);
 
-			out.delete();
+			resampledIAudioSamples.delete();
 		}
 	}
 
-	@Override
 	public void onVideoPicture(IVideoPictureEvent event) {
-		IVideoPicture pic = event.getPicture();
+		IVideoPicture iVideoPicture = event.getPicture();
 
-		if (_videoResampler == null) {
-			_videoResampler = IVideoResampler.make(
-				_width, _height, pic.getPixelType(), pic.getWidth(),
-				pic.getHeight(), pic.getPixelType());
+		if (_iVideoResampler == null) {
+			_iVideoResampler = IVideoResampler.make(
+				_width, _height, iVideoPicture.getPixelType(),
+				iVideoPicture.getWidth(), iVideoPicture.getHeight(),
+				iVideoPicture.getPixelType());
 		}
 
-		IVideoPicture out = IVideoPicture.make(
-			pic.getPixelType(), _width, _height);
+		IVideoPicture resampledIVideoPicture = IVideoPicture.make(
+			iVideoPicture.getPixelType(), _width, _height);
 
-		_videoResampler.resample(out, pic);
+		_iVideoResampler.resample(resampledIVideoPicture, iVideoPicture);
 
-		IVideoPictureEvent asc = new VideoPictureEvent(
-			event.getSource(), out, event.getStreamIndex());
+		IVideoPictureEvent iVideoPictureEvent = new VideoPictureEvent(
+			event.getSource(), resampledIVideoPicture, event.getStreamIndex());
 
-		super.onVideoPicture(asc);
+		super.onVideoPicture(iVideoPictureEvent);
 
-		out.delete();
+		resampledIVideoPicture.delete();
 	}
 
-	private IVideoResampler _videoResampler = null;
-	private IAudioResampler _resampler = null;
 	private int _height;
+	private IAudioResampler _iAudioResampler;
+	private IVideoResampler _iVideoResampler;
 	private int _width;
 
 }

@@ -234,22 +234,23 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 
 						<%
 						int previewFileCount = 0;
-
 						String previewFileURL = null;
 						String videoThumbnailURL = null;
 
-						boolean isSupportedVideo = VideoProcessorUtil.isSupportedVideo(fileEntry);
+						boolean supportedVideo = VideoProcessorUtil.isSupportedVideo(fileEntry);
 
-						if (isSupportedVideo) {
-							previewFileCount = (VideoProcessorUtil.hasVideo(fileEntry) ? 1 : 0);
+						if (supportedVideo) {
+							previewFileCount = 0;
+
+							if (VideoProcessorUtil.hasVideo(fileEntry)) {
+								previewFileCount = 1;
+							}
 
 							previewFileURL = themeDisplay.getPortalURL() + themeDisplay.getPathContext() + "/documents/" + themeDisplay.getScopeGroupId() + StringPool.SLASH + fileEntry.getFolderId() + StringPool.SLASH + HttpUtil.encodeURL(fileEntry.getTitle()) + HtmlUtil.escapeURL("?version=") + fileEntry.getVersion() + HtmlUtil.escapeURL("&videoPreview=1");
-
 							videoThumbnailURL = themeDisplay.getPortalURL() + themeDisplay.getPathContext() + "/documents/" + themeDisplay.getScopeGroupId() + StringPool.SLASH + fileEntry.getFolderId() + StringPool.SLASH + HttpUtil.encodeURL(fileEntry.getTitle()) + HtmlUtil.escapeURL("?version=") + fileEntry.getVersion() + HtmlUtil.escapeURL("&videoThumbnail=1");
 						}
 						else {
 							previewFileCount = PDFProcessorUtil.getPreviewFileCount(fileEntry);
-
 							previewFileURL = themeDisplay.getPortalURL() + themeDisplay.getPathContext() + "/documents/" + themeDisplay.getScopeGroupId() + StringPool.SLASH + fileEntry.getFolderId() + StringPool.SLASH + HttpUtil.encodeURL(fileEntry.getTitle()) + "?version=" + fileEntry.getVersion() + "&previewFileIndex=";
 						}
 						%>
@@ -262,7 +263,7 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 							</c:when>
 							<c:otherwise>
 								<c:choose>
-									<c:when test ="<%= !isSupportedVideo %>">
+									<c:when test ="<%= !supportedVideo %>">
 										<div class="lfr-preview-file" id="<portlet:namespace />previewFile">
 											<div class="lfr-preview-file-content" id="<portlet:namespace />previewFileContent">
 												<div class="lfr-preview-file-image-current-column">
@@ -310,25 +311,21 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 										<aui:script use="aui-base">
 											var previewDivObject = A.one('#<portlet:namespace />previewFileContent');
 
-											var previewDivHeight = previewDivObject.getStyle('height');
-
-											var previewDivWidth = previewDivObject.getStyle('width');
-
 											var so = new SWFObject(
 												'<%= themeDisplay.getPathJavaScript() %>/misc/video_player/mpw_player.swf',
 												'<portlet:namespace />previewFileContent',
-												previewDivWidth,
-												previewDivHeight,
+												previewDivObject.getStyle('width'),
+												previewDivObject.getStyle('height'),
 												'9',
 												'#000000'
 											);
 
+											so.addParam('allowFullScreen', 'true');
+
 											so.addVariable('<%= VideoProcessorUtil.PREVIEW_TYPE %>', '<%= previewFileURL %>');
 											so.addVariable('<%= VideoProcessorUtil.THUMBNAIL_TYPE %>', '<%= videoThumbnailURL %>');
 
-											so.addParam("allowFullScreen", "true");
-
-											so.write("<portlet:namespace />previewFileContent");
+											so.write('<portlet:namespace />previewFileContent');
 										</aui:script>
 									</c:otherwise>
 								</c:choose>
