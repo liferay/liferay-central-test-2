@@ -2613,12 +2613,12 @@
 		<resource-bundle>com.liferay.portlet.StrutsResourceBundle</resource-bundle>
 		<portlet-preferences>
 			<preference>
-				<name>delta</name>
-				<value>5</value>
-			</preference>
-			<preference>
 				<name>assetVocabularyId</name>
 				<value>-1</value>
+			</preference>
+			<preference>
+				<name>delta</name>
+				<value>5</value>
 			</preference>
 			<preference>
 				<name>displayStyle</name>
