@@ -16,6 +16,7 @@ package com.liferay.portal.atom;
 
 import com.liferay.portal.kernel.atom.AtomCollectionAdapter;
 import com.liferay.portal.kernel.atom.AtomCollectionAdapterRegistry;
+import com.liferay.portal.kernel.atom.AtomException;
 import com.liferay.portal.kernel.util.ListUtil;
 
 import java.util.List;
@@ -38,9 +39,19 @@ public class AtomCollectionAdapterRegistryImpl
 		return ListUtil.fromCollection(_atomCollectionAdapters.values());
 	}
 
-	public void register(AtomCollectionAdapter<?> atomCollectionAdapter) {
-		_atomCollectionAdapters.put(
-			atomCollectionAdapter.getCollectionName(), atomCollectionAdapter);
+	public void register(AtomCollectionAdapter<?> atomCollectionAdapter)
+		throws AtomException {
+
+		AtomCollectionAdapter<?> existingCollection =
+			_atomCollectionAdapters.put(
+				atomCollectionAdapter.getCollectionName(),
+				atomCollectionAdapter);
+
+		if (existingCollection != null) {
+			throw new AtomException(
+				"Atom collection with the same name already exist: " +
+					existingCollection.getCollectionName());
+		}
 	}
 
 	public void unregister(AtomCollectionAdapter<?> atomCollectionAdapter) {
