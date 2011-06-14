@@ -548,15 +548,15 @@
 	<definition name="portlet.enterprise_admin" extends="portlet" />
 
 	<definition name="portlet.enterprise_admin.edit_company" extends="portlet.enterprise_admin">
-		<put name="portlet_content" value="/portlet/enterprise_admin/edit_company.jsp" />
+		<put name="portlet_content" value="/portlet/portal_settings/edit_company.jsp" />
 	</definition>
 
 	<definition name="portlet.enterprise_admin.edit_company_logo" extends="portlet.enterprise_admin">
-		<put name="portlet_content" value="/portlet/enterprise_admin/edit_company_logo.jsp" />
+		<put name="portlet_content" value="/portlet/portal_settings/edit_company_logo.jsp" />
 	</definition>
 
 	<definition name="portlet.enterprise_admin.edit_ldap_server" extends="portlet.enterprise_admin">
-		<put name="portlet_content" value="/portlet/enterprise_admin/edit_ldap_server.jsp" />
+		<put name="portlet_content" value="/portlet/portal_settings/edit_ldap_server.jsp" />
 	</definition>
 
 	<definition name="portlet.enterprise_admin.edit_organization" extends="portlet.enterprise_admin">
@@ -644,23 +644,23 @@
 	</definition>
 
 	<definition name="portlet.enterprise_admin.test_cas_configuration" extends="portlet.enterprise_admin">
-		<put name="portlet_content" value="/portlet/enterprise_admin/settings/test_cas_configuration.jsp" />
+		<put name="portlet_content" value="/portlet/portal_settings/test_cas_configuration.jsp" />
 	</definition>
 
 	<definition name="portlet.enterprise_admin.test_ldap_connection" extends="portlet.enterprise_admin">
-		<put name="portlet_content" value="/portlet/enterprise_admin/settings/test_ldap_connection.jsp" />
+		<put name="portlet_content" value="/portlet/portal_settings/test_ldap_connection.jsp" />
 	</definition>
 
 	<definition name="portlet.enterprise_admin.test_ldap_groups" extends="portlet.enterprise_admin">
-		<put name="portlet_content" value="/portlet/enterprise_admin/settings/test_ldap_groups.jsp" />
+		<put name="portlet_content" value="/portlet/portal_settings/test_ldap_groups.jsp" />
 	</definition>
 
 	<definition name="portlet.enterprise_admin.test_ldap_users" extends="portlet.enterprise_admin">
-		<put name="portlet_content" value="/portlet/enterprise_admin/settings/test_ldap_users.jsp" />
+		<put name="portlet_content" value="/portlet/portal_settings/test_ldap_users.jsp" />
 	</definition>
 
 	<definition name="portlet.enterprise_admin.test_opensso_configuration" extends="portlet.enterprise_admin">
-		<put name="portlet_content" value="/portlet/enterprise_admin/settings/test_opensso_configuration.jsp" />
+		<put name="portlet_content" value="/portlet/portal_settings/test_opensso_configuration.jsp" />
 	</definition>
 
 	<definition name="portlet.enterprise_admin.view" extends="portlet.enterprise_admin">

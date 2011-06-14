@@ -37,7 +37,7 @@ request.setAttribute("view.jsp-portletURLString", portletURLString);
 
 <c:choose>
 	<c:when test='<%= tabs1.equals("settings") %>'>
-		<liferay-util:include page="/html/portlet/enterprise_admin/edit_company.jsp" />
+		<liferay-util:include page="/html/portlet/portal_settings/edit_company.jsp" />
 	</c:when>
 	<c:otherwise>
 		<aui:form action="<%= portletURLString %>" method="get" name="fm">

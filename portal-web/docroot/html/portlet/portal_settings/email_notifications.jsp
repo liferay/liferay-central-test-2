@@ -79,7 +79,7 @@ String adminEmailVerificationBody = PrefsPropsUtil.getContent(company.getCompany
 			</aui:field-wrapper>
 
 			<div class="terms email-user-add definition-of-terms">
-				<%@ include file="/html/portlet/enterprise_admin/settings/definition_of_terms.jspf" %>
+				<%@ include file="/html/portlet/portal_settings/definition_of_terms.jspf" %>
 			</div>
 		</aui:fieldset>
 	</liferay-ui:section>
@@ -98,7 +98,7 @@ String adminEmailVerificationBody = PrefsPropsUtil.getContent(company.getCompany
 			</aui:field-wrapper>
 
 			<div class="terms email-password-sent definition-of-terms">
-				<%@ include file="/html/portlet/enterprise_admin/settings/definition_of_terms.jspf" %>
+				<%@ include file="/html/portlet/portal_settings/definition_of_terms.jspf" %>
 			</div>
 		</aui:fieldset>
 	</liferay-ui:section>
@@ -117,7 +117,7 @@ String adminEmailVerificationBody = PrefsPropsUtil.getContent(company.getCompany
 			</aui:field-wrapper>
 
 			<div class="terms email-password-sent definition-of-terms">
-				<%@ include file="/html/portlet/enterprise_admin/settings/definition_of_terms.jspf" %>
+				<%@ include file="/html/portlet/portal_settings/definition_of_terms.jspf" %>
 			</div>
 		</aui:fieldset>
 	</liferay-ui:section>
@@ -136,7 +136,7 @@ String adminEmailVerificationBody = PrefsPropsUtil.getContent(company.getCompany
 			</aui:field-wrapper>
 
 			<div class="terms email-verification definition-of-terms">
-				<%@ include file="/html/portlet/enterprise_admin/settings/definition_of_terms.jspf" %>
+				<%@ include file="/html/portlet/portal_settings/definition_of_terms.jspf" %>
 			</div>
 		</aui:fieldset>
 	</liferay-ui:section>

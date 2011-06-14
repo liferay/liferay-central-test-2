@@ -58,7 +58,7 @@ request.setAttribute("websites.classPK", company.getAccountId());
 		categoryNames="<%= _CATEGORY_NAMES %>"
 		categorySections="<%= categorySections %>"
 		htmlTop="<%= htmlTop %>"
-		jspPath="/html/portlet/enterprise_admin/settings/"
+		jspPath="/html/portlet/portal_settings/"
 	/>
 </aui:form>
 

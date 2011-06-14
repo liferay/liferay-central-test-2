@@ -96,7 +96,7 @@ String siteminderUserHeader = PrefsPropsUtil.getString(company.getCompanyId(), P
 		</aui:fieldset>
 	</liferay-ui:section>
 	<liferay-ui:section>
-		<%@ include file="/html/portlet/enterprise_admin/settings/authentication_ldap.jspf" %>
+		<%@ include file="/html/portlet/portal_settings/authentication_ldap.jspf" %>
 	</liferay-ui:section>
 	<liferay-ui:section>
 		<aui:fieldset>
