@@ -38,8 +38,8 @@ public class AtomCollectionAdapterRegistryUtil {
 		return getAtomCollectionAdapterRegistry().getAtomCollectionAdapters();
 	}
 
-	public static void register(
-		AtomCollectionAdapter<?> atomCollectionAdapter) throws AtomException {
+	public static void register(AtomCollectionAdapter<?> atomCollectionAdapter)
+		throws AtomException {
 
 		getAtomCollectionAdapterRegistry().register(atomCollectionAdapter);
 	}

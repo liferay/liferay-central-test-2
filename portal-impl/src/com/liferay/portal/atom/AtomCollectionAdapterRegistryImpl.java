@@ -42,16 +42,16 @@ public class AtomCollectionAdapterRegistryImpl
 	public void register(AtomCollectionAdapter<?> atomCollectionAdapter)
 		throws AtomException {
 
-		AtomCollectionAdapter<?> existingCollection =
-			_atomCollectionAdapters.put(
-				atomCollectionAdapter.getCollectionName(),
-				atomCollectionAdapter);
+		if (_atomCollectionAdapters.containsKey(
+				atomCollectionAdapter.getCollectionName())) {
 
-		if (existingCollection != null) {
 			throw new AtomException(
-				"Atom collection with the same name already exist: " +
-					existingCollection.getCollectionName());
+				"Duplicate collection name " +
+					atomCollectionAdapter.getCollectionName());
 		}
+
+		_atomCollectionAdapters.put(
+			atomCollectionAdapter.getCollectionName(), atomCollectionAdapter);
 	}
 
 	public void unregister(AtomCollectionAdapter<?> atomCollectionAdapter) {
