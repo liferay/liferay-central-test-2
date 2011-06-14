@@ -980,8 +980,8 @@ public class DLFileEntryLocalServiceImpl
 
 		dlFileVersionPersistence.update(dlFileVersion, false);
 
-		Map<Long, Fields> fieldsMap =
-			(Map<Long, Fields>)serviceContext.getAttribute("fieldsMap");
+		Map<String, Fields> fieldsMap =
+			(Map<String, Fields>)serviceContext.getAttribute("fieldsMap");
 
 		if (documentTypeId > 0) {
 			dlDocumentMetadataSetLocalService.updateDocumentMetadataSets(
@@ -1509,8 +1509,8 @@ public class DLFileEntryLocalServiceImpl
 
 		dlFileVersionPersistence.update(dlFileVersion, false);
 
-		Map<Long, Fields> fieldsMap =
-			(Map<Long, Fields>)serviceContext.getAttribute("fieldsMap");
+		Map<String, Fields> fieldsMap =
+			(Map<String, Fields>)serviceContext.getAttribute("fieldsMap");
 
 		if (documentTypeId > 0) {
 			dlDocumentMetadataSetLocalService.updateDocumentMetadataSets(
