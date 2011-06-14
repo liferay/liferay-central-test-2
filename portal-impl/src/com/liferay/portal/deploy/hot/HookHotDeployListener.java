@@ -205,6 +205,7 @@ public class HookHotDeployListener
 		"layout.user.public.layouts.modifiable",
 		"layout.user.public.layouts.power.user.required",
 		"ldap.attrs.transformer.impl",
+		"locales.beta",
 		"login.create.account.allow.custom.password",
 		"login.events.post",
 		"login.events.pre",
@@ -255,8 +256,14 @@ public class HookHotDeployListener
 	};
 
 	public HookHotDeployListener() {
-		for (String key : _PROPS_VALUES_STRING_ARRAY) {
-			_stringArraysContainerMap.put(key, new StringArraysContainer(key));
+		for (String key : _PROPS_VALUES_STRING_MERGED_ARRAY) {
+			_stringMergedArraysContainerMap.put(
+				key, new StringMergedArraysContainer(key));
+		}
+
+		for (String key : _PROPS_VALUES_STRING_OVERRIDE_ARRAY) {
+			_stringOverrideArraysContainerMap.put(
+				key, new StringOverrideArraysContainer(key));
 		}
 	}
 
@@ -1896,7 +1903,7 @@ public class HookHotDeployListener
 			}
 		}
 
-		for (String key : _PROPS_VALUES_STRING_ARRAY) {
+		for (String key : _PROPS_VALUES_STRING_MERGED_ARRAY) {
 			String fieldName = StringUtil.replace(
 				key.toUpperCase(), CharPool.PERIOD, CharPool.UNDERLINE);
 
@@ -1907,8 +1914,8 @@ public class HookHotDeployListener
 			try {
 				Field field = PropsValues.class.getField(fieldName);
 
-				StringArraysContainer stringArraysContainer =
-					_stringArraysContainerMap.get(key);
+				StringMergedArraysContainer stringMergedArraysContainer =
+					_stringMergedArraysContainerMap.get(key);
 
 				String[] value = null;
 
@@ -1916,10 +1923,10 @@ public class HookHotDeployListener
 					value = PropsUtil.getArray(key);
 				}
 
-				stringArraysContainer.setPluginStringArray(
+				stringMergedArraysContainer.setPluginStringArray(
 					servletContextName, value);
 
-				value = stringArraysContainer.getMergedStringArray();
+				value = stringMergedArraysContainer.getMergedStringArray();
 
 				field.set(null, value);
 			}
@@ -1929,7 +1936,50 @@ public class HookHotDeployListener
 			}
 		}
 
-		if (containsKey(portalProperties, LOCALES)) {
+		for (String key : _PROPS_VALUES_STRING_OVERRIDE_ARRAY) {
+			String fieldName = StringUtil.replace(
+				key.toUpperCase(), CharPool.PERIOD, CharPool.UNDERLINE);
+
+			if (!containsKey(portalProperties, key)) {
+				continue;
+			}
+
+			try {
+				Field field = PropsValues.class.getField(fieldName);
+
+				StringOverrideArraysContainer stringOverrideArraysContainer =
+					_stringOverrideArraysContainerMap.get(key);
+
+				String[] value = null;
+
+				if (initPhase) {
+					if (stringOverrideArraysContainer.isOverridden()) {
+						_log.error(
+							"Error setting field " + fieldName +
+								": Already overridden");
+
+						continue;
+					}
+
+					value = StringUtil.split(portalProperties.getProperty(key));
+				}
+
+				stringOverrideArraysContainer.setPluginStringArray(
+					servletContextName, value);
+
+				value = stringOverrideArraysContainer.getOverrideStringArray();
+
+				field.set(null, value);
+			}
+			catch (Exception e) {
+				_log.error(
+					"Error setting field " + fieldName + ": " + e.getMessage());
+			}
+		}
+
+		if (containsKey(portalProperties, LOCALES) ||
+			containsKey(portalProperties, LOCALES_BETA)) {
+
 			PropsValues.LOCALES = PropsUtil.getArray(LOCALES);
 
 			LanguageUtil.init();
@@ -2062,26 +2112,32 @@ public class HookHotDeployListener
 		"theme.shortcut.icon"
 	};
 
-	private static final String[] _PROPS_VALUES_STRING_ARRAY = new String[] {
-		"admin.default.group.names",
-		"admin.default.role.names",
-		"admin.default.user.group.names",
-		"asset.publisher.display.styles",
-		"convert.processes",
-		"dockbar.add.portlets",
-		"layout.static.portlets.all",
-		"layout.types",
-		"session.phishing.protected.attributes",
-		"users.form.add.identification",
-		"users.form.add.main",
-		"users.form.add.miscellaneous",
-		"users.form.my.account.identification",
-		"users.form.my.account.main",
-		"users.form.my.account.miscellaneous",
-		"users.form.update.identification",
-		"users.form.update.main",
-		"users.form.update.miscellaneous"
-	};
+	private static final String[] _PROPS_VALUES_STRING_MERGED_ARRAY =
+		new String[] {
+			"admin.default.group.names",
+			"admin.default.role.names",
+			"admin.default.user.group.names",
+			"asset.publisher.display.styles",
+			"convert.processes",
+			"dockbar.add.portlets",
+			"layout.static.portlets.all",
+			"layout.types",
+			"session.phishing.protected.attributes",
+			"users.form.add.identification",
+			"users.form.add.main",
+			"users.form.add.miscellaneous",
+			"users.form.my.account.identification",
+			"users.form.my.account.main",
+			"users.form.my.account.miscellaneous",
+			"users.form.update.identification",
+			"users.form.update.main",
+			"users.form.update.miscellaneous"
+		};
+
+	private static final String[] _PROPS_VALUES_STRING_OVERRIDE_ARRAY =
+		new String[] {
+			"locales.beta"
+		};
 
 	private static Log _log = LogFactoryUtil.getLog(
 		HookHotDeployListener.class);
@@ -2119,8 +2175,12 @@ public class HookHotDeployListener
 	private Set<String> _servletContextNames = new HashSet<String>();
 	private Map<String, ServletFiltersContainer> _servletFiltersContainerMap =
 		new HashMap<String, ServletFiltersContainer>();
-	private Map<String, StringArraysContainer> _stringArraysContainerMap =
-		new HashMap<String, StringArraysContainer>();
+	private Map<String, StringMergedArraysContainer>
+		_stringMergedArraysContainerMap =
+			new HashMap<String, StringMergedArraysContainer>();
+	private Map<String, StringOverrideArraysContainer>
+		_stringOverrideArraysContainerMap =
+			new HashMap<String, StringOverrideArraysContainer>();
 	private Map<String, StrutsActionsContainer> _strutsActionsContainerMap =
 		new HashMap<String, StrutsActionsContainer>();
 
@@ -2676,9 +2736,9 @@ public class HookHotDeployListener
 
 	}
 
-	private class StringArraysContainer {
+	private class StringMergedArraysContainer {
 
-		private StringArraysContainer(String key) {
+		private StringMergedArraysContainer(String key) {
 			_portalStringArray = PropsUtil.getArray(key);
 		}
 
@@ -2714,6 +2774,51 @@ public class HookHotDeployListener
 		private String[] _portalStringArray;
 		private Map<String, String[]> _pluginStringArrayMap =
 			new HashMap<String, String[]>();
+
+	}
+
+	private class StringOverrideArraysContainer {
+
+		private StringOverrideArraysContainer(String key) {
+			_portalStringArray = PropsUtil.getArray(key);
+		}
+
+		public String[] getOverrideStringArray() {
+			if (_pluginStringArrayMap != null) {
+				return _pluginStringArrayMap;
+			}
+
+			return _portalStringArray;
+		}
+
+		public boolean isOverridden() {
+			return Validator.isNotNull(_servletContextName);
+		}
+
+		public void setPluginStringArray(
+			String servletContextName, String[] pluginStringArray) {
+
+			if (pluginStringArray != null) {
+				if (isOverridden()) {
+					return;
+				}
+
+				_servletContextName = servletContextName;
+				_pluginStringArrayMap = pluginStringArray;
+			}
+			else {
+				if (!_servletContextName.equals(servletContextName)) {
+					return;
+				}
+
+				_servletContextName = null;
+				_pluginStringArrayMap = null;
+			}
+		}
+
+		private String[] _portalStringArray;
+		private String[] _pluginStringArrayMap;
+		private String _servletContextName;
 
 	}
 
