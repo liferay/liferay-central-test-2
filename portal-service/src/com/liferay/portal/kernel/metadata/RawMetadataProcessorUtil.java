@@ -12,10 +12,8 @@
  * details.
  */
 
-package com.liferay.portal.metadata;
+package com.liferay.portal.kernel.metadata;
 
-import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portlet.dynamicdatamapping.storage.Fields;
 
 import java.io.InputStream;
@@ -27,10 +25,14 @@ import java.util.Map;
  */
 public class RawMetadataProcessorUtil {
 
-	public static Map<String, Fields> getRawMetadataMap(InputStream is)
-		throws PortalException, SystemException {
+	public static Map<String, Fields> getRawMetadataMap(
+		InputStream inputStream) {
 
-		return _rawMetadataProcessor.getRawMetadataMap(is);
+		return getRawMetadataProcessor().getRawMetadataMap(inputStream);
+	}
+
+	public static RawMetadataProcessor getRawMetadataProcessor() {
+		return _rawMetadataProcessor;
 	}
 
 	public void setRawMetadataProcessor(
