@@ -415,7 +415,7 @@ public class DLFileEntryServiceImpl extends DLFileEntryServiceBaseImpl {
 				Lock lock = lockLocalService.getLock(
 					DLFileEntry.class.getName(), fileEntryId);
 
-				if (!lock.getUuid().equals(lockUuid)) {
+				if (!lockUuid.equals(lock.getUuid())) {
 					throw new InvalidLockException("UUIDs do not match");
 				}
 			}

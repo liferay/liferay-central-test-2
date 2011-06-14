@@ -443,7 +443,7 @@ public class DLFolderServiceImpl extends DLFolderServiceBaseImpl {
 				Lock lock = lockLocalService.getLock(
 					DLFolder.class.getName(), folderId);
 
-				if (!lock.getUuid().equals(lockUuid)) {
+				if (!lockUuid.equals(lock.getUuid())) {
 					throw new InvalidLockException("UUIDs do not match");
 				}
 			}
