@@ -34,6 +34,11 @@ public class UnsyncBufferedReader extends Reader {
 	}
 
 	public UnsyncBufferedReader(Reader reader, int size) {
+		if (size <= 0) {
+			throw new IllegalArgumentException("Non-positive buffer size : "
+				+ size);
+		}
+
 		this.reader = reader;
 		buffer = new char[size];
 	}
@@ -43,18 +48,46 @@ public class UnsyncBufferedReader extends Reader {
 			reader.close();
 
 			reader = null;
+			buffer = null;
 		}
-
-		buffer = null;
 	}
 
 	public void mark(int markLimit) throws IOException {
+		if (markLimit < 0) {
+			throw new IllegalArgumentException("Negative markLimit : "
+				+ markLimit);
+		}
+
 		if (reader == null) {
 			throw new IOException("Reader is null");
 		}
 
-		this.markLimit = markLimit;
-		markIndex = index;
+		if (markLimit == 0) {
+			return;
+		}
+
+		markLimitIndex = markLimit;
+
+		if (index > 0) {
+
+			int available = firstInvalidIndex - index;
+
+			if (available > 0) {
+
+				// Shuffle mark beginning to buffer beginning
+
+				System.arraycopy(buffer, index, buffer, 0, available);
+
+				index = 0;
+				firstInvalidIndex = available;
+			}
+			else {
+
+				// Reset buffer states
+
+				index = firstInvalidIndex = 0;
+			}
+		}
 	}
 
 	public boolean markSupported() {
@@ -67,7 +100,7 @@ public class UnsyncBufferedReader extends Reader {
 		}
 
 		if (index >= firstInvalidIndex) {
-			readUnderlyingReader();
+			fillInBuffer();
 
 			if (index >= firstInvalidIndex) {
 				return -1;
@@ -95,51 +128,33 @@ public class UnsyncBufferedReader extends Reader {
 		int read = 0;
 
 		while (true) {
-			int available = firstInvalidIndex - index;
 
-			if ((available + read) >= length) {
+			// Try to at least read some data
 
-				// Enough data, stop reading
+			int currentRead = readOnce(chars, offset + read, length - read);
 
-				int leftSize = length - read;
+			if (currentRead <= 0) {
 
-				System.arraycopy(buffer, index, chars, read, leftSize);
+				// Reaching EOF, stop reading
 
-				index += leftSize;
-
-				return length;
-			}
-
-			if (available <= 0) {
-
-				// No more data in buffer, continue reading
-
-				readUnderlyingReader();
-
-				available = firstInvalidIndex - index;
-
-				if (available <= 0) {
-
-					// Cannot read any more, stop reading
-
-					if (read == 0) {
-						return -1;
-					}
-					else {
-						return read;
-					}
+				if (read == 0) {
+					read = currentRead;
 				}
+
+				break;
 			}
-			else {
 
-				// Copy all in-memory data, continue reading
+			read += currentRead;
 
-				System.arraycopy(buffer, index, chars, read, available);
+			if (!reader.ready() || (read >= length)) {
 
-				index += available;
-				read += available;
+				// Read enough or further reading may be blocked, stop reading
+
+				break;
 			}
 		}
+
+		return read;
 	}
 
 	public String readLine() throws IOException {
@@ -151,7 +166,7 @@ public class UnsyncBufferedReader extends Reader {
 
 		while (true) {
 			if (index >= firstInvalidIndex) {
-				readUnderlyingReader();
+				fillInBuffer();
 			}
 
 			if (index >= firstInvalidIndex) {
@@ -172,8 +187,8 @@ public class UnsyncBufferedReader extends Reader {
 			while (y < firstInvalidIndex) {
 				lineEndChar = buffer[y];
 
-				if ((lineEndChar == CharPool.NEW_LINE) ||
-					(lineEndChar == CharPool.RETURN)) {
+				if ((lineEndChar == CharPool.NEW_LINE)
+					|| (lineEndChar == CharPool.RETURN)) {
 
 					hasLineBreak = true;
 
@@ -191,8 +206,8 @@ public class UnsyncBufferedReader extends Reader {
 				index++;
 
 				if (lineEndChar == CharPool.RETURN) {
-					if ((index < buffer.length) &&
-						(buffer[index] == CharPool.NEW_LINE)) {
+					if ((index < buffer.length)
+						&& (buffer[index] == CharPool.NEW_LINE)) {
 
 						index++;
 					}
@@ -229,59 +244,57 @@ public class UnsyncBufferedReader extends Reader {
 			throw new IOException("Reader is null");
 		}
 
-		if (markIndex < 0) {
+		if (markLimitIndex < 0) {
 			throw new IOException("Resetting to invalid mark");
 		}
 
-		index = markIndex;
+		index = 0;
 	}
 
 	public long skip(long skip) throws IOException {
+		if (skip < 0) {
+			throw new IllegalArgumentException("Negative skip value : " + skip);
+		}
+
 		if (reader == null) {
 			throw new IOException("Reader is null");
 		}
 
-		if (skip <= 0) {
+		if (skip == 0) {
 			return 0;
 		}
 
 		long available = firstInvalidIndex - index;
 
-		if (available > 0) {
+		if (available <= 0) {
 
-			// Skip the data in buffer
+			if (markLimitIndex < 0) {
 
-			if (available < skip) {
-				skip = available;
-			}
-		}
-		else {
+				// No mark required, skip the underlying input stream
 
-			// Skip the underlying reader
-
-			if (markIndex < 0) {
-
-				// No mark required, skip
-
-				skip = reader.skip(skip);
+				return reader.skip(skip);
 			}
 			else {
 
 				// Mark required, save the skipped data
 
-				readUnderlyingReader();
+				fillInBuffer();
 
 				available = firstInvalidIndex - index;
 
-				if (available > 0) {
+				if (available <= 0) {
 
-					// Skip the data in buffer
+					// Reaching the end of stream
 
-					if (available < skip) {
-						skip = available;
-					}
+					return 0;
 				}
 			}
+		}
+
+		// Skip the data in buffer
+
+		if (available < skip) {
+			skip = available;
 		}
 
 		index += skip;
@@ -289,8 +302,8 @@ public class UnsyncBufferedReader extends Reader {
 		return skip;
 	}
 
-	protected void readUnderlyingReader() throws IOException {
-		if (markIndex < 0) {
+	protected void fillInBuffer() throws IOException {
+		if (markLimitIndex < 0) {
 
 			// No mark required, fill the buffer
 
@@ -306,54 +319,33 @@ public class UnsyncBufferedReader extends Reader {
 		}
 
 		// Mark required
+		if (index >= markLimitIndex) {
 
-		if (index >= buffer.length) {
+			// Passed mark limit indexs, get rid of all cache data
 
-			// Buffer is full, clean up or grow
+			markLimitIndex = -1;
 
-			if ((firstInvalidIndex - markIndex) > markLimit) {
+			index = firstInvalidIndex = 0;
+		}
+		else if (index == buffer.length) {
 
-				// Passed mark limit, get rid of all cache data
+			// Cann't get rid of cache data and there is no room to read in any
+			// more data, has to grow the buffer.
 
-				markIndex = -1;
-				index = 0;
+			int newBufferSize = buffer.length * 2;
+
+			if (newBufferSize > markLimitIndex) {
+				newBufferSize = markLimitIndex;
 			}
-			else if (markIndex > _MAX_MARK_WASTE_SIZE) {
 
-				// There are more than _MAX_MARK_WASTE_SIZE free space at the
-				// beginning of buffer, clean up by shuffling the buffer
+			char[] newBuffer = new char[newBufferSize];
 
-				int realDataSize = index - markIndex;
+			System.arraycopy(buffer, 0, newBuffer, 0, buffer.length);
 
-				System.arraycopy(
-					buffer, markIndex, buffer, 0, realDataSize);
-
-				markIndex = 0;
-				index = realDataSize;
-			}
-			else {
-
-				// Grow the buffer because we cannot get rid of cache data and
-				// it is inefficient to shuffle the buffer
-
-				int newBufferSize = index << 1;
-
-				if ((newBufferSize - _MAX_MARK_WASTE_SIZE) > markLimit) {
-
-					// Make thew new buffer size larger than the mark limit
-
-					newBufferSize = markLimit + _MAX_MARK_WASTE_SIZE;
-				}
-
-				char[] newBuffer = new char[newBufferSize];
-
-				System.arraycopy(buffer, 0, newBuffer, 0, index);
-
-				buffer = newBuffer;
-			}
+			buffer = newBuffer;
 		}
 
-		// Read underlying reader since the buffer has more space
+		// Read underlying input stream since the buffer has more space
 
 		firstInvalidIndex = index;
 
@@ -364,15 +356,56 @@ public class UnsyncBufferedReader extends Reader {
 		}
 	}
 
+	protected int readOnce(char[] chars, int offset, int length)
+		throws IOException {
+
+		int available = firstInvalidIndex - index;
+
+		if (available <= 0) {
+			// Buffer is empty, read from under Reader
+
+			if ((markLimitIndex < 0) && (length >= buffer.length)) {
+
+				// No mark required, left read block is no less than buffer,
+				// read through buffer is inefficient, directly read from
+				// under Reader
+
+				return reader.read(chars, offset, length);
+			}
+			else {
+
+				// Mark is required, has to read through buffer to remember data
+
+				fillInBuffer();
+
+				available = firstInvalidIndex - index;
+
+				if (available <= 0) {
+
+					// Reaching EOF
+
+					return -1;
+				}
+			}
+		}
+
+		if (length > available) {
+			length = available;
+		}
+
+		System.arraycopy(buffer, index, chars, offset, length);
+
+		index += length;
+
+		return length;
+	}
+
 	protected char[] buffer;
 	protected int firstInvalidIndex;
 	protected int index;
-	protected int markIndex = -1;
-	protected int markLimit;
+	protected int markLimitIndex = -1;
 	protected Reader reader;
 
 	private static int _DEFAULT_BUFFER_SIZE = 8192;
-
-	private static int _MAX_MARK_WASTE_SIZE = 4096;
 
 }

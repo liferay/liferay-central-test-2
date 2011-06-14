@@ -66,6 +66,18 @@ public class UnsyncBufferedOutputStreamTest extends TestCase {
 			byteArrayOutputStream, 10);
 
 		assertEquals(10, unsyncBufferedOutputStream.buffer.length);
+
+		try {
+			new UnsyncBufferedOutputStream(byteArrayOutputStream, 0);
+		}
+		catch (IllegalArgumentException iae) {
+		}
+
+		try {
+			new UnsyncBufferedOutputStream(byteArrayOutputStream, -1);
+		}
+		catch (IllegalArgumentException iae) {
+		}
 	}
 
 	public void testWrite() throws IOException {
