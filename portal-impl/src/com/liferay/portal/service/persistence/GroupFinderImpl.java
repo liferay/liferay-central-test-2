@@ -79,6 +79,9 @@ public class GroupFinderImpl
 	public static String JOIN_BY_CREATOR_USER_ID =
 		GroupFinder.class.getName() + ".joinByCreatorUserId";
 
+	public static String JOIN_BY_GROUP_ORG =
+		GroupFinder.class.getName() + ".joinByGroupOrg";
+
 	public static String JOIN_BY_GROUPS_ORGS =
 		GroupFinder.class.getName() + ".joinByGroupsOrgs";
 
@@ -121,12 +124,17 @@ public class GroupFinderImpl
 		LinkedHashMap<String, Object> params2 =
 			new LinkedHashMap<String, Object>();
 
-		params2.put("groupsOrgs", userId);
+		params2.put("groupOrg", userId);
 
 		LinkedHashMap<String, Object> params3 =
 			new LinkedHashMap<String, Object>();
 
-		params3.put("groupsUserGroups", userId);
+		params3.put("groupsOrgs", userId);
+
+		LinkedHashMap<String, Object> params4 =
+			new LinkedHashMap<String, Object>();
+
+		params4.put("groupsUserGroups", userId);
 
 		Session session = null;
 
@@ -183,12 +191,18 @@ public class GroupFinderImpl
 		LinkedHashMap<String, Object> params3 =
 			new LinkedHashMap<String, Object>(params1);
 
+		LinkedHashMap<String, Object> params4 =
+			new LinkedHashMap<String, Object>(params1);
+
 		if (userId != null) {
 			params2.remove("usersGroups");
-			params2.put("groupsOrgs", userId);
+			params2.put("groupOrg", userId);
 
 			params3.remove("usersGroups");
-			params3.put("groupsUserGroups", userId);
+			params3.put("groupsOrgs", userId);
+
+			params4.remove("usersGroups");
+			params4.put("groupsUserGroups", userId);
 		}
 
 		Session session = null;
@@ -213,6 +227,11 @@ public class GroupFinderImpl
 					countByC_C_N_D(
 						session, companyId, classNameIds, name, realName,
 						description, params3));
+
+				groupIds.addAll(
+					countByC_C_N_D(
+						session, companyId, classNameIds, name, realName,
+						description, params4));
 			}
 
 			return groupIds.size();
@@ -409,12 +428,18 @@ public class GroupFinderImpl
 		LinkedHashMap<String, Object> params3 =
 			new LinkedHashMap<String, Object>(params1);
 
+		LinkedHashMap<String, Object> params4 =
+			new LinkedHashMap<String, Object>(params1);
+
 		if (userId != null) {
 			params2.remove("usersGroups");
-			params2.put("groupsOrgs", userId);
+			params2.put("groupOrg", userId);
 
 			params3.remove("usersGroups");
-			params3.put("groupsUserGroups", userId);
+			params3.put("groupsOrgs", userId);
+
+			params4.remove("usersGroups");
+			params4.put("groupsUserGroups", userId);
 		}
 
 		String findByCND_SQL = CustomSQLUtil.get(FIND_BY_C_N_D);
@@ -603,7 +628,10 @@ public class GroupFinderImpl
 	protected String getJoin(String key) {
 		String join = StringPool.BLANK;
 
-		if (key.equals("groupsOrgs")) {
+		if (key.equals("groupOrg")) {
+			join = CustomSQLUtil.get(JOIN_BY_GROUP_ORG);
+		}
+		else if (key.equals("groupsOrgs")) {
 			join = CustomSQLUtil.get(JOIN_BY_GROUPS_ORGS);
 		}
 		else if (key.equals("groupsRoles")) {
@@ -678,6 +706,9 @@ public class GroupFinderImpl
 		}
 		else if (key.equals("creatorUserId")) {
 			join = CustomSQLUtil.get(JOIN_BY_CREATOR_USER_ID);
+		}
+		else if (key.equals("groupOrg")) {
+			join = CustomSQLUtil.get(JOIN_BY_GROUP_ORG);
 		}
 		else if (key.equals("groupsOrgs")) {
 			join = CustomSQLUtil.get(JOIN_BY_GROUPS_ORGS);
