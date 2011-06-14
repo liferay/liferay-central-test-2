@@ -228,14 +228,14 @@ public class AssetEntryServiceImpl extends AssetEntryServiceBaseImpl {
 	protected boolean isRemovedFilters (
 		AssetEntryQuery entryQuery, AssetEntryQuery filteredEntryQuery) {
 
-		if ((entryQuery.getAllCategoryIds().length > 0 &&
-				filteredEntryQuery.getAllCategoryIds().length == 0) ||
-			(entryQuery.getAnyCategoryIds().length > 0 &&
-				filteredEntryQuery.getAnyCategoryIds().length == 0) ||
-			(entryQuery.getAllTagIds().length > 0 &&
-				filteredEntryQuery.getAllTagIds().length == 0) ||
-			(entryQuery.getAnyTagIds().length > 0 &&
-				filteredEntryQuery.getAnyTagIds().length == 0)) {
+		if (((entryQuery.getAllCategoryIds().length > 0) &&
+			 (filteredEntryQuery.getAllCategoryIds().length == 0)) ||
+			((entryQuery.getAllTagIds().length > 0) &&
+			 (filteredEntryQuery.getAllTagIds().length == 0)) ||
+			((entryQuery.getAnyCategoryIds().length > 0) &&
+			 (filteredEntryQuery.getAnyCategoryIds().length == 0)) ||
+			((entryQuery.getAnyTagIds().length > 0) &&
+			 (filteredEntryQuery.getAnyTagIds().length == 0))) {
 
 			return true;
 		}
