@@ -76,7 +76,7 @@ portletURL.setParameter("structureId", String.valueOf(structureId));
 
 		<liferay-ui:search-container-column-text
 			name="name"
-			property="name"
+			value="<%= LanguageUtil.get(pageContext, template.getName(locale)) %>"
 		/>
 
 		<liferay-ui:search-container-column-text

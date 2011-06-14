@@ -16,6 +16,7 @@ package com.liferay.portlet.dynamicdatamapping.service.impl;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ResourceConstants;
@@ -28,6 +29,8 @@ import com.liferay.portlet.dynamicdatamapping.service.base.DDMTemplateLocalServi
 
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 
 /**
  * @author Brian Wing Shun Chan
@@ -37,8 +40,9 @@ public class DDMTemplateLocalServiceImpl
 	extends DDMTemplateLocalServiceBaseImpl {
 
 	public DDMTemplate addTemplate(
-			long userId, long groupId, long structureId, String name,
-			String description, String type, String language, String script,
+			long userId, long groupId, long structureId,
+			Map<Locale, String> nameMap, Map<Locale, String> descriptionMap,
+			String type, String language, String script,
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
@@ -47,7 +51,7 @@ public class DDMTemplateLocalServiceImpl
 		User user = userPersistence.findByPrimaryKey(userId);
 		Date now = new Date();
 
-		validate(name, script);
+		validate(nameMap, script);
 
 		long templateId = counterLocalService.increment();
 
@@ -61,8 +65,8 @@ public class DDMTemplateLocalServiceImpl
 		template.setCreateDate(serviceContext.getCreateDate(now));
 		template.setModifiedDate(serviceContext.getModifiedDate(now));
 		template.setStructureId(structureId);
-		template.setName(name);
-		template.setDescription(description);
+		template.setNameMap(nameMap);
+		template.setDescriptionMap(descriptionMap);
 		template.setType(type);
 		template.setLanguage(language);
 		template.setScript(script);
@@ -204,18 +208,19 @@ public class DDMTemplateLocalServiceImpl
 	}
 
 	public DDMTemplate updateTemplate(
-			long templateId, String name, String description, String type,
-			String language, String script, ServiceContext serviceContext)
+			long templateId, Map<Locale, String> nameMap,
+			Map<Locale, String> descriptionMap, String type, String language,
+			String script, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		validate(name, script);
+		validate(nameMap, script);
 
 		DDMTemplate template = ddmTemplateLocalService.getDDMTemplate(
 			templateId);
 
 		template.setModifiedDate(serviceContext.getModifiedDate(null));
-		template.setName(name);
-		template.setDescription(description);
+		template.setNameMap(nameMap);
+		template.setDescriptionMap(descriptionMap);
 		template.setType(type);
 		template.setLanguage(language);
 		template.setScript(script);
@@ -225,14 +230,23 @@ public class DDMTemplateLocalServiceImpl
 		return template;
 	}
 
-	protected void validate(String name, String script)
+	protected void validate(Map<Locale, String> nameMap, String script)
 		throws PortalException {
+
+		validateName(nameMap);
+
+		if (Validator.isNull(script)) {
+			throw new TemplateScriptException();
+		}
+	}
+
+	protected void validateName(Map<Locale, String> nameMap)
+		throws PortalException {
+
+		String name = nameMap.get(LocaleUtil.getDefault());
 
 		if (Validator.isNull(name)) {
 			throw new TemplateNameException();
-		}
-		else if (Validator.isNull(script)) {
-			throw new TemplateScriptException();
 		}
 	}
 

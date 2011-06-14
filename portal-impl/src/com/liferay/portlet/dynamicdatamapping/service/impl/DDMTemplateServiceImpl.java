@@ -23,6 +23,9 @@ import com.liferay.portlet.dynamicdatamapping.service.base.DDMTemplateServiceBas
 import com.liferay.portlet.dynamicdatamapping.service.permission.DDMPermission;
 import com.liferay.portlet.dynamicdatamapping.service.permission.DDMTemplatePermission;
 
+import java.util.Locale;
+import java.util.Map;
+
 /**
  * @author Brian Wing Shun Chan
  * @author Eduardo Lundgren
@@ -30,9 +33,9 @@ import com.liferay.portlet.dynamicdatamapping.service.permission.DDMTemplatePerm
 public class DDMTemplateServiceImpl extends DDMTemplateServiceBaseImpl {
 
 	public DDMTemplate addTemplate(
-			long groupId, long structureId, String name, String description,
-			String type, String language, String script,
-			ServiceContext serviceContext)
+			long groupId, long structureId, Map<Locale, String> nameMap,
+			Map<Locale, String> descriptionMap, String type, String language,
+			String script, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		DDMPermission.check(
@@ -40,7 +43,7 @@ public class DDMTemplateServiceImpl extends DDMTemplateServiceBaseImpl {
 			ActionKeys.ADD_TEMPLATE);
 
 		return ddmTemplateLocalService.addTemplate(
-			getUserId(), groupId, structureId, name, description, type,
+			getUserId(), groupId, structureId, nameMap, descriptionMap, type,
 			language, script, serviceContext);
 	}
 
@@ -54,15 +57,16 @@ public class DDMTemplateServiceImpl extends DDMTemplateServiceBaseImpl {
 	}
 
 	public DDMTemplate updateTemplate(
-			long templateId, String name, String description, String type,
-			String language, String script, ServiceContext serviceContext)
+			long templateId, Map<Locale, String> nameMap,
+			Map<Locale, String> descriptionMap, String type, String language,
+			String script, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		DDMTemplatePermission.check(
 			getPermissionChecker(), templateId, ActionKeys.UPDATE);
 
 		return ddmTemplateLocalService.updateTemplate(
-			templateId, name, description, type, language, script,
+			templateId, nameMap, descriptionMap, type, language, script,
 			serviceContext);
 	}
 

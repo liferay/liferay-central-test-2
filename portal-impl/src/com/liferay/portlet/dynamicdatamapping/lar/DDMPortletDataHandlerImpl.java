@@ -208,14 +208,14 @@ public class DDMPortletDataHandlerImpl extends BasePortletDataHandler {
 
 				importedTemplate = DDMTemplateLocalServiceUtil.addTemplate(
 					userId, portletDataContext.getScopeGroupId(), structureId,
-					template.getName(), template.getDescription(),
+					template.getNameMap(), template.getDescriptionMap(),
 					template.getType(), template.getLanguage(),
 					template.getScript(), serviceContext);
 			}
 			else {
 				importedTemplate = DDMTemplateLocalServiceUtil.updateTemplate(
-					existingTemplate.getTemplateId(), template.getName(),
-					template.getDescription(), template.getType(),
+					existingTemplate.getTemplateId(), template.getNameMap(),
+					template.getDescriptionMap(), template.getType(),
 					template.getLanguage(), template.getScript(),
 					serviceContext);
 			}
@@ -223,7 +223,7 @@ public class DDMPortletDataHandlerImpl extends BasePortletDataHandler {
 		else {
 			importedTemplate = DDMTemplateLocalServiceUtil.addTemplate(
 				userId, portletDataContext.getScopeGroupId(), structureId,
-				template.getName(), template.getDescription(),
+				template.getNameMap(), template.getDescriptionMap(),
 				template.getType(), template.getLanguage(),
 				template.getScript(), serviceContext);
 		}

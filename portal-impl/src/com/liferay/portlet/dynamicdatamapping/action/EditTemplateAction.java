@@ -17,6 +17,7 @@ package com.liferay.portlet.dynamicdatamapping.action;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.util.Constants;
+import com.liferay.portal.kernel.util.LocalizationUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.security.auth.PrincipalException;
@@ -38,6 +39,9 @@ import com.liferay.portlet.dynamicdatamapping.model.DDMTemplateConstants;
 import com.liferay.portlet.dynamicdatamapping.service.DDMStructureLocalServiceUtil;
 import com.liferay.portlet.dynamicdatamapping.service.DDMTemplateServiceUtil;
 import com.liferay.util.JS;
+
+import java.util.Locale;
+import java.util.Map;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -195,8 +199,10 @@ public class EditTemplateAction extends PortletAction {
 
 		long groupId = ParamUtil.getLong(uploadRequest, "groupId");
 		long structureId = ParamUtil.getLong(uploadRequest, "structureId");
-		String name = ParamUtil.getString(uploadRequest, "name");
-		String description = ParamUtil.getString(uploadRequest, "description");
+		Map<Locale, String> nameMap = LocalizationUtil.getLocalizationMap(
+			actionRequest, "name");
+		Map<Locale, String> descriptionMap =
+			LocalizationUtil.getLocalizationMap(actionRequest, "description");
 		String type = ParamUtil.getString(uploadRequest, "type");
 		String language = ParamUtil.getString(
 			uploadRequest, "language", DDMTemplateConstants.LANG_TYPE_VM);
@@ -219,12 +225,12 @@ public class EditTemplateAction extends PortletAction {
 				structureId);
 
 			template = DDMTemplateServiceUtil.addTemplate(
-				groupId, structure.getStructureId(), name, description, type,
-				language, script, serviceContext);
+				groupId, structure.getStructureId(), nameMap, descriptionMap,
+				type, language, script, serviceContext);
 		}
 		else {
 			template = DDMTemplateServiceUtil.updateTemplate(
-				templateId, name, description, type, language, script,
+				templateId, nameMap, descriptionMap, type, language, script,
 				serviceContext);
 		}
 

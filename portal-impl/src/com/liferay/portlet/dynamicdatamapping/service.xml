@@ -151,8 +151,8 @@
 		<!-- Other fields -->
 
 		<column name="structureId" type="long" />
-		<column name="name" type="String" />
-		<column name="description" type="String" />
+		<column name="name" type="String" localized="true" />
+		<column name="description" type="String" localized="true" />
 		<column name="type" type="String" />
 		<column name="language" type="String" />
 		<column name="script" type="String" />

@@ -46,7 +46,7 @@ DDMStructure structure = template.getStructure();
 	<c:if test="<%= DDMTemplatePermission.contains(permissionChecker, template, ActionKeys.PERMISSIONS) %>">
 		<liferay-security:permissionsURL
 			modelResource="<%= DDMTemplate.class.getName() %>"
-			modelResourceDescription="<%= template.getName() %>"
+			modelResourceDescription="<%= template.getName(locale) %>"
 			resourcePrimKey="<%= String.valueOf(template.getTemplateId()) %>"
 			var="permissionsURL"
 		/>

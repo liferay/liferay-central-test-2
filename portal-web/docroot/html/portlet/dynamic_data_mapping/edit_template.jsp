@@ -67,7 +67,7 @@ if (Validator.isNotNull(structureAvailableFields)) {
 
 	if (structure != null) {
 		if (template != null) {
-			title = template.getName() + " (" + structure.getName(locale) + ")";
+			title = template.getName(locale) + " (" + structure.getName(locale) + ")";
 		}
 		else {
 			title = LanguageUtil.format(pageContext, "new-template-for-structure-x", structure.getName(locale), false);
