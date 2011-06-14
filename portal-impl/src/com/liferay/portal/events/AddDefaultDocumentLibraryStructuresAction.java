@@ -159,7 +159,7 @@ public class AddDefaultDocumentLibraryStructuresAction extends SimpleAction {
 		throws Exception {
 
 		String xsd = buildDLRawMetadataConfig(
-			TikaRawMetadataProcessor.RAW_METADATA_SETS);
+			TikaRawMetadataProcessor._fields);
 
 		Document document = SAXReaderUtil.read(new StringReader(xsd));
 
