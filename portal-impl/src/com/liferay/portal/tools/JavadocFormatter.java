@@ -27,6 +27,7 @@ import com.liferay.portal.xml.SAXReaderImpl;
 import com.liferay.util.xml.DocUtil;
 
 import com.thoughtworks.qdox.JavaDocBuilder;
+import com.thoughtworks.qdox.model.AbstractBaseJavaEntity;
 import com.thoughtworks.qdox.model.AbstractJavaEntity;
 import com.thoughtworks.qdox.model.Annotation;
 import com.thoughtworks.qdox.model.DocletTag;
@@ -57,6 +58,7 @@ import org.apache.tools.ant.DirectoryScanner;
 /**
  * @author Brian Wing Shun Chan
  * @author Connor McKay
+ * @author Jim Hinkey
  */
 public class JavadocFormatter {
 
@@ -97,6 +99,7 @@ public class JavadocFormatter {
 		List<String> includes = new ArrayList<String>();
 
 		if (Validator.isNotNull(limit) && !limit.startsWith("$")) {
+			System.out.println("limit on " + limit);
 			String[] limitArray = StringUtil.split(limit, "/");
 
 			for (String curLimit : limitArray) {
@@ -115,6 +118,20 @@ public class JavadocFormatter {
 		ds.scan();
 
 		String[] fileNames = ds.getIncludedFiles();
+
+		if (fileNames.length == 0 && Validator.isNotNull(limit) &&
+			!limit.startsWith("$")) {
+
+			StringBuilder sb = new StringBuilder("limit file not found - ");
+			sb.append(limit);
+
+			if (limit.contains(".")) {
+				sb.append("; specify limit filename without package path");
+				sb.append(" or file type suffix");
+			}
+
+			System.out.println(sb.toString());
+		}
 
 		for (String fileName : fileNames) {
 			fileName = StringUtil.replace(fileName, "\\", "/");
@@ -453,31 +470,7 @@ public class JavadocFormatter {
 		return cdata.trim();
 	}
 
-	private String _getFieldKey(Element fieldElement) {
-		return fieldElement.elementText("name");
-	}
-
-	private String _getFieldKey(JavaField javaField) {
-		return javaField.getName();
-	}
-
-	private int _getIndentLength(String indent) {
-		int indentLength = 0;
-
-		for (char c : indent.toCharArray()) {
-			if (c == '\t') {
-				indentLength = indentLength + 4;
-			}
-			else {
-				indentLength++;
-			}
-		}
-
-		return indentLength;
-	}
-
-	private JavaClass _getJavaClass(String fileName, Reader reader)
-		throws Exception {
+	private String _getClassName(String fileName) {
 
 		int pos = fileName.indexOf("src/");
 
@@ -498,6 +491,54 @@ public class JavadocFormatter {
 		String srcFile = fileName.substring(pos + 1, fileName.length());
 		String className = StringUtil.replace(
 			srcFile.substring(0, srcFile.length() - 5), "/", ".");
+		return className;
+	}
+
+	private String _getFieldKey(Element fieldElement) {
+		return fieldElement.elementText("name");
+	}
+
+	private String _getFieldKey(JavaField javaField) {
+		return javaField.getName();
+	}
+
+	private String _getIndent(
+		String[] lines, AbstractBaseJavaEntity javaEntity) {
+
+		String line = lines[javaEntity.getLineNumber() - 1];
+
+		String indent = StringPool.BLANK;
+
+		for (char c : line.toCharArray()) {
+			if (Character.isWhitespace(c)) {
+				indent += c;
+			}
+			else {
+				break;
+			}
+		}
+		return indent;
+	}
+
+	private int _getIndentLength(String indent) {
+		int indentLength = 0;
+
+		for (char c : indent.toCharArray()) {
+			if (c == '\t') {
+				indentLength = indentLength + 4;
+			}
+			else {
+				indentLength++;
+			}
+		}
+
+		return indentLength;
+	}
+
+	private JavaClass _getJavaClass(String fileName, Reader reader)
+		throws Exception {
+
+		String className = _getClassName(fileName);
 
 		JavaDocBuilder builder = new JavaDocBuilder();
 
@@ -552,6 +593,30 @@ public class JavadocFormatter {
 		return sb.toString();
 	}
 
+	private int _getJavaClassLineNumber(JavaClass javaClass) {
+		int lineNumber = javaClass.getLineNumber();
+
+		Annotation[] annotations = javaClass.getAnnotations();
+
+		if (annotations.length == 0) {
+			return lineNumber;
+		}
+
+		for (Annotation annotation : annotations) {
+			int annotationLineNumber = annotation.getLineNumber();
+
+			if (annotation.getPropertyMap().isEmpty()) {
+				annotationLineNumber--;
+			}
+
+			if (annotationLineNumber < lineNumber) {
+				lineNumber = annotationLineNumber;
+			}
+		}
+
+		return lineNumber;
+	}
+
 	private Document _getJavadocDocument(JavaClass javaClass) throws Exception {
 		Element rootElement = _saxReaderUtil.createElement("javadoc");
 
@@ -595,18 +660,7 @@ public class JavadocFormatter {
 			return null;
 		}
 
-		String line = lines[javaField.getLineNumber() - 1];
-
-		String indent = StringPool.BLANK;
-
-		for (char c : line.toCharArray()) {
-			if (Character.isWhitespace(c)) {
-				indent += c;
-			}
-			else {
-				break;
-			}
-		}
+		String indent = _getIndent(lines, javaField);
 
 		StringBuilder sb = new StringBuilder();
 
@@ -657,18 +711,7 @@ public class JavadocFormatter {
 			return null;
 		}
 
-		String line = lines[javaMethod.getLineNumber() - 1];
-
-		String indent = StringPool.BLANK;
-
-		for (char c : line.toCharArray()) {
-			if (Character.isWhitespace(c)) {
-				indent += c;
-			}
-			else {
-				break;
-			}
-		}
+		String indent = _getIndent(lines, javaMethod);
 
 		StringBuilder sb = new StringBuilder();
 
@@ -866,30 +909,6 @@ public class JavadocFormatter {
 			"(?i)(?<!<code>|\\w)(null|false|true)(?!\\w)", "<code>$1</code>");
 
 		return text;
-	}
-
-	private int _getJavaClassLineNumber(JavaClass javaClass) {
-		int lineNumber = javaClass.getLineNumber();
-
-		Annotation[] annotations = javaClass.getAnnotations();
-
-		if (annotations.length == 0) {
-			return lineNumber;
-		}
-
-		for (Annotation annotation : annotations) {
-			int annotationLineNumber = annotation.getLineNumber();
-
-			if (annotation.getPropertyMap().isEmpty()) {
-				annotationLineNumber--;
-			}
-
-			if (annotationLineNumber < lineNumber) {
-				lineNumber = annotationLineNumber;
-			}
-		}
-
-		return lineNumber;
 	}
 
 	private String _trimMultilineText(String text) {
