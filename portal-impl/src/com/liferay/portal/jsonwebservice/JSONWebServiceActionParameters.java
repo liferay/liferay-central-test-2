@@ -39,8 +39,9 @@ public class JSONWebServiceActionParameters {
 
 		_jsonRpcRequest = jsonRpcRequest;
 
+		_collectDefaultsFromRequestAttributes(request);
+
 		_collectFromPath(pathParameters);
-		_collectFromRequestAttributes(request);
 		_collectFromRequestParameters(request);
 		_collectFromJSONRPCRequest(jsonRpcRequest);
 	}
@@ -65,6 +66,19 @@ public class JSONWebServiceActionParameters {
 		}
 
 		return names;
+	}
+
+	private void _collectDefaultsFromRequestAttributes(
+		HttpServletRequest request) {
+		Enumeration<String> enu = request.getAttributeNames();
+
+		while (enu.hasMoreElements()) {
+			String attributeName = enu.nextElement();
+
+			Object value = request.getAttribute(attributeName);
+
+			_parameters.put(attributeName, value);
+		}
 	}
 
 	private void _collectFromJSONRPCRequest(JSONRPCRequest jsonRpcRequest) {
@@ -105,18 +119,6 @@ public class JSONWebServiceActionParameters {
 			_parameters.put(name, value);
 
 			i += 2;
-		}
-	}
-
-	private void _collectFromRequestAttributes(HttpServletRequest request) {
-		Enumeration<String> enu = request.getAttributeNames();
-
-		while (enu.hasMoreElements()) {
-			String attributeName = enu.nextElement();
-
-			Object value = request.getAttribute(attributeName);
-
-			_parameters.put(attributeName, value);
 		}
 	}
 
