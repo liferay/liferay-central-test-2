@@ -596,7 +596,7 @@
 	</definition>
 
 	<definition name="portlet.enterprise_admin.edit_session" extends="portlet.enterprise_admin">
-		<put name="portlet_content" value="/portlet/enterprise_admin/edit_session.jsp" />
+		<put name="portlet_content" value="/portlet/monitoring/edit_session.jsp" />
 	</definition>
 
 	<definition name="portlet.enterprise_admin.edit_user" extends="portlet.enterprise_admin">

@@ -63,7 +63,7 @@ request.setAttribute("view.jsp-portletURLString", portletURLString);
 					<liferay-util:include page="/html/portlet/enterprise_admin/view_password_policies.jsp" />
 				</c:when>
 				<c:when test='<%= tabs1.equals("monitoring") %>'>
-					<liferay-util:include page="/html/portlet/enterprise_admin/view_monitoring.jsp" />
+					<liferay-util:include page="/html/portlet/monitoring/view_monitoring.jsp" />
 				</c:when>
 				<c:when test='<%= tabs1.equals("plugins") %>'>
 
