@@ -41,9 +41,11 @@ public interface DDMTemplateService {
 	 * Never modify or reference this interface directly. Always use {@link DDMTemplateServiceUtil} to access the d d m template remote service. Add custom service methods to {@link com.liferay.portlet.dynamicdatamapping.service.impl.DDMTemplateServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
 	public com.liferay.portlet.dynamicdatamapping.model.DDMTemplate addTemplate(
-		long groupId, long structureId, java.lang.String name,
-		java.lang.String description, java.lang.String type,
-		java.lang.String language, java.lang.String script,
+		long groupId, long structureId,
+		java.util.Map<java.util.Locale, java.lang.String> nameMap,
+		java.util.Map<java.util.Locale, java.lang.String> descriptionMap,
+		java.lang.String type, java.lang.String language,
+		java.lang.String script,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
@@ -53,7 +55,9 @@ public interface DDMTemplateService {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portlet.dynamicdatamapping.model.DDMTemplate updateTemplate(
-		long templateId, java.lang.String name, java.lang.String description,
+		long templateId,
+		java.util.Map<java.util.Locale, java.lang.String> nameMap,
+		java.util.Map<java.util.Locale, java.lang.String> descriptionMap,
 		java.lang.String type, java.lang.String language,
 		java.lang.String script,
 		com.liferay.portal.service.ServiceContext serviceContext)

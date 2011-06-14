@@ -246,12 +246,108 @@ public class DDMTemplateWrapper implements DDMTemplate {
 	}
 
 	/**
+	* Returns the localized name of this d d m template in the language. Uses the default language if no localization exists for the requested language.
+	*
+	* @param locale the locale of the language
+	* @return the localized name of this d d m template
+	*/
+	public java.lang.String getName(java.util.Locale locale) {
+		return _ddmTemplate.getName(locale);
+	}
+
+	/**
+	* Returns the localized name of this d d m template in the language, optionally using the default language if no localization exists for the requested language.
+	*
+	* @param locale the local of the language
+	* @param useDefault whether to use the default language if no localization exists for the requested language
+	* @return the localized name of this d d m template. If <code>useDefault</code> is <code>false</code> and no localization exists for the requested language, an empty string will be returned.
+	*/
+	public java.lang.String getName(java.util.Locale locale, boolean useDefault) {
+		return _ddmTemplate.getName(locale, useDefault);
+	}
+
+	/**
+	* Returns the localized name of this d d m template in the language. Uses the default language if no localization exists for the requested language.
+	*
+	* @param languageId the ID of the language
+	* @return the localized name of this d d m template
+	*/
+	public java.lang.String getName(java.lang.String languageId) {
+		return _ddmTemplate.getName(languageId);
+	}
+
+	/**
+	* Returns the localized name of this d d m template in the language, optionally using the default language if no localization exists for the requested language.
+	*
+	* @param languageId the ID of the language
+	* @param useDefault whether to use the default language if no localization exists for the requested language
+	* @return the localized name of this d d m template
+	*/
+	public java.lang.String getName(java.lang.String languageId,
+		boolean useDefault) {
+		return _ddmTemplate.getName(languageId, useDefault);
+	}
+
+	/**
+	* Returns a map of the locales and localized names of this d d m template.
+	*
+	* @return the locales and localized names of this d d m template
+	*/
+	public java.util.Map<java.util.Locale, java.lang.String> getNameMap() {
+		return _ddmTemplate.getNameMap();
+	}
+
+	/**
 	* Sets the name of this d d m template.
 	*
 	* @param name the name of this d d m template
 	*/
 	public void setName(java.lang.String name) {
 		_ddmTemplate.setName(name);
+	}
+
+	/**
+	* Sets the localized name of this d d m template in the language.
+	*
+	* @param name the localized name of this d d m template
+	* @param locale the locale of the language
+	*/
+	public void setName(java.lang.String name, java.util.Locale locale) {
+		_ddmTemplate.setName(name, locale);
+	}
+
+	/**
+	* Sets the localized name of this d d m template in the language, and sets the default locale.
+	*
+	* @param name the localized name of this d d m template
+	* @param locale the locale of the language
+	* @param defaultLocale the default locale
+	*/
+	public void setName(java.lang.String name, java.util.Locale locale,
+		java.util.Locale defaultLocale) {
+		_ddmTemplate.setName(name, locale, defaultLocale);
+	}
+
+	/**
+	* Sets the localized names of this d d m template from the map of locales and localized names.
+	*
+	* @param nameMap the locales and localized names of this d d m template
+	*/
+	public void setNameMap(
+		java.util.Map<java.util.Locale, java.lang.String> nameMap) {
+		_ddmTemplate.setNameMap(nameMap);
+	}
+
+	/**
+	* Sets the localized names of this d d m template from the map of locales and localized names, and sets the default locale.
+	*
+	* @param nameMap the locales and localized names of this d d m template
+	* @param defaultLocale the default locale
+	*/
+	public void setNameMap(
+		java.util.Map<java.util.Locale, java.lang.String> nameMap,
+		java.util.Locale defaultLocale) {
+		_ddmTemplate.setNameMap(nameMap, defaultLocale);
 	}
 
 	/**
@@ -264,12 +360,110 @@ public class DDMTemplateWrapper implements DDMTemplate {
 	}
 
 	/**
+	* Returns the localized description of this d d m template in the language. Uses the default language if no localization exists for the requested language.
+	*
+	* @param locale the locale of the language
+	* @return the localized description of this d d m template
+	*/
+	public java.lang.String getDescription(java.util.Locale locale) {
+		return _ddmTemplate.getDescription(locale);
+	}
+
+	/**
+	* Returns the localized description of this d d m template in the language, optionally using the default language if no localization exists for the requested language.
+	*
+	* @param locale the local of the language
+	* @param useDefault whether to use the default language if no localization exists for the requested language
+	* @return the localized description of this d d m template. If <code>useDefault</code> is <code>false</code> and no localization exists for the requested language, an empty string will be returned.
+	*/
+	public java.lang.String getDescription(java.util.Locale locale,
+		boolean useDefault) {
+		return _ddmTemplate.getDescription(locale, useDefault);
+	}
+
+	/**
+	* Returns the localized description of this d d m template in the language. Uses the default language if no localization exists for the requested language.
+	*
+	* @param languageId the ID of the language
+	* @return the localized description of this d d m template
+	*/
+	public java.lang.String getDescription(java.lang.String languageId) {
+		return _ddmTemplate.getDescription(languageId);
+	}
+
+	/**
+	* Returns the localized description of this d d m template in the language, optionally using the default language if no localization exists for the requested language.
+	*
+	* @param languageId the ID of the language
+	* @param useDefault whether to use the default language if no localization exists for the requested language
+	* @return the localized description of this d d m template
+	*/
+	public java.lang.String getDescription(java.lang.String languageId,
+		boolean useDefault) {
+		return _ddmTemplate.getDescription(languageId, useDefault);
+	}
+
+	/**
+	* Returns a map of the locales and localized descriptions of this d d m template.
+	*
+	* @return the locales and localized descriptions of this d d m template
+	*/
+	public java.util.Map<java.util.Locale, java.lang.String> getDescriptionMap() {
+		return _ddmTemplate.getDescriptionMap();
+	}
+
+	/**
 	* Sets the description of this d d m template.
 	*
 	* @param description the description of this d d m template
 	*/
 	public void setDescription(java.lang.String description) {
 		_ddmTemplate.setDescription(description);
+	}
+
+	/**
+	* Sets the localized description of this d d m template in the language.
+	*
+	* @param description the localized description of this d d m template
+	* @param locale the locale of the language
+	*/
+	public void setDescription(java.lang.String description,
+		java.util.Locale locale) {
+		_ddmTemplate.setDescription(description, locale);
+	}
+
+	/**
+	* Sets the localized description of this d d m template in the language, and sets the default locale.
+	*
+	* @param description the localized description of this d d m template
+	* @param locale the locale of the language
+	* @param defaultLocale the default locale
+	*/
+	public void setDescription(java.lang.String description,
+		java.util.Locale locale, java.util.Locale defaultLocale) {
+		_ddmTemplate.setDescription(description, locale, defaultLocale);
+	}
+
+	/**
+	* Sets the localized descriptions of this d d m template from the map of locales and localized descriptions.
+	*
+	* @param descriptionMap the locales and localized descriptions of this d d m template
+	*/
+	public void setDescriptionMap(
+		java.util.Map<java.util.Locale, java.lang.String> descriptionMap) {
+		_ddmTemplate.setDescriptionMap(descriptionMap);
+	}
+
+	/**
+	* Sets the localized descriptions of this d d m template from the map of locales and localized descriptions, and sets the default locale.
+	*
+	* @param descriptionMap the locales and localized descriptions of this d d m template
+	* @param defaultLocale the default locale
+	*/
+	public void setDescriptionMap(
+		java.util.Map<java.util.Locale, java.lang.String> descriptionMap,
+		java.util.Locale defaultLocale) {
+		_ddmTemplate.setDescriptionMap(descriptionMap, defaultLocale);
 	}
 
 	/**

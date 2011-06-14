@@ -1985,6 +1985,8 @@
 			</basic>
 			<basic name="language" />
 			<basic name="script" />
+			<transient name="descriptionMap" />
+			<transient name="nameMap" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />
 			<transient name="userUuid" />

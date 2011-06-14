@@ -1493,10 +1493,10 @@
 		<field name="createDate" type="Date" />
 		<field name="modifiedDate" type="Date" />
 		<field name="structureId" type="long" />
-		<field name="name" type="String">
+		<field name="name" type="String" localized="true">
 			<validator name="required" />
 		</field>
-		<field name="description" type="String">
+		<field name="description" type="String" localized="true">
 			<hint-collection name="TEXTAREA" />
 		</field>
 		<field name="type" type="String" />

@@ -508,7 +508,7 @@ create table DDMTemplate (
 	createDate DATE null,
 	modifiedDate DATE null,
 	structureId LONG,
-	name VARCHAR(75) null,
+	name STRING null,
 	description STRING null,
 	type_ VARCHAR(75) null,
 	language VARCHAR(75) null,

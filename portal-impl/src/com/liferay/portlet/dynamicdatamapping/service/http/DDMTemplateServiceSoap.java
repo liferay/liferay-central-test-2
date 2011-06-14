@@ -65,50 +65,10 @@ import java.rmi.RemoteException;
  * @generated
  */
 public class DDMTemplateServiceSoap {
-	public static com.liferay.portlet.dynamicdatamapping.model.DDMTemplateSoap addTemplate(
-		long groupId, long structureId, java.lang.String name,
-		java.lang.String description, java.lang.String type,
-		java.lang.String language, java.lang.String script,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws RemoteException {
-		try {
-			com.liferay.portlet.dynamicdatamapping.model.DDMTemplate returnValue =
-				DDMTemplateServiceUtil.addTemplate(groupId, structureId, name,
-					description, type, language, script, serviceContext);
-
-			return com.liferay.portlet.dynamicdatamapping.model.DDMTemplateSoap.toSoapModel(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
 	public static void deleteTemplate(long templateId)
 		throws RemoteException {
 		try {
 			DDMTemplateServiceUtil.deleteTemplate(templateId);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static com.liferay.portlet.dynamicdatamapping.model.DDMTemplateSoap updateTemplate(
-		long templateId, java.lang.String name, java.lang.String description,
-		java.lang.String type, java.lang.String language,
-		java.lang.String script,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws RemoteException {
-		try {
-			com.liferay.portlet.dynamicdatamapping.model.DDMTemplate returnValue =
-				DDMTemplateServiceUtil.updateTemplate(templateId, name,
-					description, type, language, script, serviceContext);
-
-			return com.liferay.portlet.dynamicdatamapping.model.DDMTemplateSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
