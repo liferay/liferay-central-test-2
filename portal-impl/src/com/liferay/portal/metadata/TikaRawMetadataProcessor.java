@@ -20,6 +20,13 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portlet.dynamicdatamapping.StorageException;
 import com.liferay.portlet.dynamicdatamapping.storage.Fields;
+
+import java.io.IOException;
+import java.io.InputStream;
+
+import java.util.HashMap;
+import java.util.Map;
+
 import org.apache.tika.Tika;
 import org.apache.tika.metadata.ClimateForcast;
 import org.apache.tika.metadata.CreativeCommons;
@@ -33,11 +40,6 @@ import org.apache.tika.metadata.Property;
 import org.apache.tika.metadata.TIFF;
 import org.apache.tika.metadata.TikaMetadataKeys;
 import org.apache.tika.metadata.TikaMimeKeys;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * @author Miguel Pastor
@@ -88,7 +90,7 @@ public class TikaRawMetadataProcessor implements RawMetadataProcessor {
 		String metadataKey = null;
 
 		if (fieldValue instanceof String) {
-			metadataKey = (String)fieldValue;
+			metadataKey = (String) fieldValue;
 		}
 		else {
 			metadataKey = ((Property)fieldValue).getName();
@@ -182,16 +184,17 @@ public class TikaRawMetadataProcessor implements RawMetadataProcessor {
 	private static final java.lang.reflect.Field[]
 		_TIFF_FIELDS = TIFF.class.getFields();
 
-	private static Log _log = LogFactoryUtil.getLog(TikaRawMetadataProcessor.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		TikaRawMetadataProcessor.class);
 
 	private Tika _tika;
 
 	static {
 		RAW_METADATA_SETS.put(
-			ClimateForcast.class.getSimpleName(), 
+			ClimateForcast.class.getSimpleName(),
 			_CLIMATE_FOR_CAST_FIELDS);
 		RAW_METADATA_SETS.put(
-			CreativeCommons.class.getSimpleName(), 
+			CreativeCommons.class.getSimpleName(),
 			_CREATIVE_COMMONS_FIELDS);
 		RAW_METADATA_SETS.put(
 			DublinCore.class.getSimpleName(), _DUBLIN_CORE_FIELDS);
