@@ -68,7 +68,8 @@ public class EditPasswordPolicyAssignmentsAction extends PortletAction {
 
 				SessionErrors.add(actionRequest, e.getClass().getName());
 
-				setForward(actionRequest, "portlet.password_policies_admin.error");
+				setForward(
+					actionRequest, "portlet.password_policies_admin.error");
 			}
 			else {
 				throw e;
@@ -90,7 +91,8 @@ public class EditPasswordPolicyAssignmentsAction extends PortletAction {
 
 				SessionErrors.add(renderRequest, e.getClass().getName());
 
-				return mapping.findForward("portlet.password_policies_admin.error");
+				return mapping.findForward(
+					"portlet.password_policies_admin.error");
 			}
 			else {
 				throw e;
