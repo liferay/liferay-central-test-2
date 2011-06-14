@@ -143,20 +143,11 @@ PortletURL portletURL = (PortletURL)request.getAttribute("edit_pages.jsp-portlet
 			);
 		},
 
-		updateLayoutParent: function(dragPlid, dropPlid) {
+		updateLayoutParent: function(dragPlid, dropPlid, index) {
 			TreeUtil.updateLayout(
 				{
 					cmd: 'parent_layout_id',
 					parentPlid: dropPlid,
-					plid: dragPlid
-				}
-			);
-		},
-
-		updateLayoutPriority: function(dragPlid, index) {
-			TreeUtil.updateLayout(
-				{
-					cmd: 'priority',
 					plid: dragPlid,
 					priority: index
 				}
@@ -245,32 +236,26 @@ PortletURL portletURL = (PortletURL)request.getAttribute("edit_pages.jsp-portlet
 				append: function(event) {
 					TreeUtil.restoreNodeState(event.tree.node);
 				},
-				drop: function(event) {
-					var tree = event.tree;
-
-					var dragNode = tree.dragNode;
-
-					var index = dragNode.get('parentNode').indexOf(dragNode);
-
-					TreeUtil.updateLayoutPriority(
-						TreeUtil.extractPlid(dragNode),
-						index
-					);
-				},
 				dropAppend: function(event) {
 					var tree = event.tree;
 
+					var index = tree.dragNode.get('parentNode').indexOf(tree.dragNode);
+
 					TreeUtil.updateLayoutParent(
 						TreeUtil.extractPlid(tree.dragNode),
-						TreeUtil.extractPlid(tree.dropNode)
+						TreeUtil.extractPlid(tree.dropNode),
+						index
 					);
 				},
 				dropInsert: function(event) {
 					var tree = event.tree;
 
+					var index = tree.dragNode.get('parentNode').indexOf(tree.dragNode);
+
 					TreeUtil.updateLayoutParent(
 						TreeUtil.extractPlid(tree.dragNode),
-						TreeUtil.extractPlid(tree.dropNode.get('parentNode'))
+						TreeUtil.extractPlid(tree.dropNode.get('parentNode')),
+						index
 					);
 				}
 			},
