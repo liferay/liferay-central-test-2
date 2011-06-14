@@ -58,7 +58,7 @@ import org.apache.tools.ant.DirectoryScanner;
 /**
  * @author Brian Wing Shun Chan
  * @author Connor McKay
- * @author Jim Hinkey
+ * @author James Hinkey
  */
 public class JavadocFormatter {
 
@@ -99,7 +99,8 @@ public class JavadocFormatter {
 		List<String> includes = new ArrayList<String>();
 
 		if (Validator.isNotNull(limit) && !limit.startsWith("$")) {
-			System.out.println("limit on " + limit);
+			System.out.println("Limit on " + limit);
+
 			String[] limitArray = StringUtil.split(limit, "/");
 
 			for (String curLimit : limitArray) {
@@ -119,15 +120,16 @@ public class JavadocFormatter {
 
 		String[] fileNames = ds.getIncludedFiles();
 
-		if (fileNames.length == 0 && Validator.isNotNull(limit) &&
+		if ((fileNames.length == 0) && Validator.isNotNull(limit) &&
 			!limit.startsWith("$")) {
 
-			StringBuilder sb = new StringBuilder("limit file not found - ");
+			StringBuilder sb = new StringBuilder("Limit file not found.");
+
 			sb.append(limit);
 
 			if (limit.contains(".")) {
-				sb.append("; specify limit filename without package path");
-				sb.append(" or file type suffix");
+				sb.append(" Specify limit filename without package path or ");
+				sb.append("file type suffix.");
 			}
 
 			System.out.println(sb.toString());
@@ -471,7 +473,6 @@ public class JavadocFormatter {
 	}
 
 	private String _getClassName(String fileName) {
-
 		int pos = fileName.indexOf("src/");
 
 		if (pos == -1) {
@@ -489,9 +490,9 @@ public class JavadocFormatter {
 		pos = fileName.indexOf("/", pos);
 
 		String srcFile = fileName.substring(pos + 1, fileName.length());
-		String className = StringUtil.replace(
+
+		return StringUtil.replace(
 			srcFile.substring(0, srcFile.length() - 5), "/", ".");
-		return className;
 	}
 
 	private String _getFieldKey(Element fieldElement) {
@@ -503,9 +504,9 @@ public class JavadocFormatter {
 	}
 
 	private String _getIndent(
-		String[] lines, AbstractBaseJavaEntity javaEntity) {
+		String[] lines, AbstractBaseJavaEntity abstractBaseJavaEntity) {
 
-		String line = lines[javaEntity.getLineNumber() - 1];
+		String line = lines[abstractBaseJavaEntity.getLineNumber() - 1];
 
 		String indent = StringPool.BLANK;
 
@@ -517,6 +518,7 @@ public class JavadocFormatter {
 				break;
 			}
 		}
+
 		return indent;
 	}
 
