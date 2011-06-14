@@ -28,7 +28,7 @@ int type = ParamUtil.getInteger(request, "type");
 String subtype = BeanParamUtil.getString(role, request, "subtype");
 %>
 
-<liferay-util:include page="/html/portlet/enterprise_admin/role/toolbar.jsp">
+<liferay-util:include page="/html/portlet/roles_admin/toolbar.jsp">
 	<liferay-util:param name="toolbarItem" value='<%= (role == null) ? "add" : "view-all" %>' />
 </liferay-util:include>
 
@@ -38,7 +38,7 @@ String subtype = BeanParamUtil.getString(role, request, "subtype");
 />
 
 <c:if test="<%= role != null %>">
-	<liferay-util:include page="/html/portlet/enterprise_admin/edit_role_tabs.jsp">
+	<liferay-util:include page="/html/portlet/roles_admin/edit_role_tabs.jsp">
 		<liferay-util:param name="tabs1" value="edit" />
 		<liferay-util:param name="backURL" value="<%= backURL %>" />
 	</liferay-util:include>

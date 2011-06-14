@@ -584,15 +584,15 @@
 	</definition>
 
 	<definition name="portlet.enterprise_admin.edit_role" extends="portlet.enterprise_admin">
-		<put name="portlet_content" value="/portlet/enterprise_admin/edit_role.jsp" />
+		<put name="portlet_content" value="/portlet/roles_admin/edit_role.jsp" />
 	</definition>
 
 	<definition name="portlet.enterprise_admin.edit_role_assignments" extends="portlet.enterprise_admin">
-		<put name="portlet_content" value="/portlet/enterprise_admin/edit_role_assignments.jsp" />
+		<put name="portlet_content" value="/portlet/roles_admin/edit_role_assignments.jsp" />
 	</definition>
 
 	<definition name="portlet.enterprise_admin.edit_role_permissions" extends="portlet.enterprise_admin">
-		<put name="portlet_content" value="/portlet/enterprise_admin/edit_role_permissions.jsp" />
+		<put name="portlet_content" value="/portlet/roles_admin/edit_role_permissions.jsp" />
 	</definition>
 
 	<definition name="portlet.enterprise_admin.edit_session" extends="portlet.enterprise_admin">
@@ -624,7 +624,7 @@
 	</definition>
 
 	<definition name="portlet.enterprise_admin.select_site_role" extends="portlet.enterprise_admin">
-		<put name="portlet_content" value="/portlet/enterprise_admin/select_site_role.jsp" />
+		<put name="portlet_content" value="/portlet/roles_admin/select_site_role.jsp" />
 	</definition>
 
 	<definition name="portlet.enterprise_admin.select_organization" extends="portlet.enterprise_admin">
@@ -632,11 +632,11 @@
 	</definition>
 
 	<definition name="portlet.enterprise_admin.select_organization_role" extends="portlet.enterprise_admin">
-		<put name="portlet_content" value="/portlet/enterprise_admin/select_organization_role.jsp" />
+		<put name="portlet_content" value="/portlet/roles_admin/select_organization_role.jsp" />
 	</definition>
 
 	<definition name="portlet.enterprise_admin.select_regular_role" extends="portlet.enterprise_admin">
-		<put name="portlet_content" value="/portlet/enterprise_admin/select_regular_role.jsp" />
+		<put name="portlet_content" value="/portlet/roles_admin/select_regular_role.jsp" />
 	</definition>
 
 	<definition name="portlet.enterprise_admin.select_user_group" extends="portlet.enterprise_admin">

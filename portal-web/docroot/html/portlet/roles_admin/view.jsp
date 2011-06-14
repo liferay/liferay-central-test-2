@@ -22,7 +22,7 @@ PortletURL portletURL = (PortletURL)request.getAttribute("view.jsp-portletURL");
 
 <liferay-ui:error exception="<%= RequiredRoleException.class %>" message="you-cannot-delete-a-system-role" />
 
-<liferay-util:include page="/html/portlet/enterprise_admin/role/toolbar.jsp">
+<liferay-util:include page="/html/portlet/roles_admin/toolbar.jsp">
 	<liferay-util:param name="toolbarItem" value="view-all" />
 </liferay-util:include>
 
@@ -35,7 +35,7 @@ headerNames.add(StringPool.BLANK);
 %>
 
 <liferay-ui:search-form
-	page="/html/portlet/enterprise_admin/role_search.jsp"
+	page="/html/portlet/roles_admin/role_search.jsp"
 	searchContainer="<%= searchContainer %>"
 />
 
@@ -100,7 +100,7 @@ for (int i = 0; i < results.size(); i++) {
 
 	// Action
 
-	row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/enterprise_admin/role_action.jsp");
+	row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/roles_admin/role_action.jsp");
 
 	// CSS
 

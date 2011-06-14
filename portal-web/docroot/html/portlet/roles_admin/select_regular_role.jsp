@@ -32,7 +32,7 @@ portletURL.setParameter("struts_action", "/enterprise_admin/select_regular_role"
 		searchContainer="<%= new RoleSearch(renderRequest, portletURL) %>"
 	>
 		<liferay-ui:search-form
-			page="/html/portlet/enterprise_admin/role_search.jsp"
+			page="/html/portlet/roles_admin/role_search.jsp"
 		/>
 
 		<%

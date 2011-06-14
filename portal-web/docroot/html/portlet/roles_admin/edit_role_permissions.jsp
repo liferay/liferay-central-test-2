@@ -75,7 +75,7 @@ editPermissionsURL.setParameter("roleId", String.valueOf(role.getRoleId()));
 
 <c:choose>
 	<c:when test="<%= !portletName.equals(PortletKeys.ADMIN_SERVER) %>">
-		<liferay-util:include page="/html/portlet/enterprise_admin/role/toolbar.jsp">
+		<liferay-util:include page="/html/portlet/roles_admin/toolbar.jsp">
 			<liferay-util:param name="toolbarItem" value='<%= (role == null) ? "add" : "view-all" %>' />
 		</liferay-util:include>
 
@@ -84,7 +84,7 @@ editPermissionsURL.setParameter("roleId", String.valueOf(role.getRoleId()));
 			title="<%= role.getTitle(locale) %>"
 		/>
 
-		<liferay-util:include page="/html/portlet/enterprise_admin/edit_role_tabs.jsp">
+		<liferay-util:include page="/html/portlet/roles_admin/edit_role_tabs.jsp">
 			<liferay-util:param name="tabs1" value="define-permissions" />
 			<liferay-util:param name="backURL" value="<%= backURL %>" />
 		</liferay-util:include>
@@ -104,12 +104,12 @@ editPermissionsURL.setParameter("roleId", String.valueOf(role.getRoleId()));
 <liferay-ui:success key="permissionsUpdated" message="the-role-permissions-were-updated" />
 
 <c:if test="<%= !portletName.equals(PortletKeys.ADMIN_SERVER) %>">
-	<%@ include file="/html/portlet/enterprise_admin/edit_role_permissions_navigation.jspf" %>
+	<%@ include file="/html/portlet/roles_admin/edit_role_permissions_navigation.jspf" %>
 </c:if>
 
 <c:choose>
 	<c:when test="<%= cmd.equals(Constants.VIEW) %>">
-		<liferay-util:include page="/html/portlet/enterprise_admin/edit_role_permissions_summary.jsp" />
+		<liferay-util:include page="/html/portlet/roles_admin/edit_role_permissions_summary.jsp" />
 
 		<c:if test="<%= portletName.equals(PortletKeys.ADMIN_SERVER) %>">
 			<br />
@@ -140,7 +140,7 @@ editPermissionsURL.setParameter("roleId", String.valueOf(role.getRoleId()));
 					request.setAttribute("edit_role_permissions.jsp-curPortletResource", portletResource);
 					%>
 
-					<liferay-util:include page="/html/portlet/enterprise_admin/edit_role_permissions_resource.jsp" />
+					<liferay-util:include page="/html/portlet/roles_admin/edit_role_permissions_resource.jsp" />
 				</c:when>
 				<c:when test="<%= (modelResources != null) && !modelResources.isEmpty() %>">
 
@@ -162,7 +162,7 @@ editPermissionsURL.setParameter("roleId", String.valueOf(role.getRoleId()));
 						request.setAttribute("edit_role_permissions.jsp-curModelResourceName", curModelResourceName);
 						%>
 
-						<liferay-util:include page="/html/portlet/enterprise_admin/edit_role_permissions_resource.jsp" />
+						<liferay-util:include page="/html/portlet/roles_admin/edit_role_permissions_resource.jsp" />
 
 					<%
 					}

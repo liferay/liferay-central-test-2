@@ -127,9 +127,9 @@ for (int i = 0; i < results.size(); i++) {
 	row.addText(ResourceActionsUtil.getAction(pageContext, actionId));
 
 	if (role.getType() == RoleConstants.TYPE_REGULAR) {
-		row.addJSP("/html/portlet/enterprise_admin/edit_role_permissions_resource_scope.jsp");
+		row.addJSP("/html/portlet/roles_admin/edit_role_permissions_resource_scope.jsp");
 
-		row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/enterprise_admin/edit_role_permissions_resource_action.jsp");
+		row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/roles_admin/edit_role_permissions_resource_action.jsp");
 	}
 
 	resultRows.add(row);

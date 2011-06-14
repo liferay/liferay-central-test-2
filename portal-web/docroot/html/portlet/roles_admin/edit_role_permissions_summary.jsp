@@ -263,7 +263,7 @@ for (int i = 0; i < results.size(); i++) {
 
 	// Action
 
-	row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/enterprise_admin/permission_action.jsp");
+	row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/roles_admin/permission_action.jsp");
 
 	resultRows.add(row);
 }
