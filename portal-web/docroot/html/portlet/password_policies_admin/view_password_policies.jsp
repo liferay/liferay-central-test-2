@@ -28,7 +28,7 @@ boolean passwordPolicyEnabled = LDAPSettingsUtil.isPasswordPolicyEnabled(company
 	</div>
 </c:if>
 
-<liferay-util:include page="/html/portlet/enterprise_admin/password_policy/toolbar.jsp">
+<liferay-util:include page="/html/portlet/password_policies_admin/toolbar.jsp">
 	<liferay-util:param name="toolbarItem" value="view-all" />
 </liferay-util:include>
 
@@ -42,7 +42,7 @@ headerNames.add(StringPool.BLANK);
 
 <c:if test="<%= !passwordPolicyEnabled %>">
 	<liferay-ui:search-form
-		page="/html/portlet/enterprise_admin/password_policy_search.jsp"
+		page="/html/portlet/password_policies_admin/password_policy_search.jsp"
 		searchContainer="<%= searchContainer %>"
 	/>
 </c:if>
@@ -93,7 +93,7 @@ headerNames.add(StringPool.BLANK);
 
 		// Action
 
-		row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/enterprise_admin/password_policy_action.jsp");
+		row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/password_policies_admin/password_policy_action.jsp");
 
 		// Add result row
 
