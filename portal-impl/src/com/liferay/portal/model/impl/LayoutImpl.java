@@ -283,6 +283,7 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 			_layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(
 				getGroupId(), isPrivateLayout());
 		}
+
 		return _layoutSet;
 	}
 
@@ -745,7 +746,6 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 	private static Log _log = LogFactoryUtil.getLog(LayoutImpl.class);
 
 	private LayoutSet _layoutSet;
-
 	private UnicodeProperties _typeSettingsProperties;
 
 }
