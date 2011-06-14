@@ -473,7 +473,6 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 									}
 						%>
 
-
 									<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" persistState="<%= true %>" title="<%= ddmStructure.getName(LocaleUtil.getDefault()) %>">
 
 										<%= DDMXSDUtil.getHTML(pageContext, ddmStructure.getXsd(), fields, String.valueOf(ddmStructure.getPrimaryKey()), true) %>
@@ -486,40 +485,37 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 							catch (Exception e) {
 							}
 						}
+
+						try {
+							List<DDMStructure> ddmStructures = DDMStructureLocalServiceUtil.getClassStructures(PortalUtil.getClassNameId(DLFileEntry.class));
+
+							for (DDMStructure ddmStructure : ddmStructures) {
+								Fields fields = null;
+
+								try {
+									DLDocumentMetadataSet documentMetadataSet = DLDocumentMetadataSetLocalServiceUtil.getDocumentMetadataSet(ddmStructure.getStructureId(), fileVersionId);
+
+									fields = StorageEngineUtil.getFields(documentMetadataSet.getClassPK());
+								}
+								catch (Exception e) {
+								}
+
+								if (fields != null) {
+									String name = "metadata." + ddmStructure.getName(LocaleUtil.getDefault(), true);
 						%>
 
-						<%
+									<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" persistState="<%= true %>" title="<%= name %>">
 
-							try {
-								List<DDMStructure> ddmStructures = DDMStructureLocalServiceUtil.getClassStructures(PortalUtil.getClassNameId(DLFileEntry.class));
+										<%= DDMXSDUtil.getHTML(pageContext, ddmStructure.getXsd(), fields, String.valueOf(ddmStructure.getPrimaryKey()), true) %>
 
-								for (DDMStructure ddmStructure : ddmStructures) {
-									Fields fields = null;
-
-									try {
-										DLDocumentMetadataSet documentMetadataSet = DLDocumentMetadataSetLocalServiceUtil.getDocumentMetadataSet(ddmStructure.getStructureId(), fileVersionId);
-
-										fields = StorageEngineUtil.getFields(documentMetadataSet.getClassPK());
-									}
-									catch (Exception e) {
-									}
-
-									if (fields != null) {
-										String name = "metadata." + ddmStructure.getName(LocaleUtil.getDefault(), true);
-						%>
-
-										<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" persistState="<%= true %>" title="<%= name %>">
-
-											<%= DDMXSDUtil.getHTML(pageContext, ddmStructure.getXsd(), fields, String.valueOf(ddmStructure.getPrimaryKey()), true) %>
-
-										</liferay-ui:panel>
+									</liferay-ui:panel>
 
 						<%
-									}
 								}
 							}
-							catch (Exception e) {
-							}
+						}
+						catch (Exception e) {
+						}
 						%>
 
 					</liferay-ui:panel-container>

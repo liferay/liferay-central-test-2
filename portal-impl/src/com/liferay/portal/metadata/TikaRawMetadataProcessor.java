@@ -47,6 +47,10 @@ import org.apache.tika.metadata.TikaMimeKeys;
  */
 public class TikaRawMetadataProcessor implements RawMetadataProcessor {
 
+	public static Map<String, Field[]> getFields() {
+		return _fields;
+	}
+
 	public Map<String, Fields> getRawMetadataMap(InputStream inputStream) {
 		Metadata metadata = extractMetadata(inputStream);
 
@@ -150,7 +154,7 @@ public class TikaRawMetadataProcessor implements RawMetadataProcessor {
 	private static Log _log = LogFactoryUtil.getLog(
 		TikaRawMetadataProcessor.class);
 
-	public static Map<String, Field[]> _fields = new HashMap<String, Field[]>();
+	private static Map<String, Field[]> _fields = new HashMap<String, Field[]>();
 
 	private Tika _tika;
 

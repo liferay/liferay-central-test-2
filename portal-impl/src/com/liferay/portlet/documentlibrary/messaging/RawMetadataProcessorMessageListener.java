@@ -15,8 +15,6 @@
 package com.liferay.portlet.documentlibrary.messaging;
 
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
-import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.messaging.BaseMessageListener;
 import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.metadata.RawMetadataProcessorUtil;
@@ -40,23 +38,17 @@ import java.util.Map;
  */
 public class RawMetadataProcessorMessageListener extends BaseMessageListener {
 
-	protected void doReceive(Message message)
-		throws PortalException, SystemException {
-
+	protected void doReceive(Message message) throws Exception {
 		DLFileEntry dlFileEntry = (DLFileEntry)message.getPayload();
 
-		addRawMetadata(dlFileEntry);
-	}
+		DLFileVersion dlFileVersion = dlFileEntry.getLatestFileVersion();
 
-	public void addRawMetadata(DLFileEntry dlFileEntry)
-		throws PortalException, SystemException {
-
-		InputStream is = DLFileEntryLocalServiceUtil.getFileAsStream(
+		InputStream inputStream = DLFileEntryLocalServiceUtil.getFileAsStream(
 			dlFileEntry.getUserId(), dlFileEntry.getFileEntryId(),
 			dlFileEntry.getVersion());
 
 		Map<String, Fields> rawMetadataMap =
-			RawMetadataProcessorUtil.getRawMetadataMap(is);
+			RawMetadataProcessorUtil.getRawMetadataMap(inputStream);
 
 		List<DDMStructure> ddmStructures =
 			DDMStructureLocalServiceUtil.getClassStructures(
@@ -65,10 +57,8 @@ public class RawMetadataProcessorMessageListener extends BaseMessageListener {
 
 		ServiceContext serviceContext = new ServiceContext();
 
-		serviceContext.setUserId(dlFileEntry.getUserId());
 		serviceContext.setScopeGroupId(dlFileEntry.getGroupId());
-
-		DLFileVersion dlFileVersion = dlFileEntry.getLatestFileVersion();
+		serviceContext.setUserId(dlFileEntry.getUserId());
 
 		DLDocumentMetadataSetLocalServiceUtil.updateDocumentMetadataSets(
 			dlFileEntry.getCompanyId(), 0L, dlFileVersion.getFileVersionId(),

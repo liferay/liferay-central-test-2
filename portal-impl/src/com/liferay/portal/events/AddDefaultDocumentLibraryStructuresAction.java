@@ -51,8 +51,8 @@ import java.util.Locale;
 import java.util.Map;
 
 /**
- * @author Miguel Pastor
  * @author Sergio González
+ * @author Miguel Pastor
  */
 public class AddDefaultDocumentLibraryStructuresAction extends SimpleAction {
 
@@ -81,12 +81,14 @@ public class AddDefaultDocumentLibraryStructuresAction extends SimpleAction {
 
 		for (Element structureElement : structureElements) {
 			String name = structureElement.elementText("name");
-			String structureKey = name;
 
 			String description = structureElement.elementText("description");
 
+			String ddmStructureKey = name;
+
 			DDMStructure ddmStructure =
-				DDMStructureLocalServiceUtil.fetchStructure(groupId, structureKey);
+				DDMStructureLocalServiceUtil.fetchStructure(
+					groupId, ddmStructureKey);
 
 			if (ddmStructure != null) {
 				continue;
@@ -108,7 +110,7 @@ public class AddDefaultDocumentLibraryStructuresAction extends SimpleAction {
 			DDMStructureLocalServiceUtil.addStructure(
 				userId, groupId,
 				PortalUtil.getClassNameId(DLDocumentMetadataSet.class),
-				structureKey, nameMap, descriptionMap, xsd, "xml",
+				ddmStructureKey, nameMap, descriptionMap, xsd, "xml",
 				serviceContext);
 		}
 	}
@@ -119,10 +121,10 @@ public class AddDefaultDocumentLibraryStructuresAction extends SimpleAction {
 			ServiceContext serviceContext)
 		throws Exception {
 
-		String structureKey = ddmStructureName;
+		String ddmStructureKey = ddmStructureName;
 
 		DDMStructure ddmStructure = DDMStructureLocalServiceUtil.fetchStructure(
-			groupId, structureKey);
+			groupId, ddmStructureKey);
 
 		if (ddmStructure == null) {
 			return;
@@ -158,12 +160,13 @@ public class AddDefaultDocumentLibraryStructuresAction extends SimpleAction {
 		long userId, long groupId, ServiceContext serviceContext)
 		throws Exception {
 
-		String xsd = buildDLRawMetadataConfig(
-			TikaRawMetadataProcessor._fields);
+		String xsd = buildDLRawMetadataXML(
+			TikaRawMetadataProcessor.getFields());
 
 		Document document = SAXReaderUtil.read(new StringReader(xsd));
 
 		Element rootElement = document.getRootElement();
+
 		List<Element> structureElements = rootElement.elements("structure");
 
 		for (Element structureElement : structureElements) {
@@ -172,68 +175,47 @@ public class AddDefaultDocumentLibraryStructuresAction extends SimpleAction {
 
 			Element structureElementRootElement = structureElement.element(
 				"root");
-			String elementXsd = structureElementRootElement.asXML();
+
+			String structureElementRootXML =
+				structureElementRootElement.asXML();
 
 			DDMStructure ddmStructure =
 				DDMStructureLocalServiceUtil.fetchStructure(groupId, name);
 
 			if (ddmStructure != null) {
-				ddmStructure.setXsd(elementXsd);
+				ddmStructure.setXsd(structureElementRootXML);
 
 				DDMStructureLocalServiceUtil.updateDDMStructure(ddmStructure);
 			}
 			else {
-				HashMap<Locale, String> nameMap = new HashMap<Locale, String>();
+				Map<Locale, String> nameMap = new HashMap<Locale, String>();
 
 				nameMap.put(LocaleUtil.getDefault(), name);
 
-				HashMap<Locale, String> descriptionMap =
+				Map<Locale, String> descriptionMap =
 					new HashMap<Locale, String>();
 
-				nameMap.put(LocaleUtil.getDefault(), description);
+				descriptionMap.put(LocaleUtil.getDefault(), description);
 
 				DDMStructureLocalServiceUtil.addStructure(
 					userId, groupId,
 					PortalUtil.getClassNameId(DLFileEntry.class),
-					name, nameMap, descriptionMap,
-					elementXsd, "xml", serviceContext);
+					name, nameMap, descriptionMap, structureElementRootXML,
+					"xml", serviceContext);
 			}
 		}
 	}
 
-	protected String buildDLRawMetadataConfig(Map<String, Field[]> fields) {
+	protected String buildDLRawMetadataElementXML(String name, Field field) {
 		StringBundler sb = new StringBundler();
-
-		sb.append("<?xml version=\"1.0\" encoding=\"UTF-8\" ?><root>");
-
-		for (String key : fields.keySet()) {
-			sb.append(buildDLRawMetadataStructureConfig(
-				key, fields.get(key)));
-		}
-
-		sb.append("</root>");
-
-		return sb.toString();
-	}
-
-	protected String buildDLRawMetadataElementConfig(
-		Field field, String structureName) {
-
-		StringBundler sb = new StringBundler();
-		String name = field.getName();
 
 		sb.append("<dynamic-element dataType=\"string\" name=\"");
-		sb.append(name);
+		sb.append(field.getName());
 		sb.append("\" type=\"text\">");
-
-		sb.append(
-			"<meta-data><entry name=\"label\"><![CDATA[");
-
-		sb.append(I18N_RAW_METADATA_PREFIX);
-		sb.append(structureName);
-		sb.append(StringPool.PERIOD);
+		sb.append("<meta-data><entry name=\"label\"><![CDATA[metadata.");
 		sb.append(name);
-
+		sb.append(StringPool.PERIOD);
+		sb.append(field.getName());
 		sb.append("]]></entry><entry name=\"predefinedValue\">");
 		sb.append("<![CDATA[]]></entry><entry name=\"required\">");
 		sb.append("<![CDATA[false]]></entry><entry name=\"showLabel\">");
@@ -242,7 +224,7 @@ public class AddDefaultDocumentLibraryStructuresAction extends SimpleAction {
 		return sb.toString();
 	}
 
-	protected String buildDLRawMetadataStructureConfig(
+	protected String buildDLRawMetadataStructureXML(
 		String name, Field[] fields) {
 
 		StringBundler sb = new StringBundler();
@@ -250,16 +232,29 @@ public class AddDefaultDocumentLibraryStructuresAction extends SimpleAction {
 		sb.append("<structure><name><![CDATA[");
 		sb.append(name);
 		sb.append("]]></name>");
-
 		sb.append("<description><![CDATA[");
 		sb.append(name);
 		sb.append("]]></description><root>");
 
 		for (Field field : fields) {
-			sb.append(buildDLRawMetadataElementConfig(field, name));
+			sb.append(buildDLRawMetadataElementXML(name, field));
 		}
 
 		sb.append("</root></structure>");
+
+		return sb.toString();
+	}
+
+	protected String buildDLRawMetadataXML(Map<String, Field[]> fields) {
+		StringBundler sb = new StringBundler();
+
+		sb.append("<?xml version=\"1.0\"?><root>");
+
+		for (String key : fields.keySet()) {
+			sb.append(buildDLRawMetadataStructureXML(key, fields.get(key)));
+		}
+
+		sb.append("</root>");
 
 		return sb.toString();
 	}
@@ -282,7 +277,5 @@ public class AddDefaultDocumentLibraryStructuresAction extends SimpleAction {
 		addDLRawMetadataStructures(
 			defaultUserId, group.getGroupId(), serviceContext);
 	}
-
-	private static final String I18N_RAW_METADATA_PREFIX = "metadata.";
 
 }

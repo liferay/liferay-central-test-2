@@ -435,7 +435,6 @@ public class EditFileEntryAction extends PortletAction {
 				DestinationNames.DOCUMENT_LIBRARY_RAW_METADATA_PROCESSOR,
 				fileEntry.getModel());
 		}
-
 	}
 
 }

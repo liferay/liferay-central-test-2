@@ -64,6 +64,23 @@ public class DLDocumentMetadataSetLocalServiceImpl
 	}
 
 	public void updateDocumentMetadataSets(
+			long companyId, List<DDMStructure> ddmStructures,
+			long documentTypeId, long fileVersionId,
+			Map<String, Fields> fieldsMap, ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		for (DDMStructure ddmStructure : ddmStructures) {
+			Fields fields = fieldsMap.get(ddmStructure.getStructureKey());
+
+			if (fields != null) {
+				updateDocumentMetadataSet(
+					companyId, ddmStructure, documentTypeId, fileVersionId,
+					fields, serviceContext);
+			}
+		}
+	}
+
+	public void updateDocumentMetadataSets(
 			long documentTypeId, long fileVersionId,
 			Map<String, Fields> fieldsMap, ServiceContext serviceContext)
 		throws PortalException, SystemException {
@@ -74,77 +91,8 @@ public class DLDocumentMetadataSetLocalServiceImpl
 		List<DDMStructure> ddmStructures = documentType.getDDMStructures();
 
 		updateDocumentMetadataSets(
-			documentType.getCompanyId(),documentTypeId, fileVersionId,
-			fieldsMap, ddmStructures, serviceContext);
-	}
-
-	public void updateDocumentMetadataSets(
-			long companyId, long documentTypeId, long fileVersionId,
-			Map<String, Fields> fieldsMap, List<DDMStructure> ddmStructures,
-			ServiceContext serviceContext)
-		throws PortalException, SystemException {
-
-		for (DDMStructure ddmStructure : ddmStructures) {
-			Fields fields = fieldsMap.get(ddmStructure.getStructureKey());
-
-			if (fields != null) {
-				updateDocumentMetadataSet(
-					companyId, documentTypeId, fileVersionId, fields,
-					ddmStructure, serviceContext);
-			}
-		}
-	}
-
-	protected void updateDocumentMetadataSet(
-			long companyId, long documentTypeId, long fileVersionId,
-			Fields fields,DDMStructure ddmStructure,
-			ServiceContext serviceContext)
-		throws StorageException, SystemException {
-
-			try {
-				DLDocumentMetadataSet metadataSet =
-					dlDocumentMetadataSetPersistence.findByD_F(
-						ddmStructure.getStructureId(), fileVersionId);
-
-				StorageEngineUtil.update(
-					metadataSet.getClassPK(), fields, serviceContext);
-			}
-			catch (NoSuchDocumentMetadataSetException nsdmse) {
-
-				// Document metadata set
-
-				long documentMetadataSetId = counterLocalService.increment();
-
-				DLDocumentMetadataSet documentMetadataSet =
-					dlDocumentMetadataSetPersistence.create(
-						documentMetadataSetId);
-
-				documentMetadataSet.setClassNameId(
-					ddmStructure.getClassNameId());
-
-				long classPK = StorageEngineUtil.create(
-					companyId, ddmStructure.getStructureId(),fields,
-					serviceContext);
-
-				documentMetadataSet.setClassPK(classPK);
-
-				documentMetadataSet.setDDMStructureId(
-					ddmStructure.getStructureId());
-				documentMetadataSet.setDocumentTypeId(documentTypeId);
-				documentMetadataSet.setFileVersionId(fileVersionId);
-
-				dlDocumentMetadataSetPersistence.update(
-					documentMetadataSet, false);
-
-				// Dynamic data mapping structure link
-
-				long classNameId = PortalUtil.getClassNameId(
-					DLDocumentMetadataSet.class);
-
-				ddmStructureLinkLocalService.addStructureLink(
-					classNameId, documentMetadataSet.getDocumentMetadataSetId(),
-					ddmStructure.getStructureId(), serviceContext);
-			}
+			documentType.getCompanyId(), ddmStructures, documentTypeId,
+			fileVersionId, fieldsMap, serviceContext);
 	}
 
 	protected void deleteDocumentMetadataSet(
@@ -163,6 +111,58 @@ public class DLDocumentMetadataSetLocalServiceImpl
 
 		ddmStructureLinkLocalService.deleteClassStructureLink(
 			documentMetadataSet.getDocumentMetadataSetId());
+	}
+
+	protected void updateDocumentMetadataSet(
+			long companyId, DDMStructure ddmStructure, long documentTypeId,
+			long fileVersionId, Fields fields,
+			ServiceContext serviceContext)
+		throws StorageException, SystemException {
+
+		try {
+			DLDocumentMetadataSet metadataSet =
+				dlDocumentMetadataSetPersistence.findByD_F(
+					ddmStructure.getStructureId(), fileVersionId);
+
+			StorageEngineUtil.update(
+				metadataSet.getClassPK(), fields, serviceContext);
+		}
+		catch (NoSuchDocumentMetadataSetException nsdmse) {
+
+			// Document metadata set
+
+			long documentMetadataSetId = counterLocalService.increment();
+
+			DLDocumentMetadataSet documentMetadataSet =
+				dlDocumentMetadataSetPersistence.create(
+					documentMetadataSetId);
+
+			documentMetadataSet.setClassNameId(
+				ddmStructure.getClassNameId());
+
+			long classPK = StorageEngineUtil.create(
+				companyId, ddmStructure.getStructureId(), fields,
+				serviceContext);
+
+			documentMetadataSet.setClassPK(classPK);
+
+			documentMetadataSet.setDDMStructureId(
+				ddmStructure.getStructureId());
+			documentMetadataSet.setDocumentTypeId(documentTypeId);
+			documentMetadataSet.setFileVersionId(fileVersionId);
+
+			dlDocumentMetadataSetPersistence.update(
+				documentMetadataSet, false);
+
+			// Dynamic data mapping structure link
+
+			long classNameId = PortalUtil.getClassNameId(
+				DLDocumentMetadataSet.class);
+
+			ddmStructureLinkLocalService.addStructureLink(
+				classNameId, documentMetadataSet.getDocumentMetadataSetId(),
+				ddmStructure.getStructureId(), serviceContext);
+		}
 	}
 
 }
