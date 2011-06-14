@@ -78,16 +78,16 @@ request.setAttribute("edit_role_assignments.jsp-portletURL", portletURL);
 
 	<c:choose>
 		<c:when test='<%= tabs2.equals("users") %>'>
-			<liferay-util:include page="/html/portlet/enterprise_admin/edit_role_assignments_users.jsp" />
+			<liferay-util:include page="/html/portlet/users_admin/edit_role_assignments_users.jsp" />
 		</c:when>
 		<c:when test='<%= tabs2.equals("sites") %>'>
 			<liferay-util:include page="/html/portlet/enterprise_admin/edit_role_assignments_sites.jsp" />
 		</c:when>
 		<c:when test='<%= tabs2.equals("organizations") %>'>
-			<liferay-util:include page="/html/portlet/enterprise_admin/edit_role_assignments_organizations.jsp" />
+			<liferay-util:include page="/html/portlet/users_admin/edit_role_assignments_organizations.jsp" />
 		</c:when>
 		<c:when test='<%= tabs2.equals("user-groups") %>'>
-			<liferay-util:include page="/html/portlet/enterprise_admin/edit_role_assignments_user_groups.jsp" />
+			<liferay-util:include page="/html/portlet/users_admin/edit_role_assignments_user_groups.jsp" />
 		</c:when>
 	</c:choose>
 </aui:form>

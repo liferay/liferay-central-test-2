@@ -18,62 +18,42 @@
 
 <%
 String target = ParamUtil.getString(request, "target");
-boolean includeCompany = ParamUtil.getBoolean(request, "includeCompany");
-boolean includeUserPersonalSite = ParamUtil.getBoolean(request, "includeUserPersonalSite");
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
-portletURL.setParameter("struts_action", "/enterprise_admin/select_site");
-portletURL.setParameter("target", target);
+portletURL.setParameter("struts_action", "/enterprise_admin/select_user_group");
 %>
 
 <aui:form action="<%= portletURL.toString() %>" method="post" name="fm">
 	<liferay-ui:header
-		title="sites"
+		title="user-groups"
 	/>
 
 	<liferay-ui:search-container
-		searchContainer="<%= new GroupSearch(renderRequest, portletURL) %>"
+		searchContainer="<%= new UserGroupSearch(renderRequest, portletURL) %>"
 	>
 		<liferay-ui:search-form
-			page="/html/portlet/users_admin/group_search.jsp"
+			page="/html/portlet/users_admin/user_group_search.jsp"
 		/>
 
 		<%
-		GroupSearchTerms searchTerms = (GroupSearchTerms)searchContainer.getSearchTerms();
-
-		LinkedHashMap groupParams = new LinkedHashMap();
+		UserGroupSearchTerms searchTerms = (UserGroupSearchTerms)searchContainer.getSearchTerms();
 		%>
 
 		<liferay-ui:search-container-results>
 
 			<%
-			results.clear();
+			if (filterManageableUserGroups) {
+				List<UserGroup> userGroups = UserGroupLocalServiceUtil.search(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), null, QueryUtil.ALL_POS, QueryUtil.ALL_POS, searchContainer.getOrderByComparator());
 
-			if (filterManageableGroups) {
-				groupParams.put("usersGroups", user.getUserId());
+				userGroups = UsersAdminUtil.filterUserGroups(permissionChecker, userGroups);
+
+				total = userGroups.size();
+				results = ListUtil.subList(userGroups, searchContainer.getStart(), searchContainer.getEnd());
 			}
-
-			groupParams.put("site", Boolean.TRUE);
-
-			List<Group> sites = GroupLocalServiceUtil.search(company.getCompanyId(), null, searchTerms.getName(), searchTerms.getDescription(), groupParams, searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator());
-
-			results.addAll(sites);
-
-			total = GroupLocalServiceUtil.searchCount(company.getCompanyId(), null, searchTerms.getName(), searchTerms.getDescription(), groupParams);
-
-			if (includeCompany) {
-				results.add(0, company.getGroup());
-
-				total++;
-			}
-
-			if (includeUserPersonalSite) {
-				Group userPersonalSite = GroupLocalServiceUtil.getGroup(company.getCompanyId(), GroupConstants.USER_PERSONAL_SITE);
-
-				results.add(0, userPersonalSite);
-
-				total++;
+			else {
+				results = UserGroupLocalServiceUtil.search(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), null, searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator());
+				total = UserGroupLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), null);
 			}
 
 			pageContext.setAttribute("results", results);
@@ -83,10 +63,10 @@ portletURL.setParameter("target", target);
 		</liferay-ui:search-container-results>
 
 		<liferay-ui:search-container-row
-			className="com.liferay.portal.model.Group"
+			className="com.liferay.portal.model.UserGroup"
 			escapedModel="<%= true %>"
-			keyProperty="groupId"
-			modelVar="group"
+			keyProperty="userGroupId"
+			modelVar="userGroup"
 		>
 
 			<%
@@ -94,10 +74,10 @@ portletURL.setParameter("target", target);
 
 			sb.append("javascript:opener.");
 			sb.append(renderResponse.getNamespace());
-			sb.append("selectGroup('");
-			sb.append(group.getGroupId());
+			sb.append("selectUserGroup('");
+			sb.append(userGroup.getUserGroupId());
 			sb.append("', '");
-			sb.append(UnicodeFormatter.toString(group.getDescriptiveName()));
+			sb.append(UnicodeFormatter.toString(userGroup.getName()));
 			sb.append("', '");
 			sb.append(target);
 			sb.append("');");
@@ -109,13 +89,13 @@ portletURL.setParameter("target", target);
 			<liferay-ui:search-container-column-text
 				href="<%= rowHREF %>"
 				name="name"
-				value="<%= HtmlUtil.escape(group.getDescriptiveName()) %>"
+				property="name"
 			/>
 
 			<liferay-ui:search-container-column-text
 				href="<%= rowHREF %>"
-				name="type"
-				value="<%= LanguageUtil.get(pageContext, group.getTypeLabel()) %>"
+				name="description"
+				value="<%= LanguageUtil.get(pageContext, userGroup.getDescription()) %>"
 			/>
 		</liferay-ui:search-container-row>
 

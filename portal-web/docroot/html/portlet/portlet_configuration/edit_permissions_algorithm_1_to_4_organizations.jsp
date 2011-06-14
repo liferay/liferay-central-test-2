@@ -49,7 +49,7 @@ int organizationIdsPos = ParamUtil.getInteger(request, "organizationIdsPos");
 			searchContainer="<%= new OrganizationSearch(renderRequest, portletURL) %>"
 		>
 			<liferay-ui:search-form
-				page="/html/portlet/enterprise_admin/organization_search.jsp"
+				page="/html/portlet/users_admin/organization_search.jsp"
 			/>
 
 			<%
@@ -66,7 +66,7 @@ int organizationIdsPos = ParamUtil.getInteger(request, "organizationIdsPos");
 			%>
 
 			<liferay-ui:search-container-results>
-				<%@ include file="/html/portlet/enterprise_admin/organization_search_results.jspf" %>
+				<%@ include file="/html/portlet/users_admin/organization_search_results.jspf" %>
 			</liferay-ui:search-container-results>
 
 			<liferay-ui:search-container-row

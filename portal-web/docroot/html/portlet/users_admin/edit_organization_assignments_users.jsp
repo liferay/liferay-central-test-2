@@ -14,33 +14,29 @@
  */
 --%>
 
-<%@ include file="/html/portlet/sites_admin/init.jsp" %>
+<%@ include file="/html/portlet/enterprise_admin/init.jsp" %>
 
 <%
-String tabs2 = (String)request.getAttribute("edit_team_assignments.jsp-tabs2");
+String tabs3 = (String)request.getAttribute("edit_organization_assignments.jsp-tabs3");
 
-int cur = (Integer)request.getAttribute("edit_team_assignments.jsp-cur");
+int cur = (Integer)request.getAttribute("edit_organization_assignments.jsp-cur");
 
-Team team = (Team)request.getAttribute("edit_team_assignments.jsp-team");
+Organization organization = (Organization)request.getAttribute("edit_organization_assignments.jsp-organization");
 
-Group group = (Group)request.getAttribute("edit_team_assignments.jsp-group");
-
-Organization organization = (Organization)request.getAttribute("edit_team_assignments.jsp-organization");
-
-PortletURL portletURL = (PortletURL)request.getAttribute("edit_team_assignments.jsp-portletURL");
+PortletURL portletURL = (PortletURL)request.getAttribute("edit_organization_assignments.jsp-portletURL");
 %>
+
+<liferay-ui:tabs
+	names="current,available"
+	param="tabs3"
+	url="<%= portletURL.toString() %>"
+/>
 
 <aui:input name="addUserIds" type="hidden" />
 <aui:input name="removeUserIds" type="hidden" />
 
-<liferay-ui:tabs
-	names="current,available"
-	param="tabs2"
-	url="<%= portletURL.toString() %>"
-/>
-
 <liferay-ui:search-container
-	rowChecker="<%= new UserTeamChecker(renderResponse, team) %>"
+	rowChecker="<%= new UserOrganizationChecker(renderResponse, organization) %>"
 	searchContainer="<%= new UserSearch(renderRequest, portletURL) %>"
 >
 	<liferay-ui:search-form
@@ -52,15 +48,13 @@ PortletURL portletURL = (PortletURL)request.getAttribute("edit_team_assignments.
 
 	LinkedHashMap userParams = new LinkedHashMap();
 
-	if (group.isOrganization()) {
-		userParams.put("usersOrgs", organization.getOrganizationId());
+	if (tabs3.equals("current")) {
+		userParams.put("usersOrgs", new Long(organization.getOrganizationId()));
 	}
-	else {
-		userParams.put("usersGroups", team.getGroupId());
-	}
+	else if (PropsValues.ORGANIZATIONS_ASSIGNMENT_STRICT && !permissionChecker.isCompanyAdmin()) {
+		Long[][] leftAndRightOrganizationIds = UsersAdminUtil.getLeftAndRightOrganizationIds(user.getOrganizations());
 
-	if (tabs2.equals("current")) {
-		userParams.put("usersTeams", team.getTeamId());
+		userParams.put("usersOrgsTree", leftAndRightOrganizationIds);
 	}
 	%>
 
@@ -88,7 +82,7 @@ PortletURL portletURL = (PortletURL)request.getAttribute("edit_team_assignments.
 	<div class="separator"><!-- --></div>
 
 	<%
-	String taglibOnClick = renderResponse.getNamespace() + "updateTeamUsers('" + portletURL.toString() + StringPool.AMPERSAND + renderResponse.getNamespace() + "cur=" + cur + "');";
+	String taglibOnClick = renderResponse.getNamespace() + "updateOrganizationUsers('" + portletURL.toString() + StringPool.AMPERSAND + renderResponse.getNamespace() + "cur=" + cur + "');";
 	%>
 
 	<aui:button onClick="<%= taglibOnClick %>" value="update-associations" />

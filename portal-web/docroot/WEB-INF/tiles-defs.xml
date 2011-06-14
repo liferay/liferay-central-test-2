@@ -560,15 +560,15 @@
 	</definition>
 
 	<definition name="portlet.enterprise_admin.edit_organization" extends="portlet.enterprise_admin">
-		<put name="portlet_content" value="/portlet/enterprise_admin/edit_organization.jsp" />
+		<put name="portlet_content" value="/portlet/users_admin/edit_organization.jsp" />
 	</definition>
 
 	<definition name="portlet.enterprise_admin.edit_organization_assignments" extends="portlet.enterprise_admin">
-		<put name="portlet_content" value="/portlet/enterprise_admin/edit_organization_assignments.jsp" />
+		<put name="portlet_content" value="/portlet/users_admin/edit_organization_assignments.jsp" />
 	</definition>
 
 	<definition name="portlet.enterprise_admin.edit_organization_logo" extends="portlet.enterprise_admin">
-		<put name="portlet_content" value="/portlet/enterprise_admin/edit_organization_logo.jsp" />
+		<put name="portlet_content" value="/portlet/users_admin/edit_organization_logo.jsp" />
 	</definition>
 
 	<definition name="portlet.enterprise_admin.edit_password_policy" extends="portlet.enterprise_admin">
@@ -600,19 +600,19 @@
 	</definition>
 
 	<definition name="portlet.enterprise_admin.edit_user" extends="portlet.enterprise_admin">
-		<put name="portlet_content" value="/portlet/enterprise_admin/edit_user.jsp" />
+		<put name="portlet_content" value="/portlet/users_admin/edit_user.jsp" />
 	</definition>
 
 	<definition name="portlet.enterprise_admin.edit_user_group" extends="portlet.enterprise_admin">
-		<put name="portlet_content" value="/portlet/enterprise_admin/edit_user_group.jsp" />
+		<put name="portlet_content" value="/portlet/users_admin/edit_user_group.jsp" />
 	</definition>
 
 	<definition name="portlet.enterprise_admin.edit_user_group_assignments" extends="portlet.enterprise_admin">
-		<put name="portlet_content" value="/portlet/enterprise_admin/edit_user_group_assignments.jsp" />
+		<put name="portlet_content" value="/portlet/users_admin/edit_user_group_assignments.jsp" />
 	</definition>
 
 	<definition name="portlet.enterprise_admin.edit_user_portrait" extends="portlet.enterprise_admin">
-		<put name="portlet_content" value="/portlet/enterprise_admin/edit_user_portrait.jsp" />
+		<put name="portlet_content" value="/portlet/users_admin/edit_user_portrait.jsp" />
 	</definition>
 
 	<definition name="portlet.enterprise_admin.error" extends="portlet.enterprise_admin">
@@ -628,7 +628,7 @@
 	</definition>
 
 	<definition name="portlet.enterprise_admin.select_organization" extends="portlet.enterprise_admin">
-		<put name="portlet_content" value="/portlet/enterprise_admin/select_organization.jsp" />
+		<put name="portlet_content" value="/portlet/users_admin/select_organization.jsp" />
 	</definition>
 
 	<definition name="portlet.enterprise_admin.select_organization_role" extends="portlet.enterprise_admin">
@@ -640,7 +640,7 @@
 	</definition>
 
 	<definition name="portlet.enterprise_admin.select_user_group" extends="portlet.enterprise_admin">
-		<put name="portlet_content" value="/portlet/enterprise_admin/select_user_group.jsp" />
+		<put name="portlet_content" value="/portlet/users_admin/select_user_group.jsp" />
 	</definition>
 
 	<definition name="portlet.enterprise_admin.test_cas_configuration" extends="portlet.enterprise_admin">
@@ -672,7 +672,7 @@
 	</definition>
 
 	<definition name="portlet.enterprise_admin.view_users" extends="portlet.enterprise_admin">
-		<put name="portlet_content" value="/portlet/enterprise_admin/view_users.jsp" />
+		<put name="portlet_content" value="/portlet/users_admin/view.jsp" />
 	</definition>
 
 	<!-- Enterprise Admin Sites -->

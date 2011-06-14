@@ -42,7 +42,7 @@ searchContainer.setRowChecker(new GroupRoleChecker(renderResponse, role));
 %>
 
 <liferay-ui:search-form
-	page="/html/portlet/enterprise_admin/group_search.jsp"
+	page="/html/portlet/users_admin/group_search.jsp"
 	searchContainer="<%= searchContainer %>"
 />
 

@@ -82,7 +82,7 @@ portletURL.setParameter("tabs3", tabs3);
 				searchContainer="<%= new UserSearch(renderRequest, portletURL) %>"
 			>
 				<liferay-ui:search-form
-					page="/html/portlet/enterprise_admin/user_search.jsp"
+					page="/html/portlet/users_admin/user_search.jsp"
 				/>
 
 				<%
@@ -96,7 +96,7 @@ portletURL.setParameter("tabs3", tabs3);
 				%>
 
 				<liferay-ui:search-container-results>
-					<%@ include file="/html/portlet/enterprise_admin/user_search_results.jspf" %>
+					<%@ include file="/html/portlet/users_admin/user_search_results.jspf" %>
 				</liferay-ui:search-container-results>
 
 				<liferay-ui:search-container-row
@@ -144,7 +144,7 @@ portletURL.setParameter("tabs3", tabs3);
 				searchContainer="<%= new OrganizationSearch(renderRequest, portletURL) %>"
 			>
 				<liferay-ui:search-form
-					page="/html/portlet/enterprise_admin/organization_search.jsp"
+					page="/html/portlet/users_admin/organization_search.jsp"
 				/>
 
 				<%
@@ -160,7 +160,7 @@ portletURL.setParameter("tabs3", tabs3);
 				%>
 
 				<liferay-ui:search-container-results>
-					<%@ include file="/html/portlet/enterprise_admin/organization_search_results.jspf" %>
+					<%@ include file="/html/portlet/users_admin/organization_search_results.jspf" %>
 				</liferay-ui:search-container-results>
 
 				<liferay-ui:search-container-row

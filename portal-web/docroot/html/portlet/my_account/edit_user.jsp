@@ -14,4 +14,4 @@
  */
 --%>
 
-<%@ include file="/html/portlet/enterprise_admin/edit_user.jsp" %>
+<%@ include file="/html/portlet/users_admin/edit_user.jsp" %>

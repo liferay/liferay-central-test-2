@@ -62,7 +62,7 @@ userSearch.setEmptyResultsMessage(emptyResultsMessage);
 >
 	<c:if test='<%= !tabs1.equals("summary") %>'>
 		<liferay-ui:search-form
-			page="/html/portlet/enterprise_admin/user_search.jsp"
+			page="/html/portlet/users_admin/user_search.jsp"
 		/>
 
 		<div class="separator"><!-- --></div>
@@ -79,7 +79,7 @@ userSearch.setEmptyResultsMessage(emptyResultsMessage);
 	%>
 
 	<liferay-ui:search-container-results>
-		<%@ include file="/html/portlet/enterprise_admin/user_search_results.jspf" %>
+		<%@ include file="/html/portlet/users_admin/user_search_results.jspf" %>
 	</liferay-ui:search-container-results>
 
 	<liferay-ui:search-container-row

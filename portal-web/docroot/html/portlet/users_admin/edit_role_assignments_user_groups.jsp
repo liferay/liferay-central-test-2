@@ -14,33 +14,29 @@
  */
 --%>
 
-<%@ include file="/html/portlet/sites_admin/init.jsp" %>
+<%@ include file="/html/portlet/enterprise_admin/init.jsp" %>
 
 <%
-String tabs2 = (String)request.getAttribute("edit_team_assignments.jsp-tabs2");
+String tabs3 = (String)request.getAttribute("edit_role_assignments.jsp-tabs3");
 
-int cur = (Integer)request.getAttribute("edit_team_assignments.jsp-cur");
+int cur = (Integer)request.getAttribute("edit_role_assignments.jsp-cur");
 
-Team team = (Team)request.getAttribute("edit_team_assignments.jsp-team");
+Role role = (Role)request.getAttribute("edit_role_assignments.jsp-role");
 
-Group group = (Group)request.getAttribute("edit_team_assignments.jsp-group");
-
-Organization organization = (Organization)request.getAttribute("edit_team_assignments.jsp-organization");
-
-PortletURL portletURL = (PortletURL)request.getAttribute("edit_team_assignments.jsp-portletURL");
+PortletURL portletURL = (PortletURL)request.getAttribute("edit_role_assignments.jsp-portletURL");
 %>
 
-<aui:input name="addUserGroupIds" type="hidden" />
-<aui:input name="removeUserGroupIds" type="hidden" />
+<aui:input name="addGroupIds" type="hidden" />
+<aui:input name="removeGroupIds" type="hidden" />
 
 <liferay-ui:tabs
 	names="current,available"
-	param="tabs2"
+	param="tabs3"
 	url="<%= portletURL.toString() %>"
 />
 
 <liferay-ui:search-container
-	rowChecker="<%= new UserGroupTeamChecker(renderResponse, team) %>"
+	rowChecker="<%= new UserGroupRoleChecker(renderResponse, role) %>"
 	searchContainer="<%= new UserGroupSearch(renderRequest, portletURL) %>"
 >
 	<liferay-ui:search-form
@@ -52,10 +48,10 @@ PortletURL portletURL = (PortletURL)request.getAttribute("edit_team_assignments.
 
 	LinkedHashMap userGroupParams = new LinkedHashMap();
 
-	userGroupParams.put("userGroupsGroups", new Long(group.getGroupId()));
+	if (tabs3.equals("current")) {
+		List userGroupsRoles = new ArrayList();
 
-	if (tabs2.equals("current")) {
-		userGroupParams.put("userGroupsTeams", new Long(team.getTeamId()));
+		userGroupParams.put("userGroupsRoles", new Long(role.getRoleId()));
 	}
 	%>
 
@@ -67,7 +63,7 @@ PortletURL portletURL = (PortletURL)request.getAttribute("edit_team_assignments.
 	<liferay-ui:search-container-row
 		className="com.liferay.portal.model.UserGroup"
 		escapedModel="<%= true %>"
-		keyProperty="userGroupId"
+		keyProperty="group.groupId"
 		modelVar="userGroup"
 	>
 		<liferay-ui:search-container-column-text
@@ -86,7 +82,7 @@ PortletURL portletURL = (PortletURL)request.getAttribute("edit_team_assignments.
 	<div class="separator"><!-- --></div>
 
 	<%
-	String taglibOnClick = renderResponse.getNamespace() + "updateTeamUserGroups('" + portletURL.toString() + StringPool.AMPERSAND + renderResponse.getNamespace() + "cur=" + cur + "');";
+	String taglibOnClick = renderResponse.getNamespace() + "updateRoleGroups('" + portletURL.toString() + StringPool.AMPERSAND + renderResponse.getNamespace() + "cur=" + cur + "');";
 	%>
 
 	<aui:button onClick="<%= taglibOnClick %>" value="update-associations" />

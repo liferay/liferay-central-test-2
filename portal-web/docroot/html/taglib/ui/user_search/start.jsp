@@ -34,7 +34,7 @@ searchContainer.setRowChecker(rowChecker);
 %>
 
 <liferay-ui:search-form
-	page="/html/portlet/enterprise_admin/user_search.jsp"
+	page="/html/portlet/users_admin/user_search.jsp"
 	searchContainer="<%= searchContainer %>"
 />
 
@@ -45,7 +45,7 @@ List<User> results = null;
 int total = 0;
 %>
 
-<%@ include file="/html/portlet/enterprise_admin/user_search_results.jspf" %>
+<%@ include file="/html/portlet/users_admin/user_search_results.jspf" %>
 
 <%
 searchContainer.setResults(results);

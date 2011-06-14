@@ -25,6 +25,7 @@ String tabs1Names = "users,organizations,user-groups";
 
 String tabs1Values = tabs1Names;
 
+System.out.println("windowState: " + windowState);
 if (!filterManageableOrganizations) {
 	if (windowState.equals(WindowState.MAXIMIZED)) {
 		tabs1Names += ",roles,password-policies,settings,monitoring,plugins";

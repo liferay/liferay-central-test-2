@@ -25,7 +25,7 @@
 		<%@ include file="/html/portlet/enterprise_admin/themes.jspf" %>
 	</c:when>
 	<c:when test='<%= tabs2.equals("layout-template-plugins") %>'>
-		<%@ include file="/html/portlet/enterprise_admin/layout_templates.jspf" %>
+		<%@ include file="/html/portlet/users_admin/layout_templates.jspf" %>
 	</c:when>
 	<c:when test='<%= tabs2.equals("hook-plugins") %>'>
 	</c:when>
