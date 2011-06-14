@@ -487,6 +487,12 @@ public class GroupLocalServiceUtil {
 		return getService().hasUserGroup(userId, groupId);
 	}
 
+	public static boolean hasUserGroup(long userId, long groupId,
+		boolean inherit)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().hasUserGroup(userId, groupId, inherit);
+	}
+
 	public static java.util.List<com.liferay.portal.model.Group> search(
 		long companyId, long[] classNameIds, java.lang.String name,
 		java.lang.String description,

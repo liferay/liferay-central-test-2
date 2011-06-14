@@ -475,6 +475,11 @@ public class GroupLocalServiceWrapper implements GroupLocalService {
 		return _groupLocalService.hasUserGroup(userId, groupId);
 	}
 
+	public boolean hasUserGroup(long userId, long groupId, boolean inherit)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _groupLocalService.hasUserGroup(userId, groupId, inherit);
+	}
+
 	public java.util.List<com.liferay.portal.model.Group> search(
 		long companyId, long[] classNameIds, java.lang.String name,
 		java.lang.String description,

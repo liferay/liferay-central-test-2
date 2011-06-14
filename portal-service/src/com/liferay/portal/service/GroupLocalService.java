@@ -413,6 +413,10 @@ public interface GroupLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public boolean hasUserGroup(long userId, long groupId, boolean inherit)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.Group> search(
 		long companyId, long[] classNameIds, java.lang.String name,
 		java.lang.String description,
