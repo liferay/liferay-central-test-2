@@ -19,10 +19,7 @@
 <%
 ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 
-Object[] objArray = (Object[])row.getObject();
-
-Group group = (Group)objArray[0];
-String tabs1 = (String)objArray[1];
+Group group = (Group)row.getObject();
 %>
 
 <liferay-ui:icon-menu>
@@ -127,81 +124,20 @@ String tabs1 = (String)objArray[1];
 		/>
 	</c:if>
 
-	<c:choose>
-		<c:when test='<%= tabs1.equals("sites-owned") || tabs1.equals("sites-joined") %>'>
-			<c:if test="<%= (group.getType() == GroupConstants.TYPE_SITE_OPEN) || (group.getType() == GroupConstants.TYPE_SITE_RESTRICTED) %>">
-				<portlet:actionURL var="leaveURL">
-					<portlet:param name="struts_action" value="/sites_admin/edit_site_assignments" />
-					<portlet:param name="<%= Constants.CMD %>" value="group_users" />
-					<portlet:param name="redirect" value="<%= currentURL %>" />
-					<portlet:param name="groupId" value="<%= String.valueOf(group.getGroupId()) %>" />
-					<portlet:param name="removeUserIds" value="<%= String.valueOf(user.getUserId()) %>" />
-				</portlet:actionURL>
+	<c:if test="<%= (group.getType() == GroupConstants.TYPE_SITE_OPEN) || (group.getType() == GroupConstants.TYPE_SITE_RESTRICTED) %>">
+		<portlet:actionURL var="leaveURL">
+			<portlet:param name="struts_action" value="/sites_admin/edit_site_assignments" />
+			<portlet:param name="<%= Constants.CMD %>" value="group_users" />
+			<portlet:param name="redirect" value="<%= currentURL %>" />
+			<portlet:param name="groupId" value="<%= String.valueOf(group.getGroupId()) %>" />
+			<portlet:param name="removeUserIds" value="<%= String.valueOf(user.getUserId()) %>" />
+		</portlet:actionURL>
 
-				<liferay-ui:icon
-					image="leave"
-					url="<%= leaveURL %>"
-				/>
-			</c:if>
-		</c:when>
-		<c:otherwise>
-			<c:choose>
-				<c:when test="<%= !GroupLocalServiceUtil.hasUserGroup(user.getUserId(), group.getGroupId()) %>">
-					<c:choose>
-						<c:when test="<%= group.getType() == GroupConstants.TYPE_SITE_OPEN %>">
-							<portlet:actionURL var="joinURL">
-								<portlet:param name="struts_action" value="/sites_admin/edit_site_assignments" />
-								<portlet:param name="<%= Constants.CMD %>" value="group_users" />
-								<portlet:param name="redirect" value="<%= currentURL %>" />
-								<portlet:param name="groupId" value="<%= String.valueOf(group.getGroupId()) %>" />
-								<portlet:param name="addUserIds" value="<%= String.valueOf(user.getUserId()) %>" />
-							</portlet:actionURL>
-
-							<liferay-ui:icon
-								image="join"
-								url="<%= joinURL %>"
-							/>
-						</c:when>
-						<c:when test="<%= (group.getType() == GroupConstants.TYPE_SITE_RESTRICTED) && !MembershipRequestLocalServiceUtil.hasMembershipRequest(user.getUserId(), group.getGroupId(), MembershipRequestConstants.STATUS_PENDING) %>">
-							<portlet:renderURL var="membershipRequestURL">
-								<portlet:param name="struts_action" value="/sites_admin/post_membership_request" />
-								<portlet:param name="redirect" value="<%= currentURL %>" />
-								<portlet:param name="groupId" value="<%= String.valueOf(group.getGroupId()) %>" />
-							</portlet:renderURL>
-
-							<liferay-ui:icon
-								image="post"
-								message="request-membership"
-								url="<%= membershipRequestURL %>"
-							/>
-						</c:when>
-						<c:when test="<%= MembershipRequestLocalServiceUtil.hasMembershipRequest(user.getUserId(), group.getGroupId(), MembershipRequestConstants.STATUS_PENDING) %>">
-							<liferay-ui:icon
-								image="checked"
-								message="membership-requested"
-							/>
-						</c:when>
-					</c:choose>
-				</c:when>
-				<c:otherwise>
-					<c:if test="<%= (group.getType() == GroupConstants.TYPE_SITE_OPEN) || (group.getType() == GroupConstants.TYPE_SITE_RESTRICTED) %>">
-						<portlet:actionURL var="leaveURL">
-							<portlet:param name="struts_action" value="/sites_admin/edit_site_assignments" />
-							<portlet:param name="<%= Constants.CMD %>" value="group_users" />
-							<portlet:param name="redirect" value="<%= currentURL %>" />
-							<portlet:param name="groupId" value="<%= String.valueOf(group.getGroupId()) %>" />
-							<portlet:param name="removeUserIds" value="<%= String.valueOf(user.getUserId()) %>" />
-						</portlet:actionURL>
-
-						<liferay-ui:icon
-							image="leave"
-							url="<%= leaveURL %>"
-						/>
-					</c:if>
-				</c:otherwise>
-			</c:choose>
-		</c:otherwise>
-	</c:choose>
+		<liferay-ui:icon
+			image="leave"
+			url="<%= leaveURL %>"
+		/>
+	</c:if>
 
 	<c:if test="<%= GroupPermissionUtil.contains(permissionChecker, group.getGroupId(), ActionKeys.UPDATE) %>">
 		<portlet:actionURL var="activateURL">

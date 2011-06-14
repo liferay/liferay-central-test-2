@@ -17,9 +17,12 @@
 <%@ include file="/html/portlet/sites_admin/init.jsp" %>
 
 <%
+String tabs1 = ParamUtil.getString(request, "tabs1", "my-sites");
+
 PortletURL portletURL = renderResponse.createRenderURL();
 
-portletURL.setParameter("struts_action", "/sites_admin/view");
+portletURL.setParameter("struts_action", "/my_sites/view");
+portletURL.setParameter("tabs1", tabs1);
 
 pageContext.setAttribute("portletURL", portletURL);
 %>
@@ -29,9 +32,10 @@ pageContext.setAttribute("portletURL", portletURL);
 <aui:form action="<%= portletURL.toString() %>" method="get" name="fm">
 	<liferay-portlet:renderURLParams varImpl="portletURL" />
 
-	<liferay-util:include page="/html/portlet/sites_admin/toolbar.jsp">
-		<liferay-util:param name="toolbarItem" value="view-all" />
-	</liferay-util:include>
+	<liferay-ui:tabs
+		names="my-sites,available-sites"
+		url="<%= portletURL.toString() %>"
+	/>
 
 	<%
 	GroupSearch searchContainer = new GroupSearch(renderRequest, portletURL);
@@ -50,9 +54,18 @@ pageContext.setAttribute("portletURL", portletURL);
 
 	groupParams.put("site", Boolean.TRUE);
 
-	if (!permissionChecker.isCompanyAdmin()) {
+	if (tabs1.equals("my-sites")) {
 		groupParams.put("usersGroups", new Long(user.getUserId()));
-		//groupParams.put("active", Boolean.TRUE);
+		groupParams.put("active", Boolean.TRUE);
+	}
+	else if (tabs1.equals("available-sites")) {
+		List types = new ArrayList();
+
+		types.add(new Integer(GroupConstants.TYPE_SITE_OPEN));
+		types.add(new Integer(GroupConstants.TYPE_SITE_RESTRICTED));
+
+		groupParams.put("types", types);
+		groupParams.put("active", Boolean.TRUE);
 	}
 
 	int total = GroupLocalServiceUtil.searchCount(company.getCompanyId(), classNameIds, searchTerms.getName(), searchTerms.getDescription(), groupParams);
@@ -63,21 +76,6 @@ pageContext.setAttribute("portletURL", portletURL);
 
 	searchContainer.setResults(results);
 	%>
-
-	<liferay-ui:error exception="<%= NoSuchLayoutSetException.class %>">
-
-		<%
-		NoSuchLayoutSetException nslse = (NoSuchLayoutSetException)errorException;
-
-		PKParser pkParser = new PKParser(nslse.getMessage());
-
-		long groupId = pkParser.getLong("groupId");
-
-		Group group = GroupLocalServiceUtil.getGroup(groupId);
-		%>
-
-		<liferay-ui:message arguments="<%= group.getDescriptiveName() %>" key="site-x-does-not-have-any-private-pages" />
-	</liferay-ui:error>
 
 	<liferay-ui:error exception="<%= RequiredGroupException.class %>">
 
@@ -103,11 +101,11 @@ pageContext.setAttribute("portletURL", portletURL);
 	List<String> headerNames = new ArrayList<String>();
 
 	headerNames.add("name");
-	headerNames.add("type");
 	headerNames.add("members");
-	headerNames.add("online-now");
-	headerNames.add("active");
-	headerNames.add("pending-requests");
+
+	if (tabs1.equals("my-sites")) {
+		headerNames.add("online-now");
+	}
 
 	headerNames.add(StringPool.BLANK);
 
@@ -120,15 +118,30 @@ pageContext.setAttribute("portletURL", portletURL);
 
 		group = group.toEscapedModel();
 
-		ResultRow row = new ResultRow(group, group.getGroupId(), i);
+		ResultRow row = new ResultRow(new Object[] {group, tabs1}, group.getGroupId(), i);
 
-		PortletURL rowURL = renderResponse.createRenderURL();
+		PortletURL rowURL = null;
 
-		rowURL.setWindowState(WindowState.NORMAL);
+		if (group.getPublicLayoutsPageCount() > 0) {
+			rowURL = renderResponse.createActionURL();
 
-		rowURL.setParameter("struts_action", "/sites_admin/edit_site");
-		rowURL.setParameter("groupId", String.valueOf(group.getGroupId()));
-		rowURL.setParameter("redirect", currentURL);
+			rowURL.setWindowState(WindowState.NORMAL);
+
+			rowURL.setParameter("struts_action", "/sites_admin/page");
+			rowURL.setParameter("redirect", currentURL);
+			rowURL.setParameter("groupId", String.valueOf(group.getGroupId()));
+			rowURL.setParameter("privateLayout", Boolean.FALSE.toString());
+		}
+		else if (tabs1.equals("my-sites") && (group.getPrivateLayoutsPageCount() > 0)) {
+			rowURL = renderResponse.createActionURL();
+
+			rowURL.setWindowState(WindowState.NORMAL);
+
+			rowURL.setParameter("struts_action", "/sites_admin/page");
+			rowURL.setParameter("redirect", currentURL);
+			rowURL.setParameter("groupId", String.valueOf(group.getGroupId()));
+			rowURL.setParameter("privateLayout", Boolean.TRUE.toString());
+		}
 
 		// Name
 
@@ -136,22 +149,11 @@ pageContext.setAttribute("portletURL", portletURL);
 
 		sb.append("<a href=\"");
 		sb.append(rowURL.toString());
-		sb.append("\">");
+		sb.append("\" target=\"_blank\">");
 		sb.append(HtmlUtil.escape(group.getDescriptiveName()));
 		sb.append("</a>");
 
-		if (group.isOrganization()) {
-			Organization organization = OrganizationLocalServiceUtil.getOrganization(group.getOrganizationId());
-
-			sb.append("<br />");
-			sb.append(LanguageUtil.format(pageContext, "belongs-to-an-organization-of-type-x", LanguageUtil.get(pageContext, organization.getType())));
-		}
-
 		row.addText(sb.toString());
-
-		// Type
-
-		row.addText(LanguageUtil.get(pageContext, group.getTypeLabel()), rowURL);
 
 		// Members
 
@@ -165,28 +167,15 @@ pageContext.setAttribute("portletURL", portletURL);
 
 		// Online Now
 
-		int onlineCount = LiveUsers.getGroupUsersCount(company.getCompanyId(), group.getGroupId());
+		if (tabs1.equals("my-sites")) {
+			int onlineCount = LiveUsers.getGroupUsersCount(company.getCompanyId(), group.getGroupId());
 
-		row.addText(String.valueOf(onlineCount));
-
-		// Active
-
-		row.addText(LanguageUtil.get(pageContext, (group.isActive() ? "yes" : "no")));
-
-		// Restricted number of petitions
-
-		if ((group.getType() == GroupConstants.TYPE_SITE_RESTRICTED) && permissionChecker.isGroupAdmin(group.getGroupId())) {
-			int pendingRequests = MembershipRequestLocalServiceUtil.searchCount(group.getGroupId(), MembershipRequestConstants.STATUS_PENDING);
-
-			row.addText(String.valueOf(pendingRequests));
-		}
-		else {
-			row.addText(StringPool.BLANK);
+			row.addText(String.valueOf(onlineCount));
 		}
 
 		// Action
 
-		row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/sites_admin/site_action.jsp");
+		row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/my_sites/site_action.jsp");
 
 		// Add result row
 
