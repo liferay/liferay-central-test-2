@@ -139,6 +139,7 @@ if (Validator.isNotNull(ddmStructureId)) {
 					stack: false,
 					width:820
 				},
+				storageType: '<%= PropsValues.DYNAMIC_DATA_LISTS_STORAGE_TYPE %>',
 				structureName: 'data-definition',
 				structureType: 'com.liferay.portlet.dynamicdatalists.model.DDLRecordSet',
 				title: '<liferay-ui:message key="data-definitions" />'
