@@ -22,7 +22,7 @@
 
 <c:choose>
 	<c:when test='<%= tabs2.equals("theme-plugins") %>'>
-		<%@ include file="/html/portlet/enterprise_admin/themes.jspf" %>
+		<%@ include file="/html/portlet/plugins_admin/themes.jspf" %>
 	</c:when>
 	<c:when test='<%= tabs2.equals("layout-template-plugins") %>'>
 		<%@ include file="/html/portlet/users_admin/layout_templates.jspf" %>
@@ -32,6 +32,6 @@
 	<c:when test='<%= tabs2.equals("web-plugins") %>'>
 	</c:when>
 	<c:otherwise>
-		<%@ include file="/html/portlet/enterprise_admin/portlets.jspf" %>
+		<%@ include file="/html/portlet/plugins_admin/portlets.jspf" %>
 	</c:otherwise>
 </c:choose>

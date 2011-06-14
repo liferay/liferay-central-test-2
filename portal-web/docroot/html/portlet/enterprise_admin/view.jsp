@@ -74,7 +74,7 @@ request.setAttribute("view.jsp-portletURLString", portletURLString);
 					boolean showReindexButton = false;
 					%>
 
-					<%@ include file="/html/portlet/enterprise_admin/plugins.jspf" %>
+					<%@ include file="/html/portlet/plugins_admin/plugins.jspf" %>
 				</c:when>
 			</c:choose>
 		</aui:form>
