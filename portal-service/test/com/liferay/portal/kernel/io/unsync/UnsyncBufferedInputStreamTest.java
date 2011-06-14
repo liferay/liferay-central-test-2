@@ -198,6 +198,7 @@ public class UnsyncBufferedInputStreamTest extends TestCase {
 		try {
 			new UnsyncBufferedInputStream(
 				new ByteArrayInputStream(new byte[size]), 0);
+
 			fail();
 		}
 		catch (IllegalArgumentException iae) {
@@ -206,6 +207,7 @@ public class UnsyncBufferedInputStreamTest extends TestCase {
 		try {
 			new UnsyncBufferedInputStream(
 				new ByteArrayInputStream(new byte[size]), -1);
+
 			fail();
 		}
 		catch (IllegalArgumentException iae) {
@@ -221,11 +223,13 @@ public class UnsyncBufferedInputStreamTest extends TestCase {
 		// Zero marking
 
 		unsyncBufferedInputStream.mark(0);
+
 		assertEquals(-1, unsyncBufferedInputStream.markLimitIndex);
 
 		// Negative marking
 
 		unsyncBufferedInputStream.mark(-2);
+
 		assertEquals(-1, unsyncBufferedInputStream.markLimitIndex);
 
 		// Normal
@@ -273,6 +277,7 @@ public class UnsyncBufferedInputStreamTest extends TestCase {
 
 		try {
 			unsyncBufferedInputStream.reset();
+
 			fail();
 		}
 		catch (IOException ioe) {

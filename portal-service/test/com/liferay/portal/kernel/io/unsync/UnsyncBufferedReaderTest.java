@@ -205,16 +205,19 @@ public class UnsyncBufferedReaderTest extends TestCase {
 		// Zero marking
 
 		unsyncBufferedReader.mark(0);
+
 		assertEquals(-1, unsyncBufferedReader.markLimitIndex);
 
 		// Negative marking
 
 		try {
 			unsyncBufferedReader.mark(-2);
+
 			fail();
 		}
 		catch (IllegalArgumentException iae) {
 		}
+
 		assertEquals(-1, unsyncBufferedReader.markLimitIndex);
 
 		// Normal
@@ -224,7 +227,6 @@ public class UnsyncBufferedReaderTest extends TestCase {
 		unsyncBufferedReader.mark(markLimit);
 
 		assertEquals(markLimit, unsyncBufferedReader.markLimitIndex);
-
 		assertEquals(0, unsyncBufferedReader.index);
 		assertEquals('a', unsyncBufferedReader.read());
 		assertEquals('b', unsyncBufferedReader.read());
@@ -261,6 +263,7 @@ public class UnsyncBufferedReaderTest extends TestCase {
 
 		try {
 			unsyncBufferedReader.reset();
+
 			fail();
 		}
 		catch (IOException ioe) {
@@ -462,6 +465,7 @@ public class UnsyncBufferedReaderTest extends TestCase {
 	}
 
 	private static final int _SIZE = 16 * 1024;
+
 	private static final char[] _BUFFER = new char[_SIZE];
 
 	static {

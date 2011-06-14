@@ -35,11 +35,11 @@ public class UnsyncBufferedReader extends Reader {
 
 	public UnsyncBufferedReader(Reader reader, int size) {
 		if (size <= 0) {
-			throw new IllegalArgumentException("Non-positive buffer size : "
-				+ size);
+			throw new IllegalArgumentException("Size is less than 0");
 		}
 
 		this.reader = reader;
+
 		buffer = new char[size];
 	}
 
@@ -54,8 +54,7 @@ public class UnsyncBufferedReader extends Reader {
 
 	public void mark(int markLimit) throws IOException {
 		if (markLimit < 0) {
-			throw new IllegalArgumentException("Negative markLimit : "
-				+ markLimit);
+			throw new IllegalArgumentException("Mark limit is less than 0");
 		}
 
 		if (reader == null) {
@@ -69,7 +68,6 @@ public class UnsyncBufferedReader extends Reader {
 		markLimitIndex = markLimit;
 
 		if (index > 0) {
-
 			int available = firstInvalidIndex - index;
 
 			if (available > 0) {
@@ -79,6 +77,7 @@ public class UnsyncBufferedReader extends Reader {
 				System.arraycopy(buffer, index, buffer, 0, available);
 
 				index = 0;
+
 				firstInvalidIndex = available;
 			}
 			else {
@@ -134,9 +133,6 @@ public class UnsyncBufferedReader extends Reader {
 			int currentRead = readOnce(chars, offset + read, length - read);
 
 			if (currentRead <= 0) {
-
-				// Reaching EOF, stop reading
-
 				if (read == 0) {
 					read = currentRead;
 				}
@@ -187,8 +183,8 @@ public class UnsyncBufferedReader extends Reader {
 			while (y < firstInvalidIndex) {
 				lineEndChar = buffer[y];
 
-				if ((lineEndChar == CharPool.NEW_LINE)
-					|| (lineEndChar == CharPool.RETURN)) {
+				if ((lineEndChar == CharPool.NEW_LINE) ||
+					(lineEndChar == CharPool.RETURN)) {
 
 					hasLineBreak = true;
 
@@ -206,8 +202,8 @@ public class UnsyncBufferedReader extends Reader {
 				index++;
 
 				if (lineEndChar == CharPool.RETURN) {
-					if ((index < buffer.length)
-						&& (buffer[index] == CharPool.NEW_LINE)) {
+					if ((index < buffer.length) &&
+						(buffer[index] == CharPool.NEW_LINE)) {
 
 						index++;
 					}
@@ -253,7 +249,7 @@ public class UnsyncBufferedReader extends Reader {
 
 	public long skip(long skip) throws IOException {
 		if (skip < 0) {
-			throw new IllegalArgumentException("Negative skip value : " + skip);
+			throw new IllegalArgumentException("Skip is less than 0");
 		}
 
 		if (reader == null) {
@@ -267,7 +263,6 @@ public class UnsyncBufferedReader extends Reader {
 		long available = firstInvalidIndex - index;
 
 		if (available <= 0) {
-
 			if (markLimitIndex < 0) {
 
 				// No mark required, skip the underlying input stream
@@ -283,9 +278,6 @@ public class UnsyncBufferedReader extends Reader {
 				available = firstInvalidIndex - index;
 
 				if (available <= 0) {
-
-					// Reaching the end of stream
-
 					return 0;
 				}
 			}
@@ -319,6 +311,7 @@ public class UnsyncBufferedReader extends Reader {
 		}
 
 		// Mark required
+
 		if (index >= markLimitIndex) {
 
 			// Passed mark limit indexs, get rid of all cache data
@@ -329,8 +322,8 @@ public class UnsyncBufferedReader extends Reader {
 		}
 		else if (index == buffer.length) {
 
-			// Cann't get rid of cache data and there is no room to read in any
-			// more data, has to grow the buffer.
+			// Cannot get rid of cache data and there is no room to read in any
+			// more data, so grow the buffer
 
 			int newBufferSize = buffer.length * 2;
 
@@ -345,7 +338,7 @@ public class UnsyncBufferedReader extends Reader {
 			buffer = newBuffer;
 		}
 
-		// Read underlying input stream since the buffer has more space
+		// Read the underlying input stream since the buffer has more space
 
 		firstInvalidIndex = index;
 
@@ -362,28 +355,27 @@ public class UnsyncBufferedReader extends Reader {
 		int available = firstInvalidIndex - index;
 
 		if (available <= 0) {
-			// Buffer is empty, read from under Reader
+
+			// Buffer is empty, read from underlying reader
 
 			if ((markLimitIndex < 0) && (length >= buffer.length)) {
 
 				// No mark required, left read block is no less than buffer,
-				// read through buffer is inefficient, directly read from
-				// under Reader
+				// read through buffer is inefficient, so directly read from
+				// underlying reader
 
 				return reader.read(chars, offset, length);
 			}
 			else {
 
-				// Mark is required, has to read through buffer to remember data
+				// Mark is required, has to read through the buffer to remember
+				// data
 
 				fillInBuffer();
 
 				available = firstInvalidIndex - index;
 
 				if (available <= 0) {
-
-					// Reaching EOF
-
 					return -1;
 				}
 			}

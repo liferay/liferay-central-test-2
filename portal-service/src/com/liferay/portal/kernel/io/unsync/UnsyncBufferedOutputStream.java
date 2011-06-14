@@ -34,8 +34,7 @@ public class UnsyncBufferedOutputStream extends UnsyncFilterOutputStream {
 		super(outputStream);
 
 		if (size <= 0) {
-			throw new IllegalArgumentException("Non-positive buffer size : "
-				+ size);
+			throw new IllegalArgumentException("Size is less than 0");
 		}
 
 		buffer = new byte[size];
