@@ -42,35 +42,37 @@ public class Preference implements Cloneable, Serializable {
 		_readOnly = readOnly;
 	}
 
+	public Object clone() {
+		return new Preference(_name, _values, _readOnly);
+	}
+
 	public String getName() {
 		return _name;
-	}
-
-	public String[] getValues() {
-		return _values;
-	}
-
-	public void setValues(String[] values) {
-		_values = values;
 	}
 
 	public boolean getReadOnly() {
 		return _readOnly;
 	}
 
+	public String[] getValues() {
+		return _values;
+	}
+
 	public boolean isReadOnly() {
 		return _readOnly;
 	}
 
-	public Object clone() {
-		return new Preference(_name, _values, _readOnly);
+	public void setValues(String[] values) {
+		_values = values;
 	}
 
 	public String toString() {
-		StringBundler sb = new StringBundler(6 + (_values.length * 2));
+		StringBundler sb = new StringBundler(6 + (_values.length * 2 - 1));
 
 		sb.append("{name=");
 		sb.append(getName());
+		sb.append(",readOnly=");
+		sb.append(_readOnly);
 		sb.append(",values=[");
 
 		for (int i = 0; i < _values.length; i++) {
@@ -81,15 +83,13 @@ public class Preference implements Cloneable, Serializable {
 			}
 		}
 
-		sb.append("],readOnly=");
-		sb.append(_readOnly);
-		sb.append("}");
+		sb.append("]}");
 
 		return sb.toString();
 	}
 
 	private String _name;
-	private String[] _values;
 	private boolean _readOnly;
+	private String[] _values;
 
 }
