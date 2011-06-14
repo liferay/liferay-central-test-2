@@ -41,9 +41,12 @@ public interface DestinationNames {
 
 	public static final String DOCUMENT_LIBRARY_HOOK =
 		"liferay/document_library_hook";
-
+	
 	public static final String DOCUMENT_LIBRARY_PDF_PROCESSOR =
 		"liferay/document_library_pdf_processor";
+
+	public static final String DOCUMENT_LIBRARY_RAW_METADATA_PROCESSOR =
+		"liferay/document_library_raw_metadata_processor";
 
 	public static final String DOCUMENT_LIBRARY_VIDEO_PROCESSOR =
 		"liferay/document_library_video_processor";

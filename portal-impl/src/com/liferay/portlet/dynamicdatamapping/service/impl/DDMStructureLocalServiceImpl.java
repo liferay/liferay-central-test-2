@@ -197,6 +197,12 @@ public class DDMStructureLocalServiceImpl
 		return ddmStructurePersistence.fetchByG_S(groupId, structureKey);
 	}
 
+	public List<DDMStructure> getClassStructures(long classNameId)
+		throws SystemException {
+
+		return ddmStructurePersistence.findByClassNameId(classNameId);
+	}
+
 	public List<DDMStructure> getClassStructures(
 			long classNameId, int start, int end)
 		throws SystemException {

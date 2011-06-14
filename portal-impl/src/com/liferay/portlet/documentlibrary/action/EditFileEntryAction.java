@@ -22,6 +22,8 @@ import com.liferay.documentlibrary.SourceFileNameException;
 import com.liferay.portal.DuplicateLockException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.messaging.DestinationNames;
+import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.servlet.ServletResponseConstants;
@@ -32,6 +34,7 @@ import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.repository.liferayrepository.model.LiferayFileEntry;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
@@ -231,11 +234,11 @@ public class EditFileEntryAction extends PortletAction {
 		}
 	}
 
-	protected HashMap<Long, Fields> getFieldsMap(
+	protected HashMap<String, Fields> getFieldsMap(
 			UploadPortletRequest uploadRequest, long documentTypeId)
 		throws PortalException, SystemException {
 
-		HashMap<Long, Fields> fieldsMap = new HashMap<Long, Fields>();
+		HashMap<String, Fields> fieldsMap = new HashMap<String, Fields>();
 
 		if (documentTypeId <= 0) {
 			return fieldsMap;
@@ -267,7 +270,7 @@ public class EditFileEntryAction extends PortletAction {
 				fields.put(field);
 			}
 
-			fieldsMap.put(ddmStructure.getStructureId(), fields);
+			fieldsMap.put(ddmStructure.getStructureKey(), fields);
 		}
 
 		return fieldsMap;
@@ -380,10 +383,12 @@ public class EditFileEntryAction extends PortletAction {
 
 		serviceContext.setAttribute("documentTypeId", documentTypeId);
 
-		HashMap<Long, Fields> fieldsMap = getFieldsMap(
+		HashMap<String, Fields> fieldsMap = getFieldsMap(
 			uploadRequest, documentTypeId);
 
 		serviceContext.setAttribute("fieldsMap", fieldsMap);
+
+		FileEntry fileEntry = null;
 
 		if (cmd.equals(Constants.ADD)) {
 			if (Validator.isNull(title)) {
@@ -398,7 +403,7 @@ public class EditFileEntryAction extends PortletAction {
 
 			// Add file entry
 
-			FileEntry fileEntry = DLAppServiceUtil.addFileEntry(
+			fileEntry = DLAppServiceUtil.addFileEntry(
 				repositoryId, folderId, title, description, changeLog, file,
 				serviceContext);
 
@@ -417,13 +422,20 @@ public class EditFileEntryAction extends PortletAction {
 
 			// Update file entry
 
-			DLAppServiceUtil.updateFileEntry(
+			fileEntry = DLAppServiceUtil.updateFileEntry(
 				fileEntryId, sourceFileName, title, description, changeLog,
 				majorVersion, file, serviceContext);
 		}
 
 		AssetPublisherUtil.addRecentFolderId(
 			actionRequest, DLFileEntry.class.getName(), folderId);
+
+		if (fileEntry instanceof LiferayFileEntry) {
+			MessageBusUtil.sendMessage(
+				DestinationNames.DOCUMENT_LIBRARY_RAW_METADATA_PROCESSOR,
+				fileEntry.getModel());
+		}
+
 	}
 
 }

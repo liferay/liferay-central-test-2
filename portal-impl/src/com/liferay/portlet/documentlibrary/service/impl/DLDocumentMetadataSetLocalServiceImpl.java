@@ -22,6 +22,7 @@ import com.liferay.portlet.documentlibrary.NoSuchDocumentMetadataSetException;
 import com.liferay.portlet.documentlibrary.model.DLDocumentMetadataSet;
 import com.liferay.portlet.documentlibrary.model.DLDocumentType;
 import com.liferay.portlet.documentlibrary.service.base.DLDocumentMetadataSetLocalServiceBaseImpl;
+import com.liferay.portlet.dynamicdatamapping.StorageException;
 import com.liferay.portlet.dynamicdatamapping.model.DDMStructure;
 import com.liferay.portlet.dynamicdatamapping.storage.Fields;
 import com.liferay.portlet.dynamicdatamapping.storage.StorageEngineUtil;
@@ -64,7 +65,7 @@ public class DLDocumentMetadataSetLocalServiceImpl
 
 	public void updateDocumentMetadataSets(
 			long documentTypeId, long fileVersionId,
-			Map<Long, Fields> fieldsMap, ServiceContext serviceContext)
+			Map<String, Fields> fieldsMap, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		DLDocumentType documentType =
@@ -72,12 +73,33 @@ public class DLDocumentMetadataSetLocalServiceImpl
 
 		List<DDMStructure> ddmStructures = documentType.getDDMStructures();
 
-		for (DDMStructure ddmStructure : ddmStructures) {
-			Fields fields = fieldsMap.get(ddmStructure.getStructureId());
+		updateDocumentMetadataSets(
+			documentType.getCompanyId(),documentTypeId, fileVersionId,
+			fieldsMap, ddmStructures, serviceContext);
+	}
 
-			if (fields == null) {
-				continue;
+	public void updateDocumentMetadataSets(
+			long companyId, long documentTypeId, long fileVersionId,
+			Map<String, Fields> fieldsMap, List<DDMStructure> ddmStructures,
+			ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		for (DDMStructure ddmStructure : ddmStructures) {
+			Fields fields = fieldsMap.get(ddmStructure.getStructureKey());
+
+			if (fields != null) {
+				updateDocumentMetadataSet(
+					companyId, documentTypeId, fileVersionId, fields,
+					ddmStructure, serviceContext);
 			}
+		}
+	}
+
+	protected void updateDocumentMetadataSet(
+			long companyId, long documentTypeId, long fileVersionId,
+			Fields fields,DDMStructure ddmStructure,
+			ServiceContext serviceContext)
+		throws StorageException, SystemException {
 
 			try {
 				DLDocumentMetadataSet metadataSet =
@@ -101,8 +123,8 @@ public class DLDocumentMetadataSetLocalServiceImpl
 					ddmStructure.getClassNameId());
 
 				long classPK = StorageEngineUtil.create(
-					documentType.getCompanyId(), ddmStructure.getStructureId(),
-					fields, serviceContext);
+					companyId, ddmStructure.getStructureId(),fields,
+					serviceContext);
 
 				documentMetadataSet.setClassPK(classPK);
 
@@ -123,7 +145,6 @@ public class DLDocumentMetadataSetLocalServiceImpl
 					classNameId, documentMetadataSet.getDocumentMetadataSetId(),
 					ddmStructure.getStructureId(), serviceContext);
 			}
-		}
 	}
 
 	protected void deleteDocumentMetadataSet(
