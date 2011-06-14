@@ -122,9 +122,7 @@ String script = BeanParamUtil.getString(structure, request, "xsd");
 <aui:button-row>
 	<aui:button onClick='<%= renderResponse.getNamespace() + "saveStructure();" %>' value='<%= LanguageUtil.get(pageContext, "save") %>' />
 
-	<c:if test="<%= Validator.isNull(portletResourceNamespace) %>">
-		<aui:button href="<%= redirect %>" type="cancel" />
-	</c:if>
+	<aui:button href="<%= redirect %>" type="cancel" />
 </aui:button-row>
 
 <aui:script use="liferay-portlet-dynamic-data-mapping">

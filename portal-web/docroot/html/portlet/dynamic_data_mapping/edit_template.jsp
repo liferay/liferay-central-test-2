@@ -17,6 +17,8 @@
 <%@ include file="/html/portlet/dynamic_data_mapping/init.jsp" %>
 
 <%
+String portletResource = ParamUtil.getString(request, "portletResource");
+
 String redirect = ParamUtil.getString(request, "redirect");
 String backURL = ParamUtil.getString(request, "backURL");
 
@@ -48,6 +50,7 @@ if (Validator.isNotNull(structureAvailableFields)) {
 
 <aui:form action="<%= editTemplateURL %>" enctype="multipart/form-data" method="post" name="fm" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "saveTemplate();" %>'>
 	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= (template != null) ? Constants.UPDATE : Constants.ADD %>" />
+	<aui:input name="portletResource" type="hidden" value="<%= portletResource %>" />
 	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
 	<aui:input name="templateId" type="hidden" value="<%= templateId %>" />
 	<aui:input name="groupId" type="hidden" value="<%= groupId %>" />
@@ -102,7 +105,5 @@ if (Validator.isNotNull(structureAvailableFields)) {
 <aui:button-row>
 	<aui:button onClick='<%= renderResponse.getNamespace() + "saveTemplate();" %>' value='<%= LanguageUtil.get(pageContext, "save") %>' />
 
-	<c:if test="<%= Validator.isNull(portletResourceNamespace) %>">
-		<aui:button href="<%= redirect %>" type="cancel" />
-	</c:if>
+	<aui:button href="<%= redirect %>" type="cancel" />
 </aui:button-row>

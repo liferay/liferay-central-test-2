@@ -61,13 +61,19 @@ while (itr.hasNext()) {
 
 	structureAvailableFieldsJSONArray.put(fieldJSONObject);
 }
+
+String namespace = renderResponse.getNamespace();
+
+if (Validator.isNotNull(portletResourceNamespace)){
+	namespace = portletResourceNamespace;
+}
 %>
 
 <aui:input name="language" type="hidden" value="xsd" />
 <aui:input name="script" type="hidden" />
 
 <aui:script use="liferay-portlet-dynamic-data-mapping">
-	window.<portlet:namespace />structureAvailableFields = A.Array(<%= structureAvailableFieldsJSONArray.toString() %>).concat(Liferay.FormBuilder.AVAILABLE_FIELDS.DDM_TEMPLATE);
+	window.<%= namespace %>structureAvailableFields = A.Array(<%= structureAvailableFieldsJSONArray.toString() %>).concat(Liferay.FormBuilder.AVAILABLE_FIELDS.DDM_TEMPLATE);
 
 	Liferay.provide(
 		window,

@@ -27,6 +27,7 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.ActionRequestImpl;
+import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.portlet.PortletURLImpl;
 import com.liferay.portlet.dynamicdatamapping.NoSuchTemplateException;
 import com.liferay.portlet.dynamicdatamapping.TemplateNameException;
@@ -41,6 +42,7 @@ import com.liferay.util.JS;
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
+import javax.portlet.PortletPreferences;
 import javax.portlet.PortletRequest;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
@@ -224,6 +226,30 @@ public class EditTemplateAction extends PortletAction {
 			template = DDMTemplateServiceUtil.updateTemplate(
 				templateId, name, description, type, language, script,
 				serviceContext);
+		}
+
+		String portletResource = ParamUtil.getString(
+			actionRequest, "portletResource");
+
+		if (Validator.isNotNull(portletResource)) {
+			PortletPreferences preferences =
+				PortletPreferencesFactoryUtil.getPortletSetup(
+					actionRequest, portletResource);
+
+			if (Validator.equals(
+					DDMTemplateConstants.TEMPLATE_TYPE_DETAIL, type)) {
+
+				preferences.setValue(
+					"detailDDMTemplateId",
+					String.valueOf(template.getTemplateId()));
+			}
+			else {
+				preferences.setValue(
+					"listDDMTemplateId",
+					String.valueOf(template.getTemplateId()));
+			}
+
+			preferences.store();
 		}
 
 		return template;
