@@ -20,8 +20,8 @@
 	bulletStyle="<%= bulletStyle %>"
 	displayStyle="<%= displayStyle %>"
 	headerType="<%= headerType %>"
-	rootLayoutType="<%= rootLayoutType %>"
-	rootLayoutLevel="<%= rootLayoutLevel %>"
 	includedLayouts="<%= includedLayouts %>"
 	nestedChildren="<%= nestedChildren %>"
+	rootLayoutLevel="<%= rootLayoutLevel %>"
+	rootLayoutType="<%= rootLayoutType %>"
 />
