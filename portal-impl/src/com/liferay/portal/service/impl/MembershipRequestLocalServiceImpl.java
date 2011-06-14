@@ -72,7 +72,7 @@ public class MembershipRequestLocalServiceImpl
 		membershipRequestPersistence.update(membershipRequest, false);
 
 		try {
-			notifySiteAdministrators(membershipRequest);
+			notifyGroupAdministrators(membershipRequest);
 		}
 		catch (IOException ioe) {
 			throw new SystemException(ioe);
@@ -218,60 +218,66 @@ public class MembershipRequestLocalServiceImpl
 		}
 	}
 
-	protected List<Long> getGroupAdministratorIds(long groupId)
+	protected List<Long> getGroupAdministratorUserIds(long groupId)
 		throws PortalException, SystemException {
 
-		List<Long> administratorIds = new UniqueList();
+		List<Long> userIds = new UniqueList<Long>();
 
 		Group group = groupLocalService.getGroup(groupId);
 
-		Role siteAdminRole = roleLocalService.getRole(
+		Role siteAdministratorRole = roleLocalService.getRole(
 			group.getCompanyId(), RoleConstants.SITE_ADMINISTRATOR);
 
-		List<UserGroupRole> siteAdmins =
+		List<UserGroupRole> siteAdministratorUserGroupRoles =
 			userGroupRoleLocalService.getUserGroupRolesByGroupAndRole(
-				groupId, siteAdminRole.getRoleId());
+				groupId, siteAdministratorRole.getRoleId());
 
-		for (UserGroupRole siteAdmin : siteAdmins) {
-			administratorIds.add(siteAdmin.getUserId());
+		for (UserGroupRole userGroupRole : siteAdministratorUserGroupRoles) {
+			userIds.add(userGroupRole.getUserId());
 		}
 
 		Role siteOwnerRole = rolePersistence.findByC_N(
 			group.getCompanyId(), RoleConstants.SITE_OWNER);
 
-		List<UserGroupRole> siteOwners =
+		List<UserGroupRole> siteOwnerUserGroupRoles =
 			userGroupRoleLocalService.getUserGroupRolesByGroupAndRole(
 				groupId, siteOwnerRole.getRoleId());
 
-		for (UserGroupRole siteOwner : siteOwners) {
-			administratorIds.add(siteOwner.getUserId());
+		for (UserGroupRole userGroupRole : siteOwnerUserGroupRoles) {
+			userIds.add(userGroupRole.getUserId());
 		}
 
-		if (group.isOrganization()) {
-			Role orgAdminRole = roleLocalService.getRole(
-				group.getCompanyId(), RoleConstants.ORGANIZATION_ADMINISTRATOR);
-
-			List<UserGroupRole> orgAdmins =
-				userGroupRoleLocalService.getUserGroupRolesByGroupAndRole(
-					groupId, orgAdminRole.getRoleId());
-
-			for (UserGroupRole orgAdmin : orgAdmins) {
-				administratorIds.add(orgAdmin.getUserId());
-			}
-
-			Role orgOwnerRole = roleLocalService.getRole(
-				group.getCompanyId(), RoleConstants.ORGANIZATION_OWNER);
-
-			List<UserGroupRole> orgOwners =
-				userGroupRoleLocalService.getUserGroupRolesByGroupAndRole(
-					groupId, orgOwnerRole.getRoleId());
-
-			for (UserGroupRole orgOwner : orgOwners) {
-				administratorIds.add(orgOwner.getUserId());
-			}
+		if (!group.isOrganization()) {
+			return userIds;
 		}
 
-		return administratorIds;
+		Role organizationAdministratorRole = roleLocalService.getRole(
+			group.getCompanyId(), RoleConstants.ORGANIZATION_ADMINISTRATOR);
+
+		List<UserGroupRole> organizationAdminstratorUserGroupRoles =
+			userGroupRoleLocalService.getUserGroupRolesByGroupAndRole(
+				groupId, organizationAdministratorRole.getRoleId());
+
+		for (UserGroupRole orgAdministratorUserGroupRole :
+				organizationAdminstratorUserGroupRoles) {
+
+			userIds.add(orgAdministratorUserGroupRole.getUserId());
+		}
+
+		Role orgOwnerRole = roleLocalService.getRole(
+			group.getCompanyId(), RoleConstants.ORGANIZATION_OWNER);
+
+		List<UserGroupRole> organizationOwnerUserGroupRoles =
+			userGroupRoleLocalService.getUserGroupRolesByGroupAndRole(
+				groupId, orgOwnerRole.getRoleId());
+
+		for (UserGroupRole organizationOwnerUserGroupRole :
+				organizationOwnerUserGroupRoles) {
+
+			userIds.add(organizationOwnerUserGroupRole.getUserId());
+		}
+
+		return userIds;
 	}
 
 	protected void notify(
@@ -401,14 +407,14 @@ public class MembershipRequestLocalServiceImpl
 		mailService.sendEmail(message);
 	}
 
-	protected void notifySiteAdministrators(
+	protected void notifyGroupAdministrators(
 			MembershipRequest membershipRequest)
 		throws IOException, PortalException, SystemException {
 
-		List<Long> administratorIds = getGroupAdministratorIds(
+		List<Long> userIds = getGroupAdministratorUserIds(
 			membershipRequest.getGroupId());
 
-		for (Long userId : administratorIds) {
+		for (Long userId : userIds) {
 			notify(
 				userId, membershipRequest,
 				PropsKeys.COMMUNITIES_EMAIL_MEMBERSHIP_REQUEST_SUBJECT,
