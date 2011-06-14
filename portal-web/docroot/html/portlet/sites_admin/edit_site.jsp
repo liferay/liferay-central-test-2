@@ -88,7 +88,7 @@ else if (layoutSetPrototype != null) {
 				<aui:input name="name" type="hidden" />
 			</c:when>
 			<c:when test="<%= (group != null) && group.isOrganization() %>">
-				<aui:field-wrapper helpMessage="the-name-of-this-site-cannot-be-edited-because-it-belongs-to-an-organization" label="name" >
+				<aui:field-wrapper helpMessage="the-name-of-this-site-cannot-be-edited-because-it-belongs-to-an-organization" label="name">
 					<%= group.getDescriptiveName() %>
 				</aui:field-wrapper>
 			</c:when>
