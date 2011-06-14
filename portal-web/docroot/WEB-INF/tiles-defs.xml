@@ -620,7 +620,7 @@
 	</definition>
 
 	<definition name="portlet.enterprise_admin.select_site" extends="portlet.enterprise_admin">
-		<put name="portlet_content" value="/portlet/enterprise_admin/select_site.jsp" />
+		<put name="portlet_content" value="/portlet/sites_admin/select_site.jsp" />
 	</definition>
 
 	<definition name="portlet.enterprise_admin.select_site_role" extends="portlet.enterprise_admin">

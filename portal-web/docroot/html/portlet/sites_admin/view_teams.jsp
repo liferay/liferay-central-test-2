@@ -61,7 +61,7 @@ pageContext.setAttribute("portletURL", portletURL);
 	%>
 
 	<liferay-ui:search-form
-		page="/html/portlet/enterprise_admin/team_search.jsp"
+		page="/html/portlet/sites_admin/team_search.jsp"
 		searchContainer="<%= searchContainer %>"
 	/>
 
