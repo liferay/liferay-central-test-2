@@ -276,7 +276,14 @@ public class ShardAdvice {
 						_getSignature(proceedingJoinPoint));
 			}
 
-			return proceedingJoinPoint.proceed();
+			pushCompanyService(PropsValues.SHARD_DEFAULT_NAME);
+
+			try {
+				return proceedingJoinPoint.proceed();
+			}
+			finally {
+				popCompanyService();
+			}
 		}
 
 		if (_globalCall.get() == null) {

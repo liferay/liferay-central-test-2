@@ -191,9 +191,8 @@ public class PortalPreferencesLocalServiceImpl
 						new PortalPreferencesImpl());
 				}
 
-				portalPreferences =
-					portalPreferencesLocalService.addPortalPreferences(
-						companyId, ownerId, ownerType, defaultPreferences);
+				portalPreferences = addPortalPreferences(
+					companyId, ownerId, ownerType, defaultPreferences);
 			}
 
 			portalPreferencesImpl =

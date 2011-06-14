@@ -709,12 +709,11 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 				}
 			}
 
-			preferences.store();
-
-			if (!resetKeys.isEmpty()) {
-				removePreferences(
-					companyId, resetKeys.toArray(new String[resetKeys.size()]));
+			for (String key : resetKeys) {
+				preferences.reset(key);
 			}
+
+			preferences.store();
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
