@@ -428,7 +428,7 @@ public class GroupFinderImpl
 
 		Long userId = (Long)params.get("usersGroups");
 		boolean inherit = GetterUtil.getBoolean(
-			(Serializable) params.get("inherit"), true);
+			String.valueOf(params.get("inherit")), true);
 
 		LinkedHashMap<String, Object> params1 = params;
 
@@ -441,7 +441,7 @@ public class GroupFinderImpl
 		LinkedHashMap<String, Object> params4 =
 			new LinkedHashMap<String, Object>(params1);
 
-		if (inherit && (userId != null)) {
+		if ((userId != null) && inherit) {
 			params2.remove("usersGroups");
 			params2.put("groupOrg", userId);
 
@@ -473,7 +473,7 @@ public class GroupFinderImpl
 		sb.append(replaceJoinAndWhere(findByCND_SQL, params1));
 		sb.append(")");
 
-		if (inherit && Validator.isNotNull(userId)) {
+		if (Validator.isNotNull(userId) && inherit) {
 			sb.append(" UNION (");
 			sb.append(replaceJoinAndWhere(findByCND_SQL, params2));
 			sb.append(") UNION (");
@@ -506,7 +506,7 @@ public class GroupFinderImpl
 			qPos.add(description);
 			qPos.add(description);
 
-			if (inherit && Validator.isNotNull(userId)) {
+			if (Validator.isNotNull(userId) && inherit) {
 				setJoin(qPos, params2);
 				qPos.add(companyId);
 				qPos.add(name);
