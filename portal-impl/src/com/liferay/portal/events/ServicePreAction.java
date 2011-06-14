@@ -1671,6 +1671,9 @@ public class ServicePreAction extends Action {
 			siteContentURL, "controlPanelCategory",
 			PortletCategoryKeys.CONTENT);
 
+		siteContentURL = HttpUtil.addParameter(
+			siteContentURL, "p_p_id", PortletKeys.RECENT_CONTENT);
+
 		themeDisplay.setURLSiteContent(siteContentURL);
 
 		PortletURL createAccountURL = new PortletURLImpl(
