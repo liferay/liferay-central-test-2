@@ -742,10 +742,16 @@ body.portal-popup:after, body.portal-popup:before {
 .opens-new-window-accessible {
 	background: url(../images/common/open_window.png) no-repeat 3px 50%;
 	display: inline-block;
+	font-size: 0;
 	height: 20px;
 	overflow: hidden;
 	text-indent: -9999px;
 	width: 20px;
+}
+
+.webkit .opens-new-window-accessible {
+	position: relative;
+	top: -16px;
 }
 
 /*----- Extras -----*/
