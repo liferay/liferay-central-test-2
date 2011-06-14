@@ -1714,7 +1714,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		subscriptionSender.setBody(body);
 		subscriptionSender.setCompanyId(message.getCompanyId());
 		subscriptionSender.setContextAttributes(
-			"[$COMMENTS_BODY$]", BBCodeUtil.getHTML(message.getBody()),
+			"[$COMMENTS_BODY$]", message.getBody(true),
 			"[$COMMENTS_USER_ADDRESS$]", userAddress, "[$COMMENTS_USER_NAME$]",
 			userName, "[$CONTENT_URL$]", contentURL);
 		subscriptionSender.setFrom(fromAddress, fromName);
