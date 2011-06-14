@@ -147,11 +147,24 @@ pageContext.setAttribute("portletURL", portletURL);
 
 		StringBundler sb = new StringBundler();
 
-		sb.append("<a href=\"");
-		sb.append(rowURL.toString());
-		sb.append("\" target=\"_blank\">");
-		sb.append(HtmlUtil.escape(group.getDescriptiveName()));
-		sb.append("</a>");
+		if (rowURL != null) {
+			sb.append("<a href=\"");
+			sb.append(rowURL.toString());
+			sb.append("\" target=\"_blank\"><b>");
+			sb.append(HtmlUtil.escape(group.getDescriptiveName()));
+			sb.append("</b></a>");
+		}
+		else {
+			sb.append("<b>");
+			sb.append(HtmlUtil.escape(group.getDescriptiveName()));
+			sb.append("</b>");
+		}
+
+		if (!tabs1.equals("my-sites") && Validator.isNotNull(group.getDescription())) {
+			sb.append("<br /><i>");
+			sb.append(group.getDescription());
+			sb.append("</i>");
+		}
 
 		row.addText(sb.toString());
 
