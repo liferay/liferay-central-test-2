@@ -102,6 +102,29 @@ request.setAttribute("edit_site_assignments.jsp-portletURL", portletURL);
 
 				<liferay-ui:icon-help message='<%= LanguageUtil.get(pageContext, "membership-type-" + GroupConstants.getTypeLabel(group.getType()) + "-help") %>' />
 
+				<c:if test="<%= group.getType() == GroupConstants.TYPE_SITE_RESTRICTED %>">
+
+					<%
+					int pendingRequests = MembershipRequestLocalServiceUtil.searchCount(group.getGroupId(), MembershipRequestConstants.STATUS_PENDING);
+					%>
+
+					<c:if test="<%= pendingRequests > 0 %>">
+						<portlet:renderURL var="viewMembershipRequestsURL">
+							<portlet:param name="struts_action" value="/sites_admin/view_membership_requests" />
+							<portlet:param name="redirect" value="<%= currentURL %>" />
+							<portlet:param name="groupId" value="<%= String.valueOf(group.getGroupId()) %>" />
+						</portlet:renderURL>
+
+						<br />
+
+						<liferay-ui:icon
+							image="manage_task"
+							label="<%= true %>"
+							message='<%= LanguageUtil.format(pageContext, "there-are-x-membership-requests-pending", String.valueOf(pendingRequests)) %>'
+							url="<%= viewMembershipRequestsURL %>"
+						/>
+					</c:if>
+				</c:if>
 			</div>
 
 			<liferay-util:include page="/html/portlet/sites_admin/edit_site_assignments_organization.jsp" />
