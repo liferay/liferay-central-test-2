@@ -348,6 +348,13 @@
 	<bean id="com.liferay.portal.language.LanguageResources" class="com.liferay.portal.language.LanguageResources">
 		<property name="config" value="content.Language,content.Language-ext" />
 	</bean>
+    <bean id="com.liferay.portal.metadata.TikaRawMetadataProcessor" class="com.liferay.portal.metadata.TikaRawMetadataProcessor">
+        <property name="tika" ref="org.apache.tika.Tika"/>
+    </bean>
+    <bean id="org.apache.tika.Tika" class="org.apache.tika.Tika"/>
+    <bean id="com.liferay.portal.metadata.RawMetadataProcessorUtil" class="com.liferay.portal.metadata.RawMetadataProcessorUtil">
+           <property name="rawMetadataProcessor" ref="com.liferay.portal.metadata.TikaRawMetadataProcessor" />
+    </bean>
 	<bean id="com.liferay.portal.model.ModelHintsUtil" class="com.liferay.portal.model.ModelHintsUtil">
 		<property name="modelHints">
 			<bean class="com.liferay.portal.model.ModelHintsImpl">
