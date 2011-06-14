@@ -64,7 +64,11 @@ public class AssetEntryServiceImpl extends AssetEntryServiceBaseImpl {
 	public List<AssetEntry> getEntries(AssetEntryQuery entryQuery)
 		throws PortalException, SystemException {
 
-		setupQuery(entryQuery);
+		AssetEntryQuery filteredEntryQuery = setupQuery(entryQuery);
+
+		if (isRemovedFilters(entryQuery, filteredEntryQuery)) {
+			return new ArrayList<AssetEntry>();
+		}
 
 		Object[] results = filterQuery(entryQuery);
 
@@ -74,7 +78,11 @@ public class AssetEntryServiceImpl extends AssetEntryServiceBaseImpl {
 	public int getEntriesCount(AssetEntryQuery entryQuery)
 		throws PortalException, SystemException {
 
-		setupQuery(entryQuery);
+		AssetEntryQuery filteredEntryQuery = setupQuery(entryQuery);
+
+		if (isRemovedFilters(entryQuery, filteredEntryQuery)) {
+			return 0;
+		}
 
 		Object[] results = filterQuery(entryQuery);
 
@@ -217,15 +225,40 @@ public class AssetEntryServiceImpl extends AssetEntryServiceBaseImpl {
 		return new Object[] {filteredEntries, length};
 	}
 
-	protected void setupQuery(AssetEntryQuery entryQuery)
+	protected boolean isRemovedFilters (
+		AssetEntryQuery entryQuery, AssetEntryQuery filteredEntryQuery) {
+
+		if ((entryQuery.getAllCategoryIds().length > 0 &&
+				filteredEntryQuery.getAllCategoryIds().length == 0) ||
+			(entryQuery.getAnyCategoryIds().length > 0 &&
+				filteredEntryQuery.getAnyCategoryIds().length == 0) ||
+			(entryQuery.getAllTagIds().length > 0 &&
+				filteredEntryQuery.getAllTagIds().length == 0) ||
+			(entryQuery.getAnyTagIds().length > 0 &&
+				filteredEntryQuery.getAnyTagIds().length == 0)) {
+
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	protected AssetEntryQuery setupQuery(AssetEntryQuery entryQuery)
 		throws PortalException, SystemException {
 
-		entryQuery.setAllCategoryIds(
+		AssetEntryQuery filteredEntryQuery = new AssetEntryQuery(entryQuery);
+
+		filteredEntryQuery.setAllCategoryIds(
 			filterCategoryIds(entryQuery.getAllCategoryIds()));
-		entryQuery.setAllTagIds(filterTagIds(entryQuery.getAllTagIds()));
-		entryQuery.setAnyCategoryIds(
+		filteredEntryQuery.setAllTagIds(
+			filterTagIds(entryQuery.getAllTagIds()));
+		filteredEntryQuery.setAnyCategoryIds(
 			filterCategoryIds(entryQuery.getAnyCategoryIds()));
-		entryQuery.setAnyTagIds(filterTagIds(entryQuery.getAnyTagIds()));
+		filteredEntryQuery.setAnyTagIds(
+			filterTagIds(entryQuery.getAnyTagIds()));
+
+		return filteredEntryQuery;
 	}
 
 }
