@@ -279,8 +279,11 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 	}
 
 	public LayoutSet getLayoutSet() throws PortalException, SystemException {
-		return LayoutSetLocalServiceUtil.getLayoutSet(
-			getGroupId(), isPrivateLayout());
+		if (_layoutSet == null) {
+			_layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(
+				getGroupId(), isPrivateLayout());
+		}
+		return _layoutSet;
 	}
 
 	public LayoutType getLayoutType() {
@@ -740,6 +743,8 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(LayoutImpl.class);
+
+	private LayoutSet _layoutSet;
 
 	private UnicodeProperties _typeSettingsProperties;
 
