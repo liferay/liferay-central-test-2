@@ -848,7 +848,13 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 	public boolean hasUserGroup(long userId, long groupId)
 		throws SystemException {
 
-		if (groupFinder.countByG_U(groupId, userId) > 0) {
+		return hasUserGroup(userId, groupId, true);
+	}
+
+	public boolean hasUserGroup(long userId, long groupId, boolean inherit)
+		throws SystemException {
+
+		if (groupFinder.countByG_U(groupId, userId, inherit) > 0) {
 			return true;
 		}
 		else {

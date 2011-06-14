@@ -60,7 +60,7 @@ String tabs1 = (String)objArray[1];
 				/>
 			</c:if>
 
-			<c:if test="<%= (group.getType() == GroupConstants.TYPE_SITE_OPEN) || (group.getType() == GroupConstants.TYPE_SITE_RESTRICTED) %>">
+			<c:if test="<%= ((group.getType() == GroupConstants.TYPE_SITE_OPEN) || (group.getType() == GroupConstants.TYPE_SITE_RESTRICTED)) && GroupLocalServiceUtil.hasUserGroup(user.getUserId(), group.getGroupId(), false) %>">
 				<portlet:actionURL var="leaveURL">
 					<portlet:param name="struts_action" value="/sites_admin/edit_site_assignments" />
 					<portlet:param name="<%= Constants.CMD %>" value="group_users" />
@@ -115,7 +115,7 @@ String tabs1 = (String)objArray[1];
 					</c:choose>
 				</c:when>
 				<c:otherwise>
-					<c:if test="<%= (group.getType() == GroupConstants.TYPE_SITE_OPEN) || (group.getType() == GroupConstants.TYPE_SITE_RESTRICTED) %>">
+					<c:if test="<%= ((group.getType() == GroupConstants.TYPE_SITE_OPEN) || (group.getType() == GroupConstants.TYPE_SITE_RESTRICTED)) && GroupLocalServiceUtil.hasUserGroup(user.getUserId(), group.getGroupId(), false) %>">
 						<portlet:actionURL var="leaveURL">
 							<portlet:param name="struts_action" value="/sites_admin/edit_site_assignments" />
 							<portlet:param name="<%= Constants.CMD %>" value="group_users" />

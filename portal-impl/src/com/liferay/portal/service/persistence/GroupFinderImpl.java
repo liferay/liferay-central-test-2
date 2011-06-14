@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.dao.orm.SQLQuery;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.dao.orm.Type;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
@@ -34,6 +35,7 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.util.dao.orm.CustomSQLUtil;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -115,7 +117,9 @@ public class GroupFinderImpl
 	public static String JOIN_BY_USERS_GROUPS =
 		GroupFinder.class.getName() + ".joinByUsersGroups";
 
-	public int countByG_U(long groupId, long userId) throws SystemException {
+	public int countByG_U(long groupId, long userId, boolean inherit)
+		throws SystemException {
+
 		LinkedHashMap<String, Object> params1 =
 			new LinkedHashMap<String, Object>();
 
@@ -142,8 +146,12 @@ public class GroupFinderImpl
 			session = openSession();
 
 			int count = countByGroupId(session, groupId, params1);
-			count += countByGroupId(session, groupId, params2);
-			count += countByGroupId(session, groupId, params3);
+
+			if (inherit) {
+				count += countByGroupId(session, groupId, params2);
+				count += countByGroupId(session, groupId, params3);
+				count += countByGroupId(session, groupId, params4);
+			}
 
 			return count;
 		}
@@ -419,6 +427,8 @@ public class GroupFinderImpl
 		}
 
 		Long userId = (Long)params.get("usersGroups");
+		boolean inherit = GetterUtil.getBoolean(
+			(Serializable) params.get("inherit"), true);
 
 		LinkedHashMap<String, Object> params1 = params;
 
@@ -431,7 +441,7 @@ public class GroupFinderImpl
 		LinkedHashMap<String, Object> params4 =
 			new LinkedHashMap<String, Object>(params1);
 
-		if (userId != null) {
+		if (inherit && (userId != null)) {
 			params2.remove("usersGroups");
 			params2.put("groupOrg", userId);
 
@@ -463,11 +473,13 @@ public class GroupFinderImpl
 		sb.append(replaceJoinAndWhere(findByCND_SQL, params1));
 		sb.append(")");
 
-		if (Validator.isNotNull(userId)) {
+		if (inherit && Validator.isNotNull(userId)) {
 			sb.append(" UNION (");
 			sb.append(replaceJoinAndWhere(findByCND_SQL, params2));
 			sb.append(") UNION (");
 			sb.append(replaceJoinAndWhere(findByCND_SQL, params3));
+			sb.append(") UNION (");
+			sb.append(replaceJoinAndWhere(findByCND_SQL, params4));
 			sb.append(")");
 		}
 
@@ -494,7 +506,7 @@ public class GroupFinderImpl
 			qPos.add(description);
 			qPos.add(description);
 
-			if (Validator.isNotNull(userId)) {
+			if (inherit && Validator.isNotNull(userId)) {
 				setJoin(qPos, params2);
 				qPos.add(companyId);
 				qPos.add(name);
@@ -504,6 +516,14 @@ public class GroupFinderImpl
 				qPos.add(description);
 
 				setJoin(qPos, params3);
+				qPos.add(companyId);
+				qPos.add(name);
+				qPos.add(realName);
+				qPos.add(name);
+				qPos.add(description);
+				qPos.add(description);
+
+				setJoin(qPos, params4);
 				qPos.add(companyId);
 				qPos.add(name);
 				qPos.add(realName);

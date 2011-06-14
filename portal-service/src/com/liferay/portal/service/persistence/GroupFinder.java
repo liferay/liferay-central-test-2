@@ -18,7 +18,7 @@ package com.liferay.portal.service.persistence;
  * @author Brian Wing Shun Chan
  */
 public interface GroupFinder {
-	public int countByG_U(long groupId, long userId)
+	public int countByG_U(long groupId, long userId, boolean inherit)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public int countByC_N_D(long companyId, java.lang.String name,

@@ -21,9 +21,9 @@ import com.liferay.portal.kernel.util.ReferenceRegistry;
  * @author Brian Wing Shun Chan
  */
 public class GroupFinderUtil {
-	public static int countByG_U(long groupId, long userId)
+	public static int countByG_U(long groupId, long userId, boolean inherit)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getFinder().countByG_U(groupId, userId);
+		return getFinder().countByG_U(groupId, userId, inherit);
 	}
 
 	public static int countByC_N_D(long companyId, java.lang.String name,
