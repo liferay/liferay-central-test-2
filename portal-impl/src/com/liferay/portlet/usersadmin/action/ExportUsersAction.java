@@ -87,7 +87,7 @@ public class ExportUsersAction extends PortletAction {
 		catch (Exception e) {
 			SessionErrors.add(actionRequest, e.getClass().getName());
 
-			setForward(actionRequest, "portlet.enterprise_admin.error");
+			setForward(actionRequest, "portlet.users_admin.error");
 		}
 	}
 

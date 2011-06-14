@@ -90,7 +90,7 @@ public class EditCompanyAction extends PortletAction {
 			if (e instanceof PrincipalException) {
 				SessionErrors.add(actionRequest, e.getClass().getName());
 
-				setForward(actionRequest, "portlet.enterprise_admin.error");
+				setForward(actionRequest, "portlet.portal_settings.error");
 			}
 			else if (e instanceof AddressCityException ||
 					 e instanceof AccountNameException ||

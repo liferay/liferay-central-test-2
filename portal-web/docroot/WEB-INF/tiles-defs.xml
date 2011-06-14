@@ -1123,6 +1123,14 @@
 		<put name="portlet_content" value="/portlet/page_ratings/view.jsp" />
 	</definition>
 
+	<!-- Password Policies Admin -->
+
+	<definition name="portlet.password_policies_admin" extends="portlet" />
+
+	<definition name="portlet.password_policies_admin.error" extends="portlet.password_policies_admin">
+		<put name="portlet_content" value="/portlet/password_policies_admin/error.jsp" />
+	</definition>
+
 	<!-- Plugin Installer -->
 
 	<definition name="portlet.plugin_installer" extends="portlet" />
@@ -1133,6 +1141,14 @@
 
 	<definition name="portlet.plugin_installer.view" extends="portlet.plugin_installer">
 		<put name="portlet_content" value="/portlet/plugin_installer/view.jsp" />
+	</definition>
+
+	<!-- Plugins Admin -->
+
+	<definition name="portlet.plugins_admin" extends="portlet" />
+
+	<definition name="portlet.plugins_admin.error" extends="portlet.plugins_admin">
+		<put name="portlet_content" value="/portlet/plugins_admin/error.jsp" />
 	</definition>
 
 	<!-- Polls -->
@@ -1165,6 +1181,14 @@
 
 	<definition name="portlet.polls_display.view" extends="portlet.polls_display">
 		<put name="portlet_content" value="/portlet/polls_display/view.jsp" />
+	</definition>
+
+	<!-- Portal Settings -->
+
+	<definition name="portlet.portal_settings" extends="portlet" />
+
+	<definition name="portlet.portal_settings.error" extends="portlet.portal_settings">
+		<put name="portlet_content" value="/portlet/portal_settings/error.jsp" />
 	</definition>
 
 	<!-- Portlet Configuration -->
@@ -1246,6 +1270,14 @@
 
 	<definition name="portlet.requests.view" extends="portlet.requests">
 		<put name="portlet_content" value="/portlet/requests/view.jsp" />
+	</definition>
+
+	<!-- Roles Admin -->
+
+	<definition name="portlet.roles_admin" extends="portlet" />
+
+	<definition name="portlet.roles_admin.error" extends="portlet.roles_admin">
+		<put name="portlet_content" value="/portlet/roles_admin/error.jsp" />
 	</definition>
 
 	<!-- Site Settings -->
@@ -1486,6 +1518,14 @@
 
 	<definition name="portlet.update_manager.view" extends="portlet.update_manager">
 		<put name="portlet_content" value="/portlet/update_manager/view.jsp" />
+	</definition>
+
+	<!-- Users Admin -->
+
+	<definition name="portlet.users_admin" extends="portlet" />
+
+	<definition name="portlet.users_admin.error" extends="portlet.users_admin">
+		<put name="portlet_content" value="/portlet/users_admin/error.jsp" />
 	</definition>
 
 	<!-- Wiki -->

@@ -104,7 +104,7 @@ public class EditOrganizationAction extends PortletAction {
 
 				SessionErrors.add(actionRequest, e.getClass().getName());
 
-				setForward(actionRequest, "portlet.enterprise_admin.error");
+				setForward(actionRequest, "portlet.users_admin.error");
 			}
 			else if (e instanceof AddressCityException ||
 					 e instanceof AddressStreetException ||
@@ -160,7 +160,7 @@ public class EditOrganizationAction extends PortletAction {
 
 				SessionErrors.add(renderRequest, e.getClass().getName());
 
-				return mapping.findForward("portlet.enterprise_admin.error");
+				return mapping.findForward("portlet.users_admin.error");
 			}
 			else {
 				throw e;

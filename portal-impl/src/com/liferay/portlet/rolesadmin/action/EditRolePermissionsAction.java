@@ -82,7 +82,7 @@ public class EditRolePermissionsAction extends PortletAction {
 
 				SessionErrors.add(actionRequest, e.getClass().getName());
 
-				setForward(actionRequest, "portlet.enterprise_admin.error");
+				setForward(actionRequest, "portlet.roles_admin.error");
 			}
 			else {
 				throw e;
@@ -104,7 +104,7 @@ public class EditRolePermissionsAction extends PortletAction {
 
 				SessionErrors.add(renderRequest, e.getClass().getName());
 
-				return mapping.findForward("portlet.enterprise_admin.error");
+				return mapping.findForward("portlet.roles_admin.error");
 			}
 			else {
 				throw e;

@@ -57,7 +57,7 @@ public class EditSessionAction extends PortletAction {
 			SessionErrors.add(
 				actionRequest, PrincipalException.class.getName());
 
-			setForward(actionRequest, "portlet.enterprise_admin.error");
+			setForward(actionRequest, "portlet.monitoring.error");
 
 			return;
 		}

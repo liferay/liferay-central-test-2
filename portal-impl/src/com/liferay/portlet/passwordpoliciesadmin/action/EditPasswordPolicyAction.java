@@ -63,7 +63,7 @@ public class EditPasswordPolicyAction extends PortletAction {
 			if (e instanceof PrincipalException) {
 				SessionErrors.add(actionRequest, e.getClass().getName());
 
-				setForward(actionRequest, "portlet.enterprise_admin.error");
+				setForward(actionRequest, "portlet.password_policies_admin.error");
 			}
 			else if (e instanceof DuplicatePasswordPolicyException ||
 					 e instanceof PasswordPolicyNameException ||
@@ -101,7 +101,7 @@ public class EditPasswordPolicyAction extends PortletAction {
 
 				SessionErrors.add(renderRequest, e.getClass().getName());
 
-				return mapping.findForward("portlet.enterprise_admin.error");
+				return mapping.findForward("portlet.password_policies_admin.error");
 			}
 			else {
 				throw e;

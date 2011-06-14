@@ -57,7 +57,7 @@ public class EditPluginAction extends PortletAction {
 			if (e instanceof PrincipalException) {
 				SessionErrors.add(actionRequest, e.getClass().getName());
 
-				setForward(actionRequest, "portlet.enterprise_admin.error");
+				setForward(actionRequest, "portlet.plugins_admin.error");
 			}
 			else {
 				throw e;
