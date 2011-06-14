@@ -135,28 +135,30 @@ public class PingbackMethodImpl implements Method {
 
 			ServiceContext serviceContext = new ServiceContext();
 
+			String pingbackUserName = LanguageUtil.get(
+				LocaleUtil.getDefault(), "pingback");
+
+			serviceContext.setAttribute("pingbackUserName", pingbackUserName);
+
+			StringBundler sb = new StringBundler(5);
+
 			String layoutFullURL = PortalUtil.getLayoutFullURL(
 				groupId, PortletKeys.BLOGS);
 
-			serviceContext.setLayoutFullURL(layoutFullURL);
+			sb.append(layoutFullURL);
 
-			String emailUserName = LanguageUtil.get(
-				LocaleUtil.getDefault(), "pingback");
-
-			serviceContext.setAttribute("emailUserName", emailUserName);
+			sb.append(Portal.FRIENDLY_URL_SEPARATOR);
 
 			Portlet portlet = PortletLocalServiceUtil.getPortletById(
 				companyId, PortletKeys.BLOGS);
 
-			StringBundler sb = new StringBundler(5);
-
-			sb.append(layoutFullURL);
-			sb.append(Portal.FRIENDLY_URL_SEPARATOR);
 			sb.append(portlet.getFriendlyURLMapping());
 			sb.append(StringPool.SLASH);
 			sb.append(entry.getUrlTitle());
 
 			serviceContext.setAttribute("redirect", sb.toString());
+
+			serviceContext.setLayoutFullURL(layoutFullURL);
 
 			MBMessageLocalServiceUtil.addDiscussionMessage(
 				userId, StringPool.BLANK, groupId, className, classPK, threadId,

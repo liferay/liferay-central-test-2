@@ -1688,7 +1688,16 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		}
 
 		String contentURL = (String)serviceContext.getAttribute("redirect");
-		String userName = (String)serviceContext.getAttribute("emailUserName");
+
+		String userAddress = StringPool.BLANK;
+		String userName = (String)serviceContext.getAttribute(
+			"pingbackUserName");
+
+		if (Validator.isNull(userName)) {
+			userAddress = PortalUtil.getUserEmailAddress(message.getUserId());
+			userName = PortalUtil.getUserName(
+				message.getUserId(), StringPool.BLANK);
+		}
 
 		String fromName = PrefsPropsUtil.getString(
 			message.getCompanyId(), PropsKeys.ADMIN_EMAIL_FROM_NAME);
@@ -1699,15 +1708,6 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			message.getCompanyId(), PropsKeys.DISCUSSION_EMAIL_SUBJECT);
 		String body = PrefsPropsUtil.getContent(
 			message.getCompanyId(), PropsKeys.DISCUSSION_EMAIL_BODY);
-
-		String userAddress = StringPool.BLANK;
-
-		if (Validator.isNull(userName)) {
-			userAddress = PortalUtil.getUserEmailAddress(message.getUserId());
-
-			userName = PortalUtil.getUserName(
-				message.getUserId(), StringPool.BLANK);
-		}
 
 		SubscriptionSender subscriptionSender = new SubscriptionSender();
 
