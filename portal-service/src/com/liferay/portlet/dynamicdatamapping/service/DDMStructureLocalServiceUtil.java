@@ -336,6 +336,12 @@ public class DDMStructureLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.dynamicdatamapping.model.DDMStructure> getClassStructures(
+		long classNameId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getClassStructures(classNameId);
+	}
+
+	public static java.util.List<com.liferay.portlet.dynamicdatamapping.model.DDMStructure> getClassStructures(
 		long classNameId, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getClassStructures(classNameId, start, end);

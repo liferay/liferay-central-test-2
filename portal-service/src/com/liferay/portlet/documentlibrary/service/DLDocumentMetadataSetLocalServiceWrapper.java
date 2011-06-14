@@ -266,12 +266,24 @@ public class DLDocumentMetadataSetLocalServiceWrapper
 
 	public void updateDocumentMetadataSets(long documentTypeId,
 		long fileVersionId,
-		java.util.Map<java.lang.Long, com.liferay.portlet.dynamicdatamapping.storage.Fields> fieldsMap,
+		java.util.Map<java.lang.String, com.liferay.portlet.dynamicdatamapping.storage.Fields> fieldsMap,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		_dlDocumentMetadataSetLocalService.updateDocumentMetadataSets(documentTypeId,
 			fileVersionId, fieldsMap, serviceContext);
+	}
+
+	public void updateDocumentMetadataSets(long companyId, long documentTypeId,
+		long fileVersionId,
+		java.util.Map<java.lang.String, com.liferay.portlet.dynamicdatamapping.storage.Fields> fieldsMap,
+		java.util.List<com.liferay.portlet.dynamicdatamapping.model.DDMStructure> ddmStructures,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		_dlDocumentMetadataSetLocalService.updateDocumentMetadataSets(companyId,
+			documentTypeId, fileVersionId, fieldsMap, ddmStructures,
+			serviceContext);
 	}
 
 	public DLDocumentMetadataSetLocalService getWrappedDLDocumentMetadataSetLocalService() {
