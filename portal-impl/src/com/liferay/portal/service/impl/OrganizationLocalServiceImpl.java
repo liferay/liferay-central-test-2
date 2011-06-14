@@ -842,6 +842,8 @@ public class OrganizationLocalServiceImpl
 		Organization organization = organizationPersistence.findByPrimaryKey(
 			organizationId);
 
+		String oldName = organization.getName();
+
 		organization.setParentOrganizationId(parentOrganizationId);
 		organization.setName(name);
 		organization.setType(type);
@@ -857,7 +859,16 @@ public class OrganizationLocalServiceImpl
 
 		Group group = organization.getGroup();
 
-		groupLocalService.updateSite(group.getGroupId(), site);
+		if (!oldName.equals(name)) {
+			groupLocalService.updateGroup(
+				group.getGroupId(),  name, group.getDescription(),
+				group.getType(), group.getFriendlyURL(), group.isActive(),
+				null);
+		}
+
+		if (group.isSite() != site) {
+			groupLocalService.updateSite(group.getGroupId(), site);
+		}
 
 		// Asset
 

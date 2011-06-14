@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Organization;
+import com.liferay.portal.upgrade.v4_3_0.util.ClassPKContainer;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -25,10 +26,54 @@ import java.sql.ResultSet;
 
 /**
  * @author Hugo Huijser
+ * @author Jorge Ferrer
  */
 public class UpgradeGroup extends UpgradeProcess {
 
 	protected void doUpgrade() throws Exception {
+		updateName();
+		updateSite();
+	}
+
+	protected void updateName() throws Exception {
+		long organizationClassNameId = getClassNameId(
+			Organization.class.getName());
+
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			con = DataAccess.getConnection();
+
+			String sql =
+				"select Group_.groupId, Group_.classPK, Organization_.name " +
+					"from Group_ inner join Organization_ on " +
+						"Organization_.organizationId = Group_.classPK where " +
+							"classNameId = ?";
+
+			ps = con.prepareStatement(sql);
+
+			ps.setLong(1, organizationClassNameId);
+
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				long groupId = rs.getLong("groupId");
+				long classPK = rs.getLong("classPK");
+				long organizationName = rs.getLong("Organization_.name");
+
+				runSQL(
+					"update Group_ set name = '" + classPK + _LFR_ORGANIZATION +
+						organizationName + "' where groupId = " + groupId);
+			}
+		}
+		finally {
+			DataAccess.cleanUp(con, ps, rs);
+		}
+	}
+
+	protected void updateSite() throws Exception {
 		long groupClassNameId = getClassNameId(Group.class.getName());
 
 		runSQL(
@@ -93,5 +138,7 @@ public class UpgradeGroup extends UpgradeProcess {
 			DataAccess.cleanUp(con, ps, rs);
 		}
 	}
+
+	private static final String _LFR_ORGANIZATION = " _LFR_ORGANIZATION_ ";
 
 }

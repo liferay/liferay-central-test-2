@@ -135,6 +135,9 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 			classNameId = groupClassNameId;
 			classPK = groupId;
 		}
+		else if (className.equals(Organization.class.getName())) {
+			name = getOrgGroupName(classPK, name);
+		}
 		else if (!GroupConstants.USER_PERSONAL_SITE.equals(name)) {
 			name = String.valueOf(classPK);
 		}
@@ -1294,6 +1297,10 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		return FriendlyURLNormalizer.normalize(friendlyURL);
 	}
 
+	protected String getOrgGroupName(long classPK, String name) {
+		return classPK + _LFR_ORGANIZATION + name;
+	}
+
 	protected String getRealName(long companyId, String name)
 		throws SystemException {
 
@@ -1577,7 +1584,8 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		if ((Validator.isNull(name)) || (Validator.isNumber(name)) ||
-			(name.indexOf(CharPool.STAR) != -1)) {
+			(name.indexOf(CharPool.STAR) != -1) ||
+			(name.indexOf(_LFR_ORGANIZATION) != -1)) {
 
 			throw new GroupNameException();
 		}
@@ -1592,6 +1600,8 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		catch (NoSuchGroupException nsge) {
 		}
 	}
+
+	private static final String _LFR_ORGANIZATION = " _LFR_ORGANIZATION_ ";
 
 	protected File publicLARFile;
 
