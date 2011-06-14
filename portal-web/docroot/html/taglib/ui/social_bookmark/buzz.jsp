@@ -27,8 +27,16 @@ else if (displayStyle.equals("vertical")) {
 }
 %>
 
-<liferay-util:html-bottom outputKey="buzz">
-	<script type="text/javascript" src="http://www.google.com/buzz/api/button.js"></script>
+<liferay-util:html-bottom outputKey="taglib_ui_social_bookmark_buzz">
+	<script src="http://www.google.com/buzz/api/button.js" type="text/javascript"></script>
 </liferay-util:html-bottom>
 
-<a class="google-buzz-button" data-button-style="<%= buzzDisplayStyle %>" data-locale="<%= locale.getLanguage() %>" data-url="<%= url %>" href="http://www.google.com/buzz/post"  title="<liferay-ui:message key="publish-in-google-buzz" />"></a>
+<a
+	class="google-buzz-button"
+	data-button-style="<%= buzzDisplayStyle %>"
+	data-locale="<%= locale.getLanguage() %>"
+	data-url="<%= url %>"
+	href="http://www.google.com/buzz/post"
+	title="<liferay-ui:message key="publish-in-google-buzz" />"
+>
+</a>

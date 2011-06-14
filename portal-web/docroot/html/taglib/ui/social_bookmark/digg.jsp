@@ -27,8 +27,12 @@ else if (displayStyle.equals("vertical")) {
 }
 %>
 
-<liferay-util:html-bottom outputKey="digg">
+<liferay-util:html-bottom outputKey="taglib_ui_social_bookmark_digg">
 	<script type="text/javascript" src="http://widgets.digg.com/buttons.js"></script>
 </liferay-util:html-bottom>
 
-<a class="DiggThisButton <%= diggDisplayStyle %>" href="http://digg.com/submit?url=<%= HttpUtil.encodeURL(url) %>&amp;title=<%= HttpUtil.encodeURL(title) %>"></a>
+<a
+	class="DiggThisButton <%= diggDisplayStyle %>"
+	href="http://digg.com/submit?url=<%= HttpUtil.encodeURL(url) %>&amp;title=<%= HttpUtil.encodeURL(title) %>"
+>
+</a>

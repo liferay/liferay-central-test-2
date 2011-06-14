@@ -26,15 +26,15 @@ if (displayStyle.equals("vertical")) {
 
 <c:choose>
 	<c:when test='<%= displayStyle.equals("simple") %>'>
-		<a href="http://www.reddit.com/submit" onclick="window.location = 'http://www.reddit.com/submit?url=' + encodeURIComponent('<%= url %>'); return false" title="<liferay-ui:message key="submit-to-reddit" />"> <img src="http://www.reddit.com/static/spreddit7.gif" alt='<liferay-ui:message key="submit-to-reddit" />' border="0" /> </a>
+		<a href="http://www.reddit.com/submit" onclick="window.location = 'http://www.reddit.com/submit?url=' + encodeURIComponent('<%= url %>'); return false" title="<liferay-ui:message key="submit-to-reddit" />"><img alt="<liferay-ui:message key="submit-to-reddit" />" border="0" src="http://www.reddit.com/static/spreddit7.gif" /></a>
 	</c:when>
 	<c:otherwise>
 		<script type="text/javascript">
-			reddit_newwindow='1';
+			reddit_newwindow = '1';
 			reddit_title = '<%= title %>';
 			reddit_url = '<%= url %>';
 		</script>
 
-		<script type="text/javascript" src="http://www.reddit.com/static/button/<%= redditDisplayStyle %>.js"></script>
+		<script src="http://www.reddit.com/static/button/<%= redditDisplayStyle %>.js" type="text/javascript"></script>
 	</c:otherwise>
 </c:choose>

@@ -24,7 +24,7 @@ if (displayStyle.equals("vertical")) {
 }
 %>
 
-<liferay-util:html-bottom outputKey="plusone">
+<liferay-util:html-bottom outputKey="taglib_ui_social_bookmark_plusone">
 	<script type="text/javascript" src="https://apis.google.com/js/plusone.js">
 		{
 			lang: '<%= locale.getDisplayLanguage() %>'
@@ -32,4 +32,9 @@ if (displayStyle.equals("vertical")) {
 	</script>
 </liferay-util:html-bottom>
 
-<g:plusone count="<%= !displayStyle.equals("simple") %>" size="<%= plusOneDisplayStyle %>" href="<%= url %>"></g:plusone>
+<g:plusone
+	count="<%= !displayStyle.equals("simple") %>"
+	href="<%= url %>"
+	size="<%= plusOneDisplayStyle %>"
+>
+</g:plusone>

@@ -75,8 +75,16 @@ public class SocialBookmarkTag extends IncludeTag {
 	}
 
 	protected void setAttributes(HttpServletRequest request) {
-		_jspPath = PropsUtil.get(
-			PropsKeys.SOCIAL_BOOKMARK_JSP, new Filter(_type));
+		String jspPath = _jspPaths.get(_type);
+
+		if (jspPath == null) {
+			jspPath = PropsUtil.get(
+				PropsKeys.SOCIAL_BOOKMARK_JSP, new Filter(_type));
+
+			_jspPaths.put(_type, jspPath);
+		}
+
+		_jspPath = jspPath;
 
 		if (Validator.isNull(_jspPath)) {
 			request.setAttribute(
@@ -103,6 +111,9 @@ public class SocialBookmarkTag extends IncludeTag {
 
 	private static final String _PAGE =
 		"/html/taglib/ui/social_bookmark/page.jsp";
+
+	private static Map<String, String> _jspPaths =
+		new HashMap<String, String>();
 
 	private String _jspPath;
 	private String _target;
