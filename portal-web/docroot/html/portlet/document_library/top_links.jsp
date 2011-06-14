@@ -17,7 +17,7 @@
 <%@ include file="/html/portlet/document_library_display/init.jsp" %>
 
 <c:choose>
-	<c:when test="<%= showTabs && (portletName.equals(PortletKeys.DOCUMENT_LIBRARY) || portletName.equals(PortletKeys.DOCUMENT_LIBRARY_DISPLAY)) %>">
+	<c:when test="<%= showTabs && portletName.equals(PortletKeys.DOCUMENT_LIBRARY_DISPLAY) %>">
 
 		<%
 		String topLink = ParamUtil.getString(request, "topLink", "documents-home");
@@ -109,7 +109,7 @@
 			</div>
 		</div>
 	</c:when>
-	<c:when test="<%= showTabs && showSubfolders %>">
+	<c:when test="<%= showTabs && showSubfolders && !portletName.equals(PortletKeys.DOCUMENT_LIBRARY) %>">
 		<liferay-ui:header
 			title="documents-home"
 		/>
