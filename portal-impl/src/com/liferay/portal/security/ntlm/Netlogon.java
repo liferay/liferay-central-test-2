@@ -39,11 +39,6 @@ import jcifs.smb.SmbException;
  */
 public class Netlogon {
 
-	static {
-		DcerpcBinding.addInterface(
-			"netlogon", "12345678-1234-abcd-ef00-01234567cffb:1.0");
-	}
-
 	public NtlmUserAccount logon(
 			String domain, String userName, String workstation,
 			byte[] serverChallenge,	byte[] ntResponse, byte[] lmResponse)
@@ -129,5 +124,10 @@ public class Netlogon {
 	private String _domainControllerName;
 	private NtlmServiceAccount _ntlmServiceAccount;
 	private SecureRandom _secureRandom = new SecureRandom();
+
+	static {
+		DcerpcBinding.addInterface(
+			"netlogon", "12345678-1234-abcd-ef00-01234567cffb:1.0");
+	}
 
 }

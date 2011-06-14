@@ -222,6 +222,9 @@ public class LayoutStagingHandler implements InvocationHandler {
 	private static Set<String> _layoutRevisionMethodNames =
 		new HashSet<String>();
 
+	private Layout _layout;
+	private LayoutRevision _layoutRevision;
+
 	static {
 		_layoutRevisionMethodNames.add("getColorSchemeId");
 		_layoutRevisionMethodNames.add("getCss");
@@ -260,8 +263,5 @@ public class LayoutStagingHandler implements InvocationHandler {
 		_layoutRevisionMethodNames.add("setWapColorSchemeId");
 		_layoutRevisionMethodNames.add("setWapThemeId");
 	}
-
-	private Layout _layout;
-	private LayoutRevision _layoutRevision;
 
 }
