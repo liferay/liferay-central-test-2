@@ -37,7 +37,13 @@ public class IconDeleteTag extends IconTag {
 			return _PAGE;
 		}
 
+		setImage("delete");
+
 		String url = getUrl();
+
+		if (url.startsWith("javascript:if (confirm('")) {
+			return super.getPage();
+		}
 
 		if (url.startsWith("javascript:")) {
 			url = url.substring(11);
@@ -77,7 +83,6 @@ public class IconDeleteTag extends IconTag {
 
 		url = sb.toString();
 
-		setImage("delete");
 		setUrl(url);
 
 		return super.getPage();
