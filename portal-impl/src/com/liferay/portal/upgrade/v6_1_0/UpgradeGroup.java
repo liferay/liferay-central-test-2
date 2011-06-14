@@ -16,9 +16,10 @@ package com.liferay.portal.upgrade.v6_1_0;
 
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.model.Group;
+import com.liferay.portal.model.GroupConstants;
 import com.liferay.portal.model.Organization;
-import com.liferay.portal.upgrade.v4_3_0.util.ClassPKContainer;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -46,11 +47,14 @@ public class UpgradeGroup extends UpgradeProcess {
 		try {
 			con = DataAccess.getConnection();
 
-			String sql =
-				"select Group_.groupId, Group_.classPK, Organization_.name " +
-					"from Group_ inner join Organization_ on " +
-						"Organization_.organizationId = Group_.classPK where " +
-							"classNameId = ?";
+			StringBundler sb = new StringBundler(4);
+
+			sb.append("select Group_.groupId, Group_.classPK, ");
+			sb.append("Organization_.name from Group_ inner join ");
+			sb.append("Organization_ on Organization_.organizationId = ");
+			sb.append("Group_.classPK where classNameId = ?");
+
+			String sql = sb.toString();
 
 			ps = con.prepareStatement(sql);
 
@@ -61,11 +65,12 @@ public class UpgradeGroup extends UpgradeProcess {
 			while (rs.next()) {
 				long groupId = rs.getLong("groupId");
 				long classPK = rs.getLong("classPK");
-				long organizationName = rs.getLong("Organization_.name");
+				long name = rs.getLong("Organization_.name");
 
 				runSQL(
-					"update Group_ set name = '" + classPK + _LFR_ORGANIZATION +
-						organizationName + "' where groupId = " + groupId);
+					"update Group_ set name = '" + classPK +
+						GroupConstants.ORGANIZATION_NAME_DELIMETER + name +
+						"' where groupId = " + groupId);
 			}
 		}
 		finally {
@@ -138,7 +143,5 @@ public class UpgradeGroup extends UpgradeProcess {
 			DataAccess.cleanUp(con, ps, rs);
 		}
 	}
-
-	private static final String _LFR_ORGANIZATION = " _LFR_ORGANIZATION_ ";
 
 }

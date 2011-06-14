@@ -31,6 +31,9 @@ public class GroupConstants {
 
 	public static final String GUEST = "Guest";
 
+	public static final String ORGANIZATION_NAME_DELIMETER =
+		" LFR_ORGANIZATION ";
+
 	public static final String[] SYSTEM_GROUPS = {
 		CONTROL_PANEL, GUEST, GroupConstants.USER_PERSONAL_SITE
 	};
