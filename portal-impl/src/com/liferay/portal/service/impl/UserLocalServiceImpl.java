@@ -434,9 +434,8 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	 *         their new account
 	 * @param  serviceContext the user's service context (optionally
 	 *         <code>null</code>). Can specify the user's universally unique
-	 *         identifier (with the <code>uuid</code> attribute), replacement
-	 *         asset category IDs, replacement asset tag names, and new expando
-	 *         bridge attributes.
+	 *         identifier (with the <code>uuid</code> attribute), asset category
+	 *         IDs, asset tag names, and expando bridge attributes.
 	 * @return the new user
 	 * @throws PortalException if the user's information was invalid
 	 * @throws SystemException if a system exception occurred
@@ -536,9 +535,8 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	 *         their new account
 	 * @param  serviceContext the user's service context (optionally
 	 *         <code>null</code>). Can specify the user's universally unique
-	 *         identifier (with the <code>uuid</code> attribute), replacement
-	 *         asset category IDs, replacement asset tag names, and new expando
-	 *         bridge attributes.
+	 *         identifier (with the <code>uuid</code> attribute), asset category
+	 *         IDs, asset tag names, and expando bridge attributes.
 	 * @return the new user
 	 * @throws PortalException if the user's information was invalid
 	 * @throws SystemException if a system exception occurred
@@ -2764,7 +2762,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	 * @param  sendEmail whether to send the user an email notification about
 	 *         their new account
 	 * @param  serviceContext the user's service context (optionally
-	 *         <code>null</code>). Can specify the user's new expando bridge
+	 *         <code>null</code>). Can specify the user's expando bridge
 	 *         attributes.
 	 * @return the user
 	 * @throws PortalException if the user's information was invalid
