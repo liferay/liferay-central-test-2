@@ -70,6 +70,7 @@ public class JSONWebServiceActionParameters {
 
 	private void _collectDefaultsFromRequestAttributes(
 		HttpServletRequest request) {
+
 		Enumeration<String> enu = request.getAttributeNames();
 
 		while (enu.hasMoreElements()) {
