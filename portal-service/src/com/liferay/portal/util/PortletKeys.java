@@ -180,6 +180,8 @@ public class PortletKeys {
 
 	public static final String RECENT_BLOGGERS = "114";
 
+	public static final String RECENT_CONTENT = "173";
+
 	public static final String RECENT_DOCUMENTS = "64";
 
 	public static final String REQUESTS = "121";
@@ -199,8 +201,6 @@ public class PortletKeys {
 	public static final String STAGING_BAR = "170";
 
 	public static final String STOCKS = "12";
-
-	public static final String SUMMARY = "173";
 
 	public static final String TAGS_ADMIN = "99";
 
