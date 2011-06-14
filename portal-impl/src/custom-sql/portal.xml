@@ -160,7 +160,14 @@
 	<sql id="com.liferay.portal.service.persistence.GroupFinder.joinByGroupOrg">
 		<![CDATA[
 			WHERE
-				(Group_.classPK in (select organizationId from Users_Orgs where userId = ?))
+				Group_.classPK IN (
+					SELECT
+						organizationId
+					FROM
+						Users_Orgs
+					WHERE
+						userId = ?
+				)
 		]]>
 	</sql>
 	<sql id="com.liferay.portal.service.persistence.GroupFinder.joinByGroupsOrgs">
