@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.ServiceContext;
+import com.liferay.portlet.dynamicdatamapping.RequiredStructureException;
 import com.liferay.portlet.dynamicdatamapping.StructureDuplicateElementException;
 import com.liferay.portlet.dynamicdatamapping.StructureDuplicateStructureKeyException;
 import com.liferay.portlet.dynamicdatamapping.StructureNameException;
@@ -140,6 +141,12 @@ public class DDMStructureLocalServiceImpl
 	public void deleteStructure(DDMStructure structure)
 		throws PortalException, SystemException {
 
+		if (ddmStructureLinkPersistence.countByStructureId(
+				structure.getStructureId()) > 0) {
+
+			throw new RequiredStructureException();
+		}
+
 		// Structure
 
 		ddmStructurePersistence.remove(structure);
@@ -149,11 +156,6 @@ public class DDMStructureLocalServiceImpl
 		resourceLocalService.deleteResource(
 			structure.getCompanyId(), DDMStructure.class.getName(),
 			ResourceConstants.SCOPE_INDIVIDUAL, structure.getStructureId());
-
-		// Structure links
-
-		ddmStructureLinkLocalService.deleteStructureStructureLinks(
-			structure.getStructureId());
 	}
 
 	public void deleteStructure(long structureId)

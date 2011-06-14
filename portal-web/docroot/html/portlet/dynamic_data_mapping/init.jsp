@@ -23,6 +23,7 @@
 <%@ page import="com.liferay.portlet.dynamicdatamapping.model.DDMTemplate" %>
 <%@ page import="com.liferay.portlet.dynamicdatamapping.model.DDMTemplateConstants" %>
 <%@ page import="com.liferay.portlet.dynamicdatamapping.NoSuchStructureException" %>
+<%@ page import="com.liferay.portlet.dynamicdatamapping.RequiredStructureException" %>
 <%@ page import="com.liferay.portlet.dynamicdatamapping.search.StructureDisplayTerms" %>
 <%@ page import="com.liferay.portlet.dynamicdatamapping.search.StructureSearch" %>
 <%@ page import="com.liferay.portlet.dynamicdatamapping.search.StructureSearchTerms" %>

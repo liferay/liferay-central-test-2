@@ -24,10 +24,12 @@ import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.ActionRequestImpl;
 import com.liferay.portlet.PortletURLImpl;
 import com.liferay.portlet.dynamicdatamapping.NoSuchStructureException;
+import com.liferay.portlet.dynamicdatamapping.RequiredStructureException;
 import com.liferay.portlet.dynamicdatamapping.StructureDuplicateElementException;
 import com.liferay.portlet.dynamicdatamapping.StructureNameException;
 import com.liferay.portlet.dynamicdatamapping.StructureXsdException;
@@ -98,11 +100,21 @@ public class EditStructureAction extends PortletAction {
 
 				setForward(actionRequest, "portlet.dynamic_data_mapping.error");
 			}
-			else if (e instanceof StructureDuplicateElementException ||
+			else if (e instanceof RequiredStructureException ||
+					 e instanceof StructureDuplicateElementException ||
 					 e instanceof StructureNameException ||
 					 e instanceof StructureXsdException) {
 
 				SessionErrors.add(actionRequest, e.getClass().getName(), e);
+
+				if (e instanceof RequiredStructureException) {
+					String redirect = PortalUtil.escapeRedirect(
+						ParamUtil.getString(actionRequest, "redirect"));
+
+					if (Validator.isNotNull(redirect)) {
+						actionResponse.sendRedirect(redirect);
+					}
+				}
 			}
 			else {
 				throw e;

@@ -25,6 +25,8 @@ portletURL.setParameter("struts_action", "/dynamic_data_mapping/view");
 portletURL.setParameter("tabs1", tabs1);
 %>
 
+<liferay-ui:error exception="<%= RequiredStructureException.class %>" message="required-structures-could-not-be-deleted" />
+
 <c:if test="<%= showToolbar %>">
 	<liferay-util:include page="/html/portlet/dynamic_data_mapping/toolbar.jsp">
 		<liferay-util:param name="toolbarItem" value="view-all" />
