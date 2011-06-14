@@ -127,7 +127,6 @@ String tabs1 = (String)objArray[1];
 		/>
 	</c:if>
 
-
 	<c:choose>
 		<c:when test='<%= tabs1.equals("sites-owned") || tabs1.equals("sites-joined") %>'>
 			<c:if test="<%= (group.getType() == GroupConstants.TYPE_SITE_OPEN) || (group.getType() == GroupConstants.TYPE_SITE_RESTRICTED) %>">
