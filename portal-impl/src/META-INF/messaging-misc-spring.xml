@@ -38,6 +38,9 @@
 	<bean id="destination.document_library_pdf_processor" class="com.liferay.portal.kernel.messaging.SerialDestination">
 		<property name="name" value="liferay/document_library_pdf_processor" />
 	</bean>
+	<bean id="destination.document_library_video_processor" class="com.liferay.portal.kernel.messaging.SerialDestination">
+		<property name="name" value="liferay/document_library_video_processor" />
+	</bean>
 	<bean id="destination.flags" class="com.liferay.portal.kernel.messaging.ParallelDestination">
 		<property name="name" value="liferay/flags" />
 	</bean>
@@ -66,6 +69,7 @@
 	<bean id="messageListener.buffered_increment" class="com.liferay.portal.increment.BufferedIncrementMessageListener" />
 	<bean id="messageListener.convert_process" class="com.liferay.portal.convert.messaging.ConvertProcessMessageListener" />
 	<bean id="messageListener.document_library_pdf_processor" class="com.liferay.portlet.documentlibrary.messaging.PDFProcessorMessageListener" />
+	<bean id="messageListener.document_library_video_processor" class="com.liferay.portlet.documentlibrary.messaging.VideoProcessorMessageListener" />
 	<bean id="messageListener.flags" class="com.liferay.portlet.flags.messaging.FlagsRequestMessageListener" />
 	<bean id="messageListener.hot_deploy" class="com.liferay.portal.deploy.hot.messaging.HotDeployMessageListener" />
 	<bean id="messageListener.layouts_local_publisher" class="com.liferay.portal.kernel.scheduler.messaging.SchedulerEventMessageListenerWrapper">
@@ -110,6 +114,7 @@
 				<ref bean="destination.buffered_increment_serial" />
 				<ref bean="destination.convert_process" />
 				<ref bean="destination.document_library_pdf_processor" />
+				<ref bean="destination.document_library_video_processor" />
 				<ref bean="destination.flags" />
 				<ref bean="destination.hot_deploy" />
 				<ref bean="destination.layouts_local_publisher" />
@@ -147,6 +152,11 @@
 				<entry key="liferay/document_library_pdf_processor">
 					<list value-type="com.liferay.portal.kernel.messaging.MessageListener">
 						<ref bean="messageListener.document_library_pdf_processor" />
+					</list>
+				</entry>
+				<entry key="liferay/document_library_video_processor">
+					<list value-type="com.liferay.portal.kernel.messaging.MessageListener">
+						<ref bean="messageListener.document_library_video_processor" />
 					</list>
 				</entry>
 				<entry key="liferay/flags">

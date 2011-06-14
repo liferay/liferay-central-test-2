@@ -513,16 +513,20 @@ public interface PropsKeys {
 
 	public static final String DL_FILE_ENTRY_DRAFTS_ENABLED = "dl.file.entry.drafts.enabled";
 
-	public static final String DL_FILE_ENTRY_PREVIEW_DEPTH = "dl.file.entry.preview.depth";
+	public static final String DL_FILE_ENTRY_PREVIEW_DOCUMENT_DEPTH = "dl.file.entry.preview.document.depth";
 
-	public static final String DL_FILE_ENTRY_PREVIEW_DPI = "dl.file.entry.preview.dpi";
+	public static final String DL_FILE_ENTRY_PREVIEW_DOCUMENT_DPI = "dl.file.entry.preview.document.dpi";
 
 	public static final String DL_FILE_ENTRY_PREVIEW_ENABLED = "dl.file.entry.preview.enabled";
 
-	public static final String DL_FILE_ENTRY_PREVIEW_HEIGHT = "dl.file.entry.preview.height";
+	public static final String DL_FILE_ENTRY_PREVIEW_DOCUMENT_HEIGHT = "dl.file.entry.preview.document.height";
 
-	public static final String DL_FILE_ENTRY_PREVIEW_WIDTH = "dl.file.entry.preview.width";
+	public static final String DL_FILE_ENTRY_PREVIEW_DOCUMENT_WIDTH = "dl.file.entry.preview.document.width";
 
+	public static final String DL_FILE_ENTRY_PREVIEW_VIDEO_HEIGHT = "dl.file.entry.preview.video.height";
+
+	public static final String DL_FILE_ENTRY_PREVIEW_VIDEO_WIDTH = "dl.file.entry.preview.video.width";
+    
 	public static final String DL_FILE_ENTRY_READ_COUNT_ENABLED = "dl.file.entry.read.count.enabled";
 
 	public static final String DL_FILE_ENTRY_THUMBNAIL_DEPTH = "dl.file.entry.thumbnail.depth";
@@ -748,6 +752,8 @@ public interface PropsKeys {
 	public static final String IMAGE_HOOK_IMPL = "image.hook.impl";
 
 	public static final String IMAGEMAGICK_ENABLED = "imagemagick.enabled";
+
+	public static final String XUGGLER_ENABLED = "xuggler.enabled";
 
 	public static final String IMAGEMAGICK_GLOBAL_SEARCH_PATH = "imagemagick.global.search.path";
 

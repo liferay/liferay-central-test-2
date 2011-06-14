@@ -45,6 +45,9 @@ public interface DestinationNames {
 	public static final String DOCUMENT_LIBRARY_PDF_PROCESSOR =
 		"liferay/document_library_pdf_processor";
 
+	public static final String DOCUMENT_LIBRARY_VIDEO_PROCESSOR =
+		"liferay/document_library_video_processor";
+
 	public static final String FLAGS = "liferay/flags";
 
 	/**

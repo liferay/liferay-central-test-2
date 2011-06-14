@@ -23,6 +23,8 @@ AssetRenderer assetRenderer = (AssetRenderer)request.getAttribute(WebKeys.ASSET_
 FileVersion fileVersion = (FileVersion)request.getAttribute(WebKeys.DOCUMENT_LIBRARY_FILE_VERSION);
 
 FileEntry fileEntry = fileVersion.getFileEntry();
+
+String src = themeDisplay.getPortalURL() + themeDisplay.getPathContext() + "/documents/" + themeDisplay.getScopeGroupId() + StringPool.SLASH + fileEntry.getFolderId() + StringPool.SLASH + HttpUtil.encodeURL(HtmlUtil.unescape(fileEntry.getTitle())) + "?version=" + fileEntry.getVersion();
 %>
 
 <c:if test="<%= fileVersion.isApproved() %>">
@@ -30,7 +32,14 @@ FileEntry fileEntry = fileVersion.getFileEntry();
 		<c:choose>
 			<c:when test="<%= PDFProcessorUtil.hasImages(fileEntry) %>">
 				<div>
-					<img src="<%= themeDisplay.getPortalURL() + themeDisplay.getPathContext() + "/documents/" + themeDisplay.getScopeGroupId() + StringPool.SLASH + fileEntry.getFolderId() + StringPool.SLASH + HttpUtil.encodeURL(HtmlUtil.unescape(fileEntry.getTitle())) + "?version=" + fileEntry.getVersion() + "&thumbnail=1" %>" />
+					<img src="<%= src + "&documentThumbnail=1" %>" />
+
+					<%= fileVersion.getTitle() %>
+				</div>
+			</c:when>
+			<c:when test="<%= VideoProcessorUtil.hasVideo(fileEntry) %>">
+				<div>
+					<img src="<%= src + "&videoThumbnail=1" %>" />
 
 					<%= fileVersion.getTitle() %>
 				</div>

@@ -173,10 +173,10 @@ public class PDFProcessorUtil {
 
 			if (_isGeneratePreview(id)) {
 				_generateImagesIM(
-					file, id, PropsValues.DL_FILE_ENTRY_PREVIEW_DEPTH,
-					PropsValues.DL_FILE_ENTRY_PREVIEW_DPI,
-					PropsValues.DL_FILE_ENTRY_PREVIEW_HEIGHT,
-					PropsValues.DL_FILE_ENTRY_PREVIEW_WIDTH, false);
+					file, id, PropsValues.DL_FILE_ENTRY_PREVIEW_DOCUMENT_DEPTH,
+					PropsValues.DL_FILE_ENTRY_PREVIEW_DOCUMENT_DPI,
+					PropsValues.DL_FILE_ENTRY_PREVIEW_DOCUMENT_HEIGHT,
+					PropsValues.DL_FILE_ENTRY_PREVIEW_DOCUMENT_WIDTH, false);
 
 				// ImageMagick converts single page PDFs without appending an
 				// index. Rename file for consistency.
@@ -274,9 +274,11 @@ public class PDFProcessorUtil {
 					}
 
 					_generateImagesPB(
-						pdPage, id, PropsValues.DL_FILE_ENTRY_PREVIEW_DPI,
-						PropsValues.DL_FILE_ENTRY_PREVIEW_HEIGHT,
-						PropsValues.DL_FILE_ENTRY_PREVIEW_WIDTH, false, i + 1);
+						pdPage, id,
+						PropsValues.DL_FILE_ENTRY_PREVIEW_DOCUMENT_DPI,
+						PropsValues.DL_FILE_ENTRY_PREVIEW_DOCUMENT_HEIGHT,
+						PropsValues.DL_FILE_ENTRY_PREVIEW_DOCUMENT_WIDTH, false,
+						i + 1);
 				}
 
 				if (_log.isInfoEnabled() && generatePreview) {

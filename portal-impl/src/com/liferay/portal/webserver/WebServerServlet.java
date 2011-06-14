@@ -58,6 +58,7 @@ import com.liferay.portlet.documentlibrary.service.DLAppServiceUtil;
 import com.liferay.portlet.documentlibrary.util.DLUtil;
 import com.liferay.portlet.documentlibrary.util.DocumentConversionUtil;
 import com.liferay.portlet.documentlibrary.util.PDFProcessorUtil;
+import com.liferay.portlet.documentlibrary.util.VideoProcessorUtil;
 import com.liferay.util.servlet.ServletResponseUtil;
 
 import java.io.File;
@@ -362,9 +363,14 @@ public class WebServerServlet extends HttpServlet {
 
 		String targetExtension = ParamUtil.getString(
 			request, "targetExtension");
-		boolean thumbnail = ParamUtil.getBoolean(request, "thumbnail");
+		boolean documentThumbnail = ParamUtil.getBoolean(
+			request, "documentThumbnail");
 		int previewFileIndex = ParamUtil.getInteger(
 			request, "previewFileIndex");
+
+		boolean videoPreview = ParamUtil.getBoolean(request, "videoPreview");
+		boolean videoThumbnail = ParamUtil.getBoolean(
+			request, "videoThumbnail");
 
 		if (Validator.isNotNull(targetExtension)) {
 			File convertedFile = DocumentConversionUtil.convert(
@@ -379,7 +385,7 @@ public class WebServerServlet extends HttpServlet {
 				converted = true;
 			}
 		}
-		else if (thumbnail) {
+		else if (documentThumbnail) {
 			File thumbnailFile = PDFProcessorUtil.getThumbnailFile(tempFileId);
 
 			inputStream = new FileInputStream(thumbnailFile);
@@ -397,6 +403,28 @@ public class WebServerServlet extends HttpServlet {
 
 			fileName = FileUtil.stripExtension(fileName).concat(
 				StringPool.PERIOD).concat(PDFProcessorUtil.PREVIEW_TYPE);
+
+			converted = true;
+		}
+		else if (videoPreview) {
+			File previewFile = VideoProcessorUtil.getPreviewFile(tempFileId);
+
+			inputStream = new FileInputStream(previewFile);
+
+			fileName = FileUtil.stripExtension(fileName).concat(
+				StringPool.PERIOD).concat(VideoProcessorUtil.PREVIEW_TYPE);
+
+			converted = true;
+		}
+		else if (videoThumbnail) {
+			File thumbnailFile = VideoProcessorUtil.getThumbnailFile(
+				tempFileId);
+
+			inputStream = new FileInputStream(thumbnailFile);
+
+			fileName = FileUtil.stripExtension(fileName).concat(
+				StringPool.PERIOD).concat(
+					VideoProcessorUtil.THUMBNAIL_TYPE);
 
 			converted = true;
 		}

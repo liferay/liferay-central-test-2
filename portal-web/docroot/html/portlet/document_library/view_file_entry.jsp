@@ -175,7 +175,10 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 						String thumbnailSrc = themeDisplay.getPathThemeImages() + "/file_system/large/" + DLUtil.getGenericName(fileEntry.getExtension()) + ".png";
 
 						if (PDFProcessorUtil.hasImages(fileEntry)) {
-							thumbnailSrc = themeDisplay.getPortalURL() + themeDisplay.getPathContext() + "/documents/" + themeDisplay.getScopeGroupId() + StringPool.SLASH + fileEntry.getFolderId() + StringPool.SLASH + HttpUtil.encodeURL(fileEntry.getTitle()) + "?version=" + fileEntry.getVersion() + "&thumbnail=1";
+							thumbnailSrc = themeDisplay.getPortalURL() + themeDisplay.getPathContext() + "/documents/" + themeDisplay.getScopeGroupId() + StringPool.SLASH + fileEntry.getFolderId() + StringPool.SLASH + HttpUtil.encodeURL(fileEntry.getTitle()) + "?version=" + fileEntry.getVersion() + "&documentThumbnail=1";
+						}
+						else if (VideoProcessorUtil.hasVideo(fileEntry)){
+							thumbnailSrc = themeDisplay.getPortalURL() + themeDisplay.getPathContext() + "/documents/" + themeDisplay.getScopeGroupId() + StringPool.SLASH + fileEntry.getFolderId() + StringPool.SLASH + HttpUtil.encodeURL(fileEntry.getTitle()) + "?version=" + fileEntry.getVersion() + "&videoThumbnail=1";
 						}
 						%>
 
@@ -230,9 +233,25 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 					<div>
 
 						<%
-						int previewFileCount = PDFProcessorUtil.getPreviewFileCount(fileEntry);
+						int previewFileCount = 0;
 
-						String previewFileURL = themeDisplay.getPortalURL() + themeDisplay.getPathContext() + "/documents/" + themeDisplay.getScopeGroupId() + StringPool.SLASH + fileEntry.getFolderId() + StringPool.SLASH + HttpUtil.encodeURL(fileEntry.getTitle()) + "?version=" + fileEntry.getVersion() + "&previewFileIndex=";
+						String previewFileURL = null;
+						String videoThumbnailURL = null;
+
+						boolean isSupportedVideo = VideoProcessorUtil.isSupportedVideo(fileEntry);
+
+						if (isSupportedVideo) {
+							previewFileCount = (VideoProcessorUtil.hasVideo(fileEntry) ? 1 : 0);
+
+							previewFileURL = themeDisplay.getPortalURL() + themeDisplay.getPathContext() + "/documents/" + themeDisplay.getScopeGroupId() + StringPool.SLASH + fileEntry.getFolderId() + StringPool.SLASH + HttpUtil.encodeURL(fileEntry.getTitle()) + HtmlUtil.escapeURL("?version=") + fileEntry.getVersion() + HtmlUtil.escapeURL("&videoPreview=1");
+
+							videoThumbnailURL = themeDisplay.getPortalURL() + themeDisplay.getPathContext() + "/documents/" + themeDisplay.getScopeGroupId() + StringPool.SLASH + fileEntry.getFolderId() + StringPool.SLASH + HttpUtil.encodeURL(fileEntry.getTitle()) + HtmlUtil.escapeURL("?version=") + fileEntry.getVersion() + HtmlUtil.escapeURL("&videoThumbnail=1");
+						}
+						else {
+							previewFileCount = PDFProcessorUtil.getPreviewFileCount(fileEntry);
+
+							previewFileURL = themeDisplay.getPortalURL() + themeDisplay.getPathContext() + "/documents/" + themeDisplay.getScopeGroupId() + StringPool.SLASH + fileEntry.getFolderId() + StringPool.SLASH + HttpUtil.encodeURL(fileEntry.getTitle()) + "?version=" + fileEntry.getVersion() + "&previewFileIndex=";
+						}
 						%>
 
 						<c:choose>
@@ -242,42 +261,77 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 								</div>
 							</c:when>
 							<c:otherwise>
-								<div class="lfr-preview-file" id="<portlet:namespace />previewFile">
-									<div class="lfr-preview-file-content" id="<portlet:namespace />previewFileContent">
-										<div class="lfr-preview-file-image-current-column">
-											<div class="lfr-preview-file-image-container">
-												<img class="lfr-preview-file-image-current" id="<portlet:namespace />previewFileImage" src="<%= previewFileURL + "1" %>" />
+								<c:choose>
+									<c:when test ="<%= !isSupportedVideo %>">
+										<div class="lfr-preview-file" id="<portlet:namespace />previewFile">
+											<div class="lfr-preview-file-content" id="<portlet:namespace />previewFileContent">
+												<div class="lfr-preview-file-image-current-column">
+													<div class="lfr-preview-file-image-container">
+														<img class="lfr-preview-file-image-current" id="<portlet:namespace />previewFileImage" src="<%= previewFileURL + "1" %>" />
+													</div>
+													<span class="lfr-preview-file-actions aui-helper-hidden" id="<portlet:namespace />previewFileActions">
+														<span class="lfr-preview-file-toolbar" id="<portlet:namespace />previewToolbar"></span>
+
+														<span class="lfr-preview-file-info">
+															<span class="lfr-preview-file-index" id="<portlet:namespace />previewFileIndex">1</span> of <span class="lfr-preview-file-count"><%= previewFileCount %></span>
+														</span>
+													</span>
+												</div>
+
+												<div class="lfr-preview-file-images">
+													<div class="lfr-preview-file-images-content" id="<portlet:namespace />previewImagesContent"></div>
+												</div>
 											</div>
-											<span class="lfr-preview-file-actions aui-helper-hidden" id="<portlet:namespace />previewFileActions">
-												<span class="lfr-preview-file-toolbar" id="<portlet:namespace />previewToolbar"></span>
-
-												<span class="lfr-preview-file-info">
-													<span class="lfr-preview-file-index" id="<portlet:namespace />previewFileIndex">1</span> of <span class="lfr-preview-file-count"><%= previewFileCount %></span>
-												</span>
-											</span>
 										</div>
 
-										<div class="lfr-preview-file-images">
-											<div class="lfr-preview-file-images-content" id="<portlet:namespace />previewImagesContent"></div>
+										<aui:script use="aui-base,liferay-preview">
+											new Liferay.Preview(
+												{
+													actionContent: '#<portlet:namespace />previewFileActions',
+													baseImageURL: '<%= previewFileURL %>',
+													boundingBox: '#<portlet:namespace />previewFile',
+													contentBox: '#<portlet:namespace />previewFileContent',
+													currentPreviewImage: '#<portlet:namespace />previewFileImage',
+													imageListContent: '#<portlet:namespace />previewImagesContent',
+													maxIndex: <%= previewFileCount %>,
+													previewFileIndexNode: '#<portlet:namespace />previewFileIndex',
+													toolbar: '#<portlet:namespace />previewToolbar'
+												}
+											).render();
+										</aui:script>
+									</c:when>
+									<c:otherwise>
+										<div class="lfr-preview-file" id="<portlet:namespace />previewFile">
+											<div class="lfr-preview-file-content" id="<portlet:namespace />previewFileContent"></div>
 										</div>
-									</div>
-								</div>
 
-								<aui:script use="aui-base,liferay-preview">
-									new Liferay.Preview(
-										{
-											actionContent: '#<portlet:namespace />previewFileActions',
-											baseImageURL: '<%= previewFileURL %>',
-											boundingBox: '#<portlet:namespace />previewFile',
-											contentBox: '#<portlet:namespace />previewFileContent',
-											currentPreviewImage: '#<portlet:namespace />previewFileImage',
-											imageListContent: '#<portlet:namespace />previewImagesContent',
-											maxIndex: <%= previewFileCount %>,
-											previewFileIndexNode: '#<portlet:namespace />previewFileIndex',
-											toolbar: '#<portlet:namespace />previewToolbar'
-										}
-									).render();
-								</aui:script>
+										<script src="<%= themeDisplay.getPathJavaScript() %>/misc/swfobject.js" type="text/javascript"></script>
+
+										<aui:script use="aui-base">
+											var previewDivObject = A.one('#<portlet:namespace />previewFileContent');
+
+											var previewDivHeight = previewDivObject.getStyle('height');
+
+											var previewDivWidth = previewDivObject.getStyle('width');
+
+											var so = new SWFObject(
+												'<%= themeDisplay.getPathJavaScript() %>/misc/video_player/mpw_player.swf',
+												'<portlet:namespace />previewFileContent',
+												previewDivWidth,
+												previewDivHeight,
+												'9',
+												'#000000'
+											);
+
+											so.addVariable('<%= VideoProcessorUtil.PREVIEW_TYPE %>', '<%= previewFileURL %>');
+											so.addVariable('<%= VideoProcessorUtil.THUMBNAIL_TYPE %>', '<%= videoThumbnailURL %>');
+
+											so.addParam("allowFullScreen", "true");
+
+											so.write("<portlet:namespace />previewFileContent");
+										</aui:script>
+									</c:otherwise>
+								</c:choose>
 							</c:otherwise>
 						</c:choose>
 					</div>
