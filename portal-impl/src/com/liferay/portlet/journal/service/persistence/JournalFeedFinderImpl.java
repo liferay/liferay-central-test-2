@@ -34,6 +34,7 @@ import java.util.List;
 
 /**
  * @author Raymond Augé
+ * @author Connor McKay
  */
 public class JournalFeedFinderImpl
 	extends BasePersistenceImpl<JournalFeed> implements JournalFeedFinder {
@@ -70,9 +71,12 @@ public class JournalFeedFinderImpl
 			String description, boolean andOperator)
 		throws SystemException {
 
+		String[] feedIds = CustomSQLUtil.keywords(feedId, false);
+		String[] names = CustomSQLUtil.keywords(name);
+		String[] descriptions = CustomSQLUtil.keywords(description);
+
 		return countByC_G_F_N_D(
-			companyId, groupId, new String[] {feedId}, new String[] {name},
-			new String[] {description}, andOperator);
+			companyId, groupId, feedIds, names, descriptions, andOperator);
 	}
 
 	public int countByC_G_F_N_D(
@@ -170,9 +174,13 @@ public class JournalFeedFinderImpl
 			OrderByComparator obc)
 		throws SystemException {
 
+		String[] feedIds = CustomSQLUtil.keywords(feedId, false);
+		String[] names = CustomSQLUtil.keywords(name);
+		String[] descriptions = CustomSQLUtil.keywords(description);
+
 		return findByC_G_F_N_D(
-			companyId, groupId, new String[] {feedId}, new String[] {name},
-			new String[] {description}, andOperator, start, end, obc);
+			companyId, groupId, feedIds, names, descriptions, andOperator,
+			start, end, obc);
 	}
 
 	public List<JournalFeed> findByC_G_F_N_D(

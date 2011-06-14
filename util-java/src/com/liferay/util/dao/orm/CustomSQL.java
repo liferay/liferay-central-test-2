@@ -291,13 +291,17 @@ public class CustomSQL {
 	}
 
 	public String[] keywords(String keywords, boolean lowerCase) {
+		if (Validator.isNull(keywords)) {
+			return new String[] {null};
+		}
+
 		if (lowerCase) {
 			keywords = keywords.toLowerCase();
 		}
 
 		keywords = keywords.trim();
 
-		String[] keywordsArray = StringUtil.split(keywords, StringPool.SPACE);
+		String[] keywordsArray = keywords.split("\\s+");
 
 		for (int i = 0; i < keywordsArray.length; i++) {
 			String keyword = keywordsArray[i];
@@ -315,7 +319,7 @@ public class CustomSQL {
 
 	public String[] keywords(String[] keywordsArray, boolean lowerCase) {
 		if ((keywordsArray == null) || (keywordsArray.length == 0)) {
-			keywordsArray = new String[] {null};
+			return new String[] {null};
 		}
 
 		if (lowerCase) {

@@ -34,6 +34,7 @@ import java.util.List;
 
 /**
  * @author Sergio González
+ * @author Connor McKay
  */
 public class DLDocumentTypeFinderImpl
 	extends BasePersistenceImpl<DLDocumentType>
@@ -70,9 +71,11 @@ public class DLDocumentTypeFinderImpl
 			boolean andOperator)
 		throws SystemException {
 
+		String[] names = CustomSQLUtil.keywords(name);
+		String[] descriptions = CustomSQLUtil.keywords(description, false);
+
 		return countByC_G_N_D_S(
-			companyId, groupId, new String[] {name}, new String[] {description},
-			andOperator);
+			companyId, groupId, names, descriptions, andOperator);
 	}
 
 	public int countByC_G_N_D_S(
@@ -160,9 +163,12 @@ public class DLDocumentTypeFinderImpl
 			OrderByComparator orderByComparator)
 		throws SystemException {
 
+		String[] names = CustomSQLUtil.keywords(name);
+		String[] descriptions = CustomSQLUtil.keywords(description, false);
+
 		return findByC_G_N_D_S(
-			companyId, groupId,	new String[] {name}, new String[] {description},
-			andOperator, start, end, orderByComparator);
+			companyId, groupId,	names, descriptions, andOperator, start, end,
+			orderByComparator);
 	}
 
 	public List<DLDocumentType> findByC_G_N_D_S(

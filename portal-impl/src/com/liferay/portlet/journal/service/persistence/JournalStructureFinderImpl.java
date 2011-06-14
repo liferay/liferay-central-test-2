@@ -35,6 +35,7 @@ import java.util.List;
 
 /**
  * @author Brian Wing Shun Chan
+ * @author Connor McKay
  */
 public class JournalStructureFinderImpl
 	extends BasePersistenceImpl<JournalStructure>
@@ -73,9 +74,13 @@ public class JournalStructureFinderImpl
 			String description, boolean andOperator)
 		throws SystemException {
 
+		String[] structureIds = CustomSQLUtil.keywords(structureId, false);
+		String[] names = CustomSQLUtil.keywords(name);
+		String[] descriptions = CustomSQLUtil.keywords(description);
+
 		return countByC_G_S_N_D(
-			companyId, groupIds, new String[] {structureId},
-			new String[] {name}, new String[] {description}, andOperator);
+			companyId, groupIds, structureIds, names, descriptions,
+			andOperator);
 	}
 
 	public int countByC_G_S_N_D(
@@ -167,10 +172,13 @@ public class JournalStructureFinderImpl
 			OrderByComparator obc)
 		throws SystemException {
 
+	String[] structureIds = CustomSQLUtil.keywords(structureId, false);
+	String[] names = CustomSQLUtil.keywords(name);
+	String[] descriptions = CustomSQLUtil.keywords(description);
+
 		return findByC_G_S_N_D(
-			companyId, groupIds, new String[] {structureId},
-			new String[] {name}, new String[] {description}, andOperator, start,
-			end, obc);
+			companyId, groupIds, structureIds, names, descriptions, andOperator,
+			start, end, obc);
 	}
 
 	public List<JournalStructure> findByC_G_S_N_D(

@@ -28,13 +28,13 @@ public class UserSearchTerms extends UserDisplayTerms {
 	public UserSearchTerms(PortletRequest portletRequest) {
 		super(portletRequest);
 
-		emailAddress = DAOParamUtil.getLike(portletRequest, EMAIL_ADDRESS);
-		firstName = DAOParamUtil.getLike(portletRequest, FIRST_NAME);
-		lastName = DAOParamUtil.getLike(portletRequest, LAST_NAME);
-		middleName = DAOParamUtil.getLike(portletRequest, MIDDLE_NAME);
+		emailAddress = DAOParamUtil.getString(portletRequest, EMAIL_ADDRESS);
+		firstName = DAOParamUtil.getString(portletRequest, FIRST_NAME);
+		lastName = DAOParamUtil.getString(portletRequest, LAST_NAME);
+		middleName = DAOParamUtil.getString(portletRequest, MIDDLE_NAME);
 		organizationId = ParamUtil.getLong(portletRequest, ORGANIZATION_ID);
 		roleId = ParamUtil.getLong(portletRequest, ROLE_ID);
-		screenName = DAOParamUtil.getLike(portletRequest, SCREEN_NAME);
+		screenName = DAOParamUtil.getString(portletRequest, SCREEN_NAME);
 		status = ParamUtil.getInteger(
 			portletRequest, STATUS, WorkflowConstants.STATUS_APPROVED);
 		userGroupId = ParamUtil.getLong(portletRequest, USER_GROUP_ID);

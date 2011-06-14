@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.dao.orm.SQLQuery;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.dao.orm.Type;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -34,6 +35,7 @@ import java.util.List;
 
 /**
  * @author Eduardo Lundgren
+ * @author Connor McKay
  */
 public class DDMStructureFinderImpl
 	extends BasePersistenceImpl<DDMStructure> implements DDMStructureFinder {
@@ -70,10 +72,13 @@ public class DDMStructureFinderImpl
 			String description, String storageType, boolean andOperator)
 		throws SystemException {
 
+		String[] names = CustomSQLUtil.keywords(name);
+		String[] descriptions = CustomSQLUtil.keywords(description, false);
+		String[] storageTypes = CustomSQLUtil.keywords(storageType, false);
+
 		return countByC_G_C_N_D_S(
-			companyId, groupId, classNameIds, new String[] {name},
-			new String[] {description}, new String[] {storageType},
-			andOperator);
+			companyId, groupId, classNameIds, names, descriptions,
+			storageTypes, andOperator);
 	}
 
 	public int countByC_G_C_N_D_S(
@@ -87,8 +92,7 @@ public class DDMStructureFinderImpl
 			classNameIdsString = new String[] {null};
 		}
 		else {
-			classNameIdsString = StringUtil.split(
-				StringUtil.merge(classNameIds));
+			classNameIdsString = ArrayUtil.toStringArray(classNameIds);
 		}
 
 		names = CustomSQLUtil.keywords(names);
@@ -179,10 +183,13 @@ public class DDMStructureFinderImpl
 			int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
 
+		String[] names = CustomSQLUtil.keywords(name);
+		String[] descriptions = CustomSQLUtil.keywords(description, false);
+		String[] storageTypes = CustomSQLUtil.keywords(storageType, false);
+
 		return findByC_G_C_N_D_S(
-			companyId, groupId, classNameIds, new String[] {name},
-			new String[] {description}, new String[] {storageType}, andOperator,
-			start, end, orderByComparator);
+			companyId, groupId, classNameIds, names, descriptions,
+			storageTypes, andOperator, start, end, orderByComparator);
 	}
 
 	public List<DDMStructure> findByC_G_C_N_D_S(
@@ -197,8 +204,7 @@ public class DDMStructureFinderImpl
 			classNameIdsString = new String[] {null};
 		}
 		else {
-			classNameIdsString = StringUtil.split(
-				StringUtil.merge(classNameIds));
+			classNameIdsString = ArrayUtil.toStringArray(classNameIds);
 		}
 
 		names = CustomSQLUtil.keywords(names);

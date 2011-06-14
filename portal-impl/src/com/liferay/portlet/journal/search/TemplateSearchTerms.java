@@ -26,11 +26,11 @@ public class TemplateSearchTerms extends TemplateDisplayTerms {
 	public TemplateSearchTerms(PortletRequest portletRequest) {
 		super(portletRequest);
 
-		description = DAOParamUtil.getLike(portletRequest, DESCRIPTION);
+		description = DAOParamUtil.getString(portletRequest, DESCRIPTION);
 		groupIds = setGroupIds(portletRequest);
-		name = DAOParamUtil.getLike(portletRequest, NAME);
+		name = DAOParamUtil.getString(portletRequest, NAME);
 		structureId = DAOParamUtil.getString(portletRequest, STRUCTURE_ID);
-		templateId = DAOParamUtil.getLike(portletRequest, TEMPLATE_ID);
+		templateId = DAOParamUtil.getString(portletRequest, TEMPLATE_ID);
 	}
 
 	public String getStructureIdComparator() {

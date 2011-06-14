@@ -28,8 +28,8 @@ public class RoleSearchTerms extends RoleDisplayTerms {
 	public RoleSearchTerms(PortletRequest portletRequest) {
 		super(portletRequest);
 
-		description = DAOParamUtil.getLike(portletRequest, DESCRIPTION);
-		name = DAOParamUtil.getLike(portletRequest, NAME);
+		description = DAOParamUtil.getString(portletRequest, DESCRIPTION);
+		name = DAOParamUtil.getString(portletRequest, NAME);
 		type = ParamUtil.getInteger(portletRequest, TYPE);
 	}
 

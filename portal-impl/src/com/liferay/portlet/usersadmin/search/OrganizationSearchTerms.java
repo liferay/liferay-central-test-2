@@ -39,15 +39,15 @@ public class OrganizationSearchTerms extends OrganizationDisplayTerms {
 	public OrganizationSearchTerms(PortletRequest portletRequest) {
 		super(portletRequest);
 
-		city = DAOParamUtil.getLike(portletRequest, CITY);
+		city = DAOParamUtil.getString(portletRequest, CITY);
 		countryId = ParamUtil.getLong(portletRequest, COUNTRY_ID);
-		name = DAOParamUtil.getLike(portletRequest, NAME);
+		name = DAOParamUtil.getString(portletRequest, NAME);
 		parentOrganizationId = ParamUtil.getLong(
 			portletRequest, PARENT_ORGANIZATION_ID);
 		regionId = ParamUtil.getLong(portletRequest, REGION_ID);
-		street = DAOParamUtil.getLike(portletRequest, STREET);
+		street = DAOParamUtil.getString(portletRequest, STREET);
 		type = DAOParamUtil.getString(portletRequest, TYPE);
-		zip = DAOParamUtil.getLike(portletRequest, ZIP);
+		zip = DAOParamUtil.getString(portletRequest, ZIP);
 	}
 
 	public Long getCountryIdObj() {

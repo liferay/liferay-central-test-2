@@ -26,10 +26,10 @@ public class StructureSearchTerms extends StructureDisplayTerms {
 	public StructureSearchTerms(PortletRequest portletRequest) {
 		super(portletRequest);
 
-		description = DAOParamUtil.getLike(portletRequest, DESCRIPTION);
+		description = DAOParamUtil.getString(portletRequest, DESCRIPTION);
 		groupIds = setGroupIds(portletRequest);
-		name = DAOParamUtil.getLike(portletRequest, NAME);
-		structureId = DAOParamUtil.getLike(portletRequest, STRUCTURE_ID);
+		name = DAOParamUtil.getString(portletRequest, NAME);
+		structureId = DAOParamUtil.getString(portletRequest, STRUCTURE_ID);
 	}
 
 	public void setGroupIds(long[] groupIds) {

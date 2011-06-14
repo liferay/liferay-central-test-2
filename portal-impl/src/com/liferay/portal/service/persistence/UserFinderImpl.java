@@ -41,6 +41,7 @@ import java.util.Map;
  * @author Brian Wing Shun Chan
  * @author Jon Steer
  * @author Raymond Augé
+ * @author Connor McKay
  */
 public class UserFinderImpl
 	extends BasePersistenceImpl<User> implements UserFinder {
@@ -188,10 +189,15 @@ public class UserFinderImpl
 			boolean andOperator)
 		throws SystemException {
 
+		String[] firstNames = CustomSQLUtil.keywords(firstName);
+		String[] middleNames = CustomSQLUtil.keywords(middleName);
+		String[] lastNames = CustomSQLUtil.keywords(lastName);
+		String[] screenNames = CustomSQLUtil.keywords(lastName);
+		String[] emailAddresses = CustomSQLUtil.keywords(emailAddress);
+
 		return countByC_FN_MN_LN_SN_EA_S(
-			companyId, new String[] {firstName}, new String[] {middleName},
-			new String[] {lastName}, new String[] {screenName},
-			new String[] {emailAddress}, status, params, andOperator);
+			companyId, firstNames, middleNames, lastNames, screenNames,
+			emailAddresses, status, params, andOperator);
 	}
 
 	public int countByC_FN_MN_LN_SN_EA_S(
@@ -385,11 +391,15 @@ public class UserFinderImpl
 			boolean andOperator, int start, int end, OrderByComparator obc)
 		throws SystemException {
 
+		String[] firstNames = CustomSQLUtil.keywords(firstName);
+		String[] middleNames = CustomSQLUtil.keywords(middleName);
+		String[] lastNames = CustomSQLUtil.keywords(lastName);
+		String[] screenNames = CustomSQLUtil.keywords(screenName);
+		String[] emailAddresses = CustomSQLUtil.keywords(emailAddress);
+
 		return findByC_FN_MN_LN_SN_EA_S(
-			companyId, new String[] {firstName}, new String[] {middleName},
-			new String[] {lastName}, new String[] {screenName},
-			new String[] {emailAddress}, status, params, andOperator, start,
-			end, obc);
+			companyId, firstNames, middleNames,	lastNames, screenNames,
+			emailAddresses, status, params, andOperator, start,	end, obc);
 	}
 
 	public List<User> findByC_FN_MN_LN_SN_EA_S(

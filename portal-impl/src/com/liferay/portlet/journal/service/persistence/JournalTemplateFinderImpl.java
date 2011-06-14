@@ -37,6 +37,7 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  * @author Bruno Farache
  * @author Prakash Reddy
+ * @author Connor McKay
  */
 public class JournalTemplateFinderImpl
 	extends BasePersistenceImpl<JournalTemplate>
@@ -78,10 +79,13 @@ public class JournalTemplateFinderImpl
 			String description, boolean andOperator)
 		throws SystemException {
 
+		String[] templateIds = CustomSQLUtil.keywords(templateId, false);
+		String[] names = CustomSQLUtil.keywords(name);
+		String[] descriptions = CustomSQLUtil.keywords(description);
+
 		return countByC_G_T_S_N_D(
-			companyId, groupIds, new String[] {templateId}, structureId,
-			structureIdComparator, new String[] {name},
-			new String[] {description}, andOperator);
+			companyId, groupIds, templateIds, structureId,
+			structureIdComparator, names, descriptions, andOperator);
 	}
 
 	public int countByC_G_T_S_N_D(
@@ -196,10 +200,14 @@ public class JournalTemplateFinderImpl
 			OrderByComparator obc)
 		throws SystemException {
 
+		String[] templateIds = CustomSQLUtil.keywords(templateId, false);
+		String[] names = CustomSQLUtil.keywords(name);
+		String[] descriptions = CustomSQLUtil.keywords(description);
+
 		return findByC_G_T_S_N_D(
-			companyId, groupIds, new String[] {templateId}, structureId,
-			structureIdComparator, new String[] {name},
-			new String[] {description}, andOperator, start, end, obc);
+			companyId, groupIds, templateIds, structureId,
+			structureIdComparator, names, descriptions, andOperator, start, end,
+			obc);
 	}
 
 	public List<JournalTemplate> findByC_G_T_S_N_D(

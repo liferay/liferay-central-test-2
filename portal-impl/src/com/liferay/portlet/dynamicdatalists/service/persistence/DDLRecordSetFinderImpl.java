@@ -34,6 +34,7 @@ import java.util.List;
 
 /**
  * @author Marcellus Tavares
+ * @author Connor McKay
  */
 public class DDLRecordSetFinderImpl extends BasePersistenceImpl<DDLRecordSet>
 	implements DDLRecordSetFinder {
@@ -68,9 +69,11 @@ public class DDLRecordSetFinderImpl extends BasePersistenceImpl<DDLRecordSet>
 			boolean andOperator)
 		throws SystemException {
 
+		String[] names = CustomSQLUtil.keywords(name);
+		String[] descriptions = CustomSQLUtil.keywords(description, false);
+
 		return doCountByC_G_N_D(
-			companyId, groupId, new String[] {name}, new String[] {description},
-			andOperator);
+			companyId, groupId, names, descriptions, andOperator);
 	}
 
 	public List<DDLRecordSet> findByKeywords(
@@ -101,9 +104,12 @@ public class DDLRecordSetFinderImpl extends BasePersistenceImpl<DDLRecordSet>
 			OrderByComparator orderByComparator)
 		throws SystemException {
 
+		String[] names = CustomSQLUtil.keywords(name);
+		String[] descriptions = CustomSQLUtil.keywords(description, false);
+
 		return findByC_G_N_D(
-			companyId, groupId, new String[] {name}, new String[] {description},
-			andOperator, start, end, orderByComparator);
+			companyId, groupId, names, descriptions, andOperator, start, end,
+			orderByComparator);
 	}
 
 	public List<DDLRecordSet> findByC_G_N_D(

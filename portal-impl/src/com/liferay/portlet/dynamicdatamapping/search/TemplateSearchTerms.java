@@ -26,8 +26,8 @@ public class TemplateSearchTerms extends TemplateDisplayTerms {
 	public TemplateSearchTerms(PortletRequest portletRequest) {
 		super(portletRequest);
 
-		description = DAOParamUtil.getLike(portletRequest, DESCRIPTION);
-		name = DAOParamUtil.getLike(portletRequest, NAME);
+		description = DAOParamUtil.getString(portletRequest, DESCRIPTION);
+		name = DAOParamUtil.getString(portletRequest, NAME);
 	}
 
 }

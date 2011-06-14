@@ -34,6 +34,7 @@ import java.util.List;
 
 /**
  * @author Eduardo Lundgren
+ * @author Connor McKay
  */
 public class DDMTemplateFinderImpl
 	extends BasePersistenceImpl<DDMTemplate> implements DDMTemplateFinder {
@@ -75,10 +76,14 @@ public class DDMTemplateFinderImpl
 			boolean andOperator)
 		throws SystemException {
 
+		String[] names = CustomSQLUtil.keywords(name);
+		String[] descriptions = CustomSQLUtil.keywords(description, false);
+		String[] types = CustomSQLUtil.keywords(type, false);
+		String[] languages = CustomSQLUtil.keywords(language, false);
+
 		return countByC_G_S_N_D_T_L(
-			companyId, groupId, structureId, new String[] {name},
-			new String[] {description}, new String[] {type},
-			new String[] {language}, andOperator);
+			companyId, groupId, structureId, names,	descriptions, types,
+			languages, andOperator);
 	}
 
 	public int countByC_G_S_N_D_T_L(
@@ -191,11 +196,14 @@ public class DDMTemplateFinderImpl
 			OrderByComparator orderByComparator)
 		throws SystemException {
 
+		String[] names = CustomSQLUtil.keywords(name);
+		String[] descriptions = CustomSQLUtil.keywords(description, false);
+		String[] types = CustomSQLUtil.keywords(type, false);
+		String[] languages = CustomSQLUtil.keywords(language, false);
+
 		return findByC_G_S_N_D_T_L(
-			companyId, groupId, structureId, new String[] {name},
-			new String[] {description}, new String[] {type},
-			new String[] {language}, andOperator, start, end,
-			orderByComparator);
+			companyId, groupId, structureId, names,	descriptions, types,
+			languages, andOperator, start, end, orderByComparator);
 	}
 
 	public List<DDMTemplate> findByC_G_S_N_D_T_L(

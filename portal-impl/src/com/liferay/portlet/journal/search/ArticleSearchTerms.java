@@ -30,13 +30,13 @@ public class ArticleSearchTerms extends ArticleDisplayTerms {
 	public ArticleSearchTerms(PortletRequest portletRequest) {
 		super(portletRequest);
 
-		articleId = DAOParamUtil.getLike(portletRequest, ARTICLE_ID, false);
-		content = DAOParamUtil.getLike(portletRequest, CONTENT);
-		description = DAOParamUtil.getLike(portletRequest, DESCRIPTION);
+		articleId = DAOParamUtil.getString(portletRequest, ARTICLE_ID);
+		content = DAOParamUtil.getString(portletRequest, CONTENT);
+		description = DAOParamUtil.getString(portletRequest, DESCRIPTION);
 		status = ParamUtil.getString(portletRequest, STATUS);
 		structureId = DAOParamUtil.getString(portletRequest, STRUCTURE_ID);
 		templateId = DAOParamUtil.getString(portletRequest, TEMPLATE_ID);
-		title = DAOParamUtil.getLike(portletRequest, TITLE);
+		title = DAOParamUtil.getString(portletRequest, TITLE);
 		type = DAOParamUtil.getString(portletRequest, TYPE);
 		version = ParamUtil.getDouble(portletRequest, VERSION, -1);
 

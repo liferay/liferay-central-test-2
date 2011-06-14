@@ -26,9 +26,9 @@ public class EntrySearchTerms extends EntryDisplayTerms {
 	public EntrySearchTerms(PortletRequest portletRequest) {
 		super(portletRequest);
 
-		author = DAOParamUtil.getLike(portletRequest, AUTHOR);
-		status = DAOParamUtil.getLike(portletRequest, STATUS);
-		title = DAOParamUtil.getLike(portletRequest, TITLE);
+		author = DAOParamUtil.getString(portletRequest, AUTHOR);
+		status = DAOParamUtil.getString(portletRequest, STATUS);
+		title = DAOParamUtil.getString(portletRequest, TITLE);
 	}
 
 }

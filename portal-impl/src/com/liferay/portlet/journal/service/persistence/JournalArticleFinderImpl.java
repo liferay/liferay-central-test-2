@@ -43,6 +43,7 @@ import java.util.List;
 /**
  * @author Brian Wing Shun Chan
  * @author Raymond Augé
+ * @author Connor McKay
  */
 public class JournalArticleFinderImpl
 	extends BasePersistenceImpl<JournalArticle>
@@ -75,6 +76,8 @@ public class JournalArticleFinderImpl
 		String[] titles = null;
 		String[] descriptions = null;
 		String[] contents = null;
+		String[] structureIds = null;
+		String[] templateIds = null;
 		boolean andOperator = false;
 
 		if (Validator.isNotNull(keywords)) {
@@ -82,6 +85,8 @@ public class JournalArticleFinderImpl
 			titles = CustomSQLUtil.keywords(keywords);
 			descriptions = CustomSQLUtil.keywords(keywords, false);
 			contents = CustomSQLUtil.keywords(keywords, false);
+			structureIds = CustomSQLUtil.keywords(keywords, false);
+			templateIds = CustomSQLUtil.keywords(keywords, false);
 		}
 		else {
 			andOperator = true;
@@ -89,9 +94,9 @@ public class JournalArticleFinderImpl
 
 		return doCountByC_G_C_A_V_T_D_C_T_S_T_D_S_R(
 			companyId, groupId, classNameId, articleIds, version, titles,
-			descriptions, contents, type, new String[] {structureId},
-			new String[] {templateId}, displayDateGT, displayDateLT, status,
-			reviewDate, andOperator, false);
+			descriptions, contents, type, structureIds, templateIds,
+			displayDateGT, displayDateLT, status, reviewDate, andOperator,
+			false);
 	}
 
 	public int countByC_G_C_A_V_T_D_C_T_S_T_D_S_R(
@@ -102,11 +107,13 @@ public class JournalArticleFinderImpl
 			boolean andOperator)
 		throws SystemException {
 
+		String[] structureIds = CustomSQLUtil.keywords(structureId);
+		String[] templateIds = CustomSQLUtil.keywords(templateId);
+
 		return countByC_G_C_A_V_T_D_C_T_S_T_D_S_R(
 			companyId, groupId, classNameId, articleId, version, title,
-			description, content, type, new String[] {structureId},
-			new String[] {templateId}, displayDateGT, displayDateLT, status,
-			reviewDate, andOperator);
+			description, content, type, structureIds, templateIds,
+			displayDateGT, displayDateLT, status, reviewDate, andOperator);
 	}
 
 	public int countByC_G_C_A_V_T_D_C_T_S_T_D_S_R(
@@ -117,10 +124,14 @@ public class JournalArticleFinderImpl
 			boolean andOperator)
 		throws SystemException {
 
+		String[] articleIds = CustomSQLUtil.keywords(articleId, false);
+		String[] titles = CustomSQLUtil.keywords(title);
+		String[] descriptions = CustomSQLUtil.keywords(description, false);
+		String[] contents = CustomSQLUtil.keywords(content, false);
+
 		return countByC_G_C_A_V_T_D_C_T_S_T_D_S_R(
-			companyId, groupId, classNameId, new String[] {articleId}, version,
-			new String[] {title}, new String[] {description},
-			new String[] {content}, type, structureIds, templateIds,
+			companyId, groupId, classNameId, articleIds, version, titles,
+			descriptions, contents, type, structureIds, templateIds,
 			displayDateGT, displayDateLT, status, reviewDate, andOperator);
 	}
 
@@ -149,6 +160,8 @@ public class JournalArticleFinderImpl
 		String[] titles = null;
 		String[] descriptions = null;
 		String[] contents = null;
+		String[] structureIds = null;
+		String[] templateIds = null;
 		boolean andOperator = false;
 
 		if (Validator.isNotNull(keywords)) {
@@ -156,6 +169,8 @@ public class JournalArticleFinderImpl
 			titles = CustomSQLUtil.keywords(keywords);
 			descriptions = CustomSQLUtil.keywords(keywords, false);
 			contents = CustomSQLUtil.keywords(keywords, false);
+			structureIds = CustomSQLUtil.keywords(keywords, false);
+			templateIds = CustomSQLUtil.keywords(keywords, false);
 		}
 		else {
 			andOperator = true;
@@ -163,9 +178,9 @@ public class JournalArticleFinderImpl
 
 		return doCountByC_G_C_A_V_T_D_C_T_S_T_D_S_R(
 			companyId, groupId, classNameId, articleIds, version, titles,
-			descriptions, contents, type, new String[] {structureId},
-			new String[] {templateId}, displayDateGT, displayDateLT, status,
-			reviewDate, andOperator, true);
+			descriptions, contents, type, structureIds, templateIds,
+			displayDateGT, displayDateLT, status, reviewDate, andOperator,
+			true);
 	}
 
 	public int filterCountByC_G_C_A_V_T_D_C_T_S_T_D_S_R(
@@ -176,11 +191,13 @@ public class JournalArticleFinderImpl
 			boolean andOperator)
 		throws SystemException {
 
+		String[] structureIds = CustomSQLUtil.keywords(structureId, false);
+		String[] templateIds = CustomSQLUtil.keywords(templateId, false);
+
 		return filterCountByC_G_C_A_V_T_D_C_T_S_T_D_S_R(
 			companyId, groupId, classNameId, articleId, version, title,
-			description, content, type, new String[] {structureId},
-			new String[] {templateId}, displayDateGT, displayDateLT, status,
-			reviewDate, andOperator);
+			description, content, type, structureIds, templateIds,
+			displayDateGT, displayDateLT, status, reviewDate, andOperator);
 	}
 
 	public int filterCountByC_G_C_A_V_T_D_C_T_S_T_D_S_R(
@@ -191,10 +208,14 @@ public class JournalArticleFinderImpl
 			boolean andOperator)
 		throws SystemException {
 
+		String[] articleIds = CustomSQLUtil.keywords(articleId, false);
+		String[] titles = CustomSQLUtil.keywords(title);
+		String[] descriptions = CustomSQLUtil.keywords(description, false);
+		String[] contents = CustomSQLUtil.keywords(content, false);
+
 		return filterCountByC_G_C_A_V_T_D_C_T_S_T_D_S_R(
-			companyId, groupId, classNameId, new String[] {articleId}, version,
-			new String[] {title}, new String[] {description},
-			new String[] {content}, type, structureIds, templateIds,
+			companyId, groupId, classNameId, articleIds, version, titles,
+			descriptions, contents, type, structureIds, templateIds,
 			displayDateGT, displayDateLT, status, reviewDate, andOperator);
 	}
 
@@ -224,6 +245,8 @@ public class JournalArticleFinderImpl
 		String[] titles = null;
 		String[] descriptions = null;
 		String[] contents = null;
+		String[] structureIds = null;
+		String[] templateIds = null;
 		boolean andOperator = false;
 
 		if (Validator.isNotNull(keywords)) {
@@ -231,6 +254,8 @@ public class JournalArticleFinderImpl
 			titles = CustomSQLUtil.keywords(keywords);
 			descriptions = CustomSQLUtil.keywords(keywords, false);
 			contents = CustomSQLUtil.keywords(keywords, false);
+			structureIds = CustomSQLUtil.keywords(keywords, false);
+			templateIds = CustomSQLUtil.keywords(keywords, false);
 		}
 		else {
 			andOperator = true;
@@ -238,9 +263,9 @@ public class JournalArticleFinderImpl
 
 		return doFindByC_G_C_A_V_T_D_C_T_S_T_D_S_R(
 			companyId, groupId, classNameId, articleIds, version, titles,
-			descriptions, contents, type, new String[] {structureId},
-			new String[] {templateId}, displayDateGT, displayDateLT, status,
-			reviewDate, andOperator, start, end, orderByComparator, true);
+			descriptions, contents, type, structureIds, templateIds,
+			displayDateGT, displayDateLT, status, reviewDate, andOperator,
+			start, end, orderByComparator, true);
 	}
 
 	public List<JournalArticle> filterFindByC_G_C_A_V_T_D_C_T_S_T_D_S_R(
@@ -252,11 +277,14 @@ public class JournalArticleFinderImpl
 			OrderByComparator orderByComparator)
 		throws SystemException {
 
+		String[] structureIds = CustomSQLUtil.keywords(structureId, false);
+		String[] templateIds = CustomSQLUtil.keywords(templateId, false);
+
 		return filterFindByC_G_C_A_V_T_D_C_T_S_T_D_S_R(
 			companyId, groupId, classNameId, articleId, version, title,
-			description, content, type, new String[] {structureId},
-			new String[] {templateId}, displayDateGT, displayDateLT, status,
-			reviewDate, andOperator, start, end, orderByComparator);
+			description, content, type, structureIds, templateIds,
+			displayDateGT, displayDateLT, status, reviewDate, andOperator,
+			start, end, orderByComparator);
 	}
 
 	public List<JournalArticle> filterFindByC_G_C_A_V_T_D_C_T_S_T_D_S_R(
@@ -268,10 +296,14 @@ public class JournalArticleFinderImpl
 			OrderByComparator orderByComparator)
 		throws SystemException {
 
+		String[] articleIds = CustomSQLUtil.keywords(articleId, false);
+		String[] titles = CustomSQLUtil.keywords(title);
+		String[] descriptions = CustomSQLUtil.keywords(description, false);
+		String[] contents = CustomSQLUtil.keywords(content, false);
+
 		return filterFindByC_G_C_A_V_T_D_C_T_S_T_D_S_R(
-			companyId, groupId, classNameId, new String[] {articleId}, version,
-			new String[] {title}, new String[] {description},
-			new String[] {content}, type, structureIds, templateIds,
+			companyId, groupId, classNameId, articleIds, version, titles,
+			descriptions, contents, type, structureIds, templateIds,
 			displayDateGT, displayDateLT, status, reviewDate, andOperator,
 			start, end, orderByComparator);
 	}
@@ -349,6 +381,8 @@ public class JournalArticleFinderImpl
 		String[] titles = null;
 		String[] descriptions = null;
 		String[] contents = null;
+		String[] structureIds = null;
+		String[] templateIds = null;
 		boolean andOperator = false;
 
 		if (Validator.isNotNull(keywords)) {
@@ -356,6 +390,8 @@ public class JournalArticleFinderImpl
 			titles = CustomSQLUtil.keywords(keywords);
 			descriptions = CustomSQLUtil.keywords(keywords, false);
 			contents = CustomSQLUtil.keywords(keywords, false);
+			structureIds = CustomSQLUtil.keywords(keywords, false);
+			templateIds = CustomSQLUtil.keywords(keywords, false);
 		}
 		else {
 			andOperator = true;
@@ -363,9 +399,9 @@ public class JournalArticleFinderImpl
 
 		return findByC_G_C_A_V_T_D_C_T_S_T_D_S_R(
 			companyId, groupId, classNameId, articleIds, version, titles,
-			descriptions, contents, type, new String[] {structureId},
-			new String[] {templateId}, displayDateGT, displayDateLT, status,
-			reviewDate, andOperator, start, end, orderByComparator);
+			descriptions, contents, type, structureIds, templateIds,
+			displayDateGT, displayDateLT, status, reviewDate, andOperator,
+			start, end, orderByComparator);
 	}
 
 	public List<JournalArticle> findByReviewDate(
@@ -460,10 +496,14 @@ public class JournalArticleFinderImpl
 			OrderByComparator orderByComparator)
 		throws SystemException {
 
+		String[] articleIds = CustomSQLUtil.keywords(articleId, false);
+		String[] titles = CustomSQLUtil.keywords(title);
+		String[] descriptions = CustomSQLUtil.keywords(description, false);
+		String[] contents = CustomSQLUtil.keywords(content, false);
+
 		return findByC_G_C_A_V_T_D_C_T_S_T_D_S_R(
-			companyId, groupId, classNameId, new String[] {articleId}, version,
-			new String[] {title}, new String[] {description},
-			new String[] {content}, type, structureIds, templateIds,
+			companyId, groupId, classNameId, articleIds, version, titles,
+			descriptions, contents, type, structureIds, templateIds,
 			displayDateGT, displayDateLT, status, reviewDate, andOperator,
 			start, end, orderByComparator);
 	}
@@ -477,12 +517,18 @@ public class JournalArticleFinderImpl
 			OrderByComparator orderByComparator)
 		throws SystemException {
 
+		String[] articleIds = CustomSQLUtil.keywords(articleId, false);
+		String[] titles = CustomSQLUtil.keywords(title);
+		String[] descriptions = CustomSQLUtil.keywords(description, false);
+		String[] contents = CustomSQLUtil.keywords(content, false);
+		String[] structureIds = CustomSQLUtil.keywords(structureId, false);
+		String[] templateIds = CustomSQLUtil.keywords(templateId, false);
+
 		return findByC_G_C_A_V_T_D_C_T_S_T_D_S_R(
-			companyId, groupId, classNameId, new String[] {articleId}, version,
-			new String[] {title}, new String[] {description},
-			new String[] {content}, type, new String[] {structureId},
-			new String[] {templateId}, displayDateGT, displayDateLT, status,
-			reviewDate, andOperator, start, end, orderByComparator);
+			companyId, groupId, classNameId, articleIds, version, titles,
+			descriptions, contents, type, structureIds, templateIds,
+			displayDateGT, displayDateLT, status, reviewDate, andOperator,
+			start, end, orderByComparator);
 	}
 
 	public List<JournalArticle> findByC_G_C_A_V_T_D_C_T_S_T_D_S_R(

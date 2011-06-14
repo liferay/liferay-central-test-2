@@ -28,10 +28,10 @@ public class AssetSearchTerms extends AssetDisplayTerms {
 	public AssetSearchTerms(PortletRequest portletRequest) {
 		super(portletRequest);
 
-		description = DAOParamUtil.getLike(portletRequest, DESCRIPTION);
+		description = DAOParamUtil.getString(portletRequest, DESCRIPTION);
 		groupId = ParamUtil.getLong(portletRequest, GROUP_ID);
-		title = DAOParamUtil.getLike(portletRequest, TITLE);
-		userName = DAOParamUtil.getLike(portletRequest, USER_NAME);
+		title = DAOParamUtil.getString(portletRequest, TITLE);
+		userName = DAOParamUtil.getString(portletRequest, USER_NAME);
 	}
 
 	public void setGroupId(long groupId) {

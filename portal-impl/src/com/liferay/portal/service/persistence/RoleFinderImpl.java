@@ -42,6 +42,7 @@ import java.util.Map;
 /**
  * @author Brian Wing Shun Chan
  * @author Marcellus Tavares
+ * @author Connor McKay
  */
 public class RoleFinderImpl
 	extends BasePersistenceImpl<Role> implements RoleFinder {
@@ -170,9 +171,11 @@ public class RoleFinderImpl
 			LinkedHashMap<String, Object> params, boolean andOperator)
 		throws SystemException {
 
+		String[] names = CustomSQLUtil.keywords(name);
+		String[] descriptions = CustomSQLUtil.keywords(description);
+
 		return countByC_N_D_T(
-			companyId, new String[] {name}, new String[] {description}, types,
-			params, andOperator);
+			companyId, names, descriptions, types, params, andOperator);
 	}
 
 	public int countByC_N_D_T(
@@ -445,9 +448,12 @@ public class RoleFinderImpl
 			int start, int end, OrderByComparator obc)
 		throws SystemException {
 
+		String[] names = CustomSQLUtil.keywords(name);
+		String[] descriptions = CustomSQLUtil.keywords(description);
+
 		return findByC_N_D_T(
-			companyId, new String[] {name}, new String[] {description}, types,
-			params, andOperator, start, end, obc);
+			companyId, names, descriptions, types, params, andOperator, start,
+			end, obc);
 	}
 
 	public List<Role> findByC_N_D_T(

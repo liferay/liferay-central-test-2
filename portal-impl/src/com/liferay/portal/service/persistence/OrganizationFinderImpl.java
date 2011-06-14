@@ -40,6 +40,7 @@ import java.util.Map;
  * @author Amos Fong
  * @author Brian Wing Shun Chan
  * @author Jorge Ferrer
+ * @author Connor McKay
  */
 public class OrganizationFinderImpl
 	extends BasePersistenceImpl<Organization> implements OrganizationFinder {
@@ -156,11 +157,15 @@ public class OrganizationFinderImpl
 			boolean andOperator)
 		throws SystemException {
 
+		String[] names = CustomSQLUtil.keywords(name);
+		String[] streets = CustomSQLUtil.keywords(street);
+		String[] cities = CustomSQLUtil.keywords(city);
+		String[] zips = CustomSQLUtil.keywords(zip);
+
 		return countByC_PO_N_T_S_C_Z_R_C(
 			companyId, parentOrganizationId, parentOrganizationIdComparator,
-			new String[] {name}, type, new String[] {street},
-			new String[] {city}, new String[] {zip}, regionId, countryId,
-			params, andOperator);
+			names, type, streets, cities, zips, regionId, countryId, params,
+			andOperator);
 	}
 
 	public int countByC_PO_N_T_S_C_Z_R_C(
@@ -327,11 +332,15 @@ public class OrganizationFinderImpl
 			boolean andOperator, int start, int end, OrderByComparator obc)
 		throws SystemException {
 
+		String[] names = CustomSQLUtil.keywords(name);
+		String[] streets = CustomSQLUtil.keywords(street);
+		String[] cities = CustomSQLUtil.keywords(city);
+		String[] zips = CustomSQLUtil.keywords(zip);
+
 		return findByC_PO_N_T_S_C_Z_R_C(
 			companyId, parentOrganizationId, parentOrganizationIdComparator,
-			new String[] {name}, type, new String[] {street},
-			new String[] {city}, new String[] {zip}, regionId, countryId,
-			params, andOperator, start, end, obc);
+			names, type, streets, cities, zips, regionId, countryId, params,
+			andOperator, start, end, obc);
 	}
 
 	public List<Organization> findByC_PO_N_T_S_C_Z_R_C(
