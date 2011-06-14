@@ -834,10 +834,6 @@ public class StagingImpl implements Staging {
 			Map<String, String[]> parameterMap, Date startDate, Date endDate)
 		throws Exception {
 
-		parameterMap.put(
-			PortletDataHandlerKeys.DELETE_MISSING_LAYOUTS,
-			new String[] {Boolean.FALSE.toString()});
-
 		List<Layout> layouts = new ArrayList<Layout>();
 
 		Iterator<Map.Entry<Long, Boolean>> itr1 =

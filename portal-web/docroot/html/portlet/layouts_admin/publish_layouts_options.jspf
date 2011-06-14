@@ -73,6 +73,12 @@ portletsList = ListUtil.sort(portletsList, new PortletTitleComparator(applicatio
 	<ul class="lfr-tree lfr-component">
 		<li class="tree-item">
 			<aui:input checked="<%= true %>" disabled="<%= true %>" inlineLabel="right" name="pages" type="checkbox" />
+
+			<ul>
+				<li class="tree-item">
+					<aui:input helpMessage="delete-missing-layouts-help" label="delete-missing-layouts" name="<%= PortletDataHandlerKeys.DELETE_MISSING_LAYOUTS %>" type="checkbox" />
+				</li>
+			</ul>
 		</li>
 
 		<li class="tree-item">
