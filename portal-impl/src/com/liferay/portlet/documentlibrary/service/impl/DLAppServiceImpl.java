@@ -145,6 +145,50 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 			parentFolderId, name, description, serviceContext);
 	}
 
+	public void cancelCheckOut(long fileEntryId)
+		throws PortalException, SystemException {
+
+		Repository repository = getRepository(0, fileEntryId, 0);
+
+		repository.cancelCheckOut(fileEntryId);
+	}
+
+	public void checkInFileEntry(long fileEntryId, String lockUuid)
+		throws PortalException, SystemException {
+
+		Repository repository = getRepository(0, fileEntryId, 0);
+
+		repository.checkInFileEntry(fileEntryId, lockUuid);
+	}
+
+	public void checkInFileEntry(
+			long fileEntryId, boolean major, String changeLog,
+			ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		Repository repository = getRepository(0, fileEntryId, 0);
+
+		repository.checkInFileEntry(
+			fileEntryId, major, changeLog, serviceContext);
+	}
+
+	public void checkOutFileEntry(long fileEntryId)
+		throws PortalException, SystemException {
+
+		Repository repository = getRepository(0, fileEntryId, 0);
+
+		repository.checkOutFileEntry(fileEntryId);
+	}
+
+	public FileEntry checkOutFileEntry(
+			long fileEntryId, String owner, long expirationTime)
+		throws PortalException, SystemException {
+
+		Repository repository = getRepository(0, fileEntryId, 0);
+
+		return repository.checkOutFileEntry(fileEntryId, owner, expirationTime);
+	}
+
 	public Folder copyFolder(
 			long repositoryId, long sourceFolderId, long parentFolderId,
 			String name, String description, ServiceContext serviceContext)
@@ -520,24 +564,6 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 		return repository.getSubfolderIds(folderId, recurse);
 	}
 
-	public void lockFileEntry(long fileEntryId)
-		throws PortalException, SystemException {
-
-		Repository repository = getRepository(0, fileEntryId, 0);
-
-		repository.lockFileEntry(fileEntryId);
-	}
-
-	public Lock lockFileEntry(
-			long fileEntryId, String owner, long expirationTime)
-		throws PortalException, SystemException {
-
-		Repository repository = getRepository(0, fileEntryId, 0);
-
-		return repository.lockFileEntry(
-			fileEntryId, owner, expirationTime);
-	}
-
 	public Lock lockFolder(long repositoryId, long folderId)
 		throws PortalException, SystemException {
 
@@ -607,22 +633,6 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 		Repository repository = getRepository(0, fileEntryId, 0);
 
 		repository.revertFileEntry(fileEntryId, version, serviceContext);
-	}
-
-	public void unlockFileEntry(long fileEntryId)
-		throws PortalException, SystemException {
-
-		Repository repository = getRepository(0, fileEntryId, 0);
-
-		repository.unlockFileEntry(fileEntryId);
-	}
-
-	public void unlockFileEntry(long fileEntryId, String lockUuid)
-		throws PortalException, SystemException {
-
-		Repository repository = getRepository(0, fileEntryId, 0);
-
-		repository.unlockFileEntry(fileEntryId, lockUuid);
 	}
 
 	public void unlockFolder(long repositoryId, long folderId, String lockUuid)
@@ -720,14 +730,13 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 			folderId, name, description, serviceContext);
 	}
 
-	public boolean verifyFileEntryLock(
+	public boolean verifyFileEntryCheckOut(
 			long repositoryId, long fileEntryId, String lockUuid)
 		throws PortalException, SystemException {
 
 		Repository repository = getRepository(repositoryId);
 
-		return repository.verifyFileEntryLock(
-			fileEntryId, lockUuid);
+		return repository.verifyFileEntryCheckOut(fileEntryId, lockUuid);
 	}
 
 	public boolean verifyInheritableLock(

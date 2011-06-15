@@ -14,13 +14,9 @@
 
 package com.liferay.portlet.documentlibrary.service.impl;
 
-import com.liferay.portal.ExpiredLockException;
-import com.liferay.portal.InvalidLockException;
-import com.liferay.portal.NoSuchLockException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Lock;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.ServiceContext;
@@ -70,6 +66,20 @@ public class DLFileEntryServiceImpl extends DLFileEntryServiceBaseImpl {
 		}
 
 		dlFileEntryLocalService.cancelCheckOut(getUserId(), fileEntryId);
+	}
+
+	public void checkInFileEntry(long fileEntryId, String lockUuid)
+		throws PortalException, SystemException {
+
+		try {
+			DLFileEntryPermission.check(
+				getPermissionChecker(), fileEntryId, ActionKeys.UPDATE);
+		}
+		catch (NoSuchFileEntryException nsfee) {
+		}
+
+		dlFileEntryLocalService.checkInFileEntry(
+			getUserId(), fileEntryId, lockUuid);
 	}
 
 	public void checkInFileEntry(
@@ -329,36 +339,10 @@ public class DLFileEntryServiceImpl extends DLFileEntryServiceBaseImpl {
 		return hasLock;
 	}
 
-	public boolean isFileEntryLocked(long fileEntryId)
+	public boolean isFileEntryCheckedOut(long fileEntryId)
 		throws PortalException, SystemException {
 
-		return lockLocalService.isLocked(
-			DLFileEntry.class.getName(), fileEntryId);
-	}
-
-	public Lock lockFileEntry(long fileEntryId)
-		throws PortalException, SystemException {
-
-		return lockFileEntry(
-			fileEntryId, null, DLFileEntryImpl.LOCK_EXPIRATION_TIME);
-	}
-
-	public Lock lockFileEntry(
-			long fileEntryId, String owner, long expirationTime)
-		throws PortalException, SystemException {
-
-		DLFileEntryPermission.check(
-			getPermissionChecker(), fileEntryId, ActionKeys.UPDATE);
-
-		if ((expirationTime <= 0) ||
-			(expirationTime > DLFileEntryImpl.LOCK_EXPIRATION_TIME)) {
-
-			expirationTime = DLFileEntryImpl.LOCK_EXPIRATION_TIME;
-		}
-
-		return lockLocalService.lock(
-			getUserId(), DLFileEntry.class.getName(), fileEntryId, owner,
-			false, expirationTime);
+		return dlFileEntryLocalService.isFileEntryCheckedOut(fileEntryId);
 	}
 
 	public DLFileEntry moveFileEntry(
@@ -390,51 +374,6 @@ public class DLFileEntryServiceImpl extends DLFileEntryServiceBaseImpl {
 			getUserId(), fileEntryId, version, serviceContext);
 	}
 
-	public void unlockFileEntry(long fileEntryId)
-		throws PortalException, SystemException {
-
-		try {
-			DLFileEntryPermission.check(
-				getPermissionChecker(), fileEntryId, ActionKeys.UPDATE);
-		}
-		catch (NoSuchFileEntryException nsfee) {
-		}
-
-		lockLocalService.unlock(DLFileEntry.class.getName(), fileEntryId);
-	}
-
-	public void unlockFileEntry(long fileEntryId, String lockUuid)
-		throws PortalException, SystemException {
-
-		try {
-			DLFileEntryPermission.check(
-				getPermissionChecker(), fileEntryId, ActionKeys.UPDATE);
-		}
-		catch (NoSuchFileEntryException nsfee) {
-		}
-
-		if (Validator.isNotNull(lockUuid)) {
-			try {
-				Lock lock = lockLocalService.getLock(
-					DLFileEntry.class.getName(), fileEntryId);
-
-				if (!lockUuid.equals(lock.getUuid())) {
-					throw new InvalidLockException("UUIDs do not match");
-				}
-			}
-			catch (PortalException pe) {
-				if ((pe instanceof ExpiredLockException) ||
-					(pe instanceof NoSuchLockException)) {
-				}
-				else {
-					throw pe;
-				}
-			}
-		}
-
-		lockLocalService.unlock(DLFileEntry.class.getName(), fileEntryId);
-	}
-
 	public DLFileEntry updateFileEntry(
 			long fileEntryId, String sourceFileName, String mimeType,
 			String title, String description, String changeLog,
@@ -450,35 +389,11 @@ public class DLFileEntryServiceImpl extends DLFileEntryServiceBaseImpl {
 			description, changeLog, majorVersion, is, size, serviceContext);
 	}
 
-	public boolean verifyFileEntryLock(long fileEntryId, String lockUuid)
+	public boolean verifyFileEntryCheckOut(long fileEntryId, String lockUuid)
 		throws PortalException, SystemException {
 
-		boolean verified = false;
-
-		try {
-			Lock lock = lockLocalService.getLock(
-				DLFileEntry.class.getName(), fileEntryId);
-
-			if (lock.getUuid().equals(lockUuid)) {
-				verified = true;
-			}
-		}
-		catch (PortalException pe) {
-			if ((pe instanceof ExpiredLockException) ||
-				(pe instanceof NoSuchLockException)) {
-
-				DLFileEntry dlFileEntry = dlFileEntryLocalService.getFileEntry(
-					fileEntryId);
-
-				verified = dlFolderService.verifyInheritableLock(
-					dlFileEntry.getFolderId(), lockUuid);
-			}
-			else {
-				throw pe;
-			}
-		}
-
-		return verified;
+		return dlFileEntryLocalService.verifyFileEntryCheckOut(
+			fileEntryId, lockUuid);
 	}
 
 }

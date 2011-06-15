@@ -25,7 +25,6 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.service.ServiceContext;
-import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.asset.NoSuchEntryException;
 import com.liferay.portlet.asset.model.AssetEntry;
@@ -35,9 +34,6 @@ import com.liferay.portlet.documentlibrary.model.DLFileEntryConstants;
 import com.liferay.portlet.documentlibrary.model.DLFileShortcut;
 import com.liferay.portlet.documentlibrary.service.base.DLAppHelperLocalServiceBaseImpl;
 import com.liferay.portlet.documentlibrary.social.DLActivityKeys;
-import com.liferay.portlet.messageboards.model.MBDiscussion;
-import com.liferay.portlet.ratings.model.RatingsEntry;
-import com.liferay.portlet.ratings.model.RatingsStats;
 
 import java.util.List;
 
@@ -153,66 +149,6 @@ public class DLAppHelperLocalServiceImpl
 
 	public List<FileEntry> getNoAssetFileEntries() {
 		return null;
-	}
-
-	public void moveFileEntry(long oldFileEntryId, long newFileEntryId)
-		throws PortalException, SystemException {
-
-		// File shortcuts
-
-		dlFileShortcutLocalService.updateFileShortcuts(
-			oldFileEntryId, newFileEntryId);
-
-		// Asset
-
-		assetEntryLocalService.deleteEntry(
-			DLFileEntryConstants.getClassName(), oldFileEntryId);
-
-		List<DLFileShortcut> fileShortcuts =
-			dlFileShortcutPersistence.findByToFileEntryId(oldFileEntryId);
-
-		for (DLFileShortcut fileShortcut : fileShortcuts) {
-			assetEntryLocalService.deleteEntry(
-				DLFileShortcut.class.getName(),
-				fileShortcut.getFileShortcutId());
-		}
-
-		// Ratings
-
-		RatingsStats stats = ratingsStatsLocalService.getStats(
-			DLFileEntryConstants.getClassName(), oldFileEntryId);
-
-		stats.setClassPK(newFileEntryId);
-
-		ratingsStatsPersistence.update(stats, false);
-
-		long classNameId = PortalUtil.getClassNameId(
-			DLFileEntryConstants.getClassName());
-
-		List<RatingsEntry> entries = ratingsEntryPersistence.findByC_C(
-			classNameId, oldFileEntryId);
-
-		for (RatingsEntry entry : entries) {
-			entry.setClassPK(newFileEntryId);
-
-			ratingsEntryPersistence.update(entry, false);
-		}
-
-		// Message boards
-
-		MBDiscussion discussion = mbDiscussionPersistence.fetchByC_C(
-			classNameId, oldFileEntryId);
-
-		if (discussion != null) {
-			discussion.setClassPK(newFileEntryId);
-
-			mbDiscussionPersistence.update(discussion, false);
-		}
-
-		// Social
-
-		socialActivityLocalService.deleteActivities(
-			DLFileEntryConstants.getClassName(), oldFileEntryId);
 	}
 
 	public AssetEntry updateAsset(

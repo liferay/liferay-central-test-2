@@ -204,9 +204,10 @@ public class DLFileEntryImpl
 		return false;
 	}
 
-	public boolean isLocked() {
+	public boolean isCheckedOut() {
 		try {
-			return DLFileEntryServiceUtil.isFileEntryLocked(getFileEntryId());
+			return DLFileEntryServiceUtil.isFileEntryCheckedOut(
+				getFileEntryId());
 		}
 		catch (Exception e) {
 		}
