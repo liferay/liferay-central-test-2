@@ -133,6 +133,7 @@ if (row == null && portletName.equals(PortletKeys.DOCUMENT_LIBRARY_DISPLAY)) {
 						modelResource="<%= modelResource %>"
 						modelResourceDescription="<%= HtmlUtil.escape(modelResourceDescription) %>"
 						resourcePrimKey="<%= resourcePrimKey %>"
+						redirect="<%= redirect %>"
 						var="permissionsURL"
 					/>
 
@@ -198,6 +199,7 @@ if (row == null && portletName.equals(PortletKeys.DOCUMENT_LIBRARY_DISPLAY)) {
 						modelResource="<%= modelResource %>"
 						modelResourceDescription="<%= HtmlUtil.escape(modelResourceDescription) %>"
 						resourcePrimKey="<%= resourcePrimKey %>"
+						redirect="<%= redirect %>"
 						var="permissionsURL"
 					/>
 
