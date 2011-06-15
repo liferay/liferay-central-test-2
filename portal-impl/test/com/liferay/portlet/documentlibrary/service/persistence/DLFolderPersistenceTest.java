@@ -70,17 +70,29 @@ public class DLFolderPersistenceTest extends BasePersistenceTestCase {
 		DLFolder newDLFolder = _persistence.create(pk);
 
 		newDLFolder.setUuid(randomString());
+
 		newDLFolder.setGroupId(nextLong());
+
 		newDLFolder.setCompanyId(nextLong());
+
 		newDLFolder.setUserId(nextLong());
+
 		newDLFolder.setUserName(randomString());
+
 		newDLFolder.setCreateDate(nextDate());
+
 		newDLFolder.setModifiedDate(nextDate());
+
 		newDLFolder.setRepositoryId(nextLong());
+
 		newDLFolder.setMountPoint(randomBoolean());
+
 		newDLFolder.setParentFolderId(nextLong());
+
 		newDLFolder.setName(randomString());
+
 		newDLFolder.setDescription(randomString());
+
 		newDLFolder.setLastPostDate(nextDate());
 
 		_persistence.update(newDLFolder, false);
@@ -246,17 +258,29 @@ public class DLFolderPersistenceTest extends BasePersistenceTestCase {
 		DLFolder dlFolder = _persistence.create(pk);
 
 		dlFolder.setUuid(randomString());
+
 		dlFolder.setGroupId(nextLong());
+
 		dlFolder.setCompanyId(nextLong());
+
 		dlFolder.setUserId(nextLong());
+
 		dlFolder.setUserName(randomString());
+
 		dlFolder.setCreateDate(nextDate());
+
 		dlFolder.setModifiedDate(nextDate());
+
 		dlFolder.setRepositoryId(nextLong());
+
 		dlFolder.setMountPoint(randomBoolean());
+
 		dlFolder.setParentFolderId(nextLong());
+
 		dlFolder.setName(randomString());
+
 		dlFolder.setDescription(randomString());
+
 		dlFolder.setLastPostDate(nextDate());
 
 		_persistence.update(dlFolder, false);

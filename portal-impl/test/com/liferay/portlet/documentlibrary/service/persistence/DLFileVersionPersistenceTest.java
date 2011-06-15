@@ -70,24 +70,43 @@ public class DLFileVersionPersistenceTest extends BasePersistenceTestCase {
 		DLFileVersion newDLFileVersion = _persistence.create(pk);
 
 		newDLFileVersion.setGroupId(nextLong());
+
 		newDLFileVersion.setCompanyId(nextLong());
+
 		newDLFileVersion.setUserId(nextLong());
+
 		newDLFileVersion.setUserName(randomString());
+
 		newDLFileVersion.setCreateDate(nextDate());
+
 		newDLFileVersion.setRepositoryId(nextLong());
+
 		newDLFileVersion.setFileEntryId(nextLong());
+
 		newDLFileVersion.setExtension(randomString());
+
 		newDLFileVersion.setMimeType(randomString());
+
 		newDLFileVersion.setTitle(randomString());
+
 		newDLFileVersion.setDescription(randomString());
+
 		newDLFileVersion.setChangeLog(randomString());
+
 		newDLFileVersion.setExtraSettings(randomString());
+
 		newDLFileVersion.setDocumentTypeId(nextLong());
+
 		newDLFileVersion.setVersion(randomString());
+
 		newDLFileVersion.setSize(nextLong());
+
 		newDLFileVersion.setStatus(nextInt());
+
 		newDLFileVersion.setStatusByUserId(nextLong());
+
 		newDLFileVersion.setStatusByUserName(randomString());
+
 		newDLFileVersion.setStatusDate(nextDate());
 
 		_persistence.update(newDLFileVersion, false);
@@ -268,24 +287,43 @@ public class DLFileVersionPersistenceTest extends BasePersistenceTestCase {
 		DLFileVersion dlFileVersion = _persistence.create(pk);
 
 		dlFileVersion.setGroupId(nextLong());
+
 		dlFileVersion.setCompanyId(nextLong());
+
 		dlFileVersion.setUserId(nextLong());
+
 		dlFileVersion.setUserName(randomString());
+
 		dlFileVersion.setCreateDate(nextDate());
+
 		dlFileVersion.setRepositoryId(nextLong());
+
 		dlFileVersion.setFileEntryId(nextLong());
+
 		dlFileVersion.setExtension(randomString());
+
 		dlFileVersion.setMimeType(randomString());
+
 		dlFileVersion.setTitle(randomString());
+
 		dlFileVersion.setDescription(randomString());
+
 		dlFileVersion.setChangeLog(randomString());
+
 		dlFileVersion.setExtraSettings(randomString());
+
 		dlFileVersion.setDocumentTypeId(nextLong());
+
 		dlFileVersion.setVersion(randomString());
+
 		dlFileVersion.setSize(nextLong());
+
 		dlFileVersion.setStatus(nextInt());
+
 		dlFileVersion.setStatusByUserId(nextLong());
+
 		dlFileVersion.setStatusByUserName(randomString());
+
 		dlFileVersion.setStatusDate(nextDate());
 
 		_persistence.update(dlFileVersion, false);

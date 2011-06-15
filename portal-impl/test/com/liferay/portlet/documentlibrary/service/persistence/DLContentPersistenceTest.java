@@ -15,10 +15,13 @@
 package com.liferay.portlet.documentlibrary.service.persistence;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.dao.jdbc.OutputBlob;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
+import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayInputStream;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 import com.liferay.portal.util.PropsValues;
@@ -29,6 +32,7 @@ import com.liferay.portlet.documentlibrary.model.impl.DLContentModelImpl;
 
 import java.sql.Blob;
 
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -71,12 +75,24 @@ public class DLContentPersistenceTest extends BasePersistenceTestCase {
 		DLContent newDLContent = _persistence.create(pk);
 
 		newDLContent.setGroupId(nextLong());
+
 		newDLContent.setCompanyId(nextLong());
+
 		newDLContent.setPortletId(randomString());
+
 		newDLContent.setRepositoryId(nextLong());
+
 		newDLContent.setPath(randomString());
+
 		newDLContent.setVersion(randomString());
-		newDLContent.setData(randomBlob());
+
+		byte[] newDataBytes = randomString().getBytes(StringPool.UTF8);
+
+		Blob newDataBlob = new OutputBlob(new UnsyncByteArrayInputStream(
+					newDataBytes), newDataBytes.length);
+
+		newDLContent.setData(newDataBlob);
+
 		newDLContent.setSize(nextLong());
 
 		_persistence.update(newDLContent, false);
@@ -96,10 +112,9 @@ public class DLContentPersistenceTest extends BasePersistenceTestCase {
 		assertEquals(existingDLContent.getVersion(), newDLContent.getVersion());
 
 		Blob existingData = existingDLContent.getData();
-		Blob newData = newDLContent.getData();
 
-		assertEquals(existingData.getBytes(0, (int)existingData.length()),
-			newData.getBytes(0, (int)newData.length()));
+		assertTrue(Arrays.equals(existingData.getBytes(1,
+					(int)existingData.length()), newDataBytes));
 		assertEquals(existingDLContent.getSize(), newDLContent.getSize());
 	}
 
@@ -235,12 +250,24 @@ public class DLContentPersistenceTest extends BasePersistenceTestCase {
 		DLContent dlContent = _persistence.create(pk);
 
 		dlContent.setGroupId(nextLong());
+
 		dlContent.setCompanyId(nextLong());
+
 		dlContent.setPortletId(randomString());
+
 		dlContent.setRepositoryId(nextLong());
+
 		dlContent.setPath(randomString());
+
 		dlContent.setVersion(randomString());
-		dlContent.setData(randomBlob());
+
+		byte[] dataBytes = randomString().getBytes(StringPool.UTF8);
+
+		Blob dataBlob = new OutputBlob(new UnsyncByteArrayInputStream(dataBytes),
+				dataBytes.length);
+
+		dlContent.setData(dataBlob);
+
 		dlContent.setSize(nextLong());
 
 		_persistence.update(dlContent, false);

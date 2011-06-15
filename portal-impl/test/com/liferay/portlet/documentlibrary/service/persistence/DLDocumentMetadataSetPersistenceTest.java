@@ -69,10 +69,15 @@ public class DLDocumentMetadataSetPersistenceTest
 		DLDocumentMetadataSet newDLDocumentMetadataSet = _persistence.create(pk);
 
 		newDLDocumentMetadataSet.setUuid(randomString());
+
 		newDLDocumentMetadataSet.setClassNameId(nextLong());
+
 		newDLDocumentMetadataSet.setClassPK(nextLong());
+
 		newDLDocumentMetadataSet.setDDMStructureId(nextLong());
+
 		newDLDocumentMetadataSet.setDocumentTypeId(nextLong());
+
 		newDLDocumentMetadataSet.setFileVersionId(nextLong());
 
 		_persistence.update(newDLDocumentMetadataSet, false);
@@ -226,10 +231,15 @@ public class DLDocumentMetadataSetPersistenceTest
 		DLDocumentMetadataSet dlDocumentMetadataSet = _persistence.create(pk);
 
 		dlDocumentMetadataSet.setUuid(randomString());
+
 		dlDocumentMetadataSet.setClassNameId(nextLong());
+
 		dlDocumentMetadataSet.setClassPK(nextLong());
+
 		dlDocumentMetadataSet.setDDMStructureId(nextLong());
+
 		dlDocumentMetadataSet.setDocumentTypeId(nextLong());
+
 		dlDocumentMetadataSet.setFileVersionId(nextLong());
 
 		_persistence.update(dlDocumentMetadataSet, false);

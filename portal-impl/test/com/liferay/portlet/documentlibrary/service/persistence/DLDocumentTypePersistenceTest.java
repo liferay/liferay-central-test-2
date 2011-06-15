@@ -67,12 +67,19 @@ public class DLDocumentTypePersistenceTest extends BasePersistenceTestCase {
 		DLDocumentType newDLDocumentType = _persistence.create(pk);
 
 		newDLDocumentType.setGroupId(nextLong());
+
 		newDLDocumentType.setCompanyId(nextLong());
+
 		newDLDocumentType.setUserId(nextLong());
+
 		newDLDocumentType.setUserName(randomString());
+
 		newDLDocumentType.setCreateDate(nextDate());
+
 		newDLDocumentType.setModifiedDate(nextDate());
+
 		newDLDocumentType.setName(randomString());
+
 		newDLDocumentType.setDescription(randomString());
 
 		_persistence.update(newDLDocumentType, false);
@@ -212,12 +219,19 @@ public class DLDocumentTypePersistenceTest extends BasePersistenceTestCase {
 		DLDocumentType dlDocumentType = _persistence.create(pk);
 
 		dlDocumentType.setGroupId(nextLong());
+
 		dlDocumentType.setCompanyId(nextLong());
+
 		dlDocumentType.setUserId(nextLong());
+
 		dlDocumentType.setUserName(randomString());
+
 		dlDocumentType.setCreateDate(nextDate());
+
 		dlDocumentType.setModifiedDate(nextDate());
+
 		dlDocumentType.setName(randomString());
+
 		dlDocumentType.setDescription(randomString());
 
 		_persistence.update(dlDocumentType, false);

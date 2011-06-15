@@ -70,18 +70,31 @@ public class DLFileShortcutPersistenceTest extends BasePersistenceTestCase {
 		DLFileShortcut newDLFileShortcut = _persistence.create(pk);
 
 		newDLFileShortcut.setUuid(randomString());
+
 		newDLFileShortcut.setGroupId(nextLong());
+
 		newDLFileShortcut.setCompanyId(nextLong());
+
 		newDLFileShortcut.setUserId(nextLong());
+
 		newDLFileShortcut.setUserName(randomString());
+
 		newDLFileShortcut.setCreateDate(nextDate());
+
 		newDLFileShortcut.setModifiedDate(nextDate());
+
 		newDLFileShortcut.setRepositoryId(nextLong());
+
 		newDLFileShortcut.setFolderId(nextLong());
+
 		newDLFileShortcut.setToFileEntryId(nextLong());
+
 		newDLFileShortcut.setStatus(nextInt());
+
 		newDLFileShortcut.setStatusByUserId(nextLong());
+
 		newDLFileShortcut.setStatusByUserName(randomString());
+
 		newDLFileShortcut.setStatusDate(nextDate());
 
 		_persistence.update(newDLFileShortcut, false);
@@ -251,18 +264,31 @@ public class DLFileShortcutPersistenceTest extends BasePersistenceTestCase {
 		DLFileShortcut dlFileShortcut = _persistence.create(pk);
 
 		dlFileShortcut.setUuid(randomString());
+
 		dlFileShortcut.setGroupId(nextLong());
+
 		dlFileShortcut.setCompanyId(nextLong());
+
 		dlFileShortcut.setUserId(nextLong());
+
 		dlFileShortcut.setUserName(randomString());
+
 		dlFileShortcut.setCreateDate(nextDate());
+
 		dlFileShortcut.setModifiedDate(nextDate());
+
 		dlFileShortcut.setRepositoryId(nextLong());
+
 		dlFileShortcut.setFolderId(nextLong());
+
 		dlFileShortcut.setToFileEntryId(nextLong());
+
 		dlFileShortcut.setStatus(nextInt());
+
 		dlFileShortcut.setStatusByUserId(nextLong());
+
 		dlFileShortcut.setStatusByUserName(randomString());
+
 		dlFileShortcut.setStatusDate(nextDate());
 
 		_persistence.update(dlFileShortcut, false);

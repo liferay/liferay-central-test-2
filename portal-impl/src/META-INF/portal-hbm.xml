@@ -1326,7 +1326,6 @@
 		<property name="secondReminder" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
 	</class>
 	<class name="com.liferay.portlet.documentlibrary.model.impl.DLContentImpl" table="DLContent">
-		<cache usage="read-write" />
 		<id name="contentId" type="long">
 			<generator class="assigned" />
 		</id>
