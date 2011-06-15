@@ -271,7 +271,9 @@ public class WebDAVOSXTest extends BaseWebDAVTestCase {
 					HttpServletResponse.SC_CREATED,
 					serviceCopyOrMove(Method.MOVE, orig, dest, getLock(orig)));
 
-				moveLock(orig, dest);
+				// Need to checkin to commit rename
+
+				unlock(orig);
 			}
 		}
 
