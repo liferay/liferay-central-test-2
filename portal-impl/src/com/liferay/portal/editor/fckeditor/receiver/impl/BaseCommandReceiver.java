@@ -21,13 +21,16 @@ import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.CharPool;
+import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
+import com.liferay.portal.kernel.util.MimeTypesUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.service.GroupLocalServiceUtil;
@@ -189,11 +192,18 @@ public abstract class BaseCommandReceiver implements CommandReceiver {
 			String[] fileNameArray = StringUtil.split(fileName, "/");
 			fileName = fileNameArray[fileNameArray.length - 1];
 
-			String extension = _getExtension(fileName);
+			String contentType = diskFileItem.getContentType();
+
+			if (Validator.isNull(contentType) ||
+				contentType.equals(ContentTypes.APPLICATION_OCTET_STREAM)) {
+
+				contentType = MimeTypesUtil.getContentType(
+					diskFileItem.getStoreLocation());
+			}
 
 			returnValue = fileUpload(
 				commandArgument, fileName, diskFileItem.getStoreLocation(),
-				extension);
+				contentType);
 		}
 		catch (Exception e) {
 			FCKException fcke = null;
@@ -251,7 +261,7 @@ public abstract class BaseCommandReceiver implements CommandReceiver {
 
 	protected abstract String fileUpload(
 		CommandArgument commandArgument, String fileName, File file,
-		String extension);
+		String contentType);
 
 	protected abstract void getFolders(
 		CommandArgument commandArgument, Document document, Node rootNode);
@@ -386,10 +396,6 @@ public abstract class BaseCommandReceiver implements CommandReceiver {
 		currentFolderElement.setAttribute("url", url);
 
 		return rootElement;
-	}
-
-	private String _getExtension(String fileName) {
-		return fileName.substring(fileName.lastIndexOf(CharPool.PERIOD) + 1);
 	}
 
 	private void _writeDocument(

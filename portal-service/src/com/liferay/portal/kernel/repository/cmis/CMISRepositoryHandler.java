@@ -41,12 +41,14 @@ import java.util.Map;
 public abstract class CMISRepositoryHandler extends BaseRepositoryImpl {
 
 	public FileEntry addFileEntry(
-			long folderId, String title, String description, String changeLog,
-			InputStream is, long size, ServiceContext serviceContext)
+			long folderId, String mimeType, String title, String description,
+			String changeLog, InputStream is, long size,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		return _baseCmisRepository.addFileEntry(
-			folderId, title, description, changeLog, is, size, serviceContext);
+			folderId, mimeType, title, description, changeLog, is, size,
+			serviceContext);
 	}
 
 	public Folder addFolder(
@@ -360,23 +362,26 @@ public abstract class CMISRepositoryHandler extends BaseRepositoryImpl {
 	}
 
 	public FileEntry updateFileEntry(
-			long fileEntryId, String sourceFileName, String title,
-			String description, String changeLog, boolean majorVersion,
-			InputStream is, long size, ServiceContext serviceContext)
+			long fileEntryId, String sourceFileName, String mimeType,
+			String title, String description, String changeLog,
+			boolean majorVersion, InputStream is, long size,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		return _baseCmisRepository.updateFileEntry(
-			fileEntryId, sourceFileName, title, description, changeLog,
-			majorVersion, is, size, serviceContext);
+			fileEntryId, sourceFileName, mimeType, title, description,
+			changeLog, majorVersion, is, size, serviceContext);
 	}
 
 	public FileEntry updateFileEntry(
-			String objectId, Map<String, Object> properties, InputStream is,
-			String sourceFileName, long size, ServiceContext serviceContext)
+			String objectId, String mimeType, Map<String, Object> properties,
+			InputStream is, String sourceFileName, long size,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		return _baseCmisRepository.updateFileEntry(
-			objectId, properties, is, sourceFileName, size, serviceContext);
+			objectId, mimeType, properties, is, sourceFileName, size,
+			serviceContext);
 	}
 
 	public Folder updateFolder(

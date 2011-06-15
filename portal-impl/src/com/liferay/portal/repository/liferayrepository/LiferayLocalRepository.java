@@ -72,14 +72,14 @@ public class LiferayLocalRepository
 	}
 
 	public FileEntry addFileEntry(
-			long userId, long folderId, String title, String description,
-			String changeLog, InputStream is, long size,
+			long userId, long folderId, String mimeType, String title,
+			String description, String changeLog, InputStream is, long size,
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		DLFileEntry dlFileEntry = dlFileEntryLocalService.addFileEntry(
 			userId, getGroupId(), getRepositoryId(), toFolderId(folderId),
-			title, description, changeLog, is, size, serviceContext);
+			mimeType, title, description, changeLog, is, size, serviceContext);
 
 		return new LiferayFileEntry(dlFileEntry);
 	}
@@ -275,14 +275,15 @@ public class LiferayLocalRepository
 	}
 
 	public FileEntry updateFileEntry(
-			long userId, long fileEntryId, String sourceFileName, String title,
-			String description, String changeLog, boolean majorVersion,
-			InputStream is, long size, ServiceContext serviceContext)
+			long userId, long fileEntryId, String sourceFileName,
+			String mimeType, String title, String description, String changeLog,
+			boolean majorVersion, InputStream is, long size,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		DLFileEntry dlFileEntry = dlFileEntryLocalService.updateFileEntry(
-			userId, fileEntryId, sourceFileName, title, description, changeLog,
-			majorVersion, is, size, serviceContext);
+			userId, fileEntryId, sourceFileName, mimeType, title, description,
+			changeLog, majorVersion, is, size, serviceContext);
 
 		return new LiferayFileEntry(dlFileEntry);
 	}

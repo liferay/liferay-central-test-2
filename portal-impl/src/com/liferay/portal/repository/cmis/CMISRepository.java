@@ -109,8 +109,9 @@ public class CMISRepository extends BaseCmisRepository {
 	}
 
 	public FileEntry addFileEntry(
-			long folderId, String title, String description, String changeLog,
-			InputStream is, long size, ServiceContext serviceContext)
+			long folderId, String mimeType, String title, String description,
+			String changeLog, InputStream is, long size,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		try {
@@ -127,11 +128,8 @@ public class CMISRepository extends BaseCmisRepository {
 			properties.put(
 				PropertyIds.OBJECT_TYPE_ID, BaseTypeId.CMIS_DOCUMENT.value());
 
-			String contentType = (String)serviceContext.getAttribute(
-				"contentType");
-
 			ContentStream contentStream = new ContentStreamImpl(
-				title, BigInteger.valueOf(size), contentType, is);
+				title, BigInteger.valueOf(size), mimeType, is);
 
 			return toFileEntry(
 				cmisFolder.createDocument(properties, contentStream, null));
@@ -874,12 +872,10 @@ public class CMISRepository extends BaseCmisRepository {
 			String changeLog = "Reverted to " + version;
 			String title = oldVersion.getName();
 			ContentStream contentStream = oldVersion.getContentStream();
-
-			serviceContext.setAttribute(
-				"contentType", oldVersion.getContentStreamMimeType());
+			String mimeType = oldVersion.getContentStreamMimeType();
 
 			updateFileEntry(
-				fileEntryId, contentStream.getFileName(), title,
+				fileEntryId, contentStream.getFileName(), mimeType, title,
 				StringPool.BLANK, changeLog, true, contentStream.getStream(),
 				contentStream.getLength(), serviceContext);
 		}
@@ -984,9 +980,10 @@ public class CMISRepository extends BaseCmisRepository {
 	}
 
 	public FileEntry updateFileEntry(
-			long fileEntryId, String sourceFileName, String title,
-			String description, String changeLog, boolean majorVersion,
-			InputStream is, long size, ServiceContext serviceContext)
+			long fileEntryId, String sourceFileName, String mimeType,
+			String title, String description, String changeLog,
+			boolean majorVersion, InputStream is, long size,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		Document document = null;
@@ -1027,11 +1024,8 @@ public class CMISRepository extends BaseCmisRepository {
 			}
 
 			if (is != null) {
-				String contentType = (String)serviceContext.getAttribute(
-					"contentType");
-
 				contentStream = new ContentStreamImpl(
-					sourceFileName, BigInteger.valueOf(size), contentType, is);
+					sourceFileName, BigInteger.valueOf(size), mimeType, is);
 			}
 
 			checkUpdatable(allowableActionsSet, properties, contentStream);
@@ -1075,8 +1069,9 @@ public class CMISRepository extends BaseCmisRepository {
 	}
 
 	public FileEntry updateFileEntry(
-			String objectId, Map<String, Object> properties, InputStream is,
-			String sourceFileName, long size, ServiceContext serviceContext)
+			String objectId, String mimeType, Map<String, Object> properties,
+			InputStream is, String sourceFileName, long size,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		try {
@@ -1092,13 +1087,10 @@ public class CMISRepository extends BaseCmisRepository {
 			ContentStream contentStream = null;
 
 			if (is != null) {
-				String contentType = (String)serviceContext.getAttribute(
-					"contentType");
-
 				is = new Base64.InputStream(is, Base64.ENCODE);
 
 				contentStream = new ContentStreamImpl(
-					sourceFileName, BigInteger.valueOf(size), contentType, is);
+					sourceFileName, BigInteger.valueOf(size), mimeType, is);
 			}
 
 			checkUpdatable(allowableActionsSet, properties, contentStream);

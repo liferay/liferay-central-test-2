@@ -158,6 +158,7 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 			FileEntry fileEntry = (FileEntry)resource.getModel();
 
 			long groupId = WebDAVUtil.getGroupId(companyId, destination);
+			String mimeType = fileEntry.getMimeType();
 			String title = WebDAVUtil.getResourceName(destinationArray);
 			String description = fileEntry.getDescription();
 			String changeLog = StringPool.BLANK;
@@ -187,8 +188,8 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 			}
 
 			DLAppServiceUtil.addFileEntry(
-				groupId, parentFolderId, title, description, changeLog, file,
-				serviceContext);
+				groupId, parentFolderId, mimeType, title, description,
+				changeLog, file, serviceContext);
 
 			return status;
 		}
@@ -345,12 +346,24 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 			if (resource == null) {
 				status = HttpServletResponse.SC_CREATED;
 
+				HttpServletRequest request =
+					webDavRequest.getHttpServletRequest();
+
 				String[] pathArray = webDavRequest.getPathArray();
 
 				long companyId = webDavRequest.getCompanyId();
 				long groupId = webDavRequest.getGroupId();
 				long parentFolderId = getParentFolderId(companyId, pathArray);
 				String title = WebDAVUtil.getResourceName(pathArray);
+
+				String contentType = GetterUtil.get(
+					request.getHeader(HttpHeaders.CONTENT_TYPE),
+					ContentTypes.APPLICATION_OCTET_STREAM);
+
+				if (contentType.equals(ContentTypes.APPLICATION_OCTET_STREAM)) {
+					contentType = MimeTypesUtil.getContentType(
+						request.getInputStream(), title);
+				}
 
 				String description = StringPool.BLANK;
 				String changeLog = StringPool.BLANK;
@@ -367,7 +380,7 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 				serviceContext.setAddGuestPermissions(true);
 
 				FileEntry fileEntry = DLAppServiceUtil.addFileEntry(
-					groupId, parentFolderId, title, description,
+					groupId, parentFolderId, contentType, title, description,
 					changeLog, file, serviceContext);
 
 				resource = toResource(webDavRequest, fileEntry, false);
@@ -572,7 +585,8 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 
 					DLAppServiceUtil.updateFileEntry(
 						destFileEntry.getFileEntryId(),
-						destFileEntry.getTitle(), destFileEntry.getTitle(),
+						destFileEntry.getTitle(), destFileEntry.getMimeType(),
+						destFileEntry.getTitle(),
 						destFileEntry.getDescription(), changeLog, false, bytes,
 						serviceContext);
 
@@ -586,8 +600,9 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 			}
 
 			DLAppServiceUtil.updateFileEntry(
-				fileEntry.getFileEntryId(), sourceFileName, title, description,
-				changeLog, false, bytes, serviceContext);
+				fileEntry.getFileEntryId(), sourceFileName,
+				fileEntry.getMimeType(), title, description, changeLog, false,
+				bytes, serviceContext);
 
 			if (fileEntry.getFolderId() != newParentFolderId) {
 				fileEntry = DLAppServiceUtil.moveFileEntry(
@@ -648,8 +663,6 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 					contentType = MimeTypesUtil.getContentType(
 						request.getInputStream(), title);
 				}
-
-				serviceContext.setAttribute("contentType", contentType);
 			}
 			else {
 
@@ -664,11 +677,7 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 
 					contentType = MimeTypesUtil.getContentType(file);
 				}
-
-				serviceContext.setAttribute("contentType", contentType);
 			}
-
-			serviceContext.setAttribute("extension", extension);
 
 			if (PropsValues.DL_WEBDAV_SAVE_TO_SINGLE_VERSION) {
 				serviceContext.setWorkflowAction(
@@ -694,27 +703,27 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 
 				if (contentLength > 0) {
 					DLAppServiceUtil.updateFileEntry(
-						fileEntryId, title, title, description, changeLog,
-						false, request.getInputStream(), contentLength,
-						serviceContext);
+						fileEntryId, title, contentType, title, description,
+						changeLog, false, request.getInputStream(),
+						contentLength, serviceContext);
 				}
 				else {
 					DLAppServiceUtil.updateFileEntry(
-						fileEntryId, title, title, description, changeLog,
-						false, file, serviceContext);
+						fileEntryId, title, contentType, title, description,
+						changeLog, false, file, serviceContext);
 				}
 			}
 			catch (NoSuchFileEntryException nsfee) {
 				if (contentLength > 0) {
 					DLAppServiceUtil.addFileEntry(
-						groupId, parentFolderId, title, description,
-						changeLog, request.getInputStream(), contentLength,
-						serviceContext);
+						groupId, parentFolderId, contentType, title,
+						description, changeLog, request.getInputStream(),
+						contentLength, serviceContext);
 				}
 				else {
 					DLAppServiceUtil.addFileEntry(
-						groupId, parentFolderId, title, description, changeLog,
-						file, serviceContext);
+						groupId, parentFolderId, contentType, title,
+						description, changeLog, file, serviceContext);
 				}
 			}
 
@@ -981,8 +990,9 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 
 		DLAppServiceUtil.updateFileEntry(
 			fileEntry.getFileEntryId(), fileEntry.getTitle(),
-			fileEntry.getTitle(), fileEntry.getDescription(),
-			latestFileVersion.getDescription(), true, null, 0, serviceContext);
+			fileEntry.getMimeType(), fileEntry.getTitle(),
+			fileEntry.getDescription(), latestFileVersion.getDescription(),
+			true, null, 0, serviceContext);
 	}
 
 	protected Resource toResource(

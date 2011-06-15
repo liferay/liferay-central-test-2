@@ -30,7 +30,6 @@ import com.liferay.portal.kernel.servlet.ServletResponseConstants;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.util.Constants;
-import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -381,6 +380,8 @@ public class EditFileEntryAction extends PortletAction {
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			DLFileEntry.class.getName(), actionRequest);
 
+		serviceContext.setAttribute("sourceFileName", sourceFileName);
+
 		serviceContext.setAttribute("documentTypeId", documentTypeId);
 
 		HashMap<String, Fields> fieldsMap = getFieldsMap(
@@ -395,36 +396,23 @@ public class EditFileEntryAction extends PortletAction {
 				title = sourceFileName;
 			}
 
-			serviceContext.setAttribute("contentType", contentType);
-
-			String extension = FileUtil.getExtension(sourceFileName);
-
-			serviceContext.setAttribute("extension", extension);
-
 			// Add file entry
 
 			fileEntry = DLAppServiceUtil.addFileEntry(
-				repositoryId, folderId, title, description, changeLog, file,
-				serviceContext);
+				repositoryId, folderId, contentType, title, description,
+				changeLog, file, serviceContext);
 
 			AssetPublisherUtil.addAndStoreSelection(
 				actionRequest, DLFileEntry.class.getName(),
 				fileEntry.getFileEntryId(), -1);
 		}
 		else {
-			if (Validator.isNotNull(sourceFileName)) {
-				serviceContext.setAttribute("contentType", contentType);
-
-				String extension = FileUtil.getExtension(sourceFileName);
-
-				serviceContext.setAttribute("extension", extension);
-			}
 
 			// Update file entry
 
 			fileEntry = DLAppServiceUtil.updateFileEntry(
-				fileEntryId, sourceFileName, title, description, changeLog,
-				majorVersion, file, serviceContext);
+				fileEntryId, sourceFileName, contentType, title, description,
+				changeLog, majorVersion, file, serviceContext);
 		}
 
 		AssetPublisherUtil.addRecentFolderId(

@@ -38,15 +38,16 @@ public class DLFileEntryServiceUtil {
 	 * Never modify this class directly. Add custom service methods to {@link com.liferay.portlet.documentlibrary.service.impl.DLFileEntryServiceImpl} and rerun ServiceBuilder to regenerate this class.
 	 */
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntry addFileEntry(
-		long groupId, long repositoryId, long folderId, java.lang.String title,
+		long groupId, long repositoryId, long folderId,
+		java.lang.String mimeType, java.lang.String title,
 		java.lang.String description, java.lang.String changeLog,
 		java.io.InputStream is, long size,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
-				   .addFileEntry(groupId, repositoryId, folderId, title,
-			description, changeLog, is, size, serviceContext);
+				   .addFileEntry(groupId, repositoryId, folderId, mimeType,
+			title, description, changeLog, is, size, serviceContext);
 	}
 
 	public static void cancelCheckOut(long fileEntryId)
@@ -256,15 +257,16 @@ public class DLFileEntryServiceUtil {
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntry updateFileEntry(
 		long fileEntryId, java.lang.String sourceFileName,
-		java.lang.String title, java.lang.String description,
-		java.lang.String changeLog, boolean majorVersion,
-		java.io.InputStream is, long size,
+		java.lang.String mimeType, java.lang.String title,
+		java.lang.String description, java.lang.String changeLog,
+		boolean majorVersion, java.io.InputStream is, long size,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
-				   .updateFileEntry(fileEntryId, sourceFileName, title,
-			description, changeLog, majorVersion, is, size, serviceContext);
+				   .updateFileEntry(fileEntryId, sourceFileName, mimeType,
+			title, description, changeLog, majorVersion, is, size,
+			serviceContext);
 	}
 
 	public static boolean verifyFileEntryLock(long fileEntryId,

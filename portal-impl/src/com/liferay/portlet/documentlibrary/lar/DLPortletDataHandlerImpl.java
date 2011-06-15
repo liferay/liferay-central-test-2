@@ -204,8 +204,8 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 		ServiceContext serviceContext = portletDataContext.createServiceContext(
 			fileEntryElement, fileEntry, _NAMESPACE);
 
-		serviceContext.setAttribute("contentType", fileEntry.getMimeType());
-		serviceContext.setAttribute("extension", fileEntry.getExtension());
+		serviceContext.setAttribute(
+			"sourceFileName", "A." + fileEntry.getExtension());
 
 		String binPath = fileEntryElement.attributeValue("bin-path");
 
@@ -294,17 +294,18 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 
 				importedFileEntry = DLAppLocalServiceUtil.addFileEntry(
 					userId, portletDataContext.getScopeGroupId(), folderId,
-					titleWithExtension, fileEntry.getDescription(), null,
-					is, fileEntry.getSize(), serviceContext);
+					fileEntry.getMimeType(), titleWithExtension,
+					fileEntry.getDescription(), null, is, fileEntry.getSize(),
+					serviceContext);
 			}
 			else if (!isDuplicateFileEntry(
 						folderUuid, fileEntry, existingFileEntry)) {
 
 				importedFileEntry = DLAppLocalServiceUtil.updateFileEntry(
 					userId, existingFileEntry.getFileEntryId(),
-					fileEntry.getTitle(), fileEntry.getTitle(),
-					fileEntry.getDescription(), null, true,
-					is, fileEntry.getSize(), serviceContext);
+					fileEntry.getTitle(), fileEntry.getMimeType(),
+					fileEntry.getTitle(), fileEntry.getDescription(), null,
+					true, is, fileEntry.getSize(), serviceContext);
 			}
 			else {
 				FileVersion latestFileVersion =
@@ -331,8 +332,9 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 			try {
 				importedFileEntry = DLAppLocalServiceUtil.addFileEntry(
 					userId, portletDataContext.getScopeGroupId(), folderId,
-					titleWithExtension, fileEntry.getDescription(), null,
-					is, fileEntry.getSize(), serviceContext);
+					fileEntry.getMimeType(), titleWithExtension,
+					fileEntry.getDescription(), null, is, fileEntry.getSize(),
+					serviceContext);
 			}
 			catch (DuplicateFileException dfe) {
 				String title = fileEntry.getTitle();
@@ -351,8 +353,8 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 
 				importedFileEntry = DLAppLocalServiceUtil.addFileEntry(
 					userId, portletDataContext.getScopeGroupId(), folderId,
-					title, fileEntry.getDescription(), null,
-					is, fileEntry.getSize(), serviceContext);
+					fileEntry.getMimeType(), title, fileEntry.getDescription(),
+					null, is, fileEntry.getSize(), serviceContext);
 			}
 		}
 

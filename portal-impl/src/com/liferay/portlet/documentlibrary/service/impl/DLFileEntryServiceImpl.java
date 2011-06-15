@@ -46,17 +46,17 @@ import java.util.List;
 public class DLFileEntryServiceImpl extends DLFileEntryServiceBaseImpl {
 
 	public DLFileEntry addFileEntry(
-			long groupId, long repositoryId, long folderId, String title,
-			String description, String changeLog, InputStream is, long size,
-			ServiceContext serviceContext)
+			long groupId, long repositoryId, long folderId, String mimeType,
+			String title, String description, String changeLog, InputStream is,
+			long size, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		DLFolderPermission.check(
 			getPermissionChecker(), groupId, folderId, ActionKeys.ADD_DOCUMENT);
 
 		return dlFileEntryLocalService.addFileEntry(
-			getUserId(), groupId, repositoryId, folderId, title, description,
-			changeLog, is, size, serviceContext);
+			getUserId(), groupId, repositoryId, folderId, mimeType, title,
+			description, changeLog, is, size, serviceContext);
 	}
 
 	public void cancelCheckOut(long fileEntryId)
@@ -123,10 +123,13 @@ public class DLFileEntryServiceImpl extends DLFileEntryServiceBaseImpl {
 			dlFileEntry.getCompanyId(), dlFileEntry.getFolderId(),
 			dlFileEntry.getName());
 
+		serviceContext.setAttribute(
+			"sourceFileName", "A." + dlFileEntry.getExtension());
+
 		addFileEntry(
-			groupId, repositoryId, destFolderId, dlFileEntry.getTitle(),
-			dlFileEntry.getDescription(), null, inputStream,
-			dlFileEntry.getSize(), serviceContext);
+			groupId, repositoryId, destFolderId, dlFileEntry.getMimeType(),
+			dlFileEntry.getTitle(), dlFileEntry.getDescription(), null,
+			inputStream, dlFileEntry.getSize(), serviceContext);
 	}
 
 	public void deleteFileEntry(long fileEntryId)
@@ -433,17 +436,18 @@ public class DLFileEntryServiceImpl extends DLFileEntryServiceBaseImpl {
 	}
 
 	public DLFileEntry updateFileEntry(
-			long fileEntryId, String sourceFileName, String title,
-			String description, String changeLog, boolean majorVersion,
-			InputStream is, long size, ServiceContext serviceContext)
+			long fileEntryId, String sourceFileName, String mimeType,
+			String title, String description, String changeLog,
+			boolean majorVersion, InputStream is, long size,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		DLFileEntryPermission.check(
 			getPermissionChecker(), fileEntryId, ActionKeys.UPDATE);
 
 		return dlFileEntryLocalService.updateFileEntry(
-			getUserId(), fileEntryId, sourceFileName, title, description,
-			changeLog, majorVersion, is, size, serviceContext);
+			getUserId(), fileEntryId, sourceFileName, mimeType, title,
+			description, changeLog, majorVersion, is, size, serviceContext);
 	}
 
 	public boolean verifyFileEntryLock(long fileEntryId, String lockUuid)

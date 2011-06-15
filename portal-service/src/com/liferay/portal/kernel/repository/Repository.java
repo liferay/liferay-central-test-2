@@ -33,8 +33,9 @@ import java.util.List;
 public interface Repository {
 
 	public FileEntry addFileEntry(
-			long folderId, String title, String description, String changeLog,
-			InputStream is, long size, ServiceContext serviceContext)
+			long folderId, String mimeType, String title, String description,
+			String changeLog, InputStream is, long size,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException;
 
 	public Folder addFolder(
@@ -177,9 +178,10 @@ public interface Repository {
 		throws PortalException, SystemException;
 
 	public FileEntry updateFileEntry(
-			long fileEntryId, String sourceFileName, String title,
-			String description, String changeLog, boolean majorVersion,
-			InputStream is, long size, ServiceContext serviceContext)
+			long fileEntryId, String sourceFileName, String mimeType,
+			String title, String description, String changeLog,
+			boolean majorVersion, InputStream is, long size,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException;
 
 	public Folder updateFolder(

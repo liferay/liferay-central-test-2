@@ -56,8 +56,8 @@ import com.liferay.portlet.documentlibrary.service.DLAppServiceUtil;
 public class DLAppServiceHttp {
 	public static com.liferay.portal.kernel.repository.model.FileEntry addFileEntry(
 		HttpPrincipal httpPrincipal, long repositoryId, long folderId,
-		java.lang.String title, java.lang.String description,
-		java.lang.String changeLog, byte[] bytes,
+		java.lang.String mimeType, java.lang.String title,
+		java.lang.String description, java.lang.String changeLog, byte[] bytes,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -66,8 +66,8 @@ public class DLAppServiceHttp {
 					"addFileEntry", _addFileEntryParameterTypes0);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
-					repositoryId, folderId, title, description, changeLog,
-					bytes, serviceContext);
+					repositoryId, folderId, mimeType, title, description,
+					changeLog, bytes, serviceContext);
 
 			Object returnObj = null;
 
@@ -97,8 +97,9 @@ public class DLAppServiceHttp {
 
 	public static com.liferay.portal.kernel.repository.model.FileEntry addFileEntry(
 		HttpPrincipal httpPrincipal, long repositoryId, long folderId,
-		java.lang.String title, java.lang.String description,
-		java.lang.String changeLog, java.io.File file,
+		java.lang.String mimeType, java.lang.String title,
+		java.lang.String description, java.lang.String changeLog,
+		java.io.File file,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -107,8 +108,8 @@ public class DLAppServiceHttp {
 					"addFileEntry", _addFileEntryParameterTypes1);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
-					repositoryId, folderId, title, description, changeLog,
-					file, serviceContext);
+					repositoryId, folderId, mimeType, title, description,
+					changeLog, file, serviceContext);
 
 			Object returnObj = null;
 
@@ -138,8 +139,9 @@ public class DLAppServiceHttp {
 
 	public static com.liferay.portal.kernel.repository.model.FileEntry addFileEntry(
 		HttpPrincipal httpPrincipal, long repositoryId, long folderId,
-		java.lang.String title, java.lang.String description,
-		java.lang.String changeLog, java.io.InputStream is, long size,
+		java.lang.String mimeType, java.lang.String title,
+		java.lang.String description, java.lang.String changeLog,
+		java.io.InputStream is, long size,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -148,8 +150,8 @@ public class DLAppServiceHttp {
 					"addFileEntry", _addFileEntryParameterTypes2);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
-					repositoryId, folderId, title, description, changeLog, is,
-					size, serviceContext);
+					repositoryId, folderId, mimeType, title, description,
+					changeLog, is, size, serviceContext);
 
 			Object returnObj = null;
 
@@ -2143,9 +2145,9 @@ public class DLAppServiceHttp {
 
 	public static com.liferay.portal.kernel.repository.model.FileEntry updateFileEntry(
 		HttpPrincipal httpPrincipal, long fileEntryId,
-		java.lang.String sourceFileName, java.lang.String title,
-		java.lang.String description, java.lang.String changeLog,
-		boolean majorVersion, byte[] bytes,
+		java.lang.String sourceFileName, java.lang.String mimeType,
+		java.lang.String title, java.lang.String description,
+		java.lang.String changeLog, boolean majorVersion, byte[] bytes,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -2154,8 +2156,8 @@ public class DLAppServiceHttp {
 					"updateFileEntry", _updateFileEntryParameterTypes56);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
-					fileEntryId, sourceFileName, title, description, changeLog,
-					majorVersion, bytes, serviceContext);
+					fileEntryId, sourceFileName, mimeType, title, description,
+					changeLog, majorVersion, bytes, serviceContext);
 
 			Object returnObj = null;
 
@@ -2185,9 +2187,9 @@ public class DLAppServiceHttp {
 
 	public static com.liferay.portal.kernel.repository.model.FileEntry updateFileEntry(
 		HttpPrincipal httpPrincipal, long fileEntryId,
-		java.lang.String sourceFileName, java.lang.String title,
-		java.lang.String description, java.lang.String changeLog,
-		boolean majorVersion, java.io.File file,
+		java.lang.String sourceFileName, java.lang.String mimeType,
+		java.lang.String title, java.lang.String description,
+		java.lang.String changeLog, boolean majorVersion, java.io.File file,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -2196,8 +2198,8 @@ public class DLAppServiceHttp {
 					"updateFileEntry", _updateFileEntryParameterTypes57);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
-					fileEntryId, sourceFileName, title, description, changeLog,
-					majorVersion, file, serviceContext);
+					fileEntryId, sourceFileName, mimeType, title, description,
+					changeLog, majorVersion, file, serviceContext);
 
 			Object returnObj = null;
 
@@ -2227,9 +2229,10 @@ public class DLAppServiceHttp {
 
 	public static com.liferay.portal.kernel.repository.model.FileEntry updateFileEntry(
 		HttpPrincipal httpPrincipal, long fileEntryId,
-		java.lang.String sourceFileName, java.lang.String title,
-		java.lang.String description, java.lang.String changeLog,
-		boolean majorVersion, java.io.InputStream is, long size,
+		java.lang.String sourceFileName, java.lang.String mimeType,
+		java.lang.String title, java.lang.String description,
+		java.lang.String changeLog, boolean majorVersion,
+		java.io.InputStream is, long size,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -2238,8 +2241,8 @@ public class DLAppServiceHttp {
 					"updateFileEntry", _updateFileEntryParameterTypes58);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
-					fileEntryId, sourceFileName, title, description, changeLog,
-					majorVersion, is, size, serviceContext);
+					fileEntryId, sourceFileName, mimeType, title, description,
+					changeLog, majorVersion, is, size, serviceContext);
 
 			Object returnObj = null;
 
@@ -2423,18 +2426,20 @@ public class DLAppServiceHttp {
 	private static Log _log = LogFactoryUtil.getLog(DLAppServiceHttp.class);
 	private static final Class<?>[] _addFileEntryParameterTypes0 = new Class[] {
 			long.class, long.class, java.lang.String.class,
-			java.lang.String.class, java.lang.String.class, byte[].class,
+			java.lang.String.class, java.lang.String.class,
+			java.lang.String.class, byte[].class,
 			com.liferay.portal.service.ServiceContext.class
 		};
 	private static final Class<?>[] _addFileEntryParameterTypes1 = new Class[] {
 			long.class, long.class, java.lang.String.class,
-			java.lang.String.class, java.lang.String.class, java.io.File.class,
+			java.lang.String.class, java.lang.String.class,
+			java.lang.String.class, java.io.File.class,
 			com.liferay.portal.service.ServiceContext.class
 		};
 	private static final Class<?>[] _addFileEntryParameterTypes2 = new Class[] {
 			long.class, long.class, java.lang.String.class,
 			java.lang.String.class, java.lang.String.class,
-			java.io.InputStream.class, long.class,
+			java.lang.String.class, java.io.InputStream.class, long.class,
 			com.liferay.portal.service.ServiceContext.class
 		};
 	private static final Class<?>[] _addFileShortcutParameterTypes3 = new Class[] {
@@ -2610,19 +2615,21 @@ public class DLAppServiceHttp {
 		};
 	private static final Class<?>[] _updateFileEntryParameterTypes56 = new Class[] {
 			long.class, java.lang.String.class, java.lang.String.class,
-			java.lang.String.class, java.lang.String.class, boolean.class,
-			byte[].class, com.liferay.portal.service.ServiceContext.class
+			java.lang.String.class, java.lang.String.class,
+			java.lang.String.class, boolean.class, byte[].class,
+			com.liferay.portal.service.ServiceContext.class
 		};
 	private static final Class<?>[] _updateFileEntryParameterTypes57 = new Class[] {
 			long.class, java.lang.String.class, java.lang.String.class,
-			java.lang.String.class, java.lang.String.class, boolean.class,
-			java.io.File.class, com.liferay.portal.service.ServiceContext.class
+			java.lang.String.class, java.lang.String.class,
+			java.lang.String.class, boolean.class, java.io.File.class,
+			com.liferay.portal.service.ServiceContext.class
 		};
 	private static final Class<?>[] _updateFileEntryParameterTypes58 = new Class[] {
 			long.class, java.lang.String.class, java.lang.String.class,
-			java.lang.String.class, java.lang.String.class, boolean.class,
-			java.io.InputStream.class, long.class,
-			com.liferay.portal.service.ServiceContext.class
+			java.lang.String.class, java.lang.String.class,
+			java.lang.String.class, boolean.class, java.io.InputStream.class,
+			long.class, com.liferay.portal.service.ServiceContext.class
 		};
 	private static final Class<?>[] _updateFileShortcutParameterTypes59 = new Class[] {
 			long.class, long.class, long.class,

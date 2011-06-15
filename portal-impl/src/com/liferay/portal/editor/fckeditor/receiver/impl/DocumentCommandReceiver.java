@@ -75,7 +75,7 @@ public class DocumentCommandReceiver extends BaseCommandReceiver {
 
 	protected String fileUpload(
 		CommandArgument commandArgument, String fileName, File file,
-		String extension) {
+		String contentType) {
 
 		try {
 			Group group = commandArgument.getCurrentGroup();
@@ -94,8 +94,8 @@ public class DocumentCommandReceiver extends BaseCommandReceiver {
 			serviceContext.setAddGuestPermissions(true);
 
 			DLAppServiceUtil.addFileEntry(
-				group.getGroupId(), folderId, title, description, changeLog,
-				file, serviceContext);
+				group.getGroupId(), folderId, contentType, title, description,
+				changeLog, file, serviceContext);
 		}
 		catch (Exception e) {
 			throw new FCKException(e);

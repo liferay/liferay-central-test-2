@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.search.QueryConfig;
 import com.liferay.portal.kernel.search.SearchContext;
+import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StackTraceUtil;
 import com.liferay.portal.kernel.util.StringPool;
@@ -168,14 +169,14 @@ public class DLAppServiceTest extends BaseServiceTestCase {
 			byte[] bytes = null;
 
 			FileEntry fileEntry = DLAppServiceUtil.addFileEntry(
-				_groupId, folderId, "Bytes-null.txt", description, changeLog,
-				bytes, serviceContext);
+				_groupId, folderId, ContentTypes.TEXT_PLAIN, "Bytes-null.txt",
+				description, changeLog, bytes, serviceContext);
 
 			String newName = "Bytes-changed.txt";
 
 			DLAppServiceUtil.updateFileEntry(
-				fileEntry.getFileEntryId(), newName, newName, description,
-				changeLog, true, bytes, serviceContext);
+				fileEntry.getFileEntryId(), newName, ContentTypes.TEXT_PLAIN,
+				newName, description, changeLog, true, bytes, serviceContext);
 		}
 		catch (Exception e) {
 			fail(
@@ -187,14 +188,14 @@ public class DLAppServiceTest extends BaseServiceTestCase {
 			File file = null;
 
 			FileEntry fileEntry = DLAppServiceUtil.addFileEntry(
-				_groupId, folderId, "File-null.txt", description, changeLog,
-				file, serviceContext);
+				_groupId, folderId, ContentTypes.TEXT_PLAIN, "File-null.txt",
+				description, changeLog, file, serviceContext);
 
 			String newName = "File-changed.txt";
 
 			DLAppServiceUtil.updateFileEntry(
-				fileEntry.getFileEntryId(), newName, newName, description,
-				changeLog, true, file, serviceContext);
+				fileEntry.getFileEntryId(), newName, ContentTypes.TEXT_PLAIN,
+				newName, description, changeLog, true, file, serviceContext);
 		}
 		catch (Exception e) {
 			fail(
@@ -206,14 +207,14 @@ public class DLAppServiceTest extends BaseServiceTestCase {
 			InputStream is = null;
 
 			FileEntry fileEntry = DLAppServiceUtil.addFileEntry(
-				_groupId, folderId, "IS-null.txt", description, changeLog, is,
-				0, serviceContext);
+				_groupId, folderId, ContentTypes.TEXT_PLAIN, "IS-null.txt",
+				description, changeLog, is, 0, serviceContext);
 
 			String newName = "IS-changed.txt";
 
 			DLAppServiceUtil.updateFileEntry(
-				fileEntry.getFileEntryId(), newName, newName, description,
-				changeLog, true, is, 0, serviceContext);
+				fileEntry.getFileEntryId(), newName, ContentTypes.TEXT_PLAIN,
+				newName, description, changeLog, true, is, 0, serviceContext);
 		}
 		catch (Exception e) {
 			fail(
@@ -256,8 +257,8 @@ public class DLAppServiceTest extends BaseServiceTestCase {
 		serviceContext.setAddGuestPermissions(true);
 
 		return DLAppServiceUtil.addFileEntry(
-			_groupId, folderId, fileName, description, changeLog, bytes,
-			serviceContext);
+			_groupId, folderId, ContentTypes.TEXT_PLAIN, fileName, description,
+			changeLog, bytes, serviceContext);
 	}
 
 	protected void search(boolean rootFolder, String keywords)

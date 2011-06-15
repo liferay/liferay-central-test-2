@@ -91,8 +91,8 @@ public class DLFileEntryLocalServiceImpl
 
 	public DLFileEntry addFileEntry(
 			long userId, long groupId, long repositoryId, long folderId,
-			String title, String description, String changeLog, InputStream is,
-			long size, ServiceContext serviceContext)
+			String mimeType, String title, String description, String changeLog,
+			InputStream is, long size, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		// File entry
@@ -102,8 +102,7 @@ public class DLFileEntryLocalServiceImpl
 			user.getCompanyId(), folderId);
 		String name = String.valueOf(
 			counterLocalService.increment(DLFileEntry.class.getName()));
-		String extension = (String)serviceContext.getAttribute("extension");
-		String mimeType = (String)serviceContext.getAttribute("contentType");
+		String extension = getExtension(title, serviceContext);
 
 		Long documentTypeId = (Long)serviceContext.getAttribute(
 			"documentTypeId");
@@ -725,6 +724,8 @@ public class DLFileEntryLocalServiceImpl
 		}
 
 		String sourceFileName = dlFileVersion.getTitle();
+		String extension = dlFileVersion.getExtension();
+		String mimeType = dlFileVersion.getMimeType();
 		String title = dlFileVersion.getTitle();
 		String description = dlFileVersion.getDescription();
 		String changeLog = "Reverted to " + version;
@@ -734,8 +735,9 @@ public class DLFileEntryLocalServiceImpl
 		long size = dlFileVersion.getSize();
 
 		updateFileEntry(
-			userId, fileEntryId, sourceFileName, title, description, changeLog,
-			majorVersion, extraSettings, is, size, serviceContext);
+			userId, fileEntryId, sourceFileName, extension, mimeType, title,
+			description, changeLog, majorVersion, extraSettings, is, size,
+			serviceContext);
 	}
 
 	public void unlockFileEntry(long fileEntryId) throws SystemException {
@@ -778,16 +780,20 @@ public class DLFileEntryLocalServiceImpl
 	}
 
 	public DLFileEntry updateFileEntry(
-			long userId, long fileEntryId, String sourceFileName, String title,
-			String description, String changeLog, boolean majorVersion,
-			InputStream is, long size, ServiceContext serviceContext)
+			long userId, long fileEntryId, String sourceFileName,
+			String mimeType, String title, String description, String changeLog,
+			boolean majorVersion, InputStream is, long size,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
+
+		String extension = getExtension(title, serviceContext);
 
 		String extraSettings = StringPool.BLANK;
 
 		return updateFileEntry(
-			userId, fileEntryId, sourceFileName, title, description, changeLog,
-			majorVersion, extraSettings, is, size, serviceContext);
+			userId, fileEntryId, sourceFileName, extension, mimeType, title,
+			description, changeLog, majorVersion, extraSettings, is, size,
+			serviceContext);
 	}
 
 	public DLFileEntry updateStatus(
@@ -1127,6 +1133,17 @@ public class DLFileEntryLocalServiceImpl
 		}
 	}
 
+	protected String getExtension(String title, ServiceContext serviceContext) {
+		String sourceFileName = (String)serviceContext.getAttribute(
+			"sourceFileName");
+
+		if (Validator.isNull(sourceFileName)) {
+			sourceFileName = title;
+		}
+
+		return FileUtil.getExtension(sourceFileName);
+	}
+
 	protected File getFile(DLFileEntry dlFileEntry)
 		throws PortalException, SystemException {
 
@@ -1384,10 +1401,10 @@ public class DLFileEntryLocalServiceImpl
 	}
 
 	protected DLFileEntry updateFileEntry(
-			long userId, long fileEntryId, String sourceFileName, String title,
-			String description, String changeLog, boolean majorVersion,
-			String extraSettings, InputStream is, long size,
-			ServiceContext serviceContext)
+			long userId, long fileEntryId, String sourceFileName,
+			String extension, String mimeType, String title, String description,
+			String changeLog, boolean majorVersion, String extraSettings,
+			InputStream is, long size, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		User user = userPersistence.findByPrimaryKey(userId);
@@ -1402,13 +1419,9 @@ public class DLFileEntryLocalServiceImpl
 			autoCheckIn = true;
 		}
 
-		String extension = (String)serviceContext.getAttribute("extension");
-
 		if (Validator.isNull(extension)) {
 			extension = dlFileEntry.getExtension();
 		}
-
-		String mimeType = (String)serviceContext.getAttribute("contentType");
 
 		if (Validator.isNull(mimeType)) {
 			mimeType = dlFileEntry.getMimeType();

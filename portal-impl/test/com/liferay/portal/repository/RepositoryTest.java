@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayInputStream;
 import com.liferay.portal.kernel.repository.LocalRepository;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.repository.model.Folder;
+import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.model.Layout;
@@ -116,7 +117,9 @@ public class RepositoryTest extends TestCase {
 			FileEntry fileEntry1 = localRepository.addFileEntry(
 				TestPropsValues.USER_ID,
 				DLFolderConstants.DEFAULT_PARENT_FOLDER_ID,
-				String.valueOf(DLFolderConstants.DEFAULT_PARENT_FOLDER_ID),
+				ContentTypes.TEXT_PLAIN,
+				String.valueOf(DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) +
+					".txt",
 				StringPool.BLANK, StringPool.BLANK, inputStream,
 				_TEST_CONTENT.length(), new ServiceContext());
 
@@ -131,8 +134,8 @@ public class RepositoryTest extends TestCase {
 			folderIds[i] = folder.getFolderId();
 
 			FileEntry fileEntry2 = localRepository.addFileEntry(
-				TestPropsValues.USER_ID, folderIds[i],
-				String.valueOf(folderIds[i]), StringPool.BLANK,
+				TestPropsValues.USER_ID, folderIds[i], ContentTypes.TEXT_PLAIN,
+				String.valueOf(folderIds[i]) + ".txt", StringPool.BLANK,
 				StringPool.BLANK, inputStream, _TEST_CONTENT.length(),
 				new ServiceContext());
 

@@ -45,13 +45,28 @@ import java.io.InputStream;
 import java.util.List;
 
 /**
+ * <p>
+ * The DLAppService and {@link DLAppLocalServiceImpl} are used to handle all
+ * service calls for the Document Library portlet, for all Liferay and
+ * third-party repositories. While the method signatures are universal for all
+ * repositories, additional parameters may be specified in the serviceContext to
+ * enable added flexibility, especially within Liferay's repository during
+ * creation and update. In particular, noteworthy parameters include:
+ * <ul>
+ * <li>documentTypeId - ID for custom document type</li>
+ * <li>fieldsMap - mapping for fields associated with custom document type</li>
+ * <li>sourceFileName - original filename of file being uploaded</li>
+ * </ul>
+ * </p>
+ *
  * @author Alexander Chow
  */
 public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 
 	public FileEntry addFileEntry(
-			long repositoryId, long folderId, String title, String description,
-			String changeLog, byte[] bytes, ServiceContext serviceContext)
+			long repositoryId, long folderId, String mimeType, String title,
+			String description, String changeLog, byte[] bytes,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		if (bytes == null) {
@@ -61,13 +76,14 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 		InputStream is = new UnsyncByteArrayInputStream(bytes);
 
 		return addFileEntry(
-			repositoryId, folderId, title, description, changeLog, is,
+			repositoryId, folderId, mimeType, title, description, changeLog, is,
 			bytes.length, serviceContext);
 	}
 
 	public FileEntry addFileEntry(
-			long repositoryId, long folderId, String title, String description,
-			String changeLog, File file, ServiceContext serviceContext)
+			long repositoryId, long folderId, String mimeType, String title,
+			String description, String changeLog, File file,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		try {
@@ -83,8 +99,8 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 			}
 
 			return addFileEntry(
-				repositoryId, folderId, title, description, changeLog, is, size,
-				serviceContext);
+				repositoryId, folderId, mimeType, title, description, changeLog,
+				is, size, serviceContext);
 		}
 		catch (FileNotFoundException fnfe) {
 			throw new FileSizeException();
@@ -92,8 +108,8 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 	}
 
 	public FileEntry addFileEntry(
-			long repositoryId, long folderId, String title, String description,
-			String changeLog, InputStream is, long size,
+			long repositoryId, long folderId, String mimeType, String title,
+			String description, String changeLog, InputStream is, long size,
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
@@ -105,7 +121,8 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 		Repository repository = getRepository(repositoryId);
 
 		return repository.addFileEntry(
-			folderId, title, description, changeLog, is, size, serviceContext);
+			folderId, mimeType, title, description, changeLog, is, size,
+			serviceContext);
 	}
 
 	public DLFileShortcut addFileShortcut(
@@ -627,9 +644,9 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 	}
 
 	public FileEntry updateFileEntry(
-			long fileEntryId, String sourceFileName, String title,
-			String description, String changeLog, boolean majorVersion,
-			byte[] bytes, ServiceContext serviceContext)
+			long fileEntryId, String sourceFileName, String mimeType,
+			String title, String description, String changeLog,
+			boolean majorVersion, byte[] bytes, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		InputStream is = null;
@@ -641,14 +658,14 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 		}
 
 		return updateFileEntry(
-			fileEntryId, sourceFileName, title, description, changeLog,
-			majorVersion, is, size, serviceContext);
+			fileEntryId, sourceFileName, mimeType, title, description,
+			changeLog, majorVersion, is, size, serviceContext);
 	}
 
 	public FileEntry updateFileEntry(
-			long fileEntryId, String sourceFileName, String title,
-			String description, String changeLog, boolean majorVersion,
-			File file, ServiceContext serviceContext)
+			long fileEntryId, String sourceFileName, String mimeType,
+			String title, String description, String changeLog,
+			boolean majorVersion, File file, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		try {
@@ -661,8 +678,8 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 			}
 
 			return updateFileEntry(
-				fileEntryId, sourceFileName, title, description, changeLog,
-				majorVersion, is, size, serviceContext);
+				fileEntryId, sourceFileName, mimeType, title, description,
+				changeLog, majorVersion, is, size, serviceContext);
 		}
 		catch (FileNotFoundException fnfe) {
 			throw new NoSuchFileException();
@@ -670,16 +687,17 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 	}
 
 	public FileEntry updateFileEntry(
-			long fileEntryId, String sourceFileName, String title,
-			String description, String changeLog, boolean majorVersion,
-			InputStream is, long size, ServiceContext serviceContext)
+			long fileEntryId, String sourceFileName, String mimeType,
+			String title, String description, String changeLog,
+			boolean majorVersion, InputStream is, long size,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		Repository repository = getRepository(0, fileEntryId, 0);
 
 		return repository.updateFileEntry(
-			fileEntryId, sourceFileName, title, description, changeLog,
-			majorVersion, is, size, serviceContext);
+			fileEntryId, sourceFileName, mimeType, title, description,
+			changeLog, majorVersion, is, size, serviceContext);
 	}
 
 	public DLFileShortcut updateFileShortcut(

@@ -258,14 +258,15 @@ public class DLFileEntryLocalServiceWrapper implements DLFileEntryLocalService {
 
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry addFileEntry(
 		long userId, long groupId, long repositoryId, long folderId,
-		java.lang.String title, java.lang.String description,
-		java.lang.String changeLog, java.io.InputStream is, long size,
+		java.lang.String mimeType, java.lang.String title,
+		java.lang.String description, java.lang.String changeLog,
+		java.io.InputStream is, long size,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _dlFileEntryLocalService.addFileEntry(userId, groupId,
-			repositoryId, folderId, title, description, changeLog, is, size,
-			serviceContext);
+			repositoryId, folderId, mimeType, title, description, changeLog,
+			is, size, serviceContext);
 	}
 
 	public void cancelCheckOut(long userId, long fileEntryId)
@@ -537,15 +538,15 @@ public class DLFileEntryLocalServiceWrapper implements DLFileEntryLocalService {
 
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry updateFileEntry(
 		long userId, long fileEntryId, java.lang.String sourceFileName,
-		java.lang.String title, java.lang.String description,
-		java.lang.String changeLog, boolean majorVersion,
-		java.io.InputStream is, long size,
+		java.lang.String mimeType, java.lang.String title,
+		java.lang.String description, java.lang.String changeLog,
+		boolean majorVersion, java.io.InputStream is, long size,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _dlFileEntryLocalService.updateFileEntry(userId, fileEntryId,
-			sourceFileName, title, description, changeLog, majorVersion, is,
-			size, serviceContext);
+			sourceFileName, mimeType, title, description, changeLog,
+			majorVersion, is, size, serviceContext);
 	}
 
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry updateStatus(

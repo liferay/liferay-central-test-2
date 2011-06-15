@@ -57,38 +57,41 @@ public class DLAppLocalServiceUtil {
 	}
 
 	public static com.liferay.portal.kernel.repository.model.FileEntry addFileEntry(
-		long userId, long repositoryId, long folderId, java.lang.String title,
+		long userId, long repositoryId, long folderId,
+		java.lang.String mimeType, java.lang.String title,
 		java.lang.String description, java.lang.String changeLog, byte[] bytes,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
-				   .addFileEntry(userId, repositoryId, folderId, title,
-			description, changeLog, bytes, serviceContext);
+				   .addFileEntry(userId, repositoryId, folderId, mimeType,
+			title, description, changeLog, bytes, serviceContext);
 	}
 
 	public static com.liferay.portal.kernel.repository.model.FileEntry addFileEntry(
-		long userId, long repositoryId, long folderId, java.lang.String title,
+		long userId, long repositoryId, long folderId,
+		java.lang.String mimeType, java.lang.String title,
 		java.lang.String description, java.lang.String changeLog,
 		java.io.File file,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
-				   .addFileEntry(userId, repositoryId, folderId, title,
-			description, changeLog, file, serviceContext);
+				   .addFileEntry(userId, repositoryId, folderId, mimeType,
+			title, description, changeLog, file, serviceContext);
 	}
 
 	public static com.liferay.portal.kernel.repository.model.FileEntry addFileEntry(
-		long userId, long repositoryId, long folderId, java.lang.String title,
+		long userId, long repositoryId, long folderId,
+		java.lang.String mimeType, java.lang.String title,
 		java.lang.String description, java.lang.String changeLog,
 		java.io.InputStream is, long size,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
-				   .addFileEntry(userId, repositoryId, folderId, title,
-			description, changeLog, is, size, serviceContext);
+				   .addFileEntry(userId, repositoryId, folderId, mimeType,
+			title, description, changeLog, is, size, serviceContext);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileRank addFileRank(
@@ -357,39 +360,44 @@ public class DLAppLocalServiceUtil {
 
 	public static com.liferay.portal.kernel.repository.model.FileEntry updateFileEntry(
 		long userId, long fileEntryId, java.lang.String sourceFileName,
-		java.lang.String title, java.lang.String description,
-		java.lang.String changeLog, boolean majorVersion, byte[] bytes,
+		java.lang.String mimeType, java.lang.String title,
+		java.lang.String description, java.lang.String changeLog,
+		boolean majorVersion, byte[] bytes,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
-				   .updateFileEntry(userId, fileEntryId, sourceFileName, title,
-			description, changeLog, majorVersion, bytes, serviceContext);
+				   .updateFileEntry(userId, fileEntryId, sourceFileName,
+			mimeType, title, description, changeLog, majorVersion, bytes,
+			serviceContext);
 	}
 
 	public static com.liferay.portal.kernel.repository.model.FileEntry updateFileEntry(
 		long userId, long fileEntryId, java.lang.String sourceFileName,
-		java.lang.String title, java.lang.String description,
-		java.lang.String changeLog, boolean majorVersion, java.io.File file,
+		java.lang.String mimeType, java.lang.String title,
+		java.lang.String description, java.lang.String changeLog,
+		boolean majorVersion, java.io.File file,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
-				   .updateFileEntry(userId, fileEntryId, sourceFileName, title,
-			description, changeLog, majorVersion, file, serviceContext);
+				   .updateFileEntry(userId, fileEntryId, sourceFileName,
+			mimeType, title, description, changeLog, majorVersion, file,
+			serviceContext);
 	}
 
 	public static com.liferay.portal.kernel.repository.model.FileEntry updateFileEntry(
 		long userId, long fileEntryId, java.lang.String sourceFileName,
-		java.lang.String title, java.lang.String description,
-		java.lang.String changeLog, boolean majorVersion,
-		java.io.InputStream is, long size,
+		java.lang.String mimeType, java.lang.String title,
+		java.lang.String description, java.lang.String changeLog,
+		boolean majorVersion, java.io.InputStream is, long size,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
-				   .updateFileEntry(userId, fileEntryId, sourceFileName, title,
-			description, changeLog, majorVersion, is, size, serviceContext);
+				   .updateFileEntry(userId, fileEntryId, sourceFileName,
+			mimeType, title, description, changeLog, majorVersion, is, size,
+			serviceContext);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileRank updateFileRank(

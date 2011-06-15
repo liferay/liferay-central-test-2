@@ -250,6 +250,7 @@ public class DLSharepointStorageImpl extends BaseSharepointStorageImpl {
 			long fileEntryId = fileEntry.getFileEntryId();
 
 			long folderId = fileEntry.getFolderId();
+			String mimeType = fileEntry.getMimeType();
 			String description = fileEntry.getDescription();
 			String changeLog = StringPool.BLANK;
 
@@ -263,8 +264,8 @@ public class DLSharepointStorageImpl extends BaseSharepointStorageImpl {
 			serviceContext.setAssetTagNames(assetTagNames);
 
 			fileEntry = DLAppServiceUtil.updateFileEntry(
-				fileEntryId, newName, newName, description, changeLog, false,
-				bytes, serviceContext);
+				fileEntryId, newName, mimeType, newName, description, changeLog,
+				false, bytes, serviceContext);
 
 			if (folderId != newParentFolderId) {
 				fileEntry = DLAppServiceUtil.moveFileEntry(
@@ -322,12 +323,6 @@ public class DLSharepointStorageImpl extends BaseSharepointStorageImpl {
 			contentType = MimeTypesUtil.getContentType(is, title);
 		}
 
-		serviceContext.setAttribute("contentType", contentType);
-
-		String extension = FileUtil.getExtension(title);
-
-		serviceContext.setAttribute("extension", extension);
-
 		try {
 			FileEntry fileEntry = getFileEntry(sharepointRequest);
 
@@ -341,13 +336,13 @@ public class DLSharepointStorageImpl extends BaseSharepointStorageImpl {
 			serviceContext.setAssetTagNames(assetTagNames);
 
 			DLAppServiceUtil.updateFileEntry(
-				fileEntryId, title, title, description, changeLog, false,
-				is, contentLength, serviceContext);
+				fileEntryId, title, contentType, title, description, changeLog,
+				false, is, contentLength, serviceContext);
 		}
 		catch (NoSuchFileEntryException nsfee) {
 			DLAppServiceUtil.addFileEntry(
-				groupId, parentFolderId, title, description, changeLog, is,
-				contentLength, serviceContext);
+				groupId, parentFolderId, contentType, title, description,
+				changeLog, is, contentLength, serviceContext);
 		}
 	}
 
