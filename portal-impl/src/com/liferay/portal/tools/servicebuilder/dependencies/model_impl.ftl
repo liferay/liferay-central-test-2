@@ -39,6 +39,7 @@ import java.io.Serializable;
 
 import java.lang.reflect.Proxy;
 
+import java.sql.Blob;
 import java.sql.Types;
 
 import java.util.ArrayList;

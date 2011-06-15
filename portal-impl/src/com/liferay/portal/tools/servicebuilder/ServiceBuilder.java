@@ -1176,6 +1176,9 @@ public class ServiceBuilder {
 		else if (type.equals("short") || type.equals("Short")) {
 			return "INTEGER";
 		}
+		else if (type.equals("Blob")) {
+			return "BLOB";
+		}
 		else if (type.equals("Date")) {
 			return "TIMESTAMP";
 		}

@@ -82,8 +82,8 @@
 				<#if !column.isPrimary() && !column.isCollection() && !ejbName>
 					<property name="${column.name}"
 
-					<#if column.name != column.DBName>
-						column="${column.DBName}"
+					<#if serviceBuilder.isHBMCamelCasePropertyAccessor(column.name)>
+						access="com.liferay.portal.dao.orm.hibernate.CamelCasePropertyAccessor"
 					</#if>
 
 					<#if column.isPrimitiveType() || column.type == "String">
@@ -96,8 +96,12 @@
 						</#if>
 					</#if>
 
-					<#if serviceBuilder.isHBMCamelCasePropertyAccessor(column.name)>
-						access="com.liferay.portal.dao.orm.hibernate.CamelCasePropertyAccessor"
+					<#if column.name != column.DBName>
+						column="${column.DBName}"
+					</#if>
+
+					<#if column.type == "Blob">
+						lazy="true"
 					</#if>
 
 					/>

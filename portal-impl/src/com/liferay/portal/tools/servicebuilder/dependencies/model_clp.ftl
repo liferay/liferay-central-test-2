@@ -23,6 +23,8 @@ import java.io.Serializable;
 
 import java.lang.reflect.Proxy;
 
+import java.sql.Blob;
+
 import java.util.Date;
 import java.util.Locale;
 import java.util.Map;
