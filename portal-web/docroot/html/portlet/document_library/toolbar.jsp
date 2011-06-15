@@ -33,20 +33,32 @@ String orderByType = ParamUtil.getString(request, "orderByType");
 	<liferay-ui:icon-menu align="left" cssClass="actions-button" direction="down" disabled="<%= true %>" icon="" message="actions" showExpanded="<%= false %>" showWhenSingleIcon="<%= false %>">
 
 		<%
-		String taglibUrl = "javascript:" + renderResponse.getNamespace() + "editFileEntry('" + Constants.LOCK + "')";
+		String taglibUrl = "javascript:" + renderResponse.getNamespace() + "editFileEntry('" + Constants.CANCEL_CHECKOUT + "')";
 		%>
 
 		<liferay-ui:icon
-			image="lock"
+			image="undo"
+			message="cancel-checkout"
 			url="<%= taglibUrl %>"
 		/>
 
 		<%
-		taglibUrl = "javascript:" + renderResponse.getNamespace() + "editFileEntry('" + Constants.UNLOCK + "')";
+		taglibUrl = "javascript:" + renderResponse.getNamespace() + "editFileEntry('" + Constants.CHECKIN + "')";
 		%>
 
 		<liferay-ui:icon
 			image="unlock"
+			message="checkin"
+			url="<%= taglibUrl %>"
+		/>
+
+		<%
+		taglibUrl = "javascript:" + renderResponse.getNamespace() + "editFileEntry('" + Constants.CHECKOUT + "')";
+		%>
+
+		<liferay-ui:icon
+			image="lock"
+			message="checkout"
 			url="<%= taglibUrl %>"
 		/>
 

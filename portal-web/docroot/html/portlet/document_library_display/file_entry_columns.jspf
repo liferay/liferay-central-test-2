@@ -48,14 +48,14 @@ for (int j = 0; j < fileEntryColumns.length; j++) {
 		<c:when test='<%= fileEntryColumn.equals("locked") %>'>
 
 			<%
-			boolean isLocked = fileEntry.isLocked();
+			boolean isCheckedOut = fileEntry.isCheckedOut();
 			%>
 
 			<liferay-ui:search-container-column-text
 				href="<%= rowHREF %>"
 				index="<%= j %>"
 				name="<%= fileEntryColumn %>"
-				value='<%= LanguageUtil.get(pageContext, isLocked ? "yes" : "no") %>'
+				value='<%= LanguageUtil.get(pageContext, isCheckedOut ? "yes" : "no") %>'
 			/>
 		</c:when>
 		<c:when test='<%= fileEntryColumn.equals("name") %>'>

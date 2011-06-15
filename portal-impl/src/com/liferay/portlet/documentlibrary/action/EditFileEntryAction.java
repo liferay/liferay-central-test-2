@@ -31,6 +31,7 @@ import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.repository.liferayrepository.model.LiferayFileEntry;
@@ -93,17 +94,20 @@ public class EditFileEntryAction extends PortletAction {
 			else if (cmd.equals(Constants.DELETE)) {
 				deleteFileEntries(actionRequest);
 			}
-			else if (cmd.equals(Constants.LOCK)) {
-				lockFileEntries(actionRequest);
+			else if (cmd.equals(Constants.CANCEL_CHECKOUT)) {
+				cancelFileEntriesCheckOut(actionRequest);
+			}
+			else if (cmd.equals(Constants.CHECKIN)) {
+				checkInFileEntries(actionRequest);
+			}
+			else if (cmd.equals(Constants.CHECKOUT)) {
+				checkOutFileEntries(actionRequest);
 			}
 			else if (cmd.equals(Constants.MOVE)) {
 				moveFileEntries(actionRequest);
 			}
 			else if (cmd.equals(Constants.REVERT)) {
 				revertFileEntry(actionRequest);
-			}
-			else if (cmd.equals(Constants.UNLOCK)) {
-				unlockFileEntries(actionRequest);
 			}
 
 			WindowState windowState = actionRequest.getWindowState();
@@ -215,6 +219,65 @@ public class EditFileEntryAction extends PortletAction {
 		return mapping.findForward(getForward(renderRequest, forward));
 	}
 
+	protected void cancelFileEntriesCheckOut(ActionRequest actionRequest)
+		throws Exception {
+
+		long fileEntryId = ParamUtil.getLong(actionRequest, "fileEntryId");
+
+		if (fileEntryId > 0) {
+			DLAppServiceUtil.cancelCheckOut(fileEntryId);
+		}
+		else {
+			long[] fileEntryIds = StringUtil.split(
+				ParamUtil.getString(actionRequest, "fileEntryIds"), 0L);
+
+			for (int i = 0; i < fileEntryIds.length; i++) {
+				DLAppServiceUtil.cancelCheckOut(fileEntryIds[i]);
+			}
+		}
+	}
+
+	protected void checkInFileEntries(ActionRequest actionRequest)
+		throws Exception {
+
+		long fileEntryId = ParamUtil.getLong(actionRequest, "fileEntryId");
+
+		ServiceContext serviceContext = ServiceContextFactory.getInstance(
+			actionRequest);
+
+		if (fileEntryId > 0) {
+			DLAppServiceUtil.checkInFileEntry(
+				fileEntryId, false, StringPool.BLANK, serviceContext);
+		}
+		else {
+			long[] fileEntryIds = StringUtil.split(
+				ParamUtil.getString(actionRequest, "fileEntryIds"), 0L);
+
+			for (int i = 0; i < fileEntryIds.length; i++) {
+				DLAppServiceUtil.checkInFileEntry(
+					fileEntryIds[i], false, StringPool.BLANK, serviceContext);
+			}
+		}
+	}
+
+	protected void checkOutFileEntries(ActionRequest actionRequest)
+		throws Exception {
+
+		long fileEntryId = ParamUtil.getLong(actionRequest, "fileEntryId");
+
+		if (fileEntryId > 0) {
+			DLAppServiceUtil.checkOutFileEntry(fileEntryId);
+		}
+		else {
+			long[] fileEntryIds = StringUtil.split(
+				ParamUtil.getString(actionRequest, "fileEntryIds"), 0L);
+
+			for (int i = 0; i < fileEntryIds.length; i++) {
+				DLAppServiceUtil.checkOutFileEntry(fileEntryIds[i]);
+			}
+		}
+	}
+
 	protected void deleteFileEntries(ActionRequest actionRequest)
 		throws Exception {
 
@@ -275,24 +338,6 @@ public class EditFileEntryAction extends PortletAction {
 		return fieldsMap;
 	}
 
-	protected void lockFileEntries(ActionRequest actionRequest)
-		throws Exception {
-
-		long fileEntryId = ParamUtil.getLong(actionRequest, "fileEntryId");
-
-		if (fileEntryId > 0) {
-			DLAppServiceUtil.lockFileEntry(fileEntryId);
-		}
-		else {
-			long[] fileEntryIds = StringUtil.split(
-				ParamUtil.getString(actionRequest, "fileEntryIds"), 0L);
-
-			for (int i = 0; i < fileEntryIds.length; i++) {
-				DLAppServiceUtil.lockFileEntry(fileEntryIds[i]);
-			}
-		}
-	}
-
 	protected void moveFileEntries(ActionRequest actionRequest)
 		throws Exception {
 
@@ -327,24 +372,6 @@ public class EditFileEntryAction extends PortletAction {
 			DLFileEntry.class.getName(), actionRequest);
 
 		DLAppServiceUtil.revertFileEntry(fileEntryId, version, serviceContext);
-	}
-
-	protected void unlockFileEntries(ActionRequest actionRequest)
-		throws Exception {
-
-		long fileEntryId = ParamUtil.getLong(actionRequest, "fileEntryId");
-
-		if (fileEntryId > 0) {
-			DLAppServiceUtil.unlockFileEntry(fileEntryId);
-		}
-		else {
-			long[] fileEntryIds = StringUtil.split(
-				ParamUtil.getString(actionRequest, "fileEntryIds"), 0L);
-
-			for (int i = 0; i < fileEntryIds.length; i++) {
-				DLAppServiceUtil.unlockFileEntry(fileEntryIds[i]);
-			}
-		}
 	}
 
 	protected void updateFileEntry(

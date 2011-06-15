@@ -66,7 +66,7 @@ else if (fileEntry != null) {
 	assetClassPK = fileEntry.getFileEntryId();
 }
 
-Boolean isLocked = fileEntry.isLocked();
+Boolean isCheckedOut = fileEntry.isCheckedOut();
 Boolean hasLock = fileEntry.hasLock();
 Lock lock = fileEntry.getLock();
 
@@ -132,7 +132,7 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 </c:if>
 
 <div class="view">
-	<c:if test="<%= isLocked %>">
+	<c:if test="<%= isCheckedOut %>">
 		<c:choose>
 			<c:when test="<%= hasLock %>">
 				<div class="portlet-msg-success">
@@ -153,7 +153,7 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 			</c:when>
 			<c:otherwise>
 				<div class="portlet-msg-error">
-					<%= LanguageUtil.format(pageContext, "you-cannot-modify-this-document-because-it-was-locked-by-x-on-x", new Object[] {HtmlUtil.escape(PortalUtil.getUserName(lock.getUserId(), String.valueOf(lock.getUserId()))), dateFormatDateTime.format(lock.getCreateDate())}, false) %>
+					<%= LanguageUtil.format(pageContext, "you-cannot-modify-this-document-because-it-was-checked-out-by-x-on-x", new Object[] {HtmlUtil.escape(PortalUtil.getUserName(lock.getUserId(), String.valueOf(lock.getUserId()))), dateFormatDateTime.format(lock.getCreateDate())}, false) %>
 				</div>
 			</c:otherwise>
 		</c:choose>
@@ -361,7 +361,7 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 			</div>
 
 			<div class="body-row">
-				<c:if test="<%= isLocked %>">
+				<c:if test="<%= isCheckedOut %>">
 					<img alt="" class="locked-icon" src="<%= themeDisplay.getPathThemeImages() %>/file_system/large/overlay_lock.png">
 				</c:if>
 
@@ -580,7 +580,7 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 							for (int i = 0; i < results.size(); i++) {
 								FileVersion curFileVersion = (FileVersion)results.get(i);
 
-								ResultRow row = new ResultRow(new Object[] {fileEntry, curFileVersion, results.size(), conversions, isLocked, hasLock}, String.valueOf(curFileVersion.getVersion()), i);
+								ResultRow row = new ResultRow(new Object[] {fileEntry, curFileVersion, results.size(), conversions, isCheckedOut, hasLock}, String.valueOf(curFileVersion.getVersion()), i);
 
 								StringBundler sb = new StringBundler(10);
 
@@ -757,30 +757,40 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 					label: '<liferay-ui:message key="move" />'
 				},
 
-				<c:if test="<%= !fileEntry.isLocked() %>">
+				<c:if test="<%= !fileEntry.isCheckedOut() %>">
 
 					{
 
 						handler: function(event) {
-							document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = '<%= Constants.LOCK %>';
+							document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = '<%= Constants.CHECKOUT %>';
 							submitForm(document.<portlet:namespace />fm);
 						},
 						icon: 'lock',
-						label: '<liferay-ui:message key="lock" />'
+						label: '<liferay-ui:message key="checkout" />'
 					},
 
 				</c:if>
 
-				<c:if test="<%= fileEntry.isLocked() %>">
+				<c:if test="<%= fileEntry.isCheckedOut() %>">
 
 					{
 
 						handler: function(event) {
-							document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = '<%= Constants.UNLOCK %>';
+							document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = '<%= Constants.CANCEL_CHECKOUT %>';
+							submitForm(document.<portlet:namespace />fm);
+						},
+						icon: 'undo',
+						label: '<liferay-ui:message key="cancel-checkout" />'
+					},
+
+					{
+
+						handler: function(event) {
+							document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = '<%= Constants.CHECKIN %>';
 							submitForm(document.<portlet:namespace />fm);
 						},
 						icon: 'unlock',
-						label: '<liferay-ui:message key="unlock" />'
+						label: '<liferay-ui:message key="checkin" />'
 					},
 
 				</c:if>

@@ -85,12 +85,12 @@ else if (fileEntry != null) {
 	assetClassPK = fileEntry.getFileEntryId();
 }
 
-Boolean isLocked = Boolean.FALSE;
+Boolean isCheckedOut = Boolean.FALSE;
 Boolean hasLock = Boolean.FALSE;
 Lock lock = null;
 
 if (fileEntry != null) {
-	isLocked = fileEntry.isLocked();
+	isCheckedOut = fileEntry.isCheckedOut();
 	hasLock = fileEntry.hasLock();
 	lock = fileEntry.getLock();
 }
@@ -109,7 +109,7 @@ portletURL.setParameter("fileEntryId", String.valueOf(fileEntryId));
 	<liferay-util:include page="/html/portlet/document_library/top_links.jsp" />
 </c:if>
 
-<c:if test="<%= isLocked %>">
+<c:if test="<%= isCheckedOut %>">
 	<c:choose>
 		<c:when test="<%= hasLock %>">
 			<div class="portlet-msg-success">
@@ -130,7 +130,7 @@ portletURL.setParameter("fileEntryId", String.valueOf(fileEntryId));
 		</c:when>
 		<c:otherwise>
 			<div class="portlet-msg-error">
-				<%= LanguageUtil.format(pageContext, "you-cannot-modify-this-document-because-it-was-locked-by-x-on-x", new Object[] {HtmlUtil.escape(PortalUtil.getUserName(lock.getUserId(), String.valueOf(lock.getUserId()))), dateFormatDateTime.format(lock.getCreateDate())}, false) %>
+				<%= LanguageUtil.format(pageContext, "you-cannot-modify-this-document-because-it-was-checked-out-by-x-on-x", new Object[] {HtmlUtil.escape(PortalUtil.getUserName(lock.getUserId(), String.valueOf(lock.getUserId()))), dateFormatDateTime.format(lock.getCreateDate())}, false) %>
 			</div>
 		</c:otherwise>
 	</c:choose>
@@ -399,18 +399,20 @@ else if (documentType != null) {
 			%>
 
 			<c:if test="<%= PropsValues.DL_FILE_ENTRY_DRAFTS_ENABLED %>">
-				<aui:button disabled="<%= isLocked && !hasLock %>" onClick='<%= renderResponse.getNamespace() + "saveFileEntry(true);" %>' name="saveButton" value="<%= saveButtonLabel %>" />
+				<aui:button disabled="<%= isCheckedOut && !hasLock %>" onClick='<%= renderResponse.getNamespace() + "saveFileEntry(true);" %>' name="saveButton" value="<%= saveButtonLabel %>" />
 			</c:if>
 
-			<aui:button disabled="<%= isLocked && !hasLock || (pending && PropsValues.DL_FILE_ENTRY_DRAFTS_ENABLED) %>" name="publishButton" type="submit" value="<%= publishButtonLabel %>" />
+			<aui:button disabled="<%= isCheckedOut && !hasLock || (pending && PropsValues.DL_FILE_ENTRY_DRAFTS_ENABLED) %>" name="publishButton" type="submit" value="<%= publishButtonLabel %>" />
 
-			<c:if test="<%= (fileEntry != null) && ((isLocked && hasLock) || !isLocked) %>">
+			<c:if test="<%= (fileEntry != null) && ((isCheckedOut && hasLock) || !isCheckedOut) %>">
 				<c:choose>
 					<c:when test="<%= !hasLock %>">
-						<aui:button onClick='<%= renderResponse.getNamespace() + "lock();" %>' value="lock" />
+						<aui:button onClick='<%= renderResponse.getNamespace() + "checkOut();" %>' value="checkout" />
 					</c:when>
 					<c:otherwise>
-						<aui:button onClick='<%= renderResponse.getNamespace() + "unlock();" %>' value="unlock" />
+						<aui:button onClick='<%= renderResponse.getNamespace() + "cancelCheckOut();" %>' value="cancel-checkout" />
+
+						<aui:button onClick='<%= renderResponse.getNamespace() + "checkIn();" %>' value="checkin" />
 					</c:otherwise>
 				</c:choose>
 			</c:if>
@@ -432,8 +434,16 @@ else if (documentType != null) {
 		submitForm(document.<portlet:namespace />fm);
 	}
 
-	function <portlet:namespace />lock() {
-		submitForm(document.hrefFm, "<portlet:actionURL><portlet:param name="struts_action" value="/document_library/edit_file_entry" /><portlet:param name="<%= Constants.CMD %>" value="<%= Constants.LOCK %>" /><portlet:param name="redirect" value="<%= redirect %>" /><portlet:param name="fileEntryId" value="<%= String.valueOf(fileEntryId) %>" /></portlet:actionURL>");
+	function <portlet:namespace />cancelCheckOut() {
+		submitForm(document.hrefFm, "<portlet:actionURL><portlet:param name="struts_action" value="/document_library/edit_file_entry" /><portlet:param name="<%= Constants.CMD %>" value="<%= Constants.CANCEL_CHECKOUT %>" /><portlet:param name="redirect" value="<%= redirect %>" /><portlet:param name="fileEntryId" value="<%= String.valueOf(fileEntryId) %>" /></portlet:actionURL>");
+	}
+
+	function <portlet:namespace />checkIn() {
+		submitForm(document.hrefFm, "<portlet:actionURL><portlet:param name="struts_action" value="/document_library/edit_file_entry" /><portlet:param name="<%= Constants.CMD %>" value="<%= Constants.CHECKIN %>" /><portlet:param name="redirect" value="<%= redirect %>" /><portlet:param name="fileEntryId" value="<%= String.valueOf(fileEntryId) %>" /></portlet:actionURL>");
+	}
+
+	function <portlet:namespace />checkOut() {
+		submitForm(document.hrefFm, "<portlet:actionURL><portlet:param name="struts_action" value="/document_library/edit_file_entry" /><portlet:param name="<%= Constants.CMD %>" value="<%= Constants.CHECKOUT %>" /><portlet:param name="redirect" value="<%= redirect %>" /><portlet:param name="fileEntryId" value="<%= String.valueOf(fileEntryId) %>" /></portlet:actionURL>");
 	}
 
 	function <portlet:namespace />removeFolder() {
@@ -483,10 +493,6 @@ else if (documentType != null) {
 		else {
 			social.hide();
 		}
-	}
-
-	function <portlet:namespace />unlock() {
-		submitForm(document.hrefFm, "<portlet:actionURL><portlet:param name="struts_action" value="/document_library/edit_file_entry" /><portlet:param name="<%= Constants.CMD %>" value="<%= Constants.UNLOCK %>" /><portlet:param name="redirect" value="<%= redirect %>" /><portlet:param name="fileEntryId" value="<%= String.valueOf(fileEntryId) %>" /></portlet:actionURL>");
 	}
 
 	<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">

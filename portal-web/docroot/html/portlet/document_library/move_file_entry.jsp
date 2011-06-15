@@ -31,7 +31,7 @@ long fileEntryId = BeanParamUtil.getLong(fileEntry, request, "fileEntryId");
 
 long folderId = BeanParamUtil.getLong(fileEntry, request, "folderId");
 
-Boolean isLocked = fileEntry.isLocked();
+Boolean isCheckedOut = fileEntry.isCheckedOut();
 Boolean hasLock = fileEntry.hasLock();
 Lock lock = fileEntry.getLock();
 
@@ -47,7 +47,7 @@ portletURL.setParameter("fileEntryId", String.valueOf(fileEntryId));
 	<liferay-util:include page="/html/portlet/document_library/top_links.jsp" />
 </c:if>
 
-<c:if test="<%= isLocked %>">
+<c:if test="<%= isCheckedOut %>">
 	<c:choose>
 		<c:when test="<%= hasLock %>">
 			<div class="portlet-msg-success">
@@ -68,7 +68,7 @@ portletURL.setParameter("fileEntryId", String.valueOf(fileEntryId));
 		</c:when>
 		<c:otherwise>
 			<div class="portlet-msg-error">
-				<%= LanguageUtil.format(pageContext, "you-cannot-modify-this-document-because-it-was-locked-by-x-on-x", new Object[] {HtmlUtil.escape(PortalUtil.getUserName(lock.getUserId(), String.valueOf(lock.getUserId()))), dateFormatDateTime.format(lock.getCreateDate())}, false) %>
+				<%= LanguageUtil.format(pageContext, "you-cannot-modify-this-document-because-it-was-checked-out-by-x-on-x", new Object[] {HtmlUtil.escape(PortalUtil.getUserName(lock.getUserId(), String.valueOf(lock.getUserId()))), dateFormatDateTime.format(lock.getCreateDate())}, false) %>
 			</div>
 		</c:otherwise>
 	</c:choose>
@@ -144,7 +144,7 @@ portletURL.setParameter("fileEntryId", String.valueOf(fileEntryId));
 		</aui:field-wrapper>
 
 		<aui:button-row>
-			<aui:button disabled="<%= isLocked && !hasLock %>" type="submit" value="move" />
+			<aui:button disabled="<%= isCheckedOut && !hasLock %>" type="submit" value="move" />
 
 			<aui:button href="<%= redirect %>" type="cancel" />
 		</aui:button-row>

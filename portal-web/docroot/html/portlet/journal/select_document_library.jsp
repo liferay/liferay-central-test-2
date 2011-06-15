@@ -163,9 +163,9 @@ if (folder != null) {
 
 		// Locked
 
-		boolean isLocked = fileEntry.isLocked();
+		boolean isCheckedOut = fileEntry.isCheckedOut();
 
-		row.addText(LanguageUtil.get(pageContext, isLocked ? "yes" : "no"), rowHREF);
+		row.addText(LanguageUtil.get(pageContext, isCheckedOut ? "yes" : "no"), rowHREF);
 
 		// Action
 

@@ -22,6 +22,7 @@ import com.liferay.portal.kernel.servlet.ServletResponseConstants;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.security.auth.PrincipalException;
@@ -67,14 +68,17 @@ public class EditEntryAction extends PortletAction {
 			if (cmd.equals(Constants.DELETE)) {
 				deleteEntries(actionRequest);
 			}
-			else if (cmd.equals(Constants.LOCK)) {
-				lockEntries(actionRequest);
+			else if (cmd.equals(Constants.CANCEL_CHECKOUT)) {
+				cancelCheckedOutEntries(actionRequest);
+			}
+			else if (cmd.equals(Constants.CHECKIN)) {
+				checkInEntries(actionRequest);
+			}
+			else if (cmd.equals(Constants.CHECKOUT)) {
+				checkOutEntries(actionRequest);
 			}
 			else if (cmd.equals(Constants.MOVE)) {
 				moveEntries(actionRequest);
-			}
-			else if (cmd.equals(Constants.UNLOCK)) {
-				unlockEntries(actionRequest);
 			}
 
 			WindowState windowState = actionRequest.getWindowState();
@@ -180,7 +184,7 @@ public class EditEntryAction extends PortletAction {
 		}
 	}
 
-	protected void lockEntries(ActionRequest actionRequest)
+	protected void cancelCheckedOutEntries(ActionRequest actionRequest)
 		throws Exception {
 
 		long repositoryId = ParamUtil.getLong(actionRequest, "repositoryId");
@@ -196,7 +200,51 @@ public class EditEntryAction extends PortletAction {
 			ParamUtil.getString(actionRequest, "fileEntryIds"), 0L);
 
 		for (int i = 0; i < fileEntryIds.length; i++) {
-			DLAppServiceUtil.lockFileEntry(fileEntryIds[i]);
+			DLAppServiceUtil.cancelCheckOut(fileEntryIds[i]);
+		}
+	}
+
+	protected void checkInEntries(ActionRequest actionRequest)
+		throws Exception {
+
+		long repositoryId = ParamUtil.getLong(actionRequest, "repositoryId");
+
+		long[] folderIds = StringUtil.split(
+			ParamUtil.getString(actionRequest, "folderIds"), 0L);
+
+		for (int i = 0; i < folderIds.length; i++) {
+			DLAppServiceUtil.unlockFolder(repositoryId, folderIds[i], null);
+		}
+
+		long[] fileEntryIds = StringUtil.split(
+			ParamUtil.getString(actionRequest, "fileEntryIds"), 0L);
+
+		ServiceContext serviceContext = ServiceContextFactory.getInstance(
+			actionRequest);
+
+		for (int i = 0; i < fileEntryIds.length; i++) {
+			DLAppServiceUtil.checkInFileEntry(
+				fileEntryIds[i], false, StringPool.BLANK, serviceContext);
+		}
+	}
+
+	protected void checkOutEntries(ActionRequest actionRequest)
+		throws Exception {
+
+		long repositoryId = ParamUtil.getLong(actionRequest, "repositoryId");
+
+		long[] folderIds = StringUtil.split(
+			ParamUtil.getString(actionRequest, "folderIds"), 0L);
+
+		for (int i = 0; i < folderIds.length; i++) {
+			DLAppServiceUtil.lockFolder(repositoryId, folderIds[i]);
+		}
+
+		long[] fileEntryIds = StringUtil.split(
+			ParamUtil.getString(actionRequest, "fileEntryIds"), 0L);
+
+		for (int i = 0; i < fileEntryIds.length; i++) {
+			DLAppServiceUtil.checkOutFileEntry(fileEntryIds[i]);
 		}
 	}
 
@@ -222,26 +270,6 @@ public class EditEntryAction extends PortletAction {
 		for (int i = 0; i < fileEntryIds.length; i++) {
 			DLAppServiceUtil.moveFileEntry(
 				fileEntryIds[i], newFolderId, serviceContext);
-		}
-	}
-
-	protected void unlockEntries(ActionRequest actionRequest)
-		throws Exception {
-
-		long repositoryId = ParamUtil.getLong(actionRequest, "repositoryId");
-
-		long[] folderIds = StringUtil.split(
-			ParamUtil.getString(actionRequest, "folderIds"), 0L);
-
-		for (int i = 0; i < folderIds.length; i++) {
-			DLAppServiceUtil.unlockFolder(repositoryId, folderIds[i], null);
-		}
-
-		long[] fileEntryIds = StringUtil.split(
-			ParamUtil.getString(actionRequest, "fileEntryIds"), 0L);
-
-		for (int i = 0; i < fileEntryIds.length; i++) {
-			DLAppServiceUtil.unlockFileEntry(fileEntryIds[i]);
 		}
 	}
 

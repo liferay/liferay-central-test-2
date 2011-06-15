@@ -177,11 +177,11 @@ if (folder != null) {
 			row.addText(String.valueOf(fileEntry.getReadCount()), rowHREF);
 		}
 
-		// Locked
+		// Checked Out
 
-		boolean isLocked = fileEntry.isLocked();
+		boolean isCheckedOut = fileEntry.isCheckedOut();
 
-		row.addText(LanguageUtil.get(pageContext, isLocked ? "yes" : "no"), rowHREF);
+		row.addText(LanguageUtil.get(pageContext, isCheckedOut ? "yes" : "no"), rowHREF);
 
 		// Add result row
 

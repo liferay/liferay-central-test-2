@@ -41,7 +41,7 @@ boolean showCheckBox = DLFileEntryPermission.contains(permissionChecker, fileEnt
 	<liferay-util:include page="/html/portlet/document_library/file_entry_action.jsp" />
 
 	<a class="document-link" data-folder="<%= Boolean.FALSE.toString() %>" href="<%= tempRowURL.toString() %>" title="<%= HtmlUtil.escapeAttribute(HtmlUtil.unescape(fileEntry.getTitle()) + " - " + HtmlUtil.unescape(fileEntry.getDescription())) %>">
-		<c:if test="<%= fileEntry.isLocked() %>">
+		<c:if test="<%= fileEntry.isCheckedOut() %>">
 			<img alt="<%= LanguageUtil.get(pageContext, "locked") %>" class="locked-icon" src="<%= themeDisplay.getPathThemeImages() %>/file_system/large/overlay_lock.png">
 		</c:if>
 
