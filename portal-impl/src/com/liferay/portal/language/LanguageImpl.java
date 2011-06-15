@@ -528,34 +528,32 @@ public class LanguageImpl implements Language {
 
 		_charEncodings = new HashMap<String, String>();
 		_duplicateLanguageCodes = new HashSet<String>();
-		_locales = new Locale[localesArray.length];
 		_localesMap = new HashMap<String, Locale>(localesArray.length);
 		_localesSet = new HashSet<Locale>(localesArray.length);
 
 		for (int i = 0; i < localesArray.length; i++) {
 			String languageId = localesArray[i];
 
-			int pos = languageId.indexOf(CharPool.UNDERLINE);
-
-			String language = languageId.substring(0, pos);
-			//String country = languageId.substring(pos + 1);
-
 			Locale locale = LocaleUtil.fromLanguageId(languageId);
 
 			_charEncodings.put(locale.toString(), StringPool.UTF8);
 
-			if (_localesMap.containsKey(language)) {
-				_duplicateLanguageCodes.add(language);
-			}
+			if (!_localesSet.contains(locale)) {
+				String language = locale.getLanguage();
 
-			_locales[i] = locale;
+				if (_localesMap.containsKey(language)) {
+					_duplicateLanguageCodes.add(language);
+				}
 
-			if (!_localesMap.containsKey(language)) {
-				_localesMap.put(language, locale);
+				if (!_localesMap.containsKey(language)) {
+					_localesMap.put(language, locale);
+				}
 			}
 
 			_localesSet.add(locale);
 		}
+
+		_locales = _localesSet.toArray(new Locale[0]);
 
 		String[] localesBetaArray = PropsValues.LOCALES_BETA;
 

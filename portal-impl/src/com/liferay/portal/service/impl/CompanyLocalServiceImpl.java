@@ -33,6 +33,7 @@ import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.TimeZoneUtil;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.kernel.util.Validator;
@@ -64,6 +65,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -679,6 +681,18 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 				String oldLocales = preferences.getValue(
 					PropsKeys.LOCALES, StringPool.BLANK);
 				String newLocales = properties.getProperty(PropsKeys.LOCALES);
+
+				Locale[] newLocalesArray = LocaleUtil.fromLanguageIds(
+					StringUtil.split(newLocales));
+
+				HashSet<Locale> localeSet = new HashSet<Locale>(
+						newLocalesArray.length);
+				
+				for(Locale locale : newLocalesArray) {
+					localeSet.add(locale);
+				}
+
+				newLocales = StringUtil.merge(localeSet);
 
 				if (!Validator.equals(oldLocales, newLocales)) {
 					LanguageUtil.resetAvailableLocales(companyId);
