@@ -30,6 +30,7 @@ public class ${entity.name}Wrapper implements ${entity.name} {
 	<#list methods as method>
 		<#if !method.isConstructor() && !method.isStatic() && method.isPublic() && !serviceBuilder.isDuplicateMethod(method, tempMap)>
 			<#assign parameters = method.parameters>
+
 			${serviceBuilder.getJavadocComment(method)}
 			<#if (method.name == "clone" || method.name == "hashCode" || method.name == "toString") && (parameters?size == 0)>
 				@Override
