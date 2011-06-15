@@ -84,7 +84,7 @@ public class EditLDAPServerAction extends PortletAction {
 		throws Exception {
 
 		return mapping.findForward(getForward(
-			renderRequest, "portlet.enterprise_admin.edit_ldap_server"));
+			renderRequest, "portlet.portal_settings.edit_ldap_server"));
 	}
 
 	protected UnicodeProperties addLDAPServer(

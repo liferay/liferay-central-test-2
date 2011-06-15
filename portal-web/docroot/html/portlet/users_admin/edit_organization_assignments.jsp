@@ -28,7 +28,7 @@ Organization organization = (Organization)request.getAttribute(WebKeys.ORGANIZAT
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
-portletURL.setParameter("struts_action", "/enterprise_admin/edit_organization_assignments");
+portletURL.setParameter("struts_action", "/users_admin/edit_organization_assignments");
 portletURL.setParameter("tabs1", tabs1);
 portletURL.setParameter("tabs2", tabs2);
 portletURL.setParameter("tabs3", tabs3);
@@ -67,7 +67,7 @@ if (PropsValues.ORGANIZATIONS_USER_GROUP_MEMBERSHIP_ENABLED) {
 />
 
 <portlet:actionURL var="editAssignmentsURL">
-	<portlet:param name="struts_action" value="/enterprise_admin/edit_organization_assignments" />
+	<portlet:param name="struts_action" value="/users_admin/edit_organization_assignments" />
 	<portlet:param name="redirect" value="<%= redirect %>" />
 </portlet:actionURL>
 

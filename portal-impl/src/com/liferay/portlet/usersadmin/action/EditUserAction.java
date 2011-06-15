@@ -305,7 +305,7 @@ public class EditUserAction extends PortletAction {
 		}
 
 		return mapping.findForward(
-			getForward(renderRequest, "portlet.enterprise_admin.edit_user"));
+			getForward(renderRequest, "portlet.users_admin.edit_user"));
 	}
 
 	protected User addUser(ActionRequest actionRequest)

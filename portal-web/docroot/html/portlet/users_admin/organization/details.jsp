@@ -136,7 +136,7 @@ if (organization != null) {
 			%>
 
 			<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>" var="editOrganizationLogoURL">
-				<portlet:param name="struts_action" value="/enterprise_admin/edit_organization_logo" />
+				<portlet:param name="struts_action" value="/users_admin/edit_organization_logo" />
 				<portlet:param name="redirect" value="<%= currentURL %>" />
 				<portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" />
 				<portlet:param name="publicLayoutSetId" value="<%= String.valueOf(publicLayoutSet.getLayoutSetId()) %>" />
@@ -207,7 +207,7 @@ if (parentOrganization != null) {
 		modelVar="curOrganization"
 	>
 		<portlet:renderURL var="rowURL">
-			<portlet:param name="struts_action" value="/enterprise_admin/edit_organization" />
+			<portlet:param name="struts_action" value="/users_admin/edit_organization" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
 			<portlet:param name="organizationId" value="<%= String.valueOf(curOrganization.getOrganizationId()) %>" />
 		</portlet:renderURL>
@@ -244,7 +244,7 @@ if (parentOrganization != null) {
 
 <aui:script>
 	function <portlet:namespace />openOrganizationSelector() {
-		var url = '<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/select_organization" /></portlet:renderURL>';
+		var url = '<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/users_admin/select_organization" /></portlet:renderURL>';
 
 		<c:choose>
 			<c:when test="<%= organization == null %>">
@@ -270,7 +270,7 @@ if (parentOrganization != null) {
 
 			var rowColumns = [];
 
-			var href = "<portlet:renderURL><portlet:param name="struts_action" value="/enterprise_admin/edit_organization" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>&<portlet:namespace />organizationId=" + organizationId;
+			var href = "<portlet:renderURL><portlet:param name="struts_action" value="/users_admin/edit_organization" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>&<portlet:namespace />organizationId=" + organizationId;
 
 			rowColumns.push(<portlet:namespace />createURL(href, name));
 			rowColumns.push(<portlet:namespace />createURL(href, type));

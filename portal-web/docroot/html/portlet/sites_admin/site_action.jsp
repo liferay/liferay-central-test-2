@@ -66,7 +66,7 @@ Group group = (Group)row.getObject();
 
 	<c:if test="<%= GroupPermissionUtil.contains(permissionChecker, group.getGroupId(), ActionKeys.MANAGE_STAGING) || GroupPermissionUtil.contains(permissionChecker, group.getGroupId(), ActionKeys.UPDATE) %>">
 		<portlet:renderURL var="editSettingsURL">
-			<portlet:param name="struts_action" value="/enterprise_admin/edit_settings" />
+			<portlet:param name="struts_action" value="/sites_admin/edit_settings" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
 			<portlet:param name="groupId" value="<%= String.valueOf(group.getGroupId()) %>" />
 		</portlet:renderURL>

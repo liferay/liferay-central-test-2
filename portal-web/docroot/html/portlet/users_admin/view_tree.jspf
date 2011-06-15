@@ -99,7 +99,7 @@ int organizationsCount = OrganizationLocalServiceUtil.searchCount(company.getCom
 				<div class="lfr-asset-metadata">
 					<div class="lfr-asset-icon lfr-asset-teams">
 						<portlet:renderURL var="manageTeamsURL">
-							<portlet:param name="struts_action" value="/enterprise_admin/view_teams" />
+							<portlet:param name="struts_action" value="/users_admin/view_teams" />
 							<portlet:param name="redirect" value="<%= currentURL %>" />
 							<portlet:param name="groupId" value="<%= String.valueOf(organizationGroupId) %>" />
 						</portlet:renderURL>
@@ -249,7 +249,7 @@ int organizationsCount = OrganizationLocalServiceUtil.searchCount(company.getCom
 				modelVar="curOrganization"
 			>
 				<liferay-portlet:renderURL varImpl="rowURL">
-					<portlet:param name="struts_action" value="/enterprise_admin_organizations/view" />
+					<portlet:param name="struts_action" value="/users_admin/view" />
 					<portlet:param name="organizationId" value="<%= String.valueOf(curOrganization.getOrganizationId()) %>" />
 					<portlet:param name="usersListView" value="<%= UserConstants.LIST_VIEW_TREE %>" />
 				</liferay-portlet:renderURL>

@@ -111,8 +111,7 @@ public class UsersAdminImpl implements UsersAdmin {
 
 		PortletURL portletURL = renderResponse.createRenderURL();
 
-		portletURL.setParameter(
-			"struts_action", "/enterprise_admin/view");
+		portletURL.setParameter("struts_action", "/users_admin/view");
 
 		List<Organization> ancestorOrganizations = organization.getAncestors();
 

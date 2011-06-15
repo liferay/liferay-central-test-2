@@ -180,7 +180,7 @@ public class OrganizationIndexer extends BaseIndexer {
 		String organizationId = document.get(Field.ORGANIZATION_ID);
 
 		portletURL.setParameter(
-			"struts_action", "/enterprise_admin/edit_organization");
+			"struts_action", "/users_admin/edit_organization");
 		portletURL.setParameter("organizationId", organizationId);
 
 		return new Summary(title, content, portletURL);

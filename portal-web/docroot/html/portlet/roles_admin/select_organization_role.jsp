@@ -21,7 +21,7 @@ int step = ParamUtil.getInteger(request, "step");
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
-portletURL.setParameter("struts_action", "/enterprise_admin/select_organization_role");
+portletURL.setParameter("struts_action", "/roles_admin/select_organization_role");
 
 User selUser = null;
 long uniqueOrganizationId = 0;

@@ -29,7 +29,7 @@ User selUser = PortalUtil.getSelectedUser(request);
 	</c:when>
 	<c:otherwise>
 		<portlet:actionURL var="editUserPortraitURL">
-			<portlet:param name="struts_action" value="/enterprise_admin/edit_user_portrait" />
+			<portlet:param name="struts_action" value="/users_admin/edit_user_portrait" />
 		</portlet:actionURL>
 
 		<aui:form action="<%= editUserPortraitURL %>" enctype="multipart/form-data" method="post" name="fm">

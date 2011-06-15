@@ -63,7 +63,7 @@
 		modelVar="organization"
 	>
 		<portlet:renderURL var="rowURL">
-			<portlet:param name="struts_action" value="/enterprise_admin/view" />
+			<portlet:param name="struts_action" value="/users_admin/view" />
 			<portlet:param name="redirect" value="<%= searchContainer.getIteratorURL().toString() %>" />
 			<portlet:param name="organizationId" value="<%= String.valueOf(organization.getOrganizationId()) %>" />
 			<portlet:param name="usersListView" value="<%= UserConstants.LIST_VIEW_TREE %>" />

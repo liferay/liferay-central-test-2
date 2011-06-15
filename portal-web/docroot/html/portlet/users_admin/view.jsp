@@ -25,7 +25,7 @@ PortletURL portletURL = (PortletURL)request.getAttribute("view.jsp-portletURL");
 if (portletURL == null) {
 	portletURL = renderResponse.createRenderURL();
 
-	portletURL.setParameter("struts_action", "/enterprise_admin/view_users");
+	portletURL.setParameter("struts_action", "/users_admin/view_users");
 
 	pageContext.setAttribute("portletURL", portletURL);
 }

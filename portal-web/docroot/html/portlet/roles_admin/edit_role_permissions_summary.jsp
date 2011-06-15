@@ -23,7 +23,7 @@ Role role = (Role)request.getAttribute("edit_role_permissions.jsp-role");
 
 PortletURL permissionsSummaryURL = renderResponse.createRenderURL();
 
-permissionsSummaryURL.setParameter("struts_action", "/enterprise_admin/edit_role_permissions");
+permissionsSummaryURL.setParameter("struts_action", "/roles_admin/edit_role_permissions");
 permissionsSummaryURL.setParameter(Constants.CMD, Constants.VIEW);
 permissionsSummaryURL.setParameter("tabs1", "roles");
 permissionsSummaryURL.setParameter("roleId", String.valueOf(role.getRoleId()));
@@ -221,7 +221,7 @@ for (int i = 0; i < results.size(); i++) {
 
 	PortletURL editPermissionsURL = renderResponse.createRenderURL();
 
-	editPermissionsURL.setParameter("struts_action", "/enterprise_admin/edit_role_permissions");
+	editPermissionsURL.setParameter("struts_action", "/roles_admin/edit_role_permissions");
 	editPermissionsURL.setParameter(Constants.CMD, Constants.EDIT);
 	editPermissionsURL.setParameter("tabs1", "roles");
 	editPermissionsURL.setParameter("roleId", String.valueOf(role.getRoleId()));

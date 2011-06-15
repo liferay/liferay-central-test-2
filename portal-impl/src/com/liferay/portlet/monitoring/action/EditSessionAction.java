@@ -73,7 +73,7 @@ public class EditSessionAction extends PortletAction {
 		throws Exception {
 
 		return mapping.findForward(
-			getForward(renderRequest, "portlet.enterprise_admin.edit_session"));
+			getForward(renderRequest, "portlet.monitoring.edit_session"));
 	}
 
 	protected void invalidateSession(ActionRequest actionRequest)

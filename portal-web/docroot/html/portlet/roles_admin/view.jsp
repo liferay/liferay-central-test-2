@@ -72,7 +72,7 @@ for (int i = 0; i < results.size(); i++) {
 	if (RolePermissionUtil.contains(permissionChecker, role.getRoleId(), ActionKeys.UPDATE)) {
 		rowURL = renderResponse.createRenderURL();
 
-		rowURL.setParameter("struts_action", "/enterprise_admin/edit_role");
+		rowURL.setParameter("struts_action", "/roles_admin/edit_role");
 		rowURL.setParameter("redirect", searchContainer.getIteratorURL().toString());
 		rowURL.setParameter("roleId", String.valueOf(role.getRoleId()));
 	}

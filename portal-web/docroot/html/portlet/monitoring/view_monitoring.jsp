@@ -52,7 +52,7 @@ String portletURLString = (String)request.getAttribute("view.jsp-portletURLStrin
 				modelVar="userTracker"
 			>
 				<portlet:renderURL var="rowURL">
-					<portlet:param name="struts_action" value="/enterprise_admin/edit_session" />
+					<portlet:param name="struts_action" value="/monitoring/edit_session" />
 					<portlet:param name="redirect" value="<%= currentURL %>" />
 					<portlet:param name="sessionId" value="<%= userTracker.getSessionId() %>" />
 				</portlet:renderURL>

@@ -95,7 +95,7 @@ public class EditUserGroupAssignmentsAction extends PortletAction {
 
 		return mapping.findForward(getForward(
 			renderRequest,
-			"portlet.enterprise_admin.edit_user_group_assignments"));
+			"portlet.users_admin.edit_user_group_assignments"));
 	}
 
 	protected void updateUserGroupUsers(ActionRequest actionRequest)

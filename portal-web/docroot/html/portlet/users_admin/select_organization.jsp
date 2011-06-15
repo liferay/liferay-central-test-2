@@ -21,7 +21,7 @@ String target = ParamUtil.getString(request, "target");
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
-portletURL.setParameter("struts_action", "/enterprise_admin/select_organization");
+portletURL.setParameter("struts_action", "/users_admin/select_organization");
 
 if (Validator.isNotNull(target)) {
 	portletURL.setParameter("target", target);

@@ -160,7 +160,7 @@ request.setAttribute("view.jsp-portletURLString", portletURLString);
 				document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= Constants.DELETE %>";
 				document.<portlet:namespace />fm.<portlet:namespace />redirect.value = document.<portlet:namespace />fm.<portlet:namespace />organizationsRedirect.value;
 				document.<portlet:namespace />fm.<portlet:namespace />deleteOrganizationIds.value = organizationIds;
-				submitForm(document.<portlet:namespace />fm, "<portlet:actionURL><portlet:param name="struts_action" value="/enterprise_admin/edit_organization" /></portlet:actionURL>");
+				submitForm(document.<portlet:namespace />fm, "<portlet:actionURL><portlet:param name="struts_action" value="/users_admin/edit_organization" /></portlet:actionURL>");
 			}
 
 			function <portlet:namespace />doDeleteUserGroups(userGroupIds) {
@@ -168,7 +168,7 @@ request.setAttribute("view.jsp-portletURLString", portletURLString);
 				document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= Constants.DELETE %>";
 				document.<portlet:namespace />fm.<portlet:namespace />redirect.value = document.<portlet:namespace />fm.<portlet:namespace />userGroupsRedirect.value;
 				document.<portlet:namespace />fm.<portlet:namespace />deleteUserGroupIds.value = userGroupIds;
-				submitForm(document.<portlet:namespace />fm, "<portlet:actionURL><portlet:param name="struts_action" value="/enterprise_admin/edit_user_group" /></portlet:actionURL>");
+				submitForm(document.<portlet:namespace />fm, "<portlet:actionURL><portlet:param name="struts_action" value="/users_admin/edit_user_group" /></portlet:actionURL>");
 			}
 
 			Liferay.provide(
@@ -228,7 +228,7 @@ request.setAttribute("view.jsp-portletURLString", portletURLString);
 						document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = cmd;
 						document.<portlet:namespace />fm.<portlet:namespace />redirect.value = document.<portlet:namespace />fm.<portlet:namespace />usersRedirect.value;
 						document.<portlet:namespace />fm.<portlet:namespace />deleteUserIds.value = deleteUserIds;
-						submitForm(document.<portlet:namespace />fm, "<portlet:actionURL><portlet:param name="struts_action" value="/enterprise_admin/edit_user" /></portlet:actionURL>");
+						submitForm(document.<portlet:namespace />fm, "<portlet:actionURL><portlet:param name="struts_action" value="/users_admin/edit_user" /></portlet:actionURL>");
 					}
 				},
 				['liferay-util-list-fields']
@@ -241,7 +241,7 @@ request.setAttribute("view.jsp-portletURLString", portletURLString);
 					var A = AUI();
 
 					A.io.request(
-						'<%= themeDisplay.getPathMain() %>/enterprise_admin/get_users_count',
+						'<%= themeDisplay.getPathMain() %>/users_admin/get_users_count',
 						{
 							data: {
 								active: active,

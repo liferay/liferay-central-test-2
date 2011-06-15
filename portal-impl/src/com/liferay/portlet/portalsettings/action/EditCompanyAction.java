@@ -76,7 +76,7 @@ public class EditCompanyAction extends PortletAction {
 
 				if (!SessionErrors.isEmpty(actionRequest)) {
 					setForward(
-						actionRequest, "portlet.enterprise_admin.edit_company");
+						actionRequest, "portlet.portal_settings.edit_company");
 				}
 				else {
 					updateCompany(actionRequest);
@@ -118,7 +118,7 @@ public class EditCompanyAction extends PortletAction {
 				}
 
 				setForward(
-					actionRequest, "portlet.enterprise_admin.edit_company");
+					actionRequest, "portlet.portal_settings.edit_company");
 			}
 			else {
 				throw e;
@@ -132,7 +132,7 @@ public class EditCompanyAction extends PortletAction {
 		throws Exception {
 
 		return mapping.findForward(
-			getForward(renderRequest, "portlet.enterprise_admin.edit_company"));
+			getForward(renderRequest, "portlet.portal_settings.edit_company"));
 	}
 
 	protected void updateCompany(ActionRequest actionRequest) throws Exception {

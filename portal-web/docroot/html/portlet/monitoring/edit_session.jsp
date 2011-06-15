@@ -30,7 +30,7 @@ userTracker = userTracker.toEscapedModel();
 %>
 
 <portlet:actionURL var="editSessionURL">
-	<portlet:param name="struts_action" value="/enterprise_admin/edit_session" />
+	<portlet:param name="struts_action" value="/monitoring/edit_session" />
 </portlet:actionURL>
 
 <aui:form action="<%= editSessionURL %>" method="post" name="fm">

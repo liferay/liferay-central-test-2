@@ -22,7 +22,7 @@ String toolbarItem = ParamUtil.getString(request, "toolbarItem", "view-all");
 
 <div class="lfr-portlet-toolbar">
 	<portlet:renderURL var="viewRolesURL">
-		<portlet:param name="struts_action" value="/enterprise_admin/view" />
+		<portlet:param name="struts_action" value="/roles_admin/view" />
 	</portlet:renderURL>
 
 	<span class="lfr-toolbar-button view-button <%= toolbarItem.equals("view-all") ? "current" : StringPool.BLANK %>">
@@ -31,7 +31,7 @@ String toolbarItem = ParamUtil.getString(request, "toolbarItem", "view-all");
 
 	<c:if test="<%= PortalPermissionUtil.contains(permissionChecker, ActionKeys.ADD_ROLE) %>">
 		<liferay-portlet:renderURL varImpl="addRoleURL">
-			<portlet:param name="struts_action" value="/enterprise_admin/edit_role" />
+			<portlet:param name="struts_action" value="/roles_admin/edit_role" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
 		</liferay-portlet:renderURL>
 

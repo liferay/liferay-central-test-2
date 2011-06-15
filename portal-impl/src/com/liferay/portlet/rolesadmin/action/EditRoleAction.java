@@ -114,7 +114,7 @@ public class EditRoleAction extends PortletAction {
 		}
 
 		return mapping.findForward(
-			getForward(renderRequest, "portlet.enterprise_admin.edit_role"));
+			getForward(renderRequest, "portlet.roles_admin.edit_role"));
 	}
 
 	protected void deleteRole(ActionRequest actionRequest) throws Exception {

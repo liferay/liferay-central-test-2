@@ -101,7 +101,8 @@ public class EditPasswordPolicyAssignmentsAction extends PortletAction {
 
 		return mapping.findForward(getForward(
 			renderRequest,
-			"portlet.enterprise_admin.edit_password_policy_assignments"));
+			"portlet.password_policies_admin." +
+				"edit_password_policy_assignments"));
 	}
 
 	protected void updatePasswordPolicyOrganizations(

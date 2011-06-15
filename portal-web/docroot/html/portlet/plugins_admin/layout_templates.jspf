@@ -56,7 +56,7 @@ for (int i = 0; i < results.size(); i++) {
 
 	PortletURL rowURL = renderResponse.createRenderURL();
 
-	rowURL.setParameter("struts_action", "/enterprise_admin/edit_plugin");
+	rowURL.setParameter("struts_action", "/plugins_admin/edit_plugin");
 	rowURL.setParameter("redirect", currentURL);
 
 	if (pluginPackage != null) {

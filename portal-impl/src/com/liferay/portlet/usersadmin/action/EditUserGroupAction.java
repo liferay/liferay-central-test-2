@@ -114,7 +114,7 @@ public class EditUserGroupAction extends PortletAction {
 		}
 
 		return mapping.findForward(getForward(
-			renderRequest, "portlet.enterprise_admin.edit_user_group"));
+			renderRequest, "portlet.users_admin.edit_user_group"));
 	}
 
 	protected void deleteUserGroups(ActionRequest actionRequest)

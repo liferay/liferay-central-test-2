@@ -37,7 +37,7 @@ boolean defaultPolicy = BeanParamUtil.getBoolean(passwordPolicy, request, "defau
 />
 
 <portlet:actionURL var="editPasswordPolicyURL">
-	<portlet:param name="struts_action" value="/enterprise_admin/edit_password_policy" />
+	<portlet:param name="struts_action" value="/password_policies_admin/edit_password_policy" />
 </portlet:actionURL>
 
 <aui:form action="<%= editPasswordPolicyURL %>" method="post" name="fm">

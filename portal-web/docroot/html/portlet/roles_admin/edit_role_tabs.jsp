@@ -40,7 +40,7 @@ if (Validator.isNotNull(portletResource)) {
 
 PortletURL editRoleURL = renderResponse.createRenderURL();
 
-editRoleURL.setParameter("struts_action", "/enterprise_admin/edit_role");
+editRoleURL.setParameter("struts_action", "/roles_admin/edit_role");
 editRoleURL.setParameter("redirect", backURL);
 editRoleURL.setParameter(Constants.CMD, Constants.VIEW);
 editRoleURL.setParameter("roleId", String.valueOf(role.getRoleId()));
@@ -49,7 +49,7 @@ editRoleURL.setParameter("roleId", String.valueOf(role.getRoleId()));
 
 PortletURL definePermissionsURL = renderResponse.createRenderURL();
 
-definePermissionsURL.setParameter("struts_action", "/enterprise_admin/edit_role_permissions");
+definePermissionsURL.setParameter("struts_action", "/roles_admin/edit_role_permissions");
 definePermissionsURL.setParameter("redirect", backURL);
 definePermissionsURL.setParameter(Constants.CMD, Constants.VIEW);
 definePermissionsURL.setParameter("roleId", String.valueOf(role.getRoleId()));
@@ -58,7 +58,7 @@ definePermissionsURL.setParameter("roleId", String.valueOf(role.getRoleId()));
 
 PortletURL assignMembersURL = renderResponse.createRenderURL();
 
-assignMembersURL.setParameter("struts_action", "/enterprise_admin/edit_role_assignments");
+assignMembersURL.setParameter("struts_action", "/roles_admin/edit_role_assignments");
 assignMembersURL.setParameter("redirect", backURL);
 assignMembersURL.setParameter("roleId", String.valueOf(role.getRoleId()));
 

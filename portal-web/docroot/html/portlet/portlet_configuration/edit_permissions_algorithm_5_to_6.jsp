@@ -132,7 +132,7 @@ definePermissionsURL.setPortletMode(PortletMode.VIEW);
 
 definePermissionsURL.setRefererPlid(plid);
 
-definePermissionsURL.setParameter("struts_action", "/enterprise_admin_roles/edit_role_permissions");
+definePermissionsURL.setParameter("struts_action", "/roles_admin/edit_role_permissions");
 definePermissionsURL.setParameter(Constants.CMD, Constants.VIEW);
 %>
 

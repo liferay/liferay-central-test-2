@@ -27,7 +27,7 @@ Boolean supportsFilterByGroup = (Boolean)objArray[5];
 
 <c:if test="<%= supportsFilterByGroup %>">
 	<portlet:renderURL var="selectCommunityURL" windowState="<%= LiferayWindowState.POP_UP.toString() %>">
-		<portlet:param name="struts_action" value="/enterprise_admin/select_site" />
+		<portlet:param name="struts_action" value="/roles_admin/select_site" />
 		<portlet:param name="target" value="<%= target %>" />
 		<portlet:param name="includeCompany" value="<%= Boolean.TRUE.toString() %>" />
 		<portlet:param name="includeUserPersonalSite" value="<%= Boolean.TRUE.toString() %>" />

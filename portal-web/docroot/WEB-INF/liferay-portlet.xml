@@ -1136,7 +1136,7 @@
 	<portlet>
 		<portlet-name>125</portlet-name>
 		<icon>/html/icons/enterprise_admin_users.png</icon>
-		<struts-path>enterprise_admin_users</struts-path>
+		<struts-path>users_admin</struts-path>
 		<indexer-class>com.liferay.portlet.usersadmin.util.UserIndexer</indexer-class>
 		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
 		<control-panel-entry-category>portal</control-panel-entry-category>
@@ -1189,7 +1189,7 @@
 	<portlet>
 		<portlet-name>128</portlet-name>
 		<icon>/html/icons/enterprise_admin_roles.png</icon>
-		<struts-path>enterprise_admin_roles</struts-path>
+		<struts-path>roles_admin</struts-path>
 		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
 		<control-panel-entry-category>portal</control-panel-entry-category>
 		<control-panel-entry-weight>5.0</control-panel-entry-weight>
@@ -1205,7 +1205,7 @@
 	<portlet>
 		<portlet-name>129</portlet-name>
 		<icon>/html/icons/enterprise_admin_password_policies.png</icon>
-		<struts-path>enterprise_admin_password_policies</struts-path>
+		<struts-path>password_policies_admin</struts-path>
 		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
 		<control-panel-entry-category>portal</control-panel-entry-category>
 		<control-panel-entry-weight>6.0</control-panel-entry-weight>
@@ -1220,7 +1220,7 @@
 	<portlet>
 		<portlet-name>130</portlet-name>
 		<icon>/html/icons/enterprise_admin_settings.png</icon>
-		<struts-path>enterprise_admin_settings</struts-path>
+		<struts-path>portal_settings</struts-path>
 		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
 		<control-panel-entry-category>portal</control-panel-entry-category>
 		<control-panel-entry-weight>7.0</control-panel-entry-weight>
@@ -1236,7 +1236,7 @@
 	<portlet>
 		<portlet-name>131</portlet-name>
 		<icon>/html/icons/enterprise_admin_monitoring.png</icon>
-		<struts-path>enterprise_admin_monitoring</struts-path>
+		<struts-path>monitoring</struts-path>
 		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
 		<control-panel-entry-category>portal</control-panel-entry-category>
 		<control-panel-entry-weight>9.0</control-panel-entry-weight>
@@ -1251,7 +1251,7 @@
 	<portlet>
 		<portlet-name>132</portlet-name>
 		<icon>/html/icons/enterprise_admin_plugins.png</icon>
-		<struts-path>enterprise_admin_plugins</struts-path>
+		<struts-path>plugins_admin</struts-path>
 		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
 		<control-panel-entry-category>portal</control-panel-entry-category>
 		<control-panel-entry-weight>10.0</control-panel-entry-weight>

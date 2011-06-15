@@ -67,7 +67,7 @@
 	%>
 
 		<liferay-portlet:renderURL varImpl="viewOrganizationURL">
-			<portlet:param name="struts_action" value="/enterprise_admin_organizations/view" />
+			<portlet:param name="struts_action" value="/users_admin/view" />
 			<portlet:param name="usersListView" value="<%= UserConstants.LIST_VIEW_TREE %>" />
 		</liferay-portlet:renderURL>
 
@@ -101,7 +101,7 @@
 		%>
 
 			<liferay-portlet:renderURL varImpl="viewSuborganizationsURL">
-				<portlet:param name="struts_action" value="/enterprise_admin/view" />
+				<portlet:param name="struts_action" value="/users_admin/view" />
 				<portlet:param name="tabs1" value="users" />
 				<portlet:param name="viewUsersRedirect" value="<%= currentURL %>" />
 				<portlet:param name="parentOrganizationId" value="<%= String.valueOf(curOrganization.getOrganizationId()) %>" />
@@ -158,7 +158,7 @@
 	%>
 
 		<liferay-portlet:renderURL varImpl="viewUserURL">
-			<portlet:param name="struts_action" value="/enterprise_admin/edit_user" />
+			<portlet:param name="struts_action" value="/users_admin/edit_user" />
 			<portlet:param name="redirect" value="<%= searchContainer.getIteratorURL().toString() %>" />
 		</liferay-portlet:renderURL>
 
@@ -192,7 +192,7 @@
 		%>
 
 			<liferay-portlet:renderURL varImpl="viewUsersURL">
-				<portlet:param name="struts_action" value="/enterprise_admin/view" />
+				<portlet:param name="struts_action" value="/users_admin/view" />
 				<portlet:param name="tabs1" value="users" />
 				<portlet:param name="viewUsersRedirect" value="<%= currentURL %>" />
 				<portlet:param name="organizationId" value="<%= String.valueOf(curOrganization.getOrganizationId()) %>" />

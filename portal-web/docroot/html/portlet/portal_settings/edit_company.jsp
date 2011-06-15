@@ -37,7 +37,7 @@ request.setAttribute("websites.classPK", company.getAccountId());
 %>
 
 <portlet:actionURL var="editCompanyURL">
-	<portlet:param name="struts_action" value="/enterprise_admin/edit_company" />
+	<portlet:param name="struts_action" value="/portal_settings/edit_company" />
 </portlet:actionURL>
 
 <aui:form action="<%= editCompanyURL %>" method="post" name="fm" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "saveCompany();" %>'>
@@ -67,7 +67,7 @@ request.setAttribute("websites.classPK", company.getAccountId());
 		document.<portlet:namespace />fm.method = "post";
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= Constants.UPDATE %>";
 
-		var redirect = "<portlet:renderURL><portlet:param name="struts_action" value="/enterprise_admin/edit_company" /></portlet:renderURL>";
+		var redirect = "<portlet:renderURL><portlet:param name="struts_action" value="/portal_settings/edit_company" /></portlet:renderURL>";
 
 		redirect += Liferay.Util.getHistoryParam('<portlet:namespace />');
 
@@ -76,7 +76,7 @@ request.setAttribute("websites.classPK", company.getAccountId());
 		<portlet:namespace />saveLdap();
 		<portlet:namespace />saveEmails();
 
-		submitForm(document.<portlet:namespace />fm, "<portlet:actionURL><portlet:param name="struts_action" value="/enterprise_admin/edit_company" /></portlet:actionURL>");
+		submitForm(document.<portlet:namespace />fm, "<portlet:actionURL><portlet:param name="struts_action" value="/portal_settings/edit_company" /></portlet:actionURL>");
 	}
 </aui:script>
 

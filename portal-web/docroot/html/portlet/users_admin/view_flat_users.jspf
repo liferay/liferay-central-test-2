@@ -168,7 +168,7 @@
 		modelVar="user2"
 	>
 		<liferay-portlet:renderURL varImpl="rowURL">
-			<portlet:param name="struts_action" value="/enterprise_admin/edit_user" />
+			<portlet:param name="struts_action" value="/users_admin/edit_user" />
 			<portlet:param name="redirect" value="<%= searchContainer.getIteratorURL().toString() %>" />
 			<portlet:param name="p_u_i_d" value="<%= String.valueOf(user2.getUserId()) %>" />
 		</liferay-portlet:renderURL>

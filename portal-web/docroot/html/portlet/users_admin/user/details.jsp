@@ -120,7 +120,7 @@ boolean deletePortrait = ParamUtil.getBoolean(request, "deletePortrait");
 	<div>
 		<c:if test="<%= selUser != null %>">
 			<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>" var="editUserPortraitURL">
-				<portlet:param name="struts_action" value="/enterprise_admin/edit_user_portrait" />
+				<portlet:param name="struts_action" value="/users_admin/edit_user_portrait" />
 				<portlet:param name="redirect" value="<%= currentURL %>" />
 				<portlet:param name="p_u_i_d" value="<%= String.valueOf(selUser.getUserId()) %>" />
 				<portlet:param name="portrait_id" value="<%= String.valueOf(selUser.getPortraitId()) %>" />

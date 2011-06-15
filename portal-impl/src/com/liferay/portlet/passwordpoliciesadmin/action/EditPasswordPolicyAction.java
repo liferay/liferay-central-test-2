@@ -111,7 +111,8 @@ public class EditPasswordPolicyAction extends PortletAction {
 		}
 
 		return mapping.findForward(getForward(
-			renderRequest, "portlet.enterprise_admin.edit_password_policy"));
+			renderRequest,
+			"portlet.password_policies_admin.edit_password_policy"));
 	}
 
 	protected void deletePasswordPolicy(ActionRequest actionRequest)

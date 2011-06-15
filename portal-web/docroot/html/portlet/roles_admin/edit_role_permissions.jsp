@@ -52,21 +52,21 @@ boolean showModelResources = ParamUtil.getBoolean(request, "showModelResources",
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
-portletURL.setParameter("struts_action", "/enterprise_admin/edit_role_permissions");
+portletURL.setParameter("struts_action", "/roles_admin/edit_role_permissions");
 portletURL.setParameter("tabs1", tabs1);
 portletURL.setParameter("tabs2", tabs2);
 portletURL.setParameter("roleId", String.valueOf(role.getRoleId()));
 
 PortletURL viewPermissionsURL = renderResponse.createRenderURL();
 
-viewPermissionsURL.setParameter("struts_action", "/enterprise_admin/edit_role_permissions");
+viewPermissionsURL.setParameter("struts_action", "/roles_admin/edit_role_permissions");
 viewPermissionsURL.setParameter(Constants.CMD, Constants.VIEW);
 viewPermissionsURL.setParameter("tabs1", "roles");
 viewPermissionsURL.setParameter("roleId", String.valueOf(role.getRoleId()));
 
 PortletURL editPermissionsURL = renderResponse.createRenderURL();
 
-editPermissionsURL.setParameter("struts_action", "/enterprise_admin/edit_role_permissions");
+editPermissionsURL.setParameter("struts_action", "/roles_admin/edit_role_permissions");
 editPermissionsURL.setParameter(Constants.CMD, Constants.EDIT);
 editPermissionsURL.setParameter("tabs1", "roles");
 editPermissionsURL.setParameter("redirect", viewPermissionsURL.toString());
@@ -119,7 +119,7 @@ editPermissionsURL.setParameter("roleId", String.valueOf(role.getRoleId()));
 	</c:when>
 	<c:otherwise>
 		<portlet:actionURL var="editRolePermissionsURL">
-			<portlet:param name="struts_action" value="/enterprise_admin/edit_role_permissions" />
+			<portlet:param name="struts_action" value="/roles_admin/edit_role_permissions" />
 		</portlet:actionURL>
 
 		<aui:form action="<%= editRolePermissionsURL %>" method="post" name="fm">
@@ -268,7 +268,7 @@ editPermissionsURL.setParameter("roleId", String.valueOf(role.getRoleId()));
 <%
 PortletURL definePermissionsURL = renderResponse.createRenderURL();
 
-definePermissionsURL.setParameter("struts_action", "/enterprise_admin/edit_role_permissions");
+definePermissionsURL.setParameter("struts_action", "/roles_admin/edit_role_permissions");
 definePermissionsURL.setParameter(Constants.CMD, Constants.VIEW);
 definePermissionsURL.setParameter("redirect", backURL);
 definePermissionsURL.setParameter("roleId", String.valueOf(role.getRoleId()));
@@ -278,7 +278,7 @@ PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "def
 if (!cmd.equals(Constants.VIEW) && Validator.isNotNull(portletResource)) {
 	PortletURL resourceURL = renderResponse.createRenderURL();
 
-	resourceURL.setParameter("struts_action", "/enterprise_admin/edit_role");
+	resourceURL.setParameter("struts_action", "/roles_admin/edit_role");
 	resourceURL.setParameter(Constants.CMD, Constants.EDIT);
 	resourceURL.setParameter("tabs1", tabs1);
 	resourceURL.setParameter("portletResource", portletResource);

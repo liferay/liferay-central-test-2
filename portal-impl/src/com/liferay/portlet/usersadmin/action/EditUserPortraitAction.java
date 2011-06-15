@@ -83,7 +83,7 @@ public class EditUserPortraitAction extends PortletAction {
 		throws Exception {
 
 		return mapping.findForward(getForward(
-			renderRequest, "portlet.enterprise_admin.edit_user_portrait"));
+			renderRequest, "portlet.users_admin.edit_user_portrait"));
 	}
 
 	protected void updatePortrait(ActionRequest actionRequest)

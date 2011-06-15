@@ -52,7 +52,7 @@ if (row == null) {
 <liferay-ui:icon-menu showExpanded="<%= view %>" showWhenSingleIcon="<%= view %>">
 	<c:if test="<%= OrganizationPermissionUtil.contains(permissionChecker, organizationId, ActionKeys.UPDATE) %>">
 		<portlet:renderURL var="editOrganizationURL">
-			<portlet:param name="struts_action" value="/enterprise_admin/edit_organization" />
+			<portlet:param name="struts_action" value="/users_admin/edit_organization" />
 			<portlet:param name="redirect" value="<%= redirect %>" />
 			<portlet:param name="organizationId" value="<%= String.valueOf(organizationId) %>" />
 		</portlet:renderURL>
@@ -79,7 +79,7 @@ if (row == null) {
 
 	<c:if test="<%= OrganizationPermissionUtil.contains(permissionChecker, organizationId, ActionKeys.MANAGE_LAYOUTS) %>">
 		<portlet:renderURL var="managePagesURL">
-			<portlet:param name="struts_action" value="/enterprise_admin/edit_layouts" />
+			<portlet:param name="struts_action" value="/users_admin/edit_layouts" />
 			<portlet:param name="redirect" value="<%= redirect %>" />
 			<portlet:param name="groupId" value="<%= String.valueOf(organizationGroupId) %>" />
 		</portlet:renderURL>
@@ -93,7 +93,7 @@ if (row == null) {
 
 	<c:if test="<%= OrganizationPermissionUtil.contains(permissionChecker, organizationId, ActionKeys.MANAGE_STAGING) || OrganizationPermissionUtil.contains(permissionChecker, organizationId, ActionKeys.UPDATE) %>">
 		<portlet:renderURL var="editSettingsURL">
-			<portlet:param name="struts_action" value="/enterprise_admin/edit_settings" />
+			<portlet:param name="struts_action" value="/users_admin/edit_settings" />
 			<portlet:param name="redirect" value="<%= redirect %>" />
 			<portlet:param name="groupId" value="<%= String.valueOf(organizationGroupId) %>" />
 		</portlet:renderURL>
@@ -107,7 +107,7 @@ if (row == null) {
 
 	<c:if test='<%= OrganizationPermissionUtil.contains(permissionChecker, organizationId, ActionKeys.MANAGE_TEAMS) %>'>
 		<portlet:renderURL var="manageTeamsURL">
-			<portlet:param name="struts_action" value="/enterprise_admin/view_teams" />
+			<portlet:param name="struts_action" value="/users_admin/view_teams" />
 			<portlet:param name="redirect" value="<%= redirect %>" />
 			<portlet:param name="groupId" value="<%= String.valueOf(organizationGroupId) %>" />
 		</portlet:renderURL>
@@ -121,7 +121,7 @@ if (row == null) {
 
 	<c:if test="<%= permissionChecker.isGroupOwner(organizationGroupId) || OrganizationPermissionUtil.contains(permissionChecker, organizationId, ActionKeys.ASSIGN_USER_ROLES) %>">
 		<portlet:renderURL var="assignUserRolesURL">
-			<portlet:param name="struts_action" value="/enterprise_admin/edit_user_roles" />
+			<portlet:param name="struts_action" value="/users_admin/edit_user_roles" />
 			<portlet:param name="redirect" value="<%= redirect %>" />
 			<portlet:param name="groupId" value="<%= String.valueOf(organizationGroupId) %>" />
 			<portlet:param name="roleType" value="<%= String.valueOf(RoleConstants.TYPE_ORGANIZATION) %>" />
@@ -136,7 +136,7 @@ if (row == null) {
 
 	<c:if test="<%= OrganizationPermissionUtil.contains(permissionChecker, organizationId, ActionKeys.ASSIGN_MEMBERS) %>">
 		<portlet:renderURL var="assignMembersURL">
-			<portlet:param name="struts_action" value="/enterprise_admin/edit_organization_assignments" />
+			<portlet:param name="struts_action" value="/users_admin/edit_organization_assignments" />
 			<portlet:param name="redirect" value="<%= redirect %>" />
 			<portlet:param name="organizationId" value="<%= String.valueOf(organizationId) %>" />
 		</portlet:renderURL>
@@ -150,7 +150,7 @@ if (row == null) {
 
 	<c:if test="<%= OrganizationPermissionUtil.contains(permissionChecker, organizationId, ActionKeys.MANAGE_USERS) %>">
 		<portlet:renderURL var="addUserURL">
-			<portlet:param name="struts_action" value="/enterprise_admin/edit_user" />
+			<portlet:param name="struts_action" value="/users_admin/edit_user" />
 			<portlet:param name="redirect" value="<%= redirect %>" />
 			<portlet:param name="organizationsSearchContainerPrimaryKeys" value="<%= String.valueOf(organizationId) %>" />
 		</portlet:renderURL>
@@ -164,7 +164,7 @@ if (row == null) {
 
 	<c:if test="<%= (organization != null) %>">
 		<portlet:renderURL var="viewUsersURL">
-			<portlet:param name="struts_action" value="/enterprise_admin/view" />
+			<portlet:param name="struts_action" value="/users_admin/view" />
 			<portlet:param name="tabs1" value="users" />
 			<portlet:param name="viewUsersRedirect" value="<%= redirect %>" />
 			<portlet:param name="organizationId" value="<%= String.valueOf(organizationId) %>" />
@@ -190,7 +190,7 @@ if (row == null) {
 
 			<c:if test="<%= OrganizationPermissionUtil.contains(permissionChecker, organizationId, ActionKeys.MANAGE_SUBORGANIZATIONS) %>">
 				<portlet:renderURL var="addSuborganizationURL">
-					<portlet:param name="struts_action" value="/enterprise_admin/edit_organization" />
+					<portlet:param name="struts_action" value="/users_admin/edit_organization" />
 					<portlet:param name="redirect" value="<%= redirect %>" />
 					<portlet:param name="parentOrganizationSearchContainerPrimaryKeys" value="<%= String.valueOf(organizationId) %>" />
 					<portlet:param name="type" value="<%= childrenType %>" />

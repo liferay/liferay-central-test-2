@@ -248,7 +248,7 @@ public class UserIndexer extends BaseIndexer {
 
 		String userId = document.get(Field.USER_ID);
 
-		portletURL.setParameter("struts_action", "/enterprise_admin/edit_user");
+		portletURL.setParameter("struts_action", "/users_admin/edit_user");
 		portletURL.setParameter("p_u_i_d", userId);
 
 		return new Summary(title, content, portletURL);

@@ -71,7 +71,7 @@ public class EditPluginAction extends PortletAction {
 		throws Exception {
 
 		return mapping.findForward(
-			getForward(renderRequest, "portlet.enterprise_admin.edit_plugin"));
+			getForward(renderRequest, "portlet.plugins_admin.edit_plugin"));
 	}
 
 	protected void updatePluginSetting(ActionRequest actionRequest)

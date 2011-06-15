@@ -41,7 +41,7 @@ long publicLayoutSetId = ParamUtil.getLong(request, "publicLayoutSetId");
 	</c:when>
 	<c:otherwise>
 		<portlet:actionURL var="editOrganizationLogoURL">
-			<portlet:param name="struts_action" value="/enterprise_admin/edit_organization_logo" />
+			<portlet:param name="struts_action" value="/users_admin/edit_organization_logo" />
 		</portlet:actionURL>
 
 		<aui:form action="<%= editOrganizationLogoURL %>" enctype="multipart/form-data" method="post" name="fm">

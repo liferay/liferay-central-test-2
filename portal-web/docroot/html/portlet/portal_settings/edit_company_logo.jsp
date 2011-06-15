@@ -27,7 +27,7 @@
 	</c:when>
 	<c:otherwise>
 		<portlet:actionURL var="editCompanyLogoURL">
-			<portlet:param name="struts_action" value="/enterprise_admin/edit_company_logo" />
+			<portlet:param name="struts_action" value="/portal_settings/edit_company_logo" />
 		</portlet:actionURL>
 
 		<aui:form action="<%= editCompanyLogoURL %>" enctype="multipart/form-data" method="post" name="fm">

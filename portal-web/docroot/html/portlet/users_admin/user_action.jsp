@@ -33,7 +33,7 @@ long userId = user2.getUserId();
 <liferay-ui:icon-menu>
 	<c:if test="<%= UserPermissionUtil.contains(permissionChecker, userId, ActionKeys.UPDATE) %>">
 		<portlet:renderURL var="editUserURL">
-			<portlet:param name="struts_action" value="/enterprise_admin/edit_user" />
+			<portlet:param name="struts_action" value="/users_admin/edit_user" />
 			<portlet:param name="redirect" value="<%= redirect %>" />
 			<portlet:param name="p_u_i_d" value="<%= String.valueOf(userId) %>" />
 		</portlet:renderURL>
@@ -60,7 +60,7 @@ long userId = user2.getUserId();
 
 	<c:if test="<%= UserPermissionUtil.contains(permissionChecker, userId, ActionKeys.UPDATE) && (PropsValues.LAYOUT_USER_PRIVATE_LAYOUTS_MODIFIABLE || PropsValues.LAYOUT_USER_PUBLIC_LAYOUTS_MODIFIABLE) %>">
 		<portlet:renderURL var="managePagesURL">
-			<portlet:param name="struts_action" value="/enterprise_admin/edit_layouts" />
+			<portlet:param name="struts_action" value="/users_admin/edit_layouts" />
 			<portlet:param name="redirect" value="<%= redirect %>" />
 			<portlet:param name="groupId" value="<%= String.valueOf(user2.getGroup().getGroupId()) %>" />
 		</portlet:renderURL>
@@ -88,7 +88,7 @@ long userId = user2.getUserId();
 	<c:if test="<%= UserPermissionUtil.contains(permissionChecker, userId, ActionKeys.DELETE) %>">
 		<c:if test="<%= !user2.isActive() %>">
 			<portlet:actionURL var="restoreUserURL">
-				<portlet:param name="struts_action" value="/enterprise_admin/edit_user" />
+				<portlet:param name="struts_action" value="/users_admin/edit_user" />
 				<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.RESTORE %>" />
 				<portlet:param name="redirect" value="<%= redirect %>" />
 				<portlet:param name="deleteUserIds" value="<%= String.valueOf(userId) %>" />
@@ -101,7 +101,7 @@ long userId = user2.getUserId();
 		</c:if>
 
 		<portlet:actionURL var="deleteUserURL">
-			<portlet:param name="struts_action" value="/enterprise_admin/edit_user" />
+			<portlet:param name="struts_action" value="/users_admin/edit_user" />
 			<portlet:param name="<%= Constants.CMD %>" value="<%= user2.isActive() ? Constants.DEACTIVATE : Constants.DELETE %>" />
 			<portlet:param name="redirect" value="<%= redirect %>" />
 			<portlet:param name="deleteUserIds" value="<%= String.valueOf(userId) %>" />

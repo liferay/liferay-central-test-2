@@ -23,7 +23,7 @@ boolean includeUserPersonalSite = ParamUtil.getBoolean(request, "includeUserPers
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
-portletURL.setParameter("struts_action", "/enterprise_admin/select_site");
+portletURL.setParameter("struts_action", "/sites_admin/select_site");
 portletURL.setParameter("target", target);
 %>
 

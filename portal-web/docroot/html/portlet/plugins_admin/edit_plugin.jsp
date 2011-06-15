@@ -42,7 +42,7 @@ if (pluginType.equals(Plugin.TYPE_PORTLET)) {
 %>
 
 <portlet:actionURL var="editPluginURL">
-	<portlet:param name="struts_action" value="/enterprise_admin/edit_plugin" />
+	<portlet:param name="struts_action" value="/plugins_admin/edit_plugin" />
 </portlet:actionURL>
 
 <aui:form action="<%= editPluginURL %>" method="post" name="fm">
@@ -127,7 +127,7 @@ if (pluginType.equals(Plugin.TYPE_PORTLET)) {
 										align="right"
 									>
 										<liferay-portlet:renderURL portletName="<%= PortletKeys.ENTERPRISE_ADMIN_ROLES %>" var="editURL">
-											<portlet:param name="struts_action" value="/enterprise_admin_roles/edit_role_permissions" />
+											<portlet:param name="struts_action" value="/roles_admin/edit_role_permissions" />
 											<portlet:param name="cmd" value="edit" />
 											<portlet:param name="tabs1" value="roles" />
 											<portlet:param name="roleId" value="<%= String.valueOf(role.getRoleId()) %>" />
@@ -170,7 +170,7 @@ if (pluginType.equals(Plugin.TYPE_PORTLET)) {
 										align="right"
 									>
 										<liferay-portlet:renderURL portletName="<%= PortletKeys.ENTERPRISE_ADMIN_ROLES %>" var="editURL">
-											<portlet:param name="struts_action" value="/enterprise_admin_roles/edit_role_permissions" />
+											<portlet:param name="struts_action" value="/roles_admin/edit_role_permissions" />
 											<portlet:param name="cmd" value="edit" />
 											<portlet:param name="tabs1" value="roles" />
 											<portlet:param name="roleId" value="<%= String.valueOf(role.getRoleId()) %>" />

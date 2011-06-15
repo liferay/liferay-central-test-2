@@ -28,7 +28,7 @@ PasswordPolicy passwordPolicy = (PasswordPolicy)request.getAttribute(WebKeys.PAS
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
-portletURL.setParameter("struts_action", "/enterprise_admin/edit_password_policy_assignments");
+portletURL.setParameter("struts_action", "/password_policies_admin/edit_password_policy_assignments");
 portletURL.setParameter("tabs1", tabs1);
 portletURL.setParameter("redirect", redirect);
 portletURL.setParameter("passwordPolicyId", String.valueOf(passwordPolicy.getPasswordPolicyId()));
@@ -55,7 +55,7 @@ portletURL.setParameter("tabs3", tabs3);
 />
 
 <portlet:actionURL var="editAssignmentsURL">
-	<portlet:param name="struts_action" value="/enterprise_admin/edit_password_policy_assignments" />
+	<portlet:param name="struts_action" value="/password_policies_admin/edit_password_policy_assignments" />
 </portlet:actionURL>
 
 <aui:form action="<%= editAssignmentsURL %>" method="post" name="fm">

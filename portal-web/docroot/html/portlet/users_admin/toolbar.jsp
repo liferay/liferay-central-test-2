@@ -22,7 +22,7 @@ String toolbarItem = ParamUtil.getString(request, "toolbarItem", "view");
 
 <div class="lfr-portlet-toolbar">
 	<portlet:renderURL var="viewUsersURL">
-		<portlet:param name="struts_action" value="/enterprise_admin/view" />
+		<portlet:param name="struts_action" value="/users_admin/view" />
 	</portlet:renderURL>
 
 	<liferay-ui:icon-menu align="left" direction="down" extended="<%= false %>" icon='<%= themeDisplay.getPathThemeImages() + "/common/view_users.png" %>' message="view">
@@ -34,7 +34,7 @@ String toolbarItem = ParamUtil.getString(request, "toolbarItem", "view");
 
 			<c:if test="<%= PortalPermissionUtil.contains(permissionChecker, ActionKeys.ADD_USER) %>">
 				<portlet:renderURL var="addUserURL">
-					<portlet:param name="struts_action" value="/enterprise_admin/edit_user" />
+					<portlet:param name="struts_action" value="/users_admin/edit_user" />
 					<portlet:param name="redirect" value="<%= currentURL %>" />
 				</portlet:renderURL>
 
@@ -52,7 +52,7 @@ String toolbarItem = ParamUtil.getString(request, "toolbarItem", "view");
 				%>
 
 					<portlet:renderURL var="addOrganizationURL">
-						<portlet:param name="struts_action" value="/enterprise_admin/edit_organization" />
+						<portlet:param name="struts_action" value="/users_admin/edit_organization" />
 						<portlet:param name="redirect" value="<%= currentURL %>" />
 						<portlet:param name="type" value="<%= organizationType %>" />
 					</portlet:renderURL>
@@ -71,7 +71,7 @@ String toolbarItem = ParamUtil.getString(request, "toolbarItem", "view");
 
 			<c:if test="<%= PortalPermissionUtil.contains(permissionChecker, ActionKeys.ADD_USER_GROUP) %>">
 				<portlet:renderURL var="addUsergroupURL">
-					<portlet:param name="struts_action" value="/enterprise_admin/edit_user_group" />
+					<portlet:param name="struts_action" value="/users_admin/edit_user_group" />
 					<portlet:param name="redirect" value="<%= currentURL %>" />
 				</portlet:renderURL>
 
@@ -86,7 +86,7 @@ String toolbarItem = ParamUtil.getString(request, "toolbarItem", "view");
 
 	<c:if test="<%= PortalPermissionUtil.contains(permissionChecker, ActionKeys.EXPORT_USER) %>">
 		<portlet:renderURL var="addUserURL">
-			<portlet:param name="struts_action" value="/enterprise_admin/edit_user" />
+			<portlet:param name="struts_action" value="/users_admin/edit_user" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
 		</portlet:renderURL>
 
@@ -97,6 +97,6 @@ String toolbarItem = ParamUtil.getString(request, "toolbarItem", "view");
 <aui:script>
 	function <portlet:namespace />exportUsers() {
 		document.<portlet:namespace />fm.method = "post";
-		submitForm(document.<portlet:namespace />fm, "<portlet:actionURL><portlet:param name="struts_action" value="/enterprise_admin/export_users" /></portlet:actionURL>&etag=0&strip=0&compress=0", false);
+		submitForm(document.<portlet:namespace />fm, "<portlet:actionURL><portlet:param name="struts_action" value="/users_admin/export_users" /></portlet:actionURL>&etag=0&strip=0&compress=0", false);
 	}
 </aui:script>
