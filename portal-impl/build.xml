@@ -871,8 +871,6 @@ public class Creole10Parser]]></replacevalue>
 			</else>
 		</if>
 
-		<antcall target="compile-test" />
-
 		<antcall target="print-current-time" />
 	</target>
 
