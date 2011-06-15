@@ -167,9 +167,8 @@ public class SocialEquityHistoryModelImpl extends BaseModelImpl<SocialEquityHist
 			return (SocialEquityHistory)this;
 		}
 		else {
-			return (SocialEquityHistory)Proxy.newProxyInstance(SocialEquityHistory.class.getClassLoader(),
-				new Class[] { SocialEquityHistory.class },
-				new AutoEscapeBeanHandler(this));
+			return (SocialEquityHistory)Proxy.newProxyInstance(_classLoader,
+				_escapedModelProxyInterfaces, new AutoEscapeBeanHandler(this));
 		}
 	}
 
@@ -303,6 +302,10 @@ public class SocialEquityHistoryModelImpl extends BaseModelImpl<SocialEquityHist
 		return sb.toString();
 	}
 
+	private static ClassLoader _classLoader = SocialEquityHistory.class.getClassLoader();
+	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+			SocialEquityHistory.class
+		};
 	private long _equityHistoryId;
 	private long _groupId;
 	private long _companyId;

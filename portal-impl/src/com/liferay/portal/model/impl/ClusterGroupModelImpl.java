@@ -151,9 +151,8 @@ public class ClusterGroupModelImpl extends BaseModelImpl<ClusterGroup>
 			return (ClusterGroup)this;
 		}
 		else {
-			return (ClusterGroup)Proxy.newProxyInstance(ClusterGroup.class.getClassLoader(),
-				new Class[] { ClusterGroup.class },
-				new AutoEscapeBeanHandler(this));
+			return (ClusterGroup)Proxy.newProxyInstance(_classLoader,
+				_escapedModelProxyInterfaces, new AutoEscapeBeanHandler(this));
 		}
 	}
 
@@ -273,6 +272,10 @@ public class ClusterGroupModelImpl extends BaseModelImpl<ClusterGroup>
 		return sb.toString();
 	}
 
+	private static ClassLoader _classLoader = ClusterGroup.class.getClassLoader();
+	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+			ClusterGroup.class
+		};
 	private long _clusterGroupId;
 	private String _name;
 	private String _clusterNodeIds;

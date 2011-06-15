@@ -287,9 +287,8 @@ public class RepositoryModelImpl extends BaseModelImpl<Repository>
 			return (Repository)this;
 		}
 		else {
-			return (Repository)Proxy.newProxyInstance(Repository.class.getClassLoader(),
-				new Class[] { Repository.class },
-				new AutoEscapeBeanHandler(this));
+			return (Repository)Proxy.newProxyInstance(_classLoader,
+				_escapedModelProxyInterfaces, new AutoEscapeBeanHandler(this));
 		}
 	}
 
@@ -458,6 +457,10 @@ public class RepositoryModelImpl extends BaseModelImpl<Repository>
 		return sb.toString();
 	}
 
+	private static ClassLoader _classLoader = Repository.class.getClassLoader();
+	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+			Repository.class
+		};
 	private long _repositoryId;
 	private long _groupId;
 	private long _companyId;

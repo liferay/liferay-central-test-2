@@ -293,9 +293,8 @@ public class EmailAddressModelImpl extends BaseModelImpl<EmailAddress>
 			return (EmailAddress)this;
 		}
 		else {
-			return (EmailAddress)Proxy.newProxyInstance(EmailAddress.class.getClassLoader(),
-				new Class[] { EmailAddress.class },
-				new AutoEscapeBeanHandler(this));
+			return (EmailAddress)Proxy.newProxyInstance(_classLoader,
+				_escapedModelProxyInterfaces, new AutoEscapeBeanHandler(this));
 		}
 	}
 
@@ -462,6 +461,10 @@ public class EmailAddressModelImpl extends BaseModelImpl<EmailAddress>
 		return sb.toString();
 	}
 
+	private static ClassLoader _classLoader = EmailAddress.class.getClassLoader();
+	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+			EmailAddress.class
+		};
 	private long _emailAddressId;
 	private long _companyId;
 	private long _userId;

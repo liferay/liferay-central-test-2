@@ -503,9 +503,8 @@ public class DDLRecordSetModelImpl extends BaseModelImpl<DDLRecordSet>
 			return (DDLRecordSet)this;
 		}
 		else {
-			return (DDLRecordSet)Proxy.newProxyInstance(DDLRecordSet.class.getClassLoader(),
-				new Class[] { DDLRecordSet.class },
-				new AutoEscapeBeanHandler(this));
+			return (DDLRecordSet)Proxy.newProxyInstance(_classLoader,
+				_escapedModelProxyInterfaces, new AutoEscapeBeanHandler(this));
 		}
 	}
 
@@ -697,6 +696,10 @@ public class DDLRecordSetModelImpl extends BaseModelImpl<DDLRecordSet>
 		return sb.toString();
 	}
 
+	private static ClassLoader _classLoader = DDLRecordSet.class.getClassLoader();
+	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+			DDLRecordSet.class
+		};
 	private String _uuid;
 	private String _originalUuid;
 	private long _recordSetId;

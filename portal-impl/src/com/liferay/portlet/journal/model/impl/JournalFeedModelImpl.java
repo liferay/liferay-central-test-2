@@ -504,9 +504,8 @@ public class JournalFeedModelImpl extends BaseModelImpl<JournalFeed>
 			return (JournalFeed)this;
 		}
 		else {
-			return (JournalFeed)Proxy.newProxyInstance(JournalFeed.class.getClassLoader(),
-				new Class[] { JournalFeed.class },
-				new AutoEscapeBeanHandler(this));
+			return (JournalFeed)Proxy.newProxyInstance(_classLoader,
+				_escapedModelProxyInterfaces, new AutoEscapeBeanHandler(this));
 		}
 	}
 
@@ -766,6 +765,10 @@ public class JournalFeedModelImpl extends BaseModelImpl<JournalFeed>
 		return sb.toString();
 	}
 
+	private static ClassLoader _classLoader = JournalFeed.class.getClassLoader();
+	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+			JournalFeed.class
+		};
 	private String _uuid;
 	private String _originalUuid;
 	private long _id;

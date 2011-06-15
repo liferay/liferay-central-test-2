@@ -284,9 +284,8 @@ public class AssetCategoryPropertyModelImpl extends BaseModelImpl<AssetCategoryP
 			return (AssetCategoryProperty)this;
 		}
 		else {
-			return (AssetCategoryProperty)Proxy.newProxyInstance(AssetCategoryProperty.class.getClassLoader(),
-				new Class[] { AssetCategoryProperty.class },
-				new AutoEscapeBeanHandler(this));
+			return (AssetCategoryProperty)Proxy.newProxyInstance(_classLoader,
+				_escapedModelProxyInterfaces, new AutoEscapeBeanHandler(this));
 		}
 	}
 
@@ -446,6 +445,10 @@ public class AssetCategoryPropertyModelImpl extends BaseModelImpl<AssetCategoryP
 		return sb.toString();
 	}
 
+	private static ClassLoader _classLoader = AssetCategoryProperty.class.getClassLoader();
+	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+			AssetCategoryProperty.class
+		};
 	private long _categoryPropertyId;
 	private long _companyId;
 	private long _userId;

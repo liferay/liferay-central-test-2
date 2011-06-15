@@ -251,9 +251,8 @@ public class PortletPreferencesModelImpl extends BaseModelImpl<PortletPreference
 			return (PortletPreferences)this;
 		}
 		else {
-			return (PortletPreferences)Proxy.newProxyInstance(PortletPreferences.class.getClassLoader(),
-				new Class[] { PortletPreferences.class },
-				new AutoEscapeBeanHandler(this));
+			return (PortletPreferences)Proxy.newProxyInstance(_classLoader,
+				_escapedModelProxyInterfaces, new AutoEscapeBeanHandler(this));
 		}
 	}
 
@@ -402,6 +401,10 @@ public class PortletPreferencesModelImpl extends BaseModelImpl<PortletPreference
 		return sb.toString();
 	}
 
+	private static ClassLoader _classLoader = PortletPreferences.class.getClassLoader();
+	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+			PortletPreferences.class
+		};
 	private long _portletPreferencesId;
 	private long _ownerId;
 	private long _originalOwnerId;

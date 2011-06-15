@@ -317,8 +317,8 @@ public class WikiNodeModelImpl extends BaseModelImpl<WikiNode>
 			return (WikiNode)this;
 		}
 		else {
-			return (WikiNode)Proxy.newProxyInstance(WikiNode.class.getClassLoader(),
-				new Class[] { WikiNode.class }, new AutoEscapeBeanHandler(this));
+			return (WikiNode)Proxy.newProxyInstance(_classLoader,
+				_escapedModelProxyInterfaces, new AutoEscapeBeanHandler(this));
 		}
 	}
 
@@ -495,6 +495,10 @@ public class WikiNodeModelImpl extends BaseModelImpl<WikiNode>
 		return sb.toString();
 	}
 
+	private static ClassLoader _classLoader = WikiNode.class.getClassLoader();
+	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+			WikiNode.class
+		};
 	private String _uuid;
 	private String _originalUuid;
 	private long _nodeId;

@@ -1047,9 +1047,8 @@ public class LayoutRevisionModelImpl extends BaseModelImpl<LayoutRevision>
 			return (LayoutRevision)this;
 		}
 		else {
-			return (LayoutRevision)Proxy.newProxyInstance(LayoutRevision.class.getClassLoader(),
-				new Class[] { LayoutRevision.class },
-				new AutoEscapeBeanHandler(this));
+			return (LayoutRevision)Proxy.newProxyInstance(_classLoader,
+				_escapedModelProxyInterfaces, new AutoEscapeBeanHandler(this));
 		}
 	}
 
@@ -1379,6 +1378,10 @@ public class LayoutRevisionModelImpl extends BaseModelImpl<LayoutRevision>
 		return sb.toString();
 	}
 
+	private static ClassLoader _classLoader = LayoutRevision.class.getClassLoader();
+	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+			LayoutRevision.class
+		};
 	private long _layoutRevisionId;
 	private long _groupId;
 	private long _companyId;

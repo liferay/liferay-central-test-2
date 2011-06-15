@@ -324,8 +324,8 @@ public class OrgLaborModelImpl extends BaseModelImpl<OrgLabor>
 			return (OrgLabor)this;
 		}
 		else {
-			return (OrgLabor)Proxy.newProxyInstance(OrgLabor.class.getClassLoader(),
-				new Class[] { OrgLabor.class }, new AutoEscapeBeanHandler(this));
+			return (OrgLabor)Proxy.newProxyInstance(_classLoader,
+				_escapedModelProxyInterfaces, new AutoEscapeBeanHandler(this));
 		}
 	}
 
@@ -556,6 +556,10 @@ public class OrgLaborModelImpl extends BaseModelImpl<OrgLabor>
 		return sb.toString();
 	}
 
+	private static ClassLoader _classLoader = OrgLabor.class.getClassLoader();
+	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+			OrgLabor.class
+		};
 	private long _orgLaborId;
 	private long _organizationId;
 	private int _typeId;

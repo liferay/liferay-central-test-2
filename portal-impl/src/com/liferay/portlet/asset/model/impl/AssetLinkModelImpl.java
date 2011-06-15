@@ -232,8 +232,8 @@ public class AssetLinkModelImpl extends BaseModelImpl<AssetLink>
 			return (AssetLink)this;
 		}
 		else {
-			return (AssetLink)Proxy.newProxyInstance(AssetLink.class.getClassLoader(),
-				new Class[] { AssetLink.class }, new AutoEscapeBeanHandler(this));
+			return (AssetLink)Proxy.newProxyInstance(_classLoader,
+				_escapedModelProxyInterfaces, new AutoEscapeBeanHandler(this));
 		}
 	}
 
@@ -407,6 +407,10 @@ public class AssetLinkModelImpl extends BaseModelImpl<AssetLink>
 		return sb.toString();
 	}
 
+	private static ClassLoader _classLoader = AssetLink.class.getClassLoader();
+	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+			AssetLink.class
+		};
 	private long _linkId;
 	private long _companyId;
 	private long _userId;

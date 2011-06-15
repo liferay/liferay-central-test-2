@@ -200,9 +200,8 @@ public class UserNotificationEventModelImpl extends BaseModelImpl<UserNotificati
 			return (UserNotificationEvent)this;
 		}
 		else {
-			return (UserNotificationEvent)Proxy.newProxyInstance(UserNotificationEvent.class.getClassLoader(),
-				new Class[] { UserNotificationEvent.class },
-				new AutoEscapeBeanHandler(this));
+			return (UserNotificationEvent)Proxy.newProxyInstance(_classLoader,
+				_escapedModelProxyInterfaces, new AutoEscapeBeanHandler(this));
 		}
 	}
 
@@ -356,6 +355,10 @@ public class UserNotificationEventModelImpl extends BaseModelImpl<UserNotificati
 		return sb.toString();
 	}
 
+	private static ClassLoader _classLoader = UserNotificationEvent.class.getClassLoader();
+	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+			UserNotificationEvent.class
+		};
 	private String _uuid;
 	private long _userNotificationEventId;
 	private long _companyId;

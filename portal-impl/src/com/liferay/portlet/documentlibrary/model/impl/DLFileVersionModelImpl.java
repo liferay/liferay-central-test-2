@@ -422,9 +422,8 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion>
 			return (DLFileVersion)this;
 		}
 		else {
-			return (DLFileVersion)Proxy.newProxyInstance(DLFileVersion.class.getClassLoader(),
-				new Class[] { DLFileVersion.class },
-				new AutoEscapeBeanHandler(this));
+			return (DLFileVersion)Proxy.newProxyInstance(_classLoader,
+				_escapedModelProxyInterfaces, new AutoEscapeBeanHandler(this));
 		}
 	}
 
@@ -687,6 +686,10 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion>
 		return sb.toString();
 	}
 
+	private static ClassLoader _classLoader = DLFileVersion.class.getClassLoader();
+	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+			DLFileVersion.class
+		};
 	private long _fileVersionId;
 	private long _groupId;
 	private long _companyId;

@@ -268,8 +268,8 @@ public class CountryModelImpl extends BaseModelImpl<Country>
 			return (Country)this;
 		}
 		else {
-			return (Country)Proxy.newProxyInstance(Country.class.getClassLoader(),
-				new Class[] { Country.class }, new AutoEscapeBeanHandler(this));
+			return (Country)Proxy.newProxyInstance(_classLoader,
+				_escapedModelProxyInterfaces, new AutoEscapeBeanHandler(this));
 		}
 	}
 
@@ -415,6 +415,10 @@ public class CountryModelImpl extends BaseModelImpl<Country>
 		return sb.toString();
 	}
 
+	private static ClassLoader _classLoader = Country.class.getClassLoader();
+	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+			Country.class
+		};
 	private long _countryId;
 	private String _name;
 	private String _originalName;

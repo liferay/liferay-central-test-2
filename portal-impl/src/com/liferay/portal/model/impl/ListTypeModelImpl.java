@@ -177,8 +177,8 @@ public class ListTypeModelImpl extends BaseModelImpl<ListType>
 			return (ListType)this;
 		}
 		else {
-			return (ListType)Proxy.newProxyInstance(ListType.class.getClassLoader(),
-				new Class[] { ListType.class }, new AutoEscapeBeanHandler(this));
+			return (ListType)Proxy.newProxyInstance(_classLoader,
+				_escapedModelProxyInterfaces, new AutoEscapeBeanHandler(this));
 		}
 	}
 
@@ -277,6 +277,10 @@ public class ListTypeModelImpl extends BaseModelImpl<ListType>
 		return sb.toString();
 	}
 
+	private static ClassLoader _classLoader = ListType.class.getClassLoader();
+	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+			ListType.class
+		};
 	private int _listTypeId;
 	private String _name;
 	private String _type;

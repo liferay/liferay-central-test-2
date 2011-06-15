@@ -374,8 +374,8 @@ public class DLFolderModelImpl extends BaseModelImpl<DLFolder>
 			return (DLFolder)this;
 		}
 		else {
-			return (DLFolder)Proxy.newProxyInstance(DLFolder.class.getClassLoader(),
-				new Class[] { DLFolder.class }, new AutoEscapeBeanHandler(this));
+			return (DLFolder)Proxy.newProxyInstance(_classLoader,
+				_escapedModelProxyInterfaces, new AutoEscapeBeanHandler(this));
 		}
 	}
 
@@ -595,6 +595,10 @@ public class DLFolderModelImpl extends BaseModelImpl<DLFolder>
 		return sb.toString();
 	}
 
+	private static ClassLoader _classLoader = DLFolder.class.getClassLoader();
+	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+			DLFolder.class
+		};
 	private String _uuid;
 	private String _originalUuid;
 	private long _folderId;

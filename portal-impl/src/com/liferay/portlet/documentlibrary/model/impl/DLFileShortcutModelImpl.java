@@ -399,9 +399,8 @@ public class DLFileShortcutModelImpl extends BaseModelImpl<DLFileShortcut>
 			return (DLFileShortcut)this;
 		}
 		else {
-			return (DLFileShortcut)Proxy.newProxyInstance(DLFileShortcut.class.getClassLoader(),
-				new Class[] { DLFileShortcut.class },
-				new AutoEscapeBeanHandler(this));
+			return (DLFileShortcut)Proxy.newProxyInstance(_classLoader,
+				_escapedModelProxyInterfaces, new AutoEscapeBeanHandler(this));
 		}
 	}
 
@@ -605,6 +604,10 @@ public class DLFileShortcutModelImpl extends BaseModelImpl<DLFileShortcut>
 		return sb.toString();
 	}
 
+	private static ClassLoader _classLoader = DLFileShortcut.class.getClassLoader();
+	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+			DLFileShortcut.class
+		};
 	private String _uuid;
 	private String _originalUuid;
 	private long _fileShortcutId;

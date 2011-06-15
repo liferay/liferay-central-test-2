@@ -262,9 +262,8 @@ public class PortletItemModelImpl extends BaseModelImpl<PortletItem>
 			return (PortletItem)this;
 		}
 		else {
-			return (PortletItem)Proxy.newProxyInstance(PortletItem.class.getClassLoader(),
-				new Class[] { PortletItem.class },
-				new AutoEscapeBeanHandler(this));
+			return (PortletItem)Proxy.newProxyInstance(_classLoader,
+				_escapedModelProxyInterfaces, new AutoEscapeBeanHandler(this));
 		}
 	}
 
@@ -439,6 +438,10 @@ public class PortletItemModelImpl extends BaseModelImpl<PortletItem>
 		return sb.toString();
 	}
 
+	private static ClassLoader _classLoader = PortletItem.class.getClassLoader();
+	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+			PortletItem.class
+		};
 	private long _portletItemId;
 	private long _groupId;
 	private long _originalGroupId;

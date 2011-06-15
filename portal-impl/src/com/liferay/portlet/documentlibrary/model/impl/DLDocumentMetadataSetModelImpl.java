@@ -199,9 +199,8 @@ public class DLDocumentMetadataSetModelImpl extends BaseModelImpl<DLDocumentMeta
 			return (DLDocumentMetadataSet)this;
 		}
 		else {
-			return (DLDocumentMetadataSet)Proxy.newProxyInstance(DLDocumentMetadataSet.class.getClassLoader(),
-				new Class[] { DLDocumentMetadataSet.class },
-				new AutoEscapeBeanHandler(this));
+			return (DLDocumentMetadataSet)Proxy.newProxyInstance(_classLoader,
+				_escapedModelProxyInterfaces, new AutoEscapeBeanHandler(this));
 		}
 	}
 
@@ -352,6 +351,10 @@ public class DLDocumentMetadataSetModelImpl extends BaseModelImpl<DLDocumentMeta
 		return sb.toString();
 	}
 
+	private static ClassLoader _classLoader = DLDocumentMetadataSet.class.getClassLoader();
+	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+			DLDocumentMetadataSet.class
+		};
 	private String _uuid;
 	private long _documentMetadataSetId;
 	private long _classNameId;

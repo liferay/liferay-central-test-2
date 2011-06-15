@@ -221,9 +221,8 @@ public class ShoppingOrderItemModelImpl extends BaseModelImpl<ShoppingOrderItem>
 			return (ShoppingOrderItem)this;
 		}
 		else {
-			return (ShoppingOrderItem)Proxy.newProxyInstance(ShoppingOrderItem.class.getClassLoader(),
-				new Class[] { ShoppingOrderItem.class },
-				new AutoEscapeBeanHandler(this));
+			return (ShoppingOrderItem)Proxy.newProxyInstance(_classLoader,
+				_escapedModelProxyInterfaces, new AutoEscapeBeanHandler(this));
 		}
 	}
 
@@ -389,6 +388,10 @@ public class ShoppingOrderItemModelImpl extends BaseModelImpl<ShoppingOrderItem>
 		return sb.toString();
 	}
 
+	private static ClassLoader _classLoader = ShoppingOrderItem.class.getClassLoader();
+	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+			ShoppingOrderItem.class
+		};
 	private long _orderItemId;
 	private long _orderId;
 	private String _itemId;

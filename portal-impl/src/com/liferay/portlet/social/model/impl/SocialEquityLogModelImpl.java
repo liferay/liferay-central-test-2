@@ -300,9 +300,8 @@ public class SocialEquityLogModelImpl extends BaseModelImpl<SocialEquityLog>
 			return (SocialEquityLog)this;
 		}
 		else {
-			return (SocialEquityLog)Proxy.newProxyInstance(SocialEquityLog.class.getClassLoader(),
-				new Class[] { SocialEquityLog.class },
-				new AutoEscapeBeanHandler(this));
+			return (SocialEquityLog)Proxy.newProxyInstance(_classLoader,
+				_escapedModelProxyInterfaces, new AutoEscapeBeanHandler(this));
 		}
 	}
 
@@ -503,6 +502,10 @@ public class SocialEquityLogModelImpl extends BaseModelImpl<SocialEquityLog>
 		return sb.toString();
 	}
 
+	private static ClassLoader _classLoader = SocialEquityLog.class.getClassLoader();
+	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+			SocialEquityLog.class
+		};
 	private long _equityLogId;
 	private long _groupId;
 	private long _companyId;

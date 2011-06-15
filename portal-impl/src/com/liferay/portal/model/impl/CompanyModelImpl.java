@@ -285,8 +285,8 @@ public class CompanyModelImpl extends BaseModelImpl<Company>
 			return (Company)this;
 		}
 		else {
-			return (Company)Proxy.newProxyInstance(Company.class.getClassLoader(),
-				new Class[] { Company.class }, new AutoEscapeBeanHandler(this));
+			return (Company)Proxy.newProxyInstance(_classLoader,
+				_escapedModelProxyInterfaces, new AutoEscapeBeanHandler(this));
 		}
 	}
 
@@ -450,6 +450,10 @@ public class CompanyModelImpl extends BaseModelImpl<Company>
 		return sb.toString();
 	}
 
+	private static ClassLoader _classLoader = Company.class.getClassLoader();
+	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+			Company.class
+		};
 	private long _companyId;
 	private long _accountId;
 	private String _webId;

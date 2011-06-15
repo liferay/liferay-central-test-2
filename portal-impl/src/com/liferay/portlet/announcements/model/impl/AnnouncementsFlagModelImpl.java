@@ -236,9 +236,8 @@ public class AnnouncementsFlagModelImpl extends BaseModelImpl<AnnouncementsFlag>
 			return (AnnouncementsFlag)this;
 		}
 		else {
-			return (AnnouncementsFlag)Proxy.newProxyInstance(AnnouncementsFlag.class.getClassLoader(),
-				new Class[] { AnnouncementsFlag.class },
-				new AutoEscapeBeanHandler(this));
+			return (AnnouncementsFlag)Proxy.newProxyInstance(_classLoader,
+				_escapedModelProxyInterfaces, new AutoEscapeBeanHandler(this));
 		}
 	}
 
@@ -391,6 +390,10 @@ public class AnnouncementsFlagModelImpl extends BaseModelImpl<AnnouncementsFlag>
 		return sb.toString();
 	}
 
+	private static ClassLoader _classLoader = AnnouncementsFlag.class.getClassLoader();
+	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+			AnnouncementsFlag.class
+		};
 	private long _flagId;
 	private long _userId;
 	private String _userUuid;

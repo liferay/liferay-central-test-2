@@ -327,8 +327,8 @@ public class IGFolderModelImpl extends BaseModelImpl<IGFolder>
 			return (IGFolder)this;
 		}
 		else {
-			return (IGFolder)Proxy.newProxyInstance(IGFolder.class.getClassLoader(),
-				new Class[] { IGFolder.class }, new AutoEscapeBeanHandler(this));
+			return (IGFolder)Proxy.newProxyInstance(_classLoader,
+				_escapedModelProxyInterfaces, new AutoEscapeBeanHandler(this));
 		}
 	}
 
@@ -523,6 +523,10 @@ public class IGFolderModelImpl extends BaseModelImpl<IGFolder>
 		return sb.toString();
 	}
 
+	private static ClassLoader _classLoader = IGFolder.class.getClassLoader();
+	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+			IGFolder.class
+		};
 	private String _uuid;
 	private String _originalUuid;
 	private long _folderId;

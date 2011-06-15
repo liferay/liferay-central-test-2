@@ -201,9 +201,8 @@ public class ShoppingItemPriceModelImpl extends BaseModelImpl<ShoppingItemPrice>
 			return (ShoppingItemPrice)this;
 		}
 		else {
-			return (ShoppingItemPrice)Proxy.newProxyInstance(ShoppingItemPrice.class.getClassLoader(),
-				new Class[] { ShoppingItemPrice.class },
-				new AutoEscapeBeanHandler(this));
+			return (ShoppingItemPrice)Proxy.newProxyInstance(_classLoader,
+				_escapedModelProxyInterfaces, new AutoEscapeBeanHandler(this));
 		}
 	}
 
@@ -385,6 +384,10 @@ public class ShoppingItemPriceModelImpl extends BaseModelImpl<ShoppingItemPrice>
 		return sb.toString();
 	}
 
+	private static ClassLoader _classLoader = ShoppingItemPrice.class.getClassLoader();
+	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+			ShoppingItemPrice.class
+		};
 	private long _itemPriceId;
 	private long _itemId;
 	private int _minQuantity;

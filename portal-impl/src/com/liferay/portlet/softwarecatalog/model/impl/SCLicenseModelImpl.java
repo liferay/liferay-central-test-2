@@ -239,8 +239,8 @@ public class SCLicenseModelImpl extends BaseModelImpl<SCLicense>
 			return (SCLicense)this;
 		}
 		else {
-			return (SCLicense)Proxy.newProxyInstance(SCLicense.class.getClassLoader(),
-				new Class[] { SCLicense.class }, new AutoEscapeBeanHandler(this));
+			return (SCLicense)Proxy.newProxyInstance(_classLoader,
+				_escapedModelProxyInterfaces, new AutoEscapeBeanHandler(this));
 		}
 	}
 
@@ -372,6 +372,10 @@ public class SCLicenseModelImpl extends BaseModelImpl<SCLicense>
 		return sb.toString();
 	}
 
+	private static ClassLoader _classLoader = SCLicense.class.getClassLoader();
+	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+			SCLicense.class
+		};
 	private long _licenseId;
 	private String _name;
 	private String _url;

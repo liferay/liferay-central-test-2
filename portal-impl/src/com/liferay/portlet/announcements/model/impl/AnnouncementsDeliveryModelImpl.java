@@ -261,9 +261,8 @@ public class AnnouncementsDeliveryModelImpl extends BaseModelImpl<AnnouncementsD
 			return (AnnouncementsDelivery)this;
 		}
 		else {
-			return (AnnouncementsDelivery)Proxy.newProxyInstance(AnnouncementsDelivery.class.getClassLoader(),
-				new Class[] { AnnouncementsDelivery.class },
-				new AutoEscapeBeanHandler(this));
+			return (AnnouncementsDelivery)Proxy.newProxyInstance(_classLoader,
+				_escapedModelProxyInterfaces, new AutoEscapeBeanHandler(this));
 		}
 	}
 
@@ -412,6 +411,10 @@ public class AnnouncementsDeliveryModelImpl extends BaseModelImpl<AnnouncementsD
 		return sb.toString();
 	}
 
+	private static ClassLoader _classLoader = AnnouncementsDelivery.class.getClassLoader();
+	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+			AnnouncementsDelivery.class
+		};
 	private long _deliveryId;
 	private long _companyId;
 	private long _userId;

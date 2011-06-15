@@ -394,8 +394,8 @@ public class AddressModelImpl extends BaseModelImpl<Address>
 			return (Address)this;
 		}
 		else {
-			return (Address)Proxy.newProxyInstance(Address.class.getClassLoader(),
-				new Class[] { Address.class }, new AutoEscapeBeanHandler(this));
+			return (Address)Proxy.newProxyInstance(_classLoader,
+				_escapedModelProxyInterfaces, new AutoEscapeBeanHandler(this));
 		}
 	}
 
@@ -611,6 +611,10 @@ public class AddressModelImpl extends BaseModelImpl<Address>
 		return sb.toString();
 	}
 
+	private static ClassLoader _classLoader = Address.class.getClassLoader();
+	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+			Address.class
+		};
 	private long _addressId;
 	private long _companyId;
 	private long _userId;

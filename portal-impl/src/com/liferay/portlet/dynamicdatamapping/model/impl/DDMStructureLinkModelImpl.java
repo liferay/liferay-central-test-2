@@ -201,9 +201,8 @@ public class DDMStructureLinkModelImpl extends BaseModelImpl<DDMStructureLink>
 			return (DDMStructureLink)this;
 		}
 		else {
-			return (DDMStructureLink)Proxy.newProxyInstance(DDMStructureLink.class.getClassLoader(),
-				new Class[] { DDMStructureLink.class },
-				new AutoEscapeBeanHandler(this));
+			return (DDMStructureLink)Proxy.newProxyInstance(_classLoader,
+				_escapedModelProxyInterfaces, new AutoEscapeBeanHandler(this));
 		}
 	}
 
@@ -329,6 +328,10 @@ public class DDMStructureLinkModelImpl extends BaseModelImpl<DDMStructureLink>
 		return sb.toString();
 	}
 
+	private static ClassLoader _classLoader = DDMStructureLink.class.getClassLoader();
+	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+			DDMStructureLink.class
+		};
 	private long _structureLinkId;
 	private long _classNameId;
 	private long _classPK;

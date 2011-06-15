@@ -272,9 +272,8 @@ public class WorkflowDefinitionLinkModelImpl extends BaseModelImpl<WorkflowDefin
 			return (WorkflowDefinitionLink)this;
 		}
 		else {
-			return (WorkflowDefinitionLink)Proxy.newProxyInstance(WorkflowDefinitionLink.class.getClassLoader(),
-				new Class[] { WorkflowDefinitionLink.class },
-				new AutoEscapeBeanHandler(this));
+			return (WorkflowDefinitionLink)Proxy.newProxyInstance(_classLoader,
+				_escapedModelProxyInterfaces, new AutoEscapeBeanHandler(this));
 		}
 	}
 
@@ -459,6 +458,10 @@ public class WorkflowDefinitionLinkModelImpl extends BaseModelImpl<WorkflowDefin
 		return sb.toString();
 	}
 
+	private static ClassLoader _classLoader = WorkflowDefinitionLink.class.getClassLoader();
+	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+			WorkflowDefinitionLink.class
+		};
 	private long _workflowDefinitionLinkId;
 	private long _groupId;
 	private long _originalGroupId;

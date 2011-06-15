@@ -219,9 +219,8 @@ public class WorkflowInstanceLinkModelImpl extends BaseModelImpl<WorkflowInstanc
 			return (WorkflowInstanceLink)this;
 		}
 		else {
-			return (WorkflowInstanceLink)Proxy.newProxyInstance(WorkflowInstanceLink.class.getClassLoader(),
-				new Class[] { WorkflowInstanceLink.class },
-				new AutoEscapeBeanHandler(this));
+			return (WorkflowInstanceLink)Proxy.newProxyInstance(_classLoader,
+				_escapedModelProxyInterfaces, new AutoEscapeBeanHandler(this));
 		}
 	}
 
@@ -384,6 +383,10 @@ public class WorkflowInstanceLinkModelImpl extends BaseModelImpl<WorkflowInstanc
 		return sb.toString();
 	}
 
+	private static ClassLoader _classLoader = WorkflowInstanceLink.class.getClassLoader();
+	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+			WorkflowInstanceLink.class
+		};
 	private long _workflowInstanceLinkId;
 	private long _groupId;
 	private long _companyId;

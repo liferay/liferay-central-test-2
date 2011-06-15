@@ -247,9 +247,8 @@ public class PluginSettingModelImpl extends BaseModelImpl<PluginSetting>
 			return (PluginSetting)this;
 		}
 		else {
-			return (PluginSetting)Proxy.newProxyInstance(PluginSetting.class.getClassLoader(),
-				new Class[] { PluginSetting.class },
-				new AutoEscapeBeanHandler(this));
+			return (PluginSetting)Proxy.newProxyInstance(_classLoader,
+				_escapedModelProxyInterfaces, new AutoEscapeBeanHandler(this));
 		}
 	}
 
@@ -392,6 +391,10 @@ public class PluginSettingModelImpl extends BaseModelImpl<PluginSetting>
 		return sb.toString();
 	}
 
+	private static ClassLoader _classLoader = PluginSetting.class.getClassLoader();
+	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+			PluginSetting.class
+		};
 	private long _pluginSettingId;
 	private long _companyId;
 	private long _originalCompanyId;

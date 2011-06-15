@@ -396,9 +396,8 @@ public class SCProductEntryModelImpl extends BaseModelImpl<SCProductEntry>
 			return (SCProductEntry)this;
 		}
 		else {
-			return (SCProductEntry)Proxy.newProxyInstance(SCProductEntry.class.getClassLoader(),
-				new Class[] { SCProductEntry.class },
-				new AutoEscapeBeanHandler(this));
+			return (SCProductEntry)Proxy.newProxyInstance(_classLoader,
+				_escapedModelProxyInterfaces, new AutoEscapeBeanHandler(this));
 		}
 	}
 
@@ -616,6 +615,10 @@ public class SCProductEntryModelImpl extends BaseModelImpl<SCProductEntry>
 		return sb.toString();
 	}
 
+	private static ClassLoader _classLoader = SCProductEntry.class.getClassLoader();
+	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+			SCProductEntry.class
+		};
 	private long _productEntryId;
 	private long _groupId;
 	private long _companyId;

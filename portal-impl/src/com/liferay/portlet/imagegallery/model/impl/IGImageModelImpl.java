@@ -393,8 +393,8 @@ public class IGImageModelImpl extends BaseModelImpl<IGImage>
 			return (IGImage)this;
 		}
 		else {
-			return (IGImage)Proxy.newProxyInstance(IGImage.class.getClassLoader(),
-				new Class[] { IGImage.class }, new AutoEscapeBeanHandler(this));
+			return (IGImage)Proxy.newProxyInstance(_classLoader,
+				_escapedModelProxyInterfaces, new AutoEscapeBeanHandler(this));
 		}
 	}
 
@@ -620,6 +620,10 @@ public class IGImageModelImpl extends BaseModelImpl<IGImage>
 		return sb.toString();
 	}
 
+	private static ClassLoader _classLoader = IGImage.class.getClassLoader();
+	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+			IGImage.class
+		};
 	private String _uuid;
 	private String _originalUuid;
 	private long _imageId;

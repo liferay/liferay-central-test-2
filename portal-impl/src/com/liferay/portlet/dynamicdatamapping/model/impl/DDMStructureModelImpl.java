@@ -532,9 +532,8 @@ public class DDMStructureModelImpl extends BaseModelImpl<DDMStructure>
 			return (DDMStructure)this;
 		}
 		else {
-			return (DDMStructure)Proxy.newProxyInstance(DDMStructure.class.getClassLoader(),
-				new Class[] { DDMStructure.class },
-				new AutoEscapeBeanHandler(this));
+			return (DDMStructure)Proxy.newProxyInstance(_classLoader,
+				_escapedModelProxyInterfaces, new AutoEscapeBeanHandler(this));
 		}
 	}
 
@@ -733,6 +732,10 @@ public class DDMStructureModelImpl extends BaseModelImpl<DDMStructure>
 		return sb.toString();
 	}
 
+	private static ClassLoader _classLoader = DDMStructure.class.getClassLoader();
+	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+			DDMStructure.class
+		};
 	private String _uuid;
 	private String _originalUuid;
 	private long _structureId;

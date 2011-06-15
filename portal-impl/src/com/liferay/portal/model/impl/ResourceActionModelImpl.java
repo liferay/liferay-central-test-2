@@ -165,9 +165,8 @@ public class ResourceActionModelImpl extends BaseModelImpl<ResourceAction>
 			return (ResourceAction)this;
 		}
 		else {
-			return (ResourceAction)Proxy.newProxyInstance(ResourceAction.class.getClassLoader(),
-				new Class[] { ResourceAction.class },
-				new AutoEscapeBeanHandler(this));
+			return (ResourceAction)Proxy.newProxyInstance(_classLoader,
+				_escapedModelProxyInterfaces, new AutoEscapeBeanHandler(this));
 		}
 	}
 
@@ -304,6 +303,10 @@ public class ResourceActionModelImpl extends BaseModelImpl<ResourceAction>
 		return sb.toString();
 	}
 
+	private static ClassLoader _classLoader = ResourceAction.class.getClassLoader();
+	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+			ResourceAction.class
+		};
 	private long _resourceActionId;
 	private String _name;
 	private String _originalName;

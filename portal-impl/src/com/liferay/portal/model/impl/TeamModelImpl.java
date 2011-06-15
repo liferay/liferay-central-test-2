@@ -284,8 +284,8 @@ public class TeamModelImpl extends BaseModelImpl<Team> implements TeamModel {
 			return (Team)this;
 		}
 		else {
-			return (Team)Proxy.newProxyInstance(Team.class.getClassLoader(),
-				new Class[] { Team.class }, new AutoEscapeBeanHandler(this));
+			return (Team)Proxy.newProxyInstance(_classLoader,
+				_escapedModelProxyInterfaces, new AutoEscapeBeanHandler(this));
 		}
 	}
 
@@ -445,6 +445,10 @@ public class TeamModelImpl extends BaseModelImpl<Team> implements TeamModel {
 		return sb.toString();
 	}
 
+	private static ClassLoader _classLoader = Team.class.getClassLoader();
+	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+			Team.class
+		};
 	private long _teamId;
 	private long _companyId;
 	private long _userId;

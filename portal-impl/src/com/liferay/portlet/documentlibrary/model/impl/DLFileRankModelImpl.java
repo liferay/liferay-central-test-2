@@ -200,9 +200,8 @@ public class DLFileRankModelImpl extends BaseModelImpl<DLFileRank>
 			return (DLFileRank)this;
 		}
 		else {
-			return (DLFileRank)Proxy.newProxyInstance(DLFileRank.class.getClassLoader(),
-				new Class[] { DLFileRank.class },
-				new AutoEscapeBeanHandler(this));
+			return (DLFileRank)Proxy.newProxyInstance(_classLoader,
+				_escapedModelProxyInterfaces, new AutoEscapeBeanHandler(this));
 		}
 	}
 
@@ -349,6 +348,10 @@ public class DLFileRankModelImpl extends BaseModelImpl<DLFileRank>
 		return sb.toString();
 	}
 
+	private static ClassLoader _classLoader = DLFileRank.class.getClassLoader();
+	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+			DLFileRank.class
+		};
 	private long _fileRankId;
 	private long _groupId;
 	private long _companyId;

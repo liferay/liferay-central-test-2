@@ -192,9 +192,8 @@ public class RepositoryEntryModelImpl extends BaseModelImpl<RepositoryEntry>
 			return (RepositoryEntry)this;
 		}
 		else {
-			return (RepositoryEntry)Proxy.newProxyInstance(RepositoryEntry.class.getClassLoader(),
-				new Class[] { RepositoryEntry.class },
-				new AutoEscapeBeanHandler(this));
+			return (RepositoryEntry)Proxy.newProxyInstance(_classLoader,
+				_escapedModelProxyInterfaces, new AutoEscapeBeanHandler(this));
 		}
 	}
 
@@ -334,6 +333,10 @@ public class RepositoryEntryModelImpl extends BaseModelImpl<RepositoryEntry>
 		return sb.toString();
 	}
 
+	private static ClassLoader _classLoader = RepositoryEntry.class.getClassLoader();
+	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+			RepositoryEntry.class
+		};
 	private String _uuid;
 	private String _originalUuid;
 	private long _repositoryEntryId;

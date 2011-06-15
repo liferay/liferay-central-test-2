@@ -338,9 +338,8 @@ public class DDMContentModelImpl extends BaseModelImpl<DDMContent>
 			return (DDMContent)this;
 		}
 		else {
-			return (DDMContent)Proxy.newProxyInstance(DDMContent.class.getClassLoader(),
-				new Class[] { DDMContent.class },
-				new AutoEscapeBeanHandler(this));
+			return (DDMContent)Proxy.newProxyInstance(_classLoader,
+				_escapedModelProxyInterfaces, new AutoEscapeBeanHandler(this));
 		}
 	}
 
@@ -516,6 +515,10 @@ public class DDMContentModelImpl extends BaseModelImpl<DDMContent>
 		return sb.toString();
 	}
 
+	private static ClassLoader _classLoader = DDMContent.class.getClassLoader();
+	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+			DDMContent.class
+		};
 	private String _uuid;
 	private String _originalUuid;
 	private long _contentId;

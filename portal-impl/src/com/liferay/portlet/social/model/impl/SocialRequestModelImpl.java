@@ -326,9 +326,8 @@ public class SocialRequestModelImpl extends BaseModelImpl<SocialRequest>
 			return (SocialRequest)this;
 		}
 		else {
-			return (SocialRequest)Proxy.newProxyInstance(SocialRequest.class.getClassLoader(),
-				new Class[] { SocialRequest.class },
-				new AutoEscapeBeanHandler(this));
+			return (SocialRequest)Proxy.newProxyInstance(_classLoader,
+				_escapedModelProxyInterfaces, new AutoEscapeBeanHandler(this));
 		}
 	}
 
@@ -546,6 +545,10 @@ public class SocialRequestModelImpl extends BaseModelImpl<SocialRequest>
 		return sb.toString();
 	}
 
+	private static ClassLoader _classLoader = SocialRequest.class.getClassLoader();
+	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+			SocialRequest.class
+		};
 	private String _uuid;
 	private String _originalUuid;
 	private long _requestId;

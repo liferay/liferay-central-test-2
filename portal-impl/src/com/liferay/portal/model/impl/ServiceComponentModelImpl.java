@@ -176,9 +176,8 @@ public class ServiceComponentModelImpl extends BaseModelImpl<ServiceComponent>
 			return (ServiceComponent)this;
 		}
 		else {
-			return (ServiceComponent)Proxy.newProxyInstance(ServiceComponent.class.getClassLoader(),
-				new Class[] { ServiceComponent.class },
-				new AutoEscapeBeanHandler(this));
+			return (ServiceComponent)Proxy.newProxyInstance(_classLoader,
+				_escapedModelProxyInterfaces, new AutoEscapeBeanHandler(this));
 		}
 	}
 
@@ -329,6 +328,10 @@ public class ServiceComponentModelImpl extends BaseModelImpl<ServiceComponent>
 		return sb.toString();
 	}
 
+	private static ClassLoader _classLoader = ServiceComponent.class.getClassLoader();
+	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+			ServiceComponent.class
+		};
 	private long _serviceComponentId;
 	private String _buildNamespace;
 	private String _originalBuildNamespace;

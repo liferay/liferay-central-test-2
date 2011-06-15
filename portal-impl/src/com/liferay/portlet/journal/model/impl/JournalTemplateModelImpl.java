@@ -438,9 +438,8 @@ public class JournalTemplateModelImpl extends BaseModelImpl<JournalTemplate>
 			return (JournalTemplate)this;
 		}
 		else {
-			return (JournalTemplate)Proxy.newProxyInstance(JournalTemplate.class.getClassLoader(),
-				new Class[] { JournalTemplate.class },
-				new AutoEscapeBeanHandler(this));
+			return (JournalTemplate)Proxy.newProxyInstance(_classLoader,
+				_escapedModelProxyInterfaces, new AutoEscapeBeanHandler(this));
 		}
 	}
 
@@ -669,6 +668,10 @@ public class JournalTemplateModelImpl extends BaseModelImpl<JournalTemplate>
 		return sb.toString();
 	}
 
+	private static ClassLoader _classLoader = JournalTemplate.class.getClassLoader();
+	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+			JournalTemplate.class
+		};
 	private String _uuid;
 	private String _originalUuid;
 	private long _id;

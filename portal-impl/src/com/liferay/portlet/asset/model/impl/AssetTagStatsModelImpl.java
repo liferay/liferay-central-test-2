@@ -169,9 +169,8 @@ public class AssetTagStatsModelImpl extends BaseModelImpl<AssetTagStats>
 			return (AssetTagStats)this;
 		}
 		else {
-			return (AssetTagStats)Proxy.newProxyInstance(AssetTagStats.class.getClassLoader(),
-				new Class[] { AssetTagStats.class },
-				new AutoEscapeBeanHandler(this));
+			return (AssetTagStats)Proxy.newProxyInstance(_classLoader,
+				_escapedModelProxyInterfaces, new AutoEscapeBeanHandler(this));
 		}
 	}
 
@@ -308,6 +307,10 @@ public class AssetTagStatsModelImpl extends BaseModelImpl<AssetTagStats>
 		return sb.toString();
 	}
 
+	private static ClassLoader _classLoader = AssetTagStats.class.getClassLoader();
+	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+			AssetTagStats.class
+		};
 	private long _tagStatsId;
 	private long _tagId;
 	private long _originalTagId;

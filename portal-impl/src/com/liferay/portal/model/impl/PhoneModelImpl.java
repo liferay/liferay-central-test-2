@@ -308,8 +308,8 @@ public class PhoneModelImpl extends BaseModelImpl<Phone> implements PhoneModel {
 			return (Phone)this;
 		}
 		else {
-			return (Phone)Proxy.newProxyInstance(Phone.class.getClassLoader(),
-				new Class[] { Phone.class }, new AutoEscapeBeanHandler(this));
+			return (Phone)Proxy.newProxyInstance(_classLoader,
+				_escapedModelProxyInterfaces, new AutoEscapeBeanHandler(this));
 		}
 	}
 
@@ -483,6 +483,10 @@ public class PhoneModelImpl extends BaseModelImpl<Phone> implements PhoneModel {
 		return sb.toString();
 	}
 
+	private static ClassLoader _classLoader = Phone.class.getClassLoader();
+	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+			Phone.class
+		};
 	private long _phoneId;
 	private long _companyId;
 	private long _userId;

@@ -347,9 +347,8 @@ public class BookmarksEntryModelImpl extends BaseModelImpl<BookmarksEntry>
 			return (BookmarksEntry)this;
 		}
 		else {
-			return (BookmarksEntry)Proxy.newProxyInstance(BookmarksEntry.class.getClassLoader(),
-				new Class[] { BookmarksEntry.class },
-				new AutoEscapeBeanHandler(this));
+			return (BookmarksEntry)Proxy.newProxyInstance(_classLoader,
+				_escapedModelProxyInterfaces, new AutoEscapeBeanHandler(this));
 		}
 	}
 
@@ -559,6 +558,10 @@ public class BookmarksEntryModelImpl extends BaseModelImpl<BookmarksEntry>
 		return sb.toString();
 	}
 
+	private static ClassLoader _classLoader = BookmarksEntry.class.getClassLoader();
+	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+			BookmarksEntry.class
+		};
 	private String _uuid;
 	private String _originalUuid;
 	private long _entryId;

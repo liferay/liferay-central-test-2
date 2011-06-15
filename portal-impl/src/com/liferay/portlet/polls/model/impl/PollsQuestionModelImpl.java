@@ -482,9 +482,8 @@ public class PollsQuestionModelImpl extends BaseModelImpl<PollsQuestion>
 			return (PollsQuestion)this;
 		}
 		else {
-			return (PollsQuestion)Proxy.newProxyInstance(PollsQuestion.class.getClassLoader(),
-				new Class[] { PollsQuestion.class },
-				new AutoEscapeBeanHandler(this));
+			return (PollsQuestion)Proxy.newProxyInstance(_classLoader,
+				_escapedModelProxyInterfaces, new AutoEscapeBeanHandler(this));
 		}
 	}
 
@@ -668,6 +667,10 @@ public class PollsQuestionModelImpl extends BaseModelImpl<PollsQuestion>
 		return sb.toString();
 	}
 
+	private static ClassLoader _classLoader = PollsQuestion.class.getClassLoader();
+	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+			PollsQuestion.class
+		};
 	private String _uuid;
 	private String _originalUuid;
 	private long _questionId;

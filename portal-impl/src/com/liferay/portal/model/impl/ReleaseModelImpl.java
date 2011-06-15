@@ -197,8 +197,8 @@ public class ReleaseModelImpl extends BaseModelImpl<Release>
 			return (Release)this;
 		}
 		else {
-			return (Release)Proxy.newProxyInstance(Release.class.getClassLoader(),
-				new Class[] { Release.class }, new AutoEscapeBeanHandler(this));
+			return (Release)Proxy.newProxyInstance(_classLoader,
+				_escapedModelProxyInterfaces, new AutoEscapeBeanHandler(this));
 		}
 	}
 
@@ -349,6 +349,10 @@ public class ReleaseModelImpl extends BaseModelImpl<Release>
 		return sb.toString();
 	}
 
+	private static ClassLoader _classLoader = Release.class.getClassLoader();
+	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+			Release.class
+		};
 	private long _releaseId;
 	private Date _createDate;
 	private Date _modifiedDate;

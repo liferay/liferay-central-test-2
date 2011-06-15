@@ -381,9 +381,8 @@ public class AnnouncementsEntryModelImpl extends BaseModelImpl<AnnouncementsEntr
 			return (AnnouncementsEntry)this;
 		}
 		else {
-			return (AnnouncementsEntry)Proxy.newProxyInstance(AnnouncementsEntry.class.getClassLoader(),
-				new Class[] { AnnouncementsEntry.class },
-				new AutoEscapeBeanHandler(this));
+			return (AnnouncementsEntry)Proxy.newProxyInstance(_classLoader,
+				_escapedModelProxyInterfaces, new AutoEscapeBeanHandler(this));
 		}
 	}
 
@@ -607,6 +606,10 @@ public class AnnouncementsEntryModelImpl extends BaseModelImpl<AnnouncementsEntr
 		return sb.toString();
 	}
 
+	private static ClassLoader _classLoader = AnnouncementsEntry.class.getClassLoader();
+	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+			AnnouncementsEntry.class
+		};
 	private String _uuid;
 	private long _entryId;
 	private long _companyId;

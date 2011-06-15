@@ -534,9 +534,8 @@ public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry>
 			return (AssetEntry)this;
 		}
 		else {
-			return (AssetEntry)Proxy.newProxyInstance(AssetEntry.class.getClassLoader(),
-				new Class[] { AssetEntry.class },
-				new AutoEscapeBeanHandler(this));
+			return (AssetEntry)Proxy.newProxyInstance(_classLoader,
+				_escapedModelProxyInterfaces, new AutoEscapeBeanHandler(this));
 		}
 	}
 
@@ -818,6 +817,10 @@ public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry>
 		return sb.toString();
 	}
 
+	private static ClassLoader _classLoader = AssetEntry.class.getClassLoader();
+	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+			AssetEntry.class
+		};
 	private long _entryId;
 	private long _groupId;
 	private long _originalGroupId;

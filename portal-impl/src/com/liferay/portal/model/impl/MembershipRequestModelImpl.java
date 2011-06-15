@@ -280,9 +280,8 @@ public class MembershipRequestModelImpl extends BaseModelImpl<MembershipRequest>
 			return (MembershipRequest)this;
 		}
 		else {
-			return (MembershipRequest)Proxy.newProxyInstance(MembershipRequest.class.getClassLoader(),
-				new Class[] { MembershipRequest.class },
-				new AutoEscapeBeanHandler(this));
+			return (MembershipRequest)Proxy.newProxyInstance(_classLoader,
+				_escapedModelProxyInterfaces, new AutoEscapeBeanHandler(this));
 		}
 	}
 
@@ -445,6 +444,10 @@ public class MembershipRequestModelImpl extends BaseModelImpl<MembershipRequest>
 		return sb.toString();
 	}
 
+	private static ClassLoader _classLoader = MembershipRequest.class.getClassLoader();
+	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+			MembershipRequest.class
+		};
 	private long _membershipRequestId;
 	private long _groupId;
 	private long _companyId;

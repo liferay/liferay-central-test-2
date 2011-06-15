@@ -176,9 +176,8 @@ public class PasswordPolicyRelModelImpl extends BaseModelImpl<PasswordPolicyRel>
 			return (PasswordPolicyRel)this;
 		}
 		else {
-			return (PasswordPolicyRel)Proxy.newProxyInstance(PasswordPolicyRel.class.getClassLoader(),
-				new Class[] { PasswordPolicyRel.class },
-				new AutoEscapeBeanHandler(this));
+			return (PasswordPolicyRel)Proxy.newProxyInstance(_classLoader,
+				_escapedModelProxyInterfaces, new AutoEscapeBeanHandler(this));
 		}
 	}
 
@@ -311,6 +310,10 @@ public class PasswordPolicyRelModelImpl extends BaseModelImpl<PasswordPolicyRel>
 		return sb.toString();
 	}
 
+	private static ClassLoader _classLoader = PasswordPolicyRel.class.getClassLoader();
+	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+			PasswordPolicyRel.class
+		};
 	private long _passwordPolicyRelId;
 	private long _passwordPolicyId;
 	private long _originalPasswordPolicyId;

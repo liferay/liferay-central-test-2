@@ -200,9 +200,8 @@ public class WebDAVPropsModelImpl extends BaseModelImpl<WebDAVProps>
 			return (WebDAVProps)this;
 		}
 		else {
-			return (WebDAVProps)Proxy.newProxyInstance(WebDAVProps.class.getClassLoader(),
-				new Class[] { WebDAVProps.class },
-				new AutoEscapeBeanHandler(this));
+			return (WebDAVProps)Proxy.newProxyInstance(_classLoader,
+				_escapedModelProxyInterfaces, new AutoEscapeBeanHandler(this));
 		}
 	}
 
@@ -352,6 +351,10 @@ public class WebDAVPropsModelImpl extends BaseModelImpl<WebDAVProps>
 		return sb.toString();
 	}
 
+	private static ClassLoader _classLoader = WebDAVProps.class.getClassLoader();
+	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+			WebDAVProps.class
+		};
 	private long _webDavPropsId;
 	private long _companyId;
 	private Date _createDate;

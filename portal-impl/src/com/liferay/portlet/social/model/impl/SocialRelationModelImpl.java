@@ -200,9 +200,8 @@ public class SocialRelationModelImpl extends BaseModelImpl<SocialRelation>
 			return (SocialRelation)this;
 		}
 		else {
-			return (SocialRelation)Proxy.newProxyInstance(SocialRelation.class.getClassLoader(),
-				new Class[] { SocialRelation.class },
-				new AutoEscapeBeanHandler(this));
+			return (SocialRelation)Proxy.newProxyInstance(_classLoader,
+				_escapedModelProxyInterfaces, new AutoEscapeBeanHandler(this));
 		}
 	}
 
@@ -356,6 +355,10 @@ public class SocialRelationModelImpl extends BaseModelImpl<SocialRelation>
 		return sb.toString();
 	}
 
+	private static ClassLoader _classLoader = SocialRelation.class.getClassLoader();
+	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+			SocialRelation.class
+		};
 	private String _uuid;
 	private long _relationId;
 	private long _companyId;

@@ -223,8 +223,8 @@ public class PortletModelImpl extends BaseModelImpl<Portlet>
 			return (Portlet)this;
 		}
 		else {
-			return (Portlet)Proxy.newProxyInstance(Portlet.class.getClassLoader(),
-				new Class[] { Portlet.class }, new AutoEscapeBeanHandler(this));
+			return (Portlet)Proxy.newProxyInstance(_classLoader,
+				_escapedModelProxyInterfaces, new AutoEscapeBeanHandler(this));
 		}
 	}
 
@@ -358,6 +358,10 @@ public class PortletModelImpl extends BaseModelImpl<Portlet>
 		return sb.toString();
 	}
 
+	private static ClassLoader _classLoader = Portlet.class.getClassLoader();
+	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+			Portlet.class
+		};
 	private long _id;
 	private long _companyId;
 	private long _originalCompanyId;

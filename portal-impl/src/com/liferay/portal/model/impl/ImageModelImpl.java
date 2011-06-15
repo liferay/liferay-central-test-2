@@ -225,8 +225,8 @@ public class ImageModelImpl extends BaseModelImpl<Image> implements ImageModel {
 			return (Image)this;
 		}
 		else {
-			return (Image)Proxy.newProxyInstance(Image.class.getClassLoader(),
-				new Class[] { Image.class }, new AutoEscapeBeanHandler(this));
+			return (Image)Proxy.newProxyInstance(_classLoader,
+				_escapedModelProxyInterfaces, new AutoEscapeBeanHandler(this));
 		}
 	}
 
@@ -373,6 +373,10 @@ public class ImageModelImpl extends BaseModelImpl<Image> implements ImageModel {
 		return sb.toString();
 	}
 
+	private static ClassLoader _classLoader = Image.class.getClassLoader();
+	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+			Image.class
+		};
 	private long _imageId;
 	private Date _modifiedDate;
 	private String _text;

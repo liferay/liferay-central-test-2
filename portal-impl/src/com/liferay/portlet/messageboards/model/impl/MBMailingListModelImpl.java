@@ -451,9 +451,8 @@ public class MBMailingListModelImpl extends BaseModelImpl<MBMailingList>
 			return (MBMailingList)this;
 		}
 		else {
-			return (MBMailingList)Proxy.newProxyInstance(MBMailingList.class.getClassLoader(),
-				new Class[] { MBMailingList.class },
-				new AutoEscapeBeanHandler(this));
+			return (MBMailingList)Proxy.newProxyInstance(_classLoader,
+				_escapedModelProxyInterfaces, new AutoEscapeBeanHandler(this));
 		}
 	}
 
@@ -738,6 +737,10 @@ public class MBMailingListModelImpl extends BaseModelImpl<MBMailingList>
 		return sb.toString();
 	}
 
+	private static ClassLoader _classLoader = MBMailingList.class.getClassLoader();
+	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+			MBMailingList.class
+		};
 	private String _uuid;
 	private String _originalUuid;
 	private long _mailingListId;

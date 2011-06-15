@@ -821,8 +821,8 @@ public class UserModelImpl extends BaseModelImpl<User> implements UserModel {
 			return (User)this;
 		}
 		else {
-			return (User)Proxy.newProxyInstance(User.class.getClassLoader(),
-				new Class[] { User.class }, new AutoEscapeBeanHandler(this));
+			return (User)Proxy.newProxyInstance(_classLoader,
+				_escapedModelProxyInterfaces, new AutoEscapeBeanHandler(this));
 		}
 	}
 
@@ -1218,6 +1218,10 @@ public class UserModelImpl extends BaseModelImpl<User> implements UserModel {
 		return sb.toString();
 	}
 
+	private static ClassLoader _classLoader = User.class.getClassLoader();
+	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+			User.class
+		};
 	private String _uuid;
 	private long _userId;
 	private String _userUuid;

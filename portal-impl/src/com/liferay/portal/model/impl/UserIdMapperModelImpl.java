@@ -197,9 +197,8 @@ public class UserIdMapperModelImpl extends BaseModelImpl<UserIdMapper>
 			return (UserIdMapper)this;
 		}
 		else {
-			return (UserIdMapper)Proxy.newProxyInstance(UserIdMapper.class.getClassLoader(),
-				new Class[] { UserIdMapper.class },
-				new AutoEscapeBeanHandler(this));
+			return (UserIdMapper)Proxy.newProxyInstance(_classLoader,
+				_escapedModelProxyInterfaces, new AutoEscapeBeanHandler(this));
 		}
 	}
 
@@ -335,6 +334,10 @@ public class UserIdMapperModelImpl extends BaseModelImpl<UserIdMapper>
 		return sb.toString();
 	}
 
+	private static ClassLoader _classLoader = UserIdMapper.class.getClassLoader();
+	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+			UserIdMapper.class
+		};
 	private long _userIdMapperId;
 	private long _userId;
 	private String _userUuid;

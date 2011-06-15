@@ -207,8 +207,8 @@ public class RegionModelImpl extends BaseModelImpl<Region>
 			return (Region)this;
 		}
 		else {
-			return (Region)Proxy.newProxyInstance(Region.class.getClassLoader(),
-				new Class[] { Region.class }, new AutoEscapeBeanHandler(this));
+			return (Region)Proxy.newProxyInstance(_classLoader,
+				_escapedModelProxyInterfaces, new AutoEscapeBeanHandler(this));
 		}
 	}
 
@@ -333,6 +333,10 @@ public class RegionModelImpl extends BaseModelImpl<Region>
 		return sb.toString();
 	}
 
+	private static ClassLoader _classLoader = Region.class.getClassLoader();
+	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+			Region.class
+		};
 	private long _regionId;
 	private long _countryId;
 	private String _regionCode;

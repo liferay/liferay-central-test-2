@@ -301,9 +301,8 @@ public class ResourcePermissionModelImpl extends BaseModelImpl<ResourcePermissio
 			return (ResourcePermission)this;
 		}
 		else {
-			return (ResourcePermission)Proxy.newProxyInstance(ResourcePermission.class.getClassLoader(),
-				new Class[] { ResourcePermission.class },
-				new AutoEscapeBeanHandler(this));
+			return (ResourcePermission)Proxy.newProxyInstance(_classLoader,
+				_escapedModelProxyInterfaces, new AutoEscapeBeanHandler(this));
 		}
 	}
 
@@ -476,6 +475,10 @@ public class ResourcePermissionModelImpl extends BaseModelImpl<ResourcePermissio
 		return sb.toString();
 	}
 
+	private static ClassLoader _classLoader = ResourcePermission.class.getClassLoader();
+	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+			ResourcePermission.class
+		};
 	private long _resourcePermissionId;
 	private long _companyId;
 	private long _originalCompanyId;

@@ -540,9 +540,8 @@ public class BlogsEntryModelImpl extends BaseModelImpl<BlogsEntry>
 			return (BlogsEntry)this;
 		}
 		else {
-			return (BlogsEntry)Proxy.newProxyInstance(BlogsEntry.class.getClassLoader(),
-				new Class[] { BlogsEntry.class },
-				new AutoEscapeBeanHandler(this));
+			return (BlogsEntry)Proxy.newProxyInstance(_classLoader,
+				_escapedModelProxyInterfaces, new AutoEscapeBeanHandler(this));
 		}
 	}
 
@@ -804,6 +803,10 @@ public class BlogsEntryModelImpl extends BaseModelImpl<BlogsEntry>
 		return sb.toString();
 	}
 
+	private static ClassLoader _classLoader = BlogsEntry.class.getClassLoader();
+	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+			BlogsEntry.class
+		};
 	private String _uuid;
 	private String _originalUuid;
 	private long _entryId;

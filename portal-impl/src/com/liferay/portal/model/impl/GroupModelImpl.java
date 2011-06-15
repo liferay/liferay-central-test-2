@@ -428,8 +428,8 @@ public class GroupModelImpl extends BaseModelImpl<Group> implements GroupModel {
 			return (Group)this;
 		}
 		else {
-			return (Group)Proxy.newProxyInstance(Group.class.getClassLoader(),
-				new Class[] { Group.class }, new AutoEscapeBeanHandler(this));
+			return (Group)Proxy.newProxyInstance(_classLoader,
+				_escapedModelProxyInterfaces, new AutoEscapeBeanHandler(this));
 		}
 	}
 
@@ -638,6 +638,10 @@ public class GroupModelImpl extends BaseModelImpl<Group> implements GroupModel {
 		return sb.toString();
 	}
 
+	private static ClassLoader _classLoader = Group.class.getClassLoader();
+	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+			Group.class
+		};
 	private long _groupId;
 	private long _companyId;
 	private long _originalCompanyId;

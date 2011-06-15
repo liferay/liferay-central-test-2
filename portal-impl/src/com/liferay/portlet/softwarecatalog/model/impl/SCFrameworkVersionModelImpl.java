@@ -304,9 +304,8 @@ public class SCFrameworkVersionModelImpl extends BaseModelImpl<SCFrameworkVersio
 			return (SCFrameworkVersion)this;
 		}
 		else {
-			return (SCFrameworkVersion)Proxy.newProxyInstance(SCFrameworkVersion.class.getClassLoader(),
-				new Class[] { SCFrameworkVersion.class },
-				new AutoEscapeBeanHandler(this));
+			return (SCFrameworkVersion)Proxy.newProxyInstance(_classLoader,
+				_escapedModelProxyInterfaces, new AutoEscapeBeanHandler(this));
 		}
 	}
 
@@ -476,6 +475,10 @@ public class SCFrameworkVersionModelImpl extends BaseModelImpl<SCFrameworkVersio
 		return sb.toString();
 	}
 
+	private static ClassLoader _classLoader = SCFrameworkVersion.class.getClassLoader();
+	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+			SCFrameworkVersion.class
+		};
 	private long _frameworkVersionId;
 	private long _groupId;
 	private long _companyId;

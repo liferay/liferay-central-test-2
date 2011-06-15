@@ -122,8 +122,8 @@ public class CounterModelImpl extends BaseModelImpl<Counter>
 			return (Counter)this;
 		}
 		else {
-			return (Counter)Proxy.newProxyInstance(Counter.class.getClassLoader(),
-				new Class[] { Counter.class }, new AutoEscapeBeanHandler(this));
+			return (Counter)Proxy.newProxyInstance(_classLoader,
+				_escapedModelProxyInterfaces, new AutoEscapeBeanHandler(this));
 		}
 	}
 
@@ -208,6 +208,10 @@ public class CounterModelImpl extends BaseModelImpl<Counter>
 		return sb.toString();
 	}
 
+	private static ClassLoader _classLoader = Counter.class.getClassLoader();
+	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+			Counter.class
+		};
 	private String _name;
 	private long _currentId;
 }

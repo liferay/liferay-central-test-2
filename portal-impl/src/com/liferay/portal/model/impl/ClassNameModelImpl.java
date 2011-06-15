@@ -180,8 +180,8 @@ public class ClassNameModelImpl extends BaseModelImpl<ClassName>
 			return (ClassName)this;
 		}
 		else {
-			return (ClassName)Proxy.newProxyInstance(ClassName.class.getClassLoader(),
-				new Class[] { ClassName.class }, new AutoEscapeBeanHandler(this));
+			return (ClassName)Proxy.newProxyInstance(_classLoader,
+				_escapedModelProxyInterfaces, new AutoEscapeBeanHandler(this));
 		}
 	}
 
@@ -290,6 +290,10 @@ public class ClassNameModelImpl extends BaseModelImpl<ClassName>
 		return sb.toString();
 	}
 
+	private static ClassLoader _classLoader = ClassName.class.getClassLoader();
+	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+			ClassName.class
+		};
 	private long _classNameId;
 	private String _value;
 	private String _originalValue;

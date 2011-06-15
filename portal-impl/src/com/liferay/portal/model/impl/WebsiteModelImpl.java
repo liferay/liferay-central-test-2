@@ -293,8 +293,8 @@ public class WebsiteModelImpl extends BaseModelImpl<Website>
 			return (Website)this;
 		}
 		else {
-			return (Website)Proxy.newProxyInstance(Website.class.getClassLoader(),
-				new Class[] { Website.class }, new AutoEscapeBeanHandler(this));
+			return (Website)Proxy.newProxyInstance(_classLoader,
+				_escapedModelProxyInterfaces, new AutoEscapeBeanHandler(this));
 		}
 	}
 
@@ -461,6 +461,10 @@ public class WebsiteModelImpl extends BaseModelImpl<Website>
 		return sb.toString();
 	}
 
+	private static ClassLoader _classLoader = Website.class.getClassLoader();
+	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+			Website.class
+		};
 	private long _websiteId;
 	private long _companyId;
 	private long _userId;

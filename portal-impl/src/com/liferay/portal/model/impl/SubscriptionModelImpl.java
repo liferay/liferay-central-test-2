@@ -252,9 +252,8 @@ public class SubscriptionModelImpl extends BaseModelImpl<Subscription>
 			return (Subscription)this;
 		}
 		else {
-			return (Subscription)Proxy.newProxyInstance(Subscription.class.getClassLoader(),
-				new Class[] { Subscription.class },
-				new AutoEscapeBeanHandler(this));
+			return (Subscription)Proxy.newProxyInstance(_classLoader,
+				_escapedModelProxyInterfaces, new AutoEscapeBeanHandler(this));
 		}
 	}
 
@@ -426,6 +425,10 @@ public class SubscriptionModelImpl extends BaseModelImpl<Subscription>
 		return sb.toString();
 	}
 
+	private static ClassLoader _classLoader = Subscription.class.getClassLoader();
+	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+			Subscription.class
+		};
 	private long _subscriptionId;
 	private long _companyId;
 	private long _originalCompanyId;

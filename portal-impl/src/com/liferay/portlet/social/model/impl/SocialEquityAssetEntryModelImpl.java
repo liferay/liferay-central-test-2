@@ -184,9 +184,8 @@ public class SocialEquityAssetEntryModelImpl extends BaseModelImpl<SocialEquityA
 			return (SocialEquityAssetEntry)this;
 		}
 		else {
-			return (SocialEquityAssetEntry)Proxy.newProxyInstance(SocialEquityAssetEntry.class.getClassLoader(),
-				new Class[] { SocialEquityAssetEntry.class },
-				new AutoEscapeBeanHandler(this));
+			return (SocialEquityAssetEntry)Proxy.newProxyInstance(_classLoader,
+				_escapedModelProxyInterfaces, new AutoEscapeBeanHandler(this));
 		}
 	}
 
@@ -332,6 +331,10 @@ public class SocialEquityAssetEntryModelImpl extends BaseModelImpl<SocialEquityA
 		return sb.toString();
 	}
 
+	private static ClassLoader _classLoader = SocialEquityAssetEntry.class.getClassLoader();
+	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+			SocialEquityAssetEntry.class
+		};
 	private long _equityAssetEntryId;
 	private long _groupId;
 	private long _companyId;

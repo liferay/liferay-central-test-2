@@ -278,9 +278,8 @@ public class ExpandoValueModelImpl extends BaseModelImpl<ExpandoValue>
 			return (ExpandoValue)this;
 		}
 		else {
-			return (ExpandoValue)Proxy.newProxyInstance(ExpandoValue.class.getClassLoader(),
-				new Class[] { ExpandoValue.class },
-				new AutoEscapeBeanHandler(this));
+			return (ExpandoValue)Proxy.newProxyInstance(_classLoader,
+				_escapedModelProxyInterfaces, new AutoEscapeBeanHandler(this));
 		}
 	}
 
@@ -466,6 +465,10 @@ public class ExpandoValueModelImpl extends BaseModelImpl<ExpandoValue>
 		return sb.toString();
 	}
 
+	private static ClassLoader _classLoader = ExpandoValue.class.getClassLoader();
+	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+			ExpandoValue.class
+		};
 	private long _valueId;
 	private long _companyId;
 	private long _tableId;

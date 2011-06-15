@@ -394,8 +394,8 @@ public class MBThreadModelImpl extends BaseModelImpl<MBThread>
 			return (MBThread)this;
 		}
 		else {
-			return (MBThread)Proxy.newProxyInstance(MBThread.class.getClassLoader(),
-				new Class[] { MBThread.class }, new AutoEscapeBeanHandler(this));
+			return (MBThread)Proxy.newProxyInstance(_classLoader,
+				_escapedModelProxyInterfaces, new AutoEscapeBeanHandler(this));
 		}
 	}
 
@@ -613,6 +613,10 @@ public class MBThreadModelImpl extends BaseModelImpl<MBThread>
 		return sb.toString();
 	}
 
+	private static ClassLoader _classLoader = MBThread.class.getClassLoader();
+	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+			MBThread.class
+		};
 	private long _threadId;
 	private long _groupId;
 	private long _companyId;

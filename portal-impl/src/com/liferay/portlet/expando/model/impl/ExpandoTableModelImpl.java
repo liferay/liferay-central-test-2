@@ -177,9 +177,8 @@ public class ExpandoTableModelImpl extends BaseModelImpl<ExpandoTable>
 			return (ExpandoTable)this;
 		}
 		else {
-			return (ExpandoTable)Proxy.newProxyInstance(ExpandoTable.class.getClassLoader(),
-				new Class[] { ExpandoTable.class },
-				new AutoEscapeBeanHandler(this));
+			return (ExpandoTable)Proxy.newProxyInstance(_classLoader,
+				_escapedModelProxyInterfaces, new AutoEscapeBeanHandler(this));
 		}
 	}
 
@@ -297,6 +296,10 @@ public class ExpandoTableModelImpl extends BaseModelImpl<ExpandoTable>
 		return sb.toString();
 	}
 
+	private static ClassLoader _classLoader = ExpandoTable.class.getClassLoader();
+	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+			ExpandoTable.class
+		};
 	private long _tableId;
 	private long _companyId;
 	private long _originalCompanyId;

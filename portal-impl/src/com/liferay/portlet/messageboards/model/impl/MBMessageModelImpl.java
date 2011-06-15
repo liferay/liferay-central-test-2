@@ -547,8 +547,8 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage>
 			return (MBMessage)this;
 		}
 		else {
-			return (MBMessage)Proxy.newProxyInstance(MBMessage.class.getClassLoader(),
-				new Class[] { MBMessage.class }, new AutoEscapeBeanHandler(this));
+			return (MBMessage)Proxy.newProxyInstance(_classLoader,
+				_escapedModelProxyInterfaces, new AutoEscapeBeanHandler(this));
 		}
 	}
 
@@ -834,6 +834,10 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage>
 		return sb.toString();
 	}
 
+	private static ClassLoader _classLoader = MBMessage.class.getClassLoader();
+	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+			MBMessage.class
+		};
 	private String _uuid;
 	private String _originalUuid;
 	private long _messageId;

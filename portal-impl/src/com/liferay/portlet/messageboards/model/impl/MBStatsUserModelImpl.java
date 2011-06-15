@@ -188,9 +188,8 @@ public class MBStatsUserModelImpl extends BaseModelImpl<MBStatsUser>
 			return (MBStatsUser)this;
 		}
 		else {
-			return (MBStatsUser)Proxy.newProxyInstance(MBStatsUser.class.getClassLoader(),
-				new Class[] { MBStatsUser.class },
-				new AutoEscapeBeanHandler(this));
+			return (MBStatsUser)Proxy.newProxyInstance(_classLoader,
+				_escapedModelProxyInterfaces, new AutoEscapeBeanHandler(this));
 		}
 	}
 
@@ -334,6 +333,10 @@ public class MBStatsUserModelImpl extends BaseModelImpl<MBStatsUser>
 		return sb.toString();
 	}
 
+	private static ClassLoader _classLoader = MBStatsUser.class.getClassLoader();
+	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+			MBStatsUser.class
+		};
 	private long _statsUserId;
 	private String _statsUserUuid;
 	private long _groupId;

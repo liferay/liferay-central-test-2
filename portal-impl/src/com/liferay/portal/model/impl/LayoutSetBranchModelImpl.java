@@ -307,9 +307,8 @@ public class LayoutSetBranchModelImpl extends BaseModelImpl<LayoutSetBranch>
 			return (LayoutSetBranch)this;
 		}
 		else {
-			return (LayoutSetBranch)Proxy.newProxyInstance(LayoutSetBranch.class.getClassLoader(),
-				new Class[] { LayoutSetBranch.class },
-				new AutoEscapeBeanHandler(this));
+			return (LayoutSetBranch)Proxy.newProxyInstance(_classLoader,
+				_escapedModelProxyInterfaces, new AutoEscapeBeanHandler(this));
 		}
 	}
 
@@ -480,6 +479,10 @@ public class LayoutSetBranchModelImpl extends BaseModelImpl<LayoutSetBranch>
 		return sb.toString();
 	}
 
+	private static ClassLoader _classLoader = LayoutSetBranch.class.getClassLoader();
+	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+			LayoutSetBranch.class
+		};
 	private long _layoutSetBranchId;
 	private long _groupId;
 	private long _originalGroupId;

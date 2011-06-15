@@ -126,9 +126,8 @@ public class OrgGroupRoleModelImpl extends BaseModelImpl<OrgGroupRole>
 			return (OrgGroupRole)this;
 		}
 		else {
-			return (OrgGroupRole)Proxy.newProxyInstance(OrgGroupRole.class.getClassLoader(),
-				new Class[] { OrgGroupRole.class },
-				new AutoEscapeBeanHandler(this));
+			return (OrgGroupRole)Proxy.newProxyInstance(_classLoader,
+				_escapedModelProxyInterfaces, new AutoEscapeBeanHandler(this));
 		}
 	}
 
@@ -220,6 +219,10 @@ public class OrgGroupRoleModelImpl extends BaseModelImpl<OrgGroupRole>
 		return sb.toString();
 	}
 
+	private static ClassLoader _classLoader = OrgGroupRole.class.getClassLoader();
+	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+			OrgGroupRole.class
+		};
 	private long _organizationId;
 	private long _groupId;
 	private long _roleId;

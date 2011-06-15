@@ -206,9 +206,8 @@ public class SCProductScreenshotModelImpl extends BaseModelImpl<SCProductScreens
 			return (SCProductScreenshot)this;
 		}
 		else {
-			return (SCProductScreenshot)Proxy.newProxyInstance(SCProductScreenshot.class.getClassLoader(),
-				new Class[] { SCProductScreenshot.class },
-				new AutoEscapeBeanHandler(this));
+			return (SCProductScreenshot)Proxy.newProxyInstance(_classLoader,
+				_escapedModelProxyInterfaces, new AutoEscapeBeanHandler(this));
 		}
 	}
 
@@ -387,6 +386,10 @@ public class SCProductScreenshotModelImpl extends BaseModelImpl<SCProductScreens
 		return sb.toString();
 	}
 
+	private static ClassLoader _classLoader = SCProductScreenshot.class.getClassLoader();
+	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+			SCProductScreenshot.class
+		};
 	private long _productScreenshotId;
 	private long _companyId;
 	private long _groupId;

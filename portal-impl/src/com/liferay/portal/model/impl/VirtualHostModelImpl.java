@@ -170,9 +170,8 @@ public class VirtualHostModelImpl extends BaseModelImpl<VirtualHost>
 			return (VirtualHost)this;
 		}
 		else {
-			return (VirtualHost)Proxy.newProxyInstance(VirtualHost.class.getClassLoader(),
-				new Class[] { VirtualHost.class },
-				new AutoEscapeBeanHandler(this));
+			return (VirtualHost)Proxy.newProxyInstance(_classLoader,
+				_escapedModelProxyInterfaces, new AutoEscapeBeanHandler(this));
 		}
 	}
 
@@ -303,6 +302,10 @@ public class VirtualHostModelImpl extends BaseModelImpl<VirtualHost>
 		return sb.toString();
 	}
 
+	private static ClassLoader _classLoader = VirtualHost.class.getClassLoader();
+	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+			VirtualHost.class
+		};
 	private long _virtualHostId;
 	private long _companyId;
 	private long _originalCompanyId;

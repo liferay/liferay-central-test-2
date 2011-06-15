@@ -225,9 +225,8 @@ public class JournalContentSearchModelImpl extends BaseModelImpl<JournalContentS
 			return (JournalContentSearch)this;
 		}
 		else {
-			return (JournalContentSearch)Proxy.newProxyInstance(JournalContentSearch.class.getClassLoader(),
-				new Class[] { JournalContentSearch.class },
-				new AutoEscapeBeanHandler(this));
+			return (JournalContentSearch)Proxy.newProxyInstance(_classLoader,
+				_escapedModelProxyInterfaces, new AutoEscapeBeanHandler(this));
 		}
 	}
 
@@ -385,6 +384,10 @@ public class JournalContentSearchModelImpl extends BaseModelImpl<JournalContentS
 		return sb.toString();
 	}
 
+	private static ClassLoader _classLoader = JournalContentSearch.class.getClassLoader();
+	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+			JournalContentSearch.class
+		};
 	private long _contentSearchId;
 	private long _groupId;
 	private long _originalGroupId;

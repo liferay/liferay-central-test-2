@@ -576,8 +576,8 @@ public class ContactModelImpl extends BaseModelImpl<Contact>
 			return (Contact)this;
 		}
 		else {
-			return (Contact)Proxy.newProxyInstance(Contact.class.getClassLoader(),
-				new Class[] { Contact.class }, new AutoEscapeBeanHandler(this));
+			return (Contact)Proxy.newProxyInstance(_classLoader,
+				_escapedModelProxyInterfaces, new AutoEscapeBeanHandler(this));
 		}
 	}
 
@@ -879,6 +879,10 @@ public class ContactModelImpl extends BaseModelImpl<Contact>
 		return sb.toString();
 	}
 
+	private static ClassLoader _classLoader = Contact.class.getClassLoader();
+	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+			Contact.class
+		};
 	private long _contactId;
 	private long _companyId;
 	private long _userId;

@@ -144,9 +144,8 @@ public class UserTrackerPathModelImpl extends BaseModelImpl<UserTrackerPath>
 			return (UserTrackerPath)this;
 		}
 		else {
-			return (UserTrackerPath)Proxy.newProxyInstance(UserTrackerPath.class.getClassLoader(),
-				new Class[] { UserTrackerPath.class },
-				new AutoEscapeBeanHandler(this));
+			return (UserTrackerPath)Proxy.newProxyInstance(_classLoader,
+				_escapedModelProxyInterfaces, new AutoEscapeBeanHandler(this));
 		}
 	}
 
@@ -266,6 +265,10 @@ public class UserTrackerPathModelImpl extends BaseModelImpl<UserTrackerPath>
 		return sb.toString();
 	}
 
+	private static ClassLoader _classLoader = UserTrackerPath.class.getClassLoader();
+	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+			UserTrackerPath.class
+		};
 	private long _userTrackerPathId;
 	private long _userTrackerId;
 	private String _path;

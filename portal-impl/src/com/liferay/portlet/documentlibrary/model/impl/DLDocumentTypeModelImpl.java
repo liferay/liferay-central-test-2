@@ -274,9 +274,8 @@ public class DLDocumentTypeModelImpl extends BaseModelImpl<DLDocumentType>
 			return (DLDocumentType)this;
 		}
 		else {
-			return (DLDocumentType)Proxy.newProxyInstance(DLDocumentType.class.getClassLoader(),
-				new Class[] { DLDocumentType.class },
-				new AutoEscapeBeanHandler(this));
+			return (DLDocumentType)Proxy.newProxyInstance(_classLoader,
+				_escapedModelProxyInterfaces, new AutoEscapeBeanHandler(this));
 		}
 	}
 
@@ -431,6 +430,10 @@ public class DLDocumentTypeModelImpl extends BaseModelImpl<DLDocumentType>
 		return sb.toString();
 	}
 
+	private static ClassLoader _classLoader = DLDocumentType.class.getClassLoader();
+	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+			DLDocumentType.class
+		};
 	private long _documentTypeId;
 	private long _groupId;
 	private long _companyId;

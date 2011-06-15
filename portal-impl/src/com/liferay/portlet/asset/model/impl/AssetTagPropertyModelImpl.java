@@ -283,9 +283,8 @@ public class AssetTagPropertyModelImpl extends BaseModelImpl<AssetTagProperty>
 			return (AssetTagProperty)this;
 		}
 		else {
-			return (AssetTagProperty)Proxy.newProxyInstance(AssetTagProperty.class.getClassLoader(),
-				new Class[] { AssetTagProperty.class },
-				new AutoEscapeBeanHandler(this));
+			return (AssetTagProperty)Proxy.newProxyInstance(_classLoader,
+				_escapedModelProxyInterfaces, new AutoEscapeBeanHandler(this));
 		}
 	}
 
@@ -445,6 +444,10 @@ public class AssetTagPropertyModelImpl extends BaseModelImpl<AssetTagProperty>
 		return sb.toString();
 	}
 
+	private static ClassLoader _classLoader = AssetTagProperty.class.getClassLoader();
+	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+			AssetTagProperty.class
+		};
 	private long _tagPropertyId;
 	private long _companyId;
 	private long _userId;

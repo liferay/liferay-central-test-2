@@ -397,8 +397,8 @@ public class RoleModelImpl extends BaseModelImpl<Role> implements RoleModel {
 			return (Role)this;
 		}
 		else {
-			return (Role)Proxy.newProxyInstance(Role.class.getClassLoader(),
-				new Class[] { Role.class }, new AutoEscapeBeanHandler(this));
+			return (Role)Proxy.newProxyInstance(_classLoader,
+				_escapedModelProxyInterfaces, new AutoEscapeBeanHandler(this));
 		}
 	}
 
@@ -566,6 +566,10 @@ public class RoleModelImpl extends BaseModelImpl<Role> implements RoleModel {
 		return sb.toString();
 	}
 
+	private static ClassLoader _classLoader = Role.class.getClassLoader();
+	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+			Role.class
+		};
 	private long _roleId;
 	private long _companyId;
 	private long _originalCompanyId;

@@ -310,9 +310,8 @@ public class BookmarksFolderModelImpl extends BaseModelImpl<BookmarksFolder>
 			return (BookmarksFolder)this;
 		}
 		else {
-			return (BookmarksFolder)Proxy.newProxyInstance(BookmarksFolder.class.getClassLoader(),
-				new Class[] { BookmarksFolder.class },
-				new AutoEscapeBeanHandler(this));
+			return (BookmarksFolder)Proxy.newProxyInstance(_classLoader,
+				_escapedModelProxyInterfaces, new AutoEscapeBeanHandler(this));
 		}
 	}
 
@@ -501,6 +500,10 @@ public class BookmarksFolderModelImpl extends BaseModelImpl<BookmarksFolder>
 		return sb.toString();
 	}
 
+	private static ClassLoader _classLoader = BookmarksFolder.class.getClassLoader();
+	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+			BookmarksFolder.class
+		};
 	private String _uuid;
 	private String _originalUuid;
 	private long _folderId;

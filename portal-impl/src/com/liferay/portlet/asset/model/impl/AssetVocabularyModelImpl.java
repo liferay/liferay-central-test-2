@@ -500,9 +500,8 @@ public class AssetVocabularyModelImpl extends BaseModelImpl<AssetVocabulary>
 			return (AssetVocabulary)this;
 		}
 		else {
-			return (AssetVocabulary)Proxy.newProxyInstance(AssetVocabulary.class.getClassLoader(),
-				new Class[] { AssetVocabulary.class },
-				new AutoEscapeBeanHandler(this));
+			return (AssetVocabulary)Proxy.newProxyInstance(_classLoader,
+				_escapedModelProxyInterfaces, new AutoEscapeBeanHandler(this));
 		}
 	}
 
@@ -685,6 +684,10 @@ public class AssetVocabularyModelImpl extends BaseModelImpl<AssetVocabulary>
 		return sb.toString();
 	}
 
+	private static ClassLoader _classLoader = AssetVocabulary.class.getClassLoader();
+	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+			AssetVocabulary.class
+		};
 	private String _uuid;
 	private String _originalUuid;
 	private long _vocabularyId;

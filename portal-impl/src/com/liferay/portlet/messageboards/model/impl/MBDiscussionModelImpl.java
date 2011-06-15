@@ -177,9 +177,8 @@ public class MBDiscussionModelImpl extends BaseModelImpl<MBDiscussion>
 			return (MBDiscussion)this;
 		}
 		else {
-			return (MBDiscussion)Proxy.newProxyInstance(MBDiscussion.class.getClassLoader(),
-				new Class[] { MBDiscussion.class },
-				new AutoEscapeBeanHandler(this));
+			return (MBDiscussion)Proxy.newProxyInstance(_classLoader,
+				_escapedModelProxyInterfaces, new AutoEscapeBeanHandler(this));
 		}
 	}
 
@@ -312,6 +311,10 @@ public class MBDiscussionModelImpl extends BaseModelImpl<MBDiscussion>
 		return sb.toString();
 	}
 
+	private static ClassLoader _classLoader = MBDiscussion.class.getClassLoader();
+	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+			MBDiscussion.class
+		};
 	private long _discussionId;
 	private long _classNameId;
 	private long _originalClassNameId;

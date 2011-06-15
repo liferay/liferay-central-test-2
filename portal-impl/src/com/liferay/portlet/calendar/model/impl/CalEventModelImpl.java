@@ -469,8 +469,8 @@ public class CalEventModelImpl extends BaseModelImpl<CalEvent>
 			return (CalEvent)this;
 		}
 		else {
-			return (CalEvent)Proxy.newProxyInstance(CalEvent.class.getClassLoader(),
-				new Class[] { CalEvent.class }, new AutoEscapeBeanHandler(this));
+			return (CalEvent)Proxy.newProxyInstance(_classLoader,
+				_escapedModelProxyInterfaces, new AutoEscapeBeanHandler(this));
 		}
 	}
 
@@ -735,6 +735,10 @@ public class CalEventModelImpl extends BaseModelImpl<CalEvent>
 		return sb.toString();
 	}
 
+	private static ClassLoader _classLoader = CalEvent.class.getClassLoader();
+	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+			CalEvent.class
+		};
 	private String _uuid;
 	private String _originalUuid;
 	private long _eventId;

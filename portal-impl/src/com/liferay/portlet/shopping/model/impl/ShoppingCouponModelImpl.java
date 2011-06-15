@@ -396,9 +396,8 @@ public class ShoppingCouponModelImpl extends BaseModelImpl<ShoppingCoupon>
 			return (ShoppingCoupon)this;
 		}
 		else {
-			return (ShoppingCoupon)Proxy.newProxyInstance(ShoppingCoupon.class.getClassLoader(),
-				new Class[] { ShoppingCoupon.class },
-				new AutoEscapeBeanHandler(this));
+			return (ShoppingCoupon)Proxy.newProxyInstance(_classLoader,
+				_escapedModelProxyInterfaces, new AutoEscapeBeanHandler(this));
 		}
 	}
 
@@ -618,6 +617,10 @@ public class ShoppingCouponModelImpl extends BaseModelImpl<ShoppingCoupon>
 		return sb.toString();
 	}
 
+	private static ClassLoader _classLoader = ShoppingCoupon.class.getClassLoader();
+	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+			ShoppingCoupon.class
+		};
 	private long _couponId;
 	private long _groupId;
 	private long _companyId;

@@ -250,9 +250,8 @@ public class JournalArticleImageModelImpl extends BaseModelImpl<JournalArticleIm
 			return (JournalArticleImage)this;
 		}
 		else {
-			return (JournalArticleImage)Proxy.newProxyInstance(JournalArticleImage.class.getClassLoader(),
-				new Class[] { JournalArticleImage.class },
-				new AutoEscapeBeanHandler(this));
+			return (JournalArticleImage)Proxy.newProxyInstance(_classLoader,
+				_escapedModelProxyInterfaces, new AutoEscapeBeanHandler(this));
 		}
 	}
 
@@ -417,6 +416,10 @@ public class JournalArticleImageModelImpl extends BaseModelImpl<JournalArticleIm
 		return sb.toString();
 	}
 
+	private static ClassLoader _classLoader = JournalArticleImage.class.getClassLoader();
+	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+			JournalArticleImage.class
+		};
 	private long _articleImageId;
 	private long _groupId;
 	private long _originalGroupId;

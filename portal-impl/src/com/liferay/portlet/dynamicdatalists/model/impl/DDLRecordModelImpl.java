@@ -368,8 +368,8 @@ public class DDLRecordModelImpl extends BaseModelImpl<DDLRecord>
 			return (DDLRecord)this;
 		}
 		else {
-			return (DDLRecord)Proxy.newProxyInstance(DDLRecord.class.getClassLoader(),
-				new Class[] { DDLRecord.class }, new AutoEscapeBeanHandler(this));
+			return (DDLRecord)Proxy.newProxyInstance(_classLoader,
+				_escapedModelProxyInterfaces, new AutoEscapeBeanHandler(this));
 		}
 	}
 
@@ -573,6 +573,10 @@ public class DDLRecordModelImpl extends BaseModelImpl<DDLRecord>
 		return sb.toString();
 	}
 
+	private static ClassLoader _classLoader = DDLRecord.class.getClassLoader();
+	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+			DDLRecord.class
+		};
 	private String _uuid;
 	private String _originalUuid;
 	private long _recordId;

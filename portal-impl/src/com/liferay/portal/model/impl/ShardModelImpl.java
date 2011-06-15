@@ -178,8 +178,8 @@ public class ShardModelImpl extends BaseModelImpl<Shard> implements ShardModel {
 			return (Shard)this;
 		}
 		else {
-			return (Shard)Proxy.newProxyInstance(Shard.class.getClassLoader(),
-				new Class[] { Shard.class }, new AutoEscapeBeanHandler(this));
+			return (Shard)Proxy.newProxyInstance(_classLoader,
+				_escapedModelProxyInterfaces, new AutoEscapeBeanHandler(this));
 		}
 	}
 
@@ -310,6 +310,10 @@ public class ShardModelImpl extends BaseModelImpl<Shard> implements ShardModel {
 		return sb.toString();
 	}
 
+	private static ClassLoader _classLoader = Shard.class.getClassLoader();
+	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+			Shard.class
+		};
 	private long _shardId;
 	private long _classNameId;
 	private long _originalClassNameId;

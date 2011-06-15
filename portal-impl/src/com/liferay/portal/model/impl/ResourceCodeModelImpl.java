@@ -170,9 +170,8 @@ public class ResourceCodeModelImpl extends BaseModelImpl<ResourceCode>
 			return (ResourceCode)this;
 		}
 		else {
-			return (ResourceCode)Proxy.newProxyInstance(ResourceCode.class.getClassLoader(),
-				new Class[] { ResourceCode.class },
-				new AutoEscapeBeanHandler(this));
+			return (ResourceCode)Proxy.newProxyInstance(_classLoader,
+				_escapedModelProxyInterfaces, new AutoEscapeBeanHandler(this));
 		}
 	}
 
@@ -303,6 +302,10 @@ public class ResourceCodeModelImpl extends BaseModelImpl<ResourceCode>
 		return sb.toString();
 	}
 
+	private static ClassLoader _classLoader = ResourceCode.class.getClassLoader();
+	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+			ResourceCode.class
+		};
 	private long _codeId;
 	private long _companyId;
 	private long _originalCompanyId;

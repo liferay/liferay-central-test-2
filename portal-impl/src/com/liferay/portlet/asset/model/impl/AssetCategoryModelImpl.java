@@ -550,9 +550,8 @@ public class AssetCategoryModelImpl extends BaseModelImpl<AssetCategory>
 			return (AssetCategory)this;
 		}
 		else {
-			return (AssetCategory)Proxy.newProxyInstance(AssetCategory.class.getClassLoader(),
-				new Class[] { AssetCategory.class },
-				new AutoEscapeBeanHandler(this));
+			return (AssetCategory)Proxy.newProxyInstance(_classLoader,
+				_escapedModelProxyInterfaces, new AutoEscapeBeanHandler(this));
 		}
 	}
 
@@ -764,6 +763,10 @@ public class AssetCategoryModelImpl extends BaseModelImpl<AssetCategory>
 		return sb.toString();
 	}
 
+	private static ClassLoader _classLoader = AssetCategory.class.getClassLoader();
+	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+			AssetCategory.class
+		};
 	private String _uuid;
 	private String _originalUuid;
 	private long _categoryId;

@@ -256,8 +256,8 @@ public class LockModelImpl extends BaseModelImpl<Lock> implements LockModel {
 			return (Lock)this;
 		}
 		else {
-			return (Lock)Proxy.newProxyInstance(Lock.class.getClassLoader(),
-				new Class[] { Lock.class }, new AutoEscapeBeanHandler(this));
+			return (Lock)Proxy.newProxyInstance(_classLoader,
+				_escapedModelProxyInterfaces, new AutoEscapeBeanHandler(this));
 		}
 	}
 
@@ -431,6 +431,10 @@ public class LockModelImpl extends BaseModelImpl<Lock> implements LockModel {
 		return sb.toString();
 	}
 
+	private static ClassLoader _classLoader = Lock.class.getClassLoader();
+	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+			Lock.class
+		};
 	private String _uuid;
 	private long _lockId;
 	private long _companyId;

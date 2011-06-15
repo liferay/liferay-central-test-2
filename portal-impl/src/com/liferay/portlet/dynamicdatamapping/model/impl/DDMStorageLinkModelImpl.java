@@ -171,9 +171,8 @@ public class DDMStorageLinkModelImpl extends BaseModelImpl<DDMStorageLink>
 			return (DDMStorageLink)this;
 		}
 		else {
-			return (DDMStorageLink)Proxy.newProxyInstance(DDMStorageLink.class.getClassLoader(),
-				new Class[] { DDMStorageLink.class },
-				new AutoEscapeBeanHandler(this));
+			return (DDMStorageLink)Proxy.newProxyInstance(_classLoader,
+				_escapedModelProxyInterfaces, new AutoEscapeBeanHandler(this));
 		}
 	}
 
@@ -305,6 +304,10 @@ public class DDMStorageLinkModelImpl extends BaseModelImpl<DDMStorageLink>
 		return sb.toString();
 	}
 
+	private static ClassLoader _classLoader = DDMStorageLink.class.getClassLoader();
+	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+			DDMStorageLink.class
+		};
 	private String _uuid;
 	private long _storageLinkId;
 	private long _classNameId;

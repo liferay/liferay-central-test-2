@@ -315,9 +315,8 @@ public class SocialActivityModelImpl extends BaseModelImpl<SocialActivity>
 			return (SocialActivity)this;
 		}
 		else {
-			return (SocialActivity)Proxy.newProxyInstance(SocialActivity.class.getClassLoader(),
-				new Class[] { SocialActivity.class },
-				new AutoEscapeBeanHandler(this));
+			return (SocialActivity)Proxy.newProxyInstance(_classLoader,
+				_escapedModelProxyInterfaces, new AutoEscapeBeanHandler(this));
 		}
 	}
 
@@ -527,6 +526,10 @@ public class SocialActivityModelImpl extends BaseModelImpl<SocialActivity>
 		return sb.toString();
 	}
 
+	private static ClassLoader _classLoader = SocialActivity.class.getClassLoader();
+	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+			SocialActivity.class
+		};
 	private long _activityId;
 	private long _groupId;
 	private long _originalGroupId;

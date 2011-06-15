@@ -962,8 +962,8 @@ public class LayoutModelImpl extends BaseModelImpl<Layout>
 			return (Layout)this;
 		}
 		else {
-			return (Layout)Proxy.newProxyInstance(Layout.class.getClassLoader(),
-				new Class[] { Layout.class }, new AutoEscapeBeanHandler(this));
+			return (Layout)Proxy.newProxyInstance(_classLoader,
+				_escapedModelProxyInterfaces, new AutoEscapeBeanHandler(this));
 		}
 	}
 
@@ -1285,6 +1285,10 @@ public class LayoutModelImpl extends BaseModelImpl<Layout>
 		return sb.toString();
 	}
 
+	private static ClassLoader _classLoader = Layout.class.getClassLoader();
+	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+			Layout.class
+		};
 	private String _uuid;
 	private String _originalUuid;
 	private long _plid;

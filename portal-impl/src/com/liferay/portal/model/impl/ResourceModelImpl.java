@@ -192,8 +192,8 @@ public class ResourceModelImpl extends BaseModelImpl<Resource>
 			return (Resource)this;
 		}
 		else {
-			return (Resource)Proxy.newProxyInstance(Resource.class.getClassLoader(),
-				new Class[] { Resource.class }, new AutoEscapeBeanHandler(this));
+			return (Resource)Proxy.newProxyInstance(_classLoader,
+				_escapedModelProxyInterfaces, new AutoEscapeBeanHandler(this));
 		}
 	}
 
@@ -313,6 +313,10 @@ public class ResourceModelImpl extends BaseModelImpl<Resource>
 		return sb.toString();
 	}
 
+	private static ClassLoader _classLoader = Resource.class.getClassLoader();
+	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+			Resource.class
+		};
 	private long _resourceId;
 	private long _codeId;
 	private long _originalCodeId;

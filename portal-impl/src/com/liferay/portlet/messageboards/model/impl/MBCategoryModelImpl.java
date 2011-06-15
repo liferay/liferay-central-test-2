@@ -358,9 +358,8 @@ public class MBCategoryModelImpl extends BaseModelImpl<MBCategory>
 			return (MBCategory)this;
 		}
 		else {
-			return (MBCategory)Proxy.newProxyInstance(MBCategory.class.getClassLoader(),
-				new Class[] { MBCategory.class },
-				new AutoEscapeBeanHandler(this));
+			return (MBCategory)Proxy.newProxyInstance(_classLoader,
+				_escapedModelProxyInterfaces, new AutoEscapeBeanHandler(this));
 		}
 	}
 
@@ -577,6 +576,10 @@ public class MBCategoryModelImpl extends BaseModelImpl<MBCategory>
 		return sb.toString();
 	}
 
+	private static ClassLoader _classLoader = MBCategory.class.getClassLoader();
+	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+			MBCategory.class
+		};
 	private String _uuid;
 	private String _originalUuid;
 	private long _categoryId;

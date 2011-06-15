@@ -157,9 +157,8 @@ public class PasswordTrackerModelImpl extends BaseModelImpl<PasswordTracker>
 			return (PasswordTracker)this;
 		}
 		else {
-			return (PasswordTracker)Proxy.newProxyInstance(PasswordTracker.class.getClassLoader(),
-				new Class[] { PasswordTracker.class },
-				new AutoEscapeBeanHandler(this));
+			return (PasswordTracker)Proxy.newProxyInstance(_classLoader,
+				_escapedModelProxyInterfaces, new AutoEscapeBeanHandler(this));
 		}
 	}
 
@@ -296,6 +295,10 @@ public class PasswordTrackerModelImpl extends BaseModelImpl<PasswordTracker>
 		return sb.toString();
 	}
 
+	private static ClassLoader _classLoader = PasswordTracker.class.getClassLoader();
+	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+			PasswordTracker.class
+		};
 	private long _passwordTrackerId;
 	private long _userId;
 	private String _userUuid;

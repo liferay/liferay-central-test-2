@@ -248,8 +248,8 @@ public class UserGroupModelImpl extends BaseModelImpl<UserGroup>
 			return (UserGroup)this;
 		}
 		else {
-			return (UserGroup)Proxy.newProxyInstance(UserGroup.class.getClassLoader(),
-				new Class[] { UserGroup.class }, new AutoEscapeBeanHandler(this));
+			return (UserGroup)Proxy.newProxyInstance(_classLoader,
+				_escapedModelProxyInterfaces, new AutoEscapeBeanHandler(this));
 		}
 	}
 
@@ -388,6 +388,10 @@ public class UserGroupModelImpl extends BaseModelImpl<UserGroup>
 		return sb.toString();
 	}
 
+	private static ClassLoader _classLoader = UserGroup.class.getClassLoader();
+	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+			UserGroup.class
+		};
 	private long _userGroupId;
 	private long _companyId;
 	private long _originalCompanyId;

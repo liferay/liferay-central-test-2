@@ -320,9 +320,8 @@ public class LayoutSetPrototypeModelImpl extends BaseModelImpl<LayoutSetPrototyp
 			return (LayoutSetPrototype)this;
 		}
 		else {
-			return (LayoutSetPrototype)Proxy.newProxyInstance(LayoutSetPrototype.class.getClassLoader(),
-				new Class[] { LayoutSetPrototype.class },
-				new AutoEscapeBeanHandler(this));
+			return (LayoutSetPrototype)Proxy.newProxyInstance(_classLoader,
+				_escapedModelProxyInterfaces, new AutoEscapeBeanHandler(this));
 		}
 	}
 
@@ -463,6 +462,10 @@ public class LayoutSetPrototypeModelImpl extends BaseModelImpl<LayoutSetPrototyp
 		return sb.toString();
 	}
 
+	private static ClassLoader _classLoader = LayoutSetPrototype.class.getClassLoader();
+	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+			LayoutSetPrototype.class
+		};
 	private String _uuid;
 	private long _layoutSetPrototypeId;
 	private long _companyId;

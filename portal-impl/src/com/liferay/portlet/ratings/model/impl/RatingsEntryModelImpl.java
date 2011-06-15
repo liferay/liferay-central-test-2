@@ -290,9 +290,8 @@ public class RatingsEntryModelImpl extends BaseModelImpl<RatingsEntry>
 			return (RatingsEntry)this;
 		}
 		else {
-			return (RatingsEntry)Proxy.newProxyInstance(RatingsEntry.class.getClassLoader(),
-				new Class[] { RatingsEntry.class },
-				new AutoEscapeBeanHandler(this));
+			return (RatingsEntry)Proxy.newProxyInstance(_classLoader,
+				_escapedModelProxyInterfaces, new AutoEscapeBeanHandler(this));
 		}
 	}
 
@@ -460,6 +459,10 @@ public class RatingsEntryModelImpl extends BaseModelImpl<RatingsEntry>
 		return sb.toString();
 	}
 
+	private static ClassLoader _classLoader = RatingsEntry.class.getClassLoader();
+	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+			RatingsEntry.class
+		};
 	private long _entryId;
 	private long _companyId;
 	private long _userId;

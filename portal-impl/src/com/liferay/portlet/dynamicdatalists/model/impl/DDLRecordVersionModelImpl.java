@@ -352,9 +352,8 @@ public class DDLRecordVersionModelImpl extends BaseModelImpl<DDLRecordVersion>
 			return (DDLRecordVersion)this;
 		}
 		else {
-			return (DDLRecordVersion)Proxy.newProxyInstance(DDLRecordVersion.class.getClassLoader(),
-				new Class[] { DDLRecordVersion.class },
-				new AutoEscapeBeanHandler(this));
+			return (DDLRecordVersion)Proxy.newProxyInstance(_classLoader,
+				_escapedModelProxyInterfaces, new AutoEscapeBeanHandler(this));
 		}
 	}
 
@@ -565,6 +564,10 @@ public class DDLRecordVersionModelImpl extends BaseModelImpl<DDLRecordVersion>
 		return sb.toString();
 	}
 
+	private static ClassLoader _classLoader = DDLRecordVersion.class.getClassLoader();
+	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+			DDLRecordVersion.class
+		};
 	private long _recordVersionId;
 	private long _groupId;
 	private long _companyId;

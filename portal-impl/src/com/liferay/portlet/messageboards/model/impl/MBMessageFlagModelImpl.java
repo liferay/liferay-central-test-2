@@ -243,9 +243,8 @@ public class MBMessageFlagModelImpl extends BaseModelImpl<MBMessageFlag>
 			return (MBMessageFlag)this;
 		}
 		else {
-			return (MBMessageFlag)Proxy.newProxyInstance(MBMessageFlag.class.getClassLoader(),
-				new Class[] { MBMessageFlag.class },
-				new AutoEscapeBeanHandler(this));
+			return (MBMessageFlag)Proxy.newProxyInstance(_classLoader,
+				_escapedModelProxyInterfaces, new AutoEscapeBeanHandler(this));
 		}
 	}
 
@@ -392,6 +391,10 @@ public class MBMessageFlagModelImpl extends BaseModelImpl<MBMessageFlag>
 		return sb.toString();
 	}
 
+	private static ClassLoader _classLoader = MBMessageFlag.class.getClassLoader();
+	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+			MBMessageFlag.class
+		};
 	private long _messageFlagId;
 	private long _userId;
 	private String _userUuid;

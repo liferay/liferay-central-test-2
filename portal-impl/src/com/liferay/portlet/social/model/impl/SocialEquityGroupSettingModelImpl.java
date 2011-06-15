@@ -199,9 +199,8 @@ public class SocialEquityGroupSettingModelImpl extends BaseModelImpl<SocialEquit
 			return (SocialEquityGroupSetting)this;
 		}
 		else {
-			return (SocialEquityGroupSetting)Proxy.newProxyInstance(SocialEquityGroupSetting.class.getClassLoader(),
-				new Class[] { SocialEquityGroupSetting.class },
-				new AutoEscapeBeanHandler(this));
+			return (SocialEquityGroupSetting)Proxy.newProxyInstance(_classLoader,
+				_escapedModelProxyInterfaces, new AutoEscapeBeanHandler(this));
 		}
 	}
 
@@ -348,6 +347,10 @@ public class SocialEquityGroupSettingModelImpl extends BaseModelImpl<SocialEquit
 		return sb.toString();
 	}
 
+	private static ClassLoader _classLoader = SocialEquityGroupSetting.class.getClassLoader();
+	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+			SocialEquityGroupSetting.class
+		};
 	private long _equityGroupSettingId;
 	private long _groupId;
 	private long _originalGroupId;

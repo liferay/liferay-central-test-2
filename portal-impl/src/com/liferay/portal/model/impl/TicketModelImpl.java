@@ -213,8 +213,8 @@ public class TicketModelImpl extends BaseModelImpl<Ticket>
 			return (Ticket)this;
 		}
 		else {
-			return (Ticket)Proxy.newProxyInstance(Ticket.class.getClassLoader(),
-				new Class[] { Ticket.class }, new AutoEscapeBeanHandler(this));
+			return (Ticket)Proxy.newProxyInstance(_classLoader,
+				_escapedModelProxyInterfaces, new AutoEscapeBeanHandler(this));
 		}
 	}
 
@@ -378,6 +378,10 @@ public class TicketModelImpl extends BaseModelImpl<Ticket>
 		return sb.toString();
 	}
 
+	private static ClassLoader _classLoader = Ticket.class.getClassLoader();
+	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+			Ticket.class
+		};
 	private long _ticketId;
 	private long _companyId;
 	private Date _createDate;

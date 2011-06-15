@@ -209,9 +209,8 @@ public class PermissionModelImpl extends BaseModelImpl<Permission>
 			return (Permission)this;
 		}
 		else {
-			return (Permission)Proxy.newProxyInstance(Permission.class.getClassLoader(),
-				new Class[] { Permission.class },
-				new AutoEscapeBeanHandler(this));
+			return (Permission)Proxy.newProxyInstance(_classLoader,
+				_escapedModelProxyInterfaces, new AutoEscapeBeanHandler(this));
 		}
 	}
 
@@ -338,6 +337,10 @@ public class PermissionModelImpl extends BaseModelImpl<Permission>
 		return sb.toString();
 	}
 
+	private static ClassLoader _classLoader = Permission.class.getClassLoader();
+	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+			Permission.class
+		};
 	private long _permissionId;
 	private long _companyId;
 	private String _actionId;
