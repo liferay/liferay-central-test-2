@@ -254,8 +254,6 @@ public class PortletAction extends Action {
 
 		if (Validator.isNull(redirect)) {
 			redirect = ParamUtil.getString(actionRequest, "redirect");
-
-			redirect = PortalUtil.escapeRedirect(redirect);
 		}
 
 		if (Validator.isNotNull(redirect)) {
@@ -279,7 +277,11 @@ public class PortletAction extends Action {
 					redirect, StringPool.POUND, redirectToken);
 			}
 
-			actionResponse.sendRedirect(redirect);
+			redirect = PortalUtil.escapeRedirect(redirect);
+
+			if (Validator.isNotNull(redirect)) {
+				actionResponse.sendRedirect(redirect);
+			}
 		}
 	}
 
