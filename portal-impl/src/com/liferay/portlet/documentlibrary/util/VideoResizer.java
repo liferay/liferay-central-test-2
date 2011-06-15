@@ -25,6 +25,7 @@ import com.xuggle.xuggler.IVideoPicture;
 import com.xuggle.xuggler.IVideoResampler;
 
 /**
+ * @author Juan González
  * @author Sergio González
  */
 public class VideoResizer extends MediaToolAdapter {

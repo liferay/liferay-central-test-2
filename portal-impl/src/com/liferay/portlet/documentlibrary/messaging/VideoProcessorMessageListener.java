@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portlet.documentlibrary.util.VideoProcessorUtil;
 
 /**
+ * @author Juan González
  * @author Sergio González
  */
 public class VideoProcessorMessageListener extends BaseMessageListener {

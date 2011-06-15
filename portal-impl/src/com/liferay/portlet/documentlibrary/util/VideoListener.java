@@ -27,6 +27,7 @@ import com.xuggle.xuggler.IStream;
 import com.xuggle.xuggler.IStreamCoder;
 
 /**
+ * @author Juan González
  * @author Sergio González
  */
 public class VideoListener extends MediaToolAdapter {

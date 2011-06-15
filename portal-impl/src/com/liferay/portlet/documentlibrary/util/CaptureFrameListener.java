@@ -29,6 +29,7 @@ import java.io.FileOutputStream;
 import javax.imageio.ImageIO;
 
 /**
+ * @author Juan González
  * @author Sergio González
  */
 public class CaptureFrameListener extends MediaListenerAdapter {

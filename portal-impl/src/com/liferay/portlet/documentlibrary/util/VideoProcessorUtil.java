@@ -42,6 +42,7 @@ import java.util.List;
 import java.util.Vector;
 
 /**
+ * @author Juan González
  * @author Sergio González
  */
 public class VideoProcessorUtil {

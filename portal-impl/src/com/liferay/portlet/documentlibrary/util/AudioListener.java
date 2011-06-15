@@ -21,6 +21,7 @@ import com.xuggle.xuggler.IAudioResampler;
 import com.xuggle.xuggler.IAudioSamples;
 
 /**
+ * @author Juan González
  * @author Sergio González
  */
 public class AudioListener extends MediaToolAdapter {
