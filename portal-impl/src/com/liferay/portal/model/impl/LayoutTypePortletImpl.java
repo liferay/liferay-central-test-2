@@ -1493,10 +1493,13 @@ public class LayoutTypePortletImpl
 		String[] staticPortletIdsEnd = getStaticPortletIds(
 			PropsKeys.LAYOUT_STATIC_PORTLETS_END + columnId);
 
-		String[] staticPortletIds = ArrayUtil.append(
-			staticPortletIdsStart, staticPortletIdsEnd);
+		for (String staticPortletId : staticPortletIdsStart) {
+			if (staticPortletId.equals(portletId)) {
+				return true;
+			}
+		}
 
-		for (String staticPortletId : staticPortletIds) {
+		for (String staticPortletId : staticPortletIdsEnd) {
 			if (staticPortletId.equals(portletId)) {
 				return true;
 			}
