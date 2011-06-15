@@ -181,9 +181,7 @@ public class CMISRepository extends BaseCmisRepository {
 		}
 	}
 
-	public void cancelCheckOut(long fileEntryId)
-		throws PortalException, SystemException {
-
+	public void cancelCheckOut(long fileEntryId) {
 		try {
 			Session session = getSession();
 
@@ -204,17 +202,14 @@ public class CMISRepository extends BaseCmisRepository {
 		}
 	}
 
-	public void checkInFileEntry(long fileEntryId, String lockUuid)
-		throws PortalException, SystemException {
-
+	public void checkInFileEntry(long fileEntryId, String lockUuid) {
 		checkInFileEntry(
 			fileEntryId, false, StringPool.BLANK, new ServiceContext());
 	}
 
 	public void checkInFileEntry(
-			long fileEntryId, boolean major, String changeLog,
-			ServiceContext serviceContext)
-		throws PortalException, SystemException {
+		long fileEntryId, boolean major, String changeLog,
+		ServiceContext serviceContext) {
 
 		try {
 			Session session = getSession();
@@ -262,8 +257,7 @@ public class CMISRepository extends BaseCmisRepository {
 	}
 
 	public FileEntry checkOutFileEntry(
-			long fileEntryId, String owner, long expirationTime)
-		throws PortalException, SystemException {
+		long fileEntryId, String owner, long expirationTime) {
 
 		throw new UnsupportedOperationException();
 	}

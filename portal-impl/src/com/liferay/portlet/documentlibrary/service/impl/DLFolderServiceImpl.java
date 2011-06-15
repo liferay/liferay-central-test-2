@@ -19,8 +19,6 @@ import com.liferay.portal.InvalidLockException;
 import com.liferay.portal.NoSuchLockException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.Validator;
@@ -381,8 +379,6 @@ public class DLFolderServiceImpl extends DLFolderServiceBaseImpl {
 			long expirationTime)
 		throws PortalException, SystemException {
 
-		DLFolder dlFolder = dlFolderLocalService.getFolder(folderId);
-
 		if ((expirationTime <= 0) ||
 			(expirationTime > DLFolderImpl.LOCK_EXPIRATION_TIME)) {
 
@@ -418,8 +414,5 @@ public class DLFolderServiceImpl extends DLFolderServiceBaseImpl {
 
 		lockLocalService.unlock(DLFolder.class.getName(), folderId);
 	}
-
-	private static Log _log = LogFactoryUtil.getLog(
-		DLFolderServiceImpl.class);
 
 }
