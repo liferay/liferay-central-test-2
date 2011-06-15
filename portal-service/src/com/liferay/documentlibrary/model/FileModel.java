@@ -146,6 +146,7 @@ public class FileModel implements Serializable {
 		_userUuid = userUuid;
 	}
 
+	@Override
 	public String toString() {
 		StringBundler sb = new StringBundler(31);
 
