@@ -51,6 +51,7 @@ public class LiferayEhcacheRegionFactory extends EhCacheRegionFactory {
 		super(properties);
 	}
 
+	@Override
 	public CollectionRegion buildCollectionRegion(
 			String regionName, Properties properties,
 			CacheDataDescription cacheDataDescription)
@@ -65,6 +66,7 @@ public class LiferayEhcacheRegionFactory extends EhCacheRegionFactory {
 		return new CollectionRegionWrapper(ehcacheCollectionRegion);
 	}
 
+	@Override
 	public EntityRegion buildEntityRegion(
 			String regionName, Properties properties,
 			CacheDataDescription cacheDataDescription)
@@ -79,6 +81,7 @@ public class LiferayEhcacheRegionFactory extends EhCacheRegionFactory {
 		return new EntityRegionWrapper(ehcacheEntityRegion);
 	}
 
+	@Override
 	public QueryResultsRegion buildQueryResultsRegion(
 			String regionName, Properties properties)
 		throws CacheException {
@@ -92,6 +95,7 @@ public class LiferayEhcacheRegionFactory extends EhCacheRegionFactory {
 		return new QueryResultsRegionWrapper(ehcacheQueryResultsRegion);
 	}
 
+	@Override
 	public TimestampsRegion buildTimestampsRegion(
 			String regionName, Properties properties)
 		throws CacheException {

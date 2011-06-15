@@ -47,18 +47,22 @@ public class JournalOpenSearchImpl extends HitsOpenSearchImpl {
 
 	public static final String TITLE = "Liferay Journal Search: ";
 
+	@Override
 	public Indexer getIndexer() {
 		return IndexerRegistryUtil.getIndexer(JournalArticle.class);
 	}
 
+	@Override
 	public String getPortletId() {
 		return JournalIndexer.PORTLET_ID;
 	}
 
+	@Override
 	public String getSearchPath() {
 		return SEARCH_PATH;
 	}
 
+	@Override
 	public String getTitle(String keywords) {
 		return TITLE + keywords;
 	}
@@ -99,6 +103,7 @@ public class JournalOpenSearchImpl extends HitsOpenSearchImpl {
 		return null;
 	}
 
+	@Override
 	protected String getURL(
 			ThemeDisplay themeDisplay, long groupId, Document result,
 			PortletURL portletURL)

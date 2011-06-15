@@ -27,6 +27,7 @@ import javax.servlet.http.HttpSession;
  */
 public class GarbageCollectorAction extends SessionAction {
 
+	@Override
 	public void run(HttpSession session) {
 		Runtime runtime = Runtime.getRuntime();
 

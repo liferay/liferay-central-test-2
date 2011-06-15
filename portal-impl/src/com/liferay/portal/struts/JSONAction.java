@@ -40,6 +40,7 @@ import org.apache.struts.action.ActionMapping;
  */
 public abstract class JSONAction extends Action {
 
+	@Override
 	public ActionForward execute(
 			ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response)

@@ -31,6 +31,7 @@ public abstract class BaseWorkflowDefinitionNameComparator
 		_ascending = ascending;
 	}
 
+	@Override
 	public int compare(Object obj1, Object obj2) {
 		WorkflowDefinition workflowDefinition1 = (WorkflowDefinition)obj1;
 		WorkflowDefinition workflowDefinition2 = (WorkflowDefinition)obj2;
@@ -55,6 +56,7 @@ public abstract class BaseWorkflowDefinitionNameComparator
 		}
 	}
 
+	@Override
 	public boolean isAscending() {
 		return _ascending;
 	}

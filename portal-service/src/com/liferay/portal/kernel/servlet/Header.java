@@ -59,6 +59,7 @@ public class Header implements Serializable {
 		_type = type;
 	}
 
+	@Override
 	public String toString() {
 		if (_type == DATE_TYPE) {
 			return String.valueOf(_dateValue);

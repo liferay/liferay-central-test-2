@@ -26,10 +26,12 @@ public class DefaultMessagingConfigurator
 		_messageBus = messageBus;
 	}
 
+	@Override
 	protected MessageBus getMessageBus() {
 		return _messageBus;
 	}
 
+	@Override
 	protected ClassLoader getOperatingClassloader() {
 		Thread currentThread = Thread.currentThread();
 

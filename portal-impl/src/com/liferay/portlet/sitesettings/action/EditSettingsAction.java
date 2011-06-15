@@ -52,6 +52,7 @@ import org.apache.struts.action.ActionMapping;
  */
 public class EditSettingsAction extends EditLayoutsAction {
 
+	@Override
 	public void processAction(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
 			ActionRequest actionRequest, ActionResponse actionResponse)
@@ -102,6 +103,7 @@ public class EditSettingsAction extends EditLayoutsAction {
 		}
 	}
 
+	@Override
 	public ActionForward render(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
 			RenderRequest renderRequest, RenderResponse renderResponse)
@@ -137,6 +139,7 @@ public class EditSettingsAction extends EditLayoutsAction {
 			getForward(renderRequest, "portlet.site_settings.edit_settings"));
 	}
 
+	@Override
 	protected Group getGroup(PortletRequest portletRequest) throws Exception {
 		Group group = ActionUtil.getGroup(portletRequest);
 

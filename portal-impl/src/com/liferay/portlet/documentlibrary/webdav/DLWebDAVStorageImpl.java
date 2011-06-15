@@ -67,6 +67,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 
+	@Override
 	public int copyCollectionResource(
 			WebDAVRequest webDavRequest, Resource resource, String destination,
 			boolean overwrite, long depth)
@@ -133,6 +134,7 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 		}
 	}
 
+	@Override
 	public int copySimpleResource(
 			WebDAVRequest webDavRequest, Resource resource, String destination,
 			boolean overwrite)
@@ -215,6 +217,7 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 		}
 	}
 
+	@Override
 	public int deleteResource(WebDAVRequest webDavRequest)
 		throws WebDAVException {
 
@@ -329,10 +332,12 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 		}
 	}
 
+	@Override
 	public boolean isSupportsClassTwo() {
 		return true;
 	}
 
+	@Override
 	public Status lockResource(
 			WebDAVRequest webDavRequest, String owner, long timeout)
 		throws WebDAVException {
@@ -425,6 +430,7 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 		return new Status(lock, status);
 	}
 
+	@Override
 	public Status makeCollection(WebDAVRequest webDavRequest)
 		throws WebDAVException {
 
@@ -474,6 +480,7 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 		}
 	}
 
+	@Override
 	public int moveCollectionResource(
 			WebDAVRequest webDavRequest, Resource resource, String destination,
 			boolean overwrite)
@@ -529,6 +536,7 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 		}
 	}
 
+	@Override
 	public int moveSimpleResource(
 			WebDAVRequest webDavRequest, Resource resource, String destination,
 			boolean overwrite)
@@ -631,6 +639,7 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 		}
 	}
 
+	@Override
 	public int putResource(WebDAVRequest webDavRequest) throws WebDAVException {
 		File file = null;
 
@@ -759,6 +768,7 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 		}
 	}
 
+	@Override
 	public Lock refreshResourceLock(
 			WebDAVRequest webDavRequest, String uuid, long timeout)
 		throws WebDAVException {
@@ -782,6 +792,7 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 		return lock;
 	}
 
+	@Override
 	public boolean unlockResource(WebDAVRequest webDavRequest, String token)
 		throws WebDAVException {
 

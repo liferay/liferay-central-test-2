@@ -43,6 +43,7 @@ public class DLFileEntryIdUpgradeColumnImpl extends PKUpgradeColumnImpl {
 		_movedFolderIds = new HashSet<Long>();
 	}
 
+	@Override
 	public Object getNewValue(Object oldValue) throws Exception {
 		Object newValue = super.getNewValue(oldValue);
 
@@ -75,6 +76,7 @@ public class DLFileEntryIdUpgradeColumnImpl extends PKUpgradeColumnImpl {
 		return newValue;
 	}
 
+	@Override
 	public ValueMapper getValueMapper() {
 		return _dlFileEntryIdMapper;
 	}

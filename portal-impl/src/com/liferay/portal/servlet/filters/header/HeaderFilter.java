@@ -46,6 +46,7 @@ import javax.servlet.http.HttpSession;
  */
 public class HeaderFilter extends BasePortalFilter {
 
+	@Override
 	public void init(FilterConfig filterConfig) {
 		super.init(filterConfig);
 
@@ -69,6 +70,7 @@ public class HeaderFilter extends BasePortalFilter {
 		return lasModified;
 	}
 
+	@Override
 	protected void processFilter(
 			HttpServletRequest request, HttpServletResponse response,
 			FilterChain filterChain)

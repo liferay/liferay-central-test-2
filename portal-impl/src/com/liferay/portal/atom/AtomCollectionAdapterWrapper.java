@@ -43,6 +43,7 @@ public class AtomCollectionAdapterWrapper<E>
 		_atomCollectionAdapter = atomCollectionAdapter;
 	}
 
+	@Override
 	public void deleteEntry(String resourceName, RequestContext requestContext)
 		throws ResponseContextException {
 
@@ -87,6 +88,7 @@ public class AtomCollectionAdapterWrapper<E>
 		return content;
 	}
 
+	@Override
 	public Iterable<E> getEntries(RequestContext requestContext)
 		throws ResponseContextException {
 
@@ -100,6 +102,7 @@ public class AtomCollectionAdapterWrapper<E>
 		}
 	}
 
+	@Override
 	public E getEntry(String resourceName, RequestContext requestContext)
 		throws ResponseContextException {
 
@@ -125,6 +128,7 @@ public class AtomCollectionAdapterWrapper<E>
 		return _atomCollectionAdapter.getEntryUpdated(entry);
 	}
 
+	@Override
 	public E postEntry(
 			String title, IRI id, String summary, Date updated,
 			List<Person> authors, Content content,

@@ -43,6 +43,7 @@ public class RemotingServlet extends DispatcherServlet {
 	public static final String CONTEXT_CONFIG_LOCATION =
 		"/WEB-INF/remoting-servlet.xml,/WEB-INF/remoting-servlet-ext.xml";
 
+	@Override
 	public Class<?> getContextClass() {
 		try {
 			return Class.forName(CONTEXT_CLASS);
@@ -54,10 +55,12 @@ public class RemotingServlet extends DispatcherServlet {
 		return null;
 	}
 
+	@Override
 	public String getContextConfigLocation() {
 		return CONTEXT_CONFIG_LOCATION;
 	}
 
+	@Override
 	public void service(
 			HttpServletRequest request, HttpServletResponse response)
 		throws ServletException {

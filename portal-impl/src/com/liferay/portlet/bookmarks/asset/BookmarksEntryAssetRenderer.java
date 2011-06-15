@@ -60,6 +60,7 @@ public class BookmarksEntryAssetRenderer extends BaseAssetRenderer {
 		return _entry.getName();
 	}
 
+	@Override
 	public PortletURL getURLEdit(
 			LiferayPortletRequest liferayPortletRequest,
 			LiferayPortletResponse liferayPortletResponse)
@@ -77,6 +78,7 @@ public class BookmarksEntryAssetRenderer extends BaseAssetRenderer {
 		return portletURL;
 	}
 
+	@Override
 	public String getURLViewInContext(
 		LiferayPortletRequest liferayPortletRequest,
 		LiferayPortletResponse liferayPortletResponse,
@@ -98,6 +100,7 @@ public class BookmarksEntryAssetRenderer extends BaseAssetRenderer {
 		return _entry.getUuid();
 	}
 
+	@Override
 	public boolean hasEditPermission(PermissionChecker permissionChecker) {
 		try {
 			return BookmarksEntryPermission.contains(
@@ -109,6 +112,7 @@ public class BookmarksEntryAssetRenderer extends BaseAssetRenderer {
 		return false;
 	}
 
+	@Override
 	public boolean hasViewPermission(PermissionChecker permissionChecker) {
 		try {
 			return BookmarksEntryPermission.contains(
@@ -120,6 +124,7 @@ public class BookmarksEntryAssetRenderer extends BaseAssetRenderer {
 		return true;
 	}
 
+	@Override
 	public boolean isPrintable() {
 		return true;
 	}
@@ -139,6 +144,7 @@ public class BookmarksEntryAssetRenderer extends BaseAssetRenderer {
 		}
 	}
 
+	@Override
 	protected String getIconPath(ThemeDisplay themeDisplay) {
 		return themeDisplay.getPathThemeImages() + "/ratings/star_hover.png";
 	}

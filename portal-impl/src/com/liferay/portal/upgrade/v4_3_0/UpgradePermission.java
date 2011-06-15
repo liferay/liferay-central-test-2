@@ -24,6 +24,7 @@ import com.liferay.portal.upgrade.v4_3_0.util.PermissionTable;
  */
 public class UpgradePermission extends UpgradeProcess {
 
+	@Override
 	protected void doUpgrade() throws Exception {
 
 		// Permission

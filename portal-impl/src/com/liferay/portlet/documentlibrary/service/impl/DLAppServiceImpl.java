@@ -51,12 +51,10 @@ import java.util.List;
  * third-party repositories. While the method signatures are universal for all
  * repositories, additional parameters may be specified in the serviceContext to
  * enable added flexibility, especially within Liferay's repository during
- * creation and update. In particular, noteworthy parameters include:
- * <ul>
- * <li>documentTypeId - ID for custom document type</li>
- * <li>fieldsMap - mapping for fields associated with custom document type</li>
- * <li>sourceFileName - original filename of file being uploaded</li>
- * </ul>
+ * creation and update. In particular, noteworthy parameters include: <ul> <li>
+ * documentTypeId - ID for custom document type </li> <li> fieldsMap - mapping
+ * for fields associated with custom document type </li> <li> sourceFileName -
+ * original filename of file being uploaded </li> </ul>
  * </p>
  *
  * @author Alexander Chow

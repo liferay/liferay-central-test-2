@@ -106,6 +106,7 @@ public class PortletPreferencesWrapper
 		return getPortletPreferencesImpl();
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		PortletPreferencesWrapper portletPreferencesWrapper =
 			(PortletPreferencesWrapper)obj;
@@ -124,6 +125,7 @@ public class PortletPreferencesWrapper
 		}
 	}
 
+	@Override
 	public int hashCode() {
 		return _portletPreferences.hashCode();
 	}

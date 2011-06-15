@@ -56,6 +56,7 @@ public class WikiPageAssetRenderer extends BaseAssetRenderer {
 		}
 	}
 
+	@Override
 	public String getDiscussionPath() {
 		if (PropsValues.WIKI_PAGE_COMMENTS_ENABLED) {
 			return "edit_page_discussion";
@@ -88,6 +89,7 @@ public class WikiPageAssetRenderer extends BaseAssetRenderer {
 		return _page.getTitle();
 	}
 
+	@Override
 	public PortletURL getURLEdit(
 			LiferayPortletRequest liferayPortletRequest,
 			LiferayPortletResponse liferayPortletResponse)
@@ -104,6 +106,7 @@ public class WikiPageAssetRenderer extends BaseAssetRenderer {
 		return portletURL;
 	}
 
+	@Override
 	public PortletURL getURLExport(
 		LiferayPortletRequest liferayPortletRequest,
 		LiferayPortletResponse liferayPortletResponse) {
@@ -119,6 +122,7 @@ public class WikiPageAssetRenderer extends BaseAssetRenderer {
 		return exportPortletURL;
 	}
 
+	@Override
 	public String getURLViewInContext(
 		LiferayPortletRequest liferayPortletRequest,
 		LiferayPortletResponse liferayPortletResponse,
@@ -140,20 +144,24 @@ public class WikiPageAssetRenderer extends BaseAssetRenderer {
 		return _page.getUuid();
 	}
 
+	@Override
 	public boolean hasEditPermission(PermissionChecker permissionChecker) {
 		return WikiPagePermission.contains(
 			permissionChecker, _page, ActionKeys.UPDATE);
 	}
 
+	@Override
 	public boolean hasViewPermission(PermissionChecker permissionChecker) {
 		return WikiPagePermission.contains(
 			permissionChecker, _page, ActionKeys.VIEW);
 	}
 
+	@Override
 	public boolean isConvertible() {
 		return true;
 	}
 
+	@Override
 	public boolean isPrintable() {
 		return true;
 	}
@@ -175,6 +183,7 @@ public class WikiPageAssetRenderer extends BaseAssetRenderer {
 		}
 	}
 
+	@Override
 	protected String getIconPath(ThemeDisplay themeDisplay) {
 		return themeDisplay.getPathThemeImages() + "/common/pages.png";
 	}

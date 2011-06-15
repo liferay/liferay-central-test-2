@@ -38,6 +38,7 @@ public class AbsoluteRedirectsResponse extends HttpServletResponseWrapper {
 		_request = request;
 	}
 
+	@Override
 	public void sendRedirect(String redirect) throws IOException {
 		String portalURL = getPortalURL();
 

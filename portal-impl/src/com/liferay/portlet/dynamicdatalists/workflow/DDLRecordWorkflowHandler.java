@@ -48,6 +48,7 @@ public class DDLRecordWorkflowHandler extends BaseWorkflowHandler {
 		return ResourceActionsUtil.getModelResource(locale, CLASS_NAME);
 	}
 
+	@Override
 	public WorkflowDefinitionLink getWorkflowDefinitionLink(
 			long companyId, long groupId, long classPK)
 		throws PortalException, SystemException {
@@ -59,6 +60,7 @@ public class DDLRecordWorkflowHandler extends BaseWorkflowHandler {
 			record.getRecordSetId());
 	}
 
+	@Override
 	public boolean isVisible() {
 		return false;
 	}
@@ -80,6 +82,7 @@ public class DDLRecordWorkflowHandler extends BaseWorkflowHandler {
 			userId, recordId, status, serviceContext);
 	}
 
+	@Override
 	protected String getIconPath(ThemeDisplay themeDisplay) {
 		return themeDisplay.getPathThemeImages() + "/common/history.png";
 	}

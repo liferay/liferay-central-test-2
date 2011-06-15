@@ -75,6 +75,7 @@ public class UserTrackerLocalServiceImpl
 		}
 	}
 
+	@Override
 	public void deleteUserTracker(long userTrackerId)
 		throws PortalException, SystemException {
 
@@ -84,6 +85,7 @@ public class UserTrackerLocalServiceImpl
 		deleteUserTracker(userTracker);
 	}
 
+	@Override
 	public void deleteUserTracker(UserTracker userTracker)
 		throws SystemException {
 

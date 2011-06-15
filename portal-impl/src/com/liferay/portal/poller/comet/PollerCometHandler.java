@@ -32,6 +32,7 @@ import com.liferay.portal.poller.PollerRequestHandlerUtil;
  */
 public class PollerCometHandler extends BaseCometHandler {
 
+	@Override
 	public CometHandler clone() {
 		return new PollerCometHandler();
 	}
@@ -39,6 +40,7 @@ public class PollerCometHandler extends BaseCometHandler {
 	public void receiveData(String data) {
 	}
 
+	@Override
 	protected void doDestroy() throws Exception {
 		if (_channelListener != null) {
 			try {
@@ -50,6 +52,7 @@ public class PollerCometHandler extends BaseCometHandler {
 		}
 	}
 
+	@Override
 	protected void doInit(CometSession cometSession) throws Exception {
 		CometRequest cometRequest = cometSession.getCometRequest();
 

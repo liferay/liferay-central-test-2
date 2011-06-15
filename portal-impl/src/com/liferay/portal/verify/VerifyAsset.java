@@ -27,6 +27,7 @@ import java.sql.ResultSet;
  */
 public class VerifyAsset extends VerifyProcess {
 
+	@Override
 	protected void doVerify() throws Exception {
 		rebuildTree();
 

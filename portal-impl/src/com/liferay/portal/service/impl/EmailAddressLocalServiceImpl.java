@@ -69,12 +69,14 @@ public class EmailAddressLocalServiceImpl
 		return emailAddress;
 	}
 
+	@Override
 	public void deleteEmailAddress(EmailAddress emailAddress)
 		throws SystemException {
 
 		emailAddressPersistence.remove(emailAddress);
 	}
 
+	@Override
 	public void deleteEmailAddress(long emailAddressId)
 		throws PortalException, SystemException {
 
@@ -98,6 +100,7 @@ public class EmailAddressLocalServiceImpl
 		}
 	}
 
+	@Override
 	public EmailAddress getEmailAddress(long emailAddressId)
 		throws PortalException, SystemException {
 

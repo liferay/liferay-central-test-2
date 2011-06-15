@@ -26,6 +26,7 @@ import java.util.List;
  */
 public class VerifyWiki extends VerifyProcess {
 
+	@Override
 	protected void doVerify() throws Exception {
 		List<WikiPage> pages = WikiPageLocalServiceUtil.getNoAssetPages();
 

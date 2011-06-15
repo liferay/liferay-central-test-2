@@ -113,6 +113,7 @@ public class ExpandoColumnImpl
 		return displayName;
 	}
 
+	@Override
 	public String getTypeSettings() {
 		if (_typeSettingsProperties == null) {
 			return super.getTypeSettings();
@@ -137,6 +138,7 @@ public class ExpandoColumnImpl
 		return _typeSettingsProperties;
 	}
 
+	@Override
 	public void setTypeSettings(String typeSettings) {
 		_typeSettingsProperties = null;
 

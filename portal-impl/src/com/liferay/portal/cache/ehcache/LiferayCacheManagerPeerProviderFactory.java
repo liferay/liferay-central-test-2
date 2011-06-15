@@ -57,6 +57,7 @@ public class LiferayCacheManagerPeerProviderFactory
 		}
 	}
 
+	@Override
 	public CacheManagerPeerProvider createCachePeerProvider(
 		CacheManager cacheManager, Properties properties) {
 

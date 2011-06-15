@@ -30,6 +30,7 @@ public class IGImageCustomAttributesDisplay
 		return CLASS_NAME;
 	}
 
+	@Override
 	public String getIconPath(ThemeDisplay themeDisplay) {
 		return themeDisplay.getPathThemeImages() + "/file_system/small/bmp.png";
 	}

@@ -23,10 +23,12 @@ import com.liferay.portal.kernel.portlet.PortletClassLoaderUtil;
  */
 public class PluginMessagingConfigurator extends AbstractMessagingConfigurator {
 
+	@Override
 	protected MessageBus getMessageBus() {
 		return MessageBusUtil.getMessageBus();
 	}
 
+	@Override
 	protected ClassLoader getOperatingClassloader() {
 		ClassLoader classLoader = PortletClassLoaderUtil.getClassLoader();
 

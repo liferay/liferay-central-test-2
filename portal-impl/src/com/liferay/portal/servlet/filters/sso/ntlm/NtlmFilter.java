@@ -63,6 +63,7 @@ import jcifs.util.Base64;
  */
 public class NtlmFilter extends BasePortalFilter {
 
+	@Override
 	public void init(FilterConfig filterConfig) {
 		try {
 			NtlmHttpFilter ntlmFilter = new NtlmHttpFilter();
@@ -88,6 +89,7 @@ public class NtlmFilter extends BasePortalFilter {
 		}
 	}
 
+	@Override
 	public boolean isFilterEnabled(
 		HttpServletRequest request, HttpServletResponse response) {
 
@@ -107,6 +109,7 @@ public class NtlmFilter extends BasePortalFilter {
 		return false;
 	}
 
+	@Override
 	protected Log getLog() {
 		return _log;
 	}
@@ -159,6 +162,7 @@ public class NtlmFilter extends BasePortalFilter {
 		return ntlmManager;
 	}
 
+	@Override
 	protected void processFilter(
 			HttpServletRequest request, HttpServletResponse response,
 			FilterChain filterChain)

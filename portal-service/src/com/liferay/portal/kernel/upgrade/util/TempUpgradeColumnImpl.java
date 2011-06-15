@@ -28,6 +28,7 @@ public class TempUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 		super(name, oldColumnType);
 	}
 
+	@Override
 	public Integer getNewColumnType(Integer defaultType) {
 		return getOldColumnType(defaultType);
 	}

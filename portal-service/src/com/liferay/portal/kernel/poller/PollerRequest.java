@@ -37,6 +37,7 @@ public class PollerRequest {
 		_receiveRequest = receiveRequest;
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
 			return true;
@@ -91,6 +92,7 @@ public class PollerRequest {
 		return _pollerHeader.getUserId();
 	}
 
+	@Override
 	public int hashCode() {
 		if (_portletId != null) {
 			return _portletId.hashCode();
@@ -112,6 +114,7 @@ public class PollerRequest {
 		return _pollerHeader.isStartPolling();
 	}
 
+	@Override
 	public String toString() {
 		StringBundler sb = new StringBundler(11);
 

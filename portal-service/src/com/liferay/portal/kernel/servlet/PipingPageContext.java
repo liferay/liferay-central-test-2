@@ -30,6 +30,7 @@ public class PipingPageContext extends PageContextWrapper {
 		_jspWriter = new PipingJspWriter(writer);
 	}
 
+	@Override
 	public JspWriter getOut() {
 		return _jspWriter;
 	}

@@ -23,6 +23,7 @@ import javax.servlet.jsp.PageContext;
  */
 public class ScoreSearchEntry extends SearchEntry {
 
+	@Override
 	public Object clone() {
 		ScoreSearchEntry scoreSearchEntry = new ScoreSearchEntry();
 
@@ -35,6 +36,7 @@ public class ScoreSearchEntry extends SearchEntry {
 		return _score;
 	}
 
+	@Override
 	public void print(PageContext pageContext) throws Exception {
 		pageContext.include("/html/taglib/ui/search_iterator/score.jsp");
 	}

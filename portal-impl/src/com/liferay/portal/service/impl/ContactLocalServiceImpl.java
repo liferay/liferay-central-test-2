@@ -24,12 +24,14 @@ import com.liferay.portal.service.base.ContactLocalServiceBaseImpl;
  */
 public class ContactLocalServiceImpl extends ContactLocalServiceBaseImpl {
 
+	@Override
 	public Contact getContact(long contactId)
 		throws PortalException, SystemException {
 
 		return contactPersistence.findByPrimaryKey(contactId);
 	}
 
+	@Override
 	public void deleteContact(long contactId) throws SystemException {
 		Contact contact = contactPersistence.fetchByPrimaryKey(contactId);
 
@@ -38,6 +40,7 @@ public class ContactLocalServiceImpl extends ContactLocalServiceBaseImpl {
 		}
 	}
 
+	@Override
 	public void deleteContact(Contact contact) throws SystemException {
 
 		// Addresses

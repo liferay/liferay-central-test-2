@@ -30,6 +30,7 @@ public class ShoppingItemFieldImpl
 		return _valuesArray;
 	}
 
+	@Override
 	public void setValues(String values) {
 		_valuesArray = StringUtil.split(values);
 

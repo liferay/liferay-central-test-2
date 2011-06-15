@@ -45,6 +45,7 @@ public class SerialDestination extends BaseAsyncDestination {
 		super(name, _WORKERS_CORE_SIZE, _WORKERS_MAX_SIZE);
 	}
 
+	@Override
 	protected void dispatch(
 		final Set<MessageListener> messageListeners, final Message message) {
 

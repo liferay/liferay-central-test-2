@@ -26,6 +26,7 @@ import java.util.List;
  */
 public class VerifyBookmarks extends VerifyProcess {
 
+	@Override
 	protected void doVerify() throws Exception {
 		List<BookmarksEntry> entries =
 			BookmarksEntryLocalServiceUtil.getNoAssetEntries();

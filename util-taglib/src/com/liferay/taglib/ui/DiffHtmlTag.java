@@ -27,14 +27,17 @@ public class DiffHtmlTag extends IncludeTag {
 		_diffHtmlResults = diffHtmlResults;
 	}
 
+	@Override
 	protected void cleanUp() {
 		_diffHtmlResults = null;
 	}
 
+	@Override
 	protected String getPage() {
 		return _PAGE;
 	}
 
+	@Override
 	protected void setAttributes(HttpServletRequest request) {
 		request.setAttribute(
 			"liferay-ui:diff-html:diffHtmlResults", _diffHtmlResults);

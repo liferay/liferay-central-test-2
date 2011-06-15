@@ -33,6 +33,7 @@ public class SimpleFacet extends BaseFacet {
 		super(searchContext);
 	}
 
+	@Override
 	protected BooleanClause doGetFacetClause() {
 		SearchContext searchContext = getSearchContext();
 

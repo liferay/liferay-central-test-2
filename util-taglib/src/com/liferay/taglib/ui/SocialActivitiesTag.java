@@ -55,6 +55,7 @@ public class SocialActivitiesTag extends IncludeTag {
 		_feedTitle = feedTitle;
 	}
 
+	@Override
 	protected void cleanUp() {
 		_activities = null;
 		_className = StringPool.BLANK;
@@ -65,10 +66,12 @@ public class SocialActivitiesTag extends IncludeTag {
 		_feedTitle = null;
 	}
 
+	@Override
 	protected String getPage() {
 		return _PAGE;
 	}
 
+	@Override
 	protected void setAttributes(HttpServletRequest request) {
 		request.setAttribute(
 			"liferay-ui:social-activities:activities", _activities);

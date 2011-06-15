@@ -56,6 +56,7 @@ public class XhtmlTranslator extends XhtmlTranslationVisitor {
 		return super.translate(wikiPageNode);
 	}
 
+	@Override
 	public void visit(HeadingNode headingNode) {
 		append("<h");
 		append(headingNode.getLevel());
@@ -83,6 +84,7 @@ public class XhtmlTranslator extends XhtmlTranslationVisitor {
 		append(">");
 	}
 
+	@Override
 	public void visit(ImageNode imageNode) {
 		append("<img");
 
@@ -109,6 +111,7 @@ public class XhtmlTranslator extends XhtmlTranslationVisitor {
 		append("\" />");
 	}
 
+	@Override
 	public void visit(LinkNode linkNode) {
 		append("<a href=\"");
 
@@ -128,6 +131,7 @@ public class XhtmlTranslator extends XhtmlTranslationVisitor {
 		append("</a>");
 	}
 
+	@Override
 	public void visit(TableOfContentsNode tableOfContentsNode) {
 		TableOfContentsVisitor tableOfContentsVisitor =
 			new TableOfContentsVisitor();

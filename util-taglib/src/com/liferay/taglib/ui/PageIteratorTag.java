@@ -89,6 +89,7 @@ public class PageIteratorTag extends IncludeTag {
 		}
 	}
 
+	@Override
 	protected void cleanUp() {
 		_cur = 0;
 		_curParam = null;
@@ -106,6 +107,7 @@ public class PageIteratorTag extends IncludeTag {
 		_urlAnchor = null;
 	}
 
+	@Override
 	protected String getEndPage() {
 		if (_pages > 1) {
 			return _END_PAGE;
@@ -115,10 +117,12 @@ public class PageIteratorTag extends IncludeTag {
 		}
 	}
 
+	@Override
 	protected String getStartPage() {
 		return _START_PAGE;
 	}
 
+	@Override
 	protected void setAttributes(HttpServletRequest request) {
 		_pages = (int)Math.ceil((double)_total / _delta);
 

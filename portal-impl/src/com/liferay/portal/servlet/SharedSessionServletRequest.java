@@ -35,6 +35,7 @@ public class SharedSessionServletRequest extends HttpServletRequestWrapper {
 		_shared = shared;
 	}
 
+	@Override
 	public HttpSession getSession() {
 		if (_shared) {
 			return _portalSession;
@@ -44,6 +45,7 @@ public class SharedSessionServletRequest extends HttpServletRequestWrapper {
 		}
 	}
 
+	@Override
 	public HttpSession getSession(boolean create) {
 		if (_shared) {
 			return _portalSession;

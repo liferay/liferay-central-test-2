@@ -79,6 +79,7 @@ public class TeamLocalServiceImpl extends TeamLocalServiceBaseImpl {
 		return team;
 	}
 
+	@Override
 	public void deleteTeam(long teamId)
 		throws PortalException, SystemException {
 
@@ -87,6 +88,7 @@ public class TeamLocalServiceImpl extends TeamLocalServiceBaseImpl {
 		deleteTeam(team);
 	}
 
+	@Override
 	public void deleteTeam(Team team)
 		throws PortalException, SystemException {
 
@@ -121,6 +123,7 @@ public class TeamLocalServiceImpl extends TeamLocalServiceBaseImpl {
 		return teamPersistence.findByGroupId(groupId);
 	}
 
+	@Override
 	public Team getTeam(long teamId)
 		throws PortalException, SystemException {
 

@@ -64,6 +64,7 @@ public class UpgradeRSS extends BaseUpgradePortletPreferences {
 		return new String[] {String.valueOf(groupId), articleId};
 	}
 
+	@Override
 	protected String[] getPortletIds() {
 		return new String[] {"39_INSTANCE_%"};
 	}
@@ -98,6 +99,7 @@ public class UpgradeRSS extends BaseUpgradePortletPreferences {
 		portletPreferences.reset("header-article-resource-values");
 	}
 
+	@Override
 	protected String upgradePreferences(
 			long companyId, long ownerId, int ownerType, long plid,
 			String portletId, String xml)

@@ -55,6 +55,7 @@ public class LayoutIconTag
 		request.setAttribute("liferay-theme:layout-icon:layout", layout);
 	}
 
+	@Override
 	public int doStartTag() {
 		HttpServletRequest request =
 			(HttpServletRequest)pageContext.getRequest();
@@ -68,6 +69,7 @@ public class LayoutIconTag
 		_layout = layout;
 	}
 
+	@Override
 	protected String getPage() {
 		return _PAGE;
 	}

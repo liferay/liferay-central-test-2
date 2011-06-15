@@ -28,6 +28,7 @@ import javax.servlet.jsp.JspWriter;
  */
 public class ToggleAreaTag extends IncludeTag {
 
+	@Override
 	public int doStartTag() throws JspException {
 		try {
 			HttpServletRequest request =
@@ -57,6 +58,7 @@ public class ToggleAreaTag extends IncludeTag {
 		}
 	}
 
+	@Override
 	public int doEndTag() throws JspException {
 		try {
 			if (!FileAvailabilityUtil.isAvailable(
@@ -129,6 +131,7 @@ public class ToggleAreaTag extends IncludeTag {
 		_align = align;
 	}
 
+	@Override
 	protected String getEndPage() {
 		if (Validator.isNull(_endPage)) {
 			return _END_PAGE;
@@ -138,6 +141,7 @@ public class ToggleAreaTag extends IncludeTag {
 		}
 	}
 
+	@Override
 	protected String getStartPage() {
 		if (Validator.isNull(_startPage)) {
 			return _START_PAGE;

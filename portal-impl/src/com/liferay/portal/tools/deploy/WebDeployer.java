@@ -52,6 +52,7 @@ public class WebDeployer extends BaseDeployer {
 		super(wars, jars);
 	}
 
+	@Override
 	public String getExtraContent(
 			double webXmlVersion, File srcFile, String displayName)
 		throws Exception {

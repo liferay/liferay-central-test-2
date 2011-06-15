@@ -30,6 +30,7 @@ public class AssetVocabularyImpl
 	public AssetVocabularyImpl() {
 	}
 
+	@Override
 	public String getSettings() {
 		if (_settingsProperties == null) {
 			return super.getSettings();
@@ -49,6 +50,7 @@ public class AssetVocabularyImpl
 		return _settingsProperties;
 	}
 
+	@Override
 	public String getTitle(String languageId) {
 		String value = super.getTitle(languageId);
 
@@ -59,6 +61,7 @@ public class AssetVocabularyImpl
 		return value;
 	}
 
+	@Override
 	public String getTitle(String languageId, boolean useDefault) {
 		String value = super.getTitle(languageId, useDefault);
 
@@ -80,6 +83,7 @@ public class AssetVocabularyImpl
 		return ArrayUtil.contains(requiredClassNameIds, classNameId);
 	}
 
+	@Override
 	public void setSettings(String settings) {
 		_settingsProperties = null;
 

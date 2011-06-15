@@ -53,6 +53,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class FriendlyURLServlet extends HttpServlet {
 
+	@Override
 	public void init(ServletConfig servletConfig) throws ServletException {
 		super.init(servletConfig);
 
@@ -62,6 +63,7 @@ public class FriendlyURLServlet extends HttpServlet {
 			servletConfig.getInitParameter("user"));
 	}
 
+	@Override
 	public void service(
 			HttpServletRequest request, HttpServletResponse response)
 		throws IOException, ServletException {

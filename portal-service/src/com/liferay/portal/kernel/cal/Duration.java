@@ -353,6 +353,7 @@ public class Duration implements Cloneable, Serializable {
 	 *
 	 * @return Object
 	 */
+	@Override
 	public Object clone() {
 		try {
 			Duration other = (Duration)super.clone();
@@ -375,6 +376,7 @@ public class Duration implements Cloneable, Serializable {
 	 *
 	 * @return String
 	 */
+	@Override
 	public String toString() {
 		StringBundler sb = new StringBundler(12);
 

@@ -29,11 +29,13 @@ public class RepositoryTestSetup extends TestSetup {
 		super(test);
 	}
 
+	@Override
 	public void setUp() {
 		ServiceTestUtil.initServices();
 		ServiceTestUtil.initPermissions();
 	}
 
+	@Override
 	public void tearDown() {
 		ServiceTestUtil.destroyServices();
 	}

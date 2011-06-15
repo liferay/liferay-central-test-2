@@ -45,6 +45,7 @@ public class LiveUsersMessageListener extends BaseMessageListener {
 		LiveUsers.signOut(companyId, userId, sessionId);
 	}
 
+	@Override
 	protected void doReceive(Message message) throws Exception {
 		String payload = (String)message.getPayload();
 

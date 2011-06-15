@@ -32,11 +32,13 @@ public class WriteTag extends IncludeTag {
 		_property = property;
 	}
 
+	@Override
 	protected void cleanUp() {
 		_bean = null;
 		_property = null;
 	}
 
+	@Override
 	protected String getPage() {
 		if ((_bean == null) || Validator.isNull(_property)) {
 			return null;
@@ -46,6 +48,7 @@ public class WriteTag extends IncludeTag {
 		}
 	}
 
+	@Override
 	protected void setAttributes(HttpServletRequest request) {
 		request.setAttribute("liferay-ui:write:bean", _bean);
 		request.setAttribute("liferay-ui:write:property", _property);

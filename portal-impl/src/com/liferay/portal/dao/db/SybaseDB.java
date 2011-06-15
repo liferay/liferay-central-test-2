@@ -35,6 +35,7 @@ public class SybaseDB extends BaseDB {
 		return _instance;
 	}
 
+	@Override
 	public String buildSQL(String template) throws IOException {
 		template = convertTimestamp(template);
 		template = replaceTemplate(template, getTemplate());
@@ -50,6 +51,7 @@ public class SybaseDB extends BaseDB {
 		return template;
 	}
 
+	@Override
 	public boolean isSupportsInlineDistinct() {
 		return _SUPPORTS_INLINE_DISTINCT;
 	}
@@ -58,6 +60,7 @@ public class SybaseDB extends BaseDB {
 		super(TYPE_SYBASE);
 	}
 
+	@Override
 	protected String buildCreateFileContent(
 			String sqlDir, String databaseName, int population)
 		throws IOException {
@@ -93,14 +96,17 @@ public class SybaseDB extends BaseDB {
 		return sb.toString();
 	}
 
+	@Override
 	protected String getServerName() {
 		return "sybase";
 	}
 
+	@Override
 	protected String[] getTemplate() {
 		return _SYBASE;
 	}
 
+	@Override
 	protected String reword(String data) throws IOException {
 		UnsyncBufferedReader unsyncBufferedReader = new UnsyncBufferedReader(
 			new UnsyncStringReader(data));

@@ -23,6 +23,7 @@ import javax.servlet.jsp.PageContext;
  */
 public class ButtonSearchEntry extends TextSearchEntry {
 
+	@Override
 	public Object clone() {
 		ButtonSearchEntry buttonSearchEntry = new ButtonSearchEntry();
 
@@ -31,6 +32,7 @@ public class ButtonSearchEntry extends TextSearchEntry {
 		return buttonSearchEntry;
 	}
 
+	@Override
 	public void print(PageContext pageContext) throws Exception {
 		StringBuilder sb = new StringBuilder();
 

@@ -47,18 +47,22 @@ public class MapBackedSet<E> extends AbstractSet<E> implements Serializable {
 		}
 	}
 
+	@Override
 	public void clear() {
 		_backedMap.clear();
 	}
 
+	@Override
 	public boolean contains(Object obj) {
 		return _backedMap.containsKey(obj);
 	}
 
+	@Override
 	public boolean containsAll(Collection<?> collection) {
 		return _backedMapKeySet.containsAll(collection);
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		if ((obj == this) || _backedMapKeySet.equals(obj)) {
 			return true;
@@ -68,18 +72,22 @@ public class MapBackedSet<E> extends AbstractSet<E> implements Serializable {
 		}
 	}
 
+	@Override
 	public int hashCode() {
 		return _backedMapKeySet.hashCode();
 	}
 
+	@Override
 	public boolean isEmpty() {
 		return _backedMap.isEmpty();
 	}
 
+	@Override
 	public Iterator<E> iterator() {
 		return _backedMapKeySet.iterator();
 	}
 
+	@Override
 	public boolean remove(Object obj) {
 		if (_backedMap.remove(obj) != null) {
 			return true;
@@ -89,18 +97,22 @@ public class MapBackedSet<E> extends AbstractSet<E> implements Serializable {
 		}
 	}
 
+	@Override
 	public boolean removeAll(Collection<?> collection) {
 		return _backedMapKeySet.removeAll(collection);
 	}
 
+	@Override
 	public boolean retainAll(Collection<?> collection) {
 		return _backedMapKeySet.retainAll(collection);
 	}
 
+	@Override
 	public int size() {
 		return _backedMap.size();
 	}
 
+	@Override
 	public Object[] toArray() {
 		return _backedMapKeySet.toArray();
 	}
@@ -109,6 +121,7 @@ public class MapBackedSet<E> extends AbstractSet<E> implements Serializable {
 		return _backedMapKeySet.toArray(array);
 	}
 
+	@Override
 	public String toString() {
 		return _backedMapKeySet.toString();
 	}

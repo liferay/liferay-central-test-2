@@ -41,6 +41,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class GoogleGadgetServlet extends HttpServlet {
 
+	@Override
 	public void service(
 			HttpServletRequest request, HttpServletResponse response)
 		throws IOException, ServletException {

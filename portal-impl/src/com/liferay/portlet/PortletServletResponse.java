@@ -55,16 +55,19 @@ public class PortletServletResponse extends HttpServletResponseWrapper {
 		_lifecycle = portletResponseImpl.getLifecycle();
 	}
 
+	@Override
 	public void addCookie(Cookie cookie) {
 		if (!_include) {
 			_portletResponse.addProperty(cookie);
 		}
 	}
 
+	@Override
 	public void addDateHeader(String name, long date) {
 		addHeader(name, String.valueOf(date));
 	}
 
+	@Override
 	public void addHeader(String name, String value) {
 		if (!_include) {
 			if (_lifecycle.equals(PortletRequest.RENDER_PHASE) ||
@@ -77,30 +80,37 @@ public class PortletServletResponse extends HttpServletResponseWrapper {
 		}
 	}
 
+	@Override
 	public void addIntHeader(String name, int value) {
 		addHeader(name, String.valueOf(value));
 	}
 
+	@Override
 	public boolean containsHeader(String name) {
 		return false;
 	}
 
+	@Override
 	public String encodeRedirectUrl(String url) {
 		return null;
 	}
 
+	@Override
 	public String encodeRedirectURL(String url) {
 		return null;
 	}
 
+	@Override
 	public String encodeUrl(String url) {
 		return _portletResponse.encodeURL(url);
 	}
 
+	@Override
 	public String encodeURL(String url) {
 		return _portletResponse.encodeURL(url);
 	}
 
+	@Override
 	public void flushBuffer() throws IOException {
 		if (_lifecycle.equals(PortletRequest.RENDER_PHASE) ||
 			_lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
@@ -111,6 +121,7 @@ public class PortletServletResponse extends HttpServletResponseWrapper {
 		}
 	}
 
+	@Override
 	public int getBufferSize() {
 		if (_lifecycle.equals(PortletRequest.RENDER_PHASE) ||
 			_lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
@@ -124,6 +135,7 @@ public class PortletServletResponse extends HttpServletResponseWrapper {
 		}
 	}
 
+	@Override
 	public String getCharacterEncoding() {
 		if (_lifecycle.equals(PortletRequest.RENDER_PHASE) ||
 			_lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
@@ -137,6 +149,7 @@ public class PortletServletResponse extends HttpServletResponseWrapper {
 		}
 	}
 
+	@Override
 	public String getContentType() {
 		if (_lifecycle.equals(PortletRequest.RENDER_PHASE) ||
 			_lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
@@ -150,6 +163,7 @@ public class PortletServletResponse extends HttpServletResponseWrapper {
 		}
 	}
 
+	@Override
 	public Locale getLocale() {
 		if (_lifecycle.equals(PortletRequest.RENDER_PHASE) ||
 			_lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
@@ -163,6 +177,7 @@ public class PortletServletResponse extends HttpServletResponseWrapper {
 		}
 	}
 
+	@Override
 	public ServletOutputStream getOutputStream() throws IOException {
 		if (_lifecycle.equals(PortletRequest.RENDER_PHASE) ||
 			_lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
@@ -182,6 +197,7 @@ public class PortletServletResponse extends HttpServletResponseWrapper {
 		}
 	}
 
+	@Override
 	public PrintWriter getWriter() throws IOException {
 		if (_lifecycle.equals(PortletRequest.RENDER_PHASE) ||
 			_lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
@@ -195,6 +211,7 @@ public class PortletServletResponse extends HttpServletResponseWrapper {
 		}
 	}
 
+	@Override
 	public boolean isCommitted() {
 		if (_lifecycle.equals(PortletRequest.RENDER_PHASE) ||
 			_lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
@@ -211,6 +228,7 @@ public class PortletServletResponse extends HttpServletResponseWrapper {
 		}
 	}
 
+	@Override
 	public void reset() {
 		if (_lifecycle.equals(PortletRequest.RENDER_PHASE) ||
 			_lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
@@ -221,6 +239,7 @@ public class PortletServletResponse extends HttpServletResponseWrapper {
 		}
 	}
 
+	@Override
 	public void resetBuffer() {
 		if (_lifecycle.equals(PortletRequest.RENDER_PHASE) ||
 			_lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
@@ -231,12 +250,15 @@ public class PortletServletResponse extends HttpServletResponseWrapper {
 		}
 	}
 
+	@Override
 	public void sendError(int status) {
 	}
 
+	@Override
 	public void sendError(int status, String msg) {
 	}
 
+	@Override
 	public void sendRedirect(String location) throws IOException {
 		if (!_include) {
 			if (_lifecycle.equals(PortletRequest.ACTION_PHASE)) {
@@ -247,6 +269,7 @@ public class PortletServletResponse extends HttpServletResponseWrapper {
 		}
 	}
 
+	@Override
 	public void setBufferSize(int bufferSize) {
 		if (_lifecycle.equals(PortletRequest.RENDER_PHASE) ||
 			_lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
@@ -257,6 +280,7 @@ public class PortletServletResponse extends HttpServletResponseWrapper {
 		}
 	}
 
+	@Override
 	public void setCharacterEncoding(String encoding) {
 		if (!_include) {
 			if (_lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
@@ -267,6 +291,7 @@ public class PortletServletResponse extends HttpServletResponseWrapper {
 		}
 	}
 
+	@Override
 	public void setContentLength(int length) {
 		if (!_include) {
 			if (_lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
@@ -277,6 +302,7 @@ public class PortletServletResponse extends HttpServletResponseWrapper {
 		}
 	}
 
+	@Override
 	public void setContentType(String contentType) {
 		if (!_include) {
 			if (_lifecycle.equals(PortletRequest.RENDER_PHASE) ||
@@ -289,10 +315,12 @@ public class PortletServletResponse extends HttpServletResponseWrapper {
 		}
 	}
 
+	@Override
 	public void setDateHeader(String name, long date) {
 		setHeader(name, String.valueOf(date));
 	}
 
+	@Override
 	public void setHeader(String name, String value) {
 		if (!_include) {
 			if (_lifecycle.equals(PortletRequest.RENDER_PHASE) ||
@@ -305,10 +333,12 @@ public class PortletServletResponse extends HttpServletResponseWrapper {
 		}
 	}
 
+	@Override
 	public void setIntHeader(String name, int value) {
 		setHeader(name, String.valueOf(value));
 	}
 
+	@Override
 	public void setLocale(Locale locale) {
 		if (!_include) {
 			if (_lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
@@ -319,6 +349,7 @@ public class PortletServletResponse extends HttpServletResponseWrapper {
 		}
 	}
 
+	@Override
 	public void setStatus(int status) {
 		if (!_include) {
 			if (_lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
@@ -330,6 +361,7 @@ public class PortletServletResponse extends HttpServletResponseWrapper {
 		}
 	}
 
+	@Override
 	public void setStatus(int status, String msg) {
 		setStatus(status);
 	}

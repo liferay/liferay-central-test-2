@@ -35,6 +35,7 @@ public class FragmentFilter extends BasePortalFilter {
 	public static final String SKIP_FILTER =
 		FragmentFilter.class.getName() + "SKIP_FILTER";
 
+	@Override
 	public boolean isFilterEnabled(
 		HttpServletRequest request, HttpServletResponse response) {
 
@@ -83,6 +84,7 @@ public class FragmentFilter extends BasePortalFilter {
 		}
 	}
 
+	@Override
 	protected void processFilter(
 			HttpServletRequest request, HttpServletResponse response,
 			FilterChain filterChain)

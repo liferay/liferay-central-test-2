@@ -250,6 +250,7 @@ public class WikiPortletDataHandlerImpl extends BasePortletDataHandler {
 		portletDataContext.importClassedModel(page, importedPage, _NAMESPACE);
 	}
 
+	@Override
 	public PortletDataHandlerControl[] getExportControls() {
 		return new PortletDataHandlerControl[] {
 			_nodesAndPages, _attachments, _categories, _comments, _ratings,
@@ -257,6 +258,7 @@ public class WikiPortletDataHandlerImpl extends BasePortletDataHandler {
 		};
 	}
 
+	@Override
 	public PortletDataHandlerControl[] getImportControls() {
 		return new PortletDataHandlerControl[] {
 			_nodesAndPages, _attachments, _categories, _comments, _ratings,
@@ -264,6 +266,7 @@ public class WikiPortletDataHandlerImpl extends BasePortletDataHandler {
 		};
 	}
 
+	@Override
 	public PortletPreferences importData(
 			PortletDataContext portletDataContext, String portletId,
 			PortletPreferences portletPreferences, String data)
@@ -431,6 +434,7 @@ public class WikiPortletDataHandlerImpl extends BasePortletDataHandler {
 		return sb.toString();
 	}
 
+	@Override
 	protected PortletPreferences doDeleteData(
 			PortletDataContext portletDataContext, String portletId,
 			PortletPreferences portletPreferences)
@@ -446,6 +450,7 @@ public class WikiPortletDataHandlerImpl extends BasePortletDataHandler {
 		return null;
 	}
 
+	@Override
 	protected String doExportData(
 			PortletDataContext portletDataContext, String portletId,
 			PortletPreferences portletPreferences)
@@ -474,6 +479,7 @@ public class WikiPortletDataHandlerImpl extends BasePortletDataHandler {
 		return document.formattedString();
 	}
 
+	@Override
 	protected PortletPreferences doImportData(
 			PortletDataContext portletDataContext, String portletId,
 			PortletPreferences portletPreferences, String data)

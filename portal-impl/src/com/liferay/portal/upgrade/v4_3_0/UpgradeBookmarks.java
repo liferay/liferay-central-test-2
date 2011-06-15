@@ -34,6 +34,7 @@ import java.sql.Types;
  */
 public class UpgradeBookmarks extends UpgradeProcess {
 
+	@Override
 	protected void doUpgrade() throws Exception {
 
 		// BookmarksFolder

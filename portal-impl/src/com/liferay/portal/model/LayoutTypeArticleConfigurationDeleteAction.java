@@ -32,6 +32,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class LayoutTypeArticleConfigurationDeleteAction extends Action {
 
+	@Override
 	public void run(HttpServletRequest request, HttpServletResponse response)
 		throws ActionException {
 

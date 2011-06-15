@@ -31,6 +31,7 @@ public class MBDiscussionAssetRendererFactory
 
 	public static final String TYPE = "discussion";
 
+	@Override
 	public AssetRenderer getAssetRenderer(long classPK, int type)
 		throws PortalException, SystemException {
 
@@ -39,10 +40,12 @@ public class MBDiscussionAssetRendererFactory
 		return new MBDiscussionAssetRenderer(message);
 	}
 
+	@Override
 	public String getClassName() {
 		return CLASS_NAME;
 	}
 
+	@Override
 	public String getType() {
 		return TYPE;
 	}

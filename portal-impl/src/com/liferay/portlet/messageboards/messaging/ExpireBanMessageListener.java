@@ -24,6 +24,7 @@ import com.liferay.portlet.messageboards.service.MBBanLocalServiceUtil;
  */
 public class ExpireBanMessageListener extends BaseMessageListener {
 
+	@Override
 	protected void doReceive(Message message) throws Exception {
 		MBBanLocalServiceUtil.expireBans();
 	}

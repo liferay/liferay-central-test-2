@@ -27,6 +27,7 @@ import java.net.URL;
  */
 public abstract class URLTemplateLoader extends FreeMarkerTemplateLoader {
 
+	@Override
 	public void closeTemplateSource(Object templateSource) {
 		if (templateSource instanceof URLTemplateSource) {
 			URLTemplateSource urlTemplateSource =
@@ -40,6 +41,7 @@ public abstract class URLTemplateLoader extends FreeMarkerTemplateLoader {
 		}
 	}
 
+	@Override
 	public Object findTemplateSource(String name) throws IOException {
 		URL url = getURL(name);
 
@@ -50,6 +52,7 @@ public abstract class URLTemplateLoader extends FreeMarkerTemplateLoader {
 		return null;
 	}
 
+	@Override
 	public long getLastModified(Object templateSource) {
 		if (templateSource instanceof URLTemplateSource) {
 			URLTemplateSource urlTemplateSource =
@@ -61,6 +64,7 @@ public abstract class URLTemplateLoader extends FreeMarkerTemplateLoader {
 		return super.getLastModified(templateSource);
 	}
 
+	@Override
 	public Reader getReader(Object templateSource, String encoding)
 		throws IOException {
 

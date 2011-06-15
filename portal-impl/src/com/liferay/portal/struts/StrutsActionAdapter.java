@@ -37,6 +37,7 @@ public class StrutsActionAdapter extends BaseStrutsAction {
 		_actionForm = actionForm;
 	}
 
+	@Override
 	public String execute(
 			HttpServletRequest request, HttpServletResponse response)
 		throws Exception {

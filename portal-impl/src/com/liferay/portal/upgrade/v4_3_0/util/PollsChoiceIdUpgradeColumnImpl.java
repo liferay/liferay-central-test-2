@@ -33,6 +33,7 @@ public class PollsChoiceIdUpgradeColumnImpl extends PKUpgradeColumnImpl {
 		_pollsChoiceIdMapper = ValueMapperFactoryUtil.getValueMapper();
 	}
 
+	@Override
 	public Object getNewValue(Object oldValue) throws Exception {
 		Object newValue = super.getNewValue(oldValue);
 
@@ -46,6 +47,7 @@ public class PollsChoiceIdUpgradeColumnImpl extends PKUpgradeColumnImpl {
 		return newValue;
 	}
 
+	@Override
 	public ValueMapper getValueMapper() {
 		return _pollsChoiceIdMapper;
 	}

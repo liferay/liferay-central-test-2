@@ -27,6 +27,7 @@ import com.liferay.portlet.BaseControlPanelEntry;
  */
 public class GroupPagesControlPanelEntry extends BaseControlPanelEntry {
 
+	@Override
 	public boolean isVisible(
 			Portlet portlet, String category, ThemeDisplay themeDisplay)
 		throws Exception {

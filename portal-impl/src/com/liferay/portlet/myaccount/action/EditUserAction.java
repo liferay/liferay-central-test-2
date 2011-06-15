@@ -40,6 +40,7 @@ import org.apache.struts.action.ActionMapping;
 public class EditUserAction
 	extends com.liferay.portlet.usersadmin.action.EditUserAction {
 
+	@Override
 	public void processAction(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
 			ActionRequest actionRequest, ActionResponse actionResponse)
@@ -53,6 +54,7 @@ public class EditUserAction
 			mapping, form, portletConfig, actionRequest, actionResponse);
 	}
 
+	@Override
 	public ActionForward render(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
 			RenderRequest renderRequest, RenderResponse renderResponse)
@@ -72,6 +74,7 @@ public class EditUserAction
 			mapping, form, portletConfig, renderRequest, renderResponse);
 	}
 
+	@Override
 	protected Object[] updateUser(
 			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {

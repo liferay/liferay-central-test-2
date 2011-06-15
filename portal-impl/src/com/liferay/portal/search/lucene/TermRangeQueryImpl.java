@@ -47,6 +47,7 @@ public class TermRangeQueryImpl extends BaseQueryImpl
 		return _termRangeQuery.getUpperTerm();
 	}
 
+	@Override
 	public Object getWrappedQuery() {
 		return getTermRangeQuery();
 	}
@@ -59,6 +60,7 @@ public class TermRangeQueryImpl extends BaseQueryImpl
 		return _termRangeQuery.includesUpper();
 	}
 
+	@Override
 	public String toString() {
 		return _termRangeQuery.toString();
 	}

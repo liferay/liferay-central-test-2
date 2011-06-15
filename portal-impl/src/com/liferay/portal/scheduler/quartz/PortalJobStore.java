@@ -33,6 +33,7 @@ import org.quartz.impl.jdbcjobstore.StdJDBCDelegate;
  */
 public class PortalJobStore extends JobStoreTX {
 
+	@Override
 	protected DriverDelegate getDelegate() throws NoSuchDelegateException {
 		if (_driverDelegate != null) {
 			return _driverDelegate;

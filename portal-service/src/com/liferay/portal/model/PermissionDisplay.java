@@ -87,6 +87,7 @@ public class PermissionDisplay
 		return value;
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		if (obj == null) {
 			return false;
@@ -109,6 +110,7 @@ public class PermissionDisplay
 		}
 	}
 
+	@Override
 	public int hashCode() {
 		return _portletName.concat(_modelName).concat(_actionId).hashCode();
 	}

@@ -36,6 +36,7 @@ import java.util.List;
  */
 public class MBMessageServiceTest extends BaseServiceTestCase {
 
+	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 
@@ -81,6 +82,7 @@ public class MBMessageServiceTest extends BaseServiceTestCase {
 		_userIds = UserLocalServiceUtil.getGroupUserIds(group.getGroupId());
 	}
 
+	@Override
 	public void tearDown() throws Exception {
 		if (_category != null) {
 			MBCategoryServiceUtil.deleteCategory(

@@ -52,6 +52,7 @@ public abstract class PortalClassLoaderServletContextListener
 		registerPortalLifecycle();
 	}
 
+	@Override
 	protected void doPortalDestroy() {
 		PortletClassLoaderUtil.setClassLoader(_portletClassLoader);
 		PortletClassLoaderUtil.setServletContextName(_servletContextName);
@@ -74,6 +75,7 @@ public abstract class PortalClassLoaderServletContextListener
 		}
 	}
 
+	@Override
 	protected void doPortalInit() {
 		PortletClassLoaderUtil.setClassLoader(_portletClassLoader);
 		PortletClassLoaderUtil.setServletContextName(_servletContextName);

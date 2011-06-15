@@ -87,6 +87,7 @@ public class ArticleSearchTerms extends ArticleDisplayTerms {
 		this.groupId = groupId;
 	}
 
+	@Override
 	public void setStatus(String status) {
 		this.status = status;
 	}

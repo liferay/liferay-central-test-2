@@ -35,6 +35,7 @@ import java.sql.ResultSet;
  */
 public class UpgradePortletPermissions extends UpgradeProcess {
 
+	@Override
 	protected void doUpgrade() throws Exception {
 		updatePortletPermissions(
 			"33", "com.liferay.portlet.blogs", new String[] {"ADD_ENTRY"});

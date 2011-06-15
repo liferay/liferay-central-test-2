@@ -2285,6 +2285,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 *
 	 * @param roles a string of ordered comma delimited portlet IDs
 	 */
+	@Override
 	public void setRoles(String roles) {
 		_rolesArray = StringUtil.split(roles);
 
@@ -3167,6 +3168,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 *
 	 * @return a copy of this object
 	 */
+	@Override
 	public Object clone() {
 		Portlet portlet = new PortletImpl(
 			getPortletId(), getRootPortlet(), getPluginPackage(),
@@ -3224,6 +3226,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 *         argument; and 1 if this portlet is greater than the portlet
 	 *         argument
 	 */
+	@Override
 	public int compareTo(Portlet portlet) {
 		return getPortletId().compareTo(portlet.getPortletId());
 	}
@@ -3234,6 +3237,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 * @param  obj the object to compare this portlet against
 	 * @return <code>true</code> if the portlet is equal to the specified object
 	 */
+	@Override
 	public boolean equals(Object obj) {
 		Portlet portlet = (Portlet)obj;
 

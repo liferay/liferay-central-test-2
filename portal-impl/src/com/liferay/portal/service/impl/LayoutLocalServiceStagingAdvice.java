@@ -94,6 +94,7 @@ public class LayoutLocalServiceStagingAdvice
 		return returnValue;
 	}
 
+	@Override
 	public Layout updateLayout(
 			long groupId, boolean privateLayout, long layoutId,
 			long parentLayoutId, Map<Locale, String> nameMap,
@@ -193,6 +194,7 @@ public class LayoutLocalServiceStagingAdvice
 		return wrapLayout(layout);
 	}
 
+	@Override
 	public Layout updateLayout(
 			long groupId, boolean privateLayout, long layoutId,
 			String typeSettings)
@@ -232,6 +234,7 @@ public class LayoutLocalServiceStagingAdvice
 		return layout;
 	}
 
+	@Override
 	public Layout updateLookAndFeel(
 			long groupId, boolean privateLayout, long layoutId, String themeId,
 			String colorSchemeId, String css, boolean wapTheme)
@@ -280,6 +283,7 @@ public class LayoutLocalServiceStagingAdvice
 		return layout;
 	}
 
+	@Override
 	public Layout updateName(Layout layout, String name, String languageId)
 		throws PortalException, SystemException {
 

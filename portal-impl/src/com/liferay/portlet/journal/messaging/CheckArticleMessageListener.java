@@ -25,6 +25,7 @@ import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
  */
 public class CheckArticleMessageListener extends BaseMessageListener {
 
+	@Override
 	protected void doReceive(Message message) throws Exception {
 		JournalArticleLocalServiceUtil.checkArticles();
 	}

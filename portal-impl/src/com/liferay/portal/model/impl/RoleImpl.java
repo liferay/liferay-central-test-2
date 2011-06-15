@@ -46,6 +46,7 @@ public class RoleImpl extends RoleModelImpl implements Role {
 		return name;
 	}
 
+	@Override
 	public String getTitle(String languageId) {
 		String value = super.getTitle(languageId);
 
@@ -61,6 +62,7 @@ public class RoleImpl extends RoleModelImpl implements Role {
 		return value;
 	}
 
+	@Override
 	public String getTitle(String languageId, boolean useDefault) {
 		String value = super.getTitle(languageId, useDefault);
 

@@ -46,6 +46,7 @@ public class MappingSqlQueryImpl<T>
 		compile();
 	}
 
+	@Override
 	protected T mapRow(ResultSet rs, int rowNumber) throws SQLException {
 		return _rowMapper.mapRow(rs, rowNumber);
 	}

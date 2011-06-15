@@ -1561,6 +1561,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	 * @throws PortalException if a user with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void deleteUser(long userId)
 		throws PortalException, SystemException {
 
@@ -1576,6 +1577,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	 * @throws PortalException if a portal exception occurred
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void deleteUser(User user) throws PortalException, SystemException {
 		if (!PropsValues.USERS_DELETE) {
 			throw new RequiredUserException();

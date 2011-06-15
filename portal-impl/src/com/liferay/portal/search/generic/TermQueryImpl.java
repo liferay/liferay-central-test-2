@@ -31,6 +31,7 @@ public class TermQueryImpl extends BaseQueryImpl implements TermQuery {
 		return _queryTerm;
 	}
 
+	@Override
 	public Object getWrappedQuery() {
 		return this;
 	}

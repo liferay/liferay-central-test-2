@@ -26,6 +26,7 @@ import javax.portlet.ActionRequest;
  */
 public class ViewQuestionAction extends EditQuestionAction {
 
+	@Override
 	protected void updateQuestion(ActionRequest actionRequest)
 		throws Exception {
 

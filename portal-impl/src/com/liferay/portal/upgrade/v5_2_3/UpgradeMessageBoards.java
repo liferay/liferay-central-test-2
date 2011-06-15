@@ -22,6 +22,7 @@ import com.liferay.portal.kernel.util.StringBundler;
  */
 public class UpgradeMessageBoards extends UpgradeProcess {
 
+	@Override
 	protected void doUpgrade() throws Exception {
 		updateGroupId();
 		updateMessageClassNameId();

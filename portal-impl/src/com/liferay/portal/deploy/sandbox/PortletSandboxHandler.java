@@ -43,6 +43,7 @@ public class PortletSandboxHandler extends BaseSandboxHandler {
 		_deployer = deployer;
 	}
 
+	@Override
 	protected void clonePlugin(File dir, PluginPackage pluginPackage)
 		throws Exception {
 
@@ -93,6 +94,7 @@ public class PortletSandboxHandler extends BaseSandboxHandler {
 		return qName.getNamespace();
 	}
 
+	@Override
 	protected String getPluginType() {
 		return _PLUGIN_TYPE;
 	}

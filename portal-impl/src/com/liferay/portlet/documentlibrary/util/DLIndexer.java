@@ -74,6 +74,7 @@ public class DLIndexer extends BaseIndexer {
 		return CLASS_NAMES;
 	}
 
+	@Override
 	public boolean hasPermission(
 			PermissionChecker permissionChecker, long entryClassPK,
 			String actionId)
@@ -83,10 +84,12 @@ public class DLIndexer extends BaseIndexer {
 			permissionChecker, entryClassPK, ActionKeys.VIEW);
 	}
 
+	@Override
 	public boolean isFilterSearch() {
 		return _FILTER_SEARCH;
 	}
 
+	@Override
 	public void postProcessContextQuery(
 			BooleanQuery contextQuery, SearchContext searchContext)
 		throws Exception {
@@ -123,6 +126,7 @@ public class DLIndexer extends BaseIndexer {
 		}
 	}
 
+	@Override
 	public void postProcessSearchQuery(
 			BooleanQuery searchQuery, SearchContext searchContext)
 		throws Exception {
@@ -145,6 +149,7 @@ public class DLIndexer extends BaseIndexer {
 		}
 	}
 
+	@Override
 	protected void doDelete(Object obj) throws Exception {
 		DLFileEntry fileEntry = (DLFileEntry)obj;
 
@@ -160,6 +165,7 @@ public class DLIndexer extends BaseIndexer {
 		indexer.delete(fileModel);
 	}
 
+	@Override
 	protected Document doGetDocument(Object obj) throws Exception {
 		DLFileEntry fileEntry = (DLFileEntry)obj;
 
@@ -199,6 +205,7 @@ public class DLIndexer extends BaseIndexer {
 		return indexer.getDocument(fileModel);
 	}
 
+	@Override
 	protected Summary doGetSummary(
 		Document document, Locale locale, String snippet,
 		PortletURL portletURL) {
@@ -231,6 +238,7 @@ public class DLIndexer extends BaseIndexer {
 		return new Summary(title, content, portletURL);
 	}
 
+	@Override
 	protected void doReindex(Object obj) throws Exception {
 		DLFileEntry fileEntry = (DLFileEntry)obj;
 
@@ -241,6 +249,7 @@ public class DLIndexer extends BaseIndexer {
 		}
 	}
 
+	@Override
 	protected void doReindex(String className, long classPK) throws Exception {
 		DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(
 			classPK);
@@ -248,6 +257,7 @@ public class DLIndexer extends BaseIndexer {
 		doReindex(fileEntry);
 	}
 
+	@Override
 	protected void doReindex(String[] ids) throws Exception {
 		long companyId = GetterUtil.getLong(ids[0]);
 
@@ -255,6 +265,7 @@ public class DLIndexer extends BaseIndexer {
 		reindexRoot(companyId);
 	}
 
+	@Override
 	protected String getPortletId(SearchContext searchContext) {
 		return PORTLET_ID;
 	}

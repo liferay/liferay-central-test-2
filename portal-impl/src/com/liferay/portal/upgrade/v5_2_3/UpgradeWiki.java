@@ -25,6 +25,7 @@ import com.liferay.portal.upgrade.v5_2_3.util.WikiPageTable;
  */
 public class UpgradeWiki extends UpgradeProcess {
 
+	@Override
 	protected void doUpgrade() throws Exception {
 		try {
 			runSQL("alter_column_type WikiPage title VARCHAR(255) null");

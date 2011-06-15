@@ -64,6 +64,7 @@ public class JMXMessageListener extends BaseDestinationEventListener {
 		}
 	}
 
+	@Override
 	public void destinationAdded(Destination destination) {
 		try {
 			registerDestination(destination);
@@ -74,6 +75,7 @@ public class JMXMessageListener extends BaseDestinationEventListener {
 		}
 	}
 
+	@Override
 	public void destinationRemoved(Destination destination) {
 		try {
 			unregisterDestination(destination);

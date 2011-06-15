@@ -24,6 +24,7 @@ import com.liferay.portal.kernel.util.StringBundler;
  */
 public abstract class AbstractDevice implements Device {
 
+	@Override
 	public String toString() {
 		StringBundler sb = new StringBundler(23);
 

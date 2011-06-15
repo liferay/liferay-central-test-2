@@ -45,6 +45,7 @@ public class UserWorkflowHandler extends BaseWorkflowHandler {
 		return ResourceActionsUtil.getModelResource(locale, CLASS_NAME);
 	}
 
+	@Override
 	public boolean isScopeable() {
 		return false;
 	}
@@ -72,6 +73,7 @@ public class UserWorkflowHandler extends BaseWorkflowHandler {
 		return UserLocalServiceUtil.updateStatus(userId, status);
 	}
 
+	@Override
 	protected String getIconPath(ThemeDisplay themeDisplay) {
 		return themeDisplay.getPathThemeImages() + "/common/user_icon.png";
 	}

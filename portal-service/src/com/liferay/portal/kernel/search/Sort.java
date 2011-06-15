@@ -79,6 +79,7 @@ public class Sort implements Serializable {
 		_type = type;
 	}
 
+	@Override
 	public String toString() {
 		StringBundler sb = new StringBundler(7);
 

@@ -37,6 +37,7 @@ public class NetlogonValidationSamInfo extends NdrObject {
 		_logonDomain = new rpc.sid_t();
 	}
 
+	@Override
 	public void decode(NdrBuffer ndrBuffer) throws NdrException {
 		_logonTime = ndrBuffer.dec_ndr_hyper();
 		_logoffTime = ndrBuffer.dec_ndr_hyper();
@@ -171,6 +172,7 @@ public class NetlogonValidationSamInfo extends NdrObject {
 		}
 	}
 
+	@Override
 	public void encode(NdrBuffer ndrBuffer) {
 	}
 

@@ -26,6 +26,7 @@ import javax.servlet.jsp.tagext.VariableInfo;
  */
 public class SearchContainerRowTei extends TagExtraInfo {
 
+	@Override
 	public VariableInfo[] getVariableInfo(TagData tagData) {
 		String className = tagData.getAttributeString("className");
 

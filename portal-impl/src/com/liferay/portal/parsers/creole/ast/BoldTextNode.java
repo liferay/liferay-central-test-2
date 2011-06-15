@@ -29,6 +29,7 @@ public class BoldTextNode extends FormattedTextNode {
 		super(content);
 	}
 
+	@Override
 	public void accept(ASTVisitor astVisitor) {
 		astVisitor.visit(this);
 	}

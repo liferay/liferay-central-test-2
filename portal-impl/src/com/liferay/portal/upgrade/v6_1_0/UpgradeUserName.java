@@ -29,6 +29,7 @@ import java.sql.ResultSet;
  */
 public class UpgradeUserName extends UpgradeProcess {
 
+	@Override
 	protected void doUpgrade() throws Exception {
 		updateTable("BookmarksEntry");
 		updateTable("BookmarksFolder");

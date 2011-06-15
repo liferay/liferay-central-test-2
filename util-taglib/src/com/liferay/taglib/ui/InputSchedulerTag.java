@@ -21,6 +21,7 @@ import com.liferay.taglib.util.IncludeTag;
  */
 public class InputSchedulerTag extends IncludeTag {
 
+	@Override
 	protected String getPage() {
 		return _PAGE;
 	}

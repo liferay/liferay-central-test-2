@@ -33,6 +33,7 @@ import java.util.List;
  */
 public class UpgradeCounter extends UpgradeProcess {
 
+	@Override
 	protected void doUpgrade() throws Exception {
 
 		// Counter

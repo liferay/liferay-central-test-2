@@ -29,6 +29,7 @@ import java.net.URL;
  */
 public class ThemeLoaderTemplateLoader extends URLTemplateLoader {
 
+	@Override
 	public URL getURL(String name) throws IOException {
 		int pos = name.indexOf(THEME_LOADER_SEPARATOR);
 

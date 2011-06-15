@@ -32,6 +32,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class SiteMinderLogoutAction extends Action {
 
+	@Override
 	public void run(HttpServletRequest request, HttpServletResponse response) {
 		try {
 			long companyId = PortalUtil.getCompanyId(request);

@@ -42,18 +42,22 @@ import javax.portlet.PortletPreferences;
  */
 public class PollsDisplayPortletDataHandlerImpl extends BasePortletDataHandler {
 
+	@Override
 	public PortletDataHandlerControl[] getExportControls() {
 		return new PortletDataHandlerControl[] {_questions, _votes};
 	}
 
+	@Override
 	public PortletDataHandlerControl[] getImportControls() {
 		return new PortletDataHandlerControl[] {_questions, _votes};
 	}
 
+	@Override
 	public boolean isPublishToLiveByDefault() {
 		return _PUBLISH_TO_LIVE_BY_DEFAULT;
 	}
 
+	@Override
 	protected PortletPreferences doDeleteData(
 			PortletDataContext portletDataContext, String portletId,
 			PortletPreferences portletPreferences)
@@ -64,6 +68,7 @@ public class PollsDisplayPortletDataHandlerImpl extends BasePortletDataHandler {
 		return portletPreferences;
 	}
 
+	@Override
 	protected String doExportData(
 			PortletDataContext portletDataContext, String portletId,
 			PortletPreferences portletPreferences)
@@ -116,6 +121,7 @@ public class PollsDisplayPortletDataHandlerImpl extends BasePortletDataHandler {
 		return document.formattedString();
 	}
 
+	@Override
 	protected PortletPreferences doImportData(
 			PortletDataContext portletDataContext, String portletId,
 			PortletPreferences portletPreferences, String data)

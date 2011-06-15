@@ -43,14 +43,17 @@ public class JournalStructureResourceImpl extends BaseResourceImpl {
 		_structure = structure;
 	}
 
+	@Override
 	public boolean isCollection() {
 		return false;
 	}
 
+	@Override
 	public String getContentType() {
 		return ContentTypes.TEXT_XML;
 	}
 
+	@Override
 	public InputStream getContentAsStream() throws WebDAVException {
 		try {
 			return new UnsyncByteArrayInputStream(

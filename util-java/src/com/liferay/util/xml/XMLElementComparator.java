@@ -27,6 +27,7 @@ public class XMLElementComparator extends ElementComparator {
 		_descriptor = descriptor;
 	}
 
+	@Override
 	public int compare(Element el1, Element el2) {
 		if (_descriptor.areEqual(el1, el2)) {
 			return 0;

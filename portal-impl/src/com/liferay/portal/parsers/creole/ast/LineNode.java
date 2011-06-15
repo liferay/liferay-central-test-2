@@ -32,6 +32,7 @@ public class LineNode extends BaseParentableNode {
 		super(token);
 	}
 
+	@Override
 	public void accept(ASTVisitor astVisitor) {
 		astVisitor.visit(this);
 	}

@@ -74,6 +74,7 @@ public class PhoneLocalServiceImpl extends PhoneLocalServiceBaseImpl {
 		return phone;
 	}
 
+	@Override
 	public void deletePhone(long phoneId)
 		throws PortalException, SystemException {
 
@@ -82,6 +83,7 @@ public class PhoneLocalServiceImpl extends PhoneLocalServiceBaseImpl {
 		deletePhone(phone);
 	}
 
+	@Override
 	public void deletePhone(Phone phone) throws SystemException {
 		phonePersistence.remove(phone);
 	}
@@ -99,6 +101,7 @@ public class PhoneLocalServiceImpl extends PhoneLocalServiceBaseImpl {
 		}
 	}
 
+	@Override
 	public Phone getPhone(long phoneId)
 		throws PortalException, SystemException {
 

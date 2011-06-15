@@ -27,14 +27,17 @@ public class RatingsScoreTag extends IncludeTag {
 		_score = score;
 	}
 
+	@Override
 	protected void cleanUp() {
 		_score = 0;
 	}
 
+	@Override
 	protected String getPage() {
 		return _PAGE;
 	}
 
+	@Override
 	protected void setAttributes(HttpServletRequest request) {
 		request.setAttribute(
 			"liferay-ui:ratings-score:score", String.valueOf(_score));

@@ -41,6 +41,7 @@ import java.util.Map;
  */
 public class UpgradeWebsite extends UpgradeProcess {
 
+	@Override
 	protected void doUpgrade() throws Exception {
 
 		// Website

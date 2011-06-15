@@ -91,6 +91,7 @@ public class ScriptTag extends PositionTagSupport {
 		}
 	}
 
+	@Override
 	public int doEndTag() throws JspException {
 		HttpServletRequest request =
 			(HttpServletRequest)pageContext.getRequest();
@@ -149,6 +150,7 @@ public class ScriptTag extends PositionTagSupport {
 		_use = use;
 	}
 
+	@Override
 	protected void cleanUp() {
 		super.cleanUp();
 

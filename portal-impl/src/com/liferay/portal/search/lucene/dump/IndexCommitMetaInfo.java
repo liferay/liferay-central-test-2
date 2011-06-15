@@ -67,6 +67,7 @@ public class IndexCommitMetaInfo implements Serializable {
 		return _empty;
 	}
 
+	@Override
 	public String toString() {
 		if (_empty) {
 			return StringPool.BLANK;

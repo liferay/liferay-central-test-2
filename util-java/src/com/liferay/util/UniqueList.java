@@ -52,6 +52,7 @@ public class UniqueList<E> extends ArrayList<E> {
 		}
 	}
 
+	@Override
 	public boolean addAll(Collection<? extends E> c) {
 		c = new ArrayList<E>(c);
 
@@ -68,6 +69,7 @@ public class UniqueList<E> extends ArrayList<E> {
 		return super.addAll(c);
 	}
 
+	@Override
 	public boolean addAll(int index, Collection<? extends E> c) {
 		c = new ArrayList<E>(c);
 

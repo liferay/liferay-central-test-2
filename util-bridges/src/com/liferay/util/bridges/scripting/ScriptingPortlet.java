@@ -57,6 +57,7 @@ import javax.portlet.ResourceResponse;
  */
 public class ScriptingPortlet extends GenericPortlet {
 
+	@Override
 	public void init() {
 		actionFile = getInitParameter("action-file");
 		editFile = getInitParameter("edit-file");
@@ -68,6 +69,7 @@ public class ScriptingPortlet extends GenericPortlet {
 		globalFiles = StringUtil.split(getInitParameter("global-files"));
 	}
 
+	@Override
 	public void doDispatch(
 			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws IOException, PortletException {
@@ -82,6 +84,7 @@ public class ScriptingPortlet extends GenericPortlet {
 		}
 	}
 
+	@Override
 	public void doEdit(
 			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws IOException, PortletException {
@@ -94,6 +97,7 @@ public class ScriptingPortlet extends GenericPortlet {
 		}
 	}
 
+	@Override
 	public void doHelp(
 			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws IOException {
@@ -101,6 +105,7 @@ public class ScriptingPortlet extends GenericPortlet {
 		include(helpFile, renderRequest, renderResponse);
 	}
 
+	@Override
 	public void doView(
 			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws IOException {
@@ -108,6 +113,7 @@ public class ScriptingPortlet extends GenericPortlet {
 		include(viewFile, renderRequest, renderResponse);
 	}
 
+	@Override
 	public void processAction(
 			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws IOException {
@@ -115,6 +121,7 @@ public class ScriptingPortlet extends GenericPortlet {
 		include(actionFile, actionRequest, actionResponse);
 	}
 
+	@Override
 	public void render(
 			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws IOException, PortletException {
@@ -133,6 +140,7 @@ public class ScriptingPortlet extends GenericPortlet {
 		}
 	}
 
+	@Override
 	public void serveResource(
 			ResourceRequest resourceRequest, ResourceResponse resourceResponse)
 		throws IOException {

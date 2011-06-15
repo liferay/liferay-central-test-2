@@ -36,6 +36,7 @@ public class MainServletTestSetup extends TestSetup {
 		super(test);
 	}
 
+	@Override
 	public void setUp() throws Exception {
 		ServiceTestUtil.initServices();
 		ServiceTestUtil.initPermissions();
@@ -51,6 +52,7 @@ public class MainServletTestSetup extends TestSetup {
 		_mainServlet.init(mockServletConfig);
 	}
 
+	@Override
 	public void tearDown() throws Exception {
 		_mainServlet.destroy();
 

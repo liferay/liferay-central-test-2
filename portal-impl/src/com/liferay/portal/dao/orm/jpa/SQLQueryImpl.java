@@ -115,6 +115,7 @@ public class SQLQueryImpl extends QueryImpl implements SQLQuery {
 		return this;
 	}
 
+	@Override
 	public List<?> list(boolean unmodifiable) throws ORMException {
 		try {
 			List<?> list = sessionImpl.list(
@@ -137,6 +138,7 @@ public class SQLQueryImpl extends QueryImpl implements SQLQuery {
 		}
 	}
 
+	@Override
 	public Object uniqueResult() throws ORMException {
 		try {
 			Object object =  sessionImpl.uniqueResult(

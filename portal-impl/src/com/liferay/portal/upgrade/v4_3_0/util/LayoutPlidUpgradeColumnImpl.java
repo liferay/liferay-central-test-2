@@ -40,6 +40,7 @@ public class LayoutPlidUpgradeColumnImpl extends PKUpgradeColumnImpl {
 		_layoutPlidMapper = ValueMapperFactoryUtil.getValueMapper();
 	}
 
+	@Override
 	public Object getNewValue(Object oldValue) throws Exception {
 		Object newValue = super.getNewValue(oldValue);
 
@@ -65,6 +66,7 @@ public class LayoutPlidUpgradeColumnImpl extends PKUpgradeColumnImpl {
 		return newValue;
 	}
 
+	@Override
 	public ValueMapper getValueMapper() {
 		return _layoutPlidMapper;
 	}

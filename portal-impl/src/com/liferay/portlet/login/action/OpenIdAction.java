@@ -78,6 +78,7 @@ import org.openid4java.message.sreg.SRegResponse;
  */
 public class OpenIdAction extends PortletAction {
 
+	@Override
 	public void processAction(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
 			ActionRequest actionRequest, ActionResponse actionResponse)
@@ -132,6 +133,7 @@ public class OpenIdAction extends PortletAction {
 		}
 	}
 
+	@Override
 	public ActionForward render(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
 			RenderRequest renderRequest, RenderResponse renderResponse)
@@ -153,6 +155,7 @@ public class OpenIdAction extends PortletAction {
 		return values.get(0);
 	}
 
+	@Override
 	protected boolean isCheckMethodOnProcessAction() {
 		return _CHECK_METHOD_ON_PROCESS_ACTION;
 	}

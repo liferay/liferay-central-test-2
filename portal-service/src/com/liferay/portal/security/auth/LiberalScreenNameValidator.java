@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.util.Validator;
  */
 public class LiberalScreenNameValidator extends DefaultScreenNameValidator {
 
+	@Override
 	public boolean validate(long companyId, String screenName) {
 		if (Validator.isNull(screenName)) {
 			return false;

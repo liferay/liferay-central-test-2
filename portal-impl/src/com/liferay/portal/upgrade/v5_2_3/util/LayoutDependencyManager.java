@@ -19,6 +19,7 @@ package com.liferay.portal.upgrade.v5_2_3.util;
  */
 public class LayoutDependencyManager extends DependencyManager {
 
+	@Override
 	public void update(
 			long oldPrimaryKeyValue, Object[] oldColumnValues,
 			Object[] oldExtraColumnValues, long newPrimaryKeyValue,

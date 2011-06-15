@@ -62,6 +62,7 @@ public class UpgradeScheduler extends UpgradeProcess {
 				jobName + "' and TRIGGER_GROUP = '" + jobGroup + "'");
 	}
 
+	@Override
 	protected void doUpgrade() throws Exception {
 		List<Object[]> arrays = getUpgradeQuartzData();
 

@@ -53,10 +53,12 @@ public class FastExtendedProperties extends ExtendedProperties {
 		load(inputStream);
 	}
 
+	@Override
 	public void clear() {
 		_map.clear();
 	}
 
+	@Override
 	public Object clone() {
 		FastExtendedProperties fastExtendedProperties =
 			(FastExtendedProperties)super.clone();
@@ -67,75 +69,92 @@ public class FastExtendedProperties extends ExtendedProperties {
 		return fastExtendedProperties;
 	}
 
+	@Override
 	public boolean contains(Object value) {
 		return _map.containsKey(value);
 	}
 
+	@Override
 	public boolean containsKey(Object key) {
 		return _map.containsKey(key);
 	}
 
+	@Override
 	public boolean containsValue(Object value) {
 		return _map.containsValue(value);
 	}
 
+	@Override
 	@SuppressWarnings("rawtypes")
 	public Enumeration elements() {
 		return Collections.enumeration(_map.values());
 	}
 
+	@Override
 	@SuppressWarnings("rawtypes")
 	public Set entrySet() {
 		return _map.entrySet();
 	}
 
+	@Override
 	public boolean equals(Object o) {
 		return _map.equals(o);
 	}
 
+	@Override
 	public Object get(Object key) {
 		return _map.get(key);
 	}
 
+	@Override
 	public int hashCode() {
 		return _map.hashCode();
 	}
 
+	@Override
 	public boolean isEmpty() {
 		return _map.isEmpty();
 	}
 
+	@Override
 	@SuppressWarnings("rawtypes")
 	public Enumeration keys() {
 		return Collections.enumeration(_map.keySet());
 	}
 
+	@Override
 	@SuppressWarnings("rawtypes")
 	public Set keySet() {
 		return _map.keySet();
 	}
 
+	@Override
 	public Object put(Object key, Object value) {
 		return _map.put(key, value);
 	}
 
+	@Override
 	@SuppressWarnings("rawtypes")
 	public void putAll(Map t) {
 		_map.putAll(t);
 	}
 
+	@Override
 	public Object remove(Object key) {
 		return _map.remove(key);
 	}
 
+	@Override
 	public int size() {
 		return _map.size();
 	}
 
+	@Override
 	public String toString() {
 		return _map.toString();
 	}
 
+	@Override
 	@SuppressWarnings("rawtypes")
 	public Collection values() {
 		return _map.values();

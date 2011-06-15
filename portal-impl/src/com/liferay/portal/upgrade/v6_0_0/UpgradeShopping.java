@@ -25,6 +25,7 @@ import com.liferay.portal.upgrade.v6_0_0.util.ShoppingItemTable;
  */
 public class UpgradeShopping extends UpgradeProcess {
 
+	@Override
 	protected void doUpgrade() throws Exception {
 		StringBundler sb = new StringBundler(3);
 

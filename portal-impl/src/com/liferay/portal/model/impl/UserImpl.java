@@ -115,6 +115,7 @@ public class UserImpl extends UserModelImpl implements User {
 		return ContactLocalServiceUtil.getContact(getContactId());
 	}
 
+	@Override
 	public String getDigest() {
 		String digest = super.getDigest();
 
@@ -696,6 +697,7 @@ public class UserImpl extends UserModelImpl implements User {
 		return _passwordModified;
 	}
 
+	@Override
 	public void setLanguageId(String languageId) {
 		_locale = LocaleUtil.fromLanguageId(languageId);
 
@@ -710,6 +712,7 @@ public class UserImpl extends UserModelImpl implements User {
 		_passwordUnencrypted = passwordUnencrypted;
 	}
 
+	@Override
 	public void setTimeZoneId(String timeZoneId) {
 		if (Validator.isNull(timeZoneId)) {
 			timeZoneId = TimeZoneUtil.getDefault().getID();

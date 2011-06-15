@@ -38,6 +38,7 @@ import java.sql.Types;
  */
 public class UpgradeDocumentLibrary extends UpgradeProcess {
 
+	@Override
 	protected void doUpgrade() throws Exception {
 
 		// DLFolder

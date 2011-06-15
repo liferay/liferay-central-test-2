@@ -23,6 +23,7 @@ import com.liferay.portal.plugin.PluginPackageUtil;
  */
 public class PluginRepositoriesMessageListener extends BaseMessageListener {
 
+	@Override
 	protected void doReceive(Message message) throws Exception {
 		PluginPackageUtil.reloadRepositories();
 	}

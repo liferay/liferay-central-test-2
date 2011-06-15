@@ -33,6 +33,7 @@ public class ClusterLinkPortalCacheClusterChannel
 		_priority = priority;
 	}
 
+	@Override
 	public void dispatchEvent(PortalCacheClusterEvent portalCacheClusterEvent) {
 		Message message = new Message();
 

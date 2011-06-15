@@ -30,42 +30,52 @@ public class ByteArrayInputStreamWrapper extends ServletInputStream {
 		_byteArrayInputStream = byteArrayInputStream;
 	}
 
+	@Override
 	public int available() {
 		return _byteArrayInputStream.available();
 	}
 
+	@Override
 	public void close() throws IOException {
 		_byteArrayInputStream.close();
 	}
 
+	@Override
 	public void mark(int readLimit) {
 		_byteArrayInputStream.mark(readLimit);
 	}
 
+	@Override
 	public boolean markSupported() {
 		return _byteArrayInputStream.markSupported();
 	}
 
+	@Override
 	public int read() {
 		return _byteArrayInputStream.read();
 	}
 
+	@Override
 	public int read(byte[] bytes) throws IOException {
 		return _byteArrayInputStream.read(bytes);
 	}
 
+	@Override
 	public int read(byte[] bytes, int offset, int length) {
 		return _byteArrayInputStream.read(bytes, offset, length);
 	}
 
+	@Override
 	public int readLine(byte[] bytes, int offset, int length) {
 		return _byteArrayInputStream.read(bytes, offset, length);
 	}
 
+	@Override
 	public void reset() {
 		_byteArrayInputStream.reset();
 	}
 
+	@Override
 	public long skip(long skip) {
 		return _byteArrayInputStream.skip(skip);
 	}

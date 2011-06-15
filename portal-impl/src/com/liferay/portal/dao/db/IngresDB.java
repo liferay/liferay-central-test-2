@@ -33,6 +33,7 @@ public class IngresDB extends BaseDB {
 		return _instance;
 	}
 
+	@Override
 	public String buildSQL(String template) throws IOException {
 		template = convertTimestamp(template);
 		template = replaceTemplate(template, getTemplate());
@@ -43,6 +44,7 @@ public class IngresDB extends BaseDB {
 		return template;
 	}
 
+	@Override
 	public boolean isSupportsAlterColumnName() {
 		return _SUPPORTS_ALTER_COLUMN_NAME;
 	}
@@ -51,20 +53,24 @@ public class IngresDB extends BaseDB {
 		super(TYPE_INGRES);
 	}
 
+	@Override
 	protected String buildCreateFileContent(
 		String sqlDir, String databaseName, int population) {
 
 		return null;
 	}
 
+	@Override
 	protected String getServerName() {
 		return "ingres";
 	}
 
+	@Override
 	protected String[] getTemplate() {
 		return _INGRES;
 	}
 
+	@Override
 	protected String replaceTemplate(String template, String[] actual) {
 		if ((template == null) || (TEMPLATE == null) || (actual == null)) {
 			return null;
@@ -93,6 +99,7 @@ public class IngresDB extends BaseDB {
 		return template;
 	}
 
+	@Override
 	protected String reword(String data) throws IOException {
 		UnsyncBufferedReader unsyncBufferedReader = new UnsyncBufferedReader(
 			new UnsyncStringReader(data));

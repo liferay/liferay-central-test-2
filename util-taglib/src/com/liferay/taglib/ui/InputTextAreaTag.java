@@ -40,6 +40,7 @@ public class InputTextAreaTag extends IncludeTag {
 		_param = param;
 	}
 
+	@Override
 	protected void cleanUp() {
 		_cssClass = null;
 		_defaultValue = StringPool.BLANK;
@@ -47,10 +48,12 @@ public class InputTextAreaTag extends IncludeTag {
 		_param = null;
 	}
 
+	@Override
 	protected String getPage() {
 		return _PAGE;
 	}
 
+	@Override
 	protected void setAttributes(HttpServletRequest request) {
 		request.setAttribute("liferay-ui:input-textarea:cssClass", _cssClass);
 		request.setAttribute(

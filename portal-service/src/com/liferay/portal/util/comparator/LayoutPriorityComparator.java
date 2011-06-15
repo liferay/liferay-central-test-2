@@ -31,6 +31,7 @@ public class LayoutPriorityComparator extends OrderByComparator {
 		_lessThan = lessThan;
 	}
 
+	@Override
 	public int compare(Object obj1, Object obj2) {
 		Layout layout1 = (Layout)obj1;
 		Layout layout2 = (Layout)obj2;
@@ -66,14 +67,17 @@ public class LayoutPriorityComparator extends OrderByComparator {
 		}
 	}
 
+	@Override
 	public String getOrderBy() {
 		return ORDER_BY_ASC;
 	}
 
+	@Override
 	public String[] getOrderByFields() {
 		return ORDER_BY_FIELDS;
 	}
 
+	@Override
 	public boolean isAscending() {
 		return true;
 	}

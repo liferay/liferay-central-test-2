@@ -57,6 +57,7 @@ public class PanelTag extends IncludeTag {
 		_label = label;
 	}
 
+	@Override
 	protected void cleanUp() {
 		_collapsed = false;
 		_collapsible = false;
@@ -72,18 +73,22 @@ public class PanelTag extends IncludeTag {
 		}
 	}
 
+	@Override
 	protected String getEndPage() {
 		return _END_PAGE;
 	}
 
+	@Override
 	protected String getStartPage() {
 		return _START_PAGE;
 	}
 
+	@Override
 	protected boolean isCleanUpSetAttributes() {
 		return _CLEAN_UP_SET_ATTRIBUTES;
 	}
 
+	@Override
 	protected void setAttributes(HttpServletRequest request) {
 		String id = _id;
 

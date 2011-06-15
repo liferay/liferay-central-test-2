@@ -94,6 +94,7 @@ public class PortletPreferencesLocalServiceImpl
 		return portletPreferences;
 	}
 
+	@Override
 	public void deletePortletPreferences(long portletPreferencesId)
 		throws PortalException, SystemException {
 
@@ -123,6 +124,7 @@ public class PortletPreferencesLocalServiceImpl
 		deletePortletPreferences(portletPreferences);
 	}
 
+	@Override
 	public void deletePortletPreferences(PortletPreferences portletPreferences)
 		throws SystemException {
 

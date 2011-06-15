@@ -62,6 +62,7 @@ import javax.mail.internet.InternetAddress;
  */
 public class FlagsRequestMessageListener extends BaseMessageListener {
 
+	@Override
 	protected void doReceive(Message message) throws Exception {
 		FlagsRequest flagsRequest = (FlagsRequest)message.getPayload();
 

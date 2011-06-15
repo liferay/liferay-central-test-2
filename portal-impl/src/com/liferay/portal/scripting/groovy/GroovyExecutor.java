@@ -37,6 +37,7 @@ public class GroovyExecutor extends BaseScriptingExecutor {
 
 	public static final String LANGUAGE = "groovy";
 
+	@Override
 	public void clearCache() {
 		SingleVMPoolUtil.clear(CACHE_NAME);
 	}

@@ -31,15 +31,18 @@ public class InputResourceTag extends IncludeTag {
 		_url = url;
 	}
 
+	@Override
 	protected void cleanUp() {
 		_cssClass = null;
 		_url = null;
 	}
 
+	@Override
 	protected String getPage() {
 		return _PAGE;
 	}
 
+	@Override
 	protected void setAttributes(HttpServletRequest request) {
 		request.setAttribute("liferay-ui:input-resource:cssClass", _cssClass);
 		request.setAttribute("liferay-ui:input-resource:url", _url);

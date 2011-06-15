@@ -92,6 +92,7 @@ public class PortletDeployer extends BaseDeployer {
 		super(wars, jars);
 	}
 
+	@Override
 	public void checkArguments() {
 		super.checkArguments();
 
@@ -101,6 +102,7 @@ public class PortletDeployer extends BaseDeployer {
 		}
 	}
 
+	@Override
 	public void copyXmls(
 			File srcFile, String displayName, PluginPackage pluginPackage)
 		throws Exception {
@@ -115,6 +117,7 @@ public class PortletDeployer extends BaseDeployer {
 			"_servlet_context_include.jsp", srcFile + "/WEB-INF/jsp");
 	}
 
+	@Override
 	public String getExtraContent(
 			double webXmlVersion, File srcFile, String displayName)
 		throws Exception {
@@ -386,6 +389,7 @@ public class PortletDeployer extends BaseDeployer {
 		return sb.toString();
 	}
 
+	@Override
 	public void processPluginPackageProperties(
 			File srcFile, String displayName, PluginPackage pluginPackage)
 		throws Exception {
@@ -528,6 +532,7 @@ public class PortletDeployer extends BaseDeployer {
 		FileUtil.write(facesXML, doc.formattedString(), true);
 	}
 
+	@Override
 	public void updateDeployDirectory(File srcFile) throws Exception {
 		boolean customPortletXML = false;
 

@@ -38,6 +38,7 @@ public class ServiceContext implements Cloneable, Serializable {
 		_expandoBridgeAttributes = new LinkedHashMap<String, Serializable>();
 	}
 
+	@Override
 	public Object clone() {
 		ServiceContext serviceContext = new ServiceContext();
 

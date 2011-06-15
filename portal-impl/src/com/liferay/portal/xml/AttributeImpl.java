@@ -38,6 +38,7 @@ public class AttributeImpl extends NodeImpl implements Attribute {
 		return _attribute.getData();
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		org.dom4j.Attribute attribute =
 			((AttributeImpl)obj).getWrappedAttribute();
@@ -87,6 +88,7 @@ public class AttributeImpl extends NodeImpl implements Attribute {
 		return _attribute;
 	}
 
+	@Override
 	public int hashCode() {
 		return _attribute.hashCode();
 	}
@@ -105,6 +107,7 @@ public class AttributeImpl extends NodeImpl implements Attribute {
 		_attribute.setValue(value);
 	}
 
+	@Override
 	public String toString() {
 		return _attribute.toString();
 	}

@@ -47,6 +47,7 @@ public class ServerVersionMethodImpl extends BaseMethodImpl {
 		return _METHOD_NAME;
 	}
 
+	@Override
 	protected List<ResponseElement> getElements(
 		SharepointRequest sharepointRequest) {
 

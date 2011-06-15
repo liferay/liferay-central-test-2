@@ -24,6 +24,7 @@ import com.liferay.portal.upgrade.v6_0_0.util.ResourceActionTable;
  */
 public class UpgradeResourceAction extends UpgradeProcess {
 
+	@Override
 	protected void doUpgrade() throws Exception {
 		try {
 			runSQL("alter_column_type ResourceAction name VARCHAR(255) null");

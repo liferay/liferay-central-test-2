@@ -132,6 +132,7 @@ public class PasswordPolicyLocalServiceImpl
 		}
 	}
 
+	@Override
 	public void deletePasswordPolicy(long passwordPolicyId)
 		throws PortalException, SystemException {
 
@@ -141,6 +142,7 @@ public class PasswordPolicyLocalServiceImpl
 		deletePasswordPolicy(passwordPolicy);
 	}
 
+	@Override
 	public void deletePasswordPolicy(PasswordPolicy passwordPolicy)
 		throws PortalException, SystemException {
 
@@ -175,6 +177,7 @@ public class PasswordPolicyLocalServiceImpl
 		return passwordPolicyPersistence.findByC_DP(companyId, true);
 	}
 
+	@Override
 	public PasswordPolicy getPasswordPolicy(long passwordPolicyId)
 		throws PortalException, SystemException {
 

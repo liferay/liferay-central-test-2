@@ -38,6 +38,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class WidgetServlet extends HttpServlet {
 
+	@Override
 	public void service(
 			HttpServletRequest request, HttpServletResponse response)
 		throws IOException, ServletException {

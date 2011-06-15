@@ -32,6 +32,7 @@ public class ScapedNode extends ASTNode {
 		_content = content;
 	}
 
+	@Override
 	public void accept(ASTVisitor astVisitor) {
 		astVisitor.visit(this);
 	}

@@ -297,6 +297,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		}
 	}
 
+	@Override
 	public void deleteLayout(long plid)
 		throws PortalException, SystemException {
 
@@ -517,6 +518,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		return layout;
 	}
 
+	@Override
 	public Layout getLayout(long plid)
 		throws PortalException, SystemException {
 
@@ -535,6 +537,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		return layoutPersistence.findByIconImageId(iconImageId);
 	}
 
+	@Override
 	public Layout getLayoutByUuidAndGroupId(String uuid, long groupId)
 		throws PortalException, SystemException {
 

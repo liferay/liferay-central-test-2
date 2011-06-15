@@ -38,6 +38,7 @@ public class EqualityWeakReference<T> extends WeakReference<T> {
 		_hashCode = referent.hashCode();
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
 			return true;
@@ -57,6 +58,7 @@ public class EqualityWeakReference<T> extends WeakReference<T> {
 		return false;
 	}
 
+	@Override
 	public int hashCode() {
 		return _hashCode;
 	}

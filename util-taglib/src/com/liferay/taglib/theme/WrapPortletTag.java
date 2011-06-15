@@ -83,10 +83,12 @@ public class WrapPortletTag
 			_CONTENT_WRAPPER_POST);
 	}
 
+	@Override
 	public int doStartTag() {
 		return EVAL_BODY_BUFFERED;
 	}
 
+	@Override
 	public int doEndTag() throws JspException {
 		try {
 			ServletContext servletContext = getServletContext();

@@ -47,10 +47,12 @@ public class StagingTag extends IncludeTag {
 		_showManageBackstages = showManageBackstages;
 	}
 
+	@Override
 	protected String getPage() {
 		return _PAGE;
 	}
 
+	@Override
 	protected void setAttributes(HttpServletRequest request) {
 		request.setAttribute(
 			"liferay-ui:staging:extended", String.valueOf(_extended));

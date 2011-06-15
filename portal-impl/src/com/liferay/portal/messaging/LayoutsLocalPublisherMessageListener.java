@@ -51,6 +51,7 @@ public class LayoutsLocalPublisherMessageListener
 		super(statusSender, responseSender);
 	}
 
+	@Override
 	protected void doReceive(Message message, MessageStatus messageStatus)
 		throws Exception {
 

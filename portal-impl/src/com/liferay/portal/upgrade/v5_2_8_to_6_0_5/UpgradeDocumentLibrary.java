@@ -43,6 +43,7 @@ import java.sql.ResultSet;
  */
 public class UpgradeDocumentLibrary extends UpgradeProcess {
 
+	@Override
 	protected void doUpgrade() throws Exception {
 		Connection con = null;
 		PreparedStatement ps = null;

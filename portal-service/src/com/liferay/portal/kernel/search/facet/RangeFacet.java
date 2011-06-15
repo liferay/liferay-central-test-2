@@ -37,6 +37,7 @@ public class RangeFacet extends BaseFacet {
 		super(searchContext);
 	}
 
+	@Override
 	protected BooleanClause doGetFacetClause() {
 		SearchContext searchContext = getSearchContext();
 

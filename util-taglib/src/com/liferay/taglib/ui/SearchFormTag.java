@@ -32,11 +32,13 @@ public class SearchFormTag<R> extends IncludeTag {
 		_showAddButton = showAddButton;
 	}
 
+	@Override
 	protected void cleanUp() {
 		_searchContainer = null;
 		_showAddButton = false;
 	}
 
+	@Override
 	protected void setAttributes(HttpServletRequest request) {
 		SearchContainerTag<R> searchContainerTag =
 			(SearchContainerTag<R>)findAncestorWithClass(

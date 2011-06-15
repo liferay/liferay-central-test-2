@@ -23,6 +23,7 @@ import javax.servlet.jsp.tagext.VariableInfo;
  */
 public class SectionTei extends TagExtraInfo {
 
+	@Override
 	public VariableInfo[] getVariableInfo(TagData tagData) {
 		return _variableInfo;
 	}

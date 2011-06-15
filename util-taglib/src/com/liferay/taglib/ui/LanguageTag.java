@@ -55,6 +55,7 @@ public class LanguageTag extends IncludeTag {
 		_name = name;
 	}
 
+	@Override
 	protected void cleanUp() {
 		_displayStyle = LIST_ICON;
 		_formAction = null;
@@ -63,10 +64,12 @@ public class LanguageTag extends IncludeTag {
 		_name = "languageId";
 	}
 
+	@Override
 	protected String getPage() {
 		return _PAGE;
 	}
 
+	@Override
 	protected void setAttributes(HttpServletRequest request) {
 		request.setAttribute(
 			"liferay-ui:language:displayStyle", String.valueOf(_displayStyle));

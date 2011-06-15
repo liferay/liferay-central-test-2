@@ -27,6 +27,7 @@ import javax.servlet.http.HttpSession;
  */
 public class LogSessionIdAction extends Action {
 
+	@Override
 	public void run(HttpServletRequest request, HttpServletResponse response) {
 		HttpSession session = request.getSession();
 

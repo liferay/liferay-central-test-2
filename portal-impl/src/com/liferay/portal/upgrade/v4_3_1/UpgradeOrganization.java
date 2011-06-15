@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.upgrade.UpgradeProcess;
  */
 public class UpgradeOrganization extends UpgradeProcess {
 
+	@Override
 	protected void doUpgrade() throws Exception {
 		runSQL(
 			"update Organization_ set location = TRUE where " +

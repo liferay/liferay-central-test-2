@@ -23,10 +23,12 @@ import com.liferay.portal.upgrade.v5_2_1.UpgradeSchema;
  */
 public class UpgradeProcess_5_2_1 extends UpgradeProcess {
 
+	@Override
 	public int getThreshold() {
 		return ReleaseInfo.RELEASE_5_2_1_BUILD_NUMBER;
 	}
 
+	@Override
 	protected void doUpgrade() throws Exception {
 		upgrade(UpgradeSchema.class);
 	}

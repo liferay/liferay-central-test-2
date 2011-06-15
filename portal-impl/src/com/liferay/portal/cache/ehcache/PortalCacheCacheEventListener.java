@@ -38,6 +38,7 @@ public class PortalCacheCacheEventListener implements CacheEventListener {
 		_portalCache = portalCache;
 	}
 
+	@Override
 	public Object clone() {
 		return new PortalCacheCacheEventListener(_cacheListener, _portalCache);
 	}

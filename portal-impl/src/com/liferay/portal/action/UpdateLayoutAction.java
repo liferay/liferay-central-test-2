@@ -68,6 +68,7 @@ import org.apache.struts.action.ActionMapping;
  */
 public class UpdateLayoutAction extends JSONAction {
 
+	@Override
 	public String getJSON(
 			ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response)

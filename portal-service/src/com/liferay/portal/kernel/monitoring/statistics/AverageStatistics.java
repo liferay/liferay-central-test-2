@@ -68,6 +68,7 @@ public class AverageStatistics extends BaseStatistics {
 		return _countStatistics.getCount();
 	}
 
+	@Override
 	public void reset() {
 		super.reset();
 

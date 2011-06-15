@@ -26,6 +26,7 @@ import com.liferay.portal.security.auth.CompanyThreadLocal;
  */
 public class BufferedIncrementMessageListener extends BaseMessageListener {
 
+	@Override
 	@SuppressWarnings("rawtypes")
 	protected void doReceive(Message message) throws Exception {
 		long companyId = message.getLong("companyId");

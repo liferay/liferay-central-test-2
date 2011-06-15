@@ -154,6 +154,7 @@ public class JSONWebServiceConfigurator extends FindClass {
 		_jsonWebServiceActionsManager = jsonWebServiceActionsManager;
 	}
 
+	@Override
 	protected void onEntry(FindClass.EntryData entryData) throws Exception {
 		String className = entryData.getName();
 

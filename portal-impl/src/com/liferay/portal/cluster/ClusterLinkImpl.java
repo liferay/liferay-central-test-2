@@ -38,6 +38,7 @@ import org.jgroups.JChannel;
  */
 public class ClusterLinkImpl extends ClusterBase implements ClusterLink {
 
+	@Override
 	public void destroy() {
 		if (!PropsValues.CLUSTER_LINK_ENABLED) {
 			return;
@@ -127,6 +128,7 @@ public class ClusterLinkImpl extends ClusterBase implements ClusterLink {
 		return _transportChannels.get(channelIndex);
 	}
 
+	@Override
 	protected void initChannels() throws ChannelException {
 		Properties transportProperties = PropsUtil.getProperties(
 			PropsKeys.CLUSTER_LINK_CHANNEL_PROPERTIES_TRANSPORT, true);

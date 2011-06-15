@@ -66,6 +66,7 @@ public class WebsiteLocalServiceImpl extends WebsiteLocalServiceBaseImpl {
 		return website;
 	}
 
+	@Override
 	public void deleteWebsite(long websiteId)
 		throws PortalException, SystemException {
 
@@ -74,6 +75,7 @@ public class WebsiteLocalServiceImpl extends WebsiteLocalServiceBaseImpl {
 		deleteWebsite(website);
 	}
 
+	@Override
 	public void deleteWebsite(Website website) throws SystemException {
 		websitePersistence.remove(website);
 	}
@@ -91,6 +93,7 @@ public class WebsiteLocalServiceImpl extends WebsiteLocalServiceBaseImpl {
 		}
 	}
 
+	@Override
 	public Website getWebsite(long websiteId)
 		throws PortalException, SystemException {
 

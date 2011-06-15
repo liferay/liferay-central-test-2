@@ -52,6 +52,7 @@ public class LiferayFileVersion extends LiferayModel implements FileVersion {
 		return _dlFileVersion.getChangeLog();
 	}
 
+	@Override
 	public long getCompanyId() {
 		return _dlFileVersion.getCompanyId();
 	}
@@ -64,6 +65,7 @@ public class LiferayFileVersion extends LiferayModel implements FileVersion {
 		return _dlFileVersion.getDescription();
 	}
 
+	@Override
 	public ExpandoBridge getExpandoBridge() {
 		return _dlFileVersion.getExpandoBridge();
 	}
@@ -104,6 +106,7 @@ public class LiferayFileVersion extends LiferayModel implements FileVersion {
 		return DLFileVersion.class;
 	}
 
+	@Override
 	public String getModelClassName() {
 		return DLFileVersion.class.getName();
 	}
@@ -112,6 +115,7 @@ public class LiferayFileVersion extends LiferayModel implements FileVersion {
 		return getCreateDate();
 	}
 
+	@Override
 	public long getPrimaryKey() {
 		return _dlFileVersion.getPrimaryKey();
 	}

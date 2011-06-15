@@ -69,6 +69,7 @@ public class UnmodifiableList<E> implements List<E>, Serializable {
 		return _list.containsAll(collection);
 	}
 
+	@Override
 	public boolean equals(Object object) {
 		return _list.equals(object);
 	}
@@ -77,6 +78,7 @@ public class UnmodifiableList<E> implements List<E>, Serializable {
 		return _list.get(index);
 	}
 
+	@Override
 	public int hashCode() {
 		return _list.hashCode();
 	}
@@ -197,6 +199,7 @@ public class UnmodifiableList<E> implements List<E>, Serializable {
 		return _list.toArray(a);
 	}
 
+	@Override
 	public String toString() {
 		return _list.toString();
 	}

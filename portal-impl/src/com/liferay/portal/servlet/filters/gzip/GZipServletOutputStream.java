@@ -41,24 +41,29 @@ public class GZipServletOutputStream extends ServletOutputStream {
 		};
 	}
 
+	@Override
 	public void close() throws IOException {
 		_gZipOutputStream.close();
 	}
 
+	@Override
 	public void flush() throws IOException {
 		_gZipOutputStream.flush();
 	}
 
+	@Override
 	public void write(byte[] bytes) throws IOException {
 		_gZipOutputStream.write(bytes);
 	}
 
+	@Override
 	public void write(byte[] bytes, int offset, int length)
 		throws IOException {
 
 		_gZipOutputStream.write(bytes, offset, length);
 	}
 
+	@Override
 	public void write(int b) throws IOException {
 		_gZipOutputStream.write(b);
 	}

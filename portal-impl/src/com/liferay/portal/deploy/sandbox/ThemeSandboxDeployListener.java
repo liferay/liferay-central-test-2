@@ -52,6 +52,7 @@ public class ThemeSandboxDeployListener
 		jars.add(portalLibDir + "/util-taglib.jar");
 	}
 
+	@Override
 	public void copyXmls(
 			File srcFile, String displayName, PluginPackage pluginPackage)
 		throws Exception {
@@ -67,6 +68,7 @@ public class ThemeSandboxDeployListener
 		_sandboxHandler.deploy(dir);
 	}
 
+	@Override
 	public String getDisplayName(File srcFile) {
 		String displayName = super.getDisplayName(srcFile);
 

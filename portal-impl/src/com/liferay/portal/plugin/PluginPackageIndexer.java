@@ -63,6 +63,7 @@ public class PluginPackageIndexer extends BaseIndexer {
 		return CLASS_NAMES;
 	}
 
+	@Override
 	protected void doDelete(Object obj) throws Exception {
 		PluginPackage pluginPackage = (PluginPackage)obj;
 
@@ -74,6 +75,7 @@ public class PluginPackageIndexer extends BaseIndexer {
 			CompanyConstants.SYSTEM, document.get(Field.UID));
 	}
 
+	@Override
 	protected Document doGetDocument(Object obj) throws Exception {
 		PluginPackage pluginPackage = (PluginPackage)obj;
 
@@ -163,6 +165,7 @@ public class PluginPackageIndexer extends BaseIndexer {
 		return document;
 	}
 
+	@Override
 	protected Summary doGetSummary(
 		Document document, Locale locale, String snippet,
 		PortletURL portletURL) {
@@ -187,6 +190,7 @@ public class PluginPackageIndexer extends BaseIndexer {
 		return new Summary(title, content, portletURL);
 	}
 
+	@Override
 	protected void doReindex(Object obj) throws Exception {
 		PluginPackage pluginPackage = (PluginPackage)obj;
 
@@ -195,9 +199,11 @@ public class PluginPackageIndexer extends BaseIndexer {
 		SearchEngineUtil.updateDocument(CompanyConstants.SYSTEM, document);
 	}
 
+	@Override
 	protected void doReindex(String className, long classPK) throws Exception {
 	}
 
+	@Override
 	protected void doReindex(String[] ids) throws Exception {
 		SearchEngineUtil.deletePortletDocuments(
 			CompanyConstants.SYSTEM, PORTLET_ID);
@@ -215,10 +221,12 @@ public class PluginPackageIndexer extends BaseIndexer {
 		SearchEngineUtil.updateDocuments(CompanyConstants.SYSTEM, documents);
 	}
 
+	@Override
 	protected String getPortletId(SearchContext searchContext) {
 		return PORTLET_ID;
 	}
 
+	@Override
 	protected void postProcessFullQuery(
 			BooleanQuery fullQuery, SearchContext searchContext)
 		throws Exception {

@@ -81,6 +81,7 @@ public class WriterOutputStream extends OutputStream {
 		_autoFlush = autoFlush;
 	}
 
+	@Override
 	public void close() throws IOException {
 		_doDecode(true);
 		_doFlush();
@@ -88,6 +89,7 @@ public class WriterOutputStream extends OutputStream {
 		_writer.close();
 	}
 
+	@Override
 	public void flush() throws IOException {
 		_doFlush();
 
@@ -98,10 +100,12 @@ public class WriterOutputStream extends OutputStream {
 		return _charsetName;
 	}
 
+	@Override
 	public void write(byte[] bytes) throws IOException {
 		write(bytes, 0, bytes.length);
 	}
 
+	@Override
 	public void write(byte[] bytes, int offset, int length)
 		throws IOException {
 
@@ -121,6 +125,7 @@ public class WriterOutputStream extends OutputStream {
 		}
 	}
 
+	@Override
 	public void write(int b) throws IOException {
 		write(new byte[] {(byte)b}, 0, 1);
 	}

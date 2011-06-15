@@ -60,6 +60,7 @@ import org.apache.struts.action.ActionMapping;
  */
 public class TrackbackAction extends PortletAction {
 
+	@Override
 	public void processAction(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
 			ActionRequest actionRequest, ActionResponse actionResponse)
@@ -184,6 +185,7 @@ public class TrackbackAction extends PortletAction {
 		sendSuccess(actionRequest, actionResponse);
 	}
 
+	@Override
 	protected boolean isCheckMethodOnProcessAction() {
 		return _CHECK_METHOD_ON_PROCESS_ACTION;
 	}

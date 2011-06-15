@@ -34,26 +34,32 @@ import javax.servlet.http.HttpServletResponse;
 public class ResourceResponseImpl
 	extends MimeResponseImpl implements ResourceResponse {
 
+	@Override
 	public void addDateHeader(String name, long date) {
 		_response.addDateHeader(name, date);
 	}
 
+	@Override
 	public void addHeader(String name, String value) {
 		_response.addHeader(name, value);
 	}
 
+	@Override
 	public void addIntHeader(String name, int value) {
 		_response.addIntHeader(name, value);
 	}
 
+	@Override
 	public void addProperty(Cookie cookie) {
 		_response.addCookie(cookie);
 	}
 
+	@Override
 	public PortletURL createActionURL() {
 		return super.createActionURL();
 	}
 
+	@Override
 	public LiferayPortletURL createLiferayPortletURL(
 		String portletName, String lifecycle) {
 
@@ -77,14 +83,17 @@ public class ResourceResponseImpl
 		return super.createLiferayPortletURL(portletName, lifecycle);
 	}
 
+	@Override
 	public PortletURL createRenderURL() {
 		return super.createRenderURL();
 	}
 
+	@Override
 	public ResourceURL createResourceURL() {
 		return super.createResourceURL();
 	}
 
+	@Override
 	public String getLifecycle() {
 		return PortletRequest.RESOURCE_PHASE;
 	}
@@ -101,10 +110,12 @@ public class ResourceResponseImpl
 		_response.setContentLength(length);
 	}
 
+	@Override
 	public void setDateHeader(String name, long date) {
 		_response.setDateHeader(name, date);
 	}
 
+	@Override
 	public void setHeader(String name, String value) {
 		_response.setHeader(name, value);
 
@@ -116,10 +127,12 @@ public class ResourceResponseImpl
 		}
 	}
 
+	@Override
 	public void setIntHeader(String name, int value) {
 		_response.setIntHeader(name, value);
 	}
 
+	@Override
 	protected void init(
 		PortletRequestImpl portletRequestImpl, HttpServletResponse response,
 		String portletName, long companyId, long plid) {

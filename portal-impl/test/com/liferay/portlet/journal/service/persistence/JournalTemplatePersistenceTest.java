@@ -34,6 +34,7 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class JournalTemplatePersistenceTest extends BasePersistenceTestCase {
+	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 

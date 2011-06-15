@@ -42,14 +42,17 @@ import java.util.List;
  */
 public class ConvertImageGallery extends ConvertProcess {
 
+	@Override
 	public String getDescription() {
 		return "migrate-images-from-one-repository-to-another";
 	}
 
+	@Override
 	public String getParameterDescription() {
 		return "please-select-a-new-repository-hook";
 	}
 
+	@Override
 	public String[] getParameterNames() {
 		StringBundler sb = new StringBundler(_HOOKS.length * 2 + 2);
 
@@ -66,10 +69,12 @@ public class ConvertImageGallery extends ConvertProcess {
 		return new String[] {sb.toString()};
 	}
 
+	@Override
 	public boolean isEnabled() {
 		return true;
 	}
 
+	@Override
 	protected void doConvert() throws Exception {
 		boolean cacheRegistryActive = CacheRegistryUtil.isActive();
 

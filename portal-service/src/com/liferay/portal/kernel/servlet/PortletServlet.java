@@ -56,6 +56,7 @@ public class PortletServlet extends HttpServlet {
 	public static final String PORTLET_SERVLET_RESPONSE =
 		"com.liferay.portal.kernel.servlet.PortletServletResponse";
 
+	@Override
 	public void service(
 			HttpServletRequest request, HttpServletResponse response)
 		throws IOException, ServletException {

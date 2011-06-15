@@ -23,10 +23,12 @@ import com.liferay.portal.kernel.portlet.PortletClassLoaderUtil;
 public class PortletHibernateConfiguration
 	extends PortalHibernateConfiguration {
 
+	@Override
 	protected ClassLoader getConfigurationClassLoader() {
 		return PortletClassLoaderUtil.getClassLoader();
 	}
 
+	@Override
 	protected String[] getConfigurationResources() {
 		return new String[] {"META-INF/portlet-hbm.xml"};
 	}

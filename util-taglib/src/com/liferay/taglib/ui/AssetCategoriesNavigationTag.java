@@ -33,15 +33,18 @@ public class AssetCategoriesNavigationTag extends IncludeTag {
 		_vocabularyIds = vocabularyIds;
 	}
 
+	@Override
 	protected void cleanUp() {
 		_hidePortletWhenEmpty = false;
 		_vocabularyIds = null;
 	}
 
+	@Override
 	protected String getPage() {
 		return _PAGE;
 	}
 
+	@Override
 	protected void setAttributes(HttpServletRequest request) {
 		request.setAttribute(
 			"liferay-ui:asset-tags-navigation:hidePortletWhenEmpty",

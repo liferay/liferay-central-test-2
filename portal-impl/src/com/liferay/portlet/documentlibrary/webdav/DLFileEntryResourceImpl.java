@@ -47,10 +47,12 @@ public class DLFileEntryResourceImpl extends BaseResourceImpl {
 		_fileEntry = fileEntry;
 	}
 
+	@Override
 	public boolean isCollection() {
 		return false;
 	}
 
+	@Override
 	public Lock getLock() {
 		try {
 			return _fileEntry.getLock();
@@ -61,6 +63,7 @@ public class DLFileEntryResourceImpl extends BaseResourceImpl {
 		return null;
 	}
 
+	@Override
 	public boolean isLocked() {
 		try {
 			return _fileEntry.hasLock();
@@ -71,10 +74,12 @@ public class DLFileEntryResourceImpl extends BaseResourceImpl {
 		return false;
 	}
 
+	@Override
 	public String getContentType() {
 		return _fileEntry.getMimeType();
 	}
 
+	@Override
 	public InputStream getContentAsStream() throws WebDAVException {
 		try {
 			String version = StringPool.BLANK;

@@ -43,6 +43,7 @@ public class LogoSelectorTag extends IncludeTag {
 		_showBackground = showBackground;
 	}
 
+	@Override
 	protected void cleanUp() {
 		_defaultLogoURL = null;
 		_editLogoURL = null;
@@ -51,10 +52,12 @@ public class LogoSelectorTag extends IncludeTag {
 		_showBackground = true;
 	}
 
+	@Override
 	protected String getPage() {
 		return _PAGE;
 	}
 
+	@Override
 	protected void setAttributes(HttpServletRequest request) {
 		request.setAttribute(
 			"liferay-ui:logo-selector:defaultLogoURL", _defaultLogoURL);

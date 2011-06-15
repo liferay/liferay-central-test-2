@@ -92,6 +92,7 @@ import org.apache.struts.action.ActionMapping;
  */
 public class CreateAccountAction extends PortletAction {
 
+	@Override
 	public void processAction(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
 			ActionRequest actionRequest, ActionResponse actionResponse)
@@ -195,6 +196,7 @@ public class CreateAccountAction extends PortletAction {
 		}
 	}
 
+	@Override
 	public ActionForward render(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
 			RenderRequest renderRequest, RenderResponse renderResponse)
@@ -331,6 +333,7 @@ public class CreateAccountAction extends PortletAction {
 		return _AUTO_SCREEN_NAME;
 	}
 
+	@Override
 	protected boolean isCheckMethodOnProcessAction() {
 		return _CHECK_METHOD_ON_PROCESS_ACTION;
 	}

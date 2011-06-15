@@ -99,6 +99,7 @@ public class SubscriptionLocalServiceImpl
 		return subscription;
 	}
 
+	@Override
 	public void deleteSubscription(long subscriptionId)
 		throws PortalException, SystemException {
 
@@ -121,6 +122,7 @@ public class SubscriptionLocalServiceImpl
 		deleteSubscription(subscription);
 	}
 
+	@Override
 	public void deleteSubscription(Subscription subscription)
 		throws PortalException, SystemException {
 

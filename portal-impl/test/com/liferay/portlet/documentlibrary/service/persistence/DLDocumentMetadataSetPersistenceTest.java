@@ -33,6 +33,7 @@ import java.util.List;
  */
 public class DLDocumentMetadataSetPersistenceTest
 	extends BasePersistenceTestCase {
+	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 

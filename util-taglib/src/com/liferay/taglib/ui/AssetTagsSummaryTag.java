@@ -53,6 +53,7 @@ public class AssetTagsSummaryTag extends IncludeTag {
 		_portletURL = portletURL;
 	}
 
+	@Override
 	protected void cleanUp() {
 		_assetTagNames = null;
 		_className = null;
@@ -61,10 +62,12 @@ public class AssetTagsSummaryTag extends IncludeTag {
 		_portletURL = null;
 	}
 
+	@Override
 	protected String getPage() {
 		return _PAGE;
 	}
 
+	@Override
 	protected void setAttributes(HttpServletRequest request) {
 		request.setAttribute(
 			"liferay-ui:asset-tags-summary:assetTagNames", _assetTagNames);

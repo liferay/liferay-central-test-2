@@ -34,6 +34,7 @@ import java.util.List;
  */
 public class JournalArticleResourcePersistenceTest
 	extends BasePersistenceTestCase {
+	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 

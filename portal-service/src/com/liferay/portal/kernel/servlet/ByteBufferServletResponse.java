@@ -33,6 +33,7 @@ public class ByteBufferServletResponse extends HeaderCacheServletResponse {
 		super(response);
 	}
 
+	@Override
 	public int getBufferSize() {
 		if (_byteBuffer != null) {
 			return _byteBuffer.remaining();
@@ -57,6 +58,7 @@ public class ByteBufferServletResponse extends HeaderCacheServletResponse {
 		}
 	}
 
+	@Override
 	public ServletOutputStream getOutputStream() {
 		if (_printWriter != null) {
 			throw new IllegalStateException(
@@ -72,6 +74,7 @@ public class ByteBufferServletResponse extends HeaderCacheServletResponse {
 		return _servletOutputStream;
 	}
 
+	@Override
 	public PrintWriter getWriter() {
 		if (_printWriter != null) {
 			return _printWriter;

@@ -63,6 +63,7 @@ public class CalEventAssetRendererFactory extends BaseAssetRendererFactory {
 		return TYPE;
 	}
 
+	@Override
 	public PortletURL getURLAdd(
 			LiferayPortletRequest liferayPortletRequest,
 			LiferayPortletResponse liferayPortletResponse)
@@ -90,6 +91,7 @@ public class CalEventAssetRendererFactory extends BaseAssetRendererFactory {
 		return portletURL;
 	}
 
+	@Override
 	public boolean hasPermission(
 			PermissionChecker permissionChecker, long classPK, String actionId)
 		throws Exception {
@@ -98,6 +100,7 @@ public class CalEventAssetRendererFactory extends BaseAssetRendererFactory {
 			permissionChecker, classPK, actionId);
 	}
 
+	@Override
 	protected String getIconPath(ThemeDisplay themeDisplay) {
 		return themeDisplay.getPathThemeImages() + "/common/date.png";
 	}

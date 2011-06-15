@@ -22,6 +22,7 @@ import com.liferay.portal.util.PortalInstances;
  */
 public class UpgradeExpando extends UpgradeProcess {
 
+	@Override
 	protected void doUpgrade() throws Exception {
 		long[] companyIds = PortalInstances.getCompanyIdsBySQL();
 

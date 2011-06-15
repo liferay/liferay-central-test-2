@@ -42,6 +42,7 @@ import org.apache.catalina.CometProcessor;
 public class CatalinaCometProcessor
 	extends HttpServlet implements CometProcessor {
 
+	@Override
 	public void destroy() {
 		super.destroy();
 
@@ -59,6 +60,7 @@ public class CatalinaCometProcessor
 		}
 	}
 
+	@Override
 	public void init(ServletConfig servletConfig) throws ServletException {
 		if (_log.isDebugEnabled()) {
 			_log.debug("Initialize comet processor");

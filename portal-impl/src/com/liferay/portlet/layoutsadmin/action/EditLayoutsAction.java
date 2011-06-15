@@ -111,6 +111,7 @@ import org.apache.struts.action.ActionMapping;
  */
 public class EditLayoutsAction extends PortletAction {
 
+	@Override
 	public void processAction(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
 			ActionRequest actionRequest, ActionResponse actionResponse)
@@ -260,6 +261,7 @@ public class EditLayoutsAction extends PortletAction {
 		}
 	}
 
+	@Override
 	public ActionForward render(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
 			RenderRequest renderRequest, RenderResponse renderResponse)
@@ -295,6 +297,7 @@ public class EditLayoutsAction extends PortletAction {
 			getForward(renderRequest, "portlet.layouts_admin.edit_layouts"));
 	}
 
+	@Override
 	public void serveResource(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
 			ResourceRequest resourceRequest, ResourceResponse resourceResponse)
@@ -508,6 +511,7 @@ public class EditLayoutsAction extends PortletAction {
 		return ActionUtil.getGroup(portletRequest);
 	}
 
+	@Override
 	protected boolean isCheckMethodOnProcessAction() {
 		return _CHECK_METHOD_ON_PROCESS_ACTION;
 	}

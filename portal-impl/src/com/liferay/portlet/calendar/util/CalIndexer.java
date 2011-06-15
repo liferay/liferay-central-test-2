@@ -50,6 +50,7 @@ public class CalIndexer extends BaseIndexer {
 		return CLASS_NAMES;
 	}
 
+	@Override
 	protected void doDelete(Object obj) throws Exception {
 		CalEvent event = (CalEvent)obj;
 
@@ -61,6 +62,7 @@ public class CalIndexer extends BaseIndexer {
 			event.getCompanyId(), document.get(Field.UID));
 	}
 
+	@Override
 	protected Document doGetDocument(Object obj) throws Exception {
 		CalEvent event = (CalEvent)obj;
 
@@ -74,6 +76,7 @@ public class CalIndexer extends BaseIndexer {
 		return document;
 	}
 
+	@Override
 	protected Summary doGetSummary(
 		Document document, Locale locale, String snippet,
 		PortletURL portletURL) {
@@ -94,6 +97,7 @@ public class CalIndexer extends BaseIndexer {
 		return new Summary(title, content, portletURL);
 	}
 
+	@Override
 	protected void doReindex(Object obj) throws Exception {
 		CalEvent event = (CalEvent)obj;
 
@@ -102,18 +106,21 @@ public class CalIndexer extends BaseIndexer {
 		SearchEngineUtil.updateDocument(event.getCompanyId(), document);
 	}
 
+	@Override
 	protected void doReindex(String className, long classPK) throws Exception {
 		CalEvent event = CalEventLocalServiceUtil.getEvent(classPK);
 
 		doReindex(event);
 	}
 
+	@Override
 	protected void doReindex(String[] ids) throws Exception {
 		long companyId = GetterUtil.getLong(ids[0]);
 
 		reindexEvents(companyId);
 	}
 
+	@Override
 	protected String getPortletId(SearchContext searchContext) {
 		return PORTLET_ID;
 	}

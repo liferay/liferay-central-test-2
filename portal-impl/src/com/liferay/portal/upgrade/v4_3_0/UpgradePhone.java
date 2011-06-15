@@ -41,6 +41,7 @@ import java.util.Map;
  */
 public class UpgradePhone extends UpgradeProcess {
 
+	@Override
 	protected void doUpgrade() throws Exception {
 
 		// Phone

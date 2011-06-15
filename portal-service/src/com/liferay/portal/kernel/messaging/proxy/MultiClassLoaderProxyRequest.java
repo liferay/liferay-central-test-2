@@ -37,6 +37,7 @@ public class MultiClassLoaderProxyRequest extends ProxyRequest {
 			classLoaders);
 	}
 
+	@Override
 	public Object execute(Object object) throws Exception {
 		ClassLoader contextClassLoader = null;
 

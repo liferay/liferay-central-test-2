@@ -38,6 +38,7 @@ import java.util.List;
  */
 public class VerifyGroup extends VerifyProcess {
 
+	@Override
 	protected void doVerify() throws Exception {
 		verifyCompanyGroups();
 		verifyNullFriendlyURLGroups();

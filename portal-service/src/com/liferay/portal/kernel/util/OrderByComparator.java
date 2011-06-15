@@ -85,6 +85,7 @@ public abstract class OrderByComparator implements Comparator, Serializable {
 		}
 	}
 
+	@Override
 	public String toString() {
 		return getOrderBy();
 	}

@@ -59,6 +59,7 @@ public class ContextReplace implements Cloneable {
 		return StringUtil.replace(text, _keys, _values);
 	}
 
+	@Override
 	public Object clone() {
 		return new ContextReplace(_context);
 	}

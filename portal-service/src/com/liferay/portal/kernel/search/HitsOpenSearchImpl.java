@@ -64,6 +64,7 @@ public abstract class HitsOpenSearchImpl extends BaseOpenSearchImpl {
 
 	public abstract String getTitle(String keywords);
 
+	@Override
 	public String search(
 			HttpServletRequest request, long groupId, long userId,
 			String keywords, int startPage, int itemsPerPage, String format)

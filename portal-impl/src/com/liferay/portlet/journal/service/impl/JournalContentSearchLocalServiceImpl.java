@@ -124,12 +124,14 @@ public class JournalContentSearchLocalServiceImpl
 		}
 	}
 
+	@Override
 	public void deleteJournalContentSearch(JournalContentSearch contentSearch)
 		throws SystemException {
 
 		journalContentSearchPersistence.remove(contentSearch);
 	}
 
+	@Override
 	public void deleteJournalContentSearch(long contentSearchId)
 		throws PortalException, SystemException {
 

@@ -28,6 +28,7 @@ import org.apache.commons.lang.time.StopWatch;
  */
 public class SubscriptionSenderMessageListener extends BaseMessageListener {
 
+	@Override
 	protected void doReceive(Message message) throws Exception {
 		SubscriptionSender subscriptionSender =
 			(SubscriptionSender)message.getPayload();

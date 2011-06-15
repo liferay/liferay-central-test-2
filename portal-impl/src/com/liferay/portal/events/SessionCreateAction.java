@@ -25,6 +25,7 @@ import javax.servlet.http.HttpSession;
  */
 public class SessionCreateAction extends SessionAction {
 
+	@Override
 	public void run(HttpSession session) {
 		if (_log.isDebugEnabled()) {
 			_log.debug(session.getId());

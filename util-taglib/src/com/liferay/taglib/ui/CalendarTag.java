@@ -55,6 +55,7 @@ public class CalendarTag extends IncludeTag {
 		_year = year;
 	}
 
+	@Override
 	protected void cleanUp() {
 		_data = null;
 		_day = 0;
@@ -65,10 +66,12 @@ public class CalendarTag extends IncludeTag {
 		_year = 0;
 	}
 
+	@Override
 	protected String getPage() {
 		return _PAGE;
 	}
 
+	@Override
 	protected void setAttributes(HttpServletRequest request) {
 		request.setAttribute("liferay-ui:calendar:data", _data);
 		request.setAttribute("liferay-ui:calendar:day", String.valueOf(_day));

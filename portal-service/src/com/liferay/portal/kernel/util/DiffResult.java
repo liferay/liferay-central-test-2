@@ -63,6 +63,7 @@ public class DiffResult {
 		_lineNumber = lineNumber;
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		DiffResult diffResult = (DiffResult)obj;
 
@@ -75,6 +76,7 @@ public class DiffResult {
 		return false;
 	}
 
+	@Override
 	public int hashCode() {
 		HashCode hashCode = HashCodeFactoryUtil.getHashCode();
 
@@ -84,6 +86,7 @@ public class DiffResult {
 		return hashCode.toHashCode();
 	}
 
+	@Override
 	public String toString() {
 		StringBundler sb = new StringBundler(2 * _changedLines.size() + 2);
 

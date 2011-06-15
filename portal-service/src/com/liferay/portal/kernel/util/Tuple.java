@@ -29,6 +29,7 @@ public class Tuple implements Serializable {
 		return _array[i];
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		if (!(obj instanceof Tuple)) {
 			return false;
@@ -54,6 +55,7 @@ public class Tuple implements Serializable {
 		return true;
 	}
 
+	@Override
 	public int hashCode() {
 		int hashCode = 0;
 

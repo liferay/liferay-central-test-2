@@ -46,6 +46,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class JournalWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 
+	@Override
 	public int deleteResource(WebDAVRequest webDavRequest)
 		throws WebDAVException {
 
@@ -168,6 +169,7 @@ public class JournalWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 		}
 	}
 
+	@Override
 	public int putResource(WebDAVRequest webDavRequest) throws WebDAVException {
 		try {
 			Resource resource = getResource(webDavRequest);

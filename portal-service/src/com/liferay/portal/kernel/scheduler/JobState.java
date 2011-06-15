@@ -64,6 +64,7 @@ public class JobState implements Cloneable, Serializable {
 		}
 	}
 
+	@Override
 	public Object clone() {
 		JobState jobState = new JobState(_triggerState, _exceptionsMaxSize);
 

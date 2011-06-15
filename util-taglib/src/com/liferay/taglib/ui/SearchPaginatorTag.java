@@ -25,16 +25,19 @@ public class SearchPaginatorTag<R> extends SearchFormTag<R> {
 		_type = type;
 	}
 
+	@Override
 	protected void cleanUp() {
 		super.cleanUp();
 
 		_type = "regular";
 	}
 
+	@Override
 	protected String getPage() {
 		return _PAGE;
 	}
 
+	@Override
 	protected void setAttributes(HttpServletRequest request) {
 		super.setAttributes(request);
 

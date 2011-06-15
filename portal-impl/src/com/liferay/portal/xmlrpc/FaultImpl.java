@@ -37,6 +37,7 @@ public class FaultImpl implements Fault {
 		return _description;
 	}
 
+	@Override
 	public String toString() {
 		return "XML-RPC fault " + _code + " " + _description;
 	}

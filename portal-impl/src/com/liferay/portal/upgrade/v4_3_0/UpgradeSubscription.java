@@ -39,6 +39,7 @@ import java.util.Map;
  */
 public class UpgradeSubscription extends UpgradeProcess {
 
+	@Override
 	protected void doUpgrade() throws Exception {
 
 		// Subscription

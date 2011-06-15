@@ -66,6 +66,7 @@ import javax.portlet.PortletPreferences;
  */
 public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 
+	@Override
 	public PortletDataHandlerControl[] getExportControls() {
 		return new PortletDataHandlerControl[] {
 			_categoriesAndMessages, _attachments, _messageFlags, _userBans,
@@ -73,6 +74,7 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 		};
 	}
 
+	@Override
 	public PortletDataHandlerControl[] getImportControls() {
 		return new PortletDataHandlerControl[] {
 			_categoriesAndMessages, _attachments, _messageFlags, _userBans,
@@ -80,14 +82,17 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 		};
 	}
 
+	@Override
 	public boolean isAlwaysExportable() {
 		return _ALWAYS_EXPORTABLE;
 	}
 
+	@Override
 	public boolean isPublishToLiveByDefault() {
 		return PropsValues.MESSAGE_BOARDS_PUBLISH_TO_LIVE_BY_DEFAULT;
 	}
 
+	@Override
 	protected PortletPreferences doDeleteData(
 			PortletDataContext portletDataContext, String portletId,
 			PortletPreferences portletPreferences)
@@ -107,6 +112,7 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 		return null;
 	}
 
+	@Override
 	protected String doExportData(
 			PortletDataContext portletDataContext, String portletId,
 			PortletPreferences portletPreferences)
@@ -159,6 +165,7 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 		return document.formattedString();
 	}
 
+	@Override
 	protected PortletPreferences doImportData(
 			PortletDataContext portletDataContext, String portletId,
 			PortletPreferences portletPreferences, String data)

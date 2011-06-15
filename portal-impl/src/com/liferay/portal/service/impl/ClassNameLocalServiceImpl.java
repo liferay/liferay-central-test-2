@@ -64,6 +64,7 @@ public class ClassNameLocalServiceImpl extends ClassNameLocalServiceBaseImpl {
 		}
 	}
 
+	@Override
 	public ClassName getClassName(long classNameId)
 		throws PortalException, SystemException {
 

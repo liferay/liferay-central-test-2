@@ -135,6 +135,7 @@ public class SchedulerEntryImpl implements SchedulerEntry {
 		_triggerValue = triggerValue;
 	}
 
+	@Override
 	public String toString() {
 		StringBundler sb = new StringBundler(19);
 

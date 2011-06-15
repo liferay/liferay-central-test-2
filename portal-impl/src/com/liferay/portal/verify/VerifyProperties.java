@@ -24,6 +24,7 @@ import com.liferay.util.SystemProperties;
  */
 public class VerifyProperties extends VerifyProcess {
 
+	@Override
 	protected void doVerify() throws Exception {
 
 		// system.properties

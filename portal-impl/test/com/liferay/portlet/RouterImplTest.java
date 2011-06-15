@@ -33,6 +33,7 @@ public class RouterImplTest extends BaseTestCase {
 		InitUtil.initWithSpring();
 	}
 
+	@Override
 	public void setUp() throws Exception {
 		_routerImpl = new RouterImpl();
 

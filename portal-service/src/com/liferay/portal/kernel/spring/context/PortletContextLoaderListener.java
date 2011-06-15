@@ -48,6 +48,7 @@ public class PortletContextLoaderListener
 		}
 	}
 
+	@Override
 	protected ServletContextListener getInstance() throws Exception {
 		Class<?> clazz = Class.forName(
 			_CLASS_NAME, true, PortalClassLoaderUtil.getClassLoader());

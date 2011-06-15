@@ -37,6 +37,7 @@ import java.sql.Types;
  */
 public class UpgradeOrganization extends UpgradeProcess {
 
+	@Override
 	protected void doUpgrade() throws Exception {
 		UpgradeColumn locationColumn = new TempUpgradeColumnImpl(
 			"location", new Integer(Types.BOOLEAN));

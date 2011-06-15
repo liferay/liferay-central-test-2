@@ -35,6 +35,7 @@ public class DerbyDB extends BaseDB {
 		return _instance;
 	}
 
+	@Override
 	public String buildSQL(String template) throws IOException {
 		template = convertTimestamp(template);
 		template = replaceTemplate(template, getTemplate());
@@ -47,10 +48,12 @@ public class DerbyDB extends BaseDB {
 		return template;
 	}
 
+	@Override
 	public boolean isSupportsAlterColumnName() {
 		return _SUPPORTS_ALTER_COLUMN_NAME;
 	}
 
+	@Override
 	public boolean isSupportsAlterColumnType() {
 		return _SUPPORTS_ALTER_COLUMN_TYPE;
 	}
@@ -59,6 +62,7 @@ public class DerbyDB extends BaseDB {
 		super(TYPE_DERBY);
 	}
 
+	@Override
 	protected String buildCreateFileContent(
 			String sqlDir, String databaseName, int population)
 		throws IOException {
@@ -88,14 +92,17 @@ public class DerbyDB extends BaseDB {
 		return sb.toString();
 	}
 
+	@Override
 	protected String getServerName() {
 		return "derby";
 	}
 
+	@Override
 	protected String[] getTemplate() {
 		return _DERBY;
 	}
 
+	@Override
 	protected String reword(String data) throws IOException {
 		UnsyncBufferedReader unsyncBufferedReader = new UnsyncBufferedReader(
 			new UnsyncStringReader(data));

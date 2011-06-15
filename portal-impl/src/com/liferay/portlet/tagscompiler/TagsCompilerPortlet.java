@@ -39,6 +39,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class TagsCompilerPortlet extends LiferayPortlet {
 
+	@Override
 	public void render(
 		RenderRequest renderRequest, RenderResponse renderResponse) {
 

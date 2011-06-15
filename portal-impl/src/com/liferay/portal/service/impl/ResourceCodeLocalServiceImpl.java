@@ -107,6 +107,7 @@ public class ResourceCodeLocalServiceImpl
 		getResourceCode(companyId, name, ResourceConstants.SCOPE_INDIVIDUAL);
 	}
 
+	@Override
 	public ResourceCode getResourceCode(long codeId)
 		throws PortalException, SystemException {
 

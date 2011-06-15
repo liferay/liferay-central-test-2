@@ -45,6 +45,7 @@ public class SybaseDelegate extends MSSQLDelegate {
 		super(logger, tablePrefix, instanceId, useProperties);
 	}
 
+	@Override
 	protected void setBytes(
 			PreparedStatement ps, int index, ByteArrayOutputStream baos)
 		throws SQLException {

@@ -34,6 +34,7 @@ public class NotificationEvent implements Serializable {
 		_payloadJSONObject = payloadJSONObject;
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		if (obj == null) {
 			return false;
@@ -72,6 +73,7 @@ public class NotificationEvent implements Serializable {
 		return _uuid;
 	}
 
+	@Override
 	public int hashCode() {
 		if (_uuid != null) {
 			return _uuid.hashCode();

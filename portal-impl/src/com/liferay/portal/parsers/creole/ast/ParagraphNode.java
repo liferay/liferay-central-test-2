@@ -32,6 +32,7 @@ public class ParagraphNode extends BaseParentableNode {
 		super(tokenType);
 	}
 
+	@Override
 	public void accept(ASTVisitor astVisitor) {
 		astVisitor.visit(this);
 	}

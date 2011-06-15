@@ -40,6 +40,7 @@ public abstract class BaseCacheKeyGenerator implements CacheKeyGenerator {
 		return this;
 	}
 
+	@Override
 	public abstract CacheKeyGenerator clone();
 
 	public String finish() {

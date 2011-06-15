@@ -35,6 +35,7 @@ public class JavaScriptExecutor extends BaseScriptingExecutor {
 
 	public static final String LANGUAGE = "javascript";
 
+	@Override
 	public void clearCache() {
 		SingleVMPoolUtil.clear(CACHE_NAME);
 	}

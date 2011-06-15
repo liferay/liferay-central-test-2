@@ -116,6 +116,7 @@ public class DDMStructureImpl
 		return fieldsMap.containsKey(fieldName);
 	}
 
+	@Override
 	public void setXsd(String xsd) {
 		super.setXsd(xsd);
 

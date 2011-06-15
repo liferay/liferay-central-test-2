@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.messaging.MessageListener;
 public class DefaultWorkflowDestinationEventListener
 	extends BaseDestinationEventListener {
 
+	@Override
 	public void messageListenerRegistered(
 		String destinationName, MessageListener messageListener) {
 
@@ -57,6 +58,7 @@ public class DefaultWorkflowDestinationEventListener
 			DestinationNames.WORKFLOW_TASK, _workflowTaskManagerListener);
 	}
 
+	@Override
 	public void messageListenerUnregistered(
 		String destinationName, MessageListener messageListener) {
 

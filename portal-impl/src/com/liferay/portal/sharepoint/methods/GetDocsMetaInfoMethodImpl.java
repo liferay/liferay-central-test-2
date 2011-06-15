@@ -33,6 +33,7 @@ public class GetDocsMetaInfoMethodImpl extends BaseMethodImpl {
 		return _METHOD_NAME;
 	}
 
+	@Override
 	public String getRootPath(SharepointRequest sharepointRequest) {
 		String urlList = sharepointRequest.getParameterValue("url_list");
 
@@ -47,6 +48,7 @@ public class GetDocsMetaInfoMethodImpl extends BaseMethodImpl {
 		return urlList;
 	}
 
+	@Override
 	protected List<ResponseElement> getElements(
 			SharepointRequest sharepointRequest)
 		throws Exception {

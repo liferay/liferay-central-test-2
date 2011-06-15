@@ -37,10 +37,12 @@ public class UnsyncCharArrayReader extends Reader {
 		markIndex = offset;
 	}
 
+	@Override
 	public void close() {
 		buffer = null;
 	}
 
+	@Override
 	public void mark(int readAheadLimit) throws IOException {
 		if (buffer == null) {
 			throw new IOException("Stream closed");
@@ -48,10 +50,12 @@ public class UnsyncCharArrayReader extends Reader {
 		markIndex = index;
 	}
 
+	@Override
 	public boolean markSupported() {
 		return true;
 	}
 
+	@Override
 	public int read() throws IOException {
 		if (buffer == null) {
 			throw new IOException("Stream closed");
@@ -65,10 +69,12 @@ public class UnsyncCharArrayReader extends Reader {
 		}
 	}
 
+	@Override
 	public int read(char[] chars) throws IOException {
 		return read(chars, 0, chars.length);
 	}
 
+	@Override
 	public int read(char[] chars, int offset, int length)
 		throws IOException {
 
@@ -97,6 +103,7 @@ public class UnsyncCharArrayReader extends Reader {
 		return read;
 	}
 
+	@Override
 	public int read(CharBuffer charBuffer) throws IOException {
 		if (buffer == null) {
 			throw new IOException("Stream closed");
@@ -123,6 +130,7 @@ public class UnsyncCharArrayReader extends Reader {
 		return length;
 	}
 
+	@Override
 	public boolean ready() throws IOException {
 		if (buffer == null) {
 			throw new IOException("Stream closed");
@@ -136,6 +144,7 @@ public class UnsyncCharArrayReader extends Reader {
 		}
 	}
 
+	@Override
 	public void reset() throws IOException {
 		if (buffer == null) {
 			throw new IOException("Stream closed");
@@ -144,6 +153,7 @@ public class UnsyncCharArrayReader extends Reader {
 		index = markIndex;
 	}
 
+	@Override
 	public long skip(long skip) throws IOException {
 		if (buffer == null) {
 			throw new IOException("Stream closed");

@@ -26,6 +26,7 @@ import javax.security.auth.login.LoginException;
  */
 public class PortalLoginModule extends BasicLoginModule {
 
+	@Override
 	protected Principal getPortalPrincipal(String name) throws LoginException {
 		try {
 			return (Principal)InstanceFactory.newInstance(

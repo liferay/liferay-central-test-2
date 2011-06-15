@@ -55,6 +55,7 @@ import javax.servlet.http.HttpSession;
  */
 public class SecureFilter extends BasePortalFilter {
 
+	@Override
 	public void init(FilterConfig filterConfig) {
 		super.init(filterConfig);
 
@@ -106,6 +107,7 @@ public class SecureFilter extends BasePortalFilter {
 		}
 	}
 
+	@Override
 	protected void processFilter(
 			HttpServletRequest request, HttpServletResponse response,
 			FilterChain filterChain)

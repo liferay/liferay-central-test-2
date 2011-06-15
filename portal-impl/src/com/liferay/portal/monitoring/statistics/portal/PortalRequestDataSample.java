@@ -39,6 +39,7 @@ public class PortalRequestDataSample extends BaseDataSample {
 		return _requestURL;
 	}
 
+	@Override
 	public String toString() {
 		StringBundler sb = new StringBundler(5);
 

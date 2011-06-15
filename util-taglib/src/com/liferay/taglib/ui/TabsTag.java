@@ -31,6 +31,7 @@ import javax.servlet.jsp.JspException;
  */
 public class TabsTag extends IncludeTag {
 
+	@Override
 	public int doStartTag() throws JspException {
 		try {
 			HttpServletRequest request = getServletRequest();
@@ -139,6 +140,7 @@ public class TabsTag extends IncludeTag {
 		}
 	}
 
+	@Override
 	public int doEndTag() throws JspException {
 		try {
 			HttpServletRequest request =
@@ -203,6 +205,7 @@ public class TabsTag extends IncludeTag {
 		}
 	}
 
+	@Override
 	protected String getStartPage() {
 		if (Validator.isNull(_startPage)) {
 			return _START_PAGE;
@@ -216,6 +219,7 @@ public class TabsTag extends IncludeTag {
 		_startPage = startPage;
 	}
 
+	@Override
 	protected String getEndPage() {
 		if (Validator.isNull(_endPage)) {
 			return _END_PAGE;

@@ -31,6 +31,7 @@ public abstract class BaseWorkflowLogUserIdComparator
 		_ascending = ascending;
 	}
 
+	@Override
 	public int compare(Object obj1, Object obj2) {
 		WorkflowLog workflowLog1 = (WorkflowLog)obj1;
 		WorkflowLog workflowLog2 = (WorkflowLog)obj2;
@@ -55,6 +56,7 @@ public abstract class BaseWorkflowLogUserIdComparator
 		}
 	}
 
+	@Override
 	public boolean isAscending() {
 		return _ascending;
 	}

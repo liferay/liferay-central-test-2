@@ -43,6 +43,7 @@ public class PostgreSQLDB extends BaseDB {
 		return _instance;
 	}
 
+	@Override
 	public String buildSQL(String template) throws IOException {
 		template = convertTimestamp(template);
 		template = replaceTemplate(template, getTemplate());
@@ -52,6 +53,7 @@ public class PostgreSQLDB extends BaseDB {
 		return template;
 	}
 
+	@Override
 	public List<Index> getIndexes() throws SQLException {
 		List<Index> indexes = new ArrayList<Index>();
 
@@ -99,6 +101,7 @@ public class PostgreSQLDB extends BaseDB {
 		super(TYPE_POSTGRESQL);
 	}
 
+	@Override
 	protected String buildCreateFileContent(
 			String sqlDir, String databaseName, int population)
 		throws IOException {
@@ -128,14 +131,17 @@ public class PostgreSQLDB extends BaseDB {
 		return sb.toString();
 	}
 
+	@Override
 	protected String getServerName() {
 		return "postgresql";
 	}
 
+	@Override
 	protected String[] getTemplate() {
 		return _POSTGRESQL;
 	}
 
+	@Override
 	protected String reword(String data) throws IOException {
 		UnsyncBufferedReader unsyncBufferedReader = new UnsyncBufferedReader(
 			new UnsyncStringReader(data));

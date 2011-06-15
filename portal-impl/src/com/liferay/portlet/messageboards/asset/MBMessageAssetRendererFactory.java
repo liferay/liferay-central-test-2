@@ -52,6 +52,7 @@ public class MBMessageAssetRendererFactory extends BaseAssetRendererFactory {
 		return TYPE;
 	}
 
+	@Override
 	public boolean hasPermission(
 			PermissionChecker permissionChecker, long classPK, String actionId)
 		throws Exception {
@@ -60,6 +61,7 @@ public class MBMessageAssetRendererFactory extends BaseAssetRendererFactory {
 			permissionChecker, classPK, actionId);
 	}
 
+	@Override
 	protected String getIconPath(ThemeDisplay themeDisplay) {
 		return themeDisplay.getPathThemeImages() + "/common/conversation.png";
 	}

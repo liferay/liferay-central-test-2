@@ -28,18 +28,22 @@ public class MBOpenSearchImpl extends HitsOpenSearchImpl {
 
 	public static final String TITLE = "Liferay Message Boards Search: ";
 
+	@Override
 	public Indexer getIndexer() {
 		return IndexerRegistryUtil.getIndexer(MBMessage.class);
 	}
 
+	@Override
 	public String getPortletId() {
 		return MBIndexer.PORTLET_ID;
 	}
 
+	@Override
 	public String getSearchPath() {
 		return SEARCH_PATH;
 	}
 
+	@Override
 	public String getTitle(String keywords) {
 		return TITLE + keywords;
 	}

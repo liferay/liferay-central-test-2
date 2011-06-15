@@ -64,6 +64,7 @@ public class DiscussionTag extends IncludeTag {
 		_userId = userId;
 	}
 
+	@Override
 	protected void cleanUp() {
 		_className = null;
 		_classPK = 0;
@@ -77,10 +78,12 @@ public class DiscussionTag extends IncludeTag {
 		_userId = 0;
 	}
 
+	@Override
 	protected String getPage() {
 		return _PAGE;
 	}
 
+	@Override
 	protected void setAttributes(HttpServletRequest request) {
 		String permissionClassName = _permissionClassName;
 

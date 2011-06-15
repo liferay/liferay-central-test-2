@@ -23,6 +23,7 @@ import javax.servlet.http.HttpServlet;
  */
 public class SetPortletClassLoaderServlet extends HttpServlet {
 
+	@Override
 	public void init(ServletConfig servletConfig) {
 		ServletContext servletContext = servletConfig.getServletContext();
 

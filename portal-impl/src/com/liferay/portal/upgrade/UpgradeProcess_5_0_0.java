@@ -26,10 +26,12 @@ import com.liferay.portal.upgrade.v5_0_0.UpgradeSoftwareCatalog;
  */
 public class UpgradeProcess_5_0_0 extends UpgradeProcess {
 
+	@Override
 	public int getThreshold() {
 		return ReleaseInfo.RELEASE_5_0_0_BUILD_NUMBER;
 	}
 
+	@Override
 	protected void doUpgrade() throws Exception {
 		upgrade(UpgradeSchema.class);
 		upgrade(UpgradeImageGallery.class);

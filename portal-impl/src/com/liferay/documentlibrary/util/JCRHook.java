@@ -70,6 +70,7 @@ import org.apache.commons.lang.StringUtils;
  */
 public class JCRHook extends BaseHook {
 
+	@Override
 	public void addDirectory(long companyId, long repositoryId, String dirName)
 		throws PortalException, SystemException {
 
@@ -114,6 +115,7 @@ public class JCRHook extends BaseHook {
 		}
 	}
 
+	@Override
 	public void addFile(
 			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, long fileEntryId, String properties,
@@ -195,6 +197,7 @@ public class JCRHook extends BaseHook {
 		}
 	}
 
+	@Override
 	public void checkRoot(long companyId) throws SystemException {
 		Session session = null;
 
@@ -215,6 +218,7 @@ public class JCRHook extends BaseHook {
 		}
 	}
 
+	@Override
 	public void deleteDirectory(
 			long companyId, String portletId, long repositoryId, String dirName)
 		throws PortalException {
@@ -254,6 +258,7 @@ public class JCRHook extends BaseHook {
 		}
 	}
 
+	@Override
 	public void deleteFile(
 			long companyId, String portletId, long repositoryId,
 			String fileName)
@@ -392,6 +397,7 @@ public class JCRHook extends BaseHook {
 		}
 	}
 
+	@Override
 	public void deleteFile(
 			long companyId, String portletId, long repositoryId,
 			String fileName, String versionNumber)
@@ -445,6 +451,7 @@ public class JCRHook extends BaseHook {
 		}
 	}
 
+	@Override
 	public InputStream getFileAsStream(
 			long companyId, long repositoryId, String fileName,
 			String versionNumber)
@@ -476,6 +483,7 @@ public class JCRHook extends BaseHook {
 		}
 	}
 
+	@Override
 	public String[] getFileNames(
 			long companyId, long repositoryId, String dirName)
 		throws PortalException, SystemException {
@@ -520,6 +528,7 @@ public class JCRHook extends BaseHook {
 		return fileNames.toArray(new String[fileNames.size()]);
 	}
 
+	@Override
 	public long getFileSize(
 			long companyId, long repositoryId, String fileName)
 		throws PortalException, SystemException {
@@ -548,6 +557,7 @@ public class JCRHook extends BaseHook {
 		return size;
 	}
 
+	@Override
 	public boolean hasFile(
 			long companyId, long repositoryId, String fileName,
 			String versionNumber)
@@ -564,6 +574,7 @@ public class JCRHook extends BaseHook {
 		return true;
 	}
 
+	@Override
 	public void move(String srcDir, String destDir) throws SystemException {
 		Session session = null;
 
@@ -584,6 +595,7 @@ public class JCRHook extends BaseHook {
 		}
 	}
 
+	@Override
 	public void reindex(String[] ids) throws SearchException {
 		long companyId = GetterUtil.getLong(ids[0]);
 		String portletId = ids[1];
@@ -648,6 +660,7 @@ public class JCRHook extends BaseHook {
 		SearchEngineUtil.updateDocuments(companyId, documents);
 	}
 
+	@Override
 	public void updateFile(
 			long companyId, String portletId, long groupId, long repositoryId,
 			long newRepositoryId, String fileName, long fileEntryId)
@@ -860,6 +873,7 @@ public class JCRHook extends BaseHook {
 		}
 	}
 
+	@Override
 	public void updateFile(
 			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, String versionNumber, String sourceFileName,

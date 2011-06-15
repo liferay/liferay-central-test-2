@@ -27,6 +27,7 @@ public class SimpleAuthenticator extends Authenticator {
 			userName, password.toCharArray());
 	}
 
+	@Override
 	protected PasswordAuthentication getPasswordAuthentication() {
 		return _authentication;
 	}

@@ -82,6 +82,7 @@ public class JournalArticleAssetRendererFactory
 		return new JournalArticleAssetRenderer(article);
 	}
 
+	@Override
 	public AssetRenderer getAssetRenderer(long groupId, String urlTitle)
 		throws PortalException, SystemException {
 
@@ -99,6 +100,7 @@ public class JournalArticleAssetRendererFactory
 		return TYPE;
 	}
 
+	@Override
 	public PortletURL getURLAdd(
 			LiferayPortletRequest liferayPortletRequest,
 			LiferayPortletResponse liferayPortletResponse)
@@ -126,6 +128,7 @@ public class JournalArticleAssetRendererFactory
 		return portletURL;
 	}
 
+	@Override
 	public boolean hasPermission(
 			PermissionChecker permissionChecker, long classPK, String actionId)
 		throws Exception {
@@ -134,6 +137,7 @@ public class JournalArticleAssetRendererFactory
 			permissionChecker, classPK, actionId);
 	}
 
+	@Override
 	protected String getIconPath(ThemeDisplay themeDisplay) {
 		return themeDisplay.getPathThemeImages() + "/common/history.png";
 	}

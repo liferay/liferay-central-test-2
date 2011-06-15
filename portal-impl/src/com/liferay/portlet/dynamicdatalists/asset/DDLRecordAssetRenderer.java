@@ -74,6 +74,7 @@ public class DDLRecordAssetRenderer extends BaseAssetRenderer {
 		return LanguageUtil.format(locale, "new-record-for-list-x", name);
 	}
 
+	@Override
 	public PortletURL getURLEdit(
 			LiferayPortletRequest liferayPortletRequest,
 			LiferayPortletResponse liferayPortletResponse)
@@ -99,11 +100,13 @@ public class DDLRecordAssetRenderer extends BaseAssetRenderer {
 		return _record.getUuid();
 	}
 
+	@Override
 	public boolean hasEditPermission(PermissionChecker permissionChecker) {
 		return DDLRecordSetPermission.contains(
 			permissionChecker, _recordSet, ActionKeys.UPDATE);
 	}
 
+	@Override
 	public boolean hasViewPermission(PermissionChecker permissionChecker) {
 		return DDLRecordSetPermission.contains(
 			permissionChecker, _recordSet, ActionKeys.VIEW);
@@ -130,6 +133,7 @@ public class DDLRecordAssetRenderer extends BaseAssetRenderer {
 		}
 	}
 
+	@Override
 	protected String getIconPath(ThemeDisplay themeDisplay) {
 		return themeDisplay.getPathThemeImages() + "/common/history.png";
 	}

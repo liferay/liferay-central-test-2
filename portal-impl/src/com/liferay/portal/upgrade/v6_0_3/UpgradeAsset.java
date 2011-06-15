@@ -30,6 +30,7 @@ import java.sql.ResultSet;
  */
 public class UpgradeAsset extends UpgradeProcess {
 
+	@Override
 	protected void doUpgrade() throws Exception {
 		updateAssetEntry("com.liferay.portal.model.User", "User_", "userId");
 		updateAssetEntry(

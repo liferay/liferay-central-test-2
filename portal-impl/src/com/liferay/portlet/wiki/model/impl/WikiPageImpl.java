@@ -142,6 +142,7 @@ public class WikiPageImpl extends WikiPageModelImpl implements WikiPage {
 		return page;
 	}
 
+	@Override
 	public boolean isResourceMain() {
 		return isHead();
 	}

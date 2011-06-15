@@ -32,6 +32,7 @@ public class SuccessImpl implements Success {
 		return _description;
 	}
 
+	@Override
 	public String toString() {
 		return "XML-RPC success " + _description;
 	}

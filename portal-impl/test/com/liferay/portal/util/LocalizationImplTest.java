@@ -38,6 +38,7 @@ public class LocalizationImplTest extends BaseTestCase {
 		InitUtil.initWithSpring();
 	}
 
+	@Override
 	public void setUp() throws Exception {
 		_english = new Locale("en", "US");
 		_englishId = LocaleUtil.toLanguageId(_english);

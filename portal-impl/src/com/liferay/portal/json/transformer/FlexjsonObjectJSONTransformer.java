@@ -36,6 +36,7 @@ import jodd.bean.BeanUtil;
 public class FlexjsonObjectJSONTransformer
 	extends ObjectTransformer implements JSONTransformer {
 
+	@Override
 	public void transform(Object object) {
 		Class<?> type = resolveClass(object);
 

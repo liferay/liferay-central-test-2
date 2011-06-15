@@ -399,6 +399,7 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 		importFolder(portletDataContext, path, folder);
 	}
 
+	@Override
 	public PortletDataHandlerControl[] getExportControls() {
 		return new PortletDataHandlerControl[] {
 			_foldersAndDocuments, _shortcuts, _ranks, _categories, _comments,
@@ -406,6 +407,7 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 		};
 	}
 
+	@Override
 	public PortletDataHandlerControl[] getImportControls() {
 		return new PortletDataHandlerControl[] {
 			_foldersAndDocuments, _shortcuts, _ranks, _categories, _comments,
@@ -413,10 +415,12 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 		};
 	}
 
+	@Override
 	public boolean isAlwaysExportable() {
 		return _ALWAYS_EXPORTABLE;
 	}
 
+	@Override
 	public boolean isPublishToLiveByDefault() {
 		return PropsValues.DL_PUBLISH_TO_LIVE_BY_DEFAULT;
 	}
@@ -838,6 +842,7 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 		}
 	}
 
+	@Override
 	protected PortletPreferences doDeleteData(
 			PortletDataContext portletDataContext, String portletId,
 			PortletPreferences portletPreferences)
@@ -853,6 +858,7 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 		return null;
 	}
 
+	@Override
 	protected String doExportData(
 			PortletDataContext portletDataContext, String portletId,
 			PortletPreferences portletPreferences)
@@ -916,6 +922,7 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 		return document.formattedString();
 	}
 
+	@Override
 	protected PortletPreferences doImportData(
 			PortletDataContext portletDataContext, String portletId,
 			PortletPreferences portletPreferences, String data)

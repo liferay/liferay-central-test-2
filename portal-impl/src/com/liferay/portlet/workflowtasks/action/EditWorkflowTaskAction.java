@@ -46,6 +46,7 @@ import org.apache.struts.action.ActionMapping;
  */
 public class EditWorkflowTaskAction extends PortletAction {
 
+	@Override
 	public void processAction(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
 			ActionRequest actionRequest, ActionResponse actionResponse)
@@ -83,6 +84,7 @@ public class EditWorkflowTaskAction extends PortletAction {
 		}
 	}
 
+	@Override
 	public ActionForward render(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
 			RenderRequest renderRequest, RenderResponse renderResponse)
@@ -139,6 +141,7 @@ public class EditWorkflowTaskAction extends PortletAction {
 			workflowTaskId, transitionName, comment, null);
 	}
 
+	@Override
 	protected boolean isCheckMethodOnProcessAction() {
 		return _CHECK_METHOD_ON_PROCESS_ACTION;
 	}

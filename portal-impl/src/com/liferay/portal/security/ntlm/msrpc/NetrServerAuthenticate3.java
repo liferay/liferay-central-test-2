@@ -39,6 +39,7 @@ public class NetrServerAuthenticate3 extends DcerpcMessage {
 		flags = DCERPC_FIRST_FRAG | DCERPC_LAST_FRAG;
 	}
 
+	@Override
 	public void decode_out(NdrBuffer ndrBuffer) {
 		int index = ndrBuffer.index;
 
@@ -55,6 +56,7 @@ public class NetrServerAuthenticate3 extends DcerpcMessage {
 		_status = ndrBuffer.dec_ndr_long();
 	}
 
+	@Override
 	public void encode_in(NdrBuffer ndrBuffer) {
 		ndrBuffer.enc_ndr_referent(_primaryName, 1);
 		ndrBuffer.enc_ndr_string(_primaryName);
@@ -83,6 +85,7 @@ public class NetrServerAuthenticate3 extends DcerpcMessage {
 		return _negotiateFlags;
 	}
 
+	@Override
 	public int getOpnum() {
 		return 26;
 	}

@@ -52,12 +52,14 @@ public class AssetEntriesFacet extends MultiValueFacet {
 		initFacetClause();
 	}
 
+	@Override
 	public void setFacetConfiguration(FacetConfiguration facetConfiguration) {
 		super.setFacetConfiguration(facetConfiguration);
 
 		initFacetClause();
 	}
 
+	@Override
 	protected BooleanClause doGetFacetClause() {
 		SearchContext searchContext = getSearchContext();
 

@@ -53,6 +53,7 @@ public class UnsyncByteArrayOutputStream extends OutputStream {
 		return newBuffer;
 	}
 
+	@Override
 	public String toString() {
 		return new String(buffer, 0, index);
 	}
@@ -71,10 +72,12 @@ public class UnsyncByteArrayOutputStream extends OutputStream {
 		return ByteBuffer.wrap(buffer, 0, index);
 	}
 
+	@Override
 	public void write(byte[] bytes) {
 		write(bytes, 0, bytes.length);
 	}
 
+	@Override
 	public void write(byte[] bytes, int offset, int length) {
 		if (length <= 0) {
 			return;
@@ -97,6 +100,7 @@ public class UnsyncByteArrayOutputStream extends OutputStream {
 		index = newIndex;
 	}
 
+	@Override
 	public void write(int b) {
 		int newIndex = index + 1;
 

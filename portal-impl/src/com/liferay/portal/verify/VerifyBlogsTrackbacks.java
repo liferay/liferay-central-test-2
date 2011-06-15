@@ -37,6 +37,7 @@ import java.util.List;
  */
 public class VerifyBlogsTrackbacks extends VerifyProcess {
 
+	@Override
 	protected void doVerify() throws Exception {
 		List<MBDiscussion> discussions =
 			MBMessageLocalServiceUtil.getDiscussions(

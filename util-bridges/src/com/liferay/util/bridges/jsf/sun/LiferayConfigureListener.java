@@ -29,6 +29,7 @@ public class LiferayConfigureListener extends ConfigureListener {
 	public static final String ASSOCIATE_KEY =
 		RIConstants.FACES_PREFIX + "ApplicationAssociate";
 
+	@Override
 	public void contextInitialized(ServletContextEvent sce) {
 		ServletContext sc = sce.getServletContext();
 

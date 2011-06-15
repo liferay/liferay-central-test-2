@@ -39,14 +39,17 @@ public class PortletResourceBundle extends ResourceBundle {
 		_portletInfo = portletInfo;
 	}
 
+	@Override
 	public Enumeration<String> getKeys() {
 		return _parentResourceBundle.getKeys();
 	}
 
+	@Override
 	public Locale getLocale() {
 		return _parentResourceBundle.getLocale();
 	}
 
+	@Override
 	protected Object handleGetObject(String key) {
 		try {
 			if (_parentResourceBundle == null) {

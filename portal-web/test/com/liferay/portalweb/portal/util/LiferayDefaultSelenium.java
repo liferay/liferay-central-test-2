@@ -87,12 +87,14 @@ public class LiferayDefaultSelenium
 		}
 	}
 
+	@Override
 	public void setTimeout(String timeout) {
 		super.setTimeout(timeout);
 
 		_timeout = timeout;
 	}
 
+	@Override
 	public void waitForPageToLoad(String timeout) {
 		super.waitForPageToLoad(_timeout);
 	}

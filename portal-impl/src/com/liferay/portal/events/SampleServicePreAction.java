@@ -25,6 +25,7 @@ import javax.servlet.http.HttpSession;
  */
 public class SampleServicePreAction extends Action {
 
+	@Override
 	public void run(HttpServletRequest request, HttpServletResponse response) {
 		setSharedSessionAttributes(request);
 	}

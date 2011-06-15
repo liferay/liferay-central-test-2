@@ -38,6 +38,7 @@ import javax.servlet.jsp.tagext.BodyTag;
 public class SearchContainerColumnTextTag<R>
 	extends SearchContainerColumnTag implements BodyTag {
 
+	@Override
 	public int doEndTag() {
 		try {
 			SearchContainerRowTag<R> searchContainerRowTag =
@@ -111,6 +112,7 @@ public class SearchContainerColumnTextTag<R>
 		}
 	}
 
+	@Override
 	public int doStartTag() throws JspException {
 		if (_orderable && Validator.isNull(_orderableProperty)) {
 			_orderableProperty = name;

@@ -63,6 +63,7 @@ public class MessageListenerWrapper implements MessageListener {
 		return _listener.getId();
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		if (obj == null) {
 			return false;
@@ -82,6 +83,7 @@ public class MessageListenerWrapper implements MessageListener {
 		return getId().equals(id);
 	}
 
+	@Override
 	public int hashCode() {
 		return _listener.getId().hashCode();
 	}

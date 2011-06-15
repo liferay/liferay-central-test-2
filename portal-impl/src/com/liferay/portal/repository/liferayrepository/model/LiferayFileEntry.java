@@ -63,6 +63,7 @@ public class LiferayFileEntry extends LiferayModel implements FileEntry {
 		return expandoBridge.getAttributes();
 	}
 
+	@Override
 	public long getCompanyId() {
 		return _dlFileEntry.getCompanyId();
 	}
@@ -87,6 +88,7 @@ public class LiferayFileEntry extends LiferayModel implements FileEntry {
 		return _dlFileEntry.getDescription();
 	}
 
+	@Override
 	public ExpandoBridge getExpandoBridge() {
 		return _dlFileEntry.getExpandoBridge();
 	}
@@ -169,6 +171,7 @@ public class LiferayFileEntry extends LiferayModel implements FileEntry {
 		return DLFileEntry.class;
 	}
 
+	@Override
 	public String getModelClassName() {
 		return DLFileEntry.class.getName();
 	}
@@ -177,6 +180,7 @@ public class LiferayFileEntry extends LiferayModel implements FileEntry {
 		return _dlFileEntry.getModifiedDate();
 	}
 
+	@Override
 	public long getPrimaryKey() {
 		return _dlFileEntry.getPrimaryKey();
 	}

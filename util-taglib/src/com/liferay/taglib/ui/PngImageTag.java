@@ -35,16 +35,19 @@ public class PngImageTag extends IncludeTag {
 		_width = width;
 	}
 
+	@Override
 	protected void cleanUp() {
 		_height = null;
 		_image = null;
 		_width = null;
 	}
 
+	@Override
 	protected String getPage() {
 		return _PAGE;
 	}
 
+	@Override
 	protected void setAttributes(HttpServletRequest request) {
 		request.setAttribute("liferay-ui:png_image:height", _height);
 		request.setAttribute("liferay-ui:png_image:image", _image);

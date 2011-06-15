@@ -50,6 +50,7 @@ public class SocialBookmarkTag extends IncludeTag {
 		_url = url;
 	}
 
+	@Override
 	protected void cleanUp() {
 		_target = null;
 		_title = null;
@@ -57,6 +58,7 @@ public class SocialBookmarkTag extends IncludeTag {
 		_url = null;
 	}
 
+	@Override
 	protected String getPage() {
 		String[] socialTypes = PropsUtil.getArray(
 			PropsKeys.SOCIAL_BOOKMARK_TYPES);
@@ -74,6 +76,7 @@ public class SocialBookmarkTag extends IncludeTag {
 		}
 	}
 
+	@Override
 	protected void setAttributes(HttpServletRequest request) {
 		String jspPath = _jspPaths.get(_type);
 

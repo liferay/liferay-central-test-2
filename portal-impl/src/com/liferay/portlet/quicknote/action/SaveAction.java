@@ -36,6 +36,7 @@ import org.apache.struts.action.ActionMapping;
  */
 public class SaveAction extends JSONAction {
 
+	@Override
 	public String getJSON(
 			ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response)

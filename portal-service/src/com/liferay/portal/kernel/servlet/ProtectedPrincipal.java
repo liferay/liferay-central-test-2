@@ -37,6 +37,7 @@ public class ProtectedPrincipal implements Principal, Serializable {
 		return _name;
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		if (obj == null) {
 			return false;
@@ -61,10 +62,12 @@ public class ProtectedPrincipal implements Principal, Serializable {
 		}
 	}
 
+	@Override
 	public int hashCode() {
 		return _name.hashCode();
 	}
 
+	@Override
 	public String toString() {
 		return _name;
 	}

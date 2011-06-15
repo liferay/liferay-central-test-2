@@ -57,6 +57,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class MinifierFilter extends BasePortalFilter {
 
+	@Override
 	public void init(FilterConfig filterConfig) {
 		super.init(filterConfig);
 
@@ -431,6 +432,7 @@ public class MinifierFilter extends BasePortalFilter {
 		return MinifierUtil.minifyJavaScript(content);
 	}
 
+	@Override
 	protected void processFilter(
 			HttpServletRequest request, HttpServletResponse response,
 			FilterChain filterChain)

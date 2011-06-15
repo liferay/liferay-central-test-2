@@ -21,36 +21,46 @@ import java.io.Writer;
  */
 public class DummyWriter extends Writer {
 
+	@Override
 	public Writer append(char c) {
 		return this;
 	}
 
+	@Override
 	public Writer append(CharSequence charSequence) {
 		return this;
 	}
 
+	@Override
 	public Writer append(CharSequence charSequence, int start, int end) {
 		return this;
 	}
 
+	@Override
 	public void close() {
 	}
 
+	@Override
 	public void flush() {
 	}
 
+	@Override
 	public void write(char[] chars) {
 	}
 
+	@Override
 	public void write(char[] chars, int offset, int length) {
 	}
 
+	@Override
 	public void write(int c) {
 	}
 
+	@Override
 	public void write(String string) {
 	}
 
+	@Override
 	public void write(String string, int offset, int length) {
 	}
 

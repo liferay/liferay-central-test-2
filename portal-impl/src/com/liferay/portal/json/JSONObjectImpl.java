@@ -263,6 +263,7 @@ public class JSONObjectImpl implements JSONObject {
 		return _jsonObject.remove(key);
 	}
 
+	@Override
 	public String toString() {
 		return _jsonObject.toString();
 	}

@@ -59,6 +59,7 @@ public class OrganizationIndexer extends BaseIndexer {
 		return CLASS_NAMES;
 	}
 
+	@Override
 	public void postProcessContextQuery(
 			BooleanQuery contextQuery, SearchContext searchContext)
 		throws Exception {
@@ -94,6 +95,7 @@ public class OrganizationIndexer extends BaseIndexer {
 		}
 	}
 
+	@Override
 	public void postProcessSearchQuery(
 			BooleanQuery searchQuery, SearchContext searchContext)
 		throws Exception {
@@ -120,6 +122,7 @@ public class OrganizationIndexer extends BaseIndexer {
 		}
 	}
 
+	@Override
 	protected void doDelete(Object obj) throws Exception {
 		Organization organization = (Organization)obj;
 
@@ -131,6 +134,7 @@ public class OrganizationIndexer extends BaseIndexer {
 			organization.getCompanyId(), document.get(Field.UID));
 	}
 
+	@Override
 	protected Document doGetDocument(Object obj) throws Exception {
 		Organization organization = (Organization)obj;
 
@@ -156,6 +160,7 @@ public class OrganizationIndexer extends BaseIndexer {
 		return document;
 	}
 
+	@Override
 	protected String doGetSortField(String orderByCol) {
 		if (orderByCol.equals("name")) {
 			return "name";
@@ -168,6 +173,7 @@ public class OrganizationIndexer extends BaseIndexer {
 		}
 	}
 
+	@Override
 	protected Summary doGetSummary(
 		Document document, Locale locale, String snippet,
 		PortletURL portletURL) {
@@ -185,6 +191,7 @@ public class OrganizationIndexer extends BaseIndexer {
 		return new Summary(title, content, portletURL);
 	}
 
+	@Override
 	protected void doReindex(Object obj) throws Exception {
 		if (obj instanceof List<?>) {
 			List<Organization> organizations = (List<Organization>)obj;
@@ -246,6 +253,7 @@ public class OrganizationIndexer extends BaseIndexer {
 		}
 	}
 
+	@Override
 	protected void doReindex(String className, long classPK) throws Exception {
 		Organization organization =
 			OrganizationLocalServiceUtil.getOrganization(classPK);
@@ -253,12 +261,14 @@ public class OrganizationIndexer extends BaseIndexer {
 		doReindex(organization);
 	}
 
+	@Override
 	protected void doReindex(String[] ids) throws Exception {
 		long companyId = GetterUtil.getLong(ids[0]);
 
 		reindexOrganizations(companyId);
 	}
 
+	@Override
 	protected String getPortletId(SearchContext searchContext) {
 		return PORTLET_ID;
 	}

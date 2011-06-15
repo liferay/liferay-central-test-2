@@ -29,10 +29,12 @@ import javax.portlet.PortletPreferences;
  */
 public class UpgradeDocumentLibrary extends BaseUpgradePortletPreferences {
 
+	@Override
 	protected String[] getPortletIds() {
 		return new String[] {"20"};
 	}
 
+	@Override
 	protected String upgradePreferences(
 			long companyId, long ownerId, int ownerType, long plid,
 			String portletId, String xml)

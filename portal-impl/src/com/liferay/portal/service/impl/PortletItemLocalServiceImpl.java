@@ -65,6 +65,7 @@ public class PortletItemLocalServiceImpl
 		return portletItem;
 	}
 
+	@Override
 	public PortletItem getPortletItem(long portletItemId)
 		throws PortalException, SystemException {
 

@@ -65,6 +65,7 @@ import java.util.Map;
  */
 public class ExpandoStorageAdapter extends BaseStorageAdapter {
 
+	@Override
 	protected long doCreate(
 			long companyId, long ddmStructureId, Fields fields,
 			ServiceContext serviceContext)
@@ -85,12 +86,14 @@ public class ExpandoStorageAdapter extends BaseStorageAdapter {
 		return expandoRow.getRowId();
 	}
 
+	@Override
 	protected void doDeleteByClass(long classPK) throws Exception {
 		_deleteExpandoRows(new long[] {classPK});
 
 		DDMStorageLinkLocalServiceUtil.deleteClassStorageLink(classPK);
 	}
 
+	@Override
 	protected void doDeleteByDDMStructure(long ddmStructureId)
 		throws Exception {
 
@@ -102,6 +105,7 @@ public class ExpandoStorageAdapter extends BaseStorageAdapter {
 			ddmStructureId);
 	}
 
+	@Override
 	protected List<Fields> doGetFieldsListByClasses(
 			long ddmStructureId, long[] classPKs, List<String> fieldNames,
 			OrderByComparator orderByComparator)
@@ -112,6 +116,7 @@ public class ExpandoStorageAdapter extends BaseStorageAdapter {
 		return _toList(fieldsMap, orderByComparator);
 	}
 
+	@Override
 	protected List<Fields> doGetFieldsListByDDMStructure(
 			long ddmStructureId, List<String> fieldNames,
 			OrderByComparator orderByComparator)
@@ -124,6 +129,7 @@ public class ExpandoStorageAdapter extends BaseStorageAdapter {
 		return _toList(fieldsMap, orderByComparator);
 	}
 
+	@Override
 	protected Map<Long, Fields> doGetFieldsMapByClasses(
 			long ddmStructureId, long[] classPKs, List<String> fieldNames)
 		throws Exception {
@@ -131,6 +137,7 @@ public class ExpandoStorageAdapter extends BaseStorageAdapter {
 		return _doQuery(classPKs, fieldNames, null);
 	}
 
+	@Override
 	protected List<Fields> doQuery(
 			long ddmStructureId, List<String> fieldNames, Condition condition,
 			OrderByComparator orderByComparator)
@@ -144,6 +151,7 @@ public class ExpandoStorageAdapter extends BaseStorageAdapter {
 		return _toList(fieldsMap, orderByComparator);
 	}
 
+	@Override
 	protected int doQueryCount(long ddmStructureId, Condition condition)
 		throws Exception {
 
@@ -152,6 +160,7 @@ public class ExpandoStorageAdapter extends BaseStorageAdapter {
 		return _doQueryCount(expandoRowIds, condition);
 	}
 
+	@Override
 	protected void doUpdate(
 			long classPK, Fields fields, boolean mergeFields,
 			ServiceContext serviceContext)

@@ -47,6 +47,7 @@ public class JSONWebServiceServiceAction extends JSONServiceAction {
 		}
 	}
 
+	@Override
 	public String getJSON(
 			ActionMapping actionMapping, ActionForm actionForm,
 			HttpServletRequest request, HttpServletResponse response)
@@ -72,6 +73,7 @@ public class JSONWebServiceServiceAction extends JSONServiceAction {
 		}
 	}
 
+	@Override
 	protected String getReroutePath() {
 		return _REROUTE_PATH;
 	}

@@ -40,6 +40,7 @@ public class CountStatistics extends BaseStatistics {
 		setLastSampleTime(System.currentTimeMillis());
 	}
 
+	@Override
 	public void reset() {
 		super.reset();
 

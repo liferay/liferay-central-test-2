@@ -23,6 +23,7 @@ import javax.portlet.PortletRequest;
 public class ActionRequestImpl
 	extends ClientDataRequestImpl implements ActionRequest {
 
+	@Override
 	public String getLifecycle() {
 		return PortletRequest.ACTION_PHASE;
 	}

@@ -44,6 +44,7 @@ import org.apache.struts.action.ActionMapping;
  */
 public class GetPageAttachmentAction extends PortletAction {
 
+	@Override
 	public ActionForward strutsExecute(
 			ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response)
@@ -65,6 +66,7 @@ public class GetPageAttachmentAction extends PortletAction {
 		}
 	}
 
+	@Override
 	public void processAction(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
 			ActionRequest actionRequest, ActionResponse actionResponse)
@@ -115,6 +117,7 @@ public class GetPageAttachmentAction extends PortletAction {
 			request, response, fileName, is, contentLength, contentType);
 	}
 
+	@Override
 	protected boolean isCheckMethodOnProcessAction() {
 		return _CHECK_METHOD_ON_PROCESS_ACTION;
 	}

@@ -25,6 +25,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class IconTag extends IncludeTag {
 
+	@Override
 	public int doStartTag() {
 		return EVAL_BODY_INCLUDE;
 	}
@@ -81,6 +82,7 @@ public class IconTag extends IncludeTag {
 		_url = url;
 	}
 
+	@Override
 	protected void cleanUp() {
 		_cssClass = null;
 		_id = null;
@@ -101,6 +103,7 @@ public class IconTag extends IncludeTag {
 		return _message;
 	}
 
+	@Override
 	protected String getPage() {
 		return _PAGE;
 	}
@@ -109,10 +112,12 @@ public class IconTag extends IncludeTag {
 		return _url;
 	}
 
+	@Override
 	protected boolean isCleanUpSetAttributes() {
 		return _CLEAN_UP_SET_ATTRIBUTES;
 	}
 
+	@Override
 	protected void setAttributes(HttpServletRequest request) {
 		String id = _id;
 

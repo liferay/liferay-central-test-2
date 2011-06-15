@@ -46,6 +46,7 @@ public class ReferenceEntry {
 		_field.set(_object, value);
 	}
 
+	@Override
 	public String toString() {
 		return _object.toString().concat(StringPool.POUND).concat(
 			_field.toString());

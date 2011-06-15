@@ -23,14 +23,17 @@ import javax.servlet.jsp.JspWriter;
  */
 public class JournalContentSearchTag extends IncludeTag {
 
+	@Override
 	protected String getEndPage() {
 		return _END_PAGE;
 	}
 
+	@Override
 	protected String getStartPage() {
 		return _START_PAGE;
 	}
 
+	@Override
 	protected int processEndTag() throws Exception {
 		JspWriter jspWriter = pageContext.getOut();
 

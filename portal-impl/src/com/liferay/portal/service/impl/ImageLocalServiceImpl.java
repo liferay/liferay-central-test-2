@@ -134,6 +134,7 @@ public class ImageLocalServiceImpl extends ImageLocalServiceBaseImpl {
 		}
 	}
 
+	@Override
 	public void deleteImage(long imageId)
 		throws PortalException, SystemException {
 
@@ -193,6 +194,7 @@ public class ImageLocalServiceImpl extends ImageLocalServiceBaseImpl {
 		return _defaultUserMalePortrait;
 	}
 
+	@Override
 	public Image getImage(long imageId) {
 		try {
 			if (imageId > 0) {
@@ -244,6 +246,7 @@ public class ImageLocalServiceImpl extends ImageLocalServiceBaseImpl {
 		return imagePersistence.findAll();
 	}
 
+	@Override
 	public List<Image> getImages(int start, int end) throws SystemException {
 		return imagePersistence.findAll(start, end);
 	}

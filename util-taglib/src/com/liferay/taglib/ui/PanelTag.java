@@ -29,6 +29,7 @@ import javax.servlet.jsp.JspException;
  */
 public class PanelTag extends IncludeTag {
 
+	@Override
 	public int doStartTag() throws JspException {
 		HttpServletRequest request =
 			(HttpServletRequest)pageContext.getRequest();
@@ -78,6 +79,7 @@ public class PanelTag extends IncludeTag {
 		return EVAL_BODY_INCLUDE;
 	}
 
+	@Override
 	protected String getStartPage() {
 		if (Validator.isNull(_startPage)) {
 			return _START_PAGE;
@@ -91,6 +93,7 @@ public class PanelTag extends IncludeTag {
 		_startPage = startPage;
 	}
 
+	@Override
 	protected String getEndPage() {
 		if (Validator.isNull(_endPage)) {
 			return _END_PAGE;

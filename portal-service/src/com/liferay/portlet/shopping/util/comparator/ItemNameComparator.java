@@ -36,6 +36,7 @@ public class ItemNameComparator extends OrderByComparator {
 		_ascending = ascending;
 	}
 
+	@Override
 	public int compare(Object obj1, Object obj2) {
 		ShoppingItem item1 = (ShoppingItem)obj1;
 		ShoppingItem item2 = (ShoppingItem)obj2;
@@ -58,6 +59,7 @@ public class ItemNameComparator extends OrderByComparator {
 		}
 	}
 
+	@Override
 	public String getOrderBy() {
 		if (_ascending) {
 			return ORDER_BY_ASC;
@@ -67,10 +69,12 @@ public class ItemNameComparator extends OrderByComparator {
 		}
 	}
 
+	@Override
 	public String[] getOrderByFields() {
 		return ORDER_BY_FIELDS;
 	}
 
+	@Override
 	public boolean isAscending() {
 		return _ascending;
 	}

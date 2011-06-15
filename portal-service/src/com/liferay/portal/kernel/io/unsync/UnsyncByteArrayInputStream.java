@@ -38,18 +38,22 @@ public class UnsyncByteArrayInputStream extends InputStream {
 		this.markIndex = offset;
 	}
 
+	@Override
 	public int available() {
 		return capacity - index;
 	}
 
+	@Override
 	public void mark(int readAheadLimit) {
 		markIndex = index;
 	}
 
+	@Override
 	public boolean markSupported() {
 		return true;
 	}
 
+	@Override
 	public int read() {
 		if (index < capacity) {
 			return buffer[index++] & 0xff;
@@ -59,10 +63,12 @@ public class UnsyncByteArrayInputStream extends InputStream {
 		}
 	}
 
+	@Override
 	public int read(byte[] bytes) {
 		return read(bytes, 0, bytes.length);
 	}
 
+	@Override
 	public int read(byte[] bytes, int offset, int length) {
 		if (length <= 0) {
 			return 0;
@@ -85,10 +91,12 @@ public class UnsyncByteArrayInputStream extends InputStream {
 		return read;
 	}
 
+	@Override
 	public void reset() {
 		index = markIndex;
 	}
 
+	@Override
 	public long skip(long skip) {
 		if (skip < 0) {
 			return 0;

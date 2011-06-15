@@ -45,6 +45,7 @@ public class SQLServerDB extends BaseDB {
 		return _instance;
 	}
 
+	@Override
 	public String buildSQL(String template) throws IOException {
 		template = convertTimestamp(template);
 		template = replaceTemplate(template, getTemplate());
@@ -59,6 +60,7 @@ public class SQLServerDB extends BaseDB {
 		return template;
 	}
 
+	@Override
 	public List<Index> getIndexes() throws SQLException {
 		List<Index> indexes = new ArrayList<Index>();
 
@@ -107,10 +109,12 @@ public class SQLServerDB extends BaseDB {
 		return indexes;
 	}
 
+	@Override
 	public boolean isSupportsAlterColumnType() {
 		return _SUPPORTS_ALTER_COLUMN_TYPE;
 	}
 
+	@Override
 	public boolean isSupportsInlineDistinct() {
 		return _SUPPORTS_INLINE_DISTINCT;
 	}
@@ -119,6 +123,7 @@ public class SQLServerDB extends BaseDB {
 		super(TYPE_SQLSERVER);
 	}
 
+	@Override
 	protected String buildCreateFileContent(
 			String sqlDir, String databaseName, int population)
 		throws IOException {
@@ -151,14 +156,17 @@ public class SQLServerDB extends BaseDB {
 		return sb.toString();
 	}
 
+	@Override
 	protected String getServerName() {
 		return "sql-server";
 	}
 
+	@Override
 	protected String[] getTemplate() {
 		return _SQL_SERVER;
 	}
 
+	@Override
 	protected String reword(String data) throws IOException {
 		UnsyncBufferedReader unsyncBufferedReader = new UnsyncBufferedReader(
 			new UnsyncStringReader(data));

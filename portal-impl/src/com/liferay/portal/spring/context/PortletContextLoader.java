@@ -29,6 +29,7 @@ public class PortletContextLoader extends ContextLoader {
 	public static final String PORTAL_CONFIG_LOCATION_PARAM =
 		"portalContextConfigLocation";
 
+	@Override
 	protected void customizeContext(
 		ServletContext servletContext,
 		ConfigurableWebApplicationContext applicationContext) {
@@ -39,6 +40,7 @@ public class PortletContextLoader extends ContextLoader {
 		applicationContext.setConfigLocation(configLocation);
 	}
 
+	@Override
 	protected Class<?> determineContextClass(ServletContext servletContext) {
 		return PortletApplicationContext.class;
 	}

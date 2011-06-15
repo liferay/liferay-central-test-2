@@ -32,6 +32,7 @@ import javax.servlet.jsp.tagext.TagSupport;
  */
 public class ErrorTag extends TagSupport {
 
+	@Override
 	public int doEndTag() throws JspException {
 		try {
 			HttpServletRequest request =
@@ -76,6 +77,7 @@ public class ErrorTag extends TagSupport {
 		}
 	}
 
+	@Override
 	public int doStartTag() throws JspException {
 		try {
 			HttpServletRequest request =

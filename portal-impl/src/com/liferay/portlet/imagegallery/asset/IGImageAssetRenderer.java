@@ -63,6 +63,7 @@ public class IGImageAssetRenderer extends BaseAssetRenderer {
 		return _image.getName();
 	}
 
+	@Override
 	public PortletURL getURLEdit(
 			LiferayPortletRequest liferayPortletRequest,
 			LiferayPortletResponse liferayPortletResponse)
@@ -80,6 +81,7 @@ public class IGImageAssetRenderer extends BaseAssetRenderer {
 		return portletURL;
 	}
 
+	@Override
 	public String getURLViewInContext(
 			LiferayPortletRequest liferayPortletRequest,
 			LiferayPortletResponse liferayPortletResponse,
@@ -107,10 +109,12 @@ public class IGImageAssetRenderer extends BaseAssetRenderer {
 		return _image.getUuid();
 	}
 
+	@Override
 	public String getViewInContextMessage() {
 		return "view-album";
 	}
 
+	@Override
 	public boolean hasEditPermission(PermissionChecker permissionChecker)
 		throws PortalException, SystemException {
 
@@ -118,6 +122,7 @@ public class IGImageAssetRenderer extends BaseAssetRenderer {
 			permissionChecker, _image, ActionKeys.UPDATE);
 	}
 
+	@Override
 	public boolean hasViewPermission(PermissionChecker permissionChecker)
 		throws PortalException, SystemException {
 
@@ -125,6 +130,7 @@ public class IGImageAssetRenderer extends BaseAssetRenderer {
 			permissionChecker, _image, ActionKeys.VIEW);
 	}
 
+	@Override
 	public boolean isPrintable() {
 		return true;
 	}
@@ -145,6 +151,7 @@ public class IGImageAssetRenderer extends BaseAssetRenderer {
 		}
 	}
 
+	@Override
 	protected String getIconPath(ThemeDisplay themeDisplay) {
 		return themeDisplay.getPathThemeImages() + "/file_system/small/bmp.png";
 	}

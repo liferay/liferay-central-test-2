@@ -30,6 +30,7 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class UserTrackerPathPersistenceTest extends BasePersistenceTestCase {
+	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 

@@ -51,6 +51,7 @@ import javax.mail.internet.InternetAddress;
  */
 public class MailingListMessageListener extends BaseMessageListener {
 
+	@Override
 	protected void doReceive(
 			com.liferay.portal.kernel.messaging.Message message)
 		throws Exception {

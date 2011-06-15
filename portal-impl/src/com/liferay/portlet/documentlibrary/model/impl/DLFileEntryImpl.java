@@ -70,6 +70,7 @@ public class DLFileEntryImpl
 			getGroupId(), getFolderId());
 	}
 
+	@Override
 	public ExpandoBridge getExpandoBridge() {
 		try {
 			DLFileVersion dlFileVersion = getFileVersion();
@@ -83,6 +84,7 @@ public class DLFileEntryImpl
 		return null;
 	}
 
+	@Override
 	public String getExtraSettings() {
 		if (_extraSettingsProperties == null) {
 			return super.getExtraSettings();
@@ -215,6 +217,7 @@ public class DLFileEntryImpl
 		return false;
 	}
 
+	@Override
 	public void setExtraSettings(String extraSettings) {
 		_extraSettingsProperties = null;
 

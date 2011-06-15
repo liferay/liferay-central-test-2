@@ -25,6 +25,7 @@ import com.liferay.portlet.documentlibrary.util.VideoProcessor;
  */
 public class VideoProcessorMessageListener extends BaseMessageListener {
 
+	@Override
 	protected void doReceive(Message message) throws Exception {
 		FileEntry fileEntry = (FileEntry)message.getPayload();
 

@@ -27,6 +27,7 @@ import javax.servlet.jsp.JspWriter;
  */
 public class IconHelpTag extends IconTag {
 
+	@Override
 	protected String getPage() {
 		if (FileAvailabilityUtil.isAvailable(getServletContext(), _PAGE)) {
 			return _PAGE;
@@ -36,6 +37,7 @@ public class IconHelpTag extends IconTag {
 		}
 	}
 
+	@Override
 	protected int processEndTag() throws Exception {
 		ThemeDisplay themeDisplay = (ThemeDisplay)pageContext.getAttribute(
 			"themeDisplay");

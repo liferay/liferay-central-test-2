@@ -81,6 +81,7 @@ public class MethodHandler implements Serializable {
 		return method.invoke(target, _arguments);
 	}
 
+	@Override
 	public String toString() {
 		StringBundler sb = new StringBundler(5);
 

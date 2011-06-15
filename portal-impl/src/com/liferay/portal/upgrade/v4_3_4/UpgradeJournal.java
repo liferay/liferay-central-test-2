@@ -27,6 +27,7 @@ import com.liferay.portal.upgrade.v4_3_4.util.JournalArticleTable;
  */
 public class UpgradeJournal extends UpgradeProcess {
 
+	@Override
 	protected void doUpgrade() throws Exception {
 
 		// JournalArticle

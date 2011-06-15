@@ -38,10 +38,12 @@ public class GetDocumentMethodImpl extends BaseMethodImpl {
 		return _METHOD_NAME;
 	}
 
+	@Override
 	public String getRootPath(SharepointRequest sharepointRequest) {
 		return sharepointRequest.getParameterValue("document_name");
 	}
 
+	@Override
 	protected void doProcess(SharepointRequest sharepointRequest)
 		throws Exception {
 
@@ -60,6 +62,7 @@ public class GetDocumentMethodImpl extends BaseMethodImpl {
 			sharepointRequest.getHttpServletResponse(), bytes);
 	}
 
+	@Override
 	protected List<ResponseElement> getElements(
 			SharepointRequest sharepointRequest)
 		throws Exception {

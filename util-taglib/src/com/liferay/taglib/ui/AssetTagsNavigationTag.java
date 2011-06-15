@@ -49,6 +49,7 @@ public class AssetTagsNavigationTag extends IncludeTag {
 		_showZeroAssetCount = showZeroAssetCount;
 	}
 
+	@Override
 	protected void cleanUp() {
 		_classNameId = 0;
 		_displayStyle = "cloud";
@@ -58,10 +59,12 @@ public class AssetTagsNavigationTag extends IncludeTag {
 		_showZeroAssetCount = false;
 	}
 
+	@Override
 	protected String getPage() {
 		return _PAGE;
 	}
 
+	@Override
 	protected void setAttributes(HttpServletRequest request) {
 		request.setAttribute(
 			"liferay-ui:asset-tags-navigation:classNameId",

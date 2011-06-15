@@ -40,6 +40,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class SharepointServlet extends HttpServlet {
 
+	@Override
 	public void doGet(
 		HttpServletRequest request,	HttpServletResponse response) {
 
@@ -55,6 +56,7 @@ public class SharepointServlet extends HttpServlet {
 		}
 	}
 
+	@Override
 	public void doPost(
 		HttpServletRequest request, HttpServletResponse response) {
 

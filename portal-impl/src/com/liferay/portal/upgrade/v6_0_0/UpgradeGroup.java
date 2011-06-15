@@ -28,6 +28,7 @@ import java.sql.ResultSet;
  */
 public class UpgradeGroup extends UpgradeProcess {
 
+	@Override
 	protected void doUpgrade() throws Exception {
 		updateParentGroupId();
 	}

@@ -125,6 +125,7 @@ import org.apache.struts.tiles.TilesUtilImpl;
  */
 public class MainServlet extends ActionServlet {
 
+	@Override
 	public void destroy() {
 		if (_log.isDebugEnabled()) {
 			_log.debug("Destroy plugins");
@@ -174,6 +175,7 @@ public class MainServlet extends ActionServlet {
 		callParentDestroy();
 	}
 
+	@Override
 	public void init() throws ServletException {
 		if (_log.isDebugEnabled()) {
 			_log.debug("Initialize");
@@ -351,6 +353,7 @@ public class MainServlet extends ActionServlet {
 		}
 	}
 
+	@Override
 	public void service(
 			HttpServletRequest request, HttpServletResponse response)
 		throws IOException, ServletException {
@@ -673,6 +676,7 @@ public class MainServlet extends ActionServlet {
 		return remoteUser;
 	}
 
+	@Override
 	protected synchronized RequestProcessor getRequestProcessor(
 			ModuleConfig moduleConfig)
 		throws ServletException {

@@ -27,6 +27,7 @@ import java.util.List;
  */
 public class VerifyDocumentLibrary extends VerifyProcess {
 
+	@Override
 	protected void doVerify() throws Exception {
 		removeOrphanedFileEntries();
 		updateAssets();

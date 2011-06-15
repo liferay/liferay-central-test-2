@@ -136,6 +136,7 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 		addPaths(_trackerIgnorePaths, PropsKeys.SESSION_TRACKER_IGNORE_PATHS);
 	}
 
+	@Override
 	public void process(
 			HttpServletRequest request, HttpServletResponse response)
 		throws IOException, ServletException {
@@ -268,6 +269,7 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 		request.setAttribute(WebKeys.PORTLET_STRUTS_EXECUTE, Boolean.TRUE);
 	}
 
+	@Override
 	protected void doForward(
 			String uri, HttpServletRequest request,
 			HttpServletResponse response)
@@ -276,6 +278,7 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 		StrutsUtil.forward(uri, getServletContext(), request, response);
 	}
 
+	@Override
 	protected void doInclude(
 			String uri, HttpServletRequest request,
 			HttpServletResponse response)
@@ -466,6 +469,7 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 		}
 	}
 
+	@Override
 	protected Action processActionCreate(
 			HttpServletRequest request, HttpServletResponse response,
 			ActionMapping actionMapping)
@@ -492,6 +496,7 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 		return super.processActionCreate(request, response, actionMapping);
 	}
 
+	@Override
 	protected ActionMapping processMapping(
 			HttpServletRequest request, HttpServletResponse response,
 			String path)
@@ -538,6 +543,7 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 		return actionMapping;
 	}
 
+	@Override
 	protected HttpServletRequest processMultipart(HttpServletRequest request) {
 
 		// Disable Struts from automatically wrapping a multipart request
@@ -545,6 +551,7 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 		return request;
 	}
 
+	@Override
 	protected String processPath(
 			HttpServletRequest request, HttpServletResponse response)
 		throws IOException {
@@ -832,6 +839,7 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 		return path;
 	}
 
+	@Override
 	protected boolean processRoles(
 			HttpServletRequest request, HttpServletResponse response,
 			ActionMapping actionMapping)

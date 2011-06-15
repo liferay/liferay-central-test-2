@@ -26,6 +26,7 @@ public class UncommittedServletResponse extends HttpServletResponseWrapper {
 		super(response);
 	}
 
+	@Override
 	public boolean isCommitted() {
 		return _COMMITTED;
 	}

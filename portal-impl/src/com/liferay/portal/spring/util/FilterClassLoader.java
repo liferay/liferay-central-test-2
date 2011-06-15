@@ -25,6 +25,7 @@ public class FilterClassLoader extends ClassLoader {
 		super(classLoader);
 	}
 
+	@Override
 	public Class<?> loadClass(String name) throws ClassNotFoundException {
 		if (name.startsWith("net.sf.ehcache.") ||
 			name.startsWith("org.aopalliance.") ||

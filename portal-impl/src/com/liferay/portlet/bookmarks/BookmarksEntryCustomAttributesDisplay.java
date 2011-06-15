@@ -30,6 +30,7 @@ public class BookmarksEntryCustomAttributesDisplay
 		return CLASS_NAME;
 	}
 
+	@Override
 	public String getIconPath(ThemeDisplay themeDisplay) {
 		return themeDisplay.getPathThemeImages() + "/ratings/star_hover.png";
 	}

@@ -37,6 +37,7 @@ public class Domain implements Serializable {
 		_loaded = true;
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
 			return true;
@@ -64,6 +65,7 @@ public class Domain implements Serializable {
 		return _mBeans;
 	}
 
+	@Override
 	public int hashCode() {
 		HashCode hashCode = HashCodeFactoryUtil.getHashCode();
 

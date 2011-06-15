@@ -54,6 +54,7 @@ public class CASFilter extends BasePortalFilter {
 		_ticketValidators.remove(companyId);
 	}
 
+	@Override
 	public boolean isFilterEnabled(
 		HttpServletRequest request, HttpServletResponse response) {
 
@@ -74,6 +75,7 @@ public class CASFilter extends BasePortalFilter {
 		return false;
 	}
 
+	@Override
 	protected Log getLog() {
 		return _log;
 	}
@@ -111,6 +113,7 @@ public class CASFilter extends BasePortalFilter {
 		return cas20ProxyTicketValidator;
 	}
 
+	@Override
 	protected void processFilter(
 			HttpServletRequest request, HttpServletResponse response,
 			FilterChain filterChain)

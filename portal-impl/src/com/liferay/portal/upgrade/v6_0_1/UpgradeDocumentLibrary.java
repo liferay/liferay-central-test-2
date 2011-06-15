@@ -25,6 +25,7 @@ import com.liferay.portal.upgrade.v6_0_1.util.DLFileVersionTable;
  */
 public class UpgradeDocumentLibrary extends UpgradeProcess {
 
+	@Override
 	protected void doUpgrade() throws Exception {
 		try {
 			runSQL("alter_column_type DLFileEntry size_ LONG");

@@ -29,10 +29,12 @@ public class OrderedProperties extends Properties {
 		_names = new Vector<String>();
 	}
 
+	@Override
 	public Enumeration<String> propertyNames() {
 		return _names.elements();
 	}
 
+	@Override
 	public Object put(Object key, Object value) {
 		if (_names.contains(key)) {
 			_names.remove(key);
@@ -43,6 +45,7 @@ public class OrderedProperties extends Properties {
 		return super.put(key, value);
 	}
 
+	@Override
 	public Object remove(Object key) {
 		_names.remove(key);
 

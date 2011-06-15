@@ -25,12 +25,14 @@ import javax.portlet.RenderRequest;
  */
 public class GroovyPortlet extends ScriptingPortlet {
 
+	@Override
 	public void init() {
 		super.init();
 
 		language = _LANGUAGE;
 	}
 
+	@Override
 	protected String getFileName(RenderRequest renderRequest) {
 		return renderRequest.getParameter("groovyFile");
 	}

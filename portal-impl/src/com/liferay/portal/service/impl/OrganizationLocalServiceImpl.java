@@ -228,6 +228,7 @@ public class OrganizationLocalServiceImpl
 		}
 	}
 
+	@Override
 	public void deleteOrganization(long organizationId)
 		throws PortalException, SystemException {
 
@@ -237,6 +238,7 @@ public class OrganizationLocalServiceImpl
 		deleteOrganization(organization);
 	}
 
+	@Override
 	public void deleteOrganization(Organization organization)
 		throws PortalException, SystemException {
 
@@ -328,6 +330,7 @@ public class OrganizationLocalServiceImpl
 		return groupPersistence.getOrganizations(groupId);
 	}
 
+	@Override
 	public Organization getOrganization(long organizationId)
 		throws PortalException, SystemException {
 

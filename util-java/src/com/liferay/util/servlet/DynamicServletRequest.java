@@ -93,6 +93,7 @@ public class DynamicServletRequest extends HttpServletRequestWrapper {
 		return _params;
 	}
 
+	@Override
 	public String getParameter(String name) {
 		String[] values = _params.get(name);
 
@@ -108,6 +109,7 @@ public class DynamicServletRequest extends HttpServletRequestWrapper {
 		}
 	}
 
+	@Override
 	public Map<String, String[]> getParameterMap() {
 		Map<String, String[]> map = new HashMap<String, String[]>();
 
@@ -122,6 +124,7 @@ public class DynamicServletRequest extends HttpServletRequestWrapper {
 		return map;
 	}
 
+	@Override
 	public Enumeration<String> getParameterNames() {
 		Set<String> names = new LinkedHashSet<String>();
 
@@ -138,6 +141,7 @@ public class DynamicServletRequest extends HttpServletRequestWrapper {
 		return Collections.enumeration(names);
 	}
 
+	@Override
 	public String[] getParameterValues(String name) {
 		String[] values = _params.get(name);
 

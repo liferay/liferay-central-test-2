@@ -27,16 +27,19 @@ public class SearchSpeedTag<R> extends SearchFormTag<R> {
 		_hits = hits;
 	}
 
+	@Override
 	protected void cleanUp() {
 		super.cleanUp();
 
 		_hits = null;
 	}
 
+	@Override
 	protected String getPage() {
 		return _PAGE;
 	}
 
+	@Override
 	protected void setAttributes(HttpServletRequest request) {
 		super.setAttributes(request);
 

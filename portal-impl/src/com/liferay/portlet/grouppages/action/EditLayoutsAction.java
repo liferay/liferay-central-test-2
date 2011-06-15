@@ -26,6 +26,7 @@ import javax.portlet.PortletRequest;
 public class EditLayoutsAction
 	extends com.liferay.portlet.layoutsadmin.action.EditLayoutsAction {
 
+	@Override
 	protected Group getGroup(PortletRequest portletRequest) throws Exception {
 		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);

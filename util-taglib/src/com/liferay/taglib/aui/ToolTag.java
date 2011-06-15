@@ -22,6 +22,7 @@ import javax.servlet.jsp.tagext.TagSupport;
  */
 public class ToolTag extends TagSupport {
 
+	@Override
 	public int doStartTag() {
 		PanelTag panelTag = (PanelTag)findAncestorWithClass(
 			this, PanelTag.class);
@@ -39,6 +40,7 @@ public class ToolTag extends TagSupport {
 		return _icon;
 	}
 
+	@Override
 	public String getId() {
 		return _id;
 	}
@@ -51,6 +53,7 @@ public class ToolTag extends TagSupport {
 		_icon = icon;
 	}
 
+	@Override
 	public void setId(String id) {
 		_id = id;
 	}

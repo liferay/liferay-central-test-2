@@ -23,6 +23,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class FormNavigatorTag extends IncludeTag {
 
+	@Override
 	public int doStartTag() {
 		return EVAL_BODY_INCLUDE;
 	}
@@ -59,6 +60,7 @@ public class FormNavigatorTag extends IncludeTag {
 		_showButtons = showButtons;
 	}
 
+	@Override
 	protected void cleanUp() {
 		_backURL = null;
 		_categoryNames = null;
@@ -70,10 +72,12 @@ public class FormNavigatorTag extends IncludeTag {
 		_showButtons = true;
 	}
 
+	@Override
 	protected String getPage() {
 		return _PAGE;
 	}
 
+	@Override
 	protected void setAttributes(HttpServletRequest request) {
 		request.setAttribute("liferay-ui:form-navigator:backURL", _backURL);
 		request.setAttribute(

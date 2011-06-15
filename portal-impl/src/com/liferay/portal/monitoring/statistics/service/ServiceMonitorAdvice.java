@@ -61,6 +61,7 @@ public class ServiceMonitorAdvice extends ChainableMethodAdvice {
 		}
 	}
 
+	@Override
 	public void afterReturning(MethodInvocation methodInvocation, Object result)
 		throws Throwable {
 
@@ -72,6 +73,7 @@ public class ServiceMonitorAdvice extends ChainableMethodAdvice {
 		}
 	}
 
+	@Override
 	public boolean afterThrowing(
 			MethodInvocation methodInvocation, Throwable throwable)
 		throws Throwable {
@@ -86,6 +88,7 @@ public class ServiceMonitorAdvice extends ChainableMethodAdvice {
 		return true;
 	}
 
+	@Override
 	public Object before(MethodInvocation methodInvocation) throws Throwable {
 		if (!_active) {
 			return null;
@@ -117,6 +120,7 @@ public class ServiceMonitorAdvice extends ChainableMethodAdvice {
 		return null;
 	}
 
+	@Override
 	public void duringFinally(MethodInvocation methodInvocation) {
 		ServiceRequestDataSample serviceRequestDataSample =
 			_serviceRequestDataSampleThreadLocal.get();

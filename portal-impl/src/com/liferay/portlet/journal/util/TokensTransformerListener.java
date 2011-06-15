@@ -38,6 +38,7 @@ public class TokensTransformerListener extends BaseTransformerListener {
 	public static final String TEMP_ESCAPED_AT_OPEN =
 		"[$TEMP_ESCAPED_AT_OPEN$]";
 
+	@Override
 	public String onOutput(String s) {
 		if (_log.isDebugEnabled()) {
 			_log.debug("onOutput");
@@ -46,6 +47,7 @@ public class TokensTransformerListener extends BaseTransformerListener {
 		return replace(s);
 	}
 
+	@Override
 	public String onScript(String s) {
 		if (_log.isDebugEnabled()) {
 			_log.debug("onScript");
@@ -54,6 +56,7 @@ public class TokensTransformerListener extends BaseTransformerListener {
 		return replace(s);
 	}
 
+	@Override
 	public String onXml(String s) {
 		if (_log.isDebugEnabled()) {
 			_log.debug("onXml");

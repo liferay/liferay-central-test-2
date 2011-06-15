@@ -30,6 +30,7 @@ public class SearchContainerColumnScoreTag<R> extends SearchContainerColumnTag {
 
 	private static final String DEFAULT_NAME = "score";
 
+	@Override
 	public int doEndTag() {
 		try {
 			SearchContainerRowTag<R> searchContainerRowTag =
@@ -60,6 +61,7 @@ public class SearchContainerColumnScoreTag<R> extends SearchContainerColumnTag {
 		}
 	}
 
+	@Override
 	public int doStartTag() throws JspException {
 		SearchContainerRowTag<R> searchContainerRowTag =
 			(SearchContainerRowTag<R>)findAncestorWithClass(

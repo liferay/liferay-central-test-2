@@ -23,10 +23,12 @@ import org.dom4j.Document;
  */
 public class PortletAppDescriptor extends SimpleXMLDescriptor {
 
+	@Override
 	public boolean canHandleType(String doctype, Document root) {
 		return root.getRootElement().getName().equals("portlet-app");
 	}
 
+	@Override
 	public ElementIdentifier[] getElementsIdentifiedByChild() {
 		return _ELEMENTS_IDENTIFIED_BY_CHILD;
 	}

@@ -39,6 +39,7 @@ import java.util.Iterator;
  */
 public class UpgradePortletPreferences extends UpgradeProcess {
 
+	@Override
 	protected void doUpgrade() throws Exception {
 
 		// PortletPreferences

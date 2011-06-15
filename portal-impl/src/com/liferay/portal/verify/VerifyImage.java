@@ -50,6 +50,7 @@ import java.util.List;
  */
 public class VerifyImage extends VerifyProcess {
 
+	@Override
 	protected void doVerify() throws Exception {
 		List<Image> images = ImageLocalServiceUtil.getImages();
 

@@ -43,6 +43,7 @@ public class DB2DB extends BaseDB {
 		return _instance;
 	}
 
+	@Override
 	public String buildSQL(String template) throws IOException {
 		template = convertTimestamp(template);
 		template = replaceTemplate(template, getTemplate());
@@ -55,18 +56,22 @@ public class DB2DB extends BaseDB {
 		return template;
 	}
 
+	@Override
 	public boolean isSupportsAlterColumnType() {
 		return _SUPPORTS_ALTER_COLUMN_TYPE;
 	}
 
+	@Override
 	public boolean isSupportsInlineDistinct() {
 		return _SUPPORTS_INLINE_DISTINCT;
 	}
 
+	@Override
 	public boolean isSupportsScrollableResults() {
 		return _SUPPORTS_SCROLLABLE_RESULTS;
 	}
 
+	@Override
 	public void runSQL(String template) throws IOException, SQLException {
 		if (template.startsWith(ALTER_COLUMN_NAME) ||
 			template.startsWith(ALTER_COLUMN_TYPE)) {
@@ -86,6 +91,7 @@ public class DB2DB extends BaseDB {
 		}
 	}
 
+	@Override
 	public void runSQL(String[] templates) throws IOException, SQLException {
 		super.runSQL(templates);
 
@@ -96,6 +102,7 @@ public class DB2DB extends BaseDB {
 		super(TYPE_DB2);
 	}
 
+	@Override
 	protected String buildCreateFileContent(
 			String sqlDir, String databaseName, int population)
 		throws IOException {
@@ -124,14 +131,17 @@ public class DB2DB extends BaseDB {
 		return sb.toString();
 	}
 
+	@Override
 	protected String getServerName() {
 		return "db2";
 	}
 
+	@Override
 	protected String[] getTemplate() {
 		return _DB2;
 	}
 
+	@Override
 	protected String reword(String data) throws IOException {
 		UnsyncBufferedReader unsyncBufferedReader = new UnsyncBufferedReader(
 			new UnsyncStringReader(data));

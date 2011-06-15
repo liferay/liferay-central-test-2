@@ -44,6 +44,7 @@ public class MySQLDB extends BaseDB {
 		return _instance;
 	}
 
+	@Override
 	public String buildSQL(String template) throws IOException {
 		template = convertTimestamp(template);
 		template = replaceTemplate(template, getTemplate());
@@ -54,6 +55,7 @@ public class MySQLDB extends BaseDB {
 		return template;
 	}
 
+	@Override
 	public List<Index> getIndexes() throws SQLException {
 		List<Index> indexes = new ArrayList<Index>();
 
@@ -92,10 +94,12 @@ public class MySQLDB extends BaseDB {
 		return indexes;
 	}
 
+	@Override
 	public boolean isSupportsDateMilliseconds() {
 		return _SUPPORTS_DATE_MILLISECONDS;
 	}
 
+	@Override
 	public boolean isSupportsUpdateWithInnerJoin() {
 		return _SUPPORTS_UPDATE_WITH_INNER_JOIN;
 	}
@@ -104,6 +108,7 @@ public class MySQLDB extends BaseDB {
 		super(TYPE_MYSQL);
 	}
 
+	@Override
 	protected String buildCreateFileContent(
 			String sqlDir, String databaseName, int population)
 		throws IOException {
@@ -133,14 +138,17 @@ public class MySQLDB extends BaseDB {
 		return sb.toString();
 	}
 
+	@Override
 	protected String getServerName() {
 		return "mysql";
 	}
 
+	@Override
 	protected String[] getTemplate() {
 		return _MYSQL;
 	}
 
+	@Override
 	protected String reword(String data) throws IOException {
 		UnsyncBufferedReader unsyncBufferedReader = new UnsyncBufferedReader(
 			new UnsyncStringReader(data));

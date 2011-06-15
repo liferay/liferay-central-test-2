@@ -51,6 +51,7 @@ public class InputCheckBoxTag extends IncludeTag {
 		_param = param;
 	}
 
+	@Override
 	protected void cleanUp() {
 		_cssClass = null;
 		_defaultValue = Boolean.FALSE;
@@ -61,10 +62,12 @@ public class InputCheckBoxTag extends IncludeTag {
 		_param = null;
 	}
 
+	@Override
 	protected String getPage() {
 		return _PAGE;
 	}
 
+	@Override
 	protected void setAttributes(HttpServletRequest request) {
 		request.setAttribute("liferay-ui:input-checkbox:cssClass", _cssClass);
 		request.setAttribute(

@@ -37,6 +37,7 @@ public class ClusterForwardReceiver extends BaseReceiver {
 		_clusterForwardMessageListener = clusterForwardMessageListener;
 	}
 
+	@Override
 	public void receive(Message message) {
 		if ((!_localTransportAddresses.contains(message.getSrc())) ||
 			(message.getDest() != null)) {
@@ -52,6 +53,7 @@ public class ClusterForwardReceiver extends BaseReceiver {
 		}
 	}
 
+	@Override
 	public void viewAccepted(View view) {
 		if (_log.isDebugEnabled()) {
 			_log.debug("Accepted view " + view);

@@ -51,6 +51,7 @@ public class SortedArrayList<E> extends ArrayList<E> {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public boolean addAll(Collection<? extends E> c) {
 		boolean modified = false;
 
@@ -65,6 +66,7 @@ public class SortedArrayList<E> extends ArrayList<E> {
 		return modified;
 	}
 
+	@Override
 	public boolean addAll(int index, Collection<? extends E> c) {
 		throw new UnsupportedOperationException();
 	}

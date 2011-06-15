@@ -38,6 +38,7 @@ public class BrowserTrackerLocalServiceImpl
 		}
 	}
 
+	@Override
 	public BrowserTracker getBrowserTracker(long browserTrackerId)
 		throws PortalException, SystemException {
 

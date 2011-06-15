@@ -50,6 +50,7 @@ public class KeyValuePair implements Comparable<KeyValuePair>, Serializable {
 		return _key.compareTo(kvp.getKey());
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
 			return true;
@@ -68,6 +69,7 @@ public class KeyValuePair implements Comparable<KeyValuePair>, Serializable {
 		return false;
 	}
 
+	@Override
 	public int hashCode() {
 		if (_key != null) {
 			return _key.hashCode();

@@ -38,16 +38,19 @@ public class DiffTag extends IncludeTag {
 		_targetName = targetName;
 	}
 
+	@Override
 	protected void cleanUp() {
 		_diffResults = null;
 		_sourceName = null;
 		_targetName = null;
 	}
 
+	@Override
 	protected String getPage() {
 		return _PAGE;
 	}
 
+	@Override
 	protected void setAttributes(HttpServletRequest request) {
 		request.setAttribute("liferay-ui:diff:diffResults", _diffResults);
 		request.setAttribute("liferay-ui:diff:sourceName", _sourceName);

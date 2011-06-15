@@ -46,6 +46,7 @@ import java.util.Collection;
  */
 public class AdvancedFileSystemHook extends FileSystemHook {
 
+	@Override
 	public void reindex(String[] ids) throws SearchException {
 		long companyId = GetterUtil.getLong(ids[0]);
 		String portletId = ids[1];
@@ -65,6 +66,7 @@ public class AdvancedFileSystemHook extends FileSystemHook {
 		}
 	}
 
+	@Override
 	public void updateFile(
 			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, String newFileName, boolean reindex)
@@ -124,6 +126,7 @@ public class AdvancedFileSystemHook extends FileSystemHook {
 		return fragments.length;
 	}
 
+	@Override
 	protected File getDirNameDir(
 		long companyId, long repositoryId, String dirName) {
 
@@ -178,6 +181,7 @@ public class AdvancedFileSystemHook extends FileSystemHook {
 		return documents;
 	}
 
+	@Override
 	protected File getFileNameDir(
 		long companyId, long repositoryId, String fileName) {
 
@@ -212,6 +216,7 @@ public class AdvancedFileSystemHook extends FileSystemHook {
 		return fileNameDir;
 	}
 
+	@Override
 	protected File getFileNameVersionFile(
 		long companyId, long repositoryId, String fileName, String version) {
 
@@ -256,6 +261,7 @@ public class AdvancedFileSystemHook extends FileSystemHook {
 		}
 	}
 
+	@Override
 	protected String getHeadVersionNumber(
 		long companyId, long repositoryId, String fileName) {
 

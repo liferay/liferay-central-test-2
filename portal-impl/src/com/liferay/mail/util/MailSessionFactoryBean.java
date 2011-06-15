@@ -34,6 +34,7 @@ import org.springframework.beans.factory.config.AbstractFactoryBean;
  */
 public class MailSessionFactoryBean extends AbstractFactoryBean<Session> {
 
+	@Override
 	public Class<Session> getObjectType() {
 		return Session.class;
 	}
@@ -42,6 +43,7 @@ public class MailSessionFactoryBean extends AbstractFactoryBean<Session> {
 		_propertyPrefix = propertyPrefix;
 	}
 
+	@Override
 	protected Session createInstance() throws Exception {
 		Properties properties = PropsUtil.getProperties(
 			_propertyPrefix, true);

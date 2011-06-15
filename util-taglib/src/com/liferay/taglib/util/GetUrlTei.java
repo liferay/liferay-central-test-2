@@ -25,6 +25,7 @@ import javax.servlet.jsp.tagext.VariableInfo;
  */
 public class GetUrlTei extends TagExtraInfo {
 
+	@Override
 	public VariableInfo[] getVariableInfo(TagData tagData) {
 		String var = tagData.getAttributeString("var");
 

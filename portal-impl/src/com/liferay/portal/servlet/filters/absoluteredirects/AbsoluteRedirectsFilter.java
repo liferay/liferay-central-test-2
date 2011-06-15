@@ -94,6 +94,7 @@ public class AbsoluteRedirectsFilter
 		return new AbsoluteRedirectsResponse(request, response);
 	}
 
+	@Override
 	public boolean isFilterEnabled() {
 		return _FILTER_ENABLED;
 	}

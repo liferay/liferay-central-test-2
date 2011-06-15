@@ -54,6 +54,7 @@ public class InputTimeZoneTag extends IncludeTag {
 		_value = value;
 	}
 
+	@Override
 	protected void cleanUp() {
 		_cssClass = null;
 		_daylight = false;
@@ -64,10 +65,12 @@ public class InputTimeZoneTag extends IncludeTag {
 		_value = TimeZoneUtil.getDefault().getID();
 	}
 
+	@Override
 	protected String getPage() {
 		return _PAGE;
 	}
 
+	@Override
 	protected void setAttributes(HttpServletRequest request) {
 		request.setAttribute("liferay-ui:input-time-zone:cssClass", _cssClass);
 		request.setAttribute(

@@ -165,6 +165,7 @@ public abstract class MimeResponseImpl
 		_response.setContentType(contentType);
 	}
 
+ 	@Override
  	protected void init(
 		PortletRequestImpl portletRequestImpl, HttpServletResponse response,
 		String portletName, long companyId, long plid) {

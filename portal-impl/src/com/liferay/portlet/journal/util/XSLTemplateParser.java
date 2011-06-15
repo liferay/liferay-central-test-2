@@ -34,14 +34,17 @@ import javax.xml.transform.stream.StreamSource;
  */
 public class XSLTemplateParser extends VelocityTemplateParser {
 
+	@Override
 	protected String getErrorTemplateContent() {
 		return ContentUtil.get(PropsValues.JOURNAL_ERROR_TEMPLATE_XSL);
 	}
 
+	@Override
 	protected TemplateContext getTemplateContext() throws Exception {
 		return _getTemplateContext(getScript());
 	}
 
+	@Override
 	protected boolean mergeTemplate(
 			TemplateContext templateContext,
 			UnsyncStringWriter unsyncStringWriter)

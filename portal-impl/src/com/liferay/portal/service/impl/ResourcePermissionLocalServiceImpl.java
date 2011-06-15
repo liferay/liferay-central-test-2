@@ -122,6 +122,7 @@ public class ResourcePermissionLocalServiceImpl
 		}
 	}
 
+	@Override
 	public void deleteResourcePermission(long resourcePermissionId)
 		throws PortalException, SystemException {
 

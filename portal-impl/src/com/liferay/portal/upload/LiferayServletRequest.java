@@ -32,6 +32,7 @@ public class LiferayServletRequest extends HttpServletRequestWrapper {
 		_request = request;
 	}
 
+	@Override
 	public ServletInputStream getInputStream() throws IOException {
 		if (_lis == null) {
 			_lis = new LiferayInputStream(_request);

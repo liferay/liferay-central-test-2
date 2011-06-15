@@ -39,6 +39,7 @@ import javax.servlet.http.HttpSession;
  */
 public class OpenSSOFilter extends BasePortalFilter {
 
+	@Override
 	public boolean isFilterEnabled(
 		HttpServletRequest request, HttpServletResponse response) {
 
@@ -72,6 +73,7 @@ public class OpenSSOFilter extends BasePortalFilter {
 		return false;
 	}
 
+	@Override
 	protected void processFilter(
 			HttpServletRequest request, HttpServletResponse response,
 			FilterChain filterChain)

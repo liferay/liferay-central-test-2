@@ -50,6 +50,7 @@ public class BufferedIncreasableEntry<K, T>
 		_nextInterceptor.invoke(_methodInvocation);
 	}
 
+	@Override
 	public String toString() {
 		return _methodInvocation.toString();
 	}

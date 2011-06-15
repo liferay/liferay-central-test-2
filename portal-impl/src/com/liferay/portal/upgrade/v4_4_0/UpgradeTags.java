@@ -27,6 +27,7 @@ import com.liferay.portal.upgrade.v4_4_0.util.TagsAssetTable;
  */
 public class UpgradeTags extends UpgradeProcess {
 
+	@Override
 	protected void doUpgrade() throws Exception {
 
 		// TagsAsset

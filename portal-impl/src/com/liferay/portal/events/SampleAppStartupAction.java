@@ -38,6 +38,7 @@ import java.util.Locale;
  */
 public class SampleAppStartupAction extends SimpleAction {
 
+	@Override
 	public void run(String[] ids) throws ActionException {
 		try {
 			long companyId = GetterUtil.getLong(ids[0]);

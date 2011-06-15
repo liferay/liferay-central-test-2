@@ -642,6 +642,7 @@ public class PortletURLImpl
 		_windowStateRestoreCurrentView = windowStateRestoreCurrentView;
 	}
 
+	@Override
 	public String toString() {
 		if (_toString != null) {
 			return _toString;

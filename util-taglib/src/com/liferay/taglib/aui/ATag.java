@@ -74,6 +74,7 @@ public class ATag extends IncludeTag {
 		_title = title;
 	}
 
+	@Override
 	protected void cleanUp() {
 		_cssClass = null;
 		_data = null;
@@ -86,10 +87,12 @@ public class ATag extends IncludeTag {
 		_title = null;
 	}
 
+	@Override
 	protected String getEndPage() {
 		return _END_PAGE;
 	}
 
+	@Override
 	protected String getStartPage() {
 		return _START_PAGE;
 	}
@@ -105,6 +108,7 @@ public class ATag extends IncludeTag {
 		}
 	}
 
+	@Override
 	protected int processEndTag() throws Exception {
 		JspWriter jspWriter = pageContext.getOut();
 
@@ -125,6 +129,7 @@ public class ATag extends IncludeTag {
 		return EVAL_PAGE;
 	}
 
+	@Override
 	protected int processStartTag() throws Exception {
 		JspWriter jspWriter = pageContext.getOut();
 

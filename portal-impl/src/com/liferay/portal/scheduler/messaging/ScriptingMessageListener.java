@@ -27,6 +27,7 @@ import java.util.Map;
  */
 public class ScriptingMessageListener extends BaseMessageListener {
 
+	@Override
 	public void doReceive(Message message) throws Exception {
 		Map<String, Object> inputObjects = new HashMap<String, Object>();
 

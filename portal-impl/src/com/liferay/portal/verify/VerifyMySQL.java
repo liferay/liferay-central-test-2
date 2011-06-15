@@ -55,6 +55,7 @@ public class VerifyMySQL extends VerifyProcess {
 		}
 	}
 
+	@Override
 	protected void doVerify() throws Exception {
 		DB db = DBFactoryUtil.getDB();
 

@@ -24,6 +24,7 @@ public class NullServletOutputStream extends ServletOutputStream {
 	public NullServletOutputStream() {
 	}
 
+	@Override
 	public void write(int b) {
 	}
 

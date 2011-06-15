@@ -65,6 +65,7 @@ public class ColorSchemeImpl implements ColorScheme {
 		return getName().compareTo(colorScheme.getName());
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		if (obj == null) {
 			return false;
@@ -159,6 +160,7 @@ public class ColorSchemeImpl implements ColorScheme {
 		return _settingsProperties;
 	}
 
+	@Override
 	public int hashCode() {
 		return _colorSchemeId.hashCode();
 	}

@@ -157,6 +157,7 @@ public class UnicodeProperties extends HashMap<String, String> {
 		}
 	}
 
+	@Override
 	public String remove(Object key) {
 		if ((key == null) || !containsKey(key)) {
 			return null;
@@ -176,6 +177,7 @@ public class UnicodeProperties extends HashMap<String, String> {
 		return put(key, value);
 	}
 
+	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder(_length);
 

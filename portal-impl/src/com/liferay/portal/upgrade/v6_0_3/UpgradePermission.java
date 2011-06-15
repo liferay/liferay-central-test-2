@@ -240,6 +240,7 @@ public class UpgradePermission extends UpgradeProcess {
 		}
 	}
 
+	@Override
 	protected void doUpgrade() throws Exception {
 		addSingleApproverWorkflowRoles();
 

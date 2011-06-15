@@ -21,6 +21,7 @@ import com.liferay.portal.util.BaseTestCase;
  */
 public class MediaWikiToCreoleTranslatorTest extends BaseTestCase {
 
+	@Override
 	public void setUp() throws Exception {
 		_translator = new MediaWikiToCreoleTranslator();
 	}

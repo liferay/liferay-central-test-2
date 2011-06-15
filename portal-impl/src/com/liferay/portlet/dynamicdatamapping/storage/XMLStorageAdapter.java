@@ -50,6 +50,7 @@ import java.util.Map;
  */
 public class XMLStorageAdapter extends BaseStorageAdapter {
 
+	@Override
 	protected long doCreate(
 			long companyId, long ddmStructureId, Fields fields,
 			ServiceContext serviceContext)
@@ -83,12 +84,14 @@ public class XMLStorageAdapter extends BaseStorageAdapter {
 		return ddmContent.getPrimaryKey();
 	}
 
+	@Override
 	protected void doDeleteByClass(long classPK) throws Exception {
 		DDMContentLocalServiceUtil.deleteDDMContent(classPK);
 
 		DDMStorageLinkLocalServiceUtil.deleteClassStorageLink(classPK);
 	}
 
+	@Override
 	protected void doDeleteByDDMStructure(long ddmStructureId)
 		throws Exception {
 
@@ -105,6 +108,7 @@ public class XMLStorageAdapter extends BaseStorageAdapter {
 			ddmStructureId);
 	}
 
+	@Override
 	protected List<Fields> doGetFieldsListByClasses(
 			long ddmStructureId, long[] classPKs, List<String> fieldNames,
 			OrderByComparator orderByComparator)
@@ -114,6 +118,7 @@ public class XMLStorageAdapter extends BaseStorageAdapter {
 			ddmStructureId, classPKs, fieldNames, null, orderByComparator);
 	}
 
+	@Override
 	protected List<Fields> doGetFieldsListByDDMStructure(
 			long ddmStructureId, List<String> fieldNames,
 			OrderByComparator orderByComparator)
@@ -122,6 +127,7 @@ public class XMLStorageAdapter extends BaseStorageAdapter {
 		return _doQuery(ddmStructureId, fieldNames, null, orderByComparator);
 	}
 
+	@Override
 	protected Map<Long, Fields> doGetFieldsMapByClasses(
 			long ddmStructureId, long[] classPKs, List<String> fieldNames)
 		throws Exception {
@@ -129,6 +135,7 @@ public class XMLStorageAdapter extends BaseStorageAdapter {
 		return _doQuery(ddmStructureId, classPKs, fieldNames);
 	}
 
+	@Override
 	protected List<Fields> doQuery(
 			long ddmStructureId, List<String> fieldNames, Condition condition,
 			OrderByComparator orderByComparator)
@@ -138,6 +145,7 @@ public class XMLStorageAdapter extends BaseStorageAdapter {
 			ddmStructureId, fieldNames, condition, orderByComparator);
 	}
 
+	@Override
 	protected int doQueryCount(long ddmStructureId, Condition condition)
 		throws Exception {
 
@@ -168,6 +176,7 @@ public class XMLStorageAdapter extends BaseStorageAdapter {
 		return count;
 	}
 
+	@Override
 	protected void doUpdate(
 			long classPK, Fields fields, boolean mergeFields,
 			ServiceContext serviceContext)

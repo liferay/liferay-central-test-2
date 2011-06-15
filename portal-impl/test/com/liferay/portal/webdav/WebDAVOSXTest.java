@@ -319,6 +319,7 @@ public class WebDAVOSXTest extends BaseWebDAVTestCase {
 		return _lockMap.get(fileName);
 	}
 
+	@Override
 	protected String getUserAgent() {
 		return _USER_AGENT;
 	}

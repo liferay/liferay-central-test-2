@@ -34,6 +34,7 @@ public class MSNMessageAdapter extends MsnAdapter {
 		_msg = msg;
 	}
 
+	@Override
 	public void whoJoinSession(SwitchboardSession ss, MsnFriend join) {
 		try {
 			if (_to.equals(join.getLoginName())) {

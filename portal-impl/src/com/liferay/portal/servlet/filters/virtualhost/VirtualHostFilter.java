@@ -56,12 +56,14 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class VirtualHostFilter extends BasePortalFilter {
 
+	@Override
 	public void init(FilterConfig filterConfig) {
 		super.init(filterConfig);
 
 		_servletContext = filterConfig.getServletContext();
 	}
 
+	@Override
 	public boolean isFilterEnabled(
 		HttpServletRequest request, HttpServletResponse response) {
 
@@ -139,6 +141,7 @@ public class VirtualHostFilter extends BasePortalFilter {
 		return true;
 	}
 
+	@Override
 	protected void processFilter(
 			HttpServletRequest request, HttpServletResponse response,
 			FilterChain filterChain)

@@ -367,6 +367,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		}
 	}
 
+	@Override
 	public void deleteGroup(Group group)
 		throws PortalException, SystemException {
 
@@ -533,6 +534,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		PermissionCacheUtil.clearCache();
 	}
 
+	@Override
 	public void deleteGroup(long groupId)
 		throws PortalException, SystemException {
 
@@ -588,6 +590,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		return groupPersistence.findByC_F(companyId, friendlyURL);
 	}
 
+	@Override
 	@ThreadLocalCachable
 	public Group getGroup(long groupId)
 		throws PortalException, SystemException {

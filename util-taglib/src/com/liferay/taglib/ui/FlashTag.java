@@ -143,6 +143,7 @@ public class FlashTag extends IncludeTag {
 		}
 	}
 
+	@Override
 	protected void cleanUp() {
 		_align = "left";
 		_allowFullScreen = Boolean.FALSE.toString();
@@ -166,10 +167,12 @@ public class FlashTag extends IncludeTag {
 		_wmode = "opaque";
 	}
 
+	@Override
 	protected String getPage() {
 		return _PAGE;
 	}
 
+	@Override
 	protected void setAttributes(HttpServletRequest request) {
 		request.setAttribute("liferay-ui:flash:align", _align);
 		request.setAttribute(

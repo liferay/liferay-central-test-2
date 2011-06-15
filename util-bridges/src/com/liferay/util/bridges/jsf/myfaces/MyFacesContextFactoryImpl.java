@@ -34,6 +34,7 @@ import org.apache.myfaces.context.servlet.ServletFacesContextImpl;
  */
 public class MyFacesContextFactoryImpl extends FacesContextFactory {
 
+	@Override
 	public FacesContext getFacesContext(
 			Object context, Object request, Object response,
 			Lifecycle lifecycle)

@@ -25,6 +25,7 @@ import com.liferay.portal.util.PortalInstances;
  */
 public class VerifyRole extends VerifyProcess {
 
+	@Override
 	protected void doVerify() throws Exception {
 		long[] companyIds = PortalInstances.getCompanyIdsBySQL();
 

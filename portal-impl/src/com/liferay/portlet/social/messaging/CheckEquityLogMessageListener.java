@@ -24,6 +24,7 @@ import com.liferay.portlet.social.service.SocialEquityLogLocalServiceUtil;
  */
 public class CheckEquityLogMessageListener extends BaseMessageListener {
 
+	@Override
 	protected void doReceive(Message message) throws Exception {
 		SocialEquityLogLocalServiceUtil.checkEquityLogs();
 	}

@@ -33,6 +33,7 @@ public class FormattedTextNode extends TextNode {
 		super(content);
 	}
 
+	@Override
 	public void accept(ASTVisitor astVisitor) {
 		astVisitor.visit(this);
 	}

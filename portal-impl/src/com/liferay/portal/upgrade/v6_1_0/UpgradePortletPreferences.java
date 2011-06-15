@@ -86,6 +86,7 @@ public class UpgradePortletPreferences
 		}
 	}
 
+	@Override
 	protected void doUpgrade() throws Exception {
 		updatePortalPreferences();
 		updatePortletPreferences();
@@ -116,6 +117,7 @@ public class UpgradePortletPreferences
 		return 0;
 	}
 
+	@Override
 	protected String[] getPortletIds() {
 		return _CAMEL_CASE_UPGRADE_PORTLET_IDS;
 	}

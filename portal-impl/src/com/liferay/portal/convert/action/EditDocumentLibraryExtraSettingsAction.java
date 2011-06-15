@@ -41,6 +41,7 @@ import org.apache.struts.action.ActionMapping;
  */
 public class EditDocumentLibraryExtraSettingsAction extends EditExpandoAction {
 
+	@Override
 	public void processAction(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
 			ActionRequest actionRequest, ActionResponse actionResponse)
@@ -55,6 +56,7 @@ public class EditDocumentLibraryExtraSettingsAction extends EditExpandoAction {
 		sendRedirect(actionRequest, actionResponse);
 	}
 
+	@Override
 	public ActionForward render(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
 			RenderRequest renderRequest, RenderResponse renderResponse)

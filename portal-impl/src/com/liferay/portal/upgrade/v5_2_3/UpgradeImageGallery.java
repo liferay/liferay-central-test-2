@@ -22,6 +22,7 @@ import com.liferay.portal.kernel.util.StringBundler;
  */
 public class UpgradeImageGallery extends UpgradeProcess {
 
+	@Override
 	protected void doUpgrade() throws Exception {
 		StringBundler sb = new StringBundler(2);
 

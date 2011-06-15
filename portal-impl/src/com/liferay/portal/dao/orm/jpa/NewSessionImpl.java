@@ -32,6 +32,7 @@ public class NewSessionImpl extends SessionImpl {
 		_entityManager.getTransaction().begin();
 	}
 
+	@Override
 	public Connection close() throws ORMException {
 		try {
 			_entityManager.getTransaction().commit();

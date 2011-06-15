@@ -48,6 +48,7 @@ import javax.portlet.PortletPreferences;
  */
 public class ConfigurationActionImpl extends DefaultConfigurationAction {
 
+	@Override
 	public void processAction(
 			PortletConfig portletConfig, ActionRequest actionRequest,
 			ActionResponse actionResponse)

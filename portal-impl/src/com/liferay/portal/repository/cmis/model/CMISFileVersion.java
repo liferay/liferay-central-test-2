@@ -60,6 +60,7 @@ public class CMISFileVersion extends CMISModel implements FileVersion {
 		return _document.getCheckinComment();
 	}
 
+	@Override
 	public long getCompanyId() {
 		return _cmisRepository.getCompanyId();
 	}
@@ -70,6 +71,7 @@ public class CMISFileVersion extends CMISModel implements FileVersion {
 		return creationDate.getTime();
 	}
 
+	@Override
 	public ExpandoBridge getExpandoBridge() {
 		return null;
 	}
@@ -118,6 +120,7 @@ public class CMISFileVersion extends CMISModel implements FileVersion {
 		return DLFileVersion.class;
 	}
 
+	@Override
 	public String getModelClassName() {
 		return DLFileVersion.class.getName();
 	}
@@ -126,6 +129,7 @@ public class CMISFileVersion extends CMISModel implements FileVersion {
 		return getCreateDate();
 	}
 
+	@Override
 	public long getPrimaryKey() {
 		return _fileVersionId;
 	}
@@ -258,6 +262,7 @@ public class CMISFileVersion extends CMISModel implements FileVersion {
 		return this;
 	}
 
+	@Override
 	protected CMISRepository getCmisRepository() {
 		return _cmisRepository;
 	}

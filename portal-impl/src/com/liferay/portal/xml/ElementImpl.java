@@ -290,20 +290,24 @@ public class ElementImpl extends BranchImpl implements Element {
 		return SAXReaderImpl.toNewElements(_element.elements(name));
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		org.dom4j.Element element = ((ElementImpl)obj).getWrappedElement();
 
 		return _element.equals(element);
 	}
 
+	@Override
 	public String formattedString() throws IOException {
 		return XMLFormatter.toString(_element);
 	}
 
+	@Override
 	public String formattedString(String indent) throws IOException {
 		return XMLFormatter.toString(_element, indent);
 	}
 
+	@Override
 	public String formattedString(String indent, boolean expandEmptyElements)
 		throws IOException {
 
@@ -404,6 +408,7 @@ public class ElementImpl extends BranchImpl implements Element {
 		}
 	}
 
+	@Override
 	public int hashCode() {
 		return _element.hashCode();
 	}
@@ -464,6 +469,7 @@ public class ElementImpl extends BranchImpl implements Element {
 		_element.setQName(qNameImpl.getWrappedQName());
 	}
 
+	@Override
 	public String toString() {
 		return _element.toString();
 	}

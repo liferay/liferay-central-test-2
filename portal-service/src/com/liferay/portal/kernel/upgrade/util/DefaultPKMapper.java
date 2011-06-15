@@ -26,6 +26,7 @@ public class DefaultPKMapper extends ValueMapperWrapper {
 		super(valueMapper);
 	}
 
+	@Override
 	public Object getNewValue(Object oldValue) throws Exception {
 		String oldValueString = GetterUtil.getString(
 			String.valueOf(oldValue));

@@ -25,6 +25,7 @@ public class RepositoryImpl extends RepositoryModelImpl implements Repository {
 	public RepositoryImpl() {
 	}
 
+	@Override
 	public String getTypeSettings() {
 		if (_typeSettingsProperties == null) {
 			return super.getTypeSettings();
@@ -44,6 +45,7 @@ public class RepositoryImpl extends RepositoryModelImpl implements Repository {
 		return _typeSettingsProperties;
 	}
 
+	@Override
 	public void setTypeSettings(String typeSettings) {
 		_typeSettingsProperties = null;
 

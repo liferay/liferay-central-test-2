@@ -23,14 +23,17 @@ import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
  */
 public class ConvertDocumentLibraryExtraSettings extends ConvertProcess {
 
+	@Override
 	public String getDescription() {
 		return "convert-extra-settings-from-document-library-files";
 	}
 
+	@Override
 	public String getPath() {
 		return "/admin_server/edit_document_library_extra_settings";
 	}
 
+	@Override
 	public boolean isEnabled() {
 		try {
 			return DLFileEntryLocalServiceUtil.hasExtraSettings();
@@ -42,6 +45,7 @@ public class ConvertDocumentLibraryExtraSettings extends ConvertProcess {
 		}
 	}
 
+	@Override
 	protected void doConvert() throws Exception {
 	}
 

@@ -27,6 +27,7 @@ import java.util.List;
  */
 public class VerifyPermission extends VerifyProcess {
 
+	@Override
 	protected void doVerify() throws Exception {
 		if ((PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM != 5) &&
 			(PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM != 6)) {

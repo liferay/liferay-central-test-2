@@ -45,6 +45,7 @@ public class JavaMD5CacheKeyGenerator extends BaseCacheKeyGenerator {
 		_charsetEncoder = CharsetEncoderUtil.getCharsetEncoder(StringPool.UTF8);
 	}
 
+	@Override
 	public CacheKeyGenerator clone() {
 		try {
 			return new JavaMD5CacheKeyGenerator(_maxLength);

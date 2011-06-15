@@ -26,6 +26,7 @@ import javax.naming.InitialContext;
 public class JndiObjectFactoryBean
 	extends org.springframework.jndi.JndiObjectFactoryBean {
 
+	@Override
 	protected Object lookup() {
 		try {
 			return JNDIUtil.lookup(new InitialContext(), getJndiName());

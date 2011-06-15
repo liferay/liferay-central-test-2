@@ -40,10 +40,12 @@ public class OutputStreamWriter extends Writer {
 		_charsetEncoder = CharsetEncoderUtil.getCharsetEncoder(charsetName);
 	}
 
+	@Override
 	public void close() throws IOException {
 		_outputStream.close();
 	}
 
+	@Override
 	public void flush() throws IOException {
 		_outputStream.flush();
 	}
@@ -52,6 +54,7 @@ public class OutputStreamWriter extends Writer {
 		return _charsetName;
 	}
 
+	@Override
 	public void write(char[] chars, int offset, int length) throws IOException {
 		ByteBuffer byteBuffer = _charsetEncoder.encode(
 			CharBuffer.wrap(chars, offset, length));
@@ -59,6 +62,7 @@ public class OutputStreamWriter extends Writer {
 		_outputStream.write(byteBuffer.array(), 0, byteBuffer.limit());
 	}
 
+	@Override
 	public void write(int c) throws IOException {
 		ByteBuffer byteBuffer = _charsetEncoder.encode(
 			CharBuffer.wrap(new char[] {(char)c}));
@@ -66,6 +70,7 @@ public class OutputStreamWriter extends Writer {
 		_outputStream.write(byteBuffer.array(), 0, byteBuffer.limit());
 	}
 
+	@Override
 	public void write(String string, int offset, int length)
 		throws IOException {
 

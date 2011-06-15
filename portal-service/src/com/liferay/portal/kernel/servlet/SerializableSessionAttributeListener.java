@@ -74,9 +74,11 @@ public class SerializableSessionAttributeListener
 		attributeAdded(event);
 	}
 
+	@Override
 	protected void doPortalDestroy() throws Exception {
 	}
 
+	@Override
 	protected void doPortalInit() throws Exception {
 		_sessionVerifySerializableAttribute = GetterUtil.getBoolean(
 			PropsUtil.get(PropsKeys.SESSION_VERIFY_SERIALIZABLE_ATTRIBUTE),

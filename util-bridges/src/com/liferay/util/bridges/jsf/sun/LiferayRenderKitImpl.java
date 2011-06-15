@@ -25,6 +25,7 @@ import javax.faces.context.ResponseWriter;
  */
 public class LiferayRenderKitImpl extends RenderKitImpl {
 
+	@Override
 	public ResponseWriter createResponseWriter(
 		Writer writer, String contentTypeList, String characterEncoding) {
 

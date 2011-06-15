@@ -45,6 +45,7 @@ import java.sql.Types;
  */
 public class UpgradeJournal extends UpgradeProcess {
 
+	@Override
 	protected void doUpgrade() throws Exception {
 
 		// JournalArticle

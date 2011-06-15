@@ -42,6 +42,7 @@ import javax.servlet.jsp.tagext.BodyTag;
  */
 public class IconMenuTag extends BaseBodyTagSupport implements BodyTag {
 
+	@Override
 	public int doAfterBody() {
 		HttpServletRequest request =
 			(HttpServletRequest)pageContext.getRequest();
@@ -67,6 +68,7 @@ public class IconMenuTag extends BaseBodyTagSupport implements BodyTag {
 		}
 	}
 
+	@Override
 	public int doEndTag() throws JspException {
 		try {
 			return processEndTag();
@@ -93,6 +95,7 @@ public class IconMenuTag extends BaseBodyTagSupport implements BodyTag {
 		}
 	}
 
+	@Override
 	public int doStartTag() {
 		HttpServletRequest request =
 			(HttpServletRequest)pageContext.getRequest();

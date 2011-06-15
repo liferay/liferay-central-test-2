@@ -102,6 +102,7 @@ public class InputDateTag extends IncludeTag {
 		_yearValue = yearValue;
 	}
 
+	@Override
 	protected void cleanUp() {
 		_cssClass = null;
 		_dayNullable = false;
@@ -124,10 +125,12 @@ public class InputDateTag extends IncludeTag {
 		_yearValue = 0;
 	}
 
+	@Override
 	protected String getPage() {
 		return _PAGE;
 	}
 
+	@Override
 	protected void setAttributes(HttpServletRequest request) {
 		request.setAttribute("liferay-ui:input-date:cssClass",_cssClass);
 		request.setAttribute(

@@ -43,10 +43,12 @@ public class IGImageResourceImpl extends BaseResourceImpl {
 		_image = image;
 	}
 
+	@Override
 	public boolean isCollection() {
 		return false;
 	}
 
+	@Override
 	public String getContentType() {
 		String type = StringPool.BLANK;
 
@@ -59,6 +61,7 @@ public class IGImageResourceImpl extends BaseResourceImpl {
 		return MimeTypesUtil.getContentType(type);
 	}
 
+	@Override
 	public InputStream getContentAsStream() throws WebDAVException {
 		try {
 			Image image = ImageLocalServiceUtil.getImage(

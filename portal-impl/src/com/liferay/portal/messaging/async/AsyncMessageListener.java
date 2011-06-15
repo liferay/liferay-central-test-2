@@ -23,6 +23,7 @@ import com.liferay.portal.kernel.messaging.Message;
  */
 public class AsyncMessageListener extends BaseMessageListener {
 
+	@Override
 	protected void doReceive(Message message) throws Exception {
 		Runnable runnable = (Runnable)message.getPayload();
 

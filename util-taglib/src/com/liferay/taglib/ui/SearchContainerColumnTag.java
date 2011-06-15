@@ -26,6 +26,7 @@ import javax.servlet.jsp.JspException;
 public abstract class SearchContainerColumnTag
 	extends ParamAndPropertyAncestorTagImpl {
 
+	@Override
 	@SuppressWarnings("unused")
 	public int doStartTag() throws JspException {
 		return EVAL_BODY_INCLUDE;

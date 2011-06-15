@@ -132,6 +132,7 @@ public class AutoLoginFilter extends BasePortalFilter {
 		return jUsername;
 	}
 
+	@Override
 	protected void processFilter(
 			HttpServletRequest request, HttpServletResponse response,
 			FilterChain filterChain)

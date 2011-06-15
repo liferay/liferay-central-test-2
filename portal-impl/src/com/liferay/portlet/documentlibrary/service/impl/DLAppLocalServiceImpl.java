@@ -44,7 +44,7 @@ import java.util.List;
 
 /**
  * @author Alexander Chow
- * @see DLAppServiceImpl
+ * @see    DLAppServiceImpl
  */
 public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 

@@ -52,14 +52,17 @@ import org.hibernate.dialect.Dialect;
  */
 public class ConvertDatabase extends ConvertProcess {
 
+	@Override
 	public String getDescription() {
 		return "migrate-data-from-one-database-to-another";
 	}
 
+	@Override
 	public String getParameterDescription() {
 		return "please-enter-jdbc-information-for-new-database";
 	}
 
+	@Override
 	public String[] getParameterNames() {
 		return new String[] {
 			"jdbc-driver-class-name", "jdbc-url", "jdbc-user-name",
@@ -67,10 +70,12 @@ public class ConvertDatabase extends ConvertProcess {
 		};
 	}
 
+	@Override
 	public boolean isEnabled() {
 		return true;
 	}
 
+	@Override
 	protected void doConvert() throws Exception {
 		DataSource dataSource = getDataSource();
 

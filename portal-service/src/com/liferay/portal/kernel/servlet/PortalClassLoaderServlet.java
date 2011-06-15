@@ -34,10 +34,12 @@ import javax.servlet.http.HttpServletResponse;
 public class PortalClassLoaderServlet
 	extends HttpServlet implements PortalLifecycle {
 
+	@Override
 	public void destroy() {
 		portalDestroy();
 	}
 
+	@Override
 	public void init(ServletConfig servletConfig) {
 		_servletConfig = servletConfig;
 
@@ -80,6 +82,7 @@ public class PortalClassLoaderServlet
 		}
 	}
 
+	@Override
 	public void service(
 			HttpServletRequest request, HttpServletResponse response)
 		throws IOException, ServletException {

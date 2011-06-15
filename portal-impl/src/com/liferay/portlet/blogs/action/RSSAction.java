@@ -47,6 +47,7 @@ import org.apache.struts.action.ActionMapping;
  */
 public class RSSAction extends PortletAction {
 
+	@Override
 	public void serveResource(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
 			ResourceRequest resourceRequest, ResourceResponse resourceResponse)
@@ -64,6 +65,7 @@ public class RSSAction extends PortletAction {
 		}
 	}
 
+	@Override
 	public ActionForward strutsExecute(
 			ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response)
@@ -158,6 +160,7 @@ public class RSSAction extends PortletAction {
 		return getRSS(request);
 	}
 
+	@Override
 	protected boolean isCheckMethodOnProcessAction() {
 		return _CHECK_METHOD_ON_PROCESS_ACTION;
 	}

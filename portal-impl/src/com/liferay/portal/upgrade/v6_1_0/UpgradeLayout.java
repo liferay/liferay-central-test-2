@@ -35,6 +35,7 @@ import java.util.Locale;
 public class UpgradeLayout
 	extends com.liferay.portal.upgrade.v4_4_0.UpgradeLayout {
 
+	@Override
 	protected void doUpgrade() throws Exception {
 		Connection con = null;
 		PreparedStatement ps = null;

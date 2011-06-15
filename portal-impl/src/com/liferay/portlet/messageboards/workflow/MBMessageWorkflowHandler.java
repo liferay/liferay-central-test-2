@@ -64,6 +64,7 @@ public class MBMessageWorkflowHandler extends BaseWorkflowHandler {
 			userId, classPK, status, serviceContext);
 	}
 
+	@Override
 	protected String getIconPath(ThemeDisplay themeDisplay) {
 		return themeDisplay.getPathThemeImages() + "/common/conversation.png";
 	}

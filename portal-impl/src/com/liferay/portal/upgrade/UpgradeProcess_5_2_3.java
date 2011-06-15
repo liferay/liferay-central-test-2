@@ -38,10 +38,12 @@ import com.liferay.portal.upgrade.v5_2_3.UpgradeWiki;
  */
 public class UpgradeProcess_5_2_3 extends UpgradeProcess {
 
+	@Override
 	public int getThreshold() {
 		return ReleaseInfo.RELEASE_5_2_3_BUILD_NUMBER;
 	}
 
+	@Override
 	protected void doUpgrade() throws Exception {
 		upgrade(UpgradeSchema.class);
 		upgrade(UpgradeBookmarks.class);

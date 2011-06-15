@@ -24,6 +24,7 @@ import com.liferay.portlet.documentlibrary.util.PDFProcessor;
  */
 public class PDFProcessorMessageListener extends BaseMessageListener {
 
+	@Override
 	protected void doReceive(Message message) {
 		FileEntry fileEntry = (FileEntry)message.getPayload();
 

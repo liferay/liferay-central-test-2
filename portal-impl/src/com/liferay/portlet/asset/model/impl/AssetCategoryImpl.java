@@ -54,6 +54,7 @@ public class AssetCategoryImpl
 		return categories;
 	}
 
+	@Override
 	public String getTitle(String languageId) {
 		String value = super.getTitle(languageId);
 
@@ -64,6 +65,7 @@ public class AssetCategoryImpl
 		return value;
 	}
 
+	@Override
 	public String getTitle(String languageId, boolean useDefault) {
 		String value = super.getTitle(languageId, useDefault);
 

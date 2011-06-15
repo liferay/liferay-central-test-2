@@ -24,6 +24,7 @@ import com.liferay.taglib.ui.IconTag;
  */
 public class IconExportImportTag extends IconTag {
 
+	@Override
 	protected String getPage() {
 		if (FileAvailabilityUtil.isAvailable(getServletContext(), _PAGE)) {
 			return _PAGE;

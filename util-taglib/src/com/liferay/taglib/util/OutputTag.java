@@ -34,6 +34,7 @@ public class OutputTag extends PositionTagSupport {
 		_webKey = stringBundlerKey;
 	}
 
+	@Override
 	public int doEndTag() throws JspException {
 		try {
 			if (!_output) {
@@ -74,6 +75,7 @@ public class OutputTag extends PositionTagSupport {
 		}
 	}
 
+	@Override
 	public int doStartTag() {
 		if (Validator.isNotNull(_outputKey)) {
 			Set<String> outputKeys = getOutputKeys();

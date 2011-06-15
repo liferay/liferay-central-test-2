@@ -21,6 +21,7 @@ import javax.servlet.jsp.tagext.BodyTagSupport;
  */
 public class BufferTag extends BodyTagSupport {
 
+	@Override
 	public int doEndTag() {
 		try {
 			pageContext.setAttribute(_var, getBodyContent().getString());
@@ -32,6 +33,7 @@ public class BufferTag extends BodyTagSupport {
 		}
 	}
 
+	@Override
 	public int doStartTag() {
 		return EVAL_BODY_BUFFERED;
 	}

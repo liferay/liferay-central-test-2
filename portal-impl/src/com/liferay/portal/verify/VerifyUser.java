@@ -35,6 +35,7 @@ import java.util.List;
  */
 public class VerifyUser extends VerifyProcess {
 
+	@Override
 	protected void doVerify() throws Exception {
 		List<User> users = UserLocalServiceUtil.getNoContacts();
 

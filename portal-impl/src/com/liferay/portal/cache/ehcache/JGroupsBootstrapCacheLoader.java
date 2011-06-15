@@ -32,11 +32,13 @@ public class JGroupsBootstrapCacheLoader
 		super(asynchronous, maximumChunkSize);
 	}
 
+	@Override
 	public Object clone() {
 		return new JGroupsBootstrapCacheLoader(
 			asynchronous, maximumChunkSizeBytes);
 	}
 
+	@Override
 	public void load(Ehcache cache) {
 		return;
 	}

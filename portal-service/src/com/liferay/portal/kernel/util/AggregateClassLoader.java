@@ -104,6 +104,7 @@ public class AggregateClassLoader extends ClassLoader {
 		}
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
 			return true;
@@ -151,6 +152,7 @@ public class AggregateClassLoader extends ClassLoader {
 		return classLoaders;
 	}
 
+	@Override
 	public int hashCode() {
 		if (_classLoaderReferences != null) {
 			return _classLoaderReferences.hashCode();
@@ -160,6 +162,7 @@ public class AggregateClassLoader extends ClassLoader {
 		}
 	}
 
+	@Override
 	protected Class<?> findClass(String name) throws ClassNotFoundException {
 		for (ClassLoader classLoader : getClassLoaders()) {
 			try {
@@ -172,6 +175,7 @@ public class AggregateClassLoader extends ClassLoader {
 		throw new ClassNotFoundException("Unable to find class " + name);
 	}
 
+	@Override
 	protected Class<?> loadClass(String name, boolean resolve)
 		throws ClassNotFoundException {
 

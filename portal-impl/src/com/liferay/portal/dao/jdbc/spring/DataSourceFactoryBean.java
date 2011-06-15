@@ -29,6 +29,7 @@ import org.springframework.beans.factory.config.AbstractFactoryBean;
  */
 public class DataSourceFactoryBean extends AbstractFactoryBean<DataSource> {
 
+	@Override
 	public DataSource createInstance() throws Exception {
 		Properties properties = _properties;
 
@@ -47,6 +48,7 @@ public class DataSourceFactoryBean extends AbstractFactoryBean<DataSource> {
 		DataSourceFactoryUtil.destroyDataSource(dataSource);
 	}
 
+	@Override
 	public Class<DataSource> getObjectType() {
 		return DataSource.class;
 	}

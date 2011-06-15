@@ -42,6 +42,7 @@ public class StrutsPortletActionAdapter extends BaseStrutsPortletAction {
 		_actionForm = actionForm;
 	}
 
+	@Override
 	public void processAction(
 			PortletConfig portletConfig, ActionRequest actionRequest,
 			ActionResponse actionResponse)
@@ -52,6 +53,7 @@ public class StrutsPortletActionAdapter extends BaseStrutsPortletAction {
 			actionResponse);
 	}
 
+	@Override
 	public String render(
 			PortletConfig portletConfig, RenderRequest renderRequest,
 			RenderResponse renderResponse)
@@ -68,6 +70,7 @@ public class StrutsPortletActionAdapter extends BaseStrutsPortletAction {
 		return null;
 	}
 
+	@Override
 	public void serveResource(
 			PortletConfig portletConfig, ResourceRequest resourceRequest,
 			ResourceResponse resourceResponse)

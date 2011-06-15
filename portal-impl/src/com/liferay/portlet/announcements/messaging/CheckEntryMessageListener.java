@@ -24,6 +24,7 @@ import com.liferay.portlet.announcements.service.AnnouncementsEntryLocalServiceU
  */
 public class CheckEntryMessageListener extends BaseMessageListener {
 
+	@Override
 	protected void doReceive(Message message) throws Exception {
 		AnnouncementsEntryLocalServiceUtil.checkEntries();
 	}

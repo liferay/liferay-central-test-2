@@ -43,6 +43,7 @@ public class CustomAttributeTag extends IncludeTag {
 		_name = name;
 	}
 
+	@Override
 	protected void cleanUp() {
 		_className = null;
 		_classPK = 0;
@@ -51,10 +52,12 @@ public class CustomAttributeTag extends IncludeTag {
 		_name = null;
 	}
 
+	@Override
 	protected String getPage() {
 		return _PAGE;
 	}
 
+	@Override
 	protected void setAttributes(HttpServletRequest request) {
 		request.setAttribute(
 			"liferay-ui:custom-attribute:className", _className);

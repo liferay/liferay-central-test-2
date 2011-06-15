@@ -67,6 +67,7 @@ public class InputEditorTag extends IncludeTag {
 		_width = width;
 	}
 
+	@Override
 	protected void cleanUp() {
 		_configParams = null;
 		_cssClass = null;
@@ -80,10 +81,12 @@ public class InputEditorTag extends IncludeTag {
 		_width = null;
 	}
 
+	@Override
 	protected String getPage() {
 		return _page;
 	}
 
+	@Override
 	protected void setAttributes(HttpServletRequest request) {
 		String cssClasses = "portlet ";
 

@@ -48,18 +48,22 @@ public class DirectoryOpenSearchImpl extends HitsOpenSearchImpl {
 
 	public static final String TITLE = "Liferay Directory Search: ";
 
+	@Override
 	public Indexer getIndexer() {
 		return IndexerRegistryUtil.getIndexer(User.class);
 	}
 
+	@Override
 	public String getPortletId() {
 		return UserIndexer.PORTLET_ID;
 	}
 
+	@Override
 	public String getSearchPath() {
 		return SEARCH_PATH;
 	}
 
+	@Override
 	public Summary getSummary(
 			Indexer indexer, Document document, Locale locale, String snippet,
 			PortletURL portletURL)
@@ -75,10 +79,12 @@ public class DirectoryOpenSearchImpl extends HitsOpenSearchImpl {
 		return summary;
 	}
 
+	@Override
 	public String getTitle(String keywords) {
 		return TITLE + keywords;
 	}
 
+	@Override
 	protected PortletURL getPortletURL(
 			HttpServletRequest request, String portletId, long groupId)
 		throws Exception {

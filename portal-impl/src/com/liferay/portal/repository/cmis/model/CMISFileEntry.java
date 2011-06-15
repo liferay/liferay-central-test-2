@@ -78,6 +78,7 @@ public class CMISFileEntry extends CMISModel implements FileEntry {
 		return new HashMap<String, Serializable>();
 	}
 
+	@Override
 	public long getCompanyId() {
 		return _cmisRepository.getCompanyId();
 	}
@@ -272,6 +273,7 @@ public class CMISFileEntry extends CMISModel implements FileEntry {
 		return DLFileEntry.class;
 	}
 
+	@Override
 	public String getModelClassName() {
 		return DLFileEntry.class.getName();
 	}
@@ -280,6 +282,7 @@ public class CMISFileEntry extends CMISModel implements FileEntry {
 		return _document.getLastModificationDate().getTime();
 	}
 
+	@Override
 	public long getPrimaryKey() {
 		return _fileEntryId;
 	}
@@ -435,6 +438,7 @@ public class CMISFileEntry extends CMISModel implements FileEntry {
 		return this;
 	}
 
+	@Override
 	protected CMISRepository getCmisRepository() {
 		return _cmisRepository;
 	}

@@ -25,6 +25,7 @@ import com.liferay.portal.model.RoleConstants;
  */
 public class UpgradeResourcePermission extends UpgradeProcess {
 
+	@Override
 	protected void doUpgrade() throws Exception {
 		StringBundler sb = new StringBundler(9);
 

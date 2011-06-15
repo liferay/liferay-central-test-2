@@ -58,10 +58,12 @@ public class FileCacheOutputStream extends OutputStream {
 		}
 	}
 
+	@Override
 	public void close() throws IOException {
 		_ubos.close();
 	}
 
+	@Override
 	public void flush() throws IOException {
 		_ubos.flush();
 	}
@@ -95,14 +97,17 @@ public class FileCacheOutputStream extends OutputStream {
 		return _tempFile.length();
 	}
 
+	@Override
 	public void write(byte[] b) throws IOException {
 		_ubos.write(b);
 	}
 
+	@Override
 	public void write(byte[] b, int off, int len) throws IOException {
 		_ubos.write(b, off, len);
 	}
 
+	@Override
 	public void write(int b) throws IOException {
 		_ubos.write(b);
 	}

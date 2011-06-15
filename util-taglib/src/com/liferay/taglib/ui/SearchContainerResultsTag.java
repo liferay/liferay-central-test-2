@@ -33,6 +33,7 @@ public class SearchContainerResultsTag<R> extends TagSupport {
 
 	public static final String DEFAULT_TOTAL_VAR = "total";
 
+	@Override
 	public int doEndTag() throws JspException {
 		try {
 			if (_results == null) {
@@ -76,6 +77,7 @@ public class SearchContainerResultsTag<R> extends TagSupport {
 		}
 	}
 
+	@Override
 	public int doStartTag() throws JspException {
 		SearchContainerTag<R> searchContainerTag =
 			(SearchContainerTag<R>)findAncestorWithClass(

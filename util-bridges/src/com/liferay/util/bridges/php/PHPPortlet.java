@@ -50,6 +50,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class PHPPortlet extends GenericPortlet {
 
+	@Override
 	public void init(PortletConfig portletConfig) throws PortletException {
 		super.init(portletConfig);
 
@@ -77,6 +78,7 @@ public class PHPPortlet extends GenericPortlet {
 		}
 	}
 
+	@Override
 	public void doDispatch(
 			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws IOException, PortletException {
@@ -91,6 +93,7 @@ public class PHPPortlet extends GenericPortlet {
 		}
 	}
 
+	@Override
 	public void doEdit(
 			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws IOException, PortletException {
@@ -103,18 +106,21 @@ public class PHPPortlet extends GenericPortlet {
 		}
 	}
 
+	@Override
 	public void doHelp(
 		RenderRequest renderRequest, RenderResponse renderResponse) {
 
 		processPHP(helpUri, renderRequest, renderResponse);
 	}
 
+	@Override
 	public void doView(
 		RenderRequest renderRequest, RenderResponse renderResponse) {
 
 		processPHP(viewUri, renderRequest, renderResponse);
 	}
 
+	@Override
 	public void processAction(
 			ActionRequest actionRequest, ActionResponse actionResponse) {
 		String phpURI = actionRequest.getParameter(_PHP_URI_PARAM);
@@ -124,6 +130,7 @@ public class PHPPortlet extends GenericPortlet {
 		}
 	}
 
+	@Override
 	public void destroy() {
 		if (quercusServlet != null) {
 			quercusServlet.destroy();

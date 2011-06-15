@@ -29,6 +29,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class IgnoreFilter extends BasePortalFilter {
 
+	@Override
 	protected void processFilter(
 			HttpServletRequest request, HttpServletResponse response,
 			FilterChain filterChain)

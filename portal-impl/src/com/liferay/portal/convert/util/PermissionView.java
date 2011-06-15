@@ -74,6 +74,7 @@ public class PermissionView extends Table {
 		setColumns(columns.toArray(new Object[0][]));
 	}
 
+	@Override
 	public String getSelectSQL() throws Exception {
 		return StringUtil.replace(_SELECT_SQL, "_OLD_TABLE_", getTableName());
 	}

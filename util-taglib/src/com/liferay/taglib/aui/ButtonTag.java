@@ -26,10 +26,12 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class ButtonTag extends BaseButtonTag {
 
+	@Override
 	protected boolean isCleanUpSetAttributes() {
 		return _CLEAN_UP_SET_ATTRIBUTES;
 	}
 
+	@Override
 	protected void setAttributes(HttpServletRequest request) {
 		super.setAttributes(request);
 

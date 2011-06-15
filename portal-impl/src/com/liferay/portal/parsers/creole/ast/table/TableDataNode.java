@@ -33,6 +33,7 @@ public class TableDataNode extends TableCellNode {
 		super(tokenType);
 	}
 
+	@Override
 	public void accept(ASTVisitor astVisitor) {
 		astVisitor.visit(this);
 	}

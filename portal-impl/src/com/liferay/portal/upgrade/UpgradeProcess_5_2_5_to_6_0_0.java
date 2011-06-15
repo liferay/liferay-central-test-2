@@ -35,10 +35,12 @@ import com.liferay.portal.upgrade.v6_0_0.UpgradeShopping;
  */
 public class UpgradeProcess_5_2_5_to_6_0_0 extends UpgradeProcess {
 
+	@Override
 	public int getThreshold() {
 		return ReleaseInfo.RELEASE_6_0_0_BUILD_NUMBER;
 	}
 
+	@Override
 	protected void doUpgrade() throws Exception {
 		upgrade(UpgradeSchema.class);
 		upgrade(UpgradeAsset.class);

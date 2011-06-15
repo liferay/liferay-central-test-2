@@ -37,6 +37,7 @@ public class EntryDisplayDateComparator extends OrderByComparator {
 		_ascending = ascending;
 	}
 
+	@Override
 	public int compare(Object obj1, Object obj2) {
 		BlogsEntry entry1 = (BlogsEntry)obj1;
 		BlogsEntry entry2 = (BlogsEntry)obj2;
@@ -61,6 +62,7 @@ public class EntryDisplayDateComparator extends OrderByComparator {
 		}
 	}
 
+	@Override
 	public String getOrderBy() {
 		if (_ascending) {
 			return ORDER_BY_ASC;
@@ -70,10 +72,12 @@ public class EntryDisplayDateComparator extends OrderByComparator {
 		}
 	}
 
+	@Override
 	public String[] getOrderByFields() {
 		return ORDER_BY_FIELDS;
 	}
 
+	@Override
 	public boolean isAscending() {
 		return _ascending;
 	}

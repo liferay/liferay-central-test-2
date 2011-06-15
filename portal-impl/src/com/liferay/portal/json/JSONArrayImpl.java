@@ -154,6 +154,7 @@ public class JSONArrayImpl implements JSONArray {
 		return this;
 	}
 
+	@Override
 	public String toString() {
 		return _jsonArray.toString();
 	}

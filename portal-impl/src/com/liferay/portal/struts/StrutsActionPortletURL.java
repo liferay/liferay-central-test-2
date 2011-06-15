@@ -37,6 +37,7 @@ public class StrutsActionPortletURL extends PortletURLImplWrapper {
 			StringPool.SLASH + _portlet.getStrutsPath() + StringPool.SLASH;
 	}
 
+	@Override
 	public void setParameter(String name, String value) {
 		if (name.equals("struts_action")) {
 			if (!value.startsWith(_strutsPath)) {
@@ -49,6 +50,7 @@ public class StrutsActionPortletURL extends PortletURLImplWrapper {
 		super.setParameter(name, value);
 	}
 
+	@Override
 	public void setParameters(Map<String, String[]> params) {
 		for (Map.Entry<String, String[]> entry : params.entrySet()) {
 			String name = entry.getKey();

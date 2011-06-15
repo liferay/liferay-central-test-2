@@ -32,6 +32,7 @@ public class EventRequestImpl
 		_event = event;
 	}
 
+	@Override
 	public String getLifecycle() {
 		return PortletRequest.EVENT_PHASE;
 	}

@@ -38,6 +38,7 @@ public class ValidHtmlFilter extends BasePortalFilter {
 	public static final String SKIP_FILTER =
 		ValidHtmlFilter.class.getName() + "SKIP_FILTER";
 
+	@Override
 	public boolean isFilterEnabled(
 		HttpServletRequest request, HttpServletResponse response) {
 
@@ -84,6 +85,7 @@ public class ValidHtmlFilter extends BasePortalFilter {
 		}
 	}
 
+	@Override
 	protected void processFilter(
 			HttpServletRequest request, HttpServletResponse response,
 			FilterChain filterChain)

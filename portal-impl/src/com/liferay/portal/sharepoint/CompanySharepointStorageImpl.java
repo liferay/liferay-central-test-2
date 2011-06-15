@@ -32,6 +32,7 @@ import java.util.List;
  */
 public class CompanySharepointStorageImpl extends BaseSharepointStorageImpl {
 
+	@Override
 	public Tree getFoldersTree(SharepointRequest sharepointRequest)
 		throws Exception {
 

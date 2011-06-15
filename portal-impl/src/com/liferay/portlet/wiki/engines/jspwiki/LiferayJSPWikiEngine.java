@@ -37,6 +37,7 @@ public class LiferayJSPWikiEngine extends com.ecyrd.jspwiki.WikiEngine {
 		super(context, appId, props);
 	}
 
+	@Override
 	public Collection<String> scanWikiLinks(
 		com.ecyrd.jspwiki.WikiPage page, String pageData) {
 

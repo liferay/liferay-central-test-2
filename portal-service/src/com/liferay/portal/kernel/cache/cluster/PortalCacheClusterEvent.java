@@ -34,6 +34,7 @@ public class PortalCacheClusterEvent implements Serializable {
 		_portalCacheClusterEventType = portalCacheClusterEventType;
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		if (obj == null) {
 			return false;
@@ -71,10 +72,12 @@ public class PortalCacheClusterEvent implements Serializable {
 		return _portalCacheClusterEventType;
 	}
 
+	@Override
 	public int hashCode() {
 		return toString().hashCode();
 	}
 
+	@Override
 	public String toString() {
 		StringBundler sb = new StringBundler(5);
 

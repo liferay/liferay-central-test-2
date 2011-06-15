@@ -23,6 +23,7 @@ import java.util.HashMap;
  */
 public class ArgumentsMap extends HashMap<String, String> {
 
+	@Override
 	public String get(Object key) {
 		String value = super.get(key);
 

@@ -36,6 +36,7 @@ public class ProtectedServletRequest extends HttpServletRequestWrapper {
 		}
 	}
 
+	@Override
 	public String getRemoteUser() {
 		if (_remoteUser != null) {
 			return _remoteUser;
@@ -45,6 +46,7 @@ public class ProtectedServletRequest extends HttpServletRequestWrapper {
 		}
 	}
 
+	@Override
 	public Principal getUserPrincipal() {
 		if (_userPrincipal != null) {
 			return _userPrincipal;

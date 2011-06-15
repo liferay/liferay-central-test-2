@@ -368,6 +368,7 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 		return value;
 	}
 
+	@Override
 	public String getTypeSettings() {
 		if (_typeSettingsProperties == null) {
 			return super.getTypeSettings();
@@ -609,6 +610,7 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 		}
 	}
 
+	@Override
 	public void setTypeSettings(String typeSettings) {
 		_typeSettingsProperties = null;
 

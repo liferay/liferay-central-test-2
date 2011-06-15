@@ -40,6 +40,7 @@ public class UploadProgressTag extends IncludeTag {
 		_redirect = redirect;
 	}
 
+	@Override
 	protected void cleanUp() {
 		_id = null;
 		_iframeSrc = null;
@@ -47,10 +48,12 @@ public class UploadProgressTag extends IncludeTag {
 		_redirect = null;
 	}
 
+	@Override
 	protected String getPage() {
 		return _PAGE;
 	}
 
+	@Override
 	protected void setAttributes(HttpServletRequest request) {
 		request.setAttribute("liferay-ui:upload-progress:id", _id);
 		request.setAttribute(

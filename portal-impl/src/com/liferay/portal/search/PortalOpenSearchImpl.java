@@ -60,6 +60,7 @@ public class PortalOpenSearchImpl extends BaseOpenSearchImpl {
 
 	public static final String SEARCH_PATH = "/c/search/open_search";
 
+	@Override
 	public String search(
 			HttpServletRequest request, long groupId, long userId,
 			String keywords, int startPage, int itemsPerPage, String format)

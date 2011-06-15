@@ -22,6 +22,7 @@ import javax.servlet.jsp.tagext.TagSupport;
  */
 public class PropertyTag extends TagSupport {
 
+	@Override
 	public int doStartTag() throws JspException {
 		PropertyAncestorTag propertyAncestorTag =
 			(PropertyAncestorTag)findAncestorWithClass(

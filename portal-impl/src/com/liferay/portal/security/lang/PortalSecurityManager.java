@@ -21,12 +21,14 @@ import java.security.Permission;
  */
 public class PortalSecurityManager extends SecurityManager {
 
+	@Override
 	public void checkPermission(Permission permission) {
 		if (permission.getName().equals(_PERMISSION_EXIT_VM)) {
 			Thread.dumpStack();
 		}
 	}
 
+	@Override
 	public void checkPermission(Permission permission, Object context) {
 	}
 

@@ -60,6 +60,7 @@ public class PortletRequestDataSample extends BaseDataSample {
 		return _requestType;
 	}
 
+	@Override
 	public String toString() {
 		StringBundler sb = new StringBundler(9);
 

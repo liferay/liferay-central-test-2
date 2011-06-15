@@ -45,16 +45,19 @@ public class FacetedSearcher extends BaseIndexer {
 		return null;
 	}
 
+	@Override
 	public IndexerPostProcessor[] getIndexerPostProcessors() {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public void registerIndexerPostProcessor(
 		IndexerPostProcessor indexerPostProcessor) {
 
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public Hits search(SearchContext searchContext) throws SearchException {
 		try {
 			searchContext.setSearchEngineId(getSearchEngineId());
@@ -99,6 +102,7 @@ public class FacetedSearcher extends BaseIndexer {
 		}
 	}
 
+	@Override
 	public void unregisterIndexerPostProcessor(
 		IndexerPostProcessor indexerPostProcessor) {
 
@@ -137,6 +141,7 @@ public class FacetedSearcher extends BaseIndexer {
 		}
 	}
 
+	@Override
 	protected BooleanQuery createFullQuery(
 			BooleanQuery contextQuery, SearchContext searchContext)
 		throws Exception {
@@ -221,14 +226,17 @@ public class FacetedSearcher extends BaseIndexer {
 		return fullQuery;
 	}
 
+	@Override
 	protected void doDelete(Object obj) throws Exception {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	protected Document doGetDocument(Object obj) throws Exception {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	protected Summary doGetSummary(
 			Document document, Locale locale, String snippet,
 			PortletURL portletURL)
@@ -237,18 +245,22 @@ public class FacetedSearcher extends BaseIndexer {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	protected void doReindex(Object obj) throws Exception {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	protected void doReindex(String className, long classPK) throws Exception {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	protected void doReindex(String[] ids) throws Exception {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	protected String getPortletId(SearchContext searchContext) {
 		return null;
 	}

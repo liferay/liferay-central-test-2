@@ -44,6 +44,7 @@ public class SocialBookmarksTag extends IncludeTag {
 		_url = url;
 	}
 
+	@Override
 	protected void cleanUp() {
 		_displayStyle = null;
 		_target = null;
@@ -52,10 +53,12 @@ public class SocialBookmarksTag extends IncludeTag {
 		_url = null;
 	}
 
+	@Override
 	protected String getPage() {
 		return _PAGE;
 	}
 
+	@Override
 	protected void setAttributes(HttpServletRequest request) {
 		request.setAttribute(
 			"liferay-ui:social-bookmark:displayStyle", _displayStyle);

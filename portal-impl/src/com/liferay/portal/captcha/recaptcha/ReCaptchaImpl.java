@@ -45,22 +45,26 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class ReCaptchaImpl extends SimpleCaptchaImpl {
 
+	@Override
 	public String getTaglibPath() {
 		return _TAGLIB_PATH;
 	}
 
+	@Override
 	public void serveImage(
 		HttpServletRequest request, HttpServletResponse response) {
 
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public void serveImage(
 		PortletRequest portletRequest, PortletResponse portletResponse) {
 
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	protected boolean validateChallenge(HttpServletRequest request)
 		throws CaptchaException {
 
@@ -117,6 +121,7 @@ public class ReCaptchaImpl extends SimpleCaptchaImpl {
 		return GetterUtil.getBoolean(messages[0]);
 	}
 
+	@Override
 	protected boolean validateChallenge(PortletRequest portletRequest)
 		throws CaptchaException {
 

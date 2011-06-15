@@ -33,6 +33,7 @@ import com.liferay.portal.util.PortletKeys;
  */
 public class UpgradeCompany extends UpgradeProcess {
 
+	@Override
 	protected void doUpgrade() throws Exception {
 		ValueMapper companyIdMapper = ValueMapperFactoryUtil.getValueMapper();
 

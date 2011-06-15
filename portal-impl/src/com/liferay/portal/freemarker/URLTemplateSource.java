@@ -30,6 +30,7 @@ public class URLTemplateSource {
 		_urlConnection = url.openConnection();
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		if (obj instanceof URLTemplateSource) {
 			URLTemplateSource urlTemplateSource = (URLTemplateSource)obj;
@@ -42,10 +43,12 @@ public class URLTemplateSource {
 		return false;
 	}
 
+	@Override
 	public int hashCode() {
 		return _url.hashCode();
 	}
 
+	@Override
 	public String toString() {
 		return _url.toString();
 	}

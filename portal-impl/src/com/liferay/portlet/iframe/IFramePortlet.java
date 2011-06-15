@@ -29,6 +29,7 @@ public class IFramePortlet extends StrutsPortlet {
 
 	public static final String DEFAULT_VIEW_ACTION = "/iframe/view";
 
+	@Override
 	public void init(PortletConfig portletConfig) throws PortletException {
 		super.init(portletConfig);
 

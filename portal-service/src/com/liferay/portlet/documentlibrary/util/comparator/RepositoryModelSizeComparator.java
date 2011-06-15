@@ -41,6 +41,7 @@ public class RepositoryModelSizeComparator extends OrderByComparator {
 		_ascending = ascending;
 	}
 
+	@Override
 	public int compare(Object obj1, Object obj2) {
 		Long size1 = getSize(obj1);
 		Long size2 = getSize(obj2);
@@ -55,6 +56,7 @@ public class RepositoryModelSizeComparator extends OrderByComparator {
 		}
 	}
 
+	@Override
 	public String getOrderBy() {
 		if (_ascending) {
 			return ORDER_BY_ASC;
@@ -64,10 +66,12 @@ public class RepositoryModelSizeComparator extends OrderByComparator {
 		}
 	}
 
+	@Override
 	public String[] getOrderByFields() {
 		return ORDER_BY_FIELDS;
 	}
 
+	@Override
 	public boolean isAscending() {
 		return _ascending;
 	}

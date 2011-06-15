@@ -54,6 +54,7 @@ public class HookDeployer extends BaseDeployer {
 		super(wars, jars);
 	}
 
+	@Override
 	public void copyXmls(
 			File srcFile, String displayName, PluginPackage pluginPackage)
 		throws Exception {
@@ -65,6 +66,7 @@ public class HookDeployer extends BaseDeployer {
 		}
 	}
 
+	@Override
 	public String getExtraContent(
 			double webXmlVersion, File srcFile, String displayName)
 		throws Exception {

@@ -25,6 +25,7 @@ import com.liferay.portlet.blogs.util.LinkbackProducerUtil;
  */
 public class LinkbackMessageListener extends BaseMessageListener {
 
+	@Override
 	protected void doReceive(Message message) throws Exception {
 		LinkbackConsumerUtil.verifyNewTrackbacks();
 		LinkbackProducerUtil.sendQueuedPingbacks();

@@ -43,6 +43,7 @@ public class CaptureFrameListener extends MediaListenerAdapter {
 		_width = width;
 	}
 
+	@Override
 	public void onVideoPicture(IVideoPictureEvent iVideoPictureEvent) {
 		try {
 			if (_written) {

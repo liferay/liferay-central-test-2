@@ -396,6 +396,7 @@ public class UpgradeTags extends UpgradeProcess {
 		}
 	}
 
+	@Override
 	protected void doUpgrade() throws Exception {
 		updateGroupIds();
 		updateCategories();

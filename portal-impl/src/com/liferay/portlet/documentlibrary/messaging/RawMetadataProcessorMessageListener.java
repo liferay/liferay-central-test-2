@@ -38,6 +38,7 @@ import java.util.Map;
  */
 public class RawMetadataProcessorMessageListener extends BaseMessageListener {
 
+	@Override
 	protected void doReceive(Message message) throws Exception {
 		DLFileEntry dlFileEntry = (DLFileEntry)message.getPayload();
 

@@ -31,6 +31,7 @@ import org.springframework.transaction.interceptor.TransactionAttributeSource;
 public class DynamicDataSourceTransactionInterceptor
 	extends TransactionInterceptor {
 
+	@Override
 	public void afterPropertiesSet() {
 		if (_dynamicDataSourceTargetSource == null) {
 			_dynamicDataSourceTargetSource =
@@ -39,6 +40,7 @@ public class DynamicDataSourceTransactionInterceptor
 		}
 	}
 
+	@Override
 	public Object invoke(MethodInvocation methodInvocation) throws Throwable {
 		if (_dynamicDataSourceTargetSource == null) {
 			return super.invoke(methodInvocation);

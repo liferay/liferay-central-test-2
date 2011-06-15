@@ -22,12 +22,14 @@ import com.liferay.portal.util.PropsValues;
  */
 public class BasePersistenceTestCase extends BaseTestCase {
 
+	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 
 		PropsValues.SPRING_HIBERNATE_SESSION_DELEGATED = false;
 	}
 
+	@Override
 	public void tearDown() throws Exception {
 		super.tearDown();
 

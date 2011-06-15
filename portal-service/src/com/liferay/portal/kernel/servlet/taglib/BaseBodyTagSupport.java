@@ -46,6 +46,7 @@ public class BaseBodyTagSupport extends TagSupport {
 	public void doInitBody() throws JspException {
 	}
 
+	@Override
 	@SuppressWarnings("unused")
 	public int doStartTag() throws JspException {
 		return BodyTag.EVAL_BODY_BUFFERED;
@@ -87,6 +88,7 @@ public class BaseBodyTagSupport extends TagSupport {
 		}
 	}
 
+	@Override
 	public void release() {
 		bodyContent = null;
 

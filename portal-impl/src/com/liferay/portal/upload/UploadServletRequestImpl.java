@@ -221,6 +221,7 @@ public class UploadServletRequestImpl
 		}
 	}
 
+	@Override
 	public ServletInputStream getInputStream() throws IOException {
 		return _liferayServletRequest.getInputStream();
 	}
@@ -229,6 +230,7 @@ public class UploadServletRequestImpl
 		return _params;
 	}
 
+	@Override
 	public String getParameter(String name) {
 		LiferayFileItem[] liferayFileItems = _params.get(name);
 
@@ -251,6 +253,7 @@ public class UploadServletRequestImpl
 		}
 	}
 
+	@Override
 	public Map<String, String[]> getParameterMap() {
 		Map<String, String[]> map = new HashMap<String, String[]>();
 
@@ -265,6 +268,7 @@ public class UploadServletRequestImpl
 		return map;
 	}
 
+	@Override
 	public Enumeration<String> getParameterNames() {
 		Set<String> parameterNames = new LinkedHashSet<String>();
 
@@ -283,6 +287,7 @@ public class UploadServletRequestImpl
 		return Collections.enumeration(parameterNames);
 	}
 
+	@Override
 	public String[] getParameterValues(String name) {
 		String[] parentValues = super.getParameterValues(name);
 

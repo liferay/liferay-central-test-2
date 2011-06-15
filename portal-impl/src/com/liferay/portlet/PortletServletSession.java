@@ -31,6 +31,7 @@ public class PortletServletSession extends HttpSessionWrapper {
 		_portletRequestImpl = portletRequestImpl;
 	}
 
+	@Override
 	public void invalidate() {
 		super.invalidate();
 

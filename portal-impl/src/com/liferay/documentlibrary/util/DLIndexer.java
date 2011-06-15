@@ -64,6 +64,7 @@ public class DLIndexer extends BaseIndexer {
 		return CLASS_NAMES;
 	}
 
+	@Override
 	protected void doDelete(Object obj) throws Exception {
 		FileModel fileModel = (FileModel)obj;
 
@@ -77,6 +78,7 @@ public class DLIndexer extends BaseIndexer {
 			fileModel.getCompanyId(), document.get(Field.UID));
 	}
 
+	@Override
 	protected Document doGetDocument(Object obj) throws Exception {
 		FileModel fileModel = (FileModel)obj;
 
@@ -270,6 +272,7 @@ public class DLIndexer extends BaseIndexer {
 		return document;
 	}
 
+	@Override
 	protected Summary doGetSummary(
 		Document document, Locale locale, String snippet,
 		PortletURL portletURL) {
@@ -277,6 +280,7 @@ public class DLIndexer extends BaseIndexer {
 		return null;
 	}
 
+	@Override
 	protected void doReindex(Object obj) throws Exception {
 		FileModel fileModel = (FileModel)obj;
 
@@ -287,15 +291,18 @@ public class DLIndexer extends BaseIndexer {
 		}
 	}
 
+	@Override
 	protected void doReindex(String className, long classPK) throws Exception {
 	}
 
+	@Override
 	protected void doReindex(String[] ids) throws Exception {
 		Hook hook = HookFactory.getInstance();
 
 		hook.reindex(ids);
 	}
 
+	@Override
 	protected String getPortletId(SearchContext searchContext) {
 		return (String)searchContext.getAttribute("portletId");
 	}

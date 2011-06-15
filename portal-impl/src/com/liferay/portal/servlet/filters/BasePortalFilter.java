@@ -25,10 +25,12 @@ import com.liferay.portal.util.PropsUtil;
  */
 public abstract class BasePortalFilter extends BaseFilter {
 
+	@Override
 	public boolean isFilterEnabled() {
 		return _filterEnabled;
 	}
 
+	@Override
 	protected Log getLog() {
 		return _log;
 	}

@@ -74,18 +74,21 @@ public class BlogsEntryAtomCollectionAdapter
 		return blogsEntry.getModifiedDate();
 	}
 
+	@Override
 	protected void doDeleteEntry(String resourceName) throws Exception {
 		long blogsEntryId = GetterUtil.getLong(resourceName);
 
 		BlogsEntryServiceUtil.deleteEntry(blogsEntryId);
 	}
 
+	@Override
 	protected BlogsEntry doGetEntry(String resourceName) throws Exception {
 		long blogsEntryId = GetterUtil.getLong(resourceName);
 
 		return BlogsEntryServiceUtil.getEntry(blogsEntryId);
 	}
 
+	@Override
 	protected Iterable<BlogsEntry> doGetFeedEntries(
 			AtomRequestContext atomRequestContext)
 		throws Exception {
@@ -133,6 +136,7 @@ public class BlogsEntryAtomCollectionAdapter
 		return Collections.emptyList();
 	}
 
+	@Override
 	protected String doGetFeedTitle(AtomRequestContext atomRequestContext)
 		throws Exception {
 
@@ -140,6 +144,7 @@ public class BlogsEntryAtomCollectionAdapter
 			atomRequestContext, PortletKeys.BLOGS);
 	}
 
+	@Override
 	protected BlogsEntry doPostEntry(
 			String title, String summary, String content, Date date,
 			AtomRequestContext atomRequestContext)

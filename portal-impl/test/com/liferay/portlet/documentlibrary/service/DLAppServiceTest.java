@@ -52,6 +52,7 @@ import java.util.List;
  */
 public class DLAppServiceTest extends BaseServiceTestCase {
 
+	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 
@@ -75,6 +76,7 @@ public class DLAppServiceTest extends BaseServiceTestCase {
 			name, description, serviceContext);
 	}
 
+	@Override
 	public void tearDown() throws Exception {
 		if (_fileEntry != null) {
 			DLAppServiceUtil.deleteFileEntry(_fileEntry.getFileEntryId());

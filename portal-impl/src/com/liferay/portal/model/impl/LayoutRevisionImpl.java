@@ -97,6 +97,7 @@ public class LayoutRevisionImpl
 		}
 	}
 
+	@Override
 	public String getTypeSettings() {
 		if (_typeSettingsProperties == null) {
 			return super.getTypeSettings();
@@ -169,6 +170,7 @@ public class LayoutRevisionImpl
 		}
 	}
 
+	@Override
 	public void setTypeSettings(String typeSettings) {
 		_typeSettingsProperties = null;
 

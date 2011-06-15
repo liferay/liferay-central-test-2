@@ -40,6 +40,7 @@ public class CalEventImpl extends CalEventModelImpl implements CalEvent {
 		return _recurrenceObj;
 	}
 
+	@Override
 	public void setRecurrence(String recurrence) {
 		_recurrenceObj = null;
 

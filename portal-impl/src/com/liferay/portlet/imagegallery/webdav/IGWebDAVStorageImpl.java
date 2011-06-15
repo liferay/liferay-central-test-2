@@ -58,6 +58,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class IGWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 
+	@Override
 	public int copyCollectionResource(
 			WebDAVRequest webDavRequest, Resource resource, String destination,
 			boolean overwrite, long depth)
@@ -122,6 +123,7 @@ public class IGWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 		}
 	}
 
+	@Override
 	public int copySimpleResource(
 			WebDAVRequest webDavRequest, Resource resource, String destination,
 			boolean overwrite)
@@ -197,6 +199,7 @@ public class IGWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 		}
 	}
 
+	@Override
 	public int deleteResource(WebDAVRequest webDavRequest)
 		throws WebDAVException {
 
@@ -302,6 +305,7 @@ public class IGWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 		}
 	}
 
+	@Override
 	public Status makeCollection(WebDAVRequest webDavRequest)
 		throws WebDAVException {
 
@@ -350,6 +354,7 @@ public class IGWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 		}
 	}
 
+	@Override
 	public int moveCollectionResource(
 			WebDAVRequest webDavRequest, Resource resource, String destination,
 			boolean overwrite)
@@ -396,6 +401,7 @@ public class IGWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 		}
 	}
 
+	@Override
 	public int moveSimpleResource(
 			WebDAVRequest webDavRequest, Resource resource, String destination,
 			boolean overwrite)
@@ -446,6 +452,7 @@ public class IGWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 		}
 	}
 
+	@Override
 	public int putResource(WebDAVRequest webDavRequest) throws WebDAVException {
 		File file = null;
 

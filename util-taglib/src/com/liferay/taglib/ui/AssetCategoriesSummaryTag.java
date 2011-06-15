@@ -46,6 +46,7 @@ public class AssetCategoriesSummaryTag extends IncludeTag {
 		_portletURL = portletURL;
 	}
 
+	@Override
 	protected void cleanUp() {
 		_className = null;
 		_classPK = 0;
@@ -53,10 +54,12 @@ public class AssetCategoriesSummaryTag extends IncludeTag {
 		_portletURL = null;
 	}
 
+	@Override
 	protected String getPage() {
 		return _PAGE;
 	}
 
+	@Override
 	protected void setAttributes(HttpServletRequest request) {
 		request.setAttribute(
 			"liferay-ui:asset-categories-summary:className", _className);

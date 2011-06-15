@@ -25,6 +25,7 @@ public class MBCategoryIdUpgradeColumnImpl extends PKUpgradeColumnImpl {
 		super("categoryId", true);
 	}
 
+	@Override
 	public Object getNewValue(Object oldValue) throws Exception {
 		Long categoryId = (Long)oldValue;
 

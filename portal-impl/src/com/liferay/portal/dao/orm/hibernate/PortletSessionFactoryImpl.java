@@ -39,6 +39,7 @@ import org.hibernate.SessionFactory;
  */
 public class PortletSessionFactoryImpl extends SessionFactoryImpl {
 
+	@Override
 	public Session openSession() throws ORMException {
 		SessionFactory sessionFactory = getSessionFactory();
 

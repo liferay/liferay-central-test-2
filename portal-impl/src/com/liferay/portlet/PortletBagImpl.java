@@ -97,6 +97,7 @@ public class PortletBagImpl implements PortletBag {
 		_resourceBundles = resourceBundles;
 	}
 
+	@Override
 	public Object clone() {
 		return new PortletBagImpl(
 			getPortletName(), getServletContext(), getPortletInstance(),

@@ -166,6 +166,7 @@ public class UserGroupLocalServiceImpl extends UserGroupLocalServiceBaseImpl {
 		}
 	}
 
+	@Override
 	public void deleteUserGroup(long userGroupId)
 		throws PortalException, SystemException {
 
@@ -175,6 +176,7 @@ public class UserGroupLocalServiceImpl extends UserGroupLocalServiceBaseImpl {
 		deleteUserGroup(userGroup);
 	}
 
+	@Override
 	public void deleteUserGroup(UserGroup userGroup)
 		throws PortalException, SystemException {
 
@@ -215,6 +217,7 @@ public class UserGroupLocalServiceImpl extends UserGroupLocalServiceBaseImpl {
 		PermissionCacheUtil.clearCache();
 	}
 
+	@Override
 	public UserGroup getUserGroup(long userGroupId)
 		throws PortalException, SystemException {
 

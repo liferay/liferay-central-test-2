@@ -41,6 +41,7 @@ import org.portletbridge.portlet.PortletBridgePortlet;
  */
 public class WebProxyPortlet extends PortletBridgePortlet {
 
+	@Override
 	public void init() {
 		try {
 			super.init();
@@ -61,6 +62,7 @@ public class WebProxyPortlet extends PortletBridgePortlet {
 		}
 	}
 
+	@Override
 	public void doView(
 			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws IOException, PortletException {

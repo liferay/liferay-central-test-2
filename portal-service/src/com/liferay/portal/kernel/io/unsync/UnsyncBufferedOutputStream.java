@@ -40,6 +40,7 @@ public class UnsyncBufferedOutputStream extends UnsyncFilterOutputStream {
 		buffer = new byte[size];
 	}
 
+	@Override
 	public void flush() throws IOException {
 		if (count > 0) {
 			outputStream.write(buffer, 0, count);
@@ -50,6 +51,7 @@ public class UnsyncBufferedOutputStream extends UnsyncFilterOutputStream {
 		outputStream.flush();
 	}
 
+	@Override
 	public void write(byte[] bytes, int offset, int length) throws IOException {
 		if (length >= buffer.length) {
 			if (count > 0) {
@@ -74,10 +76,12 @@ public class UnsyncBufferedOutputStream extends UnsyncFilterOutputStream {
 		count += length;
 	}
 
+	@Override
 	public void write(byte[] bytes) throws IOException {
 		write(bytes, 0, bytes.length);
 	}
 
+	@Override
 	public void write(int b) throws IOException {
 		if (count >= buffer.length) {
 			outputStream.write(buffer, 0, count);

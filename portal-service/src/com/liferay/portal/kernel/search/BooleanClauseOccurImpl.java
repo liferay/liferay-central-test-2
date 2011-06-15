@@ -23,6 +23,7 @@ public class BooleanClauseOccurImpl implements BooleanClauseOccur {
 		_name = name;
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		BooleanClauseOccur booleanClauseOccur = (BooleanClauseOccur)obj;
 

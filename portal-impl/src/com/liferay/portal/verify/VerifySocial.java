@@ -175,6 +175,7 @@ public class VerifySocial extends VerifyProcess {
 		}
 	}
 
+	@Override
 	protected void doVerify() throws Exception {
 
 		// Temporarily comment these out because of performance issues. This

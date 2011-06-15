@@ -42,6 +42,7 @@ import org.apache.struts.Globals;
  */
 public class ServletAuthorizingFilter extends BasePortalFilter {
 
+	@Override
 	protected void processFilter(
 			HttpServletRequest request, HttpServletResponse response,
 			FilterChain filterChain)

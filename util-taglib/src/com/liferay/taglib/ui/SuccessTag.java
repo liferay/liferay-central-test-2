@@ -24,6 +24,7 @@ import javax.servlet.jsp.tagext.BodyTag;
  */
 public class SuccessTag extends IncludeTag implements BodyTag {
 
+	@Override
 	public int doStartTag() {
 		HttpServletRequest request =
 			(HttpServletRequest)pageContext.getRequest();
@@ -49,6 +50,7 @@ public class SuccessTag extends IncludeTag implements BodyTag {
 		_translateMessage = translateMessage;
 	}
 
+	@Override
 	protected String getPage() {
 		return _PAGE;
 	}

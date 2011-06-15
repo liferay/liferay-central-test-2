@@ -46,6 +46,7 @@ public class CronTrigger extends BaseTrigger {
 		return _cronText;
 	}
 
+	@Override
 	public String toString() {
 		StringBundler sb = new StringBundler(5);
 

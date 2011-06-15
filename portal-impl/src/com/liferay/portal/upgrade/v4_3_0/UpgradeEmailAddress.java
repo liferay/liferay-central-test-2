@@ -41,6 +41,7 @@ import java.util.Map;
  */
 public class UpgradeEmailAddress extends UpgradeProcess {
 
+	@Override
 	protected void doUpgrade() throws Exception {
 
 		// EmailAddress

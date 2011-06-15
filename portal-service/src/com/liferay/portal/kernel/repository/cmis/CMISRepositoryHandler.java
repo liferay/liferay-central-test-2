@@ -190,6 +190,7 @@ public abstract class CMISRepositoryHandler extends BaseRepositoryImpl {
 		return _baseCmisRepository.getFolders(parentFolderId, start, end, obc);
 	}
 
+	@Override
 	public List<Object> getFoldersAndFileEntries(
 			long folderId, int start, int end, OrderByComparator obc)
 		throws SystemException {
@@ -198,6 +199,7 @@ public abstract class CMISRepositoryHandler extends BaseRepositoryImpl {
 			folderId, start, end, obc);
 	}
 
+	@Override
 	public int getFoldersAndFileEntriesCount(long folderId)
 		throws SystemException {
 
@@ -265,6 +267,7 @@ public abstract class CMISRepositoryHandler extends BaseRepositoryImpl {
 		return _baseCmisRepository.getSubfolderIds(folderId, recurse);
 	}
 
+	@Override
 	public void initRepository() throws PortalException, SystemException {
 		_baseCmisRepository.initRepository();
 	}

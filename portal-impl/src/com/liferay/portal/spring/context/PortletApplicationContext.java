@@ -44,6 +44,7 @@ import org.springframework.web.context.support.XmlWebApplicationContext;
  */
 public class PortletApplicationContext extends XmlWebApplicationContext {
 
+	@Override
 	protected void initBeanDefinitionReader(XmlBeanDefinitionReader reader) {
 		ClassLoader beanClassLoader =
 			AggregateClassLoader.getAggregateClassLoader(
@@ -57,6 +58,7 @@ public class PortletApplicationContext extends XmlWebApplicationContext {
 		reader.setBeanClassLoader(beanClassLoader);
 	}
 
+	@Override
 	protected void loadBeanDefinitions(XmlBeanDefinitionReader reader) {
 		String[] configLocations = getPortletConfigLocations();
 

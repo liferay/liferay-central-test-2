@@ -40,6 +40,7 @@ import javax.servlet.jsp.JspException;
  */
 public class InputTag extends IncludeTag {
 
+	@Override
 	public int doEndTag() throws JspException {
 		updateFormValidators();
 
@@ -48,6 +49,7 @@ public class InputTag extends IncludeTag {
 		return super.doEndTag();
 	}
 
+	@Override
 	public int doStartTag() throws JspException {
 		addModelValidators();
 
@@ -225,6 +227,7 @@ public class InputTag extends IncludeTag {
 		_validators.put(validatorName, validatorTag);
 	}
 
+	@Override
 	protected void cleanUp() {
 		_bean = null;
 		_changesContext = false;
@@ -259,14 +262,17 @@ public class InputTag extends IncludeTag {
 		_value = null;
 	}
 
+	@Override
 	protected String getPage() {
 		return _PAGE;
 	}
 
+	@Override
 	protected boolean isCleanUpSetAttributes() {
 		return _CLEAN_UP_SET_ATTRIBUTES;
 	}
 
+	@Override
 	protected void setAttributes(HttpServletRequest request) {
 		Object bean = _bean;
 

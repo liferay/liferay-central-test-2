@@ -23,6 +23,7 @@ import com.liferay.portal.util.PortalUtil;
  */
 public class UpgradeRole extends UpgradeProcess {
 
+	@Override
 	protected void doUpgrade() throws Exception {
 		long classNameId = PortalUtil.getClassNameId(Role.class.getName());
 

@@ -52,6 +52,7 @@ public class InputLocalizedTag extends IncludeTag {
 		_xml = xml;
 	}
 
+	@Override
 	protected void cleanUp() {
 		_cssClass = null;
 		_disabled = false;
@@ -62,10 +63,12 @@ public class InputLocalizedTag extends IncludeTag {
 		_xml = null;
 	}
 
+	@Override
 	protected String getPage() {
 		return _PAGE;
 	}
 
+	@Override
 	protected void setAttributes(HttpServletRequest request) {
 		String formName = _formName;
 

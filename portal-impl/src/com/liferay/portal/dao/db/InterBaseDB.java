@@ -29,6 +29,7 @@ public class InterBaseDB extends FirebirdDB {
 		super(TYPE_INTERBASE);
 	}
 
+	@Override
 	protected String getServerName() {
 		return "interbase";
 	}

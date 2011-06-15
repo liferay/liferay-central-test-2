@@ -69,6 +69,7 @@ public class JournalArticleWorkflowHandler extends BaseWorkflowHandler {
 			userId, article, status, null, serviceContext);
 	}
 
+	@Override
 	protected String getIconPath(ThemeDisplay themeDisplay) {
 		return themeDisplay.getPathThemeImages() + "/common/history.png";
 	}

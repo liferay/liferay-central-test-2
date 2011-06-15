@@ -104,6 +104,7 @@ public class LayoutSetBranchLocalServiceImpl
 		return layoutSetBranch;
 	}
 
+	@Override
 	public void deleteLayoutSetBranch(LayoutSetBranch layoutSetBranch)
 		throws PortalException, SystemException {
 
@@ -135,6 +136,7 @@ public class LayoutSetBranchLocalServiceImpl
 			layoutSetBranch.getLayoutSetBranchId());
 	}
 
+	@Override
 	public void deleteLayoutSetBranch(long layoutSetBranchId)
 		throws PortalException, SystemException {
 

@@ -38,6 +38,7 @@ import org.apache.abdera.protocol.server.impl.AbstractEntityCollectionAdapter;
 public abstract class BaseEntityCollectionAdapter<T>
 	extends AbstractEntityCollectionAdapter<T> {
 
+	@Override
 	public String getAuthor(RequestContext requestContext) {
 		String author = null;
 
@@ -53,11 +54,13 @@ public abstract class BaseEntityCollectionAdapter<T>
 		return author;
 	}
 
+	@Override
 	public String getHref(RequestContext requestContext) {
 		return requestContext.urlFor(
 			TargetType.TYPE_COLLECTION, collectionName);
 	}
 
+	@Override
 	public String getId(RequestContext requestContext) {
 		String id = AtomUtil.createIdTagPrefix(collectionName);
 
@@ -113,6 +116,7 @@ public abstract class BaseEntityCollectionAdapter<T>
 		return link;
 	}
 
+	@Override
 	protected void addFeedDetails(Feed feed, RequestContext requestContext)
 		throws ResponseContextException {
 
@@ -127,6 +131,7 @@ public abstract class BaseEntityCollectionAdapter<T>
 		}
 	}
 
+	@Override
 	protected Feed createFeedBase(RequestContext requestContext) {
 		Factory factory = requestContext.getAbdera().getFactory();
 

@@ -120,6 +120,7 @@ public class MediaWikiToCreoleTranslator extends BaseTranslator {
 		regexps.put("[-]*\\[{2}User:([^\\]]*)\\]{2}", "$1");
 	}
 
+	@Override
 	protected String postProcess(String content) {
 
 		// LEP-6118

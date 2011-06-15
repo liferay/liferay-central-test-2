@@ -36,9 +36,11 @@ public class NetlogonIdentityInfo extends NdrObject {
 		_workstation = new UnicodeString(workstation, false);
 	}
 
+	@Override
 	public void decode(NdrBuffer ndrBuffer) {
 	}
 
+	@Override
 	public void encode(NdrBuffer ndrBuffer) {
 		ndrBuffer.enc_ndr_short(_logonDomainName.length);
 		ndrBuffer.enc_ndr_short(_logonDomainName.maximum_length);

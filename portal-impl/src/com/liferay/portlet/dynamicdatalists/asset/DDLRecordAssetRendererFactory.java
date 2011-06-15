@@ -49,6 +49,7 @@ public class DDLRecordAssetRendererFactory extends BaseAssetRendererFactory {
 		return TYPE;
 	}
 
+	@Override
 	public boolean hasPermission(
 			PermissionChecker permissionChecker, long classPK, String actionId)
 		throws Exception {
@@ -59,6 +60,7 @@ public class DDLRecordAssetRendererFactory extends BaseAssetRendererFactory {
 			permissionChecker, record.getRecordSet(), actionId);
 	}
 
+	@Override
 	protected String getIconPath(ThemeDisplay themeDisplay) {
 		return themeDisplay.getPathThemeImages() + "/common/history.png";
 	}

@@ -54,10 +54,12 @@ public class GZipFilter extends BasePortalFilter {
 		}
 	}
 
+	@Override
 	public boolean isFilterEnabled() {
 		return _filterEnabled;
 	}
 
+	@Override
 	public boolean isFilterEnabled(
 		HttpServletRequest request, HttpServletResponse response) {
 
@@ -102,6 +104,7 @@ public class GZipFilter extends BasePortalFilter {
 		}
 	}
 
+	@Override
 	protected void processFilter(
 			HttpServletRequest request, HttpServletResponse response,
 			FilterChain filterChain)

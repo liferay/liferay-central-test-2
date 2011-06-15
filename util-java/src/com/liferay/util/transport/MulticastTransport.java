@@ -93,6 +93,7 @@ public class MulticastTransport extends Thread implements Transport {
 		return _connected;
 	}
 
+	@Override
 	public void run() {
 		try {
 			while (_connected) {

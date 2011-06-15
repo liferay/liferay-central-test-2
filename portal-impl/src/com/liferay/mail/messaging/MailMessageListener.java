@@ -97,6 +97,7 @@ public class MailMessageListener extends BaseMessageListener {
 		methodHandler.invoke(HookFactory.getInstance());
 	}
 
+	@Override
 	protected void doReceive(Message message) throws Exception {
 		Object payload = message.getPayload();
 

@@ -36,6 +36,7 @@ import java.sql.Types;
  */
 public class UpgradeImage extends UpgradeProcess {
 
+	@Override
 	protected void doUpgrade() throws Exception {
 
 		// Company

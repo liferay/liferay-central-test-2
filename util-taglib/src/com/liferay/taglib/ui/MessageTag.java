@@ -27,6 +27,7 @@ import javax.servlet.jsp.tagext.TagSupport;
  */
 public class MessageTag extends TagSupport {
 
+	@Override
 	public int doEndTag() throws JspException {
 		try {
 			String value =  StringPool.BLANK;

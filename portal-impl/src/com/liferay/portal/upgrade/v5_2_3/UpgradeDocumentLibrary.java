@@ -35,6 +35,7 @@ import javax.portlet.PortletPreferences;
  */
 public class UpgradeDocumentLibrary extends BaseUpgradePortletPreferences {
 
+	@Override
 	protected void doUpgrade() throws Exception {
 		try {
 			runSQL("alter_column_type DLFileEntry name VARCHAR(255) null");
@@ -113,6 +114,7 @@ public class UpgradeDocumentLibrary extends BaseUpgradePortletPreferences {
 		updatePortletPreferences();
 	}
 
+	@Override
 	protected String getUpdatePortletPreferencesWhereClause() {
 		return "portletId = '20' and preferences like " +
 			"'%<name>fileEntryColumns</name><value></value>%'";
@@ -149,6 +151,7 @@ public class UpgradeDocumentLibrary extends BaseUpgradePortletPreferences {
 		runSQL(sb.toString());
 	}
 
+	@Override
 	protected String upgradePreferences(
 			long companyId, long ownerId, int ownerType, long plid,
 			String portletId, String xml)

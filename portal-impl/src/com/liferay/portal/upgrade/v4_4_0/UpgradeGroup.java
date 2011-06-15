@@ -24,6 +24,7 @@ import com.liferay.portal.upgrade.v4_4_0.util.GroupTable;
  */
 public class UpgradeGroup extends UpgradeProcess {
 
+	@Override
 	protected void doUpgrade() throws Exception {
 
 		// Group_

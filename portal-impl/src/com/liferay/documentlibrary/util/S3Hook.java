@@ -74,10 +74,12 @@ public class S3Hook extends BaseHook {
 		}
 	}
 
+	@Override
 	public void addDirectory(
 		long companyId, long repositoryId, String dirName) {
 	}
 
+	@Override
 	public void addFile(
 			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, long fileEntryId, String properties,
@@ -116,9 +118,11 @@ public class S3Hook extends BaseHook {
 		}
 	}
 
+	@Override
 	public void checkRoot(long companyId) {
 	}
 
+	@Override
 	public void deleteDirectory(
 			long companyId, String portletId, long repositoryId, String dirName)
 		throws SystemException {
@@ -138,6 +142,7 @@ public class S3Hook extends BaseHook {
 		}
 	}
 
+	@Override
 	public void deleteFile(
 			long companyId, String portletId, long repositoryId,
 			String fileName)
@@ -169,6 +174,7 @@ public class S3Hook extends BaseHook {
 		}
 	}
 
+	@Override
 	public void deleteFile(
 			long companyId, String portletId, long repositoryId,
 			String fileName, String versionNumber)
@@ -184,6 +190,7 @@ public class S3Hook extends BaseHook {
 		}
 	}
 
+	@Override
 	public InputStream getFileAsStream(
 			long companyId, long repositoryId, String fileName,
 			String versionNumber)
@@ -206,6 +213,7 @@ public class S3Hook extends BaseHook {
 		}
 	}
 
+	@Override
 	public String[] getFileNames(
 			long companyId, long repositoryId, String dirName)
 		throws SystemException {
@@ -240,6 +248,7 @@ public class S3Hook extends BaseHook {
 		}
 	}
 
+	@Override
 	public long getFileSize(
 			long companyId, long repositoryId, String fileName)
 		throws PortalException, SystemException {
@@ -259,6 +268,7 @@ public class S3Hook extends BaseHook {
 		}
 	}
 
+	@Override
 	public boolean hasFile(
 			long companyId, long repositoryId, String fileName,
 			String versionNumber)
@@ -281,9 +291,11 @@ public class S3Hook extends BaseHook {
 		}
 	}
 
+	@Override
 	public void move(String srcDir, String destDir) {
 	}
 
+	@Override
 	public void reindex(String[] ids) throws SearchException {
 		long companyId = GetterUtil.getLong(ids[0]);
 		String portletId = ids[1];
@@ -338,6 +350,7 @@ public class S3Hook extends BaseHook {
 		SearchEngineUtil.updateDocuments(companyId, documents);
 	}
 
+	@Override
 	public void updateFile(
 			long companyId, String portletId, long groupId, long repositoryId,
 			long newRepositoryId, String fileName, long fileEntryId)
@@ -480,6 +493,7 @@ public class S3Hook extends BaseHook {
 		}
 	}
 
+	@Override
 	public void updateFile(
 			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, String versionNumber, String sourceFileName,

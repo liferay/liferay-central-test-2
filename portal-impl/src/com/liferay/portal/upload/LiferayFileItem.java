@@ -77,6 +77,7 @@ public class LiferayFileItem extends DiskFileItem {
 		return FileUtil.getExtension(_fileName);
 	}
 
+	@Override
 	public String getString() {
 
 		// Prevent serialization of uploaded content
@@ -101,6 +102,7 @@ public class LiferayFileItem extends DiskFileItem {
 		}
 	}
 
+	@Override
 	protected File getTempFile() {
 		String tempFileName = "upload_" + _getUniqueId();
 

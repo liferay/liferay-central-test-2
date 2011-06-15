@@ -54,6 +54,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class SoftwareCatalogServlet extends HttpServlet {
 
+	@Override
 	public void service(
 			HttpServletRequest request, HttpServletResponse response)
 		throws IOException, ServletException {

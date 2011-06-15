@@ -63,6 +63,7 @@ public class DLFileEntryWorkflowHandler extends BaseWorkflowHandler {
 			userId, classPK, status, serviceContext);
 	}
 
+	@Override
 	protected String getIconPath(ThemeDisplay themeDisplay) {
 		return themeDisplay.getPathThemeImages() + "/common/clip.png";
 	}

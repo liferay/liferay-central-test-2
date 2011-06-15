@@ -41,6 +41,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class JSONServlet extends HttpServlet {
 
+	@Override
 	public void init(ServletConfig servletConfig) {
 		ServletContext servletContext = servletConfig.getServletContext();
 
@@ -50,6 +51,7 @@ public class JSONServlet extends HttpServlet {
 		_jsonAction = getJSONAction(servletContext);
 	}
 
+	@Override
 	@SuppressWarnings("unused")
 	public void service(
 			HttpServletRequest request, HttpServletResponse response)

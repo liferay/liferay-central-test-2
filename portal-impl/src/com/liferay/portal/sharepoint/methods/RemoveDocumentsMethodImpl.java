@@ -33,6 +33,7 @@ public class RemoveDocumentsMethodImpl extends BaseMethodImpl {
 		return _METHOD_NAME;
 	}
 
+	@Override
 	public String getRootPath(SharepointRequest sharepointRequest) {
 		String urlList = sharepointRequest.getParameterValue("url_list");
 
@@ -41,6 +42,7 @@ public class RemoveDocumentsMethodImpl extends BaseMethodImpl {
 		return urlList.split(StringPool.SEMICOLON)[0];
 	}
 
+	@Override
 	protected List<ResponseElement> getElements(
 			SharepointRequest sharepointRequest)
 		throws Exception {

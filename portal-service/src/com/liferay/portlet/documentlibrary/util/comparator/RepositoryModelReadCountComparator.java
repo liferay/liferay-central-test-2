@@ -42,6 +42,7 @@ public class RepositoryModelReadCountComparator extends OrderByComparator {
 		_ascending = ascending;
 	}
 
+	@Override
 	public int compare(Object obj1, Object obj2) {
 		Long readCount1 = getReadCount(obj1);
 		Long readCount2 = getReadCount(obj2);
@@ -56,6 +57,7 @@ public class RepositoryModelReadCountComparator extends OrderByComparator {
 		}
 	}
 
+	@Override
 	public String getOrderBy() {
 		if (_ascending) {
 			return ORDER_BY_ASC;
@@ -65,10 +67,12 @@ public class RepositoryModelReadCountComparator extends OrderByComparator {
 		}
 	}
 
+	@Override
 	public String[] getOrderByFields() {
 		return ORDER_BY_FIELDS;
 	}
 
+	@Override
 	public boolean isAscending() {
 		return _ascending;
 	}

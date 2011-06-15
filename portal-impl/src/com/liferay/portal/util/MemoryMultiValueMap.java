@@ -50,6 +50,7 @@ public class MemoryMultiValueMap<K extends Serializable, V extends Serializable>
 		return false;
 	}
 
+	@Override
 	public Set<V> getAll(Object key) {
 		return _map.get(key);
 	}

@@ -37,6 +37,7 @@ public class ShoppingItemImpl
 	public ShoppingItemImpl() {
 	}
 
+	@Override
 	public int compareTo(ShoppingItem item) {
 		return new ItemNameComparator(true).compare(this, item);
 	}
@@ -76,6 +77,7 @@ public class ShoppingItemImpl
 		return ShoppingItemPriceLocalServiceUtil.getItemPrices(getItemId());
 	}
 
+	@Override
 	public void setFieldsQuantities(String fieldsQuantities) {
 		_fieldsQuantitiesArray = StringUtil.split(fieldsQuantities);
 

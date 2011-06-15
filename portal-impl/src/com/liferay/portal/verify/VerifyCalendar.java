@@ -26,6 +26,7 @@ import java.util.List;
  */
 public class VerifyCalendar extends VerifyProcess {
 
+	@Override
 	protected void doVerify() throws Exception {
 		List<CalEvent> events = CalEventLocalServiceUtil.getNoAssetEvents();
 

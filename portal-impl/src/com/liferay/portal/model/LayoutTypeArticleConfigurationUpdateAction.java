@@ -31,6 +31,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class LayoutTypeArticleConfigurationUpdateAction extends Action {
 
+	@Override
 	public void run(HttpServletRequest request, HttpServletResponse response)
 		throws ActionException {
 

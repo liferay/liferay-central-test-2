@@ -46,6 +46,7 @@ public class MemcachePortalCache extends BasePortalCache {
 		_timeoutTimeUnit = timeoutTimeUnit;
 	}
 
+	@Override
 	public void destroy() {
 		_memcachedClient.shutdown();
 	}

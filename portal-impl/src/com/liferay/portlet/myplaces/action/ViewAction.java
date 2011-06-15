@@ -53,6 +53,7 @@ import org.apache.struts.action.ActionMapping;
  */
 public class ViewAction extends PortletAction {
 
+	@Override
 	public ActionForward strutsExecute(
 			ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response)
@@ -86,6 +87,7 @@ public class ViewAction extends PortletAction {
 		return null;
 	}
 
+	@Override
 	public void processAction(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
 			ActionRequest actionRequest, ActionResponse actionResponse)
@@ -120,6 +122,7 @@ public class ViewAction extends PortletAction {
 		}
 	}
 
+	@Override
 	public ActionForward render(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
 			RenderRequest renderRequest, RenderResponse renderResponse)
@@ -195,6 +198,7 @@ public class ViewAction extends PortletAction {
 			group, GetterUtil.getBoolean(privateLayoutParam), themeDisplay);
 	}
 
+	@Override
 	protected boolean isCheckMethodOnProcessAction() {
 		return _CHECK_METHOD_ON_PROCESS_ACTION;
 	}

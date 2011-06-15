@@ -38,6 +38,7 @@ import org.apache.struts.action.ActionMapping;
  */
 public class GetLookAndFeelAction extends JSONAction {
 
+	@Override
 	public String getJSON(
 			ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response)

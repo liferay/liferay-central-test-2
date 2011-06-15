@@ -26,6 +26,7 @@ public class ResourceComparator extends OrderByComparator {
 
 	public static String[] ORDER_BY_FIELDS = {"resourceId"};
 
+	@Override
 	public int compare(Object obj1, Object obj2) {
 		Resource resource1 = (Resource)obj1;
 		Resource resource2 = (Resource)obj2;
@@ -44,14 +45,17 @@ public class ResourceComparator extends OrderByComparator {
 		}
 	}
 
+	@Override
 	public String getOrderBy() {
 		return ORDER_BY_DESC;
 	}
 
+	@Override
 	public String[] getOrderByFields() {
 		return ORDER_BY_FIELDS;
 	}
 
+	@Override
 	public boolean isAscending() {
 		return false;
 	}

@@ -37,6 +37,7 @@ import javax.servlet.http.HttpSession;
  */
 public class DefaultLogoutPageAction extends Action {
 
+	@Override
 	public void run(HttpServletRequest request, HttpServletResponse response)
 		throws ActionException {
 

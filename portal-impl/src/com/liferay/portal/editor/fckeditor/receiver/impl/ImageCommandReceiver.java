@@ -47,6 +47,7 @@ import org.w3c.dom.Node;
  */
 public class ImageCommandReceiver extends BaseCommandReceiver {
 
+	@Override
 	protected String createFolder(CommandArgument commandArgument) {
 		try {
 			Group group = commandArgument.getCurrentGroup();
@@ -76,6 +77,7 @@ public class ImageCommandReceiver extends BaseCommandReceiver {
 		return "0";
 	}
 
+	@Override
 	protected String fileUpload(
 		CommandArgument commandArgument, String fileName, File file,
 		String extension) {
@@ -109,6 +111,7 @@ public class ImageCommandReceiver extends BaseCommandReceiver {
 		return "0";
 	}
 
+	@Override
 	protected void getFolders(
 		CommandArgument commandArgument, Document document, Node rootNode) {
 
@@ -120,6 +123,7 @@ public class ImageCommandReceiver extends BaseCommandReceiver {
 		}
 	}
 
+	@Override
 	protected void getFoldersAndFiles(
 		CommandArgument commandArgument, Document document, Node rootNode) {
 
@@ -132,6 +136,7 @@ public class ImageCommandReceiver extends BaseCommandReceiver {
 		}
 	}
 
+	@Override
 	protected boolean isStagedData(Group group) {
 		return group.isStagedPortlet(PortletKeys.IMAGE_GALLERY);
 	}

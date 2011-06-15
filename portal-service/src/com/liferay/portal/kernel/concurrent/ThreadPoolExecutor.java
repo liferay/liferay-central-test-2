@@ -398,6 +398,7 @@ public class ThreadPoolExecutor extends AbstractExecutorService {
 		}
 	}
 
+	@Override
 	protected void finalize() {
 		shutdown();
 	}

@@ -27,6 +27,7 @@ import com.liferay.portal.upgrade.v5_1_0.util.BlogsEntryUrlTitleUpgradeColumnImp
  */
 public class UpgradeBlogs extends UpgradeProcess {
 
+	@Override
 	protected void doUpgrade() throws Exception {
 		UpgradeColumn entryIdColumn = new TempUpgradeColumnImpl("entryId");
 

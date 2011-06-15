@@ -40,6 +40,7 @@ import org.apache.lucene.util.Version;
  */
 public class DumpIndexDeletionPolicyTest extends TestCase {
 
+	@Override
 	public void setUp() throws Exception {
 		_sourceDirectory = new RAMDirectory();
 		_dumpIndexDeletionPolicy = new DumpIndexDeletionPolicy();

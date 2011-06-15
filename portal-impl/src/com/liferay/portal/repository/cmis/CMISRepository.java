@@ -579,6 +579,7 @@ public class CMISRepository extends BaseCmisRepository {
 		}
 	}
 
+	@Override
 	public List<Object> getFoldersAndFileEntries(
 			long folderId, int start, int end, OrderByComparator obc)
 		throws SystemException {
@@ -609,6 +610,7 @@ public class CMISRepository extends BaseCmisRepository {
 		}
 	}
 
+	@Override
 	public int getFoldersAndFileEntriesCount(long folderId)
 		throws SystemException {
 
@@ -637,6 +639,7 @@ public class CMISRepository extends BaseCmisRepository {
 		return count;
 	}
 
+	@Override
 	public String getLatestVersionId(String objectId) throws SystemException {
 		try {
 			Session session = getSession();
@@ -654,6 +657,7 @@ public class CMISRepository extends BaseCmisRepository {
 		}
 	}
 
+	@Override
 	public String getObjectName(String objectId)
 		throws PortalException, SystemException {
 
@@ -664,6 +668,7 @@ public class CMISRepository extends BaseCmisRepository {
 		return cmisObject.getName();
 	}
 
+	@Override
 	public List<String> getObjectPaths(String objectId)
 		throws PortalException, SystemException {
 
@@ -728,6 +733,7 @@ public class CMISRepository extends BaseCmisRepository {
 		return _cmisRepositoryHandler.getSupportedParameters();
 	}
 
+	@Override
 	public void initRepository() throws PortalException, SystemException {
 		try {
 			_sessionKey =
@@ -753,18 +759,21 @@ public class CMISRepository extends BaseCmisRepository {
 		}
 	}
 
+	@Override
 	public boolean isCancelCheckOutAllowable(String objectId)
 		throws PortalException, SystemException {
 
 		return isActionAllowable(objectId, Action.CAN_CANCEL_CHECK_OUT);
 	}
 
+	@Override
 	public boolean isCheckInAllowable(String objectId)
 		throws PortalException, SystemException {
 
 		return isActionAllowable(objectId, Action.CAN_CHECK_IN);
 	}
 
+	@Override
 	public boolean isCheckOutAllowable(String objectId)
 		throws PortalException, SystemException {
 
@@ -968,6 +977,7 @@ public class CMISRepository extends BaseCmisRepository {
 		return new CMISFileEntry(this, uuid, fileEntryId, document);
 	}
 
+	@Override
 	public FileEntry toFileEntry(String objectId)
 		throws PortalException, SystemException {
 
@@ -998,6 +1008,7 @@ public class CMISRepository extends BaseCmisRepository {
 		return new CMISFolder(this, uuid, folderId, cmisFolder);
 	}
 
+	@Override
 	public Folder toFolder(String objectId)
 		throws PortalException, SystemException {
 
@@ -1103,6 +1114,7 @@ public class CMISRepository extends BaseCmisRepository {
 		}
 	}
 
+	@Override
 	public FileEntry updateFileEntry(
 			String objectId, String mimeType, Map<String, Object> properties,
 			InputStream is, String sourceFileName, long size,

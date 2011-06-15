@@ -36,20 +36,24 @@ public class SearchToggleTag extends IncludeTag {
 		_id = id;
 	}
 
+	@Override
 	protected void cleanUp() {
 		_buttonLabel = null;
 		_displayTerms = null;
 		_id = null;
 	}
 
+	@Override
 	protected String getEndPage() {
 		return _END_PAGE;
 	}
 
+	@Override
 	protected String getStartPage() {
 		return _START_PAGE;
 	}
 
+	@Override
 	protected void setAttributes(HttpServletRequest request) {
 		request.setAttribute(
 			"liferay-ui:search-toggle:buttonLabel", _buttonLabel);

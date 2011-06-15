@@ -61,6 +61,7 @@ public abstract class BaseModelImpl<T> implements BaseModel<T> {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public abstract Object clone();
 
 	public void resetOriginalValues() {

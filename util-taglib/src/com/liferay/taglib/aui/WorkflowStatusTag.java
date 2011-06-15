@@ -45,6 +45,7 @@ public class WorkflowStatusTag extends IncludeTag {
 		_version = version;
 	}
 
+	@Override
 	protected void cleanUp() {
 		_bean = null;
 		_id = null;
@@ -53,14 +54,17 @@ public class WorkflowStatusTag extends IncludeTag {
 		_version = null;
 	}
 
+	@Override
 	protected String getPage() {
 		return _PAGE;
 	}
 
+	@Override
 	protected boolean isCleanUpSetAttributes() {
 		return _CLEAN_UP_SET_ATTRIBUTES;
 	}
 
+	@Override
 	protected void setAttributes(HttpServletRequest request) {
 		Object bean = _bean;
 

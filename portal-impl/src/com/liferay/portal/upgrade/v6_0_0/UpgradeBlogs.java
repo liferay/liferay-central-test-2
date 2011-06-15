@@ -27,6 +27,7 @@ import com.liferay.portal.upgrade.v6_0_0.util.BlogsEntryTable;
  */
 public class UpgradeBlogs extends UpgradeProcess {
 
+	@Override
 	protected void doUpgrade() throws Exception {
 		try {
 			runSQL("drop index IX_E0D90212 on BlogsEntry");

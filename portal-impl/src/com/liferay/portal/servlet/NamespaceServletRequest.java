@@ -68,6 +68,7 @@ public class NamespaceServletRequest extends DynamicServletRequest {
 		_paramNamespace = paramNamespace;
 	}
 
+	@Override
 	public Object getAttribute(String name) {
 		Object value = super.getAttribute(_attrNamespace + name);
 
@@ -78,6 +79,7 @@ public class NamespaceServletRequest extends DynamicServletRequest {
 		return value;
 	}
 
+	@Override
 	public Enumeration<String> getAttributeNames() {
 		List<String> names = new ArrayList<String>();
 
@@ -98,6 +100,7 @@ public class NamespaceServletRequest extends DynamicServletRequest {
 		return Collections.enumeration(names);
 	}
 
+	@Override
 	public void setAttribute(String name, Object value) {
 		if (_isReservedParam(name)) {
 			super.setAttribute(name, value);
@@ -118,6 +121,7 @@ public class NamespaceServletRequest extends DynamicServletRequest {
 		}
 	}
 
+	@Override
 	public void removeAttribute(String name) {
 		if (_isReservedParam(name)) {
 			super.removeAttribute(name);
@@ -127,6 +131,7 @@ public class NamespaceServletRequest extends DynamicServletRequest {
 		}
 	}
 
+	@Override
 	public String getParameter(String name) {
 		if (name == null) {
 			throw new IllegalArgumentException();

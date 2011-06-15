@@ -42,6 +42,7 @@ import org.apache.struts.action.ActionMapping;
  */
 public class GetLayoutsAction extends JSONAction {
 
+	@Override
 	public String getJSON(
 			ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response)

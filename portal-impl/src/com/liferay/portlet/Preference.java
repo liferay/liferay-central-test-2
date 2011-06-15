@@ -42,6 +42,7 @@ public class Preference implements Cloneable, Serializable {
 		_readOnly = readOnly;
 	}
 
+	@Override
 	public Object clone() {
 		return new Preference(_name, _values, _readOnly);
 	}
@@ -66,6 +67,7 @@ public class Preference implements Cloneable, Serializable {
 		_values = values;
 	}
 
+	@Override
 	public String toString() {
 		StringBundler sb = new StringBundler(6 + (_values.length * 2 - 1));
 

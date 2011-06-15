@@ -72,6 +72,7 @@ public class JournalIndexer extends BaseIndexer {
 		return CLASS_NAMES;
 	}
 
+	@Override
 	public void postProcessContextQuery(
 			BooleanQuery contextQuery, SearchContext searchContext)
 		throws Exception {
@@ -110,6 +111,7 @@ public class JournalIndexer extends BaseIndexer {
 		}
 	}
 
+	@Override
 	public void postProcessSearchQuery(
 			BooleanQuery searchQuery, SearchContext searchContext)
 		throws Exception {
@@ -135,6 +137,7 @@ public class JournalIndexer extends BaseIndexer {
 		}
 	}
 
+	@Override
 	protected void doDelete(Object obj) throws Exception {
 		JournalArticle article = (JournalArticle)obj;
 
@@ -147,6 +150,7 @@ public class JournalIndexer extends BaseIndexer {
 			article.getCompanyId(), document.get(Field.UID));
 	}
 
+	@Override
 	protected Document doGetDocument(Object obj) throws Exception {
 		JournalArticle article = (JournalArticle)obj;
 
@@ -212,6 +216,7 @@ public class JournalIndexer extends BaseIndexer {
 		return document;
 	}
 
+	@Override
 	protected String doGetSortField(String orderByCol) {
 		if (orderByCol.equals("display-date")) {
 			return "displayDate";
@@ -230,6 +235,7 @@ public class JournalIndexer extends BaseIndexer {
 		}
 	}
 
+	@Override
 	protected Summary doGetSummary(
 		Document document, Locale locale, String snippet,
 		PortletURL portletURL) {
@@ -255,6 +261,7 @@ public class JournalIndexer extends BaseIndexer {
 		return new Summary(title, content, portletURL);
 	}
 
+	@Override
 	protected void doReindex(Object obj) throws Exception {
 		JournalArticle article = (JournalArticle)obj;
 
@@ -274,6 +281,7 @@ public class JournalIndexer extends BaseIndexer {
 		SearchEngineUtil.updateDocument(article.getCompanyId(), document);
 	}
 
+	@Override
 	protected void doReindex(String className, long classPK) throws Exception {
 		JournalArticle article =
 			JournalArticleLocalServiceUtil.getLatestArticle(
@@ -282,6 +290,7 @@ public class JournalIndexer extends BaseIndexer {
 		doReindex(article);
 	}
 
+	@Override
 	protected void doReindex(String[] ids) throws Exception {
 		long companyId = GetterUtil.getLong(ids[0]);
 
@@ -316,6 +325,7 @@ public class JournalIndexer extends BaseIndexer {
 		return languageIds;
 	}
 
+	@Override
 	protected String getPortletId(SearchContext searchContext) {
 		return PORTLET_ID;
 	}

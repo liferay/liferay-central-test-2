@@ -33,14 +33,17 @@ import freemarker.template.TemplateException;
  */
 public class FreeMarkerTemplateParser extends VelocityTemplateParser {
 
+	@Override
 	protected String getErrorTemplateContent() {
 		return ContentUtil.get(PropsValues.JOURNAL_ERROR_TEMPLATE_FREEMARKER);
 	}
 
+	@Override
 	protected String getErrorTemplateId() {
 		return PropsValues.JOURNAL_ERROR_TEMPLATE_FREEMARKER;
 	}
 
+	@Override
 	protected String getJournalTemplatesPath() {
 		StringBundler sb = new StringBundler(5);
 
@@ -53,10 +56,12 @@ public class FreeMarkerTemplateParser extends VelocityTemplateParser {
 		return sb.toString();
 	}
 
+	@Override
 	protected TemplateContext getTemplateContext() {
 		return FreeMarkerEngineUtil.getWrappedRestrictedToolsContext();
 	}
 
+	@Override
 	protected boolean mergeTemplate(
 			TemplateContext templateContext,
 			UnsyncStringWriter unsyncStringWriter)
