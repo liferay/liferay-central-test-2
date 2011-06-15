@@ -203,7 +203,7 @@ Format timeFormat = FastDateFormatFactoryUtil.getSimpleDateFormat("h:mma", local
 				</tr>
 
 				<%
-				List events = CalEventServiceUtil.getEvents(scopeGroupId, tempCal, eventType);
+				List events = CalEventLocalServiceUtil.getEvents(scopeGroupId, tempCal, eventType);
 
 				events = ListUtil.sort(events, new EventTimeComparator(timeZone, locale));
 

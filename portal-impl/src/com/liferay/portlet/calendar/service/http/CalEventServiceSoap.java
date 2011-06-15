@@ -120,22 +120,6 @@ public class CalEventServiceSoap {
 	}
 
 	public static com.liferay.portlet.calendar.model.CalEventSoap[] getEvents(
-		long groupId, java.lang.String types, int start, int end)
-		throws RemoteException {
-		try {
-			java.util.List<com.liferay.portlet.calendar.model.CalEvent> returnValue =
-				CalEventServiceUtil.getEvents(groupId, types, start, end);
-
-			return com.liferay.portlet.calendar.model.CalEventSoap.toSoapModels(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static com.liferay.portlet.calendar.model.CalEventSoap[] getEvents(
 		long groupId, java.lang.String[] types, int start, int end)
 		throws RemoteException {
 		try {
@@ -143,82 +127,6 @@ public class CalEventServiceSoap {
 				CalEventServiceUtil.getEvents(groupId, types, start, end);
 
 			return com.liferay.portlet.calendar.model.CalEventSoap.toSoapModels(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static com.liferay.portlet.calendar.model.CalEventSoap[] getEvents(
-		long groupId, java.util.Calendar cal, java.lang.String types)
-		throws RemoteException {
-		try {
-			java.util.List<com.liferay.portlet.calendar.model.CalEvent> returnValue =
-				CalEventServiceUtil.getEvents(groupId, cal, types);
-
-			return com.liferay.portlet.calendar.model.CalEventSoap.toSoapModels(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static com.liferay.portlet.calendar.model.CalEventSoap[] getEvents(
-		long groupId, java.util.Calendar cal, java.lang.String[] types)
-		throws RemoteException {
-		try {
-			java.util.List<com.liferay.portlet.calendar.model.CalEvent> returnValue =
-				CalEventServiceUtil.getEvents(groupId, cal, types);
-
-			return com.liferay.portlet.calendar.model.CalEventSoap.toSoapModels(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static boolean hasEvents(long groupId, java.util.Calendar cal)
-		throws RemoteException {
-		try {
-			boolean returnValue = CalEventServiceUtil.hasEvents(groupId, cal);
-
-			return returnValue;
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static boolean hasEvents(long groupId, java.util.Calendar cal,
-		java.lang.String type) throws RemoteException {
-		try {
-			boolean returnValue = CalEventServiceUtil.hasEvents(groupId, cal,
-					type);
-
-			return returnValue;
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static boolean hasEvents(long groupId, java.util.Calendar cal,
-		java.lang.String[] types) throws RemoteException {
-		try {
-			boolean returnValue = CalEventServiceUtil.hasEvents(groupId, cal,
-					types);
-
-			return returnValue;
 		}
 		catch (Exception e) {
 			_log.error(e, e);

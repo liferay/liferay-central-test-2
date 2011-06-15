@@ -109,7 +109,7 @@ dateFormatDate = FastDateFormatFactoryUtil.getSimpleDateFormat("MMMMM d, yyyy", 
 <br />
 
 <%
-List<CalEvent> results = CalEventServiceUtil.getEvents(scopeGroupId, selCal, eventType);
+List<CalEvent> results = CalEventLocalServiceUtil.getEvents(scopeGroupId, selCal, eventType);
 
 List<CalEvent> allDayResults = new ArrayList<CalEvent>();
 List<CalEvent> partDayResults = new ArrayList<CalEvent>();

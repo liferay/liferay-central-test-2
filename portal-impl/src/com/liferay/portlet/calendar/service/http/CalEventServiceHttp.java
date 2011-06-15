@@ -246,7 +246,7 @@ public class CalEventServiceHttp {
 	}
 
 	public static java.util.List<com.liferay.portlet.calendar.model.CalEvent> getEvents(
-		HttpPrincipal httpPrincipal, long groupId, java.lang.String types,
+		HttpPrincipal httpPrincipal, long groupId, java.lang.String[] types,
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
@@ -278,232 +278,12 @@ public class CalEventServiceHttp {
 		}
 	}
 
-	public static java.util.List<com.liferay.portlet.calendar.model.CalEvent> getEvents(
-		HttpPrincipal httpPrincipal, long groupId, java.lang.String[] types,
-		int start, int end)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		try {
-			MethodKey methodKey = new MethodKey(CalEventServiceUtil.class.getName(),
-					"getEvents", _getEventsParameterTypes6);
-
-			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
-					types, start, end);
-
-			Object returnObj = null;
-
-			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
-			}
-			catch (Exception e) {
-				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
-					throw (com.liferay.portal.kernel.exception.SystemException)e;
-				}
-
-				throw new com.liferay.portal.kernel.exception.SystemException(e);
-			}
-
-			return (java.util.List<com.liferay.portlet.calendar.model.CalEvent>)returnObj;
-		}
-		catch (com.liferay.portal.kernel.exception.SystemException se) {
-			_log.error(se, se);
-
-			throw se;
-		}
-	}
-
-	public static java.util.List<com.liferay.portlet.calendar.model.CalEvent> getEvents(
-		HttpPrincipal httpPrincipal, long groupId, java.util.Calendar cal,
-		java.lang.String types)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		try {
-			MethodKey methodKey = new MethodKey(CalEventServiceUtil.class.getName(),
-					"getEvents", _getEventsParameterTypes7);
-
-			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
-					cal, types);
-
-			Object returnObj = null;
-
-			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
-			}
-			catch (Exception e) {
-				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
-					throw (com.liferay.portal.kernel.exception.PortalException)e;
-				}
-
-				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
-					throw (com.liferay.portal.kernel.exception.SystemException)e;
-				}
-
-				throw new com.liferay.portal.kernel.exception.SystemException(e);
-			}
-
-			return (java.util.List<com.liferay.portlet.calendar.model.CalEvent>)returnObj;
-		}
-		catch (com.liferay.portal.kernel.exception.SystemException se) {
-			_log.error(se, se);
-
-			throw se;
-		}
-	}
-
-	public static java.util.List<com.liferay.portlet.calendar.model.CalEvent> getEvents(
-		HttpPrincipal httpPrincipal, long groupId, java.util.Calendar cal,
-		java.lang.String[] types)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		try {
-			MethodKey methodKey = new MethodKey(CalEventServiceUtil.class.getName(),
-					"getEvents", _getEventsParameterTypes8);
-
-			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
-					cal, types);
-
-			Object returnObj = null;
-
-			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
-			}
-			catch (Exception e) {
-				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
-					throw (com.liferay.portal.kernel.exception.PortalException)e;
-				}
-
-				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
-					throw (com.liferay.portal.kernel.exception.SystemException)e;
-				}
-
-				throw new com.liferay.portal.kernel.exception.SystemException(e);
-			}
-
-			return (java.util.List<com.liferay.portlet.calendar.model.CalEvent>)returnObj;
-		}
-		catch (com.liferay.portal.kernel.exception.SystemException se) {
-			_log.error(se, se);
-
-			throw se;
-		}
-	}
-
-	public static boolean hasEvents(HttpPrincipal httpPrincipal, long groupId,
-		java.util.Calendar cal)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		try {
-			MethodKey methodKey = new MethodKey(CalEventServiceUtil.class.getName(),
-					"hasEvents", _hasEventsParameterTypes9);
-
-			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
-					cal);
-
-			Object returnObj = null;
-
-			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
-			}
-			catch (Exception e) {
-				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
-					throw (com.liferay.portal.kernel.exception.PortalException)e;
-				}
-
-				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
-					throw (com.liferay.portal.kernel.exception.SystemException)e;
-				}
-
-				throw new com.liferay.portal.kernel.exception.SystemException(e);
-			}
-
-			return ((Boolean)returnObj).booleanValue();
-		}
-		catch (com.liferay.portal.kernel.exception.SystemException se) {
-			_log.error(se, se);
-
-			throw se;
-		}
-	}
-
-	public static boolean hasEvents(HttpPrincipal httpPrincipal, long groupId,
-		java.util.Calendar cal, java.lang.String type)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		try {
-			MethodKey methodKey = new MethodKey(CalEventServiceUtil.class.getName(),
-					"hasEvents", _hasEventsParameterTypes10);
-
-			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
-					cal, type);
-
-			Object returnObj = null;
-
-			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
-			}
-			catch (Exception e) {
-				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
-					throw (com.liferay.portal.kernel.exception.PortalException)e;
-				}
-
-				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
-					throw (com.liferay.portal.kernel.exception.SystemException)e;
-				}
-
-				throw new com.liferay.portal.kernel.exception.SystemException(e);
-			}
-
-			return ((Boolean)returnObj).booleanValue();
-		}
-		catch (com.liferay.portal.kernel.exception.SystemException se) {
-			_log.error(se, se);
-
-			throw se;
-		}
-	}
-
-	public static boolean hasEvents(HttpPrincipal httpPrincipal, long groupId,
-		java.util.Calendar cal, java.lang.String[] types)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		try {
-			MethodKey methodKey = new MethodKey(CalEventServiceUtil.class.getName(),
-					"hasEvents", _hasEventsParameterTypes11);
-
-			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
-					cal, types);
-
-			Object returnObj = null;
-
-			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
-			}
-			catch (Exception e) {
-				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
-					throw (com.liferay.portal.kernel.exception.PortalException)e;
-				}
-
-				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
-					throw (com.liferay.portal.kernel.exception.SystemException)e;
-				}
-
-				throw new com.liferay.portal.kernel.exception.SystemException(e);
-			}
-
-			return ((Boolean)returnObj).booleanValue();
-		}
-		catch (com.liferay.portal.kernel.exception.SystemException se) {
-			_log.error(se, se);
-
-			throw se;
-		}
-	}
-
 	public static int getEventsCount(HttpPrincipal httpPrincipal, long groupId,
 		java.lang.String[] types)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(CalEventServiceUtil.class.getName(),
-					"getEventsCount", _getEventsCountParameterTypes12);
+					"getEventsCount", _getEventsCountParameterTypes6);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					types);
@@ -536,7 +316,7 @@ public class CalEventServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(CalEventServiceUtil.class.getName(),
-					"importICal4j", _importICal4jParameterTypes13);
+					"importICal4j", _importICal4jParameterTypes7);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					file);
@@ -578,7 +358,7 @@ public class CalEventServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(CalEventServiceUtil.class.getName(),
-					"updateEvent", _updateEventParameterTypes14);
+					"updateEvent", _updateEventParameterTypes8);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, eventId,
 					title, description, location, startDateMonth, startDateDay,
@@ -637,33 +417,15 @@ public class CalEventServiceHttp {
 			long.class
 		};
 	private static final Class<?>[] _getEventsParameterTypes5 = new Class[] {
-			long.class, java.lang.String.class, int.class, int.class
-		};
-	private static final Class<?>[] _getEventsParameterTypes6 = new Class[] {
 			long.class, java.lang.String[].class, int.class, int.class
 		};
-	private static final Class<?>[] _getEventsParameterTypes7 = new Class[] {
-			long.class, java.util.Calendar.class, java.lang.String.class
-		};
-	private static final Class<?>[] _getEventsParameterTypes8 = new Class[] {
-			long.class, java.util.Calendar.class, java.lang.String[].class
-		};
-	private static final Class<?>[] _hasEventsParameterTypes9 = new Class[] {
-			long.class, java.util.Calendar.class
-		};
-	private static final Class<?>[] _hasEventsParameterTypes10 = new Class[] {
-			long.class, java.util.Calendar.class, java.lang.String.class
-		};
-	private static final Class<?>[] _hasEventsParameterTypes11 = new Class[] {
-			long.class, java.util.Calendar.class, java.lang.String[].class
-		};
-	private static final Class<?>[] _getEventsCountParameterTypes12 = new Class[] {
+	private static final Class<?>[] _getEventsCountParameterTypes6 = new Class[] {
 			long.class, java.lang.String[].class
 		};
-	private static final Class<?>[] _importICal4jParameterTypes13 = new Class[] {
+	private static final Class<?>[] _importICal4jParameterTypes7 = new Class[] {
 			long.class, java.io.File.class
 		};
-	private static final Class<?>[] _updateEventParameterTypes14 = new Class[] {
+	private static final Class<?>[] _updateEventParameterTypes8 = new Class[] {
 			long.class, java.lang.String.class, java.lang.String.class,
 			java.lang.String.class, int.class, int.class, int.class, int.class,
 			int.class, int.class, int.class, int.class, int.class, int.class,
