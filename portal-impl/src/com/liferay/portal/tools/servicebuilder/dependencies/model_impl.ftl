@@ -535,7 +535,7 @@ public class ${entity.name}ModelImpl extends BaseModelImpl<${entity.name}> imple
 			return (${entity.name})this;
 		}
 		else {
-			return (${entity.name})Proxy.newProxyInstance(${entity.name}.class.getClassLoader(), new Class[] {${entity.name}.class}, new AutoEscapeBeanHandler(this));
+			return (${entity.name})Proxy.newProxyInstance(_classLoader, _escapedModelProxyInterfaces, new AutoEscapeBeanHandler(this));
 		}
 	}
 
@@ -741,6 +741,9 @@ public class ${entity.name}ModelImpl extends BaseModelImpl<${entity.name}> imple
 
 		return sb.toString();
 	}
+
+	private static ClassLoader _classLoader = ${entity.name}.class.getClassLoader();
+	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {${entity.name}.class};
 
 	<#list entity.regularColList as column>
 		private ${column.type} _${column.name};
