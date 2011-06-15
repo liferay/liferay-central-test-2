@@ -14,10 +14,9 @@
 
 package com.liferay.portal.kernel.servlet;
 
-import com.liferay.portal.kernel.io.unsync.UnsyncPrintWriter;
+import com.liferay.portal.kernel.util.StringPool;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.io.Writer;
 
 import javax.servlet.jsp.JspWriter;
@@ -27,16 +26,10 @@ import javax.servlet.jsp.JspWriter;
  */
 public class PipingJspWriter extends JspWriter {
 
-	public PipingJspWriter(PrintWriter printWriter) {
-		super(NO_BUFFER, false);
-
-		_printWriter = printWriter;
-	}
-
 	public PipingJspWriter(Writer writer) {
 		super(NO_BUFFER, false);
 
-		_printWriter = new UnsyncPrintWriter(writer);
+		_writer = writer;
 	}
 
 	public void clear() throws IOException {
@@ -46,118 +39,141 @@ public class PipingJspWriter extends JspWriter {
 	public void clearBuffer() {
 	}
 
-	public void close() {
-		_printWriter.close();
+	public void close() throws IOException {
+		_writer.close();
 	}
 
-	public void flush() {
-		_printWriter.flush();
+	public void flush() throws IOException {
+		_writer.flush();
 	}
 
 	public int getRemaining() {
 		return 0;
 	}
 
-	public void newLine() {
-		_printWriter.println();
+	public void newLine() throws IOException {
+		_writer.write(_LINE_SEPARATOR);
 	}
 
-	public void print(boolean b) {
-		_printWriter.print(b);
+	public void print(boolean b) throws IOException {
+		if (b) {
+			_writer.write(StringPool.TRUE);
+		}
+		else {
+			_writer.write(StringPool.FALSE);
+		}
 	}
 
-	public void print(char c) {
-		_printWriter.print(c);
+	public void print(char c) throws IOException {
+		_writer.write(c);
 	}
 
-	public void print(char[] chars) {
-		_printWriter.print(chars);
+	public void print(char[] chars) throws IOException {
+		_writer.write(chars);
 	}
 
-	public void print(double d) {
-		_printWriter.print(d);
+	public void print(double d) throws IOException {
+		_writer.write(String.valueOf(d));
 	}
 
-	public void print(float f) {
-		_printWriter.print(f);
+	public void print(float f) throws IOException {
+		_writer.write(String.valueOf(f));
 	}
 
-	public void print(int i) {
-		_printWriter.print(i);
+	public void print(int i) throws IOException {
+		_writer.write(String.valueOf(i));
 	}
 
-	public void print(long l) {
-		_printWriter.print(l);
+	public void print(long l) throws IOException {
+		_writer.write(String.valueOf(l));
 	}
 
-	public void print(Object object) {
-		_printWriter.print(object);
+	public void print(Object object) throws IOException {
+		_writer.write(String.valueOf(object));
 	}
 
-	public void print(String string) {
-		_printWriter.print(string);
+	public void print(String string) throws IOException {
+		_writer.write(string);
 	}
 
-	public void println() {
-		_printWriter.println();
+	public void println() throws IOException {
+		_writer.write(_LINE_SEPARATOR);
 	}
 
-	public void println(boolean b) {
-		_printWriter.println(b);
+	public void println(boolean b) throws IOException {
+		if (b) {
+			_writer.write(StringPool.TRUE);
+		}
+		else {
+			_writer.write(StringPool.FALSE);
+		}
+		_writer.write(_LINE_SEPARATOR);
 	}
 
-	public void println(char c) {
-		_printWriter.println(c);
+	public void println(char c) throws IOException {
+		_writer.write(c);
+		_writer.write(_LINE_SEPARATOR);
 	}
 
-	public void println(char[] chars) {
-		_printWriter.println(chars);
+	public void println(char[] chars) throws IOException {
+		_writer.write(chars);
+		_writer.write(_LINE_SEPARATOR);
 	}
 
-	public void println(double d) {
-		_printWriter.println(d);
+	public void println(double d) throws IOException {
+		_writer.write(String.valueOf(d));
+		_writer.write(_LINE_SEPARATOR);
 	}
 
-	public void println(float f) {
-		_printWriter.println(f);
+	public void println(float f) throws IOException {
+		_writer.write(String.valueOf(f));
+		_writer.write(_LINE_SEPARATOR);
 	}
 
-	public void println(int i) {
-		_printWriter.println(i);
+	public void println(int i) throws IOException {
+		_writer.write(String.valueOf(i));
+		_writer.write(_LINE_SEPARATOR);
 	}
 
-	public void println(long l) {
-		_printWriter.println(l);
+	public void println(long l) throws IOException {
+		_writer.write(String.valueOf(l));
+		_writer.write(_LINE_SEPARATOR);
 	}
 
-	public void println(Object object) {
-		_printWriter.println(object);
+	public void println(Object object) throws IOException {
+		_writer.write(String.valueOf(object));
+		_writer.write(_LINE_SEPARATOR);
 	}
 
-	public void println(String string) {
-		_printWriter.println(string);
+	public void println(String string) throws IOException {
+		_writer.write(string);
+		_writer.write(_LINE_SEPARATOR);
 	}
 
-	public void write(char[] chars) {
-		_printWriter.write(chars);
+	public void write(char[] chars) throws IOException {
+		_writer.write(chars);
 	}
 
-	public void write(char[] chars, int offset, int length) {
-		_printWriter.write(chars, offset, length);
+	public void write(char[] chars, int offset, int length) throws IOException {
+		_writer.write(chars, offset, length);
 	}
 
-	public void write(int c) {
-		_printWriter.write(c);
+	public void write(int c) throws IOException {
+		_writer.write(c);
 	}
 
-	public void write(String string) {
-		_printWriter.write(string);
+	public void write(String string) throws IOException {
+		_writer.write(string);
 	}
 
-	public void write(String string, int offset, int length) {
-		_printWriter.write(string, offset, length);
+	public void write(String string, int offset, int length)
+		throws IOException {
+		_writer.write(string, offset, length);
 	}
 
-	private PrintWriter _printWriter;
+	private static String _LINE_SEPARATOR = System.getProperty(
+		"line.separator");
+
+	private Writer _writer;
 
 }
