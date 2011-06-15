@@ -71,7 +71,7 @@ public interface DLFileEntry extends DLFileEntryModel {
 
 	public boolean hasLock();
 
-	public boolean isLocked();
+	public boolean isCheckedOut();
 
 	public void setExtraSettings(java.lang.String extraSettings);
 

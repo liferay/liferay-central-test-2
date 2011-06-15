@@ -94,6 +94,41 @@ public class DLAppServiceUtil {
 			serviceContext);
 	}
 
+	public static void cancelCheckOut(long fileEntryId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		getService().cancelCheckOut(fileEntryId);
+	}
+
+	public static void checkInFileEntry(long fileEntryId,
+		java.lang.String lockUuid)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		getService().checkInFileEntry(fileEntryId, lockUuid);
+	}
+
+	public static void checkInFileEntry(long fileEntryId, boolean major,
+		java.lang.String changeLog,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		getService()
+			.checkInFileEntry(fileEntryId, major, changeLog, serviceContext);
+	}
+
+	public static void checkOutFileEntry(long fileEntryId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		getService().checkOutFileEntry(fileEntryId);
+	}
+
+	public static com.liferay.portal.kernel.repository.model.FileEntry checkOutFileEntry(
+		long fileEntryId, java.lang.String owner, long expirationTime)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().checkOutFileEntry(fileEntryId, owner, expirationTime);
+	}
+
 	public static com.liferay.portal.kernel.repository.model.Folder copyFolder(
 		long repositoryId, long sourceFolderId, long parentFolderId,
 		java.lang.String name, java.lang.String description,
@@ -390,19 +425,6 @@ public class DLAppServiceUtil {
 		return getService().getSubfolderIds(repositoryId, folderId, recurse);
 	}
 
-	public static void lockFileEntry(long fileEntryId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		getService().lockFileEntry(fileEntryId);
-	}
-
-	public static com.liferay.portal.model.Lock lockFileEntry(
-		long fileEntryId, java.lang.String owner, long expirationTime)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return getService().lockFileEntry(fileEntryId, owner, expirationTime);
-	}
-
 	public static com.liferay.portal.model.Lock lockFolder(long repositoryId,
 		long folderId)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -457,19 +479,6 @@ public class DLAppServiceUtil {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		getService().revertFileEntry(fileEntryId, version, serviceContext);
-	}
-
-	public static void unlockFileEntry(long fileEntryId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		getService().unlockFileEntry(fileEntryId);
-	}
-
-	public static void unlockFileEntry(long fileEntryId,
-		java.lang.String lockUuid)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		getService().unlockFileEntry(fileEntryId, lockUuid);
 	}
 
 	public static void unlockFolder(long repositoryId, long folderId,
@@ -545,12 +554,12 @@ public class DLAppServiceUtil {
 				   .updateFolder(folderId, name, description, serviceContext);
 	}
 
-	public static boolean verifyFileEntryLock(long repositoryId,
+	public static boolean verifyFileEntryCheckOut(long repositoryId,
 		long fileEntryId, java.lang.String lockUuid)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
-				   .verifyFileEntryLock(repositoryId, fileEntryId, lockUuid);
+				   .verifyFileEntryCheckOut(repositoryId, fileEntryId, lockUuid);
 	}
 
 	public static boolean verifyInheritableLock(long repositoryId,

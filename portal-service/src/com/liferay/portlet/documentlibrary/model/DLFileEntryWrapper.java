@@ -620,8 +620,8 @@ public class DLFileEntryWrapper implements DLFileEntry {
 		return _dlFileEntry.hasLock();
 	}
 
-	public boolean isLocked() {
-		return _dlFileEntry.isLocked();
+	public boolean isCheckedOut() {
+		return _dlFileEntry.isCheckedOut();
 	}
 
 	public void setExtraSettingsProperties(

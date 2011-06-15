@@ -105,12 +105,6 @@ public class DLAppHelperLocalServiceUtil {
 		return getService().getNoAssetFileEntries();
 	}
 
-	public static void moveFileEntry(long oldFileEntryId, long newFileEntryId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		getService().moveFileEntry(oldFileEntryId, newFileEntryId);
-	}
-
 	public static com.liferay.portlet.asset.model.AssetEntry updateAsset(
 		long userId,
 		com.liferay.portal.kernel.repository.model.FileEntry fileEntry,

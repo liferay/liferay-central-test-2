@@ -73,6 +73,57 @@ public class DLAppServiceSoap {
 		}
 	}
 
+	public static void cancelCheckOut(long fileEntryId)
+		throws RemoteException {
+		try {
+			DLAppServiceUtil.cancelCheckOut(fileEntryId);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static void checkInFileEntry(long fileEntryId,
+		java.lang.String lockUuid) throws RemoteException {
+		try {
+			DLAppServiceUtil.checkInFileEntry(fileEntryId, lockUuid);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static void checkInFileEntry(long fileEntryId, boolean major,
+		java.lang.String changeLog,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			DLAppServiceUtil.checkInFileEntry(fileEntryId, major, changeLog,
+				serviceContext);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static void checkOutFileEntry(long fileEntryId)
+		throws RemoteException {
+		try {
+			DLAppServiceUtil.checkOutFileEntry(fileEntryId);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static void deleteFileEntry(long fileEntryId)
 		throws RemoteException {
 		try {
@@ -520,18 +571,6 @@ public class DLAppServiceSoap {
 		}
 	}
 
-	public static void lockFileEntry(long fileEntryId)
-		throws RemoteException {
-		try {
-			DLAppServiceUtil.lockFileEntry(fileEntryId);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
 	public static void revertFileEntry(long fileEntryId,
 		java.lang.String version,
 		com.liferay.portal.service.ServiceContext serviceContext)
@@ -539,30 +578,6 @@ public class DLAppServiceSoap {
 		try {
 			DLAppServiceUtil.revertFileEntry(fileEntryId, version,
 				serviceContext);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static void unlockFileEntry(long fileEntryId)
-		throws RemoteException {
-		try {
-			DLAppServiceUtil.unlockFileEntry(fileEntryId);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static void unlockFileEntry(long fileEntryId,
-		java.lang.String lockUuid) throws RemoteException {
-		try {
-			DLAppServiceUtil.unlockFileEntry(fileEntryId, lockUuid);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -615,10 +630,10 @@ public class DLAppServiceSoap {
 		}
 	}
 
-	public static boolean verifyFileEntryLock(long repositoryId,
+	public static boolean verifyFileEntryCheckOut(long repositoryId,
 		long fileEntryId, java.lang.String lockUuid) throws RemoteException {
 		try {
-			boolean returnValue = DLAppServiceUtil.verifyFileEntryLock(repositoryId,
+			boolean returnValue = DLAppServiceUtil.verifyFileEntryCheckOut(repositoryId,
 					fileEntryId, lockUuid);
 
 			return returnValue;
