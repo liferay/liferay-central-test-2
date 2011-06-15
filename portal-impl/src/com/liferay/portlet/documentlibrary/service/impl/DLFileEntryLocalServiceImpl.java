@@ -1102,6 +1102,9 @@ public class DLFileEntryLocalServiceImpl
 			expandoValueLocalService.deleteValues(
 				DLFileVersion.class.getName(),
 				dlFileVersion.getFileVersionId());
+
+			dlDocumentMetadataSetLocalService.deleteDocumentMetadataSets(
+				dlFileVersion.getFileVersionId());
 		}
 
 		// Expando
