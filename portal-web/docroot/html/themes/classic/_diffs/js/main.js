@@ -3,6 +3,10 @@ AUI().ready(
 	function(A) {
 		var navigation = A.one('#navigation');
 
+		if (navigation) {
+			navigation.plug(Liferay.NavigationInteraction);
+		}
+
 		var siteBreadcrumbs = A.one('.site-breadcrumbs');
 
 		if (siteBreadcrumbs) {

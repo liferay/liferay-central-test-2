@@ -205,23 +205,7 @@ body #banner .logo a {
 .nav-menu-style-arrows ul {
 	list-style-image: url(../images/navigation/bullet_selected.png);
 }
-#navigation .yui3-menu .yui3-menu-content {
-    background: transparent;
-    border: none;
-    font-size: 93%;
-    line-height: 1.5;
-    padding: 0;
-}
-#navigation .yui3-dd-drop ul {
-	-moz-border-radius: 4px;
-	-webkit-border-radius: 4px;
-	background: #4E5051;
-	border-radius: 4px;
-}
 
-#navigation .yui3-dd-drop li {
-	padding: 0 10 0 10;
-}
 /* ---------- Portlet wrapper and icons ---------- */
 
 .portlet {

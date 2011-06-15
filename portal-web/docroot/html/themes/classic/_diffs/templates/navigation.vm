@@ -1,7 +1,0 @@
-<nav class="sort-pages modify-pages" id="navigation">
-	<h1>
-		<span>#language("navigation")</span>
-	</h1>
-
-	#aui_drop_down($nav_items)
-</nav>
