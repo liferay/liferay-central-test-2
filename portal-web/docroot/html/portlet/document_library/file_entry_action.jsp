@@ -133,7 +133,6 @@ viewFolderURL.setParameter("folderId", String.valueOf(folderId));
 						modelResource="<%= DLFileEntryConstants.getClassName() %>"
 						modelResourceDescription="<%= HtmlUtil.unescape(fileEntry.getTitle()) %>"
 						resourcePrimKey="<%= String.valueOf(fileEntry.getFileEntryId()) %>"
-						redirect="<%= viewFolderURL.toString() %>"
 						var="permissionsURL"
 					/>
 
@@ -221,7 +220,6 @@ viewFolderURL.setParameter("folderId", String.valueOf(folderId));
 						modelResource="<%= DLFileShortcut.class.getName() %>"
 						modelResourceDescription="<%= fileEntry.getTitle() %>"
 						resourcePrimKey="<%= String.valueOf(fileShortcut.getFileShortcutId()) %>"
-						redirect="<%= viewFolderURL.toString() %>"
 						var="shortcutPermissionsURL"
 					/>
 
