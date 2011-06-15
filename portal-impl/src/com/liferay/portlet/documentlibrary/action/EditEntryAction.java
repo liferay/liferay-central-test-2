@@ -168,24 +168,6 @@ public class EditEntryAction extends PortletAction {
 		return mapping.findForward(getForward(renderRequest, forward));
 	}
 
-	protected void deleteEntries(ActionRequest actionRequest)
-		throws Exception {
-
-		long[] deleteFolderIds = StringUtil.split(
-			ParamUtil.getString(actionRequest, "folderIds"), 0L);
-
-		for (int i = 0; i < deleteFolderIds.length; i++) {
-			DLAppServiceUtil.deleteFolder(deleteFolderIds[i]);
-		}
-
-		long[] deleteFileEntryIds = StringUtil.split(
-			ParamUtil.getString(actionRequest, "fileEntryIds"), 0L);
-
-		for (int i = 0; i < deleteFileEntryIds.length; i++) {
-			DLAppServiceUtil.deleteFileEntry(deleteFileEntryIds[i]);
-		}
-	}
-
 	protected void cancelCheckedOutEntries(ActionRequest actionRequest)
 		throws Exception {
 
@@ -247,6 +229,24 @@ public class EditEntryAction extends PortletAction {
 
 		for (int i = 0; i < fileEntryIds.length; i++) {
 			DLAppServiceUtil.checkOutFileEntry(fileEntryIds[i]);
+		}
+	}
+
+	protected void deleteEntries(ActionRequest actionRequest)
+		throws Exception {
+
+		long[] deleteFolderIds = StringUtil.split(
+			ParamUtil.getString(actionRequest, "folderIds"), 0L);
+
+		for (int i = 0; i < deleteFolderIds.length; i++) {
+			DLAppServiceUtil.deleteFolder(deleteFolderIds[i]);
+		}
+
+		long[] deleteFileEntryIds = StringUtil.split(
+			ParamUtil.getString(actionRequest, "fileEntryIds"), 0L);
+
+		for (int i = 0; i < deleteFileEntryIds.length; i++) {
+			DLAppServiceUtil.deleteFileEntry(deleteFileEntryIds[i]);
 		}
 	}
 

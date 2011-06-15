@@ -105,7 +105,7 @@ User userDisplay = UserLocalServiceUtil.getUserById(fileEntry.getUserId());
 request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 %>
 
-<portlet:actionURL var ="editFileEntry">
+<portlet:actionURL var="editFileEntry">
 	<portlet:param name="struts_action" value="/document_library/edit_file_entry" />
 	<portlet:param name="redirect" value="<%= currentURL %>" />
 	<portlet:param name="fileEntryId" value="<%= String.valueOf(fileEntry.getFileEntryId()) %>" />
