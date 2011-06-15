@@ -855,7 +855,7 @@ public class JavadocFormatter {
 
 		String methodName = javaMethod.getName();
 		JavaParameter[] methodParams = javaMethod.getParameters();
-		
+
 		Type[] paramTypes = new Type[methodParams.length];
 		for (int i = 0; i < methodParams.length; i++) {
 			paramTypes[i] = methodParams[i].getType();
@@ -1043,7 +1043,7 @@ public class JavadocFormatter {
 				methodElementsMap, javaMethod);
 
 			// Handle override tag insertion
-			
+
 			if (!_hasAnnotation(javaMethod, "Override")) {
 				if (_isOverrideMethod(javaClass, javaMethod, ancestors)) {
 
