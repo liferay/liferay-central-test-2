@@ -34,6 +34,7 @@ import com.thoughtworks.qdox.model.DocletTag;
 import com.thoughtworks.qdox.model.JavaClass;
 import com.thoughtworks.qdox.model.JavaField;
 import com.thoughtworks.qdox.model.JavaMethod;
+import com.thoughtworks.qdox.model.JavaPackage;
 import com.thoughtworks.qdox.model.JavaParameter;
 import com.thoughtworks.qdox.model.Type;
 
@@ -427,14 +428,14 @@ public class JavadocFormatter {
 		}
 	}
 
-	private List<JavaClass> _getAncestors(JavaClass javaClass) {
-		List<JavaClass> ancestors = new ArrayList<JavaClass>();
+	private List<JavaClass> _getAncestorJavaClasses(JavaClass javaClass) {
+		List<JavaClass> ancestorJavaClasses = new ArrayList<JavaClass>();
 
 		while ((javaClass = javaClass.getSuperJavaClass()) != null) {
-			ancestors.add(javaClass);
+			ancestorJavaClasses.add(javaClass);
 		}
 
-		return ancestors;
+		return ancestorJavaClasses;
 	}
 
 	private String _getCDATA(AbstractJavaEntity abstractJavaEntity) {
@@ -815,19 +816,21 @@ public class JavadocFormatter {
 	}
 
 	private boolean _hasAnnotation(
-			AbstractBaseJavaEntity entity, String annotationName) {
+		AbstractBaseJavaEntity abstractBaseJavaEntity, String annotationName) {
 
-		Annotation[] annotations = entity.getAnnotations();
+		Annotation[] annotations = abstractBaseJavaEntity.getAnnotations();
 
-		if (annotations != null) {
-			for (int i = 0; i < annotations.length; i++) {
+		if (annotations == null) {
+			return false;
+		}
 
-				JavaClass annotation =
-					annotations[i].getType().getJavaClass();
+		for (int i = 0; i < annotations.length; i++) {
+			Type type = annotations[i].getType();
 
-				if (annotation.getName().equals(annotationName)) {
-					return true;
-				}
+			JavaClass javaClass = type.getJavaClass();
+
+			if (annotationName.equals(javaClass.getName())) {
+				return true;
 			}
 		}
 
@@ -844,48 +847,58 @@ public class JavadocFormatter {
 	}
 
 	private boolean  _isOverrideMethod(
-			JavaClass javaClass, JavaMethod javaMethod,
-			Collection<JavaClass> ancestors) {
+		JavaClass javaClass, JavaMethod javaMethod,
+		Collection<JavaClass> ancestorJavaClasses) {
 
-		if (javaClass.isInterface() || javaMethod.isStatic() ||
-			javaMethod.isPrivate() || javaMethod.isConstructor()) {
+		if (javaClass.isInterface() || javaMethod.isConstructor() ||
+			javaMethod.isPrivate() || javaMethod.isStatic()) {
 
 			return false;
 		}
 
 		String methodName = javaMethod.getName();
-		JavaParameter[] methodParams = javaMethod.getParameters();
 
-		Type[] paramTypes = new Type[methodParams.length];
-		for (int i = 0; i < methodParams.length; i++) {
-			paramTypes[i] = methodParams[i].getType();
+		JavaParameter[] javaParameters = javaMethod.getParameters();
+
+		Type[] types = new Type[javaParameters.length];
+
+		for (int i = 0; i < javaParameters.length; i++) {
+			types[i] = javaParameters[i].getType();
 		}
 
 		// Check for matching method in each ancestor
 
-		for (JavaClass ancestor : ancestors) {
-			JavaMethod ancestorMethod =
-				ancestor.getMethodBySignature(methodName, paramTypes);
+		for (JavaClass ancestorJavaClass : ancestorJavaClasses) {
+			JavaMethod ancestorJavaMethod =
+				ancestorJavaClass.getMethodBySignature(methodName, types);
 
-			if (ancestorMethod == null) {
+			if (ancestorJavaMethod == null) {
 				continue;
 			}
 
-			boolean isSamePackage = false;
+			boolean samePackage = false;
 
-			if (Validator.isNotNull(ancestor.getPackage())) {
-				isSamePackage = ancestor.getPackage().equals(
+			JavaPackage ancestorJavaPackage = ancestorJavaClass.getPackage(); 
+
+			if (ancestorJavaPackage != null) {
+				samePackage = ancestorJavaPackage.equals(
 					javaClass.getPackage());
 			}
 
 			// Check if the method is in scope
 
-			if (isSamePackage) {
-				return !ancestorMethod.isPrivate();
+			if (samePackage) {
+				return !ancestorJavaMethod.isPrivate();
 			}
 			else {
-				return ancestorMethod.isPublic() ||
-					ancestorMethod.isProtected();
+				if (ancestorJavaMethod.isProtected() ||
+					ancestorJavaMethod.isPublic()) {
+
+					return true;
+				}
+				else {
+					return false;
+				}
 			}
 		}
 
@@ -961,6 +974,7 @@ public class JavadocFormatter {
 
 		if (fileName.endsWith("JavadocFormatter.java") ||
 			fileName.endsWith("SourceFormatter.java") ||
+
 			_isGenerated(originalContent)) {
 
 			return;
@@ -1012,7 +1026,8 @@ public class JavadocFormatter {
 		JavaClass javaClass = _getJavaClass(
 			fileName, new UnsyncStringReader(javadocLessContent));
 
-		List<JavaClass> ancestors = _getAncestors(javaClass);
+		List<JavaClass> ancestorJavaClasses = _getAncestorJavaClasses(
+			javaClass);
 
 		Element rootElement = document.getRootElement();
 
@@ -1039,13 +1054,14 @@ public class JavadocFormatter {
 				continue;
 			}
 
-			String javaMethodComment = _getJavaMethodComment(lines,
-				methodElementsMap, javaMethod);
+			String javaMethodComment = _getJavaMethodComment(
+				lines, methodElementsMap, javaMethod);
 
 			// Handle override tag insertion
 
 			if (!_hasAnnotation(javaMethod, "Override")) {
-				if (_isOverrideMethod(javaClass, javaMethod, ancestors)) {
+				if (_isOverrideMethod(
+						javaClass, javaMethod, ancestorJavaClasses)) {
 
 					String overrideLine =
 						_getIndent(lines, javaMethod) + "@Override\n";
@@ -1059,9 +1075,7 @@ public class JavadocFormatter {
 				}
 			}
 
-			commentsMap.put(
-				javaMethod.getLineNumber(),
-				javaMethodComment);
+			commentsMap.put(javaMethod.getLineNumber(), javaMethodComment);
 		}
 
 		Map<String, Element> fieldElementsMap = new HashMap<String, Element>();
