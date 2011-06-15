@@ -354,6 +354,7 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 				long companyId = webDavRequest.getCompanyId();
 				long groupId = webDavRequest.getGroupId();
 				long parentFolderId = getParentFolderId(companyId, pathArray);
+				String title = WebDAVUtil.getResourceName(pathArray);
 
 				String contentType = GetterUtil.get(
 					request.getHeader(HttpHeaders.CONTENT_TYPE),
@@ -364,7 +365,6 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 						request.getInputStream(), title);
 				}
 
-				String title = WebDAVUtil.getResourceName(pathArray);
 				String description = StringPool.BLANK;
 				String changeLog = StringPool.BLANK;
 
