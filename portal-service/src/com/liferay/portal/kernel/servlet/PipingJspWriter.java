@@ -107,6 +107,7 @@ public class PipingJspWriter extends JspWriter {
 		else {
 			_writer.write(StringPool.FALSE);
 		}
+
 		_writer.write(_LINE_SEPARATOR);
 	}
 
@@ -168,6 +169,7 @@ public class PipingJspWriter extends JspWriter {
 
 	public void write(String string, int offset, int length)
 		throws IOException {
+
 		_writer.write(string, offset, length);
 	}
 
