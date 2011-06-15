@@ -24,7 +24,9 @@ public interface ${entity.name} extends ${entity.name}Model {
 			<#assign annotations = method.annotations>
 
 			<#list annotations as annotation>
-				${annotation.toString()}
+				<#if annotation.type.javaClass.name != "Override">
+					${annotation.toString()}
+				</#if>
 			</#list>
 
 			public ${serviceBuilder.getTypeGenericsName(method.returns)} ${method.name} (

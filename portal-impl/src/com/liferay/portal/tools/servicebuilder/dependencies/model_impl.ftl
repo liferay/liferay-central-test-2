@@ -531,6 +531,7 @@ public class ${entity.name}ModelImpl extends BaseModelImpl<${entity.name}> imple
 		}
 	</#if>
 
+	@Override
 	public ${entity.name} toEscapedModel() {
 		if (isEscapedModel()) {
 			return (${entity.name})this;
@@ -541,6 +542,7 @@ public class ${entity.name}ModelImpl extends BaseModelImpl<${entity.name}> imple
 	}
 
 	<#if (entity.PKClassName == "long") && !stringUtil.startsWith(entity.name, "Expando")>
+		@Override
 		public ExpandoBridge getExpandoBridge() {
 			if (_expandoBridge == null) {
 				_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(
@@ -557,11 +559,13 @@ public class ${entity.name}ModelImpl extends BaseModelImpl<${entity.name}> imple
 			return _expandoBridge;
 		}
 
+		@Override
 		public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
 			getExpandoBridge().setAttributes(serviceContext);
 		}
 	</#if>
 
+	@Override
 	public Object clone() {
 		${entity.name}Impl ${entity.varName}Impl = new ${entity.name}Impl();
 
@@ -646,6 +650,7 @@ public class ${entity.name}ModelImpl extends BaseModelImpl<${entity.name}> imple
 		</#if>
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		if (obj == null) {
 			return false;
@@ -675,6 +680,7 @@ public class ${entity.name}ModelImpl extends BaseModelImpl<${entity.name}> imple
 		}
 	}
 
+	@Override
 	public int hashCode() {
 		<#if entity.hasPrimitivePK(false)>
 			<#if entity.PKClassName == "int">
@@ -687,6 +693,7 @@ public class ${entity.name}ModelImpl extends BaseModelImpl<${entity.name}> imple
 		</#if>
 	}
 
+	@Override
 	public void resetOriginalValues() {
 		<#list entity.regularColList as column>
 			<#if column.isFetchFinderPath() || ((parentPKColumn != "") && (parentPKColumn.name == column.name))>
@@ -705,6 +712,7 @@ public class ${entity.name}ModelImpl extends BaseModelImpl<${entity.name}> imple
 		</#list>
 	}
 
+	@Override
 	public String toString() {
 		StringBundler sb = new StringBundler(${entity.regularColList?size * 2 + 1});
 
