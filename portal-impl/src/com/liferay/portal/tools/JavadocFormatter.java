@@ -44,6 +44,7 @@ import java.io.FileInputStream;
 import java.io.Reader;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -84,7 +85,7 @@ public class JavadocFormatter {
 		String limit = (String)cmdLineParser.getOptionValue(limitOption);
 		String init = (String)cmdLineParser.getOptionValue(initOption);
 
-		if (!init.startsWith("$")) {
+		if (Validator.isNotNull(init) && !init.startsWith("$")) {
 			_initializeMissingJavadocs = GetterUtil.getBoolean(init);
 		}
 
@@ -92,9 +93,7 @@ public class JavadocFormatter {
 
 		ds.setBasedir(_basedir);
 		ds.setExcludes(
-			new String[] {
-				"**\\classes\\**", "**\\portal-client\\**", "**\\tools\\**"
-			});
+			new String[] {"**\\classes\\**", "**\\portal-client\\**"});
 
 		List<String> includes = new ArrayList<String>();
 
@@ -123,7 +122,7 @@ public class JavadocFormatter {
 		if ((fileNames.length == 0) && Validator.isNotNull(limit) &&
 			!limit.startsWith("$")) {
 
-			StringBuilder sb = new StringBuilder("Limit file not found.");
+			StringBuilder sb = new StringBuilder("Limit file not found: ");
 
 			sb.append(limit);
 
@@ -426,6 +425,16 @@ public class JavadocFormatter {
 		for (Type exception : exceptions) {
 			_addThrowsElement(methodElement, exception, throwsDocletTags);
 		}
+	}
+
+	private List<JavaClass> _getAncestors(JavaClass javaClass) {
+		List<JavaClass> ancestors = new ArrayList<JavaClass>();
+
+		while ((javaClass = javaClass.getSuperJavaClass()) != null) {
+			ancestors.add(javaClass);
+		}
+
+		return ancestors;
 	}
 
 	private String _getCDATA(AbstractJavaEntity abstractJavaEntity) {
@@ -805,6 +814,26 @@ public class JavadocFormatter {
 		return indent;
 	}
 
+	private boolean _hasAnnotation(
+			AbstractBaseJavaEntity entity, String annotationName) {
+
+		Annotation[] annotations = entity.getAnnotations();
+
+		if (annotations != null) {
+			for (int i = 0; i < annotations.length; i++) {
+
+				JavaClass annotation =
+					annotations[i].getType().getJavaClass();
+
+				if (annotation.getName().equals(annotationName)) {
+					return true;
+				}
+			}
+		}
+
+		return false;
+	}
+
 	private boolean _isGenerated(String content) {
 		if (content.contains("* @generated") || content.contains("$ANTLR")) {
 			return true;
@@ -812,6 +841,55 @@ public class JavadocFormatter {
 		else {
 			return false;
 		}
+	}
+
+	private boolean  _isOverrideMethod(
+			JavaClass javaClass, JavaMethod javaMethod,
+			Collection<JavaClass> ancestors) {
+
+		if (javaClass.isInterface() || javaMethod.isStatic() ||
+			javaMethod.isPrivate() || javaMethod.isConstructor()) {
+
+			return false;
+		}
+
+		String methodName = javaMethod.getName();
+		JavaParameter[] methodParams = javaMethod.getParameters();
+		
+		Type[] paramTypes = new Type[methodParams.length];
+		for (int i = 0; i < methodParams.length; i++) {
+			paramTypes[i] = methodParams[i].getType();
+		}
+
+		// Check for matching method in each ancestor
+
+		for (JavaClass ancestor : ancestors) {
+			JavaMethod ancestorMethod =
+				ancestor.getMethodBySignature(methodName, paramTypes);
+
+			if (ancestorMethod == null) {
+				continue;
+			}
+
+			boolean isSamePackage = false;
+
+			if (Validator.isNotNull(ancestor.getPackage())) {
+				isSamePackage = ancestor.getPackage().equals(
+					javaClass.getPackage());
+			}
+
+			// Check if the method is in scope
+
+			if (isSamePackage) {
+				return !ancestorMethod.isPrivate();
+			}
+			else {
+				return ancestorMethod.isPublic() ||
+					ancestorMethod.isProtected();
+			}
+		}
+
+		return false;
 	}
 
 	private String _removeJavadocFromJava(
@@ -881,7 +959,8 @@ public class JavadocFormatter {
 
 		String originalContent = new String(bytes);
 
-		if (!fileName.endsWith("JavadocFormatter.java") &&
+		if (fileName.endsWith("JavadocFormatter.java") ||
+			fileName.endsWith("SourceFormatter.java") ||
 			_isGenerated(originalContent)) {
 
 			return;
@@ -933,6 +1012,8 @@ public class JavadocFormatter {
 		JavaClass javaClass = _getJavaClass(
 			fileName, new UnsyncStringReader(javadocLessContent));
 
+		List<JavaClass> ancestors = _getAncestors(javaClass);
+
 		Element rootElement = document.getRootElement();
 
 		Map<Integer, String> commentsMap = new TreeMap<Integer, String>();
@@ -958,9 +1039,29 @@ public class JavadocFormatter {
 				continue;
 			}
 
+			String javaMethodComment = _getJavaMethodComment(lines,
+				methodElementsMap, javaMethod);
+
+			// Handle override tag insertion
+			
+			if (!_hasAnnotation(javaMethod, "Override")) {
+				if (_isOverrideMethod(javaClass, javaMethod, ancestors)) {
+
+					String overrideLine =
+						_getIndent(lines, javaMethod) + "@Override\n";
+
+					if (Validator.isNotNull(javaMethodComment)) {
+						javaMethodComment =	javaMethodComment + overrideLine;
+					}
+					else {
+						javaMethodComment = overrideLine;
+					}
+				}
+			}
+
 			commentsMap.put(
 				javaMethod.getLineNumber(),
-				_getJavaMethodComment(lines, methodElementsMap, javaMethod));
+				javaMethodComment);
 		}
 
 		Map<String, Element> fieldElementsMap = new HashMap<String, Element>();
