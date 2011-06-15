@@ -77,8 +77,6 @@ public class PortletKeys {
 
 	public static final String ENTERPRISE_ADMIN_MONITORING = "131";
 
-	public static final String ENTERPRISE_ADMIN_ORGANIZATIONS = "126";
-
 	public static final String ENTERPRISE_ADMIN_PASSWORD_POLICIES = "129";
 
 	public static final String ENTERPRISE_ADMIN_PLUGINS = "132";
@@ -86,8 +84,6 @@ public class PortletKeys {
 	public static final String ENTERPRISE_ADMIN_ROLES = "128";
 
 	public static final String ENTERPRISE_ADMIN_SETTINGS = "130";
-
-	public static final String ENTERPRISE_ADMIN_USER_GROUPS = "127";
 
 	public static final String ENTERPRISE_ADMIN_USERS = "125";
 

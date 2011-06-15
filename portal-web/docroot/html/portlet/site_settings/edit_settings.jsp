@@ -117,7 +117,7 @@ request.setAttribute("edit_settings.jsp-liveGroupId", new Long(liveGroupId));
 request.setAttribute("edit_settings.jsp-liveGroupTypeSettings", liveGroupTypeSettings);
 %>
 
-<c:if test="<%= portletName.equals(PortletKeys.COMMUNITIES) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN_COMMUNITIES) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN_ORGANIZATIONS) %>">
+<c:if test="<%= portletName.equals(PortletKeys.COMMUNITIES) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN_COMMUNITIES) %>">
 	<liferay-ui:header
 		backURL="<%= backURL %>"
 		title="<%= liveGroup.getDescriptiveName() %>"

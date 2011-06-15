@@ -38,11 +38,8 @@ if (ppid.equals(PortletKeys.PORTLET_CONFIGURATION)) {
 if (ppid.equals(PortletKeys.EXPANDO)) {
 	String modelResource = ParamUtil.getString(request, PortalUtil.getPortletNamespace(ppid) + "modelResource");
 
-	if (modelResource.equals(User.class.getName())) {
+	if (modelResource.equals(User.class.getName()) || modelResource.equals(Organization.class.getName())) {
 		ppid = PortletKeys.ENTERPRISE_ADMIN_USERS;
-	}
-	else if (modelResource.equals(Organization.class.getName())) {
-		ppid = PortletKeys.ENTERPRISE_ADMIN_ORGANIZATIONS;
 	}
 }
 

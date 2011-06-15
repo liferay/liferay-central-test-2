@@ -41,7 +41,7 @@ portlets = ListUtil.sort(portlets, new PortletTitleComparator(application, local
 					<optgroup label="<liferay-ui:message key="administration" />">
 
 						<%
-						editPermissionsURL.setParameter("portletResource", PortletKeys.ENTERPRISE_ADMIN_ORGANIZATIONS);
+						editPermissionsURL.setParameter("portletResource", PortletKeys.ENTERPRISE_ADMIN_USERS);
 						editPermissionsURL.setParameter("showModelResources", "1");
 						%>
 
@@ -254,19 +254,17 @@ private static final String[] _COMMUNITY_PORTLETS = {
 };
 
 private static final String[] _ORGANIZATION_PORTLETS = {
-	PortletKeys.ENTERPRISE_ADMIN_ORGANIZATIONS,
+	PortletKeys.ENTERPRISE_ADMIN_USERS,
 };
 
 private static final String[] _PORTAL_PORTLETS = {
 	PortletKeys.ENTERPRISE_ADMIN,
 	PortletKeys.ENTERPRISE_ADMIN_COMMUNITIES,
 	PortletKeys.ENTERPRISE_ADMIN_MONITORING,
-	PortletKeys.ENTERPRISE_ADMIN_ORGANIZATIONS,
 	PortletKeys.ENTERPRISE_ADMIN_PASSWORD_POLICIES,
 	PortletKeys.ENTERPRISE_ADMIN_PLUGINS,
 	PortletKeys.ENTERPRISE_ADMIN_ROLES,
 	PortletKeys.ENTERPRISE_ADMIN_SETTINGS,
-	PortletKeys.ENTERPRISE_ADMIN_USER_GROUPS,
 	PortletKeys.ENTERPRISE_ADMIN_USERS
 };
 
