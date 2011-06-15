@@ -167,6 +167,9 @@ create index IX_C4F283C8 on DDMTemplate (type_);
 create index IX_F2A243A7 on DDMTemplate (uuid_);
 create unique index IX_1AA75CE3 on DDMTemplate (uuid_, groupId);
 
+create index IX_9B3F8F9D on DLContent (companyId, portletId, repositoryId, path_);
+create unique index IX_19EC270B on DLContent (companyId, portletId, repositoryId, path_, version);
+
 create unique index IX_D8B1BFBC on DLDocumentMetadataSet (DDMStructureId, fileVersionId);
 create index IX_5598211A on DLDocumentMetadataSet (documentTypeId);
 create index IX_18D42171 on DLDocumentMetadataSet (fileVersionId);

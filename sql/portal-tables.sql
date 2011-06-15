@@ -515,6 +515,18 @@ create table DDMTemplate (
 	script TEXT null
 );
 
+create table DLContent (
+	contentId LONG not null primary key,
+	groupId LONG,
+	companyId LONG,
+	portletId VARCHAR(75) null,
+	repositoryId LONG,
+	path_ VARCHAR(75) null,
+	version VARCHAR(75) null,
+	data_ BLOB,
+	size_ LONG
+);
+
 create table DLDocumentMetadataSet (
 	uuid_ VARCHAR(75) null,
 	documentMetadataSetId LONG not null primary key,

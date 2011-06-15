@@ -7986,6 +7986,8 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 		FinderCacheUtil.removeCache(FINDER_CLASS_NAME_LIST);
 	}
 
+	@BeanReference(type = DLContentPersistence.class)
+	protected DLContentPersistence dlContentPersistence;
 	@BeanReference(type = DLDocumentMetadataSetPersistence.class)
 	protected DLDocumentMetadataSetPersistence dlDocumentMetadataSetPersistence;
 	@BeanReference(type = DLDocumentTypePersistence.class)

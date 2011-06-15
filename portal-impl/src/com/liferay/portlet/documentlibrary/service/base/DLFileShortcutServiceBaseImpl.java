@@ -43,6 +43,7 @@ import com.liferay.portlet.documentlibrary.model.DLFileShortcut;
 import com.liferay.portlet.documentlibrary.service.DLAppHelperLocalService;
 import com.liferay.portlet.documentlibrary.service.DLAppLocalService;
 import com.liferay.portlet.documentlibrary.service.DLAppService;
+import com.liferay.portlet.documentlibrary.service.DLContentLocalService;
 import com.liferay.portlet.documentlibrary.service.DLDocumentMetadataSetLocalService;
 import com.liferay.portlet.documentlibrary.service.DLDocumentTypeLocalService;
 import com.liferay.portlet.documentlibrary.service.DLDocumentTypeService;
@@ -53,6 +54,8 @@ import com.liferay.portlet.documentlibrary.service.DLFileShortcutLocalService;
 import com.liferay.portlet.documentlibrary.service.DLFileShortcutService;
 import com.liferay.portlet.documentlibrary.service.DLFolderLocalService;
 import com.liferay.portlet.documentlibrary.service.DLFolderService;
+import com.liferay.portlet.documentlibrary.service.persistence.DLContentFinder;
+import com.liferay.portlet.documentlibrary.service.persistence.DLContentPersistence;
 import com.liferay.portlet.documentlibrary.service.persistence.DLDocumentMetadataSetPersistence;
 import com.liferay.portlet.documentlibrary.service.persistence.DLDocumentTypeFinder;
 import com.liferay.portlet.documentlibrary.service.persistence.DLDocumentTypePersistence;
@@ -140,6 +143,62 @@ public abstract class DLFileShortcutServiceBaseImpl extends PrincipalBean
 	public void setDLAppHelperLocalService(
 		DLAppHelperLocalService dlAppHelperLocalService) {
 		this.dlAppHelperLocalService = dlAppHelperLocalService;
+	}
+
+	/**
+	 * Returns the d l content local service.
+	 *
+	 * @return the d l content local service
+	 */
+	public DLContentLocalService getDLContentLocalService() {
+		return dlContentLocalService;
+	}
+
+	/**
+	 * Sets the d l content local service.
+	 *
+	 * @param dlContentLocalService the d l content local service
+	 */
+	public void setDLContentLocalService(
+		DLContentLocalService dlContentLocalService) {
+		this.dlContentLocalService = dlContentLocalService;
+	}
+
+	/**
+	 * Returns the d l content persistence.
+	 *
+	 * @return the d l content persistence
+	 */
+	public DLContentPersistence getDLContentPersistence() {
+		return dlContentPersistence;
+	}
+
+	/**
+	 * Sets the d l content persistence.
+	 *
+	 * @param dlContentPersistence the d l content persistence
+	 */
+	public void setDLContentPersistence(
+		DLContentPersistence dlContentPersistence) {
+		this.dlContentPersistence = dlContentPersistence;
+	}
+
+	/**
+	 * Returns the d l content finder.
+	 *
+	 * @return the d l content finder
+	 */
+	public DLContentFinder getDLContentFinder() {
+		return dlContentFinder;
+	}
+
+	/**
+	 * Sets the d l content finder.
+	 *
+	 * @param dlContentFinder the d l content finder
+	 */
+	public void setDLContentFinder(DLContentFinder dlContentFinder) {
+		this.dlContentFinder = dlContentFinder;
 	}
 
 	/**
@@ -896,6 +955,12 @@ public abstract class DLFileShortcutServiceBaseImpl extends PrincipalBean
 	protected DLAppService dlAppService;
 	@BeanReference(type = DLAppHelperLocalService.class)
 	protected DLAppHelperLocalService dlAppHelperLocalService;
+	@BeanReference(type = DLContentLocalService.class)
+	protected DLContentLocalService dlContentLocalService;
+	@BeanReference(type = DLContentPersistence.class)
+	protected DLContentPersistence dlContentPersistence;
+	@BeanReference(type = DLContentFinder.class)
+	protected DLContentFinder dlContentFinder;
 	@BeanReference(type = DLDocumentMetadataSetLocalService.class)
 	protected DLDocumentMetadataSetLocalService dlDocumentMetadataSetLocalService;
 	@BeanReference(type = DLDocumentMetadataSetPersistence.class)

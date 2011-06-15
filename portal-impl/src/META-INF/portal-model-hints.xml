@@ -1240,6 +1240,17 @@
 		<field name="firstReminder" type="int" />
 		<field name="secondReminder" type="int" />
 	</model>
+	<model name="com.liferay.portlet.documentlibrary.model.DLContent">
+		<field name="contentId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="portletId" type="String" />
+		<field name="repositoryId" type="long" />
+		<field name="path" type="String" />
+		<field name="version" type="String" />
+		<field name="data" type="Blob" />
+		<field name="size" type="long" />
+	</model>
 	<model name="com.liferay.portlet.documentlibrary.model.DLDocumentMetadataSet">
 		<field name="uuid" type="String" />
 		<field name="documentMetadataSetId" type="long" />

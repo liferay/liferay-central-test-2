@@ -1616,6 +1616,27 @@
 			<transient name="userUuid" />
 		</attributes>
 	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portlet.documentlibrary.model.impl.DLContentModelImpl">
+		<attributes>
+			<id name="contentId" />
+			<basic name="groupId" />
+			<basic name="companyId" />
+			<basic name="portletId" />
+			<basic name="repositoryId" />
+			<basic name="path">
+				<column name="PATH_" />
+			</basic>
+			<basic name="version" />
+			<basic name="data">
+				<column name="DATA_" />
+			</basic>
+			<basic name="size">
+				<column name="SIZE_" />
+			</basic>
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
 	<mapped-superclass class="com.liferay.portlet.documentlibrary.model.impl.DLDocumentMetadataSetModelImpl">
 		<attributes>
 			<id name="documentMetadataSetId" />
@@ -3613,6 +3634,10 @@
 		<attributes>
 			<transient name="recurrenceObj" />
 		</attributes>
+	</entity>
+	<entity class="com.liferay.portlet.documentlibrary.model.impl.DLContentImpl" name="DLContent">
+		<table name="DLContent" />
+		<attributes />
 	</entity>
 	<entity class="com.liferay.portlet.documentlibrary.model.impl.DLDocumentMetadataSetImpl" name="DLDocumentMetadataSet">
 		<table name="DLDocumentMetadataSet" />

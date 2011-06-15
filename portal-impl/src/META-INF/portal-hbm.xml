@@ -89,6 +89,7 @@
 	<import class="com.liferay.portlet.calendar.model.CalEvent" />
 	<import class="com.liferay.portlet.documentlibrary.model.DLApp" />
 	<import class="com.liferay.portlet.documentlibrary.model.DLAppHelper" />
+	<import class="com.liferay.portlet.documentlibrary.model.DLContent" />
 	<import class="com.liferay.portlet.documentlibrary.model.DLDocumentMetadataSet" />
 	<import class="com.liferay.portlet.documentlibrary.model.DLDocumentType" />
 	<import class="com.liferay.portlet.documentlibrary.model.DLFileEntry" />
@@ -1324,12 +1325,26 @@
 		<property name="firstReminder" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
 		<property name="secondReminder" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
 	</class>
+	<class name="com.liferay.portlet.documentlibrary.model.impl.DLContentImpl" table="DLContent">
+		<cache usage="read-write" />
+		<id name="contentId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="portletId" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="repositoryId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="path" type="com.liferay.portal.dao.orm.hibernate.StringType" column="path_" />
+		<property name="version" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="data" type="org.hibernate.type.BlobType" column="data_" lazy="true" />
+		<property name="size" type="com.liferay.portal.dao.orm.hibernate.LongType" column="size_" />
+	</class>
 	<class name="com.liferay.portlet.documentlibrary.model.impl.DLDocumentMetadataSetImpl" table="DLDocumentMetadataSet">
 		<cache usage="read-write" />
 		<id name="documentMetadataSetId" type="long">
 			<generator class="assigned" />
 		</id>
-		<property name="uuid" column="uuid_" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="uuid" type="com.liferay.portal.dao.orm.hibernate.StringType" column="uuid_" />
 		<property name="classNameId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="classPK" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="DDMStructureId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
@@ -1355,7 +1370,7 @@
 		<id name="fileEntryId" type="long">
 			<generator class="assigned" />
 		</id>
-		<property name="uuid" column="uuid_" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="uuid" type="com.liferay.portal.dao.orm.hibernate.StringType" column="uuid_" />
 		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
@@ -1374,7 +1389,7 @@
 		<property name="extraSettings" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="documentTypeId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="version" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="size" column="size_" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="size" type="com.liferay.portal.dao.orm.hibernate.LongType" column="size_" />
 		<property name="readCount" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
 	</class>
 	<class name="com.liferay.portlet.documentlibrary.model.impl.DLFileRankImpl" table="DLFileRank">
@@ -1393,7 +1408,7 @@
 		<id name="fileShortcutId" type="long">
 			<generator class="assigned" />
 		</id>
-		<property name="uuid" column="uuid_" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="uuid" type="com.liferay.portal.dao.orm.hibernate.StringType" column="uuid_" />
 		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
@@ -1428,7 +1443,7 @@
 		<property name="extraSettings" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="documentTypeId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="version" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="size" column="size_" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="size" type="com.liferay.portal.dao.orm.hibernate.LongType" column="size_" />
 		<property name="status" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
 		<property name="statusByUserId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="statusByUserName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
@@ -1439,7 +1454,7 @@
 		<id name="folderId" type="long">
 			<generator class="assigned" />
 		</id>
-		<property name="uuid" column="uuid_" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="uuid" type="com.liferay.portal.dao.orm.hibernate.StringType" column="uuid_" />
 		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
