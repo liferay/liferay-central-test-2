@@ -339,6 +339,13 @@ public class DDLRecordLocalServiceUtil {
 		return getService().getRecordsCount(recordSetId, status);
 	}
 
+	public static com.liferay.portlet.dynamicdatalists.model.DDLRecordVersion getRecordVersion(
+		long recordId, java.lang.String version)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().getRecordVersion(recordId, version);
+	}
+
 	public static void updateAsset(long userId,
 		com.liferay.portlet.dynamicdatalists.model.DDLRecord record,
 		com.liferay.portlet.dynamicdatalists.model.DDLRecordVersion recordVersion,
