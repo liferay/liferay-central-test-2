@@ -14,8 +14,12 @@
 
 package com.liferay.portal.service.persistence;
 
+import com.liferay.portal.kernel.dao.jdbc.OutputBlob;
+import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayInputStream;
 import com.liferay.portal.util.BaseTestCase;
 import com.liferay.portal.util.PropsValues;
+
+import java.sql.Blob;
 
 /**
  * @author Brian Wing Shun Chan
@@ -32,6 +36,15 @@ public class BasePersistenceTestCase extends BaseTestCase {
 		super.tearDown();
 
 		PropsValues.SPRING_HIBERNATE_SESSION_DELEGATED = true;
+	}
+
+	protected Blob randomBlob() throws Exception {
+		String randomString = randomString();
+
+		byte[] randomBytes = randomString.getBytes();
+
+		return new OutputBlob(
+			new UnsyncByteArrayInputStream(randomBytes), randomBytes.length);
 	}
 
 }

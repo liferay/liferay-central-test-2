@@ -35,6 +35,45 @@
 		<reference package-path="com.liferay.portlet.ratings" entity="RatingsStats" />
 		<reference package-path="com.liferay.portlet.social" entity="SocialActivity" />
 	</entity>
+	<entity name="DLContent" local-service="true" remote-service="false">
+
+		<!-- PK fields -->
+
+		<column name="contentId" type="long" primary="true" />
+
+		<!-- Group instance -->
+
+		<column name="groupId" type="long" />
+
+		<!-- Audit fields -->
+
+		<column name="companyId" type="long" />
+
+		<!-- Other fields -->
+
+		<column name="portletId" type="String" />
+		<column name="repositoryId" type="long" />
+		<column name="path" type="String" />
+		<column name="version" type="String" />
+		<column name="data" type="Blob" />
+		<column name="size" type="long" />
+
+		<!-- Finder methods -->
+
+		<finder name="C_P_R_P" return-type="Collection">
+			<finder-column name="companyId" />
+			<finder-column name="portletId" />
+			<finder-column name="repositoryId" />
+			<finder-column name="path" />
+		</finder>
+		<finder name="C_P_R_P_V" return-type="DLContent" unique="true">
+			<finder-column name="companyId" />
+			<finder-column name="portletId" />
+			<finder-column name="repositoryId" />
+			<finder-column name="path" />
+			<finder-column name="version" />
+		</finder>
+	</entity>
 	<entity name="DLDocumentMetadataSet" uuid="true" local-service="true" remote-service="false">
 
 		<!-- PK fields -->
