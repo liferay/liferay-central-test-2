@@ -181,6 +181,93 @@ public class CMISRepository extends BaseCmisRepository {
 		}
 	}
 
+	public void cancelCheckOut(long fileEntryId)
+		throws PortalException, SystemException {
+
+		try {
+			Session session = getSession();
+
+			String versionSeriesId = toFileEntryId(fileEntryId);
+
+			Document document = (Document)session.getObject(versionSeriesId);
+
+			document = document.getObjectOfLatestVersion(false);
+
+			document.cancelCheckOut();
+
+			document = (Document)session.getObject(versionSeriesId);
+
+			document.refresh();
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
+	}
+
+	public void checkInFileEntry(long fileEntryId, String lockUuid)
+		throws PortalException, SystemException {
+
+		checkInFileEntry(
+			fileEntryId, false, StringPool.BLANK, new ServiceContext());
+	}
+
+	public void checkInFileEntry(
+			long fileEntryId, boolean major, String changeLog,
+			ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		try {
+			Session session = getSession();
+
+			String versionSeriesId = toFileEntryId(fileEntryId);
+
+			Document document = (Document)session.getObject(versionSeriesId);
+
+			document = document.getObjectOfLatestVersion(false);
+
+			document.checkIn(major, null, null, changeLog);
+
+			document = (Document)session.getObject(versionSeriesId);
+
+			document.refresh();
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
+	}
+
+	public FileEntry checkOutFileEntry(long fileEntryId)
+		throws PortalException, SystemException {
+
+		try {
+			Session session = getSession();
+
+			String versionSeriesId = toFileEntryId(fileEntryId);
+
+			Document document = (Document)session.getObject(versionSeriesId);
+
+			document.refresh();
+
+			document.checkOut();
+
+			document = (Document)session.getObject(versionSeriesId);
+
+			document.refresh();
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
+
+		return getFileEntry(fileEntryId);
+	}
+
+	public FileEntry checkOutFileEntry(
+			long fileEntryId, String owner, long expirationTime)
+		throws PortalException, SystemException {
+
+		throw new UnsupportedOperationException();
+	}
+
 	public void copyFileEntry(
 			long groupId, long fileEntryId, long destFolderId,
 			ServiceContext serviceContext)
@@ -692,33 +779,6 @@ public class CMISRepository extends BaseCmisRepository {
 		return _cmisRepositoryHandler.isRefreshBeforePermissionCheck();
 	}
 
-	public void lockFileEntry(long fileEntryId) {
-		try {
-			Session session = getSession();
-
-			String versionSeriesId = toFileEntryId(fileEntryId);
-
-			Document document = (Document)session.getObject(versionSeriesId);
-
-			document.refresh();
-
-			document.checkOut();
-
-			document = (Document)session.getObject(versionSeriesId);
-
-			document.refresh();
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-		}
-	}
-
-	public Lock lockFileEntry(
-		long fileEntryId, String owner, long expirationTime) {
-
-		throw new UnsupportedOperationException();
-	}
-
 	public Lock lockFolder(long folderId) {
 		throw new UnsupportedOperationException();
 	}
@@ -950,31 +1010,6 @@ public class CMISRepository extends BaseCmisRepository {
 		return toFolder(cmisFolder);
 	}
 
-	public void unlockFileEntry(long fileEntryId) {
-		try {
-			Session session = getSession();
-
-			String versionSeriesId = toFileEntryId(fileEntryId);
-
-			Document document = (Document)session.getObject(versionSeriesId);
-
-			document = document.getObjectOfLatestVersion(false);
-
-			document.checkIn(false, null, null, StringPool.BLANK);
-
-			document = (Document)session.getObject(versionSeriesId);
-
-			document.refresh();
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-		}
-	}
-
-	public void unlockFileEntry(long fileEntryId, String lockUuid) {
-		unlockFileEntry(fileEntryId);
-	}
-
 	public void unlockFolder(long folderId, String lockUuid) {
 		throw new UnsupportedOperationException();
 	}
@@ -1166,7 +1201,7 @@ public class CMISRepository extends BaseCmisRepository {
 		}
 	}
 
-	public boolean verifyFileEntryLock(long fileEntryId, String lockUuid) {
+	public boolean verifyFileEntryCheckOut(long fileEntryId, String lockUuid) {
 		throw new UnsupportedOperationException();
 	}
 

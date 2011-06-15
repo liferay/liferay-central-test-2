@@ -60,6 +60,41 @@ public abstract class CMISRepositoryHandler extends BaseRepositoryImpl {
 			parentFolderId, title, description, serviceContext);
 	}
 
+	public void cancelCheckOut(long fileEntryId)
+		throws PortalException, SystemException {
+
+		_baseCmisRepository.cancelCheckOut(fileEntryId);
+	}
+
+	public void checkInFileEntry(long fileEntryId, String lockUuid)
+		throws PortalException, SystemException {
+
+		_baseCmisRepository.checkInFileEntry(fileEntryId, lockUuid);
+	}
+
+	public void checkInFileEntry(
+			long fileEntryId, boolean major, String changeLog,
+			ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		_baseCmisRepository.checkInFileEntry(
+			fileEntryId, major, changeLog, serviceContext);
+	}
+
+	public FileEntry checkOutFileEntry(long fileEntryId)
+		throws PortalException, SystemException {
+
+		return _baseCmisRepository.checkOutFileEntry(fileEntryId);
+	}
+
+	public FileEntry checkOutFileEntry(
+			long fileEntryId, String owner, long expirationTime)
+		throws PortalException, SystemException {
+
+		return _baseCmisRepository.checkOutFileEntry(
+			fileEntryId, owner, expirationTime);
+	}
+
 	public void copyFileEntry(
 			long groupId, long fileEntryId, long destFolderId,
 			ServiceContext serviceContext)
@@ -260,20 +295,6 @@ public abstract class CMISRepositoryHandler extends BaseRepositoryImpl {
 		return false;
 	}
 
-	public void lockFileEntry(long fileEntryId)
-		throws PortalException, SystemException {
-
-		_baseCmisRepository.lockFileEntry(fileEntryId);
-	}
-
-	public Lock lockFileEntry(
-			long fileEntryId, String owner, long expirationTime)
-		throws PortalException, SystemException {
-
-		return _baseCmisRepository.lockFileEntry(
-			fileEntryId, owner, expirationTime);
-	}
-
 	public Lock lockFolder(long folderId)
 		throws PortalException, SystemException {
 
@@ -343,18 +364,6 @@ public abstract class CMISRepositoryHandler extends BaseRepositoryImpl {
 		return _baseCmisRepository.toFolder(objectId);
 	}
 
-	public void unlockFileEntry(long fileEntryId)
-		throws PortalException, SystemException {
-
-		_baseCmisRepository.unlockFileEntry(fileEntryId);
-	}
-
-	public void unlockFileEntry(long fileEntryId, String lockUuid)
-		throws PortalException, SystemException {
-
-		_baseCmisRepository.unlockFileEntry(fileEntryId, lockUuid);
-	}
-
 	public void unlockFolder(long folderId, String lockUuid)
 		throws PortalException, SystemException {
 
@@ -393,10 +402,11 @@ public abstract class CMISRepositoryHandler extends BaseRepositoryImpl {
 			folderId, title, description, serviceContext);
 	}
 
-	public boolean verifyFileEntryLock(long fileEntryId, String lockUuid)
+	public boolean verifyFileEntryCheckOut(long fileEntryId, String lockUuid)
 		throws PortalException, SystemException {
 
-		return _baseCmisRepository.verifyFileEntryLock(fileEntryId, lockUuid);
+		return _baseCmisRepository.verifyFileEntryCheckOut(
+			fileEntryId, lockUuid);
 	}
 
 	public boolean verifyInheritableLock(long folderId, String lockUuid)

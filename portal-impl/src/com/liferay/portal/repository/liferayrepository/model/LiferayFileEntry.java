@@ -237,6 +237,10 @@ public class LiferayFileEntry extends LiferayModel implements FileEntry {
 		return _dlFileEntry.hasLock();
 	}
 
+	public boolean isCheckedOut() {
+		return _dlFileEntry.isCheckedOut();
+	}
+
 	public boolean isDefaultRepository() {
 		if (_dlFileEntry.getGroupId() == _dlFileEntry.getRepositoryId()) {
 			return true;
@@ -248,10 +252,6 @@ public class LiferayFileEntry extends LiferayModel implements FileEntry {
 
 	public boolean isEscapedModel() {
 		return _escapedModel;
-	}
-
-	public boolean isLocked() {
-		return _dlFileEntry.isLocked();
 	}
 
 	public boolean isSupportsLocking() {
