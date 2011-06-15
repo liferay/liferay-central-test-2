@@ -24,6 +24,8 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 import com.liferay.portal.util.PropsValues;
 
+import java.sql.Blob;
+
 import java.util.List;
 
 public class ${entity.name}PersistenceTest extends BasePersistenceTestCase {
@@ -141,6 +143,8 @@ public class ${entity.name}PersistenceTest extends BasePersistenceTestCase {
 					nextLong()
 				<#elseif column.type == "Date">
 					nextDate()
+				<#elseif column.type == "Blob">
+					randomBlob()
 				<#elseif column.type == "String">
 					randomString()
 				</#if>
@@ -154,7 +158,12 @@ public class ${entity.name}PersistenceTest extends BasePersistenceTestCase {
 		${entity.name} existing${entity.name} = _persistence.findByPrimaryKey(new${entity.name}.getPrimaryKey());
 
 		<#list entity.regularColList as column>
-			<#if column.type == "Date">
+			<#if column.type == "Blob">
+				Blob existing${column.methodName} = existing${entity.name}.get${column.methodName}();
+				Blob new${column.methodName} = new${entity.name}.get${column.methodName}();
+
+				assertEquals(existing${column.methodName}.getBytes(0, (int)existing${column.methodName}.length()), new${column.methodName}.getBytes(0, (int)new${column.methodName}.length()));
+			<#elseif column.type == "Date">
 				assertEquals(Time.getShortTimestamp(existing${entity.name}.get${column.methodName}()), Time.getShortTimestamp(new${entity.name}.get${column.methodName}()));
 			<#else>
 				assertEquals(existing${entity.name}.get${column.methodName}(), new${entity.name}.get${column.methodName}());
@@ -459,6 +468,8 @@ public class ${entity.name}PersistenceTest extends BasePersistenceTestCase {
 					nextInt()
 				<#elseif column.type == "long">
 					nextLong()
+				<#elseif column.type == "Blob">
+					randomBlob()
 				<#elseif column.type == "Date">
 					nextDate()
 				<#elseif column.type == "String">

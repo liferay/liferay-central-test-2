@@ -3954,6 +3954,12 @@ public class ServiceBuilder {
 			else if (colType.equalsIgnoreCase("long")) {
 				sb.append("LONG");
 			}
+			else if (colType.equals("Blob")) {
+				sb.append("BLOB");
+			}
+			else if (colType.equals("Date")) {
+				sb.append("DATE null");
+			}
 			else if (colType.equals("String")) {
 				Map<String, String> hints = ModelHintsUtil.getHints(
 					_packagePath + ".model." + entity.getName(), colName);
@@ -3978,9 +3984,6 @@ public class ServiceBuilder {
 				else if (maxLength > 4000) {
 					sb.append("TEXT");
 				}
-			}
-			else if (colType.equals("Date")) {
-				sb.append("DATE null");
 			}
 			else {
 				sb.append("invalid");
