@@ -73,20 +73,6 @@ public class PortletKeys {
 
 	public static final String ENTERPRISE_ADMIN = "79";
 
-	public static final String ENTERPRISE_ADMIN_COMMUNITIES = "134";
-
-	public static final String ENTERPRISE_ADMIN_MONITORING = "131";
-
-	public static final String ENTERPRISE_ADMIN_PASSWORD_POLICIES = "129";
-
-	public static final String ENTERPRISE_ADMIN_PLUGINS = "132";
-
-	public static final String ENTERPRISE_ADMIN_ROLES = "128";
-
-	public static final String ENTERPRISE_ADMIN_SETTINGS = "130";
-
-	public static final String ENTERPRISE_ADMIN_USERS = "125";
-
 	public static final String EXPANDO = "139";
 
 	public static final String FAST_LOGIN = "164";
@@ -128,6 +114,8 @@ public class PortletKeys {
 
 	public static final String METADATA_SET_ADMIN = "171";
 
+	public static final String MONITORING = "131";
+
 	public static final String MY_ACCOUNT = "2";
 
 	public static final String MY_PAGES = "140";
@@ -146,13 +134,19 @@ public class PortletKeys {
 
 	public static final String PAGE_RATINGS = "108";
 
+	public static final String PASSWORD_POLICIES_ADMIN = "129";
+
 	public static final String PLUGIN_INSTALLER = "111";
+
+	public static final String PLUGINS_ADMIN = "132";
 
 	public static final String POLLS = "25";
 
 	public static final String POLLS_DISPLAY = "59";
 
 	public static final String PORTAL = "90";
+
+	public static final String PORTAL_SETTINGS = "130";
 
 	public static final String PORTLET_CONFIGURATION = "86";
 
@@ -182,6 +176,8 @@ public class PortletKeys {
 
 	public static final String REQUESTS = "121";
 
+	public static final String ROLES_ADMIN = "128";
+
 	public static final String RSS = "39";
 
 	public static final String SEARCH = "3";
@@ -189,6 +185,8 @@ public class PortletKeys {
 	public static final String SHOPPING = "34";
 
 	public static final String SITE_MEMBERSHIPS_ADMIN = "174";
+
+	public static final String SITES_ADMIN = "134";
 
 	public static final String SITE_SETTINGS = "165";
 
@@ -213,6 +211,8 @@ public class PortletKeys {
 	public static final String UNIT_CONVERTER = "27";
 
 	public static final String UPDATE_MANAGER = "104";
+
+	public static final String USERS_ADMIN = "125";
 
 	public static final String WIKI = "36";
 

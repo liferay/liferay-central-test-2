@@ -126,7 +126,7 @@ Group controlPanelGroup = GroupLocalServiceUtil.getGroup(company.getCompanyId(),
 
 long controlPanelPlid = LayoutLocalServiceUtil.getDefaultPlid(controlPanelGroup.getGroupId(), true);
 
-PortletURLImpl definePermissionsURL = new PortletURLImpl(request, PortletKeys.ENTERPRISE_ADMIN_ROLES, controlPanelPlid, PortletRequest.RENDER_PHASE);
+PortletURLImpl definePermissionsURL = new PortletURLImpl(request, PortletKeys.ROLES_ADMIN, controlPanelPlid, PortletRequest.RENDER_PHASE);
 
 definePermissionsURL.setPortletMode(PortletMode.VIEW);
 

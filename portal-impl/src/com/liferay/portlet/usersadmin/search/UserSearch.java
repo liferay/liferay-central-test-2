@@ -78,7 +78,7 @@ public class UserSearch extends SearchContainer<User> {
 		String portletName = portletConfig.getPortletName();
 
 		if ((!portletName.equals(PortletKeys.ENTERPRISE_ADMIN)) &&
-			(!portletName.equals(PortletKeys.ENTERPRISE_ADMIN_USERS))) {
+			(!portletName.equals(PortletKeys.USERS_ADMIN))) {
 
 			displayTerms.setStatus(WorkflowConstants.STATUS_APPROVED);
 			searchTerms.setStatus(WorkflowConstants.STATUS_APPROVED);

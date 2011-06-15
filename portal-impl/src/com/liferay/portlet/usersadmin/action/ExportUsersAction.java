@@ -129,7 +129,7 @@ public class ExportUsersAction extends PortletAction {
 
 		PortletURL portletURL =
 			((ActionResponseImpl)actionResponse).createRenderURL(
-				PortletKeys.ENTERPRISE_ADMIN_USERS);
+				PortletKeys.USERS_ADMIN);
 
 		UserSearch userSearch = new UserSearch(actionRequest, portletURL);
 

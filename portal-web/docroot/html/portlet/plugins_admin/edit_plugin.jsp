@@ -126,7 +126,7 @@ if (pluginType.equals(Plugin.TYPE_PORTLET)) {
 									<liferay-ui:search-container-column-text
 										align="right"
 									>
-										<liferay-portlet:renderURL portletName="<%= PortletKeys.ENTERPRISE_ADMIN_ROLES %>" var="editURL">
+										<liferay-portlet:renderURL portletName="<%= PortletKeys.ROLES_ADMIN %>" var="editURL">
 											<portlet:param name="struts_action" value="/roles_admin/edit_role_permissions" />
 											<portlet:param name="cmd" value="edit" />
 											<portlet:param name="tabs1" value="roles" />
@@ -169,7 +169,7 @@ if (pluginType.equals(Plugin.TYPE_PORTLET)) {
 									<liferay-ui:search-container-column-text
 										align="right"
 									>
-										<liferay-portlet:renderURL portletName="<%= PortletKeys.ENTERPRISE_ADMIN_ROLES %>" var="editURL">
+										<liferay-portlet:renderURL portletName="<%= PortletKeys.ROLES_ADMIN %>" var="editURL">
 											<portlet:param name="struts_action" value="/roles_admin/edit_role_permissions" />
 											<portlet:param name="cmd" value="edit" />
 											<portlet:param name="tabs1" value="roles" />

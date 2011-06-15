@@ -30,7 +30,7 @@ portlets = ListUtil.sort(portlets, new PortletTitleComparator(application, local
 					<optgroup label="<liferay-ui:message key="administration" />">
 
 						<%
-						editPermissionsURL.setParameter("portletResource", PortletKeys.ENTERPRISE_ADMIN_COMMUNITIES);
+						editPermissionsURL.setParameter("portletResource", PortletKeys.SITES_ADMIN);
 						editPermissionsURL.setParameter("showModelResources", "1");
 						%>
 
@@ -41,7 +41,7 @@ portlets = ListUtil.sort(portlets, new PortletTitleComparator(application, local
 					<optgroup label="<liferay-ui:message key="administration" />">
 
 						<%
-						editPermissionsURL.setParameter("portletResource", PortletKeys.ENTERPRISE_ADMIN_USERS);
+						editPermissionsURL.setParameter("portletResource", PortletKeys.USERS_ADMIN);
 						editPermissionsURL.setParameter("showModelResources", "1");
 						%>
 
@@ -250,22 +250,22 @@ portlets = ListUtil.sort(portlets, new PortletTitleComparator(application, local
 
 <%!
 private static final String[] _COMMUNITY_PORTLETS = {
-	PortletKeys.ENTERPRISE_ADMIN_COMMUNITIES,
+	PortletKeys.SITES_ADMIN,
 };
 
 private static final String[] _ORGANIZATION_PORTLETS = {
-	PortletKeys.ENTERPRISE_ADMIN_USERS,
+	PortletKeys.USERS_ADMIN,
 };
 
 private static final String[] _PORTAL_PORTLETS = {
 	PortletKeys.ENTERPRISE_ADMIN,
-	PortletKeys.ENTERPRISE_ADMIN_COMMUNITIES,
-	PortletKeys.ENTERPRISE_ADMIN_MONITORING,
-	PortletKeys.ENTERPRISE_ADMIN_PASSWORD_POLICIES,
-	PortletKeys.ENTERPRISE_ADMIN_PLUGINS,
-	PortletKeys.ENTERPRISE_ADMIN_ROLES,
-	PortletKeys.ENTERPRISE_ADMIN_SETTINGS,
-	PortletKeys.ENTERPRISE_ADMIN_USERS
+	PortletKeys.SITES_ADMIN,
+	PortletKeys.MONITORING,
+	PortletKeys.PASSWORD_POLICIES_ADMIN,
+	PortletKeys.PLUGINS_ADMIN,
+	PortletKeys.ROLES_ADMIN,
+	PortletKeys.PORTAL_SETTINGS,
+	PortletKeys.USERS_ADMIN
 };
 
 private boolean _isCommunityPortlet(String portletId) {

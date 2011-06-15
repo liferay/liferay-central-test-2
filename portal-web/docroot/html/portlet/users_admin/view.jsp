@@ -48,13 +48,13 @@ String usersListView = request.getParameter("usersListView");
 PortalPreferences portalPreferences = PortletPreferencesFactoryUtil.getPortalPreferences(renderRequest);
 
 if (usersListView == null) {
-	usersListView = portalPreferences.getValue(PortletKeys.ENTERPRISE_ADMIN_USERS, "users-list-view", PropsValues.USERS_LIST_VIEWS_DEFAULT);
+	usersListView = portalPreferences.getValue(PortletKeys.USERS_ADMIN, "users-list-view", PropsValues.USERS_LIST_VIEWS_DEFAULT);
 }
 else {
 	boolean saveUsersListView = ParamUtil.getBoolean(request, "saveUsersListView");
 
 	if (saveUsersListView && ArrayUtil.contains(PropsValues.USERS_LIST_VIEWS, usersListView)) {
-		portalPreferences.setValue(PortletKeys.ENTERPRISE_ADMIN_USERS, "users-list-view", usersListView);
+		portalPreferences.setValue(PortletKeys.USERS_ADMIN, "users-list-view", usersListView);
 	}
 }
 %>

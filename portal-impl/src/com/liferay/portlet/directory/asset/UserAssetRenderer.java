@@ -68,8 +68,8 @@ public class UserAssetRenderer extends BaseAssetRenderer {
 		throws Exception {
 
 		PortletURL portletURL = liferayPortletResponse.createLiferayPortletURL(
-			getControlPanelPlid(liferayPortletRequest),
-			PortletKeys.ENTERPRISE_ADMIN_USERS, PortletRequest.RENDER_PHASE);
+			getControlPanelPlid(liferayPortletRequest), PortletKeys.USERS_ADMIN,
+			PortletRequest.RENDER_PHASE);
 
 		portletURL.setParameter("struts_action", "/users_admin/edit_user");
 		portletURL.setParameter("p_u_i_d", String.valueOf(_user.getUserId()));

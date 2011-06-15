@@ -141,22 +141,22 @@ String tabs1 = ParamUtil.getString(request, "tabs1");
 boolean showTabs1 = false;
 boolean showActiveUserSelect = true;
 
-if (portletName.equals(PortletKeys.ENTERPRISE_ADMIN_USERS)) {
+if (portletName.equals(PortletKeys.USERS_ADMIN)) {
 	tabs1 = "users";
 }
-else if (portletName.equals(PortletKeys.ENTERPRISE_ADMIN_ROLES) && !tabs1.equals("users")) {
+else if (portletName.equals(PortletKeys.ROLES_ADMIN) && !tabs1.equals("users")) {
 	tabs1 = "roles";
 }
-else if (portletName.equals(PortletKeys.ENTERPRISE_ADMIN_PASSWORD_POLICIES)) {
+else if (portletName.equals(PortletKeys.PASSWORD_POLICIES_ADMIN)) {
 	tabs1 = "password-policies";
 }
-else if (portletName.equals(PortletKeys.ENTERPRISE_ADMIN_SETTINGS)) {
+else if (portletName.equals(PortletKeys.PORTAL_SETTINGS)) {
 	tabs1 = "settings";
 }
-else if (portletName.equals(PortletKeys.ENTERPRISE_ADMIN_MONITORING)) {
+else if (portletName.equals(PortletKeys.MONITORING)) {
 	tabs1 = "monitoring";
 }
-else if (portletName.equals(PortletKeys.ENTERPRISE_ADMIN_PLUGINS)) {
+else if (portletName.equals(PortletKeys.PLUGINS_ADMIN)) {
 	tabs1 = "plugins";
 }
 else if (portletName.equals(PortletKeys.ENTERPRISE_ADMIN)) {

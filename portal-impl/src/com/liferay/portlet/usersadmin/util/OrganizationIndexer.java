@@ -49,8 +49,7 @@ public class OrganizationIndexer extends BaseIndexer {
 
 	public static final String[] CLASS_NAMES = {Organization.class.getName()};
 
-	public static final String PORTLET_ID =
-		PortletKeys.ENTERPRISE_ADMIN_USERS;
+	public static final String PORTLET_ID = PortletKeys.USERS_ADMIN;
 
 	public OrganizationIndexer() {
 		setStagingAware(false);
