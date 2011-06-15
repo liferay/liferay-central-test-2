@@ -25,6 +25,9 @@ public class ClearEhcacheThreadUtil {
 		Thread[] threads = ThreadUtil.getThreads();
 
 		for (Thread thread : threads) {
+			if (thread == null) {
+				continue;
+			}
 			String name = thread.getName();
 
 			if (name.equals(_THREAD_NAME)) {
