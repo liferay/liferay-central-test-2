@@ -105,6 +105,18 @@ public class Entity {
 		_finderList = finderList;
 		_referenceList = referenceList;
 		_txRequiredList = txRequiredList;
+
+		if (_cacheEnabled && (_regularColList != null)) {
+			for (EntityColumn col : _regularColList) {
+				String colType = col.getType();
+
+				if (colType.equals("Blob")) {
+					_cacheEnabled = false;
+
+					break;
+				}
+			}
+		}
 	}
 
 	public boolean equals(Object obj) {

@@ -26,6 +26,7 @@ import com.liferay.portal.util.PropsValues;
 
 import java.sql.Blob;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class ${entity.name}PersistenceTest extends BasePersistenceTestCase {
@@ -162,7 +163,7 @@ public class ${entity.name}PersistenceTest extends BasePersistenceTestCase {
 				Blob existing${column.methodName} = existing${entity.name}.get${column.methodName}();
 				Blob new${column.methodName} = new${entity.name}.get${column.methodName}();
 
-				assertEquals(existing${column.methodName}.getBytes(0, (int)existing${column.methodName}.length()), new${column.methodName}.getBytes(0, (int)new${column.methodName}.length()));
+				assertTrue(Arrays.equals(existing${column.methodName}.getBytes(1, (int)existing${column.methodName}.length()), new${column.methodName}.getBytes(1, (int)new${column.methodName}.length())));
 			<#elseif column.type == "Date">
 				assertEquals(Time.getShortTimestamp(existing${entity.name}.get${column.methodName}()), Time.getShortTimestamp(new${entity.name}.get${column.methodName}()));
 			<#else>
