@@ -18,7 +18,6 @@ import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.model.Group;
-import com.liferay.portal.model.GroupConstants;
 import com.liferay.portal.model.Organization;
 
 import java.sql.Connection;
@@ -69,8 +68,8 @@ public class UpgradeGroup extends UpgradeProcess {
 
 				runSQL(
 					"update Group_ set name = '" + classPK +
-						GroupConstants.ORGANIZATION_NAME_DELIMETER + name +
-						"' where groupId = " + groupId);
+						_ORGANIZATION_NAME_DELIMETER + name +
+							"' where groupId = " + groupId);
 			}
 		}
 		finally {
@@ -143,5 +142,8 @@ public class UpgradeGroup extends UpgradeProcess {
 			DataAccess.cleanUp(con, ps, rs);
 		}
 	}
+
+	private static final String _ORGANIZATION_NAME_DELIMETER =
+		" LFR_ORGANIZATION ";
 
 }
