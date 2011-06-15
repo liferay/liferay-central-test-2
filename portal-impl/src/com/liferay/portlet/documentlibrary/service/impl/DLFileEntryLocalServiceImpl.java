@@ -1099,11 +1099,11 @@ public class DLFileEntryLocalServiceImpl
 		for (DLFileVersion dlFileVersion : dlFileVersions) {
 			dlFileVersionPersistence.remove(dlFileVersion);
 
-			expandoValueLocalService.deleteValues(
-				DLFileVersion.class.getName(),
+			dlDocumentMetadataSetLocalService.deleteDocumentMetadataSets(
 				dlFileVersion.getFileVersionId());
 
-			dlDocumentMetadataSetLocalService.deleteDocumentMetadataSets(
+			expandoValueLocalService.deleteValues(
+				DLFileVersion.class.getName(),
 				dlFileVersion.getFileVersionId());
 		}
 
