@@ -743,6 +743,7 @@ public class ${entity.name}ModelImpl extends BaseModelImpl<${entity.name}> imple
 	}
 
 	private static ClassLoader _classLoader = ${entity.name}.class.getClassLoader();
+
 	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {${entity.name}.class};
 
 	<#list entity.regularColList as column>
