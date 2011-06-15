@@ -869,10 +869,10 @@ public class CMISRepository extends BaseCmisRepository {
 				}
 			}
 
+			String mimeType = oldVersion.getContentStreamMimeType();
 			String changeLog = "Reverted to " + version;
 			String title = oldVersion.getName();
 			ContentStream contentStream = oldVersion.getContentStream();
-			String mimeType = oldVersion.getContentStreamMimeType();
 
 			updateFileEntry(
 				fileEntryId, contentStream.getFileName(), mimeType, title,

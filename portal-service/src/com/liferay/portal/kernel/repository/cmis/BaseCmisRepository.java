@@ -56,8 +56,8 @@ public abstract class BaseCmisRepository extends BaseRepositoryImpl {
 		throws PortalException, SystemException;
 
 	public abstract FileEntry updateFileEntry(
-			String objectId, String mimeType, Map<String, Object> properties, 
-			InputStream is, String sourceFileName, long size, 
+			String objectId, String mimeType, Map<String, Object> properties,
+			InputStream is, String sourceFileName, long size,
 			ServiceContext serviceContext)
 		throws PortalException, SystemException;
 

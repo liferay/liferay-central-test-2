@@ -380,9 +380,8 @@ public class EditFileEntryAction extends PortletAction {
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			DLFileEntry.class.getName(), actionRequest);
 
-		serviceContext.setAttribute("sourceFileName", sourceFileName);
-
 		serviceContext.setAttribute("documentTypeId", documentTypeId);
+		serviceContext.setAttribute("sourceFileName", sourceFileName);
 
 		HashMap<String, Fields> fieldsMap = getFieldsMap(
 			uploadRequest, documentTypeId);
