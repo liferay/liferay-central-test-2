@@ -49,6 +49,9 @@ for (Map<String, String> fields : fieldsMap.values()) {
 }
 
 if (editable) {
+	headerNames.add("status");
+	headerNames.add("modified-date");
+	headerNames.add("author");
 	headerNames.add(StringPool.BLANK);
 }
 
@@ -117,9 +120,13 @@ for (int i = 0; i < results.size(); i++) {
 		row.setParameter("detailDDMTemplateId", String.valueOf(detailDDMTemplateId));
 	}
 
-	// Action
-
 	if (editable) {
+		row.addText(LanguageUtil.get(pageContext, WorkflowConstants.toLabel(record.getStatus())), rowURL);
+		row.addText(dateFormatDateTime.format(record.getModifiedDate()), rowURL);
+		row.addText(HtmlUtil.escape(PortalUtil.getUserName(record.getUserId(), record.getUserName())), rowURL);
+
+		// Action
+
 		row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/dynamic_data_lists/record_action.jsp");
 	}
 

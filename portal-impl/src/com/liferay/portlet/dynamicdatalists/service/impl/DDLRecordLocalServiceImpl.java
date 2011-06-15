@@ -227,6 +227,12 @@ public class DDLRecordLocalServiceImpl
 		return ddlRecordFinder.countByR_S(recordSetId, status);
 	}
 
+	public DDLRecordVersion getRecordVersion(long recordId, String version)
+		throws PortalException, SystemException {
+
+		return ddlRecordVersionPersistence.findByR_V(recordId, version);
+	}
+
 	public void updateAsset(
 			long userId, DDLRecord record, DDLRecordVersion recordVersion,
 			long[] assetCategoryIds, String[] assetTagNames, Locale locale)

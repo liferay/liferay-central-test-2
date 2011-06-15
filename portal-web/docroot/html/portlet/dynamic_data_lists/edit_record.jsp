@@ -54,6 +54,10 @@ if (record != null) {
 
 	<liferay-ui:error exception="<%= StorageFieldRequiredException.class %>" message="please-fill-out-all-required-fields" />
 
+	<c:if test="<%= recordVersion != null %>">
+		<aui:workflow-status status="<%= recordVersion.getStatus() %>" version="<%= recordVersion.getVersion() %>" />
+	</c:if>
+
 	<aui:fieldset>
 
 		<%
@@ -73,8 +77,8 @@ if (record != null) {
 
 		Fields fields = null;
 
-		if (record != null) {
-			fields = StorageEngineUtil.getFields(record.getClassPK());
+		if (recordVersion != null) {
+			fields = StorageEngineUtil.getFields(recordVersion.getClassPK());
 		}
 		%>
 

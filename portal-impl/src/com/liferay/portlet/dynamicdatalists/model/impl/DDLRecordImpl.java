@@ -85,4 +85,23 @@ public class DDLRecordImpl
 		return DDLRecordSetLocalServiceUtil.getRecordSet(getRecordSetId());
 	}
 
+	public DDLRecordVersion getRecordVersion()
+		throws PortalException, SystemException {
+
+		return getRecordVersion(getVersion());
+	}
+
+	public DDLRecordVersion getRecordVersion(String version)
+		throws PortalException, SystemException {
+
+		return DDLRecordLocalServiceUtil.getRecordVersion(
+			getRecordId(), version);
+	}
+
+	public int getStatus() throws PortalException, SystemException {
+		DDLRecordVersion recordVersion = getRecordVersion();
+
+		return recordVersion.getStatus();
+	}
+
 }
