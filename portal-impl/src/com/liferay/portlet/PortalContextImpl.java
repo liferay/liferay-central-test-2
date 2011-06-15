@@ -58,31 +58,11 @@ public class PortalContextImpl implements PortalContext {
 	}
 
 	public static boolean isSupportedPortletMode(PortletMode portletMode) {
-		Enumeration<PortletMode> enu = Collections.enumeration(portletModes);
-
-		while (enu.hasMoreElements()) {
-			PortletMode supported = enu.nextElement();
-
-			if (supported.equals(portletMode)) {
-				return true;
-			}
-		}
-
-		return false;
+		return portletModes.contains(portletMode);
 	}
 
 	public static boolean isSupportedWindowState(WindowState windowState) {
-		Enumeration<WindowState> enu = Collections.enumeration(windowStates);
-
-		while (enu.hasMoreElements()) {
-			WindowState supported = enu.nextElement();
-
-			if (supported.equals(windowState)) {
-				return true;
-			}
-		}
-
-		return false;
+		return windowStates.contains(windowState);
 	}
 
 	public String getPortalInfo() {
