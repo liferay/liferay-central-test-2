@@ -878,7 +878,7 @@ public class JavadocFormatter {
 
 			boolean samePackage = false;
 
-			JavaPackage ancestorJavaPackage = ancestorJavaClass.getPackage(); 
+			JavaPackage ancestorJavaPackage = ancestorJavaClass.getPackage();
 
 			if (ancestorJavaPackage != null) {
 				samePackage = ancestorJavaPackage.equals(
