@@ -17,6 +17,7 @@ package com.liferay.portlet.calendar.service.impl;
 import com.liferay.portal.kernel.cal.TZSRecurrence;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portlet.calendar.model.CalEvent;
@@ -26,6 +27,8 @@ import com.liferay.portlet.calendar.service.permission.CalendarPermission;
 
 import java.io.File;
 
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -94,15 +97,76 @@ public class CalEventServiceImpl extends CalEventServiceBaseImpl {
 	}
 
 	public List<CalEvent> getEvents(
+			long groupId, String types, int start, int end)
+		throws SystemException {
+
+		return getEvents(groupId, new String[] {types}, start, end);
+	}
+
+	public List<CalEvent> getEvents(
 			long groupId, String[] types, int start, int end)
 		throws SystemException {
 
-		if ((types != null) && (types.length > 0)) {
+		if ((types != null) && (types.length > 0) &&
+			((types.length > 1) || Validator.isNotNull(types[0]))) {
+
 			return calEventPersistence.filterFindByG_T(
 				groupId, types, start, end);
 		}
 		else {
 			return calEventPersistence.filterFindByGroupId(groupId, start, end);
+		}
+	}
+
+	public List<CalEvent> getEvents(long groupId, Calendar cal, String types)
+		throws PortalException, SystemException {
+
+		return getEvents(groupId, cal, new String[] {types});
+	}
+
+	public List<CalEvent> getEvents(long groupId, Calendar cal, String[] types)
+		throws PortalException, SystemException {
+
+		List<CalEvent> events = new ArrayList<CalEvent>();
+
+		List<CalEvent> eventList = calEventLocalService.getEvents (
+			groupId, cal, types);
+
+		for (CalEvent event : eventList) {
+			long eventId = event.getEventId();
+
+			if (CalEventPermission.contains(
+				getPermissionChecker(), eventId, ActionKeys.VIEW)) {
+
+				events.add(event);
+			}
+		}
+
+		return events;
+	}
+
+	public boolean hasEvents(long groupId, Calendar cal)
+		throws SystemException, PortalException {
+
+		return hasEvents(groupId, cal, new String[0]);
+	}
+
+	public boolean hasEvents(long groupId, Calendar cal, String type)
+		throws SystemException, PortalException {
+
+		return hasEvents(groupId, cal, new String[] {type});
+	}
+
+	public boolean hasEvents(long groupId, Calendar cal, String[] types)
+		throws SystemException, PortalException {
+
+		List<CalEvent> events = getEvents(groupId, cal, types);
+
+		if (events.isEmpty()) {
+			return false;
+		}
+		else {
+			return true;
 		}
 	}
 

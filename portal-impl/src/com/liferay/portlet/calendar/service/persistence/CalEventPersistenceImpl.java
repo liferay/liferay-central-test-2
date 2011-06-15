@@ -58,6 +58,7 @@ import com.liferay.portlet.calendar.NoSuchEventException;
 import com.liferay.portlet.calendar.model.CalEvent;
 import com.liferay.portlet.calendar.model.impl.CalEventImpl;
 import com.liferay.portlet.calendar.model.impl.CalEventModelImpl;
+import com.liferay.portlet.calendar.service.persistence.CalEventPersistence;
 import com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence;
 import com.liferay.portlet.social.service.persistence.SocialActivityPersistence;
 
