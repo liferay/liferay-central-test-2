@@ -61,8 +61,8 @@ public class RawMetadataProcessorMessageListener extends BaseMessageListener {
 		serviceContext.setUserId(dlFileEntry.getUserId());
 
 		DLDocumentMetadataSetLocalServiceUtil.updateDocumentMetadataSets(
-			dlFileEntry.getCompanyId(), 0L, dlFileVersion.getFileVersionId(),
-			rawMetadataMap, ddmStructures, serviceContext);
+			dlFileEntry.getCompanyId(), ddmStructures, 0L,
+			dlFileVersion.getFileVersionId(), rawMetadataMap, serviceContext);
 	}
 
 }
