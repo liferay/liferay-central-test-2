@@ -15,10 +15,13 @@ import ${packagePath}.model.${entity.name};
 import ${packagePath}.model.impl.${entity.name}ModelImpl;
 
 import ${beanLocatorUtil};
+import com.liferay.portal.kernel.dao.jdbc.OutputBlob;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
+import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayInputStream;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
@@ -132,6 +135,12 @@ public class ${entity.name}PersistenceTest extends BasePersistenceTestCase {
 
 		<#list entity.regularColList as column>
 			<#if !column.primary && ((parentPKColumn == "") || (parentPKColumn.name != column.name))>
+				<#if column.type == "Blob">
+					byte[] new${column.methodName}Bytes = randomString().getBytes(StringPool.UTF8);
+
+					Blob new${column.methodName}Blob = new OutputBlob(new UnsyncByteArrayInputStream(new${column.methodName}Bytes), new${column.methodName}Bytes.length);
+				</#if>
+
 				new${entity.name}.set${column.methodName}(
 
 				<#if column.type == "boolean">
@@ -145,7 +154,7 @@ public class ${entity.name}PersistenceTest extends BasePersistenceTestCase {
 				<#elseif column.type == "Date">
 					nextDate()
 				<#elseif column.type == "Blob">
-					randomBlob()
+					 new${column.methodName}Blob
 				<#elseif column.type == "String">
 					randomString()
 				</#if>
@@ -161,9 +170,8 @@ public class ${entity.name}PersistenceTest extends BasePersistenceTestCase {
 		<#list entity.regularColList as column>
 			<#if column.type == "Blob">
 				Blob existing${column.methodName} = existing${entity.name}.get${column.methodName}();
-				Blob new${column.methodName} = new${entity.name}.get${column.methodName}();
 
-				assertTrue(Arrays.equals(existing${column.methodName}.getBytes(1, (int)existing${column.methodName}.length()), new${column.methodName}.getBytes(1, (int)new${column.methodName}.length())));
+				assertTrue(Arrays.equals(existing${column.methodName}.getBytes(1, (int)existing${column.methodName}.length()), new${column.methodName}Bytes));
 			<#elseif column.type == "Date">
 				assertEquals(Time.getShortTimestamp(existing${entity.name}.get${column.methodName}()), Time.getShortTimestamp(new${entity.name}.get${column.methodName}()));
 			<#else>
@@ -459,6 +467,12 @@ public class ${entity.name}PersistenceTest extends BasePersistenceTestCase {
 
 		<#list entity.regularColList as column>
 			<#if !column.primary && ((parentPKColumn == "") || (parentPKColumn.name != column.name))>
+				<#if column.type == "Blob">
+					byte[] ${column.name}Bytes = randomString().getBytes(StringPool.UTF8);
+
+					Blob ${column.name}Blob = new OutputBlob(new UnsyncByteArrayInputStream(${column.name}Bytes), ${column.name}Bytes.length);
+				</#if>
+
 				${entity.varName}.set${column.methodName}(
 
 				<#if column.type == "boolean">
@@ -470,7 +484,7 @@ public class ${entity.name}PersistenceTest extends BasePersistenceTestCase {
 				<#elseif column.type == "long">
 					nextLong()
 				<#elseif column.type == "Blob">
-					randomBlob()
+					${column.name}Blob
 				<#elseif column.type == "Date">
 					nextDate()
 				<#elseif column.type == "String">
