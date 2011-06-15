@@ -1220,16 +1220,16 @@
 		<put name="portlet_content" value="/portlet/roles_admin/error.jsp" />
 	</definition>
 
-	<definition name="portlet.roles_admin.select_site_role" extends="portlet.roles_admin">
-		<put name="portlet_content" value="/portlet/roles_admin/select_site_role.jsp" />
-	</definition>
-
 	<definition name="portlet.roles_admin.select_organization_role" extends="portlet.roles_admin">
 		<put name="portlet_content" value="/portlet/roles_admin/select_organization_role.jsp" />
 	</definition>
 
 	<definition name="portlet.roles_admin.select_regular_role" extends="portlet.roles_admin">
 		<put name="portlet_content" value="/portlet/roles_admin/select_regular_role.jsp" />
+	</definition>
+
+	<definition name="portlet.roles_admin.select_site_role" extends="portlet.roles_admin">
+		<put name="portlet_content" value="/portlet/roles_admin/select_site_role.jsp" />
 	</definition>
 
 	<!-- Site Settings -->
