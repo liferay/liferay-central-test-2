@@ -17,7 +17,7 @@ package com.liferay.portlet.documentlibrary.messaging;
 import com.liferay.portal.kernel.messaging.BaseMessageListener;
 import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.repository.model.FileEntry;
-import com.liferay.portlet.documentlibrary.util.VideoProcessorUtil;
+import com.liferay.portlet.documentlibrary.util.VideoProcessor;
 
 /**
  * @author Juan González
@@ -28,7 +28,7 @@ public class VideoProcessorMessageListener extends BaseMessageListener {
 	protected void doReceive(Message message) throws Exception {
 		FileEntry fileEntry = (FileEntry)message.getPayload();
 
-		VideoProcessorUtil.generateVideo(fileEntry);
+		VideoProcessor.generateVideo(fileEntry);
 	}
 
 }

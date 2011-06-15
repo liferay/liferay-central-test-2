@@ -22,8 +22,6 @@ import com.liferay.documentlibrary.SourceFileNameException;
 import com.liferay.portal.DuplicateLockException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.kernel.messaging.DestinationNames;
-import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.servlet.ServletResponseConstants;
@@ -34,7 +32,6 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.repository.liferayrepository.model.LiferayFileEntry;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
@@ -50,6 +47,7 @@ import com.liferay.portlet.documentlibrary.model.DLDocumentType;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.service.DLAppServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLDocumentTypeLocalServiceUtil;
+import com.liferay.portlet.documentlibrary.util.DLProcessor;
 import com.liferay.portlet.dynamicdatamapping.model.DDMStructure;
 import com.liferay.portlet.dynamicdatamapping.storage.Field;
 import com.liferay.portlet.dynamicdatamapping.storage.Fields;
@@ -444,11 +442,7 @@ public class EditFileEntryAction extends PortletAction {
 		AssetPublisherUtil.addRecentFolderId(
 			actionRequest, DLFileEntry.class.getName(), folderId);
 
-		if (fileEntry instanceof LiferayFileEntry) {
-			MessageBusUtil.sendMessage(
-				DestinationNames.DOCUMENT_LIBRARY_RAW_METADATA_PROCESSOR,
-				fileEntry.getModel());
-		}
+		DLProcessor.triggerAll(fileEntry);
 	}
 
 }

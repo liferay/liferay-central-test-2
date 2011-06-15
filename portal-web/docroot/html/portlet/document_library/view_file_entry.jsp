@@ -174,10 +174,10 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 						<%
 						String thumbnailSrc = themeDisplay.getPathThemeImages() + "/file_system/large/" + DLUtil.getGenericName(fileEntry.getExtension()) + ".png";
 
-						if (PDFProcessorUtil.hasImages(fileEntry)) {
+						if (PDFProcessor.hasImages(fileEntry)) {
 							thumbnailSrc = themeDisplay.getPortalURL() + themeDisplay.getPathContext() + "/documents/" + themeDisplay.getScopeGroupId() + StringPool.SLASH + fileEntry.getFolderId() + StringPool.SLASH + HttpUtil.encodeURL(fileEntry.getTitle()) + "?version=" + fileEntry.getVersion() + "&documentThumbnail=1";
 						}
-						else if (VideoProcessorUtil.hasVideo(fileEntry)){
+						else if (VideoProcessor.hasVideo(fileEntry)){
 							thumbnailSrc = themeDisplay.getPortalURL() + themeDisplay.getPathContext() + "/documents/" + themeDisplay.getScopeGroupId() + StringPool.SLASH + fileEntry.getFolderId() + StringPool.SLASH + HttpUtil.encodeURL(fileEntry.getTitle()) + "?version=" + fileEntry.getVersion() + "&videoThumbnail=1";
 						}
 						%>
@@ -237,12 +237,12 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 						String previewFileURL = null;
 						String videoThumbnailURL = null;
 
-						boolean supportedVideo = VideoProcessorUtil.isSupportedVideo(fileEntry);
+						boolean supportedVideo = VideoProcessor.isSupportedVideo(fileEntry);
 
 						if (supportedVideo) {
 							previewFileCount = 0;
 
-							if (VideoProcessorUtil.hasVideo(fileEntry)) {
+							if (VideoProcessor.hasVideo(fileEntry)) {
 								previewFileCount = 1;
 							}
 
@@ -250,7 +250,7 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 							videoThumbnailURL = themeDisplay.getPortalURL() + themeDisplay.getPathContext() + "/documents/" + themeDisplay.getScopeGroupId() + StringPool.SLASH + fileEntry.getFolderId() + StringPool.SLASH + HttpUtil.encodeURL(fileEntry.getTitle()) + HtmlUtil.escapeURL("?version=") + fileEntry.getVersion() + HtmlUtil.escapeURL("&videoThumbnail=1");
 						}
 						else {
-							previewFileCount = PDFProcessorUtil.getPreviewFileCount(fileEntry);
+							previewFileCount = PDFProcessor.getPreviewFileCount(fileEntry);
 							previewFileURL = themeDisplay.getPortalURL() + themeDisplay.getPathContext() + "/documents/" + themeDisplay.getScopeGroupId() + StringPool.SLASH + fileEntry.getFolderId() + StringPool.SLASH + HttpUtil.encodeURL(fileEntry.getTitle()) + "?version=" + fileEntry.getVersion() + "&previewFileIndex=";
 						}
 						%>
@@ -322,8 +322,8 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 
 											so.addParam('allowFullScreen', 'true');
 
-											so.addVariable('<%= VideoProcessorUtil.PREVIEW_TYPE %>', '<%= previewFileURL %>');
-											so.addVariable('<%= VideoProcessorUtil.THUMBNAIL_TYPE %>', '<%= videoThumbnailURL %>');
+											so.addVariable('<%= VideoProcessor.PREVIEW_TYPE %>', '<%= previewFileURL %>');
+											so.addVariable('<%= VideoProcessor.THUMBNAIL_TYPE %>', '<%= videoThumbnailURL %>');
 
 											so.write('<portlet:namespace />previewFileContent');
 										</aui:script>

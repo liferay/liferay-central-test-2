@@ -27,14 +27,14 @@ String src = themeDisplay.getPortalURL() + themeDisplay.getPathContext() + "/doc
 <div class="asset-resource-info">
 	<aui:a href='<%= themeDisplay.getPortalURL() + themeDisplay.getPathContext() + "/documents/" + fileVersion.getRepositoryId() + StringPool.SLASH + fileEntry.getFolderId() + StringPool.SLASH + HttpUtil.encodeURL(HtmlUtil.unescape(fileVersion.getTitle())) %>'>
 		<c:choose>
-			<c:when test="<%= PDFProcessorUtil.hasImages(fileEntry) %>">
+			<c:when test="<%= PDFProcessor.hasImages(fileEntry) %>">
 				<div>
 					<img src="<%= src %>&documentThumbnail=1" />
 
 					<%= fileVersion.getTitle() %>
 				</div>
 			</c:when>
-			<c:when test="<%= VideoProcessorUtil.hasVideo(fileEntry) %>">
+			<c:when test="<%= VideoProcessor.hasVideo(fileEntry) %>">
 				<div>
 					<img src="<%= src %>&videoThumbnail=1" />
 

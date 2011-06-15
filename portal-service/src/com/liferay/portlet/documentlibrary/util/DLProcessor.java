@@ -12,22 +12,34 @@
  * details.
  */
 
-package com.liferay.portlet.documentlibrary.messaging;
+package com.liferay.portlet.documentlibrary.util;
 
-import com.liferay.portal.kernel.messaging.BaseMessageListener;
-import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.repository.model.FileEntry;
-import com.liferay.portlet.documentlibrary.util.PDFProcessor;
+import com.liferay.portal.kernel.util.InstancePool;
+import com.liferay.portal.kernel.util.PropsKeys;
+import com.liferay.portal.kernel.util.PropsUtil;
 
 /**
  * @author Alexander Chow
  */
-public class PDFProcessorMessageListener extends BaseMessageListener {
+public abstract class DLProcessor {
 
-	protected void doReceive(Message message) {
-		FileEntry fileEntry = (FileEntry)message.getPayload();
+	public abstract void trigger(FileEntry fileEntry);
 
-		PDFProcessor.generateImages(fileEntry);
+	public static void triggerAll(FileEntry fileEntry) {
+		if (fileEntry == null) {
+			return;
+		}
+
+		for (String processorClassName : _DL_FILE_ENTRY_PROCESSORS) {
+			DLProcessor dlProcessor =
+				(DLProcessor)InstancePool.get(processorClassName);
+
+			dlProcessor.trigger(fileEntry);
+		}
 	}
+
+	private static final String[] _DL_FILE_ENTRY_PROCESSORS =
+		PropsUtil.getArray(PropsKeys.DL_FILE_ENTRY_PROCESSORS);
 
 }

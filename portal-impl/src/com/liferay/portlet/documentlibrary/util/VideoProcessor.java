@@ -45,7 +45,7 @@ import java.util.Vector;
  * @author Juan González
  * @author Sergio González
  */
-public class VideoProcessorUtil {
+public class VideoProcessor extends DLProcessor {
 
 	public static final String PREVIEW_TYPE = "flv";
 
@@ -75,6 +75,10 @@ public class VideoProcessorUtil {
 
 	public static boolean isSupportedVideo(FileEntry fileEntry) {
 		return _instance._isSupportedVideo(fileEntry);
+	}
+
+	public void trigger(FileEntry fileEntry) {
+		_instance._queueGeneration(fileEntry);
 	}
 
 	private void _generateThumbnailXuggler(
@@ -324,11 +328,6 @@ public class VideoProcessorUtil {
 		}
 	}
 
-	private VideoProcessorUtil() {
-		FileUtil.mkdirs(_PREVIEW_PATH);
-		FileUtil.mkdirs(_THUMBNAIL_PATH);
-	}
-
 	private static final String _PREVIEW_PATH =
 		SystemProperties.get(SystemProperties.TMP_DIR) +
 			"/liferay/document_preview/";
@@ -337,13 +336,18 @@ public class VideoProcessorUtil {
 		SystemProperties.get(SystemProperties.TMP_DIR) +
 			"/liferay/document_thumbnail/";
 
-	private static Log _log = LogFactoryUtil.getLog(VideoProcessorUtil.class);
+	private static Log _log = LogFactoryUtil.getLog(VideoProcessor.class);
 
-	private static VideoProcessorUtil _instance = new VideoProcessorUtil();
+	private static VideoProcessor _instance = new VideoProcessor();
 
 	private static List<String> _videoMimeTypes = Arrays.asList(
 		"video/quicktime", "video/mpeg", "video/x-msvideo", "video/mp4",
 		"video/x-ms-wmv", "video/avi");
+
+	static {
+		FileUtil.mkdirs(_PREVIEW_PATH);
+		FileUtil.mkdirs(_THUMBNAIL_PATH);
+	}
 
 	private List<Long> _fileEntries = new Vector<Long>();
 

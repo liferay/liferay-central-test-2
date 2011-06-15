@@ -30,14 +30,14 @@ String src = themeDisplay.getPortalURL() + themeDisplay.getPathContext() + "/doc
 <c:if test="<%= fileVersion.isApproved() %>">
 	<div class="asset-resource-info">
 		<c:choose>
-			<c:when test="<%= PDFProcessorUtil.hasImages(fileEntry) %>">
+			<c:when test="<%= PDFProcessor.hasImages(fileEntry) %>">
 				<div>
 					<img src="<%= src %>&documentThumbnail=1" />
 
 					<%= fileVersion.getTitle() %>
 				</div>
 			</c:when>
-			<c:when test="<%= VideoProcessorUtil.hasVideo(fileEntry) %>">
+			<c:when test="<%= VideoProcessor.hasVideo(fileEntry) %>">
 				<div>
 					<img src="<%= src %>&videoThumbnail=1" />
 

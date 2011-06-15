@@ -62,7 +62,7 @@ import org.im4java.process.ProcessStarter;
 /**
  * @author Alexander Chow
  */
-public class PDFProcessorUtil {
+public class PDFProcessor extends DLProcessor {
 
 	public static final String PREVIEW_TYPE = ImageProcessor.TYPE_PNG;
 
@@ -94,33 +94,8 @@ public class PDFProcessorUtil {
 		return hasImages;
 	}
 
-	private PDFProcessorUtil() {
-		FileUtil.mkdirs(_PREVIEW_PATH);
-		FileUtil.mkdirs(_THUMBNAIL_PATH);
-
-		if (!PropsValues.IMAGEMAGICK_ENABLED) {
-			return;
-		}
-
-		String filterName = null;
-
-		if (OSDetector.isApple()) {
-			filterName = "apple";
-		}
-		else if (OSDetector.isWindows()) {
-			filterName = "windows";
-		}
-		else {
-			filterName = "unix";
-		}
-
-		String globalSearchPath = PropsUtil.get(
-			PropsKeys.IMAGEMAGICK_GLOBAL_SEARCH_PATH,
-			new Filter(filterName));
-
-		ProcessStarter.setGlobalSearchPath(globalSearchPath);
-
-		_convertCmd = new ConvertCmd();
+	public void trigger(FileEntry fileEntry) {
+		_instance._queueGeneration(fileEntry);
 	}
 
 	private void _generateImages(FileEntry fileEntry) {
@@ -534,11 +509,39 @@ public class PDFProcessorUtil {
 		SystemProperties.get(SystemProperties.TMP_DIR) +
 			"/liferay/document_thumbnail/";
 
-	private static Log _log = LogFactoryUtil.getLog(PDFProcessorUtil.class);
+	private static Log _log = LogFactoryUtil.getLog(PDFProcessor.class);
 
-	private static PDFProcessorUtil _instance = new PDFProcessorUtil();
+	private static PDFProcessor _instance = new PDFProcessor();
 
-	private ConvertCmd _convertCmd;
-	private List<Long> _fileEntries = new Vector<Long>();
+	private static ConvertCmd _convertCmd;
+
+	private static List<Long> _fileEntries = new Vector<Long>();
+
+	static {
+		FileUtil.mkdirs(_PREVIEW_PATH);
+		FileUtil.mkdirs(_THUMBNAIL_PATH);
+
+		if (PropsValues.IMAGEMAGICK_ENABLED) {
+			String filterName = null;
+
+			if (OSDetector.isApple()) {
+				filterName = "apple";
+			}
+			else if (OSDetector.isWindows()) {
+				filterName = "windows";
+			}
+			else {
+				filterName = "unix";
+			}
+
+			String globalSearchPath = PropsUtil.get(
+				PropsKeys.IMAGEMAGICK_GLOBAL_SEARCH_PATH,
+				new Filter(filterName));
+
+			ProcessStarter.setGlobalSearchPath(globalSearchPath);
+
+			_convertCmd = new ConvertCmd();
+		}
+	}
 
 }

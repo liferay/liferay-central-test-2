@@ -12,22 +12,24 @@
  * details.
  */
 
-package com.liferay.portlet.documentlibrary.messaging;
+package com.liferay.portlet.documentlibrary.util;
 
-import com.liferay.portal.kernel.messaging.BaseMessageListener;
-import com.liferay.portal.kernel.messaging.Message;
+import com.liferay.portal.kernel.messaging.DestinationNames;
+import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.repository.model.FileEntry;
-import com.liferay.portlet.documentlibrary.util.PDFProcessor;
+import com.liferay.portal.repository.liferayrepository.model.LiferayFileEntry;
 
 /**
  * @author Alexander Chow
  */
-public class PDFProcessorMessageListener extends BaseMessageListener {
+public class RawMetadataProcessor extends DLProcessor {
 
-	protected void doReceive(Message message) {
-		FileEntry fileEntry = (FileEntry)message.getPayload();
-
-		PDFProcessor.generateImages(fileEntry);
+	public void trigger(FileEntry fileEntry) {
+		if (fileEntry instanceof LiferayFileEntry) {
+			MessageBusUtil.sendMessage(
+				DestinationNames.DOCUMENT_LIBRARY_RAW_METADATA_PROCESSOR,
+				fileEntry.getModel());
+		}
 	}
 
 }
