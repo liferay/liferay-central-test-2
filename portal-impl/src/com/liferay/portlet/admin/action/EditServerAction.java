@@ -157,6 +157,9 @@ public class EditServerAction extends PortletAction {
 		else if (cmd.equals("updateCaptcha")) {
 			updateCaptcha(actionRequest, preferences);
 		}
+		else if (cmd.equals("updateExternalTools")) {
+			updateExternalTools(actionRequest, preferences);
+		}
 		else if (cmd.equals("updateFileUploads")) {
 			updateFileUploads(actionRequest, preferences);
 		}
@@ -165,9 +168,6 @@ public class EditServerAction extends PortletAction {
 		}
 		else if (cmd.equals("updateMail")) {
 			updateMail(actionRequest, preferences);
-		}
-		else if (cmd.equals("updateOpenOffice")) {
-			updateOpenOffice(actionRequest, preferences);
 		}
 		else if (cmd.equals("verifyPluginTables")) {
 			verifyPluginTables();
@@ -442,6 +442,28 @@ public class EditServerAction extends PortletAction {
 		}
 	}
 
+	protected void updateExternalTools(
+			ActionRequest actionRequest, PortletPreferences preferences)
+		throws Exception {
+
+		boolean openOfficeEnabled = ParamUtil.getBoolean(
+			actionRequest, "openOfficeEnabled");
+		int openOfficePort = ParamUtil.getInteger(
+			actionRequest, "openOfficePort");
+		boolean xugglerEnabled = ParamUtil.getBoolean(
+			actionRequest, "xugglerEnabled");
+
+		preferences.setValue(
+			PropsKeys.OPENOFFICE_SERVER_ENABLED,
+			String.valueOf(openOfficeEnabled));
+		preferences.setValue(
+			PropsKeys.OPENOFFICE_SERVER_PORT, String.valueOf(openOfficePort));
+		preferences.setValue(
+			PropsKeys.XUGGLER_ENABLED, String.valueOf(xugglerEnabled));
+
+		preferences.store();
+	}
+
 	protected void updateFileUploads(
 			ActionRequest actionRequest, PortletPreferences preferences)
 		throws Exception {
@@ -608,21 +630,6 @@ public class EditServerAction extends PortletAction {
 		preferences.store();
 
 		MailServiceUtil.clearSession();
-	}
-
-	protected void updateOpenOffice(
-			ActionRequest actionRequest, PortletPreferences preferences)
-		throws Exception {
-
-		boolean enabled = ParamUtil.getBoolean(actionRequest, "enabled");
-		int port = ParamUtil.getInteger(actionRequest, "port");
-
-		preferences.setValue(
-			PropsKeys.OPENOFFICE_SERVER_ENABLED, String.valueOf(enabled));
-		preferences.setValue(
-			PropsKeys.OPENOFFICE_SERVER_PORT, String.valueOf(port));
-
-		preferences.store();
 	}
 
 	protected void validateCaptcha(ActionRequest actionRequest)

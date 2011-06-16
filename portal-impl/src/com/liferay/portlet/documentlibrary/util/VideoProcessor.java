@@ -21,8 +21,10 @@ import com.liferay.portal.kernel.messaging.DestinationNames;
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.util.FileUtil;
+import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
@@ -109,7 +111,11 @@ public class VideoProcessor extends DLProcessor {
 
 	private void _generateVideo(FileEntry fileEntry) {
 		try {
-			if (!PropsValues.XUGGLER_ENABLED || _hasVideo(fileEntry)) {
+			if (!PrefsPropsUtil.getBoolean(
+					PropsKeys.XUGGLER_ENABLED,
+					PropsValues.XUGGLER_ENABLED) ||
+				_hasVideo(fileEntry)) {
+
 				return;
 			}
 

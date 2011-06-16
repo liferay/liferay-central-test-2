@@ -45,7 +45,7 @@ numberFormat.setMinimumIntegerDigits(2);
 	</c:when>
 	<c:otherwise>
 		<liferay-ui:tabs
-			names="resources,log-levels,properties,captcha,data-migration,file-uploads,mail,OpenOffice,script,shutdown"
+			names="resources,log-levels,properties,captcha,data-migration,file-uploads,mail,external-tools,script,shutdown"
 			param="tabs2"
 			url="<%= portletURL.toString() %>"
 		/>
@@ -549,13 +549,17 @@ numberFormat.setMinimumIntegerDigits(2);
 					<aui:button onClick="<%= taglibUpdateMail %>" value="save" />
 				</aui:button-row>
 			</c:when>
-			<c:when test='<%= tabs2.equals("OpenOffice") %>'>
+			<c:when test='<%= tabs2.equals("external-tools") %>'>
 				<aui:fieldset>
-					<liferay-ui:panel-container extended="<%= true %>" id="adminOpenOfficeConversionPanelContainer" persistState="<%= true %>">
+					<liferay-ui:panel-container extended="<%= true %>" id="adminExternalToolsPanelContainer" persistState="<%= true %>">
 						<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="adminOpenOfficeConversionPanel" persistState="<%= true %>" title="enabling-openoffice-integration-provides-document-conversion-functionality">
-							<aui:input inlineLabel="right" name="enabled" type="checkbox" value="<%= PrefsPropsUtil.getBoolean(PropsKeys.OPENOFFICE_SERVER_ENABLED) %>" />
+							<aui:input inlineLabel="right" label="enabled" name="openOfficeEnabled" type="checkbox" value="<%= PrefsPropsUtil.getBoolean(PropsKeys.OPENOFFICE_SERVER_ENABLED) %>" />
 
-							<aui:input cssClass="lfr-input-text-container" name="port" type="text" value="<%= PrefsPropsUtil.getString(PropsKeys.OPENOFFICE_SERVER_PORT) %>" />
+							<aui:input cssClass="lfr-input-text-container" label="port" name="openOfficePort" type="text" value="<%= PrefsPropsUtil.getString(PropsKeys.OPENOFFICE_SERVER_PORT) %>" />
+						</liferay-ui:panel>
+
+						<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="adminXugglerPanel" persistState="<%= true %>" title="enabling-xuggler-provides-video-conversion-and-preview">
+							<aui:input inlineLabel="right" label="enabled" name="xugglerEnabled" type="checkbox" value="<%= PrefsPropsUtil.getBoolean(PropsKeys.XUGGLER_ENABLED) %>" />
 						</liferay-ui:panel>
 					</liferay-ui:panel-container>
 				</aui:fieldset>
@@ -563,10 +567,10 @@ numberFormat.setMinimumIntegerDigits(2);
 				<aui:button-row>
 
 					<%
-					String taglibUpdateOpenOffice = renderResponse.getNamespace() + "saveServer('updateOpenOffice');";
+					String taglibUpdateExternalTools = renderResponse.getNamespace() + "saveServer('updateExternalTools');";
 					%>
 
-					<aui:button onClick="<%= taglibUpdateOpenOffice %>" value="save" />
+					<aui:button onClick="<%= taglibUpdateExternalTools %>" value="save" />
 				</aui:button-row>
 			</c:when>
 			<c:when test='<%= tabs2.equals("script") %>'>
