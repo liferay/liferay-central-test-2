@@ -14,7 +14,7 @@
  */
 --%>
 
-.lfr-preview-file {
+.lfr-preview-file, lr-preview-video {
 	position: relative;
 }
 
@@ -215,4 +215,12 @@
 
 .lfr-preview-file-arrow-right {
 	right: -50px;
+}
+
+.lfr-preview-video-content {
+	border: 2px solid #828F95;
+	height: 380px;
+	margin: auto;
+	padding: 2px;
+	width: 640px;
 }
