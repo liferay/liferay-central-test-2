@@ -1,0 +1,199 @@
+/**
+ * Copyright (c) 2000-2011 Liferay, Inc. All rights reserved.
+ *
+ * This library is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU Lesser General Public License as published by the Free
+ * Software Foundation; either version 2.1 of the License, or (at your option)
+ * any later version.
+ *
+ * This library is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
+ * details.
+ */
+
+package com.liferay.portal.kernel.search.facet;
+
+import com.liferay.documentlibrary.model.FileModel;
+import com.liferay.portal.kernel.json.JSONArray;
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
+import com.liferay.portal.kernel.json.JSONObject;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.plugin.PluginPackage;
+import com.liferay.portal.kernel.search.BooleanClause;
+import com.liferay.portal.kernel.search.BooleanClauseFactoryUtil;
+import com.liferay.portal.kernel.search.BooleanClauseOccur;
+import com.liferay.portal.kernel.search.BooleanQuery;
+import com.liferay.portal.kernel.search.BooleanQueryFactoryUtil;
+import com.liferay.portal.kernel.search.Field;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerPostProcessor;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.search.SearchContext;
+import com.liferay.portal.kernel.search.facet.config.FacetConfiguration;
+import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portlet.asset.model.AssetEntry;
+
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * @author Raymond Augé
+ */
+public class AssetEntriesFacet extends MultiValueFacet {
+
+	public AssetEntriesFacet(SearchContext searchContext) {
+		super(searchContext);
+
+		setFieldName(Field.ENTRY_CLASS_NAME);
+
+		initFacetClause();
+	}
+
+	@Override
+	public void setFacetConfiguration(FacetConfiguration facetConfiguration) {
+		super.setFacetConfiguration(facetConfiguration);
+
+		initFacetClause();
+	}
+
+	@Override
+	protected BooleanClause doGetFacetClause() {
+		SearchContext searchContext = getSearchContext();
+
+		String[] entryClassNames = searchContext.getEntryClassNames();
+
+		BooleanQuery facetQuery = BooleanQueryFactoryUtil.create();
+
+		for (String entryClassName : entryClassNames) {
+			Indexer indexer = IndexerRegistryUtil.getIndexer(entryClassName);
+
+			if (indexer == null) {
+				continue;
+			}
+
+			try {
+				BooleanQuery indexerBooleanQuery = indexer.getFacetQuery(
+					entryClassName, searchContext);
+
+				if ((indexerBooleanQuery == null ) ||
+					(indexerBooleanQuery.clauses().isEmpty())) {
+
+					continue;
+				}
+
+				BooleanQuery entityQuery = BooleanQueryFactoryUtil.create();
+
+				entityQuery.add(indexerBooleanQuery, BooleanClauseOccur.MUST);
+
+				indexer.postProcessContextQuery(entityQuery, searchContext);
+
+				for (IndexerPostProcessor indexerPostProcessor :
+						indexer.getIndexerPostProcessors()) {
+
+					indexerPostProcessor.postProcessContextQuery(
+						entityQuery, searchContext);
+				}
+
+				if (indexer.isStagingAware()) {
+					if (!searchContext.isIncludeLiveGroups() &&
+						searchContext.isIncludeStagingGroups()) {
+
+						entityQuery.addRequiredTerm(Field.STAGING_GROUP, true);
+					}
+					else if (searchContext.isIncludeLiveGroups() &&
+							!searchContext.isIncludeStagingGroups()) {
+
+						entityQuery.addRequiredTerm(Field.STAGING_GROUP, false);
+					}
+				}
+
+				if (!entityQuery.clauses().isEmpty()) {
+					facetQuery.add(entityQuery, BooleanClauseOccur.SHOULD);
+				}
+			}
+			catch (Exception e) {
+				_log.error(e, e);
+			}
+		}
+
+		if (facetQuery.clauses().isEmpty()) {
+			return null;
+		}
+
+		return BooleanClauseFactoryUtil.create(
+			facetQuery, BooleanClauseOccur.MUST.getName());
+	}
+
+	protected void initFacetClause() {
+		SearchContext searchContext = getSearchContext();
+
+		FacetConfiguration facetConfiguration = getFacetConfiguration();
+
+		JSONObject dataJSONObject = facetConfiguration.getData();
+
+		String[] entryClassNames = null;
+
+		if (dataJSONObject.has("values")) {
+			JSONArray valuesJSONArray = dataJSONObject.getJSONArray("values");
+
+			entryClassNames = new String[valuesJSONArray.length()];
+
+			for (int i = 0; i < valuesJSONArray.length(); i++) {
+				entryClassNames[i] = valuesJSONArray.getString(i);
+			}
+		}
+
+		if ((entryClassNames == null) || (entryClassNames.length == 0)) {
+			entryClassNames = searchContext.getEntryClassNames();
+		}
+
+		if (!isStatic()) {
+			String[] entryClassNameParam = StringUtil.split(
+				GetterUtil.getString(
+					searchContext.getAttribute(getFieldName())));
+
+			if ((entryClassNameParam != null) &&
+				(entryClassNameParam.length > 0)) {
+
+				entryClassNames = entryClassNameParam;
+			}
+		}
+
+		if ((entryClassNames == null) || (entryClassNames.length == 0)) {
+			List<String> entryClassNamesList = new ArrayList<String>();
+
+			for (Indexer indexer : IndexerRegistryUtil.getIndexers()) {
+				for (String className : indexer.getClassNames()) {
+					if (!entryClassNamesList.contains(className) &&
+						!className.equals(AssetEntry.class.getName()) &&
+						!className.equals(FileModel.class.getName()) &&
+						!className.equals(PluginPackage.class.getName())) {
+
+						entryClassNamesList.add(className);
+					}
+				}
+			}
+
+			entryClassNames = entryClassNamesList.toArray(
+				new String[entryClassNamesList.size()]);
+
+			if (!dataJSONObject.has("values")) {
+				JSONArray entriesJSONArray = JSONFactoryUtil.createJSONArray();
+
+				for (String entryClassName : entryClassNames) {
+					entriesJSONArray.put(entryClassName);
+				}
+
+				dataJSONObject.put("values", entriesJSONArray);
+			}
+		}
+
+		searchContext.setEntryClassNames(entryClassNames);
+	}
+
+	private static Log _log = LogFactoryUtil.getLog(AssetEntriesFacet.class);
+
+}

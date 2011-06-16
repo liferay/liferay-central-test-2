@@ -1,0 +1,79 @@
+<?xml version="1.0"?>
+
+<project name="util-taglib" basedir="." default="compile">
+	<import file="../build-common-java.xml" />
+
+	<property name="jar.file" value="${ant.project.name}" />
+
+	<target name="build-taglibs">
+		<java
+			classname="com.liferay.alloy.tools.tagbuilder.TagBuilder"
+			classpathref="project.classpath"
+			fork="true"
+			maxmemory="256m"
+			newenvironment="true"
+		>
+			<jvmarg value="-Dtagbuilder.components.xml=${project.dir}/util-taglib/src/com/liferay/taglib/aui.xml" />
+			<jvmarg value="-Dtagbuilder.docroot.dir=${project.dir}/portal-web/docroot/" />
+			<jvmarg value="-Dtagbuilder.java.dir=${project.dir}/util-taglib/src/com/liferay/taglib/" />
+			<jvmarg value="-Dtagbuilder.java.package=com.liferay.taglib" />
+			<jvmarg value="-Dtagbuilder.jsp.common.init.path=/html/taglib/taglib-init.jsp" />
+			<jvmarg value="-Dtagbuilder.jsp.dir=/html/taglib/" />
+			<jvmarg value="-Dtagbuilder.templates.dir=com/liferay/alloy/tools/tagbuilder/templates/" />
+			<jvmarg value="-Dtagbuilder.tld.dir=${project.dir}/util-taglib/src/META-INF/" />
+		</java>
+	</target>
+
+	<target name="deploy" depends="jar">
+		<if>
+			<equals arg1="${app.server.type}" arg2="tomcat" />
+			<then>
+				<copy file="${jar.file}.jar" todir="${app.server.portal.dir}/WEB-INF/lib" />
+
+				<copy todir="${app.server.portal.dir}/WEB-INF/tld">
+					<fileset dir="classes/META-INF" includes="*.tld" />
+				</copy>
+			</then>
+		</if>
+	</target>
+
+	<target name="jar">
+		<antcall target="build-common-java.jar" />
+
+		<copy file="${jar.file}.jar" todir="${portal-impl.classes.dir}/com/liferay/portal/deploy/dependencies" />
+
+		<copy todir="${portal-impl.classes.dir}/com/liferay/portal/deploy/dependencies">
+			<fileset dir="classes/META-INF" />
+		</copy>
+
+		<copy file="${jar.file}.jar" todir="${project.dir}/portal-web/docroot/WEB-INF/lib" />
+
+		<copy todir="${project.dir}/portal-web/docroot/WEB-INF/tld">
+			<fileset dir="classes/META-INF" includes="*.tld" />
+		</copy>
+	</target>
+
+	<target name="taglibdoc">
+		<property name="doc.taglibs.dir" value="${doc.dir}/taglibs" />
+
+		<mkdir dir="${doc.taglibs.dir}" />
+
+		<java
+			classname="com.sun.tlddoc.TLDDoc"
+			classpathref="project.classpath"
+			failonerror="true"
+			fork="true"
+			maxmemory="256m"
+		>
+			<arg line="-d ${doc.taglibs.dir}" />
+			<arg value="${project.dir}/util-taglib/src/META-INF/liferay-aui.tld" />
+			<arg value="${project.dir}/util-taglib/src/META-INF/liferay-faces.tld" />
+			<arg value="${project.dir}/util-taglib/src/META-INF/liferay-portlet-ext.tld" />
+			<arg value="${project.dir}/util-taglib/src/META-INF/liferay-portlet.tld" />
+			<arg value="${project.dir}/util-taglib/src/META-INF/liferay-security.tld" />
+			<arg value="${project.dir}/util-taglib/src/META-INF/liferay-theme.tld" />
+			<arg value="${project.dir}/util-taglib/src/META-INF/liferay-ui.tld" />
+			<arg value="${project.dir}/util-taglib/src/META-INF/liferay-util.tld" />
+		</java>
+	</target>
+</project>

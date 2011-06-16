@@ -1,0 +1,44 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>TranslateEnglishJapaneseTest</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">TranslateEnglishJapaneseTest</td></tr>
+</thead><tbody>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Translator Test Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Translator Test Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>_26_id</td>
+	<td>label=English to Japanese</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>_26_text</td>
+	<td>My name is JR Skywalker, fluent in over 6 million forms of communication.</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Translate']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>私の名前はコミュニケーションの6,000,000の形態に流暢なジュニアSkywalkerである。</td>
+	<td></td>
+</tr>
+
+</tbody></table>
+</body>
+</html>

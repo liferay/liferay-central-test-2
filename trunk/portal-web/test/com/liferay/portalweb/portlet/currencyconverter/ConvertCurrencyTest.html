@@ -1,0 +1,69 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>ConvertCurrencyTest</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">ConvertCurrencyTest</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/web/guest/home/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Currency Converter Test Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
+	<td>link=Currency Converter Test Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>_16_number</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>_16_number</td>
+	<td>2.5</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>_16_from</td>
+	<td>label=KRW</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>_16_to</td>
+	<td>label=BHD</td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
+	<td>//input[@value='Convert']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>//input[2]</td>
+	<td>2.5</td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>KRW</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>BHD</td>
+	<td></td>
+</tr>
+
+</tbody></table>
+</body>
+</html>

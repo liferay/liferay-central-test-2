@@ -1,0 +1,3 @@
+#!/bin/sh
+
+./resin.sh

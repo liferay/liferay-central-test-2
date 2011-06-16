@@ -1,0 +1,44 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>TranslateDutchEnglishTest</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">TranslateDutchEnglishTest</td></tr>
+</thead><tbody>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Translator Test Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Translator Test Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>_26_id</td>
+	<td>label=Dutch to English</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>_26_text</td>
+	<td>Mijn naam is Vertaler Liferay, vloeiend in meer dan 6 miljoen vormen van mededeling.</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Translate']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>My name is translator Liferay, fluently in more than 6 millions forms of communication.</td>
+	<td></td>
+</tr>
+
+</tbody></table>
+</body>
+</html>

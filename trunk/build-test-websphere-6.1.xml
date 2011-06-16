@@ -1,0 +1,130 @@
+<?xml version="1.0"?>
+
+<project name="portal-test-websphere-6.1" basedir="." default="test" xmlns:antelope="antlib:ise.antelope.tasks">
+	<import file="build-test.xml" />
+
+	<target name="run-selenium-websphere-6.1">
+		<antcall target="prepare-vm-server">
+			<param name="vm.vmdk.suffix" value="websphere-6.1.0.27" />
+		</antcall>
+
+		<tstamp>
+			<format property="tstamp.value" pattern="yyyyMMddkkmmssSSS" />
+		</tstamp>
+
+		<unzip src="dist/liferay-portal-dependencies-${lp.version}.zip" dest="${tstamp.value}">
+			<mapper type="flatten" />
+		</unzip>
+
+		<copy todir="${tstamp.value}">
+			<fileset
+				dir="lib/development"
+				includes="hsql.jar,jtds.jar,mysql.jar,persistence.jar,postgresql.jar"
+			/>
+		</copy>
+
+		<if>
+			<isset property="jdbc.drivers.optional.dir" />
+			<then>
+				<copy todir="${tstamp.value}">
+					<fileset
+						dir="${jdbc.drivers.optional.dir}"
+						includes="*.jar"
+					/>
+				</copy>
+			</then>
+		</if>
+
+		<exec executable="${pscp.executable}">
+			<arg line="-pw ${vm.password} ${tstamp.value}\*.jar ${vm.username}@${vm.host}:/Progra~1/IBM/WebSphere/AppServer/lib/ext" />
+		</exec>
+
+		<delete dir="${tstamp.value}" />
+
+		<exec executable="${plink.executable}">
+			<arg line="-pw ${vm.password} ${vm.username}@${vm.host} cmd.exe /c move C:\Progra~1\IBM\WebSphere\AppServer\lib\ext\portlet.jar C:\Progra~1\IBM\WebSphere\AppServer\java\jre\lib\ext" />
+		</exec>
+
+		<exec executable="${pscp.executable}">
+			<arg line="-pw ${vm.password} ${vm.username}@${vm.host}:/Progra~1/IBM/WebSphere/AppServer/profiles/AppSrv01/config/cells/liferay-ead7385Node01Cell/nodes/liferay-ead7385Node01/servers/server1/server.xml server.xml" />
+		</exec>
+
+		<replace file="server.xml">
+			<replacefilter token="genericJvmArguments=&quot;&quot;" value="genericJvmArguments=&quot;-Dfile.encoding=UTF8&quot;" />
+		</replace>
+
+		<exec executable="${pscp.executable}">
+			<arg line="-pw ${vm.password} server.xml ${vm.username}@${vm.host}:/Progra~1/IBM/WebSphere/AppServer/profiles/AppSrv01/config/cells/liferay-ead7385Node01Cell/nodes/liferay-ead7385Node01/servers/server1/server.xml" />
+		</exec>
+
+		<delete file="server.xml" />
+
+		<exec executable="${plink.executable}">
+			<arg line="-pw ${vm.password} ${vm.username}@${vm.host} cmd.exe /c C:\Progra~1\IBM\WebSphere\AppServer\profiles\AppSrv01\bin\startServer.bat server1" />
+		</exec>
+
+		<echo file="wsadmin.jacl">$AdminApp uninstall DefaultApplication
+
+$AdminConfig save
+
+$AdminApp install "C:/liferay-portal-${lp.version}.war" {-appname liferay-portal -contextroot /}
+
+$AdminConfig save
+
+$AdminApp install "C:/tunnel-web.war" {-appname liferay-tunnel-web -contextroot /tunnel-web}
+
+$AdminConfig save
+
+$AdminControl stopServer server1</echo>
+
+		<exec executable="${pscp.executable}">
+			<arg line="-pw ${vm.password} wsadmin.jacl ${vm.username}@${vm.host}:/" />
+		</exec>
+
+		<delete file="wsadmin.jacl" />
+
+		<exec executable="${plink.executable}">
+			<arg line="-pw ${vm.password} ${vm.username}@${vm.host} cmd.exe /c C:\Progra~1\IBM\WebSphere\AppServer\bin\wsadmin.bat -f C:\wsadmin.jacl" />
+		</exec>
+
+		<antcall target="revert-test-properties" />
+
+		<replace
+			file="portal-impl/test/test-portal-impl.properties"
+			token="localhost:8080"
+			value="${vm.host}:9080"
+		/>
+
+		<replace
+			file="portal-web/test/test-portal-web.properties"
+			token="localhost:8080"
+			value="${vm.host}:9080"
+		/>
+
+		<antcall target="start-selenium" />
+
+		<antcall target="run-websphere-6.1">
+			<param name="test.class" value="${test.name}" />
+		</antcall>
+
+		<antcall target="stop-selenium" />
+
+		<exec dir="${vm.drive}/${vm.host}" executable="${vmware-cmd.executable}">
+			<arg line="${vm.drive}\${vm.host}\${vm.host}.vmx stop hard" />
+		</exec>
+	</target>
+
+	<target name="run-websphere-6.1">
+		<antcall target="rebuild-database" inheritAll="false" />
+
+		<exec executable="${plink.executable}">
+			<arg line="-pw ${vm.password} ${vm.username}@${vm.host} cmd.exe /c C:\Progra~1\IBM\WebSphere\AppServer\profiles\AppSrv01\bin\startServer.bat server1" />
+		</exec>
+
+		<antcall target="run-selenium-test" />
+
+		<exec executable="${plink.executable}">
+			<arg line="-pw ${vm.password} ${vm.username}@${vm.host} cmd.exe /c C:\Progra~1\IBM\WebSphere\AppServer\profiles\AppSrv01\bin\stopServer.bat server1" />
+		</exec>
+	</target>
+</project>

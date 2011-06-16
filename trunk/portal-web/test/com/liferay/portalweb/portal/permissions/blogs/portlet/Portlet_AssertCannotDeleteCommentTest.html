@@ -1,0 +1,39 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Portlet_AssertCannotDeleteCommentTest</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">Portlet_AssertCannotDeleteCommentTest</td></tr>
+</thead><tbody>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Blogs Permissions Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
+	<td>link=Blogs Permissions Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
+	<td>link=Portlet1 Temporary1 Entry1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@class='lfr-panel-title']/span</td>
+	<td>Comments</td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>link=Delete</td>
+	<td></td>
+</tr>
+
+</tbody></table>
+</body>
+</html>

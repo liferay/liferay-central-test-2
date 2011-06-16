@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+
+<!--
+Copyright (c) 2000-2011 Liferay, Inc. All rights reserved.
+
+This library is free software; you can redistribute it and/or modify it under
+the terms of the GNU Lesser General Public License as published by the Free
+Software Foundation; either version 2.1 of the License, or (at your option)
+any later version.
+
+This library is distributed in the hope that it will be useful, but WITHOUT
+ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
+details.
+-->
+
+<html>
+	<body>
+		<h2>The Liferay Public API Documentation.</h2>
+
+		<p>This documentation includes only those classes that should be used by portlet and plugin developers. These include:</p>
+
+		<ul>
+			<li>Portal models and services</li>
+			<li>Built-in portlet models and services</li>
+			<li>The portal kernel and utilities</li>
+		</ul>
+
+		<h2>Best Practices</h2>
+
+		<p>The hot-pluggable nature of Liferay portlets and plugins imposes certain restrictions on the parts of the Liferay core they can access. These limitations allow for the least disruptive upgrades to both the core and plugins while also allowing the greatest flexibility in modifying core Liferay features without requiring a portal restart.</p>
+
+		<h3>Interfacing with the Liferay Kernel and Built-in Portlets</h3>
+
+		<p>Most classes in Liferay follow a simple, but extremely important hierarchy. The public methods are defined in an interface, such as &quot;Portal&quot;. This interface is then implemented in a class of the same name but with the suffix &quot;Impl&quot; appended (&quot;PortalImpl&quot;). A single instance of this implementation class is then stored inside a static wrapper class with the suffix &quot;Util&quot; (&quot;PortalUtil&quot;).</p>
+
+		<p>The hierarchy of different types of classes will often diverge significantly from this paradigm (particularly for models and services), the basic structure remains the same. The reasons for this system are explained in more detail later, but the end result is that whenever possible, classes should only be referenced by their interfaces and accessed via their utilities. If you are interested in a more detailed explanation keep reading, otherwise skip to the examples section.</p>
+
+		<p>The first cause for this pattern is that servlet containers (such as Apache Tomcat) place the core and plugins within separate class loaders. This means that any classes shared between the two must be placed in the global class loader for the servlet container. Classes within the global class loader cannot be reloaded without restarting the servlet container, whereas classes inside servlets (such as the Liferay kernel and plugins) are monitored for changes on disk and reloaded whenever necessary. Thus, flexibility mandates that as little as possible be placed in the global class loader. However, all the functionality of the core must still be accessible within portlets.</p>
+
+		<p>Liferay solves this problem using the class hierarchy. All the core interfaces and utilities are placed in the global class loader, while their implementations are placed inside the portal servlet. This allows the portal to be modified in place, while still maintaining a consistent interface for plugins.</p>
+
+		<p>One other reason for the separation between interface, implementation, and utility is that Liferay makes extensive use of the Spring framework to the support dynamic injection and replacement of implementation classes in utilities. This means that it is possible in Liferay to completely replace many built-in classes with your own implementations at runtime. By placing core classes within a static utility wrapper, you can dynamically modify Liferay's behavior without the portal or other plugins needing to do anything.</p>
+
+		<h4>Examples</h4>
+
+		<p>Get a user model object from the local service:</p>
+
+		<pre><code>import com.liferay.portal.service.UserLocalServiceUtil;
+import com.liferay.portal.model.User;
+...
+User test_user = UserLocalServiceUtil.getUserByEmailAddress("test@liferay.com");</code></pre>
+
+		<p>Retrieve the list of available locales from a localizations XML fragment:</p>
+
+		<pre><code>import com.liferay.portal.kernel.util.LocalizationUtil;
+...
+String xml;
+String[] locales = LocalizationUtil.getAvailableLocales(xml);</code></pre>
+	</body>
+</html>

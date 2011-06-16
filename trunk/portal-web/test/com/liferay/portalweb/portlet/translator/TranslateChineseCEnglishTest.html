@@ -1,0 +1,44 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>TranslateChineseCEnglishTest</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">TranslateChineseCEnglishTest</td></tr>
+</thead><tbody>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Translator Test Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Translator Test Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>_26_id</td>
+	<td>label=Chinese (China) to English</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>_26_text</td>
+	<td>我的名字是Mike Vader译者，流利完全成功6通信的百万个形式。</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Translate']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>My name is Mike the Vader translator, fluent completely successful 6 correspondence 1,000,000 forms.</td>
+	<td></td>
+</tr>
+
+</tbody></table>
+</body>
+</html>

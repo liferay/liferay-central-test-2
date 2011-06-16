@@ -1,0 +1,181 @@
+<?xml version="1.0"?>
+
+<project name="sql-parent">
+	<import file="../build-common.xml" />
+
+	<mkdir dir="log" />
+
+	<target name="build-db">
+		<java
+			classname="com.liferay.portal.tools.DBBuilder"
+			classpathref="project.classpath"
+		>
+			<arg value="-Dexternal-properties=com/liferay/portal/tools/dependencies/portal-tools.properties" />
+			<arg value="db.database.name=${database.name}" />
+			<arg value="db.database.types=${database.types}" />
+			<arg value="db.sql.dir=${basedir}" />
+		</java>
+	</target>
+
+	<target name="clean">
+		<delete includeemptydirs="true" failonerror="false">
+			<fileset
+				dir="."
+				excludes="*.sql,*.vm"
+				includes="create*/**,indexes/**,log/**,portal*/**,sequences/**,update*/**"
+			/>
+		</delete>
+	</target>
+
+	<target name="export-oracle">
+		<exec executable="${oracle.export.executable}">
+			<arg line="${oracle.export.arg.line}" />
+		</exec>
+	</target>
+
+	<target name="rebuild-all">
+		<antcall target="rebuild-db2" />
+		<antcall target="rebuild-firebird" />
+		<antcall target="rebuild-hypersonic" />
+		<antcall target="rebuild-mysql" />
+		<antcall target="rebuild-oracle" />
+		<antcall target="rebuild-postgresql" />
+		<antcall target="rebuild-sql-server" />
+		<antcall target="rebuild-sybase" />
+	</target>
+
+	<target name="rebuild-database">
+		<exec executable="${executable}" output="log/${log}">
+			<arg line="${arg.line}" />
+		</exec>
+	</target>
+
+	<target name="rebuild-db2">
+		<antcall target="rebuild-database">
+			<param name="executable" value="${db2.executable}" />
+			<param name="arg.line" value="${db2.arg.line}" />
+			<param name="log" value="${db2.log}" />
+		</antcall>
+	</target>
+
+	<target name="rebuild-firebird">
+		<delete file="${database.name}.gdb" failonerror="false" />
+
+		<antcall target="rebuild-database">
+			<param name="executable" value="${firebird.executable}" />
+			<param name="arg.line" value="${firebird.arg.line}" />
+			<param name="log" value="${firebird.log}" />
+		</antcall>
+	</target>
+
+	<target name="rebuild-hypersonic">
+		<delete file="${database.name}.lck" failonerror="false" />
+		<delete file="${database.name}.log" failonerror="false" />
+		<delete file="${database.name}.properties" failonerror="false" />
+		<delete file="${database.name}.script" failonerror="false" />
+
+		<java
+			classname="com.liferay.portal.tools.DBLoader"
+			classpathref="project.classpath"
+		>
+			<arg value="-Dexternal-properties=com/liferay/portal/tools/dependencies/portal-tools.properties" />
+			<arg value="-Dfile.encoding=UTF-8" />
+			<arg value="db.database.name=${database.name}" />
+			<arg value="db.database.type=hypersonic" />
+			<arg value="db.sql.dir=${basedir}" />
+			<arg value="db.file.name=portal${minimal.suffix}/portal${minimal.suffix}-hypersonic.sql" />
+		</java>
+
+		<java
+			classname="com.liferay.portal.tools.DBLoader"
+			classpathref="project.classpath"
+		>
+			<arg value="-Dexternal-properties=com/liferay/portal/tools/dependencies/portal-tools.properties" />
+			<arg value="-Dfile.encoding=UTF-8" />
+			<arg value="db.database.name=${database.name}" />
+			<arg value="db.database.type=hypersonic" />
+			<arg value="db.sql.dir=${basedir}" />
+			<arg value="db.file.name=indexes.sql" />
+		</java>
+
+		<delete dir="${database.name}.tmp" failonerror="false" />
+	</target>
+
+	<target name="rebuild-mysql">
+		<antcall target="rebuild-database">
+			<param name="executable" value="${mysql.executable}" />
+			<param name="arg.line" value="${mysql.arg.line}" />
+			<param name="log" value="${mysql.log}" />
+		</antcall>
+	</target>
+
+	<target name="rebuild-oracle">
+		<antcall target="rebuild-database">
+			<param name="executable" value="${oracle.sqlplus.executable}" />
+			<param name="arg.line" value="${oracle.arg.line}" />
+			<param name="log" value="${oracle.log}" />
+		</antcall>
+
+		<delete>
+			<fileset dir="portal" includes="*.log" />
+		</delete>
+	</target>
+
+	<target name="rebuild-postgresql">
+		<antcall target="rebuild-database">
+			<param name="executable" value="${postgresql.executable}" />
+			<param name="arg.line" value="${postgresql.arg.line}" />
+			<param name="log" value="${postgresql.log}" />
+		</antcall>
+	</target>
+
+	<target name="rebuild-sql-server">
+		<antcall target="rebuild-database">
+			<param name="executable" value="${sql-server.executable}" />
+			<param name="arg.line" value="${sql-server.arg.line}" />
+			<param name="log" value="${sql-server.log}" />
+		</antcall>
+	</target>
+
+	<target name="rebuild-sybase">
+		<antcall target="rebuild-database">
+			<param name="executable" value="${sybase.executable}" />
+			<param name="arg.line" value="${sybase.arg.line}" />
+			<param name="log" value="${sybase.log}" />
+		</antcall>
+	</target>
+
+	<target name="test-sample-sql" >
+		<tstamp>
+			<format property="tstamp.value" pattern="yyyyMMddkkmmssSSS" />
+		</tstamp>
+
+		<mkdir dir="${tstamp.value}" />
+
+		<java
+			classname="com.liferay.portal.tools.samplesqlbuilder.TestSampleSQLBuilder"
+			classpathref="project.classpath"
+			failonerror="true"
+		>
+			<arg value="-Dexternal-properties=com/liferay/portal/tools/dependencies/portal-tools.properties" />
+			<arg value="sql.dir=${basedir}" />
+			<arg value="sample.sql.base.dir=${basedir}/../benchmarks" />
+			<arg value="sample.sql.output.dir=${tstamp.value}"/>
+			<arg value="sample.sql.db.type=hypersonic" />
+			<arg value="sample.sql.blogs.entry.comment.count=1" />
+			<arg value="sample.sql.blogs.entry.count=1" />
+			<arg value="sample.sql.group.count=1" />
+			<arg value="sample.sql.mb.category.count=1" />
+			<arg value="sample.sql.mb.message.count=1" />
+			<arg value="sample.sql.mb.thread.count=1" />
+			<arg value="sample.sql.user.count=1" />
+			<arg value="sample.sql.user.to.group.count=1" />
+			<arg value="sample.sql.wiki.node.count=1" />
+			<arg value="sample.sql.wiki.page.comment.count=1" />
+			<arg value="sample.sql.wiki.page.count=1" />
+			<arg value="sample.sql.security.enabled=false" />
+		</java>
+
+		<delete dir="${tstamp.value}" />
+	</target>
+</project>
