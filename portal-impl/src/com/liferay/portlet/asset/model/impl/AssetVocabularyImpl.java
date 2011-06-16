@@ -78,8 +78,8 @@ public class AssetVocabularyImpl
 			_settingsProperties = getSettingsProperties();
 		}
 
-		return GetterUtil.getBoolean(_settingsProperties.getProperty(
-			"multiValued"), true);
+		return GetterUtil.getBoolean(
+			_settingsProperties.getProperty("multiValued"), true);
 	}
 
 	public boolean isRequired(long classNameId) {
