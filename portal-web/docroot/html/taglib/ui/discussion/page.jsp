@@ -339,6 +339,7 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 								</c:if>
 
 								<div class="lfr-discussion-message">
+
 									<%
 									String msgBody = BBCodeUtil.getHTML(message);
 
@@ -433,9 +434,9 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 									<div id="<%= randomNamespace %>postReplyForm<%= i %>" class="lfr-discussion-form lfr-discussion-form-reply" style="display: none;">
 
 										<liferay-ui:user-display
+											displayStyle="<%= 2 %>"
 											userId="<%= user.getUserId() %>"
 											userName="<%= HtmlUtil.escape(PortalUtil.getUserName(user.getUserId(), StringPool.BLANK)) %>"
-											displayStyle="<%= 2 %>"
 										/>
 
 										<aui:input id='<%= randomNamespace + "postReplyBody" + i %>' label="" name='<%= "postReplyBody" + i %>' style='<%= "height: " + ModelHintsConstants.TEXTAREA_DISPLAY_HEIGHT + "px; width: " + ModelHintsConstants.TEXTAREA_DISPLAY_WIDTH + "px;" %>' type="textarea"  wrap="soft" />
@@ -452,7 +453,7 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 									</div>
 
 									<c:if test="<%= MBDiscussionPermission.contains(permissionChecker, company.getCompanyId(), scopeGroupId, permissionClassName, permissionClassPK, message.getMessageId(), userId, ActionKeys.UPDATE_DISCUSSION) %>">
-										<div id="<%= randomNamespace %>editForm<%= i %>" class="lfr-discussion-form lfr-discussion-form-edit" style="display: none;">
+										<div class="lfr-discussion-form lfr-discussion-form-edit" id="<%= randomNamespace %>editForm<%= i %>" style="display: none;">
 											<aui:input id='<%= randomNamespace + "editReplyBody" + i %>' label="" name='<%= "editReplyBody" + i %>' style='<%= "height: " + ModelHintsConstants.TEXTAREA_DISPLAY_HEIGHT + "px; width: " + ModelHintsConstants.TEXTAREA_DISPLAY_WIDTH + "px;" %>'  value="<%= message.getBody() %>" type="textarea" wrap="soft" />
 
 											<%
