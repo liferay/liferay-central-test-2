@@ -17,7 +17,17 @@
 <%@ include file="/html/portlet/enterprise_admin/init.jsp" %>
 
 <%
-PortletURL portletURL = (PortletURL)request.getAttribute("view.jsp-portletURL");
+String tabs2 = ParamUtil.getString(request, "tabs2");
+String tabs3 = ParamUtil.getString(request, "tabs3");
+
+PortletURL portletURL = renderResponse.createRenderURL();
+
+portletURL.setParameter("struts_action", "/password_policies_admin/view");
+portletURL.setParameter("tabs1", tabs1);
+portletURL.setParameter("tabs2", tabs2);
+portletURL.setParameter("tabs3", tabs3);
+
+pageContext.setAttribute("portletURL", portletURL);
 
 boolean passwordPolicyEnabled = LDAPSettingsUtil.isPasswordPolicyEnabled(company.getCompanyId());
 %>
@@ -103,3 +113,7 @@ headerNames.add(StringPool.BLANK);
 
 	<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 </c:if>
+
+<%!
+private static final long[] _DURATIONS = {300, 600, 1800, 3600, 7200, 10800, 21600};
+%>

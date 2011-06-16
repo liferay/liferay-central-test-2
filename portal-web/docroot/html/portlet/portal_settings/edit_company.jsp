@@ -17,6 +17,18 @@
 <%@ include file="/html/portlet/enterprise_admin/init.jsp" %>
 
 <%
+String tabs2 = ParamUtil.getString(request, "tabs2");
+String tabs3 = ParamUtil.getString(request, "tabs3");
+
+PortletURL portletURL = renderResponse.createRenderURL();
+
+portletURL.setParameter("struts_action", "/portal_settings/view");
+portletURL.setParameter("tabs1", tabs1);
+portletURL.setParameter("tabs2", tabs2);
+portletURL.setParameter("tabs3", tabs3);
+
+pageContext.setAttribute("portletURL", portletURL);
+
 themeDisplay.setIncludeServiceJs(true);
 
 String[] configurationSections = PropsValues.COMPANY_SETTINGS_FORM_CONFIGURATION;
