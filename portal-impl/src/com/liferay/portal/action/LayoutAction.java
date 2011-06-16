@@ -449,11 +449,28 @@ public class LayoutAction extends Action {
 			portletMode = PortletMode.VIEW;
 		}
 
+		long scopeGroupId = 0;
 		User user = stateAwareResponseImpl.getUser();
+		Layout invokedLayout = (Layout)request.getAttribute(WebKeys.LAYOUT);
 		Layout layout = stateAwareResponseImpl.getLayout();
+		Layout layoutWithPortlet = layoutTypePortlet.getLayout();
+
+		try {
+			request.setAttribute(WebKeys.LAYOUT, layoutWithPortlet);
+			scopeGroupId = PortalUtil.getScopeGroupId(request, portletId);
+		}
+		finally {
+			request.setAttribute(WebKeys.LAYOUT, invokedLayout);
+		}
+
+		if(scopeGroupId <= 0){
+			scopeGroupId = PortalUtil.getScopeGroupId(
+				layoutWithPortlet, portletId);
+		}
 
 		PortletPreferences portletPreferences =
-			portletRequestImpl.getPreferencesImpl();
+			PortletPreferencesFactoryUtil.getPortletSetup(
+				scopeGroupId, layoutWithPortlet, portletId, null);
 
 		EventRequestImpl eventRequestImpl = EventRequestFactory.create(
 			request, portlet, invokerPortlet, portletContext, windowState,
