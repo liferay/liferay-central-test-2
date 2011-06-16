@@ -302,18 +302,18 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 										</aui:script>
 									</c:when>
 									<c:otherwise>
-										<div class="lfr-preview-video" id="<portlet:namespace />previewVideo">
-											<div class="lfr-preview-video-content" id="<portlet:namespace />previewVideoContent"></div>
+										<div class="lfr-preview-file" id="<portlet:namespace />previewFile">
+											<div class="lfr-preview-file-content" id="<portlet:namespace />previewFileContent"></div>
 										</div>
 
 										<script src="<%= themeDisplay.getPathJavaScript() %>/misc/swfobject.js" type="text/javascript"></script>
 
 										<aui:script use="aui-base">
-											var previewDivObject = A.one('#<portlet:namespace />previewVideoContent');
+											var previewDivObject = A.one('#<portlet:namespace />previewFileContent');
 
 											var so = new SWFObject(
 												'<%= themeDisplay.getPathJavaScript() %>/misc/video_player/mpw_player.swf',
-												'<portlet:namespace />previewVideoContent',
+												'<portlet:namespace />previewFileContent',
 												previewDivObject.getStyle('width'),
 												previewDivObject.getStyle('height'),
 												'9',
@@ -325,7 +325,7 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 											so.addVariable('<%= VideoProcessor.PREVIEW_TYPE %>', '<%= previewFileURL %>');
 											so.addVariable('<%= VideoProcessor.THUMBNAIL_TYPE %>', '<%= videoThumbnailURL %>');
 
-											so.write('<portlet:namespace />previewVideoContent');
+											so.write('<portlet:namespace />previewFileContent');
 										</aui:script>
 									</c:otherwise>
 								</c:choose>
