@@ -59,8 +59,8 @@ if (!company.isCommunityLogo()) {
 String[][] categorySections = {mainSections};
 %>
 
-<div class="header-row">
-	<div class="header-row-content">
+<div class="lfr-header-row">
+	<div class="lfr-header-row-content">
 		<liferay-util:include page="/html/portlet/layouts_admin/add_layout.jsp" />
 
 		<aui:button-row cssClass="edit-toolbar" id='<%= liferayPortletResponse.getNamespace() + "layoutSetToolbar" %>'>

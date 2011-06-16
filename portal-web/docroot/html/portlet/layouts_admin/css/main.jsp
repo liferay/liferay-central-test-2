@@ -206,14 +206,8 @@
 		margin: 0 0 0.5em 0;
 	}
 
-	.header-row {
-		background-color: #E5E5E5;
-		margin-bottom: .5em;
-		min-height: 34px;
-	}
-
-	.header-row-content {
-		padding: 2px;
+	.lfr-header-row {
+		margin-bottom: 0.5em;
 	}
 
 	.manage-view {

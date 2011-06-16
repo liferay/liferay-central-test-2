@@ -67,8 +67,8 @@ if (folder != null) {
 }
 %>
 
-<div class="header-row">
-	<div class="header-row-content" id="<portlet:namespace />parentFolderTitleContainer">
+<div class="lfr-header-row">
+	<div class="lfr-header-row-content" id="<portlet:namespace />parentFolderTitleContainer">
 		<div class="parent-folder-title" id="<portlet:namespace />parentFolderTitle">
 			<c:choose>
 				<c:when test="<%= folderId != DLFolderConstants.DEFAULT_PARENT_FOLDER_ID && parentFolderId == DLFolderConstants.DEFAULT_PARENT_FOLDER_ID %>">

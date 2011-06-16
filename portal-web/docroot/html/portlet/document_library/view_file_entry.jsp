@@ -161,8 +161,8 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 
 	<aui:layout>
 		<aui:column columnWidth="<%= 70 %>" cssClass="lfr-asset-column-details" first="<%= true %>">
-			<div class="header-row">
-				<div class="header-row-content">
+			<div class="lfr-header-row">
+				<div class="lfr-header-row-content">
 					<aui:button-row cssClass="edit-toolbar" id='<%= renderResponse.getNamespace() + "fileEntryToolbar" %>' />
 				</div>
 			</div>
@@ -356,8 +356,8 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 		</aui:column>
 
 		<aui:column columnWidth="<%= 30 %>" cssClass="lfr-asset-column-details context-pane" last="<%= true %>">
-			<div class="header-row">
-				<div class="header-row-content"></div>
+			<div class="lfr-header-row">
+				<div class="lfr-header-row-content"></div>
 			</div>
 
 			<div class="body-row">

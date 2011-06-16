@@ -86,8 +86,8 @@ if ((selLayout != null) && !group.isLayoutPrototype()) {
 <aui:layout cssClass="manage-view">
 	<c:if test="<%= !group.isLayoutPrototype() %>">
 		<aui:column columnWidth="25" cssClass="manage-sitemap">
-			<div class="header-row">
-				<div class="header-row-content"> </div>
+			<div class="lfr-header-row">
+				<div class="lfr-header-row-content"> </div>
 			</div>
 
 			<liferay-util:include page="/html/portlet/layouts_admin/tree_js.jsp">

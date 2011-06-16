@@ -67,8 +67,8 @@ request.setAttribute("view.jsp-repositoryId", String.valueOf(repositoryId));
 <div id="<portlet:namespace />documentLibraryContainer">
 	<aui:layout cssClass="view">
 		<aui:column columnWidth="<%= 20 %>" cssClass="navigation-pane" first="<%= true %>">
-			<div class="header-row">
-				<div class="header-row-content" id="<portlet:namespace />parentFolderTitleContainer">
+			<div class="lfr-header-row">
+				<div class="lfr-header-row-content" id="<portlet:namespace />parentFolderTitleContainer">
 					<div class="parent-folder-title" id="<portlet:namespace />parentFolderTitle"></div>
 				</div>
 			</div>
@@ -95,8 +95,8 @@ request.setAttribute("view.jsp-repositoryId", String.valueOf(repositoryId));
 				<aui:input name="fileEntryIds" type="hidden" />
 				<aui:input name="fileShortcutIds" type="hidden" />
 
-				<div class="header-row">
-					<div class="header-row-content">
+				<div class="lfr-header-row">
+					<div class="lfr-header-row-content">
 						<div class="toolbar">
 							<liferay-util:include page="/html/portlet/document_library/toolbar.jsp" />
 						</div>

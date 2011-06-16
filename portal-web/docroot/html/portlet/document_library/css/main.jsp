@@ -302,7 +302,7 @@
 		}
 	}
 
-	.header-row {
+	.lfr-header-row {
 		.aui-icon-display-icon {
 			background: url(<%= themeImagesPath%>/document_library/layouts.png) no-repeat -35px 0;
 		}
