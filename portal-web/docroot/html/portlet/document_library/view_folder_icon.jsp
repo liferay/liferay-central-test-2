@@ -34,7 +34,7 @@ boolean showCheckBox = DLFolderPermission.contains(permissionChecker, folder, Ac
 
 	<liferay-util:include page="/html/portlet/document_library/folder_action.jsp" />
 
-	<a class="document-link" data-folder="<%= Boolean.TRUE.toString() %>" data-folderId="<%= folder.getFolderId() %>" data-resource-url="<%= viewEntriesURL.toString() %>" href="<%= tempRowURL.toString() %>" title="<%= HtmlUtil.escape(folder.getName()) + " - " + HtmlUtil.escape(folder.getDescription()) %>">
+	<a class="document-link" data-folder="<%= Boolean.TRUE.toString() %>" data-resource-url="<%= viewEntriesURL.toString() %>" href="<%= tempRowURL.toString() %>" title="<%= HtmlUtil.escape(folder.getName()) + " - " + HtmlUtil.escape(folder.getDescription()) %>">
 		<img border="no" class="document-thumbnail" src="<%= thumbnailSrc %>" style="height: <%= PropsValues.DL_FILE_ENTRY_THUMBNAIL_HEIGHT %>; width: <%= PropsValues.DL_FILE_ENTRY_THUMBNAIL_WIDTH %>;" />
 
 		<span class="document-title">
