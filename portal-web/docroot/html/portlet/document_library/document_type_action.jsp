@@ -14,7 +14,7 @@
  */
 --%>
 
-<%@ include file="init.jsp" %>
+<%@ include file="/html/portlet/document_library/init.jsp" %>
 
 <%
 ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);

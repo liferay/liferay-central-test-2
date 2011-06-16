@@ -14,7 +14,7 @@
  */
 --%>
 
-<%@ include file="init.jsp" %>
+<%@ include file="/html/taglib/aui/button/init.jsp" %>
 
 <%
 if (Validator.isNotNull(href)) {

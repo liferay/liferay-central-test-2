@@ -14,7 +14,7 @@
  */
 --%>
 
-<%@ include file="init.jsp" %>
+<%@ include file="/html/taglib/aui/layout/init.jsp" %>
 
 <div class="aui-layout <%= cssClass %>" <%= InlineUtil.buildDynamicAttributes(dynamicAttributes) %>>
 	<div class="aui-layout-content <%= cssClasses %>">

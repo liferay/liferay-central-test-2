@@ -14,6 +14,6 @@
  */
 --%>
 
-<%@ include file="init.jsp" %>
+<%@ include file="/html/taglib/aui/form/init.jsp" %>
 
 <form action="<%= HtmlUtil.escape(action) %>" class="aui-form <%= cssClass %> <%= inlineLabels ? "aui-field-labels-inline" : StringPool.BLANK %>" id="<%= namespace + name %>" name="<%= namespace + name %>" <%= InlineUtil.buildDynamicAttributes(dynamicAttributes) %>>

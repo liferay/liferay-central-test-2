@@ -14,7 +14,7 @@
  */
 --%>
 
-<%@ include file="init.jsp" %>
+<%@ include file="/html/portlet/document_library/init.jsp" %>
 
 <div class="search-form">
 	<span class="aui-search-bar">
