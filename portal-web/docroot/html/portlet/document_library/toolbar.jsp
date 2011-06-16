@@ -29,32 +29,14 @@ String orderByType = ParamUtil.getString(request, "orderByType");
 
 <aui:input cssClass="select-documents aui-state-default" inline="<%= true %>" label="" name='<%= RowChecker.ALL_ROW_IDS %>' type="checkbox" />
 
-<span class="add-button" id="<portlet:namespace />addButtonContainer">
-	<liferay-util:include page="/html/portlet/document_library/add_button.jsp" />
-</span>
-
-<span class="sort-button" id="<portlet:namespace />sortButtonContainer">
-	<liferay-util:include page="/html/portlet/document_library/sort_button.jsp" />
-</span>
-
 <liferay-ui:icon-menu align="left" cssClass="actions-button" direction="down" disabled="<%= true %>" icon="" id="actionsButtonContainer" message="actions" showExpanded="<%= false %>" showWhenSingleIcon="<%= false %>">
-	<%
-	String taglibUrl = "javascript:" + renderResponse.getNamespace() + "editFileEntry('" + Constants.CANCEL_CHECKOUT + "')";
-	%>
-
-	<liferay-ui:icon
-		image="undo"
-		message="cancel-checkout"
-		url="<%= taglibUrl %>"
-	/>
 
 	<%
-	taglibUrl = "javascript:" + renderResponse.getNamespace() + "editFileEntry('" + Constants.LOCK + "')";
+	String taglibUrl = "javascript:" + renderResponse.getNamespace() + "editFileEntry('" + Constants.LOCK + "')";
 	%>
 
 	<liferay-ui:icon
 		image="lock"
-			message="checkin"
 		url="<%= taglibUrl %>"
 	/>
 
@@ -64,7 +46,6 @@ String orderByType = ParamUtil.getString(request, "orderByType");
 
 	<liferay-ui:icon
 		image="unlock"
-			message="checkout"
 		url="<%= taglibUrl %>"
 	/>
 
@@ -87,6 +68,14 @@ String orderByType = ParamUtil.getString(request, "orderByType");
 		url="<%= taglibUrl %>"
 	/>
 </liferay-ui:icon-menu>
+
+<span class="add-button" id="<portlet:namespace />addButtonContainer">
+	<liferay-util:include page="/html/portlet/document_library/add_button.jsp" />
+</span>
+
+<span class="sort-button" id="<portlet:namespace />sortButtonContainer">
+	<liferay-util:include page="/html/portlet/document_library/sort_button.jsp" />
+</span>
 
 <span class="manage-button">
 	<liferay-ui:icon-menu align="left" direction="down" icon="" message="manage" showExpanded="<%= false %>" showWhenSingleIcon="<%= true %>">
