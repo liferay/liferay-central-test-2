@@ -259,6 +259,7 @@ public class JGroupsManager implements CacheManagerPeerProvider, CachePeer {
 
 	private class EhcacheJGroupsReceiver extends BaseReceiver {
 
+		@Override
 		public void receive(Message message) {
 			Object object = message.getObject();
 

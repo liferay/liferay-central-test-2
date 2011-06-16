@@ -28,6 +28,7 @@ public class CommentImpl extends NodeImpl implements Comment {
 		_comment = comment;
 	}
 
+	@Override
 	public <T, V extends Visitor<T>> T accept(V visitor) {
 		return visitor.visitComment(this);
 	}

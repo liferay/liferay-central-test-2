@@ -49,6 +49,7 @@ public class SoftReferenceThreadLocal<T> extends ThreadLocal<T> {
 		_softReferenceThreadLocal.remove();
 	}
 
+	@Override
 	public void set(T value) {
 		if (value == null) {
 			_softReferenceThreadLocal.set((SoftReference<T>)_nullSoftReference);

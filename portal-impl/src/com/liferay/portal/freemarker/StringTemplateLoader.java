@@ -91,6 +91,7 @@ public class StringTemplateLoader implements TemplateLoader {
 			_lastModified = lastModified;
 		}
 
+		@Override
 		public boolean equals(Object obj) {
 			if (this == obj) {
 				return true;
@@ -110,6 +111,7 @@ public class StringTemplateLoader implements TemplateLoader {
 			return false;
 		}
 
+		@Override
 		public int hashCode() {
 			return _name.hashCode();
 		}

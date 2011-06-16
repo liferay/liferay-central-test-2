@@ -28,6 +28,7 @@ public class TextImpl extends NodeImpl implements Text {
 		_text = text;
 	}
 
+	@Override
 	public <T, V extends Visitor<T>> T accept(V visitor) {
 		return visitor.visitText(this);
 	}

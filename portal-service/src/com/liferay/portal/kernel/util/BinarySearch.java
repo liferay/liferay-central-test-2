@@ -27,10 +27,12 @@ public abstract class BinarySearch<E> {
 
 		return new BinarySearch<T>() {
 
+			@Override
 			protected int compare(int index, T e) {
 				return list.get(index).compareTo(e);
 			}
 
+			@Override
 			protected int getLastIndex() {
 				return list.size() - 1;
 			}
@@ -43,10 +45,12 @@ public abstract class BinarySearch<E> {
 
 		return new BinarySearch<T>() {
 
+			@Override
 			protected int compare(int index, T e) {
 				return comparator.compare(list.get(index), e);
 			}
 
+			@Override
 			protected int getLastIndex() {
 				return list.size() - 1;
 			}

@@ -28,6 +28,7 @@ public class NamespaceImpl extends NodeImpl implements Namespace {
 		_namespace = namespace;
 	}
 
+	@Override
 	public <T, V extends Visitor<T>> T accept(V visitor) {
 		return visitor.visitNamespace(this);
 	}

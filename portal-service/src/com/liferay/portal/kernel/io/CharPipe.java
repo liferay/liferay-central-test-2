@@ -86,6 +86,7 @@ public class CharPipe {
 
 	private class PipeReader extends Reader {
 
+		@Override
 		public void close() {
 			bufferLock.lock();
 
@@ -99,14 +100,17 @@ public class CharPipe {
 			}
 		}
 
+		@Override
 		public void mark(int readAheadLimit) throws IOException {
 			throw new IOException("Mark is not supported");
 		}
 
+		@Override
 		public boolean markSupported() {
 			return false;
 		}
 
+		@Override
 		public int read() throws IOException {
 			if (_closed) {
 				throw new IOException("Stream closed");
@@ -130,10 +134,12 @@ public class CharPipe {
 			}
 		}
 
+		@Override
 		public int read(char[] chars) throws IOException {
 			return read(chars, 0, chars.length);
 		}
 
+		@Override
 		public int read(char[] chars, int offset, int length)
 			throws IOException {
 
@@ -186,6 +192,7 @@ public class CharPipe {
 			}
 		}
 
+		@Override
 		public int read(CharBuffer charBuffer) throws IOException {
 			if (_closed) {
 				throw new IOException("Stream closed");
@@ -208,6 +215,7 @@ public class CharPipe {
 			return read;
 		}
 
+		@Override
 		public boolean ready() throws IOException {
 			if (_closed) {
 				throw new IOException("Stream closed");
@@ -223,10 +231,12 @@ public class CharPipe {
 			}
 		}
 
+		@Override
 		public void reset() throws IOException {
 			throw new IOException("Reset is not supported");
 		}
 
+		@Override
 		public long skip(long skip) throws IOException {
 			if (skip < 0) {
 				throw new IllegalArgumentException("Skip value is negative");
@@ -308,12 +318,14 @@ public class CharPipe {
 
 	private class PipeWriter extends Writer {
 
+		@Override
 		public Writer append(char c) throws IOException {
 			write(c);
 
 			return this;
 		}
 
+		@Override
 		public Writer append(CharSequence charSequence) throws IOException {
 			String string = null;
 
@@ -329,6 +341,7 @@ public class CharPipe {
 			return this;
 		}
 
+		@Override
 		public Writer append(CharSequence charSequence, int start, int end)
 			throws IOException {
 
@@ -346,6 +359,7 @@ public class CharPipe {
 			return this;
 		}
 
+		@Override
 		public void close() {
 			bufferLock.lock();
 
@@ -359,13 +373,16 @@ public class CharPipe {
 			}
 		}
 
+		@Override
 		public void flush() {
 		}
 
+		@Override
 		public void write(char[] chars) throws IOException {
 			write(chars, 0, chars.length);
 		}
 
+		@Override
 		public void write(char[] chars, int offset, int length)
 			throws IOException {
 
@@ -424,6 +441,7 @@ public class CharPipe {
 			}
 		}
 
+		@Override
 		public void write(int c) throws IOException {
 			if (_closed) {
 				throw new IOException("Stream closed");
@@ -443,10 +461,12 @@ public class CharPipe {
 			}
 		}
 
+		@Override
 		public void write(String string) throws IOException {
 			write(string, 0, string.length());
 		}
 
+		@Override
 		public void write(String string, int offset, int length)
 			throws IOException {
 

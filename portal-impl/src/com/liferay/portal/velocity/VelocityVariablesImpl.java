@@ -393,6 +393,7 @@ public class VelocityVariablesImpl implements VelocityVariables {
 				"xmlRequest",
 				new Object() {
 
+					@Override
 					public String toString() {
 						return PortletRequestUtil.toXML(
 							portletRequest, portletResponse);

@@ -38,6 +38,7 @@ public enum StorageType {
 		return _value;
 	}
 
+	@Override
 	public String toString() {
 		return _value;
 	}

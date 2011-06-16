@@ -141,6 +141,7 @@ public class UnicodeProperties extends HashMap<String, String> {
 		}
 	}
 
+	@Override
 	public String put(String key, String value) {
 		if (key == null) {
 			return null;

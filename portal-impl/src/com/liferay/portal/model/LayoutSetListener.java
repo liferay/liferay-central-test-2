@@ -22,10 +22,12 @@ import com.liferay.portal.servlet.filters.cache.CacheUtil;
  */
 public class LayoutSetListener extends BaseModelListener<LayoutSet> {
 
+	@Override
 	public void onAfterRemove(LayoutSet layoutSet) {
 		clearCache(layoutSet);
 	}
 
+	@Override
 	public void onAfterUpdate(LayoutSet layoutSet) {
 		clearCache(layoutSet);
 	}

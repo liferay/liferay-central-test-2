@@ -250,6 +250,7 @@ public class AxisServlet extends org.apache.axis.transport.http.AxisServlet {
 			return _exception;
 		}
 
+		@Override
 		public void run() {
 			try {
 				doDestroy();
@@ -273,6 +274,7 @@ public class AxisServlet extends org.apache.axis.transport.http.AxisServlet {
 			return _exception;
 		}
 
+		@Override
 		public void run() {
 			try {
 				doInit();

@@ -100,6 +100,7 @@ public class NonceUtil {
 			}
 		}
 
+		@Override
 		public boolean equals(Object obj) {
 			if (this == obj) {
 				return true;
@@ -118,6 +119,7 @@ public class NonceUtil {
 			return false;
 		}
 
+		@Override
 		public int hashCode() {
 			return _nonce.hashCode();
 		}

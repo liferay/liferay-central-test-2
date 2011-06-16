@@ -22,6 +22,7 @@ import com.liferay.portalweb.portal.util.ThemeIds;
  */
 public class IterateThemeTest extends BaseTestCase {
 
+	@Override
 	public void tearDown() throws Exception {
 		ThemeIds.iterate();
 	}

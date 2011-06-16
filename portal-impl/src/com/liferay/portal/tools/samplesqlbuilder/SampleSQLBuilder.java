@@ -410,6 +410,7 @@ public class SampleSQLBuilder {
 
 		Thread thread = new Thread() {
 
+			@Override
 			public void run() {
 				try {
 					_writer = new UnsyncTeeWriter(

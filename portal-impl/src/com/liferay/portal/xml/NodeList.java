@@ -47,6 +47,7 @@ public class NodeList<E, F> extends TranslatedList<E, F> {
 		return new NodeList<E, F>(newList, oldList);
 	}
 
+	@Override
 	protected F toOldObject(E o) {
 		if (o instanceof Attribute) {
 			AttributeImpl attributeImpl = (AttributeImpl)o;

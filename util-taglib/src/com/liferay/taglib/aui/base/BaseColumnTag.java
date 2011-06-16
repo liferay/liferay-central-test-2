@@ -26,6 +26,7 @@ import javax.servlet.jsp.JspException;
  */
 public class BaseColumnTag extends com.liferay.taglib.util.IncludeTag {
 
+	@Override
 	public int doStartTag() throws JspException {
 		setAttributeNamespace(_ATTRIBUTE_NAMESPACE);
 
@@ -72,6 +73,7 @@ public class BaseColumnTag extends com.liferay.taglib.util.IncludeTag {
 		setScopedAttribute("last", last);
 	}
 
+	@Override
 	protected void cleanUp() {
 		_columnWidth = 0;
 		_cssClass = null;
@@ -79,14 +81,17 @@ public class BaseColumnTag extends com.liferay.taglib.util.IncludeTag {
 		_last = false;
 	}
 
+	@Override
 	protected String getEndPage() {
 		return _END_PAGE;
 	}
 
+	@Override
 	protected String getStartPage() {
 		return _START_PAGE;
 	}
 
+	@Override
 	protected void setAttributes(HttpServletRequest request) {
 		setNamespacedAttribute(request, "columnWidth", _columnWidth);
 		setNamespacedAttribute(request, "cssClass", _cssClass);

@@ -166,9 +166,11 @@ public class HotDeployUtil {
 
 			PortalLifecycle portalLifecycle = new BasePortalLifecycle() {
 
+				@Override
 				protected void doPortalDestroy() {
 				}
 
+				@Override
 				protected void doPortalInit() {
 					HotDeployUtil.fireDeployEvent(event);
 				}

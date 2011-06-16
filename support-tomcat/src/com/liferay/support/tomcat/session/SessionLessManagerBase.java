@@ -22,6 +22,7 @@ import org.apache.catalina.session.StandardManager;
  */
 public class SessionLessManagerBase extends StandardManager {
 
+	@Override
 	public void add(Session session) {
 	}
 

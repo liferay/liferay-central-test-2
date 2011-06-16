@@ -137,6 +137,7 @@ public class GNicknameManagerImpl
 
 		new GetNextItems(url, atomFeedElement) {
 
+			@Override
 			public void getNextItems(String nextURL)
 				throws GoogleAppsException {
 

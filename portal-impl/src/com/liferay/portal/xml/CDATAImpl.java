@@ -28,6 +28,7 @@ public class CDATAImpl extends NodeImpl implements CDATA {
 		_cdata = cdata;
 	}
 
+	@Override
 	public <T, V extends Visitor<T>> T accept(V visitor) {
 		return visitor.visitCDATA(this);
 	}

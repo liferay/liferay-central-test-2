@@ -69,6 +69,7 @@ public abstract class BaseEntityCollectionAdapter<T>
 		return id;
 	}
 
+	@Override
 	public String getId(T entry) {
 		String id = AtomUtil.createIdTagPrefix(collectionName);
 
@@ -78,6 +79,7 @@ public abstract class BaseEntityCollectionAdapter<T>
 		return id;
 	}
 
+	@Override
 	public String getName(T entry) {
 		return getEntryId(entry);
 	}
@@ -86,6 +88,7 @@ public abstract class BaseEntityCollectionAdapter<T>
 		this.collectionName = collectionName;
 	}
 
+	@Override
 	protected String addEntryDetails(
 			RequestContext requestContext, Entry entry, IRI feedIri, T entryObj)
 		throws ResponseContextException {

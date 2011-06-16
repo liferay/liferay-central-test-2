@@ -28,6 +28,7 @@ public class EntityImpl extends NodeImpl implements Entity {
 		_entity = entity;
 	}
 
+	@Override
 	public <T, V extends Visitor<T>> T accept(V visitor) {
 		return visitor.visitEntity(this);
 	}

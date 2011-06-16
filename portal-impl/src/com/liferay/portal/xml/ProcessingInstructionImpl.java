@@ -33,6 +33,7 @@ public class ProcessingInstructionImpl
 		_processingInstruction = processingInstruction;
 	}
 
+	@Override
 	public <T, V extends Visitor<T>> T accept(V visitor) {
 		return visitor.visitProcessInstruction(this);
 	}

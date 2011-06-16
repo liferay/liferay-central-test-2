@@ -813,6 +813,7 @@ public class ThreadPoolExecutorTest extends TestCase {
 
 		Thread thread = new Thread() {
 
+			@Override
 			public void run() {
 				try {
 					ReentrantLock putLock = taskQueue.getPutLock();
@@ -874,6 +875,7 @@ public class ThreadPoolExecutorTest extends TestCase {
 
 		Thread thread = new Thread() {
 
+			@Override
 			public void run() {
 				try {
 					ReentrantLock takeLock = taskQueue.getTakeLock();

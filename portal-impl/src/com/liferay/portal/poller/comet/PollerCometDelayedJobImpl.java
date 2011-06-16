@@ -76,6 +76,7 @@ public class PollerCometDelayedJobImpl
 
 	private class PollerCometTimerTask extends TimerTask {
 
+		@Override
 		public void run() {
 			synchronized (_pollerCometDelayedTasks) {
 				for (PollerCometDelayedTask pollerCometDelayedTask :

@@ -342,10 +342,12 @@ public class DLAppServiceTest extends BaseServiceTestCase {
 			_index = index;
 		}
 
+		@Override
 		public boolean isSuccess() {
 			return _success;
 		}
 
+		@Override
 		protected void doRun() throws Exception {
 			try {
 				FileEntry fileEntry = addFileEntry(
@@ -375,10 +377,12 @@ public class DLAppServiceTest extends BaseServiceTestCase {
 			_index = index;
 		}
 
+		@Override
 		public boolean isSuccess() {
 			return _success;
 		}
 
+		@Override
 		protected void doRun() throws Exception {
 			try {
 				FileEntry fileEntry = DLAppServiceUtil.getFileEntry(

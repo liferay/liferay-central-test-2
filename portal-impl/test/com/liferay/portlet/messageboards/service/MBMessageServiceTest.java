@@ -136,10 +136,12 @@ public class MBMessageServiceTest extends BaseServiceTestCase {
 			_subject = subject;
 		}
 
+		@Override
 		public boolean isSuccess() {
 			return true;
 		}
 
+		@Override
 		protected void doRun() throws Exception {
 			String body = "This is a test message.";
 			List<ObjectValuePair<String, byte[]>> files =

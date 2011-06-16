@@ -28,6 +28,7 @@ public class PortalConnector extends Connector {
 		_copyConnector(connector);
 	}
 
+	@Override
 	public Request createRequest() {
 		Request request = new PortalRequest();
 

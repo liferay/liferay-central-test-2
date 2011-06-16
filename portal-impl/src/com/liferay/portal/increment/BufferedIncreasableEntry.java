@@ -36,6 +36,7 @@ public class BufferedIncreasableEntry<K, T>
 		_nextInterceptor = nextInterceptor;
 	}
 
+	@Override
 	public Increment<T> doIncrease(
 		Increment<T> originalValue, Increment<T> deltaValue) {
 

@@ -35,6 +35,7 @@ public class SortedArrayList<E> extends ArrayList<E> {
 		_comparator = comparator;
 	}
 
+	@Override
 	public boolean add(E e) {
 		int index = 0;
 
@@ -47,6 +48,7 @@ public class SortedArrayList<E> extends ArrayList<E> {
 		return true;
 	}
 
+	@Override
 	public void add(int index, E e) {
 		throw new UnsupportedOperationException();
 	}
@@ -71,6 +73,7 @@ public class SortedArrayList<E> extends ArrayList<E> {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public E set(int index, E e) {
 		throw new UnsupportedOperationException();
 	}

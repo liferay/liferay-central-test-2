@@ -112,6 +112,7 @@ public class IndexCommitMetaInfo implements Serializable {
 			return _fileSize;
 		}
 
+		@Override
 		public String toString() {
 			StringBundler sb = new StringBundler(5);
 

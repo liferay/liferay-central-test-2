@@ -36,10 +36,12 @@ public class OAuthManagerImpl implements OAuthManager {
 
 		Api api = new DefaultApi10a() {
 
+			@Override
 			public String getAccessTokenEndpoint() {
 				return accessURL;
 			}
 
+			@Override
 			public String getRequestTokenEndpoint() {
 				return requestURL;
 			}

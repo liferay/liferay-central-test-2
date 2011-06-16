@@ -38,6 +38,7 @@ public class MapBackedSet<E> extends AbstractSet<E> implements Serializable {
 		_backedMapKeySet = backedMap.keySet();
 	}
 
+	@Override
 	public boolean add(E element) {
 		if (_backedMap.put(element, Boolean.TRUE) == null) {
 			return true;
@@ -117,6 +118,7 @@ public class MapBackedSet<E> extends AbstractSet<E> implements Serializable {
 		return _backedMapKeySet.toArray();
 	}
 
+	@Override
 	public <T> T[] toArray(T[] array) {
 		return _backedMapKeySet.toArray(array);
 	}

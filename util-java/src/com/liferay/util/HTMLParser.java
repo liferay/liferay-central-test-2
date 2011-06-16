@@ -48,6 +48,7 @@ public class HTMLParser {
 
 	private class DefaultParser extends HTMLEditorKit {
 
+		@Override
 		public HTMLEditorKit.Parser getParser() {
 			return super.getParser();
 		}
@@ -56,9 +57,11 @@ public class HTMLParser {
 
 	private class HTMLCallback extends HTMLEditorKit.ParserCallback{
 
+		@Override
 		public void handleText(char[] data, int pos) {
 		}
 
+		@Override
 		public void handleStartTag(
 			HTML.Tag tag, MutableAttributeSet attributes, int pos) {
 
@@ -80,9 +83,11 @@ public class HTMLParser {
 			}
 		}
 
+		@Override
 		public void handleEndTag(HTML.Tag tag, int pos) {
 		}
 
+		@Override
 		public void handleSimpleTag(
 			HTML.Tag tag, MutableAttributeSet attributes, int pos) {
 
@@ -104,9 +109,11 @@ public class HTMLParser {
 			}
 		}
 
+		@Override
 		public void handleComment(char[] data, int pos) {
 		}
 
+		@Override
 		public void handleError(String errorMsg, int pos) {
 		}
 

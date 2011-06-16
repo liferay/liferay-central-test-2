@@ -56,6 +56,7 @@ public class UserListener extends BaseModelListener<User> {
 		}
 	}
 
+	@Override
 	public void onAfterCreate(User user) throws ModelListenerException {
 		try {
 			exportToLDAP(user);
@@ -65,6 +66,7 @@ public class UserListener extends BaseModelListener<User> {
 		}
 	}
 
+	@Override
 	public void onAfterUpdate(User user) throws ModelListenerException {
 		try {
 			exportToLDAP(user);

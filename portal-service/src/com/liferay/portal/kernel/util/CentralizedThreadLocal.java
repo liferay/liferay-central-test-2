@@ -94,6 +94,7 @@ public class CentralizedThreadLocal<T> extends ThreadLocal<T> {
 		threadLocals.remove(this);
 	}
 
+	@Override
 	public void set(T value) {
 		Map<ThreadLocal<?>, Object> threadLocals = _getThreadLocals();
 
@@ -132,6 +133,7 @@ public class CentralizedThreadLocal<T> extends ThreadLocal<T> {
 	private static class MapThreadLocal
 		extends ThreadLocal<Map<ThreadLocal<?>, Object>> {
 
+		@Override
 		protected Map<ThreadLocal<?>, Object> initialValue() {
 			return new HashMap<ThreadLocal<?>, Object>();
 		}

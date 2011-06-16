@@ -78,6 +78,7 @@ public class IncreasableEntryTest extends TestCase {
 			super(key, value);
 		}
 
+		@Override
 		public Integer doIncrease(Integer originalValue, Integer deltaValue) {
 			return originalValue + deltaValue;
 		}

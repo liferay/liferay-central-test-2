@@ -32,6 +32,7 @@ public class DocumentImpl extends BranchImpl implements Document {
 		_document = document;
 	}
 
+	@Override
 	public <T, V extends Visitor<T>> T accept(V visitor) {
 		return visitor.visitDocument(this);
 	}

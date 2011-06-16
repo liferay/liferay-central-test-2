@@ -56,6 +56,7 @@ public class AtomCollectionAdapterWrapper<E>
 		}
 	}
 
+	@Override
 	public List<Person> getAuthors(E entry, RequestContext requestContext) {
 		List<Person> persons = new ArrayList<Person>();
 
@@ -76,6 +77,7 @@ public class AtomCollectionAdapterWrapper<E>
 		return persons;
 	}
 
+	@Override
 	public Object getContent(E entry, RequestContext requestContext) {
 		Abdera abdera = requestContext.getAbdera();
 
@@ -115,6 +117,7 @@ public class AtomCollectionAdapterWrapper<E>
 		}
 	}
 
+	@Override
 	public String getTitle(E entry) {
 		return _atomCollectionAdapter.getEntryTitle(entry);
 	}
@@ -124,6 +127,7 @@ public class AtomCollectionAdapterWrapper<E>
 			new AtomRequestContextImpl(requestContext));
 	}
 
+	@Override
 	public Date getUpdated(E entry) {
 		return _atomCollectionAdapter.getEntryUpdated(entry);
 	}
@@ -146,6 +150,7 @@ public class AtomCollectionAdapterWrapper<E>
 		}
 	}
 
+	@Override
 	public void putEntry(
 			E entry, String title, Date updated, List<Person> authors,
 			String summary, Content content, RequestContext requestContext)
@@ -162,6 +167,7 @@ public class AtomCollectionAdapterWrapper<E>
 		}
 	}
 
+	@Override
 	protected String getEntryId(E entry) {
 		return _atomCollectionAdapter.getEntryId(entry);
 	}

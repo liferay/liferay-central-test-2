@@ -26,6 +26,7 @@ import javax.servlet.jsp.JspException;
  */
 public class BaseLegendTag extends com.liferay.taglib.util.IncludeTag {
 
+	@Override
 	public int doStartTag() throws JspException {
 		setAttributeNamespace(_ATTRIBUTE_NAMESPACE);
 
@@ -52,15 +53,18 @@ public class BaseLegendTag extends com.liferay.taglib.util.IncludeTag {
 		setScopedAttribute("label", label);
 	}
 
+	@Override
 	protected void cleanUp() {
 		_cssClass = null;
 		_label = null;
 	}
 
+	@Override
 	protected String getPage() {
 		return _PAGE;
 	}
 
+	@Override
 	protected void setAttributes(HttpServletRequest request) {
 		setNamespacedAttribute(request, "cssClass", _cssClass);
 		setNamespacedAttribute(request, "label", _label);

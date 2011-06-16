@@ -247,6 +247,7 @@ public class GUserManagerImpl extends GBaseManagerImpl implements GUserManager {
 
 		new GetNextItems(url, atomFeedElement) {
 
+			@Override
 			public void getNextItems(String nextURL)
 				throws GoogleAppsException {
 

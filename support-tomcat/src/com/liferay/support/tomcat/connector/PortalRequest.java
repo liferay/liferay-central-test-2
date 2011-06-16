@@ -25,6 +25,7 @@ import org.apache.catalina.connector.Request;
  */
 public class PortalRequest extends Request {
 
+	@Override
 	protected void configureSessionCookie(Cookie cookie) {
 		super.configureSessionCookie(cookie);
 

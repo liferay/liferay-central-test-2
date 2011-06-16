@@ -79,6 +79,7 @@ public class ShardDataSourceTargetSource implements TargetSource {
 	private static ThreadLocal<DataSource> _dataSource =
 		new ThreadLocal<DataSource>() {
 
+		@Override
 		protected DataSource initialValue() {
 			return _dataSources.get(PropsValues.SHARD_DEFAULT_NAME);
 		}

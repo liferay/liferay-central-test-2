@@ -71,6 +71,7 @@ public class SourceFormatter {
 			_readExclusions();
 
 			Thread thread1 = new Thread () {
+				@Override
 				public void run() {
 					try {
 						_checkPersistenceTestSuite();
@@ -87,6 +88,7 @@ public class SourceFormatter {
 			};
 
 			Thread thread2 = new Thread () {
+				@Override
 				public void run() {
 					try {
 						_formatJava();

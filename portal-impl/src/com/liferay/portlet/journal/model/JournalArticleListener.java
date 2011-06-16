@@ -25,10 +25,12 @@ import com.liferay.portlet.journalcontent.util.JournalContentUtil;
  */
 public class JournalArticleListener extends BaseModelListener<JournalArticle> {
 
+	@Override
 	public void onAfterRemove(JournalArticle article) {
 		clearCache(article);
 	}
 
+	@Override
 	public void onAfterUpdate(JournalArticle article) {
 		clearCache(article);
 	}

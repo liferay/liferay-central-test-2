@@ -38,6 +38,7 @@ public class LiferayApplicationMap extends AbstractMap<String, Object> {
 		return _servletContext.getAttribute(key.toString());
 	}
 
+	@Override
 	public Object put(String key, Object value) {
 		Object previousValue = get(key);
 

@@ -37,6 +37,7 @@ public class UniqueList<E> extends ArrayList<E> {
 		super(initialCapacity);
 	}
 
+	@Override
 	public boolean add(E e) {
 		if (!contains(e)) {
 			return super.add(e);
@@ -46,6 +47,7 @@ public class UniqueList<E> extends ArrayList<E> {
 		}
 	}
 
+	@Override
 	public void add(int index, E e) {
 		if (!contains(e)) {
 			super.add(index, e);
@@ -86,6 +88,7 @@ public class UniqueList<E> extends ArrayList<E> {
 		return super.addAll(index, c);
 	}
 
+	@Override
 	public E set(int index, E e) {
 		Thread currentThread = Thread.currentThread();
 

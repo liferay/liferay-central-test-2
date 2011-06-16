@@ -179,6 +179,7 @@ public class BlogsEntryAtomCollectionAdapter
 			serviceContext);
 	}
 
+	@Override
 	protected void doPutEntry(
 			BlogsEntry blogsEntry, String title, String summary, String content,
 			Date date, AtomRequestContext atomRequestContext)

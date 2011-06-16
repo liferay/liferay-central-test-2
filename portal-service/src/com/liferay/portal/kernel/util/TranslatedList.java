@@ -29,12 +29,14 @@ public abstract class TranslatedList<E, F> extends ListWrapper<E> {
 		_oldList = oldList;
 	}
 
+	@Override
 	public boolean add(E o) {
 		_oldList.add(toOldObject(o));
 
 		return super.add(o);
 	}
 
+	@Override
 	public void add(int index, E element) {
 		_oldList.add(index, toOldObject(element));
 
@@ -99,6 +101,7 @@ public abstract class TranslatedList<E, F> extends ListWrapper<E> {
 		return super.retainAll(c);
 	}
 
+	@Override
 	public E set(int index, E element) {
 		_oldList.set(index, toOldObject(element));
 

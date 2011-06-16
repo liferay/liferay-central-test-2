@@ -139,6 +139,7 @@ public class UnsyncPrintWriter extends PrintWriter {
 		}
 	}
 
+	@Override
 	public PrintWriter format(
 		Locale locale, String format, Object... arguments) {
 
@@ -156,6 +157,7 @@ public class UnsyncPrintWriter extends PrintWriter {
 		return this;
 	}
 
+	@Override
 	public PrintWriter format(String format, Object... arguments) {
 		return format(Locale.getDefault(), format, arguments);
 	}
@@ -214,12 +216,14 @@ public class UnsyncPrintWriter extends PrintWriter {
 		write(string);
 	}
 
+	@Override
 	public PrintWriter printf(
 		Locale locale, String format, Object... arguments) {
 
 		return format(locale, format, arguments);
 	}
 
+	@Override
 	public PrintWriter printf(String format, Object... arguments) {
 		return format(format, arguments);
 	}

@@ -44,6 +44,7 @@ public class DataSourceFactoryBean extends AbstractFactoryBean<DataSource> {
 		return DataSourceFactoryUtil.initDataSource(properties);
 	}
 
+	@Override
 	public void destroyInstance(DataSource dataSource) throws Exception {
 		DataSourceFactoryUtil.destroyDataSource(dataSource);
 	}

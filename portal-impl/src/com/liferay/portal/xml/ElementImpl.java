@@ -43,6 +43,7 @@ public class ElementImpl extends BranchImpl implements Element {
 		_element = element;
 	}
 
+	@Override
 	public <T, V extends Visitor<T>> T accept(V visitor) {
 		return visitor.visitElement(this);
 	}
