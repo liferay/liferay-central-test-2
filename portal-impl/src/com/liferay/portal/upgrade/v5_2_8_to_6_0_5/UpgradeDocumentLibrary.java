@@ -136,8 +136,15 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 		upgradeTable.setCreateSQL(
 			StringUtil.replace(
 				DLFileVersionTable.TABLE_SQL_CREATE,
-				",title VARCHAR(75) null",
-				",title VARCHAR(255) null"));
+				new String[] {
+					",extraSettings VARCHAR(75) null",
+					",title VARCHAR(75) null"
+				},
+				new String [] {
+					",extraSettings STRING null",
+					",title VARCHAR(255) null"
+				}));
+
 		upgradeTable.setIndexesSQL(DLFileVersionTable.TABLE_SQL_ADD_INDEXES);
 
 		upgradeTable.updateTable();
