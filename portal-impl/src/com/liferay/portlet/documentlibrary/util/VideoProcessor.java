@@ -344,11 +344,11 @@ public class VideoProcessor extends DLProcessor {
 		"video/quicktime", "video/mpeg", "video/x-msvideo", "video/mp4",
 		"video/x-ms-wmv", "video/avi");
 
+	private List<Long> _fileEntries = new Vector<Long>();
+
 	static {
 		FileUtil.mkdirs(_PREVIEW_PATH);
 		FileUtil.mkdirs(_THUMBNAIL_PATH);
 	}
-
-	private List<Long> _fileEntries = new Vector<Long>();
 
 }

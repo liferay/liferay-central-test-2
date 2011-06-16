@@ -24,8 +24,6 @@ import com.liferay.portal.kernel.util.PropsUtil;
  */
 public abstract class DLProcessor {
 
-	public abstract void trigger(FileEntry fileEntry);
-
 	public static void triggerAll(FileEntry fileEntry) {
 		if (fileEntry == null) {
 			return;
@@ -38,6 +36,8 @@ public abstract class DLProcessor {
 			dlProcessor.trigger(fileEntry);
 		}
 	}
+
+	public abstract void trigger(FileEntry fileEntry);
 
 	private static final String[] _DL_FILE_ENTRY_PROCESSORS =
 		PropsUtil.getArray(PropsKeys.DL_FILE_ENTRY_PROCESSORS);

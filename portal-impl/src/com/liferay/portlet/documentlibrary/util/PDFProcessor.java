@@ -514,7 +514,6 @@ public class PDFProcessor extends DLProcessor {
 	private static PDFProcessor _instance = new PDFProcessor();
 
 	private static ConvertCmd _convertCmd;
-
 	private static List<Long> _fileEntries = new Vector<Long>();
 
 	static {
