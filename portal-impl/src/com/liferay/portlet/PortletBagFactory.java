@@ -407,16 +407,18 @@ public class PortletBagFactory {
 			inputStream = _classLoader.getResourceAsStream(
 				localizedResourceBundleName);
 
-			if (locale != null) {
-				newLocale = LanguageResources.getSuperLocale(locale);
+			if (locale == null) {
+				break;
+			}
 
-				if (newLocale == null) {
-					break;
-				}
+			newLocale = LanguageResources.getSuperLocale(locale);
 
-				if (newLocale.equals(locale)) {
-					break;
-				}
+			if (newLocale == null) {
+				break;
+			}
+
+			if (newLocale.equals(locale)) {
+				break;
 			}
 		}
 
