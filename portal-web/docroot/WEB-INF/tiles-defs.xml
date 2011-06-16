@@ -1232,6 +1232,10 @@
 		<put name="portlet_content" value="/portlet/roles_admin/select_site_role.jsp" />
 	</definition>
 
+	<definition name="portlet.roles_admin.view" extends="portlet.roles_admin">
+		<put name="portlet_content" value="/portlet/roles_admin/view.jsp" />
+	</definition>
+
 	<!-- Site Settings -->
 
 	<definition name="portlet.site_settings" extends="portlet" />

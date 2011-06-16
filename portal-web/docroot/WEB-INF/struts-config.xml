@@ -1486,7 +1486,7 @@
 
 		<action path="/roles_admin/select_site_role" forward="portlet.roles_admin.select_site_role" />
 
-		<action path="/roles_admin/view" forward="portlet.enterprise_admin.view" />
+		<action path="/roles_admin/view" forward="portlet.roles_admin.view" />
 
 		<!-- RSS -->
 
