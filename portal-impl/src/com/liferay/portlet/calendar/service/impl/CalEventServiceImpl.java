@@ -100,7 +100,7 @@ public class CalEventServiceImpl extends CalEventServiceBaseImpl {
 	public List<CalEvent> getEvents(long groupId, Calendar cal, String type)
 		throws PortalException, SystemException {
 
-		return getEvents(groupId, cal, new String[] {types});
+		return getEvents(groupId, cal, new String[] {type});
 	}
 
 	public List<CalEvent> getEvents(long groupId, Calendar cal, String[] types)
@@ -130,7 +130,7 @@ public class CalEventServiceImpl extends CalEventServiceBaseImpl {
 			long groupId, String type, int start, int end)
 		throws SystemException {
 
-		return getEvents(groupId, new String[] {types}, start, end);
+		return getEvents(groupId, new String[] {type}, start, end);
 	}
 
 	public List<CalEvent> getEvents(
