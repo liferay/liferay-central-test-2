@@ -17,6 +17,7 @@ package com.liferay.portal.kernel.util;
 import java.io.Serializable;
 
 import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 
 import java.util.Arrays;
 
@@ -63,16 +64,21 @@ public class MethodHandler implements Serializable {
 
 		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
 
+		Method method = MethodCache.get(_methodKey);
+
+		int modifiers = method.getModifiers();
+
 		Object targetObject = null;
 
-		if (newInstance) {
+		if (newInstance && !Modifier.isStatic(modifiers)) {
+
 			Class<?> targetClass = contextClassLoader.loadClass(
 				getClassName());
 
 			targetObject = targetClass.newInstance();
 		}
 
-		return invoke(targetObject);
+		return method.invoke(targetObject, _arguments);
 	}
 
 	public Object invoke(Object target) throws Exception {
