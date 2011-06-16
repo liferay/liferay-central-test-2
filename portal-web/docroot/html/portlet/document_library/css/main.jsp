@@ -595,7 +595,7 @@
 		}
 	}
 
-	.asset-details {		
+	.asset-details {
 		h3.version {
 			margin: 0 0 10px;
 		}

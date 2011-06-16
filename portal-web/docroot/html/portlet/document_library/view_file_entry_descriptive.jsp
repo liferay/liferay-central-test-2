@@ -41,7 +41,7 @@ boolean showCheckBox = DLFileEntryPermission.contains(permissionChecker, fileEnt
 			<c:if test="<%= fileEntry.isCheckedOut() %>">
 				<img alt="<%= LanguageUtil.get(pageContext, "locked") %>" class="locked-icon" src="<%= themeDisplay.getPathThemeImages() %>/file_system/large/overlay_lock.png">
 			</c:if>
-		</span>	
+		</span>
 
 		<span class="document-title"><%= fileEntry.getTitle() %></span>
 

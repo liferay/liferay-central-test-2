@@ -143,7 +143,7 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 			<c:if test="<%= isCheckedOut %>">
 				<c:choose>
 					<c:when test="<%= hasLock %>">
-							<div class="portlet-msg-success portlet-msg-lock">
+						<div class="portlet-msg-lock portlet-msg-success">
 							<c:choose>
 								<c:when test="<%= lock.isNeverExpires() %>">
 									<liferay-ui:message key="you-now-have-an-indefinite-lock-on-this-document" />
