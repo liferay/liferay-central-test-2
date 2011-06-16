@@ -33,7 +33,6 @@ List<String> headerNames = searchContainer.getHeaderNames();
 Map orderableHeaders = searchContainer.getOrderableHeaders();
 String emptyResultsMessage = searchContainer.getEmptyResultsMessage();
 RowChecker rowChecker = searchContainer.getRowChecker();
-int sortColumnIndex = -1;
 
 if (end > total) {
 	end = total;
@@ -82,6 +81,8 @@ List<String> primaryKeys = new ArrayList<String>();
 			<tr class="portlet-section-header results-header">
 
 			<%
+			int sortColumnIndex = -1;
+
 			for (int i = 0; i < headerNames.size(); i++) {
 				String headerName = headerNames.get(i);
 
