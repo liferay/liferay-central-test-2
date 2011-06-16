@@ -415,6 +415,113 @@ public class DLContentUtil {
 	}
 
 	/**
+	* Returns the d l content where companyId = &#63; and repositoryId = &#63; and path = &#63; or throws a {@link com.liferay.portlet.documentlibrary.NoSuchContentException} if it could not be found.
+	*
+	* @param companyId the company ID
+	* @param repositoryId the repository ID
+	* @param path the path
+	* @return the matching d l content
+	* @throws com.liferay.portlet.documentlibrary.NoSuchContentException if a matching d l content could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.portlet.documentlibrary.model.DLContent findByC_R_P(
+		long companyId, long repositoryId, java.lang.String path)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.documentlibrary.NoSuchContentException {
+		return getPersistence().findByC_R_P(companyId, repositoryId, path);
+	}
+
+	/**
+	* Returns the d l content where companyId = &#63; and repositoryId = &#63; and path = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	*
+	* @param companyId the company ID
+	* @param repositoryId the repository ID
+	* @param path the path
+	* @return the matching d l content, or <code>null</code> if a matching d l content could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.portlet.documentlibrary.model.DLContent fetchByC_R_P(
+		long companyId, long repositoryId, java.lang.String path)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().fetchByC_R_P(companyId, repositoryId, path);
+	}
+
+	/**
+	* Returns the d l content where companyId = &#63; and repositoryId = &#63; and path = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	*
+	* @param companyId the company ID
+	* @param repositoryId the repository ID
+	* @param path the path
+	* @return the matching d l content, or <code>null</code> if a matching d l content could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.portlet.documentlibrary.model.DLContent fetchByC_R_P(
+		long companyId, long repositoryId, java.lang.String path,
+		boolean retrieveFromCache)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .fetchByC_R_P(companyId, repositoryId, path,
+			retrieveFromCache);
+	}
+
+	/**
+	* Returns the d l content where companyId = &#63; and repositoryId = &#63; and path = &#63; and version = &#63; or throws a {@link com.liferay.portlet.documentlibrary.NoSuchContentException} if it could not be found.
+	*
+	* @param companyId the company ID
+	* @param repositoryId the repository ID
+	* @param path the path
+	* @param version the version
+	* @return the matching d l content
+	* @throws com.liferay.portlet.documentlibrary.NoSuchContentException if a matching d l content could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.portlet.documentlibrary.model.DLContent findByC_R_P_V(
+		long companyId, long repositoryId, java.lang.String path,
+		java.lang.String version)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.documentlibrary.NoSuchContentException {
+		return getPersistence()
+				   .findByC_R_P_V(companyId, repositoryId, path, version);
+	}
+
+	/**
+	* Returns the d l content where companyId = &#63; and repositoryId = &#63; and path = &#63; and version = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	*
+	* @param companyId the company ID
+	* @param repositoryId the repository ID
+	* @param path the path
+	* @param version the version
+	* @return the matching d l content, or <code>null</code> if a matching d l content could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.portlet.documentlibrary.model.DLContent fetchByC_R_P_V(
+		long companyId, long repositoryId, java.lang.String path,
+		java.lang.String version)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .fetchByC_R_P_V(companyId, repositoryId, path, version);
+	}
+
+	/**
+	* Returns the d l content where companyId = &#63; and repositoryId = &#63; and path = &#63; and version = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	*
+	* @param companyId the company ID
+	* @param repositoryId the repository ID
+	* @param path the path
+	* @param version the version
+	* @return the matching d l content, or <code>null</code> if a matching d l content could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.portlet.documentlibrary.model.DLContent fetchByC_R_P_V(
+		long companyId, long repositoryId, java.lang.String path,
+		java.lang.String version, boolean retrieveFromCache)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .fetchByC_R_P_V(companyId, repositoryId, path, version,
+			retrieveFromCache);
+	}
+
+	/**
 	* Returns all the d l contents.
 	*
 	* @return the d l contents
@@ -499,6 +606,37 @@ public class DLContentUtil {
 	}
 
 	/**
+	* Removes the d l content where companyId = &#63; and repositoryId = &#63; and path = &#63; from the database.
+	*
+	* @param companyId the company ID
+	* @param repositoryId the repository ID
+	* @param path the path
+	* @throws SystemException if a system exception occurred
+	*/
+	public static void removeByC_R_P(long companyId, long repositoryId,
+		java.lang.String path)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.documentlibrary.NoSuchContentException {
+		getPersistence().removeByC_R_P(companyId, repositoryId, path);
+	}
+
+	/**
+	* Removes the d l content where companyId = &#63; and repositoryId = &#63; and path = &#63; and version = &#63; from the database.
+	*
+	* @param companyId the company ID
+	* @param repositoryId the repository ID
+	* @param path the path
+	* @param version the version
+	* @throws SystemException if a system exception occurred
+	*/
+	public static void removeByC_R_P_V(long companyId, long repositoryId,
+		java.lang.String path, java.lang.String version)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.documentlibrary.NoSuchContentException {
+		getPersistence().removeByC_R_P_V(companyId, repositoryId, path, version);
+	}
+
+	/**
 	* Removes all the d l contents from the database.
 	*
 	* @throws SystemException if a system exception occurred
@@ -543,6 +681,38 @@ public class DLContentUtil {
 		return getPersistence()
 				   .countByC_P_R_P_V(companyId, portletId, repositoryId, path,
 			version);
+	}
+
+	/**
+	* Returns the number of d l contents where companyId = &#63; and repositoryId = &#63; and path = &#63;.
+	*
+	* @param companyId the company ID
+	* @param repositoryId the repository ID
+	* @param path the path
+	* @return the number of matching d l contents
+	* @throws SystemException if a system exception occurred
+	*/
+	public static int countByC_R_P(long companyId, long repositoryId,
+		java.lang.String path)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().countByC_R_P(companyId, repositoryId, path);
+	}
+
+	/**
+	* Returns the number of d l contents where companyId = &#63; and repositoryId = &#63; and path = &#63; and version = &#63;.
+	*
+	* @param companyId the company ID
+	* @param repositoryId the repository ID
+	* @param path the path
+	* @param version the version
+	* @return the number of matching d l contents
+	* @throws SystemException if a system exception occurred
+	*/
+	public static int countByC_R_P_V(long companyId, long repositoryId,
+		java.lang.String path, java.lang.String version)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .countByC_R_P_V(companyId, repositoryId, path, version);
 	}
 
 	/**
