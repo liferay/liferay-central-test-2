@@ -135,7 +135,7 @@ if (folder != null) {
 							</a>
 						</c:if>
 
-						<a href="<%= viewDocumentsHomeURL.toString() %>" data-refresh-entries="<%= Boolean.TRUE.toString() %>" data-resource-url="<%= viewDocumentsHomeEntriesURL.toString() %>">
+						<a href="<%= viewDocumentsHomeURL.toString() %>" data-navigation="documents-home" data-refresh-entries="<%= Boolean.TRUE.toString() %>" data-resource-url="<%= viewDocumentsHomeEntriesURL.toString() %>" data-show-siblings="<%= Boolean.TRUE.toString() %>" data-view-folders="<%= Boolean.TRUE.toString() %>">
 							<liferay-ui:icon image="../aui/home" />
 
 							<%= LanguageUtil.get(pageContext, "documents-home") %>
@@ -160,7 +160,7 @@ if (folder != null) {
 					</liferay-portlet:resourceURL>
 
 					<li class="folder <%= navigation.equals("recent-documents") ? "selected" : StringPool.BLANK %>">
-						<a href="<%= viewRecentDocumentsURL.toString() %>" data-refresh-entries="<%= Boolean.TRUE.toString() %>" data-resource-url="<%= viewRecentDocumentsEntriesURL.toString() %>">
+						<a href="<%= viewRecentDocumentsURL.toString() %>" data-navigation="recent-documents" data-refresh-entries="<%= Boolean.TRUE.toString() %>" data-resource-url="<%= viewRecentDocumentsEntriesURL.toString() %>">
 							<liferay-ui:icon image="../aui/clock" />
 
 							<%= LanguageUtil.get(pageContext, "recent-documents") %>
@@ -172,7 +172,7 @@ if (folder != null) {
 						<portlet:param name="folderId" value="<%= String.valueOf(parentFolderId) %>" />
 					</liferay-portlet:renderURL>
 
-					<liferay-portlet:resourceURL copyCurrentRenderParameters="<%= false %>" varImpl="viewDocumentsHomeEntriesURL">
+					<liferay-portlet:resourceURL copyCurrentRenderParameters="<%= false %>" varImpl="viewMyDocumentsEntriesURL">
 						<portlet:param name="struts_action" value="/document_library/view" />
 						<portlet:param name="navigation" value="my-documents" />
 						<portlet:param name="viewAddButton" value="<%= Boolean.TRUE.toString() %>" />
@@ -185,7 +185,7 @@ if (folder != null) {
 					</liferay-portlet:resourceURL>
 
 					<li class="folder <%= navigation.equals("my-documents") ? "selected" : StringPool.BLANK %>">
-						<a href="<%= viewMyDocumentsURL.toString() %>" data-refresh-entries="<%= Boolean.TRUE.toString() %>" data-resource-url="<%= viewDocumentsHomeEntriesURL.toString() %>">
+						<a href="<%= viewMyDocumentsURL.toString() %>" data-navigation="my-documents" data-refresh-entries="<%= Boolean.TRUE.toString() %>" data-resource-url="<%= viewMyDocumentsEntriesURL.toString() %>">
 							<liferay-ui:icon image="../aui/person" />
 
 							<%= LanguageUtil.get(pageContext, "my-documents") %>
@@ -216,7 +216,7 @@ if (folder != null) {
 						</liferay-portlet:resourceURL>
 
 						<li class="folder document-type">
-							<a href="<%= viewBasicDocumentTypeURL.toString() %>" data-refresh-entries="<%= Boolean.TRUE.toString() %>" data-resource-url="<%= viewBasicDocumentTypeEntriesURL.toString() %>"
+							<a href="<%= viewBasicDocumentTypeURL.toString() %>" data-document-type-id="<%= String.valueOf(0) %>" data-refresh-entries="<%= Boolean.TRUE.toString() %>" data-resource-url="<%= viewBasicDocumentTypeEntriesURL.toString() %>"
 								<liferay-ui:icon image="copy" />
 
 								<%= LanguageUtil.get(pageContext, "basic-document") %>
@@ -247,7 +247,8 @@ if (folder != null) {
 						</liferay-portlet:resourceURL>
 
 						<li class="folder document-type">
-							<a href="<%= viewDocumentTypeURL.toString() %>" data-refresh-entries="<%= Boolean.TRUE.toString() %>" data-resource-url="<%= viewDocumentTypeEntriesURL.toString() %>"
+							<a href="<%= viewDocumentTypeURL.toString() %>" data-document-type-id="<%= documentType.getDocumentTypeId()
+							 %>" data-refresh-entries="<%= Boolean.TRUE.toString() %>" data-resource-url="<%= viewDocumentTypeEntriesURL.toString() %>"
 								<liferay-ui:icon image="copy" />
 
 								<%= documentType.getName() %>
@@ -291,7 +292,7 @@ if (folder != null) {
 							<liferay-ui:icon cssClass="expand-folder-arrow" image="../aui/carat-1-l" />
 						</a>
 
-						<a data-refresh-entries="<%= Boolean.TRUE.toString() %>" data-refresh-folders="<%= Boolean.TRUE.toString() %>" data-resource-url="<%= viewEntriesURL.toString() %>" href="<%= viewURL.toString() %>">
+						<a data-folder-id="<%= String.valueOf(parentFolderId) %>" data-refresh-entries="<%= Boolean.TRUE.toString() %>" data-refresh-folders="<%= Boolean.TRUE.toString() %>" data-resource-url="<%= viewEntriesURL.toString() %>" data-show-siblings="<%= Boolean.TRUE.toString() %>" data-view-folders="<%= Boolean.TRUE.toString() %>" href="<%= viewURL.toString() %>">
 							<liferay-ui:icon src='<%= themeDisplay.getPathThemeImages() + "/arrows/01_up.png" %>' />
 
 							<%= LanguageUtil.get(pageContext, "up") %>
@@ -334,7 +335,7 @@ if (folder != null) {
 								</a>
 							</c:if>
 
-							<a data-refresh-entries="<%= Boolean.TRUE.toString() %>" data-resource-url="<%= viewEntriesURL.toString() %>" href="<%= viewURL.toString() %>">
+							<a data-folder-id="<%= String.valueOf(curFolder.getFolderId()) %>" data-refresh-entries="<%= Boolean.TRUE.toString() %>" data-resource-url="<%= viewEntriesURL.toString() %>" data-show-siblings="<%= Boolean.TRUE.toString() %>" data-view-folders="<%= Boolean.TRUE.toString() %>" href="<%= viewURL.toString() %>">
 								<liferay-ui:icon image="folder" />
 
 								<%= curFolder.getName() %>
