@@ -74,12 +74,46 @@ public interface CalEventService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.calendar.model.CalEvent> getEvents(
+		long groupId, java.util.Calendar cal, java.lang.String types)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<com.liferay.portlet.calendar.model.CalEvent> getEvents(
+		long groupId, java.util.Calendar cal, java.lang.String[] types)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<com.liferay.portlet.calendar.model.CalEvent> getEvents(
+		long groupId, java.lang.String types, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<com.liferay.portlet.calendar.model.CalEvent> getEvents(
 		long groupId, java.lang.String[] types, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getEventsCount(long groupId, java.lang.String[] types)
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public boolean hasEvents(long groupId, java.util.Calendar cal)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public boolean hasEvents(long groupId, java.util.Calendar cal,
+		java.lang.String types)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public boolean hasEvents(long groupId, java.util.Calendar cal,
+		java.lang.String[] types)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
 
 	public void importICal4j(long groupId, java.io.File file)
 		throws com.liferay.portal.kernel.exception.PortalException,

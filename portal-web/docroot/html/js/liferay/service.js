@@ -624,6 +624,7 @@ Liferay.Service.registerClass(
 		getEvent: true,
 		getEvents: true,
 		getEventsCount: true,
+		hasEvents: true,
 		updateEvent: true
 	}
 );

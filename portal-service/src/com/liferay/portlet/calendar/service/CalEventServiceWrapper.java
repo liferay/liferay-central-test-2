@@ -74,6 +74,26 @@ public class CalEventServiceWrapper implements CalEventService {
 	}
 
 	public java.util.List<com.liferay.portlet.calendar.model.CalEvent> getEvents(
+		long groupId, java.util.Calendar cal, java.lang.String types)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _calEventService.getEvents(groupId, cal, types);
+	}
+
+	public java.util.List<com.liferay.portlet.calendar.model.CalEvent> getEvents(
+		long groupId, java.util.Calendar cal, java.lang.String[] types)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _calEventService.getEvents(groupId, cal, types);
+	}
+
+	public java.util.List<com.liferay.portlet.calendar.model.CalEvent> getEvents(
+		long groupId, java.lang.String types, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _calEventService.getEvents(groupId, types, start, end);
+	}
+
+	public java.util.List<com.liferay.portlet.calendar.model.CalEvent> getEvents(
 		long groupId, java.lang.String[] types, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _calEventService.getEvents(groupId, types, start, end);
@@ -82,6 +102,26 @@ public class CalEventServiceWrapper implements CalEventService {
 	public int getEventsCount(long groupId, java.lang.String[] types)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _calEventService.getEventsCount(groupId, types);
+	}
+
+	public boolean hasEvents(long groupId, java.util.Calendar cal)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _calEventService.hasEvents(groupId, cal);
+	}
+
+	public boolean hasEvents(long groupId, java.util.Calendar cal,
+		java.lang.String types)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _calEventService.hasEvents(groupId, cal, types);
+	}
+
+	public boolean hasEvents(long groupId, java.util.Calendar cal,
+		java.lang.String[] types)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _calEventService.hasEvents(groupId, cal, types);
 	}
 
 	public void importICal4j(long groupId, java.io.File file)
