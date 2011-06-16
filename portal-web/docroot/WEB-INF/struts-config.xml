@@ -613,6 +613,10 @@
 
 		<action path="/dynamic_data_mapping/view_template" forward="portlet.dynamic_data_mapping.view_template" />
 
+		<!-- Enterprise Admin -->
+
+		<action path="/enterprise_admin/view" forward="portlet.enterprise_admin.view" />
+
 		<!-- Expando -->
 
 		<action path="/expando/edit_expando" type="com.liferay.portlet.expando.action.EditExpandoAction">
@@ -1133,7 +1137,7 @@
 			<forward name="portlet.monitoring.error" path="portlet.monitoring.error" />
 		</action>
 
-		<action path="/monitoring/view" forward="portlet.monitoring.view" />
+		<action path="/monitoring/view" forward="portlet.enterprise_admin.view" />
 
 		<!-- My Account -->
 
@@ -1296,7 +1300,7 @@
 			<forward name="portlet.password_policies_admin.error" path="portlet.password_policies_admin.error" />
 		</action>
 
-		<action path="/password_policies_admin/view" forward="portlet.password_policies_admin.view" />
+		<action path="/password_policies_admin/view" forward="portlet.enterprise_admin.view" />
 
 		<!-- Plugin Installer -->
 
@@ -1313,7 +1317,7 @@
 			<forward name="portlet.plugins_admin.error" path="portlet.plugins_admin.error" />
 		</action>
 
-		<action path="/plugins_admin/view" forward="portlet.plugins_admin.view" />
+		<action path="/plugins_admin/view" forward="portlet.enterprise_admin.view" />
 
 		<!-- Polls -->
 
@@ -1801,7 +1805,7 @@
 
 		<action path="/users_admin/select_user_group" forward="portlet.users_admin.select_user_group" />
 
-		<action path="/users_admin/view" forward="portlet.users_admin.view" />
+		<action path="/users_admin/view" forward="portlet.enterprise_admin.view" />
 
 		<action path="/users_admin/view_teams" forward="portlet.sites_admin.view_teams" />
 
