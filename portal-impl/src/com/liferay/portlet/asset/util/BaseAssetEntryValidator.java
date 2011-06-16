@@ -19,7 +19,6 @@ import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.ArrayUtil;
-import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.UnicodeProperties;
@@ -124,10 +123,7 @@ public class BaseAssetEntryValidator implements AssetEntryValidator {
 			}
 		}
 
-		boolean multiValued = GetterUtil.getBoolean(
-			settingsProperties.getProperty("multiValued"));
-
-		if (!multiValued) {
+		if (!vocabulary.isMultiValued()) {
 			boolean duplicate = false;
 
 			for (AssetCategory category : categories) {
