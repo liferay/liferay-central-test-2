@@ -33,7 +33,6 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class JournalArticleImagePersistenceTest extends BasePersistenceTestCase {
-	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 
@@ -70,11 +69,17 @@ public class JournalArticleImagePersistenceTest extends BasePersistenceTestCase 
 		JournalArticleImage newJournalArticleImage = _persistence.create(pk);
 
 		newJournalArticleImage.setGroupId(nextLong());
+
 		newJournalArticleImage.setArticleId(randomString());
+
 		newJournalArticleImage.setVersion(nextDouble());
+
 		newJournalArticleImage.setElInstanceId(randomString());
+
 		newJournalArticleImage.setElName(randomString());
+
 		newJournalArticleImage.setLanguageId(randomString());
+
 		newJournalArticleImage.setTempImage(randomBoolean());
 
 		_persistence.update(newJournalArticleImage, false);
@@ -240,11 +245,17 @@ public class JournalArticleImagePersistenceTest extends BasePersistenceTestCase 
 		JournalArticleImage journalArticleImage = _persistence.create(pk);
 
 		journalArticleImage.setGroupId(nextLong());
+
 		journalArticleImage.setArticleId(randomString());
+
 		journalArticleImage.setVersion(nextDouble());
+
 		journalArticleImage.setElInstanceId(randomString());
+
 		journalArticleImage.setElName(randomString());
+
 		journalArticleImage.setLanguageId(randomString());
+
 		journalArticleImage.setTempImage(randomBoolean());
 
 		_persistence.update(journalArticleImage, false);

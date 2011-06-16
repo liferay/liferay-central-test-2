@@ -221,6 +221,7 @@ public class SocialRelationWrapper implements SocialRelation {
 		_socialRelation.setExpandoBridgeAttributes(serviceContext);
 	}
 
+	@Override
 	public java.lang.Object clone() {
 		return new SocialRelationWrapper((SocialRelation)_socialRelation.clone());
 	}
@@ -230,6 +231,7 @@ public class SocialRelationWrapper implements SocialRelation {
 		return _socialRelation.compareTo(socialRelation);
 	}
 
+	@Override
 	public int hashCode() {
 		return _socialRelation.hashCode();
 	}
@@ -238,6 +240,7 @@ public class SocialRelationWrapper implements SocialRelation {
 		return new SocialRelationWrapper(_socialRelation.toEscapedModel());
 	}
 
+	@Override
 	public java.lang.String toString() {
 		return _socialRelation.toString();
 	}

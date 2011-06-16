@@ -34,7 +34,6 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class AssetCategoryPersistenceTest extends BasePersistenceTestCase {
-	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 
@@ -71,17 +70,29 @@ public class AssetCategoryPersistenceTest extends BasePersistenceTestCase {
 		AssetCategory newAssetCategory = _persistence.create(pk);
 
 		newAssetCategory.setUuid(randomString());
+
 		newAssetCategory.setGroupId(nextLong());
+
 		newAssetCategory.setCompanyId(nextLong());
+
 		newAssetCategory.setUserId(nextLong());
+
 		newAssetCategory.setUserName(randomString());
+
 		newAssetCategory.setCreateDate(nextDate());
+
 		newAssetCategory.setModifiedDate(nextDate());
+
 		newAssetCategory.setLeftCategoryId(nextLong());
+
 		newAssetCategory.setRightCategoryId(nextLong());
+
 		newAssetCategory.setName(randomString());
+
 		newAssetCategory.setTitle(randomString());
+
 		newAssetCategory.setDescription(randomString());
+
 		newAssetCategory.setVocabularyId(nextLong());
 
 		_persistence.update(newAssetCategory, false);
@@ -253,17 +264,29 @@ public class AssetCategoryPersistenceTest extends BasePersistenceTestCase {
 		AssetCategory assetCategory = _persistence.create(pk);
 
 		assetCategory.setUuid(randomString());
+
 		assetCategory.setGroupId(nextLong());
+
 		assetCategory.setCompanyId(nextLong());
+
 		assetCategory.setUserId(nextLong());
+
 		assetCategory.setUserName(randomString());
+
 		assetCategory.setCreateDate(nextDate());
+
 		assetCategory.setModifiedDate(nextDate());
+
 		assetCategory.setLeftCategoryId(nextLong());
+
 		assetCategory.setRightCategoryId(nextLong());
+
 		assetCategory.setName(randomString());
+
 		assetCategory.setTitle(randomString());
+
 		assetCategory.setDescription(randomString());
+
 		assetCategory.setVocabularyId(nextLong());
 
 		_persistence.update(assetCategory, false);

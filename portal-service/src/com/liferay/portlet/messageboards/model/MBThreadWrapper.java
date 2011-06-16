@@ -468,6 +468,7 @@ public class MBThreadWrapper implements MBThread {
 		_mbThread.setExpandoBridgeAttributes(serviceContext);
 	}
 
+	@Override
 	public java.lang.Object clone() {
 		return new MBThreadWrapper((MBThread)_mbThread.clone());
 	}
@@ -477,6 +478,7 @@ public class MBThreadWrapper implements MBThread {
 		return _mbThread.compareTo(mbThread);
 	}
 
+	@Override
 	public int hashCode() {
 		return _mbThread.hashCode();
 	}
@@ -485,6 +487,7 @@ public class MBThreadWrapper implements MBThread {
 		return new MBThreadWrapper(_mbThread.toEscapedModel());
 	}
 
+	@Override
 	public java.lang.String toString() {
 		return _mbThread.toString();
 	}

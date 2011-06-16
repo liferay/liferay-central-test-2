@@ -466,6 +466,7 @@ public class AddressWrapper implements Address {
 		_address.setExpandoBridgeAttributes(serviceContext);
 	}
 
+	@Override
 	public java.lang.Object clone() {
 		return new AddressWrapper((Address)_address.clone());
 	}
@@ -474,6 +475,7 @@ public class AddressWrapper implements Address {
 		return _address.compareTo(address);
 	}
 
+	@Override
 	public int hashCode() {
 		return _address.hashCode();
 	}
@@ -482,6 +484,7 @@ public class AddressWrapper implements Address {
 		return new AddressWrapper(_address.toEscapedModel());
 	}
 
+	@Override
 	public java.lang.String toString() {
 		return _address.toString();
 	}

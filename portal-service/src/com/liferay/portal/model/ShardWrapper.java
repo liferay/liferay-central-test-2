@@ -176,6 +176,7 @@ public class ShardWrapper implements Shard {
 		_shard.setExpandoBridgeAttributes(serviceContext);
 	}
 
+	@Override
 	public java.lang.Object clone() {
 		return new ShardWrapper((Shard)_shard.clone());
 	}
@@ -184,6 +185,7 @@ public class ShardWrapper implements Shard {
 		return _shard.compareTo(shard);
 	}
 
+	@Override
 	public int hashCode() {
 		return _shard.hashCode();
 	}
@@ -192,6 +194,7 @@ public class ShardWrapper implements Shard {
 		return new ShardWrapper(_shard.toEscapedModel());
 	}
 
+	@Override
 	public java.lang.String toString() {
 		return _shard.toString();
 	}

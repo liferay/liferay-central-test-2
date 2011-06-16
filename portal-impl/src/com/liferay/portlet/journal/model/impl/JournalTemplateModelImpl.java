@@ -433,6 +433,7 @@ public class JournalTemplateModelImpl extends BaseModelImpl<JournalTemplate>
 		_smallImageURL = smallImageURL;
 	}
 
+	@Override
 	public JournalTemplate toEscapedModel() {
 		if (isEscapedModel()) {
 			return (JournalTemplate)this;
@@ -443,6 +444,7 @@ public class JournalTemplateModelImpl extends BaseModelImpl<JournalTemplate>
 		}
 	}
 
+	@Override
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
 			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
@@ -452,10 +454,12 @@ public class JournalTemplateModelImpl extends BaseModelImpl<JournalTemplate>
 		return _expandoBridge;
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
 		getExpandoBridge().setAttributes(serviceContext);
 	}
 
+	@Override
 	public Object clone() {
 		JournalTemplateImpl journalTemplateImpl = new JournalTemplateImpl();
 
@@ -495,6 +499,7 @@ public class JournalTemplateModelImpl extends BaseModelImpl<JournalTemplate>
 		return 0;
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		if (obj == null) {
 			return false;
@@ -519,10 +524,12 @@ public class JournalTemplateModelImpl extends BaseModelImpl<JournalTemplate>
 		}
 	}
 
+	@Override
 	public int hashCode() {
 		return (int)getPrimaryKey();
 	}
 
+	@Override
 	public void resetOriginalValues() {
 		JournalTemplateModelImpl journalTemplateModelImpl = this;
 
@@ -539,6 +546,7 @@ public class JournalTemplateModelImpl extends BaseModelImpl<JournalTemplate>
 		journalTemplateModelImpl._setOriginalSmallImageId = false;
 	}
 
+	@Override
 	public String toString() {
 		StringBundler sb = new StringBundler(37);
 

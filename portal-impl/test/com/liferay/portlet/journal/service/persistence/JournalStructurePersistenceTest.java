@@ -34,7 +34,6 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class JournalStructurePersistenceTest extends BasePersistenceTestCase {
-	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 
@@ -71,16 +70,27 @@ public class JournalStructurePersistenceTest extends BasePersistenceTestCase {
 		JournalStructure newJournalStructure = _persistence.create(pk);
 
 		newJournalStructure.setUuid(randomString());
+
 		newJournalStructure.setGroupId(nextLong());
+
 		newJournalStructure.setCompanyId(nextLong());
+
 		newJournalStructure.setUserId(nextLong());
+
 		newJournalStructure.setUserName(randomString());
+
 		newJournalStructure.setCreateDate(nextDate());
+
 		newJournalStructure.setModifiedDate(nextDate());
+
 		newJournalStructure.setStructureId(randomString());
+
 		newJournalStructure.setParentStructureId(randomString());
+
 		newJournalStructure.setName(randomString());
+
 		newJournalStructure.setDescription(randomString());
+
 		newJournalStructure.setXsd(randomString());
 
 		_persistence.update(newJournalStructure, false);
@@ -249,16 +259,27 @@ public class JournalStructurePersistenceTest extends BasePersistenceTestCase {
 		JournalStructure journalStructure = _persistence.create(pk);
 
 		journalStructure.setUuid(randomString());
+
 		journalStructure.setGroupId(nextLong());
+
 		journalStructure.setCompanyId(nextLong());
+
 		journalStructure.setUserId(nextLong());
+
 		journalStructure.setUserName(randomString());
+
 		journalStructure.setCreateDate(nextDate());
+
 		journalStructure.setModifiedDate(nextDate());
+
 		journalStructure.setStructureId(randomString());
+
 		journalStructure.setParentStructureId(randomString());
+
 		journalStructure.setName(randomString());
+
 		journalStructure.setDescription(randomString());
+
 		journalStructure.setXsd(randomString());
 
 		_persistence.update(journalStructure, false);

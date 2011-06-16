@@ -77,6 +77,7 @@ public class VideoProcessor extends DLProcessor {
 		return _instance._isSupportedVideo(fileEntry);
 	}
 
+	@Override
 	public void trigger(FileEntry fileEntry) {
 		_instance._queueGeneration(fileEntry);
 	}

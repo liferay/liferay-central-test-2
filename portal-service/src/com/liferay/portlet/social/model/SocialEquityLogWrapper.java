@@ -340,6 +340,7 @@ public class SocialEquityLogWrapper implements SocialEquityLog {
 		_socialEquityLog.setExpandoBridgeAttributes(serviceContext);
 	}
 
+	@Override
 	public java.lang.Object clone() {
 		return new SocialEquityLogWrapper((SocialEquityLog)_socialEquityLog.clone());
 	}
@@ -349,6 +350,7 @@ public class SocialEquityLogWrapper implements SocialEquityLog {
 		return _socialEquityLog.compareTo(socialEquityLog);
 	}
 
+	@Override
 	public int hashCode() {
 		return _socialEquityLog.hashCode();
 	}
@@ -357,6 +359,7 @@ public class SocialEquityLogWrapper implements SocialEquityLog {
 		return new SocialEquityLogWrapper(_socialEquityLog.toEscapedModel());
 	}
 
+	@Override
 	public java.lang.String toString() {
 		return _socialEquityLog.toString();
 	}

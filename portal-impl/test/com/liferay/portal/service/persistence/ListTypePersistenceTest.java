@@ -66,6 +66,7 @@ public class ListTypePersistenceTest extends BasePersistenceTestCase {
 		ListType newListType = _persistence.create(pk);
 
 		newListType.setName(randomString());
+
 		newListType.setType(randomString());
 
 		_persistence.update(newListType, false);
@@ -187,6 +188,7 @@ public class ListTypePersistenceTest extends BasePersistenceTestCase {
 		ListType listType = _persistence.create(pk);
 
 		listType.setName(randomString());
+
 		listType.setType(randomString());
 
 		_persistence.update(listType, false);

@@ -176,6 +176,7 @@ public class ClusterGroupWrapper implements ClusterGroup {
 		_clusterGroup.setExpandoBridgeAttributes(serviceContext);
 	}
 
+	@Override
 	public java.lang.Object clone() {
 		return new ClusterGroupWrapper((ClusterGroup)_clusterGroup.clone());
 	}
@@ -184,6 +185,7 @@ public class ClusterGroupWrapper implements ClusterGroup {
 		return _clusterGroup.compareTo(clusterGroup);
 	}
 
+	@Override
 	public int hashCode() {
 		return _clusterGroup.hashCode();
 	}
@@ -192,6 +194,7 @@ public class ClusterGroupWrapper implements ClusterGroup {
 		return new ClusterGroupWrapper(_clusterGroup.toEscapedModel());
 	}
 
+	@Override
 	public java.lang.String toString() {
 		return _clusterGroup.toString();
 	}

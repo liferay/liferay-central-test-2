@@ -32,7 +32,6 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class PortletPersistenceTest extends BasePersistenceTestCase {
-	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 
@@ -69,8 +68,11 @@ public class PortletPersistenceTest extends BasePersistenceTestCase {
 		Portlet newPortlet = _persistence.create(pk);
 
 		newPortlet.setCompanyId(nextLong());
+
 		newPortlet.setPortletId(randomString());
+
 		newPortlet.setRoles(randomString());
+
 		newPortlet.setActive(randomBoolean());
 
 		_persistence.update(newPortlet, false);
@@ -208,8 +210,11 @@ public class PortletPersistenceTest extends BasePersistenceTestCase {
 		Portlet portlet = _persistence.create(pk);
 
 		portlet.setCompanyId(nextLong());
+
 		portlet.setPortletId(randomString());
+
 		portlet.setRoles(randomString());
+
 		portlet.setActive(randomBoolean());
 
 		_persistence.update(portlet, false);

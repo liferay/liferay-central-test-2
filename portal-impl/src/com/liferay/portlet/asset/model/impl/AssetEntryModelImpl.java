@@ -529,6 +529,7 @@ public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry>
 		_viewCount = viewCount;
 	}
 
+	@Override
 	public AssetEntry toEscapedModel() {
 		if (isEscapedModel()) {
 			return (AssetEntry)this;
@@ -539,6 +540,7 @@ public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry>
 		}
 	}
 
+	@Override
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
 			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
@@ -548,10 +550,12 @@ public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry>
 		return _expandoBridge;
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
 		getExpandoBridge().setAttributes(serviceContext);
 	}
 
+	@Override
 	public Object clone() {
 		AssetEntryImpl assetEntryImpl = new AssetEntryImpl();
 
@@ -600,6 +604,7 @@ public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry>
 		}
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		if (obj == null) {
 			return false;
@@ -624,10 +629,12 @@ public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry>
 		}
 	}
 
+	@Override
 	public int hashCode() {
 		return (int)getPrimaryKey();
 	}
 
+	@Override
 	public void resetOriginalValues() {
 		AssetEntryModelImpl assetEntryModelImpl = this;
 
@@ -646,6 +653,7 @@ public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry>
 		assetEntryModelImpl._originalClassUuid = assetEntryModelImpl._classUuid;
 	}
 
+	@Override
 	public String toString() {
 		StringBundler sb = new StringBundler(51);
 

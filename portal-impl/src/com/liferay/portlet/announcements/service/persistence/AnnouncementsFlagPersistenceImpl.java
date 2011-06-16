@@ -149,6 +149,7 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl<Announ
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache() {
 		if (_HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
 			CacheRegistryUtil.clear(AnnouncementsFlagImpl.class.getName());
@@ -166,6 +167,7 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl<Announ
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache(AnnouncementsFlag announcementsFlag) {
 		EntityCacheUtil.removeResult(AnnouncementsFlagModelImpl.ENTITY_CACHE_ENABLED,
 			AnnouncementsFlagImpl.class, announcementsFlag.getPrimaryKey());
@@ -201,6 +203,7 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl<Announ
 	 * @throws com.liferay.portal.NoSuchModelException if a announcements flag with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AnnouncementsFlag remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
@@ -253,11 +256,13 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl<Announ
 	 * @return the announcements flag that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AnnouncementsFlag remove(AnnouncementsFlag announcementsFlag)
 		throws SystemException {
 		return super.remove(announcementsFlag);
 	}
 
+	@Override
 	protected AnnouncementsFlag removeImpl(AnnouncementsFlag announcementsFlag)
 		throws SystemException {
 		announcementsFlag = toUnwrappedModel(announcementsFlag);
@@ -293,6 +298,7 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl<Announ
 		return announcementsFlag;
 	}
 
+	@Override
 	public AnnouncementsFlag updateImpl(
 		com.liferay.portlet.announcements.model.AnnouncementsFlag announcementsFlag,
 		boolean merge) throws SystemException {
@@ -381,6 +387,7 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl<Announ
 	 * @throws com.liferay.portal.NoSuchModelException if a announcements flag with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AnnouncementsFlag findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
@@ -417,6 +424,7 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl<Announ
 	 * @return the announcements flag, or <code>null</code> if a announcements flag with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AnnouncementsFlag fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());

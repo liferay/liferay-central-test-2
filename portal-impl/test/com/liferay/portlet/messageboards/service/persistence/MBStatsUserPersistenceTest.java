@@ -33,7 +33,6 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class MBStatsUserPersistenceTest extends BasePersistenceTestCase {
-	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 
@@ -70,8 +69,11 @@ public class MBStatsUserPersistenceTest extends BasePersistenceTestCase {
 		MBStatsUser newMBStatsUser = _persistence.create(pk);
 
 		newMBStatsUser.setGroupId(nextLong());
+
 		newMBStatsUser.setUserId(nextLong());
+
 		newMBStatsUser.setMessageCount(nextInt());
+
 		newMBStatsUser.setLastPostDate(nextDate());
 
 		_persistence.update(newMBStatsUser, false);
@@ -216,8 +218,11 @@ public class MBStatsUserPersistenceTest extends BasePersistenceTestCase {
 		MBStatsUser mbStatsUser = _persistence.create(pk);
 
 		mbStatsUser.setGroupId(nextLong());
+
 		mbStatsUser.setUserId(nextLong());
+
 		mbStatsUser.setMessageCount(nextInt());
+
 		mbStatsUser.setLastPostDate(nextDate());
 
 		_persistence.update(mbStatsUser, false);

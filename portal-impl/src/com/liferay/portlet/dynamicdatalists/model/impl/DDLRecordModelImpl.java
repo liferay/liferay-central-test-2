@@ -363,6 +363,7 @@ public class DDLRecordModelImpl extends BaseModelImpl<DDLRecord>
 		_displayIndex = displayIndex;
 	}
 
+	@Override
 	public DDLRecord toEscapedModel() {
 		if (isEscapedModel()) {
 			return (DDLRecord)this;
@@ -373,6 +374,7 @@ public class DDLRecordModelImpl extends BaseModelImpl<DDLRecord>
 		}
 	}
 
+	@Override
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
 			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
@@ -382,10 +384,12 @@ public class DDLRecordModelImpl extends BaseModelImpl<DDLRecord>
 		return _expandoBridge;
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
 		getExpandoBridge().setAttributes(serviceContext);
 	}
 
+	@Override
 	public Object clone() {
 		DDLRecordImpl ddlRecordImpl = new DDLRecordImpl();
 
@@ -424,6 +428,7 @@ public class DDLRecordModelImpl extends BaseModelImpl<DDLRecord>
 		}
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		if (obj == null) {
 			return false;
@@ -448,10 +453,12 @@ public class DDLRecordModelImpl extends BaseModelImpl<DDLRecord>
 		}
 	}
 
+	@Override
 	public int hashCode() {
 		return (int)getPrimaryKey();
 	}
 
+	@Override
 	public void resetOriginalValues() {
 		DDLRecordModelImpl ddlRecordModelImpl = this;
 
@@ -462,6 +469,7 @@ public class DDLRecordModelImpl extends BaseModelImpl<DDLRecord>
 		ddlRecordModelImpl._setOriginalGroupId = false;
 	}
 
+	@Override
 	public String toString() {
 		StringBundler sb = new StringBundler(31);
 

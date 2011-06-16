@@ -160,6 +160,7 @@ public class ResourceActionModelImpl extends BaseModelImpl<ResourceAction>
 		_bitwiseValue = bitwiseValue;
 	}
 
+	@Override
 	public ResourceAction toEscapedModel() {
 		if (isEscapedModel()) {
 			return (ResourceAction)this;
@@ -170,6 +171,7 @@ public class ResourceActionModelImpl extends BaseModelImpl<ResourceAction>
 		}
 	}
 
+	@Override
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
 			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(0,
@@ -179,10 +181,12 @@ public class ResourceActionModelImpl extends BaseModelImpl<ResourceAction>
 		return _expandoBridge;
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
 		getExpandoBridge().setAttributes(serviceContext);
 	}
 
+	@Override
 	public Object clone() {
 		ResourceActionImpl resourceActionImpl = new ResourceActionImpl();
 
@@ -222,6 +226,7 @@ public class ResourceActionModelImpl extends BaseModelImpl<ResourceAction>
 		return 0;
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		if (obj == null) {
 			return false;
@@ -246,10 +251,12 @@ public class ResourceActionModelImpl extends BaseModelImpl<ResourceAction>
 		}
 	}
 
+	@Override
 	public int hashCode() {
 		return (int)getPrimaryKey();
 	}
 
+	@Override
 	public void resetOriginalValues() {
 		ResourceActionModelImpl resourceActionModelImpl = this;
 
@@ -258,6 +265,7 @@ public class ResourceActionModelImpl extends BaseModelImpl<ResourceAction>
 		resourceActionModelImpl._originalActionId = resourceActionModelImpl._actionId;
 	}
 
+	@Override
 	public String toString() {
 		StringBundler sb = new StringBundler(9);
 

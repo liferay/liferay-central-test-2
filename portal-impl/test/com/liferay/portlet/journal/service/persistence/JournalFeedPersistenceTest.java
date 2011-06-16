@@ -34,7 +34,6 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class JournalFeedPersistenceTest extends BasePersistenceTestCase {
-	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 
@@ -71,26 +70,47 @@ public class JournalFeedPersistenceTest extends BasePersistenceTestCase {
 		JournalFeed newJournalFeed = _persistence.create(pk);
 
 		newJournalFeed.setUuid(randomString());
+
 		newJournalFeed.setGroupId(nextLong());
+
 		newJournalFeed.setCompanyId(nextLong());
+
 		newJournalFeed.setUserId(nextLong());
+
 		newJournalFeed.setUserName(randomString());
+
 		newJournalFeed.setCreateDate(nextDate());
+
 		newJournalFeed.setModifiedDate(nextDate());
+
 		newJournalFeed.setFeedId(randomString());
+
 		newJournalFeed.setName(randomString());
+
 		newJournalFeed.setDescription(randomString());
+
 		newJournalFeed.setType(randomString());
+
 		newJournalFeed.setStructureId(randomString());
+
 		newJournalFeed.setTemplateId(randomString());
+
 		newJournalFeed.setRendererTemplateId(randomString());
+
 		newJournalFeed.setDelta(nextInt());
+
 		newJournalFeed.setOrderByCol(randomString());
+
 		newJournalFeed.setOrderByType(randomString());
+
 		newJournalFeed.setTargetLayoutFriendlyUrl(randomString());
+
 		newJournalFeed.setTargetPortletId(randomString());
+
 		newJournalFeed.setContentField(randomString());
+
 		newJournalFeed.setFeedType(randomString());
+
 		newJournalFeed.setFeedVersion(nextDouble());
 
 		_persistence.update(newJournalFeed, false);
@@ -268,26 +288,47 @@ public class JournalFeedPersistenceTest extends BasePersistenceTestCase {
 		JournalFeed journalFeed = _persistence.create(pk);
 
 		journalFeed.setUuid(randomString());
+
 		journalFeed.setGroupId(nextLong());
+
 		journalFeed.setCompanyId(nextLong());
+
 		journalFeed.setUserId(nextLong());
+
 		journalFeed.setUserName(randomString());
+
 		journalFeed.setCreateDate(nextDate());
+
 		journalFeed.setModifiedDate(nextDate());
+
 		journalFeed.setFeedId(randomString());
+
 		journalFeed.setName(randomString());
+
 		journalFeed.setDescription(randomString());
+
 		journalFeed.setType(randomString());
+
 		journalFeed.setStructureId(randomString());
+
 		journalFeed.setTemplateId(randomString());
+
 		journalFeed.setRendererTemplateId(randomString());
+
 		journalFeed.setDelta(nextInt());
+
 		journalFeed.setOrderByCol(randomString());
+
 		journalFeed.setOrderByType(randomString());
+
 		journalFeed.setTargetLayoutFriendlyUrl(randomString());
+
 		journalFeed.setTargetPortletId(randomString());
+
 		journalFeed.setContentField(randomString());
+
 		journalFeed.setFeedType(randomString());
+
 		journalFeed.setFeedVersion(nextDouble());
 
 		_persistence.update(journalFeed, false);

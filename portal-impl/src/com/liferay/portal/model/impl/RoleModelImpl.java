@@ -392,6 +392,7 @@ public class RoleModelImpl extends BaseModelImpl<Role> implements RoleModel {
 		_subtype = subtype;
 	}
 
+	@Override
 	public Role toEscapedModel() {
 		if (isEscapedModel()) {
 			return (Role)this;
@@ -402,6 +403,7 @@ public class RoleModelImpl extends BaseModelImpl<Role> implements RoleModel {
 		}
 	}
 
+	@Override
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
 			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
@@ -411,10 +413,12 @@ public class RoleModelImpl extends BaseModelImpl<Role> implements RoleModel {
 		return _expandoBridge;
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
 		getExpandoBridge().setAttributes(serviceContext);
 	}
 
+	@Override
 	public Object clone() {
 		RoleImpl roleImpl = new RoleImpl();
 
@@ -445,6 +449,7 @@ public class RoleModelImpl extends BaseModelImpl<Role> implements RoleModel {
 		return 0;
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		if (obj == null) {
 			return false;
@@ -469,10 +474,12 @@ public class RoleModelImpl extends BaseModelImpl<Role> implements RoleModel {
 		}
 	}
 
+	@Override
 	public int hashCode() {
 		return (int)getPrimaryKey();
 	}
 
+	@Override
 	public void resetOriginalValues() {
 		RoleModelImpl roleModelImpl = this;
 
@@ -491,6 +498,7 @@ public class RoleModelImpl extends BaseModelImpl<Role> implements RoleModel {
 		roleModelImpl._originalName = roleModelImpl._name;
 	}
 
+	@Override
 	public String toString() {
 		StringBundler sb = new StringBundler(19);
 

@@ -33,7 +33,6 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class MBBanPersistenceTest extends BasePersistenceTestCase {
-	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 
@@ -70,11 +69,17 @@ public class MBBanPersistenceTest extends BasePersistenceTestCase {
 		MBBan newMBBan = _persistence.create(pk);
 
 		newMBBan.setGroupId(nextLong());
+
 		newMBBan.setCompanyId(nextLong());
+
 		newMBBan.setUserId(nextLong());
+
 		newMBBan.setUserName(randomString());
+
 		newMBBan.setCreateDate(nextDate());
+
 		newMBBan.setModifiedDate(nextDate());
+
 		newMBBan.setBanUserId(nextLong());
 
 		_persistence.update(newMBBan, false);
@@ -218,11 +223,17 @@ public class MBBanPersistenceTest extends BasePersistenceTestCase {
 		MBBan mbBan = _persistence.create(pk);
 
 		mbBan.setGroupId(nextLong());
+
 		mbBan.setCompanyId(nextLong());
+
 		mbBan.setUserId(nextLong());
+
 		mbBan.setUserName(randomString());
+
 		mbBan.setCreateDate(nextDate());
+
 		mbBan.setModifiedDate(nextDate());
+
 		mbBan.setBanUserId(nextLong());
 
 		_persistence.update(mbBan, false);

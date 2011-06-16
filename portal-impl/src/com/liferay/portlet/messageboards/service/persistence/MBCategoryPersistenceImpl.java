@@ -183,6 +183,7 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache() {
 		if (_HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
 			CacheRegistryUtil.clear(MBCategoryImpl.class.getName());
@@ -200,6 +201,7 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache(MBCategory mbCategory) {
 		EntityCacheUtil.removeResult(MBCategoryModelImpl.ENTITY_CACHE_ENABLED,
 			MBCategoryImpl.class, mbCategory.getPrimaryKey());
@@ -237,6 +239,7 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 	 * @throws com.liferay.portal.NoSuchModelException if a message boards category with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBCategory remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
@@ -289,10 +292,12 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 	 * @return the message boards category that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBCategory remove(MBCategory mbCategory) throws SystemException {
 		return super.remove(mbCategory);
 	}
 
+	@Override
 	protected MBCategory removeImpl(MBCategory mbCategory)
 		throws SystemException {
 		mbCategory = toUnwrappedModel(mbCategory);
@@ -327,6 +332,7 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 		return mbCategory;
 	}
 
+	@Override
 	public MBCategory updateImpl(
 		com.liferay.portlet.messageboards.model.MBCategory mbCategory,
 		boolean merge) throws SystemException {
@@ -424,6 +430,7 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 	 * @throws com.liferay.portal.NoSuchModelException if a message boards category with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBCategory findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
@@ -460,6 +467,7 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 	 * @return the message boards category, or <code>null</code> if a message boards category with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBCategory fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());

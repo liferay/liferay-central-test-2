@@ -305,6 +305,7 @@ public class WorkflowInstanceLinkWrapper implements WorkflowInstanceLink {
 		_workflowInstanceLink.setExpandoBridgeAttributes(serviceContext);
 	}
 
+	@Override
 	public java.lang.Object clone() {
 		return new WorkflowInstanceLinkWrapper((WorkflowInstanceLink)_workflowInstanceLink.clone());
 	}
@@ -314,6 +315,7 @@ public class WorkflowInstanceLinkWrapper implements WorkflowInstanceLink {
 		return _workflowInstanceLink.compareTo(workflowInstanceLink);
 	}
 
+	@Override
 	public int hashCode() {
 		return _workflowInstanceLink.hashCode();
 	}
@@ -322,6 +324,7 @@ public class WorkflowInstanceLinkWrapper implements WorkflowInstanceLink {
 		return new WorkflowInstanceLinkWrapper(_workflowInstanceLink.toEscapedModel());
 	}
 
+	@Override
 	public java.lang.String toString() {
 		return _workflowInstanceLink.toString();
 	}

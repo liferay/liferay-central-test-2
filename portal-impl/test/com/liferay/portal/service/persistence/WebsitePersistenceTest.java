@@ -30,7 +30,6 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class WebsitePersistenceTest extends BasePersistenceTestCase {
-	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 
@@ -67,14 +66,23 @@ public class WebsitePersistenceTest extends BasePersistenceTestCase {
 		Website newWebsite = _persistence.create(pk);
 
 		newWebsite.setCompanyId(nextLong());
+
 		newWebsite.setUserId(nextLong());
+
 		newWebsite.setUserName(randomString());
+
 		newWebsite.setCreateDate(nextDate());
+
 		newWebsite.setModifiedDate(nextDate());
+
 		newWebsite.setClassNameId(nextLong());
+
 		newWebsite.setClassPK(nextLong());
+
 		newWebsite.setUrl(randomString());
+
 		newWebsite.setTypeId(nextInt());
+
 		newWebsite.setPrimary(randomBoolean());
 
 		_persistence.update(newWebsite, false);
@@ -206,14 +214,23 @@ public class WebsitePersistenceTest extends BasePersistenceTestCase {
 		Website website = _persistence.create(pk);
 
 		website.setCompanyId(nextLong());
+
 		website.setUserId(nextLong());
+
 		website.setUserName(randomString());
+
 		website.setCreateDate(nextDate());
+
 		website.setModifiedDate(nextDate());
+
 		website.setClassNameId(nextLong());
+
 		website.setClassPK(nextLong());
+
 		website.setUrl(randomString());
+
 		website.setTypeId(nextInt());
+
 		website.setPrimary(randomBoolean());
 
 		_persistence.update(website, false);

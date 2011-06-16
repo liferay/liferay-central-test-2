@@ -475,6 +475,7 @@ public class DDLRecordVersionWrapper implements DDLRecordVersion {
 		_ddlRecordVersion.setExpandoBridgeAttributes(serviceContext);
 	}
 
+	@Override
 	public java.lang.Object clone() {
 		return new DDLRecordVersionWrapper((DDLRecordVersion)_ddlRecordVersion.clone());
 	}
@@ -484,6 +485,7 @@ public class DDLRecordVersionWrapper implements DDLRecordVersion {
 		return _ddlRecordVersion.compareTo(ddlRecordVersion);
 	}
 
+	@Override
 	public int hashCode() {
 		return _ddlRecordVersion.hashCode();
 	}
@@ -492,6 +494,7 @@ public class DDLRecordVersionWrapper implements DDLRecordVersion {
 		return new DDLRecordVersionWrapper(_ddlRecordVersion.toEscapedModel());
 	}
 
+	@Override
 	public java.lang.String toString() {
 		return _ddlRecordVersion.toString();
 	}

@@ -125,6 +125,7 @@ public class PortalPreferencesPersistenceImpl extends BasePersistenceImpl<Portal
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache() {
 		if (_HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
 			CacheRegistryUtil.clear(PortalPreferencesImpl.class.getName());
@@ -142,6 +143,7 @@ public class PortalPreferencesPersistenceImpl extends BasePersistenceImpl<Portal
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache(PortalPreferences portalPreferences) {
 		EntityCacheUtil.removeResult(PortalPreferencesModelImpl.ENTITY_CACHE_ENABLED,
 			PortalPreferencesImpl.class, portalPreferences.getPrimaryKey());
@@ -176,6 +178,7 @@ public class PortalPreferencesPersistenceImpl extends BasePersistenceImpl<Portal
 	 * @throws com.liferay.portal.NoSuchModelException if a portal preferences with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public PortalPreferences remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
@@ -229,11 +232,13 @@ public class PortalPreferencesPersistenceImpl extends BasePersistenceImpl<Portal
 	 * @return the portal preferences that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public PortalPreferences remove(PortalPreferences portalPreferences)
 		throws SystemException {
 		return super.remove(portalPreferences);
 	}
 
+	@Override
 	protected PortalPreferences removeImpl(PortalPreferences portalPreferences)
 		throws SystemException {
 		portalPreferences = toUnwrappedModel(portalPreferences);
@@ -268,6 +273,7 @@ public class PortalPreferencesPersistenceImpl extends BasePersistenceImpl<Portal
 		return portalPreferences;
 	}
 
+	@Override
 	public PortalPreferences updateImpl(
 		com.liferay.portal.model.PortalPreferences portalPreferences,
 		boolean merge) throws SystemException {
@@ -351,6 +357,7 @@ public class PortalPreferencesPersistenceImpl extends BasePersistenceImpl<Portal
 	 * @throws com.liferay.portal.NoSuchModelException if a portal preferences with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public PortalPreferences findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
@@ -388,6 +395,7 @@ public class PortalPreferencesPersistenceImpl extends BasePersistenceImpl<Portal
 	 * @return the portal preferences, or <code>null</code> if a portal preferences with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public PortalPreferences fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());

@@ -293,6 +293,7 @@ public class SocialEquitySettingWrapper implements SocialEquitySetting {
 		_socialEquitySetting.setExpandoBridgeAttributes(serviceContext);
 	}
 
+	@Override
 	public java.lang.Object clone() {
 		return new SocialEquitySettingWrapper((SocialEquitySetting)_socialEquitySetting.clone());
 	}
@@ -302,6 +303,7 @@ public class SocialEquitySettingWrapper implements SocialEquitySetting {
 		return _socialEquitySetting.compareTo(socialEquitySetting);
 	}
 
+	@Override
 	public int hashCode() {
 		return _socialEquitySetting.hashCode();
 	}
@@ -310,6 +312,7 @@ public class SocialEquitySettingWrapper implements SocialEquitySetting {
 		return new SocialEquitySettingWrapper(_socialEquitySetting.toEscapedModel());
 	}
 
+	@Override
 	public java.lang.String toString() {
 		return _socialEquitySetting.toString();
 	}

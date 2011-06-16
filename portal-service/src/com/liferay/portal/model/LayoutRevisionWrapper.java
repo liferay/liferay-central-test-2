@@ -1256,6 +1256,7 @@ public class LayoutRevisionWrapper implements LayoutRevision {
 		_layoutRevision.setExpandoBridgeAttributes(serviceContext);
 	}
 
+	@Override
 	public java.lang.Object clone() {
 		return new LayoutRevisionWrapper((LayoutRevision)_layoutRevision.clone());
 	}
@@ -1264,6 +1265,7 @@ public class LayoutRevisionWrapper implements LayoutRevision {
 		return _layoutRevision.compareTo(layoutRevision);
 	}
 
+	@Override
 	public int hashCode() {
 		return _layoutRevision.hashCode();
 	}
@@ -1272,6 +1274,7 @@ public class LayoutRevisionWrapper implements LayoutRevision {
 		return new LayoutRevisionWrapper(_layoutRevision.toEscapedModel());
 	}
 
+	@Override
 	public java.lang.String toString() {
 		return _layoutRevision.toString();
 	}

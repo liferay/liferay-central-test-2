@@ -33,7 +33,6 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class TicketPersistenceTest extends BasePersistenceTestCase {
-	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 
@@ -70,12 +69,19 @@ public class TicketPersistenceTest extends BasePersistenceTestCase {
 		Ticket newTicket = _persistence.create(pk);
 
 		newTicket.setCompanyId(nextLong());
+
 		newTicket.setCreateDate(nextDate());
+
 		newTicket.setClassNameId(nextLong());
+
 		newTicket.setClassPK(nextLong());
+
 		newTicket.setKey(randomString());
+
 		newTicket.setType(nextInt());
+
 		newTicket.setExtraInfo(randomString());
+
 		newTicket.setExpirationDate(nextDate());
 
 		_persistence.update(newTicket, false);
@@ -219,12 +225,19 @@ public class TicketPersistenceTest extends BasePersistenceTestCase {
 		Ticket ticket = _persistence.create(pk);
 
 		ticket.setCompanyId(nextLong());
+
 		ticket.setCreateDate(nextDate());
+
 		ticket.setClassNameId(nextLong());
+
 		ticket.setClassPK(nextLong());
+
 		ticket.setKey(randomString());
+
 		ticket.setType(nextInt());
+
 		ticket.setExtraInfo(randomString());
+
 		ticket.setExpirationDate(nextDate());
 
 		_persistence.update(ticket, false);

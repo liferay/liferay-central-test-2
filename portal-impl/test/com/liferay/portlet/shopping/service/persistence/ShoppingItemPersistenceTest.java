@@ -34,7 +34,6 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class ShoppingItemPersistenceTest extends BasePersistenceTestCase {
-	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 
@@ -71,37 +70,69 @@ public class ShoppingItemPersistenceTest extends BasePersistenceTestCase {
 		ShoppingItem newShoppingItem = _persistence.create(pk);
 
 		newShoppingItem.setGroupId(nextLong());
+
 		newShoppingItem.setCompanyId(nextLong());
+
 		newShoppingItem.setUserId(nextLong());
+
 		newShoppingItem.setUserName(randomString());
+
 		newShoppingItem.setCreateDate(nextDate());
+
 		newShoppingItem.setModifiedDate(nextDate());
+
 		newShoppingItem.setCategoryId(nextLong());
+
 		newShoppingItem.setSku(randomString());
+
 		newShoppingItem.setName(randomString());
+
 		newShoppingItem.setDescription(randomString());
+
 		newShoppingItem.setProperties(randomString());
+
 		newShoppingItem.setFields(randomBoolean());
+
 		newShoppingItem.setFieldsQuantities(randomString());
+
 		newShoppingItem.setMinQuantity(nextInt());
+
 		newShoppingItem.setMaxQuantity(nextInt());
+
 		newShoppingItem.setPrice(nextDouble());
+
 		newShoppingItem.setDiscount(nextDouble());
+
 		newShoppingItem.setTaxable(randomBoolean());
+
 		newShoppingItem.setShipping(nextDouble());
+
 		newShoppingItem.setUseShippingFormula(randomBoolean());
+
 		newShoppingItem.setRequiresShipping(randomBoolean());
+
 		newShoppingItem.setStockQuantity(nextInt());
+
 		newShoppingItem.setFeatured(randomBoolean());
+
 		newShoppingItem.setSale(randomBoolean());
+
 		newShoppingItem.setSmallImage(randomBoolean());
+
 		newShoppingItem.setSmallImageId(nextLong());
+
 		newShoppingItem.setSmallImageURL(randomString());
+
 		newShoppingItem.setMediumImage(randomBoolean());
+
 		newShoppingItem.setMediumImageId(nextLong());
+
 		newShoppingItem.setMediumImageURL(randomString());
+
 		newShoppingItem.setLargeImage(randomBoolean());
+
 		newShoppingItem.setLargeImageId(nextLong());
+
 		newShoppingItem.setLargeImageURL(randomString());
 
 		_persistence.update(newShoppingItem, false);
@@ -311,37 +342,69 @@ public class ShoppingItemPersistenceTest extends BasePersistenceTestCase {
 		ShoppingItem shoppingItem = _persistence.create(pk);
 
 		shoppingItem.setGroupId(nextLong());
+
 		shoppingItem.setCompanyId(nextLong());
+
 		shoppingItem.setUserId(nextLong());
+
 		shoppingItem.setUserName(randomString());
+
 		shoppingItem.setCreateDate(nextDate());
+
 		shoppingItem.setModifiedDate(nextDate());
+
 		shoppingItem.setCategoryId(nextLong());
+
 		shoppingItem.setSku(randomString());
+
 		shoppingItem.setName(randomString());
+
 		shoppingItem.setDescription(randomString());
+
 		shoppingItem.setProperties(randomString());
+
 		shoppingItem.setFields(randomBoolean());
+
 		shoppingItem.setFieldsQuantities(randomString());
+
 		shoppingItem.setMinQuantity(nextInt());
+
 		shoppingItem.setMaxQuantity(nextInt());
+
 		shoppingItem.setPrice(nextDouble());
+
 		shoppingItem.setDiscount(nextDouble());
+
 		shoppingItem.setTaxable(randomBoolean());
+
 		shoppingItem.setShipping(nextDouble());
+
 		shoppingItem.setUseShippingFormula(randomBoolean());
+
 		shoppingItem.setRequiresShipping(randomBoolean());
+
 		shoppingItem.setStockQuantity(nextInt());
+
 		shoppingItem.setFeatured(randomBoolean());
+
 		shoppingItem.setSale(randomBoolean());
+
 		shoppingItem.setSmallImage(randomBoolean());
+
 		shoppingItem.setSmallImageId(nextLong());
+
 		shoppingItem.setSmallImageURL(randomString());
+
 		shoppingItem.setMediumImage(randomBoolean());
+
 		shoppingItem.setMediumImageId(nextLong());
+
 		shoppingItem.setMediumImageURL(randomString());
+
 		shoppingItem.setLargeImage(randomBoolean());
+
 		shoppingItem.setLargeImageId(nextLong());
+
 		shoppingItem.setLargeImageURL(randomString());
 
 		_persistence.update(shoppingItem, false);

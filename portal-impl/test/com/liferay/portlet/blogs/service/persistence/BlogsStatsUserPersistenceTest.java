@@ -33,7 +33,6 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class BlogsStatsUserPersistenceTest extends BasePersistenceTestCase {
-	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 
@@ -70,12 +69,19 @@ public class BlogsStatsUserPersistenceTest extends BasePersistenceTestCase {
 		BlogsStatsUser newBlogsStatsUser = _persistence.create(pk);
 
 		newBlogsStatsUser.setGroupId(nextLong());
+
 		newBlogsStatsUser.setCompanyId(nextLong());
+
 		newBlogsStatsUser.setUserId(nextLong());
+
 		newBlogsStatsUser.setEntryCount(nextInt());
+
 		newBlogsStatsUser.setLastPostDate(nextDate());
+
 		newBlogsStatsUser.setRatingsTotalEntries(nextInt());
+
 		newBlogsStatsUser.setRatingsTotalScore(nextDouble());
+
 		newBlogsStatsUser.setRatingsAverageScore(nextDouble());
 
 		_persistence.update(newBlogsStatsUser, false);
@@ -229,12 +235,19 @@ public class BlogsStatsUserPersistenceTest extends BasePersistenceTestCase {
 		BlogsStatsUser blogsStatsUser = _persistence.create(pk);
 
 		blogsStatsUser.setGroupId(nextLong());
+
 		blogsStatsUser.setCompanyId(nextLong());
+
 		blogsStatsUser.setUserId(nextLong());
+
 		blogsStatsUser.setEntryCount(nextInt());
+
 		blogsStatsUser.setLastPostDate(nextDate());
+
 		blogsStatsUser.setRatingsTotalEntries(nextInt());
+
 		blogsStatsUser.setRatingsTotalScore(nextDouble());
+
 		blogsStatsUser.setRatingsAverageScore(nextDouble());
 
 		_persistence.update(blogsStatsUser, false);

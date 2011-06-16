@@ -263,6 +263,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache() {
 		if (_HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
 			CacheRegistryUtil.clear(GroupImpl.class.getName());
@@ -280,6 +281,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache(Group group) {
 		EntityCacheUtil.removeResult(GroupModelImpl.ENTITY_CACHE_ENABLED,
 			GroupImpl.class, group.getPrimaryKey());
@@ -345,6 +347,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @throws com.liferay.portal.NoSuchModelException if a group with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Group remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
@@ -397,10 +400,12 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @return the group that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Group remove(Group group) throws SystemException {
 		return super.remove(group);
 	}
 
+	@Override
 	protected Group removeImpl(Group group) throws SystemException {
 		group = toUnwrappedModel(group);
 
@@ -519,6 +524,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		return group;
 	}
 
+	@Override
 	public Group updateImpl(com.liferay.portal.model.Group group, boolean merge)
 		throws SystemException {
 		group = toUnwrappedModel(group);
@@ -730,6 +736,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @throws com.liferay.portal.NoSuchModelException if a group with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Group findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
@@ -766,6 +773,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @return the group, or <code>null</code> if a group with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Group fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());

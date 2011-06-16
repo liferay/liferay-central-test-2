@@ -67,14 +67,23 @@ public class EmailAddressPersistenceTest extends BasePersistenceTestCase {
 		EmailAddress newEmailAddress = _persistence.create(pk);
 
 		newEmailAddress.setCompanyId(nextLong());
+
 		newEmailAddress.setUserId(nextLong());
+
 		newEmailAddress.setUserName(randomString());
+
 		newEmailAddress.setCreateDate(nextDate());
+
 		newEmailAddress.setModifiedDate(nextDate());
+
 		newEmailAddress.setClassNameId(nextLong());
+
 		newEmailAddress.setClassPK(nextLong());
+
 		newEmailAddress.setAddress(randomString());
+
 		newEmailAddress.setTypeId(nextInt());
+
 		newEmailAddress.setPrimary(randomBoolean());
 
 		_persistence.update(newEmailAddress, false);
@@ -218,14 +227,23 @@ public class EmailAddressPersistenceTest extends BasePersistenceTestCase {
 		EmailAddress emailAddress = _persistence.create(pk);
 
 		emailAddress.setCompanyId(nextLong());
+
 		emailAddress.setUserId(nextLong());
+
 		emailAddress.setUserName(randomString());
+
 		emailAddress.setCreateDate(nextDate());
+
 		emailAddress.setModifiedDate(nextDate());
+
 		emailAddress.setClassNameId(nextLong());
+
 		emailAddress.setClassPK(nextLong());
+
 		emailAddress.setAddress(randomString());
+
 		emailAddress.setTypeId(nextInt());
+
 		emailAddress.setPrimary(randomBoolean());
 
 		_persistence.update(emailAddress, false);

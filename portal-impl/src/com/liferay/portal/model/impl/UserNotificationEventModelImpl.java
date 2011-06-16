@@ -195,6 +195,7 @@ public class UserNotificationEventModelImpl extends BaseModelImpl<UserNotificati
 		_payload = payload;
 	}
 
+	@Override
 	public UserNotificationEvent toEscapedModel() {
 		if (isEscapedModel()) {
 			return (UserNotificationEvent)this;
@@ -205,6 +206,7 @@ public class UserNotificationEventModelImpl extends BaseModelImpl<UserNotificati
 		}
 	}
 
+	@Override
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
 			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
@@ -214,10 +216,12 @@ public class UserNotificationEventModelImpl extends BaseModelImpl<UserNotificati
 		return _expandoBridge;
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
 		getExpandoBridge().setAttributes(serviceContext);
 	}
 
+	@Override
 	public Object clone() {
 		UserNotificationEventImpl userNotificationEventImpl = new UserNotificationEventImpl();
 
@@ -255,6 +259,7 @@ public class UserNotificationEventModelImpl extends BaseModelImpl<UserNotificati
 		return 0;
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		if (obj == null) {
 			return false;
@@ -279,13 +284,16 @@ public class UserNotificationEventModelImpl extends BaseModelImpl<UserNotificati
 		}
 	}
 
+	@Override
 	public int hashCode() {
 		return (int)getPrimaryKey();
 	}
 
+	@Override
 	public void resetOriginalValues() {
 	}
 
+	@Override
 	public String toString() {
 		StringBundler sb = new StringBundler(17);
 

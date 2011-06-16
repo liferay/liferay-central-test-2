@@ -205,6 +205,7 @@ public class PollsVoteWrapper implements PollsVote {
 		_pollsVote.setExpandoBridgeAttributes(serviceContext);
 	}
 
+	@Override
 	public java.lang.Object clone() {
 		return new PollsVoteWrapper((PollsVote)_pollsVote.clone());
 	}
@@ -213,6 +214,7 @@ public class PollsVoteWrapper implements PollsVote {
 		return _pollsVote.compareTo(pollsVote);
 	}
 
+	@Override
 	public int hashCode() {
 		return _pollsVote.hashCode();
 	}
@@ -221,6 +223,7 @@ public class PollsVoteWrapper implements PollsVote {
 		return new PollsVoteWrapper(_pollsVote.toEscapedModel());
 	}
 
+	@Override
 	public java.lang.String toString() {
 		return _pollsVote.toString();
 	}

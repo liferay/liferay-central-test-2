@@ -275,6 +275,7 @@ public class MembershipRequestModelImpl extends BaseModelImpl<MembershipRequest>
 		_statusId = statusId;
 	}
 
+	@Override
 	public MembershipRequest toEscapedModel() {
 		if (isEscapedModel()) {
 			return (MembershipRequest)this;
@@ -285,6 +286,7 @@ public class MembershipRequestModelImpl extends BaseModelImpl<MembershipRequest>
 		}
 	}
 
+	@Override
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
 			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
@@ -294,10 +296,12 @@ public class MembershipRequestModelImpl extends BaseModelImpl<MembershipRequest>
 		return _expandoBridge;
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
 		getExpandoBridge().setAttributes(serviceContext);
 	}
 
+	@Override
 	public Object clone() {
 		MembershipRequestImpl membershipRequestImpl = new MembershipRequestImpl();
 
@@ -332,6 +336,7 @@ public class MembershipRequestModelImpl extends BaseModelImpl<MembershipRequest>
 		return 0;
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		if (obj == null) {
 			return false;
@@ -356,13 +361,16 @@ public class MembershipRequestModelImpl extends BaseModelImpl<MembershipRequest>
 		}
 	}
 
+	@Override
 	public int hashCode() {
 		return (int)getPrimaryKey();
 	}
 
+	@Override
 	public void resetOriginalValues() {
 	}
 
+	@Override
 	public String toString() {
 		StringBundler sb = new StringBundler(21);
 

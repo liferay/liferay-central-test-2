@@ -32,7 +32,6 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class RolePersistenceTest extends BasePersistenceTestCase {
-	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 
@@ -69,12 +68,19 @@ public class RolePersistenceTest extends BasePersistenceTestCase {
 		Role newRole = _persistence.create(pk);
 
 		newRole.setCompanyId(nextLong());
+
 		newRole.setClassNameId(nextLong());
+
 		newRole.setClassPK(nextLong());
+
 		newRole.setName(randomString());
+
 		newRole.setTitle(randomString());
+
 		newRole.setDescription(randomString());
+
 		newRole.setType(nextInt());
+
 		newRole.setSubtype(randomString());
 
 		_persistence.update(newRole, false);
@@ -225,12 +231,19 @@ public class RolePersistenceTest extends BasePersistenceTestCase {
 		Role role = _persistence.create(pk);
 
 		role.setCompanyId(nextLong());
+
 		role.setClassNameId(nextLong());
+
 		role.setClassPK(nextLong());
+
 		role.setName(randomString());
+
 		role.setTitle(randomString());
+
 		role.setDescription(randomString());
+
 		role.setType(nextInt());
+
 		role.setSubtype(randomString());
 
 		_persistence.update(role, false);

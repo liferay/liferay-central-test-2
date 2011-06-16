@@ -297,6 +297,7 @@ public class BlogsStatsUserWrapper implements BlogsStatsUser {
 		_blogsStatsUser.setExpandoBridgeAttributes(serviceContext);
 	}
 
+	@Override
 	public java.lang.Object clone() {
 		return new BlogsStatsUserWrapper((BlogsStatsUser)_blogsStatsUser.clone());
 	}
@@ -306,6 +307,7 @@ public class BlogsStatsUserWrapper implements BlogsStatsUser {
 		return _blogsStatsUser.compareTo(blogsStatsUser);
 	}
 
+	@Override
 	public int hashCode() {
 		return _blogsStatsUser.hashCode();
 	}
@@ -314,6 +316,7 @@ public class BlogsStatsUserWrapper implements BlogsStatsUser {
 		return new BlogsStatsUserWrapper(_blogsStatsUser.toEscapedModel());
 	}
 
+	@Override
 	public java.lang.String toString() {
 		return _blogsStatsUser.toString();
 	}

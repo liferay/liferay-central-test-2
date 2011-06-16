@@ -123,6 +123,7 @@ public class BrowserTrackerPersistenceImpl extends BasePersistenceImpl<BrowserTr
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache() {
 		if (_HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
 			CacheRegistryUtil.clear(BrowserTrackerImpl.class.getName());
@@ -140,6 +141,7 @@ public class BrowserTrackerPersistenceImpl extends BasePersistenceImpl<BrowserTr
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache(BrowserTracker browserTracker) {
 		EntityCacheUtil.removeResult(BrowserTrackerModelImpl.ENTITY_CACHE_ENABLED,
 			BrowserTrackerImpl.class, browserTracker.getPrimaryKey());
@@ -171,6 +173,7 @@ public class BrowserTrackerPersistenceImpl extends BasePersistenceImpl<BrowserTr
 	 * @throws com.liferay.portal.NoSuchModelException if a browser tracker with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public BrowserTracker remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
@@ -224,11 +227,13 @@ public class BrowserTrackerPersistenceImpl extends BasePersistenceImpl<BrowserTr
 	 * @return the browser tracker that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public BrowserTracker remove(BrowserTracker browserTracker)
 		throws SystemException {
 		return super.remove(browserTracker);
 	}
 
+	@Override
 	protected BrowserTracker removeImpl(BrowserTracker browserTracker)
 		throws SystemException {
 		browserTracker = toUnwrappedModel(browserTracker);
@@ -260,6 +265,7 @@ public class BrowserTrackerPersistenceImpl extends BasePersistenceImpl<BrowserTr
 		return browserTracker;
 	}
 
+	@Override
 	public BrowserTracker updateImpl(
 		com.liferay.portal.model.BrowserTracker browserTracker, boolean merge)
 		throws SystemException {
@@ -334,6 +340,7 @@ public class BrowserTrackerPersistenceImpl extends BasePersistenceImpl<BrowserTr
 	 * @throws com.liferay.portal.NoSuchModelException if a browser tracker with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public BrowserTracker findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
@@ -370,6 +377,7 @@ public class BrowserTrackerPersistenceImpl extends BasePersistenceImpl<BrowserTr
 	 * @return the browser tracker, or <code>null</code> if a browser tracker with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public BrowserTracker fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());

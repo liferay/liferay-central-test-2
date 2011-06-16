@@ -217,6 +217,7 @@ public class PollsVoteModelImpl extends BaseModelImpl<PollsVote>
 		_voteDate = voteDate;
 	}
 
+	@Override
 	public PollsVote toEscapedModel() {
 		if (isEscapedModel()) {
 			return (PollsVote)this;
@@ -227,6 +228,7 @@ public class PollsVoteModelImpl extends BaseModelImpl<PollsVote>
 		}
 	}
 
+	@Override
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
 			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(0,
@@ -236,10 +238,12 @@ public class PollsVoteModelImpl extends BaseModelImpl<PollsVote>
 		return _expandoBridge;
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
 		getExpandoBridge().setAttributes(serviceContext);
 	}
 
+	@Override
 	public Object clone() {
 		PollsVoteImpl pollsVoteImpl = new PollsVoteImpl();
 
@@ -268,6 +272,7 @@ public class PollsVoteModelImpl extends BaseModelImpl<PollsVote>
 		}
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		if (obj == null) {
 			return false;
@@ -292,10 +297,12 @@ public class PollsVoteModelImpl extends BaseModelImpl<PollsVote>
 		}
 	}
 
+	@Override
 	public int hashCode() {
 		return (int)getPrimaryKey();
 	}
 
+	@Override
 	public void resetOriginalValues() {
 		PollsVoteModelImpl pollsVoteModelImpl = this;
 
@@ -308,6 +315,7 @@ public class PollsVoteModelImpl extends BaseModelImpl<PollsVote>
 		pollsVoteModelImpl._setOriginalQuestionId = false;
 	}
 
+	@Override
 	public String toString() {
 		StringBundler sb = new StringBundler(11);
 

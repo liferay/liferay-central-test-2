@@ -35,7 +35,6 @@ import java.util.List;
  */
 public class AssetCategoryPropertyPersistenceTest
 	extends BasePersistenceTestCase {
-	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 
@@ -72,12 +71,19 @@ public class AssetCategoryPropertyPersistenceTest
 		AssetCategoryProperty newAssetCategoryProperty = _persistence.create(pk);
 
 		newAssetCategoryProperty.setCompanyId(nextLong());
+
 		newAssetCategoryProperty.setUserId(nextLong());
+
 		newAssetCategoryProperty.setUserName(randomString());
+
 		newAssetCategoryProperty.setCreateDate(nextDate());
+
 		newAssetCategoryProperty.setModifiedDate(nextDate());
+
 		newAssetCategoryProperty.setCategoryId(nextLong());
+
 		newAssetCategoryProperty.setKey(randomString());
+
 		newAssetCategoryProperty.setValue(randomString());
 
 		_persistence.update(newAssetCategoryProperty, false);
@@ -237,12 +243,19 @@ public class AssetCategoryPropertyPersistenceTest
 		AssetCategoryProperty assetCategoryProperty = _persistence.create(pk);
 
 		assetCategoryProperty.setCompanyId(nextLong());
+
 		assetCategoryProperty.setUserId(nextLong());
+
 		assetCategoryProperty.setUserName(randomString());
+
 		assetCategoryProperty.setCreateDate(nextDate());
+
 		assetCategoryProperty.setModifiedDate(nextDate());
+
 		assetCategoryProperty.setCategoryId(nextLong());
+
 		assetCategoryProperty.setKey(randomString());
+
 		assetCategoryProperty.setValue(randomString());
 
 		_persistence.update(assetCategoryProperty, false);

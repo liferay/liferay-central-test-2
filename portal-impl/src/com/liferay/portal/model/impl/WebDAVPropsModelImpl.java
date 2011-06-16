@@ -195,6 +195,7 @@ public class WebDAVPropsModelImpl extends BaseModelImpl<WebDAVProps>
 		_props = props;
 	}
 
+	@Override
 	public WebDAVProps toEscapedModel() {
 		if (isEscapedModel()) {
 			return (WebDAVProps)this;
@@ -205,6 +206,7 @@ public class WebDAVPropsModelImpl extends BaseModelImpl<WebDAVProps>
 		}
 	}
 
+	@Override
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
 			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
@@ -214,10 +216,12 @@ public class WebDAVPropsModelImpl extends BaseModelImpl<WebDAVProps>
 		return _expandoBridge;
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
 		getExpandoBridge().setAttributes(serviceContext);
 	}
 
+	@Override
 	public Object clone() {
 		WebDAVPropsImpl webDAVPropsImpl = new WebDAVPropsImpl();
 
@@ -248,6 +252,7 @@ public class WebDAVPropsModelImpl extends BaseModelImpl<WebDAVProps>
 		}
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		if (obj == null) {
 			return false;
@@ -272,10 +277,12 @@ public class WebDAVPropsModelImpl extends BaseModelImpl<WebDAVProps>
 		}
 	}
 
+	@Override
 	public int hashCode() {
 		return (int)getPrimaryKey();
 	}
 
+	@Override
 	public void resetOriginalValues() {
 		WebDAVPropsModelImpl webDAVPropsModelImpl = this;
 
@@ -288,6 +295,7 @@ public class WebDAVPropsModelImpl extends BaseModelImpl<WebDAVProps>
 		webDAVPropsModelImpl._setOriginalClassPK = false;
 	}
 
+	@Override
 	public String toString() {
 		StringBundler sb = new StringBundler(15);
 

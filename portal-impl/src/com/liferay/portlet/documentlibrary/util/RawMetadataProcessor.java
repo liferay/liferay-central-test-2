@@ -24,6 +24,7 @@ import com.liferay.portal.repository.liferayrepository.model.LiferayFileEntry;
  */
 public class RawMetadataProcessor extends DLProcessor {
 
+	@Override
 	public void trigger(FileEntry fileEntry) {
 		if (fileEntry instanceof LiferayFileEntry) {
 			MessageBusUtil.sendMessage(

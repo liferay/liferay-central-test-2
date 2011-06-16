@@ -194,6 +194,7 @@ public class RegionWrapper implements Region {
 		_region.setExpandoBridgeAttributes(serviceContext);
 	}
 
+	@Override
 	public java.lang.Object clone() {
 		return new RegionWrapper((Region)_region.clone());
 	}
@@ -202,6 +203,7 @@ public class RegionWrapper implements Region {
 		return _region.compareTo(region);
 	}
 
+	@Override
 	public int hashCode() {
 		return _region.hashCode();
 	}
@@ -210,6 +212,7 @@ public class RegionWrapper implements Region {
 		return new RegionWrapper(_region.toEscapedModel());
 	}
 
+	@Override
 	public java.lang.String toString() {
 		return _region.toString();
 	}

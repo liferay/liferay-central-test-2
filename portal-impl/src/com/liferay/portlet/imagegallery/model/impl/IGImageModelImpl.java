@@ -388,6 +388,7 @@ public class IGImageModelImpl extends BaseModelImpl<IGImage>
 		return _originalCustom2ImageId;
 	}
 
+	@Override
 	public IGImage toEscapedModel() {
 		if (isEscapedModel()) {
 			return (IGImage)this;
@@ -398,6 +399,7 @@ public class IGImageModelImpl extends BaseModelImpl<IGImage>
 		}
 	}
 
+	@Override
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
 			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
@@ -407,10 +409,12 @@ public class IGImageModelImpl extends BaseModelImpl<IGImage>
 		return _expandoBridge;
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
 		getExpandoBridge().setAttributes(serviceContext);
 	}
 
+	@Override
 	public Object clone() {
 		IGImageImpl igImageImpl = new IGImageImpl();
 
@@ -455,6 +459,7 @@ public class IGImageModelImpl extends BaseModelImpl<IGImage>
 		return 0;
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		if (obj == null) {
 			return false;
@@ -479,10 +484,12 @@ public class IGImageModelImpl extends BaseModelImpl<IGImage>
 		}
 	}
 
+	@Override
 	public int hashCode() {
 		return (int)getPrimaryKey();
 	}
 
+	@Override
 	public void resetOriginalValues() {
 		IGImageModelImpl igImageModelImpl = this;
 
@@ -509,6 +516,7 @@ public class IGImageModelImpl extends BaseModelImpl<IGImage>
 		igImageModelImpl._setOriginalCustom2ImageId = false;
 	}
 
+	@Override
 	public String toString() {
 		StringBundler sb = new StringBundler(31);
 

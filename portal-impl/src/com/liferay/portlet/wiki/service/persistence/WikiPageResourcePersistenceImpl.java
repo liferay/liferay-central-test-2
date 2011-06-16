@@ -145,6 +145,7 @@ public class WikiPageResourcePersistenceImpl extends BasePersistenceImpl<WikiPag
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache() {
 		if (_HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
 			CacheRegistryUtil.clear(WikiPageResourceImpl.class.getName());
@@ -162,6 +163,7 @@ public class WikiPageResourcePersistenceImpl extends BasePersistenceImpl<WikiPag
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache(WikiPageResource wikiPageResource) {
 		EntityCacheUtil.removeResult(WikiPageResourceModelImpl.ENTITY_CACHE_ENABLED,
 			WikiPageResourceImpl.class, wikiPageResource.getPrimaryKey());
@@ -201,6 +203,7 @@ public class WikiPageResourcePersistenceImpl extends BasePersistenceImpl<WikiPag
 	 * @throws com.liferay.portal.NoSuchModelException if a wiki page resource with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPageResource remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
@@ -254,11 +257,13 @@ public class WikiPageResourcePersistenceImpl extends BasePersistenceImpl<WikiPag
 	 * @return the wiki page resource that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPageResource remove(WikiPageResource wikiPageResource)
 		throws SystemException {
 		return super.remove(wikiPageResource);
 	}
 
+	@Override
 	protected WikiPageResource removeImpl(WikiPageResource wikiPageResource)
 		throws SystemException {
 		wikiPageResource = toUnwrappedModel(wikiPageResource);
@@ -294,6 +299,7 @@ public class WikiPageResourcePersistenceImpl extends BasePersistenceImpl<WikiPag
 		return wikiPageResource;
 	}
 
+	@Override
 	public WikiPageResource updateImpl(
 		com.liferay.portlet.wiki.model.WikiPageResource wikiPageResource,
 		boolean merge) throws SystemException {
@@ -385,6 +391,7 @@ public class WikiPageResourcePersistenceImpl extends BasePersistenceImpl<WikiPag
 	 * @throws com.liferay.portal.NoSuchModelException if a wiki page resource with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPageResource findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
@@ -421,6 +428,7 @@ public class WikiPageResourcePersistenceImpl extends BasePersistenceImpl<WikiPag
 	 * @return the wiki page resource, or <code>null</code> if a wiki page resource with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPageResource fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());

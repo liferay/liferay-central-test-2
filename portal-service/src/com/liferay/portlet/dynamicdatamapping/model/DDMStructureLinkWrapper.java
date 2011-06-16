@@ -176,6 +176,7 @@ public class DDMStructureLinkWrapper implements DDMStructureLink {
 		_ddmStructureLink.setExpandoBridgeAttributes(serviceContext);
 	}
 
+	@Override
 	public java.lang.Object clone() {
 		return new DDMStructureLinkWrapper((DDMStructureLink)_ddmStructureLink.clone());
 	}
@@ -185,6 +186,7 @@ public class DDMStructureLinkWrapper implements DDMStructureLink {
 		return _ddmStructureLink.compareTo(ddmStructureLink);
 	}
 
+	@Override
 	public int hashCode() {
 		return _ddmStructureLink.hashCode();
 	}
@@ -193,6 +195,7 @@ public class DDMStructureLinkWrapper implements DDMStructureLink {
 		return new DDMStructureLinkWrapper(_ddmStructureLink.toEscapedModel());
 	}
 
+	@Override
 	public java.lang.String toString() {
 		return _ddmStructureLink.toString();
 	}

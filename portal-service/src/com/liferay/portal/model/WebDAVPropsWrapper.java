@@ -230,6 +230,7 @@ public class WebDAVPropsWrapper implements WebDAVProps {
 		_webDAVProps.setExpandoBridgeAttributes(serviceContext);
 	}
 
+	@Override
 	public java.lang.Object clone() {
 		return new WebDAVPropsWrapper((WebDAVProps)_webDAVProps.clone());
 	}
@@ -238,6 +239,7 @@ public class WebDAVPropsWrapper implements WebDAVProps {
 		return _webDAVProps.compareTo(webDAVProps);
 	}
 
+	@Override
 	public int hashCode() {
 		return _webDAVProps.hashCode();
 	}
@@ -246,6 +248,7 @@ public class WebDAVPropsWrapper implements WebDAVProps {
 		return new WebDAVPropsWrapper(_webDAVProps.toEscapedModel());
 	}
 
+	@Override
 	public java.lang.String toString() {
 		return _webDAVProps.toString();
 	}

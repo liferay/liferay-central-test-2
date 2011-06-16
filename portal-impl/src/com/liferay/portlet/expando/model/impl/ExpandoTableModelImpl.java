@@ -172,6 +172,7 @@ public class ExpandoTableModelImpl extends BaseModelImpl<ExpandoTable>
 		return GetterUtil.getString(_originalName);
 	}
 
+	@Override
 	public ExpandoTable toEscapedModel() {
 		if (isEscapedModel()) {
 			return (ExpandoTable)this;
@@ -182,6 +183,7 @@ public class ExpandoTableModelImpl extends BaseModelImpl<ExpandoTable>
 		}
 	}
 
+	@Override
 	public Object clone() {
 		ExpandoTableImpl expandoTableImpl = new ExpandoTableImpl();
 
@@ -209,6 +211,7 @@ public class ExpandoTableModelImpl extends BaseModelImpl<ExpandoTable>
 		}
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		if (obj == null) {
 			return false;
@@ -233,10 +236,12 @@ public class ExpandoTableModelImpl extends BaseModelImpl<ExpandoTable>
 		}
 	}
 
+	@Override
 	public int hashCode() {
 		return (int)getPrimaryKey();
 	}
 
+	@Override
 	public void resetOriginalValues() {
 		ExpandoTableModelImpl expandoTableModelImpl = this;
 
@@ -251,6 +256,7 @@ public class ExpandoTableModelImpl extends BaseModelImpl<ExpandoTable>
 		expandoTableModelImpl._originalName = expandoTableModelImpl._name;
 	}
 
+	@Override
 	public String toString() {
 		StringBundler sb = new StringBundler(9);
 

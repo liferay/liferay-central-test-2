@@ -140,6 +140,7 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl<ShoppingC
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache() {
 		if (_HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
 			CacheRegistryUtil.clear(ShoppingCouponImpl.class.getName());
@@ -157,6 +158,7 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl<ShoppingC
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache(ShoppingCoupon shoppingCoupon) {
 		EntityCacheUtil.removeResult(ShoppingCouponModelImpl.ENTITY_CACHE_ENABLED,
 			ShoppingCouponImpl.class, shoppingCoupon.getPrimaryKey());
@@ -188,6 +190,7 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl<ShoppingC
 	 * @throws com.liferay.portal.NoSuchModelException if a shopping coupon with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ShoppingCoupon remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
@@ -240,11 +243,13 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl<ShoppingC
 	 * @return the shopping coupon that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ShoppingCoupon remove(ShoppingCoupon shoppingCoupon)
 		throws SystemException {
 		return super.remove(shoppingCoupon);
 	}
 
+	@Override
 	protected ShoppingCoupon removeImpl(ShoppingCoupon shoppingCoupon)
 		throws SystemException {
 		shoppingCoupon = toUnwrappedModel(shoppingCoupon);
@@ -276,6 +281,7 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl<ShoppingC
 		return shoppingCoupon;
 	}
 
+	@Override
 	public ShoppingCoupon updateImpl(
 		com.liferay.portlet.shopping.model.ShoppingCoupon shoppingCoupon,
 		boolean merge) throws SystemException {
@@ -364,6 +370,7 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl<ShoppingC
 	 * @throws com.liferay.portal.NoSuchModelException if a shopping coupon with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ShoppingCoupon findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
@@ -400,6 +407,7 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl<ShoppingC
 	 * @return the shopping coupon, or <code>null</code> if a shopping coupon with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ShoppingCoupon fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());

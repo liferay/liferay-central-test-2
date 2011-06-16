@@ -499,6 +499,7 @@ public class JournalFeedModelImpl extends BaseModelImpl<JournalFeed>
 		_feedVersion = feedVersion;
 	}
 
+	@Override
 	public JournalFeed toEscapedModel() {
 		if (isEscapedModel()) {
 			return (JournalFeed)this;
@@ -509,6 +510,7 @@ public class JournalFeedModelImpl extends BaseModelImpl<JournalFeed>
 		}
 	}
 
+	@Override
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
 			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
@@ -518,10 +520,12 @@ public class JournalFeedModelImpl extends BaseModelImpl<JournalFeed>
 		return _expandoBridge;
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
 		getExpandoBridge().setAttributes(serviceContext);
 	}
 
+	@Override
 	public Object clone() {
 		JournalFeedImpl journalFeedImpl = new JournalFeedImpl();
 
@@ -566,6 +570,7 @@ public class JournalFeedModelImpl extends BaseModelImpl<JournalFeed>
 		return 0;
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		if (obj == null) {
 			return false;
@@ -590,10 +595,12 @@ public class JournalFeedModelImpl extends BaseModelImpl<JournalFeed>
 		}
 	}
 
+	@Override
 	public int hashCode() {
 		return (int)getPrimaryKey();
 	}
 
+	@Override
 	public void resetOriginalValues() {
 		JournalFeedModelImpl journalFeedModelImpl = this;
 
@@ -606,6 +613,7 @@ public class JournalFeedModelImpl extends BaseModelImpl<JournalFeed>
 		journalFeedModelImpl._originalFeedId = journalFeedModelImpl._feedId;
 	}
 
+	@Override
 	public String toString() {
 		StringBundler sb = new StringBundler(47);
 

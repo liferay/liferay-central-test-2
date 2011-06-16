@@ -67,13 +67,21 @@ public class MembershipRequestPersistenceTest extends BasePersistenceTestCase {
 		MembershipRequest newMembershipRequest = _persistence.create(pk);
 
 		newMembershipRequest.setGroupId(nextLong());
+
 		newMembershipRequest.setCompanyId(nextLong());
+
 		newMembershipRequest.setUserId(nextLong());
+
 		newMembershipRequest.setCreateDate(nextDate());
+
 		newMembershipRequest.setComments(randomString());
+
 		newMembershipRequest.setReplyComments(randomString());
+
 		newMembershipRequest.setReplyDate(nextDate());
+
 		newMembershipRequest.setReplierUserId(nextLong());
+
 		newMembershipRequest.setStatusId(nextInt());
 
 		_persistence.update(newMembershipRequest, false);
@@ -218,13 +226,21 @@ public class MembershipRequestPersistenceTest extends BasePersistenceTestCase {
 		MembershipRequest membershipRequest = _persistence.create(pk);
 
 		membershipRequest.setGroupId(nextLong());
+
 		membershipRequest.setCompanyId(nextLong());
+
 		membershipRequest.setUserId(nextLong());
+
 		membershipRequest.setCreateDate(nextDate());
+
 		membershipRequest.setComments(randomString());
+
 		membershipRequest.setReplyComments(randomString());
+
 		membershipRequest.setReplyDate(nextDate());
+
 		membershipRequest.setReplierUserId(nextLong());
+
 		membershipRequest.setStatusId(nextInt());
 
 		_persistence.update(membershipRequest, false);

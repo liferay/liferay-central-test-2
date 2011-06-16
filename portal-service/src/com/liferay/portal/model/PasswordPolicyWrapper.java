@@ -772,6 +772,7 @@ public class PasswordPolicyWrapper implements PasswordPolicy {
 		_passwordPolicy.setExpandoBridgeAttributes(serviceContext);
 	}
 
+	@Override
 	public java.lang.Object clone() {
 		return new PasswordPolicyWrapper((PasswordPolicy)_passwordPolicy.clone());
 	}
@@ -780,6 +781,7 @@ public class PasswordPolicyWrapper implements PasswordPolicy {
 		return _passwordPolicy.compareTo(passwordPolicy);
 	}
 
+	@Override
 	public int hashCode() {
 		return _passwordPolicy.hashCode();
 	}
@@ -788,6 +790,7 @@ public class PasswordPolicyWrapper implements PasswordPolicy {
 		return new PasswordPolicyWrapper(_passwordPolicy.toEscapedModel());
 	}
 
+	@Override
 	public java.lang.String toString() {
 		return _passwordPolicy.toString();
 	}

@@ -187,6 +187,7 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl<Bookmark
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache() {
 		if (_HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
 			CacheRegistryUtil.clear(BookmarksFolderImpl.class.getName());
@@ -204,6 +205,7 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl<Bookmark
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache(BookmarksFolder bookmarksFolder) {
 		EntityCacheUtil.removeResult(BookmarksFolderModelImpl.ENTITY_CACHE_ENABLED,
 			BookmarksFolderImpl.class, bookmarksFolder.getPrimaryKey());
@@ -242,6 +244,7 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl<Bookmark
 	 * @throws com.liferay.portal.NoSuchModelException if a bookmarks folder with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public BookmarksFolder remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
@@ -294,11 +297,13 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl<Bookmark
 	 * @return the bookmarks folder that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public BookmarksFolder remove(BookmarksFolder bookmarksFolder)
 		throws SystemException {
 		return super.remove(bookmarksFolder);
 	}
 
+	@Override
 	protected BookmarksFolder removeImpl(BookmarksFolder bookmarksFolder)
 		throws SystemException {
 		bookmarksFolder = toUnwrappedModel(bookmarksFolder);
@@ -333,6 +338,7 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl<Bookmark
 		return bookmarksFolder;
 	}
 
+	@Override
 	public BookmarksFolder updateImpl(
 		com.liferay.portlet.bookmarks.model.BookmarksFolder bookmarksFolder,
 		boolean merge) throws SystemException {
@@ -428,6 +434,7 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl<Bookmark
 	 * @throws com.liferay.portal.NoSuchModelException if a bookmarks folder with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public BookmarksFolder findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
@@ -464,6 +471,7 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl<Bookmark
 	 * @return the bookmarks folder, or <code>null</code> if a bookmarks folder with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public BookmarksFolder fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());

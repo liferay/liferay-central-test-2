@@ -340,6 +340,7 @@ public class SCProductVersionWrapper implements SCProductVersion {
 		_scProductVersion.setExpandoBridgeAttributes(serviceContext);
 	}
 
+	@Override
 	public java.lang.Object clone() {
 		return new SCProductVersionWrapper((SCProductVersion)_scProductVersion.clone());
 	}
@@ -349,6 +350,7 @@ public class SCProductVersionWrapper implements SCProductVersion {
 		return _scProductVersion.compareTo(scProductVersion);
 	}
 
+	@Override
 	public int hashCode() {
 		return _scProductVersion.hashCode();
 	}
@@ -357,6 +359,7 @@ public class SCProductVersionWrapper implements SCProductVersion {
 		return new SCProductVersionWrapper(_scProductVersion.toEscapedModel());
 	}
 
+	@Override
 	public java.lang.String toString() {
 		return _scProductVersion.toString();
 	}

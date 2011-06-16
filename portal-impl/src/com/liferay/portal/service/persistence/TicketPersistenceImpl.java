@@ -119,6 +119,7 @@ public class TicketPersistenceImpl extends BasePersistenceImpl<Ticket>
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache() {
 		if (_HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
 			CacheRegistryUtil.clear(TicketImpl.class.getName());
@@ -136,6 +137,7 @@ public class TicketPersistenceImpl extends BasePersistenceImpl<Ticket>
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache(Ticket ticket) {
 		EntityCacheUtil.removeResult(TicketModelImpl.ENTITY_CACHE_ENABLED,
 			TicketImpl.class, ticket.getPrimaryKey());
@@ -167,6 +169,7 @@ public class TicketPersistenceImpl extends BasePersistenceImpl<Ticket>
 	 * @throws com.liferay.portal.NoSuchModelException if a ticket with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Ticket remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
@@ -219,10 +222,12 @@ public class TicketPersistenceImpl extends BasePersistenceImpl<Ticket>
 	 * @return the ticket that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Ticket remove(Ticket ticket) throws SystemException {
 		return super.remove(ticket);
 	}
 
+	@Override
 	protected Ticket removeImpl(Ticket ticket) throws SystemException {
 		ticket = toUnwrappedModel(ticket);
 
@@ -253,6 +258,7 @@ public class TicketPersistenceImpl extends BasePersistenceImpl<Ticket>
 		return ticket;
 	}
 
+	@Override
 	public Ticket updateImpl(com.liferay.portal.model.Ticket ticket,
 		boolean merge) throws SystemException {
 		ticket = toUnwrappedModel(ticket);
@@ -330,6 +336,7 @@ public class TicketPersistenceImpl extends BasePersistenceImpl<Ticket>
 	 * @throws com.liferay.portal.NoSuchModelException if a ticket with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Ticket findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
@@ -366,6 +373,7 @@ public class TicketPersistenceImpl extends BasePersistenceImpl<Ticket>
 	 * @return the ticket, or <code>null</code> if a ticket with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Ticket fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());

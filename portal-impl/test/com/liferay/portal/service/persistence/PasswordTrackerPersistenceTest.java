@@ -67,7 +67,9 @@ public class PasswordTrackerPersistenceTest extends BasePersistenceTestCase {
 		PasswordTracker newPasswordTracker = _persistence.create(pk);
 
 		newPasswordTracker.setUserId(nextLong());
+
 		newPasswordTracker.setCreateDate(nextDate());
+
 		newPasswordTracker.setPassword(randomString());
 
 		_persistence.update(newPasswordTracker, false);
@@ -197,7 +199,9 @@ public class PasswordTrackerPersistenceTest extends BasePersistenceTestCase {
 		PasswordTracker passwordTracker = _persistence.create(pk);
 
 		passwordTracker.setUserId(nextLong());
+
 		passwordTracker.setCreateDate(nextDate());
+
 		passwordTracker.setPassword(randomString());
 
 		_persistence.update(passwordTracker, false);

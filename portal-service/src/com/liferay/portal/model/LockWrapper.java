@@ -322,6 +322,7 @@ public class LockWrapper implements Lock {
 		_lock.setExpandoBridgeAttributes(serviceContext);
 	}
 
+	@Override
 	public java.lang.Object clone() {
 		return new LockWrapper((Lock)_lock.clone());
 	}
@@ -330,6 +331,7 @@ public class LockWrapper implements Lock {
 		return _lock.compareTo(lock);
 	}
 
+	@Override
 	public int hashCode() {
 		return _lock.hashCode();
 	}
@@ -338,6 +340,7 @@ public class LockWrapper implements Lock {
 		return new LockWrapper(_lock.toEscapedModel());
 	}
 
+	@Override
 	public java.lang.String toString() {
 		return _lock.toString();
 	}

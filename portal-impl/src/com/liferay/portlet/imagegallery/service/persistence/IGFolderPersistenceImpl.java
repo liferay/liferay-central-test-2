@@ -204,6 +204,7 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache() {
 		if (_HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
 			CacheRegistryUtil.clear(IGFolderImpl.class.getName());
@@ -221,6 +222,7 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache(IGFolder igFolder) {
 		EntityCacheUtil.removeResult(IGFolderModelImpl.ENTITY_CACHE_ENABLED,
 			IGFolderImpl.class, igFolder.getPrimaryKey());
@@ -265,6 +267,7 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 	 * @throws com.liferay.portal.NoSuchModelException if a i g folder with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public IGFolder remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
@@ -317,10 +320,12 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 	 * @return the i g folder that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public IGFolder remove(IGFolder igFolder) throws SystemException {
 		return super.remove(igFolder);
 	}
 
+	@Override
 	protected IGFolder removeImpl(IGFolder igFolder) throws SystemException {
 		igFolder = toUnwrappedModel(igFolder);
 
@@ -362,6 +367,7 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 		return igFolder;
 	}
 
+	@Override
 	public IGFolder updateImpl(
 		com.liferay.portlet.imagegallery.model.IGFolder igFolder, boolean merge)
 		throws SystemException {
@@ -483,6 +489,7 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 	 * @throws com.liferay.portal.NoSuchModelException if a i g folder with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public IGFolder findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
@@ -519,6 +526,7 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 	 * @return the i g folder, or <code>null</code> if a i g folder with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public IGFolder fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());

@@ -279,6 +279,7 @@ public class MBBanWrapper implements MBBan {
 		_mbBan.setExpandoBridgeAttributes(serviceContext);
 	}
 
+	@Override
 	public java.lang.Object clone() {
 		return new MBBanWrapper((MBBan)_mbBan.clone());
 	}
@@ -287,6 +288,7 @@ public class MBBanWrapper implements MBBan {
 		return _mbBan.compareTo(mbBan);
 	}
 
+	@Override
 	public int hashCode() {
 		return _mbBan.hashCode();
 	}
@@ -295,6 +297,7 @@ public class MBBanWrapper implements MBBan {
 		return new MBBanWrapper(_mbBan.toEscapedModel());
 	}
 
+	@Override
 	public java.lang.String toString() {
 		return _mbBan.toString();
 	}

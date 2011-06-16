@@ -464,6 +464,7 @@ public class CalEventModelImpl extends BaseModelImpl<CalEvent>
 		_secondReminder = secondReminder;
 	}
 
+	@Override
 	public CalEvent toEscapedModel() {
 		if (isEscapedModel()) {
 			return (CalEvent)this;
@@ -474,6 +475,7 @@ public class CalEventModelImpl extends BaseModelImpl<CalEvent>
 		}
 	}
 
+	@Override
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
 			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
@@ -483,10 +485,12 @@ public class CalEventModelImpl extends BaseModelImpl<CalEvent>
 		return _expandoBridge;
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
 		getExpandoBridge().setAttributes(serviceContext);
 	}
 
+	@Override
 	public Object clone() {
 		CalEventImpl calEventImpl = new CalEventImpl();
 
@@ -538,6 +542,7 @@ public class CalEventModelImpl extends BaseModelImpl<CalEvent>
 		return 0;
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		if (obj == null) {
 			return false;
@@ -562,10 +567,12 @@ public class CalEventModelImpl extends BaseModelImpl<CalEvent>
 		}
 	}
 
+	@Override
 	public int hashCode() {
 		return (int)getPrimaryKey();
 	}
 
+	@Override
 	public void resetOriginalValues() {
 		CalEventModelImpl calEventModelImpl = this;
 
@@ -576,6 +583,7 @@ public class CalEventModelImpl extends BaseModelImpl<CalEvent>
 		calEventModelImpl._setOriginalGroupId = false;
 	}
 
+	@Override
 	public String toString() {
 		StringBundler sb = new StringBundler(47);
 

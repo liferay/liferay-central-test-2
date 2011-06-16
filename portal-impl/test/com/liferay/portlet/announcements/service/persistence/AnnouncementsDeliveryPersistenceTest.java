@@ -34,7 +34,6 @@ import java.util.List;
  */
 public class AnnouncementsDeliveryPersistenceTest
 	extends BasePersistenceTestCase {
-	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 
@@ -71,10 +70,15 @@ public class AnnouncementsDeliveryPersistenceTest
 		AnnouncementsDelivery newAnnouncementsDelivery = _persistence.create(pk);
 
 		newAnnouncementsDelivery.setCompanyId(nextLong());
+
 		newAnnouncementsDelivery.setUserId(nextLong());
+
 		newAnnouncementsDelivery.setType(randomString());
+
 		newAnnouncementsDelivery.setEmail(randomBoolean());
+
 		newAnnouncementsDelivery.setSms(randomBoolean());
+
 		newAnnouncementsDelivery.setWebsite(randomBoolean());
 
 		_persistence.update(newAnnouncementsDelivery, false);
@@ -225,10 +229,15 @@ public class AnnouncementsDeliveryPersistenceTest
 		AnnouncementsDelivery announcementsDelivery = _persistence.create(pk);
 
 		announcementsDelivery.setCompanyId(nextLong());
+
 		announcementsDelivery.setUserId(nextLong());
+
 		announcementsDelivery.setType(randomString());
+
 		announcementsDelivery.setEmail(randomBoolean());
+
 		announcementsDelivery.setSms(randomBoolean());
+
 		announcementsDelivery.setWebsite(randomBoolean());
 
 		_persistence.update(announcementsDelivery, false);

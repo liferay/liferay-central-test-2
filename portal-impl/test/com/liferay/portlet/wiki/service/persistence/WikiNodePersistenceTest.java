@@ -34,7 +34,6 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class WikiNodePersistenceTest extends BasePersistenceTestCase {
-	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 
@@ -71,14 +70,23 @@ public class WikiNodePersistenceTest extends BasePersistenceTestCase {
 		WikiNode newWikiNode = _persistence.create(pk);
 
 		newWikiNode.setUuid(randomString());
+
 		newWikiNode.setGroupId(nextLong());
+
 		newWikiNode.setCompanyId(nextLong());
+
 		newWikiNode.setUserId(nextLong());
+
 		newWikiNode.setUserName(randomString());
+
 		newWikiNode.setCreateDate(nextDate());
+
 		newWikiNode.setModifiedDate(nextDate());
+
 		newWikiNode.setName(randomString());
+
 		newWikiNode.setDescription(randomString());
+
 		newWikiNode.setLastPostDate(nextDate());
 
 		_persistence.update(newWikiNode, false);
@@ -233,14 +241,23 @@ public class WikiNodePersistenceTest extends BasePersistenceTestCase {
 		WikiNode wikiNode = _persistence.create(pk);
 
 		wikiNode.setUuid(randomString());
+
 		wikiNode.setGroupId(nextLong());
+
 		wikiNode.setCompanyId(nextLong());
+
 		wikiNode.setUserId(nextLong());
+
 		wikiNode.setUserName(randomString());
+
 		wikiNode.setCreateDate(nextDate());
+
 		wikiNode.setModifiedDate(nextDate());
+
 		wikiNode.setName(randomString());
+
 		wikiNode.setDescription(randomString());
+
 		wikiNode.setLastPostDate(nextDate());
 
 		_persistence.update(wikiNode, false);

@@ -322,6 +322,7 @@ public class ShoppingCartWrapper implements ShoppingCart {
 		_shoppingCart.setExpandoBridgeAttributes(serviceContext);
 	}
 
+	@Override
 	public java.lang.Object clone() {
 		return new ShoppingCartWrapper((ShoppingCart)_shoppingCart.clone());
 	}
@@ -331,6 +332,7 @@ public class ShoppingCartWrapper implements ShoppingCart {
 		return _shoppingCart.compareTo(shoppingCart);
 	}
 
+	@Override
 	public int hashCode() {
 		return _shoppingCart.hashCode();
 	}
@@ -339,6 +341,7 @@ public class ShoppingCartWrapper implements ShoppingCart {
 		return new ShoppingCartWrapper(_shoppingCart.toEscapedModel());
 	}
 
+	@Override
 	public java.lang.String toString() {
 		return _shoppingCart.toString();
 	}

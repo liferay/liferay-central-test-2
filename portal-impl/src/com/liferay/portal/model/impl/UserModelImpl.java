@@ -816,6 +816,7 @@ public class UserModelImpl extends BaseModelImpl<User> implements UserModel {
 		_status = status;
 	}
 
+	@Override
 	public User toEscapedModel() {
 		if (isEscapedModel()) {
 			return (User)this;
@@ -826,6 +827,7 @@ public class UserModelImpl extends BaseModelImpl<User> implements UserModel {
 		}
 	}
 
+	@Override
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
 			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
@@ -835,10 +837,12 @@ public class UserModelImpl extends BaseModelImpl<User> implements UserModel {
 		return _expandoBridge;
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
 		getExpandoBridge().setAttributes(serviceContext);
 	}
 
+	@Override
 	public Object clone() {
 		UserImpl userImpl = new UserImpl();
 
@@ -901,6 +905,7 @@ public class UserModelImpl extends BaseModelImpl<User> implements UserModel {
 		}
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		if (obj == null) {
 			return false;
@@ -925,10 +930,12 @@ public class UserModelImpl extends BaseModelImpl<User> implements UserModel {
 		}
 	}
 
+	@Override
 	public int hashCode() {
 		return (int)getPrimaryKey();
 	}
 
+	@Override
 	public void resetOriginalValues() {
 		UserModelImpl userModelImpl = this;
 
@@ -963,6 +970,7 @@ public class UserModelImpl extends BaseModelImpl<User> implements UserModel {
 		userModelImpl._setOriginalPortraitId = false;
 	}
 
+	@Override
 	public String toString() {
 		StringBundler sb = new StringBundler(79);
 

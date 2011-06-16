@@ -167,6 +167,7 @@ public class WikiPageResourceWrapper implements WikiPageResource {
 		_wikiPageResource.setExpandoBridgeAttributes(serviceContext);
 	}
 
+	@Override
 	public java.lang.Object clone() {
 		return new WikiPageResourceWrapper((WikiPageResource)_wikiPageResource.clone());
 	}
@@ -176,6 +177,7 @@ public class WikiPageResourceWrapper implements WikiPageResource {
 		return _wikiPageResource.compareTo(wikiPageResource);
 	}
 
+	@Override
 	public int hashCode() {
 		return _wikiPageResource.hashCode();
 	}
@@ -184,6 +186,7 @@ public class WikiPageResourceWrapper implements WikiPageResource {
 		return new WikiPageResourceWrapper(_wikiPageResource.toEscapedModel());
 	}
 
+	@Override
 	public java.lang.String toString() {
 		return _wikiPageResource.toString();
 	}

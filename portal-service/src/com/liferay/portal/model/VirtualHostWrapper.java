@@ -167,6 +167,7 @@ public class VirtualHostWrapper implements VirtualHost {
 		_virtualHost.setExpandoBridgeAttributes(serviceContext);
 	}
 
+	@Override
 	public java.lang.Object clone() {
 		return new VirtualHostWrapper((VirtualHost)_virtualHost.clone());
 	}
@@ -175,6 +176,7 @@ public class VirtualHostWrapper implements VirtualHost {
 		return _virtualHost.compareTo(virtualHost);
 	}
 
+	@Override
 	public int hashCode() {
 		return _virtualHost.hashCode();
 	}
@@ -183,6 +185,7 @@ public class VirtualHostWrapper implements VirtualHost {
 		return new VirtualHostWrapper(_virtualHost.toEscapedModel());
 	}
 
+	@Override
 	public java.lang.String toString() {
 		return _virtualHost.toString();
 	}

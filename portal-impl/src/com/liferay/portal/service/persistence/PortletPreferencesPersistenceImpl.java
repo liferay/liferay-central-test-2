@@ -178,6 +178,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache() {
 		if (_HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
 			CacheRegistryUtil.clear(PortletPreferencesImpl.class.getName());
@@ -195,6 +196,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache(PortletPreferences portletPreferences) {
 		EntityCacheUtil.removeResult(PortletPreferencesModelImpl.ENTITY_CACHE_ENABLED,
 			PortletPreferencesImpl.class, portletPreferences.getPrimaryKey());
@@ -232,6 +234,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 	 * @throws com.liferay.portal.NoSuchModelException if a portlet preferences with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public PortletPreferences remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
@@ -285,11 +288,13 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 	 * @return the portlet preferences that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public PortletPreferences remove(PortletPreferences portletPreferences)
 		throws SystemException {
 		return super.remove(portletPreferences);
 	}
 
+	@Override
 	protected PortletPreferences removeImpl(
 		PortletPreferences portletPreferences) throws SystemException {
 		portletPreferences = toUnwrappedModel(portletPreferences);
@@ -327,6 +332,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 		return portletPreferences;
 	}
 
+	@Override
 	public PortletPreferences updateImpl(
 		com.liferay.portal.model.PortletPreferences portletPreferences,
 		boolean merge) throws SystemException {
@@ -424,6 +430,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 	 * @throws com.liferay.portal.NoSuchModelException if a portlet preferences with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public PortletPreferences findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
@@ -461,6 +468,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 	 * @return the portlet preferences, or <code>null</code> if a portlet preferences with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public PortletPreferences fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());

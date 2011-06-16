@@ -149,6 +149,7 @@ public class ListTypeWrapper implements ListType {
 		_listType.setExpandoBridgeAttributes(serviceContext);
 	}
 
+	@Override
 	public java.lang.Object clone() {
 		return new ListTypeWrapper((ListType)_listType.clone());
 	}
@@ -157,6 +158,7 @@ public class ListTypeWrapper implements ListType {
 		return _listType.compareTo(listType);
 	}
 
+	@Override
 	public int hashCode() {
 		return _listType.hashCode();
 	}
@@ -165,6 +167,7 @@ public class ListTypeWrapper implements ListType {
 		return new ListTypeWrapper(_listType.toEscapedModel());
 	}
 
+	@Override
 	public java.lang.String toString() {
 		return _listType.toString();
 	}

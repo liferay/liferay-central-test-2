@@ -157,6 +157,7 @@ public class DDLRecordVersionPersistenceImpl extends BasePersistenceImpl<DDLReco
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache() {
 		if (_HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
 			CacheRegistryUtil.clear(DDLRecordVersionImpl.class.getName());
@@ -174,6 +175,7 @@ public class DDLRecordVersionPersistenceImpl extends BasePersistenceImpl<DDLReco
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache(DDLRecordVersion ddlRecordVersion) {
 		EntityCacheUtil.removeResult(DDLRecordVersionModelImpl.ENTITY_CACHE_ENABLED,
 			DDLRecordVersionImpl.class, ddlRecordVersion.getPrimaryKey());
@@ -209,6 +211,7 @@ public class DDLRecordVersionPersistenceImpl extends BasePersistenceImpl<DDLReco
 	 * @throws com.liferay.portal.NoSuchModelException if a d d l record version with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DDLRecordVersion remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
@@ -262,11 +265,13 @@ public class DDLRecordVersionPersistenceImpl extends BasePersistenceImpl<DDLReco
 	 * @return the d d l record version that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DDLRecordVersion remove(DDLRecordVersion ddlRecordVersion)
 		throws SystemException {
 		return super.remove(ddlRecordVersion);
 	}
 
+	@Override
 	protected DDLRecordVersion removeImpl(DDLRecordVersion ddlRecordVersion)
 		throws SystemException {
 		ddlRecordVersion = toUnwrappedModel(ddlRecordVersion);
@@ -302,6 +307,7 @@ public class DDLRecordVersionPersistenceImpl extends BasePersistenceImpl<DDLReco
 		return ddlRecordVersion;
 	}
 
+	@Override
 	public DDLRecordVersion updateImpl(
 		com.liferay.portlet.dynamicdatalists.model.DDLRecordVersion ddlRecordVersion,
 		boolean merge) throws SystemException {
@@ -400,6 +406,7 @@ public class DDLRecordVersionPersistenceImpl extends BasePersistenceImpl<DDLReco
 	 * @throws com.liferay.portal.NoSuchModelException if a d d l record version with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DDLRecordVersion findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
@@ -436,6 +443,7 @@ public class DDLRecordVersionPersistenceImpl extends BasePersistenceImpl<DDLReco
 	 * @return the d d l record version, or <code>null</code> if a d d l record version with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DDLRecordVersion fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());

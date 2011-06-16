@@ -164,6 +164,7 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache() {
 		if (_HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
 			CacheRegistryUtil.clear(PortletItemImpl.class.getName());
@@ -181,6 +182,7 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache(PortletItem portletItem) {
 		EntityCacheUtil.removeResult(PortletItemModelImpl.ENTITY_CACHE_ENABLED,
 			PortletItemImpl.class, portletItem.getPrimaryKey());
@@ -219,6 +221,7 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 	 * @throws com.liferay.portal.NoSuchModelException if a portlet item with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public PortletItem remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
@@ -271,11 +274,13 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 	 * @return the portlet item that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public PortletItem remove(PortletItem portletItem)
 		throws SystemException {
 		return super.remove(portletItem);
 	}
 
+	@Override
 	protected PortletItem removeImpl(PortletItem portletItem)
 		throws SystemException {
 		portletItem = toUnwrappedModel(portletItem);
@@ -314,6 +319,7 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 		return portletItem;
 	}
 
+	@Override
 	public PortletItem updateImpl(
 		com.liferay.portal.model.PortletItem portletItem, boolean merge)
 		throws SystemException {
@@ -415,6 +421,7 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 	 * @throws com.liferay.portal.NoSuchModelException if a portlet item with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public PortletItem findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
@@ -451,6 +458,7 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 	 * @return the portlet item, or <code>null</code> if a portlet item with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public PortletItem fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());

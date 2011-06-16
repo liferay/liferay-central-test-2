@@ -149,6 +149,7 @@ public class RatingsEntryPersistenceImpl extends BasePersistenceImpl<RatingsEntr
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache() {
 		if (_HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
 			CacheRegistryUtil.clear(RatingsEntryImpl.class.getName());
@@ -166,6 +167,7 @@ public class RatingsEntryPersistenceImpl extends BasePersistenceImpl<RatingsEntr
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache(RatingsEntry ratingsEntry) {
 		EntityCacheUtil.removeResult(RatingsEntryModelImpl.ENTITY_CACHE_ENABLED,
 			RatingsEntryImpl.class, ratingsEntry.getPrimaryKey());
@@ -201,6 +203,7 @@ public class RatingsEntryPersistenceImpl extends BasePersistenceImpl<RatingsEntr
 	 * @throws com.liferay.portal.NoSuchModelException if a ratings entry with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public RatingsEntry remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
@@ -253,11 +256,13 @@ public class RatingsEntryPersistenceImpl extends BasePersistenceImpl<RatingsEntr
 	 * @return the ratings entry that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public RatingsEntry remove(RatingsEntry ratingsEntry)
 		throws SystemException {
 		return super.remove(ratingsEntry);
 	}
 
+	@Override
 	protected RatingsEntry removeImpl(RatingsEntry ratingsEntry)
 		throws SystemException {
 		ratingsEntry = toUnwrappedModel(ratingsEntry);
@@ -293,6 +298,7 @@ public class RatingsEntryPersistenceImpl extends BasePersistenceImpl<RatingsEntr
 		return ratingsEntry;
 	}
 
+	@Override
 	public RatingsEntry updateImpl(
 		com.liferay.portlet.ratings.model.RatingsEntry ratingsEntry,
 		boolean merge) throws SystemException {
@@ -381,6 +387,7 @@ public class RatingsEntryPersistenceImpl extends BasePersistenceImpl<RatingsEntr
 	 * @throws com.liferay.portal.NoSuchModelException if a ratings entry with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public RatingsEntry findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
@@ -417,6 +424,7 @@ public class RatingsEntryPersistenceImpl extends BasePersistenceImpl<RatingsEntr
 	 * @return the ratings entry, or <code>null</code> if a ratings entry with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public RatingsEntry fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());

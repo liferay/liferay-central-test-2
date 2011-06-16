@@ -285,6 +285,7 @@ public class RatingsEntryModelImpl extends BaseModelImpl<RatingsEntry>
 		_score = score;
 	}
 
+	@Override
 	public RatingsEntry toEscapedModel() {
 		if (isEscapedModel()) {
 			return (RatingsEntry)this;
@@ -295,6 +296,7 @@ public class RatingsEntryModelImpl extends BaseModelImpl<RatingsEntry>
 		}
 	}
 
+	@Override
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
 			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
@@ -304,10 +306,12 @@ public class RatingsEntryModelImpl extends BaseModelImpl<RatingsEntry>
 		return _expandoBridge;
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
 		getExpandoBridge().setAttributes(serviceContext);
 	}
 
+	@Override
 	public Object clone() {
 		RatingsEntryImpl ratingsEntryImpl = new RatingsEntryImpl();
 
@@ -340,6 +344,7 @@ public class RatingsEntryModelImpl extends BaseModelImpl<RatingsEntry>
 		}
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		if (obj == null) {
 			return false;
@@ -364,10 +369,12 @@ public class RatingsEntryModelImpl extends BaseModelImpl<RatingsEntry>
 		}
 	}
 
+	@Override
 	public int hashCode() {
 		return (int)getPrimaryKey();
 	}
 
+	@Override
 	public void resetOriginalValues() {
 		RatingsEntryModelImpl ratingsEntryModelImpl = this;
 
@@ -384,6 +391,7 @@ public class RatingsEntryModelImpl extends BaseModelImpl<RatingsEntry>
 		ratingsEntryModelImpl._setOriginalClassPK = false;
 	}
 
+	@Override
 	public String toString() {
 		StringBundler sb = new StringBundler(19);
 

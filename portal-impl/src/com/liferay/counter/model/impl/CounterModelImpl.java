@@ -117,6 +117,7 @@ public class CounterModelImpl extends BaseModelImpl<Counter>
 		_currentId = currentId;
 	}
 
+	@Override
 	public Counter toEscapedModel() {
 		if (isEscapedModel()) {
 			return (Counter)this;
@@ -127,6 +128,7 @@ public class CounterModelImpl extends BaseModelImpl<Counter>
 		}
 	}
 
+	@Override
 	public Object clone() {
 		CounterImpl counterImpl = new CounterImpl();
 
@@ -144,6 +146,7 @@ public class CounterModelImpl extends BaseModelImpl<Counter>
 		return getPrimaryKey().compareTo(primaryKey);
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		if (obj == null) {
 			return false;
@@ -168,13 +171,16 @@ public class CounterModelImpl extends BaseModelImpl<Counter>
 		}
 	}
 
+	@Override
 	public int hashCode() {
 		return getPrimaryKey().hashCode();
 	}
 
+	@Override
 	public void resetOriginalValues() {
 	}
 
+	@Override
 	public String toString() {
 		StringBundler sb = new StringBundler(5);
 

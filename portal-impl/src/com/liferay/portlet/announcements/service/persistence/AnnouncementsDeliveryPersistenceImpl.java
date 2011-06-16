@@ -144,6 +144,7 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl<An
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache() {
 		if (_HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
 			CacheRegistryUtil.clear(AnnouncementsDeliveryImpl.class.getName());
@@ -161,6 +162,7 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl<An
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache(AnnouncementsDelivery announcementsDelivery) {
 		EntityCacheUtil.removeResult(AnnouncementsDeliveryModelImpl.ENTITY_CACHE_ENABLED,
 			AnnouncementsDeliveryImpl.class,
@@ -197,6 +199,7 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl<An
 	 * @throws com.liferay.portal.NoSuchModelException if a announcements delivery with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AnnouncementsDelivery remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
@@ -249,11 +252,13 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl<An
 	 * @return the announcements delivery that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AnnouncementsDelivery remove(
 		AnnouncementsDelivery announcementsDelivery) throws SystemException {
 		return super.remove(announcementsDelivery);
 	}
 
+	@Override
 	protected AnnouncementsDelivery removeImpl(
 		AnnouncementsDelivery announcementsDelivery) throws SystemException {
 		announcementsDelivery = toUnwrappedModel(announcementsDelivery);
@@ -290,6 +295,7 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl<An
 		return announcementsDelivery;
 	}
 
+	@Override
 	public AnnouncementsDelivery updateImpl(
 		com.liferay.portlet.announcements.model.AnnouncementsDelivery announcementsDelivery,
 		boolean merge) throws SystemException {
@@ -379,6 +385,7 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl<An
 	 * @throws com.liferay.portal.NoSuchModelException if a announcements delivery with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AnnouncementsDelivery findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
@@ -415,6 +422,7 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl<An
 	 * @return the announcements delivery, or <code>null</code> if a announcements delivery with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AnnouncementsDelivery fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());

@@ -397,7 +397,7 @@ public class UserLocalServiceWrapper implements UserLocalService {
 	* @param sendEmail whether to send the user an email notification about
 	their new account
 	* @param serviceContext the user's service context (optionally
-	<code>null</code>). Specifies the user's universally unique
+	<code>null</code>). Can specify the user's universally unique
 	identifier (with the <code>uuid</code> attribute), asset category
 	IDs, asset tag names, and expando bridge attributes.
 	* @return the new user
@@ -481,7 +481,7 @@ public class UserLocalServiceWrapper implements UserLocalService {
 	* @param sendEmail whether to send the user an email notification about
 	their new account
 	* @param serviceContext the user's service context (optionally
-	<code>null</code>). Specifies the user's universally unique
+	<code>null</code>). Can specify the user's universally unique
 	identifier (with the <code>uuid</code> attribute), asset category
 	IDs, asset tag names, and expando bridge attributes.
 	* @return the new user
@@ -820,10 +820,10 @@ public class UserLocalServiceWrapper implements UserLocalService {
 	* the confirmation email.
 	*
 	* @param user the user
-	* @param serviceContext the user's service context. Specifies whether a
+	* @param serviceContext the user's service context. Can specify whether a
 	password should be generated (with the <code>autoPassword</code>
 	attribute) and whether the confirmation email should be sent
-	(with the <code>sendEmail</code> attribute)
+	(with the <code>sendEmail</code> attribute).
 	* @throws PortalException if a portal exception occurred
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1764,7 +1764,7 @@ public class UserLocalServiceWrapper implements UserLocalService {
 	* @param sendEmail whether to send the user an email notification about
 	their new account
 	* @param serviceContext the user's service context (optionally
-	<code>null</code>). Specifies the user's expando bridge
+	<code>null</code>). Can specify the user's expando bridge
 	attributes.
 	* @return the user
 	* @throws PortalException if the user's information was invalid
@@ -1875,7 +1875,7 @@ public class UserLocalServiceWrapper implements UserLocalService {
 
 	/**
 	* Returns an ordered range of all the users with the status, and whose
-	* first name, middle name, last name, screen name, or email address match
+	* first name, middle name, last name, screen name, and email address match
 	* the keywords specified for them, without using the indexer. It is
 	* preferable to use the indexed version {@link #search(long, String,
 	* String, String, String, String, int, LinkedHashMap, boolean, int, int,
@@ -1928,7 +1928,7 @@ public class UserLocalServiceWrapper implements UserLocalService {
 
 	/**
 	* Returns an ordered range of all the users with the status, and whose
-	* first name, middle name, last name, screen name, or email address match
+	* first name, middle name, last name, screen name, and email address match
 	* the keywords specified for them, using the indexer. It is preferable to
 	* use this method instead of the non-indexed version whenever possible for
 	* performance reasons.
@@ -2001,7 +2001,7 @@ public class UserLocalServiceWrapper implements UserLocalService {
 
 	/**
 	* Returns the number of users with the status, and whose first name, middle
-	* name, last name, screen name, or email address match the keywords
+	* name, last name, screen name, and email address match the keywords
 	* specified for them.
 	*
 	* @param companyId the primary key of the user's company
@@ -2661,9 +2661,10 @@ public class UserLocalServiceWrapper implements UserLocalService {
 	* @param userGroupRoles the user user's group roles
 	* @param userGroupIds the primary keys of the user's user groups
 	* @param serviceContext the user's service context (optionally
-	<code>null</code>). Specifies the user's universally unique
-	identifier (with the <code>uuid</code> attribute), asset category
-	IDs, asset tag names, and expando bridge attributes.
+	<code>null</code>). Can specify the user's universally unique
+	identifier (with the <code>uuid</code> attribute), replacement
+	asset category IDs, replacement asset tag names, and new expando
+	bridge attributes.
 	* @return the user
 	* @throws PortalException if a user with the primary key could not be found
 	or if the new information was invalid

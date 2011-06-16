@@ -176,6 +176,7 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl<UserGroupR
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache() {
 		if (_HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
 			CacheRegistryUtil.clear(UserGroupRoleImpl.class.getName());
@@ -193,6 +194,7 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl<UserGroupR
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache(UserGroupRole userGroupRole) {
 		EntityCacheUtil.removeResult(UserGroupRoleModelImpl.ENTITY_CACHE_ENABLED,
 			UserGroupRoleImpl.class, userGroupRole.getPrimaryKey());
@@ -221,6 +223,7 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl<UserGroupR
 	 * @throws com.liferay.portal.NoSuchModelException if a user group role with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public UserGroupRole remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove((UserGroupRolePK)primaryKey);
@@ -274,11 +277,13 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl<UserGroupR
 	 * @return the user group role that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public UserGroupRole remove(UserGroupRole userGroupRole)
 		throws SystemException {
 		return super.remove(userGroupRole);
 	}
 
+	@Override
 	protected UserGroupRole removeImpl(UserGroupRole userGroupRole)
 		throws SystemException {
 		userGroupRole = toUnwrappedModel(userGroupRole);
@@ -305,6 +310,7 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl<UserGroupR
 		return userGroupRole;
 	}
 
+	@Override
 	public UserGroupRole updateImpl(
 		com.liferay.portal.model.UserGroupRole userGroupRole, boolean merge)
 		throws SystemException {
@@ -360,6 +366,7 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl<UserGroupR
 	 * @throws com.liferay.portal.NoSuchModelException if a user group role with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public UserGroupRole findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey((UserGroupRolePK)primaryKey);
@@ -396,6 +403,7 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl<UserGroupR
 	 * @return the user group role, or <code>null</code> if a user group role with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public UserGroupRole fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey((UserGroupRolePK)primaryKey);

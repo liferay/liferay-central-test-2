@@ -162,6 +162,7 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl<MBBan>
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache() {
 		if (_HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
 			CacheRegistryUtil.clear(MBBanImpl.class.getName());
@@ -179,6 +180,7 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl<MBBan>
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache(MBBan mbBan) {
 		EntityCacheUtil.removeResult(MBBanModelImpl.ENTITY_CACHE_ENABLED,
 			MBBanImpl.class, mbBan.getPrimaryKey());
@@ -213,6 +215,7 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl<MBBan>
 	 * @throws com.liferay.portal.NoSuchModelException if a message boards ban with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBBan remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
@@ -264,10 +267,12 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl<MBBan>
 	 * @return the message boards ban that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBBan remove(MBBan mbBan) throws SystemException {
 		return super.remove(mbBan);
 	}
 
+	@Override
 	protected MBBan removeImpl(MBBan mbBan) throws SystemException {
 		mbBan = toUnwrappedModel(mbBan);
 
@@ -301,6 +306,7 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl<MBBan>
 		return mbBan;
 	}
 
+	@Override
 	public MBBan updateImpl(
 		com.liferay.portlet.messageboards.model.MBBan mbBan, boolean merge)
 		throws SystemException {
@@ -384,6 +390,7 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl<MBBan>
 	 * @throws com.liferay.portal.NoSuchModelException if a message boards ban with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBBan findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
@@ -420,6 +427,7 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl<MBBan>
 	 * @return the message boards ban, or <code>null</code> if a message boards ban with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBBan fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());

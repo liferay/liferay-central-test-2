@@ -137,6 +137,7 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl<Resource>
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache() {
 		if (_HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
 			CacheRegistryUtil.clear(ResourceImpl.class.getName());
@@ -154,6 +155,7 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl<Resource>
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache(Resource resource) {
 		EntityCacheUtil.removeResult(ResourceModelImpl.ENTITY_CACHE_ENABLED,
 			ResourceImpl.class, resource.getPrimaryKey());
@@ -189,6 +191,7 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl<Resource>
 	 * @throws com.liferay.portal.NoSuchModelException if a resource with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Resource remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
@@ -241,10 +244,12 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl<Resource>
 	 * @return the resource that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Resource remove(Resource resource) throws SystemException {
 		return super.remove(resource);
 	}
 
+	@Override
 	protected Resource removeImpl(Resource resource) throws SystemException {
 		resource = toUnwrappedModel(resource);
 
@@ -279,6 +284,7 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl<Resource>
 		return resource;
 	}
 
+	@Override
 	public Resource updateImpl(com.liferay.portal.model.Resource resource,
 		boolean merge) throws SystemException {
 		resource = toUnwrappedModel(resource);
@@ -360,6 +366,7 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl<Resource>
 	 * @throws com.liferay.portal.NoSuchModelException if a resource with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Resource findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
@@ -396,6 +403,7 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl<Resource>
 	 * @return the resource, or <code>null</code> if a resource with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Resource fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());

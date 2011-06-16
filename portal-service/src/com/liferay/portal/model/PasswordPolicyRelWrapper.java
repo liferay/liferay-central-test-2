@@ -176,6 +176,7 @@ public class PasswordPolicyRelWrapper implements PasswordPolicyRel {
 		_passwordPolicyRel.setExpandoBridgeAttributes(serviceContext);
 	}
 
+	@Override
 	public java.lang.Object clone() {
 		return new PasswordPolicyRelWrapper((PasswordPolicyRel)_passwordPolicyRel.clone());
 	}
@@ -185,6 +186,7 @@ public class PasswordPolicyRelWrapper implements PasswordPolicyRel {
 		return _passwordPolicyRel.compareTo(passwordPolicyRel);
 	}
 
+	@Override
 	public int hashCode() {
 		return _passwordPolicyRel.hashCode();
 	}
@@ -193,6 +195,7 @@ public class PasswordPolicyRelWrapper implements PasswordPolicyRel {
 		return new PasswordPolicyRelWrapper(_passwordPolicyRel.toEscapedModel());
 	}
 
+	@Override
 	public java.lang.String toString() {
 		return _passwordPolicyRel.toString();
 	}

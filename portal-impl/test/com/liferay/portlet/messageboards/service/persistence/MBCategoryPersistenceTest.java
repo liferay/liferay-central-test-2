@@ -34,7 +34,6 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class MBCategoryPersistenceTest extends BasePersistenceTestCase {
-	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 
@@ -71,18 +70,31 @@ public class MBCategoryPersistenceTest extends BasePersistenceTestCase {
 		MBCategory newMBCategory = _persistence.create(pk);
 
 		newMBCategory.setUuid(randomString());
+
 		newMBCategory.setGroupId(nextLong());
+
 		newMBCategory.setCompanyId(nextLong());
+
 		newMBCategory.setUserId(nextLong());
+
 		newMBCategory.setUserName(randomString());
+
 		newMBCategory.setCreateDate(nextDate());
+
 		newMBCategory.setModifiedDate(nextDate());
+
 		newMBCategory.setParentCategoryId(nextLong());
+
 		newMBCategory.setName(randomString());
+
 		newMBCategory.setDescription(randomString());
+
 		newMBCategory.setDisplayStyle(randomString());
+
 		newMBCategory.setThreadCount(nextInt());
+
 		newMBCategory.setMessageCount(nextInt());
+
 		newMBCategory.setLastPostDate(nextDate());
 
 		_persistence.update(newMBCategory, false);
@@ -245,18 +257,31 @@ public class MBCategoryPersistenceTest extends BasePersistenceTestCase {
 		MBCategory mbCategory = _persistence.create(pk);
 
 		mbCategory.setUuid(randomString());
+
 		mbCategory.setGroupId(nextLong());
+
 		mbCategory.setCompanyId(nextLong());
+
 		mbCategory.setUserId(nextLong());
+
 		mbCategory.setUserName(randomString());
+
 		mbCategory.setCreateDate(nextDate());
+
 		mbCategory.setModifiedDate(nextDate());
+
 		mbCategory.setParentCategoryId(nextLong());
+
 		mbCategory.setName(randomString());
+
 		mbCategory.setDescription(randomString());
+
 		mbCategory.setDisplayStyle(randomString());
+
 		mbCategory.setThreadCount(nextInt());
+
 		mbCategory.setMessageCount(nextInt());
+
 		mbCategory.setLastPostDate(nextDate());
 
 		_persistence.update(mbCategory, false);

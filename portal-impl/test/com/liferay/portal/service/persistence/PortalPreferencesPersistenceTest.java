@@ -31,7 +31,6 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class PortalPreferencesPersistenceTest extends BasePersistenceTestCase {
-	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 
@@ -68,7 +67,9 @@ public class PortalPreferencesPersistenceTest extends BasePersistenceTestCase {
 		PortalPreferences newPortalPreferences = _persistence.create(pk);
 
 		newPortalPreferences.setOwnerId(nextLong());
+
 		newPortalPreferences.setOwnerType(nextInt());
+
 		newPortalPreferences.setPreferences(randomString());
 
 		_persistence.update(newPortalPreferences, false);
@@ -215,7 +216,9 @@ public class PortalPreferencesPersistenceTest extends BasePersistenceTestCase {
 		PortalPreferences portalPreferences = _persistence.create(pk);
 
 		portalPreferences.setOwnerId(nextLong());
+
 		portalPreferences.setOwnerType(nextInt());
+
 		portalPreferences.setPreferences(randomString());
 
 		_persistence.update(portalPreferences, false);

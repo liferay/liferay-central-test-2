@@ -256,6 +256,7 @@ public class AssetTagModelImpl extends BaseModelImpl<AssetTag>
 		_assetCount = assetCount;
 	}
 
+	@Override
 	public AssetTag toEscapedModel() {
 		if (isEscapedModel()) {
 			return (AssetTag)this;
@@ -266,6 +267,7 @@ public class AssetTagModelImpl extends BaseModelImpl<AssetTag>
 		}
 	}
 
+	@Override
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
 			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
@@ -275,10 +277,12 @@ public class AssetTagModelImpl extends BaseModelImpl<AssetTag>
 		return _expandoBridge;
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
 		getExpandoBridge().setAttributes(serviceContext);
 	}
 
+	@Override
 	public Object clone() {
 		AssetTagImpl assetTagImpl = new AssetTagImpl();
 
@@ -309,6 +313,7 @@ public class AssetTagModelImpl extends BaseModelImpl<AssetTag>
 		return 0;
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		if (obj == null) {
 			return false;
@@ -333,13 +338,16 @@ public class AssetTagModelImpl extends BaseModelImpl<AssetTag>
 		}
 	}
 
+	@Override
 	public int hashCode() {
 		return (int)getPrimaryKey();
 	}
 
+	@Override
 	public void resetOriginalValues() {
 	}
 
+	@Override
 	public String toString() {
 		StringBundler sb = new StringBundler(19);
 

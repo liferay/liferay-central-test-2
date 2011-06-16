@@ -221,6 +221,7 @@ public class ImageWrapper implements Image {
 		_image.setExpandoBridgeAttributes(serviceContext);
 	}
 
+	@Override
 	public java.lang.Object clone() {
 		return new ImageWrapper((Image)_image.clone());
 	}
@@ -229,6 +230,7 @@ public class ImageWrapper implements Image {
 		return _image.compareTo(image);
 	}
 
+	@Override
 	public int hashCode() {
 		return _image.hashCode();
 	}
@@ -237,6 +239,7 @@ public class ImageWrapper implements Image {
 		return new ImageWrapper(_image.toEscapedModel());
 	}
 
+	@Override
 	public java.lang.String toString() {
 		return _image.toString();
 	}

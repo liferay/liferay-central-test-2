@@ -159,6 +159,7 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache() {
 		if (_HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
 			CacheRegistryUtil.clear(UserGroupImpl.class.getName());
@@ -176,6 +177,7 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache(UserGroup userGroup) {
 		EntityCacheUtil.removeResult(UserGroupModelImpl.ENTITY_CACHE_ENABLED,
 			UserGroupImpl.class, userGroup.getPrimaryKey());
@@ -211,6 +213,7 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 	 * @throws com.liferay.portal.NoSuchModelException if a user group with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public UserGroup remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
@@ -263,10 +266,12 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 	 * @return the user group that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public UserGroup remove(UserGroup userGroup) throws SystemException {
 		return super.remove(userGroup);
 	}
 
+	@Override
 	protected UserGroup removeImpl(UserGroup userGroup)
 		throws SystemException {
 		userGroup = toUnwrappedModel(userGroup);
@@ -332,6 +337,7 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 		return userGroup;
 	}
 
+	@Override
 	public UserGroup updateImpl(com.liferay.portal.model.UserGroup userGroup,
 		boolean merge) throws SystemException {
 		userGroup = toUnwrappedModel(userGroup);
@@ -416,6 +422,7 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 	 * @throws com.liferay.portal.NoSuchModelException if a user group with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public UserGroup findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
@@ -452,6 +459,7 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 	 * @return the user group, or <code>null</code> if a user group with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public UserGroup fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());

@@ -304,6 +304,7 @@ public class LayoutSetBranchWrapper implements LayoutSetBranch {
 		_layoutSetBranch.setExpandoBridgeAttributes(serviceContext);
 	}
 
+	@Override
 	public java.lang.Object clone() {
 		return new LayoutSetBranchWrapper((LayoutSetBranch)_layoutSetBranch.clone());
 	}
@@ -313,6 +314,7 @@ public class LayoutSetBranchWrapper implements LayoutSetBranch {
 		return _layoutSetBranch.compareTo(layoutSetBranch);
 	}
 
+	@Override
 	public int hashCode() {
 		return _layoutSetBranch.hashCode();
 	}
@@ -321,6 +323,7 @@ public class LayoutSetBranchWrapper implements LayoutSetBranch {
 		return new LayoutSetBranchWrapper(_layoutSetBranch.toEscapedModel());
 	}
 
+	@Override
 	public java.lang.String toString() {
 		return _layoutSetBranch.toString();
 	}

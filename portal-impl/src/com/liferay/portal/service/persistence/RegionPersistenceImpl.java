@@ -146,6 +146,7 @@ public class RegionPersistenceImpl extends BasePersistenceImpl<Region>
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache() {
 		if (_HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
 			CacheRegistryUtil.clear(RegionImpl.class.getName());
@@ -163,6 +164,7 @@ public class RegionPersistenceImpl extends BasePersistenceImpl<Region>
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache(Region region) {
 		EntityCacheUtil.removeResult(RegionModelImpl.ENTITY_CACHE_ENABLED,
 			RegionImpl.class, region.getPrimaryKey());
@@ -191,6 +193,7 @@ public class RegionPersistenceImpl extends BasePersistenceImpl<Region>
 	 * @throws com.liferay.portal.NoSuchModelException if a region with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Region remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
@@ -243,10 +246,12 @@ public class RegionPersistenceImpl extends BasePersistenceImpl<Region>
 	 * @return the region that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Region remove(Region region) throws SystemException {
 		return super.remove(region);
 	}
 
+	@Override
 	protected Region removeImpl(Region region) throws SystemException {
 		region = toUnwrappedModel(region);
 
@@ -272,6 +277,7 @@ public class RegionPersistenceImpl extends BasePersistenceImpl<Region>
 		return region;
 	}
 
+	@Override
 	public Region updateImpl(com.liferay.portal.model.Region region,
 		boolean merge) throws SystemException {
 		region = toUnwrappedModel(region);
@@ -327,6 +333,7 @@ public class RegionPersistenceImpl extends BasePersistenceImpl<Region>
 	 * @throws com.liferay.portal.NoSuchModelException if a region with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Region findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
@@ -363,6 +370,7 @@ public class RegionPersistenceImpl extends BasePersistenceImpl<Region>
 	 * @return the region, or <code>null</code> if a region with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Region fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());

@@ -248,6 +248,7 @@ public class ReleaseWrapper implements Release {
 		_release.setExpandoBridgeAttributes(serviceContext);
 	}
 
+	@Override
 	public java.lang.Object clone() {
 		return new ReleaseWrapper((Release)_release.clone());
 	}
@@ -256,6 +257,7 @@ public class ReleaseWrapper implements Release {
 		return _release.compareTo(release);
 	}
 
+	@Override
 	public int hashCode() {
 		return _release.hashCode();
 	}
@@ -264,6 +266,7 @@ public class ReleaseWrapper implements Release {
 		return new ReleaseWrapper(_release.toEscapedModel());
 	}
 
+	@Override
 	public java.lang.String toString() {
 		return _release.toString();
 	}

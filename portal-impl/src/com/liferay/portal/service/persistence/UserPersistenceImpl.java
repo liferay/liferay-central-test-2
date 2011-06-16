@@ -279,6 +279,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache() {
 		if (_HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
 			CacheRegistryUtil.clear(UserImpl.class.getName());
@@ -296,6 +297,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache(User user) {
 		EntityCacheUtil.removeResult(UserModelImpl.ENTITY_CACHE_ENABLED,
 			UserImpl.class, user.getPrimaryKey());
@@ -365,6 +367,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 	 * @throws com.liferay.portal.NoSuchModelException if a user with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public User remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
@@ -415,10 +418,12 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 	 * @return the user that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public User remove(User user) throws SystemException {
 		return super.remove(user);
 	}
 
+	@Override
 	protected User removeImpl(User user) throws SystemException {
 		user = toUnwrappedModel(user);
 
@@ -551,6 +556,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 		return user;
 	}
 
+	@Override
 	public User updateImpl(com.liferay.portal.model.User user, boolean merge)
 		throws SystemException {
 		user = toUnwrappedModel(user);
@@ -805,6 +811,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 	 * @throws com.liferay.portal.NoSuchModelException if a user with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public User findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
@@ -841,6 +848,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 	 * @return the user, or <code>null</code> if a user with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public User fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());

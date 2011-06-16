@@ -190,6 +190,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache() {
 		if (_HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
 			CacheRegistryUtil.clear(JournalArticleImageImpl.class.getName());
@@ -207,6 +208,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache(JournalArticleImage journalArticleImage) {
 		EntityCacheUtil.removeResult(JournalArticleImageModelImpl.ENTITY_CACHE_ENABLED,
 			JournalArticleImageImpl.class, journalArticleImage.getPrimaryKey());
@@ -249,6 +251,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 	 * @throws com.liferay.portal.NoSuchModelException if a journal article image with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public JournalArticleImage remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
@@ -302,11 +305,13 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 	 * @return the journal article image that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public JournalArticleImage remove(JournalArticleImage journalArticleImage)
 		throws SystemException {
 		return super.remove(journalArticleImage);
 	}
 
+	@Override
 	protected JournalArticleImage removeImpl(
 		JournalArticleImage journalArticleImage) throws SystemException {
 		journalArticleImage = toUnwrappedModel(journalArticleImage);
@@ -349,6 +354,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 		return journalArticleImage;
 	}
 
+	@Override
 	public JournalArticleImage updateImpl(
 		com.liferay.portlet.journal.model.JournalArticleImage journalArticleImage,
 		boolean merge) throws SystemException {
@@ -468,6 +474,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 	 * @throws com.liferay.portal.NoSuchModelException if a journal article image with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public JournalArticleImage findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
@@ -504,6 +511,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 	 * @return the journal article image, or <code>null</code> if a journal article image with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public JournalArticleImage fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());

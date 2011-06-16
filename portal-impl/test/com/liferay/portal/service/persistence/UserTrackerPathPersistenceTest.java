@@ -30,7 +30,6 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class UserTrackerPathPersistenceTest extends BasePersistenceTestCase {
-	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 
@@ -67,7 +66,9 @@ public class UserTrackerPathPersistenceTest extends BasePersistenceTestCase {
 		UserTrackerPath newUserTrackerPath = _persistence.create(pk);
 
 		newUserTrackerPath.setUserTrackerId(nextLong());
+
 		newUserTrackerPath.setPath(randomString());
+
 		newUserTrackerPath.setPathDate(nextDate());
 
 		_persistence.update(newUserTrackerPath, false);
@@ -197,7 +198,9 @@ public class UserTrackerPathPersistenceTest extends BasePersistenceTestCase {
 		UserTrackerPath userTrackerPath = _persistence.create(pk);
 
 		userTrackerPath.setUserTrackerId(nextLong());
+
 		userTrackerPath.setPath(randomString());
+
 		userTrackerPath.setPathDate(nextDate());
 
 		_persistence.update(userTrackerPath, false);

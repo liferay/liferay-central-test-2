@@ -68,6 +68,7 @@ public class BrowserTrackerPersistenceTest extends BasePersistenceTestCase {
 		BrowserTracker newBrowserTracker = _persistence.create(pk);
 
 		newBrowserTracker.setUserId(nextLong());
+
 		newBrowserTracker.setBrowserKey(nextLong());
 
 		_persistence.update(newBrowserTracker, false);
@@ -209,6 +210,7 @@ public class BrowserTrackerPersistenceTest extends BasePersistenceTestCase {
 		BrowserTracker browserTracker = _persistence.create(pk);
 
 		browserTracker.setUserId(nextLong());
+
 		browserTracker.setBrowserKey(nextLong());
 
 		_persistence.update(browserTracker, false);

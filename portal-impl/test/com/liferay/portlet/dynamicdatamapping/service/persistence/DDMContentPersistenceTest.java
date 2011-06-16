@@ -34,7 +34,6 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class DDMContentPersistenceTest extends BasePersistenceTestCase {
-	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 
@@ -71,14 +70,23 @@ public class DDMContentPersistenceTest extends BasePersistenceTestCase {
 		DDMContent newDDMContent = _persistence.create(pk);
 
 		newDDMContent.setUuid(randomString());
+
 		newDDMContent.setGroupId(nextLong());
+
 		newDDMContent.setCompanyId(nextLong());
+
 		newDDMContent.setUserId(nextLong());
+
 		newDDMContent.setUserName(randomString());
+
 		newDDMContent.setCreateDate(nextDate());
+
 		newDDMContent.setModifiedDate(nextDate());
+
 		newDDMContent.setName(randomString());
+
 		newDDMContent.setDescription(randomString());
+
 		newDDMContent.setXml(randomString());
 
 		_persistence.update(newDDMContent, false);
@@ -231,14 +239,23 @@ public class DDMContentPersistenceTest extends BasePersistenceTestCase {
 		DDMContent ddmContent = _persistence.create(pk);
 
 		ddmContent.setUuid(randomString());
+
 		ddmContent.setGroupId(nextLong());
+
 		ddmContent.setCompanyId(nextLong());
+
 		ddmContent.setUserId(nextLong());
+
 		ddmContent.setUserName(randomString());
+
 		ddmContent.setCreateDate(nextDate());
+
 		ddmContent.setModifiedDate(nextDate());
+
 		ddmContent.setName(randomString());
+
 		ddmContent.setDescription(randomString());
+
 		ddmContent.setXml(randomString());
 
 		_persistence.update(ddmContent, false);

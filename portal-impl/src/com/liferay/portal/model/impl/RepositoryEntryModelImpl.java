@@ -187,6 +187,7 @@ public class RepositoryEntryModelImpl extends BaseModelImpl<RepositoryEntry>
 		return GetterUtil.getString(_originalMappedId);
 	}
 
+	@Override
 	public RepositoryEntry toEscapedModel() {
 		if (isEscapedModel()) {
 			return (RepositoryEntry)this;
@@ -197,6 +198,7 @@ public class RepositoryEntryModelImpl extends BaseModelImpl<RepositoryEntry>
 		}
 	}
 
+	@Override
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
 			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(0,
@@ -206,10 +208,12 @@ public class RepositoryEntryModelImpl extends BaseModelImpl<RepositoryEntry>
 		return _expandoBridge;
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
 		getExpandoBridge().setAttributes(serviceContext);
 	}
 
+	@Override
 	public Object clone() {
 		RepositoryEntryImpl repositoryEntryImpl = new RepositoryEntryImpl();
 
@@ -238,6 +242,7 @@ public class RepositoryEntryModelImpl extends BaseModelImpl<RepositoryEntry>
 		}
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		if (obj == null) {
 			return false;
@@ -262,10 +267,12 @@ public class RepositoryEntryModelImpl extends BaseModelImpl<RepositoryEntry>
 		}
 	}
 
+	@Override
 	public int hashCode() {
 		return (int)getPrimaryKey();
 	}
 
+	@Override
 	public void resetOriginalValues() {
 		RepositoryEntryModelImpl repositoryEntryModelImpl = this;
 
@@ -282,6 +289,7 @@ public class RepositoryEntryModelImpl extends BaseModelImpl<RepositoryEntry>
 		repositoryEntryModelImpl._originalMappedId = repositoryEntryModelImpl._mappedId;
 	}
 
+	@Override
 	public String toString() {
 		StringBundler sb = new StringBundler(11);
 

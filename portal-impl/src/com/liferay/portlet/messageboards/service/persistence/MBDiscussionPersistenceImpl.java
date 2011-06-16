@@ -151,6 +151,7 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache() {
 		if (_HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
 			CacheRegistryUtil.clear(MBDiscussionImpl.class.getName());
@@ -168,6 +169,7 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache(MBDiscussion mbDiscussion) {
 		EntityCacheUtil.removeResult(MBDiscussionModelImpl.ENTITY_CACHE_ENABLED,
 			MBDiscussionImpl.class, mbDiscussion.getPrimaryKey());
@@ -205,6 +207,7 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 	 * @throws com.liferay.portal.NoSuchModelException if a message boards discussion with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBDiscussion remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
@@ -257,11 +260,13 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 	 * @return the message boards discussion that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBDiscussion remove(MBDiscussion mbDiscussion)
 		throws SystemException {
 		return super.remove(mbDiscussion);
 	}
 
+	@Override
 	protected MBDiscussion removeImpl(MBDiscussion mbDiscussion)
 		throws SystemException {
 		mbDiscussion = toUnwrappedModel(mbDiscussion);
@@ -299,6 +304,7 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 		return mbDiscussion;
 	}
 
+	@Override
 	public MBDiscussion updateImpl(
 		com.liferay.portlet.messageboards.model.MBDiscussion mbDiscussion,
 		boolean merge) throws SystemException {
@@ -393,6 +399,7 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 	 * @throws com.liferay.portal.NoSuchModelException if a message boards discussion with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBDiscussion findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
@@ -429,6 +436,7 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 	 * @return the message boards discussion, or <code>null</code> if a message boards discussion with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBDiscussion fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());

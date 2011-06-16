@@ -33,7 +33,6 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class SocialRequestPersistenceTest extends BasePersistenceTestCase {
-	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 
@@ -70,16 +69,27 @@ public class SocialRequestPersistenceTest extends BasePersistenceTestCase {
 		SocialRequest newSocialRequest = _persistence.create(pk);
 
 		newSocialRequest.setUuid(randomString());
+
 		newSocialRequest.setGroupId(nextLong());
+
 		newSocialRequest.setCompanyId(nextLong());
+
 		newSocialRequest.setUserId(nextLong());
+
 		newSocialRequest.setCreateDate(nextLong());
+
 		newSocialRequest.setModifiedDate(nextLong());
+
 		newSocialRequest.setClassNameId(nextLong());
+
 		newSocialRequest.setClassPK(nextLong());
+
 		newSocialRequest.setType(nextInt());
+
 		newSocialRequest.setExtraData(randomString());
+
 		newSocialRequest.setReceiverUserId(nextLong());
+
 		newSocialRequest.setStatus(nextInt());
 
 		_persistence.update(newSocialRequest, false);
@@ -249,16 +259,27 @@ public class SocialRequestPersistenceTest extends BasePersistenceTestCase {
 		SocialRequest socialRequest = _persistence.create(pk);
 
 		socialRequest.setUuid(randomString());
+
 		socialRequest.setGroupId(nextLong());
+
 		socialRequest.setCompanyId(nextLong());
+
 		socialRequest.setUserId(nextLong());
+
 		socialRequest.setCreateDate(nextLong());
+
 		socialRequest.setModifiedDate(nextLong());
+
 		socialRequest.setClassNameId(nextLong());
+
 		socialRequest.setClassPK(nextLong());
+
 		socialRequest.setType(nextInt());
+
 		socialRequest.setExtraData(randomString());
+
 		socialRequest.setReceiverUserId(nextLong());
+
 		socialRequest.setStatus(nextInt());
 
 		_persistence.update(socialRequest, false);

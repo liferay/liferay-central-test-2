@@ -203,6 +203,7 @@ public class DDMTemplatePersistenceImpl extends BasePersistenceImpl<DDMTemplate>
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache() {
 		if (_HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
 			CacheRegistryUtil.clear(DDMTemplateImpl.class.getName());
@@ -220,6 +221,7 @@ public class DDMTemplatePersistenceImpl extends BasePersistenceImpl<DDMTemplate>
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache(DDMTemplate ddmTemplate) {
 		EntityCacheUtil.removeResult(DDMTemplateModelImpl.ENTITY_CACHE_ENABLED,
 			DDMTemplateImpl.class, ddmTemplate.getPrimaryKey());
@@ -257,6 +259,7 @@ public class DDMTemplatePersistenceImpl extends BasePersistenceImpl<DDMTemplate>
 	 * @throws com.liferay.portal.NoSuchModelException if a d d m template with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DDMTemplate remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
@@ -309,11 +312,13 @@ public class DDMTemplatePersistenceImpl extends BasePersistenceImpl<DDMTemplate>
 	 * @return the d d m template that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DDMTemplate remove(DDMTemplate ddmTemplate)
 		throws SystemException {
 		return super.remove(ddmTemplate);
 	}
 
+	@Override
 	protected DDMTemplate removeImpl(DDMTemplate ddmTemplate)
 		throws SystemException {
 		ddmTemplate = toUnwrappedModel(ddmTemplate);
@@ -348,6 +353,7 @@ public class DDMTemplatePersistenceImpl extends BasePersistenceImpl<DDMTemplate>
 		return ddmTemplate;
 	}
 
+	@Override
 	public DDMTemplate updateImpl(
 		com.liferay.portlet.dynamicdatamapping.model.DDMTemplate ddmTemplate,
 		boolean merge) throws SystemException {
@@ -445,6 +451,7 @@ public class DDMTemplatePersistenceImpl extends BasePersistenceImpl<DDMTemplate>
 	 * @throws com.liferay.portal.NoSuchModelException if a d d m template with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DDMTemplate findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
@@ -481,6 +488,7 @@ public class DDMTemplatePersistenceImpl extends BasePersistenceImpl<DDMTemplate>
 	 * @return the d d m template, or <code>null</code> if a d d m template with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DDMTemplate fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());

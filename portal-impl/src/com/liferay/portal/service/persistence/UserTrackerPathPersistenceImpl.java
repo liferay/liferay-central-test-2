@@ -124,6 +124,7 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl<UserTrac
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache() {
 		if (_HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
 			CacheRegistryUtil.clear(UserTrackerPathImpl.class.getName());
@@ -141,6 +142,7 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl<UserTrac
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache(UserTrackerPath userTrackerPath) {
 		EntityCacheUtil.removeResult(UserTrackerPathModelImpl.ENTITY_CACHE_ENABLED,
 			UserTrackerPathImpl.class, userTrackerPath.getPrimaryKey());
@@ -169,6 +171,7 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl<UserTrac
 	 * @throws com.liferay.portal.NoSuchModelException if a user tracker path with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public UserTrackerPath remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
@@ -222,11 +225,13 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl<UserTrac
 	 * @return the user tracker path that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public UserTrackerPath remove(UserTrackerPath userTrackerPath)
 		throws SystemException {
 		return super.remove(userTrackerPath);
 	}
 
+	@Override
 	protected UserTrackerPath removeImpl(UserTrackerPath userTrackerPath)
 		throws SystemException {
 		userTrackerPath = toUnwrappedModel(userTrackerPath);
@@ -253,6 +258,7 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl<UserTrac
 		return userTrackerPath;
 	}
 
+	@Override
 	public UserTrackerPath updateImpl(
 		com.liferay.portal.model.UserTrackerPath userTrackerPath, boolean merge)
 		throws SystemException {
@@ -309,6 +315,7 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl<UserTrac
 	 * @throws com.liferay.portal.NoSuchModelException if a user tracker path with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public UserTrackerPath findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
@@ -345,6 +352,7 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl<UserTrac
 	 * @return the user tracker path, or <code>null</code> if a user tracker path with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public UserTrackerPath fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());

@@ -283,6 +283,7 @@ public class PollsChoiceWrapper implements PollsChoice {
 		_pollsChoice.setExpandoBridgeAttributes(serviceContext);
 	}
 
+	@Override
 	public java.lang.Object clone() {
 		return new PollsChoiceWrapper((PollsChoice)_pollsChoice.clone());
 	}
@@ -292,6 +293,7 @@ public class PollsChoiceWrapper implements PollsChoice {
 		return _pollsChoice.compareTo(pollsChoice);
 	}
 
+	@Override
 	public int hashCode() {
 		return _pollsChoice.hashCode();
 	}
@@ -300,6 +302,7 @@ public class PollsChoiceWrapper implements PollsChoice {
 		return new PollsChoiceWrapper(_pollsChoice.toEscapedModel());
 	}
 
+	@Override
 	public java.lang.String toString() {
 		return _pollsChoice.toString();
 	}

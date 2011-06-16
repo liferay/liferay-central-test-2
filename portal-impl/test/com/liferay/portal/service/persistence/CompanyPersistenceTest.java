@@ -69,12 +69,19 @@ public class CompanyPersistenceTest extends BasePersistenceTestCase {
 		Company newCompany = _persistence.create(pk);
 
 		newCompany.setAccountId(nextLong());
+
 		newCompany.setWebId(randomString());
+
 		newCompany.setKey(randomString());
+
 		newCompany.setMx(randomString());
+
 		newCompany.setHomeURL(randomString());
+
 		newCompany.setLogoId(nextLong());
+
 		newCompany.setSystem(randomBoolean());
+
 		newCompany.setMaxUsers(nextInt());
 
 		_persistence.update(newCompany, false);
@@ -222,12 +229,19 @@ public class CompanyPersistenceTest extends BasePersistenceTestCase {
 		Company company = _persistence.create(pk);
 
 		company.setAccountId(nextLong());
+
 		company.setWebId(randomString());
+
 		company.setKey(randomString());
+
 		company.setMx(randomString());
+
 		company.setHomeURL(randomString());
+
 		company.setLogoId(nextLong());
+
 		company.setSystem(randomBoolean());
+
 		company.setMaxUsers(nextInt());
 
 		_persistence.update(company, false);

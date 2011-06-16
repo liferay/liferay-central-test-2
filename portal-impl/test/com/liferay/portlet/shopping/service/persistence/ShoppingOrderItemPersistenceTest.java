@@ -31,7 +31,6 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class ShoppingOrderItemPersistenceTest extends BasePersistenceTestCase {
-	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 
@@ -68,13 +67,21 @@ public class ShoppingOrderItemPersistenceTest extends BasePersistenceTestCase {
 		ShoppingOrderItem newShoppingOrderItem = _persistence.create(pk);
 
 		newShoppingOrderItem.setOrderId(nextLong());
+
 		newShoppingOrderItem.setItemId(randomString());
+
 		newShoppingOrderItem.setSku(randomString());
+
 		newShoppingOrderItem.setName(randomString());
+
 		newShoppingOrderItem.setDescription(randomString());
+
 		newShoppingOrderItem.setProperties(randomString());
+
 		newShoppingOrderItem.setPrice(nextDouble());
+
 		newShoppingOrderItem.setQuantity(nextInt());
+
 		newShoppingOrderItem.setShippedDate(nextDate());
 
 		_persistence.update(newShoppingOrderItem, false);
@@ -214,13 +221,21 @@ public class ShoppingOrderItemPersistenceTest extends BasePersistenceTestCase {
 		ShoppingOrderItem shoppingOrderItem = _persistence.create(pk);
 
 		shoppingOrderItem.setOrderId(nextLong());
+
 		shoppingOrderItem.setItemId(randomString());
+
 		shoppingOrderItem.setSku(randomString());
+
 		shoppingOrderItem.setName(randomString());
+
 		shoppingOrderItem.setDescription(randomString());
+
 		shoppingOrderItem.setProperties(randomString());
+
 		shoppingOrderItem.setPrice(nextDouble());
+
 		shoppingOrderItem.setQuantity(nextInt());
+
 		shoppingOrderItem.setShippedDate(nextDate());
 
 		_persistence.update(shoppingOrderItem, false);

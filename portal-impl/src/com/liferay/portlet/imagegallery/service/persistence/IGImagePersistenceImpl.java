@@ -239,6 +239,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache() {
 		if (_HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
 			CacheRegistryUtil.clear(IGImageImpl.class.getName());
@@ -256,6 +257,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache(IGImage igImage) {
 		EntityCacheUtil.removeResult(IGImageModelImpl.ENTITY_CACHE_ENABLED,
 			IGImageImpl.class, igImage.getPrimaryKey());
@@ -303,6 +305,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 	 * @throws com.liferay.portal.NoSuchModelException if a i g image with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public IGImage remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
@@ -355,10 +358,12 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 	 * @return the i g image that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public IGImage remove(IGImage igImage) throws SystemException {
 		return super.remove(igImage);
 	}
 
+	@Override
 	protected IGImage removeImpl(IGImage igImage) throws SystemException {
 		igImage = toUnwrappedModel(igImage);
 
@@ -404,6 +409,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 		return igImage;
 	}
 
+	@Override
 	public IGImage updateImpl(
 		com.liferay.portlet.imagegallery.model.IGImage igImage, boolean merge)
 		throws SystemException {
@@ -561,6 +567,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 	 * @throws com.liferay.portal.NoSuchModelException if a i g image with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public IGImage findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
@@ -597,6 +604,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 	 * @return the i g image, or <code>null</code> if a i g image with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public IGImage fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());

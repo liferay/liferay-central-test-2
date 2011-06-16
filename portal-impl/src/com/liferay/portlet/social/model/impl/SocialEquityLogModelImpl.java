@@ -295,6 +295,7 @@ public class SocialEquityLogModelImpl extends BaseModelImpl<SocialEquityLog>
 		return GetterUtil.getString(_originalExtraData);
 	}
 
+	@Override
 	public SocialEquityLog toEscapedModel() {
 		if (isEscapedModel()) {
 			return (SocialEquityLog)this;
@@ -305,6 +306,7 @@ public class SocialEquityLogModelImpl extends BaseModelImpl<SocialEquityLog>
 		}
 	}
 
+	@Override
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
 			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
@@ -314,10 +316,12 @@ public class SocialEquityLogModelImpl extends BaseModelImpl<SocialEquityLog>
 		return _expandoBridge;
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
 		getExpandoBridge().setAttributes(serviceContext);
 	}
 
+	@Override
 	public Object clone() {
 		SocialEquityLogImpl socialEquityLogImpl = new SocialEquityLogImpl();
 
@@ -353,6 +357,7 @@ public class SocialEquityLogModelImpl extends BaseModelImpl<SocialEquityLog>
 		}
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		if (obj == null) {
 			return false;
@@ -377,10 +382,12 @@ public class SocialEquityLogModelImpl extends BaseModelImpl<SocialEquityLog>
 		}
 	}
 
+	@Override
 	public int hashCode() {
 		return (int)getPrimaryKey();
 	}
 
+	@Override
 	public void resetOriginalValues() {
 		SocialEquityLogModelImpl socialEquityLogModelImpl = this;
 
@@ -409,6 +416,7 @@ public class SocialEquityLogModelImpl extends BaseModelImpl<SocialEquityLog>
 		socialEquityLogModelImpl._originalExtraData = socialEquityLogModelImpl._extraData;
 	}
 
+	@Override
 	public String toString() {
 		StringBundler sb = new StringBundler(25);
 

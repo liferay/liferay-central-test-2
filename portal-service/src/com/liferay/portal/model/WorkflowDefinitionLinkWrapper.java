@@ -324,6 +324,7 @@ public class WorkflowDefinitionLinkWrapper implements WorkflowDefinitionLink {
 		_workflowDefinitionLink.setExpandoBridgeAttributes(serviceContext);
 	}
 
+	@Override
 	public java.lang.Object clone() {
 		return new WorkflowDefinitionLinkWrapper((WorkflowDefinitionLink)_workflowDefinitionLink.clone());
 	}
@@ -333,6 +334,7 @@ public class WorkflowDefinitionLinkWrapper implements WorkflowDefinitionLink {
 		return _workflowDefinitionLink.compareTo(workflowDefinitionLink);
 	}
 
+	@Override
 	public int hashCode() {
 		return _workflowDefinitionLink.hashCode();
 	}
@@ -341,6 +343,7 @@ public class WorkflowDefinitionLinkWrapper implements WorkflowDefinitionLink {
 		return new WorkflowDefinitionLinkWrapper(_workflowDefinitionLink.toEscapedModel());
 	}
 
+	@Override
 	public java.lang.String toString() {
 		return _workflowDefinitionLink.toString();
 	}

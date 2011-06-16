@@ -316,6 +316,7 @@ public class OrganizationModelImpl extends BaseModelImpl<Organization>
 		_comments = comments;
 	}
 
+	@Override
 	public Organization toEscapedModel() {
 		if (isEscapedModel()) {
 			return (Organization)this;
@@ -326,6 +327,7 @@ public class OrganizationModelImpl extends BaseModelImpl<Organization>
 		}
 	}
 
+	@Override
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
 			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
@@ -335,10 +337,12 @@ public class OrganizationModelImpl extends BaseModelImpl<Organization>
 		return _expandoBridge;
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
 		getExpandoBridge().setAttributes(serviceContext);
 	}
 
+	@Override
 	public Object clone() {
 		OrganizationImpl organizationImpl = new OrganizationImpl();
 
@@ -372,6 +376,7 @@ public class OrganizationModelImpl extends BaseModelImpl<Organization>
 		return 0;
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		if (obj == null) {
 			return false;
@@ -396,10 +401,12 @@ public class OrganizationModelImpl extends BaseModelImpl<Organization>
 		}
 	}
 
+	@Override
 	public int hashCode() {
 		return (int)getPrimaryKey();
 	}
 
+	@Override
 	public void resetOriginalValues() {
 		OrganizationModelImpl organizationModelImpl = this;
 
@@ -414,6 +421,7 @@ public class OrganizationModelImpl extends BaseModelImpl<Organization>
 		organizationModelImpl._originalName = organizationModelImpl._name;
 	}
 
+	@Override
 	public String toString() {
 		StringBundler sb = new StringBundler(25);
 

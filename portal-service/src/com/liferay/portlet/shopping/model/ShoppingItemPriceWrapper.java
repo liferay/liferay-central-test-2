@@ -293,6 +293,7 @@ public class ShoppingItemPriceWrapper implements ShoppingItemPrice {
 		_shoppingItemPrice.setExpandoBridgeAttributes(serviceContext);
 	}
 
+	@Override
 	public java.lang.Object clone() {
 		return new ShoppingItemPriceWrapper((ShoppingItemPrice)_shoppingItemPrice.clone());
 	}
@@ -302,6 +303,7 @@ public class ShoppingItemPriceWrapper implements ShoppingItemPrice {
 		return _shoppingItemPrice.compareTo(shoppingItemPrice);
 	}
 
+	@Override
 	public int hashCode() {
 		return _shoppingItemPrice.hashCode();
 	}
@@ -310,6 +312,7 @@ public class ShoppingItemPriceWrapper implements ShoppingItemPrice {
 		return new ShoppingItemPriceWrapper(_shoppingItemPrice.toEscapedModel());
 	}
 
+	@Override
 	public java.lang.String toString() {
 		return _shoppingItemPrice.toString();
 	}

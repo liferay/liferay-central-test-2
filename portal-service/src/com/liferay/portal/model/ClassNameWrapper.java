@@ -140,6 +140,7 @@ public class ClassNameWrapper implements ClassName {
 		_className.setExpandoBridgeAttributes(serviceContext);
 	}
 
+	@Override
 	public java.lang.Object clone() {
 		return new ClassNameWrapper((ClassName)_className.clone());
 	}
@@ -148,6 +149,7 @@ public class ClassNameWrapper implements ClassName {
 		return _className.compareTo(className);
 	}
 
+	@Override
 	public int hashCode() {
 		return _className.hashCode();
 	}
@@ -156,6 +158,7 @@ public class ClassNameWrapper implements ClassName {
 		return new ClassNameWrapper(_className.toEscapedModel());
 	}
 
+	@Override
 	public java.lang.String toString() {
 		return _className.toString();
 	}

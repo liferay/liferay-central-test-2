@@ -124,6 +124,7 @@ public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl<Password
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache() {
 		if (_HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
 			CacheRegistryUtil.clear(PasswordTrackerImpl.class.getName());
@@ -141,6 +142,7 @@ public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl<Password
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache(PasswordTracker passwordTracker) {
 		EntityCacheUtil.removeResult(PasswordTrackerModelImpl.ENTITY_CACHE_ENABLED,
 			PasswordTrackerImpl.class, passwordTracker.getPrimaryKey());
@@ -169,6 +171,7 @@ public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl<Password
 	 * @throws com.liferay.portal.NoSuchModelException if a password tracker with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public PasswordTracker remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
@@ -222,11 +225,13 @@ public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl<Password
 	 * @return the password tracker that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public PasswordTracker remove(PasswordTracker passwordTracker)
 		throws SystemException {
 		return super.remove(passwordTracker);
 	}
 
+	@Override
 	protected PasswordTracker removeImpl(PasswordTracker passwordTracker)
 		throws SystemException {
 		passwordTracker = toUnwrappedModel(passwordTracker);
@@ -253,6 +258,7 @@ public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl<Password
 		return passwordTracker;
 	}
 
+	@Override
 	public PasswordTracker updateImpl(
 		com.liferay.portal.model.PasswordTracker passwordTracker, boolean merge)
 		throws SystemException {
@@ -309,6 +315,7 @@ public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl<Password
 	 * @throws com.liferay.portal.NoSuchModelException if a password tracker with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public PasswordTracker findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
@@ -345,6 +352,7 @@ public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl<Password
 	 * @return the password tracker, or <code>null</code> if a password tracker with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public PasswordTracker fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());

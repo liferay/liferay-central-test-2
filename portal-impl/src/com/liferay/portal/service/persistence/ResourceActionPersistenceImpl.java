@@ -137,6 +137,7 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache() {
 		if (_HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
 			CacheRegistryUtil.clear(ResourceActionImpl.class.getName());
@@ -154,6 +155,7 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache(ResourceAction resourceAction) {
 		EntityCacheUtil.removeResult(ResourceActionModelImpl.ENTITY_CACHE_ENABLED,
 			ResourceActionImpl.class, resourceAction.getPrimaryKey());
@@ -185,6 +187,7 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 	 * @throws com.liferay.portal.NoSuchModelException if a resource action with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ResourceAction remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
@@ -238,11 +241,13 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 	 * @return the resource action that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ResourceAction remove(ResourceAction resourceAction)
 		throws SystemException {
 		return super.remove(resourceAction);
 	}
 
+	@Override
 	protected ResourceAction removeImpl(ResourceAction resourceAction)
 		throws SystemException {
 		resourceAction = toUnwrappedModel(resourceAction);
@@ -278,6 +283,7 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 		return resourceAction;
 	}
 
+	@Override
 	public ResourceAction updateImpl(
 		com.liferay.portal.model.ResourceAction resourceAction, boolean merge)
 		throws SystemException {
@@ -364,6 +370,7 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 	 * @throws com.liferay.portal.NoSuchModelException if a resource action with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ResourceAction findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
@@ -400,6 +407,7 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 	 * @return the resource action, or <code>null</code> if a resource action with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ResourceAction fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());

@@ -269,6 +269,7 @@ public class AnnouncementsDeliveryWrapper implements AnnouncementsDelivery {
 		_announcementsDelivery.setExpandoBridgeAttributes(serviceContext);
 	}
 
+	@Override
 	public java.lang.Object clone() {
 		return new AnnouncementsDeliveryWrapper((AnnouncementsDelivery)_announcementsDelivery.clone());
 	}
@@ -278,6 +279,7 @@ public class AnnouncementsDeliveryWrapper implements AnnouncementsDelivery {
 		return _announcementsDelivery.compareTo(announcementsDelivery);
 	}
 
+	@Override
 	public int hashCode() {
 		return _announcementsDelivery.hashCode();
 	}
@@ -286,6 +288,7 @@ public class AnnouncementsDeliveryWrapper implements AnnouncementsDelivery {
 		return new AnnouncementsDeliveryWrapper(_announcementsDelivery.toEscapedModel());
 	}
 
+	@Override
 	public java.lang.String toString() {
 		return _announcementsDelivery.toString();
 	}

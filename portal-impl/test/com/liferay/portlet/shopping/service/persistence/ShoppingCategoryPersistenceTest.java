@@ -31,7 +31,6 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class ShoppingCategoryPersistenceTest extends BasePersistenceTestCase {
-	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 
@@ -68,13 +67,21 @@ public class ShoppingCategoryPersistenceTest extends BasePersistenceTestCase {
 		ShoppingCategory newShoppingCategory = _persistence.create(pk);
 
 		newShoppingCategory.setGroupId(nextLong());
+
 		newShoppingCategory.setCompanyId(nextLong());
+
 		newShoppingCategory.setUserId(nextLong());
+
 		newShoppingCategory.setUserName(randomString());
+
 		newShoppingCategory.setCreateDate(nextDate());
+
 		newShoppingCategory.setModifiedDate(nextDate());
+
 		newShoppingCategory.setParentCategoryId(nextLong());
+
 		newShoppingCategory.setName(randomString());
+
 		newShoppingCategory.setDescription(randomString());
 
 		_persistence.update(newShoppingCategory, false);
@@ -214,13 +221,21 @@ public class ShoppingCategoryPersistenceTest extends BasePersistenceTestCase {
 		ShoppingCategory shoppingCategory = _persistence.create(pk);
 
 		shoppingCategory.setGroupId(nextLong());
+
 		shoppingCategory.setCompanyId(nextLong());
+
 		shoppingCategory.setUserId(nextLong());
+
 		shoppingCategory.setUserName(randomString());
+
 		shoppingCategory.setCreateDate(nextDate());
+
 		shoppingCategory.setModifiedDate(nextDate());
+
 		shoppingCategory.setParentCategoryId(nextLong());
+
 		shoppingCategory.setName(randomString());
+
 		shoppingCategory.setDescription(randomString());
 
 		_persistence.update(shoppingCategory, false);

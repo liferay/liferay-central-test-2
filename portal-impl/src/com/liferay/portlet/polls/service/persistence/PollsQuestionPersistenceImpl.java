@@ -159,6 +159,7 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl<PollsQuest
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache() {
 		if (_HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
 			CacheRegistryUtil.clear(PollsQuestionImpl.class.getName());
@@ -176,6 +177,7 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl<PollsQuest
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache(PollsQuestion pollsQuestion) {
 		EntityCacheUtil.removeResult(PollsQuestionModelImpl.ENTITY_CACHE_ENABLED,
 			PollsQuestionImpl.class, pollsQuestion.getPrimaryKey());
@@ -214,6 +216,7 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl<PollsQuest
 	 * @throws com.liferay.portal.NoSuchModelException if a polls question with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public PollsQuestion remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
@@ -266,11 +269,13 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl<PollsQuest
 	 * @return the polls question that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public PollsQuestion remove(PollsQuestion pollsQuestion)
 		throws SystemException {
 		return super.remove(pollsQuestion);
 	}
 
+	@Override
 	protected PollsQuestion removeImpl(PollsQuestion pollsQuestion)
 		throws SystemException {
 		pollsQuestion = toUnwrappedModel(pollsQuestion);
@@ -305,6 +310,7 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl<PollsQuest
 		return pollsQuestion;
 	}
 
+	@Override
 	public PollsQuestion updateImpl(
 		com.liferay.portlet.polls.model.PollsQuestion pollsQuestion,
 		boolean merge) throws SystemException {
@@ -401,6 +407,7 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl<PollsQuest
 	 * @throws com.liferay.portal.NoSuchModelException if a polls question with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public PollsQuestion findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
@@ -437,6 +444,7 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl<PollsQuest
 	 * @return the polls question, or <code>null</code> if a polls question with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public PollsQuestion fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());

@@ -121,6 +121,7 @@ public class OrgGroupRoleModelImpl extends BaseModelImpl<OrgGroupRole>
 		_roleId = roleId;
 	}
 
+	@Override
 	public OrgGroupRole toEscapedModel() {
 		if (isEscapedModel()) {
 			return (OrgGroupRole)this;
@@ -131,6 +132,7 @@ public class OrgGroupRoleModelImpl extends BaseModelImpl<OrgGroupRole>
 		}
 	}
 
+	@Override
 	public Object clone() {
 		OrgGroupRoleImpl orgGroupRoleImpl = new OrgGroupRoleImpl();
 
@@ -149,6 +151,7 @@ public class OrgGroupRoleModelImpl extends BaseModelImpl<OrgGroupRole>
 		return getPrimaryKey().compareTo(primaryKey);
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		if (obj == null) {
 			return false;
@@ -173,13 +176,16 @@ public class OrgGroupRoleModelImpl extends BaseModelImpl<OrgGroupRole>
 		}
 	}
 
+	@Override
 	public int hashCode() {
 		return getPrimaryKey().hashCode();
 	}
 
+	@Override
 	public void resetOriginalValues() {
 	}
 
+	@Override
 	public String toString() {
 		StringBundler sb = new StringBundler(7);
 

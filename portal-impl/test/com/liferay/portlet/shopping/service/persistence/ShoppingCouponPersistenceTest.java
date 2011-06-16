@@ -34,7 +34,6 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class ShoppingCouponPersistenceTest extends BasePersistenceTestCase {
-	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 
@@ -71,21 +70,37 @@ public class ShoppingCouponPersistenceTest extends BasePersistenceTestCase {
 		ShoppingCoupon newShoppingCoupon = _persistence.create(pk);
 
 		newShoppingCoupon.setGroupId(nextLong());
+
 		newShoppingCoupon.setCompanyId(nextLong());
+
 		newShoppingCoupon.setUserId(nextLong());
+
 		newShoppingCoupon.setUserName(randomString());
+
 		newShoppingCoupon.setCreateDate(nextDate());
+
 		newShoppingCoupon.setModifiedDate(nextDate());
+
 		newShoppingCoupon.setCode(randomString());
+
 		newShoppingCoupon.setName(randomString());
+
 		newShoppingCoupon.setDescription(randomString());
+
 		newShoppingCoupon.setStartDate(nextDate());
+
 		newShoppingCoupon.setEndDate(nextDate());
+
 		newShoppingCoupon.setActive(randomBoolean());
+
 		newShoppingCoupon.setLimitCategories(randomString());
+
 		newShoppingCoupon.setLimitSkus(randomString());
+
 		newShoppingCoupon.setMinOrder(nextDouble());
+
 		newShoppingCoupon.setDiscount(nextDouble());
+
 		newShoppingCoupon.setDiscountType(randomString());
 
 		_persistence.update(newShoppingCoupon, false);
@@ -257,21 +272,37 @@ public class ShoppingCouponPersistenceTest extends BasePersistenceTestCase {
 		ShoppingCoupon shoppingCoupon = _persistence.create(pk);
 
 		shoppingCoupon.setGroupId(nextLong());
+
 		shoppingCoupon.setCompanyId(nextLong());
+
 		shoppingCoupon.setUserId(nextLong());
+
 		shoppingCoupon.setUserName(randomString());
+
 		shoppingCoupon.setCreateDate(nextDate());
+
 		shoppingCoupon.setModifiedDate(nextDate());
+
 		shoppingCoupon.setCode(randomString());
+
 		shoppingCoupon.setName(randomString());
+
 		shoppingCoupon.setDescription(randomString());
+
 		shoppingCoupon.setStartDate(nextDate());
+
 		shoppingCoupon.setEndDate(nextDate());
+
 		shoppingCoupon.setActive(randomBoolean());
+
 		shoppingCoupon.setLimitCategories(randomString());
+
 		shoppingCoupon.setLimitSkus(randomString());
+
 		shoppingCoupon.setMinOrder(nextDouble());
+
 		shoppingCoupon.setDiscount(nextDouble());
+
 		shoppingCoupon.setDiscountType(randomString());
 
 		_persistence.update(shoppingCoupon, false);

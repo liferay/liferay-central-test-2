@@ -33,7 +33,6 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class ReleasePersistenceTest extends BasePersistenceTestCase {
-	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 
@@ -70,11 +69,17 @@ public class ReleasePersistenceTest extends BasePersistenceTestCase {
 		Release newRelease = _persistence.create(pk);
 
 		newRelease.setCreateDate(nextDate());
+
 		newRelease.setModifiedDate(nextDate());
+
 		newRelease.setServletContextName(randomString());
+
 		newRelease.setBuildNumber(nextInt());
+
 		newRelease.setBuildDate(nextDate());
+
 		newRelease.setVerified(randomBoolean());
+
 		newRelease.setTestString(randomString());
 
 		_persistence.update(newRelease, false);
@@ -221,11 +226,17 @@ public class ReleasePersistenceTest extends BasePersistenceTestCase {
 		Release release = _persistence.create(pk);
 
 		release.setCreateDate(nextDate());
+
 		release.setModifiedDate(nextDate());
+
 		release.setServletContextName(randomString());
+
 		release.setBuildNumber(nextInt());
+
 		release.setBuildDate(nextDate());
+
 		release.setVerified(randomBoolean());
+
 		release.setTestString(randomString());
 
 		_persistence.update(release, false);

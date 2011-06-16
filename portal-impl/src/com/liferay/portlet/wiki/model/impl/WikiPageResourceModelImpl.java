@@ -161,6 +161,7 @@ public class WikiPageResourceModelImpl extends BaseModelImpl<WikiPageResource>
 		return GetterUtil.getString(_originalTitle);
 	}
 
+	@Override
 	public WikiPageResource toEscapedModel() {
 		if (isEscapedModel()) {
 			return (WikiPageResource)this;
@@ -171,6 +172,7 @@ public class WikiPageResourceModelImpl extends BaseModelImpl<WikiPageResource>
 		}
 	}
 
+	@Override
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
 			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(0,
@@ -180,10 +182,12 @@ public class WikiPageResourceModelImpl extends BaseModelImpl<WikiPageResource>
 		return _expandoBridge;
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
 		getExpandoBridge().setAttributes(serviceContext);
 	}
 
+	@Override
 	public Object clone() {
 		WikiPageResourceImpl wikiPageResourceImpl = new WikiPageResourceImpl();
 
@@ -211,6 +215,7 @@ public class WikiPageResourceModelImpl extends BaseModelImpl<WikiPageResource>
 		}
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		if (obj == null) {
 			return false;
@@ -235,10 +240,12 @@ public class WikiPageResourceModelImpl extends BaseModelImpl<WikiPageResource>
 		}
 	}
 
+	@Override
 	public int hashCode() {
 		return (int)getPrimaryKey();
 	}
 
+	@Override
 	public void resetOriginalValues() {
 		WikiPageResourceModelImpl wikiPageResourceModelImpl = this;
 
@@ -249,6 +256,7 @@ public class WikiPageResourceModelImpl extends BaseModelImpl<WikiPageResource>
 		wikiPageResourceModelImpl._originalTitle = wikiPageResourceModelImpl._title;
 	}
 
+	@Override
 	public String toString() {
 		StringBundler sb = new StringBundler(9);
 

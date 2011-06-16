@@ -67,15 +67,25 @@ public class PhonePersistenceTest extends BasePersistenceTestCase {
 		Phone newPhone = _persistence.create(pk);
 
 		newPhone.setCompanyId(nextLong());
+
 		newPhone.setUserId(nextLong());
+
 		newPhone.setUserName(randomString());
+
 		newPhone.setCreateDate(nextDate());
+
 		newPhone.setModifiedDate(nextDate());
+
 		newPhone.setClassNameId(nextLong());
+
 		newPhone.setClassPK(nextLong());
+
 		newPhone.setNumber(randomString());
+
 		newPhone.setExtension(randomString());
+
 		newPhone.setTypeId(nextInt());
+
 		newPhone.setPrimary(randomBoolean());
 
 		_persistence.update(newPhone, false);
@@ -207,15 +217,25 @@ public class PhonePersistenceTest extends BasePersistenceTestCase {
 		Phone phone = _persistence.create(pk);
 
 		phone.setCompanyId(nextLong());
+
 		phone.setUserId(nextLong());
+
 		phone.setUserName(randomString());
+
 		phone.setCreateDate(nextDate());
+
 		phone.setModifiedDate(nextDate());
+
 		phone.setClassNameId(nextLong());
+
 		phone.setClassPK(nextLong());
+
 		phone.setNumber(randomString());
+
 		phone.setExtension(randomString());
+
 		phone.setTypeId(nextInt());
+
 		phone.setPrimary(randomBoolean());
 
 		_persistence.update(phone, false);

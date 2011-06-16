@@ -248,6 +248,7 @@ public class ExpandoValueWrapper implements ExpandoValue {
 		_expandoValue.setExpandoBridgeAttributes(serviceContext);
 	}
 
+	@Override
 	public java.lang.Object clone() {
 		return new ExpandoValueWrapper((ExpandoValue)_expandoValue.clone());
 	}
@@ -257,6 +258,7 @@ public class ExpandoValueWrapper implements ExpandoValue {
 		return _expandoValue.compareTo(expandoValue);
 	}
 
+	@Override
 	public int hashCode() {
 		return _expandoValue.hashCode();
 	}
@@ -265,6 +267,7 @@ public class ExpandoValueWrapper implements ExpandoValue {
 		return new ExpandoValueWrapper(_expandoValue.toEscapedModel());
 	}
 
+	@Override
 	public java.lang.String toString() {
 		return _expandoValue.toString();
 	}

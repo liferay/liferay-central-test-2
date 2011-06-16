@@ -282,6 +282,7 @@ public class RepositoryModelImpl extends BaseModelImpl<Repository>
 		_dlFolderId = dlFolderId;
 	}
 
+	@Override
 	public Repository toEscapedModel() {
 		if (isEscapedModel()) {
 			return (Repository)this;
@@ -292,6 +293,7 @@ public class RepositoryModelImpl extends BaseModelImpl<Repository>
 		}
 	}
 
+	@Override
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
 			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
@@ -301,10 +303,12 @@ public class RepositoryModelImpl extends BaseModelImpl<Repository>
 		return _expandoBridge;
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
 		getExpandoBridge().setAttributes(serviceContext);
 	}
 
+	@Override
 	public Object clone() {
 		RepositoryImpl repositoryImpl = new RepositoryImpl();
 
@@ -339,6 +343,7 @@ public class RepositoryModelImpl extends BaseModelImpl<Repository>
 		}
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		if (obj == null) {
 			return false;
@@ -363,13 +368,16 @@ public class RepositoryModelImpl extends BaseModelImpl<Repository>
 		}
 	}
 
+	@Override
 	public int hashCode() {
 		return (int)getPrimaryKey();
 	}
 
+	@Override
 	public void resetOriginalValues() {
 	}
 
+	@Override
 	public String toString() {
 		StringBundler sb = new StringBundler(23);
 

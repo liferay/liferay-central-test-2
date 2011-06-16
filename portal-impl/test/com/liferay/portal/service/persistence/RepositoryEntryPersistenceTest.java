@@ -32,7 +32,6 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class RepositoryEntryPersistenceTest extends BasePersistenceTestCase {
-	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 
@@ -69,8 +68,11 @@ public class RepositoryEntryPersistenceTest extends BasePersistenceTestCase {
 		RepositoryEntry newRepositoryEntry = _persistence.create(pk);
 
 		newRepositoryEntry.setUuid(randomString());
+
 		newRepositoryEntry.setGroupId(nextLong());
+
 		newRepositoryEntry.setRepositoryId(nextLong());
+
 		newRepositoryEntry.setMappedId(randomString());
 
 		_persistence.update(newRepositoryEntry, false);
@@ -225,8 +227,11 @@ public class RepositoryEntryPersistenceTest extends BasePersistenceTestCase {
 		RepositoryEntry repositoryEntry = _persistence.create(pk);
 
 		repositoryEntry.setUuid(randomString());
+
 		repositoryEntry.setGroupId(nextLong());
+
 		repositoryEntry.setRepositoryId(nextLong());
+
 		repositoryEntry.setMappedId(randomString());
 
 		_persistence.update(repositoryEntry, false);

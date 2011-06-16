@@ -33,7 +33,6 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class SocialEquitySettingPersistenceTest extends BasePersistenceTestCase {
-	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 
@@ -70,13 +69,21 @@ public class SocialEquitySettingPersistenceTest extends BasePersistenceTestCase 
 		SocialEquitySetting newSocialEquitySetting = _persistence.create(pk);
 
 		newSocialEquitySetting.setGroupId(nextLong());
+
 		newSocialEquitySetting.setCompanyId(nextLong());
+
 		newSocialEquitySetting.setClassNameId(nextLong());
+
 		newSocialEquitySetting.setActionId(randomString());
+
 		newSocialEquitySetting.setDailyLimit(nextInt());
+
 		newSocialEquitySetting.setLifespan(nextInt());
+
 		newSocialEquitySetting.setType(nextInt());
+
 		newSocialEquitySetting.setUniqueEntry(randomBoolean());
+
 		newSocialEquitySetting.setValue(nextInt());
 
 		_persistence.update(newSocialEquitySetting, false);
@@ -240,13 +247,21 @@ public class SocialEquitySettingPersistenceTest extends BasePersistenceTestCase 
 		SocialEquitySetting socialEquitySetting = _persistence.create(pk);
 
 		socialEquitySetting.setGroupId(nextLong());
+
 		socialEquitySetting.setCompanyId(nextLong());
+
 		socialEquitySetting.setClassNameId(nextLong());
+
 		socialEquitySetting.setActionId(randomString());
+
 		socialEquitySetting.setDailyLimit(nextInt());
+
 		socialEquitySetting.setLifespan(nextInt());
+
 		socialEquitySetting.setType(nextInt());
+
 		socialEquitySetting.setUniqueEntry(randomBoolean());
+
 		socialEquitySetting.setValue(nextInt());
 
 		_persistence.update(socialEquitySetting, false);

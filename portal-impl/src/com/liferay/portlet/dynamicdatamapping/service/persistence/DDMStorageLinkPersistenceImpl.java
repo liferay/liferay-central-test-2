@@ -155,6 +155,7 @@ public class DDMStorageLinkPersistenceImpl extends BasePersistenceImpl<DDMStorag
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache() {
 		if (_HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
 			CacheRegistryUtil.clear(DDMStorageLinkImpl.class.getName());
@@ -172,6 +173,7 @@ public class DDMStorageLinkPersistenceImpl extends BasePersistenceImpl<DDMStorag
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache(DDMStorageLink ddmStorageLink) {
 		EntityCacheUtil.removeResult(DDMStorageLinkModelImpl.ENTITY_CACHE_ENABLED,
 			DDMStorageLinkImpl.class, ddmStorageLink.getPrimaryKey());
@@ -207,6 +209,7 @@ public class DDMStorageLinkPersistenceImpl extends BasePersistenceImpl<DDMStorag
 	 * @throws com.liferay.portal.NoSuchModelException if a d d m storage link with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DDMStorageLink remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
@@ -259,11 +262,13 @@ public class DDMStorageLinkPersistenceImpl extends BasePersistenceImpl<DDMStorag
 	 * @return the d d m storage link that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DDMStorageLink remove(DDMStorageLink ddmStorageLink)
 		throws SystemException {
 		return super.remove(ddmStorageLink);
 	}
 
+	@Override
 	protected DDMStorageLink removeImpl(DDMStorageLink ddmStorageLink)
 		throws SystemException {
 		ddmStorageLink = toUnwrappedModel(ddmStorageLink);
@@ -295,6 +300,7 @@ public class DDMStorageLinkPersistenceImpl extends BasePersistenceImpl<DDMStorag
 		return ddmStorageLink;
 	}
 
+	@Override
 	public DDMStorageLink updateImpl(
 		com.liferay.portlet.dynamicdatamapping.model.DDMStorageLink ddmStorageLink,
 		boolean merge) throws SystemException {
@@ -377,6 +383,7 @@ public class DDMStorageLinkPersistenceImpl extends BasePersistenceImpl<DDMStorag
 	 * @throws com.liferay.portal.NoSuchModelException if a d d m storage link with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DDMStorageLink findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
@@ -413,6 +420,7 @@ public class DDMStorageLinkPersistenceImpl extends BasePersistenceImpl<DDMStorag
 	 * @return the d d m storage link, or <code>null</code> if a d d m storage link with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DDMStorageLink fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());

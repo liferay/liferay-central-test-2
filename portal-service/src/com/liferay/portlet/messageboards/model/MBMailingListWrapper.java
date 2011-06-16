@@ -628,6 +628,7 @@ public class MBMailingListWrapper implements MBMailingList {
 		_mbMailingList.setExpandoBridgeAttributes(serviceContext);
 	}
 
+	@Override
 	public java.lang.Object clone() {
 		return new MBMailingListWrapper((MBMailingList)_mbMailingList.clone());
 	}
@@ -637,6 +638,7 @@ public class MBMailingListWrapper implements MBMailingList {
 		return _mbMailingList.compareTo(mbMailingList);
 	}
 
+	@Override
 	public int hashCode() {
 		return _mbMailingList.hashCode();
 	}
@@ -645,6 +647,7 @@ public class MBMailingListWrapper implements MBMailingList {
 		return new MBMailingListWrapper(_mbMailingList.toEscapedModel());
 	}
 
+	@Override
 	public java.lang.String toString() {
 		return _mbMailingList.toString();
 	}

@@ -180,6 +180,7 @@ public class RatingsStatsModelImpl extends BaseModelImpl<RatingsStats>
 		_averageScore = averageScore;
 	}
 
+	@Override
 	public RatingsStats toEscapedModel() {
 		if (isEscapedModel()) {
 			return (RatingsStats)this;
@@ -190,6 +191,7 @@ public class RatingsStatsModelImpl extends BaseModelImpl<RatingsStats>
 		}
 	}
 
+	@Override
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
 			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(0,
@@ -199,10 +201,12 @@ public class RatingsStatsModelImpl extends BaseModelImpl<RatingsStats>
 		return _expandoBridge;
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
 		getExpandoBridge().setAttributes(serviceContext);
 	}
 
+	@Override
 	public Object clone() {
 		RatingsStatsImpl ratingsStatsImpl = new RatingsStatsImpl();
 
@@ -232,6 +236,7 @@ public class RatingsStatsModelImpl extends BaseModelImpl<RatingsStats>
 		}
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		if (obj == null) {
 			return false;
@@ -256,10 +261,12 @@ public class RatingsStatsModelImpl extends BaseModelImpl<RatingsStats>
 		}
 	}
 
+	@Override
 	public int hashCode() {
 		return (int)getPrimaryKey();
 	}
 
+	@Override
 	public void resetOriginalValues() {
 		RatingsStatsModelImpl ratingsStatsModelImpl = this;
 
@@ -272,6 +279,7 @@ public class RatingsStatsModelImpl extends BaseModelImpl<RatingsStats>
 		ratingsStatsModelImpl._setOriginalClassPK = false;
 	}
 
+	@Override
 	public String toString() {
 		StringBundler sb = new StringBundler(13);
 

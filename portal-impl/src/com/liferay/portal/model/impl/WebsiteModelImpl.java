@@ -288,6 +288,7 @@ public class WebsiteModelImpl extends BaseModelImpl<Website>
 		_primary = primary;
 	}
 
+	@Override
 	public Website toEscapedModel() {
 		if (isEscapedModel()) {
 			return (Website)this;
@@ -298,6 +299,7 @@ public class WebsiteModelImpl extends BaseModelImpl<Website>
 		}
 	}
 
+	@Override
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
 			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
@@ -307,10 +309,12 @@ public class WebsiteModelImpl extends BaseModelImpl<Website>
 		return _expandoBridge;
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
 		getExpandoBridge().setAttributes(serviceContext);
 	}
 
+	@Override
 	public Object clone() {
 		WebsiteImpl websiteImpl = new WebsiteImpl();
 
@@ -343,6 +347,7 @@ public class WebsiteModelImpl extends BaseModelImpl<Website>
 		return 0;
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		if (obj == null) {
 			return false;
@@ -367,13 +372,16 @@ public class WebsiteModelImpl extends BaseModelImpl<Website>
 		}
 	}
 
+	@Override
 	public int hashCode() {
 		return (int)getPrimaryKey();
 	}
 
+	@Override
 	public void resetOriginalValues() {
 	}
 
+	@Override
 	public String toString() {
 		StringBundler sb = new StringBundler(23);
 

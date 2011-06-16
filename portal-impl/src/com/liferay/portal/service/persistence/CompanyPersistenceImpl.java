@@ -149,6 +149,7 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache() {
 		if (_HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
 			CacheRegistryUtil.clear(CompanyImpl.class.getName());
@@ -166,6 +167,7 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache(Company company) {
 		EntityCacheUtil.removeResult(CompanyModelImpl.ENTITY_CACHE_ENABLED,
 			CompanyImpl.class, company.getPrimaryKey());
@@ -203,6 +205,7 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 	 * @throws com.liferay.portal.NoSuchModelException if a company with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Company remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
@@ -255,10 +258,12 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 	 * @return the company that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Company remove(Company company) throws SystemException {
 		return super.remove(company);
 	}
 
+	@Override
 	protected Company removeImpl(Company company) throws SystemException {
 		company = toUnwrappedModel(company);
 
@@ -295,6 +300,7 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 		return company;
 	}
 
+	@Override
 	public Company updateImpl(com.liferay.portal.model.Company company,
 		boolean merge) throws SystemException {
 		company = toUnwrappedModel(company);
@@ -399,6 +405,7 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 	 * @throws com.liferay.portal.NoSuchModelException if a company with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Company findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
@@ -435,6 +442,7 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 	 * @return the company, or <code>null</code> if a company with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Company fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());

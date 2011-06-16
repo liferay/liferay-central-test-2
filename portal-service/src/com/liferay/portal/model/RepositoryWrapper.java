@@ -302,6 +302,7 @@ public class RepositoryWrapper implements Repository {
 		_repository.setExpandoBridgeAttributes(serviceContext);
 	}
 
+	@Override
 	public java.lang.Object clone() {
 		return new RepositoryWrapper((Repository)_repository.clone());
 	}
@@ -310,6 +311,7 @@ public class RepositoryWrapper implements Repository {
 		return _repository.compareTo(repository);
 	}
 
+	@Override
 	public int hashCode() {
 		return _repository.hashCode();
 	}
@@ -318,6 +320,7 @@ public class RepositoryWrapper implements Repository {
 		return new RepositoryWrapper(_repository.toEscapedModel());
 	}
 
+	@Override
 	public java.lang.String toString() {
 		return _repository.toString();
 	}

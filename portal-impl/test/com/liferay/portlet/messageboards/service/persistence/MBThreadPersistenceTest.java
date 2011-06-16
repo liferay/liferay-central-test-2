@@ -33,7 +33,6 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class MBThreadPersistenceTest extends BasePersistenceTestCase {
-	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 
@@ -70,18 +69,31 @@ public class MBThreadPersistenceTest extends BasePersistenceTestCase {
 		MBThread newMBThread = _persistence.create(pk);
 
 		newMBThread.setGroupId(nextLong());
+
 		newMBThread.setCompanyId(nextLong());
+
 		newMBThread.setCategoryId(nextLong());
+
 		newMBThread.setRootMessageId(nextLong());
+
 		newMBThread.setRootMessageUserId(nextLong());
+
 		newMBThread.setMessageCount(nextInt());
+
 		newMBThread.setViewCount(nextInt());
+
 		newMBThread.setLastPostByUserId(nextLong());
+
 		newMBThread.setLastPostDate(nextDate());
+
 		newMBThread.setPriority(nextDouble());
+
 		newMBThread.setStatus(nextInt());
+
 		newMBThread.setStatusByUserId(nextLong());
+
 		newMBThread.setStatusByUserName(randomString());
+
 		newMBThread.setStatusDate(nextDate());
 
 		_persistence.update(newMBThread, false);
@@ -238,18 +250,31 @@ public class MBThreadPersistenceTest extends BasePersistenceTestCase {
 		MBThread mbThread = _persistence.create(pk);
 
 		mbThread.setGroupId(nextLong());
+
 		mbThread.setCompanyId(nextLong());
+
 		mbThread.setCategoryId(nextLong());
+
 		mbThread.setRootMessageId(nextLong());
+
 		mbThread.setRootMessageUserId(nextLong());
+
 		mbThread.setMessageCount(nextInt());
+
 		mbThread.setViewCount(nextInt());
+
 		mbThread.setLastPostByUserId(nextLong());
+
 		mbThread.setLastPostDate(nextDate());
+
 		mbThread.setPriority(nextDouble());
+
 		mbThread.setStatus(nextInt());
+
 		mbThread.setStatusByUserId(nextLong());
+
 		mbThread.setStatusByUserName(randomString());
+
 		mbThread.setStatusDate(nextDate());
 
 		_persistence.update(mbThread, false);

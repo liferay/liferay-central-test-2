@@ -155,6 +155,7 @@ public class DDMStructureLinkPersistenceImpl extends BasePersistenceImpl<DDMStru
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache() {
 		if (_HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
 			CacheRegistryUtil.clear(DDMStructureLinkImpl.class.getName());
@@ -172,6 +173,7 @@ public class DDMStructureLinkPersistenceImpl extends BasePersistenceImpl<DDMStru
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache(DDMStructureLink ddmStructureLink) {
 		EntityCacheUtil.removeResult(DDMStructureLinkModelImpl.ENTITY_CACHE_ENABLED,
 			DDMStructureLinkImpl.class, ddmStructureLink.getPrimaryKey());
@@ -203,6 +205,7 @@ public class DDMStructureLinkPersistenceImpl extends BasePersistenceImpl<DDMStru
 	 * @throws com.liferay.portal.NoSuchModelException if a d d m structure link with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DDMStructureLink remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
@@ -256,11 +259,13 @@ public class DDMStructureLinkPersistenceImpl extends BasePersistenceImpl<DDMStru
 	 * @return the d d m structure link that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DDMStructureLink remove(DDMStructureLink ddmStructureLink)
 		throws SystemException {
 		return super.remove(ddmStructureLink);
 	}
 
+	@Override
 	protected DDMStructureLink removeImpl(DDMStructureLink ddmStructureLink)
 		throws SystemException {
 		ddmStructureLink = toUnwrappedModel(ddmStructureLink);
@@ -292,6 +297,7 @@ public class DDMStructureLinkPersistenceImpl extends BasePersistenceImpl<DDMStru
 		return ddmStructureLink;
 	}
 
+	@Override
 	public DDMStructureLink updateImpl(
 		com.liferay.portlet.dynamicdatamapping.model.DDMStructureLink ddmStructureLink,
 		boolean merge) throws SystemException {
@@ -368,6 +374,7 @@ public class DDMStructureLinkPersistenceImpl extends BasePersistenceImpl<DDMStru
 	 * @throws com.liferay.portal.NoSuchModelException if a d d m structure link with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DDMStructureLink findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
@@ -404,6 +411,7 @@ public class DDMStructureLinkPersistenceImpl extends BasePersistenceImpl<DDMStru
 	 * @return the d d m structure link, or <code>null</code> if a d d m structure link with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DDMStructureLink fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());

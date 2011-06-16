@@ -34,7 +34,6 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class MBMailingListPersistenceTest extends BasePersistenceTestCase {
-	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 
@@ -71,29 +70,53 @@ public class MBMailingListPersistenceTest extends BasePersistenceTestCase {
 		MBMailingList newMBMailingList = _persistence.create(pk);
 
 		newMBMailingList.setUuid(randomString());
+
 		newMBMailingList.setGroupId(nextLong());
+
 		newMBMailingList.setCompanyId(nextLong());
+
 		newMBMailingList.setUserId(nextLong());
+
 		newMBMailingList.setUserName(randomString());
+
 		newMBMailingList.setCreateDate(nextDate());
+
 		newMBMailingList.setModifiedDate(nextDate());
+
 		newMBMailingList.setCategoryId(nextLong());
+
 		newMBMailingList.setEmailAddress(randomString());
+
 		newMBMailingList.setInProtocol(randomString());
+
 		newMBMailingList.setInServerName(randomString());
+
 		newMBMailingList.setInServerPort(nextInt());
+
 		newMBMailingList.setInUseSSL(randomBoolean());
+
 		newMBMailingList.setInUserName(randomString());
+
 		newMBMailingList.setInPassword(randomString());
+
 		newMBMailingList.setInReadInterval(nextInt());
+
 		newMBMailingList.setOutEmailAddress(randomString());
+
 		newMBMailingList.setOutCustom(randomBoolean());
+
 		newMBMailingList.setOutServerName(randomString());
+
 		newMBMailingList.setOutServerPort(nextInt());
+
 		newMBMailingList.setOutUseSSL(randomBoolean());
+
 		newMBMailingList.setOutUserName(randomString());
+
 		newMBMailingList.setOutPassword(randomString());
+
 		newMBMailingList.setAllowAnonymous(randomBoolean());
+
 		newMBMailingList.setActive(randomBoolean());
 
 		_persistence.update(newMBMailingList, false);
@@ -288,29 +311,53 @@ public class MBMailingListPersistenceTest extends BasePersistenceTestCase {
 		MBMailingList mbMailingList = _persistence.create(pk);
 
 		mbMailingList.setUuid(randomString());
+
 		mbMailingList.setGroupId(nextLong());
+
 		mbMailingList.setCompanyId(nextLong());
+
 		mbMailingList.setUserId(nextLong());
+
 		mbMailingList.setUserName(randomString());
+
 		mbMailingList.setCreateDate(nextDate());
+
 		mbMailingList.setModifiedDate(nextDate());
+
 		mbMailingList.setCategoryId(nextLong());
+
 		mbMailingList.setEmailAddress(randomString());
+
 		mbMailingList.setInProtocol(randomString());
+
 		mbMailingList.setInServerName(randomString());
+
 		mbMailingList.setInServerPort(nextInt());
+
 		mbMailingList.setInUseSSL(randomBoolean());
+
 		mbMailingList.setInUserName(randomString());
+
 		mbMailingList.setInPassword(randomString());
+
 		mbMailingList.setInReadInterval(nextInt());
+
 		mbMailingList.setOutEmailAddress(randomString());
+
 		mbMailingList.setOutCustom(randomBoolean());
+
 		mbMailingList.setOutServerName(randomString());
+
 		mbMailingList.setOutServerPort(nextInt());
+
 		mbMailingList.setOutUseSSL(randomBoolean());
+
 		mbMailingList.setOutUserName(randomString());
+
 		mbMailingList.setOutPassword(randomString());
+
 		mbMailingList.setAllowAnonymous(randomBoolean());
+
 		mbMailingList.setActive(randomBoolean());
 
 		_persistence.update(mbMailingList, false);

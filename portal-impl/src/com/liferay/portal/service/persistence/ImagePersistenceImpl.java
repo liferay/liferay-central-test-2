@@ -122,6 +122,7 @@ public class ImagePersistenceImpl extends BasePersistenceImpl<Image>
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache() {
 		if (_HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
 			CacheRegistryUtil.clear(ImageImpl.class.getName());
@@ -139,6 +140,7 @@ public class ImagePersistenceImpl extends BasePersistenceImpl<Image>
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache(Image image) {
 		EntityCacheUtil.removeResult(ImageModelImpl.ENTITY_CACHE_ENABLED,
 			ImageImpl.class, image.getPrimaryKey());
@@ -167,6 +169,7 @@ public class ImagePersistenceImpl extends BasePersistenceImpl<Image>
 	 * @throws com.liferay.portal.NoSuchModelException if a image with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Image remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
@@ -219,10 +222,12 @@ public class ImagePersistenceImpl extends BasePersistenceImpl<Image>
 	 * @return the image that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Image remove(Image image) throws SystemException {
 		return super.remove(image);
 	}
 
+	@Override
 	protected Image removeImpl(Image image) throws SystemException {
 		image = toUnwrappedModel(image);
 
@@ -248,6 +253,7 @@ public class ImagePersistenceImpl extends BasePersistenceImpl<Image>
 		return image;
 	}
 
+	@Override
 	public Image updateImpl(com.liferay.portal.model.Image image, boolean merge)
 		throws SystemException {
 		image = toUnwrappedModel(image);
@@ -305,6 +311,7 @@ public class ImagePersistenceImpl extends BasePersistenceImpl<Image>
 	 * @throws com.liferay.portal.NoSuchModelException if a image with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Image findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
@@ -341,6 +348,7 @@ public class ImagePersistenceImpl extends BasePersistenceImpl<Image>
 	 * @return the image, or <code>null</code> if a image with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Image fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());

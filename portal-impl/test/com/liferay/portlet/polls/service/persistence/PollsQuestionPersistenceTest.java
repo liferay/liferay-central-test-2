@@ -34,7 +34,6 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class PollsQuestionPersistenceTest extends BasePersistenceTestCase {
-	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 
@@ -71,15 +70,25 @@ public class PollsQuestionPersistenceTest extends BasePersistenceTestCase {
 		PollsQuestion newPollsQuestion = _persistence.create(pk);
 
 		newPollsQuestion.setUuid(randomString());
+
 		newPollsQuestion.setGroupId(nextLong());
+
 		newPollsQuestion.setCompanyId(nextLong());
+
 		newPollsQuestion.setUserId(nextLong());
+
 		newPollsQuestion.setUserName(randomString());
+
 		newPollsQuestion.setCreateDate(nextDate());
+
 		newPollsQuestion.setModifiedDate(nextDate());
+
 		newPollsQuestion.setTitle(randomString());
+
 		newPollsQuestion.setDescription(randomString());
+
 		newPollsQuestion.setExpirationDate(nextDate());
+
 		newPollsQuestion.setLastVoteDate(nextDate());
 
 		_persistence.update(newPollsQuestion, false);
@@ -241,15 +250,25 @@ public class PollsQuestionPersistenceTest extends BasePersistenceTestCase {
 		PollsQuestion pollsQuestion = _persistence.create(pk);
 
 		pollsQuestion.setUuid(randomString());
+
 		pollsQuestion.setGroupId(nextLong());
+
 		pollsQuestion.setCompanyId(nextLong());
+
 		pollsQuestion.setUserId(nextLong());
+
 		pollsQuestion.setUserName(randomString());
+
 		pollsQuestion.setCreateDate(nextDate());
+
 		pollsQuestion.setModifiedDate(nextDate());
+
 		pollsQuestion.setTitle(randomString());
+
 		pollsQuestion.setDescription(randomString());
+
 		pollsQuestion.setExpirationDate(nextDate());
+
 		pollsQuestion.setLastVoteDate(nextDate());
 
 		_persistence.update(pollsQuestion, false);

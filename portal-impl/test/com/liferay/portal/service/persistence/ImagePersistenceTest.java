@@ -67,10 +67,15 @@ public class ImagePersistenceTest extends BasePersistenceTestCase {
 		Image newImage = _persistence.create(pk);
 
 		newImage.setModifiedDate(nextDate());
+
 		newImage.setText(randomString());
+
 		newImage.setType(randomString());
+
 		newImage.setHeight(nextInt());
+
 		newImage.setWidth(nextInt());
+
 		newImage.setSize(nextInt());
 
 		_persistence.update(newImage, false);
@@ -196,10 +201,15 @@ public class ImagePersistenceTest extends BasePersistenceTestCase {
 		Image image = _persistence.create(pk);
 
 		image.setModifiedDate(nextDate());
+
 		image.setText(randomString());
+
 		image.setType(randomString());
+
 		image.setHeight(nextInt());
+
 		image.setWidth(nextInt());
+
 		image.setSize(nextInt());
 
 		_persistence.update(image, false);

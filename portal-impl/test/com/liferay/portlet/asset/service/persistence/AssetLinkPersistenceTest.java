@@ -33,7 +33,6 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class AssetLinkPersistenceTest extends BasePersistenceTestCase {
-	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 
@@ -70,12 +69,19 @@ public class AssetLinkPersistenceTest extends BasePersistenceTestCase {
 		AssetLink newAssetLink = _persistence.create(pk);
 
 		newAssetLink.setCompanyId(nextLong());
+
 		newAssetLink.setUserId(nextLong());
+
 		newAssetLink.setUserName(randomString());
+
 		newAssetLink.setCreateDate(nextDate());
+
 		newAssetLink.setEntryId1(nextLong());
+
 		newAssetLink.setEntryId2(nextLong());
+
 		newAssetLink.setType(nextInt());
+
 		newAssetLink.setWeight(nextInt());
 
 		_persistence.update(newAssetLink, false);
@@ -223,12 +229,19 @@ public class AssetLinkPersistenceTest extends BasePersistenceTestCase {
 		AssetLink assetLink = _persistence.create(pk);
 
 		assetLink.setCompanyId(nextLong());
+
 		assetLink.setUserId(nextLong());
+
 		assetLink.setUserName(randomString());
+
 		assetLink.setCreateDate(nextDate());
+
 		assetLink.setEntryId1(nextLong());
+
 		assetLink.setEntryId2(nextLong());
+
 		assetLink.setType(nextInt());
+
 		assetLink.setWeight(nextInt());
 
 		_persistence.update(assetLink, false);

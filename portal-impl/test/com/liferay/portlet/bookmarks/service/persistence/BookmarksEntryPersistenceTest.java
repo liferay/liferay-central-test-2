@@ -34,7 +34,6 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class BookmarksEntryPersistenceTest extends BasePersistenceTestCase {
-	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 
@@ -71,17 +70,29 @@ public class BookmarksEntryPersistenceTest extends BasePersistenceTestCase {
 		BookmarksEntry newBookmarksEntry = _persistence.create(pk);
 
 		newBookmarksEntry.setUuid(randomString());
+
 		newBookmarksEntry.setGroupId(nextLong());
+
 		newBookmarksEntry.setCompanyId(nextLong());
+
 		newBookmarksEntry.setUserId(nextLong());
+
 		newBookmarksEntry.setUserName(randomString());
+
 		newBookmarksEntry.setCreateDate(nextDate());
+
 		newBookmarksEntry.setModifiedDate(nextDate());
+
 		newBookmarksEntry.setFolderId(nextLong());
+
 		newBookmarksEntry.setName(randomString());
+
 		newBookmarksEntry.setUrl(randomString());
+
 		newBookmarksEntry.setDescription(randomString());
+
 		newBookmarksEntry.setVisits(nextInt());
+
 		newBookmarksEntry.setPriority(nextInt());
 
 		_persistence.update(newBookmarksEntry, false);
@@ -245,17 +256,29 @@ public class BookmarksEntryPersistenceTest extends BasePersistenceTestCase {
 		BookmarksEntry bookmarksEntry = _persistence.create(pk);
 
 		bookmarksEntry.setUuid(randomString());
+
 		bookmarksEntry.setGroupId(nextLong());
+
 		bookmarksEntry.setCompanyId(nextLong());
+
 		bookmarksEntry.setUserId(nextLong());
+
 		bookmarksEntry.setUserName(randomString());
+
 		bookmarksEntry.setCreateDate(nextDate());
+
 		bookmarksEntry.setModifiedDate(nextDate());
+
 		bookmarksEntry.setFolderId(nextLong());
+
 		bookmarksEntry.setName(randomString());
+
 		bookmarksEntry.setUrl(randomString());
+
 		bookmarksEntry.setDescription(randomString());
+
 		bookmarksEntry.setVisits(nextInt());
+
 		bookmarksEntry.setPriority(nextInt());
 
 		_persistence.update(bookmarksEntry, false);

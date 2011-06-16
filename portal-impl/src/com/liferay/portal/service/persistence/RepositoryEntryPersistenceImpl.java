@@ -168,6 +168,7 @@ public class RepositoryEntryPersistenceImpl extends BasePersistenceImpl<Reposito
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache() {
 		if (_HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
 			CacheRegistryUtil.clear(RepositoryEntryImpl.class.getName());
@@ -185,6 +186,7 @@ public class RepositoryEntryPersistenceImpl extends BasePersistenceImpl<Reposito
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache(RepositoryEntry repositoryEntry) {
 		EntityCacheUtil.removeResult(RepositoryEntryModelImpl.ENTITY_CACHE_ENABLED,
 			RepositoryEntryImpl.class, repositoryEntry.getPrimaryKey());
@@ -230,6 +232,7 @@ public class RepositoryEntryPersistenceImpl extends BasePersistenceImpl<Reposito
 	 * @throws com.liferay.portal.NoSuchModelException if a repository entry with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public RepositoryEntry remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
@@ -283,11 +286,13 @@ public class RepositoryEntryPersistenceImpl extends BasePersistenceImpl<Reposito
 	 * @return the repository entry that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public RepositoryEntry remove(RepositoryEntry repositoryEntry)
 		throws SystemException {
 		return super.remove(repositoryEntry);
 	}
 
+	@Override
 	protected RepositoryEntry removeImpl(RepositoryEntry repositoryEntry)
 		throws SystemException {
 		repositoryEntry = toUnwrappedModel(repositoryEntry);
@@ -329,6 +334,7 @@ public class RepositoryEntryPersistenceImpl extends BasePersistenceImpl<Reposito
 		return repositoryEntry;
 	}
 
+	@Override
 	public RepositoryEntry updateImpl(
 		com.liferay.portal.model.RepositoryEntry repositoryEntry, boolean merge)
 		throws SystemException {
@@ -443,6 +449,7 @@ public class RepositoryEntryPersistenceImpl extends BasePersistenceImpl<Reposito
 	 * @throws com.liferay.portal.NoSuchModelException if a repository entry with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public RepositoryEntry findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
@@ -479,6 +486,7 @@ public class RepositoryEntryPersistenceImpl extends BasePersistenceImpl<Reposito
 	 * @return the repository entry, or <code>null</code> if a repository entry with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public RepositoryEntry fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());

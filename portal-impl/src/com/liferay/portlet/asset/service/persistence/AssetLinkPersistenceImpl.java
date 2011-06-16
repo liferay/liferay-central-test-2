@@ -197,6 +197,7 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache() {
 		if (_HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
 			CacheRegistryUtil.clear(AssetLinkImpl.class.getName());
@@ -214,6 +215,7 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache(AssetLink assetLink) {
 		EntityCacheUtil.removeResult(AssetLinkModelImpl.ENTITY_CACHE_ENABLED,
 			AssetLinkImpl.class, assetLink.getPrimaryKey());
@@ -249,6 +251,7 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 	 * @throws com.liferay.portal.NoSuchModelException if a asset link with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AssetLink remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
@@ -301,10 +304,12 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 	 * @return the asset link that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AssetLink remove(AssetLink assetLink) throws SystemException {
 		return super.remove(assetLink);
 	}
 
+	@Override
 	protected AssetLink removeImpl(AssetLink assetLink)
 		throws SystemException {
 		assetLink = toUnwrappedModel(assetLink);
@@ -340,6 +345,7 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 		return assetLink;
 	}
 
+	@Override
 	public AssetLink updateImpl(
 		com.liferay.portlet.asset.model.AssetLink assetLink, boolean merge)
 		throws SystemException {
@@ -428,6 +434,7 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 	 * @throws com.liferay.portal.NoSuchModelException if a asset link with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AssetLink findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
@@ -464,6 +471,7 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 	 * @return the asset link, or <code>null</code> if a asset link with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AssetLink fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());

@@ -187,6 +187,7 @@ public class PasswordTrackerWrapper implements PasswordTracker {
 		_passwordTracker.setExpandoBridgeAttributes(serviceContext);
 	}
 
+	@Override
 	public java.lang.Object clone() {
 		return new PasswordTrackerWrapper((PasswordTracker)_passwordTracker.clone());
 	}
@@ -196,6 +197,7 @@ public class PasswordTrackerWrapper implements PasswordTracker {
 		return _passwordTracker.compareTo(passwordTracker);
 	}
 
+	@Override
 	public int hashCode() {
 		return _passwordTracker.hashCode();
 	}
@@ -204,6 +206,7 @@ public class PasswordTrackerWrapper implements PasswordTracker {
 		return new PasswordTrackerWrapper(_passwordTracker.toEscapedModel());
 	}
 
+	@Override
 	public java.lang.String toString() {
 		return _passwordTracker.toString();
 	}

@@ -312,6 +312,7 @@ public class WikiNodeModelImpl extends BaseModelImpl<WikiNode>
 		_lastPostDate = lastPostDate;
 	}
 
+	@Override
 	public WikiNode toEscapedModel() {
 		if (isEscapedModel()) {
 			return (WikiNode)this;
@@ -322,6 +323,7 @@ public class WikiNodeModelImpl extends BaseModelImpl<WikiNode>
 		}
 	}
 
+	@Override
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
 			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
@@ -331,10 +333,12 @@ public class WikiNodeModelImpl extends BaseModelImpl<WikiNode>
 		return _expandoBridge;
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
 		getExpandoBridge().setAttributes(serviceContext);
 	}
 
+	@Override
 	public Object clone() {
 		WikiNodeImpl wikiNodeImpl = new WikiNodeImpl();
 
@@ -368,6 +372,7 @@ public class WikiNodeModelImpl extends BaseModelImpl<WikiNode>
 		return 0;
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		if (obj == null) {
 			return false;
@@ -392,10 +397,12 @@ public class WikiNodeModelImpl extends BaseModelImpl<WikiNode>
 		}
 	}
 
+	@Override
 	public int hashCode() {
 		return (int)getPrimaryKey();
 	}
 
+	@Override
 	public void resetOriginalValues() {
 		WikiNodeModelImpl wikiNodeModelImpl = this;
 
@@ -408,6 +415,7 @@ public class WikiNodeModelImpl extends BaseModelImpl<WikiNode>
 		wikiNodeModelImpl._originalName = wikiNodeModelImpl._name;
 	}
 
+	@Override
 	public String toString() {
 		StringBundler sb = new StringBundler(23);
 

@@ -139,6 +139,7 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache() {
 		if (_HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
 			CacheRegistryUtil.clear(ServiceComponentImpl.class.getName());
@@ -156,6 +157,7 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache(ServiceComponent serviceComponent) {
 		EntityCacheUtil.removeResult(ServiceComponentModelImpl.ENTITY_CACHE_ENABLED,
 			ServiceComponentImpl.class, serviceComponent.getPrimaryKey());
@@ -190,6 +192,7 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 	 * @throws com.liferay.portal.NoSuchModelException if a service component with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ServiceComponent remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
@@ -243,11 +246,13 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 	 * @return the service component that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ServiceComponent remove(ServiceComponent serviceComponent)
 		throws SystemException {
 		return super.remove(serviceComponent);
 	}
 
+	@Override
 	protected ServiceComponent removeImpl(ServiceComponent serviceComponent)
 		throws SystemException {
 		serviceComponent = toUnwrappedModel(serviceComponent);
@@ -282,6 +287,7 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 		return serviceComponent;
 	}
 
+	@Override
 	public ServiceComponent updateImpl(
 		com.liferay.portal.model.ServiceComponent serviceComponent,
 		boolean merge) throws SystemException {
@@ -367,6 +373,7 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 	 * @throws com.liferay.portal.NoSuchModelException if a service component with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ServiceComponent findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
@@ -404,6 +411,7 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 	 * @return the service component, or <code>null</code> if a service component with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ServiceComponent fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());

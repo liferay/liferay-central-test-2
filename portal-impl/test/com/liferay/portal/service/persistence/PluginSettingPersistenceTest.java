@@ -69,9 +69,13 @@ public class PluginSettingPersistenceTest extends BasePersistenceTestCase {
 		PluginSetting newPluginSetting = _persistence.create(pk);
 
 		newPluginSetting.setCompanyId(nextLong());
+
 		newPluginSetting.setPluginId(randomString());
+
 		newPluginSetting.setPluginType(randomString());
+
 		newPluginSetting.setRoles(randomString());
+
 		newPluginSetting.setActive(randomBoolean());
 
 		_persistence.update(newPluginSetting, false);
@@ -225,9 +229,13 @@ public class PluginSettingPersistenceTest extends BasePersistenceTestCase {
 		PluginSetting pluginSetting = _persistence.create(pk);
 
 		pluginSetting.setCompanyId(nextLong());
+
 		pluginSetting.setPluginId(randomString());
+
 		pluginSetting.setPluginType(randomString());
+
 		pluginSetting.setRoles(randomString());
+
 		pluginSetting.setActive(randomBoolean());
 
 		_persistence.update(pluginSetting, false);

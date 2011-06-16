@@ -34,7 +34,6 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class SCProductEntryPersistenceTest extends BasePersistenceTestCase {
-	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 
@@ -71,19 +70,33 @@ public class SCProductEntryPersistenceTest extends BasePersistenceTestCase {
 		SCProductEntry newSCProductEntry = _persistence.create(pk);
 
 		newSCProductEntry.setGroupId(nextLong());
+
 		newSCProductEntry.setCompanyId(nextLong());
+
 		newSCProductEntry.setUserId(nextLong());
+
 		newSCProductEntry.setUserName(randomString());
+
 		newSCProductEntry.setCreateDate(nextDate());
+
 		newSCProductEntry.setModifiedDate(nextDate());
+
 		newSCProductEntry.setName(randomString());
+
 		newSCProductEntry.setType(randomString());
+
 		newSCProductEntry.setTags(randomString());
+
 		newSCProductEntry.setShortDescription(randomString());
+
 		newSCProductEntry.setLongDescription(randomString());
+
 		newSCProductEntry.setPageURL(randomString());
+
 		newSCProductEntry.setAuthor(randomString());
+
 		newSCProductEntry.setRepoGroupId(randomString());
+
 		newSCProductEntry.setRepoArtifactId(randomString());
 
 		_persistence.update(newSCProductEntry, false);
@@ -256,19 +269,33 @@ public class SCProductEntryPersistenceTest extends BasePersistenceTestCase {
 		SCProductEntry scProductEntry = _persistence.create(pk);
 
 		scProductEntry.setGroupId(nextLong());
+
 		scProductEntry.setCompanyId(nextLong());
+
 		scProductEntry.setUserId(nextLong());
+
 		scProductEntry.setUserName(randomString());
+
 		scProductEntry.setCreateDate(nextDate());
+
 		scProductEntry.setModifiedDate(nextDate());
+
 		scProductEntry.setName(randomString());
+
 		scProductEntry.setType(randomString());
+
 		scProductEntry.setTags(randomString());
+
 		scProductEntry.setShortDescription(randomString());
+
 		scProductEntry.setLongDescription(randomString());
+
 		scProductEntry.setPageURL(randomString());
+
 		scProductEntry.setAuthor(randomString());
+
 		scProductEntry.setRepoGroupId(randomString());
+
 		scProductEntry.setRepoArtifactId(randomString());
 
 		_persistence.update(scProductEntry, false);

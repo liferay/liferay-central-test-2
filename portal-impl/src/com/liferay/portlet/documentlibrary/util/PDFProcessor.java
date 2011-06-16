@@ -94,6 +94,7 @@ public class PDFProcessor extends DLProcessor {
 		return hasImages;
 	}
 
+	@Override
 	public void trigger(FileEntry fileEntry) {
 		_instance._queueGeneration(fileEntry);
 	}

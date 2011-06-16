@@ -170,6 +170,7 @@ public class UserGroupRoleWrapper implements UserGroupRole {
 		_userGroupRole.setExpandoBridgeAttributes(serviceContext);
 	}
 
+	@Override
 	public java.lang.Object clone() {
 		return new UserGroupRoleWrapper((UserGroupRole)_userGroupRole.clone());
 	}
@@ -178,6 +179,7 @@ public class UserGroupRoleWrapper implements UserGroupRole {
 		return _userGroupRole.compareTo(userGroupRole);
 	}
 
+	@Override
 	public int hashCode() {
 		return _userGroupRole.hashCode();
 	}
@@ -186,6 +188,7 @@ public class UserGroupRoleWrapper implements UserGroupRole {
 		return new UserGroupRoleWrapper(_userGroupRole.toEscapedModel());
 	}
 
+	@Override
 	public java.lang.String toString() {
 		return _userGroupRole.toString();
 	}

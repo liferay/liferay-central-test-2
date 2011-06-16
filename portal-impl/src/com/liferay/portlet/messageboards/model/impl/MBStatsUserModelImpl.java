@@ -183,6 +183,7 @@ public class MBStatsUserModelImpl extends BaseModelImpl<MBStatsUser>
 		_lastPostDate = lastPostDate;
 	}
 
+	@Override
 	public MBStatsUser toEscapedModel() {
 		if (isEscapedModel()) {
 			return (MBStatsUser)this;
@@ -193,6 +194,7 @@ public class MBStatsUserModelImpl extends BaseModelImpl<MBStatsUser>
 		}
 	}
 
+	@Override
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
 			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(0,
@@ -202,10 +204,12 @@ public class MBStatsUserModelImpl extends BaseModelImpl<MBStatsUser>
 		return _expandoBridge;
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
 		getExpandoBridge().setAttributes(serviceContext);
 	}
 
+	@Override
 	public Object clone() {
 		MBStatsUserImpl mbStatsUserImpl = new MBStatsUserImpl();
 
@@ -242,6 +246,7 @@ public class MBStatsUserModelImpl extends BaseModelImpl<MBStatsUser>
 		return 0;
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		if (obj == null) {
 			return false;
@@ -266,10 +271,12 @@ public class MBStatsUserModelImpl extends BaseModelImpl<MBStatsUser>
 		}
 	}
 
+	@Override
 	public int hashCode() {
 		return (int)getPrimaryKey();
 	}
 
+	@Override
 	public void resetOriginalValues() {
 		MBStatsUserModelImpl mbStatsUserModelImpl = this;
 
@@ -282,6 +289,7 @@ public class MBStatsUserModelImpl extends BaseModelImpl<MBStatsUser>
 		mbStatsUserModelImpl._setOriginalUserId = false;
 	}
 
+	@Override
 	public String toString() {
 		StringBundler sb = new StringBundler(11);
 

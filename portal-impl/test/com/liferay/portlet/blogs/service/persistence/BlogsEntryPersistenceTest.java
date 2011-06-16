@@ -34,7 +34,6 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class BlogsEntryPersistenceTest extends BasePersistenceTestCase {
-	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 
@@ -71,26 +70,47 @@ public class BlogsEntryPersistenceTest extends BasePersistenceTestCase {
 		BlogsEntry newBlogsEntry = _persistence.create(pk);
 
 		newBlogsEntry.setUuid(randomString());
+
 		newBlogsEntry.setGroupId(nextLong());
+
 		newBlogsEntry.setCompanyId(nextLong());
+
 		newBlogsEntry.setUserId(nextLong());
+
 		newBlogsEntry.setUserName(randomString());
+
 		newBlogsEntry.setCreateDate(nextDate());
+
 		newBlogsEntry.setModifiedDate(nextDate());
+
 		newBlogsEntry.setTitle(randomString());
+
 		newBlogsEntry.setUrlTitle(randomString());
+
 		newBlogsEntry.setDescription(randomString());
+
 		newBlogsEntry.setContent(randomString());
+
 		newBlogsEntry.setDisplayDate(nextDate());
+
 		newBlogsEntry.setAllowPingbacks(randomBoolean());
+
 		newBlogsEntry.setAllowTrackbacks(randomBoolean());
+
 		newBlogsEntry.setTrackbacks(randomString());
+
 		newBlogsEntry.setSmallImage(randomBoolean());
+
 		newBlogsEntry.setSmallImageId(nextLong());
+
 		newBlogsEntry.setSmallImageURL(randomString());
+
 		newBlogsEntry.setStatus(nextInt());
+
 		newBlogsEntry.setStatusByUserId(nextLong());
+
 		newBlogsEntry.setStatusByUserName(randomString());
+
 		newBlogsEntry.setStatusDate(nextDate());
 
 		_persistence.update(newBlogsEntry, false);
@@ -270,26 +290,47 @@ public class BlogsEntryPersistenceTest extends BasePersistenceTestCase {
 		BlogsEntry blogsEntry = _persistence.create(pk);
 
 		blogsEntry.setUuid(randomString());
+
 		blogsEntry.setGroupId(nextLong());
+
 		blogsEntry.setCompanyId(nextLong());
+
 		blogsEntry.setUserId(nextLong());
+
 		blogsEntry.setUserName(randomString());
+
 		blogsEntry.setCreateDate(nextDate());
+
 		blogsEntry.setModifiedDate(nextDate());
+
 		blogsEntry.setTitle(randomString());
+
 		blogsEntry.setUrlTitle(randomString());
+
 		blogsEntry.setDescription(randomString());
+
 		blogsEntry.setContent(randomString());
+
 		blogsEntry.setDisplayDate(nextDate());
+
 		blogsEntry.setAllowPingbacks(randomBoolean());
+
 		blogsEntry.setAllowTrackbacks(randomBoolean());
+
 		blogsEntry.setTrackbacks(randomString());
+
 		blogsEntry.setSmallImage(randomBoolean());
+
 		blogsEntry.setSmallImageId(nextLong());
+
 		blogsEntry.setSmallImageURL(randomString());
+
 		blogsEntry.setStatus(nextInt());
+
 		blogsEntry.setStatusByUserId(nextLong());
+
 		blogsEntry.setStatusByUserName(randomString());
+
 		blogsEntry.setStatusDate(nextDate());
 
 		_persistence.update(blogsEntry, false);

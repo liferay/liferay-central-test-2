@@ -167,6 +167,7 @@ public class PortalPreferencesWrapper implements PortalPreferences {
 		_portalPreferences.setExpandoBridgeAttributes(serviceContext);
 	}
 
+	@Override
 	public java.lang.Object clone() {
 		return new PortalPreferencesWrapper((PortalPreferences)_portalPreferences.clone());
 	}
@@ -176,6 +177,7 @@ public class PortalPreferencesWrapper implements PortalPreferences {
 		return _portalPreferences.compareTo(portalPreferences);
 	}
 
+	@Override
 	public int hashCode() {
 		return _portalPreferences.hashCode();
 	}
@@ -184,6 +186,7 @@ public class PortalPreferencesWrapper implements PortalPreferences {
 		return new PortalPreferencesWrapper(_portalPreferences.toEscapedModel());
 	}
 
+	@Override
 	public java.lang.String toString() {
 		return _portalPreferences.toString();
 	}

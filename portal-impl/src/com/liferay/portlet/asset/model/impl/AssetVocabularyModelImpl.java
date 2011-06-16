@@ -495,6 +495,7 @@ public class AssetVocabularyModelImpl extends BaseModelImpl<AssetVocabulary>
 		_settings = settings;
 	}
 
+	@Override
 	public AssetVocabulary toEscapedModel() {
 		if (isEscapedModel()) {
 			return (AssetVocabulary)this;
@@ -505,6 +506,7 @@ public class AssetVocabularyModelImpl extends BaseModelImpl<AssetVocabulary>
 		}
 	}
 
+	@Override
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
 			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
@@ -514,10 +516,12 @@ public class AssetVocabularyModelImpl extends BaseModelImpl<AssetVocabulary>
 		return _expandoBridge;
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
 		getExpandoBridge().setAttributes(serviceContext);
 	}
 
+	@Override
 	public Object clone() {
 		AssetVocabularyImpl assetVocabularyImpl = new AssetVocabularyImpl();
 
@@ -551,6 +555,7 @@ public class AssetVocabularyModelImpl extends BaseModelImpl<AssetVocabulary>
 		return 0;
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		if (obj == null) {
 			return false;
@@ -575,10 +580,12 @@ public class AssetVocabularyModelImpl extends BaseModelImpl<AssetVocabulary>
 		}
 	}
 
+	@Override
 	public int hashCode() {
 		return (int)getPrimaryKey();
 	}
 
+	@Override
 	public void resetOriginalValues() {
 		AssetVocabularyModelImpl assetVocabularyModelImpl = this;
 
@@ -591,6 +598,7 @@ public class AssetVocabularyModelImpl extends BaseModelImpl<AssetVocabulary>
 		assetVocabularyModelImpl._originalName = assetVocabularyModelImpl._name;
 	}
 
+	@Override
 	public String toString() {
 		StringBundler sb = new StringBundler(25);
 

@@ -31,7 +31,6 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class AssetTagPersistenceTest extends BasePersistenceTestCase {
-	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 
@@ -68,12 +67,19 @@ public class AssetTagPersistenceTest extends BasePersistenceTestCase {
 		AssetTag newAssetTag = _persistence.create(pk);
 
 		newAssetTag.setGroupId(nextLong());
+
 		newAssetTag.setCompanyId(nextLong());
+
 		newAssetTag.setUserId(nextLong());
+
 		newAssetTag.setUserName(randomString());
+
 		newAssetTag.setCreateDate(nextDate());
+
 		newAssetTag.setModifiedDate(nextDate());
+
 		newAssetTag.setName(randomString());
+
 		newAssetTag.setAssetCount(nextInt());
 
 		_persistence.update(newAssetTag, false);
@@ -203,12 +209,19 @@ public class AssetTagPersistenceTest extends BasePersistenceTestCase {
 		AssetTag assetTag = _persistence.create(pk);
 
 		assetTag.setGroupId(nextLong());
+
 		assetTag.setCompanyId(nextLong());
+
 		assetTag.setUserId(nextLong());
+
 		assetTag.setUserName(randomString());
+
 		assetTag.setCreateDate(nextDate());
+
 		assetTag.setModifiedDate(nextDate());
+
 		assetTag.setName(randomString());
+
 		assetTag.setAssetCount(nextInt());
 
 		_persistence.update(assetTag, false);

@@ -378,6 +378,7 @@ public class SocialRequestWrapper implements SocialRequest {
 		_socialRequest.setExpandoBridgeAttributes(serviceContext);
 	}
 
+	@Override
 	public java.lang.Object clone() {
 		return new SocialRequestWrapper((SocialRequest)_socialRequest.clone());
 	}
@@ -387,6 +388,7 @@ public class SocialRequestWrapper implements SocialRequest {
 		return _socialRequest.compareTo(socialRequest);
 	}
 
+	@Override
 	public int hashCode() {
 		return _socialRequest.hashCode();
 	}
@@ -395,6 +397,7 @@ public class SocialRequestWrapper implements SocialRequest {
 		return new SocialRequestWrapper(_socialRequest.toEscapedModel());
 	}
 
+	@Override
 	public java.lang.String toString() {
 		return _socialRequest.toString();
 	}

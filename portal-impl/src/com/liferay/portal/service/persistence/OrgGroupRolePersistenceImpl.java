@@ -134,6 +134,7 @@ public class OrgGroupRolePersistenceImpl extends BasePersistenceImpl<OrgGroupRol
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache() {
 		if (_HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
 			CacheRegistryUtil.clear(OrgGroupRoleImpl.class.getName());
@@ -151,6 +152,7 @@ public class OrgGroupRolePersistenceImpl extends BasePersistenceImpl<OrgGroupRol
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache(OrgGroupRole orgGroupRole) {
 		EntityCacheUtil.removeResult(OrgGroupRoleModelImpl.ENTITY_CACHE_ENABLED,
 			OrgGroupRoleImpl.class, orgGroupRole.getPrimaryKey());
@@ -179,6 +181,7 @@ public class OrgGroupRolePersistenceImpl extends BasePersistenceImpl<OrgGroupRol
 	 * @throws com.liferay.portal.NoSuchModelException if a org group role with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public OrgGroupRole remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove((OrgGroupRolePK)primaryKey);
@@ -232,11 +235,13 @@ public class OrgGroupRolePersistenceImpl extends BasePersistenceImpl<OrgGroupRol
 	 * @return the org group role that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public OrgGroupRole remove(OrgGroupRole orgGroupRole)
 		throws SystemException {
 		return super.remove(orgGroupRole);
 	}
 
+	@Override
 	protected OrgGroupRole removeImpl(OrgGroupRole orgGroupRole)
 		throws SystemException {
 		orgGroupRole = toUnwrappedModel(orgGroupRole);
@@ -263,6 +268,7 @@ public class OrgGroupRolePersistenceImpl extends BasePersistenceImpl<OrgGroupRol
 		return orgGroupRole;
 	}
 
+	@Override
 	public OrgGroupRole updateImpl(
 		com.liferay.portal.model.OrgGroupRole orgGroupRole, boolean merge)
 		throws SystemException {
@@ -317,6 +323,7 @@ public class OrgGroupRolePersistenceImpl extends BasePersistenceImpl<OrgGroupRol
 	 * @throws com.liferay.portal.NoSuchModelException if a org group role with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public OrgGroupRole findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey((OrgGroupRolePK)primaryKey);
@@ -353,6 +360,7 @@ public class OrgGroupRolePersistenceImpl extends BasePersistenceImpl<OrgGroupRol
 	 * @return the org group role, or <code>null</code> if a org group role with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public OrgGroupRole fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey((OrgGroupRolePK)primaryKey);

@@ -279,6 +279,7 @@ public class TeamModelImpl extends BaseModelImpl<Team> implements TeamModel {
 		_description = description;
 	}
 
+	@Override
 	public Team toEscapedModel() {
 		if (isEscapedModel()) {
 			return (Team)this;
@@ -289,6 +290,7 @@ public class TeamModelImpl extends BaseModelImpl<Team> implements TeamModel {
 		}
 	}
 
+	@Override
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
 			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
@@ -298,10 +300,12 @@ public class TeamModelImpl extends BaseModelImpl<Team> implements TeamModel {
 		return _expandoBridge;
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
 		getExpandoBridge().setAttributes(serviceContext);
 	}
 
+	@Override
 	public Object clone() {
 		TeamImpl teamImpl = new TeamImpl();
 
@@ -332,6 +336,7 @@ public class TeamModelImpl extends BaseModelImpl<Team> implements TeamModel {
 		return 0;
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		if (obj == null) {
 			return false;
@@ -356,10 +361,12 @@ public class TeamModelImpl extends BaseModelImpl<Team> implements TeamModel {
 		}
 	}
 
+	@Override
 	public int hashCode() {
 		return (int)getPrimaryKey();
 	}
 
+	@Override
 	public void resetOriginalValues() {
 		TeamModelImpl teamModelImpl = this;
 
@@ -370,6 +377,7 @@ public class TeamModelImpl extends BaseModelImpl<Team> implements TeamModel {
 		teamModelImpl._originalName = teamModelImpl._name;
 	}
 
+	@Override
 	public String toString() {
 		StringBundler sb = new StringBundler(19);
 

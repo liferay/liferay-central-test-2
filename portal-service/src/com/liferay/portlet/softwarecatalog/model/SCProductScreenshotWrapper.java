@@ -221,6 +221,7 @@ public class SCProductScreenshotWrapper implements SCProductScreenshot {
 		_scProductScreenshot.setExpandoBridgeAttributes(serviceContext);
 	}
 
+	@Override
 	public java.lang.Object clone() {
 		return new SCProductScreenshotWrapper((SCProductScreenshot)_scProductScreenshot.clone());
 	}
@@ -230,6 +231,7 @@ public class SCProductScreenshotWrapper implements SCProductScreenshot {
 		return _scProductScreenshot.compareTo(scProductScreenshot);
 	}
 
+	@Override
 	public int hashCode() {
 		return _scProductScreenshot.hashCode();
 	}
@@ -238,6 +240,7 @@ public class SCProductScreenshotWrapper implements SCProductScreenshot {
 		return new SCProductScreenshotWrapper(_scProductScreenshot.toEscapedModel());
 	}
 
+	@Override
 	public java.lang.String toString() {
 		return _scProductScreenshot.toString();
 	}

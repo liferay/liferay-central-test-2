@@ -69,7 +69,9 @@ public class PermissionPersistenceTest extends BasePersistenceTestCase {
 		Permission newPermission = _persistence.create(pk);
 
 		newPermission.setCompanyId(nextLong());
+
 		newPermission.setActionId(randomString());
+
 		newPermission.setResourceId(nextLong());
 
 		_persistence.update(newPermission, false);
@@ -214,7 +216,9 @@ public class PermissionPersistenceTest extends BasePersistenceTestCase {
 		Permission permission = _persistence.create(pk);
 
 		permission.setCompanyId(nextLong());
+
 		permission.setActionId(randomString());
+
 		permission.setResourceId(nextLong());
 
 		_persistence.update(permission, false);

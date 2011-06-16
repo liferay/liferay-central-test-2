@@ -139,6 +139,7 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl<LayoutPr
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache() {
 		if (_HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
 			CacheRegistryUtil.clear(LayoutPrototypeImpl.class.getName());
@@ -156,6 +157,7 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl<LayoutPr
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache(LayoutPrototype layoutPrototype) {
 		EntityCacheUtil.removeResult(LayoutPrototypeModelImpl.ENTITY_CACHE_ENABLED,
 			LayoutPrototypeImpl.class, layoutPrototype.getPrimaryKey());
@@ -184,6 +186,7 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl<LayoutPr
 	 * @throws com.liferay.portal.NoSuchModelException if a layout prototype with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public LayoutPrototype remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
@@ -237,11 +240,13 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl<LayoutPr
 	 * @return the layout prototype that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public LayoutPrototype remove(LayoutPrototype layoutPrototype)
 		throws SystemException {
 		return super.remove(layoutPrototype);
 	}
 
+	@Override
 	protected LayoutPrototype removeImpl(LayoutPrototype layoutPrototype)
 		throws SystemException {
 		layoutPrototype = toUnwrappedModel(layoutPrototype);
@@ -268,6 +273,7 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl<LayoutPr
 		return layoutPrototype;
 	}
 
+	@Override
 	public LayoutPrototype updateImpl(
 		com.liferay.portal.model.LayoutPrototype layoutPrototype, boolean merge)
 		throws SystemException {
@@ -326,6 +332,7 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl<LayoutPr
 	 * @throws com.liferay.portal.NoSuchModelException if a layout prototype with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public LayoutPrototype findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
@@ -362,6 +369,7 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl<LayoutPr
 	 * @return the layout prototype, or <code>null</code> if a layout prototype with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public LayoutPrototype fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());

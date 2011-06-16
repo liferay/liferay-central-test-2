@@ -32,7 +32,6 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class ExpandoValuePersistenceTest extends BasePersistenceTestCase {
-	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 
@@ -69,11 +68,17 @@ public class ExpandoValuePersistenceTest extends BasePersistenceTestCase {
 		ExpandoValue newExpandoValue = _persistence.create(pk);
 
 		newExpandoValue.setCompanyId(nextLong());
+
 		newExpandoValue.setTableId(nextLong());
+
 		newExpandoValue.setColumnId(nextLong());
+
 		newExpandoValue.setRowId(nextLong());
+
 		newExpandoValue.setClassNameId(nextLong());
+
 		newExpandoValue.setClassPK(nextLong());
+
 		newExpandoValue.setData(randomString());
 
 		_persistence.update(newExpandoValue, false);
@@ -229,11 +234,17 @@ public class ExpandoValuePersistenceTest extends BasePersistenceTestCase {
 		ExpandoValue expandoValue = _persistence.create(pk);
 
 		expandoValue.setCompanyId(nextLong());
+
 		expandoValue.setTableId(nextLong());
+
 		expandoValue.setColumnId(nextLong());
+
 		expandoValue.setRowId(nextLong());
+
 		expandoValue.setClassNameId(nextLong());
+
 		expandoValue.setClassPK(nextLong());
+
 		expandoValue.setData(randomString());
 
 		_persistence.update(expandoValue, false);

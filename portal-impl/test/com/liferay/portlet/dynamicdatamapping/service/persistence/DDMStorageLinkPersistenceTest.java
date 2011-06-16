@@ -32,7 +32,6 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class DDMStorageLinkPersistenceTest extends BasePersistenceTestCase {
-	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 
@@ -69,8 +68,11 @@ public class DDMStorageLinkPersistenceTest extends BasePersistenceTestCase {
 		DDMStorageLink newDDMStorageLink = _persistence.create(pk);
 
 		newDDMStorageLink.setUuid(randomString());
+
 		newDDMStorageLink.setClassNameId(nextLong());
+
 		newDDMStorageLink.setClassPK(nextLong());
+
 		newDDMStorageLink.setStructureId(nextLong());
 
 		_persistence.update(newDDMStorageLink, false);
@@ -215,8 +217,11 @@ public class DDMStorageLinkPersistenceTest extends BasePersistenceTestCase {
 		DDMStorageLink ddmStorageLink = _persistence.create(pk);
 
 		ddmStorageLink.setUuid(randomString());
+
 		ddmStorageLink.setClassNameId(nextLong());
+
 		ddmStorageLink.setClassPK(nextLong());
+
 		ddmStorageLink.setStructureId(nextLong());
 
 		_persistence.update(ddmStorageLink, false);

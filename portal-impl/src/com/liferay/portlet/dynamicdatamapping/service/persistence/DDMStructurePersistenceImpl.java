@@ -200,6 +200,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache() {
 		if (_HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
 			CacheRegistryUtil.clear(DDMStructureImpl.class.getName());
@@ -217,6 +218,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache(DDMStructure ddmStructure) {
 		EntityCacheUtil.removeResult(DDMStructureModelImpl.ENTITY_CACHE_ENABLED,
 			DDMStructureImpl.class, ddmStructure.getPrimaryKey());
@@ -261,6 +263,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @throws com.liferay.portal.NoSuchModelException if a d d m structure with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DDMStructure remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
@@ -313,11 +316,13 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @return the d d m structure that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DDMStructure remove(DDMStructure ddmStructure)
 		throws SystemException {
 		return super.remove(ddmStructure);
 	}
 
+	@Override
 	protected DDMStructure removeImpl(DDMStructure ddmStructure)
 		throws SystemException {
 		ddmStructure = toUnwrappedModel(ddmStructure);
@@ -359,6 +364,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 		return ddmStructure;
 	}
 
+	@Override
 	public DDMStructure updateImpl(
 		com.liferay.portlet.dynamicdatamapping.model.DDMStructure ddmStructure,
 		boolean merge) throws SystemException {
@@ -480,6 +486,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @throws com.liferay.portal.NoSuchModelException if a d d m structure with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DDMStructure findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
@@ -516,6 +523,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @return the d d m structure, or <code>null</code> if a d d m structure with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DDMStructure fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());

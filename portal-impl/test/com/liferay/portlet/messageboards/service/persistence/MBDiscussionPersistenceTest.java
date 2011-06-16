@@ -32,7 +32,6 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class MBDiscussionPersistenceTest extends BasePersistenceTestCase {
-	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 
@@ -69,7 +68,9 @@ public class MBDiscussionPersistenceTest extends BasePersistenceTestCase {
 		MBDiscussion newMBDiscussion = _persistence.create(pk);
 
 		newMBDiscussion.setClassNameId(nextLong());
+
 		newMBDiscussion.setClassPK(nextLong());
+
 		newMBDiscussion.setThreadId(nextLong());
 
 		_persistence.update(newMBDiscussion, false);
@@ -217,7 +218,9 @@ public class MBDiscussionPersistenceTest extends BasePersistenceTestCase {
 		MBDiscussion mbDiscussion = _persistence.create(pk);
 
 		mbDiscussion.setClassNameId(nextLong());
+
 		mbDiscussion.setClassPK(nextLong());
+
 		mbDiscussion.setThreadId(nextLong());
 
 		_persistence.update(mbDiscussion, false);

@@ -34,7 +34,6 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class DDLRecordPersistenceTest extends BasePersistenceTestCase {
-	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 
@@ -71,18 +70,31 @@ public class DDLRecordPersistenceTest extends BasePersistenceTestCase {
 		DDLRecord newDDLRecord = _persistence.create(pk);
 
 		newDDLRecord.setUuid(randomString());
+
 		newDDLRecord.setGroupId(nextLong());
+
 		newDDLRecord.setCompanyId(nextLong());
+
 		newDDLRecord.setUserId(nextLong());
+
 		newDDLRecord.setUserName(randomString());
+
 		newDDLRecord.setVersionUserId(nextLong());
+
 		newDDLRecord.setVersionUserName(randomString());
+
 		newDDLRecord.setCreateDate(nextDate());
+
 		newDDLRecord.setModifiedDate(nextDate());
+
 		newDDLRecord.setClassNameId(nextLong());
+
 		newDDLRecord.setClassPK(nextLong());
+
 		newDDLRecord.setRecordSetId(nextLong());
+
 		newDDLRecord.setVersion(randomString());
+
 		newDDLRecord.setDisplayIndex(nextInt());
 
 		_persistence.update(newDDLRecord, false);
@@ -240,18 +252,31 @@ public class DDLRecordPersistenceTest extends BasePersistenceTestCase {
 		DDLRecord ddlRecord = _persistence.create(pk);
 
 		ddlRecord.setUuid(randomString());
+
 		ddlRecord.setGroupId(nextLong());
+
 		ddlRecord.setCompanyId(nextLong());
+
 		ddlRecord.setUserId(nextLong());
+
 		ddlRecord.setUserName(randomString());
+
 		ddlRecord.setVersionUserId(nextLong());
+
 		ddlRecord.setVersionUserName(randomString());
+
 		ddlRecord.setCreateDate(nextDate());
+
 		ddlRecord.setModifiedDate(nextDate());
+
 		ddlRecord.setClassNameId(nextLong());
+
 		ddlRecord.setClassPK(nextLong());
+
 		ddlRecord.setRecordSetId(nextLong());
+
 		ddlRecord.setVersion(randomString());
+
 		ddlRecord.setDisplayIndex(nextInt());
 
 		_persistence.update(ddlRecord, false);

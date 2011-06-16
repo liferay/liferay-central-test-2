@@ -246,6 +246,7 @@ public class LayoutRevisionPersistenceImpl extends BasePersistenceImpl<LayoutRev
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache() {
 		if (_HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
 			CacheRegistryUtil.clear(LayoutRevisionImpl.class.getName());
@@ -263,6 +264,7 @@ public class LayoutRevisionPersistenceImpl extends BasePersistenceImpl<LayoutRev
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache(LayoutRevision layoutRevision) {
 		EntityCacheUtil.removeResult(LayoutRevisionModelImpl.ENTITY_CACHE_ENABLED,
 			LayoutRevisionImpl.class, layoutRevision.getPrimaryKey());
@@ -298,6 +300,7 @@ public class LayoutRevisionPersistenceImpl extends BasePersistenceImpl<LayoutRev
 	 * @throws com.liferay.portal.NoSuchModelException if a layout revision with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public LayoutRevision remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
@@ -351,11 +354,13 @@ public class LayoutRevisionPersistenceImpl extends BasePersistenceImpl<LayoutRev
 	 * @return the layout revision that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public LayoutRevision remove(LayoutRevision layoutRevision)
 		throws SystemException {
 		return super.remove(layoutRevision);
 	}
 
+	@Override
 	protected LayoutRevision removeImpl(LayoutRevision layoutRevision)
 		throws SystemException {
 		layoutRevision = toUnwrappedModel(layoutRevision);
@@ -391,6 +396,7 @@ public class LayoutRevisionPersistenceImpl extends BasePersistenceImpl<LayoutRev
 		return layoutRevision;
 	}
 
+	@Override
 	public LayoutRevision updateImpl(
 		com.liferay.portal.model.LayoutRevision layoutRevision, boolean merge)
 		throws SystemException {
@@ -503,6 +509,7 @@ public class LayoutRevisionPersistenceImpl extends BasePersistenceImpl<LayoutRev
 	 * @throws com.liferay.portal.NoSuchModelException if a layout revision with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public LayoutRevision findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
@@ -539,6 +546,7 @@ public class LayoutRevisionPersistenceImpl extends BasePersistenceImpl<LayoutRev
 	 * @return the layout revision, or <code>null</code> if a layout revision with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public LayoutRevision fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());

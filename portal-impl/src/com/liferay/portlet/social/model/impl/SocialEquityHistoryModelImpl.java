@@ -162,6 +162,7 @@ public class SocialEquityHistoryModelImpl extends BaseModelImpl<SocialEquityHist
 		_personalEquity = personalEquity;
 	}
 
+	@Override
 	public SocialEquityHistory toEscapedModel() {
 		if (isEscapedModel()) {
 			return (SocialEquityHistory)this;
@@ -172,6 +173,7 @@ public class SocialEquityHistoryModelImpl extends BaseModelImpl<SocialEquityHist
 		}
 	}
 
+	@Override
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
 			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
@@ -181,10 +183,12 @@ public class SocialEquityHistoryModelImpl extends BaseModelImpl<SocialEquityHist
 		return _expandoBridge;
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
 		getExpandoBridge().setAttributes(serviceContext);
 	}
 
+	@Override
 	public Object clone() {
 		SocialEquityHistoryImpl socialEquityHistoryImpl = new SocialEquityHistoryImpl();
 
@@ -214,6 +218,7 @@ public class SocialEquityHistoryModelImpl extends BaseModelImpl<SocialEquityHist
 		}
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		if (obj == null) {
 			return false;
@@ -238,13 +243,16 @@ public class SocialEquityHistoryModelImpl extends BaseModelImpl<SocialEquityHist
 		}
 	}
 
+	@Override
 	public int hashCode() {
 		return (int)getPrimaryKey();
 	}
 
+	@Override
 	public void resetOriginalValues() {
 	}
 
+	@Override
 	public String toString() {
 		StringBundler sb = new StringBundler(13);
 

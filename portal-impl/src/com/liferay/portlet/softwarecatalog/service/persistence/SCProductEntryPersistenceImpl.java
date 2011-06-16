@@ -183,6 +183,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache() {
 		if (_HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
 			CacheRegistryUtil.clear(SCProductEntryImpl.class.getName());
@@ -200,6 +201,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache(SCProductEntry scProductEntry) {
 		EntityCacheUtil.removeResult(SCProductEntryModelImpl.ENTITY_CACHE_ENABLED,
 			SCProductEntryImpl.class, scProductEntry.getPrimaryKey());
@@ -235,6 +237,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 	 * @throws com.liferay.portal.NoSuchModelException if a s c product entry with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public SCProductEntry remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
@@ -288,11 +291,13 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 	 * @return the s c product entry that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public SCProductEntry remove(SCProductEntry scProductEntry)
 		throws SystemException {
 		return super.remove(scProductEntry);
 	}
 
+	@Override
 	protected SCProductEntry removeImpl(SCProductEntry scProductEntry)
 		throws SystemException {
 		scProductEntry = toUnwrappedModel(scProductEntry);
@@ -338,6 +343,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 		return scProductEntry;
 	}
 
+	@Override
 	public SCProductEntry updateImpl(
 		com.liferay.portlet.softwarecatalog.model.SCProductEntry scProductEntry,
 		boolean merge) throws SystemException {
@@ -436,6 +442,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 	 * @throws com.liferay.portal.NoSuchModelException if a s c product entry with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public SCProductEntry findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
@@ -472,6 +479,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 	 * @return the s c product entry, or <code>null</code> if a s c product entry with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public SCProductEntry fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());

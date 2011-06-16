@@ -198,6 +198,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache() {
 		if (_HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
 			CacheRegistryUtil.clear(RoleImpl.class.getName());
@@ -215,6 +216,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache(Role role) {
 		EntityCacheUtil.removeResult(RoleModelImpl.ENTITY_CACHE_ENABLED,
 			RoleImpl.class, role.getPrimaryKey());
@@ -253,6 +255,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @throws com.liferay.portal.NoSuchModelException if a role with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Role remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
@@ -303,10 +306,12 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @return the role that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Role remove(Role role) throws SystemException {
 		return super.remove(role);
 	}
 
+	@Override
 	protected Role removeImpl(Role role) throws SystemException {
 		role = toUnwrappedModel(role);
 
@@ -378,6 +383,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 		return role;
 	}
 
+	@Override
 	public Role updateImpl(com.liferay.portal.model.Role role, boolean merge)
 		throws SystemException {
 		role = toUnwrappedModel(role);
@@ -486,6 +492,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @throws com.liferay.portal.NoSuchModelException if a role with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Role findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
@@ -522,6 +529,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @return the role, or <code>null</code> if a role with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Role fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());

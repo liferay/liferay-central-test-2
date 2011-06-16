@@ -365,6 +365,7 @@ public class LayoutSetWrapper implements LayoutSet {
 		_layoutSet.setExpandoBridgeAttributes(serviceContext);
 	}
 
+	@Override
 	public java.lang.Object clone() {
 		return new LayoutSetWrapper((LayoutSet)_layoutSet.clone());
 	}
@@ -373,6 +374,7 @@ public class LayoutSetWrapper implements LayoutSet {
 		return _layoutSet.compareTo(layoutSet);
 	}
 
+	@Override
 	public int hashCode() {
 		return _layoutSet.hashCode();
 	}
@@ -381,6 +383,7 @@ public class LayoutSetWrapper implements LayoutSet {
 		return new LayoutSetWrapper(_layoutSet.toEscapedModel());
 	}
 
+	@Override
 	public java.lang.String toString() {
 		return _layoutSet.toString();
 	}

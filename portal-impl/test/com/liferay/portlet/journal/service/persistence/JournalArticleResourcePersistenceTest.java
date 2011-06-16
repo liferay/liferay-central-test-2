@@ -34,7 +34,6 @@ import java.util.List;
  */
 public class JournalArticleResourcePersistenceTest
 	extends BasePersistenceTestCase {
-	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 
@@ -71,7 +70,9 @@ public class JournalArticleResourcePersistenceTest
 		JournalArticleResource newJournalArticleResource = _persistence.create(pk);
 
 		newJournalArticleResource.setUuid(randomString());
+
 		newJournalArticleResource.setGroupId(nextLong());
+
 		newJournalArticleResource.setArticleId(randomString());
 
 		_persistence.update(newJournalArticleResource, false);
@@ -225,7 +226,9 @@ public class JournalArticleResourcePersistenceTest
 		JournalArticleResource journalArticleResource = _persistence.create(pk);
 
 		journalArticleResource.setUuid(randomString());
+
 		journalArticleResource.setGroupId(nextLong());
+
 		journalArticleResource.setArticleId(randomString());
 
 		_persistence.update(journalArticleResource, false);

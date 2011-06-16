@@ -331,6 +331,7 @@ public class WebsiteWrapper implements Website {
 		_website.setExpandoBridgeAttributes(serviceContext);
 	}
 
+	@Override
 	public java.lang.Object clone() {
 		return new WebsiteWrapper((Website)_website.clone());
 	}
@@ -339,6 +340,7 @@ public class WebsiteWrapper implements Website {
 		return _website.compareTo(website);
 	}
 
+	@Override
 	public int hashCode() {
 		return _website.hashCode();
 	}
@@ -347,6 +349,7 @@ public class WebsiteWrapper implements Website {
 		return new WebsiteWrapper(_website.toEscapedModel());
 	}
 
+	@Override
 	public java.lang.String toString() {
 		return _website.toString();
 	}

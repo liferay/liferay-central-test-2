@@ -227,6 +227,7 @@ public class AssetLinkModelImpl extends BaseModelImpl<AssetLink>
 		_weight = weight;
 	}
 
+	@Override
 	public AssetLink toEscapedModel() {
 		if (isEscapedModel()) {
 			return (AssetLink)this;
@@ -237,6 +238,7 @@ public class AssetLinkModelImpl extends BaseModelImpl<AssetLink>
 		}
 	}
 
+	@Override
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
 			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
@@ -246,10 +248,12 @@ public class AssetLinkModelImpl extends BaseModelImpl<AssetLink>
 		return _expandoBridge;
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
 		getExpandoBridge().setAttributes(serviceContext);
 	}
 
+	@Override
 	public Object clone() {
 		AssetLinkImpl assetLinkImpl = new AssetLinkImpl();
 
@@ -288,6 +292,7 @@ public class AssetLinkModelImpl extends BaseModelImpl<AssetLink>
 		return 0;
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		if (obj == null) {
 			return false;
@@ -312,10 +317,12 @@ public class AssetLinkModelImpl extends BaseModelImpl<AssetLink>
 		}
 	}
 
+	@Override
 	public int hashCode() {
 		return (int)getPrimaryKey();
 	}
 
+	@Override
 	public void resetOriginalValues() {
 		AssetLinkModelImpl assetLinkModelImpl = this;
 
@@ -332,6 +339,7 @@ public class AssetLinkModelImpl extends BaseModelImpl<AssetLink>
 		assetLinkModelImpl._setOriginalType = false;
 	}
 
+	@Override
 	public String toString() {
 		StringBundler sb = new StringBundler(19);
 

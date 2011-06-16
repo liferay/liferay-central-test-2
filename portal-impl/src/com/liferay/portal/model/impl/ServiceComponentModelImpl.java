@@ -171,6 +171,7 @@ public class ServiceComponentModelImpl extends BaseModelImpl<ServiceComponent>
 		_data = data;
 	}
 
+	@Override
 	public ServiceComponent toEscapedModel() {
 		if (isEscapedModel()) {
 			return (ServiceComponent)this;
@@ -181,6 +182,7 @@ public class ServiceComponentModelImpl extends BaseModelImpl<ServiceComponent>
 		}
 	}
 
+	@Override
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
 			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(0,
@@ -190,10 +192,12 @@ public class ServiceComponentModelImpl extends BaseModelImpl<ServiceComponent>
 		return _expandoBridge;
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
 		getExpandoBridge().setAttributes(serviceContext);
 	}
 
+	@Override
 	public Object clone() {
 		ServiceComponentImpl serviceComponentImpl = new ServiceComponentImpl();
 
@@ -239,6 +243,7 @@ public class ServiceComponentModelImpl extends BaseModelImpl<ServiceComponent>
 		return 0;
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		if (obj == null) {
 			return false;
@@ -263,10 +268,12 @@ public class ServiceComponentModelImpl extends BaseModelImpl<ServiceComponent>
 		}
 	}
 
+	@Override
 	public int hashCode() {
 		return (int)getPrimaryKey();
 	}
 
+	@Override
 	public void resetOriginalValues() {
 		ServiceComponentModelImpl serviceComponentModelImpl = this;
 
@@ -277,6 +284,7 @@ public class ServiceComponentModelImpl extends BaseModelImpl<ServiceComponent>
 		serviceComponentModelImpl._setOriginalBuildNumber = false;
 	}
 
+	@Override
 	public String toString() {
 		StringBundler sb = new StringBundler(11);
 

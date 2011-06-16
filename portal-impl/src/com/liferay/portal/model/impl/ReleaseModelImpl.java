@@ -192,6 +192,7 @@ public class ReleaseModelImpl extends BaseModelImpl<Release>
 		_testString = testString;
 	}
 
+	@Override
 	public Release toEscapedModel() {
 		if (isEscapedModel()) {
 			return (Release)this;
@@ -202,6 +203,7 @@ public class ReleaseModelImpl extends BaseModelImpl<Release>
 		}
 	}
 
+	@Override
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
 			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(0,
@@ -211,10 +213,12 @@ public class ReleaseModelImpl extends BaseModelImpl<Release>
 		return _expandoBridge;
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
 		getExpandoBridge().setAttributes(serviceContext);
 	}
 
+	@Override
 	public Object clone() {
 		ReleaseImpl releaseImpl = new ReleaseImpl();
 
@@ -246,6 +250,7 @@ public class ReleaseModelImpl extends BaseModelImpl<Release>
 		}
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		if (obj == null) {
 			return false;
@@ -270,16 +275,19 @@ public class ReleaseModelImpl extends BaseModelImpl<Release>
 		}
 	}
 
+	@Override
 	public int hashCode() {
 		return (int)getPrimaryKey();
 	}
 
+	@Override
 	public void resetOriginalValues() {
 		ReleaseModelImpl releaseModelImpl = this;
 
 		releaseModelImpl._originalServletContextName = releaseModelImpl._servletContextName;
 	}
 
+	@Override
 	public String toString() {
 		StringBundler sb = new StringBundler(17);
 

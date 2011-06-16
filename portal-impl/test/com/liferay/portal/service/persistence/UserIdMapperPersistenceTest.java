@@ -32,7 +32,6 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class UserIdMapperPersistenceTest extends BasePersistenceTestCase {
-	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 
@@ -69,8 +68,11 @@ public class UserIdMapperPersistenceTest extends BasePersistenceTestCase {
 		UserIdMapper newUserIdMapper = _persistence.create(pk);
 
 		newUserIdMapper.setUserId(nextLong());
+
 		newUserIdMapper.setType(randomString());
+
 		newUserIdMapper.setDescription(randomString());
+
 		newUserIdMapper.setExternalUserId(randomString());
 
 		_persistence.update(newUserIdMapper, false);
@@ -222,8 +224,11 @@ public class UserIdMapperPersistenceTest extends BasePersistenceTestCase {
 		UserIdMapper userIdMapper = _persistence.create(pk);
 
 		userIdMapper.setUserId(nextLong());
+
 		userIdMapper.setType(randomString());
+
 		userIdMapper.setDescription(randomString());
+
 		userIdMapper.setExternalUserId(randomString());
 
 		_persistence.update(userIdMapper, false);

@@ -30,7 +30,6 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class RepositoryPersistenceTest extends BasePersistenceTestCase {
-	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 
@@ -67,14 +66,23 @@ public class RepositoryPersistenceTest extends BasePersistenceTestCase {
 		Repository newRepository = _persistence.create(pk);
 
 		newRepository.setGroupId(nextLong());
+
 		newRepository.setCompanyId(nextLong());
+
 		newRepository.setCreateDate(nextDate());
+
 		newRepository.setModifiedDate(nextDate());
+
 		newRepository.setClassNameId(nextLong());
+
 		newRepository.setName(randomString());
+
 		newRepository.setDescription(randomString());
+
 		newRepository.setPortletId(randomString());
+
 		newRepository.setTypeSettings(randomString());
+
 		newRepository.setDlFolderId(nextLong());
 
 		_persistence.update(newRepository, false);
@@ -215,14 +223,23 @@ public class RepositoryPersistenceTest extends BasePersistenceTestCase {
 		Repository repository = _persistence.create(pk);
 
 		repository.setGroupId(nextLong());
+
 		repository.setCompanyId(nextLong());
+
 		repository.setCreateDate(nextDate());
+
 		repository.setModifiedDate(nextDate());
+
 		repository.setClassNameId(nextLong());
+
 		repository.setName(randomString());
+
 		repository.setDescription(randomString());
+
 		repository.setPortletId(randomString());
+
 		repository.setTypeSettings(randomString());
+
 		repository.setDlFolderId(nextLong());
 
 		_persistence.update(repository, false);

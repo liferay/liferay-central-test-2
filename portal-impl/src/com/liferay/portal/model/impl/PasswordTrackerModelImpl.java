@@ -152,6 +152,7 @@ public class PasswordTrackerModelImpl extends BaseModelImpl<PasswordTracker>
 		_password = password;
 	}
 
+	@Override
 	public PasswordTracker toEscapedModel() {
 		if (isEscapedModel()) {
 			return (PasswordTracker)this;
@@ -162,6 +163,7 @@ public class PasswordTrackerModelImpl extends BaseModelImpl<PasswordTracker>
 		}
 	}
 
+	@Override
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
 			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(0,
@@ -171,10 +173,12 @@ public class PasswordTrackerModelImpl extends BaseModelImpl<PasswordTracker>
 		return _expandoBridge;
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
 		getExpandoBridge().setAttributes(serviceContext);
 	}
 
+	@Override
 	public Object clone() {
 		PasswordTrackerImpl passwordTrackerImpl = new PasswordTrackerImpl();
 
@@ -219,6 +223,7 @@ public class PasswordTrackerModelImpl extends BaseModelImpl<PasswordTracker>
 		return 0;
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		if (obj == null) {
 			return false;
@@ -243,13 +248,16 @@ public class PasswordTrackerModelImpl extends BaseModelImpl<PasswordTracker>
 		}
 	}
 
+	@Override
 	public int hashCode() {
 		return (int)getPrimaryKey();
 	}
 
+	@Override
 	public void resetOriginalValues() {
 	}
 
+	@Override
 	public String toString() {
 		StringBundler sb = new StringBundler(9);
 

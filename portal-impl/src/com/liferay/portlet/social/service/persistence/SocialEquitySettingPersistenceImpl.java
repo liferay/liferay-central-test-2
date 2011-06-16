@@ -157,6 +157,7 @@ public class SocialEquitySettingPersistenceImpl extends BasePersistenceImpl<Soci
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache() {
 		if (_HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
 			CacheRegistryUtil.clear(SocialEquitySettingImpl.class.getName());
@@ -174,6 +175,7 @@ public class SocialEquitySettingPersistenceImpl extends BasePersistenceImpl<Soci
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache(SocialEquitySetting socialEquitySetting) {
 		EntityCacheUtil.removeResult(SocialEquitySettingModelImpl.ENTITY_CACHE_ENABLED,
 			SocialEquitySettingImpl.class, socialEquitySetting.getPrimaryKey());
@@ -211,6 +213,7 @@ public class SocialEquitySettingPersistenceImpl extends BasePersistenceImpl<Soci
 	 * @throws com.liferay.portal.NoSuchModelException if a social equity setting with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public SocialEquitySetting remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
@@ -264,11 +267,13 @@ public class SocialEquitySettingPersistenceImpl extends BasePersistenceImpl<Soci
 	 * @return the social equity setting that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public SocialEquitySetting remove(SocialEquitySetting socialEquitySetting)
 		throws SystemException {
 		return super.remove(socialEquitySetting);
 	}
 
+	@Override
 	protected SocialEquitySetting removeImpl(
 		SocialEquitySetting socialEquitySetting) throws SystemException {
 		socialEquitySetting = toUnwrappedModel(socialEquitySetting);
@@ -306,6 +311,7 @@ public class SocialEquitySettingPersistenceImpl extends BasePersistenceImpl<Soci
 		return socialEquitySetting;
 	}
 
+	@Override
 	public SocialEquitySetting updateImpl(
 		com.liferay.portlet.social.model.SocialEquitySetting socialEquitySetting,
 		boolean merge) throws SystemException {
@@ -408,6 +414,7 @@ public class SocialEquitySettingPersistenceImpl extends BasePersistenceImpl<Soci
 	 * @throws com.liferay.portal.NoSuchModelException if a social equity setting with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public SocialEquitySetting findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
@@ -444,6 +451,7 @@ public class SocialEquitySettingPersistenceImpl extends BasePersistenceImpl<Soci
 	 * @return the social equity setting, or <code>null</code> if a social equity setting with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public SocialEquitySetting fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());

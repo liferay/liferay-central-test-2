@@ -157,6 +157,7 @@ public class PortalPreferencesModelImpl extends BaseModelImpl<PortalPreferences>
 		_preferences = preferences;
 	}
 
+	@Override
 	public PortalPreferences toEscapedModel() {
 		if (isEscapedModel()) {
 			return (PortalPreferences)this;
@@ -167,6 +168,7 @@ public class PortalPreferencesModelImpl extends BaseModelImpl<PortalPreferences>
 		}
 	}
 
+	@Override
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
 			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(0,
@@ -176,10 +178,12 @@ public class PortalPreferencesModelImpl extends BaseModelImpl<PortalPreferences>
 		return _expandoBridge;
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
 		getExpandoBridge().setAttributes(serviceContext);
 	}
 
+	@Override
 	public Object clone() {
 		PortalPreferencesImpl portalPreferencesImpl = new PortalPreferencesImpl();
 
@@ -207,6 +211,7 @@ public class PortalPreferencesModelImpl extends BaseModelImpl<PortalPreferences>
 		}
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		if (obj == null) {
 			return false;
@@ -231,10 +236,12 @@ public class PortalPreferencesModelImpl extends BaseModelImpl<PortalPreferences>
 		}
 	}
 
+	@Override
 	public int hashCode() {
 		return (int)getPrimaryKey();
 	}
 
+	@Override
 	public void resetOriginalValues() {
 		PortalPreferencesModelImpl portalPreferencesModelImpl = this;
 
@@ -247,6 +254,7 @@ public class PortalPreferencesModelImpl extends BaseModelImpl<PortalPreferences>
 		portalPreferencesModelImpl._setOriginalOwnerType = false;
 	}
 
+	@Override
 	public String toString() {
 		StringBundler sb = new StringBundler(9);
 

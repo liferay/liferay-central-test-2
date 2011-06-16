@@ -220,6 +220,7 @@ public class JournalContentSearchModelImpl extends BaseModelImpl<JournalContentS
 		return GetterUtil.getString(_originalArticleId);
 	}
 
+	@Override
 	public JournalContentSearch toEscapedModel() {
 		if (isEscapedModel()) {
 			return (JournalContentSearch)this;
@@ -230,6 +231,7 @@ public class JournalContentSearchModelImpl extends BaseModelImpl<JournalContentS
 		}
 	}
 
+	@Override
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
 			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
@@ -239,10 +241,12 @@ public class JournalContentSearchModelImpl extends BaseModelImpl<JournalContentS
 		return _expandoBridge;
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
 		getExpandoBridge().setAttributes(serviceContext);
 	}
 
+	@Override
 	public Object clone() {
 		JournalContentSearchImpl journalContentSearchImpl = new JournalContentSearchImpl();
 
@@ -273,6 +277,7 @@ public class JournalContentSearchModelImpl extends BaseModelImpl<JournalContentS
 		}
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		if (obj == null) {
 			return false;
@@ -297,10 +302,12 @@ public class JournalContentSearchModelImpl extends BaseModelImpl<JournalContentS
 		}
 	}
 
+	@Override
 	public int hashCode() {
 		return (int)getPrimaryKey();
 	}
 
+	@Override
 	public void resetOriginalValues() {
 		JournalContentSearchModelImpl journalContentSearchModelImpl = this;
 
@@ -321,6 +328,7 @@ public class JournalContentSearchModelImpl extends BaseModelImpl<JournalContentS
 		journalContentSearchModelImpl._originalArticleId = journalContentSearchModelImpl._articleId;
 	}
 
+	@Override
 	public String toString() {
 		StringBundler sb = new StringBundler(15);
 

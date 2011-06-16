@@ -439,6 +439,7 @@ public class AnnouncementsEntryWrapper implements AnnouncementsEntry {
 		_announcementsEntry.setExpandoBridgeAttributes(serviceContext);
 	}
 
+	@Override
 	public java.lang.Object clone() {
 		return new AnnouncementsEntryWrapper((AnnouncementsEntry)_announcementsEntry.clone());
 	}
@@ -448,6 +449,7 @@ public class AnnouncementsEntryWrapper implements AnnouncementsEntry {
 		return _announcementsEntry.compareTo(announcementsEntry);
 	}
 
+	@Override
 	public int hashCode() {
 		return _announcementsEntry.hashCode();
 	}
@@ -456,6 +458,7 @@ public class AnnouncementsEntryWrapper implements AnnouncementsEntry {
 		return new AnnouncementsEntryWrapper(_announcementsEntry.toEscapedModel());
 	}
 
+	@Override
 	public java.lang.String toString() {
 		return _announcementsEntry.toString();
 	}

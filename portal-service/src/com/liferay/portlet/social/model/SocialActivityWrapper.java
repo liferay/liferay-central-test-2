@@ -342,6 +342,7 @@ public class SocialActivityWrapper implements SocialActivity {
 		_socialActivity.setExpandoBridgeAttributes(serviceContext);
 	}
 
+	@Override
 	public java.lang.Object clone() {
 		return new SocialActivityWrapper((SocialActivity)_socialActivity.clone());
 	}
@@ -351,6 +352,7 @@ public class SocialActivityWrapper implements SocialActivity {
 		return _socialActivity.compareTo(socialActivity);
 	}
 
+	@Override
 	public int hashCode() {
 		return _socialActivity.hashCode();
 	}
@@ -359,6 +361,7 @@ public class SocialActivityWrapper implements SocialActivity {
 		return new SocialActivityWrapper(_socialActivity.toEscapedModel());
 	}
 
+	@Override
 	public java.lang.String toString() {
 		return _socialActivity.toString();
 	}

@@ -121,6 +121,7 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl<OrgLabor>
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache() {
 		if (_HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
 			CacheRegistryUtil.clear(OrgLaborImpl.class.getName());
@@ -138,6 +139,7 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl<OrgLabor>
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache(OrgLabor orgLabor) {
 		EntityCacheUtil.removeResult(OrgLaborModelImpl.ENTITY_CACHE_ENABLED,
 			OrgLaborImpl.class, orgLabor.getPrimaryKey());
@@ -166,6 +168,7 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl<OrgLabor>
 	 * @throws com.liferay.portal.NoSuchModelException if a org labor with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public OrgLabor remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
@@ -218,10 +221,12 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl<OrgLabor>
 	 * @return the org labor that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public OrgLabor remove(OrgLabor orgLabor) throws SystemException {
 		return super.remove(orgLabor);
 	}
 
+	@Override
 	protected OrgLabor removeImpl(OrgLabor orgLabor) throws SystemException {
 		orgLabor = toUnwrappedModel(orgLabor);
 
@@ -247,6 +252,7 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl<OrgLabor>
 		return orgLabor;
 	}
 
+	@Override
 	public OrgLabor updateImpl(com.liferay.portal.model.OrgLabor orgLabor,
 		boolean merge) throws SystemException {
 		orgLabor = toUnwrappedModel(orgLabor);
@@ -314,6 +320,7 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl<OrgLabor>
 	 * @throws com.liferay.portal.NoSuchModelException if a org labor with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public OrgLabor findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
@@ -350,6 +357,7 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl<OrgLabor>
 	 * @return the org labor, or <code>null</code> if a org labor with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public OrgLabor fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());

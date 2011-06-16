@@ -313,6 +313,7 @@ public class IGFolderWrapper implements IGFolder {
 		_igFolder.setExpandoBridgeAttributes(serviceContext);
 	}
 
+	@Override
 	public java.lang.Object clone() {
 		return new IGFolderWrapper((IGFolder)_igFolder.clone());
 	}
@@ -322,6 +323,7 @@ public class IGFolderWrapper implements IGFolder {
 		return _igFolder.compareTo(igFolder);
 	}
 
+	@Override
 	public int hashCode() {
 		return _igFolder.hashCode();
 	}
@@ -330,6 +332,7 @@ public class IGFolderWrapper implements IGFolder {
 		return new IGFolderWrapper(_igFolder.toEscapedModel());
 	}
 
+	@Override
 	public java.lang.String toString() {
 		return _igFolder.toString();
 	}

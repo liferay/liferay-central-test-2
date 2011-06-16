@@ -247,6 +247,7 @@ public class ShoppingCartModelImpl extends BaseModelImpl<ShoppingCart>
 		_insure = insure;
 	}
 
+	@Override
 	public ShoppingCart toEscapedModel() {
 		if (isEscapedModel()) {
 			return (ShoppingCart)this;
@@ -257,6 +258,7 @@ public class ShoppingCartModelImpl extends BaseModelImpl<ShoppingCart>
 		}
 	}
 
+	@Override
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
 			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
@@ -266,10 +268,12 @@ public class ShoppingCartModelImpl extends BaseModelImpl<ShoppingCart>
 		return _expandoBridge;
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
 		getExpandoBridge().setAttributes(serviceContext);
 	}
 
+	@Override
 	public Object clone() {
 		ShoppingCartImpl shoppingCartImpl = new ShoppingCartImpl();
 
@@ -304,6 +308,7 @@ public class ShoppingCartModelImpl extends BaseModelImpl<ShoppingCart>
 		}
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		if (obj == null) {
 			return false;
@@ -328,10 +333,12 @@ public class ShoppingCartModelImpl extends BaseModelImpl<ShoppingCart>
 		}
 	}
 
+	@Override
 	public int hashCode() {
 		return (int)getPrimaryKey();
 	}
 
+	@Override
 	public void resetOriginalValues() {
 		ShoppingCartModelImpl shoppingCartModelImpl = this;
 
@@ -344,6 +351,7 @@ public class ShoppingCartModelImpl extends BaseModelImpl<ShoppingCart>
 		shoppingCartModelImpl._setOriginalUserId = false;
 	}
 
+	@Override
 	public String toString() {
 		StringBundler sb = new StringBundler(23);
 

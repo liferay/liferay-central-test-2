@@ -277,6 +277,7 @@ public class TeamWrapper implements Team {
 		_team.setExpandoBridgeAttributes(serviceContext);
 	}
 
+	@Override
 	public java.lang.Object clone() {
 		return new TeamWrapper((Team)_team.clone());
 	}
@@ -285,6 +286,7 @@ public class TeamWrapper implements Team {
 		return _team.compareTo(team);
 	}
 
+	@Override
 	public int hashCode() {
 		return _team.hashCode();
 	}
@@ -293,6 +295,7 @@ public class TeamWrapper implements Team {
 		return new TeamWrapper(_team.toEscapedModel());
 	}
 
+	@Override
 	public java.lang.String toString() {
 		return _team.toString();
 	}

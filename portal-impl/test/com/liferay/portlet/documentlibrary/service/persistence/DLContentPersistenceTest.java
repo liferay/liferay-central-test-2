@@ -39,7 +39,6 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class DLContentPersistenceTest extends BasePersistenceTestCase {
-	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 

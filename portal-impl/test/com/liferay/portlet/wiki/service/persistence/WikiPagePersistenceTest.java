@@ -34,7 +34,6 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class WikiPagePersistenceTest extends BasePersistenceTestCase {
-	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 
@@ -71,26 +70,47 @@ public class WikiPagePersistenceTest extends BasePersistenceTestCase {
 		WikiPage newWikiPage = _persistence.create(pk);
 
 		newWikiPage.setUuid(randomString());
+
 		newWikiPage.setResourcePrimKey(nextLong());
+
 		newWikiPage.setGroupId(nextLong());
+
 		newWikiPage.setCompanyId(nextLong());
+
 		newWikiPage.setUserId(nextLong());
+
 		newWikiPage.setUserName(randomString());
+
 		newWikiPage.setCreateDate(nextDate());
+
 		newWikiPage.setModifiedDate(nextDate());
+
 		newWikiPage.setNodeId(nextLong());
+
 		newWikiPage.setTitle(randomString());
+
 		newWikiPage.setVersion(nextDouble());
+
 		newWikiPage.setMinorEdit(randomBoolean());
+
 		newWikiPage.setContent(randomString());
+
 		newWikiPage.setSummary(randomString());
+
 		newWikiPage.setFormat(randomString());
+
 		newWikiPage.setHead(randomBoolean());
+
 		newWikiPage.setParentTitle(randomString());
+
 		newWikiPage.setRedirectTitle(randomString());
+
 		newWikiPage.setStatus(nextInt());
+
 		newWikiPage.setStatusByUserId(nextLong());
+
 		newWikiPage.setStatusByUserName(randomString());
+
 		newWikiPage.setStatusDate(nextDate());
 
 		_persistence.update(newWikiPage, false);
@@ -270,26 +290,47 @@ public class WikiPagePersistenceTest extends BasePersistenceTestCase {
 		WikiPage wikiPage = _persistence.create(pk);
 
 		wikiPage.setUuid(randomString());
+
 		wikiPage.setResourcePrimKey(nextLong());
+
 		wikiPage.setGroupId(nextLong());
+
 		wikiPage.setCompanyId(nextLong());
+
 		wikiPage.setUserId(nextLong());
+
 		wikiPage.setUserName(randomString());
+
 		wikiPage.setCreateDate(nextDate());
+
 		wikiPage.setModifiedDate(nextDate());
+
 		wikiPage.setNodeId(nextLong());
+
 		wikiPage.setTitle(randomString());
+
 		wikiPage.setVersion(nextDouble());
+
 		wikiPage.setMinorEdit(randomBoolean());
+
 		wikiPage.setContent(randomString());
+
 		wikiPage.setSummary(randomString());
+
 		wikiPage.setFormat(randomString());
+
 		wikiPage.setHead(randomBoolean());
+
 		wikiPage.setParentTitle(randomString());
+
 		wikiPage.setRedirectTitle(randomString());
+
 		wikiPage.setStatus(nextInt());
+
 		wikiPage.setStatusByUserId(nextLong());
+
 		wikiPage.setStatusByUserName(randomString());
+
 		wikiPage.setStatusDate(nextDate());
 
 		_persistence.update(wikiPage, false);

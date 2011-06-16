@@ -257,6 +257,7 @@ public class PortletItemModelImpl extends BaseModelImpl<PortletItem>
 		return _originalClassNameId;
 	}
 
+	@Override
 	public PortletItem toEscapedModel() {
 		if (isEscapedModel()) {
 			return (PortletItem)this;
@@ -267,6 +268,7 @@ public class PortletItemModelImpl extends BaseModelImpl<PortletItem>
 		}
 	}
 
+	@Override
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
 			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
@@ -276,10 +278,12 @@ public class PortletItemModelImpl extends BaseModelImpl<PortletItem>
 		return _expandoBridge;
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
 		getExpandoBridge().setAttributes(serviceContext);
 	}
 
+	@Override
 	public Object clone() {
 		PortletItemImpl portletItemImpl = new PortletItemImpl();
 
@@ -313,6 +317,7 @@ public class PortletItemModelImpl extends BaseModelImpl<PortletItem>
 		}
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		if (obj == null) {
 			return false;
@@ -337,10 +342,12 @@ public class PortletItemModelImpl extends BaseModelImpl<PortletItem>
 		}
 	}
 
+	@Override
 	public int hashCode() {
 		return (int)getPrimaryKey();
 	}
 
+	@Override
 	public void resetOriginalValues() {
 		PortletItemModelImpl portletItemModelImpl = this;
 
@@ -357,6 +364,7 @@ public class PortletItemModelImpl extends BaseModelImpl<PortletItem>
 		portletItemModelImpl._setOriginalClassNameId = false;
 	}
 
+	@Override
 	public String toString() {
 		StringBundler sb = new StringBundler(21);
 

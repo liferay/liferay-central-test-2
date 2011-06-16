@@ -205,6 +205,7 @@ public class AnnouncementsFlagWrapper implements AnnouncementsFlag {
 		_announcementsFlag.setExpandoBridgeAttributes(serviceContext);
 	}
 
+	@Override
 	public java.lang.Object clone() {
 		return new AnnouncementsFlagWrapper((AnnouncementsFlag)_announcementsFlag.clone());
 	}
@@ -214,6 +215,7 @@ public class AnnouncementsFlagWrapper implements AnnouncementsFlag {
 		return _announcementsFlag.compareTo(announcementsFlag);
 	}
 
+	@Override
 	public int hashCode() {
 		return _announcementsFlag.hashCode();
 	}
@@ -222,6 +224,7 @@ public class AnnouncementsFlagWrapper implements AnnouncementsFlag {
 		return new AnnouncementsFlagWrapper(_announcementsFlag.toEscapedModel());
 	}
 
+	@Override
 	public java.lang.String toString() {
 		return _announcementsFlag.toString();
 	}

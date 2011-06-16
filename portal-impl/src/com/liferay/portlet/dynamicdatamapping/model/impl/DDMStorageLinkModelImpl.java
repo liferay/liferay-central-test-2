@@ -166,6 +166,7 @@ public class DDMStorageLinkModelImpl extends BaseModelImpl<DDMStorageLink>
 		_structureId = structureId;
 	}
 
+	@Override
 	public DDMStorageLink toEscapedModel() {
 		if (isEscapedModel()) {
 			return (DDMStorageLink)this;
@@ -176,6 +177,7 @@ public class DDMStorageLinkModelImpl extends BaseModelImpl<DDMStorageLink>
 		}
 	}
 
+	@Override
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
 			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(0,
@@ -185,10 +187,12 @@ public class DDMStorageLinkModelImpl extends BaseModelImpl<DDMStorageLink>
 		return _expandoBridge;
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
 		getExpandoBridge().setAttributes(serviceContext);
 	}
 
+	@Override
 	public Object clone() {
 		DDMStorageLinkImpl ddmStorageLinkImpl = new DDMStorageLinkImpl();
 
@@ -217,6 +221,7 @@ public class DDMStorageLinkModelImpl extends BaseModelImpl<DDMStorageLink>
 		}
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		if (obj == null) {
 			return false;
@@ -241,10 +246,12 @@ public class DDMStorageLinkModelImpl extends BaseModelImpl<DDMStorageLink>
 		}
 	}
 
+	@Override
 	public int hashCode() {
 		return (int)getPrimaryKey();
 	}
 
+	@Override
 	public void resetOriginalValues() {
 		DDMStorageLinkModelImpl ddmStorageLinkModelImpl = this;
 
@@ -253,6 +260,7 @@ public class DDMStorageLinkModelImpl extends BaseModelImpl<DDMStorageLink>
 		ddmStorageLinkModelImpl._setOriginalClassPK = false;
 	}
 
+	@Override
 	public String toString() {
 		StringBundler sb = new StringBundler(11);
 

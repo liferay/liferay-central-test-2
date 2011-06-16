@@ -556,6 +556,7 @@ public class CalEventWrapper implements CalEvent {
 		_calEvent.setExpandoBridgeAttributes(serviceContext);
 	}
 
+	@Override
 	public java.lang.Object clone() {
 		return new CalEventWrapper((CalEvent)_calEvent.clone());
 	}
@@ -564,6 +565,7 @@ public class CalEventWrapper implements CalEvent {
 		return _calEvent.compareTo(calEvent);
 	}
 
+	@Override
 	public int hashCode() {
 		return _calEvent.hashCode();
 	}
@@ -572,6 +574,7 @@ public class CalEventWrapper implements CalEvent {
 		return new CalEventWrapper(_calEvent.toEscapedModel());
 	}
 
+	@Override
 	public java.lang.String toString() {
 		return _calEvent.toString();
 	}

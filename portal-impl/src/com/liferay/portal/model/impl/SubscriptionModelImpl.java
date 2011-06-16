@@ -247,6 +247,7 @@ public class SubscriptionModelImpl extends BaseModelImpl<Subscription>
 		_frequency = frequency;
 	}
 
+	@Override
 	public Subscription toEscapedModel() {
 		if (isEscapedModel()) {
 			return (Subscription)this;
@@ -257,6 +258,7 @@ public class SubscriptionModelImpl extends BaseModelImpl<Subscription>
 		}
 	}
 
+	@Override
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
 			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
@@ -266,10 +268,12 @@ public class SubscriptionModelImpl extends BaseModelImpl<Subscription>
 		return _expandoBridge;
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
 		getExpandoBridge().setAttributes(serviceContext);
 	}
 
+	@Override
 	public Object clone() {
 		SubscriptionImpl subscriptionImpl = new SubscriptionImpl();
 
@@ -302,6 +306,7 @@ public class SubscriptionModelImpl extends BaseModelImpl<Subscription>
 		}
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		if (obj == null) {
 			return false;
@@ -326,10 +331,12 @@ public class SubscriptionModelImpl extends BaseModelImpl<Subscription>
 		}
 	}
 
+	@Override
 	public int hashCode() {
 		return (int)getPrimaryKey();
 	}
 
+	@Override
 	public void resetOriginalValues() {
 		SubscriptionModelImpl subscriptionModelImpl = this;
 
@@ -350,6 +357,7 @@ public class SubscriptionModelImpl extends BaseModelImpl<Subscription>
 		subscriptionModelImpl._setOriginalClassPK = false;
 	}
 
+	@Override
 	public String toString() {
 		StringBundler sb = new StringBundler(19);
 

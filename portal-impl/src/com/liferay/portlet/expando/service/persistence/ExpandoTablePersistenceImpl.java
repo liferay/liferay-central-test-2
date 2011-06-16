@@ -150,6 +150,7 @@ public class ExpandoTablePersistenceImpl extends BasePersistenceImpl<ExpandoTabl
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache() {
 		if (_HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
 			CacheRegistryUtil.clear(ExpandoTableImpl.class.getName());
@@ -167,6 +168,7 @@ public class ExpandoTablePersistenceImpl extends BasePersistenceImpl<ExpandoTabl
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache(ExpandoTable expandoTable) {
 		EntityCacheUtil.removeResult(ExpandoTableModelImpl.ENTITY_CACHE_ENABLED,
 			ExpandoTableImpl.class, expandoTable.getPrimaryKey());
@@ -203,6 +205,7 @@ public class ExpandoTablePersistenceImpl extends BasePersistenceImpl<ExpandoTabl
 	 * @throws com.liferay.portal.NoSuchModelException if a expando table with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ExpandoTable remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
@@ -255,11 +258,13 @@ public class ExpandoTablePersistenceImpl extends BasePersistenceImpl<ExpandoTabl
 	 * @return the expando table that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ExpandoTable remove(ExpandoTable expandoTable)
 		throws SystemException {
 		return super.remove(expandoTable);
 	}
 
+	@Override
 	protected ExpandoTable removeImpl(ExpandoTable expandoTable)
 		throws SystemException {
 		expandoTable = toUnwrappedModel(expandoTable);
@@ -296,6 +301,7 @@ public class ExpandoTablePersistenceImpl extends BasePersistenceImpl<ExpandoTabl
 		return expandoTable;
 	}
 
+	@Override
 	public ExpandoTable updateImpl(
 		com.liferay.portlet.expando.model.ExpandoTable expandoTable,
 		boolean merge) throws SystemException {
@@ -383,6 +389,7 @@ public class ExpandoTablePersistenceImpl extends BasePersistenceImpl<ExpandoTabl
 	 * @throws com.liferay.portal.NoSuchModelException if a expando table with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ExpandoTable findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
@@ -419,6 +426,7 @@ public class ExpandoTablePersistenceImpl extends BasePersistenceImpl<ExpandoTabl
 	 * @return the expando table, or <code>null</code> if a expando table with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ExpandoTable fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());

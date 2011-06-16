@@ -403,6 +403,7 @@ public class SCProductEntryWrapper implements SCProductEntry {
 		_scProductEntry.setExpandoBridgeAttributes(serviceContext);
 	}
 
+	@Override
 	public java.lang.Object clone() {
 		return new SCProductEntryWrapper((SCProductEntry)_scProductEntry.clone());
 	}
@@ -412,6 +413,7 @@ public class SCProductEntryWrapper implements SCProductEntry {
 		return _scProductEntry.compareTo(scProductEntry);
 	}
 
+	@Override
 	public int hashCode() {
 		return _scProductEntry.hashCode();
 	}
@@ -420,6 +422,7 @@ public class SCProductEntryWrapper implements SCProductEntry {
 		return new SCProductEntryWrapper(_scProductEntry.toEscapedModel());
 	}
 
+	@Override
 	public java.lang.String toString() {
 		return _scProductEntry.toString();
 	}

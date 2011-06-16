@@ -121,6 +121,7 @@ public class OrgGroupPermissionModelImpl extends BaseModelImpl<OrgGroupPermissio
 		_permissionId = permissionId;
 	}
 
+	@Override
 	public OrgGroupPermission toEscapedModel() {
 		if (isEscapedModel()) {
 			return (OrgGroupPermission)this;
@@ -131,6 +132,7 @@ public class OrgGroupPermissionModelImpl extends BaseModelImpl<OrgGroupPermissio
 		}
 	}
 
+	@Override
 	public Object clone() {
 		OrgGroupPermissionImpl orgGroupPermissionImpl = new OrgGroupPermissionImpl();
 
@@ -149,6 +151,7 @@ public class OrgGroupPermissionModelImpl extends BaseModelImpl<OrgGroupPermissio
 		return getPrimaryKey().compareTo(primaryKey);
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		if (obj == null) {
 			return false;
@@ -173,13 +176,16 @@ public class OrgGroupPermissionModelImpl extends BaseModelImpl<OrgGroupPermissio
 		}
 	}
 
+	@Override
 	public int hashCode() {
 		return getPrimaryKey().hashCode();
 	}
 
+	@Override
 	public void resetOriginalValues() {
 	}
 
+	@Override
 	public String toString() {
 		StringBundler sb = new StringBundler(7);
 

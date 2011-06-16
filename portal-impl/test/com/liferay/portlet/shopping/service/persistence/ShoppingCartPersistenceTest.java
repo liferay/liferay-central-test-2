@@ -33,7 +33,6 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class ShoppingCartPersistenceTest extends BasePersistenceTestCase {
-	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 
@@ -70,14 +69,23 @@ public class ShoppingCartPersistenceTest extends BasePersistenceTestCase {
 		ShoppingCart newShoppingCart = _persistence.create(pk);
 
 		newShoppingCart.setGroupId(nextLong());
+
 		newShoppingCart.setCompanyId(nextLong());
+
 		newShoppingCart.setUserId(nextLong());
+
 		newShoppingCart.setUserName(randomString());
+
 		newShoppingCart.setCreateDate(nextDate());
+
 		newShoppingCart.setModifiedDate(nextDate());
+
 		newShoppingCart.setItemIds(randomString());
+
 		newShoppingCart.setCouponCodes(randomString());
+
 		newShoppingCart.setAltShipping(nextInt());
+
 		newShoppingCart.setInsure(randomBoolean());
 
 		_persistence.update(newShoppingCart, false);
@@ -236,14 +244,23 @@ public class ShoppingCartPersistenceTest extends BasePersistenceTestCase {
 		ShoppingCart shoppingCart = _persistence.create(pk);
 
 		shoppingCart.setGroupId(nextLong());
+
 		shoppingCart.setCompanyId(nextLong());
+
 		shoppingCart.setUserId(nextLong());
+
 		shoppingCart.setUserName(randomString());
+
 		shoppingCart.setCreateDate(nextDate());
+
 		shoppingCart.setModifiedDate(nextDate());
+
 		shoppingCart.setItemIds(randomString());
+
 		shoppingCart.setCouponCodes(randomString());
+
 		shoppingCart.setAltShipping(nextInt());
+
 		shoppingCart.setInsure(randomBoolean());
 
 		_persistence.update(shoppingCart, false);

@@ -385,6 +385,7 @@ public class MBCategoryWrapper implements MBCategory {
 		_mbCategory.setExpandoBridgeAttributes(serviceContext);
 	}
 
+	@Override
 	public java.lang.Object clone() {
 		return new MBCategoryWrapper((MBCategory)_mbCategory.clone());
 	}
@@ -394,6 +395,7 @@ public class MBCategoryWrapper implements MBCategory {
 		return _mbCategory.compareTo(mbCategory);
 	}
 
+	@Override
 	public int hashCode() {
 		return _mbCategory.hashCode();
 	}
@@ -402,6 +404,7 @@ public class MBCategoryWrapper implements MBCategory {
 		return new MBCategoryWrapper(_mbCategory.toEscapedModel());
 	}
 
+	@Override
 	public java.lang.String toString() {
 		return _mbCategory.toString();
 	}

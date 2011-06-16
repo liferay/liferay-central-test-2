@@ -215,6 +215,7 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache() {
 		if (_HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
 			CacheRegistryUtil.clear(JournalTemplateImpl.class.getName());
@@ -232,6 +233,7 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache(JournalTemplate journalTemplate) {
 		EntityCacheUtil.removeResult(JournalTemplateModelImpl.ENTITY_CACHE_ENABLED,
 			JournalTemplateImpl.class, journalTemplate.getPrimaryKey());
@@ -280,6 +282,7 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 	 * @throws com.liferay.portal.NoSuchModelException if a journal template with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public JournalTemplate remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
@@ -332,11 +335,13 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 	 * @return the journal template that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public JournalTemplate remove(JournalTemplate journalTemplate)
 		throws SystemException {
 		return super.remove(journalTemplate);
 	}
 
+	@Override
 	protected JournalTemplate removeImpl(JournalTemplate journalTemplate)
 		throws SystemException {
 		journalTemplate = toUnwrappedModel(journalTemplate);
@@ -383,6 +388,7 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 		return journalTemplate;
 	}
 
+	@Override
 	public JournalTemplate updateImpl(
 		com.liferay.portlet.journal.model.JournalTemplate journalTemplate,
 		boolean merge) throws SystemException {
@@ -525,6 +531,7 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 	 * @throws com.liferay.portal.NoSuchModelException if a journal template with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public JournalTemplate findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
@@ -561,6 +568,7 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 	 * @return the journal template, or <code>null</code> if a journal template with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public JournalTemplate fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());

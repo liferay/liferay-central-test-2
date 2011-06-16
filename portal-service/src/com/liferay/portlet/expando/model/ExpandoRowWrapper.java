@@ -167,6 +167,7 @@ public class ExpandoRowWrapper implements ExpandoRow {
 		_expandoRow.setExpandoBridgeAttributes(serviceContext);
 	}
 
+	@Override
 	public java.lang.Object clone() {
 		return new ExpandoRowWrapper((ExpandoRow)_expandoRow.clone());
 	}
@@ -176,6 +177,7 @@ public class ExpandoRowWrapper implements ExpandoRow {
 		return _expandoRow.compareTo(expandoRow);
 	}
 
+	@Override
 	public int hashCode() {
 		return _expandoRow.hashCode();
 	}
@@ -184,6 +186,7 @@ public class ExpandoRowWrapper implements ExpandoRow {
 		return new ExpandoRowWrapper(_expandoRow.toEscapedModel());
 	}
 
+	@Override
 	public java.lang.String toString() {
 		return _expandoRow.toString();
 	}

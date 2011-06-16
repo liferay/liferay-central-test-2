@@ -33,7 +33,6 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class UserPersistenceTest extends BasePersistenceTestCase {
-	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 
@@ -70,42 +69,79 @@ public class UserPersistenceTest extends BasePersistenceTestCase {
 		User newUser = _persistence.create(pk);
 
 		newUser.setUuid(randomString());
+
 		newUser.setCompanyId(nextLong());
+
 		newUser.setCreateDate(nextDate());
+
 		newUser.setModifiedDate(nextDate());
+
 		newUser.setDefaultUser(randomBoolean());
+
 		newUser.setContactId(nextLong());
+
 		newUser.setPassword(randomString());
+
 		newUser.setPasswordEncrypted(randomBoolean());
+
 		newUser.setPasswordReset(randomBoolean());
+
 		newUser.setPasswordModifiedDate(nextDate());
+
 		newUser.setDigest(randomString());
+
 		newUser.setReminderQueryQuestion(randomString());
+
 		newUser.setReminderQueryAnswer(randomString());
+
 		newUser.setGraceLoginCount(nextInt());
+
 		newUser.setScreenName(randomString());
+
 		newUser.setEmailAddress(randomString());
+
 		newUser.setFacebookId(nextLong());
+
 		newUser.setOpenId(randomString());
+
 		newUser.setPortraitId(nextLong());
+
 		newUser.setLanguageId(randomString());
+
 		newUser.setTimeZoneId(randomString());
+
 		newUser.setGreeting(randomString());
+
 		newUser.setComments(randomString());
+
 		newUser.setFirstName(randomString());
+
 		newUser.setMiddleName(randomString());
+
 		newUser.setLastName(randomString());
+
 		newUser.setJobTitle(randomString());
+
 		newUser.setLoginDate(nextDate());
+
 		newUser.setLoginIP(randomString());
+
 		newUser.setLastLoginDate(nextDate());
+
 		newUser.setLastLoginIP(randomString());
+
 		newUser.setLastFailedLoginDate(nextDate());
+
 		newUser.setFailedLoginAttempts(nextInt());
+
 		newUser.setLockout(randomBoolean());
+
 		newUser.setLockoutDate(nextDate());
+
 		newUser.setAgreedToTermsOfUse(randomBoolean());
+
 		newUser.setEmailAddressVerified(randomBoolean());
+
 		newUser.setStatus(nextInt());
 
 		_persistence.update(newUser, false);
@@ -326,42 +362,79 @@ public class UserPersistenceTest extends BasePersistenceTestCase {
 		User user = _persistence.create(pk);
 
 		user.setUuid(randomString());
+
 		user.setCompanyId(nextLong());
+
 		user.setCreateDate(nextDate());
+
 		user.setModifiedDate(nextDate());
+
 		user.setDefaultUser(randomBoolean());
+
 		user.setContactId(nextLong());
+
 		user.setPassword(randomString());
+
 		user.setPasswordEncrypted(randomBoolean());
+
 		user.setPasswordReset(randomBoolean());
+
 		user.setPasswordModifiedDate(nextDate());
+
 		user.setDigest(randomString());
+
 		user.setReminderQueryQuestion(randomString());
+
 		user.setReminderQueryAnswer(randomString());
+
 		user.setGraceLoginCount(nextInt());
+
 		user.setScreenName(randomString());
+
 		user.setEmailAddress(randomString());
+
 		user.setFacebookId(nextLong());
+
 		user.setOpenId(randomString());
+
 		user.setPortraitId(nextLong());
+
 		user.setLanguageId(randomString());
+
 		user.setTimeZoneId(randomString());
+
 		user.setGreeting(randomString());
+
 		user.setComments(randomString());
+
 		user.setFirstName(randomString());
+
 		user.setMiddleName(randomString());
+
 		user.setLastName(randomString());
+
 		user.setJobTitle(randomString());
+
 		user.setLoginDate(nextDate());
+
 		user.setLoginIP(randomString());
+
 		user.setLastLoginDate(nextDate());
+
 		user.setLastLoginIP(randomString());
+
 		user.setLastFailedLoginDate(nextDate());
+
 		user.setFailedLoginAttempts(nextInt());
+
 		user.setLockout(randomBoolean());
+
 		user.setLockoutDate(nextDate());
+
 		user.setAgreedToTermsOfUse(randomBoolean());
+
 		user.setEmailAddressVerified(randomBoolean());
+
 		user.setStatus(nextInt());
 
 		_persistence.update(user, false);

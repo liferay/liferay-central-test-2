@@ -266,6 +266,7 @@ public class CompanyWrapper implements Company {
 		_company.setExpandoBridgeAttributes(serviceContext);
 	}
 
+	@Override
 	public java.lang.Object clone() {
 		return new CompanyWrapper((Company)_company.clone());
 	}
@@ -274,6 +275,7 @@ public class CompanyWrapper implements Company {
 		return _company.compareTo(company);
 	}
 
+	@Override
 	public int hashCode() {
 		return _company.hashCode();
 	}
@@ -282,6 +284,7 @@ public class CompanyWrapper implements Company {
 		return new CompanyWrapper(_company.toEscapedModel());
 	}
 
+	@Override
 	public java.lang.String toString() {
 		return _company.toString();
 	}

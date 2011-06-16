@@ -32,7 +32,6 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class SubscriptionPersistenceTest extends BasePersistenceTestCase {
-	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 
@@ -69,12 +68,19 @@ public class SubscriptionPersistenceTest extends BasePersistenceTestCase {
 		Subscription newSubscription = _persistence.create(pk);
 
 		newSubscription.setCompanyId(nextLong());
+
 		newSubscription.setUserId(nextLong());
+
 		newSubscription.setUserName(randomString());
+
 		newSubscription.setCreateDate(nextDate());
+
 		newSubscription.setModifiedDate(nextDate());
+
 		newSubscription.setClassNameId(nextLong());
+
 		newSubscription.setClassPK(nextLong());
+
 		newSubscription.setFrequency(randomString());
 
 		_persistence.update(newSubscription, false);
@@ -235,12 +241,19 @@ public class SubscriptionPersistenceTest extends BasePersistenceTestCase {
 		Subscription subscription = _persistence.create(pk);
 
 		subscription.setCompanyId(nextLong());
+
 		subscription.setUserId(nextLong());
+
 		subscription.setUserName(randomString());
+
 		subscription.setCreateDate(nextDate());
+
 		subscription.setModifiedDate(nextDate());
+
 		subscription.setClassNameId(nextLong());
+
 		subscription.setClassPK(nextLong());
+
 		subscription.setFrequency(randomString());
 
 		_persistence.update(subscription, false);

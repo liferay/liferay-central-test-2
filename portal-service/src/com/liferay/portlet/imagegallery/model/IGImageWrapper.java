@@ -385,6 +385,7 @@ public class IGImageWrapper implements IGImage {
 		_igImage.setExpandoBridgeAttributes(serviceContext);
 	}
 
+	@Override
 	public java.lang.Object clone() {
 		return new IGImageWrapper((IGImage)_igImage.clone());
 	}
@@ -393,6 +394,7 @@ public class IGImageWrapper implements IGImage {
 		return _igImage.compareTo(igImage);
 	}
 
+	@Override
 	public int hashCode() {
 		return _igImage.hashCode();
 	}
@@ -401,6 +403,7 @@ public class IGImageWrapper implements IGImage {
 		return new IGImageWrapper(_igImage.toEscapedModel());
 	}
 
+	@Override
 	public java.lang.String toString() {
 		return _igImage.toString();
 	}

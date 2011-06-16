@@ -208,6 +208,7 @@ public class TicketModelImpl extends BaseModelImpl<Ticket>
 		_expirationDate = expirationDate;
 	}
 
+	@Override
 	public Ticket toEscapedModel() {
 		if (isEscapedModel()) {
 			return (Ticket)this;
@@ -218,6 +219,7 @@ public class TicketModelImpl extends BaseModelImpl<Ticket>
 		}
 	}
 
+	@Override
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
 			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
@@ -227,10 +229,12 @@ public class TicketModelImpl extends BaseModelImpl<Ticket>
 		return _expandoBridge;
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
 		getExpandoBridge().setAttributes(serviceContext);
 	}
 
+	@Override
 	public Object clone() {
 		TicketImpl ticketImpl = new TicketImpl();
 
@@ -269,6 +273,7 @@ public class TicketModelImpl extends BaseModelImpl<Ticket>
 		return 0;
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		if (obj == null) {
 			return false;
@@ -293,16 +298,19 @@ public class TicketModelImpl extends BaseModelImpl<Ticket>
 		}
 	}
 
+	@Override
 	public int hashCode() {
 		return (int)getPrimaryKey();
 	}
 
+	@Override
 	public void resetOriginalValues() {
 		TicketModelImpl ticketModelImpl = this;
 
 		ticketModelImpl._originalKey = ticketModelImpl._key;
 	}
 
+	@Override
 	public String toString() {
 		StringBundler sb = new StringBundler(19);
 

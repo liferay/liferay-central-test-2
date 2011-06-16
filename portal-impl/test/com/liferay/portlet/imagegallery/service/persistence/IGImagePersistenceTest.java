@@ -34,7 +34,6 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class IGImagePersistenceTest extends BasePersistenceTestCase {
-	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 
@@ -71,18 +70,31 @@ public class IGImagePersistenceTest extends BasePersistenceTestCase {
 		IGImage newIGImage = _persistence.create(pk);
 
 		newIGImage.setUuid(randomString());
+
 		newIGImage.setGroupId(nextLong());
+
 		newIGImage.setCompanyId(nextLong());
+
 		newIGImage.setUserId(nextLong());
+
 		newIGImage.setUserName(randomString());
+
 		newIGImage.setCreateDate(nextDate());
+
 		newIGImage.setModifiedDate(nextDate());
+
 		newIGImage.setFolderId(nextLong());
+
 		newIGImage.setName(randomString());
+
 		newIGImage.setDescription(randomString());
+
 		newIGImage.setSmallImageId(nextLong());
+
 		newIGImage.setLargeImageId(nextLong());
+
 		newIGImage.setCustom1ImageId(nextLong());
+
 		newIGImage.setCustom2ImageId(nextLong());
 
 		_persistence.update(newIGImage, false);
@@ -251,18 +263,31 @@ public class IGImagePersistenceTest extends BasePersistenceTestCase {
 		IGImage igImage = _persistence.create(pk);
 
 		igImage.setUuid(randomString());
+
 		igImage.setGroupId(nextLong());
+
 		igImage.setCompanyId(nextLong());
+
 		igImage.setUserId(nextLong());
+
 		igImage.setUserName(randomString());
+
 		igImage.setCreateDate(nextDate());
+
 		igImage.setModifiedDate(nextDate());
+
 		igImage.setFolderId(nextLong());
+
 		igImage.setName(randomString());
+
 		igImage.setDescription(randomString());
+
 		igImage.setSmallImageId(nextLong());
+
 		igImage.setLargeImageId(nextLong());
+
 		igImage.setCustom1ImageId(nextLong());
+
 		igImage.setCustom2ImageId(nextLong());
 
 		_persistence.update(igImage, false);

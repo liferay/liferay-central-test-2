@@ -167,6 +167,7 @@ public class PermissionWrapper implements Permission {
 		_permission.setExpandoBridgeAttributes(serviceContext);
 	}
 
+	@Override
 	public java.lang.Object clone() {
 		return new PermissionWrapper((Permission)_permission.clone());
 	}
@@ -175,6 +176,7 @@ public class PermissionWrapper implements Permission {
 		return _permission.compareTo(permission);
 	}
 
+	@Override
 	public int hashCode() {
 		return _permission.hashCode();
 	}
@@ -183,6 +185,7 @@ public class PermissionWrapper implements Permission {
 		return new PermissionWrapper(_permission.toEscapedModel());
 	}
 
+	@Override
 	public java.lang.String toString() {
 		return _permission.toString();
 	}

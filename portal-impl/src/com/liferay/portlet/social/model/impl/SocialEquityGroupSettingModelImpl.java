@@ -194,6 +194,7 @@ public class SocialEquityGroupSettingModelImpl extends BaseModelImpl<SocialEquit
 		_enabled = enabled;
 	}
 
+	@Override
 	public SocialEquityGroupSetting toEscapedModel() {
 		if (isEscapedModel()) {
 			return (SocialEquityGroupSetting)this;
@@ -204,6 +205,7 @@ public class SocialEquityGroupSettingModelImpl extends BaseModelImpl<SocialEquit
 		}
 	}
 
+	@Override
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
 			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
@@ -213,10 +215,12 @@ public class SocialEquityGroupSettingModelImpl extends BaseModelImpl<SocialEquit
 		return _expandoBridge;
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
 		getExpandoBridge().setAttributes(serviceContext);
 	}
 
+	@Override
 	public Object clone() {
 		SocialEquityGroupSettingImpl socialEquityGroupSettingImpl = new SocialEquityGroupSettingImpl();
 
@@ -246,6 +250,7 @@ public class SocialEquityGroupSettingModelImpl extends BaseModelImpl<SocialEquit
 		}
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		if (obj == null) {
 			return false;
@@ -270,10 +275,12 @@ public class SocialEquityGroupSettingModelImpl extends BaseModelImpl<SocialEquit
 		}
 	}
 
+	@Override
 	public int hashCode() {
 		return (int)getPrimaryKey();
 	}
 
+	@Override
 	public void resetOriginalValues() {
 		SocialEquityGroupSettingModelImpl socialEquityGroupSettingModelImpl = this;
 
@@ -290,6 +297,7 @@ public class SocialEquityGroupSettingModelImpl extends BaseModelImpl<SocialEquit
 		socialEquityGroupSettingModelImpl._setOriginalType = false;
 	}
 
+	@Override
 	public String toString() {
 		StringBundler sb = new StringBundler(13);
 

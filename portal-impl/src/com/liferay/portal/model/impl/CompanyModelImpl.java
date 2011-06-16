@@ -280,6 +280,7 @@ public class CompanyModelImpl extends BaseModelImpl<Company>
 		_maxUsers = maxUsers;
 	}
 
+	@Override
 	public Company toEscapedModel() {
 		if (isEscapedModel()) {
 			return (Company)this;
@@ -290,6 +291,7 @@ public class CompanyModelImpl extends BaseModelImpl<Company>
 		}
 	}
 
+	@Override
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
 			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
@@ -299,10 +301,12 @@ public class CompanyModelImpl extends BaseModelImpl<Company>
 		return _expandoBridge;
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
 		getExpandoBridge().setAttributes(serviceContext);
 	}
 
+	@Override
 	public Object clone() {
 		CompanyImpl companyImpl = new CompanyImpl();
 
@@ -335,6 +339,7 @@ public class CompanyModelImpl extends BaseModelImpl<Company>
 		}
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		if (obj == null) {
 			return false;
@@ -359,10 +364,12 @@ public class CompanyModelImpl extends BaseModelImpl<Company>
 		}
 	}
 
+	@Override
 	public int hashCode() {
 		return (int)getPrimaryKey();
 	}
 
+	@Override
 	public void resetOriginalValues() {
 		CompanyModelImpl companyModelImpl = this;
 
@@ -375,6 +382,7 @@ public class CompanyModelImpl extends BaseModelImpl<Company>
 		companyModelImpl._setOriginalLogoId = false;
 	}
 
+	@Override
 	public String toString() {
 		StringBundler sb = new StringBundler(19);
 

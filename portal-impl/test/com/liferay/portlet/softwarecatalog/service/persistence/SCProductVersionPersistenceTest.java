@@ -34,7 +34,6 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class SCProductVersionPersistenceTest extends BasePersistenceTestCase {
-	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 
@@ -71,15 +70,25 @@ public class SCProductVersionPersistenceTest extends BasePersistenceTestCase {
 		SCProductVersion newSCProductVersion = _persistence.create(pk);
 
 		newSCProductVersion.setCompanyId(nextLong());
+
 		newSCProductVersion.setUserId(nextLong());
+
 		newSCProductVersion.setUserName(randomString());
+
 		newSCProductVersion.setCreateDate(nextDate());
+
 		newSCProductVersion.setModifiedDate(nextDate());
+
 		newSCProductVersion.setProductEntryId(nextLong());
+
 		newSCProductVersion.setVersion(randomString());
+
 		newSCProductVersion.setChangeLog(randomString());
+
 		newSCProductVersion.setDownloadPageURL(randomString());
+
 		newSCProductVersion.setDirectDownloadURL(randomString());
+
 		newSCProductVersion.setRepoStoreArtifact(randomBoolean());
 
 		_persistence.update(newSCProductVersion, false);
@@ -242,15 +251,25 @@ public class SCProductVersionPersistenceTest extends BasePersistenceTestCase {
 		SCProductVersion scProductVersion = _persistence.create(pk);
 
 		scProductVersion.setCompanyId(nextLong());
+
 		scProductVersion.setUserId(nextLong());
+
 		scProductVersion.setUserName(randomString());
+
 		scProductVersion.setCreateDate(nextDate());
+
 		scProductVersion.setModifiedDate(nextDate());
+
 		scProductVersion.setProductEntryId(nextLong());
+
 		scProductVersion.setVersion(randomString());
+
 		scProductVersion.setChangeLog(randomString());
+
 		scProductVersion.setDownloadPageURL(randomString());
+
 		scProductVersion.setDirectDownloadURL(randomString());
+
 		scProductVersion.setRepoStoreArtifact(randomBoolean());
 
 		_persistence.update(scProductVersion, false);

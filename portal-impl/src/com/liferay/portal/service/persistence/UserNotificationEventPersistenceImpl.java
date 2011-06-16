@@ -139,6 +139,7 @@ public class UserNotificationEventPersistenceImpl extends BasePersistenceImpl<Us
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache() {
 		if (_HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
 			CacheRegistryUtil.clear(UserNotificationEventImpl.class.getName());
@@ -156,6 +157,7 @@ public class UserNotificationEventPersistenceImpl extends BasePersistenceImpl<Us
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache(UserNotificationEvent userNotificationEvent) {
 		EntityCacheUtil.removeResult(UserNotificationEventModelImpl.ENTITY_CACHE_ENABLED,
 			UserNotificationEventImpl.class,
@@ -189,6 +191,7 @@ public class UserNotificationEventPersistenceImpl extends BasePersistenceImpl<Us
 	 * @throws com.liferay.portal.NoSuchModelException if a user notification event with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public UserNotificationEvent remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
@@ -242,11 +245,13 @@ public class UserNotificationEventPersistenceImpl extends BasePersistenceImpl<Us
 	 * @return the user notification event that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public UserNotificationEvent remove(
 		UserNotificationEvent userNotificationEvent) throws SystemException {
 		return super.remove(userNotificationEvent);
 	}
 
+	@Override
 	protected UserNotificationEvent removeImpl(
 		UserNotificationEvent userNotificationEvent) throws SystemException {
 		userNotificationEvent = toUnwrappedModel(userNotificationEvent);
@@ -274,6 +279,7 @@ public class UserNotificationEventPersistenceImpl extends BasePersistenceImpl<Us
 		return userNotificationEvent;
 	}
 
+	@Override
 	public UserNotificationEvent updateImpl(
 		com.liferay.portal.model.UserNotificationEvent userNotificationEvent,
 		boolean merge) throws SystemException {
@@ -341,6 +347,7 @@ public class UserNotificationEventPersistenceImpl extends BasePersistenceImpl<Us
 	 * @throws com.liferay.portal.NoSuchModelException if a user notification event with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public UserNotificationEvent findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
@@ -378,6 +385,7 @@ public class UserNotificationEventPersistenceImpl extends BasePersistenceImpl<Us
 	 * @return the user notification event, or <code>null</code> if a user notification event with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public UserNotificationEvent fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());

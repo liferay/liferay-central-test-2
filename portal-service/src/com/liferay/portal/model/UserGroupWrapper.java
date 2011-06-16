@@ -212,6 +212,7 @@ public class UserGroupWrapper implements UserGroup {
 		_userGroup.setExpandoBridgeAttributes(serviceContext);
 	}
 
+	@Override
 	public java.lang.Object clone() {
 		return new UserGroupWrapper((UserGroup)_userGroup.clone());
 	}
@@ -220,6 +221,7 @@ public class UserGroupWrapper implements UserGroup {
 		return _userGroup.compareTo(userGroup);
 	}
 
+	@Override
 	public int hashCode() {
 		return _userGroup.hashCode();
 	}
@@ -228,6 +230,7 @@ public class UserGroupWrapper implements UserGroup {
 		return new UserGroupWrapper(_userGroup.toEscapedModel());
 	}
 
+	@Override
 	public java.lang.String toString() {
 		return _userGroup.toString();
 	}

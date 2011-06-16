@@ -137,6 +137,7 @@ public class PortletPersistenceImpl extends BasePersistenceImpl<Portlet>
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache() {
 		if (_HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
 			CacheRegistryUtil.clear(PortletImpl.class.getName());
@@ -154,6 +155,7 @@ public class PortletPersistenceImpl extends BasePersistenceImpl<Portlet>
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache(Portlet portlet) {
 		EntityCacheUtil.removeResult(PortletModelImpl.ENTITY_CACHE_ENABLED,
 			PortletImpl.class, portlet.getPrimaryKey());
@@ -189,6 +191,7 @@ public class PortletPersistenceImpl extends BasePersistenceImpl<Portlet>
 	 * @throws com.liferay.portal.NoSuchModelException if a portlet with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Portlet remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
@@ -241,10 +244,12 @@ public class PortletPersistenceImpl extends BasePersistenceImpl<Portlet>
 	 * @return the portlet that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Portlet remove(Portlet portlet) throws SystemException {
 		return super.remove(portlet);
 	}
 
+	@Override
 	protected Portlet removeImpl(Portlet portlet) throws SystemException {
 		portlet = toUnwrappedModel(portlet);
 
@@ -279,6 +284,7 @@ public class PortletPersistenceImpl extends BasePersistenceImpl<Portlet>
 		return portlet;
 	}
 
+	@Override
 	public Portlet updateImpl(com.liferay.portal.model.Portlet portlet,
 		boolean merge) throws SystemException {
 		portlet = toUnwrappedModel(portlet);
@@ -362,6 +368,7 @@ public class PortletPersistenceImpl extends BasePersistenceImpl<Portlet>
 	 * @throws com.liferay.portal.NoSuchModelException if a portlet with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Portlet findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
@@ -398,6 +405,7 @@ public class PortletPersistenceImpl extends BasePersistenceImpl<Portlet>
 	 * @return the portlet, or <code>null</code> if a portlet with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Portlet fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());

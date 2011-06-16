@@ -446,6 +446,7 @@ public class MBMailingListModelImpl extends BaseModelImpl<MBMailingList>
 		_active = active;
 	}
 
+	@Override
 	public MBMailingList toEscapedModel() {
 		if (isEscapedModel()) {
 			return (MBMailingList)this;
@@ -456,6 +457,7 @@ public class MBMailingListModelImpl extends BaseModelImpl<MBMailingList>
 		}
 	}
 
+	@Override
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
 			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
@@ -465,10 +467,12 @@ public class MBMailingListModelImpl extends BaseModelImpl<MBMailingList>
 		return _expandoBridge;
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
 		getExpandoBridge().setAttributes(serviceContext);
 	}
 
+	@Override
 	public Object clone() {
 		MBMailingListImpl mbMailingListImpl = new MBMailingListImpl();
 
@@ -518,6 +522,7 @@ public class MBMailingListModelImpl extends BaseModelImpl<MBMailingList>
 		}
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		if (obj == null) {
 			return false;
@@ -542,10 +547,12 @@ public class MBMailingListModelImpl extends BaseModelImpl<MBMailingList>
 		}
 	}
 
+	@Override
 	public int hashCode() {
 		return (int)getPrimaryKey();
 	}
 
+	@Override
 	public void resetOriginalValues() {
 		MBMailingListModelImpl mbMailingListModelImpl = this;
 
@@ -560,6 +567,7 @@ public class MBMailingListModelImpl extends BaseModelImpl<MBMailingList>
 		mbMailingListModelImpl._setOriginalCategoryId = false;
 	}
 
+	@Override
 	public String toString() {
 		StringBundler sb = new StringBundler(53);
 

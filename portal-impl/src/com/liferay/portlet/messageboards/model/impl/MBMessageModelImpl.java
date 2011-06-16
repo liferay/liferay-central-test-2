@@ -542,6 +542,7 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage>
 		}
 	}
 
+	@Override
 	public MBMessage toEscapedModel() {
 		if (isEscapedModel()) {
 			return (MBMessage)this;
@@ -552,6 +553,7 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage>
 		}
 	}
 
+	@Override
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
 			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
@@ -561,10 +563,12 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage>
 		return _expandoBridge;
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
 		getExpandoBridge().setAttributes(serviceContext);
 	}
 
+	@Override
 	public Object clone() {
 		MBMessageImpl mbMessageImpl = new MBMessageImpl();
 
@@ -625,6 +629,7 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage>
 		return 0;
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		if (obj == null) {
 			return false;
@@ -649,10 +654,12 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage>
 		}
 	}
 
+	@Override
 	public int hashCode() {
 		return (int)getPrimaryKey();
 	}
 
+	@Override
 	public void resetOriginalValues() {
 		MBMessageModelImpl mbMessageModelImpl = this;
 
@@ -663,6 +670,7 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage>
 		mbMessageModelImpl._setOriginalGroupId = false;
 	}
 
+	@Override
 	public String toString() {
 		StringBundler sb = new StringBundler(51);
 

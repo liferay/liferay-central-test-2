@@ -171,6 +171,7 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache() {
 		if (_HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
 			CacheRegistryUtil.clear(MBMailingListImpl.class.getName());
@@ -188,6 +189,7 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache(MBMailingList mbMailingList) {
 		EntityCacheUtil.removeResult(MBMailingListModelImpl.ENTITY_CACHE_ENABLED,
 			MBMailingListImpl.class, mbMailingList.getPrimaryKey());
@@ -232,6 +234,7 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 	 * @throws com.liferay.portal.NoSuchModelException if a message boards mailing list with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMailingList remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
@@ -284,11 +287,13 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 	 * @return the message boards mailing list that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMailingList remove(MBMailingList mbMailingList)
 		throws SystemException {
 		return super.remove(mbMailingList);
 	}
 
+	@Override
 	protected MBMailingList removeImpl(MBMailingList mbMailingList)
 		throws SystemException {
 		mbMailingList = toUnwrappedModel(mbMailingList);
@@ -329,6 +334,7 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 		return mbMailingList;
 	}
 
+	@Override
 	public MBMailingList updateImpl(
 		com.liferay.portlet.messageboards.model.MBMailingList mbMailingList,
 		boolean merge) throws SystemException {
@@ -459,6 +465,7 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 	 * @throws com.liferay.portal.NoSuchModelException if a message boards mailing list with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMailingList findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
@@ -495,6 +502,7 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 	 * @return the message boards mailing list, or <code>null</code> if a message boards mailing list with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMailingList fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());

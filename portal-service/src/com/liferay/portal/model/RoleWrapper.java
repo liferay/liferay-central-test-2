@@ -362,6 +362,7 @@ public class RoleWrapper implements Role {
 		_role.setExpandoBridgeAttributes(serviceContext);
 	}
 
+	@Override
 	public java.lang.Object clone() {
 		return new RoleWrapper((Role)_role.clone());
 	}
@@ -370,6 +371,7 @@ public class RoleWrapper implements Role {
 		return _role.compareTo(role);
 	}
 
+	@Override
 	public int hashCode() {
 		return _role.hashCode();
 	}
@@ -378,6 +380,7 @@ public class RoleWrapper implements Role {
 		return new RoleWrapper(_role.toEscapedModel());
 	}
 
+	@Override
 	public java.lang.String toString() {
 		return _role.toString();
 	}

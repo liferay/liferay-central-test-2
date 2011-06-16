@@ -34,7 +34,6 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class JournalTemplatePersistenceTest extends BasePersistenceTestCase {
-	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 
@@ -71,21 +70,37 @@ public class JournalTemplatePersistenceTest extends BasePersistenceTestCase {
 		JournalTemplate newJournalTemplate = _persistence.create(pk);
 
 		newJournalTemplate.setUuid(randomString());
+
 		newJournalTemplate.setGroupId(nextLong());
+
 		newJournalTemplate.setCompanyId(nextLong());
+
 		newJournalTemplate.setUserId(nextLong());
+
 		newJournalTemplate.setUserName(randomString());
+
 		newJournalTemplate.setCreateDate(nextDate());
+
 		newJournalTemplate.setModifiedDate(nextDate());
+
 		newJournalTemplate.setTemplateId(randomString());
+
 		newJournalTemplate.setStructureId(randomString());
+
 		newJournalTemplate.setName(randomString());
+
 		newJournalTemplate.setDescription(randomString());
+
 		newJournalTemplate.setXsl(randomString());
+
 		newJournalTemplate.setLangType(randomString());
+
 		newJournalTemplate.setCacheable(randomBoolean());
+
 		newJournalTemplate.setSmallImage(randomBoolean());
+
 		newJournalTemplate.setSmallImageId(nextLong());
+
 		newJournalTemplate.setSmallImageURL(randomString());
 
 		_persistence.update(newJournalTemplate, false);
@@ -266,21 +281,37 @@ public class JournalTemplatePersistenceTest extends BasePersistenceTestCase {
 		JournalTemplate journalTemplate = _persistence.create(pk);
 
 		journalTemplate.setUuid(randomString());
+
 		journalTemplate.setGroupId(nextLong());
+
 		journalTemplate.setCompanyId(nextLong());
+
 		journalTemplate.setUserId(nextLong());
+
 		journalTemplate.setUserName(randomString());
+
 		journalTemplate.setCreateDate(nextDate());
+
 		journalTemplate.setModifiedDate(nextDate());
+
 		journalTemplate.setTemplateId(randomString());
+
 		journalTemplate.setStructureId(randomString());
+
 		journalTemplate.setName(randomString());
+
 		journalTemplate.setDescription(randomString());
+
 		journalTemplate.setXsl(randomString());
+
 		journalTemplate.setLangType(randomString());
+
 		journalTemplate.setCacheable(randomBoolean());
+
 		journalTemplate.setSmallImage(randomBoolean());
+
 		journalTemplate.setSmallImageId(nextLong());
+
 		journalTemplate.setSmallImageURL(randomString());
 
 		_persistence.update(journalTemplate, false);

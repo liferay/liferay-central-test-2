@@ -33,7 +33,6 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class ExpandoTablePersistenceTest extends BasePersistenceTestCase {
-	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 
@@ -70,7 +69,9 @@ public class ExpandoTablePersistenceTest extends BasePersistenceTestCase {
 		ExpandoTable newExpandoTable = _persistence.create(pk);
 
 		newExpandoTable.setCompanyId(nextLong());
+
 		newExpandoTable.setClassNameId(nextLong());
+
 		newExpandoTable.setName(randomString());
 
 		_persistence.update(newExpandoTable, false);
@@ -214,7 +215,9 @@ public class ExpandoTablePersistenceTest extends BasePersistenceTestCase {
 		ExpandoTable expandoTable = _persistence.create(pk);
 
 		expandoTable.setCompanyId(nextLong());
+
 		expandoTable.setClassNameId(nextLong());
+
 		expandoTable.setName(randomString());
 
 		_persistence.update(expandoTable, false);

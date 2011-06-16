@@ -249,6 +249,7 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache() {
 		if (_HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
 			CacheRegistryUtil.clear(SocialActivityImpl.class.getName());
@@ -266,6 +267,7 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache(SocialActivity socialActivity) {
 		EntityCacheUtil.removeResult(SocialActivityModelImpl.ENTITY_CACHE_ENABLED,
 			SocialActivityImpl.class, socialActivity.getPrimaryKey());
@@ -308,6 +310,7 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 	 * @throws com.liferay.portal.NoSuchModelException if a social activity with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public SocialActivity remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
@@ -360,11 +363,13 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 	 * @return the social activity that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public SocialActivity remove(SocialActivity socialActivity)
 		throws SystemException {
 		return super.remove(socialActivity);
 	}
 
+	@Override
 	protected SocialActivity removeImpl(SocialActivity socialActivity)
 		throws SystemException {
 		socialActivity = toUnwrappedModel(socialActivity);
@@ -409,6 +414,7 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 		return socialActivity;
 	}
 
+	@Override
 	public SocialActivity updateImpl(
 		com.liferay.portlet.social.model.SocialActivity socialActivity,
 		boolean merge) throws SystemException {
@@ -535,6 +541,7 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 	 * @throws com.liferay.portal.NoSuchModelException if a social activity with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public SocialActivity findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
@@ -571,6 +578,7 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 	 * @return the social activity, or <code>null</code> if a social activity with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public SocialActivity fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());

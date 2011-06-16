@@ -154,6 +154,7 @@ public class PollsChoicePersistenceImpl extends BasePersistenceImpl<PollsChoice>
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache() {
 		if (_HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
 			CacheRegistryUtil.clear(PollsChoiceImpl.class.getName());
@@ -171,6 +172,7 @@ public class PollsChoicePersistenceImpl extends BasePersistenceImpl<PollsChoice>
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache(PollsChoice pollsChoice) {
 		EntityCacheUtil.removeResult(PollsChoiceModelImpl.ENTITY_CACHE_ENABLED,
 			PollsChoiceImpl.class, pollsChoice.getPrimaryKey());
@@ -210,6 +212,7 @@ public class PollsChoicePersistenceImpl extends BasePersistenceImpl<PollsChoice>
 	 * @throws com.liferay.portal.NoSuchModelException if a polls choice with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public PollsChoice remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
@@ -262,11 +265,13 @@ public class PollsChoicePersistenceImpl extends BasePersistenceImpl<PollsChoice>
 	 * @return the polls choice that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public PollsChoice remove(PollsChoice pollsChoice)
 		throws SystemException {
 		return super.remove(pollsChoice);
 	}
 
+	@Override
 	protected PollsChoice removeImpl(PollsChoice pollsChoice)
 		throws SystemException {
 		pollsChoice = toUnwrappedModel(pollsChoice);
@@ -302,6 +307,7 @@ public class PollsChoicePersistenceImpl extends BasePersistenceImpl<PollsChoice>
 		return pollsChoice;
 	}
 
+	@Override
 	public PollsChoice updateImpl(
 		com.liferay.portlet.polls.model.PollsChoice pollsChoice, boolean merge)
 		throws SystemException {
@@ -392,6 +398,7 @@ public class PollsChoicePersistenceImpl extends BasePersistenceImpl<PollsChoice>
 	 * @throws com.liferay.portal.NoSuchModelException if a polls choice with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public PollsChoice findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
@@ -428,6 +435,7 @@ public class PollsChoicePersistenceImpl extends BasePersistenceImpl<PollsChoice>
 	 * @return the polls choice, or <code>null</code> if a polls choice with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public PollsChoice fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());

@@ -32,7 +32,6 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class ResourcePermissionPersistenceTest extends BasePersistenceTestCase {
-	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 
@@ -69,11 +68,17 @@ public class ResourcePermissionPersistenceTest extends BasePersistenceTestCase {
 		ResourcePermission newResourcePermission = _persistence.create(pk);
 
 		newResourcePermission.setCompanyId(nextLong());
+
 		newResourcePermission.setName(randomString());
+
 		newResourcePermission.setScope(nextInt());
+
 		newResourcePermission.setPrimKey(randomString());
+
 		newResourcePermission.setRoleId(nextLong());
+
 		newResourcePermission.setOwnerId(nextLong());
+
 		newResourcePermission.setActionIds(nextLong());
 
 		_persistence.update(newResourcePermission, false);
@@ -254,11 +259,17 @@ public class ResourcePermissionPersistenceTest extends BasePersistenceTestCase {
 		ResourcePermission resourcePermission = _persistence.create(pk);
 
 		resourcePermission.setCompanyId(nextLong());
+
 		resourcePermission.setName(randomString());
+
 		resourcePermission.setScope(nextInt());
+
 		resourcePermission.setPrimKey(randomString());
+
 		resourcePermission.setRoleId(nextLong());
+
 		resourcePermission.setOwnerId(nextLong());
+
 		resourcePermission.setActionIds(nextLong());
 
 		_persistence.update(resourcePermission, false);

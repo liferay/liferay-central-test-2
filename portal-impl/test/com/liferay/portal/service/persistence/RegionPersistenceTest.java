@@ -29,7 +29,6 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class RegionPersistenceTest extends BasePersistenceTestCase {
-	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 
@@ -66,8 +65,11 @@ public class RegionPersistenceTest extends BasePersistenceTestCase {
 		Region newRegion = _persistence.create(pk);
 
 		newRegion.setCountryId(nextLong());
+
 		newRegion.setRegionCode(randomString());
+
 		newRegion.setName(randomString());
+
 		newRegion.setActive(randomBoolean());
 
 		_persistence.update(newRegion, false);
@@ -190,8 +192,11 @@ public class RegionPersistenceTest extends BasePersistenceTestCase {
 		Region region = _persistence.create(pk);
 
 		region.setCountryId(nextLong());
+
 		region.setRegionCode(randomString());
+
 		region.setName(randomString());
+
 		region.setActive(randomBoolean());
 
 		_persistence.update(region, false);

@@ -277,6 +277,7 @@ public class AssetTagWrapper implements AssetTag {
 		_assetTag.setExpandoBridgeAttributes(serviceContext);
 	}
 
+	@Override
 	public java.lang.Object clone() {
 		return new AssetTagWrapper((AssetTag)_assetTag.clone());
 	}
@@ -285,6 +286,7 @@ public class AssetTagWrapper implements AssetTag {
 		return _assetTag.compareTo(assetTag);
 	}
 
+	@Override
 	public int hashCode() {
 		return _assetTag.hashCode();
 	}
@@ -293,6 +295,7 @@ public class AssetTagWrapper implements AssetTag {
 		return new AssetTagWrapper(_assetTag.toEscapedModel());
 	}
 
+	@Override
 	public java.lang.String toString() {
 		return _assetTag.toString();
 	}

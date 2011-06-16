@@ -175,6 +175,7 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache() {
 		if (_HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
 			CacheRegistryUtil.clear(OrganizationImpl.class.getName());
@@ -192,6 +193,7 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache(Organization organization) {
 		EntityCacheUtil.removeResult(OrganizationModelImpl.ENTITY_CACHE_ENABLED,
 			OrganizationImpl.class, organization.getPrimaryKey());
@@ -227,6 +229,7 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 	 * @throws com.liferay.portal.NoSuchModelException if a organization with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Organization remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
@@ -280,11 +283,13 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 	 * @return the organization that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Organization remove(Organization organization)
 		throws SystemException {
 		return super.remove(organization);
 	}
 
+	@Override
 	protected Organization removeImpl(Organization organization)
 		throws SystemException {
 		organization = toUnwrappedModel(organization);
@@ -342,6 +347,7 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 		return organization;
 	}
 
+	@Override
 	public Organization updateImpl(
 		com.liferay.portal.model.Organization organization, boolean merge)
 		throws SystemException {
@@ -443,6 +449,7 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 	 * @throws com.liferay.portal.NoSuchModelException if a organization with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Organization findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
@@ -479,6 +486,7 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 	 * @return the organization, or <code>null</code> if a organization with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Organization fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());

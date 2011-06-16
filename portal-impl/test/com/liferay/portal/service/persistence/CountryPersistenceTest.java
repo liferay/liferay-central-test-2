@@ -69,10 +69,15 @@ public class CountryPersistenceTest extends BasePersistenceTestCase {
 		Country newCountry = _persistence.create(pk);
 
 		newCountry.setName(randomString());
+
 		newCountry.setA2(randomString());
+
 		newCountry.setA3(randomString());
+
 		newCountry.setNumber(randomString());
+
 		newCountry.setIdd(randomString());
+
 		newCountry.setActive(randomBoolean());
 
 		_persistence.update(newCountry, false);
@@ -218,10 +223,15 @@ public class CountryPersistenceTest extends BasePersistenceTestCase {
 		Country country = _persistence.create(pk);
 
 		country.setName(randomString());
+
 		country.setA2(randomString());
+
 		country.setA3(randomString());
+
 		country.setNumber(randomString());
+
 		country.setIdd(randomString());
+
 		country.setActive(randomBoolean());
 
 		_persistence.update(country, false);

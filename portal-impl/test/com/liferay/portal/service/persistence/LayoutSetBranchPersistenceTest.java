@@ -70,13 +70,21 @@ public class LayoutSetBranchPersistenceTest extends BasePersistenceTestCase {
 		LayoutSetBranch newLayoutSetBranch = _persistence.create(pk);
 
 		newLayoutSetBranch.setGroupId(nextLong());
+
 		newLayoutSetBranch.setCompanyId(nextLong());
+
 		newLayoutSetBranch.setUserId(nextLong());
+
 		newLayoutSetBranch.setUserName(randomString());
+
 		newLayoutSetBranch.setCreateDate(nextDate());
+
 		newLayoutSetBranch.setModifiedDate(nextDate());
+
 		newLayoutSetBranch.setPrivateLayout(randomBoolean());
+
 		newLayoutSetBranch.setName(randomString());
+
 		newLayoutSetBranch.setDescription(randomString());
 
 		_persistence.update(newLayoutSetBranch, false);
@@ -239,13 +247,21 @@ public class LayoutSetBranchPersistenceTest extends BasePersistenceTestCase {
 		LayoutSetBranch layoutSetBranch = _persistence.create(pk);
 
 		layoutSetBranch.setGroupId(nextLong());
+
 		layoutSetBranch.setCompanyId(nextLong());
+
 		layoutSetBranch.setUserId(nextLong());
+
 		layoutSetBranch.setUserName(randomString());
+
 		layoutSetBranch.setCreateDate(nextDate());
+
 		layoutSetBranch.setModifiedDate(nextDate());
+
 		layoutSetBranch.setPrivateLayout(randomBoolean());
+
 		layoutSetBranch.setName(randomString());
+
 		layoutSetBranch.setDescription(randomString());
 
 		_persistence.update(layoutSetBranch, false);

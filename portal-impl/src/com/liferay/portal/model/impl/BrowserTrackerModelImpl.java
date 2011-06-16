@@ -142,6 +142,7 @@ public class BrowserTrackerModelImpl extends BaseModelImpl<BrowserTracker>
 		_browserKey = browserKey;
 	}
 
+	@Override
 	public BrowserTracker toEscapedModel() {
 		if (isEscapedModel()) {
 			return (BrowserTracker)this;
@@ -152,6 +153,7 @@ public class BrowserTrackerModelImpl extends BaseModelImpl<BrowserTracker>
 		}
 	}
 
+	@Override
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
 			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(0,
@@ -161,10 +163,12 @@ public class BrowserTrackerModelImpl extends BaseModelImpl<BrowserTracker>
 		return _expandoBridge;
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
 		getExpandoBridge().setAttributes(serviceContext);
 	}
 
+	@Override
 	public Object clone() {
 		BrowserTrackerImpl browserTrackerImpl = new BrowserTrackerImpl();
 
@@ -191,6 +195,7 @@ public class BrowserTrackerModelImpl extends BaseModelImpl<BrowserTracker>
 		}
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		if (obj == null) {
 			return false;
@@ -215,10 +220,12 @@ public class BrowserTrackerModelImpl extends BaseModelImpl<BrowserTracker>
 		}
 	}
 
+	@Override
 	public int hashCode() {
 		return (int)getPrimaryKey();
 	}
 
+	@Override
 	public void resetOriginalValues() {
 		BrowserTrackerModelImpl browserTrackerModelImpl = this;
 
@@ -227,6 +234,7 @@ public class BrowserTrackerModelImpl extends BaseModelImpl<BrowserTracker>
 		browserTrackerModelImpl._setOriginalUserId = false;
 	}
 
+	@Override
 	public String toString() {
 		StringBundler sb = new StringBundler(7);
 
