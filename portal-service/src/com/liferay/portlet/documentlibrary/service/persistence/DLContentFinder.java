@@ -18,4 +18,20 @@ package com.liferay.portlet.documentlibrary.service.persistence;
  * @author Brian Wing Shun Chan
  */
 public interface DLContentFinder {
+	public java.util.List<java.lang.String> findNamesByC_R_P(long companyId,
+		long repositoryId, java.lang.String path)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public long findSizeByC_R_P(long companyId, long repositoryId,
+		java.lang.String path)
+		throws com.liferay.portal.NoSuchDLContentException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	public void updateByC_R_P_N_1(long companyId, long repositoryId,
+		java.lang.String path, long newRepositoryId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public void updateByC_R_P_N_2(long companyId, long repositoryId,
+		java.lang.String path, java.lang.String newPath)
+		throws com.liferay.portal.kernel.exception.SystemException;
 }
