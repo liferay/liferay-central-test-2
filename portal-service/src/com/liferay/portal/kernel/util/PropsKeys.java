@@ -591,10 +591,6 @@ public interface PropsKeys {
 
 	public static final String DL_REPOSITORY_IMPL = "dl.repository.impl";
 
-	public static final String DL_WEBDAV_HOLD_LOCK = "dl.webdav.hold.lock";
-
-	public static final String DL_WEBDAV_SAVE_TO_SINGLE_VERSION = "dl.webdav.save.to.single.version";
-
 	public static final String DOCKBAR_ADD_PORTLETS = "dockbar.add.portlets";
 
 	public static final String DYNAMIC_DATA_LISTS_ERROR_TEMPLATE_FREEMARKER = "dynamic.data.lists.error.template.freemarker";

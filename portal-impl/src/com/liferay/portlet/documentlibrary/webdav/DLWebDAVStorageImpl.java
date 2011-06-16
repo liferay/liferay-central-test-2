@@ -22,7 +22,6 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.repository.model.FileEntry;
-import com.liferay.portal.kernel.repository.model.FileVersion;
 import com.liferay.portal.kernel.repository.model.Folder;
 import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.util.ContentTypes;
@@ -39,11 +38,9 @@ import com.liferay.portal.kernel.webdav.Status;
 import com.liferay.portal.kernel.webdav.WebDAVException;
 import com.liferay.portal.kernel.webdav.WebDAVRequest;
 import com.liferay.portal.kernel.webdav.WebDAVUtil;
-import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.model.Lock;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.ServiceContext;
-import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.webdav.LockException;
 import com.liferay.portlet.asset.service.AssetTagLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.DuplicateFolderNameException;
@@ -54,7 +51,6 @@ import com.liferay.portlet.documentlibrary.service.DLAppServiceUtil;
 
 import java.io.File;
 import java.io.InputStream;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -690,11 +686,6 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 				}
 			}
 
-			if (PropsValues.DL_WEBDAV_SAVE_TO_SINGLE_VERSION) {
-				serviceContext.setWorkflowAction(
-					WorkflowConstants.ACTION_SAVE_DRAFT);
-			}
-
 			try {
 				FileEntry fileEntry = DLAppServiceUtil.getFileEntry(
 					groupId, parentFolderId, title);
@@ -801,14 +792,6 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 		try {
 			if (resource instanceof DLFileEntryResourceImpl) {
 				FileEntry fileEntry = (FileEntry)resource.getModel();
-
-				if (PropsValues.DL_WEBDAV_HOLD_LOCK) {
-					return true;
-				}
-
-				if (PropsValues.DL_WEBDAV_SAVE_TO_SINGLE_VERSION) {
-					publishFileEntry(fileEntry);
-				}
 
 				DLAppServiceUtil.checkInFileEntry(
 					fileEntry.getFileEntryId(), token);
@@ -984,28 +967,6 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 				return false;
 			}
 		}
-	}
-
-	protected void publishFileEntry(FileEntry fileEntry) throws Exception {
-		FileVersion latestFileVersion = fileEntry.getLatestFileVersion();
-
-		if (latestFileVersion.getStatus() ==
-				WorkflowConstants.STATUS_APPROVED) {
-
-			return;
-		}
-
-		ServiceContext serviceContext = new ServiceContext();
-
-		serviceContext.setAddGroupPermissions(
-			isAddGroupPermissions(fileEntry.getRepositoryId()));
-		serviceContext.setAddGuestPermissions(true);
-
-		DLAppServiceUtil.updateFileEntry(
-			fileEntry.getFileEntryId(), fileEntry.getTitle(),
-			fileEntry.getMimeType(), fileEntry.getTitle(),
-			fileEntry.getDescription(), latestFileVersion.getDescription(),
-			true, null, 0, serviceContext);
 	}
 
 	protected Resource toResource(

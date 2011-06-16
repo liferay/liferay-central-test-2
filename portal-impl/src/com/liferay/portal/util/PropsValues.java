@@ -460,10 +460,6 @@ public class PropsValues {
 
 	public static final String[] DL_REPOSITORY_IMPL = PropsUtil.getArray(PropsKeys.DL_REPOSITORY_IMPL);
 
-	public static boolean DL_WEBDAV_HOLD_LOCK = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.DL_WEBDAV_HOLD_LOCK));
-
-	public static boolean DL_WEBDAV_SAVE_TO_SINGLE_VERSION = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.DL_WEBDAV_SAVE_TO_SINGLE_VERSION));
-
 	public static String[] DOCKBAR_ADD_PORTLETS = PropsUtil.getArray(PropsKeys.DOCKBAR_ADD_PORTLETS);
 
 	public static final String DYNAMIC_DATA_LISTS_ERROR_TEMPLATE_FREEMARKER = PropsUtil.get(PropsKeys.DYNAMIC_DATA_LISTS_ERROR_TEMPLATE_FREEMARKER);
