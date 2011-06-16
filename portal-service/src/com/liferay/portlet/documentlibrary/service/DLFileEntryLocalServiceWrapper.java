@@ -276,19 +276,19 @@ public class DLFileEntryLocalServiceWrapper implements DLFileEntryLocalService {
 	}
 
 	public void checkInFileEntry(long userId, long fileEntryId,
-		java.lang.String lockUuid)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		_dlFileEntryLocalService.checkInFileEntry(userId, fileEntryId, lockUuid);
-	}
-
-	public void checkInFileEntry(long userId, long fileEntryId,
 		boolean majorVersion, java.lang.String changeLog,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		_dlFileEntryLocalService.checkInFileEntry(userId, fileEntryId,
 			majorVersion, changeLog, serviceContext);
+	}
+
+	public void checkInFileEntry(long userId, long fileEntryId,
+		java.lang.String lockUuid)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		_dlFileEntryLocalService.checkInFileEntry(userId, fileEntryId, lockUuid);
 	}
 
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry checkOutFileEntry(

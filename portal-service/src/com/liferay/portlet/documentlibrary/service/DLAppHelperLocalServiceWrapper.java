@@ -99,6 +99,11 @@ public class DLAppHelperLocalServiceWrapper implements DLAppHelperLocalService {
 		return _dlAppHelperLocalService.getNoAssetFileEntries();
 	}
 
+	public void triggerProcesses(
+		com.liferay.portal.kernel.repository.model.FileEntry fileEntry) {
+		_dlAppHelperLocalService.triggerProcesses(fileEntry);
+	}
+
 	public com.liferay.portlet.asset.model.AssetEntry updateAsset(long userId,
 		com.liferay.portal.kernel.repository.model.FileEntry fileEntry,
 		com.liferay.portal.kernel.repository.model.FileVersion fileVersion,
@@ -110,11 +115,6 @@ public class DLAppHelperLocalServiceWrapper implements DLAppHelperLocalService {
 		return _dlAppHelperLocalService.updateAsset(userId, fileEntry,
 			fileVersion, assetCategoryIds, assetTagNames, assetLinkEntryIds,
 			mimeType, addDraftAssetEntry, visible);
-	}
-
-	public void triggerProcesses(
-		com.liferay.portal.kernel.repository.model.FileEntry fileEntry) {
-		_dlAppHelperLocalService.triggerProcesses(fileEntry);
 	}
 
 	public void updateStatus(long userId,
