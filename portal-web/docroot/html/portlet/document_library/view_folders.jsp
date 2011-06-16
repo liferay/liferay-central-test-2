@@ -88,7 +88,7 @@ if (folder != null) {
 </div>
 
 <div class="body-row">
-	<div id="<portlet:namespace />folderContainer">
+	<div data-folderId="<%= folderId %>" id="<portlet:namespace />folderContainer">
 		<ul>
 			<c:choose>
 				<c:when test="<%= (folderId == DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) && (parentFolderId == DLFolderConstants.DEFAULT_PARENT_FOLDER_ID && showRootFolder) %>">

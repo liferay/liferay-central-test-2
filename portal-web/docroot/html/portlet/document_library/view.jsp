@@ -243,10 +243,16 @@ if (folder != null) {
 				changeRequest: function(event) {
 					var state = event.state;
 
+					var before = state.before;
+
 					var page = state.page;
 					var rowsPerPage = state.rowsPerPage;
 
-					loadEntriesData(page, rowsPerPage);
+					if (!before ||
+						(page != before.page || rowsPerPage != before.rowsPerPage)) {
+
+						loadEntriesData(page, rowsPerPage);
+					}
 				}
 			}
 		}
@@ -302,7 +308,15 @@ if (folder != null) {
 
 						var folders = content.one('#<portlet:namespace />folderContainer');
 
-						listView.set('data', folders);
+						var currentFolders = listView.get('data');
+
+						var currentFolderId = currentFolders && currentFolders.attr('data-folderId');
+
+						var folderId = folders && folders.attr('data-folderId');
+
+						if (folders && folderId != currentFolderId) {
+							listView.set('data', folders);
+						}
 
 						var entries = content.one('#<portlet:namespace />entries')
 
