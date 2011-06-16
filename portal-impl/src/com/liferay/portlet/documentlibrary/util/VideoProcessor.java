@@ -112,8 +112,7 @@ public class VideoProcessor extends DLProcessor {
 	private void _generateVideo(FileEntry fileEntry) {
 		try {
 			if (!PrefsPropsUtil.getBoolean(
-					PropsKeys.XUGGLER_ENABLED,
-					PropsValues.XUGGLER_ENABLED) ||
+					PropsKeys.XUGGLER_ENABLED, PropsValues.XUGGLER_ENABLED) ||
 				_hasVideo(fileEntry)) {
 
 				return;

@@ -157,8 +157,8 @@ public class EditServerAction extends PortletAction {
 		else if (cmd.equals("updateCaptcha")) {
 			updateCaptcha(actionRequest, preferences);
 		}
-		else if (cmd.equals("updateExternalTools")) {
-			updateExternalTools(actionRequest, preferences);
+		else if (cmd.equals("updateExternalServices")) {
+			updateExternalServices(actionRequest, preferences);
 		}
 		else if (cmd.equals("updateFileUploads")) {
 			updateFileUploads(actionRequest, preferences);
@@ -442,7 +442,7 @@ public class EditServerAction extends PortletAction {
 		}
 	}
 
-	protected void updateExternalTools(
+	protected void updateExternalServices(
 			ActionRequest actionRequest, PortletPreferences preferences)
 		throws Exception {
 
