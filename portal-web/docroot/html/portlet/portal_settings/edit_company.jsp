@@ -35,8 +35,6 @@ portletURL.setParameter("tabs1", tabs1);
 portletURL.setParameter("tabs2", tabs2);
 portletURL.setParameter("tabs3", tabs3);
 
-pageContext.setAttribute("portletURL", portletURL);
-
 request.setAttribute("addresses.className", Account.class.getName());
 request.setAttribute("emailAddresses.className", Account.class.getName());
 request.setAttribute("phones.className", Account.class.getName());

@@ -26,8 +26,6 @@ portletURL.setParameter("struts_action", "/roles_admin/view");
 portletURL.setParameter("tabs1", tabs1);
 portletURL.setParameter("tabs2", tabs2);
 portletURL.setParameter("tabs3", tabs3);
-
-pageContext.setAttribute("portletURL", portletURL);
 %>
 
 <liferay-ui:error exception="<%= RequiredRoleException.class %>" message="you-cannot-delete-a-system-role" />

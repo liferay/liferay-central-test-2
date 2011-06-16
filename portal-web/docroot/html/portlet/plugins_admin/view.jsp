@@ -27,8 +27,6 @@ portletURL.setParameter("tabs1", tabs1);
 portletURL.setParameter("tabs2", tabs2);
 portletURL.setParameter("tabs3", tabs3);
 
-pageContext.setAttribute("portletURL", portletURL);
-
 PortletURL installPluginsURL = null;
 
 boolean showEditPluginHREF = true;
