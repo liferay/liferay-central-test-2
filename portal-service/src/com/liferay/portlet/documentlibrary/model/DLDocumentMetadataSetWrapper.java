@@ -231,6 +231,7 @@ public class DLDocumentMetadataSetWrapper implements DLDocumentMetadataSet {
 		_dlDocumentMetadataSet.setExpandoBridgeAttributes(serviceContext);
 	}
 
+	@Override
 	public java.lang.Object clone() {
 		return new DLDocumentMetadataSetWrapper((DLDocumentMetadataSet)_dlDocumentMetadataSet.clone());
 	}
@@ -240,6 +241,7 @@ public class DLDocumentMetadataSetWrapper implements DLDocumentMetadataSet {
 		return _dlDocumentMetadataSet.compareTo(dlDocumentMetadataSet);
 	}
 
+	@Override
 	public int hashCode() {
 		return _dlDocumentMetadataSet.hashCode();
 	}
@@ -248,6 +250,7 @@ public class DLDocumentMetadataSetWrapper implements DLDocumentMetadataSet {
 		return new DLDocumentMetadataSetWrapper(_dlDocumentMetadataSet.toEscapedModel());
 	}
 
+	@Override
 	public java.lang.String toString() {
 		return _dlDocumentMetadataSet.toString();
 	}

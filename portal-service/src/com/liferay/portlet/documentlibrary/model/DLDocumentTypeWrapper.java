@@ -277,6 +277,7 @@ public class DLDocumentTypeWrapper implements DLDocumentType {
 		_dlDocumentType.setExpandoBridgeAttributes(serviceContext);
 	}
 
+	@Override
 	public java.lang.Object clone() {
 		return new DLDocumentTypeWrapper((DLDocumentType)_dlDocumentType.clone());
 	}
@@ -286,6 +287,7 @@ public class DLDocumentTypeWrapper implements DLDocumentType {
 		return _dlDocumentType.compareTo(dlDocumentType);
 	}
 
+	@Override
 	public int hashCode() {
 		return _dlDocumentType.hashCode();
 	}
@@ -294,6 +296,7 @@ public class DLDocumentTypeWrapper implements DLDocumentType {
 		return new DLDocumentTypeWrapper(_dlDocumentType.toEscapedModel());
 	}
 
+	@Override
 	public java.lang.String toString() {
 		return _dlDocumentType.toString();
 	}

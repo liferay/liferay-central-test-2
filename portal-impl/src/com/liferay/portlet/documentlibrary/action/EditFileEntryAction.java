@@ -47,7 +47,6 @@ import com.liferay.portlet.documentlibrary.model.DLDocumentType;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.service.DLAppServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLDocumentTypeLocalServiceUtil;
-import com.liferay.portlet.documentlibrary.util.DLProcessor;
 import com.liferay.portlet.dynamicdatamapping.model.DDMStructure;
 import com.liferay.portlet.dynamicdatamapping.storage.Field;
 import com.liferay.portlet.dynamicdatamapping.storage.Fields;
@@ -443,8 +442,6 @@ public class EditFileEntryAction extends PortletAction {
 
 		AssetPublisherUtil.addRecentFolderId(
 			actionRequest, DLFileEntry.class.getName(), folderId);
-
-		DLProcessor.triggerAll(fileEntry);
 	}
 
 }

@@ -531,6 +531,7 @@ public class DLFileEntryWrapper implements DLFileEntry {
 		_dlFileEntry.setExpandoBridgeAttributes(serviceContext);
 	}
 
+	@Override
 	public java.lang.Object clone() {
 		return new DLFileEntryWrapper((DLFileEntry)_dlFileEntry.clone());
 	}
@@ -540,6 +541,7 @@ public class DLFileEntryWrapper implements DLFileEntry {
 		return _dlFileEntry.compareTo(dlFileEntry);
 	}
 
+	@Override
 	public int hashCode() {
 		return _dlFileEntry.hashCode();
 	}
@@ -548,6 +550,7 @@ public class DLFileEntryWrapper implements DLFileEntry {
 		return new DLFileEntryWrapper(_dlFileEntry.toEscapedModel());
 	}
 
+	@Override
 	public java.lang.String toString() {
 		return _dlFileEntry.toString();
 	}

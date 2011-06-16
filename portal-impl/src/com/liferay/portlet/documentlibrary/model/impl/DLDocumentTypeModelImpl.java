@@ -269,6 +269,7 @@ public class DLDocumentTypeModelImpl extends BaseModelImpl<DLDocumentType>
 		_description = description;
 	}
 
+	@Override
 	public DLDocumentType toEscapedModel() {
 		if (isEscapedModel()) {
 			return (DLDocumentType)this;
@@ -279,6 +280,7 @@ public class DLDocumentTypeModelImpl extends BaseModelImpl<DLDocumentType>
 		}
 	}
 
+	@Override
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
 			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
@@ -288,10 +290,12 @@ public class DLDocumentTypeModelImpl extends BaseModelImpl<DLDocumentType>
 		return _expandoBridge;
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
 		getExpandoBridge().setAttributes(serviceContext);
 	}
 
+	@Override
 	public Object clone() {
 		DLDocumentTypeImpl dlDocumentTypeImpl = new DLDocumentTypeImpl();
 
@@ -324,6 +328,7 @@ public class DLDocumentTypeModelImpl extends BaseModelImpl<DLDocumentType>
 		}
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		if (obj == null) {
 			return false;
@@ -348,13 +353,16 @@ public class DLDocumentTypeModelImpl extends BaseModelImpl<DLDocumentType>
 		}
 	}
 
+	@Override
 	public int hashCode() {
 		return (int)getPrimaryKey();
 	}
 
+	@Override
 	public void resetOriginalValues() {
 	}
 
+	@Override
 	public String toString() {
 		StringBundler sb = new StringBundler(19);
 

@@ -171,6 +171,7 @@ public class DLDocumentMetadataSetPersistenceImpl extends BasePersistenceImpl<DL
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache() {
 		if (_HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
 			CacheRegistryUtil.clear(DLDocumentMetadataSetImpl.class.getName());
@@ -188,6 +189,7 @@ public class DLDocumentMetadataSetPersistenceImpl extends BasePersistenceImpl<DL
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache(DLDocumentMetadataSet dlDocumentMetadataSet) {
 		EntityCacheUtil.removeResult(DLDocumentMetadataSetModelImpl.ENTITY_CACHE_ENABLED,
 			DLDocumentMetadataSetImpl.class,
@@ -227,6 +229,7 @@ public class DLDocumentMetadataSetPersistenceImpl extends BasePersistenceImpl<DL
 	 * @throws com.liferay.portal.NoSuchModelException if a d l document metadata set with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLDocumentMetadataSet remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
@@ -280,11 +283,13 @@ public class DLDocumentMetadataSetPersistenceImpl extends BasePersistenceImpl<DL
 	 * @return the d l document metadata set that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLDocumentMetadataSet remove(
 		DLDocumentMetadataSet dlDocumentMetadataSet) throws SystemException {
 		return super.remove(dlDocumentMetadataSet);
 	}
 
+	@Override
 	protected DLDocumentMetadataSet removeImpl(
 		DLDocumentMetadataSet dlDocumentMetadataSet) throws SystemException {
 		dlDocumentMetadataSet = toUnwrappedModel(dlDocumentMetadataSet);
@@ -320,6 +325,7 @@ public class DLDocumentMetadataSetPersistenceImpl extends BasePersistenceImpl<DL
 		return dlDocumentMetadataSet;
 	}
 
+	@Override
 	public DLDocumentMetadataSet updateImpl(
 		com.liferay.portlet.documentlibrary.model.DLDocumentMetadataSet dlDocumentMetadataSet,
 		boolean merge) throws SystemException {
@@ -412,6 +418,7 @@ public class DLDocumentMetadataSetPersistenceImpl extends BasePersistenceImpl<DL
 	 * @throws com.liferay.portal.NoSuchModelException if a d l document metadata set with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLDocumentMetadataSet findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
@@ -449,6 +456,7 @@ public class DLDocumentMetadataSetPersistenceImpl extends BasePersistenceImpl<DL
 	 * @return the d l document metadata set, or <code>null</code> if a d l document metadata set with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLDocumentMetadataSet fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());

@@ -556,6 +556,7 @@ public class DLFileVersionWrapper implements DLFileVersion {
 		_dlFileVersion.setExpandoBridgeAttributes(serviceContext);
 	}
 
+	@Override
 	public java.lang.Object clone() {
 		return new DLFileVersionWrapper((DLFileVersion)_dlFileVersion.clone());
 	}
@@ -565,6 +566,7 @@ public class DLFileVersionWrapper implements DLFileVersion {
 		return _dlFileVersion.compareTo(dlFileVersion);
 	}
 
+	@Override
 	public int hashCode() {
 		return _dlFileVersion.hashCode();
 	}
@@ -573,6 +575,7 @@ public class DLFileVersionWrapper implements DLFileVersion {
 		return new DLFileVersionWrapper(_dlFileVersion.toEscapedModel());
 	}
 
+	@Override
 	public java.lang.String toString() {
 		return _dlFileVersion.toString();
 	}

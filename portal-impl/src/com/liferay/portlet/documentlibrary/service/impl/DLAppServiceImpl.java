@@ -118,9 +118,13 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 
 		Repository repository = getRepository(repositoryId);
 
-		return repository.addFileEntry(
+		FileEntry fileEntry = repository.addFileEntry(
 			folderId, mimeType, title, description, changeLog, is, size,
 			serviceContext);
+		
+		dlAppHelperLocalService.triggerProcesses(fileEntry);
+
+		return fileEntry;
 	}
 
 	public DLFileShortcut addFileShortcut(
@@ -703,9 +707,13 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 
 		Repository repository = getRepository(0, fileEntryId, 0);
 
-		return repository.updateFileEntry(
+		FileEntry fileEntry = repository.updateFileEntry(
 			fileEntryId, sourceFileName, mimeType, title, description,
 			changeLog, majorVersion, is, size, serviceContext);
+
+		dlAppHelperLocalService.triggerProcesses(fileEntry);
+
+		return fileEntry;
 	}
 
 	public DLFileShortcut updateFileShortcut(

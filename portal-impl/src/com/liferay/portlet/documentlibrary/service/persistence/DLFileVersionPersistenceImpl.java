@@ -157,6 +157,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache() {
 		if (_HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
 			CacheRegistryUtil.clear(DLFileVersionImpl.class.getName());
@@ -174,6 +175,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache(DLFileVersion dlFileVersion) {
 		EntityCacheUtil.removeResult(DLFileVersionModelImpl.ENTITY_CACHE_ENABLED,
 			DLFileVersionImpl.class, dlFileVersion.getPrimaryKey());
@@ -209,6 +211,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 	 * @throws com.liferay.portal.NoSuchModelException if a d l file version with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileVersion remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
@@ -261,11 +264,13 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 	 * @return the d l file version that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileVersion remove(DLFileVersion dlFileVersion)
 		throws SystemException {
 		return super.remove(dlFileVersion);
 	}
 
+	@Override
 	protected DLFileVersion removeImpl(DLFileVersion dlFileVersion)
 		throws SystemException {
 		dlFileVersion = toUnwrappedModel(dlFileVersion);
@@ -301,6 +306,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 		return dlFileVersion;
 	}
 
+	@Override
 	public DLFileVersion updateImpl(
 		com.liferay.portlet.documentlibrary.model.DLFileVersion dlFileVersion,
 		boolean merge) throws SystemException {
@@ -403,6 +409,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 	 * @throws com.liferay.portal.NoSuchModelException if a d l file version with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileVersion findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
@@ -439,6 +446,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 	 * @return the d l file version, or <code>null</code> if a d l file version with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileVersion fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());

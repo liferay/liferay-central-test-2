@@ -417,6 +417,7 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion>
 		}
 	}
 
+	@Override
 	public DLFileVersion toEscapedModel() {
 		if (isEscapedModel()) {
 			return (DLFileVersion)this;
@@ -427,6 +428,7 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion>
 		}
 	}
 
+	@Override
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
 			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
@@ -436,10 +438,12 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion>
 		return _expandoBridge;
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
 		getExpandoBridge().setAttributes(serviceContext);
 	}
 
+	@Override
 	public Object clone() {
 		DLFileVersionImpl dlFileVersionImpl = new DLFileVersionImpl();
 
@@ -501,6 +505,7 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion>
 		return 0;
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		if (obj == null) {
 			return false;
@@ -525,10 +530,12 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion>
 		}
 	}
 
+	@Override
 	public int hashCode() {
 		return (int)getPrimaryKey();
 	}
 
+	@Override
 	public void resetOriginalValues() {
 		DLFileVersionModelImpl dlFileVersionModelImpl = this;
 
@@ -539,6 +546,7 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion>
 		dlFileVersionModelImpl._originalVersion = dlFileVersionModelImpl._version;
 	}
 
+	@Override
 	public String toString() {
 		StringBundler sb = new StringBundler(43);
 

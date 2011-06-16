@@ -376,6 +376,7 @@ public class DLFolderWrapper implements DLFolder {
 		_dlFolder.setExpandoBridgeAttributes(serviceContext);
 	}
 
+	@Override
 	public java.lang.Object clone() {
 		return new DLFolderWrapper((DLFolder)_dlFolder.clone());
 	}
@@ -385,6 +386,7 @@ public class DLFolderWrapper implements DLFolder {
 		return _dlFolder.compareTo(dlFolder);
 	}
 
+	@Override
 	public int hashCode() {
 		return _dlFolder.hashCode();
 	}
@@ -393,6 +395,7 @@ public class DLFolderWrapper implements DLFolder {
 		return new DLFolderWrapper(_dlFolder.toEscapedModel());
 	}
 
+	@Override
 	public java.lang.String toString() {
 		return _dlFolder.toString();
 	}

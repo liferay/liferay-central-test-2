@@ -369,6 +369,7 @@ public class DLFolderModelImpl extends BaseModelImpl<DLFolder>
 		_lastPostDate = lastPostDate;
 	}
 
+	@Override
 	public DLFolder toEscapedModel() {
 		if (isEscapedModel()) {
 			return (DLFolder)this;
@@ -379,6 +380,7 @@ public class DLFolderModelImpl extends BaseModelImpl<DLFolder>
 		}
 	}
 
+	@Override
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
 			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
@@ -388,10 +390,12 @@ public class DLFolderModelImpl extends BaseModelImpl<DLFolder>
 		return _expandoBridge;
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
 		getExpandoBridge().setAttributes(serviceContext);
 	}
 
+	@Override
 	public Object clone() {
 		DLFolderImpl dlFolderImpl = new DLFolderImpl();
 
@@ -442,6 +446,7 @@ public class DLFolderModelImpl extends BaseModelImpl<DLFolder>
 		return 0;
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		if (obj == null) {
 			return false;
@@ -466,10 +471,12 @@ public class DLFolderModelImpl extends BaseModelImpl<DLFolder>
 		}
 	}
 
+	@Override
 	public int hashCode() {
 		return (int)getPrimaryKey();
 	}
 
+	@Override
 	public void resetOriginalValues() {
 		DLFolderModelImpl dlFolderModelImpl = this;
 
@@ -490,6 +497,7 @@ public class DLFolderModelImpl extends BaseModelImpl<DLFolder>
 		dlFolderModelImpl._originalName = dlFolderModelImpl._name;
 	}
 
+	@Override
 	public String toString() {
 		StringBundler sb = new StringBundler(29);
 

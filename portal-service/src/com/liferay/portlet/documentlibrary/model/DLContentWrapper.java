@@ -257,6 +257,7 @@ public class DLContentWrapper implements DLContent {
 		_dlContent.setExpandoBridgeAttributes(serviceContext);
 	}
 
+	@Override
 	public java.lang.Object clone() {
 		return new DLContentWrapper((DLContent)_dlContent.clone());
 	}
@@ -266,6 +267,7 @@ public class DLContentWrapper implements DLContent {
 		return _dlContent.compareTo(dlContent);
 	}
 
+	@Override
 	public int hashCode() {
 		return _dlContent.hashCode();
 	}
@@ -274,6 +276,7 @@ public class DLContentWrapper implements DLContent {
 		return new DLContentWrapper(_dlContent.toEscapedModel());
 	}
 
+	@Override
 	public java.lang.String toString() {
 		return _dlContent.toString();
 	}

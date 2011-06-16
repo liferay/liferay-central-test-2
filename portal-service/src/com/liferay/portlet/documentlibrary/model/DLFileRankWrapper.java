@@ -223,6 +223,7 @@ public class DLFileRankWrapper implements DLFileRank {
 		_dlFileRank.setExpandoBridgeAttributes(serviceContext);
 	}
 
+	@Override
 	public java.lang.Object clone() {
 		return new DLFileRankWrapper((DLFileRank)_dlFileRank.clone());
 	}
@@ -232,6 +233,7 @@ public class DLFileRankWrapper implements DLFileRank {
 		return _dlFileRank.compareTo(dlFileRank);
 	}
 
+	@Override
 	public int hashCode() {
 		return _dlFileRank.hashCode();
 	}
@@ -240,6 +242,7 @@ public class DLFileRankWrapper implements DLFileRank {
 		return new DLFileRankWrapper(_dlFileRank.toEscapedModel());
 	}
 
+	@Override
 	public java.lang.String toString() {
 		return _dlFileRank.toString();
 	}

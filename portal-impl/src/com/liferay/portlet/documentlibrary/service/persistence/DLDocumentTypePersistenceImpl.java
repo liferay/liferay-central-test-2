@@ -155,6 +155,7 @@ public class DLDocumentTypePersistenceImpl extends BasePersistenceImpl<DLDocumen
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache() {
 		if (_HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
 			CacheRegistryUtil.clear(DLDocumentTypeImpl.class.getName());
@@ -172,6 +173,7 @@ public class DLDocumentTypePersistenceImpl extends BasePersistenceImpl<DLDocumen
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache(DLDocumentType dlDocumentType) {
 		EntityCacheUtil.removeResult(DLDocumentTypeModelImpl.ENTITY_CACHE_ENABLED,
 			DLDocumentTypeImpl.class, dlDocumentType.getPrimaryKey());
@@ -200,6 +202,7 @@ public class DLDocumentTypePersistenceImpl extends BasePersistenceImpl<DLDocumen
 	 * @throws com.liferay.portal.NoSuchModelException if a d l document type with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLDocumentType remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
@@ -253,11 +256,13 @@ public class DLDocumentTypePersistenceImpl extends BasePersistenceImpl<DLDocumen
 	 * @return the d l document type that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLDocumentType remove(DLDocumentType dlDocumentType)
 		throws SystemException {
 		return super.remove(dlDocumentType);
 	}
 
+	@Override
 	protected DLDocumentType removeImpl(DLDocumentType dlDocumentType)
 		throws SystemException {
 		dlDocumentType = toUnwrappedModel(dlDocumentType);
@@ -294,6 +299,7 @@ public class DLDocumentTypePersistenceImpl extends BasePersistenceImpl<DLDocumen
 		return dlDocumentType;
 	}
 
+	@Override
 	public DLDocumentType updateImpl(
 		com.liferay.portlet.documentlibrary.model.DLDocumentType dlDocumentType,
 		boolean merge) throws SystemException {
@@ -355,6 +361,7 @@ public class DLDocumentTypePersistenceImpl extends BasePersistenceImpl<DLDocumen
 	 * @throws com.liferay.portal.NoSuchModelException if a d l document type with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLDocumentType findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
@@ -391,6 +398,7 @@ public class DLDocumentTypePersistenceImpl extends BasePersistenceImpl<DLDocumen
 	 * @return the d l document type, or <code>null</code> if a d l document type with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLDocumentType fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());

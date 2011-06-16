@@ -158,6 +158,7 @@ public class DLContentPersistenceImpl extends BasePersistenceImpl<DLContent>
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache() {
 		if (_HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
 			CacheRegistryUtil.clear(DLContentImpl.class.getName());
@@ -175,6 +176,7 @@ public class DLContentPersistenceImpl extends BasePersistenceImpl<DLContent>
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache(DLContent dlContent) {
 		EntityCacheUtil.removeResult(DLContentModelImpl.ENTITY_CACHE_ENABLED,
 			DLContentImpl.class, dlContent.getPrimaryKey());
@@ -214,6 +216,7 @@ public class DLContentPersistenceImpl extends BasePersistenceImpl<DLContent>
 	 * @throws com.liferay.portal.NoSuchModelException if a d l content with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLContent remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
@@ -266,10 +269,12 @@ public class DLContentPersistenceImpl extends BasePersistenceImpl<DLContent>
 	 * @return the d l content that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLContent remove(DLContent dlContent) throws SystemException {
 		return super.remove(dlContent);
 	}
 
+	@Override
 	protected DLContent removeImpl(DLContent dlContent)
 		throws SystemException {
 		dlContent = toUnwrappedModel(dlContent);
@@ -310,6 +315,7 @@ public class DLContentPersistenceImpl extends BasePersistenceImpl<DLContent>
 		return dlContent;
 	}
 
+	@Override
 	public DLContent updateImpl(
 		com.liferay.portlet.documentlibrary.model.DLContent dlContent,
 		boolean merge) throws SystemException {
@@ -418,6 +424,7 @@ public class DLContentPersistenceImpl extends BasePersistenceImpl<DLContent>
 	 * @throws com.liferay.portal.NoSuchModelException if a d l content with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLContent findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
@@ -454,6 +461,7 @@ public class DLContentPersistenceImpl extends BasePersistenceImpl<DLContent>
 	 * @return the d l content, or <code>null</code> if a d l content with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLContent fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());

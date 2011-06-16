@@ -490,6 +490,7 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry>
 		_readCount = readCount;
 	}
 
+	@Override
 	public DLFileEntry toEscapedModel() {
 		if (isEscapedModel()) {
 			return (DLFileEntry)this;
@@ -500,6 +501,7 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry>
 		}
 	}
 
+	@Override
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
 			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
@@ -509,10 +511,12 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry>
 		return _expandoBridge;
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
 		getExpandoBridge().setAttributes(serviceContext);
 	}
 
+	@Override
 	public Object clone() {
 		DLFileEntryImpl dlFileEntryImpl = new DLFileEntryImpl();
 
@@ -570,6 +574,7 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry>
 		return 0;
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		if (obj == null) {
 			return false;
@@ -594,10 +599,12 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry>
 		}
 	}
 
+	@Override
 	public int hashCode() {
 		return (int)getPrimaryKey();
 	}
 
+	@Override
 	public void resetOriginalValues() {
 		DLFileEntryModelImpl dlFileEntryModelImpl = this;
 
@@ -616,6 +623,7 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry>
 		dlFileEntryModelImpl._originalTitle = dlFileEntryModelImpl._title;
 	}
 
+	@Override
 	public String toString() {
 		StringBundler sb = new StringBundler(45);
 

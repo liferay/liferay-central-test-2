@@ -238,6 +238,7 @@ public class DLContentModelImpl extends BaseModelImpl<DLContent>
 		_size = size;
 	}
 
+	@Override
 	public DLContent toEscapedModel() {
 		if (isEscapedModel()) {
 			return (DLContent)this;
@@ -248,6 +249,7 @@ public class DLContentModelImpl extends BaseModelImpl<DLContent>
 		}
 	}
 
+	@Override
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
 			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
@@ -257,10 +259,12 @@ public class DLContentModelImpl extends BaseModelImpl<DLContent>
 		return _expandoBridge;
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
 		getExpandoBridge().setAttributes(serviceContext);
 	}
 
+	@Override
 	public Object clone() {
 		DLContentImpl dlContentImpl = new DLContentImpl();
 
@@ -293,6 +297,7 @@ public class DLContentModelImpl extends BaseModelImpl<DLContent>
 		}
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		if (obj == null) {
 			return false;
@@ -317,10 +322,12 @@ public class DLContentModelImpl extends BaseModelImpl<DLContent>
 		}
 	}
 
+	@Override
 	public int hashCode() {
 		return (int)getPrimaryKey();
 	}
 
+	@Override
 	public void resetOriginalValues() {
 		DLContentModelImpl dlContentModelImpl = this;
 
@@ -339,6 +346,7 @@ public class DLContentModelImpl extends BaseModelImpl<DLContent>
 		dlContentModelImpl._originalVersion = dlContentModelImpl._version;
 	}
 
+	@Override
 	public String toString() {
 		StringBundler sb = new StringBundler(19);
 

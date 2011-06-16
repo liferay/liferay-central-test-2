@@ -112,6 +112,11 @@ public class DLAppHelperLocalServiceWrapper implements DLAppHelperLocalService {
 			mimeType, addDraftAssetEntry, visible);
 	}
 
+	public void triggerProcesses(
+		com.liferay.portal.kernel.repository.model.FileEntry fileEntry) {
+		_dlAppHelperLocalService.triggerProcesses(fileEntry);
+	}
+
 	public void updateStatus(long userId,
 		com.liferay.portal.kernel.repository.model.FileEntry fileEntry,
 		com.liferay.portal.kernel.repository.model.FileVersion latestFileVersion,

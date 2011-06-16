@@ -105,9 +105,13 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 
 		LocalRepository localRepository = getLocalRepository(repositoryId);
 
-		return localRepository.addFileEntry(
+		FileEntry fileEntry = localRepository.addFileEntry(
 			userId, folderId, mimeType, title, description, changeLog, is, size,
 			serviceContext);
+		
+		dlAppHelperLocalService.triggerProcesses(fileEntry);
+
+		return fileEntry;
 	}
 
 	public DLFileRank addFileRank(
@@ -494,9 +498,13 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 
 		LocalRepository localRepository = getLocalRepository(0, fileEntryId, 0);
 
-		return localRepository.updateFileEntry(
+		FileEntry fileEntry = localRepository.updateFileEntry(
 			userId, fileEntryId, sourceFileName, mimeType, title, description,
 			changeLog, majorVersion, is, size, serviceContext);
+
+		dlAppHelperLocalService.triggerProcesses(fileEntry);
+
+		return fileEntry;
 	}
 
 	public DLFileRank updateFileRank(
