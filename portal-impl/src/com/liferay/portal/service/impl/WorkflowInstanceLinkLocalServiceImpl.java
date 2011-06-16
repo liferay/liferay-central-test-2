@@ -110,7 +110,7 @@ public class WorkflowInstanceLinkLocalServiceImpl
 
 	public WorkflowInstanceLink fetchWorkflowInstanceLink(
 			long companyId, long groupId, String className, long classPK)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		List<WorkflowInstanceLink> workflowInstanceLinks =
 			getWorkflowInstanceLinks(companyId, groupId, className, classPK);
@@ -164,11 +164,10 @@ public class WorkflowInstanceLinkLocalServiceImpl
 
 	public boolean hasWorkflowInstanceLink(
 			long companyId, long groupId, String className, long classPK)
-		throws PortalException, SystemException {
+		throws SystemException {
 
-		WorkflowInstanceLink workflowInstanceLink =
-			fetchWorkflowInstanceLink(
-				companyId, groupId, className, classPK);
+		WorkflowInstanceLink workflowInstanceLink = fetchWorkflowInstanceLink(
+			companyId, groupId, className, classPK);
 
 		if (workflowInstanceLink != null) {
 			return true;
@@ -181,9 +180,8 @@ public class WorkflowInstanceLinkLocalServiceImpl
 			long companyId, long groupId, String className, long classPK)
 		throws PortalException, SystemException {
 
-		WorkflowInstanceLink workflowInstanceLink =
-			fetchWorkflowInstanceLink(
-				companyId, groupId, className, classPK);
+		WorkflowInstanceLink workflowInstanceLink = fetchWorkflowInstanceLink(
+			companyId, groupId, className, classPK);
 
 		if (workflowInstanceLink == null) {
 			return false;
