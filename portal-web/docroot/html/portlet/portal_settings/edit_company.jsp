@@ -17,8 +17,16 @@
 <%@ include file="/html/portlet/enterprise_admin/init.jsp" %>
 
 <%
+themeDisplay.setIncludeServiceJs(true);
+
 String tabs2 = ParamUtil.getString(request, "tabs2");
 String tabs3 = ParamUtil.getString(request, "tabs3");
+
+String[] configurationSections = PropsValues.COMPANY_SETTINGS_FORM_CONFIGURATION;
+String[] identificationSections = PropsValues.COMPANY_SETTINGS_FORM_IDENTIFICATION;
+String[] miscellaneousSections = PropsValues.COMPANY_SETTINGS_FORM_MISCELLANEOUS;
+
+String[][] categorySections = {configurationSections, identificationSections, miscellaneousSections};
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
@@ -28,14 +36,6 @@ portletURL.setParameter("tabs2", tabs2);
 portletURL.setParameter("tabs3", tabs3);
 
 pageContext.setAttribute("portletURL", portletURL);
-
-themeDisplay.setIncludeServiceJs(true);
-
-String[] configurationSections = PropsValues.COMPANY_SETTINGS_FORM_CONFIGURATION;
-String[] identificationSections = PropsValues.COMPANY_SETTINGS_FORM_IDENTIFICATION;
-String[] miscellaneousSections = PropsValues.COMPANY_SETTINGS_FORM_MISCELLANEOUS;
-
-String[][] categorySections = {configurationSections, identificationSections, miscellaneousSections};
 
 request.setAttribute("addresses.className", Account.class.getName());
 request.setAttribute("emailAddresses.className", Account.class.getName());

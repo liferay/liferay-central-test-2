@@ -113,7 +113,3 @@ headerNames.add(StringPool.BLANK);
 
 	<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 </c:if>
-
-<%!
-private static final long[] _DURATIONS = {300, 600, 1800, 3600, 7200, 10800, 21600};
-%>
