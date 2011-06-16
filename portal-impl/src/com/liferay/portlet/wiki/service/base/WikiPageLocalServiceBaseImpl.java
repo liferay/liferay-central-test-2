@@ -16,8 +16,6 @@ package com.liferay.portlet.wiki.service.base;
 
 import com.liferay.counter.service.CounterLocalService;
 
-import com.liferay.documentlibrary.service.DLLocalService;
-
 import com.liferay.portal.kernel.bean.BeanReference;
 import com.liferay.portal.kernel.bean.IdentifiableBean;
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdate;
@@ -544,24 +542,6 @@ public abstract class WikiPageLocalServiceBaseImpl
 	 */
 	public void setCounterLocalService(CounterLocalService counterLocalService) {
 		this.counterLocalService = counterLocalService;
-	}
-
-	/**
-	 * Returns the d l local service.
-	 *
-	 * @return the d l local service
-	 */
-	public DLLocalService getDLLocalService() {
-		return dlLocalService;
-	}
-
-	/**
-	 * Sets the d l local service.
-	 *
-	 * @param dlLocalService the d l local service
-	 */
-	public void setDLLocalService(DLLocalService dlLocalService) {
-		this.dlLocalService = dlLocalService;
 	}
 
 	/**
@@ -1537,8 +1517,6 @@ public abstract class WikiPageLocalServiceBaseImpl
 	protected WikiPageResourcePersistence wikiPageResourcePersistence;
 	@BeanReference(type = CounterLocalService.class)
 	protected CounterLocalService counterLocalService;
-	@BeanReference(type = DLLocalService.class)
-	protected DLLocalService dlLocalService;
 	@BeanReference(type = CompanyLocalService.class)
 	protected CompanyLocalService companyLocalService;
 	@BeanReference(type = CompanyService.class)

@@ -14,9 +14,6 @@
 
 package com.liferay.portal.convert;
 
-import com.liferay.documentlibrary.DuplicateDirectoryException;
-import com.liferay.documentlibrary.util.Hook;
-import com.liferay.documentlibrary.util.HookFactory;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.search.Indexer;
@@ -31,9 +28,17 @@ import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.MaintenanceUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsValues;
+import com.liferay.portlet.documentlibrary.DuplicateDirectoryException;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFileVersion;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
+import com.liferay.portlet.documentlibrary.store.AdvancedFileSystemStore;
+import com.liferay.portlet.documentlibrary.store.CMISStore;
+import com.liferay.portlet.documentlibrary.store.FileSystemStore;
+import com.liferay.portlet.documentlibrary.store.JCRStore;
+import com.liferay.portlet.documentlibrary.store.S3Store;
+import com.liferay.portlet.documentlibrary.store.Store;
+import com.liferay.portlet.documentlibrary.store.StoreFactory;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
 import com.liferay.portlet.wiki.model.WikiPage;
@@ -64,11 +69,11 @@ public class ConvertDocumentLibrary extends ConvertProcess {
 	public String[] getParameterNames() {
 		StringBundler sb = new StringBundler(_HOOKS.length * 2 + 2);
 
-		sb.append(PropsKeys.DL_HOOK_IMPL);
+		sb.append(PropsKeys.DL_STORE_IMPL);
 		sb.append(StringPool.EQUAL);
 
 		for (String hook : _HOOKS) {
-			if (!hook.equals(PropsValues.DL_HOOK_IMPL)) {
+			if (!hook.equals(PropsValues.DL_STORE_IMPL)) {
 				sb.append(hook);
 				sb.append(StringPool.SEMICOLON);
 			}
@@ -84,26 +89,27 @@ public class ConvertDocumentLibrary extends ConvertProcess {
 
 	@Override
 	protected void doConvert() throws Exception {
-		_sourceHook = HookFactory.getInstance();
+		_sourceStore = StoreFactory.getInstance();
 
 		String[] values = getParameterValues();
 
-		String targetHookClassName = values[0];
+		String targetStoreClassName = values[0];
 
 		ClassLoader classLoader = PortalClassLoaderUtil.getClassLoader();
 
-		_targetHook = (Hook)classLoader.loadClass(
-			targetHookClassName).newInstance();
+		_targetStore = (Store)classLoader.loadClass(
+			targetStoreClassName).newInstance();
 
 		migratePortlets();
 
-		HookFactory.setInstance(_targetHook);
+		StoreFactory.setInstance(_targetStore);
 
 		MaintenanceUtil.appendStatus(
-			"Please set " + PropsKeys.DL_HOOK_IMPL +
-				" in your portal-ext.properties to use " + targetHookClassName);
+			"Please set " + PropsKeys.DL_STORE_IMPL +
+				" in your portal-ext.properties to use " +
+					targetStoreClassName);
 
-		PropsValues.DL_HOOK_IMPL = targetHookClassName;
+		PropsValues.DL_STORE_IMPL = targetStoreClassName;
 	}
 
 	protected void migrateDL() throws Exception {
@@ -146,7 +152,7 @@ public class ConvertDocumentLibrary extends ConvertProcess {
 			WorkflowConstants.STATUS_ANY);
 
 		if (dlFileVersions.isEmpty()) {
-			String versionNumber = Hook.DEFAULT_VERSION;
+			String versionNumber = Store.DEFAULT_VERSION;
 			Date modifiedDate = fileEntry.getModifiedDate();
 
 			migrateFile(
@@ -172,17 +178,17 @@ public class ConvertDocumentLibrary extends ConvertProcess {
 		String properties, Date modifiedDate) {
 
 		try {
-			InputStream is = _sourceHook.getFileAsStream(
+			InputStream is = _sourceStore.getFileAsStream(
 				companyId, repositoryId, fileName, versionNumber);
 
-			if (versionNumber.equals(Hook.DEFAULT_VERSION)) {
-				_targetHook.addFile(
+			if (versionNumber.equals(Store.DEFAULT_VERSION)) {
+				_targetStore.addFile(
 					companyId, portletId, groupId, repositoryId, fileName,
 					fileEntryId, properties, modifiedDate, _serviceContext,
 					is);
 			}
 			else {
-				_targetHook.updateFile(
+				_targetStore.updateFile(
 					companyId, portletId, groupId, repositoryId, fileName,
 					versionNumber, fileName, fileEntryId, properties,
 					modifiedDate, _serviceContext, is);
@@ -200,13 +206,13 @@ public class ConvertDocumentLibrary extends ConvertProcess {
 		String portletId = CompanyConstants.SYSTEM_STRING;
 		long groupId = GroupConstants.DEFAULT_PARENT_GROUP_ID;
 		long repositoryId = CompanyConstants.SYSTEM;
-		String versionNumber = Hook.DEFAULT_VERSION;
+		String versionNumber = Store.DEFAULT_VERSION;
 		long fileEntryId = 0;
 		String properties = StringPool.BLANK;
 		Date modifiedDate = new Date();
 
 		try {
-			_targetHook.addDirectory(companyId, repositoryId, dirName);
+			_targetStore.addDirectory(companyId, repositoryId, dirName);
 		}
 		catch (DuplicateDirectoryException dde) {
 		}
@@ -277,18 +283,16 @@ public class ConvertDocumentLibrary extends ConvertProcess {
 	}
 
 	private static final String[] _HOOKS = new String[] {
-		"com.liferay.documentlibrary.util.AdvancedFileSystemHook",
-		"com.liferay.documentlibrary.util.CMISHook",
-		"com.liferay.documentlibrary.util.FileSystemHook",
-		"com.liferay.documentlibrary.util.JCRHook",
-		"com.liferay.documentlibrary.util.S3Hook"
+		AdvancedFileSystemStore.class.getName(), CMISStore.class.getName(),
+		FileSystemStore.class.getName(), JCRStore.class.getName(),
+		S3Store.class.getName()
 	};
 
 	private static Log _log = LogFactoryUtil.getLog(
 		ConvertDocumentLibrary.class);
 
 	private ServiceContext _serviceContext = new ServiceContext();
-	private Hook _sourceHook;
-	private Hook _targetHook;
+	private Store _sourceStore;
+	private Store _targetStore;
 
 }

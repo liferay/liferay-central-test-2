@@ -14,13 +14,13 @@
 
 package com.liferay.portal.upgrade.v4_3_0.util;
 
-import com.liferay.documentlibrary.service.DLLocalServiceUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.upgrade.util.UpgradeColumn;
 import com.liferay.portal.kernel.upgrade.util.ValueMapper;
 import com.liferay.portal.kernel.upgrade.util.ValueMapperFactoryUtil;
 import com.liferay.portal.upgrade.util.PKUpgradeColumnImpl;
+import com.liferay.portlet.documentlibrary.store.DLStoreUtil;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -62,7 +62,7 @@ public class DLFileEntryIdUpgradeColumnImpl extends PKUpgradeColumnImpl {
 
 		if (!_movedFolderIds.contains(oldFolderId)) {
 			try {
-				DLLocalServiceUtil.move(
+				DLStoreUtil.move(
 					"/" + oldCompanyId + "/documentlibrary/" + oldFolderId,
 					"/" + newCompanyId + "/documentlibrary/" + newFolderId);
 			}

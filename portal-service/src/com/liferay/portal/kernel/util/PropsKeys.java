@@ -565,35 +565,35 @@ public interface PropsKeys {
 
 	public static final String DL_FILE_RANK_MAX_SIZE = "dl.file.rank.max.size";
 
-	public static final String DL_HOOK_CMIS_CREDENTIALS_PASSWORD = "dl.hook.cmis.credentials.password";
-
-	public static final String DL_HOOK_CMIS_CREDENTIALS_USERNAME = "dl.hook.cmis.credentials.username";
-
-	public static final String DL_HOOK_CMIS_REPOSITORY_URL = "dl.hook.cmis.repository.url";
-
-	public static final String DL_HOOK_CMIS_SYSTEM_ROOT_DIR = "dl.hook.cmis.system.root.dir";
-
-	public static final String DL_HOOK_FILE_SYSTEM_ROOT_DIR = "dl.hook.file.system.root.dir";
-
-	public static final String DL_HOOK_IMPL = "dl.hook.impl";
-
-	public static final String DL_HOOK_JCR_FETCH_DELAY = "dl.hook.jcr.fetch.delay";
-
-	public static final String DL_HOOK_JCR_FETCH_MAX_FAILURES = "dl.hook.jcr.fetch.max.failures";
-
-	public static final String DL_HOOK_JCR_MOVE_VERSION_LABELS = "dl.hook.jcr.move.version.labels";
-
-	public static final String DL_HOOK_S3_ACCESS_KEY = "dl.hook.s3.access.key";
-
-	public static final String DL_HOOK_S3_BUCKET_NAME = "dl.hook.s3.bucket.name";
-
-	public static final String DL_HOOK_S3_SECRET_KEY = "dl.hook.s3.secret.key";
-
 	public static final String DL_PUBLISH_TO_LIVE_BY_DEFAULT = "dl.publish.to.live.by.default";
 
 	public static final String DL_REPOSITORY_CMIS_DELETE_DEPTH = "dl.repository.cmis.delete.depth";
 
 	public static final String DL_REPOSITORY_IMPL = "dl.repository.impl";
+
+	public static final String DL_STORE_CMIS_CREDENTIALS_PASSWORD = "dl.store.cmis.credentials.password";
+
+	public static final String DL_STORE_CMIS_CREDENTIALS_USERNAME = "dl.store.cmis.credentials.username";
+
+	public static final String DL_STORE_CMIS_REPOSITORY_URL = "dl.store.cmis.repository.url";
+
+	public static final String DL_STORE_CMIS_SYSTEM_ROOT_DIR = "dl.store.cmis.system.root.dir";
+
+	public static final String DL_STORE_FILE_SYSTEM_ROOT_DIR = "dl.store.file.system.root.dir";
+
+	public static final String DL_STORE_IMPL = "dl.store.impl";
+
+	public static final String DL_STORE_JCR_FETCH_DELAY = "dl.store.jcr.fetch.delay";
+
+	public static final String DL_STORE_JCR_FETCH_MAX_FAILURES = "dl.store.jcr.fetch.max.failures";
+
+	public static final String DL_STORE_JCR_MOVE_VERSION_LABELS = "dl.store.jcr.move.version.labels";
+
+	public static final String DL_STORE_S3_ACCESS_KEY = "dl.store.s3.access.key";
+
+	public static final String DL_STORE_S3_BUCKET_NAME = "dl.store.s3.bucket.name";
+
+	public static final String DL_STORE_S3_SECRET_KEY = "dl.store.s3.secret.key";
 
 	public static final String DOCKBAR_ADD_PORTLETS = "dockbar.add.portlets";
 
