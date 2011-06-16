@@ -121,6 +121,8 @@ public class VideoProcessor extends DLProcessor {
 			if (_isGeneratePreview(id)) {
 				File tmpFile = _getVideoTmpFile(id, fileEntry.getExtension());
 
+				previewFile.createNewFile();
+
 				try {
 					InputStream inputStream =
 						DLFileEntryLocalServiceUtil.getFileAsStream(
