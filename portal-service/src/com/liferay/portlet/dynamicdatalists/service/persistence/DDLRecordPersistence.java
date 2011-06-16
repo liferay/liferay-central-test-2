@@ -354,6 +354,117 @@ public interface DDLRecordPersistence extends BasePersistence<DDLRecord> {
 			com.liferay.portlet.dynamicdatalists.NoSuchRecordException;
 
 	/**
+	* Returns all the d d l records where recordSetId = &#63; and userId = &#63;.
+	*
+	* @param recordSetId the record set ID
+	* @param userId the user ID
+	* @return the matching d d l records
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<com.liferay.portlet.dynamicdatalists.model.DDLRecord> findByR_U(
+		long recordSetId, long userId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns a range of all the d d l records where recordSetId = &#63; and userId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param recordSetId the record set ID
+	* @param userId the user ID
+	* @param start the lower bound of the range of d d l records
+	* @param end the upper bound of the range of d d l records (not inclusive)
+	* @return the range of matching d d l records
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<com.liferay.portlet.dynamicdatalists.model.DDLRecord> findByR_U(
+		long recordSetId, long userId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns an ordered range of all the d d l records where recordSetId = &#63; and userId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param recordSetId the record set ID
+	* @param userId the user ID
+	* @param start the lower bound of the range of d d l records
+	* @param end the upper bound of the range of d d l records (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of matching d d l records
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<com.liferay.portlet.dynamicdatalists.model.DDLRecord> findByR_U(
+		long recordSetId, long userId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the first d d l record in the ordered set where recordSetId = &#63; and userId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param recordSetId the record set ID
+	* @param userId the user ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching d d l record
+	* @throws com.liferay.portlet.dynamicdatalists.NoSuchRecordException if a matching d d l record could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.liferay.portlet.dynamicdatalists.model.DDLRecord findByR_U_First(
+		long recordSetId, long userId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.dynamicdatalists.NoSuchRecordException;
+
+	/**
+	* Returns the last d d l record in the ordered set where recordSetId = &#63; and userId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param recordSetId the record set ID
+	* @param userId the user ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching d d l record
+	* @throws com.liferay.portlet.dynamicdatalists.NoSuchRecordException if a matching d d l record could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.liferay.portlet.dynamicdatalists.model.DDLRecord findByR_U_Last(
+		long recordSetId, long userId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.dynamicdatalists.NoSuchRecordException;
+
+	/**
+	* Returns the d d l records before and after the current d d l record in the ordered set where recordSetId = &#63; and userId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param recordId the primary key of the current d d l record
+	* @param recordSetId the record set ID
+	* @param userId the user ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the previous, current, and next d d l record
+	* @throws com.liferay.portlet.dynamicdatalists.NoSuchRecordException if a d d l record with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.liferay.portlet.dynamicdatalists.model.DDLRecord[] findByR_U_PrevAndNext(
+		long recordId, long recordSetId, long userId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.dynamicdatalists.NoSuchRecordException;
+
+	/**
 	* Returns all the d d l records.
 	*
 	* @return the d d l records
@@ -426,6 +537,16 @@ public interface DDLRecordPersistence extends BasePersistence<DDLRecord> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
+	* Removes all the d d l records where recordSetId = &#63; and userId = &#63; from the database.
+	*
+	* @param recordSetId the record set ID
+	* @param userId the user ID
+	* @throws SystemException if a system exception occurred
+	*/
+	public void removeByR_U(long recordSetId, long userId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
 	* Removes all the d d l records from the database.
 	*
 	* @throws SystemException if a system exception occurred
@@ -462,6 +583,17 @@ public interface DDLRecordPersistence extends BasePersistence<DDLRecord> {
 	* @throws SystemException if a system exception occurred
 	*/
 	public int countByRecordSetId(long recordSetId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the number of d d l records where recordSetId = &#63; and userId = &#63;.
+	*
+	* @param recordSetId the record set ID
+	* @param userId the user ID
+	* @return the number of matching d d l records
+	* @throws SystemException if a system exception occurred
+	*/
+	public int countByR_U(long recordSetId, long userId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**

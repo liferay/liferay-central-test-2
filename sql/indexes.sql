@@ -128,6 +128,7 @@ create index IX_25D734CD on Country (active_);
 create unique index IX_19DA007B on Country (name);
 
 create index IX_87A6B599 on DDLRecord (recordSetId);
+create index IX_AAC564D3 on DDLRecord (recordSetId, userId);
 create index IX_8BC2F891 on DDLRecord (uuid_);
 create unique index IX_B4328F39 on DDLRecord (uuid_, groupId);
 

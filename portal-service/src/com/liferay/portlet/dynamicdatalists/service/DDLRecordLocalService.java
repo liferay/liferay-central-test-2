@@ -290,6 +290,11 @@ public interface DDLRecordLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<com.liferay.portlet.dynamicdatalists.model.DDLRecord> getRecords(
+		long recordSetId, long userId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getRecordsCount(long recordSetId, int status)
 		throws com.liferay.portal.kernel.exception.SystemException;
 

@@ -334,6 +334,12 @@ public class DDLRecordLocalServiceUtil {
 			orderByComparator);
 	}
 
+	public static java.util.List<com.liferay.portlet.dynamicdatalists.model.DDLRecord> getRecords(
+		long recordSetId, long userId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getRecords(recordSetId, userId);
+	}
+
 	public static int getRecordsCount(long recordSetId, int status)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getRecordsCount(recordSetId, status);
