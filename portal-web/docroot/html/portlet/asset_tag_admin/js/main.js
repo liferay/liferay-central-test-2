@@ -797,7 +797,9 @@ AUI().add(
 						var query = instance._tagsSearch.get('query');
 
 						if (!instance._restartSearch) {
-							currentPage = (paginator.get('page') || 1) - 1;
+							var paginatorMap = instance._getTagsPaginatorMap();
+
+							currentPage = (paginator.get('page') || paginatorMap['page'].defaultValue) - 1;
 						}
 
 						var rowsPerPage = paginator.get('rowsPerPage');
