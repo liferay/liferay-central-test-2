@@ -51,7 +51,6 @@ import com.liferay.portlet.documentlibrary.service.DLAppServiceUtil;
 
 import java.io.File;
 import java.io.InputStream;
-
 import java.util.ArrayList;
 import java.util.List;
 

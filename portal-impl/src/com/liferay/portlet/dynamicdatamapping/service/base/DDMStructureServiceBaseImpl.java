@@ -31,10 +31,10 @@ import com.liferay.portal.service.persistence.ResourcePersistence;
 import com.liferay.portal.service.persistence.UserFinder;
 import com.liferay.portal.service.persistence.UserPersistence;
 
-import com.liferay.portlet.documentlibrary.service.DLFileEntryTypeLocalService;
-import com.liferay.portlet.documentlibrary.service.DLFileEntryTypeService;
-import com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryTypeFinder;
-import com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryTypePersistence;
+import com.liferay.portlet.documentlibrary.service.DLDocumentTypeLocalService;
+import com.liferay.portlet.documentlibrary.service.DLDocumentTypeService;
+import com.liferay.portlet.documentlibrary.service.persistence.DLDocumentTypeFinder;
+import com.liferay.portlet.documentlibrary.service.persistence.DLDocumentTypePersistence;
 import com.liferay.portlet.dynamicdatamapping.model.DDMStructure;
 import com.liferay.portlet.dynamicdatamapping.service.DDMContentLocalService;
 import com.liferay.portlet.dynamicdatamapping.service.DDMStorageLinkLocalService;
@@ -519,79 +519,79 @@ public abstract class DDMStructureServiceBaseImpl extends PrincipalBean
 	}
 
 	/**
-	 * Returns the d l file entry type local service.
+	 * Returns the d l document type local service.
 	 *
-	 * @return the d l file entry type local service
+	 * @return the d l document type local service
 	 */
-	public DLFileEntryTypeLocalService getDLFileEntryTypeLocalService() {
-		return dlFileEntryTypeLocalService;
+	public DLDocumentTypeLocalService getDLDocumentTypeLocalService() {
+		return dlDocumentTypeLocalService;
 	}
 
 	/**
-	 * Sets the d l file entry type local service.
+	 * Sets the d l document type local service.
 	 *
-	 * @param dlFileEntryTypeLocalService the d l file entry type local service
+	 * @param dlDocumentTypeLocalService the d l document type local service
 	 */
-	public void setDLFileEntryTypeLocalService(
-		DLFileEntryTypeLocalService dlFileEntryTypeLocalService) {
-		this.dlFileEntryTypeLocalService = dlFileEntryTypeLocalService;
+	public void setDLDocumentTypeLocalService(
+		DLDocumentTypeLocalService dlDocumentTypeLocalService) {
+		this.dlDocumentTypeLocalService = dlDocumentTypeLocalService;
 	}
 
 	/**
-	 * Returns the d l file entry type remote service.
+	 * Returns the d l document type remote service.
 	 *
-	 * @return the d l file entry type remote service
+	 * @return the d l document type remote service
 	 */
-	public DLFileEntryTypeService getDLFileEntryTypeService() {
-		return dlFileEntryTypeService;
+	public DLDocumentTypeService getDLDocumentTypeService() {
+		return dlDocumentTypeService;
 	}
 
 	/**
-	 * Sets the d l file entry type remote service.
+	 * Sets the d l document type remote service.
 	 *
-	 * @param dlFileEntryTypeService the d l file entry type remote service
+	 * @param dlDocumentTypeService the d l document type remote service
 	 */
-	public void setDLFileEntryTypeService(
-		DLFileEntryTypeService dlFileEntryTypeService) {
-		this.dlFileEntryTypeService = dlFileEntryTypeService;
+	public void setDLDocumentTypeService(
+		DLDocumentTypeService dlDocumentTypeService) {
+		this.dlDocumentTypeService = dlDocumentTypeService;
 	}
 
 	/**
-	 * Returns the d l file entry type persistence.
+	 * Returns the d l document type persistence.
 	 *
-	 * @return the d l file entry type persistence
+	 * @return the d l document type persistence
 	 */
-	public DLFileEntryTypePersistence getDLFileEntryTypePersistence() {
-		return dlFileEntryTypePersistence;
+	public DLDocumentTypePersistence getDLDocumentTypePersistence() {
+		return dlDocumentTypePersistence;
 	}
 
 	/**
-	 * Sets the d l file entry type persistence.
+	 * Sets the d l document type persistence.
 	 *
-	 * @param dlFileEntryTypePersistence the d l file entry type persistence
+	 * @param dlDocumentTypePersistence the d l document type persistence
 	 */
-	public void setDLFileEntryTypePersistence(
-		DLFileEntryTypePersistence dlFileEntryTypePersistence) {
-		this.dlFileEntryTypePersistence = dlFileEntryTypePersistence;
+	public void setDLDocumentTypePersistence(
+		DLDocumentTypePersistence dlDocumentTypePersistence) {
+		this.dlDocumentTypePersistence = dlDocumentTypePersistence;
 	}
 
 	/**
-	 * Returns the d l file entry type finder.
+	 * Returns the d l document type finder.
 	 *
-	 * @return the d l file entry type finder
+	 * @return the d l document type finder
 	 */
-	public DLFileEntryTypeFinder getDLFileEntryTypeFinder() {
-		return dlFileEntryTypeFinder;
+	public DLDocumentTypeFinder getDLDocumentTypeFinder() {
+		return dlDocumentTypeFinder;
 	}
 
 	/**
-	 * Sets the d l file entry type finder.
+	 * Sets the d l document type finder.
 	 *
-	 * @param dlFileEntryTypeFinder the d l file entry type finder
+	 * @param dlDocumentTypeFinder the d l document type finder
 	 */
-	public void setDLFileEntryTypeFinder(
-		DLFileEntryTypeFinder dlFileEntryTypeFinder) {
-		this.dlFileEntryTypeFinder = dlFileEntryTypeFinder;
+	public void setDLDocumentTypeFinder(
+		DLDocumentTypeFinder dlDocumentTypeFinder) {
+		this.dlDocumentTypeFinder = dlDocumentTypeFinder;
 	}
 
 	/**
@@ -687,13 +687,13 @@ public abstract class DDMStructureServiceBaseImpl extends PrincipalBean
 	protected UserPersistence userPersistence;
 	@BeanReference(type = UserFinder.class)
 	protected UserFinder userFinder;
-	@BeanReference(type = DLFileEntryTypeLocalService.class)
-	protected DLFileEntryTypeLocalService dlFileEntryTypeLocalService;
-	@BeanReference(type = DLFileEntryTypeService.class)
-	protected DLFileEntryTypeService dlFileEntryTypeService;
-	@BeanReference(type = DLFileEntryTypePersistence.class)
-	protected DLFileEntryTypePersistence dlFileEntryTypePersistence;
-	@BeanReference(type = DLFileEntryTypeFinder.class)
-	protected DLFileEntryTypeFinder dlFileEntryTypeFinder;
+	@BeanReference(type = DLDocumentTypeLocalService.class)
+	protected DLDocumentTypeLocalService dlDocumentTypeLocalService;
+	@BeanReference(type = DLDocumentTypeService.class)
+	protected DLDocumentTypeService dlDocumentTypeService;
+	@BeanReference(type = DLDocumentTypePersistence.class)
+	protected DLDocumentTypePersistence dlDocumentTypePersistence;
+	@BeanReference(type = DLDocumentTypeFinder.class)
+	protected DLDocumentTypeFinder dlDocumentTypeFinder;
 	private String _beanIdentifier;
 }

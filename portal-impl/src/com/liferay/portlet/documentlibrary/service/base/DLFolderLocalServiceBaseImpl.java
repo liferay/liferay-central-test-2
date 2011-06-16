@@ -55,11 +55,11 @@ import com.liferay.portlet.documentlibrary.service.DLAppHelperLocalService;
 import com.liferay.portlet.documentlibrary.service.DLAppLocalService;
 import com.liferay.portlet.documentlibrary.service.DLAppService;
 import com.liferay.portlet.documentlibrary.service.DLContentLocalService;
+import com.liferay.portlet.documentlibrary.service.DLDocumentMetadataSetLocalService;
+import com.liferay.portlet.documentlibrary.service.DLDocumentTypeLocalService;
+import com.liferay.portlet.documentlibrary.service.DLDocumentTypeService;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalService;
-import com.liferay.portlet.documentlibrary.service.DLFileEntryMetadataLocalService;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryService;
-import com.liferay.portlet.documentlibrary.service.DLFileEntryTypeLocalService;
-import com.liferay.portlet.documentlibrary.service.DLFileEntryTypeService;
 import com.liferay.portlet.documentlibrary.service.DLFileRankLocalService;
 import com.liferay.portlet.documentlibrary.service.DLFileShortcutLocalService;
 import com.liferay.portlet.documentlibrary.service.DLFileShortcutService;
@@ -67,11 +67,11 @@ import com.liferay.portlet.documentlibrary.service.DLFolderLocalService;
 import com.liferay.portlet.documentlibrary.service.DLFolderService;
 import com.liferay.portlet.documentlibrary.service.persistence.DLContentFinder;
 import com.liferay.portlet.documentlibrary.service.persistence.DLContentPersistence;
+import com.liferay.portlet.documentlibrary.service.persistence.DLDocumentMetadataSetPersistence;
+import com.liferay.portlet.documentlibrary.service.persistence.DLDocumentTypeFinder;
+import com.liferay.portlet.documentlibrary.service.persistence.DLDocumentTypePersistence;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryFinder;
-import com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryMetadataPersistence;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryPersistence;
-import com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryTypeFinder;
-import com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryTypePersistence;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileRankFinder;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileRankPersistence;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutPersistence;
@@ -464,6 +464,120 @@ public abstract class DLFolderLocalServiceBaseImpl
 	}
 
 	/**
+	 * Returns the d l document metadata set local service.
+	 *
+	 * @return the d l document metadata set local service
+	 */
+	public DLDocumentMetadataSetLocalService getDLDocumentMetadataSetLocalService() {
+		return dlDocumentMetadataSetLocalService;
+	}
+
+	/**
+	 * Sets the d l document metadata set local service.
+	 *
+	 * @param dlDocumentMetadataSetLocalService the d l document metadata set local service
+	 */
+	public void setDLDocumentMetadataSetLocalService(
+		DLDocumentMetadataSetLocalService dlDocumentMetadataSetLocalService) {
+		this.dlDocumentMetadataSetLocalService = dlDocumentMetadataSetLocalService;
+	}
+
+	/**
+	 * Returns the d l document metadata set persistence.
+	 *
+	 * @return the d l document metadata set persistence
+	 */
+	public DLDocumentMetadataSetPersistence getDLDocumentMetadataSetPersistence() {
+		return dlDocumentMetadataSetPersistence;
+	}
+
+	/**
+	 * Sets the d l document metadata set persistence.
+	 *
+	 * @param dlDocumentMetadataSetPersistence the d l document metadata set persistence
+	 */
+	public void setDLDocumentMetadataSetPersistence(
+		DLDocumentMetadataSetPersistence dlDocumentMetadataSetPersistence) {
+		this.dlDocumentMetadataSetPersistence = dlDocumentMetadataSetPersistence;
+	}
+
+	/**
+	 * Returns the d l document type local service.
+	 *
+	 * @return the d l document type local service
+	 */
+	public DLDocumentTypeLocalService getDLDocumentTypeLocalService() {
+		return dlDocumentTypeLocalService;
+	}
+
+	/**
+	 * Sets the d l document type local service.
+	 *
+	 * @param dlDocumentTypeLocalService the d l document type local service
+	 */
+	public void setDLDocumentTypeLocalService(
+		DLDocumentTypeLocalService dlDocumentTypeLocalService) {
+		this.dlDocumentTypeLocalService = dlDocumentTypeLocalService;
+	}
+
+	/**
+	 * Returns the d l document type remote service.
+	 *
+	 * @return the d l document type remote service
+	 */
+	public DLDocumentTypeService getDLDocumentTypeService() {
+		return dlDocumentTypeService;
+	}
+
+	/**
+	 * Sets the d l document type remote service.
+	 *
+	 * @param dlDocumentTypeService the d l document type remote service
+	 */
+	public void setDLDocumentTypeService(
+		DLDocumentTypeService dlDocumentTypeService) {
+		this.dlDocumentTypeService = dlDocumentTypeService;
+	}
+
+	/**
+	 * Returns the d l document type persistence.
+	 *
+	 * @return the d l document type persistence
+	 */
+	public DLDocumentTypePersistence getDLDocumentTypePersistence() {
+		return dlDocumentTypePersistence;
+	}
+
+	/**
+	 * Sets the d l document type persistence.
+	 *
+	 * @param dlDocumentTypePersistence the d l document type persistence
+	 */
+	public void setDLDocumentTypePersistence(
+		DLDocumentTypePersistence dlDocumentTypePersistence) {
+		this.dlDocumentTypePersistence = dlDocumentTypePersistence;
+	}
+
+	/**
+	 * Returns the d l document type finder.
+	 *
+	 * @return the d l document type finder
+	 */
+	public DLDocumentTypeFinder getDLDocumentTypeFinder() {
+		return dlDocumentTypeFinder;
+	}
+
+	/**
+	 * Sets the d l document type finder.
+	 *
+	 * @param dlDocumentTypeFinder the d l document type finder
+	 */
+	public void setDLDocumentTypeFinder(
+		DLDocumentTypeFinder dlDocumentTypeFinder) {
+		this.dlDocumentTypeFinder = dlDocumentTypeFinder;
+	}
+
+	/**
 	 * Returns the d l file entry local service.
 	 *
 	 * @return the d l file entry local service
@@ -535,120 +649,6 @@ public abstract class DLFolderLocalServiceBaseImpl
 	 */
 	public void setDLFileEntryFinder(DLFileEntryFinder dlFileEntryFinder) {
 		this.dlFileEntryFinder = dlFileEntryFinder;
-	}
-
-	/**
-	 * Returns the d l file entry metadata local service.
-	 *
-	 * @return the d l file entry metadata local service
-	 */
-	public DLFileEntryMetadataLocalService getDLFileEntryMetadataLocalService() {
-		return dlFileEntryMetadataLocalService;
-	}
-
-	/**
-	 * Sets the d l file entry metadata local service.
-	 *
-	 * @param dlFileEntryMetadataLocalService the d l file entry metadata local service
-	 */
-	public void setDLFileEntryMetadataLocalService(
-		DLFileEntryMetadataLocalService dlFileEntryMetadataLocalService) {
-		this.dlFileEntryMetadataLocalService = dlFileEntryMetadataLocalService;
-	}
-
-	/**
-	 * Returns the d l file entry metadata persistence.
-	 *
-	 * @return the d l file entry metadata persistence
-	 */
-	public DLFileEntryMetadataPersistence getDLFileEntryMetadataPersistence() {
-		return dlFileEntryMetadataPersistence;
-	}
-
-	/**
-	 * Sets the d l file entry metadata persistence.
-	 *
-	 * @param dlFileEntryMetadataPersistence the d l file entry metadata persistence
-	 */
-	public void setDLFileEntryMetadataPersistence(
-		DLFileEntryMetadataPersistence dlFileEntryMetadataPersistence) {
-		this.dlFileEntryMetadataPersistence = dlFileEntryMetadataPersistence;
-	}
-
-	/**
-	 * Returns the d l file entry type local service.
-	 *
-	 * @return the d l file entry type local service
-	 */
-	public DLFileEntryTypeLocalService getDLFileEntryTypeLocalService() {
-		return dlFileEntryTypeLocalService;
-	}
-
-	/**
-	 * Sets the d l file entry type local service.
-	 *
-	 * @param dlFileEntryTypeLocalService the d l file entry type local service
-	 */
-	public void setDLFileEntryTypeLocalService(
-		DLFileEntryTypeLocalService dlFileEntryTypeLocalService) {
-		this.dlFileEntryTypeLocalService = dlFileEntryTypeLocalService;
-	}
-
-	/**
-	 * Returns the d l file entry type remote service.
-	 *
-	 * @return the d l file entry type remote service
-	 */
-	public DLFileEntryTypeService getDLFileEntryTypeService() {
-		return dlFileEntryTypeService;
-	}
-
-	/**
-	 * Sets the d l file entry type remote service.
-	 *
-	 * @param dlFileEntryTypeService the d l file entry type remote service
-	 */
-	public void setDLFileEntryTypeService(
-		DLFileEntryTypeService dlFileEntryTypeService) {
-		this.dlFileEntryTypeService = dlFileEntryTypeService;
-	}
-
-	/**
-	 * Returns the d l file entry type persistence.
-	 *
-	 * @return the d l file entry type persistence
-	 */
-	public DLFileEntryTypePersistence getDLFileEntryTypePersistence() {
-		return dlFileEntryTypePersistence;
-	}
-
-	/**
-	 * Sets the d l file entry type persistence.
-	 *
-	 * @param dlFileEntryTypePersistence the d l file entry type persistence
-	 */
-	public void setDLFileEntryTypePersistence(
-		DLFileEntryTypePersistence dlFileEntryTypePersistence) {
-		this.dlFileEntryTypePersistence = dlFileEntryTypePersistence;
-	}
-
-	/**
-	 * Returns the d l file entry type finder.
-	 *
-	 * @return the d l file entry type finder
-	 */
-	public DLFileEntryTypeFinder getDLFileEntryTypeFinder() {
-		return dlFileEntryTypeFinder;
-	}
-
-	/**
-	 * Sets the d l file entry type finder.
-	 *
-	 * @param dlFileEntryTypeFinder the d l file entry type finder
-	 */
-	public void setDLFileEntryTypeFinder(
-		DLFileEntryTypeFinder dlFileEntryTypeFinder) {
-		this.dlFileEntryTypeFinder = dlFileEntryTypeFinder;
 	}
 
 	/**
@@ -1334,6 +1334,18 @@ public abstract class DLFolderLocalServiceBaseImpl
 	protected DLContentPersistence dlContentPersistence;
 	@BeanReference(type = DLContentFinder.class)
 	protected DLContentFinder dlContentFinder;
+	@BeanReference(type = DLDocumentMetadataSetLocalService.class)
+	protected DLDocumentMetadataSetLocalService dlDocumentMetadataSetLocalService;
+	@BeanReference(type = DLDocumentMetadataSetPersistence.class)
+	protected DLDocumentMetadataSetPersistence dlDocumentMetadataSetPersistence;
+	@BeanReference(type = DLDocumentTypeLocalService.class)
+	protected DLDocumentTypeLocalService dlDocumentTypeLocalService;
+	@BeanReference(type = DLDocumentTypeService.class)
+	protected DLDocumentTypeService dlDocumentTypeService;
+	@BeanReference(type = DLDocumentTypePersistence.class)
+	protected DLDocumentTypePersistence dlDocumentTypePersistence;
+	@BeanReference(type = DLDocumentTypeFinder.class)
+	protected DLDocumentTypeFinder dlDocumentTypeFinder;
 	@BeanReference(type = DLFileEntryLocalService.class)
 	protected DLFileEntryLocalService dlFileEntryLocalService;
 	@BeanReference(type = DLFileEntryService.class)
@@ -1342,18 +1354,6 @@ public abstract class DLFolderLocalServiceBaseImpl
 	protected DLFileEntryPersistence dlFileEntryPersistence;
 	@BeanReference(type = DLFileEntryFinder.class)
 	protected DLFileEntryFinder dlFileEntryFinder;
-	@BeanReference(type = DLFileEntryMetadataLocalService.class)
-	protected DLFileEntryMetadataLocalService dlFileEntryMetadataLocalService;
-	@BeanReference(type = DLFileEntryMetadataPersistence.class)
-	protected DLFileEntryMetadataPersistence dlFileEntryMetadataPersistence;
-	@BeanReference(type = DLFileEntryTypeLocalService.class)
-	protected DLFileEntryTypeLocalService dlFileEntryTypeLocalService;
-	@BeanReference(type = DLFileEntryTypeService.class)
-	protected DLFileEntryTypeService dlFileEntryTypeService;
-	@BeanReference(type = DLFileEntryTypePersistence.class)
-	protected DLFileEntryTypePersistence dlFileEntryTypePersistence;
-	@BeanReference(type = DLFileEntryTypeFinder.class)
-	protected DLFileEntryTypeFinder dlFileEntryTypeFinder;
 	@BeanReference(type = DLFileRankLocalService.class)
 	protected DLFileRankLocalService dlFileRankLocalService;
 	@BeanReference(type = DLFileRankPersistence.class)

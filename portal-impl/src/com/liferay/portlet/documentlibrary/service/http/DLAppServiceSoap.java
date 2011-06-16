@@ -235,12 +235,12 @@ public class DLAppServiceSoap {
 	}
 
 	public static java.util.List<com.liferay.portal.kernel.repository.model.FileEntry> getFileEntries(
-		long repositoryId, long folderId, long fileEntryTypeId)
+		long repositoryId, long folderId, long documentTypeId)
 		throws RemoteException {
 		try {
 			java.util.List<com.liferay.portal.kernel.repository.model.FileEntry> returnValue =
 				DLAppServiceUtil.getFileEntries(repositoryId, folderId,
-					fileEntryTypeId);
+					documentTypeId);
 
 			return returnValue;
 		}
@@ -252,12 +252,12 @@ public class DLAppServiceSoap {
 	}
 
 	public static java.util.List<com.liferay.portal.kernel.repository.model.FileEntry> getFileEntries(
-		long repositoryId, long folderId, long fileEntryTypeId, int start,
+		long repositoryId, long folderId, long documentTypeId, int start,
 		int end) throws RemoteException {
 		try {
 			java.util.List<com.liferay.portal.kernel.repository.model.FileEntry> returnValue =
 				DLAppServiceUtil.getFileEntries(repositoryId, folderId,
-					fileEntryTypeId, start, end);
+					documentTypeId, start, end);
 
 			return returnValue;
 		}
@@ -269,13 +269,13 @@ public class DLAppServiceSoap {
 	}
 
 	public static java.util.List<com.liferay.portal.kernel.repository.model.FileEntry> getFileEntries(
-		long repositoryId, long folderId, long fileEntryTypeId, int start,
+		long repositoryId, long folderId, long documentTypeId, int start,
 		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws RemoteException {
 		try {
 			java.util.List<com.liferay.portal.kernel.repository.model.FileEntry> returnValue =
 				DLAppServiceUtil.getFileEntries(repositoryId, folderId,
-					fileEntryTypeId, start, end, obc);
+					documentTypeId, start, end, obc);
 
 			return returnValue;
 		}
@@ -317,10 +317,10 @@ public class DLAppServiceSoap {
 	}
 
 	public static int getFileEntriesCount(long repositoryId, long folderId,
-		long fileEntryTypeId) throws RemoteException {
+		long documentTypeId) throws RemoteException {
 		try {
 			int returnValue = DLAppServiceUtil.getFileEntriesCount(repositoryId,
-					folderId, fileEntryTypeId);
+					folderId, documentTypeId);
 
 			return returnValue;
 		}

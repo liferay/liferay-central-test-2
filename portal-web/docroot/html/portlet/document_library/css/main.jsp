@@ -26,7 +26,7 @@
 		margin-top: 5px;
 	}
 
-	.edit-file-entry-type {
+	.edit-document-type {
 		h3 {
 			margin: 1em 0 0.3em 0;
 		}

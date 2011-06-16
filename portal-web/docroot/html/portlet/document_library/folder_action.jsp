@@ -241,12 +241,12 @@ if (row == null && portletName.equals(PortletKeys.DOCUMENT_LIBRARY_DISPLAY)) {
 			</c:if>
 
 			<%
-			int fileEntryTypesCount = DLFileEntryTypeServiceUtil.getFileEntryTypesCount(scopeGroupId);
+			int documentTypesCount = DLDocumentTypeServiceUtil.getDocumentTypesCount(scopeGroupId);
 			%>
 
 			<c:if test="<%= showActions && DLFolderPermission.contains(permissionChecker, scopeGroupId, folderId, ActionKeys.ADD_DOCUMENT) %>">
-				<liferay-portlet:renderURL var="editFileEntryURL" windowState="<%= fileEntryTypesCount > 0 ? LiferayWindowState.POP_UP.toString() : WindowState.NORMAL.toString() %>">
-					<portlet:param name="struts_action" value='<%= fileEntryTypesCount > 0 ? "/document_library_display/select_file_entry_type" : "/document_library_display/edit_file_entry" %>' />
+				<liferay-portlet:renderURL var="editFileEntryURL" windowState="<%= documentTypesCount > 0 ? LiferayWindowState.POP_UP.toString() : WindowState.NORMAL.toString() %>">
+					<portlet:param name="struts_action" value='<%= documentTypesCount > 0 ? "/document_library_display/select_document_type" : "/document_library_display/edit_file_entry" %>' />
 					<portlet:param name="redirect" value="<%= currentURL %>" />
 					<portlet:param name="backURL" value="<%= currentURL %>" />
 					<portlet:param name="repositoryId" value="<%= String.valueOf(repositoryId) %>" />
@@ -254,10 +254,10 @@ if (row == null && portletName.equals(PortletKeys.DOCUMENT_LIBRARY_DISPLAY)) {
 				</liferay-portlet:renderURL>
 
 				<%
-				String taglibEditURL = "javascript:Liferay.Util.openWindow({dialog: {width: 420}, id: '" + renderResponse.getNamespace() + "selectFileEntryType', title: '" + LanguageUtil.get(pageContext, "select-document-type") + "', uri:'" + editFileEntryURL.toString() + "'});";
+				String taglibEditURL = "javascript:Liferay.Util.openWindow({dialog: {width: 420}, id: '" + renderResponse.getNamespace() + "selectDocumentType', title: '" + LanguageUtil.get(pageContext, "select-document-type") + "', uri:'" + editFileEntryURL.toString() + "'});";
 				%>
 
-				<liferay-ui:icon image="../document_library/add_document" message="add-document" url="<%= fileEntryTypesCount > 0 ? taglibEditURL : editFileEntryURL %>" />
+				<liferay-ui:icon image="../document_library/add_document" message="add-document" url="<%= documentTypesCount > 0 ? taglibEditURL : editFileEntryURL %>" />
 			</c:if>
 
 			<c:if test="<%= showActions && DLFolderPermission.contains(permissionChecker, scopeGroupId, folderId, ActionKeys.ADD_SHORTCUT) && ((folder == null) || folder.isSupportsShortcuts()) %>">

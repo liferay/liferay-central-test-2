@@ -341,7 +341,7 @@ if (folder != null) {
 		item.ancestor('.folder').addClass('selected');
 
 		var dataDirectionRight = item.attr('data-direction-right');
-		var dataFileEntryTypeId = item.attr('data-file-entry-type-id');
+		var dataDocumentTypeId = item.attr('data-document-type-id');
 		var dataFolderId = item.attr('data-folder-id');
 		var dataNavigation = item.attr('data-navigation');
 		var dataRefreshEntries = item.attr('data-refresh-entries');
@@ -382,8 +382,8 @@ if (folder != null) {
 			config['<portlet:namespace />viewFolders'] = dataViewFolders;
 		}
 
-		if (dataFileEntryTypeId) {
-			config['<portlet:namespace />fileEntryTypeId'] = dataFileEntryTypeId;
+		if (dataDocumentTypeId) {
+			config['<portlet:namespace />documentTypeId'] = dataDocumentTypeId;
 		}
 
 		Liferay.fire(

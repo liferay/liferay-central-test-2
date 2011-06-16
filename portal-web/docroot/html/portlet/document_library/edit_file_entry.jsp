@@ -56,24 +56,24 @@ FileVersion fileVersion = null;
 
 long fileVersionId = 0;
 
-long fileEntryTypeId = ParamUtil.getLong(request, "fileEntryTypeId", -1);
+long documentTypeId = ParamUtil.getLong(request, "documentTypeId", -1);
 
 if (fileEntry != null) {
 	fileVersion = fileEntry.getLatestFileVersion();
 
 	fileVersionId = fileVersion.getFileVersionId();
 
-	if ((fileEntryTypeId == -1) && (fileVersion.getModel() instanceof DLFileVersion)) {
+	if ((documentTypeId == -1) && (fileVersion.getModel() instanceof DLFileVersion)) {
 		DLFileVersion dlFileVersion = (DLFileVersion)fileVersion.getModel();
 
-		fileEntryTypeId = dlFileVersion.getFileEntryTypeId();
+		documentTypeId = dlFileVersion.getDocumentTypeId();
 	}
 }
 
-DLFileEntryType fileEntryType = null;
+DLDocumentType documentType = null;
 
-if (fileEntryTypeId > 0) {
-	fileEntryType = DLFileEntryTypeLocalServiceUtil.getFileEntryType(fileEntryTypeId);
+if (documentTypeId > 0) {
+	documentType = DLDocumentTypeLocalServiceUtil.getDocumentType(documentTypeId);
 }
 
 long assetClassPK = 0;
@@ -142,8 +142,8 @@ String header = LanguageUtil.get(pageContext, "new-document");
 if (fileVersion != null) {
 	header = fileVersion.getTitle();
 }
-else if (fileEntryType != null) {
-	header = LanguageUtil.format(pageContext, "new-x", new Object[] {fileEntryType.getName()});
+else if (documentType != null) {
+	header = LanguageUtil.format(pageContext, "new-x", new Object[] {documentType.getName()});
 }
 %>
 
@@ -265,19 +265,19 @@ else if (fileEntryType != null) {
 			<aui:input name="description" />
 
 			<%
-			List<DLFileEntryType> fileEntryTypes = DLFileEntryTypeServiceUtil.getFileEntryTypes(scopeGroupId, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+			List<DLDocumentType> documentTypes = DLDocumentTypeServiceUtil.getDocumentTypes(scopeGroupId, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 			%>
 
 			<c:choose>
 				<c:when test="<%= !cmd.equals(Constants.ADD) %>">
-					<aui:select changesContext="<%= true %>" label="document-type" name="fileEntryTypeId" onChange='<%= renderResponse.getNamespace() + "changeFileEntryType();" %>'>
+					<aui:select changesContext="<%= true %>" label="document-type" name="documentTypeId" onChange='<%= renderResponse.getNamespace() + "changeDocumentType();" %>'>
 						<aui:option label="none" value="0" />
 
 						<%
-						for (DLFileEntryType curFileEntryType : fileEntryTypes) {
+						for (DLDocumentType curDocumentType : documentTypes) {
 						%>
 
-							<aui:option label="<%= curFileEntryType.getName() %>" selected="<%= (fileEntryTypeId == curFileEntryType.getPrimaryKey()) %>" value="<%= curFileEntryType.getPrimaryKey() %>" />
+							<aui:option label="<%= curDocumentType.getName() %>" selected="<%= (documentTypeId == curDocumentType.getPrimaryKey()) %>" value="<%= curDocumentType.getPrimaryKey() %>" />
 
 						<%
 						}
@@ -286,22 +286,22 @@ else if (fileEntryType != null) {
 					</aui:select>
 				</c:when>
 				<c:otherwise>
-					<aui:input name="fileEntryTypeId" type="hidden" value="<%= fileEntryTypeId %>" />
+					<aui:input name="documentTypeId" type="hidden" value="<%= documentTypeId %>" />
 				</c:otherwise>
 			</c:choose>
 
 			<%
-			if (fileEntryTypeId > 0) {
+			if (documentTypeId > 0) {
 				try {
-					List<DDMStructure> ddmStructures = fileEntryType.getDDMStructures();
+					List<DDMStructure> ddmStructures = documentType.getDDMStructures();
 
 					for (DDMStructure ddmStructure : ddmStructures) {
 						Fields fields = null;
 
 						try {
-							DLFileEntryMetadata fileEntryMetadata = DLFileEntryMetadataLocalServiceUtil.getFileEntryMetadata(ddmStructure.getStructureId(), fileVersionId);
+							DLDocumentMetadataSet documentMetadataSet = DLDocumentMetadataSetLocalServiceUtil.getDocumentMetadataSet(ddmStructure.getStructureId(), fileVersionId);
 
-							fields = StorageEngineUtil.getFields(fileEntryMetadata.getClassPK());
+							fields = StorageEngineUtil.getFields(documentMetadataSet.getClassPK());
 						}
 						catch (Exception e) {
 						}
@@ -429,7 +429,7 @@ else if (fileEntryType != null) {
 />
 
 <aui:script>
-	function <portlet:namespace />changeFileEntryType() {
+	function <portlet:namespace />changeDocumentType() {
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= Constants.PREVIEW %>";
 		submitForm(document.<portlet:namespace />fm);
 	}

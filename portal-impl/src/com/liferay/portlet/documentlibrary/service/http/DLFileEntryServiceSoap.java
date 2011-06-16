@@ -193,13 +193,13 @@ public class DLFileEntryServiceSoap {
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntrySoap[] getFileEntries(
-		long groupId, long folderId, long fileEntryTypeId, int start, int end,
+		long groupId, long folderId, long documentTypeId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws RemoteException {
 		try {
 			java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> returnValue =
 				DLFileEntryServiceUtil.getFileEntries(groupId, folderId,
-					fileEntryTypeId, start, end, obc);
+					documentTypeId, start, end, obc);
 
 			return com.liferay.portlet.documentlibrary.model.DLFileEntrySoap.toSoapModels(returnValue);
 		}
@@ -226,10 +226,10 @@ public class DLFileEntryServiceSoap {
 	}
 
 	public static int getFileEntriesCount(long groupId, long folderId,
-		long fileEntryTypeId) throws RemoteException {
+		long documentTypeId) throws RemoteException {
 		try {
 			int returnValue = DLFileEntryServiceUtil.getFileEntriesCount(groupId,
-					folderId, fileEntryTypeId);
+					folderId, documentTypeId);
 
 			return returnValue;
 		}

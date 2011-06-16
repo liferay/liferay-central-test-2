@@ -43,17 +43,17 @@ FileVersion fileVersion = fileEntry.getFileVersion();
 
 long fileVersionId = 0;
 
-long fileEntryTypeId = ParamUtil.getLong(request, "fileEntryTypeId");
+long documentTypeId = ParamUtil.getLong(request, "documentTypeId");
 
 if (fileEntry != null) {
 	fileVersion = fileEntry.getLatestFileVersion();
 
 	fileVersionId = fileVersion.getFileVersionId();
 
-	if ((fileEntryTypeId == 0) && (fileVersion.getModel() instanceof DLFileVersion)) {
+	if ((documentTypeId == 0) && (fileVersion.getModel() instanceof DLFileVersion)) {
 		DLFileVersion dlFileVersion = (DLFileVersion)fileVersion.getModel();
 
-		fileEntryTypeId = dlFileVersion.getFileEntryTypeId();
+		documentTypeId = dlFileVersion.getDocumentTypeId();
 	}
 }
 
@@ -455,9 +455,9 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 					<liferay-ui:panel-container extended="<%= true %>" persistState="<%= true %>">
 
 						<%
-						if (fileEntryTypeId > 0) {
+						if (documentTypeId > 0) {
 							try {
-								DLFileEntryType documentType = DLFileEntryTypeServiceUtil.getFileEntryType(fileEntryTypeId);
+								DLDocumentType documentType = DLDocumentTypeServiceUtil.getDocumentType(documentTypeId);
 
 								List<DDMStructure> ddmStructures = documentType.getDDMStructures();
 
@@ -465,9 +465,9 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 									Fields fields = null;
 
 									try {
-										DLFileEntryMetadata fileEntryMetadata = DLFileEntryMetadataLocalServiceUtil.getFileEntryMetadata(ddmStructure.getStructureId(), fileVersionId);
+										DLDocumentMetadataSet documentMetadataSet = DLDocumentMetadataSetLocalServiceUtil.getDocumentMetadataSet(ddmStructure.getStructureId(), fileVersionId);
 
-										fields = StorageEngineUtil.getFields(fileEntryMetadata.getClassPK());
+										fields = StorageEngineUtil.getFields(documentMetadataSet.getClassPK());
 									}
 									catch (Exception e) {
 									}
@@ -493,9 +493,9 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 								Fields fields = null;
 
 								try {
-									DLFileEntryMetadata fileEntryMetadata = DLFileEntryMetadataLocalServiceUtil.getFileEntryMetadata(ddmStructure.getStructureId(), fileVersionId);
+									DLDocumentMetadataSet documentMetadataSet = DLDocumentMetadataSetLocalServiceUtil.getDocumentMetadataSet(ddmStructure.getStructureId(), fileVersionId);
 
-									fields = StorageEngineUtil.getFields(fileEntryMetadata.getClassPK());
+									fields = StorageEngineUtil.getFields(documentMetadataSet.getClassPK());
 								}
 								catch (Exception e) {
 								}

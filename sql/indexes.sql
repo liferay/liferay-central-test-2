@@ -171,27 +171,26 @@ create unique index IX_1AA75CE3 on DDMTemplate (uuid_, groupId);
 create index IX_9B3F8F9D on DLContent (companyId, portletId, repositoryId, path_);
 create unique index IX_19EC270B on DLContent (companyId, portletId, repositoryId, path_, version);
 
+create unique index IX_D8B1BFBC on DLDocumentMetadataSet (DDMStructureId, fileVersionId);
+create index IX_5598211A on DLDocumentMetadataSet (documentTypeId);
+create index IX_18D42171 on DLDocumentMetadataSet (fileVersionId);
+create index IX_79AEF83E on DLDocumentMetadataSet (uuid_);
+
+create index IX_C0A3BBE7 on DLDocumentType (groupId);
+
+create index IX_E5E327B2 on DLDocumentType_DDMStructure (documentTypeId);
+create index IX_F8746210 on DLDocumentType_DDMStructure (structureId);
+
 create index IX_4CB1B2B4 on DLFileEntry (companyId);
 create index IX_F4AF5636 on DLFileEntry (groupId);
 create index IX_93CF8193 on DLFileEntry (groupId, folderId);
-create index IX_29D0AF28 on DLFileEntry (groupId, folderId, fileEntryTypeId);
+create index IX_40BC2FF7 on DLFileEntry (groupId, folderId, documentTypeId);
 create unique index IX_5391712 on DLFileEntry (groupId, folderId, name);
 create unique index IX_ED5CA615 on DLFileEntry (groupId, folderId, title);
 create index IX_43261870 on DLFileEntry (groupId, userId);
 create index IX_D20C434D on DLFileEntry (groupId, userId, folderId);
 create index IX_64F0FE40 on DLFileEntry (uuid_);
 create unique index IX_BC2E7E6A on DLFileEntry (uuid_, groupId);
-
-create unique index IX_7332B44F on DLFileEntryMetadata (DDMStructureId, fileVersionId);
-create index IX_4F40FE5E on DLFileEntryMetadata (fileEntryId);
-create index IX_F8E90438 on DLFileEntryMetadata (fileEntryTypeId);
-create index IX_1FE9C04 on DLFileEntryMetadata (fileVersionId);
-create index IX_D49AB5D1 on DLFileEntryMetadata (uuid_);
-
-create index IX_4501FD9C on DLFileEntryType (groupId);
-
-create index IX_BCDA0038 on DLFileEntryType_DDMStructure (fileEntryTypeId);
-create index IX_16520FB on DLFileEntryType_DDMStructure (structureId);
 
 create unique index IX_38F0315 on DLFileRank (companyId, userId, fileEntryId);
 create index IX_A65A1F8B on DLFileRank (fileEntryId);

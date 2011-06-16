@@ -213,11 +213,10 @@ public class DDMStructureLocalServiceImpl
 			classNameId, start, end);
 	}
 
-	public List<DDMStructure> getDLFileEntryTypeStructures(
-			long dlFileEntryTypeId)
+	public List<DDMStructure> getDLDocumentTypeStructures(long dlDocumentTypeId)
 		throws SystemException {
 
-		return dlFileEntryTypePersistence.getDDMStructures(dlFileEntryTypeId);
+		return dlDocumentTypePersistence.getDDMStructures(dlDocumentTypeId);
 	}
 
 	public DDMStructure getStructure(long structureId)

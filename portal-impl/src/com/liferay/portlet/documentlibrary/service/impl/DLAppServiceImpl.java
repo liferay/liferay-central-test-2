@@ -52,9 +52,9 @@ import java.util.List;
  * repositories, additional parameters may be specified in the serviceContext to
  * enable added flexibility, especially within Liferay's repository during
  * creation and update. In particular, noteworthy parameters include: <ul> <li>
- * fileEntryTypeId - ID for custom file entry type </li> <li> fieldsMap -
- * mapping for fields associated with custom document type </li> <li>
- * sourceFileName - original filename of file being uploaded </li> </ul>
+ * documentTypeId - ID for custom document type </li> <li> fieldsMap - mapping
+ * for fields associated with custom document type </li> <li> sourceFileName -
+ * original filename of file being uploaded </li> </ul>
  * </p>
  *
  * @author Alexander Chow
@@ -121,7 +121,7 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 		FileEntry fileEntry = repository.addFileEntry(
 			folderId, mimeType, title, description, changeLog, is, size,
 			serviceContext);
-
+		
 		dlAppHelperLocalService.triggerProcesses(fileEntry);
 
 		return fileEntry;
@@ -273,32 +273,32 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 	}
 
 	public List<FileEntry> getFileEntries(
-			long repositoryId, long folderId, long fileEntryTypeId)
+			long repositoryId, long folderId, long documentTypeId)
 		throws PortalException, SystemException {
 
 		return getFileEntries(
-			repositoryId, folderId, fileEntryTypeId, QueryUtil.ALL_POS,
+			repositoryId, folderId, documentTypeId, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS);
 	}
 
 	public List<FileEntry> getFileEntries(
-			long repositoryId, long folderId, long fileEntryTypeId, int start,
+			long repositoryId, long folderId, long documentTypeId, int start,
 			int end)
 		throws PortalException, SystemException {
 
 		return getFileEntries(
-			repositoryId, folderId, fileEntryTypeId, start, end, null);
+			repositoryId, folderId, documentTypeId, start, end, null);
 	}
 
 	public List<FileEntry> getFileEntries(
-			long repositoryId, long folderId, long fileEntryTypeId, int start,
+			long repositoryId, long folderId, long documentTypeId, int start,
 			int end, OrderByComparator obc)
 		throws PortalException, SystemException {
 
 		Repository repository = getRepository(repositoryId);
 
 		return repository.getFileEntries(
-			folderId, fileEntryTypeId, start, end, obc);
+			folderId, documentTypeId, start, end, obc);
 	}
 
 	public List<Object> getFileEntriesAndFileShortcuts(
@@ -330,12 +330,12 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 	}
 
 	public int getFileEntriesCount(
-			long repositoryId, long folderId, long fileEntryTypeId)
+			long repositoryId, long folderId, long documentTypeId)
 		throws PortalException, SystemException {
 
 		Repository repository = getRepository(repositoryId);
 
-		return repository.getFileEntriesCount(folderId, fileEntryTypeId);
+		return repository.getFileEntriesCount(folderId, documentTypeId);
 	}
 
 	public FileEntry getFileEntry(long fileEntryId)

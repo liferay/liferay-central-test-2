@@ -134,19 +134,18 @@ create table DLContent (
 	size_ LONG
 );
 
-create table DLFileEntryMetadata (
+create table DLDocumentMetadataSet (
 	uuid_ VARCHAR(75) null,
-	fileEntryMetadataId LONG not null primary key,
+	documentMetadataSetId LONG not null primary key,
 	classNameId LONG,
 	classPK LONG,
 	DDMStructureId LONG,
-	fileEntryTypeId LONG,
-	fileEntryId LONG,
+	documentTypeId LONG,
 	fileVersionId LONG
 );
 
-create table DLFileEntryType (
-	fileEntryTypeId LONG not null primary key,
+create table DLDocumentType (
+	documentTypeId LONG not null primary key,
 	groupId LONG,
 	companyId LONG,
 	userId LONG,
@@ -157,15 +156,15 @@ create table DLFileEntryType (
 	description STRING null
 );
 
-create table DLFileEntryType_DDMStructure (
-	fileEntryTypeId LONG not null,
+create table DLDocumentType_DDMStructure (
+	documentTypeId LONG not null,
 	structureId LONG not null,
-	primary key (fileEntryTypeId, structureId)
+	primary key (documentTypeId, structureId)
 );
 
 alter table DLFileEntry add repositoryId LONG;
 alter table DLFileEntry add mimeType VARCHAR(75) null;
-alter table DLFileEntry add fileEntryTypeId LONG;
+alter table DLFileEntry add documentTypeId LONG;
 
 COMMIT_TRANSACTION;
 
@@ -189,8 +188,8 @@ drop index IX_94E784D2 on DLFileVersion;
 drop index IX_2F8FED9C on DLFileVersion;
 alter table DLFileVersion add repositoryId LONG;
 alter table DLFileVersion add fileEntryId LONG;
-alter table DLFileVersion add fileEntryTypeId LONG;
 alter table DLFileVersion add mimeType VARCHAR(75) null;
+alter table DLFileVersion add documentTypeId LONG;
 
 COMMIT_TRANSACTION;
 

@@ -374,7 +374,7 @@ public class CMISRepository extends BaseCmisRepository {
 	}
 
 	public List<FileEntry> getFileEntries(
-		long folderId, long fileEntryTypeId, int start, int end,
+		long folderId, long documentTypeId, int start, int end,
 		OrderByComparator obc) {
 
 		return new ArrayList<FileEntry>();
@@ -386,8 +386,8 @@ public class CMISRepository extends BaseCmisRepository {
 		return fileEntries.size();
 	}
 
-	public int getFileEntriesCount(long folderId, long fileEntryTypeId) {
-		List<FileEntry> fileEntries = getFileEntries(folderId, fileEntryTypeId);
+	public int getFileEntriesCount(long folderId, long documentTypeId) {
+		List<FileEntry> fileEntries = getFileEntries(folderId, documentTypeId);
 
 		return fileEntries.size();
 	}

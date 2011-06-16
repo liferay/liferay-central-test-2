@@ -1,6 +1,38 @@
 <?xml version="1.0"?>
 
 <custom-sql>
+	<sql id="com.liferay.portlet.documentlibrary.service.persistence.DLDocumentTypeFinder.countByC_G_N_D_S">
+		<![CDATA[
+			SELECT
+				COUNT(DISTINCT documentTypeId) AS COUNT_VALUE
+			FROM
+				DLDocumentType
+			WHERE
+				(companyId = ?) AND
+				(groupId = ?) AND
+				(
+					(lower(name) LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
+					(description LIKE ? [$AND_OR_NULL_CHECK$])
+				)
+		]]>
+	</sql>
+	<sql id="com.liferay.portlet.documentlibrary.service.persistence.DLDocumentTypeFinder.findByC_G_N_D_S">
+		<![CDATA[
+			SELECT
+				{DLDocumentType.*}
+			FROM
+				DLDocumentType
+			WHERE
+				(companyId = ?) AND
+				(groupId = ?) AND
+				(
+					(lower(name) LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
+					(description LIKE ? [$AND_OR_NULL_CHECK$])
+				)
+			ORDER BY
+				DLDocumentType.documentTypeId DESC
+		]]>
+	</sql>
 	<sql id="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryFinder.countByExtraSettings">
 		<![CDATA[
 			SELECT
@@ -74,38 +106,6 @@
 					FROM
 						Group_
 				))
-		]]>
-	</sql>
-	<sql id="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryTypeFinder.countByC_G_N_D_S">
-		<![CDATA[
-			SELECT
-				COUNT(DISTINCT fileEntryTypeId) AS COUNT_VALUE
-			FROM
-				DLFileEntryType
-			WHERE
-				(companyId = ?) AND
-				(groupId = ?) AND
-				(
-					(lower(name) LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
-					(description LIKE ? [$AND_OR_NULL_CHECK$])
-				)
-		]]>
-	</sql>
-	<sql id="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryTypeFinder.findByC_G_N_D_S">
-		<![CDATA[
-			SELECT
-				{DLFileEntryType.*}
-			FROM
-				DLFileEntryType
-			WHERE
-				(companyId = ?) AND
-				(groupId = ?) AND
-				(
-					(lower(name) LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
-					(description LIKE ? [$AND_OR_NULL_CHECK$])
-				)
-			ORDER BY
-				DLFileEntryType.fileEntryTypeId DESC
 		]]>
 	</sql>
 	<sql id="com.liferay.portlet.documentlibrary.service.persistence.DLFileRankFinder.findByStaleRanks">
