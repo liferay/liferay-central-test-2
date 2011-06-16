@@ -121,7 +121,7 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 		FileEntry fileEntry = repository.addFileEntry(
 			folderId, mimeType, title, description, changeLog, is, size,
 			serviceContext);
-		
+
 		dlAppHelperLocalService.triggerProcesses(fileEntry);
 
 		return fileEntry;

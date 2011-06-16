@@ -221,7 +221,7 @@ public class DDLRecordLocalServiceImpl
 			recordSetId, status, start, end, orderByComparator);
 	}
 
-	public List<DDLRecord> getRecords(long recordSetId, long userId) 
+	public List<DDLRecord> getRecords(long recordSetId, long userId)
 		throws SystemException {
 
 		return ddlRecordPersistence.findByR_U(recordSetId, userId);
