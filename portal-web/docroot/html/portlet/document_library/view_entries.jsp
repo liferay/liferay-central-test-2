@@ -226,7 +226,7 @@ for (int i = 0; i < results.size(); i++) {
 						<liferay-ui:icon
 							image='<%= "../file_system/small/" + fileEntry.getExtension() %>'
 							label="<%= true %>"
-							message="<%= StringUtil.shorten(fileEntry.getTitle(), 60) %>"
+							message="<%= fileEntry.getTitle() %>"
 						/>
 					</liferay-util:buffer>
 
@@ -243,7 +243,7 @@ for (int i = 0; i < results.size(); i++) {
 
 					row.addText(fileEntryTitle, rowURL);
 
-					row.addText(StringUtil.shorten(fileEntry.getDescription(), 100), rowURL);
+					row.addText(fileEntry.getDescription(), rowURL);
 
 					row.addText(TextFormatter.formatKB(fileEntry.getSize(), locale) + "k");
 
@@ -309,7 +309,7 @@ for (int i = 0; i < results.size(); i++) {
 						<liferay-ui:icon
 							image="folder"
 							label="<%= true %>"
-							message="<%= StringUtil.shorten(curFolder.getName(), 60) %>"
+							message="<%= curFolder.getName() %>"
 						/>
 					</liferay-util:buffer>
 
@@ -342,7 +342,7 @@ for (int i = 0; i < results.size(); i++) {
 
 					folderDescriptionSearchEntry.setData(data);
 					folderDescriptionSearchEntry.setHref(rowURL.toString());
-					folderDescriptionSearchEntry.setName(StringUtil.shorten(curFolder.getDescription(), 100));
+					folderDescriptionSearchEntry.setName(folderTitle);
 
 					row.addSearchEntry(folderDescriptionSearchEntry);
 

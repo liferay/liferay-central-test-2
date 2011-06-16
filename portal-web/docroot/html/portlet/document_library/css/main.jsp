@@ -26,6 +26,10 @@
 		margin-top: 5px;
 	}
 
+	.document-container, .document-entries-paginator {
+		clear: both;
+	}
+
 	.edit-document-type {
 		h3 {
 			margin: 1em 0 0.3em 0;
@@ -37,41 +41,29 @@
 		}
 	}
 
-	.document-container {
-		.document-entries-paginator {
-				clear: both;
+	.document-container .search-info {
+		background-color: #CCECF9;
+		min-height: 40px;
+		position: relative;
+
+		.keywords {
+			float: none;
+			font-size: 1.4em;
+			font-weight: bold;
+			position: absolute;
+			top: 7px;
 		}
 
-		.overlay.document-action a {
-			display: block;
-			float: right;
-			min-height: 20px;
+		.change-search-folder {
+			position: absolute;
+			right: 60px;
+			top: 7px;
 		}
 
-		.search-info {
-			background-color: #CCECF9;
-			min-height: 40px;
-			position: relative;
-
-			.keywords {
-				float: none;
-				font-size: 1.4em;
-				font-weight: bold;
-				position: absolute;
-				top: 7px;
-			}
-
-			.change-search-folder {
-				position: absolute;
-				right: 60px;
-				top: 7px;
-			}
-
-			.close-search {
-				position: absolute;
-				right: 20px;
-				top: 10px;
-			}
+		.close-search {
+			position: absolute;
+			right: 20px;
+			top: 10px;
 		}
 	}
 
@@ -169,7 +161,7 @@
 
 		&.descriptive {
 			display: block;
-			min-height: 140px;
+			height: 140px;
 			margin: 5px;
 			padding-bottom: 5px;
 			padding-top: 5px;
@@ -178,21 +170,18 @@
 			.document-title {
 				display: block;
 				font-weight: bold;
-				text-align: left;
 			}
 
 			.document-description {
 				display: block;
-				margin: 0.5em;
-				text-align: left;
 			}
 
 			.document-action {
 				height: 20px;
 				overflow: hidden;
 				position: absolute;
-				right: 10px;
-				top: 5px;
+				right: 6px;
+				top: 10px;
 			}
 
 			.document-selector {
@@ -206,11 +195,6 @@
 				float: left;
 				margin: 5px 10px;
 				text-align: center;
-			}
-
-			.document-thumbnail-container {
-				float: left;
-				min-height: 140px;
 			}
 
 			.document-link {
@@ -234,10 +218,6 @@
 			&.selected, .selected:hover {
 				background-color: #00a2ea;
 			}
-
-			.aui-field-choice .aui-field-element {
-				position: inherit;
-			}
 		}
 
 		&.icon {
@@ -258,7 +238,7 @@
 			.document-selector {
 				left: 10px;
 				position: absolute;
-				top: 7px;
+				top: 10px;
 			}
 
 			.document-thumbnail {
@@ -279,12 +259,8 @@
 				background-color: #00a2ea;
 			}
 
-			.document-selector, &:hover .document-selector, &.selected .document-selector, .aui-field.aui-field-choice {
+			.document-selector, &:hover .document-selector, &.selected .document-selector {
 				position: absolute;
-			}
-
-			.aui-field-choice .aui-field-element {
-				display: block;
 			}
 		}
 
@@ -301,6 +277,12 @@
 			min-height: 180px;
 			text-align: center;
 			text-decoration: none;
+		}
+
+		.overlay.document-action a {
+			display: block;
+			float: right;
+			min-height: 20px;
 		}
 
 		&:hover, &.hover {
@@ -497,7 +479,7 @@
 	.document-library-breadcrumb {
 		border: 1px solid #CCC;
 		background-color: #FAFAFA;
-		margin-top: 31px;
+		margin-top: 1em;
 		padding: 7px;
 
 		.breadcrumbs {
