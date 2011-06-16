@@ -36,7 +36,7 @@ import org.apache.abdera.protocol.server.RequestContext;
 public class AtomUtil {
 
 	public static String createFeedTitleFromPortletName(
-			AtomRequestContext atomRequestContext, String portletId) {
+		AtomRequestContext atomRequestContext, String portletId) {
 
 		String portletTitle = null;
 

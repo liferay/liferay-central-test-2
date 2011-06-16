@@ -14,9 +14,6 @@
 
 package com.liferay.portal.kernel.atom;
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
-
 import java.util.Date;
 
 /**
@@ -147,8 +144,5 @@ public abstract class BaseAtomCollectionAdapter<E>
 			E entry, String title, String summary, String content, Date date,
 			AtomRequestContext atomRequestContext)
 		throws Exception;
-
-	private static Log _log = LogFactoryUtil.getLog(
-		BaseAtomCollectionAdapter.class);
 
 }

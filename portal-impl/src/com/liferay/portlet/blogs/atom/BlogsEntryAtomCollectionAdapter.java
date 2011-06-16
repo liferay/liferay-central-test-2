@@ -75,7 +75,6 @@ public class BlogsEntryAtomCollectionAdapter
 	}
 
 	public String getFeedTitle(AtomRequestContext atomRequestContext) {
-
 		return AtomUtil.createFeedTitleFromPortletName(
 			atomRequestContext, PortletKeys.BLOGS);
 	}
@@ -106,8 +105,8 @@ public class BlogsEntryAtomCollectionAdapter
 		throws Exception {
 
 		long groupId = atomRequestContext.getLongParameter("groupId");
-
 		int status = WorkflowConstants.STATUS_APPROVED;
+
 		int max = atomRequestContext.getIntParameter(
 			"max", SearchContainer.DEFAULT_DELTA);
 
