@@ -1,56 +1,6 @@
 <?xml version="1.0"?>
 
 <custom-sql>
-	<sql id="com.liferay.portlet.documentlibrary.service.persistence.DLContentFinder.findNamesByC_R_P">
-		<![CDATA[
-			SELECT
-				path_
-			FROM
-				DLContent
-			WHERE
-				(companyId = ?) AND
-				(repositoryId = ?) AND
-				(path_ LIKE ?)
-		]]>
-	</sql>
-	<sql id="com.liferay.portlet.documentlibrary.service.persistence.DLContentFinder.findSizeByC_R_P">
-		<![CDATA[
-			SELECT
-				size_, version
-			FROM
-				DLContent
-			WHERE
-				(companyId = ?) AND
-				(repositoryId = ?) AND
-				(path_ = ?)
-			ORDER BY
-				version DESC
-		]]>
-	</sql>
-	<sql id="com.liferay.portlet.documentlibrary.service.persistence.DLContentFinder.updateByC_R_P_N_1">
-		<![CDATA[
-			UPDATE
-				DLContent
-			SET
-				repositoryId = ?
-			WHERE
-				(companyId = ?) AND
-				(repositoryId = ?) AND
-				(path_ = ?)
-		]]>
-	</sql>
-	<sql id="com.liferay.portlet.documentlibrary.service.persistence.DLContentFinder.updateByC_R_P_N_2">
-		<![CDATA[
-			UPDATE
-				DLContent
-			SET
-				path_ = ?
-			WHERE
-				(companyId = ?) AND
-				(repositoryId = ?) AND
-				(path_ = ?)
-		]]>
-	</sql>
 	<sql id="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryFinder.countByExtraSettings">
 		<![CDATA[
 			SELECT
