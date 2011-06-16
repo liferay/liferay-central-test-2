@@ -557,6 +557,10 @@ public class AssetVocabularyWrapper implements AssetVocabulary {
 		return _assetVocabulary.getSettingsProperties();
 	}
 
+	public boolean isMultiValued() {
+		return _assetVocabulary.isMultiValued();
+	}
+
 	public boolean isRequired(long classNameId) {
 		return _assetVocabulary.isRequired(classNameId);
 	}
