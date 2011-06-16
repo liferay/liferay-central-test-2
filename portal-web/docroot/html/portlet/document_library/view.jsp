@@ -249,7 +249,7 @@ if (folder != null) {
 					var rowsPerPage = state.rowsPerPage;
 
 					if (!before ||
-						(page != before.page || rowsPerPage != before.rowsPerPage)) {
+						((page != before.page) || (rowsPerPage != before.rowsPerPage))) {
 
 						loadEntriesData(page, rowsPerPage);
 					}
@@ -314,7 +314,7 @@ if (folder != null) {
 
 						var folderId = folders && folders.attr('data-folderId');
 
-						if (folders && folderId != currentFolderId) {
+						if (folders && (folderId != currentFolderId)) {
 							listView.set('data', folders);
 						}
 
