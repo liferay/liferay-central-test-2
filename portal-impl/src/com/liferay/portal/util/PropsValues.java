@@ -116,6 +116,10 @@ public class PropsValues {
 
 	public static final int AUTO_DEPLOY_BLACKLIST_THRESHOLD = GetterUtil.getInteger(PropsUtil.get(PropsKeys.AUTO_DEPLOY_BLACKLIST_THRESHOLD));
 
+	public static final boolean AUTO_DEPLOY_COPY_COMMONS_LOGGING = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.AUTO_DEPLOY_COPY_COMMONS_LOGGING));
+
+	public static final boolean AUTO_DEPLOY_COPY_LOG4J = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.AUTO_DEPLOY_COPY_LOG4J));
+
 	public static final boolean AUTO_DEPLOY_CUSTOM_PORTLET_XML = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.AUTO_DEPLOY_CUSTOM_PORTLET_XML));
 
 	public static final String AUTO_DEPLOY_DEFAULT_DEST_DIR = PropsUtil.get(PropsKeys.AUTO_DEPLOY_DEFAULT_DEST_DIR);

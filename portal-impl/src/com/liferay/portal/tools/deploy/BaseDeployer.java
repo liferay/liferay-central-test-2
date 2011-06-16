@@ -328,36 +328,49 @@ public class BaseDeployer implements Deployer {
 
 		File pluginLibDir = new File(srcFile + "/WEB-INF/lib/");
 
-		String[] commonsLoggingJars = pluginLibDir.list(
-			new GlobFilenameFilter("commons-logging*.jar"));
+		if (PropsValues.AUTO_DEPLOY_COPY_COMMONS_LOGGING) {
+			String[] commonsLoggingJars = pluginLibDir.list(
+				new GlobFilenameFilter("commons-logging*.jar"));
 
-		if ((commonsLoggingJars == null) || (commonsLoggingJars.length == 0)) {
-			String portalJarPath =
-				PortalUtil.getPortalLibDir() + "commons-logging.jar";
+			if ((commonsLoggingJars == null) ||
+				(commonsLoggingJars.length == 0)) {
 
-			FileUtil.copyFile(
-				portalJarPath, srcFile + "/WEB-INF/lib/commons-logging.jar",
-				true);
+				String portalJarPath =
+					PortalUtil.getPortalLibDir() + "commons-logging.jar";
+
+				FileUtil.copyFile(
+					portalJarPath, srcFile + "/WEB-INF/lib/commons-logging.jar",
+					true);
+			}
 		}
 
 		// log4j*.jar
 
-		String[] log4jJars = pluginLibDir.list(
-			new GlobFilenameFilter("log4j*.jar"));
+		if (PropsValues.AUTO_DEPLOY_COPY_LOG4J) {
+			String[] log4jJars = pluginLibDir.list(
+				new GlobFilenameFilter("log4j*.jar"));
 
-		if ((log4jJars == null) || (log4jJars.length == 0)) {
-			String portalJarPath = PortalUtil.getPortalLibDir() + "log4j.jar";
+			if ((log4jJars == null) || (log4jJars.length == 0)) {
+				String portalJarPath =
+					PortalUtil.getPortalLibDir() + "log4j.jar";
 
-			FileUtil.copyFile(
-				portalJarPath, srcFile + "/WEB-INF/lib/log4j.jar", true);
+				FileUtil.copyFile(
+					portalJarPath, srcFile + "/WEB-INF/lib/log4j.jar", true);
+			}
 		}
 	}
 
 	public void copyProperties(File srcFile, PluginPackage pluginPackage)
 		throws Exception {
 
-		copyDependencyXml("log4j.properties", srcFile + "/WEB-INF/classes");
-		copyDependencyXml("logging.properties", srcFile + "/WEB-INF/classes");
+		if (PropsValues.AUTO_DEPLOY_COPY_COMMONS_LOGGING) {
+			copyDependencyXml(
+				"logging.properties", srcFile + "/WEB-INF/classes");
+		}
+
+		if (PropsValues.AUTO_DEPLOY_COPY_LOG4J) {
+			copyDependencyXml("log4j.properties", srcFile + "/WEB-INF/classes");
+		}
 	}
 
 	public void copyTlds(File srcFile, PluginPackage pluginPackage)
