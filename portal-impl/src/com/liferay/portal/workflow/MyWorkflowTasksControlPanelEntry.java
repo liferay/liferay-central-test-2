@@ -14,12 +14,9 @@
 
 package com.liferay.portal.workflow;
 
-import com.liferay.portal.kernel.workflow.WorkflowEngineManagerUtil;
 import com.liferay.portal.kernel.workflow.WorkflowTaskManagerUtil;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.security.permission.PermissionChecker;
-import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portlet.BaseControlPanelEntry;
 
 /**
  * @author Miguel Pastor
