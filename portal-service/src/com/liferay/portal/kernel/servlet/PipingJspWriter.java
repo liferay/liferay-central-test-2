@@ -108,6 +108,10 @@ public class PipingJspWriter extends JspWriter {
 
 	@Override
 	public void print(String string) throws IOException {
+		if (string == null) {
+			string = StringPool.NULL;
+		}
+
 		_writer.write(string);
 	}
 
@@ -172,6 +176,10 @@ public class PipingJspWriter extends JspWriter {
 
 	@Override
 	public void println(String string) throws IOException {
+		if (string == null) {
+			string = StringPool.NULL;
+		}
+
 		_writer.write(string);
 		_writer.write(_LINE_SEPARATOR);
 	}
