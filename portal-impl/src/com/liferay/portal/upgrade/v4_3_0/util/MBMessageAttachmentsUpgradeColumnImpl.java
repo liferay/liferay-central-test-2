@@ -14,12 +14,12 @@
 
 package com.liferay.portal.upgrade.v4_3_0.util;
 
+import com.liferay.documentlibrary.service.DLLocalServiceUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.upgrade.util.BaseUpgradeColumnImpl;
 import com.liferay.portal.kernel.upgrade.util.UpgradeColumn;
 import com.liferay.portal.model.CompanyConstants;
-import com.liferay.portlet.documentlibrary.store.DLStoreUtil;
 
 /**
  * @author Brian Wing Shun Chan
@@ -51,11 +51,11 @@ public class MBMessageAttachmentsUpgradeColumnImpl
 			Long newThreadId = (Long)_threadIdColumn.getNewValue();
 
 			try {
-				DLStoreUtil.addDirectory(
+				DLLocalServiceUtil.addDirectory(
 					newCompanyId.longValue(), CompanyConstants.SYSTEM,
 					"messageboards/" + newThreadId);
 
-				DLStoreUtil.move(
+				DLLocalServiceUtil.move(
 					"/" + oldCompanyId +
 						"/documentlibrary/system/messageboards/" + oldThreadId +
 							"/" + oldMessageId,

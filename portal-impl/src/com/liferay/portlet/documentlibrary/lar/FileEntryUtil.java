@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.documentlibrary.lar;
 
+import com.liferay.documentlibrary.service.DLLocalServiceUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.repository.model.FileEntry;
@@ -23,7 +24,6 @@ import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryUtil;
-import com.liferay.portlet.documentlibrary.store.DLStoreUtil;
 
 import java.io.InputStream;
 
@@ -88,7 +88,7 @@ public class FileEntryUtil extends LiferayBase {
 
 		String name = ((DLFileEntry)fileEntry.getModel()).getName();
 
-		return DLStoreUtil.getFileAsStream(
+		return DLLocalServiceUtil.getFileAsStream(
 			fileEntry.getCompanyId(), repositoryId, name,
 			fileEntry.getVersion());
 

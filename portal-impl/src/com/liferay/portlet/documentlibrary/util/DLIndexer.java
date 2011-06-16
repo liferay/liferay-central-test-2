@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.documentlibrary.util;
 
+import com.liferay.documentlibrary.model.FileModel;
 import com.liferay.portal.kernel.portlet.LiferayPortletURL;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.search.BaseIndexer;
@@ -41,12 +42,10 @@ import com.liferay.portlet.asset.service.AssetTagLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
-import com.liferay.portlet.documentlibrary.model.FileModel;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFolderServiceUtil;
 import com.liferay.portlet.documentlibrary.service.permission.DLFileEntryPermission;
-import com.liferay.portlet.documentlibrary.store.DLStoreIndexer;
 
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -67,7 +66,8 @@ public class DLIndexer extends BaseIndexer {
 	public static final String PORTLET_ID = PortletKeys.DOCUMENT_LIBRARY;
 
 	public DLIndexer() {
-		IndexerRegistryUtil.register(new DLStoreIndexer());
+		IndexerRegistryUtil.register(
+			new com.liferay.documentlibrary.util.DLIndexer());
 	}
 
 	public String[] getClassNames() {

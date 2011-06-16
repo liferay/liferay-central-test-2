@@ -493,12 +493,6 @@
 			<bean class="com.liferay.portal.asset.AssetRendererFactoryRegistryImpl" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.documentlibrary.store.DLStore" class="com.liferay.portlet.documentlibrary.store.DLStoreImpl" />
-	<bean id="com.liferay.portlet.documentlibrary.store.Store" class="com.liferay.portlet.documentlibrary.store.SafeFileNameStoreWrapper">
-		<constructor-arg>
-			<bean class="com.liferay.portlet.documentlibrary.store.StoreProxyImpl" />
-		</constructor-arg>
-	</bean>
 	<bean id="com.liferay.portlet.dynamicdatamapping.storage.StorageEngine" class="com.liferay.portlet.dynamicdatamapping.storage.StorageEngineImpl">
 		<property name="defaultStorageAdapter">
 			<bean class="com.liferay.portlet.dynamicdatamapping.storage.XMLStorageAdapter" />

@@ -14,6 +14,7 @@
 
 package com.liferay.portal.kernel.search.facet;
 
+import com.liferay.documentlibrary.model.FileModel;
 import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
@@ -34,7 +35,6 @@ import com.liferay.portal.kernel.search.facet.config.FacetConfiguration;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portlet.asset.model.AssetEntry;
-import com.liferay.portlet.documentlibrary.model.FileModel;
 
 import java.util.ArrayList;
 import java.util.List;

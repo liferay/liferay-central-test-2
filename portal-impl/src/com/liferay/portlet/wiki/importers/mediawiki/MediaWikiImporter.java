@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.wiki.importers.mediawiki;
 
+import com.liferay.documentlibrary.service.DLLocalServiceUtil;
 import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -44,7 +45,6 @@ import com.liferay.portlet.asset.model.AssetTag;
 import com.liferay.portlet.asset.service.AssetTagLocalServiceUtil;
 import com.liferay.portlet.asset.service.AssetTagPropertyLocalServiceUtil;
 import com.liferay.portlet.asset.util.AssetUtil;
-import com.liferay.portlet.documentlibrary.store.DLStoreUtil;
 import com.liferay.portlet.wiki.ImportFilesException;
 import com.liferay.portlet.wiki.NoSuchPageException;
 import com.liferay.portlet.wiki.importers.WikiImporter;
@@ -222,7 +222,7 @@ public class MediaWikiImporter implements WikiImporter {
 		String fileName = paths[paths.length - 1];
 
 		try {
-			DLStoreUtil.validate(fileName, true, bytes);
+			DLLocalServiceUtil.validate(fileName, true, bytes);
 		}
 		catch (PortalException pe) {
 			return false;

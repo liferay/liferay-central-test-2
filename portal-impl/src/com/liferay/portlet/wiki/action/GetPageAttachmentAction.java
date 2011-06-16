@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.wiki.action;
 
+import com.liferay.documentlibrary.service.DLLocalServiceUtil;
 import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.MimeTypesUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -21,7 +22,6 @@ import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portlet.documentlibrary.store.DLStoreUtil;
 import com.liferay.portlet.wiki.model.WikiPage;
 import com.liferay.portlet.wiki.service.WikiPageServiceUtil;
 import com.liferay.util.servlet.ServletResponseUtil;
@@ -107,9 +107,9 @@ public class GetPageAttachmentAction extends PortletAction {
 
 		String path = page.getAttachmentsDir() + "/" + fileName;
 
-		InputStream is = DLStoreUtil.getFileAsStream(
+		InputStream is = DLLocalServiceUtil.getFileAsStream(
 			page.getCompanyId(), CompanyConstants.SYSTEM, path);
-		long contentLength = DLStoreUtil.getFileSize(
+		long contentLength = DLLocalServiceUtil.getFileSize(
 			page.getCompanyId(), CompanyConstants.SYSTEM, path);
 		String contentType = MimeTypesUtil.getContentType(fileName);
 

@@ -14,6 +14,8 @@
 
 package com.liferay.portal.image;
 
+import com.liferay.documentlibrary.NoSuchFileException;
+import com.liferay.documentlibrary.service.DLLocalServiceUtil;
 import com.liferay.portal.NoSuchImageException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -23,8 +25,6 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Image;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortletKeys;
-import com.liferay.portlet.documentlibrary.NoSuchFileException;
-import com.liferay.portlet.documentlibrary.store.DLStoreUtil;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -42,7 +42,7 @@ public class DLHook extends BaseHook {
 		String fileName = getFileName(image.getImageId(), image.getType());
 
 		try {
-			DLStoreUtil.deleteFile(
+			DLLocalServiceUtil.deleteFile(
 				_COMPANY_ID, _PORTLET_ID, _REPOSITORY_ID, fileName);
 		}
 		catch (NoSuchFileException nsfe) {
@@ -55,7 +55,7 @@ public class DLHook extends BaseHook {
 
 		String fileName = getFileName(image.getImageId(), image.getType());
 
-		InputStream is = DLStoreUtil.getFileAsStream(
+		InputStream is = DLLocalServiceUtil.getFileAsStream(
 			_COMPANY_ID, _REPOSITORY_ID, fileName);
 
 		byte[] bytes = null;
@@ -75,7 +75,7 @@ public class DLHook extends BaseHook {
 
 		String fileName = getFileName(image.getImageId(), image.getType());
 
-		return DLStoreUtil.getFileAsStream(
+		return DLLocalServiceUtil.getFileAsStream(
 			_COMPANY_ID, _REPOSITORY_ID, fileName);
 	}
 
@@ -86,14 +86,14 @@ public class DLHook extends BaseHook {
 		Date now = new Date();
 		InputStream is = new UnsyncByteArrayInputStream(bytes);
 
-		if (DLStoreUtil.hasFile(
+		if (DLLocalServiceUtil.hasFile(
 			_COMPANY_ID, _REPOSITORY_ID, fileName, _VERSION_NUMBER)) {
 
-			DLStoreUtil.deleteFile(
+			DLLocalServiceUtil.deleteFile(
 				_COMPANY_ID, _PORTLET_ID, _REPOSITORY_ID, fileName);
 		}
 
-		DLStoreUtil.addFile(
+		DLLocalServiceUtil.addFile(
 			_COMPANY_ID, _PORTLET_ID, _GROUP_ID, _REPOSITORY_ID, fileName, true,
 			_FILE_ENTRY_ID, _PROPERTIES, now, new ServiceContext(), is);
 	}

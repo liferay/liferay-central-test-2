@@ -14,6 +14,8 @@
 
 package com.liferay.portal.upgrade.v6_0_0;
 
+import com.liferay.documentlibrary.NoSuchFileException;
+import com.liferay.documentlibrary.service.DLLocalServiceUtil;
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -31,9 +33,7 @@ import com.liferay.portal.upgrade.v6_0_0.util.DLFileRankTable;
 import com.liferay.portal.upgrade.v6_0_0.util.DLFileShortcutTable;
 import com.liferay.portal.upgrade.v6_0_0.util.DLFileVersionTable;
 import com.liferay.portal.util.PortletKeys;
-import com.liferay.portlet.documentlibrary.NoSuchFileException;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
-import com.liferay.portlet.documentlibrary.store.DLStoreUtil;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -130,7 +130,7 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 
 				if (!newName.equals(name)) {
 					try {
-						DLStoreUtil.updateFile(
+						DLLocalServiceUtil.updateFile(
 							companyId, portletId, groupId, repositoryId, name,
 							newName, false);
 					}

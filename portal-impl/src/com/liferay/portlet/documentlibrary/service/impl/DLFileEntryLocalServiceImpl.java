@@ -14,6 +14,10 @@
 
 package com.liferay.portlet.documentlibrary.service.impl;
 
+import com.liferay.documentlibrary.DuplicateFileException;
+import com.liferay.documentlibrary.FileNameException;
+import com.liferay.documentlibrary.NoSuchFileException;
+import com.liferay.documentlibrary.util.JCRHook;
 import com.liferay.portal.ExpiredLockException;
 import com.liferay.portal.InvalidLockException;
 import com.liferay.portal.NoSuchLockException;
@@ -43,11 +47,8 @@ import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.asset.model.AssetEntry;
 import com.liferay.portlet.asset.model.AssetLink;
-import com.liferay.portlet.documentlibrary.DuplicateFileException;
 import com.liferay.portlet.documentlibrary.DuplicateFolderNameException;
-import com.liferay.portlet.documentlibrary.FileNameException;
 import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
-import com.liferay.portlet.documentlibrary.NoSuchFileException;
 import com.liferay.portlet.documentlibrary.NoSuchFileVersionException;
 import com.liferay.portlet.documentlibrary.NoSuchFolderException;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
@@ -59,8 +60,6 @@ import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
 import com.liferay.portlet.documentlibrary.model.impl.DLFileEntryImpl;
 import com.liferay.portlet.documentlibrary.service.base.DLFileEntryLocalServiceBaseImpl;
-import com.liferay.portlet.documentlibrary.store.DLStoreUtil;
-import com.liferay.portlet.documentlibrary.store.JCRStore;
 import com.liferay.portlet.documentlibrary.util.DLUtil;
 import com.liferay.portlet.documentlibrary.util.comparator.FileVersionVersionComparator;
 import com.liferay.portlet.documentlibrary.util.comparator.RepositoryModelModifiedDateComparator;
@@ -201,7 +200,7 @@ public class DLFileEntryLocalServiceImpl
 
 		// File
 
-		DLStoreUtil.addFile(
+		dlLocalService.addFile(
 			user.getCompanyId(), PortletKeys.DOCUMENT_LIBRARY,
 			dlFileEntry.getGroupId(), dlFileEntry.getDataRepositoryId(), name,
 			false, fileEntryId, dlFileEntry.getLuceneProperties(),
@@ -233,7 +232,7 @@ public class DLFileEntryLocalServiceImpl
 		dlFileVersionPersistence.remove(dlFileVersion);
 
 		try {
-			DLStoreUtil.deleteFile(
+			dlLocalService.deleteFile(
 				dlFileEntry.getCompanyId(), PortletKeys.DOCUMENT_LIBRARY,
 				dlFileEntry.getDataRepositoryId(), dlFileEntry.getName(),
 				DLFileEntryConstants.PRIVATE_WORKING_COPY_VERSION);
@@ -303,7 +302,7 @@ public class DLFileEntryLocalServiceImpl
 
 		if (file != null) {
 			try {
-				DLStoreUtil.deleteFile(
+				dlLocalService.deleteFile(
 					user.getCompanyId(), PortletKeys.DOCUMENT_LIBRARY,
 					dlFileEntry.getDataRepositoryId(), dlFileEntry.getName(),
 					DLFileEntryConstants.PRIVATE_WORKING_COPY_VERSION);
@@ -318,7 +317,7 @@ public class DLFileEntryLocalServiceImpl
 				throw new SystemException(ioe);
 			}
 
-			DLStoreUtil.updateFile(
+			dlLocalService.updateFile(
 				user.getCompanyId(), PortletKeys.DOCUMENT_LIBRARY,
 				dlFileEntry.getGroupId(), dlFileEntry.getDataRepositoryId(),
 				dlFileEntry.getName(), dlFileEntry.getExtension(), false,
@@ -441,7 +440,7 @@ public class DLFileEntryLocalServiceImpl
 			}
 
 			try {
-				DLStoreUtil.deleteFile(
+				dlLocalService.deleteFile(
 					user.getCompanyId(), PortletKeys.DOCUMENT_LIBRARY,
 					dlFileEntry.getDataRepositoryId(), dlFileEntry.getName(),
 					DLFileEntryConstants.PRIVATE_WORKING_COPY_VERSION);
@@ -449,7 +448,7 @@ public class DLFileEntryLocalServiceImpl
 			catch (NoSuchFileException nsfe) {
 			}
 
-			DLStoreUtil.updateFile(
+			dlLocalService.updateFile(
 				user.getCompanyId(), PortletKeys.DOCUMENT_LIBRARY,
 				dlFileEntry.getGroupId(), dlFileEntry.getDataRepositoryId(),
 				dlFileEntry.getName(), dlFileEntry.getExtension(), false,
@@ -550,7 +549,7 @@ public class DLFileEntryLocalServiceImpl
 		dlAppHelperLocalService.getFileAsStream(
 			userId, new LiferayFileEntry(dlFileEntry));
 
-		return DLStoreUtil.getFileAsStream(
+		return dlLocalService.getFileAsStream(
 			dlFileEntry.getCompanyId(), dlFileEntry.getDataRepositoryId(),
 			dlFileEntry.getName(), version);
 	}
@@ -689,8 +688,7 @@ public class DLFileEntryLocalServiceImpl
 			dlFileVersionPersistence.findByFileEntryId(fileEntryId);
 
 		if (dlFileVersions.isEmpty()) {
-			throw new NoSuchFileVersionException(
-				"No file versions found for fileEntryId " + fileEntryId);
+			throw new NoSuchFileVersionException();
 		}
 
 		dlFileVersions = ListUtil.copy(dlFileVersions);
@@ -1224,7 +1222,7 @@ public class DLFileEntryLocalServiceImpl
 		// File
 
 		try {
-			DLStoreUtil.deleteFile(
+			dlLocalService.deleteFile(
 				dlFileEntry.getCompanyId(), PortletKeys.DOCUMENT_LIBRARY,
 				dlFileEntry.getDataRepositoryId(), dlFileEntry.getName());
 		}
@@ -1282,7 +1280,7 @@ public class DLFileEntryLocalServiceImpl
 
 		while (is == null) {
 			try {
-				is = DLStoreUtil.getFileAsStream(
+				is = dlLocalService.getFileAsStream(
 					dlFileEntry.getCompanyId(),
 					dlFileEntry.getDataRepositoryId(),
 					dlFileEntry.getName());
@@ -1298,13 +1296,13 @@ public class DLFileEntryLocalServiceImpl
 			catch (NoSuchFileException nsfe) {
 				fetchFailures++;
 
-				if (PropsValues.DL_STORE_IMPL.equals(
-						JCRStore.class.getName()) &&
+				if (PropsValues.DL_HOOK_IMPL.equals(
+						JCRHook.class.getName()) &&
 					(fetchFailures <
-						PropsValues.DL_STORE_JCR_FETCH_MAX_FAILURES)) {
+						PropsValues.DL_HOOK_JCR_FETCH_MAX_FAILURES)) {
 
 					try {
-						Thread.sleep(PropsValues.DL_STORE_JCR_FETCH_DELAY);
+						Thread.sleep(PropsValues.DL_HOOK_JCR_FETCH_DELAY);
 					}
 					catch (InterruptedException ie) {
 					}
@@ -1328,7 +1326,7 @@ public class DLFileEntryLocalServiceImpl
 
 		while (is == null) {
 			try {
-				is = DLStoreUtil.getFileAsStream(
+				is = dlLocalService.getFileAsStream(
 					dlFileEntry.getCompanyId(),
 					dlFileEntry.getDataRepositoryId(),
 					dlFileEntry.getName(), version);
@@ -1344,13 +1342,13 @@ public class DLFileEntryLocalServiceImpl
 			catch (NoSuchFileException nsfe) {
 				fetchFailures++;
 
-				if (PropsValues.DL_STORE_IMPL.equals(
-						JCRStore.class.getName()) &&
+				if (PropsValues.DL_HOOK_IMPL.equals(
+						JCRHook.class.getName()) &&
 					(fetchFailures <
-						PropsValues.DL_STORE_JCR_FETCH_MAX_FAILURES)) {
+						PropsValues.DL_HOOK_JCR_FETCH_MAX_FAILURES)) {
 
 					try {
-						Thread.sleep(PropsValues.DL_STORE_JCR_FETCH_DELAY);
+						Thread.sleep(PropsValues.DL_HOOK_JCR_FETCH_DELAY);
 					}
 					catch (InterruptedException ie) {
 					}
@@ -1437,7 +1435,7 @@ public class DLFileEntryLocalServiceImpl
 
 		long oldDataRepositoryId = dlFileEntry.getDataRepositoryId();
 
-		if (DLStoreUtil.hasFile(
+		if (dlLocalService.hasFile(
 				user.getCompanyId(),
 				DLFolderConstants.getDataRepositoryId(
 					dlFileEntry.getGroupId(), newFolderId),
@@ -1452,7 +1450,7 @@ public class DLFileEntryLocalServiceImpl
 
 		// File
 
-		DLStoreUtil.updateFile(
+		dlLocalService.updateFile(
 			user.getCompanyId(), PortletKeys.DOCUMENT_LIBRARY,
 			dlFileEntry.getGroupId(), oldDataRepositoryId,
 			dlFileEntry.getDataRepositoryId(), dlFileEntry.getName(),
@@ -1554,7 +1552,7 @@ public class DLFileEntryLocalServiceImpl
 
 		if (is != null) {
 			try {
-				DLStoreUtil.deleteFile(
+				dlLocalService.deleteFile(
 					user.getCompanyId(), PortletKeys.DOCUMENT_LIBRARY,
 					dlFileEntry.getDataRepositoryId(), dlFileEntry.getName(),
 					version);
@@ -1562,7 +1560,7 @@ public class DLFileEntryLocalServiceImpl
 			catch (NoSuchFileException nsfe) {
 			}
 
-			DLStoreUtil.updateFile(
+			dlLocalService.updateFile(
 				user.getCompanyId(), PortletKeys.DOCUMENT_LIBRARY,
 				dlFileEntry.getGroupId(), dlFileEntry.getDataRepositoryId(),
 				dlFileEntry.getName(), dlFileEntry.getExtension(), false,
@@ -1656,13 +1654,13 @@ public class DLFileEntryLocalServiceImpl
 		throws PortalException, SystemException {
 
 		if (Validator.isNotNull(sourceFileName)) {
-			DLStoreUtil.validate(
+			dlLocalService.validate(
 				sourceFileName, extension, sourceFileName, true, is);
 		}
 
 		validateFileName(title);
 
-		DLStoreUtil.validate(title, false);
+		dlLocalService.validate(title, false);
 
 		validateFile(groupId, folderId, fileEntryId, title);
 	}
@@ -1676,7 +1674,7 @@ public class DLFileEntryLocalServiceImpl
 
 		validateFileName(fileName);
 
-		DLStoreUtil.validate(fileName, true, is);
+		dlLocalService.validate(fileName, true, is);
 
 		validateFile(groupId, folderId, 0, title);
 	}

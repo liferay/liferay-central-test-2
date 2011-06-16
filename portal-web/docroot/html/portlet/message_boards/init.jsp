@@ -16,6 +16,10 @@
 
 <%@ include file="/html/portlet/init.jsp" %>
 
+<%@ page import="com.liferay.documentlibrary.FileExtensionException" %>
+<%@ page import="com.liferay.documentlibrary.FileNameException" %>
+<%@ page import="com.liferay.documentlibrary.FileSizeException" %>
+<%@ page import="com.liferay.documentlibrary.service.DLLocalServiceUtil" %>
 <%@ page import="com.liferay.portal.kernel.search.Document" %>
 <%@ page import="com.liferay.portal.kernel.search.Field" %>
 <%@ page import="com.liferay.portal.kernel.search.Hits" %>
@@ -27,10 +31,6 @@
 <%@ page import="com.liferay.portlet.asset.model.AssetTag" %>
 <%@ page import="com.liferay.portlet.asset.service.AssetTagLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.asset.util.AssetUtil" %>
-<%@ page import="com.liferay.portlet.documentlibrary.FileExtensionException" %>
-<%@ page import="com.liferay.portlet.documentlibrary.FileNameException" %>
-<%@ page import="com.liferay.portlet.documentlibrary.FileSizeException" %>
-<%@ page import="com.liferay.portlet.documentlibrary.store.DLStoreUtil" %>
 <%@ page import="com.liferay.portlet.messageboards.BannedUserException" %>
 <%@ page import="com.liferay.portlet.messageboards.CategoryNameException" %>
 <%@ page import="com.liferay.portlet.messageboards.LockedThreadException" %>
