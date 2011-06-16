@@ -48,7 +48,8 @@ public class AtomCollectionAdapterWrapper<E>
 		throws ResponseContextException {
 
 		try {
-			_atomCollectionAdapter.deleteEntry(resourceName);
+			_atomCollectionAdapter.deleteEntry(
+				resourceName, new AtomRequestContextImpl(requestContext));
 		}
 		catch (AtomException ae) {
 			throw new ResponseContextException(
@@ -109,7 +110,8 @@ public class AtomCollectionAdapterWrapper<E>
 		throws ResponseContextException {
 
 		try {
-			return _atomCollectionAdapter.getEntry(resourceName);
+			return _atomCollectionAdapter.getEntry(
+				resourceName, new AtomRequestContextImpl(requestContext));
 		}
 		catch (AtomException ae) {
 			throw new ResponseContextException(

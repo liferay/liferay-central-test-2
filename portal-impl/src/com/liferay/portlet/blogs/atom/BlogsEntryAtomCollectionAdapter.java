@@ -74,15 +74,27 @@ public class BlogsEntryAtomCollectionAdapter
 		return blogsEntry.getModifiedDate();
 	}
 
+	public String getFeedTitle(AtomRequestContext atomRequestContext) {
+
+		return AtomUtil.createFeedTitleFromPortletName(
+			atomRequestContext, PortletKeys.BLOGS);
+	}
+
 	@Override
-	protected void doDeleteEntry(String resourceName) throws Exception {
+	protected void doDeleteEntry(
+			String resourceName, AtomRequestContext atomRequestContext)
+		throws Exception {
+
 		long blogsEntryId = GetterUtil.getLong(resourceName);
 
 		BlogsEntryServiceUtil.deleteEntry(blogsEntryId);
 	}
 
 	@Override
-	protected BlogsEntry doGetEntry(String resourceName) throws Exception {
+	protected BlogsEntry doGetEntry(
+			String resourceName, AtomRequestContext atomRequestContext)
+		throws Exception {
+
 		long blogsEntryId = GetterUtil.getLong(resourceName);
 
 		return BlogsEntryServiceUtil.getEntry(blogsEntryId);
@@ -134,14 +146,6 @@ public class BlogsEntryAtomCollectionAdapter
 		}
 
 		return Collections.emptyList();
-	}
-
-	@Override
-	protected String doGetFeedTitle(AtomRequestContext atomRequestContext)
-		throws Exception {
-
-		return AtomUtil.createFeedTitleFromPortletName(
-			atomRequestContext, PortletKeys.BLOGS);
 	}
 
 	@Override

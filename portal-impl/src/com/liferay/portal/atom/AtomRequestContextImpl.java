@@ -61,6 +61,12 @@ public class AtomRequestContextImpl implements AtomRequestContext {
 		return _requestContext.getParameter(name);
 	}
 
+	public String getParameter(String name, String defaultValue) {
+		String value = _requestContext.getParameter(name);
+
+		return GetterUtil.getString(value, defaultValue);
+	}
+
 	public Object getRequestAttribute(String name) {
 		return _requestContext.getAttribute(RequestContext.Scope.REQUEST, name);
 	}
