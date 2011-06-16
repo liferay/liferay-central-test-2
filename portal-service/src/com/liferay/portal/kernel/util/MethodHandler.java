@@ -60,18 +60,15 @@ public class MethodHandler implements Serializable {
 	}
 
 	public Object invoke(boolean newInstance) throws Exception {
+		Method method = MethodCache.get(_methodKey);
+
 		Thread currentThread = Thread.currentThread();
 
 		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
 
-		Method method = MethodCache.get(_methodKey);
-
-		int modifiers = method.getModifiers();
-
 		Object targetObject = null;
 
-		if (newInstance && !Modifier.isStatic(modifiers)) {
-
+		if (newInstance && !Modifier.isStatic(method.getModifiers())) {
 			Class<?> targetClass = contextClassLoader.loadClass(
 				getClassName());
 
