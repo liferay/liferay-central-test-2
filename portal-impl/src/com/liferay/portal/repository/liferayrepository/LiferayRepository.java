@@ -183,12 +183,12 @@ public class LiferayRepository
 	}
 
 	public List<FileEntry> getFileEntries(
-			long folderId, long documentTypeId, int start, int end,
+			long folderId, long fileEntryTypeId, int start, int end,
 			OrderByComparator obc)
 		throws SystemException {
 
 		List<DLFileEntry> dlFileEntries = dlFileEntryService.getFileEntries(
-			getGroupId(), toFolderId(folderId), documentTypeId, start, end,
+			getGroupId(), toFolderId(folderId), fileEntryTypeId, start, end,
 			obc);
 
 		return toFileEntries(dlFileEntries);
@@ -217,11 +217,11 @@ public class LiferayRepository
 			getGroupId(), toFolderId(folderId));
 	}
 
-	public int getFileEntriesCount(long folderId, long documentTypeId)
+	public int getFileEntriesCount(long folderId, long fileEntryTypeId)
 		throws SystemException {
 
 		return dlFileEntryService.getFileEntriesCount(
-			getGroupId(), toFolderId(folderId), documentTypeId);
+			getGroupId(), toFolderId(folderId), fileEntryTypeId);
 	}
 
 	public FileEntry getFileEntry(long fileEntryId)

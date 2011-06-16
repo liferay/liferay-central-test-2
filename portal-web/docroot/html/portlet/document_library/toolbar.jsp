@@ -95,7 +95,7 @@ String orderByType = ParamUtil.getString(request, "orderByType");
 	<liferay-ui:icon-menu align="left" direction="down" icon="" message="manage" showExpanded="<%= false %>" showWhenSingleIcon="<%= true %>">
 
 		<%
-		String taglibUrl = "javascript:" + renderResponse.getNamespace() + "openDocumentTypeView()";
+		String taglibUrl = "javascript:" + renderResponse.getNamespace() + "openFileEntryTypeView()";
 		%>
 
 		<liferay-ui:icon
@@ -117,7 +117,7 @@ String orderByType = ParamUtil.getString(request, "orderByType");
 </span>
 
 <aui:script>
-	function <portlet:namespace />openDocumentTypeView() {
+	function <portlet:namespace />openFileEntryTypeView() {
 		Liferay.Util.openWindow(
 			{
 				dialog: {
@@ -125,7 +125,7 @@ String orderByType = ParamUtil.getString(request, "orderByType");
 					width:820
 				},
 				title: '<liferay-ui:message key="document-types" />',
-				uri: '<liferay-portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/document_library/view_document_type" /><portlet:param name="redirect" value="<%= currentURL %>" /></liferay-portlet:renderURL>'
+				uri: '<liferay-portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/document_library/view_file_entry_type" /><portlet:param name="redirect" value="<%= currentURL %>" /></liferay-portlet:renderURL>'
 			}
 		);
 	}
@@ -140,7 +140,7 @@ String orderByType = ParamUtil.getString(request, "orderByType");
 				showManageTemplates: 'false',
 				storageType: 'xml',
 				structureName: 'metadata-set',
-				structureType: 'com.liferay.portlet.documentlibrary.model.DLDocumentMetadataSet',
+				structureType: 'com.liferay.portlet.documentlibrary.model.DLFileEntryMetadata',
 				title: '<liferay-ui:message key="metadata-sets" />'
 			}
 		);
