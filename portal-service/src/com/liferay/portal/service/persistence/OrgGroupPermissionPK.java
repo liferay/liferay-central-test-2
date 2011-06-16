@@ -114,6 +114,7 @@ public class OrgGroupPermissionPK implements Comparable<OrgGroupPermissionPK>,
 		return 0;
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		if (obj == null) {
 			return false;
@@ -137,11 +138,13 @@ public class OrgGroupPermissionPK implements Comparable<OrgGroupPermissionPK>,
 		}
 	}
 
+	@Override
 	public int hashCode() {
 		return (String.valueOf(organizationId) + String.valueOf(groupId) +
 		String.valueOf(permissionId)).hashCode();
 	}
 
+	@Override
 	public String toString() {
 		StringBundler sb = new StringBundler(15);
 

@@ -3,7 +3,7 @@
 <deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
 	<service name="Portal_PortletService" provider="java:RPC" style="rpc" use="encoded">
 		<typeMapping xmlns:ns="http://model.portal.liferay.com" qname="ns:PortletSoap" type="java:com.liferay.portal.model.PortletSoap" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>
-		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="getWARPortlets" qname="operNS:getWARPortlets" returnQName="getWARPortletsReturn" returnType="rtns:string" soapAction=""> </operation>
+		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="getWARPortlets" qname="operNS:getWARPortlets" returnQName="getWARPortletsReturn" returnType="rtns:anyType" soapAction=""> </operation>
 		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="http://model.portal.liferay.com" name="updatePortlet" qname="operNS:updatePortlet" returnQName="updatePortletReturn" returnType="rtns:PortletSoap" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="companyId" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="portletId" type="tns:string"></parameter>

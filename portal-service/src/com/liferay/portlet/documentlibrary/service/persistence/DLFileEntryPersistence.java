@@ -1364,20 +1364,20 @@ public interface DLFileEntryPersistence extends BasePersistence<DLFileEntry> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Returns all the d l file entries where groupId = &#63; and folderId = &#63; and fileEntryTypeId = &#63;.
+	* Returns all the d l file entries where groupId = &#63; and folderId = &#63; and documentTypeId = &#63;.
 	*
 	* @param groupId the group ID
 	* @param folderId the folder ID
-	* @param fileEntryTypeId the file entry type ID
+	* @param documentTypeId the document type ID
 	* @return the matching d l file entries
 	* @throws SystemException if a system exception occurred
 	*/
-	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> findByG_F_F(
-		long groupId, long folderId, long fileEntryTypeId)
+	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> findByG_F_D(
+		long groupId, long folderId, long documentTypeId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Returns a range of all the d l file entries where groupId = &#63; and folderId = &#63; and fileEntryTypeId = &#63;.
+	* Returns a range of all the d l file entries where groupId = &#63; and folderId = &#63; and documentTypeId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
@@ -1385,18 +1385,18 @@ public interface DLFileEntryPersistence extends BasePersistence<DLFileEntry> {
 	*
 	* @param groupId the group ID
 	* @param folderId the folder ID
-	* @param fileEntryTypeId the file entry type ID
+	* @param documentTypeId the document type ID
 	* @param start the lower bound of the range of d l file entries
 	* @param end the upper bound of the range of d l file entries (not inclusive)
 	* @return the range of matching d l file entries
 	* @throws SystemException if a system exception occurred
 	*/
-	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> findByG_F_F(
-		long groupId, long folderId, long fileEntryTypeId, int start, int end)
+	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> findByG_F_D(
+		long groupId, long folderId, long documentTypeId, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Returns an ordered range of all the d l file entries where groupId = &#63; and folderId = &#63; and fileEntryTypeId = &#63;.
+	* Returns an ordered range of all the d l file entries where groupId = &#63; and folderId = &#63; and documentTypeId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
@@ -1404,20 +1404,20 @@ public interface DLFileEntryPersistence extends BasePersistence<DLFileEntry> {
 	*
 	* @param groupId the group ID
 	* @param folderId the folder ID
-	* @param fileEntryTypeId the file entry type ID
+	* @param documentTypeId the document type ID
 	* @param start the lower bound of the range of d l file entries
 	* @param end the upper bound of the range of d l file entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching d l file entries
 	* @throws SystemException if a system exception occurred
 	*/
-	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> findByG_F_F(
-		long groupId, long folderId, long fileEntryTypeId, int start, int end,
+	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> findByG_F_D(
+		long groupId, long folderId, long documentTypeId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Returns the first d l file entry in the ordered set where groupId = &#63; and folderId = &#63; and fileEntryTypeId = &#63;.
+	* Returns the first d l file entry in the ordered set where groupId = &#63; and folderId = &#63; and documentTypeId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
@@ -1425,20 +1425,20 @@ public interface DLFileEntryPersistence extends BasePersistence<DLFileEntry> {
 	*
 	* @param groupId the group ID
 	* @param folderId the folder ID
-	* @param fileEntryTypeId the file entry type ID
+	* @param documentTypeId the document type ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching d l file entry
 	* @throws com.liferay.portlet.documentlibrary.NoSuchFileEntryException if a matching d l file entry could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public com.liferay.portlet.documentlibrary.model.DLFileEntry findByG_F_F_First(
-		long groupId, long folderId, long fileEntryTypeId,
+	public com.liferay.portlet.documentlibrary.model.DLFileEntry findByG_F_D_First(
+		long groupId, long folderId, long documentTypeId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
 
 	/**
-	* Returns the last d l file entry in the ordered set where groupId = &#63; and folderId = &#63; and fileEntryTypeId = &#63;.
+	* Returns the last d l file entry in the ordered set where groupId = &#63; and folderId = &#63; and documentTypeId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
@@ -1446,20 +1446,20 @@ public interface DLFileEntryPersistence extends BasePersistence<DLFileEntry> {
 	*
 	* @param groupId the group ID
 	* @param folderId the folder ID
-	* @param fileEntryTypeId the file entry type ID
+	* @param documentTypeId the document type ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching d l file entry
 	* @throws com.liferay.portlet.documentlibrary.NoSuchFileEntryException if a matching d l file entry could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public com.liferay.portlet.documentlibrary.model.DLFileEntry findByG_F_F_Last(
-		long groupId, long folderId, long fileEntryTypeId,
+	public com.liferay.portlet.documentlibrary.model.DLFileEntry findByG_F_D_Last(
+		long groupId, long folderId, long documentTypeId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
 
 	/**
-	* Returns the d l file entries before and after the current d l file entry in the ordered set where groupId = &#63; and folderId = &#63; and fileEntryTypeId = &#63;.
+	* Returns the d l file entries before and after the current d l file entry in the ordered set where groupId = &#63; and folderId = &#63; and documentTypeId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
@@ -1468,20 +1468,20 @@ public interface DLFileEntryPersistence extends BasePersistence<DLFileEntry> {
 	* @param fileEntryId the primary key of the current d l file entry
 	* @param groupId the group ID
 	* @param folderId the folder ID
-	* @param fileEntryTypeId the file entry type ID
+	* @param documentTypeId the document type ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next d l file entry
 	* @throws com.liferay.portlet.documentlibrary.NoSuchFileEntryException if a d l file entry with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public com.liferay.portlet.documentlibrary.model.DLFileEntry[] findByG_F_F_PrevAndNext(
-		long fileEntryId, long groupId, long folderId, long fileEntryTypeId,
+	public com.liferay.portlet.documentlibrary.model.DLFileEntry[] findByG_F_D_PrevAndNext(
+		long fileEntryId, long groupId, long folderId, long documentTypeId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
 
 	/**
-	* Returns all the d l file entries where groupId = &#63; and folderId = any &#63; and fileEntryTypeId = &#63;.
+	* Returns all the d l file entries where groupId = &#63; and folderId = any &#63; and documentTypeId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
@@ -1489,16 +1489,16 @@ public interface DLFileEntryPersistence extends BasePersistence<DLFileEntry> {
 	*
 	* @param groupId the group ID
 	* @param folderIds the folder IDs
-	* @param fileEntryTypeId the file entry type ID
+	* @param documentTypeId the document type ID
 	* @return the matching d l file entries
 	* @throws SystemException if a system exception occurred
 	*/
-	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> findByG_F_F(
-		long groupId, long[] folderIds, long fileEntryTypeId)
+	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> findByG_F_D(
+		long groupId, long[] folderIds, long documentTypeId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Returns a range of all the d l file entries where groupId = &#63; and folderId = any &#63; and fileEntryTypeId = &#63;.
+	* Returns a range of all the d l file entries where groupId = &#63; and folderId = any &#63; and documentTypeId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
@@ -1506,18 +1506,18 @@ public interface DLFileEntryPersistence extends BasePersistence<DLFileEntry> {
 	*
 	* @param groupId the group ID
 	* @param folderIds the folder IDs
-	* @param fileEntryTypeId the file entry type ID
+	* @param documentTypeId the document type ID
 	* @param start the lower bound of the range of d l file entries
 	* @param end the upper bound of the range of d l file entries (not inclusive)
 	* @return the range of matching d l file entries
 	* @throws SystemException if a system exception occurred
 	*/
-	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> findByG_F_F(
-		long groupId, long[] folderIds, long fileEntryTypeId, int start, int end)
+	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> findByG_F_D(
+		long groupId, long[] folderIds, long documentTypeId, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Returns an ordered range of all the d l file entries where groupId = &#63; and folderId = any &#63; and fileEntryTypeId = &#63;.
+	* Returns an ordered range of all the d l file entries where groupId = &#63; and folderId = any &#63; and documentTypeId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
@@ -1525,34 +1525,34 @@ public interface DLFileEntryPersistence extends BasePersistence<DLFileEntry> {
 	*
 	* @param groupId the group ID
 	* @param folderIds the folder IDs
-	* @param fileEntryTypeId the file entry type ID
+	* @param documentTypeId the document type ID
 	* @param start the lower bound of the range of d l file entries
 	* @param end the upper bound of the range of d l file entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching d l file entries
 	* @throws SystemException if a system exception occurred
 	*/
-	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> findByG_F_F(
-		long groupId, long[] folderIds, long fileEntryTypeId, int start,
+	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> findByG_F_D(
+		long groupId, long[] folderIds, long documentTypeId, int start,
 		int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Returns all the d l file entries that the user has permission to view where groupId = &#63; and folderId = &#63; and fileEntryTypeId = &#63;.
+	* Returns all the d l file entries that the user has permission to view where groupId = &#63; and folderId = &#63; and documentTypeId = &#63;.
 	*
 	* @param groupId the group ID
 	* @param folderId the folder ID
-	* @param fileEntryTypeId the file entry type ID
+	* @param documentTypeId the document type ID
 	* @return the matching d l file entries that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
-	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> filterFindByG_F_F(
-		long groupId, long folderId, long fileEntryTypeId)
+	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> filterFindByG_F_D(
+		long groupId, long folderId, long documentTypeId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Returns a range of all the d l file entries that the user has permission to view where groupId = &#63; and folderId = &#63; and fileEntryTypeId = &#63;.
+	* Returns a range of all the d l file entries that the user has permission to view where groupId = &#63; and folderId = &#63; and documentTypeId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
@@ -1560,18 +1560,18 @@ public interface DLFileEntryPersistence extends BasePersistence<DLFileEntry> {
 	*
 	* @param groupId the group ID
 	* @param folderId the folder ID
-	* @param fileEntryTypeId the file entry type ID
+	* @param documentTypeId the document type ID
 	* @param start the lower bound of the range of d l file entries
 	* @param end the upper bound of the range of d l file entries (not inclusive)
 	* @return the range of matching d l file entries that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
-	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> filterFindByG_F_F(
-		long groupId, long folderId, long fileEntryTypeId, int start, int end)
+	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> filterFindByG_F_D(
+		long groupId, long folderId, long documentTypeId, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Returns an ordered range of all the d l file entries that the user has permissions to view where groupId = &#63; and folderId = &#63; and fileEntryTypeId = &#63;.
+	* Returns an ordered range of all the d l file entries that the user has permissions to view where groupId = &#63; and folderId = &#63; and documentTypeId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
@@ -1579,51 +1579,51 @@ public interface DLFileEntryPersistence extends BasePersistence<DLFileEntry> {
 	*
 	* @param groupId the group ID
 	* @param folderId the folder ID
-	* @param fileEntryTypeId the file entry type ID
+	* @param documentTypeId the document type ID
 	* @param start the lower bound of the range of d l file entries
 	* @param end the upper bound of the range of d l file entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching d l file entries that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
-	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> filterFindByG_F_F(
-		long groupId, long folderId, long fileEntryTypeId, int start, int end,
+	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> filterFindByG_F_D(
+		long groupId, long folderId, long documentTypeId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Returns the d l file entries before and after the current d l file entry in the ordered set of d l file entries that the user has permission to view where groupId = &#63; and folderId = &#63; and fileEntryTypeId = &#63;.
+	* Returns the d l file entries before and after the current d l file entry in the ordered set of d l file entries that the user has permission to view where groupId = &#63; and folderId = &#63; and documentTypeId = &#63;.
 	*
 	* @param fileEntryId the primary key of the current d l file entry
 	* @param groupId the group ID
 	* @param folderId the folder ID
-	* @param fileEntryTypeId the file entry type ID
+	* @param documentTypeId the document type ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next d l file entry
 	* @throws com.liferay.portlet.documentlibrary.NoSuchFileEntryException if a d l file entry with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public com.liferay.portlet.documentlibrary.model.DLFileEntry[] filterFindByG_F_F_PrevAndNext(
-		long fileEntryId, long groupId, long folderId, long fileEntryTypeId,
+	public com.liferay.portlet.documentlibrary.model.DLFileEntry[] filterFindByG_F_D_PrevAndNext(
+		long fileEntryId, long groupId, long folderId, long documentTypeId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
 
 	/**
-	* Returns all the d l file entries that the user has permission to view where groupId = &#63; and folderId = any &#63; and fileEntryTypeId = &#63;.
+	* Returns all the d l file entries that the user has permission to view where groupId = &#63; and folderId = any &#63; and documentTypeId = &#63;.
 	*
 	* @param groupId the group ID
 	* @param folderIds the folder IDs
-	* @param fileEntryTypeId the file entry type ID
+	* @param documentTypeId the document type ID
 	* @return the matching d l file entries that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
-	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> filterFindByG_F_F(
-		long groupId, long[] folderIds, long fileEntryTypeId)
+	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> filterFindByG_F_D(
+		long groupId, long[] folderIds, long documentTypeId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Returns a range of all the d l file entries that the user has permission to view where groupId = &#63; and folderId = any &#63; and fileEntryTypeId = &#63;.
+	* Returns a range of all the d l file entries that the user has permission to view where groupId = &#63; and folderId = any &#63; and documentTypeId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
@@ -1631,18 +1631,18 @@ public interface DLFileEntryPersistence extends BasePersistence<DLFileEntry> {
 	*
 	* @param groupId the group ID
 	* @param folderIds the folder IDs
-	* @param fileEntryTypeId the file entry type ID
+	* @param documentTypeId the document type ID
 	* @param start the lower bound of the range of d l file entries
 	* @param end the upper bound of the range of d l file entries (not inclusive)
 	* @return the range of matching d l file entries that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
-	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> filterFindByG_F_F(
-		long groupId, long[] folderIds, long fileEntryTypeId, int start, int end)
+	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> filterFindByG_F_D(
+		long groupId, long[] folderIds, long documentTypeId, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Returns an ordered range of all the d l file entries that the user has permission to view where groupId = &#63; and folderId = any &#63; and fileEntryTypeId = &#63;.
+	* Returns an ordered range of all the d l file entries that the user has permission to view where groupId = &#63; and folderId = any &#63; and documentTypeId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
@@ -1650,15 +1650,15 @@ public interface DLFileEntryPersistence extends BasePersistence<DLFileEntry> {
 	*
 	* @param groupId the group ID
 	* @param folderIds the folder IDs
-	* @param fileEntryTypeId the file entry type ID
+	* @param documentTypeId the document type ID
 	* @param start the lower bound of the range of d l file entries
 	* @param end the upper bound of the range of d l file entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching d l file entries that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
-	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> filterFindByG_F_F(
-		long groupId, long[] folderIds, long fileEntryTypeId, int start,
+	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> filterFindByG_F_D(
+		long groupId, long[] folderIds, long documentTypeId, int start,
 		int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
@@ -1801,14 +1801,14 @@ public interface DLFileEntryPersistence extends BasePersistence<DLFileEntry> {
 			com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
 
 	/**
-	* Removes all the d l file entries where groupId = &#63; and folderId = &#63; and fileEntryTypeId = &#63; from the database.
+	* Removes all the d l file entries where groupId = &#63; and folderId = &#63; and documentTypeId = &#63; from the database.
 	*
 	* @param groupId the group ID
 	* @param folderId the folder ID
-	* @param fileEntryTypeId the file entry type ID
+	* @param documentTypeId the document type ID
 	* @throws SystemException if a system exception occurred
 	*/
-	public void removeByG_F_F(long groupId, long folderId, long fileEntryTypeId)
+	public void removeByG_F_D(long groupId, long folderId, long documentTypeId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
@@ -2009,53 +2009,53 @@ public interface DLFileEntryPersistence extends BasePersistence<DLFileEntry> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Returns the number of d l file entries where groupId = &#63; and folderId = &#63; and fileEntryTypeId = &#63;.
+	* Returns the number of d l file entries where groupId = &#63; and folderId = &#63; and documentTypeId = &#63;.
 	*
 	* @param groupId the group ID
 	* @param folderId the folder ID
-	* @param fileEntryTypeId the file entry type ID
+	* @param documentTypeId the document type ID
 	* @return the number of matching d l file entries
 	* @throws SystemException if a system exception occurred
 	*/
-	public int countByG_F_F(long groupId, long folderId, long fileEntryTypeId)
+	public int countByG_F_D(long groupId, long folderId, long documentTypeId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Returns the number of d l file entries where groupId = &#63; and folderId = any &#63; and fileEntryTypeId = &#63;.
+	* Returns the number of d l file entries where groupId = &#63; and folderId = any &#63; and documentTypeId = &#63;.
 	*
 	* @param groupId the group ID
 	* @param folderIds the folder IDs
-	* @param fileEntryTypeId the file entry type ID
+	* @param documentTypeId the document type ID
 	* @return the number of matching d l file entries
 	* @throws SystemException if a system exception occurred
 	*/
-	public int countByG_F_F(long groupId, long[] folderIds, long fileEntryTypeId)
+	public int countByG_F_D(long groupId, long[] folderIds, long documentTypeId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Returns the number of d l file entries that the user has permission to view where groupId = &#63; and folderId = &#63; and fileEntryTypeId = &#63;.
+	* Returns the number of d l file entries that the user has permission to view where groupId = &#63; and folderId = &#63; and documentTypeId = &#63;.
 	*
 	* @param groupId the group ID
 	* @param folderId the folder ID
-	* @param fileEntryTypeId the file entry type ID
+	* @param documentTypeId the document type ID
 	* @return the number of matching d l file entries that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
-	public int filterCountByG_F_F(long groupId, long folderId,
-		long fileEntryTypeId)
+	public int filterCountByG_F_D(long groupId, long folderId,
+		long documentTypeId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Returns the number of d l file entries that the user has permission to view where groupId = &#63; and folderId = any &#63; and fileEntryTypeId = &#63;.
+	* Returns the number of d l file entries that the user has permission to view where groupId = &#63; and folderId = any &#63; and documentTypeId = &#63;.
 	*
 	* @param groupId the group ID
 	* @param folderIds the folder IDs
-	* @param fileEntryTypeId the file entry type ID
+	* @param documentTypeId the document type ID
 	* @return the number of matching d l file entries that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
-	public int filterCountByG_F_F(long groupId, long[] folderIds,
-		long fileEntryTypeId)
+	public int filterCountByG_F_D(long groupId, long[] folderIds,
+		long documentTypeId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**

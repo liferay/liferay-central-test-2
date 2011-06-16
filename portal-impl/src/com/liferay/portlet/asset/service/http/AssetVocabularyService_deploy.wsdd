@@ -17,17 +17,10 @@
 		<operation xmlns:operNS="urn:http.service.asset.portlet.liferay.com" xmlns:rtns="urn:http.service.asset.portlet.liferay.com" xmlns:tns2="http://model.asset.portlet.liferay.com" name="getGroupsVocabularies" qname="operNS:getGroupsVocabularies" returnQName="getGroupsVocabulariesReturn" returnType="rtns:ArrayOf_tns2_AssetVocabularySoap" returnItemType="tns2:AssetVocabularySoap" soapAction="">
 			<parameter xmlns:tns="urn:http.service.asset.portlet.liferay.com" qname="groupIds" type="tns:ArrayOf_xsd_long"></parameter>
 		</operation>
-		<operation xmlns:operNS="urn:http.service.asset.portlet.liferay.com" xmlns:rtns="urn:http.service.asset.portlet.liferay.com" xmlns:tns2="http://model.asset.portlet.liferay.com" name="getGroupsVocabularies" qname="operNS:getGroupsVocabularies" returnQName="getGroupsVocabulariesReturn" returnType="rtns:ArrayOf_tns2_AssetVocabularySoap" returnItemType="tns2:AssetVocabularySoap" soapAction="">
-			<parameter xmlns:tns="urn:http.service.asset.portlet.liferay.com" qname="groupIds" type="tns:ArrayOf_xsd_long"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="className" type="tns:string"></parameter>
-		</operation>
-		<operation xmlns:operNS="urn:http.service.asset.portlet.liferay.com" xmlns:rtns="urn:http.service.asset.portlet.liferay.com" xmlns:tns2="http://model.asset.portlet.liferay.com" name="getVocabularies" qname="operNS:getVocabularies" returnQName="getVocabulariesReturn" returnType="rtns:ArrayOf_tns2_AssetVocabularySoap" returnItemType="tns2:AssetVocabularySoap" soapAction="">
-			<parameter xmlns:tns="urn:http.service.asset.portlet.liferay.com" qname="vocabularyIds" type="tns:ArrayOf_xsd_long"></parameter>
-		</operation>
 		<operation xmlns:operNS="urn:http.service.asset.portlet.liferay.com" xmlns:rtns="http://model.asset.portlet.liferay.com" name="getVocabulary" qname="operNS:getVocabulary" returnQName="getVocabularyReturn" returnType="rtns:AssetVocabularySoap" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="vocabularyId" type="tns:long"></parameter>
 		</operation>
-		<parameter name="allowedMethods" value="deleteVocabulary getCompanyVocabularies getGroupVocabularies getGroupsVocabularies getVocabularies getVocabulary" />
+		<parameter name="allowedMethods" value="deleteVocabulary getCompanyVocabularies getGroupVocabularies getGroupsVocabularies getVocabulary" />
 		<parameter name="className" value="com.liferay.portlet.asset.service.http.AssetVocabularyServiceSoap" />
 		<parameter name="schemaUnqualified" value="http://model.asset.portlet.liferay.com,urn:http.service.asset.portlet.liferay.com" />
 		<parameter name="typeMappingVersion" value="1.2" />

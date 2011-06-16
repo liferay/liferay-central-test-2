@@ -112,6 +112,7 @@ public class OrgGroupRolePK implements Comparable<OrgGroupRolePK>, Serializable 
 		return 0;
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		if (obj == null) {
 			return false;
@@ -135,11 +136,13 @@ public class OrgGroupRolePK implements Comparable<OrgGroupRolePK>, Serializable 
 		}
 	}
 
+	@Override
 	public int hashCode() {
 		return (String.valueOf(organizationId) + String.valueOf(groupId) +
 		String.valueOf(roleId)).hashCode();
 	}
 
+	@Override
 	public String toString() {
 		StringBundler sb = new StringBundler(15);
 

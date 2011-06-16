@@ -347,10 +347,10 @@ public class DDMStructureLocalServiceUtil {
 		return getService().getClassStructures(classNameId, start, end);
 	}
 
-	public static java.util.List<com.liferay.portlet.dynamicdatamapping.model.DDMStructure> getDLFileEntryTypeStructures(
-		long dlFileEntryTypeId)
+	public static java.util.List<com.liferay.portlet.dynamicdatamapping.model.DDMStructure> getDLDocumentTypeStructures(
+		long dlDocumentTypeId)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().getDLFileEntryTypeStructures(dlFileEntryTypeId);
+		return getService().getDLDocumentTypeStructures(dlDocumentTypeId);
 	}
 
 	public static com.liferay.portlet.dynamicdatamapping.model.DDMStructure getStructure(

@@ -196,30 +196,30 @@ public class DLAppServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portal.kernel.repository.model.FileEntry> getFileEntries(
-		long repositoryId, long folderId, long fileEntryTypeId)
+		long repositoryId, long folderId, long documentTypeId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
-				   .getFileEntries(repositoryId, folderId, fileEntryTypeId);
+				   .getFileEntries(repositoryId, folderId, documentTypeId);
 	}
 
 	public static java.util.List<com.liferay.portal.kernel.repository.model.FileEntry> getFileEntries(
-		long repositoryId, long folderId, long fileEntryTypeId, int start,
+		long repositoryId, long folderId, long documentTypeId, int start,
 		int end)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
-				   .getFileEntries(repositoryId, folderId, fileEntryTypeId,
+				   .getFileEntries(repositoryId, folderId, documentTypeId,
 			start, end);
 	}
 
 	public static java.util.List<com.liferay.portal.kernel.repository.model.FileEntry> getFileEntries(
-		long repositoryId, long folderId, long fileEntryTypeId, int start,
+		long repositoryId, long folderId, long documentTypeId, int start,
 		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
-				   .getFileEntries(repositoryId, folderId, fileEntryTypeId,
+				   .getFileEntries(repositoryId, folderId, documentTypeId,
 			start, end, obc);
 	}
 
@@ -248,11 +248,11 @@ public class DLAppServiceUtil {
 	}
 
 	public static int getFileEntriesCount(long repositoryId, long folderId,
-		long fileEntryTypeId)
+		long documentTypeId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
-				   .getFileEntriesCount(repositoryId, folderId, fileEntryTypeId);
+				   .getFileEntriesCount(repositoryId, folderId, documentTypeId);
 	}
 
 	public static com.liferay.portal.kernel.repository.model.FileEntry getFileEntry(

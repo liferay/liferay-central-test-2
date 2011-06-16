@@ -49,7 +49,7 @@ public class DLFileEntrySoap implements Serializable {
 		soapModel.setTitle(model.getTitle());
 		soapModel.setDescription(model.getDescription());
 		soapModel.setExtraSettings(model.getExtraSettings());
-		soapModel.setFileEntryTypeId(model.getFileEntryTypeId());
+		soapModel.setDocumentTypeId(model.getDocumentTypeId());
 		soapModel.setVersion(model.getVersion());
 		soapModel.setSize(model.getSize());
 		soapModel.setReadCount(model.getReadCount());
@@ -249,12 +249,12 @@ public class DLFileEntrySoap implements Serializable {
 		_extraSettings = extraSettings;
 	}
 
-	public long getFileEntryTypeId() {
-		return _fileEntryTypeId;
+	public long getDocumentTypeId() {
+		return _documentTypeId;
 	}
 
-	public void setFileEntryTypeId(long fileEntryTypeId) {
-		_fileEntryTypeId = fileEntryTypeId;
+	public void setDocumentTypeId(long documentTypeId) {
+		_documentTypeId = documentTypeId;
 	}
 
 	public String getVersion() {
@@ -299,7 +299,7 @@ public class DLFileEntrySoap implements Serializable {
 	private String _title;
 	private String _description;
 	private String _extraSettings;
-	private long _fileEntryTypeId;
+	private long _documentTypeId;
 	private String _version;
 	private long _size;
 	private int _readCount;

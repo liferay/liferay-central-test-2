@@ -33,6 +33,7 @@ import java.util.List;
  */
 public class WorkflowDefinitionLinkPersistenceTest
 	extends BasePersistenceTestCase {
+	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 

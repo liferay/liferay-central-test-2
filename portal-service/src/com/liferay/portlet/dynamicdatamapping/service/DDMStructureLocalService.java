@@ -299,8 +299,8 @@ public interface DDMStructureLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.List<com.liferay.portlet.dynamicdatamapping.model.DDMStructure> getDLFileEntryTypeStructures(
-		long dlFileEntryTypeId)
+	public java.util.List<com.liferay.portlet.dynamicdatamapping.model.DDMStructure> getDLDocumentTypeStructures(
+		long dlDocumentTypeId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)

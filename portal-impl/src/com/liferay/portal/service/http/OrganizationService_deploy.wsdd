@@ -31,7 +31,6 @@
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="countryId" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="statusId" type="tns:int"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="comments" type="tns:string"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="site" type="tns:boolean"></parameter>
 			<parameter xmlns:tns="urn:http.service.portal.liferay.com" qname="addresses" type="tns:ArrayOf_tns2_AddressSoap"></parameter>
 			<parameter xmlns:tns="urn:http.service.portal.liferay.com" qname="emailAddresses" type="tns:ArrayOf_tns2_EmailAddressSoap"></parameter>
 			<parameter xmlns:tns="urn:http.service.portal.liferay.com" qname="orgLabors" type="tns:ArrayOf_tns2_OrgLaborSoap"></parameter>
@@ -48,7 +47,6 @@
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="countryId" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="statusId" type="tns:int"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="comments" type="tns:string"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="site" type="tns:boolean"></parameter>
 			<parameter xmlns:tns="http://service.portal.liferay.com" qname="serviceContext" type="tns:ServiceContext"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.portal.liferay.com" name="addPasswordPolicyOrganizations" qname="operNS:addPasswordPolicyOrganizations" soapAction="">
@@ -115,7 +113,6 @@
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="countryId" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="statusId" type="tns:int"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="comments" type="tns:string"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="site" type="tns:boolean"></parameter>
 			<parameter xmlns:tns="urn:http.service.portal.liferay.com" qname="addresses" type="tns:ArrayOf_tns2_AddressSoap"></parameter>
 			<parameter xmlns:tns="urn:http.service.portal.liferay.com" qname="emailAddresses" type="tns:ArrayOf_tns2_EmailAddressSoap"></parameter>
 			<parameter xmlns:tns="urn:http.service.portal.liferay.com" qname="orgLabors" type="tns:ArrayOf_tns2_OrgLaborSoap"></parameter>
@@ -133,7 +130,6 @@
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="countryId" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="statusId" type="tns:int"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="comments" type="tns:string"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="site" type="tns:boolean"></parameter>
 			<parameter xmlns:tns="http://service.portal.liferay.com" qname="serviceContext" type="tns:ServiceContext"></parameter>
 		</operation>
 		<parameter name="allowedMethods" value="addGroupOrganizations addOrganization addPasswordPolicyOrganizations deleteLogo deleteOrganization getManageableOrganizations getOrganization getOrganizationId getOrganizations getOrganizationsCount getUserOrganizations setGroupOrganizations unsetGroupOrganizations unsetPasswordPolicyOrganizations updateOrganization" />
