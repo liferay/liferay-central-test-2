@@ -31,7 +31,6 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class SCFrameworkVersionPersistenceTest extends BasePersistenceTestCase {
-	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 

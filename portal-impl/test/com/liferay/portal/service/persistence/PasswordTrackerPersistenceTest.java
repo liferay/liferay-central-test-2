@@ -30,7 +30,6 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class PasswordTrackerPersistenceTest extends BasePersistenceTestCase {
-	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 

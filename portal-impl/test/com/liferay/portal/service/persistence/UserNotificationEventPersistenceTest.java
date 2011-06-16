@@ -30,7 +30,6 @@ import java.util.List;
  */
 public class UserNotificationEventPersistenceTest
 	extends BasePersistenceTestCase {
-	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 

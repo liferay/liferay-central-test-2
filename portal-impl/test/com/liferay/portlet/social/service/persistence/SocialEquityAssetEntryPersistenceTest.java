@@ -33,7 +33,6 @@ import java.util.List;
  */
 public class SocialEquityAssetEntryPersistenceTest
 	extends BasePersistenceTestCase {
-	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 

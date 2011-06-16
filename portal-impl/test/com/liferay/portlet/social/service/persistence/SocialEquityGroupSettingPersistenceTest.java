@@ -33,7 +33,6 @@ import java.util.List;
  */
 public class SocialEquityGroupSettingPersistenceTest
 	extends BasePersistenceTestCase {
-	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 

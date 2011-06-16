@@ -338,10 +338,10 @@ public class DDMStructureLocalServiceWrapper implements DDMStructureLocalService
 			end);
 	}
 
-	public java.util.List<com.liferay.portlet.dynamicdatamapping.model.DDMStructure> getDLDocumentTypeStructures(
-		long dlDocumentTypeId)
+	public java.util.List<com.liferay.portlet.dynamicdatamapping.model.DDMStructure> getDLFileEntryTypeStructures(
+		long dlFileEntryTypeId)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return _ddmStructureLocalService.getDLDocumentTypeStructures(dlDocumentTypeId);
+		return _ddmStructureLocalService.getDLFileEntryTypeStructures(dlFileEntryTypeId);
 	}
 
 	public com.liferay.portlet.dynamicdatamapping.model.DDMStructure getStructure(
