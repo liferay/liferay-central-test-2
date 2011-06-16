@@ -17,6 +17,7 @@ package com.liferay.portlet.calendar.service.impl;
 import com.liferay.portal.kernel.cal.TZSRecurrence;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.ServiceContext;
@@ -27,8 +28,8 @@ import com.liferay.portlet.calendar.service.permission.CalendarPermission;
 
 import java.io.File;
 
-import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -105,18 +106,20 @@ public class CalEventServiceImpl extends CalEventServiceBaseImpl {
 	public List<CalEvent> getEvents(long groupId, Calendar cal, String[] types)
 		throws PortalException, SystemException {
 
-		List<CalEvent> events = new ArrayList<CalEvent>();
-
-		List<CalEvent> eventList = calEventLocalService.getEvents(
+		List<CalEvent> events = calEventLocalService.getEvents(
 			groupId, cal, types);
 
-		for (CalEvent event : eventList) {
-			long eventId = event.getEventId();
+		events = ListUtil.copy(events);
 
-			if (CalEventPermission.contains(
-				getPermissionChecker(), eventId, ActionKeys.VIEW)) {
+		Iterator<CalEvent> itr = events.iterator();
 
-				events.add(event);
+		while (itr.hasNext()) {
+			CalEvent event = itr.next();
+
+			if (!CalEventPermission.contains(
+					getPermissionChecker(), event, ActionKeys.VIEW)) {
+
+				itr.remove();
 			}
 		}
 
@@ -145,6 +148,12 @@ public class CalEventServiceImpl extends CalEventServiceBaseImpl {
 		}
 	}
 
+	public int getEventsCount(long groupId, String type)
+		throws SystemException {
+
+		return getEventsCount(groupId, new String[] {type});
+	}
+
 	public int getEventsCount(long groupId, String[] types)
 		throws SystemException {
 
@@ -162,10 +171,10 @@ public class CalEventServiceImpl extends CalEventServiceBaseImpl {
 		return hasEvents(groupId, cal, new String[0]);
 	}
 
-	public boolean hasEvents(long groupId, Calendar cal, String types)
+	public boolean hasEvents(long groupId, Calendar cal, String type)
 		throws PortalException, SystemException {
 
-		return hasEvents(groupId, cal, new String[] {types});
+		return hasEvents(groupId, cal, new String[] {type});
 	}
 
 	public boolean hasEvents(long groupId, Calendar cal, String[] types)

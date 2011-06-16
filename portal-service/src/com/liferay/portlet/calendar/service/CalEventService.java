@@ -95,6 +95,10 @@ public interface CalEventService {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getEventsCount(long groupId, java.lang.String type)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getEventsCount(long groupId, java.lang.String[] types)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
@@ -105,7 +109,7 @@ public interface CalEventService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public boolean hasEvents(long groupId, java.util.Calendar cal,
-		java.lang.String types)
+		java.lang.String type)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 

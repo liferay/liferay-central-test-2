@@ -99,6 +99,11 @@ public class CalEventServiceWrapper implements CalEventService {
 		return _calEventService.getEvents(groupId, types, start, end);
 	}
 
+	public int getEventsCount(long groupId, java.lang.String type)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _calEventService.getEventsCount(groupId, type);
+	}
+
 	public int getEventsCount(long groupId, java.lang.String[] types)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _calEventService.getEventsCount(groupId, types);
@@ -111,10 +116,10 @@ public class CalEventServiceWrapper implements CalEventService {
 	}
 
 	public boolean hasEvents(long groupId, java.util.Calendar cal,
-		java.lang.String types)
+		java.lang.String type)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return _calEventService.hasEvents(groupId, cal, types);
+		return _calEventService.hasEvents(groupId, cal, type);
 	}
 
 	public boolean hasEvents(long groupId, java.util.Calendar cal,

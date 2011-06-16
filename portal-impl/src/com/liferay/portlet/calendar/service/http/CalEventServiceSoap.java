@@ -183,6 +183,20 @@ public class CalEventServiceSoap {
 		}
 	}
 
+	public static int getEventsCount(long groupId, java.lang.String type)
+		throws RemoteException {
+		try {
+			int returnValue = CalEventServiceUtil.getEventsCount(groupId, type);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static int getEventsCount(long groupId, java.lang.String[] types)
 		throws RemoteException {
 		try {
@@ -212,10 +226,10 @@ public class CalEventServiceSoap {
 	}
 
 	public static boolean hasEvents(long groupId, java.util.Calendar cal,
-		java.lang.String types) throws RemoteException {
+		java.lang.String type) throws RemoteException {
 		try {
 			boolean returnValue = CalEventServiceUtil.hasEvents(groupId, cal,
-					types);
+					type);
 
 			return returnValue;
 		}
