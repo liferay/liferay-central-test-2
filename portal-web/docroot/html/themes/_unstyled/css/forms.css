@@ -4,6 +4,9 @@ fieldset {
 .ie fieldset {
 }
 
+.ie7 .aui-fieldset {
+}
+
 .aui-fieldset {
 }
 

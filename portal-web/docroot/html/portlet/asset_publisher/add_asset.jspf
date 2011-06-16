@@ -19,54 +19,52 @@ Map<String, PortletURL> addPortletURLs = getAddPortletURLs(liferayPortletRequest
 %>
 
 <c:if test="<%= !addPortletURLs.isEmpty() %>">
-	<div class="lfr-meta-actions edit-controls">
-		<liferay-ui:icon-menu
-			align="left"
-			icon='<%= themeDisplay.getPathThemeImages() + "/common/add.png" %>'
-			message='<%= LanguageUtil.format(pageContext, (groupIds.length == 1) ? "add-new" : "add-new-in-x", new Object[] {(GroupLocalServiceUtil.getGroup(groupId)).getDescriptiveName()}) %>'
-			showWhenSingleIcon="<%= true %>"
-		>
+	<liferay-ui:icon-menu
+		align="left"
+		icon='<%= themeDisplay.getPathThemeImages() + "/common/add.png" %>'
+		message='<%= LanguageUtil.format(pageContext, (groupIds.length == 1) ? "add-new" : "add-new-in-x", new Object[] {(GroupLocalServiceUtil.getGroup(groupId)).getDescriptiveName()}) %>'
+		showWhenSingleIcon="<%= true %>"
+	>
 
-			<%
-			for (Map.Entry<String, PortletURL> entry : addPortletURLs.entrySet()) {
-				String className = entry.getKey();
+		<%
+		for (Map.Entry<String, PortletURL> entry : addPortletURLs.entrySet()) {
+			String className = entry.getKey();
 
-				String message = ResourceActionsUtil.getModelResourceNamePrefix() + className;
+			String message = ResourceActionsUtil.getModelResourceNamePrefix() + className;
 
-				int pos = className.indexOf(_CLASSNAME_SEPARATOR);
+			int pos = className.indexOf(_CLASSNAME_SEPARATOR);
 
-				if (pos != -1) {
-					message = className.substring(pos + _CLASSNAME_SEPARATOR.length(), className.length());
+			if (pos != -1) {
+				message = className.substring(pos + _CLASSNAME_SEPARATOR.length(), className.length());
 
-					className = className.substring(0, pos);
-				}
-
-				AssetRendererFactory assetRendererFactory = AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(className);
-
-				PortletURL addPortletURL = entry.getValue();
-
-				addPortletURL.setParameter("groupId", String.valueOf(groupId));
-
-				String addPortletURLString = addPortletURL.toString();
-
-				addPortletURLString = HttpUtil.addParameter(addPortletURLString, "doAsGroupId", groupId);
-				addPortletURLString = HttpUtil.addParameter(addPortletURLString, "refererPlid", plid);
-
-				String taglibEditURL = "javascript:Liferay.Util.openWindow({dialog: {width: 960}, id: '" + liferayPortletResponse.getNamespace() + "', title: '" + ResourceActionsUtil.getModelResource(locale, className) + "', uri:'" + addPortletURLString + "'});";
-			%>
-
-				<liferay-ui:icon
-					message="<%= message %>"
-					src="<%= assetRendererFactory.getIconPath(renderRequest) %>"
-					url="<%= taglibEditURL %>"
-				/>
-
-			<%
+				className = className.substring(0, pos);
 			}
-			%>
 
-		</liferay-ui:icon-menu>
-	</div>
+			AssetRendererFactory assetRendererFactory = AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(className);
+
+			PortletURL addPortletURL = entry.getValue();
+
+			addPortletURL.setParameter("groupId", String.valueOf(groupId));
+
+			String addPortletURLString = addPortletURL.toString();
+
+			addPortletURLString = HttpUtil.addParameter(addPortletURLString, "doAsGroupId", groupId);
+			addPortletURLString = HttpUtil.addParameter(addPortletURLString, "refererPlid", plid);
+
+			String taglibEditURL = "javascript:Liferay.Util.openWindow({dialog: {width: 960}, id: '" + liferayPortletResponse.getNamespace() + "', title: '" + ResourceActionsUtil.getModelResource(locale, className) + "', uri:'" + addPortletURLString + "'});";
+		%>
+
+			<liferay-ui:icon
+				message="<%= message %>"
+				src="<%= assetRendererFactory.getIconPath(renderRequest) %>"
+				url="<%= taglibEditURL %>"
+			/>
+
+		<%
+		}
+		%>
+
+	</liferay-ui:icon-menu>
 </c:if>
 
 <%!
