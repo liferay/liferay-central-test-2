@@ -97,6 +97,7 @@ public class ${entity.PKClassName} implements Comparable<${entity.PKClassName}>,
 		return 0;
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		if (obj == null) {
 			return false;
@@ -131,6 +132,7 @@ public class ${entity.PKClassName} implements Comparable<${entity.PKClassName}>,
 		}
 	}
 
+	@Override
 	public int hashCode() {
 		return (
 
@@ -149,6 +151,7 @@ public class ${entity.PKClassName} implements Comparable<${entity.PKClassName}>,
 		).hashCode();
 	}
 
+	@Override
 	public String toString() {
 		StringBundler sb = new StringBundler(${entity.PKList?size * 5});
 
