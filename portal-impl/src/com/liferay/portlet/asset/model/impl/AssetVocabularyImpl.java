@@ -15,6 +15,7 @@
 package com.liferay.portlet.asset.model.impl;
 
 import com.liferay.portal.kernel.util.ArrayUtil;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.kernel.util.Validator;
@@ -70,6 +71,15 @@ public class AssetVocabularyImpl
 		}
 
 		return value;
+	}
+
+	public boolean isMultiValued() {
+		if (Validator.isNull(_settingsProperties)) {
+			_settingsProperties = getSettingsProperties();
+		}
+
+		return GetterUtil.getBoolean(_settingsProperties.getProperty(
+			"multiValued"), true);
 	}
 
 	public boolean isRequired(long classNameId) {
