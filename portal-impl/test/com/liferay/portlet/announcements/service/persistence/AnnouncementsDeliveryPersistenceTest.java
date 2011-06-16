@@ -34,6 +34,7 @@ import java.util.List;
  */
 public class AnnouncementsDeliveryPersistenceTest
 	extends BasePersistenceTestCase {
+	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 
