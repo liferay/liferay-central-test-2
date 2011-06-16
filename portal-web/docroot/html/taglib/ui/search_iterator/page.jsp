@@ -33,6 +33,7 @@ List<String> headerNames = searchContainer.getHeaderNames();
 Map orderableHeaders = searchContainer.getOrderableHeaders();
 String emptyResultsMessage = searchContainer.getEmptyResultsMessage();
 RowChecker rowChecker = searchContainer.getRowChecker();
+int sortColumnIndex = -1;
 
 if (end > total) {
 	end = total;
@@ -102,10 +103,22 @@ List<String> primaryKeys = new ArrayList<String>();
 
 				String cssClass = StringPool.BLANK;
 
+				if (headerNames.size() == 1) {
+					cssClass = "only";
+				}
+				else if (i == 0) {
+					cssClass = "first";
+				}
+				else if (i == headerNames.size() - 1) {
+					cssClass = "last";
+				}
+
 				if (orderCurrentHeader) {
-					cssClass = "sort-column";
+					cssClass += " sort-column";
 
 					cssClass += " sort-" + HtmlUtil.escapeAttribute(orderByType);
+
+					sortColumnIndex = i;
 
 					if (orderByType.equals("asc")) {
 						orderByType = "desc";
@@ -266,6 +279,10 @@ List<String> primaryKeys = new ArrayList<String>();
 				}
 				else if ((j + 1) == entries.size()) {
 					columnClassName += " last";
+				}
+
+				if (j == sortColumnIndex) {
+					columnClassName += " sort-column";
 				}
 			%>
 
