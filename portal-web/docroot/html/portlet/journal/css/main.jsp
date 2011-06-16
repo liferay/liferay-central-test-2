@@ -388,9 +388,6 @@
 	}
 
 	.form-navigator {
-		position: relative;
-		z-index: 430;
-
 		.article-info {
 			font-weight: bold;
 			margin-bottom: 15px;
