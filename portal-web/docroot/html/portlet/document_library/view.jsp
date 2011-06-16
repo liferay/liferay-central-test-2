@@ -79,9 +79,7 @@ request.setAttribute("view.jsp-repositoryId", String.valueOf(repositoryId));
 		</aui:column>
 
 		<aui:column columnWidth="<%= showFolderMenu ? 80 : 100 %>" cssClass="context-pane" last="<%= true %>">
-			<span class="search-button-container" id="<portlet:namespace />fileEntrySearchContainer">
-				<liferay-util:include page="/html/portlet/document_library/file_entry_search.jsp" />
-			</span>
+			<liferay-util:include page="/html/portlet/document_library/file_entry_search.jsp" />
 
 			<liferay-portlet:renderURL varImpl="editFileEntryURL">
 				<portlet:param name="struts_action" value="/document_library/edit_file_entry" />

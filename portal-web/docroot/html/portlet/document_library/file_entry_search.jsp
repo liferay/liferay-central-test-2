@@ -26,16 +26,18 @@ long folderId = GetterUtil.getLong((String)request.getAttribute("view.jsp-folder
 	<portlet:param name="searchFolderId" value="<%= String.valueOf(folderId) %>" />
 </liferay-portlet:resourceURL>
 
-<aui:form action="<%= searchURL.toString() %>" method="get" name="fm1" onSubmit='<%= "event.preventDefault(); " + liferayPortletResponse.getNamespace() + "searchFileEntry();" %>'>
+<div class="lfr-search-combobox search-button-container" id="<portlet:namespace />fileEntrySearchContainer">
+	<aui:form action="<%= searchURL.toString() %>" method="get" name="fm1" onSubmit='<%= "event.preventDefault(); " + liferayPortletResponse.getNamespace() + "searchFileEntry();" %>'>
 
-	<%
-	String taglibOnClick = "javascript:event.preventDefault(); " + liferayPortletResponse.getNamespace() + "searchFileEntry();";
-	%>
+		<%
+		String taglibOnClick = "javascript:event.preventDefault(); " + liferayPortletResponse.getNamespace() + "searchFileEntry();";
+		%>
 
-	<aui:button cssClass="search-button" name="search" onClick="<%= taglibOnClick %>" value="search" />
+		<aui:input cssClass="first keywords lfr-search-combobox-item" id="keywords" label="" name="keywords" type="text" />
 
-	<aui:input cssClass="keywords" id="keywords" label="" name="keywords" type="text" />
-</aui:form>
+		<aui:button cssClass="last lfr-search-combobox-item" name="search" onClick="<%= taglibOnClick %>" value="search" />
+	</aui:form>
+</div>
 
 <aui:script use="aui-io-plugin">
 	var entriesContainer = A.one('#<portlet:namespace />documentContainer');
