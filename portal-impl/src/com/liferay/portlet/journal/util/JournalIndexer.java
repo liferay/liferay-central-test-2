@@ -505,6 +505,17 @@ public class JournalIndexer extends BaseIndexer {
 				continue;
 			}
 
+			if (article.isApproved()) {
+				JournalArticle latestArticle =
+					JournalArticleLocalServiceUtil.getLatestArticle(
+						article.getResourcePrimKey(),
+						WorkflowConstants.STATUS_APPROVED);
+
+				if (!latestArticle.isIndexable()) {
+					continue;
+				}
+			}
+
 			Document document = getDocument(article);
 
 			documents.add(document);
