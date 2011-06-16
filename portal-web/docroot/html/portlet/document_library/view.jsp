@@ -60,10 +60,6 @@ request.setAttribute("view.jsp-folderId", String.valueOf(folderId));
 request.setAttribute("view.jsp-repositoryId", String.valueOf(repositoryId));
 %>
 
-<div class="portlet-msg-error aui-helper-hidden" id="<portlet:namespace />errorContainer">
-	<liferay-ui:message key="your-request-failed-to-complete" />
-</div>
-
 <div id="<portlet:namespace />documentLibraryContainer">
 	<aui:layout cssClass="view">
 		<aui:column columnWidth="<%= 20 %>" cssClass="navigation-pane" first="<%= true %>">
@@ -73,13 +69,29 @@ request.setAttribute("view.jsp-repositoryId", String.valueOf(repositoryId));
 				</div>
 			</div>
 
+			<div class="portlet-msg-error aui-helper-hidden" id="<portlet:namespace />errorContainer">
+				<liferay-ui:message key="your-request-failed-to-complete" />
+			</div>
+
 			<div class="body-row">
 				<div id="<portlet:namespace />folderContainer"></div>
 			</div>
 		</aui:column>
 
 		<aui:column columnWidth="<%= showFolderMenu ? 80 : 100 %>" cssClass="context-pane" last="<%= true %>">
-			<liferay-util:include page="/html/portlet/document_library/file_entry_search.jsp" />
+			<div class="lfr-header-row">
+				<div class="lfr-header-row-content">
+					<liferay-util:include page="/html/portlet/document_library/file_entry_search.jsp" />
+
+					<div class="toolbar">
+						<liferay-util:include page="/html/portlet/document_library/toolbar.jsp" />
+					</div>
+
+					<div class="display-style">
+						<span class="toolbar" id="<portlet:namespace />displayStyleToolbar"></span>
+					</div>
+				</div>
+			</div>
 
 			<liferay-portlet:renderURL varImpl="editFileEntryURL">
 				<portlet:param name="struts_action" value="/document_library/edit_file_entry" />
@@ -92,18 +104,6 @@ request.setAttribute("view.jsp-repositoryId", String.valueOf(repositoryId));
 				<aui:input name="folderIds" type="hidden" />
 				<aui:input name="fileEntryIds" type="hidden" />
 				<aui:input name="fileShortcutIds" type="hidden" />
-
-				<div class="lfr-header-row">
-					<div class="lfr-header-row-content">
-						<div class="toolbar">
-							<liferay-util:include page="/html/portlet/document_library/toolbar.jsp" />
-						</div>
-
-						<div class="display-style">
-							<span class="toolbar" id="<portlet:namespace />displayStyleToolbar"></span>
-						</div>
-					</div>
-				</div>
 
 				<div class="document-container" id="<portlet:namespace />documentContainer"></div>
 
@@ -162,7 +162,7 @@ if (folder != null) {
 		function() {
 			var A = AUI();
 
-			var actionsButton = A.one('#<portlet:namespace />actionsButtonContainer ul');
+			var actionsButton = A.one('#<portlet:namespace />actionsButtonContainer');
 
 			var disabled = (Liferay.Util.listCheckedExcept(document.<portlet:namespace />fm2, '<portlet:namespace /><%= RowChecker.ALL_ROW_IDS %>Checkbox').length == 0);
 
@@ -170,6 +170,8 @@ if (folder != null) {
 		},
 		['liferay-util-list-fields']
 	);
+
+	<portlet:namespace />toggleActionsButton();
 </aui:script>
 
 <aui:script use="aui-dialog,aui-dialog-iframe">
