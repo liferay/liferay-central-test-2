@@ -120,11 +120,11 @@ public class CalEventServiceSoap {
 	}
 
 	public static com.liferay.portlet.calendar.model.CalEventSoap[] getEvents(
-		long groupId, java.util.Calendar cal, java.lang.String types)
+		long groupId, java.util.Calendar cal, java.lang.String type)
 		throws RemoteException {
 		try {
 			java.util.List<com.liferay.portlet.calendar.model.CalEvent> returnValue =
-				CalEventServiceUtil.getEvents(groupId, cal, types);
+				CalEventServiceUtil.getEvents(groupId, cal, type);
 
 			return com.liferay.portlet.calendar.model.CalEventSoap.toSoapModels(returnValue);
 		}
@@ -152,11 +152,11 @@ public class CalEventServiceSoap {
 	}
 
 	public static com.liferay.portlet.calendar.model.CalEventSoap[] getEvents(
-		long groupId, java.lang.String types, int start, int end)
+		long groupId, java.lang.String type, int start, int end)
 		throws RemoteException {
 		try {
 			java.util.List<com.liferay.portlet.calendar.model.CalEvent> returnValue =
-				CalEventServiceUtil.getEvents(groupId, types, start, end);
+				CalEventServiceUtil.getEvents(groupId, type, start, end);
 
 			return com.liferay.portlet.calendar.model.CalEventSoap.toSoapModels(returnValue);
 		}
