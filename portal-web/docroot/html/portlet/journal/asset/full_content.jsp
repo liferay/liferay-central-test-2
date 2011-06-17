@@ -18,6 +18,7 @@
 
 <%
 AssetRendererFactory assetRendererFactory = (AssetRendererFactory)request.getAttribute(WebKeys.ASSET_RENDERER_FACTORY);
+boolean workflowAssetPreview = GetterUtil.getBoolean(request.getParameter(WebKeys.WORKFLOW_ASSET_PREVIEW), false);
 
 JournalArticle article = (JournalArticle)request.getAttribute(WebKeys.JOURNAL_ARTICLE);
 JournalArticleResource articleResource = JournalArticleResourceLocalServiceUtil.getArticleResource(article.getResourcePrimKey());
@@ -29,7 +30,7 @@ String xmlRequest = PortletRequestUtil.toXML(renderRequest, renderResponse);
 
 JournalArticleDisplay articleDisplay = null;
 
-if (article.isApproved()) {
+if (article.isApproved() && !workflowAssetPreview) {
 	articleDisplay = JournalContentUtil.getDisplay(articleResource.getGroupId(), articleResource.getArticleId(), templateId, null, languageId, themeDisplay, articlePage, xmlRequest);
 }
 else {

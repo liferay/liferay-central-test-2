@@ -54,7 +54,7 @@ public class JournalArticleWorkflowHandler extends BaseWorkflowHandler {
 
 		long userId = GetterUtil.getLong(
 			(String)workflowContext.get(WorkflowConstants.CONTEXT_USER_ID));
-		long resourcePrimKey = GetterUtil.getLong(
+		long id = GetterUtil.getLong(
 			(String)workflowContext.get(
 				WorkflowConstants.CONTEXT_ENTRY_CLASS_PK));
 
@@ -62,8 +62,7 @@ public class JournalArticleWorkflowHandler extends BaseWorkflowHandler {
 			"serviceContext");
 
 		JournalArticle article =
-			JournalArticleLocalServiceUtil.getLatestArticle(
-				resourcePrimKey, WorkflowConstants.STATUS_ANY, false);
+			JournalArticleLocalServiceUtil.getArticle(id);
 
 		return JournalArticleLocalServiceUtil.updateStatus(
 			userId, article, status, null, serviceContext);
