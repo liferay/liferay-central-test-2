@@ -1272,6 +1272,8 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
+		// Page
+
 		User user = userPersistence.findByPrimaryKey(userId);
 		WikiNode node = wikiNodePersistence.findByPrimaryKey(page.getNodeId());
 

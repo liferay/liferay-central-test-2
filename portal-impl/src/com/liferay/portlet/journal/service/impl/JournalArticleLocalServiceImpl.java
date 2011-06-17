@@ -2234,12 +2234,12 @@ public class JournalArticleLocalServiceImpl
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
+		// Article
+
 		User user = userPersistence.findByPrimaryKey(userId);
 		Date now = new Date();
 
 		int oldStatus = article.getStatus();
-
-		// Article
 
 		article.setModifiedDate(serviceContext.getModifiedDate(now));
 

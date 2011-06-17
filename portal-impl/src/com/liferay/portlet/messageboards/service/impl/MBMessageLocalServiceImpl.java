@@ -1395,6 +1395,8 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
+		// Message
+
 		MBMessage message = getMessage(messageId);
 
 		int oldStatus = message.getStatus();
