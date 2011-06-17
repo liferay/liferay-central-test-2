@@ -106,6 +106,34 @@ public class DLContentPersistenceImpl extends BasePersistenceImpl<DLContent>
 				Long.class.getName(), String.class.getName(),
 				String.class.getName()
 			});
+	public static final FinderPath FINDER_PATH_FETCH_BY_C_R_P = new FinderPath(DLContentModelImpl.ENTITY_CACHE_ENABLED,
+			DLContentModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_ENTITY,
+			"fetchByC_R_P",
+			new String[] {
+				Long.class.getName(), Long.class.getName(),
+				String.class.getName()
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_C_R_P = new FinderPath(DLContentModelImpl.ENTITY_CACHE_ENABLED,
+			DLContentModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"countByC_R_P",
+			new String[] {
+				Long.class.getName(), Long.class.getName(),
+				String.class.getName()
+			});
+	public static final FinderPath FINDER_PATH_FETCH_BY_C_R_P_V = new FinderPath(DLContentModelImpl.ENTITY_CACHE_ENABLED,
+			DLContentModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_ENTITY,
+			"fetchByC_R_P_V",
+			new String[] {
+				Long.class.getName(), Long.class.getName(),
+				String.class.getName(), String.class.getName()
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_C_R_P_V = new FinderPath(DLContentModelImpl.ENTITY_CACHE_ENABLED,
+			DLContentModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"countByC_R_P_V",
+			new String[] {
+				Long.class.getName(), Long.class.getName(),
+				String.class.getName(), String.class.getName()
+			});
 	public static final FinderPath FINDER_PATH_FIND_ALL = new FinderPath(DLContentModelImpl.ENTITY_CACHE_ENABLED,
 			DLContentModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"findAll", new String[0]);
@@ -127,6 +155,24 @@ public class DLContentPersistenceImpl extends BasePersistenceImpl<DLContent>
 				Long.valueOf(dlContent.getCompanyId()),
 				
 			dlContent.getPortletId(), Long.valueOf(dlContent.getRepositoryId()),
+				
+			dlContent.getPath(),
+				
+			dlContent.getVersion()
+			}, dlContent);
+
+		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_R_P,
+			new Object[] {
+				Long.valueOf(dlContent.getCompanyId()),
+				Long.valueOf(dlContent.getRepositoryId()),
+				
+			dlContent.getPath()
+			}, dlContent);
+
+		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_R_P_V,
+			new Object[] {
+				Long.valueOf(dlContent.getCompanyId()),
+				Long.valueOf(dlContent.getRepositoryId()),
 				
 			dlContent.getPath(),
 				
@@ -186,6 +232,24 @@ public class DLContentPersistenceImpl extends BasePersistenceImpl<DLContent>
 				Long.valueOf(dlContent.getCompanyId()),
 				
 			dlContent.getPortletId(), Long.valueOf(dlContent.getRepositoryId()),
+				
+			dlContent.getPath(),
+				
+			dlContent.getVersion()
+			});
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_R_P,
+			new Object[] {
+				Long.valueOf(dlContent.getCompanyId()),
+				Long.valueOf(dlContent.getRepositoryId()),
+				
+			dlContent.getPath()
+			});
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_R_P_V,
+			new Object[] {
+				Long.valueOf(dlContent.getCompanyId()),
+				Long.valueOf(dlContent.getRepositoryId()),
 				
 			dlContent.getPath(),
 				
@@ -309,6 +373,24 @@ public class DLContentPersistenceImpl extends BasePersistenceImpl<DLContent>
 			dlContentModelImpl.getVersion()
 			});
 
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_R_P,
+			new Object[] {
+				Long.valueOf(dlContentModelImpl.getCompanyId()),
+				Long.valueOf(dlContentModelImpl.getRepositoryId()),
+				
+			dlContentModelImpl.getPath()
+			});
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_R_P_V,
+			new Object[] {
+				Long.valueOf(dlContentModelImpl.getCompanyId()),
+				Long.valueOf(dlContentModelImpl.getRepositoryId()),
+				
+			dlContentModelImpl.getPath(),
+				
+			dlContentModelImpl.getVersion()
+			});
+
 		EntityCacheUtil.removeResult(DLContentModelImpl.ENTITY_CACHE_ENABLED,
 			DLContentImpl.class, dlContent.getPrimaryKey());
 
@@ -382,6 +464,70 @@ public class DLContentPersistenceImpl extends BasePersistenceImpl<DLContent>
 					Long.valueOf(dlContent.getCompanyId()),
 					
 				dlContent.getPortletId(),
+					Long.valueOf(dlContent.getRepositoryId()),
+					
+				dlContent.getPath(),
+					
+				dlContent.getVersion()
+				}, dlContent);
+		}
+
+		if (!isNew &&
+				((dlContent.getCompanyId() != dlContentModelImpl.getOriginalCompanyId()) ||
+				(dlContent.getRepositoryId() != dlContentModelImpl.getOriginalRepositoryId()) ||
+				!Validator.equals(dlContent.getPath(),
+					dlContentModelImpl.getOriginalPath()))) {
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_R_P,
+				new Object[] {
+					Long.valueOf(dlContentModelImpl.getOriginalCompanyId()),
+					Long.valueOf(dlContentModelImpl.getOriginalRepositoryId()),
+					
+				dlContentModelImpl.getOriginalPath()
+				});
+		}
+
+		if (isNew ||
+				((dlContent.getCompanyId() != dlContentModelImpl.getOriginalCompanyId()) ||
+				(dlContent.getRepositoryId() != dlContentModelImpl.getOriginalRepositoryId()) ||
+				!Validator.equals(dlContent.getPath(),
+					dlContentModelImpl.getOriginalPath()))) {
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_R_P,
+				new Object[] {
+					Long.valueOf(dlContent.getCompanyId()),
+					Long.valueOf(dlContent.getRepositoryId()),
+					
+				dlContent.getPath()
+				}, dlContent);
+		}
+
+		if (!isNew &&
+				((dlContent.getCompanyId() != dlContentModelImpl.getOriginalCompanyId()) ||
+				(dlContent.getRepositoryId() != dlContentModelImpl.getOriginalRepositoryId()) ||
+				!Validator.equals(dlContent.getPath(),
+					dlContentModelImpl.getOriginalPath()) ||
+				!Validator.equals(dlContent.getVersion(),
+					dlContentModelImpl.getOriginalVersion()))) {
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_R_P_V,
+				new Object[] {
+					Long.valueOf(dlContentModelImpl.getOriginalCompanyId()),
+					Long.valueOf(dlContentModelImpl.getOriginalRepositoryId()),
+					
+				dlContentModelImpl.getOriginalPath(),
+					
+				dlContentModelImpl.getOriginalVersion()
+				});
+		}
+
+		if (isNew ||
+				((dlContent.getCompanyId() != dlContentModelImpl.getOriginalCompanyId()) ||
+				(dlContent.getRepositoryId() != dlContentModelImpl.getOriginalRepositoryId()) ||
+				!Validator.equals(dlContent.getPath(),
+					dlContentModelImpl.getOriginalPath()) ||
+				!Validator.equals(dlContent.getVersion(),
+					dlContentModelImpl.getOriginalVersion()))) {
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_R_P_V,
+				new Object[] {
+					Long.valueOf(dlContent.getCompanyId()),
 					Long.valueOf(dlContent.getRepositoryId()),
 					
 				dlContent.getPath(),
@@ -580,7 +726,7 @@ public class DLContentPersistenceImpl extends BasePersistenceImpl<DLContent>
 						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
-				query = new StringBundler(5);
+				query = new StringBundler(6);
 			}
 
 			query.append(_SQL_SELECT_DLCONTENT_WHERE);
@@ -616,6 +762,10 @@ public class DLContentPersistenceImpl extends BasePersistenceImpl<DLContent>
 			if (orderByComparator != null) {
 				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
 					orderByComparator);
+			}
+
+			else {
+				query.append(DLContentModelImpl.ORDER_BY_JPQL);
 			}
 
 			String sql = query.toString();
@@ -910,6 +1060,10 @@ public class DLContentPersistenceImpl extends BasePersistenceImpl<DLContent>
 			}
 		}
 
+		else {
+			query.append(DLContentModelImpl.ORDER_BY_JPQL);
+		}
+
 		String sql = query.toString();
 
 		Query q = session.createQuery(sql);
@@ -1043,7 +1197,7 @@ public class DLContentPersistenceImpl extends BasePersistenceImpl<DLContent>
 		}
 
 		if (result == null) {
-			StringBundler query = new StringBundler(6);
+			StringBundler query = new StringBundler(7);
 
 			query.append(_SQL_SELECT_DLCONTENT_WHERE);
 
@@ -1086,6 +1240,8 @@ public class DLContentPersistenceImpl extends BasePersistenceImpl<DLContent>
 					query.append(_FINDER_COLUMN_C_P_R_P_V_VERSION_2);
 				}
 			}
+
+			query.append(DLContentModelImpl.ORDER_BY_JPQL);
 
 			String sql = query.toString();
 
@@ -1150,6 +1306,363 @@ public class DLContentPersistenceImpl extends BasePersistenceImpl<DLContent>
 			finally {
 				if (result == null) {
 					FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_P_R_P_V,
+						finderArgs);
+				}
+
+				closeSession(session);
+			}
+		}
+		else {
+			if (result instanceof List<?>) {
+				return null;
+			}
+			else {
+				return (DLContent)result;
+			}
+		}
+	}
+
+	/**
+	 * Returns the d l content where companyId = &#63; and repositoryId = &#63; and path = &#63; or throws a {@link com.liferay.portlet.documentlibrary.NoSuchContentException} if it could not be found.
+	 *
+	 * @param companyId the company ID
+	 * @param repositoryId the repository ID
+	 * @param path the path
+	 * @return the matching d l content
+	 * @throws com.liferay.portlet.documentlibrary.NoSuchContentException if a matching d l content could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public DLContent findByC_R_P(long companyId, long repositoryId, String path)
+		throws NoSuchContentException, SystemException {
+		DLContent dlContent = fetchByC_R_P(companyId, repositoryId, path);
+
+		if (dlContent == null) {
+			StringBundler msg = new StringBundler(8);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("companyId=");
+			msg.append(companyId);
+
+			msg.append(", repositoryId=");
+			msg.append(repositoryId);
+
+			msg.append(", path=");
+			msg.append(path);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			if (_log.isWarnEnabled()) {
+				_log.warn(msg.toString());
+			}
+
+			throw new NoSuchContentException(msg.toString());
+		}
+
+		return dlContent;
+	}
+
+	/**
+	 * Returns the d l content where companyId = &#63; and repositoryId = &#63; and path = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param companyId the company ID
+	 * @param repositoryId the repository ID
+	 * @param path the path
+	 * @return the matching d l content, or <code>null</code> if a matching d l content could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public DLContent fetchByC_R_P(long companyId, long repositoryId, String path)
+		throws SystemException {
+		return fetchByC_R_P(companyId, repositoryId, path, true);
+	}
+
+	/**
+	 * Returns the d l content where companyId = &#63; and repositoryId = &#63; and path = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param companyId the company ID
+	 * @param repositoryId the repository ID
+	 * @param path the path
+	 * @return the matching d l content, or <code>null</code> if a matching d l content could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public DLContent fetchByC_R_P(long companyId, long repositoryId,
+		String path, boolean retrieveFromCache) throws SystemException {
+		Object[] finderArgs = new Object[] { companyId, repositoryId, path };
+
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_C_R_P,
+					finderArgs, this);
+		}
+
+		if (result == null) {
+			StringBundler query = new StringBundler(5);
+
+			query.append(_SQL_SELECT_DLCONTENT_WHERE);
+
+			query.append(_FINDER_COLUMN_C_R_P_COMPANYID_2);
+
+			query.append(_FINDER_COLUMN_C_R_P_REPOSITORYID_2);
+
+			if (path == null) {
+				query.append(_FINDER_COLUMN_C_R_P_PATH_1);
+			}
+			else {
+				if (path.equals(StringPool.BLANK)) {
+					query.append(_FINDER_COLUMN_C_R_P_PATH_3);
+				}
+				else {
+					query.append(_FINDER_COLUMN_C_R_P_PATH_2);
+				}
+			}
+
+			query.append(DLContentModelImpl.ORDER_BY_JPQL);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(companyId);
+
+				qPos.add(repositoryId);
+
+				if (path != null) {
+					qPos.add(path);
+				}
+
+				List<DLContent> list = q.list();
+
+				result = list;
+
+				DLContent dlContent = null;
+
+				if (list.isEmpty()) {
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_R_P,
+						finderArgs, list);
+				}
+				else {
+					dlContent = list.get(0);
+
+					cacheResult(dlContent);
+
+					if ((dlContent.getCompanyId() != companyId) ||
+							(dlContent.getRepositoryId() != repositoryId) ||
+							(dlContent.getPath() == null) ||
+							!dlContent.getPath().equals(path)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_R_P,
+							finderArgs, dlContent);
+					}
+				}
+
+				return dlContent;
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (result == null) {
+					FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_R_P,
+						finderArgs);
+				}
+
+				closeSession(session);
+			}
+		}
+		else {
+			if (result instanceof List<?>) {
+				return null;
+			}
+			else {
+				return (DLContent)result;
+			}
+		}
+	}
+
+	/**
+	 * Returns the d l content where companyId = &#63; and repositoryId = &#63; and path = &#63; and version = &#63; or throws a {@link com.liferay.portlet.documentlibrary.NoSuchContentException} if it could not be found.
+	 *
+	 * @param companyId the company ID
+	 * @param repositoryId the repository ID
+	 * @param path the path
+	 * @param version the version
+	 * @return the matching d l content
+	 * @throws com.liferay.portlet.documentlibrary.NoSuchContentException if a matching d l content could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public DLContent findByC_R_P_V(long companyId, long repositoryId,
+		String path, String version)
+		throws NoSuchContentException, SystemException {
+		DLContent dlContent = fetchByC_R_P_V(companyId, repositoryId, path,
+				version);
+
+		if (dlContent == null) {
+			StringBundler msg = new StringBundler(10);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("companyId=");
+			msg.append(companyId);
+
+			msg.append(", repositoryId=");
+			msg.append(repositoryId);
+
+			msg.append(", path=");
+			msg.append(path);
+
+			msg.append(", version=");
+			msg.append(version);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			if (_log.isWarnEnabled()) {
+				_log.warn(msg.toString());
+			}
+
+			throw new NoSuchContentException(msg.toString());
+		}
+
+		return dlContent;
+	}
+
+	/**
+	 * Returns the d l content where companyId = &#63; and repositoryId = &#63; and path = &#63; and version = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param companyId the company ID
+	 * @param repositoryId the repository ID
+	 * @param path the path
+	 * @param version the version
+	 * @return the matching d l content, or <code>null</code> if a matching d l content could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public DLContent fetchByC_R_P_V(long companyId, long repositoryId,
+		String path, String version) throws SystemException {
+		return fetchByC_R_P_V(companyId, repositoryId, path, version, true);
+	}
+
+	/**
+	 * Returns the d l content where companyId = &#63; and repositoryId = &#63; and path = &#63; and version = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param companyId the company ID
+	 * @param repositoryId the repository ID
+	 * @param path the path
+	 * @param version the version
+	 * @return the matching d l content, or <code>null</code> if a matching d l content could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public DLContent fetchByC_R_P_V(long companyId, long repositoryId,
+		String path, String version, boolean retrieveFromCache)
+		throws SystemException {
+		Object[] finderArgs = new Object[] {
+				companyId, repositoryId, path, version
+			};
+
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_C_R_P_V,
+					finderArgs, this);
+		}
+
+		if (result == null) {
+			StringBundler query = new StringBundler(6);
+
+			query.append(_SQL_SELECT_DLCONTENT_WHERE);
+
+			query.append(_FINDER_COLUMN_C_R_P_V_COMPANYID_2);
+
+			query.append(_FINDER_COLUMN_C_R_P_V_REPOSITORYID_2);
+
+			if (path == null) {
+				query.append(_FINDER_COLUMN_C_R_P_V_PATH_1);
+			}
+			else {
+				if (path.equals(StringPool.BLANK)) {
+					query.append(_FINDER_COLUMN_C_R_P_V_PATH_3);
+				}
+				else {
+					query.append(_FINDER_COLUMN_C_R_P_V_PATH_2);
+				}
+			}
+
+			if (version == null) {
+				query.append(_FINDER_COLUMN_C_R_P_V_VERSION_1);
+			}
+			else {
+				if (version.equals(StringPool.BLANK)) {
+					query.append(_FINDER_COLUMN_C_R_P_V_VERSION_3);
+				}
+				else {
+					query.append(_FINDER_COLUMN_C_R_P_V_VERSION_2);
+				}
+			}
+
+			query.append(DLContentModelImpl.ORDER_BY_JPQL);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(companyId);
+
+				qPos.add(repositoryId);
+
+				if (path != null) {
+					qPos.add(path);
+				}
+
+				if (version != null) {
+					qPos.add(version);
+				}
+
+				List<DLContent> list = q.list();
+
+				result = list;
+
+				DLContent dlContent = null;
+
+				if (list.isEmpty()) {
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_R_P_V,
+						finderArgs, list);
+				}
+				else {
+					dlContent = list.get(0);
+
+					cacheResult(dlContent);
+
+					if ((dlContent.getCompanyId() != companyId) ||
+							(dlContent.getRepositoryId() != repositoryId) ||
+							(dlContent.getPath() == null) ||
+							!dlContent.getPath().equals(path) ||
+							(dlContent.getVersion() == null) ||
+							!dlContent.getVersion().equals(version)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_R_P_V,
+							finderArgs, dlContent);
+					}
+				}
+
+				return dlContent;
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (result == null) {
+					FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_R_P_V,
 						finderArgs);
 				}
 
@@ -1232,7 +1745,7 @@ public class DLContentPersistenceImpl extends BasePersistenceImpl<DLContent>
 				sql = query.toString();
 			}
 			else {
-				sql = _SQL_SELECT_DLCONTENT;
+				sql = _SQL_SELECT_DLCONTENT.concat(DLContentModelImpl.ORDER_BY_JPQL);
 			}
 
 			Session session = null;
@@ -1307,6 +1820,38 @@ public class DLContentPersistenceImpl extends BasePersistenceImpl<DLContent>
 		throws NoSuchContentException, SystemException {
 		DLContent dlContent = findByC_P_R_P_V(companyId, portletId,
 				repositoryId, path, version);
+
+		dlContentPersistence.remove(dlContent);
+	}
+
+	/**
+	 * Removes the d l content where companyId = &#63; and repositoryId = &#63; and path = &#63; from the database.
+	 *
+	 * @param companyId the company ID
+	 * @param repositoryId the repository ID
+	 * @param path the path
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void removeByC_R_P(long companyId, long repositoryId, String path)
+		throws NoSuchContentException, SystemException {
+		DLContent dlContent = findByC_R_P(companyId, repositoryId, path);
+
+		dlContentPersistence.remove(dlContent);
+	}
+
+	/**
+	 * Removes the d l content where companyId = &#63; and repositoryId = &#63; and path = &#63; and version = &#63; from the database.
+	 *
+	 * @param companyId the company ID
+	 * @param repositoryId the repository ID
+	 * @param path the path
+	 * @param version the version
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void removeByC_R_P_V(long companyId, long repositoryId, String path,
+		String version) throws NoSuchContentException, SystemException {
+		DLContent dlContent = findByC_R_P_V(companyId, repositoryId, path,
+				version);
 
 		dlContentPersistence.remove(dlContent);
 	}
@@ -1531,6 +2076,177 @@ public class DLContentPersistenceImpl extends BasePersistenceImpl<DLContent>
 	}
 
 	/**
+	 * Returns the number of d l contents where companyId = &#63; and repositoryId = &#63; and path = &#63;.
+	 *
+	 * @param companyId the company ID
+	 * @param repositoryId the repository ID
+	 * @param path the path
+	 * @return the number of matching d l contents
+	 * @throws SystemException if a system exception occurred
+	 */
+	public int countByC_R_P(long companyId, long repositoryId, String path)
+		throws SystemException {
+		Object[] finderArgs = new Object[] { companyId, repositoryId, path };
+
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_C_R_P,
+				finderArgs, this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(4);
+
+			query.append(_SQL_COUNT_DLCONTENT_WHERE);
+
+			query.append(_FINDER_COLUMN_C_R_P_COMPANYID_2);
+
+			query.append(_FINDER_COLUMN_C_R_P_REPOSITORYID_2);
+
+			if (path == null) {
+				query.append(_FINDER_COLUMN_C_R_P_PATH_1);
+			}
+			else {
+				if (path.equals(StringPool.BLANK)) {
+					query.append(_FINDER_COLUMN_C_R_P_PATH_3);
+				}
+				else {
+					query.append(_FINDER_COLUMN_C_R_P_PATH_2);
+				}
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(companyId);
+
+				qPos.add(repositoryId);
+
+				if (path != null) {
+					qPos.add(path);
+				}
+
+				count = (Long)q.uniqueResult();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_C_R_P,
+					finderArgs, count);
+
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	/**
+	 * Returns the number of d l contents where companyId = &#63; and repositoryId = &#63; and path = &#63; and version = &#63;.
+	 *
+	 * @param companyId the company ID
+	 * @param repositoryId the repository ID
+	 * @param path the path
+	 * @param version the version
+	 * @return the number of matching d l contents
+	 * @throws SystemException if a system exception occurred
+	 */
+	public int countByC_R_P_V(long companyId, long repositoryId, String path,
+		String version) throws SystemException {
+		Object[] finderArgs = new Object[] {
+				companyId, repositoryId, path, version
+			};
+
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_C_R_P_V,
+				finderArgs, this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(5);
+
+			query.append(_SQL_COUNT_DLCONTENT_WHERE);
+
+			query.append(_FINDER_COLUMN_C_R_P_V_COMPANYID_2);
+
+			query.append(_FINDER_COLUMN_C_R_P_V_REPOSITORYID_2);
+
+			if (path == null) {
+				query.append(_FINDER_COLUMN_C_R_P_V_PATH_1);
+			}
+			else {
+				if (path.equals(StringPool.BLANK)) {
+					query.append(_FINDER_COLUMN_C_R_P_V_PATH_3);
+				}
+				else {
+					query.append(_FINDER_COLUMN_C_R_P_V_PATH_2);
+				}
+			}
+
+			if (version == null) {
+				query.append(_FINDER_COLUMN_C_R_P_V_VERSION_1);
+			}
+			else {
+				if (version.equals(StringPool.BLANK)) {
+					query.append(_FINDER_COLUMN_C_R_P_V_VERSION_3);
+				}
+				else {
+					query.append(_FINDER_COLUMN_C_R_P_V_VERSION_2);
+				}
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(companyId);
+
+				qPos.add(repositoryId);
+
+				if (path != null) {
+					qPos.add(path);
+				}
+
+				if (version != null) {
+					qPos.add(version);
+				}
+
+				count = (Long)q.uniqueResult();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_C_R_P_V,
+					finderArgs, count);
+
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	/**
 	 * Returns the number of d l contents.
 	 *
 	 * @return the number of d l contents
@@ -1644,6 +2360,19 @@ public class DLContentPersistenceImpl extends BasePersistenceImpl<DLContent>
 	private static final String _FINDER_COLUMN_C_P_R_P_V_VERSION_1 = "dlContent.version IS NULL";
 	private static final String _FINDER_COLUMN_C_P_R_P_V_VERSION_2 = "dlContent.version = ?";
 	private static final String _FINDER_COLUMN_C_P_R_P_V_VERSION_3 = "(dlContent.version IS NULL OR dlContent.version = ?)";
+	private static final String _FINDER_COLUMN_C_R_P_COMPANYID_2 = "dlContent.companyId = ? AND ";
+	private static final String _FINDER_COLUMN_C_R_P_REPOSITORYID_2 = "dlContent.repositoryId = ? AND ";
+	private static final String _FINDER_COLUMN_C_R_P_PATH_1 = "dlContent.path IS NULL";
+	private static final String _FINDER_COLUMN_C_R_P_PATH_2 = "dlContent.path = ?";
+	private static final String _FINDER_COLUMN_C_R_P_PATH_3 = "(dlContent.path IS NULL OR dlContent.path = ?)";
+	private static final String _FINDER_COLUMN_C_R_P_V_COMPANYID_2 = "dlContent.companyId = ? AND ";
+	private static final String _FINDER_COLUMN_C_R_P_V_REPOSITORYID_2 = "dlContent.repositoryId = ? AND ";
+	private static final String _FINDER_COLUMN_C_R_P_V_PATH_1 = "dlContent.path IS NULL AND ";
+	private static final String _FINDER_COLUMN_C_R_P_V_PATH_2 = "dlContent.path = ? AND ";
+	private static final String _FINDER_COLUMN_C_R_P_V_PATH_3 = "(dlContent.path IS NULL OR dlContent.path = ?) AND ";
+	private static final String _FINDER_COLUMN_C_R_P_V_VERSION_1 = "dlContent.version IS NULL";
+	private static final String _FINDER_COLUMN_C_R_P_V_VERSION_2 = "dlContent.version = ?";
+	private static final String _FINDER_COLUMN_C_R_P_V_VERSION_3 = "(dlContent.version IS NULL OR dlContent.version = ?)";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "dlContent.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No DLContent exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No DLContent exists with the key {";
