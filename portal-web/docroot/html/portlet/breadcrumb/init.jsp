@@ -25,5 +25,5 @@ if (Validator.isNotNull(portletResource)) {
 	preferences = PortletPreferencesFactoryUtil.getPortletSetup(request, portletResource);
 }
 
-String displayStyle = PrefsParamUtil.getString(preferences, renderRequest,"displayStyle", "horizontal");
+String displayStyle = PrefsParamUtil.getString(preferences, renderRequest, "displayStyle", "horizontal");
 %>
