@@ -24,6 +24,7 @@ import com.liferay.portal.RequiredLayoutException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayInputStream;
+import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.util.DateFormatFactoryUtil;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -44,10 +45,12 @@ import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portal.model.LayoutReference;
 import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.PortletConstants;
+import com.liferay.portal.model.PortletPreferences;
 import com.liferay.portal.model.Resource;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.LayoutImpl;
+import com.liferay.portal.service.PortletPreferencesLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.base.LayoutLocalServiceBaseImpl;
 import com.liferay.portal.util.FriendlyURLNormalizer;
@@ -56,6 +59,7 @@ import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.comparator.LayoutComparator;
 import com.liferay.portal.util.comparator.LayoutPriorityComparator;
+import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 
 import java.io.File;
@@ -842,6 +846,18 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		validateParentLayoutId(
 			groupId, privateLayout, layoutId, parentLayoutId);
 
+		try {
+			Locale[] locales = LanguageUtil.getAvailableLocales();
+
+			for (Locale locale : locales) {
+				updateScopedPortletNames(
+					groupId, privateLayout, layoutId, nameMap.get(locale),
+					LanguageUtil.getLanguageId(locale));
+			}
+		}
+		catch (Exception e) {
+		}
+
 		Date now = new Date();
 
 		Layout layout = layoutPersistence.findByG_P_L(
@@ -1117,6 +1133,46 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		Layout layout = layoutPersistence.findByPrimaryKey(plid);
 
 		return updatePriority(layout, priority);
+	}
+
+	public void updateScopedPortletNames(long groupId, boolean privateLayout,
+			long layoutId, String name, String languageId)
+		throws Exception {
+
+		Layout layout = getLayout(groupId, privateLayout, layoutId);
+
+		List<PortletPreferences> portletPreferencesList =
+			PortletPreferencesLocalServiceUtil.getPortletPreferencesByPlid(
+				layout.getPlid());
+
+		for (PortletPreferences portletPreferences : portletPreferencesList) {
+			String portletId = portletPreferences.getPortletId();
+
+			javax.portlet.PortletPreferences preferences =
+				PortletPreferencesFactoryUtil.getLayoutPortletSetup(
+					layout, portletId);
+
+			String scopeLayoutUuid = GetterUtil.getString(
+				preferences.getValue("lfrScopeLayoutUuid", null));
+
+			if (layout.getUuid().equals(scopeLayoutUuid)) {
+				String portletTitle =
+					PortalUtil.getPortletTitle(portletId, languageId);
+
+				String newPortletTitle = PortalUtil.getNewPortletTitle(
+					portletTitle, layout.getName(languageId), name);
+
+				if (!newPortletTitle.equals(portletTitle)) {
+					preferences.setValue(
+						"portlet-setup-title-" + languageId, newPortletTitle);
+					preferences.setValue(
+						"portlet-setup-use-custom-title",
+						Boolean.TRUE.toString());
+				}
+
+				preferences.store();
+			}
+		}
 	}
 
 	protected String getFriendlyURL(
