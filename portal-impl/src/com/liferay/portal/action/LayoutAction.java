@@ -16,6 +16,8 @@ package com.liferay.portal.action;
 
 import com.liferay.portal.kernel.audit.AuditMessage;
 import com.liferay.portal.kernel.audit.AuditRouterUtil;
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayInputStream;
 import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayOutputStream;
 import com.liferay.portal.kernel.io.unsync.UnsyncStringWriter;
@@ -330,6 +332,34 @@ public class LayoutAction extends Action {
 		return layoutTypePortlets;
 	}
 
+	protected long getScopeGroupId(
+			HttpServletRequest request, LayoutTypePortlet layoutTypePortlet,
+			String portletId)
+		throws PortalException, SystemException {
+
+		long scopeGroupId = 0;
+
+		Layout layoutTypePortletLayout = layoutTypePortlet.getLayout();
+
+		Layout requestLayout = (Layout)request.getAttribute(WebKeys.LAYOUT);
+
+		try {
+			request.setAttribute(WebKeys.LAYOUT, layoutTypePortletLayout);
+
+			scopeGroupId = PortalUtil.getScopeGroupId(request, portletId);
+		}
+		finally {
+			request.setAttribute(WebKeys.LAYOUT, requestLayout);
+		}
+
+		if (scopeGroupId <= 0) {
+			scopeGroupId = PortalUtil.getScopeGroupId(
+				layoutTypePortletLayout, portletId);
+		}
+
+		return scopeGroupId;
+	}
+
 	protected void includeLayoutContent(
 			HttpServletRequest request, HttpServletResponse response,
 			ThemeDisplay themeDisplay, Layout layout)
@@ -449,39 +479,27 @@ public class LayoutAction extends Action {
 			portletMode = PortletMode.VIEW;
 		}
 
-		long scopeGroupId = 0;
-		User user = stateAwareResponseImpl.getUser();
-		Layout invokedLayout = (Layout)request.getAttribute(WebKeys.LAYOUT);
-		Layout layout = stateAwareResponseImpl.getLayout();
-		Layout layoutWithPortlet = layoutTypePortlet.getLayout();
+		long scopeGroupId = getScopeGroupId(
+			request, layoutTypePortlet, portletId);
 
-		try {
-			request.setAttribute(WebKeys.LAYOUT, layoutWithPortlet);
-			scopeGroupId = PortalUtil.getScopeGroupId(request, portletId);
-		}
-		finally {
-			request.setAttribute(WebKeys.LAYOUT, invokedLayout);
-		}
-
-		if(scopeGroupId <= 0){
-			scopeGroupId = PortalUtil.getScopeGroupId(
-				layoutWithPortlet, portletId);
-		}
+		Layout layoutTypePortletLayout = layoutTypePortlet.getLayout();
 
 		PortletPreferences portletPreferences =
 			PortletPreferencesFactoryUtil.getPortletSetup(
-				scopeGroupId, layoutWithPortlet, portletId, null);
+				scopeGroupId, layoutTypePortletLayout, portletId, null);
 
 		EventRequestImpl eventRequestImpl = EventRequestFactory.create(
 			request, portlet, invokerPortlet, portletContext, windowState,
-			portletMode, portletPreferences,
-			layoutTypePortlet.getLayout().getPlid());
+			portletMode, portletPreferences, layoutTypePortletLayout.getPlid());
 
 		eventRequestImpl.setEvent(
 			serializeEvent(event, invokerPortlet.getPortletClassLoader()));
 
+		Layout layout = stateAwareResponseImpl.getLayout();
+
 		EventResponseImpl eventResponseImpl = EventResponseFactory.create(
-			eventRequestImpl, response, portletId, user, layout);
+			eventRequestImpl, response, portletId,
+			stateAwareResponseImpl.getUser(), layout);
 
 		eventRequestImpl.defineObjects(portletConfig, eventResponseImpl);
 
