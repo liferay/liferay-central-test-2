@@ -77,9 +77,7 @@ public class UserSearch extends SearchContainer<User> {
 
 		String portletName = portletConfig.getPortletName();
 
-		if ((!portletName.equals(PortletKeys.ENTERPRISE_ADMIN)) &&
-			(!portletName.equals(PortletKeys.USERS_ADMIN))) {
-
+		if (!portletName.equals(PortletKeys.USERS_ADMIN)) {
 			displayTerms.setStatus(WorkflowConstants.STATUS_APPROVED);
 			searchTerms.setStatus(WorkflowConstants.STATUS_APPROVED);
 		}
@@ -120,18 +118,16 @@ public class UserSearch extends SearchContainer<User> {
 				Validator.isNotNull(orderByType)) {
 
 				preferences.setValue(
-					PortletKeys.ENTERPRISE_ADMIN, "users-order-by-col",
-					orderByCol);
+					PortletKeys.USERS_ADMIN, "users-order-by-col", orderByCol);
 				preferences.setValue(
-					PortletKeys.ENTERPRISE_ADMIN, "users-order-by-type",
+					PortletKeys.USERS_ADMIN, "users-order-by-type",
 					orderByType);
 			}
 			else {
 				orderByCol = preferences.getValue(
-					PortletKeys.ENTERPRISE_ADMIN, "users-order-by-col",
-					"last-name");
+					PortletKeys.USERS_ADMIN, "users-order-by-col", "last-name");
 				orderByType = preferences.getValue(
-					PortletKeys.ENTERPRISE_ADMIN, "users-order-by-type", "asc");
+					PortletKeys.USERS_ADMIN, "users-order-by-type", "asc");
 			}
 
 			OrderByComparator orderByComparator =

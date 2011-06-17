@@ -83,18 +83,18 @@ public class UserGroupSearch extends SearchContainer<UserGroup> {
 				Validator.isNotNull(orderByType)) {
 
 				preferences.setValue(
-					PortletKeys.ENTERPRISE_ADMIN, "user-groups-order-by-col",
+					PortletKeys.USERS_ADMIN, "user-groups-order-by-col",
 					orderByCol);
 				preferences.setValue(
-					PortletKeys.ENTERPRISE_ADMIN, "user-groups-order-by-type",
+					PortletKeys.USERS_ADMIN, "user-groups-order-by-type",
 					orderByType);
 			}
 			else {
 				orderByCol = preferences.getValue(
-					PortletKeys.ENTERPRISE_ADMIN, "user-groups-order-by-col",
+					PortletKeys.USERS_ADMIN, "user-groups-order-by-col",
 					"name");
 				orderByType = preferences.getValue(
-					PortletKeys.ENTERPRISE_ADMIN, "user-groups-order-by-type",
+					PortletKeys.USERS_ADMIN, "user-groups-order-by-type",
 					"asc");
 			}
 

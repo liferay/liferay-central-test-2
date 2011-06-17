@@ -159,9 +159,6 @@ else if (portletName.equals(PortletKeys.MONITORING)) {
 else if (portletName.equals(PortletKeys.PLUGINS_ADMIN)) {
 	tabs1 = "plugins";
 }
-else if (portletName.equals(PortletKeys.ENTERPRISE_ADMIN)) {
-	showTabs1 = true;
-}
 else {
 	showActiveUserSelect = false;
 

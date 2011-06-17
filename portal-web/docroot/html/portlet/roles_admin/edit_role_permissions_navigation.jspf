@@ -258,7 +258,6 @@ private static final String[] _ORGANIZATION_PORTLETS = {
 };
 
 private static final String[] _PORTAL_PORTLETS = {
-	PortletKeys.ENTERPRISE_ADMIN,
 	PortletKeys.SITES_ADMIN,
 	PortletKeys.MONITORING,
 	PortletKeys.PASSWORD_POLICIES_ADMIN,
