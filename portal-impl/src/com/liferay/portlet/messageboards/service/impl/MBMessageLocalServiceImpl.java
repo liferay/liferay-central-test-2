@@ -1062,9 +1062,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		MBThread thread = mbThreadPersistence.findByPrimaryKey(
 			message.getThreadId());
 
-		if (!message.isDiscussion() &&
-			(message.getStatus() == WorkflowConstants.STATUS_APPROVED)) {
-
+		if (message.isApproved() && !message.isDiscussion()) {
 			mbThreadLocalService.updateThread(
 				thread.getThreadId(), thread.getViewCount() + 1);
 		}
@@ -1072,9 +1070,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		MBThread previousThread = null;
 		MBThread nextThread = null;
 
-		if ((message.getStatus() == WorkflowConstants.STATUS_APPROVED) &&
-			includePrevAndNext) {
-
+		if (message.isApproved() && includePrevAndNext) {
 			ThreadLastPostDateComparator comparator =
 				new ThreadLastPostDateComparator(false);
 
@@ -1206,7 +1202,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		boolean visible = false;
 
-		if ((message.getStatus() == WorkflowConstants.STATUS_APPROVED) &&
+		if (message.isApproved() &&
 			((message.getClassNameId() == 0) ||
 			 (message.getParentMessageId() != 0))) {
 
