@@ -77,6 +77,8 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
+import javax.portlet.PortletException;
+
 /**
  * @author Brian Wing Shun Chan
  * @author Joel Kozikowski
@@ -845,18 +847,6 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		validateParentLayoutId(
 			groupId, privateLayout, layoutId, parentLayoutId);
 
-		try {
-			Locale[] locales = LanguageUtil.getAvailableLocales();
-
-			for (Locale locale : locales) {
-				updateScopedPortletNames(
-					groupId, privateLayout, layoutId, nameMap.get(locale),
-					LanguageUtil.getLanguageId(locale));
-			}
-		}
-		catch (Exception e) {
-		}
-
 		Date now = new Date();
 
 		Layout layout = layoutPersistence.findByG_P_L(
@@ -893,6 +883,16 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		}
 
 		layoutPersistence.update(layout, false);
+
+		// Portlet preferences
+
+		Locale[] locales = LanguageUtil.getAvailableLocales();
+
+		for (Locale locale : locales) {
+			updateScopedPortletNames(
+				groupId, privateLayout, layoutId, nameMap.get(locale),
+				LanguageUtil.getLanguageId(locale));
+		}
 
 		// Icon
 
@@ -1134,10 +1134,13 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		return updatePriority(layout, priority);
 	}
 
+	/**
+	 * @see com.liferay.portlet.portletconfiguration.action.EditScopeAction#updateScope
+	 */
 	public void updateScopedPortletNames(
 			long groupId, boolean privateLayout, long layoutId, String name,
 			String languageId)
-		throws Exception {
+		throws PortalException, SystemException {
 
 		Layout layout = getLayout(groupId, privateLayout, layoutId);
 
@@ -1155,13 +1158,17 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			String scopeLayoutUuid = GetterUtil.getString(
 				preferences.getValue("lfrScopeLayoutUuid", null));
 
-			if (layout.getUuid().equals(scopeLayoutUuid)) {
-				String portletTitle =
-					PortalUtil.getPortletTitle(portletId, languageId);
+			if (!scopeLayoutUuid.equals(layout.getUuid())) {
+				continue;
+			}
 
-				String newPortletTitle = PortalUtil.getNewPortletTitle(
-					portletTitle, layout.getName(languageId), name);
+			String portletTitle = PortalUtil.getPortletTitle(
+				portletId, languageId);
 
+			String newPortletTitle = PortalUtil.getNewPortletTitle(
+				portletTitle, layout.getName(languageId), name);
+
+			try {
 				if (!newPortletTitle.equals(portletTitle)) {
 					preferences.setValue(
 						"portlet-setup-title-" + languageId, newPortletTitle);
@@ -1171,6 +1178,12 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 				}
 
 				preferences.store();
+			}
+			catch (IOException ioe) {
+				throw new SystemException(ioe);
+			}
+			catch (PortletException pe) {
+				throw new SystemException(pe);
 			}
 		}
 	}

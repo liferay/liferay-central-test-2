@@ -607,9 +607,13 @@ public class LayoutLocalServiceWrapper implements LayoutLocalService {
 		return _layoutLocalService.updatePriority(plid, priority);
 	}
 
+	/**
+	* @see com.liferay.portlet.portletconfiguration.action.EditScopeAction#updateScope
+	*/
 	public void updateScopedPortletNames(long groupId, boolean privateLayout,
 		long layoutId, java.lang.String name, java.lang.String languageId)
-		throws java.lang.Exception {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		_layoutLocalService.updateScopedPortletNames(groupId, privateLayout,
 			layoutId, name, languageId);
 	}
