@@ -490,8 +490,4 @@ public interface LayoutLocalService {
 		int priority)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
-
-	public void updateScopedPortletNames(long groupId, boolean privateLayout,
-		long layoutId, java.lang.String name, java.lang.String languageId)
-		throws java.lang.Exception;
 }
