@@ -25,8 +25,7 @@
 
 		<!-- Other fields -->
 
-		<column name="classNameId" type="long" />
-		<column name="classPK" type="long" />
+		<column name="DDMStorageId" type="long" />
 		<column name="recordSetId" type="long" />
 		<column name="version" type="String" />
 		<column name="displayIndex" type="int" />
@@ -65,8 +64,7 @@
 
 		<!-- Other fields -->
 
-		<column name="classNameId" type="long" />
-		<column name="classPK" type="long" />
+		<column name="DDMStorageId" type="long" />
 		<column name="recordSetId" type="long" />
 		<column name="recordId" type="long" />
 		<column name="version" type="String" />

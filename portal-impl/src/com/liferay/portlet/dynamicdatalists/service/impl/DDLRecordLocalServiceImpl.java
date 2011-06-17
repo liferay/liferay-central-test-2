@@ -36,7 +36,6 @@ import com.liferay.portlet.dynamicdatalists.model.DDLRecordSet;
 import com.liferay.portlet.dynamicdatalists.model.DDLRecordVersion;
 import com.liferay.portlet.dynamicdatalists.service.base.DDLRecordLocalServiceBaseImpl;
 import com.liferay.portlet.dynamicdatalists.util.comparator.DDLRecordVersionVersionComparator;
-import com.liferay.portlet.dynamicdatamapping.model.DDMStructure;
 import com.liferay.portlet.dynamicdatamapping.storage.Field;
 import com.liferay.portlet.dynamicdatamapping.storage.Fields;
 import com.liferay.portlet.dynamicdatamapping.storage.StorageEngineUtil;
@@ -83,15 +82,11 @@ public class DDLRecordLocalServiceImpl
 		record.setCreateDate(serviceContext.getCreateDate(now));
 		record.setModifiedDate(serviceContext.getModifiedDate(now));
 
-		DDMStructure ddmStructure = recordSet.getDDMStructure();
-
-		record.setClassNameId(ddmStructure.getClassNameId());
-
-		long classPK = StorageEngineUtil.create(
+		long ddmStorageId = StorageEngineUtil.create(
 			recordSet.getCompanyId(), recordSet.getDDMStructureId(), fields,
 			serviceContext);
 
-		record.setClassPK(classPK);
+		record.setDDMStorageId(ddmStorageId);
 
 		record.setRecordSetId(recordSetId);
 		record.setVersion(DDLRecordConstants.DEFAULT_VERSION);
@@ -102,7 +97,7 @@ public class DDLRecordLocalServiceImpl
 		// Record version
 
 		DDLRecordVersion recordVersion = addRecordVersion(
-			user, record, classPK, DDLRecordConstants.DEFAULT_VERSION,
+			user, record, ddmStorageId, DDLRecordConstants.DEFAULT_VERSION,
 			displayIndex, WorkflowConstants.STATUS_DRAFT);
 
 		// Asset
@@ -152,7 +147,7 @@ public class DDLRecordLocalServiceImpl
 
 			// Dynamic data mapping storage
 
-			StorageEngineUtil.deleteByClass(recordVersion.getClassPK());
+			StorageEngineUtil.deleteByClass(recordVersion.getDDMStorageId());
 		}
 
 		// Workflow
@@ -271,8 +266,7 @@ public class DDLRecordLocalServiceImpl
 		record.setVersionUserId(user.getUserId());
 		record.setVersionUserName(user.getFullName());
 		record.setModifiedDate(serviceContext.getModifiedDate(null));
-		record.setClassNameId(recordVersion.getClassNameId());
-		record.setClassPK(recordVersion.getClassPK());
+		record.setDDMStorageId(recordVersion.getDDMStorageId());
 		record.setRecordSetId(recordVersion.getRecordSetId());
 		record.setVersion(recordVersion.getVersion());
 		record.setDisplayIndex(recordVersion.getDisplayIndex());
@@ -353,20 +347,20 @@ public class DDLRecordLocalServiceImpl
 		if (recordVersion.isApproved()) {
 			DDLRecordSet recordSet = record.getRecordSet();
 
-			long classPK = StorageEngineUtil.create(
+			long ddmStorageId = StorageEngineUtil.create(
 				recordSet.getCompanyId(), recordSet.getDDMStructureId(), fields,
 				serviceContext);
 			String version = getNextVersion(
-				record, recordVersion.getVersion(), majorVersion, 
+				record, recordVersion.getVersion(), majorVersion,
 				serviceContext.getWorkflowAction());
 
 			addRecordVersion(
-				user, record, classPK, version, displayIndex,
+				user, record, ddmStorageId, version, displayIndex,
 				WorkflowConstants.STATUS_DRAFT);
 		}
 		else {
 			StorageEngineUtil.update(
-				recordVersion.getClassPK(), fields, mergeFields,
+				recordVersion.getDDMStorageId(), fields, mergeFields,
 				serviceContext);
 
 			String version = recordVersion.getVersion();
@@ -427,8 +421,7 @@ public class DDLRecordLocalServiceImpl
 					record.getVersion(),
 					latestRecordVersion.getVersion()) <= 0) {
 
-				record.setClassNameId(latestRecordVersion.getClassNameId());
-				record.setClassPK(latestRecordVersion.getClassPK());
+				record.setDDMStorageId(latestRecordVersion.getDDMStorageId());
 				record.setVersion(latestRecordVersion.getVersion());
 				record.setRecordSetId(latestRecordVersion.getRecordSetId());
 				record.setDisplayIndex(latestRecordVersion.getDisplayIndex());
@@ -465,7 +458,7 @@ public class DDLRecordLocalServiceImpl
 	}
 
 	protected DDLRecordVersion addRecordVersion(
-			User user, DDLRecord record, long classPK, String version,
+			User user, DDLRecord record, long ddmStorageId, String version,
 			int displayIndex, int status)
 		throws SystemException {
 
@@ -491,8 +484,7 @@ public class DDLRecordLocalServiceImpl
 		recordVersion.setUserName(versionUserName);
 
 		recordVersion.setCreateDate(record.getModifiedDate());
-		recordVersion.setClassNameId(record.getClassNameId());
-		recordVersion.setClassPK(classPK);
+		recordVersion.setDDMStorageId(ddmStorageId);
 		recordVersion.setRecordSetId(record.getRecordSetId());
 		recordVersion.setRecordId(record.getRecordId());
 		recordVersion.setVersion(version);
@@ -508,7 +500,7 @@ public class DDLRecordLocalServiceImpl
 	}
 
 	protected String getNextVersion(
-		DDLRecord record, String version, boolean majorVersion, 
+		DDLRecord record, String version, boolean majorVersion,
 		int workflowAction) {
 
 		if (workflowAction == WorkflowConstants.ACTION_SAVE_DRAFT) {

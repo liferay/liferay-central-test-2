@@ -80,7 +80,7 @@ if (record != null) {
 		Fields fields = null;
 
 		if (recordVersion != null) {
-			fields = StorageEngineUtil.getFields(recordVersion.getClassPK());
+			fields = StorageEngineUtil.getFields(recordVersion.getDDMStorageId());
 		}
 		%>
 

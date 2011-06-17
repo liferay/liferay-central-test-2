@@ -56,7 +56,7 @@ public class DDLRecordImpl
 	}
 
 	public Fields getFields() throws StorageException {
-		return StorageEngineUtil.getFields(getClassPK());
+		return StorageEngineUtil.getFields(getDDMStorageId());
 	}
 
 	public Serializable getFieldType(String fieldName) throws Exception {

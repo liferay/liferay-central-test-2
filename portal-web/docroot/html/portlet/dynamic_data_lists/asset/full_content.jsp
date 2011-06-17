@@ -26,7 +26,7 @@ DDMStructure ddmStructure = recordSet.getDDMStructure();
 Fields fields = null;
 
 if (record != null) {
-	fields = StorageEngineUtil.getFields(record.getClassPK());
+	fields = StorageEngineUtil.getFields(record.getDDMStorageId());
 }
 %>
 
