@@ -884,16 +884,6 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		layoutPersistence.update(layout, false);
 
-		// Portlet preferences
-
-		Locale[] locales = LanguageUtil.getAvailableLocales();
-
-		for (Locale locale : locales) {
-			updateScopedPortletNames(
-				groupId, privateLayout, layoutId, nameMap.get(locale),
-				LanguageUtil.getLanguageId(locale));
-		}
-
 		// Icon
 
 		if (iconImage != null) {
@@ -904,6 +894,16 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 				imageLocalService.updateImage(
 					layout.getIconImageId(), iconBytes);
 			}
+		}
+
+		// Portlet preferences
+
+		Locale[] locales = LanguageUtil.getAvailableLocales();
+
+		for (Locale locale : locales) {
+			updateScopedPortletNames(
+				groupId, privateLayout, layoutId, nameMap.get(locale),
+				LanguageUtil.getLanguageId(locale));
 		}
 
 		// Expando
