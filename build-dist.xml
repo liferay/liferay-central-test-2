@@ -94,38 +94,37 @@ app.server.glassfish.zip.url=http://download.java.net/glassfish/v3/release/${app
 
 	<target name="build-dist-language-hook">
 		<if>
-			<available file="${lp.plugins.dir}/hooks/liferay-portal-language-pack-${current.locale}-hook" />
+			<available file="${lp.plugins.dir}/hooks/liferay-language-${locale.current}-hook" />
 			<then>
-				<delete dir="${lp.plugins.dir}/hooks/liferay-portal-language-pack-${current.locale}-hook" />
+				<delete dir="${lp.plugins.dir}/hooks/liferay-language-${locale.current}-hook" />
 			</then>
 		</if>
 
 		<exec dir="${lp.plugins.dir}/hooks" executable="cmd.exe">
-			<arg line="/c create.bat liferay-portal-language-pack-${current.locale} &quot;Liferay Portal Language Pack ${current.locale}&quot;" />
+			<arg line="/c create.bat liferay-language-${locale.current} &quot;Liferay Portal Language Pack ${locale.current}&quot;" />
 		</exec>
 
-		<echo file="${lp.plugins.dir}/hooks/liferay-portal-language-pack-${current.locale}-hook/docroot/WEB-INF/liferay-hook.xml"><![CDATA[<?xml version="1.0"?>
-<!DOCTYPE hook PUBLIC "-//Liferay//DTD Hook 6.0.0//EN" "http://www.liferay.com/dtd/liferay-hook_6_0_0.dtd">
+		<echo file="${lp.plugins.dir}/hooks/liferay-language-${locale.current}-hook/docroot/WEB-INF/liferay-hook.xml"><![CDATA[<?xml version="1.0"?>
+<!DOCTYPE hook PUBLIC "-//Liferay//DTD Hook 6.1.0//EN" "http://www.liferay.com/dtd/liferay-hook_6_1_0.dtd">
 
 <hook>
-<language-properties>content/Language-ext_${current.locale}.properties</language-properties>
-</hook>]]>
-</echo>
+	<language-properties>content/Language-ext_${locale.current}.properties</language-properties>
+</hook>]]></echo>
 
-		<copy file="portal-impl/src/content/Language_${current.locale}.properties" tofile="${lp.plugins.dir}/hooks/liferay-portal-language-pack-${current.locale}-hook/docroot/WEB-INF/src/content/Language-ext_${current.locale}.properties" />
+		<copy file="portal-impl/src/content/Language_${locale.current}.properties" tofile="${lp.plugins.dir}/hooks/liferay-language-${locale.current}-hook/docroot/WEB-INF/src/content/Language-ext_${locale.current}.properties" />
 
 		<if>
 			<not>
 				<equals arg1="${lp.plugins.minor.version}" arg2="1" />
 			</not>
 			<then>
-				<replace file="${lp.plugins.dir}/hooks/liferay-portal-language-pack-${current.locale}-hook/docroot/WEB-INF/liferay-plugin-package.properties">
+				<replace file="${lp.plugins.dir}/hooks/liferay-language-${locale.current}-hook/docroot/WEB-INF/liferay-plugin-package.properties">
 					<replacefilter token="module-incremental-version=1" value="module-incremental-version=${lp.plugins.minor.version}" />
 				</replace>
 			</then>
 		</if>
 
-		<ant dir="${lp.plugins.dir}/hooks/liferay-portal-language-pack-${current.locale}-hook" target="war" inheritAll="false" />
+		<ant dir="${lp.plugins.dir}/hooks/liferay-language-${locale.current}-hook" target="war" inheritAll="false" />
 	</target>
 
 	<target name="build-dist-language-hooks">
@@ -144,22 +143,23 @@ app.server.glassfish.zip.url=http://download.java.net/glassfish/v3/release/${app
 				outputTxtContent = "";
 			}
 
-			String localesFiles = outputTxtContent.replaceAll("\r\n", ",");
-			localesFiles = localesFiles.replaceAll("Language.properties,", "");
-			localesFiles = localesFiles.replaceAll("Language_", "");
-			localesFiles = localesFiles.replaceAll(".properties", "");
+			String locales = outputTxtContent.replaceAll("\r\n", ",");
 
-			if (localesFiles.endsWith(",")) {
-				localesFiles = localesFiles.substring(0, localesFiles.length() - 1);
+			locales = locales.replaceAll("Language.properties,", "");
+			locales = locales.replaceAll("Language_", "");
+			locales = locales.replaceAll(".properties", "");
+
+			if (locales.endsWith(",")) {
+				locales = locales.substring(0, locales.length() - 1);
 			}
 
-			project.setProperty("locales.list", localesFiles);
+			project.setProperty("locale.list", locales);
 		</script>
 
-		<for list="${locales.list}" param="current.locale">
+		<for list="${locale.list}" param="locale.current">
 			<sequential>
 				<antcall target="build-dist-language-hook">
-					<param name="current.locale" value="@{current.locale}" />
+					<param name="locale.current" value="@{locale.current}" />
 				</antcall>
 			</sequential>
 		</for>
