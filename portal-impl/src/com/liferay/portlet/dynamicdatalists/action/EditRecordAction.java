@@ -69,6 +69,9 @@ public class EditRecordAction extends PortletAction {
 			else if (cmd.equals(Constants.DELETE)) {
 				deleteRecord(actionRequest);
 			}
+			else if (cmd.equals(Constants.REVERT)) {
+				revertRecordVersion(actionRequest);
+			}
 
 			if (Validator.isNotNull(cmd)) {
 				sendRedirect(actionRequest, actionResponse);
@@ -124,6 +127,19 @@ public class EditRecordAction extends PortletAction {
 		long recordId = ParamUtil.getLong(actionRequest, "recordId");
 
 		DDLRecordLocalServiceUtil.deleteRecord(recordId);
+	}
+
+	protected void revertRecordVersion(ActionRequest actionRequest)
+		throws Exception {
+
+		long recordId = ParamUtil.getLong(actionRequest, "recordId");
+		String version = ParamUtil.getString(actionRequest, "version");
+
+		ServiceContext serviceContext = ServiceContextFactory.getInstance(
+			DDLRecord.class.getName(), actionRequest);
+
+		DDLRecordLocalServiceUtil.revertRecordVersion(
+			recordId, version, serviceContext);
 	}
 
 	protected DDLRecord updateRecord(ActionRequest actionRequest)
