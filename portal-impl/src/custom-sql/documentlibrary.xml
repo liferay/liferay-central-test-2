@@ -6,12 +6,12 @@
 			UPDATE
 				DLContent
 			SET
-				repositoryId = [$OLD_REPOSITORY_ID$],
-				path_ = '[$OLD_PATH$]'
+				repositoryId = [$NEW_REPOSITORY_ID$],
+				path_ = '[$NEW_PATH$]'
 			WHERE
 				(companyId = [$COMPANY_ID$]) AND
-				(repositoryId = [$NEW_REPOSITORY_ID$]) AND
-				(path_ = '[$NEW_PATH$]')
+				(repositoryId = [$OLD_REPOSITORY_ID$]) AND
+				(path_ = '[$OLD_PATH$]')
 		]]>
 	</sql>
 	<sql id="com.liferay.portlet.documentlibrary.service.persistence.DLContentFinder.findByC_R_P">
