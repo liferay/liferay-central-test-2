@@ -1738,9 +1738,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		String layoutFullURL = serviceContext.getLayoutFullURL();
 
-		if (message.getStatus() != WorkflowConstants.STATUS_APPROVED ||
-			Validator.isNull(layoutFullURL)) {
-
+		if (!message.isApproved() || Validator.isNull(layoutFullURL)) {
 			return;
 		}
 
@@ -1941,8 +1939,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		MBMessage message, ServiceContext serviceContext) {
 
 		if (!PropsValues.BLOGS_PINGBACK_ENABLED ||
-			!message.isAllowPingbacks() ||
-			(message.getStatus() != WorkflowConstants.STATUS_APPROVED)) {
+			!message.isAllowPingbacks() || !message.isApproved()) {
 
 			return;
 		}

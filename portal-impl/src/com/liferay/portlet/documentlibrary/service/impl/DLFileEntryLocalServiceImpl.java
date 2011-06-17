@@ -786,7 +786,7 @@ public class DLFileEntryLocalServiceImpl
 		DLFileVersion dlFileVersion = dlFileEntryLocalService.getFileVersion(
 			fileEntryId, version);
 
-		if (dlFileVersion.getStatus() != WorkflowConstants.STATUS_APPROVED) {
+		if (!dlFileVersion.isApproved()) {
 			return;
 		}
 
