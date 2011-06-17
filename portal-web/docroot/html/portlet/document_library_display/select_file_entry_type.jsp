@@ -23,32 +23,32 @@ String backURL = ParamUtil.getString(request, "backURL");
 long repositoryId = ParamUtil.getLong(request, "repositoryId");
 long folderId = ParamUtil.getLong(request, "folderId");
 
-List<DLDocumentType> documentTypes = new ArrayList<DLDocumentType>();
+List<DLFileEntryType> fileEntryTypes = new ArrayList<DLFileEntryType>();
 
-DLDocumentType basicDocumentType = DLDocumentTypeLocalServiceUtil.createDLDocumentType(0);
+DLFileEntryType basicDocumentType = DLFileEntryTypeLocalServiceUtil.createDLFileEntryType(0);
 
 basicDocumentType.setName(LanguageUtil.get(pageContext, "basic-document"));
 
-documentTypes.add(basicDocumentType);
+fileEntryTypes.add(basicDocumentType);
 
-documentTypes.addAll(DLDocumentTypeServiceUtil.getDocumentTypes(scopeGroupId, QueryUtil.ALL_POS, QueryUtil.ALL_POS));
+fileEntryTypes.addAll(DLFileEntryTypeServiceUtil.getFileEntryTypes(scopeGroupId, QueryUtil.ALL_POS, QueryUtil.ALL_POS));
 %>
 
 <liferay-ui:search-container
-	id='<%= renderResponse.getNamespace() + "documentTypesSearchContainer" %>'
+	id='<%= renderResponse.getNamespace() + "fileEntryTypesSearchContainer" %>'
 >
 	<liferay-ui:search-container-results
-		results="<%= documentTypes %>"
+		results="<%= fileEntryTypes %>"
 	/>
 
 	<liferay-ui:search-container-row
-		className="com.liferay.portlet.documentlibrary.model.DLDocumentType"
+		className="com.liferay.portlet.documentlibrary.model.DLFileEntryType"
 		escapedModel="<%= true %>"
-		keyProperty="documentTypeId"
-		modelVar="documentType"
+		keyProperty="fileEntryTypeId"
+		modelVar="fileEntryType"
 	>
 		<liferay-ui:search-container-column-text name="name">
-			<a class="select-document-type" data-rowId="<%= documentType.getDocumentTypeId() %>" href="javascript:;"><%= documentType.getName() %></a>
+			<a class="select-file-entry-type" data-rowId="<%= fileEntryType.getFileEntryTypeId() %>" href="javascript:;"><%= fileEntryType.getName() %></a>
 		</liferay-ui:search-container-column-text>
 	</liferay-ui:search-container-row>
 
@@ -56,7 +56,7 @@ documentTypes.addAll(DLDocumentTypeServiceUtil.getDocumentTypes(scopeGroupId, Qu
 </liferay-ui:search-container>
 
 <aui:script use="liferay-portlet-url,liferay-search-container">
-	var searchContainer = Liferay.SearchContainer.get('<portlet:namespace />documentTypesSearchContainer');
+	var searchContainer = Liferay.SearchContainer.get('<portlet:namespace />fileEntryTypesSearchContainer');
 
 	searchContainer.get('contentBox').delegate(
 		'click',
@@ -69,7 +69,7 @@ documentTypes.addAll(DLDocumentTypeServiceUtil.getDocumentTypes(scopeGroupId, Qu
 
 			portletURL.setParameter('<%= Constants.CMD %>', '<%= Constants.ADD %>');
 			portletURL.setParameter('backURL', '<%= HtmlUtil.escape(backURL) %>');
-			portletURL.setParameter('documentTypeId', link.getAttribute('data-rowId'));
+			portletURL.setParameter('fileEntryTypeId', link.getAttribute('data-rowId'));
 			portletURL.setParameter('folderId', '<%= folderId %>');
 			portletURL.setParameter('redirect', '<%= HtmlUtil.escape(redirect) %>');
 			portletURL.setParameter('repositoryId', '<%= repositoryId %>');
@@ -84,6 +84,6 @@ documentTypes.addAll(DLDocumentTypeServiceUtil.getDocumentTypes(scopeGroupId, Qu
 				}
 			);
 		},
-		'.select-document-type'
+		'.select-file-entry-type'
 	);
 </aui:script>

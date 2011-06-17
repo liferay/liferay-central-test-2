@@ -19,15 +19,15 @@
 <%
 ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 
-DLDocumentType documentType = (DLDocumentType)row.getObject();
+DLFileEntryType fileEntryType = (DLFileEntryType)row.getObject();
 %>
 
 <liferay-ui:icon-menu showExpanded="<%= false %>" showWhenSingleIcon="<%= false %>">
-	<c:if test="<%= DLDocumentTypePermission.contains(permissionChecker, documentType, ActionKeys.UPDATE) %>">
+	<c:if test="<%= DLFileEntryTypePermission.contains(permissionChecker, fileEntryType, ActionKeys.UPDATE) %>">
 		<portlet:renderURL var="editURL">
-			<portlet:param name="struts_action" value="/document_library/edit_document_type" />
+			<portlet:param name="struts_action" value="/document_library/edit_file_entry_type" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
-			<portlet:param name="documentTypeId" value="<%= String.valueOf(documentType.getDocumentTypeId()) %>" />
+			<portlet:param name="fileEntryTypeId" value="<%= String.valueOf(fileEntryType.getFileEntryTypeId()) %>" />
 		</portlet:renderURL>
 
 		<liferay-ui:icon
@@ -36,11 +36,11 @@ DLDocumentType documentType = (DLDocumentType)row.getObject();
 		/>
 	</c:if>
 
-	<c:if test="<%= DLDocumentTypePermission.contains(permissionChecker, documentType, ActionKeys.PERMISSIONS) %>">
+	<c:if test="<%= DLFileEntryTypePermission.contains(permissionChecker, fileEntryType, ActionKeys.PERMISSIONS) %>">
 		<liferay-security:permissionsURL
-			modelResource="<%= DLDocumentType.class.getName() %>"
-			modelResourceDescription="<%= documentType.getName() %>"
-			resourcePrimKey="<%= String.valueOf(documentType.getDocumentTypeId()) %>"
+			modelResource="<%= DLFileEntryType.class.getName() %>"
+			modelResourceDescription="<%= fileEntryType.getName() %>"
+			resourcePrimKey="<%= String.valueOf(fileEntryType.getFileEntryTypeId()) %>"
 			var="permissionsURL"
 		/>
 
@@ -50,12 +50,12 @@ DLDocumentType documentType = (DLDocumentType)row.getObject();
 		/>
 	</c:if>
 
-	<c:if test="<%= DLDocumentTypePermission.contains(permissionChecker, documentType, ActionKeys.DELETE) %>">
+	<c:if test="<%= DLFileEntryTypePermission.contains(permissionChecker, fileEntryType, ActionKeys.DELETE) %>">
 		<portlet:actionURL var="deleteURL">
-			<portlet:param name="struts_action" value="/document_library/edit_document_type" />
+			<portlet:param name="struts_action" value="/document_library/edit_file_entry_type" />
 			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
-			<portlet:param name="documentTypeId" value="<%= String.valueOf(documentType.getDocumentTypeId()) %>" />
+			<portlet:param name="fileEntryTypeId" value="<%= String.valueOf(fileEntryType.getFileEntryTypeId()) %>" />
 		</portlet:actionURL>
 
 		<liferay-ui:icon-delete url="<%= deleteURL %>" />

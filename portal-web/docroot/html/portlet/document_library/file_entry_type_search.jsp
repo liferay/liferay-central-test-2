@@ -25,12 +25,12 @@
 </div>
 
 <aui:button-row>
-	<aui:button onClick='<%= renderResponse.getNamespace() + "addDocumentType();" %>' value="add-document-type" />
+	<aui:button onClick='<%= renderResponse.getNamespace() + "addFileEntryType();" %>' value="add-document-type" />
 </aui:button-row>
 
 <aui:script>
-	function <portlet:namespace />addDocumentType() {
-		var url = '<portlet:renderURL><portlet:param name="struts_action" value="/document_library/edit_document_type" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';
+	function <portlet:namespace />addFileEntryType() {
+		var url = '<portlet:renderURL><portlet:param name="struts_action" value="/document_library/edit_file_entry_type" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';
 
 		submitForm(document.hrefFm, url);
 	}

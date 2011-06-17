@@ -19,18 +19,18 @@
 <%
 String redirect = ParamUtil.getString(request, "redirect");
 
-DLDocumentType documentType = (DLDocumentType)request.getAttribute(WebKeys.DOCUMENT_LIBRARY_DOCUMENT_TYPE);
+DLFileEntryType fileEntryType = (DLFileEntryType)request.getAttribute(WebKeys.DOCUMENT_LIBRARY_FILE_ENTRY_TYPE);
 
-long documentTypeId = BeanParamUtil.getLong(documentType, request, "documentTypeId");
+long fileEntryTypeId = BeanParamUtil.getLong(fileEntryType, request, "fileEntryTypeId");
 
 String headerNames = "name,null";
 
 List<DDMStructure> ddmStructures = null;
 
-if (documentType != null) {
+if (fileEntryType != null) {
 	headerNames = "name";
 
-	ddmStructures = documentType.getDDMStructures();
+	ddmStructures = fileEntryType.getDDMStructures();
 }
 %>
 
@@ -42,23 +42,23 @@ if (documentType != null) {
 	/>
 </liferay-util:buffer>
 
-<portlet:actionURL var="editDocumentTypeURL">
-	<portlet:param name="struts_action" value="/document_library/edit_document_type" />
+<portlet:actionURL var="editFileEntryTypeURL">
+	<portlet:param name="struts_action" value="/document_library/edit_file_entry_type" />
 </portlet:actionURL>
 
-<aui:form action="<%= editDocumentTypeURL %>" method="post" name="fm">
-	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= (documentType == null) ? Constants.ADD : Constants.UPDATE %>" />
+<aui:form action="<%= editFileEntryTypeURL %>" method="post" name="fm">
+	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= (fileEntryType == null) ? Constants.ADD : Constants.UPDATE %>" />
 	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
-	<aui:input name="documentTypeId" type="hidden" value="<%= documentTypeId %>" />
+	<aui:input name="fileEntryTypeId" type="hidden" value="<%= fileEntryTypeId %>" />
 
 	<liferay-ui:header
 		backURL="<%= redirect %>"
-		title='<%= (documentType != null) ? documentType.getName() : "new-document-type" %>'
+		title='<%= (fileEntryType != null) ? fileEntryType.getName() : "new-document-type" %>'
 	/>
 
-	<aui:model-context bean="<%= documentType %>" model="<%= DLDocumentType.class %>" />
+	<aui:model-context bean="<%= fileEntryType %>" model="<%= DLFileEntryType.class %>" />
 
-	<aui:fieldset cssClass="edit-document-type">
+	<aui:fieldset cssClass="edit-file-entry-type">
 		<aui:input name="name" />
 
 		<aui:input name="description" />
@@ -94,7 +94,7 @@ if (documentType != null) {
 		</liferay-ui:search-container>
 
 		<liferay-ui:icon
-			cssClass="modify-link select-metadata-set"
+			cssClass="modify-link select-metadata"
 			image="add"
 			label="<%= true %>"
 			message="select"
@@ -122,7 +122,7 @@ if (documentType != null) {
 				storageType: 'xml',
 				struts_action: '/dynamic_data_mapping/select_structure',
 				structureName: 'metadata-set',
-				structureType: 'com.liferay.portlet.documentlibrary.model.DLDocumentMetadataSet',
+				structureType: 'com.liferay.portlet.documentlibrary.model.DLFileEntryMetadata',
 				title: '<liferay-ui:message key="metadata-sets" />',
 				saveCallback: '<%= renderResponse.getNamespace() + "selectDDMStructure" %>'
 			}
@@ -168,7 +168,7 @@ if (documentType != null) {
 </aui:script>
 
 <%
-if (documentType == null) {
+if (fileEntryType == null) {
 	PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "add-document-type"), currentURL);
 }
 else {

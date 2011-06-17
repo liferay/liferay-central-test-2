@@ -19,12 +19,12 @@
 <%
 PortletURL portletURL = renderResponse.createRenderURL();
 
-portletURL.setParameter("struts_action", "/document_library/view_document_type");
+portletURL.setParameter("struts_action", "/document_library/view_file_entry_type");
 %>
 
 <aui:form action="<%= portletURL.toString() %>" method="post" name="fm">
 	<liferay-ui:search-form
-		page="/html/portlet/document_library/document_type_search.jsp"
+		page="/html/portlet/document_library/file_entry_type_search.jsp"
 	/>
 </aui:form>
 
@@ -34,17 +34,17 @@ portletURL.setParameter("struts_action", "/document_library/view_document_type")
 	searchContainer="<%= new StructureSearch(renderRequest, portletURL) %>"
 >
 	<liferay-ui:search-container-results>
-		<%@ include file="/html/portlet/document_library/document_type_search_results.jspf" %>
+		<%@ include file="/html/portlet/document_library/file_entry_type_search_results.jspf" %>
 	</liferay-ui:search-container-results>
 
 	<liferay-ui:search-container-row
-		className="com.liferay.portlet.documentlibrary.model.DLDocumentType"
-		keyProperty="documentTypeId"
-		modelVar="documentType"
+		className="com.liferay.portlet.documentlibrary.model.DLFileEntryType"
+		keyProperty="fileEntryTypeId"
+		modelVar="fileEntryType"
 	>
 		<liferay-ui:search-container-column-text
 			name="id"
-			property="documentTypeId"
+			property="fileEntryTypeId"
 		/>
 
 		<liferay-ui:search-container-column-text
@@ -58,14 +58,14 @@ portletURL.setParameter("struts_action", "/document_library/view_document_type")
 		>
 
 			<%
-			buffer.append(dateFormatDateTime.format(documentType.getModifiedDate()));
+			buffer.append(dateFormatDateTime.format(fileEntryType.getModifiedDate()));
 			%>
 
 		</liferay-ui:search-container-column-text>
 
 		<liferay-ui:search-container-column-jsp
 			align="right"
-			path="/html/portlet/document_library/document_type_action.jsp"
+			path="/html/portlet/document_library/file_entry_type_action.jsp"
 		/>
 	</liferay-ui:search-container-row>
 

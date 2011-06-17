@@ -25,7 +25,7 @@ long folderId = GetterUtil.getLong((String)request.getAttribute("view.jsp-folder
 
 long repositoryId = GetterUtil.getLong((String)request.getAttribute("view.jsp-repositoryId"));
 
-long documentTypeId = ParamUtil.getLong(request, "documentTypeId");
+long fileEntryTypeId = ParamUtil.getLong(request, "fileEntryTypeId");
 
 int status = WorkflowConstants.STATUS_APPROVED;
 
@@ -99,7 +99,7 @@ int end = ParamUtil.getInteger(request, "end", searchContainer.getEnd());
 List results = null;
 int total = 0;
 
-if (documentTypeId > 0) {
+if (fileEntryTypeId > 0) {
 	Indexer indexer = IndexerRegistryUtil.getIndexer(DLFileEntryConstants.getClassName());
 
 	SearchContext searchContext = SearchContextFactory.getInstance(request);
