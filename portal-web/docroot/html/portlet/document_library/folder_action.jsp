@@ -132,7 +132,6 @@ if (row == null && portletName.equals(PortletKeys.DOCUMENT_LIBRARY_DISPLAY)) {
 					<liferay-security:permissionsURL
 						modelResource="<%= modelResource %>"
 						modelResourceDescription="<%= HtmlUtil.escape(modelResourceDescription) %>"
-						redirect="<%= redirect %>"
 						resourcePrimKey="<%= resourcePrimKey %>"
 						var="permissionsURL"
 					/>
@@ -198,7 +197,6 @@ if (row == null && portletName.equals(PortletKeys.DOCUMENT_LIBRARY_DISPLAY)) {
 					<liferay-security:permissionsURL
 						modelResource="<%= modelResource %>"
 						modelResourceDescription="<%= HtmlUtil.escape(modelResourceDescription) %>"
-						redirect="<%= redirect %>"
 						resourcePrimKey="<%= resourcePrimKey %>"
 						var="permissionsURL"
 					/>
