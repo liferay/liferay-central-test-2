@@ -33,7 +33,6 @@ List<String> headerNames = searchContainer.getHeaderNames();
 Map orderableHeaders = searchContainer.getOrderableHeaders();
 String emptyResultsMessage = searchContainer.getEmptyResultsMessage();
 RowChecker rowChecker = searchContainer.getRowChecker();
-int sortColumnIndex = -1;
 
 if (end > total) {
 	end = total;
@@ -56,6 +55,8 @@ if (iteratorURL != null) {
 }
 
 List<String> primaryKeys = new ArrayList<String>();
+
+int sortColumnIndex = -1;
 %>
 
 <c:if test="<%= resultRows.isEmpty() && (emptyResultsMessage != null) %>">
