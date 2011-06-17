@@ -133,6 +133,7 @@ public class EditRecordAction extends PortletAction {
 		throws Exception {
 
 		long recordId = ParamUtil.getLong(actionRequest, "recordId");
+
 		String version = ParamUtil.getString(actionRequest, "version");
 
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(

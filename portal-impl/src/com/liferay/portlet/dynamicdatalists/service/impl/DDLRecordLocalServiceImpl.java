@@ -234,19 +234,19 @@ public class DDLRecordLocalServiceImpl
 		return ddlRecordVersionPersistence.findByR_V(recordId, version);
 	}
 
-	public int getRecordVersionsCount(long recordId)
-		throws PortalException, SystemException {
-
-		return ddlRecordVersionPersistence.countByRecordId(recordId);
-	}
-
 	public List<DDLRecordVersion> getRecordVersions(
 			long recordId, int start, int end,
 			OrderByComparator orderByComparator)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		return ddlRecordVersionPersistence.findByRecordId(
 			recordId, start, end, orderByComparator);
+	}
+
+	public int getRecordVersionsCount(long recordId)
+		throws SystemException {
+
+		return ddlRecordVersionPersistence.countByRecordId(recordId);
 	}
 
 	public void revertRecordVersion(
@@ -255,7 +255,7 @@ public class DDLRecordLocalServiceImpl
 
 		DDLRecordVersion recordVersion = getRecordVersion(recordId, version);
 
-		if (recordVersion.getStatus() != WorkflowConstants.STATUS_APPROVED) {
+		if (!recordVersion.isApproved()) {
 			return;
 		}
 

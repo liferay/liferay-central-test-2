@@ -352,19 +352,17 @@ public class DDLRecordLocalServiceUtil {
 		return getService().getRecordVersion(recordId, version);
 	}
 
-	public static int getRecordVersionsCount(long recordId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return getService().getRecordVersionsCount(recordId);
-	}
-
 	public static java.util.List<com.liferay.portlet.dynamicdatalists.model.DDLRecordVersion> getRecordVersions(
 		long recordId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService()
 				   .getRecordVersions(recordId, start, end, orderByComparator);
+	}
+
+	public static int getRecordVersionsCount(long recordId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getRecordVersionsCount(recordId);
 	}
 
 	public static void revertRecordVersion(long recordId,
