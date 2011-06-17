@@ -462,11 +462,6 @@
 			<forward name="portlet.document_library.error" path="portlet.document_library.error" />
 		</action>
 
-		<action path="/document_library/edit_file_entry_type" type="com.liferay.portlet.documentlibrary.action.EditFileEntryTypeAction">
-			<forward name="portlet.document_library.edit_file_entry_type" path="portlet.document_library.edit_file_entry_type" />
-			<forward name="portlet.document_library.error" path="portlet.document_library.error" />
-		</action>
-
 		<action path="/document_library/edit_entry" type="com.liferay.portlet.documentlibrary.action.EditEntryAction">
 			<forward name="portlet.document_library.error" path="portlet.document_library.error" />
 		</action>
@@ -478,6 +473,11 @@
 
 		<action path="/document_library/edit_file_entry_discussion" type="com.liferay.portlet.messageboards.action.EditDiscussionAction">
 			<forward name="portlet.message_boards.error" path="portlet.document_library.error" />
+		</action>
+
+		<action path="/document_library/edit_file_entry_type" type="com.liferay.portlet.documentlibrary.action.EditFileEntryTypeAction">
+			<forward name="portlet.document_library.edit_file_entry_type" path="portlet.document_library.edit_file_entry_type" />
+			<forward name="portlet.document_library.error" path="portlet.document_library.error" />
 		</action>
 
 		<action path="/document_library/edit_file_shortcut" type="com.liferay.portlet.documentlibrary.action.EditFileShortcutAction">
@@ -542,12 +542,12 @@
 			<forward name="portlet.document_library.view" path="portlet.document_library.view" />
 		</action>
 
-		<action path="/document_library/view_file_entry_type" forward="portlet.document_library.view_file_entry_type" />
-
 		<action path="/document_library/view_file_entry" type="com.liferay.portlet.documentlibrary.action.EditFileEntryAction">
 			<forward name="portlet.document_library.edit_file_entry" path="portlet.document_library.view_file_entry" />
 			<forward name="portlet.document_library.error" path="portlet.document_library.error" />
 		</action>
+
+		<action path="/document_library/view_file_entry_type" forward="portlet.document_library.view_file_entry_type" />
 
 		<action path="/document_library/view_file_shortcut" type="com.liferay.portlet.documentlibrary.action.EditFileShortcutAction">
 			<forward name="portlet.document_library.edit_file_shortcut" path="portlet.document_library.view_file_shortcut" />

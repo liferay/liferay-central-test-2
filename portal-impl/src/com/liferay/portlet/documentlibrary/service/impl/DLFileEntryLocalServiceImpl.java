@@ -1191,6 +1191,11 @@ public class DLFileEntryLocalServiceImpl
 			dlFileEntry.getCompanyId(), dlFileEntry.getGroupId(),
 			DLFileEntry.class.getName(), dlFileEntry.getFileEntryId());
 
+		// File entry metadata
+
+		dlFileEntryMetadataLocalService.deleteFileEntryMetadata(
+			dlFileEntry.getFileEntryId());
+
 		// File versions
 
 		List<DLFileVersion> dlFileVersions =
@@ -1209,11 +1214,6 @@ public class DLFileEntryLocalServiceImpl
 
 		expandoValueLocalService.deleteValues(
 			DLFileEntry.class.getName(), dlFileEntry.getFileEntryId());
-
-		// File entry metadata
-
-		dlFileEntryMetadataLocalService.deleteFileEntryMetadata(
-			dlFileEntry.getFileEntryId());
 
 		// Lock
 

@@ -44,19 +44,19 @@ public class DLFileEntryTypeLocalServiceImpl
 
 		long fileEntryTypeId = counterLocalService.increment();
 
-		DLFileEntryType fileEntryType = dlFileEntryTypePersistence.create(
+		DLFileEntryType dlFileEntryType = dlFileEntryTypePersistence.create(
 			fileEntryTypeId);
 
-		fileEntryType.setGroupId(groupId);
-		fileEntryType.setCompanyId(user.getCompanyId());
-		fileEntryType.setUserId(user.getUserId());
-		fileEntryType.setUserName(user.getFullName());
-		fileEntryType.setCreateDate(serviceContext.getCreateDate(now));
-		fileEntryType.setModifiedDate(serviceContext.getModifiedDate(now));
-		fileEntryType.setName(name);
-		fileEntryType.setDescription(description);
+		dlFileEntryType.setGroupId(groupId);
+		dlFileEntryType.setCompanyId(user.getCompanyId());
+		dlFileEntryType.setUserId(user.getUserId());
+		dlFileEntryType.setUserName(user.getFullName());
+		dlFileEntryType.setCreateDate(serviceContext.getCreateDate(now));
+		dlFileEntryType.setModifiedDate(serviceContext.getModifiedDate(now));
+		dlFileEntryType.setName(name);
+		dlFileEntryType.setDescription(description);
 
-		dlFileEntryTypePersistence.update(fileEntryType, false);
+		dlFileEntryTypePersistence.update(dlFileEntryType, false);
 
 		dlFileEntryTypePersistence.addDDMStructures(
 			fileEntryTypeId, ddmStructureIds);
@@ -65,16 +65,16 @@ public class DLFileEntryTypeLocalServiceImpl
 			 serviceContext.getAddGuestPermissions()) {
 
 			addFileEntryTypeResources(
-				fileEntryType, serviceContext.getAddGroupPermissions(),
+				dlFileEntryType, serviceContext.getAddGroupPermissions(),
 				serviceContext.getAddGuestPermissions());
 		}
 		else {
 			addFileEntryTypeResources(
-				fileEntryType, serviceContext.getGroupPermissions(),
+				dlFileEntryType, serviceContext.getGroupPermissions(),
 				serviceContext.getGuestPermissions());
 		}
 
-		return fileEntryType;
+		return dlFileEntryType;
 	}
 
 	public void deleteFileEntryType(long fileEntryTypeId)
@@ -131,14 +131,14 @@ public class DLFileEntryTypeLocalServiceImpl
 			long[] ddmStructureIds, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		DLFileEntryType fileEntryType =
+		DLFileEntryType dlFileEntryType =
 			dlFileEntryTypePersistence.findByPrimaryKey(fileEntryTypeId);
 
-		fileEntryType.setModifiedDate(serviceContext.getModifiedDate(null));
-		fileEntryType.setName(name);
-		fileEntryType.setDescription(description);
+		dlFileEntryType.setModifiedDate(serviceContext.getModifiedDate(null));
+		dlFileEntryType.setName(name);
+		dlFileEntryType.setDescription(description);
 
-		dlFileEntryTypePersistence.update(fileEntryType, false);
+		dlFileEntryTypePersistence.update(dlFileEntryType, false);
 
 		dlFileEntryTypePersistence.setDDMStructures(
 			fileEntryTypeId, ddmStructureIds);

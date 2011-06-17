@@ -255,8 +255,8 @@ public class DLStoreIndexer extends BaseIndexer {
 
 		document.addKeyword(Field.USER_NAME, userName, true);
 
-		document.addKeyword("fileEntryTypeId", fileEntry.getFileEntryTypeId());
 		document.addKeyword("extension", fileEntry.getExtension());
+		document.addKeyword("fileEntryTypeId", fileEntry.getFileEntryTypeId());
 		document.addKeyword("path", fileModel.getFileName());
 		document.addKeyword("repositoryId", fileModel.getRepositoryId());
 

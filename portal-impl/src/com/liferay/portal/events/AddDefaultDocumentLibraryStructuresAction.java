@@ -133,11 +133,11 @@ public class AddDefaultDocumentLibraryStructuresAction extends SimpleAction {
 
 		long[] ddmStructureId = new long[] {ddmStructure.getStructureId()};
 
-		List<DLFileEntryType> DLFileEntryTypes =
+		List<DLFileEntryType> dlFileEntryTypes =
 			DLFileEntryTypeLocalServiceUtil.getFileEntryTypes(
 				groupId, dlFileEntryTypeName, dlFileEntryTypeDescription);
 
-		if (DLFileEntryTypes.isEmpty()) {
+		if (dlFileEntryTypes.isEmpty()) {
 			DLFileEntryTypeLocalServiceUtil.addFileEntryType(
 				userId, groupId, dlFileEntryTypeName,
 				dlFileEntryTypeDescription, ddmStructureId,	serviceContext);
