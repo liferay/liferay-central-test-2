@@ -262,4 +262,8 @@ public interface DLContentLocalService {
 	public boolean hasContent(long companyId, java.lang.String portletId,
 		long repositoryId, java.lang.String path, java.lang.String version)
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public void updateDLContent(long companyId, long oldRepositoryId,
+		long newRepositoryId, java.lang.String oldPath, java.lang.String newPath)
+		throws com.liferay.portal.kernel.exception.SystemException;
 }

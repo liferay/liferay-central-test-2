@@ -65,7 +65,7 @@ public class DLContentModelImpl extends BaseModelImpl<DLContent>
 			{ "data_", Types.BLOB },
 			{ "size_", Types.BIGINT }
 		};
-	public static final String TABLE_SQL_CREATE = "create table DLContent (contentId LONG not null primary key,groupId LONG,companyId LONG,portletId VARCHAR(75) null,repositoryId LONG,path_ VARCHAR(75) null,version VARCHAR(75) null,data_ BLOB,size_ LONG)";
+	public static final String TABLE_SQL_CREATE = "create table DLContent (contentId LONG not null primary key,groupId LONG,companyId LONG,portletId VARCHAR(75) null,repositoryId LONG,path_ VARCHAR(255) null,version VARCHAR(75) null,data_ BLOB,size_ LONG)";
 	public static final String TABLE_SQL_DROP = "drop table DLContent";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";

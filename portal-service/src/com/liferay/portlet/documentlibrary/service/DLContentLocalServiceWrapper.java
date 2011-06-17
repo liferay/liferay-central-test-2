@@ -296,6 +296,13 @@ public class DLContentLocalServiceWrapper implements DLContentLocalService {
 			repositoryId, path, version);
 	}
 
+	public void updateDLContent(long companyId, long oldRepositoryId,
+		long newRepositoryId, java.lang.String oldPath, java.lang.String newPath)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		_dlContentLocalService.updateDLContent(companyId, oldRepositoryId,
+			newRepositoryId, oldPath, newPath);
+	}
+
 	public DLContentLocalService getWrappedDLContentLocalService() {
 		return _dlContentLocalService;
 	}

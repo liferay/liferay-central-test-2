@@ -21,6 +21,12 @@ import com.liferay.portal.kernel.util.ReferenceRegistry;
  * @author Brian Wing Shun Chan
  */
 public class DLContentFinderUtil {
+	public static java.util.List<java.lang.Object[]> findByC_R_P(
+		long companyId, long repositoryId, java.lang.String path)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getFinder().findByC_R_P(companyId, repositoryId, path);
+	}
+
 	public static DLContentFinder getFinder() {
 		if (_finder == null) {
 			_finder = (DLContentFinder)PortalBeanLocatorUtil.locate(DLContentFinder.class.getName());

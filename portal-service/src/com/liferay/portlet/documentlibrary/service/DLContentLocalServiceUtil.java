@@ -307,6 +307,14 @@ public class DLContentLocalServiceUtil {
 				   .hasContent(companyId, portletId, repositoryId, path, version);
 	}
 
+	public static void updateDLContent(long companyId, long oldRepositoryId,
+		long newRepositoryId, java.lang.String oldPath, java.lang.String newPath)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getService()
+			.updateDLContent(companyId, oldRepositoryId, newRepositoryId,
+			oldPath, newPath);
+	}
+
 	public static DLContentLocalService getService() {
 		if (_service == null) {
 			_service = (DLContentLocalService)PortalBeanLocatorUtil.locate(DLContentLocalService.class.getName());
