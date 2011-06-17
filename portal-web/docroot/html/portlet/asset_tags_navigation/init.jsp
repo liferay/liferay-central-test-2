@@ -18,7 +18,6 @@
 
 <%@ page import="com.liferay.portlet.asset.AssetRendererFactoryRegistryUtil" %>
 <%@ page import="com.liferay.portlet.asset.model.AssetRendererFactory" %>
-<%@ page import="com.liferay.portlet.asset.util.AssetUtil" %>
 
 <%
 PortletPreferences preferences = renderRequest.getPreferences();

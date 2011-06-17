@@ -23,7 +23,6 @@
 <%@ page import="com.liferay.portal.kernel.search.SearchContext" %>
 <%@ page import="com.liferay.portal.kernel.search.SearchContextFactory" %>
 <%@ page import="com.liferay.portal.service.permission.PortalPermissionUtil" %>
-<%@ page import="com.liferay.portlet.blogs.NoSuchEntryException" %>
 <%@ page import="com.liferay.portlet.blogs.model.BlogsEntry" %>
 <%@ page import="com.liferay.portlet.blogs.service.BlogsEntryLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.blogs.service.permission.BlogsEntryPermission" %>

@@ -106,7 +106,6 @@
 <%@ page import="com.liferay.portlet.sitesadmin.search.TeamDisplayTerms" %>
 <%@ page import="com.liferay.portlet.sitesadmin.search.TeamSearch" %>
 <%@ page import="com.liferay.portlet.usersadmin.search.GroupDisplayTerms" %>
-<%@ page import="com.liferay.portlet.usersadmin.search.GroupPermissionChecker" %>
 <%@ page import="com.liferay.portlet.usersadmin.search.GroupSearch" %>
 <%@ page import="com.liferay.portlet.usersadmin.search.GroupSearchTerms" %>
 <%@ page import="com.liferay.portlet.usersadmin.search.OrganizationDisplayTerms" %>
@@ -129,7 +128,6 @@
 <%@ page import="java.net.MalformedURLException" %>
 <%@ page import="java.net.URL" %>
 
-<%@ page import="javax.naming.NamingEnumeration" %>
 <%@ page import="javax.naming.directory.Attribute" %>
 <%@ page import="javax.naming.directory.Attributes" %>
 <%@ page import="javax.naming.directory.SearchResult" %>

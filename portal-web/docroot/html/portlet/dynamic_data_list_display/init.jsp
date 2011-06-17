@@ -25,7 +25,6 @@
 <%@ page import="com.liferay.portlet.dynamicdatalists.service.permission.DDLPermission" %>
 <%@ page import="com.liferay.portlet.dynamicdatamapping.model.DDMTemplate" %>
 <%@ page import="com.liferay.portlet.dynamicdatamapping.model.DDMTemplateConstants" %>
-<%@ page import="com.liferay.portlet.dynamicdatamapping.model.impl.DDMTemplateImpl" %>
 <%@ page import="com.liferay.portlet.dynamicdatamapping.service.DDMTemplateLocalServiceUtil" %>
 
 <%

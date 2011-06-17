@@ -17,4 +17,3 @@
 <%@ include file="/html/portlet/init.jsp" %>
 
 <%@ page import="com.liferay.portlet.translator.model.Translation" %>
-<%@ page import="com.liferay.portlet.translator.util.TranslatorUtil" %>

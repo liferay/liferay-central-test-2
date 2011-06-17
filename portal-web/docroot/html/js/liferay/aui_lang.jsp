@@ -23,10 +23,6 @@
 <%@ page import="com.liferay.portal.kernel.util.CalendarUtil" %>
 <%@ page import="com.liferay.portal.kernel.util.ContentTypes" %>
 <%@ page import="com.liferay.portal.kernel.util.LocaleUtil" %>
-<%@ page import="com.liferay.portal.kernel.util.LocalizationUtil" %>
-<%@ page import="com.liferay.portal.model.Theme" %>
-<%@ page import="com.liferay.portal.service.ThemeLocalServiceUtil" %>
-<%@ page import="com.liferay.portal.util.PortalUtil" %>
 <%@ page import="com.liferay.util.JS" %>
 
 <%@ page import="java.text.DateFormat" %>

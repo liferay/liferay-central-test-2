@@ -54,7 +54,6 @@
 <%@ page import="com.liferay.portlet.login.action.ForgotPasswordAction" %>
 <%@ page import="com.liferay.portlet.login.util.LoginUtil" %>
 
-<%@ page import="org.openid4java.OpenIDException" %>
 <%@ page import="org.openid4java.association.AssociationException" %>
 <%@ page import="org.openid4java.consumer.ConsumerException" %>
 <%@ page import="org.openid4java.discovery.DiscoveryException" %>
