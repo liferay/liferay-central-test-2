@@ -112,7 +112,7 @@ public class DLContentLocalServiceImpl extends DLContentLocalServiceBaseImpl {
 			companyId, portletId, repositoryId, path, version);
 	}
 
-	public List<Object[]> getContentReferences(
+	public List<DLContent> getContentReferences(
 			long companyId, long repositoryId, String path)
 		throws SystemException {
 

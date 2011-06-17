@@ -25,8 +25,9 @@ import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.portlet.documentlibrary.model.DLContent;
 import com.liferay.portlet.documentlibrary.model.impl.DLContentImpl;
 import com.liferay.util.dao.orm.CustomSQLUtil;
-import java.util.ArrayList;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -70,30 +71,31 @@ public class DLContentFinderImpl
 			qPos.add(repositoryId);
 			qPos.add(path);
 
-			List<Object[]> queryResults = q.list();
+			List<DLContent> dlContents = new ArrayList<DLContent>();
 
-			List<DLContent> dummyDLContents = new ArrayList<DLContent>(
-				queryResults.size());
+			Iterator<Object[]> itr = q.list().iterator();
 
-			for (Object[] queryResult : queryResults) {
-				DLContent dummyDLContent = new DLContentImpl();
+			while (itr.hasNext()) {
+				Object[] array = itr.next();
 
-				dummyDLContent.setContentId(
-					((Number)queryResult[0]).longValue());
-				dummyDLContent.setGroupId(((Number)queryResult[1]).longValue());
-				dummyDLContent.setCompanyId(
-					((Number)queryResult[2]).longValue());
-				dummyDLContent.setPortletId((String)queryResult[3]);
-				dummyDLContent.setRepositoryId(
-					((Number)queryResult[4]).longValue());
-				dummyDLContent.setPath((String)queryResult[5]);
-				dummyDLContent.setVersion((String)queryResult[6]);
-				dummyDLContent.setSize(((Number)queryResult[7]).longValue());
-				
-				dummyDLContents.add(dummyDLContent);
+				DLContent dlContent = new DLContentImpl();
+
+				dlContent.setContentId(
+					((Number)array[0]).longValue());
+				dlContent.setGroupId(((Number)array[1]).longValue());
+				dlContent.setCompanyId(
+					((Number)array[2]).longValue());
+				dlContent.setPortletId((String)array[3]);
+				dlContent.setRepositoryId(
+					((Number)array[4]).longValue());
+				dlContent.setPath((String)array[5]);
+				dlContent.setVersion((String)array[6]);
+				dlContent.setSize(((Number)array[7]).longValue());
+
+				dlContents.add(dlContent);
 			}
 
-			return dummyDLContents;
+			return dlContents;
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
