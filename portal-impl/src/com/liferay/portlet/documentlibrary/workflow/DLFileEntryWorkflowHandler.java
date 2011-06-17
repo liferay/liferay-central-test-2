@@ -52,7 +52,7 @@ public class DLFileEntryWorkflowHandler extends BaseWorkflowHandler {
 
 		long userId = GetterUtil.getLong(
 			(String)workflowContext.get(WorkflowConstants.CONTEXT_USER_ID));
-		long classPK = GetterUtil.getLong(
+		long dlFileVersionId = GetterUtil.getLong(
 			(String)workflowContext.get(
 				WorkflowConstants.CONTEXT_ENTRY_CLASS_PK));
 
@@ -60,7 +60,7 @@ public class DLFileEntryWorkflowHandler extends BaseWorkflowHandler {
 			"serviceContext");
 
 		return DLFileEntryLocalServiceUtil.updateStatus(
-			userId, classPK, status, serviceContext);
+			userId, dlFileVersionId, status, serviceContext);
 	}
 
 	@Override

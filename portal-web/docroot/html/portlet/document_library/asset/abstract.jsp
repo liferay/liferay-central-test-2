@@ -24,20 +24,28 @@ FileVersion fileVersion = (FileVersion)request.getAttribute(WebKeys.DOCUMENT_LIB
 
 FileEntry fileEntry = fileVersion.getFileEntry();
 
-String src = themeDisplay.getPortalURL() + themeDisplay.getPathContext() + "/documents/" + themeDisplay.getScopeGroupId() + StringPool.SLASH + fileEntry.getFolderId() + StringPool.SLASH + HttpUtil.encodeURL(HtmlUtil.unescape(fileEntry.getTitle())) + "?version=" + fileEntry.getVersion();
+boolean showThumbNails = false;
+if (fileEntry.getVersion().equals(fileVersion.getVersion())) {
+	showThumbNails = true;
+}
+
+String src = null;
+if (showThumbNails) {
+	src = themeDisplay.getPortalURL() + themeDisplay.getPathContext() + "/documents/" + themeDisplay.getScopeGroupId() + StringPool.SLASH + fileEntry.getFolderId() + StringPool.SLASH + HttpUtil.encodeURL(HtmlUtil.unescape(fileEntry.getTitle())) + "?version=" + fileEntry.getVersion();
+}
 %>
 
 <c:if test="<%= fileVersion.isApproved() %>">
 	<div class="asset-resource-info">
 		<c:choose>
-			<c:when test="<%= PDFProcessor.hasImages(fileEntry) %>">
+			<c:when test="<%= showThumbNails && PDFProcessor.hasImages(fileEntry) %>">
 				<div>
 					<img src="<%= src %>&documentThumbnail=1" />
 
 					<%= fileVersion.getTitle() %>
 				</div>
 			</c:when>
-			<c:when test="<%= VideoProcessor.hasVideo(fileEntry) %>">
+			<c:when test="<%= showThumbNails && VideoProcessor.hasVideo(fileEntry) %>">
 				<div>
 					<img src="<%= src %>&videoThumbnail=1" />
 
@@ -49,7 +57,7 @@ String src = themeDisplay.getPortalURL() + themeDisplay.getPathContext() + "/doc
 					image='<%= "../file_system/small/" + fileVersion.getIcon() %>'
 					label="<%= true %>"
 					message="<%= HtmlUtil.escape(fileVersion.getTitle()) %>"
-					url='<%= themeDisplay.getPortalURL() + themeDisplay.getPathContext() + "/documents/" + fileVersion.getRepositoryId() + StringPool.SLASH + fileEntry.getFolderId() + StringPool.SLASH + HttpUtil.encodeURL(HtmlUtil.unescape(fileVersion.getTitle())) %>'
+					url='<%= themeDisplay.getPortalURL() + themeDisplay.getPathContext() + "/documents/" + fileVersion.getRepositoryId() + StringPool.SLASH + fileEntry.getFolderId() + StringPool.SLASH + HttpUtil.encodeURL(HtmlUtil.unescape(fileEntry.getTitle())) + "?version=" + fileVersion.getVersion() %>'
 				/>
 			</c:otherwise>
 		</c:choose>

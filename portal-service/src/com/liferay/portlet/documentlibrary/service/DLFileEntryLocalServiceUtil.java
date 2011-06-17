@@ -548,12 +548,12 @@ public class DLFileEntryLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntry updateStatus(
-		long userId, long fileEntryId, int status,
+		long userId, long fileVersionId, int status,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
-				   .updateStatus(userId, fileEntryId, status, serviceContext);
+				   .updateStatus(userId, fileVersionId, status, serviceContext);
 	}
 
 	public static boolean verifyFileEntryCheckOut(long fileEntryId,

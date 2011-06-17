@@ -214,7 +214,7 @@ public class DLFileEntryLocalServiceImpl
 
 		WorkflowHandlerRegistryUtil.startWorkflowInstance(
 			user.getCompanyId(), groupId, userId, DLFileEntry.class.getName(),
-			fileEntryId, dlFileEntry, serviceContext);
+			dlFileVersion.getFileVersionId(), dlFileVersion, serviceContext);
 
 		return dlFileEntry;
 	}
@@ -337,8 +337,8 @@ public class DLFileEntryLocalServiceImpl
 
 			WorkflowHandlerRegistryUtil.startWorkflowInstance(
 				user.getCompanyId(), dlFileEntry.getGroupId(), userId,
-				DLFileEntry.class.getName(), dlFileEntry.getFileEntryId(),
-				dlFileEntry, serviceContext);
+				DLFileEntry.class.getName(), dlFileVersion.getFileVersionId(),
+				dlFileVersion, serviceContext);
 		}
 
 		lockLocalService.unlock(DLFileEntry.class.getName(), fileEntryId);
@@ -861,27 +861,26 @@ public class DLFileEntryLocalServiceImpl
 	}
 
 	public DLFileEntry updateStatus(
-			long userId, long fileEntryId, int status,
+			long userId, long fileVersionId, int status,
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		// File entry
-
 		User user = userPersistence.findByPrimaryKey(userId);
-		DLFileEntry dlFileEntry = dlFileEntryPersistence.findByPrimaryKey(
-			fileEntryId);
 
 		// File version
+		DLFileVersion dlFileVersion = dlFileVersionPersistence.findByPrimaryKey(
+			fileVersionId);
 
-		DLFileVersion latestDLFileVersion = getLatestFileVersion(
-			dlFileEntry.getFileEntryId());
+		dlFileVersion.setStatus(status);
+		dlFileVersion.setStatusByUserId(user.getUserId());
+		dlFileVersion.setStatusByUserName(user.getFullName());
+		dlFileVersion.setStatusDate(new Date());
 
-		latestDLFileVersion.setStatus(status);
-		latestDLFileVersion.setStatusByUserId(user.getUserId());
-		latestDLFileVersion.setStatusByUserName(user.getFullName());
-		latestDLFileVersion.setStatusDate(new Date());
+		dlFileVersionPersistence.update(dlFileVersion, false);
 
-		dlFileVersionPersistence.update(latestDLFileVersion, false);
+		// File entry
+		DLFileEntry dlFileEntry = dlFileEntryPersistence.findByPrimaryKey(
+			dlFileVersion.getFileEntryId());
 
 		if (status == WorkflowConstants.STATUS_APPROVED) {
 
@@ -889,20 +888,20 @@ public class DLFileEntryLocalServiceImpl
 
 			if (DLUtil.compareVersions(
 					dlFileEntry.getVersion(),
-					latestDLFileVersion.getVersion()) <= 0) {
+					dlFileVersion.getVersion()) <= 0) {
 
-				dlFileEntry.setTitle(latestDLFileVersion.getTitle());
+				dlFileEntry.setTitle(dlFileVersion.getTitle());
 				dlFileEntry.setDescription(
-					latestDLFileVersion.getDescription());
+					dlFileVersion.getDescription());
 				dlFileEntry.setExtraSettings(
-					latestDLFileVersion.getExtraSettings());
-				dlFileEntry.setVersion(latestDLFileVersion.getVersion());
-				dlFileEntry.setVersionUserId(latestDLFileVersion.getUserId());
+					dlFileVersion.getExtraSettings());
+				dlFileEntry.setVersion(dlFileVersion.getVersion());
+				dlFileEntry.setVersionUserId(dlFileVersion.getUserId());
 				dlFileEntry.setVersionUserName(
-					latestDLFileVersion.getUserName());
+					dlFileVersion.getUserName());
 				dlFileEntry.setModifiedDate(
-					latestDLFileVersion.getCreateDate());
-				dlFileEntry.setSize(latestDLFileVersion.getSize());
+					dlFileVersion.getCreateDate());
+				dlFileEntry.setSize(dlFileVersion.getSize());
 
 				dlFileEntryPersistence.update(dlFileEntry, false);
 			}
@@ -917,8 +916,7 @@ public class DLFileEntryLocalServiceImpl
 
 			// File entry
 
-			if (dlFileEntry.getVersion().equals(
-					latestDLFileVersion.getVersion())) {
+			if (dlFileEntry.getVersion().equals(dlFileVersion.getVersion())) {
 
 				String newVersion = DLFileEntryConstants.DEFAULT_VERSION;
 
@@ -938,7 +936,7 @@ public class DLFileEntryLocalServiceImpl
 
 			// Indexer
 
-			if (latestDLFileVersion.getVersion().equals(
+			if (dlFileVersion.getVersion().equals(
 					DLFileEntryConstants.DEFAULT_VERSION)) {
 
 				Indexer indexer = IndexerRegistryUtil.getIndexer(
@@ -952,7 +950,7 @@ public class DLFileEntryLocalServiceImpl
 
 		dlAppHelperLocalService.updateStatus(
 			userId, new LiferayFileEntry(dlFileEntry),
-			new LiferayFileVersion(latestDLFileVersion), status);
+			new LiferayFileVersion(dlFileVersion), status);
 
 		return dlFileEntry;
 	}
@@ -1185,12 +1183,6 @@ public class DLFileEntryLocalServiceImpl
 		webDAVPropsLocalService.deleteWebDAVProps(
 			DLFileEntry.class.getName(), dlFileEntry.getFileEntryId());
 
-		// Workflow
-
-		workflowInstanceLinkLocalService.deleteWorkflowInstanceLinks(
-			dlFileEntry.getCompanyId(), dlFileEntry.getGroupId(),
-			DLFileEntry.class.getName(), dlFileEntry.getFileEntryId());
-
 		// File entry metadata
 
 		dlFileEntryMetadataLocalService.deleteFileEntryMetadata(
@@ -1203,6 +1195,12 @@ public class DLFileEntryLocalServiceImpl
 				dlFileEntry.getFileEntryId());
 
 		for (DLFileVersion dlFileVersion : dlFileVersions) {
+			// Workflow
+
+			workflowInstanceLinkLocalService.deleteWorkflowInstanceLinks(
+				dlFileEntry.getCompanyId(), dlFileEntry.getGroupId(),
+				DLFileEntry.class.getName(), dlFileVersion.getFileVersionId());
+
 			dlFileVersionPersistence.remove(dlFileVersion);
 
 			expandoValueLocalService.deleteValues(
