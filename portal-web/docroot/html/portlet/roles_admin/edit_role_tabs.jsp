@@ -19,7 +19,7 @@
 <%
 String cmd = ParamUtil.getString(request, Constants.CMD);
 
-tabs1 = ParamUtil.getString(request, "tabs1");
+String tabs1 = ParamUtil.getString(request, "tabs1");
 
 String redirect = ParamUtil.getString(request, "redirect");
 String backURL = ParamUtil.getString(request, "backURL", redirect);

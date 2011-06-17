@@ -134,39 +134,10 @@
 <%@ page import="javax.naming.ldap.LdapContext" %>
 
 <%
-String tabs1 = ParamUtil.getString(request, "tabs1");
-
-boolean showTabs1 = false;
 boolean showActiveUserSelect = true;
 
-if (portletName.equals(PortletKeys.USERS_ADMIN)) {
-	tabs1 = "users";
-}
-else if (portletName.equals(PortletKeys.ROLES_ADMIN) && !tabs1.equals("users")) {
-	tabs1 = "roles";
-}
-else if (portletName.equals(PortletKeys.PASSWORD_POLICIES_ADMIN)) {
-	tabs1 = "password-policies";
-}
-else if (portletName.equals(PortletKeys.PORTAL_SETTINGS)) {
-	tabs1 = "settings";
-}
-else if (portletName.equals(PortletKeys.MONITORING)) {
-	tabs1 = "monitoring";
-}
-else if (portletName.equals(PortletKeys.PLUGINS_ADMIN)) {
-	tabs1 = "plugins";
-}
-else {
+if (!(portletName.equals(PortletKeys.PASSWORD_POLICIES_ADMIN) || portletName.equals(PortletKeys.PORTAL_SETTINGS) || portletName.equals(PortletKeys.ROLES_ADMIN) || portletName.equals(PortletKeys.SITES_ADMIN) || portletName.equals(PortletKeys.USERS_ADMIN))) {
 	showActiveUserSelect = false;
-
-	if (tabs1.equals("roles") || tabs1.equals("password-policies") || tabs1.equals("settings") || tabs1.equals("monitoring") || tabs1.equals("plugins")) {
-		tabs1 = "users";
-	}
-}
-
-if (Validator.isNull(tabs1)) {
-	tabs1 = "users";
 }
 
 boolean filterManageableGroups = true;

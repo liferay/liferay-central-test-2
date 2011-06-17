@@ -17,6 +17,7 @@
 <%@ include file="/html/portlet/enterprise_admin/init.jsp" %>
 
 <%
+String tabs1 = ParamUtil.getString(request, "tabs1");
 String tabs2 = ParamUtil.getString(request, "tabs2", "current");
 
 int cur = ParamUtil.getInteger(request, SearchContainer.DEFAULT_CUR_PARAM);
