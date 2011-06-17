@@ -112,6 +112,13 @@ public class DLContentLocalServiceImpl extends DLContentLocalServiceBaseImpl {
 			companyId, portletId, repositoryId, path, version);
 	}
 
+	public List<Object[]> getContentReferences(
+			long companyId, long repositoryId, String path)
+		throws SystemException {
+
+		return dlContentFinder.findByC_R_P(companyId, repositoryId, path);
+	}
+
 	public List<DLContent> getContents(
 			long companyId, String portletId, long repositoryId, String path)
 		throws SystemException {

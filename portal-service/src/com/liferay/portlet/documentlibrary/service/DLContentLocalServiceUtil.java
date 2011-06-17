@@ -292,6 +292,12 @@ public class DLContentLocalServiceUtil {
 				   .getContent(companyId, portletId, repositoryId, path, version);
 	}
 
+	public static java.util.List<java.lang.Object[]> getContentReferences(
+		long companyId, long repositoryId, java.lang.String path)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getContentReferences(companyId, repositoryId, path);
+	}
+
 	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLContent> getContents(
 		long companyId, java.lang.String portletId, long repositoryId,
 		java.lang.String path)
