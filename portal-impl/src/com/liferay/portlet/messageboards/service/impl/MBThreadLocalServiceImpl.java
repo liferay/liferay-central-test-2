@@ -14,8 +14,6 @@
 
 package com.liferay.portlet.messageboards.service.impl;
 
-import com.liferay.documentlibrary.DuplicateDirectoryException;
-import com.liferay.documentlibrary.NoSuchDirectoryException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.search.Indexer;
@@ -28,6 +26,9 @@ import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.model.GroupConstants;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.service.ServiceContext;
+import com.liferay.portlet.documentlibrary.DuplicateDirectoryException;
+import com.liferay.portlet.documentlibrary.NoSuchDirectoryException;
+import com.liferay.portlet.documentlibrary.store.DLStoreUtil;
 import com.liferay.portlet.messageboards.SplitThreadException;
 import com.liferay.portlet.messageboards.model.MBCategory;
 import com.liferay.portlet.messageboards.model.MBCategoryConstants;
@@ -76,7 +77,7 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 		String dirName = thread.getAttachmentsDir();
 
 		try {
-			dlLocalService.deleteDirectory(
+			DLStoreUtil.deleteDirectory(
 				companyId, portletId, repositoryId, dirName);
 		}
 		catch (NoSuchDirectoryException nsde) {
@@ -645,31 +646,31 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 		String newAttachmentsDir = message.getAttachmentsDir();
 
 		try {
-			dlLocalService.addDirectory(
+			DLStoreUtil.addDirectory(
 				companyId, repositoryId, newAttachmentsDir);
 		}
 		catch (DuplicateDirectoryException dde) {
 		}
 
-		String[] fileNames = dlLocalService.getFileNames(
+		String[] fileNames = DLStoreUtil.getFileNames(
 			companyId, repositoryId, oldAttachmentsDir);
 
 		for (String fileName : fileNames) {
 			String name = StringUtil.extractLast(fileName, StringPool.SLASH);
-			byte[] fileBytes = dlLocalService.getFile(
+			byte[] fileBytes = DLStoreUtil.getFile(
 				companyId, repositoryId, fileName);
 
-			dlLocalService.addFile(
+			DLStoreUtil.addFile(
 				companyId, portletId, groupId, repositoryId,
 				newAttachmentsDir + "/" + name, 0, StringPool.BLANK,
 				message.getModifiedDate(), new ServiceContext(), fileBytes);
 
-			dlLocalService.deleteFile(
+			DLStoreUtil.deleteFile(
 				companyId, portletId, repositoryId, fileName);
 		}
 
 		try {
-			dlLocalService.deleteDirectory(
+			DLStoreUtil.deleteDirectory(
 				companyId, portletId, repositoryId, oldAttachmentsDir);
 		}
 		catch (NoSuchDirectoryException nsde) {

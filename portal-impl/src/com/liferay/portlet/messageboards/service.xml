@@ -293,7 +293,6 @@
 
 		<!-- References -->
 
-		<reference package-path="com.liferay.documentlibrary" entity="DL" />
 		<reference package-path="com.liferay.mail" entity="Mail" />
 		<reference package-path="com.liferay.portal" entity="Company" />
 		<reference package-path="com.liferay.portal" entity="Group" />
@@ -481,7 +480,6 @@
 
 		<!-- References -->
 
-		<reference package-path="com.liferay.documentlibrary" entity="DL" />
 		<reference package-path="com.liferay.portal" entity="Lock" />
 		<reference package-path="com.liferay.portal" entity="WorkflowInstanceLink" />
 		<reference package-path="com.liferay.portlet.asset" entity="AssetEntry" />

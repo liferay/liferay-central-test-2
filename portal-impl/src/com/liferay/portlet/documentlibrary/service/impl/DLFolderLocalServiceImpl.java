@@ -14,8 +14,6 @@
 
 package com.liferay.portlet.documentlibrary.service.impl;
 
-import com.liferay.documentlibrary.DuplicateFileException;
-import com.liferay.documentlibrary.NoSuchDirectoryException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
@@ -31,12 +29,15 @@ import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.asset.util.AssetUtil;
+import com.liferay.portlet.documentlibrary.DuplicateFileException;
 import com.liferay.portlet.documentlibrary.DuplicateFolderNameException;
 import com.liferay.portlet.documentlibrary.FolderNameException;
+import com.liferay.portlet.documentlibrary.NoSuchDirectoryException;
 import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
 import com.liferay.portlet.documentlibrary.service.base.DLFolderLocalServiceBaseImpl;
+import com.liferay.portlet.documentlibrary.store.DLStoreUtil;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -131,7 +132,7 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 			groupId, DLFolderConstants.DEFAULT_PARENT_FOLDER_ID);
 
 		try {
-			dlLocalService.deleteDirectory(
+			DLStoreUtil.deleteDirectory(
 				group.getCompanyId(), PortletKeys.DOCUMENT_LIBRARY, groupId,
 				StringPool.BLANK);
 		}
@@ -424,7 +425,7 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 		// Directory
 
 		try {
-			dlLocalService.deleteDirectory(
+			DLStoreUtil.deleteDirectory(
 				dlFolder.getCompanyId(), PortletKeys.DOCUMENT_LIBRARY,
 				dlFolder.getFolderId(), StringPool.BLANK);
 		}

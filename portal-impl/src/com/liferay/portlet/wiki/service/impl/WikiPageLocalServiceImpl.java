@@ -14,9 +14,6 @@
 
 package com.liferay.portlet.wiki.service.impl;
 
-import com.liferay.documentlibrary.DuplicateDirectoryException;
-import com.liferay.documentlibrary.NoSuchDirectoryException;
-import com.liferay.documentlibrary.NoSuchFileException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.language.LanguageUtil;
@@ -51,6 +48,10 @@ import com.liferay.portlet.asset.NoSuchEntryException;
 import com.liferay.portlet.asset.model.AssetEntry;
 import com.liferay.portlet.asset.model.AssetLink;
 import com.liferay.portlet.asset.model.AssetLinkConstants;
+import com.liferay.portlet.documentlibrary.DuplicateDirectoryException;
+import com.liferay.portlet.documentlibrary.NoSuchDirectoryException;
+import com.liferay.portlet.documentlibrary.NoSuchFileException;
+import com.liferay.portlet.documentlibrary.store.DLStoreUtil;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.wiki.DuplicatePageException;
 import com.liferay.portlet.wiki.NoSuchPageException;
@@ -232,12 +233,12 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		long repositoryId = CompanyConstants.SYSTEM;
 
 		try {
-			dlLocalService.addDirectory(companyId, repositoryId, dirName);
+			DLStoreUtil.addDirectory(companyId, repositoryId, dirName);
 		}
 		catch (DuplicateDirectoryException dde) {
 		}
 
-		dlLocalService.addFile(
+		DLStoreUtil.addFile(
 			companyId, portletId, groupId, repositoryId,
 			dirName + "/" + fileName, false, 0, StringPool.BLANK,
 			modifiedDate, new ServiceContext(), inputStream);
@@ -265,7 +266,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		String dirName = page.getAttachmentsDir();
 
 		try {
-			dlLocalService.addDirectory(companyId, repositoryId, dirName);
+			DLStoreUtil.addDirectory(companyId, repositoryId, dirName);
 		}
 		catch (DuplicateDirectoryException dde) {
 		}
@@ -284,7 +285,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 				userId, WikiPage.class.getName(), page.getResourcePrimKey(),
 				ActionKeys.ADD_ATTACHMENT, dirName + "/" + fileName);
 
-			dlLocalService.addFile(
+			DLStoreUtil.addFile(
 				companyId, portletId, groupId, repositoryId,
 				dirName + "/" + fileName, 0, StringPool.BLANK,
 				page.getModifiedDate(), new ServiceContext(), bytes);
@@ -426,7 +427,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		String dirName = page.getAttachmentsDir();
 
 		try {
-			dlLocalService.deleteDirectory(
+			DLStoreUtil.deleteDirectory(
 				companyId, portletId, repositoryId, dirName);
 		}
 		catch (NoSuchDirectoryException nsde) {
@@ -518,7 +519,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		long repositoryId = CompanyConstants.SYSTEM;
 
 		try {
-			dlLocalService.deleteFile(
+			DLStoreUtil.deleteFile(
 				companyId, portletId, repositoryId, fileName);
 		}
 		catch (NoSuchFileException nsfe) {

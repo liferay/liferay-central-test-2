@@ -16,8 +16,6 @@ package com.liferay.portlet.messageboards.service.base;
 
 import com.liferay.counter.service.CounterLocalService;
 
-import com.liferay.documentlibrary.service.DLLocalService;
-
 import com.liferay.mail.service.MailService;
 
 import com.liferay.portal.kernel.bean.BeanReference;
@@ -587,24 +585,6 @@ public abstract class MBMessageServiceBaseImpl extends PrincipalBean
 	 */
 	public void setCounterLocalService(CounterLocalService counterLocalService) {
 		this.counterLocalService = counterLocalService;
-	}
-
-	/**
-	 * Returns the d l local service.
-	 *
-	 * @return the d l local service
-	 */
-	public DLLocalService getDLLocalService() {
-		return dlLocalService;
-	}
-
-	/**
-	 * Sets the d l local service.
-	 *
-	 * @param dlLocalService the d l local service
-	 */
-	public void setDLLocalService(DLLocalService dlLocalService) {
-		this.dlLocalService = dlLocalService;
 	}
 
 	/**
@@ -1645,8 +1625,6 @@ public abstract class MBMessageServiceBaseImpl extends PrincipalBean
 	protected MBThreadFinder mbThreadFinder;
 	@BeanReference(type = CounterLocalService.class)
 	protected CounterLocalService counterLocalService;
-	@BeanReference(type = DLLocalService.class)
-	protected DLLocalService dlLocalService;
 	@BeanReference(type = MailService.class)
 	protected MailService mailService;
 	@BeanReference(type = CompanyLocalService.class)
