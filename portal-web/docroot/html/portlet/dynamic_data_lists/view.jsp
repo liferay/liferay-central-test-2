@@ -54,7 +54,7 @@ portletURL.setParameter("struts_action", "/dynamic_data_lists/view");
 			modelVar="recordSet"
 		>
 			<liferay-portlet:renderURL varImpl="rowURL">
-				<portlet:param name="struts_action" value="/dynamic_data_lists/edit_record_set" />
+				<portlet:param name="struts_action" value="/dynamic_data_lists/view_record_set" />
 				<portlet:param name="redirect" value="<%= searchContainer.getIteratorURL().toString() %>" />
 				<portlet:param name="recordSetId" value="<%= String.valueOf(recordSet.getRecordSetId()) %>" />
 			</liferay-portlet:renderURL>

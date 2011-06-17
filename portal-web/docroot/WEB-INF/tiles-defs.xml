@@ -507,6 +507,14 @@
 		<put name="portlet_content" value="/portlet/dynamic_data_lists/view.jsp" />
 	</definition>
 
+	<definition name="portlet.dynamic_data_lists.view_record" extends="portlet.dynamic_data_lists">
+		<put name="portlet_content" value="/portlet/dynamic_data_lists/view_record.jsp" />
+	</definition>
+
+	<definition name="portlet.dynamic_data_lists.view_record_history" extends="portlet.dynamic_data_lists">
+		<put name="portlet_content" value="/portlet/dynamic_data_lists/view_record_history.jsp" />
+	</definition>
+
 	<definition name="portlet.dynamic_data_lists.view_record_set" extends="portlet.dynamic_data_lists">
 		<put name="portlet_content" value="/portlet/dynamic_data_lists/view_record_set.jsp" />
 	</definition>

@@ -58,6 +58,8 @@ if (record != null) {
 		<aui:workflow-status status="<%= recordVersion.getStatus() %>" version="<%= recordVersion.getVersion() %>" />
 	</c:if>
 
+	<liferay-util:include page="/html/portlet/dynamic_data_lists/record_toolbar.jsp" />
+
 	<aui:fieldset>
 
 		<%

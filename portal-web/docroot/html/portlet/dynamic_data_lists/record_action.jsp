@@ -29,6 +29,18 @@ long detailDDMTemplateId = GetterUtil.getLong((String)row.getParameter("detailDD
 %>
 
 <liferay-ui:icon-menu>
+	<liferay-portlet:renderURL portletName="<%= PortletKeys.DYNAMIC_DATA_LISTS %>" var="viewRecordURL" windowState="<%= WindowState.MAXIMIZED.toString() %>">
+		<portlet:param name="struts_action" value="/dynamic_data_lists/view_record" />
+		<portlet:param name="redirect" value="<%= currentURL %>" />
+		<portlet:param name="recordId" value="<%= String.valueOf(record.getRecordId()) %>" />
+		<portlet:param name="detailDDMTemplateId" value="<%= String.valueOf(detailDDMTemplateId) %>" />
+	</liferay-portlet:renderURL>
+
+	<liferay-ui:icon
+		image="view"
+		url="<%= viewRecordURL %>"
+	/>
+
 	<liferay-portlet:renderURL portletName="<%= PortletKeys.DYNAMIC_DATA_LISTS %>" var="editRecordURL" windowState="<%= WindowState.MAXIMIZED.toString() %>">
 		<portlet:param name="struts_action" value="/dynamic_data_lists/edit_record" />
 		<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.UPDATE %>" />

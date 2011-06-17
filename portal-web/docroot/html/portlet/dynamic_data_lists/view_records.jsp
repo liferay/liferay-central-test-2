@@ -82,7 +82,7 @@ for (int i = 0; i < results.size(); i++) {
 
 	PortletURL rowURL = renderResponse.createRenderURL();
 
-	rowURL.setParameter("struts_action", "/dynamic_data_lists/edit_record");
+	rowURL.setParameter("struts_action", "/dynamic_data_lists/view_record");
 	rowURL.setParameter("redirect", currentURL);
 	rowURL.setParameter("recordId", String.valueOf(record.getRecordId()));
 
