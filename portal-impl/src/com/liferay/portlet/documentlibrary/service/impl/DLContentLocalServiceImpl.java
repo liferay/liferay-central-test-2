@@ -18,9 +18,11 @@ import com.liferay.portal.kernel.dao.jdbc.OutputBlob;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayInputStream;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portlet.documentlibrary.NoSuchContentException;
 import com.liferay.portlet.documentlibrary.model.DLContent;
 import com.liferay.portlet.documentlibrary.service.base.DLContentLocalServiceBaseImpl;
+import com.liferay.util.dao.orm.CustomSQLUtil;
 
 import java.io.InputStream;
 
@@ -133,5 +135,35 @@ public class DLContentLocalServiceImpl extends DLContentLocalServiceBaseImpl {
 			return false;
 		}
 	}
+
+	public void updateDLContent(
+			long companyId, long oldRepositoryId, long newRepositoryId,
+			String oldPath, String newPath)
+		throws SystemException {
+
+		String sql = CustomSQLUtil.get(_UPDATE_DL_CONTENT);
+
+		sql = StringUtil.replace(
+			sql,
+			new String[] {
+				"[$COMPANY_ID$]",
+				"[$NEW_PATH$]",
+				"[$NEW_REPOSITORY_ID$]",
+				"[$OLD_PATH$]",
+				"[$OLD_REPOSITORY_ID$]"
+			},
+			new String[] {
+				String.valueOf(companyId),
+				newPath,
+				String.valueOf(newRepositoryId),
+				oldPath,
+				String.valueOf(oldRepositoryId)
+			});
+
+		runSQL(sql);
+	}
+
+	private static final String _UPDATE_DL_CONTENT =
+		DLContentLocalServiceImpl.class.getName() + ".updateDLContent";
 
 }

@@ -14,12 +14,71 @@
 
 package com.liferay.portlet.documentlibrary.service.persistence;
 
+import com.liferay.portal.kernel.dao.orm.QueryPos;
+import com.liferay.portal.kernel.dao.orm.SQLQuery;
+import com.liferay.portal.kernel.dao.orm.Session;
+import com.liferay.portal.kernel.dao.orm.Type;
+import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.portlet.documentlibrary.model.DLContent;
+import com.liferay.util.dao.orm.CustomSQLUtil;
+
+import java.util.List;
 
 /**
  * @author Brian Wing Shun Chan
  */
 public class DLContentFinderImpl
 	extends BasePersistenceImpl<DLContent> implements DLContentFinder {
+
+	public static String FIND_BY_C_R_P =
+		DLContentFinder.class.getName() + ".findByC_R_P";
+
+	public static String UPDATE_BY_C_R_P =
+		DLContentFinder.class.getName() + ".updateByC_R_P";
+
+	public List<Object[]> findByC_R_P(
+			long companyId, long repositoryId, String path)
+		throws SystemException {
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			String sql = CustomSQLUtil.get(FIND_BY_C_R_P);
+
+			if (path.contains(StringPool.PERCENT)) {
+				sql = StringUtil.replace(sql, "(path_ = ?)", "(path_ LIKE ?)");
+			}
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addScalar("contentId", Type.LONG);
+			q.addScalar("groupId", Type.LONG);
+			q.addScalar("companyId", Type.LONG);
+			q.addScalar("portletId", Type.STRING);
+			q.addScalar("repositoryId", Type.LONG);
+			q.addScalar("path_", Type.STRING);
+			q.addScalar("version", Type.STRING);
+			q.addScalar("size_", Type.LONG);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(companyId);
+			qPos.add(repositoryId);
+			qPos.add(path);
+
+			return q.list();
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
 }
