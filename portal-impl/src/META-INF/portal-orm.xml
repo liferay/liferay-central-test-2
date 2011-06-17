@@ -1839,8 +1839,7 @@
 			<basic name="modifiedDate">
 				<temporal>TIMESTAMP</temporal>
 			</basic>
-			<basic name="classNameId" />
-			<basic name="classPK" />
+			<basic name="DDMStorageId" />
 			<basic name="recordSetId" />
 			<basic name="version" />
 			<basic name="displayIndex" />
@@ -1888,8 +1887,7 @@
 			<basic name="createDate">
 				<temporal>TIMESTAMP</temporal>
 			</basic>
-			<basic name="classNameId" />
-			<basic name="classPK" />
+			<basic name="DDMStorageId" />
 			<basic name="recordSetId" />
 			<basic name="recordId" />
 			<basic name="version" />

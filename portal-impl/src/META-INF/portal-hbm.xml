@@ -1482,8 +1482,7 @@
 		<property name="versionUserName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="createDate" type="org.hibernate.type.TimestampType" />
 		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
-		<property name="classNameId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
-		<property name="classPK" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="DDMStorageId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="recordSetId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="version" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="displayIndex" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
@@ -1516,8 +1515,7 @@
 		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="userName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="createDate" type="org.hibernate.type.TimestampType" />
-		<property name="classNameId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
-		<property name="classPK" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="DDMStorageId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="recordSetId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="recordId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="version" type="com.liferay.portal.dao.orm.hibernate.StringType" />

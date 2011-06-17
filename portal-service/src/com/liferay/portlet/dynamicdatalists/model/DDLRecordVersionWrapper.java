@@ -183,48 +183,21 @@ public class DDLRecordVersionWrapper implements DDLRecordVersion {
 	}
 
 	/**
-	* Returns the fully qualified class name of this d d l record version.
+	* Returns the d d m storage ID of this d d l record version.
 	*
-	* @return the fully qualified class name of this d d l record version
+	* @return the d d m storage ID of this d d l record version
 	*/
-	public java.lang.String getClassName() {
-		return _ddlRecordVersion.getClassName();
+	public long getDDMStorageId() {
+		return _ddlRecordVersion.getDDMStorageId();
 	}
 
 	/**
-	* Returns the class name ID of this d d l record version.
+	* Sets the d d m storage ID of this d d l record version.
 	*
-	* @return the class name ID of this d d l record version
+	* @param DDMStorageId the d d m storage ID of this d d l record version
 	*/
-	public long getClassNameId() {
-		return _ddlRecordVersion.getClassNameId();
-	}
-
-	/**
-	* Sets the class name ID of this d d l record version.
-	*
-	* @param classNameId the class name ID of this d d l record version
-	*/
-	public void setClassNameId(long classNameId) {
-		_ddlRecordVersion.setClassNameId(classNameId);
-	}
-
-	/**
-	* Returns the class p k of this d d l record version.
-	*
-	* @return the class p k of this d d l record version
-	*/
-	public long getClassPK() {
-		return _ddlRecordVersion.getClassPK();
-	}
-
-	/**
-	* Sets the class p k of this d d l record version.
-	*
-	* @param classPK the class p k of this d d l record version
-	*/
-	public void setClassPK(long classPK) {
-		_ddlRecordVersion.setClassPK(classPK);
+	public void setDDMStorageId(long DDMStorageId) {
+		_ddlRecordVersion.setDDMStorageId(DDMStorageId);
 	}
 
 	/**

@@ -275,48 +275,21 @@ public class DDLRecordWrapper implements DDLRecord {
 	}
 
 	/**
-	* Returns the fully qualified class name of this d d l record.
+	* Returns the d d m storage ID of this d d l record.
 	*
-	* @return the fully qualified class name of this d d l record
+	* @return the d d m storage ID of this d d l record
 	*/
-	public java.lang.String getClassName() {
-		return _ddlRecord.getClassName();
+	public long getDDMStorageId() {
+		return _ddlRecord.getDDMStorageId();
 	}
 
 	/**
-	* Returns the class name ID of this d d l record.
+	* Sets the d d m storage ID of this d d l record.
 	*
-	* @return the class name ID of this d d l record
+	* @param DDMStorageId the d d m storage ID of this d d l record
 	*/
-	public long getClassNameId() {
-		return _ddlRecord.getClassNameId();
-	}
-
-	/**
-	* Sets the class name ID of this d d l record.
-	*
-	* @param classNameId the class name ID of this d d l record
-	*/
-	public void setClassNameId(long classNameId) {
-		_ddlRecord.setClassNameId(classNameId);
-	}
-
-	/**
-	* Returns the class p k of this d d l record.
-	*
-	* @return the class p k of this d d l record
-	*/
-	public long getClassPK() {
-		return _ddlRecord.getClassPK();
-	}
-
-	/**
-	* Sets the class p k of this d d l record.
-	*
-	* @param classPK the class p k of this d d l record
-	*/
-	public void setClassPK(long classPK) {
-		_ddlRecord.setClassPK(classPK);
+	public void setDDMStorageId(long DDMStorageId) {
+		_ddlRecord.setDDMStorageId(DDMStorageId);
 	}
 
 	/**

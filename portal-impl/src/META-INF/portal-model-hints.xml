@@ -1394,8 +1394,7 @@
 		<field name="versionUserName" type="String" />
 		<field name="createDate" type="Date" />
 		<field name="modifiedDate" type="Date" />
-		<field name="classNameId" type="long" />
-		<field name="classPK" type="long" />
+		<field name="DDMStorageId" type="long" />
 		<field name="recordSetId" type="long" />
 		<field name="version" type="String" />
 		<field name="displayIndex" type="int" />
@@ -1429,8 +1428,7 @@
 		<field name="userId" type="long" />
 		<field name="userName" type="String" />
 		<field name="createDate" type="Date" />
-		<field name="classNameId" type="long" />
-		<field name="classPK" type="long" />
+		<field name="DDMStorageId" type="long" />
 		<field name="recordSetId" type="long" />
 		<field name="recordId" type="long" />
 		<field name="version" type="String" />

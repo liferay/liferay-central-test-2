@@ -16,7 +16,6 @@ package com.liferay.portlet.dynamicdatalists.model;
 
 import com.liferay.portal.kernel.bean.AutoEscape;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.model.AttachedModel;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.model.WorkflowedModel;
 import com.liferay.portal.service.ServiceContext;
@@ -40,8 +39,8 @@ import java.util.Date;
  * @see com.liferay.portlet.dynamicdatalists.model.impl.DDLRecordVersionModelImpl
  * @generated
  */
-public interface DDLRecordVersionModel extends AttachedModel,
-	BaseModel<DDLRecordVersion>, WorkflowedModel {
+public interface DDLRecordVersionModel extends BaseModel<DDLRecordVersion>,
+	WorkflowedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
@@ -163,39 +162,18 @@ public interface DDLRecordVersionModel extends AttachedModel,
 	public void setCreateDate(Date createDate);
 
 	/**
-	 * Returns the fully qualified class name of this d d l record version.
+	 * Returns the d d m storage ID of this d d l record version.
 	 *
-	 * @return the fully qualified class name of this d d l record version
+	 * @return the d d m storage ID of this d d l record version
 	 */
-	public String getClassName();
+	public long getDDMStorageId();
 
 	/**
-	 * Returns the class name ID of this d d l record version.
+	 * Sets the d d m storage ID of this d d l record version.
 	 *
-	 * @return the class name ID of this d d l record version
+	 * @param DDMStorageId the d d m storage ID of this d d l record version
 	 */
-	public long getClassNameId();
-
-	/**
-	 * Sets the class name ID of this d d l record version.
-	 *
-	 * @param classNameId the class name ID of this d d l record version
-	 */
-	public void setClassNameId(long classNameId);
-
-	/**
-	 * Returns the class p k of this d d l record version.
-	 *
-	 * @return the class p k of this d d l record version
-	 */
-	public long getClassPK();
-
-	/**
-	 * Sets the class p k of this d d l record version.
-	 *
-	 * @param classPK the class p k of this d d l record version
-	 */
-	public void setClassPK(long classPK);
+	public void setDDMStorageId(long DDMStorageId);
 
 	/**
 	 * Returns the record set ID of this d d l record version.

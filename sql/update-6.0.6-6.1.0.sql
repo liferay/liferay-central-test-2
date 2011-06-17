@@ -36,8 +36,7 @@ create table DDLRecord (
 	versionUserName VARCHAR(75) null,
 	createDate DATE null,
 	modifiedDate DATE null,
-	classNameId LONG,
-	classPK LONG,
+	DDMStorageId LONG,
 	recordSetId LONG,
 	version VARCHAR(75) null,
 	displayIndex INTEGER

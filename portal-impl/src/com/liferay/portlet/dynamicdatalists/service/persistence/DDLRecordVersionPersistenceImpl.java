@@ -384,8 +384,7 @@ public class DDLRecordVersionPersistenceImpl extends BasePersistenceImpl<DDLReco
 		ddlRecordVersionImpl.setUserId(ddlRecordVersion.getUserId());
 		ddlRecordVersionImpl.setUserName(ddlRecordVersion.getUserName());
 		ddlRecordVersionImpl.setCreateDate(ddlRecordVersion.getCreateDate());
-		ddlRecordVersionImpl.setClassNameId(ddlRecordVersion.getClassNameId());
-		ddlRecordVersionImpl.setClassPK(ddlRecordVersion.getClassPK());
+		ddlRecordVersionImpl.setDDMStorageId(ddlRecordVersion.getDDMStorageId());
 		ddlRecordVersionImpl.setRecordSetId(ddlRecordVersion.getRecordSetId());
 		ddlRecordVersionImpl.setRecordId(ddlRecordVersion.getRecordId());
 		ddlRecordVersionImpl.setVersion(ddlRecordVersion.getVersion());

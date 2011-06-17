@@ -88,9 +88,7 @@ public class DDLRecordPersistenceTest extends BasePersistenceTestCase {
 
 		newDDLRecord.setModifiedDate(nextDate());
 
-		newDDLRecord.setClassNameId(nextLong());
-
-		newDDLRecord.setClassPK(nextLong());
+		newDDLRecord.setDDMStorageId(nextLong());
 
 		newDDLRecord.setRecordSetId(nextLong());
 
@@ -117,9 +115,8 @@ public class DDLRecordPersistenceTest extends BasePersistenceTestCase {
 			Time.getShortTimestamp(newDDLRecord.getCreateDate()));
 		assertEquals(Time.getShortTimestamp(existingDDLRecord.getModifiedDate()),
 			Time.getShortTimestamp(newDDLRecord.getModifiedDate()));
-		assertEquals(existingDDLRecord.getClassNameId(),
-			newDDLRecord.getClassNameId());
-		assertEquals(existingDDLRecord.getClassPK(), newDDLRecord.getClassPK());
+		assertEquals(existingDDLRecord.getDDMStorageId(),
+			newDDLRecord.getDDMStorageId());
 		assertEquals(existingDDLRecord.getRecordSetId(),
 			newDDLRecord.getRecordSetId());
 		assertEquals(existingDDLRecord.getVersion(), newDDLRecord.getVersion());
@@ -270,9 +267,7 @@ public class DDLRecordPersistenceTest extends BasePersistenceTestCase {
 
 		ddlRecord.setModifiedDate(nextDate());
 
-		ddlRecord.setClassNameId(nextLong());
-
-		ddlRecord.setClassPK(nextLong());
+		ddlRecord.setDDMStorageId(nextLong());
 
 		ddlRecord.setRecordSetId(nextLong());
 
