@@ -340,6 +340,29 @@ public class DDLRecordLocalServiceWrapper implements DDLRecordLocalService {
 		return _ddlRecordLocalService.getRecordVersion(recordId, version);
 	}
 
+	public int getRecordVersionsCount(long recordId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _ddlRecordLocalService.getRecordVersionsCount(recordId);
+	}
+
+	public java.util.List<com.liferay.portlet.dynamicdatalists.model.DDLRecordVersion> getRecordVersions(
+		long recordId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _ddlRecordLocalService.getRecordVersions(recordId, start, end,
+			orderByComparator);
+	}
+
+	public void revertRecordVersion(long recordId, java.lang.String version,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		_ddlRecordLocalService.revertRecordVersion(recordId, version,
+			serviceContext);
+	}
+
 	public void updateAsset(long userId,
 		com.liferay.portlet.dynamicdatalists.model.DDLRecord record,
 		com.liferay.portlet.dynamicdatalists.model.DDLRecordVersion recordVersion,
