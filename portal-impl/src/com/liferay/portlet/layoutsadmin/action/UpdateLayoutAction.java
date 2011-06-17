@@ -220,6 +220,38 @@ public class UpdateLayoutAction extends JSONAction {
 		return new String[] {String.valueOf(layout.getLayoutId()), layoutURL};
 	}
 
+	/**
+	 * @see com.liferay.portlet.portletconfiguration.action.EditScopeAction#getPortletTitle
+	 */
+	protected String getPortletTitle(
+		HttpServletRequest request, String portletId,
+		javax.portlet.PortletPreferences preferences) {
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		String portletTitle = PortletConfigurationUtil.getPortletTitle(
+			preferences, themeDisplay.getLanguageId());
+
+		if (Validator.isNull(portletTitle)) {
+			ServletContext servletContext =
+				(ServletContext)request.getAttribute(WebKeys.CTX);
+
+			PortletConfig portletConfig =
+				PortletConfigFactoryUtil.create(
+					PortletLocalServiceUtil.getPortletById(portletId),
+					servletContext);
+
+			ResourceBundle resourceBundle = portletConfig.getResourceBundle(
+				themeDisplay.getLocale());
+
+			portletTitle = resourceBundle.getString(
+				JavaConstants.JAVAX_PORTLET_TITLE);
+		}
+
+		return portletTitle;
+	}
+
 	protected void updateDisplayOrder(HttpServletRequest request)
 		throws Exception {
 
@@ -242,8 +274,8 @@ public class UpdateLayoutAction extends JSONAction {
 		String name = ParamUtil.getString(request, "name");
 		String languageId = ParamUtil.getString(request, "languageId");
 
-		LayoutLocalServiceUtil.updateScopedPortletNames(
-			groupId, privateLayout, layoutId, name, languageId);
+		updateScopedPortletNames(
+			request, groupId, privateLayout, layoutId, name, languageId);
 
 		if (plid <= 0) {
 			LayoutServiceUtil.updateName(
@@ -293,6 +325,51 @@ public class UpdateLayoutAction extends JSONAction {
 		}
 		else {
 			LayoutServiceUtil.updatePriority(plid, priority);
+		}
+	}
+
+	/**
+	 * @see com.liferay.portlet.portletconfiguration.action.EditScopeAction#updateScope
+	 */
+	protected void updateScopedPortletNames(
+			HttpServletRequest request, long groupId, boolean privateLayout,
+			long layoutId, String name, String languageId)
+		throws Exception {
+
+		Layout layout = LayoutLocalServiceUtil.getLayout(
+			groupId, privateLayout, layoutId);
+
+		List<PortletPreferences> portletPreferencesList =
+			PortletPreferencesLocalServiceUtil.getPortletPreferencesByPlid(
+				layout.getPlid());
+
+		for (PortletPreferences portletPreferences : portletPreferencesList) {
+			String portletId = portletPreferences.getPortletId();
+
+			javax.portlet.PortletPreferences preferences =
+				PortletPreferencesFactoryUtil.getLayoutPortletSetup(
+					layout, portletId);
+
+			String scopeLayoutUuid = GetterUtil.getString(
+				preferences.getValue("lfrScopeLayoutUuid", null));
+
+			if (layout.getUuid().equals(scopeLayoutUuid)) {
+				String portletTitle = getPortletTitle(
+					request, portletId, preferences);
+
+				String newPortletTitle = PortalUtil.getNewPortletTitle(
+					portletTitle, layout.getName(languageId), name);
+
+				if (!newPortletTitle.equals(portletTitle)) {
+					preferences.setValue(
+						"portlet-setup-title-" + languageId, newPortletTitle);
+					preferences.setValue(
+						"portlet-setup-use-custom-title",
+						Boolean.TRUE.toString());
+				}
+
+				preferences.store();
+			}
 		}
 	}
 
