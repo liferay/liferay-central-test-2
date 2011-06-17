@@ -53,7 +53,7 @@
 		</permissions>
 	</model-resource>
 	<model-resource>
-		<model-name>com.liferay.portlet.documentlibrary.model.DLDocumentType</model-name>
+		<model-name>com.liferay.portlet.documentlibrary.model.DLFileEntryType</model-name>
 		<portlet-ref>
 			<portlet-name>20</portlet-name>
 		</portlet-ref>

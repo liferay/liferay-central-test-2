@@ -51,10 +51,10 @@ import com.liferay.portlet.documentlibrary.DuplicateFolderNameException;
 import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
 import com.liferay.portlet.documentlibrary.NoSuchFileVersionException;
 import com.liferay.portlet.documentlibrary.NoSuchFolderException;
-import com.liferay.portlet.documentlibrary.model.DLDocumentMetadataSet;
-import com.liferay.portlet.documentlibrary.model.DLDocumentType;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFileEntryConstants;
+import com.liferay.portlet.documentlibrary.model.DLFileEntryMetadata;
+import com.liferay.portlet.documentlibrary.model.DLFileEntryType;
 import com.liferay.portlet.documentlibrary.model.DLFileVersion;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
@@ -113,11 +113,11 @@ public class DLFileEntryLocalServiceImpl
 			counterLocalService.increment(DLFileEntry.class.getName()));
 		String extension = getExtension(title, serviceContext);
 
-		Long documentTypeId = (Long)serviceContext.getAttribute(
-			"documentTypeId");
+		Long fileEntryTypeId = (Long)serviceContext.getAttribute(
+			"fileEntryTypeId");
 
-		if (documentTypeId == null) {
-			documentTypeId = 0L;
+		if (fileEntryTypeId == null) {
+			fileEntryTypeId = 0L;
 		}
 
 		Date now = new Date();
@@ -144,7 +144,7 @@ public class DLFileEntryLocalServiceImpl
 		dlFileEntry.setMimeType(mimeType);
 		dlFileEntry.setTitle(title);
 		dlFileEntry.setDescription(description);
-		dlFileEntry.setDocumentTypeId(documentTypeId);
+		dlFileEntry.setFileEntryTypeId(fileEntryTypeId);
 		dlFileEntry.setVersion(DLFileEntryConstants.DEFAULT_VERSION);
 		dlFileEntry.setSize(size);
 		dlFileEntry.setReadCount(DLFileEntryConstants.DEFAULT_READ_COUNT);
@@ -171,7 +171,7 @@ public class DLFileEntryLocalServiceImpl
 		DLFileVersion dlFileVersion = addFileVersion(
 			user, dlFileEntry, serviceContext.getModifiedDate(now), extension,
 			mimeType, title, description, null, StringPool.BLANK,
-			documentTypeId, DLFileEntryConstants.DEFAULT_VERSION, size,
+			fileEntryTypeId, DLFileEntryConstants.DEFAULT_VERSION, size,
 			WorkflowConstants.STATUS_DRAFT, serviceContext);
 
 		// Folder
@@ -410,9 +410,9 @@ public class DLFileEntryLocalServiceImpl
 
 			HashMap<Long, Fields> fieldsMap = new HashMap<Long, Fields>();
 
-			if (dlFileVersion.getDocumentTypeId() > 0) {
+			if (dlFileVersion.getFileEntryTypeId() > 0) {
 				fieldsMap = getDocumentMetadataFieldsMap(
-					dlFileVersion.getDocumentTypeId(),
+					dlFileVersion.getFileEntryTypeId(),
 					dlFileVersion.getFileVersionId());
 			}
 
@@ -423,7 +423,7 @@ public class DLFileEntryLocalServiceImpl
 				dlFileVersion.getMimeType(), dlFileVersion.getTitle(),
 				dlFileVersion.getDescription(), dlFileVersion.getChangeLog(),
 				dlFileVersion.getExtraSettings(),
-				dlFileVersion.getDocumentTypeId(),
+				dlFileVersion.getFileEntryTypeId(),
 				DLFileEntryConstants.PRIVATE_WORKING_COPY_VERSION,
 				dlFileVersion.getSize(), WorkflowConstants.STATUS_DRAFT,
 				serviceContext);
@@ -1037,7 +1037,7 @@ public class DLFileEntryLocalServiceImpl
 	protected DLFileVersion addFileVersion(
 			User user, DLFileEntry dlFileEntry, Date modifiedDate,
 			String extension, String mimeType, String title, String description,
-			String changeLog, String extraSettings, long documentTypeId,
+			String changeLog, String extraSettings, long fileEntryTypeId,
 			String version, long size, int status,
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
@@ -1069,7 +1069,7 @@ public class DLFileEntryLocalServiceImpl
 		dlFileVersion.setDescription(description);
 		dlFileVersion.setChangeLog(changeLog);
 		dlFileVersion.setExtraSettings(extraSettings);
-		dlFileVersion.setDocumentTypeId(documentTypeId);
+		dlFileVersion.setFileEntryTypeId(fileEntryTypeId);
 		dlFileVersion.setVersion(version);
 		dlFileVersion.setSize(size);
 		dlFileVersion.setStatus(status);
@@ -1083,9 +1083,10 @@ public class DLFileEntryLocalServiceImpl
 		Map<String, Fields> fieldsMap =
 			(Map<String, Fields>)serviceContext.getAttribute("fieldsMap");
 
-		if (documentTypeId > 0) {
-			dlDocumentMetadataSetLocalService.updateDocumentMetadataSets(
-				documentTypeId, fileVersionId, fieldsMap, serviceContext);
+		if (fileEntryTypeId > 0) {
+			dlFileEntryMetadataLocalService.updateFileEntryMetadata(
+				fileEntryTypeId, dlFileEntry.getFileEntryId(), fileVersionId,
+				fieldsMap, serviceContext);
 		}
 
 		return dlFileVersion;
@@ -1193,9 +1194,6 @@ public class DLFileEntryLocalServiceImpl
 		for (DLFileVersion dlFileVersion : dlFileVersions) {
 			dlFileVersionPersistence.remove(dlFileVersion);
 
-			dlDocumentMetadataSetLocalService.deleteDocumentMetadataSets(
-				dlFileVersion.getFileVersionId());
-
 			expandoValueLocalService.deleteValues(
 				DLFileVersion.class.getName(),
 				dlFileVersion.getFileVersionId());
@@ -1205,6 +1203,11 @@ public class DLFileEntryLocalServiceImpl
 
 		expandoValueLocalService.deleteValues(
 			DLFileEntry.class.getName(), dlFileEntry.getFileEntryId());
+
+		// File entry metadata
+
+		dlFileEntryMetadataLocalService.deleteFileEntryMetadata(
+			dlFileEntry.getFileEntryId());
 
 		// Lock
 
@@ -1231,24 +1234,24 @@ public class DLFileEntryLocalServiceImpl
 	}
 
 	protected HashMap<Long, Fields> getDocumentMetadataFieldsMap(
-			long documentTypeId, long fileVersionId)
+			long fileEntryTypeId, long fileVersionId)
 		throws PortalException, SystemException {
 
 		HashMap<Long, Fields> fieldsMap = new HashMap<Long, Fields>();
 
-		DLDocumentType documentType =
-			dlDocumentTypeLocalService.getDocumentType(documentTypeId);
+		DLFileEntryType fileEntryType =
+			dlFileEntryTypeLocalService.getFileEntryType(fileEntryTypeId);
 
-		List<DDMStructure> ddmStructures = documentType.getDDMStructures();
+		List<DDMStructure> ddmStructures = fileEntryType.getDDMStructures();
 
 		for (DDMStructure ddmStructure : ddmStructures) {
-			DLDocumentMetadataSet dlDocumentMetadataSet =
-				dlDocumentMetadataSetLocalService.getDocumentMetadataSet(
+			DLFileEntryMetadata dlFileEntryMetadata =
+				dlFileEntryMetadataLocalService.getFileEntryMetadata(
 					ddmStructure.getStructureId(),
 					fileVersionId);
 
 			Fields fields = StorageEngineUtil.getFields(
-				dlDocumentMetadataSet.getClassPK());
+				dlFileEntryMetadata.getClassPK());
 
 			fieldsMap.put(ddmStructure.getStructureId(), fields);
 		}
@@ -1515,11 +1518,11 @@ public class DLFileEntryLocalServiceImpl
 			}
 		}
 
-		Long documentTypeId = (Long)serviceContext.getAttribute(
-			"documentTypeId");
+		Long fileEntryTypeId = (Long)serviceContext.getAttribute(
+			"fileEntryTypeId");
 
-		if (documentTypeId == null) {
-			documentTypeId = 0L;
+		if (fileEntryTypeId == null) {
+			fileEntryTypeId = 0L;
 		}
 
 		Date now = new Date();
@@ -1541,7 +1544,7 @@ public class DLFileEntryLocalServiceImpl
 
 		updateFileVersion(
 			user, dlFileVersion, sourceFileName, extension,mimeType, title,
-			description, changeLog, extraSettings, documentTypeId, version,
+			description, changeLog, extraSettings, fileEntryTypeId, version,
 			size, dlFileVersion.getStatus(),
 			serviceContext.getModifiedDate(now), serviceContext);
 
@@ -1585,7 +1588,7 @@ public class DLFileEntryLocalServiceImpl
 	protected void updateFileVersion(
 			User user, DLFileVersion dlFileVersion, String sourceFileName,
 			String extension, String mimeType, String title, String description,
-			String changeLog, String extraSettings, long documentTypeId,
+			String changeLog, String extraSettings, long fileEntryTypeId,
 			String version, long size, int status, Date statusDate,
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
@@ -1599,7 +1602,7 @@ public class DLFileEntryLocalServiceImpl
 		dlFileVersion.setDescription(description);
 		dlFileVersion.setChangeLog(changeLog);
 		dlFileVersion.setExtraSettings(extraSettings);
-		dlFileVersion.setDocumentTypeId(documentTypeId);
+		dlFileVersion.setFileEntryTypeId(fileEntryTypeId);
 		dlFileVersion.setVersion(version);
 		dlFileVersion.setSize(size);
 		dlFileVersion.setStatus(status);
@@ -1613,9 +1616,10 @@ public class DLFileEntryLocalServiceImpl
 		Map<String, Fields> fieldsMap =
 			(Map<String, Fields>)serviceContext.getAttribute("fieldsMap");
 
-		if (documentTypeId > 0) {
-			dlDocumentMetadataSetLocalService.updateDocumentMetadataSets(
-				documentTypeId, dlFileVersion.getFileVersionId(), fieldsMap,
+		if (fileEntryTypeId > 0) {
+			dlFileEntryMetadataLocalService.updateFileEntryMetadata(
+				fileEntryTypeId, dlFileVersion.getFileEntryId(),
+				dlFileVersion.getFileVersionId(), fieldsMap,
 				serviceContext);
 		}
 	}

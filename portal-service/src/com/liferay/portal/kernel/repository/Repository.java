@@ -83,7 +83,7 @@ public interface Repository {
 		throws SystemException;
 
 	public List<FileEntry> getFileEntries(
-			long folderId, long documentTypeId, int start, int end,
+			long folderId, long fileEntryTypeId, int start, int end,
 			OrderByComparator obc)
 		throws SystemException;
 
@@ -97,7 +97,7 @@ public interface Repository {
 	public int getFileEntriesCount(long folderId)
 		throws SystemException;
 
-	public int getFileEntriesCount(long folderId, long documentTypeId)
+	public int getFileEntriesCount(long folderId, long fileEntryTypeId)
 		throws SystemException;
 
 	public FileEntry getFileEntry(long fileEntryId)

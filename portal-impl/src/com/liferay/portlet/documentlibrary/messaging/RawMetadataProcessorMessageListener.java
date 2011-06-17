@@ -22,8 +22,8 @@ import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFileVersion;
-import com.liferay.portlet.documentlibrary.service.DLDocumentMetadataSetLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
+import com.liferay.portlet.documentlibrary.service.DLFileEntryMetadataLocalServiceUtil;
 import com.liferay.portlet.dynamicdatamapping.model.DDMStructure;
 import com.liferay.portlet.dynamicdatamapping.service.DDMStructureLocalServiceUtil;
 import com.liferay.portlet.dynamicdatamapping.storage.Fields;
@@ -61,9 +61,10 @@ public class RawMetadataProcessorMessageListener extends BaseMessageListener {
 		serviceContext.setScopeGroupId(dlFileEntry.getGroupId());
 		serviceContext.setUserId(dlFileEntry.getUserId());
 
-		DLDocumentMetadataSetLocalServiceUtil.updateDocumentMetadataSets(
+		DLFileEntryMetadataLocalServiceUtil.updateFileEntryMetadata(
 			dlFileEntry.getCompanyId(), ddmStructures, 0L,
-			dlFileVersion.getFileVersionId(), rawMetadataMap, serviceContext);
+			dlFileEntry.getFileEntryId(), dlFileVersion.getFileVersionId(),
+			rawMetadataMap, serviceContext);
 	}
 
 }

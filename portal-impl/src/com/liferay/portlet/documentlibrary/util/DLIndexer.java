@@ -133,7 +133,7 @@ public class DLIndexer extends BaseIndexer {
 
 		addSearchTerm(searchQuery, searchContext, Field.USER_NAME, true);
 
-		addSearchTerm(searchQuery, searchContext, "documentTypeId", false);
+		addSearchTerm(searchQuery, searchContext, "fileEntryTypeId", false);
 		addSearchTerm(searchQuery, searchContext, "extension", true);
 		addSearchTerm(searchQuery, searchContext, "path", true);
 
