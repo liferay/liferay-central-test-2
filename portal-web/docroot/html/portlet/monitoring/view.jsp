@@ -18,8 +18,16 @@
 
 <%
 String tabs2 = ParamUtil.getString(request, "tabs2");
+String tabs3 = ParamUtil.getString(request, "tabs3");
 
-String portletURLString = (String)request.getAttribute("view.jsp-portletURLString");
+PortletURL portletURL = renderResponse.createRenderURL();
+
+portletURL.setParameter("struts_action", "/monitoring/view");
+portletURL.setParameter("tabs1", tabs1);
+portletURL.setParameter("tabs2", tabs2);
+portletURL.setParameter("tabs3", tabs3);
+
+String portletURLString = portletURL.toString();
 %>
 
 <c:choose>

@@ -17,102 +17,116 @@
 <%@ include file="/html/portlet/enterprise_admin/init.jsp" %>
 
 <%
+String tabs2 = ParamUtil.getString(request, "tabs2");
+String tabs3 = ParamUtil.getString(request, "tabs3");
+
 PortletURL portletURL = renderResponse.createRenderURL();
 
 portletURL.setParameter("struts_action", "/roles_admin/view");
+portletURL.setParameter("tabs1", tabs1);
+portletURL.setParameter("tabs2", tabs2);
+portletURL.setParameter("tabs3", tabs3);
+
+pageContext.setAttribute("portletURL", portletURL);
+
+String portletURLString = portletURL.toString();
 %>
 
 <liferay-ui:error exception="<%= RequiredRoleException.class %>" message="you-cannot-delete-a-system-role" />
 
-<liferay-util:include page="/html/portlet/roles_admin/toolbar.jsp">
-	<liferay-util:param name="toolbarItem" value="view-all" />
-</liferay-util:include>
+<aui:form action="<%= portletURLString %>" method="get" name="fm">
+	<liferay-portlet:renderURLParams varImpl="portletURL" />
 
-<%
-RoleSearch searchContainer = new RoleSearch(renderRequest, portletURL);
+	<liferay-util:include page="/html/portlet/roles_admin/toolbar.jsp">
+		<liferay-util:param name="toolbarItem" value="view-all" />
+	</liferay-util:include>
 
-List headerNames = searchContainer.getHeaderNames();
+	<%
+	RoleSearch searchContainer = new RoleSearch(renderRequest, portletURL);
 
-headerNames.add(StringPool.BLANK);
-%>
+	List headerNames = searchContainer.getHeaderNames();
 
-<liferay-ui:search-form
-	page="/html/portlet/roles_admin/role_search.jsp"
-	searchContainer="<%= searchContainer %>"
-/>
+	headerNames.add(StringPool.BLANK);
+	%>
 
-<%
-RoleSearchTerms searchTerms = (RoleSearchTerms)searchContainer.getSearchTerms();
+	<liferay-ui:search-form
+		page="/html/portlet/roles_admin/role_search.jsp"
+		searchContainer="<%= searchContainer %>"
+	/>
 
-int total = RoleLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getKeywords(), searchTerms.getTypesObj());
+	<%
+	RoleSearchTerms searchTerms = (RoleSearchTerms)searchContainer.getSearchTerms();
 
-searchContainer.setTotal(total);
+	int total = RoleLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getKeywords(), searchTerms.getTypesObj());
 
-List results = RoleLocalServiceUtil.search(company.getCompanyId(), searchTerms.getKeywords(), searchTerms.getTypesObj(), searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator());
+	searchContainer.setTotal(total);
 
-searchContainer.setResults(results);
+	List results = RoleLocalServiceUtil.search(company.getCompanyId(), searchTerms.getKeywords(), searchTerms.getTypesObj(), searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator());
 
-portletURL.setParameter(searchContainer.getCurParam(), String.valueOf(searchContainer.getCur()));
-%>
+	searchContainer.setResults(results);
 
-<aui:input name="rolesRedirect" type="hidden" value="<%= portletURL.toString() %>" />
+	portletURL.setParameter(searchContainer.getCurParam(), String.valueOf(searchContainer.getCur()));
+	%>
 
-<div class="separator"><!-- --></div>
+	<aui:input name="rolesRedirect" type="hidden" value="<%= portletURL.toString() %>" />
 
-<%
-List resultRows = searchContainer.getResultRows();
+	<div class="separator"><!-- --></div>
 
-for (int i = 0; i < results.size(); i++) {
-	Role role = (Role)results.get(i);
+	<%
+	List resultRows = searchContainer.getResultRows();
 
-	role = role.toEscapedModel();
+	for (int i = 0; i < results.size(); i++) {
+		Role role = (Role)results.get(i);
 
-	ResultRow row = new ResultRow(role, role.getRoleId(), i);
+		role = role.toEscapedModel();
 
-	PortletURL rowURL = null;
+		ResultRow row = new ResultRow(role, role.getRoleId(), i);
 
-	if (RolePermissionUtil.contains(permissionChecker, role.getRoleId(), ActionKeys.UPDATE)) {
-		rowURL = renderResponse.createRenderURL();
+		PortletURL rowURL = null;
 
-		rowURL.setParameter("struts_action", "/roles_admin/edit_role");
-		rowURL.setParameter("redirect", searchContainer.getIteratorURL().toString());
-		rowURL.setParameter("roleId", String.valueOf(role.getRoleId()));
+		if (RolePermissionUtil.contains(permissionChecker, role.getRoleId(), ActionKeys.UPDATE)) {
+			rowURL = renderResponse.createRenderURL();
+
+			rowURL.setParameter("struts_action", "/roles_admin/edit_role");
+			rowURL.setParameter("redirect", searchContainer.getIteratorURL().toString());
+			rowURL.setParameter("roleId", String.valueOf(role.getRoleId()));
+		}
+
+		// Name
+
+		row.addText(HtmlUtil.escape(role.getTitle(locale)), rowURL);
+
+		// Type
+
+		row.addText(LanguageUtil.get(pageContext, role.getTypeLabel()), rowURL);
+
+		// Subtype
+
+		if ((PropsValues.ROLES_ORGANIZATION_SUBTYPES.length > 0) ||
+			(PropsValues.ROLES_REGULAR_SUBTYPES.length > 0) ||
+			(PropsValues.ROLES_SITE_SUBTYPES.length > 0)) {
+
+			row.addText(LanguageUtil.get(pageContext, role.getSubtype()), rowURL);
+		}
+
+		// Description
+
+		row.addText(role.getDescription(), rowURL);
+
+		// Action
+
+		row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/roles_admin/role_action.jsp");
+
+		// CSS
+
+		row.setClassName(RolesAdminUtil.getCssClassName(role));
+		row.setClassHoverName(RolesAdminUtil.getCssClassName(role));
+
+		// Add result row
+
+		resultRows.add(row);
 	}
+	%>
 
-	// Name
-
-	row.addText(HtmlUtil.escape(role.getTitle(locale)), rowURL);
-
-	// Type
-
-	row.addText(LanguageUtil.get(pageContext, role.getTypeLabel()), rowURL);
-
-	// Subtype
-
-	if ((PropsValues.ROLES_ORGANIZATION_SUBTYPES.length > 0) ||
-		(PropsValues.ROLES_REGULAR_SUBTYPES.length > 0) ||
-		(PropsValues.ROLES_SITE_SUBTYPES.length > 0)) {
-
-		row.addText(LanguageUtil.get(pageContext, role.getSubtype()), rowURL);
-	}
-
-	// Description
-
-	row.addText(role.getDescription(), rowURL);
-
-	// Action
-
-	row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/roles_admin/role_action.jsp");
-
-	// CSS
-
-	row.setClassName(RolesAdminUtil.getCssClassName(role));
-	row.setClassHoverName(RolesAdminUtil.getCssClassName(role));
-
-	// Add result row
-
-	resultRows.add(row);
-}
-%>
-
-<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
+	<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
+</aui:form>
