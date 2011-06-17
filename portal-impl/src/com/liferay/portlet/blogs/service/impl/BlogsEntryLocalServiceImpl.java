@@ -578,6 +578,13 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 		entry.setSmallImageURL(smallImageURL);
 
+		// Asset
+
+		updateAsset(
+			userId, entry, serviceContext.getAssetCategoryIds(),
+			serviceContext.getAssetTagNames(),
+			serviceContext.getAssetLinkEntryIds());
+
 		if (!entry.isPending()) {
 			entry.setStatus(WorkflowConstants.STATUS_DRAFT);
 		}
@@ -600,13 +607,6 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 		saveImages(
 			smallImage, entry.getSmallImageId(), smallFile, smallBytes);
-
-		// Asset
-
-		updateAsset(
-			userId, entry, serviceContext.getAssetCategoryIds(),
-			serviceContext.getAssetTagNames(),
-			serviceContext.getAssetLinkEntryIds());
 
 		// Workflow
 
