@@ -14,9 +14,6 @@
 
 package com.liferay.portal.service.persistence;
 
-import junit.framework.Test;
-import junit.framework.TestSuite;
-
 import com.liferay.counter.service.persistence.CounterPersistenceTest;
 import com.liferay.portlet.announcements.service.persistence.AnnouncementsDeliveryPersistenceTest;
 import com.liferay.portlet.announcements.service.persistence.AnnouncementsEntryPersistenceTest;
@@ -101,6 +98,9 @@ import com.liferay.portlet.softwarecatalog.service.persistence.SCProductVersionP
 import com.liferay.portlet.wiki.service.persistence.WikiNodePersistenceTest;
 import com.liferay.portlet.wiki.service.persistence.WikiPagePersistenceTest;
 import com.liferay.portlet.wiki.service.persistence.WikiPageResourcePersistenceTest;
+
+import junit.framework.Test;
+import junit.framework.TestSuite;
 
 /**
  * @author Brian Wing Shun Chan
