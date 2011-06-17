@@ -352,18 +352,18 @@ public interface DLFileEntryModel extends BaseModel<DLFileEntry>, GroupedModel {
 	public void setExtraSettings(String extraSettings);
 
 	/**
-	 * Returns the document type ID of this d l file entry.
+	 * Returns the file entry type ID of this d l file entry.
 	 *
-	 * @return the document type ID of this d l file entry
+	 * @return the file entry type ID of this d l file entry
 	 */
-	public long getDocumentTypeId();
+	public long getFileEntryTypeId();
 
 	/**
-	 * Sets the document type ID of this d l file entry.
+	 * Sets the file entry type ID of this d l file entry.
 	 *
-	 * @param documentTypeId the document type ID of this d l file entry
+	 * @param fileEntryTypeId the file entry type ID of this d l file entry
 	 */
-	public void setDocumentTypeId(long documentTypeId);
+	public void setFileEntryTypeId(long fileEntryTypeId);
 
 	/**
 	 * Returns the version of this d l file entry.

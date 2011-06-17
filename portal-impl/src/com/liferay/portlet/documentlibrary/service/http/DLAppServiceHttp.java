@@ -749,7 +749,7 @@ public class DLAppServiceHttp {
 
 	public static java.util.List<com.liferay.portal.kernel.repository.model.FileEntry> getFileEntries(
 		HttpPrincipal httpPrincipal, long repositoryId, long folderId,
-		long documentTypeId)
+		long fileEntryTypeId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
@@ -757,7 +757,7 @@ public class DLAppServiceHttp {
 					"getFileEntries", _getFileEntriesParameterTypes19);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
-					repositoryId, folderId, documentTypeId);
+					repositoryId, folderId, fileEntryTypeId);
 
 			Object returnObj = null;
 
@@ -787,7 +787,7 @@ public class DLAppServiceHttp {
 
 	public static java.util.List<com.liferay.portal.kernel.repository.model.FileEntry> getFileEntries(
 		HttpPrincipal httpPrincipal, long repositoryId, long folderId,
-		long documentTypeId, int start, int end)
+		long fileEntryTypeId, int start, int end)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
@@ -795,7 +795,7 @@ public class DLAppServiceHttp {
 					"getFileEntries", _getFileEntriesParameterTypes20);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
-					repositoryId, folderId, documentTypeId, start, end);
+					repositoryId, folderId, fileEntryTypeId, start, end);
 
 			Object returnObj = null;
 
@@ -825,7 +825,7 @@ public class DLAppServiceHttp {
 
 	public static java.util.List<com.liferay.portal.kernel.repository.model.FileEntry> getFileEntries(
 		HttpPrincipal httpPrincipal, long repositoryId, long folderId,
-		long documentTypeId, int start, int end,
+		long fileEntryTypeId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -834,7 +834,7 @@ public class DLAppServiceHttp {
 					"getFileEntries", _getFileEntriesParameterTypes21);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
-					repositoryId, folderId, documentTypeId, start, end, obc);
+					repositoryId, folderId, fileEntryTypeId, start, end, obc);
 
 			Object returnObj = null;
 
@@ -978,7 +978,7 @@ public class DLAppServiceHttp {
 	}
 
 	public static int getFileEntriesCount(HttpPrincipal httpPrincipal,
-		long repositoryId, long folderId, long documentTypeId)
+		long repositoryId, long folderId, long fileEntryTypeId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
@@ -986,7 +986,7 @@ public class DLAppServiceHttp {
 					"getFileEntriesCount", _getFileEntriesCountParameterTypes25);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
-					repositoryId, folderId, documentTypeId);
+					repositoryId, folderId, fileEntryTypeId);
 
 			Object returnObj = null;
 

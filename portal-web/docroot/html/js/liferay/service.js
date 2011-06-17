@@ -673,18 +673,6 @@ Liferay.Service.registerClass(
 );
 
 Liferay.Service.registerClass(
-	Liferay.Service.DL, "DLDocumentType",
-	{
-		addDocumentType: true,
-		deleteDocumentType: true,
-		getDocumentType: true,
-		getDocumentTypes: true,
-		getDocumentTypesCount: true,
-		updateDocumentType: true
-	}
-);
-
-Liferay.Service.registerClass(
 	Liferay.Service.DL, "DLFileEntry",
 	{
 		cancelCheckOut: true,
@@ -707,6 +695,18 @@ Liferay.Service.registerClass(
 		refreshFileEntryLock: true,
 		revertFileEntry: true,
 		verifyFileEntryCheckOut: true
+	}
+);
+
+Liferay.Service.registerClass(
+	Liferay.Service.DL, "DLFileEntryType",
+	{
+		addFileEntryType: true,
+		deleteFileEntryType: true,
+		getFileEntryType: true,
+		getFileEntryTypes: true,
+		getFileEntryTypesCount: true,
+		updateFileEntryType: true
 	}
 );
 

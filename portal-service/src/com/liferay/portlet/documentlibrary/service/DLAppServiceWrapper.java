@@ -181,29 +181,29 @@ public class DLAppServiceWrapper implements DLAppService {
 	}
 
 	public java.util.List<com.liferay.portal.kernel.repository.model.FileEntry> getFileEntries(
-		long repositoryId, long folderId, long documentTypeId)
+		long repositoryId, long folderId, long fileEntryTypeId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _dlAppService.getFileEntries(repositoryId, folderId,
-			documentTypeId);
+			fileEntryTypeId);
 	}
 
 	public java.util.List<com.liferay.portal.kernel.repository.model.FileEntry> getFileEntries(
-		long repositoryId, long folderId, long documentTypeId, int start,
+		long repositoryId, long folderId, long fileEntryTypeId, int start,
 		int end)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _dlAppService.getFileEntries(repositoryId, folderId,
-			documentTypeId, start, end);
+			fileEntryTypeId, start, end);
 	}
 
 	public java.util.List<com.liferay.portal.kernel.repository.model.FileEntry> getFileEntries(
-		long repositoryId, long folderId, long documentTypeId, int start,
+		long repositoryId, long folderId, long fileEntryTypeId, int start,
 		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _dlAppService.getFileEntries(repositoryId, folderId,
-			documentTypeId, start, end, obc);
+			fileEntryTypeId, start, end, obc);
 	}
 
 	public java.util.List<java.lang.Object> getFileEntriesAndFileShortcuts(
@@ -229,11 +229,11 @@ public class DLAppServiceWrapper implements DLAppService {
 	}
 
 	public int getFileEntriesCount(long repositoryId, long folderId,
-		long documentTypeId)
+		long fileEntryTypeId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _dlAppService.getFileEntriesCount(repositoryId, folderId,
-			documentTypeId);
+			fileEntryTypeId);
 	}
 
 	public com.liferay.portal.kernel.repository.model.FileEntry getFileEntry(

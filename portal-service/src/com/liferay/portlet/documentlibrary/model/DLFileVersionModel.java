@@ -280,18 +280,18 @@ public interface DLFileVersionModel extends BaseModel<DLFileVersion>,
 	public void setExtraSettings(String extraSettings);
 
 	/**
-	 * Returns the document type ID of this d l file version.
+	 * Returns the file entry type ID of this d l file version.
 	 *
-	 * @return the document type ID of this d l file version
+	 * @return the file entry type ID of this d l file version
 	 */
-	public long getDocumentTypeId();
+	public long getFileEntryTypeId();
 
 	/**
-	 * Sets the document type ID of this d l file version.
+	 * Sets the file entry type ID of this d l file version.
 	 *
-	 * @param documentTypeId the document type ID of this d l file version
+	 * @param fileEntryTypeId the file entry type ID of this d l file version
 	 */
-	public void setDocumentTypeId(long documentTypeId);
+	public void setFileEntryTypeId(long fileEntryTypeId);
 
 	/**
 	 * Returns the version of this d l file version.

@@ -197,18 +197,18 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 				Long.class.getName(), Long.class.getName(),
 				String.class.getName()
 			});
-	public static final FinderPath FINDER_PATH_FIND_BY_G_F_D = new FinderPath(DLFileEntryModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_FIND_BY_G_F_F = new FinderPath(DLFileEntryModelImpl.ENTITY_CACHE_ENABLED,
 			DLFileEntryModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
-			"findByG_F_D",
+			"findByG_F_F",
 			new String[] {
 				Long.class.getName(), Long.class.getName(), Long.class.getName(),
 				
 			"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			});
-	public static final FinderPath FINDER_PATH_COUNT_BY_G_F_D = new FinderPath(DLFileEntryModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_COUNT_BY_G_F_F = new FinderPath(DLFileEntryModelImpl.ENTITY_CACHE_ENABLED,
 			DLFileEntryModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
-			"countByG_F_D",
+			"countByG_F_F",
 			new String[] {
 				Long.class.getName(), Long.class.getName(), Long.class.getName()
 			});
@@ -602,7 +602,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 		dlFileEntryImpl.setTitle(dlFileEntry.getTitle());
 		dlFileEntryImpl.setDescription(dlFileEntry.getDescription());
 		dlFileEntryImpl.setExtraSettings(dlFileEntry.getExtraSettings());
-		dlFileEntryImpl.setDocumentTypeId(dlFileEntry.getDocumentTypeId());
+		dlFileEntryImpl.setFileEntryTypeId(dlFileEntry.getFileEntryTypeId());
 		dlFileEntryImpl.setVersion(dlFileEntry.getVersion());
 		dlFileEntryImpl.setSize(dlFileEntry.getSize());
 		dlFileEntryImpl.setReadCount(dlFileEntry.getReadCount());
@@ -5176,22 +5176,22 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	}
 
 	/**
-	 * Returns all the d l file entries where groupId = &#63; and folderId = &#63; and documentTypeId = &#63;.
+	 * Returns all the d l file entries where groupId = &#63; and folderId = &#63; and fileEntryTypeId = &#63;.
 	 *
 	 * @param groupId the group ID
 	 * @param folderId the folder ID
-	 * @param documentTypeId the document type ID
+	 * @param fileEntryTypeId the file entry type ID
 	 * @return the matching d l file entries
 	 * @throws SystemException if a system exception occurred
 	 */
-	public List<DLFileEntry> findByG_F_D(long groupId, long folderId,
-		long documentTypeId) throws SystemException {
-		return findByG_F_D(groupId, folderId, documentTypeId,
+	public List<DLFileEntry> findByG_F_F(long groupId, long folderId,
+		long fileEntryTypeId) throws SystemException {
+		return findByG_F_F(groupId, folderId, fileEntryTypeId,
 			QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
 	/**
-	 * Returns a range of all the d l file entries where groupId = &#63; and folderId = &#63; and documentTypeId = &#63;.
+	 * Returns a range of all the d l file entries where groupId = &#63; and folderId = &#63; and fileEntryTypeId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
@@ -5199,19 +5199,19 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 *
 	 * @param groupId the group ID
 	 * @param folderId the folder ID
-	 * @param documentTypeId the document type ID
+	 * @param fileEntryTypeId the file entry type ID
 	 * @param start the lower bound of the range of d l file entries
 	 * @param end the upper bound of the range of d l file entries (not inclusive)
 	 * @return the range of matching d l file entries
 	 * @throws SystemException if a system exception occurred
 	 */
-	public List<DLFileEntry> findByG_F_D(long groupId, long folderId,
-		long documentTypeId, int start, int end) throws SystemException {
-		return findByG_F_D(groupId, folderId, documentTypeId, start, end, null);
+	public List<DLFileEntry> findByG_F_F(long groupId, long folderId,
+		long fileEntryTypeId, int start, int end) throws SystemException {
+		return findByG_F_F(groupId, folderId, fileEntryTypeId, start, end, null);
 	}
 
 	/**
-	 * Returns an ordered range of all the d l file entries where groupId = &#63; and folderId = &#63; and documentTypeId = &#63;.
+	 * Returns an ordered range of all the d l file entries where groupId = &#63; and folderId = &#63; and fileEntryTypeId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
@@ -5219,24 +5219,24 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 *
 	 * @param groupId the group ID
 	 * @param folderId the folder ID
-	 * @param documentTypeId the document type ID
+	 * @param fileEntryTypeId the file entry type ID
 	 * @param start the lower bound of the range of d l file entries
 	 * @param end the upper bound of the range of d l file entries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching d l file entries
 	 * @throws SystemException if a system exception occurred
 	 */
-	public List<DLFileEntry> findByG_F_D(long groupId, long folderId,
-		long documentTypeId, int start, int end,
+	public List<DLFileEntry> findByG_F_F(long groupId, long folderId,
+		long fileEntryTypeId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				groupId, folderId, documentTypeId,
+				groupId, folderId, fileEntryTypeId,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
 			};
 
-		List<DLFileEntry> list = (List<DLFileEntry>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_G_F_D,
+		List<DLFileEntry> list = (List<DLFileEntry>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_G_F_F,
 				finderArgs, this);
 
 		if (list == null) {
@@ -5252,11 +5252,11 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 
 			query.append(_SQL_SELECT_DLFILEENTRY_WHERE);
 
-			query.append(_FINDER_COLUMN_G_F_D_GROUPID_2);
+			query.append(_FINDER_COLUMN_G_F_F_GROUPID_2);
 
-			query.append(_FINDER_COLUMN_G_F_D_FOLDERID_2);
+			query.append(_FINDER_COLUMN_G_F_F_FOLDERID_2);
 
-			query.append(_FINDER_COLUMN_G_F_D_DOCUMENTTYPEID_2);
+			query.append(_FINDER_COLUMN_G_F_F_FILEENTRYTYPEID_2);
 
 			if (orderByComparator != null) {
 				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
@@ -5282,7 +5282,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 
 				qPos.add(folderId);
 
-				qPos.add(documentTypeId);
+				qPos.add(fileEntryTypeId);
 
 				list = (List<DLFileEntry>)QueryUtil.list(q, getDialect(),
 						start, end);
@@ -5292,13 +5292,13 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 			}
 			finally {
 				if (list == null) {
-					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_G_F_D,
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_G_F_F,
 						finderArgs);
 				}
 				else {
 					cacheResult(list);
 
-					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_G_F_D,
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_G_F_F,
 						finderArgs, list);
 				}
 
@@ -5310,7 +5310,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	}
 
 	/**
-	 * Returns the first d l file entry in the ordered set where groupId = &#63; and folderId = &#63; and documentTypeId = &#63;.
+	 * Returns the first d l file entry in the ordered set where groupId = &#63; and folderId = &#63; and fileEntryTypeId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
@@ -5318,17 +5318,17 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 *
 	 * @param groupId the group ID
 	 * @param folderId the folder ID
-	 * @param documentTypeId the document type ID
+	 * @param fileEntryTypeId the file entry type ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching d l file entry
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileEntryException if a matching d l file entry could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public DLFileEntry findByG_F_D_First(long groupId, long folderId,
-		long documentTypeId, OrderByComparator orderByComparator)
+	public DLFileEntry findByG_F_F_First(long groupId, long folderId,
+		long fileEntryTypeId, OrderByComparator orderByComparator)
 		throws NoSuchFileEntryException, SystemException {
-		List<DLFileEntry> list = findByG_F_D(groupId, folderId, documentTypeId,
-				0, 1, orderByComparator);
+		List<DLFileEntry> list = findByG_F_F(groupId, folderId,
+				fileEntryTypeId, 0, 1, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(8);
@@ -5341,8 +5341,8 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 			msg.append(", folderId=");
 			msg.append(folderId);
 
-			msg.append(", documentTypeId=");
-			msg.append(documentTypeId);
+			msg.append(", fileEntryTypeId=");
+			msg.append(fileEntryTypeId);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -5354,7 +5354,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	}
 
 	/**
-	 * Returns the last d l file entry in the ordered set where groupId = &#63; and folderId = &#63; and documentTypeId = &#63;.
+	 * Returns the last d l file entry in the ordered set where groupId = &#63; and folderId = &#63; and fileEntryTypeId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
@@ -5362,19 +5362,19 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 *
 	 * @param groupId the group ID
 	 * @param folderId the folder ID
-	 * @param documentTypeId the document type ID
+	 * @param fileEntryTypeId the file entry type ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching d l file entry
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileEntryException if a matching d l file entry could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public DLFileEntry findByG_F_D_Last(long groupId, long folderId,
-		long documentTypeId, OrderByComparator orderByComparator)
+	public DLFileEntry findByG_F_F_Last(long groupId, long folderId,
+		long fileEntryTypeId, OrderByComparator orderByComparator)
 		throws NoSuchFileEntryException, SystemException {
-		int count = countByG_F_D(groupId, folderId, documentTypeId);
+		int count = countByG_F_F(groupId, folderId, fileEntryTypeId);
 
-		List<DLFileEntry> list = findByG_F_D(groupId, folderId, documentTypeId,
-				count - 1, count, orderByComparator);
+		List<DLFileEntry> list = findByG_F_F(groupId, folderId,
+				fileEntryTypeId, count - 1, count, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(8);
@@ -5387,8 +5387,8 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 			msg.append(", folderId=");
 			msg.append(folderId);
 
-			msg.append(", documentTypeId=");
-			msg.append(documentTypeId);
+			msg.append(", fileEntryTypeId=");
+			msg.append(fileEntryTypeId);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -5400,7 +5400,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	}
 
 	/**
-	 * Returns the d l file entries before and after the current d l file entry in the ordered set where groupId = &#63; and folderId = &#63; and documentTypeId = &#63;.
+	 * Returns the d l file entries before and after the current d l file entry in the ordered set where groupId = &#63; and folderId = &#63; and fileEntryTypeId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
@@ -5409,14 +5409,14 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @param fileEntryId the primary key of the current d l file entry
 	 * @param groupId the group ID
 	 * @param folderId the folder ID
-	 * @param documentTypeId the document type ID
+	 * @param fileEntryTypeId the file entry type ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next d l file entry
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileEntryException if a d l file entry with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public DLFileEntry[] findByG_F_D_PrevAndNext(long fileEntryId,
-		long groupId, long folderId, long documentTypeId,
+	public DLFileEntry[] findByG_F_F_PrevAndNext(long fileEntryId,
+		long groupId, long folderId, long fileEntryTypeId,
 		OrderByComparator orderByComparator)
 		throws NoSuchFileEntryException, SystemException {
 		DLFileEntry dlFileEntry = findByPrimaryKey(fileEntryId);
@@ -5428,13 +5428,13 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 
 			DLFileEntry[] array = new DLFileEntryImpl[3];
 
-			array[0] = getByG_F_D_PrevAndNext(session, dlFileEntry, groupId,
-					folderId, documentTypeId, orderByComparator, true);
+			array[0] = getByG_F_F_PrevAndNext(session, dlFileEntry, groupId,
+					folderId, fileEntryTypeId, orderByComparator, true);
 
 			array[1] = dlFileEntry;
 
-			array[2] = getByG_F_D_PrevAndNext(session, dlFileEntry, groupId,
-					folderId, documentTypeId, orderByComparator, false);
+			array[2] = getByG_F_F_PrevAndNext(session, dlFileEntry, groupId,
+					folderId, fileEntryTypeId, orderByComparator, false);
 
 			return array;
 		}
@@ -5446,9 +5446,9 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 		}
 	}
 
-	protected DLFileEntry getByG_F_D_PrevAndNext(Session session,
+	protected DLFileEntry getByG_F_F_PrevAndNext(Session session,
 		DLFileEntry dlFileEntry, long groupId, long folderId,
-		long documentTypeId, OrderByComparator orderByComparator,
+		long fileEntryTypeId, OrderByComparator orderByComparator,
 		boolean previous) {
 		StringBundler query = null;
 
@@ -5462,11 +5462,11 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 
 		query.append(_SQL_SELECT_DLFILEENTRY_WHERE);
 
-		query.append(_FINDER_COLUMN_G_F_D_GROUPID_2);
+		query.append(_FINDER_COLUMN_G_F_F_GROUPID_2);
 
-		query.append(_FINDER_COLUMN_G_F_D_FOLDERID_2);
+		query.append(_FINDER_COLUMN_G_F_F_FOLDERID_2);
 
-		query.append(_FINDER_COLUMN_G_F_D_DOCUMENTTYPEID_2);
+		query.append(_FINDER_COLUMN_G_F_F_FILEENTRYTYPEID_2);
 
 		if (orderByComparator != null) {
 			String[] orderByFields = orderByComparator.getOrderByFields();
@@ -5539,7 +5539,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 
 		qPos.add(folderId);
 
-		qPos.add(documentTypeId);
+		qPos.add(fileEntryTypeId);
 
 		if (orderByComparator != null) {
 			Object[] values = orderByComparator.getOrderByValues(dlFileEntry);
@@ -5560,7 +5560,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	}
 
 	/**
-	 * Returns all the d l file entries where groupId = &#63; and folderId = any &#63; and documentTypeId = &#63;.
+	 * Returns all the d l file entries where groupId = &#63; and folderId = any &#63; and fileEntryTypeId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
@@ -5568,18 +5568,18 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 *
 	 * @param groupId the group ID
 	 * @param folderIds the folder IDs
-	 * @param documentTypeId the document type ID
+	 * @param fileEntryTypeId the file entry type ID
 	 * @return the matching d l file entries
 	 * @throws SystemException if a system exception occurred
 	 */
-	public List<DLFileEntry> findByG_F_D(long groupId, long[] folderIds,
-		long documentTypeId) throws SystemException {
-		return findByG_F_D(groupId, folderIds, documentTypeId,
+	public List<DLFileEntry> findByG_F_F(long groupId, long[] folderIds,
+		long fileEntryTypeId) throws SystemException {
+		return findByG_F_F(groupId, folderIds, fileEntryTypeId,
 			QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
 	/**
-	 * Returns a range of all the d l file entries where groupId = &#63; and folderId = any &#63; and documentTypeId = &#63;.
+	 * Returns a range of all the d l file entries where groupId = &#63; and folderId = any &#63; and fileEntryTypeId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
@@ -5587,19 +5587,19 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 *
 	 * @param groupId the group ID
 	 * @param folderIds the folder IDs
-	 * @param documentTypeId the document type ID
+	 * @param fileEntryTypeId the file entry type ID
 	 * @param start the lower bound of the range of d l file entries
 	 * @param end the upper bound of the range of d l file entries (not inclusive)
 	 * @return the range of matching d l file entries
 	 * @throws SystemException if a system exception occurred
 	 */
-	public List<DLFileEntry> findByG_F_D(long groupId, long[] folderIds,
-		long documentTypeId, int start, int end) throws SystemException {
-		return findByG_F_D(groupId, folderIds, documentTypeId, start, end, null);
+	public List<DLFileEntry> findByG_F_F(long groupId, long[] folderIds,
+		long fileEntryTypeId, int start, int end) throws SystemException {
+		return findByG_F_F(groupId, folderIds, fileEntryTypeId, start, end, null);
 	}
 
 	/**
-	 * Returns an ordered range of all the d l file entries where groupId = &#63; and folderId = any &#63; and documentTypeId = &#63;.
+	 * Returns an ordered range of all the d l file entries where groupId = &#63; and folderId = any &#63; and fileEntryTypeId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
@@ -5607,24 +5607,24 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 *
 	 * @param groupId the group ID
 	 * @param folderIds the folder IDs
-	 * @param documentTypeId the document type ID
+	 * @param fileEntryTypeId the file entry type ID
 	 * @param start the lower bound of the range of d l file entries
 	 * @param end the upper bound of the range of d l file entries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching d l file entries
 	 * @throws SystemException if a system exception occurred
 	 */
-	public List<DLFileEntry> findByG_F_D(long groupId, long[] folderIds,
-		long documentTypeId, int start, int end,
+	public List<DLFileEntry> findByG_F_F(long groupId, long[] folderIds,
+		long fileEntryTypeId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				groupId, StringUtil.merge(folderIds), documentTypeId,
+				groupId, StringUtil.merge(folderIds), fileEntryTypeId,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
 			};
 
-		List<DLFileEntry> list = (List<DLFileEntry>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_G_F_D,
+		List<DLFileEntry> list = (List<DLFileEntry>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_G_F_F,
 				finderArgs, this);
 
 		if (list == null) {
@@ -5638,7 +5638,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 				query.append(WHERE_AND);
 			}
 
-			query.append(_FINDER_COLUMN_G_F_D_GROUPID_5);
+			query.append(_FINDER_COLUMN_G_F_F_GROUPID_5);
 
 			conjunctionable = true;
 
@@ -5650,7 +5650,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 				query.append(StringPool.OPEN_PARENTHESIS);
 
 				for (int i = 0; i < folderIds.length; i++) {
-					query.append(_FINDER_COLUMN_G_F_D_FOLDERID_5);
+					query.append(_FINDER_COLUMN_G_F_F_FOLDERID_5);
 
 					if ((i + 1) < folderIds.length) {
 						query.append(WHERE_OR);
@@ -5666,7 +5666,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 				query.append(WHERE_AND);
 			}
 
-			query.append(_FINDER_COLUMN_G_F_D_DOCUMENTTYPEID_5);
+			query.append(_FINDER_COLUMN_G_F_F_FILEENTRYTYPEID_5);
 
 			conjunctionable = true;
 
@@ -5696,7 +5696,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 					qPos.add(folderIds);
 				}
 
-				qPos.add(documentTypeId);
+				qPos.add(fileEntryTypeId);
 
 				list = (List<DLFileEntry>)QueryUtil.list(q, getDialect(),
 						start, end);
@@ -5706,13 +5706,13 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 			}
 			finally {
 				if (list == null) {
-					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_G_F_D,
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_G_F_F,
 						finderArgs);
 				}
 				else {
 					cacheResult(list);
 
-					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_G_F_D,
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_G_F_F,
 						finderArgs, list);
 				}
 
@@ -5724,22 +5724,22 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	}
 
 	/**
-	 * Returns all the d l file entries that the user has permission to view where groupId = &#63; and folderId = &#63; and documentTypeId = &#63;.
+	 * Returns all the d l file entries that the user has permission to view where groupId = &#63; and folderId = &#63; and fileEntryTypeId = &#63;.
 	 *
 	 * @param groupId the group ID
 	 * @param folderId the folder ID
-	 * @param documentTypeId the document type ID
+	 * @param fileEntryTypeId the file entry type ID
 	 * @return the matching d l file entries that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
-	public List<DLFileEntry> filterFindByG_F_D(long groupId, long folderId,
-		long documentTypeId) throws SystemException {
-		return filterFindByG_F_D(groupId, folderId, documentTypeId,
+	public List<DLFileEntry> filterFindByG_F_F(long groupId, long folderId,
+		long fileEntryTypeId) throws SystemException {
+		return filterFindByG_F_F(groupId, folderId, fileEntryTypeId,
 			QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
 	/**
-	 * Returns a range of all the d l file entries that the user has permission to view where groupId = &#63; and folderId = &#63; and documentTypeId = &#63;.
+	 * Returns a range of all the d l file entries that the user has permission to view where groupId = &#63; and folderId = &#63; and fileEntryTypeId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
@@ -5747,20 +5747,20 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 *
 	 * @param groupId the group ID
 	 * @param folderId the folder ID
-	 * @param documentTypeId the document type ID
+	 * @param fileEntryTypeId the file entry type ID
 	 * @param start the lower bound of the range of d l file entries
 	 * @param end the upper bound of the range of d l file entries (not inclusive)
 	 * @return the range of matching d l file entries that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
-	public List<DLFileEntry> filterFindByG_F_D(long groupId, long folderId,
-		long documentTypeId, int start, int end) throws SystemException {
-		return filterFindByG_F_D(groupId, folderId, documentTypeId, start, end,
-			null);
+	public List<DLFileEntry> filterFindByG_F_F(long groupId, long folderId,
+		long fileEntryTypeId, int start, int end) throws SystemException {
+		return filterFindByG_F_F(groupId, folderId, fileEntryTypeId, start,
+			end, null);
 	}
 
 	/**
-	 * Returns an ordered range of all the d l file entries that the user has permissions to view where groupId = &#63; and folderId = &#63; and documentTypeId = &#63;.
+	 * Returns an ordered range of all the d l file entries that the user has permissions to view where groupId = &#63; and folderId = &#63; and fileEntryTypeId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
@@ -5768,18 +5768,18 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 *
 	 * @param groupId the group ID
 	 * @param folderId the folder ID
-	 * @param documentTypeId the document type ID
+	 * @param fileEntryTypeId the file entry type ID
 	 * @param start the lower bound of the range of d l file entries
 	 * @param end the upper bound of the range of d l file entries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching d l file entries that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
-	public List<DLFileEntry> filterFindByG_F_D(long groupId, long folderId,
-		long documentTypeId, int start, int end,
+	public List<DLFileEntry> filterFindByG_F_F(long groupId, long folderId,
+		long fileEntryTypeId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
-			return findByG_F_D(groupId, folderId, documentTypeId, start, end,
+			return findByG_F_F(groupId, folderId, fileEntryTypeId, start, end,
 				orderByComparator);
 		}
 
@@ -5795,11 +5795,11 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 
 		query.append(_FILTER_SQL_SELECT_DLFILEENTRY_WHERE);
 
-		query.append(_FINDER_COLUMN_G_F_D_GROUPID_2);
+		query.append(_FINDER_COLUMN_G_F_F_GROUPID_2);
 
-		query.append(_FINDER_COLUMN_G_F_D_FOLDERID_2);
+		query.append(_FINDER_COLUMN_G_F_F_FOLDERID_2);
 
-		query.append(_FINDER_COLUMN_G_F_D_DOCUMENTTYPEID_2);
+		query.append(_FINDER_COLUMN_G_F_F_FILEENTRYTYPEID_2);
 
 		appendGroupByComparator(query, _FILTER_COLUMN_PK);
 
@@ -5846,7 +5846,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 
 			qPos.add(folderId);
 
-			qPos.add(documentTypeId);
+			qPos.add(fileEntryTypeId);
 
 			return (List<DLFileEntry>)QueryUtil.list(q, getDialect(), start, end);
 		}
@@ -5859,24 +5859,24 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	}
 
 	/**
-	 * Returns the d l file entries before and after the current d l file entry in the ordered set of d l file entries that the user has permission to view where groupId = &#63; and folderId = &#63; and documentTypeId = &#63;.
+	 * Returns the d l file entries before and after the current d l file entry in the ordered set of d l file entries that the user has permission to view where groupId = &#63; and folderId = &#63; and fileEntryTypeId = &#63;.
 	 *
 	 * @param fileEntryId the primary key of the current d l file entry
 	 * @param groupId the group ID
 	 * @param folderId the folder ID
-	 * @param documentTypeId the document type ID
+	 * @param fileEntryTypeId the file entry type ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next d l file entry
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileEntryException if a d l file entry with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public DLFileEntry[] filterFindByG_F_D_PrevAndNext(long fileEntryId,
-		long groupId, long folderId, long documentTypeId,
+	public DLFileEntry[] filterFindByG_F_F_PrevAndNext(long fileEntryId,
+		long groupId, long folderId, long fileEntryTypeId,
 		OrderByComparator orderByComparator)
 		throws NoSuchFileEntryException, SystemException {
 		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
-			return findByG_F_D_PrevAndNext(fileEntryId, groupId, folderId,
-				documentTypeId, orderByComparator);
+			return findByG_F_F_PrevAndNext(fileEntryId, groupId, folderId,
+				fileEntryTypeId, orderByComparator);
 		}
 
 		DLFileEntry dlFileEntry = findByPrimaryKey(fileEntryId);
@@ -5888,13 +5888,13 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 
 			DLFileEntry[] array = new DLFileEntryImpl[3];
 
-			array[0] = filterGetByG_F_D_PrevAndNext(session, dlFileEntry,
-					groupId, folderId, documentTypeId, orderByComparator, true);
+			array[0] = filterGetByG_F_F_PrevAndNext(session, dlFileEntry,
+					groupId, folderId, fileEntryTypeId, orderByComparator, true);
 
 			array[1] = dlFileEntry;
 
-			array[2] = filterGetByG_F_D_PrevAndNext(session, dlFileEntry,
-					groupId, folderId, documentTypeId, orderByComparator, false);
+			array[2] = filterGetByG_F_F_PrevAndNext(session, dlFileEntry,
+					groupId, folderId, fileEntryTypeId, orderByComparator, false);
 
 			return array;
 		}
@@ -5906,9 +5906,9 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 		}
 	}
 
-	protected DLFileEntry filterGetByG_F_D_PrevAndNext(Session session,
+	protected DLFileEntry filterGetByG_F_F_PrevAndNext(Session session,
 		DLFileEntry dlFileEntry, long groupId, long folderId,
-		long documentTypeId, OrderByComparator orderByComparator,
+		long fileEntryTypeId, OrderByComparator orderByComparator,
 		boolean previous) {
 		StringBundler query = null;
 
@@ -5922,11 +5922,11 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 
 		query.append(_FILTER_SQL_SELECT_DLFILEENTRY_WHERE);
 
-		query.append(_FINDER_COLUMN_G_F_D_GROUPID_2);
+		query.append(_FINDER_COLUMN_G_F_F_GROUPID_2);
 
-		query.append(_FINDER_COLUMN_G_F_D_FOLDERID_2);
+		query.append(_FINDER_COLUMN_G_F_F_FOLDERID_2);
 
-		query.append(_FINDER_COLUMN_G_F_D_DOCUMENTTYPEID_2);
+		query.append(_FINDER_COLUMN_G_F_F_FILEENTRYTYPEID_2);
 
 		appendGroupByComparator(query, _FILTER_COLUMN_PK);
 
@@ -6026,7 +6026,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 
 		qPos.add(folderId);
 
-		qPos.add(documentTypeId);
+		qPos.add(fileEntryTypeId);
 
 		if (orderByComparator != null) {
 			Object[] values = orderByComparator.getOrderByValues(dlFileEntry);
@@ -6047,22 +6047,22 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	}
 
 	/**
-	 * Returns all the d l file entries that the user has permission to view where groupId = &#63; and folderId = any &#63; and documentTypeId = &#63;.
+	 * Returns all the d l file entries that the user has permission to view where groupId = &#63; and folderId = any &#63; and fileEntryTypeId = &#63;.
 	 *
 	 * @param groupId the group ID
 	 * @param folderIds the folder IDs
-	 * @param documentTypeId the document type ID
+	 * @param fileEntryTypeId the file entry type ID
 	 * @return the matching d l file entries that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
-	public List<DLFileEntry> filterFindByG_F_D(long groupId, long[] folderIds,
-		long documentTypeId) throws SystemException {
-		return filterFindByG_F_D(groupId, folderIds, documentTypeId,
+	public List<DLFileEntry> filterFindByG_F_F(long groupId, long[] folderIds,
+		long fileEntryTypeId) throws SystemException {
+		return filterFindByG_F_F(groupId, folderIds, fileEntryTypeId,
 			QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
 	/**
-	 * Returns a range of all the d l file entries that the user has permission to view where groupId = &#63; and folderId = any &#63; and documentTypeId = &#63;.
+	 * Returns a range of all the d l file entries that the user has permission to view where groupId = &#63; and folderId = any &#63; and fileEntryTypeId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
@@ -6070,20 +6070,20 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 *
 	 * @param groupId the group ID
 	 * @param folderIds the folder IDs
-	 * @param documentTypeId the document type ID
+	 * @param fileEntryTypeId the file entry type ID
 	 * @param start the lower bound of the range of d l file entries
 	 * @param end the upper bound of the range of d l file entries (not inclusive)
 	 * @return the range of matching d l file entries that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
-	public List<DLFileEntry> filterFindByG_F_D(long groupId, long[] folderIds,
-		long documentTypeId, int start, int end) throws SystemException {
-		return filterFindByG_F_D(groupId, folderIds, documentTypeId, start,
+	public List<DLFileEntry> filterFindByG_F_F(long groupId, long[] folderIds,
+		long fileEntryTypeId, int start, int end) throws SystemException {
+		return filterFindByG_F_F(groupId, folderIds, fileEntryTypeId, start,
 			end, null);
 	}
 
 	/**
-	 * Returns an ordered range of all the d l file entries that the user has permission to view where groupId = &#63; and folderId = any &#63; and documentTypeId = &#63;.
+	 * Returns an ordered range of all the d l file entries that the user has permission to view where groupId = &#63; and folderId = any &#63; and fileEntryTypeId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
@@ -6091,18 +6091,18 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 *
 	 * @param groupId the group ID
 	 * @param folderIds the folder IDs
-	 * @param documentTypeId the document type ID
+	 * @param fileEntryTypeId the file entry type ID
 	 * @param start the lower bound of the range of d l file entries
 	 * @param end the upper bound of the range of d l file entries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching d l file entries that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
-	public List<DLFileEntry> filterFindByG_F_D(long groupId, long[] folderIds,
-		long documentTypeId, int start, int end,
+	public List<DLFileEntry> filterFindByG_F_F(long groupId, long[] folderIds,
+		long fileEntryTypeId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
-			return findByG_F_D(groupId, folderIds, documentTypeId, start, end,
+			return findByG_F_F(groupId, folderIds, fileEntryTypeId, start, end,
 				orderByComparator);
 		}
 
@@ -6116,7 +6116,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 			query.append(WHERE_AND);
 		}
 
-		query.append(_FINDER_COLUMN_G_F_D_GROUPID_5);
+		query.append(_FINDER_COLUMN_G_F_F_GROUPID_5);
 
 		conjunctionable = true;
 
@@ -6128,7 +6128,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 			query.append(StringPool.OPEN_PARENTHESIS);
 
 			for (int i = 0; i < folderIds.length; i++) {
-				query.append(_FINDER_COLUMN_G_F_D_FOLDERID_5);
+				query.append(_FINDER_COLUMN_G_F_F_FOLDERID_5);
 
 				if ((i + 1) < folderIds.length) {
 					query.append(WHERE_OR);
@@ -6144,7 +6144,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 			query.append(WHERE_AND);
 		}
 
-		query.append(_FINDER_COLUMN_G_F_D_DOCUMENTTYPEID_5);
+		query.append(_FINDER_COLUMN_G_F_F_FILEENTRYTYPEID_5);
 
 		conjunctionable = true;
 
@@ -6195,7 +6195,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 				qPos.add(folderIds);
 			}
 
-			qPos.add(documentTypeId);
+			qPos.add(fileEntryTypeId);
 
 			return (List<DLFileEntry>)QueryUtil.list(q, getDialect(), start, end);
 		}
@@ -6440,17 +6440,17 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	}
 
 	/**
-	 * Removes all the d l file entries where groupId = &#63; and folderId = &#63; and documentTypeId = &#63; from the database.
+	 * Removes all the d l file entries where groupId = &#63; and folderId = &#63; and fileEntryTypeId = &#63; from the database.
 	 *
 	 * @param groupId the group ID
 	 * @param folderId the folder ID
-	 * @param documentTypeId the document type ID
+	 * @param fileEntryTypeId the file entry type ID
 	 * @throws SystemException if a system exception occurred
 	 */
-	public void removeByG_F_D(long groupId, long folderId, long documentTypeId)
+	public void removeByG_F_F(long groupId, long folderId, long fileEntryTypeId)
 		throws SystemException {
-		for (DLFileEntry dlFileEntry : findByG_F_D(groupId, folderId,
-				documentTypeId)) {
+		for (DLFileEntry dlFileEntry : findByG_F_F(groupId, folderId,
+				fileEntryTypeId)) {
 			dlFileEntryPersistence.remove(dlFileEntry);
 		}
 	}
@@ -7613,19 +7613,19 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	}
 
 	/**
-	 * Returns the number of d l file entries where groupId = &#63; and folderId = &#63; and documentTypeId = &#63;.
+	 * Returns the number of d l file entries where groupId = &#63; and folderId = &#63; and fileEntryTypeId = &#63;.
 	 *
 	 * @param groupId the group ID
 	 * @param folderId the folder ID
-	 * @param documentTypeId the document type ID
+	 * @param fileEntryTypeId the file entry type ID
 	 * @return the number of matching d l file entries
 	 * @throws SystemException if a system exception occurred
 	 */
-	public int countByG_F_D(long groupId, long folderId, long documentTypeId)
+	public int countByG_F_F(long groupId, long folderId, long fileEntryTypeId)
 		throws SystemException {
-		Object[] finderArgs = new Object[] { groupId, folderId, documentTypeId };
+		Object[] finderArgs = new Object[] { groupId, folderId, fileEntryTypeId };
 
-		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_F_D,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_F_F,
 				finderArgs, this);
 
 		if (count == null) {
@@ -7633,11 +7633,11 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 
 			query.append(_SQL_COUNT_DLFILEENTRY_WHERE);
 
-			query.append(_FINDER_COLUMN_G_F_D_GROUPID_2);
+			query.append(_FINDER_COLUMN_G_F_F_GROUPID_2);
 
-			query.append(_FINDER_COLUMN_G_F_D_FOLDERID_2);
+			query.append(_FINDER_COLUMN_G_F_F_FOLDERID_2);
 
-			query.append(_FINDER_COLUMN_G_F_D_DOCUMENTTYPEID_2);
+			query.append(_FINDER_COLUMN_G_F_F_FILEENTRYTYPEID_2);
 
 			String sql = query.toString();
 
@@ -7654,7 +7654,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 
 				qPos.add(folderId);
 
-				qPos.add(documentTypeId);
+				qPos.add(fileEntryTypeId);
 
 				count = (Long)q.uniqueResult();
 			}
@@ -7666,7 +7666,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 					count = Long.valueOf(0);
 				}
 
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_G_F_D,
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_G_F_F,
 					finderArgs, count);
 
 				closeSession(session);
@@ -7677,21 +7677,21 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	}
 
 	/**
-	 * Returns the number of d l file entries where groupId = &#63; and folderId = any &#63; and documentTypeId = &#63;.
+	 * Returns the number of d l file entries where groupId = &#63; and folderId = any &#63; and fileEntryTypeId = &#63;.
 	 *
 	 * @param groupId the group ID
 	 * @param folderIds the folder IDs
-	 * @param documentTypeId the document type ID
+	 * @param fileEntryTypeId the file entry type ID
 	 * @return the number of matching d l file entries
 	 * @throws SystemException if a system exception occurred
 	 */
-	public int countByG_F_D(long groupId, long[] folderIds, long documentTypeId)
+	public int countByG_F_F(long groupId, long[] folderIds, long fileEntryTypeId)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
-				groupId, StringUtil.merge(folderIds), documentTypeId
+				groupId, StringUtil.merge(folderIds), fileEntryTypeId
 			};
 
-		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_F_D,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_F_F,
 				finderArgs, this);
 
 		if (count == null) {
@@ -7705,7 +7705,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 				query.append(WHERE_AND);
 			}
 
-			query.append(_FINDER_COLUMN_G_F_D_GROUPID_5);
+			query.append(_FINDER_COLUMN_G_F_F_GROUPID_5);
 
 			conjunctionable = true;
 
@@ -7717,7 +7717,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 				query.append(StringPool.OPEN_PARENTHESIS);
 
 				for (int i = 0; i < folderIds.length; i++) {
-					query.append(_FINDER_COLUMN_G_F_D_FOLDERID_5);
+					query.append(_FINDER_COLUMN_G_F_F_FOLDERID_5);
 
 					if ((i + 1) < folderIds.length) {
 						query.append(WHERE_OR);
@@ -7733,7 +7733,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 				query.append(WHERE_AND);
 			}
 
-			query.append(_FINDER_COLUMN_G_F_D_DOCUMENTTYPEID_5);
+			query.append(_FINDER_COLUMN_G_F_F_FILEENTRYTYPEID_5);
 
 			conjunctionable = true;
 
@@ -7754,7 +7754,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 					qPos.add(folderIds);
 				}
 
-				qPos.add(documentTypeId);
+				qPos.add(fileEntryTypeId);
 
 				count = (Long)q.uniqueResult();
 			}
@@ -7766,7 +7766,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 					count = Long.valueOf(0);
 				}
 
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_G_F_D,
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_G_F_F,
 					finderArgs, count);
 
 				closeSession(session);
@@ -7777,29 +7777,29 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	}
 
 	/**
-	 * Returns the number of d l file entries that the user has permission to view where groupId = &#63; and folderId = &#63; and documentTypeId = &#63;.
+	 * Returns the number of d l file entries that the user has permission to view where groupId = &#63; and folderId = &#63; and fileEntryTypeId = &#63;.
 	 *
 	 * @param groupId the group ID
 	 * @param folderId the folder ID
-	 * @param documentTypeId the document type ID
+	 * @param fileEntryTypeId the file entry type ID
 	 * @return the number of matching d l file entries that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
-	public int filterCountByG_F_D(long groupId, long folderId,
-		long documentTypeId) throws SystemException {
+	public int filterCountByG_F_F(long groupId, long folderId,
+		long fileEntryTypeId) throws SystemException {
 		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
-			return countByG_F_D(groupId, folderId, documentTypeId);
+			return countByG_F_F(groupId, folderId, fileEntryTypeId);
 		}
 
 		StringBundler query = new StringBundler(4);
 
 		query.append(_FILTER_SQL_COUNT_DLFILEENTRY_WHERE);
 
-		query.append(_FINDER_COLUMN_G_F_D_GROUPID_2);
+		query.append(_FINDER_COLUMN_G_F_F_GROUPID_2);
 
-		query.append(_FINDER_COLUMN_G_F_D_FOLDERID_2);
+		query.append(_FINDER_COLUMN_G_F_F_FOLDERID_2);
 
-		query.append(_FINDER_COLUMN_G_F_D_DOCUMENTTYPEID_2);
+		query.append(_FINDER_COLUMN_G_F_F_FILEENTRYTYPEID_2);
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
 				DLFileEntry.class.getName(), _FILTER_COLUMN_PK, groupId);
@@ -7820,7 +7820,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 
 			qPos.add(folderId);
 
-			qPos.add(documentTypeId);
+			qPos.add(fileEntryTypeId);
 
 			Long count = (Long)q.uniqueResult();
 
@@ -7835,18 +7835,18 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	}
 
 	/**
-	 * Returns the number of d l file entries that the user has permission to view where groupId = &#63; and folderId = any &#63; and documentTypeId = &#63;.
+	 * Returns the number of d l file entries that the user has permission to view where groupId = &#63; and folderId = any &#63; and fileEntryTypeId = &#63;.
 	 *
 	 * @param groupId the group ID
 	 * @param folderIds the folder IDs
-	 * @param documentTypeId the document type ID
+	 * @param fileEntryTypeId the file entry type ID
 	 * @return the number of matching d l file entries that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
-	public int filterCountByG_F_D(long groupId, long[] folderIds,
-		long documentTypeId) throws SystemException {
+	public int filterCountByG_F_F(long groupId, long[] folderIds,
+		long fileEntryTypeId) throws SystemException {
 		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
-			return countByG_F_D(groupId, folderIds, documentTypeId);
+			return countByG_F_F(groupId, folderIds, fileEntryTypeId);
 		}
 
 		StringBundler query = new StringBundler();
@@ -7859,7 +7859,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 			query.append(WHERE_AND);
 		}
 
-		query.append(_FINDER_COLUMN_G_F_D_GROUPID_5);
+		query.append(_FINDER_COLUMN_G_F_F_GROUPID_5);
 
 		conjunctionable = true;
 
@@ -7871,7 +7871,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 			query.append(StringPool.OPEN_PARENTHESIS);
 
 			for (int i = 0; i < folderIds.length; i++) {
-				query.append(_FINDER_COLUMN_G_F_D_FOLDERID_5);
+				query.append(_FINDER_COLUMN_G_F_F_FOLDERID_5);
 
 				if ((i + 1) < folderIds.length) {
 					query.append(WHERE_OR);
@@ -7887,7 +7887,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 			query.append(WHERE_AND);
 		}
 
-		query.append(_FINDER_COLUMN_G_F_D_DOCUMENTTYPEID_5);
+		query.append(_FINDER_COLUMN_G_F_F_FILEENTRYTYPEID_5);
 
 		conjunctionable = true;
 
@@ -7912,7 +7912,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 				qPos.add(folderIds);
 			}
 
-			qPos.add(documentTypeId);
+			qPos.add(fileEntryTypeId);
 
 			Long count = (Long)q.uniqueResult();
 
@@ -7999,12 +7999,12 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 
 	@BeanReference(type = DLContentPersistence.class)
 	protected DLContentPersistence dlContentPersistence;
-	@BeanReference(type = DLDocumentMetadataSetPersistence.class)
-	protected DLDocumentMetadataSetPersistence dlDocumentMetadataSetPersistence;
-	@BeanReference(type = DLDocumentTypePersistence.class)
-	protected DLDocumentTypePersistence dlDocumentTypePersistence;
 	@BeanReference(type = DLFileEntryPersistence.class)
 	protected DLFileEntryPersistence dlFileEntryPersistence;
+	@BeanReference(type = DLFileEntryMetadataPersistence.class)
+	protected DLFileEntryMetadataPersistence dlFileEntryMetadataPersistence;
+	@BeanReference(type = DLFileEntryTypePersistence.class)
+	protected DLFileEntryTypePersistence dlFileEntryTypePersistence;
 	@BeanReference(type = DLFileRankPersistence.class)
 	protected DLFileRankPersistence dlFileRankPersistence;
 	@BeanReference(type = DLFileShortcutPersistence.class)
@@ -8073,15 +8073,15 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	private static final String _FINDER_COLUMN_G_F_T_TITLE_1 = "dlFileEntry.title IS NULL";
 	private static final String _FINDER_COLUMN_G_F_T_TITLE_2 = "dlFileEntry.title = ?";
 	private static final String _FINDER_COLUMN_G_F_T_TITLE_3 = "(dlFileEntry.title IS NULL OR dlFileEntry.title = ?)";
-	private static final String _FINDER_COLUMN_G_F_D_GROUPID_2 = "dlFileEntry.groupId = ? AND ";
-	private static final String _FINDER_COLUMN_G_F_D_GROUPID_5 = "(" +
-		_removeConjunction(_FINDER_COLUMN_G_F_D_GROUPID_2) + ")";
-	private static final String _FINDER_COLUMN_G_F_D_FOLDERID_2 = "dlFileEntry.folderId = ? AND ";
-	private static final String _FINDER_COLUMN_G_F_D_FOLDERID_5 = "(" +
-		_removeConjunction(_FINDER_COLUMN_G_F_D_FOLDERID_2) + ")";
-	private static final String _FINDER_COLUMN_G_F_D_DOCUMENTTYPEID_2 = "dlFileEntry.documentTypeId = ?";
-	private static final String _FINDER_COLUMN_G_F_D_DOCUMENTTYPEID_5 = "(" +
-		_removeConjunction(_FINDER_COLUMN_G_F_D_DOCUMENTTYPEID_2) + ")";
+	private static final String _FINDER_COLUMN_G_F_F_GROUPID_2 = "dlFileEntry.groupId = ? AND ";
+	private static final String _FINDER_COLUMN_G_F_F_GROUPID_5 = "(" +
+		_removeConjunction(_FINDER_COLUMN_G_F_F_GROUPID_2) + ")";
+	private static final String _FINDER_COLUMN_G_F_F_FOLDERID_2 = "dlFileEntry.folderId = ? AND ";
+	private static final String _FINDER_COLUMN_G_F_F_FOLDERID_5 = "(" +
+		_removeConjunction(_FINDER_COLUMN_G_F_F_FOLDERID_2) + ")";
+	private static final String _FINDER_COLUMN_G_F_F_FILEENTRYTYPEID_2 = "dlFileEntry.fileEntryTypeId = ?";
+	private static final String _FINDER_COLUMN_G_F_F_FILEENTRYTYPEID_5 = "(" +
+		_removeConjunction(_FINDER_COLUMN_G_F_F_FILEENTRYTYPEID_2) + ")";
 
 	private static String _removeConjunction(String sql) {
 		int pos = sql.indexOf(" AND ");
