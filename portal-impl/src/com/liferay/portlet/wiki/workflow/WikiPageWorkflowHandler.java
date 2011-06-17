@@ -52,15 +52,17 @@ public class WikiPageWorkflowHandler extends BaseWorkflowHandler {
 
 		long userId = GetterUtil.getLong(
 			(String)workflowContext.get(WorkflowConstants.CONTEXT_USER_ID));
-		long classPK = GetterUtil.getLong(
+		long pageId = GetterUtil.getLong(
 			(String)workflowContext.get(
 				WorkflowConstants.CONTEXT_ENTRY_CLASS_PK));
 
 		ServiceContext serviceContext = (ServiceContext)workflowContext.get(
 			"serviceContext");
 
+		WikiPage wikiPage = WikiPageLocalServiceUtil.getPageByPageId(pageId);
+
 		return WikiPageLocalServiceUtil.updateStatus(
-			userId, classPK, status, serviceContext);
+			userId, wikiPage, status, serviceContext);
 	}
 
 	@Override

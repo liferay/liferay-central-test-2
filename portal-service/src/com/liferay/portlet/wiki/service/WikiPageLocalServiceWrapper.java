@@ -436,6 +436,12 @@ public class WikiPageLocalServiceWrapper implements WikiPageLocalService {
 		return _wikiPageLocalService.getPage(nodeId, title, version);
 	}
 
+	public com.liferay.portlet.wiki.model.WikiPage getPageByPageId(long pageId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _wikiPageLocalService.getPageByPageId(pageId);
+	}
+
 	public com.liferay.portlet.wiki.model.WikiPageDisplay getPageDisplay(
 		long nodeId, java.lang.String title,
 		javax.portlet.PortletURL viewPageURL,

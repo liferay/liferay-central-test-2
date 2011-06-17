@@ -21,6 +21,8 @@ int abstractLength = (Integer)request.getAttribute(WebKeys.ASSET_PUBLISHER_ABSTR
 
 WikiPage wikiPage = (WikiPage)request.getAttribute(WebKeys.WIKI_PAGE);
 
+boolean workflowAssetPreview = GetterUtil.getBoolean((Boolean)request.getAttribute(WebKeys.WORKFLOW_ASSET_PREVIEW), false);
+
 PortletURL viewPageURL = new PortletURLImpl(request, PortletKeys.WIKI, plid, PortletRequest.ACTION_PHASE);
 
 viewPageURL.setWindowState(WindowState.MAXIMIZED);
@@ -42,7 +44,7 @@ String attachmentURLPrefix = themeDisplay.getPathMain() + "/wiki/get_page_attach
 
 WikiPageDisplay pageDisplay = null;
 
-if (wikiPage.isApproved()) {
+if (wikiPage.isApproved() && !workflowAssetPreview) {
 	pageDisplay = WikiCacheUtil.getDisplay(wikiPage.getNodeId(), wikiPage.getTitle(), viewPageURL, editPageURL, attachmentURLPrefix);
 }
 else {
