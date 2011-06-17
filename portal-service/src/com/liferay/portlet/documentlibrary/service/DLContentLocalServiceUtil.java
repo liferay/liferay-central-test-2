@@ -292,22 +292,7 @@ public class DLContentLocalServiceUtil {
 				   .getContent(companyId, portletId, repositoryId, path, version);
 	}
 
-	public static com.liferay.portlet.documentlibrary.model.DLContent getContent(
-		long companyId, long repositoryId, java.lang.String path)
-		throws com.liferay.portal.kernel.exception.SystemException,
-			com.liferay.portlet.documentlibrary.NoSuchContentException {
-		return getService().getContent(companyId, repositoryId, path);
-	}
-
-	public static com.liferay.portlet.documentlibrary.model.DLContent getContent(
-		long companyId, long repositoryId, java.lang.String path,
-		java.lang.String version)
-		throws com.liferay.portal.kernel.exception.SystemException,
-			com.liferay.portlet.documentlibrary.NoSuchContentException {
-		return getService().getContent(companyId, repositoryId, path, version);
-	}
-
-	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLContent> getContentReferences(
+	public static java.util.List<java.lang.Object[]> getContentReferences(
 		long companyId, long repositoryId, java.lang.String path)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getContentReferences(companyId, repositoryId, path);
@@ -326,12 +311,6 @@ public class DLContentLocalServiceUtil {
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService()
 				   .hasContent(companyId, portletId, repositoryId, path, version);
-	}
-
-	public static boolean hasContent(long companyId, long repositoryId,
-		java.lang.String path, java.lang.String version)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().hasContent(companyId, repositoryId, path, version);
 	}
 
 	public static void updateDLContent(long companyId, long oldRepositoryId,
