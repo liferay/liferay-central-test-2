@@ -23,7 +23,9 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.portlet.documentlibrary.model.DLContent;
+import com.liferay.portlet.documentlibrary.model.impl.DLContentImpl;
 import com.liferay.util.dao.orm.CustomSQLUtil;
+import java.util.ArrayList;
 
 import java.util.List;
 
@@ -36,10 +38,7 @@ public class DLContentFinderImpl
 	public static String FIND_BY_C_R_P =
 		DLContentFinder.class.getName() + ".findByC_R_P";
 
-	public static String UPDATE_BY_C_R_P =
-		DLContentFinder.class.getName() + ".updateByC_R_P";
-
-	public List<Object[]> findByC_R_P(
+	public List<DLContent> findByC_R_P(
 			long companyId, long repositoryId, String path)
 		throws SystemException {
 
@@ -71,7 +70,30 @@ public class DLContentFinderImpl
 			qPos.add(repositoryId);
 			qPos.add(path);
 
-			return q.list();
+			List<Object[]> queryResults = q.list();
+
+			List<DLContent> dummyDLContents = new ArrayList<DLContent>(
+				queryResults.size());
+
+			for (Object[] queryResult : queryResults) {
+				DLContent dummyDLContent = new DLContentImpl();
+
+				dummyDLContent.setContentId(
+					((Number)queryResult[0]).longValue());
+				dummyDLContent.setGroupId(((Number)queryResult[1]).longValue());
+				dummyDLContent.setCompanyId(
+					((Number)queryResult[2]).longValue());
+				dummyDLContent.setPortletId((String)queryResult[3]);
+				dummyDLContent.setRepositoryId(
+					((Number)queryResult[4]).longValue());
+				dummyDLContent.setPath((String)queryResult[5]);
+				dummyDLContent.setVersion((String)queryResult[6]);
+				dummyDLContent.setSize(((Number)queryResult[7]).longValue());
+				
+				dummyDLContents.add(dummyDLContent);
+			}
+
+			return dummyDLContents;
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

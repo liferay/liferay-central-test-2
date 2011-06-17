@@ -18,7 +18,7 @@ package com.liferay.portlet.documentlibrary.service.persistence;
  * @author Brian Wing Shun Chan
  */
 public interface DLContentFinder {
-	public java.util.List<java.lang.Object[]> findByC_R_P(long companyId,
-		long repositoryId, java.lang.String path)
+	public java.util.List<com.liferay.portlet.documentlibrary.model.DLContent> findByC_R_P(
+		long companyId, long repositoryId, java.lang.String path)
 		throws com.liferay.portal.kernel.exception.SystemException;
 }
