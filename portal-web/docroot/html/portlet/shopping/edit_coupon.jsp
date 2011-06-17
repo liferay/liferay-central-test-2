@@ -116,9 +116,9 @@ String discountType = BeanParamUtil.getString(coupon, request, "discountType");
 			<liferay-ui:message key="if-the-discount-type-is-free-shipping,-then-shipping-charges-are-subtracted-from-the-order" />
 
 			<aui:fieldset>
-				<aui:input label="minimum-order" name="minOrder" size="4" type="text" value="<%= doubleFormat.format(minOrder) %>" />
+				<aui:input ignoreRequestValue="<%= true %>" label="minimum-order" name="minOrder" size="4" type="text" value="<%= doubleFormat.format(minOrder) %>" />
 
-				<aui:input name="discount" size="4" type="text" value="<%= doubleFormat.format(discount) %>" />
+				<aui:input ignoreRequestValue="<%= true %>" name="discount" size="4" type="text" value="<%= doubleFormat.format(discount) %>" />
 
 				<aui:select name="discountType">
 
