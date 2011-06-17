@@ -521,11 +521,11 @@ public interface PropsKeys {
 
 	public static final String DL_FILE_ENTRY_PREVIEW_DOCUMENT_DPI = "dl.file.entry.preview.document.dpi";
 
-	public static final String DL_FILE_ENTRY_PREVIEW_ENABLED = "dl.file.entry.preview.enabled";
-
 	public static final String DL_FILE_ENTRY_PREVIEW_DOCUMENT_HEIGHT = "dl.file.entry.preview.document.height";
 
 	public static final String DL_FILE_ENTRY_PREVIEW_DOCUMENT_WIDTH = "dl.file.entry.preview.document.width";
+
+	public static final String DL_FILE_ENTRY_PREVIEW_ENABLED = "dl.file.entry.preview.enabled";
 
 	public static final String DL_FILE_ENTRY_PREVIEW_VIDEO_HEIGHT = "dl.file.entry.preview.video.height";
 
@@ -756,8 +756,6 @@ public interface PropsKeys {
 	public static final String IMAGE_HOOK_IMPL = "image.hook.impl";
 
 	public static final String IMAGEMAGICK_ENABLED = "imagemagick.enabled";
-
-	public static final String XUGGLER_ENABLED = "xuggler.enabled";
 
 	public static final String IMAGEMAGICK_GLOBAL_SEARCH_PATH = "imagemagick.global.search.path";
 
@@ -2016,6 +2014,8 @@ public interface PropsKeys {
 	public static final String WIKI_RSS_ABSTRACT_LENGTH = "wiki.rss.abstract.length";
 
 	public static final String XML_VALIDATION_ENABLED = "xml.validation.enabled";
+
+	public static final String XUGGLER_ENABLED = "xuggler.enabled";
 
 	public static final String YM_LOGIN = "ym.login";
 

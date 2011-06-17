@@ -371,15 +371,15 @@ public class HookHotDeployListener
 			DefaultControlPanelEntryFactory.setInstance(null);
 		}
 
-		if (portalProperties.containsKey(PropsKeys.DL_STORE_IMPL)) {
-			StoreFactory.setInstance(null);
-		}
-
 		if (portalProperties.containsKey(PropsKeys.DL_REPOSITORY_IMPL)) {
 			DLRepositoryContainer dlRepositoryContainer =
 				_dlRepositoryContainerMap.remove(servletContextName);
 
 			dlRepositoryContainer.unregisterRepositoryFactories();
+		}
+
+		if (portalProperties.containsKey(PropsKeys.DL_STORE_IMPL)) {
+			StoreFactory.setInstance(null);
 		}
 
 		if (portalProperties.containsKey(PropsKeys.IMAGE_HOOK_IMPL)) {
@@ -1547,16 +1547,6 @@ public class HookHotDeployListener
 			DefaultControlPanelEntryFactory.setInstance(controlPanelEntry);
 		}
 
-		if (portalProperties.containsKey(PropsKeys.DL_STORE_IMPL)) {
-			String storeClassName = portalProperties.getProperty(
-				PropsKeys.DL_STORE_IMPL);
-
-			Store store = (Store)newInstance(
-				portletClassLoader, Store.class, storeClassName);
-
-			StoreFactory.setInstance(store);
-		}
-
 		if (portalProperties.containsKey(PropsKeys.DL_REPOSITORY_IMPL)) {
 			String[] dlRepositoryClassNames = StringUtil.split(
 				portalProperties.getProperty(PropsKeys.DL_REPOSITORY_IMPL));
@@ -1574,6 +1564,16 @@ public class HookHotDeployListener
 				dlRepositoryContainer.registerRepositoryFactory(
 					dlRepositoryClassName, repositoryFactory);
 			}
+		}
+
+		if (portalProperties.containsKey(PropsKeys.DL_STORE_IMPL)) {
+			String storeClassName = portalProperties.getProperty(
+				PropsKeys.DL_STORE_IMPL);
+
+			Store store = (Store)newInstance(
+				portletClassLoader, Store.class, storeClassName);
+
+			StoreFactory.setInstance(store);
 		}
 
 		if (portalProperties.containsKey(PropsKeys.IMAGE_HOOK_IMPL)) {

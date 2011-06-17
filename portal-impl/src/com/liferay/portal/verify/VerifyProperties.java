@@ -262,6 +262,54 @@ public class VerifyProperties extends VerifyProcess {
 			"default.user.public.layouts.lar"
 		},
 		new String[] {
+			"dl.hook.cmis.credentials.password",
+			"dl.store.cmis.credentials.password"
+		},
+		new String[] {
+			"dl.hook.cmis.credentials.username",
+			"dl.store.cmis.credentials.username"
+		},
+		new String[] {
+			"dl.hook.cmis.repository.url",
+			"dl.store.cmis.repository.url"
+		},
+		new String[] {
+			"dl.hook.cmis.system.root.dir",
+			"dl.store.cmis.system.root.dir"
+		},
+		new String[] {
+			"dl.hook.file.system.root.dir",
+			"dl.store.file.system.root.dir"
+		},
+		new String[] {
+			"dl.hook.impl",
+			"dl.store.impl"
+		},
+		new String[] {
+			"dl.hook.jcr.fetch.delay",
+			"dl.store.jcr.fetch.delay"
+		},
+		new String[] {
+			"dl.hook.jcr.fetch.max.failures",
+			"dl.store.jcr.fetch.max.failures"
+		},
+		new String[] {
+			"dl.hook.jcr.move.version.labels",
+			"dl.store.jcr.move.version.labels"
+		},
+		new String[] {
+			"dl.hook.s3.access.key",
+			"dl.store.s3.access.key"
+		},
+		new String[] {
+			"dl.hook.s3.bucket.name",
+			"dl.store.s3.bucket.name"
+		},
+		new String[] {
+			"dl.hook.s3.secret.key",
+			"dl.store.s3.secret.key"
+		},
+		new String[] {
 			"editor.wysiwyg.portal-web.docroot.html.portlet.calendar." +
 				"edit_configuration.jsp",
 			"editor.wysiwyg.portal-web.docroot.html.portlet.calendar." +
