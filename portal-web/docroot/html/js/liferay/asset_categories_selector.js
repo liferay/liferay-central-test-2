@@ -52,6 +52,10 @@ AUI().add(
 						},
 						value: null
 					},
+					singleSelect: {
+						validator: Lang.isBoolean,
+						value: false
+					},
 					vocabularyIds: {
 						setter: function(value) {
 							var instance = this;
@@ -140,6 +144,8 @@ AUI().add(
 
 						var output = [];
 
+						var singleSelect = instance.get('singleSelect');
+
 						A.each(
 							json,
 							function(item, index, collection) {
@@ -158,7 +164,7 @@ AUI().add(
 									id: treeId,
 									label: Liferay.Util.escapeHTML(item.name),
 									leaf: !item.hasChildren,
-									type: 'check'
+									type: singleSelect ? 'radio' : 'check'
 								};
 
 								output.push(newTreeNode);
