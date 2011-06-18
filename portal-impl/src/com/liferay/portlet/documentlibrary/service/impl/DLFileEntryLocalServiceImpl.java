@@ -865,9 +865,9 @@ public class DLFileEntryLocalServiceImpl
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		User user = userPersistence.findByPrimaryKey(userId);
-
 		// File version
+
+		User user = userPersistence.findByPrimaryKey(userId);
 		DLFileVersion dlFileVersion = dlFileVersionPersistence.findByPrimaryKey(
 			fileVersionId);
 
@@ -879,28 +879,22 @@ public class DLFileEntryLocalServiceImpl
 		dlFileVersionPersistence.update(dlFileVersion, false);
 
 		// File entry
+
 		DLFileEntry dlFileEntry = dlFileEntryPersistence.findByPrimaryKey(
 			dlFileVersion.getFileEntryId());
 
 		if (status == WorkflowConstants.STATUS_APPROVED) {
-
-			// File entry
-
 			if (DLUtil.compareVersions(
 					dlFileEntry.getVersion(),
 					dlFileVersion.getVersion()) <= 0) {
 
 				dlFileEntry.setTitle(dlFileVersion.getTitle());
-				dlFileEntry.setDescription(
-					dlFileVersion.getDescription());
-				dlFileEntry.setExtraSettings(
-					dlFileVersion.getExtraSettings());
+				dlFileEntry.setDescription(dlFileVersion.getDescription());
+				dlFileEntry.setExtraSettings(dlFileVersion.getExtraSettings());
 				dlFileEntry.setVersion(dlFileVersion.getVersion());
 				dlFileEntry.setVersionUserId(dlFileVersion.getUserId());
-				dlFileEntry.setVersionUserName(
-					dlFileVersion.getUserName());
-				dlFileEntry.setModifiedDate(
-					dlFileVersion.getCreateDate());
+				dlFileEntry.setVersionUserName(dlFileVersion.getUserName());
+				dlFileEntry.setModifiedDate(dlFileVersion.getCreateDate());
 				dlFileEntry.setSize(dlFileVersion.getSize());
 
 				dlFileEntryPersistence.update(dlFileEntry, false);
@@ -917,7 +911,6 @@ public class DLFileEntryLocalServiceImpl
 			// File entry
 
 			if (dlFileEntry.getVersion().equals(dlFileVersion.getVersion())) {
-
 				String newVersion = DLFileEntryConstants.DEFAULT_VERSION;
 
 				List<DLFileVersion> approvedFileVersions =
@@ -1195,6 +1188,7 @@ public class DLFileEntryLocalServiceImpl
 				dlFileEntry.getFileEntryId());
 
 		for (DLFileVersion dlFileVersion : dlFileVersions) {
+
 			// Workflow
 
 			workflowInstanceLinkLocalService.deleteWorkflowInstanceLinks(
