@@ -31,7 +31,7 @@ boolean workflowAssetPreview = ParamUtil.getBoolean(request, "workflowAssetPrevi
 
 JournalArticleDisplay articleDisplay = null;
 
-if (article.isApproved() && !workflowAssetPreview) {
+if (!workflowAssetPreview && article.isApproved()) {
 	articleDisplay = JournalContentUtil.getDisplay(articleResource.getGroupId(), articleResource.getArticleId(), templateId, null, languageId, themeDisplay, articlePage, xmlRequest);
 }
 else {

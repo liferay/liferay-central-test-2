@@ -29,7 +29,7 @@ boolean workflowAssetPreview = GetterUtil.getBoolean((Boolean)request.getAttribu
 
 JournalArticleDisplay articleDisplay = null;
 
-if (article.isApproved() && !workflowAssetPreview) {
+if (!workflowAssetPreview && article.isApproved()) {
 	articleDisplay = JournalContentUtil.getDisplay(articleResource.getGroupId(), articleResource.getArticleId(), null, null, languageId, themeDisplay);
 }
 else {
