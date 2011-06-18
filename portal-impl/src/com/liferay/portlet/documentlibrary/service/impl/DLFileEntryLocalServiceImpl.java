@@ -1188,18 +1188,15 @@ public class DLFileEntryLocalServiceImpl
 				dlFileEntry.getFileEntryId());
 
 		for (DLFileVersion dlFileVersion : dlFileVersions) {
-
-			// Workflow
-
-			workflowInstanceLinkLocalService.deleteWorkflowInstanceLinks(
-				dlFileEntry.getCompanyId(), dlFileEntry.getGroupId(),
-				DLFileEntry.class.getName(), dlFileVersion.getFileVersionId());
-
 			dlFileVersionPersistence.remove(dlFileVersion);
 
 			expandoValueLocalService.deleteValues(
 				DLFileVersion.class.getName(),
 				dlFileVersion.getFileVersionId());
+
+			workflowInstanceLinkLocalService.deleteWorkflowInstanceLinks(
+				dlFileEntry.getCompanyId(), dlFileEntry.getGroupId(),
+				DLFileEntry.class.getName(), dlFileVersion.getFileVersionId());
 		}
 
 		// Expando
