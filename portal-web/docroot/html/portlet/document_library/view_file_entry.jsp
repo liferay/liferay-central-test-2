@@ -377,7 +377,7 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 					</div>
 
 					<div class="lfr-asset-summary">
-						<aui:workflow-status status="<%= fileVersion.getStatus() %>" />
+						<aui:workflow-status model="<%= DLFileEntry.class %>" status="<%= fileVersion.getStatus() %>" />
 					</div>
 
 					<c:if test="<%= Validator.isNotNull(fileEntry.getDescription()) %>">
@@ -458,7 +458,7 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 					</c:if>
 
 
-					<aui:workflow-status status="<%= fileVersion.getStatus() %>" />
+					<aui:workflow-status model="<%= DLFileEntry.class %>" status="<%= fileVersion.getStatus() %>" />
 
 					<%
 					if (fileEntryTypeId > 0) {
