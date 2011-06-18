@@ -40,6 +40,8 @@ if (record != null) {
 	title='<%= (record != null) ? "edit-record" : "new-record" %>'
 />
 
+<aui:model-context bean="<%= recordVersion %>" model="<%= DDLRecordVersion.class %>" />
+
 <portlet:actionURL var="editRecordURL">
 	<portlet:param name="struts_action" value="/dynamic_data_lists/edit_record" />
 </portlet:actionURL>
@@ -55,7 +57,7 @@ if (record != null) {
 	<liferay-ui:error exception="<%= StorageFieldRequiredException.class %>" message="please-fill-out-all-required-fields" />
 
 	<c:if test="<%= recordVersion != null %>">
-		<aui:workflow-status status="<%= recordVersion.getStatus() %>" version="<%= recordVersion.getVersion() %>" />
+		<aui:workflow-status model="<%= DDLRecord.class %>" status="<%= recordVersion.getStatus() %>" version="<%= recordVersion.getVersion() %>" />
 	</c:if>
 
 	<liferay-util:include page="/html/portlet/dynamic_data_lists/record_toolbar.jsp" />
