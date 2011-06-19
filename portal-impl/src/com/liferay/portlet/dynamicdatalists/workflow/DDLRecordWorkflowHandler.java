@@ -75,7 +75,7 @@ public class DDLRecordWorkflowHandler extends BaseWorkflowHandler {
 
 		long userId = GetterUtil.getLong(
 			(String)workflowContext.get(WorkflowConstants.CONTEXT_USER_ID));
-		long recordVersionId = GetterUtil.getLong(
+		long classPK = GetterUtil.getLong(
 			(String)workflowContext.get(
 				WorkflowConstants.CONTEXT_ENTRY_CLASS_PK));
 
@@ -83,7 +83,7 @@ public class DDLRecordWorkflowHandler extends BaseWorkflowHandler {
 			"serviceContext");
 
 		return DDLRecordLocalServiceUtil.updateStatus(
-			userId, recordVersionId, status, serviceContext);
+			userId, classPK, status, serviceContext);
 	}
 
 	@Override
