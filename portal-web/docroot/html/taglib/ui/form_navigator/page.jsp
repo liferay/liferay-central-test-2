@@ -43,6 +43,7 @@ if (Validator.isNotNull(historyKey)) {
 
 <div class="taglib-form-navigator">
 	<div id="<portlet:namespace />sectionsContainer">
+
 		<%
 		for (String section : allSections) {
 			String sectionId = _getSectionId(section);
