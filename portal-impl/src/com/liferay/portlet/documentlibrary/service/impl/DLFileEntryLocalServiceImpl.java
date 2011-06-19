@@ -868,6 +868,7 @@ public class DLFileEntryLocalServiceImpl
 		// File version
 
 		User user = userPersistence.findByPrimaryKey(userId);
+
 		DLFileVersion dlFileVersion = dlFileVersionPersistence.findByPrimaryKey(
 			fileVersionId);
 
